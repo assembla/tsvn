@@ -15,8 +15,6 @@
 class CSVNStatusCache
 {
 private:
-	
-private:
 	CSVNStatusCache(void);
 	~CSVNStatusCache(void);
 
@@ -32,23 +30,16 @@ public:
 	void EnableRecursiveFetch(bool bEnable);
 	void EnableRemoteStatus(bool bEnable);
 
-	// Get the status for a directory by asking the directory, rather 
-	// than the usual method of asking its parent
-	CStatusCacheEntry GetDirectorysOwnStatus(const CTSVNPath& path);
-
-	void RefreshDirectoryStatus(const CTSVNPath& path);
-
-	// Set the status of a entry directory within a parent
-	void SetDirectoryStatusInParent(const CTSVNPath& childDirectory, svn_wc_status_kind status);
+	void SetDirectoryStatus(const CTSVNPath& path, const svn_wc_status_t *pStatus);
 
 	void AddFolderForCrawling(const CTSVNPath& path);
 
-private:
 	CCachedDirectory& GetDirectoryCacheEntry(const CTSVNPath& path);
 
 private:
-	typedef std::map<CTSVNPath, CCachedDirectory> CachedDirMap; 
-	CachedDirMap m_directoryCache; 
+
+private:
+	CCachedDirectory::CachedDirMap m_directoryCache; 
 	CComAutoCriticalSection m_critSec;
 	SVNHelper m_svnHelp;
 	bool m_bDoRecursiveFetches;

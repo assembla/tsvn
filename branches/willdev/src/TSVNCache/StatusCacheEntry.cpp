@@ -5,9 +5,17 @@
 CStatusCacheEntry::CStatusCacheEntry()
 {
 	SetAsUnversioned();
+	m_bSet = false;
 }
 
 CStatusCacheEntry::CStatusCacheEntry(const svn_wc_status_t* pSVNStatus,__int64 lastWriteTime)
+{
+	SetStatus(pSVNStatus);
+	m_lastWriteTime = lastWriteTime;
+	m_discardAtTime = GetTickCount()+600000;
+}
+
+void CStatusCacheEntry::SetStatus(const svn_wc_status_t* pSVNStatus)
 {
 	if(pSVNStatus == NULL)
 	{
@@ -20,9 +28,9 @@ CStatusCacheEntry::CStatusCacheEntry(const svn_wc_status_t* pSVNStatus,__int64 l
 		// Currently we don't deep-copy the entry value
 		m_svnStatus.entry = NULL;
 	}
-	m_lastWriteTime = lastWriteTime;
-	m_discardAtTime = GetTickCount()+600000;
+	m_bSet = true;
 }
+
 
 void CStatusCacheEntry::SetAsUnversioned()
 {
@@ -71,4 +79,10 @@ bool CStatusCacheEntry::ForceStatus(svn_wc_status_kind forcedStatus)
 		return true;
 	}
 	return false;
+}
+
+bool 
+CStatusCacheEntry::HasBeenSet() const
+{
+	return m_bSet;
 }

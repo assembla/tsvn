@@ -46,7 +46,7 @@ CCachedDirectory& CSVNStatusCache::GetDirectoryCacheEntry(const CTSVNPath& path)
 {
 	ATLASSERT(path.IsDirectory());
 
-	CachedDirMap::iterator itMap;
+	CCachedDirectory::ItDir itMap;
 	itMap = m_directoryCache.find(path);
 	if(itMap != m_directoryCache.end())
 	{
@@ -56,7 +56,7 @@ CCachedDirectory& CSVNStatusCache::GetDirectoryCacheEntry(const CTSVNPath& path)
 	else
 	{
 		// We don't know anything about this directory yet - lets add it to our cache
-		return m_directoryCache[path] = CCachedDirectory(path);
+		return m_directoryCache.insert(m_directoryCache.lower_bound(path), std::make_pair(path, CCachedDirectory(path)))->second;
 	}
 }
 
@@ -65,8 +65,7 @@ CStatusCacheEntry CSVNStatusCache::GetStatusForPath(const CTSVNPath& path)
 {
 	AutoLocker lock(m_critSec);
 
-	// We always start by asking the containing directory for the version of something
-
+	// Check a very short-lived 'mini-cache' of the last thing we were asked for.
 	long now = (long)GetTickCount();
 	if(now-m_mostRecentExpiresAt < 0)
 	{
@@ -75,17 +74,20 @@ CStatusCacheEntry CSVNStatusCache::GetStatusForPath(const CTSVNPath& path)
 			return m_mostRecentStatus;
 		}
 	}
-
-	_cprintf("Req: %ws\n", path.GetWinPathString());
-
 	m_mostRecentPath = path;
 	m_mostRecentExpiresAt = now+1000;
+
+	ATLTRACE("Req: %ws\n", path.GetWinPathString());
+
+	// Stop the crawler starting on a new folder while we're doing this much more important task...
+	CCrawlInhibitor crawlInhibit(&m_folderCrawler);
 
 	return m_mostRecentStatus = GetDirectoryCacheEntry(path.GetContainingDirectory()).GetStatusForMember(path);
 }
 
 // Get the status for a directory by asking the directory, rather 
 // than the usual method of asking its parent
+/*
 CStatusCacheEntry 
 CSVNStatusCache::GetDirectorysOwnStatus(const CTSVNPath& path)
 {
@@ -93,38 +95,14 @@ CSVNStatusCache::GetDirectorysOwnStatus(const CTSVNPath& path)
 
 	ATLASSERT(path.IsDirectory());
 
-	return GetDirectoryCacheEntry(path).GetStatusForMember(path);
+	return GetDirectoryCacheEntry(path).GetOwnStatus();
 }
-
-void CSVNStatusCache::RefreshDirectoryStatus(const CTSVNPath& path)
-{
-	AutoLocker lock(m_critSec);
-
-	ATLASSERT(path.IsDirectory());
-
-	CCachedDirectory& dir = GetDirectoryCacheEntry(path);
-	
-	// Make it reload its own status
-	dir.GetStatusForMember(path);
-
-	// Make sure that its parent knows its status
-	dir.PushMostImportantStatusUpwards();
-}
-
-
-void
-CSVNStatusCache::SetDirectoryStatusInParent(const CTSVNPath& childDirectory, svn_wc_status_kind status)
-{
-	if(!childDirectory.GetContainingDirectory().IsEmpty())
-	{
-		GetDirectoryCacheEntry(childDirectory.GetContainingDirectory()).SetStatusOfContainedDirectory(childDirectory, status);
-	}
-}
+*/
 
 
 void CSVNStatusCache::Dump()
 {
-	CachedDirMap::const_iterator itMap;
+	CCachedDirectory::ItDir itMap;
 	for(itMap = m_directoryCache.begin(); itMap != m_directoryCache.end(); ++itMap)
 	{
 		ATLTRACE("Dir %ws\n", itMap->first.GetWinPath());
@@ -145,6 +123,13 @@ void CSVNStatusCache::AddFolderForCrawling(const CTSVNPath& path)
 {
 	m_folderCrawler.AddDirectoryForUpdate(path);
 }
+
+//void CSVNStatusCache::SetDirectoryStatus(const CTSVNPath& path, const svn_wc_status_t *pStatus)
+//{
+//	ATLASSERT(path.IsDirectory());
+//	GetDirectoryCacheEntry(path)->second.SetOwnStatus(pStatus);
+//}
+
 
 
 static class StatusCacheTests
