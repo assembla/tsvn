@@ -474,9 +474,9 @@ BOOL SVN::Export(CString srcPath, CString destPath, SVNRev revision, BOOL force,
 	if (revision.IsWorking()&&(pProgDlg))
 	{
 		// files are special!
-		if (!srcPath.IsDirectory())
+		if (!PathIsDirectory(srcPath))
 		{
-			CopyFile(srcPath.GetWinPath(), destPath.GetWinPath(), FALSE);
+			CopyFile(srcPath, destPath, FALSE);
 			return TRUE;
 		}
 		// our own "export" function with a callback and the ability to export
