@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2004 - Tim Kemp and Stefan Kueng
+// Copyright (C) 2003-2004 - Stefan Kueng
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -49,6 +49,8 @@ typedef std::basic_string<wchar_t> wide_string;
 #endif
 #pragma warning (pop)
 
+typedef int (__cdecl *GENERICCOMPAREFN)(const void * elem1, const void * elem2);
+
 struct log_entry
 {
 	apr_hash_t* ch_paths;
@@ -58,6 +60,11 @@ struct log_entry
 	const char* msg; 
 };
 
+struct source_entry
+{
+	const char *	pathto;
+	LONG			revisionto;
+};
 
 class CRevisionEntry
 {
@@ -69,12 +76,11 @@ public:
 	const char *	author;
 	apr_time_t		date;
 	const char *	message;
-	const char *	pathto;
-	LONG			revisionto;
 	const char *	pathfrom;
 	LONG			revisionfrom;
 	char			action;
 	int				level;
+	CPtrArray		sourcearray;
 };
 
 class CRevisionGraph : public SVNPrompt
@@ -86,6 +92,8 @@ public:
 	BOOL						AnalyzeRevisionData(CString path);
 	virtual BOOL				ProgressCallback(CString text1, CString text2, DWORD done, DWORD total);
 	CString						GetLastErrorMessage();
+	CPtrArray					m_arEntryPtrs;
+
 	BOOL						m_bCancelled;
 	apr_array_header_t *		m_logdata;
 	apr_pool_t *				pool;			///< memory pool
@@ -94,10 +102,9 @@ private:
 	BOOL						AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev);
 	BOOL						CheckForwardCopies();
 	BOOL						IsParentOrItself(const char * parent, const char * child);
+	static int __cdecl			SortCompare(const void * pElem1, const void * pElem2);	///< sort callback function
 	CStringA					m_sRepoRoot;
 	LONG						m_lHeadRevision;
-
-	CPtrArray					m_arEntryPtrs;
 
 	int							m_nRecurseLevel;
 	svn_error_t *				Err;			///< Global error object struct
