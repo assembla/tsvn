@@ -28,3 +28,7 @@ Code/build changes
          error baton isn't cleared by the next log call (which is
          unnecessary anyway).
          approved by: steveking (one line change, low risk)
+* 2444 : Fix small bug: the OK button was enabled in the commit dialog when 
+         a log message from the history combo box was chosen, even though 
+         the thread gathering the status was still running.
+         approved by: steveking
