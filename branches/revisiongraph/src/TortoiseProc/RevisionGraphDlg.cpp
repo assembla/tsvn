@@ -27,6 +27,7 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_bThreadRunning = FALSE;
+	m_lSelectedRev = -1;
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()
@@ -65,6 +66,7 @@ BEGIN_MESSAGE_MAP(CRevisionGraphDlg, CResizableDialog)
 	ON_WM_HSCROLL()
 	ON_WM_VSCROLL()
 	ON_WM_SIZE()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -333,7 +335,7 @@ void CRevisionGraphDlg::DrawOctangle(CDC * pDC, const CRect& rect)
 
 void CRevisionGraphDlg::DrawNode(CDC * pDC, const CRect& rect,
 								COLORREF contour, CRevisionEntry *rentry, NodeShape shape, 
-								bool isSel, int penStyle /*= PS_SOLID*/)
+								BOOL isSel, int penStyle /*= PS_SOLID*/)
 {
 	CPen* pOldPen = 0L;
 	CBrush* pOldBrush = 0L;
@@ -464,6 +466,8 @@ void CRevisionGraphDlg::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 	if (end > m_arEntryPtrs.GetCount())
 		end = m_arEntryPtrs.GetCount();
 
+	m_arNodeList.RemoveAll();
+	m_arNodeRevList.RemoveAll();
 	for ( ; i<end; ++i)
 	{
 		CRevisionEntry * entry = (CRevisionEntry*)m_arEntryPtrs.GetAt(i);
@@ -472,7 +476,9 @@ void CRevisionGraphDlg::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		noderect.bottom = noderect.top + NODE_RECT_HEIGTH;
 		noderect.left = (entry->level - 1)*(NODE_RECT_WIDTH+NODE_SPACE_LEFT+NODE_SPACE_RIGHT) + NODE_SPACE_LEFT - nHScrollPos;
 		noderect.right = noderect.left + NODE_RECT_WIDTH;
-		DrawNode(pDC, noderect, RGB(0,0,0), entry, TSVNOctangle, false);
+		DrawNode(pDC, noderect, RGB(0,0,0), entry, TSVNOctangle, m_lSelectedRev==entry->revision);
+		m_arNodeList.Add(noderect);
+		m_arNodeRevList.Add(entry->revision);
 	}
 	DrawConnections(pDC, rect, nVScrollPos, nHScrollPos);
 }
@@ -716,4 +722,20 @@ void CRevisionGraphDlg::OnSize(UINT nType, int cx, int cy)
 	__super::OnSize(nType, cx, cy);
 	SetScrollbars();
 	Invalidate(FALSE);
+}
+
+void CRevisionGraphDlg::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	for (INT_PTR i=0; i<m_arNodeList.GetCount(); ++i)
+	{
+		if (m_arNodeList.GetAt(i).PtInRect(point))
+		{
+			if (m_lSelectedRev == m_arNodeRevList.GetAt(i))
+				m_lSelectedRev = -1;
+			else
+				m_lSelectedRev = m_arNodeRevList.GetAt(i);
+			Invalidate();
+		}
+	}
+	__super::OnLButtonDown(nFlags, point);
 }
