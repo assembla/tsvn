@@ -1,8 +1,12 @@
-# (регистр первой буквы почти везде нижний, кроме "Вы")
 #
-# Working Copy -- Рабочая копия
-# Working Base -- Рабочая база
-# Update(s) -- Обновлениe(я)
+# Russian translation for TortoiseSVN
+# Copyright (C) 2004-2005 the TortoiseSVN team
+# This file is distributed under the same license as TortoiseSVN
+#
+# Authors:
+# Alexander <brambo@inbox.ru>
+# Shura Zam <tonal@promsoft.ru>
+#
 # Checkout -- Извлечь
 # Commit -- Фиксировать
 # Revision -- Ревизия
@@ -20,12 +24,14 @@
 # sharing -- общий доступ
 # you -- Вы
 #
+# Выполнено на основе перевода Alexander <brambo@inbox.ru> из версии: 2495
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2004-06-28 09:49+0200\n"
-"PO-Revision-Date: 2005-01-19 20:22+0500\n"
-"Last-Translator: Alexander <brambo@inbox.ru>\n"
+"PO-Revision-Date: 2005-01-28 14:50+0600\n"
+"Last-Translator: Shura Zam <tonal@promsoft.ru>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -34,8 +40,6 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-# ID:126,#:
-# ID:10,
 #: ID:10
 #: ID:126
 msgid " "
@@ -81,7 +85,7 @@ msgstr "%1 не может быть открыта из-за большого к
 # ID:3867,
 #: ID:3867
 msgid "%1 could not be removed because it is the current directory."
-msgstr "%1 не удалена: нельзя удалить текущую директорию."
+msgstr "%1 не может быть удалена: нельзя удалить текущую директорию."
 
 # ID:3868,#:
 # ID:3868,
@@ -123,7 +127,7 @@ msgid "%d files selected, %d files total"
 msgstr "%d файлов выбрано, %d файлов всего"
 
 # На?
-# ID:77,
+# ID:226,
 #: ID:226
 msgid "%s - at revision: %d"
 msgstr "%s - в ревизии: %d"
@@ -173,9 +177,8 @@ msgstr "&Применить патч-файл"
 
 # ID:138,
 #: ID:138
-#, fuzzy
 msgid "&Browse Repository"
-msgstr "Обзор репозитория"
+msgstr "&Обзор репозитория"
 
 # Control-ID:1011,
 #: Control-ID:1011
@@ -206,29 +209,23 @@ msgstr "&Закрывать окна автоматически"
 
 # ID:76,
 #: ID:76
-#, fuzzy
 msgid "&Compare Revisions"
-msgstr "Сравнить ревизии"
+msgstr "&Сравнить ревизии"
 
 # ID:101,
 #: ID:101
-#, fuzzy
 msgid "&Copy To..."
-msgstr "Копировать в..."
+msgstr "&Копировать в..."
 
-# ID:11,#:
-# ID:73,#:
 # ID:101,
 #: ID:101
-#, fuzzy
 msgid "&Delete"
-msgstr "Удалить"
+msgstr "&Удалить"
 
 # Control-ID:1031,
 #: Control-ID:1031
-#, fuzzy
 msgid "&Edit"
-msgstr "Редакт."
+msgstr "&Редакт."
 
 # Control-ID:1099,
 #: Control-ID:1099
@@ -245,6 +242,7 @@ msgstr "&Включить прокси-сервер"
 msgid "&External"
 msgstr "&Внешняя"
 
+# MenuEntry#:
 #: MenuEntry
 msgid "&File"
 msgstr "&Файл"
@@ -271,18 +269,17 @@ msgid "&From WC at URL:"
 msgstr "&Исходная раб. копия как URL:"
 
 # Control-ID:1032,#:
+# Control-ID:1115,#:
 # Control-ID:1019,#:
 # Control-ID:1019,
 #: Control-ID:1032
 #: Control-ID:1115
 #: Control-ID:1019
 msgid "&Head Revision"
-msgstr "&Верхняя ревизия"
+msgstr "&Головная (последняя) ревизия"
 
-# Control-ID:57670,#:
-# MenuEntry#:
 # Control-ID:9,#:
-# Control-ID:57670,
+# Control-ID:57670,#:
 #: Control-ID:9
 #: Control-ID:57670
 #: MenuEntry
@@ -308,15 +305,10 @@ msgstr "&Язык:"
 msgid "&Mark as resolved"
 msgstr "&Пометить как решенный"
 
+#: Control-ID:1
 #: MenuEntry
 msgid "&Merge"
 msgstr "&Слить"
-
-# Control-ID:65535,
-#: Control-ID:65535
-#, fuzzy
-msgid "&Merge changes into the current working copy which points to the URL:"
-msgstr "&Слить изменения в текущую рабочую копию из URL:"
 
 # Control-ID:1012,
 #: Control-ID:1012
@@ -344,18 +336,16 @@ msgstr "&Следующее различие"
 msgid "&OK"
 msgstr "&OK"
 
-# ID:3841,#:
 # ID:101,#:
-# ID:3841,
+# ID:113,
 #: ID:101
 #: ID:113
-#, fuzzy
 msgid "&Open"
-msgstr "Открыть"
+msgstr "&Открыть"
 
 #: MenuEntry
 msgid "&Open Ctrl-O"
-msgstr "&Открыть Ctrl-O"
+msgstr "&Открыть\tCtrl-O"
 
 # Control-ID:65535,#:
 # Control-ID:65535,
@@ -380,12 +370,10 @@ msgstr "&Предыдущее различие"
 # Control-ID:1023,
 #: Control-ID:1023
 msgid "&Recurse into folders to fetch the status"
-msgstr "&Рекурсивно ао каталогам для получения статуса"
+msgstr "&Рекурсивно по каталогам для получения статуса"
 
-# Control-ID:1013,#:
-# Control-ID:1100,
+# ID:376,
 #: ID:376
-#, fuzzy
 msgid "&Redo"
 msgstr "&Удалить"
 
@@ -396,18 +384,16 @@ msgstr "&Удалить"
 msgid "&Remove"
 msgstr "&Удалить"
 
-# ID:11,#:
 # ID:101,
 #: ID:101
 msgid "&Rename/Move..."
-msgstr "Переименовать/Переместить..."
+msgstr "&Переименовать/Переместить..."
 
 # "с этой" или "начиная с этой"?
 # ID:113,
 #: ID:113
-#, fuzzy
 msgid "&Revert changes from this revision"
-msgstr "Вернуть измения с этой ревизии"
+msgstr "&Вернуть измения с этой ревизии"
 
 # Control-ID:1033,#:
 # Control-ID:1116,#:
@@ -424,19 +410,16 @@ msgstr "&SSH клиент:"
 
 #: MenuEntry
 msgid "&Save Ctrl-S"
-msgstr "&Сохранить Ctrl-S"
+msgstr "&Сохранить\tCtrl-S"
 
-# ID:313,#:
-# ID:101,
 #: MenuEntry
 msgid "&Save Graph As..."
-msgstr "Сохранить граф как..."
+msgstr "&Сохранить граф как..."
 
-# Control-ID:1023,#:
 # Control-ID:1023,
 #: Control-ID:1023
 msgid "&Save authentication"
-msgstr "сохранить аутентификацию"
+msgstr "&Сохранить аутентификацию"
 
 # Control-ID:1132,
 #: Control-ID:1132
@@ -452,7 +435,6 @@ msgstr "&Установить"
 msgid "&Status Bar"
 msgstr "&Строка статуса"
 
-# Control-ID:65535,#:
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "&To Revision"
@@ -492,12 +474,12 @@ msgstr "&Назад\tCtrl+Z"
 # Control-ID:1061,
 #: Control-ID:1061
 msgid "&Unknown drives"
-msgstr "Неизвестные носители"
+msgstr "&Неизвестные носители"
 
 # ID:76,
 #: ID:76
 msgid "&Update Item To Revision"
-msgstr "Обновить объект до ревизии"
+msgstr "&Обновить объект до ревизии"
 
 # Control-ID:65535,#:
 # Control-ID:1005,#:
@@ -507,26 +489,31 @@ msgstr "Обновить объект до ревизии"
 msgid "&Username:"
 msgstr "&Username:"
 
+# MenuEntry#:
 #: MenuEntry
 msgid "&View"
 msgstr "&Вид"
 
 #: MenuEntry
 msgid "&Whitespaces"
-msgstr "&Пустые символы"
+msgstr "&Пробелы"
+
+# ID:219,
+#: ID:219
+msgid "(dry run)"
+msgstr "(Пробный запуск)"
 
 # ID:208,
 #: ID:208
 msgid "(multiple targets selected)"
-msgstr "(несколько получателей выбрано)"
+msgstr "(несколько целей выбрано)"
 
-# ID:3867,#:
-# ID:3867,
+# ID:314,
 #: ID:314
 msgid "(not found)"
 msgstr "(не найден)"
 
-# Dlg-ID:107,
+# ID:208,
 #: ID:208
 msgid "(property change only)"
 msgstr "(изменение только свойств)"
@@ -556,7 +543,7 @@ msgstr "- %d"
 msgid "..."
 msgstr "..."
 
-# ID:119,
+# ID:151,
 #: ID:151
 msgid ": Revision %d"
 msgstr ": Ревизия %d"
@@ -595,6 +582,11 @@ msgid ""
 "to bring up the context menu where you will find all <b>TortoiseSVN</b> commands.\n"
 "And <u>read the manual!</u>"
 msgstr ""
+"<b>TortoiseSVN</b> - расширение оболочки.\n"
+"Это способ встроится в Windows explorer.\n"
+"Для использования <b>TortoiseSVN</b> откройте explorer и щелкните правой кнопкой мыши на любую папку.\n"
+"В появившимся меню можно найти все сомманды <b>TortoiseSVN</b>.\n"
+"И <u>читайте справку!</u>"
 
 # ID:3867,#:
 # ID:3867,
@@ -619,6 +611,8 @@ msgid ""
 "A newline separated list of paths for which icon overlays are shown.\n"
 "If you add an \"*\" char at the end of a path, then all files and subdirs inside that path are included too."
 msgstr ""
+"Список директорий разделённых новой строкой где будут показываться накладки (overlay) иконок\n"
+"Если вы добавите \"*\" в конец пути, все поддиректории будут включенны автоматом."
 
 # ID:194,
 #: ID:194
@@ -627,6 +621,9 @@ msgid ""
 "If you add an \"*\" char at the end of a path, then all files and subdirs inside that path are excluded too.\n"
 "An empty list will allow overlays on all paths."
 msgstr ""
+"Список директорий разделённых новой строкой где не будут показываться накладки (overlay) иконок\n"
+"Если вы добавите \"*\" в конец пути, все поддиректории будут так же исключены.\n"
+"Пустой список разрешает накладки для любого пути."
 
 # ID:3843,#:
 # ID:3843,
@@ -646,13 +643,13 @@ msgid ""
 "A viewer program for GNU diff files (patch files).\n"
 "If you don't have one use NotePad."
 msgstr ""
-"Программа просмотра файлов различий GNU-типа (патчей).\n"
-"Если у вас нет такой, используйте Блокнот."
+"Программа просмотра GNU diff-файлов (патчей).\n"
+"Если у вас нет такой, можно использовать Блокнот."
 
 # ID:101,
 #: ID:101
 msgid "A&dd Folder..."
-msgstr "Добавить папку..."
+msgstr "&Добавить папку..."
 
 # Control-ID:1093,
 #: Control-ID:1093
@@ -712,12 +709,12 @@ msgid ""
 "to show the subversion status of the files below.\n"
 "<ct=0x0000ff><b>Caution:</b> this can slow down explorer!</ct>"
 msgstr ""
-"Активируйте это если вы хотите помечать\n"
-"под папками их subversion-статус.\n"
+"Пометте, если вы хотите чтобы для папок\n"
+"отображалсось subversion-состояние\n"
 "<ct=0x0000ff><b>Внимание:</b> это может замедлить проводник</ct>"
 
 # ID:8,#:
-# ID:73,#:
+# ID:209,#:
 # Dlg-ID:155,
 #: ID:8
 #: ID:209
@@ -733,29 +730,29 @@ msgstr "Добавить &файл..."
 # ID:110,
 #: ID:110
 msgid "Add Extension Specific Diff Program"
-msgstr "Добавить расширение специфической программы различий"
+msgstr "Добавить программу просмотра различий для расширения"
 
 # ID:110,
 #: ID:110
 msgid "Add Extension Specific Merge Program"
-msgstr "Добавить внешнюю программу слияния"
+msgstr "Добавить программу слияния для расширения"
 
 # ID:13,
 #: ID:13
 msgid "Add To Ignore List"
 msgstr "Добавить в список игнорирования"
 
-# Не перевел "here".
 # ID:12,
 #: ID:12
 msgid "Add files to Subversion here"
-msgstr "Добавить файлы в Subversion"
+msgstr "Добавить файлы в Subversion здесь"
 
 # Dlg-ID:171,
 #: Dlg-ID:171
 msgid "Add/Edit Extension Specific Diff/Merge Program"
-msgstr "Добавить/Править внешнюю программу различий/слияния"
+msgstr "Добавить/Править программу различий/слияния для расширения"
 
+# ID:73,#:
 # Control-ID:65535,
 #: ID:73
 #: Control-ID:65535
@@ -772,16 +769,14 @@ msgstr "Файл добавлен удаленно"
 msgid "Added a folder remotely"
 msgstr "Файл добавлен удаленно"
 
-# ID:13,
+# ID:145,
 #: ID:145
 msgid ""
 "Added the file(s)\n"
 "%sto the ignore list."
 msgstr "Файл(ы) %s добавлены в список 'игнорирования'"
 
-# ID:8,#:
-# ID:73,#:
-# Dlg-ID:155,
+# ID:263,
 #: ID:263
 msgid "Adding"
 msgstr "Добавление"
@@ -809,7 +804,7 @@ msgstr ""
 # ID:110,
 #: ID:110
 msgid "Advanced Diff Settings"
-msgstr "Дополнительные настройки Различий"
+msgstr "Дополнительные настройки просмотра различий"
 
 # Dlg-ID:170,
 #: Dlg-ID:170
@@ -841,7 +836,7 @@ msgstr "Все файлы (*.*)|*.*||"
 # ID:82,
 #: ID:82
 msgid "All files are already under version control. There's nothing to add!"
-msgstr ""
+msgstr "Все указанные файлы уже версионные. Ничего не добавилось!"
 
 # ID:3867,#:
 # ID:3868,#:
@@ -876,7 +871,7 @@ msgstr ""
 "Внешняя программа различий используется\n"
 "для сравнения различных ревизий файлов\n"
 "<hr=100%>\n"
-"Вы можете установить следующие пути:\n"
+"Вы можете подать параметрами следующие пути:\n"
 "%base\tбазовый файл\n"
 "%mine\tизмененный файл"
 
@@ -895,9 +890,11 @@ msgstr ""
 "Внешняя программа слияния используется\n"
 "для решения конфликтов файлов\n"
 "<hr=100%>\n"
-"Вы можете установить следующие пути:\n"
+"Вы можете подать параметрами следующие пути:\n"
 "%merged\tконфликтный файл, куда сохранять\n"
-"%mine\tфайл, каков он в репозитории"
+"%theirs\t\tфайл, каков он в репозитории\n"
+"%mine\t\tфайл с вашими изменениями\n"
+"%base\t\tоригинал файла"
 
 # ID:3843,#:
 # ID:3843,
@@ -949,6 +946,7 @@ msgid "An unsupported operation was attempted."
 msgstr "Произошла попытка совершить неподдерживаемую операцию."
 
 # ID:76,
+# ID:269,
 #: ID:269
 msgid "Analyze revision data..."
 msgstr "Анализировать данные ревизии..."
@@ -971,7 +969,7 @@ msgstr "Применить патч-файл"
 # ID:145,
 #: ID:145
 msgid "Are you sure you want to mark the conflicted file(s) as resolved?"
-msgstr ""
+msgstr "Вы уверены, что хотите пометить эти/этот конфликтны(е/й) файл(ы) как решенные?"
 
 # ID:79,
 #: ID:79
@@ -1009,9 +1007,9 @@ msgstr "Авторы:                      Stefan Kueng, Tim Kemp"
 # Control-ID:1067,
 #: Control-ID:1067
 msgid "Automatically resolve conflicted subversion status on save"
-msgstr "Автоматически разрешить проблемный subversion-статус при сохранении"
+msgstr "Автоматически пометить как разренный при сохранении"
 
-# Dlg-ID:141,
+# Control-ID:1157,
 #: Control-ID:1157
 msgid "Average"
 msgstr "Среднее"
@@ -1039,7 +1037,7 @@ msgstr "Базовый файл:"
 # Control-ID:1128,
 #: Control-ID:1128
 msgid "Berkeley Database (BDB)"
-msgstr ""
+msgstr "Berkeley Database (BDB)"
 
 # Dlg-ID:162,
 #: Dlg-ID:162
@@ -1105,18 +1103,17 @@ msgstr "Вс&троена"
 # Control-ID:1119,
 #: Control-ID:1119
 msgid "Bug-ID / Issue-Nr:"
-msgstr ""
+msgstr "Bug-ID / Issue-Nr"
 
 # ID:101,
 #: ID:101
 msgid "C&reate Folder..."
-msgstr "Создать папку..."
+msgstr "С&оздать папку..."
 
 # ID:77,
 #: ID:77
-#, fuzzy
 msgid "C&reate Tag From Revision"
-msgstr "Создать тег из ревизии"
+msgstr "С&оздать тег из ревизии"
 
 # ID:3697,
 #: ID:3697
@@ -1136,8 +1133,8 @@ msgstr ""
 "в\n"
 "%s"
 
-# Control-ID:2,#:
 # ID:73,#:
+# Control-ID:2,#:
 # Control-ID:2,
 #: ID:73
 #: Control-ID:2
@@ -1147,9 +1144,9 @@ msgstr "Отменить"
 # ID:132,
 #: ID:132
 msgid "Cancelling SVN Blame..."
-msgstr "Отмена SVN Авторы файла..."
+msgstr "Отмена комманды SVN \"Авторы файла\"..."
 
-# ID:132,
+# ID:270,
 #: ID:270
 msgid "Cancelling operation..."
 msgstr "Отмена операции..."
@@ -1172,7 +1169,7 @@ msgstr "Сертификат еще не действителен. Действ�
 # ID:157,
 #: ID:157
 msgid "Certificates|*.p12;*.pkcs12;*.pfx|All|*.*||"
-msgstr "Сертификаты|*.p12;*.pkcs12|All|*.*||"
+msgstr "Сертификаты|*.p12;*.pkcs12;*.pfx|All|*.*||"
 
 # ID:3825,
 #: ID:3825
@@ -1210,25 +1207,20 @@ msgstr "Проверить на наличие обновлений"
 msgid "Check For Updates..."
 msgstr "Обновления..."
 
-# Control-ID:65535,#:
-# Control-ID:1055,#:
-# Control-ID:65535,
+# Control-ID:1132,
 #: Control-ID:1132
-#, fuzzy
 msgid "Check Repository"
 msgstr "Получениеиз репозитория"
 
 # ID:13,
 #: ID:13
-#, fuzzy
 msgid "Check for Modifications"
 msgstr "Проверить на наличие обновлений"
 
 # Control-ID:1073,
 #: Control-ID:1073
-#, fuzzy
 msgid "Check for newer &versions"
-msgstr "Проверить на наличие новых версий"
+msgstr "Проверить на наличие новых &версий"
 
 # Отметьте -- орфографическая ошибка?
 # ID:79,
@@ -1237,7 +1229,7 @@ msgid ""
 "Check if you want the progress dialog to close\n"
 "automatically after the operation finishes."
 msgstr ""
-"Отметьте, если Вы хотите, чтобы диалоги закрывались\n"
+"Пометьте, если Вы хотите, чтобы диалоги закрывались\n"
 "автоматически после завершения операции."
 
 # ID:9,
@@ -1259,7 +1251,7 @@ msgstr ""
 msgid "Check the path and/or URL you've entered."
 msgstr "Проверьте введенные путь и/или URL."
 
-# Control-ID:65535,
+# ID:194,
 #: ID:194
 msgid "Check those menu entries you want to appear in the top context menu instead of the submenu"
 msgstr "Выберите пункты меню, которые Вы хотите видеть вверху контекстного меню, а не в подменю"
@@ -1287,7 +1279,7 @@ msgstr "Извлечь"
 # Control-ID:1074,
 #: Control-ID:1074
 msgid "Checkout &directory:"
-msgstr "&Получить папку:"
+msgstr "&Извлечь папку:"
 
 # ID:8,
 #: ID:8
@@ -1312,7 +1304,7 @@ msgstr "Очистка прерванных операций, блокирова
 # Control-ID:1059,
 #: Control-ID:1059
 msgid "Clear &Auth Cache"
-msgstr "Очмстить кэш &авторизации"
+msgstr "Очистить кэш &авторизации"
 
 # ID:195,
 #: ID:195
@@ -1320,8 +1312,8 @@ msgid ""
 "Clears the stored authentication.\n"
 "You will have to enter your username/password again for all repositories."
 msgstr ""
-"Очищает все сохраненные даныые авторизации.\n"
-"Вам нужно будет ввести заново имя/пароль для всех репозиториев."
+"Очищает все сохраненные данные авторизации.\n"
+"Вам нужно будет заново ввести имя/пароль для всех репозиториев."
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -1336,7 +1328,7 @@ msgstr "Нажмите на \"Дополнительно\" для определ
 # ID:257,
 #: ID:257
 msgid "Clipboard"
-msgstr ""
+msgstr "Буфер обмена"
 
 # ID:3825,
 #: ID:3825
@@ -1369,7 +1361,7 @@ msgstr "Фиксировать в:"
 msgid "Commit..."
 msgstr "Фиксировать..."
 
-# Control-ID:1110,
+# ID:244,
 #: ID:244
 msgid "Commits by author"
 msgstr "Фиксации по автору:"
@@ -1377,12 +1369,12 @@ msgstr "Фиксации по автору:"
 # ID:244,
 #: ID:244
 msgid "Commits by week"
-msgstr ""
+msgstr "Фиксации по неделям:"
 
 # Control-ID:1135,
 #: Control-ID:1135
 msgid "Commits each week:"
-msgstr ""
+msgstr "Фиксаций в неделю"
 
 # ID:9,
 #: ID:9
@@ -1392,22 +1384,22 @@ msgstr "Фиксирует Ваши изменения в репозитории
 # Control-ID:1083,
 #: Control-ID:1083
 msgid "Committing"
-msgstr "Фиксирование"
+msgstr "Фиксация"
 
 # Control-ID:1019,
 #: Control-ID:1019
 msgid "Compare Whitespaces"
-msgstr "Сравнивать пустые символы"
+msgstr "Сравнивать пробелы"
 
 # ID:138,
 #: ID:138
 msgid "Compare With B&ase"
-msgstr "Сравнить с базой"
+msgstr "Сравнить с б&азой"
 
 # ID:76,
 #: ID:76
 msgid "Compare with &working copy"
-msgstr "Сравнить с рабочей копией"
+msgstr "Сравнить с &рабочей копией"
 
 # ID:12,
 #: ID:12
@@ -1419,13 +1411,14 @@ msgstr "Сравнивает этот файл и последнюю зафик�
 msgid "Completed"
 msgstr "Завершено"
 
+# ID:263,#:
 # Control-ID:65535,
 #: ID:263
 #: Control-ID:65535
 msgid "Conflicted"
 msgstr "Конфликт"
 
-# Control-ID:65535,
+# ID:188,
 #: ID:188
 msgid "Conflicts: %d"
 msgstr "Конфликты: %s"
@@ -1440,13 +1433,12 @@ msgstr "Контекстное меню"
 msgid "Continue"
 msgstr "Продолжить"
 
-# ID:73,
+# ID:376,
 #: ID:376
-#, fuzzy
 msgid "Cop&y"
-msgstr "Копировать"
+msgstr "Копи&ровать"
 
-# ID:74,
+# ID:73,
 #: ID:73
 msgid "Copied"
 msgstr "Скопировано"
@@ -1456,7 +1448,7 @@ msgstr "Скопировано"
 msgid "Copied remotely"
 msgstr "Скопировано удаленно"
 
-# ID:151,
+# ID:101,
 #: ID:101
 msgid "Copy To Working Copy..."
 msgstr "Копировать в рабочую копию..."
@@ -1597,11 +1589,10 @@ msgstr "Невозможно создать поток!"
 msgid "Create Patch..."
 msgstr "Создать патч..."
 
-# ID:8,
+# Dlg-ID:178,
 #: Dlg-ID:178
-#, fuzzy
 msgid "Create Repository"
-msgstr "Создать здесь репозиторий"
+msgstr "Создать репозиторий"
 
 # ID:8,
 #: ID:8
@@ -1622,7 +1613,7 @@ msgstr "Папка создана удаленно"
 # ID:10,
 #: ID:10
 msgid "Creates a 'cheap' copy inside the repository used for branches or tagging"
-msgstr "Создает дешевую' копию внутри репозитория, используемую для веток и создания тегов"
+msgstr "Создает 'дешевую' копию внутри репозитория, используемую для веток и создания тегов"
 
 # ID:10,
 #: ID:10
@@ -1637,7 +1628,7 @@ msgstr "Создает патч-файл из всех изменений, ко�
 # ID:376,
 #: ID:376
 msgid "Cu&t"
-msgstr ""
+msgstr "В&ырезать"
 
 # ID:3603,
 #: ID:3603
@@ -1645,7 +1636,7 @@ msgid ""
 "Cut the selection and put it on the Clipboard\n"
 "Cut"
 msgstr ""
-"Вырезать выбранное и положить его в Буфер обмена\n"
+"Вырезать выбранное и положить в Буфер обмена\n"
 "Вырезать"
 
 # Control-ID:1123,
@@ -1663,16 +1654,12 @@ msgstr "Дата"
 msgid "Default &number of log messages"
 msgstr "&Количество лог-сообщений по-умолчанию"
 
-# ID:11,#:
-# ID:73,#:
-# ID:101,
+# ID:11,
 #: ID:11
 msgid "Delete"
 msgstr "Удалить"
 
-# ID:11,#:
-# ID:73,#:
-# ID:101,
+# ID:73,
 #: ID:73
 msgid "Deleted"
 msgstr "Удален"
@@ -1682,9 +1669,7 @@ msgstr "Удален"
 msgid "Deletes files / folders from source control"
 msgstr "Удаляет файлы/папки из контроля кода"
 
-# ID:11,#:
-# ID:73,#:
-# ID:101,
+# ID:263,
 #: ID:263
 msgid "Deleting"
 msgstr "Удаление"
@@ -1698,7 +1683,7 @@ msgstr "Диск назначения полон."
 # Dlg-ID:184,
 #: Dlg-ID:184
 msgid "Dialog"
-msgstr ""
+msgstr "Диалог"
 
 # ID:12,
 #: ID:12
@@ -1745,7 +1730,7 @@ msgstr "Диск полон при обращении к %1."
 # ID:3860,
 #: ID:3860
 msgid "Dispatch exception: %1"
-msgstr "Диспетчер исключений: %1"
+msgstr ""
 
 # ID:3605,
 #: ID:3605
@@ -1793,7 +1778,7 @@ msgstr "Не показывать это сообщение снова"
 msgid ""
 "Do you really want to revert all changes\n"
 "which were made in this revision?"
-msgstr "Вы действительно хотите убрать все изменения,что были сделаны в этой ревизии?"
+msgstr "Вы действительно хотите убрать все изменения, сделаные в этой ревизии?"
 
 # ID:76,
 #: ID:76
@@ -1830,7 +1815,7 @@ msgstr "Вы хотите сохранить изменения?"
 msgid "Don't convert files when diffing against BASE"
 msgstr "Не преобразовывать файлы при сравнении с Базой"
 
-# ID:80,
+# ID:73,
 #: ID:73
 msgid "Don't show this message again"
 msgstr "Не показывать это сообщение снова"
@@ -1841,7 +1826,7 @@ msgid "Drive Types"
 msgstr "Типы накопителей"
 
 # Control-ID:1061,
-#: Control-ID:1061
+#: Control-ID:1179
 msgid "Dry Run"
 msgstr "Пробный запуск"
 
@@ -1867,17 +1852,17 @@ msgstr "Редактировать конфликты"
 # ID:110,
 #: ID:110
 msgid "Edit Extension Specific Diff Program"
-msgstr "Редактировать расширение специфической программы различий"
+msgstr "Редактировать программы различий для расширений"
 
 # ID:110,
 #: ID:110
 msgid "Edit Extension Specific Merge Program"
-msgstr "Редактировать расширение специфической программы слияния"
+msgstr "Редактировать программы слияния для расширений"
 
 # ID:79,
 #: ID:79
 msgid "Either the name or IP of the proxy server"
-msgstr "Имя либо IP прокси-сервера"
+msgstr "Имя либо IP-адрес прокси-сервера"
 
 # Род?
 # Control-ID:65535,
@@ -1925,6 +1910,11 @@ msgstr ""
 "Стереть выбранное\n"
 "Стереть"
 
+# ID:82,
+#: ID:82
+msgid "Error"
+msgstr "Ошибка"
+
 # ID:81,
 #: ID:81
 msgid "Error validating server certificate for %s:"
@@ -1956,10 +1946,10 @@ msgid "Export Directory:"
 msgstr "Директория экспорта:"
 
 # да-а
-# Control-ID:1073,
+# ID:79,
 #: ID:79
 msgid "Export unversioned files too"
-msgstr "Экспортировать также и неверсированные файлы"
+msgstr "Экспортировать также и неверсионные файлы"
 
 # ID:9,
 #: ID:9
@@ -1984,7 +1974,7 @@ msgstr "Расширение"
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Extension specific programs"
-msgstr "Расширение специфических программ"
+msgstr "Программы специфические для расширений"
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -2042,7 +2032,8 @@ msgstr "Выборка версии %s файла:"
 
 # ID:63,#:
 # ID:74,#:
-# ID:77,
+# ID:77,#:
+# ID:207,
 #: ID:63
 #: ID:74
 #: ID:77
@@ -2050,6 +2041,7 @@ msgstr "Выборка версии %s файла:"
 msgid "File"
 msgstr "Файл"
 
+# ID:376,#:
 # Dlg-ID:135,
 #: ID:376
 #: Dlg-ID:135
@@ -2059,7 +2051,7 @@ msgstr "Патчи файла"
 # Control-ID:1138,
 #: Control-ID:1138
 msgid "File changes each week:"
-msgstr ""
+msgstr "Изменений файлов в неделю"
 
 # ID:3603,
 #: ID:3603
@@ -2093,22 +2085,22 @@ msgstr "Для помощи нажмите F1"
 # Control-ID:1168,
 #: Control-ID:1168
 msgid "Force shell icon refresh"
-msgstr ""
+msgstr "Обновить иконки оболочки"
 
 # Control-ID:65535,
 #: Control-ID:65535
-msgid "From:"
-msgstr "Из:"
+msgid "From: (start URL and revision of the range to merge)"
+msgstr ""
 
 # ID:273,
 #: ID:273
 msgid "GDI+ couldn't be initialized!"
-msgstr ""
+msgstr "Невозможно инициализировать GDI+"
 
 # ID:273,
 #: ID:273
 msgid "GDI+ couldn't create a bitmap object. You probably don't have enough memory."
-msgstr ""
+msgstr "GDI+ не может создать рисунок. Вероятно очень мало памяти."
 
 # Dlg-ID:107,
 #: Dlg-ID:107
@@ -2133,14 +2125,14 @@ msgstr "Получение информации о файле..."
 # ID:269,
 #: ID:269
 msgid "Getting information from repository..."
-msgstr ""
+msgstr "Получение информации из репозитория"
 
 # ID:132,
 #: ID:132
 msgid "Getting log info..."
 msgstr "Получение информации о файле..."
 
-# ID:2049,
+# ID:2051,
 #: ID:2051
 msgid ""
 "Go to the next conflict\n"
@@ -2149,6 +2141,7 @@ msgstr ""
 "Перейти к следующему конфликту\n"
 "следующий конфликт"
 
+# ID:2051,
 # ID:2049,
 #: ID:2049
 msgid ""
@@ -2158,7 +2151,7 @@ msgstr ""
 "Перейти к следующему различию\n"
 "следующее различие"
 
-# ID:2049,
+# ID:2051,
 #: ID:2051
 msgid ""
 "Go to the previous conflict\n"
@@ -2179,22 +2172,20 @@ msgstr ""
 # Control-ID:1134,
 #: Control-ID:1134
 msgid "Graph type:"
-msgstr ""
+msgstr "Тип графика"
 
-# Control-ID:1032,#:
-# Control-ID:1019,#:
-# Control-ID:1019,
+# Control-ID:1032,
 #: Control-ID:1032
 msgid "H&ead Revision"
 msgstr "&Главная ревизия"
 
-# ID:12,
+# ID:238,
 #: ID:238
 msgid "Head revision of the repository is: %d"
 msgstr "Главная ревизия в репозитории: %d"
 
-# Control-ID:1004,#:
-# ID:12,
+# ID:12,#:
+# Control-ID:1004,
 #: ID:12
 #: Control-ID:1004
 msgid "Help"
@@ -2203,14 +2194,14 @@ msgstr "Помощь"
 # Control-ID:1127,
 #: Control-ID:1127
 msgid "Hint: Press F5 to refresh the selected subtree and Ctrl-F5 to load all children too"
-msgstr "Подсказка: Нажмите F5 для обновления выбранного поддерева и Ctrl+F5 для загрузки всех потомков тоже"
+msgstr "Подсказка: Нажмите F5 для обновления выбранного поддерева и Ctrl+F5 для загрузки всех потомков"
 
 # ID:82,
 #: ID:82
 msgid "Hostname mismatch (%s)"
 msgstr "Имя хоста не соответствует (%s)"
 
-# Dlg-ID:106,
+# Control-ID:65535,
 #: Control-ID:65535
 msgid "Icon Overlays / Status Columns"
 msgstr "Пометки иконок/Колонки статуса"
@@ -2218,7 +2209,7 @@ msgstr "Пометки иконок/Колонки статуса"
 # Control-ID:1170,
 #: Control-ID:1170
 msgid "Icon Set:"
-msgstr ""
+msgstr "Набор иконок"
 
 # Control-ID:65535,#:
 # Control-ID:65535,
@@ -2229,7 +2220,7 @@ msgstr "Иконки/Дизайн/Код:     Luebbe Onken"
 # ID:194,
 #: ID:194
 msgid "If activated, prevents the overlays from showing in \"save as..\" or \"open\" dialogs"
-msgstr "Если активировано, запрещает помечать иконки в диалогах \"сохранить как...\" и \"открыть\""
+msgstr "Если отмеченно, запрещает помечать иконки в диалогах \"сохранить как...\" и \"открыть\""
 
 # ID:95,
 #: ID:95
@@ -2265,20 +2256,20 @@ msgstr ""
 msgid "Ignore"
 msgstr "Игнорировать"
 
-# Control-ID:1021,
+# ID:15,
 #: ID:15
 msgid "Ignore %d items"
-msgstr "Игнорировать %d символов"
+msgstr "Игнорировать %d элементов"
 
 # Control-ID:1021,
 #: Control-ID:1021
 msgid "Ignore All Whitespaces"
-msgstr "Игнорировать все пустые символы"
+msgstr "Игнорировать все пробелы"
 
 # Control-ID:1020,
 #: Control-ID:1020
 msgid "Ignore Leading Whitespaces"
-msgstr "Игнорировать пустые символы в начале строки"
+msgstr "Игнорировать пробелы в начале строки"
 
 # Control-ID:1018,
 #: Control-ID:1018
@@ -2317,6 +2308,9 @@ msgid ""
 "If deactivated, a versioned folder will always have the 'normal' overlay icon shown.\n"
 "<ct=0x0000ff><b>If the explorer seems slow, deactivate this feature!</b></ct>"
 msgstr ""
+"Показывать состояние папки пометкой иконок.\n"
+"Если выключенно папки всегда помечаются как 'нормальные'.\n"
+"<ct=0x0000ff><b>Если explorer сильно тормозит - выключите!</b></ct>"
 
 # ID:76,
 #: ID:76
@@ -2396,6 +2390,8 @@ msgid ""
 "It's not possible to rename a file just in case!\n"
 "Please read our docs on how to work around this Subversion limitation."
 msgstr ""
+"Вы не можете переименовать файл в этом случае!\n"
+"Читайте документацию как обойти это ограничение Subversion."
 
 # Control-ID:1016,
 #: Control-ID:1016
@@ -2425,7 +2421,7 @@ msgstr "Запускает внешнюю программу различий / 
 # Control-ID:1137,
 #: Control-ID:1137
 msgid "Least active author:"
-msgstr ""
+msgstr "Последний активный автор"
 
 # ID:188,
 #: ID:188
@@ -2441,7 +2437,7 @@ msgstr ""
 "Показать разделы помощи\n"
 "Разделы помощи"
 
-# ID:188,
+# Control-ID:1172,
 #: Control-ID:1172
 msgid "List View"
 msgstr "Показ списком"
@@ -2468,7 +2464,8 @@ msgstr "Лог"
 msgid "Log Message"
 msgstr "Лог-сообщение"
 
-# Dlg-ID:130,
+# Control-ID:1125,#:
+# Control-ID:1125,
 #: Control-ID:1125
 msgid "Log Message History:"
 msgstr "Лог истории сообщений"
@@ -2500,11 +2497,13 @@ msgid ""
 "Marks a file as resolved in Subversion\n"
 "Mark as resolved"
 msgstr ""
+"Отметить файл как решенный в Subversion\n"
+"Отметить как решенный"
 
 # Control-ID:1159,
 #: Control-ID:1159
 msgid "Max"
-msgstr ""
+msgstr "Максимум"
 
 # Dlg-ID:141,
 #: Dlg-ID:141
@@ -2521,7 +2520,7 @@ msgstr "Программа слияния"
 msgid "Merge..."
 msgstr "Слить..."
 
-# Dlg-ID:141,
+# ID:263,
 #: ID:263
 msgid "Merged"
 msgstr "Объединен"
@@ -2529,7 +2528,7 @@ msgstr "Объединен"
 # ID:10,
 #: ID:10
 msgid "Merges a branch into the main trunk"
-msgstr "Сливает ветку в главный ствол"
+msgstr "Сливает ветку с главным стволом"
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -2546,13 +2545,13 @@ msgstr "Сообщение"
 msgid "Mime Type"
 msgstr "Mime-тип"
 
-# Dlg-ID:143,
+# Control-ID:1158,
 #: Control-ID:1158
 msgid "Min"
 msgstr "Минимум"
 
-# Control-ID:1023,#:
-# Control-ID:1082,
+# Control-ID:1082,#:
+# Control-ID:1023,
 #: Control-ID:1082
 #: Control-ID:1023
 msgid "Misc"
@@ -2572,7 +2571,7 @@ msgstr "Изменен"
 # Control-ID:1136,
 #: Control-ID:1136
 msgid "Most active author:"
-msgstr ""
+msgstr "Наиболее активный автор:"
 
 # Не перевел "here".
 # ID:12,
@@ -2595,10 +2594,9 @@ msgstr "Перемещение %s"
 msgid "Moving..."
 msgstr "Перемещение..."
 
-# ID:12,
 #: MenuEntry
 msgid "N&ext Conflict"
-msgstr "Следующий конфликт"
+msgstr "Следующий &конфликт"
 
 # ID:3697,
 #: ID:3697
@@ -2608,7 +2606,7 @@ msgstr "NUM"
 # Control-ID:1129,
 #: Control-ID:1129
 msgid "Native Filesystem (FSFS)"
-msgstr ""
+msgstr "Native Filesystem (FSFS)"
 
 # Dlg-ID:102,
 #: Dlg-ID:102
@@ -2638,16 +2636,16 @@ msgid ""
 "<hr=100%>\n"
 "TortoiseProc.exe is used by the Shell extension and should not be called directly!"
 msgstr ""
-"Не передана команда!\n"
+"Не задана команда!\n"
 "<hr=100%>\n"
 "TortoiseProc.exe используется Shell-расширением и не должна вызываться напрямую!"
 
 # ID:81,
 #: ID:81
 msgid "No command value specified!"
-msgstr "Не установлено значение команды!"
+msgstr "Не установлено значение для команды!"
 
-# ID:113,
+# ID:82,
 #: ID:82
 msgid "No differences found!"
 msgstr "Различий не найдено"
@@ -2677,7 +2675,7 @@ msgstr ""
 "с момента последнего фиксирования.\n"
 "Здесь нечего делать TortoiseSVN..."
 
-# ID:77,
+# ID:170,
 #: ID:170
 msgid ""
 "No files were changed or added since\n"
@@ -2693,7 +2691,7 @@ msgstr ""
 # ID:273,
 #: ID:273
 msgid "No image encoder found for %s."
-msgstr ""
+msgstr "Не найден ни один обработчик для изображения %s."
 
 # Род?
 # Control-ID:65535,
@@ -2707,18 +2705,23 @@ msgstr "Нормально"
 msgid "Not all of the system registry entries (or INI file) were removed."
 msgstr "Не все компоненты в системном реестре (либо INI-файлы) удалены."
 
+# ID:88,
+#: ID:88
+msgid "Notice"
+msgstr "Уведомление"
+
 # Control-ID:1161,
 #: Control-ID:1161
 msgid "Number of authors:"
-msgstr ""
+msgstr "Количество авторов"
 
 # Control-ID:1160,
 #: Control-ID:1160
 msgid "Number of weeks:"
-msgstr ""
+msgstr "Количество недель"
 
-# Control-ID:1,#:
 # ID:73,#:
+# Control-ID:1,#:
 # Control-ID:1,
 #: ID:73
 #: Control-ID:1
@@ -2759,7 +2762,6 @@ msgid "Only update the top folder"
 msgstr "Обновить только верхний уровень папки"
 
 # ID:3841,#:
-# ID:101,#:
 # ID:3841,
 #: ID:3841
 msgid "Open"
@@ -2795,10 +2797,9 @@ msgstr "Открывает обзор репозитория для наладк
 msgid "Out of memory."
 msgstr "Нехватка памяти."
 
-# ID:12,
 #: MenuEntry
 msgid "P&revious Conflict"
-msgstr "Предыдущий конфликт"
+msgstr "&Предыдущий конфликт"
 
 # ID:76,
 #: ID:76
@@ -2815,7 +2816,7 @@ msgstr "PKCS12"
 msgid "Password:"
 msgstr "Пароль."
 
-# Dlg-ID:158,
+# Control-ID:1031,
 #: Control-ID:1031
 msgid "Paste Changed Filenames"
 msgstr "Вставить имена измененных файлов"
@@ -2829,7 +2830,7 @@ msgstr "Патчить все"
 # ID:157,
 #: ID:157
 msgid "Patchfiles (*.diff, *.patch)|*.diff;*.patch|All (*.*)|*.*||"
-msgstr "Патч-файлы|*.diff;*.patch|All|*.*||"
+msgstr "Патч-файлы (*.diff, *.patch)|*.diff;*.patch|All (*.*)|*.*||"
 
 # ID:77,
 #: ID:77
@@ -2839,7 +2840,7 @@ msgstr "Путь"
 # ID:157,
 #: ID:157
 msgid "Pictures (*.jpg, *.png, *.bmp, *.gif)|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All (*.*)|*.*||"
-msgstr ""
+msgstr "Рисунки (*.jpg, *.png, *.bmp, *.gif)|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All (*.*)|*.*||"
 
 # ID:3858,#:
 # ID:3858,
@@ -2941,7 +2942,7 @@ msgstr "Пожалуйста, выберите кнопку."
 # ID:76,
 #: ID:76
 msgid "Please specify the certificate type"
-msgstr "Пожалуйста, определите тип сертификата."
+msgstr "Пожалуйста, укажите тип сертификата."
 
 # ID:132,
 #: ID:132
@@ -2973,7 +2974,8 @@ msgstr "Программа"
 msgid "Programs (*.exe)|*.exe|All Files (*.*)|*.*||"
 msgstr "Программы (*.exe)|*.exe|Все файлы (*.*)|*.*||"
 
-# Control-ID:65535,
+# Control-ID:65535,#:
+# Dlg-ID:177,
 #: Control-ID:65535
 #: Dlg-ID:177
 msgid "Properties"
@@ -2989,7 +2991,7 @@ msgstr "Свойство"
 msgid "Property Page"
 msgstr "Страница свойств"
 
-# Control-ID:65535,
+# ID:207,
 #: ID:207
 msgid "Property Status"
 msgstr "Статус свойства"
@@ -3021,7 +3023,7 @@ msgstr ""
 # Control-ID:1073,
 #: Control-ID:1073
 msgid "R&AM drives"
-msgstr "RAM диски"
+msgstr "R&AM диски"
 
 # ID:3697,
 #: ID:3697
@@ -3036,7 +3038,7 @@ msgstr "&Сменные диски"
 # ID:12,
 #: ID:12
 msgid "Read the 'Daily Use Guide' before you are stuck..."
-msgstr "Прочитайте \"Гид Повседневного Использования\" перед тем, как завязнуть..."
+msgstr "Прочитайте 'Daily Use Guide' перед тем, как завязнуть..."
 
 # ID:3603,
 #: ID:3603
@@ -3092,21 +3094,22 @@ msgstr "Перебазировать..."
 msgid "Relocating..."
 msgstr "Перебазирование..."
 
-# Control-ID:65535,
+# ID:207,
 #: ID:207
 msgid "Remote Property Status"
-msgstr "Удаленный статус свойства"
+msgstr "Удаленное состояние свойства"
 
-# ID:63,
+# ID:63,#:
+# ID:207,
 #: ID:63
 #: ID:207
 msgid "Remote Status"
-msgstr "Удаленный статус"
+msgstr "Удаленное состояние"
 
-# ID:63,
+# ID:207,
 #: ID:207
 msgid "Remote Text Status"
-msgstr "Удаленный статус текста"
+msgstr "Удаленное состояние текста"
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -3128,8 +3131,7 @@ msgstr "Переименовать"
 msgid "Rename %s"
 msgstr "Переименовать %s"
 
-# ID:11,#:
-# ID:101,
+# ID:11,
 #: ID:11
 msgid "Rename..."
 msgstr "Переименовать..."
@@ -3180,7 +3182,8 @@ msgstr "Репозиторий"
 msgid "Repository Browser"
 msgstr "Обозреватель репозитория"
 
-# ID:8,
+# ID:8,#:
+# ID:74,
 #: ID:8
 #: ID:74
 msgid "Resolved"
@@ -3208,16 +3211,13 @@ msgid "Retry"
 msgstr "Повторить"
 
 # ID:8,#:
-# ID:73,#:
 # Dlg-ID:175,
 #: ID:8
 #: Dlg-ID:175
 msgid "Revert"
 msgstr "Возвратить"
 
-# ID:8,#:
-# ID:73,#:
-# Dlg-ID:175,
+# ID:73,
 #: ID:73
 msgid "Reverted"
 msgstr "Возвращен"
@@ -3240,7 +3240,9 @@ msgstr "Ревизия"
 msgid "Revision %d"
 msgstr "Ревизия %d"
 
-# ID:119,
+# ID:269,#:
+# ID:270,#:
+# ID:271,
 #: ID:269
 #: ID:270
 #: ID:271
@@ -3252,7 +3254,9 @@ msgstr "Ревизия %d"
 msgid "Revision / Author:"
 msgstr "Ревизия / Автор:"
 
-# ID:75,
+# ID:15,#:
+# ID:269,#:
+# Dlg-ID:182,
 #: ID:15
 #: ID:269
 #: Dlg-ID:182
@@ -3286,42 +3290,42 @@ msgstr "SSH"
 # ID:77,
 #: ID:77
 msgid "SVN Add..."
-msgstr "SVN Добавление..."
+msgstr "Комманда SVN Добавление..."
 
 # ID:132,
 #: ID:132
 msgid "SVN Blame"
-msgstr "SVN Авторы файла"
+msgstr "SVN 'Авторы файла'"
 
 # ID:77,
 #: ID:77
 msgid "SVN Checkout..."
-msgstr "SVN Извлечение..."
+msgstr "Комманда SVN Извлечение..."
 
 # ID:77,
 #: ID:77
 msgid "SVN Commit..."
-msgstr "SVN Фиксирование..."
+msgstr "Комманда SVN Фиксирование..."
 
 # ID:78,
 #: ID:78
 msgid "SVN Copy..."
-msgstr "SVN Копирование..."
+msgstr "Комманда SVN Копирование..."
 
 # ID:78,
 #: ID:78
 msgid "SVN Export..."
-msgstr "SVN Экспорт..."
+msgstr "Комманда SVN Экспорт..."
 
 # ID:77,
 #: ID:77
 msgid "SVN Import..."
-msgstr "SVN Импорт..."
+msgstr "Комманда SVN Импорт..."
 
 # ID:78,
 #: ID:78
 msgid "SVN Merge..."
-msgstr "SVN Слияние..."
+msgstr "Комманда SVN Слияние..."
 
 # Dlg-ID:134,
 #: Dlg-ID:134
@@ -3331,12 +3335,12 @@ msgstr "SVN Прогресс"
 # ID:77,
 #: ID:77
 msgid "SVN Resolve..."
-msgstr "SVN Разрешение..."
+msgstr "Комманда SVN Разрешение..."
 
 # ID:77,
 #: ID:77
 msgid "SVN Revert..."
-msgstr "SVN Возвращение..."
+msgstr "Комманда SVN Возвращение..."
 
 # ID:11,
 #: ID:11
@@ -3351,7 +3355,7 @@ msgstr "SVN Статус"
 # ID:78,
 #: ID:78
 msgid "SVN Switch..."
-msgstr "SVN Переключение..."
+msgstr "Комманда SVN Переключение..."
 
 # ID:77,
 #: ID:77
@@ -3383,8 +3387,7 @@ msgstr "Сохранить &как..."
 msgid "Save As"
 msgstr "Сохранить как"
 
-# ID:313,#:
-# ID:101,
+# ID:272,
 #: ID:272
 msgid "Save Graph as..."
 msgstr "Сохранить граф как..."
@@ -3392,15 +3395,14 @@ msgstr "Сохранить граф как..."
 # ID:76,
 #: ID:76
 msgid "Save Revision &To..."
-msgstr "Сохранить ревизию в..."
+msgstr "Сохранить ревизию &в..."
 
 # Control-ID:1132,
 #: Control-ID:1132
 msgid "Save To Clipboard"
-msgstr ""
+msgstr "Сохранить в Буфер обмена"
 
-# ID:313,#:
-# ID:101,
+# ID:313,
 #: ID:313
 msgid "Save as..."
 msgstr "Сохранить как..."
@@ -3411,10 +3413,10 @@ msgstr "Сохранить как..."
 msgid "Save changes to %1?"
 msgstr "Сохранить изменения в %1?"
 
-# ID:76,
+# ID:232,
 #: ID:232
 msgid "Save client certificate path"
-msgstr "Сохранить путь к клиентскому сертификату"
+msgstr "Сохранить путь к сертификату клиента"
 
 # ID:3601,#:
 # ID:3601,
@@ -3438,12 +3440,12 @@ msgstr "Сохранить патч-файл в:"
 #: Control-ID:1017
 #: Control-ID:1064
 msgid "Scintilla"
-msgstr ""
+msgstr "Scintilla"
 
 # ID:113,
 #: ID:113
 msgid "Search &log messages..."
-msgstr "Найти в лог-сообщениях..."
+msgstr "Найти в &лог-сообщениях..."
 
 # Может, "Поиск по %1 не удался"?
 # ID:3867,#:
@@ -3452,7 +3454,7 @@ msgstr "Найти в лог-сообщениях..."
 msgid "Seek failed on %1"
 msgstr "Поиск прервался на %1"
 
-# Control-ID:1031,
+# ID:376,
 #: ID:376
 msgid "Select &All"
 msgstr "Выбрать &все"
@@ -3530,7 +3532,7 @@ msgstr ""
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Select the type of repository you want to create:"
-msgstr ""
+msgstr "Выберите какой тип репозитория Вы хотите создать:"
 
 # ID:3866,#:
 # ID:3866,
@@ -3558,30 +3560,34 @@ msgstr "Устанавливать даты файлов на \"время по�
 msgid "Setting Properties..."
 msgstr "Установка свойств..."
 
-# ID:107,#:
-# ID:9,
+# ID:9,#:
+# ID:107,
 #: ID:9
 #: ID:107
 msgid "Settings"
 msgstr "Настройки"
 
-# Control-ID:65535,
+# ID:12,
+#: Control-ID:1132
+msgid "Sh&ow Log"
+msgstr "Пока&зать лог"
+
+# ID:101,
 #: ID:101
 msgid "Sho&w Properties"
-msgstr "Показать свойства"
+msgstr "Показа&ть свойства"
 
 # Control-ID:1105,
 #: Control-ID:1105
 msgid "Short &date/time format in log messages"
 msgstr "Короткий формат &даты/времени в лог-сообщениях"
 
-# объектах или пунктах?
 # ID:12,
 #: ID:12
 msgid "Short Url of subversion items"
 msgstr "Короткий Url в subversion-объектах"
 
-# Control-ID:1016,
+# Control-ID:1031,
 #: Control-ID:1031
 msgid "Show &All"
 msgstr "Показать &все"
@@ -3589,8 +3595,9 @@ msgstr "Показать &все"
 # ID:113,
 #: ID:113
 msgid "Show &Differences"
-msgstr "Показать различия"
+msgstr "Показать &различия"
 
+# ID:101,#:
 # Control-ID:1031,#:
 # Control-ID:1034,
 #: ID:101
@@ -3612,7 +3619,7 @@ msgstr "Показать &лог"
 # Control-ID:1088,
 #: Control-ID:1088
 msgid "Show &overlays only in explorer"
-msgstr "Показывать пометки только в проводнике"
+msgstr "Показывать &пометки только в проводнике"
 
 # Control-ID:1065,
 #: Control-ID:1065
@@ -3622,7 +3629,7 @@ msgstr "Показывать строку различий"
 # ID:113,
 #: ID:113
 msgid "Show Differences as &Unified Diff"
-msgstr "Показать различия как патч-файл"
+msgstr "Показать различия как &патч-файл"
 
 # Control-ID:1063,
 #: Control-ID:1063
@@ -3634,10 +3641,10 @@ msgstr "Показывать номера строк"
 msgid "Show Log"
 msgstr "Показать лог"
 
-# Control-ID:65535,
+# Control-ID:1169,
 #: Control-ID:1169
 msgid "Show folderstatus"
-msgstr "Показывать статус папки"
+msgstr "Показывать состояние папки"
 
 # ID:3713,
 #: ID:3713
@@ -3663,14 +3670,15 @@ msgid ""
 "Show special characters for whitespaces\n"
 "Show Whitespaces"
 msgstr ""
-"Показать специальные символы для пустых символов\n"
-"Показать пустые символы"
+"Показать специальные символы для пробелов\n"
+"Показать пробелы"
 
 # да-а
+# Control-ID:1073,#:
 # Control-ID:1073,
 #: Control-ID:1073
 msgid "Show unversioned files"
-msgstr "Показать неверсированные файлы"
+msgstr "Показать неверсионные файлы"
 
 # ID:15,
 #: ID:15
@@ -3711,7 +3719,7 @@ msgstr "Пропущен"
 # ID:263,
 #: ID:263
 msgid "Skipped missing target"
-msgstr ""
+msgstr "Пропущена неверная цель"
 
 # ID:79,
 #: ID:79
@@ -3723,6 +3731,11 @@ msgstr ""
 "Обозначить файлы или папки, которые TortoiseSVN\n"
 "должна исключить из контроля версий.Разделитель шаблонов -- пробел."
 
+# Control-ID:65535,
+#: Control-ID:65535
+msgid "Specify the revision range which you want to merge:"
+msgstr ""
+
 # ID:3604,
 #: ID:3604
 msgid ""
@@ -3732,8 +3745,9 @@ msgstr ""
 "Разделить активное окно на панели\n"
 "Разделить"
 
-# ID:74,#:
-# ID:77,
+# ID:245,#:
+# Control-ID:1132,#:
+# Dlg-ID:179,
 #: ID:245
 #: Control-ID:1132
 #: Dlg-ID:179
@@ -3741,17 +3755,18 @@ msgid "Statistics"
 msgstr "Статистика"
 
 # ID:74,#:
-# ID:77,
+# ID:77,#:
+# ID:207,
 #: ID:74
 #: ID:77
 #: ID:207
 msgid "Status"
-msgstr "Статус"
+msgstr "Состояние"
 
 # ID:11,
 #: ID:11
 msgid "Status of item in SVN"
-msgstr "Статус объекта в SVN"
+msgstr "Состояние объекта в SVN"
 
 # Control-ID:1130,
 #: Control-ID:1130
@@ -3761,19 +3776,17 @@ msgstr ""
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Subversion configuration file:"
-msgstr "Subversion конфигурационный файл:"
+msgstr "Конфигурационный файл Subversion:"
 
-# Control-ID:65535,
+# ID:14,
 #: ID:14
-#, fuzzy
 msgid "Subversion export all here"
-msgstr "Subversion конфигурационный файл:"
+msgstr "Экспортировать из Subversion всё сюда"
 
-# ID:13,
+# ID:14,
 #: ID:14
-#, fuzzy
 msgid "Subversion export here"
-msgstr "Копировать файлы в Subversion сюда"
+msgstr "Экспортировать файлы из Subversion сюда"
 
 # ID:79,
 #: ID:79
@@ -3850,7 +3863,7 @@ msgstr "Переключить..."
 # Control-ID:1173,
 #: Control-ID:1173
 msgid "Symbol View"
-msgstr ""
+msgstr "Окно Символов"
 
 # ID:3857,#:
 # ID:3857,
@@ -3868,7 +3881,7 @@ msgstr "Размер табуляции:"
 msgid "Tagged the working copy to %s"
 msgstr "Создан тег из рабочей копии в %s"
 
-# Control-ID:65535,
+# ID:207,
 #: ID:207
 msgid "Text Status"
 msgstr "Статус текста"
@@ -3965,6 +3978,8 @@ msgid ""
 "The line \"Index: \" was not found!\n"
 "Either this is not a diff file or the diff is empty."
 msgstr ""
+"Сторка \"Index: \" не найдена!\n"
+"Или это не diff-фаил, или diff-фаил пуст."
 
 # ID:63,
 #: ID:63
@@ -4011,6 +4026,11 @@ msgid ""
 "matches it better. Do you want to use the suggested path instead?"
 msgstr ""
 
+# Control-ID:65535,
+#: Control-ID:65535
+msgid "The result of the merge is stored in the working copy at:"
+msgstr "Результат слияния помещён в рабочюю копию:"
+
 # ID:78,
 #: ID:78
 msgid ""
@@ -4026,6 +4046,8 @@ msgid ""
 "The target folder is not empty!\n"
 "Are you sure you want to check out into that folder?"
 msgstr ""
+"Указанная папка не пустая!\n"
+"Вы уверены что извлекать файлы надо сюда?"
 
 # изменения не возвращают, но ничего лучше не придумал.
 # ID:81,
@@ -4037,7 +4059,7 @@ msgid ""
 msgstr ""
 "Рабочая копия изменена!\n"
 "<hr=100%>\n"
-"Пожалуйста, сначала зафиксируйте либо возвратите изменения."
+"Пожалуйста, сначала зафиксируйте либо отмените(Возвратите) изменения."
 
 # ID:81,
 #: ID:81
@@ -4070,6 +4092,10 @@ msgid ""
 "Do you want to save the file with the conflicts still there?\n"
 "If you click YES, then you have to manually resolve the conflicts in another editor!"
 msgstr ""
+"Остался нерешенный конфликт в сторке %d!\n"
+"Вы должны разрешить его перед сохранением.\n"
+"Вы действительно хотите сохранить файл содержащий конфликт?\n"
+"Если ответить ДА, вам придётся решить конфликт в другом редакторе!"
 
 # ID:188,
 #: ID:188
@@ -4096,12 +4122,12 @@ msgstr "Эта программа требует файл %s, не найден�
 # ID:15,
 #: ID:15
 msgid "This property is only allowed on folders, not files."
-msgstr ""
+msgstr "У файла не может быть этого свойства. Только у папки."
 
 # ID:15,
 #: ID:15
 msgid "This property must not have multiple lines. Only one line is allowed."
-msgstr ""
+msgstr "Для этого свойства разрешена только одна строка."
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -4115,8 +4141,8 @@ msgstr "Чтобы посмотреть изменения, которые Вы 
 
 # Control-ID:65535,
 #: Control-ID:65535
-msgid "To:"
-msgstr "В:"
+msgid "To: (end URL and revision of the range to merge)"
+msgstr ""
 
 # ID:7,#:
 # ID:3585,#:
@@ -4190,12 +4216,12 @@ msgstr "TortoiseSVN Настройки"
 # Control-ID:1162,
 #: Control-ID:1162
 msgid "Total commits analyzed:"
-msgstr ""
+msgstr "Всего фиксаций проанализированно:"
 
 # Control-ID:1163,
 #: Control-ID:1163
 msgid "Total file changes:"
-msgstr ""
+msgstr "Всего файлов изменено"
 
 # ID:73,
 #: ID:73
@@ -4205,7 +4231,7 @@ msgstr "Попробуйте еще раз"
 # ID:251,
 #: ID:251
 msgid "Try a \"Cleanup\". If that doesn't work you need to do a fresh checkout."
-msgstr ""
+msgstr "Попровуйте \"Очистку\". Если не помогло Вам надо заново сделать \"Извлечение\""
 
 # ID:10,
 #: ID:10
@@ -4249,6 +4275,12 @@ msgid ""
 "Logmessage:\r\n"
 "%s"
 msgstr ""
+"URL: %s\r\n"
+"Автор: %s\r\n"
+"Дата: %s\r\n"
+"\r\n"
+"Log-сообщение:\r\n"
+"%s"
 
 # ID:3866,#:
 # ID:3866,
@@ -4268,13 +4300,13 @@ msgstr "Невозможно прочитать из %1: он открыт ке�
 # ID:3865,
 #: ID:3865
 msgid "Unable to read write-only property."
-msgstr "Невозможно прочитать: \"только-для-записи\"."
+msgstr "Невозможно прочитать свойство: \"только-для-записи\"."
 
 # ID:3865,#:
 # ID:3865,
 #: ID:3865
 msgid "Unable to write read-only property."
-msgstr "Невозможно записать: \"только-для-чтения\"."
+msgstr "Невозможно записать свойство: \"только-для-чтения\"."
 
 # Род?
 # Двоеточие более правильно, имхо.
@@ -4305,6 +4337,12 @@ msgstr ""
 msgid "Unexpected file format."
 msgstr "Неожиданный формат файла."
 
+# Control-ID:65535,
+#: Control-ID:1180
+#, fuzzy
+msgid "Unified Diff"
+msgstr "Применить патч-файл"
+
 # ID:81,
 #: ID:81
 msgid ""
@@ -4312,9 +4350,6 @@ msgid ""
 "  Fingerprint: %s\n"
 "  Distinguished name: %s"
 msgstr ""
-"Неизвестна сторона, выдавшая сертификат.\n"
-"  Fingerprint: %s\n"
-"  Distinguished name: %s"
 
 # Род?
 # ID:3841,#:
@@ -4324,7 +4359,6 @@ msgid "Untitled"
 msgstr "Неназванный"
 
 # ID:8,#:
-# ID:74,#:
 # Dlg-ID:152,
 #: ID:8
 #: Dlg-ID:152
@@ -4336,25 +4370,22 @@ msgstr "Обновить"
 msgid "Update To Revision..."
 msgstr "Обновить до ревизии..."
 
-# ID:8,#:
-# ID:74,#:
-# Dlg-ID:152,
+# ID:74,
 #: ID:74
-#, fuzzy
 msgid "Updated"
 msgstr "Обновить"
 
 # ID:11,
 #: ID:11
 msgid "Updates the working copy to a specific revision"
-msgstr "Обновляет рабочую копию до определенной ревизии"
+msgstr "Обновляет рабочую копию до указанной ревизии"
 
 # ID:9,
 #: ID:9
 msgid "Updates the working copy to the current revision"
 msgstr "Обновляет рабочую копию до текущей ревизии"
 
-# ID:144,
+# ID:207,
 #: ID:207
 msgid "Url"
 msgstr "Url"
@@ -4366,9 +4397,8 @@ msgstr "Url:"
 
 # ID:251,
 #: ID:251
-#, fuzzy
 msgid "Use &other text block"
-msgstr "Использовать этот текстовый блок"
+msgstr "Использовать &другой текстовый блок"
 
 # ID:195,
 #: ID:195
@@ -4377,6 +4407,9 @@ msgid ""
 "To separate multiple exceptions, use commas (',').\n"
 "Example: *.mylan.com, *.company.com"
 msgstr ""
+"Используйте '*' для указания группы исключений\n"
+"Для разделения нескольких исключений используйте запятую (',').\n"
+"Например: *.mylan.com, *.company.com"
 
 # Control-ID:1064,
 #: Control-ID:1064
@@ -4388,9 +4421,8 @@ msgstr "Использовать Увеличитель в Локаторе."
 msgid "Use Text viewer to view blames"
 msgstr ""
 
-# Control-ID:65535,
+# Control-ID:1073,
 #: Control-ID:1073
-#, fuzzy
 msgid "Use \"From:\" URL"
 msgstr "&Исходный URL:"
 
@@ -4402,42 +4434,37 @@ msgstr "Использовать однопанельный вид по умол
 # Control-ID:1066,
 #: Control-ID:1066
 msgid "Use strikeout for deleted lines"
-msgstr "Использовать зачеркивание для удаленных строк"
+msgstr "Использовать зачёркивание для удалённых строк"
 
 # ID:251,
 #: ID:251
-#, fuzzy
 msgid "Use text block from \"&theirs\""
-msgstr "Использовать текстовый блок из \"их\""
+msgstr "Использовать текстовый блок из \"&их\""
 
 # ID:251,
 #: ID:251
-#, fuzzy
 msgid "Use text block from \"&yours\""
-msgstr "Использовать тестовый блок из \"ваше\""
+msgstr "Использовать тестовый блок из \"&ваше\""
 
 # ID:251,
 #: ID:251
-#, fuzzy
 msgid "Use text block from \"t&heirs\" before \"yours\""
-msgstr "Использовать тестовый блок из \"их\" перед \"ваше\""
+msgstr "Использовать тестовый блок из \"и&х\" перед \"ваше\""
 
 # ID:251,
 #: ID:251
-#, fuzzy
 msgid "Use text block from \"y&ours\" before \"theirs\""
-msgstr "Использовать тестовый блок из \"ваше\" перед \"их\""
+msgstr "Использовать тестовый блок из \"в&аше\" перед \"их\""
 
 # ID:251,
 #: ID:251
-#, fuzzy
 msgid "Use th&is text block"
-msgstr "Использовать этот текстовый блок"
+msgstr "Использовать эт&от текстовый блок"
 
 # ID:251,
 #: ID:251
 msgid "Use this &whole file"
-msgstr ""
+msgstr "Использовать &весь файл"
 
 # ID:12,
 #: ID:12
@@ -4447,7 +4474,7 @@ msgstr "Используйте это, если URL репозитория из�
 # ID:251,
 #: ID:251
 msgid "Use whole other &file"
-msgstr ""
+msgstr "Использовать другой &файл"
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -4480,13 +4507,13 @@ msgid ""
 "/diff:<path to unified diff file>\n"
 "/patchpath:<path to folder>"
 msgstr ""
-"Правильные опции в командной строке:\n"
-"/base:<путь к файлу в базе>\n"
+"Разрешенные опции в командной строке:\n"
+"/base:<путь к базовому файлу>\n"
 "/theirs:<путь к их файлу>\n"
 "/yours:<путь к Вашему файлу>\n"
 "/merged:<путь к результирующему файлу>\n"
 "/diff:<путь к патч-файлу>\n"
-"/patchpath:<path to folder>"
+"/patchpath:<путь к патч-папке>"
 
 # ID:11,
 #: ID:11
@@ -4502,7 +4529,7 @@ msgstr "Версия"
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Viewer program for GNU diff files (patch files)."
-msgstr "Программа просмотра GNU файлов различий (патч-файлов)."
+msgstr "Программа просмотра GNU diff-файлов (патч-файлов)."
 
 # Control-ID:1084,#:
 # Control-ID:1084,
@@ -4510,32 +4537,34 @@ msgstr "Программа просмотра GNU файлов различий 
 msgid "Visit our website"
 msgstr "Посетить наш вебсайт"
 
+# ID:88,
+#: ID:88
+msgid "Warning"
+msgstr "Предупреждение"
+
 # ID:219,
 #: ID:219
 msgid "Warning!"
-msgstr ""
+msgstr "Предупреждение!"
 
-# ID:78,
+# ID:195,
 #: ID:195
-#, fuzzy
 msgid ""
 "When checked, forces a refresh of the shell overlay icons after each operation.\n"
 "<ct=0x0000ff><b>Caution:</b> this can slow down explorer!</ct>"
 msgstr ""
-"Активируйте это если вы хотите помечать\n"
-"под папками их subversion-статус.\n"
-"<ct=0x0000ff><b>Внимание:</b> это может замедлить проводник</ct>"
+"Включите, чтобы видеть действительное subversion-состояние папок.\n"
+"<ct=0x0000ff><b>Внимание:</b> это может замедлить explorer!</ct>"
 
 # Control-ID:65535,
 #: Control-ID:65535
-#, fuzzy
 msgid "Whitespace diff"
-msgstr "Файл различий пустых символов"
+msgstr "Учитывать пробелы"
 
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Whitespaces"
-msgstr "Пустые символы"
+msgstr "Пробелы"
 
 # ID:80,
 #: ID:80
@@ -4585,14 +4614,14 @@ msgid ""
 "Do you really want to do that?"
 msgstr ""
 "Вы пытаетесь обратится к репозиторию посредством file:/// на\n"
-"общем сетевом диске.\n"
+"сетевом диске.\n"
 "Это может привести к сильному повреждению репозитория!\n"
 "Вы действительно хотите это сделать?"
 
 # ID:251,
 #: ID:251
 msgid "You have to update your working copy first."
-msgstr ""
+msgstr "Сперва вы должны обновить свою рабочую копию."
 
 # ID:169,
 #: ID:169
@@ -4607,7 +4636,7 @@ msgid ""
 "You selected an unversioned file.\n"
 "The file will be added to version control when you commit."
 msgstr ""
-"Вы выбрали неверсированный файл.\n"
+"Вы выбрали неверсионный файл.\n"
 "Этот файл будет добавлен в контроль версий при фиксировании."
 
 # ID:195,
@@ -4616,6 +4645,8 @@ msgid ""
 "You've changed the icon set from <i>%s</i> to <i>%s</i>.\n"
 "That change won't take effect until you restart your computer or logoff and logon again!"
 msgstr ""
+"Вы изменили набор иконок с <i>%s</i> на <i>%s</i>.\n"
+"Эти изменения вступят в силу только после перезагрузки, или выхода-входа!"
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -4641,11 +4672,11 @@ msgstr ""
 
 #: MenuEntry
 msgid "Zoom &In"
-msgstr ""
+msgstr "Уве&личить"
 
 #: MenuEntry
 msgid "Zoom &Out"
-msgstr ""
+msgstr "Уме&ньшить"
 
 # ID:10,
 #: ID:10
@@ -4664,11 +4695,10 @@ msgstr "файл без имени"
 msgid "and support the developers"
 msgstr "и поддержать разработчиков"
 
-# ID:76,
+# ID:245,
 #: ID:245
-#, fuzzy
 msgid "author"
-msgstr "Автор"
+msgstr "автор"
 
 # ID:15,
 #: ID:15
@@ -4685,6 +4715,8 @@ msgid ""
 "bugtraq:label\n"
 "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
+"bugtraq:label\n"
+"Текст заголовка для ввода issue номера."
 
 # ID:14,
 #: ID:14
@@ -4714,12 +4746,12 @@ msgstr ""
 msgid "cleaning up"
 msgstr "идет очистка"
 
-# ID:8,
+# ID:244,#:
+# ID:245,
 #: ID:244
 #: ID:245
-#, fuzzy
 msgid "commits"
-msgstr "Фиксировать..."
+msgstr "фиксировать..."
 
 # ID:11,
 #: ID:11
@@ -4750,7 +4782,7 @@ msgid ""
 "%s"
 msgstr ""
 "%s\n"
-"экспортирована в\n"
+"экспортирован в\n"
 "%s"
 
 # Род?
@@ -4799,7 +4831,7 @@ msgstr "нет описания для этой команды"
 # ID:10,
 #: ID:10
 msgid "non-versioned"
-msgstr "неизвестный"
+msgstr "неверсионный"
 
 # ID:10,
 #: ID:10
@@ -4808,7 +4840,6 @@ msgstr "нормальный"
 
 # ID:11,
 #: ID:11
-#, fuzzy
 msgid "obstructed"
 msgstr "поврежденный"
 
@@ -4828,7 +4859,6 @@ msgstr "&рекурсивно"
 msgid "replaced"
 msgstr "перемещен"
 
-# Control-ID:1023,#:
 # Control-ID:1023,
 #: Control-ID:1023
 msgid "save authentication"
@@ -4841,7 +4871,7 @@ msgid ""
 "One of 'native', 'LF', 'CR', 'CRLF'."
 msgstr ""
 "svn:eol-style\n"
-"Одна из 'родных', 'LF', 'CR', 'CRLF'."
+"Одно из 'native', 'LF', 'CR', 'CRLF'."
 
 # ID:14,
 #: ID:14
@@ -4850,7 +4880,7 @@ msgid ""
 "If present, make the file executable. This property cannot be set on a directory. A non-recursive attempt will fail, and a recursive attempt will set the property only on the file children of the directory."
 msgstr ""
 "svn:executable\n"
-"Если определено, помечает файл как запускаемый. Это свойство не может быть установлено на директории. Нерекурсивная попытка закончится неудачей, а рекурсивная -- установит свойство только на дочерние файлы."
+"Если определено, помечает файл как выполняемый. Это свойство не может быть установлено на директории. Нерекурсивная попытка закончится неудачей, а рекурсивная -- установит свойство только на дочерние файлы."
 
 # ID:14,
 #: ID:14
@@ -4861,7 +4891,7 @@ msgid ""
 "foo/bar -r 1234\thttp://example.com/repos/zag"
 msgstr ""
 "svn:externals\n"
-"Список определителей модулей, разделенный переносами строки, каждый из которых содержить относительный путь к директории, опциональные флаги ревизий, и URL. Например\n"
+"Список определителей модулей, разделенный переносами строки, каждый из которых содержит относительный путь к директории, опциональные флаги ревизий, и URL. Например\n"
 "foo\t\thttp://example.com/repos/zig\n"
 "foo/bar -r 1234\thttp://example.com/repos/zag"
 
@@ -4873,7 +4903,7 @@ msgid ""
 "A newline separated list of file patterns to ignore."
 msgstr ""
 "svn:ignore\n"
-"Список игнорируемых шаблонов, разделенный переносами строки"
+"Список шаблонов игнорирования, разделенный переносами строки"
 
 # ID:14,
 #: ID:14
@@ -4887,7 +4917,7 @@ msgid ""
 "Id\t\t\t\tA compressed summary of the previous 4 keywords."
 msgstr ""
 "svn:keywords\n"
-"Заменяемые ключевые слова. Правильные ключевые слова:\n"
+"Подставляемые ключевые слова. Доступные ключевые слова:\n"
 "URL, HeadURL\t\t\tURL верхней версии объекта.\n"
 "Author, LastChangedBy\t\tПоследний, кто изменил файл.\n"
 "Date, LastChangedDate\t\tДата/Время последней модификации файла.\n"
@@ -4901,7 +4931,7 @@ msgid ""
 "The mimetype of the file. Used to determine whether to merge the file, and how to serve it from Apache. A mimetype beginning with 'text/' (or an absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
 "svn:mime-type\n"
-"Mime-тип файла. Используется для определения, нужно ли сливать файл, и как использовать их Apache. Mime-тип, начинающийся с \"text/\" (или несуществующего mime-типа) обрабатывается как текст. Все остальное считается бинарным."
+"Mime-тип файла. Используется для определения, нужно ли сливать файл, и как использовать их Apache. Mime-тип, начинающийся с 'text/' (или несуществующего mime-типа) обрабатывается как текст. Все остальное считается бинарным."
 
 # ID:80,
 #: ID:80
@@ -4922,6 +4952,8 @@ msgid ""
 "tsvn:logminsize\n"
 "Minimum size in chars a log message must have before a commit is allowed."
 msgstr ""
+"tsvn:logminsize\n"
+"Минимальное разрешенное количество символов в Log-сообщении."
 
 # ID:15,
 #: ID:15
@@ -4930,6 +4962,8 @@ msgid ""
 "String which is inserted in the log message boxes in the commit dialogs.\n"
 "Use this as a log message templates for users to fill in."
 msgstr ""
+"tsvn:logtemplate\n"
+"Строка содержащая шаблон Log-сообщения для диалога фиксации."
 
 # ID:15,
 #: ID:15
@@ -4938,6 +4972,10 @@ msgid ""
 "Set this to the number of chars the log message should not exceed its width.\n"
 "A faded line is shown in the commit dialogs at that position. The default is 80 chars."
 msgstr ""
+"tsvn:logwidthmarker\n"
+"Set this to the number of chars the log message should not exceed its width.\n"
+"Установите в количество символов которое не следует привышать строке сообщения.\n"
+"Тонкая линия будет показана на этом месте. По умолчанию 80 символов."
 
 # ID:15,
 #: ID:15
@@ -4946,6 +4984,9 @@ msgid ""
 "Set this to the language number you want your log messages written in.\n"
 "TortoiseSVN will then load the appropriate spell checker module if available."
 msgstr ""
+"tsvn:projectlanguage\n"
+"Установите номер языка для Log-сообщений проекта.\n"
+"TortoiseSVN будет подгружать подходящуй модуль проверки орфографии, если найдёт."
 
 # ID:15,
 #: ID:15
@@ -4953,11 +4994,18 @@ msgid ""
 "tsvn:warnifnoissue\n"
 "Set to \"yes\" if a warning shall be shown when no issue is entered in the commit dialog."
 msgstr ""
+"tsvn:warnifnoissue\n"
+"При установки в \"yes\" будет появлялось предупреждение если забыть указать issue в диалоге фиксации."
 
 # ID:244,
 #: ID:244
 msgid "week"
-msgstr ""
+msgstr "неделя"
+
+# ID:9,
+#: Control-ID:65535
+msgid "which points to the repository at URL:"
+msgstr "Фиксирует Ваши изменения в репозитории:"
 
 # Control-ID:1112,
 #: Control-ID:1112
