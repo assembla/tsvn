@@ -19,7 +19,6 @@
 #include "TortoiseProc.h"
 #include ".\revisiongraphdlg.h"
 
-
 // CRevisionGraphDlg dialog
 
 IMPLEMENT_DYNAMIC(CRevisionGraphDlg, CResizableDialog)
@@ -35,6 +34,15 @@ CRevisionGraphDlg::~CRevisionGraphDlg()
 	for (INT_PTR i=0; i<m_arConnections.GetCount(); ++i)
 	{
 		delete [] (CPoint*)m_arConnections.GetAt(i);
+	}
+	for (int i=0; i<MAXFONTS; i++)
+	{
+		if (m_apFonts[i] != NULL)
+		{
+			m_apFonts[i]->DeleteObject();
+			delete m_apFonts[i];
+		}
+		m_apFonts[i] = NULL;
 	}
 }
 
@@ -65,6 +73,16 @@ END_MESSAGE_MAP()
 BOOL CRevisionGraphDlg::OnInitDialog()
 {
 	CResizableDialog::OnInitDialog();
+
+	memset(&m_lfBaseFont, 0, sizeof(m_lfBaseFont));
+	m_lfBaseFont.lfHeight = 0;
+	m_lfBaseFont.lfWeight = FW_NORMAL;
+	m_lfBaseFont.lfItalic = FALSE;
+	m_lfBaseFont.lfCharSet = DEFAULT_CHARSET;
+	m_lfBaseFont.lfOutPrecision = OUT_DEFAULT_PRECIS;
+	m_lfBaseFont.lfClipPrecision = CLIP_DEFAULT_PRECIS;
+	m_lfBaseFont.lfQuality = DEFAULT_QUALITY;
+	m_lfBaseFont.lfPitchAndFamily = DEFAULT_PITCH;
 
 	CString temp;
 	temp.LoadString(IDS_REVGRAPH_PROGTITLE);
@@ -147,7 +165,7 @@ DWORD WINAPI WorkerThread(LPVOID pVoid)
 	e = new CRevisionEntry();
 	e->level = 1;
 	e->revision = 15;
-	e->url = "/trunk";
+	e->url = "/branches/testing/andevenmore/testing/to/get/a/very/long/url";
 	e->author = "kueng";
 	e->message = "something on a branch";
 	e->pathfrom = "/branches/testing";
@@ -224,6 +242,31 @@ INT_PTR CRevisionGraphDlg::GetIndexOfRevision(LONG rev)
 /************************************************************************/
 /* Graphing functions                                                   */
 /************************************************************************/
+CFont* CRevisionGraphDlg::GetFont(BOOL bItalic /*= FALSE*/, BOOL bBold /*= FALSE*/)
+{
+	int nIndex = 0;
+	if (bBold)
+		nIndex |= 1;
+	if (bItalic)
+		nIndex |= 2;
+	if (m_apFonts[nIndex] == NULL)
+	{
+		m_apFonts[nIndex] = new CFont;
+		m_lfBaseFont.lfWeight = bBold ? FW_BOLD : FW_NORMAL;
+		m_lfBaseFont.lfItalic = (BYTE) bItalic;
+		m_lfBaseFont.lfStrikeOut = (BYTE) FALSE;
+		m_lfBaseFont.lfHeight = -MulDiv(10, GetDeviceCaps(this->GetDC()->m_hDC, LOGPIXELSY), 72);
+		_tcsncpy(m_lfBaseFont.lfFaceName, _T("Courier New"), 32);
+		if (!m_apFonts[nIndex]->CreateFontIndirect(&m_lfBaseFont))
+		{
+			delete m_apFonts[nIndex];
+			m_apFonts[nIndex] = NULL;
+			return CDialog::GetFont();
+		}
+	}
+	return m_apFonts[nIndex];
+}
+
 BOOL CRevisionGraphDlg::OnEraseBkgnd(CDC* pDC)
 {
 	CRect rect;
@@ -258,7 +301,6 @@ void CRevisionGraphDlg::OnPaint()
 			CResizableDialog::OnPaint();
 			return;
 		}
-		dc.SetTextAlign(TA_CENTER);
 		dc.SetBkMode(TRANSPARENT);
 		GetViewSize();
 		DrawGraph(&dc, rect, GetScrollPos(SB_VERT), GetScrollPos(SB_HORZ));
@@ -290,11 +332,12 @@ void CRevisionGraphDlg::DrawOctangle(CDC * pDC, const CRect& rect)
 }
 
 void CRevisionGraphDlg::DrawNode(CDC * pDC, const CRect& rect,
-								COLORREF contour, NodeShape shape, 
+								COLORREF contour, CRevisionEntry *rentry, NodeShape shape, 
 								bool isSel, int penStyle /*= PS_SOLID*/)
 {
 	CPen* pOldPen = 0L;
 	CBrush* pOldBrush = 0L;
+	CFont* pOldFont = 0L;
 	CPen pen, pen2;
 	CBrush brush;
 	COLORREF selcolor = RGB_DEF_SEL;
@@ -360,15 +403,35 @@ void CRevisionGraphDlg::DrawNode(CDC * pDC, const CRect& rect,
 			ASSERT(FALSE);	//unknown type
 			return;
 		}
-
+		pOldFont = pDC->SelectObject(GetFont(FALSE, TRUE));
+		CString temp;
+		CRect r;
+		TEXTMETRIC tm;
+		pDC->GetTextMetrics(&tm);
+		temp.Format(IDS_REVGRAPH_BOXREVISIONTITLE, rentry->revision);
+		pDC->DrawText(temp, &r, DT_CALCRECT);
+		pDC->ExtTextOut(rect.left + ((rect.Width()-r.Width())/2), rect.top + NODE_RECT_HEIGTH/4, ETO_CLIPPED, NULL, temp, NULL);
+		pDC->SelectObject(GetFont(TRUE));
+		temp = CUnicodeUtils::GetUnicode(rentry->url);
+		r = rect;
+		temp.Replace('/','\\');
+		pDC->DrawText(temp.GetBuffer(temp.GetLength()), temp.GetLength(), &r, DT_CALCRECT | DT_PATH_ELLIPSIS | DT_MODIFYSTRING);
+		temp.ReleaseBuffer();
+		temp.Replace('\\','/');
+		pDC->ExtTextOut(rect.left + ((rect.Width()-r.Width())/2), rect.top + NODE_RECT_HEIGTH/4 + NODE_RECT_HEIGTH/3, ETO_CLIPPED, &rect, temp, NULL);
 		// Cleanup
-		if( pOldPen != 0L )
+		if (pOldFont != 0L)
+		{
+			pDC->SelectObject(pOldFont);
+			pOldFont = 0L;
+		}
+		if (pOldPen != 0L)
 		{
 			pDC->SelectObject(pOldPen);
 			pOldPen = 0L;
 		}
 
-		if( pOldBrush != 0L )
+		if (pOldBrush != 0L)
 		{
 			pDC->SelectObject(pOldBrush);
 			pOldBrush = 0L;
@@ -409,7 +472,7 @@ void CRevisionGraphDlg::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		noderect.bottom = noderect.top + NODE_RECT_HEIGTH;
 		noderect.left = (entry->level - 1)*(NODE_RECT_WIDTH+NODE_SPACE_LEFT+NODE_SPACE_RIGHT) + NODE_SPACE_LEFT - nHScrollPos;
 		noderect.right = noderect.left + NODE_RECT_WIDTH;
-		DrawNode(pDC, noderect, RGB(0,0,0), TSVNOctangle, false);
+		DrawNode(pDC, noderect, RGB(0,0,0), entry, TSVNOctangle, false);
 	}
 	DrawConnections(pDC, rect, nVScrollPos, nHScrollPos);
 }
@@ -418,6 +481,9 @@ void CRevisionGraphDlg::BuildConnections()
 {
 	CDWordArray connections;
 	CDWordArray connections2;
+	// check how many connections there are between each level
+	// this is used to add a slight offset to the vertical lines
+	// so they're not overlapping
 	for (INT_PTR i=0; i<m_arEntryPtrs.GetCount(); ++i)
 	{
 		CRevisionEntry * reventry = (CRevisionEntry*)m_arEntryPtrs.GetAt(i);
@@ -464,7 +530,7 @@ void CRevisionGraphDlg::BuildConnections()
 				//line down: 3
 				pt[2].x = pt[1].x;
 				pt[2].y = (GetIndexOfRevision(sentry->revisionto)*(NODE_RECT_HEIGTH+NODE_SPACE_TOP+NODE_SPACE_BOTTOM) + NODE_SPACE_TOP);
-				pt[2].y += (NODE_RECT_HEIGTH / (reventry->sourcearray.GetCount()+1));
+				pt[2].y += (NODE_RECT_HEIGTH / 2);
 				//line to target: 4
 				pt[3].y = pt[2].y;
 				pt[3].x = ((((CRevisionEntry*)m_arEntryPtrs.GetAt(GetIndexOfRevision(sentry->revisionto)))->level-1)*(NODE_RECT_WIDTH+NODE_SPACE_LEFT+NODE_SPACE_RIGHT));
@@ -511,10 +577,21 @@ void CRevisionGraphDlg::DrawConnections(CDC* pDC, const CRect& rect, int nVScrol
 	for (INT_PTR i=0; i<m_arConnections.GetCount(); ++i)
 	{
 		CPoint * pt = (CPoint*)m_arConnections.GetAt(i);
+		// only draw the lines if they're at least partially visible
 		if (viewrect.PtInRect(pt[0])||viewrect.PtInRect(pt[3]))
 		{
-			//the line is (at least partially) visible, so draw the line
-			pDC->Polyline(pt, 4);
+			CPoint p[4];
+			// correct the scroll offset
+			p[0].x = pt[0].x - nHScrollPos;
+			p[1].x = pt[1].x - nHScrollPos;
+			p[2].x = pt[2].x - nHScrollPos;
+			p[3].x = pt[3].x - nHScrollPos;
+			p[0].y = pt[0].y - nVScrollPos;
+			p[1].y = pt[1].y - nVScrollPos;
+			p[2].y = pt[2].y - nVScrollPos;
+			p[3].y = pt[3].y - nVScrollPos;
+
+			pDC->Polyline(p, 4);
 		}
 	}
 }
