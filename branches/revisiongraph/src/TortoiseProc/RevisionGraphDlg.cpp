@@ -477,7 +477,21 @@ void CRevisionGraphDlg::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		noderect.bottom = noderect.top + NODE_RECT_HEIGTH;
 		noderect.left = (entry->level - 1)*(NODE_RECT_WIDTH+NODE_SPACE_LEFT+NODE_SPACE_RIGHT) + NODE_SPACE_LEFT - nHScrollPos;
 		noderect.right = noderect.left + NODE_RECT_WIDTH;
-		DrawNode(&memDC, noderect, RGB(0,0,0), entry, TSVNOctangle, m_lSelectedRev==entry->revision);
+		switch (entry->action)
+		{
+		case 'D':
+			DrawNode(&memDC, noderect, RGB(0,0,0), entry, TSVNOctangle, m_lSelectedRev==entry->revision);
+			break;
+		case 'A':
+			DrawNode(&memDC, noderect, RGB(0,0,0), entry, TSVNRoundRect, m_lSelectedRev==entry->revision);
+			break;
+		case 'R':
+			DrawNode(&memDC, noderect, RGB(0,0,0), entry, TSVNOctangle, m_lSelectedRev==entry->revision);
+			break;
+		default:
+			DrawNode(&memDC, noderect, RGB(0,0,0), entry, TSVNRectangle, m_lSelectedRev==entry->revision);
+			break;
+		}
 		m_arNodeList.Add(noderect);
 		m_arNodeRevList.Add(entry->revision);
 	}
@@ -732,7 +746,7 @@ void CRevisionGraphDlg::OnLButtonDown(UINT nFlags, CPoint point)
 	{
 		if (m_arNodeList.GetAt(i).PtInRect(point))
 		{
-			if (m_lSelectedRev == m_arNodeRevList.GetAt(i))
+			if (m_lSelectedRev == (LONG)m_arNodeRevList.GetAt(i))
 				m_lSelectedRev = -1;
 			else
 				m_lSelectedRev = m_arNodeRevList.GetAt(i);
