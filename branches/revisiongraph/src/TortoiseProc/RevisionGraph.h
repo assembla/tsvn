@@ -83,22 +83,24 @@ public:
 	~CRevisionGraph(void);
 	BOOL						FetchRevisionData(CString path);
 	BOOL						AnalyzeRevisionData(CString path);
-
+	virtual BOOL				ProgressCallback(CString text1, CString text2, DWORD done, DWORD total);
 	CString						GetLastErrorMessage();
 	BOOL						m_bCancelled;
 	apr_array_header_t *		m_logdata;
+	apr_pool_t *				pool;			///< memory pool
 private:
 	BOOL						GetRepositoryRoot(CStringA& url);
 	BOOL						AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev);
+	BOOL						CheckForwardCopies();
 	BOOL						IsParentOrItself(const char * parent, const char * child);
 	CStringA					m_sRepoRoot;
 	LONG						m_lHeadRevision;
 
 	CPtrArray					m_arEntryPtrs;
 
+	int							m_nRecurseLevel;
 	svn_error_t *				Err;			///< Global error object struct
 	apr_pool_t *				parentpool;
-	apr_pool_t *				pool;			///< memory pool
 	static svn_error_t*			cancel(void *baton);
 	static svn_error_t*			logDataReceiver(void* baton, 
 												apr_hash_t* ch_paths, 
