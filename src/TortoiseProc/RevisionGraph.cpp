@@ -68,7 +68,13 @@ CRevisionGraph::CRevisionGraph(void) : SVNPrompt()
 CRevisionGraph::~CRevisionGraph(void)
 {
 	svn_pool_destroy (parentpool);
+	for (int i=0; i<m_arEntryPtrs.GetCount(); ++i)
+	{
+		delete (CRevisionEntry*)m_arEntryPtrs.GetAt(i);
+	}
 }
+
+BOOL CRevisionGraph::ProgressCallback(CString /*text*/, CString /*text2*/, DWORD /*done*/, DWORD /*total*/) {return TRUE;}
 
 svn_error_t* CRevisionGraph::cancel(void *baton)
 {
@@ -95,7 +101,7 @@ svn_error_t* CRevisionGraph::logDataReceiver(void* baton,
 	log_entry * e = NULL;
 	CRevisionGraph * me = (CRevisionGraph *)baton;
 
-	e = (log_entry *)apr_pcalloc (pool, sizeof(*e));
+	e = (log_entry *)apr_pcalloc (me->pool, sizeof(log_entry));
 	if (e==NULL)
 	{
 		return svn_error_create(APR_OS_START_SYSERR + ERROR_NOT_ENOUGH_MEMORY, NULL, NULL);
@@ -107,12 +113,31 @@ svn_error_t* CRevisionGraph::logDataReceiver(void* baton,
 		if (error)
 			return error;
 	}
-	e->author = author;
-	e->ch_paths = ch_paths;
-	e->msg = msg;
+	e->author = apr_pstrdup(me->pool, author);
+	//create a copy of the hash
+	e->ch_paths = apr_hash_make(me->pool);
+	apr_hash_index_t* hi;
+	for (hi = apr_hash_first (pool, ch_paths); hi; hi = apr_hash_next (hi))
+	{
+		const char * key;
+		const char * keycopy;
+		svn_log_changed_path_t *val;
+		svn_log_changed_path_t *valcopy;
+		apr_hash_this(hi, (const void**)&key, NULL, (void**)&val);
+		keycopy = apr_pstrdup(me->pool, key);
+		valcopy = (svn_log_changed_path_t*)apr_pmemdup(me->pool, val, sizeof(svn_log_changed_path_t));
+		valcopy->copyfrom_path = apr_pstrdup(me->pool, val->copyfrom_path);
+		apr_hash_set(e->ch_paths, keycopy, APR_HASH_KEY_STRING, valcopy);
+	}
+	e->msg = apr_pstrdup(me->pool, msg);
 	e->rev = rev;
 	if (me->m_lHeadRevision < rev)
 		me->m_lHeadRevision = rev;
+	CString temp, temp2;
+	temp.LoadString(IDS_REVGRAPH_PROGGETREVS);
+	temp2.Format(IDS_REVGRAPH_PROGCURRENTREV, rev);
+	if (!me->ProgressCallback(temp, temp2, me->m_lHeadRevision - rev, me->m_lHeadRevision))
+		me->m_bCancelled = TRUE;
 	APR_ARRAY_PUSH(me->m_logdata, log_entry *) = e;
 	return SVN_NO_ERROR;
 }
@@ -175,7 +200,35 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path)
 {
 	if (m_logdata == NULL)
 		return FALSE;
-	AnalyzeRevisions("test", m_lHeadRevision, 1);
+	SVN::preparePath(path);
+	CStringA url = CUnicodeUtils::GetUTF8(path);
+
+	// convert a working copy path into an URL if necessary
+	if (!svn_path_is_url(url))
+	{
+		//not an url, so get the URL from the working copy path first
+		svn_wc_adm_access_t *adm_access;          
+		const svn_wc_entry_t *entry;  
+		const char * canontarget = svn_path_canonicalize(url, pool);
+#pragma warning(push)
+#pragma warning(disable: 4127)	// conditional expression is constant
+		Err = svn_wc_adm_probe_open2 (&adm_access, NULL, canontarget,
+			FALSE, 0, pool);
+		if (Err) return FALSE;
+		Err =  svn_wc_entry (&entry, canontarget, adm_access, FALSE, pool);
+		if (Err) return FALSE;
+		Err = svn_wc_adm_close (adm_access);
+		if (Err) return FALSE;
+#pragma warning(pop)
+
+		url = entry ? entry->url : "";
+	}
+	if (!CUtils::IsEscaped(url))
+		url = CUtils::PathEscape(url);
+	url = url.Mid(m_sRepoRoot.GetLength());
+	m_nRecurseLevel = 0;
+	AnalyzeRevisions(url, m_lHeadRevision, 1);
+	CheckForwardCopies();
 	return TRUE;
 }
 
@@ -184,9 +237,19 @@ BOOL CRevisionGraph::AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev)
 	LONG forward = 1;
 	if (startrev > endrev)
 		forward = -1;
+	m_nRecurseLevel++;
+	TRACE(_T("Analyzing %s from %ld to %ld - recurse level %d\n"), (LPCTSTR)CString(url), startrev, endrev, m_nRecurseLevel);
 	for (long currentrev=startrev; currentrev!=endrev; currentrev += forward)
 	{
-		log_entry * logentry = APR_ARRAY_IDX(m_logdata, currentrev, log_entry *);
+		if (m_nRecurseLevel==1)
+		{
+			CString temp, temp2;
+			temp.LoadString(IDS_REVGRAPH_PROGANALYZE);
+			temp2.Format(IDS_REVGRAPH_PROGANALYZEREV, currentrev);
+			if (!ProgressCallback(temp, temp2, forward==1 ? endrev-currentrev : startrev-currentrev, forward==1 ? endrev-startrev : startrev-endrev))
+				return FALSE;
+		}
+		log_entry * logentry = APR_ARRAY_IDX(m_logdata, currentrev-1, log_entry *);
 		if (logentry)
 		{
 			ASSERT(logentry->rev == currentrev);
@@ -213,24 +276,113 @@ BOOL CRevisionGraph::AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev)
 							reventry->revisionfrom = val->copyfrom_rev;
 						}
 						m_arEntryPtrs.Add(reventry);
+						TRACE("revision entry: %ld - %s\n", reventry->revision, reventry->url);
 						if (val->copyfrom_path)
 						{
 							// the file/folder was copied to here
 							// so we have to get all the information from that source too.
-							AnalyzeRevisions(val->copyfrom_path, currentrev, 1);
+							AnalyzeRevisions(val->copyfrom_path, currentrev-1, startrev);
 						}
 					}
-					else
+					else if (val->action != 'M')
 					{
+						//the parent got moved, and therefore we too
+						CRevisionEntry * reventry = new CRevisionEntry();
+						reventry->revision = currentrev;
+						reventry->author = logentry->author;
+						reventry->date = logentry->time;
+						reventry->message = logentry->msg;
+						reventry->url = key;
+						reventry->action = val->action;
 						if (val->copyfrom_path)
 						{
-							//check if our file/folder may be the source of a copy operation
-							if (IsParentOrItself(val->copyfrom_path, url)==0)
+							reventry->pathfrom = val->copyfrom_path;
+							reventry->revisionfrom = val->copyfrom_rev;
+						}
+						m_arEntryPtrs.Add(reventry);
+						TRACE("revision entry: %ld - %s\n", reventry->revision, reventry->url);
+						AnalyzeRevisions(key, currentrev+1, m_lHeadRevision);
+					}
+				}
+				else
+				{
+					if (val->copyfrom_path)
+					{
+						//check if our file/folder may be the source of a copy operation
+						if (IsParentOrItself(val->copyfrom_path, url))
+						{
+							CRevisionEntry * reventry = new CRevisionEntry();
+							reventry->revision = currentrev;
+							reventry->author = logentry->author;
+							reventry->date = logentry->time;
+							reventry->message = logentry->msg;
+							reventry->url = key;
+							reventry->action = val->action;
+							if (val->copyfrom_path)
 							{
-								AnalyzeRevisions(val->copyfrom_path, currentrev, m_lHeadRevision);
+								reventry->pathfrom = val->copyfrom_path;
+								reventry->revisionfrom = val->copyfrom_rev;
 							}
+							m_arEntryPtrs.Add(reventry);
+							TRACE("revision entry: %ld - %s\n", reventry->revision, reventry->url);
+							AnalyzeRevisions(key, currentrev+1, m_lHeadRevision);
 						}
 					}
+				}
+			}
+		}
+	}
+	m_nRecurseLevel--;
+	return TRUE;
+}
+
+BOOL CRevisionGraph::CheckForwardCopies()
+{
+	CString temp, temp2;
+	temp.LoadString(IDS_REVGRAPH_PROGCHECKFORWARD);
+	for (INT_PTR i=0; i<m_arEntryPtrs.GetCount(); ++i)
+	{
+		temp2.Format(IDS_REVGRAPH_PROGCHECKFORWARDREV, i);
+		if (!ProgressCallback(temp, temp2, i, m_arEntryPtrs.GetCount()))
+			return FALSE;
+		CRevisionEntry * logentry = (CRevisionEntry*)m_arEntryPtrs.GetAt(i);
+		if ((logentry->pathfrom)&&(logentry->revisionfrom))
+		{
+			//this entry was copied from somewhere.
+			//try to find that revision entry
+			BOOL found = FALSE;
+			for (INT_PTR j=0; j<m_arEntryPtrs.GetCount(); ++j)
+			{
+				CRevisionEntry * e = (CRevisionEntry*)m_arEntryPtrs.GetAt(j);
+				if (e->revision == logentry->revisionfrom)
+				{
+					e->revisionto = logentry->revision;
+					e->pathto = logentry->url;
+					found = TRUE;
+					break;
+				}
+			}
+			if (!found)
+			{
+				//create a new entry as a starting point
+				log_entry * origentry = APR_ARRAY_IDX(m_logdata, logentry->revisionfrom-1, log_entry *);
+				CRevisionEntry * reventry = new CRevisionEntry();
+				svn_log_changed_path_t *val;
+				apr_hash_index_t* hi = apr_hash_first (pool, origentry->ch_paths);
+				if (hi)
+				{
+					apr_hash_this(hi, (const void**)&reventry->url, NULL, (void**)&val);
+					reventry->revision = origentry->rev;
+					reventry->author = origentry->author;
+					reventry->date = origentry->time;
+					reventry->message = origentry->msg;
+					reventry->action = val->action;
+					if (val->copyfrom_path)
+					{
+						reventry->pathfrom = val->copyfrom_path;
+						reventry->revisionfrom = val->copyfrom_rev;
+					}
+					m_arEntryPtrs.Add(reventry);
 				}
 			}
 		}
@@ -242,7 +394,8 @@ BOOL CRevisionGraph::IsParentOrItself(const char * parent, const char * child)
 {
 	if (strncmp(parent, child, strlen(parent))==0)
 	{
-		if (child[strlen(parent)]=='/')
+		size_t len = strlen(parent);
+		if ((child[len]=='/')||(child[len]==0))
 			return TRUE;
 	}
 	return FALSE;
