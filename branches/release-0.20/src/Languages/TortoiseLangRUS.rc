@@ -1,11 +1,7 @@
-// Microsoft Visual C++ generated resource script.
-//
-#include "resrc1.h"
-
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
 //
-// Generated from the TEXTINCLUDE 2 resource.
+// Generated from the TEXTINCLUDE 1 resource.
 //
 #include "..\tortoiseproc\resource.h"
 #include "afxres.h"
@@ -73,17 +69,12 @@ LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 
 1 TEXTINCLUDE 
 BEGIN
-    "resrc1.h\0"
-END
-
-2 TEXTINCLUDE 
-BEGIN
     "#include ""..\\tortoiseproc\\resource.h""\r\n"
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE 
+2 TEXTINCLUDE 
 BEGIN
     "\r\n"
     "\0"
@@ -114,16 +105,18 @@ BEGIN
     LTEXT           "Дмитрий Попков",IDC_STATIC,47,183,57,8
 END
 
-IDD_ADD DIALOGEX 0, 0, 244, 146
+IDD_ADD DIALOGEX 0, 0, 244, 154
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | 
     WS_THICKFRAME
 CAPTION "Добавление в репозиторий"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "ОК",IDOK,8,125,50,14
-    PUSHBUTTON      "Отмена",IDCANCEL,187,125,50,14
+    DEFPUSHBUTTON   "ОК",IDOK,8,133,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,187,133,50,14
     CONTROL         "",IDC_ADDLIST,"SysListView32",LVS_REPORT | 
                     LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,230,107
+    CONTROL         "Выделить все (или отменить выделение)",IDC_SELECTALL,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,119,230,10
 END
 
 IDD_CHANGEDFILES DIALOGEX 0, 0, 408, 206
@@ -145,18 +138,18 @@ CAPTION "Создание рабочей копии"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Репозиторий",IDC_STATIC,7,7,279,55
-    LTEXT           "&URL репозитория:",IDC_STATIC,13,23,66,8
+    LTEXT           "URL репозитория:",IDC_STATIC,13,23,66,8
     COMBOBOX        IDC_URLCOMBO,83,22,173,41,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
                     WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "...",IDC_BROWSE,264,22,14,12
-    LTEXT           "&Рабочая копия:",IDC_STATIC,13,41,59,8
+    LTEXT           "Рабочая копия:",IDC_STATIC,13,41,59,8
     EDITTEXT        IDC_CHECKOUTDIRECTORY,83,41,173,14,ES_AUTOHSCROLL
     PUSHBUTTON      "...",IDC_CHECKOUTDIRECTORY_BROWSE,264,41,14,12
     GROUPBOX        "Редакция, извлекаемая из репозитория",IDC_STATIC,7,68,
                     279,51
-    CONTROL         "&Головная редакция",IDC_REVISION_HEAD,"Button",
+    CONTROL         "Головная редакция (HEAD)",IDC_REVISION_HEAD,"Button",
                     BS_AUTORADIOBUTTON,13,82,112,10
-    CONTROL         "&Указанная:",IDC_REVISION_N,"Button",BS_AUTORADIOBUTTON | 
+    CONTROL         "Указанная:",IDC_REVISION_N,"Button",BS_AUTORADIOBUTTON | 
                     BS_MULTILINE,13,98,70,13
     EDITTEXT        IDC_REVISION_NUM,83,97,58,14,ES_AUTOHSCROLL | 
                     WS_DISABLED
@@ -184,14 +177,14 @@ BEGIN
                     WS_VSCROLL
 END
 
-IDD_IMPORT DIALOGEX 0, 0, 269, 281
+IDD_IMPORT DIALOGEX 0, 0, 269, 292
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
     WS_SYSMENU
 CAPTION "Импорт файлов в репозиторий"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "ОК",IDOK,157,261,50,14
-    PUSHBUTTON      "Отмена",IDCANCEL,213,261,50,14
+    DEFPUSHBUTTON   "ОК",IDOK,157,271,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,213,271,50,14
     LTEXT           "URL репозитория:",IDC_STATIC4,13,24,64,8
     EDITTEXT        IDC_MESSAGE,13,60,242,60,ES_MULTILINE | ES_AUTOVSCROLL | 
                     ES_AUTOHSCROLL | ES_WANTRETURN
@@ -203,7 +196,9 @@ BEGIN
     CONTROL         "",IDC_FILELIST,"SysListView32",LVS_REPORT | 
                     LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,14,141,242,103
     GROUPBOX        "Список временных файлов для удаления",IDC_STATIC3,8,128,
-                    255,123
+                    255,138
+    CONTROL         "Выделить все (или отменить выделение)",IDC_SELECTALL,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,250,239,10
 END
 
 IDD_LOGMESSAGE DIALOGEX 0, 0, 289, 245
@@ -280,10 +275,10 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "ОК",IDOK,7,47,50,14
     PUSHBUTTON      "Отмена",IDCANCEL,172,47,50,14
-    EDITTEXT        IDC_PASSEDIT,84,10,139,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSEDIT,74,10,147,14,ES_AUTOHSCROLL
     CONTROL         "Запомнить параметры авторизации",IDC_SAVECHECK,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,6,31,215,10
-    LTEXT           "Пользователь:",IDC_INFOTEXT2,7,13,64,9
+    LTEXT           "Пользователь:",IDC_INFOTEXT,7,13,64,9
 END
 
 IDD_RELOCATE DIALOGEX 0, 0, 268, 66
@@ -330,7 +325,7 @@ BEGIN
                     WS_EX_CLIENTEDGE
 END
 
-IDD_SETTINGSMAIN DIALOGEX 0, 0, 287, 174
+IDD_SETTINGSMAIN DIALOGEX 0, 0, 287, 175
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Основные"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
@@ -346,7 +341,7 @@ BEGIN
     EDITTEXT        IDC_TEMPEXTENSIONS,100,92,179,14,ES_AUTOHSCROLL
     CONTROL         "Включить добавление/удаление файлов непосредственно\nперед фиксированием изменений",
                     IDC_ADDBEFORECOMMIT,"Button",BS_AUTOCHECKBOX | 
-                    BS_MULTILINE | WS_TABSTOP,7,120,270,18
+                    BS_MULTILINE | WS_TABSTOP,7,114,270,18
     LTEXT           "Внешняя программа для\nслияния файлов:",IDC_STATIC,7,28,
                     93,17
     EDITTEXT        IDC_EXTMERGE,100,27,122,14,ES_AUTOHSCROLL
@@ -357,7 +352,10 @@ BEGIN
     PUSHBUTTON      "Выбор ...",IDC_DIFFVIEWERROWSE,230,48,50,14
     CONTROL         "Запоминать введённый комментарий в случае отмены фиксирования изменений",
                     IDC_NOREMOVELOGMSG,"Button",BS_AUTOCHECKBOX | 
-                    BS_MULTILINE | WS_TABSTOP,6,142,206,19
+                    BS_MULTILINE | WS_TABSTOP,7,133,206,19
+    CONTROL         "Автоматически закрывать окно операции после её окончания",
+                    IDC_AUTOCLOSE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,
+                    157,273,10
 END
 
 IDD_SETTINGSOVERLAY DIALOGEX 0, 0, 234, 107
@@ -378,9 +376,9 @@ BEGIN
                     BS_AUTOCHECKBOX | WS_TABSTOP,7,79,150,10
 END
 
-IDD_SETTINGSPROXY DIALOGEX 0, 0, 278, 103
+IDD_SETTINGSPROXY DIALOGEX 0, 0, 278, 134
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
-CAPTION "Прокси-сервер"
+CAPTION "Сетевые настройки"
 FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     LTEXT           "Адрес\nсервера:",IDC_STATIC,18,32,50,17
@@ -396,6 +394,9 @@ BEGIN
     GROUPBOX        "Настройки прокси-сервера",IDC_STATIC,7,22,264,74
     CONTROL         "Использовать прокси сервер",IDC_ENABLE,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,7,7,118,10
+    LTEXT           "SSH клиент:",IDC_STATIC,8,113,49,8
+    EDITTEXT        IDC_SSHCLIENT,71,110,141,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Выбор ...",IDC_SSHBROWSE,221,110,50,14
 END
 
 IDD_SVNPROGRESS DIALOGEX 0, 0, 364, 146
@@ -531,50 +532,49 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,163,63,50,14
 END
 
-IDD_PROPPAGE DIALOGEX 0, 0, 232, 302
-STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PROPPAGE DIALOGEX 0, 0, 247, 277
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE | 
+    WS_CAPTION
 CAPTION "Property Page"
-FONT 8, "MS Shell Dlg", 0, 0, 0x0
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    LTEXT           "Редакция:",IDC_STATIC,7,8,40,8
-    LTEXT           "Последная \nредакция:",IDC_STATIC,7,32,77,16
-    LTEXT           "Дата последней \nредакции:",IDC_STATIC,7,49,63,19
-    LTEXT           "Автор:",IDC_STATIC,7,69,24,8
-    LTEXT           "Состояние:",IDC_STATIC,7,82,41,8
-    LTEXT           "Состояние \nсвойств:",IDC_STATIC,7,95,68,15
-    LTEXT           "URL:",IDC_STATIC,7,20,16,8
-    EDITTEXT        IDC_REVISION,78,8,79,12,ES_AUTOHSCROLL | ES_READONLY | 
+    LTEXT           "URL:",IDC_STATIC,5,5,16,8
+    EDITTEXT        IDC_REPOURL,25,5,215,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_REPOURL,78,23,150,12,ES_AUTOHSCROLL | ES_READONLY | 
+    LTEXT           "Редакция / автор:",IDC_STATIC,6,18,74,8
+    EDITTEXT        IDC_REVISION,84,18,50,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_CDATE,78,53,150,12,ES_AUTOHSCROLL | ES_READONLY | 
+    EDITTEXT        IDC_AUTHOR,134,18,60,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_TEXTDATE,123,83,105,12,ES_AUTOHSCROLL | ES_READONLY | 
+    LTEXT           "LOCKED",IDC_LOCKED,204,18,27,8
+    LTEXT           "Последняя редакция:",IDC_STATIC,6,30,75,8
+    EDITTEXT        IDC_CREVISION,84,30,50,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_CREVISION,78,38,150,12,ES_AUTOHSCROLL | ES_READONLY | 
+    EDITTEXT        IDC_CDATE,134,30,90,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_TEXTSTATUS,78,83,41,12,ES_AUTOHSCROLL | ES_READONLY | 
+    LTEXT           "Состояние:",IDC_STATIC,5,42,75,8
+    EDITTEXT        IDC_TEXTSTATUS,84,42,50,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_PROPSTATUS,78,98,41,12,ES_AUTOHSCROLL | ES_READONLY | 
+    EDITTEXT        IDC_TEXTDATE,134,42,105,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_PROPDATE,123,98,105,12,ES_AUTOHSCROLL | ES_READONLY | 
+    LTEXT           "Соятояние свойств:",IDC_STATIC,5,54,75,8
+    EDITTEXT        IDC_PROPSTATUS,84,54,50,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_AUTHOR,78,68,150,12,ES_AUTOHSCROLL | ES_READONLY | 
+    EDITTEXT        IDC_PROPDATE,134,54,105,12,ES_AUTOHSCROLL | ES_READONLY | 
                     NOT WS_BORDER,WS_EX_TRANSPARENT
-    LTEXT           "Заблокировано",IDC_LOCKED,175,4,52,8
-    GROUPBOX        "Свойства",IDC_STATIC,7,135,215,160
+    PUSHBUTTON      "История изменений",IDC_SHOWLOG,5,66,235,14
+    GROUPBOX        "Свойства",IDC_STATIC,5,82,235,190
     CONTROL         "",IDC_PROPLIST,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_ALIGNLEFT | LVS_NOSORTHEADER | 
-                    WS_BORDER | WS_TABSTOP,13,147,203,72
-    PUSHBUTTON      "Добавить",IDC_ADDBUTTON,13,256,79,14,WS_DISABLED
-    PUSHBUTTON      "Удалить",IDC_REMOVEBUTTON,13,274,79,14
-    EDITTEXT        IDC_EDITNAME,13,225,79,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDITVALUE,97,225,118,62,ES_MULTILINE | 
+                    WS_BORDER | WS_TABSTOP,12,94,220,74
+    EDITTEXT        IDC_EDITNAME,12,171,84,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITVALUE,12,190,221,60,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | 
                     WS_VSCROLL
-    PUSHBUTTON      "История изменений",IDC_SHOWLOG,7,117,215,14
     CONTROL         "Рекурсивное",IDC_RECURSIVE,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,13,243,77,10
+                    WS_TABSTOP,13,256,67,10
+    PUSHBUTTON      "Установить",IDC_ADDBUTTON,87,254,70,14,WS_DISABLED
+    PUSHBUTTON      "Удалить",IDC_REMOVEBUTTON,161,254,72,14
 END
 
 
@@ -586,12 +586,10 @@ END
 #ifdef APSTUDIO_INVOKED
 GUIDELINES DESIGNINFO 
 BEGIN
-
     IDD_UPDATE, DIALOG
     BEGIN
         BOTTOMMARGIN, 98
     END
-
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -687,6 +685,7 @@ BEGIN
                             "Укажите программу, которая будет использоваться для просмотра файлов изменений (diff - файлов)"
     IDS_SETTINGS_SELECTMERGE 
                             "Укажите программу, которая будет использоваться для процедуры слияния файлов"
+    IDS_SETTINGS_SELECTSSH  "Укажите программу - клиента SSH"
     IDS_SETTINGS_EXTDIFF_TT "Внешняя программа, используемая для сравнения файлов"
     IDS_SETTINGS_EXTDIFFBROWSE_TT 
                             "Выбор внешней программы для сравнения файлов."
@@ -705,6 +704,8 @@ BEGIN
     IDS_SETTINGS_PROXYSERVER_TT "Введите имя или IP-адрес прокси-сервера"
     IDS_SETTINGS_DIFFVIEWER_TT 
                             "Программа для просмотра diff-файлов.\nЕсли у Вас нет такой программы, используйте Блокнот."
+    IDS_SETTINGS_AUTOCLOSE_TT 
+                            "Если Вы хотите, чтобы окно прогресса операции автоматически закрывалось\nпо окончании операции, включите эту настройку."
     IDS_PROC_WARNREVERT     "Вы действительно хотите произвести откат изменений?\nВсе изменения, произведённые с момента последнего обновления,\nбудут безвозвратно потеряны."
     IDS_PROC_CLEANUPFINISHED 
                             "Очистка рабочей копии от временных файлов завершена"
@@ -732,6 +733,7 @@ BEGIN
     IDS_PROC_COPYINGPROG    "Копируется %s"
     IDS_PROC_MOVINGPROG     "Перемещается %s"
     IDS_PROC_CPYMVPROG2     "в %s"
+    IDS_PROC_ENTERURL       "Введите URL"
 END
 
 STRINGTABLE 
@@ -830,7 +832,7 @@ BEGIN
     IDS_SSL_REJECT          "Отвергнуть"
     IDS_ERR_SSL_NOTYETVALID "Время действия сертификата ещё не началось. Он действителен начиная с: %s"
     IDS_ERR_SSL_EXPIRED     "Время действия сертификата истекло. Он действителен до: %s"
-    IDS_PROC_ENTERURL       "Введите URL"
+    IDS_ERR_COPYITSELF      "Копирование \n%s\nв\n%s\nневозможно"
 END
 
 STRINGTABLE 
