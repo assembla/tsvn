@@ -26,6 +26,7 @@ using namespace ATL;
 #include <map>
 #include <algorithm>
 #include <deque>
+#include <numeric>
 
 #include "svn_wc.h"
 #include "svn_client.h"

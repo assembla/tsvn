@@ -7,6 +7,8 @@ CFolderCrawler::CFolderCrawler(void)
 	m_hWakeEvent = CreateEvent(NULL,FALSE,FALSE,NULL);
 	m_hTerminationEvent = CreateEvent(NULL,TRUE,FALSE,NULL);
 	m_hThread = INVALID_HANDLE_VALUE;
+	m_bCrawlInhibitSet = 0;
+	m_crawlHoldoffReleasesAt = (long)GetTickCount();
 }
 
 CFolderCrawler::~CFolderCrawler(void)
@@ -72,12 +74,23 @@ void CFolderCrawler::WorkerThread()
 			break;
 		}
 
-		// We must have been woken-up
-		Sleep(1000);
+		// If we get here, we've been woken up by something being added to the queue.
+		// However, it's important that we don't do our crawling while
+		// the shell is still asking for items
+		// 
 
 		for(;;)
 		{
 			CTSVNPath workingPath;
+
+			if(m_bCrawlInhibitSet)
+			{
+				// We're in crawl hold-off 
+				ATLTRACE("Crawl hold-off\n");
+				Sleep(50);
+				continue;
+			}
+
 			{
 				AutoLocker lock(m_critSec);
 				if(m_foldersToUpdate.empty())
@@ -85,6 +98,16 @@ void CFolderCrawler::WorkerThread()
 					// Nothing left to do 
 					break;
 				}
+
+				if(((long)GetTickCount() - m_crawlHoldoffReleasesAt) < 0)
+				{
+					lock.Unlock();
+					Sleep(100);
+					continue;
+				}
+
+
+
 				workingPath = m_foldersToUpdate.front();
 				m_foldersToUpdate.pop_front();
 			}
@@ -92,9 +115,15 @@ void CFolderCrawler::WorkerThread()
 			ATLTRACE("Crawling folder: %s\n", workingPath.GetSVNApiPath());
 
 			// Now, we need to visit this folder, to make sure that we know its 'most important' status
-			CSVNStatusCache::Instance().RefreshDirectoryStatus(workingPath);
+			CSVNStatusCache::Instance().GetDirectoryCacheEntry(workingPath).RefreshStatus();
 
 			Sleep(10);
 		}
 	}
+}
+
+void CFolderCrawler::SetHoldoff()
+{
+	AutoLocker lock(m_critSec);
+	m_crawlHoldoffReleasesAt = (long)GetTickCount() + 1000;
 }
