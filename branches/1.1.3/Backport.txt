@@ -1,6 +1,9 @@
 List of revisions which should be backported
 to this branch from trunk.
 
+Revisions in which language files get updated don't need to be
+mentioned here, they're merged in without voting here.
+
 Doc changes
 -----------
 * 2426 : Update documentation about properties
@@ -20,4 +23,8 @@ Code/build changes
 ------------------
 * 2431 : Bug in the settings dialog where proxy settings got lost
          when using the browse button to set the SSH client.
+         approved by: steveking (one line change, low risk)
+* 2439, 2440 : But in blame. When blame fails return immediately so the
+         error baton isn't cleared by the next log call (which is
+         unnecessary anyway).
          approved by: steveking (one line change, low risk)
