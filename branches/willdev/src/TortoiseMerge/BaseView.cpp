@@ -1283,6 +1283,8 @@ void CBaseView::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 
 	if (!m_arLineStates)
 		return;
+	if (m_nSelBlockEnd >= GetLineCount())
+		m_nSelBlockEnd = GetLineCount()-1;
 	if ((nLine <= m_arLineStates->GetCount())&&(nLine > m_nTopLine))
 	{
 		int nIndex = nLine - 1;
@@ -1660,7 +1662,7 @@ void CBaseView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 	if (nChar==VK_DOWN)
 	{
-		if (m_nSelBlockEnd < GetLineCount())
+		if (m_nSelBlockEnd < GetLineCount()-1)
 		{
 			m_nSelBlockEnd++;
 			Invalidate();

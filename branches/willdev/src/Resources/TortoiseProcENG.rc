@@ -799,9 +799,9 @@ BEGIN
 END
 
 IDD_REVISIONGRAPH DIALOGEX 0, 0, 263, 231
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_VSCROLL | WS_HSCROLL | WS_SYSMENU
-EXSTYLE WS_EX_CONTEXTHELP
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_VSCROLL | WS_HSCROLL | 
+    WS_SYSMENU
 CAPTION "Revision Graph"
 MENU IDR_REVISIONGRAPH
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
@@ -1211,6 +1211,20 @@ BEGIN
         MENUITEM "Zoom &In",                    ID_VIEW_ZOOMIN
         MENUITEM "Zoom &Out",                   ID_VIEW_ZOOMOUT
     END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACC_REVISIONGRAPH ACCELERATORS 
+BEGIN
+    VK_UP,          ID_VIEW_ZOOMIN,         VIRTKEY, CONTROL, NOINVERT
+    VK_DOWN,        ID_VIEW_ZOOMOUT,        VIRTKEY, CONTROL, NOINVERT
+    VK_ADD,         ID_VIEW_ZOOMIN,         VIRTKEY, CONTROL, NOINVERT
+    VK_SUBTRACT,    ID_VIEW_ZOOMOUT,        VIRTKEY, CONTROL, NOINVERT
 END
 
 
@@ -1648,6 +1662,8 @@ BEGIN
                             "When checked, forces a refresh of the shell overlay icons after each operation.\n<ct=0x0000ff><b>Caution:</b> this can slow down explorer!</ct>"
     IDS_SETTINGS_ICONSETCHANGED 
                             "You've changed the icon set from <i>%s</i> to <i>%s</i>.\nThat change won't take effect until you restart your computer or logoff and logon again!"
+    IDS_SETTINGS_PROXYEXCEPTIONS_TT 
+                            "Use '*' as a wildcard character when specifying an exception\nTo separate multiple exceptions, use colons (',').\nExample: *.mylan.com, *.company.com"
 END
 
 STRINGTABLE 
@@ -1702,6 +1718,8 @@ BEGIN
     IDS_SVNACTION_SKIPMISSING "Skipped missing target"
     IDS_SVNACTION_ADDING    "Adding"
     IDS_SVNACTION_DELETING  "Deleting"
+    IDS_SVNACTION_MERGED    "Merged"
+    IDS_SVNACTION_CONFLICTED "Conflicted"
 END
 
 STRINGTABLE 
@@ -1740,6 +1758,16 @@ STRINGTABLE
 BEGIN
     IDS_LOGPROMPT_NOTHINGTOCOMMITUNVERSIONED 
                             "No files were changed or added since\nthe last commit. There's nothing\nfor TortoiseSVN to do here...\nDo you want to see the unversioned files?"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SCIEDIT_UNDO        "&Undo"
+    IDS_SCIEDIT_REDO        "&Redo"
+    IDS_SCIEDIT_CUT         "Cu&t"
+    IDS_SCIEDIT_COPY        "Cop&y"
+    IDS_SCIEDIT_PASTE       "&Paste"
+    IDS_SCIEDIT_SELECTALL   "Select &All"
 END
 
 #endif    // English (U.S.) resources

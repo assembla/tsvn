@@ -17,6 +17,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //
 #include "StdAfx.h"
+#include "resource.h"
 #include ".\sciedit.h"
 
 IMPLEMENT_DYNAMIC(CSciEdit, CWnd)
@@ -47,6 +48,8 @@ void CSciEdit::Init()
 	m_DirectPointer = SendMessage(SCI_GETDIRECTPOINTER, 0, 0);
 	Call(SCI_SETMARGINWIDTHN, 1, 0);
 	Call(SCI_SETUSETABS, 0);		//pressing TAB inserts spaces
+	Call(SCI_SETWRAPVISUALFLAGS, SC_WRAPVISUALFLAG_END);
+	Call(SCI_AUTOCSETIGNORECASE, 1);
 	
 	TCHAR buffer[11];
 	GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_IDEFAULTANSICODEPAGE,(TCHAR *)buffer,10);
@@ -58,6 +61,7 @@ void CSciEdit::Init()
 	//Setup the spell checker and thesaurus
 	TCHAR buf[MAX_PATH];
 	CString sFolder;
+	CString sFolderUp;
 	CString sFile;
 
 	// look for dictionary files and use them if found
@@ -65,7 +69,9 @@ void CSciEdit::Init()
 	{
 		sFolder = CString(buf);
 		sFolder = sFolder.Left(sFolder.ReverseFind('\\'));
+		sFolderUp = sFolder.Left(sFolder.ReverseFind('\\'));
 		sFolder += _T("\\");
+		sFolderUp += _T("\\");
 		long langId = GetUserDefaultLCID();
 
 		do
@@ -82,12 +88,26 @@ void CSciEdit::Init()
 					delete pChecker;
 				pChecker = new MySpell(CStringA(sFolder + sFile + _T(".aff")), CStringA(sFolder + sFile + _T(".dic")));
 			}
-			if ((PathFileExists(sFolder + _T("dic\\") + sFile + _T(".aff"))) &&
+			else if ((PathFileExists(sFolder + _T("dic\\") + sFile + _T(".aff"))) &&
 				(PathFileExists(sFolder + _T("dic\\") + sFile + _T(".dic"))))
 			{
 				if (pChecker)
 					delete pChecker;
 				pChecker = new MySpell(CStringA(sFolder + _T("dic\\") + sFile + _T(".aff")), CStringA(sFolder + _T("dic\\") + sFile + _T(".dic")));
+			}
+			else if ((PathFileExists(sFolderUp + sFile + _T(".aff"))) &&
+				(PathFileExists(sFolderUp + sFile + _T(".dic"))))
+			{
+				if (pChecker)
+					delete pChecker;
+				pChecker = new MySpell(CStringA(sFolderUp + sFile + _T(".aff")), CStringA(sFolderUp + sFile + _T(".dic")));
+			}
+			else if ((PathFileExists(sFolderUp + _T("dic\\") + sFile + _T(".aff"))) &&
+				(PathFileExists(sFolderUp + _T("dic\\") + sFile + _T(".dic"))))
+			{
+				if (pChecker)
+					delete pChecker;
+				pChecker = new MySpell(CStringA(sFolderUp + _T("dic\\") + sFile + _T(".aff")), CStringA(sFolderUp + _T("dic\\") + sFile + _T(".dic")));
 			}
 #if 0
 			if ((PathFileExists(sFolder + sFile + _T(".idx"))) &&
@@ -126,10 +146,37 @@ LRESULT CSciEdit::Call(UINT message, WPARAM wParam, LPARAM lParam)
 	return ((SciFnDirect) m_DirectFunction)(m_DirectPointer, message, wParam, lParam);
 }
 
+CString CSciEdit::StringFromControl(const CStringA& text)
+{
+	CString sText;
+#ifdef UNICODE
+	int codepage = Call(SCI_GETCODEPAGE);
+	int reslen = MultiByteToWideChar(codepage, 0, text, text.GetLength(), 0, 0);	
+	MultiByteToWideChar(codepage, 0, text, text.GetLength(), sText.GetBuffer(reslen+1), reslen+1);
+	sText.ReleaseBuffer(reslen);
+#else
+	sText = text;	
+#endif
+	return sText;
+}
+
+CStringA CSciEdit::StringForControl(const CString& text)
+{
+	CStringA sTextA;
+#ifdef UNICODE
+	int codepage = Call(SCI_GETCODEPAGE);
+	int reslen = WideCharToMultiByte(codepage, 0, text, text.GetLength(), 0, 0, 0, 0);
+	WideCharToMultiByte(codepage, 0, text, text.GetLength(), sTextA.GetBuffer(reslen+1), reslen+1, 0, 0);
+	sTextA.ReleaseBuffer(reslen);
+#else
+	sTextA = text;
+#endif
+	return sTextA;
+}
+
 void CSciEdit::SetText(const CString& sText)
 {
-	CStringA sTextA = CStringA(sText);
-	Call(SCI_SETTEXT, 0, (LPARAM)(LPCSTR)sTextA);
+	Call(SCI_SETTEXT, 0, (LPARAM)(LPCSTR)StringForControl(sText));
 }
 
 CString CSciEdit::GetText()
@@ -138,8 +185,7 @@ CString CSciEdit::GetText()
 	CStringA sTextA;
 	Call(SCI_GETTEXT, len+1, (LPARAM)(LPCSTR)sTextA.GetBuffer(len+1));
 	sTextA.ReleaseBuffer();
-	CString sText = CString(sTextA);
-	return sText;
+	return StringFromControl(sTextA);
 }
 
 CString CSciEdit::GetWordUnderCursor(bool bSelectWord)
@@ -154,14 +200,13 @@ CString CSciEdit::GetWordUnderCursor(bool bSelectWord)
 	if (bSelectWord)
 	{
 		Call(SCI_SETSEL, textrange.chrg.cpMin, textrange.chrg.cpMax);
-		Call(SCI_SETCURRENTPOS, textrange.chrg.cpMin);
 	}
-	return CString(textbuffer);
+	return StringFromControl(textbuffer);
 }
 
 void CSciEdit::SetFont(CString sFontName, int iFontSizeInPoints)
 {
-	Call(SCI_STYLESETFONT, STYLE_DEFAULT, (LPARAM)(LPCSTR)CStringA(sFontName));
+	Call(SCI_STYLESETFONT, STYLE_DEFAULT, (LPARAM)(LPCSTR)StringForControl(sFontName));
 	Call(SCI_STYLESETSIZE, STYLE_DEFAULT, iFontSizeInPoints);
 	Call(SCI_STYLECLEARALL);
 }
@@ -241,6 +286,7 @@ void CSciEdit::SuggestSpellingAlternatives()
 	if (pChecker == NULL)
 		return;
 	CString word = GetWordUnderCursor(true);
+	Call(SCI_SETCURRENTPOS, Call(SCI_WORDSTARTPOSITION, Call(SCI_GETCURRENTPOS), TRUE));
 	if (word.IsEmpty())
 		return;
 	char ** wlst;
@@ -258,7 +304,7 @@ void CSciEdit::SuggestSpellingAlternatives()
 		if (suggestions.IsEmpty())
 			return;
 		Call(SCI_AUTOCSETSEPARATOR, (WPARAM)CStringA(m_separator).GetAt(0));
-		Call(SCI_AUTOCSHOW, 0, (LPARAM)(LPCSTR)CStringA(suggestions));
+		Call(SCI_AUTOCSHOW, 0, (LPARAM)(LPCSTR)StringForControl(suggestions));
 		Call(SCI_AUTOCSETDROPRESTOFWORD, 1);
 	}
 
@@ -289,7 +335,7 @@ void CSciEdit::DoAutoCompletion()
 	if (sAutoCompleteList.IsEmpty())
 		return;
 	Call(SCI_AUTOCSETSEPARATOR, (WPARAM)CStringA(m_separator).GetAt(0));
-	Call(SCI_AUTOCSHOW, word.GetLength(), (LPARAM)(LPCSTR)CStringA(sAutoCompleteList));
+	Call(SCI_AUTOCSHOW, word.GetLength(), (LPARAM)(LPCSTR)StringForControl(sAutoCompleteList));
 }
 
 BOOL CSciEdit::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pLResult)
@@ -311,6 +357,130 @@ BOOL CSciEdit::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT
 		}
 	}
 	return CWnd::OnChildNotify(message, wParam, lParam, pLResult);
+}
+
+BEGIN_MESSAGE_MAP(CSciEdit, CWnd)
+	ON_WM_KEYDOWN()
+	ON_WM_CONTEXTMENU()
+END_MESSAGE_MAP()
+
+void CSciEdit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	switch (nChar)
+	{
+	case (VK_TAB):
+		{
+			if (GetKeyState(VK_CONTROL)&0x8000)
+			{
+				//Ctrl-Tab was pressed, this means we should provide the user with
+				//a list of possible spell checking alternatives to the word under
+				//the cursor
+				SuggestSpellingAlternatives();
+				return;
+			}
+		}
+		break;
+	case (VK_ESCAPE):
+		{
+			if ((Call(SCI_AUTOCACTIVE)==0)&&(Call(SCI_CALLTIPACTIVE)==0))
+				::SendMessage(GetParent()->GetSafeHwnd(), WM_CLOSE, 0, 0);
+		}
+		break;
+	}
+	CWnd::OnKeyDown(nChar, nRepCnt, nFlags);
+}
+
+void CSciEdit::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
+{
+	if ((point.x == -1) && (point.y == -1))
+	{
+		CRect rect;
+		GetClientRect(&rect);
+		ClientToScreen(&rect);
+		point = rect.CenterPoint();
+	}
+	CString sMenuItemText;
+	CMenu popup;
+	if (popup.CreatePopupMenu())
+	{
+		bool bCanUndo = !!Call(SCI_CANUNDO);
+		bool bCanRedo = !!Call(SCI_CANREDO);
+		bool bHasSelection = (Call(SCI_GETANCHOR) != Call(SCI_GETCURRENTPOS));
+		bool bCanPaste = !!Call(SCI_CANPASTE);
+		UINT uEnabledMenu = MF_STRING | MF_ENABLED;
+		UINT uDisabledMenu = MF_STRING | MF_GRAYED;
+		
+		sMenuItemText.LoadString(IDS_SCIEDIT_UNDO);
+		popup.AppendMenu(bCanUndo ? uEnabledMenu : uDisabledMenu, SCI_UNDO, sMenuItemText);
+		sMenuItemText.LoadString(IDS_SCIEDIT_REDO);
+		popup.AppendMenu(bCanRedo ? uEnabledMenu : uDisabledMenu, SCI_REDO, sMenuItemText);
+		
+		popup.AppendMenu(MF_SEPARATOR);
+		
+		sMenuItemText.LoadString(IDS_SCIEDIT_CUT);
+		popup.AppendMenu(bHasSelection ? uEnabledMenu : uDisabledMenu, SCI_CUT, sMenuItemText);
+		sMenuItemText.LoadString(IDS_SCIEDIT_COPY);
+		popup.AppendMenu(bHasSelection ? uEnabledMenu : uDisabledMenu, SCI_COPY, sMenuItemText);
+		sMenuItemText.LoadString(IDS_SCIEDIT_PASTE);
+		popup.AppendMenu(bCanPaste ? uEnabledMenu : uDisabledMenu, SCI_PASTE, sMenuItemText);
+
+		popup.AppendMenu(MF_SEPARATOR);
+		
+		sMenuItemText.LoadString(IDS_SCIEDIT_SELECTALL);
+		popup.AppendMenu(uEnabledMenu, SCI_SELECTALL, sMenuItemText);
+
+		popup.AppendMenu(MF_SEPARATOR);
+
+		CMenu corrections;
+		corrections.CreatePopupMenu();
+		CStringA worda = StringForControl(GetWordUnderCursor());
+		int nCorrections = 0;
+		if ((pChecker)&&(!worda.IsEmpty()))
+		{
+			char ** wlst;
+			int ns = pChecker->suggest(&wlst,worda);
+			if (ns > 0)
+			{
+				for (int i=0; i < ns; i++) 
+				{
+					CString sug = CString(wlst[i]);
+					corrections.InsertMenu((UINT)-1, 0, i+1, sug);
+					free(wlst[i]);
+				} 
+				free(wlst);
+			}
+
+			if ((ns > 0)&&(point.x >= 0))
+			{
+				sMenuItemText.LoadString(IDS_SPELLEDIT_CORRECTIONS);
+				popup.InsertMenu((UINT)-1, MF_POPUP, (UINT_PTR)corrections.m_hMenu, sMenuItemText);
+				nCorrections = ns;
+			}
+		} // if (pChecker)
+
+		int cmd = popup.TrackPopupMenu(TPM_RETURNCMD | TPM_LEFTALIGN | TPM_NONOTIFY, point.x, point.y, this, 0);
+		switch (cmd)
+		{
+		case 0:
+			break;	// no command selected
+		case SCI_UNDO:
+		case SCI_REDO:
+		case SCI_CUT:
+		case SCI_COPY:
+		case SCI_PASTE:
+		case SCI_SELECTALL:
+			Call(cmd);
+			break;
+		default:
+			if (cmd <= nCorrections)
+			{
+				GetWordUnderCursor(true);
+				CString temp;
+				corrections.GetMenuString(cmd, temp, 0);
+				Call(SCI_REPLACESEL, 0, (LPARAM)(LPCSTR)StringForControl(temp));
+			}
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -336,22 +506,4 @@ void CAutoCompletionList::AddSorted(const CString& elem, bool bNoDuplicates /*= 
 	}
 	return InsertAt(nMin, elem);
 }
-BEGIN_MESSAGE_MAP(CSciEdit, CWnd)
-	ON_WM_KEYDOWN()
-END_MESSAGE_MAP()
 
-void CSciEdit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
-{
-	if (nChar == VK_TAB)
-	{
-		if (GetKeyState(VK_CONTROL)&0x8000)
-		{
-			//Ctrl-Tab was pressed, this means we should provide the user with
-			//a list of possible spell checking alternatives to the word under
-			//the cursor
-			SuggestSpellingAlternatives();
-			return;
-		}
-	}
-	CWnd::OnKeyDown(nChar, nRepCnt, nFlags);
-}

@@ -49,6 +49,7 @@
 #define IDD_REVISIONGRAPH               182
 #define IDR_REVISIONGRAPH               183
 #define IDD_OVERLAYICONS                184
+#define IDR_ACC_REVISIONGRAPH           185
 #define IDS_CHSTAT_FILECOL              1000
 #define IDS_CHSTAT_WCCOL                1001
 #define IDS_CHSTAT_REPOCOL              1002
@@ -265,7 +266,6 @@
 #define IDS_SVNACTION_STATUS            1176
 #define IDS_SVNACTION_SKIP              1177
 #define IDS_PROGS_EXTCOL                1178
-#define IDC_CUSTOM1                     1178
 #define IDS_PROGS_TOOLCOL               1179
 #define IDS_LOG_FILE                    1180
 #define IDS_SVN_USERCANCELLED           1181
@@ -469,6 +469,7 @@
 #define IDS_SETTINGS_COMMITFILETIMES_TT 3106
 #define IDS_SETTINGS_SHELLFORCEREFRESH_TT 3107
 #define IDS_SETTINGS_ICONSETCHANGED     3108
+#define IDS_SETTINGS_PROXYEXCEPTIONS_TT 3109
 #define IDS_CHECKNEWER_YOURVERSION      3200
 #define IDS_CHECKNEWER_CURRENTVERSION   3201
 #define IDS_CHECKNEWER_YOURUPTODATE     3202
@@ -505,6 +506,8 @@
 #define IDS_SVNACTION_SKIPMISSING       4200
 #define IDS_SVNACTION_ADDING            4201
 #define IDS_SVNACTION_DELETING          4202
+#define IDS_SVNACTION_MERGED            4203
+#define IDS_SVNACTION_CONFLICTED        4204
 #define IDS_REVGRAPH_PROGTITLE          4300
 #define IDS_REVGRAPH_PROGGETREVS        4301
 #define IDS_REVGRAPH_PROGCURRENTREV     4302
@@ -516,6 +519,12 @@
 #define IDS_REVGRAPH_BOXREVISIONTITLE   4320
 #define IDS_REVGRAPH_BOXTOOLTIP         4340
 #define IDS_REVGRAPH_SAVEPIC            4350
+#define IDS_SCIEDIT_UNDO                6000
+#define IDS_SCIEDIT_REDO                6001
+#define IDS_SCIEDIT_CUT                 6002
+#define IDS_SCIEDIT_COPY                6003
+#define IDS_SCIEDIT_PASTE               6004
+#define IDS_SCIEDIT_SELECTALL           6005
 #define ID_FILE_SAVEGRAPHAS             32771
 #define ID_VIEW_ZOOMIN                  32772
 #define ID_VIEW_ZOOMOUT                 32773
@@ -524,8 +533,8 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        185
-#define _APS_NEXT_COMMAND_VALUE         32774
+#define _APS_NEXT_RESOURCE_VALUE        186
+#define _APS_NEXT_COMMAND_VALUE         32779
 #define _APS_NEXT_CONTROL_VALUE         1179
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
