@@ -63,6 +63,9 @@ public:
 	BOOL			m_bThreadRunning;
 
 	void			InitView();
+#ifdef DEBUG
+	void			FillTestData();
+#endif
 protected:
 	HICON			m_hIcon;
 	HANDLE			m_hThread;
@@ -81,6 +84,7 @@ protected:
 	virtual void	DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	virtual BOOL	ProgressCallback(CString text, CString text2, DWORD done, DWORD total);
 	virtual BOOL	OnInitDialog();
+	virtual BOOL	PreTranslateMessage(MSG* pMsg);
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void	OnPaint();
 	afx_msg BOOL	OnEraseBkgnd(CDC* pDC);
@@ -88,7 +92,8 @@ protected:
 	afx_msg void	OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void	OnSize(UINT nType, int cx, int cy);
 	afx_msg int		OnToolHitTest(CPoint point, TOOLINFO* pTI) const;
-	BOOL			OnToolTipNotify(UINT id, NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void	OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg BOOL	OnToolTipNotify(UINT id, NMHDR *pNMHDR, LRESULT *pResult);
 
 	DECLARE_MESSAGE_MAP()
 private:
@@ -104,8 +109,7 @@ private:
 	void			DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos);
 	void			BuildConnections();
 	void			DrawConnections(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos);
+
 public:
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
 };
 DWORD WINAPI WorkerThread(LPVOID pVoid);
