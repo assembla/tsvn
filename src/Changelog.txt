@@ -1,3 +1,25 @@
+Version 1.1.4
+- BUG: The revision graph didn't work for paths/URLs with spaces in it. (Stefan)
+- BUG: The revision graph could crash when saving the graph as a picture. (Stefan)
+- BUG: Changes in externals from the same repository were shown in the commit
+       dialog, but not committed even if checked. (Stefan)
+- BUG: When comparing a file with both local and remote modifications in the
+       "check for modifications" dialog the BASE was used instead of the 
+       working copy file. (Stefan)
+- BUG: Searching in the log dialog for changed paths only worked the first
+       time. Subsequent searches produced a result off by one. (Stefan)
+- BUG: The statistics from the log dialog could crash if no logs were
+       available. (Stefan)
+- BUG: The explorer context menu showed the wrong entries for nested layouts. (Stefan)
+- BUG: 'extended export' would also copy all the .svn folders. (Stefan)
+- BUG: the progress dialog wouldn't close by clicking on the 'X'. (Stefan)
+- BUG: Special/Invalid chars could be entered for log messages. (Stefan)
+- BUG: Deleting more than one file at the time made TSVN crash. (Stefan/Will)
+- BUG: Autocompletion could crash TSVN. (Stefan)
+- BUG: URL's which need escaping (e.g. if they have spaces) didn't work and
+       could even make TSVN crash. (Stefan)
+- BUG: The icon set chooser dialog sometimes showed the overlays only in part. (Stefan)
+
 Version 1.1.3
 - ADD: Autocompletion for paths/filenames in the commit dialog. (Stefan)
 - ADD: Spell checker suggestions when pressing Ctrl-Tab. (Stefan)
