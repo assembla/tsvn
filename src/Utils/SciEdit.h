@@ -85,6 +85,8 @@ public:
 	 * The specified text is written to the scintilla control.
 	 */
 	void		SetText(const CString& sText);
+	void		InsertText(const CString& sText, bool bNewLine = false);
+
 	/**
 	 * Retreives the text in the scintilla control.
 	 */

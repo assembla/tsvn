@@ -201,11 +201,7 @@ BOOL CTortoiseProcApp::InitInstance()
 	CRegDWORD loc = CRegDWORD(_T("Software\\TortoiseSVN\\LanguageID"), 1033);
 	long langId = loc;
 	CString langDll;
-	char procpath[MAX_PATH] = {0};
-	GetModuleFileNameA(NULL, procpath, MAX_PATH);
-	CStringA langpath = procpath;
-	langpath = langpath.Left(langpath.ReverseFind('\\'));
-	langpath = langpath.Left(langpath.ReverseFind('\\')+1);
+	CStringA langpath = CStringA(CUtils::GetAppParentDirectory());
 	langpath += "Languages";
 	bindtextdomain("subversion", (LPCSTR)langpath);
 	SetThreadLocale(1033); 
@@ -818,7 +814,6 @@ BOOL CTortoiseProcApp::InitInstance()
 					if ((svn.Err->apr_err == SVN_ERR_UNVERSIONED_RESOURCE) ||
 						(svn.Err->apr_err == SVN_ERR_CLIENT_MODIFIED))
 					{
-						svn.ReleasePool();
 						CString msg, yes, no, yestoall;
 						msg.Format(IDS_PROC_REMOVEFORCE, svn.GetLastErrorMessage());
 						yes.LoadString(IDS_MSGBOX_YES);

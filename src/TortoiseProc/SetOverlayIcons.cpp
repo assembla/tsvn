@@ -66,12 +66,8 @@ BOOL CSetOverlayIcons::OnInitDialog()
 	m_cIconList.SetImageList(&m_ImageList, LVSIL_SMALL);
 	m_cIconList.SetImageList(&m_ImageListBig, LVSIL_NORMAL);
 	//get the path to our icon sets
-	TCHAR procpath[MAX_PATH] = {0};
-	GetModuleFileName(NULL, procpath, MAX_PATH);
-	*(_tcsrchr(procpath, '\\'))='\0';
-	*(_tcsrchr(procpath, '\\'))='\0';
-	_tcscat(procpath, _T("\\Icons"));
-	m_sIconPath = procpath;
+	m_sIconPath = CUtils::GetAppParentDirectory();
+	m_sIconPath += _T("Icons");
 	//list all the icon sets
 	CDirFileEnum filefinder(m_sIconPath);
 	bool isDir = false;

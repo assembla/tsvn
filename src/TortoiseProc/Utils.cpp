@@ -57,6 +57,10 @@ CString CUtils::GetTempFile(const CString& origfilename)
 			i++;
 		} while (PathFileExists(tempfile));
 	}
+	//now create the tempfile, so that subsequent calls to GetTempFile() return
+	//different filenames.
+	HANDLE hFile = CreateFile(tempfile, GENERIC_READ, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_TEMPORARY, NULL);
+	CloseHandle(hFile);
 	return tempfile;
 }
 
@@ -96,14 +100,20 @@ BOOL CUtils::StartExtMerge(const CTSVNPath& basefile, const CTSVNPath& theirfile
 		com = tortoiseMergePath;
 		if (com.IsEmpty())
 		{
-			TCHAR tmerge[MAX_PATH];
-			GetModuleFileName(NULL, tmerge, MAX_PATH);
-			com = tmerge;
-			com.Replace(_T("TortoiseProc.exe"), _T("TortoiseMerge.exe"));
+			com = CUtils::GetAppDirectory();
+			com += _T("TortoiseMerge.exe");
 		}
 		com = _T("\"") + com + _T("\"");
 		com = com + _T(" /base:%base /theirs:%theirs /yours:%mine /merged:%merged");
 		com = com + _T(" /basename:%bname /theirsname:%tname /yoursname:%yname /mergedname:%mname");
+	}
+	// check if the params are set. If not, just add the files to the command line
+	if ((com.Find(_T("%base"))<0)&&(com.Find(_T("%theirs"))<0)&&(com.Find(_T("%mine"))<0))
+	{
+		com += _T(" \"")+basefile.GetWinPathString()+_T("\"");
+		com += _T(" \"")+theirfile.GetWinPathString()+_T("\"");
+		com += _T(" \"")+yourfile.GetWinPathString()+_T("\"");
+		com += _T(" \"")+mergedfile.GetWinPathString()+_T("\"");
 	}
 	if (basefile.IsEmpty())
 	{
@@ -174,14 +184,12 @@ BOOL CUtils::StartExtPatch(const CTSVNPath& patchfile, const CTSVNPath& dir, con
 {
 	CString viewer;
 	// use TortoiseMerge
-	TCHAR tmerge[MAX_PATH];
-	GetModuleFileName(NULL, tmerge, MAX_PATH);
-	viewer = tmerge;
-	viewer.Replace(_T("TortoiseProc.exe"), _T("TortoiseMerge.exe"));
+	viewer = CUtils::GetAppDirectory();
+	viewer += _T("TortoiseMerge.exe");
 
 	viewer = _T("\"") + viewer + _T("\"");
-	viewer = viewer + _T(" /patchpath:\"") + patchfile.GetWinPathString() + _T("\"");
-	viewer = viewer + _T(" /diff:\"") + dir.GetWinPathString() + _T("\"");
+	viewer = viewer + _T(" /diff:\"") + patchfile.GetWinPathString() + _T("\"");
+	viewer = viewer + _T(" /patchpath:\"") + dir.GetWinPathString() + _T("\"");
 	if (bReversed)
 		viewer += _T(" /reversedpatch");
 	if (!sOriginalDescription.IsEmpty())
@@ -214,12 +222,16 @@ BOOL CUtils::StartExtDiff(const CTSVNPath& file1, const CTSVNPath& file2, const 
 	{
 		//no registry entry (or commented out) for a diff program
 		//use TortoiseMerge
-		TCHAR tmerge[MAX_PATH];
-		GetModuleFileName(NULL, tmerge, MAX_PATH);
-		viewer = tmerge;
-		viewer.Replace(_T("TortoiseProc.exe"), _T("TortoiseMerge.exe"));
+		viewer = CUtils::GetAppDirectory();
+		viewer += _T("TortoiseMerge.exe");
 		viewer = _T("\"") + viewer + _T("\"");
 		viewer = viewer + _T(" /base:%base /yours:%mine /basename:%bname /yoursname:%yname");
+	}
+	// check if the params are set. If not, just add the files to the command line
+	if ((viewer.Find(_T("%base"))<0)&&(viewer.Find(_T("%mine"))<0))
+	{
+		viewer += _T(" \"")+file1.GetWinPathString()+_T("\"");
+		viewer += _T(" \"")+file2.GetWinPathString()+_T("\"");
 	}
 	if (viewer.Find(_T("%base")) >= 0)
 	{
@@ -273,7 +285,12 @@ BOOL CUtils::StartUnifiedDiffViewer(const CTSVNPath& patchfile, BOOL bWait)
 		viewer = buf;
 	}
 	if (viewer.Find(_T("%1"))>=0)
-		viewer.Replace(_T("%1"), _T("\"") + patchfile.GetWinPathString() + _T("\""));
+	{
+		if (viewer.Find(_T("\"%1\"")) >= 0)
+			viewer.Replace(_T("%1"), patchfile.GetWinPathString());
+		else
+			viewer.Replace(_T("%1"), _T("\"") + patchfile.GetWinPathString() + _T("\""));
+	}
 	else
 		viewer += _T(" \"") + patchfile.GetWinPathString() + _T("\"");
 
@@ -346,14 +363,18 @@ BOOL CUtils::StartTextViewer(CString file)
 			return FALSE;
 		}
 	}
-	if (viewer.Find(_T("%1")) >= 0)
+	if (viewer.Find(_T("\"%1\"")) >= 0)
 	{
-		viewer.Replace(_T("%1"),  _T("\"")+file+_T("\""));
+		viewer.Replace(_T("\"%1\""), file);
+	}
+	else if (viewer.Find(_T("%1")) >= 0)
+	{
+		viewer.Replace(_T("%1"),  file);
 	}
 	else
 	{
 		viewer += _T(" ");
-		viewer += _T("\"")+file+_T("\"");
+		viewer += file;
 	}
 
 	if(!LaunchApplication(viewer, IDS_ERR_DIFFVIEWSTART, false))
@@ -539,7 +560,9 @@ CString CUtils::GetFileNameFromPath(CString sPath)
 CString CUtils::GetFileExtFromPath(const CString& sPath)
 {
 	int dotPos = sPath.ReverseFind('.');
-	int slashPos = sPath.ReverseFind('/');
+	int slashPos = sPath.ReverseFind('\\');
+	if (slashPos < 0)
+		slashPos = sPath.ReverseFind('/');
 	if (dotPos > slashPos)
 		return sPath.Mid(dotPos);
 	return CString();
@@ -670,13 +693,8 @@ bool CUtils::LaunchApplication(const CString& sCommandLine, UINT idErrMessageFor
 	startup.cb = sizeof(startup);
 	memset(&process, 0, sizeof(process));
 
-	//remove possible double quotes
-	//(depends on if the user added them in the settings him/herself or not)
 	CString cleanCommandLine(sCommandLine);
-	while (cleanCommandLine.Replace(_T("\"\""), _T("\"")) > 0)
-	{
-		;
-	}
+
 	if (CreateProcess(NULL, const_cast<TCHAR*>((LPCTSTR)cleanCommandLine), NULL, NULL, FALSE, 0, 0, 0, &startup, &process)==0)
 	{
 		if(idErrMessageFormat != 0)
@@ -698,7 +716,7 @@ bool CUtils::LaunchApplication(const CString& sCommandLine, UINT idErrMessageFor
 			LocalFree( lpMsgBuf );
 		}
 		return false;
-	} // if (CreateProcess(NULL /*(LPCTSTR)cleanCommandLine*/, const_cast<TCHAR*>((LPCTSTR)viewer), NULL, NULL, FALSE, 0, 0, 0, &startup, &process)==0) 
+	}
 
 	if (bWaitForStartup)
 	{
@@ -713,14 +731,30 @@ bool CUtils::LaunchApplication(const CString& sCommandLine, UINT idErrMessageFor
 */
 bool CUtils::LaunchTortoiseBlame(const CString& sBlameFile, const CString& sLogFile, const CString& sOriginalFile)
 {
-	TCHAR tblame[MAX_PATH];
-	GetModuleFileName(NULL, tblame, MAX_PATH);
-
-	CString viewer = tblame;
-	viewer.Replace(_T("TortoiseProc.exe"), _T("TortoiseBlame.exe"));
+	CString viewer = CUtils::GetAppDirectory();
+	viewer += _T("TortoiseBlame.exe");
 	viewer += _T(" \"") + sBlameFile + _T("\"");
 	viewer += _T(" \"") + sLogFile + _T("\"");
 	viewer += _T(" \"") + sOriginalFile + _T("\"");
 	
 	return LaunchApplication(viewer, IDS_ERR_EXTDIFFSTART, false);
+}
+
+CString CUtils::GetAppDirectory()
+{
+	TCHAR procpath[MAX_PATH] = {0};
+	GetModuleFileName(NULL, procpath, MAX_PATH);
+	CString langpath = procpath;
+	langpath = langpath.Left(langpath.ReverseFind('\\')+1);
+	return langpath;
+}
+
+CString CUtils::GetAppParentDirectory()
+{
+	TCHAR procpath[MAX_PATH] = {0};
+	GetModuleFileName(NULL, procpath, MAX_PATH);
+	CString langpath = procpath;
+	langpath = langpath.Left(langpath.ReverseFind('\\'));
+	langpath = langpath.Left(langpath.ReverseFind('\\')+1);
+	return langpath;
 }

@@ -18,6 +18,7 @@
 //
 #include "StdAfx.h"
 #include "resource.h"
+#include "Utils.h"
 #include ".\sciedit.h"
 
 IMPLEMENT_DYNAMIC(CSciEdit, CWnd)
@@ -51,12 +52,7 @@ void CSciEdit::Init(LONG lLanguage)
 	Call(SCI_SETWRAPVISUALFLAGS, SC_WRAPVISUALFLAG_END);
 	Call(SCI_AUTOCSETIGNORECASE, 1);
 	
-	TCHAR buffer[11];
-	GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_IDEFAULTANSICODEPAGE,(TCHAR *)buffer,10);
-	buffer[10]=0;
-	int codepage=0;
-	codepage=_tstoi((TCHAR *)buffer);
-	Call(SCI_SETCODEPAGE, codepage);
+	Call(SCI_SETCODEPAGE, SC_CP_UTF8);
 	
 	// look for dictionary files and use them if found
 	long langId = GetUserDefaultLCID();
@@ -82,72 +78,64 @@ void CSciEdit::Init(LONG lLanguage)
 BOOL CSciEdit::LoadDictionaries(LONG lLanguageID)
 {
 	//Setup the spell checker and thesaurus
-	TCHAR buf[MAX_PATH];
-	CString sFolder;
-	CString sFolderUp;
+	TCHAR buf[6];
+	CString sFolder = CUtils::GetAppDirectory();
+	CString sFolderUp = CUtils::GetAppParentDirectory();
 	CString sFile;
-	if (GetModuleFileName(NULL, buf, MAX_PATH))
-	{
-		sFolder = CString(buf);
-		sFolder = sFolder.Left(sFolder.ReverseFind('\\'));
-		sFolderUp = sFolder.Left(sFolder.ReverseFind('\\'));
-		sFolder += _T("\\");
-		sFolderUp += _T("\\");
 
-		GetLocaleInfo(MAKELCID(lLanguageID, SORT_DEFAULT), LOCALE_SISO639LANGNAME, buf, sizeof(buf));
-		sFile = buf;
-		sFile += _T("_");
-		GetLocaleInfo(MAKELCID(lLanguageID, SORT_DEFAULT), LOCALE_SISO3166CTRYNAME, buf, sizeof(buf));
-		sFile += buf;
-		if (pChecker==NULL)
+	GetLocaleInfo(MAKELCID(lLanguageID, SORT_DEFAULT), LOCALE_SISO639LANGNAME, buf, sizeof(buf));
+	sFile = buf;
+	sFile += _T("_");
+	GetLocaleInfo(MAKELCID(lLanguageID, SORT_DEFAULT), LOCALE_SISO3166CTRYNAME, buf, sizeof(buf));
+	sFile += buf;
+	if (pChecker==NULL)
+	{
+		if ((PathFileExists(sFolder + sFile + _T(".aff"))) &&
+			(PathFileExists(sFolder + sFile + _T(".dic"))))
 		{
-			if ((PathFileExists(sFolder + sFile + _T(".aff"))) &&
-				(PathFileExists(sFolder + sFile + _T(".dic"))))
-			{
-				pChecker = new MySpell(CStringA(sFolder + sFile + _T(".aff")), CStringA(sFolder + sFile + _T(".dic")));
-			}
-			else if ((PathFileExists(sFolder + _T("dic\\") + sFile + _T(".aff"))) &&
-				(PathFileExists(sFolder + _T("dic\\") + sFile + _T(".dic"))))
-			{
-				pChecker = new MySpell(CStringA(sFolder + _T("dic\\") + sFile + _T(".aff")), CStringA(sFolder + _T("dic\\") + sFile + _T(".dic")));
-			}
-			else if ((PathFileExists(sFolderUp + sFile + _T(".aff"))) &&
-				(PathFileExists(sFolderUp + sFile + _T(".dic"))))
-			{
-				pChecker = new MySpell(CStringA(sFolderUp + sFile + _T(".aff")), CStringA(sFolderUp + sFile + _T(".dic")));
-			}
-			else if ((PathFileExists(sFolderUp + _T("dic\\") + sFile + _T(".aff"))) &&
-				(PathFileExists(sFolderUp + _T("dic\\") + sFile + _T(".dic"))))
-			{
-				pChecker = new MySpell(CStringA(sFolderUp + _T("dic\\") + sFile + _T(".aff")), CStringA(sFolderUp + _T("dic\\") + sFile + _T(".dic")));
-			}
+			pChecker = new MySpell(CStringA(sFolder + sFile + _T(".aff")), CStringA(sFolder + sFile + _T(".dic")));
 		}
-#if THESAURUS
-		if (pThesaur==NULL)
+		else if ((PathFileExists(sFolder + _T("dic\\") + sFile + _T(".aff"))) &&
+			(PathFileExists(sFolder + _T("dic\\") + sFile + _T(".dic"))))
 		{
-			if ((PathFileExists(sFolder + _T("th_") + sFile + _T(".idx"))) &&
-				(PathFileExists(sFolder + _T("th_") + sFile + _T(".dat"))))
-			{
-				pThesaur = new MyThes(CStringA(sFolder + sFile + _T(".idx")), CStringA(sFolder + sFile + _T(".dat")));
-			}
-			else if ((PathFileExists(sFolder + _T("dic\\th_") + sFile + _T(".idx"))) &&
-				(PathFileExists(sFolder + _T("dic\\th_") + sFile + _T(".dat"))))
-			{
-				pThesaur = new MyThes(CStringA(sFolder + _T("dic\\") + sFile + _T(".idx")), CStringA(sFolder + _T("dic\\") + sFile + _T(".dat")));
-			}
-			else if ((PathFileExists(sFolderUp + _T("th_") + sFile + _T(".idx"))) &&
-				(PathFileExists(sFolderUp + _T("th_") + sFile + _T(".dat"))))
-			{
-				pThesaur = new MyThes(CStringA(sFolderUp + _T("th_") + sFile + _T(".idx")), CStringA(sFolderUp + _T("th_") + sFile + _T(".dat")));
-			}
-			else if ((PathFileExists(sFolderUp + _T("dic\\th_") + sFile + _T(".idx"))) &&
-				(PathFileExists(sFolderUp + _T("dic\\th_") + sFile + _T(".dat"))))
-			{
-				pThesaur = new MyThes(CStringA(sFolderUp + _T("dic\\th_") + sFile + _T(".idx")), CStringA(sFolderUp + _T("dic\\th_") + sFile + _T(".dat")));
-			}
+			pChecker = new MySpell(CStringA(sFolder + _T("dic\\") + sFile + _T(".aff")), CStringA(sFolder + _T("dic\\") + sFile + _T(".dic")));
 		}
-#endif
+		else if ((PathFileExists(sFolderUp + sFile + _T(".aff"))) &&
+			(PathFileExists(sFolderUp + sFile + _T(".dic"))))
+		{
+			pChecker = new MySpell(CStringA(sFolderUp + sFile + _T(".aff")), CStringA(sFolderUp + sFile + _T(".dic")));
+		}
+		else if ((PathFileExists(sFolderUp + _T("dic\\") + sFile + _T(".aff"))) &&
+			(PathFileExists(sFolderUp + _T("dic\\") + sFile + _T(".dic"))))
+		{
+			pChecker = new MySpell(CStringA(sFolderUp + _T("dic\\") + sFile + _T(".aff")), CStringA(sFolderUp + _T("dic\\") + sFile + _T(".dic")));
+		}
 	}
+#if THESAURUS
+	if (pThesaur==NULL)
+	{
+		if ((PathFileExists(sFolder + _T("th_") + sFile + _T(".idx"))) &&
+			(PathFileExists(sFolder + _T("th_") + sFile + _T(".dat"))))
+		{
+			pThesaur = new MyThes(CStringA(sFolder + sFile + _T(".idx")), CStringA(sFolder + sFile + _T(".dat")));
+		}
+		else if ((PathFileExists(sFolder + _T("dic\\th_") + sFile + _T(".idx"))) &&
+			(PathFileExists(sFolder + _T("dic\\th_") + sFile + _T(".dat"))))
+		{
+			pThesaur = new MyThes(CStringA(sFolder + _T("dic\\") + sFile + _T(".idx")), CStringA(sFolder + _T("dic\\") + sFile + _T(".dat")));
+		}
+		else if ((PathFileExists(sFolderUp + _T("th_") + sFile + _T(".idx"))) &&
+			(PathFileExists(sFolderUp + _T("th_") + sFile + _T(".dat"))))
+		{
+			pThesaur = new MyThes(CStringA(sFolderUp + _T("th_") + sFile + _T(".idx")), CStringA(sFolderUp + _T("th_") + sFile + _T(".dat")));
+		}
+		else if ((PathFileExists(sFolderUp + _T("dic\\th_") + sFile + _T(".idx"))) &&
+			(PathFileExists(sFolderUp + _T("dic\\th_") + sFile + _T(".dat"))))
+		{
+			pThesaur = new MyThes(CStringA(sFolderUp + _T("dic\\th_") + sFile + _T(".idx")), CStringA(sFolderUp + _T("dic\\th_") + sFile + _T(".dat")));
+		}
+	}
+#endif
 	if ((pThesaur)||(pChecker))
 		return TRUE;
 	return FALSE;
@@ -180,7 +168,7 @@ CStringA CSciEdit::StringForControl(const CString& text)
 #ifdef UNICODE
 	int codepage = Call(SCI_GETCODEPAGE);
 	int reslen = WideCharToMultiByte(codepage, 0, text, text.GetLength(), 0, 0, 0, 0);
-	WideCharToMultiByte(codepage, 0, text, text.GetLength(), sTextA.GetBuffer(reslen+1), reslen+1, 0, 0);
+	WideCharToMultiByte(codepage, 0, text, text.GetLength(), sTextA.GetBuffer(reslen), reslen, 0, 0);
 	sTextA.ReleaseBuffer(reslen);
 #else
 	sTextA = text;
@@ -190,12 +178,21 @@ CStringA CSciEdit::StringForControl(const CString& text)
 
 void CSciEdit::SetText(const CString& sText)
 {
-	Call(SCI_SETTEXT, 0, (LPARAM)(LPCSTR)StringForControl(sText));
+	CStringA sTextA = StringForControl(sText);
+	Call(SCI_SETTEXT, 0, (LPARAM)(LPCSTR)sTextA);
+}
+
+void CSciEdit::InsertText(const CString& sText, bool bNewLine)
+{
+	CStringA sTextA = StringForControl(sText);
+	Call(SCI_REPLACESEL, 0, (LPARAM)(LPCSTR)sTextA);
+	if (bNewLine)
+		Call(SCI_REPLACESEL, 0, (LPARAM)(LPCSTR)"\n");
 }
 
 CString CSciEdit::GetText()
 {
-	LRESULT len = Call(SCI_GETLENGTH);
+	LRESULT len = Call(SCI_GETTEXT, 0, 0);
 	CStringA sTextA;
 	Call(SCI_GETTEXT, len+1, (LPARAM)(LPCSTR)sTextA.GetBuffer(len+1));
 	sTextA.ReleaseBuffer();
@@ -209,6 +206,8 @@ CString CSciEdit::GetWordUnderCursor(bool bSelectWord)
 	textrange.lpstrText = textbuffer;	
 	int pos = Call(SCI_GETCURRENTPOS);
 	textrange.chrg.cpMin = Call(SCI_WORDSTARTPOSITION, pos, TRUE);
+	if (pos == textrange.chrg.cpMin)
+		return CString();
 	textrange.chrg.cpMax = Call(SCI_WORDENDPOSITION, textrange.chrg.cpMin, TRUE);
 	Call(SCI_GETTEXTRANGE, 0, (LPARAM)&textrange);
 	if (bSelectWord)
@@ -270,7 +269,7 @@ void CSciEdit::CheckSpelling()
 			Call(SCI_GETTEXTRANGE, 0, (LPARAM)&textrange);
 			if (strlen(textrange.lpstrText) > 3)
 			{
-				if (!pChecker->spell(textrange.lpstrText))
+				if (!pChecker->spell(CStringA(StringFromControl(textrange.lpstrText))))
 				{
 					//mark word as misspelled
 					Call(SCI_STARTSTYLING, textrange.chrg.cpMin, INDICS_MASK);
@@ -328,9 +327,14 @@ void CSciEdit::DoAutoCompletion()
 {
 	if (m_autolist.GetCount()==0)
 		return;
+	if (Call(SCI_AUTOCACTIVE))
+		return;
 	CString word = GetWordUnderCursor();
 	if (word.GetLength() < 3)
 		return;		//don't autocomplete yet, word is too short
+	int pos = Call(SCI_GETCURRENTPOS);
+	if (pos != Call(SCI_WORDENDPOSITION, pos, TRUE))
+		return;	//don't autocomplete if we're not at the end of a word
 	CString sAutoCompleteList;
 	
 	for (INT_PTR index = 0; index < m_autolist.GetCount(); ++index)
@@ -348,6 +352,7 @@ void CSciEdit::DoAutoCompletion()
 	sAutoCompleteList.TrimRight(m_separator);
 	if (sAutoCompleteList.IsEmpty())
 		return;
+
 	Call(SCI_AUTOCSETSEPARATOR, (WPARAM)CStringA(m_separator).GetAt(0));
 	Call(SCI_AUTOCSHOW, word.GetLength(), (LPARAM)(LPCSTR)StringForControl(sAutoCompleteList));
 }
@@ -358,14 +363,20 @@ BOOL CSciEdit::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT
 		return CWnd::OnChildNotify(message, wParam, lParam, pLResult);
 	
 	LPNMHDR lpnmhdr = (LPNMHDR) lParam;
-
+	SCNotification * lpSCN = (SCNotification *)lParam;
+	
 	if(lpnmhdr->hwndFrom==m_hWnd)
 	{
 		switch(lpnmhdr->code)
 		{
 		case SCN_CHARADDED:
-			CheckSpelling();
-			DoAutoCompletion();
+			if ((lpSCN->ch < 32)&&(lpSCN->ch != 13)&&(lpSCN->ch != 10))
+				Call(SCI_DELETEBACK);
+			else
+			{
+				CheckSpelling();
+				DoAutoCompletion();
+			}
 			return TRUE;
 			break;
 		}
@@ -392,6 +403,11 @@ void CSciEdit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 				SuggestSpellingAlternatives();
 				return;
 			}
+			else
+			{
+				::PostMessage(GetParent()->GetSafeHwnd(), WM_NEXTDLGCTL, GetKeyState(VK_SHIFT)&0x8000, 0);
+				return;
+			}
 		}
 		break;
 	case (VK_ESCAPE):
@@ -406,12 +422,24 @@ void CSciEdit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CSciEdit::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 {
+	int anchor = Call(SCI_GETANCHOR);
+	int currentpos = Call(SCI_GETCURRENTPOS);
 	if ((point.x == -1) && (point.y == -1))
 	{
 		CRect rect;
 		GetClientRect(&rect);
 		ClientToScreen(&rect);
 		point = rect.CenterPoint();
+	}
+	else
+	{
+		// change the cursor position to the point where the user
+		// right-clicked.
+		CPoint clientpoint = point;
+		ScreenToClient(&clientpoint);
+		int pointpos = Call(SCI_POSITIONFROMPOINT, clientpoint.x, clientpoint.y);
+		Call(SCI_SETANCHOR, pointpos);
+		Call(SCI_SETCURRENTPOS, pointpos);
 	}
 	CString sMenuItemText;
 	CMenu popup;
@@ -447,7 +475,7 @@ void CSciEdit::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 
 		CMenu corrections;
 		corrections.CreatePopupMenu();
-		CStringA worda = StringForControl(GetWordUnderCursor());
+		CStringA worda = CStringA(GetWordUnderCursor());
 		int nCorrections = 0;
 		if ((pChecker)&&(!worda.IsEmpty()))
 		{
@@ -546,6 +574,9 @@ void CSciEdit::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 #endif
 		}
 	}
+	// restore the anchor and cursor position
+	Call(SCI_SETCURRENTPOS, currentpos);
+	Call(SCI_SETANCHOR, anchor);
 }
 
 //////////////////////////////////////////////////////////////////////////
