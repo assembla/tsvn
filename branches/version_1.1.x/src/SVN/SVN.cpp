@@ -471,9 +471,14 @@ BOOL SVN::Resolve(const CTSVNPath& path, BOOL recurse)
 
 BOOL SVN::Export(CString srcPath, CString destPath, SVNRev revision, BOOL force, CProgressDlg * pProgDlg, BOOL extended)
 {
-
 	if (revision.IsWorking()&&(pProgDlg))
 	{
+		// files are special!
+		if (!srcPath.IsDirectory())
+		{
+			CopyFile(srcPath.GetWinPath(), destPath.GetWinPath(), FALSE);
+			return TRUE;
+		}
 		// our own "export" function with a callback and the ability to export
 		// unversioned items too
 		if (extended)
