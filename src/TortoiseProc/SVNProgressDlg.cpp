@@ -773,6 +773,7 @@ void CSVNProgressDlg::OnClose()
 		m_bCancelled = TRUE;
 		return;
 	}
+	GetDlgItem(IDCANCEL)->EnableWindow();
 	__super::OnClose();
 }
 
