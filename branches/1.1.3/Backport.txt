@@ -19,7 +19,9 @@ Code/build changes
 * 2444 : Fix small bug: the OK button was enabled in the commit dialog when 
          a log message from the history combo box was chosen, even though 
          the thread gathering the status was still running.
-
+* 2453 : To the view title a traling space was added. This prevented the check
+         for a patched file from succeeding and therefore the 'save' button
+         was always deactivated in TortoiseMerge.
 
 Language Files
 --------------
