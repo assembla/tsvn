@@ -1,0 +1,40 @@
+List of revisions which are backported
+to this branch from trunk. Anyone who objects to a backport
+must give a reason and undo the merge himself.
+
+Doc changes
+-----------
+* 2426 : Update documentation about properties
+* 2434 : Update documentation with better explanations on how merging works
+* 2435 : Small fix to revision 2434
+* 2436 : german translation to 2434.
+* 2461 : Update documentation about diffing & Explorer columns
+* 2467 : Add info about colours in progress dialogs
+* 2478 : german translation of 2461
+* 2497 : Updated doc images
+* 2499 : german translation of 2467, several german doc fixes
+
+Code/build changes
+------------------
+* 2485,2488 : Allow access to Settings Dialog even if SVN config file is corrupt
+* 2431 : Bug in the settings dialog where proxy settings got lost
+         when using the browse button to set the SSH client.
+* 2439, 2440 : Bug in blame. When blame fails return immediately so the
+         error baton isn't cleared by the next log call (which is
+         unnecessary anyway).
+* 2444 : Fix small bug: the OK button was enabled in the commit dialog when 
+         a log message from the history combo box was chosen, even though 
+         the thread gathering the status was still running.
+* 2453 : To the view title a traling space was added. This prevented the check
+         for a patched file from succeeding and therefore the 'save' button
+         was always deactivated in TortoiseMerge.
+* 2456 : Fix for showing wrong number of weeks in the stats page.
+* 2458 : Fix for wrong coloring of copied revisions in the log dialog.
+* 2464 : Fix for broken status cache on SUBST'ed drives.
+* 2486 : Fix for broken merge if the URL doesn't exist in HEAD anymore.
+* 2492 : Revert of revision 2414.
+
+Language Files
+--------------
+Already merged:
+2442, 2450, 2469, 2460, 2472, 2479, 2481, 2483 , 2495
