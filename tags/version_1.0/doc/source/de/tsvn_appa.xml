@@ -1,0 +1,806 @@
+﻿<appendix id="tsvn-faq">
+	<title>Häufig gestellte Fragen (FAQ)</title>
+	<simplesect>
+		<para>
+		Dieser Anhang beantwortet diejenigen Fragen, welche am meisten in der
+		Mailing Liste <email>dev@tortoisesvn.tigris.org</email> gestellt wurden.
+		</para>
+	</simplesect>
+	<!-- ================================================================= -->
+	<!-- ======================== SECTION 1 ============================== -->
+	<!-- ================================================================= -->
+	<sect1 id="tsvn-faq-installation">
+		<title>Installationsprobleme</title>
+		<para>
+		Die meisten dieser Antworten stammen aus dem <application>TortoiseCVS
+		</application>
+			<ulink url="http://www.tortoisecvs.org/faq.html">FAQ
+		</ulink>
+		</para>
+		<sect2 id="tsvn-faq-installation-1">
+			<title>Warum erscheinen die überlagerten Icons nicht?</title>
+			<para>
+				<itemizedlist>
+					<listitem>
+						<para>
+						Wenn Sie Windows 95 benutzen werden Sie keine überlagerten
+						Icons sehen. Sie können versuchen, der Anleitung für NT4
+						weiter unten zu folgen, aber es kann trotzdem sein dass
+						es nicht funktioniert. Beachten Sie bitte: TortoiseSVN
+						unterstützt Windows 95 nicht &mdash; es können also
+						noch weitere Probleme damit auftreten.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Wenn Sie TortoiseSVN mit Windows NT4 benutzen wollen,
+						müssen Sie die Desktop-Erweiterungen des IE4 installieren
+						um eine neuere Version des Explorers zu erhalten.
+						Installieren Sie dazu den Internet-Explorer 4 und 
+						wählen Sie <guibutton>Ja</guibutton> um den ActiveDesktop
+						ebenfalls zu installieren. Keine Panik, Sie können den
+						AktivDesktop später wieder deaktivieren durch einen
+						Rechtsklick darauf. Wir benötigen nur die neue Version
+						des Explorers.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Falls Sie bereits den IE5 oder IE6 installiert haben so
+						müssen Sie entweder:
+						<orderedlist>
+							<listitem>
+								<para>
+								Den IE5 deinstallieren, IE4 installieren und
+								dann wieder den IE5 installieren. Was für
+								ein Schlamassel...
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+								Das Setupprogramm des IE5 von der Kommandozeile
+								aus starten um die IE4 Desktoperweiterungen
+								ebenfalls zu installieren.
+								</para>
+								<para>
+								Das Setupprogramm muss in dem Ordner gestartet
+								werden welches die Datei ie5setup.exe enthält.
+								Falls der Browser anschliessend instabil wirkt
+								führen Sie einfach die Reparaturfunktion aus.
+								</para>
+								<para>Für Win95: ie5setup.exe /c:"ie5wzd /e:IE4Shell WIN /I:Y"</para>
+								<para>Für WinNT: ie5setup.exe /c:"ie5wzd /e:IE4Shell NTx86 /I:Y"</para>
+								<para>Für Win95: ie6setup.exe /c:"ie5wzd /e:IE4Shell WIN /I:Y"</para>
+								<para>Für WinNT: ie6setup.exe /c:"ie6wzd /e:IE4Shell NTx86 /I:Y"</para>
+							</listitem>
+						</orderedlist>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Die Verknüpfung mit Namen <literal>Win NT Explorer</literal>
+						in Ihrem Start-Menu zeigt vielleicht auf 
+						<filename>C:\WINNT\explorer.scf</filename>. Erstellen
+						Sie eine neue Verknüpfung zu 
+<screen>
+%windir%\Explorer.exe /n, /e
+</screen>
+						und Sie werden überlagerte Icons erhalten.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Falls Sie einen IntelliPoint-Maustreiber installiert
+						haben und den Explorer mittels Mausklick starten,
+						müssen Sie den Treiber von Version 3 auf mindestens
+						Version 3.2 aktualisieren.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-2">
+			<title>Ich bin den Anweisungen gefolgt, habe aber immer noch keine Icons?!?</title>
+			<para>
+			Sie haben nach der Installation von TortoiseSVN den Rechner neu
+			gestartet? Sie haben jetzt WinNT/Win95 und IE>=5.5 installiert?
+			</para>
+			<para>
+			Wenn Sie TortoiseSVN unter einem anderen Benutzernamen installiert
+			haben als Sie jetzt angemeldet sind machen Sie folgendes:
+			Gehen Sie zum Eigenschaftsdialog von TortoiseSVN und aktivieren
+			Sie die Icon Overlays für mindestens die fixen Laufwerke. Der 
+			Installer macht dies automatisch für den aktuellen Benutzer, da
+			Sie jetzt aber als ein anderer Benutzer angemeldet sind müssen Sie
+			dies von Hand machen.
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-2-1">
+			<title>Die überlagerten Icons erscheinen, aber nicht alle davon!</title>
+			<para>
+			Dies passiert normalerweise dann, wenn Sie noch andere Programme
+			installiert haben welche solche überlagerten Icons verwenden, z.B.
+			TortoiseCVS. Der Grund dafür ist dass Windows nur 15 solche Icons
+			verwalten kann, und Windows selbst benötigt schon etwa 4 davon
+			(z.B. für Verknüpfungen, freigegebene Ordner, ...). Wenn alle
+			diese 15 Icons verwendet werden, kann TortoiseSVN keine weiteren
+			benutzen und zeigt deshalb nicht mehr alle Icons an.
+			</para>
+			<para>
+			TortoiseSVN benutzt fünf überlagerte Icons für den Status:
+			<orderedlist>
+				<listitem><para>Normal</para></listitem>
+				<listitem><para>Verändert</para></listitem>
+				<listitem><para>In Konflikt</para></listitem>
+				<listitem><para>Gelöscht</para></listitem>
+				<listitem><para>Hinzugefügt</para></listitem>
+			</orderedlist>
+			Am wahrscheinlichsten ist dass das Icon für <literal>Hinzugefügt</literal>
+			nicht mehr angezeigt wird. Dann das <literal>Gelöscht</literal> Icon
+			und so weiter.
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-3">
+			<title>Warum ändern sich die Icons manchmal in zufällige Grafiken?</title>
+			<para>
+			Der Windows Icon Cache ist ein fehlerhaftes Biest. Sie können das
+			Problem folgendermassen lösen:
+			<itemizedlist>
+				<listitem>
+					<para>Installieren Sie Microsoft's <application>
+						<ulink url="http://www.microsoft.com/ntworkstation/downloads/powertoys/networking/nttweakui.asp">TweakUI</ulink>
+						</application> und führen Sie die Option <literal>Icon Cache reparieren</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Oder erhöhen Sie die grösse des Icon Caches. Gehen
+					Sie zu 
+<screen>
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer
+</screen>
+					Und erstellen Sie einen neuen String Wert <literal>Max Cached Icons</literal>.
+					Der Standardwert ist 500 &mdash; versuchen Sie den Wert auf
+					2048 zu erhöhen. Lesen Sie auch den Knowledge-Base Artikel
+					<ulink url="http://support.microsoft.com/support/kb/articles/Q132/6/68.asp">Q132</ulink>
+					für mehr Informationen.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Oder löschen Sie die Datei <filename>ShellIconCache</filename>
+					in Ihrem Windows Verzeichnis und starten Sie den Computer neu.
+					</para>
+				</listitem>
+			</itemizedlist>
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-4">
+			<title>Diese Icons sind scheusslich, I will schönere!</title>
+			<para>
+			Sie können Ihr eigenes Iconset erstellen und benutzen. Und wenn
+			Sie dies tun, schicken Sie uns bitte Ihre schöneren Icons an
+			die Mailingliste <email>dev@tortoisesvn.tigris.org</email>.
+			</para>
+			<para>
+			Die Icons müssen mindestens in zwei Grössen vorliegen (16x16 und 32x32)
+			mit jeweils 16 Farben, für Windows XP sollte die Icons zusätzlich
+			in der Grösse 48x48 vorhanden sein.
+			</para>
+			<para>
+			Um die neuen Icons zu installieren kopieren Sie diese in den Ordner,
+			wo TortoiseSVN installiert wurde. Sie können entweder die ursprünglichen
+			Icons zuerst irgendwo sichern oder auch gleich direkt mit Ihren
+			neuen überschreiben.
+			</para>
+			<para>
+			Falls Sie die alten Icons nicht überschreiben wollen sondern einfach
+			nur die neuen Icons benutzen müssen Sie die Registry ändern.
+			Unter <filename>HKLM\Software\TortoiseSVN\</filename> ändern Sie
+			die Schlüssel <literal>ConflictIcon</literal>, <literal>InSubversionIcon</literal>, 
+			<literal>AddedIcon</literal>, <literal>DeletedIcon</literal> und
+			<literal>ModifiedIcon</literal> so dass die Pfade zu den neuen
+			Icons stimmen.
+			</para>
+			<para>
+			Anschliessend müssen Sie den Computer neu starten, damit der Explorer
+			die neuen Icons neu einliest. Als Alternative können Sie auch den
+			Icon Cache löschen mit dem 
+			<ulink url="http://www.microsoft.com/ntworkstation/downloads/powertoys/networking/nttweakui.asp">
+					<application>TweakUI</application>
+			</ulink> Tool von Microsoft.
+			Für Windows XP gibts dieses Tool 
+			<ulink url="http://www.microsoft.com/windowsxp/pro/downloads/powertoys.asp">hier</ulink>.
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-5">
+			<title>Die Menus werden als <literal>Ownerdrawn</literal> (keine icons, kein Text)
+			in bestimmten Programmen angezeigt</title>
+			<para>
+			Der Grund dafür ist dass das Kontextmenu komplett von TortoiseSVN
+			selbst gezeichnet wird.
+			</para>
+			<para>
+			Falls Sie das nicht mögen, können Sie TortoiseSVN zwingen, die
+			Kontextmenu's auf herkömmliche Weise zu nutzen: Erstellen Sie
+			einen Registry-Eintrag unter:
+<screen>
+HKCU\Software\TortoiseSVN\OwnerdrawnMenus
+</screen>
+			und setzen Sie diesen auf 0. Dies zwing TortoiseSVN dazu, die 
+			Standard Windowsroutinen für Kontextmenueinträge zu verwenden.
+			Sie werden wie bisher alle Menueinträge sehen können, jedoch sehen
+			die icons hässlich aus da Windows standardmässig icons nur in der
+			Grösse 10x10 für Kontextmenueinträge zulässt. 
+			Wenn Sie wieder die normalen Einstellungen möchten, löschen Sie
+			den erstellten Registry-Eintrag oder setzen Sie den Wert auf 1.
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-6">
+			<title>Wie kann ich TortoiseSVN deinstallieren?</title>
+			<para>
+			Ganz einfach: TortoiseSVN trägt sich in das Software-Panel in
+			der Systemsteuerung ein, von wo aus Sie den Befehl <literal>Entfernen
+			</literal> wählen können. Dies entfernt TortoiseSVN, jedoch nicht
+			ihre mit TortoiseSVN erstellten oder benutzten Datenbanken. Sie
+			verlieren also Ihre Daten nicht.
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-7">
+			<title>Ich hab eine neuere Version von TortoiseSVN installiert,
+			aber die neuen Funktionen sind nicht sichtbar?!?</title>
+			<para>
+			TortoiseSVN ist eine Windows Explorer Erweiterung. Das heisst nach
+			einem Update <emphasis>müssen</emphasis> den Explorer neu starten.
+			Da der Desktop selbst ein Explorerprozess ist, müssen Sie Windows
+			neu starten, oder sich mindestens abmelden und wieder anmelden.
+			Wenn Sie dies nicht tun nutzt der Explorer immer die Version,
+			welche er noch im Speicher geladen hat (d.h. die alte Version).
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-8">
+			<title>Kann ich TortoiseCVS und TortoiseSVN auf demselbem Computer
+			gleichzeitig verwenden?</title>
+			<para>
+			Ja, die beiden Programme können ohne grössere Probleme auf demselben
+			PC installiert sein. Sie können sogar die gleichen Ordner unter
+			CVS und SVN stellen, sofern das für Sie Sinn macht.
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-installation-9">
+			<title>Ich habe PowerDesk 5 installiert, und TortoiseSVN funktioniert
+			nicht auf meinem PC</title>
+			<para>
+			Nun, in diesem Falle ist PowerDesk der Schuldige.
+			</para>
+			<para>
+			Wir haben eine Supportanfrage an die Leute von PowerDesk geschickt,
+			und dies war ihre Antwort:
+			<blockquote>
+					<para>
+				For now, we suggest the users of the Tortoise shell 
+				extension may wish to save off the PD context menu key, 
+				and temporarily delete it from the registry while 
+				we work on a fix to the PD code. The PD context menu 
+				key is here:
+<screen>
+[HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers\PowerDeskMenu]
+</screen>
+				Hopefully, removing that key will prevent a shell crash 
+				when both apps are on the system. Unfortunately, this 
+				will disable the PowerDesk features of the user's 
+				shell context menu. We believe the problem to be inside 
+				the PD code as we have seen other shell extensions run 
+				into similar problems when PD5 is installed. We are 
+				working on a fix and we will provide a patch ASAP.
+				</para>
+				</blockquote>
+			</para>
+		</sect2>
+	</sect1>
+	<!-- ================================================================= -->
+	<!-- ======================== SECTION 2 ============================== -->
+	<!-- ================================================================= -->
+	<sect1 id="tsvn-faq-dug">
+		<title>täglicher Gebrauch</title>
+		<para>
+		Dieser Abschnitt beantwortet Fragen bei Problemen welche beim täglichen
+		Umgang mit TortoiseSVN auftreten können.
+		</para>
+		<sect2 id="tsvn-faq-dug-1">
+			<title>Ich habe irrtümlich eine Datei gelöscht, und nun ist sie weg!</title>
+			<para>
+			Sie können mit dem Befehl <guimenuitem>Rückgängig</guimenuitem>
+			auf dem übergeordneten Ordner ausführen. Dies bringt die gelöschte
+			Datei wieder zurück. Aber seien Sie vorsichtig: Sie werden <emphasis>
+			alle</emphasis> Änderungen verlieren, welche Sie an Dateien in
+			diesem Ordner gemacht haben. Das heisst nicht nur die gelöschte
+			Datei wird wiederhergestellt, sondern auch Änderungen an anderen
+			Dateien.
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-dug-2">
+			<title>Wenn ich eine Datei mit TortoiseSVN lösche, ist diese
+			weg. Wie kann ich diesen Löschvorgang zur Datenbank übertragen?</title>
+			<para>
+			Ganz einfach: übertragen Sie den ganzen Ordner.
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-dug-3">
+			<title>Ich kriege immer eine Fehlermeldung wenn ich versuche,
+			eine einzelne Datei auszuchecken.</title>
+			<para>
+			Da ist nicht falsch daran. Subversion erlaubt nur ganze Ordner
+			auszuchecken, nicht einzelne Dateien. 
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-dug-4">
+			<title>Ich habe Probleme, eine Datei von GROSSBuchstaben in kleinBuchstaben
+			umzubenennen</title>
+			<para>
+			Es gibt (mindestens) zwei verschiedene Möglichkeiten, um eine umzubenennen
+			ohne die Historie zu verlieren. Es ist wichtig, dass Sie die Datei
+			mit TortoiseSVN umbenennen und nicht nur mit dem Explorer! Wenn
+			Sie eine Datei nur mit dem Explorer umbenennen können Sie Ihre
+			Arbeitskopie zerstören.
+			</para>
+			<para>
+			Lösung A) 
+			<orderedlist>
+					<listitem>
+						<para>
+						Übertragen Sie die Änderungen in der Arbeitskopie
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Benennen Sie die Datei von <filename>DATEINAME</filename>
+						in <filename>dateiname</filename> um mit dem Umbenennen-
+						Befehl im <guimenuitem>Datenbankbrowser</guimenuitem>.
+						Dieses Umbenennen erfolgt <emphasis>direkt</emphasis>
+						in der Datenbank!
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Löschen Sie den Ordner Ihrer Arbeitskopie, welcher die
+						umbenannte Datei enthielt. Danach müssen Sie Ihre
+						Arbeitskopie <guimenuitem>Aktualisieren...</guimenuitem>.
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+			<para>
+			Lösung B)
+			<orderedlist>
+					<listitem>
+						<para>
+						Benennen Sie die Datei von <filename>DATEINAME</filename>
+						zu <filename>DATEINAME_</filename> um mit dem
+						<guimenuitem>Umbenennen</guimenuitem> Befehl.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Übertragen Sie diese Änderung in die Datenbank.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Benennen Sie die Datei von <filename>DATEINAME_</filename>
+						um in <filename>filename</filename>.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Übertragen Sie diese Änderung in die Datenbank.
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-dug-5">
+			<title>Ich hab eine Datei gelöscht und eine neue Datei
+			mit demselben Namen erstellt. Nun kann ich nicht mehr Übertragen?</title>
+			<para>
+			Sie möchten Subversion wohl bescheissen? Nein &mdash; im Ernst &mdash;
+			was haben Sie erwartet?
+			</para>
+			<para>
+			Nehmen Sie an ihre Arbeitskopie ist auf Revision #55.
+			</para>
+			<para>
+			Sie haben eine Datei mit TortoiseSVN gelöscht. Dies markiert diese
+			Datei für die Löschung aus der Datenbank bei der nächsten Übertragung.
+			Die Datei ist noch nicht wirklich gelöscht, Sie könnten sie zum
+			Beispiel mit dem <guimenuitem>Rückgängig</guimenuitem> wieder
+			zurückholen.
+			</para>
+			<para>
+			Dann haben Sie eine neue Datei erstellt mit demselben Namen und
+			haben diese zur Versionskontrolle hinzugefügt. Dies markiert diese
+			Datei für die Speicherung in der Datenbank bei der nächsten
+			Übertragung.
+			</para>
+			<para>
+			Nun versuchen Sie Ihre Änderungen zu Übertragen. Subversion versucht
+			nun, diese Datei gleichzeitig in der Datenbank zu löschen und
+			auch neu zu speichern (weil der Dateiname gleich ist). Da dies
+			natürlich nicht möglich ist, gibts eine Fehlermeldung.
+			</para>
+			<para>
+			Sie hätten die Löschung der Datei gleich zur Datenbank übertragen
+			sollen. Sie haben immer noch keine Ahnung was Sie jetzt tun sollen?
+			Nun dann:
+			<orderedlist>
+					<listitem>
+						<para>
+						Verschieben Sie die neu erstellte Datei
+						an einen sicheren Platz auf Ihrer Festplatte (ausserhalb
+						Ihrer Arbeitskopie)
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Übertragen Sie Ihre Änderungen. Damit wird die Datei
+						erstmal von der Datenbank gelöscht. Dies hätten Sie
+						von Anfang an so tun sollen.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Verschieben Sie die Datei wieder zurück in Ihre Arbeitskopie
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						Übertragen Sie die Änderungen nochmals
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-dug-6">
+			<title>Kann ich TortoiseSVN und andere Subversion Clients
+			gleichzeitig benutzen?</title>
+			<para>
+			Ja, Sie können verschiedene Subversion Clients miteinander, nacheinander
+			und übereinander verwenden wie Sie wollen. Sie sollten nur darauf
+			achten dass alle Clients die gleiche Version der Subversion Libraries
+			verwenden (dies steht üblicherweise in der About-Box (Info, Über, ...)
+			des Programms).
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-dug-7">
+			<title>Kann ich mit verschiedenen Arbeitskopien von unterschiedlichen
+			Datenbanken gleichzeitig arbeiten?</title>
+			<para>
+			Ja, Sie können. Dies ist eine Standardfunktion von Subversion. Jeder
+			Ordner einer Arbeitskopie weiss, zu welcher Datenbank es gehört.
+			</para>
+			<para>
+			Wenn Sie möchten, dass bestimmte Unterordner Ihrer Arbeitskopie
+			von einer anderen Datenbank ausgecheckt werden können Sie dies
+			auch automatisieren, indem Sie die Subversion-Eigenschaft <literal>
+			svn:externals</literal> verwenden. Bitte lesen Sie dazu den Beitrag
+			im Subversion-Buch: 
+			<ulink url="http://svnbook.red-bean.com/html-chunk/ch07s03.html">
+					<citetitle>External Definitions</citetitle>
+			</ulink>
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-dug-8">
+			<title>Wie behandelt TortoiseSVN Konflikte?</title>
+			<para>
+			Stellen Sie sich vor, Sie checken Revision 24 einer Datei aus und
+			ändern diese. In der Zwischenzeit ändert jemand anders diese Datei
+			ebenfalls und überträgt diese Änderungen in Revision 25. Vielleicht
+			wird die Datei sogar nochmals geändert und wieder übertragen, so
+			dass in der Datenbank nun 26 Revisionen gespeichert sind. Wenn Sie
+			jetzt Ihre Arbeitskopie aktualisieren, <emphasis>kann</emphasis>
+			(nicht muss!) es einen Konflikt geben. Bitte lesen Sie dazu den
+			Abschnitt <xref linkend="tsvn-DUG-conflicts" />
+			</para>
+		</sect2>
+	</sect1>
+	<!-- ================================================================= -->
+	<!-- ======================== SECTION 3 ============================== -->
+	<!-- ================================================================= -->
+	<sect1 id="tsvn-faq-misc">
+		<title>Verschiedene Fragen</title>
+		<sect2 id="tsvn-faq-misc-1">
+			<title>TortoiseSVN scheint sehr langsam zu sein bei grossen Ordnern!</title>
+			<para>
+			Um Ihnen die überlagerten Icons anzuzeigen muss TortoiseSVN zuerst
+			den Status von jeder einzelnen Datei bestimmen, und dies jedesmal
+			wenn Sie einen Ordner von einer Arbeitskopie im Explorer anzeigen.
+			Dies dauert normalerweise etwa eine Sekunde, kann jedoch auch viel
+			länger dauern wenn Sie grosse Ordner mit vielen Dateien unter
+			Versionskontrolle haben.
+			</para>
+			<para>
+			Beachten Sie: Normalerweise ist TortoiseSVN nur das allererste Mal
+			wenn Sie einen Ordner anzeigen sehr langsam. Wenn Sie denselben
+			Ordner später nochmals anzeigen lassen, ist TortoiseSVN viel
+			schneller weil bestimmte Informationen zwischengespeichert werden.
+			</para>
+			<para>
+			Sie können versuchen TortoiseSVN schneller zu machen durch folgende
+			Methoden:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					Am meisten Zeit gewinnen Sie, wenn Sie die rekursiven
+					überlagerten Icons ausschalten. Gehen Sie dazu in den
+					Eigenschafts-Dialog von TortoiseSVN und schalten Sie die
+					Option <command>Änderungen in Ordnern anzeigen</command>
+					aus. Damit zeigt TortoiseSVN den Status von Dateien
+					innerhalb von Ordnern nicht mehr auf den Ordnern selbst
+					an.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Wann immer die <literal>Zuletzt geändert am</literal> Zeit
+					einer Datei ändert, muss TortoiseSVN diese Datei komplett
+					untersuchen, ob sich die Datei auch wirklich geändert hat.
+					Wenn Sie also häufig eine Datei ändern, die Änderungen
+					rückgängig machen und dann die Datei trotzdem abspeichern
+					verlangsamen Sie damit TortoiseSVN erheblich! Wenn also
+					TortoiseSVN auf Ihrer Arbeitskopie immer langsamer wird
+					hilft ein frisches Auschecken der Arbeitskopie.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Wenn Sie mit Windows XP arbeiten, können Sie auch die 
+					<literal>Zip-Ordner</literal> ausschalten. Dies wird nicht
+					nur TortoiseSVN schneller machen, sondern das ganze System!
+					<orderedlist>
+						<listitem>
+							<para>
+							Wählen Sie den Punkt <command>Ausführen</command> 
+							im <command>Start</command> Menu.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+							Geben Sie <command>regsvr32 /u %windir%\system32\zipfldr.dll</command>
+							in der Dialogbox ein und klicken Sie auf <guibutton>
+							OK</guibutton>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+							Die Änderung wirkt sofort, aber vielleicht sollten
+							Sie dennoch Windows neu starten um jeden Rest von
+							den Zip-Ordnern aus dem Speicher zu entfernen.
+							</para>
+						</listitem>
+					</orderedlist>
+					Falls Sie irgendwann die Zip-Ordner wieder aktivieren 
+					möchten, gehen Sie wie folgt vor:
+					<orderedlist>
+						<listitem>
+							<para>
+							Wählen Sie den Punkt <command>Ausführen</command> 
+							im <command>Start</command> Menu.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+							Geben Sie <command>regsvr32 %windir%\system32\zipfldr.dll</command>
+							in der Dialogbox ein und klicken Sie auf <guibutton>
+							OK</guibutton>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+							Die Änderung wirkt sofort.
+							</para>
+						</listitem>						
+					</orderedlist>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		<sect2 id="tsvn-faq-misc-2">
+			<title>Unterstützt TortoiseSVN SSH?</title>
+			<para>
+			TortoiseSVN nutzt die Subversion libraries. Und Subversion
+			unterstützt SSH mittels <systemitem class="url">svn+ssh://</systemitem> 
+			für den Zugriff auf eine Datenbank. Wenn Sie nicht den 
+			<literal>svnserve</literal> Server verwenden möchten, dann können
+			Sie auch einen Server mit Apache verwenden und die Verbindung
+			mittels SSL verschlüsseln.
+			</para>
+			<para>
+			Eine Anleitung wie man einen Apache Server mit SSL absichert
+			finden Sie im Abschnitt <xref linkend="tsvn-serversetup-apache-6"/>
+			Eine Anleitung für <systemitem class="url">svn+ssh://</systemitem> 
+			finden Sie im Abschnitt <xref linkend="tsvn-serversetup-svnserve-5"/>
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-misc-3">
+			<title>Kann ich Daten verlieren wenn ich TortoiseSVN benutze?</title>
+			<para>
+			TortoiseSVn nutzt die Subversion library. Genug gesagt :-)
+			</para>
+			<para>
+			Im Ernst &mdash; Nein! Lesen Sie die Subversion
+			(<ulink url="http://subversion.tigris.org/">Webseite</ulink>.
+			Sie können Ihre Arbeitskopie so stark verkrüppeln wie Sie wollen,
+			aber wenn Sie Ihre Änderungen regelmässig in die Datenbank 
+			übertragen können Sie jederzeit zu einem funktionierenden Stand
+			zurückkehren.
+			</para>
+			<para>
+			Natürlich kann TortoiseSVN nicht gegen Dummheit schützen. Wenn
+			Sie Ihren PC zum Fenster rausschmeissen, die Festplatte formatieren
+			ohne vorher eine Sicherung zu machen, den PC in die Badewanne
+			mitnehmen, ...
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-misc-4">
+			<title>Ich suche ein externes Diff-Programm</title>
+			<para>
+			Diese Liste von Diff-Programmen ist nicht komplett, wird Ihnen
+			aber als Anfang helfen können:
+			<itemizedlist>
+					<listitem>
+						<para>
+							<ulink url="http://winmerge.sourceforge.net/">
+				WinMerge</ulink>, ein grossartiges Open-Source Programm</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="ftp://ftp.perforce.com/pub/perforce/r03.1/bin.ntx86/p4diff.zip">
+				Perforce Win Diff</ulink>, ein Gratistool von Perforce. 
+				Sie können das Installationsprogramm 
+				<ulink url="http://www.perforce.com/perforce/loadprog.html">
+				hier</ulink> finden.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="http://www.prestosoft.com/">Examdiff oder Examdiff Pro</ulink>, 
+							ein excellentes Free- oder Shareware Tool. Version 3.2 versteht auch UNICODE
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="http://www.scootersoftware.com/">
+				Beyond Compare</ulink>, ein gutes Shareware Tool, versteht Unicode</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="http://www.scintilla.org/SciTEDownload.html">
+							SciTE</ulink>, um Unified-Diffs farbig anzuzeigen. 
+							Auch als Texteditor gut geeignet!
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-misc-5">
+			<title>Ich suche ein externes Merge-Programm</title>
+			<para>
+			Diese Liste von Diff-Programmen ist nicht komplett, wird Ihnen
+			aber als Anfang helfen können:
+			<itemizedlist>
+					<listitem>
+						<para>
+							<ulink url="http://winmerge.sourceforge.net/">
+				WinMerge</ulink>, ein grossartiges Open-Source Programm</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="ftp://ftp.perforce.com/pub/perforce/r03.1/bin.ntx86/p4diff.zip">
+				Perforce Win Diff</ulink>, ein Gratistool von Perforce. 
+				Sie können das Installationsprogramm 
+				<ulink url="http://www.perforce.com/perforce/loadprog.html">
+				hier</ulink> finden.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="http://www.accurev.com/free/tkdiff/">
+				TkDiff</ulink>, nutzt TCL/TK</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink url="http://sourceforge.net/projects/conflicteditor/">
+				CvsConflictEditor</ulink>, hat Fehler, aber auch Potential</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-misc-6">
+			<title>Was sind die versteckten Registry-Einstellungen?</title>
+			<para>
+			Es gibt ein paar Registry-Einstellungen für TortoiseSVN welche
+			nicht über den Einstellungs-Dialog zugänglich sind. Diese
+			Einstellungen werden normalerweise zur Fehleranalyse benötigt oder
+			für andere spezielle Fälle. Sie können diese Einstellungen mit
+			dem Registry-Editor von Windows selbst sezten.
+			<command>regedt32</command>.
+			<variablelist>
+				<varlistentry>
+					<term>HKCU\Software\TortoiseSVN\Debug</term>
+					<listitem>
+					<para>
+					Setzen Sie diesen Wert auf 1, damit TortoiseSVN bei
+					jedem Start die Parameter anzeigt, welche es vom
+					Shell-Teil erhält.
+					</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>HKCU\Software\TortoiseSVN\OwnerdrawnMenus</term>
+					<listitem>
+					<para>
+					Setzen Sie diesen Wert auf 0, wenn Sie nicht möchten
+					dass TortoiseSVN die Kontextmenueinträge selbst zeichnet.
+					Die ist hilfreich wenn Sie einen anderen Dateimanager
+					als den Windows-Explorer verwenden möchten oder wenn
+					Sie sonst irgendwie Probleme mit der Anzeige des
+					Kontextmenus haben.
+					</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>HKCU\Software\TortoiseSVN\BlockStatus</term>
+					<listitem>
+					<para>
+					Wenn Sie nicht möchten, dass TortoiseSVN die überlagerten
+					Icons neu zeichnet, während ein anderer TortoiseSVN Prozess
+					läuft (z.B. eine Übertragung, Aktualisierung, ...) dann
+					setzen Sie diesen Wert auf 1.
+					</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			</para>
+			<para>
+			Bitte spielen Sie nicht mit diesen Werten herum, wenn Sie nicht
+			<emphasis>genau</emphasis> wissen was Sie tun!
+			</para>
+		</sect2>
+		<sect2 id="tsvn-faq-misc-7">
+			<title>Ich liebe TortoiseSVN, wie kann ich etwas für die Entwickler tun?</title>
+			<para>
+			Danke, das Sie gefragt haben!
+			</para>
+			<para>
+			Wenn Sie TortoiseSVN mögen und es oft benutzen, unterstützen Sie bitte
+			die Entwickler!
+			</para>
+			<para>
+			Sie können uns auf viele Weise helfen: Sie können uns Patches schicken
+			und damit bei der Entwicklung direkt mithelfen, oder Sie können uns
+			bei unserer Arbeit motivieren.
+			</para>
+			<para>
+			Während wir an TortoiseSVN arbeiten hören wir gerne Musik. Und weil wir
+			viele viele Stunden an TortoiseSVN arbeiten, benötigen wir immer wieder
+			neue Musik. Aus diesem Grund haben wir im Internet Seiten eingerichtet,
+			von wo aus Sie uns Musik-CD's und auch mal eine DVD schenken können:
+			<itemizedlist>
+				<listitem>
+					<para>Die Wunschliste von Stefan ist 
+						<ulink url="http://www.amazon.com/o/registry/17DKTOSXX1KJK">
+							hier</ulink> (English) oder 
+						<ulink url="http://www.amazon.de/exec/obidos/wishlist/26JA3LXZXY4TB/">
+						hier</ulink> (Deutsch).
+					</para>
+				</listitem>
+				<listitem>
+					<para>L&uuml;bbe hat ebenfalls eine <ulink url="http://www.amazon.de/exec/obidos/wishlist/3IKWLV2U0TVUA/">
+						Wunschliste</ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+			</para>
+		</sect2>
+	</sect1>
+</appendix>
