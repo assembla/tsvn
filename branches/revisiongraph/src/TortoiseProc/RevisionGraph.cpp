@@ -111,6 +111,8 @@ svn_error_t* CRevisionGraph::logDataReceiver(void* baton,
 	e->ch_paths = ch_paths;
 	e->msg = msg;
 	e->rev = rev;
+	if (me->m_lHeadRevision < rev)
+		me->m_lHeadRevision = rev;
 	APR_ARRAY_PUSH(me->m_logdata, log_entry *) = e;
 	return SVN_NO_ERROR;
 }
@@ -147,13 +149,13 @@ BOOL CRevisionGraph::FetchRevisionData(CString path)
 	// we have to get the log from the repository root
 	if (!GetRepositoryRoot(url))
 		return FALSE;
-
+	m_sRepoRoot = url;
 	apr_array_header_t *targets = apr_array_make (pool, 1, sizeof (const char *));
 	const char * target = apr_pstrdup (pool, url);
 	(*((const char **) apr_array_push (targets))) = target;
 
 	m_logdata = apr_array_make(pool, 100, sizeof(log_entry *));
-
+	m_lHeadRevision = -1;
 	Err = svn_client_log (targets, 
 		SVNRev(1), 
 		SVNRev(SVNRev::REV_HEAD), 
@@ -167,6 +169,83 @@ BOOL CRevisionGraph::FetchRevisionData(CString path)
 		return FALSE;
 	}
 	return TRUE;
+}
+
+BOOL CRevisionGraph::AnalyzeRevisionData(CString path)
+{
+	if (m_logdata == NULL)
+		return FALSE;
+	AnalyzeRevisions("test", m_lHeadRevision, 1);
+	return TRUE;
+}
+
+BOOL CRevisionGraph::AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev)
+{
+	LONG forward = 1;
+	if (startrev > endrev)
+		forward = -1;
+	for (long currentrev=startrev; currentrev!=endrev; currentrev += forward)
+	{
+		log_entry * logentry = APR_ARRAY_IDX(m_logdata, currentrev, log_entry *);
+		if (logentry)
+		{
+			ASSERT(logentry->rev == currentrev);
+			apr_hash_index_t* hi;
+			for (hi = apr_hash_first (pool, logentry->ch_paths); hi; hi = apr_hash_next (hi))
+			{
+				const char * key;
+				svn_log_changed_path_t *val;
+				apr_hash_this(hi, (const void**)&key, NULL, (void**)&val);
+				if (IsParentOrItself(key, url))
+				{
+					if (strcmp(key, url)==0)
+					{
+						CRevisionEntry * reventry = new CRevisionEntry();
+						reventry->revision = currentrev;
+						reventry->author = logentry->author;
+						reventry->date = logentry->time;
+						reventry->message = logentry->msg;
+						reventry->url = key;
+						reventry->action = val->action;
+						if (val->copyfrom_path)
+						{
+							reventry->pathfrom = val->copyfrom_path;
+							reventry->revisionfrom = val->copyfrom_rev;
+						}
+						m_arEntryPtrs.Add(reventry);
+						if (val->copyfrom_path)
+						{
+							// the file/folder was copied to here
+							// so we have to get all the information from that source too.
+							AnalyzeRevisions(val->copyfrom_path, currentrev, 1);
+						}
+					}
+					else
+					{
+						if (val->copyfrom_path)
+						{
+							//check if our file/folder may be the source of a copy operation
+							if (IsParentOrItself(val->copyfrom_path, url)==0)
+							{
+								AnalyzeRevisions(val->copyfrom_path, currentrev, m_lHeadRevision);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return TRUE;
+}
+
+BOOL CRevisionGraph::IsParentOrItself(const char * parent, const char * child)
+{
+	if (strncmp(parent, child, strlen(parent))==0)
+	{
+		if (child[strlen(parent)]=='/')
+			return TRUE;
+	}
+	return FALSE;
 }
 
 CString CRevisionGraph::GetLastErrorMessage()

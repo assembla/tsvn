@@ -64,17 +64,16 @@ class CRevisionEntry
 public:
 	//methods
 	//members
-	stdstring		fullpath;
-	stdstring		filename;
 	LONG			revision;
-	stdstring		author;
-	stdstring		date;
-	stdstring		message;
-	BOOL			copied;
-	stdstring		pathto;
+	const char *	url;
+	const char *	author;
+	apr_time_t		date;
+	const char *	message;
+	const char *	pathto;
 	LONG			revisionto;
-	stdstring		pathfrom;
+	const char *	pathfrom;
 	LONG			revisionfrom;
+	char			action;
 };
 
 class CRevisionGraph : public SVNPrompt
@@ -83,12 +82,19 @@ public:
 	CRevisionGraph(void);
 	~CRevisionGraph(void);
 	BOOL						FetchRevisionData(CString path);
-	
+	BOOL						AnalyzeRevisionData(CString path);
+
 	CString						GetLastErrorMessage();
 	BOOL						m_bCancelled;
 	apr_array_header_t *		m_logdata;
 private:
 	BOOL						GetRepositoryRoot(CStringA& url);
+	BOOL						AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev);
+	BOOL						IsParentOrItself(const char * parent, const char * child);
+	CStringA					m_sRepoRoot;
+	LONG						m_lHeadRevision;
+
+	CPtrArray					m_arEntryPtrs;
 
 	svn_error_t *				Err;			///< Global error object struct
 	apr_pool_t *				parentpool;
