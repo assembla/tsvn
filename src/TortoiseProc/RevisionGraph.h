@@ -1,0 +1,105 @@
+// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2004 - Tim Kemp and Stefan Kueng
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#pragma once
+#include "atlsimpstr.h"
+#include "afxtempl.h"
+
+#include "apr_general.h"
+#include "apr_tables.h"
+#include "apr_hash.h"
+#include "svn_pools.h"
+#include "svn_client.h"
+#include "svn_sorts.h"
+#include "svn_path.h"
+#include "svn_wc.h"
+#include "svn_utf.h"
+#include "svn_repos.h"
+#include "svn_string.h"
+#include "svn_config.h"
+#include "svn_time.h"
+#include "svn_subst.h"
+#include "svn_auth.h"
+
+#include "ProgressDlg.h"
+#include "SVNPrompt.h"
+#include "SVNRev.h"
+
+
+#pragma warning (push,1)
+typedef std::basic_string<wchar_t> wide_string;
+#ifdef UNICODE
+#	define stdstring wide_string
+#else
+#	define stdstring std::string
+#endif
+#pragma warning (pop)
+
+struct log_entry
+{
+	apr_hash_t* ch_paths;
+	svn_revnum_t rev;
+	const char* author; 
+	apr_time_t time;
+	const char* msg; 
+};
+
+
+class CRevisionEntry
+{
+public:
+	//methods
+	//members
+	stdstring		fullpath;
+	stdstring		filename;
+	LONG			revision;
+	stdstring		author;
+	stdstring		date;
+	stdstring		message;
+	BOOL			copied;
+	stdstring		pathto;
+	LONG			revisionto;
+	stdstring		pathfrom;
+	LONG			revisionfrom;
+};
+
+class CRevisionGraph : public SVNPrompt
+{
+public:
+	CRevisionGraph(void);
+	~CRevisionGraph(void);
+	BOOL						FetchRevisionData(CString path);
+	
+	CString						GetLastErrorMessage();
+	BOOL						m_bCancelled;
+	apr_array_header_t *		m_logdata;
+private:
+	BOOL						GetRepositoryRoot(CStringA& url);
+
+	svn_error_t *				Err;			///< Global error object struct
+	apr_pool_t *				parentpool;
+	apr_pool_t *				pool;			///< memory pool
+	static svn_error_t*			cancel(void *baton);
+	static svn_error_t*			logDataReceiver(void* baton, 
+												apr_hash_t* ch_paths, 
+												svn_revnum_t rev, 
+												const char* author, 
+												const char* date, 
+												const char* msg, 
+												apr_pool_t* pool);
+
+};
