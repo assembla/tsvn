@@ -15,7 +15,7 @@ Code/build changes
 ------------------
 * 2431 : Bug in the settings dialog where proxy settings got lost
          when using the browse button to set the SSH client.
-* 2439, 2440 : But in blame. When blame fails return immediately so the
+* 2439, 2440 : Bug in blame. When blame fails return immediately so the
          error baton isn't cleared by the next log call (which is
          unnecessary anyway).
 * 2444 : Fix small bug: the OK button was enabled in the commit dialog when 
@@ -26,8 +26,9 @@ Code/build changes
          was always deactivated in TortoiseMerge.
 * 2456 : Fix for showing wrong number of weeks in the stats page.
 * 2458 : Fix for wrong coloring of copied revisions in the log dialog.
+* 2464 : Fix for broken status cache on SUBST'ed drives.
 
 Language Files
 --------------
 Already merged:
-2442, 2450
+2442, 2450, 2469
