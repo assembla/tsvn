@@ -45,6 +45,8 @@ enum NodeShape
 #define NODE_SPACE_TOP			20
 #define NODE_SPACE_BOTTOM		30
 
+#define MAXFONTS				2
+
 class CRevisionGraphDlg : public CResizableDialog, public CRevisionGraph
 {
 	DECLARE_DYNAMIC(CRevisionGraphDlg)
@@ -66,6 +68,9 @@ protected:
 	DWORD			m_dwTicks;
 	CRect			m_ViewRect;
 	CPtrArray		m_arConnections;
+	LOGFONT			m_lfBaseFont;
+	CFont *			m_apFonts[MAXFONTS];
+
 	virtual void	DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	virtual BOOL	ProgressCallback(CString text, CString text2, DWORD done, DWORD total);
 	virtual BOOL	OnInitDialog();
@@ -81,9 +86,11 @@ private:
 	INT_PTR			GetIndexOfRevision(LONG rev);
 	void			SetScrollbars();
 	CRect *			GetViewSize();
+	CFont*			GetFont(BOOL bItalic = FALSE, BOOL bBold = FALSE);
+
 	void			DrawOctangle(CDC * pDC, const CRect& rect);
 	void			DrawNode(CDC * pDC, const CRect& rect,
-							COLORREF contour, 
+							COLORREF contour, CRevisionEntry *rentry,
 							NodeShape shape, bool isSel, int penStyle = PS_SOLID);
 	void			DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos);
 	void			BuildConnections();
