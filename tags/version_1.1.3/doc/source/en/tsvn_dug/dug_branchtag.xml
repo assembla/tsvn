@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="tsvn-DUG-branchtag">
+	<title>Branching / Tagging</title>
+	<indexterm>
+		<primary>branch</primary>
+	</indexterm>
+	<indexterm>
+		<primary>tag</primary>
+	</indexterm>
+	<indexterm>
+		<primary>copy</primary>
+	</indexterm>
+	<?dbhh topicname="HIDD_COPY"?>
+	<para>
+		One of the features of version control systems is the ability
+		to isolate changes onto a separate line of development.
+		This line is known as a <firstterm>branch</firstterm>.
+		Branches are usually used to try out new features without
+		disturbing the main branch of development with compiler
+		errors and bugs. As soon as the new feature of the branch
+		is stable enough then the branch is <firstterm>merged</firstterm>
+		back into the main branch (the trunk).
+	</para>
+	<para>
+		Another feature of version control systems is the ability
+		to mark particular revisions (e.g. a release version),
+		so you can at any time recreate a certain build or
+		environment. This process is known as <firstterm>tagging</firstterm>.
+	</para>
+	<para>
+		Subversion does not know a special command for branching
+		or tagging. Subversion uses so called <literal>cheap copies</literal>
+		instead. Cheap copies are something similar to links,
+		which means that no actual copy is made but just a link
+		to a specific file/revision is created.
+	</para>
+	<sect2 id="tsvn-DUG-branch-1">
+		<title>Creating a Branch or Tag</title>
+		<para>
+			Before you create a branch or tag from your working copy, you
+			must make sure it is updated to the same level as the repository.
+			Even if you know that no-one else has made any changes (maybe you
+			are the sole developer) it is still a good idea to update your
+			working copy. If you have previously committed changes in a sub-folder
+			the parent folder may not have been updated to the latest revision,
+			which can prevent a branch/tag operation from working. 
+		</para>
+		<para>
+			If you have imported your project with the recommended
+			directory structure creating a branch or tag version is very simple:
+			<figure id="tsvn-DUG-branchtag-dia-1">
+				<title>The Branch/Tag Dialog</title>
+				<graphic fileref="images/Copy.png"/>
+			</figure>
+			Select the parent folder of your working copy and select
+			the command
+			<menuchoice>
+				<guimenuitem>Branch/Tag...</guimenuitem>
+			</menuchoice>
+			from the context menu. Enter the URL to the repository path for
+			branches or tags into the dialog. So instead of
+			<filename>trunk</filename>
+			you would now use
+			<filename>tags/tagname</filename>
+			where
+			<filename>tagname</filename>
+			would be e.g.
+			<filename>ProjectName_v1.10</filename>.
+<screen>
+    C:/SVNRepository/trunk/ProjectName/...
+    C:/SVNRepository/trunk/AnotherProject/...
+    C:/SVNRepository/branches/ProjectName_SpecialDebugBuildBasedOn_v1.09/
+    C:/SVNRepository/tags/ProjectName_v1.10
+</screen>
+			If you press
+			<guibutton>OK</guibutton>
+			now, Subversion just creates a cheap copy of your selected Directory
+			<emphasis>inside the repository</emphasis>. Creating a Branch / Tag does 
+			<emphasis>not</emphasis> affect your working copy.
+		</para>
+		<para>
+			If you have uncommitted changes inside the working copy, TortoiseSVN will
+			commit these together with creating the Tag
+		</para>
+	</sect2>
+
+	<sect2 id="tsvn-DUG-switch-1">
+		<title>To Checkout or to Switch...</title>
+		<?dbhh topicname="HIDD_SWITCH"?>
+		<indexterm>
+			<primary>switch</primary>
+		</indexterm>
+		<para>
+			...that is (not really) the question. While a checkout checks
+			out everything from the desired branch into your working
+			directory, a 
+			<menuchoice>
+				<guimenuitem>Switch...</guimenuitem>
+			</menuchoice>
+			only transfers the changed data to your
+			working copy. Good for the network load, good for your patience. :-)
+		</para>
+		<para>
+			To be able to work with your freshly generated copy you
+			have several ways to handle it. You can:
+			<itemizedlist>
+				<listitem>
+					<para>
+						do a
+						<menuchoice>
+							<guimenuitem>Checkout</guimenuitem>
+						</menuchoice>
+						of it again. You can check it out to any location on your
+						local disk and you can create as many working copies
+						from your repository as you like.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Switch your current working copy to the
+						newly created copy in the repository. Again select the
+						parent folder of your project and select the command
+						<menuchoice>
+							<guimenuitem>Switch...</guimenuitem>
+						</menuchoice>
+						from the context menu.
+					</para>
+					<para>
+						In the next dialog yout enter the URL of the branch you just created.
+						Leave the Checkbox 
+						<guilabel>latest revision</guilabel>
+						active and click on
+						<guibutton>OK</guibutton>.
+						Your working copy is switched to the new branch / tag.
+					</para>
+					<para>
+						Switch works just like Update in that it never discards your
+						local changes. Any changes you have made to your working copy
+						which have not yet been committed will be merged when you
+						do the Switch. If you do not want this to happen then you
+						must either commit the changes before switching, or revert
+						your working copy to an already-committed revision (typically HEAD).
+					</para>
+				</listitem>
+			</itemizedlist>
+			<figure id="tsvn-DUG-switch-dia-1">
+				<title>The Switch Dialog</title>
+				<graphic fileref="images/Switch.png"/>
+			</figure>
+		</para>
+		<para>
+			Although Subversion itself makes no distinction between tags
+			and branches, the way they are typically used differs a bit.
+			<itemizedlist>
+				<listitem>
+					<para>
+						Tags are typically used to create a static snapshot of the
+						project at a particular stage. As such they not normally
+						used for development - that's what branches are for, which
+						is the reason we recommended the
+						<filename>/trunk /branches /tags</filename>
+						repository structure in the first place. Working on a tag
+						revision is <emphasis>not a good idea</emphasis>, but
+						because your local files are not write protected there is
+						nothing to stop you doing this by mistake.
+						However, if you try to commit to a path in the repository
+						which contains <filename>/tags/</filename>, TortoiseSVN will
+						warn you.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						It may be that you need to make further changes to a
+						release which you have already tagged. The correct way
+						to handle this is to create a new branch from the tag
+						first and commit the branch. Do your Changes on this
+						branch and then create a new tag from this new branch, e.g. 
+						<filename>Version_1.0.1</filename>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If you modify a working copy created from
+						a branch and commit, then all changes go to the new
+						branch and <emphasis>not</emphasis> the trunk.
+						Only the modifications are stored.
+						The rest remains a cheap copy.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</sect2>
+</sect1>
