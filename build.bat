@@ -13,6 +13,7 @@ set LIB=%~dp0ext\gettext\lib;%LIB%
 
 if "%1"=="" (
   SET _RELEASE=ON
+  SET _RELEASE_MBCS=ON
   SET _DEBUG=ON
   SET _DOCS=ON
   SET _SETUP=ON
@@ -23,12 +24,20 @@ if "%1"=="release" SET _RELEASE=ON
 if "%1"=="RELEASE" SET _RELEASE=ON
 if "%1"=="debug" SET _DEBUG=ON
 if "%1"=="DEBUG" SET _DEBUG=ON
+if "%1"=="release_mbcs" SET _RELEASE_MBCS=ON
+if "%1"=="RELEASE_MBCS" SET _RELEASE_MBCS=ON
 if "%1"=="doc" SET _DOCS=ON
 if "%1"=="DOC" SET _DOCS=ON
 if "%1"=="setup" SET _SETUP=ON
 if "%1"=="SETUP" SET _SETUP=ON
 shift
 if NOT "%1"=="" goto :getparam
+
+if DEFINED _RELEASE (
+  set _RELEASE_OR_RELEASE_MBCS=ON
+) else if DEFINED _RELEASE_MBCS (
+  set _RELEASE_OR_RELEASE_MBCS=ON
+)
 
 rem patch apr-iconv
 copy ext\apr-iconv_patch\lib\iconv_module.c ..\Subversion\apr-iconv\lib /Y
@@ -134,6 +143,20 @@ if DEFINED _RELEASE (
   copy ..\Subversion\apr-util\Release\libaprutil.dll bin\Release\bin /Y > NUL 
   copy ..\Subversion\apr-iconv\Release\libapriconv.dll bin\Release\bin /Y > NUL 
 )
+if DEFINED _RELEASE_MBCS (
+  if EXIST bin\release_mbcs\iconv rmdir /S /Q bin\release_mbcs\iconv > NUL
+  mkdir bin\release_mbcs\iconv > NUL
+  copy ..\Subversion\apr-iconv\Release\iconv\*.so bin\release_mbcs\iconv > NUL
+  if EXIST bin\release_mbcs\bin rmdir /S /Q bin\release_mbcs\bin > NUL
+  mkdir bin\release_mbcs\bin > NUL
+  copy ..\Common\openssl\out32dll\*.dll bin\release_mbcs\bin /Y > NUL
+  copy .\ext\gettext\bin\intl.dll bin\release_mbcs\bin /Y > NUL
+  copy ..\Subversion\db4-win32\bin\libdb42.dll bin\release_mbcs\bin /Y > NUL
+  copy ..\Subversion\apr\Release\libapr.dll bin\Release_MBCS\bin /Y > NUL 
+  copy ..\Subversion\apr-util\Release\libaprutil.dll bin\Release_MBCS\bin /Y > NUL 
+  copy ..\Subversion\apr-iconv\Release\libapriconv.dll bin\Release_MBCS\bin /Y > NUL 
+)
+
 echo ================================================================================
 echo building TortoiseSVN
 cd src
@@ -141,11 +164,12 @@ devenv TortoiseSVN.sln /rebuild release /project SubWCRev
 ..\bin\release\bin\SubWCRev.exe .. version.in version.h
 if DEFINED _RELEASE (
   devenv TortoiseSVN.sln /rebuild release
-  copy TortoiseSVNSetup\autolist.txt ..\bin\release\bin
+)
+if DEFINED _RELEASE_MBCS (
+  devenv TortoiseSVN.sln /rebuild release_mbcs
 )
 if DEFINED _DEBUG (
   devenv TortoiseSVN.sln /rebuild debug
-  copy TortoiseSVNSetup\autolist.txt ..\bin\debug\bin
 )
 
 echo ================================================================================
@@ -154,6 +178,7 @@ cd Utils\scintilla\win32
 nmake -f scintilla.mak
 copy ..\bin\SciLexer.dll ..\..\..\..\bin\debug\bin /Y > NUL
 copy ..\bin\SciLexer.dll ..\..\..\..\bin\release\bin /Y > NUL
+copy ..\bin\SciLexer.dll ..\..\..\..\bin\release_mbcs\bin /Y > NUL
 del ..\bin\*.dll > NUL
 del ..\bin\*.exp > NUL
 del ..\bin\*.lib > NUL
