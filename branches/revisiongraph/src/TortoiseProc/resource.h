@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by f:\Development\Svn\TortoiseGraphBranch\src\Resources\TortoiseProcENG.rc
+// Used by d:\Development\Subversion\TortoiseGraphBranch\src\Resources\TortoiseProcENG.rc
 //
 #define IDR_MANIFEST                    1
 #define IDR_MAINFRAME                   1
@@ -496,6 +496,7 @@
 #define IDS_REVGRAPH_PROGCHECKFORWARD   4306
 #define IDS_REVGRAPH_PROGCHECKFORWARDREV 4307
 #define IDS_REVGRAPH_BOXREVISIONTITLE   4320
+#define IDS_REVGRAPH_BOXTOOLTIP         4340
 
 // Next default values for new objects
 // 

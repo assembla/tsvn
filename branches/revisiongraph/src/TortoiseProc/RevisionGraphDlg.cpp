@@ -29,6 +29,7 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_bThreadRunning = FALSE;
 	m_lSelectedRev = -1;
+	m_pDlgTip = NULL;
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()
@@ -68,6 +69,8 @@ BEGIN_MESSAGE_MAP(CRevisionGraphDlg, CResizableDialog)
 	ON_WM_VSCROLL()
 	ON_WM_SIZE()
 	ON_WM_LBUTTONDOWN()
+	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTW, 0, 0xFFFF, OnToolTipNotify)
+	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTA, 0, 0xFFFF, OnToolTipNotify)
 END_MESSAGE_MAP()
 
 
@@ -77,6 +80,12 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 {
 	CResizableDialog::OnInitDialog();
 
+	m_pDlgTip = new CToolTipCtrl;
+	if(!m_pDlgTip->Create(this))
+	{
+		TRACE("Unable to add tooltip!\n");
+	}
+	EnableToolTips();
 	memset(&m_lfBaseFont, 0, sizeof(m_lfBaseFont));
 	m_lfBaseFont.lfHeight = 0;
 	m_lfBaseFont.lfWeight = FW_NORMAL;
@@ -754,4 +763,109 @@ void CRevisionGraphDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		}
 	}
 	__super::OnLButtonDown(nFlags, point);
+}
+
+int CRevisionGraphDlg::OnToolHitTest(CPoint point, TOOLINFO* pTI) const
+{
+	for (INT_PTR i=0; i<m_arNodeList.GetCount(); ++i)
+	{
+		if (m_arNodeList.GetAt(i).PtInRect(point))
+		{
+			pTI->hwnd = this->m_hWnd;
+			this->GetClientRect(&pTI->rect);
+			pTI->uFlags  |= TTF_ALWAYSTIP | TTF_IDISHWND;
+			pTI->uId = (UINT)m_hWnd;
+			pTI->lpszText = LPSTR_TEXTCALLBACK;
+			return 1;
+		}
+	}
+	return -1;
+}
+
+BOOL CRevisionGraphDlg::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pResult)
+{
+	// need to handle both ANSI and UNICODE versions of the message
+	TOOLTIPTEXTA* pTTTA = (TOOLTIPTEXTA*)pNMHDR;
+	TOOLTIPTEXTW* pTTTW = (TOOLTIPTEXTW*)pNMHDR;
+	CString strTipText;
+
+	CRevisionEntry * rentry = NULL;
+	POINT point;
+	GetCursorPos(&point);
+	ScreenToClient(&point);
+	if (pNMHDR->idFrom == (UINT)m_hWnd)
+	{
+		for (INT_PTR i=0; i<m_arNodeList.GetCount(); ++i)
+		{
+			if (m_arNodeList.GetAt(i).PtInRect(point))
+			{
+				rentry = (CRevisionEntry*)m_arEntryPtrs.GetAt(GetIndexOfRevision(m_arNodeRevList.GetAt(i)));
+			}
+		}
+		if (rentry)
+		{
+			TCHAR date[200];
+			SVN::formatDate(date, rentry->date);
+			strTipText.Format(IDS_REVGRAPH_BOXTOOLTIP, 
+							CUnicodeUtils::GetUnicode(rentry->author), 
+							date,
+							CUnicodeUtils::GetUnicode(rentry->message));
+		}
+	}
+	else
+		return FALSE;
+
+	*pResult = 0;
+	if (strTipText.IsEmpty())
+		return TRUE;
+		
+	if (strTipText.GetLength() >= MAX_TT_LENGTH)
+		strTipText = strTipText.Left(MAX_TT_LENGTH);
+
+	if (pNMHDR->code == TTN_NEEDTEXTA)
+	{
+		::SendMessage(pNMHDR->hwndFrom, TTM_SETMAXTIPWIDTH, 0, 600);
+#ifdef UNICODE
+		pTTTA->lpszText = m_szTip;
+		WideCharToMultiByte(CP_ACP, 0, strTipText, -1, m_szTip, strTipText.GetLength()+1, 0, 0);
+#else
+		lstrcpyn(m_szTip, strTipText, strTipText.GetLength()+1);
+		pTTTA->lpszText = m_szTip;
+#endif
+	} // if (pNMHDR->code == TTN_NEEDTEXTA)
+	else
+	{
+		::SendMessage(pNMHDR->hwndFrom, TTM_SETMAXTIPWIDTH, 0, 600);
+#ifdef UNICODE
+		lstrcpyn(m_wszTip, strTipText, strTipText.GetLength()+1);
+		pTTTW->lpszText = m_wszTip;
+#else
+		pTTTW->lpszText = m_wszTip;
+		::MultiByteToWideChar( CP_ACP , 0, strTipText, -1, m_wszTip, strTipText.GetLength()+1 );
+#endif
+	}
+
+	return TRUE;    // message was handled
+}
+
+BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
+{
+	if (::IsWindow(m_pDlgTip->m_hWnd) && pMsg->hwnd == m_hWnd)
+	{
+		switch(pMsg->message)
+		{
+		case WM_LBUTTONDOWN: 
+		case WM_MOUSEMOVE:
+		case WM_LBUTTONUP: 
+		case WM_RBUTTONDOWN:
+		case WM_MBUTTONDOWN: 
+		case WM_RBUTTONUP:
+		case WM_MBUTTONUP:
+			// This will reactivate the tooltip
+			m_pDlgTip->Activate(TRUE);
+			m_pDlgTip->RelayEvent(pMsg);
+			break;
+		}
+	}
+	return __super::PreTranslateMessage(pMsg);
 }
