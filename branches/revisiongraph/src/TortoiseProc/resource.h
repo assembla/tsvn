@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by f:\Development\Svn\TortoiseSVN\src\Resources\TortoiseProcENG.rc
+// Used by f:\Development\Svn\TortoiseGraphBranch\src\Resources\TortoiseProcENG.rc
 //
 #define IDR_MANIFEST                    1
 #define IDR_MAINFRAME                   1
@@ -46,6 +46,7 @@
 #define IDD_REPOCREATE                  178
 #define IDD_STATGRAPH                   179
 #define IDD_PATCH_FILE_OPEN_CUSTOM      180
+#define IDD_REVISIONGRAPH               182
 #define IDS_CHSTAT_FILECOL              1000
 #define IDS_CHSTAT_WCCOL                1001
 #define IDS_CHSTAT_REPOCOL              1002
@@ -486,14 +487,22 @@
 #define IDS_SVNACTION_SKIPMISSING       4200
 #define IDS_SVNACTION_ADDING            4201
 #define IDS_SVNACTION_DELETING          4202
+#define IDS_REVGRAPH_PROGTITLE          4300
+#define IDS_REVGRAPH_PROGGETREVS        4301
+#define IDS_REVGRAPH_PROGCURRENTREV     4302
+#define IDS_REVGRAPH_PROGANALYZE        4303
+#define IDS_REVGRAPH_PROGANALYZEREV     4304
+#define IDS_REVGRAPH_PROGCANCEL         4305
+#define IDS_REVGRAPH_PROGCHECKFORWARD   4306
+#define IDS_REVGRAPH_PROGCHECKFORWARDREV 4307
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        182
+#define _APS_NEXT_RESOURCE_VALUE        183
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1168
+#define _APS_NEXT_CONTROL_VALUE         1169
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
