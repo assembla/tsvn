@@ -74,6 +74,7 @@ public:
 	const char *	pathfrom;
 	LONG			revisionfrom;
 	char			action;
+	int				level;
 };
 
 class CRevisionGraph : public SVNPrompt
