@@ -140,74 +140,7 @@ DWORD WINAPI WorkerThread(LPVOID pVoid)
 	//pDlg->FetchRevisionData(pDlg->m_sPath);
 	//pDlg->AnalyzeRevisionData(pDlg->m_sPath);
 	//pDlg->m_Progress.Stop();
-	CRevisionEntry * e = new CRevisionEntry();
-	e->level = 1;
-	e->revision = 1;
-	e->url = "/trunk";
-	e->author = "kueng";
-	e->message = "something";
-	pDlg->m_arEntryPtrs.Add(e);
-
-	e = new CRevisionEntry();
-	e->level = 1;
-	e->revision = 10;
-	e->url = "/trunk";
-	e->author = "kueng";
-	e->message = "something else";
-	source_entry * se = new source_entry;
-	se->pathto = "branches/testing";
-	se->revisionto = 11;
-	e->sourcearray.Add(se);
-	pDlg->m_arEntryPtrs.Add(e);
-
-	e = new CRevisionEntry();
-	e->level = 2;
-	e->revision = 11;
-	e->url = "/branches/testing";
-	e->author = "kueng";
-	e->message = "something else";
-	e->pathfrom = "/trunk";
-	e->revisionfrom = 10;
-	se = new source_entry;
-	se->pathto = "/branches/testingrenamed";
-	se->revisionto = 15;
-	e->sourcearray.Add(se);
-	pDlg->m_arEntryPtrs.Add(e);
-
-	e = new CRevisionEntry();
-	e->level = 1;
-	e->revision = 15;
-	e->url = "/branches/testing/andevenmore/testing/to/get/a/very/long/url";
-	e->author = "kueng";
-	e->message = "something on a branch";
-	e->pathfrom = "/branches/testing";
-	e->revisionfrom = 11;
-	se = new source_entry;
-	se->pathto = "/tags/version1";
-	se->revisionto = 16;
-	e->sourcearray.Add(se);
-	se = new source_entry;
-	se->pathto = "/tags/version2";
-	se->revisionto = 20;
-	e->sourcearray.Add(se);
-	pDlg->m_arEntryPtrs.Add(e);
-
-	e = new CRevisionEntry();
-	e->level = 2;
-	e->revision = 16;
-	e->url = "/tags/version1";
-	e->author = "kueng";
-	e->message = "tagged";
-	pDlg->m_arEntryPtrs.Add(e);
-
-	e = new CRevisionEntry();
-	e->level = 2;
-	e->revision = 20;
-	e->url = "/tags/version2";
-	e->author = "kueng";
-	e->message = "tagged2";
-	pDlg->m_arEntryPtrs.Add(e);
-
+	pDlg->FillTestData();
 	pDlg->InitView();
 	pDlg->m_bThreadRunning = FALSE;
 	pDlg->Invalidate();
@@ -868,4 +801,75 @@ BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
 		}
 	}
 	return __super::PreTranslateMessage(pMsg);
+}
+
+void CRevisionGraphDlg::FillTestData()
+{
+	CRevisionEntry * e = new CRevisionEntry();
+	e->level = 1;
+	e->revision = 1;
+	e->url = "/trunk";
+	e->author = "kueng";
+	e->message = "something";
+	m_arEntryPtrs.Add(e);
+
+	e = new CRevisionEntry();
+	e->level = 1;
+	e->revision = 10;
+	e->url = "/trunk";
+	e->author = "kueng";
+	e->message = "something else";
+	source_entry * se = new source_entry;
+	se->pathto = "branches/testing";
+	se->revisionto = 11;
+	e->sourcearray.Add(se);
+	m_arEntryPtrs.Add(e);
+
+	e = new CRevisionEntry();
+	e->level = 2;
+	e->revision = 11;
+	e->url = "/branches/testing";
+	e->author = "kueng";
+	e->message = "something else";
+	e->pathfrom = "/trunk";
+	e->revisionfrom = 10;
+	se = new source_entry;
+	se->pathto = "/branches/testingrenamed";
+	se->revisionto = 15;
+	e->sourcearray.Add(se);
+	m_arEntryPtrs.Add(e);
+
+	e = new CRevisionEntry();
+	e->level = 1;
+	e->revision = 15;
+	e->url = "/branches/testing/andevenmore/testing/to/get/a/very/long/url";
+	e->author = "kueng";
+	e->message = "something on a branch";
+	e->pathfrom = "/branches/testing";
+	e->revisionfrom = 11;
+	se = new source_entry;
+	se->pathto = "/tags/version1";
+	se->revisionto = 16;
+	e->sourcearray.Add(se);
+	se = new source_entry;
+	se->pathto = "/tags/version2";
+	se->revisionto = 20;
+	e->sourcearray.Add(se);
+	m_arEntryPtrs.Add(e);
+
+	e = new CRevisionEntry();
+	e->level = 2;
+	e->revision = 16;
+	e->url = "/tags/version1";
+	e->author = "kueng";
+	e->message = "tagged";
+	m_arEntryPtrs.Add(e);
+
+	e = new CRevisionEntry();
+	e->level = 2;
+	e->revision = 20;
+	e->url = "/tags/version2";
+	e->author = "kueng";
+	e->message = "tagged2";
+	m_arEntryPtrs.Add(e);
 }
