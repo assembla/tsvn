@@ -119,7 +119,7 @@ CString CBlame::BlameToTempFile(const CTSVNPath& path, SVNRev startrev, SVNRev e
 		DeleteFile(m_sSavePath);
 		m_sSavePath.Empty();
 	}
-	if (!extBlame)
+	else if (!extBlame)
 	{
 		m_progressDlg.FormatNonPathLine(2, IDS_BLAME_PROGRESSLOGSTART);
 		m_progressDlg.SetProgress(0, m_highestrev);
