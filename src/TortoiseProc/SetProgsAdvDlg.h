@@ -64,7 +64,7 @@ protected:
 private:
 	CBalloon	m_tooltips;				///< needed to display tooltips
 	CString		m_sType;				///< tool type ("Diff" or "Merge")
-	CRegKey		m_regToolKey;			///< registry key where the tools are stored
+	CTSVNRegKey	m_regToolKey;			///< registry key where the tools are stored
 	CListCtrl	m_ToolListCtrl;			///< list control used for viewing and editing
 	CRegDWORD	m_regDontConvertBase;	///< registry value for the "Don't Convert" flag
 	BOOL		m_bDontConvertBase;		///< don't convert files when diffing agains BASE

@@ -57,6 +57,12 @@
 #include <afxdlgs.h>
 #include <afxctl.h>
 #include <afxtempl.h>
+
+#define _ATL_NO_AUTOMATIC_NAMESPACE 1
+#include <atlsync.h>
+
+#include <atlsync.h>
+
 #include <afxmt.h>
 
 #ifndef UNICODE

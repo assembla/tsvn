@@ -310,9 +310,9 @@ void CShellExt::GetColumnStatus(const TCHAR * path, BOOL bIsDir)
 	else
 	{
 		status = g_CachedStatus.GetFullStatus(path, bIsDir, TRUE);
+		filestatus = status->status;
 	}
-	filestatus = status->status;
-
+	
 #ifdef UNICODE
 	columnauthor = UTF8ToWide(status->author);
 #else

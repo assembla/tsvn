@@ -71,7 +71,7 @@ private:
 
 private:
 	// A critical section to protect data shared with our timer thread
-	CCriticalSection m_critSec;
+	::CCriticalSection m_critSec;
 	// The list of paths which will need updating
 	CTSVNPathList m_pathsForUpdating;
 	// The time at which we'll force an update, if we're not flushed first
@@ -81,5 +81,5 @@ private:
 	// A handle to our worker thread
 	HANDLE			m_hThread;
 	// A termination event - when set, the worker thread will terminate
-	CEvent			m_terminationEvent;
+	::CEvent		m_terminationEvent;
 };

@@ -34,7 +34,9 @@ CShellExt::CShellExt(FileState state)
     m_State = state;
 
     m_cRef = 0L;
-    g_cRefThisDll++;
+	g_cRefThisDll++;
+
+	ATLTRACE("CShellExt CTOR on thread %d\n", GetCurrentThreadId());
 
 	
     INITCOMMONCONTROLSEX used = {
