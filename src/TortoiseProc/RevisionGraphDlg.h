@@ -46,6 +46,7 @@ enum NodeShape
 #define NODE_SPACE_BOTTOM		30
 
 #define MAXFONTS				2
+#define	MAX_TT_LENGTH			10000
 
 class CRevisionGraphDlg : public CResizableDialog, public CRevisionGraph
 {
@@ -73,6 +74,9 @@ protected:
 	LONG			m_lSelectedRev;
 	LOGFONT			m_lfBaseFont;
 	CFont *			m_apFonts[MAXFONTS];
+	CToolTipCtrl *	m_pDlgTip;
+	char			m_szTip[MAX_TT_LENGTH+1];
+	wchar_t			m_wszTip[MAX_TT_LENGTH+1];
 
 	virtual void	DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	virtual BOOL	ProgressCallback(CString text, CString text2, DWORD done, DWORD total);
@@ -83,6 +87,8 @@ protected:
 	afx_msg void	OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void	OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void	OnSize(UINT nType, int cx, int cy);
+	afx_msg int		OnToolHitTest(CPoint point, TOOLINFO* pTI) const;
+	BOOL			OnToolTipNotify(UINT id, NMHDR *pNMHDR, LRESULT *pResult);
 
 	DECLARE_MESSAGE_MAP()
 private:
@@ -100,5 +106,6 @@ private:
 	void			DrawConnections(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos);
 public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 };
 DWORD WINAPI WorkerThread(LPVOID pVoid);
