@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2004 - Tim Kemp and Stefan Kueng
+// Copyright (C) 2003-2004 - Stefan Kueng
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -70,7 +70,12 @@ CRevisionGraph::~CRevisionGraph(void)
 	svn_pool_destroy (parentpool);
 	for (int i=0; i<m_arEntryPtrs.GetCount(); ++i)
 	{
-		delete (CRevisionEntry*)m_arEntryPtrs.GetAt(i);
+		CRevisionEntry * e = (CRevisionEntry*)m_arEntryPtrs.GetAt(i);
+		for (int j=0; j<e->sourcearray.GetCount(); ++j)
+		{
+			delete (source_entry*)e->sourcearray.GetAt(j);
+		}
+		delete e;
 	}
 }
 
@@ -359,8 +364,23 @@ BOOL CRevisionGraph::CheckForwardCopies()
 				CRevisionEntry * e = (CRevisionEntry*)m_arEntryPtrs.GetAt(j);
 				if (e->revision == logentry->revisionfrom)
 				{
-					e->revisionto = logentry->revision;
-					e->pathto = logentry->url;
+					BOOL there = FALSE;
+					for (INT_PTR k=0; k<logentry->sourcearray.GetCount();++k)
+					{
+						source_entry * sentry = (source_entry*)logentry->sourcearray.GetAt(k);
+						if (strcmp(sentry->pathto, logentry->url)==0)
+						{
+							there = TRUE;
+							break;
+						}
+					}
+					if (!there)
+					{
+						source_entry * sentry = new source_entry;
+						sentry->pathto = logentry->url;
+						sentry->revisionto = logentry->revision;
+						logentry->sourcearray.Add(sentry);
+					}
 					found = TRUE;
 					break;
 				}
@@ -385,12 +405,26 @@ BOOL CRevisionGraph::CheckForwardCopies()
 						reventry->pathfrom = val->copyfrom_path;
 						reventry->revisionfrom = val->copyfrom_rev;
 					}
+					source_entry * sentry = new source_entry;
+					sentry->pathto = logentry->url;
+					sentry->revisionto = logentry->revision;
+					reventry->sourcearray.Add(sentry);
+
 					m_arEntryPtrs.Add(reventry);
 				}
 			}
 		}
 	}
+	//now sort the array by revisions
+	qsort(m_arEntryPtrs.GetData(), m_arEntryPtrs.GetSize(), sizeof(CRevisionEntry *), (GENERICCOMPAREFN)SortCompare);
 	return TRUE;
+}
+
+int CRevisionGraph::SortCompare(const void * pElem1, const void * pElem2)
+{
+	CRevisionEntry * entry1 = *((CRevisionEntry**)pElem1);
+	CRevisionEntry * entry2 = *((CRevisionEntry**)pElem2);
+	return (entry1->revision - entry2->revision);
 }
 
 BOOL CRevisionGraph::IsParentOrItself(const char * parent, const char * child)
