@@ -17,6 +17,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "stdafx.h"
 #include "TortoiseProc.h"
+#include "MemDC.h"
 #include ".\revisiongraphdlg.h"
 
 // CRevisionGraphDlg dialog
@@ -269,11 +270,8 @@ CFont* CRevisionGraphDlg::GetFont(BOOL bItalic /*= FALSE*/, BOOL bBold /*= FALSE
 	return m_apFonts[nIndex];
 }
 
-BOOL CRevisionGraphDlg::OnEraseBkgnd(CDC* pDC)
+BOOL CRevisionGraphDlg::OnEraseBkgnd(CDC* /*pDC*/)
 {
-	CRect rect;
-	GetClientRect(&rect);
-	pDC->FillSolidRect(rect, RGB(255,255,255));		// white background
 	return TRUE;
 }
 
@@ -303,7 +301,6 @@ void CRevisionGraphDlg::OnPaint()
 			CResizableDialog::OnPaint();
 			return;
 		}
-		dc.SetBkMode(TRANSPARENT);
 		GetViewSize();
 		DrawGraph(&dc, rect, GetScrollPos(SB_VERT), GetScrollPos(SB_HORZ));
 	}
@@ -456,6 +453,10 @@ void CRevisionGraphDlg::DrawNode(CDC * pDC, const CRect& rect,
 
 void CRevisionGraphDlg::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos)
 {
+	CMemDC memDC(pDC);
+	memDC.FillSolidRect(rect, RGB(255,255,255));		// white background
+	memDC.SetBkMode(TRANSPARENT);
+
 	INT_PTR i = 0;
 	while (i*(NODE_RECT_HEIGTH+NODE_SPACE_TOP+NODE_SPACE_BOTTOM) <= nVScrollPos)
 		i++;
@@ -476,11 +477,12 @@ void CRevisionGraphDlg::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		noderect.bottom = noderect.top + NODE_RECT_HEIGTH;
 		noderect.left = (entry->level - 1)*(NODE_RECT_WIDTH+NODE_SPACE_LEFT+NODE_SPACE_RIGHT) + NODE_SPACE_LEFT - nHScrollPos;
 		noderect.right = noderect.left + NODE_RECT_WIDTH;
-		DrawNode(pDC, noderect, RGB(0,0,0), entry, TSVNOctangle, m_lSelectedRev==entry->revision);
+		DrawNode(&memDC, noderect, RGB(0,0,0), entry, TSVNOctangle, m_lSelectedRev==entry->revision);
 		m_arNodeList.Add(noderect);
 		m_arNodeRevList.Add(entry->revision);
 	}
-	DrawConnections(pDC, rect, nVScrollPos, nHScrollPos);
+	DrawConnections(&memDC, rect, nVScrollPos, nHScrollPos);
+
 }
 
 void CRevisionGraphDlg::BuildConnections()
