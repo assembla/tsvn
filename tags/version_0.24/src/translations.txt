@@ -1,0 +1,53 @@
+Translations
+------------
+
+TortoiseSVN is still in development so
+translations of all resources is also
+a work 'in progress'.
+
+To implement a new language for TortoiseSVN
+follow these steps:
+
+Get the resource dll for translating, usually
+located under 
+http://svn.collab.net/repos/tortoisesvn/branches/release-0.xx/src/Languages/
+while "xx" means the version number of the release.
+if it's not there, then it's located here:
+http://tortoisesvn.tigris.org/servlets/ProjectDocumentList?folderID=616
+The dll is called "TortoiseLang.dll".
+
+To translate the dll you can use the program
+SmartTranslator. You can get it from
+http://www.codeproject.com/tools/smarttranslator.asp
+
+Start this program and set up the paths. Don't forget
+to add the *.dic to the dictionary path (it'll get created
+for you). Then you _must_ set "english" as the target
+language - that's a small issue with the program (it doesn't
+move the version information to the target language).
+Then start translating all strings and dialogs. You can
+preview the dialogs by right clicking on the tree view
+and select the entry in the context menu.
+If you find that your translation doesn't fit at all
+in a dialog please drop me a note.
+
+And don't forget to add all your translated strings
+to the dictionary! You have to do that manually
+before pressing ok in the translation dialog!!!
+If you don't do that then you'll have to translate
+the same strings all over again in the next release.
+
+As soon as you're finished translating you can
+"build target" and create your own language dll.
+Please rename that dll to
+TortoiseProcXXXX.dll
+where XXXX is the _decimal_ value of your language
+ID - you can find the language ID's here:
+http://msdn.microsoft.com/library/default.asp?url=/library/en-us/intl/nls_238z.asp
+Also note that the resulting dll is called
+Tortoise'Proc', not Tortoise'Lang'.
+
+Example:
+English(US) is 0x409 --> 1033 as decimal value.
+
+The last step: send me the dll AND the dictionary file
