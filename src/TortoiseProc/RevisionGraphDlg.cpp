@@ -24,6 +24,7 @@
 #include "SVN.h"
 #include "Utils.h"
 #include "UnicodeUtils.h"
+#include ".\revisiongraphdlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -57,6 +58,7 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 		m_apFonts[i] = NULL;
 	}
 	m_nZoomFactor = 10;
+	m_hAccel = 0;
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()
@@ -127,6 +129,8 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	m_Progress.SetCancelMsg(IDS_REVGRAPH_PROGCANCEL);
 	m_Progress.SetTime();
 
+	m_hAccel = LoadAccelerators(AfxGetResourceHandle(),MAKEINTRESOURCE(IDR_ACC_REVISIONGRAPH));
+	
 	m_dwTicks = GetTickCount();
 	if (AfxBeginThread(WorkerThread, this)==NULL)
 	{
@@ -368,19 +372,22 @@ void CRevisionGraphDlg::DrawNode(CDC * pDC, const CRect& rect,
 		pOldFont = pDC->SelectObject(GetFont(FALSE, TRUE));
 		CString temp;
 		CRect r;
+		CRect textrect = rect;
+		textrect.left += 4;
+		textrect.right -= 4;
 		TEXTMETRIC textMetric;
 		pDC->GetTextMetrics(&textMetric);
 		temp.Format(IDS_REVGRAPH_BOXREVISIONTITLE, rentry->revision);
 		pDC->DrawText(temp, &r, DT_CALCRECT);
-		pDC->ExtTextOut(rect.left + ((rect.Width()-r.Width())/2), rect.top + m_node_rect_heigth/4, ETO_CLIPPED, NULL, temp, NULL);
+		pDC->ExtTextOut(textrect.left + ((rect.Width()-r.Width())/2), textrect.top + m_node_rect_heigth/4, ETO_CLIPPED, NULL, temp, NULL);
 		pDC->SelectObject(GetFont(TRUE));
 		temp = CUnicodeUtils::GetUnicode(rentry->url);
-		r = rect;
+		r = textrect;
 		temp.Replace('/','\\');
 		pDC->DrawText(temp.GetBuffer(temp.GetLength()), temp.GetLength(), &r, DT_CALCRECT | DT_PATH_ELLIPSIS | DT_MODIFYSTRING);
 		temp.ReleaseBuffer();
 		temp.Replace('\\','/');
-		pDC->ExtTextOut(rect.left + ((rect.Width()-r.Width())/2), rect.top + m_node_rect_heigth/4 + m_node_rect_heigth/3, ETO_CLIPPED, &rect, temp, NULL);
+		pDC->ExtTextOut(textrect.left + 2 + ((textrect.Width()-4-r.Width())/2), textrect.top + m_node_rect_heigth/4 + m_node_rect_heigth/3, ETO_CLIPPED, &textrect, temp, NULL);
 		// Cleanup
 		if (pOldFont != 0L)
 		{
@@ -961,6 +968,10 @@ BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
 			break;
 		}
 	}
+	if ((m_hAccel)&&(pMsg->message >= WM_KEYFIRST && pMsg->message <= WM_KEYLAST))
+	{
+		return TranslateAccelerator(m_hWnd,m_hAccel,pMsg);
+	}
 	return __super::PreTranslateMessage(pMsg);
 }
 
@@ -1327,5 +1338,6 @@ void CRevisionGraphDlg::FillTestData()
 	m_arEntryPtrs.Add(e);
 }
 #endif //DEBUG
+
 
 

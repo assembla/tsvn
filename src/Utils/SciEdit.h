@@ -101,6 +101,9 @@ public:
 	 * Returns the word located under the cursor.
 	 */
 	CString		GetWordUnderCursor(bool bSelectWord = false);
+	
+	CStringA	StringForControl(const CString& text);
+	CString		StringFromControl(const CStringA& text);
 private:
 	HMODULE		m_hModule;
 	LRESULT		m_DirectFunction;
@@ -114,7 +117,7 @@ protected:
 	void		CheckSpelling(void);
 	void		SuggestSpellingAlternatives(void);
 	void		DoAutoCompletion(void);
-public:
-	DECLARE_MESSAGE_MAP()
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
+	DECLARE_MESSAGE_MAP()
 };

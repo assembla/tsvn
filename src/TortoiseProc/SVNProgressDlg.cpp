@@ -164,9 +164,9 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, svn_wc_notify_action_t actio
 			data->bAuxItem = true;
 
 			if (!m_ExtStack.IsEmpty())
-				data->sActionColumnText.Format(IDS_PROGRS_PATHATREV, (LPCTSTR)m_ExtStack.RemoveHead(), rev);
+				data->sPathColumnText.Format(IDS_PROGRS_PATHATREV, (LPCTSTR)m_ExtStack.RemoveHead(), rev);
 			else
-				data->sActionColumnText.Format(IDS_PROGRS_ATREV, rev);
+				data->sPathColumnText.Format(IDS_PROGRS_ATREV, rev);
 
 			if ((m_bConflictsOccurred)&&(m_ExtStack.IsEmpty()))
 			{
@@ -193,9 +193,12 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, svn_wc_notify_action_t actio
 		break;
 	} // switch (action)
 
-	if(!data->bAuxItem)
+	if (data->sActionColumnText.IsEmpty())
 	{
 		data->sActionColumnText = SVN::GetActionText(action, content_state, prop_state);
+	}
+	if(!data->bAuxItem)
+	{
 		data->sPathColumnText = path.GetUIPathString();
 	}
 
@@ -233,7 +236,7 @@ CString CSVNProgressDlg::BuildInfoString()
 		{
 		case svn_wc_notify_add:
 		case svn_wc_notify_update_add:
-//BUGBUG -  Should svn_wc_notify_commit_added be here too?
+		case svn_wc_notify_commit_added:
 			added++;
 			break;
 		case svn_wc_notify_copy:
@@ -267,14 +270,14 @@ CString CSVNProgressDlg::BuildInfoString()
 	}
 	if (conflicted)
 	{
-		temp.LoadString(IDS_STATUSCONFLICTED);
+		temp.LoadString(IDS_SVNACTION_CONFLICTED);
 		infotext += temp;
 		temp.Format(_T(":%d "), conflicted);
 		infotext += temp;
 	}
 	if (merged)
 	{
-		temp.LoadString(IDS_STATUSMERGED);
+		temp.LoadString(IDS_SVNACTION_MERGED);
 		infotext += temp;
 		infotext.AppendFormat(_T(":%d "), merged);
 	}
@@ -329,21 +332,12 @@ CString CSVNProgressDlg::BuildInfoString()
 	return infotext;
 }
 
-void CSVNProgressDlg::SetParams(Command cmd, int options, const CString& path, const CString& url /* = "" */, const CString& message /* = "" */, SVNRev revision /* = -1 */)
+void CSVNProgressDlg::SetParams(Command cmd, int options, const CTSVNPathList& pathList, const CString& url /* = "" */, const CString& message /* = "" */, SVNRev revision /* = -1 */)
 {
 	m_Command = cmd;
 	m_options = options;
 
-	if(m_options & ProgOptPathIsTempFile)
-	{
-		m_targetPathList.LoadFromTemporaryFile(path);
-		::DeleteFile(path);
-	}
-	else
-	{
-		m_targetPathList.Clear();
-		m_targetPathList.AddPath(CTSVNPath(path));
-	}
+	m_targetPathList = pathList;
 
 	//WGD - I'm removing this for the moment, because it can actually happen.
 	// For example, do an Add, then select all the items in the list box, right-click and choose 'Add'.
@@ -577,9 +571,12 @@ UINT CSVNProgressDlg::ProgressThread()
 							bURLFetched = TRUE;
 						CString urllower = url;
 						urllower.MakeLower();
-	//BUGBUG? - Is this /tags/ test really legitimate?  Who's to say that 
-	//all 'tags' have the word /tag/ in their URL?  
-	//Or have I misunderstood this?
+						// test if the commit goes to a tag.
+						// now since Subversion doesn't force users to
+						// create tags in the recommended /tags/ folder
+						// only a warning is shown. This won't work if the tags
+						// are stored in a non-recommended place, but the check
+						// still helps those who do.
 						if (urllower.Find(_T("/tags/"))>=0)
 							isTag = TRUE;
 						break;

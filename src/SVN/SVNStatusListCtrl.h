@@ -20,6 +20,7 @@
 
 #include "TSVNPath.h"
 #include "SVNRev.h"
+#include "SVNStatusCache.h"
 
 class SVNConfig;
 class SVNStatus;
@@ -135,7 +136,7 @@ public:
 		bool					inunversionedfolder;	///< if the file is inside an unversioned folder
 		bool					inexternal;				///< if the item is in an external folder
 		bool					direct;					///< directly included (TRUE) or just a child of a folder
-		bool					isfolder;				///< TRUE if entry refers to a folder
+//		bool					isfolder;				///< TRUE if entry refers to a folder
 
 		friend class CSVNStatusListCtrl;
 	};
@@ -155,7 +156,7 @@ public:
 	 * \param bUpdate TRUE if the remote status is requested too.
 	 * \return TRUE on success.
 	 */
-	BOOL GetStatus(CString sFilePath, bool bUpdate = false);
+	BOOL GetStatus(const CTSVNPathList& pathList, bool bUpdate = false);
 
 	/**
 	 * Populates the list control with the previously (with GetStatus) gathered status information.
@@ -214,9 +215,10 @@ public:
 	 */
 	void SetEntryCheck(FileEntry* pEntry, int listboxIndex, bool bCheck);
 
-	/** Write a list of the checked items' paths into a temporary file
+	/** Write a list of the checked items' paths into a path list 
 	 */
-	bool WriteCheckedNamesToFile(const CString& sFilename);
+	void WriteCheckedNamesToPathList(CTSVNPathList& pathList);
+
 
 public:
 	CString GetLastErrorMessage() {return m_sLastError;}
@@ -279,6 +281,9 @@ private:
 	///< Build a path list of all the selected items in the list (NOTE - SELECTED, not CHECKED)
 	void FillListOfSelectedItemPaths(CTSVNPathList& pathList);
 
+
+	void AddItemToStatusArray(const CTSVNPath& path, const CTSVNPath& basePath);
+
 	afx_msg void OnHdnItemclick(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnItemchanged(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
@@ -316,5 +321,7 @@ private:
 
 	CWnd *						m_pStatLabel;
 	CButton *					m_pSelectButton;
+
+	CSVNStatusCache				m_statusCache;
 
 };
