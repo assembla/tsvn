@@ -68,6 +68,9 @@ protected:
 	DWORD			m_dwTicks;
 	CRect			m_ViewRect;
 	CPtrArray		m_arConnections;
+	CArray<CRect, CRect> m_arNodeList;
+	CDWordArray		m_arNodeRevList;
+	LONG			m_lSelectedRev;
 	LOGFONT			m_lfBaseFont;
 	CFont *			m_apFonts[MAXFONTS];
 
@@ -91,9 +94,11 @@ private:
 	void			DrawOctangle(CDC * pDC, const CRect& rect);
 	void			DrawNode(CDC * pDC, const CRect& rect,
 							COLORREF contour, CRevisionEntry *rentry,
-							NodeShape shape, bool isSel, int penStyle = PS_SOLID);
+							NodeShape shape, BOOL isSel, int penStyle = PS_SOLID);
 	void			DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos);
 	void			BuildConnections();
 	void			DrawConnections(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos);
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };
 DWORD WINAPI WorkerThread(LPVOID pVoid);
