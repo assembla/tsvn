@@ -252,15 +252,12 @@ BOOL CSetProgsPage::OnInitDialog()
 
 	m_sDiffPath = m_regDiffPath;
 	m_iExtDiff = IsExternal(m_sDiffPath);
-	m_sDiffPath.TrimLeft(_T('#'));
 
 	m_sDiffViewerPath = m_regDiffViewerPath;
 	m_iDiffViewer = IsExternal(m_sDiffViewerPath);
-	m_sDiffViewerPath.TrimLeft(_T('#'));
 
 	m_sMergePath = m_regMergePath;
 	m_iExtMerge = IsExternal(m_sMergePath);
-	m_sMergePath.TrimLeft(_T('#'));
 
 	SHAutoComplete(::GetDlgItem(m_hWnd, IDC_EXTDIFF), SHACF_FILESYSTEM | SHACF_FILESYS_ONLY);
 	SHAutoComplete(::GetDlgItem(m_hWnd, IDC_DIFFVIEWER), SHACF_FILESYSTEM | SHACF_FILESYS_ONLY);

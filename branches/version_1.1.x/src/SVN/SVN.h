@@ -67,9 +67,17 @@ public:
 	SVN(void);
 	~SVN(void);
 
+	struct LogChangedPath
+	{
+		CString sPath;
+		CString sCopyFromPath;
+		LONG	lCopyFromRev;
+		CString sAction;
+	} ;
+	typedef CArray<LogChangedPath*, LogChangedPath*> LogChangedPathArray;
 	virtual BOOL Cancel();
 	virtual BOOL Notify(const CTSVNPath& path, svn_wc_notify_action_t action, svn_node_kind_t kind, const CString& myme_type, svn_wc_notify_state_t content_state, svn_wc_notify_state_t prop_state, LONG rev);
-	virtual BOOL Log(LONG rev, const CString& author, const CString& date, const CString& message, const CString& cpaths, apr_time_t time, int filechanges, BOOL copies);
+	virtual BOOL Log(LONG rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies);
 	virtual BOOL BlameCallback(LONG linenumber, LONG revision, const CString& author, const CString& date, const CStringA& line);
 
 	/**
@@ -451,11 +459,6 @@ public:
 	CString GetURLFromPath(const CTSVNPath& path);
 	CString GetUUIDFromPath(const CTSVNPath& path);
 
-	/**
-	 * Releases all used memory pools.
-	 */
-	void ReleasePool();
-
 	static CString CheckConfigFile();
 
 	/**
@@ -501,12 +504,6 @@ public:
 	 */
 	static void preparePath(CString &path);
 
-//	/**
-//	 * Tells the shell (explorer) to update the icon overlays.
-//	 * \param paths the list of paths of the files/folders which have changed.
-//	 */
-//	static void UpdateShell(const CTSVNPathList& paths);
-
 	/**
 	 * Checks if a given path is a valid URL.
 	 */	 	 	 	
@@ -545,7 +542,7 @@ public:
 	static void UseIEProxySettings(apr_hash_t * cfg);
 	svn_error_t *				Err;			///< Global error object struct
 private:
-	svn_client_ctx_t 			m_ctx;
+	svn_client_ctx_t * 			m_pctx;
 	apr_hash_t *				statushash;
 	apr_array_header_t *		statusarray;
 	svn_wc_status_t *			status;
@@ -554,7 +551,6 @@ private:
 	svn_opt_revision_t			rev;			///< subversion revision. used by getRevision()
 	SVNPrompt					m_prompt;
 
-	static CString				cpaths;
 	svn_opt_revision_t *	getRevision (long revNumber);
 	void * logMessage (const char * message, char * baseDirectory = NULL);
 
