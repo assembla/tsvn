@@ -1464,7 +1464,7 @@ void CLogDlg::DoDiffFromLog(int selIndex, long rev)
 	{
 		temp = temp.Left(temp.Find(_T(" (from "))-1);
 	}
-	temp = temp.Trim();
+	temp = temp.Trim(_T(": "));
 	filepath += temp;
 	StartDiff(CTSVNPath(filepath), rev, CTSVNPath(filepath), rev-1);
 	theApp.DoWaitCursor(-1);
