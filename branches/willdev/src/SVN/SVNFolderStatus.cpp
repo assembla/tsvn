@@ -85,7 +85,7 @@ SVNFolderStatus::SVNFolderStatus(void)
 	invalidstatus.url = emptyString;
 	invalidstatus.rev = -1;
 	m_nCounter = 0;
-	sCacheKey.reserve(MAX_PATH);
+//	sCacheKey.reserve(MAX_PATH);
 
 	m_hInvalidationEvent = CreateEvent(NULL, FALSE, FALSE, _T("TortoiseSVNCacheInvalidationEvent"));
 }
@@ -94,7 +94,7 @@ SVNFolderStatus::~SVNFolderStatus(void)
 {
 	CloseHandle(m_hInvalidationEvent);
 }
-
+/*
 const FileStatusCacheEntry * SVNFolderStatus::BuildCache(LPCTSTR filepath, BOOL bIsFolder)
 {
 	svn_client_ctx_t *			ctx;
@@ -249,33 +249,37 @@ DWORD SVNFolderStatus::GetTimeoutValue()
 		factor = 1;
 	return factor*timeout;
 }
-
+*/
 const FileStatusCacheEntry * SVNFolderStatus::GetFullStatus(LPCTSTR filepath, BOOL bIsFolder, BOOL bColumnProvider)
 {
 	const FileStatusCacheEntry * ret = NULL;
-	m_bColumnProvider = bColumnProvider;
-	BOOL bHasAdminDir = g_ShellCache.HasSVNAdminDir(filepath, bIsFolder);
-	
-	//no overlay for unversioned folders
-	if ((!bColumnProvider)&&(!bHasAdminDir))
-		return &invalidstatus;
-	//for the SVNStatus column, we have to check the cache to see
-	//if it's not just unversioned but ignored
-	ret = GetCachedItem(filepath);
-	if (ret)
-		return ret;
 
-	//if it's not in the cache and has no admin dir, then we assume
-	//it's not ignored too
-	if ((bColumnProvider)&&(!bHasAdminDir))
+	svn_wc_status_t fullStatus;
+	if(!m_remoteCache.GetStatusFromRemoteCache(filepath, &fullStatus))
+	{
 		return &invalidstatus;
-	ret = BuildCache(filepath, bIsFolder);
-	if (ret)
-		return ret;
+	}
+
+	if (fullStatus.entry != NULL)
+	{
+		filestat.author = authors.GetString(fullStatus.entry->cmt_author);
+		filestat.url = urls.GetString(fullStatus.entry->url);
+		filestat.rev = fullStatus.entry->cmt_rev;
+	} // if (status->entry) 
 	else
-		return &invalidstatus;
+	{
+		filestat.author = authors.GetString(NULL);
+		filestat.url = urls.GetString(NULL);
+		filestat.rev = -1;
+	}
+	filestat.status = svn_wc_status_unversioned;
+	filestat.status = SVNStatus::GetMoreImportant(filestat.status, fullStatus.text_status);
+	filestat.status = SVNStatus::GetMoreImportant(filestat.status, fullStatus.prop_status);
+
+	return &filestat;
 }
 
+/*
 const FileStatusCacheEntry * SVNFolderStatus::GetCachedItem(LPCTSTR filepath)
 {
 	sCacheKey.assign(filepath);
@@ -379,3 +383,6 @@ void SVNFolderStatus::ClearCache()
 	// an event which tells us that it's invalid
 	ResetEvent(m_hInvalidationEvent);
 }
+*/
+
+

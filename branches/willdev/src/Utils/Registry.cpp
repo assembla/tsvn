@@ -467,7 +467,7 @@ CRegPoint& CRegPoint::operator =(CPoint s)
 
 /////////////////////////////////////////////////////////////////////
 
-CRegKey::CRegKey(const CString& key, HKEY base)
+CTSVNRegKey::CTSVNRegKey(const CString& key, HKEY base)
 {
 	m_base = base;
 	m_hKey = NULL;
@@ -475,13 +475,13 @@ CRegKey::CRegKey(const CString& key, HKEY base)
 	m_path.TrimLeft(_T("\\"));
 }
 
-CRegKey::~CRegKey()
+CTSVNRegKey::~CTSVNRegKey()
 {
 	if (m_hKey)
 		RegCloseKey(m_hKey);
 }
 
-DWORD CRegKey::createKey()
+DWORD CTSVNRegKey::createKey()
 {
 	DWORD disp;
 	DWORD rc = RegCreateKeyEx(m_base, m_path, 0, _T(""), REG_OPTION_NON_VOLATILE, KEY_WRITE, NULL, &m_hKey, &disp);
@@ -492,13 +492,13 @@ DWORD CRegKey::createKey()
 	return RegCloseKey(m_hKey);
 }
 
-DWORD CRegKey::removeKey()
+DWORD CTSVNRegKey::removeKey()
 {
 	RegOpenKeyEx(m_base, m_path, 0, KEY_WRITE, &m_hKey);
 	return SHDeleteKey(m_base, (LPCTSTR)m_path);
 }
 
-bool CRegKey::getValues(CStringList& values)
+bool ::CTSVNRegKey::getValues(CStringList& values)
 {
 	values.RemoveAll();
 
@@ -519,7 +519,7 @@ bool CRegKey::getValues(CStringList& values)
 	return values.GetCount() > 0;
 }
 
-bool CRegKey::getSubKeys(CStringList& subkeys)
+bool CTSVNRegKey::getSubKeys(CStringList& subkeys)
 {
 	subkeys.RemoveAll();
 

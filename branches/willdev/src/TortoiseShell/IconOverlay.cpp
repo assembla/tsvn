@@ -160,17 +160,19 @@ STDMETHODIMP CShellExt::IsMemberOf(LPCWSTR pwszPath, DWORD /*dwAttrib*/)
 	svn_wc_status_kind status = svn_wc_status_unversioned;
 	if (pwszPath == NULL)
 		return S_FALSE;
-#ifdef UNICODE
-	const TCHAR* pPath = pwszPath;
-#else
-	std::string snPath = WideToUTF8(std::basic_string<wchar_t>(pwszPath));
-	const TCHAR* pPath = snPath.c_str();
-#endif
+//#ifdef UNICODE
+//	const TCHAR* pPath = pwszPath;
+//#else
+//	std::string snPath = WideToUTF8(std::basic_string<wchar_t>(pwszPath));
+//	const TCHAR* pPath = snPath.c_str();
+//#endif
 
+	AutoLocker lock(g_csCacheGuard);
+
+	/*
 	//if recursive is set in the registry then check directories recursive for status and show
 	//the overlay with the highest priority on the folder.
 	//since this can be slow for big directories it is optional - but very neat
-	AutoLocker lock(g_csCacheGuard);
 
 	// Look in our caches for this item 
 	const FileStatusCacheEntry * s = g_CachedStatus.GetCachedItem(pPath);
@@ -218,8 +220,33 @@ STDMETHODIMP CShellExt::IsMemberOf(LPCWSTR pwszPath, DWORD /*dwAttrib*/)
 	}
 
 	lock.Unlock();
+	*/
 
-	ATLTRACE("Status %d for file %ws\n", status, pwszPath);
+//	if(pStatusCache == NULL)
+//	{
+//		ITSVNStatusCachePtr pCreateHelper;
+//		HRESULT hr = pCreateHelper.CreateInstance(__uuidof(CStatusCacheComInterface));
+//		if(SUCCEEDED(hr))
+//		{
+//			pStatusCache = pCreateHelper.Detach();
+//		}
+//		ATLTRACE("Created on thread %d\n", GetCurrentThreadId());
+//	}
+
+//	if(pStatusCache != NULL)
+
+	svn_wc_status_t fullStatus;
+	if(g_CachedStatus.m_remoteCache.GetStatusFromRemoteCache(pwszPath, &fullStatus))
+	{
+		status = SVNStatus::GetMoreImportant(status, fullStatus.text_status);
+		status = SVNStatus::GetMoreImportant(status, fullStatus.prop_status);
+	}
+	else
+	{
+		status = svn_wc_status_unversioned;
+	}
+
+//	ATLTRACE("GSK Status %d for file %ws\n", status, pwszPath);
 
 	//the priority system of the shell doesn't seem to work as expected (or as I expected):
 	//as it seems that if one handler returns S_OK then that handler is used, no matter

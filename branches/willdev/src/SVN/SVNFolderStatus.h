@@ -20,6 +20,7 @@
 
 #include "CApr.h"
 #include "SVNStatus.h"
+#include "RemoteCacheLink.h"
 
 /**
  * \ingroup TortoiseShell
@@ -141,15 +142,17 @@ public:
 	SVNFolderStatus(void);
 	~SVNFolderStatus(void);
 	const FileStatusCacheEntry *	GetFullStatus(LPCTSTR filepath, BOOL bIsFolder, BOOL bColumnProvider = FALSE);
-	const FileStatusCacheEntry *	GetCachedItem(LPCTSTR filepath);
+//	const FileStatusCacheEntry *	GetCachedItem(LPCTSTR filepath);
 
 	FileStatusCacheEntry		invalidstatus;
 
+
+
 private:
-	const FileStatusCacheEntry * BuildCache(LPCTSTR filepath, BOOL bIsFolder);
-	DWORD				GetTimeoutValue();
-	static void			fillstatusmap (void *baton, const char *path, svn_wc_status_t *status);
-	void				ClearCache();
+//	const FileStatusCacheEntry * BuildCache(LPCTSTR filepath, BOOL bIsFolder);
+//	DWORD				GetTimeoutValue();
+//	static void			fillstatusmap (void *baton, const char *path, svn_wc_status_t *status);
+//	void				ClearCache();
 	
 	BOOL				m_bColumnProvider;
 	int					m_nCounter;
@@ -166,13 +169,16 @@ private:
 	StringPool		urls;
 	char			emptyString[1];
 
-	stdstring		sCacheKey;
+//	stdstring		sCacheKey;
 
 	HANDLE			m_hInvalidationEvent;
 
 	// The item we most recently supplied status for 
 	stdstring		m_mostRecentPath;
 	const FileStatusCacheEntry* m_mostRecentStatus;
+
+public:
+	CRemoteCacheLink m_remoteCache;
 
 };
 
