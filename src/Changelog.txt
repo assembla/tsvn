@@ -1,3 +1,18 @@
+Version 0.15.1
+- BUG: Making a copy didn't always work. Some 
+       Pre-Commit-Hooks prevent too short
+       log messages. (Stefan)
+- BUG: Wrong error message was shown if the
+       external diff viewer could not be
+       started. (Stefan)
+- ADD: In the "Check for updates" dialog two context
+       menus for showing a diff and updating files
+       and folders. (Stefan)
+- ADD: The proxy-settings are saved even if they
+       are disabled. That way you can enable/disable
+       those settings without the need to always
+       reenter the data. (Stefan)
+
 Version 0.15
 - BUG: right-dragging a single file/folder resulted
        in error message "cannot copy path ... into
