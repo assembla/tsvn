@@ -270,6 +270,7 @@ BOOL CRevisionGraph::AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev)
 						reventry->message = logentry->msg;
 						reventry->url = key;
 						reventry->action = val->action;
+						reventry->level = m_nRecurseLevel;
 						if (val->copyfrom_path)
 						{
 							reventry->pathfrom = val->copyfrom_path;
@@ -294,6 +295,7 @@ BOOL CRevisionGraph::AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev)
 						reventry->message = logentry->msg;
 						reventry->url = key;
 						reventry->action = val->action;
+						reventry->level = m_nRecurseLevel;
 						if (val->copyfrom_path)
 						{
 							reventry->pathfrom = val->copyfrom_path;
@@ -318,6 +320,7 @@ BOOL CRevisionGraph::AnalyzeRevisions(CStringA url, LONG startrev, LONG endrev)
 							reventry->message = logentry->msg;
 							reventry->url = key;
 							reventry->action = val->action;
+							reventry->level = m_nRecurseLevel;
 							if (val->copyfrom_path)
 							{
 								reventry->pathfrom = val->copyfrom_path;
