@@ -60,11 +60,7 @@ BOOL CSetOverlayIcons::OnInitDialog()
 {
 	CResizableStandAloneDialog::OnInitDialog();
 
-	m_ImageList.Create(16, 16, ILC_COLOR32 | ILC_MASK, 20, 10);
-	m_ImageListBig.Create(32, 32, ILC_COLOR32 | ILC_MASK, 20, 10);
 	m_cIconList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_DOUBLEBUFFER | LVS_EX_INFOTIP | LVS_EX_SUBITEMIMAGES);
-	m_cIconList.SetImageList(&m_ImageList, LVSIL_SMALL);
-	m_cIconList.SetImageList(&m_ImageListBig, LVSIL_NORMAL);
 	//get the path to our icon sets
 	m_sIconPath = CUtils::GetAppParentDirectory();
 	m_sIconPath += _T("Icons");
@@ -132,17 +128,13 @@ void CSetOverlayIcons::ShowIconSet(bool bSmallIcons)
 {
 	m_cIconList.SetRedraw(FALSE);
 	m_cIconList.DeleteAllItems();
-	int nImageCount = m_ImageList.GetImageCount();
-	for (int i=0; i<nImageCount; ++i)
-	{
-		m_ImageList.Remove(0);
-	}
-	nImageCount = m_ImageListBig.GetImageCount();
-	for (int i=0; i<nImageCount; ++i)
-	{
-		m_ImageListBig.Remove(0);
-	}
-	TRACE(_T("Imagelist small : %d  Imagelist big : %d\n"), m_ImageList.GetImageCount(), m_ImageListBig.GetImageCount());
+	m_ImageList.DeleteImageList();
+	m_ImageListBig.DeleteImageList();
+	m_ImageList.Create(16, 16, ILC_COLOR32 | ILC_MASK, 20, 10);
+	m_ImageListBig.Create(32, 32, ILC_COLOR32 | ILC_MASK, 20, 10);
+	m_cIconList.SetImageList(&m_ImageList, LVSIL_SMALL);
+	m_cIconList.SetImageList(&m_ImageListBig, LVSIL_NORMAL);
+
 	//find all the icons of the selected icon set
 	CString sIconSet;
 	int index = m_cIconSet.GetCurSel();
