@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2005-01-17 22:58+0100\n"
+"PO-Revision-Date: 2005-04-02 15:54+0100\n"
 "Last-Translator: J-M. van Leerdam <translator@bemy.demon.nl>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1093,7 +1093,7 @@ msgstr "Vergelijk met &werkkopie"
 
 #: ID:12
 msgid "Compares the file with the last commited version to show you the changes you made"
-msgstr "Vergelijkt het bestand met de laatste vastgelegde versie om de door u gemaakte wijzigingen te tonen"
+msgstr "Vergelijkt het bestand met de laatste vastgelegde revisie om de door u gemaakte wijzigingen te tonen"
 
 #: ID:74
 msgid "Completed"
@@ -1199,7 +1199,7 @@ msgid ""
 "Could not retrieve version %s of the file %s.\n"
 "Patching is not possible!"
 msgstr ""
-"Kan versie %s van bestand %s niet ophalen.\n"
+"Kan revisie %s van bestand %s niet ophalen.\n"
 "Patchen is niet mogelijk!"
 
 #: ID:64
@@ -1595,7 +1595,7 @@ msgstr "Bestand ophalen..."
 
 #: ID:313
 msgid "Fetching version %s of file:"
-msgstr "Versie %s van bestand ophalen:"
+msgstr "Revisie %s van bestand ophalen:"
 
 #: ID:63
 #: ID:74
@@ -1760,7 +1760,7 @@ msgstr ""
 
 #: ID:79
 msgid "If checked, TortoiseSVN doesn't create a temporary file to do the diff but diffs the original file against BASE"
-msgstr "Kies deze optie om TortoiseSVN zonder tijdelijk bestand een Diff tussen het origineel en de actuele versie te laten maken"
+msgstr "Kies deze optie om TortoiseSVN zonder tijdelijk bestand een Diff tussen het origineel en de actuele revisie te laten maken"
 
 #: ID:194
 msgid "If enabled, TortoiseSVN checks once a week if a newer version is available"
@@ -3211,7 +3211,7 @@ msgid ""
 msgstr ""
 "De werkkopie is gewijzigd!\n"
 "<hr=100%>\n"
-"U moet eerst de wijzigingen vastleggen of de originele versie terugzetten."
+"U moet eerst de wijzigingen vastleggen of de originele revisie terugzetten."
 
 # ID:81,
 #: ID:81
@@ -3711,11 +3711,11 @@ msgstr ""
 
 #: MenuEntry
 msgid "Zoom &In"
-msgstr "&Inzoomen"
+msgstr "&Inzoomen\tCtrl-+"
 
 #: MenuEntry
 msgid "Zoom &Out"
-msgstr "&Uitzoomen"
+msgstr "&Uitzoomen\tCtrl--"
 
 #: ID:10
 msgid "added"
@@ -3925,7 +3925,7 @@ msgid ""
 msgstr ""
 "svn:keywords\n"
 "Termen die vervangen moeten worden. Geldige termen zijn:\n"
-"URL, HeadURL\t\t\tDe URL voor de recentste versie van het object.\n"
+"URL, HeadURL\t\t\tDe URL voor de meest recente revisie (HEAD) van het object.\n"
 "Author, LastChangedBy\t\tDe persoon die de laatste wijziging in het bestand heeft gedaan.\n"
 "Date, LastChangedDate\t\tDe datum/tijd van de laatste wijziging van het object.\n"
 "Rev, LastChangedRevision\tDe laatste revisie waarin het object is gewijzigd.\n"
