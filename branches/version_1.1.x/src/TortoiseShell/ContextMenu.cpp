@@ -88,18 +88,7 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 							svn_wc_status_kind status = svn_wc_status_unversioned;
 							try
 							{
-								bool bIsDirectory = !!PathIsDirectory(str.c_str());
-								const FileStatusCacheEntry * s = g_CachedStatus.GetFullStatus(str.c_str(), bIsDirectory);
-								if (s)
-								{
-									status = s->status;
-								}
-								// if the status is unversioned and the item is a folder,
-								// it still could be versioned! That's because svn_client_status()
-								// returns unversioned for nested layouts if the folder
-								// is from a different repository/wc!
-								if ((status == svn_wc_status_unversioned)&&(bIsDirectory))
-									status = SVNStatus::GetAllStatus(str.c_str());
+								status = SVNStatus::GetAllStatus(str.c_str());
 							}
 							catch ( ... )
 							{
@@ -152,19 +141,7 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 							svn_wc_status_kind status = svn_wc_status_unversioned;
 							try
 							{
-								AutoLocker lock(g_csCacheGuard);
-								bool bIsDirectory = !!PathIsDirectory(str.c_str());
-								const FileStatusCacheEntry * s = g_CachedStatus.GetFullStatus(str.c_str(), bIsDirectory);
-								if (s)
-								{
-									status = s->status;
-								}
-								// if the status is unversioned and the item is a folder,
-								// it still could be versioned! That's because svn_client_status()
-								// returns unversioned for nested layouts if the folder
-								// is from a different repository/wc!
-								if ((status == svn_wc_status_unversioned)&&(bIsDirectory))
-									status = SVNStatus::GetAllStatus(str.c_str());
+								status = SVNStatus::GetAllStatus(str.c_str());
 								statfetched = TRUE;
 							}
 							catch ( ... )
