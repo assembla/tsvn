@@ -1335,11 +1335,13 @@ LRESULT CLogDlg::OnFindDialogMessage(WPARAM /*wParam*/, LPARAM /*lParam*/)
 					if (cpath->sCopyFromPath.Find(FindText)>=0)
 					{
 						bFound = TRUE;
+						--i;
 						break;
 					}
 					if (cpath->sPath.Find(FindText)>=0)
 					{
 						bFound = TRUE;
+						--i;
 						break;
 					}
 				}
@@ -1358,16 +1360,20 @@ LRESULT CLogDlg::OnFindDialogMessage(WPARAM /*wParam*/, LPARAM /*lParam*/)
 				for (INT_PTR cpPathIndex = 0; cpPathIndex<cpatharray->GetCount(); ++cpPathIndex)
 				{
 					LogChangedPath * cpath = cpatharray->GetAt(cpPathIndex);
-					CString lowerpath = cpath->sCopyFromPath.MakeLower();
+					CString lowerpath = cpath->sCopyFromPath;
+					lowerpath.MakeLower();
 					if (lowerpath.Find(find)>=0)
 					{
 						bFound = TRUE;
+						--i;
 						break;
 					}
-					lowerpath = cpath->sPath.MakeLower();
+					lowerpath = cpath->sPath;
+					lowerpath.MakeLower();
 					if (lowerpath.Find(find)>=0)
 					{
 						bFound = TRUE;
+						--i;
 						break;
 					}
 				}
