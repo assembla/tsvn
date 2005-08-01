@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
+	<?include Includes.wxi?>
+	<Product 	UpgradeCode="3E07F1EB-9543-437C-9DE2-58FFCADD39A9" 
+  			Name="TortoiseSVN" 
+			Id="????????-????-????-????-????????????"
+			Version="1.2.1.$WCREV$"
+			Manufacturer="TortoiseSVN" 
+			Language="1033">
+		<Package 	Id="????????-????-????-????-????????????"
+				Keywords="Sourcecontrol Subversion Shell" 
+				Description="Subversion Client" 
+				Comments="Windows Shell Integration For SubVersion Source Control" 
+				Manufacturer="Stefan Kueng" 
+				InstallerVersion="200" 
+				Platforms="Intel" 
+				Languages="1033" 
+				Compressed="yes" 
+				SummaryCodepage="1252" />
+		<Upgrade Id="3E07F1EB-9543-437C-9DE2-58FFCADD39A9" >
+			<UpgradeVersion Property="PREVIOUSVERSIONSINSTALLED" />
+		</Upgrade>
+		<Property Id="ARPHELPLINK">www.tortoisesvn.org</Property>
+		<Property Id="ARPCONTACT">Stefan Kueng</Property>
+		<Property Id="ARPCOMMENTS">Windows Shell Integration For SubVersion Source Control</Property>
+		<Property Id="ARPURLINFOABOUT">www.tortoisesvn.org</Property>
+		<Property Id="ARPPRODUCTICON">TSVNIcon</Property>
+
+		<Property Id="VSDUIANDADVERTISED">This advertised application will not be installed because it might be unsafe. Contact your administrator to change the installation user interface option of the package to basic.</Property>
+		<Property Id="MaintenanceForm_Action">Repair</Property>
+		<Property Id="AdminMaintenanceForm_Action">Repair</Property>
+		<Property Id="FolderForm_AllUsers">ME</Property>
+		<Property Id="AdminWelcomeForm_NextArgs">AdminFolderForm</Property>
+		<Property Id="AdminFolderForm_PrevArgs">AdminWelcomeForm</Property>
+		<Property Id="AdminFolderForm_NextArgs">AdminConfirmInstallForm</Property>
+		<Property Id="AdminConfirmInstallForm_PrevArgs">AdminFolderForm</Property>
+		<Property Id="WelcomeForm_NextArgs">FolderForm</Property>
+		<Property Id="FolderForm_PrevArgs">WelcomeForm</Property>
+		<Property Id="FolderForm_NextArgs">ConfirmInstallForm</Property>
+		<Property Id="ConfirmInstallForm_PrevArgs">FolderForm</Property>
+		<Property Id="VERSIONIE">
+			<RegistrySearch Id="RegSearchIeVersion" Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer" Name="Version" Type="registry" />
+		</Property>
+		<Property Id="VERSIONSHELL">
+			<DirectorySearch Id="DirSearchShellDll" Path="[SystemFolder]">
+				<FileSearch Id="DirSearchShellDll" Name="shell32.dll" MinVersion="4.72.0.0" />
+			</DirectorySearch>
+		</Property>
+		<Property Id="TEXTEDITOR">
+			<DirectorySearch Id="FileSearchTextEditorExe" Path="[WindowsFolder]">
+				<FileSearch Id="FileSearchTextEditorExe" Name="notepad.exe" />
+			</DirectorySearch>
+		</Property>
+		<Condition Message="[ProductName] needs at least Internet Explorer 5">NOT ((VERSIONIE&lt;&lt;"1") OR (VERSIONIE&lt;&lt;"2") OR (VERSIONIE&lt;&lt;"3") OR (VERSIONIE&lt;&lt;"4"))</Condition>
+		<Condition Message="[ProductName] needs at least shell32.dll version 4.72">(NOT (""=VERSIONSHELL)) OR (Installed)</Condition>
+		<Condition Message="This installer requires an NT based OS">(VersionNT)</Condition>
+
+		<FragmentRef Id="StructureFragment"/>
+
+		<FragmentRef Id="FeaturesFragment" />
+		
+		<Media Id="1" Cabinet="TSVN.cab" EmbedCab="yes" CompressionLevel="high" />
+		<CustomAction Id="Set_ShowChangelog" Property="ShowChangelog" Value="Yes" Return="check" />
+		<CustomAction Id="ShowChangelogAction" Property="TEXTEDITOR" ExeCommand="[TARGETDIR]changelog.txt" Return="check" />
+		<CustomAction Id="DIRCA_TARGETDIR" Property="TARGETDIR" Value="[ProgramFilesFolder]\[ProductName]" Execute="firstSequence" />
+
+		<CustomAction Id="ERRCA_UIANDADVERTISED" Error="[VSDUIANDADVERTISED]" />
+
+		<FragmentRef Id="UIFragment" />
+
+		<AdminExecuteSequence>
+			<Custom Action="DIRCA_TARGETDIR" Before="CostInitialize">TARGETDIR=""</Custom>
+		</AdminExecuteSequence>
+		<InstallExecuteSequence>
+			<AppSearch Sequence="1"></AppSearch>
+			<RemoveExistingProducts After="FindRelatedProducts">PREVIOUSVERSIONSINSTALLED</RemoveExistingProducts>
+			<Custom Action="DIRCA_TARGETDIR" After="ValidateProductID">TARGETDIR=""</Custom>
+			<ScheduleReboot After="RegisterProduct"></ScheduleReboot>
+		</InstallExecuteSequence>
+		<Binary Id="UpFldrBtn" src="include\UpFldrBtn.bmp" />
+		<Binary Id="NewFldrBtn" src="include\NewFldrBtn.bmp" />
+		<Binary Id="TSVNBanner" src="include\tortoisesvn_logo.jpg" />
+		<Icon Id="TSVNIcon" src="..\Resources\Tortoise.ico" />
+	</Product>
+</Wix>
+
