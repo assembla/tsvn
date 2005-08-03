@@ -25,7 +25,7 @@
 				<Registry Root="HKMU" Key="Software\Classes\CLSID\{3035134d-7B7D-4fcc-81B4-1E394CA267EB}\InProcServer32" Name="ThreadingModel" Value="Apartment" Type="string" />
 				<Registry Root="HKMU" Key="Software\Classes\CLSID\{3035134c-7B7D-4fcc-81B4-1E394CA267EB}\InProcServer32" Value="[TARGETDIR]bin\tortoisesvn.dll" Type="string" />
 				<Registry Root="HKMU" Key="Software\Classes\CLSID\{3035134c-7B7D-4fcc-81B4-1E394CA267EB}\InProcServer32" Name="ThreadingModel" Value="Apartment" Type="string" />
-				<Registry Root="HKMU" Key="Software\Classes\CLSID\{30351346-7B7D-4fcc-81B4-1E394CA267EB}" Name="*" />
+				<Registry Root="HKMU" Key="Software\Classes\CLSID\{30351346-7B7D-4fcc-81B4-1E394CA267EB}" Action="createKeyAndRemoveKeyOnUninstall" />
 				<Registry Root="HKMU" Key="Software\Classes\CLSID\{30351346-7B7D-4fcc-81B4-1E394CA267EB}\InProcServer32" Value="[TARGETDIR]bin\tortoisesvn.dll" Type="string" />
 				<Registry Root="HKMU" Key="Software\Classes\CLSID\{30351346-7B7D-4fcc-81B4-1E394CA267EB}\InProcServer32" Name="ThreadingModel" Value="Apartment" Type="string" />
 				<Registry Root="HKMU" Key="Software\Classes\CLSID\{30351346-7B7D-4fcc-81B4-1E394CA267EB}" Value="TortoiseSVN" Type="string" />
