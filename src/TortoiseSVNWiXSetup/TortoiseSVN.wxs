@@ -3,7 +3,7 @@
 	<?include Includes.wxi?>
 	<Product 	
 		UpgradeCode="$(var.UpgradeGuid)" 
-  	Name="TortoiseSVN" 
+  	Name="$(var.ProductName)" 
 		Id="????????-????-????-????-????????????"
 		Version="$(var.VersionNumber)"
 		Manufacturer="TortoiseSVN" 
@@ -26,26 +26,30 @@
 
 		<Media Id="1" Cabinet="TSVN.cab" EmbedCab="yes" CompressionLevel="high" />
 
+		<!-- Add/Remove Programs (ARP) related properties ........................................................................ -->
+		<Icon Id="TSVNIcon" src="..\Resources\Tortoise.ico" />
 		<Property Id="ARPHELPLINK">$(var.TortoiseSvnOrg)</Property>
 		<Property Id="ARPCONTACT">$(var.PackageManufacturer)</Property>
 		<Property Id="ARPCOMMENTS">$(var.PackageComments)</Property>
 		<Property Id="ARPURLINFOABOUT">$(var.TortoiseSvnOrg)</Property>
 		<Property Id="ARPPRODUCTICON">TSVNIcon</Property>
 
+		<!-- Launch Condition related properties ................................................................................. -->
 		<Property Id="VERSIONIE">
 			<RegistrySearch Id="RegSearchIeVersion" Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer" Name="Version" Type="raw" />
 		</Property>
-		<Condition Message="[ProductName] needs at least Internet Explorer 5">NOT ((VERSIONIE&lt;&lt;"1") OR (VERSIONIE&lt;&lt;"2") OR (VERSIONIE&lt;&lt;"3") OR (VERSIONIE&lt;&lt;"4"))</Condition>
+		<Condition Message="$(var.ProductName) needs at least Internet Explorer 5">NOT ((VERSIONIE&lt;&lt;"1") OR (VERSIONIE&lt;&lt;"2") OR (VERSIONIE&lt;&lt;"3") OR (VERSIONIE&lt;&lt;"4"))</Condition>
 
 		<Property Id="VERSIONSHELL">
 			<DirectorySearch Id="DirSearchShellDll" Path="[SystemFolder]">
 				<FileSearch Id="DirSearchShellDll" Name="shell32.dll" MinVersion="4.72.0.0" />
 			</DirectorySearch>
 		</Property>
-		<Condition Message="[ProductName] needs at least shell32.dll version 4.72">(NOT (""=VERSIONSHELL)) OR (Installed)</Condition>
+		<Condition Message="$(var.ProductName) needs at least shell32.dll version 4.72">(NOT (""=VERSIONSHELL)) OR (Installed)</Condition>
 
 		<Condition Message="This installer requires an NT based OS">(VersionNT)</Condition>
 
+		<!-- Show/Don't-show changelog related properties and custom actions ..................................................... -->
 		<Property Id="TEXTEDITOR">
 			<DirectorySearch Id="FileSearchTextEditorExe" Path="[WindowsFolder]">
 				<FileSearch Id="FileSearchTextEditorExe" Name="notepad.exe" />
@@ -54,10 +58,11 @@
 		<CustomAction Id="Set_ShowChangelog" Property="ShowChangelog" Value="Yes" Return="check" />
 		<CustomAction Id="ShowChangelogAction" Property="TEXTEDITOR" ExeCommand="[TARGETDIR]changelog.txt" Return="check" />
 
+		<!-- Unsafe-check properties and custom actions .......................................................................... -->
 		<Property Id="VSDUIANDADVERTISED">This advertised application will not be installed because it might be unsafe. Contact your administrator to change the installation user interface option of the package to basic.</Property>
 		<CustomAction Id="ERRCA_UIANDADVERTISED" Error="[VSDUIANDADVERTISED]" />
 
-		<CustomAction Id="DIRCA_TARGETDIR" Property="TARGETDIR" Value="[ProgramFilesFolder]\[ProductName]" Execute="firstSequence" />
+		<CustomAction Id="DIRCA_TARGETDIR" Property="TARGETDIR" Value="[ProgramFilesFolder]\$(var.ProductName)" Execute="firstSequence" />
 
 		<FragmentRef Id="StructureFragment"/>
 
@@ -65,6 +70,7 @@
 
 		<FragmentRef Id="UIFragment" />
 
+		<!-- Execute Sequencing ................................................................................................. -->
 		<AdminExecuteSequence>
 			<Custom Action="DIRCA_TARGETDIR" Before="CostInitialize">TARGETDIR=""</Custom>
 		</AdminExecuteSequence>
@@ -75,6 +81,7 @@
 			<ScheduleReboot After="RegisterProduct" />
 		</InstallExecuteSequence>
 
+		<!-- UI Sequencing  ..................................................................................................... -->
 		<AdminUISequence>
 			<Show Dialog="AdminFatalErrorForm" OnExit="error" />
 			<Show Dialog="AdminUserExitForm" OnExit="cancel" />
@@ -97,11 +104,6 @@
 			<Custom Action="Set_ShowChangelog" After="AppSearch">NOT Installed</Custom>
 			<Show Dialog="ProgressForm" After="WelcomeForm" />
 		</InstallUISequence>
-
-		<Binary Id="UpFldrBtn" src="include\UpFldrBtn.bmp" />
-		<Binary Id="NewFldrBtn" src="include\NewFldrBtn.bmp" />
-		<Binary Id="TSVNBanner" src="include\tortoisesvn_logo.jpg" />
-		<Icon Id="TSVNIcon" src="..\Resources\Tortoise.ico" />
 	</Product>
 </Wix>
 
