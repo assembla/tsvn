@@ -54,6 +54,7 @@
 				<Registry Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers\6TortoiseSVN" Value="{$(var.GuidDave)}" Type="string" />
 				<Registry Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers\7TortoiseSVN" Value="{$(var.GuidJohn)}" Type="string" />
 			</Component>
+			
 			<Component Id="C__machineregistry" Guid="4913F361-DE93-490C-81D0-1FB002EBF141" >
 				<Registry Root="HKLM" Key="Software\[Manufacturer]" Name="ReadOnlyIcon" Value="[TARGETDIR]icons\XPStyle\TortoiseReadOnly.ico" KeyPath="yes" Type="string" />
 				<Registry Root="HKLM" Key="Software\[Manufacturer]" Name="DeletedIcon" Value="[TARGETDIR]icons\XPStyle\TortoiseDeleted.ico" Type="string" />
@@ -67,6 +68,7 @@
 				<Registry Root="HKLM" Key="Software\[Manufacturer]" Name="LockedIcon" Value="[TARGETDIR]icons\XPStyle\TortoiseLocked.ico" Type="string" />
 				<Registry Root="HKLM" Key="Software\[Manufacturer]" Name="AddedIcon" Value="[TARGETDIR]icons\XPStyle\TortoiseAdded.ico" Type="string" />
 			</Component>
+			
 			<Component Id="C__approveshellcomponents" Guid="A5B89BEC-D213-461D-AACD-8F46477E87D0" >
 				<Registry Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" Name="{$(var.GuidStef)}" Value="TortoiseSVN" KeyPath="yes" Type="string" />
 				<Registry Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" Name="{$(var.GuidJill)}" Value="TortoiseSVN" Type="string" />
@@ -78,6 +80,7 @@
 				<Registry Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" Name="{$(var.GuidDave)}" Value="TortoiseSVN" Type="string" />
 				<Registry Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" Name="{$(var.GuidJohn)}" Value="TortoiseSVN" Type="string" />
 			</Component>
+			
 			<Component Id="C__svnprotocoll" Guid="02271D5C-3065-4038-AD86-46A271854FA6" >
 				<Registry Root="HKMU" Key="Software\Classes\svn" KeyPath="yes" Value="URL:SVN Protocol" Type="string" />
 				<Registry Root="HKMU" Key="Software\Classes\svn" Name="URL Protocol" Type="string" />
@@ -94,6 +97,7 @@
 				<Registry Root="HKMU" Key="Software\Classes\tsvn\DefaultIcon" Value="[TARGETDIR]bin\TortoiseProc.exe" Type="string" />
 				<Registry Root="HKMU" Key="Software\Classes\tsvn\shell\open\command" Value="[TARGETDIR]bin\TortoiseProc.exe /command:checkout /url:&quot;%1&quot;" Type="string" />
 			</Component>
+			
 			<Directory Id="D__Bin" Name="BIN" LongName="bin" >
 				<Component Id="C__libssl" Guid="53F3D18C-528D-4B08-AB1A-8644BFD3D5F2" >
 					<File Id="F__libeay32" Name="LIBEAY32.DLL" LongName="libeay32.dll" DiskId="1" src="..\..\..\Common\openssl\out32dll\libeay32.dll" KeyPath="yes" />
@@ -139,28 +143,34 @@
 					<Shortcut Id="S__TortoiseProc" Directory="D_TortoisePrgMenu" Name="HELP" LongName="Help" Advertise="no"
 						Target="[TARGETDIR]bin\TortoiseProc.exe" Description="Documentation about TortoiseSVN" Arguments="/command:help" Show="normal" />
 				</Component>
+				
 				<Component Id="C__TortoiseMerge" Guid="2F8D9AF8-A660-47f0-83CE-DD7DA0FB73DD" >
 					<File Id="F__TortoiseMerge" Name="TMERGE.EXE" LongName="TortoiseMerge.exe" DiskId="1" src="..\..\bin\release\bin\TortoiseMerge.exe" />
 
 					<Shortcut Id="S__TortoiseMerge" Directory="D_TortoisePrgMenu" Name="TMERGE" LongName="TortoiseMerge" Advertise="no"
 						Target="[TARGETDIR]bin\TortoiseMerge.exe" Description="View Diff's, Merge Diff's, Resolve Conflicted Files and Apply Patches" Show="normal" />
 				</Component>
+				
 				<Component Id="C__CRuntimeSTLMFC" Guid="DC08A867-1436-4DCE-8907-F1E2FCFCA02A" >
 					<File Id="F__msvcr71" Name="MSVCR71.DLL" LongName="msvcr71.dll" DiskId="1" src="$(env.windir)\system32\msvcr71.dll" KeyPath="yes" />
 					<File Id="F__mfc71u" Name="MFC71U.DLL" LongName="mfc71u.dll" DiskId="1" src="$(env.windir)\system32\mfc71u.dll" />
 					<File Id="F__mfc71" Name="MFC71.DLL" LongName="mfc71.dll" DiskId="1" src="$(env.windir)\system32\mfc71.dll" />
 					<File Id="F__msvcp71" Name="MSVCP71.DLL" LongName="msvcp71.dll" DiskId="1" src="$(env.windir)\system32\msvcp71.dll" />
 				</Component>
+				
 				<Component Id="C__Sounds" Guid="8C3F26B0-D4EE-4EB9-8E88-9FA60AD48B83" >
 					<File Id="F__sounderror" Name="TERROR.WAV" LongName="TortoiseSVN_error.wav" DiskId="1" src="..\Resources\TortoiseSVN_error.wav" KeyPath="yes" />
 					<File Id="F__soundwarning" Name="TWARN.WAV" LongName="TortoiseSVN_Warning.wav" DiskId="1" src="..\Resources\TortoiseSVN_Warning.wav" />
 					<File Id="F__soundnotification" Name="TNOTIFY.WAV" LongName="TortoiseSVN_Notification.wav" DiskId="1" src="..\Resources\TortoiseSVN_Notification.wav" />
 				</Component>
+				
 				<Component Id="C__TortoiseBlame" Guid="1B00F2A6-4D6B-4DBE-8B69-C8B493B4BBE5" >
 					<File Id="F__TortoiseBlame" Name="TBLAME.EXE" LongName="TortoiseBlame.exe" DiskId="1" src="..\..\bin\release\bin\TortoiseBlame.exe" KeyPath="yes" />
 					<File Id="F__SciLexer" Name="SCILEX.DLL" LongName="SciLexer.dll" DiskId="1" src="..\..\bin\release\bin\SciLexer.dll" />
 				</Component>
+				
 			</Directory>
+			
 			<Directory Id="D__Iconv" Name="ICONV" LongName="iconv" >
 				<Component Id="C__iconv" Guid="582E4865-CC41-4689-BC77-20AD85017BBC" DiskId="1">
 					<File Id="file0" Name="ADOBE-1.SO" LongName="adobe-stdenc.so" src="..\..\bin\release\iconv\adobe-stdenc.so" />
@@ -385,10 +395,12 @@
 						<File Id="F__ENGBSPELLAFF" Name="en_GB.aff" LongName="en_GB.aff" src="..\..\..\Common\Spell\en_GB.aff" DiskId="1" />
 						<File Id="F__ENGBSPELLDIC" Name="en_GB.dic" LongName="en_GB.dic" src="..\..\..\Common\Spell\en_GB.dic" DiskId="1" />
 					<?endif ?>
+					
 					<?if $(var.DictionaryEN) = 1 ?>
 						<File Id="F__ENSPELLAFF" Name="en_US.aff" LongName="en_US.aff" src="..\..\..\Common\Spell\en_US.aff" DiskId="1" />
 						<File Id="F__ENSPELLDIC" Name="en_US.dic" LongName="en_US.dic" src="..\..\..\Common\Spell\en_US.dic" DiskId="1" />
 					<?endif ?>
+					
 					<RemoveFile Id="F__Languages" Name="*.*" LongName="*.*" On="uninstall" />
 				</Component>
 			</Directory>
@@ -426,6 +438,7 @@
 						<File Id="F__ClassicAddedIcon" Name="TORTOI7.ICO" LongName="TortoiseAdded.ico" DiskId="1" src="..\Resources\Icons\Classic\TortoiseAdded.ico" />
 					</Component>
 				</Directory>
+				
 				<Directory Id="D__iconscvsclassic" Name="CVSClass" LongName="CVSClassic" >
 					<Component Id="C__iconscvsclassic" Guid="B96586EC-BE4C-4CCB-B88B-D4CD77CE66FB" >
 						<File Id="F__CVSClassicConflictIcon" Name="TORTOI1.ICO" LongName="TortoiseConflict.ico" DiskId="1" src="..\Resources\Icons\CVSClassic\TortoiseConflict.ico" KeyPath="yes" />
@@ -437,6 +450,7 @@
 						<File Id="F__CVSClassicAddedIcon" Name="TORTOI7.ICO" LongName="TortoiseAdded.ico" DiskId="1" src="..\Resources\Icons\CVSClassic\TortoiseAdded.ico" />
 					</Component>
 				</Directory>
+				
 				<Directory Id="D__iconsmodern" Name="Modern" >
 					<Component Id="C__iconsmodern" Guid="09F2C74B-E4DF-428B-8366-7C0346F7309C" >
 						<File Id="F__ModernConflictIcon" Name="TORTOI1.ICO" LongName="TortoiseConflict.ico" DiskId="1" src="..\Resources\Icons\Modern\TortoiseConflict.ico" KeyPath="yes" />
@@ -448,6 +462,7 @@
 						<File Id="F__ModernAddedIcon" Name="TORTOI7.ICO" LongName="TortoiseAdded.ico" DiskId="1" src="..\Resources\Icons\Modern\TortoiseAdded.ico" />
 					</Component>
 				</Directory>
+				
 				<Directory Id="D__iconsxpstyle" Name="XPStyle" >
 					<Component Id="C__iconsxpstyle" Guid="BEF69706-378E-4EE3-960A-617C2A2C769D" >
 						<File Id="F__XPStyleConflictIcon" Name="TORTOI1.ICO" LongName="TortoiseConflict.ico" DiskId="1" src="..\Resources\Icons\XPStyle\TortoiseConflict.ico" KeyPath="yes" />
@@ -459,6 +474,7 @@
 						<File Id="F__XPStyleAddedIcon" Name="TORTOI7.ICO" LongName="TortoiseAdded.ico" DiskId="1" src="..\Resources\Icons\XPStyle\TortoiseAdded.ico" />
 					</Component>
 				</Directory>
+				
 				<Directory Id="D__iconssubclipse" Name="SUBCLI1" LongName="Subclipse" >
 					<Component Id="C__iconsmarkphippard" Guid="F79F394A-EFF0-47AF-B5DE-BCBE24A2E321" >
 						<File Id="F__SubclipseConflictIcon" Name="TORTOI1.ICO" LongName="TortoiseConflict.ico" DiskId="1" src="..\Resources\Icons\Subclipse\TortoiseConflict.ico" KeyPath="yes" />
@@ -470,6 +486,7 @@
 						<File Id="F__SubclipseAddedIcon" Name="TORTOI7.ICO" LongName="TortoiseAdded.ico" DiskId="1" src="..\Resources\Icons\Subclipse\TortoiseAdded.ico" />
 					</Component>
 				</Directory>
+				
 				<Directory Id="D__iconsstraight" Name="Straight" >
 					<Component Id="C__iconsstraight" Guid="5CF62B63-1159-4626-A449-8486104D33AB" >
 						<File Id="F__StraightConflictIcon" Name="TORTOI1.ICO" LongName="TortoiseConflict.ico" DiskId="1" src="..\Resources\Icons\Straight\TortoiseConflict.ico" KeyPath="yes" />
