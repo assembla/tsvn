@@ -1,6 +1,18 @@
 <?xml version="1.0"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
 	<Fragment Id="UIFragment">
+		<Property Id="AdminWelcomeForm_NextArgs">AdminFolderForm</Property>
+		<Property Id="AdminFolderForm_PrevArgs">AdminWelcomeForm</Property>
+		<Property Id="AdminFolderForm_NextArgs">AdminConfirmInstallForm</Property>
+		<Property Id="AdminConfirmInstallForm_PrevArgs">AdminFolderForm</Property>
+		<Property Id="WelcomeForm_NextArgs">FolderForm</Property>
+		<Property Id="FolderForm_PrevArgs">WelcomeForm</Property>
+		<Property Id="FolderForm_NextArgs">ConfirmInstallForm</Property>
+		<Property Id="ConfirmInstallForm_PrevArgs">FolderForm</Property>
+
+		<Property Id="MaintenanceForm_Action">Repair</Property>
+		<Property Id="AdminMaintenanceForm_Action">Repair</Property>
+
 		<UI>
 			<Property Id="ErrorDialog">ErrorDialog</Property>
 			<Property Id="DefaultUIFont">DefaultUIFont</Property>
@@ -984,28 +996,6 @@
 			<UIText Id="VolumeCostRequired">Required</UIText>
 			<UIText Id="VolumeCostSize">Disk Size</UIText>
 			<UIText Id="VolumeCostVolume">Volume</UIText>
-			<AdminUISequence>
-				<Show Dialog="AdminFatalErrorForm" OnExit="error" />
-				<Show Dialog="AdminUserExitForm" OnExit="cancel" />
-				<Show Dialog="AdminFinishedForm" OnExit="success" />
-				<Custom Action="DIRCA_TARGETDIR" Before="CostInitialize">TARGETDIR=""</Custom>
-				<Show Dialog="AdminResumeForm" After="FileCost">Installed="" AND RESUME</Show>
-				<Show Dialog="AdminMaintenanceForm" After="AdminResumeForm">Installed&lt;&gt;""</Show>
-				<Show Dialog="AdminWelcomeForm" After="CostFinalize">Installed="" AND NOT RESUME</Show>
-				<Show Dialog="AdminProgressForm" After="AdminWelcomeForm" />
-			</AdminUISequence>
-			<InstallUISequence>
-				<Show Dialog="FatalErrorForm" OnExit="error">NOT HideFatalErrorForm</Show>
-				<Show Dialog="UserExitForm" OnExit="cancel" />
-				<Show Dialog="FinishedForm" OnExit="success" />
-				<Custom Action="ERRCA_UIANDADVERTISED" Before="AppSearch">ProductState=1</Custom>
-				<Custom Action="DIRCA_TARGETDIR" After="ValidateProductID">TARGETDIR=""</Custom>
-				<Show Dialog="ResumeForm" After="IsolateComponents">Installed="" AND RESUME</Show>
-				<Show Dialog="MaintenanceForm" After="ResumeForm">Installed&lt;&gt;""</Show>
-				<Show Dialog="WelcomeForm" After="CostFinalize">Installed="" AND NOT RESUME</Show>
-				<Custom Action="Set_ShowChangelog" After="AppSearch">NOT Installed</Custom>
-				<Show Dialog="ProgressForm" After="WelcomeForm" />
-			</InstallUISequence>
 		</UI>
 	</Fragment>
 </Wix>
