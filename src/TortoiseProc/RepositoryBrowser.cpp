@@ -255,11 +255,13 @@ void CRepositoryBrowser::ShowContextMenu(CPoint pt, LRESULT *pResult)
 	BOOL bLocked = FALSE;
 
 	int si = m_treeRepository.GetFirstSelectedItem();
+	if (si == RVI_INVALID)
+		return;
 	do
 	{
 		if (m_treeRepository.IsFolder(m_treeRepository.GetItemHandle(si)))
 			hasFolders = TRUE;
-		if (!m_treeRepository.GetItemText(si, 5).IsEmpty())
+		if (!m_treeRepository.GetItemText(si, 6).IsEmpty())
 			bLocked = TRUE;
 		si = m_treeRepository.GetNextSelectedItem(si);
 	} while (si != RVI_INVALID);

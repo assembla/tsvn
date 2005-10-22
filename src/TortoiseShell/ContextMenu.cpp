@@ -46,6 +46,7 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 	isIgnored = false;
 	isInVersionedFolder = false;
 	isAdded = false;
+	isDeleted = false;
 	isLocked = false;
 	isPatchFile = false;
 	stdstring statuspath;
@@ -139,6 +140,8 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 								isConflicted = true;
 							if (status == svn_wc_status_added)
 								isAdded = true;
+							if (status == svn_wc_status_deleted)
+								isDeleted = true;
 						}
 					}
 				} // for (int i = 0; i < count; i++)
@@ -227,6 +230,8 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 								isConflicted = true;
 							if (status == svn_wc_status_added)
 								isAdded = true;
+							if (status == svn_wc_status_deleted)
+								isDeleted = true;
 						}
 					}
 				} // for (int i = 0; i < count; ++i)
@@ -337,6 +342,8 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 			isFolder = true;
 			if (status == svn_wc_status_added)
 				isAdded = true;
+			if (status == svn_wc_status_deleted)
+				isDeleted = true;
 		}
 	}
 		
@@ -380,6 +387,8 @@ void CShellExt::InsertSVNMenu(BOOL ownerdrawn, BOOL istop, HMENU menu, UINT pos,
 
 HBITMAP CShellExt::IconToBitmap(UINT uIcon, COLORREF transparentColor)
 {
+	if (bitmaps.find(uIcon) != bitmaps.end())
+		return bitmaps[uIcon];
 	HICON hIcon = (HICON)LoadImage(g_hResInst, MAKEINTRESOURCE(uIcon), IMAGE_ICON, 10, 10, LR_DEFAULTCOLOR);
 	if (!hIcon)
 		return NULL;
@@ -438,10 +447,10 @@ HBITMAP CShellExt::IconToBitmap(UINT uIcon, COLORREF transparentColor)
 
 	// Restore settings
 	::SelectObject(dst_hdc, old_dst_bmp);
-	::DeleteObject(bmp);
 	::DeleteDC(dst_hdc);
 	::ReleaseDC(desktop, screen_dev); 
 	DestroyIcon(hIcon);
+	bitmaps[uIcon] = bmp;
 	return bmp;
 }
 
@@ -494,6 +503,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 {
 	ATLTRACE("Shell :: QueryContextMenu\n");
 	PreserveChdir preserveChdir;
+	
 	//first check if our drophandler is called
 	//and then (if true) provide the context menu for the
 	//drop handler
@@ -721,8 +731,10 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 
 	if ((!isInSVN)&&(isFolder)&&(!isFolderInSVN))
 		InsertSVNMenu(ownerdrawn, ISTOP(MENUCREATEREPOS), HMENU(MENUCREATEREPOS), INDEXMENU(MENUCREATEREPOS), idCmd++, IDS_MENUCREATEREPOS, IDI_CREATEREPOS, idCmdFirst, CreateRepos);
-	if ((!isInSVN && isInVersionedFolder)||(isInSVN && isFolder)||(isIgnored))
+	if ((!isInSVN && isInVersionedFolder)||(isInSVN && isFolder)||(isIgnored)||(!isFolder && isDeleted && !isOnlyOneItemSelected))
 		InsertSVNMenu(ownerdrawn, ISTOP(MENUADD), HMENU(MENUADD), INDEXMENU(MENUADD), idCmd++, IDS_MENUADD, IDI_ADD, idCmdFirst, Add);
+	else if (!isFolder && isDeleted && isOnlyOneItemSelected)
+		InsertSVNMenu(ownerdrawn, ISTOP(MENUADD), HMENU(MENUADD), INDEXMENU(MENUADD), idCmd++, IDS_MENUADDASREPLACEMENT, IDI_ADD, idCmdFirst, AddAsReplacement);
 	if ((!isInSVN)&&(isFolder))
 		InsertSVNMenu(ownerdrawn, ISTOP(MENUIMPORT), HMENU(MENUIMPORT), INDEXMENU(MENUIMPORT), idCmd++, IDS_MENUIMPORT, IDI_IMPORT, idCmdFirst, Import);
 	if ((isInSVN)&&(!isFolder)&&(!isAdded)&&(isOnlyOneItemSelected))
@@ -965,6 +977,7 @@ STDMETHODIMP CShellExt::InvokeCommand(LPCMINVOKECOMMANDINFO lpcmi)
 						svnCmd += _T("\"");
 						break;
 					case Add:
+					case AddAsReplacement:
 						tempfile = WriteFileListToTempFile();
 						svnCmd += _T("add /path:\"");
 						svnCmd += tempfile;
@@ -1656,6 +1669,12 @@ LPCTSTR CShellExt::GetMenuTextFromResource(int id)
 			break;
 		case Add:
 			MAKESTRING(IDS_MENUADD);
+			resource = MAKEINTRESOURCE(IDI_ADD);
+			SETSPACE(MENUADD);
+			PREPENDSVN(MENUADD);
+			break;
+		case AddAsReplacement:
+			MAKESTRING(IDS_MENUADDASREPLACEMENT);
 			resource = MAKEINTRESOURCE(IDI_ADD);
 			SETSPACE(MENUADD);
 			PREPENDSVN(MENUADD);

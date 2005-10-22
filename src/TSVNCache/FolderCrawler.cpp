@@ -38,17 +38,20 @@ CFolderCrawler::~CFolderCrawler(void)
 
 void CFolderCrawler::Stop()
 {
-	SetEvent(m_hTerminationEvent);
-	if(WaitForSingleObject(m_hThread, 5000) != WAIT_OBJECT_0)
+	if (m_hTerminationEvent != INVALID_HANDLE_VALUE)
 	{
-		ATLTRACE("Error terminating crawler thread\n");
+		SetEvent(m_hTerminationEvent);
+		if(WaitForSingleObject(m_hThread, 5000) != WAIT_OBJECT_0)
+		{
+			ATLTRACE("Error terminating crawler thread\n");
+		}
+		CloseHandle(m_hThread);
+		m_hThread = INVALID_HANDLE_VALUE;
+		CloseHandle(m_hTerminationEvent);
+		m_hTerminationEvent = INVALID_HANDLE_VALUE;
+		CloseHandle(m_hWakeEvent);
+		m_hWakeEvent = INVALID_HANDLE_VALUE;
 	}
-	CloseHandle(m_hThread);
-	m_hThread = INVALID_HANDLE_VALUE;
-	CloseHandle(m_hTerminationEvent);
-	m_hTerminationEvent = INVALID_HANDLE_VALUE;
-	CloseHandle(m_hWakeEvent);
-	m_hWakeEvent = INVALID_HANDLE_VALUE;
 }
 
 void CFolderCrawler::Initialise()
@@ -209,6 +212,11 @@ void CFolderCrawler::WorkerThread()
 							CSVNStatusCache::Instance().RemoveCacheForPath(workingPath);
 					}
 					CSVNStatusCache::Instance().Done();
+					//In case that svn_client_stat() modified a file and we got
+					//a notification about that in the directory watcher,
+					//remove that here again - this is to prevent an endless loop
+					AutoLocker lock(m_critSec);
+					m_pathsToUpdate.erase(std::remove(m_pathsToUpdate.begin(), m_pathsToUpdate.end(), workingPath), m_pathsToUpdate.end());
 				}
 				else if (workingPath.HasAdminDir())
 				{
@@ -225,6 +233,8 @@ void CFolderCrawler::WorkerThread()
 						CSVNStatusCache::Instance().GetDirectoryCacheEntry(workingPath)->Invalidate();
 					CSVNStatusCache::Instance().GetStatusForPath(workingPath, flags);
 					CSVNStatusCache::Instance().Done();
+					AutoLocker lock(m_critSec);
+					m_pathsToUpdate.erase(std::remove(m_pathsToUpdate.begin(), m_pathsToUpdate.end(), workingPath), m_pathsToUpdate.end());
 				}
 			}
 			else if (!m_foldersToUpdate.empty())

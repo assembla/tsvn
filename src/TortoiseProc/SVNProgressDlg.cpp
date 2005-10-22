@@ -113,7 +113,7 @@ void CSVNProgressDlg::AddItemToList(const NotificationData* pData)
 		// Make sure the item is *entirely* visible even if the horizontal
 		// scroll bar is visible.
 		int count = m_ProgList.GetCountPerPage();
-		if (iInsertedAt <= (m_ProgList.GetTopIndex() + count))
+		if (iInsertedAt <= (m_ProgList.GetTopIndex() + count + 2))
 			m_ProgList.EnsureVisible(iInsertedAt, false);
 	}
 }
@@ -1209,7 +1209,11 @@ BOOL CSVNProgressDlg::PreTranslateMessage(MSG* pMsg)
 			// the impression that the OK button was pressed.
 			if ((!m_bThreadRunning)&&(!GetDlgItem(IDCANCEL)->IsWindowEnabled())
 				&&(GetDlgItem(IDOK)->IsWindowEnabled())&&(GetDlgItem(IDOK)->IsWindowVisible()))
+			{
+				// since we convert ESC to RETURN, make sure the OK button has the focus.
+				GetDlgItem(IDOK)->SetFocus();
 				pMsg->wParam = VK_RETURN;
+			}
 		}
 		if (pMsg->wParam == 'A')
 		{
