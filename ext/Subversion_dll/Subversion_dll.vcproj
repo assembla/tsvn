@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="SubWCRev"
-	ProjectGUID="{1F29DBDD-7DFF-4178-98F0-9137636788BC}"
+	Name="Subversion_dll"
+	ProjectGUID="{F333E77B-72D9-4F0D-BE1E-00821127E195}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -13,32 +13,33 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="..\..\bin\Debug\bin"
-			IntermediateDirectory="..\..\obj\SubWCRev\Debug"
-			ConfigurationType="1"
-			CharacterSet="1">
+			IntermediateDirectory="..\..\obj\Subversion_dll\Debug"
+			ConfigurationType="2"
+			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/apr/include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;SUBVERSION_DLL_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="2"
-				ForceConformanceInForLoopScope="TRUE"
+				RuntimeLibrary="1"
 				UsePrecompiledHeader="3"
-				WarningLevel="4"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
 				DebugInformationFormat="4"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Ws2_32.lib shlwapi.lib Version.lib ../../bin/Debug/bin/Subversion_tsvn.lib ../../ext/apr\Debug\libapr.lib ../../ext/apr-util\Debug\libaprutil.lib ../../ext/apr-util\xml\expat\lib\LibD\xml.lib ../../ext/svn-win32-libintl/lib/intl3_svn.lib"
-				OutputFile="$(OutDir)/SubWCRev.exe"
+				AdditionalDependencies="wininet.lib mswsock.lib ws2_32.lib rpcrt4.lib ..\Subversion\db4-win32\lib\libdb43d.lib ..\svn-win32-libintl/lib/intl3_svn.lib"
+				OutputFile="$(OutDir)/Subversion_tsvn.dll"
 				LinkIncremental="2"
-				IgnoreDefaultLibraryNames="LIBC.lib"
+				IgnoreDefaultLibraryNames="LIBC;shell32;msvcrt.lib;libcmtd.lib"
+				ModuleDefinitionFile="Subversion_dll.def"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/SubWCRev.pdb"
-				SubSystem="1"
+				ProgramDatabaseFile="$(OutDir)/Subversion_tsvn.pdb"
+				SubSystem="2"
+				ImportLibrary="$(OutDir)/Subversion_tsvn.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -49,7 +50,8 @@
 			<Tool
 				Name="VCPreLinkEventTool"/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\apr\include"/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
@@ -64,35 +66,33 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\..\bin\Release\bin"
-			IntermediateDirectory="..\..\obj\SubWCRev\Release"
-			ConfigurationType="1"
-			CharacterSet="1"
-			WholeProgramOptimization="TRUE">
+			IntermediateDirectory="..\..\obj\Subversion_dll\Release"
+			ConfigurationType="2"
+			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="1"
-				GlobalOptimizations="TRUE"
-				FavorSizeOrSpeed="2"
-				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/apr/include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="2"
-				BufferSecurityCheck="FALSE"
-				ForceConformanceInForLoopScope="TRUE"
+				AdditionalIncludeDirectories=""
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;SUBVERSION_DLL_EXPORTS"
+				RuntimeLibrary="0"
 				UsePrecompiledHeader="3"
-				WarningLevel="4"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
 				DebugInformationFormat="3"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Ws2_32.lib shlwapi.lib Version.lib ../../bin/Release/bin/Subversion_tsvn.lib ../../ext/apr\Release\libapr.lib ../../ext/apr-util\Release\libaprutil.lib ../../ext/apr-util\xml\expat\lib\LibR\xml.lib ../../ext/svn-win32-libintl/lib/intl3_svn.lib"
-				OutputFile="$(OutDir)/SubWCRev.exe"
+				AdditionalDependencies="wininet.lib mswsock.lib ws2_32.lib rpcrt4.lib ..\Subversion\db4-win32\lib\libdb43.lib ..\svn-win32-libintl/lib/intl3_svn.lib"
+				OutputFile="$(OutDir)/Subversion_tsvn.dll"
 				LinkIncremental="1"
-				IgnoreDefaultLibraryNames="LIBCMT.lib"
+				IgnoreDefaultLibraryNames="shell32;libcmt.lib"
+				ModuleDefinitionFile="Subversion_dll.def"
 				GenerateDebugInformation="TRUE"
-				SubSystem="1"
+				ProgramDatabaseFile="$(OutDir)/Subversion_tsvn.pdb"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)/Subversion_tsvn.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -103,7 +103,8 @@
 			<Tool
 				Name="VCPreLinkEventTool"/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\apr\include"/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
@@ -124,9 +125,6 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath=".\status.cpp">
-			</File>
-			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -142,13 +140,31 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\SubWCRev.cpp">
+				RelativePath=".\Subversion_dll.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Subversion_dll.def">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath=".\resource.h">
+			</File>
 			<File
 				RelativePath=".\stdafx.h">
 			</File>
@@ -157,11 +173,11 @@
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			<File
+				RelativePath=".\Subversion_dll.rc">
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
-		<Global
-			Name="DevPartner_IsInstrumented"
-			Value="0"/>
 	</Globals>
 </VisualStudioProject>

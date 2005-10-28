@@ -30,10 +30,6 @@ if "%1"=="SETUP" SET _SETUP=ON
 shift
 if NOT "%1"=="" goto :getparam
 
-rem patch apr-iconv
-copy ext\apr-iconv\lib\iconv_module.c ext\apr-iconv\lib\iconv_module_original.c /Y
-copy ext\apr-iconv_patch\lib\iconv_module.c ext\apr-iconv\lib /Y
-
 rem OpenSSL
 echo ================================================================================
 echo building OpenSSL
@@ -50,7 +46,7 @@ cd %startdir%\ext\Subversion
 xcopy /Q /Y /I /E %startdir%\ext\berkeley-db\db4.3-win32 db4-win32
 rmdir /s /q build\win32\vcnet-vcproj
 del build\win32\build_*.bat
-echo 0.25.3> %startdir%\ext\neon\.version
+echo 0.25.4> %startdir%\ext\neon\.version
 call python gen-make.py -t vcproj --with-openssl=..\..\..\Common\openssl --with-zlib=..\..\..\Common\zlib --with-neon=..\neon --with-apr=..\apr --with-apr-util=..\apr-util --with-apr-iconv=..\apr-iconv --enable-nls --enable-bdb-in-apr-util --vsnet-version=2003
 copy /Y %startdir%\ext\libaprutil.vcproj %startdir%\ext\apr-util\libaprutil.vcproj
 rem the expat.h.in doesn't have the version information correctly set :(
@@ -58,49 +54,28 @@ copy %startdir%\ext\apr-util\xml\expat\lib\expat.h.in %startdir%\ext\apr-util\xm
 copy %startdir%\expat.h.in %startdir%\ext\apr-util\xml\expat\lib\expat.h.in /Y
 rem the neon tarball contains config.hw, but the source tag doesn't
 copy %startdir%\neonconfig.hw %startdir%\ext\neon\config.hw /Y
+rem we want apr-util without apr-iconv!
+copy %startdir%\ext\apu.hw %startdir%\ext\apr-util\include\apu.hw /Y
+copy %startdir%\ext\utf.c %startdir%\ext\Subversion\subversion\libsvn_subr\utf.c /Y
 
+cd %startdir%
 if DEFINED _DEBUG (
-  rem first, compile without any network/repository support
-  echo building netless Subversion
-  rmdir /s /q Debug\Subversion_netless
-  ren subversion\svn_private_config.h  svn_private_config_copy.h
-  ren subversion\svn_private_config.hw  svn_private_config_copy.hw
-  copy %startdir%\svn_private_config.h subversion\svn_private_config.h
-  copy %startdir%\svn_private_config.h subversion\svn_private_config.hw
-  devenv subversion_vcnet.sln /useenv /rebuild debug /project "__ALL__"
-  ren Debug\subversion subversion_netless
-  echo building Subversion
-  del subversion\svn_private_config.h
-  del subversion\svn_private_config.hw
-  ren subversion\svn_private_config_copy.h svn_private_config.h
-  ren subversion\svn_private_config_copy.hw svn_private_config.hw
-  devenv subversion_vcnet.sln /useenv /rebuild debug /project "__ALL__"
+  if EXIST bin\debug\bin rmdir /S /Q bin\debug\bin > NUL
+  mkdir bin\debug\bin > NUL
+  devenv %startdir%\ext\Subversion_dll\Subversion_dll.sln /useenv /rebuild debug /project "Subversion_dll"
 )
 
 if DEFINED _RELEASE (
-  rem first, compile without any network/repository support
-  echo building netless Subversion
-  rmdir /s /q Release\Subversion_netless
-  ren subversion\svn_private_config.h  svn_private_config_copy.h
-  ren subversion\svn_private_config.hw  svn_private_config_copy.hw
-  copy %startdir%\svn_private_config.h subversion\svn_private_config.h
-  copy %startdir%\svn_private_config.h subversion\svn_private_config.hw
-  devenv subversion_vcnet.sln /useenv /rebuild release /project "__ALL__"
-  ren Release\subversion subversion_netless
-  echo building Subversion
-  del subversion\svn_private_config.h
-  del subversion\svn_private_config.hw
-  ren subversion\svn_private_config_copy.h svn_private_config.h
-  ren subversion\svn_private_config_copy.hw svn_private_config.hw
-  devenv subversion_vcnet.sln /useenv /rebuild release /project "__ALL__"
+  if EXIST bin\release\bin rmdir /S /Q bin\release\bin > NUL
+  mkdir bin\release\bin > NUL
+  devenv %startdir%\ext\Subversion_dll\Subversion_dll.sln /useenv /rebuild release /project "Subversion_dll"
 )
-cd %startdir%
-copy ext\apr-iconv\lib\iconv_module_original.c ext\apr-iconv\lib\iconv_module.c /Y
-del ext\apr-iconv\lib\iconv_module_original.c
+
 copy %startdir%\ext\apr-util\xml\expat\lib\expat.h.in_copy %startdir%\ext\apr-util\xml\expat\lib\expat.h.in /Y
 del %startdir%\ext\apr-util\xml\expat\lib\expat.h.in_copy
 
 svn revert -R ext\apr-util
+svn revert -R ext\Subversion
 
 @echo off
 rem TortoiseSVN
@@ -108,30 +83,18 @@ echo ===========================================================================
 echo copying files
 cd %startdir%
 if DEFINED _DEBUG (
-  if EXIST bin\debug\iconv rmdir /S /Q bin\debug\iconv > NUL
-  mkdir bin\debug\iconv > NUL
-  copy .\ext\apr-iconv\Debug\iconv\*.so bin\debug\iconv > NUL
-  if EXIST bin\debug\bin rmdir /S /Q bin\debug\bin > NUL
-  mkdir bin\debug\bin > NUL
   copy ..\Common\openssl\out32dll\*.dll bin\debug\bin /Y > NUL
   copy .\ext\svn-win32-libintl\bin\intl3_svn.dll bin\debug\bin /Y > NUL
   copy .\ext\Subversion\db4-win32\bin\libdb43d.dll bin\debug\bin /Y > NUL
   copy .\ext\apr\Debug\libapr.dll bin\Debug\bin /Y > NUL 
   copy .\ext\apr-util\Debug\libaprutil.dll bin\Debug\bin /Y > NUL 
-  copy .\ext\apr-iconv\Debug\libapriconv.dll bin\Debug\bin /Y > NUL 
 )
 if DEFINED _RELEASE (
-  if EXIST bin\release\iconv rmdir /S /Q bin\release\iconv > NUL
-  mkdir bin\release\iconv > NUL
-  copy .\ext\apr-iconv\Release\iconv\*.so bin\release\iconv > NUL
-  if EXIST bin\release\bin rmdir /S /Q bin\release\bin > NUL
-  mkdir bin\release\bin > NUL
   copy ..\Common\openssl\out32dll\*.dll bin\release\bin /Y > NUL
   copy .\ext\svn-win32-libintl\bin\intl3_svn.dll bin\release\bin /Y > NUL
   copy .\ext\Subversion\db4-win32\bin\libdb43.dll bin\release\bin /Y > NUL
   copy .\ext\apr\Release\libapr.dll bin\Release\bin /Y > NUL 
   copy .\ext\apr-util\Release\libaprutil.dll bin\Release\bin /Y > NUL 
-  copy .\ext\apr-iconv\Release\libapriconv.dll bin\Release\bin /Y > NUL 
 )
 echo ================================================================================
 echo building TortoiseSVN

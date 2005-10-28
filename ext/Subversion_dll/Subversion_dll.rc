@@ -1,0 +1,141 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "..\Subversion\subversion\include\svn_version.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION SVN_VER_MAJOR,SVN_VER_MINOR,SVN_VER_PATCH
+ PRODUCTVERSION SVN_VER_MAJOR,SVN_VER_MINOR,SVN_VER_PATCH
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "FileDescription", "Subversion TSVN Dll"
+            VALUE "FileVersion", SVN_VERSION
+            VALUE "InternalName", "Subversion TSVN Dll"
+            VALUE "LegalCopyright", "Copyright (C) 2005"
+            VALUE "OriginalFilename", "Subversion_tsvn.dll"
+            VALUE "ProductName", "TortoiseSVN"
+            VALUE "ProductVersion", SVN_VERSION
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""..\\Subversion\\subversion\\include\\svn_version.h""\r\n"
+    "\r\n"
+    "/////////////////////////////////////////////////////////////////////////////\r\n"
+    "//\r\n"
+    "// Version\r\n"
+    "//\r\n"
+    "\r\n"
+    "VS_VERSION_INFO VERSIONINFO\r\n"
+    " FILEVERSION SVN_VER_MAJOR,SVN_VER_MINOR,SVN_VER_PATCH\r\n"
+    " PRODUCTVERSION SVN_VER_MAJOR,SVN_VER_MINOR,SVN_VER_PATCH\r\n"
+    " FILEFLAGSMASK 0x17L\r\n"
+    "#ifdef _DEBUG\r\n"
+    " FILEFLAGS 0x1L\r\n"
+    "#else\r\n"
+    " FILEFLAGS 0x0L\r\n"
+    "#endif\r\n"
+    " FILEOS 0x4L\r\n"
+    " FILETYPE 0x2L\r\n"
+    " FILESUBTYPE 0x0L\r\n"
+    "BEGIN\r\n"
+    "    BLOCK ""StringFileInfo""\r\n"
+    "    BEGIN\r\n"
+    "        BLOCK ""000004b0""\r\n"
+    "        BEGIN\r\n"
+    "            VALUE ""FileDescription"", ""Subversion TSVN Dll""\r\n"
+    "            VALUE ""FileVersion"", SVN_VERSION\r\n"
+    "            VALUE ""InternalName"", ""Subversion TSVN Dll""\r\n"
+    "            VALUE ""LegalCopyright"", ""Copyright (C) 2005""\r\n"
+    "            VALUE ""OriginalFilename"", ""Subversion_tsvn.dll""\r\n"
+    "            VALUE ""ProductName"", ""TortoiseSVN""\r\n"
+    "            VALUE ""ProductVersion"", SVN_VERSION\r\n"
+    "        END\r\n"
+    "    END\r\n"
+    "    BLOCK ""VarFileInfo""\r\n"
+    "    BEGIN\r\n"
+    "        VALUE ""Translation"", 0x0, 1200\r\n"
+    "    END\r\n"
+    "END\r\n"
+    "\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
