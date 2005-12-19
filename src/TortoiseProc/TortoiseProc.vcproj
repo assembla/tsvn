@@ -11,6 +11,9 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
@@ -78,6 +81,95 @@
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="D:\Program Files\TSVN64\bin\"
+			IntermediateDirectory="x64\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
+			UseOfATL="0"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="false"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\svn-win32-libintl\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet"
+				PreprocessorDefinitions="_WINDOWS;_DEBUG;SVN_DEBUG;APU_HAVE_DB=1;ENABLE_NLS;THESAURUS;WIN64"
+				MinimalRebuild="true"
+				ExceptionHandling="1"
+				RuntimeLibrary="3"
+				TreatWChar_tAsBuiltInType="true"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="4"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="&quot;$(IntDir)&quot;;..\TortoiseShell"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj\ResizableLib\Debug\ResizableLib.lib ../../ext/Subversion\db4-win64\lib\libdb43d.lib ../../ext/Subversion\Debug\subversion\libsvn_repos\libsvn_repos-1.lib ../../ext/Subversion\Debug\subversion\libsvn_diff\libsvn_diff-1.lib ../../ext/Subversion\Debug\subversion\libsvn_fs\libsvn_fs-1.lib ../../ext/Subversion\Debug\subversion\libsvn_fs_base\libsvn_fs_base-1.lib ../../ext/Subversion\Debug\subversion\libsvn_fs_fs\libsvn_fs_fs-1.lib ../../ext/Subversion\Debug\subversion\libsvn_ra_dav\libsvn_ra_dav-1.lib ../../ext/Subversion\Debug\subversion\libsvn_ra_local\libsvn_ra_local-1.lib ../../ext/Subversion\Debug\subversion\libsvn_ra\libsvn_ra-1.lib ../../ext/Subversion\Debug\subversion\libsvn_ra_svn\libsvn_ra_svn-1.lib ../../ext/neon\libneonD.lib ../../ext/Subversion\Debug\subversion\libsvn_wc\libsvn_wc-1.lib ../../ext/Subversion\Debug\subversion\libsvn_subr\libsvn_subr-1.lib ../../ext/Subversion\Debug\subversion\libsvn_client\libsvn_client-1.lib ../../ext/Subversion\Debug\subversion\libsvn_delta\libsvn_delta-1.lib ../../ext/apr\Debug\libapr.lib ../../ext/apr-util\Debug\libaprutil.lib ../../ext/apr-iconv\Debug\libapriconv.lib ../../ext/apr-util\xml\expat\lib\LibD\xml.lib ../../ext/svn-win64-libintl/lib/intl3_svn.lib"
+				LinkIncremental="2"
+				IgnoreDefaultLibraryNames="LIBC;shell32;msvcrt.lib"
+				DelayLoadDLLs="gdiplus.dll;libdb43d.dll;libeay32.dll"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -199,6 +291,101 @@
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="x64\$(ConfigurationName)"
+			IntermediateDirectory="x64\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="UpgradeFromVC71.vsprops"
+			UseOfMFC="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="false"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="1"
+				InlineFunctionExpansion="1"
+				FavorSizeOrSpeed="2"
+				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\svn-win32-libintl\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet"
+				PreprocessorDefinitions="_WINDOWS;NDEBUG;APU_HAVE_DB=1;THESAURUS;WIN64"
+				StringPooling="true"
+				MinimalRebuild="false"
+				RuntimeLibrary="2"
+				BufferSecurityCheck="false"
+				TreatWChar_tAsBuiltInType="true"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="4"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="&quot;$(IntDir)&quot;;..\TortoiseShell"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj/ResizableLib/Release/ResizableLib.Lib ../../ext/Subversion\db4-win64\lib\libdb43.lib ../../ext/Subversion\Release\subversion\libsvn_repos\libsvn_repos-1.lib ../../ext/Subversion\Release\subversion\libsvn_diff\libsvn_diff-1.lib ../../ext/Subversion\Release\subversion\libsvn_fs\libsvn_fs-1.lib ../../ext/Subversion\Release\subversion\libsvn_fs_base\libsvn_fs_base-1.lib ../../ext/Subversion\Release\subversion\libsvn_fs_fs\libsvn_fs_fs-1.lib ../../ext/Subversion\Release\subversion\libsvn_ra_dav\libsvn_ra_dav-1.lib ../../ext/Subversion\Release\subversion\libsvn_ra_local\libsvn_ra_local-1.lib ../../ext/Subversion\Release\subversion\libsvn_ra\libsvn_ra-1.lib ../../ext/Subversion\Release\subversion\libsvn_ra_svn\libsvn_ra_svn-1.lib ../../ext/neon\libneon.lib ../../ext/Subversion\Release\subversion\libsvn_wc\libsvn_wc-1.lib ../../ext/Subversion\Release\subversion\libsvn_subr\libsvn_subr-1.lib ../../ext/Subversion\Release\subversion\libsvn_client\libsvn_client-1.lib ../../ext/Subversion\Release\subversion\libsvn_delta\libsvn_delta-1.lib ../../ext/apr\Release\libapr.lib ../../ext/apr-util\Release\libaprutil.lib ../../ext/apr-iconv\Release\libapriconv.lib ../../ext/apr-util\xml\expat\lib\LibR\xml.lib ../../ext/svn-win64-libintl/lib/intl3_svn.lib"
+				LinkIncremental="1"
+				IgnoreDefaultLibraryNames="libcd.lib;libc;shell32;"
+				DelayLoadDLLs="gdiplus.dll;libdb43.dll;libeay32.dll"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				OptimizeForWindows98="1"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -223,6 +410,22 @@
 					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -266,7 +469,23 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
+						Name="Debug|x64"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
 						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|x64"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -610,11 +829,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -636,11 +871,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -670,11 +921,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -696,11 +963,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -722,11 +1005,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -744,11 +1043,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -774,11 +1089,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -800,11 +1131,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -826,11 +1173,27 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -883,7 +1246,23 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -915,7 +1294,23 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
+							Name="Debug|x64"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
 							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|x64"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -1766,7 +2161,23 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug|x64"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					ExcludedFromBuild="true"
 					>
 					<Tool
@@ -1807,7 +2218,23 @@
 				/>
 			</FileConfiguration>
 			<FileConfiguration
+				Name="Debug|x64"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+					UsePrecompiledHeader="1"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
 				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+					UsePrecompiledHeader="1"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|x64"
 				>
 				<Tool
 					Name="VCCLCompilerTool"
