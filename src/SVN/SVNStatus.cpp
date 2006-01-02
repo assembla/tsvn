@@ -288,7 +288,7 @@ svn_revnum_t SVNStatus::GetStatus(const CTSVNPath& path, bool update /* = false 
 	
 	return youngest;
 }
-svn_wc_status2_t * SVNStatus::GetFirstFileStatus(const CTSVNPath& path, CTSVNPath& retPath, bool update)
+svn_wc_status2_t * SVNStatus::GetFirstFileStatus(const CTSVNPath& path, CTSVNPath& retPath, bool update, bool recurse)
 {
 	const sort_item*			item;
 
@@ -304,7 +304,7 @@ svn_wc_status2_t * SVNStatus::GetFirstFileStatus(const CTSVNPath& path, CTSVNPat
 							&rev,
 							getstatushash,
 							&hashbaton,
-							TRUE,		//descend
+							recurse,	//descend
 							TRUE,		//getall
 							update,		//update
 							TRUE,		//noignore
