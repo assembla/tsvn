@@ -15,3 +15,6 @@ Merged changes:
 5328							: Cache not saved correctly
 5323							: Rename md5 checksum to .md5 instead of .txt
 5308, 5335						: Fix build scripts
+5337							: Fix blame from the repobrowser with file not existing in HEAD anymore
+5338							: stop threads before deleting/nulling CSVNStatusCache instance
+5339							: increase auth retry limit
