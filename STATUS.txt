@@ -23,9 +23,12 @@ Merged changes:
 5350							: Use midnight as the default time in the log filter
 5351							: Use full filename to load crashreport dll
 5358							: fix broken sorting in log dialog
-5361, 5364, 5367				: patch neon from the build script
+5361, 5364, 5367, 5389-5392		: patch neon from the build script
 5375							: critical sections to avoid crash when drive is unmounted (cache)
 5376							: OK button read "Cancel" instead of "OK" in log dialog started for selection
 5374, 5381						: doc change, copyright
 5384							: crash with URLs in wrong case
+5390							: reverting multiple revisions from the log dialog missed reverting the last
+								  selected revision
+
 
