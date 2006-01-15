@@ -37,7 +37,7 @@
 				<arg value="-outputresource:libeay32.dll;#2" />
 			</exec>
 		</if>
-		<if test="${platform == 'win64'}">
+		<if test="${platform == 'x64'}">
 			<exec program="perl" workingdir="..\..\common\openssl">
 				<arg value="Configure" />
 				<arg value="VC-WIN64A" />
