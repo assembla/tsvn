@@ -174,7 +174,7 @@ static const struct CommandInfo
 	{	cmdUnIgnore,		_T("unignore"),			true	},
 	{	cmdBlame,			_T("blame"),			false	},
 	{	cmdCat,				_T("cat"),				false	},
-	{	cmdCreatePatch,		_T("createpatch"),		false	},
+	{	cmdCreatePatch,		_T("createpatch"),		true	},
 	{	cmdUpdateCheck,		_T("updatecheck"),		false	},
 	{	cmdRevisionGraph,	_T("revisiongraph"),	false	},
 	{	cmdLock,			_T("lock"),				true	},
@@ -263,6 +263,7 @@ BOOL CTortoiseProcApp::InitInstance()
 		}
 	} while ((hInst == NULL) && (langId != 0));
 	TCHAR buf[6];
+	_tcscpy_s(buf, _T("en"));
 	langId = loc;
 	CString sHelppath;
 	sHelppath = this->m_pszHelpFilePath;
@@ -1738,7 +1739,7 @@ BOOL CTortoiseProcApp::InitInstance()
 		len = ::GetTempPath (len+100, path);
 		if (len != 0)
 		{
-			CSimpleFileFind finder = CSimpleFileFind(path, _T("svn*.*"));
+			CSimpleFileFind finder = CSimpleFileFind(path, _T("*svn*.*"));
 			FILETIME systime_;
 			::GetSystemTimeAsFileTime(&systime_);
 			__int64 systime = (((_int64)systime_.dwHighDateTime)<<32) | ((__int64)systime_.dwLowDateTime);
@@ -1881,7 +1882,7 @@ BOOL CTortoiseProcApp::CreatePatch(const CTSVNPath& root, const CTSVNPathList& p
 	::DeleteFile(tempPatchFilePath.GetWinPath());
 	
 	CTSVNPath sDir = path.GetCommonRoot();
-	if (!root.IsEmpty())
+	if (sDir.IsEmpty())
 		sDir = root;
 	if (!sDir.IsDirectory())
 	{
@@ -1899,7 +1900,7 @@ BOOL CTortoiseProcApp::CreatePatch(const CTSVNPath& root, const CTSVNPathList& p
 		CString sRelativePath = path[fileindex].GetWinPathString().Mid(sDir.GetDirectory().GetWinPathString().GetLength());
 		sRelativePath.Trim(_T("/\\"));
 		CTSVNPath diffpath = CTSVNPath(sRelativePath);
-		if (!svn.Diff(diffpath, SVNRev::REV_BASE, diffpath, SVNRev::REV_WC, TRUE, FALSE, FALSE, FALSE, _T(""), true, tempPatchFilePath))
+		if (!svn.Diff(diffpath, SVNRev::REV_BASE, diffpath, SVNRev::REV_WC, FALSE, FALSE, FALSE, FALSE, _T(""), true, tempPatchFilePath))
 		{
 			progDlg.Stop();
 			::MessageBox((EXPLORERHWND), svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);

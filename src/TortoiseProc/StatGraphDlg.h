@@ -20,10 +20,11 @@
 
 #include "StandAloneDlg.h"
 #include "MyGraph.h"
+#include "afxcmn.h"
 
 // CStatGraphDlg dialog
 
-class CStatGraphDlg : public CResizableStandAloneDialog
+class CStatGraphDlg : public CResizableStandAloneDialog//CResizableStandAloneDialog
 {
 	DECLARE_DYNAMIC(CStatGraphDlg)
 
@@ -38,12 +39,17 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	virtual BOOL OnInitDialog();
 	afx_msg void OnCbnSelchangeGraphcombo();
+	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	afx_msg void OnBnClickedStacked();
+	afx_msg void OnNeedText(NMHDR *pnmh, LRESULT *pResult);
 
 	DECLARE_MESSAGE_MAP()
 	
 	CPtrArray		m_graphDataArray;
 	MyGraph			m_graph;
 	CComboBox		m_cGraphType;
+	CSliderCtrl		m_Skipper;
+	BOOL			m_bStacked;
 	
 	void		ShowCommitsByDate();
 	void		ShowCommitsByAuthor();

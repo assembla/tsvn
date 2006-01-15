@@ -431,7 +431,7 @@ void CCachedDirectory::GetStatusCallback(void *baton, const char *path, svn_wc_s
 
 	if(status->entry)
 	{
-		svnPath.SetFromSVN(path, (status->entry->kind == svn_node_dir));
+		svnPath.SetFromSVN(path, ((status->entry->kind == svn_node_dir)&&(status->text_status != svn_wc_status_ignored)));
 
 		if(svnPath.IsDirectory())
 		{
@@ -640,7 +640,7 @@ void CCachedDirectory::RefreshStatus(bool bRecursive)
 				{
 					// crawl all subfolders too! Otherwise a change deep inside the
 					// tree which has changed won't get propagated up the tree.
-					CSVNStatusCache::Instance().AddFolderForCrawling(CTSVNPath(itMembers->first));
+					CSVNStatusCache::Instance().AddFolderForCrawling(filePath);
 				}
 			}
 		}

@@ -516,7 +516,7 @@ BOOL CSVNProgressDlg::OnInitDialog()
 
 void CSVNProgressDlg::ReportSVNError()
 {
-	ReportError(m_pSvn->GetLastErrorMessage());
+	ReportError(m_pSvn->GetLastErrorMessage(MAX_PATH));
 }
 
 void CSVNProgressDlg::ReportError(const CString& sError)
@@ -596,9 +596,13 @@ UINT CSVNProgressDlg::ProgressThread()
 			SetWindowText(sWindowTitle);
 			if (!m_pSvn->Checkout(m_url, m_targetPathList[0], m_Revision, m_Revision, m_options & ProgOptRecursive, m_options & ProgOptIgnoreExternals))
 			{
+				if (m_ProgList.GetItemCount()!=0)
+				{
+						ReportSVNError();
+				}
 				// if the checkout fails with the peg revision set to the checkout revision,
 				// try again with HEAD as the peg revision.
-				if (!m_pSvn->Checkout(m_url, m_targetPathList[0], SVNRev::REV_HEAD, m_Revision, m_options & ProgOptRecursive, m_options & ProgOptIgnoreExternals))
+				else if (!m_pSvn->Checkout(m_url, m_targetPathList[0], SVNRev::REV_HEAD, m_Revision, m_options & ProgOptRecursive, m_options & ProgOptIgnoreExternals))
 				{
 					ReportSVNError();
 				}
@@ -1391,7 +1395,7 @@ void CSVNProgressDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 						{
 						case ID_COMPARE:
 							{
-								CTSVNPath tempfile = CTempFiles::Instance().GetTempFilePath(true, data->path);
+								CTSVNPath tempfile = CTempFiles::Instance().GetTempFilePath(true, data->path, m_nUpdateStartRev);
 								SVN svn;
 								if (!svn.Cat(data->path, SVNRev(SVNRev::REV_WC), m_nUpdateStartRev, tempfile))
 								{

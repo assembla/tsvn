@@ -6,13 +6,13 @@
 # Jan Normann Nielsen <spam@dubbekarl.dk>
 # Gunther Strube <gbs@users.sourceforge.net>
 #
-# Based on Tortoise.pot r5160
+# Based on Tortoise.pot r5300
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2005-12-19 12:39+0100\n"
+"PO-Revision-Date: 2006-01-05 08:01+0100\n"
 "Last-Translator: Jan Normann Nielsen <spam@dubbekarl.dk>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgstr "%I64d Bytes overført"
 #: ID:357,
 #, c-format
 msgid "%I64d kBytes transferred"
-msgstr "%l64d kBytes overført"
+msgstr "%I64d kBytes overført"
 
 #: ID:169,
 #, c-format
@@ -1237,6 +1237,11 @@ msgstr "Kommentar"
 msgid "Commit"
 msgstr "Arkivér"
 
+#: Control-ID:1262,
+#, fuzzy
+msgid "Commit threshold:"
+msgstr "Arkiveringsterskel:"
+
 #: Control-ID:1110,
 msgid "Commit to:"
 msgstr "Arkivér til:"
@@ -1413,7 +1418,7 @@ msgstr "Filen %s kunne ikke gemmes!"
 #: ID:81,
 #, c-format
 msgid "Could not start diff viewer!\n<hr=100%%>\n%s"
-msgstr "Diff-fremvisningsprogrammet kunne ikke startes!\n<hr=100%%>\n%"
+msgstr "Diff-fremvisningsprogrammet kunne ikke startes!\n<hr=100%%>\n%s"
 
 #: ID:81,
 #, c-format
@@ -2131,8 +2136,12 @@ msgid "Look and Feel::Colors"
 msgstr "Tema::Farver"
 
 #: Dlg-ID:196,
-msgid "Look and Feel::Dialogs"
-msgstr "Tema::Dialoger"
+msgid "Look and Feel::Dialogs 1"
+msgstr "Tema::Dialoger 1"
+
+#: Dlg-ID:213,
+msgid "Look and Feel::Dialogs 2"
+msgstr "Tema::Dialoger 2"
 
 #: Dlg-ID:106,
 msgid "Look and Feel::Icon Overlays"
@@ -2141,10 +2150,6 @@ msgstr "Tema::Ikonoverdækninger"
 #: Dlg-ID:184,
 msgid "Look and Feel::Icon Set"
 msgstr "Tema::Ikoner"
-
-#: Dlg-ID:213,
-msgid "Look and Feel::Misc"
-msgstr "Tema::Andet"
 
 #: ID:238,
 #, c-format
@@ -2432,6 +2437,10 @@ msgstr "Åbner hjælpen\nHjælpeemner"
 #: ID:13,
 msgid "Opens the repository browser to tweak the repository online"
 msgstr "Åbner versionsarkivsøgeren til at styre versionsarkivet online"
+
+#: ID:245,
+msgid "Others"
+msgstr "Andre"
 
 #: ID:3843,#: ID:3843,
 msgid "Out of memory."
@@ -3221,6 +3230,11 @@ msgstr "Angiv intervallet af revisioner, som skal flettes:"
 #: ID:3604,
 msgid "Split the active window into panes\nSplit"
 msgstr "Opdel det aktive vindue i paneler\nOpdel"
+
+#: Control-ID:1263,
+#, fuzzy
+msgid "Stacked"
+msgstr "Stakket"
 
 #: ID:245,
 msgid "Statistics"

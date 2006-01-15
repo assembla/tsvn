@@ -335,6 +335,16 @@ public:
 	 */
 	void SetEmptyString(const CString& str) {m_sEmpty = str;}
 	void SetEmptyString(UINT id) {m_sEmpty.LoadString(id);}
+
+	/**
+	 * Determines if the control should recurse into unversioned folders
+	 * when fetching the status. The default behavior is defined by the
+	 * registry key HKCU\Software\TortoiseSVN\UnversionedRecurse, which
+	 * is read in the Init() method.
+	 * If you want to change the behavior, call this method *after*
+	 * calling Init().
+	 */
+	void SetUnversionedRecurse(bool bUnversionedRecurse) {m_bUnversionedRecurse = bUnversionedRecurse;}
 	
 public:
 	CString GetLastErrorMessage() {return m_sLastError;}
@@ -362,7 +372,7 @@ private:
 	static bool CSVNStatusListCtrl::SortCompare(const FileEntry* entry1, const FileEntry* entry2);
 
 	/// Process one line of the command file supplied to GetStatus
-	bool FetchStatusForSingleTarget(SVNConfig& config, SVNStatus& status, const CTSVNPath& target, bool bFetchStatusFromRepository, CStringA& strCurrentRepositoryUUID, CTSVNPathList& arExtPaths, bool bAllDirect); 
+	bool FetchStatusForSingleTarget(SVNConfig& config, SVNStatus& status, const CTSVNPath& target, bool bFetchStatusFromRepository, CStringA& strCurrentRepositoryUUID, CTSVNPathList& arExtPaths, bool bAllDirect, bool recurse = true); 
 
 	/// Create 'status' data for each item in an unversioned folder
 	void AddUnversionedFolder(const CTSVNPath& strFolderName, const CTSVNPath& strBasePath, apr_array_header_t *pIgnorePatterns);

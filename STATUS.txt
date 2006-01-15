@@ -1,0 +1,44 @@
+This file tracks the status of releases in the 1.3.x line.
+
+Status of 1.3.0:
+================
+
+Soak period:
+  30-12-2005 - Soak period started with RC1 release
+  15-01-2006 - Soak period ended, 1.3.0 released
+
+Merged changes:
+Version 1.3.1
+
+Version 1.3.0
+5321, 5322						: issue #205.
+5323							: using the 1.3.0 tag of Subversion
+5325							: correct stacked weekly graph for 0-commit entries
+5326, 5344						: Stat graph slider tooltips show "xx %", number of authors grouped
+5328							: Cache not saved correctly
+5323							: Rename md5 checksum to .md5 instead of .txt
+5308, 5335						: Fix build scripts
+5337, 5343						: Fix blame from the repobrowser with file not existing in HEAD anymore
+5338							: stop threads before deleting/nulling CSVNStatusCache instance
+5339							: increase auth retry limit
+5345							: reject illegal paths in overlay requests
+5349							: treat UTF8 files without BOM differently
+5350							: Use midnight as the default time in the log filter
+5351							: Use full filename to load crashreport dll
+5358							: fix broken sorting in log dialog
+5361, 5364, 5367, 5389-5392, 5414: patch neon from the build script
+5375							: critical sections to avoid crash when drive is unmounted (cache)
+5376							: OK button read "Cancel" instead of "OK" in log dialog started for selection
+5374, 5381						: doc change, copyright
+5384							: crash with URLs in wrong case
+5390							: reverting multiple revisions from the log dialog missed reverting the last
+								  selected revision
+5403							: Fix bug with "Others (#)" for "by date" statistics
+5404							: Wrong crawling of ignored files (treated them as folders)
+5405							: Fix creating patchfile for multiple selected files
+5408							: Broken diffing of UTF8 files
+5409							: Create Patch included files two times if they were below a folder with
+								  property changes
+5410							: Foldernames like "folder.svn" were treated as admin dirs
+
+

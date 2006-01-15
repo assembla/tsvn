@@ -4,9 +4,13 @@
 	<!-- default configuration is release -->
 	<property name="configuration" value="release" />
 	<!-- default builds are dev builds -->
-	<property name="devrelease" value="-dev" />
+	<property name="devrelease" value="-dev" unless="${property::exists('devrelease')}"/>
 	<!-- default build for win32 platform -->
 	<property name="platform" value="Win32" />
+	<!-- default build tool is VS.NET2005 -->
+	<property name="buildtool" value="devenv.com" />
+
+	<include buildfile="default.build.user" />
 	
 <!-- ====================================================================== -->
 <!-- Configuration targets													-->
@@ -51,7 +55,7 @@
 		</nant>
 	</target>
 
-	<target name="docs" depends="env">
+	<target name="docs" depends="VSNET,env">
 		<description>
 			Builds the docs in all languages and all formats.
 		</description>
@@ -178,23 +182,6 @@
 				<exclude name="ext/Subversion/**" />
 			</fileset>
 		</zip>
-	</target>
-
-<!-- ====================================================================== -->
-<!-- Requirement-check targets												-->
-<!-- ====================================================================== -->
-	<target name="VSNET" description="Checks if the env variables for VS.NET2005 are set">
-		<if test="${not environment::variable-exists('VCINSTALLDIR')}">
-			<fail>You must first call %VS80COMNTOOLS%\vsvars32.bat!</fail>
-		</if>
-	</target>
-	
-	<target name="env" description="sets up the env variables with the paths to our needed tools">
-		<nant target="settoolpaths">
-			<buildfiles>
-				<include name="toolpaths.build" />
-			</buildfiles>
-		</nant>
 	</target>
 
 <!-- ====================================================================== -->

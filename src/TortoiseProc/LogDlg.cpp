@@ -59,7 +59,7 @@ CLogDlg::CLogDlg(CWnd* pParent /*=NULL*/)
 	m_pFindDialog = NULL;
 	m_bCancelled = FALSE;
 	m_pNotifyWindow = NULL;
-	m_bThreadRunning = FALSE;
+	m_bThreadRunning = false;
 	m_bAscending = FALSE;
 }
 
@@ -272,10 +272,10 @@ BOOL CLogDlg::OnInitDialog()
 	//blocking the dialog
 	m_tTo = 0;
 	m_tFrom = (DWORD)-1;
-	m_bThreadRunning = TRUE;
+	m_bThreadRunning = true;
 	if (AfxBeginThread(LogThreadEntry, this)==NULL)
 	{
-		m_bThreadRunning = FALSE;
+		m_bThreadRunning = false;
 		CMessageBox::Show(NULL, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
 	}
 	return FALSE;
@@ -390,10 +390,10 @@ void CLogDlg::OnBnClickedGetall()
 	m_limit = 0;
 	m_tTo = 0;
 	m_tFrom = (DWORD)-1;
-	m_bThreadRunning = TRUE;
+	m_bThreadRunning = true;
 	if (AfxBeginThread(LogThreadEntry, this)==NULL)
 	{
-		m_bThreadRunning = FALSE;
+		m_bThreadRunning = false;
 		CMessageBox::Show(NULL, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
 	}
 	GetDlgItem(IDC_LOGLIST)->UpdateData(FALSE);
@@ -430,13 +430,14 @@ void CLogDlg::Refresh()
 	m_arShownList.RemoveAll();
 	m_logEntries.ClearAll();
 
-	m_bThreadRunning = TRUE;
+	m_bThreadRunning = false;
 	if (AfxBeginThread(LogThreadEntry, this)==NULL)
 	{
-		m_bThreadRunning = FALSE;
+		m_bThreadRunning = false;
 		CMessageBox::Show(NULL, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
 	}
 	GetDlgItem(IDC_LOGLIST)->UpdateData(FALSE);
+	m_bNoDispUpdates = false;
 }
 
 void CLogDlg::OnBnClickedNexthundred()
@@ -458,10 +459,10 @@ void CLogDlg::OnBnClickedNexthundred()
 	m_bCancelled = FALSE;
 	m_limit = 100;
 	SetSortArrow(&m_LogList, -1, true);
-	m_bThreadRunning = TRUE;
+	m_bThreadRunning = true;
 	if (AfxBeginThread(LogThreadEntry, this)==NULL)
 	{
-		m_bThreadRunning = FALSE;
+		m_bThreadRunning = false;
 		CMessageBox::Show(NULL, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
 	}
 	GetDlgItem(IDC_LOGLIST)->UpdateData(FALSE);
@@ -479,7 +480,7 @@ void CLogDlg::OnCancel()
 	temp2.LoadString(IDS_MSGBOX_CANCEL);
 	if ((temp.Compare(temp2)==0)||(m_bThreadRunning))
 	{
-		m_bCancelled = TRUE;
+		m_bCancelled = true;
 		return;
 	}
 	__super::OnCancel();
@@ -509,25 +510,16 @@ BOOL CLogDlg::Log(svn_revnum_t rev, const CString& author, const CString& date, 
 	CString sShortMessage = message;
 	// Remove newlines 'cause those are not shown nicely in the listcontrol
 	sShortMessage.Replace(_T("\r"), _T(""));
-	sShortMessage.Replace('\n', ' ');
 	
 	found = sShortMessage.Find(_T("\n\n"));
 	if (found >=0)
 	{
-		if (found <=80)
-			sShortMessage = sShortMessage.Left(found);
-		else
-		{
-			found = sShortMessage.Find(_T("\n"));
-			if ((found >= 0)&&(found <=80))
-				sShortMessage = sShortMessage.Left(found);
-		}
+		sShortMessage = sShortMessage.Left(found);
 	}
-	else if (sShortMessage.GetLength() > 80)
-		sShortMessage = sShortMessage.Left(77) + _T("...");
+	sShortMessage.Replace('\n', ' ');
 	
 	PLOGENTRYDATA pLogItem = new LOGENTRYDATA;
-	pLogItem->bCopies = copies;
+	pLogItem->bCopies = !!copies;
 	pLogItem->tmDate = ttime;
 	pLogItem->sAuthor = author;
 	pLogItem->sDate = date;
@@ -576,7 +568,7 @@ UINT CLogDlg::LogThreadEntry(LPVOID pVoid)
 //this is the thread function which calls the subversion function
 UINT CLogDlg::LogThread()
 {
-	m_bThreadRunning = TRUE;
+	m_bThreadRunning = true;
 
 	//disable the "Get All" button while we're receiving
 	//log messages.
@@ -585,8 +577,11 @@ UINT CLogDlg::LogThread()
 	GetDlgItem(IDC_CHECK_STOPONCOPY)->EnableWindow(FALSE);
 	
 	CString temp;
-	temp.LoadString(IDS_MSGBOX_CANCEL);
-	GetDlgItem(IDOK)->SetWindowText(temp);
+	if (!GetDlgItem(IDOK)->IsWindowVisible())
+	{
+		temp.LoadString(IDS_MSGBOX_CANCEL);
+		GetDlgItem(IDCANCEL)->SetWindowText(temp);
+	}
 	m_LogProgress.SetRange32(0, 100);
 	m_LogProgress.SetPos(0);
 	GetDlgItem(IDC_PROGRESS)->ShowWindow(TRUE);
@@ -636,14 +631,17 @@ UINT CLogDlg::LogThread()
 	GetDlgItem(IDC_CHECK_STOPONCOPY)->EnableWindow(TRUE);
 
 	GetDlgItem(IDC_PROGRESS)->ShowWindow(FALSE);
-	m_bCancelled = TRUE;
-	m_bThreadRunning = FALSE;
+	m_bCancelled = true;
+	m_bThreadRunning = false;
 	m_LogList.RedrawItems(0, m_arShownList.GetCount());
 	m_LogList.SetRedraw(false);
 	CUtils::ResizeAllListCtrlCols(&m_LogList);
 	m_LogList.SetRedraw(true);
-	temp.LoadString(IDS_MSGBOX_OK);
-	GetDlgItem(IDOK)->SetWindowText(temp);
+	if (!GetDlgItem(IDOK)->IsWindowVisible())
+	{
+		temp.LoadString(IDS_MSGBOX_OK);
+		GetDlgItem(IDCANCEL)->SetWindowText(temp);
+	}
 	POINT pt;
 	GetCursorPos(&pt);
 	SetCursorPos(pt.x, pt.y);
@@ -892,12 +890,13 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 						POSITION pos = m_LogList.GetFirstSelectedItemPosition();
 						PLOGENTRYDATA pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(m_LogList.GetNextSelectedItem(pos)));
 						long rev = pLogEntry->dwRev;
-						long revend = rev-1;
+						long revend = rev;
 						while (pos)
 						{
 						    pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(m_LogList.GetNextSelectedItem(pos)));
 						    revend = pLogEntry->dwRev;
-						}					
+						}
+						revend--;
 						CString msg;
 						msg.Format(IDS_LOG_REVERT_CONFIRM, m_path.GetWinPathString());
 						if (CMessageBox::Show(this->m_hWnd, msg, _T("TortoiseSVN"), MB_YESNO | MB_ICONQUESTION) == IDYES)
@@ -1082,7 +1081,7 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 						progDlg.SetLine(1, sInfoLine);
 						SetAndClearProgressInfo(&progDlg);
 						progDlg.ShowModeless(m_hWnd);
-						CTSVNPath tempfile = CTempFiles::Instance().GetTempFilePath(true, m_path);
+						CTSVNPath tempfile = CTempFiles::Instance().GetTempFilePath(true, m_path, rev);
 						if (!Cat(m_path, SVNRev(SVNRev::REV_HEAD), rev, tempfile))
 						{
 							progDlg.Stop();
@@ -1506,7 +1505,7 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 						SetAndClearProgressInfo(&progDlg);
 						progDlg.ShowModeless(m_hWnd);
 
-						CTSVNPath tempfile = CTempFiles::Instance().GetTempFilePath(true, CTSVNPath(filepath));
+						CTSVNPath tempfile = CTempFiles::Instance().GetTempFilePath(true, CTSVNPath(filepath), rev);
 						if (!Cat(CTSVNPath(filepath), SVNRev(rev), rev, tempfile))
 						{
 							progDlg.Stop();
@@ -2469,7 +2468,10 @@ void CLogDlg::OnLvnGetdispinfoLoglist(NMHDR *pNMHDR, LRESULT *pResult)
 			break;
 		case 4: //message
 			if (itemid < m_logEntries.size())
+			{
 				pItem->pszText = const_cast<LPWSTR>((LPCTSTR)pLogEntry->sShortMessage);
+				pItem->cchTextMax = pLogEntry->sShortMessage.GetLength();
+			}
 			else
 				lstrcpyn(pItem->pszText, _T(""), pItem->cchTextMax);
 			break;
@@ -2614,6 +2616,7 @@ void CLogDlg::OnEnChangeSearchedit()
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_HIDE);
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_SHOW);
 		GetDlgItem(IDC_SEARCHEDIT)->SetFocus();
+		GetDlgItem(IDC_STATBUTTON)->EnableWindow(!(((m_bThreadRunning)||(m_arShownList.IsEmpty()))));
 		return;
 	}
 	SetTimer(LOGFILTER_TIMER, 1000, NULL);
@@ -2630,7 +2633,13 @@ void CLogDlg::OnTimer(UINT_PTR nIDEvent)
 			return;
 		}
 		if (m_sFilterText.IsEmpty())
-			return;
+		{
+			GetDlgItem(IDC_STATBUTTON)->EnableWindow(!(((m_bThreadRunning)||(m_arShownList.IsEmpty()))));
+			// do not return here!
+			// we also need to run the filter if the filtertext is empty:
+			// 1. to clear an existing filter
+			// 2. to rebuild the m_arShownList after sorting
+		}
 		theApp.DoWaitCursor(1);
 		KillTimer(LOGFILTER_TIMER);
 		FillLogMessageCtrl(false);
@@ -2800,13 +2809,16 @@ void CLogDlg::OnTimer(UINT_PTR nIDEvent)
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_SHOW);
 		GetDlgItem(IDC_SEARCHEDIT)->SetFocus();
 	} // if (nIDEvent == LOGFILTER_TIMER)
+	GetDlgItem(IDC_STATBUTTON)->EnableWindow(!(((m_bThreadRunning)||(m_arShownList.IsEmpty()))));
 	__super::OnTimer(nIDEvent);
 }
 
 void CLogDlg::OnDtnDatetimechangeDateto(NMHDR * /*pNMHDR*/, LRESULT *pResult)
 {
-	CTime time;
-	m_DateTo.GetTime(time);
+	CTime _time;
+	m_DateTo.GetTime(_time);
+	CTime time(_time.GetYear(), _time.GetMonth(), _time.GetDay(), 0, 0, 0);
+	
 	if (time.GetTime() != m_tTo)
 	{
 		m_tTo = (DWORD)time.GetTime();
@@ -2818,8 +2830,9 @@ void CLogDlg::OnDtnDatetimechangeDateto(NMHDR * /*pNMHDR*/, LRESULT *pResult)
 
 void CLogDlg::OnDtnDatetimechangeDatefrom(NMHDR * /*pNMHDR*/, LRESULT *pResult)
 {
-	CTime time;
-	m_DateFrom.GetTime(time);
+	CTime _time;
+	m_DateTo.GetTime(_time);
+	CTime time(_time.GetYear(), _time.GetMonth(), _time.GetDay(), 0, 0, 0);
 	if (time.GetTime() != m_tFrom)
 	{
 		m_tFrom = (DWORD)time.GetTime();

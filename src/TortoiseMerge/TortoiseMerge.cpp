@@ -85,6 +85,7 @@ BOOL CTortoiseMergeApp::InitInstance()
 		}
 	} while ((hInst == NULL) && (langId != 0));
 	TCHAR buf[6];
+	_tcscpy_s(buf, _T("en"));
 	langId = loc;
 	CString sHelppath;
 	sHelppath = this->m_pszHelpFilePath;
@@ -259,6 +260,7 @@ BOOL CTortoiseMergeApp::InitInstance()
 	if (!pFrame->m_Data.IsBaseFileInUse() && pFrame->m_Data.m_sPatchPath.IsEmpty() && pFrame->m_Data.m_sDiffFile.IsEmpty())
 	{
 		pFrame->OnFileOpen();
+		return TRUE;
 	}
 	return pFrame->LoadViews();
 }

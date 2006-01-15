@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sect1 SYSTEM "../../../dtd/dblite.dtd">
+<sect1 id="tsvn-DUG-merge">
+	<title>Merging</title>
+	<?dbhh topicname="HIDD_MERGE"?>
+	<indexterm>
+		<primary>merge</primary>
+	</indexterm>
+	<para>
+		Where branches are used to maintain separate lines of development,
+		at some stage you will want to merge the changes made on one branch
+		back into the trunk, or vice versa.
+	</para>
+	<para>
+		It is important to understand how branching and merging works in
+		Subversion before you start using it, as it can become quite complex.
+		It is highly recommended that you read the chapter
+		<ulink url="http://svnbook.red-bean.com/en/1.1/ch04.html">
+			<citetitle>Branching and Merging</citetitle>
+		</ulink>
+		in the
+		<ulink url="http://svnbook.red-bean.com/">
+			<citetitle>Subversion Book</citetitle>
+		</ulink>
+		which gives a full description, and many examples of how it is used.
+	</para>
+	<para>
+		An important point to remember is that Merge is closely related to
+		Diff. The merge process works by generating a list of differences
+		between two points in the repository, and applying those differences
+		to your working copy. For example if you want to merge the changes
+		made in revision N then you have to compare revision N with revision
+		(N-1). Novices often ask
+		<quote>Why do I have to subtract 1 from the start revision.</quote>
+		Think of the underlying Diff process and it will become clearer.
+		TO make this easier, when you use <guibutton>Show Log</guibutton> to
+		select a range of revisions to merge, TortoiseSVN makes this adjustment
+		for you automatically.
+	</para>
+	<para>
+		In general it is a good idea to perform a merge into an unmodified
+		working copy. If you have made other changes in your WC, commit those
+		first. If the merge does not go as you expect, you may want to revert
+		the changes, and the <guilabel>Revert</guilabel> command will discard
+		<emphasis>all</emphasis> changes including any you made before the merge.
+	</para>
+	<para>
+		There are two common use cases for merging which are handled in
+		slightly different ways, as described below.
+	</para>
+	<sect2 id="tsvn-DUG-merge-1">
+		<title>Merging a Range of Revisions</title>
+		<para>
+			This method covers the case when you have made one or more
+			revisions to a branch (or to the trunk) and you want to port
+			those changes across to a different branch.
+		</para>
+		<para>
+			<figure id="tsvn-DUG-merge-dia-1">
+				<title>The Merge Dialog</title>
+				<graphic fileref="../images/Merge.png"/>
+			</figure>
+			To merge revisions you need to go to a working copy of the
+			branch in which you want to receive the changes, often the trunk.
+			Select
+			<menuchoice>
+				<guimenu>TortoiseSVN</guimenu>
+				<guimenuitem>Merge...</guimenuitem>
+			</menuchoice>
+			from the context menu.
+			<orderedlist>
+				<listitem>
+					<para>
+						In the <guilabel>From:</guilabel> field enter the full
+						folder url of the branch or tag containing the changes
+						you want to port into your working copy.
+						You may also click
+						<guibutton>...</guibutton>
+						to browse the repository and find the desired branch.
+						If you have merged from this branch before, then just
+						use the drop down list which shows a history of
+						previously used URLs.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Because you are porting a range of revisions from
+						the same branch into your working copy, make sure the
+						<guilabel>Use "From:" URL</guilabel> checkbox is
+						checked.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In the <guilabel>From Revision</guilabel> field enter the
+						start revision number. This is the revision
+						<emphasis>before</emphasis> the changes you want to merge.
+						Remember that Subversion will create a diff file in order
+						to perform the merge, so the start point has to be just
+						before the first change you are interested in.
+						For example,
+						your log messages may look something like this:
+<screen>
+Rev Comments
+39. Working on MyBranch
+38. Working on trunk
+37. Working on MyBranch
+36. Create branch MyBranch
+35. Working on trunk
+34. Working on trunk
+         ...
+</screen>
+						If you now want to merge all the changes from MyBranch into
+						the trunk you have to choose 36 as the
+						<guilabel>From Revision</guilabel>, not 37 as you might think.
+						If you select revision 37 as the start point, then the
+						difference engine compares the end point with revision 37,
+						and will miss the changes made in revision 37 itself.
+						If that sounds complicated, don't worry, there is an
+						easier way in TortoiseSVN ...
+					</para>
+					<para>
+						The easiest way to select the range of revisions you need
+						is to click on <guibutton>Show Log</guibutton>, as this
+						will list recent changes with their log comments.
+						If you want to merge the changes from a single revision, just
+						select that revision. If you want to merge changes from several
+						revisions, then select that range
+						(using the usual <keycap>Shift</keycap>-modifier).
+						Click on <guibutton>OK</guibutton> and the revision numbers
+						of the <guilabel>From revision</guilabel> and
+						<guilabel>To revision</guilabel> in the Merge dialog will
+						<emphasis>both</emphasis> be filled in for you.
+					</para>
+					<para>
+						When the <guilabel>Use "From:" URL</guilabel> checkbox is
+						checked, only one <guibutton>Show Log</guibutton> button
+						is enabled. This is because the Show Log dialog sets both
+						<guilabel>From:</guilabel> and <guilabel>To:</guilabel>
+						revisions, so you need to use the multiple selection method
+						outlined above.
+					</para>
+					<para>
+						If you have already merged some changes from this branch,
+						hopefully you will have made a note of the last revision
+						merged in the log message when you committed the change.
+						In that case, you can use <guibutton>Show Log</guibutton>
+						for the Working Copy to trace that log message. Use the
+						end point of the last merge as the start point for this
+						merge. For example, if you have merged revisions 37 to 39
+						last time, then the start point for this merge should be
+						revision 39.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If you have not used <guibutton>Show Log</guibutton> to
+						select the revision range, then you will need to set the
+						<guilabel>To Revision</guilabel> manually. Enter the
+						last revision number in the range you want to merge.
+						Often this will be the HEAD revision, although it doesn't
+						need to be - you may just want to merge a single revision.
+					</para>
+					<para>
+						If other people may be committing changes then be careful
+						about using the HEAD revision. It may not refer to the
+						revision you think it does if someone else made a commit
+						after your last update.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Click <guibutton>OK</guibutton> to complete the merge.
+					</para>
+				</listitem>
+			</orderedlist>
+			The merge is now complete. It's a good idea to have a look at the
+			merge and see if it's as expected. Merging is usually quite complicated.
+			Conflicts often arise if the branch has drifted far from the trunk.
+		</para>
+		<para>
+			When you have tested the changes and come to commit this revision,
+			your commit log message should <emphasis>always</emphasis>
+			include the revision numbers which have been ported in the merge.
+			If you want to apply another merge at a later time you will need to
+			know what you have already merged, as you do not want to port a
+			change more than once. Unfortunately merge information is not
+			stored by Subversion. For more information about this, refer to
+			<ulink url="http://svnbook.red-bean.com/en/1.1/ch04s03.html#svn-ch-4-sect-3.2.1">
+				<citetitle>Tracking Merges Manually</citetitle>
+			</ulink>
+			in the
+			<ulink url="http://svnbook.red-bean.com/">
+				<citetitle>Subversion Book</citetitle>
+			</ulink>
+		</para>
+		<para>
+			Branch management is important. If you want to keep this branch up to
+			date with the trunk, you should be sure to merge often so that the
+			branch and trunk do not drift too far apart. Of course, you
+			should still avoid repeated merging of changes, as explained above.
+		</para>
+		<important>
+			<para>
+				Subversion can't merge a file with a folder and vice versa - only
+				folders to folders and files to files. If you click on a file and
+				open up the merge dialog, then you have to give a path to a file
+				in that dialog. If you select a folder and bring up the dialog,
+				then you must specify a folder url for the merge.
+			</para>
+		</important>
+	</sect2>
+	<sect2 id="tsvn-DUG-merge-2">
+		<title>Merging Two Different Trees</title>
+		<para>
+			This method covers the case when you have made a feature branch
+			as discussed in the Subversion book. All trunk changes have been
+			ported to the feature branch, week by week, and now the feature
+			is complete you want to merge it back into the trunk. Because
+			you have kept the feature branch synchronized with the trunk,
+			the latest versions of branch and trunk will be absolutely
+			identical except for your branch changes. So in this special case,
+			you would merge by comparing the branch with the trunk.
+		</para>
+		<para>
+			To merge the feature branch back into the trunk you need to go to
+			a working copy of the trunk.
+			Select
+			<menuchoice>
+				<guimenu>TortoiseSVN</guimenu>
+				<guimenuitem>Merge...</guimenuitem>
+			</menuchoice>
+			from the context menu.
+			<orderedlist>
+				<listitem>
+					<para>
+						In the <guilabel>From:</guilabel> field enter the full
+						folder url of the <emphasis>trunk</emphasis>. This
+						may sound wrong, but remember that the trunk is the
+						start point to which you want to add the branch changes.
+						You may also click
+						<guibutton>...</guibutton>
+						to browse the repository.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Because you are comparing two different trees, make sure
+						the <guilabel>Use "From:" URL</guilabel> checkbox is
+						<emphasis>not</emphasis> checked.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In the <guilabel>To:</guilabel> field enter the full
+						folder url of the feature branch.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In both the <guilabel>From Revision</guilabel> field and
+						the <guilabel>To Revision</guilabel> field, enter the
+						last revision number at which the two trees were
+						synchronized. If you are sure no-one else is making
+						commits you can use the HEAD revision in both cases.
+						If there is a chance that someone else may have made
+						a commit since that synchronization, use the specific
+						revision number to avoid losing more recent commits.
+					</para>
+					<para>
+						You can also use <guibutton>Show Log</guibutton> to
+						select the revision. Note that in this case you are
+						not selecting a range of revisions, so the revision
+						you select there is what will actually appear in the
+						<guilabel>Revision</guilabel> field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Click <guibutton>OK</guibutton> to complete the merge.
+					</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		<para>
+			In this case you will not need the feature branch again
+			because the new feature is now integrated into the trunk.
+			The feature branch is redundant and can be deleted
+			from the repository if required.
+		</para>
+	</sect2>
+	<sect2 id="tsvn-DUG-merge-3">
+		<title>Previewing Merge Results</title>
+		<para>
+			If you are uncertain about the merge operation, you may want to
+			preview what will happen do before you allow it to change your
+			working copy. There are two additional buttons to help you.
+		</para>
+		<para>
+			<guibutton>Unified Diff</guibutton> creates the diff file (remember
+			that merge is based on diff) and shows you which lines will be changed
+			in your working copy files. As this is a unified diff (patch) file it is
+			not always easy to read out of context, but for small scale changes it
+			is often helpful.
+		</para>
+		<para>
+			<guibutton>Dry Run</guibutton> performs the merge operation, but does
+			<emphasis>not</emphasis> modify the working copy at all.
+			It shows you a list of the files that will be changed
+			by a real merge, and notes those areas where conflicts will occur.
+		</para>
+	</sect2>
+</sect1>

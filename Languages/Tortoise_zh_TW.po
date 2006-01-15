@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2004-06-28 09:49+0200\n"
-"PO-Revision-Date: 2005-11-30 10:38+0800\n"
+"PO-Revision-Date: 2006-01-02 10:31+0800\n"
 "Last-Translator: Cecil Sheng <zcecil@csie.org>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1680,6 +1680,11 @@ msgid "Commit"
 msgstr "送交"
 
 # Control-ID:1110,
+#: Control-ID:1262
+msgid "Commit threshold:"
+msgstr "送交至:"
+
+# Control-ID:1110,
 #: Control-ID:1110
 msgid "Commit to:"
 msgstr "送交至:"
@@ -1860,11 +1865,11 @@ msgstr "無法檢查新版!"
 #, c-format
 msgid ""
 "Could not copy the files!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 msgstr ""
 "無法複製檔案!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 
 # ID:81,
@@ -1919,11 +1924,11 @@ msgstr "無法儲存檔案 %s!"
 #, c-format
 msgid ""
 "Could not start diff viewer!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 msgstr ""
 "無法啟動差異檢視工具!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 
 # ID:81,
@@ -1931,11 +1936,11 @@ msgstr ""
 #, c-format
 msgid ""
 "Could not start external diff program!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 msgstr ""
 "無法啟動外部差異比對工具!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 
 # ID:81,
@@ -1943,11 +1948,11 @@ msgstr ""
 #, c-format
 msgid ""
 "Could not start external merge program!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 msgstr ""
 "無法啟動外部合併工具!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 
 # ID:3857,#:
@@ -2736,6 +2741,15 @@ msgstr ""
 "如果設定, TortoiseSVN 會把檔案時間設定至上次\n"
 "提交的時間. 如果不設定, 則使用目前的時間."
 
+# ID:196,
+#: ID:196
+msgid ""
+"If set, files inside unversioned folders can be shown in the status control.\n"
+"The status control is used for example in the commit dialog."
+msgstr ""
+"設定此選項時, 位於無版本控制目錄下的檔案也會在狀態中顯示.\n"
+"在送交視窗中就會用到這個功能."
+
 # ID:251,
 #: ID:251
 msgid "If you want to break the lock, use the \"Check For Modifications\" dialog."
@@ -3004,8 +3018,13 @@ msgstr "視覺樣式::顏色"
 
 # Dlg-ID:106,
 #: Dlg-ID:196
-msgid "Look and Feel::Dialogs"
-msgstr "視覺樣式::視窗"
+msgid "Look and Feel::Dialogs 1"
+msgstr "視覺樣式::視窗 1"
+
+# Dlg-ID:106,
+#: Dlg-ID:213
+msgid "Look and Feel::Dialogs 2"
+msgstr "視覺樣式::視窗 2"
 
 # Dlg-ID:106,
 #: Dlg-ID:106
@@ -3418,6 +3437,11 @@ msgstr ""
 msgid "Opens the repository browser to tweak the repository online"
 msgstr "開啟檔案庫瀏覽器, 進行線上調校檔案庫"
 
+# ID:188,
+#: ID:245
+msgid "Others"
+msgstr "對方的"
+
 # ID:3843,#:
 # ID:3843,
 #: ID:3843
@@ -3695,6 +3719,11 @@ msgstr "復原(&V)..."
 #: ID:12
 msgid "Read the 'Daily Use Guide' before you are stuck..."
 msgstr "在你卡住之前, 請先閱讀日常使用指南..."
+
+# Control-ID:1073,
+#: Control-ID:1260
+msgid "Recurse into unversioned folders"
+msgstr "遞迴搜尋無版本控制的目錄"
 
 # ID:3603,
 #: ID:3603
@@ -4508,6 +4537,12 @@ msgstr ""
 "將目前視窗分割區塊\n"
 "分割"
 
+# ID:11,#:
+# Control-ID:1002,
+#: Control-ID:1263
+msgid "Stacked"
+msgstr "堆疊的"
+
 # ID:74,#:
 # ID:77,
 #: ID:245
@@ -4519,6 +4554,7 @@ msgstr "統計資料"
 #: ID:74
 #: ID:77
 #: ID:207
+#: Control-ID:65535
 msgid "Status"
 msgstr "狀態"
 
@@ -4578,11 +4614,11 @@ msgstr ""
 #, c-format
 msgid ""
 "Subversion reported an error while doing a cleanup!\n"
-"<hr=100%>\n"
+"<hr=100%%>\n"
 "%s"
 msgstr ""
-"Subversion 在進行清理動作時回報錯誤!\n"
-"<hr=100%>\n"
+"Subversion 在進行清理動作時發生錯誤!\n"
+"<hr=100%%>\n"
 "%s"
 
 # Control-ID:65535,
