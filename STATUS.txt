@@ -23,7 +23,7 @@ Merged changes:
 5350							: Use midnight as the default time in the log filter
 5351							: Use full filename to load crashreport dll
 5358							: fix broken sorting in log dialog
-5361, 5364, 5367, 5389-5392		: patch neon from the build script
+5361, 5364, 5367, 5389-5392, 5414: patch neon from the build script
 5375							: critical sections to avoid crash when drive is unmounted (cache)
 5376							: OK button read "Cancel" instead of "OK" in log dialog started for selection
 5374, 5381						: doc change, copyright
@@ -33,5 +33,9 @@ Merged changes:
 5403							: Fix bug with "Others (#)" for "by date" statistics
 5404							: Wrong crawling of ignored files (treated them as folders)
 5405							: Fix creating patchfile for multiple selected files
+5408							: Broken diffing of UTF8 files
+5409							: Create Patch included files two times if they were below a folder with
+								  property changes
+5410							: Foldernames like "folder.svn" were treated as admin dirs
 
 
