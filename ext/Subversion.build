@@ -59,6 +59,7 @@
 			<arg value="--with-berkeley-db=..\berkeley-db\db4.3-${platform}" />
 			<arg value="--enable-nls" />
 			<arg value="--vsnet-version=2005" />
+			<arg value="--platform=${platform}" />
 		</exec>
 		
 		<copy file="build\apr.hw" tofile="apr\include\apr.hw" overwrite="true" />
