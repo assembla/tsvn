@@ -7,6 +7,14 @@ NULL=nul
 rmdir=deltree /y
 !ENDIF
 
+!IF "$(PLATFORM)" == "x64" || "$(PLATFORM)" == "X64"
+CFG_MACHINE = /machine:X64
+CFG_WINDEF  = /D "WIN64"
+!ELSE
+CFG_MACHINE = /machine:X86
+CFG_WINDEF  = /D "WIN32"
+!ENDIF
+
 SILENT=@
 
 # Default build and bind modes
@@ -100,8 +108,8 @@ OBJ_DIR   = $(OUTPUT_DIR)\objs
 INT_CFLAGS   = /nologo $(CFG_CFLAGS) /Fp"$(OUTPUT_DIR)\iconv.pch"
 INT_INCLUDES = /I "$(API_SOURCE)\include" /I "$(API_SOURCE)\lib" \
 		/I "$(APR_SOURCE)\include"
-INT_DEFINES  = /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" $(CFG_DEFINES)
-INT_LDFLAGS  = /nologo /dll /incremental:no /subsystem:windows \
+INT_DEFINES  = $(CFG_WINDEF) /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "_CRT_NONSTDC_NO_DEPRECATE" /D "_CRT_SECURE_NO_DEPRECATE" $(CFG_DEFINES)
+INT_LDFLAGS  = /nologo /dll /incremental:no /subsystem:windows $(CFG_MACHINE) \
 		/export:iconv_module,DATA $(CFG_LDFLAGS)
 
 CFLAGS       = /W3
