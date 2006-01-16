@@ -1,0 +1,226 @@
+Index: neon.mak
+===================================================================
+--- neon.mak	(revision 845)
++++ neon.mak	(working copy)
+@@ -232,19 +232,19 @@
+ 	<<tempfile.bat
+   @echo off
+   cd /d "$(ZLIB_SRC)"
+-  "$(MAKE)" /nologo /f win32\Makefile.msc CFLAGS="/nologo $(CFLAGS)" LDFLAGS="$(ZLIB_LDFLAGS)" STATICLIB=$(ZLIB_STATICLIB) $(ZLIB_STATICLIB)
++  $(MAKE) /nologo /f win32\Makefile.msc CFLAGS="/nologo $(CFLAGS)" LDFLAGS="$(ZLIB_LDFLAGS)" STATICLIB=$(ZLIB_STATICLIB) $(ZLIB_STATICLIB)
+ <<
+ 
+ "$(ZLIB_SRC)\$(ZLIB_IMPLIB)":
+ 	<<tempfile.bat
+   @echo off
+   cd /d "$(ZLIB_SRC)"
+-  "$(MAKE)" /nologo /f win32\Makefile.msc CFLAGS="/nologo $(CFLAGS)" LDFLAGS="$(ZLIB_LDFLAGS)" SHAREDLIB=$(ZLIB_SHAREDLIB) IMPLIB=$(ZLIB_IMPLIB) $(ZLIB_SHAREDLIB) $(ZLIB_IMPLIB)
++  $(MAKE) /nologo /f win32\Makefile.msc CFLAGS="/nologo $(CFLAGS)" LDFLAGS="$(ZLIB_LDFLAGS)" SHAREDLIB=$(ZLIB_SHAREDLIB) IMPLIB=$(ZLIB_IMPLIB) $(ZLIB_SHAREDLIB) $(ZLIB_IMPLIB)
+ <<
+ 
+ ZLIB_CLEAN:
+ 	<<tempfile.bat
+   @echo off
+   cd /d "$(ZLIB_SRC)"
+-  "$(MAKE)" /nologo /f win32\Makefile.msc STATICLIB=$(ZLIB_STATICLIB) SHAREDLIB=$(ZLIB_SHAREDLIB) IMPLIB=$(ZLIB_IMPLIB) clean
++  $(MAKE) /nologo /f win32\Makefile.msc STATICLIB=$(ZLIB_STATICLIB) SHAREDLIB=$(ZLIB_SHAREDLIB) IMPLIB=$(ZLIB_IMPLIB) clean
+ <<
+Index: src/ne_alloc.h
+===================================================================
+--- src/ne_alloc.h	(revision 845)
++++ src/ne_alloc.h	(working copy)
+@@ -22,7 +22,7 @@
+ #ifndef NE_ALLOC_H
+ #define NE_ALLOC_H
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ #include <stdlib.h>
+ #else
+ #include <sys/types.h>
+Index: src/ne_auth.c
+===================================================================
+--- src/ne_auth.c	(revision 845)
++++ src/ne_auth.c	(working copy)
+@@ -39,7 +39,7 @@
+ #include <unistd.h> /* for getpid() */
+ #endif
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ #include <windows.h> /* for GetCurrentThreadId() etc */
+ #endif
+ 
+@@ -266,7 +266,7 @@
+     }
+ #endif
+     {
+-#ifdef WIN32
++#ifdef _WIN32
+ 	DWORD pid = GetCurrentThreadId();
+ #else
+ 	pid_t pid = getpid();
+Index: src/ne_dates.c
+===================================================================
+--- src/ne_dates.c	(revision 845)
++++ src/ne_dates.c	(working copy)
+@@ -34,7 +34,7 @@
+ #include <string.h>
+ #endif
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ #include <windows.h> /* for TIME_ZONE_INFORMATION */
+ #endif
+ 
+@@ -68,14 +68,14 @@
+ #define GMTOFF(t) ((t).tm_gmtoff)
+ #elif defined(HAVE_STRUCT_TM___TM_GMTOFF)
+ #define GMTOFF(t) ((t).__tm_gmtoff)
+-#elif defined(WIN32)
++#elif defined(_WIN32)
+ #define GMTOFF(t) (gmt_to_local_win32())
+ #else
+ /* FIXME: work out the offset anyway. */
+ #define GMTOFF(t) (0)
+ #endif
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ time_t gmt_to_local_win32(void)
+ {
+     TIME_ZONE_INFORMATION tzinfo;
+Index: src/ne_socket.c
+===================================================================
+--- src/ne_socket.c	(revision 845)
++++ src/ne_socket.c	(working copy)
+@@ -60,7 +60,7 @@
+ #include <netdb.h>
+ #endif
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ #include <winsock2.h>
+ #include <stddef.h>
+ #ifdef USE_GETADDRINFO
+@@ -140,7 +140,7 @@
+ /* pre-BONE */
+ #define ne_close(s) closesocket(s)
+ #define ne_errno errno
+-#elif defined(WIN32)
++#elif defined(_WIN32)
+ #define ne_close(s) closesocket(s)
+ #define ne_errno WSAGetLastError()
+ #else /* really Unix! */
+@@ -148,7 +148,7 @@
+ #define ne_errno errno
+ #endif
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ #define NE_ISRESET(e) ((e) == WSAECONNABORTED || (e) == WSAETIMEDOUT || \
+                        (e) == WSAECONNRESET || (e) == WSAENETRESET)
+ #define NE_ISCLOSED(e) ((e) == WSAESHUTDOWN || (e) == WSAENOTCONN)
+@@ -219,7 +219,7 @@
+ #define set_error(s, str) ne_strnzcpy((s)->error, (str), sizeof (s)->error)
+ 
+ /* set_strerror: set socket error to system error string for 'errnum' */
+-#ifdef WIN32
++#ifdef _WIN32
+ /* Print system error message to given buffer. */
+ static void print_error(int errnum, char *buffer, size_t buflen)
+ {
+@@ -230,7 +230,7 @@
+         ne_snprintf(buffer, buflen, "Socket error %d", errnum);
+ }
+ #define set_strerror(s, e) print_error((e), (s)->error, sizeof (s)->error)
+-#else /* not WIN32 */
++#else /* not _WIN32 */
+ #define set_strerror(s, e) ne_strerror((e), (s)->error, sizeof (s)->error)
+ #endif
+ 
+@@ -301,7 +301,7 @@
+ 
+ int ne_sock_init(void)
+ {
+-#ifdef WIN32
++#ifdef _WIN32
+     WORD wVersionRequested;
+     WSADATA wsaData;
+     int err;
+@@ -312,7 +312,7 @@
+     else if (init_result < 0)
+ 	return -1;
+ 
+-#ifdef WIN32    
++#ifdef _WIN32    
+     wVersionRequested = MAKEWORD(2, 2);
+     
+     err = WSAStartup(wVersionRequested, &wsaData);
+@@ -352,7 +352,7 @@
+ 
+ void ne_sock_exit(void)
+ {
+-#ifdef WIN32
++#ifdef _WIN32
+     WSACleanup();
+ #endif
+ #ifdef HAVE_GNUTLS
+@@ -772,7 +772,7 @@
+ #define INADDR_NONE ((in_addr_t) -1)
+ #endif
+ 
+-#if !defined(USE_GETADDRINFO) && !defined(HAVE_DECL_H_ERRNO) && !defined(WIN32)
++#if !defined(USE_GETADDRINFO) && !defined(HAVE_DECL_H_ERRNO) && !defined(_WIN32)
+ /* Ancient versions of netdb.h don't export h_errno. */
+ extern int h_errno;
+ #endif
+@@ -813,7 +813,7 @@
+     if (laddr == INADDR_NONE) {
+ 	hp = gethostbyname(hostname);
+ 	if (hp == NULL) {
+-#ifdef WIN32
++#ifdef _WIN32
+ 	    addr->errnum = WSAGetLastError();
+ #else
+             addr->errnum = h_errno;
+@@ -875,7 +875,7 @@
+ 
+ char *ne_addr_error(const ne_sock_addr *addr, char *buf, size_t bufsiz)
+ {
+-#ifdef WIN32
++#ifdef _WIN32
+     print_error(addr->errnum, buf, bufsiz);
+ #else
+     const char *err;
+@@ -891,7 +891,7 @@
+     err = _("Host not found");
+ #endif
+     ne_strnzcpy(buf, err, bufsiz);
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+     return buf;
+ }
+ 
+@@ -995,7 +995,7 @@
+ 	return -1;
+     }
+     
+-#if !defined(NE_USE_POLL) && !defined(WIN32)
++#if !defined(NE_USE_POLL) && !defined(_WIN32)
+     if (fd > FD_SETSIZE) {
+         ne_close(fd);
+         set_error(sock, _("Socket descriptor number exceeds FD_SETSIZE"));
+Index: src/ne_uri.c
+===================================================================
+--- src/ne_uri.c	(revision 845)
++++ src/ne_uri.c	(working copy)
+@@ -274,7 +274,7 @@
+ #undef CMP
+ #undef CASECMP
+ 
+-#ifndef WIN32
++#ifndef _WIN32
+ #undef min
+ #define min(a,b) ((a)<(b)?(a):(b))
+ #endif

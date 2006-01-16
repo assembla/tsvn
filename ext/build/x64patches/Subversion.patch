@@ -1,0 +1,3969 @@
+Index: build/generator/build_zlib.ezt
+===================================================================
+--- build/generator/build_zlib.ezt	(revision 18105)
++++ build/generator/build_zlib.ezt	(working copy)
+@@ -45,12 +45,12 @@
+ @rem **************************************************************************
+ :debug
+ set STATICLIB=zlibstatD.lib
+-set CC_OPTS=/MDd /Gm /Gi /ZI /Od /GZ /D_DEBUG
++set CC_OPTS=/MDd /Gm /Zi /Od /RTC1 /D_DEBUG
+ goto checkrebuild
+ 
+ @rem **************************************************************************
+ :build
+-set COMMON_CC_OPTS=/nologo /W3 /FD /GX /DWIN32 /D_WINDOWS
++set COMMON_CC_OPTS=/nologo /W3 /FD /EHsc /D[win_flavour] /D_WINDOWS
+ set CFLAGS=%COMMON_CC_OPTS% %CC_OPTS% $(LOC)
+ set BUILD_OPTS=%ASM_OPTS% CFLAGS="%COMMON_CC_OPTS% %CC_OPTS% $(LOC)"
+ @echo nmake /f win32\Makefile.msc %BUILD_OPTS% STATICLIB=%STATICLIB% %target%
+Index: build/generator/gen_uri_delims.vcproj.ezt
+===================================================================
+--- build/generator/gen_uri_delims.vcproj.ezt	(revision 18105)
++++ build/generator/gen_uri_delims.vcproj.ezt	(working copy)
+@@ -7,11 +7,11 @@
+ 	SccLocalPath="">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory="."
+ 			IntermediateDirectory=".\Debug"
+ 			ConfigurationType="1"
+@@ -21,7 +21,7 @@
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
+-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
++				PreprocessorDefinitions="[win_flavour];_DEBUG;_CONSOLE"
+ 				RuntimeLibrary="3"
+ 				PrecompiledHeaderFile=".\Debug/gen_uri_delims.pch"
+ 				AssemblerListingLocation=".\Debug/"
+@@ -40,8 +40,9 @@
+ 				GenerateDebugInformation="TRUE"
+ 				ProgramDatabaseFile="Debug\gen_uri_delims.pdb"
+ 				SubSystem="1"
+-				TargetMachine="1"/>
+-			<Tool
++[is platform "x64"]				TargetMachine="17"/>
++[else]				TargetMachine="1"/>
++[end]			<Tool
+ 				Name="VCMIDLTool"
+ 				TypeLibraryName="./gen_uri_delims.tlb"
+ 				HeaderFileName=""/>
+@@ -61,7 +62,7 @@
+ 				Name="VCWebDeploymentTool"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory="."
+ 			IntermediateDirectory=".\Release"
+ 			ConfigurationType="1"
+@@ -72,7 +73,7 @@
+ 				Name="VCCLCompilerTool"
+ 				Optimization="2"
+ 				InlineFunctionExpansion="1"
+-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
++				PreprocessorDefinitions="[win_flavour];NDEBUG;_CONSOLE"
+ 				StringPooling="TRUE"
+ 				RuntimeLibrary="2"
+ 				EnableFunctionLevelLinking="TRUE"
+@@ -91,8 +92,9 @@
+ 				SuppressStartupBanner="TRUE"
+ 				ProgramDatabaseFile="Release\gen_uri_delims.pdb"
+ 				SubSystem="1"
+-				TargetMachine="1"/>
+-			<Tool
++[is platform "x64"]				TargetMachine="17"/>
++[else]				TargetMachine="1"/>
++[end]			<Tool
+ 				Name="VCMIDLTool"
+ 				TypeLibraryName="./gen_uri_delims.tlb"
+ 				HeaderFileName=""/>
+@@ -118,14 +120,14 @@
+ 		<File
+ 			RelativePath="gen_uri_delims.c">
+ 			<FileConfiguration
+-				Name="Debug|Win32">
++				Name="Debug|[platform]">
+ 				<Tool
+ 					Name="VCCLCompilerTool"
+ 					Optimization="0"
+ 					PreprocessorDefinitions=""/>
+ 			</FileConfiguration>
+ 			<FileConfiguration
+-				Name="Release|Win32">
++				Name="Release|[platform]">
+ 				<Tool
+ 					Name="VCCLCompilerTool"
+ 					Optimization="2"
+Index: build/generator/gen_vcnet_vcproj.py
+===================================================================
+--- build/generator/gen_vcnet_vcproj.py	(revision 18105)
++++ build/generator/gen_vcnet_vcproj.py	(working copy)
+@@ -182,7 +182,10 @@
+       'guids' : guidvals,
+       }
+ 
+-    self.write_with_template('subversion_vcnet.sln', 'vcnet_sln.ezt', data)
++    if self.vsnet_version == '9.00':
++	  self.write_with_template('subversion_vcnet.sln', 'vcnet_sln9.ezt', data)
++    else:
++	  self.write_with_template('subversion_vcnet.sln', 'vcnet_sln.ezt', data)
+ 
+ 
+ # compatibility with older Pythons:
+Index: build/generator/gen_win.py
+===================================================================
+--- build/generator/gen_win.py	(revision 18105)
++++ build/generator/gen_win.py	(working copy)
+@@ -60,6 +60,9 @@
+     # NLS options
+     self.enable_nls = None
+ 
++    # Platform selection
++    self.platform = "Win32"
++    self.win_flavour = "WIN32"
+ 
+     for opt, val in options:
+       if opt == '--with-berkeley-db':
+@@ -114,6 +117,10 @@
+         else:
+           sys.stderr.write('WARNING: Unknown VS.NET version "%s",'
+                            ' assumimg "%s"\n' % (val, self.vsnet_version))
++      elif opt == '--platform':
++        if val == 'x64' or val == 'X64':
++          self.platform = 'x64'
++          self.win_flavour = 'WIN64'
+ 
+   def __init__(self, fname, verfname, options, subdir):
+     """
+@@ -138,6 +145,7 @@
+     # Look for ML
+     if self.zlib_path:
+       self._find_ml()
++      self.have_ml = 0
+       
+     # Find neon version
+     if self.neon_path:
+@@ -200,7 +208,7 @@
+       os.makedirs(self.projfilesdir)
+ 
+     #Here we can add additional platforms to compile for
+-    self.platforms = ['Win32']
++    self.platforms = [self.platform]
+ 
+     #Here we can add additional modes to compile for
+     self.configs = ['Debug','Release']
+@@ -568,8 +576,9 @@
+   def get_win_defines(self, target, cfg):
+     "Return the list of defines for target"
+ 
+-    fakedefines = ["WIN32","_WINDOWS","alloca=_alloca",
+-                   "snprintf=_snprintf"]
++    fakedefines = [self.win_flavour,"_WINDOWS","alloca=_alloca",
++                   "snprintf=_snprintf", "_CRT_SECURE_NO_DEPRECATE",
++                   "_CRT_NONSTDC_NO_DEPRECATE"]
+     if isinstance(target, gen_base.TargetApacheMod):
+       if target.name == 'mod_dav_svn':
+         fakedefines.extend(["AP_DECLARE_EXPORT"])
+@@ -646,7 +655,7 @@
+     libcfg = string.replace(string.replace(cfg, "Debug", "LibD"),
+                             "Release", "LibR")
+ 
+-    fakelibdirs = [ self.apath(self.bdb_path, "lib") ]
++    fakelibdirs = [ self.apath(self.bdb_path, "lib"), self.path (self.neon_path) ]
+     if isinstance(target, gen_base.TargetApacheMod):
+       fakelibdirs.append(self.apath(self.httpd_path, cfg))
+       if target.name == 'mod_dav_svn':
+@@ -659,6 +668,7 @@
+     "Return the list of external libraries needed for target"
+ 
+     dblib = self.bdb_lib+(cfg == 'Debug' and 'd.lib' or '.lib')
++    neonlib = cfg == 'Debug' and 'libneond.lib' or 'libneon.lib'
+ 
+     if not isinstance(target, gen_base.TargetLinked):
+       return []
+@@ -688,6 +698,8 @@
+       if dep.external_lib == '$(SVN_DB_LIBS)':
+         nondeplibs.append(dblib)
+ 
++    nondeplibs.append(neonlib)
++
+     return gen_base.unique(nondeplibs)
+ 
+   def get_win_sources(self, target, reldir_prefix=''):
+Index: build/generator/libapr.vcproj.ezt
+===================================================================
+--- build/generator/libapr.vcproj.ezt	(revision 18105)
++++ build/generator/libapr.vcproj.ezt	(working copy)
+@@ -7,11 +7,11 @@
+ 	SccLocalPath="">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory=".\Debug"
+ 			IntermediateDirectory=".\Debug"
+ 			ConfigurationType="2"
+@@ -21,7 +21,7 @@
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
+ 				AdditionalIncludeDirectories="./include,./include/arch,./include/arch/win32,./include/arch/unix"
+-				PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS"
++				PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS"
+ 				RuntimeLibrary="3"
+ 				PrecompiledHeaderFile=".\Debug/libapr.pch"
+ 				AssemblerListingLocation=".\Debug/"
+@@ -44,8 +44,9 @@
+ 				SubSystem="2"
+ 				BaseAddress="0x6EEC0000"
+ 				ImportLibrary=".\Debug/libapr.lib"
+-				TargetMachine="1"/>
+-			<Tool
++[is platform "x64"]				TargetMachine="17"/>
++[else]				TargetMachine="1"/>
++[end]			<Tool
+ 				Name="VCMIDLTool"
+ 				PreprocessorDefinitions="_DEBUG"
+ 				MkTypLibCompatible="TRUE"
+@@ -68,7 +69,7 @@
+ 				Name="VCWebServiceProxyGeneratorTool"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory=".\Release"
+ 			IntermediateDirectory=".\Release"
+ 			ConfigurationType="2"
+@@ -79,7 +80,7 @@
+ 				Optimization="2"
+ 				InlineFunctionExpansion="1"
+ 				AdditionalIncludeDirectories="./include,./include/arch,./include/arch/win32,./include/arch/unix"
+-				PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS"
++				PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS"
+ 				StringPooling="TRUE"
+ 				RuntimeLibrary="2"
+ 				EnableFunctionLevelLinking="TRUE"
+@@ -105,8 +106,9 @@
+ 				OptimizeReferences="2"
+ 				BaseAddress="0x6EEC0000"
+ 				ImportLibrary=".\Release/libapr.lib"
+-				TargetMachine="1"/>
+-			<Tool
++[is platform "x64"]				TargetMachine="17"/>
++[else]				TargetMachine="1"/>
++[end]			<Tool
+ 				Name="VCMIDLTool"
+ 				PreprocessorDefinitions="NDEBUG"
+ 				MkTypLibCompatible="TRUE"
+@@ -141,20 +143,20 @@
+ 				<File
+ 					RelativePath="dso\win32\dso.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -164,305 +166,305 @@
+ 				<File
+ 					RelativePath="file_io\unix\copy.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\dir.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\unix\fileacc.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\filedup.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\filepath.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\unix\filepath_util.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\filestat.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\filesys.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\flock.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\unix\fullrw.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\unix\mktemp.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\open.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\pipe.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\readwrite.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\win32\seek.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="file_io\unix\tempdir.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -472,77 +474,77 @@
+ 				<File
+ 					RelativePath="locks\win32\proc_mutex.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="locks\win32\thread_cond.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="locks\win32\thread_mutex.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="locks\win32\thread_rwlock.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -552,20 +554,20 @@
+ 				<File
+ 					RelativePath="memory\unix\apr_pools.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -575,231 +577,231 @@
+ 				<File
+ 					RelativePath="misc\win32\apr_app.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32"
++						Name="Debug|[platform]"
+ 						ExcludedFromBuild="TRUE">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32"
++						Name="Release|[platform]"
+ 						ExcludedFromBuild="TRUE">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\win32\charset.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\win32\env.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\unix\errorcodes.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\unix\getopt.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\win32\internal.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\win32\misc.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\unix\otherchild.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\win32\rand.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\win32\start.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\win32\utf8.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\unix\version.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -809,39 +811,39 @@
+ 				<File
+ 					RelativePath="mmap\unix\common.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="mmap\win32\mmap.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -851,153 +853,153 @@
+ 				<File
+ 					RelativePath="network_io\unix\inet_ntop.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="network_io\unix\inet_pton.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="poll\unix\poll.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="poll\unix\pollacc.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="network_io\win32\sendrecv.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="network_io\unix\sockaddr.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="network_io\win32\sockets.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="network_io\win32\sockopt.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -1007,20 +1009,20 @@
+ 				<File
+ 					RelativePath="passwd\apr_getpass.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -1030,20 +1032,20 @@
+ 				<File
+ 					RelativePath="shmem\win32\shm.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -1053,115 +1055,115 @@
+ 				<File
+ 					RelativePath="strings\apr_cpystrn.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="strings\apr_fnmatch.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="strings\apr_snprintf.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="strings\apr_strings.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="strings\apr_strnatcmp.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="strings\apr_strtok.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -1171,39 +1173,39 @@
+ 				<File
+ 					RelativePath="tables\apr_hash.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="tables\apr_tables.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -1213,77 +1215,77 @@
+ 				<File
+ 					RelativePath="threadproc\win32\proc.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="threadproc\win32\signals.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="threadproc\win32\thread.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="threadproc\win32\threadpriv.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -1293,58 +1295,58 @@
+ 				<File
+ 					RelativePath="time\win32\access.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="time\win32\time.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="time\win32\timestr.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -1354,39 +1356,39 @@
+ 				<File
+ 					RelativePath="user\win32\groupinfo.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="user\win32\userinfo.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APR_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APR_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -1437,13 +1439,13 @@
+ 			<File
+ 				RelativePath="include\apr.h.in">
+ 				<FileConfiguration
+-					Name="Debug|Win32"
++					Name="Debug|[platform]"
+ 					ExcludedFromBuild="TRUE">
+ 					<Tool
+ 						Name="VCCustomBuildTool"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32"
++					Name="Release|[platform]"
+ 					ExcludedFromBuild="TRUE">
+ 					<Tool
+ 						Name="VCCustomBuildTool"/>
+@@ -1452,13 +1454,13 @@
+ 			<File
+ 				RelativePath="include\apr.hnw">
+ 				<FileConfiguration
+-					Name="Debug|Win32"
++					Name="Debug|[platform]"
+ 					ExcludedFromBuild="TRUE">
+ 					<Tool
+ 						Name="VCCustomBuildTool"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32"
++					Name="Release|[platform]"
+ 					ExcludedFromBuild="TRUE">
+ 					<Tool
+ 						Name="VCCustomBuildTool"/>
+@@ -1467,7 +1469,7 @@
+ 			<File
+ 				RelativePath="include\apr.hw">
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apr.h from apr.hw"
+@@ -1476,7 +1478,7 @@
+ 						Outputs=".\include\apr.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apr.h from apr.hw"
+@@ -1597,7 +1599,7 @@
+ 		<File
+ 			RelativePath="build\win32ver.awk">
+ 			<FileConfiguration
+-				Name="Debug|Win32">
++				Name="Debug|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					Description="Creating Version Resource"
+@@ -1606,7 +1608,7 @@
+ 					Outputs=".\libapr.rc"/>
+ 			</FileConfiguration>
+ 			<FileConfiguration
+-				Name="Release|Win32">
++				Name="Release|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					Description="Creating Version Resource"
+Index: build/generator/libapriconv.vcproj.ezt
+===================================================================
+--- build/generator/libapriconv.vcproj.ezt	(revision 18105)
++++ build/generator/libapriconv.vcproj.ezt	(working copy)
+@@ -7,11 +7,11 @@
+ 	SccLocalPath="">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory=".\Debug"
+ 			IntermediateDirectory=".\Debug"
+ 			ConfigurationType="2"
+@@ -21,7 +21,7 @@
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
+ 				AdditionalIncludeDirectories="./include,../apr/include"
+-				PreprocessorDefinitions="_DEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS"
++				PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS"
+ 				RuntimeLibrary="3"
+ 				PrecompiledHeaderFile=".\Debug/libapriconv.pch"
+ 				AssemblerListingLocation=".\Debug/"
+@@ -43,8 +43,9 @@
+ 				SubSystem="2"
+ 				BaseAddress="0x6EE50000"
+ 				ImportLibrary=".\Debug/libapriconv.lib"
+-				TargetMachine="1"/>
+-			<Tool
++[is platform "x64"]				TargetMachine="17"/>
++[else]				TargetMachine="1"/>
++[end]			<Tool
+ 				Name="VCMIDLTool"
+ 				PreprocessorDefinitions="_DEBUG"
+ 				MkTypLibCompatible="TRUE"
+@@ -67,7 +68,7 @@
+ 				Name="VCWebServiceProxyGeneratorTool"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory=".\Release"
+ 			IntermediateDirectory=".\Release"
+ 			ConfigurationType="2"
+@@ -78,7 +79,7 @@
+ 				Optimization="2"
+ 				InlineFunctionExpansion="1"
+ 				AdditionalIncludeDirectories="./include,../apr/include"
+-				PreprocessorDefinitions="NDEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS"
++				PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS"
+ 				StringPooling="TRUE"
+ 				RuntimeLibrary="2"
+ 				EnableFunctionLevelLinking="TRUE"
+@@ -103,8 +104,9 @@
+ 				OptimizeReferences="2"
+ 				BaseAddress="0x6EE50000"
+ 				ImportLibrary=".\Release/libapriconv.lib"
+-				TargetMachine="1"/>
+-			<Tool
++[is platform "x64"]				TargetMachine="17"/>
++[else]				TargetMachine="1"/>
++[end]			<Tool
+ 				Name="VCMIDLTool"
+ 				PreprocessorDefinitions="NDEBUG"
+ 				MkTypLibCompatible="TRUE"
+@@ -139,134 +141,134 @@
+ 				<File
+ 					RelativePath="lib\iconv.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="lib\iconv_ces.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="lib\iconv_ces_euc.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="lib\iconv_ces_iso2022.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="lib\iconv_int.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="lib\iconv_module.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="lib\iconv_uc.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;API_DECLARE_EXPORT;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;API_DECLARE_EXPORT;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -290,7 +292,7 @@
+ 		<File
+ 			RelativePath="..\apr\build\win32ver.awk">
+ 			<FileConfiguration
+-				Name="Debug|Win32">
++				Name="Debug|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					Description="Creating Version Resource"
+@@ -299,7 +301,7 @@
+ 					Outputs=".\libapriconv.rc"/>
+ 			</FileConfiguration>
+ 			<FileConfiguration
+-				Name="Release|Win32">
++				Name="Release|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					Description="Creating Version Resource"
+Index: build/generator/libapriconv_ccs_modules.vcproj.ezt
+===================================================================
+--- build/generator/libapriconv_ccs_modules.vcproj.ezt	(revision 18105)
++++ build/generator/libapriconv_ccs_modules.vcproj.ezt	(working copy)
+@@ -8,11 +8,11 @@
+ 	Keyword="MakeFileProj">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory=".\..\Release\iconv"
+ 			IntermediateDirectory=".\..\Release\iconv"
+ 			ConfigurationType="0"
+@@ -20,12 +20,12 @@
+ 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+ 			<Tool
+ 				Name="VCNMakeTool"
+-				BuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=release BIND_MODE=shared"
+-				ReBuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=release BIND_MODE=shared /a"
++				BuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=release BIND_MODE=shared PLATFORM=[platform]"
++				ReBuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=release BIND_MODE=shared PLATFORM=[platform] /a"
+ 				Output="Release"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory=".\..\Debug\iconv"
+ 			IntermediateDirectory=".\..\Debug\iconv"
+ 			ConfigurationType="0"
+@@ -33,8 +33,8 @@
+ 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+ 			<Tool
+ 				Name="VCNMakeTool"
+-				BuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=debug BIND_MODE=shared"
+-				ReBuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=debug BIND_MODE=shared /a"
++				BuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=debug BIND_MODE=shared PLATFORM=[platform]"
++				ReBuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=debug BIND_MODE=shared PLATFORM=[platform] /a"
+ 				Output="Debug"/>
+ 		</Configuration>
+ 	</Configurations>
+Index: build/generator/libapriconv_ces_modules.vcproj.ezt
+===================================================================
+--- build/generator/libapriconv_ces_modules.vcproj.ezt	(revision 18105)
++++ build/generator/libapriconv_ces_modules.vcproj.ezt	(working copy)
+@@ -8,11 +8,11 @@
+ 	Keyword="MakeFileProj">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory=".\..\Release\iconv"
+ 			IntermediateDirectory=".\..\Release\iconv"
+ 			ConfigurationType="0"
+@@ -20,12 +20,12 @@
+ 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+ 			<Tool
+ 				Name="VCNMakeTool"
+-				BuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=release BIND_MODE=shared"
+-				ReBuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=release BIND_MODE=shared /a"
++				BuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=release BIND_MODE=shared PLATFORM=[platform]"
++				ReBuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=release BIND_MODE=shared PLATFORM=[platform] /a"
+ 				Output="Release"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory=".\..\Debug\iconv"
+ 			IntermediateDirectory=".\..\Debug\iconv"
+ 			ConfigurationType="0"
+@@ -33,8 +33,8 @@
+ 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+ 			<Tool
+ 				Name="VCNMakeTool"
+-				BuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=debug BIND_MODE=shared"
+-				ReBuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=debug BIND_MODE=shared /a"
++				BuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=debug BIND_MODE=shared PLATFORM=[platform]"
++				ReBuildCommandLine="NMAKE /nologo /f Makefile.win BUILD_MODE=debug BIND_MODE=shared PLATFORM=[platform] /a"
+ 				Output="Debug"/>
+ 		</Configuration>
+ 	</Configurations>
+Index: build/generator/libaprutil.vcproj.ezt
+===================================================================
+--- build/generator/libaprutil.vcproj.ezt	(revision 18105)
++++ build/generator/libaprutil.vcproj.ezt	(working copy)
+@@ -7,11 +7,11 @@
+ 	SccLocalPath="">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory=".\Debug"
+ 			IntermediateDirectory=".\Debug"
+ 			ConfigurationType="2"
+@@ -21,7 +21,7 @@
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
+ 				AdditionalIncludeDirectories="./include,../apr/include,./include/private,../apr-iconv/include,./dbm/sdbm,./xml/expat/lib"
+-				PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS"
++				PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS"
+ 				RuntimeLibrary="3"
+ 				PrecompiledHeaderFile=".\Debug/libaprutil.pch"
+ 				AssemblerListingLocation=".\Debug/"
+@@ -44,7 +44,9 @@
+ 				SubSystem="2"
+ 				BaseAddress="0x6EE60000"
+ 				ImportLibrary=".\Debug/libaprutil.lib"
+-				TargetMachine="1"/>
++[is platform "x64"]				TargetMachine="17"/>
++[else]				TargetMachine="1"/>
++[end]			<Tool
+ 			<Tool
+ 				Name="VCMIDLTool"
+ 				PreprocessorDefinitions="_DEBUG"
+@@ -68,7 +70,7 @@
+ 				Name="VCWebServiceProxyGeneratorTool"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory=".\Release"
+ 			IntermediateDirectory=".\Release"
+ 			ConfigurationType="2"
+@@ -79,7 +81,7 @@
+ 				Optimization="2"
+ 				InlineFunctionExpansion="1"
+ 				AdditionalIncludeDirectories="./include,../apr/include,./include/private,../apr-iconv/include,./dbm/sdbm,./xml/expat/lib"
+-				PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS"
++				PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS"
+ 				StringPooling="TRUE"
+ 				RuntimeLibrary="2"
+ 				EnableFunctionLevelLinking="TRUE"
+@@ -105,7 +107,9 @@
+ 				OptimizeReferences="2"
+ 				BaseAddress="0x6EE60000"
+ 				ImportLibrary=".\Release/libaprutil.lib"
+-				TargetMachine="1"/>
++[is platform "x64"]				TargetMachine="17"/>
++[else]				TargetMachine="1"/>
++[end]			<Tool
+ 			<Tool
+ 				Name="VCMIDLTool"
+ 				PreprocessorDefinitions="NDEBUG"
+@@ -141,248 +145,248 @@
+ 				<File
+ 					RelativePath="buckets\apr_brigade.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_alloc.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_eos.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_file.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_flush.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_heap.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_mmap.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_pipe.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_pool.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_refcount.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_simple.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="buckets\apr_buckets_socket.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -392,96 +396,96 @@
+ 				<File
+ 					RelativePath="crypto\apr_md4.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="crypto\apr_md5.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="crypto\apr_sha1.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="crypto\getuuid.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="crypto\uuid.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -491,77 +495,77 @@
+ 				<File
+ 					RelativePath="dbm\apr_dbm.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="dbm\apr_dbm_berkeleydb.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="dbm\apr_dbm_gdbm.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="dbm\apr_dbm_sdbm.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -571,20 +575,20 @@
+ 				<File
+ 					RelativePath="encoding\apr_base64.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -594,20 +598,20 @@
+ 				<File
+ 					RelativePath="hooks\apr_hooks.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -617,39 +621,39 @@
+ 				<File
+ 					RelativePath="ldap\apr_ldap_compat.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="ldap\apr_ldap_url.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -659,77 +663,77 @@
+ 				<File
+ 					RelativePath="misc\apr_date.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\apr_queue.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\apr_reslist.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="misc\apr_rmm.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -739,77 +743,77 @@
+ 				<File
+ 					RelativePath="dbm\sdbm\sdbm.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="dbm\sdbm\sdbm_hash.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="dbm\sdbm\sdbm_lock.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+ 					RelativePath="dbm\sdbm\sdbm_pair.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 				<File
+@@ -828,20 +832,20 @@
+ 				<File
+ 					RelativePath="strmatch\apr_strmatch.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -851,20 +855,20 @@
+ 				<File
+ 					RelativePath="uri\apr_uri.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -874,20 +878,20 @@
+ 				<File
+ 					RelativePath="xlate\xlate.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -897,20 +901,20 @@
+ 				<File
+ 					RelativePath="xml\apr_xml.c">
+ 					<FileConfiguration
+-						Name="Debug|Win32">
++						Name="Debug|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="0"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_DEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 					<FileConfiguration
+-						Name="Release|Win32">
++						Name="Release|[platform]">
+ 						<Tool
+ 							Name="VCCLCompilerTool"
+ 							Optimization="2"
+ 							AdditionalIncludeDirectories=""
+-							PreprocessorDefinitions="NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;$(NoInherit)"/>
++							PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;NDEBUG;APU_DECLARE_EXPORT;APU_USE_SDBM;[win_flavour];_WINDOWS;$(NoInherit)"/>
+ 					</FileConfiguration>
+ 				</File>
+ 			</Filter>
+@@ -927,7 +931,7 @@
+ 			<File
+ 				RelativePath="include\apr_ldap.hw">
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apr_ldap.h from apr_ldap.hw"
+@@ -936,7 +940,7 @@
+ 						Outputs=".\include\apr_ldap.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apr_ldap.h from apr_ldap.hw"
+@@ -954,7 +958,7 @@
+ 			<File
+ 				RelativePath="include\apu.hw">
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apu.h from apu.hw"
+@@ -963,7 +967,7 @@
+ 						Outputs=".\include\apu.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apu.h from apu.hw"
+@@ -978,7 +982,7 @@
+ 			<File
+ 				RelativePath="include\private\apu_config.hw">
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apu_config.h from apu_config.hw"
+@@ -987,7 +991,7 @@
+ 						Outputs=".\include\private\apu_config.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apu_config.h from apu_config.hw"
+@@ -1002,7 +1006,7 @@
+ 			<File
+ 				RelativePath="include\private\apu_select_dbm.hw">
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apu_select_dbm.h from apu_select_dbm.hw"
+@@ -1011,7 +1015,7 @@
+ 						Outputs=".\include\private\apu_select_dbm.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apu_select_dbm.h from apu_select_dbm.hw"
+@@ -1029,7 +1033,7 @@
+ 			<File
+ 				RelativePath="include\apu_want.hw">
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apu_want.h from apu_want.hw"
+@@ -1038,7 +1042,7 @@
+ 						Outputs=".\include\apu_want.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating apu_want.h from apu_want.hw"
+@@ -1050,7 +1054,7 @@
+ 			<File
+ 				RelativePath="uri\gen_uri_delims.exe">
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Generating uri_delims.h"
+@@ -1059,7 +1063,7 @@
+ 						Outputs=".\uri\uri_delims.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Generating uri_delims.h"
+@@ -1145,7 +1149,7 @@
+ 		<File
+ 			RelativePath="..\apr\build\win32ver.awk">
+ 			<FileConfiguration
+-				Name="Debug|Win32">
++				Name="Debug|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					Description="Creating Version Resource"
+@@ -1154,7 +1158,7 @@
+ 					Outputs=".\libaprutil.rc"/>
+ 			</FileConfiguration>
+ 			<FileConfiguration
+-				Name="Release|Win32">
++				Name="Release|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					Description="Creating Version Resource"
+Index: build/generator/neon.vcproj.ezt
+===================================================================
+--- build/generator/neon.vcproj.ezt	(revision 18105)
++++ build/generator/neon.vcproj.ezt	(working copy)
+@@ -8,11 +8,11 @@
+ 	Keyword="MakeFileProj">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory="[neon_path]\Debug"
+ 			IntermediateDirectory="[neon_path]\Debug"
+ 			ConfigurationType="0"
+@@ -25,7 +25,7 @@
+ 				Output="[neon_path]\libneonD.lib"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory="[neon_path]\Release"
+ 			IntermediateDirectory="[neon_path]\Release"
+ 			ConfigurationType="0"
+Index: build/generator/svn_config.vcproj.ezt
+===================================================================
+--- build/generator/svn_config.vcproj.ezt	(revision 18105)
++++ build/generator/svn_config.vcproj.ezt	(working copy)
+@@ -8,11 +8,11 @@
+ 	Keyword="MakeFileProj">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory="."
+ 			IntermediateDirectory="."
+ 			ConfigurationType="10"
+@@ -31,7 +31,7 @@
+ 				Name="VCPreBuildEventTool"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory="."
+ 			IntermediateDirectory="."
+ 			ConfigurationType="10"
+@@ -54,13 +54,13 @@
+ 		<File
+ 			RelativePath="..\..\subversion\svn_private_config.h">
+ 			<FileConfiguration
+-				Name="Debug|Win32"
++				Name="Debug|[platform]"
+ 				ExcludedFromBuild="TRUE">
+ 				<Tool
+ 					Name="VCCustomBuildTool"/>
+ 			</FileConfiguration>
+ 			<FileConfiguration
+-				Name="Release|Win32"
++				Name="Release|[platform]"
+ 				ExcludedFromBuild="TRUE">
+ 				<Tool
+ 					Name="VCCustomBuildTool"/>
+@@ -69,7 +69,7 @@
+ 		<File
+ 			RelativePath="..\..\subversion\svn_private_config.hw">
+ 			<FileConfiguration
+-				Name="Debug|Win32">
++				Name="Debug|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					Description="Creating svn_private_config.h from svn_private_config.hw."
+@@ -78,7 +78,7 @@
+ 					Outputs="..\..\subversion\svn_private_config.h"/>
+ 			</FileConfiguration>
+ 			<FileConfiguration
+-				Name="Release|Win32">
++				Name="Release|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					Description="Creating svn_private_config.h from svn_private_config.hw."
+Index: build/generator/svn_locale.vcproj.ezt
+===================================================================
+--- build/generator/svn_locale.vcproj.ezt	(revision 18105)
++++ build/generator/svn_locale.vcproj.ezt	(working copy)
+@@ -8,11 +8,11 @@
+ 	Keyword="MakeFileProj">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			ConfigurationType="0"
+ 			UseOfMFC="0"
+ 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+@@ -23,7 +23,7 @@
+                         />
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			ConfigurationType="0"
+ 			UseOfMFC="0"
+ 			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+Index: build/generator/vcnet_sln.ezt
+===================================================================
+--- build/generator/vcnet_sln.ezt	(revision 18105)
++++ build/generator/vcnet_sln.ezt	(working copy)
+@@ -1,5 +1,6 @@
+ Microsoft Visual Studio Solution File, Format Version [version]
+-[for targets]Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "[targets.name]", "[targets.path]", "[targets.guid]"
++[is version "9.00"]# Visual Studio 2005
++[end][for targets]Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "[targets.name]", "[targets.path]", "[targets.guid]"
+ EndProject
+ [end]Global
+ 	GlobalSection(SolutionConfiguration) = preSolution
+Index: build/generator/vcnet_vcproj.ezt
+===================================================================
+--- build/generator/vcnet_vcproj.ezt	(revision 18105)
++++ build/generator/vcnet_vcproj.ezt	(working copy)
+@@ -48,9 +48,10 @@
+ [is target_type "4"][else]				OutputFile="$(OutDir)\[target.output_name]"
+ [end][is configs.name "Debug"]				LinkIncremental="2"
+ [else]				LinkIncremental="1"
+-[end]				AdditionalLibraryDirectories="..\..\..\db4-win32\lib;[for configs.libdirs][configs.libdirs];[end]"
+-				TargetMachine="1"
+-				IgnoreDefaultLibraryNames="libc.lib"
++[end]				AdditionalLibraryDirectories="..\..\..\db4-[platform]\lib;[for configs.libdirs][configs.libdirs];[end]"
++[is platform "x64"]				TargetMachine="17"
++[else]				TargetMachine="1"
++[end]				IgnoreDefaultLibraryNames="libc.lib"
+ [if-any def_file]				ModuleDefinitionFile="[def_file]"
+ [end]				GenerateDebugInformation="TRUE"
+ 				ProgramDatabaseFile="$(OutDir)\$(TargetName).pdb"[is configs.name "Debug"]
+@@ -94,7 +95,7 @@
+ 			RelativePath="[sources.path]">
+ [if-any sources.custom_build][for configs]
+ 			<FileConfiguration
+-				Name="[configs.name]|Win32">
++				Name="[configs.name]|[platform]">
+ 				<Tool
+ 					Name="VCCustomBuildTool"
+ 					CommandLine="[sources.custom_build]"
+@@ -104,7 +105,7 @@
+ [end][end]
+ [if-any sources.reldir][for configs]
+ 			<FileConfiguration
+-				Name="[configs.name]|Win32">
++				Name="[configs.name]|[platform]">
+ 				<Tool
+ 					Name="VCCLCompilerTool"
+ 					ObjectFile="$(IntDir)/[sources.reldir]/"
+Index: build/generator/xml.vcproj.ezt
+===================================================================
+--- build/generator/xml.vcproj.ezt	(revision 18105)
++++ build/generator/xml.vcproj.ezt	(working copy)
+@@ -7,11 +7,11 @@
+ 	SccLocalPath="">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory=".\LibR"
+ 			IntermediateDirectory=".\LibR"
+ 			ConfigurationType="4"
+@@ -23,7 +23,7 @@
+ 				Optimization="2"
+ 				InlineFunctionExpansion="1"
+ 				AdditionalIncludeDirectories="."
+-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;VERSION=\&quot;expat_1.95.1\&quot;;XML_MAJOR_VERSION=1;XML_MINOR_VERSION=95;XML_MICRO_VERSION=1"
++				PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;[win_flavour];NDEBUG;_WINDOWS;VERSION=\&quot;expat_1.95.1\&quot;;XML_MAJOR_VERSION=1;XML_MINOR_VERSION=95;XML_MICRO_VERSION=1"
+ 				StringPooling="TRUE"
+ 				RuntimeLibrary="2"
+ 				EnableFunctionLevelLinking="TRUE"
+@@ -56,7 +56,7 @@
+ 				Name="VCWebServiceProxyGeneratorTool"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory=".\LibD"
+ 			IntermediateDirectory=".\LibD"
+ 			ConfigurationType="4"
+@@ -67,7 +67,7 @@
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
+ 				AdditionalIncludeDirectories="."
+-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;VERSION=\&quot;expat_1.95.1\&quot;;XML_MAJOR_VERSION=1;XML_MINOR_VERSION=95;XML_MICRO_VERSION=1"
++				PreprocessorDefinitions="_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;[win_flavour];_DEBUG;_WINDOWS;VERSION=\&quot;expat_1.95.1\&quot;;XML_MAJOR_VERSION=1;XML_MINOR_VERSION=95;XML_MICRO_VERSION=1"
+ 				RuntimeLibrary="3"
+ 				PrecompiledHeaderFile=".\LibD/xml.pch"
+ 				AssemblerListingLocation=".\LibD/"
+@@ -107,7 +107,7 @@
+ 			<File
+ 				RelativePath="xmlparse.c">
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+ 						Optimization="2"
+@@ -115,7 +115,7 @@
+ 						PreprocessorDefinitions=""/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+ 						Optimization="0"
+@@ -126,7 +126,7 @@
+ 			<File
+ 				RelativePath="xmlrole.c">
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+ 						Optimization="2"
+@@ -134,7 +134,7 @@
+ 						PreprocessorDefinitions=""/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+ 						Optimization="0"
+@@ -145,7 +145,7 @@
+ 			<File
+ 				RelativePath="xmltok.c">
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+ 						Optimization="2"
+@@ -153,7 +153,7 @@
+ 						PreprocessorDefinitions=""/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+ 						Optimization="0"
+@@ -164,7 +164,7 @@
+ 			<File
+ 				RelativePath="xmltok_impl.c">
+ 				<FileConfiguration
+-					Name="Release|Win32"
++					Name="Release|[platform]"
+ 					ExcludedFromBuild="TRUE">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+@@ -173,7 +173,7 @@
+ 						PreprocessorDefinitions=""/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Debug|Win32"
++					Name="Debug|[platform]"
+ 					ExcludedFromBuild="TRUE">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+@@ -185,7 +185,7 @@
+ 			<File
+ 				RelativePath="xmltok_ns.c">
+ 				<FileConfiguration
+-					Name="Release|Win32"
++					Name="Release|[platform]"
+ 					ExcludedFromBuild="TRUE">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+@@ -194,7 +194,7 @@
+ 						PreprocessorDefinitions=""/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Debug|Win32"
++					Name="Debug|[platform]"
+ 					ExcludedFromBuild="TRUE">
+ 					<Tool
+ 						Name="VCCLCompilerTool"
+@@ -247,7 +247,7 @@
+ 			<File
+ 				RelativePath="expat.h.in">
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating expat.h from expat.h.in"
+@@ -256,7 +256,7 @@
+ 						Outputs=".\expat.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating expat.h from expat.h.in"
+@@ -268,7 +268,7 @@
+ 			<File
+ 				RelativePath="winconfig.h">
+ 				<FileConfiguration
+-					Name="Release|Win32">
++					Name="Release|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating config.h from winconfig.h"
+@@ -277,7 +277,7 @@
+ 						Outputs=".\config.h"/>
+ 				</FileConfiguration>
+ 				<FileConfiguration
+-					Name="Debug|Win32">
++					Name="Debug|[platform]">
+ 					<Tool
+ 						Name="VCCustomBuildTool"
+ 						Description="Creating config.h from winconfig.h"
+Index: build/generator/zlib.vcproj.ezt
+===================================================================
+--- build/generator/zlib.vcproj.ezt	(revision 18105)
++++ build/generator/zlib.vcproj.ezt	(working copy)
+@@ -8,11 +8,11 @@
+ 	Keyword="MakeFileProj">
+ 	<Platforms>
+ 		<Platform
+-			Name="Win32"/>
++			Name="[platform]"/>
+ 	</Platforms>
+ 	<Configurations>
+ 		<Configuration
+-			Name="Debug|Win32"
++			Name="Debug|[platform]"
+ 			OutputDirectory="[zlib_path]\Debug"
+ 			IntermediateDirectory="[zlib_path]\Debug"
+ 			ConfigurationType="0"
+@@ -25,7 +25,7 @@
+ 				Output="[zlib_path]\zlibstatD.lib"/>
+ 		</Configuration>
+ 		<Configuration
+-			Name="Release|Win32"
++			Name="Release|[platform]"
+ 			OutputDirectory="[zlib_path]\Release"
+ 			IntermediateDirectory="[zlib_path]\Release"
+ 			ConfigurationType="0"
+Index: build/win32/svn.rc
+===================================================================
+--- build/win32/svn.rc	(revision 18105)
++++ build/win32/svn.rc	(working copy)
+@@ -19,6 +19,18 @@
+ #  error This file was not generated by Visual Studio.
+ #endif
+ 
++/* Prevents standard libs from being parsed.
++ * VS2005's resource compiler will complain about the long macro
++ * names defined and used therein.
++ */
++#define _INC_STDLIB
++#define _INC_CRTDEFS
++#define _INC_STRING
++#define _INC_STDIO
++#define _INC_TIME
++#define _INC_PROCESS
++#define _INC_ERRNO
++
+ #include <winres.h>
+ #include <apr_general.h>
+ #include "../../subversion/include/svn_version.h"
+Index: subversion/bindings/swig/perl/libsvn_swig_perl/swigutil_pl.c
+===================================================================
+--- subversion/bindings/swig/perl/libsvn_swig_perl/swigutil_pl.c	(revision 18105)
++++ subversion/bindings/swig/perl/libsvn_swig_perl/swigutil_pl.c	(working copy)
+@@ -21,7 +21,7 @@
+ #include <XSUB.h>
+ 
+ #include <stdarg.h>
+-#ifdef WIN32
++#ifdef _WIN32
+ #include <io.h>
+ #endif
+ 
+@@ -1373,7 +1373,7 @@
+                     pool);
+     } else if (SvROK(file) && SvTYPE(SvRV(file)) == SVt_PVGV) {
+         apr_status_t status;
+-#ifdef WIN32
++#ifdef _WIN32
+         apr_os_file_t osfile = (apr_os_file_t)
+           _get_osfhandle(PerlIO_fileno(IoIFP(sv_2io(file))));
+ #else
+Index: subversion/bindings/swig/python/libsvn_swig_py/swigutil_py.c
+===================================================================
+--- subversion/bindings/swig/python/libsvn_swig_py/swigutil_py.c	(revision 18105)
++++ subversion/bindings/swig/python/libsvn_swig_py/swigutil_py.c	(working copy)
+@@ -1370,7 +1370,7 @@
+ 
+       /* input is a file object -- convert to apr_file_t */
+       file = PyFile_AsFile(py_file);
+-#ifdef WIN32
++#ifdef _WIN32
+       osfile = (apr_os_file_t)_get_osfhandle(_fileno(file));
+ #else
+       osfile = (apr_os_file_t)fileno(file);
+Index: subversion/libsvn_subr/cmdline.c
+===================================================================
+--- subversion/libsvn_subr/cmdline.c	(revision 18105)
++++ subversion/libsvn_subr/cmdline.c	(working copy)
+@@ -20,7 +20,7 @@
+ #include <stdlib.h>             /* for atexit() */
+ #include <locale.h>             /* for setlocale() */
+ 
+-#ifndef WIN32
++#ifndef _WIN32
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+@@ -58,7 +58,7 @@
+   apr_status_t status;
+   apr_pool_t *pool;
+ 
+-#ifndef WIN32
++#ifndef _WIN32
+   {
+     struct stat st;
+ 
+@@ -78,7 +78,7 @@
+   }
+ #endif
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+   /* Initialize the input and output encodings. */
+   {
+     static char input_encoding_buffer[16];
+@@ -92,7 +92,7 @@
+                  "CP%u", (unsigned) GetConsoleOutputCP());
+     output_encoding = output_encoding_buffer;
+   }
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+ 
+   /* C programs default to the "C" locale. But because svn is supposed
+      to be i18n-aware, it should inherit the default locale of its
+Index: subversion/libsvn_subr/config_win.c
+===================================================================
+--- subversion/libsvn_subr/config_win.c	(revision 18105)
++++ subversion/libsvn_subr/config_win.c	(working copy)
+@@ -20,7 +20,7 @@
+ 
+ #include "svn_private_config.h"
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ 
+ #define WIN32_LEAN_AND_MEAN
+ #include <windows.h>
+@@ -58,7 +58,7 @@
+   if (style == APR_FILEPATH_ENCODING_UTF8)
+     {
+       WCHAR folder_ucs2[MAX_PATH];
+-      int inwords, outbytes, outlength;
++      apr_size_t inwords, outbytes, outlength;
+       char *folder_utf8;
+ 
+       if (S_OK != SHGetFolderPathW (NULL, csidl, NULL, SHGFP_TYPE_CURRENT,
+@@ -114,7 +114,7 @@
+ static svn_error_t *
+ utf8_to_ucs2 (WCHAR **ucs2, const char *utf8, apr_pool_t *pool)
+ {
+-  int inbytes, outwords, outlength;
++  apr_size_t inbytes, outwords, outlength;
+   apr_status_t apr_err;
+ 
+   inbytes = lstrlenA (utf8);
+@@ -341,4 +341,4 @@
+   return svn_err;
+ }
+ 
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+Index: subversion/libsvn_subr/io.c
+===================================================================
+--- subversion/libsvn_subr/io.c	(revision 18105)
++++ subversion/libsvn_subr/io.c	(working copy)
+@@ -21,7 +21,7 @@
+ #include <stdio.h>
+ #include <assert.h>
+ 
+-#ifndef WIN32
++#ifndef _WIN32
+ #include <unistd.h>
+ #ifndef APR_GSETID
+ /* Needed for fallback setgid code in dir_make */
+@@ -71,7 +71,7 @@
+   goes a long way towards minimizing it.  It is not an infinite
+   loop because there might really be an error.
+ */
+-#ifdef WIN32
++#ifdef _WIN32
+ #define WIN32_RETRY_LOOP(err, expr)                                        \
+   do                                                                       \
+     {                                                                      \
+@@ -486,14 +486,14 @@
+             }
+         }
+     }
+-#ifdef WIN32
++#ifdef _WIN32
+   /* Next, on Win32, try the C:\TEMP directory. */
+   if (test_tempdir("C:\\TEMP", pool))
+     {
+       temp_dir = "C:\\TEMP";
+       goto end;
+     }
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+ 			    
+   /* Next, try a set of hard-coded paths. */
+   for (i = 0; i < (sizeof(try_dirs) / sizeof(const char *)); i++)
+@@ -574,7 +574,7 @@
+ 
+   /* ### FIXME: apr_file_copy with perms may fail on Win32.  We need a
+      platform-specific implementation to get the permissions right. */
+-#ifndef WIN32
++#ifndef _WIN32
+   if (copy_perms)
+     {
+       apr_file_t *s;
+@@ -600,7 +600,7 @@
+              svn_path_local_style (dst_tmp, pool));
+         }
+     }
+-#endif /* ! WIN32 */
++#endif /* ! _WIN32 */
+ 
+   return svn_io_file_rename (dst_tmp, dst, pool);
+ }
+@@ -1249,7 +1249,7 @@
+                           const char *path, 
+                           apr_pool_t *pool)
+ {
+-#if defined(APR_HAS_USER) && !defined(WIN32)
++#if defined(APR_HAS_USER) && !defined(_WIN32)
+   apr_finfo_t file_info;
+   apr_status_t apr_err;
+   apr_uid_t uid;
+@@ -1276,7 +1276,7 @@
+   else
+     *executable = (file_info.protection & APR_WEXECUTE);
+ 
+-#else  /* defined(WIN32) || !defined(APR_HAS_USER) */
++#else  /* defined(_WIN32) || !defined(APR_HAS_USER) */
+   *executable = FALSE;
+ #endif
+ 
+@@ -1389,7 +1389,7 @@
+   /* Call the operating system specific function to actually force the
+      data to disk. */
+   {
+-#ifdef WIN32
++#ifdef _WIN32
+       
+       if (! FlushFileBuffers (filehand))
+         return svn_error_wrap_apr
+@@ -1508,11 +1508,11 @@
+   apr_status_t apr_err;
+   const char *path_apr;
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+   /* Set the file writable but only on Windows, because Windows
+      will not allow us to remove files that are read-only. */
+   SVN_ERR (svn_io_set_file_read_write (path, TRUE, pool));
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+ 
+   SVN_ERR (svn_path_cstring_from_utf8 (&path_apr, path, pool));
+ 
+@@ -2371,7 +2371,7 @@
+   apr_status_t status = APR_SUCCESS;
+   const char *from_path_apr, *to_path_apr;
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+   /* Set the file writable but only on Windows, because Windows will
+      not allow us to rename files that are read-only. But preserve the
+      state of the read-only flag on the destination. */
+@@ -2379,12 +2379,12 @@
+   apr_finfo_t finfo;
+ 
+   SVN_ERR (svn_io_set_file_read_write (from_path, FALSE, pool));
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+ 
+   SVN_ERR (svn_path_cstring_from_utf8 (&from_path_apr, from_path, pool));
+   SVN_ERR (svn_path_cstring_from_utf8 (&to_path_apr, to_path, pool));
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+   status = apr_stat (&finfo, to_path_apr, APR_FINFO_PROT, pool);
+   if (APR_STATUS_IS_ENOENT (status))
+     {
+@@ -2403,7 +2403,7 @@
+       if (was_read_only)
+         SVN_ERR (svn_io_set_file_read_write (to_path, FALSE, pool));
+     }
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+ 
+   if (!status)
+     {
+@@ -2417,10 +2417,10 @@
+                                svn_path_local_style (from_path, pool),
+                                svn_path_local_style (to_path, pool));
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+   if (was_read_only)
+     SVN_ERR (svn_io_set_file_read_only (to_path, FALSE, pool));
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+ 
+   return SVN_NO_ERROR;
+ }
+@@ -2451,7 +2451,7 @@
+       if (err)
+         goto failed_tmp;
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+       /* Windows won't let us delete a file marked as read-only,
+          so, mark as read+write */
+       err = svn_io_set_file_read_write (from_path, FALSE, pool);
+@@ -2463,7 +2463,7 @@
+       if (! err)
+         return SVN_NO_ERROR;
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+     failed_final:
+       svn_error_clear (svn_io_set_file_read_write (to_path, FALSE, pool));
+ #endif
+@@ -2472,7 +2472,7 @@
+       return err;
+ 
+     failed_tmp:
+-#ifdef WIN32
++#ifdef _WIN32
+       svn_error_clear (svn_io_set_file_read_write (tmp_to_path, FALSE, pool));
+ #endif
+       svn_error_clear (svn_io_remove_file (tmp_to_path, pool));
+@@ -2544,7 +2544,7 @@
+        * don't support the sgid bit, and that's okay. */
+       apr_file_perms_set (path_apr, finfo.protection | APR_GSETID);
+     }
+-#elif !defined (WIN32)
++#elif !defined (_WIN32)
+   /* APR_GSETID appears in APR 0.9.5, so we need some fallback code
+      until Subversion can require 0.9.5. */
+   if (sgid)
+@@ -2864,11 +2864,11 @@
+   /* ...and close the file. */
+   SVN_ERR (svn_io_file_close (format_file, pool));
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+   /* make the destination writable, but only on Windows, because
+      Windows does not let us replace read-only files. */
+   SVN_ERR (svn_io_set_file_read_write (path, TRUE, pool));
+-#endif /* WIN32 */
++#endif /* _WIN32 */
+ 
+   /* rename the temp file as the real destination */
+   SVN_ERR (svn_io_file_rename (path_tmp, path, pool));
+Index: subversion/libsvn_subr/nls.c
+===================================================================
+--- subversion/libsvn_subr/nls.c	(revision 18105)
++++ subversion/libsvn_subr/nls.c	(working copy)
+@@ -18,7 +18,7 @@
+ 
+ #include <stdlib.h>
+ 
+-#ifndef WIN32
++#ifndef _WIN32
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+@@ -34,7 +34,7 @@
+ 
+ #include "svn_private_config.h"
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ /* FIXME: We're using an internal APR header here, which means we
+    have to build Subversion with APR sources. This being Win32-only,
+    that should be fine for now, but a better solution must be found in
+@@ -49,7 +49,7 @@
+   svn_error_t *err = SVN_NO_ERROR;
+   
+ #ifdef ENABLE_NLS
+-#ifdef WIN32
++#ifdef _WIN32
+   {
+     WCHAR ucs2_path[MAX_PATH];
+     char* utf8_path;

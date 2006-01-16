@@ -1,0 +1,158 @@
+Index: file_io/win32/open.c
+===================================================================
+--- file_io/win32/open.c	(revision 369201)
++++ file_io/win32/open.c	(working copy)
+@@ -48,7 +48,7 @@
+      * Note that the \\?\ form only works for local drive paths, and
+      * \\?\UNC\ is needed UNC paths.
+      */
+-    int srcremains = strlen(srcstr) + 1;
++    apr_size_t srcremains = strlen(srcstr) + 1;
+     apr_wchar_t *t = retstr;
+     apr_status_t rv;
+ 
+@@ -102,7 +102,7 @@
+      * then transform \\'s back into /'s since the \\?\ form never
+      * allows '/' path seperators, and APR always uses '/'s.
+      */
+-    int srcremains = wcslen(srcstr) + 1;
++    apr_size_t srcremains = wcslen(srcstr) + 1;
+     apr_status_t rv;
+     char *t = retstr;
+     if (srcstr[0] == L'\\' && srcstr[1] == L'\\' && 
+Index: file_io/win32/readwrite.c
+===================================================================
+--- file_io/win32/readwrite.c	(revision 369201)
++++ file_io/win32/readwrite.c	(working copy)
+@@ -30,6 +30,9 @@
+  */
+ static apr_status_t read_with_timeout(apr_file_t *file, void *buf, apr_size_t len, apr_size_t *nbytes)
+ {
++	/* used as temporary to receive 4 byte values where nbytes is too large */
++	DWORD bytesRead = 0;
++
+     apr_status_t rv;
+     *nbytes = 0;
+ 
+@@ -69,7 +72,8 @@
+         file->pOverlapped->OffsetHigh = (DWORD)(file->filePtr >> 32);
+     }
+ 
+-    rv = ReadFile(file->filehand, buf, len, nbytes, file->pOverlapped);
++    rv = ReadFile(file->filehand, buf, len, &bytesRead, file->pOverlapped);
++	*nbytes = bytesRead;
+ 
+     if (!rv) {
+         rv = apr_get_os_error();
+@@ -86,7 +90,9 @@
+             switch (rv) {
+             case WAIT_OBJECT_0:
+                 GetOverlappedResult(file->filehand, file->pOverlapped, 
+-                                    nbytes, TRUE);
++                                    &bytesRead, TRUE);
++				*nbytes = bytesRead;
++
+                 rv = APR_SUCCESS;
+                 break;
+             case WAIT_TIMEOUT:
+@@ -215,6 +221,9 @@
+     apr_status_t rv;
+     DWORD bwrote;
+ 
++	/* used as temporary to receive 4 byte values where nbytes is too large */
++	DWORD bytesWritten = 0;
++
+     /* If the file is open for xthread support, allocate and
+      * initialize the overlapped and io completion event (hEvent). 
+      * Threads should NOT share an apr_file_t or its hEvent.
+@@ -310,7 +319,8 @@
+                 rv = WaitForSingleObject(thefile->pOverlapped->hEvent, INFINITE);
+                 switch (rv) {
+                     case WAIT_OBJECT_0:
+-                        GetOverlappedResult(thefile->filehand, thefile->pOverlapped, nbytes, TRUE);
++                        GetOverlappedResult(thefile->filehand, thefile->pOverlapped, &bytesWritten, TRUE);
++						*nbytes = bytesWritten;
+                         rv = APR_SUCCESS;
+                         break;
+                     case WAIT_TIMEOUT:
+@@ -344,7 +354,7 @@
+ {
+     apr_status_t rv = APR_SUCCESS;
+     apr_size_t i;
+-    DWORD bwrote = 0;
++    apr_size_t bwrote = 0;
+     char *buf;
+ 
+     *nbytes = 0;
+@@ -362,7 +372,7 @@
+ 
+ APR_DECLARE(apr_status_t) apr_file_putc(char ch, apr_file_t *thefile)
+ {
+-    DWORD len = 1;
++    apr_size_t len = 1;
+ 
+     return apr_file_write(thefile, &ch, &len);
+ }
+@@ -376,7 +386,7 @@
+ APR_DECLARE(apr_status_t) apr_file_getc(char *ch, apr_file_t *thefile)
+ {
+     apr_status_t rc;
+-    int bread;
++    apr_size_t bread;
+ 
+     bread = 1;
+     rc = apr_file_read(thefile, ch, &bread);
+@@ -394,7 +404,7 @@
+ 
+ APR_DECLARE(apr_status_t) apr_file_puts(const char *str, apr_file_t *thefile)
+ {
+-    DWORD len = strlen(str);
++    apr_size_t len = strlen(str);
+ 
+     return apr_file_write(thefile, str, &len);
+ }
+Index: include/arch/win32/apr_private.h
+===================================================================
+--- include/arch/win32/apr_private.h	(revision 369201)
++++ include/arch/win32/apr_private.h	(working copy)
+@@ -20,7 +20,7 @@
+  * which unix would create at build time.
+  */
+ 
+-#ifdef WIN32
++#ifdef _WIN32
+ 
+ #ifndef APR_PRIVATE_H
+ #define APR_PRIVATE_H
+@@ -150,4 +150,4 @@
+ #include "../apr_private_common.h"
+ 
+ #endif  /*APR_PRIVATE_H*/
+-#endif  /*WIN32*/
++#endif  /*_WIN32*/
+Index: network_io/win32/sendrecv.c
+===================================================================
+--- network_io/win32/sendrecv.c	(revision 369201)
++++ network_io/win32/sendrecv.c	(working copy)
+@@ -229,7 +229,7 @@
+     apr_ssize_t rv;
+     apr_off_t curoff = *offset;
+     DWORD dwFlags = 0;
+-    DWORD nbytes;
++    apr_size_t nbytes;
+     TRANSMIT_FILE_BUFFERS tfb, *ptfb = NULL;
+     int ptr = 0;
+     int bytes_to_send;   /* Bytes to send out of the file (not including headers) */
+Index: strings/apr_fnmatch.c
+===================================================================
+--- strings/apr_fnmatch.c	(revision 369201)
++++ strings/apr_fnmatch.c	(working copy)
+@@ -42,7 +42,7 @@
+  * Function fnmatch() as specified in POSIX 1003.2-1992, section B.6.
+  * Compares a filename or pathname to a pattern.
+  */
+-#ifndef WIN32
++#ifndef _WIN32
+ #include "apr_private.h"
+ #endif
+ #include "apr_fnmatch.h"
