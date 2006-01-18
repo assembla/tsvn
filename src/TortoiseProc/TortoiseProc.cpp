@@ -1580,6 +1580,7 @@ BOOL CTortoiseProcApp::InitInstance()
 		if (command == cmdBlame)
 		{
 			CBlameDlg dlg;
+			dlg.EndRev = SVNRev::REV_HEAD;
 			if (dlg.DoModal() == IDOK)
 			{
 				CBlame blame;
