@@ -1283,7 +1283,10 @@ BOOL CTortoiseProcApp::InitInstance()
 				// ask for a new name of the source item
 				CRenameDlg renDlg;
 				renDlg.m_name = pathList[0].GetFileOrDirectoryName();
-				renDlg.DoModal();
+				if (renDlg.DoModal() != IDOK)
+				{
+					return FALSE;
+				}
 				sNewName = renDlg.m_name;
 			}
 			CProgressDlg progress;
@@ -1634,6 +1637,15 @@ BOOL CTortoiseProcApp::InitInstance()
 			dlg.m_pathList = pathList;
 			if (dlg.DoModal()==IDOK)
 			{
+				if (cmdLinePath.IsEmpty())
+				{
+					if (pathList.GetCount() == 1)
+						cmdLinePath = pathList[0];
+					else
+					{
+						cmdLinePath = pathList.GetCommonRoot();
+					}
+				}
 				CreatePatch(cmdLinePath, dlg.m_pathList, CTSVNPath(savepath));
 				SVN svn;
 				svn.Revert(dlg.m_filesToRevert, false);
