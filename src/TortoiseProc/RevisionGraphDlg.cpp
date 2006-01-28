@@ -206,13 +206,10 @@ cleanup:
 
 void CRevisionGraphDlg::InitView()
 {
-	CRect * oldsize = GetViewSize();
-	int width = oldsize->Width();
-	int height = oldsize->Height();
 	m_ViewRect.SetRectEmpty();
 	GetViewSize();
 	BuildConnections();
-	SetScrollbars(0,0,width,height);
+	SetScrollbars(0,0,m_ViewRect.Width(),m_ViewRect.Height());
 }
 
 void CRevisionGraphDlg::SetScrollbars(int nVert, int nHorz, int oldwidth, int oldheight)
@@ -1113,6 +1110,18 @@ CRect * CRevisionGraphDlg::GetViewSize()
 
 	m_ViewRect.right = level * (m_node_rect_width + m_node_space_left + m_node_space_right);
 	m_ViewRect.bottom = revisions * (m_node_rect_heigth + m_node_space_top + m_node_space_bottom);
+	CRect rect;
+	GetClientRect(&rect);
+	if (m_ViewRect.Width() < rect.Width())
+	{
+		m_ViewRect.left = rect.left;
+		m_ViewRect.right = rect.right;
+	}
+	if (m_ViewRect.Height() < rect.Height())
+	{
+		m_ViewRect.top = rect.top;
+		m_ViewRect.bottom = rect.bottom;
+	}
 	return &m_ViewRect;
 }
 
