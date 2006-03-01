@@ -221,7 +221,7 @@ void CLogPromptDlg::OnOK()
 
 	CTSVNPathList itemsToAdd;
 	CTSVNPathList itemsToRemove;
-
+	bool bHasConflicted = false;
 	for (int j=0; j<nListItems; j++)
 	{
 		const CSVNStatusListCtrl::FileEntry * entry = m_ListCtrl.GetListEntry(j);
@@ -230,7 +230,11 @@ void CLogPromptDlg::OnOK()
 			if (entry->status == svn_wc_status_unversioned)
 			{
 				itemsToAdd.AddPath(entry->GetPath());
-			} 
+			}
+			if (entry->status == svn_wc_status_conflicted)
+			{
+				bHasConflicted = true;
+			}
 			if (entry->status == svn_wc_status_missing)
 			{
 				itemsToRemove.AddPath(entry->GetPath());
@@ -264,6 +268,8 @@ void CLogPromptDlg::OnOK()
 		m_bRecursive = TRUE;
 	}
 	else
+		m_bRecursive = FALSE;
+	if ((nUnchecked != 0)||(bCheckedInExternal)||(bHasConflicted))
 	{
 		m_bRecursive = FALSE;
 
