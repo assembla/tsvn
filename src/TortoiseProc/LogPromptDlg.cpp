@@ -221,6 +221,7 @@ void CLogPromptDlg::OnOK()
 
 	CTSVNPathList itemsToAdd;
 	CTSVNPathList itemsToRemove;
+	bool bCheckedInExternal = false;
 	bool bHasConflicted = false;
 	for (int j=0; j<nListItems; j++)
 	{
@@ -242,6 +243,10 @@ void CLogPromptDlg::OnOK()
 			if (entry->status == svn_wc_status_deleted)
 			{
 				arDeleted.Add(j);
+			}
+			if (entry->IsInExternal())
+			{
+				bCheckedInExternal = true;
 			}
 		}
 		else
