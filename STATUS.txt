@@ -21,6 +21,8 @@ Version 1.3.3
 5892							: select files in repobrowser
 5904							: Unignoring a wildcard pattern mistakenly reported the successfull
 								  removal of the file name.
+5906							: Unignoring file names removed more than it should from svn:ignore if
+								  the file name was part of another file name.
 
 Version 1.3.2
 5525							: Cancel didn't work when right-drag-copy files
