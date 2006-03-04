@@ -1545,8 +1545,6 @@ BOOL CTortoiseProcApp::InitInstance()
 				value += "\n";
 				value.Remove('\r');
 				value.Replace("\n\n", "\n");
-				CStringA sTrimmedvalue = value;
-				sTrimmedvalue.Trim();
 				
 				// Delete all occurences of 'name'
 				// "\n" is temporarily prepended to make the algorithm easier
@@ -1554,6 +1552,8 @@ BOOL CTortoiseProcApp::InitInstance()
 				value.Replace("\n" + CUnicodeUtils::GetUTF8(name) + "\n", "\n");
 				value = value.Mid(1);
 				
+				CStringA sTrimmedvalue = value;
+				sTrimmedvalue.Trim();
 				if (sTrimmedvalue.IsEmpty())
 				{
 					if (!props.Remove(_T("svn:ignore")))
