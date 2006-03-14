@@ -1340,8 +1340,12 @@ void CSVNStatusListCtrl::CheckEntry(int index, int nListItems)
 			} // if (!GetCheck(i)) 
 		} // for (int i=0; i<GetItemCount(); ++i)
 	} // if (entry->status == svn_wc_status_deleted) 
-	entry->checked = TRUE;
-	m_nSelected++;
+ 
+	if ( !entry->checked )
+	{
+		entry->checked = TRUE;
+		m_nSelected++;
+	}
 }
 
 void CSVNStatusListCtrl::UncheckEntry(int index, int nListItems)
@@ -1383,8 +1387,12 @@ void CSVNStatusListCtrl::UncheckEntry(int index, int nListItems)
 			}
 		} // for (int i=0; i<GetItemCount(); i++)
 	} // else if (entry->status == svn_wc_status_deleted)
-	entry->checked = FALSE;
-	m_nSelected--;
+
+	if ( entry->checked )
+	{
+		entry->checked = FALSE;
+		m_nSelected--;
+	}
 }
 
 bool CSVNStatusListCtrl::EntryPathCompareNoCase(const FileEntry* pEntry1, const FileEntry* pEntry2)
