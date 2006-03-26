@@ -9,6 +9,9 @@
 	<property name="platform" value="win32" />
 	<!-- default build tool is VS.NET2005 -->
 	<property name="buildtool" value="devenv.com" />
+	<!-- default: don't add a platform specific extension 
+	     to the bin folders 'release' / 'debug'  -->
+	<property name="bindirextension" value="" />
 
 	<include buildfile="default.build.user" />
 	
@@ -30,17 +33,18 @@
 		<property name="devrelease" value="" />
 	</target>
 
-	<target name="win64">
+	<target name="x64">
 		<description>
 			Compiles everything for the win64 platform.
 		</description>
-		<property name="platform" value="win64" />
+		<property name="platform" value="x64" />
+		<property name="bindirextension" value="64" />
 	</target>
 
 <!-- ====================================================================== -->
 <!-- Project targets														-->
 <!-- ====================================================================== -->
-	<target name="cleanall">
+	<target name="clean">
 		<description>
 			Cleans every subproject.
 		</description>
@@ -129,11 +133,17 @@
 		<description>
 			Builds all the language pack installers.
 		</description>
-		<nant target="all">
-			<buildfiles>
-				<include name="Languages\LanguagePack.build" />
-			</buildfiles>
-		</nant>
+		<property name="processorarchitecture" value="x86" />
+		<property name="processorarchitecture" value="AMD64" if="${platform == 'x64'}" />
+
+		<if test="${environment::get-variable('PROCESSOR_ARCHITECTURE') == processorarchitecture}">
+			<nant target="all">
+				<buildfiles>
+					<include name="Languages\LanguagePack.build" />
+				</buildfiles>
+			</nant>
+		</if>
+		<echo message="skipping generating languagepacks" if="${environment::get-variable('PROCESSOR_ARCHITECTURE') != processorarchitecture}" />
 	</target>
 
 	<target name="msi" depends="env">
@@ -191,7 +201,7 @@
 		<echo message="You must specify a target to tell us what you want to build!" />
 		<echo />
 		<echo message="The following targets are available:" />
-		<echo message="cleanall     : this will clean up previous builds and force a" />
+		<echo message="clean        : this will clean up previous builds and force a" />
 		<echo message="               complete rebuild later" />
 		<echo message="docs         : builds the docs in all languages and all formats" />
 		<echo message="Subversion   : builds the Subversion libraries, including its" />
@@ -209,7 +219,14 @@
 		<echo message="          those targets are built with debug support" />
 		<echo message="release : call this if you want to create official releases." />
 		<echo message="          It removes the '-dev' string from some builds" />
+		<echo message="x64     : call this if you want to create native 64 bit builds." />
+		<echo message="          (AMD64/EMT64 only -- will not work on Itanium systems.)" />
 		<echo />
+		<echo message="Please specify the configuration targets BEFORE the main target." />
+		<echo message="Examples:" />
+		<echo />
+		<echo message="nant release setup" />
+		<echo message="nant -v x64 debug binaries" />
 		<echo />
     </target>
 </project>
