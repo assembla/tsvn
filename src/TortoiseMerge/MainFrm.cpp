@@ -1395,6 +1395,14 @@ void CMainFrame::OnViewSwitchleft()
 	CWorkingFile file = m_Data.m_baseFile;
 	m_Data.m_baseFile = m_Data.m_yourFile;
 	m_Data.m_yourFile = file;
+	if (m_Data.m_mergedFile.GetFilename().CompareNoCase(m_Data.m_yourFile.GetFilename())==0)
+	{
+		m_Data.m_mergedFile = m_Data.m_baseFile;
+	}
+	else if (m_Data.m_mergedFile.GetFilename().CompareNoCase(m_Data.m_baseFile.GetFilename())==0)
+	{
+		m_Data.m_mergedFile = m_Data.m_yourFile;
+	}
 	LoadViews();
 }
 
