@@ -75,6 +75,7 @@ public:
 	/// in the list of handled shell requests to avoid deadlocks.
 	void UpdateShell(const CTSVNPath& path);
 
+	void Init();
 	void Stop();
 
 	void CloseWatcherHandles(HDEVNOTIFY hdev);

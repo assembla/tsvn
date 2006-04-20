@@ -43,7 +43,7 @@ BOOL CCachedDirectory::SaveToDisk(FILE * pFile)
 		WRITEVALUETOFILE(value);
 		if (value)
 		{
-			if (fwrite(key, sizeof(TCHAR), value, pFile)!=value)
+			if (fwrite((LPCTSTR)key, sizeof(TCHAR), value, pFile)!=value)
 				return false;
 			if (!I->second.SaveToDisk(pFile))
 				return false;
@@ -58,7 +58,7 @@ BOOL CCachedDirectory::SaveToDisk(FILE * pFile)
 		WRITEVALUETOFILE(value);
 		if (value)
 		{
-			if (fwrite(path, sizeof(TCHAR), value, pFile)!=value)
+			if (fwrite((LPCTSTR)path, sizeof(TCHAR), value, pFile)!=value)
 				return false;
 			svn_wc_status_kind status = I->second;
 			WRITEVALUETOFILE(status);
@@ -70,7 +70,7 @@ BOOL CCachedDirectory::SaveToDisk(FILE * pFile)
 	WRITEVALUETOFILE(value);
 	if (value)
 	{
-		if (fwrite(m_directoryPath.GetWinPathString(), sizeof(TCHAR), value, pFile)!=value)
+		if (fwrite(m_directoryPath.GetWinPath(), sizeof(TCHAR), value, pFile)!=value)
 			return false;
 	}
 	if (!m_ownStatus.SaveToDisk(pFile))
