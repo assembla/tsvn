@@ -58,7 +58,7 @@ void CSVNStatusCache::Create()
 		if (pFile)
 		{
 			LOADVALUEFROMFILE(value);
-			if (value != 1)
+			if (value != 2)
 			{
 				goto error;
 			}
@@ -132,7 +132,7 @@ bool CSVNStatusCache::SaveCache()
 		_tfopen_s(&pFile, path, _T("wb"));
 		if (pFile)
 		{
-			value = 1;		// 'version'
+			value = 2;		// 'version'
 			WRITEVALUETOFILE(value);
 			value = (int)m_pInstance->m_directoryCache.size();
 			WRITEVALUETOFILE(value);
@@ -350,7 +350,7 @@ CStatusCacheEntry CSVNStatusCache::GetStatusForPath(const CTSVNPath& path, DWORD
 		CCachedDirectory * cachedDir = GetDirectoryCacheEntry(path.GetContainingDirectory());
 		if (cachedDir != NULL)
 		{
-			m_mostRecentStatus = cachedDir->GetStatusForMember(path, bRecursive, bFetch);
+			m_mostRecentStatus = cachedDir->GetStatusForMember(path, bRecursive);
 			return m_mostRecentStatus;
 		}
 	}
