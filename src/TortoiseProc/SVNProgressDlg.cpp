@@ -345,6 +345,7 @@ CString CSVNProgressDlg::BuildInfoString()
 			break;
 		case svn_wc_notify_delete:
 		case svn_wc_notify_update_delete:
+		case svn_wc_notify_commit_deleted:
 			deleted++;
 			break;
 		case svn_wc_notify_restore:

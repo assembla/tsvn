@@ -367,7 +367,7 @@ private:
 	void Sort();	///< Sorts the control by columns
 	void AddEntry(const FileEntry * entry, WORD langID, int listIndex);	///< add an entry to the control
 	void RemoveListEntry(int index);	///< removes an entry from the listcontrol and both arrays
-	void BuildStatistics();	///< build the statistics
+	bool BuildStatistics();	///< build the statistics
 	void StartDiff(int fileindex);	///< start the external diff program
 	CTSVNPath BuildTargetFile();		///< builds a temporary files containing the paths of the selected entries
 	//static int __cdecl SortCompare(const void * pElem1, const void * pElem2);	///< sort callback function
