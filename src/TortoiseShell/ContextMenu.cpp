@@ -1672,7 +1672,7 @@ STDMETHODIMP CShellExt::HandleMenuMsg2(UINT uMsg, WPARAM wParam, LPARAM lParam, 
 				// which the top level context menu is *not*. So drawing there the accelerators
 				// is futile because they won't get used.
 				int menuID = myIDMap[lpdis->itemID];
-				if ((_tcsncmp(szItem, _T("SVN"), 3)==0)||(menuID == SubMenu)||(menuID == SubMenuFile)||(menuID == SubMenuFolder)||(menuID == SubMenuLink)||(menuID == SubMenuMultiple))
+				if ((_tcsncmp(szItem, _T("SVN"), 3)==0)||(menuID == SubMenu))
 					uFormat |= DT_HIDEPREFIX;
 				else
 				{
