@@ -417,6 +417,21 @@ bool CSVNStatusListCtrl::FetchStatusForSingleTarget(
 				} 
 			}
 		}
+		else if (strCurrentRepositoryUUID.IsEmpty() && (s->text_status == svn_wc_status_added))
+		{
+			// An added entry doesn't have an UUID assigned to it yet.
+			// So we fetch the status of the parent directory instead and
+			// check if that one has an UUID assigned to it.
+			svn_wc_status2_t * sparent;
+			CTSVNPath svnParentPath;
+			sparent = status.GetFirstFileStatus(workingTarget.GetContainingDirectory(), svnParentPath, false, false, false);
+			if (sparent && sparent->entry && sparent->entry->uuid)
+			{
+				strCurrentRepositoryUUID = sparent->entry->uuid;
+				m_sUUID = strCurrentRepositoryUUID;
+			}
+		}
+
 		if ((wcFileStatus == svn_wc_status_unversioned)&& svnPath.IsDirectory())
 		{
 			// check if the unversioned folder is maybe versioned. This
@@ -513,6 +528,12 @@ CSVNStatusListCtrl::AddNewFileEntry(
 			{
 				cpath = path.GetDirectory();
 				cpath.AppendPathString(CUnicodeUtils::GetUnicode(pSVNStatus->entry->conflict_new));
+				m_ConflictFileList.AddPath(cpath);
+			}
+			if (pSVNStatus->entry->prejfile)
+			{
+				cpath = path.GetDirectory();
+				cpath.AppendPathString(CUnicodeUtils::GetUnicode(pSVNStatus->entry->prejfile));
 				m_ConflictFileList.AddPath(cpath);
 			}
 		}
@@ -1710,9 +1731,9 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 				if (((wcStatus == svn_wc_status_conflicted)||(entry->isConflicted))&&(GetSelectedCount()==1))
 				{
 					if ((m_dwContextMenus & SVNSLC_POPCONFLICT)||(m_dwContextMenus & SVNSLC_POPRESOLVE))
-					popup.AppendMenu(MF_SEPARATOR);
-					
-					if (m_dwContextMenus & SVNSLC_POPCONFLICT)
+						popup.AppendMenu(MF_SEPARATOR);
+
+					if ((m_dwContextMenus & SVNSLC_POPCONFLICT)&&(entry->textstatus == svn_wc_status_conflicted))
 					{
 						temp.LoadString(IDS_MENUCONFLICT);
 						popup.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_EDITCONFLICT, temp);
@@ -1721,6 +1742,9 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 					{
 						temp.LoadString(IDS_STATUSLIST_CONTEXT_RESOLVED);
 						popup.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_RESOLVECONFLICT, temp);
+					}
+					if ((m_dwContextMenus & SVNSLC_POPRESOLVE)&&(entry->textstatus == svn_wc_status_conflicted))
+					{
 						temp.LoadString(IDS_SVNPROGRESS_MENUUSETHEIRS);
 						popup.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_RESOLVETHEIRS, temp);
 						temp.LoadString(IDS_SVNPROGRESS_MENUUSEMINE);

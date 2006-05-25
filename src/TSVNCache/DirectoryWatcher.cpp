@@ -59,8 +59,11 @@ CDirectoryWatcher::CDirectoryWatcher(void) :
 CDirectoryWatcher::~CDirectoryWatcher(void)
 {
 	InterlockedExchange(&m_bRunning, FALSE);
-	CloseHandle(m_hThread);
-	CloseHandle(m_hCompPort);
+	if (m_hThread != INVALID_HANDLE_VALUE)
+	{
+		CloseHandle(m_hThread);
+		m_hThread = INVALID_HANDLE_VALUE;
+	}
 	AutoLocker lock(m_critSec);
 	ClearInfoMap();
 }
@@ -68,15 +71,34 @@ CDirectoryWatcher::~CDirectoryWatcher(void)
 void CDirectoryWatcher::Stop()
 {
 	InterlockedExchange(&m_bRunning, FALSE);
-	CloseHandle(m_hThread);
+	if (m_hThread != INVALID_HANDLE_VALUE)
+		CloseHandle(m_hThread);
 	m_hThread = INVALID_HANDLE_VALUE;
-	CloseHandle(m_hCompPort);
+	if (m_hCompPort != INVALID_HANDLE_VALUE)
+		CloseHandle(m_hCompPort);
 	m_hCompPort = INVALID_HANDLE_VALUE;
 }
 
 void CDirectoryWatcher::SetFolderCrawler(CFolderCrawler * crawler)
 {
 	m_FolderCrawler = crawler;
+}
+
+bool CDirectoryWatcher::RemovePathAndChildren(const CTSVNPath& path)
+{
+	bool bRemoved = false;
+	AutoLocker lock(m_critSec);
+repeat:
+	for (int i=0; i<watchedPaths.GetCount(); ++i)
+	{
+		if (path.IsAncestorOf(watchedPaths[i]))
+		{
+			watchedPaths.RemovePath(watchedPaths[i]);
+			bRemoved = true;
+			goto repeat;
+		}
+	}
+	return bRemoved;
 }
 
 bool CDirectoryWatcher::AddPath(const CTSVNPath& path)
@@ -154,14 +176,12 @@ bool CDirectoryWatcher::AddPath(const CTSVNPath& path)
 		watchedPaths.AddPath(newroot);
 		watchedPaths.RemoveChildren();
 		CloseInfoMap();
-		CloseHandle(m_hCompPort);
 		m_hCompPort = INVALID_HANDLE_VALUE;
 		return true;
 	}
 	ATLTRACE("add path to watch %ws\n", path.GetWinPath());
 	watchedPaths.AddPath(path);
 	CloseInfoMap();
-	CloseHandle(m_hCompPort);
 	m_hCompPort = INVALID_HANDLE_VALUE;
 	return true;
 }
@@ -202,6 +222,7 @@ void CDirectoryWatcher::WorkerThread()
 				if ((m_hCompPort != INVALID_HANDLE_VALUE)&&(lasterr!=ERROR_SUCCESS)&&(lasterr!=ERROR_INVALID_HANDLE))
 				{
 					CloseHandle(m_hCompPort);
+					m_hCompPort = INVALID_HANDLE_VALUE;
 				}
 				// Since we pass m_hCompPort to CreateIoCompletionPort, we
 				// have to set this to NULL to have that API create a new
@@ -222,6 +243,7 @@ void CDirectoryWatcher::WorkerThread()
 						// this could happen if a watched folder has been removed/renamed
 						ATLTRACE("CDirectoryWatcher: CreateFile failed. Can't watch directory %ws\n", watchedPaths[i].GetWinPath());
 						CloseHandle(m_hCompPort);
+						m_hCompPort = INVALID_HANDLE_VALUE;
 						AutoLocker lock(m_critSec);
 						watchedPaths.RemovePath(watchedPaths[i]);
 						i--; if (i<0) i=0;
@@ -243,7 +265,6 @@ void CDirectoryWatcher::WorkerThread()
 						ATLTRACE("CDirectoryWatcher: CreateIoCompletionPort failed. Can't watch directory %ws\n", watchedPaths[i].GetWinPath());
 						AutoLocker lock(m_critSec);
 						ClearInfoMap();
-						CloseHandle(m_hCompPort);
 						delete pDirInfo;
 						pDirInfo = NULL;
 						watchedPaths.RemovePath(watchedPaths[i]);
@@ -262,7 +283,6 @@ void CDirectoryWatcher::WorkerThread()
 						ATLTRACE("CDirectoryWatcher: ReadDirectoryChangesW failed. Can't watch directory %ws\n", watchedPaths[i].GetWinPath());
 						AutoLocker lock(m_critSec);
 						ClearInfoMap();
-						CloseHandle(m_hCompPort);
 						delete pDirInfo;
 						pDirInfo = NULL;
 						watchedPaths.RemovePath(watchedPaths[i]);
@@ -387,6 +407,9 @@ void CDirectoryWatcher::ClearInfoMap()
 		}
 	}
 	watchInfoMap.clear();
+	if (m_hCompPort != INVALID_HANDLE_VALUE)
+		CloseHandle(m_hCompPort);
+	m_hCompPort = INVALID_HANDLE_VALUE;
 }
 
 CTSVNPath CDirectoryWatcher::CloseInfoMap(HDEVNOTIFY hdev)
@@ -399,10 +422,16 @@ CTSVNPath CDirectoryWatcher::CloseInfoMap(HDEVNOTIFY hdev)
 	{
 		CDirectoryWatcher::CDirWatchInfo * info = I->second;
 		if (info->m_hDevNotify == hdev)
+		{
 			path = info->m_DirName;
+			RemovePathAndChildren(path);
+		}
 		info->CloseDirectoryHandle();
 	}
 	watchInfoMap.clear();
+	if (m_hCompPort != INVALID_HANDLE_VALUE)
+		CloseHandle(m_hCompPort);
+	m_hCompPort = INVALID_HANDLE_VALUE;
 	return path;
 }
 

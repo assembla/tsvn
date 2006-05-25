@@ -706,9 +706,9 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 	}
 	if ((isInSVN)&&(!isAdded))
 		InsertSVNMenu(ownerdrawn, ISTOP(MENUUPDATEEXT), HMENU(MENUUPDATEEXT), INDEXMENU(MENUUPDATEEXT), idCmd++, IDS_MENUUPDATEEXT, IDI_UPDATE, idCmdFirst, UpdateExt);
-	if ((isInSVN)&&(isOnlyOneItemSelected)&&(!isAdded))
+	if ((isInSVN)&&(isOnlyOneItemSelected)&&(!isAdded)&&(isInVersionedFolder))
 		InsertSVNMenu(ownerdrawn, ISTOP(MENURENAME), HMENU(MENURENAME), INDEXMENU(MENURENAME), idCmd++, IDS_MENURENAME, IDI_RENAME, idCmdFirst, Rename);
-	if ((isInSVN)&&(!isAdded))
+	if ((isInSVN)&&(!isAdded)&&(isInVersionedFolder))
 		InsertSVNMenu(ownerdrawn, ISTOP(MENUREMOVE), HMENU(MENUREMOVE), INDEXMENU(MENUREMOVE), idCmd++, IDS_MENUREMOVE, IDI_DELETE, idCmdFirst, Remove);
 	if (((isInSVN)&&(!isNormal))||((isFolder)&&(isFolderInSVN)))
 		InsertSVNMenu(ownerdrawn, ISTOP(MENUREVERT), HMENU(MENUREVERT), INDEXMENU(MENUREVERT), idCmd++, IDS_MENUREVERT, IDI_REVERT, idCmdFirst, Revert);
@@ -1606,9 +1606,7 @@ STDMETHODIMP CShellExt::HandleMenuMsg2(UINT uMsg, WPARAM wParam, LPARAM lParam, 
 			if (resource == NULL)
 				return S_OK;
 			szItem = stringtablebuffer;
-			g_ShellCache.SetMenuInserted(NULL, false);	// now the menu is shown, no more menu's get inserted.
-			ATLTRACE("Shell :: WM_DRAWITEM\n");
-			if (lpdis->itemAction & (ODA_DRAWENTIRE|ODA_SELECT))
+			//if (lpdis->itemAction & (ODA_DRAWENTIRE|ODA_SELECT))
 			{
 				int ix, iy;
 				RECT rt, rtTemp;
@@ -1673,10 +1671,18 @@ STDMETHODIMP CShellExt::HandleMenuMsg2(UINT uMsg, WPARAM wParam, LPARAM lParam, 
 				// Reason: we only get the WM_MENUCHAR message if the *whole* menu is ownerdrawn,
 				// which the top level context menu is *not*. So drawing there the accelerators
 				// is futile because they won't get used.
-				if ((_tcsncmp(szItem, _T("SVN"), 3)==0)||(myIDMap[lpdis->itemID] == SubMenu))
+				int menuID = myIDMap[lpdis->itemID];
+				if ((_tcsncmp(szItem, _T("SVN"), 3)==0)||(menuID == SubMenu))
 					uFormat |= DT_HIDEPREFIX;
 				else
-					uFormat |= (lpdis->itemState & ODS_NOACCEL) ? DT_HIDEPREFIX : 0;
+				{
+					// If the "hide keyboard cues" option is turned off, we still
+					// get the ODS_NOACCEL flag! So we have to check this setting
+					// manually too.
+					BOOL bShowAccels = FALSE;
+					SystemParametersInfo(SPI_GETKEYBOARDCUES, 0, &bShowAccels, 0);
+					uFormat |= ((lpdis->itemState & ODS_NOACCEL)&&(!bShowAccels)) ? DT_HIDEPREFIX : 0;
+				}
 				if (lpdis->itemState & ODS_GRAYED)
 				{        
 					SetBkMode(lpdis->hDC, TRANSPARENT);

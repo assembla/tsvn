@@ -58,7 +58,7 @@ void CSVNStatusCache::Create()
 		if (pFile)
 		{
 			LOADVALUEFROMFILE(value);
-			if (value != 1)
+			if (value != 2)
 			{
 				goto error;
 			}
@@ -132,7 +132,7 @@ bool CSVNStatusCache::SaveCache()
 		_tfopen_s(&pFile, path, _T("wb"));
 		if (pFile)
 		{
-			value = 1;		// 'version'
+			value = 2;		// 'version'
 			WRITEVALUETOFILE(value);
 			value = (int)m_pInstance->m_directoryCache.size();
 			WRITEVALUETOFILE(value);
@@ -149,7 +149,7 @@ bool CSVNStatusCache::SaveCache()
 				WRITEVALUETOFILE(value);
 				if (value)
 				{
-					if (fwrite(key, sizeof(TCHAR), value, pFile)!=value)
+					if (fwrite((LPCTSTR)key, sizeof(TCHAR), value, pFile)!=value)
 						goto error;
 					if (!I->second->SaveToDisk(pFile))
 						goto error;
@@ -190,6 +190,12 @@ void CSVNStatusCache::Stop()
 	m_shellUpdater.Stop();
 }
 
+void CSVNStatusCache::Init()
+{
+	m_folderCrawler.Initialise();
+	m_shellUpdater.Initialise();
+}
+
 CSVNStatusCache::CSVNStatusCache(void)
 {
 	TCHAR path[MAX_PATH];
@@ -203,9 +209,6 @@ CSVNStatusCache::CSVNStatusCache(void)
 	m_NoWatchPaths.insert(CTSVNPath(CString(path)));
 	SHGetFolderPath(NULL, CSIDL_WINDOWS, NULL, 0, path);
 	m_NoWatchPaths.insert(CTSVNPath(CString(path)));
-
-	m_folderCrawler.Initialise();
-	m_shellUpdater.Initialise();
 }
 
 CSVNStatusCache::~CSVNStatusCache(void)
@@ -213,6 +216,7 @@ CSVNStatusCache::~CSVNStatusCache(void)
 	for (CCachedDirectory::CachedDirMap::iterator I = m_pInstance->m_directoryCache.begin(); I != m_pInstance->m_directoryCache.end(); ++I)
 	{
 		delete I->second;
+		I->second = NULL;
 	}
 }
 
@@ -241,12 +245,16 @@ bool CSVNStatusCache::RemoveCacheForDirectory(CCachedDirectory * cdir)
 	if (cdir == NULL)
 		return false;
 	typedef std::map<CTSVNPath, svn_wc_status_kind>  ChildDirStatus;
-	for (ChildDirStatus::iterator it = cdir->m_childDirectories.begin(); it != cdir->m_childDirectories.end(); )
+	if (cdir->m_childDirectories.size())
 	{
-		CCachedDirectory * childdir = CSVNStatusCache::Instance().GetDirectoryCacheEntry(it->first);
-		RemoveCacheForDirectory(childdir);
-		cdir->m_childDirectories.erase(it->first);
-		it = cdir->m_childDirectories.begin();
+		ChildDirStatus::iterator it = cdir->m_childDirectories.begin();
+		for (; it != cdir->m_childDirectories.end(); )
+		{
+			CCachedDirectory * childdir = CSVNStatusCache::Instance().GetDirectoryCacheEntry(it->first);
+			RemoveCacheForDirectory(childdir);
+			cdir->m_childDirectories.erase(it->first);
+			it = cdir->m_childDirectories.begin();
+		}
 	}
 	m_directoryCache.erase(cdir->m_directoryPath);
 	ATLTRACE("removed path %ws from cache\n", cdir->m_directoryPath);
@@ -267,6 +275,7 @@ void CSVNStatusCache::RemoveCacheForPath(const CTSVNPath& path)
 		dirtoremove = itMap->second;
 	if (dirtoremove == NULL)
 		return;
+	ATLASSERT(path.IsEquivalentTo(dirtoremove->m_directoryPath));
 	RemoveCacheForDirectory(dirtoremove);
 }
 
@@ -339,11 +348,15 @@ CStatusCacheEntry CSVNStatusCache::GetStatusForPath(const CTSVNPath& path, DWORD
 		CCrawlInhibitor crawlInhibit(&m_folderCrawler);
 
 		CCachedDirectory * cachedDir = GetDirectoryCacheEntry(path.GetContainingDirectory());
-		if (cachedDir)
-			return m_mostRecentStatus = cachedDir->GetStatusForMember(path, bRecursive);
+		if (cachedDir != NULL)
+		{
+			m_mostRecentStatus = cachedDir->GetStatusForMember(path, bRecursive);
+			return m_mostRecentStatus;
+		}
 	}
 	ATLTRACE("ignored no good path %ws\n", path.GetWinPath());
-	return (m_mostRecentStatus = CStatusCacheEntry());
+	m_mostRecentStatus = CStatusCacheEntry();
+	return m_mostRecentStatus;
 }
 
 void CSVNStatusCache::AddFolderForCrawling(const CTSVNPath& path)
