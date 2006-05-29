@@ -188,7 +188,7 @@ public:
       CString           sSize;
       LVITEM            lvi            = {0};
       TStrStrVector::iterator p;
-	  int status;
+	  DWORD_PTR status;
 	  char path[_MAX_PATH];
       for (i = 0, p = m_pUDFiles->begin(); p != m_pUDFiles->end(); p++, i++)
       {
@@ -232,7 +232,7 @@ public:
 
          // Size
 		 if (GetFileAttributesEx(path, GetFileExInfoStandard, &infoData)) {
-			sSize.Format(TEXT("%d KB"), infoData.nFileSizeLow);
+			sSize.Format(TEXT("%d KB"), (infoData.nFileSizeLow + 1023) / 1024);
             list.SetItemText(i, 3, sSize);
 		 }
       }
