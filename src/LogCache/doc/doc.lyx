@@ -1,0 +1,160 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass scrartcl
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+\added_space_top vfill \added_space_bottom vfill 
+Log Caching in TortoiseSVN
+\layout Date
+
+Date 2006-06-27
+\layout Author
+
+Stefan Fuhrmann (
+\emph on 
+stefan.fuhrmann@etas.de
+\emph default 
+)
+\layout Abstract
+
+This document describes the details of the TortoiseSVN logbook cache implementat
+ion as well as its the design rationales.
+\layout Section
+
+Use Cases
+\layout Standard
+
+Subversion revision logs basically contain all repository information except
+ the actual file and property contents
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+In real life, though, logs are only fetched for a certain sub-set of the
+ repository.
+\end_inset 
+
+ .
+ Hence, many non-modifying operations except content diffs and full-text
+ search can be performed solely on that information.
+\layout Standard
+
+The downside of this is the sheer size of that information: A few hundred
+ megabytes for a large repository's log information may be manageable on
+ a decent developer workstation.
+ It will be far less convenient on a rather modest notebook.
+\layout Standard
+
+While not adhering to a strict (and boring) use-case description style,
+ the following use-cases try to cover as many aspects of the log cache usage.
+ They are neither intended to be orthogonal nor complete, though.
+\layout Subsection
+
+Show Latest Revisions
+\layout Standard
+
+Maybe the most common usage.
+\layout Subsection
+
+Dig Through History
+\layout Standard
+
+Filtering is important.
+ Covers many revisions.
+\layout Subsection
+
+Statistics
+\layout Standard
+
+Future enhancements?
+\layout Subsection
+
+Interactive Revision Graphs
+\layout Standard
+
+Data processing can be enhanced as the query latency is reduced (no need
+ to fetch all etc.).
+\layout Subsection
+
+
+\begin_inset LatexCommand \label{UC:ReduceRequiredBandwith}
+
+\end_inset 
+
+Reduce Required Bandwith 
+\layout Standard
+
+Even down to zero.
+ Distribute 
+\begin_inset Quotes eld
+\end_inset 
+
+log tar balls
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ Import / export.
+ Often combined with limited RAM and HD resources.
+\layout Subsection
+
+Offline Functionality
+\layout Standard
+
+Differs from UC 
+\begin_inset LatexCommand \ref{UC:ReduceRequiredBandwith}
+
+\end_inset 
+
+ by being explicit (don't even try to connect).
+ Unavailable data remains unavailable.
+\layout Subsection
+
+Refresh Log Information
+\layout Standard
+
+Comment, author, etc.
+ may change
+\layout Subsection
+
+Enhanced Diff Between Tags
+\layout Standard
+
+Has the file been not touched at all or just been restored to its original
+ state?
+\layout Subsection
+
+Quality Assurance
+\layout Standard
+
+What paths (branches / tags) contain a certain code fragment?
+\layout Section
+
+Requirements
+\layout Standard
+
+.
+\the_end
