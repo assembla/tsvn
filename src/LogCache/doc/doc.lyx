@@ -127,7 +127,7 @@ Of course, the caching mechanism should be able to hold the logs multiple
 \family typewriter 
 svn:externals
 \family default 
- refering to other repositories.
+ referring to other repositories.
 \layout Subsection
 
 
@@ -165,7 +165,42 @@ In all those cases, the log that is searched spans - often sparsely - over
 Statistics
 \layout Standard
 
-Future enhancements?
+Statistics are a great tool for identifying trends
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Example: Does the average number of file changes in a commit increase over
+ time? If so, how does the distribution look like, i.e.
+ is it only the upper 1% (big merges) that is growing?
+\end_inset 
+
+ and verifying assumptions
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+For instance: Am I the one that contributes most to this tool or feature?
+\end_inset 
+
+ that are the basis of your source code management strategies.
+ Client-side log analysis is very important to those users that don't have
+ the rights to add such analysis on the server side.
+ Lowering the server load is a positive side-effect.
+\layout Standard
+
+There is a lot of information in the log data that makes data mining worthwhile.
+ Even a very sophisticated statistics engine will not cover all user needs.
+ Because of that, the user should be able to write his / her own data query.
+ A public low-level API to iterate over and navigate through all data will
+ be sufficient implement any query strategy.
+\layout Standard
+
+On top of that, another API layer shall provide grouping, sorting and filtering.
+ That's what statistics in TortoiseSVN use today.
+ 
 \layout Subsection
 
 Interactive Revision Graphs
@@ -243,8 +278,8 @@ collapsed false
 
 \layout Standard
 
-Not just modem users but people using connect on demand or having a satelite
- connection will experience huge initial comminication setup latencies.
+Not just modem users but people using connect on demand or having a satellite
+ connection will experience huge initial communication setup latencies.
 \end_inset 
 
  making them prefer TortoiseSVN not to connect the server until explicitly
@@ -263,29 +298,44 @@ log tar balls
 \end_inset 
 
 .
- An easy way to import / export someones log cache is needed.
+ An easy way to import / export someone's log cache is needed.
  
 \layout Standard
 
 Fast repository access is given for workstations accessing the server within
  the LAN.
  If you do not have that LAN connection you are likely to use a notebook
- or other computer with limited RAM, CPU and harddisk resources.
- Therefore, many log caching users will need about a space efficent data
- representation that is still quickly accessible with reasonable computing
- power.
+ or other computer with limited RAM, CPU and hard-disk resources.
+ Therefore, many log caching users will about a space efficient data representat
+ion that is still quickly accessible with reasonable computing power.
 \layout Subsection
 
 Offline Functionality
 \layout Standard
 
-Differs from UC 
-\begin_inset LatexCommand \ref{UC:ReduceRequiredBandwith}
+From time to time and depending on the respective user's settings, TortoiseSVN
+ will contact the repository server to update the log information before
+ it displays the requested information.
+ If the server cannot be reached, the client will be deadlocked until some
+ timeout.
+ 
+\layout Standard
 
+To prevent such delays, there shall be an offline mode.
+ While in this mode, the tool won't even try to connect the server leaving
+ unavailable data unavailable.
+ Hence, the API should have a way to communicate what information is missing
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Mainly, this is missing revision ranges.
 \end_inset 
 
- by being explicit (don't even try to connect).
- Unavailable data remains unavailable.
+.
+ Moreover, outdated information must not be deleted as long as there is
+ no way to replace it.
 \layout Subsection
 
 Refresh Log Information
@@ -306,7 +356,8 @@ Has the file been not touched at all or just been restored to its original
 Quality Assurance
 \layout Standard
 
-What paths (branches / tags) contain a certain code fragment?
+What paths (branches / tags) contain a certain code fragment? Client-side
+ scripting.
 \layout Subsection
 
 Honor Access Rights
