@@ -16,13 +16,13 @@
 \paperorientation portrait
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
+\paragraph_separation skip
 \defskip medskip
-\quotes_language english
+\quotes_language swedish
 \quotes_times 2
 \papercolumns 1
 \papersides 1
-\paperpagestyle default
+\paperpagestyle fancy
 
 \layout Title
 \added_space_top vfill \added_space_bottom vfill 
@@ -43,7 +43,7 @@ This document describes the details of the TortoiseSVN logbook cache implementat
 ion as well as its the design rationales.
 \layout Section
 
-Use Cases
+Use Cases and User Requirements
 \layout Standard
 
 Subversion revision logs basically contain all repository information except
@@ -69,7 +69,7 @@ The downside of this is the sheer size of that information: A few hundred
 \layout Standard
 
 While not adhering to a strict (and boring) use-case description style,
- the following use-cases try to cover as many aspects of the log cache usage.
+ the following sections try to cover as many aspects of the log cache usage.
  They are neither intended to be orthogonal nor complete, though.
 \layout Subsection
 
@@ -111,11 +111,11 @@ Another implication of this use case are small but frequent additions to
  the cache log.
  While the user expects other, large log operations to take a noticeable
  amount of time, he / she will assume that 
-\begin_inset Quotes eld
+\begin_inset Quotes sld
 \end_inset 
 
 show latest
-\begin_inset Quotes erd
+\begin_inset Quotes srd
 \end_inset 
 
  requests and updates could be done in a second or even less.
@@ -155,6 +155,10 @@ all
 \emph default 
  the log information is fast, filtering the same should not be major contributor
  to runtime.
+\layout Standard
+
+Full-text searches in comment, author and / or changed paths are helpful
+ and should be efficient as well.
 \layout Standard
 
 In all those cases, the log that is searched spans - often sparsely - over
@@ -265,11 +269,11 @@ For instance: get HEAD revision and be done if it did not change.
 \layout Standard
 
 Some people's connection to their repository server may not be exactly 
-\begin_inset Quotes eld
+\begin_inset Quotes srd
 \end_inset 
 
 snappy
-\begin_inset Quotes erd
+\begin_inset Quotes srd
 \end_inset 
 
 
@@ -290,11 +294,11 @@ Not just modem users but people using connect on demand or having a satellite
 Large repositories will have more than a million revisions.
  The most efficient way to fill a log cache for those is by distributing
  
-\begin_inset Quotes eld
+\begin_inset Quotes srd
 \end_inset 
 
 log tar balls
-\begin_inset Quotes erd
+\begin_inset Quotes srd
 \end_inset 
 
 .
@@ -341,35 +345,225 @@ Mainly, this is missing revision ranges.
 Refresh Log Information
 \layout Standard
 
-Comment, author, etc.
- may change.
- Update (ask server) explicitly.
+In some environments, a user is allowed to modify comment, author and time
+ stamp revision properties of some or all revisions.
+ This may happen more or less infrequently and may or may not be of interest
+ to other users.
+ Note that generally important status information should be stored in dedicated
+ revision properties.
+\layout Standard
+
+Hence, refreshing the log cache is a very infrequent operation and the user
+ must enable and trigger it explicitly.
+ Because there is no way of knowing the revisions that were actually changed
+ and fetching only the log header is takes almost as long as fetching the
+ verbose log, a refresh may be implemented as a simple 
+\begin_inset Quotes sld
+\end_inset 
+
+clear cache
+\begin_inset Quotes srd
+\end_inset 
+
+ operation.
 \layout Subsection
 
 Enhanced Diff Between Tags
 \layout Standard
 
-Has the file been not touched at all or just been restored to its original
- state?
+When asking SVN between to arbitrary paths, it will not only use ancestry
+ information but will also compare contents to check if the files are actually
+ different.
+ Changes that have been undone later on will not show up in the result.
+ 
+\layout Standard
+
+Some users may want more detail here: were there further changes in the
+ past that don't show up in the final diff? What is the change history down
+ to the common ancester of a given item?
+\layout Standard
+
+Log information is sufficient to construct the list of nodes that have been
+ touched on any side.
+ The search will stop for those paths that found a common ancestor.
+ So, the locally cached log data can be used for limited offline diffs as
+ well as for enhancing online diffs by adding a list of 
+\begin_inset Quotes sld
+\end_inset 
+
+touched
+\begin_inset Quotes srd
+\end_inset 
+
+ paths that did end up with the same content, though.
 \layout Subsection
 
 Quality Assurance
 \layout Standard
 
-What paths (branches / tags) contain a certain code fragment? Client-side
- scripting.
+Statistics already cover some quality assurance tasks.
+ Starting from that aggregated data, the user queries specific sub-sets
+ and correlates them to each other
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Examples: Does someone frequently add / remove source files without updating
+ the respective project file? Are short comments used mainly used for small
+ commits? After large merges, how many 
+\begin_inset Quotes sld
+\end_inset 
+
+fix build
+\begin_inset Quotes srd
+\end_inset 
+
+ commits are required to stabilize the target path again?
+\end_inset 
+
+.
+ The goal here is to find systematic problems.
+\layout Standard
+
+Another type of log analysis has the form of 
+\begin_inset Quotes sld
+\end_inset 
+
+What paths (branches / tags) contain a certain code fragment?
+\begin_inset Quotes srd
+\end_inset 
+
+
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Note, that there is a multitude of possible options and parameters to be
+ passed to that query.
+\end_inset 
+
+ There may be various types of similar questions that cannot be answered
+ by a simple 
+\family typewriter 
+diff
+\family default 
+, 
+\family typewriter 
+log
+\family default 
+ or 
+\family typewriter 
+blame
+\family default 
+ command but requires their interactive use: 
+\family typewriter 
+blame
+\family default 
+ and 
+\family typewriter 
+log
+\family default 
+ will allow to trace back to the origin of the code fragment.
+ 
+\family typewriter 
+Log
+\family default 
+ will then be used to find candidates that may still contain some or all
+ of these lines with 
+\family typewriter 
+diff
+\family default 
+ verifying that modifications did not change the code lines in question.
+ Since there is probably no other way than examining many log entries one
+ by one, the log cache performance is crucial.
+\layout Standard
+
+QA analysis queries will often be automated.
+ Hence, some command line or similar scripting interface is desirable.
 \layout Subsection
 
 Honor Access Rights
 \layout Standard
 
-Repository access restrictions.
- Share cache data yes / no.
+The user may not have full access rights.
+ In the first place, this applies to the repository itself: Even if someone
+ provided the working copy, the current user may not have the right to access
+ any of the corresponding repository paths.
+ When asking the server for a particular log, we must, therefore, pass just
+ the same path that the user specified
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+It is not generally possible to resort to the repository root, for instance.
+\end_inset 
+
+.
+ As a result, the log cache will not contain just one consecutive range
+ of revisions.
+ Moreover, the revision ranges must be tagged with the paths that have been
+ used to get the log from the server.
+ The latter will not be asked again for those missing revisions in between.
+\layout Standard
+
+Once the log cache grows a background 
+\begin_inset Quotes sld
+\end_inset 
+
+auto-fill
+\begin_inset Quotes srd
+\end_inset 
+
+ feature, there must be an option to exclude / include repository paths.
+ Otherwise, there would be a lot of 
+\begin_inset Quotes sld
+\end_inset 
+
+access denied
+\begin_inset Quotes srd
+\end_inset 
+
+ to be found in the server access logs.
+ However, no revision shall be removed from the log cache if the changed
+ paths are no longer accessible by the user
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Rationale: The information already leaked, obviously.
+ Furthermore, there may be a temporary issue with the server returning bogous
+ errors and the user doesn't want to lose all his / her cache content in
+ that case.
+\end_inset 
+
+.
+\layout Standard
+
+A second type of access right management applies to the placement of the
+ log cache data.
+ Some users may want to share it with others on the same machine.
+ Other users may - by company rules - not at all be allowed to do that.
 \layout Section
 
 System Requirements
 \layout Standard
 
-From on the use cases listed above, this section will derive requirements
- the log caching mechanism shall meet.
+This section will derive requirements from on the use cases listed above,
+ that the log caching mechanism shall meet.
+\layout Section
+
+Big Picture Design
+\layout Standard
+
+.
+\layout Section
+
+Detailed Design
+\layout Standard
+
+.
 \the_end
