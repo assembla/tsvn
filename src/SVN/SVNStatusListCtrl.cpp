@@ -2093,6 +2093,8 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 												fentry->propstatus = svn_wc_status_unversioned;
 											}
 											fentry->status = svn_wc_status_unversioned;
+											fentry->textstatus = svn_wc_status_unversioned;
+											fentry->copied = false;
 											fentry->isConflicted = false;
 											SetItemState(index, 0, LVIS_SELECTED);
 											SetEntryCheck(fentry, index, false);
