@@ -554,6 +554,51 @@ System Requirements
 
 This section will derive requirements from on the use cases listed above,
  that the log caching mechanism shall meet.
+\layout Subsection
+
+Functional 
+\layout Standard
+
+XML I/O
+\layout Subsection
+
+Non-functional
+\layout Subsubsection
+
+Size
+\layout Itemize
+
+on disk five to ten times better than svn log -v --xml
+\layout Itemize
+
+in RAM two to five times better than svn log -v --xml
+\layout Subsubsection
+
+Performance
+\layout Itemize
+
+100 MB/s from file cache
+\layout Subsubsection
+
+Robustness
+\layout Standard
+
+Checksum, write & replace.
+\layout Subsubsection
+
+Extensibility
+\layout Standard
+
+Things that can be added without breaking storage format compatibility:
+\layout Itemize
+
+Indices
+\layout Standard
+
+Things that can be added without breaking the design:
+\layout Itemize
+
+Data stream formats.
 \layout Section
 
 Big Picture Design
