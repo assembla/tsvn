@@ -125,6 +125,11 @@ public:
 					   , SUB_STREAM_ID anID)
 		: B (aBuffer, anID)
 	{
+		// trick the compiler: 
+		// use a dummy reference to factoryCreator
+		// to force its creation
+
+		&factoryCreator;
 	}
 
 	virtual ~COutStreamImplBase() {};

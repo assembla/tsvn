@@ -105,6 +105,11 @@ public:
 					  , STREAM_INDEX index)
 		: B (buffer, index)
 	{
+		// trick the compiler: 
+		// use a dummy reference to factoryCreator
+		// to force its creation
+
+		&factoryCreator;
 	}
 
 	virtual ~CInStreamImplBase() {};
