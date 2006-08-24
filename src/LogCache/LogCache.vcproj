@@ -24,6 +24,7 @@
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -72,6 +73,7 @@
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -187,6 +189,9 @@
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\StringDictonary.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -241,6 +246,9 @@
 				RelativePath=".\PackedIntegerOutStream.h">
 			</File>
 			<File
+				RelativePath=".\QuickHash.h">
+			</File>
+			<File
 				RelativePath=".\RootInStream.h">
 			</File>
 			<File
@@ -254,6 +262,9 @@
 			</File>
 			<File
 				RelativePath=".\StreamTypeIDs.h">
+			</File>
+			<File
+				RelativePath=".\StringDictonary.h">
 			</File>
 		</Filter>
 		<Filter
