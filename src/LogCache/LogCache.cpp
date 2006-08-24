@@ -10,7 +10,7 @@ void ReadStream (const std::wstring& fileName)
 {
 	CRootInStream stream (fileName);
 
-	CStringDictonary dictionary;
+	CStringDictionary dictionary;
 
 	stream >> dictionary;
 }
@@ -19,7 +19,7 @@ void WriteStream (const std::wstring& fileName)
 {
 	CRootOutStream stream (fileName);
 
-	CStringDictonary dictionary;
+	CStringDictionary dictionary;
 	dictionary.insert ("test");
 	dictionary.insert ("hugo");
 	dictionary.insert ("otto");
