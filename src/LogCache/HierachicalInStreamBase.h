@@ -46,13 +46,13 @@ private:
 	typedef std::map<SUB_STREAM_ID, IHierarchicalInStream*> TSubStreams;
 	TSubStreams subStreams;
 
+protected:
+
 	// stream content
 	// (sub-stream info will be excluded after ReadSubStreams()) 
 
 	const unsigned char* first;
 	const unsigned char* last;
-
-protected:
 
 	// for usage with CRootInStream
 
@@ -72,4 +72,75 @@ public:
 	// implement IHierarchicalOutStream
 
 	virtual IHierarchicalInStream* GetSubStream (SUB_STREAM_ID subStreamID);
+};
+
+///////////////////////////////////////////////////////////////
+//
+// CInStreamImplBase<>
+//
+//		implements a read stream class based upon the non-
+//		creatable base class B. T is the actual stream class
+//		to create and type is the desired stream type id.
+//
+///////////////////////////////////////////////////////////////
+
+template<class T, class B, STREAM_TYPE_ID type> 
+class CInStreamImplBase : public B
+{
+private:
+
+	// create our stream factory
+
+	typedef CStreamFactory< T
+						  , IHierarchicalInStream
+						  , CCacheFileInBuffer
+						  , type> TFactory;
+	static typename TFactory::CCreator factoryCreator;
+
+public:
+
+	// construction / destruction: nothing to do here
+
+	CInStreamImplBase ( CCacheFileInBuffer* buffer
+					  , STREAM_INDEX index)
+		: B (buffer, index)
+	{
+	}
+
+	virtual ~CInStreamImplBase() {};
+};
+
+// stream factory creator
+
+template<class T, class B, STREAM_TYPE_ID type> 
+typename CInStreamImplBase<T, B, type>::TFactory::CCreator 
+	CInStreamImplBase<T, B, type>::factoryCreator;
+
+///////////////////////////////////////////////////////////////
+//
+// CInStreamImpl<>
+//
+//		enhances CInStreamImplBase<> for the case that there 
+//		is no further sub-class.
+//
+///////////////////////////////////////////////////////////////
+
+template<class B, STREAM_TYPE_ID type> 
+class CInStreamImpl : public CInStreamImplBase< CInStreamImpl<B, type>
+											  , B
+											  , type>
+{
+public:
+
+	typedef CInStreamImplBase<CInStreamImpl<B, type>, B, type> TBase;
+
+	// construction / destruction: nothing to do here
+
+	CInStreamImpl ( CCacheFileInBuffer* buffer
+				  , STREAM_INDEX index)
+		: TBase (buffer, index)
+	{
+	}
+
+	virtual ~CInStreamImpl() {};
 };

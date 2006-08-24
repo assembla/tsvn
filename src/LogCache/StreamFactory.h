@@ -71,7 +71,8 @@ private:
 
 	CStreamFactory()
 	{
-		CStreamFactoryPool<I>::GetInstance()->Add (this);
+		typedef CStreamFactoryPool< IStreamFactory<I, B> > TPool;
+		TPool::GetInstance()->Add (this);
 	}
 
 public:
@@ -103,6 +104,16 @@ public:
 		static CStreamFactory<T, I, B, type> instance;
 		return &instance;
 	}
+
+	// creator utility
+
+	struct CCreator
+	{
+		CCreator() 
+		{
+			CStreamFactory::GetInstance();
+		}
+	};
 };
 
 ///////////////////////////////////////////////////////////////
@@ -159,7 +170,7 @@ public:
 		
 	void Add (I* factory)
 	{
-		assert (factories.find (factory->GetTypeID() == factories.end()));
+		assert (factories.find (factory->GetTypeID()) == factories.end());
 		factories [factory->GetTypeID()] = factory;
 	}
 

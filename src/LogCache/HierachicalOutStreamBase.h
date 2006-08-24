@@ -93,3 +93,81 @@ public:
 												  , STREAM_TYPE_ID type);
 	virtual STREAM_INDEX AutoClose();
 };
+
+///////////////////////////////////////////////////////////////
+//
+// COutStreamImplBase<>
+//
+//		implements a write stream class based upon the non-
+//		creatable base class B. T is the actual stream class
+//		to create and type is the desired stream type id.
+//
+///////////////////////////////////////////////////////////////
+
+template<class T, class B, STREAM_TYPE_ID type> 
+class COutStreamImplBase : public B
+{
+private:
+
+	// create our stream factory
+
+	typedef CStreamFactory< T
+						  , IHierarchicalOutStream
+						  , CCacheFileOutBuffer
+						  , type> TFactory;
+	static typename TFactory::CCreator factoryCreator;
+
+public:
+
+	// construction / destruction: nothing to do here
+
+	COutStreamImplBase ( CCacheFileOutBuffer* aBuffer
+					   , SUB_STREAM_ID anID)
+		: B (aBuffer, anID)
+	{
+	}
+
+	virtual ~COutStreamImplBase() {};
+
+	// implement the rest of IHierarchicalOutStream
+
+	virtual STREAM_TYPE_ID GetTypeID() const
+	{
+		return TFactory::GetInstance()->GetTypeID();
+	}
+};
+
+// stream factory creator
+
+template<class T, class B, STREAM_TYPE_ID type> 
+typename COutStreamImplBase<T, B, type>::TFactory::CCreator 
+	COutStreamImplBase<T, B, type>::factoryCreator;
+
+///////////////////////////////////////////////////////////////
+//
+// CInStreamImpl<>
+//
+//		enhances CInStreamImplBase<> for the case that there 
+//		is no further sub-class.
+//
+///////////////////////////////////////////////////////////////
+
+template<class B, STREAM_TYPE_ID type> 
+class COutStreamImpl : public COutStreamImplBase< COutStreamImpl<B, type>
+												, B
+												, type>
+{
+public:
+
+	typedef COutStreamImplBase<COutStreamImpl<B, type>, B, type> TBase;
+
+	// construction / destruction: nothing to do here
+
+	COutStreamImpl ( CCacheFileOutBuffer* buffer
+				   , STREAM_INDEX index)
+		: TBase (buffer, index)
+	{
+	}
+
+	virtual ~COutStreamImpl() {};
+};
