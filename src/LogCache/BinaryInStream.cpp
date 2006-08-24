@@ -12,6 +12,7 @@
 CBinaryInStreamBase::CBinaryInStreamBase ( CCacheFileInBuffer* buffer
 									     , STREAM_INDEX index)
 	: CHierachicalInStreamBase (buffer, index)
+	, current (first)
 {
 }
 

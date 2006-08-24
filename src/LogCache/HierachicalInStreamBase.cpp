@@ -31,7 +31,7 @@ void CHierachicalInStreamBase::ReadSubStreams ( CCacheFileInBuffer* buffer
 		const IInStreamFactory* factory 
 			= CInStreamFactoryPool::GetInstance()->GetFactory (subStreamType);
 		IHierarchicalInStream* subStream 
-			= factory->CreateStream (buffer, index);
+			= factory->CreateStream (buffer, subStreamIndex);
 
 		subStreams.insert (std::make_pair (subStreamID, subStream));
 	}
