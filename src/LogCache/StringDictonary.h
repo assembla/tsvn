@@ -15,9 +15,16 @@ class IHierarchicalOutStream;
 
 ///////////////////////////////////////////////////////////////
 //
+// CStringDictionary
+//
+//		efficiently stores a pool unique (UTF8) strings.
+//		Each string is assigned an unique, immutable index.
+//
+//		Under most circumstances, O(1) lookup is provided.
+//
 ///////////////////////////////////////////////////////////////
 
-class CStringDictonary
+class CStringDictionary
 {
 private:
 
@@ -41,13 +48,13 @@ private:
 		// the dictionary we index with the hash
 		// (used to map index -> value)
 
-		CStringDictonary* dictionary;
+		CStringDictionary* dictionary;
 
 	public:
 
 		// simple construction
 
-		CHashFunction (CStringDictonary* aDictionary);
+		CHashFunction (CStringDictionary* aDictionary);
 
 		// required typedefs and constants
 
@@ -88,11 +95,6 @@ private:
 
 	friend class CHashFunction;
 
-	// no assignment nor copy
-
-	CStringDictonary (const CStringDictonary&);
-	CStringDictonary& operator= (const CStringDictonary&);
-
 	// test for the worst effects of data corruption
 
 	void CheckOffsets();
@@ -101,29 +103,34 @@ public:
 
 	// construction / destruction
 
-	CStringDictonary(void);
-	virtual ~CStringDictonary(void);
+	CStringDictionary(void);
+	virtual ~CStringDictionary(void);
 
 	// dictionary operations
 
-	size_t find (const char* string) const;
-	const char* operator[](size_t index) const;
-	size_t length (size_t index) const;
+	size_t size() const
+	{
+		return offsets.size()-1;
+	}
 
-	size_t insert (const char* string);
+	const char* operator[](size_t index) const;
+	size_t GetLength (size_t index) const;
+
+	size_t Find (const char* string) const;
+	size_t Insert (const char* string);
 
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
-											 , CStringDictonary& dictionary);
+											 , CStringDictionary& dictionary);
 	friend IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
-											  , const CStringDictonary& dictionary);
+											  , const CStringDictionary& dictionary);
 };
 
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
-								  , CStringDictonary& dictionary);
+								  , CStringDictionary& dictionary);
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
-								   , const CStringDictonary& dictionary);
+								   , const CStringDictionary& dictionary);
 
