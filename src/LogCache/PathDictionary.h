@@ -42,6 +42,10 @@ private:
 
 	CIndexPairDictionary paths;
 
+	// index check utility
+
+	void CheckParentIndex (size_t index) const;
+
 public:
 
 	// construction (create root path) / destruction
@@ -61,6 +65,7 @@ public:
 
 	size_t Find (size_t parent, const char* pathElement) const;
 	size_t Insert (size_t parent, const char* pathElement);
+	size_t AutoInsert (size_t parent, const char* pathElement);
 
 	// stream I/O
 

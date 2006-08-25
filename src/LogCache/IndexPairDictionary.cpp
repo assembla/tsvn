@@ -47,6 +47,21 @@ size_t CIndexPairDictionary::Insert (const std::pair<int, int>& value)
 	return result;
 }
 
+size_t CIndexPairDictionary::AutoInsert (const std::pair<int, int>& value)
+{
+	size_t result = Find (value);
+	if (result == -1)
+		result = Insert (value);
+
+	return result;
+}
+
+void CIndexPairDictionary::Clear()
+{
+	data.clear();
+	hashIndex.clear();
+}
+
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

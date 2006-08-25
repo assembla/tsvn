@@ -10,6 +10,14 @@
 //
 ///////////////////////////////////////////////////////////////
 
+// index check utility
+
+void CPathDictionary::CheckParentIndex (size_t index) const
+{
+	if (index >= paths.size())
+		throw std::exception ("parent path index out of range");
+}
+
 // construction (create root path) / destruction
 
 CPathDictionary::CPathDictionary()
@@ -43,14 +51,19 @@ size_t CPathDictionary::Find (size_t parent, const char* pathElement) const
 
 size_t CPathDictionary::Insert (size_t parent, const char* pathElement)
 {
-	if (parent >= paths.size())
-		throw std::exception ("parent path index out of range");
+	CheckParentIndex (parent);
 
-	size_t pathElementIndex = pathElements.Find (pathElement);
-	if (pathElementIndex == -1)
-		pathElementIndex = pathElements.Insert (pathElement);
+	size_t pathElementIndex = pathElements.AutoInsert (pathElement);
+	return paths.Insert (std::make_pair ((int)parent, (int)pathElementIndex));
+}
 
-	return paths.Find (std::make_pair ((int)parent, (int)pathElementIndex));
+size_t CPathDictionary::AutoInsert (size_t parent, const char* pathElement)
+{
+	CheckParentIndex (parent);
+
+	size_t pathElementIndex = pathElements.AutoInsert (pathElement);
+	return paths.AutoInsert (std::make_pair ( (int)parent
+											, (int)pathElementIndex));
 }
 
 // stream I/O

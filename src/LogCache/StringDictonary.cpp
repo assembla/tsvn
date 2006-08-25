@@ -154,7 +154,7 @@ size_t CStringDictionary::Insert (const char* string)
 {
 	// must not exist yet (so, it is not empty as well)
 
-	assert (find (string) == CHashFunction::NO_INDEX_VALUE);
+	assert (Find (string) == CHashFunction::NO_INDEX_VALUE);
 
 	// add string to container
 
@@ -170,6 +170,15 @@ size_t CStringDictionary::Insert (const char* string)
 	offsets.push_back ((DWORD)packedStrings.size());
 
 	// ready
+
+	return result;
+}
+
+size_t CStringDictionary::AutoInsert (const char* string)
+{
+	size_t result = Find (string);
+	if (result == -1)
+		result = Insert (string);
 
 	return result;
 }

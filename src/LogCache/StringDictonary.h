@@ -118,6 +118,7 @@ public:
 
 	size_t Find (const char* string) const;
 	size_t Insert (const char* string);
+	size_t AutoInsert (const char* string);
 
 	// stream I/O
 

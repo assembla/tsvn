@@ -122,8 +122,10 @@ public:
 	}
 
 	size_t Find (const std::pair<int, int>& value) const;
-
 	size_t Insert (const std::pair<int, int>& value);
+	size_t AutoInsert (const std::pair<int, int>& value);
+
+	void Clear();
 
 	// stream I/O
 
