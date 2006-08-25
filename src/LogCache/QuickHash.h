@@ -294,6 +294,18 @@ public:
 		return *this;
 	}
 
+	// get rid of all entries
+
+	void clear()
+	{
+		if (grower.size() > 0)
+		{
+			delete[] data;
+			grower = prime_grower();
+			create_data();
+		}
+	}
+
 	// read cache performance statistics
 
 	const statistics_t& statisitics() const
