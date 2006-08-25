@@ -74,6 +74,8 @@ public:
 							 , CDiffIntegerInStreamBase
 							 , DIFF_INTEGER_STREAM_TYPE_ID> TBase;
 
+	typedef int value_type;
+
 	// construction / destruction: nothing special to do
 
 	CDiffIntegerInStream ( CCacheFileInBuffer* buffer

@@ -63,6 +63,8 @@ public:
 							  , CPackedDWORDOutStreamBase
 							  , PACKED_DWORD_STREAM_TYPE_ID> TBase;
 
+	typedef DWORD value_type;
+
 	// construction / destruction: nothing special to do
 
 	CPackedDWORDOutStream ( CCacheFileOutBuffer* aBuffer
@@ -73,3 +75,23 @@ public:
 
 	using TBase::Add;
 };
+
+///////////////////////////////////////////////////////////////
+//
+// operator<< 
+//
+//		for CPackedDWORDOutStreamBase derived streams and vectors.
+//
+///////////////////////////////////////////////////////////////
+
+template<class S, class V>
+S& operator<< (S& stream, const std::vector<V>& data)
+{
+	typedef typename std::vector<V>::const_iterator IT;
+
+	stream.Add ((typename S::value_type)data.size());
+	for (IT iter = data.begin(), end = data.end(); iter != end; ++iter)
+		stream.Add ((typename S::value_type)(*iter));
+
+	return stream;
+}

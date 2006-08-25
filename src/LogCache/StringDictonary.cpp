@@ -205,11 +205,7 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		= dynamic_cast<CDiffIntegerInStream*>
 			(stream.GetSubStream (CStringDictionary::OFFSETS_STREAM_ID));
 
-	size_t count = offsetsStream->GetValue();
-	dictionary.offsets.resize (count);
-
-	for (size_t i = 0; i < count; ++i)
-		dictionary.offsets[i] = offsetsStream->GetValue();
+	*offsetsStream >> dictionary.offsets;
 
 	// check against the worst effects of data corruption
 
@@ -223,7 +219,7 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 	dictionary.hashIndex.reserve (dictionary.offsets.size());
 
 	const char* stringBase = &dictionary.packedStrings.at(0);
-	for (size_t i = 1; i < count-1; ++i)
+	for (size_t i = 1, count = dictionary.offsets.size()-1; i < count; ++i)
 		dictionary.hashIndex.insert ( stringBase + dictionary.offsets[i]
 									, (DWORD)i);
 
@@ -250,10 +246,7 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 		= dynamic_cast<CDiffIntegerOutStream*>
 			(stream.OpenSubStream ( CStringDictionary::OFFSETS_STREAM_ID
 								  , DIFF_INTEGER_STREAM_TYPE_ID));
-
-	offsetsStream->Add ((int)dictionary.offsets.size());
-	for (size_t i = 0, count = dictionary.offsets.size(); i != count; ++i)
-		offsetsStream->Add ((int)dictionary.offsets[i]);
+	*offsetsStream << dictionary.offsets;
 
 	// ready
 

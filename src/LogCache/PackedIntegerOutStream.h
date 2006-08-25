@@ -62,6 +62,8 @@ public:
 							  , CPackedIntegerOutStreamBase
 							  , PACKED_INTEGER_STREAM_TYPE_ID> TBase;
 
+	typedef int value_type;
+
 	// construction / destruction: nothing special to do
 
 	CPackedIntegerOutStream ( CCacheFileOutBuffer* aBuffer

@@ -57,6 +57,8 @@ public:
 							 , CPackedDWORDInStreamBase
 							 , PACKED_DWORD_STREAM_TYPE_ID> TBase;
 
+	typedef DWORD value_type;
+
 	// construction / destruction: nothing special to do
 
 	CPackedDWORDInStream ( CCacheFileInBuffer* buffer
@@ -67,3 +69,27 @@ public:
 
 	using TBase::GetValue;
 };
+
+///////////////////////////////////////////////////////////////
+//
+// operator>> 
+//
+//		for CPackedDWORDInStreamBase derived streams and vectors.
+//
+///////////////////////////////////////////////////////////////
+
+template<class S, class V>
+S& operator>> (S& stream, std::vector<V>& data)
+{
+	typedef typename std::vector<V>::const_iterator IT;
+
+	size_t count = stream.GetValue();
+
+	data.clear();
+	data.reserve (count);
+
+	for (; count > 0; --count)
+		data.push_back (stream.GetValue());
+
+	return stream;
+}

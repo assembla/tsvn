@@ -63,6 +63,8 @@ public:
 							  , CDiffIntegerOutStreamBase
 		                      , DIFF_INTEGER_STREAM_TYPE_ID> TBase;
 
+	typedef int value_type;
+
 	// construction / destruction: nothing special to do
 
 	CDiffIntegerOutStream ( CCacheFileOutBuffer* aBuffer
