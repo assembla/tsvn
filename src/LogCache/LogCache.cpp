@@ -20,9 +20,9 @@ void WriteStream (const std::wstring& fileName)
 	CRootOutStream stream (fileName);
 
 	CStringDictionary dictionary;
-	dictionary.insert ("test");
-	dictionary.insert ("hugo");
-	dictionary.insert ("otto");
+	dictionary.Insert ("test");
+	dictionary.Insert ("hugo");
+	dictionary.Insert ("otto");
 
 	stream << dictionary;
 }
