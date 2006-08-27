@@ -12,22 +12,73 @@
 //
 // CRevisionInfoContainer
 //
+//		stores all log information except the actual version
+//		number. So, please note, that the indices used here
+//		are not the revision number (revisons may come in
+//		in arbitrary order while new information will only
+//		be appended here).
+//
+//		Every entry holds the data for exactly one revision.
+//		You may add change paths to the last revision, only.
+//
+//		Internal storage for revision "index" is as follows:
+//
+//			* comments[index], authors[authors[index]] and
+//			  timeStamps[index] contain the values passed to 
+//			  Insert()
+//
+//			* CDictionaryBasedPath (&paths, rootPaths[index])
+//			  is the common root path for all changed paths
+//			  in that revision (returns true in IsInvalid(),
+//			  if there are no changed paths for this revision).
+//
+//			* changesOffsets[index] .. changesOffsets[index+1]-1
+//			  is the range within changes and changedPaths 
+//			  that contains all changes to the revision
+//
+//			* copyFromOffsets[index] .. copyFromOffsets[index+1]-1
+//			  is the corresponding range within copyFromPaths 
+//			  and copyFromRevisions 
+//
+//		changes contains the TChangeAction values. If a non-
+//		empty fromPath has been passed to AddChange(), "1" is
+//		added to the action value. Only in that case, there
+//		will be entries in copyFromPaths and copyFromRevisions.
+//		(so, iterators need two differen change indices to
+//		represent their current position).
+//
 ///////////////////////////////////////////////////////////////
 
 class CRevisionInfoContainer
 {
 private:
 
-	CStringDictionary authorPool;
-	CTokenizedStringContainer comments;
+	// string pool for author names
 
+	CStringDictionary authorPool;
+
+	// common directory for all paths
+
+	CPathDictionary paths;
+
+	// comment, author and timeStamp per revision index
+
+	CTokenizedStringContainer comments;
 	std::vector<DWORD> authors;
 	std::vector<DWORD> timeStamps;
+
+	// common root of all changed paths in this revision
+
 	std::vector<DWORD> rootPaths;
+
+	// mark the ranges that contain the changed path info
+
 	std::vector<DWORD> changesOffsets;
 	std::vector<DWORD> copyFromOffsets;
 
-	CPathDictionary paths;
+	// changed path info
+	// (note, that copyFrom info will have less entries)
+
 	std::vector<unsigned char> changes;
 	std::vector<DWORD> changedPaths;
 	std::vector<DWORD> copyFromPaths;
@@ -61,6 +112,15 @@ private:
 
 public:
 
+	///////////////////////////////////////////////////////////////
+	//
+	// TChangeAction
+	//
+	//		the action IDs to use with AddChange 
+	//		(actually, a bit mask).
+	//
+	///////////////////////////////////////////////////////////////
+
 	enum TChangeAction
 	{
 		ACTION_ADDED	= 0x04,
@@ -74,11 +134,26 @@ public:
 						| ACTION_DELETED
 	};
 
+	///////////////////////////////////////////////////////////////
+	//
+	// CChangesIterator
+	//
+	//		a very simplistic forward iterator class.
+	//		It will be used to provide a convenient
+	//		interface to a revision's changes list.
+	//
+	///////////////////////////////////////////////////////////////
+
 	class CChangesIterator
 	{
 	private:
 
+		// the container we operate on 
+
 		const CRevisionInfoContainer* container;
+
+		// the two different change info indices
+
 		size_t changeOffset;
 		size_t copyFromOffset;
 
