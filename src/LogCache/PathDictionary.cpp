@@ -151,7 +151,7 @@ CDictionaryBasedPath::CDictionaryBasedPath ( CPathDictionary* aDictionary
 
 				// auto-insert
 
-				nextIndex = dictionary->Insert (index, pathElement);
+				nextIndex = aDictionary->Insert (index, pathElement);
 			}
 
 			// we are now one level deeper
@@ -200,4 +200,28 @@ std::string CDictionaryBasedPath::GetPath() const
 	// ready
 
 	return result;
+}
+
+CDictionaryBasedPath CDictionaryBasedPath::GetCommonRoot (size_t rhsIndex) const
+{
+	assert ((index != (-1)) && (rhsIndex != (-1)));
+
+	size_t lhsIndex = index;
+
+	while (lhsIndex != rhsIndex)
+	{
+		// the parent has *always* a smaller index
+		// -> a common parent cannot be larger than lhs or rhs
+
+		if (lhsIndex < rhsIndex)
+		{
+			rhsIndex = dictionary->GetParent (rhsIndex);
+		}
+		else
+		{
+			lhsIndex = dictionary->GetParent (lhsIndex);
+		}
+	}
+
+	return CDictionaryBasedPath (dictionary, lhsIndex);
 }

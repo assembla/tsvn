@@ -94,14 +94,14 @@ private:
 
 	// our dictionary and position within it
 
-	CPathDictionary* dictionary;
+	const CPathDictionary* dictionary;
 	size_t index;
 
 public:
 
 	// construction / destruction
 
-	CDictionaryBasedPath (CPathDictionary* aDictionary, size_t anIndex)
+	CDictionaryBasedPath (const CPathDictionary* aDictionary, size_t anIndex)
 		: dictionary (aDictionary)
 		, index (anIndex)
 	{
@@ -122,7 +122,7 @@ public:
 		return index;
 	}
 
-	CPathDictionary* GetDictionary() const
+	const CPathDictionary* GetDictionary() const
 	{
 		return dictionary;
 	}
@@ -134,11 +134,23 @@ public:
 		return index == 0;
 	}
 
+	bool IsValid() const
+	{
+		return index != -1;
+	}
+
 	CDictionaryBasedPath GetParent() const
 	{
 		return CDictionaryBasedPath ( dictionary
 									, dictionary->GetParent (index));
 	}
+
+	CDictionaryBasedPath GetCommonRoot (const CDictionaryBasedPath& rhs) const
+	{
+		return GetCommonRoot (rhs.index);
+	}
+
+	CDictionaryBasedPath GetCommonRoot (size_t rhsIndex) const;
 
 	// convert to string
 
