@@ -89,7 +89,7 @@ S& operator>> (S& stream, std::vector<V>& data)
 	data.reserve (count);
 
 	for (; count > 0; --count)
-		data.push_back (stream.GetValue());
+		data.push_back ((V)stream.GetValue());
 
 	return stream;
 }
