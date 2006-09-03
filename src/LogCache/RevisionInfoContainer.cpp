@@ -50,7 +50,7 @@ size_t CRevisionInfoContainer::Insert ( const std::string& author
 
 	// ready
 
-	return size()-2;
+	return size()-1;
 }
 
 void CRevisionInfoContainer::AddChange ( TChangeAction action
