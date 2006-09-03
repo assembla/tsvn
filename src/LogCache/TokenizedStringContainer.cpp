@@ -49,7 +49,7 @@ void CTokenizedStringContainer::CPairPacker::GetStringRange ( DWORD stringIndex
 
 	IIT base = container->stringData.begin();
 	first = base + offset;
-	last = base + length;
+	last = first + length;
 }
 
 // add token pairs of one string to our counters
@@ -94,6 +94,8 @@ void CTokenizedStringContainer::CPairPacker::AddCompressablePairs()
 
 bool CTokenizedStringContainer::CPairPacker::CompressString (DWORD stringIndex)
 {
+	size_t oldReplacementCount = replacements;
+
 	IIT iter;
 	IIT end;
 
@@ -120,7 +122,12 @@ bool CTokenizedStringContainer::CPairPacker::CompressString (DWORD stringIndex)
 
 				lastToken = container->GetPairToken (pairIndex);
 				if (++iter == end)
+				{
+					token = -1;
 					--iter;
+				}
+				else
+					token = *iter;
 
 				++replacements;
 			}
@@ -134,20 +141,18 @@ bool CTokenizedStringContainer::CPairPacker::CompressString (DWORD stringIndex)
 		lastToken = token;
 	}
 
-	// any change at all?
+	// store the last token in fly
 
 	*target = lastToken;
-	if (++target == end)
-		return false;
 
 	// fill up the empty space at the end
 
-	for (; (target != end); ++target)
+	for (++target; (target != end); ++target)
 		*target = -1;
 	
-	// there was a compression
+	// was there a compression?
 
-	return true;
+	return replacements > oldReplacementCount;
 }
 
 CTokenizedStringContainer::CPairPacker::CPairPacker 
@@ -202,6 +207,7 @@ size_t CTokenizedStringContainer::CPairPacker::OneRound()
 	// (next round can find new pairs only with tokens we just added)
 
 	newPairs.Clear();
+	counts.clear();
 	minimumToken = container->GetPairToken (oldPairsCount);
 
 	// report our results
@@ -451,7 +457,7 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 	CPackedIntegerOutStream* stringsStream 
 		= dynamic_cast<CPackedIntegerOutStream*>
 			(stream.OpenSubStream ( CTokenizedStringContainer::STRINGS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
+								  , PACKED_INTEGER_STREAM_TYPE_ID));
 	*stringsStream << container.stringData;
 
 	// the string positions
