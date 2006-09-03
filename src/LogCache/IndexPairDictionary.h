@@ -63,7 +63,13 @@ private:
 
 		size_t operator() (const value_type& value) const
 		{
-			return (size_t)value.first + (size_t)value.second;
+#ifdef _WIN64
+			return reinterpret_cast<size_t&>(value);
+#else
+			return (((size_t)value.first) << 24) + (((size_t)value.first) >> 8)
+				 + (((size_t)value.first) << 16) + (((size_t)value.first) >> 16)
+				 + (size_t)value.second;
+#endif
 		}
 
 		// dictionary lookup

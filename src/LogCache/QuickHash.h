@@ -113,11 +113,7 @@ private:
 		
 		size_t next (size_t index) const 
 		{
-			index += 1381;
-			if (index >= capacity())
-				index %= capacity();
-
-			return index;
+			return (index + 1381000000) % capacity();
 		}
 
 		const statistics_t& get_statistics() const
