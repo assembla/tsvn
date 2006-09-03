@@ -72,6 +72,15 @@ void CRevisionIndex::SetRevisionIndex (size_t revision, DWORD index)
 	indices [revision - firstRevision] = index;
 }
 
+// reset content
+
+void CRevisionIndex::Clear()
+{
+	indices.clear();
+
+	firstRevision = 0;
+}
+
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

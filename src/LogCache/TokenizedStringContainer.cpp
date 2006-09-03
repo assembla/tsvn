@@ -381,6 +381,18 @@ void CTokenizedStringContainer::Compress()
 	packer.Compact();
 }
 
+// reset content
+
+void CTokenizedStringContainer::Clear()
+{
+	words.Clear();
+	pairs.Clear();
+
+	stringData.clear();
+
+	offsets.erase (offsets.begin()+1, offsets.end());
+}
+
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

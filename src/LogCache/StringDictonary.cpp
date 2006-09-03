@@ -1,4 +1,4 @@
-#include ".\stdafx.h"
+#include "StdAfx.h"
 #include ".\stringdictonary.h"
 
 #include "BLOBInStream.h"
@@ -181,6 +181,16 @@ size_t CStringDictionary::AutoInsert (const char* string)
 		result = Insert (string);
 
 	return result;
+}
+
+// reset content
+
+void CStringDictionary::Clear()
+{
+	packedStrings.clear();
+	offsets.erase (offsets.begin()+1, offsets.end());
+
+	hashIndex.clear();
 }
 
 // stream I/O

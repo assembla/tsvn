@@ -217,6 +217,10 @@ public:
 	size_t Insert (const std::string& s);
 	void Compress();
 
+	// reset content
+
+	void Clear();
+
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

@@ -66,6 +66,14 @@ size_t CPathDictionary::AutoInsert (size_t parent, const char* pathElement)
 											, (int)pathElementIndex));
 }
 
+// reset content
+
+void CPathDictionary::Clear()
+{
+	pathElements.Clear();
+	paths.Clear();
+}
+
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

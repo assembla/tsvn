@@ -120,6 +120,10 @@ public:
 	size_t Insert (const char* string);
 	size_t AutoInsert (const char* string);
 
+	// reset content
+
+	void Clear();
+
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

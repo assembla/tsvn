@@ -67,6 +67,10 @@ public:
 	size_t Insert (size_t parent, const char* pathElement);
 	size_t AutoInsert (size_t parent, const char* pathElement);
 
+	// reset content
+
+	void Clear();
+
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

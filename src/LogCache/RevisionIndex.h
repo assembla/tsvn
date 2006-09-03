@@ -70,6 +70,10 @@ public:
 
 	void SetRevisionIndex (size_t revision, DWORD index);
 
+	// reset content
+
+	void Clear();
+
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

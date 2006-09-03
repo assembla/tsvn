@@ -98,6 +98,29 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
 	}
 }
 
+// reset content
+
+void CRevisionInfoContainer::Clear()
+{
+	authorPool.Clear();
+	paths.Clear();
+	comments.Clear();
+
+	authors.clear();
+	timeStamps.clear();
+
+	rootPaths.clear();
+
+	changesOffsets.erase (changesOffsets.begin()+1, changesOffsets.end());
+	copyFromOffsets.erase (copyFromOffsets.begin()+1, copyFromOffsets.end());
+
+	changes.clear();
+	changedPaths.clear();
+	copyFromPaths.clear();
+	copyFromRevisions.clear();
+
+}
+
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

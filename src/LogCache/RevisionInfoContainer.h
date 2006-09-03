@@ -272,6 +272,10 @@ public:
 				   , const std::string& fromPath
 				   , DWORD fromRevision);
 
+	// reset content
+
+	void Clear();
+
 	// get information
 
 	size_t size() const
