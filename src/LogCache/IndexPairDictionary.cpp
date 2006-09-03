@@ -44,6 +44,8 @@ size_t CIndexPairDictionary::Insert (const std::pair<int, int>& value)
 
 	size_t result = data.size();
 	hashIndex.insert (value, (DWORD)result);
+	data.push_back (value);
+
 	return result;
 }
 
