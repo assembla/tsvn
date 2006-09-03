@@ -5,6 +5,7 @@
 #include "RootInStream.h"
 #include "RootOutStream.h"
 #include "StringDictonary.h"
+#include "CachedLogInfo.h"
 
 void ReadStream (const std::wstring& fileName)
 {
@@ -27,10 +28,21 @@ void WriteStream (const std::wstring& fileName)
 	stream << dictionary;
 }
 
+void TestXMLIO()
+{
+	CCachedLogInfo logInfo (L"C:\\temp\\kde.stream");
+
+	logInfo.LoadFromXML (L"C:\\temp\\kde.log.xml2");
+//	logInfo.SaveAsXML (L"C:\\temp\\tsvntrunk.xml.out");
+	logInfo.Save();
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	WriteStream (L"C:\\temp\\test.stream");
 	ReadStream (L"C:\\temp\\test.stream");
+
+	TestXMLIO();
 
 	return 0;
 }

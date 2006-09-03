@@ -12,6 +12,7 @@
 
 #include <windows.h>
 #include <assert.h>
+#include <time.h>
 
 #include <algorithm>
 #include <functional>
