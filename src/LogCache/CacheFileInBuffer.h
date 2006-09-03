@@ -1,5 +1,56 @@
 #pragma once
 
+class CMappedInFile
+{
+private:
+
+	// the file
+
+	HANDLE file;
+
+	// the memory mapping
+
+	HANDLE mapping;
+
+	// file content memory address
+
+	const unsigned char* buffer;
+
+	// physical file size (== file size)
+
+	size_t size;
+
+	// construction utilities
+
+	void MapToMemory (const std::wstring& fileName);
+
+public:
+
+	// construction / destruction: auto- open/close
+
+	CMappedInFile (const std::wstring& fileName);
+	~CMappedInFile();
+
+	// access streams
+
+	const unsigned char* GetBuffer() const;
+	size_t GetSize() const;
+};
+
+///////////////////////////////////////////////////////////////
+// access streams
+///////////////////////////////////////////////////////////////
+
+inline const unsigned char* CMappedInFile::GetBuffer() const
+{
+	return buffer;
+}
+
+inline size_t CMappedInFile::GetSize() const
+{
+	return size;
+}
+
 ///////////////////////////////////////////////////////////////
 // index type used to address a certain stream within the file.
 ///////////////////////////////////////////////////////////////
@@ -30,25 +81,9 @@ enum
 //
 ///////////////////////////////////////////////////////////////
 
-class CCacheFileInBuffer
+class CCacheFileInBuffer : private CMappedInFile
 {
 private:
-
-	// the file
-
-	HANDLE file;
-
-	// the memory mapping
-
-	HANDLE mapping;
-
-	// file content memory address
-
-	const unsigned char* buffer;
-
-	// physical file size (== file size)
-
-	size_t size;
 
 	// start-addresses of all streams (i.e. streamCount + 1 entry)
 
@@ -56,7 +91,6 @@ private:
 
 	// construction utilities
 
-	void MapToMemory (const std::wstring& fileName);
 	void ReadStreamOffsets();
 
 	// data access utility
@@ -65,8 +99,8 @@ private:
 	{
 		// ranges should have been checked before
 
-		assert ((offset < size) && (offset + sizeof (DWORD) <= size));
-		return reinterpret_cast<const DWORD*>(buffer + offset);
+		assert ((offset < GetSize()) && (offset + sizeof (DWORD) <= GetSize()));
+		return reinterpret_cast<const DWORD*>(GetBuffer() + offset);
 	}
 
 public:

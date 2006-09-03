@@ -3,7 +3,7 @@
 
 // construction utilities
 
-void CCacheFileInBuffer::MapToMemory (const std::wstring& fileName)
+void CMappedInFile::MapToMemory (const std::wstring& fileName)
 {
     // create the file handle & open the file r/o
 
@@ -43,11 +43,36 @@ void CCacheFileInBuffer::MapToMemory (const std::wstring& fileName)
 	buffer = reinterpret_cast<const unsigned char*>(address);
 }
 
+// construction / destruction: auto- open/close
+
+CMappedInFile::CMappedInFile (const std::wstring& fileName)
+    : file (INVALID_HANDLE_VALUE)
+	, mapping (INVALID_HANDLE_VALUE)
+	, buffer (NULL)
+	, size (0)
+{
+	MapToMemory (fileName);
+}
+
+CMappedInFile::~CMappedInFile()
+{
+	if (buffer != NULL)
+		UnmapViewOfFile (buffer);
+
+	if (mapping != INVALID_HANDLE_VALUE)
+		CloseHandle (mapping);
+
+	if (file != INVALID_HANDLE_VALUE)
+		CloseHandle (file);
+}
+
+// construction utilities
+
 void CCacheFileInBuffer::ReadStreamOffsets()
 {
 	// minimun size: 3 DWORDs
 
-	if (size < 3 * sizeof (DWORD))
+	if (GetSize() < 3 * sizeof (DWORD))
 		throw std::exception ("log cache file too small");
 
 	// extract version numbers
@@ -62,18 +87,20 @@ void CCacheFileInBuffer::ReadStreamOffsets()
 
     // number of streams in file
 
-	DWORD streamCount = *GetDWORD (size - sizeof (DWORD));
-	if (size < (3 + streamCount) * sizeof (DWORD))
+	DWORD streamCount = *GetDWORD (GetSize() - sizeof (DWORD));
+	if (GetSize() < (3 + streamCount) * sizeof (DWORD))
 		throw std::exception ("log cache file too small to hold stream directory");
 
 	// read stream sizes and ranges list
 
-	const unsigned char* lastStream = buffer + 2* sizeof (DWORD);
+	const unsigned char* lastStream = GetBuffer() + 2* sizeof (DWORD);
 
 	streamContents.reserve (streamCount+1);
 	streamContents.push_back (lastStream);
 
-	const DWORD* streamSizes = GetDWORD (size - (streamCount+1) * sizeof (DWORD));
+	size_t contentEnd = GetSize() - (streamCount+1) * sizeof (DWORD);
+	const DWORD* streamSizes = GetDWORD (contentEnd);
+
 	for (DWORD i = 0; i < streamCount; ++i)
 	{
 		lastStream += streamSizes[i];
@@ -82,7 +109,7 @@ void CCacheFileInBuffer::ReadStreamOffsets()
 
 	// consistency check
 
-	if (lastStream - buffer != size - (streamCount + 1) * sizeof (DWORD))
+	if (lastStream - GetBuffer() != contentEnd)
 		throw std::exception ("stream directory corrupted");
 }
 
@@ -90,25 +117,13 @@ void CCacheFileInBuffer::ReadStreamOffsets()
 // construction / destruction: auto- open/close
 
 CCacheFileInBuffer::CCacheFileInBuffer (const std::wstring& fileName)
-    : file (INVALID_HANDLE_VALUE)
-	, mapping (INVALID_HANDLE_VALUE)
-	, buffer (NULL)
-	, size (0)
+    : CMappedInFile (fileName)
 {
-	MapToMemory (fileName);
 	ReadStreamOffsets();
 }
 
 CCacheFileInBuffer::~CCacheFileInBuffer()
 {
-	if (buffer != NULL)
-		UnmapViewOfFile (buffer);
-
-	if (mapping != INVALID_HANDLE_VALUE)
-		CloseHandle (mapping);
-
-	if (file != INVALID_HANDLE_VALUE)
-		CloseHandle (file);
 }
 
 // access streams
