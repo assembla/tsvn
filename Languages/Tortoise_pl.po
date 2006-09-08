@@ -457,8 +457,8 @@ msgstr "Za&kończ"
 
 # ID:9,
 #: ID:323
-msgid "&Export to..."
-msgstr "&Eksportuj do..."
+msgid "&Export selection to..."
+msgstr "&Eksportuj wybrane elementy do..."
 
 # Control-ID:1092,
 #: Control-ID:1092
@@ -721,6 +721,11 @@ msgstr "&Usuń"
 msgid "&Rename"
 msgstr "&Zmień nazwę"
 
+# Control-ID:1316,
+#: Control-ID:1316
+msgid "&Reopen commit dialog after a commit failed"
+msgstr "&Otwórz ponownie dialog zatwierdzania po nieudanym zatwierdzeniu"
+
 # ID:13,
 #: ID:13
 msgid "&Repo-browser"
@@ -763,8 +768,8 @@ msgstr "&Zapisz wykres jako..."
 
 # ID:322,
 #: ID:322
-msgid "&Save list to file"
-msgstr "&Zapisz listę do pliku"
+msgid "&Save list of selected files to..."
+msgstr "&Zapisz listę wybranych plików do..."
 
 # ID:101,#:
 # ID:313,
@@ -1740,8 +1745,8 @@ msgstr "Zmienione pliki: %d"
 
 # Control-ID:1242,
 #: Control-ID:1242
-msgid "Changes made (double-click for details):"
-msgstr "Dokonane zmiany (kliknij dwukrotnie aby zobaczyć szczegóły):"
+msgid "Changes made (double-click on file for diff):"
+msgstr "Dokonane zmiany (kliknij dwukrotnie aby zobaczyć różnice):"
 
 # ID:8,
 #: ID:8
@@ -2918,6 +2923,11 @@ msgstr ""
 msgid "Finished!"
 msgstr "Zakończono!"
 
+# Control-ID:1315,
+#: Control-ID:1315
+msgid "Floppy drives (A: B:)"
+msgstr "Stacje dyskietek (A: B:)"
+
 # ID:3585,
 #: ID:3585
 msgid "For Help, press F1. Scroll horizontally with Ctrl-Scrollwheel"
@@ -3137,6 +3147,15 @@ msgstr ""
 #: ID:79
 msgid "If checked, TortoiseSVN creates a temporary file of the BASE to do the diff with the keywords expanded and the line endings adjusted."
 msgstr "Jeśli właczone, TortoiseSVN tworzy tymczasowy plik zawierający wersję podstawową (BASE) do porównań z rozwiniętymi słowami kluczowymi i ustawionymi końcami linii."
+
+# ID:196,
+#: ID:196
+msgid ""
+"If checked, the commit dialog will be started again automatically after an error,\n"
+"while preserving your last selection and log message."
+msgstr ""
+"Jeśli włączone, dialog zatwierdzania będzie po błędzie uruchamiany ponownie,\n"
+"z zachowaniem ostatnio wybranych elementów i komunikatu logu."
 
 # ID:195,
 #: ID:195
@@ -4134,7 +4153,6 @@ msgstr "Wprowadź wszystkie poprawki"
 
 # ID:376,
 #: ID:376
-#, fuzzy
 msgid "Patch selected"
 msgstr "Wybrany plik łatek"
 
