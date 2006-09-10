@@ -1,3 +1,4 @@
+Version 1.4.0
 - NEW: Allow changing the alpha value in overlapped mode in TortoiseIDiff
        to be changed with Ctrl+Shift+Wheel. (Stefan)
 - NEW: In the file diff dialog, Ctrl-A now selects all entries, and 
@@ -14,6 +15,9 @@
        case-insensitive. (Tobias Schäfer)
 - CHG: The FileDiff dialog now remembers its size and position. (Tobias
        Schäfer)
+- CHG: The 'recent message' is not appended to a prefilled log
+       message by the tsvn:logtemplate property. Instead, the
+       template is overwritten. See issue #283 for details. (Stefan)
 - BUG: The header in TortoiseBlame was shown in the wrong font in translated
        versions. (Kazutoshi Satoda)
 - BUG: The state of the "Floppy drives" checkbox was not set correctly
