@@ -85,6 +85,7 @@ BOOL CPropDlg::OnInitDialog()
 
 	AddAnchor(IDC_PROPERTYLIST, TOP_LEFT, BOTTOM_RIGHT);
 	AddAnchor(IDOK, BOTTOM_CENTER);
+	EnableSaveRestore(_T("PropDlg"));
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
