@@ -123,7 +123,6 @@ BOOL CEditPropertyValueDlg::OnInitDialog()
 		m_PropNames.SetWindowText(m_sPropName);
 	}
 
-	GetDlgItem(IDC_PROPVALUE)->EnableToolTips();
 	GetDlgItem(IDC_PROPNAMECOMBO)->EnableToolTips();
 
 	m_tooltips.Create(this);
@@ -254,7 +253,6 @@ void CEditPropertyValueDlg::CheckRecursive()
 
 		if (nText)
 		{
-			m_tooltips.AddTool(IDC_PROPVALUE, nText);
 			m_tooltips.AddTool(GetDlgItem(IDC_PROPNAMECOMBO)->GetWindow(GW_CHILD), nText);
 		}
 	}
