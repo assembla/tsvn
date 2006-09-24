@@ -1,55 +1,10 @@
 #pragma once
 
-class CMappedInFile
-{
-private:
-
-	// the file
-
-	HANDLE file;
-
-	// the memory mapping
-
-	HANDLE mapping;
-
-	// file content memory address
-
-	const unsigned char* buffer;
-
-	// physical file size (== file size)
-
-	size_t size;
-
-	// construction utilities
-
-	void MapToMemory (const std::wstring& fileName);
-
-public:
-
-	// construction / destruction: auto- open/close
-
-	CMappedInFile (const std::wstring& fileName);
-	~CMappedInFile();
-
-	// access streams
-
-	const unsigned char* GetBuffer() const;
-	size_t GetSize() const;
-};
-
 ///////////////////////////////////////////////////////////////
-// access streams
+// include base class
 ///////////////////////////////////////////////////////////////
 
-inline const unsigned char* CMappedInFile::GetBuffer() const
-{
-	return buffer;
-}
-
-inline size_t CMappedInFile::GetSize() const
-{
-	return size;
-}
+#include "MappedInFile.h"
 
 ///////////////////////////////////////////////////////////////
 // index type used to address a certain stream within the file.

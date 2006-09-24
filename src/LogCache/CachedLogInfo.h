@@ -11,6 +11,20 @@
 //
 // CCachedLogInfo
 //
+//		contains the whole cached log information: It just
+//		combines the exisiting logInfo structure with the
+//		revision index (lookup is revision=>revIndex=>revData).
+//
+//		The interface is that of the logInfo component, except
+//		that it uses proper revision numbers.
+//
+//		As the cache root object, it is associated with a
+//		fileName. You have to load and save the data explicitly.
+//
+//		It also maintains a "modified" flag to check whether
+//		new data has been added / removed at all. You don't 
+//		need to call Save() if there was no change.
+//
 ///////////////////////////////////////////////////////////////
 
 class CCachedLogInfo
@@ -42,33 +56,6 @@ private:
 		LOG_INFO_STREAM_ID = 2
 	};
 
-	bool GetXMLTag ( const std::string& log
-				   , size_t start
-				   , size_t parentEnd
-				   , const std::string& tagName
-				   , size_t& tagStart
-				   , size_t& tagEnd);
-	std::string GetXMLTaggedText ( const std::string& log
-							     , size_t start
-							     , size_t end
-							     , const std::string& tagName);
-
-	size_t GetXMLAttributeOffset ( const std::string& log
-							     , size_t start
-								 , size_t end
-					             , const std::string& attribute);
-	size_t GetXMLRevisionAttribute ( const std::string& log
-								   , size_t start
-								   , size_t end
-					               , const std::string& attribute);
-	std::string GetXMLTextAttribute ( const std::string& log
-								    , size_t start
-								    , size_t end
-						            , const std::string& attribute);
-
-	void ParseChanges (const std::string& log, size_t current, size_t changesEnd);
-	void ParseXMLLog (const std::string& log, size_t current, size_t logEnd);
-
 public:
 
 	// for convenience
@@ -86,11 +73,6 @@ public:
 	bool IsModified();
 	void Save();
 	void Save (const std::wstring& newFileName);
-
-	// XML I/O
-
-	void LoadFromXML (const std::wstring& xmlFileName);
-	void SaveAsXML (const std::wstring& xmlFileName);
 
 	// data access
 

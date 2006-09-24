@@ -6,6 +6,7 @@
 #include "RootOutStream.h"
 #include "StringDictonary.h"
 #include "CachedLogInfo.h"
+#include "XMLLogReader.h"
 
 void ReadStream (const std::wstring& fileName)
 {
@@ -32,7 +33,7 @@ void TestXMLIO()
 {
 	CCachedLogInfo logInfo (L"C:\\temp\\kde.stream");
 
-	logInfo.LoadFromXML (L"C:\\temp\\kde.log.xml2");
+	CXMLLogReader::LoadFromXML (L"C:\\temp\\kde.log.xml", logInfo);
 //	logInfo.SaveAsXML (L"C:\\temp\\tsvntrunk.xml.out");
 	logInfo.Save();
 }
