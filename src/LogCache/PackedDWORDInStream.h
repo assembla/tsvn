@@ -20,6 +20,9 @@ class CPackedDWORDInStreamBase : public CBinaryInStreamBase
 {
 protected:
 
+	DWORD lastValue;
+	DWORD count;
+
 	// not ment to be instantiated
 
 	// construction: nothing to do here
@@ -29,6 +32,7 @@ protected:
 
 	// data access
 
+	DWORD InternalGetValue();
 	DWORD GetValue();
 
 public:

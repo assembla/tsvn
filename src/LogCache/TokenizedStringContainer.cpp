@@ -443,6 +443,7 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 	IHierarchicalOutStream* wordsStream 
 		= stream.OpenSubStream ( CTokenizedStringContainer::WORDS_STREAM_ID
 							   , COMPOSITE_STREAM_TYPE_ID);
+	const_cast<CTokenizedStringContainer*>(&container)->Compress();
 	*wordsStream << container.words;
 
 	// write the pairs

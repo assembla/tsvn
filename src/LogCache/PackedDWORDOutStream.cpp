@@ -9,7 +9,7 @@
 
 // add data to the stream
 
-void CPackedDWORDOutStreamBase::Add (DWORD value)
+void CPackedDWORDOutStreamBase::InternalAdd (DWORD value)
 {
 	while (true)
 	{
@@ -24,11 +24,28 @@ void CPackedDWORDOutStreamBase::Add (DWORD value)
 	}
 }
 
+void CPackedDWORDOutStreamBase::FlushLastValue()
+{
+	InternalAdd (0);
+	InternalAdd (count);
+	InternalAdd (lastValue);
+}
+
+// write our data to the file
+
+void CPackedDWORDOutStreamBase::WriteThisStream (CCacheFileOutBuffer* buffer)
+{
+	FlushLastValue();
+	CBinaryOutStreamBase::WriteThisStream (buffer);
+}
+
 // construction: nothing special to do
 
 CPackedDWORDOutStreamBase::CPackedDWORDOutStreamBase ( CCacheFileOutBuffer* aBuffer
 													 , SUB_STREAM_ID anID)
 	: CBinaryOutStreamBase (aBuffer, anID)
+	, lastValue (0)
+	, count (0)
 {
 }
 

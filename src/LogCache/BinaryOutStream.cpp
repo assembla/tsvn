@@ -16,6 +16,8 @@ void CBinaryOutStreamBase::WriteThisStream (CCacheFileOutBuffer* buffer)
 
 	if (!data.empty())
 		buffer->Add (&data.at(0), (DWORD)data.size());
+
+	data.clear();
 }
 
 // construction: nothing special to do

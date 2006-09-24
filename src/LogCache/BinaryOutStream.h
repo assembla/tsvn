@@ -26,11 +26,11 @@ private:
 
 	std::vector<unsigned char> data;
 
+protected:
+
 	// write our data to the file
 
 	virtual void WriteThisStream (CCacheFileOutBuffer* buffer);
-
-protected:
 
 	// add data to the stream
 
