@@ -87,7 +87,7 @@ S& operator>> (S& stream, std::vector<V>& data)
 {
 	typedef typename std::vector<V>::const_iterator IT;
 
-	size_t count = stream.GetValue();
+	size_t count = (size_t)stream.GetValue();
 
 	data.clear();
 	data.reserve (count);

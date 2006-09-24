@@ -85,7 +85,7 @@ public:
 	void Insert ( size_t revision
 				, const std::string& author
 				, const std::string& comment
-				, DWORD timeStamp);
+				, __time64_t timeStamp);
 
 	void AddChange ( TChangeAction action
 				   , const std::string& path

@@ -275,19 +275,21 @@ void CXMLLogReader::ParseXMLLog ( const char* current
 			printf ("%d\n", revision);
 
 		tm time = {0,0,0, 0,0,0, 0,0,0};
+		int musecs = 0;
 		sscanf ( date.c_str()
-			   , "%04d-%02d-%02dT%02d:%02d:%02d."
+			   , "%04d-%02d-%02dT%02d:%02d:%02d.%06d"
 			   , &time.tm_year
 			   , &time.tm_mon
 			   , &time.tm_mday
 			   , &time.tm_hour
 			   , &time.tm_min
-			   , &time.tm_sec);
+			   , &time.tm_sec
+			   , &musecs);
 		time.tm_isdst = 0;
 		time.tm_year -= 1900;
 		time.tm_mon -= 1;
 
-		DWORD timeStamp = (DWORD)mktime (&time);
+		__time64_t timeStamp = _mktime64 (&time) + musecs;
 
 		target.Insert (revision, author, comment, timeStamp);
 

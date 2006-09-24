@@ -60,7 +60,7 @@ void CCachedLogInfo::Save (const std::wstring& newFileName)
 void CCachedLogInfo::Insert ( size_t revision
 							 , const std::string& author
 							 , const std::string& comment
-							 , DWORD timeStamp)
+							 , __time64_t timeStamp)
 {
 	// there will be a modification
 

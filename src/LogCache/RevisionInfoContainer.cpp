@@ -5,6 +5,8 @@
 #include "PackedDWORDOutStream.h"
 #include "DiffIntegerInStream.h"
 #include "DiffIntegerOutStream.h"
+#include "PackedTime64InStream.h"
+#include "PackedTime64OutStream.h"
 
 // construction / destruction
 
@@ -25,7 +27,7 @@ CRevisionInfoContainer::~CRevisionInfoContainer(void)
 
 size_t CRevisionInfoContainer::Insert ( const std::string& author
 									  , const std::string& comment
-									  , DWORD timeStamp)
+									  , __time64_t timeStamp)
 {
 	// this should newer throw as there are usually more
 	// changes than revisions. But you never know ...
@@ -147,8 +149,8 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 			(stream.GetSubStream (CRevisionInfoContainer::AUTHORS_STREAM_ID));
 	*authorsStream >> container.authors;
 
-	CDiffIntegerInStream* timeStampsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
+	CPackedTime64InStream* timeStampsStream 
+		= dynamic_cast<CPackedTime64InStream*>
 			(stream.GetSubStream (CRevisionInfoContainer::TIMESTAMPS_STREAM_ID));
 	*timeStampsStream >> container.timeStamps;
 
@@ -222,10 +224,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								  , DIFF_INTEGER_STREAM_TYPE_ID));
 	*authorsStream << container.authors;
 
-	CDiffIntegerOutStream* timeStampsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
+	CPackedTime64OutStream* timeStampsStream 
+		= dynamic_cast<CPackedTime64OutStream*>
 			(stream.OpenSubStream ( CRevisionInfoContainer::TIMESTAMPS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
+								  , PACKED_TIME64_STREAM_TYPE_ID));
 	*timeStampsStream << container.timeStamps;
 
 	CPackedDWORDOutStream* rootPathsStream 

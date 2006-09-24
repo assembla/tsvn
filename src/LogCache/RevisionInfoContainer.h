@@ -65,7 +65,7 @@ private:
 
 	CTokenizedStringContainer comments;
 	std::vector<DWORD> authors;
-	std::vector<DWORD> timeStamps;
+	std::vector<__time64_t> timeStamps;
 
 	// common root of all changed paths in this revision
 
@@ -265,7 +265,7 @@ public:
 
 	size_t Insert ( const std::string& author
 				  , const std::string& comment
-				  , DWORD timeStamp);
+				  , __time64_t timeStamp);
 
 	void AddChange ( TChangeAction action
 				   , const std::string& path
@@ -289,7 +289,7 @@ public:
 		return authorPool [authors [index]];
 	}
 
-	DWORD GetTimeStamp (size_t index) const
+	__time64_t GetTimeStamp (size_t index) const
 	{
 		CheckIndex (index);
 		return timeStamps [index];
