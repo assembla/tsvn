@@ -317,7 +317,7 @@ void CRepositoryBrowser::ShowContextMenu(CPoint pt, LRESULT *pResult)
 				if (!bFolder)
 				{
 					temp.LoadString(IDS_REPOBROWSE_OPEN);
-					popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPOPEN, temp);		// "open"
+					popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPOPEN, temp);			// "open"
 					temp.LoadString(IDS_LOG_POPUP_OPENWITH);
 					popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPOPENWITH, temp);
 					popup.AppendMenu(MF_SEPARATOR, NULL);
@@ -344,7 +344,7 @@ void CRepositoryBrowser::ShowContextMenu(CPoint pt, LRESULT *pResult)
 			if (bFolder)
 			{
 				temp.LoadString(IDS_MENUCHECKOUT);
-				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPCHECKOUT, temp);		// "Checkout.."
+				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPCHECKOUT, temp);			// "Checkout.."
 			}
 			if (uSelCount == 1)
 			{
@@ -386,16 +386,16 @@ void CRepositoryBrowser::ShowContextMenu(CPoint pt, LRESULT *pResult)
 
 					temp.LoadString(IDS_REPOBROWSE_RENAME);
 					popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPRENAME, temp);		// "Rename"
-
-					temp.LoadString(IDS_REPOBROWSE_COPYTOWC);
-					popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPCOPYTOWC, temp);		// "Copy To Working Copy..."
 				} // if (GetRevision().IsHead()
+
+				temp.LoadString(IDS_REPOBROWSE_COPYTOWC);
+				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPCOPYTOWC, temp);			// "Copy To Working Copy..."
 
 				temp.LoadString(IDS_REPOBROWSE_COPY);
 				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPCOPYTO, temp);			// "Copy To..."
 				
 				temp.LoadString(IDS_REPOBROWSE_URLTOCLIPBOARD);
-				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPURLTOCLIPBOARD, temp);			// "Copy URL to clipboard"
+				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPURLTOCLIPBOARD, temp);	// "Copy URL to clipboard"
 
 				popup.AppendMenu(MF_SEPARATOR, NULL);
 				
