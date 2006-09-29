@@ -1767,6 +1767,8 @@ BOOL CTortoiseProcApp::InitInstance()
 				{
 					CString temp;
 					temp.Format(IDS_ERR_FAILEDIGNOREPROPERTY, name);
+					temp += _T("\n");
+					temp += props.GetLastErrorMsg().c_str();
 					CMessageBox::Show(EXPLORERHWND, temp, _T("TortoiseSVN"), MB_ICONERROR);
 					err = TRUE;
 					break;
