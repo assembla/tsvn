@@ -1584,7 +1584,6 @@ BOOL CTortoiseProcApp::InitInstance()
 			SVN svn;
 			CRelocateDlg dlg;
 			dlg.m_sFromUrl = svn.GetUIURLFromPath(cmdLinePath);
-			dlg.m_sFromUrl = _T("svn://escala/xxx/yyy/branches/SAM/FIBER");
 			dlg.m_sToUrl = dlg.m_sFromUrl;
 
 			if (dlg.DoModal() == IDOK)
