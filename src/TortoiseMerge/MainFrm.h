@@ -93,8 +93,8 @@ protected:
 	void			SaveFile(const CString& sFilePath);
 	void			WriteWindowPlacement(WINDOWPLACEMENT * pwp);
 	BOOL			ReadWindowPlacement(WINDOWPLACEMENT * pwp);
-	bool			FileSave();
-	bool			FileSaveAs();
+	bool			FileSave(bool bCheckResolved=true);
+	bool			FileSaveAs(bool bCheckResolved=true);
 protected: 
 	CStatusBar		m_wndStatusBar;
 	CNewToolBar		m_wndToolBar;
