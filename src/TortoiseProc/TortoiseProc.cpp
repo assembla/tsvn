@@ -1909,7 +1909,13 @@ BOOL CTortoiseProcApp::InitInstance()
 					}
 					else
 					{
-						CAppUtils::LaunchTortoiseBlame(tempfile, logfile, cmdLinePath.GetFileOrDirectoryName());
+						CString sVal;
+						if (parser.HasVal(_T("line")))
+						{
+							sVal = _T("/line:");
+							sVal += parser.GetVal(_T("line"));
+						}
+						CAppUtils::LaunchTortoiseBlame(tempfile, logfile, cmdLinePath.GetFileOrDirectoryName(), sVal);
 					}
 				} // if (!tempfile.IsEmpty()) 
 				else
