@@ -154,11 +154,11 @@ std::string SVNProperties::GetItem(int index, BOOL name)
 
 	if (m_props == NULL)
 	{
-		return NULL;
+		return "";
 	}
 	if (index >= m_propCount)
 	{
-		return NULL;
+		return "";
 	}
 
 	long ind = 0;
@@ -172,7 +172,7 @@ std::string SVNProperties::GetItem(int index, BOOL name)
 													m_pool);
 		if (m_error != NULL)
 		{
-			return NULL;
+			return "";
 		}
 
 		apr_hash_index_t *hi;
@@ -202,7 +202,7 @@ std::string SVNProperties::GetItem(int index, BOOL name)
 	else if (propval)
 		return std::string(propval->data, propval->len);
 	else
-		return NULL;
+		return "";
 }
 
 BOOL SVNProperties::IsSVNProperty(int index)
