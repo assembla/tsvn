@@ -7,6 +7,7 @@
 #include "StringDictonary.h"
 #include "CachedLogInfo.h"
 #include "XMLLogReader.h"
+#include "XMLLogWriter.h"
 
 void ReadStream (const std::wstring& fileName)
 {
@@ -31,10 +32,14 @@ void WriteStream (const std::wstring& fileName)
 
 void TestXMLIO()
 {
-	CCachedLogInfo logInfo (L"C:\\temp\\kde.stream");
+//	CCachedLogInfo logInfo (L"C:\\temp\\kde.stream");
+	CCachedLogInfo logInfo (L"C:\\temp\\tsvntrunk.stream");
+//	logInfo.Load();
+//	logInfo.Clear();
 
-	CXMLLogReader::LoadFromXML (L"C:\\temp\\kde.log.xml", logInfo);
-//	logInfo.SaveAsXML (L"C:\\temp\\tsvntrunk.xml.out");
+//	CXMLLogReader::LoadFromXML (L"C:\\temp\\kde.log.xml", logInfo);
+	CXMLLogReader::LoadFromXML (L"C:\\temp\\tsvntrunk.xml", logInfo);
+	CXMLLogWriter::SaveToXML (L"C:\\temp\\tsvntrunk.xml.out", logInfo);
 	logInfo.Save();
 }
 
