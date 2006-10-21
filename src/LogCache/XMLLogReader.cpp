@@ -3,6 +3,31 @@
 #include ".\MappedInFile.h"
 
 ///////////////////////////////////////////////////////////////
+// _mkgmtime64() is not available under VS2003
+///////////////////////////////////////////////////////////////
+
+static const int days[12] 
+	= {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+
+__time64_t mkgmtime64 (struct tm *tb)
+{
+    __time64_t tmptm1 = tb->tm_year;
+    __time64_t tmptm2 = days[tb->tm_mon];
+    if ( ((tmptm1 % 4) == 0) && (tb->tm_mon > 1) )
+            tmptm2++;
+
+    tmptm2 += (tmptm1 - 70) * 365 + ((tmptm1-73) / 4);
+
+    tmptm1 = tmptm2 + (__time64_t)tb->tm_mday;
+
+    tmptm1 = tmptm1 * 24 + (__time64_t)tb->tm_hour;
+    tmptm1 = tmptm1 * 60 + (__time64_t)tb->tm_min;
+    tmptm1 = tmptm1 * 60 + (__time64_t)tb->tm_sec;
+
+    return tmptm1;
+}
+
+///////////////////////////////////////////////////////////////
 // a strstr-like utility that works on memory buffers
 ///////////////////////////////////////////////////////////////
 
@@ -289,8 +314,7 @@ void CXMLLogReader::ParseXMLLog ( const char* current
 		time.tm_year -= 1900;
 		time.tm_mon -= 1;
 
-		__time64_t timeStamp = _mktime64 (&time) + musecs;
-
+		__time64_t timeStamp = mkgmtime64 (&time)*1000000 + musecs;
 		target.Insert (revision, author, comment, timeStamp);
 
 		const char* pathsEnd = NULL;
