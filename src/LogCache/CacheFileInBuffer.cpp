@@ -17,7 +17,7 @@ void CCacheFileInBuffer::ReadStreamOffsets()
 
 	// check version number
 
-	if (requiredVersion > MAX_LOG_CACHE_FILE_VERISON)
+	if (requiredVersion > MAX_LOG_CACHE_FILE_VERSION)
 		throw std::exception ("log cache file format too new");
 
     // number of streams in file

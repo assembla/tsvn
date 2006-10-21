@@ -34,8 +34,8 @@ CCacheFileOutBuffer::CCacheFileOutBuffer (const std::wstring& fileName)
 
 	// the version id
 
-	Add (OUR_LOG_CACHE_FILE_VERISON);
-	Add (MIN_LOG_CACHE_FILE_VERISON);
+	Add (OUR_LOG_CACHE_FILE_VERSION);
+	Add (MIN_LOG_CACHE_FILE_VERSION);
 }
 
 CCacheFileOutBuffer::~CCacheFileOutBuffer()

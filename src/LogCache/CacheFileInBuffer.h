@@ -18,7 +18,7 @@ typedef int STREAM_INDEX;
 
 enum
 {
-	MAX_LOG_CACHE_FILE_VERISON = 0x20060701,
+	MAX_LOG_CACHE_FILE_VERSION = 0x20060701,
 };
 
 ///////////////////////////////////////////////////////////////
