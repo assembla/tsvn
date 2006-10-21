@@ -177,7 +177,7 @@ std::string CDictionaryBasedPath::GetPath() const
 	pathElements.reserve (15);
 
 	for ( size_t currentIndex = index
-		; index != 0
+		; currentIndex != 0
 		; currentIndex = dictionary->GetParent (currentIndex))
 	{
 		pathElements.push_back (dictionary->GetPathElement (currentIndex));
