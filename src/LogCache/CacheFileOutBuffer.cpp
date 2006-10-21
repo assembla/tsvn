@@ -5,6 +5,7 @@
 
 CCacheFileOutBuffer::CCacheFileOutBuffer (const std::wstring& fileName)
 	: CBufferedOutFile (fileName)
+	, streamIsOpen (false)
 {
 	// write the version ids
 

@@ -79,12 +79,5 @@ public:
 
 	STREAM_INDEX OpenStream();
 	void CloseStream();
-
-	// convenience methods
-
-	void Add (DWORD value)
-	{
-		CBufferedOutFile::Add ((unsigned char*)&value, sizeof (value));
-	}
 };
 

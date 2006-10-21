@@ -30,11 +30,6 @@ CBufferedOutFile::CBufferedOutFile (const std::wstring& fileName)
 					  , NULL);
 	if (file == INVALID_HANDLE_VALUE)
 		throw std::exception ("can't create log cache file");
-
-	// the version id
-
-	Add (OUR_LOG_CACHE_FILE_VERSION);
-	Add (MIN_LOG_CACHE_FILE_VERSION);
 }
 
 CBufferedOutFile::~CBufferedOutFile()
@@ -74,4 +69,17 @@ void CBufferedOutFile::Add (const unsigned char* data, DWORD bytes)
 
 	used += bytes;
 	fileSize += bytes;
+}
+
+///////////////////////////////////////////////////////////////
+// file stream operation
+///////////////////////////////////////////////////////////////
+
+CBufferedOutFile& operator<< (CBufferedOutFile& dest, int value)
+{
+	enum {BUFFER_SIZE = 11};
+	char buffer [BUFFER_SIZE];
+	itoa (value, buffer, 10);
+
+	return operator<< (dest, buffer);
 }
