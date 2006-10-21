@@ -1,6 +1,12 @@
 #pragma once
 
 ///////////////////////////////////////////////////////////////
+// include base class
+///////////////////////////////////////////////////////////////
+
+#include "BufferedOutFile.h"
+
+///////////////////////////////////////////////////////////////
 // index type used to address a certain stream within the file.
 ///////////////////////////////////////////////////////////////
 
@@ -50,24 +56,9 @@ enum
 //
 ///////////////////////////////////////////////////////////////
 
-class CCacheFileOutBuffer
+class CCacheFileOutBuffer : public CBufferedOutFile
 {
 private:
-
-	// the file
-
-	HANDLE file;
-
-	// our local buffer
-
-	enum {BUFFER_SIZE = 1024*1024};
-
-	std::auto_ptr<unsigned char> buffer;
-	DWORD used;
-
-	// physical file size + used
-
-	size_t fileSize;
 
 	// offsets of all streams
 
@@ -77,28 +68,23 @@ private:
 
 	bool streamIsOpen;
 
-	// write buffer content to disk
-
-	void Flush();
-
 public:
 
 	// construction / destruction: auto- open/close
 
 	CCacheFileOutBuffer (const std::wstring& fileName);
-	~CCacheFileOutBuffer();
+	virtual ~CCacheFileOutBuffer();
 
 	// write data to file
 
 	STREAM_INDEX OpenStream();
-	void Add (const unsigned char* data, DWORD bytes);
 	void CloseStream();
 
 	// convenience methods
 
 	void Add (DWORD value)
 	{
-		Add ((unsigned char*)&value, sizeof (value));
+		CBufferedOutFile::Add ((unsigned char*)&value, sizeof (value));
 	}
 };
 
