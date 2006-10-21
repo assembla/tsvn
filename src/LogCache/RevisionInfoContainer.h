@@ -175,7 +175,6 @@ public:
 			, changeOffset (aChangeOffset)
 			, copyFromOffset (aCopyFromOffset)
 		{
-			assert (IsValid());
 		}
 
 		// data access
@@ -250,6 +249,13 @@ public:
 		bool operator!= (const CChangesIterator& rhs)
 		{
 			return !operator==(rhs);
+		}
+
+		// pointer-like behavior
+
+		const CChangesIterator* operator->() const
+		{
+			return this;
 		}
 	};
 
