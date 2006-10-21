@@ -40,7 +40,7 @@ public:
 	// construction / destruction: auto- open/close
 
 	CMappedInFile (const std::wstring& fileName);
-	~CMappedInFile();
+	virtual ~CMappedInFile();
 
 	// access streams
 
