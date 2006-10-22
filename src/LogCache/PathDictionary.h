@@ -46,6 +46,10 @@ private:
 
 	void CheckParentIndex (size_t index) const;
 
+	// construction utility
+
+	void Initialize();
+
 public:
 
 	// construction (create root path) / destruction

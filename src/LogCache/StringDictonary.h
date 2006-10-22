@@ -99,6 +99,10 @@ private:
 
 	void CheckOffsets();
 
+	// construction utility
+
+	void Initialize();
+
 public:
 
 	// construction / destruction

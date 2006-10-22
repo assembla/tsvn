@@ -111,16 +111,23 @@ void CStringDictionary::CheckOffsets()
 			throw std::exception ("dictionary entry does not point to a string");
 }
 
-// construction / destruction
+// construction utility
 
-CStringDictionary::CStringDictionary(void)
-	: hashIndex (CHashFunction (this))
+void CStringDictionary::Initialize()
 {
 	// insert the empty string at index 0
 
 	packedStrings.push_back (0);
 	offsets.push_back (0);
 	offsets.push_back (1);
+}
+
+// construction / destruction
+
+CStringDictionary::CStringDictionary(void)
+	: hashIndex (CHashFunction (this))
+{
+	Initialize();
 }
 
 CStringDictionary::~CStringDictionary(void)
@@ -188,9 +195,10 @@ size_t CStringDictionary::AutoInsert (const char* string)
 void CStringDictionary::Clear()
 {
 	packedStrings.clear();
-	offsets.erase (offsets.begin()+1, offsets.end());
-
+	offsets.clear();
 	hashIndex.clear();
+
+	Initialize();
 }
 
 // stream I/O

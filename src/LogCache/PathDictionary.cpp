@@ -18,11 +18,18 @@ void CPathDictionary::CheckParentIndex (size_t index) const
 		throw std::exception ("parent path index out of range");
 }
 
+// construction utility
+
+void CPathDictionary::Initialize()
+{
+	paths.Insert (std::make_pair (0, 0));
+}
+
 // construction (create root path) / destruction
 
 CPathDictionary::CPathDictionary()
 {
-	paths.Insert (std::make_pair (0, 0));
+	Initialize();
 }
 
 CPathDictionary::~CPathDictionary(void)
@@ -72,6 +79,8 @@ void CPathDictionary::Clear()
 {
 	pathElements.Clear();
 	paths.Clear();
+
+	Initialize();
 }
 
 // stream I/O
