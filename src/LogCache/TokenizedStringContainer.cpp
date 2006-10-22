@@ -224,24 +224,42 @@ void CTokenizedStringContainer::CPairPacker::Compact()
 	IIT target = first;
 
 	UIT offsetIter = container->offsets.begin();
+	UIT offsetsEnd = container->offsets.end();
 	IIT nextStringStart = first + *offsetIter;
 
-	for ( IIT iter = target, end = container->stringData.end()
-		; iter != end
-		; ++iter)
+	IIT iter = target;
+	IIT end = container->stringData.end();
+
+	while (iter != end)
 	{
-		if (iter == nextStringStart)
+		// update string boundaries 
+		// (use "while" loop to handle empty strings)
+
+		while (iter == nextStringStart)
 		{
 			*offsetIter = (DWORD)(target - first);
 			nextStringStart = first + *(++offsetIter);
 		}
 
+		// copy string token
+
 		if (container->IsToken (*iter))
 		{
 			*target = *iter;
+			++iter;
 			++target;
 		}
+		else
+		{
+			// jump to end of string
+
+			iter = nextStringStart;
+		}
 	}
+
+	// update string boundaries 
+
+	std::fill (offsetIter, offsetsEnd, (DWORD)(target - first));
 
 	// remove trailing tokens
 
