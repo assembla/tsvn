@@ -28,7 +28,7 @@ __time64_t CPackedTime64InStreamBase::GetValue()
 
 	size_t count = ((head / 0x10) & 0x7) +1;
 
-	unsigned buffer[8];
+	unsigned char buffer[8];
 	*reinterpret_cast<__time64_t*>(buffer) = 0;
 	for (size_t i = 0; i < count; ++i)
 		buffer[i] = GetByte();
