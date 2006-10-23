@@ -10,6 +10,9 @@
 //
 // CXMLLogReader
 //
+//		utility class to parse an XML formatted log and add
+//		the data to the given changed log info.
+//
 ///////////////////////////////////////////////////////////////
 
 class CXMLLogReader

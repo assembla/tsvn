@@ -299,22 +299,27 @@ void CXMLLogReader::ParseXMLLog ( const char* current
 		if (revision % 10000 == 0)
 			printf ("%d\n", revision);
 
-		tm time = {0,0,0, 0,0,0, 0,0,0};
-		int musecs = 0;
-		sscanf ( date.c_str()
-			   , "%04d-%02d-%02dT%02d:%02d:%02d.%06d"
-			   , &time.tm_year
-			   , &time.tm_mon
-			   , &time.tm_mday
-			   , &time.tm_hour
-			   , &time.tm_min
-			   , &time.tm_sec
-			   , &musecs);
-		time.tm_isdst = 0;
-		time.tm_year -= 1900;
-		time.tm_mon -= 1;
+		__time64_t timeStamp = 0;
+		if (!date.empty())
+		{
+			tm time = {0,0,0, 0,0,0, 0,0,0};
+			int musecs = 0;
+			sscanf ( date.c_str()
+				, "%04d-%02d-%02dT%02d:%02d:%02d.%06d"
+				, &time.tm_year
+				, &time.tm_mon
+				, &time.tm_mday
+				, &time.tm_hour
+				, &time.tm_min
+				, &time.tm_sec
+				, &musecs);
+			time.tm_isdst = 0;
+			time.tm_year -= 1900;
+			time.tm_mon -= 1;
 
-		__time64_t timeStamp = mkgmtime64 (&time)*1000000 + musecs;
+			timeStamp = mkgmtime64 (&time)*1000000 + musecs;
+		}
+
 		target.Insert (revision, author, comment, timeStamp);
 
 		const char* pathsEnd = NULL;
