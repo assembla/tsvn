@@ -44,7 +44,7 @@ private:
 		// the dictionary we index with the hash
 		// (used to map index -> value)
 
-		CIndexPairDictionary* dictionary;
+		std::vector<std::pair<int, int> >* data;
 
 	public:
 
@@ -64,7 +64,7 @@ private:
 		size_t operator() (const value_type& value) const
 		{
 #ifdef _WIN64
-			return reinterpret_cast<size_t&>(value);
+			return reinterpret_cast<const size_t&>(value);
 #else
 			return (((size_t)value.first) << 24) + (((size_t)value.first) >> 8)
 				 + (((size_t)value.first) << 16) + (((size_t)value.first) >> 16)
@@ -76,16 +76,16 @@ private:
 
 		const value_type& value (index_type index) const
 		{
-			assert (dictionary->data.size() >= index);
-			return dictionary->data[index];
+			assert (data->size() >= index);
+			return (*data)[index];
 		}
 
 		// lookup and comparison
 
 		bool equal (const value_type& value, index_type index) const
 		{
-			assert (dictionary->data.size() >= index);
-			return dictionary->data[index] == value;
+			assert (data->size() >= index);
+			return (*data)[index] == value;
 		}
 	};
 

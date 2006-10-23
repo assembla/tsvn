@@ -12,7 +12,7 @@
 
 CIndexPairDictionary::CHashFunction::CHashFunction 
 	( CIndexPairDictionary* aDictionary)
-	: dictionary (aDictionary)
+	: data (&aDictionary->data)
 {
 }
 
