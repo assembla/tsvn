@@ -262,6 +262,9 @@ public:
 
 	void reserve (size_t min_bucket_count)
 	{
+		if (size_t(-1) / sizeof (index_type[4]))
+			min_bucket_count *= 2;
+
 		index_type* old_data = data;
 		size_t old_data_size = grower.capacity();
 		
