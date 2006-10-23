@@ -85,6 +85,12 @@ inline void CPackedDWORDOutStreamBase::Add (DWORD value)
 		{
 			InternalAdd (lastValue+1);
 		}
+		else if ((count == 2) && (lastValue < 0x80))
+		{
+			InternalAdd (lastValue+1);
+			InternalAdd (lastValue+1);
+			count = 1;
+		}
 		else
 		{
 			FlushLastValue();
