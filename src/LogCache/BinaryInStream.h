@@ -48,9 +48,6 @@ protected:
 
 	unsigned char GetByte()
 	{
-		if (current == last)
-			return 0;
-
 		return *(current++);
 	}
 
