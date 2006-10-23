@@ -42,6 +42,27 @@ public:
 	virtual ~CPackedDWORDInStreamBase() {};
 };
 
+inline DWORD CPackedDWORDInStreamBase::GetValue()
+{
+	while (true)
+	{
+		if (count != 0)
+		{
+			--count;
+			return lastValue;
+		}
+		else
+		{
+			DWORD result = InternalGetValue();
+			if (result != 0)
+				return result-1;
+
+			count = InternalGetValue();
+			lastValue = InternalGetValue();
+		}
+	}
+}
+
 ///////////////////////////////////////////////////////////////
 //
 // CPackedDWORDInStream
@@ -85,15 +106,14 @@ public:
 template<class S, class V>
 S& operator>> (S& stream, std::vector<V>& data)
 {
-	typedef typename std::vector<V>::const_iterator IT;
+	typedef typename std::vector<V>::iterator IT;
 
 	size_t count = (size_t)stream.GetValue();
 
 	data.clear();
-	data.reserve (count);
-
-	for (; count > 0; --count)
-		data.push_back ((V)stream.GetValue());
+	data.resize (count);
+	for (IT iter = data.begin(), end = data.end(); iter != end; ++iter)
+		*iter = (V)stream.GetValue();
 
 	return stream;
 }

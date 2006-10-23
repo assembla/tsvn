@@ -21,9 +21,13 @@ CPackedDWORDInStreamBase::CPackedDWORDInStreamBase (CCacheFileInBuffer* buffer
 
 DWORD CPackedDWORDInStreamBase::InternalGetValue()
 {
-	DWORD result = 0;
-	char shift = 0;
+	DWORD result = GetByte();
+	if (result < 0x80)
+		return result;
 
+	result -= 0x80;
+
+	char shift = 7;
 	while (true)
 	{
 		DWORD c = GetByte();
@@ -32,27 +36,6 @@ DWORD CPackedDWORDInStreamBase::InternalGetValue()
 
 		result += ((c - 0x80) << shift);
 		shift += 7;
-	}
-}
-
-DWORD CPackedDWORDInStreamBase::GetValue()
-{
-	while (true)
-	{
-		if (count > 0)
-		{
-			--count;
-			return lastValue;
-		}
-		else
-		{
-			DWORD result = InternalGetValue();
-			if (result != 0)
-				return result-1;
-
-			count = InternalGetValue();
-			lastValue = InternalGetValue();
-		}
 	}
 }
 
