@@ -26,9 +26,12 @@ void CPackedDWORDOutStreamBase::InternalAdd (DWORD value)
 
 void CPackedDWORDOutStreamBase::FlushLastValue()
 {
-	InternalAdd (0);
-	InternalAdd (count);
-	InternalAdd (lastValue);
+	if (count > 0)
+	{
+		InternalAdd (0);
+		InternalAdd (count);
+		InternalAdd (lastValue);
+	}
 }
 
 // write our data to the file
