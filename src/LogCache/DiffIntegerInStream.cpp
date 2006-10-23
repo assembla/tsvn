@@ -3,16 +3,15 @@
 
 ///////////////////////////////////////////////////////////////
 //
-// CDiffIntegerInStreamBase
+// CDiffDWORDInStream
 //
 ///////////////////////////////////////////////////////////////
 
-// construction: nothing to do here
+// construction: nothing special to do
 
-CDiffIntegerInStreamBase::CDiffIntegerInStreamBase (CCacheFileInBuffer* buffer
-												   , STREAM_INDEX index)
-	: CPackedIntegerInStreamBase (buffer, index)
-	, lastValue (0)
+CDiffDWORDInStream::CDiffDWORDInStream ( CCacheFileInBuffer* buffer
+									   , STREAM_INDEX index)
+	: TBase (buffer, index)
 {
 }
 

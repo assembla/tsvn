@@ -159,13 +159,13 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 			(stream.GetSubStream (CRevisionInfoContainer::ROOTPATHS_STREAM_ID));
 	*rootPathsStream >> container.rootPaths;
 
-	CDiffIntegerInStream* changesOffsetsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
+	CDiffDWORDInStream* changesOffsetsStream 
+		= dynamic_cast<CDiffDWORDInStream*>
 			(stream.GetSubStream (CRevisionInfoContainer::CHANGES_OFFSETS_STREAM_ID));
 	*changesOffsetsStream >> container.changesOffsets;
 
-	CDiffIntegerInStream* copyFromOffsetsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
+	CDiffDWORDInStream* copyFromOffsetsStream 
+		= dynamic_cast<CDiffDWORDInStream*>
 			(stream.GetSubStream (CRevisionInfoContainer::COPYFROM_OFFSETS_STREAM_ID));
 	*copyFromOffsetsStream >> container.copyFromOffsets;
 
@@ -236,16 +236,16 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								  , PACKED_DWORD_STREAM_TYPE_ID));
 	*rootPathsStream << container.rootPaths;
 
-	CDiffIntegerOutStream* changesOffsetsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
+	CDiffDWORDOutStream* changesOffsetsStream 
+		= dynamic_cast<CDiffDWORDOutStream*>
 			(stream.OpenSubStream ( CRevisionInfoContainer::CHANGES_OFFSETS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
+								  , DIFF_DWORD_STREAM_TYPE_ID));
 	*changesOffsetsStream << container.changesOffsets;
 
-	CDiffIntegerOutStream* copyFromOffsetsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
+	CDiffDWORDOutStream* copyFromOffsetsStream 
+		= dynamic_cast<CDiffDWORDOutStream*>
 			(stream.OpenSubStream ( CRevisionInfoContainer::COPYFROM_OFFSETS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
+								  , DIFF_DWORD_STREAM_TYPE_ID));
 	*copyFromOffsetsStream << container.copyFromOffsets;
 
 	// write the changes info

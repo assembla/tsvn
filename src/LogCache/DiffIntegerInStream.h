@@ -8,20 +8,21 @@
 
 ///////////////////////////////////////////////////////////////
 //
-// CDiffIntegerInStreamBase
+// CDiffInStreamBase<>
 //
-//		enhances CPackedIntegerInStreamBase to store values 
-//		differentially.
+//		enhances CPackedIntegerInStreamBase as well as
+//		CPackedDWORDInStreamBase to store values differentially.
 //
 ///////////////////////////////////////////////////////////////
 
-class CDiffIntegerInStreamBase : public CPackedIntegerInStreamBase
+template<class Base, class V>
+class CDiffInStreamBase : public Base
 {
 private:
 
 	// our current diff base
 
-	int lastValue;
+	V lastValue;
 
 protected:
 
@@ -29,14 +30,18 @@ protected:
 
 	// construction: nothing to do here
 
-	CDiffIntegerInStreamBase ( CCacheFileInBuffer* buffer
-						     , STREAM_INDEX index);
+	CDiffInStreamBase ( CCacheFileInBuffer* buffer
+					  , STREAM_INDEX index)
+		: Base (buffer, index)
+		, lastValue (0)
+	{
+	}
 
 	// data access
 
-	int GetValue()
+	V GetValue()
 	{
-		lastValue += CPackedIntegerInStreamBase::GetValue();
+		lastValue += Base::GetValue();
 		return lastValue;
 	}
 
@@ -44,15 +49,56 @@ public:
 
 	// destruction
 
-	virtual ~CDiffIntegerInStreamBase() {};
+	virtual ~CDiffInStreamBase() {};
 
 	// extend Reset() to reset lastValue properly
 
 	virtual void Reset()
 	{
-		CPackedIntegerInStreamBase::Reset();
+		Base::Reset();
 		lastValue = 0;
 	}
+};
+
+///////////////////////////////////////////////////////////////
+// the two template instances
+///////////////////////////////////////////////////////////////
+
+typedef CDiffInStreamBase< CPackedDWORDInStreamBase
+						 , DWORD> CDiffDWORDInStreamBase;
+typedef CDiffInStreamBase< CPackedIntegerInStreamBase
+						 , int> CDiffIntegerInStreamBase;
+
+///////////////////////////////////////////////////////////////
+//
+// CDiffDWORDInStream
+//
+//		instantiable sub-class of CDiffDWORDInStreamBase.
+//
+///////////////////////////////////////////////////////////////
+
+class CDiffDWORDInStream 
+	: public CInStreamImplBase< CDiffDWORDInStream
+							  , CDiffDWORDInStreamBase
+							  , DIFF_DWORD_STREAM_TYPE_ID>
+{
+public:
+
+	typedef CInStreamImplBase< CDiffDWORDInStream
+							 , CDiffDWORDInStreamBase
+							 , DIFF_DWORD_STREAM_TYPE_ID> TBase;
+
+	typedef int value_type;
+
+	// construction / destruction: nothing special to do
+
+	CDiffDWORDInStream ( CCacheFileInBuffer* buffer
+					   , STREAM_INDEX index);
+	virtual ~CDiffDWORDInStream() {};
+
+	// public data access methods
+
+	using TBase::GetValue;
 };
 
 ///////////////////////////////////////////////////////////////

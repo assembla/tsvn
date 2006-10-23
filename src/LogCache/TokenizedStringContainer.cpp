@@ -443,8 +443,8 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 
 	// read the string offsets
 
-	CDiffIntegerInStream* offsetsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
+	CDiffDWORDInStream* offsetsStream 
+		= dynamic_cast<CDiffDWORDInStream*>
 			(stream.GetSubStream (CTokenizedStringContainer::OFFSETS_STREAM_ID));
 	*offsetsStream >> container.offsets;
 
@@ -481,10 +481,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 
 	// the string positions
 
-	CDiffIntegerOutStream* offsetsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
+	CDiffDWORDOutStream* offsetsStream 
+		= dynamic_cast<CDiffDWORDOutStream*>
 			(stream.OpenSubStream ( CTokenizedStringContainer::OFFSETS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
+								  , DIFF_DWORD_STREAM_TYPE_ID));
 	*offsetsStream << container.offsets;
 
 	// ready

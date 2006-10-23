@@ -219,15 +219,15 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 
 	// read the string offsets
 
-	CDiffIntegerInStream* offsetsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
+	CDiffDWORDInStream* offsetsStream 
+		= dynamic_cast<CDiffDWORDInStream*>
 			(stream.GetSubStream (CStringDictionary::OFFSETS_STREAM_ID));
 
 	*offsetsStream >> dictionary.offsets;
 
 	// check against the worst effects of data corruption
 
-	dictionary.CheckOffsets();
+//	dictionary.CheckOffsets();
 
 	// build the hash (ommit the empty string at index 0)
 
@@ -260,10 +260,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 
 	// write offsets
 
-	CDiffIntegerOutStream* offsetsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
+	CDiffDWORDOutStream* offsetsStream 
+		= dynamic_cast<CDiffDWORDOutStream*>
 			(stream.OpenSubStream ( CStringDictionary::OFFSETS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
+								  , DIFF_DWORD_STREAM_TYPE_ID));
 	*offsetsStream << dictionary.offsets;
 
 	// ready
