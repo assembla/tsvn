@@ -331,6 +331,23 @@ public:
 								, copyFromOffsets[index+1]);
 	}
 
+	// r/o access to internal pools
+
+	const CStringDictionary& GetAuthors() const
+	{
+		return authorPool;
+	}
+
+	const CPathDictionary& GetPaths() const
+	{
+		return paths;
+	}
+
+	const CTokenizedStringContainer& GetComments() const
+	{
+		return comments;
+	}
+
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
