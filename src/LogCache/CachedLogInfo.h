@@ -6,6 +6,7 @@
 
 #include "RevisionIndex.h"
 #include "RevisionInfoContainer.h"
+#include "SkipRevisionInfo.h"
 
 ///////////////////////////////////////////////////////////////
 //
@@ -39,6 +40,7 @@ private:
 
 	CRevisionIndex revisions;
 	CRevisionInfoContainer logInfo;
+	CSkipRevisionInfo skippedRevisions;
 
 	// revision has been added or Clear() has been called
 

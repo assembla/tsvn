@@ -7,7 +7,8 @@
 // construction / destruction (nothing to do)
 
 CCachedLogInfo::CCachedLogInfo (const std::wstring& aFileName)
-	: fileName (aFileName)
+	: skippedRevisions (&logInfo.GetPaths(), &revisions)
+	, fileName (aFileName)
 	, modified (false)
 	, revisionAdded (false)
 {
