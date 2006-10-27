@@ -248,7 +248,7 @@ HTREEITEM CRepositoryTree::AddFile(const CString& file, bool force, bool bAlread
 HTREEITEM CRepositoryTree::UpdateUrl(const CString& url)
 {
 	CString url_path;
-	AfxExtractSubString(url_path, SVNUrl(url), 0, '\t');
+	AfxExtractSubString(url_path, url, 0, '\t');
 
 	HTREEITEM hItem = FindUrl(url_path);
 	
@@ -269,7 +269,7 @@ HTREEITEM CRepositoryTree::UpdateUrl(const CString& url)
 bool CRepositoryTree::DeleteUrl(const CString& url)
 {
 	CString url_path;
-	AfxExtractSubString(url_path, SVNUrl(url), 0, '\t');
+	AfxExtractSubString(url_path, url, 0, '\t');
 
 	HTREEITEM hItem = FindUrl(url_path);
 	

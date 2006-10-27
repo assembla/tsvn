@@ -55,10 +55,8 @@ public:
 	SVNUrl(const CString& svn_url, bool bAlreadyUnescaped = false);
 	SVNUrl(const CString& path, const CString& revision, bool bAlreadyUnescaped = false);
 	SVNUrl(const CString& path, const SVNRev& revision, bool bAlreadyUnescaped = false);
-	SVNUrl(const SVNUrl& other, bool bAlreadyUnescaped = false);
 
 	SVNUrl& operator=(const CString& svn_url);
-	SVNUrl& operator=(const SVNUrl& svn_url);
 
 public:
 	/**
