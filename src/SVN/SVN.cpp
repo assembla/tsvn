@@ -1285,6 +1285,11 @@ void SVN::UrlToPath(CString &url)
 	if (url.GetAt(1) != '/')
 		url = url.Mid(1);
 	SVN::preparePath(url);
+	// now we need to unescape the url
+	CStringA urla = CStringA(url);
+	CPathUtils::Unescape(urla.GetBuffer());
+	urla.ReleaseBuffer();
+	url = CString(urla);
 }
 
 void	SVN::preparePath(CString &path)
@@ -1493,6 +1498,7 @@ BOOL SVN::Relocate(const CTSVNPath& path, const CTSVNPath& from, const CTSVNPath
 
 BOOL SVN::IsRepository(const CString& strUrl)
 {
+	// The URL we get here is per definition properly encoded and escaped.
 	svn_repos_t* pRepos;
 	CString url = strUrl;
 	preparePath(url);
