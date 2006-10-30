@@ -4,7 +4,16 @@
 #include ".\RevisionIndex.h"
 #include ".\PathDictionary.h"
 
+#include ".\PackedDWORDInStream.h"
+#include ".\PackedDWORDOutStream.h"
+#include ".\DiffIntegerInStream.h"
+#include ".\DiffIntegerOutStream.h"
+
+///////////////////////////////////////////////////////////////
+// CSkipRevisionInfo::SPerPathRanges
+///////////////////////////////////////////////////////////////
 // find next / previous "gap"
+///////////////////////////////////////////////////////////////
 
 DWORD CSkipRevisionInfo::SPerPathRanges::FindNext (DWORD revision) const
 {
@@ -50,7 +59,9 @@ DWORD CSkipRevisionInfo::SPerPathRanges::FindPrevious (DWORD revision) const
 		: iter->first-1;
 }
 
+///////////////////////////////////////////////////////////////
 // update / insert range
+///////////////////////////////////////////////////////////////
 
 void CSkipRevisionInfo::SPerPathRanges::Add (DWORD start, DWORD size)
 {
@@ -94,13 +105,226 @@ void CSkipRevisionInfo::SPerPathRanges::Add (DWORD start, DWORD size)
 	}
 }
 
+///////////////////////////////////////////////////////////////
+// CSkipRevisionInfo::CPacker
+///////////////////////////////////////////////////////////////
+// remove ranges already covered by parent path ranges
+///////////////////////////////////////////////////////////////
+
+size_t CSkipRevisionInfo::CPacker::RemoveParentRanges()
+{
+	// count the number of remaining ranges
+
+	size_t rangeCount = 0;
+
+	// remove all parent ranges
+
+	std::vector<SPerPathRanges*>& data = parent->data;
+	const CPathDictionary& paths = parent->paths;
+
+	for (size_t i = 0, count = parent->data.size(); i < count; ++i)
+	{
+		SPerPathRanges* perPathInfo = parent->data[i];
+		CDictionaryBasedPath parentPath 
+			= CDictionaryBasedPath (&paths, perPathInfo->pathID).GetParent();
+
+		SPerPathRanges::TRanges& ranges = perPathInfo->ranges;
+		IT iter = ranges.begin();
+
+		// check all ranges of data[i]
+
+		while (iter != ranges.end())
+		{
+			bool removed = false;
+			DWORD next = parent->GetNextRevision (parentPath, iter->first);
+
+			// does the parent cover at least the begin of this range?
+
+			if (next != -1)
+			{
+				if (next >= iter->first + iter->second)
+				{
+					iter = ranges.erase (iter);
+					removed = true;
+				}
+				else
+				{
+					DWORD size = iter->second + iter->first - next;
+					ranges.insert (iter, std::make_pair (next, size));
+					iter = ranges.erase (iter);
+				}
+			}
+
+			if (!removed)
+			{
+				// the range wasn't entierely covered
+
+				DWORD end = iter->first + iter->second-1;
+				DWORD previous = parent->GetPreviousRevision (parentPath, end);
+
+				// parent covers the end of the range?
+
+				if (previous != -1)
+				{
+					// must be no complete cover
+
+					assert (previous >= iter->first);
+
+					// reduce the size of the range
+
+					iter->second = previous - iter->first + 1;
+				}
+			}
+
+			// update counter and iterator
+
+			if (!removed)
+			{
+				++rangeCount;
+				++iter;
+			}
+		}
+	}
+
+	// sort all ranges
+
+	return rangeCount;
+}
+
+///////////////////////////////////////////////////////////////
+// build a sorted list of all ranges
+///////////////////////////////////////////////////////////////
+
+void CSkipRevisionInfo::CPacker::SortRanges (size_t rangeCount)
+{
+	allRanges.clear();
+	allRanges.reserve (rangeCount);
+
+	// remove all parent ranges
+
+	std::vector<SPerPathRanges*>& data = parent->data;
+	for (size_t i = 0, count = data.size(); i < count; ++i)
+	{
+		SPerPathRanges::TRanges& ranges = data[i]->ranges;
+		for (IT iter = ranges.begin(), end = ranges.end(); iter != end; ++iter)
+		{
+			allRanges.push_back (iter);
+		}
+	}
+
+	// sort all ranges
+
+	std::sort (allRanges.begin(), allRanges.end(), CIterComp());
+}
+
+///////////////////////////////////////////////////////////////
+// reset ranges completely covered by cached revision info
+///////////////////////////////////////////////////////////////
+
+void CSkipRevisionInfo::CPacker::RemoveKnownRevisions()
+{
+	const CRevisionIndex& revisions = parent->revisions;
+
+	DWORD firstKnownRevision = 0;
+	DWORD nextUnknownRevision = 0;
+	DWORD lastRevision = (DWORD)revisions.GetLastRevision();
+
+	for (size_t i = 0; i < allRanges.size(); ++i)
+	{
+		IT& iter = allRanges[i];
+		if (iter->first > nextUnknownRevision)
+		{
+			firstKnownRevision = iter->first;
+			while ((revisions[firstKnownRevision] == -1) && (firstKnownRevision < lastRevision))
+				++firstKnownRevision;
+
+			nextUnknownRevision = firstKnownRevision+1;
+			while ((revisions[nextUnknownRevision] != -1) && (nextUnknownRevision < lastRevision))
+				++nextUnknownRevision;
+		}
+
+		if (iter->first + iter->second <= nextUnknownRevision)
+			iter->second = 0;
+	}
+}
+
+///////////////////////////////////////////////////////////////
+// remove all ranges that have been reset to size 0
+///////////////////////////////////////////////////////////////
+
+void CSkipRevisionInfo::CPacker::RemoveEmptyRanges()
+{
+	// remove all ranges that have been reset to size 0
+
+	std::vector<SPerPathRanges*>& data = parent->data;
+
+	std::vector<SPerPathRanges*>::iterator dest = data.begin();
+	for (size_t i = 0, count = data.size(); i < count; ++i)
+	{
+		SPerPathRanges::TRanges& ranges = data[i]->ranges;
+		for (IT iter = ranges.begin(); iter != ranges.end(); )
+		{
+			if (iter->second == 0)
+				iter = ranges.erase (iter);
+			else
+				++iter;
+		}
+
+		// remove path data if there are no ranges left 
+		// for the respecitive path ID
+
+		if (ranges.empty())
+		{
+			delete data[i];
+		}
+		else
+		{
+			*dest = data[i];
+			++dest;
+		}
+	}
+
+	data.erase (dest, data.end());
+}
+
+///////////////////////////////////////////////////////////////
+// construction / destruction
+///////////////////////////////////////////////////////////////
+
+CSkipRevisionInfo::CPacker::CPacker()
+	: parent (NULL)
+{
+}
+
+CSkipRevisionInfo::CPacker::~CPacker()
+{
+}
+
+///////////////////////////////////////////////////////////////
+// remove unnecessary entries
+///////////////////////////////////////////////////////////////
+
+void CSkipRevisionInfo::CPacker::operator()(CSkipRevisionInfo* aParent)
+{
+	parent = aParent;
+
+	size_t rangeCount = RemoveParentRanges();
+	SortRanges (rangeCount);
+	RemoveKnownRevisions();
+	RemoveEmptyRanges();
+}
+
+///////////////////////////////////////////////////////////////
+// CSkipRevisionInfo
+///////////////////////////////////////////////////////////////
 // remove known revisions from the range
+///////////////////////////////////////////////////////////////
 
 void CSkipRevisionInfo::TryReduceRange (DWORD& revision, DWORD& size)
 {
 	// raise lower bound
 
-	while ((size > 0) && ((*revisions)[revision] != -1))
+	while ((size > 0) && (revisions[revision] != -1))
 	{
 		++revision;
 		--size;
@@ -108,16 +332,18 @@ void CSkipRevisionInfo::TryReduceRange (DWORD& revision, DWORD& size)
 
 	// lower upper bound
 
-	while ((size > 0) && ((*revisions)[revision + size-1] != -1))
+	while ((size > 0) && (revisions[revision + size-1] != -1))
 	{
 		--size;
 	}
 }
 
+///////////////////////////////////////////////////////////////
 // construction / destruction
+///////////////////////////////////////////////////////////////
 
-CSkipRevisionInfo::CSkipRevisionInfo ( const CPathDictionary* aPathDictionary
-									 , const CRevisionIndex* aRevisionIndex)
+CSkipRevisionInfo::CSkipRevisionInfo ( const CPathDictionary& aPathDictionary
+									 , const CRevisionIndex& aRevisionIndex)
 	: index (CHashFunction (&data))
 	, paths (aPathDictionary)
 	, revisions (aRevisionIndex)
@@ -129,7 +355,9 @@ CSkipRevisionInfo::~CSkipRevisionInfo(void)
 	Clear();
 }
 
+///////////////////////////////////////////////////////////////
 // query data
+///////////////////////////////////////////////////////////////
 
 DWORD CSkipRevisionInfo::GetNextRevision ( const CDictionaryBasedPath& path
 										 , DWORD revision) const
@@ -155,8 +383,6 @@ DWORD CSkipRevisionInfo::GetNextRevision ( const CDictionaryBasedPath& path
 	do
 	{
 		result = revision;
-
-		// for 
 
 		DWORD parentNext = GetNextRevision (path.GetParent(), revision);
 		if (parentNext != -1)
@@ -203,8 +429,6 @@ DWORD CSkipRevisionInfo::GetPreviousRevision ( const CDictionaryBasedPath& path
 	{
 		result = revision;
 
-		// for 
-
 		DWORD parentNext = GetPreviousRevision (path.GetParent(), revision);
 		if (parentNext != -1)
 			revision = parentNext;
@@ -225,7 +449,9 @@ DWORD CSkipRevisionInfo::GetPreviousRevision ( const CDictionaryBasedPath& path
 		: result;
 }
 
+///////////////////////////////////////////////////////////////
 // add / remove data
+///////////////////////////////////////////////////////////////
 
 void CSkipRevisionInfo::Add ( const CDictionaryBasedPath& path
 							, DWORD revision
@@ -265,6 +491,10 @@ void CSkipRevisionInfo::Add ( const CDictionaryBasedPath& path
 	ranges->Add (revision, size);
 }
 
+///////////////////////////////////////////////////////////////
+// remove all data
+///////////////////////////////////////////////////////////////
+
 void CSkipRevisionInfo::Clear()
 {
 	for (size_t i = 0, count = data.size(); i != count; ++i)
@@ -274,119 +504,120 @@ void CSkipRevisionInfo::Clear()
 	index.clear();
 }
 
+///////////////////////////////////////////////////////////////
 // remove unnecessary entries
+///////////////////////////////////////////////////////////////
 
 void CSkipRevisionInfo::Compress()
 {
-	std::vector<IT> allRanges;
-
-	// remove all parent ranges
-
-	for (size_t i = 0, count = data.size(); i < count; ++i)
-	{
-		CDictionaryBasedPath parentPath 
-			= CDictionaryBasedPath (paths, data[i]->pathID).GetParent();
-
-		SPerPathRanges::TRanges& ranges = data[i]->ranges;
-		SPerPathRanges::TRanges::iterator iter = ranges.begin();
-
-		while (iter != ranges.end())
-		{
-			bool removed = false;
-			DWORD next = GetNextRevision (parentPath, iter->first);
-			if (next != -1)
-			{
-				if (next >= iter->first + iter->second)
-				{
-					iter = ranges.erase (iter);
-					removed = true;
-				}
-				else
-				{
-					DWORD size = iter->second + iter->first - next;
-					iter = ranges.erase (iter);
-					iter = ranges.insert (iter, std::make_pair (next, size));
-				}
-			}
-
-			if (!removed)
-			{
-				DWORD end = iter->first + iter->second-1;
-				DWORD previous = GetPreviousRevision (parentPath, end);
-				if (previous != -1)
-				{
-					if (previous < iter->first)
-					{
-						iter = ranges.erase (iter);
-						removed = true;
-					}
-					else
-					{
-						iter->second = previous - iter->first + 1;
-					}
-				}
-			}
-
-			if (!removed)
-			{
-				allRanges.push_back (iter);
-				++iter;
-			}
-		}
-	}
-
-	// sort all ranges
-
-	std::sort (allRanges.begin(), allRanges.end(), CIterComp());
-
-	// reset all ranges that are completely covered by cached revision info
-
-	DWORD firstKnownRevision = 0;
-	DWORD nextUnknownRevision = 0;
-	DWORD lastRevision = (DWORD)revisions->GetLastRevision();
-
-	for (size_t i = 0; i < allRanges.size(); ++i)
-	{
-		IT& iter = allRanges[i];
-		if (iter->first > nextUnknownRevision)
-		{
-			firstKnownRevision = iter->first;
-			while (((*revisions)[firstKnownRevision] == -1) && (firstKnownRevision < lastRevision))
-				++firstKnownRevision;
-
-			nextUnknownRevision = firstKnownRevision+1;
-			while (((*revisions)[nextUnknownRevision] != -1) && (nextUnknownRevision < lastRevision))
-				++nextUnknownRevision;
-		}
-
-		if (iter->first + iter->second <= nextUnknownRevision)
-			iter->second = 0;
-	}
-
-	// remove all ranges that have been reset to size 0
-
-	std::vector<SPerPathRanges*>::iterator dest = data.begin();
-	for (size_t i = 0, count = data.size(); i < count; ++i)
-	{
-		SPerPathRanges::TRanges& ranges = data[i]->ranges;
-		for (IT iter = ranges.begin(); iter != ranges.end(); )
-		{
-			if (iter->second == 0)
-				iter = ranges.erase (iter);
-			else
-				++iter;
-		}
-
-		if (ranges.empty())
-		{
-			delete data[i];
-		}
-		else
-		{
-			*dest = data[i];
-			++dest;
-		}
-	}
-
-	data.erase (dest, data.end());
+	CPacker()(this);
 }
+
+///////////////////////////////////////////////////////////////
+// stream I/O
+///////////////////////////////////////////////////////////////
+
+IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
+								  , CSkipRevisionInfo& container)
+{
+	// open sub-streams
+
+	CPackedDWORDInStream* pathIDsStream 
+		= dynamic_cast<CPackedDWORDInStream*>
+			(stream.GetSubStream (CSkipRevisionInfo::PATHIDS_STREAM_ID));
+
+	CPackedDWORDInStream* entryCountStream 
+		= dynamic_cast<CPackedDWORDInStream*>
+			(stream.GetSubStream (CSkipRevisionInfo::ENTRY_COUNT_STREAM_ID));
+
+	CDiffDWORDInStream* revisionsStream 
+		= dynamic_cast<CDiffDWORDInStream*>
+			(stream.GetSubStream (CSkipRevisionInfo::REVISIONS_STREAM_ID));
+
+	CDiffDWORDInStream* sizesStream 
+		= dynamic_cast<CDiffDWORDInStream*>
+			(stream.GetSubStream (CSkipRevisionInfo::SIZES_STREAM_ID));
+
+	// read all data
+
+	size_t count = pathIDsStream->GetValue();
+
+	container.Clear();
+	container.data.reserve (count);
+
+	for (size_t i = 0; i < count; ++i)
+	{
+		std::auto_ptr<CSkipRevisionInfo::SPerPathRanges> perPathInfo 
+			(new CSkipRevisionInfo::SPerPathRanges);
+
+		perPathInfo->pathID = pathIDsStream->GetValue();
+
+		size_t entryCount = entryCountStream->GetValue();
+		CSkipRevisionInfo::IT iter = perPathInfo->ranges.end();
+		for (size_t k = 0; i < entryCount; ++k)
+		{
+			iter = perPathInfo->ranges.insert 
+					(iter, std::make_pair ( revisionsStream->GetValue()
+										  , sizesStream->GetValue()));
+		}
+
+		container.data.push_back (perPathInfo.release());
+	}
+
+	// ready
+
+	return stream;
+}
+
+IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
+								   , const CSkipRevisionInfo& container)
+{
+	// open sub-streams
+
+	CPackedDWORDOutStream* pathIDsStream 
+		= dynamic_cast<CPackedDWORDOutStream*>
+			(stream.OpenSubStream ( CSkipRevisionInfo::PATHIDS_STREAM_ID
+								  , PACKED_DWORD_STREAM_TYPE_ID));
+
+	CPackedDWORDOutStream* entryCountStream 
+		= dynamic_cast<CPackedDWORDOutStream*>
+			(stream.OpenSubStream ( CSkipRevisionInfo::ENTRY_COUNT_STREAM_ID
+								  , PACKED_DWORD_STREAM_TYPE_ID));
+
+	CDiffDWORDOutStream* revisionsStream 
+		= dynamic_cast<CDiffDWORDOutStream*>
+			(stream.OpenSubStream ( CSkipRevisionInfo::REVISIONS_STREAM_ID
+								  , DIFF_DWORD_STREAM_TYPE_ID));
+
+	CDiffDWORDOutStream* sizesStream 
+		= dynamic_cast<CDiffDWORDOutStream*>
+			(stream.OpenSubStream ( CSkipRevisionInfo::SIZES_STREAM_ID
+								  , DIFF_DWORD_STREAM_TYPE_ID));
+
+	// write all data
+
+	pathIDsStream->Add ((DWORD)container.data.size());
+
+	typedef std::vector<CSkipRevisionInfo::SPerPathRanges*>::const_iterator CIT;
+	for ( CIT dataIter = container.data.begin(), dataEnd = container.data.end()
+		; dataIter < dataEnd
+		; ++dataIter)
+	{
+		pathIDsStream->Add ((*dataIter)->pathID);
+		entryCountStream->Add ((DWORD)(*dataIter)->ranges.size());
+
+		for ( CSkipRevisionInfo::IT iter = (*dataIter)->ranges.begin()
+			, end = (*dataIter)->ranges.end()
+			; iter != end
+			; ++iter)
+		{
+			revisionsStream->Add (iter->first);
+			sizesStream->Add (iter->second);
+		}
+	}
+
+	// ready
+
+	return stream;
+}
+

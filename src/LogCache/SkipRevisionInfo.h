@@ -1,14 +1,57 @@
 #pragma once
 
+///////////////////////////////////////////////////////////////
+// necessary includes
+///////////////////////////////////////////////////////////////
+
 #include "QuickHash.h"
+
+///////////////////////////////////////////////////////////////
+// forward declarations
+///////////////////////////////////////////////////////////////
 
 class CPathDictionary;
 class CDictionaryBasedPath;
 class CRevisionIndex;
 
+class IHierarchicalInStream;
+class IHierarchicalOutStream;
+
+///////////////////////////////////////////////////////////////
+//
+// CSkipRevisionInfo
+//
+//		associates paths with a list of revision ranges. It will
+//		be used to store those ranges that definitely contain no
+//		log information for the respective path. Hence, even if
+//		we have no cached log information for that range at all,
+//		we don't need to ask the server for the log.
+//
+//		Compress() should be called to reduce the number of 
+//		entries in this data structure. CRevisionInfoContainer 
+//		has been designed to allow for very fast scanning -
+//		eliminating the need to use CSkipRevisionInfo as an
+//		optimization.
+//
+///////////////////////////////////////////////////////////////
+
 class CSkipRevisionInfo
 {
 private:
+
+	///////////////////////////////////////////////////////////////
+	//
+	// SPerPathRanges
+	//
+	//		structure that stores a number of revision ranges
+	//		(start, size) to a given path ID.
+	//
+	//		Revision ranges must not overlap.
+	//
+	//		Convenience methods for adding and retrieving
+	//		ranges are provided.
+	//
+	///////////////////////////////////////////////////////////////
 
 	struct SPerPathRanges
 	{
@@ -28,17 +71,14 @@ private:
 
 	typedef SPerPathRanges::TRanges::iterator IT;
 
-	class CIterComp
-	{
-	public:
-
-		bool operator() (const IT& lhs, const IT& rhs) const
-		{
-			return lhs->first < rhs->first;
-		}
-	};
-
-	friend class CHashFunction;
+	///////////////////////////////////////////////////////////////
+	//
+	// CHashFunction
+	//
+	//		simple quick_hash<> hash function that maps pathIDs
+	//		onto vector indices.
+	//
+	///////////////////////////////////////////////////////////////
 
 	class CHashFunction
 	{
@@ -89,11 +129,76 @@ private:
 		}
 	};
 
+	friend class CHashFunction;
+
+	///////////////////////////////////////////////////////////////
+	//
+	// CPacker
+	//
+	//		utility class to remove duplicate ranges (parent paths)
+	//		as well as ranges now covered by cached revision info.
+	//
+	///////////////////////////////////////////////////////////////
+
+	class CPacker
+	{
+	private:
+
+		CSkipRevisionInfo* parent;
+		std::vector<IT> allRanges;
+
+		// individual compression steps
+
+		size_t RemoveParentRanges();
+		void SortRanges (size_t rangeCount);
+		void RemoveKnownRevisions();
+		void RemoveEmptyRanges();
+
+	public:
+
+		// construction / destruction
+
+		CPacker();
+		~CPacker();
+
+		// compress
+
+		void operator()(CSkipRevisionInfo* aParent);
+	};
+
+	friend class CPacker;
+
+	///////////////////////////////////////////////////////////////
+	//
+	// CIterComp
+	//
+	//		predicate to order ranges by their start revisions.
+	//
+	///////////////////////////////////////////////////////////////
+
+	class CIterComp
+	{
+	public:
+
+		bool operator() (const IT& lhs, const IT& rhs) const
+		{
+			return lhs->first < rhs->first;
+		}
+	};
+
+	enum
+	{
+		PATHIDS_STREAM_ID = 1 ,
+		ENTRY_COUNT_STREAM_ID = 2,
+		REVISIONS_STREAM_ID = 3,
+		SIZES_STREAM_ID = 4
+	};
+
 	std::vector<SPerPathRanges*> data;
 	quick_hash<CHashFunction> index;
 
-	const CPathDictionary* paths;
-	const CRevisionIndex* revisions;
+	const CPathDictionary& paths;
+	const CRevisionIndex& revisions;
 
 	// remove known revisions from the range
 
@@ -103,8 +208,8 @@ public:
 
 	// construction / destruction
 
-	CSkipRevisionInfo ( const CPathDictionary* aPathDictionary
-					  , const CRevisionIndex* aRevisionIndex);
+	CSkipRevisionInfo ( const CPathDictionary& aPathDictionary
+					  , const CRevisionIndex& aRevisionIndex);
 	~CSkipRevisionInfo(void);
 
 	// query data (return -1, if not found)
@@ -120,4 +225,19 @@ public:
 	// remove unnecessary entries
 
 	void Compress();
+
+	// stream I/O
+
+	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
+											 , CSkipRevisionInfo& container);
+	friend IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
+											  , const CSkipRevisionInfo& container);
 };
+
+// stream I/O
+
+IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
+								  , CSkipRevisionInfo& container);
+IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
+								   , const CSkipRevisionInfo& container);
+

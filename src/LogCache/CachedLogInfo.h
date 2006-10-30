@@ -55,7 +55,8 @@ private:
 	enum
 	{
 		REVISIONS_STREAM_ID = 1,
-		LOG_INFO_STREAM_ID = 2
+		LOG_INFO_STREAM_ID = 2,
+		SKIP_REVISIONS_STREAM_ID = 3
 	};
 
 public:

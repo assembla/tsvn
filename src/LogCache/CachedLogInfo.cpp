@@ -7,7 +7,7 @@
 // construction / destruction (nothing to do)
 
 CCachedLogInfo::CCachedLogInfo (const std::wstring& aFileName)
-	: skippedRevisions (&logInfo.GetPaths(), &revisions)
+	: skippedRevisions (logInfo.GetPaths(), revisions)
 	, fileName (aFileName)
 	, modified (false)
 	, revisionAdded (false)
@@ -26,7 +26,7 @@ void CCachedLogInfo::Load()
 
 	CRootInStream stream (fileName);
 
-	// write the data
+	// read the data
 
 	IHierarchicalInStream* revisionsStream
 		= stream.GetSubStream (REVISIONS_STREAM_ID);
@@ -35,6 +35,10 @@ void CCachedLogInfo::Load()
 	IHierarchicalInStream* logInfoStream
 		= stream.GetSubStream (LOG_INFO_STREAM_ID);
 	*logInfoStream >> logInfo;
+
+	IHierarchicalInStream* skipRevisionsStream
+		= stream.GetSubStream (SKIP_REVISIONS_STREAM_ID);
+	*skipRevisionsStream >> skippedRevisions;
 }
 
 void CCachedLogInfo::Save (const std::wstring& newFileName)
@@ -50,6 +54,10 @@ void CCachedLogInfo::Save (const std::wstring& newFileName)
 	IHierarchicalOutStream* logInfoStream
 		= stream.OpenSubStream (LOG_INFO_STREAM_ID, COMPOSITE_STREAM_TYPE_ID);
 	*logInfoStream << logInfo;
+
+	IHierarchicalOutStream* skipRevisionsStream
+		= stream.OpenSubStream (SKIP_REVISIONS_STREAM_ID, COMPOSITE_STREAM_TYPE_ID);
+	*skipRevisionsStream << skippedRevisions;
 
 	// all fine -> connect to the new file name
 
