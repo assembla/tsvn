@@ -563,15 +563,123 @@ XML I/O
 \layout Subsection
 
 Non-functional
+\layout Standard
+
+To be used at all, the cache shall have an acceptable RAM and disk footprint.
+ Operation from cache would ideally be interactively, i.e.
+ the tool would answer faster than the user is able to make up his mind
+ about the next step.
+ Worst case performance should be close to traditional, non-cached operation.
+\layout Subsubsection
+
+Scalability and Worst Case
+\layout Standard
+
+Repository growth is limited by human activity
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Monitoring fully automated systems like system snapshots every ten seconds
+ are not in the scope of TortoiseSVN.
+\end_inset 
+
+: The number of check-ins as well as the number of changes per check-in
+ will be about constant for each individual person.
+ Indirectly, this is even true for repositories that contain mainly third
+ party code, e.g.
+ LINUX distributions, because in the end those files stem from 
+\begin_inset Quotes sld
+\end_inset 
+
+ordinary
+\begin_inset Quotes srd
+\end_inset 
+
+ repositories.
+\layout Standard
+
+Hence, we may assume that the number of path changes per unit of time will
+ increase but slowly if at all.
+ Moore's law does not apply here.
+ Therefore, a reasonable worst-case scenario for a single repository would
+ be:
+\layout Itemize
+
+about 1 commit per minute (500k revisions per year, equivalent to approx.
+ 500 full-time developers)
+\layout Itemize
+
+10 million revisions in 20 years
+\layout Itemize
+
+100 million changed paths in 20 years
+\layout Itemize
+
+1000 million words commentary in 20 years
+\layout Standard
+
+For the short term, users will stick with 32 bit systems limiting the usable
+ address space to a few 100 megs
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Mind the address space fragmentation!
+\end_inset 
+
+.
+ It may not be possible to cover the long-term worst case with that limited
+ amount of RAM.
+ Therefore, we reduce the requirement by a factor of 10 for those systems.
 \layout Subsubsection
 
 Size
+\layout Standard
+
+Given an estimated average of less than 10 paths changed per revision, the
+ size of the XML log data is 1 kByte or less per revision for typical repositori
+es
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Actual samples: apache.org (1032 bytes), kde.org (963 bytes), TortoiseSVN
+ (451 bytes).
+\end_inset 
+
+.
+ They will soon grow to one GByte and more for the largest repositories.
+ 
+\layout Standard
+
+Fortunately, those XML files contain highly redundant information: they
+ can be ZIPed to about one 15th of their original size.
+ A ratio of 1:10 would reduce the file size to a managable 100 MByte.
+ With additional temporary indices, pointers and so forth, the in-memory
+ representation may be twice as big.
+\layout Standard
+
+General target cache data sizes:
 \layout Itemize
 
-on disk five to ten times better than svn log -v --xml
+on disk ten times better than 
+\family typewriter 
+svn log -v --xml
 \layout Itemize
 
-in RAM two to five times better than svn log -v --xml
+in RAM five times better than 
+\family typewriter 
+svn log -v --xml
+\layout Standard
+
+Our benchmark will the revisions 1 through 500,000 of kde.org.
+ The XML file is 459 MByte and the corresponding cache size shall be less
+ than 50 MByte on disk and less than 100 MByte in memory, respectively.
+ 
 \layout Subsubsection
 
 Performance
