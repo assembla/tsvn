@@ -1434,21 +1434,28 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 			return;
 		PLOGENTRYDATA pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(m_LogList.GetNextSelectedItem(pos)));
 		long rev1 = pLogEntry->dwRev;
-		long rev2 = rev1-1;
+		long rev2 = rev1;
 		bool bOneRev = true;
 		if (pos)
 		{
-			pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(m_LogList.GetNextSelectedItem(pos)));
-			if (pLogEntry)
+			while (pos)
 			{
-				rev2 = pLogEntry->dwRev;
-				bOneRev = false;
+				pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(m_LogList.GetNextSelectedItem(pos)));
+				if (pLogEntry)
+				{
+					rev1 = max(rev1,(long)pLogEntry->dwRev);
+					rev2 = min(rev2,(long)pLogEntry->dwRev);
+					bOneRev = false;
+				}				
 			}
 			changedpath = m_currentChangedPathList[selIndex].GetSVNPathString();
+			if (!bOneRev)
+				rev2--;
 		}
 		else
 		{
 			changedlogpath = pLogEntry->pArChangedPaths->GetAt(selIndex);
+			rev2 = rev1-1;
 
 			if ((m_cHidePaths.GetState() & 0x0003)==BST_CHECKED)
 			{
