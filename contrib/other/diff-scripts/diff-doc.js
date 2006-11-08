@@ -1,4 +1,8 @@
 var objArgs,num,sBaseDoc,sNewDoc,objScript,word,destination;
+// WdCompareTarget
+var wdCompareTargetSelected = 0;
+var wdCompareTargetCurrent = 1;
+var wdCompareTargetNew = 2;
 
 objArgs = WScript.Arguments;
 num = objArgs.length;
@@ -41,7 +45,7 @@ word.visible = true;
 destination = word.Documents.Open(sNewDoc);
     
 // Compare to the base document
-destination.Compare(sBaseDoc);
+destination.Compare(sBaseDoc, "", wdCompareTargetNew, true, true);
     
 // Show the comparison result
 if (Number(word.Version) < 12)
