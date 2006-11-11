@@ -6,7 +6,7 @@
 void CHierachicalOutStreamBase::CloseSubStreams()
 {
 	std::for_each (subStreams.begin(), subStreams.end(), 
-		std::mem_fun (IHierarchicalOutStream::AutoClose));
+		std::mem_fun (&IHierarchicalOutStream::AutoClose));
 }
 
 void CHierachicalOutStreamBase::WriteSubStreamList()
