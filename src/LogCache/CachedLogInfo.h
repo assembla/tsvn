@@ -82,8 +82,10 @@ public:
 	const std::wstring& GetFileName() const;
 	const CRevisionIndex& GetRevisions() const;
 	const CRevisionInfoContainer& GetLogInfo() const;
+	const CSkipRevisionInfo& GetSkippedRevisions() const;
 
-	// data modification (mirrors CRevisionInfoContainer)
+	// data modification 
+	// (mirrors CRevisionInfoContainer and CSkipRevisionInfo)
 
 	void Insert ( size_t revision
 				, const std::string& author
@@ -94,6 +96,10 @@ public:
 				   , const std::string& path
 				   , const std::string& fromPath
 				   , DWORD fromRevision);
+
+	void AddSkipRange ( const std::string& path
+					  , DWORD startRevision
+					  , DWORD count);
 
 	void Clear();
 };
@@ -129,6 +135,11 @@ inline const CRevisionIndex& CCachedLogInfo::GetRevisions() const
 inline const CRevisionInfoContainer& CCachedLogInfo::GetLogInfo() const
 {
 	return logInfo;
+}
+
+inline const CSkipRevisionInfo& CCachedLogInfo::GetSkippedRevisions() const
+{
+	return skippedRevisions;
 }
 
 ///////////////////////////////////////////////////////////////

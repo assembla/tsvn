@@ -85,6 +85,18 @@ void CCachedLogInfo::Insert ( size_t revision
 	revisionAdded = true;
 }
 
+void CCachedLogInfo::AddSkipRange ( const std::string& path
+								  , DWORD startRevision
+								  , DWORD count)
+{
+	CDictionaryBasedPath dictPath (&logInfo.GetPaths(), path);
+
+	// if the path is unknown, don't add it
+
+	if (dictPath.GetPath() == path)
+		skippedRevisions.Add (dictPath, startRevision, count);
+}
+
 void CCachedLogInfo::Clear()
 {
 	modified = revisions.GetLastRevision() != 0;
