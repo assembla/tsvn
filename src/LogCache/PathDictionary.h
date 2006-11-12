@@ -105,6 +105,11 @@ private:
 	const CPathDictionary* dictionary;
 	size_t index;
 
+	// construction utility: lookup and optionally auto-insert
+
+	void ParsePath ( const std::string& path
+				   , CPathDictionary* writableDictionary = NULL);
+
 public:
 
 	// construction / destruction
@@ -115,9 +120,12 @@ public:
 	{
 	}
 
+	CDictionaryBasedPath ( const CPathDictionary* aDictionary
+						 , const std::string& path);
+
 	CDictionaryBasedPath ( CPathDictionary* aDictionary
 						 , const std::string& path
-						 , bool nextParent = false);
+						 , bool nextParent);
 
 	~CDictionaryBasedPath() 
 	{
@@ -159,6 +167,8 @@ public:
 	}
 
 	CDictionaryBasedPath GetCommonRoot (size_t rhsIndex) const;
+
+	bool IsSameOrParentOf (const CDictionaryBasedPath& rhs) const;
 
 	// convert to string
 

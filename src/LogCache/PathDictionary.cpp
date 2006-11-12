@@ -133,13 +133,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 //
 ///////////////////////////////////////////////////////////////
 
-// construction: lookup and optionally auto-insert
+// construction utility: lookup and optionally auto-insert
 
-CDictionaryBasedPath::CDictionaryBasedPath ( CPathDictionary* aDictionary
-										   , const std::string& path
-										   , bool nextParent)
-	: dictionary (aDictionary)
-	, index (0)
+void CDictionaryBasedPath::ParsePath ( const std::string& path
+								     , CPathDictionary* writableDictionary)
 {
 	if (!path.empty())
 	{
@@ -161,14 +158,14 @@ CDictionaryBasedPath::CDictionaryBasedPath ( CPathDictionary* aDictionary
 			size_t nextIndex = dictionary->Find (index, pathElement);
 			if (nextIndex == -1)
 			{
-				// not found. Stop here?
+				// not found. Do we have to stop here?
 
-				if (nextParent)
+				if (writableDictionary = NULL)
 					break;
 
 				// auto-insert
 
-				nextIndex = aDictionary->Insert (index, pathElement);
+				nextIndex = writableDictionary->Insert (index, pathElement);
 			}
 
 			// we are now one level deeper
@@ -177,6 +174,49 @@ CDictionaryBasedPath::CDictionaryBasedPath ( CPathDictionary* aDictionary
 		}
 	}
 }
+
+// construction: lookup (stop at last known parent, if necessary)
+
+CDictionaryBasedPath::CDictionaryBasedPath ( const CPathDictionary* aDictionary
+										   , const std::string& path)
+	: dictionary (aDictionary)
+	, index (0)
+{
+	ParsePath (path, NULL);
+}
+
+CDictionaryBasedPath::CDictionaryBasedPath ( CPathDictionary* aDictionary
+										   , const std::string& path
+										   , bool nextParent)
+	: dictionary (aDictionary)
+	, index (0)
+{
+	ParsePath (path, nextParent ? NULL : aDictionary);
+}
+
+bool CDictionaryBasedPath::IsSameOrParentOf (const CDictionaryBasedPath& rhs) const
+{
+	// the root is always a parent of / the same as rhs
+
+	if (index == 0)
+		return true;
+
+	// crawl rhs up to the root until we find it to be equal to *this
+
+	for ( size_t rhsIndex = rhs.index
+		; rhsIndex != 0
+		; rhsIndex = dictionary->GetParent (rhsIndex))
+	{
+		if (index == rhsIndex)
+			return true;
+	}
+
+	// *this has not been found amoung rhs' parent paths
+
+	return false;
+}
+
+// convert to string
 
 std::string CDictionaryBasedPath::GetPath() const
 {
