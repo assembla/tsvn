@@ -228,9 +228,21 @@ CSVNStatusCache::~CSVNStatusCache(void)
 void CSVNStatusCache::Refresh()
 {
 	m_shellCache.ForceRefresh();
-	for (CCachedDirectory::CachedDirMap::iterator I = m_pInstance->m_directoryCache.begin(); I != m_pInstance->m_directoryCache.end(); ++I)
+	if (m_pInstance->m_directoryCache.size())
 	{
-		I->second->RefreshMostImportant();
+		CCachedDirectory::CachedDirMap::iterator I = m_pInstance->m_directoryCache.begin();
+		for (/* no init */; I != m_pInstance->m_directoryCache.end(); ++I)
+		{
+			if (m_shellCache.IsPathAllowed(I->first.GetWinPath()))
+				I->second->RefreshMostImportant();
+			else
+			{
+				CSVNStatusCache::Instance().RemoveCacheForPath(I->first);
+				I = m_pInstance->m_directoryCache.begin();
+				if (I == m_pInstance->m_directoryCache.end())
+					break;
+			}
+		}
 	}
 }
 
@@ -330,6 +342,9 @@ CCachedDirectory * CSVNStatusCache::GetDirectoryCacheEntry(const CTSVNPath& path
 		if (itMap!=m_directoryCache.end())
 			m_directoryCache.erase(itMap);
 		// We don't know anything about this directory yet - lets add it to our cache
+		// but only if it exists!
+		if (path.Exists())
+		{
 		ATLTRACE("adding %ws to our cache\n", path.GetWinPath());
 		ATLASSERT(path.IsDirectory());
 		CCachedDirectory * newcdir = new CCachedDirectory(path);
@@ -341,6 +356,7 @@ CCachedDirectory * CSVNStatusCache::GetDirectoryCacheEntry(const CTSVNPath& path
 			return cdir;		
 		}
 		m_bClearMemory = true;
+		}
 		return NULL;
 	}
 }
