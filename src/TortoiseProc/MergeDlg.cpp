@@ -25,7 +25,9 @@
 #include "MessageBox.h"
 #include "registry.h"
 #include "SVNDiff.h"
-#include ".\mergedlg.h"
+#include "AppUtils.h"
+#include "PathUtils.h"
+#include "UnicodeUtils.h"
 
 IMPLEMENT_DYNAMIC(CMergeDlg, CStandAloneDialog)
 CMergeDlg::CMergeDlg(CWnd* pParent /*=NULL*/)
@@ -105,8 +107,14 @@ BOOL CMergeDlg::OnInitDialog()
 	{
 		if (!bRepeating)
 		{
-			m_URLFrom = url;
-			m_URLTo = url;
+			// unescape the url, it's shown to the user: unescaped url look better
+			CStringA urla = CUnicodeUtils::GetUTF8(url);
+			CPathUtils::Unescape(urla.GetBuffer());
+			urla.ReleaseBuffer();
+			// do not overwrite the "from" url if set on the commandline
+			if (m_URLFrom.IsEmpty())
+				m_URLFrom = CUnicodeUtils::GetUnicode(urla);
+			m_URLTo = CUnicodeUtils::GetUnicode(urla);
 		}
 		GetDlgItem(IDC_WCURL)->SetWindowText(url);
 		m_tooltips.AddTool(IDC_WCURL, url);
