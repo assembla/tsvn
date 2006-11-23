@@ -2748,11 +2748,13 @@ void CLogDlg::SetSplitterRange()
 		CRect rcMiddle;
 		GetDlgItem(IDC_MSGVIEW)->GetWindowRect(rcMiddle);
 		ScreenToClient(rcMiddle);
-		m_wndSplitter1.SetRange(rcTop.top+20, rcMiddle.bottom-20);
+		if (rcMiddle.Height() && rcMiddle.Width())
+			m_wndSplitter1.SetRange(rcTop.top+20, rcMiddle.bottom-20);
 		CRect rcBottom;
 		m_LogMsgCtrl.GetWindowRect(rcBottom);
 		ScreenToClient(rcBottom);
-		m_wndSplitter2.SetRange(rcMiddle.top+20, rcBottom.bottom-20);
+		if (rcBottom.Height() && rcBottom.Width())
+			m_wndSplitter2.SetRange(rcMiddle.top+20, rcBottom.bottom-20);
 	}
 }
 
