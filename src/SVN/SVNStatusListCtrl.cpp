@@ -1435,6 +1435,14 @@ void CSVNStatusListCtrl::OnHdnItemclick(NMHDR *pNMHDR, LRESULT *pResult)
 	pHeader->GetItem(m_nSortedColumn, &HeaderItem);
 	HeaderItem.fmt |= (m_bAscending ? HDF_SORTUP : HDF_SORTDOWN);
 	pHeader->SetItem(m_nSortedColumn, &HeaderItem);
+
+	// the checked state of the list control items must be restored
+	for (int i=0; i<GetItemCount(); ++i)
+	{
+		FileEntry * entry = GetListEntry(i);
+		SetCheck(i, entry->IsChecked());
+	}
+
 	m_bBlock = FALSE;
 }
 
@@ -2076,35 +2084,34 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 							{
 								//since the entries got reverted we need to remove
 								//them from the list too, if no remote changes are shown
+								// and if the unmodified files are not shown
 								POSITION pos;
 								while ((pos = GetFirstSelectedItemPosition())!=0)
 								{
 									int index;
 									index = GetNextSelectedItem(pos);
 									FileEntry * fentry = m_arStatusArray[m_arListArray[index]];
-									if (fentry->remotestatus <= svn_wc_status_normal)
+									fentry->status = svn_wc_status_normal;
+									fentry->propstatus = svn_wc_status_normal;
+									fentry->textstatus = svn_wc_status_normal;
+									fentry->copied = false;
+									fentry->isConflicted = false;
+									if ((fentry->remotestatus <= svn_wc_status_normal)||(m_dwShow & SVNSLC_SHOWNORMAL))
 									{
 										if (fentry->textstatus == svn_wc_status_added)
 										{
-											if ( fentry->IsFolder() )
-											{
+											// reverting added items makes the unversioned, not 'normal'
+											if (fentry->IsFolder())
 												fentry->propstatus = svn_wc_status_none;
-											}
 											else
-											{
 												fentry->propstatus = svn_wc_status_unversioned;
-											}
 											fentry->status = svn_wc_status_unversioned;
 											fentry->textstatus = svn_wc_status_unversioned;
-											fentry->copied = false;
-											fentry->isConflicted = false;
 											SetItemState(index, 0, LVIS_SELECTED);
 											SetEntryCheck(fentry, index, false);
 										}
-										else if ( fentry->switched )
+										else if ((fentry->switched)||(m_dwShow & SVNSLC_SHOWNORMAL))
 										{
-											fentry->textstatus = svn_wc_status_normal;
-											fentry->status = svn_wc_status_normal;
 											SetItemState(index, 0, LVIS_SELECTED);
 										}
 										else
