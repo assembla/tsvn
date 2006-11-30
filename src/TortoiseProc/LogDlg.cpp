@@ -1676,7 +1676,7 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 						ZeroMemory(szFile, sizeof(szFile));
 						CString revFilename;
 						temp = CPathUtils::GetFileNameFromPath(filepath);
-						int rfind = filepath.ReverseFind('.');
+						int rfind = temp.ReverseFind('.');
 						if (rfind > 0)
 							revFilename.Format(_T("%s-%ld%s"), temp.Left(rfind), rev1, temp.Mid(rfind));
 						else
