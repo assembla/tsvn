@@ -1,6 +1,7 @@
 # This file is distributed under the same license as TortoiseSVN
 #
 # Authors:
+# Dongsheng Song <dongsheng.song@gmail.com>
 # NetCobra <netcobra@gmail.com>
 # Cecil Sheng <zcecil@csie.org>
 # Xingyu.Wang <xingyu.wang@gmail.com>
@@ -11,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN zh_CN\n"
 "POT-Creation-Date: 2004-06-28 09:49+0200\n"
-"PO-Revision-Date: 2006-09-13 10:05+0100\n"
-"Last-Translator: Lübbe Onken <luebbe@tigris.org>\n"
+"PO-Revision-Date: 2006-12-04 17:19+0800\n"
+"Last-Translator: Dongsheng Song <dongsheng.song@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -248,7 +249,7 @@ msgid ""
 msgstr ""
 "%s\n"
 "是个文件夹，不是文件！\n"
-"TortoiseMerge无法比较文件夹的差异。"
+"TortoiseMerge 无法比较文件夹的差异。"
 
 #: MenuEntry
 msgid "&?"
@@ -274,7 +275,7 @@ msgstr "高级设置(&A)..."
 # Control-ID:1013,
 #: Control-ID:1013
 msgid "&Apply unified diff"
-msgstr "应用单一补丁文件(&A)"
+msgstr "应用标准差异文件(&A)"
 
 # ID:76,
 #: Control-ID:65535
@@ -559,12 +560,12 @@ msgstr "图标集(&I)："
 #: ID:15
 #, c-format
 msgid "&Ignore %d items"
-msgstr "忽略(&I) %d 项"
+msgstr "忽略 %d 项(&I)"
 
 # Control-ID:1067,
 #: Control-ID:1021
 msgid "&Ignore whitespace changes"
-msgstr "忽略空白的变化(&I)"
+msgstr "忽略空白字符的变化(&I)"
 
 #: MenuEntry
 msgid "&Image Info"
@@ -709,7 +710,7 @@ msgstr "删除(&R)"
 # Dlg-ID:151,
 #: ID:101
 msgid "&Rename"
-msgstr "重命名(&R)"
+msgstr "改名(&R)"
 
 # Control-ID:1316,
 #: Control-ID:1316
@@ -724,7 +725,7 @@ msgstr "版本库浏览器(&R)"
 # ID:113,
 #: ID:113
 msgid "&Revert changes from this revision"
-msgstr "复原自此版本以来的变更(&R)"
+msgstr "复原此版本中的变更(&R)"
 
 # Control-ID:1033,#:
 # Control-ID:1116,#:
@@ -788,7 +789,7 @@ msgstr "偷取此锁定(&S)"
 # Control-ID:1130,
 #: Control-ID:1130
 msgid "&Stop on copy/rename"
-msgstr "复制/重命名时终止(&S)"
+msgstr "复制/改名时终止(&S)"
 
 # Control-ID:1173,
 #: Control-ID:1173
@@ -831,26 +832,26 @@ msgstr "工具栏(&T)"
 #: Control-ID:1091
 #: Control-ID:1094
 msgid "&TortoiseMerge"
-msgstr "TortoiseMerge(&T)"
+msgstr "&TortoiseMerge"
 
 # ID:9,#:
 # ID:80,
 #: ID:9
 msgid "&TortoiseSVN"
-msgstr "TortoiseSVN(&T)"
+msgstr "&TortoiseSVN"
 
 # Control-ID:65535,#:
 # Control-ID:1058,
 #: Control-ID:65535
 #: Control-ID:1058
 msgid "&URL of repository:"
-msgstr "版本库 URL(&U)："
+msgstr "版本库 &URL："
 
 # Control-ID:65535,#:
 # Control-ID:1076,
 #: Control-ID:1076
 msgid "&URL:"
-msgstr "URL(&U)："
+msgstr "&URL："
 
 # ID:376,
 #: ID:376
@@ -864,7 +865,7 @@ msgstr "还原(&U) Ctrl+Z"
 # Control-ID:1013,
 #: MenuEntry
 msgid "&Unified diff"
-msgstr "标准差异（Unified diff）(&U)"
+msgstr "标准差异（&Unified diff）"
 
 # Control-ID:1061,
 #: Control-ID:1061
@@ -1104,7 +1105,7 @@ msgstr "总是接受"
 #: ID:3867
 #, c-format
 msgid "Access to %1 was denied."
-msgstr "拒绝存取 %1。"
+msgstr "存取 %1 被拒绝。"
 
 # ID:77,
 #: ID:77
@@ -1388,7 +1389,7 @@ msgstr "分析分支数据..."
 # ID:14,
 #: ID:14
 msgid "Applies a unified diff file to the working copy"
-msgstr "应用单一差异文件至工作拷贝"
+msgstr "应用标准差异文件至工作拷贝"
 
 # ID:15,
 #: ID:15
@@ -1412,7 +1413,7 @@ msgstr "递归应用该属性"
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Apply unified diff"
-msgstr "应用单一补丁文件"
+msgstr "应用标准差异文件"
 
 # ID:145,
 #: ID:145
@@ -1427,7 +1428,7 @@ msgstr "是否确定要复原 %d 个项目? 从上次更新之后的<b>所有</b
 
 #: MenuEntry
 msgid "Arrange &Vertical"
-msgstr "垂直排布(&V)"
+msgstr "垂直排列(&V)"
 
 #: MenuEntry
 msgid "Arranged by &path"
@@ -2147,7 +2148,7 @@ msgstr ""
 # ID:81,
 #: ID:81
 msgid "Could not get the status!"
-msgstr "无法取得状态！"
+msgstr "无法获取状态！"
 
 # ID:69,
 #: ID:69
@@ -2172,7 +2173,7 @@ msgid ""
 "Could not retrieve URL of the file!\n"
 "%s"
 msgstr ""
-"无法取得文件的 URL！\n"
+"无法获取文件的 URL！\n"
 "%s"
 
 # ID:66,
@@ -2182,7 +2183,7 @@ msgid ""
 "Could not retrieve revision %s of the file %s.\n"
 "Patching is not possible!"
 msgstr ""
-"无法取得 %s 版本的 %s 文件。\n"
+"无法获取 %s 版本的 %s 文件。\n"
 "无法进行补丁！"
 
 # ID:64,
@@ -2231,7 +2232,7 @@ msgstr ""
 # ID:3857,
 #: ID:3857
 msgid "Could not start print job."
-msgstr "无法启动打印工作。"
+msgstr "无法启动打印任务。"
 
 # ID:81,
 #: ID:81
@@ -2281,7 +2282,7 @@ msgstr "在当前地址创建文件数据库"
 # ID:14,
 #: ID:14
 msgid "Creates a unified diff file with all changes you made"
-msgstr "创建包含你所有修改的单一修改文件"
+msgstr "创建包含你所有修改的标准差异文件"
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -2395,7 +2396,7 @@ msgstr "目录："
 msgid ""
 "Disable this option if you have really big working copies and experience\n"
 "too much disk access when browsing the working copy."
-msgstr "如果你的工作拷贝非常大，占用了许多硬盘空间，请禁用此选项。"
+msgstr "如果你的工作拷贝非常大，占用了较大的硬盘空间，请禁用此选项。"
 
 # ID:3867,#:
 # ID:3867,
@@ -2771,7 +2772,7 @@ msgstr "外部程序：合并工具"
 # Control-ID:65535,
 #: Dlg-ID:194
 msgid "External Programs::Unified Diff Viewer"
-msgstr "外部程序：单一差异查看器"
+msgstr "外部程序：标准差异查看器"
 
 # ID:74,
 #: ID:74
@@ -2810,13 +2811,13 @@ msgstr "为右键菜单获取 SVN 状态(&S)"
 # ID:313,
 #: ID:313
 msgid "Fetching file..."
-msgstr "正在取得文件..."
+msgstr "正在获取文件..."
 
 # ID:313,
 #: ID:313
 #, c-format
 msgid "Fetching revision %s of file:"
-msgstr "正在取得文件的 %s 版本："
+msgstr "正在获取文件的 %s 版本："
 
 # ID:63,#:
 # ID:74,#:
@@ -2950,7 +2951,7 @@ msgstr "正在生成补丁文件..."
 # ID:16,
 #: ID:16
 msgid "Get loc&k..."
-msgstr "取得锁定(&K)..."
+msgstr "获取锁定(&K)..."
 
 # ID:89,
 #: ID:89
@@ -2969,18 +2970,18 @@ msgstr ""
 #: ID:119
 #, c-format
 msgid "Getting file %s"
-msgstr "正在取得文件 %s"
+msgstr "正在获取文件 %s"
 
 # ID:119,
 #: ID:120
 #, c-format
 msgid "Getting file %s, revision %ld"
-msgstr "正在取得文件 %s  版本 %ld"
+msgstr "正在获取文件 %s  版本 %ld"
 
 # ID:132,
 #: ID:132
 msgid "Getting file info..."
-msgstr "正在取得文件信息..."
+msgstr "正在获取文件信息..."
 
 # ID:269,
 #: ID:269
@@ -2995,12 +2996,12 @@ msgstr "正在获取信息..."
 # ID:132,
 #: ID:132
 msgid "Getting log info..."
-msgstr "正在取得日志信息..."
+msgstr "正在获取日志信息..."
 
 # ID:132,
 #: ID:119
 msgid "Getting unified diff"
-msgstr "正在取得单一比较"
+msgstr "正在获取标准差异"
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -3672,7 +3673,7 @@ msgstr "合并"
 # Dlg-ID:141,
 #: ID:263
 msgid "Merged"
-msgstr "合并结果（Merged）"
+msgstr "已合并"
 
 # ID:10,
 #: ID:10
@@ -3892,7 +3893,7 @@ msgid ""
 msgstr ""
 "从上次提交以来没有任何文件修改或\n"
 "加入。TortoiseSVN 没有可执行的操\n"
-"作。要查看未进行版本控制的文件吗？"
+"作。要查看无版本控制的文件吗？"
 
 # ID:3843,#:
 # ID:3843,
@@ -4245,7 +4246,7 @@ msgstr "请指定凭证类型"
 # ID:132,
 #: ID:132
 msgid "Please wait - this can take several minutes. Seriously!"
-msgstr "请稍候，确实可能需要数分钟！"
+msgstr "请稍候，此操作可能需要实实在在的数分钟时间！"
 
 # ID:13,
 #: ID:13
@@ -4272,7 +4273,7 @@ msgstr "请稍候..."
 # ID:376,
 #: ID:376
 msgid "Preview patched file"
-msgstr "预览补丁过的文件"
+msgstr "预览打过补丁的文件"
 
 # ID:132,
 #: ID:132
@@ -4395,7 +4396,7 @@ msgstr "可移动磁盘(&M)"
 # ID:11,
 #: ID:11
 msgid "Re&name..."
-msgstr "重命名(&N)..."
+msgstr "改名(&N)..."
 
 # ID:77,
 #: ID:8
@@ -4410,7 +4411,7 @@ msgstr "在你卡住之前, 请先阅读日常使用指南…"
 # Control-ID:1073,
 #: Control-ID:1260
 msgid "Recurse into unversioned folders"
-msgstr "递归处理未进行版本控制的文件夹"
+msgstr "递归处理无版本控制的文件夹"
 
 # Control-ID:1018,
 #: ID:563
@@ -4516,7 +4517,7 @@ msgstr "从忽略列表删除(&I)"
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Removed"
-msgstr "删除"
+msgstr "已删除"
 
 # ID:126,
 #: ID:126
@@ -4543,28 +4544,28 @@ msgstr "将选定的文件或文件匹配列表从忽略列表删除"
 # Dlg-ID:151,
 #: Dlg-ID:151
 msgid "Rename"
-msgstr "重命名"
+msgstr "改名"
 
 # ID:97,
 #: ID:97
 #, c-format
 msgid "Rename %s"
-msgstr "重命名 %s"
+msgstr "改名 %s"
 
 # ID:126,
 #: Control-ID:65535
 msgid "Renamed node"
-msgstr "重命名的节点"
+msgstr "改名的节点"
 
 # ID:126,
 #: ID:126
 msgid "Renamed remotely"
-msgstr "远程重命名完成"
+msgstr "远程改名完成"
 
 # ID:11,
 #: ID:11
 msgid "Renames files / folders inside version control"
-msgstr "重命名版本控制树中的文件/文件夹"
+msgstr "改名版本控制树中的文件/文件夹"
 
 # ID:3603,
 #: ID:3603
@@ -4661,7 +4662,7 @@ msgstr "解决有冲突的文件"
 # ID:73,
 #: Control-ID:1254
 msgid "Restore Default"
-msgstr "回复默认值"
+msgstr "恢复默认值"
 
 # ID:3826,
 #: ID:3826
@@ -4839,7 +4840,7 @@ msgstr "SVN 作者"
 # Control-ID:1073,
 #: ID:16
 msgid "SVN Copy and rename versioned file here"
-msgstr "SVN 复制并重命名版本控制的文件到当前位置"
+msgstr "SVN 复制并改名版本控制的文件到当前位置"
 
 # Control-ID:1073,
 #: ID:13
@@ -4864,7 +4865,7 @@ msgstr "SVN 锁定属主"
 # Control-ID:1073,
 #: ID:17
 msgid "SVN Move and rename versioned files here"
-msgstr "SVN 复制并重命名版本控制的文件到当前位置"
+msgstr "SVN 复制并改名版本控制的文件到当前位置"
 
 # Control-ID:1073,
 #: ID:12
@@ -5218,7 +5219,7 @@ msgstr "仅在资源管理器中显示图标覆盖(&O)"
 # Control-ID:1073,
 #: Control-ID:1073
 msgid "Show &unversioned files"
-msgstr "显示非版本控制的文件(&U)"
+msgstr "显示无版本控制的文件(&U)"
 
 # Control-ID:1073,
 #: MenuEntry
@@ -5228,7 +5229,7 @@ msgstr "显示文件列表"
 # ID:113,
 #: ID:113
 msgid "Show differences as &unified diff"
-msgstr "以单一差异文件显示修改(&U)"
+msgstr "以标准差异文件显示修改(&U)"
 
 # Control-ID:1073,
 #: Control-ID:1264
@@ -5280,7 +5281,7 @@ msgstr "显示未修改的文件"
 # Control-ID:1073,
 #: Control-ID:1073
 msgid "Show unversioned files"
-msgstr "显示非版本控制的文件"
+msgstr "显示无版本控制的文件"
 
 # Control-ID:1073,
 #: ID:272
@@ -5307,7 +5308,7 @@ msgstr "不论在版本库中或在本地端都显示从上次更新以后有改
 # ID:2050,
 #: ID:2050
 msgid "Shows all revisions where changes were made to this item"
-msgstr "显示该项目发生改变的全部版本"
+msgstr "显示所有修改过该项的版本"
 
 # ID:10,
 #: ID:10
@@ -5317,7 +5318,7 @@ msgstr "显示关于 TortoiseSVN 的信息"
 # ID:17,
 #: ID:17
 msgid "Shows the eol-style property value"
-msgstr "显示设置的行结束符类型"
+msgstr "显示 eol-style 属性设置"
 
 # ID:12,
 #: ID:12
@@ -5635,7 +5636,7 @@ msgid ""
 "The diffing engine aborted because of an error:\n"
 "%s"
 msgstr ""
-"差异比较引擎停止，错误信息:\n"
+"差异比较引擎终止，错误信息:\n"
 "%s"
 
 # ID:64,
@@ -5877,9 +5878,9 @@ msgid ""
 "<hr=100%>\n"
 "Please commit your changes first or revert."
 msgstr ""
-"工作拷贝已更动！\n"
+"工作拷贝已修改！\n"
 "<hr=100%>\n"
-"请先提交你的变更或复原你的改动。"
+"请先提交或撤销你的修改。"
 
 # ID:81,
 #: ID:81
@@ -6046,10 +6047,10 @@ msgstr ""
 "TortoiseIDiff:  TortoiseSVN 的图片差异查看器\n"
 "\n"
 "可用的命令行参数：\n"
-"/left:\"path to left picture\"\n"
-"/lefttitle:\"title to show for the left picture\"\n"
-"/right:\"path to right picture\"\n"
-"/righttitle:\"title to show for the right picture\""
+"/left：“左侧文件的路径”\n"
+"/lefttitle：“左侧窗口的标题”\n"
+"/right：“右侧文件的路径”\n"
+"/righttitle：“右侧窗口的标题”"
 
 # ID:7,#:
 # ID:3585,#:
@@ -6166,7 +6167,7 @@ msgstr "TortoiseSVN 合并..."
 # ID:101,
 #: ID:221
 msgid "TortoiseSVN Rename/move"
-msgstr "TortoiseSVN 重命名/移动..."
+msgstr "TortoiseSVN 改名/移动..."
 
 # ID:77,
 #: ID:77
@@ -6200,8 +6201,8 @@ msgid ""
 "TortoiseSVN has detected similar filenames. Do you want the files:%s\n"
 "to be renamed too?"
 msgstr ""
-"TortoiseSVN 发现文件重名。你要将文件：%s\n"
-"改名吗？"
+"TortoiseSVN 检测到类似的文件名。你要同时改名\n"
+"文件 %s 吗？"
 
 # Control-ID:1162,
 #: Control-ID:1162
@@ -6236,7 +6237,7 @@ msgstr "调整 TortoiseSVN 设置"
 
 #: MenuEntry
 msgid "Two-way &Diff"
-msgstr "双向差异(&D)"
+msgstr "双向差异比较(&D)"
 
 # Control-ID:65535,#:
 # Control-ID:1076,
@@ -6335,7 +6336,7 @@ msgstr "预期外的文件格式。"
 
 #: MenuEntry
 msgid "Unified &diff of HEAD revisions"
-msgstr "与最新版本的标准差异（Unified diff）(&D)"
+msgstr "与最新版本的标准差异(&D)"
 
 # ID:81,
 #: ID:81
@@ -6376,7 +6377,7 @@ msgstr "未命名"
 # Control-ID:1313,
 #: Control-ID:1313
 msgid "Unversioned files mark parent folder as modified"
-msgstr "包含无版本控制的文件的文件夹标志为修改后"
+msgstr "如果文件夹包含无版本控制的文件，则标识为已修改"
 
 # ID:8,#:
 # ID:74,#:
@@ -6426,7 +6427,7 @@ msgstr "对两个文件进行比较时默认使用单窗口方式(&O)"
 # ID:251,
 #: ID:251
 msgid "Use &other text block"
-msgstr "使用其它文字区块(&O)"
+msgstr "使用其它文本块(&O)"
 
 # Control-ID:1126,
 #: Control-ID:1126
@@ -6462,12 +6463,12 @@ msgstr "使用“_svn”目录替代“.svn”目录"
 # ID:251,
 #: ID:251
 msgid "Use both text blocks (this one first)"
-msgstr "使用两个文字区块（这个块最前）"
+msgstr "使用两个文本块（这个块最前）"
 
 # ID:251,
 #: ID:251
 msgid "Use both text blocks (this one last)"
-msgstr "使用两个文字区块（这个块最后）"
+msgstr "使用两个文本块（这个块最后）"
 
 # Control-ID:1066,
 #: Control-ID:1066
@@ -6477,27 +6478,27 @@ msgstr "用双删除线表示已删除行(&K)"
 # ID:251,
 #: ID:251
 msgid "Use text block from \"&mine\""
-msgstr "使用本地的文字区块(&M)"
+msgstr "使用本地的文本块(&M)"
 
 # ID:251,
 #: ID:251
 msgid "Use text block from \"&theirs\""
-msgstr "使用远程的文字区块(&T)"
+msgstr "使用远程的文本块(&T)"
 
 # ID:251,
 #: ID:251
 msgid "Use text block from \"m&ine\" before \"theirs\""
-msgstr "优先使用本地的而非远程的文字区块(&I)"
+msgstr "优先使用本地的而非远程的文本块(&I)"
 
 # ID:251,
 #: ID:251
 msgid "Use text block from \"t&heirs\" before \"mine\""
-msgstr "优先使用远程的而非本地的文字区块(&H)"
+msgstr "优先使用远程的而非本地的文本块(&H)"
 
 # ID:251,
 #: ID:251
 msgid "Use th&is text block"
-msgstr "使用此文字区块(&I)"
+msgstr "使用此文本块(&I)"
 
 # ID:251,
 #: ID:251
@@ -6540,7 +6541,7 @@ msgstr ""
 "/theirs：<远程文件的路径>\n"
 "/yours：<本地文件的路径>\n"
 "/merged：<合并后文件的路径>\n"
-"/diff：<单一补丁文件的路径>\n"
+"/diff：<标准差异文件的路径>\n"
 "/patchpath：<文件夹路径>"
 
 # ID:11,
@@ -6821,7 +6822,7 @@ msgstr "缩小"
 # ID:2051,
 #: ID:2051
 msgid "Zoom to fit"
-msgstr "缩放到适合比例"
+msgstr "缩放到适当比例"
 
 # ID:10,
 #: ID:10
@@ -6886,7 +6887,8 @@ msgid ""
 msgstr ""
 "bugtraq:logregex\n"
 "用换行分隔的两个正则表达式，\n"
-"第一个正则表达式用于查找问题标题中的字符串，第二个正则表达式用于从字符串取得问题编号。"
+"第一个正则表达式用于查找问题标题中的字符串，\n"
+"第二个正则表达式用于从字符串获取问题编号。"
 
 # ID:14,
 #: ID:14
@@ -7153,7 +7155,7 @@ msgstr ""
 "svn:needs-lock\n"
 "将此属性设为任意值（如“*”）来执行此文件锁定。\n"
 "文件将在检出或更新时被设为只读，表明用户需在\n"
-"修改或提交前取得该文件锁定。"
+"修改或提交前获取该文件锁定。"
 
 # ID:208,
 #: ID:208
@@ -7253,4 +7255,3 @@ msgstr "对应版本库URL："
 #: ID:245
 msgid "year"
 msgstr "年"
-
