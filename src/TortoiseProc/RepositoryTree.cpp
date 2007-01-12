@@ -142,7 +142,7 @@ HTREEITEM CRepositoryTree::AddFolder(const CString& folder, bool force, bool ini
 			if (force && hParentItem != RVTI_ROOT)
 				Expand(hParentItem, RVE_EXPAND);
  
-			hItem = CReportCtrl::InsertItem(folder_name, m_nIconFolder, -1, -1, hParentItem, insertafter);
+			hItem = CReportCtrl::InsertItem(folder_name, m_nIconFolder, -1, -1, hParentItem, RVTI_SORT);
 
 			InsertDummyItem(hItem);
 			SetItemData(GetItemIndex(hItem), 0);

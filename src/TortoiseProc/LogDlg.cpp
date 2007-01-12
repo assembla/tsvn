@@ -3223,7 +3223,8 @@ void CLogDlg::OnTimer(UINT_PTR nIDEvent)
 		m_cFilterCancelButton.ShowWindow(SW_SHOW);
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_HIDE);
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_SEARCHEDIT)->SetFocus();
+		if (bSetFocusToFilterControl)
+			GetDlgItem(IDC_SEARCHEDIT)->SetFocus();
 	} // if (nIDEvent == LOGFILTER_TIMER)
 	DialogEnableWindow(IDC_STATBUTTON, !(((m_bThreadRunning)||(m_arShownList.IsEmpty()))));
 	__super::OnTimer(nIDEvent);
