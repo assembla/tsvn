@@ -122,6 +122,7 @@ protected:
 	afx_msg void OnBnClickedHidepaths();
 	afx_msg void OnBnClickedCheckStoponcopy();
 	afx_msg void OnLvnOdfinditemLoglist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 	virtual void OnCancel();
 	virtual void OnOK();
 	virtual BOOL OnInitDialog();
