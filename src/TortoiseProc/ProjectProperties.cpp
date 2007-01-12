@@ -502,8 +502,6 @@ CString ProjectProperties::FindBugID(const CString& msg)
 	bool bFound = false;
 
 	CString sRet;
-	if (sUrl.IsEmpty())
-		return sRet;
 
 	std::set<CString> bugIDs;
 
