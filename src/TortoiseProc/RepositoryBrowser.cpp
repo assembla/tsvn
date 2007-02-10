@@ -368,6 +368,10 @@ void CRepositoryBrowser::OnLButtonDown(UINT nFlags, CPoint point)
 	if (point.x > treelist.right-REPOBROWSER_CTRL_MIN_WIDTH) 
 		point.x = treelist.right-REPOBROWSER_CTRL_MIN_WIDTH;
 
+	if ((point.y < treelist.top) || 
+		(point.y > treelist.bottom))
+		return CStandAloneDialogTmpl<CResizableDialog>::OnLButtonDown(nFlags, point);
+
 	bDragMode = true;
 
 	SetCapture();
