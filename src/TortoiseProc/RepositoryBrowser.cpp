@@ -177,7 +177,7 @@ BOOL CRepositoryBrowser::OnInitDialog()
 	// set up the list control
 	m_RepoList.SetExtendedStyle(LVS_EX_HEADERDRAGDROP | LVS_EX_DOUBLEBUFFER | LVS_EX_INFOTIP | LVS_EX_SUBITEMIMAGES);
 	m_RepoList.SetImageList(&SYS_IMAGE_LIST(), LVSIL_SMALL);
-
+	m_RepoList.ShowText(CString(MAKEINTRESOURCE(IDS_REPOBROWSE_INITWAIT)));
 
 	m_RepoTree.SetImageList(&SYS_IMAGE_LIST(), TVSIL_NORMAL);
 
@@ -239,6 +239,7 @@ LRESULT CRepositoryBrowser::OnAfterInitDialog(WPARAM /*wParam*/, LPARAM /*lParam
 
 	ChangeToUrl(m_InitialSvnUrl.GetPath());
 	m_barRepository.GotoUrl(m_InitialSvnUrl);
+	m_RepoList.ClearText();
 	m_bInitDone = TRUE;
 	return 0;
 }
@@ -525,10 +526,6 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 
 bool CRepositoryBrowser::ChangeToUrl(const CString& url)
 {
-	m_RepoList.SetRedraw(false);
-	m_RepoList.DeleteAllItems();
-	m_RepoList.SetRedraw(true);
-
 	CString partUrl = url;
 	HTREEITEM hItem = m_RepoTree.GetRootItem();
 	if (hItem == NULL)
@@ -566,9 +563,12 @@ bool CRepositoryBrowser::ChangeToUrl(const CString& url)
 	if (pTreeItem == NULL)
 		return FALSE;
 
+	m_RepoList.ShowText(_T(" "), true);
+
 	RefreshNode(hItem);
 
 	FillList(&pTreeItem->children);
+	m_RepoList.ClearText();
 
 	return true;
 }
@@ -742,6 +742,7 @@ bool CRepositoryBrowser::RefreshNode(const CString& url)
 
 bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
 {
+	CWaitCursorEx wait;
 	CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
 	if (m_RepoTree.ItemHasChildren(hNode))
 	{
@@ -760,6 +761,7 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
 	if (!List(CTSVNPath(pTreeItem->url), GetRevision(), GetRevision(), true, true))
 	{
 		// error during list()
+		m_RepoList.ShowText(GetLastErrorMessage());
 		return false;
 	}
 	pTreeItem->children_fetched = true;
@@ -784,11 +786,9 @@ void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult
 	{
 		if (!pTreeItem->children_fetched)
 		{
-			m_RepoList.SetRedraw(false);
-			m_RepoList.DeleteAllItems();
-			m_RepoList.SetRedraw(true);
-
+			m_RepoList.ShowText(_T(" "), true);
 			RefreshNode(pNMTreeView->itemNew.hItem);
+			m_RepoList.ClearText();
 		}
 
 		FillList(&pTreeItem->children);

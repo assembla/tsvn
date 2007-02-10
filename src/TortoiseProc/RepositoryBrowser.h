@@ -28,6 +28,7 @@
 #include "ProjectProperties.h"
 #include "LogDlg.h"
 #include "TSVNPath.h"
+#include "HintListCtrl.h"
 
 #define REPOBROWSER_CTRL_MIN_WIDTH 20
 
@@ -168,7 +169,7 @@ protected:
 	CRepositoryBarCnr	m_cnrRepositoryBar;
 
 	CTreeCtrl			m_RepoTree;
-	CListCtrl			m_RepoList;
+	CHintListCtrl		m_RepoList;
 
 	CString				m_strReposRoot;
 	CString				m_sUUID;
