@@ -18,6 +18,9 @@
 //
 #pragma once
 
+#include <map>
+#include <deque>
+
 #include "SVNUrl.h"
 #include "RepositoryTree.h"
 #include "RepositoryBar.h"
@@ -26,13 +29,89 @@
 #include "LogDlg.h"
 #include "TSVNPath.h"
 
+#define REPOBROWSER_CTRL_MIN_WIDTH 20
+
+using namespace std;
+
 class CInputLogDlg;
+
+class CItem
+{
+public:
+	CItem() : kind(svn_node_none)
+		, size(0)
+		, has_props(false)
+		, created_rev(0)
+		, time(0)
+		, is_dav_comment(false)
+		, lock_creationdate(0)
+		, lock_expirationdate(0)
+	{
+
+	}
+	CItem(const CString& _path, 
+		svn_node_kind_t _kind,
+		svn_filesize_t _size,
+		bool _has_props,
+		svn_revnum_t _created_rev,
+		apr_time_t _time,
+		const CString& _author,
+		const CString& _locktoken,
+		const CString& _lockowner,
+		const CString& _lockcomment,
+		bool _is_dav_comment,
+		apr_time_t _lock_creationdate,
+		apr_time_t _lock_expirationdate,
+		const CString& _absolutepath)
+	{
+		path = _path;
+		kind = _kind;
+		size = _size;
+		has_props = _has_props;
+		created_rev = _created_rev;
+		time = _time;
+		author = _author;
+		locktoken = _locktoken;
+		lockowner = _lockowner;
+		lockcomment = _lockcomment;
+		is_dav_comment = _is_dav_comment;
+		lock_creationdate = _lock_creationdate;
+		lock_expirationdate = _lock_expirationdate;
+		absolutepath = _absolutepath;
+	}
+public:
+	CString				path;
+	svn_node_kind_t		kind;
+	svn_filesize_t		size;
+	bool				has_props;
+	svn_revnum_t		created_rev;
+	apr_time_t			time;
+	CString				author;
+	CString				locktoken;
+	CString				lockowner;
+	CString				lockcomment;
+	bool				is_dav_comment;
+	apr_time_t			lock_creationdate;
+	apr_time_t			lock_expirationdate;
+	CString				absolutepath;
+};
+
+class CTreeItem
+{
+public:
+	CTreeItem() : children_fetched(false) {}
+
+	CString			unescapedname;
+	CString			url;
+	bool			children_fetched;			///< whether the contents of the folder are known/fetched or not
+	deque<CItem>	children;
+};
 
 /**
  * \ingroup TortoiseProc
  * Dialog to browse a repository.
  */
-class CRepositoryBrowser : public CResizableStandAloneDialog
+class CRepositoryBrowser : public CResizableStandAloneDialog, public SVN
 {
 	DECLARE_DYNAMIC(CRepositoryBrowser)
 
@@ -57,35 +136,59 @@ protected:
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 
-	afx_msg void OnRVNItemRClickReposTree(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnRVNItemRClickUpReposTree(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
-	afx_msg void OnRVNKeyDownReposTree(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedHelp();
 	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
-	afx_msg LRESULT OnAfterInitDialog(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT OnFilesDropped(WPARAM wParam, LPARAM lParam);
+
+	LRESULT OnAfterInitDialog(WPARAM /*wParam*/, LPARAM /*lParam*/);
+	void DrawXorBar(CDC * pDC, int x1, int y1, int width, int height);
+	virtual BOOL ReportList(const CString& path, svn_node_kind_t kind, 
+		svn_filesize_t size, bool has_props, svn_revnum_t created_rev, 
+		apr_time_t time, const CString& author, const CString& locktoken, 
+		const CString& lockowner, const CString& lockcomment, 
+		bool is_dav_comment, apr_time_t lock_creationdate, 
+		apr_time_t lock_expirationdate, const CString& absolutepath);
+
+	void RecursiveRemove(HTREEITEM hItem);
+	bool ChangeToUrl(const CString& url);
+	HTREEITEM FindUrl(const CString& fullurl, bool create = true);
+	HTREEITEM FindUrl(const CString& fullurl, const CString& url, bool create = true, HTREEITEM hItem = TVI_ROOT);
+	void FillList(deque<CItem> * pItems);
 
 	DECLARE_MESSAGE_MAP()
 
-	void OnFilesDropped(int iItem, int iSubItem, const CTSVNPathList& droppedPaths);
-	void DeleteSelectedEntries();
-	void SetupInputDlg(CInputLogDlg * dlg);
-	void ShowContextMenu(CPoint pt, LRESULT *pResult);
 
 	static UINT InitThreadEntry(LPVOID pVoid);
 	UINT InitThread();
 
 	bool				m_bInitDone;
-	CRepositoryTree		m_treeRepository;
 	CRepositoryBar		m_barRepository;
 	CRepositoryBarCnr	m_cnrRepositoryBar;
+
+	CTreeCtrl			m_RepoTree;
+	CListCtrl			m_RepoList;
+
+	CString				m_strReposRoot;
+	CString				m_sUUID;
 
 private:
 	bool m_bStandAlone;
 	SVNUrl m_InitialSvnUrl;
 	bool m_bThreadRunning;
 	static const UINT	m_AfterInitMessage;
+
+	int					m_nIconFolder;
+	int					m_nOpenIconFolder;
+
+	int					oldy, oldx;
+	bool				bDragMode;
+public:
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+protected:
+	virtual void OnCancel();
+public:
+	afx_msg void OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 /**
