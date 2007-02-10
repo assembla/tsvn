@@ -99,12 +99,13 @@ public:
 class CTreeItem
 {
 public:
-	CTreeItem() : children_fetched(false) {}
+	CTreeItem() : children_fetched(false), has_child_folders(true) {}
 
 	CString			unescapedname;
 	CString			url;
 	bool			children_fetched;			///< whether the contents of the folder are known/fetched or not
 	deque<CItem>	children;
+	bool			has_child_folders;
 };
 
 /**
@@ -152,6 +153,8 @@ protected:
 	bool ChangeToUrl(const CString& url);
 	HTREEITEM FindUrl(const CString& fullurl, bool create = true);
 	HTREEITEM FindUrl(const CString& fullurl, const CString& url, bool create = true, HTREEITEM hItem = TVI_ROOT);
+	bool RefreshNode(const CString& url);
+	bool RefreshNode(HTREEITEM hNode);
 	void FillList(deque<CItem> * pItems);
 
 	DECLARE_MESSAGE_MAP()

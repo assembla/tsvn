@@ -480,6 +480,7 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 									const CString& absolutepath)
 {
 	static deque<CItem> * pDirList = NULL;
+	static CTreeItem * pTreeItem = NULL;
 	static CString dirPath;
 
 	CString sParent = absolutepath;
@@ -495,7 +496,9 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 		if (sParent.Compare(_T("/"))==0)
 			sParent.Empty();
 		HTREEITEM hItem = FindUrl(m_strReposRoot + sParent);
-		pDirList = &((CTreeItem*)m_RepoTree.GetItemData(hItem))->children;
+		pTreeItem = (CTreeItem*)m_RepoTree.GetItemData(hItem);
+		pDirList = &(pTreeItem->children);
+
 		dirPath = sParent;
 	}
 	if (path.IsEmpty())
@@ -504,6 +507,8 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 	if (kind == svn_node_dir)
 	{
 		FindUrl(m_strReposRoot + absolutepath + (abspath_has_slash ? _T("") : _T("/")) + path);
+		if (pTreeItem)
+			pTreeItem->has_child_folders = true;
 	}
 	pDirList->push_back(CItem(path.Mid(slashpos+1), kind, size, has_props,
 		created_rev, time, author, locktoken,
@@ -556,15 +561,8 @@ bool CRepositoryBrowser::ChangeToUrl(const CString& url)
 	CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hItem);
 	if (pTreeItem == NULL)
 		return FALSE;
-	if (!pTreeItem->children_fetched)
-	{
-		if (!List(CTSVNPath(url), GetRevision(), GetRevision(), true, true))
-		{
-			// error during list()
-			return false;
-		}
-		pTreeItem->children_fetched = true;
-	}
+
+	RefreshNode(hItem);
 
 	FillList(&pTreeItem->children);
 
@@ -732,6 +730,47 @@ void CRepositoryBrowser::OnCancel()
 	__super::OnCancel();
 }
 
+bool CRepositoryBrowser::RefreshNode(const CString& url)
+{
+	HTREEITEM hNode = FindUrl(url);
+	return RefreshNode(hNode);
+}
+
+bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
+{
+	CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
+	if (m_RepoTree.ItemHasChildren(hNode))
+	{
+		HTREEITEM hChild = m_RepoTree.GetChildItem(hNode);
+		HTREEITEM hNext;
+		while (hChild)
+		{
+			hNext = m_RepoTree.GetNextItem(hChild, TVGN_NEXT);
+			RecursiveRemove(hChild);
+			m_RepoTree.DeleteItem(hChild);
+			hChild = hNext;
+		}
+	}
+	pTreeItem->children.clear();
+	pTreeItem->has_child_folders = false;
+	if (!List(CTSVNPath(pTreeItem->url), GetRevision(), GetRevision(), true, true))
+	{
+		// error during list()
+		return false;
+	}
+	pTreeItem->children_fetched = true;
+	// if there are no child folders, remove the '+' in front of the node
+	if (!pTreeItem->has_child_folders)
+	{
+		TVITEM tvitem = {0};
+		tvitem.hItem = hNode;
+		tvitem.mask = TVIF_CHILDREN;
+		tvitem.cChildren = 0;
+		m_RepoTree.SetItem(&tvitem);
+	}
+	return true;
+}
+
 void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
@@ -745,25 +784,7 @@ void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult
 			m_RepoList.DeleteAllItems();
 			m_RepoList.SetRedraw(true);
 
-			if (m_RepoTree.ItemHasChildren(pNMTreeView->itemNew.hItem))
-			{
-				HTREEITEM hChild = m_RepoTree.GetChildItem(pNMTreeView->itemNew.hItem);
-				HTREEITEM hNext;
-				while (hChild)
-				{
-					hNext = m_RepoTree.GetNextItem(hChild, TVGN_NEXT);
-					RecursiveRemove(hChild);
-					m_RepoTree.DeleteItem(hChild);
-					hChild = hNext;
-				}
-			}
-			pTreeItem->children.clear();
-			if (!List(CTSVNPath(pTreeItem->url), GetRevision(), GetRevision(), true, true))
-			{
-				// error during list()
-				return;
-			}
-			pTreeItem->children_fetched = true;
+			RefreshNode(pNMTreeView->itemNew.hItem);
 		}
 
 		FillList(&pTreeItem->children);
@@ -779,28 +800,10 @@ void CRepositoryBrowser::OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pRes
 	// user wants to expand a tree node.
 	// check if we already know its children - if not we have to ask the repository!
 
-	CTreeItem * pTreeItem = (CTreeItem *)pNMTreeView->itemOld.lParam;
+	CTreeItem * pTreeItem = (CTreeItem *)pNMTreeView->itemNew.lParam;
 	if (!pTreeItem->children_fetched)
 	{
-		if (m_RepoTree.ItemHasChildren(pNMTreeView->itemNew.hItem))
-		{
-			HTREEITEM hChild = m_RepoTree.GetChildItem(pNMTreeView->itemNew.hItem);
-			HTREEITEM hNext;
-			while (hChild)
-			{
-				hNext = m_RepoTree.GetNextItem(hChild, TVGN_NEXT);
-				RecursiveRemove(hChild);
-				m_RepoTree.DeleteItem(hChild);
-				hChild = hNext;
-			}
-		}
-		pTreeItem->children.clear();
-		if (!List(CTSVNPath(pTreeItem->url), GetRevision(), GetRevision(), true, true))
-		{
-			// error during list()
-			return;
-		}
-		pTreeItem->children_fetched = true;
+		RefreshNode(pNMTreeView->itemNew.hItem);
 	}
 
 	*pResult = 0;
