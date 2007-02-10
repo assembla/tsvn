@@ -194,6 +194,7 @@ protected:
 public:
 	afx_msg void OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 /**

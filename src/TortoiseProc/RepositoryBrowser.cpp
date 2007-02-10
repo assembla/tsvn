@@ -134,6 +134,7 @@ BEGIN_MESSAGE_MAP(CRepositoryBrowser, CResizableStandAloneDialog)
 	ON_WM_LBUTTONUP()
 	ON_NOTIFY(TVN_SELCHANGED, IDC_REPOTREE, &CRepositoryBrowser::OnTvnSelchangedRepotree)
 	ON_NOTIFY(TVN_ITEMEXPANDING, IDC_REPOTREE, &CRepositoryBrowser::OnTvnItemexpandingRepotree)
+	ON_NOTIFY(NM_DBLCLK, IDC_REPOLIST, &CRepositoryBrowser::OnNMDblclkRepolist)
 END_MESSAGE_MAP()
 
 SVNUrl CRepositoryBrowser::GetURL() const
@@ -519,7 +520,7 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 		created_rev, time, author, locktoken,
 		lockowner, lockcomment, is_dav_comment,
 		lock_creationdate, lock_expirationdate,
-		absolutepath+path.Left(slashpos)));
+		m_strReposRoot+absolutepath+(abspath_has_slash ? _T("") : _T("/"))+path));
 
 	return TRUE;
 }
@@ -634,6 +635,7 @@ void CRepositoryBrowser::FillList(deque<CItem> * pItems)
 		m_RepoList.SetItemText(index, 4, temp);
 		// date
 		m_RepoList.SetItemText(index, 6, it->lockowner);
+		m_RepoList.SetItemData(index, (DWORD_PTR)&(*it));
 	}
 
 	for (int col = 0; col <= (((CHeaderCtrl*)(m_RepoList.GetDlgItem(0)))->GetItemCount()-1); col++)
@@ -811,4 +813,18 @@ void CRepositoryBrowser::OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pRes
 	}
 
 	*pResult = 0;
+}
+
+void CRepositoryBrowser::OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMITEMACTIVATE pNmItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	*pResult = 0;
+	if (pNmItemActivate->iItem < 0)
+		return;
+	CItem * pItem = (CItem*)m_RepoList.GetItemData(pNmItemActivate->iItem);
+	if ((pItem)&&(pItem->kind == svn_node_dir))
+	{
+		// a doubleclick on a folder results in selecting that folder
+		ChangeToUrl(pItem->absolutepath);
+	}
 }
