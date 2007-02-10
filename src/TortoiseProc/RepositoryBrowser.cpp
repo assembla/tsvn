@@ -133,6 +133,7 @@ BEGIN_MESSAGE_MAP(CRepositoryBrowser, CResizableStandAloneDialog)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
 	ON_NOTIFY(TVN_SELCHANGED, IDC_REPOTREE, &CRepositoryBrowser::OnTvnSelchangedRepotree)
+	ON_NOTIFY(TVN_ITEMEXPANDING, IDC_REPOTREE, &CRepositoryBrowser::OnTvnItemexpandingRepotree)
 END_MESSAGE_MAP()
 
 SVNUrl CRepositoryBrowser::GetURL() const
@@ -515,6 +516,10 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 
 bool CRepositoryBrowser::ChangeToUrl(const CString& url)
 {
+	m_RepoList.SetRedraw(false);
+	m_RepoList.DeleteAllItems();
+	m_RepoList.SetRedraw(true);
+
 	CString partUrl = url;
 	HTREEITEM hItem = m_RepoTree.GetRootItem();
 	if (hItem == NULL)
@@ -736,6 +741,10 @@ void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult
 	{
 		if (!pTreeItem->children_fetched)
 		{
+			m_RepoList.SetRedraw(false);
+			m_RepoList.DeleteAllItems();
+			m_RepoList.SetRedraw(true);
+
 			if (m_RepoTree.ItemHasChildren(pNMTreeView->itemNew.hItem))
 			{
 				HTREEITEM hChild = m_RepoTree.GetChildItem(pNMTreeView->itemNew.hItem);
@@ -758,6 +767,40 @@ void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult
 		}
 
 		FillList(&pTreeItem->children);
+	}
+
+	*pResult = 0;
+}
+
+void CRepositoryBrowser::OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+
+	// user wants to expand a tree node.
+	// check if we already know its children - if not we have to ask the repository!
+
+	CTreeItem * pTreeItem = (CTreeItem *)pNMTreeView->itemOld.lParam;
+	if (!pTreeItem->children_fetched)
+	{
+		if (m_RepoTree.ItemHasChildren(pNMTreeView->itemNew.hItem))
+		{
+			HTREEITEM hChild = m_RepoTree.GetChildItem(pNMTreeView->itemNew.hItem);
+			HTREEITEM hNext;
+			while (hChild)
+			{
+				hNext = m_RepoTree.GetNextItem(hChild, TVGN_NEXT);
+				RecursiveRemove(hChild);
+				m_RepoTree.DeleteItem(hChild);
+				hChild = hNext;
+			}
+		}
+		pTreeItem->children.clear();
+		if (!List(CTSVNPath(pTreeItem->url), GetRevision(), GetRevision(), true, true))
+		{
+			// error during list()
+			return;
+		}
+		pTreeItem->children_fetched = true;
 	}
 
 	*pResult = 0;
