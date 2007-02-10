@@ -183,6 +183,8 @@ private:
 	int					m_nIconFolder;
 	int					m_nOpenIconFolder;
 
+	volatile bool		m_blockEvents;
+
 	int					oldy, oldx;
 	bool				bDragMode;
 public:

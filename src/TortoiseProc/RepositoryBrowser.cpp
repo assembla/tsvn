@@ -82,6 +82,7 @@ CRepositoryBrowser::CRepositoryBrowser(const SVNUrl& svn_url, BOOL bFile)
 	, m_bStandAlone(true)
 	, m_InitialSvnUrl(svn_url)
 	, m_bInitDone(false)
+	, m_blockEvents(false)
 {
 }
 
@@ -91,6 +92,7 @@ CRepositoryBrowser::CRepositoryBrowser(const SVNUrl& svn_url, CWnd* pParent, BOO
 	, m_InitialSvnUrl(svn_url, true)
 	, m_bStandAlone(false)
 	, m_bInitDone(false)
+	, m_blockEvents(false)
 {
 }
 
@@ -495,12 +497,12 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 	if ((slashpos > 0) && (!abspath_has_slash))
 		sParent += _T("/");
 	sParent += path.Left(slashpos);
+	if (sParent.Compare(_T("/"))==0)
+		sParent.Empty();
 	if ((path.IsEmpty())||
 		(pDirList == NULL)||
 		(sParent.Compare(dirPath)))
 	{
-		if (sParent.Compare(_T("/"))==0)
-			sParent.Empty();
 		HTREEITEM hItem = FindUrl(m_strReposRoot + sParent);
 		pTreeItem = (CTreeItem*)m_RepoTree.GetItemData(hItem);
 		pDirList = &(pTreeItem->children);
@@ -567,8 +569,13 @@ bool CRepositoryBrowser::ChangeToUrl(const CString& url)
 	m_RepoList.ShowText(_T(" "), true);
 
 	RefreshNode(hItem);
-
 	FillList(&pTreeItem->children);
+
+	m_blockEvents = true;
+	m_RepoTree.EnsureVisible(hItem);
+	m_RepoTree.SelectItem(hItem);
+	m_blockEvents = false;
+
 	m_RepoList.ClearText();
 
 	return true;
@@ -664,18 +671,20 @@ HTREEITEM CRepositoryBrowser::FindUrl(const CString& fullurl, const CString& url
 	}
 	HTREEITEM hSibling = hItem;
 	if (m_RepoTree.GetNextItem(hItem, TVGN_CHILD))
-		hSibling = m_RepoTree.GetNextItem(hItem, TVGN_CHILD);
-	do
 	{
-		CString sSibling = ((CTreeItem*)m_RepoTree.GetItemData(hSibling))->unescapedname;
-		if (sSibling.Compare(url.Left(sSibling.GetLength()))==0)
+		hSibling = m_RepoTree.GetNextItem(hItem, TVGN_CHILD);
+		do
 		{
-			if (sSibling.GetLength() == url.GetLength())
-				return hSibling;
-			if (url.GetAt(sSibling.GetLength()) == '/')
-				return FindUrl(fullurl, url.Mid(sSibling.GetLength()+1), create, hSibling);
-		}
-	} while ((hSibling = m_RepoTree.GetNextItem(hSibling, TVGN_NEXT)) != NULL);	
+			CString sSibling = ((CTreeItem*)m_RepoTree.GetItemData(hSibling))->unescapedname;
+			if (sSibling.Compare(url.Left(sSibling.GetLength()))==0)
+			{
+				if (sSibling.GetLength() == url.GetLength())
+					return hSibling;
+				if (url.GetAt(sSibling.GetLength()) == '/')
+					return FindUrl(fullurl, url.Mid(sSibling.GetLength()+1), create, hSibling);
+			}
+		} while ((hSibling = m_RepoTree.GetNextItem(hSibling, TVGN_NEXT)) != NULL);	
+	}
 	if (!create)
 		return NULL;
 	// create tree items for every path part in the url
@@ -782,6 +791,10 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
 void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	*pResult = 0;
+
+	if (m_blockEvents)
+		return;
 
 	CTreeItem * pTreeItem = (CTreeItem *)pNMTreeView->itemNew.lParam;
 	if (pTreeItem)
@@ -795,13 +808,15 @@ void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult
 
 		FillList(&pTreeItem->children);
 	}
-
-	*pResult = 0;
 }
 
 void CRepositoryBrowser::OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	*pResult = 0;
+
+	if (m_blockEvents)
+		return;
 
 	// user wants to expand a tree node.
 	// check if we already know its children - if not we have to ask the repository!
@@ -811,14 +826,16 @@ void CRepositoryBrowser::OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pRes
 	{
 		RefreshNode(pNMTreeView->itemNew.hItem);
 	}
-
-	*pResult = 0;
 }
 
 void CRepositoryBrowser::OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMITEMACTIVATE pNmItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
 	*pResult = 0;
+
+	if (m_blockEvents)
+		return;
+
 	if (pNmItemActivate->iItem < 0)
 		return;
 	CItem * pItem = (CItem*)m_RepoList.GetItemData(pNmItemActivate->iItem);
