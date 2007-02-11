@@ -72,15 +72,14 @@ enum RepoBrowserContextMenuCommands
 
 };
 
-
-
 IMPLEMENT_DYNAMIC(CRepositoryBrowser, CResizableStandAloneDialog)
 
-CRepositoryBrowser::CRepositoryBrowser(const SVNUrl& svn_url, BOOL bFile)
+CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, BOOL bFile)
 	: CResizableStandAloneDialog(CRepositoryBrowser::IDD, NULL)
 	, m_cnrRepositoryBar(&m_barRepository)
 	, m_bStandAlone(true)
-	, m_InitialSvnUrl(svn_url)
+	, m_InitialUrl(url)
+	, m_initialRev(rev)
 	, m_bInitDone(false)
 	, m_blockEvents(false)
 	, m_bSortAscending(true)
@@ -88,10 +87,11 @@ CRepositoryBrowser::CRepositoryBrowser(const SVNUrl& svn_url, BOOL bFile)
 {
 }
 
-CRepositoryBrowser::CRepositoryBrowser(const SVNUrl& svn_url, CWnd* pParent, BOOL bFile)
+CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, CWnd* pParent, BOOL bFile)
 	: CResizableStandAloneDialog(CRepositoryBrowser::IDD, pParent)
 	, m_cnrRepositoryBar(&m_barRepository)
-	, m_InitialSvnUrl(svn_url, true)
+	, m_InitialUrl(url)
+	, m_initialRev(rev)
 	, m_bStandAlone(false)
 	, m_bInitDone(false)
 	, m_blockEvents(false)
@@ -144,19 +144,14 @@ BEGIN_MESSAGE_MAP(CRepositoryBrowser, CResizableStandAloneDialog)
 	ON_NOTIFY(HDN_ITEMCLICK, 0, &CRepositoryBrowser::OnHdnItemclickRepolist)
 END_MESSAGE_MAP()
 
-SVNUrl CRepositoryBrowser::GetURL() const
-{
-	return m_barRepository.GetCurrentUrl();
-}
-
 SVNRev CRepositoryBrowser::GetRevision() const
 {
-	return GetURL().GetRevision();
+	return m_barRepository.GetCurrentRev();
 }
 
 CString CRepositoryBrowser::GetPath() const
 {
-	return GetURL().GetPath();
+	return m_barRepository.GetCurrentUrl();
 }
 
 BOOL CRepositoryBrowser::OnInitDialog()
@@ -165,7 +160,6 @@ BOOL CRepositoryBrowser::OnInitDialog()
 
 	m_cnrRepositoryBar.SubclassDlgItem(IDC_REPOS_BAR_CNR, this);
 	m_barRepository.Create(&m_cnrRepositoryBar, 12345);
-	//m_barRepository.AssocTree(&m_treeRepository);
 
 	if (m_bStandAlone)
 	{
@@ -225,8 +219,14 @@ UINT CRepositoryBrowser::InitThread()
 
 	DialogEnableWindow(IDOK, FALSE);
 	DialogEnableWindow(IDCANCEL, FALSE);
-	m_strReposRoot = GetRepositoryRootAndUUID(CTSVNPath(m_InitialSvnUrl.GetPath()), m_sUUID);
-	m_strReposRoot = SVNUrl::Unescape(m_strReposRoot);
+	m_strReposRoot = GetRepositoryRootAndUUID(CTSVNPath(m_InitialUrl), m_sUUID);
+	CStringA urla = CUnicodeUtils::GetUTF8(m_strReposRoot);
+	char * urlabuf = new char[urla.GetLength()+1];
+	strcpy_s(urlabuf, urla.GetLength()+1, urla);
+	CPathUtils::Unescape(urlabuf);
+	m_strReposRoot = CUnicodeUtils::GetUnicode(urlabuf);
+	delete [] urlabuf;
+
 	PostMessage(WM_AFTERINIT);
 	DialogEnableWindow(IDOK, TRUE);
 	DialogEnableWindow(IDCANCEL, TRUE);
@@ -240,11 +240,13 @@ UINT CRepositoryBrowser::InitThread()
 
 LRESULT CRepositoryBrowser::OnAfterInitDialog(WPARAM /*wParam*/, LPARAM /*lParam*/)
 {
-	if (m_InitialSvnUrl.GetPath().IsEmpty())
-		m_InitialSvnUrl = m_barRepository.GetCurrentUrl();
-
-	ChangeToUrl(m_InitialSvnUrl.GetPath());
-	m_barRepository.GotoUrl(m_InitialSvnUrl);
+	if (m_InitialUrl.IsEmpty())
+	{
+		m_InitialUrl = m_barRepository.GetCurrentUrl();
+		m_initialRev = m_barRepository.GetCurrentRev();
+	}
+	ChangeToUrl(m_InitialUrl, m_initialRev);
+	m_barRepository.GotoUrl(m_InitialUrl, m_initialRev);
 	m_RepoList.ClearText();
 	m_bInitDone = TRUE;
 	return 0;
@@ -530,7 +532,7 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 	return TRUE;
 }
 
-bool CRepositoryBrowser::ChangeToUrl(const CString& url)
+bool CRepositoryBrowser::ChangeToUrl(const CString& url, const SVNRev& rev)
 {
 	CString partUrl = url;
 	HTREEITEM hItem = m_RepoTree.GetRootItem();
@@ -873,7 +875,7 @@ void CRepositoryBrowser::OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult)
 	if ((pItem)&&(pItem->kind == svn_node_dir))
 	{
 		// a doubleclick on a folder results in selecting that folder
-		ChangeToUrl(pItem->absolutepath);
+		ChangeToUrl(pItem->absolutepath, m_initialRev);
 	}
 }
 

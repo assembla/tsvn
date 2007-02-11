@@ -21,8 +21,6 @@
 #include <map>
 #include <deque>
 
-#include "SVNUrl.h"
-#include "RepositoryTree.h"
 #include "RepositoryBar.h"
 #include "StandAloneDlg.h"
 #include "ProjectProperties.h"
@@ -118,12 +116,10 @@ class CRepositoryBrowser : public CResizableStandAloneDialog, public SVN
 	DECLARE_DYNAMIC(CRepositoryBrowser)
 
 public:
-	CRepositoryBrowser(const SVNUrl& svn_url, BOOL bFile = FALSE);					///< standalone repository browser
-	CRepositoryBrowser(const SVNUrl& svn_url, CWnd* pParent, BOOL bFile = FALSE);	///< dependent repository browser
+	CRepositoryBrowser(const CString& url, const SVNRev& rev, BOOL bFile = FALSE);					///< standalone repository browser
+	CRepositoryBrowser(const CString& url, const SVNRev& rev, CWnd* pParent, BOOL bFile = FALSE);	///< dependent repository browser
 	virtual ~CRepositoryBrowser();
 
-	/// Returns the currently displayed URL and revision.
-	SVNUrl GetURL() const;
 	/// Returns the currently displayed revision only (for convenience)
 	SVNRev GetRevision() const;
 	/// Returns the currently displayed URL's path only (for convenience)
@@ -151,7 +147,7 @@ protected:
 		apr_time_t lock_expirationdate, const CString& absolutepath);
 
 	void RecursiveRemove(HTREEITEM hItem);
-	bool ChangeToUrl(const CString& url);
+	bool ChangeToUrl(const CString& url, const SVNRev& rev);
 	HTREEITEM FindUrl(const CString& fullurl, bool create = true);
 	HTREEITEM FindUrl(const CString& fullurl, const CString& url, bool create = true, HTREEITEM hItem = TVI_ROOT);
 	bool RefreshNode(const CString& url);
@@ -179,7 +175,8 @@ protected:
 
 private:
 	bool m_bStandAlone;
-	SVNUrl m_InitialSvnUrl;
+	CString m_InitialUrl;
+	SVNRev m_initialRev;
 	bool m_bThreadRunning;
 	static const UINT	m_AfterInitMessage;
 

@@ -1230,25 +1230,25 @@ svn_error_t* SVN::listReceiver(void* baton, const char* path,
 							   const svn_dirent_t *dirent, 
 							   const svn_lock_t *lock, 
 							   const char *abs_path, 
-							   apr_pool_t *pool)
+							   apr_pool_t * /*pool*/)
 {
-	svn_error_t * error = NULL;
 	SVN * svn = (SVN *)baton;
 	SVN_ERR (svn->cancel(baton));
 	svn->ReportList(CUnicodeUtils::GetUnicode(path), 
 		dirent->kind,
 		dirent->size,
-		dirent->has_props,
+		!!dirent->has_props,
 		dirent->created_rev,
 		dirent->time,
 		CUnicodeUtils::GetUnicode(dirent->last_author),
 		lock ? CUnicodeUtils::GetUnicode(lock->token) : CString(),
 		lock ? CUnicodeUtils::GetUnicode(lock->owner) : CString(),
 		lock ? CUnicodeUtils::GetUnicode(lock->comment) : CString(),
-		lock ? lock->is_dav_comment : false,
+		lock ? !!lock->is_dav_comment : false,
 		lock ? lock->creation_date : 0,
 		lock ? lock->expiration_date : 0,
 		CUnicodeUtils::GetUnicode(abs_path));
+	return NULL;
 }
 
 svn_error_t* SVN::logReceiver(void* baton, 
