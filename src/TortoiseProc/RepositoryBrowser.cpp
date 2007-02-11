@@ -160,6 +160,7 @@ BOOL CRepositoryBrowser::OnInitDialog()
 
 	m_cnrRepositoryBar.SubclassDlgItem(IDC_REPOS_BAR_CNR, this);
 	m_barRepository.Create(&m_cnrRepositoryBar, 12345);
+	m_barRepository.SetIRepo(this);
 
 	if (m_bStandAlone)
 	{
@@ -536,6 +537,14 @@ bool CRepositoryBrowser::ChangeToUrl(const CString& url, const SVNRev& rev)
 {
 	CString partUrl = url;
 	HTREEITEM hItem = m_RepoTree.GetRootItem();
+	if ((LONG(rev) != LONG(m_initialRev))||
+		(m_strReposRoot.Compare(url.Left(m_strReposRoot.GetLength()))))
+	{
+		// if the revision changed, then invalidate everything
+		RecursiveRemove(hItem);
+		m_RepoTree.DeleteAllItems();
+		hItem = m_RepoTree.GetRootItem();
+	}
 	if (hItem == NULL)
 	{
 		// the tree view is empty, just fill in the repository root

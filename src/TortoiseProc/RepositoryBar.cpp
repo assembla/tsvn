@@ -30,6 +30,7 @@ IMPLEMENT_DYNAMIC(CRepositoryBar, CReBarCtrl)
 #pragma warning(disable: 4355)	// 'this' used in base member initializer list
 
 CRepositoryBar::CRepositoryBar() : m_cbxUrl(this)
+	, m_pRepo(NULL)
 {
 }
 
@@ -145,11 +146,16 @@ void CRepositoryBar::ShowUrl(const CString& url, SVNRev rev)
 void CRepositoryBar::GotoUrl(const CString& url, SVNRev rev)
 {
 	CString new_url = url;
+	SVNRev new_rev = rev;
 
 	if (new_url.IsEmpty())
+	{
 		new_url = GetCurrentUrl();
-
-	ShowUrl(url, rev);
+		new_rev = GetCurrentRev();
+	}
+	ShowUrl(new_url, new_rev);
+	if (m_pRepo)
+		m_pRepo->ChangeToUrl(new_url, new_rev);
 }
 
 void CRepositoryBar::SetRevision(SVNRev rev)
@@ -214,6 +220,8 @@ void CRepositoryBar::OnCbnSelEndOK()
 			m_btnRevision.GetWindowText(revision);
 			m_url = path;
 			m_rev = revision;
+			if (m_pRepo)
+				m_pRepo->ChangeToUrl(m_url, m_rev);
 		}
 	}
 }
@@ -230,6 +238,7 @@ void CRepositoryBar::OnBnClicked()
 	if (dlg.DoModal() == IDOK)
 	{
 		revision = dlg.GetEnteredRevisionString();
+		m_rev = SVNRev(revision);
 		m_btnRevision.SetWindowText(SVNRev(revision).ToString());
 		GotoUrl();
 	}

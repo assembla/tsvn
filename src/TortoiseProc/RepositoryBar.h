@@ -23,6 +23,11 @@
 
 class CRepositoryTree;
 
+class IRepo
+{
+public:
+	virtual bool ChangeToUrl(const CString& url, const SVNRev& rev) = 0;
+};
 
 /**
  * \ingroup TortoiseProc
@@ -81,6 +86,8 @@ public:
 	 */
 	void SetRevision(SVNRev rev);
 
+	void SetIRepo(IRepo * pRepo) {m_pRepo = pRepo;}
+
 protected:
 	afx_msg void OnCbnSelEndOK();
 	afx_msg void OnBnClicked();
@@ -91,6 +98,8 @@ protected:
 private:
 	CString m_url;
 	SVNRev m_rev;
+
+	IRepo * m_pRepo;
 
 	class CRepositoryCombo : public CHistoryCombo 
 	{

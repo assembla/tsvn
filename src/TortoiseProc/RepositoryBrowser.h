@@ -111,7 +111,7 @@ public:
  * \ingroup TortoiseProc
  * Dialog to browse a repository.
  */
-class CRepositoryBrowser : public CResizableStandAloneDialog, public SVN
+class CRepositoryBrowser : public CResizableStandAloneDialog, public SVN, public IRepo
 {
 	DECLARE_DYNAMIC(CRepositoryBrowser)
 
@@ -124,6 +124,8 @@ public:
 	SVNRev GetRevision() const;
 	/// Returns the currently displayed URL's path only (for convenience)
 	CString GetPath() const;
+
+	bool ChangeToUrl(const CString& url, const SVNRev& rev);
 
 	enum { IDD = IDD_REPOSITORY_BROWSER };
 
@@ -147,7 +149,6 @@ protected:
 		apr_time_t lock_expirationdate, const CString& absolutepath);
 
 	void RecursiveRemove(HTREEITEM hItem);
-	bool ChangeToUrl(const CString& url, const SVNRev& rev);
 	HTREEITEM FindUrl(const CString& fullurl, bool create = true);
 	HTREEITEM FindUrl(const CString& fullurl, const CString& url, bool create = true, HTREEITEM hItem = TVI_ROOT);
 	bool RefreshNode(const CString& url);
