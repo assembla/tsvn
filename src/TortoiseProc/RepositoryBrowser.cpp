@@ -625,6 +625,7 @@ void CRepositoryBrowser::FillList(deque<CItem> * pItems)
 
 	// now fill in the data
 
+	TCHAR date_native[SVN_DATE_BUFFER];
 	int nCount = 0;
 	for (deque<CItem>::const_iterator it = pItems->begin(); it != pItems->end(); ++it)
 	{
@@ -635,12 +636,20 @@ void CRepositoryBrowser::FillList(deque<CItem> * pItems)
 			icon_idx = SYS_IMAGE_LIST().GetFileIconIndex(it->path);
 		int index = m_RepoList.InsertItem(nCount, it->path, icon_idx);
 		// extension
+		temp = CPathUtils::GetFileExtFromPath(it->path);
+		m_RepoList.SetItemText(index, 1, temp);
+		// revision
 		temp.Format(_T("%ld"), it->created_rev);
 		m_RepoList.SetItemText(index, 2, temp);
+		// author
 		m_RepoList.SetItemText(index, 3, it->author);
+		// size
 		temp.Format(_T("%ld"), it->size);
 		m_RepoList.SetItemText(index, 4, temp);
 		// date
+		SVN::formatDate(date_native, (apr_time_t&)it->time, true);
+		m_RepoList.SetItemText(index, 5, date_native);
+		// lock owner
 		m_RepoList.SetItemText(index, 6, it->lockowner);
 		m_RepoList.SetItemData(index, (DWORD_PTR)&(*it));
 	}
