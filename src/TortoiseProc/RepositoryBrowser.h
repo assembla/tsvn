@@ -157,12 +157,15 @@ protected:
 	bool RefreshNode(const CString& url);
 	bool RefreshNode(HTREEITEM hNode);
 	void FillList(deque<CItem> * pItems);
+	void SetSortArrow();
 
 	DECLARE_MESSAGE_MAP()
 
 
 	static UINT InitThreadEntry(LPVOID pVoid);
 	UINT InitThread();
+
+	static int CALLBACK ListSort(LPARAM lParam1, LPARAM lParam2, LPARAM lParam3);
 
 	bool				m_bInitDone;
 	CRepositoryBar		m_barRepository;
@@ -185,6 +188,9 @@ private:
 
 	volatile bool		m_blockEvents;
 
+	bool				m_bSortAscending;
+	int					m_nSortedColumn;
+
 	int					oldy, oldx;
 	bool				bDragMode;
 public:
@@ -197,6 +203,7 @@ public:
 	afx_msg void OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 /**

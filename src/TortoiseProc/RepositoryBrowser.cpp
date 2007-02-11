@@ -83,6 +83,8 @@ CRepositoryBrowser::CRepositoryBrowser(const SVNUrl& svn_url, BOOL bFile)
 	, m_InitialSvnUrl(svn_url)
 	, m_bInitDone(false)
 	, m_blockEvents(false)
+	, m_bSortAscending(true)
+	, m_nSortedColumn(0)
 {
 }
 
@@ -93,6 +95,8 @@ CRepositoryBrowser::CRepositoryBrowser(const SVNUrl& svn_url, CWnd* pParent, BOO
 	, m_bStandAlone(false)
 	, m_bInitDone(false)
 	, m_blockEvents(false)
+	, m_bSortAscending(true)
+	, m_nSortedColumn(0)
 {
 }
 
@@ -137,6 +141,7 @@ BEGIN_MESSAGE_MAP(CRepositoryBrowser, CResizableStandAloneDialog)
 	ON_NOTIFY(TVN_SELCHANGED, IDC_REPOTREE, &CRepositoryBrowser::OnTvnSelchangedRepotree)
 	ON_NOTIFY(TVN_ITEMEXPANDING, IDC_REPOTREE, &CRepositoryBrowser::OnTvnItemexpandingRepotree)
 	ON_NOTIFY(NM_DBLCLK, IDC_REPOLIST, &CRepositoryBrowser::OnNMDblclkRepolist)
+	ON_NOTIFY(HDN_ITEMCLICK, 0, &CRepositoryBrowser::OnHdnItemclickRepolist)
 END_MESSAGE_MAP()
 
 SVNUrl CRepositoryBrowser::GetURL() const
@@ -158,8 +163,6 @@ BOOL CRepositoryBrowser::OnInitDialog()
 {
 	CResizableStandAloneDialog::OnInitDialog();
 
-	bool bSortNumerical = !!(DWORD)CRegDWORD(_T("Software\\TortoiseSVN\\SortNumerical"), TRUE);
-	//m_treeRepository.SortNumerical(bSortNumerical);
 	m_cnrRepositoryBar.SubclassDlgItem(IDC_REPOS_BAR_CNR, this);
 	m_barRepository.Create(&m_cnrRepositoryBar, 12345);
 	//m_barRepository.AssocTree(&m_treeRepository);
@@ -654,14 +657,32 @@ void CRepositoryBrowser::FillList(deque<CItem> * pItems)
 		m_RepoList.SetItemData(index, (DWORD_PTR)&(*it));
 	}
 
+	ListView_SortItemsEx(m_RepoList, ListSort, this);
+	SetSortArrow();
+
 	for (int col = 0; col <= (((CHeaderCtrl*)(m_RepoList.GetDlgItem(0)))->GetItemCount()-1); col++)
 	{
 		m_RepoList.SetColumnWidth(col, LVSCW_AUTOSIZE_USEHEADER);
 	}
 
 	m_RepoList.SetRedraw(true);
+}
 
+void CRepositoryBrowser::SetSortArrow()
+{
+	CHeaderCtrl * pHeader = m_RepoList.GetHeaderCtrl();
+	HDITEM HeaderItem = {0};
+	HeaderItem.mask = HDI_FORMAT;
+	for (int i=0; i<pHeader->GetItemCount(); ++i)
+	{
+		pHeader->GetItem(i, &HeaderItem);
+		HeaderItem.fmt &= ~(HDF_SORTDOWN | HDF_SORTUP);
+		pHeader->SetItem(i, &HeaderItem);
+	}
 
+	pHeader->GetItem(m_nSortedColumn, &HeaderItem);
+	HeaderItem.fmt |= (m_bSortAscending ? HDF_SORTUP : HDF_SORTDOWN);
+	pHeader->SetItem(m_nSortedColumn, &HeaderItem);
 }
 
 HTREEITEM CRepositoryBrowser::FindUrl(const CString& fullurl, bool create /* = true */)
@@ -854,4 +875,78 @@ void CRepositoryBrowser::OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult)
 		// a doubleclick on a folder results in selecting that folder
 		ChangeToUrl(pItem->absolutepath);
 	}
+}
+
+void CRepositoryBrowser::OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMHEADER phdr = reinterpret_cast<LPNMHEADER>(pNMHDR);
+	// a click on a header means sorting the items
+	if (m_nSortedColumn != phdr->iItem)
+		m_bSortAscending = true;
+	else
+		m_bSortAscending = !m_bSortAscending;
+	m_nSortedColumn = phdr->iItem;
+
+	ListView_SortItemsEx(m_RepoList, ListSort, this);
+	SetSortArrow();
+
+	*pResult = 0;
+}
+
+int CRepositoryBrowser::ListSort(LPARAM lParam1, LPARAM lParam2, LPARAM lParam3)
+{
+	CRepositoryBrowser * pThis = (CRepositoryBrowser*)lParam3;
+	CItem * pItem1 = (CItem*)pThis->m_RepoList.GetItemData(lParam1);
+	CItem * pItem2 = (CItem*)pThis->m_RepoList.GetItemData(lParam2);
+	int nRet = 0;
+	switch (pThis->m_nSortedColumn)
+	{
+	case 1: // extension
+		nRet = pThis->m_RepoList.GetItemText(lParam1, 1).CompareNoCase(pThis->m_RepoList.GetItemText(lParam2, 1));
+		if (nRet != 0)
+			break;
+		// fall through
+	case 2: // revision number
+		nRet = pItem1->created_rev - pItem2->created_rev;
+		if (nRet != 0)
+			break;
+		// fall through
+	case 3: // author
+		nRet = pItem1->author.CompareNoCase(pItem2->author);
+		if (nRet != 0)
+			break;
+		// fall through
+	case 4: // size
+		nRet = int(pItem1->size - pItem2->size);
+		if (nRet != 0)
+			break;
+		// fall through
+	case 5: // date
+		nRet = int(pItem1->time - pItem2->time);
+		if (nRet != 0)
+			break;
+		// fall through
+	case 6: // lock owner
+		nRet = pItem1->lockowner.CompareNoCase(pItem2->lockowner);
+		if (nRet != 0)
+			break;
+		// fall through
+	case 0:	// filename
+		nRet = CStringUtils::CompareNumerical(pItem1->path, pItem2->path);
+		break;
+	}
+
+	if (!pThis->m_bSortAscending)
+		nRet = -nRet;
+
+	// we want folders on top, then the files
+	if (pItem1->kind != pItem2->kind)
+	{
+		if (pItem1->kind == svn_node_dir)
+			nRet = -1;
+		else
+			nRet = 1;
+	}
+
+	return nRet;
 }
