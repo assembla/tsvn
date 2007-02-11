@@ -797,10 +797,12 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
 {
 	CWaitCursorEx wait;
 	CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
+	HTREEITEM hSel1 = m_RepoTree.GetSelectedItem();
 	if (m_RepoTree.ItemHasChildren(hNode))
 	{
 		HTREEITEM hChild = m_RepoTree.GetChildItem(hNode);
 		HTREEITEM hNext;
+		m_blockEvents = true;
 		while (hChild)
 		{
 			hNext = m_RepoTree.GetNextItem(hChild, TVGN_NEXT);
@@ -808,6 +810,7 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
 			m_RepoTree.DeleteItem(hChild);
 			hChild = hNext;
 		}
+		m_blockEvents = false;
 	}
 	pTreeItem->children.clear();
 	pTreeItem->has_child_folders = false;
@@ -826,6 +829,10 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
 		tvitem.mask = TVIF_CHILDREN;
 		tvitem.cChildren = 0;
 		m_RepoTree.SetItem(&tvitem);
+	}
+	if (hSel1 != m_RepoTree.GetSelectedItem())
+	{
+		FillList(&pTreeItem->children);
 	}
 	return true;
 }
