@@ -743,6 +743,7 @@ HTREEITEM CRepositoryBrowser::FindUrl(const CString& fullurl, const CString& url
 	hNewItem = m_RepoTree.InsertItem(&tvinsert);
 	sTemp.ReleaseBuffer();
 	ATLTRACE("created tree entry %ws, url %ws\n", sTemp, pTreeItem->url);
+	m_RepoTree.SortChildren(hNewItem);
 	return hNewItem;
 }
 
