@@ -92,7 +92,7 @@ public:
 	bool				is_dav_comment;
 	apr_time_t			lock_creationdate;
 	apr_time_t			lock_expirationdate;
-	CString				absolutepath;
+	CString				absolutepath;			///< unescaped url stripped of repository root
 };
 
 class CTreeItem
@@ -101,7 +101,7 @@ public:
 	CTreeItem() : children_fetched(false), has_child_folders(true) {}
 
 	CString			unescapedname;
-	CString			url;
+	CString			url;						///< unescaped url
 	bool			children_fetched;			///< whether the contents of the folder are known/fetched or not
 	deque<CItem>	children;
 	bool			has_child_folders;
@@ -202,6 +202,7 @@ public:
 	afx_msg void OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 /**

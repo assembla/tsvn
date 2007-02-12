@@ -142,6 +142,7 @@ BEGIN_MESSAGE_MAP(CRepositoryBrowser, CResizableStandAloneDialog)
 	ON_NOTIFY(TVN_ITEMEXPANDING, IDC_REPOTREE, &CRepositoryBrowser::OnTvnItemexpandingRepotree)
 	ON_NOTIFY(NM_DBLCLK, IDC_REPOLIST, &CRepositoryBrowser::OnNMDblclkRepolist)
 	ON_NOTIFY(HDN_ITEMCLICK, 0, &CRepositoryBrowser::OnHdnItemclickRepolist)
+	ON_NOTIFY(LVN_ITEMCHANGED, IDC_REPOLIST, &CRepositoryBrowser::OnLvnItemchangedRepolist)
 END_MESSAGE_MAP()
 
 SVNRev CRepositoryBrowser::GetRevision() const
@@ -856,6 +857,7 @@ void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult
 		}
 
 		FillList(&pTreeItem->children);
+		m_barRepository.ShowUrl(pTreeItem->url, GetRevision());
 	}
 }
 
@@ -967,4 +969,21 @@ int CRepositoryBrowser::ListSort(LPARAM lParam1, LPARAM lParam2, LPARAM lParam3)
 	}
 
 	return nRet;
+}
+
+void CRepositoryBrowser::OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	*pResult = 0;
+	if (m_blockEvents)
+		return;
+	if (pNMLV->uChanged & LVIF_STATE)
+	{
+		if (pNMLV->uNewState & LVIS_SELECTED)
+		{
+			CItem * pItem = (CItem*)m_RepoList.GetItemData(pNMLV->iItem);
+			if (pItem)
+				m_barRepository.ShowUrl(pItem->absolutepath, GetRevision());
+		}
+	}
 }
