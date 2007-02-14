@@ -31,11 +31,13 @@ public:
 	CTreeDropTarget(CRepositoryBrowser * pRepoBrowser);
 	
 	virtual bool OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEffect);
+	virtual HRESULT STDMETHODCALLTYPE DragEnter(IDataObject __RPC_FAR *pDataObj, DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR *pdwEffect);
 	virtual HRESULT STDMETHODCALLTYPE DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR *pdwEffect);
 	virtual HRESULT STDMETHODCALLTYPE DragLeave(void);
 
 private:
 	CRepositoryBrowser * m_pRepoBrowser;
+	bool m_bFiles;
 };
 
 class CListDropTarget : public CIDropTarget
@@ -44,9 +46,11 @@ public:
 	CListDropTarget(CRepositoryBrowser * pRepoBrowser);
 
 	virtual bool OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEffect);
+	virtual HRESULT STDMETHODCALLTYPE DragEnter(IDataObject __RPC_FAR *pDataObj, DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR *pdwEffect);
 	virtual HRESULT STDMETHODCALLTYPE DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR *pdwEffect);
 	virtual HRESULT STDMETHODCALLTYPE DragLeave(void);
 
 private:
 	CRepositoryBrowser * m_pRepoBrowser;
+	bool m_bFiles;
 };

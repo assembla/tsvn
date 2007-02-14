@@ -5,6 +5,7 @@
 
 CTreeDropTarget::CTreeDropTarget(CRepositoryBrowser * pRepoBrowser) : CIDropTarget(pRepoBrowser->m_RepoTree.GetSafeHwnd())
 	, m_pRepoBrowser(pRepoBrowser)
+	, m_bFiles(false)
 {
 }
 
@@ -22,7 +23,7 @@ bool CTreeDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEf
 		urls.Replace(_T("\r\n"), _T("*"));
 		CTSVNPathList urlList;
 		urlList.LoadFromAsteriskSeparatedString(urls);
-		m_pRepoBrowser->OnDrop(urlList);
+		m_pRepoBrowser->OnDrop(urlList, *pdwEffect);
 	}
 
 	if(pFmtEtc->cfFormat == CF_HDROP && medium.tymed == TYMED_HGLOBAL)
@@ -39,12 +40,26 @@ bool CTreeDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEf
 				DragQueryFile(hDrop, i, szFileName, sizeof(szFileName));
 				urlList.AddPath(CTSVNPath(szFileName));
 			}
-			m_pRepoBrowser->OnDrop(urlList);
+			m_pRepoBrowser->OnDrop(urlList, *pdwEffect);
 		}
 		GlobalUnlock(medium.hGlobal);
 	}
 	TreeView_SelectDropTarget(m_hTargetWnd, NULL);
 	return true;
+}
+
+HRESULT CTreeDropTarget::DragEnter(IDataObject __RPC_FAR *pDataObj, DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR *pdwEffect)
+{
+	FORMATETC ftetc={0}; 
+	ftetc.dwAspect = DVASPECT_CONTENT; 
+	ftetc.lindex = -1; 
+	ftetc.tymed = TYMED_HGLOBAL; 
+	ftetc.cfFormat=CF_HDROP; 
+	if (pDataObj->QueryGetData(&ftetc) == S_OK)
+		m_bFiles = true;
+	else
+		m_bFiles = false;
+	return CIDropTarget::DragEnter(pDataObj, grfKeyState, pt, pdwEffect);
 }
 
 HRESULT CTreeDropTarget::DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR *pdwEffect)
@@ -56,6 +71,8 @@ HRESULT CTreeDropTarget::DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR 
 	HTREEITEM hItem = TreeView_HitTest(m_hTargetWnd,&hit);
 	if (hItem != NULL)
 	{
+		if (m_bFiles)
+			*pdwEffect = DROPEFFECT_COPY;
 		TreeView_SelectDropTarget(m_hTargetWnd, hItem);
 	}
 	else
@@ -74,6 +91,7 @@ HRESULT CTreeDropTarget::DragLeave(void)
 
 CListDropTarget::CListDropTarget(CRepositoryBrowser * pRepoBrowser):CIDropTarget(pRepoBrowser->m_RepoList.GetSafeHwnd())
 	, m_pRepoBrowser(pRepoBrowser)
+	, m_bFiles(false)
 {
 }	
 
@@ -91,7 +109,7 @@ bool CListDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEf
 		urls.Replace(_T("\r\n"), _T("*"));
 		CTSVNPathList urlList;
 		urlList.LoadFromAsteriskSeparatedString(urls);
-		m_pRepoBrowser->OnDrop(urlList);
+		m_pRepoBrowser->OnDrop(urlList, *pdwEffect);
 	}
 
 	if(pFmtEtc->cfFormat == CF_HDROP && medium.tymed == TYMED_HGLOBAL)
@@ -108,13 +126,32 @@ bool CListDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEf
 				DragQueryFile(hDrop, i, szFileName, sizeof(szFileName));
 				urlList.AddPath(CTSVNPath(szFileName));
 			}
-			m_pRepoBrowser->OnDrop(urlList);
+			m_pRepoBrowser->OnDrop(urlList, *pdwEffect);
 		}
 		GlobalUnlock(medium.hGlobal);
 	}
 	ListView_SetItemState(m_hTargetWnd, -1, 0, LVIS_DROPHILITED);
 	return true; //let base free the medium
 }
+
+HRESULT CListDropTarget::DragEnter(IDataObject __RPC_FAR *pDataObj, DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR *pdwEffect)
+{
+	FORMATETC ftetc={0}; 
+	ftetc.dwAspect = DVASPECT_CONTENT; 
+	ftetc.lindex = -1; 
+	ftetc.tymed = TYMED_HGLOBAL; 
+	ftetc.cfFormat=CF_HDROP; 
+	if (pDataObj->QueryGetData(&ftetc) == S_OK)
+	{
+		m_bFiles = true;
+	}
+	else
+	{
+		m_bFiles = false;
+	}
+	return CIDropTarget::DragEnter(pDataObj, grfKeyState, pt, pdwEffect);
+}
+
 
 HRESULT CListDropTarget::DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR *pdwEffect)
 {
@@ -123,6 +160,9 @@ HRESULT CListDropTarget::DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR 
 	ScreenToClient(m_hTargetWnd,&hit.pt);
 	hit.flags = LVHT_ONITEM;
 	int iItem = ListView_HitTest(m_hTargetWnd,&hit);
+
+	if (grfKeyState & MK_SHIFT)
+		*pdwEffect = DROPEFFECT_MOVE;
 
 	if (iItem >= 0)
 	{
@@ -136,10 +176,16 @@ HRESULT CListDropTarget::DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR 
 			}
 			else
 			{
+				if (m_bFiles)
+					*pdwEffect = DROPEFFECT_COPY;
 				ListView_SetItemState(m_hTargetWnd, -1, 0, LVIS_DROPHILITED);
 				ListView_SetItemState(m_hTargetWnd, iItem, LVIS_DROPHILITED, LVIS_DROPHILITED);
 			}
 		}
+	}
+	else
+	{
+		ListView_SetItemState(m_hTargetWnd, -1, 0, LVIS_DROPHILITED);
 	}
 	return CIDropTarget::DragOver(grfKeyState, pt, pdwEffect);
 }
