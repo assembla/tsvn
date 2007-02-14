@@ -160,7 +160,8 @@ protected:
 	bool RefreshNode(HTREEITEM hNode);
 	void FillList(deque<CItem> * pItems);
 	void SetSortArrow();
-	bool OnDrop(const CTSVNPathList& pathlist);
+	void OnBeginDrag(NMHDR *pNMHDR);
+	bool OnDrop(const CTSVNPathList& pathlist, DWORD dwEffect);
 
 	DECLARE_MESSAGE_MAP()
 
@@ -197,6 +198,7 @@ private:
 
 	CTreeDropTarget *	m_pTreeDropTarget;
 	CListDropTarget *	m_pListDropTarget;
+	bool				m_bRightDrag;
 
 	int					oldy, oldx;
 	bool				bDragMode;
@@ -213,6 +215,7 @@ public:
 	afx_msg void OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnBeginrdragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 /**

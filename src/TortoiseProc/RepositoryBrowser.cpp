@@ -149,6 +149,7 @@ BEGIN_MESSAGE_MAP(CRepositoryBrowser, CResizableStandAloneDialog)
 	ON_NOTIFY(HDN_ITEMCLICK, 0, &CRepositoryBrowser::OnHdnItemclickRepolist)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_REPOLIST, &CRepositoryBrowser::OnLvnItemchangedRepolist)
 	ON_NOTIFY(LVN_BEGINDRAG, IDC_REPOLIST, &CRepositoryBrowser::OnLvnBegindragRepolist)
+	ON_NOTIFY(LVN_BEGINRDRAG, IDC_REPOLIST, &CRepositoryBrowser::OnLvnBeginrdragRepolist)
 END_MESSAGE_MAP()
 
 SVNRev CRepositoryBrowser::GetRevision() const
@@ -1020,10 +1021,23 @@ void CRepositoryBrowser::OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResul
 	}
 }
 
+void CRepositoryBrowser::OnLvnBeginrdragRepolist(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	m_bRightDrag = true;
+	*pResult = 0;
+	OnBeginDrag(pNMHDR);
+}
+
 void CRepositoryBrowser::OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	m_bRightDrag = false;
 	*pResult = 0;
+	OnBeginDrag(pNMHDR);
+}
+
+void CRepositoryBrowser::OnBeginDrag(NMHDR *pNMHDR)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
 
 	CIDropSource* pdsrc = new CIDropSource;
 	if (pdsrc == NULL)
@@ -1071,12 +1085,12 @@ void CRepositoryBrowser::OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult)
 	dragsrchelper.InitializeFromWindow(m_RepoList.GetSafeHwnd(), pNMLV->ptAction, pdobj);
 	// Initiate the Drag & Drop
 	DWORD dwEffect;
-	::DoDragDrop(pdobj, pdsrc, DROPEFFECT_COPY, &dwEffect);
+	::DoDragDrop(pdobj, pdsrc, DROPEFFECT_MOVE|DROPEFFECT_COPY, &dwEffect);
 	pdsrc->Release();
 	pdobj->Release();
 }
 
-bool CRepositoryBrowser::OnDrop(const CTSVNPathList& pathlist)
+bool CRepositoryBrowser::OnDrop(const CTSVNPathList& pathlist, DWORD dwEffect)
 {
 	for (int i=0; i<pathlist.GetCount(); ++i)
 	{
