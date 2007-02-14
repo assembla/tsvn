@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - Stefan Kueng
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,11 +21,12 @@
 #include <map>
 #include <deque>
 
+#include "resource.h"
+#include "TSVNPath.h"
 #include "RepositoryBar.h"
 #include "StandAloneDlg.h"
 #include "ProjectProperties.h"
 #include "LogDlg.h"
-#include "TSVNPath.h"
 #include "HintListCtrl.h"
 
 #define REPOBROWSER_CTRL_MIN_WIDTH 20
@@ -33,6 +34,8 @@
 using namespace std;
 
 class CInputLogDlg;
+class CTreeDropTarget;
+class CListDropTarget;
 
 class CItem
 {
@@ -107,6 +110,7 @@ public:
 	bool			has_child_folders;
 };
 
+
 /**
  * \ingroup TortoiseProc
  * Dialog to browse a repository.
@@ -114,7 +118,8 @@ public:
 class CRepositoryBrowser : public CResizableStandAloneDialog, public SVN, public IRepo
 {
 	DECLARE_DYNAMIC(CRepositoryBrowser)
-
+friend class CTreeDropTarget;
+friend class CListDropTarget;
 public:
 	CRepositoryBrowser(const CString& url, const SVNRev& rev, BOOL bFile = FALSE);					///< standalone repository browser
 	CRepositoryBrowser(const CString& url, const SVNRev& rev, CWnd* pParent, BOOL bFile = FALSE);	///< dependent repository browser
@@ -155,6 +160,7 @@ protected:
 	bool RefreshNode(HTREEITEM hNode);
 	void FillList(deque<CItem> * pItems);
 	void SetSortArrow();
+	bool OnDrop(const CTSVNPathList& pathlist);
 
 	DECLARE_MESSAGE_MAP()
 
@@ -189,6 +195,9 @@ private:
 	bool				m_bSortAscending;
 	int					m_nSortedColumn;
 
+	CTreeDropTarget *	m_pTreeDropTarget;
+	CListDropTarget *	m_pListDropTarget;
+
 	int					oldy, oldx;
 	bool				bDragMode;
 public:
@@ -203,6 +212,7 @@ public:
 	afx_msg void OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 /**

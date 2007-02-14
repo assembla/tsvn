@@ -41,6 +41,7 @@
 #include "BrowseFolder.h"
 #include "SVNDiff.h"
 #include "SysImageList.h"
+#include "RepoDrags.h"
 
 
 enum RepoBrowserContextMenuCommands
@@ -84,6 +85,8 @@ CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, BO
 	, m_blockEvents(false)
 	, m_bSortAscending(true)
 	, m_nSortedColumn(0)
+	, m_pTreeDropTarget(NULL)
+	, m_pListDropTarget(NULL)
 {
 }
 
@@ -97,6 +100,8 @@ CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, CW
 	, m_blockEvents(false)
 	, m_bSortAscending(true)
 	, m_nSortedColumn(0)
+	, m_pTreeDropTarget(NULL)
+	, m_pListDropTarget(NULL)
 {
 }
 
@@ -143,6 +148,7 @@ BEGIN_MESSAGE_MAP(CRepositoryBrowser, CResizableStandAloneDialog)
 	ON_NOTIFY(NM_DBLCLK, IDC_REPOLIST, &CRepositoryBrowser::OnNMDblclkRepolist)
 	ON_NOTIFY(HDN_ITEMCLICK, 0, &CRepositoryBrowser::OnHdnItemclickRepolist)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_REPOLIST, &CRepositoryBrowser::OnLvnItemchangedRepolist)
+	ON_NOTIFY(LVN_BEGINDRAG, IDC_REPOLIST, &CRepositoryBrowser::OnLvnBegindragRepolist)
 END_MESSAGE_MAP()
 
 SVNRev CRepositoryBrowser::GetRevision() const
@@ -162,6 +168,26 @@ BOOL CRepositoryBrowser::OnInitDialog()
 	m_cnrRepositoryBar.SubclassDlgItem(IDC_REPOS_BAR_CNR, this);
 	m_barRepository.Create(&m_cnrRepositoryBar, 12345);
 	m_barRepository.SetIRepo(this);
+
+	m_pTreeDropTarget = new CTreeDropTarget(this);
+	RegisterDragDrop(m_RepoTree.GetSafeHwnd(), m_pTreeDropTarget);
+	// create the supported formats:
+	FORMATETC ftetc={0}; 
+	ftetc.cfFormat = CF_TEXT; 
+	ftetc.dwAspect = DVASPECT_CONTENT; 
+	ftetc.lindex = -1; 
+	ftetc.tymed = TYMED_HGLOBAL; 
+	m_pTreeDropTarget->AddSuportedFormat(ftetc); 
+	ftetc.cfFormat=CF_HDROP; 
+	m_pTreeDropTarget->AddSuportedFormat(ftetc);
+
+	m_pListDropTarget = new CListDropTarget(this);
+	RegisterDragDrop(m_RepoList.GetSafeHwnd(), m_pListDropTarget);
+	// create the supported formats:
+	ftetc.cfFormat = CF_TEXT; 
+	m_pListDropTarget->AddSuportedFormat(ftetc); 
+	ftetc.cfFormat=CF_HDROP; 
+	m_pListDropTarget->AddSuportedFormat(ftetc);
 
 	if (m_bStandAlone)
 	{
@@ -256,6 +282,9 @@ LRESULT CRepositoryBrowser::OnAfterInitDialog(WPARAM /*wParam*/, LPARAM /*lParam
 
 void CRepositoryBrowser::OnOK()
 {
+	RevokeDragDrop(m_RepoList.GetSafeHwnd());
+	RevokeDragDrop(m_RepoTree.GetSafeHwnd());
+
 	HTREEITEM hItem = m_RepoTree.GetRootItem();
 	RecursiveRemove(hItem);
 
@@ -782,6 +811,9 @@ HTREEITEM CRepositoryBrowser::FindUrl(const CString& fullurl, const CString& url
 
 void CRepositoryBrowser::OnCancel()
 {
+	RevokeDragDrop(m_RepoList.GetSafeHwnd());
+	RevokeDragDrop(m_RepoTree.GetSafeHwnd());
+
 	HTREEITEM hItem = m_RepoTree.GetRootItem();
 	RecursiveRemove(hItem);
 
@@ -986,4 +1018,68 @@ void CRepositoryBrowser::OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResul
 				m_barRepository.ShowUrl(pItem->absolutepath, GetRevision());
 		}
 	}
+}
+
+void CRepositoryBrowser::OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	*pResult = 0;
+
+	CIDropSource* pdsrc = new CIDropSource;
+	if (pdsrc == NULL)
+		return;
+	pdsrc->AddRef();
+	CIDataObject* pdobj = new CIDataObject(pdsrc);
+	if (pdobj == NULL)
+		return;
+	pdobj->AddRef();
+
+	// Init the supported format
+	FORMATETC fmtetc = {0}; 
+	fmtetc.cfFormat = CF_UNICODETEXT; 
+	fmtetc.dwAspect = DVASPECT_CONTENT; 
+	fmtetc.lindex = -1; 
+	fmtetc.tymed = TYMED_HGLOBAL;
+	// Init the medium used
+	STGMEDIUM medium = {0};
+	medium.tymed = TYMED_HGLOBAL;
+
+	CString urls;
+
+	POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+	int index = -1;
+	while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
+	{
+		CItem * pItem = (CItem *)m_RepoList.GetItemData(index);
+		urls += pItem->absolutepath + _T("\r\n");
+	}
+
+	medium.hGlobal = GlobalAlloc(GHND, (urls.GetLength()+1)*sizeof(TCHAR));
+	if (medium.hGlobal)
+	{
+		TCHAR* pMem = (TCHAR*)GlobalLock(medium.hGlobal);
+		_tcscpy_s(pMem, urls.GetLength()+1, (LPCTSTR)urls);
+		GlobalUnlock(medium.hGlobal);
+
+		pdobj->SetData(&fmtetc, &medium, TRUE);
+	}
+
+	m_pListDropTarget->AddSuportedFormat(fmtetc);
+	m_pTreeDropTarget->AddSuportedFormat(fmtetc);
+
+	CDragSourceHelper dragsrchelper;
+	dragsrchelper.InitializeFromWindow(m_RepoList.GetSafeHwnd(), pNMLV->ptAction, pdobj);
+	// Initiate the Drag & Drop
+	DWORD dwEffect;
+	::DoDragDrop(pdobj, pdsrc, DROPEFFECT_COPY, &dwEffect);
+	pdsrc->Release();
+	pdobj->Release();
+}
+
+bool CRepositoryBrowser::OnDrop(const CTSVNPathList& pathlist)
+{
+	for (int i=0; i<pathlist.GetCount(); ++i)
+	{
+	}
+	return true;
 }
