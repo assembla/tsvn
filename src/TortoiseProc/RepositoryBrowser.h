@@ -161,7 +161,7 @@ protected:
 	void FillList(deque<CItem> * pItems);
 	void SetSortArrow();
 	void OnBeginDrag(NMHDR *pNMHDR);
-	bool OnDrop(const CTSVNPathList& pathlist, DWORD dwEffect);
+	bool OnDrop(const CTSVNPath& target, const CTSVNPathList& pathlist, DWORD dwEffect);
 
 	DECLARE_MESSAGE_MAP()
 

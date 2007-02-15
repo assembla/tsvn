@@ -11,6 +11,13 @@ CTreeDropTarget::CTreeDropTarget(CRepositoryBrowser * pRepoBrowser) : CIDropTarg
 
 bool CTreeDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEffect)
 {
+	// find the target
+	CString targetUrl;
+	HTREEITEM hDropTarget = m_pRepoBrowser->m_RepoTree.GetNextItem(TVI_ROOT, TVGN_DROPHILITE);
+	if (hDropTarget)
+	{
+		targetUrl = ((CTreeItem*)m_pRepoBrowser->m_RepoTree.GetItemData(hDropTarget))->url;
+	}
 	if (pFmtEtc->cfFormat == CF_UNICODETEXT && medium.tymed == TYMED_HGLOBAL)
 	{
 		TCHAR* pStr = (TCHAR*)GlobalLock(medium.hGlobal);
@@ -23,7 +30,8 @@ bool CTreeDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEf
 		urls.Replace(_T("\r\n"), _T("*"));
 		CTSVNPathList urlList;
 		urlList.LoadFromAsteriskSeparatedString(urls);
-		m_pRepoBrowser->OnDrop(urlList, *pdwEffect);
+
+		m_pRepoBrowser->OnDrop(CTSVNPath(targetUrl), urlList, *pdwEffect);
 	}
 
 	if(pFmtEtc->cfFormat == CF_HDROP && medium.tymed == TYMED_HGLOBAL)
@@ -40,7 +48,7 @@ bool CTreeDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEf
 				DragQueryFile(hDrop, i, szFileName, sizeof(szFileName));
 				urlList.AddPath(CTSVNPath(szFileName));
 			}
-			m_pRepoBrowser->OnDrop(urlList, *pdwEffect);
+			m_pRepoBrowser->OnDrop(CTSVNPath(targetUrl), urlList, *pdwEffect);
 		}
 		GlobalUnlock(medium.hGlobal);
 	}
@@ -97,6 +105,21 @@ CListDropTarget::CListDropTarget(CRepositoryBrowser * pRepoBrowser):CIDropTarget
 
 bool CListDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEffect)
 {
+	// find the target url
+	CString targetUrl;
+	int targetIndex = m_pRepoBrowser->m_RepoList.GetNextItem(-1, LVNI_DROPHILITED);
+	if (targetIndex >= 0)
+	{
+		targetUrl = ((CItem*)m_pRepoBrowser->m_RepoList.GetItemData(targetIndex))->absolutepath;
+	}
+	else
+	{
+		HTREEITEM hDropTarget = m_pRepoBrowser->m_RepoTree.GetSelectedItem();
+		if (hDropTarget)
+		{
+			targetUrl = ((CTreeItem*)m_pRepoBrowser->m_RepoTree.GetItemData(hDropTarget))->url;
+		}
+	}
 	if(pFmtEtc->cfFormat == CF_UNICODETEXT && medium.tymed == TYMED_HGLOBAL)
 	{
 		TCHAR* pStr = (TCHAR*)GlobalLock(medium.hGlobal);
@@ -109,7 +132,7 @@ bool CListDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEf
 		urls.Replace(_T("\r\n"), _T("*"));
 		CTSVNPathList urlList;
 		urlList.LoadFromAsteriskSeparatedString(urls);
-		m_pRepoBrowser->OnDrop(urlList, *pdwEffect);
+		m_pRepoBrowser->OnDrop(CTSVNPath(targetUrl), urlList, *pdwEffect);
 	}
 
 	if(pFmtEtc->cfFormat == CF_HDROP && medium.tymed == TYMED_HGLOBAL)
@@ -126,7 +149,7 @@ bool CListDropTarget::OnDrop(FORMATETC* pFmtEtc, STGMEDIUM& medium, DWORD *pdwEf
 				DragQueryFile(hDrop, i, szFileName, sizeof(szFileName));
 				urlList.AddPath(CTSVNPath(szFileName));
 			}
-			m_pRepoBrowser->OnDrop(urlList, *pdwEffect);
+			m_pRepoBrowser->OnDrop(CTSVNPath(targetUrl), urlList, *pdwEffect);
 		}
 		GlobalUnlock(medium.hGlobal);
 	}

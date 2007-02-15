@@ -1090,10 +1090,10 @@ void CRepositoryBrowser::OnBeginDrag(NMHDR *pNMHDR)
 	pdobj->Release();
 }
 
-bool CRepositoryBrowser::OnDrop(const CTSVNPathList& pathlist, DWORD dwEffect)
+bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pathlist, DWORD dwEffect)
 {
-	for (int i=0; i<pathlist.GetCount(); ++i)
-	{
-	}
+	ATLTRACE("dropped %ld items on %ws, dwEffect is %ld\n", pathlist.GetCount(), (LPCTSTR)target.GetSVNPathString(), dwEffect);
+
+
 	return true;
 }
