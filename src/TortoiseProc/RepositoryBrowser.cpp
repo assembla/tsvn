@@ -821,13 +821,13 @@ void CRepositoryBrowser::OnCancel()
 	__super::OnCancel();
 }
 
-bool CRepositoryBrowser::RefreshNode(const CString& url)
+bool CRepositoryBrowser::RefreshNode(const CString& url, bool force /* = false*/)
 {
 	HTREEITEM hNode = FindUrl(url);
-	return RefreshNode(hNode);
+	return RefreshNode(hNode, force);
 }
 
-bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
+bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
 {
 	CWaitCursorEx wait;
 	CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
@@ -864,7 +864,7 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
 		tvitem.cChildren = 0;
 		m_RepoTree.SetItem(&tvitem);
 	}
-	if (hSel1 != m_RepoTree.GetSelectedItem())
+	if ((force)||(hSel1 != m_RepoTree.GetSelectedItem()))
 	{
 		FillList(&pTreeItem->children);
 	}
@@ -1093,7 +1093,125 @@ void CRepositoryBrowser::OnBeginDrag(NMHDR *pNMHDR)
 bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pathlist, DWORD dwEffect)
 {
 	ATLTRACE("dropped %ld items on %ws, dwEffect is %ld\n", pathlist.GetCount(), (LPCTSTR)target.GetSVNPathString(), dwEffect);
+	if (pathlist.GetCount() == 0)
+		return false;
 
+	// check the first item in the pathlist:
+	// if it's an url, we do a copy or move operation
+	// if it's a local path, we do an import
+	if (PathIsURL(pathlist[0].GetSVNPathString()))
+	{
+		// drag-n-drop inside the repobrowser
+		CInputLogDlg input(this);
+		input.SetProjectProperties(&m_ProjectProperties);
+		CString sHint;
+		if (pathlist.GetCount() == 1)
+		{
+			if (dwEffect == DROPEFFECT_COPY)
+				sHint.Format(IDS_INPUT_COPY, (LPCTSTR)pathlist[0].GetSVNPathString(), (LPCTSTR)(target.GetSVNPathString()+_T("/")+pathlist[0].GetFileOrDirectoryName()));
+			else
+				sHint.Format(IDS_INPUT_MOVE, (LPCTSTR)pathlist[0].GetSVNPathString(), (LPCTSTR)(target.GetSVNPathString()+_T("/")+pathlist[0].GetFileOrDirectoryName()));
+		}
+		else
+		{
+			if (dwEffect == DROPEFFECT_COPY)
+				sHint.Format(IDS_INPUT_COPYMORE, pathlist.GetCount(), (LPCTSTR)target.GetSVNPathString());
+			else
+				sHint.Format(IDS_INPUT_MOVEMORE, pathlist.GetCount(), (LPCTSTR)target.GetSVNPathString());
+		}
+		input.SetActionText(sHint);
+		if (input.DoModal() == IDOK)
+		{
+			CWaitCursorEx wait_cursor;
+			BOOL bRet = FALSE;
+			if (dwEffect == DROPEFFECT_COPY)
+				bRet = Copy(pathlist, target, GetRevision(), GetRevision(), input.GetLogMessage(), true);
+			else
+				bRet = Move(pathlist, target, TRUE, input.GetLogMessage(), true);
+			if (!bRet)
+			{
+				wait_cursor.Hide();
+				CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
+			}
+			else if (GetRevision().IsHead())
+			{
+				// if the copy/move operation was to the currently shown url,
+				// update the current view. Otherwise mark the target URL as 'not fetched'.
+				HTREEITEM hSelected = m_RepoTree.GetSelectedItem();
+				if (hSelected)
+				{
+					CTreeItem * pItem = (CTreeItem*)m_RepoTree.GetItemData(hSelected);
+					if (pItem)
+					{
+						// mark the target as 'dirty'
+						pItem->children_fetched = false;
+						if ((dwEffect == DROPEFFECT_MOVE)||(pItem->url.Compare(target.GetSVNPathString())==0))
+						{
+							// Refresh the current view
+							RefreshNode(hSelected, true);
+						}
+					}
+				}
+			}
+		}
+	}
+	else
+	{
+		// import files dragged onto us
+		if (pathlist.GetCount() > 1)
+		{
+			if (CMessageBox::Show(m_hWnd, IDS_REPOBROWSE_MULTIIMPORT, IDS_APPNAME, MB_YESNO | MB_ICONQUESTION)!=IDYES)
+				return false;
+		}
 
+		CInputLogDlg input(this);
+		input.SetProjectProperties(&m_ProjectProperties);
+		input.SetUUID(m_sUUID);
+		CString sHint;
+		if (pathlist.GetCount() == 1)
+			sHint.Format(IDS_INPUT_IMPORTFILEFULL, pathlist[0].GetWinPath(), (LPCTSTR)(target.GetSVNPathString() + _T("/") + pathlist[0].GetFileOrDirectoryName()));
+		else
+			sHint.Format(IDS_INPUT_IMPORTFILES, pathlist.GetCount());
+		input.SetActionText(sHint);
+
+		if (input.DoModal() == IDOK)
+		{
+			for (int importindex = 0; importindex<pathlist.GetCount(); ++importindex)
+			{
+				CString filename = pathlist[importindex].GetFileOrDirectoryName();
+				if (!Import(pathlist[importindex], 
+					CTSVNPath(target.GetSVNPathString()+_T("/")+filename), 
+					input.GetLogMessage(), TRUE, TRUE))
+				{
+					CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
+					return false;
+				}
+			}
+			if (GetRevision().IsHead())
+			{
+				// if the import operation was to the currently shown url,
+				// update the current view. Otherwise mark the target URL as 'not fetched'.
+				HTREEITEM hSelected = m_RepoTree.GetSelectedItem();
+				if (hSelected)
+				{
+					CTreeItem * pItem = (CTreeItem*)m_RepoTree.GetItemData(hSelected);
+					if (pItem)
+					{
+						if (pItem->url.Compare(target.GetSVNPathString())==0)
+						{
+							// Refresh the current view
+							RefreshNode(hSelected, true);
+						}
+						else
+						{
+							// only mark the target as 'dirty'
+							pItem->children_fetched = false;
+						}
+					}
+				}
+			}
+		}
+
+	}
 	return true;
 }
