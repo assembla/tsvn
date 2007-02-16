@@ -1096,6 +1096,31 @@ bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pa
 	if (pathlist.GetCount() == 0)
 		return false;
 
+	if (m_bRightDrag)
+	{
+		// right dragging means we have to show a context menu
+		POINT pt;
+		GetCursorPos(&pt);
+		CMenu popup;
+		if (popup.CreatePopupMenu())
+		{
+			CString temp(MAKEINTRESOURCE(IDS_REPOBROWSE_COPYDROP));
+			popup.AppendMenu(MF_STRING | MF_ENABLED, 1, temp);
+			temp.LoadString(IDS_REPOBROWSE_MOVEDROP);
+			popup.AppendMenu(MF_STRING | MF_ENABLED, 2, temp);
+			int cmd = popup.TrackPopupMenu(TPM_RETURNCMD | TPM_LEFTALIGN | TPM_NONOTIFY, pt.x, pt.y, this, 0);
+			switch (cmd)
+			{
+			case 1: // copy drop
+				dwEffect = DROPEFFECT_COPY;
+				break;
+			case 2: // move drop
+				dwEffect = DROPEFFECT_MOVE;
+				break;
+			}
+		}
+
+	}
 	// check the first item in the pathlist:
 	// if it's an url, we do a copy or move operation
 	// if it's a local path, we do an import
