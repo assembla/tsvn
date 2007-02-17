@@ -156,8 +156,8 @@ protected:
 	void RecursiveRemove(HTREEITEM hItem);
 	HTREEITEM FindUrl(const CString& fullurl, bool create = true);
 	HTREEITEM FindUrl(const CString& fullurl, const CString& url, bool create = true, HTREEITEM hItem = TVI_ROOT);
-	bool RefreshNode(const CString& url, bool force = false);
-	bool RefreshNode(HTREEITEM hNode, bool force = false);
+	bool RefreshNode(const CString& url);
+	bool RefreshNode(HTREEITEM hNode);
 	void FillList(deque<CItem> * pItems);
 	void SetSortArrow();
 	void OnBeginDrag(NMHDR *pNMHDR);
@@ -217,6 +217,9 @@ public:
 	afx_msg void OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnBeginrdragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
+	afx_msg void OnLvnEndlabeleditRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResult);
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 };
 
 /**
