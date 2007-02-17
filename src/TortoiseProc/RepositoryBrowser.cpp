@@ -42,6 +42,7 @@
 #include "SVNDiff.h"
 #include "SysImageList.h"
 #include "RepoDrags.h"
+#include "SVNInfo.h"
 
 
 enum RepoBrowserContextMenuCommands
@@ -75,7 +76,7 @@ enum RepoBrowserContextMenuCommands
 
 IMPLEMENT_DYNAMIC(CRepositoryBrowser, CResizableStandAloneDialog)
 
-CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, BOOL bFile)
+CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev)
 	: CResizableStandAloneDialog(CRepositoryBrowser::IDD, NULL)
 	, m_cnrRepositoryBar(&m_barRepository)
 	, m_bStandAlone(true)
@@ -90,7 +91,7 @@ CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, BO
 {
 }
 
-CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, CWnd* pParent, BOOL bFile)
+CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, CWnd* pParent)
 	: CResizableStandAloneDialog(CRepositoryBrowser::IDD, pParent)
 	, m_cnrRepositoryBar(&m_barRepository)
 	, m_InitialUrl(url)
@@ -250,6 +251,21 @@ UINT CRepositoryBrowser::InitThread()
 
 	DialogEnableWindow(IDOK, FALSE);
 	DialogEnableWindow(IDCANCEL, FALSE);
+
+	// We don't know if the url passed to us points to a file or a folder,
+	// let's find out:
+	SVNInfo info;
+	const SVNInfoData * infodata = NULL;
+	infodata = info.GetFirstFileInfo(CTSVNPath(m_InitialUrl), m_initialRev, m_initialRev);
+	if (infodata)
+	{
+		if (infodata->kind == svn_node_file)
+		{
+			m_InitialUrl = m_InitialUrl.Left(m_InitialUrl.ReverseFind('/'));
+		}
+	}
+	m_InitialUrl.TrimRight('/');
+
 	m_strReposRoot = GetRepositoryRootAndUUID(CTSVNPath(m_InitialUrl), m_sUUID);
 	CStringA urla = CUnicodeUtils::GetUTF8(m_strReposRoot);
 	char * urlabuf = new char[urla.GetLength()+1];
@@ -276,7 +292,7 @@ LRESULT CRepositoryBrowser::OnAfterInitDialog(WPARAM /*wParam*/, LPARAM /*lParam
 		m_InitialUrl = m_barRepository.GetCurrentUrl();
 		m_initialRev = m_barRepository.GetCurrentRev();
 	}
-	ChangeToUrl(m_InitialUrl, m_initialRev);
+//	ChangeToUrl(m_InitialUrl, m_initialRev);
 	m_barRepository.GotoUrl(m_InitialUrl, m_initialRev);
 	m_RepoList.ClearText();
 	m_bInitDone = TRUE;
@@ -823,13 +839,13 @@ void CRepositoryBrowser::OnCancel()
 	__super::OnCancel();
 }
 
-bool CRepositoryBrowser::RefreshNode(const CString& url, bool force /* = false*/)
+bool CRepositoryBrowser::RefreshNode(const CString& url, bool force /* = false*/, bool recursive /* = false*/)
 {
 	HTREEITEM hNode = FindUrl(url);
-	return RefreshNode(hNode, force);
+	return RefreshNode(hNode, force, recursive);
 }
 
-bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
+bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/, bool recursive /* = false*/)
 {
 	CWaitCursorEx wait;
 	CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
@@ -850,7 +866,7 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
 	}
 	pTreeItem->children.clear();
 	pTreeItem->has_child_folders = false;
-	if (!List(CTSVNPath(pTreeItem->url), GetRevision(), GetRevision(), true, true))
+	if (!List(CTSVNPath(pTreeItem->url), GetRevision(), GetRevision(), recursive, true))
 	{
 		// error during list()
 		m_RepoList.ShowText(GetLastErrorMessage());
@@ -2204,7 +2220,7 @@ BOOL CRepositoryBrowser::PreTranslateMessage(MSG* pMsg)
 		{
 		case VK_F5:
 			m_blockEvents = true;
-			RefreshNode(m_RepoTree.GetSelectedItem(), true);
+			RefreshNode(m_RepoTree.GetSelectedItem(), true, (GetAsyncKeyState(VK_CONTROL)&0x8000));
 			m_blockEvents = false;
 			break;
 		case VK_F2:

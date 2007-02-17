@@ -121,8 +121,8 @@ class CRepositoryBrowser : public CResizableStandAloneDialog, public SVN, public
 friend class CTreeDropTarget;
 friend class CListDropTarget;
 public:
-	CRepositoryBrowser(const CString& url, const SVNRev& rev, BOOL bFile = FALSE);					///< standalone repository browser
-	CRepositoryBrowser(const CString& url, const SVNRev& rev, CWnd* pParent, BOOL bFile = FALSE);	///< dependent repository browser
+	CRepositoryBrowser(const CString& url, const SVNRev& rev);					///< standalone repository browser
+	CRepositoryBrowser(const CString& url, const SVNRev& rev, CWnd* pParent);	///< dependent repository browser
 	virtual ~CRepositoryBrowser();
 
 	/// Returns the currently displayed revision only (for convenience)
@@ -156,8 +156,8 @@ protected:
 	void RecursiveRemove(HTREEITEM hItem);
 	HTREEITEM FindUrl(const CString& fullurl, bool create = true);
 	HTREEITEM FindUrl(const CString& fullurl, const CString& url, bool create = true, HTREEITEM hItem = TVI_ROOT);
-	bool RefreshNode(const CString& url, bool force = false);
-	bool RefreshNode(HTREEITEM hNode, bool force = false);
+	bool RefreshNode(const CString& url, bool force = false, bool recursive = false);
+	bool RefreshNode(HTREEITEM hNode, bool force = false, bool recursive = false);
 	void FillList(deque<CItem> * pItems);
 	void SetSortArrow();
 	void OnBeginDrag(NMHDR *pNMHDR);
