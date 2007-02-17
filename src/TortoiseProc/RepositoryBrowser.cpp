@@ -823,13 +823,13 @@ void CRepositoryBrowser::OnCancel()
 	__super::OnCancel();
 }
 
-bool CRepositoryBrowser::RefreshNode(const CString& url)
+bool CRepositoryBrowser::RefreshNode(const CString& url, bool force /* = false*/)
 {
 	HTREEITEM hNode = FindUrl(url);
-	return RefreshNode(hNode);
+	return RefreshNode(hNode, force);
 }
 
-bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
+bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
 {
 	CWaitCursorEx wait;
 	CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
@@ -866,9 +866,10 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode)
 		tvitem.cChildren = 0;
 		m_RepoTree.SetItem(&tvitem);
 	}
-
-	FillList(&pTreeItem->children);
-
+	if ((force)||(hSel1 == hNode)||(hSel1 != m_RepoTree.GetSelectedItem()))
+	{
+		FillList(&pTreeItem->children);
+	}
 	return true;
 }
 
@@ -1175,7 +1176,7 @@ bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pa
 						if ((dwEffect == DROPEFFECT_MOVE)||(pItem->url.Compare(target.GetSVNPathString())==0))
 						{
 							// Refresh the current view
-							RefreshNode(hSelected);
+							RefreshNode(hSelected, true);
 						}
 					}
 				}
@@ -1227,7 +1228,7 @@ bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pa
 						if (pItem->url.Compare(target.GetSVNPathString())==0)
 						{
 							// Refresh the current view
-							RefreshNode(hSelected);
+							RefreshNode(hSelected, true);
 						}
 						else
 						{
@@ -1753,7 +1754,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 						CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 						return;
 					}
-					RefreshNode(m_RepoTree.GetSelectedItem());
+					RefreshNode(m_RepoTree.GetSelectedItem(), true);
 				}
 			}
 			break;
@@ -1764,7 +1765,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 					CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 					return;
 				}
-				RefreshNode(m_RepoTree.GetSelectedItem());
+				RefreshNode(m_RepoTree.GetSelectedItem(), true);
 			}
 			break;
 		case ID_IMPORTFOLDER:
@@ -1802,7 +1803,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 						}
 						progDlg.Stop();
 						SetAndClearProgressInfo((HWND)NULL);
-						RefreshNode(m_RepoTree.GetSelectedItem());
+						RefreshNode(m_RepoTree.GetSelectedItem(), true);
 					}
 				}
 			}
@@ -1874,7 +1875,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 						}
 						progDlg.Stop();
 						SetAndClearProgressInfo((HWND)NULL);
-						RefreshNode(m_RepoTree.GetSelectedItem());
+						RefreshNode(m_RepoTree.GetSelectedItem(), true);
 					}
 				}
 				delete [] pszFilters;
@@ -1929,7 +1930,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 						}
 						if (GetRevision().IsHead())
 						{
-							RefreshNode(m_RepoTree.GetSelectedItem());
+							RefreshNode(m_RepoTree.GetSelectedItem(), true);
 						}
 					}
 				}
@@ -2041,14 +2042,14 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 							CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 							return;
 						}
-						RefreshNode(m_RepoTree.GetSelectedItem());
+						RefreshNode(m_RepoTree.GetSelectedItem(), true);
 					}
 				}
 			}
 			break;
 		case ID_REFRESH:
 			{
-				RefreshNode(urlList[0].GetSVNPathString());
+				RefreshNode(urlList[0].GetSVNPathString(), true);
 			}
 			break;
 		case ID_GNUDIFF:
@@ -2140,7 +2141,7 @@ void CRepositoryBrowser::OnLvnEndlabeleditRepolist(NMHDR *pNMHDR, LRESULT *pResu
 			return;
 		}
 		*pResult = TRUE;
-		RefreshNode(m_RepoTree.GetSelectedItem());
+		RefreshNode(m_RepoTree.GetSelectedItem(), true);
 	}
 }
 
@@ -2175,7 +2176,7 @@ void CRepositoryBrowser::OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResu
 			return;
 		}
 		*pResult = TRUE;
-		RefreshNode(m_RepoTree.GetSelectedItem());
+		RefreshNode(m_RepoTree.GetSelectedItem(), true);
 	}
 }
 
@@ -2203,7 +2204,7 @@ BOOL CRepositoryBrowser::PreTranslateMessage(MSG* pMsg)
 		{
 		case VK_F5:
 			m_blockEvents = true;
-			RefreshNode(m_RepoTree.GetSelectedItem());
+			RefreshNode(m_RepoTree.GetSelectedItem(), true);
 			m_blockEvents = false;
 			break;
 		case VK_F2:

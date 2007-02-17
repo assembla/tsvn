@@ -156,8 +156,8 @@ protected:
 	void RecursiveRemove(HTREEITEM hItem);
 	HTREEITEM FindUrl(const CString& fullurl, bool create = true);
 	HTREEITEM FindUrl(const CString& fullurl, const CString& url, bool create = true, HTREEITEM hItem = TVI_ROOT);
-	bool RefreshNode(const CString& url);
-	bool RefreshNode(HTREEITEM hNode);
+	bool RefreshNode(const CString& url, bool force = false);
+	bool RefreshNode(HTREEITEM hNode, bool force = false);
 	void FillList(deque<CItem> * pItems);
 	void SetSortArrow();
 	void OnBeginDrag(NMHDR *pNMHDR);
