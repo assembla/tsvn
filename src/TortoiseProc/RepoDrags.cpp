@@ -88,6 +88,20 @@ HRESULT CTreeDropTarget::DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR 
 		TreeView_SelectDropTarget(m_hTargetWnd, NULL);
 		*pdwEffect = DROPEFFECT_NONE;
 	}
+	CRect rect;
+	m_pRepoBrowser->m_RepoTree.GetWindowRect(&rect);
+	if (rect.PtInRect((POINT&)pt))
+	{
+		if (pt.y > (rect.bottom-20))
+		{
+			m_pRepoBrowser->m_RepoTree.SendMessage(WM_VSCROLL, MAKEWPARAM (SB_LINEDOWN, 0), NULL);
+		}
+		if (pt.y < (rect.top+20))
+		{
+			m_pRepoBrowser->m_RepoTree.SendMessage(WM_VSCROLL, MAKEWPARAM (SB_LINEUP, 0), NULL);
+		}
+	}
+
 	return CIDropTarget::DragOver(grfKeyState, pt, pdwEffect);
 }
 
@@ -210,6 +224,21 @@ HRESULT CListDropTarget::DragOver(DWORD grfKeyState, POINTL pt, DWORD __RPC_FAR 
 	{
 		ListView_SetItemState(m_hTargetWnd, -1, 0, LVIS_DROPHILITED);
 	}
+
+	CRect rect;
+	m_pRepoBrowser->m_RepoList.GetWindowRect(&rect);
+	if (rect.PtInRect((POINT&)pt))
+	{
+		if (pt.y > (rect.bottom-20))
+		{
+			m_pRepoBrowser->m_RepoList.SendMessage(WM_VSCROLL, MAKEWPARAM (SB_LINEDOWN, 0), NULL);
+		}
+		if (pt.y < (rect.top+20))
+		{
+			m_pRepoBrowser->m_RepoList.SendMessage(WM_VSCROLL, MAKEWPARAM (SB_LINEUP, 0), NULL);
+		}
+	}
+
 	return CIDropTarget::DragOver(grfKeyState, pt, pdwEffect);
 }
 
