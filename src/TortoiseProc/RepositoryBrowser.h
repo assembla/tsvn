@@ -162,7 +162,7 @@ protected:
 	void SetSortArrow();
 	void OnBeginDrag(NMHDR *pNMHDR);
 	bool OnDrop(const CTSVNPath& target, const CTSVNPathList& pathlist, DWORD dwEffect);
-
+	CString EscapeUrl(const CTSVNPath& url);
 	DECLARE_MESSAGE_MAP()
 
 
@@ -216,6 +216,7 @@ public:
 	afx_msg void OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnBeginrdragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
 };
 
 /**
