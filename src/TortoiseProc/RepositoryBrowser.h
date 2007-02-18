@@ -37,6 +37,12 @@ class CInputLogDlg;
 class CTreeDropTarget;
 class CListDropTarget;
 
+/**
+ * \ingroup TortoiseProc
+ * helper class which holds all the information of an item (file or folder)
+ * in the repository. The information gets filled by the svn_client_list()
+ * callback.
+ */
 class CItem
 {
 public:
@@ -49,7 +55,6 @@ public:
 		, lock_creationdate(0)
 		, lock_expirationdate(0)
 	{
-
 	}
 	CItem(const CString& _path, 
 		svn_node_kind_t _kind,
@@ -98,6 +103,11 @@ public:
 	CString				absolutepath;			///< unescaped url stripped of repository root
 };
 
+/**
+ * \ingroup TortoiseProc
+ * helper class which holds the information for a tree item
+ * in the repository browser.
+ */
 class CTreeItem
 {
 public:
@@ -120,6 +130,7 @@ class CRepositoryBrowser : public CResizableStandAloneDialog, public SVN, public
 	DECLARE_DYNAMIC(CRepositoryBrowser)
 friend class CTreeDropTarget;
 friend class CListDropTarget;
+
 public:
 	CRepositoryBrowser(const CString& url, const SVNRev& rev);					///< standalone repository browser
 	CRepositoryBrowser(const CString& url, const SVNRev& rev, CWnd* pParent);	///< dependent repository browser
@@ -130,22 +141,46 @@ public:
 	/// Returns the currently displayed URL's path only (for convenience)
 	CString GetPath() const;
 
+	/// switches to the \c url at \c rev. If the url is valid and exists,
+	/// the repository browser will show the content of that url.
 	bool ChangeToUrl(const CString& url, const SVNRev& rev);
 
 	enum { IDD = IDD_REPOSITORY_BROWSER };
 
+	/// the project properties if the repository browser was started from a working copy
 	ProjectProperties m_ProjectProperties;
+	/// the local path of the working copy
 	CTSVNPath m_path;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
+	virtual void OnCancel();
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
 	afx_msg void OnBnClickedHelp();
 	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnBeginrdragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
+	afx_msg void OnLvnEndlabeleditRepolist(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResult);
 
+	DECLARE_MESSAGE_MAP()
+
+	/// called after the init thread has finished
 	LRESULT OnAfterInitDialog(WPARAM /*wParam*/, LPARAM /*lParam*/);
+	/// draws the bar when the tree and list control are resized
 	void DrawXorBar(CDC * pDC, int x1, int y1, int width, int height);
+	/// callback from the SVN::List() method which stores all the information
 	virtual BOOL ReportList(const CString& path, svn_node_kind_t kind, 
 		svn_filesize_t size, bool has_props, svn_revnum_t created_rev, 
 		apr_time_t time, const CString& author, const CString& locktoken, 
@@ -153,17 +188,38 @@ protected:
 		bool is_dav_comment, apr_time_t lock_creationdate, 
 		apr_time_t lock_expirationdate, const CString& absolutepath);
 
+	/// recursively removes all items from \c hItem on downwards.
 	void RecursiveRemove(HTREEITEM hItem);
+	/// searches the tree item for the specified \c fullurl.
 	HTREEITEM FindUrl(const CString& fullurl, bool create = true);
+	/// searches the tree item for the specified \c fullurl.
 	HTREEITEM FindUrl(const CString& fullurl, const CString& url, bool create = true, HTREEITEM hItem = TVI_ROOT);
+	/**
+	 * Refetches the information for \c url. If \c force is true, then the list
+	 * control is refilled again.
+	 * \param recursive if true, the information is fetched recursively.
+	 */
 	bool RefreshNode(const CString& url, bool force = false, bool recursive = false);
+	/**
+	 * Refetches the information for \c hNode. If \c force is true, then the list
+	 * control is refilled again.
+	 * \param recursive if true, the information is fetched recursively.
+	 */
 	bool RefreshNode(HTREEITEM hNode, bool force = false, bool recursive = false);
+	/// Fills the list control with all the items in \c pItems.
 	void FillList(deque<CItem> * pItems);
+	/// Sets the sort arrow in the list view header according to the currently used sorting.
 	void SetSortArrow();
+	/// called when a drag-n-drop operation starts
 	void OnBeginDrag(NMHDR *pNMHDR);
+	/// called when a drag-n-drop operation ends and the user dropped something on us.
 	bool OnDrop(const CTSVNPath& target, const CTSVNPathList& pathlist, DWORD dwEffect);
+	/**
+	 * Since all urls we store and use are not properly escaped but "UI friendly", this
+	 * method converts those urls to a properly escaped url which we can use in
+	 * Subversion API calls.
+	 */
 	CString EscapeUrl(const CTSVNPath& url);
-	DECLARE_MESSAGE_MAP()
 
 
 	static UINT InitThreadEntry(LPVOID pVoid);
@@ -171,6 +227,7 @@ protected:
 
 	static int CALLBACK ListSort(LPARAM lParam1, LPARAM lParam2, LPARAM lParam3);
 
+protected:
 	bool				m_bInitDone;
 	CRepositoryBar		m_barRepository;
 	CRepositoryBarCnr	m_cnrRepositoryBar;
@@ -202,24 +259,6 @@ private:
 
 	int					oldy, oldx;
 	bool				bDragMode;
-public:
-	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
-protected:
-	virtual void OnCancel();
-public:
-	afx_msg void OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnLvnBegindragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnLvnBeginrdragRepolist(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
-	afx_msg void OnLvnEndlabeleditRepolist(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResult);
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
 };
 
 /**

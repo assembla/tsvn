@@ -311,10 +311,25 @@ void CRepositoryBrowser::OnOK()
 	CResizableStandAloneDialog::OnOK();
 }
 
+void CRepositoryBrowser::OnCancel()
+{
+	RevokeDragDrop(m_RepoList.GetSafeHwnd());
+	RevokeDragDrop(m_RepoTree.GetSafeHwnd());
+
+	HTREEITEM hItem = m_RepoTree.GetRootItem();
+	RecursiveRemove(hItem);
+
+	__super::OnCancel();
+}
+
 void CRepositoryBrowser::OnBnClickedHelp()
 {
 	OnHelp();
 }
+
+/******************************************************************************/
+/* tree and list view resizing                                                */
+/******************************************************************************/
 
 BOOL CRepositoryBrowser::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message) 
 {
@@ -533,6 +548,10 @@ void CRepositoryBrowser::DrawXorBar(CDC * pDC, int x1, int y1, int width, int he
 	DeleteObject(hbm);
 }
 
+/******************************************************************************/
+/* repository information gathering                                           */
+/******************************************************************************/
+
 BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind, 
 									svn_filesize_t size, bool has_props, 
 									svn_revnum_t created_rev, apr_time_t time, 
@@ -729,23 +748,6 @@ void CRepositoryBrowser::FillList(deque<CItem> * pItems)
 	m_RepoList.SetRedraw(true);
 }
 
-void CRepositoryBrowser::SetSortArrow()
-{
-	CHeaderCtrl * pHeader = m_RepoList.GetHeaderCtrl();
-	HDITEM HeaderItem = {0};
-	HeaderItem.mask = HDI_FORMAT;
-	for (int i=0; i<pHeader->GetItemCount(); ++i)
-	{
-		pHeader->GetItem(i, &HeaderItem);
-		HeaderItem.fmt &= ~(HDF_SORTDOWN | HDF_SORTUP);
-		pHeader->SetItem(i, &HeaderItem);
-	}
-
-	pHeader->GetItem(m_nSortedColumn, &HeaderItem);
-	HeaderItem.fmt |= (m_bSortAscending ? HDF_SORTUP : HDF_SORTDOWN);
-	pHeader->SetItem(m_nSortedColumn, &HeaderItem);
-}
-
 HTREEITEM CRepositoryBrowser::FindUrl(const CString& fullurl, bool create /* = true */)
 {
 	return FindUrl(fullurl, fullurl, create, TVI_ROOT);
@@ -829,17 +831,6 @@ HTREEITEM CRepositoryBrowser::FindUrl(const CString& fullurl, const CString& url
 	return hNewItem;
 }
 
-void CRepositoryBrowser::OnCancel()
-{
-	RevokeDragDrop(m_RepoList.GetSafeHwnd());
-	RevokeDragDrop(m_RepoTree.GetSafeHwnd());
-
-	HTREEITEM hItem = m_RepoTree.GetRootItem();
-	RecursiveRemove(hItem);
-
-	__super::OnCancel();
-}
-
 bool CRepositoryBrowser::RefreshNode(const CString& url, bool force /* = false*/, bool recursive /* = false*/)
 {
 	HTREEITEM hNode = FindUrl(url);
@@ -888,6 +879,75 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/, b
 		FillList(&pTreeItem->children);
 	}
 	return true;
+}
+
+BOOL CRepositoryBrowser::PreTranslateMessage(MSG* pMsg)
+{
+	if (pMsg->message>=WM_KEYFIRST && pMsg->message<=WM_KEYLAST)
+	{
+		// Check if there is an Inplace Edit active:
+		// Done in a fast check. Inplace edit controls are child
+		// windows of our dialog. So if we check the parent of the
+		// window with the focus we will find it.
+		HWND hWndFocus = ::GetFocus();
+		if (hWndFocus && ::GetParent(hWndFocus)!=m_hWnd)
+		{
+			// Might be the sub control of the tree control that has the focus
+			// Do a direct translation.
+			::TranslateMessage(pMsg);
+			::DispatchMessage(pMsg);
+			return TRUE;
+		}
+	}
+	if (pMsg->message == WM_KEYDOWN)
+	{
+		switch (pMsg->wParam)
+		{
+		case VK_F5:
+			m_blockEvents = true;
+			RefreshNode(m_RepoTree.GetSelectedItem(), true, !!(GetAsyncKeyState(VK_CONTROL)&0x8000));
+			m_blockEvents = false;
+			break;
+		case VK_F2:
+			{
+				POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+				int selIndex = m_RepoList.GetNextSelectedItem(pos);
+				m_blockEvents = true;
+				if (selIndex >= 0)
+				{
+					m_RepoList.SetFocus();
+					m_RepoList.EditLabel(selIndex);
+				}
+				else
+				{
+					m_RepoTree.SetFocus();
+					m_RepoTree.EditLabel(m_RepoTree.GetSelectedItem());
+				}
+				m_blockEvents = false;
+			}
+			break;
+		case 'C':
+		case 'c':
+			{
+				if (GetAsyncKeyState(VK_CONTROL)&0x8000)
+				{
+					// Ctrl-C : copy the selected item urls to the clipboard
+					CStringA url;
+					POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+					int index = -1;
+					while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
+					{
+						CItem * pItem = (CItem *)m_RepoList.GetItemData(index);
+						url += CPathUtils::PathEscape(CUnicodeUtils::GetUTF8(pItem->absolutepath)) + "\r\n";
+					}
+					if (!url.IsEmpty())
+						CStringUtils::WriteAsciiStringToClipboard(url);
+				}
+			}
+			break;
+		}
+	}
+	return __super::PreTranslateMessage(pMsg);
 }
 
 void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult)
@@ -1036,6 +1096,23 @@ int CRepositoryBrowser::ListSort(LPARAM lParam1, LPARAM lParam2, LPARAM lParam3)
 	return nRet;
 }
 
+void CRepositoryBrowser::SetSortArrow()
+{
+	CHeaderCtrl * pHeader = m_RepoList.GetHeaderCtrl();
+	HDITEM HeaderItem = {0};
+	HeaderItem.mask = HDI_FORMAT;
+	for (int i=0; i<pHeader->GetItemCount(); ++i)
+	{
+		pHeader->GetItem(i, &HeaderItem);
+		HeaderItem.fmt &= ~(HDF_SORTDOWN | HDF_SORTUP);
+		pHeader->SetItem(i, &HeaderItem);
+	}
+
+	pHeader->GetItem(m_nSortedColumn, &HeaderItem);
+	HeaderItem.fmt |= (m_bSortAscending ? HDF_SORTUP : HDF_SORTDOWN);
+	pHeader->SetItem(m_nSortedColumn, &HeaderItem);
+}
+
 void CRepositoryBrowser::OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
@@ -1050,6 +1127,73 @@ void CRepositoryBrowser::OnLvnItemchangedRepolist(NMHDR *pNMHDR, LRESULT *pResul
 			if (pItem)
 				m_barRepository.ShowUrl(pItem->absolutepath, GetRevision());
 		}
+	}
+}
+
+void CRepositoryBrowser::OnLvnEndlabeleditRepolist(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	NMLVDISPINFO *pDispInfo = reinterpret_cast<NMLVDISPINFO*>(pNMHDR);
+	*pResult = 0;
+	if (pDispInfo->item.pszText == NULL)
+		return;
+	// rename the item in the repository
+	CItem * pItem = (CItem *)m_RepoList.GetItemData(pDispInfo->item.iItem);
+
+	CWaitCursorEx wait_cursor;
+	CInputLogDlg input(this);
+	input.SetUUID(m_sUUID);
+	input.SetProjectProperties(&m_ProjectProperties);
+	CTSVNPath targetUrl = CTSVNPath(EscapeUrl(CTSVNPath(pItem->absolutepath.Left(pItem->absolutepath.ReverseFind('/')+1)+pDispInfo->item.pszText)));
+	CString sHint;
+	sHint.Format(IDS_INPUT_RENAME, (LPCTSTR)(pItem->absolutepath), (LPCTSTR)targetUrl.GetSVNPathString());
+	input.SetActionText(sHint);
+	if (input.DoModal() == IDOK)
+	{
+		if (!Move(CTSVNPathList(CTSVNPath(EscapeUrl(CTSVNPath(pItem->absolutepath)))),
+			targetUrl,
+			true, input.GetLogMessage()))
+		{
+			wait_cursor.Hide();
+			CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
+			return;
+		}
+		*pResult = TRUE;
+		RefreshNode(m_RepoTree.GetSelectedItem(), true);
+	}
+}
+
+void CRepositoryBrowser::OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMTVDISPINFO pTVDispInfo = reinterpret_cast<LPNMTVDISPINFO>(pNMHDR);
+	*pResult = 0;
+	if (pTVDispInfo->item.pszText == NULL)
+		return;
+
+	// rename the item in the repository
+	CTreeItem * pItem = (CTreeItem *)m_RepoTree.GetItemData(m_RepoTree.GetSelectedItem());
+	if (pItem == NULL)
+		return;
+
+	CWaitCursorEx wait_cursor;
+	CInputLogDlg input(this);
+	input.SetUUID(m_sUUID);
+	input.SetProjectProperties(&m_ProjectProperties);
+	CTSVNPath targetUrl = CTSVNPath(EscapeUrl(CTSVNPath(pItem->url.Left(pItem->url.ReverseFind('/')+1)+pTVDispInfo->item.pszText)));
+	CString sHint;
+	sHint.Format(IDS_INPUT_RENAME, (LPCTSTR)(pItem->url), (LPCTSTR)targetUrl.GetSVNPathString());
+	input.SetActionText(sHint);
+	if (input.DoModal() == IDOK)
+	{
+		if (!Move(CTSVNPathList(CTSVNPath(EscapeUrl(CTSVNPath(pItem->url)))),
+			targetUrl,
+			true, input.GetLogMessage()))
+		{
+			wait_cursor.Hide();
+			CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
+			return;
+		}
+		*pResult = TRUE;
+		RefreshNode(m_RepoTree.GetSelectedItem(), true);
 	}
 }
 
@@ -2142,138 +2286,3 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 	}
 }
 
-void CRepositoryBrowser::OnLvnEndlabeleditRepolist(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	NMLVDISPINFO *pDispInfo = reinterpret_cast<NMLVDISPINFO*>(pNMHDR);
-	*pResult = 0;
-	if (pDispInfo->item.pszText == NULL)
-		return;
-	// rename the item in the repository
-	CItem * pItem = (CItem *)m_RepoList.GetItemData(pDispInfo->item.iItem);
-
-	CWaitCursorEx wait_cursor;
-	CInputLogDlg input(this);
-	input.SetUUID(m_sUUID);
-	input.SetProjectProperties(&m_ProjectProperties);
-	CTSVNPath targetUrl = CTSVNPath(EscapeUrl(CTSVNPath(pItem->absolutepath.Left(pItem->absolutepath.ReverseFind('/')+1)+pDispInfo->item.pszText)));
-	CString sHint;
-	sHint.Format(IDS_INPUT_RENAME, (LPCTSTR)(pItem->absolutepath), (LPCTSTR)targetUrl.GetSVNPathString());
-	input.SetActionText(sHint);
-	if (input.DoModal() == IDOK)
-	{
-		if (!Move(CTSVNPathList(CTSVNPath(EscapeUrl(CTSVNPath(pItem->absolutepath)))),
-			targetUrl,
-			true, input.GetLogMessage()))
-		{
-			wait_cursor.Hide();
-			CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
-			return;
-		}
-		*pResult = TRUE;
-		RefreshNode(m_RepoTree.GetSelectedItem(), true);
-	}
-}
-
-void CRepositoryBrowser::OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMTVDISPINFO pTVDispInfo = reinterpret_cast<LPNMTVDISPINFO>(pNMHDR);
-	*pResult = 0;
-	if (pTVDispInfo->item.pszText == NULL)
-		return;
-
-	// rename the item in the repository
-	CTreeItem * pItem = (CTreeItem *)m_RepoTree.GetItemData(m_RepoTree.GetSelectedItem());
-	if (pItem == NULL)
-		return;
-
-	CWaitCursorEx wait_cursor;
-	CInputLogDlg input(this);
-	input.SetUUID(m_sUUID);
-	input.SetProjectProperties(&m_ProjectProperties);
-	CTSVNPath targetUrl = CTSVNPath(EscapeUrl(CTSVNPath(pItem->url.Left(pItem->url.ReverseFind('/')+1)+pTVDispInfo->item.pszText)));
-	CString sHint;
-	sHint.Format(IDS_INPUT_RENAME, (LPCTSTR)(pItem->url), (LPCTSTR)targetUrl.GetSVNPathString());
-	input.SetActionText(sHint);
-	if (input.DoModal() == IDOK)
-	{
-		if (!Move(CTSVNPathList(CTSVNPath(EscapeUrl(CTSVNPath(pItem->url)))),
-			targetUrl,
-			true, input.GetLogMessage()))
-		{
-			wait_cursor.Hide();
-			CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
-			return;
-		}
-		*pResult = TRUE;
-		RefreshNode(m_RepoTree.GetSelectedItem(), true);
-	}
-}
-
-BOOL CRepositoryBrowser::PreTranslateMessage(MSG* pMsg)
-{
-	if (pMsg->message>=WM_KEYFIRST && pMsg->message<=WM_KEYLAST)
-	{
-		// Check if there is an Inplace Edit active:
-		// Done in a fast check. Inplace edit controls are child
-		// windows of our dialog. So if we check the parent of the
-		// window with the focus we will find it.
-		HWND hWndFocus = ::GetFocus();
-		if (hWndFocus && ::GetParent(hWndFocus)!=m_hWnd)
-		{
-			// Might be the sub control of the tree control that has the focus
-			// Do a direct translation.
-			::TranslateMessage(pMsg);
-			::DispatchMessage(pMsg);
-			return TRUE;
-		}
-	}
-	if (pMsg->message == WM_KEYDOWN)
-	{
-		switch (pMsg->wParam)
-		{
-		case VK_F5:
-			m_blockEvents = true;
-			RefreshNode(m_RepoTree.GetSelectedItem(), true, !!(GetAsyncKeyState(VK_CONTROL)&0x8000));
-			m_blockEvents = false;
-			break;
-		case VK_F2:
-			{
-				POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
-				int selIndex = m_RepoList.GetNextSelectedItem(pos);
-				m_blockEvents = true;
-				if (selIndex >= 0)
-				{
-					m_RepoList.SetFocus();
-					m_RepoList.EditLabel(selIndex);
-				}
-				else
-				{
-					m_RepoTree.SetFocus();
-					m_RepoTree.EditLabel(m_RepoTree.GetSelectedItem());
-				}
-				m_blockEvents = false;
-			}
-			break;
-		case 'C':
-		case 'c':
-			{
-				if (GetAsyncKeyState(VK_CONTROL)&0x8000)
-				{
-					// Ctrl-C : copy the selected item urls to the clipboard
-					CStringA url;
-					POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
-					int index = -1;
-					while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
-					{
-						CItem * pItem = (CItem *)m_RepoList.GetItemData(index);
-						url += CPathUtils::PathEscape(CUnicodeUtils::GetUTF8(pItem->absolutepath)) + "\r\n";
-					}
-					if (!url.IsEmpty())
-						CStringUtils::WriteAsciiStringToClipboard(url);
-				}
-			}
-			break;
-		}
-	}
-	return __super::PreTranslateMessage(pMsg);
-}
