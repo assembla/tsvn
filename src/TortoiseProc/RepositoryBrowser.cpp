@@ -578,7 +578,8 @@ BOOL CRepositoryBrowser::ReportList(const CString& path, svn_node_kind_t kind,
 		lockowner, lockcomment, is_dav_comment,
 		lock_creationdate, lock_expirationdate,
 		m_strReposRoot+absolutepath+(abspath_has_slash ? _T("") : _T("/"))+path));
-
+	if (pTreeItem)
+		pTreeItem->children_fetched = true;
 	return TRUE;
 }
 
@@ -927,6 +928,18 @@ void CRepositoryBrowser::OnTvnItemexpandingRepotree(NMHDR *pNMHDR, LRESULT *pRes
 	if (!pTreeItem->children_fetched)
 	{
 		RefreshNode(pNMTreeView->itemNew.hItem);
+	}
+	else
+	{
+		// if there are no child folders, remove the '+' in front of the node
+		if (!pTreeItem->has_child_folders)
+		{
+			TVITEM tvitem = {0};
+			tvitem.hItem = pNMTreeView->itemNew.hItem;
+			tvitem.mask = TVIF_CHILDREN;
+			tvitem.cChildren = 0;
+			m_RepoTree.SetItem(&tvitem);
+		}
 	}
 }
 
@@ -2220,7 +2233,7 @@ BOOL CRepositoryBrowser::PreTranslateMessage(MSG* pMsg)
 		{
 		case VK_F5:
 			m_blockEvents = true;
-			RefreshNode(m_RepoTree.GetSelectedItem(), true, (GetAsyncKeyState(VK_CONTROL)&0x8000));
+			RefreshNode(m_RepoTree.GetSelectedItem(), true, !!(GetAsyncKeyState(VK_CONTROL)&0x8000));
 			m_blockEvents = false;
 			break;
 		case VK_F2:

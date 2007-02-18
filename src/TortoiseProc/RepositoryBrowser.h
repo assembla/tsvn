@@ -101,7 +101,7 @@ public:
 class CTreeItem
 {
 public:
-	CTreeItem() : children_fetched(false), has_child_folders(true) {}
+	CTreeItem() : children_fetched(false), has_child_folders(false) {}
 
 	CString			unescapedname;
 	CString			url;						///< unescaped url
