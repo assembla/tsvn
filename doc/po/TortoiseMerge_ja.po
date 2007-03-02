@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2005-08-30 15:16GMT Daylight Time\n"
-"PO-Revision-Date: 2007-03-02 10:10+0900\n"
+"PO-Revision-Date: 2007-03-02 16:14+0900\n"
 "Last-Translator: KURASAWA Nozomu <nabetaro@caldron.jp>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -367,11 +367,11 @@ msgstr "<placeholder-1/> メニューバーの下にツールバーがありま�
 
 #: source/TortoiseMerge_en.xml:563(para)
 msgid "On the left side of the window is a locator bar. This provides a quick visual reference as to where the changes lie within the file. The bar has three columns. The left column refers to the left pane, the right column to the right pane, and the centre column to the bottom pane (if present). In one-pane view only the left column is used. The locator bar can also be used as a scroll bar to scroll all the windows simultaneously."
-msgstr ""
+msgstr "ウィンドウの左側にあるのは位置指定バーです。これにより、ファイルにある変更点を素早く参照できます。位置指定バーは 3 列あります。左の列は左ペインを、右の列は右ペインを、中央の列は (表示されている場合) 下部ペインを参照します。1 ペインビューでは左の列のみ使用します。位置指定バーは、ウィンドウを同時にスクロールさせるスクロールバーとしても、使用できます。"
 
 #: source/TortoiseMerge_en.xml:572(para)
 msgid "Below the bottom window is the status bar. This shows the number of lines added and deleted in <literal>Theirs</literal> and <literal>Mine</literal>, and the number of unresolved conflicts remaining. The left side of the status bar is used to display hints when you hover the mouse over a control."
-msgstr ""
+msgstr "下部ウィンドウの下は、ステータスバーです。<literal>Theirs</literal> と <literal>Mine</literal> の追加・削除行数や、解消されていない競合数を表示します。ステータスバーの左側は、マウスでコントロールを指す際に、ヒントを表示するのに使用します。"
 
 #: source/TortoiseMerge_en.xml:585(title)
 msgid "Merging / Editing Conflicts"
@@ -379,31 +379,31 @@ msgstr "競合のマージ・編集"
 
 #: source/TortoiseMerge_en.xml:586(para)
 msgid "TortoiseMerge not only <emphasis>shows</emphasis> you the differences between files but also lets you resolve conflicts or apply changes."
-msgstr ""
+msgstr "TortoiseMerge はファイルの差分を <emphasis>表示</emphasis> するだけでなく、競合を解消したり変更を適用したりできます。"
 
 #: source/TortoiseMerge_en.xml:590(para)
 msgid "If you're in two pane view, then you can only edit the file in the right pane (<literal>Mine</literal>). To apply changes made in the left file (<literal>Theirs</literal>), <action>right-click</action> on the changed lines and select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>theirs</quote></guimenuitem></menuchoice>. Then the changes from the left file are added to the right file."
-msgstr ""
+msgstr "2 ペインビューの場合、右ペイン (<literal>Mine</literal>) のみ編集できます。左のファイル (<literal>Theirs</literal>) に変更を加えるには、変更する行で <action>右クリック</action> し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem><quote>theirs</quote> のテキストブロックを利用</guimenuitem></menuchoice> を選択してください。その後、左のファイルの変更を右のファイルに加えてください。"
 
 #: source/TortoiseMerge_en.xml:602(para)
 msgid "Sometimes you actually want both text blocks, and the context menu also offers you <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use both text blocks (this one first)</guimenuitem></menuchoice> and <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use both text blocks (this one last)</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "時には、実際に両方のテキストブロックが必要になります。その場合は、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>両方のテキストブロックを利用 (こちらを先にする)</guimenuitem></menuchoice> や <menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>両方のテキストブロックを利用 (こちらを後にする)</guimenuitem></menuchoice> を使用してください。"
 
 #: source/TortoiseMerge_en.xml:615(para)
 msgid "If you're in three pane view (sometimes called <emphasis>merge view</emphasis>) you can only edit the file in the bottom view (<literal>Merged</literal>). As in two pane view, you can <action>right-click</action> on conflicted lines and either select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>theirs</quote></guimenuitem></menuchoice> or <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>mine</quote></guimenuitem></menuchoice>. In addition, if you want <emphasis>both</emphasis> blocks, you can select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem> Use text block from <quote>mine</quote> before <quote>theirs</quote></guimenuitem></menuchoice> or <menuchoice><guimenu>Context Menu</guimenu><guimenuitem> Use text block from <quote>theirs</quote> before <quote>mine</quote></guimenuitem></menuchoice>. According to the command you've selected, the changes are used in the resulting <literal>Merged</literal> file."
-msgstr ""
+msgstr "3 ペインビュー (時に <emphasis>マージビュー</emphasis> と呼ばれます) の場合、下部ビューにあるファイル (<literal>Merged</literal>) のみ編集できます。2 ペインビューと同様に、競合した行で <action>右クリック</action> し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem><quote>theirs</quote> のテキストブロックを利用</guimenuitem></menuchoice> と <menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem><quote>mine</quote> のテキストブロックを利用</guimenuitem></menuchoice> のどちらかを選択してください。さらに <emphasis>両方</emphasis> のブロックを使用したい場合は、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem> <quote>theirs</quote> の前に <quote>mine</quote> のテキストブロックを利用 </guimenuitem></menuchoice> と <menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem> <quote>mine</quote> の前に <quote>theirs</quote> のテキストブロックを利用 </guimenuitem></menuchoice> のどちらかを選択してください。選択したコマンドの結果、<literal>Merged</literal> ファイルを変更します。"
 
 #: source/TortoiseMerge_en.xml:652(para)
 msgid "Sometimes the conflict is too difficult to resolve by simply picking <literal>Theirs</literal> and <literal>Mine</literal> and it requires hand editing. TortoiseMerge allows you to do all the easy changes visually first and then save the file, leaving only the difficult changes to be resolved by hand-editing."
-msgstr ""
+msgstr "競合によっては、<literal>Theirs</literal> と <literal>Mine</literal> から選択するだけで解消するわけに行かず、手で編集しなければならないことがあります。TortoiseMerge は、まず簡単な変更を行ってしまってから保存し、手で編集して解消する難しい変更のみにできます。"
 
 #: source/TortoiseMerge_en.xml:660(para)
 msgid "Note that if you use TortoiseMerge on the same files again, any changes to your working copy, whether in TortoiseMerge, or by hand-editing, <emphasis>will be discarded</emphasis> and the file will appear as it did when conflict-editing first started."
-msgstr ""
+msgstr "再度同じファイルで TortoiseMerge  を使用すると、TortoiseMerge か手で編集かに関わらず、作業コピーに行った変更が <emphasis>取り消され</emphasis>、競合編集を行い始めた状態のファイルになることに注意してください。"
 
 #: source/TortoiseMerge_en.xml:668(para)
 msgid "If you need to copy lines of text to insert in another file using your favourite text editor, you can select multiple lines to copy within TortoiseMerge. <action>Click</action> on the first line of the block, then <action>Shift+Click</action> on the last line of the block. As usual, <action>Ctrl+C</action> can be used to copy the selected lines to the clipboard."
-msgstr ""
+msgstr "テキストのコピーした行を、お好みのエディタで別のファイルに挿入する場合、TortoiseMerge で複数行を選択し、コピーできます。ブロックの先頭行を <action>クリック</action> してから、ブロックの最終行で <action>Shift+クリック</action> してください。通常、<action>Ctrl+C</action> で選択した行をクリップボードにコピーします。"
 
 #: source/TortoiseMerge_en.xml:681(title)
 msgid "Settings"
@@ -431,19 +431,19 @@ msgstr "<guilabel>改行コードを無視する</guilabel> 改行コードの�
 
 #: source/TortoiseMerge_en.xml:702(para)
 msgid "<guilabel>Ignore case changes</guilabel> hides changes which are due solely to case changes within the text. This can be useful with apps such as Visual Basic, which changes case in variables without warning."
-msgstr ""
+msgstr "<guilabel>大文字/小文字の変更は無視する</guilabel> テキスト中で、大文字/小文字しか違わない変更を隠します。Visual Basic のような、警告なしで変数の大文字小文字を変更してしまうようなアプリでは便利です。"
 
 #: source/TortoiseMerge_en.xml:708(para)
 msgid "<guilabel>Colour code in-line changes</guilabel> uses the same scheme as the line diff bar to show the detailed in-line changes within the main display panes."
-msgstr ""
+msgstr "<guilabel>変更された行内の色コード</guilabel> メイン表示ペインの行内の変更を、差分バーと同様に色分けします。"
 
 #: source/TortoiseMerge_en.xml:713(para)
 msgid "<guilabel>Compare whitespaces</guilabel> shows all changes in indentation and inline whitespace as added/removed lines (which is how Subversion treats such changes)."
-msgstr ""
+msgstr "<guilabel>空白を比較</guilabel> 行の追加・削除と同様 (Subversion の扱いと同様) に、インデントや行内の空白の変更を示します。"
 
 #: source/TortoiseMerge_en.xml:718(para)
 msgid "<guilabel>Ignore whitespace changes</guilabel> hides changes which are due solely to a change in the amount or type of whitespace, eg. changing the indentation or changing tabs to spaces. Adding whitespace where there was none before, or removing a whitespace completely is still shown as a change."
-msgstr ""
+msgstr "<guilabel>空白の変更は無視する</guilabel> 空白の種類や量しか違わない変更を隠します。例: インデントの変更や、タブとスペースの変更など。とはいえ何もないところへの空白の追加や、空白の完全削除は表示します。"
 
 #: source/TortoiseMerge_en.xml:726(para)
 msgid "<guilabel>Ignore all whitespaces</guilabel> hides all whitespace-only changes."
@@ -491,7 +491,7 @@ msgstr "空"
 
 #: source/TortoiseMerge_en.xml:763(listitem)
 msgid "Where lines have been added in the opposite pane, and no such line existed in this pane."
-msgstr ""
+msgstr "反対のペインにある行が、このペインには存在しない部分"
 
 #: source/TortoiseMerge_en.xml:769(term)
 msgid "Conflicted"
@@ -519,7 +519,7 @@ msgstr "空白の差分"
 
 #: source/TortoiseMerge_en.xml:785(listitem)
 msgid "In the case above, the actual whitespace difference is highlighted using this color."
-msgstr ""
+msgstr "上記の場合、実際に空白が異なる箇所をこの色で強調する。"
 
 #: source/TortoiseMerge_en.xml:795(title)
 msgid "keyboard shortcuts"
@@ -709,7 +709,7 @@ msgstr "3 方向 diff で使用する <placeholder-1/> ファイルを指定し�
 
 #: source/TortoiseMerge_en.xml:996(entry)
 msgid "The name of the base file. This is shown in the view title instead of the file path. For three way diffs it is shown in a tooltip for the view title."
-msgstr "base ファイルの名前です。ファイルのパスの代わりにタイトルに表示します。3 方向 diff では、view タイトルのツールチップに表示します。"
+msgstr "base ファイルの名前です。ファイルのパスの代わりにタイトルに表示します。3 方向 diff では、ビュータイトルのツールチップに表示します。"
 
 #: source/TortoiseMerge_en.xml:1006(emphasis)
 msgid "theirs"
@@ -721,7 +721,7 @@ msgstr "3 方向 diff で使用する <placeholder-1/> ファイルを指定し�
 
 #: source/TortoiseMerge_en.xml:1012(entry)
 msgid "The name of the theirs file. This is shown in the view title instead of the file path."
-msgstr "theirs ファイルの名前です。ファイルパスの代わりに view タイトルに表示します。"
+msgstr "theirs ファイルの名前です。ファイルパスの代わりにビュータイトルに表示します。"
 
 #: source/TortoiseMerge_en.xml:1020(emphasis)
 msgid "mine"
@@ -733,47 +733,47 @@ msgstr "3 方向 diff で使用する <placeholder-1/> ファイルを指定し�
 
 #: source/TortoiseMerge_en.xml:1027(entry)
 msgid "The name of the mine file. This is shown in the view title instead of the file path."
-msgstr "mine ファイルの名前です。ファイルパスの代わりに view タイトルに表示します。"
+msgstr "mine ファイルの名前です。ファイルパスの代わりにビュータイトルに表示します。"
 
 #: source/TortoiseMerge_en.xml:1035(emphasis)
 msgid "merged"
-msgstr ""
+msgstr "merged"
 
 #: source/TortoiseMerge_en.xml:1034(entry)
 msgid "Specifies the resulting <placeholder-1/> file used in three way diffs. This is the filepath where the result of the merge/conflict resolving is saved. If this is not set, then TortoiseMerge will ask the user where to save the result."
-msgstr ""
+msgstr "3 方向 diff で結果として得られる <placeholder-1/> ファイルを指定します。マージや競合解消した結果を保存するファイルパスです。設定しない場合、TortoiseMerge はどこに保存するか訊いてきます。"
 
 #: source/TortoiseMerge_en.xml:1044(entry)
 msgid "The name of the merged file. This is shown in the view title instead of the file path."
-msgstr ""
+msgstr "merged ファイルの名前です。ファイルパスの代わりにビュータイトルに表示します。"
 
 #: source/TortoiseMerge_en.xml:1055(emphasis)
 msgid "very long"
-msgstr ""
+msgstr "非常に長い時間"
 
 #: source/TortoiseMerge_en.xml:1051(entry)
 msgid "The path where a patch should be applied to. If you don't set this path, then TortoiseMerge will try to find the path itself to match the paths in the patchfile, but that can take <placeholder-1/>."
-msgstr ""
+msgstr "適用するパッチファイルのパスです。このパスを設定しない場合、TortoiseMerge はパッチファイルのあるパスと一致するパスから探そうとしますが、<placeholder-1/> がかかります。"
 
 #: source/TortoiseMerge_en.xml:1060(entry)
 msgid "The name of the original file to patch. Used for the view title."
-msgstr ""
+msgstr "パッチを当てるオリジナルファイルの名前です。ビュータイトルに使われます。"
 
 #: source/TortoiseMerge_en.xml:1067(entry)
 msgid "The name of the resulting patched file. Used for the view title."
-msgstr ""
+msgstr "パッチを当てたファイルの名前です。ビュータイトルに使われます。"
 
 #: source/TortoiseMerge_en.xml:1074(entry)
 msgid "The path to the patch/diff file to apply to a directory."
-msgstr ""
+msgstr "パッチ・diff ファイルをディレクトリに適用するパスです。"
 
 #: source/TortoiseMerge_en.xml:1080(entry)
 msgid "Forces TortoiseMerge to start with the one-way view instead of the view the user specified in the settings."
-msgstr ""
+msgstr "TortoiseMerge を、ユーザが指定したビューではなく、強制的に 1 方向ビューで起動します。"
 
 #: source/TortoiseMerge_en.xml:1087(entry)
 msgid "Switches the left and right view of the specified two files to diff."
-msgstr ""
+msgstr "差分を取るよう指定した 2 ファイルの左右のビューを入れ替えます。"
 
 #: source/TortoiseMerge_en.xml:1096(para)
 msgid ""
@@ -781,6 +781,9 @@ msgid ""
 "TortoiseMerge BaseFilePath MyFilePath [ TheirFilePath ]\n"
 "</screen> If two files are given they will be compared with each other. If three files are given, the first is taken as the BASE file, and the other two are compared with it in a three-way diff."
 msgstr ""
+"他の diff プログラムと互換があるように、コマンドラインに単にファイル名を与えることもできます。コマンドラインの単純な形は以下になります。<screen>\n"
+"TortoiseMerge BaseFilePath MyFilePath [ TheirFilePath ]\n"
+"</screen> ファイルを 2 つ与えると、相互に比較します。3 ファイル与えると、最初の物を BASE ファイル、他の 2 つで比較する 3 方向 diff となります。"
 
 #: source/TortoiseMerge_en.xml:1112(title)
 msgid "Glossary"
