@@ -715,9 +715,6 @@ void CMainFrame::SaveFile(const CString& sFilePath)
 	{
 		arText = m_pwndBottomView->m_arDiffLines;
 		arStates = m_pwndBottomView->m_arLineStates;
-		m_pwndBottomView->SetModified(FALSE);
-		if ((m_pwndRightView)&&(m_pwndRightView->IsWindowVisible()))
-			m_pwndRightView->SetModified(FALSE);
 		Invalidate();
 	} // if (m_pwndBottomView) 
 	else if ((m_pwndRightView)&&(m_pwndRightView->IsWindowVisible()))
@@ -728,9 +725,6 @@ void CMainFrame::SaveFile(const CString& sFilePath)
 		else if (m_Data.IsTheirFileInUse())
 			pOriginFile = &m_Data.m_arTheirFile;
 		arStates = m_pwndRightView->m_arLineStates;
-		m_pwndRightView->SetModified(FALSE);
-		if ((m_pwndBottomView)&&(m_pwndBottomView->IsWindowVisible()))
-			m_pwndBottomView->SetModified(FALSE);
 		Invalidate();
 	} 
 	else
@@ -799,7 +793,11 @@ void CMainFrame::SaveFile(const CString& sFilePath)
 			return;
 		}
 		m_dlgFilePatches.SetFileStatusAsPatched(sFilePath);
-	} // if ((arText)&&(arStates)&&(pOriginFile)) 
+		if (m_pwndBottomView)
+			m_pwndBottomView->SetModified(FALSE);
+		if (m_pwndRightView)
+			m_pwndRightView->SetModified(FALSE);
+	}
 }
 
 void CMainFrame::OnFileSave()
