@@ -554,7 +554,9 @@ bool CRevisionGraph::AnalyzeRevisions(CStringA url, svn_revnum_t startrev, bool 
 						reventry->action = CRevisionEntry::renamed;
 						bRenamed = false;
 					}
-					if ((reventry->action != CRevisionEntry::lastcommit)&&(reventry->sourcearray.GetCount() > 0))
+					if 	((reventry->action != CRevisionEntry::modified)&&
+						(reventry->action != CRevisionEntry::lastcommit)&&
+						(reventry->sourcearray.GetCount() > 0))
 					{
 						// the entry is a source of a copy
 						reventry->bUsed = true;
@@ -587,7 +589,7 @@ bool CRevisionGraph::AnalyzeRevisions(CStringA url, svn_revnum_t startrev, bool 
 							if (!reventry->bUsed)
 							{
 								reventry->bUsed = true;
-								reventry->action = CRevisionEntry::nothing;
+								reventry->action = CRevisionEntry::modified;
 								reventry->level = m_nRecurseLevel;
 								reventry->url = apr_pstrdup(graphpool, url);
 							}
@@ -613,7 +615,7 @@ bool CRevisionGraph::AnalyzeRevisions(CStringA url, svn_revnum_t startrev, bool 
 						if (!reventry->bUsed)
 						{
 							reventry->bUsed = true;
-							reventry->action = CRevisionEntry::nothing;
+							reventry->action = CRevisionEntry::modified;
 							reventry->level = m_nRecurseLevel;
 							reventry->url = apr_pstrdup(graphpool, url);
 						}
