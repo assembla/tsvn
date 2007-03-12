@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2006-12-27 00:18+0900\n"
-"Last-Translator: Daisuke Deguchi <ddeguchi@suenaga.m.is.nagoya-u.ac.jp>\n"
+"PO-Revision-Date: 2007-03-07 20:43+0900\n"
+"Last-Translator: KURASAWA Nozomu <nabetaro@caldron.jp>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -434,7 +434,7 @@ msgstr "編集(&E)"
 # ID:12,
 #: ID:12
 msgid "&Edit conflicts"
-msgstr "衝突の編集(&E)"
+msgstr "競合の編集(&E)"
 
 # Control-ID:1099,
 #: Control-ID:1099
@@ -1331,11 +1331,11 @@ msgid ""
 "%mine\t\tyour own file, with your changes\n"
 "%base\t\tthe original file without your changes"
 msgstr ""
-"ファイルの衝突を解消するために、\n"
+"ファイルの競合を解消するために、\n"
 "利用する外部マージツール。\n"
 "<hr=100%>\n"
 "パスに次のようなパラメータ指定が可能:\n"
-"%merged\t保存先の衝突ファイル名\n"
+"%merged\t保存先の競合ファイル名\n"
 "%theirs\t\tリポジトリ内のファイル\n"
 "%mine\t\tあなたが変更したファイル\n"
 "%base\t\t変更前のオリジナルファイル"
@@ -1431,7 +1431,7 @@ msgstr "Unified Diff を適用"
 # ID:145,
 #: ID:145
 msgid "Are you sure you want to mark the conflicted file(s) as resolved?"
-msgstr "本当に、ファイルの衝突を解消済に変更してもよろしいですか？"
+msgstr "本当に、ファイルの競合を解消済に変更してもよろしいですか？"
 
 # ID:79,
 #: ID:79
@@ -1505,7 +1505,7 @@ msgstr "ローカル操作の場合は自動的に閉じる"
 # Control-ID:1123,
 #: ID:222
 msgid "Auto-close if no conflicts"
-msgstr "衝突が無い場合は自動的に閉じる"
+msgstr "競合が無い場合は自動的に閉じる"
 
 # ID:222,
 #: ID:222
@@ -2010,7 +2010,7 @@ msgstr "異なるリビジョンのファイルを比較するために用いる
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Configure the program used to resolve conflicted files."
-msgstr "ファイルの衝突を解消するために利用するプログラムを設定する。"
+msgstr "ファイルの競合を解消するために利用するプログラムを設定する。"
 
 # Control-ID:65535,
 #: Control-ID:65535
@@ -2021,13 +2021,13 @@ msgstr "GNUの差分ファイル（パッチファイル）の表示に用いる
 #: ID:263
 #: Control-ID:65535
 msgid "Conflicted"
-msgstr "衝突"
+msgstr "競合"
 
 # Control-ID:65535,
 #: ID:188
 #, c-format
 msgid "Conflicts: %d"
-msgstr "衝突: %d"
+msgstr "競合: %d"
 
 # ID:73,
 #: ID:73
@@ -3036,8 +3036,8 @@ msgid ""
 "Go to the next conflict\n"
 "next conflict"
 msgstr ""
-"次の衝突点へ移動する\n"
-"次の衝突点へ"
+"次の競合へ移動する\n"
+"次の競合へ"
 
 # ID:2049,
 #: ID:2049
@@ -3054,8 +3054,8 @@ msgid ""
 "Go to the previous conflict\n"
 "previous conflict"
 msgstr ""
-"前の衝突点へ移動する\n"
-"前の衝突点へ"
+"前の競合へ移動する\n"
+"前の競合へ"
 
 # ID:2049,
 #: ID:2049
@@ -3448,7 +3448,7 @@ msgstr "最後に保存した項目のリビジョン"
 # ID:12,
 #: ID:12
 msgid "Launches the external diff / merge program to solve the conflicts"
-msgstr "衝突を解消するために、外部の差分／マージプログラムを起動"
+msgstr "競合を解消するために、外部の差分／マージプログラムを起動"
 
 # Control-ID:1137,
 #: Control-ID:1137
@@ -3797,7 +3797,7 @@ msgstr "My ファイル:"
 # ID:12,
 #: MenuEntry
 msgid "N&ext Conflict"
-msgstr "次の衝突点へ(&E)"
+msgstr "次の競合へ(&E)"
 
 # ID:3697,
 #: ID:3697
@@ -4008,7 +4008,7 @@ msgstr "外部参照を除外する"
 # ID:219,
 #: ID:219
 msgid "One or more files are in a conflicted state."
-msgstr "１つ以上のファイルが衝突の状態にあります。"
+msgstr "１つ以上のファイルが競合状態にあります。"
 
 # Control-ID:1073,
 #: ID:99
@@ -4097,7 +4097,7 @@ msgstr "メモリ不足です。"
 # ID:12,
 #: MenuEntry
 msgid "P&revious Conflict"
-msgstr "前の衝突点へ(&R)"
+msgstr "前の競合へ(&R)"
 
 # ID:76,
 #: ID:76
@@ -4644,12 +4644,12 @@ msgstr "問題の解消"
 # ID:9,
 #: ID:282
 msgid "Resolve conflict using \"mine\""
-msgstr "\"mine\" を利用して衝突を解消する"
+msgstr "\"mine\" を利用して競合を解消する"
 
 # ID:9,
 #: ID:282
 msgid "Resolve conflict using \"theirs\""
-msgstr "\"theirs\" を利用して衝突を解消する"
+msgstr "\"theirs\" を利用して競合を解消する"
 
 # ID:8,
 #: ID:74
@@ -4670,7 +4670,7 @@ msgstr ""
 # ID:9,
 #: ID:9
 msgid "Resolves conflicted files"
-msgstr "ファイルの衝突を解消する"
+msgstr "ファイルの競合を解消する"
 
 # ID:73,
 #: Control-ID:1254
@@ -5827,7 +5827,7 @@ msgid ""
 "The selected file appears to still have one or more conflict markers in it.\n"
 "Are you sure you want to mark the file resolved?"
 msgstr ""
-"選択されたファイル内には、まだ１つ以上の衝突マークがあります。\n"
+"選択されたファイル内には、まだ１つ以上の競合マークがあります。\n"
 "本当に、ファイルに解消済マークを付けてもよろしいですか？"
 
 # ID:102,
@@ -5935,9 +5935,9 @@ msgid ""
 "Do you want to save the file with the conflicts still there?\n"
 "If you click YES, then you have to manually resolve the conflicts in another editor!"
 msgstr ""
-"まだ未解消の衝突が行 %d に存在しています！\n"
-"保存する前に、まずそれらの衝突を解消してください。\n"
-"衝突が存在する状態のままで、ファイルの保存を行ってもよろしいですか？\n"
+"まだ未解消の競合が行 %d に存在しています！\n"
+"保存する前に、まずそれらの競合を解消してください。\n"
+"競合が存在する状態のままで、ファイルの保存を行ってもよろしいですか？\n"
 "「はい」をクリックすると、他のエディタを用いて手作業で編集する必要があります！"
 
 # ID:82,
@@ -6955,7 +6955,7 @@ msgstr "コミット"
 # ID:11,
 #: ID:11
 msgid "conflicted"
-msgstr "衝突"
+msgstr "競合"
 
 # ID:77,
 #: ID:208
@@ -7069,7 +7069,7 @@ msgstr "画素"
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "possible or real conflict / obstructed"
-msgstr "衝突もしくはその可能性のあるファイル"
+msgstr "競合もしくはその可能性のあるファイル"
 
 # ID:245,
 #: ID:245
