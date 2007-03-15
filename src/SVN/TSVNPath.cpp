@@ -882,7 +882,8 @@ CTSVNPath CTSVNPathList::GetCommonRoot() const
 		sTempRoot.Empty();
 		for (it = m_paths.begin(); it != m_paths.end(); ++it)
 		{
-			const CString& sPath = it->GetWinPathString();
+			CTSVNPath directory = it->GetContainingDirectory();
+			const CString& sPath = directory.GetWinPathString();
 			if (sTempRoot.IsEmpty())
 				sTempRoot = sPath.Left(i);
 			if (sTempRoot.Compare(sPath.Left(i))!=0)
@@ -980,6 +981,7 @@ public:
 		ContainingDirectoryTest();
 		AncestorTest();
 		SubversionPathTest();
+		GetCommonRootTest();
 #if defined(_MFC_VER)
 		ValidPathAndUrlTest();
 		ListLoadingTest();
@@ -1213,6 +1215,17 @@ private:
 #endif
 	}
 
+	void GetCommonRootTest()
+	{
+		CTSVNPath pathA (_T("C:\\Development\\LogDlg.cpp"));
+		CTSVNPath pathB (_T("C:\\Development\\LogDlg.h"));
+		
+		CTSVNPathList list;
+		list.AddPath(pathA);
+		list.AddPath(pathB);
+		
+		ATLASSERT(list.GetCommonRoot().GetWinPathString().CompareNoCase(_T("C:\\Development"))==0);
+	}
 	
 #if defined(_MFC_VER)
 	void ValidPathAndUrlTest()
