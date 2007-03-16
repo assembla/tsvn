@@ -19,10 +19,7 @@
 #pragma once
 #include "DiffData.h"
 #include "SVNLineDiff.h"
-
-class CMainFrame;
-class CLocatorBar;
-class CLineDiffBar;
+#include "LocatorBar.h"
 
 /**
  * \ingroup TortoiseMerge
