@@ -141,7 +141,6 @@ void CRightView::OnContextMenu(CPoint point, int /*nLine*/)
 						case CDiffData::DIFFSTATE_REMOVED:
 						case CDiffData::DIFFSTATE_THEIRSREMOVED:
 						case CDiffData::DIFFSTATE_YOURSREMOVED:
-							rightstate.linestates[i] = CDiffData::DIFFSTATE_NORMAL;
 							m_arLineStates->SetAt(i, CDiffData::DIFFSTATE_NORMAL);
 							m_pwndLeft->m_arLineStates->SetAt(i, CDiffData::DIFFSTATE_NORMAL);
 							break;
