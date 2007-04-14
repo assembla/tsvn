@@ -36,7 +36,7 @@ protected:
 
 	// implement copy-history following strategy
 
-	virtual void HandleCopy() = 0;
+	virtual void HandleCopyAndDelete() = 0;
 
 	// do we have data for that revision?
 

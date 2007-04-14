@@ -3,7 +3,7 @@
 
 // implement as no-op
 
-void CStrictLogInterator::HandleCopy()
+void CStrictLogInterator::HandleCopyAndDelete()
 {
 }
 

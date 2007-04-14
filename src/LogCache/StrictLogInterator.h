@@ -8,7 +8,7 @@ protected:
 
 	// implement as no-op
 
-	virtual void HandleCopy();
+	virtual void HandleCopyAndDelete();
 
 public:
 

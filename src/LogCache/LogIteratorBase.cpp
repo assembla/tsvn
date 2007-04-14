@@ -5,7 +5,7 @@
 
 bool CLogIteratorBase::IntersectsWithPath (const CDictionaryBasedPath& rhsPath) const
 {
-	return path.IsSameOrParentOf (rhsPath) ||rhsPath.IsSameOrParentOf (path);
+	return path.IsSameOrParentOf (rhsPath) || rhsPath.IsSameOrParentOf (path);
 }
 
 bool CLogIteratorBase::PathInRevision() const
@@ -104,8 +104,14 @@ void CLogIteratorBase::Advance()
 		// the current revision may be a copy / rename
 		// -> update our path before we proceed, if necessary
 
-		HandleCopy();
+		HandleCopyAndDelete();
 
+		// revision may have been set to -1, 
+		// e.g. if a deletion has been found
+	}
+
+	if (revision > 0)
+	{
 		// find next entry that mentiones the path
 		// stop @ revision 0 or missing log data
 
