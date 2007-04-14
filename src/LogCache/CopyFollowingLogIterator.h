@@ -4,15 +4,19 @@
 class CCopyFollowingLogIterator :
 	public CLogIteratorBase
 {
-private:
+protected:
 
-	// we may need this for paths that have no log entry
-	// (e.g. while following a copy history)
+	// implement copy-following and termination-on-delete
 
-	std::string relPath;
+	virtual void HandleCopyAndDelete();
 
 public:
 
-	CCopyFollowingLogIterator(void);
+	// construction / destruction 
+	// (nothing special to do)
+
+	CCopyFollowingLogIterator ( const CCachedLogInfo* cachedLog
+							  , size_t startRevision
+							  , const CDictionaryBasedPath& startPath);
 	virtual ~CCopyFollowingLogIterator(void);
 };
