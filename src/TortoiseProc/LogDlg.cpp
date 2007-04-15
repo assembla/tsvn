@@ -2091,16 +2091,24 @@ void CLogDlg::OnNMDblclkLogmsg(NMHDR * /*pNMHDR*/, LRESULT *pResult)
 	POSITION pos = m_LogList.GetFirstSelectedItemPosition();
 	PLOGENTRYDATA pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(m_LogList.GetNextSelectedItem(pos)));
 	long rev1 = pLogEntry->dwRev;
-	long rev2 = rev1-1;
+	long rev2 = rev1;
 	if (pos)
 	{
-		pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(m_LogList.GetNextSelectedItem(pos)));
-		if (pLogEntry)
-			rev2 = pLogEntry->dwRev;
+		while (pos)
+		{
+			pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(m_LogList.GetNextSelectedItem(pos)));
+			if (pLogEntry)
+			{
+				rev1 = max(rev1,(long)pLogEntry->dwRev);
+				rev2 = min(rev2,(long)pLogEntry->dwRev);
+			}
+		}
+		rev2--;
 		DoDiffFromLog(selIndex, rev1, rev2, false, false);
 	}
 	else
 	{
+		rev2 = rev1-1;
 		LogChangedPath * changedpath = pLogEntry->pArChangedPaths->GetAt(selIndex);
 
 		if ((m_cHidePaths.GetState() & 0x0003)==BST_CHECKED)
