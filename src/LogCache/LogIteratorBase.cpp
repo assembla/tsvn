@@ -3,9 +3,34 @@
 
 // comparison methods
 
-bool CLogIteratorBase::IntersectsWithPath (const CDictionaryBasedPath& rhsPath) const
+bool CLogIteratorBase::PathsIntersect ( const CDictionaryBasedPath& lhsPath
+									  , const CDictionaryBasedPath& rhsPath)
 {
-	return path.IsSameOrParentOf (rhsPath) || rhsPath.IsSameOrParentOf (path);
+	return lhsPath.IsSameOrParentOf (rhsPath) 
+		|| rhsPath.IsSameOrParentOf (lhsPath);
+}
+
+// is current revision actually relevant?
+
+bool CLogIteratorBase::PathInRevision
+	( const CRevisionInfoContainer::CChangesIterator& first
+	, const CRevisionInfoContainer::CChangesIterator& last
+	, const CDictionaryBasedPath& path)
+{
+	// close examination of all changes
+
+	for ( CRevisionInfoContainer::CChangesIterator iter = first
+		; iter != last
+		; ++iter)
+	{
+		CDictionaryBasedPath changedPath = iter->GetPath();
+		if (PathsIntersect (changedPath, path))
+			return true;
+	}
+
+	// no paths that we were looking for
+
+	return false;
 }
 
 bool CLogIteratorBase::PathInRevision() const
@@ -23,25 +48,14 @@ bool CLogIteratorBase::PathInRevision() const
 	if (!revisionRootPath.IsValid())
 		return false;
 
-	if (!IntersectsWithPath (revisionRootPath))
+	if (!PathsIntersect (path, revisionRootPath))
 		return false;
 
 	// close examination of all changes
 
-	for (CRevisionInfoContainer::CChangesIterator 
-			iter = revisionInfo.GetChangesBegin(index),
-			last = revisionInfo.GetChangesEnd(index)
-		; iter != last
-		; ++iter)
-	{
-		CDictionaryBasedPath changedPath = iter->GetPath();
-		if (IntersectsWithPath (revisionRootPath))
-			return true;
-	}
-
-	// no paths that we were looking for
-
-	return false;
+	return PathInRevision ( revisionInfo.GetChangesBegin(index)
+						  , revisionInfo.GetChangesEnd(index)
+						  , path);
 }
 
 // Test, whether InternalHandleCopyAndDelete() should be used
@@ -149,6 +163,19 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 	return false;
 }
 
+// log scanning sub-routines
+
+void CLogIteratorBase::ToNextRevision()
+{
+	--revision;
+}
+
+size_t CLogIteratorBase::SkipNARevisions()
+{
+	return logInfo->GetSkippedRevisions()
+				.GetPreviousRevision (path, revision);
+}
+
 // log scanning
 
 void CLogIteratorBase::InternalAdvance()
@@ -160,17 +187,14 @@ void CLogIteratorBase::InternalAdvance()
 	{
 		// perform at least one step
 
-		--revision;
+		ToNextRevision();
 
 		// skip ranges of missing data, if we know
 		// that they don't affect our path
 
 		while (InternalDataIsMissing())
 		{
-			DWORD nextRevision 
-				= logInfo->GetSkippedRevisions()
-					.GetPreviousRevision (path, revision);
-
+			size_t nextRevision = SkipNARevisions(); 
 			if (nextRevision != -1)
 				revision = nextRevision;
 		}

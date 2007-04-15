@@ -44,8 +44,15 @@ protected:
 
 	// comparison methods
 
-	bool IntersectsWithPath (const CDictionaryBasedPath& rhsPath) const;
-	bool PathInRevision() const;
+	static bool PathsIntersect 
+		( const CDictionaryBasedPath& lhsPath
+		, const CDictionaryBasedPath& rhsPath);
+	static bool PathInRevision 
+		( const CRevisionInfoContainer::CChangesIterator& first
+		, const CRevisionInfoContainer::CChangesIterator& last
+		, const CDictionaryBasedPath& path);
+
+	virtual bool PathInRevision() const;
 
 	// utilities for efficient HandleCopyAndDelete() implementation
 
@@ -64,9 +71,14 @@ protected:
 		, CDictionaryBasedPath& searchPath
 		, size_t& searchRevision);
 
+	// log scanning sub-routines
+
+	virtual size_t SkipNARevisions();
+	virtual void ToNextRevision();
+
 	// log scanning
 
-	void InternalAdvance();
+	virtual void InternalAdvance();
 
 public:
 
