@@ -1,6 +1,29 @@
 #pragma once
 
 ///////////////////////////////////////////////////////////////
+// data structures to accomodate the change list
+///////////////////////////////////////////////////////////////
+
+struct LogChangedPath
+{
+	CString sPath;
+	CString sCopyFromPath;
+	svn_revnum_t lCopyFromRev;
+	DWORD action;
+	CString GetAction() const;
+};
+
+enum
+{
+	LOGACTIONS_MODIFIED	= 0x00000001,
+	LOGACTIONS_REPLACED	= 0x00000002,
+	LOGACTIONS_ADDED	= 0x00000004,
+	LOGACTIONS_DELETED	= 0x00000008
+};
+
+typedef CArray<LogChangedPath*, LogChangedPath*> LogChangedPathArray;
+
+///////////////////////////////////////////////////////////////
 // ILogReceiver
 ///////////////////////////////////////////////////////////////
 
