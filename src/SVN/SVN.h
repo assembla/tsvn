@@ -617,9 +617,6 @@ private:
 	svn_opt_revision_t *	getRevision (svn_revnum_t revNumber);
 	void * logMessage (const char * message, char * baseDirectory = NULL);
 
-	// Convert a TSVNPathList into an array of SVN paths
-	apr_array_header_t * MakePathArray(const CTSVNPathList& pathList);
-
 	svn_error_t * get_url_from_target (const char **URL, const char *target);
 	svn_error_t * get_uuid_from_target (const char **UUID, const char *target);
 	static svn_error_t* cancel(void *baton);

@@ -309,7 +309,7 @@ BOOL SVN::Remove(const CTSVNPathList& pathlist, BOOL force, CString message)
 	message.Replace(_T("\r"), _T(""));
 	m_pctx->log_msg_baton2 = logMessage(CUnicodeUtils::GetUTF8(message));
 
-	Err = svn_client_delete2 (&commit_info, MakePathArray(pathlist), force,
+	Err = svn_client_delete2 (&commit_info, pathlist.MakePathArray(pool), force,
 							  m_pctx,
 							  subPool);
 	if(Err != NULL)
@@ -338,7 +338,7 @@ BOOL SVN::Revert(const CTSVNPathList& pathlist, BOOL recurse)
 {
 	TRACE("Reverting list of %d files\n", pathlist.GetCount());
 
-	Err = svn_client_revert (MakePathArray(pathlist), recurse, m_pctx, pool);
+	Err = svn_client_revert (Mpathlist.MakePathArray(pool), recurse, m_pctx, pool);
 
 	if(Err != NULL)
 	{
@@ -370,7 +370,7 @@ BOOL SVN::Update(const CTSVNPathList& pathList, SVNRev revision, BOOL recurse, B
 {
 	SVNPool(localpool);
 	Err = svn_client_update2(NULL,
-							MakePathArray(pathList),
+							pathlist.MakePathArray(pool),
 							revision,
 							recurse,
 							ignoreexternals,
@@ -392,7 +392,7 @@ svn_revnum_t SVN::Commit(const CTSVNPathList& pathlist, CString message, BOOL re
 	message.Replace(_T("\r"), _T(""));
 	m_pctx->log_msg_baton2 = logMessage(CUnicodeUtils::GetUTF8(message));
 	Err = svn_client_commit3 (&commit_info, 
-							MakePathArray(pathlist), 
+							pathlist.MakePathArray(pool), 
 							recurse,
 							keep_locks,
 							m_pctx,
@@ -467,7 +467,7 @@ BOOL SVN::MakeDir(const CTSVNPathList& pathlist, CString message)
 	message.Replace(_T("\r"), _T(""));
 	m_pctx->log_msg_baton2 = logMessage(CUnicodeUtils::GetUTF8(message));
 	Err = svn_client_mkdir2 (&commit_info,
-							 MakePathArray(pathlist),
+							 pathlist.MakePathArray(pool),
 							 m_pctx,
 							 pool);
 	if(Err != NULL)
@@ -879,7 +879,7 @@ bool SVN::DiffSummarizePeg(const CTSVNPath& path, SVNRev peg, SVNRev rev1, SVNRe
 BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev revisionStart, SVNRev revisionEnd, int limit, BOOL changed, BOOL strict /* = FALSE */)
 {
 	SVNPool localpool(pool);
-	Err = svn_client_log3 (MakePathArray(pathlist), 
+	Err = svn_client_log3 (pathlist.MakePathArray(pool), 
 						revisionPeg,
 						revisionStart, 
 						revisionEnd, 
@@ -1040,13 +1040,13 @@ svn_error_t* SVN::blameReceiver(void* baton,
 
 BOOL SVN::Lock(const CTSVNPathList& pathList, BOOL bStealLock, const CString& comment /* = CString( */)
 {
-	Err = svn_client_lock(MakePathArray(pathList), CUnicodeUtils::GetUTF8(comment), bStealLock, m_pctx, pool);
+	Err = svn_client_lock(pathlist.MakePathArray(pool), CUnicodeUtils::GetUTF8(comment), bStealLock, m_pctx, pool);
 	return (Err == NULL);	
 }
 
 BOOL SVN::Unlock(const CTSVNPathList& pathList, BOOL bBreakLock)
 {
-	Err = svn_client_unlock(MakePathArray(pathList), bBreakLock, m_pctx, pool);
+	Err = svn_client_unlock(pathlist.MakePathArray(pool), bBreakLock, m_pctx, pool);
 	return (Err == NULL);
 }
 
@@ -1872,18 +1872,6 @@ void SVN::SetPromptParentWindow(HWND hWnd)
 void SVN::SetPromptApp(CWinApp* pWinApp)
 {
 	m_prompt.SetApp(pWinApp);
-}
-
-apr_array_header_t * SVN::MakePathArray(const CTSVNPathList& pathList)
-{
-	apr_array_header_t *targets = apr_array_make (pool,pathList.GetCount(),sizeof(const char *));
-
-	for(int nItem = 0; nItem < pathList.GetCount(); nItem++)
-	{
-		const char * target = apr_pstrdup (pool, pathList[nItem].GetSVNApiPath());
-		(*((const char **) apr_array_push (targets))) = target;
-	}
-	return targets;
 }
 
 void SVN::SetAndClearProgressInfo(HWND hWnd)

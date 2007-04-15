@@ -18,6 +18,8 @@
 //
 #pragma once
 
+#include "apr_tables.h"
+
 #if defined(_MFC_VER)
 // CSTRING is always available in an MFC build
 #define CSTRING_AVAILABLE
@@ -321,6 +323,9 @@ public:
 	 * child files and folders don't have to be deleted anymore)
 	 */
 	void RemoveChildren();
+
+	/** Convert into the SVN API parameter format */
+	apr_array_header_t * MakePathArray (apr_pool_t *pool) const;
 
 private:
 	typedef std::vector<CTSVNPath> PathVector;
