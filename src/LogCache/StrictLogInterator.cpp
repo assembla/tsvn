@@ -3,8 +3,9 @@
 
 // implement as no-op
 
-void CStrictLogInterator::HandleCopyAndDelete()
+bool CStrictLogInterator::HandleCopyAndDelete()
 {
+	return false;
 }
 
 // construction / destruction 

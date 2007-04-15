@@ -44,6 +44,111 @@ bool CLogIteratorBase::PathInRevision() const
 	return false;
 }
 
+// Test, whether InternalHandleCopyAndDelete() should be used
+
+bool CLogIteratorBase::ContainsCopyOrDelete 
+	( const CRevisionInfoContainer::CChangesIterator& first
+	, const CRevisionInfoContainer::CChangesIterator& last)
+{
+	// close examination of all changes
+
+	for (CRevisionInfoContainer::CChangesIterator iter = first
+		; iter != last
+		; ++iter)
+	{
+		// the only non-critical operation is the mere modification
+
+		CRevisionInfoContainer::TChangeAction action = iter.GetAction();
+		if (action != CRevisionInfoContainer::ACTION_CHANGED)
+			return true;
+	}
+
+	// no copy / delete / replace found
+
+	return false;
+}
+
+// Change the path we are iterating the log for,
+// if there is a copy / replace.
+// Set revision to -1, if path is deleted.
+
+bool CLogIteratorBase::InternalHandleCopyAndDelete 
+	( const CRevisionInfoContainer::CChangesIterator& first
+	, const CRevisionInfoContainer::CChangesIterator& last
+	, const CDictionaryBasedPath& revisionRootPath
+	, CDictionaryBasedPath& searchPath
+	, size_t& searchRevision)
+{
+	// any chance that this revision affects our search path?
+
+	if (!revisionRootPath.IsValid())
+		return false;
+
+	if (!revisionRootPath.IsSameOrParentOf (searchPath))
+		return false;
+
+	// close examination of all changes
+
+	for (CRevisionInfoContainer::CChangesIterator iter = first
+		; iter != last
+		; ++iter)
+	{
+		// most entries will just be file content changes
+		// -> skip them efficiently
+
+		CRevisionInfoContainer::TChangeAction action = iter.GetAction();
+		if (action == CRevisionInfoContainer::ACTION_CHANGED)
+			continue;
+
+		// deletion / copy / rename / replacement
+		// -> skip, if our search path is not affected (only some sub-path)
+
+		CDictionaryBasedPath changedPath = iter->GetPath();
+		if (!changedPath.IsSameOrParentOf (searchPath))
+			continue;
+
+		// now, this is serious
+
+		switch (action)
+		{
+			// deletion?
+
+			case CRevisionInfoContainer::ACTION_DELETED:
+			{
+				// end of path history
+
+				searchRevision = -1;
+				return true;
+			}
+
+			// rename?
+
+			case CRevisionInfoContainer::ACTION_ADDED:
+			case CRevisionInfoContainer::ACTION_REPLACED:
+			{
+				// continue search on copy source path
+
+				assert (iter.GetFromPath().IsValid());
+				searchPath = iter.GetFromPath();
+				searchRevision = iter.GetFromRevision();
+
+				return true;
+			}
+
+			// there should be no other
+
+			default:
+			{
+				assert (0);
+			}
+		}
+	}
+
+	// all fine, no special action required
+
+	return false;
+}
+
 // log scanning
 
 void CLogIteratorBase::InternalAdvance()
@@ -82,7 +187,6 @@ CLogIteratorBase::CLogIteratorBase ( const CCachedLogInfo* cachedLog
 	: logInfo (cachedLog)
 	, revision (startRevision)
 	, path (startPath)
-	, relPath()
 {
 }
 
@@ -104,18 +208,27 @@ void CLogIteratorBase::Advance()
 		// the current revision may be a copy / rename
 		// -> update our path before we proceed, if necessary
 
-		HandleCopyAndDelete();
+		if (HandleCopyAndDelete())
+		{
+			// revision may have been set to -1, 
+			// e.g. if a deletion has been found
 
-		// revision may have been set to -1, 
-		// e.g. if a deletion has been found
-	}
+			if (revision != -1)
+			{
+				// switched to a new path
+				// -> retry access on that new path 
+				// (especially, we must try (copy-from-) revision)
 
-	if (revision > 0)
-	{
-		// find next entry that mentiones the path
-		// stop @ revision 0 or missing log data
+				Retry();
+			}
+		}
+		else
+		{
+			// find next entry that mentiones the path
+			// stop @ revision 0 or missing log data
 
-		InternalAdvance();
+			InternalAdvance();
+		}
 	}
 }
 

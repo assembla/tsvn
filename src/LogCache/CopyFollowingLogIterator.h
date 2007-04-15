@@ -8,7 +8,7 @@ protected:
 
 	// implement copy-following and termination-on-delete
 
-	virtual void HandleCopyAndDelete();
+	virtual bool HandleCopyAndDelete();
 
 public:
 

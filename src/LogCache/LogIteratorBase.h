@@ -36,7 +36,7 @@ protected:
 
 	// implement copy-history following strategy
 
-	virtual void HandleCopyAndDelete() = 0;
+	virtual bool HandleCopyAndDelete() = 0;
 
 	// do we have data for that revision?
 
@@ -46,6 +46,23 @@ protected:
 
 	bool IntersectsWithPath (const CDictionaryBasedPath& rhsPath) const;
 	bool PathInRevision() const;
+
+	// utilities for efficient HandleCopyAndDelete() implementation
+
+	// any HandleCopyAndDelete() entries in that revision?
+
+	static bool ContainsCopyOrDelete 
+		( const CRevisionInfoContainer::CChangesIterator& first
+		, const CRevisionInfoContainer::CChangesIterator& last);
+
+	// return true, searchPath / searchRevision have been modified
+
+	static bool InternalHandleCopyAndDelete 
+		( const CRevisionInfoContainer::CChangesIterator& first
+		, const CRevisionInfoContainer::CChangesIterator& last
+		, const CDictionaryBasedPath& revisionRootPath
+		, CDictionaryBasedPath& searchPath
+		, size_t& searchRevision);
 
 	// log scanning
 
