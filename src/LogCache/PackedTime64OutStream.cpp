@@ -28,7 +28,7 @@ void CPackedTime64OutStreamBase::Add (__time64_t value)
 
 	// store bits 0 .. 3 in the header
 
-	head = (unsigned char)value & 0xf;
+	head += (unsigned char)value & 0xf;
 	value >>= 4;
 
 	// set buffer and determine size (min. 1)
