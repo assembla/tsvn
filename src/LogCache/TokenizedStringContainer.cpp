@@ -22,6 +22,8 @@ namespace LogCache
 void CTokenizedStringContainer::CPairPacker::Initialize()
 {
 	strings.reserve (container->offsets.size());
+	newPairs.reserve (container->pairs.size());
+	counts.reserve (container->pairs.size());
 
 	IT first = container->offsets.begin();
 	IT last = container->offsets.end();
@@ -410,6 +412,23 @@ void CTokenizedStringContainer::Compress()
 	packer.Compact();
 }
 
+void CTokenizedStringContainer::AutoCompress()
+{
+	// Compress only if "too few" pairs have been found yet.
+
+	// In typical repositories, the relation of string
+	// tokens to used token pairs is ~10:1.
+	
+	// We will favour compressing in small caches while
+	// making this expensive operation less likely for
+	// larger caches with already a reasonable number of
+	// token pairs. Threashold: log n > n / p
+
+	index_t relation = (index_t)stringData.size() / (pairs.size() + 1);
+	if (stringData.size() < (1 << relation))
+		Compress();
+}
+
 // reset content
 
 void CTokenizedStringContainer::Clear()
@@ -466,7 +485,7 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 	IHierarchicalOutStream* wordsStream 
 		= stream.OpenSubStream ( CTokenizedStringContainer::WORDS_STREAM_ID
 							   , COMPOSITE_STREAM_TYPE_ID);
-	const_cast<CTokenizedStringContainer*>(&container)->Compress();
+	const_cast<CTokenizedStringContainer*>(&container)->AutoCompress();
 	*wordsStream << container.words;
 
 	// write the pairs

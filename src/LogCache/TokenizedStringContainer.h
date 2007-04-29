@@ -226,6 +226,7 @@ public:
 
 	index_t Insert (const std::string& s);
 	void Compress();
+	void AutoCompress();
 
 	// reset content
 
