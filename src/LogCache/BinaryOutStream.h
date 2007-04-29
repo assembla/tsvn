@@ -24,7 +24,13 @@ private:
 
 	// data to write (may be NULL)
 
-	std::vector<unsigned char> data;
+	std::auto_ptr<unsigned char> data;
+	unsigned char* current;
+	unsigned char* last;
+
+	// buffer management
+
+	void Grow() throw();
 
 protected:
 
@@ -34,14 +40,22 @@ protected:
 
 	// add data to the stream
 
-	void Add (const unsigned char* source, size_t byteCount)
+	void Add (const unsigned char* source, size_t byteCount) throw()
 	{
-		data.insert (data.end(), source, source + byteCount);
+		while (current + byteCount > last)
+			Grow();
+
+		memcpy (current, source, byteCount);
+		current += byteCount;
 	}
 
-	void Add (unsigned char c)
+	void Add (unsigned char c) throw()
 	{
-		data.push_back (c);
+		if (current == last)
+			Grow();
+
+		*current = c;
+		++current;
 	};
 
 public:
