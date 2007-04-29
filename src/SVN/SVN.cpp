@@ -338,7 +338,7 @@ BOOL SVN::Revert(const CTSVNPathList& pathlist, BOOL recurse)
 {
 	TRACE("Reverting list of %d files\n", pathlist.GetCount());
 
-	Err = svn_client_revert (Mpathlist.MakePathArray(pool), recurse, m_pctx, pool);
+	Err = svn_client_revert (pathlist.MakePathArray(pool), recurse, m_pctx, pool);
 
 	if(Err != NULL)
 	{
@@ -370,7 +370,7 @@ BOOL SVN::Update(const CTSVNPathList& pathList, SVNRev revision, BOOL recurse, B
 {
 	SVNPool(localpool);
 	Err = svn_client_update2(NULL,
-							pathlist.MakePathArray(pool),
+							pathList.MakePathArray(pool),
 							revision,
 							recurse,
 							ignoreexternals,
@@ -1040,13 +1040,13 @@ svn_error_t* SVN::blameReceiver(void* baton,
 
 BOOL SVN::Lock(const CTSVNPathList& pathList, BOOL bStealLock, const CString& comment /* = CString( */)
 {
-	Err = svn_client_lock(pathlist.MakePathArray(pool), CUnicodeUtils::GetUTF8(comment), bStealLock, m_pctx, pool);
+	Err = svn_client_lock(pathList.MakePathArray(pool), CUnicodeUtils::GetUTF8(comment), bStealLock, m_pctx, pool);
 	return (Err == NULL);	
 }
 
 BOOL SVN::Unlock(const CTSVNPathList& pathList, BOOL bBreakLock)
 {
-	Err = svn_client_unlock(pathlist.MakePathArray(pool), bBreakLock, m_pctx, pool);
+	Err = svn_client_unlock(pathList.MakePathArray(pool), bBreakLock, m_pctx, pool);
 	return (Err == NULL);
 }
 
