@@ -31,6 +31,8 @@ public:
 	typedef typename HF::value_type value_type;
 	typedef typename HF::index_type index_type;
 	
+	enum {NO_INDEX_VALUE = (index_type)(HF::NO_INDEX_VALUE)};
+
 	struct statistics_t
 	{
 		size_t capacity;
@@ -147,7 +149,7 @@ private:
 		size_t new_capacity = grower.capacity();
 	
 		data = new index_type[new_capacity];
-		std::fill_n (data, new_capacity, HF::NO_INDEX_VALUE);
+		std::fill_n (data, new_capacity, NO_INDEX_VALUE);
 	}
 	
 	// add a value to the hash 
@@ -160,7 +162,7 @@ private:
 		size_t bucket = grower.map (hf (value));
 		index_type* target = data + bucket;
 
-		if (*target == HF::NO_INDEX_VALUE)
+		if (*target == NO_INDEX_VALUE)
 		{
 			*target = index;
 			grower.inserted_cleanly();
@@ -177,7 +179,7 @@ private:
 			target = data + bucket;
 			++collision_path_size;
 		}
-		while (*target != HF::NO_INDEX_VALUE);
+		while (*target != NO_INDEX_VALUE);
 		
 		// insert collisioned item
 
@@ -192,7 +194,7 @@ private:
 		for (size_t i = 0; i < old_data_size; ++i)
 		{
 			index_type index = old_data[i];
-			if (index != HF::NO_INDEX_VALUE)
+			if (index != NO_INDEX_VALUE)
 				internal_insert (hf.value (index), index);
 		}
 
@@ -225,14 +227,14 @@ public:
 	}
 
 	// find the bucket containing the desired value;
-	// return HF::NO_INDEX_VALUE if not contained in hash
+	// return NO_INDEX_VALUE if not contained in hash
 	
 	index_type find (const value_type& value) const
 	{
 		size_t bucket = grower.map (hf (value));
 		index_type index = data[bucket];
 
-		while (index != HF::NO_INDEX_VALUE)
+		while (index != NO_INDEX_VALUE)
 		{
 			// found?
 
@@ -252,7 +254,7 @@ public:
 	
 	void insert (const value_type& value, index_type index)
 	{
-		assert (find (value) == HF::NO_INDEX_VALUE);
+		assert (find (value) == NO_INDEX_VALUE);
 		
 		if (should_grow())
 			reserve (grower.capacity()+1);
