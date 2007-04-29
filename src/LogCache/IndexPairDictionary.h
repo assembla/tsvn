@@ -127,6 +127,8 @@ public:
 		return (index_t)data.size();
 	}
 
+	void reserve (index_t min_capacity);
+
 	const std::pair<index_t, index_t>& operator[](index_t index) const
 	{
 		if (index >= data.size())

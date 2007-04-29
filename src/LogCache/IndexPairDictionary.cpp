@@ -40,6 +40,12 @@ CIndexPairDictionary::~CIndexPairDictionary(void)
 
 // dictionary operations
 
+void CIndexPairDictionary::reserve (index_t min_capacity)
+{
+	data.reserve (min_capacity);
+	hashIndex.reserve (min_capacity);
+}
+
 index_t CIndexPairDictionary::Find (const std::pair<index_t, index_t>& value) const
 {
 	return hashIndex.find (value);
