@@ -5,6 +5,7 @@
 ///////////////////////////////////////////////////////////////
 
 #include "QuickHash.h"
+#include "LogCacheGlobals.h"
 
 ///////////////////////////////////////////////////////////////
 // forward declarations
@@ -12,6 +13,13 @@
 
 class IHierarchicalInStream;
 class IHierarchicalOutStream;
+
+///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
 
 ///////////////////////////////////////////////////////////////
 //
@@ -44,7 +52,7 @@ private:
 		// the dictionary we index with the hash
 		// (used to map index -> value)
 
-		std::vector<std::pair<int, int> >* data;
+		std::vector<std::pair<index_t, index_t> >* data;
 
 	public:
 
@@ -54,10 +62,10 @@ private:
 
 		// required typedefs and constants
 
-		typedef std::pair<int, int> value_type;
-		typedef DWORD index_type;
+		typedef std::pair<index_t, index_t> value_type;
+		typedef index_t index_type;
 
-		enum {NO_INDEX_VALUE = -1};
+		enum {NO_INDEX = LogCache::NO_INDEX};
 
 		// the actual hash function
 
@@ -99,7 +107,7 @@ private:
 
 	// our data pool
 
-	std::vector<std::pair<int, int> > data;
+	std::vector<std::pair<index_t, index_t> > data;
 
 	// the hash index (for faster lookup)
 
@@ -114,12 +122,12 @@ public:
 
 	// dictionary operations
 
-	size_t size() const
+	index_t size() const
 	{
-		return data.size();
+		return (index_t)data.size();
 	}
 
-	const std::pair<int, int>& operator[](size_t index) const
+	const std::pair<index_t, index_t>& operator[](index_t index) const
 	{
 		if (index >= data.size())
 			throw std::exception ("pair dictionary index out of range");
@@ -127,9 +135,9 @@ public:
 		return data[index];
 	}
 
-	size_t Find (const std::pair<int, int>& value) const;
-	size_t Insert (const std::pair<int, int>& value);
-	size_t AutoInsert (const std::pair<int, int>& value);
+	index_t Find (const std::pair<index_t, index_t>& value) const;
+	index_t Insert (const std::pair<index_t, index_t>& value);
+	index_t AutoInsert (const std::pair<index_t, index_t>& value);
 
 	void Clear();
 
@@ -147,3 +155,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 								  , CIndexPairDictionary& dictionary);
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								   , const CIndexPairDictionary& dictionary);
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
+

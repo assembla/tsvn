@@ -1,11 +1,24 @@
 #pragma once
 
 ///////////////////////////////////////////////////////////////
+// include
+///////////////////////////////////////////////////////////////
+
+#include "LogCacheGlobals.h"
+
+///////////////////////////////////////////////////////////////
 // forward declarations
 ///////////////////////////////////////////////////////////////
 
 class IHierarchicalInStream;
 class IHierarchicalOutStream;
+
+///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
 
 ///////////////////////////////////////////////////////////////
 //
@@ -27,8 +40,8 @@ private:
 
 	// the mapping and its bias
 
-	size_t firstRevision;
-	std::vector<DWORD> indices;
+	revision_t firstRevision;
+	std::vector<index_t> indices;
 
 	// sub-stream IDs
 
@@ -47,28 +60,28 @@ public:
 	// range of (possibly available) revisions:
 	// GetFirstRevision() .. GetLastRevision()-1
 
-	size_t GetFirstRevision() const
+	revision_t GetFirstRevision() const
 	{
 		return firstRevision;
 	}
-	size_t GetLastRevision() const
+	revision_t GetLastRevision() const
 	{
-		return firstRevision + indices.size();
+		return firstRevision + (revision_t)indices.size();
 	}
 
 	// read
 
-	DWORD operator[](size_t revision) const
+	index_t operator[](revision_t revision) const
 	{
 		revision -= firstRevision;
 		return revision < indices.size()
 			? indices[revision]
-			: (DWORD)-1;
+			: NO_INDEX;
 	}
 
-	// insert info (must be -1 before)
+	// insert info (must be NO_INDEX before)
 
-	void SetRevisionIndex (size_t revision, DWORD index);
+	void SetRevisionIndex (revision_t revision, index_t index);
 
 	// reset content
 
@@ -88,4 +101,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 								  , CRevisionIndex& container);
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								   , const CRevisionIndex& container);
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
 

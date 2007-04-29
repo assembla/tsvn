@@ -9,6 +9,13 @@
 #include "SkipRevisionInfo.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 //
 // CCachedLogInfo
 //
@@ -87,7 +94,7 @@ public:
 	// data modification 
 	// (mirrors CRevisionInfoContainer and CSkipRevisionInfo)
 
-	void Insert ( size_t revision
+	void Insert ( revision_t revision
 				, const std::string& author
 				, const std::string& comment
 				, __time64_t timeStamp);
@@ -95,11 +102,11 @@ public:
 	void AddChange ( TChangeAction action
 				   , const std::string& path
 				   , const std::string& fromPath
-				   , DWORD fromRevision);
+				   , revision_t fromRevision);
 
 	void AddSkipRange ( const std::string& path
-					  , DWORD startRevision
-					  , DWORD count);
+					  , revision_t startRevision
+					  , revision_t count);
 
 	void Clear();
 };
@@ -147,12 +154,18 @@ inline const CSkipRevisionInfo& CCachedLogInfo::GetSkippedRevisions() const
 ///////////////////////////////////////////////////////////////
 
 inline void CCachedLogInfo::AddChange ( TChangeAction action
-								       , const std::string& path
-									   , const std::string& fromPath
-									   , DWORD fromRevision)
+								      , const std::string& path
+									  , const std::string& fromPath
+									  , revision_t fromRevision)
 {
 	assert (revisionAdded);
 
 	logInfo.AddChange (action, path, fromPath, fromRevision);
+}
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
 }
 

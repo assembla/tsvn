@@ -7,6 +7,13 @@
 #include "logiteratorbase.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // CLogBatchIteratorBase
 ///////////////////////////////////////////////////////////////
 
@@ -16,7 +23,7 @@ public:
 
 	// container type for <path, revision> pairs
 
-	typedef std::pair<CDictionaryBasedPath, size_t> TPathRevision;
+	typedef std::pair<CDictionaryBasedPath, revision_t> TPathRevision;
 	typedef std::vector<TPathRevision> TPathRevisions;
 
 protected:
@@ -27,7 +34,7 @@ protected:
 
 	// path list folding utilties
 
-	static size_t MaxRevision (const TPathRevisions& pathRevisions);
+	static revision_t MaxRevision (const TPathRevisions& pathRevisions);
 	static CDictionaryBasedPath BasePath ( const CCachedLogInfo* cachedLog
 										 , const TPathRevisions& pathRevisions);
 
@@ -40,7 +47,7 @@ protected:
 	// implement log scanning sub-routines to
 	// work on multiple paths
 
-	virtual size_t SkipNARevisions();
+	virtual revision_t SkipNARevisions();
 	virtual bool PathInRevision() const;
 
 	virtual void ToNextRevision();
@@ -51,3 +58,10 @@ public:
 
 	virtual ~CLogBatchIteratorBase(void);
 };
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
+

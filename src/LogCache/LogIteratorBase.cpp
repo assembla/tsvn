@@ -1,6 +1,11 @@
 #include "StdAfx.h"
 #include "LogIteratorBase.h"
 
+// begin namespace LogCache
+
+namespace LogCache
+{
+
 // comparison methods
 
 bool CLogIteratorBase::PathsIntersect ( const CDictionaryBasedPath& lhsPath
@@ -40,7 +45,7 @@ bool CLogIteratorBase::PathInRevision() const
 	// revision data lookup
 
 	const CRevisionInfoContainer& revisionInfo = logInfo->GetLogInfo();
-	size_t index = logInfo->GetRevisions()[revision];
+	revision_t index = logInfo->GetRevisions()[revision];
 
 	// any chance that this revision affects our path?
 
@@ -84,14 +89,14 @@ bool CLogIteratorBase::ContainsCopyOrDelete
 
 // Change the path we are iterating the log for,
 // if there is a copy / replace.
-// Set revision to -1, if path is deleted.
+// Set revision to NO_REVISION, if path is deleted.
 
 bool CLogIteratorBase::InternalHandleCopyAndDelete 
 	( const CRevisionInfoContainer::CChangesIterator& first
 	, const CRevisionInfoContainer::CChangesIterator& last
 	, const CDictionaryBasedPath& revisionRootPath
 	, CDictionaryBasedPath& searchPath
-	, size_t& searchRevision)
+	, revision_t& searchRevision)
 {
 	// any chance that this revision affects our search path?
 
@@ -131,7 +136,7 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 			{
 				// end of path history
 
-				searchRevision = -1;
+				searchRevision = NO_REVISION;
 				return true;
 			}
 
@@ -170,7 +175,7 @@ void CLogIteratorBase::ToNextRevision()
 	--revision;
 }
 
-size_t CLogIteratorBase::SkipNARevisions()
+revision_t CLogIteratorBase::SkipNARevisions()
 {
 	return logInfo->GetSkippedRevisions()
 				.GetPreviousRevision (path, revision);
@@ -194,8 +199,8 @@ void CLogIteratorBase::InternalAdvance()
 
 		while (InternalDataIsMissing())
 		{
-			size_t nextRevision = SkipNARevisions(); 
-			if (nextRevision != -1)
+			revision_t nextRevision = SkipNARevisions(); 
+			if (nextRevision != NO_REVISION)
 				revision = nextRevision;
 		}
 	}
@@ -206,7 +211,7 @@ void CLogIteratorBase::InternalAdvance()
 // (copy construction & assignment use default methods)
 
 CLogIteratorBase::CLogIteratorBase ( const CCachedLogInfo* cachedLog
-								   , size_t startRevision
+								   , revision_t startRevision
 								   , const CDictionaryBasedPath& startPath)
 	: logInfo (cachedLog)
 	, revision (startRevision)
@@ -234,10 +239,10 @@ void CLogIteratorBase::Advance()
 
 		if (HandleCopyAndDelete())
 		{
-			// revision may have been set to -1, 
+			// revision may have been set to NO_REVISION, 
 			// e.g. if a deletion has been found
 
-			if (revision != -1)
+			if (revision != NO_REVISION)
 			{
 				// switched to a new path
 				// -> retry access on that new path 
@@ -263,3 +268,8 @@ void CLogIteratorBase::Retry()
 	++revision;
 	InternalAdvance();
 }
+
+// end namespace LogCache
+
+}
+

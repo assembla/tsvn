@@ -9,6 +9,13 @@
 #include "TokenizedStringContainer.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 //
 // CRevisionInfoContainer
 //
@@ -64,25 +71,25 @@ private:
 	// comment, author and timeStamp per revision index
 
 	CTokenizedStringContainer comments;
-	std::vector<DWORD> authors;
+	std::vector<index_t> authors;
 	std::vector<__time64_t> timeStamps;
 
 	// common root of all changed paths in this revision
 
-	std::vector<DWORD> rootPaths;
+	std::vector<index_t> rootPaths;
 
 	// mark the ranges that contain the changed path info
 
-	std::vector<DWORD> changesOffsets;
-	std::vector<DWORD> copyFromOffsets;
+	std::vector<index_t> changesOffsets;
+	std::vector<index_t> copyFromOffsets;
 
 	// changed path info
 	// (note, that copyFrom info will have less entries)
 
 	std::vector<unsigned char> changes;
-	std::vector<DWORD> changedPaths;
-	std::vector<DWORD> copyFromPaths;
-	std::vector<DWORD> copyFromRevisions;
+	std::vector<index_t> changedPaths;
+	std::vector<index_t> copyFromPaths;
+	std::vector<revision_t> copyFromRevisions;
 
 	// sub-stream IDs
 
@@ -104,9 +111,9 @@ private:
 
 	// index checking utility
 
-	void CheckIndex (size_t index) const
+	void CheckIndex (index_t index) const
 	{
-		if (index >= size())
+		if (index >= (index_t)size())
 			throw std::exception ("revision info index out of range");
 	}
 
@@ -154,8 +161,8 @@ public:
 
 		// the two different change info indices
 
-		size_t changeOffset;
-		size_t copyFromOffset;
+		index_t changeOffset;
+		index_t copyFromOffset;
 
 	public:
 
@@ -169,8 +176,8 @@ public:
 		}
 
 		CChangesIterator ( const CRevisionInfoContainer* aContainer
-						 , size_t aChangeOffset
-						 , size_t aCopyFromOffset)
+						 , index_t aChangeOffset
+						 , index_t aCopyFromOffset)
 			: container (aContainer)
 			, changeOffset (aChangeOffset)
 			, copyFromOffset (aCopyFromOffset)
@@ -195,18 +202,18 @@ public:
 		CDictionaryBasedPath GetPath() const
 		{
 			assert (IsValid());
-			size_t pathID = container->changedPaths[changeOffset];
+			index_t pathID = container->changedPaths[changeOffset];
 			return CDictionaryBasedPath (&container->paths, pathID);
 		}
 
 		CDictionaryBasedPath GetFromPath() const
 		{
 			assert (HasFromPath());
-			size_t pathID = container->copyFromPaths [copyFromOffset];
+			index_t pathID = container->copyFromPaths [copyFromOffset];
 			return CDictionaryBasedPath (&container->paths, pathID);
 		}
 
-		DWORD GetFromRevision() const
+		revision_t GetFromRevision() const
 		{
 			assert (HasFromPath());
 			return container->copyFromRevisions [copyFromOffset];
@@ -217,8 +224,8 @@ public:
 		bool IsValid() const
 		{
 			return (container != NULL)
-				&& (changeOffset < container->changes.size())
-				&& (copyFromOffset <= container->copyFromPaths.size());
+				&& (changeOffset < (index_t)container->changes.size())
+				&& (copyFromOffset <= (index_t)container->copyFromPaths.size());
 		}
 
 		// move pointer
@@ -269,14 +276,14 @@ public:
 	// add information
 	// AddChange() always adds to the last revision
 
-	size_t Insert ( const std::string& author
-				  , const std::string& comment
-				  , __time64_t timeStamp);
+	index_t Insert ( const std::string& author
+				   , const std::string& comment
+				   , __time64_t timeStamp);
 
 	void AddChange ( TChangeAction action
 				   , const std::string& path
 				   , const std::string& fromPath
-				   , DWORD fromRevision);
+				   , revision_t fromRevision);
 
 	// reset content
 
@@ -284,30 +291,30 @@ public:
 
 	// get information
 
-	size_t size() const
+	index_t size() const
 	{
-		return authors.size();
+		return (index_t)authors.size();
 	}
 
-	const char* GetAuthor (size_t index) const
+	const char* GetAuthor (index_t index) const
 	{
 		CheckIndex (index);
 		return authorPool [authors [index]];
 	}
 
-	__time64_t GetTimeStamp (size_t index) const
+	__time64_t GetTimeStamp (index_t index) const
 	{
 		CheckIndex (index);
 		return timeStamps [index];
 	}
 
-	std::string GetComment (size_t index) const
+	std::string GetComment (index_t index) const
 	{
 		CheckIndex (index);
 		return comments [index];
 	}
 
-	CDictionaryBasedPath GetRootPath (size_t index) const
+	CDictionaryBasedPath GetRootPath (index_t index) const
 	{
 		CheckIndex (index);
 		return CDictionaryBasedPath (&paths, rootPaths [index]);
@@ -315,7 +322,7 @@ public:
 
 	// iterate over all changes
 
-	CChangesIterator GetChangesBegin (size_t index) const
+	CChangesIterator GetChangesBegin (index_t index) const
 	{
 		CheckIndex (index);
 		return CChangesIterator ( this
@@ -323,7 +330,7 @@ public:
 								, copyFromOffsets[index]);
 	}
 
-	CChangesIterator GetChangesEnd (size_t index) const
+	CChangesIterator GetChangesEnd (index_t index) const
 	{
 		CheckIndex (index);
 		return CChangesIterator ( this
@@ -362,4 +369,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 								  , CRevisionInfoContainer& container);
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								   , const CRevisionInfoContainer& container);
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
 

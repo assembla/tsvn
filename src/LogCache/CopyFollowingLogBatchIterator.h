@@ -1,6 +1,13 @@
 #pragma once
 #include "logbatchiteratorbase.h"
 
+///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
 class CCopyFollowingLogBatchIterator :
 	public CLogBatchIteratorBase
 {
@@ -19,3 +26,10 @@ public:
 								   , const TPathRevisions& startPathRevisions);
 	virtual ~CCopyFollowingLogBatchIterator(void);
 };
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
+

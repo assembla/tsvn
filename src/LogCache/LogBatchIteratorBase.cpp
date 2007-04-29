@@ -1,15 +1,20 @@
 #include "StdAfx.h"
 #include "LogBatchIteratorBase.h"
 
+// begin namespace LogCache
+
+namespace LogCache
+{
+
 // find the top revision of all paths
 
-size_t CLogBatchIteratorBase::MaxRevision 
+revision_t CLogBatchIteratorBase::MaxRevision 
 	(const TPathRevisions& pathRevisions)
 {
 	if (pathRevisions.empty())
-		return -1;
+		return NO_REVISION;
 	
-	size_t result = pathRevisions[0].second;
+	revision_t result = pathRevisions[0].second;
 	for ( TPathRevisions::const_iterator iter = pathRevisions.begin() + 1
 		, end = pathRevisions.end()
 		; iter != end
@@ -32,7 +37,7 @@ CDictionaryBasedPath CLogBatchIteratorBase::BasePath
 
 	if (pathRevisions.empty())
 		return CDictionaryBasedPath ( &cachedLog->GetLogInfo().GetPaths()
-									, (size_t)-1);
+									, NO_INDEX);
 	
 	// fold the paths
 
@@ -65,11 +70,11 @@ CLogBatchIteratorBase::CLogBatchIteratorBase
 
 // navigation sub-routines
 
-size_t CLogBatchIteratorBase::SkipNARevisions()
+revision_t CLogBatchIteratorBase::SkipNARevisions()
 {
 	const CSkipRevisionInfo& skippedRevisions = logInfo->GetSkippedRevisions();
 
-	size_t result = -1;
+	revision_t result = NO_REVISION;
 	for ( TPathRevisions::const_iterator iter = pathRevisions.begin()
 		, end = pathRevisions.end()
 		; iter != end
@@ -77,11 +82,11 @@ size_t CLogBatchIteratorBase::SkipNARevisions()
 	{
 		// test at least the start revision of any path
 
-		size_t localResult = min (revision, iter->second);
+		revision_t localResult = min (revision, iter->second);
 
 		// still relevant?
 
-		if ((result == -1) || (localResult > result))
+		if ((result == NO_REVISION) || (localResult > result))
 		{
 			// skip revisions that are of no interest for this path
 
@@ -91,7 +96,7 @@ size_t CLogBatchIteratorBase::SkipNARevisions()
 
 			// keep the max. of all next relevant revisions for
 
-			if ((result == -1) || (localResult > result))
+			if ((result == NO_REVISION) || (localResult > result))
 				result = localResult;
 		}
 	}
@@ -108,7 +113,7 @@ bool CLogBatchIteratorBase::PathInRevision() const
 	// revision data lookup
 
 	const CRevisionInfoContainer& revisionInfo = logInfo->GetLogInfo();
-	size_t index = logInfo->GetRevisions()[revision];
+	index_t index = logInfo->GetRevisions()[revision];
 
 	// fetch invariant information
 
@@ -158,4 +163,8 @@ void CLogBatchIteratorBase::ToNextRevision()
 
 CLogBatchIteratorBase::~CLogBatchIteratorBase(void)
 {
+}
+
+// end namespace LogCache
+
 }

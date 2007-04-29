@@ -7,6 +7,13 @@
 #include "CachedLogInfo.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 //
 // CXMLLogReader
 //
@@ -56,10 +63,10 @@ private:
 											 , const char* end
 											 , const char* attribute
 											 , size_t attributeLen);
-	static int GetXMLRevisionAttribute ( const char* start
-									   , const char* end
-									   , const char* attribute
-									   , size_t attributeLen);
+	static revision_t GetXMLRevisionAttribute ( const char* start
+										      , const char* end
+										      , const char* attribute
+										      , size_t attributeLen);
 	static std::string GetXMLTextAttribute ( const char* start
 										   , const char* end
 										   , const char* attribute
@@ -97,4 +104,10 @@ public:
 	static void LoadFromXML ( const std::wstring& xmlFileName
 						    , CCachedLogInfo& target);
 };
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
 

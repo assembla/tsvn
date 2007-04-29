@@ -5,6 +5,13 @@
 #include "DiffIntegerOutStream.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // CIndexPairDictionary::CHashFunction
 ///////////////////////////////////////////////////////////////
 
@@ -33,26 +40,26 @@ CIndexPairDictionary::~CIndexPairDictionary(void)
 
 // dictionary operations
 
-size_t CIndexPairDictionary::Find (const std::pair<int, int>& value) const
+index_t CIndexPairDictionary::Find (const std::pair<index_t, index_t>& value) const
 {
 	return hashIndex.find (value);
 }
 
-size_t CIndexPairDictionary::Insert (const std::pair<int, int>& value)
+index_t CIndexPairDictionary::Insert (const std::pair<index_t, index_t>& value)
 {
-	assert (Find (value) == -1);
+	assert (Find (value) == NO_INDEX);
 
-	size_t result = data.size();
-	hashIndex.insert (value, (DWORD)result);
+	index_t result = (index_t)data.size();
+	hashIndex.insert (value, (index_t)result);
 	data.push_back (value);
 
 	return result;
 }
 
-size_t CIndexPairDictionary::AutoInsert (const std::pair<int, int>& value)
+index_t CIndexPairDictionary::AutoInsert (const std::pair<index_t, index_t>& value)
 {
-	size_t result = Find (value);
-	if (result == -1)
+	index_t result = Find (value);
+	if (result == NO_INDEX)
 		result = Insert (value);
 
 	return result;
@@ -75,10 +82,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		= dynamic_cast<CDiffIntegerInStream*>
 			(stream.GetSubStream (CIndexPairDictionary::FIRST_STREAM_ID));
 
-	size_t count = firstStream->GetValue();
+	index_t count = firstStream->GetValue();
 	dictionary.data.resize (count);
 
-	for (size_t i = 0; i < count; ++i)
+	for (index_t i = 0; i < count; ++i)
 		dictionary.data[i].first = firstStream->GetValue();
 
 	// read the second elements
@@ -87,7 +94,7 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		= dynamic_cast<CDiffIntegerInStream*>
 			(stream.GetSubStream (CIndexPairDictionary::SECOND_STREAM_ID));
 
-	for (size_t i = 0; i < count; ++i)
+	for (index_t i = 0; i < count; ++i)
 		dictionary.data[i].second = secondStream->GetValue();
 
 	// build the hash (ommit the empty string at index 0)
@@ -97,8 +104,8 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 			(CIndexPairDictionary::CHashFunction (&dictionary));
 	dictionary.hashIndex.reserve (dictionary.data.size());
 
-	for (size_t i = 0; i < count; ++i)
-		dictionary.hashIndex.insert (dictionary.data[i], (DWORD)i);
+	for (index_t i = 0; i < count; ++i)
+		dictionary.hashIndex.insert (dictionary.data[i], i);
 
 	// ready
 
@@ -134,4 +141,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 	// ready
 
 	return stream;
+}
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
 }

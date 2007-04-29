@@ -3,6 +3,13 @@
 #include ".\BufferedOutFile.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // write <date> tag
 ///////////////////////////////////////////////////////////////
 
@@ -123,8 +130,8 @@ void CXMLLogWriter::WriteChanges ( CBufferedOutFile& file
 
 void CXMLLogWriter::WriteRevisionInfo ( CBufferedOutFile& file
 									  , const CRevisionInfoContainer& info
-									  , DWORD revision
-									  , DWORD index)
+									  , revision_t revision
+									  , index_t index)
 {
 	static const std::string startText = "<logentry\n   revision=\"";
 	static const std::string revisionEndText = "\">\n";
@@ -175,15 +182,15 @@ void CXMLLogWriter::WriteRevionsTopDown ( CBufferedOutFile& file
 	const CRevisionIndex& revisions = source.GetRevisions();
 	const CRevisionInfoContainer& info = source.GetLogInfo();
 
-	for ( size_t revision = revisions.GetLastRevision()-1
+	for ( revision_t revision = revisions.GetLastRevision()-1
 		, fristRevision = revisions.GetFirstRevision()
 		; revision+1 > fristRevision
 		; --revision)
 	{
-		DWORD index = revisions[revision];
-		if (index != -1)
+		index_t index = revisions[revision];
+		if (index != NO_INDEX)
 		{
-			WriteRevisionInfo (file, info, (DWORD)revision, index);
+			WriteRevisionInfo (file, info, revision, index);
 		}
 	}
 }
@@ -198,15 +205,15 @@ void CXMLLogWriter::WriteRevionsBottomUp ( CBufferedOutFile& file
 	const CRevisionIndex& revisions = source.GetRevisions();
 	const CRevisionInfoContainer& info = source.GetLogInfo();
 
-	for ( size_t revision = revisions.GetFirstRevision()
+	for ( revision_t revision = revisions.GetFirstRevision()
 		, lastRevision = revisions.GetLastRevision()
 		; revision < lastRevision
 		; ++revision)
 	{
-		DWORD index = revisions[revision];
-		if (index != -1)
+		index_t index = revisions[revision];
+		if (index != NO_INDEX)
 		{
-			WriteRevisionInfo (file, info, (DWORD)revision, index);
+			WriteRevisionInfo (file, info, revision, index);
 		}
 	}
 }
@@ -239,3 +246,9 @@ void CXMLLogWriter::SaveToXML ( const std::wstring& xmlFileName
 	file << footer;
 }
 
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}

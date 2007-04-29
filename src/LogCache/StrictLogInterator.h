@@ -1,6 +1,13 @@
 #pragma once
 #include "logiteratorbase.h"
 
+///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
 class CStrictLogInterator :
 	public CLogIteratorBase
 {
@@ -16,7 +23,14 @@ public:
 	// (nothing special to do)
 
 	CStrictLogInterator ( const CCachedLogInfo* cachedLog
-						, size_t startRevision
+						, revision_t startRevision
 						, const CDictionaryBasedPath& startPath);
 	virtual ~CStrictLogInterator(void);
 };
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
+

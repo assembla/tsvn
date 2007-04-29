@@ -8,6 +8,11 @@
 #include "PackedTime64InStream.h"
 #include "PackedTime64OutStream.h"
 
+// begin namespace LogCache
+
+namespace LogCache
+{
+
 // construction / destruction
 
 CRevisionInfoContainer::CRevisionInfoContainer(void)
@@ -25,25 +30,25 @@ CRevisionInfoContainer::~CRevisionInfoContainer(void)
 // add information
 // AddChange() always adds to the last revision
 
-size_t CRevisionInfoContainer::Insert ( const std::string& author
-									  , const std::string& comment
-									  , __time64_t timeStamp)
+index_t CRevisionInfoContainer::Insert ( const std::string& author
+									   , const std::string& comment
+									   , __time64_t timeStamp)
 {
 	// this should newer throw as there are usually more
 	// changes than revisions. But you never know ...
 
-	if (authors.size() == (DWORD)(-1))
+	if (authors.size() == NO_INDEX)
 		throw std::exception ("revision container overflow");
 
 	// store the given revision info
 
-	authors.push_back ((DWORD)authorPool.AutoInsert (author.c_str()));
+	authors.push_back (authorPool.AutoInsert (author.c_str()));
 	timeStamps.push_back (timeStamp);
 	comments.Insert (comment);
 
 	// no changes yet -> no common root path info
 
-	rootPaths.push_back (-1);
+	rootPaths.push_back (NO_INDEX);
 
 	// empty range for changes 
 
@@ -58,11 +63,11 @@ size_t CRevisionInfoContainer::Insert ( const std::string& author
 void CRevisionInfoContainer::AddChange ( TChangeAction action
 									   , const std::string& path
 									   , const std::string& fromPath
-									   , DWORD fromRevision)
+									   , revision_t fromRevision)
 {
 	// under x64, there might actually be an overflow
 
-	if (changes.size() == (DWORD)(-1))
+	if (changes.size() == NO_INDEX)
 		throw std::exception ("revision container change list overflow");
 
 	// another change
@@ -72,13 +77,13 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
 	// add change path index and update the root path 
 	// of all changes in this revision
 
-	CDictionaryBasedPath parsedPath (&paths, path);
-	changedPaths.push_back ((DWORD)parsedPath.GetIndex());
+	CDictionaryBasedPath parsedPath (&paths, path, false);
+	changedPaths.push_back (parsedPath.GetIndex());
 
-	DWORD& rootPathIndex = *rootPaths.rbegin();
-	rootPathIndex = rootPathIndex == -1
-				  ? (DWORD)parsedPath.GetIndex()
-				  : (DWORD)parsedPath.GetCommonRoot (rootPathIndex).GetIndex();
+	index_t& rootPathIndex = *rootPaths.rbegin();
+	rootPathIndex = rootPathIndex == NO_INDEX
+				  ? parsedPath.GetIndex()
+				  : parsedPath.GetCommonRoot (rootPathIndex).GetIndex();
 
 	// add changes info (flags), and indicate presence of fromPath (if given)
 
@@ -92,8 +97,8 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
 
 		// add fromPath info
 
-		CDictionaryBasedPath parsedFromPath (&paths, fromPath);
-		copyFromPaths.push_back ((DWORD)parsedFromPath.GetIndex());
+		CDictionaryBasedPath parsedFromPath (&paths, fromPath, false);
+		copyFromPaths.push_back (parsedFromPath.GetIndex());
 		copyFromRevisions.push_back (fromRevision);
 
 		++(*copyFromOffsets.rbegin());
@@ -277,4 +282,8 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 	// ready
 
 	return stream;
+}
+
+// end namespace LogCache
+
 }

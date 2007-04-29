@@ -10,52 +10,59 @@
 #include ".\DiffIntegerOutStream.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // CSkipRevisionInfo::SPerPathRanges
 ///////////////////////////////////////////////////////////////
 // find next / previous "gap"
 ///////////////////////////////////////////////////////////////
 
-DWORD CSkipRevisionInfo::SPerPathRanges::FindNext (DWORD revision) const
+revision_t CSkipRevisionInfo::SPerPathRanges::FindNext (revision_t revision) const
 {
 	// special case
 
 	if (ranges.empty())
-		return -1;
+		return NO_REVISION;
 
 	// look for the first range *behind* revision
 
 	TRanges::const_iterator iter = ranges.upper_bound (revision);
 	if (iter == ranges.begin())
-		return -1;
+		return NO_REVISION;
 
 	// return end of previous range, if revision is within this range
 
 	--iter;
-	DWORD next = iter->first + iter->second;
+	revision_t next = iter->first + iter->second;
 	return next <= revision 
-		? -1
+		? NO_REVISION
 		: next;
 }
 
-DWORD CSkipRevisionInfo::SPerPathRanges::FindPrevious (DWORD revision) const
+revision_t CSkipRevisionInfo::SPerPathRanges::FindPrevious (revision_t revision) const
 {
 	// special case
 
 	if (ranges.empty())
-		return -1;
+		return NO_REVISION;
 
 	// look for the first range *behind* revision
 
 	TRanges::const_iterator iter = ranges.upper_bound (revision);
 	if (iter == ranges.begin())
-		return -1;
+		return NO_REVISION;
 
 	// return start-1 of previous range, if revision is within this range
 
 	--iter;
-	DWORD next = iter->first + iter->second;
+	revision_t next = iter->first + iter->second;
 	return next <= revision 
-		? -1
+		? NO_REVISION
 		: iter->first-1;
 }
 
@@ -63,9 +70,9 @@ DWORD CSkipRevisionInfo::SPerPathRanges::FindPrevious (DWORD revision) const
 // update / insert range
 ///////////////////////////////////////////////////////////////
 
-void CSkipRevisionInfo::SPerPathRanges::Add (DWORD start, DWORD size)
+void CSkipRevisionInfo::SPerPathRanges::Add (revision_t start, revision_t size)
 {
-	DWORD end = start + size;
+	revision_t end = start + size;
 
 	// insert the new range / enlarge existing range
 
@@ -80,7 +87,7 @@ void CSkipRevisionInfo::SPerPathRanges::Add (DWORD start, DWORD size)
 		TRanges::iterator iter = insertionResult.first;
 		--iter;
 
-		DWORD previousEnd = iter->first + iter->second;
+		revision_t previousEnd = iter->first + iter->second;
 
 		if (previousEnd >= start)
 		{
@@ -111,11 +118,11 @@ void CSkipRevisionInfo::SPerPathRanges::Add (DWORD start, DWORD size)
 // remove ranges already covered by parent path ranges
 ///////////////////////////////////////////////////////////////
 
-size_t CSkipRevisionInfo::CPacker::RemoveParentRanges()
+index_t CSkipRevisionInfo::CPacker::RemoveParentRanges()
 {
 	// count the number of remaining ranges
 
-	size_t rangeCount = 0;
+	index_t rangeCount = 0;
 
 	// remove all parent ranges
 
@@ -136,11 +143,11 @@ size_t CSkipRevisionInfo::CPacker::RemoveParentRanges()
 		while (iter != ranges.end())
 		{
 			bool removed = false;
-			DWORD next = parent->GetNextRevision (parentPath, iter->first);
+			revision_t next = parent->GetNextRevision (parentPath, iter->first);
 
 			// does the parent cover at least the begin of this range?
 
-			if (next != -1)
+			if (next != NO_REVISION)
 			{
 				if (next >= iter->first + iter->second)
 				{
@@ -149,7 +156,7 @@ size_t CSkipRevisionInfo::CPacker::RemoveParentRanges()
 				}
 				else
 				{
-					DWORD size = iter->second + iter->first - next;
+					revision_t size = iter->second + iter->first - next;
 					ranges.insert (iter, std::make_pair (next, size));
 					iter = ranges.erase (iter);
 				}
@@ -159,12 +166,12 @@ size_t CSkipRevisionInfo::CPacker::RemoveParentRanges()
 			{
 				// the range wasn't entierely covered
 
-				DWORD end = iter->first + iter->second-1;
-				DWORD previous = parent->GetPreviousRevision (parentPath, end);
+				revision_t end = iter->first + iter->second-1;
+				revision_t previous = parent->GetPreviousRevision (parentPath, end);
 
 				// parent covers the end of the range?
 
-				if (previous != -1)
+				if (previous != NO_REVISION)
 				{
 					// must be no complete cover
 
@@ -195,7 +202,7 @@ size_t CSkipRevisionInfo::CPacker::RemoveParentRanges()
 // build a sorted list of all ranges
 ///////////////////////////////////////////////////////////////
 
-void CSkipRevisionInfo::CPacker::SortRanges (size_t rangeCount)
+void CSkipRevisionInfo::CPacker::SortRanges (index_t rangeCount)
 {
 	allRanges.clear();
 	allRanges.reserve (rangeCount);
@@ -225,9 +232,9 @@ void CSkipRevisionInfo::CPacker::RemoveKnownRevisions()
 {
 	const CRevisionIndex& revisions = parent->revisions;
 
-	DWORD firstKnownRevision = 0;
-	DWORD nextUnknownRevision = 0;
-	DWORD lastRevision = (DWORD)revisions.GetLastRevision();
+	revision_t firstKnownRevision = 0;
+	revision_t nextUnknownRevision = 0;
+	revision_t lastRevision = revisions.GetLastRevision();
 
 	for (size_t i = 0; i < allRanges.size(); ++i)
 	{
@@ -235,11 +242,13 @@ void CSkipRevisionInfo::CPacker::RemoveKnownRevisions()
 		if (iter->first > nextUnknownRevision)
 		{
 			firstKnownRevision = iter->first;
-			while ((revisions[firstKnownRevision] == -1) && (firstKnownRevision < lastRevision))
+			while (   (revisions[firstKnownRevision] == NO_INDEX) 
+				   && (firstKnownRevision < lastRevision))
 				++firstKnownRevision;
 
 			nextUnknownRevision = firstKnownRevision+1;
-			while ((revisions[nextUnknownRevision] != -1) && (nextUnknownRevision < lastRevision))
+			while (   (revisions[nextUnknownRevision] != NO_INDEX) 
+				   && (nextUnknownRevision < lastRevision))
 				++nextUnknownRevision;
 		}
 
@@ -308,7 +317,7 @@ void CSkipRevisionInfo::CPacker::operator()(CSkipRevisionInfo* aParent)
 {
 	parent = aParent;
 
-	size_t rangeCount = RemoveParentRanges();
+	index_t rangeCount = RemoveParentRanges();
 	SortRanges (rangeCount);
 	RemoveKnownRevisions();
 	RemoveEmptyRanges();
@@ -320,11 +329,11 @@ void CSkipRevisionInfo::CPacker::operator()(CSkipRevisionInfo* aParent)
 // remove known revisions from the range
 ///////////////////////////////////////////////////////////////
 
-void CSkipRevisionInfo::TryReduceRange (DWORD& revision, DWORD& size)
+void CSkipRevisionInfo::TryReduceRange (revision_t& revision, revision_t& size)
 {
 	// raise lower bound
 
-	while ((size > 0) && (revisions[revision] != -1))
+	while ((size > 0) && (revisions[revision] != NO_REVISION))
 	{
 		++revision;
 		--size;
@@ -332,7 +341,7 @@ void CSkipRevisionInfo::TryReduceRange (DWORD& revision, DWORD& size)
 
 	// lower upper bound
 
-	while ((size > 0) && (revisions[revision + size-1] != -1))
+	while ((size > 0) && (revisions[revision + size-1] != NO_REVISION))
 	{
 		--size;
 	}
@@ -359,39 +368,39 @@ CSkipRevisionInfo::~CSkipRevisionInfo(void)
 // query data
 ///////////////////////////////////////////////////////////////
 
-DWORD CSkipRevisionInfo::GetNextRevision ( const CDictionaryBasedPath& path
-										 , DWORD revision) const
+revision_t CSkipRevisionInfo::GetNextRevision ( const CDictionaryBasedPath& path
+										      , revision_t revision) const
 {
 	// above the root or invalid parameter ?
 
-	if (!path.IsValid() || (revision == -1))
-		return -1;
+	if (!path.IsValid() || (revision == NO_REVISION))
+		return NO_REVISION;
 
 	// lookup the extry for this path
 
-	DWORD dataIndex = index.find ((DWORD)path.GetIndex());
-	SPerPathRanges* ranges = dataIndex == -1
+	index_t dataIndex = index.find (path.GetIndex());
+	SPerPathRanges* ranges = dataIndex == NO_INDEX
 						   ? NULL
 						   : data[dataIndex];
 
 	// crawl this and the parent path data
 	// until we found a gap (i.e. could not improve further)
 
-	DWORD startRevision = revision;
-	DWORD result = revision;
+	revision_t startRevision = revision;
+	revision_t result = revision;
 
 	do
 	{
 		result = revision;
 
-		DWORD parentNext = GetNextRevision (path.GetParent(), revision);
-		if (parentNext != -1)
+		revision_t parentNext = GetNextRevision (path.GetParent(), revision);
+		if (parentNext != NO_REVISION)
 			revision = parentNext;
 
 		if (ranges != NULL)
 		{
-			DWORD next = ranges->FindNext (revision);
-			if (parentNext != -1)
+			revision_t next = ranges->FindNext (revision);
+			if (parentNext != NO_REVISION)
 				revision = parentNext;
 		}
 	}
@@ -400,43 +409,43 @@ DWORD CSkipRevisionInfo::GetNextRevision ( const CDictionaryBasedPath& path
 	// ready
 
 	return revision == startRevision 
-		? -1 
+		? NO_REVISION 
 		: result;
 }
 
-DWORD CSkipRevisionInfo::GetPreviousRevision ( const CDictionaryBasedPath& path
-											 , DWORD revision) const
+revision_t CSkipRevisionInfo::GetPreviousRevision ( const CDictionaryBasedPath& path
+												  , revision_t revision) const
 {
 	// above the root or invalid parameter ?
 
-	if (!path.IsValid() || (revision == -1))
-		return -1;
+	if (!path.IsValid() || (revision == NO_REVISION))
+		return NO_REVISION;
 
 	// lookup the extry for this path
 
-	DWORD dataIndex = index.find ((DWORD)path.GetIndex());
-	SPerPathRanges* ranges = dataIndex == -1
+	index_t dataIndex = index.find (path.GetIndex());
+	SPerPathRanges* ranges = dataIndex == NO_INDEX
 						   ? NULL
 						   : data[dataIndex];
 
 	// crawl this and the parent path data
 	// until we found a gap (i.e. could not improve further)
 
-	DWORD startRevision = revision;
-	DWORD result = revision;
+	revision_t startRevision = revision;
+	revision_t result = revision;
 
 	do
 	{
 		result = revision;
 
-		DWORD parentNext = GetPreviousRevision (path.GetParent(), revision);
-		if (parentNext != -1)
+		revision_t parentNext = GetPreviousRevision (path.GetParent(), revision);
+		if (parentNext != NO_REVISION)
 			revision = parentNext;
 
 		if (ranges != NULL)
 		{
-			DWORD next = ranges->FindPrevious (revision);
-			if (parentNext != -1)
+			revision_t next = ranges->FindPrevious (revision);
+			if (parentNext != NO_REVISION)
 				revision = parentNext;
 		}
 	}
@@ -454,15 +463,15 @@ DWORD CSkipRevisionInfo::GetPreviousRevision ( const CDictionaryBasedPath& path
 ///////////////////////////////////////////////////////////////
 
 void CSkipRevisionInfo::Add ( const CDictionaryBasedPath& path
-							, DWORD revision
-							, DWORD size)
+							, revision_t revision
+							, revision_t size)
 {
 	// violating these assertions will break our lookup algorithms
 
 	assert (path.IsValid());
 	assert (revision > 0);
-	assert (revision != -1);
-	assert (size != -1);
+	assert (revision != NO_REVISION);
+	assert (size != NO_REVISION);
 
 	// reduce the range, if we have revision info for the boundaries
 
@@ -473,13 +482,13 @@ void CSkipRevisionInfo::Add ( const CDictionaryBasedPath& path
 	// lookup / auto-insert entry for path
 
 	SPerPathRanges* ranges = NULL;
-	DWORD dataIndex = index.find ((DWORD)path.GetIndex());
+	index_t dataIndex = index.find (path.GetIndex());
 
-	if (dataIndex == -1)
+	if (dataIndex == NO_INDEX)
 	{
 		ranges = new SPerPathRanges;
 		data.push_back (ranges);
-		index.insert ((DWORD)path.GetIndex(), (DWORD)data.size()-1);
+		index.insert (path.GetIndex(), (index_t)data.size()-1);
 	}
 	else
 	{
@@ -619,5 +628,11 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 	// ready
 
 	return stream;
+}
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
 }
 

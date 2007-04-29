@@ -1,6 +1,11 @@
 #include "StdAfx.h"
 #include "StrictLogInterator.h"
 
+// begin namespace LogCache
+
+namespace LogCache
+{
+
 // implement as no-op
 
 bool CStrictLogInterator::HandleCopyAndDelete()
@@ -12,7 +17,7 @@ bool CStrictLogInterator::HandleCopyAndDelete()
 // (nothing special to do)
 
 CStrictLogInterator::CStrictLogInterator ( const CCachedLogInfo* cachedLog
-										 , size_t startRevision
+										 , revision_t startRevision
 										 , const CDictionaryBasedPath& startPath)
 	: CLogIteratorBase (cachedLog, startRevision, startPath)
 {
@@ -22,3 +27,6 @@ CStrictLogInterator::~CStrictLogInterator(void)
 {
 }
 
+// end namespace LogCache
+
+}

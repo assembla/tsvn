@@ -5,14 +5,19 @@
 #include "HierachicalOutStreamBase.h"
 
 ///////////////////////////////////////////////////////////////
-//
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // CPathDictionary
-//
 ///////////////////////////////////////////////////////////////
 
 // index check utility
 
-void CPathDictionary::CheckParentIndex (size_t index) const
+void CPathDictionary::CheckParentIndex (index_t index) const
 {
 	if (index >= paths.size())
 		throw std::exception ("parent path index out of range");
@@ -38,39 +43,39 @@ CPathDictionary::~CPathDictionary(void)
 
 // dictionary operations
 
-size_t CPathDictionary::GetParent (size_t index) const
+index_t CPathDictionary::GetParent (index_t index) const
 {
 	return paths[index].first;
 }
 
-const char* CPathDictionary::GetPathElement (size_t index) const
+const char* CPathDictionary::GetPathElement (index_t index) const
 {
 	return pathElements [paths [index].second];
 }
 
-size_t CPathDictionary::Find (size_t parent, const char* pathElement) const
+index_t CPathDictionary::Find (index_t parent, const char* pathElement) const
 {
-	size_t pathElementIndex = pathElements.Find (pathElement);
-	return pathElementIndex == -1
-		? -1
-		: paths.Find (std::make_pair ((int)parent, (int)pathElementIndex));
+	index_t pathElementIndex = pathElements.Find (pathElement);
+	return pathElementIndex == NO_INDEX
+		? NO_INDEX
+		: paths.Find (std::make_pair (parent, pathElementIndex));
 }
 
-size_t CPathDictionary::Insert (size_t parent, const char* pathElement)
+index_t CPathDictionary::Insert (index_t parent, const char* pathElement)
 {
 	CheckParentIndex (parent);
 
-	size_t pathElementIndex = pathElements.AutoInsert (pathElement);
-	return paths.Insert (std::make_pair ((int)parent, (int)pathElementIndex));
+	index_t pathElementIndex = pathElements.AutoInsert (pathElement);
+	return paths.Insert (std::make_pair (parent, pathElementIndex));
 }
 
-size_t CPathDictionary::AutoInsert (size_t parent, const char* pathElement)
+index_t CPathDictionary::AutoInsert (index_t parent, const char* pathElement)
 {
 	CheckParentIndex (parent);
 
-	size_t pathElementIndex = pathElements.AutoInsert (pathElement);
-	return paths.AutoInsert (std::make_pair ( (int)parent
-											, (int)pathElementIndex));
+	index_t pathElementIndex = pathElements.AutoInsert (pathElement);
+	return paths.AutoInsert (std::make_pair ( parent
+											, pathElementIndex));
 }
 
 // reset content
@@ -155,12 +160,12 @@ void CDictionaryBasedPath::ParsePath ( const std::string& path
 
 			// try move to the next sub-path
 
-			size_t nextIndex = dictionary->Find (index, pathElement);
-			if (nextIndex == -1)
+			index_t nextIndex = dictionary->Find (index, pathElement);
+			if (nextIndex == NO_INDEX)
 			{
 				// not found. Do we have to stop here?
 
-				if (writableDictionary = NULL)
+				if (writableDictionary == NULL)
 					break;
 
 				// auto-insert
@@ -203,7 +208,7 @@ bool CDictionaryBasedPath::IsSameOrParentOf (const CDictionaryBasedPath& rhs) co
 
 	// crawl rhs up to the root until we find it to be equal to *this
 
-	for ( size_t rhsIndex = rhs.index
+	for ( index_t rhsIndex = rhs.index
 		; rhsIndex != 0
 		; rhsIndex = dictionary->GetParent (rhsIndex))
 	{
@@ -225,7 +230,7 @@ std::string CDictionaryBasedPath::GetPath() const
 	std::vector<const char*> pathElements;
 	pathElements.reserve (15);
 
-	for ( size_t currentIndex = index
+	for ( index_t currentIndex = index
 		; currentIndex != 0
 		; currentIndex = dictionary->GetParent (currentIndex))
 	{
@@ -259,11 +264,11 @@ std::string CDictionaryBasedPath::GetPath() const
 	return result;
 }
 
-CDictionaryBasedPath CDictionaryBasedPath::GetCommonRoot (size_t rhsIndex) const
+CDictionaryBasedPath CDictionaryBasedPath::GetCommonRoot (index_t rhsIndex) const
 {
-	assert ((index != (-1)) && (rhsIndex != (-1)));
+	assert ((index != NO_INDEX) && (rhsIndex != NO_INDEX));
 
-	size_t lhsIndex = index;
+	index_t lhsIndex = index;
 
 	while (lhsIndex != rhsIndex)
 	{
@@ -281,4 +286,10 @@ CDictionaryBasedPath CDictionaryBasedPath::GetCommonRoot (size_t rhsIndex) const
 	}
 
 	return CDictionaryBasedPath (dictionary, lhsIndex);
+}
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
 }

@@ -1,6 +1,11 @@
 #include "StdAfx.h"
 #include "StrictLogBatchIterator.h"
 
+// begin namespace LogCache
+
+namespace LogCache
+{
+
 // implement as no-op
 
 bool CStrictLogBatchIterator::HandleCopyAndDelete()
@@ -19,4 +24,8 @@ CStrictLogBatchIterator::CStrictLogBatchIterator
 
 CStrictLogBatchIterator::~CStrictLogBatchIterator(void)
 {
+}
+
+// end namespace LogCache
+
 }

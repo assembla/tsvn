@@ -5,6 +5,21 @@
 ///////////////////////////////////////////////////////////////
 
 #include "QuickHash.h"
+#include "LogCacheGlobals.h"
+
+///////////////////////////////////////////////////////////////
+// forward declarations
+///////////////////////////////////////////////////////////////
+
+class IHierarchicalInStream;
+class IHierarchicalOutStream;
+
+///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
 
 ///////////////////////////////////////////////////////////////
 // forward declarations
@@ -13,9 +28,6 @@
 class CPathDictionary;
 class CDictionaryBasedPath;
 class CRevisionIndex;
-
-class IHierarchicalInStream;
-class IHierarchicalOutStream;
 
 ///////////////////////////////////////////////////////////////
 //
@@ -55,18 +67,18 @@ private:
 
 	struct SPerPathRanges
 	{
-		typedef std::map<DWORD, DWORD> TRanges;
+		typedef std::map<revision_t, revision_t> TRanges;
 		TRanges ranges;
-		DWORD pathID;
+		index_t pathID;
 
 		// find next / previous "gap"
 
-		DWORD FindNext (DWORD revision) const;
-		DWORD FindPrevious (DWORD revision) const;
+		revision_t FindNext (revision_t revision) const;
+		revision_t FindPrevious (revision_t revision) const;
 
 		// update / insert range
 
-		void Add (DWORD start, DWORD size);
+		void Add (revision_t start, revision_t size);
 	};
 
 	typedef SPerPathRanges::TRanges::iterator IT;
@@ -100,10 +112,10 @@ private:
 
 		// required typedefs and constants
 
-		typedef DWORD value_type;
-		typedef DWORD index_type;
+		typedef index_t value_type;
+		typedef index_t index_type;
 
-		enum {NO_INDEX_VALUE = -1};
+		enum {NO_INDEX = LogCache::NO_INDEX};
 
 		// the actual hash function
 
@@ -149,8 +161,8 @@ private:
 
 		// individual compression steps
 
-		size_t RemoveParentRanges();
-		void SortRanges (size_t rangeCount);
+		index_t RemoveParentRanges();
+		void SortRanges (index_t rangeCount);
 		void RemoveKnownRevisions();
 		void RemoveEmptyRanges();
 
@@ -202,7 +214,7 @@ private:
 
 	// remove known revisions from the range
 
-	void TryReduceRange (DWORD& revision, DWORD& size);
+	void TryReduceRange (revision_t& revision, revision_t& size);
 
 public:
 
@@ -212,14 +224,14 @@ public:
 					  , const CRevisionIndex& aRevisionIndex);
 	~CSkipRevisionInfo(void);
 
-	// query data (return -1, if not found)
+	// query data (return NO_REVISION, if not found)
 
-	DWORD GetNextRevision (const CDictionaryBasedPath& path, DWORD revision) const;
-	DWORD GetPreviousRevision (const CDictionaryBasedPath& path, DWORD revision) const;
+	revision_t GetNextRevision (const CDictionaryBasedPath& path, revision_t revision) const;
+	revision_t GetPreviousRevision (const CDictionaryBasedPath& path, revision_t revision) const;
 
 	// add / remove data
 
-	void Add (const CDictionaryBasedPath& path, DWORD revision, DWORD size);
+	void Add (const CDictionaryBasedPath& path, revision_t revision, revision_t size);
 	void Clear();
 
 	// remove unnecessary entries
@@ -240,4 +252,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 								  , CSkipRevisionInfo& container);
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								   , const CSkipRevisionInfo& container);
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
 

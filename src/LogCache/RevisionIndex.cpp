@@ -4,6 +4,11 @@
 #include "DiffIntegerInStream.h"
 #include "DiffIntegerOutStream.h"
 
+// begin namespace LogCache
+
+namespace LogCache
+{
+
 // construction / destruction
 
 CRevisionIndex::CRevisionIndex(void)
@@ -15,16 +20,16 @@ CRevisionIndex::~CRevisionIndex(void)
 {
 }
 
-// insert info (must be -1 before)
+// insert info (must be NO_INDEX before)
 
-void CRevisionIndex::SetRevisionIndex (size_t revision, DWORD index)
+void CRevisionIndex::SetRevisionIndex (revision_t revision, index_t index)
 {
 	// parameter check
 
-	assert (operator[](revision) == -1);
-	assert (index != -1);
+	assert (operator[](revision) == NO_INDEX);
+	assert (index != NO_INDEX);
 
-	if (revision == -1)
+	if (revision == NO_REVISION)
 		throw std::exception ("Invalid revision");
 
 	// special cases
@@ -48,22 +53,23 @@ void CRevisionIndex::SetRevisionIndex (size_t revision, DWORD index)
 	{
 		// efficiently grow on the lower end
 
-		size_t newFirstRevision = firstRevision < indices.size()
+		revision_t indexSize = (revision_t)indices.size();
+		revision_t newFirstRevision = firstRevision < indexSize
 			? 0
-			: min (firstRevision - indices.size(), revision);
+			: min (firstRevision - indexSize, revision);
 
-		indices.insert (indices.begin(), firstRevision - newFirstRevision, (DWORD)-1);
+		indices.insert (indices.begin(), firstRevision - newFirstRevision, NO_INDEX);
 		firstRevision = newFirstRevision;
 	}
 	else
 	{
-		size_t size = indices.size();
+		revision_t size = (revision_t)indices.size();
 		if (revision - firstRevision > size)
 		{
 			// efficently grow on the upper end
 
 			size_t toAdd = max (size, revision - firstRevision - size);
-			indices.insert (indices.end(), toAdd, (DWORD)-1);
+			indices.insert (indices.end(), toAdd, NO_INDEX);
 		}
 	}
 
@@ -117,3 +123,8 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 
 	return stream;
 }
+
+// end namespace LogCache
+
+}
+

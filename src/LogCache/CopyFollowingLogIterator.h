@@ -1,6 +1,13 @@
 #pragma once
 #include "logiteratorbase.h"
 
+///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
 class CCopyFollowingLogIterator :
 	public CLogIteratorBase
 {
@@ -16,7 +23,14 @@ public:
 	// (nothing special to do)
 
 	CCopyFollowingLogIterator ( const CCachedLogInfo* cachedLog
-							  , size_t startRevision
+		                      , revision_t startRevision
 							  , const CDictionaryBasedPath& startPath);
 	virtual ~CCopyFollowingLogIterator(void);
 };
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
+

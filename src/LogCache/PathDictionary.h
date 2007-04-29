@@ -8,6 +8,13 @@
 #include "IndexPairDictionary.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 //
 // CPathDictionary
 //
@@ -44,7 +51,7 @@ private:
 
 	// index check utility
 
-	void CheckParentIndex (size_t index) const;
+	void CheckParentIndex (index_t index) const;
 
 	// construction utility
 
@@ -59,17 +66,17 @@ public:
 
 	// dictionary operations
 
-	size_t size() const
+	index_t size() const
 	{
-		return paths.size();
+		return (index_t)paths.size();
 	}
 
-	size_t GetParent (size_t index) const;
-	const char* GetPathElement (size_t index) const;
+	index_t GetParent (index_t index) const;
+	const char* GetPathElement (index_t index) const;
 
-	size_t Find (size_t parent, const char* pathElement) const;
-	size_t Insert (size_t parent, const char* pathElement);
-	size_t AutoInsert (size_t parent, const char* pathElement);
+	index_t Find (index_t parent, const char* pathElement) const;
+	index_t Insert (index_t parent, const char* pathElement);
+	index_t AutoInsert (index_t parent, const char* pathElement);
 
 	// reset content
 
@@ -103,7 +110,7 @@ private:
 	// our dictionary and position within it
 
 	const CPathDictionary* dictionary;
-	size_t index;
+	index_t index;
 
 	// construction utility: lookup and optionally auto-insert
 
@@ -114,7 +121,7 @@ public:
 
 	// construction / destruction
 
-	CDictionaryBasedPath (const CPathDictionary* aDictionary, size_t anIndex)
+	CDictionaryBasedPath (const CPathDictionary* aDictionary, index_t anIndex)
 		: dictionary (aDictionary)
 		, index (anIndex)
 	{
@@ -133,7 +140,7 @@ public:
 
 	// data access
 
-	size_t GetIndex() const
+	index_t GetIndex() const
 	{
 		return index;
 	}
@@ -152,7 +159,7 @@ public:
 
 	bool IsValid() const
 	{
-		return index != -1;
+		return index != NO_INDEX;
 	}
 
 	CDictionaryBasedPath GetParent() const
@@ -166,7 +173,7 @@ public:
 		return GetCommonRoot (rhs.index);
 	}
 
-	CDictionaryBasedPath GetCommonRoot (size_t rhsIndex) const;
+	CDictionaryBasedPath GetCommonRoot (index_t rhsIndex) const;
 
 	bool IsSameOrParentOf (const CDictionaryBasedPath& rhs) const;
 
@@ -174,3 +181,10 @@ public:
 
 	std::string GetPath() const;
 };
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
+

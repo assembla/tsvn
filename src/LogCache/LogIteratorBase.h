@@ -10,6 +10,13 @@
 #include "CachedLogInfo.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // CLogIteratorBase
 ///////////////////////////////////////////////////////////////
 
@@ -24,14 +31,14 @@ protected:
 	// just enough to describe our position
 	// and what we are looking for
 
-	size_t revision;
+	revision_t revision;
 	CDictionaryBasedPath path;
 
 	// construction 
 	// (copy construction & assignment use default methods)
 
 	CLogIteratorBase ( const CCachedLogInfo* cachedLog
-					 , size_t startRevision
+					 , revision_t startRevision
 					 , const CDictionaryBasedPath& startPath);
 
 	// implement copy-history following strategy
@@ -69,11 +76,11 @@ protected:
 		, const CRevisionInfoContainer::CChangesIterator& last
 		, const CDictionaryBasedPath& revisionRootPath
 		, CDictionaryBasedPath& searchPath
-		, size_t& searchRevision);
+		, revision_t& searchRevision);
 
 	// log scanning sub-routines
 
-	virtual size_t SkipNARevisions();
+	virtual revision_t SkipNARevisions();
 	virtual void ToNextRevision();
 
 	// log scanning
@@ -89,7 +96,7 @@ public:
 	// implement ILogIterator
 
 	virtual bool DataIsMissing() const;
-	virtual size_t GetRevision() const;
+	virtual revision_t GetRevision() const;
 	virtual const CDictionaryBasedPath& GetPath() const;
 
 	virtual void Advance();
@@ -103,14 +110,14 @@ public:
 
 inline bool CLogIteratorBase::InternalDataIsMissing() const
 {
-	return logInfo->GetRevisions()[revision] == -1;
+	return logInfo->GetRevisions()[revision] == NO_INDEX;
 }
 
 ///////////////////////////////////////////////////////////////
 // implement ILogIterator
 ///////////////////////////////////////////////////////////////
 
-inline size_t CLogIteratorBase::GetRevision() const
+inline revision_t CLogIteratorBase::GetRevision() const
 {
 	return revision;
 }
@@ -118,5 +125,11 @@ inline size_t CLogIteratorBase::GetRevision() const
 inline const CDictionaryBasedPath& CLogIteratorBase::GetPath() const
 {
 	return path;
+}
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
 }
 

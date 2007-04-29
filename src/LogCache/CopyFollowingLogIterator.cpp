@@ -1,9 +1,14 @@
 #include "StdAfx.h"
 #include "CopyFollowingLogIterator.h"
 
+// begin namespace LogCache
+
+namespace LogCache
+{
+
 // Change the path we are iterating the log for,
 // if there is a copy / replace.
-// Set revision to -1, if path is deleted.
+// Set revision to NO_REVISION, if path is deleted.
 
 bool CCopyFollowingLogIterator::HandleCopyAndDelete()
 {
@@ -12,7 +17,7 @@ bool CCopyFollowingLogIterator::HandleCopyAndDelete()
 	// revision data lookup
 
 	const CRevisionInfoContainer& revisionInfo = logInfo->GetLogInfo();
-	size_t index = logInfo->GetRevisions()[revision];
+	index_t index = logInfo->GetRevisions()[revision];
 
 	// switch to new path, if necessary
 
@@ -28,7 +33,7 @@ bool CCopyFollowingLogIterator::HandleCopyAndDelete()
 
 CCopyFollowingLogIterator::CCopyFollowingLogIterator 
 	( const CCachedLogInfo* cachedLog
-	, size_t startRevision
+	, revision_t startRevision
 	, const CDictionaryBasedPath& startPath)
 	: CLogIteratorBase (cachedLog, startRevision, startPath)
 {
@@ -38,3 +43,6 @@ CCopyFollowingLogIterator::~CCopyFollowingLogIterator(void)
 {
 }
 
+// end namespace LogCache
+
+}

@@ -8,6 +8,13 @@
 #include "IndexPairDictionary.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 //
 // CTokenizedStringContainer
 //
@@ -73,31 +80,30 @@ private:
 	{
 	private:
 
-		typedef std::vector<int>::iterator IIT;
-		typedef std::vector<DWORD>::iterator UIT;
+		typedef std::vector<index_t>::iterator IT;
 
 		// the container we operate on and the indicies
 		// of all strings that might be compressed
 
 		CTokenizedStringContainer* container;
-		std::vector<DWORD> strings;
+		std::vector<index_t> strings;
 
 		// the pairs we found and the number of places they occur in
 
 		CIndexPairDictionary newPairs;
-		std::vector<DWORD> counts;
+		std::vector<index_t> counts;
 
 		// tokens smaller than that cannot be compressed
 		// (internal optimization as after the initial round 
 		// only combinations with the latest pairs may yield
 		// further pairs)
 
-		int minimumToken;
+		index_t minimumToken;
 
 		// total number of replacements performed so far
 		// (i.e. number of tokens saved)
 
-		size_t replacements;
+		index_t replacements;
 
 		// find all strings that consist of more than one token
 
@@ -105,13 +111,13 @@ private:
 
 		// efficiently determine the iterator range that spans our string
 
-		void GetStringRange (DWORD stringIndex, IIT& first, IIT& last);
+		void GetStringRange (index_t stringIndex, IT& first, IT& last);
 
 		// add token pairs of one string to our counters
 
-		void AccumulatePairs (DWORD stringIndex);
+		void AccumulatePairs (index_t stringIndex);
 		void AddCompressablePairs();
-		bool CompressString (DWORD stringIndex);
+		bool CompressString (index_t stringIndex);
 
 	public:
 
@@ -131,7 +137,7 @@ private:
 
 	friend class CPairPacker;
 
-	typedef std::vector<int>::const_iterator TSDIterator;
+	typedef std::vector<index_t>::const_iterator TSDIterator;
 
 	// the token contents: words and pairs
 
@@ -140,11 +146,11 @@ private:
 
 	// container for all tokens of all strings
 
-	std::vector<int> stringData;
+	std::vector<index_t> stringData;
 
 	// marks the ranges within stringData that form the strings
 
-	std::vector<DWORD> offsets;
+	std::vector<index_t> offsets;
 
 	// sub-stream IDs
 
@@ -158,42 +164,46 @@ private:
 
 	// token coding
 
-	enum {EMPTY_TOKEN = -1};
+	enum 
+	{
+		EMPTY_TOKEN = NO_INDEX,
+		LAST_PAIR_TOKEN = (index_t)NO_INDEX / (index_t)2
+	};
 
-	bool IsToken (int token) const
+	bool IsToken (index_t token) const
 	{
 		return token != EMPTY_TOKEN;
 	}
-	bool IsDictionaryWord (int token) const
+	bool IsDictionaryWord (index_t token) const
 	{
-		return token < EMPTY_TOKEN;
+		return token > LAST_PAIR_TOKEN;
 	}
 
-	size_t GetWordIndex (int token) const
+	index_t GetWordIndex (index_t token) const
 	{
-		return -1 - token;
+		return EMPTY_TOKEN - token;
 	}
-	size_t GetPairIndex (int token) const
+	index_t GetPairIndex (index_t token) const
 	{
 		return token;
 	}
 
-	int GetWordToken (size_t wordIndex) const
+	index_t GetWordToken (index_t wordIndex) const
 	{
-		return -1 - (int)wordIndex;
+		return EMPTY_TOKEN - wordIndex;
 	}
-	int GetPairToken (size_t pairIndex) const
+	index_t GetPairToken (index_t pairIndex) const
 	{
-		return (int)pairIndex;
+		return pairIndex;
 	}
 
 	// data access utility
 
-	void AppendToken (std::string& target, int token) const;
+	void AppendToken (std::string& target, index_t token) const;
 
 	// insertion utilties
 
-	void Append (int token);
+	void Append (index_t token);
 	void Append (const std::string& s);
 
 public:
@@ -205,16 +215,16 @@ public:
 
 	// data access
 
-	size_t size() const
+	index_t size() const
 	{
-		return offsets.size() -1;
+		return (index_t)offsets.size() -1;
 	}
 
-	std::string operator[] (size_t index) const;
+	std::string operator[] (index_t index) const;
 
 	// modification
 
-	size_t Insert (const std::string& s);
+	index_t Insert (const std::string& s);
 	void Compress();
 
 	// reset content
@@ -235,4 +245,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 								  , CTokenizedStringContainer& container);
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								   , const CTokenizedStringContainer& container);
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
 

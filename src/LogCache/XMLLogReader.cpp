@@ -3,6 +3,13 @@
 #include ".\MappedInFile.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // _mkgmtime64() is not available under VS2003
 ///////////////////////////////////////////////////////////////
 
@@ -161,14 +168,14 @@ const char* CXMLLogReader::GetXMLAttributeOffset ( const char* start
 	return start;
 }
 
-int CXMLLogReader::GetXMLRevisionAttribute ( const char* start
-										   , const char* end
-										   , const char* attribute
-										   , size_t attributeLen)
+revision_t CXMLLogReader::GetXMLRevisionAttribute ( const char* start
+												  , const char* end
+												  , const char* attribute
+												  , size_t attributeLen)
 {
 	start = GetXMLAttributeOffset (start, end, attribute, attributeLen);
 	return start == NULL
-		? -1
+		? NO_REVISION
 		: atoi (start);
 }
 
@@ -235,7 +242,7 @@ void CXMLLogReader::ParseChanges ( const char* current
 			= GetXMLTextAttribute (current, changesEnd, "action", 6);
 		std::string fromPath
 			= GetXMLTextAttribute (current, changesEnd, "copyfrom-path", 13);
-		size_t fromRevision
+		revision_t fromRevision
 			= GetXMLRevisionAttribute (current, changesEnd, "copyfrom-rev", 12);
 
 		current = (const char*) memchr (current, '>', changesEnd - current)+1;
@@ -265,7 +272,7 @@ void CXMLLogReader::ParseChanges ( const char* current
 			throw std::exception ("unknown action type");
 		}
 
-		target.AddChange (action, path, fromPath, (DWORD)fromRevision);
+		target.AddChange (action, path, fromPath, fromRevision);
 	}
 }
 
@@ -287,7 +294,7 @@ void CXMLLogReader::ParseXMLLog ( const char* current
 					 , current
 					 , revisionEnd))
 	{
-		size_t revision 
+		revision_t revision 
 			= GetXMLRevisionAttribute (current, revisionEnd, "revision", 8);
 		std::string author
 			= GetXMLTaggedText (current, revisionEnd, "<author", 7, "</author>", 9);
@@ -360,5 +367,11 @@ void CXMLLogReader::LoadFromXML ( const std::wstring& xmlFileName
 	{
 		throw std::exception ("XML file contains no log information");
 	}
+}
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
 }
 

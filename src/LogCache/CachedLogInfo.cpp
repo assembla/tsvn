@@ -4,11 +4,18 @@
 #include "RootInStream.h"
 #include "RootOutStream.h"
 
+// begin namespace LogCache
+
+namespace LogCache
+{
+
 // construction / destruction (nothing to do)
 
 CCachedLogInfo::CCachedLogInfo (const std::wstring& aFileName)
-	: skippedRevisions (logInfo.GetPaths(), revisions)
-	, fileName (aFileName)
+	: fileName (aFileName)
+	, revisions()
+	, logInfo()
+	, skippedRevisions (logInfo.GetPaths(), revisions)
 	, modified (false)
 	, revisionAdded (false)
 {
@@ -66,7 +73,7 @@ void CCachedLogInfo::Save (const std::wstring& newFileName)
 
 // data modification (mirrors CRevisionInfoContainer)
 
-void CCachedLogInfo::Insert ( size_t revision
+void CCachedLogInfo::Insert ( revision_t revision
 							 , const std::string& author
 							 , const std::string& comment
 							 , __time64_t timeStamp)
@@ -77,7 +84,7 @@ void CCachedLogInfo::Insert ( size_t revision
 
 	// add entry to cache and update the revision index
 
-	DWORD index = (DWORD)logInfo.Insert (author, comment, timeStamp);
+	index_t index = logInfo.Insert (author, comment, timeStamp);
 	revisions.SetRevisionIndex (revision, index);
 
 	// you may call AddChange() now
@@ -86,8 +93,8 @@ void CCachedLogInfo::Insert ( size_t revision
 }
 
 void CCachedLogInfo::AddSkipRange ( const std::string& path
-								  , DWORD startRevision
-								  , DWORD count)
+								  , revision_t startRevision
+								  , revision_t count)
 {
 	CDictionaryBasedPath dictPath (&logInfo.GetPaths(), path);
 
@@ -105,3 +112,8 @@ void CCachedLogInfo::Clear()
 	revisions.Clear();
 	logInfo.Clear();
 }
+
+// end namespace LogCache
+
+}
+

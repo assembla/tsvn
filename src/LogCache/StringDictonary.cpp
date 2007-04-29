@@ -7,6 +7,13 @@
 #include "DiffIntegerOutStream.h"
 
 ///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // CStringDictionary::CHashFunction
 ///////////////////////////////////////////////////////////////
 
@@ -42,11 +49,11 @@ CStringDictionary::CHashFunction::value_type
 CStringDictionary::CHashFunction::value 
 	(CStringDictionary::CHashFunction::index_type index) const
 {
-	if (index == NO_INDEX_VALUE)
+	if (index == NO_INDEX)
 		return NULL;
 
 	assert (dictionary->offsets.size() > index+1);
-	assert (dictionary->offsets[index] != -1);
+	assert (dictionary->offsets[index] != NO_INDEX);
 
 	return &dictionary->packedStrings.at(0) + dictionary->offsets[index];
 }
@@ -60,7 +67,7 @@ CStringDictionary::CHashFunction::equal
 {
 	// special cases
 
-	if (index == NO_INDEX_VALUE)
+	if (index == NO_INDEX)
 		return (value == NULL) || (*value == 0);
 
 	if (value == NULL)
@@ -136,55 +143,57 @@ CStringDictionary::~CStringDictionary(void)
 
 // dictionary operations
 
-size_t CStringDictionary::Find (const char* string) const
+index_t CStringDictionary::Find (const char* string) const
 {
 	return hashIndex.find (string);
 }
 
-const char* CStringDictionary::operator[](size_t index) const
+const char* CStringDictionary::operator[](index_t index) const
 {
-	if (index+1 >= offsets.size())
+	if (index+1 >= (index_t)offsets.size())
 		throw std::exception ("dictionary string index out of range");
 
 	return &packedStrings.at(0) + offsets[index];
 }
 
-size_t CStringDictionary::GetLength (size_t index) const
+index_t CStringDictionary::GetLength (index_t index) const
 {
-	if (index+1 >= offsets.size())
+	if (index+1 >= (index_t)offsets.size())
 		throw std::exception ("dictionary string index out of range");
 
 	return offsets[index+1] - offsets[index] - 1;
 }
 
-size_t CStringDictionary::Insert (const char* string)
+index_t CStringDictionary::Insert (const char* string)
 {
 	// must not exist yet (so, it is not empty as well)
 
-	assert (Find (string) == CHashFunction::NO_INDEX_VALUE);
+	assert (Find (string) == NO_INDEX);
+	assert (strlen (string) < NO_INDEX);
 
 	// add string to container
 
-	size_t size = strlen (string) +1;
-	packedStrings.insert (packedStrings.end(), string, string + size);
-	if (packedStrings.size() == (DWORD)(-1))
+	index_t size = index_t (strlen (string)) +1;
+	if (packedStrings.size() >= NO_INDEX - size)
 		throw std::exception ("dictionary overflow");
+
+	packedStrings.insert (packedStrings.end(), string, string + size);
 
 	// update indices
 
-	size_t result = offsets.size()-1;
-	hashIndex.insert (string, (DWORD)result);
-	offsets.push_back ((DWORD)packedStrings.size());
+	index_t result = (index_t)offsets.size()-1;
+	hashIndex.insert (string, result);
+	offsets.push_back ((index_t)packedStrings.size());
 
 	// ready
 
 	return result;
 }
 
-size_t CStringDictionary::AutoInsert (const char* string)
+index_t CStringDictionary::AutoInsert (const char* string)
 {
-	size_t result = Find (string);
-	if (result == -1)
+	index_t result = Find (string);
+	if (result == NO_INDEX)
 		result = Insert (string);
 
 	return result;
@@ -212,6 +221,9 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		= dynamic_cast<CBLOBInStream*>
 			(stream.GetSubStream (CStringDictionary::PACKED_STRING_STREAM_ID));
 
+	if (packedStringStream->GetSize() >= NO_INDEX)
+		throw std::exception ("data stream to large");
+
 	dictionary.packedStrings.resize (packedStringStream->GetSize());
 	memcpy ( &dictionary.packedStrings.at(0)
 		   , packedStringStream->GetData()
@@ -237,9 +249,9 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 	dictionary.hashIndex.reserve (dictionary.offsets.size());
 
 	const char* stringBase = &dictionary.packedStrings.at(0);
-	for (size_t i = 1, count = dictionary.offsets.size()-1; i < count; ++i)
+	for (index_t i = 1, count = (index_t)dictionary.offsets.size()-1; i < count; ++i)
 		dictionary.hashIndex.insert ( stringBase + dictionary.offsets[i]
-									, (DWORD)i);
+									, i);
 
 	// ready
 
@@ -271,3 +283,8 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 	return stream;
 }
 
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}

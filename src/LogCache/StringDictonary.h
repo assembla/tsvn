@@ -5,6 +5,7 @@
 ///////////////////////////////////////////////////////////////
 
 #include "QuickHash.h"
+#include "LogCacheGlobals.h"
 
 ///////////////////////////////////////////////////////////////
 // forward declarations
@@ -12,6 +13,13 @@
 
 class IHierarchicalInStream;
 class IHierarchicalOutStream;
+
+///////////////////////////////////////////////////////////////
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
 
 ///////////////////////////////////////////////////////////////
 //
@@ -59,9 +67,9 @@ private:
 		// required typedefs and constants
 
 		typedef const char* value_type;
-		typedef DWORD index_type;
+		typedef index_t index_type;
 
-		enum {NO_INDEX_VALUE = -1};
+		enum {NO_INDEX = LogCache::NO_INDEX};
 
 		// the actual hash function
 
@@ -87,7 +95,7 @@ private:
 	// the string data
 
 	std::vector<char> packedStrings;
-	std::vector<DWORD> offsets;
+	std::vector<index_t> offsets;
 
 	// the string index
 
@@ -112,17 +120,17 @@ public:
 
 	// dictionary operations
 
-	size_t size() const
+	index_t size() const
 	{
-		return offsets.size()-1;
+		return (index_t)(offsets.size()-1);
 	}
 
-	const char* operator[](size_t index) const;
-	size_t GetLength (size_t index) const;
+	const char* operator[](index_t index) const;
+	index_t GetLength (index_t index) const;
 
-	size_t Find (const char* string) const;
-	size_t Insert (const char* string);
-	size_t AutoInsert (const char* string);
+	index_t Find (const char* string) const;
+	index_t Insert (const char* string);
+	index_t AutoInsert (const char* string);
 
 	// reset content
 
@@ -142,4 +150,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 								  , CStringDictionary& dictionary);
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								   , const CStringDictionary& dictionary);
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
+}
 

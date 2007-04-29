@@ -7,9 +7,14 @@
 #include "DiffIntegerOutStream.h"
 
 ///////////////////////////////////////////////////////////////
-//
+// begin namespace LogCache
+///////////////////////////////////////////////////////////////
+
+namespace LogCache
+{
+
+///////////////////////////////////////////////////////////////
 // CPairPacker
-//
 ///////////////////////////////////////////////////////////////
 
 // find all 
@@ -18,18 +23,18 @@ void CTokenizedStringContainer::CPairPacker::Initialize()
 {
 	strings.reserve (container->offsets.size());
 
-	UIT first = container->offsets.begin();
-	UIT last = container->offsets.end();
-	UIT iter = first;
+	IT first = container->offsets.begin();
+	IT last = container->offsets.end();
+	IT iter = first;
 
 	assert (first != last);
 
-	DWORD offset = *iter;
+	index_t offset = *iter;
 	for (++iter; iter != last; ++iter)
 	{
-		DWORD nextOffset = *iter;
+		index_t nextOffset = *iter;
 		if (offset + 2 <= nextOffset)
-			strings.push_back ((DWORD)(iter - first - 1));
+			strings.push_back ((index_t)(iter - first - 1));
 
 		offset = nextOffset;
 	}
@@ -37,43 +42,43 @@ void CTokenizedStringContainer::CPairPacker::Initialize()
 
 // efficiently determine the iterator range that spans our string
 
-void CTokenizedStringContainer::CPairPacker::GetStringRange ( DWORD stringIndex
-															, IIT& first
-															, IIT& last)
+void CTokenizedStringContainer::CPairPacker::GetStringRange ( index_t stringIndex
+															, IT& first
+															, IT& last)
 {
 
-	UIT iter = container->offsets.begin() + stringIndex;
+	IT iter = container->offsets.begin() + stringIndex;
 
 	size_t offset = *iter;
 	size_t length = *(++iter) - offset;
 
-	IIT base = container->stringData.begin();
+	IT base = container->stringData.begin();
 	first = base + offset;
 	last = first + length;
 }
 
 // add token pairs of one string to our counters
 
-void CTokenizedStringContainer::CPairPacker::AccumulatePairs (DWORD stringIndex)
+void CTokenizedStringContainer::CPairPacker::AccumulatePairs (index_t stringIndex)
 {
-	IIT iter;
-	IIT end;
+	IT iter;
+	IT end;
 
 	GetStringRange (stringIndex, iter, end);
 
-	int lastToken = *iter;
+	index_t lastToken = *iter;
 	for ( ++iter; (iter != end) && container->IsToken (*iter); ++iter)
 	{
-		int token = *iter;
+		index_t token = *iter;
 		if ((token >= minimumToken) || (lastToken >= minimumToken))
 		{
 			// that pair could be compressible (i.e. wasn't tried before)
 
-			std::pair<int, int> newPair (lastToken, token);
-			assert (container->pairs.Find (newPair) == -1);
+			std::pair<index_t, index_t> newPair (lastToken, token);
+			assert (container->pairs.Find (newPair) == NO_INDEX);
 
-			size_t index = newPairs.AutoInsert (newPair);
-			if (index >= counts.size())
+			index_t index = newPairs.AutoInsert (newPair);
+			if (index >= (index_t)counts.size())
 				counts.push_back (1);
 			else
 				++counts[index];
@@ -85,45 +90,45 @@ void CTokenizedStringContainer::CPairPacker::AccumulatePairs (DWORD stringIndex)
 
 void CTokenizedStringContainer::CPairPacker::AddCompressablePairs()
 {
-	for (size_t i = 0, count = counts.size(); i < count; ++i)
+	for (index_t i = 0, count = (index_t)counts.size(); i < count; ++i)
 	{
 		if (counts[i] > 2)
 			container->pairs.Insert (newPairs[i]);
 	}
 }
 
-bool CTokenizedStringContainer::CPairPacker::CompressString (DWORD stringIndex)
+bool CTokenizedStringContainer::CPairPacker::CompressString (index_t stringIndex)
 {
 	size_t oldReplacementCount = replacements;
 
-	IIT iter;
-	IIT end;
+	IT iter;
+	IT end;
 
 	GetStringRange (stringIndex, iter, end);
 
-	IIT target = iter;
+	IT target = iter;
 
-	int lastToken = *iter;
+	index_t lastToken = *iter;
 	for ( ++iter; (iter != end) && container->IsToken (*iter); ++iter)
 	{
 		// can we combine last token with this one?
 
-		int token = *iter;
+		index_t token = *iter;
 		if ((token >= minimumToken) || (lastToken >= minimumToken))
 		{
 			// that pair could be compressible (i.e. wasn't tried before)
 
-			std::pair<int, int> newPair (lastToken, token);
-			size_t pairIndex = container->pairs.Find (newPair);
+			std::pair<index_t, index_t> newPair (lastToken, token);
+			index_t pairIndex = container->pairs.Find (newPair);
 
-			if (pairIndex != -1)
+			if (pairIndex != NO_INDEX)
 			{
 				// replace token *pair* with new, compressed token
 
 				lastToken = container->GetPairToken (pairIndex);
 				if (++iter == end)
 				{
-					token = -1;
+					token = EMPTY_TOKEN;
 					--iter;
 				}
 				else
@@ -148,7 +153,7 @@ bool CTokenizedStringContainer::CPairPacker::CompressString (DWORD stringIndex)
 	// fill up the empty space at the end
 
 	for (++target; (target != end); ++target)
-		*target = -1;
+		*target = EMPTY_TOKEN;
 	
 	// was there a compression?
 
@@ -158,7 +163,7 @@ bool CTokenizedStringContainer::CPairPacker::CompressString (DWORD stringIndex)
 CTokenizedStringContainer::CPairPacker::CPairPacker 
 	( CTokenizedStringContainer* aContainer)
 	: container (aContainer)
-	, minimumToken (INT_MIN)
+	, minimumToken (0)
 	, replacements(0)
 {
 	Initialize();
@@ -174,12 +179,12 @@ size_t CTokenizedStringContainer::CPairPacker::OneRound()
 {
 	// save current state
 
-	size_t oldReplacementCount = replacements;
-	size_t oldPairsCount = container->pairs.size();
+	index_t oldReplacementCount = replacements;
+	index_t oldPairsCount = container->pairs.size();
 
 	// count pairs
 
-	for (UIT iter = strings.begin(), end = strings.end(); iter != end; ++iter)
+	for (IT iter = strings.begin(), end = strings.end(); iter != end; ++iter)
 		AccumulatePairs (*iter);
 
 	// add new, compressible pairs to the container
@@ -188,10 +193,10 @@ size_t CTokenizedStringContainer::CPairPacker::OneRound()
 
 	// compress strings
 
-	UIT target = strings.begin();
-	for (UIT iter = target, end = strings.end(); iter != end; ++iter)
+	IT target = strings.begin();
+	for (IT iter = target, end = strings.end(); iter != end; ++iter)
 	{
-		DWORD stringIndex = *iter;
+		index_t stringIndex = *iter;
 		if (CompressString (stringIndex))
 		{
 			*target = stringIndex;
@@ -220,15 +225,15 @@ void CTokenizedStringContainer::CPairPacker::Compact()
 	if (replacements == 0)
 		return;
 
-	IIT first = container->stringData.begin();
-	IIT target = first;
+	IT first = container->stringData.begin();
+	IT target = first;
 
-	UIT offsetIter = container->offsets.begin();
-	UIT offsetsEnd = container->offsets.end();
-	IIT nextStringStart = first + *offsetIter;
+	IT offsetIter = container->offsets.begin();
+	IT offsetsEnd = container->offsets.end();
+	IT nextStringStart = first + *offsetIter;
 
-	IIT iter = target;
-	IIT end = container->stringData.end();
+	IT iter = target;
+	IT end = container->stringData.end();
 
 	while (iter != end)
 	{
@@ -237,7 +242,7 @@ void CTokenizedStringContainer::CPairPacker::Compact()
 
 		while (iter == nextStringStart)
 		{
-			*offsetIter = (DWORD)(target - first);
+			*offsetIter = (index_t)(target - first);
 			nextStringStart = first + *(++offsetIter);
 		}
 
@@ -259,7 +264,7 @@ void CTokenizedStringContainer::CPairPacker::Compact()
 
 	// update string boundaries 
 
-	std::fill (offsetIter, offsetsEnd, (DWORD)(target - first));
+	std::fill (offsetIter, offsetsEnd, (index_t)(target - first));
 
 	// remove trailing tokens
 
@@ -275,7 +280,7 @@ void CTokenizedStringContainer::CPairPacker::Compact()
 // data access utility
 
 void CTokenizedStringContainer::AppendToken ( std::string& target
-											, int token) const
+											, index_t token) const
 {
 	if (IsDictionaryWord (token))
 	{
@@ -287,7 +292,7 @@ void CTokenizedStringContainer::AppendToken ( std::string& target
 	{
 		// token is a compressed pair of tokens
 
-		std::pair<int, int> subTokens = pairs [GetPairIndex (token)];
+		std::pair<index_t, index_t> subTokens = pairs [GetPairIndex (token)];
 
 		// add them recursively
 
@@ -298,11 +303,11 @@ void CTokenizedStringContainer::AppendToken ( std::string& target
 
 // insertion utilties
 
-void CTokenizedStringContainer::Append (int token)
+void CTokenizedStringContainer::Append (index_t token)
 {
 	if (IsToken (token))
 	{
-		if (stringData.size() == (DWORD)(-1))
+		if (stringData.size() == NO_INDEX)
 			throw std::exception ("string container overflow");
 
 		stringData.push_back (token);
@@ -313,7 +318,7 @@ void CTokenizedStringContainer::Append (const std::string& s)
 {
 	static const std::string delimiters (" \t\n\\/");
 
-	int lastToken = EMPTY_TOKEN;
+	index_t lastToken = EMPTY_TOKEN;
 	size_t nextPos = std::string::npos;
 
 	for (size_t pos = 0, length = s.length(); pos < length; pos = nextPos)
@@ -325,12 +330,12 @@ void CTokenizedStringContainer::Append (const std::string& s)
 			nextPos = length;
 
 		std::string word = s.substr (pos, nextPos - pos);
-		int token = GetWordToken (words.AutoInsert (word.c_str()));
+		index_t token = GetWordToken (words.AutoInsert (word.c_str()));
 
 		// auto-compress, if pair with last token is already known
 
-		size_t pairIndex = pairs.Find (std::make_pair (lastToken, token));
-		if (pairIndex == -1)
+		index_t pairIndex = pairs.Find (std::make_pair (lastToken, token));
+		if (pairIndex == NO_INDEX)
 		{
 			Append (lastToken);
 			lastToken = token;
@@ -360,7 +365,7 @@ CTokenizedStringContainer::~CTokenizedStringContainer(void)
 
 // data access
 
-std::string CTokenizedStringContainer::operator[] (size_t index) const
+std::string CTokenizedStringContainer::operator[] (index_t index) const
 {
 	// range check
 
@@ -384,7 +389,7 @@ std::string CTokenizedStringContainer::operator[] (size_t index) const
 
 // modification
 
-size_t CTokenizedStringContainer::Insert (const std::string& s)
+index_t CTokenizedStringContainer::Insert (const std::string& s)
 {
 	// tokenize and compress
 
@@ -392,8 +397,8 @@ size_t CTokenizedStringContainer::Insert (const std::string& s)
 
 	// no error -> we can add the new string to the index
 
-	offsets.push_back ((DWORD)stringData.size());
-	return offsets.size()-2;
+	offsets.push_back ((index_t)stringData.size());
+	return (index_t)(offsets.size()-2);
 }
 
 void CTokenizedStringContainer::Compress()
@@ -490,4 +495,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 	// ready
 
 	return stream;
+}
+
+///////////////////////////////////////////////////////////////
+// end namespace LogCache
+///////////////////////////////////////////////////////////////
+
 }
