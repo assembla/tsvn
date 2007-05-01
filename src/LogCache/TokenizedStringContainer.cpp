@@ -424,7 +424,7 @@ void CTokenizedStringContainer::AutoCompress()
 	// larger caches with already a reasonable number of
 	// token pairs. Threashold: log n > n / p
 
-	index_t relation = (index_t)stringData.size() / (pairs.size() + 1);
+	size_t relation = stringData.size() / ((size_t)pairs.size() + 1);
 	if (stringData.size() < (1 << relation))
 		Compress();
 }
