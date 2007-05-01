@@ -51,6 +51,7 @@ public:
 	SVN(void);
 	~SVN(void);
 
+#ifndef __ILOGRECEIVER_H__
 	struct LogChangedPath
 	{
 		CString sPath;
@@ -63,6 +64,8 @@ public:
 #	define LOGACTIONS_ADDED		0x00000004
 #	define LOGACTIONS_DELETED	0x00000008
 	typedef CArray<LogChangedPath*, LogChangedPath*> LogChangedPathArray;
+#endif
+
 	virtual BOOL Cancel();
 	virtual BOOL Notify(const CTSVNPath& path, svn_wc_notify_action_t action, 
 							svn_node_kind_t kind, const CString& mime_type, 

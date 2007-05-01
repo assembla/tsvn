@@ -1,5 +1,7 @@
 #pragma once
-#include "ilogquery.h"
+
+#include "ILogQuery.h"
+#include "svn_client.h"
 
 class CSVNLogQuery : public ILogQuery
 {

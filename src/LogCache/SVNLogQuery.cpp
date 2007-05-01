@@ -1,5 +1,15 @@
 #include "StdAfx.h"
+
 #include "SVNLogQuery.h"
+#include "ILogReceiver.h"
+
+#include "svn_time.h"
+#include "svn_sorts.h"
+#include "UnicodeUtils.h"
+#include "SVN.h"
+#include "SVNError.h"
+#include "SVNHelpers.h"
+#include "TSVNPath.h"
 
 svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 									   , apr_hash_t* ch_paths
@@ -57,7 +67,7 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 				static const char actionKeys[5] = "MRAD";
 				const char* actionKey = strchr (actionKeys, log_item->action);
 
-				changedPath->action = actionIndex == NULL 
+				changedPath->action = actionKey == NULL 
 									? 0
 									: 1 << (actionKey - actionKeys);
 
@@ -72,10 +82,10 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 				}
 				else
 				{
-					changedpath->lCopyFromRev = 0;
+					changedPath->lCopyFromRev = 0;
 				}
 
-				arChangedPaths->Add (changedpath.release());
+				arChangedPaths->Add (changedPath.release());
 			} 
 		} 
 	}
@@ -83,10 +93,6 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 	{
 		e->Delete();
 	}
-#pragma warning(push)
-#pragma warning(disable: 4127)	// conditional expression is constant
-	SVN_ERR (svn->cancel(baton));
-#pragma warning(pop)
 
 	// now, report the change
 
@@ -98,6 +104,10 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 							 , timeStamp
 							 , messageNative);
 	}
+	catch (SVNError& e)
+	{
+		return svn_error_create (e.GetCode(), NULL, e.GetMessage());
+	}
 	catch (...)
 	{
 		// we must not leak exceptions back into SVN
@@ -106,7 +116,9 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 	return NULL;
 }
 
-CSVNLogQuery::CSVNLogQuery(void)
+CSVNLogQuery::CSVNLogQuery (svn_client_ctx_t *context, apr_pool_t *pool)
+	: context (context)
+	, pool (pool)
 {
 }
 
@@ -123,7 +135,7 @@ void CSVNLogQuery::Log ( const CTSVNPathList& targets
 					   , ILogReceiver* receiver)
 {
 	SVNPool localpool (pool);
-	svn_error_t *result = svn_client_log3 ( pathlist.MakePathArray (pool)
+	svn_error_t *result = svn_client_log3 ( targets.MakePathArray (pool)
 										  , peg_revision
 										  , start
 										  , end
@@ -135,7 +147,7 @@ void CSVNLogQuery::Log ( const CTSVNPathList& targets
 										  , context
 										  , localpool);
 
-	if (error != NULL)
-		throw ESVNLogException (error);
+	if (result != NULL)
+		throw SVNError (result);
 }
 
