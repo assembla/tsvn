@@ -149,7 +149,7 @@ private:
 		size_t new_capacity = grower.capacity();
 	
 		data = new index_type[new_capacity];
-		std::fill_n (data, new_capacity, NO_INDEX);
+		stdext::unchecked_fill_n (data, new_capacity, NO_INDEX);
 	}
 	
 	// add a value to the hash 
@@ -290,7 +290,7 @@ public:
 		hf = rhs.hf;
 		grower = rhs.grower;
 
-		std::copy (rhs.data, rhs.data + rhs.grower.capacity(), data);
+		stdext::unchecked_copy (rhs.data, rhs.data + rhs.grower.capacity(), data);
 
 		return *this;
 	}

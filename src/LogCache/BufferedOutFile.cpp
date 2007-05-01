@@ -79,7 +79,7 @@ CBufferedOutFile& operator<< (CBufferedOutFile& dest, int value)
 {
 	enum {BUFFER_SIZE = 11};
 	char buffer [BUFFER_SIZE];
-	itoa (value, buffer, 10);
+	_itoa_s (value, buffer, 10);
 
 	return operator<< (dest, buffer);
 }
