@@ -20,7 +20,7 @@ namespace LogCache
 // CLogIteratorBase
 ///////////////////////////////////////////////////////////////
 
-class CLogIteratorBase
+class CLogIteratorBase : public ILogIterator
 {
 protected:
 
@@ -98,6 +98,7 @@ public:
 	virtual bool DataIsMissing() const;
 	virtual revision_t GetRevision() const;
 	virtual const CDictionaryBasedPath& GetPath() const;
+	virtual bool EndOfPath() const;
 
 	virtual void Advance();
 
@@ -125,6 +126,11 @@ inline revision_t CLogIteratorBase::GetRevision() const
 inline const CDictionaryBasedPath& CLogIteratorBase::GetPath() const
 {
 	return path;
+}
+
+inline bool CLogIteratorBase::EndOfPath() const
+{
+	return revision == NO_REVISION;
 }
 
 ///////////////////////////////////////////////////////////////
