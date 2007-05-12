@@ -433,6 +433,14 @@
 		<Filter
 			Name="Storage Layer"
 			>
+			<File
+				RelativePath=".\LogCachePool.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LogCachePool.h"
+				>
+			</File>
 			<Filter
 				Name="Streams"
 				>
@@ -774,6 +782,14 @@
 			Name="Log Interface Layer"
 			>
 			<File
+				RelativePath=".\CacheLogQuery.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\CacheLogQuery.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ILogQuery.h"
 				>
 			</File>
@@ -784,34 +800,6 @@
 			<File
 				RelativePath=".\SVNLogQuery.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\SVNLogQuery.h"
