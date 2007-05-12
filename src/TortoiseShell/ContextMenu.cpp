@@ -1062,6 +1062,8 @@ STDMETHODIMP CShellExt::InvokeCommand(LPCMINVOKECOMMANDINFO lpcmi)
 			std::map<stdstring, int>::const_iterator verb_it = myVerbsMap.lower_bound(verb);
 			if (verb_it != myVerbsMap.end() && verb_it->first == verb)
 				idCmd = verb_it->second;
+			else
+				return hr;
 		}
 
 		// See if we have a handler interface for this id
