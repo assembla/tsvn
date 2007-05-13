@@ -8,7 +8,7 @@
 namespace LogCache
 {
 
-class CStrictLogInterator :
+class CStrictLogIterator :
 	public CLogIteratorBase
 {
 protected:
@@ -22,10 +22,10 @@ public:
 	// construction / destruction 
 	// (nothing special to do)
 
-	CStrictLogInterator ( const CCachedLogInfo* cachedLog
+	CStrictLogIterator ( const CCachedLogInfo* cachedLog
 						, revision_t startRevision
 						, const CDictionaryBasedPath& startPath);
-	virtual ~CStrictLogInterator(void);
+	virtual ~CStrictLogIterator(void);
 };
 
 ///////////////////////////////////////////////////////////////
