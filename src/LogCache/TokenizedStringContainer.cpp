@@ -425,7 +425,7 @@ void CTokenizedStringContainer::AutoCompress()
 	// token pairs. Threashold: log n > n / p
 
 	size_t relation = stringData.size() / ((size_t)pairs.size() + 1);
-	if (stringData.size() < (1 << relation))
+	if (stringData.size() < ((size_t)1 << relation))
 		Compress();
 }
 

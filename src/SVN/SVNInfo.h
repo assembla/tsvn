@@ -58,7 +58,7 @@ public:
 
 	// convenience methods:
 
-	bool IsValid() {return rev.IsValid();}
+	bool IsValid() {return rev.IsValid() != FALSE;}
 };
 
 
