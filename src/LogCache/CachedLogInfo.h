@@ -104,7 +104,7 @@ public:
 				   , const std::string& fromPath
 				   , revision_t fromRevision);
 
-	void AddSkipRange ( const std::string& path
+	void AddSkipRange ( const CDictionaryBasedPath& path
 					  , revision_t startRevision
 					  , revision_t count);
 
