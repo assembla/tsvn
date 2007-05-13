@@ -98,7 +98,7 @@ void CCachedLogInfo::AddSkipRange ( const CDictionaryBasedPath& path
 {
 	modified = true;
 
-	skippedRevisions.Add (dictPath, startRevision, count);
+	skippedRevisions.Add (path, startRevision, count);
 }
 
 void CCachedLogInfo::Clear()
