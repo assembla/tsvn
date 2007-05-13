@@ -581,6 +581,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								   , const CSkipRevisionInfo& container)
 {
+	// minimize the data to write
+
+	const_cast<CSkipRevisionInfo*>(&container)->Compress();
+
 	// open sub-streams
 
 	CPackedDWORDOutStream* pathIDsStream 
