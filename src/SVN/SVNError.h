@@ -44,12 +44,12 @@ public:
 	const CStringA& GetMessage() const;
 };
 
-svn_errno_t SVNError::GetCode() const
+inline svn_errno_t SVNError::GetCode() const
 {
 	return code;
 }
 
-const CStringA& SVNError::GetMessage() const
+inline const CStringA& SVNError::GetMessage() const
 {
 	return message;
 }
