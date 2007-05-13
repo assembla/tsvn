@@ -1,9 +1,38 @@
 #pragma once
 
-#include "ILogQuery.h"
+///////////////////////////////////////////////////////////////
+// necessary includes
+///////////////////////////////////////////////////////////////
 
-class CCachedLogInfo;
-class CSVNLogQuery;
+#include "ILogQuery.h"
+#include "ILogReceiver.h"
+
+#include "RevisionInfoContainer.h"
+
+///////////////////////////////////////////////////////////////
+// forward declarations
+///////////////////////////////////////////////////////////////
+
+class SVNInfoData;
+class CTSVNPath;
+
+namespace LogCache
+{
+	class CLogCachePool;
+	class CCachedLogInfo;
+}
+
+using namespace LogCache;
+
+///////////////////////////////////////////////////////////////
+//
+// CCacheLogQuery
+//
+//		Implements ILogQuery on the log cache. It requires
+//		another query to fill the gaps in the cache it may
+//		encounter. Those will be filled on-the-fly.
+//
+///////////////////////////////////////////////////////////////
 
 class CCacheLogQuery : public ILogQuery
 {
@@ -16,24 +45,45 @@ private:
 		// cache to use & update
 
 		CCachedLogInfo* cache;
+		CStringA URL;
 
 		// connection to the SVN repository
 
-		CSVNLogQuery* svnQuery;
+		ILogQuery* svnQuery;
 
-		// prepare a call to svnQuery to fill up a gap in the cache
+		// path to log for and the begin of the current gap 
+		// in the log for that path
 
-		revision_t LastMissingRevision ( revision_t firstMissingRevision
-									   , revision_t endRevision);
+		std::auto_ptr<CDictionaryBasedPath> currentPath;
+		revision_t firstNARevision;
+		bool followRenames;
+
+		// the original log receiver (may be NULL)
+
+		ILogReceiver* receiver;
+
+		// implement ILogReceiver
+
+		virtual void ReceiveLog ( const LogChangedPathArray& changes
+								, svn_revnum_t rev
+								, const CString& author
+								, const apr_time_t& timeStamp
+								, const CString& message);
 
 	public:
 
-		void FillLog ( revision_t startRevision
-					 , revision_t endRevision
-					 , const CDictionaryBasedPath& startPath
-					 , int limit
-					 , bool strictNodeHistory
-					 , ILogReceiver* receiver);
+		// actually call SVN
+		// return the last revision sent to the receiver
+
+		revision_t FillLog ( CCachedLogInfo* cache
+						   , const CStringA& URL
+						   , ILogQuery* svnQuery
+						   , revision_t startRevision
+						   , revision_t endRevision
+						   , const CDictionaryBasedPath& startPath
+						   , int limit
+						   , bool strictNodeHistory
+						   , ILogReceiver* receiver);
 	};
 
 	// we get our cache from here
@@ -47,9 +97,16 @@ private:
 
 	// connection to the SVN repository (may be NULL)
 
-	CSVNLogQuery* svnQuery;
+	ILogQuery* svnQuery;
 
-	// 
+	// Determine the revision range to pass to SVN.
+
+	revision_t NextAvailableRevision ( const CDictionaryBasedPath& path
+									 , revision_t firstMissingRevision
+								     , revision_t endRevision) const;
+
+	// ask SVN to fill the log -- at least a bit
+	// Possibly, it will stop long before endRevision and limit!
 
 	revision_t FillLog ( revision_t startRevision
 					   , revision_t endRevision
@@ -109,7 +166,7 @@ public:
 
 	// construction / destruction
 
-	CCacheLogQuery (CLogCachePool* caches, CSVNLogQuery* svnQuery);
+	CCacheLogQuery (CLogCachePool* caches, ILogQuery* svnQuery);
 	virtual ~CCacheLogQuery(void);
 
 	// query a section from log for multiple paths

@@ -1,6 +1,194 @@
 #include "StdAfx.h"
+
 #include "CacheLogQuery.h"
+
 #include "CachedLogInfo.h"
+#include "CopyFollowingLogIterator.h"
+#include "StrictLogIterator.h"
+#include "LogCachePool.h"
+
+#include "svn_client.h"
+#include "svn_opt.h"
+
+#include "UnicodeUtils.h"
+#include "TSVNPath.h"
+#include "SVN.h"
+#include "SVNInfo.h"
+#include "SVNError.h"
+
+// implement ILogReceiver
+
+void CCacheLogQuery::CLogFiller::ReceiveLog ( const LogChangedPathArray& changes
+											, svn_revnum_t rev
+											, const CString& author
+											, const apr_time_t& timeStamp
+											, const CString& message)
+{
+	// add it to the cache, if it is not in there, yet
+
+	revision_t revision = static_cast<revision_t>(rev);
+	if (cache->GetRevisions()[revision] == NO_INDEX)
+	{
+		// create the revision entry
+
+		cache->Insert ( revision
+					  , (const char*)CUnicodeUtils::GetUTF8 (author)
+					  , (const char*)CUnicodeUtils::GetUTF8 (message)
+					  , timeStamp);
+
+		// add all changes
+
+		for (INT_PTR i = 0, count = changes.GetCount(); i < count; ++i)
+		{
+			const LogChangedPath* change = changes.GetAt (i);
+
+			CRevisionInfoContainer::TChangeAction action 
+				= (CRevisionInfoContainer::TChangeAction)(change->action * 4);
+			std::string path 
+				= (const char*)SVN::MakeSVNUrlOrPath (change->sPath);
+			std::string copyFromPath 
+				= (const char*)SVN::MakeSVNUrlOrPath (change->sCopyFromPath);
+			revision_t copyFromRevision 
+				= change->lCopyFromRev == 0 
+				? NO_REVISION 
+				: static_cast<revision_t>(change->lCopyFromRev);
+
+			cache->AddChange (action, path, copyFromPath, copyFromRevision);
+		}
+	}
+
+	// mark the gap and update the current path
+
+	if (firstNARevision > revision+1)
+	{
+		cache->AddSkipRange ( *currentPath
+							, firstNARevision
+							, firstNARevision - revision -1);
+	}
+
+	if (followRenames)
+	{
+		CCopyFollowingLogIterator iterator (cache, revision, *currentPath);
+		iterator.Advance();
+
+		*currentPath = iterator.GetPath();
+	}
+
+	firstNARevision = revision-1;
+
+	// hand on to the original log receiver
+
+	if (receiver != NULL)
+		receiver->ReceiveLog (changes, rev, author, timeStamp, message);
+}
+
+// actually call SVN
+// return the last revision sent to the receiver
+
+revision_t 
+CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
+								    , const CStringA& URL
+								    , ILogQuery* svnQuery
+								    , revision_t startRevision
+									, revision_t endRevision
+									, const CDictionaryBasedPath& startPath
+									, int limit
+									, bool strictNodeHistory
+								    , ILogReceiver* receiver)
+{
+	this->cache = cache;
+	this->URL = URL;
+	this->svnQuery = svnQuery;
+	this->receiver = receiver;
+
+	firstNARevision = startRevision;
+	currentPath.reset (new CDictionaryBasedPath (startPath));
+	followRenames = !strictNodeHistory;
+
+	CTSVNPath path;
+	path.SetFromSVN (URL + "/" + startPath.GetPath().c_str());
+
+	svnQuery->Log ( CTSVNPathList (path)
+				  , static_cast<long>(startRevision)
+				  , static_cast<long>(startRevision)
+				  , static_cast<long>(endRevision)
+			      , limit
+				  , strictNodeHistory
+				  , this);
+
+	return firstNARevision+1;
+}
+
+// when asking SVN to fill our cache, we want it to cover
+// the missing revisions as well as the ones that we already
+// know to have no info for this path. Otherwise, we may end
+// up creating a lot of queries for paths that are seldom
+// modified.
+
+revision_t 
+CCacheLogQuery::NextAvailableRevision ( const CDictionaryBasedPath& path
+									  , revision_t startRevision
+									  , revision_t endRevision) const
+{
+	const CRevisionIndex& revisions = cache->GetRevisions();
+	revision_t lastRevisionToCheck = min ( endRevision
+										 , revisions.GetFirstRevision());
+
+	while ((startRevision >= endRevision) && (startRevision != NO_REVISION))
+	{
+		CStrictLogIterator iterator (cache, startRevision, path);
+		assert (iterator.DataIsMissing());
+
+		iterator.Advance();
+
+		// found the next cache entry for this path?
+
+		if (!iterator.DataIsMissing())
+			return iterator.GetRevision();
+
+		// skip N/A revisions
+
+		while (   (startRevision >= lastRevisionToCheck) 
+			   && (startRevision != NO_REVISION)
+			   && (revisions[startRevision] == NO_INDEX))
+		{
+			--startRevision;
+		}
+	}
+
+	// there is no cached data available for this path and revision range
+
+	return endRevision-1;
+}
+
+// ask SVN to fill the log -- at least a bit
+// Possibly, it will stop long before endRevision and limit!
+
+revision_t CCacheLogQuery::FillLog ( revision_t startRevision
+								   , revision_t endRevision
+								   , const CDictionaryBasedPath& startPath
+								   , int limit
+								   , bool strictNodeHistory
+								   , ILogReceiver* receiver)
+{
+	// don't try to get a full log; just enough to continue our search
+
+	endRevision = NextAvailableRevision ( startPath
+										, startRevision
+										, endRevision);
+
+	// now, fill the cache (somewhat) and forward to the receiver
+
+	return CLogFiller().FillLog ( cache
+								, URL
+								, svnQuery
+								, startRevision
+								, endRevision
+								, startPath
+								, limit
+								, strictNodeHistory
+								, receiver);
+}
 
 // fill the receiver's change list buffer 
 
@@ -42,7 +230,7 @@ CCacheLogQuery::GetChanges ( CRevisionInfoContainer::CChangesIterator& first
 			changedPath->lCopyFromRev = 0;
 		}
 
-		arChangedPaths->Add (changedPath.release());
+		result->Add (changedPath.release());
 	} 
 
 	return result;
@@ -59,10 +247,15 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 {
 	// create the right iterator
 
-	std::auto_ptr<ILogIterator> iterator
-		= strictNodeHistory
-		? new CStrictLogInterator (cache, startRevision, startPath)
-		: new CCopyFollowingLogIterator (cache, startRevision, startPath);
+	std::auto_ptr<ILogIterator> iterator;
+	if (strictNodeHistory)
+		iterator.reset (new CStrictLogIterator ( cache
+											   , startRevision
+											   , startPath));
+	else
+		iterator.reset (new CCopyFollowingLogIterator ( cache
+													  , startRevision
+													  , startPath));
 
 	// find first suitable entry or cache gap
 
@@ -98,20 +291,20 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 			revision_t revision = iterator->GetRevision();
 			if (revision < lastReported)
 			{
-				index_t logIndex = cache->GetRevisions (revision);
+				index_t logIndex = cache->GetRevisions()[revision];
 				const CRevisionInfoContainer& logInfo = cache->GetLogInfo();
 
+				CStringA author = logInfo.GetAuthor (logIndex);
+				CStringA comment = logInfo.GetComment (logIndex).c_str();
 				std::auto_ptr<LogChangedPathArray> changes
-					= GetChanges ( logInfo->GetChangesBegin (logIndex)
-								 , logInfo->GetChangesEnd (logIndex));
+					= GetChanges ( logInfo.GetChangesBegin (logIndex)
+								 , logInfo.GetChangesEnd (logIndex));
 
-				receiver->ReceiveLog ( *changes.get())
+				receiver->ReceiveLog ( *changes.get()
 									 , revision
-									 , CUnicodeUtils::GetUnicode 
-										   (logInfo->GetAuthor (index).c_str())
-									 , logInfo->GetTimeStamp (index)
-									 , CUnicodeUtils::GetUnicode 
-									       (logInfo->GetComment (index).c_str()));
+									 , CUnicodeUtils::GetUnicode (author)
+									 , logInfo.GetTimeStamp (logIndex)
+									 , CUnicodeUtils::GetUnicode (comment));
 			}
 
 			// enough?
@@ -160,8 +353,9 @@ CDictionaryBasedPath CCacheLogQuery::GetRelativeRepositoryPath (SVNInfoData& inf
 	// get path object
 
 	CStringA relPath = CUnicodeUtils::GetUTF8 (info.url).Mid (URL.GetLength());
+	const CPathDictionary* paths = &cache->GetLogInfo().GetPaths();
 
-	return CDictionaryBasedPath (cache->paths, (const char*)relPath);
+	return CDictionaryBasedPath (paths, (const char*)relPath);
 }
 
 // get UUID & repository-relative path
@@ -182,7 +376,7 @@ SVNInfoData& CCacheLogQuery::GetRepositoryInfo ( const CTSVNPath& path
 
 	if (path.IsUrl())
 	{
-		headInfo = *SVNInfo().GetFirstFileInfo (path, SVNRev(), _T("HEAD"));
+		headInfo = *SVNInfo().GetFirstFileInfo (path, SVNRev(), CString (_T("HEAD")));
 		return headInfo;
 	}
 	else
@@ -212,14 +406,14 @@ revision_t CCacheLogQuery::DecodeRevision ( const CTSVNPath& path
 	case svn_opt_revision_number:
 		return static_cast<LONG>(revision);
 
-	case svn_opt_svn_opt_revision_head:
+	case svn_opt_revision_head:
 		if (!headInfo.IsValid())
 			headInfo = *SVNInfo().GetFirstFileInfo (path, SVNRev(), revision);
 
 		return static_cast<LONG>(headInfo.rev);
 
 	case svn_opt_revision_base:
-	case svn_opt_svn_opt_revision_working:
+	case svn_opt_revision_working:
 		if (!baseInfo.IsValid())
 			baseInfo = *SVNInfo().GetFirstFileInfo (path, SVNRev(), SVNRev());
 
@@ -232,7 +426,7 @@ revision_t CCacheLogQuery::DecodeRevision ( const CTSVNPath& path
 	const SVNInfoData* info 
 		= infoProvider.GetFirstFileInfo (path, SVNRev(), revision);
 
-	return static_cast<LONG>(info.rev);
+	return static_cast<LONG>(info->rev);
 }
 
 // get the (exactly) one path from targets
@@ -244,12 +438,16 @@ CTSVNPath CCacheLogQuery::GetPath (const CTSVNPathList& targets) const
 		throw SVNError ( SVN_ERR_INCORRECT_PARAMS
 					   , "Must specify exactly one path to get the log from.");
 
-	return targets.operator [0];
+	return targets [0];
 }
 
 // construction / destruction
 
-CCacheLogQuery::CCacheLogQuery(void)
+CCacheLogQuery::CCacheLogQuery (CLogCachePool* caches, ILogQuery* svnQuery)
+	: caches (caches)
+	, cache (NULL)
+	, URL()
+	, svnQuery (svnQuery)
 {
 }
 
@@ -296,7 +494,7 @@ void CCacheLogQuery::Log ( const CTSVNPathList& targets
 	CDictionaryBasedPath startPath 
 		= TranslatePegRevisionPath ( pegRevision
 								   , startRevision
-								   , GetRelativeRepositoryPath (path, info));
+								   , GetRelativeRepositoryPath (info));
 
 	// do it 
 
