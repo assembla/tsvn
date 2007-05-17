@@ -22,6 +22,9 @@
 #include "SVNRev.h"
 #include "SVNGlobal.h"
 
+#include "ILogReceiver.h"
+#include "LogCachePool.h"
+
 class CProgressDlg;
 class CTSVNPath;
 class CTSVNPathList;
@@ -45,26 +48,11 @@ svn_error_t * svn_cl__get_log_message (const char **log_msg,
  * The drawback of this is that valid pathnames with sequences looking like escaped
  * chars may not work correctly under certain circumstances.
  */
-class SVN
+class SVN : private ILogReceiver
 {
 public:
 	SVN(void);
 	~SVN(void);
-
-#ifndef __ILOGRECEIVER_H__
-	struct LogChangedPath
-	{
-		CString sPath;
-		CString sCopyFromPath;
-		svn_revnum_t lCopyFromRev;
-		CString sAction;
-	};
-#	define LOGACTIONS_MODIFIED	0x00000001
-#	define LOGACTIONS_REPLACED	0x00000002
-#	define LOGACTIONS_ADDED		0x00000004
-#	define LOGACTIONS_DELETED	0x00000008
-	typedef CArray<LogChangedPath*, LogChangedPath*> LogChangedPathArray;
-#endif
 
 	virtual BOOL Cancel();
 	virtual BOOL Notify(const CTSVNPath& path, svn_wc_notify_action_t action, 
@@ -622,19 +610,14 @@ private:
 
 	svn_error_t * get_url_from_target (const char **URL, const char *target);
 	svn_error_t * get_uuid_from_target (const char **UUID, const char *target);
+
+	void cancel();
 	static svn_error_t* cancel(void *baton);
 	static void notify( void *baton,
 						const svn_wc_notify_t *notify,
 						apr_pool_t *pool);
 	static svn_error_t* summarize_func(const svn_client_diff_summarize_t *diff, 
 					void *baton, apr_pool_t *pool);
-	static svn_error_t* logReceiver(void* baton, 
-					apr_hash_t* ch_paths, 
-					svn_revnum_t rev, 
-					const char* author, 
-					const char* date, 
-					const char* msg, 
-					apr_pool_t* pool);
 	static svn_error_t* blameReceiver(void* baton,
 					apr_off_t line_no,
 					svn_revnum_t revision,
@@ -642,6 +625,14 @@ private:
 					const char * date,
 					const char * line,
 					apr_pool_t * pool);
+
+	// implement ILogReceiver
+
+	void ReceiveLog ( LogChangedPathArray* changes
+					, svn_revnum_t rev
+					, const CString& author
+					, const apr_time_t& timeStamp
+					, const CString& message);
 
 	static void progress_func(apr_off_t progress, apr_off_t total, void *baton, apr_pool_t *pool);
 	SVNProgress		m_SVNProgressMSG;
@@ -656,6 +647,7 @@ private:
 	DWORD		progress_lastTicks;
 	std::vector<apr_off_t> progress_vector;
 
+	static LogCache::CLogCachePool logCachePool;
 };
 
 static UINT WM_SVNPROGRESS = RegisterWindowMessage(_T("TORTOISESVN_SVNPROGRESS_MSG"));

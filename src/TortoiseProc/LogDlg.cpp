@@ -65,10 +65,6 @@ CLogDlg::CLogDlg(CWnd* pParent /*=NULL*/)
 	m_pNotifyWindow = NULL;
 	m_bThreadRunning = FALSE;
 	m_bAscending = FALSE;
-	sModifiedStatus.LoadString(IDS_SVNACTION_MODIFIED);
-	sReplacedStatus.LoadString(IDS_SVNACTION_REPLACED);
-	sAddStatus.LoadString(IDS_SVNACTION_ADD);
-	sDeleteStatus.LoadString(IDS_SVNACTION_DELETE);
 }
 
 CLogDlg::~CLogDlg()
@@ -788,7 +784,7 @@ void CLogDlg::CopySelectionToClipBoard()
 			for (INT_PTR cpPathIndex = 0; cpPathIndex<cpatharray->GetCount(); ++cpPathIndex)
 			{
 				LogChangedPath * cpath = cpatharray->GetAt(cpPathIndex);
-				sPaths += cpath->sAction + _T(" : ") + cpath->sPath;
+				sPaths += cpath->GetAction() + _T(" : ") + cpath->sPath;
 				if (cpath->sCopyFromPath.IsEmpty())
 					sPaths += _T("\r\n");
 				else
@@ -818,12 +814,10 @@ BOOL CLogDlg::DiffPossible(LogChangedPath * changedpath, svn_revnum_t rev)
 	CString added, deleted;
 	if (changedpath == NULL)
 		return false;
-	added.LoadString(IDS_SVNACTION_ADD);
-	deleted.LoadString(IDS_SVNACTION_DELETE);
 
-	if ((rev > 1)&&(changedpath->sAction.Compare(deleted)!=0))
+	if ((rev > 1)&&(changedpath->action != LOGACTIONS_DELETED))
 	{
-		if (changedpath->sAction.Compare(added)==0) // file is added
+		if (changedpath->action == LOGACTIONS_ADDED) // file is added
 		{
 			if (changedpath->lCopyFromRev == 0)
 				return FALSE; // but file was not added with history
@@ -1516,9 +1510,7 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 						msg.Format(IDS_LOG_REVERT_CONFIRM, wcPath);
 						if (CMessageBox::Show(this->m_hWnd, msg, _T("TortoiseSVN"), MB_YESNO | MB_ICONQUESTION) == IDYES)
 						{
-							CString sAction;
-							sAction.LoadString(IDS_SVNACTION_DELETE);
-							if (changedlogpath->sAction.Compare(sAction)==0)
+							if (changedlogpath->action == LOGACTIONS_DELETED)
 							{
 								// a deleted path! Since the path isn't there anymore, merge
 								// won't work. So just do a copy url->wc
@@ -1643,8 +1635,7 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 						if (GetSaveFileName(&ofn)==TRUE)
 						{
 							tempfile.SetFromWin(ofn.lpstrFile);
-							CString sAction(MAKEINTRESOURCE(IDS_SVNACTION_DELETE));
-							SVNRev getrev = (sAction.Compare(changedlogpath->sAction)==0) ? rev2 : rev1;
+							SVNRev getrev = (changedlogpath->action == LOGACTIONS_DELETED) ? rev2 : rev1;
 
 							CProgressDlg progDlg;
 							progDlg.SetTitle(IDS_APPNAME);
@@ -2528,20 +2519,20 @@ void CLogDlg::OnNMCustomdrawLogmsg(NMHDR *pNMHDR, LRESULT *pResult)
 
 		if ((!bGrayed)&&(m_currentChangedArray)&&(m_currentChangedArray->GetCount() > (INT_PTR)pLVCD->nmcd.dwItemSpec))
 		{
-			CString sAction = m_currentChangedArray->GetAt(pLVCD->nmcd.dwItemSpec)->sAction;
-			if (sAction.Compare(sModifiedStatus) == 0)
+			DWORD action = m_currentChangedArray->GetAt(pLVCD->nmcd.dwItemSpec)->action;
+			if (action == LOGACTIONS_MODIFIED)
 			{
 				crText = m_Colors.GetColor(CColors::Modified);
 			}
-			if (sAction.Compare(sReplacedStatus) == 0)
+			if (action == LOGACTIONS_REPLACED)
 			{
 				crText = m_Colors.GetColor(CColors::Deleted);
 			}
-			if (sAction.Compare(sAddStatus) == 0)
+			if (action == LOGACTIONS_ADDED)
 			{
 				crText = m_Colors.GetColor(CColors::Added);
 			}
-			if (sAction.Compare(sDeleteStatus) == 0)
+			if (action == LOGACTIONS_DELETED)
 			{
 				crText = m_Colors.GetColor(CColors::Deleted);
 			}
@@ -2819,7 +2810,7 @@ void CLogDlg::OnLvnGetdispinfoLogmsg(NMHDR *pNMHDR, LRESULT *pResult)
 		{
 		case 0:	//Action
 			if (lcpath)
-				pItem->pszText = const_cast<LPWSTR>((LPCTSTR)lcpath->sAction);
+				pItem->pszText = const_cast<LPWSTR>((LPCTSTR)lcpath->GetAction());
 			else
 				lstrcpyn(pItem->pszText, _T(""), pItem->cchTextMax);				
 			break;
@@ -3002,7 +2993,7 @@ void CLogDlg::OnTimer(UINT_PTR nIDEvent)
 							bGoing = false;
 							continue;
 						}
-						br = pat.match( restring ((LPCTSTR)cpath->sAction), results);
+						br = pat.match( restring ((LPCTSTR)cpath->GetAction()), results);
 						if ((br.matched)&&(IsEntryInDateRange(i)))
 						{
 							m_arShownList.Add(m_logEntries[i]);
@@ -3071,7 +3062,7 @@ void CLogDlg::OnTimer(UINT_PTR nIDEvent)
 							bGoing = false;
 							continue;
 						}
-						path = cpath->sAction;
+						path = cpath->GetAction();
 						path.MakeLower();
 						if ((path.Find(find)>=0)&&(IsEntryInDateRange(i)))
 						{
@@ -3324,27 +3315,19 @@ int CLogDlg::SortCompare(const void * pElem1, const void * pElem2)
 {
 	LogChangedPath * cpath1 = *((LogChangedPath**)pElem1);
 	LogChangedPath * cpath2 = *((LogChangedPath**)pElem2);
+
+	if (m_bAscendingPathList)
+		std::swap (cpath1, cpath2);
+
 	switch (m_nSortColumnPathList)
 	{
 	case 0:		// action
-		if (m_bAscendingPathList)
-			return cpath1->sAction.Compare(cpath2->sAction);
-		else
-			return cpath2->sAction.Compare(cpath1->sAction);
+			return cpath2->GetAction().Compare(cpath1->GetAction());
 	case 1:		// path
-		if (m_bAscendingPathList)
-			return cpath1->sPath.CompareNoCase(cpath2->sPath);
-		else
 			return cpath2->sPath.CompareNoCase(cpath1->sPath);
 	case 2:		// copyfrom path
-		if (m_bAscendingPathList)
-			return cpath1->sCopyFromPath.Compare(cpath2->sCopyFromPath);
-		else
 			return cpath2->sCopyFromPath.Compare(cpath1->sCopyFromPath);
 	case 3:		// copyfrom revision
-		if (m_bAscendingPathList)
-			return cpath1->lCopyFromRev > cpath2->lCopyFromRev;
-		else
 			return cpath2->lCopyFromRev > cpath1->lCopyFromRev;
 	}
 	return 0;
