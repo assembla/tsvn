@@ -98,7 +98,7 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 
 	try
 	{
-		receiver->ReceiveLog ( *arChangedPaths.get()
+		receiver->ReceiveLog ( arChangedPaths.release()
 							 , revision
 							 , authorNative
 							 , timeStamp

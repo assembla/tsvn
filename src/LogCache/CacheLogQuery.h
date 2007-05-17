@@ -64,7 +64,7 @@ private:
 
 		// implement ILogReceiver
 
-		virtual void ReceiveLog ( const LogChangedPathArray& changes
+		virtual void ReceiveLog ( LogChangedPathArray* changes
 								, svn_revnum_t rev
 								, const CString& author
 								, const apr_time_t& timeStamp

@@ -18,7 +18,7 @@
 
 // implement ILogReceiver
 
-void CCacheLogQuery::CLogFiller::ReceiveLog ( const LogChangedPathArray& changes
+void CCacheLogQuery::CLogFiller::ReceiveLog ( LogChangedPathArray* changes
 											, svn_revnum_t rev
 											, const CString& author
 											, const apr_time_t& timeStamp
@@ -38,9 +38,9 @@ void CCacheLogQuery::CLogFiller::ReceiveLog ( const LogChangedPathArray& changes
 
 		// add all changes
 
-		for (INT_PTR i = 0, count = changes.GetCount(); i < count; ++i)
+		for (INT_PTR i = 0, count = changes->GetCount(); i < count; ++i)
 		{
-			const LogChangedPath* change = changes.GetAt (i);
+			const LogChangedPath* change = changes->GetAt (i);
 
 			CRevisionInfoContainer::TChangeAction action 
 				= (CRevisionInfoContainer::TChangeAction)(change->action * 4);
@@ -300,7 +300,7 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 					= GetChanges ( logInfo.GetChangesBegin (logIndex)
 								 , logInfo.GetChangesEnd (logIndex));
 
-				receiver->ReceiveLog ( *changes.get()
+				receiver->ReceiveLog ( changes.release()
 									 , revision
 									 , CUnicodeUtils::GetUnicode (author)
 									 , logInfo.GetTimeStamp (logIndex)

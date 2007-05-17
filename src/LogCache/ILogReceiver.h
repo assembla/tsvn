@@ -62,7 +62,7 @@ public:
 
 	// may throw a SVNError to cancel the log
 
-	virtual void ReceiveLog ( const LogChangedPathArray& changes
+	virtual void ReceiveLog ( LogChangedPathArray* changes
 							, svn_revnum_t rev
 							, const CString& author
 							, const apr_time_t& timeStamp
