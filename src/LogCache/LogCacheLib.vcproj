@@ -20,8 +20,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\obj\$(ConfigurationName)\$(ProjectName)"
-			IntermediateDirectory="..\..\obj\$(ConfigurationName)\$(ProjectName)"
+			OutputDirectory="..\..\obj\$(ProjectName)\$(ConfigurationName)"
+			IntermediateDirectory="..\..\obj\$(ProjectName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\Utils;..\SVN"
+				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\Utils;..\SVN;..\TortoiseProc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -86,8 +86,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			OutputDirectory="..\..\obj\$(ConfigurationName)64\$(ProjectName)"
-			IntermediateDirectory="..\..\obj\$(ConfigurationName)64\$(ProjectName)"
+			OutputDirectory="..\..\obj\$(ProjectName)\$(ConfigurationName)64"
+			IntermediateDirectory="..\..\obj\$(ProjectName)\$(ConfigurationName)64"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -112,7 +112,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\Utils;..\SVN"
+				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\Utils;..\SVN;..\TortoiseProc"
 				PreprocessorDefinitions="WIN64;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -153,8 +153,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\obj\$(ConfigurationName)\$(ProjectName)"
-			IntermediateDirectory="..\..\obj\$(ConfigurationName)\$(ProjectName)"
+			OutputDirectory="..\..\obj\$(ProjectName)\$(ConfigurationName)"
+			IntermediateDirectory="..\..\obj\$(ProjectName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -179,7 +179,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
-				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\Utils;..\SVN"
+				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\Utils;..\SVN;..\TortoiseProc"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
@@ -218,8 +218,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			OutputDirectory="..\..\obj\$(ConfigurationName)64\$(ProjectName)"
-			IntermediateDirectory="..\..\obj\$(ConfigurationName)64\$(ProjectName)"
+			OutputDirectory="..\..\obj\$(ProjectName)\$(ConfigurationName)64"
+			IntermediateDirectory="..\..\obj\$(ProjectName)\$(ConfigurationName)64"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
@@ -245,7 +245,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
-				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\Utils;..\SVN"
+				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\Utils;..\SVN;..\TortoiseProc"
 				PreprocessorDefinitions="WIN64;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
@@ -713,6 +713,10 @@
 			</File>
 			<File
 				RelativePath=".\ILogQuery.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ILogReceiver.cpp"
 				>
 			</File>
 			<File
