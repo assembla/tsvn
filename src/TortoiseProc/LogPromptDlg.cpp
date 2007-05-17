@@ -666,9 +666,7 @@ void CLogPromptDlg::GetAutocompletionList()
 			mapRegex[strLine.Left(strLine.Find('=')).Trim()] = sRegex;
 		}
 		file.Close();
-		SHGetFolderPath(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, sRegexFile.GetBuffer(MAX_PATH+1));
-		sRegexFile.ReleaseBuffer();
-		sRegexFile += _T("\\TortoiseSVN\\autolist.txt");
+		sRegexFile = CPathUtils::GetAppDataDirectory() + _T("autolist.txt");
 		if (PathFileExists(sRegexFile))
 		{
 			CStdioFile file2(sRegexFile, CFile::typeText | CFile::modeRead);
