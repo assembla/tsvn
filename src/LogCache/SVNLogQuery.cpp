@@ -64,7 +64,7 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 					= (svn_log_changed_path_t *) apr_hash_get ( ch_paths
 															  , item->key
 															  , item->klen);
-				static const char actionKeys[5] = "MRAD";
+				static const char actionKeys[5] = "AMRD";
 				const char* actionKey = strchr (actionKeys, log_item->action);
 
 				changedPath->action = actionKey == NULL 

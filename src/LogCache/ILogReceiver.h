@@ -28,7 +28,13 @@ struct LogChangedPath
 
 	// convenience method
 
-	CString GetAction() const;
+	const CString& GetAction() const;
+
+private:
+
+	// cached return value of GetAction()
+
+	mutable CString actionAsString;
 };
 
 enum

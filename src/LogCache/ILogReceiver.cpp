@@ -10,31 +10,32 @@
 
 // convenience method
 
-CString LogChangedPath::GetAction() const
+const CString& LogChangedPath::GetAction() const
 {
-	CString actionAsString;
-
-	switch (action)
+	if (actionAsString.IsEmpty())
 	{
-	case LOGACTIONS_ADDED: 
-		actionAsString.LoadString(IDS_SVNACTION_ADD);
-		break;
+		switch (action)
+		{
+		case LOGACTIONS_ADDED: 
+			actionAsString.LoadString(IDS_SVNACTION_ADD);
+			break;
 
-	case LOGACTIONS_DELETED: 
-		actionAsString.LoadString(IDS_SVNACTION_DELETE);
-		break;
+		case LOGACTIONS_DELETED: 
+			actionAsString.LoadString(IDS_SVNACTION_DELETE);
+			break;
 
-	case LOGACTIONS_REPLACED: 
-		actionAsString.LoadString(IDS_SVNACTION_REPLACED);
-		break;
+		case LOGACTIONS_REPLACED: 
+			actionAsString.LoadString(IDS_SVNACTION_REPLACED);
+			break;
 
-	case LOGACTIONS_MODIFIED: 
-		actionAsString.LoadString(IDS_SVNACTION_MODIFIED);
-		break;
+		case LOGACTIONS_MODIFIED: 
+			actionAsString.LoadString(IDS_SVNACTION_MODIFIED);
+			break;
 
-	default:
-		// there should always be an action
-		assert (0);
+		default:
+			// there should always be an action
+			assert (0);
+		}
 	}
 
 	return actionAsString;
