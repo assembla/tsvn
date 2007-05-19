@@ -569,12 +569,9 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		CSkipRevisionInfo::IT iter = perPathInfo->ranges.end();
 		for (size_t k = 0; k < entryCount; ++k)
 		{
-			DWORD size = sizesStream->GetValue();
-			assert (2*size > size);
-
 			iter = perPathInfo->ranges.insert 
 					(iter, std::make_pair ( revisionsStream->GetValue()
-										  , size));
+										  , sizesStream->GetValue()));
 		}
 
 		container.index.insert ( perPathInfo->pathID
@@ -633,8 +630,6 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 			; iter != end
 			; ++iter)
 		{
-			assert (2*iter->second > iter->second);
-
 			revisionsStream->Add (iter->first);
 			sizesStream->Add (iter->second);
 		}
