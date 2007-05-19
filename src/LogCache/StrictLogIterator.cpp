@@ -10,7 +10,26 @@ namespace LogCache
 
 bool CStrictLogIterator::HandleCopyAndDelete()
 {
-	return false;
+	// revision data lookup
+
+	const CRevisionInfoContainer& revisionInfo = logInfo->GetLogInfo();
+	index_t index = logInfo->GetRevisions()[revision];
+
+	// switch to new path, if necessary
+
+	bool result = InternalHandleCopyAndDelete ( revisionInfo.GetChangesBegin(index)
+											  , revisionInfo.GetChangesEnd(index)
+											  , revisionInfo.GetRootPath (index)
+											  , path
+											  , revision);
+	if (result)
+	{
+		// stop on copy
+
+		revision = NO_REVISION;
+	}
+
+	return result;
 }
 
 // construction / destruction 
