@@ -252,7 +252,8 @@ void CSkipRevisionInfo::CPacker::RemoveKnownRevisions()
 				++nextUnknownRevision;
 		}
 
-		if (iter->first + iter->second <= nextUnknownRevision)
+		if (   (iter->first >= firstKnownRevision)
+			&& (iter->first + iter->second <= nextUnknownRevision))
 			iter->second = 0;
 	}
 }
@@ -565,13 +566,15 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 
 		size_t entryCount = entryCountStream->GetValue();
 		CSkipRevisionInfo::IT iter = perPathInfo->ranges.end();
-		for (size_t k = 0; i < entryCount; ++k)
+		for (size_t k = 0; k < entryCount; ++k)
 		{
 			iter = perPathInfo->ranges.insert 
 					(iter, std::make_pair ( revisionsStream->GetValue()
 										  , sizesStream->GetValue()));
 		}
 
+		container.index.insert ( perPathInfo->pathID
+							   , (index_t)container.data.size());
 		container.data.push_back (perPathInfo.release());
 	}
 

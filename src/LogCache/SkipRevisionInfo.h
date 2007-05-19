@@ -136,7 +136,7 @@ private:
 
 		bool equal (const value_type& value, index_type index) const
 		{
-			assert (data->size() >= index);
+			assert (data->size() > index);
 			return (*data)[index]->pathID == value;
 		}
 	};
