@@ -62,7 +62,7 @@ CDictionaryBasedTempPath CDictionaryBasedTempPath::ReplaceParent
 	// I admit, this is the most stupid implementation possible ;)
 
 	std::string newPath = newParent.GetPath() 
-						+ GetPath().substr (newParent.GetPath().length());
+						+ GetPath().substr (oldParent.GetPath().length());
 
 	return CDictionaryBasedTempPath (GetDictionary(), newPath);
 }
@@ -140,7 +140,11 @@ std::string CDictionaryBasedTempPath::GetPath() const
 
 		for (size_t i = 0; i < count; ++i)
 		{
-			result.push_back ('/');
+			// don't add a slash if base path is /
+
+			if (result.length() > 1)
+				result.push_back ('/');
+
 			result.append (relPathElements[i]);
 		}
 	}
