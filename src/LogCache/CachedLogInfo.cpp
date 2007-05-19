@@ -31,21 +31,29 @@ void CCachedLogInfo::Load()
 {
 	assert (revisions.GetLastRevision() == 0);
 
-	CRootInStream stream (fileName);
+	try
+	{
+		CRootInStream stream (fileName);
 
-	// read the data
+		// read the data
 
-	IHierarchicalInStream* revisionsStream
-		= stream.GetSubStream (REVISIONS_STREAM_ID);
-	*revisionsStream >> revisions;
+		IHierarchicalInStream* revisionsStream
+			= stream.GetSubStream (REVISIONS_STREAM_ID);
+		*revisionsStream >> revisions;
 
-	IHierarchicalInStream* logInfoStream
-		= stream.GetSubStream (LOG_INFO_STREAM_ID);
-	*logInfoStream >> logInfo;
+		IHierarchicalInStream* logInfoStream
+			= stream.GetSubStream (LOG_INFO_STREAM_ID);
+		*logInfoStream >> logInfo;
 
-	IHierarchicalInStream* skipRevisionsStream
-		= stream.GetSubStream (SKIP_REVISIONS_STREAM_ID);
-	*skipRevisionsStream >> skippedRevisions;
+		IHierarchicalInStream* skipRevisionsStream
+			= stream.GetSubStream (SKIP_REVISIONS_STREAM_ID);
+		*skipRevisionsStream >> skippedRevisions;
+	}
+	catch (...)
+	{
+		// if there was a problem, the cache file is probably corrupt
+		// -> don't use its data
+	}
 }
 
 void CCachedLogInfo::Save (const std::wstring& newFileName)

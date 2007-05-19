@@ -24,7 +24,6 @@ CLogCachePool::CLogCachePool (const CString& cacheFolderPath)
 
 CLogCachePool::~CLogCachePool()
 {
-	Flush();
 	Clear();
 }
 
@@ -64,7 +63,17 @@ void CLogCachePool::Flush()
 		; ++iter)
 	{
 		if (iter->second->IsModified())
-			iter->second->Save();
+		{
+			try
+			{
+				iter->second->Save();
+			}
+			catch (...)
+			{
+				// cache file could not be written 
+				// (cache may be lost but that's o.k.)
+			}
+		}
 	}
 }
 
