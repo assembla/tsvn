@@ -891,7 +891,7 @@ BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev r
 		CSVNLogQuery svnQuery (m_pctx, localpool);
 		CCacheLogQuery cacheQuery (&logCachePool, &svnQuery);
 
-		bool useLogCache = false;
+		bool useLogCache = true;
 		ILogQuery* query = useLogCache 
 						 ? static_cast<ILogQuery*>(&cacheQuery)
 						 : static_cast<ILogQuery*>(&svnQuery);
@@ -901,11 +901,12 @@ BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev r
 				   , revisionStart
 				   , revisionEnd
 				   , limit
-				   , strict
+				   , strict != FALSE
 				   , this);
 	}
-	catch (...)
+	catch (SVNError& e)
 	{
+		Err = svn_error_create (e.GetCode(), NULL, e.GetMessage());
 		return FALSE;
 	}
 
