@@ -219,6 +219,8 @@ void CLogIteratorBase::InternalAdvance()
 			revision_t nextRevision = SkipNARevisions(); 
 			if (nextRevision != NO_REVISION)
 				revision = nextRevision;
+			else
+				break;
 		}
 	}
 	while ((revision > 0) && !InternalDataIsMissing() && !PathInRevision());
