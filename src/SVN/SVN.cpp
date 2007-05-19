@@ -37,6 +37,7 @@
 #include "SVNError.h"
 #include "SVNLogQuery.h"
 #include "CacheLogQuery.h"
+#include "MessageBox.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -330,7 +331,7 @@ BOOL SVN::Remove(const CTSVNPathList& pathlist, BOOL force, BOOL keeplocal, CStr
 	message.Replace(_T("\r"), _T(""));
 	m_pctx->log_msg_baton3 = logMessage(CUnicodeUtils::GetUTF8(message));
 
-	Err = svn_client_delete3 (&commit_info, MakePathArray(pathlist), 
+	Err = svn_client_delete3 (&commit_info, pathlist.MakePathArray(subPool), 
 							  force,
 							  keeplocal,
 							  m_pctx,
@@ -373,7 +374,7 @@ BOOL SVN::Revert(const CTSVNPathList& pathlist, BOOL recurse)
 	TRACE("Reverting list of %d files\n", pathlist.GetCount());
 	SVNPool subpool(pool);
 
-	Err = svn_client_revert (MakePathArray(pathlist), recurse, m_pctx, subpool);
+	Err = svn_client_revert (pathlist.MakePathArray(subpool), recurse, m_pctx, subpool);
 
 	if(Err != NULL)
 	{
@@ -425,7 +426,7 @@ BOOL SVN::Add(const CTSVNPathList& pathList, ProjectProperties * props, BOOL rec
 BOOL SVN::AddToChangeList(const CTSVNPathList& pathList, const CString& changelist)
 {
 	SVNPool subpool(pool);
-	Err = svn_client_add_to_changelist(MakePathArray(pathList), changelist.IsEmpty() ? NULL : (LPCSTR)CUnicodeUtils::GetUTF8(changelist), m_pctx, subpool);
+	Err = svn_client_add_to_changelist(pathList.MakePathArray(subpool), changelist.IsEmpty() ? NULL : (LPCSTR)CUnicodeUtils::GetUTF8(changelist), m_pctx, subpool);
 	if(Err != NULL)
 	{
 		return FALSE;
@@ -437,7 +438,7 @@ BOOL SVN::AddToChangeList(const CTSVNPathList& pathList, const CString& changeli
 BOOL SVN::RemoveFromChangeList(const CTSVNPathList& pathList, const CString& changelist)
 {
 	SVNPool subpool(pool);
-	Err = svn_client_remove_from_changelist(MakePathArray(pathList), changelist.IsEmpty() ? NULL : (LPCSTR)CUnicodeUtils::GetUTF8(changelist), m_pctx, subpool);
+	Err = svn_client_remove_from_changelist(pathList.MakePathArray(subpool), changelist.IsEmpty() ? NULL : (LPCSTR)CUnicodeUtils::GetUTF8(changelist), m_pctx, subpool);
 	if(Err != NULL)
 	{
 		return FALSE;
@@ -560,7 +561,7 @@ BOOL SVN::Move(const CTSVNPathList& srcPathList, const CTSVNPath& destPath, BOOL
 	message.Replace(_T("\r"), _T(""));
 	m_pctx->log_msg_baton3 = logMessage(CUnicodeUtils::GetUTF8(message));
 	Err = svn_client_move5 (&commit_info,
-							MakePathArray(srcPathList),
+							srcPathList.MakePathArray(subpool),
 							destPath.GetSVNApiPath(),
 							force,
 							move_as_child,

@@ -1330,8 +1330,6 @@ void CLogDlg::OnNMDblclkChangedFileList(NMHDR * /*pNMHDR*/, LRESULT *pResult)
 				}
 			}
 		}
-		CString deleted;
-		deleted.LoadString(IDS_SVNACTION_DELETE);
 
 		if (DiffPossible(changedpath, rev1))
 		{
@@ -1355,7 +1353,7 @@ void CLogDlg::OnNMDblclkChangedFileList(NMHDR * /*pNMHDR*/, LRESULT *pResult)
 			}
 			DoDiffFromLog(selIndex, rev1, rev2, false, false);
 		}
-		else if (changedpath->sAction.Compare(deleted) == 0)
+		else if (changedpath->action == LOGACTIONS_DELETED)
 			// deleted files must be opened from the revision before the deletion
 			Open(false,changedpath->sPath,rev1-1);
 		else
@@ -2199,7 +2197,7 @@ void CLogDlg::OnLvnGetdispinfoChangedFileList(NMHDR *pNMHDR, LRESULT *pResult)
 		{
 		case 0:	//Action
 			if (lcpath)
-				lstrcpyn(pItem->pszText, (LPCTSTR)lcpath->sAction, pItem->cchTextMax);
+				lstrcpyn(pItem->pszText, (LPCTSTR)lcpath->GetAction(), pItem->cchTextMax);
 			else
 				lstrcpyn(pItem->pszText, _T(""), pItem->cchTextMax);				
 			break;
@@ -2353,7 +2351,7 @@ void CLogDlg::RecalculateShownList(CPtrArray * pShownlist)
 						bGoing = false;
 						continue;
 					}
-					br = pat.match( restring ((LPCTSTR)cpath->sAction), results);
+					br = pat.match( restring ((LPCTSTR)cpath->GetAction()), results);
 					if ((br.matched)&&(IsEntryInDateRange(i)))
 					{
 						pShownlist->Add(m_logEntries[i]);
@@ -2422,7 +2420,7 @@ void CLogDlg::RecalculateShownList(CPtrArray * pShownlist)
 						bGoing = false;
 						continue;
 					}
-					path = cpath->sAction;
+					path = cpath->GetAction();
 					path.MakeLower();
 					if ((path.Find(find)>=0)&&(IsEntryInDateRange(i)))
 					{
@@ -3686,9 +3684,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 				wcPath += fileURL.Mid(i);
 				wcPath.Replace('/', '\\');
 				CSVNProgressDlg dlg;
-				CString sAction;
-				sAction.LoadString(IDS_SVNACTION_DELETE);
-				if (changedlogpaths[0]->sAction.Compare(sAction)==0)
+				if (changedlogpaths[0]->action == LOGACTIONS_DELETED)
 				{
 					// a deleted path! Since the path isn't there anymore, merge
 					// won't work. So just do a copy url->wc
@@ -3845,8 +3841,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 					progDlg.SetTitle(IDS_APPNAME);
 					for (std::vector<LogChangedPath*>::iterator it = changedlogpaths.begin(); it!= changedlogpaths.end(); ++it)
 					{
-						CString sAction(MAKEINTRESOURCE(IDS_SVNACTION_DELETE));
-						SVNRev getrev = (sAction.Compare((*it)->sAction)==0) ? rev2 : rev1;
+						SVNRev getrev = ((*it)->action == LOGACTIONS_DELETED) ? rev2 : rev1;
 
 						CString sInfoLine;
 						sInfoLine.Format(IDS_PROGRESSGETFILEREVISION, filepath, getrev.ToString());
@@ -3988,9 +3983,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 				filepath = GetRepositoryRoot(CTSVNPath(filepath));
 				filepath += changedpaths[0];
 				svn_revnum_t logrev = rev1;
-				CString added, deleted;
-				deleted.LoadString(IDS_SVNACTION_DELETE);
-				if (changedlogpaths[0]->sAction.Compare(deleted)==0)
+				if (changedlogpaths[0]->action == LOGACTIONS_DELETED)
 				{
 					// if the item got deleted in this revision,
 					// fetch the log from the previous revision where it
