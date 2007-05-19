@@ -27,7 +27,7 @@ void CPathDictionary::CheckParentIndex (index_t index) const
 
 void CPathDictionary::Initialize()
 {
-	paths.Insert (std::make_pair (0, 0));
+	paths.Insert (std::make_pair (NO_INDEX, 0));
 }
 
 // construction (create root path) / destruction
@@ -149,6 +149,7 @@ void CDictionaryBasedPath::ParsePath ( const std::string& path
 		std::string temp (path);
 		assert (path[0] == '/');
 
+		index_t currentIndex = index;
 		for ( size_t pos = 0, nextPos = temp.find ('/', 1)
 			; pos != std::string::npos
 			; pos = nextPos, nextPos = temp.find ('/', nextPos))
@@ -161,7 +162,7 @@ void CDictionaryBasedPath::ParsePath ( const std::string& path
 
 			// try move to the next sub-path
 
-			index_t nextIndex = dictionary->Find (index, pathElement);
+			index_t nextIndex = dictionary->Find (currentIndex, pathElement);
 			if (nextIndex == NO_INDEX)
 			{
 				// not found. Do we have to stop here?
@@ -170,7 +171,9 @@ void CDictionaryBasedPath::ParsePath ( const std::string& path
 				{
 					// auto-insert
 
-					nextIndex = writableDictionary->Insert (index, pathElement);
+					nextIndex = writableDictionary->Insert ( currentIndex
+														   , pathElement);
+					index = nextIndex;
 				}
 				else if (relPath != NULL)
 				{
@@ -185,10 +188,14 @@ void CDictionaryBasedPath::ParsePath ( const std::string& path
 					break;
 				}
 			}
+			else
+			{
+				// we are now one level deeper
 
-			// we are now one level deeper
+				index = nextIndex;
+			}
 
-			index = nextIndex;
+			currentIndex = nextIndex;
 		}
 	}
 }
