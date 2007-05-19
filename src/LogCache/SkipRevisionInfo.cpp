@@ -445,8 +445,8 @@ revision_t CSkipRevisionInfo::GetPreviousRevision ( const CDictionaryBasedPath& 
 		if (ranges != NULL)
 		{
 			revision_t next = ranges->FindPrevious (revision);
-			if (parentNext != NO_REVISION)
-				revision = parentNext;
+			if (next != NO_REVISION)
+				revision = next;
 		}
 	}
 	while (revision < result);
@@ -454,7 +454,7 @@ revision_t CSkipRevisionInfo::GetPreviousRevision ( const CDictionaryBasedPath& 
 	// ready
 
 	return revision == startRevision 
-		? -1 
+		? NO_REVISION
 		: result;
 }
 
@@ -473,7 +473,7 @@ void CSkipRevisionInfo::Add ( const CDictionaryBasedPath& path
 	assert (revision != NO_REVISION);
 	assert (size != NO_REVISION);
 
-	// reduce the range, if we have revision info for the boundaries
+	// reduce the range, if we have revision info at the boundaries
 
 	TryReduceRange (revision, size);
 	if (size == 0)
@@ -487,6 +487,8 @@ void CSkipRevisionInfo::Add ( const CDictionaryBasedPath& path
 	if (dataIndex == NO_INDEX)
 	{
 		ranges = new SPerPathRanges;
+		ranges->pathID = path.GetIndex();
+
 		data.push_back (ranges);
 		index.insert (path.GetIndex(), (index_t)data.size()-1);
 	}

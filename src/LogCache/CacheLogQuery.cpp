@@ -63,11 +63,13 @@ void CCacheLogQuery::CLogFiller::ReceiveLog ( LogChangedPathArray* changes
 
 	// mark the gap and update the current path
 
-	if (firstNARevision > revision+1)
+	if (firstNARevision > revision)
 	{
+		assert (currentPath->IsFullyCachedPath());
+
 		cache->AddSkipRange ( currentPath->GetBasePath()
-							, firstNARevision
-							, firstNARevision - revision -1);
+							, revision+1
+							, firstNARevision - revision);
 	}
 
 	if (followRenames)
@@ -110,7 +112,7 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 	followRenames = !strictNodeHistory;
 
 	CTSVNPath path;
-	path.SetFromSVN (URL + "/" + startPath.GetPath().c_str());
+	path.SetFromSVN (URL + startPath.GetPath().c_str());
 
 	svnQuery->Log ( CTSVNPathList (path)
 				  , static_cast<long>(startRevision)
@@ -119,6 +121,16 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 			      , limit
 				  , strictNodeHistory
 				  , this);
+
+	if (   (firstNARevision == startRevision) 
+		&& currentPath->IsFullyCachedPath())
+	{
+		// the log was empty
+
+		cache->AddSkipRange ( currentPath->GetBasePath()
+							, endRevision
+							, startRevision - endRevision + 1);
+	}
 
 	return firstNARevision+1;
 }
@@ -148,7 +160,7 @@ CCacheLogQuery::NextAvailableRevision ( const CDictionaryBasedTempPath& path
 		// found the next cache entry for this path?
 
 		if (!iterator.DataIsMissing())
-			return iterator.GetRevision();
+			return iterator.GetRevision()+1;
 
 		// skip N/A revisions
 
@@ -187,7 +199,7 @@ revision_t CCacheLogQuery::FillLog ( revision_t startRevision
 								, URL
 								, svnQuery
 								, startRevision
-								, endRevision
+								, max (min (startRevision, endRevision), 1)
 								, startPath
 								, limit
 								, strictNodeHistory
@@ -220,7 +232,7 @@ CCacheLogQuery::GetChanges ( CRevisionInfoContainer::CChangesIterator& first
 
 		// decode copy-from info
 
-		if (   first.GetFromPath().IsValid()
+		if (   first.HasFromPath()
 			&& (first.GetFromRevision() != NO_REVISION))
 		{
 			std::string path = first.GetFromPath().GetPath();
@@ -267,7 +279,7 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 
 	// report starts at endRevision or earlier revisions
 
-	revision_t lastReported = endRevision+1;
+	revision_t lastReported = startRevision+1;
 
 	// crawl & update the cache, report entries found
 
@@ -280,7 +292,7 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 			// (as to allow the user to cancel this action).
 
 			lastReported = FillLog ( iterator->GetRevision()
-								   , startRevision
+								   , endRevision
 								   , iterator->GetPath()
 								   , limit
 								   , strictNodeHistory
@@ -315,6 +327,8 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 
 			if ((limit != 0) && (--limit == 0))
 				return;
+			else
+				iterator->Advance();
 		}
 	}
 }
@@ -326,9 +340,9 @@ CDictionaryBasedTempPath CCacheLogQuery::TranslatePegRevisionPath
 	, revision_t startRevision
 	, const CDictionaryBasedTempPath& startPath)
 {
-	CCopyFollowingLogIterator iterator (cache, startRevision, startPath);
+	CCopyFollowingLogIterator iterator (cache, pegRevision, startPath);
 
-	while ((iterator.GetRevision() > pegRevision) && !iterator.EndOfPath())
+	while ((iterator.GetRevision() > startRevision) && !iterator.EndOfPath())
 	{
 		if (iterator.DataIsMissing())
 			FillLog ( iterator.GetRevision()
