@@ -108,6 +108,7 @@ SVN::SVN(void) :
 SVN::~SVN(void)
 {
 	svn_pool_destroy (parentpool);
+	logCachePool.Flush();
 }
 
 CString SVN::CheckConfigFile()
