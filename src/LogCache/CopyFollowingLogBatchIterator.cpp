@@ -45,7 +45,7 @@ bool CCopyFollowingLogBatchIterator::HandleCopyAndDelete()
 		// is path relevant?
 
 		if (   (iter->second >= revision)
-			&& !PathsIntersect (iter->first, revisionRootPath))
+			&& !PathsIntersect (iter->first.GetBasePath(), revisionRootPath))
 		{
 			// update this path and its revision, if necessary
 
@@ -80,7 +80,7 @@ bool CCopyFollowingLogBatchIterator::HandleCopyAndDelete()
 		}
 	}
 
-	// update foldet information
+	// update folder information
 
 	revision = MaxRevision (pathRevisions);
 	path = BasePath (logInfo, pathRevisions);

@@ -17,7 +17,7 @@ namespace LogCache
 // forward declarations
 ///////////////////////////////////////////////////////////////
 
-class CDictionaryBasedPath;
+class CDictionaryBasedTempPath;
 
 ///////////////////////////////////////////////////////////////
 // ILogIterator
@@ -31,7 +31,7 @@ public:
 
 	virtual bool DataIsMissing() const = 0;
 	virtual revision_t GetRevision() const = 0;
-	virtual const CDictionaryBasedPath& GetPath() const = 0;
+	virtual const CDictionaryBasedTempPath& GetPath() const = 0;
 	virtual bool EndOfPath() const = 0;
 
 	// to next / previous revision for our path

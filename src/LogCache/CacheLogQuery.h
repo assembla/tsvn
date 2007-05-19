@@ -8,6 +8,7 @@
 #include "ILogReceiver.h"
 
 #include "RevisionInfoContainer.h"
+#include "DictionaryBasedTempPath.h"
 
 ///////////////////////////////////////////////////////////////
 // forward declarations
@@ -54,7 +55,7 @@ private:
 		// path to log for and the begin of the current gap 
 		// in the log for that path
 
-		std::auto_ptr<CDictionaryBasedPath> currentPath;
+		std::auto_ptr<CDictionaryBasedTempPath> currentPath;
 		revision_t firstNARevision;
 		bool followRenames;
 
@@ -80,7 +81,7 @@ private:
 						   , ILogQuery* svnQuery
 						   , revision_t startRevision
 						   , revision_t endRevision
-						   , const CDictionaryBasedPath& startPath
+						   , const CDictionaryBasedTempPath& startPath
 						   , int limit
 						   , bool strictNodeHistory
 						   , ILogReceiver* receiver);
@@ -101,7 +102,7 @@ private:
 
 	// Determine the revision range to pass to SVN.
 
-	revision_t NextAvailableRevision ( const CDictionaryBasedPath& path
+	revision_t NextAvailableRevision ( const CDictionaryBasedTempPath& path
 									 , revision_t firstMissingRevision
 								     , revision_t endRevision) const;
 
@@ -110,7 +111,7 @@ private:
 
 	revision_t FillLog ( revision_t startRevision
 					   , revision_t endRevision
-					   , const CDictionaryBasedPath& startPath
+					   , const CDictionaryBasedTempPath& startPath
 					   , int limit
 					   , bool strictNodeHistory
 					   , ILogReceiver* receiver);
@@ -125,22 +126,22 @@ private:
 
 	void InternalLog ( revision_t startRevision
 					 , revision_t endRevision
-					 , const CDictionaryBasedPath& startPath
+					 , const CDictionaryBasedTempPath& startPath
 					 , int limit
 					 , bool strictNodeHistory
 					 , ILogReceiver* receiver);
 
 	// follow copy history until the startRevision is reached
 
-	CDictionaryBasedPath TranslatePegRevisionPath 
+	CDictionaryBasedTempPath TranslatePegRevisionPath 
 		( revision_t pegRevision
 		, revision_t startRevision
-		, const CDictionaryBasedPath& startPath);
+		, const CDictionaryBasedTempPath& startPath);
 
 	// extract the repository-relative path of the URL / file name
 	// and open the cache
 
-	CDictionaryBasedPath GetRelativeRepositoryPath (SVNInfoData& info);
+	CDictionaryBasedTempPath GetRelativeRepositoryPath (SVNInfoData& info);
 
 	// get UUID & repository-relative path
 

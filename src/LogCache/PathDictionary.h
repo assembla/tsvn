@@ -112,10 +112,20 @@ private:
 	const CPathDictionary* dictionary;
 	index_t index;
 
+protected:
+
+	// index manipulation
+
+	void SetIndex (index_t newIndex) 
+	{
+		index = newIndex;
+	}
+
 	// construction utility: lookup and optionally auto-insert
 
 	void ParsePath ( const std::string& path
-				   , CPathDictionary* writableDictionary = NULL);
+				   , CPathDictionary* writableDictionary = NULL
+				   , std::vector<std::string>* relPath = NULL);
 
 public:
 

@@ -141,7 +141,8 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 // construction utility: lookup and optionally auto-insert
 
 void CDictionaryBasedPath::ParsePath ( const std::string& path
-								     , CPathDictionary* writableDictionary)
+								     , CPathDictionary* writableDictionary
+									 , std::vector<std::string>* relPath)
 {
 	if (!path.empty())
 	{
@@ -165,12 +166,24 @@ void CDictionaryBasedPath::ParsePath ( const std::string& path
 			{
 				// not found. Do we have to stop here?
 
-				if (writableDictionary == NULL)
+				if (writableDictionary != NULL)
+				{
+					// auto-insert
+
+					nextIndex = writableDictionary->Insert (index, pathElement);
+				}
+				else if (relPath != NULL)
+				{
+					// build relative path
+
+					relPath->push_back (pathElement);
+				}
+				else
+				{
+					// must stop at the last known parent
+
 					break;
-
-				// auto-insert
-
-				nextIndex = writableDictionary->Insert (index, pathElement);
+				}
 			}
 
 			// we are now one level deeper

@@ -18,7 +18,7 @@ bool CStrictLogIterator::HandleCopyAndDelete()
 
 CStrictLogIterator::CStrictLogIterator ( const CCachedLogInfo* cachedLog
 										 , revision_t startRevision
-										 , const CDictionaryBasedPath& startPath)
+										 , const CDictionaryBasedTempPath& startPath)
 	: CLogIteratorBase (cachedLog, startRevision, startPath)
 {
 }

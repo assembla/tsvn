@@ -24,7 +24,7 @@ public:
 
 	CStrictLogIterator ( const CCachedLogInfo* cachedLog
 						, revision_t startRevision
-						, const CDictionaryBasedPath& startPath);
+						, const CDictionaryBasedTempPath& startPath);
 	virtual ~CStrictLogIterator(void);
 };
 

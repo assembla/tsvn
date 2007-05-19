@@ -6,7 +6,7 @@
 
 #include "ILogIterator.h"
 
-#include "PathDictionary.h"
+#include "DictionaryBasedTempPath.h"
 #include "CachedLogInfo.h"
 
 ///////////////////////////////////////////////////////////////
@@ -32,18 +32,22 @@ protected:
 	// and what we are looking for
 
 	revision_t revision;
-	CDictionaryBasedPath path;
+	CDictionaryBasedTempPath path;
 
 	// construction 
 	// (copy construction & assignment use default methods)
 
 	CLogIteratorBase ( const CCachedLogInfo* cachedLog
 					 , revision_t startRevision
-					 , const CDictionaryBasedPath& startPath);
+					 , const CDictionaryBasedTempPath& startPath);
 
 	// implement copy-history following strategy
 
 	virtual bool HandleCopyAndDelete() = 0;
+
+	// react on cache updates
+
+	virtual void HandleCacheUpdates();
 
 	// do we have data for that revision?
 
@@ -57,7 +61,7 @@ protected:
 	static bool PathInRevision 
 		( const CRevisionInfoContainer::CChangesIterator& first
 		, const CRevisionInfoContainer::CChangesIterator& last
-		, const CDictionaryBasedPath& path);
+		, const CDictionaryBasedTempPath& path);
 
 	virtual bool PathInRevision() const;
 
@@ -75,7 +79,7 @@ protected:
 		( const CRevisionInfoContainer::CChangesIterator& first
 		, const CRevisionInfoContainer::CChangesIterator& last
 		, const CDictionaryBasedPath& revisionRootPath
-		, CDictionaryBasedPath& searchPath
+		, CDictionaryBasedTempPath& searchPath
 		, revision_t& searchRevision);
 
 	// log scanning sub-routines
@@ -97,7 +101,7 @@ public:
 
 	virtual bool DataIsMissing() const;
 	virtual revision_t GetRevision() const;
-	virtual const CDictionaryBasedPath& GetPath() const;
+	virtual const CDictionaryBasedTempPath& GetPath() const;
 	virtual bool EndOfPath() const;
 
 	virtual void Advance();
@@ -123,7 +127,7 @@ inline revision_t CLogIteratorBase::GetRevision() const
 	return revision;
 }
 
-inline const CDictionaryBasedPath& CLogIteratorBase::GetPath() const
+inline const CDictionaryBasedTempPath& CLogIteratorBase::GetPath() const
 {
 	return path;
 }

@@ -6,6 +6,15 @@
 namespace LogCache
 {
 
+// react on cache updates
+
+void CLogIteratorBase::HandleCacheUpdates()
+{
+	// maybe, we can now use a shorter relative path
+
+	path.RepeatLookup();
+}
+
 // comparison methods
 
 bool CLogIteratorBase::PathsIntersect ( const CDictionaryBasedPath& lhsPath
@@ -20,7 +29,7 @@ bool CLogIteratorBase::PathsIntersect ( const CDictionaryBasedPath& lhsPath
 bool CLogIteratorBase::PathInRevision
 	( const CRevisionInfoContainer::CChangesIterator& first
 	, const CRevisionInfoContainer::CChangesIterator& last
-	, const CDictionaryBasedPath& path)
+	, const CDictionaryBasedTempPath& path)
 {
 	// close examination of all changes
 
@@ -29,7 +38,14 @@ bool CLogIteratorBase::PathInRevision
 		; ++iter)
 	{
 		CDictionaryBasedPath changedPath = iter->GetPath();
-		if (PathsIntersect (changedPath, path))
+		if (changedPath.IsSameOrParentOf (path.GetBasePath()))
+			return true;
+
+		// if (and only if) path is a cached path, 
+		// it may be a parent of the changedPath
+
+		if (   path.IsFullyCachedPath() 
+			&& path.GetBasePath().IsSameOrParentOf (changedPath))
 			return true;
 	}
 
@@ -53,7 +69,7 @@ bool CLogIteratorBase::PathInRevision() const
 	if (!revisionRootPath.IsValid())
 		return false;
 
-	if (!PathsIntersect (path, revisionRootPath))
+	if (!PathsIntersect (path.GetBasePath(), revisionRootPath))
 		return false;
 
 	// close examination of all changes
@@ -95,7 +111,7 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 	( const CRevisionInfoContainer::CChangesIterator& first
 	, const CRevisionInfoContainer::CChangesIterator& last
 	, const CDictionaryBasedPath& revisionRootPath
-	, CDictionaryBasedPath& searchPath
+	, CDictionaryBasedTempPath& searchPath
 	, revision_t& searchRevision)
 {
 	// any chance that this revision affects our search path?
@@ -103,12 +119,12 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 	if (!revisionRootPath.IsValid())
 		return false;
 
-	if (!revisionRootPath.IsSameOrParentOf (searchPath))
+	if (!revisionRootPath.IsSameOrParentOf (searchPath.GetBasePath()))
 		return false;
 
 	// close examination of all changes
 
-	for (CRevisionInfoContainer::CChangesIterator iter = first
+	for ( CRevisionInfoContainer::CChangesIterator iter = first
 		; iter != last
 		; ++iter)
 	{
@@ -123,7 +139,7 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 		// -> skip, if our search path is not affected (only some sub-path)
 
 		CDictionaryBasedPath changedPath = iter->GetPath();
-		if (!changedPath.IsSameOrParentOf (searchPath))
+		if (!changedPath.IsSameOrParentOf (searchPath.GetBasePath()))
 			continue;
 
 		// now, this is serious
@@ -148,7 +164,8 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 				// continue search on copy source path
 
 				assert (iter.GetFromPath().IsValid());
-				searchPath = iter.GetFromPath();
+				searchPath = searchPath.ReplaceParent ( iter.GetPath()
+													  , iter.GetFromPath());
 				searchRevision = iter.GetFromRevision();
 
 				return true;
@@ -178,7 +195,7 @@ void CLogIteratorBase::ToNextRevision()
 revision_t CLogIteratorBase::SkipNARevisions()
 {
 	return logInfo->GetSkippedRevisions()
-				.GetPreviousRevision (path, revision);
+		.GetPreviousRevision (path.GetBasePath(), revision);
 }
 
 // log scanning
@@ -212,7 +229,7 @@ void CLogIteratorBase::InternalAdvance()
 
 CLogIteratorBase::CLogIteratorBase ( const CCachedLogInfo* cachedLog
 								   , revision_t startRevision
-								   , const CDictionaryBasedPath& startPath)
+								   , const CDictionaryBasedTempPath& startPath)
 	: logInfo (cachedLog)
 	, revision (startRevision)
 	, path (startPath)
@@ -232,6 +249,12 @@ bool CLogIteratorBase::DataIsMissing() const
 
 void CLogIteratorBase::Advance()
 {
+	// maybe, there was some cache update
+
+	HandleCacheUpdates();
+
+	// end of history?
+
 	if (revision > 0)
 	{
 		// the current revision may be a copy / rename
@@ -263,6 +286,10 @@ void CLogIteratorBase::Advance()
 
 void CLogIteratorBase::Retry()
 {
+	// maybe, there was some cache update
+
+	HandleCacheUpdates();
+
 	// don't handle copy / rename more than once
 
 	++revision;

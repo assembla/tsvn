@@ -29,19 +29,18 @@ revision_t CLogBatchIteratorBase::MaxRevision
 
 // find the top revision of all paths
 
-CDictionaryBasedPath CLogBatchIteratorBase::BasePath 
+CDictionaryBasedTempPath CLogBatchIteratorBase::BasePath 
 	( const CCachedLogInfo* cachedLog
 	, const TPathRevisions& pathRevisions)
 {
 	// return a dummy path, if there is nothing to log
 
 	if (pathRevisions.empty())
-		return CDictionaryBasedPath ( &cachedLog->GetLogInfo().GetPaths()
-									, NO_INDEX);
+		return CDictionaryBasedTempPath (&cachedLog->GetLogInfo().GetPaths());
 	
 	// fold the paths
 
-	CDictionaryBasedPath result = pathRevisions[0].first;
+	CDictionaryBasedTempPath result = pathRevisions[0].first;
 	for ( TPathRevisions::const_iterator iter = pathRevisions.begin() + 1
 		, end = pathRevisions.end()
 		; iter != end
@@ -68,6 +67,23 @@ CLogBatchIteratorBase::CLogBatchIteratorBase
 {
 }
 
+// react on cache updates
+
+void CLogBatchIteratorBase::HandleCacheUpdates()
+{
+	CLogIteratorBase::HandleCacheUpdates();
+
+	// maybe, we can now use a shorter relative path
+
+	for ( TPathRevisions::iterator iter = pathRevisions.begin()
+		, end = pathRevisions.end()
+		; iter != end
+		; ++iter)
+	{
+		iter->first.RepeatLookup();
+	}
+}
+
 // navigation sub-routines
 
 revision_t CLogBatchIteratorBase::SkipNARevisions()
@@ -91,7 +107,7 @@ revision_t CLogBatchIteratorBase::SkipNARevisions()
 			// skip revisions that are of no interest for this path
 
 			localResult
-				= skippedRevisions.GetPreviousRevision ( iter->first
+				= skippedRevisions.GetPreviousRevision ( iter->first.GetBasePath()
 													   , localResult);
 
 			// keep the max. of all next relevant revisions for
@@ -135,7 +151,7 @@ bool CLogBatchIteratorBase::PathInRevision() const
 		// is path relevant?
 
 		if (   (iter->second >= revision)
-			&& !PathsIntersect (iter->first, revisionRootPath))
+			&& !PathsIntersect (iter->first.GetBasePath(), revisionRootPath))
 		{
 			// if we found one match, we are done
 

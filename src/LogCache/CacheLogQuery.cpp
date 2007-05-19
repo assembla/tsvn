@@ -55,13 +55,17 @@ void CCacheLogQuery::CLogFiller::ReceiveLog ( LogChangedPathArray* changes
 
 			cache->AddChange (action, path, copyFromPath, copyFromRevision);
 		}
+
+		// update our path info
+
+		currentPath->RepeatLookup();
 	}
 
 	// mark the gap and update the current path
 
 	if (firstNARevision > revision+1)
 	{
-		cache->AddSkipRange ( *currentPath
+		cache->AddSkipRange ( currentPath->GetBasePath()
 							, firstNARevision
 							, firstNARevision - revision -1);
 	}
@@ -91,7 +95,7 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 								    , ILogQuery* svnQuery
 								    , revision_t startRevision
 									, revision_t endRevision
-									, const CDictionaryBasedPath& startPath
+									, const CDictionaryBasedTempPath& startPath
 									, int limit
 									, bool strictNodeHistory
 								    , ILogReceiver* receiver)
@@ -102,7 +106,7 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 	this->receiver = receiver;
 
 	firstNARevision = startRevision;
-	currentPath.reset (new CDictionaryBasedPath (startPath));
+	currentPath.reset (new CDictionaryBasedTempPath (startPath));
 	followRenames = !strictNodeHistory;
 
 	CTSVNPath path;
@@ -126,7 +130,7 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 // modified.
 
 revision_t 
-CCacheLogQuery::NextAvailableRevision ( const CDictionaryBasedPath& path
+CCacheLogQuery::NextAvailableRevision ( const CDictionaryBasedTempPath& path
 									  , revision_t startRevision
 									  , revision_t endRevision) const
 {
@@ -166,7 +170,7 @@ CCacheLogQuery::NextAvailableRevision ( const CDictionaryBasedPath& path
 
 revision_t CCacheLogQuery::FillLog ( revision_t startRevision
 								   , revision_t endRevision
-								   , const CDictionaryBasedPath& startPath
+								   , const CDictionaryBasedTempPath& startPath
 								   , int limit
 								   , bool strictNodeHistory
 								   , ILogReceiver* receiver)
@@ -240,7 +244,7 @@ CCacheLogQuery::GetChanges ( CRevisionInfoContainer::CChangesIterator& first
 
 void CCacheLogQuery::InternalLog ( revision_t startRevision
 								 , revision_t endRevision
-								 , const CDictionaryBasedPath& startPath
+								 , const CDictionaryBasedTempPath& startPath
 								 , int limit
 								 , bool strictNodeHistory
 								 , ILogReceiver* receiver)
@@ -317,10 +321,10 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 
 // follow copy history until the startRevision is reached
 
-CDictionaryBasedPath CCacheLogQuery::TranslatePegRevisionPath 
+CDictionaryBasedTempPath CCacheLogQuery::TranslatePegRevisionPath 
 	( revision_t pegRevision
 	, revision_t startRevision
-	, const CDictionaryBasedPath& startPath)
+	, const CDictionaryBasedTempPath& startPath)
 {
 	CCopyFollowingLogIterator iterator (cache, startRevision, startPath);
 
@@ -343,7 +347,7 @@ CDictionaryBasedPath CCacheLogQuery::TranslatePegRevisionPath
 // extract the repository-relative path of the URL / file name
 // and open the cache
 
-CDictionaryBasedPath CCacheLogQuery::GetRelativeRepositoryPath (SVNInfoData& info)
+CDictionaryBasedTempPath CCacheLogQuery::GetRelativeRepositoryPath (SVNInfoData& info)
 {
 	// load cache
 
@@ -355,7 +359,7 @@ CDictionaryBasedPath CCacheLogQuery::GetRelativeRepositoryPath (SVNInfoData& inf
 	CStringA relPath = CUnicodeUtils::GetUTF8 (info.url).Mid (URL.GetLength());
 	const CPathDictionary* paths = &cache->GetLogInfo().GetPaths();
 
-	return CDictionaryBasedPath (paths, (const char*)relPath);
+	return CDictionaryBasedTempPath (paths, (const char*)relPath);
 }
 
 // get UUID & repository-relative path
@@ -491,7 +495,7 @@ void CCacheLogQuery::Log ( const CTSVNPathList& targets
 
 	SVNInfoData& info = GetRepositoryInfo (path, baseInfo, headInfo);
 
-	CDictionaryBasedPath startPath 
+	CDictionaryBasedTempPath startPath 
 		= TranslatePegRevisionPath ( pegRevision
 								   , startRevision
 								   , GetRelativeRepositoryPath (info));

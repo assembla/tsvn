@@ -23,7 +23,7 @@ public:
 
 	// container type for <path, revision> pairs
 
-	typedef std::pair<CDictionaryBasedPath, revision_t> TPathRevision;
+	typedef std::pair<CDictionaryBasedTempPath, revision_t> TPathRevision;
 	typedef std::vector<TPathRevision> TPathRevisions;
 
 protected:
@@ -35,14 +35,18 @@ protected:
 	// path list folding utilties
 
 	static revision_t MaxRevision (const TPathRevisions& pathRevisions);
-	static CDictionaryBasedPath BasePath ( const CCachedLogInfo* cachedLog
-										 , const TPathRevisions& pathRevisions);
+	static CDictionaryBasedTempPath BasePath ( const CCachedLogInfo* cachedLog
+										     , const TPathRevisions& pathRevisions);
 
 	// construction 
 	// (copy construction & assignment use default methods)
 
 	CLogBatchIteratorBase ( const CCachedLogInfo* cachedLog
 						  , const TPathRevisions& startPathRevisions);
+
+	// react on cache updates
+
+	virtual void HandleCacheUpdates();
 
 	// implement log scanning sub-routines to
 	// work on multiple paths
