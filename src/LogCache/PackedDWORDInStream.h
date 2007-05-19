@@ -40,6 +40,10 @@ public:
 	// destruction
 
 	virtual ~CPackedDWORDInStreamBase() {};
+
+	// plain data access
+
+	size_t GetSizeValue();
 };
 
 inline DWORD CPackedDWORDInStreamBase::GetValue()
@@ -61,6 +65,13 @@ inline DWORD CPackedDWORDInStreamBase::GetValue()
 			lastValue = InternalGetValue();
 		}
 	}
+}
+
+// plain data access
+
+inline size_t CPackedDWORDInStreamBase::GetSizeValue()
+{
+	return static_cast<size_t>(InternalGetValue());
 }
 
 ///////////////////////////////////////////////////////////////
@@ -108,7 +119,7 @@ S& operator>> (S& stream, std::vector<V>& data)
 {
 	typedef typename std::vector<V>::iterator IT;
 
-	size_t count = (size_t)stream.GetValue();
+	size_t count = stream.GetSizeValue();
 
 	data.clear();
 	data.resize (count);

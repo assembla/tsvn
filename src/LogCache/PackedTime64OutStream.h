@@ -47,7 +47,18 @@ public:
 	CPackedTime64OutStreamBase ( CCacheFileOutBuffer* aBuffer
 						        , SUB_STREAM_ID anID);
 	virtual ~CPackedTime64OutStreamBase() {};
+
+	// plain data access
+
+	void AddSizeValue (size_t value);
 };
+
+// plain data access
+
+inline void CPackedTime64OutStreamBase::AddSizeValue (size_t value)
+{
+	Add (static_cast<DWORD>(value));
+}
 
 ///////////////////////////////////////////////////////////////
 //

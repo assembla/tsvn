@@ -38,7 +38,18 @@ public:
 	// destruction
 
 	virtual ~CPackedTime64InStreamBase() {};
+
+	// plain data access
+
+	size_t GetSizeValue();
 };
+
+// plain data access
+
+inline size_t CPackedTime64InStreamBase::GetSizeValue()
+{
+	return static_cast<size_t>(GetValue());
+}
 
 ///////////////////////////////////////////////////////////////
 //

@@ -98,7 +98,8 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		= dynamic_cast<CDiffIntegerInStream*>
 			(stream.GetSubStream (CRevisionIndex::INDEX_STREAM_ID));
 
-	container.firstRevision = indexStream->GetValue();
+	container.firstRevision 
+		= static_cast<revision_t>(indexStream->GetSizeValue());
 	*indexStream >> container.indices;
 
 	// ready
@@ -116,7 +117,7 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 			(stream.OpenSubStream ( CRevisionIndex::INDEX_STREAM_ID
 								  , DIFF_INTEGER_STREAM_TYPE_ID));
 
-	indexStream->Add ((int)container.firstRevision);
+	indexStream->AddSizeValue (container.firstRevision);
 	*indexStream << container.indices;
 
 	// ready

@@ -67,6 +67,10 @@ public:
 	CPackedDWORDOutStreamBase ( CCacheFileOutBuffer* aBuffer
 						      , SUB_STREAM_ID anID);
 	virtual ~CPackedDWORDOutStreamBase() {};
+
+	// plain data access
+
+	void AddSizeValue (size_t value);
 };
 
 ///////////////////////////////////////////////////////////////
@@ -75,6 +79,10 @@ public:
 
 inline void CPackedDWORDOutStreamBase::Add (DWORD value)
 {
+	// that is the only value we cannot represet
+
+	assert (value != (DWORD)-1);
+
 	if (value == lastValue)
 	{
 		++count;
@@ -99,6 +107,13 @@ inline void CPackedDWORDOutStreamBase::Add (DWORD value)
 
 		lastValue = value;
 	}
+}
+
+// plain data access
+
+inline void CPackedDWORDOutStreamBase::AddSizeValue (size_t value)
+{
+	InternalAdd (static_cast<DWORD>(value));
 }
 
 ///////////////////////////////////////////////////////////////
@@ -148,7 +163,7 @@ S& operator<< (S& stream, const std::vector<V>& data)
 
 	// write total entry count and entries
 
-	stream.Add ((typename S::value_type)data.size());
+	stream.AddSizeValue (data.size());
 	for (IT iter = data.begin(), end = data.end(); iter != end; ++iter)
 		stream.Add ((typename S::value_type)(*iter));
 

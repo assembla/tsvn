@@ -473,6 +473,7 @@ void CSkipRevisionInfo::Add ( const CDictionaryBasedPath& path
 	assert (revision > 0);
 	assert (revision != NO_REVISION);
 	assert (size != NO_REVISION);
+	assert (2*size > size);
 
 	// reduce the range, if we have revision info at the boundaries
 
@@ -546,8 +547,8 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		= dynamic_cast<CDiffDWORDInStream*>
 			(stream.GetSubStream (CSkipRevisionInfo::REVISIONS_STREAM_ID));
 
-	CDiffDWORDInStream* sizesStream 
-		= dynamic_cast<CDiffDWORDInStream*>
+	CDiffIntegerInStream* sizesStream 
+		= dynamic_cast<CDiffIntegerInStream*>
 			(stream.GetSubStream (CSkipRevisionInfo::SIZES_STREAM_ID));
 
 	// read all data
@@ -568,9 +569,12 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		CSkipRevisionInfo::IT iter = perPathInfo->ranges.end();
 		for (size_t k = 0; k < entryCount; ++k)
 		{
+			DWORD size = sizesStream->GetValue();
+			assert (2*size > size);
+
 			iter = perPathInfo->ranges.insert 
 					(iter, std::make_pair ( revisionsStream->GetValue()
-										  , sizesStream->GetValue()));
+										  , size));
 		}
 
 		container.index.insert ( perPathInfo->pathID
@@ -607,10 +611,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 			(stream.OpenSubStream ( CSkipRevisionInfo::REVISIONS_STREAM_ID
 								  , DIFF_DWORD_STREAM_TYPE_ID));
 
-	CDiffDWORDOutStream* sizesStream 
-		= dynamic_cast<CDiffDWORDOutStream*>
+	CDiffIntegerOutStream* sizesStream 
+		= dynamic_cast<CDiffIntegerOutStream*>
 			(stream.OpenSubStream ( CSkipRevisionInfo::SIZES_STREAM_ID
-								  , DIFF_DWORD_STREAM_TYPE_ID));
+								  , DIFF_INTEGER_STREAM_TYPE_ID));
 
 	// write all data
 
@@ -629,6 +633,8 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 			; iter != end
 			; ++iter)
 		{
+			assert (2*iter->second > iter->second);
+
 			revisionsStream->Add (iter->first);
 			sizesStream->Add (iter->second);
 		}
