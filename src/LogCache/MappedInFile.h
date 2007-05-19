@@ -35,6 +35,10 @@ private:
 
 	void MapToMemory (const std::wstring& fileName);
 
+	// destruction / exception utility: close all handles
+
+	void UnMap();
+
 public:
 
 	// construction / destruction: auto- open/close

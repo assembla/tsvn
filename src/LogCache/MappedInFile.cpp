@@ -30,17 +30,37 @@ void CMappedInFile::MapToMemory (const std::wstring& fileName)
 
     mapping = CreateFileMapping (file, NULL, PAGE_READONLY, 0, 0, NULL);
 	if (mapping == INVALID_HANDLE_VALUE)
+	{
+		UnMap();
 		throw std::exception ("can't create mapping for log cache file");
+	}
 
     // map the whole file
 
 	LPVOID address = MapViewOfFile (mapping, FILE_MAP_READ, 0, 0, 0);
     if (address == NULL)
+	{
+		UnMap();
 		throw std::exception ("can't map the log cache file into memory");
+	}
 
 	// set our buffer pointer
 
 	buffer = reinterpret_cast<const unsigned char*>(address);
+}
+
+// close all handles
+
+void CMappedInFile::UnMap()
+{
+	if (buffer != NULL)
+		UnmapViewOfFile (buffer);
+
+	if (mapping != INVALID_HANDLE_VALUE)
+		CloseHandle (mapping);
+
+	if (file != INVALID_HANDLE_VALUE)
+		CloseHandle (file);
 }
 
 // construction / destruction: auto- open/close
@@ -56,12 +76,5 @@ CMappedInFile::CMappedInFile (const std::wstring& fileName)
 
 CMappedInFile::~CMappedInFile()
 {
-	if (buffer != NULL)
-		UnmapViewOfFile (buffer);
-
-	if (mapping != INVALID_HANDLE_VALUE)
-		CloseHandle (mapping);
-
-	if (file != INVALID_HANDLE_VALUE)
-		CloseHandle (file);
+	UnMap();
 }
