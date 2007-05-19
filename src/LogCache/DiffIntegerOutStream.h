@@ -92,6 +92,10 @@ public:
 	using TBase::Add;
 };
 
+template COutStreamImplBase< CDiffDWORDOutStream
+						   , CDiffDWORDOutStreamBase
+	                       , DIFF_DWORD_STREAM_TYPE_ID>;
+
 ///////////////////////////////////////////////////////////////
 //
 // CDiffIntegerOutStream
@@ -123,3 +127,7 @@ public:
 
 	using TBase::Add;
 };
+
+template COutStreamImplBase< CDiffIntegerOutStream
+						   , CDiffIntegerOutStreamBase
+		                   , DIFF_INTEGER_STREAM_TYPE_ID>;

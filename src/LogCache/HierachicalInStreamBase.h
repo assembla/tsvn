@@ -87,7 +87,7 @@ public:
 template<class T, class B, STREAM_TYPE_ID type> 
 class CInStreamImplBase : public B
 {
-private:
+public:
 
 	// create our stream factory
 

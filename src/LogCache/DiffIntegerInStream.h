@@ -101,6 +101,10 @@ public:
 	using TBase::GetValue;
 };
 
+template CInStreamImplBase< CDiffDWORDInStream
+						  , CDiffDWORDInStreamBase
+						  , DIFF_DWORD_STREAM_TYPE_ID>;
+
 ///////////////////////////////////////////////////////////////
 //
 // CDiffIntegerInStream
@@ -132,3 +136,8 @@ public:
 
 	using TBase::GetValue;
 };
+
+template CInStreamImplBase< CDiffIntegerInStream
+						  , CDiffIntegerInStreamBase
+						  , DIFF_INTEGER_STREAM_TYPE_ID>;
+

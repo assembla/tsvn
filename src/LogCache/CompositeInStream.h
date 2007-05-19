@@ -44,3 +44,4 @@ template CInStreamImpl< CCompositeInStreamBase
 					  , COMPOSITE_STREAM_TYPE_ID>;
 typedef CInStreamImpl< CCompositeInStreamBase
 					 , COMPOSITE_STREAM_TYPE_ID> CCompositeInStream;
+

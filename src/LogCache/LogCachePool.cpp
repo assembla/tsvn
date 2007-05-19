@@ -2,6 +2,14 @@
 #include "LogCachePool.h"
 #include "CachedLogInfo.h"
 
+#include "CompositeInStream.h"
+#include "CompositeOutStream.h"
+#include "DiffIntegerInStream.h"
+#include "DiffIntegerOutStream.h"
+#include "PackedIntegerInStream.h"
+#include "PackedIntegerOutStream.h"
+
+
 // begin namespace LogCache
 
 namespace LogCache
