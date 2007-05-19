@@ -146,32 +146,31 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 
 		switch (action)
 		{
-			// deletion?
-
-			case CRevisionInfoContainer::ACTION_DELETED:
-			{
-				// end of path history
-
-				searchRevision = NO_REVISION;
-				return true;
-			}
-
 			// rename?
 
 			case CRevisionInfoContainer::ACTION_ADDED:
 			case CRevisionInfoContainer::ACTION_REPLACED:
 			{
-				// continue search on copy source path
+				if (iter.HasFromPath())
+				{
+					// continue search on copy source path
 
-				assert (iter.GetFromPath().IsValid());
-				searchPath = searchPath.ReplaceParent ( iter.GetPath()
-													  , iter.GetFromPath());
-				searchRevision = iter.GetFromRevision();
+					searchPath = searchPath.ReplaceParent ( iter.GetPath()
+														  , iter.GetFromPath());
+					searchRevision = iter.GetFromRevision();
+				}
+				else
+				{
+					// end of path history
+
+					searchRevision = NO_REVISION;
+				}
 
 				return true;
 			}
 
 			// there should be no other
+			// (we are unlikely to find a deletion ;) )
 
 			default:
 			{
