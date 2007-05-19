@@ -153,9 +153,7 @@ CCacheLogQuery::NextAvailableRevision ( const CDictionaryBasedTempPath& path
 	while ((startRevision >= endRevision) && (startRevision != NO_REVISION))
 	{
 		CStrictLogIterator iterator (cache, startRevision, path);
-		assert (iterator.DataIsMissing());
-
-		iterator.Advance();
+		iterator.Retry();
 
 		// found the next cache entry for this path?
 
