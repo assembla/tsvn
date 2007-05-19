@@ -339,6 +339,7 @@ CDictionaryBasedTempPath CCacheLogQuery::TranslatePegRevisionPath
 	, const CDictionaryBasedTempPath& startPath)
 {
 	CCopyFollowingLogIterator iterator (cache, pegRevision, startPath);
+	iterator.Retry();
 
 	while ((iterator.GetRevision() > startRevision) && !iterator.EndOfPath())
 	{
