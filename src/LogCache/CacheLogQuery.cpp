@@ -152,13 +152,16 @@ CCacheLogQuery::NextAvailableRevision ( const CDictionaryBasedTempPath& path
 
 	while ((startRevision >= endRevision) && (startRevision != NO_REVISION))
 	{
+		// skip known revisions that are irrelevant for path
+
 		CStrictLogIterator iterator (cache, startRevision, path);
 		iterator.Retry();
+		startRevision = iterator.GetRevision();
 
 		// found the next cache entry for this path?
 
 		if (!iterator.DataIsMissing())
-			return iterator.GetRevision()+1;
+			return startRevision+1;
 
 		// skip N/A revisions
 
