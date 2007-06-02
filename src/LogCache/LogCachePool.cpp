@@ -26,6 +26,7 @@
 #include "DiffIntegerOutStream.h"
 #include "PackedIntegerInStream.h"
 #include "PackedIntegerOutStream.h"
+#include "HuffmanOutStream.h"
 
 
 // begin namespace LogCache

@@ -23,6 +23,7 @@
 #include "PackedIntegerOutStream.h"
 #include "DiffIntegerInStream.h"
 #include "DiffIntegerOutStream.h"
+#include "CompositeOutStream.h"
 
 ///////////////////////////////////////////////////////////////
 // begin namespace LogCache
@@ -500,9 +501,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 {
 	// write the words
 
-	IHierarchicalOutStream* wordsStream 
-		= stream.OpenSubStream ( CTokenizedStringContainer::WORDS_STREAM_ID
-							   , COMPOSITE_STREAM_TYPE_ID);
+	CCompositeOutStream* wordsStream 
+		= dynamic_cast<CCompositeOutStream*>
+			(stream.OpenSubStream ( CTokenizedStringContainer::WORDS_STREAM_ID
+								  , COMPOSITE_STREAM_TYPE_ID));
 	const_cast<CTokenizedStringContainer*>(&container)->AutoCompress();
 	*wordsStream << container.words;
 

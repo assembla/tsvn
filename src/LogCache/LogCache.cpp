@@ -27,6 +27,8 @@
 #include "XMLLogReader.h"
 #include "XMLLogWriter.h"
 
+using namespace LogCache;
+
 void ReadStream (const std::wstring& fileName)
 {
 	CRootInStream stream (fileName);
@@ -50,21 +52,22 @@ void WriteStream (const std::wstring& fileName)
 
 void TestXMLIO()
 {
-//	CCachedLogInfo logInfo (L"C:\\temp\\kde.stream");
-	CCachedLogInfo logInfo (L"C:\\temp\\tsvntrunk.stream");
+	CCachedLogInfo logInfo (L"C:\\temp\\kde.stream");
+//	CCachedLogInfo logInfo (L"E:\\temp\\tsvntrunk.stream");
 //	logInfo.Load();
 //	logInfo.Clear();
 
-//	CXMLLogReader::LoadFromXML (L"C:\\temp\\kde.log.xml", logInfo);
-	CXMLLogReader::LoadFromXML (L"C:\\temp\\tsvntrunk.xml", logInfo);
-	CXMLLogWriter::SaveToXML (L"C:\\temp\\tsvntrunk.xml.out", logInfo);
+	CXMLLogReader::LoadFromXML (L"E:\\temp\\kde.log.xml", logInfo);
+	CXMLLogWriter::SaveToXML (L"E:\\temp\\kde.xml.out", logInfo, true);
+//	CXMLLogReader::LoadFromXML (L"E:\\temp\\tsvntrunk.log.xml", logInfo);
+//	CXMLLogWriter::SaveToXML (L"E:\\temp\\tsvntrunk.xml.out", logInfo, true);
 	logInfo.Save();
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	WriteStream (L"C:\\temp\\test.stream");
-	ReadStream (L"C:\\temp\\test.stream");
+//	ReadStream (L"C:\\temp\\test.stream");
 
 	TestXMLIO();
 
