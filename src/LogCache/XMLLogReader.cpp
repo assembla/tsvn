@@ -322,7 +322,7 @@ void CXMLLogReader::ParseXMLLog ( const char* current
 			= GetXMLTaggedText (current, revisionEnd, "<msg", 4, "</msg>", 6);
 
 		if (revision % 10000 == 0)
-			printf ("%d\n", revision);
+			printf (".");
 
 		__time64_t timeStamp = 0;
 		if (!date.empty())

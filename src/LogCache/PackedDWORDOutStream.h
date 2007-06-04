@@ -76,7 +76,9 @@ protected:
 	// compression (RLE) support
 
 	void Add (DWORD value);
-	void WriteThisStream (CCacheFileOutBuffer* buffer);
+
+	virtual const unsigned char* GetStreamData();
+	virtual size_t GetStreamSize();
 
 public:
 

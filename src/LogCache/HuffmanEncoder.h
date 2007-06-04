@@ -24,56 +24,35 @@
 // include base class
 ///////////////////////////////////////////////////////////////
 
-#include "BLOBOutStream.h"
+#include "HuffmanBase.h"
 
 ///////////////////////////////////////////////////////////////
 //
-// CHuffmanOutStream
-//
-//		Base class for write streams that contain a single 
-//		binary chunk of data.
-//
-//		Add() must be called at most once. Since it will close
-//		the stream implicitly, there is no need to buffer the
-//		data within the stream. It will be written directly
-//		to the file buffer instead.
-//
-//		That means, all sub-streams will be written as well!
+// CHuffmanEncoder
 //
 ///////////////////////////////////////////////////////////////
 
-class CHuffmanOutStreamBase : public CBLOBOutStreamBase
+class CHuffmanEncoder : public CHuffmanBase
 {
 private:
 
-	// per-character info
-
-	typedef unsigned __int64 QWORD;
-	typedef unsigned char BYTE;
-
-#ifdef _WIN64
-	typedef QWORD key_type;
-	typedef QWORD count_block_type;
-	typedef DWORD encode_block_type;
-#else
-	typedef DWORD key_type;
-	typedef DWORD count_block_type;
-	typedef WORD encode_block_type;
-#endif
-
-	enum 
-	{
-		BUCKET_COUNT = 1 << (8 * sizeof (BYTE)),  // we have to encode up to 2^8 byte different values
-		KEY_BITS = sizeof (key_type) * 8,
-		MAX_ENCODING_LENGTH = (sizeof (DWORD) - 1) * 8 / 2	// 2 encoded values plus odd bits shall 
-										    // still fit into a single DWORD
-	};
+	// for each plaintext value:
+	// the compressed value (key), the length of that
+	// key in bits and the number of occurrences of the
+	// original characters.
 
 	key_type key[BUCKET_COUNT];
 	BYTE keyLength[BUCKET_COUNT];
 	DWORD count[BUCKET_COUNT];
 
+	// plaintext values ordered by frequency (most
+	// frequently used first)
+
 	BYTE sorted [BUCKET_COUNT];
+
+	// number of byte values that *actually* occured
+	// in the plaintext buffer.
+
 	size_t sortedCount;
 
 	// huffman encoding stages:
@@ -112,24 +91,11 @@ public:
 
 	// construction / destruction: nothing special to do
 
-	CHuffmanOutStreamBase ( CCacheFileOutBuffer* aBuffer
-						  , SUB_STREAM_ID anID);
-	virtual ~CHuffmanOutStreamBase() {};
+	CHuffmanEncoder();
+	virtual ~CHuffmanEncoder() {};
 
-	// write local stream data and close the stream
+	// compress the source data and return the target buffer.
+	// The caller must delete the target buffer.
 
-	void Add (const unsigned char* source, size_t byteCount);
+	std::pair<BYTE*, DWORD> Encode (const BYTE* source, size_t byteCount);
 };
-
-///////////////////////////////////////////////////////////////
-//
-// CHuffmanOutStream
-//
-//		instantiable sub-class of CHuffmanOutStreamBase.
-//
-///////////////////////////////////////////////////////////////
-
-template COutStreamImpl< CHuffmanOutStreamBase
-					   , HUFFMAN_STREAM_TYPE_ID>;
-typedef COutStreamImpl< CHuffmanOutStreamBase
-					  , HUFFMAN_STREAM_TYPE_ID> CHuffmanOutStream;

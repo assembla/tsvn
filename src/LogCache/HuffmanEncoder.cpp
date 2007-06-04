@@ -17,15 +17,14 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 #include "StdAfx.h"
-#include "HuffmanOutStream.h"
-#include "HighResClock.h"
+#include "HuffmanEncoder.h"
 
 // huffman encoding stages:
 
 // (1) determine distribution
 
-void CHuffmanOutStreamBase::CountValues ( const unsigned char* source
-										, const unsigned char* end)
+void CHuffmanEncoder::CountValues ( const unsigned char* source
+								  , const unsigned char* end)
 {
 	// keep intermediate results
 
@@ -73,7 +72,7 @@ void CHuffmanOutStreamBase::CountValues ( const unsigned char* source
 
 // (2) prepare for key assignment: sort by frequency
 
-void CHuffmanOutStreamBase::SortByFrequency()
+void CHuffmanEncoder::SortByFrequency()
 {
 	// sort all tokens to encode and sort them by frequency
 
@@ -102,22 +101,23 @@ void CHuffmanOutStreamBase::SortByFrequency()
 
 	// recursively construct huffman keys
 
-	AssignEncoding (first, last, 0, 0);
+	if (first != last)
+		AssignEncoding (first, last, 0, 0);
 }
 
 // (3) recursively construct & assign keys
 
-void CHuffmanOutStreamBase::AssignEncoding ( BYTE* first
-										   , BYTE* last
-										   , key_type encoding
-										   , BYTE bitCount)
+void CHuffmanEncoder::AssignEncoding ( BYTE* first
+								     , BYTE* last
+								     , key_type encoding
+								     , BYTE bitCount)
 {
 	size_t distance = last - first;
 	if (distance == 1)
 	{
 		// we constructed a unique encoding
 
-		key[*first] = encoding << (KEY_BITS - bitCount);
+		key[*first] = ReverseBits (encoding, bitCount) << (KEY_BITS - bitCount);
 		keyLength[*first] = bitCount;
 	}
 	else
@@ -170,7 +170,7 @@ void CHuffmanOutStreamBase::AssignEncoding ( BYTE* first
 
 // (4) target buffer size calculation
 
-DWORD CHuffmanOutStreamBase::CalculatePackedSize()
+DWORD CHuffmanEncoder::CalculatePackedSize()
 {
 	// first, the original and packed buffer sizes
 
@@ -200,7 +200,7 @@ DWORD CHuffmanOutStreamBase::CalculatePackedSize()
 
 // (5) write a huffman table
 
-void CHuffmanOutStreamBase::WriteHuffmanTable (BYTE*& dest)
+void CHuffmanEncoder::WriteHuffmanTable (BYTE*& dest)
 {
 	*dest = static_cast<BYTE>(sortedCount);
 	++dest;
@@ -221,16 +221,16 @@ void CHuffmanOutStreamBase::WriteHuffmanTable (BYTE*& dest)
 
 // (6) write encoded target stream
 
-#ifdef _WIN64
-
-void CHuffmanOutStreamBase::WriteHuffmanEncoded ( const BYTE* source
-											    , const BYTE* end
-												, BYTE* dest)
+void CHuffmanEncoder::WriteHuffmanEncoded ( const BYTE* source
+									      , const BYTE* end
+										  , BYTE* dest)
 {
 	key_type cachedCode = 0;
 	BYTE cachedBits = 0;
 
-	// main loop
+#ifdef _WIN64
+
+	// main loop (22 1/3 clock ticks per 4 chars on K8) 
 
 	const encode_block_type* blockSource 
 		= reinterpret_cast<const encode_block_type*>(source);
@@ -286,7 +286,7 @@ void CHuffmanOutStreamBase::WriteHuffmanEncoded ( const BYTE* source
 		cachedBits &= 7;
 	}
 
-	// write remaining odd chars
+	// encode odd chars
 
 	source = reinterpret_cast<const BYTE*>(blockEnd);
 	for ( ; source != end; ++source)
@@ -305,22 +305,9 @@ void CHuffmanOutStreamBase::WriteHuffmanEncoded ( const BYTE* source
 		cachedBits += length;
 	}
 
-	// write the remaining cached data
-
-	*reinterpret_cast<key_type*>(dest) 
-		= cachedCode >> (KEY_BITS - cachedBits);
-}
-
 #else
 
-void CHuffmanOutStreamBase::WriteHuffmanEncoded ( const BYTE* source
-											    , const BYTE* end
-												, BYTE* dest)
-{
-	key_type cachedCode = 0;
-	BYTE cachedBits = 0;
-
-	// main loop
+	// main loop (11.3 clock ticks per char on K8)
 
 	for ( ; source != end; ++source)
 	{
@@ -337,19 +324,18 @@ void CHuffmanOutStreamBase::WriteHuffmanEncoded ( const BYTE* source
 		cachedCode += mask;
 		cachedBits += length;
 
-		if (cachedBits + MAX_ENCODING_LENGTH > KEY_BITS)
-		{
-			// write full bytes only
+		// write full bytes only
 
-			*reinterpret_cast<key_type*>(dest) 
-				= cachedCode >> (KEY_BITS - cachedBits);
-			dest += cachedBits / 8;
+		*reinterpret_cast<key_type*>(dest) 
+			= cachedCode >> (KEY_BITS - cachedBits);
+		dest += cachedBits / 8;
 
-			// update cache
+		// update cache
 
-			cachedBits &= 7;
-		}
+		cachedBits &= 7;
 	}
+
+#endif
 
 	// write the remaining cached data
 
@@ -357,14 +343,10 @@ void CHuffmanOutStreamBase::WriteHuffmanEncoded ( const BYTE* source
 		= cachedCode >> (KEY_BITS - cachedBits);
 }
 
-#endif
-
 // construction: nothing special to do
 
-CHuffmanOutStreamBase::CHuffmanOutStreamBase ( CCacheFileOutBuffer* aBuffer
-											 , SUB_STREAM_ID anID)
-	: CBLOBOutStreamBase (aBuffer, anID)
-	, sortedCount (0)
+CHuffmanEncoder::CHuffmanEncoder()
+	: sortedCount (0)
 {
 	ZeroMemory (&key, sizeof (key));
 	ZeroMemory (&keyLength, sizeof (keyLength));
@@ -374,11 +356,9 @@ CHuffmanOutStreamBase::CHuffmanOutStreamBase ( CCacheFileOutBuffer* aBuffer
 
 // write local stream data and close the stream
 
-void CHuffmanOutStreamBase::Add (const unsigned char* source, size_t byteCount)
+std::pair<CHuffmanEncoder::BYTE*, DWORD>
+CHuffmanEncoder::Encode (const BYTE* source, size_t byteCount)
 {
-	CHighResClock clock1;
-	CHighResClock clock2;
-
 	assert (sorted[0] == NULL);
 
 	// this may fail under x64
@@ -388,43 +368,24 @@ void CHuffmanOutStreamBase::Add (const unsigned char* source, size_t byteCount)
 
 	// calculate static Huffman encoding
 
-	CHighResClock clock3;
 	CountValues (source, source + byteCount);
-	clock3.Stop();
 	SortByFrequency();
 
 	// create buffer
 
 	DWORD targetSize = CalculatePackedSize();
-	std::auto_ptr<unsigned char> buffer (new unsigned char[targetSize]);
+	std::auto_ptr<BYTE> buffer (new BYTE[targetSize]);
 
 	// fill it
 
-	unsigned char* dest = buffer.get();
+	BYTE* dest = buffer.get();
 	*reinterpret_cast<DWORD*>(dest) = static_cast<DWORD>(byteCount);
 	dest += sizeof (DWORD);
 	*reinterpret_cast<DWORD*>(dest) = targetSize;
 	dest += sizeof (DWORD);
 
 	WriteHuffmanTable (dest);
-	clock2.Stop();
-
 	WriteHuffmanEncoded (source, source + byteCount, dest);
 
-	clock1.Stop();
-
-	DWORD ticks1 = (22000 * clock1.GetMusecsTaken()) / byteCount;
-	DWORD ticks2 = (22000 * clock2.GetMusecsTaken()) / byteCount;
-	DWORD ticks3 = (22000 * clock3.GetMusecsTaken()) / byteCount;
-
-	int perc = 100 * (byteCount - targetSize) / byteCount;
-
-	CStringA s;
-	s.Format ("%d/%d/%d ticks, %d/%d bytes, %d\n", ticks3, ticks2, ticks1, (int)targetSize, (int)byteCount, perc);
-
-	printf ("%s", (const char*)s);
-
-	// let our base class write that data
-
-	CBLOBOutStreamBase::Add (buffer.get(), targetSize);
+	return std::make_pair (buffer.release(), targetSize);
 }

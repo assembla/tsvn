@@ -18,6 +18,7 @@
 //
 #include "StdAfx.h"
 #include "HierachicalInStreamBase.h"
+#include "HuffmanDecoder.h"
 
 void CHierachicalInStreamBase::ReadSubStreams ( CCacheFileInBuffer* buffer
 											  , STREAM_INDEX index)
@@ -59,6 +60,22 @@ void CHierachicalInStreamBase::ReadSubStreams ( CCacheFileInBuffer* buffer
 	first += directorySize;
 }
 
+void CHierachicalInStreamBase::DecodeThisStream()
+{
+	// Huffman-compress the raw stream data
+
+	CHuffmanDecoder decoder;
+	std::pair<unsigned char*, DWORD> plainData
+		= decoder.Decode (first, last - first);
+
+	// add it to the target file
+
+	first = plainData.first;
+	last = first + plainData.second;
+
+	TRACE ("Allocate %x\n", first);
+}
+
 // construction / destruction
 
 CHierachicalInStreamBase::CHierachicalInStreamBase()
@@ -73,6 +90,7 @@ CHierachicalInStreamBase::CHierachicalInStreamBase ( CCacheFileInBuffer* buffer
 	, last (NULL)
 {
 	ReadSubStreams (buffer, index);
+	DecodeThisStream();
 }
 
 CHierachicalInStreamBase::~CHierachicalInStreamBase()
@@ -82,6 +100,10 @@ CHierachicalInStreamBase::~CHierachicalInStreamBase()
 		; iter != end
 		; ++iter)
 		delete iter->second;
+
+	TRACE ("Delete %x\n", first);
+
+	delete first;
 }
 
 // implement IHierarchicalOutStream

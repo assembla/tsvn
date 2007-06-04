@@ -20,7 +20,7 @@
 #include ".\stringdictonary.h"
 
 #include "BLOBInStream.h"
-#include "HuffmanOutStream.h"
+#include "BLOBOutStream.h"
 #include "DiffIntegerInStream.h"
 #include "DiffIntegerOutStream.h"
 
@@ -281,10 +281,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 {
 	// write string data
 
-	CHuffmanOutStream* packedStringStream 
-		= dynamic_cast<CHuffmanOutStream*>
+	CBLOBOutStream* packedStringStream 
+		= dynamic_cast<CBLOBOutStream*>
 			(stream.OpenSubStream ( CStringDictionary::PACKED_STRING_STREAM_ID
-								  , HUFFMAN_STREAM_TYPE_ID));
+								  , BLOB_STREAM_TYPE_ID));
 	packedStringStream->Add ((const unsigned char*)&dictionary.packedStrings.at(0)
 							, dictionary.packedStrings.size());
 

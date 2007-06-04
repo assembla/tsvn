@@ -18,6 +18,7 @@
 //
 #include "StdAfx.h"
 #include "HierachicalOutStreamBase.h"
+#include "HuffmanEncoder.h"
 
 // close (write) stream
 
@@ -44,13 +45,29 @@ void CHierachicalOutStreamBase::WriteSubStreamList()
 	}
 }
 
+void CHierachicalOutStreamBase::WriteThisStream()
+{
+	// Huffman-compress the raw stream data
+
+	CHuffmanEncoder packer;
+	std::pair<unsigned char*, DWORD> packedData
+		= packer.Encode (GetStreamData(), GetStreamSize());
+	ReleaseStreamData();
+
+	// add it to the target file
+
+	buffer->Add (packedData.first, packedData.second);
+	delete packedData.first;
+}
+
 void CHierachicalOutStreamBase::Close()
 {
 	CloseSubStreams();
 
 	index = buffer->OpenStream();
 	WriteSubStreamList();
-	WriteThisStream (buffer);
+	WriteThisStream();
+
 	buffer->CloseStream();
 }
 

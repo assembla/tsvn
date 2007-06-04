@@ -52,12 +52,18 @@ void CPackedDWORDOutStreamBase::FlushLastValue()
 	}
 }
 
-// write our data to the file
+// prepare our data for being written to the file
 
-void CPackedDWORDOutStreamBase::WriteThisStream (CCacheFileOutBuffer* buffer)
+const unsigned char* CPackedDWORDOutStreamBase::GetStreamData()
 {
 	FlushLastValue();
-	CBinaryOutStreamBase::WriteThisStream (buffer);
+	return CBinaryOutStreamBase::GetStreamData();
+}
+
+size_t CPackedDWORDOutStreamBase::GetStreamSize()
+{
+	FlushLastValue();
+	return CBinaryOutStreamBase::GetStreamSize();
 }
 
 // construction: nothing special to do

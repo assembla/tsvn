@@ -459,51 +459,27 @@
 					>
 				</File>
 				<File
-					RelativePath=".\HuffmanOutStream.cpp"
+					RelativePath=".\HuffmanBase.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AssemblerOutput="0"
-							AssemblerListingLocation="$(IntDir)"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|x64"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AssemblerOutput="4"
-							AssemblerListingLocation="$(IntDir)"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AssemblerOutput="4"
-							AssemblerListingLocation="$(IntDir)"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|x64"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalOptions="/FAs"
-							WholeProgramOptimization="false"
-							AssemblerOutput="4"
-							AssemblerListingLocation="$(IntDir)\"
-							ObjectFile="$(IntDir)"
-							BrowseInformation="0"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\HuffmanOutStream.h"
+					RelativePath=".\HuffmanBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\HuffmanDecoder.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\HuffmanDecoder.h"
+					>
+				</File>
+				<File
+					RelativePath=".\HuffmanEncoder.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\HuffmanEncoder.h"
 					>
 				</File>
 				<File

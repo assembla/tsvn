@@ -26,6 +26,10 @@
 #include "CachedLogInfo.h"
 #include "XMLLogReader.h"
 #include "XMLLogWriter.h"
+#include "XMLLogWriter.h"
+#include "CompositeInStream.h"
+#include "CompositeOutStream.h"
+#include "HighResClock.h"
 
 using namespace LogCache;
 
@@ -52,16 +56,43 @@ void WriteStream (const std::wstring& fileName)
 
 void TestXMLIO()
 {
-	CCachedLogInfo logInfo (L"C:\\temp\\kde.stream");
+	CCachedLogInfo logInfo (L"E:\\temp\\kde.stream");
 //	CCachedLogInfo logInfo (L"E:\\temp\\tsvntrunk.stream");
 //	logInfo.Load();
 //	logInfo.Clear();
 
+	CHighResClock clock1;
 	CXMLLogReader::LoadFromXML (L"E:\\temp\\kde.log.xml", logInfo);
-	CXMLLogWriter::SaveToXML (L"E:\\temp\\kde.xml.out", logInfo, true);
+	clock1.Stop();
+
 //	CXMLLogReader::LoadFromXML (L"E:\\temp\\tsvntrunk.log.xml", logInfo);
-//	CXMLLogWriter::SaveToXML (L"E:\\temp\\tsvntrunk.xml.out", logInfo, true);
 	logInfo.Save();
+	logInfo.Clear();
+
+	CHighResClock clock2;
+	logInfo.Load();
+	clock2.Stop();
+
+	CHighResClock clock3;
+	CXMLLogWriter::SaveToXML (L"E:\\temp\\kde.xml.out", logInfo, true);
+	clock3.Stop();
+
+//	CXMLLogWriter::SaveToXML (L"E:\\temp\\tsvntrunk.xml.out", logInfo, true);
+
+	Sleep(5000);
+
+	CHighResClock clock4;
+	logInfo.Save();
+	clock4.Stop();
+
+	CStringA s;
+	s.Format ("\nimport: %5.4f  load: %5.4f  export: %5.4f  save: %5.4f\n"
+			 , clock1.GetMusecsTaken() / 1e+06
+			 , clock2.GetMusecsTaken() / 1e+06
+			 , clock3.GetMusecsTaken() / 1e+06
+			 , clock4.GetMusecsTaken() / 1e+06);
+
+	printf (s);
 }
 
 int _tmain(int argc, _TCHAR* argv[])

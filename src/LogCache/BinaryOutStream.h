@@ -52,9 +52,11 @@ private:
 
 protected:
 
-	// write our data to the file
+	// return the stream data
 
-	virtual void WriteThisStream (CCacheFileOutBuffer* buffer);
+	virtual const unsigned char* GetStreamData();
+	virtual size_t GetStreamSize();
+	virtual void ReleaseStreamData();
 
 	// add data to the stream
 

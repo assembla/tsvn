@@ -92,12 +92,15 @@ private:
 
 	// overwrite this in your class
 
-	virtual void WriteThisStream (CCacheFileOutBuffer* buffer) = 0;
+	virtual const unsigned char* GetStreamData() = 0;
+	virtual size_t GetStreamSize() = 0;
+	virtual void ReleaseStreamData() {};
 
 	// close (write) stream
 
 	void CloseSubStreams();
 	void WriteSubStreamList();
+	void WriteThisStream();
 	void Close();
 
 public:

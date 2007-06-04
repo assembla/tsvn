@@ -52,15 +52,24 @@ void CBinaryOutStreamBase::Grow() throw()
 
 // write our data to the file
 
-void CBinaryOutStreamBase::WriteThisStream (CCacheFileOutBuffer* buffer)
+// return the stream data
+
+const unsigned char* CBinaryOutStreamBase::GetStreamData() 
+{
+	return data.get();
+}
+
+size_t CBinaryOutStreamBase::GetStreamSize() 
 {
 	size_t size = current - data.get();
 	if (size > (DWORD)(-1))
 		throw std::exception ("binary stream too large");
 
-	if (size > 0)
-		buffer->Add (data.get(), (DWORD)size);
+	return size;
+}
 
+void CBinaryOutStreamBase::ReleaseStreamData()
+{
 	data.reset();
 	current = NULL;
 	last = NULL;
