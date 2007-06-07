@@ -44,7 +44,8 @@ namespace LogCache
 //		be appended here).
 //
 //		Every entry holds the data for exactly one revision.
-//		You may add change paths to the last revision, only.
+//		You may add change paths and merged revision info 
+//		to the last revision, only.
 //
 //		Internal storage for revision "index" is as follows:
 //
@@ -64,6 +65,11 @@ namespace LogCache
 //			* copyFromOffsets[index] .. copyFromOffsets[index+1]-1
 //			  is the corresponding range within copyFromPaths 
 //			  and copyFromRevisions 
+//
+//			* mergedRevisionsOffsets[index] .. mergedRevisionsOffsets[index+1]-1
+//			  is the range within mergedPaths and mergedRevisions
+//			  that contains all revision that got directly
+//			  merged into this one.
 //
 //		changes contains the TChangeAction values. If a non-
 //		empty fromPath has been passed to AddChange(), "1" is
@@ -101,6 +107,10 @@ private:
 	std::vector<index_t> changesOffsets;
 	std::vector<index_t> copyFromOffsets;
 
+	// mark the ranges that contain the merged revision info
+
+	std::vector<index_t> mergedRevisionsOffsets;
+
 	// changed path info
 	// (note, that copyFrom info will have less entries)
 
@@ -108,6 +118,11 @@ private:
 	std::vector<index_t> changedPaths;
 	std::vector<index_t> copyFromPaths;
 	std::vector<revision_t> copyFromRevisions;
+
+	// merged revisions info
+
+	std::vector<index_t> mergedPaths;
+	std::vector<revision_t> mergedRevisions;
 
 	// sub-stream IDs
 
@@ -124,7 +139,10 @@ private:
 		CHANGES_STREAM_ID = 9,
 		CHANGED_PATHS_STREAM_ID = 10,
 		COPYFROM_PATHS_STREAM_ID = 11,
-		COPYFROM_REVISIONS_STREAM_ID = 12
+		COPYFROM_REVISIONS_STREAM_ID = 12,
+		MERGEDREVISION_OFFSETS_STREAM_ID = 13,
+		MERGED_PATHS_STREAM_ID = 14,
+		MERGED_REVISIONS_STREAM_ID = 15
 	};
 
 	// index checking utility
@@ -288,13 +306,110 @@ public:
 
 	friend class CChangesIterator;
 
+	///////////////////////////////////////////////////////////////
+	//
+	// CMergedRevisionsIterator
+	//
+	//		a very simplistic forward iterator class.
+	//		It will be used to provide a convenient
+	//		interface to a revision's merged revision list.
+	//
+	///////////////////////////////////////////////////////////////
+
+	class CMergedRevisionsIterator
+	{
+	private:
+
+		// the container we operate on 
+
+		const CRevisionInfoContainer* container;
+
+		// the merged revision info index
+
+		index_t offset;
+
+	public:
+
+		// construction
+
+		CMergedRevisionsIterator()
+			: container (NULL)
+			, offset(0)
+		{
+		}
+
+		CMergedRevisionsIterator ( const CRevisionInfoContainer* container
+								 , index_t offset)
+			: container (container)
+			, offset (offset)
+		{
+		}
+
+		// data access
+
+		CDictionaryBasedPath GetPath() const
+		{
+			index_t pathID = container->mergedPaths [offset];
+			return CDictionaryBasedPath (&container->paths, pathID);
+		}
+
+		revision_t GetRevision() const
+		{
+			return container->mergedRevisions [offset];
+		}
+
+		// general status (points to an action)
+
+		bool IsValid() const
+		{
+			return (container != NULL)
+				&& (offset < (index_t)container->mergedRevisions.size());
+		}
+
+		// move pointer
+
+		CMergedRevisionsIterator& operator++()		// prefix
+		{
+			++offset;
+			return *this;
+		}
+
+		CMergedRevisionsIterator operator++(int)	// postfix
+		{
+			CMergedRevisionsIterator result (*this);
+			++offset;
+			return result;
+		}
+
+		// comparison
+
+		bool operator== (const CMergedRevisionsIterator& rhs)
+		{
+			return (container == rhs.container)
+				&& (offset == rhs.offset);
+		}
+		bool operator!= (const CMergedRevisionsIterator& rhs)
+		{
+			return !operator==(rhs);
+		}
+
+		// pointer-like behavior
+
+		const CMergedRevisionsIterator* operator->() const
+		{
+			return this;
+		}
+	};
+
+	friend class CMergedRevisionsIterator;
+
 	// construction / destruction
 
 	CRevisionInfoContainer(void);
 	~CRevisionInfoContainer(void);
 
 	// add information
-	// AddChange() always adds to the last revision
+	// AddChange() and AddMergedRevision() always adds to the last revision
 
 	index_t Insert ( const std::string& author
 				   , const std::string& comment
@@ -304,6 +419,9 @@ public:
 				   , const std::string& path
 				   , const std::string& fromPath
 				   , revision_t fromRevision);
+
+	void AddMergedRevision ( const std::string& path
+				           , revision_t revision);
 
 	// reset content
 
@@ -362,6 +480,22 @@ public:
 		return CChangesIterator ( this
 								, changesOffsets[index+1]
 								, copyFromOffsets[index+1]);
+	}
+
+	// iterate over all merged revisions
+
+	CMergedRevisionsIterator GetMergedRevisionsBegin (index_t index) const
+	{
+		CheckIndex (index);
+		return CMergedRevisionsIterator ( this
+										, mergedRevisionsOffsets[index]);
+	}
+
+	CMergedRevisionsIterator GetMergedRevisionsEnd (index_t index) const
+	{
+		CheckIndex (index);
+		return CMergedRevisionsIterator ( this
+										, mergedRevisionsOffsets[index+1]);
 	}
 
 	// r/o access to internal pools

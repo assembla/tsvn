@@ -39,6 +39,7 @@ CRevisionInfoContainer::CRevisionInfoContainer(void)
 
 	changesOffsets.push_back(0);
 	copyFromOffsets.push_back(0);
+	mergedRevisionsOffsets.push_back(0);
 }
 
 CRevisionInfoContainer::~CRevisionInfoContainer(void)
@@ -123,6 +124,25 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
 	}
 }
 
+void CRevisionInfoContainer::AddMergedRevision ( const std::string& path
+									           , revision_t revision)
+{
+	// under x64, there might actually be an overflow
+
+	if (changes.size() == NO_INDEX)
+		throw std::exception ("revision container change list overflow");
+
+	// another change
+
+	++(*mergedRevisionsOffsets.rbegin());
+
+	// add merged revision and path index
+
+	CDictionaryBasedPath parsedPath (&paths, path, false);
+	mergedPaths.push_back (parsedPath.GetIndex());
+	mergedRevisions.push_back (revision);
+}
+
 // reset content
 
 void CRevisionInfoContainer::Clear()
@@ -138,12 +158,15 @@ void CRevisionInfoContainer::Clear()
 
 	changesOffsets.erase (changesOffsets.begin()+1, changesOffsets.end());
 	copyFromOffsets.erase (copyFromOffsets.begin()+1, copyFromOffsets.end());
+	mergedRevisionsOffsets.erase (mergedRevisionsOffsets.begin()+1, mergedRevisionsOffsets.end());
 
 	changes.clear();
 	changedPaths.clear();
 	copyFromPaths.clear();
 	copyFromRevisions.clear();
 
+	mergedPaths.clear();
+	mergedRevisions.clear();
 }
 
 // stream I/O
@@ -192,6 +215,11 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 			(stream.GetSubStream (CRevisionInfoContainer::COPYFROM_OFFSETS_STREAM_ID));
 	*copyFromOffsetsStream >> container.copyFromOffsets;
 
+	CDiffDWORDInStream* mergedRevisionsOffsetsStream 
+		= dynamic_cast<CDiffDWORDInStream*>
+		(stream.GetSubStream (CRevisionInfoContainer::MERGEDREVISION_OFFSETS_STREAM_ID));
+	*mergedRevisionsOffsetsStream >> container.mergedRevisionsOffsets;
+
 	// read the changes info
 
 	CPackedDWORDInStream* changesStream 
@@ -213,6 +241,18 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		= dynamic_cast<CDiffIntegerInStream*>
 			(stream.GetSubStream (CRevisionInfoContainer::COPYFROM_REVISIONS_STREAM_ID));
 	*copyFromRevisionsStream >> container.copyFromRevisions;
+
+	// merged revisions
+
+	CDiffIntegerInStream* mergedPathsStream 
+		= dynamic_cast<CDiffIntegerInStream*>
+			(stream.GetSubStream (CRevisionInfoContainer::MERGED_PATHS_STREAM_ID));
+	*mergedPathsStream >> container.mergedPaths;
+
+	CDiffIntegerInStream* mergedRevisionsStream 
+		= dynamic_cast<CDiffIntegerInStream*>
+			(stream.GetSubStream (CRevisionInfoContainer::MERGED_REVISIONS_STREAM_ID));
+	*mergedRevisionsStream >> container.mergedRevisions;
 
 	// ready
 
@@ -271,6 +311,12 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								  , DIFF_DWORD_STREAM_TYPE_ID));
 	*copyFromOffsetsStream << container.copyFromOffsets;
 
+	CDiffDWORDOutStream* mergedRevisionsOffsetsStream 
+		= dynamic_cast<CDiffDWORDOutStream*>
+			(stream.OpenSubStream ( CRevisionInfoContainer::MERGEDREVISION_OFFSETS_STREAM_ID
+								  , DIFF_DWORD_STREAM_TYPE_ID));
+	*mergedRevisionsOffsetsStream << container.mergedRevisionsOffsets;
+
 	// write the changes info
 
 	CPackedDWORDOutStream* changesStream 
@@ -296,6 +342,20 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 			(stream.OpenSubStream ( CRevisionInfoContainer::COPYFROM_REVISIONS_STREAM_ID
 								  , DIFF_INTEGER_STREAM_TYPE_ID));
 	*copyFromRevisionsStream << container.copyFromRevisions;
+
+	// merged revisions
+
+	CDiffIntegerOutStream* mergedPathsStream 
+		= dynamic_cast<CDiffIntegerOutStream*>
+		(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_PATHS_STREAM_ID
+								  , DIFF_INTEGER_STREAM_TYPE_ID));
+	*mergedPathsStream << container.mergedPaths;
+
+	CDiffIntegerOutStream* mergedRevisionsStream 
+		= dynamic_cast<CDiffIntegerOutStream*>
+			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_REVISIONS_STREAM_ID
+								  , DIFF_INTEGER_STREAM_TYPE_ID));
+	*mergedRevisionsStream << container.mergedRevisions;
 
 	// ready
 
