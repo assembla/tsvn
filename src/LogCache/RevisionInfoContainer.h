@@ -148,6 +148,8 @@ public:
 
 	enum TChangeAction
 	{
+		HAS_COPY_FROM   = 0x01,
+
 		ACTION_ADDED	= 0x04,
 		ACTION_CHANGED	= 0x08,
 		ACTION_REPLACED	= 0x10,
@@ -214,7 +216,7 @@ public:
 		bool HasFromPath() const
 		{
 			assert (IsValid());
-			return (container->changes[changeOffset] & ~ANY_ACTION) != 0;
+			return (container->changes[changeOffset] & HAS_COPY_FROM) != 0;
 		}
 
 		CDictionaryBasedPath GetPath() const
