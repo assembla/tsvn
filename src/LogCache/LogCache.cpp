@@ -30,6 +30,7 @@
 #include "CompositeInStream.h"
 #include "CompositeOutStream.h"
 #include "HighResClock.h"
+#include "CopyFollowingLogIterator.h"
 
 using namespace LogCache;
 
@@ -57,15 +58,15 @@ void WriteStream (const std::wstring& fileName)
 void TestXMLIO()
 {
 	CCachedLogInfo logInfo (L"E:\\temp\\kde.stream");
-//	CCachedLogInfo logInfo (L"E:\\temp\\tsvntrunk.stream");
+//	CCachedLogInfo logInfo (L"E:\\temp\\tsvn.stream");
 //	logInfo.Load();
 //	logInfo.Clear();
 
 	CHighResClock clock1;
 	CXMLLogReader::LoadFromXML (L"E:\\temp\\kde.log.xml", logInfo);
+//	CXMLLogReader::LoadFromXML (L"E:\\temp\\tsvn.log.xml", logInfo);
 	clock1.Stop();
 
-//	CXMLLogReader::LoadFromXML (L"E:\\temp\\tsvntrunk.log.xml", logInfo);
 	logInfo.Save();
 	logInfo.Clear();
 
@@ -75,9 +76,8 @@ void TestXMLIO()
 
 	CHighResClock clock3;
 	CXMLLogWriter::SaveToXML (L"E:\\temp\\kde.xml.out", logInfo, true);
+//	CXMLLogWriter::SaveToXML (L"E:\\temp\\tsvn.xml.out", logInfo, true);
 	clock3.Stop();
-
-//	CXMLLogWriter::SaveToXML (L"E:\\temp\\tsvntrunk.xml.out", logInfo, true);
 
 	Sleep(5000);
 
@@ -95,12 +95,55 @@ void TestXMLIO()
 	printf (s);
 }
 
+void TestIteration()
+{
+	CCachedLogInfo logInfo (L"E:\\temp\\kde.stream");
+//	CCachedLogInfo logInfo (L"E:\\temp\\tsvn.stream");
+	logInfo.Load();
+
+	revision_t head = logInfo.GetRevisions().GetLastRevision()-1;
+
+	CHighResClock clock1;
+	CDictionaryBasedTempPath rootPath (&logInfo.GetLogInfo().GetPaths(), "");
+	CCopyFollowingLogIterator rootIterator (&logInfo, head, rootPath);
+
+	int revisionsForRoot = 0;
+	while (!rootIterator.EndOfPath())
+	{
+		++revisionsForRoot;
+		rootIterator.Advance();
+	}
+	clock1.Stop();
+
+	CHighResClock clock2;
+	CDictionaryBasedTempPath tagsPath (&logInfo.GetLogInfo().GetPaths(), "/tags");
+	CCopyFollowingLogIterator tagsIterator (&logInfo, head, tagsPath);
+	int revisionsForTags = 0;
+	while (!tagsIterator.EndOfPath())
+	{
+		++revisionsForTags;
+		tagsIterator.Advance();
+	}
+	clock2.Stop();
+
+	CStringA s;
+	s.Format ("found %d revisions on / in %5.4f secs\n"
+			  "found %d revisions on /tags in %5.4f secs\n"
+			 , revisionsForRoot
+			 , clock1.GetMusecsTaken() / 1e+06
+			 , revisionsForTags
+			 , clock2.GetMusecsTaken() / 1e+06);
+
+	printf (s);
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	WriteStream (L"C:\\temp\\test.stream");
 //	ReadStream (L"C:\\temp\\test.stream");
 
 	TestXMLIO();
+	TestIteration();
 
 	return 0;
 }
