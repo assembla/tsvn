@@ -1,24 +1,22 @@
 # Simplified Chinese translation for TortoiseSVN
-# Copyright (C) 2004-2006 the TortoiseSVN team
+# Copyright (C) 2004-2007 the TortoiseSVN team
 # This file is distributed under the same license as TortoiseSVN
 #
 # Authors:
-# Dongsheng Song <dongsheng.song@gmail.com>
+# Dongsheng Song <dongsheng.song@gmail.com>, 2006-2007
 # Xingyu.Wang <xingyu.wang@gmail.com>
 # Stan J <thinkernel@yeah.net>
-# Dictionary:
-# <DICTIONARY>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2006-10-11 21:52GMT Daylight Time\n"
-"PO-Revision-Date: 2006-12-04 20:32+0800\n"
+"PO-Revision-Date: 2007-06-20 15:52+0800\n"
 "Last-Translator: Dongsheng Song <dongsheng.song@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
 
 #: source/TortoiseMerge_en.xml:4(title)
 msgid "TortoiseMerge"
@@ -82,7 +80,7 @@ msgstr "　　TortoiseMerge 是免费的。你不需要为它支付任何费用�
 
 #: source/TortoiseMerge_en.xml:67(para)
 msgid "TortoiseMerge is an Open Source project. That means you have full access to the source code of this program. You can browse it on this link <ulink url=\"http://tortoisesvn.tigris.org/svn/tortoisesvn/\"><citetitle>http://tortoisesvn.tigris.org/svn/tortoisesvn/</citetitle></ulink>. (Username:guest, for password hit enter) The most recent version (where we're currently working) is located under <filename>/trunk/</filename> the released versions are located under <filename>/tags/</filename>."
-msgstr "TortoiseMerge 是一个开源软件项目。换言之，你可以取得它的全部源代码。你可以访问以下链接得到源代码：<ulink url=\"http://tortoisesvn.tigris.org/svn/tortoisesvn/\"><citetitle>http://tortoisesvn.tigris.org/svn/tortoisesvn/</citetitle></ulink>（用户名：guest，无密码） 。最新的版本（我们当前正在开发的）放在 <filename>/trunk/</filename> ，已发布版本放在 <filename>/tags/</filename>。"
+msgstr "　　TortoiseMerge 是一个开源软件项目。换言之，你可以取得它的全部源代码。你可以访问以下链接得到源代码：<ulink url=\"http://tortoisesvn.tigris.org/svn/tortoisesvn/\"><citetitle>http://tortoisesvn.tigris.org/svn/tortoisesvn/</citetitle></ulink>（用户名：guest，无密码） 。最新的版本（我们当前正在开发的）放在 <filename>/trunk/</filename> ，已发布版本放在 <filename>/tags/</filename>  。"
 
 #: source/TortoiseMerge_en.xml:86(title)
 msgid "Wishlist"
@@ -355,7 +353,7 @@ msgstr "<guibutton>交换左右窗口</guibutton> 在双窗口方式中，互换
 
 #: source/TortoiseMerge_en.xml:548(para)
 msgid "<guibutton>Show/Hide Patch List</guibutton> When TortoiseMerge has a patch list, this button allows you to hide it (so you can see both windows), or show it (so you can review the file list)."
-msgstr "<guibutton>显示/隐藏补丁列表</guibutton> 当 TortoiseMerge 有补丁列表时，这个按钮允许你隐藏它(于是你可以看到两个窗口)，或者显示它(于是你可以复审文件列表)。"
+msgstr "<guibutton>显示/隐藏补丁列表</guibutton> 当 TortoiseMerge 有补丁列表时，这个按钮允许你隐藏它(于是你可以看到两个窗口)，或者显示它(于是你可以复审文件列表)。 "
 
 #: source/TortoiseMerge_en.xml:556(para)
 msgid "<guibutton>Settings</guibutton> takes you to TortoiseMerge's settings dialog."
@@ -439,15 +437,15 @@ msgstr "<guilabel>为改变的代码着色</guilabel>在主窗口，使用与行
 
 #: source/TortoiseMerge_en.xml:713(para)
 msgid "<guilabel>Compare whitespaces</guilabel> shows all changes in indentation and inline whitespace as added/removed lines (which is how Subversion treats such changes)."
-msgstr "<guilabel>比较空白字符</guilabel> 将显示所有缩进变化，和行内空白字符的变化按照添加/删除的行显示（即 Subversion 处理变化的方式）。"
+msgstr "　　<guilabel>比较空白字符</guilabel> 将全部缩进变化，或行内空白字符的变化按照添加/删除的行显示（即 Subversion 处理变化的方式）。"
 
 #: source/TortoiseMerge_en.xml:718(para)
 msgid "<guilabel>Ignore whitespace changes</guilabel> hides changes which are due solely to a change in the amount or type of whitespace, eg. changing the indentation or changing tabs to spaces. Adding whitespace where there was none before, or removing a whitespace completely is still shown as a change."
-msgstr "<guilabel>忽略空白字符变化</guilabel> 隐藏仅仅只是空白字符数量和类型的变化。例如，缩进，制表符变成了空格。在以前没有空白字符的地方增加空白字符，或者完全删除空白字符，仍旧视为变化。"
+msgstr "　　<guilabel>忽略空白字符变化</guilabel> 隐藏仅仅只是空白字符数量和类型的变化。例如，缩进，制表符变成了空格。在以前没有空白字符的地方增加空白字符，或者完全删除空白字符，仍旧视为变化。"
 
 #: source/TortoiseMerge_en.xml:726(para)
 msgid "<guilabel>Ignore all whitespaces</guilabel> hides all whitespace-only changes."
-msgstr "<guilabel>忽略全部空白字符</guilabel> 隐藏所有空白字符的变化。"
+msgstr "　　<guilabel>忽略全部空白字符</guilabel> 隐藏所有空白字符的变化。"
 
 #: source/TortoiseMerge_en.xml:732(title)
 msgid "Colour Settings Page"
@@ -1082,12 +1080,5 @@ msgstr ""
 msgid "translator-translation"
 msgstr "译者"
 
-#~ msgid ""
-#~ "<guilabel>Ignore Leading Whitespaces</guilabel> hides changes which are "
-#~ "due solely to leading whitespace (indentation). Other whitespace changes "
-#~ "within a line are shown <quote>inline</quote> rather than as added/"
-#~ "removed lines."
-#~ msgstr ""
-#~ "　　<guilabel>忽略行首空白字符</guilabel> 隐藏行首空格的改变（缩进）。其它"
-#~ "的行内空白字符的改变以<quote>内联</quote>方式显示，而不视做添加/删除的行。"
-
+#~ msgid "<guilabel>Ignore Leading Whitespaces</guilabel> hides changes which are due solely to leading whitespace (indentation). Other whitespace changes within a line are shown <quote>inline</quote> rather than as added/removed lines."
+#~ msgstr "　　<guilabel>忽略行首空白字符</guilabel> 隐藏行首空格的改变（缩进）。其它的行内空白字符的改变以<quote>内联</quote>方式显示，而不视做添加/删除的行。"
