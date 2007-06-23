@@ -34,6 +34,9 @@
 
 using namespace LogCache;
 
+//std::wstring path = L"E:\\temp\\tsvn";
+std::wstring path = L"E:\\temp\\kde";
+
 void ReadStream (const std::wstring& fileName)
 {
 	CRootInStream stream (fileName);
@@ -57,14 +60,10 @@ void WriteStream (const std::wstring& fileName)
 
 void TestXMLIO()
 {
-	CCachedLogInfo logInfo (L"E:\\temp\\kde.stream");
-//	CCachedLogInfo logInfo (L"E:\\temp\\tsvn.stream");
-//	logInfo.Load();
-//	logInfo.Clear();
+	CCachedLogInfo logInfo (path + L".stream");
 
 	CHighResClock clock1;
-	CXMLLogReader::LoadFromXML (L"E:\\temp\\kde.log.xml", logInfo);
-//	CXMLLogReader::LoadFromXML (L"E:\\temp\\tsvn.log.xml", logInfo);
+	CXMLLogReader::LoadFromXML (path + L".log.xml", logInfo);
 	clock1.Stop();
 
 	logInfo.Save();
@@ -75,8 +74,7 @@ void TestXMLIO()
 	clock2.Stop();
 
 	CHighResClock clock3;
-	CXMLLogWriter::SaveToXML (L"E:\\temp\\kde.xml.out", logInfo, true);
-//	CXMLLogWriter::SaveToXML (L"E:\\temp\\tsvn.xml.out", logInfo, true);
+	CXMLLogWriter::SaveToXML (path + L".xml.out", logInfo, true);
 	clock3.Stop();
 
 	Sleep(5000);
@@ -97,8 +95,7 @@ void TestXMLIO()
 
 void TestIteration()
 {
-	CCachedLogInfo logInfo (L"E:\\temp\\kde.stream");
-//	CCachedLogInfo logInfo (L"E:\\temp\\tsvn.stream");
+	CCachedLogInfo logInfo (path + L".stream");
 	logInfo.Load();
 
 	revision_t head = logInfo.GetRevisions().GetLastRevision()-1;
@@ -137,13 +134,46 @@ void TestIteration()
 	printf (s);
 }
 
+void TestUpdate()
+{
+	CCachedLogInfo logInfo (path + L".stream");
+	logInfo.Load();
+
+	CCachedLogInfo copied (path + L".stream");
+	copied.Load();
+
+	CCachedLogInfo newData (path + L".dummy.stream");
+	newData.Insert (1234, "dummy", "", 0);
+
+	CHighResClock clock1;
+	logInfo.Update (copied, true, true, true, true, true);
+	clock1.Stop();
+
+	CHighResClock clock2;
+	logInfo.Update (newData, true, true, true, true, true);
+	clock2.Stop();
+
+	CHighResClock clock3;
+	logInfo.Update (newData, true, false, false, false, false);
+	clock3.Stop();
+
+	CStringA s;
+	s.Format ("updated all %d revisions in %5.4f secs\n"
+			  "updated a single revision in %5.4f secs\n"
+			  "updated an author in %5.4f secs\n"
+			 , copied.GetLogInfo().size()
+			 , clock1.GetMusecsTaken() / 1e+06
+			 , clock2.GetMusecsTaken() / 1e+06
+			 , clock3.GetMusecsTaken() / 1e+06);
+
+	printf (s);
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-	WriteStream (L"C:\\temp\\test.stream");
-//	ReadStream (L"C:\\temp\\test.stream");
-
 	TestXMLIO();
 	TestIteration();
+	TestUpdate();
 
 	return 0;
 }
