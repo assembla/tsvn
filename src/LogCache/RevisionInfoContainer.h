@@ -166,12 +166,15 @@ private:
 						, const index_mapping_t& indexMap);
 
 	void UpdateChanges ( const CRevisionInfoContainer& newData
-					   , const index_mapping_t& indexMap);
+					   , const index_mapping_t& indexMap
+					   , const index_mapping_t& pathIDMapping);
 	void UpdateMergers ( const CRevisionInfoContainer& newData
-					   , const index_mapping_t& indexMap);
+					   , const index_mapping_t& indexMap
+					   , const index_mapping_t& pathIDMapping);
 
 	void Append ( const CRevisionInfoContainer& newData
-				, const index_mapping_t& indexMap);
+				, const index_mapping_t& indexMap
+			    , const index_mapping_t& pathIDMapping);
 
 public:
 

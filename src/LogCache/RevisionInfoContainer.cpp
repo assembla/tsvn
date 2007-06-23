@@ -86,12 +86,9 @@ void CRevisionInfoContainer::UpdateComments
 
 void CRevisionInfoContainer::UpdateChanges 
 	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap)
+	, const index_mapping_t& indexMap
+	, const index_mapping_t& pathIDMapping)
 {
-	// make new paths available
-
-	index_mapping_t idMapping = paths.Merge (newData.paths);
-
 	// save & remove old data
 
 	std::vector<unsigned char> oldChanges;
@@ -130,7 +127,7 @@ void CRevisionInfoContainer::UpdateChanges
 				; ++k)
 			{
 				changes.push_back (newData.changes[k]);
-				changedPaths.push_back (*idMapping.find (newData.changedPaths[k]));
+				changedPaths.push_back (*pathIDMapping.find (newData.changedPaths[k]));
 			}
 
 			for ( index_t k = newData.copyFromOffsets [sourceIndex]
@@ -139,7 +136,7 @@ void CRevisionInfoContainer::UpdateChanges
 				; ++k)
 			{
 				copyFromRevisions.push_back (newData.copyFromRevisions[k]);
-				copyFromPaths.push_back (*idMapping.find (newData.copyFromPaths[k]));
+				copyFromPaths.push_back (*pathIDMapping.find (newData.copyFromPaths[k]));
 			}
 		}
 		else
@@ -184,12 +181,9 @@ void CRevisionInfoContainer::UpdateChanges
 
 void CRevisionInfoContainer::UpdateMergers 
 	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap)
+	, const index_mapping_t& indexMap
+	, const index_mapping_t& pathIDMapping)
 {
-	// make new paths available
-
-	index_mapping_t idMapping = paths.Merge (newData.paths);
-
 	// save & remove old data
 
 	std::vector<index_t> oldMergedFromPaths;
@@ -226,8 +220,8 @@ void CRevisionInfoContainer::UpdateMergers
 				; k != last
 				; ++k)
 			{
-				mergedFromPaths.push_back (*idMapping.find (newData.mergedFromPaths[k]));
-				mergedToPaths.push_back (*idMapping.find (newData.mergedToPaths[k]));
+				mergedFromPaths.push_back (*pathIDMapping.find (newData.mergedFromPaths[k]));
+				mergedToPaths.push_back (*pathIDMapping.find (newData.mergedToPaths[k]));
 
 				mergedRangeStarts.push_back (newData.mergedRangeStarts[k]);
 				mergedRangeDeltas.push_back (newData.mergedRangeDeltas[k]);
@@ -262,20 +256,18 @@ void CRevisionInfoContainer::UpdateMergers
 
 void CRevisionInfoContainer::Append 
 	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap)
+	, const index_mapping_t& indexMap
+	, const index_mapping_t& pathIDMapping)
 {
-	// make new paths available
-
-	index_mapping_t idMapping = paths.Merge (newData.paths);
-
 	// append new entries
 
+	size_t oldCount = size();
 	for ( index_mapping_t::const_iterator iter = indexMap.begin()
 		, end = indexMap.end()
 		; iter != end
 		; ++iter)
 	{
-		if (iter->key < size())
+		if (iter->key < oldCount)
 			continue;
 
 		index_t i = iter->value;
@@ -287,7 +279,7 @@ void CRevisionInfoContainer::Append
 			; k != last
 			; ++k)
 		{
-			changedPaths.push_back (*idMapping.find (newData.changedPaths[k]));
+			changedPaths.push_back (*pathIDMapping.find (newData.changedPaths[k]));
 			changes.push_back (newData.changes[k]);
 		}
 
@@ -300,7 +292,7 @@ void CRevisionInfoContainer::Append
 			; k != last
 			; ++k)
 		{
-			copyFromPaths.push_back (*idMapping.find (newData.copyFromPaths[k]));
+			copyFromPaths.push_back (*pathIDMapping.find (newData.copyFromPaths[k]));
 			copyFromRevisions.push_back (newData.copyFromRevisions[k]);
 		}
 
@@ -313,8 +305,8 @@ void CRevisionInfoContainer::Append
 			; k != last
 			; ++k)
 		{
-			mergedFromPaths.push_back (*idMapping.find (newData.mergedFromPaths[k]));
-			mergedToPaths.push_back (*idMapping.find (newData.mergedToPaths[k]));
+			mergedFromPaths.push_back (*pathIDMapping.find (newData.mergedFromPaths[k]));
+			mergedToPaths.push_back (*pathIDMapping.find (newData.mergedToPaths[k]));
 
 			mergedRangeStarts.push_back (newData.mergedRangeStarts[k]);
 			mergedRangeDeltas.push_back (newData.mergedRangeDeltas[k]);
@@ -485,6 +477,10 @@ void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
 									, bool updateChanges
 									, bool updateMergers)
 {
+	// make new paths available
+
+	index_mapping_t pathIDMapping = paths.Merge (newData.paths);
+
 	// replace exising data
 
 	if (updateAuthors)
@@ -495,13 +491,13 @@ void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
 		UpdateComments (newData, indexMap);
 
 	if (updateChanges)
-		UpdateChanges (newData, indexMap);
+		UpdateChanges (newData, indexMap, pathIDMapping);
 	if (updateMergers)
-		UpdateMergers (newData, indexMap);
+		UpdateMergers (newData, indexMap, pathIDMapping);
 
 	// append remaining data
 
-	Append (newData, indexMap);
+	Append (newData, indexMap, pathIDMapping);
 }
 
 // stream I/O
