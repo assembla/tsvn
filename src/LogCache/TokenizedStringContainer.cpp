@@ -544,13 +544,14 @@ void CTokenizedStringContainer::Remove (const std::vector<index_t>& indexes)
 void CTokenizedStringContainer::Replace ( const CTokenizedStringContainer& source
 										, const std::vector<index_t>& indexes)
 {
-	assert (indexes.size() == source.size());
+	assert (indexes.size() <= source.size());
 
 	// we will fully rebuild the string token buffer
 	// -> save the old one and replace it with an empty buffer
 
 	std::vector<index_t> oldData;
 	oldData.swap (stringData);
+	stringData.reserve (oldData.size() + source.stringData.size());
 
 	IT oldFirst = oldData.begin();
 
@@ -558,6 +559,7 @@ void CTokenizedStringContainer::Replace ( const CTokenizedStringContainer& sourc
 
 	index_t k = 0;
 	index_t indexCount = static_cast<index_t>(indexes.size());
+	index_t oldOffset = offsets[0];
 
 	for (index_t i = 0, count = (index_t)offsets.size()-1; i < count; ++i)
 	{
@@ -572,13 +574,14 @@ void CTokenizedStringContainer::Replace ( const CTokenizedStringContainer& sourc
 		{
 			// copy string tokens
 
-			std::copy ( oldFirst + offsets[i]
-				      , oldFirst + offsets[i+1]
-					  , stringData.end());
+			stringData.insert ( stringData.end()
+							  , oldFirst + oldOffset
+							  , oldFirst + offsets[i+1]);
 		}
 
 		// update (end-)offset
 
+		oldOffset = offsets[i+1];
 		offsets[i+1] = static_cast<index_t>(stringData.size());
 	}
 

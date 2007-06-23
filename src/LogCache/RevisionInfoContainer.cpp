@@ -31,6 +31,264 @@
 namespace LogCache
 {
 
+// update / modify utilities
+
+void CRevisionInfoContainer::UpdateAuthors 
+	( const CRevisionInfoContainer& newData
+	, const std::vector<index_t>& indexes
+	, index_t count)
+{
+	index_mapping_t idMapping = authorPool.Merge (newData.authorPool);
+	for (index_t i = 0; i < count; ++i)
+		authors[indexes[i]] = *idMapping.find (newData.authors[i]);
+}
+
+void CRevisionInfoContainer::UpdateTimeStamps 
+	( const CRevisionInfoContainer& newData
+	, const std::vector<index_t>& indexes
+	, index_t count)
+{
+	for (index_t i = 0; i < count; ++i)
+		timeStamps[indexes[i]] = newData.timeStamps[i];
+}
+
+void CRevisionInfoContainer::UpdateComments 
+	( const CRevisionInfoContainer& newData
+	, const std::vector<index_t>& indexes
+	, index_t count)
+{
+	std::vector<index_t> toReplace (indexes.begin(), indexes.begin() + count);
+	comments.Replace (newData.comments, toReplace);
+}
+
+void CRevisionInfoContainer::UpdateChanges 
+	( const CRevisionInfoContainer& newData
+	, const std::vector<index_t>& indexes
+	, index_t count)
+{
+	// make new paths available
+
+	index_mapping_t idMapping = paths.Merge (newData.paths);
+
+	// save & remove old data
+
+	std::vector<unsigned char> oldChanges;
+	changes.swap (oldChanges);
+	changes.reserve (oldChanges.size());
+
+	std::vector<index_t> oldChangedPaths;
+	changedPaths.swap (oldChangedPaths);
+	changedPaths.reserve (oldChangedPaths.size());
+
+	std::vector<index_t> oldCopyFromPaths;
+	copyFromPaths.swap (oldCopyFromPaths);
+	copyFromPaths.reserve (oldCopyFromPaths.size());
+
+	std::vector<revision_t> oldCopyFromRevisions;
+	copyFromRevisions.swap (oldCopyFromRevisions);
+	copyFromRevisions.reserve (oldCopyFromRevisions.size());
+
+	// splice
+
+	index_t firstChange = changesOffsets[0];
+	index_t firstCopy = copyFromOffsets[0];
+
+	size_t k = 0;
+	for (index_t i = 0, count = size(); i < count; ++i)
+	{
+		if ((k < count) && (indexes[k] == i))
+		{
+			// copy & translate
+
+			for ( index_t m = newData.changesOffsets[k]
+				, last = newData.changesOffsets[k+1]
+				; m != last
+				; ++m)
+			{
+				changes.push_back (newData.changes[m]);
+				changedPaths.push_back (*idMapping.find (newData.changedPaths[m]));
+			}
+
+			for ( index_t m = newData.copyFromOffsets[k]
+				, last = newData.copyFromOffsets[k+1]
+				; m != last
+				; ++m)
+			{
+				copyFromRevisions.push_back (newData.copyFromRevisions[m]);
+				copyFromPaths.push_back (*idMapping.find (newData.copyFromPaths[m]));
+			}
+		}
+		else
+		{
+			// keep exisiting data
+
+			// standard per-path info
+
+			index_t lastChange = changesOffsets[i+1];
+
+			changes.insert ( changes.end()
+						   , oldChanges.begin() + firstChange
+						   , oldChanges.begin() + lastChange);
+			changedPaths.insert ( changedPaths.end()
+								, oldChangedPaths.begin() + firstChange
+								, oldChangedPaths.begin() + lastChange);
+
+			// copy-from info, if available
+
+			index_t lastCopy = copyFromOffsets[i+1];
+
+			if (firstCopy != lastCopy)
+			{
+				copyFromPaths.insert ( copyFromPaths.end()
+								     , oldCopyFromPaths.begin() + firstCopy
+								     , oldCopyFromPaths.begin() + lastCopy);
+				copyFromRevisions.insert ( copyFromRevisions.end()
+										 , oldCopyFromRevisions.begin() + firstCopy
+										 , oldCopyFromRevisions.begin() + lastCopy);
+			}
+		}
+
+		// update positions
+
+		firstChange = changesOffsets[i+1];
+		firstCopy = copyFromOffsets[i+1];
+
+		changesOffsets[i+1] = static_cast<index_t>(changes.size());
+		copyFromOffsets[i+1] = static_cast<index_t>(copyFromPaths.size());
+	}
+}
+
+void CRevisionInfoContainer::UpdateMergers 
+	( const CRevisionInfoContainer& newData
+	, const std::vector<index_t>& indexes
+	, index_t count)
+{
+	// make new paths available
+
+	index_mapping_t idMapping = paths.Merge (newData.paths);
+
+	// save & remove old data
+
+	std::vector<index_t> oldMergedFromPaths;
+	mergedFromPaths.swap (oldMergedFromPaths);
+	mergedFromPaths.reserve (oldMergedFromPaths.size());
+
+	std::vector<index_t> oldMergedToPaths;
+	mergedToPaths.swap (oldMergedToPaths);
+	mergedToPaths.reserve (oldMergedToPaths.size());
+
+	std::vector<revision_t> oldMergedRangeStarts;
+	mergedRangeStarts.swap (oldMergedRangeStarts);
+	mergedRangeStarts.reserve (oldMergedRangeStarts.size());
+
+	std::vector<revision_t> oldMergedRangeDeltas;
+	mergedRangeDeltas.swap (oldMergedRangeDeltas);
+	mergedRangeDeltas.reserve (oldMergedRangeDeltas.size());
+
+	// splice
+
+	index_t firstMerge = mergedRevisionsOffsets[0];
+
+	size_t k = 0;
+	for (index_t i = 0, count = size(); i < count; ++i)
+	{
+		if ((k < count) && (indexes[k] == i))
+		{
+			// copy & translate
+
+			for ( index_t m = newData.mergedRevisionsOffsets[k]
+				, last = newData.mergedRevisionsOffsets[k+1]
+				; m != last
+				; ++m)
+			{
+				mergedFromPaths.push_back (*idMapping.find (newData.mergedFromPaths[m]));
+				mergedToPaths.push_back (*idMapping.find (newData.mergedToPaths[m]));
+
+				mergedRangeStarts.push_back (newData.mergedRangeStarts[m]);
+				mergedRangeDeltas.push_back (newData.mergedRangeDeltas[m]);
+			}
+		}
+		else
+		{
+			// keep exisiting data
+
+			index_t lastMerge = changesOffsets[i+1];
+
+			mergedFromPaths.insert ( mergedFromPaths.end()
+								   , oldMergedFromPaths.begin() + firstMerge
+								   , oldMergedFromPaths.begin() + lastMerge);
+			mergedToPaths.insert ( mergedToPaths.end()
+								 , oldMergedToPaths.begin() + firstMerge
+								 , oldMergedToPaths.begin() + lastMerge);
+			mergedRangeStarts.insert ( mergedRangeStarts.end()
+									 , oldMergedRangeStarts.begin() + firstMerge
+									 , oldMergedRangeStarts.begin() + lastMerge);
+			mergedRangeDeltas.insert ( mergedRangeDeltas.end()
+									 , oldMergedRangeDeltas.begin() + firstMerge
+									 , oldMergedRangeDeltas.begin() + lastMerge);
+		}
+
+		// update positions
+
+		firstMerge = mergedRevisionsOffsets[i+1];
+		mergedRevisionsOffsets[i+1] = static_cast<index_t>(mergedFromPaths.size());
+	}
+}
+
+void CRevisionInfoContainer::Append 
+	( const CRevisionInfoContainer& newData
+	, index_t startIndex)
+{
+	// make new paths available
+
+	index_mapping_t idMapping = paths.Merge (newData.paths);
+
+	for (index_t i = startIndex, count = newData.size(); i < count; ++i)
+	{
+		// copy & translate change info
+
+		for ( index_t k = newData.changesOffsets[i]
+			, last = newData.changesOffsets[i+1]
+			; k != last
+			; ++k)
+		{
+			changedPaths.push_back (*idMapping.find (newData.changedPaths[k]));
+			changes.push_back (newData.changes[k]);
+		}
+
+		changesOffsets.push_back ((index_t)changes.size());
+
+		// copy & translate copy-from info
+
+		for ( index_t k = newData.copyFromOffsets[i]
+			, last = newData.copyFromOffsets[i+1]
+			; k != last
+			; ++k)
+		{
+			copyFromPaths.push_back (*idMapping.find (newData.copyFromPaths[k]));
+			copyFromRevisions.push_back (newData.copyFromRevisions[k]);
+		}
+
+		copyFromOffsets.push_back ((index_t)copyFromPaths.size());
+
+		// copy & translate merge info
+
+		for ( index_t k = newData.mergedRevisionsOffsets[i]
+			, last = newData.mergedRevisionsOffsets[i+1]
+			; k != last
+			; ++k)
+		{
+			mergedFromPaths.push_back (*idMapping.find (newData.mergedFromPaths[k]));
+			mergedToPaths.push_back (*idMapping.find (newData.mergedToPaths[k]));
+
+			mergedRangeStarts.push_back (newData.mergedRangeStarts[k]);
+			mergedRangeDeltas.push_back (newData.mergedRangeDeltas[k]);
+		}
+
+		mergedRevisionsOffsets.push_back ((index_t)mergedFromPaths.size());
+	}
+}
+
 // construction / destruction
 
 CRevisionInfoContainer::CRevisionInfoContainer(void)
@@ -177,6 +435,56 @@ void CRevisionInfoContainer::Clear()
 	mergedToPaths.clear();
 	mergedRangeStarts.clear();
 	mergedRangeDeltas.clear();
+}
+
+// update / modify existing data
+// indexes must be in ascending order
+// indexes[] may be size() -> results in an Append()
+
+void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
+									, const std::vector<index_t>& indexes
+									, bool updateAuthors
+									, bool updateTimeStamps
+									, bool updateComments
+									, bool updateChanges
+									, bool updateMergers)
+{
+	// how many entries have to be replaced?
+
+	index_t existing = 0;
+	while ((existing < indexes.size()) && (indexes[existing] < size()))
+		++existing;
+
+	// replace exising data
+
+	if (existing > 0)
+	{
+		if (updateAuthors)
+			UpdateAuthors (newData, indexes, existing);
+		if (updateTimeStamps)
+			UpdateTimeStamps (newData, indexes, existing);
+		if (updateComments)
+			UpdateComments (newData, indexes, existing);
+
+		if (updateChanges)
+			UpdateChanges (newData, indexes, existing);
+		if (updateMergers)
+			UpdateMergers (newData, indexes, existing);
+	}
+
+	// append remaining data
+
+	if (existing < indexes.size())
+	{
+		// we require all data to be valid
+
+		assert (   updateAuthors && updateTimeStamps && updateComments 
+			    && updateChanges && updateMergers);
+
+		// add the data starting at the first non-merged source entry
+
+		Append (newData, existing);
+	}
 }
 
 // stream I/O

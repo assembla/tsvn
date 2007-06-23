@@ -156,6 +156,28 @@ private:
 
 	void CheckIndex (index_t index) const;
 
+	// update / modify utilities
+
+	void UpdateAuthors ( const CRevisionInfoContainer& newData
+					   , const std::vector<index_t>& indexes
+					   , index_t count);
+	void UpdateTimeStamps ( const CRevisionInfoContainer& newData
+						  , const std::vector<index_t>& indexes
+						  , index_t count);
+	void UpdateComments ( const CRevisionInfoContainer& newData
+						, const std::vector<index_t>& indexes
+						, index_t count);
+
+	void UpdateChanges ( const CRevisionInfoContainer& newData
+					   , const std::vector<index_t>& indexes
+					   , index_t count);
+	void UpdateMergers ( const CRevisionInfoContainer& newData
+					   , const std::vector<index_t>& indexes
+					   , index_t count);
+
+	void Append ( const CRevisionInfoContainer& newData
+				, index_t startIndex);
+
 public:
 
 	///////////////////////////////////////////////////////////////
@@ -355,6 +377,18 @@ public:
 	const CStringDictionary& GetAuthors() const;
 	const CPathDictionary& GetPaths() const;
 	const CTokenizedStringContainer& GetComments() const;
+
+	// update / modify existing data
+	// indexes must be in ascending order
+	// indexes[] may be size() -> results in an Append()
+
+	void Update ( const CRevisionInfoContainer& newData
+				, const std::vector<index_t>& indexes
+				, bool updateAuthors
+				, bool updateTimeStamps
+				, bool updateComments
+				, bool updateChanges
+				, bool updateMergers);
 
 	// stream I/O
 
