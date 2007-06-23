@@ -127,6 +127,15 @@ public:
 					  , revision_t count);
 
 	void Clear();
+
+	// update / modify existing data
+
+	void Update ( const CCachedLogInfo& newData
+				, bool updateAuthors
+				, bool updateTimeStamps
+				, bool updateComments
+				, bool updateChanges
+				, bool updateMergers);
 };
 
 ///////////////////////////////////////////////////////////////
