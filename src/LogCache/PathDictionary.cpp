@@ -112,9 +112,10 @@ void CPathDictionary::Clear()
 index_mapping_t CPathDictionary::Merge (const CPathDictionary& source)
 {
 	index_mapping_t result;
+	result.insert (0, 0);
 
 	index_mapping_t elementMapping = pathElements.Merge (source.pathElements);
-	for (index_t i = 0, count = source.size(); i < count; ++i)
+	for (index_t i = 1, count = source.size(); i < count; ++i)
 	{
 		const std::pair<index_t, index_t>& sourcePath = source.paths[i];
 
