@@ -135,6 +135,8 @@ public:
     private:
 
         typedef typename quick_hash_map<K,V>::data_type::const_iterator iterator;
+        typedef typename quick_hash_map<K,V>::element_type value_type;
+
         iterator iter;
 
     public:
@@ -153,9 +155,9 @@ public:
 			return iter->value;
 		}
 
-        const const_iterator* operator->() const
+        const value_type* operator->() const
 		{
-			return this;
+			return &*iter;
 		}
 
         // comparison
