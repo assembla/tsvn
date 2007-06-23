@@ -124,9 +124,13 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
 	}
 }
 
-void CRevisionInfoContainer::AddMergedRevision ( const std::string& path
-									           , revision_t revision)
+void CRevisionInfoContainer::AddMergedRevision ( const std::string& fromPath
+											   , const std::string& toPath
+											   , revision_t revisionStart
+											   , revision_t revisionDelta)
 {
+	assert (revisionDelta != 0);
+
 	// under x64, there might actually be an overflow
 
 	if (changes.size() == NO_INDEX)
@@ -136,11 +140,15 @@ void CRevisionInfoContainer::AddMergedRevision ( const std::string& path
 
 	++(*mergedRevisionsOffsets.rbegin());
 
-	// add merged revision and path index
+	// add merged revision range and path info
 
-	CDictionaryBasedPath parsedPath (&paths, path, false);
-	mergedPaths.push_back (parsedPath.GetIndex());
-	mergedRevisions.push_back (revision);
+	CDictionaryBasedPath parsedFromPath (&paths, fromPath, false);
+	mergedFromPaths.push_back (parsedFromPath.GetIndex());
+	CDictionaryBasedPath parsedToPath (&paths, toPath, false);
+	mergedToPaths.push_back (parsedToPath.GetIndex());
+
+	mergedRangeStarts.push_back (revisionStart);
+	mergedRangeDeltas.push_back (revisionDelta);
 }
 
 // reset content
@@ -165,8 +173,10 @@ void CRevisionInfoContainer::Clear()
 	copyFromPaths.clear();
 	copyFromRevisions.clear();
 
-	mergedPaths.clear();
-	mergedRevisions.clear();
+	mergedFromPaths.clear();
+	mergedToPaths.clear();
+	mergedRangeStarts.clear();
+	mergedRangeDeltas.clear();
 }
 
 // stream I/O
@@ -244,15 +254,25 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 
 	// merged revisions
 
-	CDiffIntegerInStream* mergedPathsStream 
+	CDiffIntegerInStream* mergedFromPathsStream 
 		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::MERGED_PATHS_STREAM_ID));
-	*mergedPathsStream >> container.mergedPaths;
+			(stream.GetSubStream (CRevisionInfoContainer::MERGED_FROM_PATHS_STREAM_ID));
+	*mergedFromPathsStream >> container.mergedFromPaths;
 
-	CDiffIntegerInStream* mergedRevisionsStream 
+	CDiffIntegerInStream* mergedToPathsStream 
 		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::MERGED_REVISIONS_STREAM_ID));
-	*mergedRevisionsStream >> container.mergedRevisions;
+			(stream.GetSubStream (CRevisionInfoContainer::MERGED_TO_PATHS_STREAM_ID));
+	*mergedToPathsStream >> container.mergedToPaths;
+
+	CDiffIntegerInStream* mergedRangeStartsStream 
+		= dynamic_cast<CDiffIntegerInStream*>
+			(stream.GetSubStream (CRevisionInfoContainer::MERGED_RANGE_STARTS_STREAM_ID));
+	*mergedRangeStartsStream >> container.mergedRangeStarts;
+
+	CDiffIntegerInStream* mergedRangeDeltasStream
+		= dynamic_cast<CDiffIntegerInStream*>
+			(stream.GetSubStream (CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID));
+	*mergedRangeDeltasStream >> container.mergedRangeDeltas;
 
 	// ready
 
@@ -345,17 +365,29 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 
 	// merged revisions
 
-	CDiffIntegerOutStream* mergedPathsStream 
+	CDiffIntegerOutStream* mergedFromPathsStream 
 		= dynamic_cast<CDiffIntegerOutStream*>
-		(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_PATHS_STREAM_ID
+			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_FROM_PATHS_STREAM_ID
 								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*mergedPathsStream << container.mergedPaths;
+	*mergedFromPathsStream << container.mergedFromPaths;
 
-	CDiffIntegerOutStream* mergedRevisionsStream 
+	CDiffIntegerOutStream* mergedToPathsStream 
 		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_REVISIONS_STREAM_ID
+			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_TO_PATHS_STREAM_ID
 								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*mergedRevisionsStream << container.mergedRevisions;
+	*mergedToPathsStream << container.mergedToPaths;
+
+	CDiffIntegerOutStream* mergedRangeStartsStream 
+		= dynamic_cast<CDiffIntegerOutStream*>
+			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_RANGE_STARTS_STREAM_ID
+								  , DIFF_INTEGER_STREAM_TYPE_ID));
+	*mergedRangeStartsStream << container.mergedRangeStarts;
+
+	CDiffIntegerOutStream* mergedRangeDeltasStream 
+		= dynamic_cast<CDiffIntegerOutStream*>
+			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID
+								  , DIFF_INTEGER_STREAM_TYPE_ID));
+	*mergedRangeDeltasStream << container.mergedRangeDeltas;
 
 	// ready
 

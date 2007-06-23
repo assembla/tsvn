@@ -67,9 +67,11 @@ namespace LogCache
 //			  and copyFromRevisions 
 //
 //			* mergedRevisionsOffsets[index] .. mergedRevisionsOffsets[index+1]-1
-//			  is the range within mergedPaths and mergedRevisions
-//			  that contains all revision that got directly
-//			  merged into this one.
+//			  is the range within mergedFromPaths, mergedToPaths,
+//			  mergedRangeStarts and mergedRangeDeltas that 
+//			  contains the info of all merges done in this
+//			  revision.	Negative mergedRangeDeltas[] denote
+//			  an "undone" merge.
 //
 //		changes contains the TChangeAction values. If a non-
 //		empty fromPath has been passed to AddChange(), "1" is
@@ -120,9 +122,12 @@ private:
 	std::vector<revision_t> copyFromRevisions;
 
 	// merged revisions info
+	// (mergedRangeDeltas[] < 0 -> "undo merge")
 
-	std::vector<index_t> mergedPaths;
-	std::vector<revision_t> mergedRevisions;
+	std::vector<index_t> mergedFromPaths;
+	std::vector<index_t> mergedToPaths;
+	std::vector<revision_t> mergedRangeStarts;
+	std::vector<revision_t> mergedRangeDeltas;
 
 	// sub-stream IDs
 
@@ -141,8 +146,10 @@ private:
 		COPYFROM_PATHS_STREAM_ID = 11,
 		COPYFROM_REVISIONS_STREAM_ID = 12,
 		MERGEDREVISION_OFFSETS_STREAM_ID = 13,
-		MERGED_PATHS_STREAM_ID = 14,
-		MERGED_REVISIONS_STREAM_ID = 15
+		MERGED_FROM_PATHS_STREAM_ID = 14,
+		MERGED_TO_PATHS_STREAM_ID = 15,
+		MERGED_RANGE_STARTS_STREAM_ID = 16,
+		MERGED_RANGE_DELTAS_STREAM_ID = 17
 	};
 
 	// index checking utility
@@ -312,7 +319,7 @@ public:
 	//
 	//		a very simplistic forward iterator class.
 	//		It will be used to provide a convenient
-	//		interface to a revision's merged revision list.
+	//		interface to a revision's merged revision info.
 	//
 	///////////////////////////////////////////////////////////////
 
@@ -347,15 +354,26 @@ public:
 
 		// data access
 
-		CDictionaryBasedPath GetPath() const
+		CDictionaryBasedPath GetFromPath() const
 		{
-			index_t pathID = container->mergedPaths [offset];
+			index_t pathID = container->mergedFromPaths [offset];
 			return CDictionaryBasedPath (&container->paths, pathID);
 		}
 
-		revision_t GetRevision() const
+		CDictionaryBasedPath GetToPath() const
 		{
-			return container->mergedRevisions [offset];
+			index_t pathID = container->mergedToPaths [offset];
+			return CDictionaryBasedPath (&container->paths, pathID);
+		}
+
+		revision_t GetRangeStart() const
+		{
+			return container->mergedRangeStarts [offset];
+		}
+
+		revision_t GetRangeDelta() const
+		{
+			return container->mergedRangeDeltas [offset];
 		}
 
 		// general status (points to an action)
@@ -363,7 +381,7 @@ public:
 		bool IsValid() const
 		{
 			return (container != NULL)
-				&& (offset < (index_t)container->mergedRevisions.size());
+				&& (offset < (index_t)container->mergedFromPaths.size());
 		}
 
 		// move pointer
@@ -420,8 +438,10 @@ public:
 				   , const std::string& fromPath
 				   , revision_t fromRevision);
 
-	void AddMergedRevision ( const std::string& path
-				           , revision_t revision);
+	void AddMergedRevision ( const std::string& fromPath
+				           , const std::string& toPath
+				           , revision_t revisionStart
+				           , revision_t revisionDelta);
 
 	// reset content
 
