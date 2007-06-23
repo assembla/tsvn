@@ -155,7 +155,12 @@ private:
 
 	friend class CPairPacker;
 
+	// useful typedefs
+
 	typedef std::vector<index_t>::const_iterator TSDIterator;
+
+	typedef std::vector<index_t>::iterator IT;
+	typedef std::vector<index_t>::const_iterator CIT;
 
 	// the token contents: words and pairs
 
@@ -224,6 +229,10 @@ private:
 	void Append (index_t token);
 	void Append (const std::string& s);
 
+	// range check
+
+	void CheckIndex (index_t index) const;
+
 public:
 
 	// construction / destruction
@@ -243,12 +252,24 @@ public:
 	// modification
 
 	index_t Insert (const std::string& s);
+	void Remove (index_t index);
+
 	void Compress();
 	void AutoCompress();
 
 	// reset content
 
 	void Clear();
+
+	// batch modifications
+	// indexes must be in ascending order
+
+	// Replace() will append new entries, 
+	// if indexes[] matches current size().
+
+	void Remove (const std::vector<index_t>& indexes);
+	void Replace ( const CTokenizedStringContainer& source
+				 , const std::vector<index_t>& indexes);
 
 	// stream I/O
 

@@ -100,6 +100,11 @@ public:
 
 	void Clear();
 
+	// "merge" with another container:
+	// add new entries and return ID mapping for source container
+
+	index_mapping_t Merge (const CPathDictionary& source);
+
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

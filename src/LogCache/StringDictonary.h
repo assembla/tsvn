@@ -22,7 +22,7 @@
 // necessary includes
 ///////////////////////////////////////////////////////////////
 
-#include "QuickHash.h"
+#include "QuickHashMap.h"
 #include "LogCacheGlobals.h"
 
 ///////////////////////////////////////////////////////////////
@@ -38,6 +38,12 @@ class IHierarchicalOutStream;
 
 namespace LogCache
 {
+
+///////////////////////////////////////////////////////////////
+// efficient associative container
+///////////////////////////////////////////////////////////////
+
+typedef quick_hash_map<index_t, index_t> index_mapping_t;
 
 ///////////////////////////////////////////////////////////////
 //
@@ -153,6 +159,11 @@ public:
 	// reset content
 
 	void Clear();
+
+	// "merge" with another container:
+	// add new entries and return ID mapping for source container
+
+	index_mapping_t Merge (const CStringDictionary& source);
 
 	// stream I/O
 

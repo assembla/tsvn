@@ -373,6 +373,14 @@ void CTokenizedStringContainer::Append (const std::string& s)
 	Append (lastToken);
 }
 
+// range check
+
+void CTokenizedStringContainer::CheckIndex (index_t index) const
+{
+	if (index >= offsets.size()-1)
+		throw std::exception ("string container index out of range");
+}
+
 // construction / destruction
 
 CTokenizedStringContainer::CTokenizedStringContainer(void)
@@ -390,8 +398,7 @@ std::string CTokenizedStringContainer::operator[] (index_t index) const
 {
 	// range check
 
-	if (index >= offsets.size()-1)
-		throw std::exception ("string container index out of range");
+	CheckIndex (index);
 
 	// the iterators over the (compressed) tokens 
 	// to buid the string from
@@ -420,6 +427,32 @@ index_t CTokenizedStringContainer::Insert (const std::string& s)
 
 	offsets.push_back ((index_t)stringData.size());
 	return (index_t)(offsets.size()-2);
+}
+
+void CTokenizedStringContainer::Remove (index_t index)
+{
+	// range check
+
+	CheckIndex (index);
+
+	// special case: last string
+
+	if (index+2 == offsets.size())
+	{
+		offsets.pop_back();
+		return;
+	}
+
+	// terminate the previous string 
+
+	assert (offsets[index] != offsets[index+1]);
+	stringData[offsets[index]] = EMPTY_TOKEN;
+
+	// remove string from index but keep its tokens
+	// (they remain hidden and will be removed upon
+	// the next "compress" run)
+
+	offsets.erase (offsets.begin()+index);
 }
 
 void CTokenizedStringContainer::Compress()
@@ -458,6 +491,104 @@ void CTokenizedStringContainer::Clear()
 	stringData.clear();
 
 	offsets.erase (offsets.begin()+1, offsets.end());
+}
+
+// batch modifications
+// indexes must be in ascending order
+
+// Replace() will append new entries, 
+// if indices[] matches current size().
+
+void CTokenizedStringContainer::Remove (const std::vector<index_t>& indexes)
+{
+	// prepatation
+
+	CIT indexIter = indexes.begin();
+	CIT indexEnd = indexes.end();
+
+	IT firstToken = stringData.begin();
+	IT targetToken = firstToken;
+
+	// copy & drop strings ("remove_copy_if") in-situ 
+
+	for ( index_t i = 0, target = 0, count = (index_t)offsets.size()-1
+		; i < count
+		; ++i)
+	{
+		if ((indexIter != indexEnd) && (*indexIter == i))
+		{
+			// skip / remove this token string
+
+			++indexIter;
+		}
+		else
+		{
+			// copy string tokens
+
+			targetToken = std::copy ( firstToken + offsets[i]
+								    , firstToken + offsets[i+1]
+									, targetToken);
+
+			// update (end-)offset
+
+			offsets[++target] = static_cast<index_t>(targetToken - firstToken);
+		}
+	}
+
+	// trim containers
+
+	offsets.erase (offsets.end() - indexes.size(), offsets.end());
+	stringData.erase (targetToken, stringData.end());
+}
+
+void CTokenizedStringContainer::Replace ( const CTokenizedStringContainer& source
+										, const std::vector<index_t>& indexes)
+{
+	assert (indexes.size() == source.size());
+
+	// we will fully rebuild the string token buffer
+	// -> save the old one and replace it with an empty buffer
+
+	std::vector<index_t> oldData;
+	oldData.swap (stringData);
+
+	IT oldFirst = oldData.begin();
+
+	// splice the data
+
+	index_t k = 0;
+	index_t indexCount = static_cast<index_t>(indexes.size());
+
+	for (index_t i = 0, count = (index_t)offsets.size()-1; i < count; ++i)
+	{
+		if ((k != indexCount) && (indexes[k] == i))
+		{
+			// replace this token string
+
+			Append (source[k]);
+			++k;
+		}
+		else
+		{
+			// copy string tokens
+
+			std::copy ( oldFirst + offsets[i]
+				      , oldFirst + offsets[i+1]
+					  , stringData.end());
+		}
+
+		// update (end-)offset
+
+		offsets[i+1] = static_cast<index_t>(stringData.size());
+	}
+
+	// append remaining strings
+
+	for (; k < indexCount; ++k)
+	{
+		assert (indexes[k] == size());
+		Insert (source[k]);
+	}
 }
 
 // stream I/O

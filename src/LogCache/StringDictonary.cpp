@@ -228,6 +228,19 @@ void CStringDictionary::Clear()
 	Initialize();
 }
 
+// "merge" with another container:
+// add new entries and return ID mapping for source container
+
+index_mapping_t CStringDictionary::Merge (const CStringDictionary& source)
+{
+	index_mapping_t result;
+
+	for (index_t i = 0, count = source.size(); i < count; ++i)
+		result.insert (i, AutoInsert (source[i]));
+
+	return result;
+}
+
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
