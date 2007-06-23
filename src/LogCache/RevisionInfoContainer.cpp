@@ -366,6 +366,7 @@ index_t CRevisionInfoContainer::Insert ( const std::string& author
 
 	changesOffsets.push_back (*changesOffsets.rbegin());
 	copyFromOffsets.push_back (*copyFromOffsets.rbegin());
+	mergedRevisionsOffsets.push_back (*mergedRevisionsOffsets.rbegin());
 
 	// ready
 
