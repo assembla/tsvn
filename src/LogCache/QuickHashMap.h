@@ -213,11 +213,27 @@ public:
     friend class const_iterator;
 
 	// construction
-    // (default-implemented assignment and destruction work as desired)
+    // (default-implemented destruction works as desired)
 
 	quick_hash_map() 
 		: hash (CHashFunction (&data))
 	{
+	}
+	
+	quick_hash_map (const quick_hash_map& rhs) 
+		: hash (CHashFunction (&data))
+	{
+		operator=(rhs);
+	}
+
+	// assignment
+
+	quick_hash_map& operator= (const quick_hash_map& rhs) 
+	{
+		hash = rhs.hash;
+		data = rhs.data;
+
+		return *this;
 	}
 	
 	// data access
