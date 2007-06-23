@@ -159,24 +159,19 @@ private:
 	// update / modify utilities
 
 	void UpdateAuthors ( const CRevisionInfoContainer& newData
-					   , const std::vector<index_t>& indexes
-					   , index_t count);
+					   , const index_mapping_t& indexMap);
 	void UpdateTimeStamps ( const CRevisionInfoContainer& newData
-						  , const std::vector<index_t>& indexes
-						  , index_t count);
+						  , const index_mapping_t& indexMap);
 	void UpdateComments ( const CRevisionInfoContainer& newData
-						, const std::vector<index_t>& indexes
-						, index_t count);
+						, const index_mapping_t& indexMap);
 
 	void UpdateChanges ( const CRevisionInfoContainer& newData
-					   , const std::vector<index_t>& indexes
-					   , index_t count);
+					   , const index_mapping_t& indexMap);
 	void UpdateMergers ( const CRevisionInfoContainer& newData
-					   , const std::vector<index_t>& indexes
-					   , index_t count);
+					   , const index_mapping_t& indexMap);
 
 	void Append ( const CRevisionInfoContainer& newData
-				, index_t startIndex);
+				, const index_mapping_t& indexMap);
 
 public:
 
@@ -383,7 +378,7 @@ public:
 	// indexes[] may be size() -> results in an Append()
 
 	void Update ( const CRevisionInfoContainer& newData
-				, const std::vector<index_t>& indexes
+				, const index_mapping_t& indexMap
 				, bool updateAuthors
 				, bool updateTimeStamps
 				, bool updateComments

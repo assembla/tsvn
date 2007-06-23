@@ -264,12 +264,12 @@ public:
 	// batch modifications
 	// indexes must be in ascending order
 
-	// Replace() will append new entries, 
-	// if indexes[] matches current size().
+	// indexMap maps target index -> source index, 
+	// entries with target index >= size() will be appended
 
 	void Remove (const std::vector<index_t>& indexes);
 	void Replace ( const CTokenizedStringContainer& source
-				 , const std::vector<index_t>& indexes);
+				 , const index_mapping_t& indexMap);
 
 	// stream I/O
 

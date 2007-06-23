@@ -542,10 +542,8 @@ void CTokenizedStringContainer::Remove (const std::vector<index_t>& indexes)
 }
 
 void CTokenizedStringContainer::Replace ( const CTokenizedStringContainer& source
-										, const std::vector<index_t>& indexes)
+										, const index_mapping_t& indexMap)
 {
-	assert (indexes.size() <= source.size());
-
 	// we will fully rebuild the string token buffer
 	// -> save the old one and replace it with an empty buffer
 
@@ -557,18 +555,19 @@ void CTokenizedStringContainer::Replace ( const CTokenizedStringContainer& sourc
 
 	// splice the data
 
-	index_t k = 0;
-	index_t indexCount = static_cast<index_t>(indexes.size());
 	index_t oldOffset = offsets[0];
+	index_t count = (index_t)offsets.size()-1;
 
-	for (index_t i = 0, count = (index_t)offsets.size()-1; i < count; ++i)
+	index_mapping_t::const_iterator mapEnd = indexMap.end();
+
+	for (index_t i = 0; i < count; ++i)
 	{
-		if ((k != indexCount) && (indexes[k] == i))
+		index_mapping_t::const_iterator iter = indexMap.find (i);
+		if (iter != mapEnd)
 		{
 			// replace this token string
 
-			Append (source[k]);
-			++k;
+			Append (source[iter->key]);
 		}
 		else
 		{
@@ -587,10 +586,12 @@ void CTokenizedStringContainer::Replace ( const CTokenizedStringContainer& sourc
 
 	// append remaining strings
 
-	for (; k < indexCount; ++k)
+	for ( index_mapping_t::const_iterator iter = indexMap.begin()
+		; iter != mapEnd
+		; ++iter)
 	{
-		assert (indexes[k] == size());
-		Insert (source[k]);
+		if (iter->key >= count)
+			Insert (source[iter->value]);
 	}
 }
 

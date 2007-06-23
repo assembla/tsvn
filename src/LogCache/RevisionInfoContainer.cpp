@@ -35,36 +35,58 @@ namespace LogCache
 
 void CRevisionInfoContainer::UpdateAuthors 
 	( const CRevisionInfoContainer& newData
-	, const std::vector<index_t>& indexes
-	, index_t count)
+	, const index_mapping_t& indexMap)
 {
 	index_mapping_t idMapping = authorPool.Merge (newData.authorPool);
-	for (index_t i = 0; i < count; ++i)
-		authors[indexes[i]] = *idMapping.find (newData.authors[i]);
+
+	index_t count = size();
+	for ( index_mapping_t::const_iterator iter = indexMap.begin()
+		, end = indexMap.end()
+		; iter != end
+		; ++iter)
+	{
+		if (iter->key < count)
+			authors[iter->key] = *idMapping.find (newData.authors[iter->value]);
+	}
 }
 
 void CRevisionInfoContainer::UpdateTimeStamps 
 	( const CRevisionInfoContainer& newData
-	, const std::vector<index_t>& indexes
-	, index_t count)
+	, const index_mapping_t& indexMap)
 {
-	for (index_t i = 0; i < count; ++i)
-		timeStamps[indexes[i]] = newData.timeStamps[i];
+	index_t count = size();
+	for ( index_mapping_t::const_iterator iter = indexMap.begin()
+		, end = indexMap.end()
+		; iter != end
+		; ++iter)
+	{
+		if (iter->key < count)
+			timeStamps[iter->key] = newData.timeStamps[iter->value];
+	}
 }
 
 void CRevisionInfoContainer::UpdateComments 
 	( const CRevisionInfoContainer& newData
-	, const std::vector<index_t>& indexes
-	, index_t count)
+	, const index_mapping_t& indexMap)
 {
-	std::vector<index_t> toReplace (indexes.begin(), indexes.begin() + count);
+	index_mapping_t toReplace;
+
+	index_t count = size();
+	for ( index_mapping_t::const_iterator iter = indexMap.begin()
+		, end = indexMap.end()
+		; iter != end
+		; ++iter)
+	{
+		if (iter->key < count)
+			toReplace.insert (iter->key, iter->value);
+	}
+
 	comments.Replace (newData.comments, toReplace);
 }
 
 void CRevisionInfoContainer::UpdateChanges 
 	( const CRevisionInfoContainer& newData
-	, const std::vector<index_t>& indexes
-	, index_t count)
+	, const index_mapping_t& indexMap)
 {
 	// make new paths available
 
@@ -93,29 +115,31 @@ void CRevisionInfoContainer::UpdateChanges
 	index_t firstChange = changesOffsets[0];
 	index_t firstCopy = copyFromOffsets[0];
 
-	size_t k = 0;
+	index_mapping_t::const_iterator mapEnd = indexMap.end();
 	for (index_t i = 0, count = size(); i < count; ++i)
 	{
-		if ((k < count) && (indexes[k] == i))
+		index_mapping_t::const_iterator iter = indexMap.find (i);
+		if (iter != mapEnd)
 		{
 			// copy & translate
 
-			for ( index_t m = newData.changesOffsets[k]
-				, last = newData.changesOffsets[k+1]
-				; m != last
-				; ++m)
+			index_t sourceIndex = iter->value;
+			for ( index_t k = newData.changesOffsets [sourceIndex]
+				, last = newData.changesOffsets [sourceIndex+1]
+				; k != last
+				; ++k)
 			{
-				changes.push_back (newData.changes[m]);
-				changedPaths.push_back (*idMapping.find (newData.changedPaths[m]));
+				changes.push_back (newData.changes[k]);
+				changedPaths.push_back (*idMapping.find (newData.changedPaths[k]));
 			}
 
-			for ( index_t m = newData.copyFromOffsets[k]
-				, last = newData.copyFromOffsets[k+1]
-				; m != last
-				; ++m)
+			for ( index_t k = newData.copyFromOffsets [sourceIndex]
+				, last = newData.copyFromOffsets [sourceIndex+1]
+				; k != last
+				; ++k)
 			{
-				copyFromRevisions.push_back (newData.copyFromRevisions[m]);
-				copyFromPaths.push_back (*idMapping.find (newData.copyFromPaths[m]));
+				copyFromRevisions.push_back (newData.copyFromRevisions[k]);
+				copyFromPaths.push_back (*idMapping.find (newData.copyFromPaths[k]));
 			}
 		}
 		else
@@ -160,8 +184,7 @@ void CRevisionInfoContainer::UpdateChanges
 
 void CRevisionInfoContainer::UpdateMergers 
 	( const CRevisionInfoContainer& newData
-	, const std::vector<index_t>& indexes
-	, index_t count)
+	, const index_mapping_t& indexMap)
 {
 	// make new paths available
 
@@ -189,23 +212,25 @@ void CRevisionInfoContainer::UpdateMergers
 
 	index_t firstMerge = mergedRevisionsOffsets[0];
 
-	size_t k = 0;
+	index_mapping_t::const_iterator mapEnd = indexMap.end();
 	for (index_t i = 0, count = size(); i < count; ++i)
 	{
-		if ((k < count) && (indexes[k] == i))
+		index_mapping_t::const_iterator iter = indexMap.find (i);
+		if (iter != mapEnd)
 		{
 			// copy & translate
 
-			for ( index_t m = newData.mergedRevisionsOffsets[k]
-				, last = newData.mergedRevisionsOffsets[k+1]
-				; m != last
-				; ++m)
+			index_t sourceIndex = iter->value;
+			for ( index_t k = newData.mergedRevisionsOffsets [sourceIndex]
+				, last = newData.mergedRevisionsOffsets [sourceIndex+1]
+				; k != last
+				; ++k)
 			{
-				mergedFromPaths.push_back (*idMapping.find (newData.mergedFromPaths[m]));
-				mergedToPaths.push_back (*idMapping.find (newData.mergedToPaths[m]));
+				mergedFromPaths.push_back (*idMapping.find (newData.mergedFromPaths[k]));
+				mergedToPaths.push_back (*idMapping.find (newData.mergedToPaths[k]));
 
-				mergedRangeStarts.push_back (newData.mergedRangeStarts[m]);
-				mergedRangeDeltas.push_back (newData.mergedRangeDeltas[m]);
+				mergedRangeStarts.push_back (newData.mergedRangeStarts[k]);
+				mergedRangeDeltas.push_back (newData.mergedRangeDeltas[k]);
 			}
 		}
 		else
@@ -237,14 +262,24 @@ void CRevisionInfoContainer::UpdateMergers
 
 void CRevisionInfoContainer::Append 
 	( const CRevisionInfoContainer& newData
-	, index_t startIndex)
+	, const index_mapping_t& indexMap)
 {
 	// make new paths available
 
 	index_mapping_t idMapping = paths.Merge (newData.paths);
 
-	for (index_t i = startIndex, count = newData.size(); i < count; ++i)
+	// append new entries
+
+	for ( index_mapping_t::const_iterator iter = indexMap.begin()
+		, end = indexMap.end()
+		; iter != end
+		; ++iter)
 	{
+		if (iter->key < size())
+			continue;
+
+		index_t i = iter->value;
+
 		// copy & translate change info
 
 		for ( index_t k = newData.changesOffsets[i]
@@ -442,49 +477,30 @@ void CRevisionInfoContainer::Clear()
 // indexes[] may be size() -> results in an Append()
 
 void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
-									, const std::vector<index_t>& indexes
+									, const index_mapping_t& indexMap
 									, bool updateAuthors
 									, bool updateTimeStamps
 									, bool updateComments
 									, bool updateChanges
 									, bool updateMergers)
 {
-	// how many entries have to be replaced?
-
-	index_t existing = 0;
-	while ((existing < indexes.size()) && (indexes[existing] < size()))
-		++existing;
-
 	// replace exising data
 
-	if (existing > 0)
-	{
-		if (updateAuthors)
-			UpdateAuthors (newData, indexes, existing);
-		if (updateTimeStamps)
-			UpdateTimeStamps (newData, indexes, existing);
-		if (updateComments)
-			UpdateComments (newData, indexes, existing);
+	if (updateAuthors)
+		UpdateAuthors (newData, indexMap);
+	if (updateTimeStamps)
+		UpdateTimeStamps (newData, indexMap);
+	if (updateComments)
+		UpdateComments (newData, indexMap);
 
-		if (updateChanges)
-			UpdateChanges (newData, indexes, existing);
-		if (updateMergers)
-			UpdateMergers (newData, indexes, existing);
-	}
+	if (updateChanges)
+		UpdateChanges (newData, indexMap);
+	if (updateMergers)
+		UpdateMergers (newData, indexMap);
 
 	// append remaining data
 
-	if (existing < indexes.size())
-	{
-		// we require all data to be valid
-
-		assert (   updateAuthors && updateTimeStamps && updateComments 
-			    && updateChanges && updateMergers);
-
-		// add the data starting at the first non-merged source entry
-
-		Append (newData, existing);
-	}
+	Append (newData, indexMap);
 }
 
 // stream I/O
