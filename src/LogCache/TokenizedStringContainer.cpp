@@ -567,7 +567,7 @@ void CTokenizedStringContainer::Replace ( const CTokenizedStringContainer& sourc
 		{
 			// replace this token string
 
-			Append (source[iter->key]);
+			Append (source[iter->value]);
 		}
 		else
 		{
