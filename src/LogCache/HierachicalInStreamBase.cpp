@@ -72,8 +72,6 @@ void CHierachicalInStreamBase::DecodeThisStream()
 
 	first = plainData.first;
 	last = first + plainData.second;
-
-	TRACE ("Allocate %x\n", first);
 }
 
 // construction / destruction
@@ -100,8 +98,6 @@ CHierachicalInStreamBase::~CHierachicalInStreamBase()
 		; iter != end
 		; ++iter)
 		delete iter->second;
-
-	TRACE ("Delete %x\n", first);
 
 	delete first;
 }
