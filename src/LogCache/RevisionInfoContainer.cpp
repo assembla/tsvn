@@ -237,7 +237,7 @@ void CRevisionInfoContainer::UpdateMergers
 		{
 			// keep exisiting data
 
-			index_t lastMerge = changesOffsets[i+1];
+			index_t lastMerge = mergedRevisionsOffsets[i+1];
 
 			mergedFromPaths.insert ( mergedFromPaths.end()
 								   , oldMergedFromPaths.begin() + firstMerge
