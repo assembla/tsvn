@@ -148,6 +148,7 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 	, CDictionaryBasedTempPath& searchPath
 	, revision_t& searchRevision)
 {
+	bool addFound = false;
 	// any chance that this revision affects our search path?
 
 	if (!revisionRootPath.IsValid())
@@ -192,19 +193,32 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 					searchPath = searchPath.ReplaceParent ( iter.GetPath()
 														  , iter.GetFromPath());
 					searchRevision = iter.GetFromRevision();
+					return true;
 				}
 				else
 				{
-					// end of path history
-
 					searchRevision = NO_REVISION;
+					addFound = true;
+					// we don't return here immediately, since an ADD without
+					// a copyfrom doesn't mean necessarily that our path got
+					// added in this revision. Instead, just set a flag indicating
+					// that this method should return true if we don't find
+					// another real rename of our path.
+					//
+					// example:
+					//
+					// our path: /trunk/file
+					// renamed to
+					// /trunk/project/file
+					// 
+					// this can only happen if
+					// /trunk/project
+					// is added first (usually without a copyfrom path)
 				}
-
-				return true;
 			}
+			break;
 
 			// there should be no other
-			// (we are unlikely to find a deletion ;) )
 
 			default:
 			{
@@ -212,6 +226,9 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 			}
 		}
 	}
+
+	if (addFound)
+		return true;
 
 	// all fine, no special action required
 
