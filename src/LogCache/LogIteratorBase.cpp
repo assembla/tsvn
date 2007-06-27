@@ -218,6 +218,13 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 			}
 			break;
 
+			case CRevisionInfoContainer::ACTION_DELETED:
+			{
+				// deletions are possible!
+				// but we don't need to do anything with them.
+			}
+			break;
+
 			// there should be no other
 
 			default:
