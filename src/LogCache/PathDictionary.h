@@ -210,6 +210,19 @@ public:
 
 	bool IsSameOrParentOf (const CDictionaryBasedPath& rhs) const;
 
+    // general comparison
+
+    bool operator==(const CDictionaryBasedPath& rhs) const
+    {
+        assert (dictionary == rhs.dictionary);
+        return index == rhs.index;
+    }
+
+    bool operator!=(const CDictionaryBasedPath& rhs) const
+    {
+        return !operator==(rhs);
+    }
+
 	// convert to string
 
 	std::string GetPath() const;
