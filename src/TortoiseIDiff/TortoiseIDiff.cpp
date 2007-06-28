@@ -70,7 +70,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	INITCOMMONCONTROLSEX used = {
 		sizeof(INITCOMMONCONTROLSEX),
-		ICC_STANDARD_CLASSES | ICC_BAR_CLASSES
+		ICC_STANDARD_CLASSES | ICC_BAR_CLASSES | ICC_WIN95_CLASSES
 	};
 	InitCommonControlsEx(&used);
 	CAlphaControl::RegisterCustomControl();
@@ -84,7 +84,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	mainWindow.SetLeft(parser.HasVal(_T("left")) ? parser.GetVal(_T("left")) : _T(""), parser.HasVal(_T("lefttitle")) ? parser.GetVal(_T("lefttitle")) : _T(""));
 	mainWindow.SetRight(parser.HasVal(_T("right")) ? parser.GetVal(_T("right")) : _T(""), parser.HasVal(_T("righttitle")) ? parser.GetVal(_T("righttitle")) : _T(""));
-
 	if (mainWindow.RegisterAndCreateWindow())
 	{
 		hAccelTable = LoadAccelerators(hResource, MAKEINTRESOURCE(IDR_TORTOISEIDIFF));

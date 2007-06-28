@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -192,10 +192,7 @@ const CString& CTSVNPath::GetUIPathString() const
 		//BUGBUG HORRIBLE!!! - CPathUtils::IsEscaped doesn't need to be MFC-only
 		if (IsUrl())
 		{
-			CStringA sUIPathA = GetSVNApiPath();
-			CPathUtils::Unescape(sUIPathA.GetBuffer());
-			sUIPathA.ReleaseBuffer();
-			m_sUIPath = CUnicodeUtils::GetUnicode(sUIPathA);
+			m_sUIPath = CPathUtils::PathUnescape(GetSVNPathString());
 		}
 		else
 #endif 
@@ -314,7 +311,7 @@ void CTSVNPath::UpdateAttributes() const
 	else
 	{
 		DWORD err = GetLastError();
-		if ((err == ERROR_FILE_NOT_FOUND)||(err == ERROR_PATH_NOT_FOUND))
+		if ((err == ERROR_FILE_NOT_FOUND)||(err == ERROR_PATH_NOT_FOUND)||(err == ERROR_INVALID_NAME))
 		{
 			m_bIsDirectory = false;
 			m_lastWriteTime = 0;
@@ -746,7 +743,7 @@ bool CTSVNPathList::AreAllPathsFiles() const
 
 #if defined(_MFC_VER)
 
-bool CTSVNPathList::LoadFromTemporaryFile(const CTSVNPath& filename)
+bool CTSVNPathList::LoadFromFile(const CTSVNPath& filename)
 {
 	Clear();
 	try
@@ -775,7 +772,7 @@ bool CTSVNPathList::LoadFromTemporaryFile(const CTSVNPath& filename)
 	return true;
 }
 
-bool CTSVNPathList::WriteToTemporaryFile(const CString& sFilename, bool bANSI /* = false */) const
+bool CTSVNPathList::WriteToFile(const CString& sFilename, bool bANSI /* = false */) const
 {
 	try
 	{

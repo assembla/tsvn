@@ -69,44 +69,51 @@ void CSVNStatusCache::Create()
 		pFile = _tfsopen(path2, _T("rb"), _SH_DENYNO);
 		if (pFile)
 		{
-			LOADVALUEFROMFILE(value);
-			if (value != 2)
+			try
 			{
-				goto error;
-			}
-			int mapsize = 0;
-			LOADVALUEFROMFILE(mapsize);
-			for (int i=0; i<mapsize; ++i)
-			{
-				LOADVALUEFROMFILE2(value);	
-				if (value > MAX_PATH)
-					goto error;
-				if (value)
+				LOADVALUEFROMFILE(value);
+				if (value != 2)
 				{
-					CString sKey;
-					if (fread(sKey.GetBuffer(value+1), sizeof(TCHAR), value, pFile)!=value)
+					goto error;
+				}
+				int mapsize = 0;
+				LOADVALUEFROMFILE(mapsize);
+				for (int i=0; i<mapsize; ++i)
+				{
+					LOADVALUEFROMFILE2(value);	
+					if (value > MAX_PATH)
+						goto error;
+					if (value)
 					{
-						sKey.ReleaseBuffer(0);
-						goto error;
-					}
-					sKey.ReleaseBuffer(value);
-					CCachedDirectory * cacheddir = new CCachedDirectory();
-					if (cacheddir == NULL)
-						goto error;
-					if (!cacheddir->LoadFromDisk(pFile))
-						goto error;
-					CTSVNPath KeyPath = CTSVNPath(sKey);
-					if (m_pInstance->IsPathAllowed(KeyPath))
-					{
-						m_pInstance->m_directoryCache[KeyPath] = cacheddir;
-						m_pInstance->watcher.AddPath(KeyPath);
-						// do *not* add the paths for crawling!
-						// because crawled paths will trigger a shell
-						// notification, which makes the desktop flash constantly
-						// until the whole first time crawling is over
-						// m_pInstance->AddFolderForCrawling(KeyPath);
+						CString sKey;
+						if (fread(sKey.GetBuffer(value+1), sizeof(TCHAR), value, pFile)!=value)
+						{
+							sKey.ReleaseBuffer(0);
+							goto error;
+						}
+						sKey.ReleaseBuffer(value);
+						CCachedDirectory * cacheddir = new CCachedDirectory();
+						if (cacheddir == NULL)
+							goto error;
+						if (!cacheddir->LoadFromDisk(pFile))
+							goto error;
+						CTSVNPath KeyPath = CTSVNPath(sKey);
+						if (m_pInstance->IsPathAllowed(KeyPath))
+						{
+							m_pInstance->m_directoryCache[KeyPath] = cacheddir;
+							m_pInstance->watcher.AddPath(KeyPath);
+							// do *not* add the paths for crawling!
+							// because crawled paths will trigger a shell
+							// notification, which makes the desktop flash constantly
+							// until the whole first time crawling is over
+							// m_pInstance->AddFolderForCrawling(KeyPath);
+						}
 					}
 				}
+			}
+			catch (CAtlException)
+			{
+				goto error;
 			}
 		}
 	}
@@ -344,6 +351,7 @@ CCachedDirectory * CSVNStatusCache::GetDirectoryCacheEntry(const CTSVNPath& path
 		// that means that path got invalidated and needs to be treated
 		// as if it never was in our cache. So we remove the last remains
 		// from the cache and start from scratch.
+		AssertLock();
 		if (!IsWriter())
 		{
 			// upgrading our state to writer
@@ -359,17 +367,25 @@ CCachedDirectory * CSVNStatusCache::GetDirectoryCacheEntry(const CTSVNPath& path
 		// but only if it exists!
 		if (path.Exists() && m_shellCache.IsPathAllowed(path.GetWinPath()) && !g_SVNAdminDir.IsAdminDirPath(path.GetWinPath()))
 		{
-			ATLTRACE(_T("adding %s to our cache\n"), path.GetWinPath());
-			ATLASSERT(path.IsDirectory()||(!path.Exists()));
-			CCachedDirectory * newcdir = new CCachedDirectory(path);
-			if (newcdir)
+			// some notifications are for files which got removed/moved around.
+			// In such cases, the CTSVNPath::IsDirectory() will return true (it assumes a directory if
+			// the path doesn't exist). Which means we can get here with a path to a file
+			// instead of a directory.
+			// Since we're here most likely called from the crawler thread, the file could exist
+			// again. If that's the case, just do nothing
+			if (path.IsDirectory()||(!path.Exists()))
 			{
-				CCachedDirectory * cdir = m_directoryCache.insert(m_directoryCache.lower_bound(path), std::make_pair(path, newcdir))->second;
-				if (!path.IsEmpty())
-					watcher.AddPath(path);
-				return cdir;		
+				ATLTRACE(_T("adding %s to our cache\n"), path.GetWinPath());
+				CCachedDirectory * newcdir = new CCachedDirectory(path);
+				if (newcdir)
+				{
+					CCachedDirectory * cdir = m_directoryCache.insert(m_directoryCache.lower_bound(path), std::make_pair(path, newcdir))->second;
+					if (!path.IsEmpty())
+						watcher.AddPath(path);
+					return cdir;		
+				}
+				m_bClearMemory = true;
 			}
-			m_bClearMemory = true;
 		}
 		return NULL;
 	}
@@ -441,26 +457,3 @@ void CSVNStatusCache::CloseWatcherHandles(HDEVNOTIFY hdev)
 	m_folderCrawler.BlockPath(path);
 }
 
-//////////////////////////////////////////////////////////////////////////
-#ifdef _DEBUG
-static class StatusCacheTests
-{
-public:
-	StatusCacheTests()
-	{
-		//apr_initialize();
-		//CSVNStatusCache::Create();
-		//{
-		//	CSVNStatusCache& cache = CSVNStatusCache::Instance();
-
-		//	cache.GetStatusForPath(CTSVNPath(_T("D:/Development/SVN/TortoiseSVN")), TSVNCACHE_FLAGS_RECUSIVE_STATUS);
-		//	cache.GetStatusForPath(CTSVNPath(_T("D:/Development/SVN/Subversion")), TSVNCACHE_FLAGS_RECUSIVE_STATUS);
-		//}
-
-		//CSVNStatusCache::Destroy();
-		//apr_terminate();
-	}
-
-} StatusCacheTests;
-
-#endif

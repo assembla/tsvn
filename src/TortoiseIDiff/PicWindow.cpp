@@ -71,12 +71,57 @@ void CPicWindow::PositionTrackBar()
 
 LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	TRACKMOUSEEVENT mevt;
 	switch (uMsg)
 	{
 	case WM_CREATE:
-		// create a slider control
-		hwndAlphaSlider = CreateTrackbar(hwnd);
-		ShowWindow(hwndAlphaSlider, SW_HIDE);
+		{
+			// create a slider control
+			hwndAlphaSlider = CreateTrackbar(hwnd);
+			ShowWindow(hwndAlphaSlider, SW_HIDE);
+			//Create the tooltips
+			TOOLINFO ti;
+			RECT rect;                  // for client area coordinates
+
+			hwndTT = CreateWindowEx(WS_EX_TOPMOST,
+				TOOLTIPS_CLASS,
+				NULL,
+				WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP,		
+				CW_USEDEFAULT,
+				CW_USEDEFAULT,
+				CW_USEDEFAULT,
+				CW_USEDEFAULT,
+				hwnd,
+				NULL,
+				hResource,
+				NULL
+				);
+
+			SetWindowPos(hwndTT,
+				HWND_TOPMOST,
+				0,
+				0,
+				0,
+				0,
+				SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+
+			::GetClientRect(hwnd, &rect);
+
+			ti.cbSize = sizeof(TOOLINFO);
+			ti.uFlags = TTF_TRACK | TTF_ABSOLUTE;
+			ti.hwnd = hwnd;
+			ti.hinst = hResource;
+			ti.uId = 0;
+			ti.lpszText = LPSTR_TEXTCALLBACK;
+			// ToolTip control will cover the whole window
+			ti.rect.left = rect.left;    
+			ti.rect.top = rect.top;
+			ti.rect.right = rect.right;
+			ti.rect.bottom = rect.bottom;
+
+			SendMessage(hwndTT, TTM_ADDTOOL, 0, (LPARAM) (LPTOOLINFO) &ti);	
+			SendMessage(hwndTT, TTM_SETMAXTIPWIDTH, 0, 600);
+		}
 		break;
 	case WM_SETFOCUS:
 	case WM_KILLFOCUS:
@@ -128,8 +173,34 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 		startVScrollPos = nVScrollPos;
 		startHScrollPos = nHScrollPos;
 		break;
+	case WM_MOUSELEAVE:
+		SendMessage(hwndTT, TTM_TRACKACTIVATE, FALSE, 0);
+		::InvalidateRect(*this, NULL, FALSE);
+		break;
 	case WM_MOUSEMOVE:
 		{
+			mevt.cbSize = sizeof(TRACKMOUSEEVENT);
+			mevt.dwFlags = TME_LEAVE;
+			mevt.dwHoverTime = HOVER_DEFAULT;
+			mevt.hwndTrack = *this;
+			::TrackMouseEvent(&mevt);
+			POINT pt = {((int)(short)LOWORD(lParam)), ((int)(short)HIWORD(lParam))};
+			if (pt.y < HEADER_HEIGHT)
+			{
+				ClientToScreen(*this, &pt);
+				pt.x += 15;
+				pt.y += 15;
+				SendMessage(hwndTT, TTM_TRACKPOSITION, 0, MAKELONG(pt.x, pt.y));
+				TOOLINFO ti;
+				ti.cbSize = sizeof(TOOLINFO);
+				ti.hwnd = *this;
+				ti.uId = 0;
+				SendMessage(hwndTT, TTM_TRACKACTIVATE, TRUE, (LPARAM)&ti);
+			}
+			else
+			{
+				SendMessage(hwndTT, TTM_TRACKACTIVATE, FALSE, 0);
+			}
 			if (wParam & MK_LBUTTON)
 			{
 				// pan the image
@@ -278,6 +349,23 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 					_stprintf_s(stringbuf, MAX_PATH, _T("%ld alpha"), (BYTE)SendMessage(hwndAlphaSlider, TBM_GETPOS, 0, 0));
 					lpttt->lpszText = stringbuf;
 				}
+				else
+				{
+					NMTTDISPINFOA* pTTTA = (NMTTDISPINFOA*)pNMHDR;
+					NMTTDISPINFOW* pTTTW = (NMTTDISPINFOW*)pNMHDR;
+					TCHAR infostring[8192];
+					BuildInfoString(infostring, sizeof(infostring)/sizeof(TCHAR), true);
+					if (pNMHDR->code == TTN_NEEDTEXTW)
+					{
+						lstrcpyn(m_wszTip, infostring, 8192);
+						pTTTW->lpszText = m_wszTip;
+					}
+					else
+					{
+						pTTTA->lpszText = m_szTip;
+						::WideCharToMultiByte(CP_ACP, 0, infostring, -1, m_szTip, 8192, NULL, NULL);
+					}
+				}
 			}
 		}
 		break;
@@ -353,7 +441,8 @@ void CPicWindow::SetPic(stdstring path, stdstring title)
 
 void CPicWindow::DrawViewTitle(HDC hDC, RECT * rect)
 {
-	HFONT hFont = CreateFont(-MulDiv(10, GetDeviceCaps(hDC, LOGPIXELSY), 72), 0, 0, 0, FW_DONTCARE, false, false, false, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, _T("MS Shell Dlg"));
+	HFONT hFont = NULL;
+	hFont = CreateFont(-MulDiv(pSecondPic ? 8 : 10, GetDeviceCaps(hDC, LOGPIXELSY), 72), 0, 0, 0, FW_DONTCARE, false, false, false, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, _T("MS Shell Dlg"));
 	HFONT hFontOld = (HFONT)SelectObject(hDC, (HGDIOBJ)hFont);
 
 	RECT textrect;
@@ -383,11 +472,6 @@ void CPicWindow::DrawViewTitle(HDC hDC, RECT * rect)
 	stdstring realtitle = *title;
 	stdstring imgnumstring;
 
-	if (pSecondPic)
-	{
-		realtitle = realtitle + _T(" - ") + (pictitle2.empty() ? picpath2 : pictitle2);
-	}
-
 	if (HasMultipleImages())
 	{
 		TCHAR buf[MAX_PATH];
@@ -402,15 +486,27 @@ void CPicWindow::DrawViewTitle(HDC hDC, RECT * rect)
 	if (GetTextExtentPoint32(hDC, realtitle.c_str(), realtitle.size(), &stringsize))
 	{
 		int nStringLength = stringsize.cx;
-
+		int texttop = pSecondPic ? textrect.top + (HEADER_HEIGHT/2) - stringsize.cy : textrect.top + (HEADER_HEIGHT/2) - stringsize.cy/2;
 		ExtTextOut(hDC, 
 			max(textrect.left + ((textrect.right-textrect.left)-nStringLength)/2, 1),
-			textrect.top + (HEADER_HEIGHT/2) - stringsize.cy/2,
+			texttop,
 			ETO_CLIPPED,
 			&textrect,
 			realtitle.c_str(),
 			realtitle.size(),
 			NULL);
+		if (pSecondPic)
+		{
+			realtitle = (pictitle2.empty() ? picpath2 : pictitle2);
+			ExtTextOut(hDC, 
+				max(textrect.left + ((textrect.right-textrect.left)-nStringLength)/2, 1),
+				texttop + stringsize.cy,
+				ETO_CLIPPED,
+				&textrect,
+				realtitle.c_str(),
+				realtitle.size(),
+				NULL);
+		}
 	}
 	if (HasMultipleImages())
 	{
@@ -441,25 +537,25 @@ void CPicWindow::SetupScrollBars()
 
 	si.fMask = SIF_POS | SIF_PAGE | SIF_RANGE | SIF_DISABLENOSCROLL;
 
-	LONG width = picture.m_Width;
-	LONG height = picture.m_Height;
+	double width = double(picture.m_Width)*picscale;
+	double height = double(picture.m_Height)*picscale;
 	if (pSecondPic)
 	{
-		width = max(width, pSecondPic->m_Width);
-		height = max(height, pSecondPic->m_Height);
+		width = max(width, double(pSecondPic->m_Width)*picscale2);
+		height = max(height, double(pSecondPic->m_Height)*picscale2);
 	}
 
-	bool bPicWidthBigger = (int(double(width)*picscale) > (rect.right-rect.left));
-	bool bPicHeigthBigger = (int(double(height)*picscale) > (rect.bottom-rect.top));
+	bool bPicWidthBigger = (int(width) > (rect.right-rect.left));
+	bool bPicHeigthBigger = (int(height) > (rect.bottom-rect.top));
 	// set the scroll position so that the image is drawn centered in the window
 	// if the window is bigger than the image
 	if (!bPicWidthBigger)
 	{
-		nHScrollPos = -((rect.right-rect.left)-int(double(width)*picscale))/2;
+		nHScrollPos = -((rect.right-rect.left)-int(width))/2;
 	}
 	if (!bPicHeigthBigger)
 	{
-		nVScrollPos = -((rect.bottom-rect.top)-int(double(height)*picscale))/2;
+		nVScrollPos = -((rect.bottom-rect.top)-int(height))/2;
 	}
 	// if the image is smaller than the window, we don't need the scrollbars
 	ShowScrollBar(*this, SB_HORZ, bPicWidthBigger);
@@ -468,13 +564,13 @@ void CPicWindow::SetupScrollBars()
 	si.nPos  = nVScrollPos;
 	si.nPage = rect.bottom-rect.top;
 	si.nMin  = 0;
-	si.nMax  = int(double(height)*picscale);
+	si.nMax  = int(height);
 	SetScrollInfo(*this, SB_VERT, &si, TRUE);
 
 	si.nPos  = nHScrollPos;
 	si.nPage = rect.right-rect.left;
 	si.nMin  = 0;
-	si.nMax  = int(double(width)*picscale);
+	si.nMax  = int(width);
 	SetScrollInfo(*this, SB_HORZ, &si, TRUE);
 
 	PositionChildren();
@@ -646,14 +742,32 @@ void CPicWindow::SetZoom(double dZoom)
 	if (dZoom < 1.0)
 	{	// Zoomed out, use high quality bicubic
 		picture.SetInterpolationMode(InterpolationModeHighQualityBicubic);
+		if (pSecondPic)
+			pSecondPic->SetInterpolationMode(InterpolationModeHighQualityBicubic);
 	}
 	else if (!((int)(dZoom*100.0)%100))
 	{	// "Even" zoom sizes should be shown w-o any interpolation
 		picture.SetInterpolationMode(InterpolationModeNearestNeighbor);
+		if (pSecondPic)
+			pSecondPic->SetInterpolationMode(InterpolationModeNearestNeighbor);
 	}
 	else
 	{	// Arbitrary zoomed in, use bilinear that is semi-smoothed
 		picture.SetInterpolationMode(InterpolationModeBilinear);
+		if (pSecondPic)
+			pSecondPic->SetInterpolationMode(InterpolationModeBilinear);
+	}
+	picscale = dZoom;
+
+	if ((pSecondPic)&&(bFitTogether))
+	{
+		double width, height;
+		double zoomWidth, zoomHeight;
+		width = double(picture.m_Width)*dZoom;
+		height = double(picture.m_Height)*dZoom;
+		zoomWidth = width/double(pSecondPic->m_Width);
+		zoomHeight = height/double(pSecondPic->m_Height);
+		picscale2 = min(zoomWidth, zoomHeight);
 	}
 
 	// adjust the scrollbar positions according to the new zoom and the
@@ -675,7 +789,7 @@ void CPicWindow::SetZoom(double dZoom)
 			pTheOtherPic->nVScrollPos = nVScrollPos;
 		}
 	}
-	picscale = dZoom;
+
 	SetupScrollBars();
 	PositionChildren();
 	InvalidateRect(*this, NULL, TRUE);
@@ -685,7 +799,7 @@ void CPicWindow::Zoom(bool in)
 {
 	double zoomFactor;
 
-	// Find correct zoom factor	and quantize picscale
+	// Find correct zoom factor and quantize picscale
 	if (!in && picscale <= 0.2)
 	{
 		picscale = 0.1;
@@ -710,10 +824,14 @@ void CPicWindow::Zoom(bool in)
 	// Set zoom
 	if (in)
 	{
+		if ((pSecondPic)&&(!bFitTogether))
+			picscale2 = picscale2+zoomFactor;
 		SetZoom(picscale+zoomFactor);
 	}
 	else
 	{
+		if ((pSecondPic)&&(!bFitTogether))
+			picscale2 = picscale2-zoomFactor;
 		SetZoom(picscale-zoomFactor);
 	}
 }
@@ -742,24 +860,50 @@ double CPicWindow::RoundDouble(double doValue, int nPrecision)
 void CPicWindow::FitImageInWindow()
 {
 	RECT rect;
+	double dZoom = 1.0;
 	GetClientRect(&rect);
 	if (rect.right-rect.left)
 	{
 		if (((rect.right - rect.left) > picture.m_Width)&&((rect.bottom - rect.top)> picture.m_Height))
 		{
 			// image is smaller than the window
-			SetZoom(1.0);
+			dZoom = 1.0;
 		}
 		else
 		{
 			// image is bigger than the window
 			double xscale = double(rect.right-rect.left)/double(picture.m_Width);
 			double yscale = double(rect.bottom-rect.top)/double(picture.m_Height);
-			SetZoom(min(yscale, xscale));
+			dZoom = min(yscale, xscale);
 		}
-		SetupScrollBars();
+		if (pSecondPic)
+		{
+			if (((rect.right - rect.left) > pSecondPic->m_Width)&&((rect.bottom - rect.top)> pSecondPic->m_Height))
+			{
+				// image is smaller than the window
+				picscale2 = min(1.0, dZoom);
+			}
+			else
+			{
+				// image is bigger than the window
+				double xscale = double(rect.right-rect.left)/double(pSecondPic->m_Width);
+				double yscale = double(rect.bottom-rect.top)/double(pSecondPic->m_Height);
+				picscale2 = min(yscale, xscale);
+			}
+		}
+		SetZoom(dZoom);
 	}
 	PositionChildren();
+	InvalidateRect(*this, NULL, TRUE);
+}
+
+void CPicWindow::FitTogether(bool bFit)
+{
+	bFitTogether = bFit;
+
+	if (pSecondPic == NULL)
+		return;
+	SetZoom(GetZoom());
 }
 
 void CPicWindow::Paint(HWND hwnd)
@@ -779,11 +923,6 @@ void CPicWindow::Paint(HWND hwnd)
 		CMemDC memDC(hdc);
 
 		GetClientRect(&rect);
-		if (bFirstpaint)
-		{
-			FitImageInWindow();
-			bFirstpaint = false;
-		}
 		if (bValid)
 		{
 			RECT picrect;
@@ -814,9 +953,9 @@ void CPicWindow::Paint(HWND hwnd)
 
 				RECT picrect2;
 				picrect2.left =  rect.left-nHScrollPos;
-				picrect2.right = (picrect2.left + LONG(double(pSecondPic->m_Width)*picscale));
+				picrect2.right = (picrect2.left + LONG(double(pSecondPic->m_Width)*picscale2));
 				picrect2.top = rect.top-nVScrollPos;
-				picrect2.bottom = (picrect2.top + LONG(double(pSecondPic->m_Height)*picscale));
+				picrect2.bottom = (picrect2.top + LONG(double(pSecondPic->m_Height)*picscale2));
 
 				SetBkColor(secondhdc, ::GetSysColor(COLOR_WINDOW));
 				::ExtTextOut(secondhdc, 0, 0, ETO_OPAQUE, &rect, NULL, 0, NULL);
@@ -862,34 +1001,12 @@ void CPicWindow::Paint(HWND hwnd)
 			m_inforect.bottom = rect.bottom;
 
 			TCHAR infostring[8192];
-			if (pSecondPic)
-			{
-				_stprintf_s(infostring, sizeof(infostring)/sizeof(TCHAR), 
-					(TCHAR const *)ResString(hResource, IDS_DUALIMAGEINFO),
-					pictitle.empty() ? picpath.c_str() : pictitle.c_str(),
-					picture.GetFileSizeAsText().c_str(),
-					picture.GetWidth(), picture.GetHeight(),
-					picture.GetHorizontalResolution(), picture.GetVerticalResolution(),
-					picture.GetColorDepth(),
-					(UINT)(GetZoom()*100.0),
-					pictitle2.empty() ? picpath2.c_str() : pictitle2.c_str(),
-					pSecondPic->GetFileSizeAsText().c_str(),
-					pSecondPic->GetWidth(), pSecondPic->GetHeight(),
-					pSecondPic->GetHorizontalResolution(), pSecondPic->GetVerticalResolution(),
-					pSecondPic->GetColorDepth());
-			}
-			else
-			{
-				_stprintf_s(infostring, sizeof(infostring)/sizeof(TCHAR), 
-					(TCHAR const *)ResString(hResource, IDS_IMAGEINFO),
-					picture.GetFileSizeAsText().c_str(), 
-					picture.GetWidth(), picture.GetHeight(),
-					picture.GetHorizontalResolution(), picture.GetVerticalResolution(),
-					picture.GetColorDepth(),
-					(UINT)(GetZoom()*100.0));
-			}
+			BuildInfoString(infostring, sizeof(infostring)/sizeof(TCHAR), false);
 			// set the font
-			HFONT hFont = CreateFont(-MulDiv(8, GetDeviceCaps(memDC, LOGPIXELSY), 72), 0, 0, 0, FW_DONTCARE, false, false, false, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, _T("MS Shell Dlg"));
+			NONCLIENTMETRICS metrics = {0};
+			metrics.cbSize = sizeof(NONCLIENTMETRICS);
+			SystemParametersInfo(SPI_GETNONCLIENTMETRICS, 0, &metrics, FALSE);
+			HFONT hFont = CreateFontIndirect(&metrics.lfStatusFont);
 			HFONT hFontOld = (HFONT)SelectObject(memDC, (HGDIOBJ)hFont);
 			// find out how big the rectangle for the text has to be
 			DrawText(memDC, infostring, -1, &m_inforect, DT_EDITCONTROL | DT_EXPANDTABS | DT_LEFT | DT_VCENTER | DT_CALCRECT);
@@ -911,8 +1028,8 @@ void CPicWindow::Paint(HWND hwnd)
 				SetTextColor(memDC, GetSysColor(COLOR_WINDOWTEXT));
 				DrawText(memDC, infostring, -1, &m_inforect, DT_EDITCONTROL | DT_EXPANDTABS | DT_LEFT | DT_VCENTER);
 				SelectObject(memDC, (HGDIOBJ)hFontOld);
-				PositionTrackBar();
 			}
+			PositionTrackBar();
 			DeleteObject(hFont);
 		}
 		else
@@ -1042,9 +1159,45 @@ HWND CPicWindow::CreateTrackbar(HWND hwndParent)
 		200, 30,							// size 
 		hwndParent,							// parent window 
 		(HMENU)TRACKBAR_ID,					// control identifier 
-		hResource,							// instance 
+		hInst,								// instance 
 		NULL								// no WM_CREATE parameter 
 		); 
 
 	return hwndTrack; 
+}
+
+void CPicWindow::BuildInfoString(TCHAR * buf, int size, bool bTooltip)
+{
+	// Unfortunately, we need two different strings for the tooltip
+	// and the info box. Because the tooltips use a different tab size
+	// than ExtTextOut(), and to keep the output aligned we therefore
+	// need two different strings.
+	// Note: some translations could end up with two identical strings, but
+	// in English we need two - even if we wouldn't need two in English, some
+	// translation might then need two again.
+	if (pSecondPic)
+	{
+		_stprintf_s(buf, size, 
+			(TCHAR const *)ResString(hResource, bTooltip ? IDS_DUALIMAGEINFOTT : IDS_DUALIMAGEINFO),
+			picture.GetFileSizeAsText().c_str(),
+			picture.GetWidth(), picture.GetHeight(),
+			picture.GetHorizontalResolution(), picture.GetVerticalResolution(),
+			picture.GetColorDepth(),
+			(UINT)(GetZoom()*100.0),
+			pSecondPic->GetFileSizeAsText().c_str(),
+			pSecondPic->GetWidth(), pSecondPic->GetHeight(),
+			pSecondPic->GetHorizontalResolution(), pSecondPic->GetVerticalResolution(),
+			pSecondPic->GetColorDepth(),
+			(UINT)(GetZoom2()*100.0));
+	}
+	else
+	{
+		_stprintf_s(buf, size, 
+			(TCHAR const *)ResString(hResource, bTooltip ? IDS_IMAGEINFOTT : IDS_IMAGEINFO),
+			picture.GetFileSizeAsText().c_str(), 
+			picture.GetWidth(), picture.GetHeight(),
+			picture.GetHorizontalResolution(), picture.GetVerticalResolution(),
+			picture.GetColorDepth(),
+			(UINT)(GetZoom()*100.0));
+	}
 }

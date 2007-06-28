@@ -48,7 +48,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\svn-win32-libintl\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;&quot;../../ext/cyrus-sasl/include&quot;"
+				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\libintl\libintl3-win32\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;&quot;../../ext/cyrus-sasl/include&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;SVN_DEBUG;APU_HAVE_DB=1;ENABLE_NLS;THESAURUS"
 				MinimalRebuild="true"
 				ExceptionHandling="1"
@@ -74,7 +74,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj\ResizableLib\Debug\ResizableLib.lib ../../obj\LogCacheLib\Debug\LogCacheLib.lib ../../ext/berkeley-db\db4.4-win32\lib\libdb44d.lib ../../ext/Subversion\debug_win32\libsvn_repos.lib ../../ext/Subversion\debug_win32\libsvn_diff.lib ../../ext/Subversion\debug_win32\libsvn_fs.lib ../../ext/Subversion\debug_win32\libsvn_fs_base.lib ../../ext/Subversion\debug_win32\libsvn_fs_fs.lib ../../ext/Subversion\debug_win32\libsvn_fs_util.lib ../../ext/Subversion\debug_win32\libsvn_ra_dav.lib ../../ext/Subversion\debug_win32\libsvn_ra_local.lib ../../ext/Subversion\debug_win32\libsvn_ra.lib ../../ext/Subversion\debug_win32\libsvn_ra_svn.lib ../../ext/neon\debug_win32\libneon.lib ../../ext/Subversion\debug_win32\libsvn_wc.lib ../../ext/Subversion\debug_win32\libsvn_subr.lib ../../ext/Subversion\debug_win32\libsvn_client.lib ../../ext/Subversion\debug_win32\libsvn_delta.lib ../../ext/apr\debug_win32\libapr_tsvn.lib ../../ext/cyrus-SASL\2.1.22-win32\lib\debug\libsasl.lib ../../ext/apr-util\debug_win32\libaprutil_tsvn.lib ../../ext/apr-util\xml\expat\lib\debug_win32\xml.lib ../../ext/svn-win32-libintl/lib/intl3_svn.lib"
+				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj\ResizableLib\Debug\ResizableLib.lib ../../obj\LogCacheLib\Debug\LogCacheLib.lib ../../ext/berkeley-db\db4.4-win32\lib\libdb44d.lib ../../ext/Subversion\debug_win32\libsvn_repos.lib ../../ext/Subversion\debug_win32\libsvn_diff.lib ../../ext/Subversion\debug_win32\libsvn_fs.lib ../../ext/Subversion\debug_win32\libsvn_fs_base.lib ../../ext/Subversion\debug_win32\libsvn_fs_fs.lib ../../ext/Subversion\debug_win32\libsvn_fs_util.lib ../../ext/Subversion\debug_win32\libsvn_ra_neon.lib ../../ext/Subversion\debug_win32\libsvn_ra_local.lib ../../ext/Subversion\debug_win32\libsvn_ra.lib ../../ext/Subversion\debug_win32\libsvn_ra_svn.lib ../../ext/neon\debug_win32\libneon.lib ../../ext/Subversion\debug_win32\libsvn_wc.lib ../../ext/Subversion\debug_win32\libsvn_subr.lib ../../ext/Subversion\debug_win32\libsvn_client.lib ../../ext/Subversion\debug_win32\libsvn_delta.lib ../../ext/apr\debug_win32\libapr_tsvn.lib ../../ext/cyrus-SASL\2.1.22-win32\lib\debug\libsasl.lib ../../ext/apr-util\debug_win32\libaprutil_tsvn.lib ../../ext/apr-util\xml\expat\lib\debug_win32\xml.lib ../../ext/libintl/libintl3-win32/lib/intl3_tsvn.lib"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="shell32;msvcrt.lib"
 				DelayLoadDLLs="gdiplus.dll"
@@ -138,7 +138,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\svn-win32-libintl\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;&quot;../../ext/cyrus-sasl/include&quot;"
+				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\libintl\libintl3-win32\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;&quot;../../ext/cyrus-sasl/include&quot;"
 				PreprocessorDefinitions="WIN64;_WINDOWS;_DEBUG;SVN_DEBUG;APU_HAVE_DB=1;ENABLE_NLS;THESAURUS"
 				MinimalRebuild="true"
 				ExceptionHandling="1"
@@ -164,7 +164,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj\ResizableLib\Debug64\ResizableLib.lib ../../obj\LogCacheLib\Debug64\LogCacheLib.lib ../../ext/berkeley-db\db4.4-x64\lib\libdb44d.lib ../../ext/Subversion\debug_x64\libsvn_repos.lib ../../ext/Subversion\debug_x64\libsvn_diff.lib ../../ext/Subversion\debug_x64\libsvn_fs.lib ../../ext/Subversion\debug_x64\libsvn_fs_base.lib ../../ext/Subversion\debug_x64\libsvn_fs_fs.lib ../../ext/Subversion\debug_x64\libsvn_fs_util.lib ../../ext/Subversion\debug_x64\libsvn_ra_dav.lib ../../ext/Subversion\debug_x64\libsvn_ra_local.lib ../../ext/Subversion\debug_x64\libsvn_ra.lib ../../ext/Subversion\debug_x64\libsvn_ra_svn.lib ../../ext/neon\debug_x64\libneon.lib ../../ext/Subversion\debug_x64\libsvn_wc.lib ../../ext/Subversion\debug_x64\libsvn_subr.lib ../../ext/Subversion\debug_x64\libsvn_client.lib ../../ext/Subversion\debug_x64\libsvn_delta.lib ../../ext/apr\debug_x64\libapr_tsvn.lib ../../ext/apr-util\debug_x64\libaprutil_tsvn.lib ../../ext/apr-util\xml\expat\lib\debug_x64\xml.lib ../../ext/svn-x64-libintl/lib/intl3_svn.lib ../../ext/cyrus-SASL\2.1.22-x64\lib\debug\libsasl.lib"
+				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj\ResizableLib\Debug64\ResizableLib.lib ../../obj\LogCacheLib\Debug64\LogCacheLib.lib ../../ext/berkeley-db\db4.4-x64\lib\libdb44d.lib ../../ext/Subversion\debug_x64\libsvn_repos.lib ../../ext/Subversion\debug_x64\libsvn_diff.lib ../../ext/Subversion\debug_x64\libsvn_fs.lib ../../ext/Subversion\debug_x64\libsvn_fs_base.lib ../../ext/Subversion\debug_x64\libsvn_fs_fs.lib ../../ext/Subversion\debug_x64\libsvn_fs_util.lib ../../ext/Subversion\debug_x64\libsvn_ra_neon.lib ../../ext/Subversion\debug_x64\libsvn_ra_local.lib ../../ext/Subversion\debug_x64\libsvn_ra.lib ../../ext/Subversion\debug_x64\libsvn_ra_svn.lib ../../ext/neon\debug_x64\libneon.lib ../../ext/Subversion\debug_x64\libsvn_wc.lib ../../ext/Subversion\debug_x64\libsvn_subr.lib ../../ext/Subversion\debug_x64\libsvn_client.lib ../../ext/Subversion\debug_x64\libsvn_delta.lib ../../ext/apr\debug_x64\libapr_tsvn.lib ../../ext/apr-util\debug_x64\libaprutil_tsvn.lib ../../ext/apr-util\xml\expat\lib\debug_x64\xml.lib ../../ext/libintl/libintl3-x64/lib/intl3_tsvn.lib ../../ext/cyrus-SASL\2.1.22-x64\lib\debug\libsasl.lib"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="shell32;msvcrt.lib"
 				DelayLoadDLLs="gdiplus.dll"
@@ -229,7 +229,7 @@
 				Optimization="1"
 				InlineFunctionExpansion="1"
 				FavorSizeOrSpeed="2"
-				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\svn-win32-libintl\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;&quot;../../ext/cyrus-sasl/include&quot;"
+				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\libintl\libintl3-win32\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;&quot;../../ext/cyrus-sasl/include&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;APU_HAVE_DB=1;THESAURUS"
 				StringPooling="true"
 				MinimalRebuild="false"
@@ -256,7 +256,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj/ResizableLib/Release/ResizableLib.Lib ../../obj\LogCacheLib\Release\LogCacheLib.lib ../../ext/berkeley-db\db4.4-win32\lib\libdb44.lib ../../ext/Subversion\release_win32\libsvn_repos.lib ../../ext/Subversion\release_win32\libsvn_diff.lib ../../ext/Subversion\release_win32\libsvn_fs.lib ../../ext/Subversion\release_win32\libsvn_fs_base.lib ../../ext/Subversion\release_win32\libsvn_fs_fs.lib ../../ext/Subversion\release_win32\libsvn_fs_util.lib ../../ext/Subversion\release_win32\libsvn_ra_dav.lib ../../ext/Subversion\release_win32\libsvn_ra_local.lib ../../ext/Subversion\release_win32\libsvn_ra.lib ../../ext/Subversion\release_win32\libsvn_ra_svn.lib ../../ext/neon\release_win32\libneon.lib ../../ext/Subversion\release_win32\libsvn_wc.lib ../../ext/Subversion\release_win32\libsvn_subr.lib ../../ext/Subversion\release_win32\libsvn_client.lib ../../ext/Subversion\release_win32\libsvn_delta.lib ../../ext/apr\release_win32\libapr_tsvn.lib ../../ext/apr-util\release_win32\libaprutil_tsvn.lib ../../ext/apr-util\xml\expat\lib\release_win32\xml.lib ../../ext/svn-win32-libintl/lib/intl3_svn.lib ../../ext/cyrus-SASL\2.1.22-win32\lib\release\libsasl.lib"
+				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj/ResizableLib/Release/ResizableLib.Lib ../../obj\LogCacheLib\Release\LogCacheLib.lib ../../ext/berkeley-db\db4.4-win32\lib\libdb44.lib ../../ext/Subversion\release_win32\libsvn_repos.lib ../../ext/Subversion\release_win32\libsvn_diff.lib ../../ext/Subversion\release_win32\libsvn_fs.lib ../../ext/Subversion\release_win32\libsvn_fs_base.lib ../../ext/Subversion\release_win32\libsvn_fs_fs.lib ../../ext/Subversion\release_win32\libsvn_fs_util.lib ../../ext/Subversion\release_win32\libsvn_ra_neon.lib ../../ext/Subversion\release_win32\libsvn_ra_local.lib ../../ext/Subversion\release_win32\libsvn_ra.lib ../../ext/Subversion\release_win32\libsvn_ra_svn.lib ../../ext/neon\release_win32\libneon.lib ../../ext/Subversion\release_win32\libsvn_wc.lib ../../ext/Subversion\release_win32\libsvn_subr.lib ../../ext/Subversion\release_win32\libsvn_client.lib ../../ext/Subversion\release_win32\libsvn_delta.lib ../../ext/apr\release_win32\libapr_tsvn.lib ../../ext/apr-util\release_win32\libaprutil_tsvn.lib ../../ext/apr-util\xml\expat\lib\release_win32\xml.lib ../../ext/libintl/libintl3-win32/lib/intl3_tsvn.lib ../../ext/cyrus-SASL\2.1.22-win32\lib\release\libsasl.lib"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="libcd.lib;libc;shell32;"
 				DelayLoadDLLs="gdiplus.dll"
@@ -325,7 +325,7 @@
 				Optimization="1"
 				InlineFunctionExpansion="1"
 				FavorSizeOrSpeed="2"
-				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\svn-win32-libintl\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;&quot;../../ext/cyrus-sasl/include&quot;"
+				AdditionalIncludeDirectories="&quot;../../ext/apr-util/include&quot;;&quot;../../ext/apr-util/xml/expat/lib&quot;;../../ext/Subversion/subversion/include;../../ext/Subversion/subversion/libsvn_client;../../ext/apr/include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\crashrpt;..\TortoiseShell;&quot;..\..\ext\libintl\libintl3-win32\inc&quot;;..\Utils\scintilla\include;..\..\ext\GRETA;..\Utils\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;&quot;../../ext/cyrus-sasl/include&quot;"
 				PreprocessorDefinitions="WIN64;_WINDOWS;NDEBUG;APU_HAVE_DB=1;THESAURUS"
 				StringPooling="true"
 				MinimalRebuild="false"
@@ -352,7 +352,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj/ResizableLib/Release64/ResizableLib.Lib ../../obj\LogCacheLib\Release64\LogCacheLib.lib ../../ext/berkeley-db\db4.4-x64\lib\libdb44.lib ../../ext/Subversion\release_x64\libsvn_repos.lib ../../ext/Subversion\release_x64\libsvn_diff.lib ../../ext/Subversion\release_x64\libsvn_fs.lib ../../ext/Subversion\release_x64\libsvn_fs_base.lib ../../ext/Subversion\release_x64\libsvn_fs_fs.lib ../../ext/Subversion\release_x64\libsvn_fs_util.lib ../../ext/Subversion\release_x64\libsvn_ra_dav.lib ../../ext/Subversion\release_x64\libsvn_ra_local.lib ../../ext/Subversion\release_x64\libsvn_ra.lib ../../ext/Subversion\release_x64\libsvn_ra_svn.lib ../../ext/neon\release_x64\libneon.lib ../../ext/Subversion\release_x64\libsvn_wc.lib ../../ext/Subversion\release_x64\libsvn_subr.lib ../../ext/Subversion\release_x64\libsvn_client.lib ../../ext/Subversion\release_x64\libsvn_delta.lib ../../ext/apr\release_x64\libapr_tsvn.lib ../../ext/apr-util\release_x64\libaprutil_tsvn.lib ../../ext/apr-util\xml\expat\lib\release_x64\xml.lib ../../ext/svn-x64-libintl/lib/intl3_svn.lib ../../ext/cyrus-SASL\2.1.22-x64\lib\release\libsasl.lib"
+				AdditionalDependencies="delayimp.lib wininet.lib shfolder.lib shell32.lib comctl32.lib mswsock.lib ws2_32.lib rpcrt4.lib shlwapi.lib Version.lib gdiplus.lib ../../obj/ResizableLib/Release64/ResizableLib.Lib ../../obj\LogCacheLib\Release64\LogCacheLib.lib ../../ext/berkeley-db\db4.4-x64\lib\libdb44.lib ../../ext/Subversion\release_x64\libsvn_repos.lib ../../ext/Subversion\release_x64\libsvn_diff.lib ../../ext/Subversion\release_x64\libsvn_fs.lib ../../ext/Subversion\release_x64\libsvn_fs_base.lib ../../ext/Subversion\release_x64\libsvn_fs_fs.lib ../../ext/Subversion\release_x64\libsvn_fs_util.lib ../../ext/Subversion\release_x64\libsvn_ra_neon.lib ../../ext/Subversion\release_x64\libsvn_ra_local.lib ../../ext/Subversion\release_x64\libsvn_ra.lib ../../ext/Subversion\release_x64\libsvn_ra_svn.lib ../../ext/neon\release_x64\libneon.lib ../../ext/Subversion\release_x64\libsvn_wc.lib ../../ext/Subversion\release_x64\libsvn_subr.lib ../../ext/Subversion\release_x64\libsvn_client.lib ../../ext/Subversion\release_x64\libsvn_delta.lib ../../ext/apr\release_x64\libapr_tsvn.lib ../../ext/apr-util\release_x64\libaprutil_tsvn.lib ../../ext/apr-util\xml\expat\lib\release_x64\xml.lib ../../ext/libintl/libintl3-x64/lib/intl3_tsvn.lib ../../ext/cyrus-SASL\2.1.22-x64\lib\release\libsasl.lib"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="libcd.lib;libc;shell32;"
 				DelayLoadDLLs="gdiplus.dll"
@@ -892,10 +892,10 @@
 				Name="3rd Party"
 				>
 				<Filter
-					Name="myspell"
+					Name="hunspell"
 					>
 					<File
-						RelativePath="..\Utils\myspell\affentry.cxx"
+						RelativePath="..\Utils\hunspell\affentry.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -904,6 +904,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -913,6 +914,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -922,6 +924,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -931,15 +934,16 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\affentry.hxx"
+						RelativePath="..\Utils\hunspell\affentry.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\affixmgr.cxx"
+						RelativePath="..\Utils\hunspell\affixmgr.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -948,6 +952,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -957,6 +962,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -966,6 +972,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -975,23 +982,24 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\affixmgr.hxx"
+						RelativePath="..\Utils\hunspell\affixmgr.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\atypes.hxx"
+						RelativePath="..\Utils\hunspell\atypes.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\baseaffix.hxx"
+						RelativePath="..\Utils\hunspell\baseaffix.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\csutil.cxx"
+						RelativePath="..\Utils\hunspell\csutil.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1000,6 +1008,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1009,6 +1018,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1018,6 +1028,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1027,15 +1038,16 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\csutil.hxx"
+						RelativePath="..\Utils\hunspell\csutil.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\dictmgr.cxx"
+						RelativePath="..\Utils\hunspell\dictmgr.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1044,6 +1056,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1053,6 +1066,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1062,6 +1076,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1071,15 +1086,16 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\dictmgr.hxx"
+						RelativePath="..\Utils\hunspell\dictmgr.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\example.cxx"
+						RelativePath="..\Utils\hunspell\hashmgr.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1088,6 +1104,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1097,6 +1114,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1106,6 +1124,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1115,11 +1134,20 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\hashmgr.cxx"
+						RelativePath="..\Utils\hunspell\hashmgr.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Utils\hunspell\htypes.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Utils\hunspell\hunspell.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1128,6 +1156,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1137,6 +1166,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1146,6 +1176,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1155,19 +1186,24 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\hashmgr.hxx"
+						RelativePath="..\Utils\hunspell\hunspell.h"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\htypes.hxx"
+						RelativePath="..\Utils\hunspell\hunspell.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\myspell.cxx"
+						RelativePath="..\Utils\hunspell\langnum.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Utils\hunspell\mythes.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1176,6 +1212,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1185,6 +1222,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1194,6 +1232,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1203,15 +1242,16 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\myspell.hxx"
+						RelativePath="..\Utils\hunspell\mythes.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\mythes.cxx"
+						RelativePath="..\Utils\hunspell\suggestmgr.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1220,6 +1260,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1229,6 +1270,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1238,6 +1280,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1247,15 +1290,16 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\mythes.hxx"
+						RelativePath="..\Utils\hunspell\suggestmgr.hxx"
 						>
 					</File>
 					<File
-						RelativePath="..\Utils\myspell\suggestmgr.cxx"
+						RelativePath="..\Utils\hunspell\utf_info.cxx"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1264,6 +1308,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1273,6 +1318,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1282,6 +1328,7 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
 						<FileConfiguration
@@ -1291,12 +1338,9 @@
 								Name="VCCLCompilerTool"
 								PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
+								WarningLevel="3"
 							/>
 						</FileConfiguration>
-					</File>
-					<File
-						RelativePath="..\Utils\myspell\suggestmgr.hxx"
-						>
 					</File>
 				</Filter>
 				<Filter
@@ -1446,6 +1490,14 @@
 			</File>
 			<File
 				RelativePath="..\Svn\SVNConfig.h"
+				>
+			</File>
+			<File
+				RelativePath="..\SVN\SVNDataObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\SVN\SVNDataObject.h"
 				>
 			</File>
 			<File

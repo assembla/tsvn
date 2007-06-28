@@ -90,8 +90,10 @@ public:
 	void Done() {m_rwSection.Done();}
 	bool IsWriter() {return m_rwSection.IsWriter();}
 #if defined (DEBUG) || defined (_DEBUG)
+	void AssertLock() {m_rwSection.AssertLock();}
 	void AssertWriting() {m_rwSection.AssertWriting();}
 #else
+	void AssertLock() {;}
 	void AssertWriting() {;}
 #endif
 	bool IsPathAllowed(CTSVNPath path) {return !!m_shellCache.IsPathAllowed(path.GetWinPath());}

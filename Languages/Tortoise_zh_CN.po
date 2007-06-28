@@ -31,7 +31,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2007-05-29 19:29+0800\n"
+"PO-Revision-Date: 2007-06-28 14:36+0800\n"
 "Last-Translator: Dongsheng Song <dongsheng.song@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -242,44 +242,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "确定要删除吗？"
-
-# ID:7,
-#: ID:7,
-#, c-format
-msgid ""
-"%s\n"
-"File size:\t\t\t%s\n"
-"Width:\t\t\t%ld pixel\n"
-"Height:\t\t\t%ld pixel\n"
-"Horizontal Resolution:\t%.1f dpi\n"
-"Vertical Resolution:\t\t%.1f dpi\n"
-"Depth:\t\t\t%d bit\n"
-"Zoom:\t\t\t%d%%\n"
-"\n"
-"%s\n"
-"File size:\t\t\t%s\n"
-"Width:\t\t\t%ld pixel\n"
-"Height:\t\t\t%ld pixel\n"
-"Horizontal Resolution:\t%.1f dpi\n"
-"Vertical Resolution:\t\t%.1f dpi\n"
-"Depth:\t\t\t%d bit"
-msgstr ""
-"%s\n"
-"文件大小：\t\t%s\n"
-"宽度：\t\t\t%ld pixel\n"
-"高度：\t\t\t%ld pixel\n"
-"水平分辨率：\t\t%.1f dpi\n"
-"垂直分辨率：\t\t%.1f dpi\n"
-"色深：\t\t\t%d bit\n"
-"缩放比例：\t\t%d%%\n"
-"\n"
-"%s\n"
-"文件大小：\t\t%s\n"
-"宽度：\t\t\t%ld pixel\n"
-"高度：\t\t\t%ld pixel\n"
-"水平分辨率：\t\t%.1f dpi\n"
-"垂直分辨率：\t\t%.1f dpi\n"
-"色深：\t\t\t%d bit"
 
 # ID:69,
 #: ID:69,
@@ -1711,6 +1673,15 @@ msgstr "创建文件夹(&R)..."
 msgid "CAP"
 msgstr "CAP"
 
+# ID:113,
+#: Control-ID:1126,
+msgid "Cache log messages"
+msgstr "缓存日志信息"
+
+#: ID:197,
+msgid "Caches the log messages to speed up log fetching"
+msgstr "缓存日志信息，以加速日志获取"
+
 # ID:82,
 #: ID:82,
 #, c-format
@@ -2820,20 +2791,6 @@ msgstr "输入代理服务器的 IP 地址或名称"
 msgid "Empty"
 msgstr "空的"
 
-# Control-ID:1240,
-#: Control-ID:1240,
-msgid "Enable &accelerators on the top level menu"
-msgstr "使用顶级菜单的快捷键(&A)"
-
-# ID:196,
-#: ID:196,
-msgid ""
-"Enable this if you want keyboard accelerators on the top level context menu too.\n"
-"Note that the context menu icons look nicer with this disabled."
-msgstr ""
-"打开该选项可以使用快捷键来访问顶级关联菜单。\n"
-"注意，如果不使用快捷键，关联菜单的图标看起来更漂亮。"
-
 # ID:196,
 #: ID:196,
 msgid ""
@@ -3129,6 +3086,61 @@ msgstr "文件补丁"
 #: ID:7,
 #, c-format
 msgid ""
+"File size:\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%"
+msgstr ""
+"文件大小：\t\t%s\n"
+"宽度：\t\t\t%ld 像素\n"
+"高度：\t\t\t%ld 像素\n"
+"水平分辨率：\t%.1f dpi\n"
+"垂直分辨率：\t%.1f dpi\n"
+"色深：\t\t\t%d 位\n"
+"缩放比例：\t\t\t%d%%"
+
+# ID:7,
+#: ID:8,
+#, c-format
+msgid ""
+"File size:\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%\n"
+"\n"
+"File size:\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%"
+msgstr ""
+"文件大小：\t\t%s\n"
+"宽度：\t\t\t%ld 像素\n"
+"高度：\t\t\t%ld 像素\n"
+"水平分辨率：\t%.1f dpi\n"
+"垂直分辨率：\t%.1f dpi\n"
+"色深：\t\t\t%d 位\n"
+"缩放比例：\t\t\t%d%%\n"
+"\n"
+"文件大小：\t\t%s\n"
+"宽度：\t\t\t%ld 像素\n"
+"高度：\t\t\t%ld 像素\n"
+"水平分辨率：\t%.1f dpi\n"
+"垂直分辨率：\t%.1f dpi\n"
+"色深：\t\t\t%d 位缩放比例：\t\t\t%d%%"
+
+# ID:7,
+#: ID:7,
+#, c-format
+msgid ""
 "File size:\t\t\t%s\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
@@ -3144,6 +3156,41 @@ msgstr ""
 "垂直分辨率：\t\t%.1f dpi\n"
 "色深：\t\t\t%d bit\n"
 "缩放比例：\t\t%d%%"
+
+# ID:7,
+#: ID:7,
+#, c-format
+msgid ""
+"File size:\t\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%\n"
+"\n"
+"File size:\t\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%"
+msgstr ""
+"文件大小：\t\t\t%s\n"
+"宽度：\t\t\t%ld 像素\n"
+"高度：\t\t\t%ld 像素\n"
+"水平分辨率：\t%.1f dpi\n"
+"垂直分辨率：\t\t%.1f dpi\n"
+"色深：\t\t\t%d 位\n"
+"缩放比例：\t\t\t%d%%\n"
+"\n"
+"文件大小：\t\t\t%s\n"
+"宽度：\t\t\t%ld 像素\n"
+"高度：\t\t\t%ld 像素\n"
+"水平分辨率：\t%.1f dpi\n"
+"垂直分辨率：\t\t%.1f dpi\n"
+"色深：\t\t\t%d 位缩放比例:\t\t\t%d%%"
 
 # Control-ID:65535,
 #: Control-ID:65535,
@@ -3169,6 +3216,10 @@ msgstr ""
 #: ID:77,#: ID:219,
 msgid "Finished!"
 msgstr "完成！"
+
+#: MenuEntry
+msgid "Fit Images &together"
+msgstr "优化图像显示尺寸(&T)"
 
 # Control-ID:1315,
 #: Control-ID:1315,
@@ -3476,6 +3527,11 @@ msgstr "ID:32796:V C +A"
 msgid "ID:32809:V C +F"
 msgstr "ID:32809:V C +F"
 
+#. Accelerator Entry for Menu ID:32810; 'Fit Images &together'
+#: Corresponding Menu ID:32810; 'Fit Images &together'
+msgid "ID:32810:V   +T"
+msgstr "ID:32810:V   +T"
+
 #. Accelerator Entry for Menu ID:57601; '&Open Ctrl-O'
 #: Corresponding Menu ID:57601; '&Open Ctrl-O'
 msgid "ID:57601:V C +O"
@@ -3533,8 +3589,8 @@ msgstr "图标/设计/程序:     Luebbe Onken"
 
 # ID:194,
 #: ID:194,
-msgid "If activated, prevents the overlays from showing in \"save as...\" or \"open\" dialogs"
-msgstr "如果激活此选项，在“另存为...”或是“打开”对话框中不显示覆盖图标。"
+msgid "If activated, prevents the overlays and the context menu from showing in \"save as...\" or \"open\" dialogs"
+msgstr "如果激活此选项，在“另存为...”或“打开”对话框中不显示覆盖图标和上下文菜单。"
 
 # ID:198,
 #: ID:198,
@@ -4209,6 +4265,12 @@ msgstr "合并"
 #: ID:78,
 msgid "Merge - TortoiseSVN"
 msgstr "合并 - TortoiseSVN"
+
+# Dlg-ID:141,#:
+# Control-ID:65535,
+#: Control-ID:1377,
+msgid "Merge Depth"
+msgstr "合并深度"
 
 # ID:263,#:
 # ID:263,
@@ -4898,8 +4960,8 @@ msgstr "正在获取差异，请稍候..."
 
 # ID:104,
 #: ID:104,
-msgid "Please wait while the repository browser is initialized..."
-msgstr "请稍候，正在启动版本库浏览器"
+msgid "Please wait while the repository browser is initializing..."
+msgstr "请稍候，正在启动版本库浏览器 ..."
 
 # ID:119,#:
 # ID:146,#:
@@ -5952,8 +6014,8 @@ msgstr "显示日志(&L)..."
 
 # Control-ID:1088,
 #: Control-ID:1088,
-msgid "Show &overlays only in explorer"
-msgstr "仅在资源管理器中显示图标覆盖(&O)"
+msgid "Show &overlays and context menu only in explorer"
+msgstr "仅在资源管理器中显示图标覆盖和上下文菜单(&O)"
 
 # Control-ID:1073,
 #: Control-ID:1073,
@@ -7462,6 +7524,11 @@ msgstr "工作拷贝"
 #: Control-ID:1335,
 msgid "Working Copy Path:"
 msgstr "工作拷贝路径"
+
+# Control-ID:1183,
+#: ID:267,
+msgid "Working copy"
+msgstr "工作副本"
 
 # ID:80,
 #: ID:80,

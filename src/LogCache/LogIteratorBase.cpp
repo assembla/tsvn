@@ -148,7 +148,6 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 	, CDictionaryBasedTempPath& searchPath
 	, revision_t& searchRevision)
 {
-	bool addFound = false;
 	// any chance that this revision affects our search path?
 
 	if (!revisionRootPath.IsValid())
@@ -159,6 +158,9 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 
 	// close examination of all changes
 
+	bool plainAddFound = false;
+
+	CRevisionInfoContainer::CChangesIterator bestRename = last;
 	for ( CRevisionInfoContainer::CChangesIterator iter = first
 		; iter != last
 		; ++iter)
@@ -190,15 +192,17 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 				{
 					// continue search on copy source path
 
-					searchPath = searchPath.ReplaceParent ( iter.GetPath()
-														  , iter.GetFromPath());
-					searchRevision = iter.GetFromRevision();
-					return true;
+					// The last copy found will also be the one closed
+					// to our searchPath (there may be multiple renames,
+					// if the base path got renamed).
+
+					bestRename = iter;
 				}
 				else
 				{
 					searchRevision = NO_REVISION;
-					addFound = true;
+					plainAddFound = true;
+
 					// we don't return here immediately, since an ADD without
 					// a copyfrom doesn't mean necessarily that our path got
 					// added in this revision. Instead, just set a flag indicating
@@ -234,7 +238,20 @@ bool CLogIteratorBase::InternalHandleCopyAndDelete
 		}
 	}
 
-	if (addFound)
+	// there was a rename / copy from some older path,rev
+
+	if (bestRename != last)
+	{
+		searchPath = searchPath.ReplaceParent ( bestRename.GetPath()
+											  , bestRename.GetFromPath());
+		searchRevision = bestRename.GetFromRevision();
+
+		return true;
+	}
+
+    // we did not rename this item but actually reached the end of the history
+
+	if (plainAddFound)
 		return true;
 
 	// all fine, no special action required

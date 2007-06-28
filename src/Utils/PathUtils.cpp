@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,7 +51,137 @@ BOOL CPathUtils::MakeSureDirectoryPathExists(LPCTSTR path)
 	return bRet;
 }
 
-#ifdef _MFC_VER
+void CPathUtils::Unescape(char * psz)
+{
+	char * pszSource = psz;
+	char * pszDest = psz;
+
+	static const char szHex[] = "0123456789ABCDEF";
+
+	// Unescape special characters. The number of characters
+	// in the *pszDest is assumed to be <= the number of characters
+	// in pszSource (they are both the same string anyway)
+
+	while (*pszSource != '\0' && *pszDest != '\0')
+	{
+		if (*pszSource == '%')
+		{
+			// The next two chars following '%' should be digits
+			if ( *(pszSource + 1) == '\0' ||
+				*(pszSource + 2) == '\0' )
+			{
+				// nothing left to do
+				break;
+			}
+
+			char nValue = '?';
+			const char * pszLow = NULL;
+			const char * pszHigh = NULL;
+			pszSource++;
+
+			*pszSource = (char) toupper(*pszSource);
+			pszHigh = strchr(szHex, *pszSource);
+
+			if (pszHigh != NULL)
+			{
+				pszSource++;
+				*pszSource = (char) toupper(*pszSource);
+				pszLow = strchr(szHex, *pszSource);
+
+				if (pszLow != NULL)
+				{
+					nValue = (char) (((pszHigh - szHex) << 4) +
+						(pszLow - szHex));
+				}
+			}
+			else
+			{
+				pszSource--;
+				nValue = *pszSource;
+			}
+			*pszDest++ = nValue;
+		} 
+		else
+			*pszDest++ = *pszSource;
+
+		pszSource++;
+	}
+
+	*pszDest = '\0';
+}
+
+static const char iri_escape_chars[256] = {
+	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
+
+	/* 128 */
+	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0
+};
+
+const char uri_autoescape_chars[256] = {
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 1, 0, 0, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 1, 0, 0,
+
+	/* 64 */
+	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 0, 1,
+	0, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 1, 0,
+
+	/* 128 */
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+
+	/* 192 */
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+};
+
+static const char uri_char_validity[256] = {
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 1, 0, 0, 1, 0, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 1, 0, 0,
+
+	/* 64 */
+	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 0, 1,
+	0, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
+	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 1, 0,
+
+	/* 128 */
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+
+	/* 192 */
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
+};
+
+
 void CPathUtils::ConvertToBackslash(LPTSTR dest, LPCTSTR src, size_t len)
 {
 	_tcscpy_s(dest, len, src);
@@ -61,6 +191,7 @@ void CPathUtils::ConvertToBackslash(LPTSTR dest, LPCTSTR src, size_t len)
 			*p = '\\';
 }
 
+#ifdef _MFC_VER
 CString CPathUtils::GetFileNameFromPath(CString sPath)
 {
 	CString ret;
@@ -173,131 +304,6 @@ CString CPathUtils::GetAppDataDirectory()
 	return CString (path) + _T('\\');
 }
 
-void CPathUtils::Unescape(char * psz)
-{
-	char * pszSource = psz;
-	char * pszDest = psz;
-
-	static const char szHex[] = "0123456789ABCDEF";
-
-	// Unescape special characters. The number of characters
-	// in the *pszDest is assumed to be <= the number of characters
-	// in pszSource (they are both the same string anyway)
-
-	while (*pszSource != '\0' && *pszDest != '\0')
-	{
-		if (*pszSource == '%')
-		{
-			// The next two chars following '%' should be digits
-			if ( *(pszSource + 1) == '\0' ||
-				*(pszSource + 2) == '\0' )
-			{
-				// nothing left to do
-				break;
-			}
-
-			char nValue = '?';
-			const char * pszLow = NULL;
-			const char * pszHigh = NULL;
-			pszSource++;
-
-			*pszSource = (char) toupper(*pszSource);
-			pszHigh = strchr(szHex, *pszSource);
-
-			if (pszHigh != NULL)
-			{
-				pszSource++;
-				*pszSource = (char) toupper(*pszSource);
-				pszLow = strchr(szHex, *pszSource);
-
-				if (pszLow != NULL)
-				{
-					nValue = (char) (((pszHigh - szHex) << 4) +
-						(pszLow - szHex));
-				}
-			}
-			*pszDest++ = nValue;
-		} 
-		else
-			*pszDest++ = *pszSource;
-
-		pszSource++;
-	}
-
-	*pszDest = '\0';
-}
-
-static const char iri_escape_chars[256] = {
-	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1,
-
-	/* 128 */
-	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0
-};
-
-const char uri_autoescape_chars[256] = {
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 1, 0, 0, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 1, 0, 0,
-
-	/* 64 */
-	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 0, 1,
-	0, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 1, 0,
-
-	/* 128 */
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-
-	/* 192 */
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-};
-
-static const char uri_char_validity[256] = {
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 1, 0, 0, 1, 0, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 1, 0, 0,
-
-	/* 64 */
-	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 0, 1,
-	0, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 1, 1, 1, 1, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,   1, 1, 1, 0, 0, 0, 1, 0,
-
-	/* 128 */
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-
-	/* 192 */
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0,
-};
-
 CStringA CPathUtils::PathEscape(const CStringA& path)
 {
 	CStringA ret2;
@@ -340,6 +346,39 @@ CStringA CPathUtils::PathEscape(const CStringA& path)
 	ret.Replace(("file:///%5C"), ("file:///\\"));
 	ret.Replace(("file:////%5C"), ("file:////\\"));
 
+	return ret;
+}
+
+CStringA CPathUtils::PathUnescape(const CStringA& path)
+{
+	std::auto_ptr<char> urlabuf (new char[path.GetLength()+1]);
+
+	strcpy_s(urlabuf.get(), path.GetLength()+1, path);
+	Unescape(urlabuf.get());
+
+	return urlabuf.get();
+}
+
+CStringW CPathUtils::PathUnescape(const CStringW& path)
+{
+	char * buf;
+	CStringA patha;
+	int len = path.GetLength();
+	if (len==0)
+		return CStringW();
+	buf = patha.GetBuffer(len*4 + 1);
+	int lengthIncTerminator = WideCharToMultiByte(CP_UTF8, 0, path, -1, buf, len*4, NULL, NULL);
+	patha.ReleaseBuffer(lengthIncTerminator-1);
+
+	patha = PathUnescape(patha);
+
+	WCHAR * bufw;
+	len = patha.GetLength();
+	bufw = new WCHAR[len*4 + 1];
+	ZeroMemory(bufw, (len*4 + 1)*sizeof(WCHAR));
+	MultiByteToWideChar(CP_UTF8, 0, patha, -1, bufw, len*4);
+	CStringW ret = CStringW(bufw);
+	delete [] bufw;
 	return ret;
 }
 
@@ -397,3 +436,27 @@ CString CPathUtils::GetVersionFromFile(const CString & p_strDateiname)
 
 
 #endif
+
+#if defined(_DEBUG) && defined(_MFC_VER)
+// Some test cases for these classes
+static class CPathTests
+{
+public:
+	CPathTests()
+	{
+		UnescapeTest();
+	}
+
+private:
+	void UnescapeTest()
+	{
+		CString test(_T("file:///d:/REpos1/uCOS-100/Trunk/name%20with%20spaces/NewTest%20%%20NewTest"));
+		CString test2 = CPathUtils::PathUnescape(test);
+		ATLASSERT(test2.Compare(_T("file:///d:/REpos1/uCOS-100/Trunk/name with spaces/NewTest % NewTest")) == 0);
+		CStringA test3 = CPathUtils::PathEscape("file:///d:/REpos1/uCOS-100/Trunk/name with spaces/NewTest % NewTest");
+		ATLASSERT(test3.Compare("file:///d:/REpos1/uCOS-100/Trunk/name%20with%20spaces/NewTest%20%%20NewTest") == 0);
+	}
+
+} CPathTests;
+#endif
+

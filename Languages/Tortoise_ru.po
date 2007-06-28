@@ -42,13 +42,13 @@
 # you -- вы
 #
 # Выполнено на основе перевода Alexander <brambo@inbox.ru> из версии: 2495
-# Версии 3826 - 9577: Stanislav Petrakov <stannic@gmail.com>
+# Версии 3826 - 9894: Stanislav Petrakov <stannic@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2004-06-28 09:49+0200\n"
-"PO-Revision-Date: 2007-05-28 21:44+0300\n"
+"PO-Revision-Date: 2007-06-26 00:31+0300\n"
 "Last-Translator: Stanislav Petrakov <stannic@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -212,43 +212,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "Вы действительно желаете это удалить?"
-
-#: ID:7
-#, c-format
-msgid ""
-"%s\n"
-"File size:\t\t\t%s\n"
-"Width:\t\t\t%ld pixel\n"
-"Height:\t\t\t%ld pixel\n"
-"Horizontal Resolution:\t%.1f dpi\n"
-"Vertical Resolution:\t\t%.1f dpi\n"
-"Depth:\t\t\t%d bit\n"
-"Zoom:\t\t\t%d%%\n"
-"\n"
-"%s\n"
-"File size:\t\t\t%s\n"
-"Width:\t\t\t%ld pixel\n"
-"Height:\t\t\t%ld pixel\n"
-"Horizontal Resolution:\t%.1f dpi\n"
-"Vertical Resolution:\t\t%.1f dpi\n"
-"Depth:\t\t\t%d bit"
-msgstr ""
-"%s\n"
-"Размер файла:\t\t%s\n"
-"Ширина:\t\t\t%ld пиксел(ов)\n"
-"Высота:\t\t\t%ld пиксел(ов)\n"
-"Разреш. по горизонтали:\t%.1f dpi\n"
-"Разреш. по вертикали:\t%.1f dpi\n"
-"Глубина цвета:\t\t%d бит\n"
-"Увеличение:\t\t%d%%\n"
-"\n"
-"%s\n"
-"Размер файла:\t\t%s\n"
-"Ширина:\t\t\t%ld пиксел(ов)\n"
-"Высота:\t\t\t%ld пиксел(ов)\n"
-"Разреш. по горизонтали:\t%.1f dpi\n"
-"Разреш. по вертикали:\t%.1f dpi\n"
-"Глубина цвета:\t\t%d бит"
 
 #: ID:69
 #, c-format
@@ -1023,7 +986,7 @@ msgstr "Добавить '%s' в словарь"
 
 #: ID:16
 msgid "Add (as replacement)..."
-msgstr "Добавить (как замену)..."
+msgstr "Добавить (как перемещение)..."
 
 #: ID:77
 msgid "Add - TortoiseSVN"
@@ -1435,6 +1398,14 @@ msgstr "С&оздать папку..."
 #: ID:3697
 msgid "CAP"
 msgstr "CAP"
+
+#: Control-ID:1126
+msgid "Cache log messages"
+msgstr "Кэшировать сообщения журнала"
+
+#: ID:197
+msgid "Caches the log messages to speed up log fetching"
+msgstr "Включает кэширование сообщений журнала для ускорения их доставки"
 
 #: ID:82
 #, c-format
@@ -1987,7 +1958,7 @@ msgid ""
 "Patching is not possible!"
 msgstr ""
 "Не могу получить версию %s файла %s.\n"
-"Невозможено применить заплатку!"
+"Невозможно применить заплатку!"
 
 #: ID:64
 #, c-format
@@ -2332,7 +2303,7 @@ msgstr "Редактировать свойства"
 
 #: ID:113
 msgid "Edit author"
-msgstr "Редактировать автора"
+msgstr "Изменить автора"
 
 #: ID:115
 msgid "Edit author name"
@@ -2349,7 +2320,7 @@ msgstr "Редактировать программу слияния для ко
 #: ID:113
 #: ID:115
 msgid "Edit log message"
-msgstr "Редактировать сообщение журнала"
+msgstr "Изменить сообщение журнала"
 
 #: Control-ID:1331
 msgid "Edit..."
@@ -2363,18 +2334,6 @@ msgstr "Введите имя либо IP-адрес прокси-сервера
 #: Control-ID:65535
 msgid "Empty"
 msgstr "Отсутствующее"
-
-#: Control-ID:1240
-msgid "Enable &accelerators on the top level menu"
-msgstr "Включить &ускорители в меню верхнего уровня"
-
-#: ID:196
-msgid ""
-"Enable this if you want keyboard accelerators on the top level context menu too.\n"
-"Note that the context menu icons look nicer with this disabled."
-msgstr ""
-"Отметьте, если вам нужны клавиатурные ускорители и в контекстном меню верхнего уровня.\n"
-"Предупреждение: значки в контекстном меню выглядят лучше, когда эта опция выключена."
 
 #: ID:196
 msgid ""
@@ -2587,7 +2546,7 @@ msgstr "Извлечение файла..."
 #: ID:313
 #, c-format
 msgid "Fetching revision %s of file:"
-msgstr "Выборка ревизии %s файла:"
+msgstr "Извлечение ревизии %s файла"
 
 #: ID:63
 #: ID:74
@@ -2617,6 +2576,60 @@ msgstr "Заплатки файла"
 #: ID:7
 #, c-format
 msgid ""
+"File size:\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%"
+msgstr ""
+"Размер файла:\t\t%s\n"
+"Ширина:\t\t\t%ld пиксел(ов)\n"
+"Высота:\t\t\t%ld пиксел(ов)\n"
+"Разреш. по горизонтали:\t%.1f dpi\n"
+"Разреш. по вертикали:\t%.1f dpi\n"
+"Глубина цвета:\t\t%d бит\n"
+"Увеличение:\t\t%d%%"
+
+#: ID:8
+#, c-format
+msgid ""
+"File size:\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%\n"
+"\n"
+"File size:\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%"
+msgstr ""
+"Размер файла:\t\t%s\n"
+"Ширина:\t\t\t%ld пиксел(ов)\n"
+"Высота:\t\t\t%ld пиксел(ов)\n"
+"Разреш. по горизонтали:\t%.1f dpi\n"
+"Разреш. по вертикали:\t%.1f dpi\n"
+"Глубина цвета:\t\t%d бит\n"
+"Увеличение:\t\t%d%%\n"
+"\n"
+"Размер файла:\t\t%s\n"
+"Ширина:\t\t\t%ld пиксел(ов)\n"
+"Высота:\t\t\t%ld пиксел(ов)\n"
+"Разреш. по горизонтали:\t%.1f dpi\n"
+"Разреш. по вертикали:\t%.1f dpi\n"
+"Глубина цвета:\t\t%d бит\n"
+"Увеличение:\t\t%d%%"
+
+#: ID:7
+#, c-format
+msgid ""
 "File size:\t\t\t%s\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
@@ -2625,6 +2638,41 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
+"Размер файла:\t\t%s\n"
+"Ширина:\t\t\t%ld пиксел(ов)\n"
+"Высота:\t\t\t%ld пиксел(ов)\n"
+"Разреш. по горизонтали:\t%.1f dpi\n"
+"Разреш. по вертикали:\t%.1f dpi\n"
+"Глубина цвета:\t\t%d бит\n"
+"Увеличение:\t\t%d%%"
+
+#: ID:7
+#, c-format
+msgid ""
+"File size:\t\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%\n"
+"\n"
+"File size:\t\t\t%s\n"
+"Width:\t\t\t%ld pixel\n"
+"Height:\t\t\t%ld pixel\n"
+"Horizontal Resolution:\t%.1f dpi\n"
+"Vertical Resolution:\t\t%.1f dpi\n"
+"Depth:\t\t\t%d bit\n"
+"Zoom:\t\t\t%d%%"
+msgstr ""
+"Размер файла:\t\t%s\n"
+"Ширина:\t\t\t%ld пиксел(ов)\n"
+"Высота:\t\t\t%ld пиксел(ов)\n"
+"Разреш. по горизонтали:\t%.1f dpi\n"
+"Разреш. по вертикали:\t%.1f dpi\n"
+"Глубина цвета:\t\t%d бит\n"
+"Увеличение:\t\t%d%%\n"
+"\n"
 "Размер файла:\t\t%s\n"
 "Ширина:\t\t\t%ld пиксел(ов)\n"
 "Высота:\t\t\t%ld пиксел(ов)\n"
@@ -2655,6 +2703,10 @@ msgstr ""
 #: ID:219
 msgid "Finished!"
 msgstr "Закончено!"
+
+#: MenuEntry
+msgid "Fit Images &together"
+msgstr "&Вписать обе картинки"
 
 #: Control-ID:1315
 msgid "Floppy drives (A: B:)"
@@ -2936,6 +2988,12 @@ msgstr "ID:32796:V C +A"
 msgid "ID:32809:V C +F"
 msgstr "ID:32809:V C +F"
 
+#. Accelerator Entry for Menu ID:32810; 'Fit Images &together'
+#: Corresponding Menu ID:32810
+#: ; 'Fit Images &together'
+msgid "ID:32810:V   +T"
+msgstr "ID:32810:V   +T"
+
 #. Accelerator Entry for Menu ID:57601; '&Open Ctrl-O'
 #: Corresponding Menu ID:57601
 #: ; '&Open Ctrl-O'
@@ -2999,8 +3057,10 @@ msgid "Icons/Design/Code:     Luebbe Onken"
 msgstr "Значки/Дизайн/Код: Luebbe Onken"
 
 #: ID:194
-msgid "If activated, prevents the overlays from showing in \"save as...\" or \"open\" dialogs"
-msgstr "Если отмечено, запрещает помечать значки в диалогах \"сохранить как...\" и \"открыть\""
+msgid "If activated, prevents the overlays and the context menu from showing in \"save as...\" or \"open\" dialogs"
+msgstr ""
+"Если отмечено, то контекстное меню и пометки на значках не будут отображаться\n"
+"в диалогах \"сохранить как...\" и \"открыть\""
 
 #: ID:198
 msgid ""
@@ -3590,6 +3650,10 @@ msgstr "Слияние"
 msgid "Merge - TortoiseSVN"
 msgstr "Слияние - TortoiseSVN"
 
+#: Control-ID:1377
+msgid "Merge Depth"
+msgstr "Глубина охвата при слиянии"
+
 #: ID:263
 msgid "Merged"
 msgstr "Слито"
@@ -4130,11 +4194,11 @@ msgstr "Пожалуйста, выберите тип привязки"
 
 #: ID:76
 msgid "Please specify the certificate type"
-msgstr "Пожалуйста, укажите тип сертификата."
+msgstr "Пожалуйста, укажите тип сертификата"
 
 #: ID:132
 msgid "Please wait - this can take several minutes. Seriously!"
-msgstr "Подождите, пожалуйста. Это может занять несколько минут. Серьезно!"
+msgstr "Подождите, пожалуйста, - это может занять несколько минут. Серьезно!"
 
 #: ID:13
 msgid "Please wait while cancelling..."
@@ -4142,10 +4206,10 @@ msgstr "Пожалуйста, подождите отмены..."
 
 #: ID:319
 msgid "Please wait while differences are obtained..."
-msgstr "Пожалуйста, подождите, пока получаются различия..."
+msgstr "Подождите, пожалуйста, пока получаются различия..."
 
 #: ID:104
-msgid "Please wait while the repository browser is initialized..."
+msgid "Please wait while the repository browser is initializing..."
 msgstr "Подождите, пожалуйста, пока обозреватель хранилища инициализируется..."
 
 #: ID:104
@@ -4481,11 +4545,11 @@ msgstr ""
 
 #: Control-ID:65535
 msgid "Replaced node"
-msgstr "Заменённый узел"
+msgstr "Перемещённый узел"
 
 #: ID:74
 msgid "Replacing"
-msgstr "Замена"
+msgstr "Перемещено"
 
 #: Control-ID:1374
 #: Control-ID:1055
@@ -5008,8 +5072,8 @@ msgid "Show &log..."
 msgstr "Показать &журнал..."
 
 #: Control-ID:1088
-msgid "Show &overlays only in explorer"
-msgstr "Показывать &пометки только в проводнике"
+msgid "Show &overlays and context menu only in explorer"
+msgstr "Показывать &пометки и контекстное меню только в проводнике"
 
 #: Control-ID:1073
 msgid "Show &unversioned files"
@@ -6054,7 +6118,7 @@ msgstr ""
 
 #: ID:266
 msgid "Unknown depth"
-msgstr "Неизвестный охват"
+msgstr "Неизвестная глубина"
 
 #: ID:221
 #: Dlg-ID:242
@@ -6317,6 +6381,10 @@ msgstr "Рабочая копия"
 #: Control-ID:1335
 msgid "Working Copy Path:"
 msgstr "Путь в рабочей копии:"
+
+#: ID:267
+msgid "Working copy"
+msgstr "Рабочая копия"
 
 #: ID:80
 #, c-format
@@ -6685,7 +6753,7 @@ msgstr "отсутствует"
 
 #: Control-ID:65535
 msgid "missing / deleted / replaced"
-msgstr "отсутствует / удалён / заменён"
+msgstr "отсутствует / удалён / перемещён"
 
 #: ID:10
 msgid "modified"
@@ -6738,7 +6806,7 @@ msgstr "только-для-чтения"
 
 #: ID:10
 msgid "replaced"
-msgstr "заменён"
+msgstr "перемещён"
 
 #: ID:220
 msgid "respecting ancestry"

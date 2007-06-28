@@ -180,12 +180,6 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
                                    LPDATAOBJECT pDataObj,
                                    HKEY /* hRegKey */)
 {
-	OSVERSIONINFOEX inf;
-	ZeroMemory(&inf, sizeof(OSVERSIONINFOEX));
-	inf.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	GetVersionEx((OSVERSIONINFO *)&inf);
-	fullver = MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion);
-
 	ATLTRACE("Shell :: Initialize\n");
 	PreserveChdir preserveChdir;
 	files_.clear();
@@ -540,11 +534,10 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 	return NOERROR;
 }
 
-void CShellExt::InsertSVNMenu(BOOL istop, HMENU menu, UINT pos, UINT_PTR id, UINT stringid, UINT icon, UINT idCmdFirst, SVNCommands com)
+void CShellExt::InsertSVNMenu(BOOL istop, HMENU menu, UINT pos, UINT_PTR id, UINT stringid, UINT icon, UINT idCmdFirst, SVNCommands com, UINT uFlags)
 {
-	TCHAR menutextbuffer[255];
-	TCHAR verbsbuffer[255];
-	ZeroMemory(menutextbuffer, sizeof(menutextbuffer));
+	TCHAR menutextbuffer[255] = {0};
+	TCHAR verbsbuffer[255] = {0};
 	MAKESTRING(stringid);
 
 	if (istop)
@@ -554,22 +547,21 @@ void CShellExt::InsertSVNMenu(BOOL istop, HMENU menu, UINT pos, UINT_PTR id, UIN
 		_tcscpy_s(menutextbuffer, 255, _T("SVN "));
 	}
 	_tcscat_s(menutextbuffer, 255, stringtablebuffer);
-	if (fullver >= 0x600) 
+	if ((fullver < 0x500)||(fullver == 0x500 && !uFlags))
 	{
 		InsertMenu(menu, pos, MF_BYPOSITION | MF_STRING , id, menutextbuffer);
-		HBITMAP bmp = IconToBitmap(icon, (COLORREF)GetSysColor(COLOR_MENU)); 
+		HBITMAP bmp = IconToBitmap(icon); 
 		SetMenuItemBitmaps(menu, pos, MF_BYPOSITION, bmp, bmp);
 	}
 	else
 	{
-		MENUITEMINFO menuiteminfo;
-		ZeroMemory(&menuiteminfo, sizeof(menuiteminfo));
+		MENUITEMINFO menuiteminfo = {0};
 		menuiteminfo.cbSize = sizeof(menuiteminfo);
-		menuiteminfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_SUBMENU | MIIM_DATA | MIIM_BITMAP | MIIM_STRING;
+		menuiteminfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_BITMAP | MIIM_STRING;
 		menuiteminfo.fType = MFT_STRING;
 		menuiteminfo.dwTypeData = menutextbuffer;
-		menuiteminfo.cch = (UINT)min(_tcslen(menuiteminfo.dwTypeData), UINT_MAX);
-		menuiteminfo.hbmpItem = HBMMENU_CALLBACK;
+		if (icon)
+			menuiteminfo.hbmpItem = (fullver >= 0x600) ? IconToBitmapPARGB32(icon) : HBMMENU_CALLBACK;
 		menuiteminfo.wID = id;
 		InsertMenuItem(menu, pos, TRUE, &menuiteminfo);
 	}
@@ -599,7 +591,7 @@ void CShellExt::InsertSVNMenu(BOOL istop, HMENU menu, UINT pos, UINT_PTR id, UIN
 		mySubMenuMap[pos] = com;
 }
 
-HBITMAP CShellExt::IconToBitmap(UINT uIcon, COLORREF transparentColor)
+HBITMAP CShellExt::IconToBitmap(UINT uIcon)
 {
 	std::map<UINT, HBITMAP>::iterator bitmap_it = bitmaps.lower_bound(uIcon);
 	if (bitmap_it != bitmaps.end() && bitmap_it->first == uIcon)
@@ -609,22 +601,21 @@ HBITMAP CShellExt::IconToBitmap(UINT uIcon, COLORREF transparentColor)
 	if (!hIcon)
 		return NULL;
 
-	RECT     rect;
+	RECT rect;
 
 	rect.right = ::GetSystemMetrics(SM_CXMENUCHECK);
 	rect.bottom = ::GetSystemMetrics(SM_CYMENUCHECK);
 
-	rect.left =
-		rect.top  = 0;
+	rect.left = rect.top = 0;
 
-	HWND desktop    = ::GetDesktopWindow();
+	HWND desktop = ::GetDesktopWindow();
 	if (desktop == NULL)
 	{
 		DestroyIcon(hIcon);
 		return NULL;
 	}
 
-	HDC  screen_dev = ::GetDC(desktop);
+	HDC screen_dev = ::GetDC(desktop);
 	if (screen_dev == NULL)
 	{
 		DestroyIcon(hIcon);
@@ -658,8 +649,9 @@ HBITMAP CShellExt::IconToBitmap(UINT uIcon, COLORREF transparentColor)
 		return NULL;
 	}
 
-	// Fill the background of the compatible DC with the given colour
-	::SetBkColor(dst_hdc, transparentColor);
+	// Fill the background of the compatible DC with the white colour
+	// that is taken by menu routines as transparent
+	::SetBkColor(dst_hdc, RGB(255, 255, 255));
 	::ExtTextOut(dst_hdc, 0, 0, ETO_OPAQUE, &rect, NULL, 0, NULL);
 
 	// Draw the icon into the compatible DC
@@ -729,7 +721,7 @@ STDMETHODIMP CShellExt::QueryDropContext(UINT uFlags, UINT idCmdFirst, HMENU hMe
 	if (((uFlags & 0x000f)!=CMF_NORMAL)&&(!(uFlags & CMF_EXPLORE))&&(!(uFlags & CMF_VERBSONLY)))
 		return NOERROR;
 
-	if (folder_.size()  == 0)
+	if (folder_.size() == 0)
 		return NOERROR;					// no target? this should never happen, but we shouldn't crash anyway just because we can't handle this.
 
 	//the drop handler only has eight commands, but not all are visible at the same time:
@@ -740,21 +732,21 @@ STDMETHODIMP CShellExt::QueryDropContext(UINT uFlags, UINT idCmdFirst, HMENU hMe
 	UINT idCmd = idCmdFirst;
 
 	if ((itemStates & ITEMIS_FOLDERINSVN)&&((itemStates & ITEMIS_INSVN)&&((~itemStates) & ITEMIS_ADDED)))
-		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPMOVEMENU, 0, idCmdFirst, ShellMenuDropMove);
+		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPMOVEMENU, 0, idCmdFirst, ShellMenuDropMove, uFlags);
 	if ((itemStates & ITEMIS_FOLDERINSVN)&&(itemStates & ITEMIS_INSVN)&&(itemStates & ITEMIS_ONLYONE)&&((~itemStates) & ITEMIS_ADDED))
-		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPMOVERENAMEMENU, 0, idCmdFirst, ShellMenuDropMoveRename);
+		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPMOVERENAMEMENU, 0, idCmdFirst, ShellMenuDropMoveRename, uFlags);
 	if ((itemStates & ITEMIS_FOLDERINSVN)&&(itemStates & ITEMIS_INSVN)&&((~itemStates) & ITEMIS_ADDED))
-		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPCOPYMENU, 0, idCmdFirst, ShellMenuDropCopy);
+		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPCOPYMENU, 0, idCmdFirst, ShellMenuDropCopy, uFlags);
 	if ((itemStates & ITEMIS_FOLDERINSVN)&&(itemStates & ITEMIS_INSVN)&&(itemStates & ITEMIS_ONLYONE)&&((~itemStates) & ITEMIS_ADDED))
-		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPCOPYRENAMEMENU, 0, idCmdFirst, ShellMenuDropCopyRename);
+		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPCOPYRENAMEMENU, 0, idCmdFirst, ShellMenuDropCopyRename, uFlags);
 	if ((itemStates & ITEMIS_FOLDERINSVN)&&((~itemStates) & ITEMIS_INSVN))
-		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPCOPYADDMENU, 0, idCmdFirst, ShellMenuDropCopyAdd);
+		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPCOPYADDMENU, 0, idCmdFirst, ShellMenuDropCopyAdd, uFlags);
 	if (((itemStates & ITEMIS_FOLDERINSVN)==0)&&(itemStates & ITEMIS_INSVN))
-		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPEXPORTMENU, 0, idCmdFirst, ShellMenuDropExport);
+		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPEXPORTMENU, 0, idCmdFirst, ShellMenuDropExport, uFlags);
 	if (((itemStates & ITEMIS_FOLDERINSVN)==0)&&(itemStates & ITEMIS_INSVN))
-		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPEXPORTEXTENDEDMENU, 0, idCmdFirst, ShellMenuDropExportExtended);
+		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPEXPORTEXTENDEDMENU, 0, idCmdFirst, ShellMenuDropExportExtended, uFlags);
 	if ((itemStates & ITEMIS_FOLDERINSVN)&&(itemStates & ITEMIS_PATCHFILE))
-		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_MENUAPPLYPATCH, 0, idCmdFirst, ShellMenuApplyPatch);
+		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_MENUAPPLYPATCH, 0, idCmdFirst, ShellMenuApplyPatch, uFlags);
 	if (idCmd != idCmdFirst)
 		InsertMenu(hMenu, indexMenu++, MF_SEPARATOR|MF_BYPOSITION, 0, NULL); 
 
@@ -869,6 +861,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 	bool bMenuEntryAdded = false;
 	// insert separator at start
 	InsertMenu(hMenu, indexMenu++, MF_SEPARATOR|MF_BYPOSITION, 0, NULL); idCmd++;
+	bool bShowIcons = !!DWORD(CRegStdWORD(_T("Software\\TortoiseSVN\\OwnerdrawnMenus"), TRUE));
 	while (menuInfo[menuIndex].command != ShellMenuLastEntry)
 	{
 		if (menuInfo[menuIndex].command == ShellSeparator)
@@ -942,6 +935,7 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 						bAddSeparator = false;
 						bMenuEntryAdded = false;
 						InsertMenu(subMenu, indexSubMenu++, MF_SEPARATOR|MF_BYPOSITION, 0, NULL); 
+						idCmd++;
 					}
 					
 					// handle special cases (submenus)
@@ -965,9 +959,10 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 										bIsTop ? indexMenu++ : indexSubMenu++,
 										idCmd++,
 										menuInfo[menuIndex].menuTextID,
-										menuInfo[menuIndex].iconID,
+										bShowIcons ? menuInfo[menuIndex].iconID : 0,
 										idCmdFirst,
-										menuInfo[menuIndex].command);
+										menuInfo[menuIndex].command,
+										uFlags);
 						if (!bIsTop)
 							bMenuEntryAdded = true;
 					}
@@ -983,48 +978,51 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 	MENUITEMINFO menuiteminfo;
 	ZeroMemory(&menuiteminfo, sizeof(menuiteminfo));
 	menuiteminfo.cbSize = sizeof(menuiteminfo);
-	if (fullver >= 0x600)
-		menuiteminfo.fMask = MIIM_STRING | MIIM_ID | MIIM_SUBMENU | MIIM_CHECKMARKS | MIIM_DATA;
-	else
-	{
-		menuiteminfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_SUBMENU | MIIM_DATA | MIIM_BITMAP | MIIM_STRING;
-		menuiteminfo.hbmpItem = HBMMENU_CALLBACK;
-	}
 	menuiteminfo.fType = MFT_STRING;
  	menuiteminfo.dwTypeData = _T("TortoiseSVN\0\0");
-	menuiteminfo.cch = (UINT)min(_tcslen(menuiteminfo.dwTypeData), UINT_MAX);
 
-	HBITMAP bmp = NULL;
+	UINT uIcon = bShowIcons ? IDI_APP : 0;
 	if (folder_.size())
 	{
-		bmp = IconToBitmap(IDI_MENUFOLDER, (COLORREF)GetSysColor(COLOR_MENU));
+		uIcon = bShowIcons ? IDI_MENUFOLDER : 0;
 		myIDMap[idCmd - idCmdFirst] = ShellSubMenuFolder;
 		myIDMap[idCmd] = ShellSubMenuFolder;
 		menuiteminfo.dwItemData = (ULONG_PTR)g_MenuIDString;
 	}
 	else if (((~itemStates) & ITEMIS_SHORTCUT) && (files_.size()==1))
 	{
-		bmp = IconToBitmap(IDI_MENUFILE, (COLORREF)GetSysColor(COLOR_MENU));
+		uIcon = bShowIcons ? IDI_MENUFILE : 0;
 		myIDMap[idCmd - idCmdFirst] = ShellSubMenuFile;
 		myIDMap[idCmd] = ShellSubMenuFile;
 	}
 	else if ((itemStates & ITEMIS_SHORTCUT) && (files_.size()==1))
 	{
-		bmp = IconToBitmap(IDI_MENULINK, (COLORREF)GetSysColor(COLOR_MENU));
+		uIcon = bShowIcons ? IDI_MENULINK : 0;
 		myIDMap[idCmd - idCmdFirst] = ShellSubMenuLink;
 		myIDMap[idCmd] = ShellSubMenuLink;
 	}
 	else if (files_.size() > 1)
 	{
-		bmp = IconToBitmap(IDI_MENUMULTIPLE, (COLORREF)GetSysColor(COLOR_MENU));
+		uIcon = bShowIcons ? IDI_MENUMULTIPLE : 0;
 		myIDMap[idCmd - idCmdFirst] = ShellSubMenuMultiple;
 		myIDMap[idCmd] = ShellSubMenuMultiple;
 	}
 	else
 	{
-		bmp = IconToBitmap(IDI_APP, (COLORREF)GetSysColor(COLOR_MENU));
 		myIDMap[idCmd - idCmdFirst] = ShellSubMenu;
 		myIDMap[idCmd] = ShellSubMenu;
+	}
+	HBITMAP bmp = NULL;
+	if ((fullver < 0x500)||(fullver == 0x500 && !uFlags))
+	{
+		bmp = IconToBitmap(uIcon);
+		menuiteminfo.fMask = MIIM_STRING | MIIM_ID | MIIM_SUBMENU | MIIM_CHECKMARKS | MIIM_DATA;
+	}
+	else
+	{
+		menuiteminfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_SUBMENU | MIIM_DATA | MIIM_BITMAP | MIIM_STRING;
+		if (bShowIcons)
+			menuiteminfo.hbmpItem = (fullver >= 0x600) ? IconToBitmapPARGB32(uIcon) : HBMMENU_CALLBACK;
 	}
 	menuiteminfo.hbmpChecked = bmp;
 	menuiteminfo.hbmpUnchecked = bmp;
@@ -1037,7 +1035,6 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 
 	//return number of menu items added
 	return ResultFromScode(MAKE_SCODE(SEVERITY_SUCCESS, 0, (USHORT)(idCmd - idCmdFirst)));
-//#endregion
 }
 
 
@@ -1571,7 +1568,7 @@ STDMETHODIMP CShellExt::GetCommandString(UINT_PTR idCmd,
                                          UINT FAR * /*reserved*/,
                                          LPSTR pszName,
                                          UINT cchMax)
-{   
+{
 	//do we know the id?
 	std::map<UINT_PTR, UINT_PTR>::const_iterator id_it = myIDMap.lower_bound(idCmd);
 	if (id_it == myIDMap.end() || id_it->first != idCmd)
@@ -1640,8 +1637,8 @@ STDMETHODIMP CShellExt::GetCommandString(UINT_PTR idCmd,
 
 STDMETHODIMP CShellExt::HandleMenuMsg(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-   LRESULT res;
-   return HandleMenuMsg2(uMsg, wParam, lParam, &res);
+	LRESULT res;
+	return HandleMenuMsg2(uMsg, wParam, lParam, &res);
 }
 
 STDMETHODIMP CShellExt::HandleMenuMsg2(UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT *pResult)
@@ -1661,10 +1658,10 @@ STDMETHODIMP CShellExt::HandleMenuMsg2(UINT uMsg, WPARAM wParam, LPARAM lParam, 
 			MEASUREITEMSTRUCT* lpmis = (MEASUREITEMSTRUCT*)lParam;
 			if (lpmis==NULL)
 				break;
-			*pResult = TRUE;
 			lpmis->itemWidth += 2;
 			if (lpmis->itemHeight < 16)
 				lpmis->itemHeight = 16;
+			*pResult = TRUE;
 		}
 		break;
 	case WM_DRAWITEM:
@@ -1861,7 +1858,7 @@ void CShellExt::InsertIgnoreSubmenus(UINT &idCmd, UINT idCmdFirst, HMENU hMenu, 
 	{
 		// check if the item name is ignored or the mask
 		size_t p = 0;
-		while ( (p=ignoredprops.find( ignorepath,p )) != -1  )
+		while ( (p=ignoredprops.find( ignorepath,p )) != -1 )
 		{
 			if ( (p==0 || ignoredprops[p-1]==TCHAR('\n'))
 				&& (p+_tcslen(ignorepath)==ignoredprops.length() || ignoredprops[p+_tcslen(ignorepath)+1]==TCHAR('\n')) )
@@ -1952,8 +1949,8 @@ void CShellExt::InsertIgnoreSubmenus(UINT &idCmd, UINT idCmdFirst, HMENU hMenu, 
 		menuiteminfo.cbSize = sizeof(menuiteminfo);
 		menuiteminfo.fMask = MIIM_FTYPE | MIIM_ID | MIIM_SUBMENU | MIIM_DATA | MIIM_BITMAP | MIIM_STRING;
 		menuiteminfo.fType = MFT_STRING;
-		menuiteminfo.hbmpItem = HBMMENU_CALLBACK;
-		HBITMAP bmp = IconToBitmap(IDI_IGNORE, (COLORREF)GetSysColor(COLOR_MENU));
+		HBITMAP bmp = (fullver >= 0x600) ? IconToBitmapPARGB32(IDI_IGNORE) : IconToBitmap(IDI_IGNORE);
+		menuiteminfo.hbmpItem = (fullver >= 0x600) ? bmp : HBMMENU_CALLBACK;
 		menuiteminfo.hbmpChecked = bmp;
 		menuiteminfo.hbmpUnchecked = bmp;
 		menuiteminfo.hSubMenu = ignoresubmenu;
@@ -1980,4 +1977,25 @@ void CShellExt::InsertIgnoreSubmenus(UINT &idCmd, UINT idCmdFirst, HMENU hMenu, 
 	}
 }
 
+HBITMAP CShellExt::IconToBitmapPARGB32(UINT uIcon)
+{
+	std::map<UINT, HBITMAP>::iterator bitmap_it = bitmaps.lower_bound(uIcon);
+	if (bitmap_it != bitmaps.end() && bitmap_it->first == uIcon)
+		return bitmap_it->second;
+	if (!m_gdipToken)
+		return NULL;
+	HICON hIcon = (HICON)LoadImage(g_hResInst, MAKEINTRESOURCE(uIcon), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
+	if (!hIcon)
+		return NULL;
+	Bitmap icon(hIcon);
+	Bitmap bmp(16, 16, PixelFormat32bppPARGB);
+	Graphics g(&bmp);
+	g.DrawImage(&icon, 0, 0, 16, 16);
 
+	HBITMAP hBmp = NULL;
+	bmp.GetHBITMAP(Color(255, 0, 0, 0), &hBmp);
+
+	if(hBmp)
+		bitmaps.insert(bitmap_it, std::make_pair(uIcon, hBmp));
+	return hBmp;
+}

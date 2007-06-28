@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@
 #include "BrowseFolder.h"
 #include "BlameDlg.h"
 #include "Blame.h"
+#include "SVNHelpers.h"
 
 #define ICONITEMBORDER 5
 
@@ -197,7 +198,8 @@ BOOL CLogDlg::OnInitDialog()
 	CResizableStandAloneDialog::OnInitDialog();
 
 	// use the state of the "stop on copy/rename" option from the last time
-	m_bStrict = m_regLastStrict;
+	if (!m_bStrict)
+		m_bStrict = m_regLastStrict;
 	UpdateData(FALSE);
 	CString temp;
 	if (m_limit)
@@ -338,6 +340,28 @@ BOOL CLogDlg::OnInitDialog()
 	if (hWndExplorer)
 		CenterWindow(CWnd::FromHandle(hWndExplorer));
 	EnableSaveRestore(_T("LogDlg"));
+
+	DWORD yPos1 = CRegDWORD(_T("Software\\TortoiseSVN\\TortoiseProc\\ResizableState\\LogDlgSizer1"));
+	DWORD yPos2 = CRegDWORD(_T("Software\\TortoiseSVN\\TortoiseProc\\ResizableState\\LogDlgSizer2"));
+	if (yPos1)
+	{
+		RECT rectSplitter;
+		m_wndSplitter1.GetWindowRect(&rectSplitter);
+		ScreenToClient(&rectSplitter);
+		int delta = yPos1 - rectSplitter.top;
+		DoSizeV1(delta);
+		m_wndSplitter1.SetWindowPos(NULL, 0, yPos1, 0, 0, SWP_NOSIZE);
+	}
+	if (yPos2)
+	{
+		RECT rectSplitter;
+		m_wndSplitter2.GetWindowRect(&rectSplitter);
+		ScreenToClient(&rectSplitter);
+		int delta = yPos2 - rectSplitter.top;
+		DoSizeV2(delta);
+		m_wndSplitter2.SetWindowPos(NULL, 0, yPos2, 0, 0, SWP_NOSIZE);
+	}
+
 	
 	if (m_bSelect)
 	{
@@ -363,6 +387,8 @@ BOOL CLogDlg::OnInitDialog()
 	temp.LoadString(IDS_LOG_SHOWRANGE);
 	m_btnShow.AddEntry(temp);
 	m_btnShow.SetCurrentEntry((LONG)CRegDWORD(_T("Software\\TortoiseSVN\\ShowAllEntry")));
+
+	m_mergedRevs.clear();
 
 	// first start a thread to obtain the log messages without
 	// blocking the dialog
@@ -505,7 +531,10 @@ void CLogDlg::FillLogMessageCtrl(bool bShow /* = true*/)
 	}
 	CAppUtils::ResizeAllListCtrlCols(&m_ChangedFileListCtrl);
 	// sort according to the settings
-	SetSortArrow(&m_ChangedFileListCtrl, -1, false);
+	if (m_nSortColumnPathList > 0)
+		SetSortArrow(&m_ChangedFileListCtrl, m_nSortColumnPathList, m_bAscendingPathList);
+	else
+		SetSortArrow(&m_ChangedFileListCtrl, -1, false);
 	m_ChangedFileListCtrl.SetRedraw(TRUE);
 }
 
@@ -682,6 +711,19 @@ BOOL CLogDlg::Cancel()
 	return m_bCancelled;
 }
 
+void CLogDlg::SaveSplitterPos()
+{
+	CRegDWORD regPos1 = CRegDWORD(_T("Software\\TortoiseSVN\\TortoiseProc\\ResizableState\\LogDlgSizer1"));
+	CRegDWORD regPos2 = CRegDWORD(_T("Software\\TortoiseSVN\\TortoiseProc\\ResizableState\\LogDlgSizer2"));
+	RECT rectSplitter;
+	m_wndSplitter1.GetWindowRect(&rectSplitter);
+	ScreenToClient(&rectSplitter);
+	regPos1 = rectSplitter.top;
+	m_wndSplitter2.GetWindowRect(&rectSplitter);
+	ScreenToClient(&rectSplitter);
+	regPos2 = rectSplitter.top;
+}
+
 void CLogDlg::OnCancel()
 {
 	// canceling means stopping the working thread if it's still running.
@@ -701,6 +743,7 @@ void CLogDlg::OnCancel()
 		m_regLastStrict = m_bStrict;
 	CRegDWORD reg = CRegDWORD(_T("Software\\TortoiseSVN\\ShowAllEntry"));
 	reg = m_btnShow.GetCurrentEntry();
+	SaveSplitterPos();
 	__super::OnCancel();
 }
 
@@ -829,15 +872,51 @@ UINT CLogDlg::LogThread()
 
 		// The URL is escaped because SVN::logReceiver
 		// returns the path in a native format
-		CStringA urla = CUnicodeUtils::GetUTF8(sUrl);
-		char * urlabuf = new char[urla.GetLength()+1];
-		strcpy_s(urlabuf, urla.GetLength()+1, urla);
-		CPathUtils::Unescape(urlabuf);
-		sUrl = CUnicodeUtils::GetUnicode(urlabuf);
-		delete [] urlabuf;
+		sUrl = CPathUtils::PathUnescape(sUrl);
 	}
 	m_sRelativeRoot = sUrl.Mid(m_sRepositoryRoot.GetLength());
 	
+	if (!m_mergePath.IsEmpty() && m_mergedRevs.empty())
+	{
+		// in case we got a merge path set, retrieve the merge info
+		// of that path and check whether one of the merge URLs
+		// match the URL we show the log for.
+		SVNPool localpool(pool);
+		svn_error_clear(Err);
+		apr_hash_t * mergeinfo = NULL;
+		if (svn_client_get_mergeinfo(&mergeinfo, m_mergePath.GetSVNApiPath(), SVNRev(SVNRev::REV_WC), m_pctx, localpool) == NULL)
+		{
+			// now check the relative paths
+			apr_hash_index_t *hi;
+			const void *key;
+			void *val;
+
+			for (hi = apr_hash_first(localpool, mergeinfo); hi; hi = apr_hash_next(hi))
+			{
+				apr_hash_this(hi, &key, NULL, &val);
+				if (m_sRelativeRoot.Compare(CUnicodeUtils::GetUnicode((char*)key)) == 0)
+				{
+					apr_array_header_t * arr = (apr_array_header_t*)val;
+					if (val)
+					{
+						for (long i=0; i<arr->nelts; ++i)
+						{
+							svn_merge_range_t * pRange = APR_ARRAY_IDX(arr, i, svn_merge_range_t*);
+							if (pRange)
+							{
+								for (svn_revnum_t r=pRange->start; r<=pRange->end; ++r)
+								{
+									m_mergedRevs.insert(r);
+								}
+							}
+						}
+					}
+					break;
+				}
+			}
+		}
+	}
+
 	m_LogProgress.SetPos(1);
 	if (m_startrev == SVNRev::REV_HEAD)
 	{
@@ -1274,6 +1353,7 @@ void CLogDlg::OnOK()
 		m_regLastStrict = m_bStrict;
 	CRegDWORD reg = CRegDWORD(_T("Software\\TortoiseSVN\\ShowAllEntry"));
 	reg = m_btnShow.GetCurrentEntry();
+	SaveSplitterPos();
 }
 
 void CLogDlg::OnNMDblclkChangedFileList(NMHDR * /*pNMHDR*/, LRESULT *pResult)
@@ -1795,8 +1875,14 @@ void CLogDlg::OnNMCustomdrawLoglist(NMHDR *pNMHDR, LRESULT *pResult)
 
 			if (m_arShownList.GetCount() > (INT_PTR)pLVCD->nmcd.dwItemSpec)
 			{
-				if (((PLOGENTRYDATA)m_arShownList.GetAt(pLVCD->nmcd.dwItemSpec))->bCopies)
-					crText = m_Colors.GetColor(CColors::Modified);
+				PLOGENTRYDATA data = (PLOGENTRYDATA)m_arShownList.GetAt(pLVCD->nmcd.dwItemSpec);
+				if (data)
+				{
+					if (data->bCopies)
+						crText = m_Colors.GetColor(CColors::Modified);
+					if (m_mergedRevs.find(data->Rev) != m_mergedRevs.end())
+						crText = GetSysColor(COLOR_GRAYTEXT);
+				}
 			}
 			if (m_arShownList.GetCount() == (INT_PTR)pLVCD->nmcd.dwItemSpec)
 			{
@@ -2735,15 +2821,25 @@ int CLogDlg::SortCompare(const void * pElem1, const void * pElem2)
 	if (m_bAscendingPathList)
 		std::swap (cpath1, cpath2);
 
+	int cmp = 0;
 	switch (m_nSortColumnPathList)
 	{
-	case 0:		// action
-			return cpath2->GetAction().Compare(cpath1->GetAction());
-	case 1:		// path
-			return cpath2->sPath.CompareNoCase(cpath1->sPath);
-	case 2:		// copyfrom path
-			return cpath2->sCopyFromPath.Compare(cpath1->sCopyFromPath);
-	case 3:		// copyfrom revision
+	case 0:	// action
+			cmp = cpath2->GetAction().Compare(cpath1->GetAction());
+			if (cmp)
+				return cmp;
+			// fall through
+	case 1:	// path
+			cmp = cpath2->sPath.CompareNoCase(cpath1->sPath);
+			if (cmp)
+				return cmp;
+			// fall through
+	case 2:	// copyfrom path
+			cmp = cpath2->sCopyFromPath.Compare(cpath1->sCopyFromPath);
+			if (cmp)
+				return cmp;
+			// fall through
+	case 3:	// copyfrom revision
 			return cpath2->lCopyFromRev > cpath1->lCopyFromRev;
 	}
 	return 0;
@@ -3269,12 +3365,16 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 					progDlg.ShowModeless(m_hWnd);
 					if (!svn.Cat(m_path, SVNRev(SVNRev::REV_HEAD), revSelected, tempfile))
 					{
-						progDlg.Stop();
-						svn.SetAndClearProgressInfo((HWND)NULL);
-						delete [] pszFilters;
-						CMessageBox::Show(this->m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
-						EnableOKButton();
-						break;
+						// try again with another peg revision
+						if (!svn.Cat(m_path, revSelected, revSelected, tempfile))
+						{
+							progDlg.Stop();
+							svn.SetAndClearProgressInfo((HWND)NULL);
+							delete [] pszFilters;
+							CMessageBox::Show(this->m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
+							EnableOKButton();
+							break;
+						}
 					}
 					progDlg.Stop();
 					svn.SetAndClearProgressInfo((HWND)NULL);
@@ -3683,10 +3783,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 				fileURL = sUrlRoot + fileURL.Trim();
 				// firstfile = (e.g.) http://mydomain.com/repos/trunk/folder/file1
 				// sUrl = http://mydomain.com/repos/trunk/folder
-				CStringA sTempA = CStringA(sUrl);
-				CPathUtils::Unescape(sTempA.GetBuffer());
-				sTempA.ReleaseBuffer();
-				CString sUnescapedUrl = CUnicodeUtils::GetUnicode(sTempA);
+				CString sUnescapedUrl = CPathUtils::PathUnescape(sUrl);
 				// find out until which char the urls are identical
 				int i=0;
 				while ((i<fileURL.GetLength())&&(i<sUnescapedUrl.GetLength())&&(fileURL[i]==sUnescapedUrl[i]))

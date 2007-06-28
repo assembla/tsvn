@@ -31,9 +31,9 @@ SVNInfo::SVNInfo(void)
 {
 	m_pool = svn_pool_create (NULL);
 
-	svn_client_create_context(&m_pctx, m_pool);
+	svn_error_clear(svn_client_create_context(&m_pctx, m_pool));
 
-	svn_config_ensure(NULL, m_pool);
+	svn_error_clear(svn_config_ensure(NULL, m_pool));
 	
 	// set up authentication
 	m_prompt.Init(m_pool, m_pctx);
@@ -46,6 +46,7 @@ SVNInfo::SVNInfo(void)
 	if (m_err)
 	{
 		::MessageBox(NULL, this->GetLastErrorMsg(), _T("TortoiseSVN"), MB_ICONERROR);
+		svn_error_clear(m_err);
 		svn_pool_destroy (m_pool);					// free the allocated memory
 		exit(-1);
 	}
@@ -65,6 +66,7 @@ SVNInfo::SVNInfo(void)
 
 SVNInfo::~SVNInfo(void)
 {
+	svn_error_clear(m_err);
 	svn_pool_destroy (m_pool);					// free the allocated memory
 }
 
@@ -90,6 +92,7 @@ CString SVNInfo::GetLastErrorMsg()
 
 const SVNInfoData * SVNInfo::GetFirstFileInfo(const CTSVNPath& path, SVNRev pegrev, SVNRev revision, bool recurse /* = false */)
 {
+	svn_error_clear(m_err);
 	m_arInfo.clear();
 	m_pos = 0;
 	m_err = svn_client_info(path.GetSVNApiPath(), pegrev, revision, infoReceiver, this, recurse, m_pctx, m_pool);
@@ -128,7 +131,9 @@ svn_error_t * SVNInfo::infoReceiver(void* baton, const char * path, const svn_in
 	data.lastchangedtime = info->last_changed_date/1000000L;
 	if (info->last_changed_author)
 		data.author = CUnicodeUtils::GetUnicode(info->last_changed_author);
-	
+	data.depth = info->depth;
+	data.size = info->size;
+
 	if (info->lock)
 	{
 		if (info->lock->path)
@@ -163,6 +168,9 @@ svn_error_t * SVNInfo::infoReceiver(void* baton, const char * path, const svn_in
 			data.conflict_wrk = CUnicodeUtils::GetUnicode(info->conflict_wrk);
 		if (info->prejfile)
 			data.prejfile = CUnicodeUtils::GetUnicode(info->prejfile);
+		if (info->changelist)
+			data.changelist = CUnicodeUtils::GetUnicode(info->changelist);
+		data.working_size = info->working_size;
 	}
 	pThis->m_arInfo.push_back(data);
 	pThis->Receiver(&data);

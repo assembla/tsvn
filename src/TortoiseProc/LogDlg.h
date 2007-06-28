@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -110,6 +110,7 @@ public:
 	void SetDialogTitle(const CString& sTitle) {m_sTitle = sTitle;}
 	void SetSelect(bool bSelect) {m_bSelect = bSelect;}
 	void ContinuousSelection(bool bCont = true) {m_bSelectionMustBeContinuous = bCont;}
+	void SetMergePath(const CTSVNPath& mergepath) {m_mergePath = mergepath;}
 
 private:
 	static UINT LogThreadEntry(LPVOID pVoid);
@@ -134,6 +135,7 @@ private:
 	void EnableOKButton();
 	void GetAll(bool bForceAll = false);
 	void UpdateLogInfoLabel();
+	void SaveSplitterPos();
 
 	virtual LRESULT DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 	static int __cdecl	SortCompare(const void * pElem1, const void * pElem2);	///< sort callback function
@@ -154,6 +156,7 @@ private:
 	CProgressCtrl		m_LogProgress;
 	CMenuButton			m_btnShow;
 	CTSVNPath			m_path;
+	CTSVNPath			m_mergePath;
 	SVNRev				m_pegrev;
 	SVNRev				m_startrev;
 	SVNRev				m_LogRevision;
@@ -200,6 +203,7 @@ private:
 	bool				m_bSelect;
 	bool				m_bShowBugtraqColumn;
 	CString				m_sLogInfo;
+	std::set<svn_revnum_t> m_mergedRevs;
 
 	CTime				m_timFrom;
 	CTime				m_timTo;
@@ -300,7 +304,10 @@ private:
         {
             bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
             {
-                return pStart->sAuthor.CompareNoCase(pEnd->sAuthor)<0;
+				int ret = pStart->sAuthor.CompareNoCase(pEnd->sAuthor);
+				if (ret == 0)
+					return pStart->Rev < pEnd->Rev;
+				return ret<0;
             }
         };
         // Descending author sorting.
@@ -308,7 +315,10 @@ private:
         {
             bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
             {
-                return pStart->sAuthor.CompareNoCase(pEnd->sAuthor)>0;
+				int ret = pStart->sAuthor.CompareNoCase(pEnd->sAuthor);
+				if (ret == 0)
+					return pStart->Rev > pEnd->Rev;
+				return ret>0;
             }
         };
         // Ascending message sorting.
@@ -332,6 +342,8 @@ private:
 		{
 			bool operator() (PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
 			{
+				if (pStart->actions == pEnd->actions)
+					return pStart->Rev < pEnd->Rev;
 				return pStart->actions < pEnd->actions;
 			}
 		};
@@ -340,6 +352,8 @@ private:
 		{
 			bool operator() (PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
 			{
+				if (pStart->actions == pEnd->actions)
+					return pStart->Rev > pEnd->Rev;
 				return pStart->actions > pEnd->actions;
 			}
 		};

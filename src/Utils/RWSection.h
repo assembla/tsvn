@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -30,8 +30,10 @@ public:
 	void Done();
 	bool IsWriter() {return ((m_nWaitingWriters > 0) || (m_nActive < 0));}
 #if defined (DEBUG) || defined (_DEBUG)
+	void AssertLock() {ATLASSERT(m_nActive);}
 	void AssertWriting() {ATLASSERT((m_nWaitingWriters || (m_nActive < 0)));}
 #else
+	void AssertLock() {;}
 	void AssertWriting() {;}
 #endif
 private:

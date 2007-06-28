@@ -634,7 +634,7 @@ void CSVNProgressDlg::ReportNotification(const CString& sNotification)
 
 void CSVNProgressDlg::ReportCmd(const CString& sCmd)
 {
-	ReportString(sCmd, CString(MAKEINTRESOURCE(IDS_PROGRS_CMDINFO)));
+	ReportString(sCmd, CString(MAKEINTRESOURCE(IDS_PROGRS_CMDINFO)), m_Colors.GetColor(CColors::Cmd));
 }
 
 void CSVNProgressDlg::ReportString(CString sMessage, const CString& sMsgKind, COLORREF color)
@@ -929,7 +929,7 @@ UINT CSVNProgressDlg::ProgressThread()
 			}
 			DWORD exitcode = 0;
 			CString error;
-			if (CHooks::Instance().PreCommit(m_selectedPaths, m_depth, exitcode, error))
+			if (CHooks::Instance().PreCommit(m_selectedPaths, m_depth, m_sMessage, exitcode, error))
 			{
 				if (exitcode)
 				{
@@ -953,7 +953,7 @@ UINT CSVNProgressDlg::ProgressThread()
 					ReportError(CString(MAKEINTRESOURCE(IDS_PROGRS_NONRECURSIVEHINT)));
 				}
 			}
-			if (CHooks::Instance().PostCommit(m_selectedPaths, m_depth, m_RevisionEnd, exitcode, error))
+			if (CHooks::Instance().PostCommit(m_selectedPaths, m_depth, m_RevisionEnd, m_sMessage, exitcode, error))
 			{
 				if (exitcode)
 				{
@@ -1286,7 +1286,7 @@ UINT CSVNProgressDlg::ProgressThread()
 	{
 		CString sFinalInfo;
 		CTimeSpan time = CTime::GetCurrentTime() - startTime;
-		temp.Format(IDS_PROGRS_TIME, time.GetTotalMinutes(), time.GetSeconds());
+		temp.Format(IDS_PROGRS_TIME, (LONG)time.GetTotalMinutes(), (LONG)time.GetSeconds());
 		sFinalInfo.Format(IDS_PROGRS_FINALINFO, m_sTotalBytesTransferred, temp);
 		GetDlgItem(IDC_PROGRESSLABEL)->SetWindowText(sFinalInfo);
 	}

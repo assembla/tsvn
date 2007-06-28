@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,6 +31,12 @@
 #define ENDDIALOGTIMER 100
 #define REFRESHTIMER   101
 
+
+typedef struct RegexData
+{
+	CString regex;
+	REGEX_FLAGS flags;
+} RegexData;
 
 /**
  * \ingroup TortoiseProc
@@ -80,6 +86,8 @@ protected:
 	void ScanFile(const CString& sFilePath, const CString& sRegex, REGEX_FLAGS rflags);
 	void DoSize(int delta);
 	void SetSplitterRange();
+	void SaveSplitterPos();
+	void ParseRegexFile(const CString& sFile, std::map<CString, RegexData>& mapRegex);
 
 	DECLARE_MESSAGE_MAP()
 
@@ -98,7 +106,7 @@ public:
 
 private:
 	CWinThread*			m_pThread;
-	CAutoCompletionList	m_autolist;
+	std::set<CString>	m_autolist;
 	CSVNStatusListCtrl	m_ListCtrl;
 	BOOL				m_bShowUnversioned;
 	volatile LONG		m_bBlock;

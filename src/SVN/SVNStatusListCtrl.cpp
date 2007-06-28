@@ -736,13 +736,11 @@ CSVNStatusListCtrl::AddNewFileEntry(
 
 		if (pSVNStatus->entry->url)
 		{
-			CPathUtils::Unescape((char *)pSVNStatus->entry->url);
-			entry->url = CUnicodeUtils::GetUnicode(pSVNStatus->entry->url);
+			entry->url = CUnicodeUtils::GetUnicode(CPathUtils::PathUnescape(pSVNStatus->entry->url));
 		}
 		if (pSVNStatus->entry->copyfrom_url)
 		{
-			CPathUtils::Unescape((char *)pSVNStatus->entry->copyfrom_url);
-			entry->copyfrom_url = CUnicodeUtils::GetUnicode(pSVNStatus->entry->copyfrom_url);
+			entry->copyfrom_url = CUnicodeUtils::GetUnicode(CPathUtils::PathUnescape(pSVNStatus->entry->copyfrom_url));
 			entry->copyfrom_rev = pSVNStatus->entry->copyfrom_rev;
 		}
 		else
@@ -892,7 +890,7 @@ void CSVNStatusListCtrl::ReadRemainingItemsStatus(SVNStatus& status, const CTSVN
 				if (!strCurrentRepositoryUUID.IsEmpty())
 				{
 					if ((SVNStatus::IsImportant(wcFileStatus))&&
-						(s->entry->kind == svn_node_dir)&&
+						(!lastexternalpath.IsEmpty())&&
 						(lastexternalpath.IsAncestorOf(svnPath)))
 					{
 						bEntryfromDifferentRepo = true;
@@ -1435,7 +1433,7 @@ void CSVNStatusListCtrl::AddEntry(FileEntry * entry, WORD langID, int listIndex)
 	SetItemText(index, nCol++, temp);
 	// SVNSLC_COLMODIFICATIONDATE
 	__int64 filetime = entry->GetPath().GetLastWriteTime();
-	if (filetime)
+	if ( (filetime) && (entry->status!=svn_wc_status_deleted) )
 	{
 		FILETIME* f = (FILETIME*)(__int64*)&filetime;
 		TCHAR datebuf[SVN_DATE_BUFFER];
@@ -2513,7 +2511,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 						CTSVNPathList targetList;
 						FillListOfSelectedItemPaths(targetList);
 						CTSVNPath tempFile = CTempFiles::Instance().GetTempFilePath(false);
-						VERIFY(targetList.WriteToTemporaryFile(tempFile.GetWinPathString()));
+						VERIFY(targetList.WriteToFile(tempFile.GetWinPathString()));
 						CString commandline = CPathUtils::GetAppDirectory();
 						commandline += _T("TortoiseProc.exe /command:commit /pathfile:\"");
 						commandline += tempFile.GetWinPathString();
@@ -2920,8 +2918,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 											{
 												if (s->entry->url)
 												{
-													CPathUtils::Unescape((char *)s->entry->url);
-													entry->url = CUnicodeUtils::GetUnicode(s->entry->url);
+													entry->url = CUnicodeUtils::GetUnicode(CPathUtils::PathUnescape(s->entry->url));
 												}
 											}
 											if (s->entry && s->entry->present_props)
@@ -3064,8 +3061,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 										{
 											if (s->entry->url)
 											{
-												CPathUtils::Unescape((char *)s->entry->url);
-												entry->url = CUnicodeUtils::GetUnicode(s->entry->url);
+												entry->url = CUnicodeUtils::GetUnicode(CPathUtils::PathUnescape(s->entry->url));
 											}
 										}
 										if (s->entry && s->entry->present_props)
@@ -4302,22 +4298,16 @@ BOOL CSVNStatusListCtrl::OnToolTipText(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRes
 		{
 			if (fentry->copied)
 			{
-				CStringA url;
-				url.Format(IDS_STATUSLIST_COPYFROM, CUnicodeUtils::GetUTF8(fentry->copyfrom_url), fentry->copyfrom_rev);
-				CPathUtils::Unescape(url.GetBuffer());
-				url.ReleaseBuffer();
-				CString urlW = CUnicodeUtils::GetUnicode(url);
-				lstrcpyn(pTTTW->szText, urlW, 80);
+				CString url;
+				url.Format(IDS_STATUSLIST_COPYFROM, (LPCTSTR)CPathUtils::PathUnescape(fentry->copyfrom_url), (LONG)fentry->copyfrom_rev);
+				lstrcpyn(pTTTW->szText, url, 80);
 				return TRUE;
 			}
 			if (fentry->switched)
 			{
-				CStringA url;
-				url.Format(IDS_STATUSLIST_SWITCHEDTO, CUnicodeUtils::GetUTF8(fentry->url));
-				CPathUtils::Unescape(url.GetBuffer());
-				url.ReleaseBuffer();
-				CString urlW = CUnicodeUtils::GetUnicode(url);
-				lstrcpyn(pTTTW->szText, urlW, 80);
+				CString url;
+				url.Format(IDS_STATUSLIST_SWITCHEDTO, CPathUtils::PathUnescape(fentry->url));
+				lstrcpyn(pTTTW->szText, url, 80);
 				return TRUE;
 			}
 			if (fentry->keeplocal)

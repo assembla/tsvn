@@ -118,6 +118,7 @@ BOOL CCheckoutDlg::OnInitDialog()
 	AddAnchor(IDC_EXPORT_CHECKOUTDIR, TOP_LEFT, TOP_RIGHT);
 	AddAnchor(IDC_CHECKOUTDIRECTORY, TOP_LEFT, TOP_RIGHT);
 	AddAnchor(IDC_CHECKOUTDIRECTORY_BROWSE, TOP_RIGHT);
+	AddAnchor(IDC_GROUPMIDDLE, TOP_LEFT, TOP_RIGHT);
 	AddAnchor(IDC_DEPTH, TOP_LEFT, TOP_RIGHT);
 	AddAnchor(IDC_NOEXTERNALS, TOP_LEFT, TOP_RIGHT);
 	AddAnchor(IDC_GROUPBOTTOM, TOP_LEFT, TOP_RIGHT);
@@ -190,7 +191,7 @@ void CCheckoutDlg::OnOK()
 		if (GetDriveType(temp)==DRIVE_REMOTE)
 		{
 			if (SVN::IsBDBRepository(m_URL))
-				// It's a network share, and the user tries to create a berkeley db on it.
+				// It's a network share, and the user tries to create a Berkeley db on it.
 				// Show a warning telling the user about the risks of doing so.
 				if (CMessageBox::Show(this->m_hWnd, IDS_WARN_SHAREFILEACCESS, IDS_APPNAME, MB_ICONWARNING | MB_YESNO)==IDNO)
 				{
@@ -263,45 +264,44 @@ void CCheckoutDlg::OnBnClickedBrowse()
 
 	if (!rev.IsValid())
 		rev = SVNRev::REV_HEAD;
-	CAppUtils::BrowseRepository(m_URLCombo, this, rev);
-	SetRevision(rev);
-
-
-	CRegString regDefCheckoutUrl(_T("Software\\TortoiseSVN\\DefaultCheckoutUrl"));
-	CRegString regDefCheckoutPath(_T("Software\\TortoiseSVN\\DefaultCheckoutPath"));
-	if (!CString(regDefCheckoutUrl).IsEmpty())
+	if (CAppUtils::BrowseRepository(m_URLCombo, this, rev))
 	{
-		m_URL = m_URLCombo.GetString();
-		CTSVNPath url = CTSVNPath(m_URL);
-		CTSVNPath defurl = CTSVNPath(CString(regDefCheckoutUrl));
-		if (defurl.IsAncestorOf(url))
+		SetRevision(rev);
+
+		CRegString regDefCheckoutUrl(_T("Software\\TortoiseSVN\\DefaultCheckoutUrl"));
+		CRegString regDefCheckoutPath(_T("Software\\TortoiseSVN\\DefaultCheckoutPath"));
+		if (!CString(regDefCheckoutUrl).IsEmpty())
 		{
-			if (CTSVNPath::CheckChild(CTSVNPath(CString(regDefCheckoutPath)), CTSVNPath(m_strCheckoutDirectory)))
+			m_URL = m_URLCombo.GetString();
+			CTSVNPath url = CTSVNPath(m_URL);
+			CTSVNPath defurl = CTSVNPath(CString(regDefCheckoutUrl));
+			if (defurl.IsAncestorOf(url))
 			{
-				// the default url is the parent of the specified url
-				m_strCheckoutDirectory = CString(regDefCheckoutPath) + url.GetWinPathString().Mid(defurl.GetWinPathString().GetLength());
-				m_strCheckoutDirectory.Replace(_T("\\\\"), _T("\\"));
-				UpdateData(FALSE);
+				if (CTSVNPath::CheckChild(CTSVNPath(CString(regDefCheckoutPath)), CTSVNPath(m_strCheckoutDirectory)))
+				{
+					// the default url is the parent of the specified url
+					m_strCheckoutDirectory = CString(regDefCheckoutPath).TrimRight('\\') + url.GetWinPathString().Mid(defurl.GetWinPathString().GetLength());
+					UpdateData(FALSE);
+				}
 			}
 		}
-	}
-	else
-	{
-		m_URLCombo.GetWindowText(m_URL);
-		if (m_URL.IsEmpty())
-			return;
-		CString tempURL = m_URL;
-		CString name;
-		while (name.IsEmpty() || (name.CompareNoCase(_T("branches"))==0) ||
-			(name.CompareNoCase(_T("tags"))==0) ||
-			(name.CompareNoCase(_T("trunk"))==0))
+		else
 		{
-			name = tempURL.Mid(tempURL.ReverseFind('/')+1);
-			tempURL = tempURL.Left(tempURL.ReverseFind('/'));
+			m_URLCombo.GetWindowText(m_URL);
+			if (m_URL.IsEmpty())
+				return;
+			CString tempURL = m_URL;
+			CString name;
+			while (name.IsEmpty() || (name.CompareNoCase(_T("branches"))==0) ||
+				(name.CompareNoCase(_T("tags"))==0) ||
+				(name.CompareNoCase(_T("trunk"))==0))
+			{
+				name = tempURL.Mid(tempURL.ReverseFind('/')+1);
+				tempURL = tempURL.Left(tempURL.ReverseFind('/'));
+			}
+			m_strCheckoutDirectory = m_sCheckoutDirOrig.TrimRight('\\')+_T('\\')+name;
+			UpdateData(FALSE);
 		}
-		m_strCheckoutDirectory = m_sCheckoutDirOrig+_T('\\')+name;
-		m_strCheckoutDirectory.Replace(_T("\\\\"), _T("\\"));
-		UpdateData(FALSE);
 	}
 }
 
@@ -416,7 +416,6 @@ void CCheckoutDlg::OnCbnEditchangeUrlcombo()
 		name = tempURL.Mid(tempURL.ReverseFind('/')+1);
 		tempURL = tempURL.Left(tempURL.ReverseFind('/'));
 	}
-	m_strCheckoutDirectory = m_sCheckoutDirOrig+_T('\\')+name;
-	m_strCheckoutDirectory.Replace(_T("\\\\"), _T("\\"));
+	m_strCheckoutDirectory = m_sCheckoutDirOrig.TrimRight('\\')+_T('\\')+name;
 	UpdateData(FALSE);
 }

@@ -172,11 +172,6 @@ msgstr ""
 msgid "%s\nDo you want to remove it anyway?"
 msgstr ""
 
-#: ID:7,
-#, c-format
-msgid "%s\nFile size:\t\t\t%s\nWidth:\t\t\t%ld pixel\nHeight:\t\t\t%ld pixel\nHorizontal Resolution:\t%.1f dpi\nVertical Resolution:\t\t%.1f dpi\nDepth:\t\t\t%d bit\nZoom:\t\t\t%d%%\n\n%s\nFile size:\t\t\t%s\nWidth:\t\t\t%ld pixel\nHeight:\t\t\t%ld pixel\nHorizontal Resolution:\t%.1f dpi\nVertical Resolution:\t\t%.1f dpi\nDepth:\t\t\t%d bit"
-msgstr ""
-
 #: ID:69,
 #, c-format
 msgid "%s\nis a directory, not a file!\nTortoiseMerge can't diff directories."
@@ -1230,6 +1225,14 @@ msgstr ""
 msgid "CAP"
 msgstr ""
 
+#: Control-ID:1126,
+msgid "Cache log messages"
+msgstr ""
+
+#: ID:197,
+msgid "Caches the log messages to speed up log fetching"
+msgstr ""
+
 #: ID:82,
 #, c-format
 msgid "Can't copy \n%s\nto\n%s"
@@ -2233,7 +2236,22 @@ msgstr ""
 
 #: ID:7,
 #, c-format
+msgid "File size:\t\t%s\nWidth:\t\t\t%ld pixel\nHeight:\t\t\t%ld pixel\nHorizontal Resolution:\t%.1f dpi\nVertical Resolution:\t%.1f dpi\nDepth:\t\t\t%d bit\nZoom:\t\t\t%d%%"
+msgstr ""
+
+#: ID:8,
+#, c-format
+msgid "File size:\t\t%s\nWidth:\t\t\t%ld pixel\nHeight:\t\t\t%ld pixel\nHorizontal Resolution:\t%.1f dpi\nVertical Resolution:\t%.1f dpi\nDepth:\t\t\t%d bit\nZoom:\t\t\t%d%%\n\nFile size:\t\t%s\nWidth:\t\t\t%ld pixel\nHeight:\t\t\t%ld pixel\nHorizontal Resolution:\t%.1f dpi\nVertical Resolution:\t%.1f dpi\nDepth:\t\t\t%d bit\nZoom:\t\t\t%d%%"
+msgstr ""
+
+#: ID:7,
+#, c-format
 msgid "File size:\t\t\t%s\nWidth:\t\t\t%ld pixel\nHeight:\t\t\t%ld pixel\nHorizontal Resolution:\t%.1f dpi\nVertical Resolution:\t\t%.1f dpi\nDepth:\t\t\t%d bit\nZoom:\t\t\t%d%%"
+msgstr ""
+
+#: ID:7,
+#, c-format
+msgid "File size:\t\t\t%s\nWidth:\t\t\t%ld pixel\nHeight:\t\t\t%ld pixel\nHorizontal Resolution:\t%.1f dpi\nVertical Resolution:\t\t%.1f dpi\nDepth:\t\t\t%d bit\nZoom:\t\t\t%d%%\n\nFile size:\t\t\t%s\nWidth:\t\t\t%ld pixel\nHeight:\t\t\t%ld pixel\nHorizontal Resolution:\t%.1f dpi\nVertical Resolution:\t\t%.1f dpi\nDepth:\t\t\t%d bit\nZoom:\t\t\t%d%%"
 msgstr ""
 
 #: Control-ID:65535,
@@ -2250,6 +2268,10 @@ msgstr ""
 
 #: ID:77,#: ID:219,
 msgid "Finished!"
+msgstr ""
+
+#: MenuEntry
+msgid "Fit Images &together"
 msgstr ""
 
 #: Control-ID:1315,
@@ -2480,6 +2502,11 @@ msgstr ""
 msgid "ID:32809:V C +F"
 msgstr ""
 
+#. Accelerator Entry for Menu ID:32810; 'Fit Images &together'
+#: Corresponding Menu ID:32810; 'Fit Images &together'
+msgid "ID:32810:V   +T"
+msgstr ""
+
 #. Accelerator Entry for Menu ID:57601; '&Open Ctrl-O'
 #: Corresponding Menu ID:57601; '&Open Ctrl-O'
 msgid "ID:57601:V C +O"
@@ -2534,7 +2561,7 @@ msgid "Icons/Design/Code:     Luebbe Onken"
 msgstr ""
 
 #: ID:194,
-msgid "If activated, prevents the overlays from showing in \"save as...\" or \"open\" dialogs"
+msgid "If activated, prevents the overlays and the context menu from showing in \"save as...\" or \"open\" dialogs"
 msgstr ""
 
 #: ID:198,
@@ -2943,6 +2970,10 @@ msgstr ""
 
 #: ID:78,
 msgid "Merge - TortoiseSVN"
+msgstr ""
+
+#: Control-ID:1377,
+msgid "Merge Depth"
 msgstr ""
 
 #: ID:263,#: ID:263,
@@ -3438,7 +3469,7 @@ msgid "Please wait while differences are obtained..."
 msgstr ""
 
 #: ID:104,
-msgid "Please wait while the repository browser is initialized..."
+msgid "Please wait while the repository browser is initializing..."
 msgstr ""
 
 #: ID:104,#: ID:119,#: ID:146,#: ID:213,
@@ -4209,7 +4240,7 @@ msgid "Show &log..."
 msgstr ""
 
 #: Control-ID:1088,
-msgid "Show &overlays only in explorer"
+msgid "Show &overlays and context menu only in explorer"
 msgstr ""
 
 #: Control-ID:1073,
@@ -5149,6 +5180,10 @@ msgstr ""
 
 #: Control-ID:1335,
 msgid "Working Copy Path:"
+msgstr ""
+
+#: ID:267,
+msgid "Working copy"
 msgstr ""
 
 #: ID:80,

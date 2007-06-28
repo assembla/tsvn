@@ -367,6 +367,12 @@
 				when you commit the main project, but you have to commit
 				those external changes separately.
 			</para>
+			<para>
+				Of the three methods described, this is the only one which needs
+				no setup on the client side. Once externals are specified in
+				the folder properties, all clients will get populated folders
+				when they update.
+			</para>
 		</sect2>
 		<sect2 id="tsvn-howto-common-nested">
 			<title>Use a nested working copy</title>
@@ -478,8 +484,14 @@ TortoiseProc.exe /command:repobrowser /path:"url/to/repository"
 			<orderedlist>
 				<listitem>
 					<para>
-						Move the file to somewhere safe, not inside your
-						working copy.
+						Hold the <keycap>Shift</keycap> key to get the extended
+						context menu and use
+						<menuchoice>
+							<guimenu>TortoiseSVN</guimenu>
+							<guimenuitem>Delete (keep local)</guimenuitem>
+						</menuchoice>
+						to mark the file/folder for deletion from the repository
+						without losing the local copy.
 					</para>
 				</listitem>
 				<listitem>
@@ -488,65 +500,12 @@ TortoiseProc.exe /command:repobrowser /path:"url/to/repository"
 							<guimenu>TortoiseSVN</guimenu>
 							<guimenuitem>Commit</guimenuitem>
 						</menuchoice>
-						the parent folder. TortoiseSVN will see that the file
-						is missing and you can mark it for deletion
-						from the repository.
+						the parent folder.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Move the file back to its original location.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Add the file to the ignore list so you don't get
-						into the same trouble again.
-					</para>
-				</listitem>
-			</orderedlist>
-		</para>
-		<para>
-			If you need to remove a whole folder/hierarchy from version control,
-			the procedure is different again.
-			<orderedlist>
-				<listitem>
-					<para>
-						<menuchoice>
-							<guimenu>TortoiseSVN</guimenu>
-							<guimenuitem>Export</guimenuitem>
-						</menuchoice>
-						the folder to somewhere safe, not inside your
-						working copy.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<menuchoice>
-							<guimenu>TortoiseSVN</guimenu>
-							<guimenuitem>Delete</guimenuitem>
-						</menuchoice>
-						the folder from your working copy.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<menuchoice>
-							<guimenu>TortoiseSVN</guimenu>
-							<guimenuitem>Commit</guimenuitem>
-						</menuchoice>
-						the deleted folder to remove it from the repository.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Move the exported folder back to its original location
-						in your working copy.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Add the folder to the ignore list so you don't get
+						Add the file/folder to the ignore list so you don't get
 						into the same trouble again.
 					</para>
 				</listitem>

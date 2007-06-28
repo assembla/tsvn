@@ -44,6 +44,7 @@
 #include "SysImageList.h"
 #include "RepoDrags.h"
 #include "SVNInfo.h"
+#include "SVNDataObject.h"
 
 
 enum RepoBrowserContextMenuCommands
@@ -187,7 +188,7 @@ BOOL CRepositoryBrowser::OnInitDialog()
 	RegisterDragDrop(m_RepoTree.GetSafeHwnd(), m_pTreeDropTarget);
 	// create the supported formats:
 	FORMATETC ftetc={0}; 
-	ftetc.cfFormat = CF_TEXT; 
+	ftetc.cfFormat = CF_UNICODETEXT; 
 	ftetc.dwAspect = DVASPECT_CONTENT; 
 	ftetc.lindex = -1; 
 	ftetc.tymed = TYMED_HGLOBAL; 
@@ -198,7 +199,7 @@ BOOL CRepositoryBrowser::OnInitDialog()
 	m_pListDropTarget = new CListDropTarget(this);
 	RegisterDragDrop(m_RepoList.GetSafeHwnd(), m_pListDropTarget);
 	// create the supported formats:
-	ftetc.cfFormat = CF_TEXT; 
+	ftetc.cfFormat = CF_UNICODETEXT; 
 	m_pListDropTarget->AddSuportedFormat(ftetc); 
 	ftetc.cfFormat=CF_HDROP; 
 	m_pListDropTarget->AddSuportedFormat(ftetc);
@@ -357,12 +358,7 @@ void CRepositoryBrowser::InitRepo()
 	m_bCancelled = false;
 	m_strReposRoot = data->reposRoot;
 	m_sUUID = data->reposUUID;
-	CStringA urla = CUnicodeUtils::GetUTF8(m_strReposRoot);
-	char * urlabuf = new char[urla.GetLength()+1];
-	strcpy_s(urlabuf, urla.GetLength()+1, urla);
-	CPathUtils::Unescape(urlabuf);
-	m_strReposRoot = CUnicodeUtils::GetUnicode(urlabuf);
-	delete [] urlabuf;
+	m_strReposRoot = CPathUtils::PathUnescape(m_strReposRoot);
 	// now check the repository root for the url type, then
 	// set the corresponding background image
 	if (!m_strReposRoot.IsEmpty())
@@ -433,6 +429,8 @@ void CRepositoryBrowser::OnOK()
 	RevokeDragDrop(m_RepoList.GetSafeHwnd());
 	RevokeDragDrop(m_RepoTree.GetSafeHwnd());
 
+	SaveColumnWidths(true);
+
 	HTREEITEM hItem = m_RepoTree.GetRootItem();
 	RecursiveRemove(hItem);
 
@@ -444,6 +442,8 @@ void CRepositoryBrowser::OnCancel()
 {
 	RevokeDragDrop(m_RepoList.GetSafeHwnd());
 	RevokeDragDrop(m_RepoTree.GetSafeHwnd());
+
+	SaveColumnWidths(true);
 
 	HTREEITEM hItem = m_RepoTree.GetRootItem();
 	RecursiveRemove(hItem);
@@ -896,6 +896,25 @@ void CRepositoryBrowser::FillList(deque<CItem> * pItems)
 	{
 		m_RepoList.SetColumnWidth(col, LVSCW_AUTOSIZE_USEHEADER);
 	}
+	for (int col = 0; col <= (((CHeaderCtrl*)(m_RepoList.GetDlgItem(0)))->GetItemCount()-1); col++)
+	{
+		m_arColumnAutoWidths[col] = m_RepoList.GetColumnWidth(col);
+	}
+
+	CRegString regColWidths(_T("Software\\TortoiseSVN\\RepoBrowserColumnWidth"));
+	if (!CString(regColWidths).IsEmpty())
+	{
+		StringToWidthArray(regColWidths, m_arColumnWidths);
+	}
+	int maxcol = ((CHeaderCtrl*)(m_RepoList.GetDlgItem(0)))->GetItemCount()-1;
+	int col;
+	for (col = 1; col <= maxcol; col++)
+	{
+		if (m_arColumnWidths[col] == 0)
+			m_RepoList.SetColumnWidth(col, LVSCW_AUTOSIZE_USEHEADER);
+		else
+			m_RepoList.SetColumnWidth(col, m_arColumnWidths[col]);
+	}
 
 	m_RepoList.SetRedraw(true);
 }
@@ -994,6 +1013,7 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/, b
 {
 	if (hNode == NULL)
 		return false;
+	SaveColumnWidths();
 	CWaitCursorEx wait;
 	CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
 	HTREEITEM hSel1 = m_RepoTree.GetSelectedItem();
@@ -1022,12 +1042,11 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/, b
 	}
 	pTreeItem->children_fetched = true;
 	// if there are no child folders, remove the '+' in front of the node
-	if (!pTreeItem->has_child_folders)
 	{
 		TVITEM tvitem = {0};
 		tvitem.hItem = hNode;
 		tvitem.mask = TVIF_CHILDREN;
-		tvitem.cChildren = 0;
+		tvitem.cChildren = pTreeItem->has_child_folders ? 1 : 0;
 		m_RepoTree.SetItem(&tvitem);
 	}
 	if ((force)||(hSel1 == hNode)||(hSel1 != m_RepoTree.GetSelectedItem()))
@@ -1409,49 +1428,29 @@ void CRepositoryBrowser::OnBeginDrag(NMHDR *pNMHDR)
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
 
+	if (m_RepoList.HasText())
+		return;
 	CIDropSource* pdsrc = new CIDropSource;
 	if (pdsrc == NULL)
 		return;
-	if (m_RepoList.HasText())
-		return;
 	pdsrc->AddRef();
-	CIDataObject* pdobj = new CIDataObject(pdsrc);
-	if (pdobj == NULL)
-		return;
-	pdobj->AddRef();
 
-	// Init the supported format
-	FORMATETC fmtetc = {0}; 
-	fmtetc.cfFormat = CF_UNICODETEXT; 
-	fmtetc.dwAspect = DVASPECT_CONTENT; 
-	fmtetc.lindex = -1; 
-	fmtetc.tymed = TYMED_HGLOBAL;
-	// Init the medium used
-	STGMEDIUM medium = {0};
-	medium.tymed = TYMED_HGLOBAL;
-
-	CString urls;
-
+	CTSVNPathList sourceURLs;
 	POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
 	int index = -1;
 	while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
 	{
 		CItem * pItem = (CItem *)m_RepoList.GetItemData(index);
-		urls += pItem->absolutepath + _T("\r\n");
+		sourceURLs.AddPath(CTSVNPath(EscapeUrl(CTSVNPath(pItem->absolutepath))));
 	}
 
-	medium.hGlobal = GlobalAlloc(GHND, (urls.GetLength()+1)*sizeof(TCHAR));
-	if (medium.hGlobal)
+	SVNDataObject* pdobj = new SVNDataObject(sourceURLs, GetRevision(), GetRevision());
+	if (pdobj == NULL)
 	{
-		TCHAR* pMem = (TCHAR*)GlobalLock(medium.hGlobal);
-		_tcscpy_s(pMem, urls.GetLength()+1, (LPCTSTR)urls);
-		GlobalUnlock(medium.hGlobal);
-
-		pdobj->SetData(&fmtetc, &medium, TRUE);
+		delete pdsrc;
+		return;
 	}
-
-	m_pListDropTarget->AddSuportedFormat(fmtetc);
-	m_pTreeDropTarget->AddSuportedFormat(fmtetc);
+	pdobj->AddRef();
 
 	CDragSourceHelper dragsrchelper;
 	dragsrchelper.InitializeFromWindow(m_RepoList.GetSafeHwnd(), pNMLV->ptAction, pdobj);
@@ -1538,6 +1537,7 @@ bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pa
 	{
 		// drag-n-drop inside the repobrowser
 		CInputLogDlg input(this);
+		input.SetUUID(m_sUUID);
 		input.SetProjectProperties(&m_ProjectProperties);
 		CString sHint;
 		if (pathlist.GetCount() == 1)
@@ -1970,61 +1970,8 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 			break;
 		case ID_SAVEAS:
 			{
-				bool bSavePathOK = false;
 				CTSVNPath tempfile;
-				if (urlList.GetCount() == 1)
-				{
-					OPENFILENAME ofn;		// common dialog box structure
-					TCHAR szFile[MAX_PATH];  // buffer for file name
-					ZeroMemory(szFile, sizeof(szFile));
-					CString filename = m_path.GetFileOrDirectoryName();
-					_tcscpy_s(szFile, MAX_PATH, filename);
-					// Initialize OPENFILENAME
-					ofn.lStructSize = sizeof(OPENFILENAME);
-					ofn.hwndOwner = this->m_hWnd;
-					ofn.lpstrFile = szFile;
-					ofn.nMaxFile = sizeof(szFile)/sizeof(TCHAR);
-					CString temp;
-					temp.LoadString(IDS_REPOBROWSE_SAVEAS);
-					CStringUtils::RemoveAccelerators(temp);
-					if (temp.IsEmpty())
-						ofn.lpstrTitle = NULL;
-					else
-						ofn.lpstrTitle = temp;
-					ofn.Flags = OFN_OVERWRITEPROMPT;
-
-					CString sFilter;
-					sFilter.LoadString(IDS_COMMONFILEFILTER);
-					TCHAR * pszFilters = new TCHAR[sFilter.GetLength()+4];
-					_tcscpy_s (pszFilters, sFilter.GetLength()+4, sFilter);
-					// Replace '|' delimiters with '\0's
-					TCHAR *ptr = pszFilters + _tcslen(pszFilters);  //set ptr at the NULL
-					while (ptr != pszFilters)
-					{
-						if (*ptr == '|')
-							*ptr = '\0';
-						ptr--;
-					}
-					ofn.lpstrFilter = pszFilters;
-					ofn.nFilterIndex = 1;
-					// Display the Open dialog box. 
-					bSavePathOK = (GetSaveFileName(&ofn)==TRUE);
-					if (bSavePathOK)
-						tempfile.SetFromWin(ofn.lpstrFile);
-					delete [] pszFilters;
-				}
-				else
-				{
-					CBrowseFolder browser;
-					CString sTempfile;
-					browser.m_style = BIF_EDITBOX | BIF_NEWDIALOGSTYLE | BIF_RETURNFSANCESTORS | BIF_RETURNONLYFSDIRS;
-					browser.Show(GetSafeHwnd(), sTempfile);
-					if (!sTempfile.IsEmpty())
-					{
-						bSavePathOK = true;
-						tempfile.SetFromWin(sTempfile);
-					}
-				}
+				bool bSavePathOK = AskForSavePath(urlList, tempfile);
 				if (bSavePathOK)
 				{
 					CWaitCursorEx wait_cursor;
@@ -2459,61 +2406,8 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 			break;
 		case ID_COPYTOWC:
 			{
-				bool bSavePathOK = false;
 				CTSVNPath tempfile;
-				if (urlList.GetCount() == 1)
-				{
-					OPENFILENAME ofn;		// common dialog box structure
-					TCHAR szFile[MAX_PATH];  // buffer for file name
-					ZeroMemory(szFile, sizeof(szFile));
-					CString filename = m_path.GetFileOrDirectoryName();
-					_tcscpy_s(szFile, MAX_PATH, filename);
-					// Initialize OPENFILENAME
-					ofn.lStructSize = sizeof(OPENFILENAME);
-					ofn.hwndOwner = this->m_hWnd;
-					ofn.lpstrFile = szFile;
-					ofn.nMaxFile = sizeof(szFile)/sizeof(TCHAR);
-					CString temp;
-					temp.LoadString(IDS_REPOBROWSE_SAVEAS);
-					CStringUtils::RemoveAccelerators(temp);
-					if (temp.IsEmpty())
-						ofn.lpstrTitle = NULL;
-					else
-						ofn.lpstrTitle = temp;
-					ofn.Flags = OFN_OVERWRITEPROMPT;
-
-					CString sFilter;
-					sFilter.LoadString(IDS_COMMONFILEFILTER);
-					TCHAR * pszFilters = new TCHAR[sFilter.GetLength()+4];
-					_tcscpy_s (pszFilters, sFilter.GetLength()+4, sFilter);
-					// Replace '|' delimiters with '\0's
-					TCHAR *ptr = pszFilters + _tcslen(pszFilters);  //set ptr at the NULL
-					while (ptr != pszFilters)
-					{
-						if (*ptr == '|')
-							*ptr = '\0';
-						ptr--;
-					}
-					ofn.lpstrFilter = pszFilters;
-					ofn.nFilterIndex = 1;
-					// Display the Open dialog box. 
-					bSavePathOK = (GetSaveFileName(&ofn)==TRUE);
-					if (bSavePathOK)
-						tempfile.SetFromWin(ofn.lpstrFile);
-					delete [] pszFilters;
-				}
-				else
-				{
-					CBrowseFolder browser;
-					CString sTempfile;
-					browser.m_style = BIF_EDITBOX | BIF_NEWDIALOGSTYLE | BIF_RETURNFSANCESTORS | BIF_RETURNONLYFSDIRS;
-					browser.Show(GetSafeHwnd(), sTempfile);
-					if (!sTempfile.IsEmpty())
-					{
-						bSavePathOK = true;
-						tempfile.SetFromWin(sTempfile);
-					}
-				}
+				bool bSavePathOK = AskForSavePath(urlList, tempfile);
 				if (bSavePathOK)
 				{
 					CWaitCursorEx wait_cursor;
@@ -2660,4 +2554,110 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 }
 
 
+bool CRepositoryBrowser::AskForSavePath(const CTSVNPathList& urlList, CTSVNPath &tempfile)
+{
+	bool bSavePathOK = false;
+	if (urlList.GetCount() == 1)
+	{
+		OPENFILENAME ofn;		// common dialog box structure
+		TCHAR szFile[MAX_PATH];  // buffer for file name
+		ZeroMemory(szFile, sizeof(szFile));
+		CString filename = m_path.GetFileOrDirectoryName();
+		_tcscpy_s(szFile, MAX_PATH, filename);
+		// Initialize OPENFILENAME
+		ofn.lStructSize = sizeof(OPENFILENAME);
+		ofn.hwndOwner = this->m_hWnd;
+		ofn.lpstrFile = szFile;
+		ofn.nMaxFile = sizeof(szFile)/sizeof(TCHAR);
+		CString temp;
+		temp.LoadString(IDS_REPOBROWSE_SAVEAS);
+		CStringUtils::RemoveAccelerators(temp);
+		if (temp.IsEmpty())
+			ofn.lpstrTitle = NULL;
+		else
+			ofn.lpstrTitle = temp;
+		ofn.Flags = OFN_OVERWRITEPROMPT;
 
+		CString sFilter;
+		sFilter.LoadString(IDS_COMMONFILEFILTER);
+		TCHAR * pszFilters = new TCHAR[sFilter.GetLength()+4];
+		_tcscpy_s (pszFilters, sFilter.GetLength()+4, sFilter);
+		// Replace '|' delimiters with '\0's
+		TCHAR *ptr = pszFilters + _tcslen(pszFilters);  //set ptr at the NULL
+		while (ptr != pszFilters)
+		{
+			if (*ptr == '|')
+				*ptr = '\0';
+			ptr--;
+		}
+		ofn.lpstrFilter = pszFilters;
+		ofn.nFilterIndex = 1;
+		// Display the Open dialog box. 
+		bSavePathOK = (GetSaveFileName(&ofn)==TRUE);
+		if (bSavePathOK)
+			tempfile.SetFromWin(ofn.lpstrFile);
+		delete [] pszFilters;
+	}
+	else
+	{
+		CBrowseFolder browser;
+		CString sTempfile;
+		browser.m_style = BIF_EDITBOX | BIF_NEWDIALOGSTYLE | BIF_RETURNFSANCESTORS | BIF_RETURNONLYFSDIRS;
+		browser.Show(GetSafeHwnd(), sTempfile);
+		if (!sTempfile.IsEmpty())
+		{
+			bSavePathOK = true;
+			tempfile.SetFromWin(sTempfile);
+		}
+	}
+	return bSavePathOK;
+}
+
+bool CRepositoryBrowser::StringToWidthArray(const CString& WidthString, int WidthArray[])
+{
+	TCHAR * endchar;
+	for (int i=0; i<7; ++i)
+	{
+		CString hex = WidthString.Mid(i*8, 8);
+		if ( hex.IsEmpty() )
+		{
+			// This case only occurs when upgrading from an older
+			// TSVN version in which there were fewer columns.
+			WidthArray[i] = 0;
+		}
+		else
+		{
+			WidthArray[i] = _tcstol(hex, &endchar, 16);
+		}
+	}
+	return true;
+}
+
+CString CRepositoryBrowser::WidthArrayToString(int WidthArray[])
+{
+	CString sResult;
+	TCHAR buf[10];
+	for (int i=0; i<7; ++i)
+	{
+		_stprintf_s(buf, 10, _T("%08X"), WidthArray[i]);
+		sResult += buf;
+	}
+	return sResult;
+}
+
+void CRepositoryBrowser::SaveColumnWidths(bool bSaveToRegistry /* = false */)
+{
+	CRegString regColWidth(_T("Software\\TortoiseSVN\\RepoBrowserColumnWidth"));
+	int maxcol = ((CHeaderCtrl*)(m_RepoList.GetDlgItem(0)))->GetItemCount()-1;
+	for (int col = 0; col <= maxcol; col++)
+	{
+		m_arColumnWidths[col] = m_RepoList.GetColumnWidth(col);
+		if (m_arColumnWidths[col] == m_arColumnAutoWidths[col])
+			m_arColumnWidths[col] = 0;
+	}
+	if (bSaveToRegistry)
+	{
+		CString sWidths = WidthArrayToString(m_arColumnWidths);
+		regColWidth = sWidths;
+	}
+}

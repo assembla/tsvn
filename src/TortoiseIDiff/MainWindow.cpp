@@ -101,6 +101,8 @@ void CMainWindow::PositionChildren(RECT * clientrect /* = NULL */)
 		}
 	}
 	if (hdwp) EndDeferWindowPos(hdwp);
+	picWindow1.SetupScrollBars();
+	picWindow2.SetupScrollBars();
 	InvalidateRect(*this, NULL, FALSE);
 }
 
@@ -123,6 +125,9 @@ LRESULT CALLBACK CMainWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam,
 			GetClientRect(hwnd, &rect);
 			nSplitterPos = (rect.right-rect.left)/2;
 			CreateToolbar();
+			PositionChildren(&rect);
+			picWindow1.FitImageInWindow();
+			picWindow2.FitImageInWindow();
 		}
 		break;
 	case WM_COMMAND:
@@ -143,52 +148,12 @@ LRESULT CALLBACK CMainWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam,
 			EndPaint(hwnd, &ps);
 		}
 		break;
-	case WM_SIZING:
+    case WM_GETMINMAXINFO:
 		{
-			RECT * pRect = (RECT *)lParam;
-			switch (wParam)
-			{
-			case WMSZ_BOTTOM:
-				if ((pRect->bottom-pRect->top)<WINDOW_MINHEIGTH)
-					pRect->bottom = pRect->top+WINDOW_MINHEIGTH;
-				break;
-			case WMSZ_BOTTOMLEFT:
-				if ((pRect->right-pRect->left)<WINDOW_MINWIDTH)
-					pRect->left = pRect->right-WINDOW_MINWIDTH;
-				if ((pRect->bottom-pRect->top)<WINDOW_MINHEIGTH)
-					pRect->bottom = pRect->top+WINDOW_MINHEIGTH;
-				break;
-			case WMSZ_BOTTOMRIGHT:
-				if ((pRect->right-pRect->left)<WINDOW_MINWIDTH)
-					pRect->right = pRect->left+WINDOW_MINWIDTH;
-				if ((pRect->bottom-pRect->top)<WINDOW_MINHEIGTH)
-					pRect->bottom = pRect->top+WINDOW_MINHEIGTH;
-				break;
-			case WMSZ_LEFT:
-				if ((pRect->right-pRect->left)<WINDOW_MINWIDTH)
-					pRect->left = pRect->right-WINDOW_MINWIDTH;
-				break;
-			case WMSZ_RIGHT:
-				if ((pRect->right-pRect->left)<WINDOW_MINWIDTH)
-					pRect->right = pRect->left+WINDOW_MINWIDTH;
-				break;
-			case WMSZ_TOP:
-				if ((pRect->bottom-pRect->top)<WINDOW_MINHEIGTH)
-					pRect->top = pRect->bottom-WINDOW_MINHEIGTH;
-				break;
-			case WMSZ_TOPLEFT:
-				if ((pRect->right-pRect->left)<WINDOW_MINWIDTH)
-					pRect->left = pRect->right-WINDOW_MINWIDTH;
-				if ((pRect->bottom-pRect->top)<WINDOW_MINHEIGTH)
-					pRect->top = pRect->bottom-WINDOW_MINHEIGTH;
-				break;
-			case WMSZ_TOPRIGHT:
-				if ((pRect->right-pRect->left)<WINDOW_MINWIDTH)
-					pRect->right = pRect->left+WINDOW_MINWIDTH;
-				if ((pRect->bottom-pRect->top)<WINDOW_MINHEIGTH)
-					pRect->top = pRect->bottom-WINDOW_MINHEIGTH;
-				break;
-			}
+			MINMAXINFO * mmi = (MINMAXINFO*)lParam;
+			mmi->ptMinTrackSize.x = WINDOW_MINWIDTH;
+			mmi->ptMinTrackSize.y = WINDOW_MINHEIGTH;
+			return 0;
 		}
 		break;
 	case WM_SIZE:
@@ -285,9 +250,7 @@ LRESULT CMainWindow::DoCommand(int id)
 			if (OpenDialog())
 			{
 				picWindow1.SetPic(leftpicpath, _T(""));
-				picWindow1.FitImageInWindow();
 				picWindow2.SetPic(rightpicpath, _T(""));
-				picWindow2.FitImageInWindow();
 				if (bOverlap)
 				{
 					picWindow1.SetSecondPic(picWindow2.GetPic(), rightpictitle, rightpicpath);
@@ -299,6 +262,8 @@ LRESULT CMainWindow::DoCommand(int id)
 				RECT rect;
 				GetClientRect(*this, &rect);
 				PositionChildren(&rect);
+				picWindow1.FitImageInWindow();
+				picWindow2.FitImageInWindow();
 			}
 		}
 		break;
@@ -336,6 +301,7 @@ LRESULT CMainWindow::DoCommand(int id)
 				picWindow2.StopTimer();
 				picWindow1.SetSecondPic(picWindow2.GetPic(), rightpictitle, rightpicpath);
 				picWindow1.SetSecondPicAlpha(127);
+				picWindow1.SetZoom2(picWindow2.GetZoom());
 			}
 			else
 			{
@@ -352,7 +318,39 @@ LRESULT CMainWindow::DoCommand(int id)
 			RECT rect;
 			GetClientRect(*this, &rect);
 			PositionChildren(&rect);
-			return 0;
+			if (bOverlap)
+            {
+				picWindow1.FitImageInWindow();
+            }
+            else
+            {
+                picWindow1.FitImageInWindow();
+                picWindow2.FitImageInWindow();
+            }
+            return 0;
+		}
+		break;
+	case ID_VIEW_FITTOGETHER:
+		{
+			bFitTogether = !bFitTogether;
+			picWindow1.FitTogether(bFitTogether);
+			picWindow2.FitTogether(bFitTogether);
+			if (!bFitTogether)
+			{
+				picWindow1.SetZoom2(picWindow1.GetZoom());
+			}
+
+			HMENU hMenu = GetMenu(*this);
+			UINT uCheck = MF_BYCOMMAND;
+			uCheck |= bFitTogether ? MF_CHECKED : MF_UNCHECKED;
+			CheckMenuItem(hMenu, ID_VIEW_FITTOGETHER, uCheck);
+
+			// change the state of the toolbar button
+			TBBUTTONINFO tbi;
+			tbi.cbSize = sizeof(TBBUTTONINFO);
+			tbi.dwMask = TBIF_STATE;
+			tbi.fsState = bFitTogether ? TBSTATE_CHECKED | TBSTATE_ENABLED : TBSTATE_ENABLED;
+			SendMessage(hwndTB, TB_SETBUTTONINFO, ID_VIEW_FITTOGETHER, (LPARAM)&tbi);
 		}
 		break;
 	case ID_VIEW_LINKIMAGESTOGETHER:
@@ -762,7 +760,7 @@ bool CMainWindow::CreateToolbar()
 
 	SendMessage(hwndTB, TB_BUTTONSTRUCTSIZE, (WPARAM) sizeof(TBBUTTON), 0);
 
-	TBBUTTON tbb[10];
+	TBBUTTON tbb[11];
 	// create an imagelist containing the icons for the toolbar
 	hToolbarImgList = ImageList_Create(24, 24, ILC_COLOR32 | ILC_MASK, 10, 4);
 	if (hToolbarImgList == NULL)
@@ -802,6 +800,14 @@ bool CMainWindow::CreateToolbar()
 	hIcon = LoadIcon(hResource, MAKEINTRESOURCE(IDI_FITINWINDOW));
 	tbb[index].iBitmap = ImageList_AddIcon(hToolbarImgList, hIcon); 
 	tbb[index].idCommand = ID_VIEW_FITIMAGESINWINDOW; 
+	tbb[index].fsState = TBSTATE_ENABLED; 
+	tbb[index].fsStyle = BTNS_BUTTON; 
+	tbb[index].dwData = 0; 
+	tbb[index++].iString = 0; 
+
+	hIcon = LoadIcon(hResource, MAKEINTRESOURCE(IDI_FITTOGETHER));
+	tbb[index].iBitmap = ImageList_AddIcon(hToolbarImgList, hIcon); 
+	tbb[index].idCommand = ID_VIEW_FITTOGETHER; 
 	tbb[index].fsState = TBSTATE_ENABLED; 
 	tbb[index].fsStyle = BTNS_BUTTON; 
 	tbb[index].dwData = 0; 

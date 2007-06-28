@@ -423,7 +423,35 @@ bool TortoiseBlame::GotoLine(long line)
 	{
 		line = authors.size()-1;
 	}
-	SendEditor(SCI_GOTOLINE, line);
+
+	int nCurrentPos = SendEditor(SCI_GETCURRENTPOS);
+	int nCurrentLine = SendEditor(SCI_LINEFROMPOSITION,nCurrentPos);
+	int nFirstVisibleLine = SendEditor(SCI_GETFIRSTVISIBLELINE);
+	int nLinesOnScreen = SendEditor(SCI_LINESONSCREEN);
+
+	if ( line>=nFirstVisibleLine && line<=nFirstVisibleLine+nLinesOnScreen)
+	{
+		// no need to scroll
+		SendEditor(SCI_GOTOLINE, line);
+	}
+	else
+	{
+		// Place the requested line one third from the top
+		if ( line > nCurrentLine )
+		{
+			SendEditor(SCI_GOTOLINE, (WPARAM)(line+(int)nLinesOnScreen*(2/3.0)));
+		}
+		else
+		{
+			SendEditor(SCI_GOTOLINE, (WPARAM)(line-(int)nLinesOnScreen*(1/3.0)));
+		}
+	}
+
+	// Highlight the line
+	int nPosStart = SendEditor(SCI_POSITIONFROMLINE,line);
+	int nPosEnd = SendEditor(SCI_GETLINEENDPOSITION,line);
+	SendEditor(SCI_SETSEL,nPosEnd,nPosStart);
+
 	return true;
 }
 
@@ -1395,13 +1423,13 @@ LRESULT CALLBACK WndBlameProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 				ti.hwnd = app.wBlame;
 				ti.uId = 0;
 				SendMessage(app.hwndTT, TTM_TRACKACTIVATE, TRUE, (LPARAM)&ti);
-				app.ttVisible = TRUE;
 			}
 			int y = ((int)(short)HIWORD(lParam));
 			LONG_PTR line = app.SendEditor(SCI_GETFIRSTVISIBLELINE);
 			LONG_PTR heigth = app.SendEditor(SCI_TEXTHEIGHT);
 			line = line + (y/heigth);
-			if (line < (LONG)app.revs.size())
+			app.ttVisible = (line < (LONG)app.revs.size());
+			if ( app.ttVisible )
 			{
 				if (app.authors[line].compare(app.m_mouseauthor) != 0)
 				{

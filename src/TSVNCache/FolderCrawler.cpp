@@ -60,12 +60,12 @@ void CFolderCrawler::Stop()
 
 void CFolderCrawler::Initialise()
 {
-	// Don't call Initalise more than once
+	// Don't call Initialize more than once
 	ATLASSERT(m_hThread == INVALID_HANDLE_VALUE);
 
 	// Just start the worker thread. 
-	// It will wait for event being signalled.
-	// If m_hWakeEvent is already signalled the worker thread 
+	// It will wait for event being signaled.
+	// If m_hWakeEvent is already signaled the worker thread 
 	// will behave properly (with normal priority at worst).
 
 	m_bRun = true;
@@ -262,7 +262,7 @@ void CFolderCrawler::WorkerThread()
 						workingPath = workingPath.GetContainingDirectory();	
 					} while(workingPath.IsAdminDir());
 
-					ATLTRACE("Invalidating and refreshing folder: %ws\n", workingPath.GetWinPath());
+					ATLTRACE(_T("Invalidating and refreshing folder: %s\n"), workingPath.GetWinPath());
 					{
 						AutoLocker print(critSec);
 						_stprintf_s(szCurrentCrawledPath[nCurrentCrawledpathIndex], MAX_CRAWLEDPATHSLEN, _T("Invalidating and refreshing folder: %s"), workingPath.GetWinPath());

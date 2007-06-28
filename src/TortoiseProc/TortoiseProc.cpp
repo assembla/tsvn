@@ -296,6 +296,7 @@ BOOL CTortoiseProcApp::InitInstance()
 	sHelppath.Replace(_T("tortoiseproc.chm"), _T("TortoiseSVN_en.chm"));
 	free((void*)m_pszHelpFilePath);
 	m_pszHelpFilePath=_tcsdup(sHelppath);
+	sHelppath = CPathUtils::GetAppParentDirectory() + _T("Languages\\TortoiseSVN_en.chm");
 	do
 	{
 		CString sLang = _T("_");
@@ -403,7 +404,7 @@ BOOL CTortoiseProcApp::InitInstance()
 		{
 			CString sPathfileArgument = CPathUtils::GetLongPathname(parser.GetVal(_T("pathfile")));
 			cmdLinePath.SetFromUnknown(sPathfileArgument);
-			if (pathList.LoadFromTemporaryFile(cmdLinePath)==false)
+			if (pathList.LoadFromFile(cmdLinePath)==false)
 				return FALSE;		// no path specified!
 			if ( parser.HasKey(_T("deletepathfile")) )
 			{
@@ -1128,7 +1129,7 @@ BOOL CTortoiseProcApp::InitInstance()
 					options |= dlg.m_bIgnoreAncestry ? ProgOptIgnoreAncestry : 0;
 					progDlg.SetParams(CSVNProgressDlg::SVNProgress_Merge, options, pathList, dlg.m_URLFrom, dlg.m_URLTo, dlg.StartRev);		//use the message as the second url
 					// use the depth of the working copy
-					progDlg.SetDepth(svn_depth_unknown);
+					progDlg.SetDepth(dlg.m_depth);
 					progDlg.m_RevisionEnd = dlg.EndRev;
 					progDlg.DoModal();
 					repeat = dlg.m_bDryRun;
@@ -1322,7 +1323,7 @@ BOOL CTortoiseProcApp::InitInstance()
 					}
 					else
 						sFilemask.Empty();
-					CString sNewMask = destinationPath.GetFilename();
+					CString sNewMask = sNewName;
 					if (sNewMask.ReverseFind('.'>=0))
 					{
 						sNewMask = sNewMask.Left(sNewMask.ReverseFind('.'));
@@ -2487,9 +2488,7 @@ BOOL CTortoiseProcApp::CreatePatch(const CTSVNPath& root, const CTSVNPathList& p
 			}
 			fclose(inFile);
 
-			CStringUtils::WriteAsciiStringToClipboard(sClipdata);
 			CStringUtils::WriteDiffToClipboard(sClipdata);
-
 		}
 	}
 

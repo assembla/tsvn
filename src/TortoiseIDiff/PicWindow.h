@@ -55,7 +55,6 @@ class CPicWindow : public CWindow
 public:
 	CPicWindow(HINSTANCE hInst, const WNDCLASSEX* wcx = NULL) : CWindow(hInst, wcx)
 		, bValid(false)
-		, bFirstpaint(true)
 		, nHScrollPos(0)
 		, nVScrollPos(0)
 		, picscale(1.0)
@@ -70,6 +69,7 @@ public:
 		, pTheOtherPic(NULL)
 		, bLinked(true)
 		, hwndAlphaSlider(NULL)
+		, bFitTogether(false)
 	{ 
 		SetWindowTitle(_T("Picture Window"));
 	};
@@ -112,10 +112,15 @@ public:
 	}
 	/// Resizes the image to fit into the window. Small images are not enlarged.
 	void FitImageInWindow();
+	/// Makes both images the same size, fitting into the window
+	void FitTogether(bool bFit);
 	/// Sets the zoom factor of the image
 	void SetZoom(double dZoom);
+	void SetZoom2(double dZoom) {picscale2 = dZoom;}
 	/// Returns the currently used zoom factor in which the image is shown.
 	double GetZoom() {return picscale;}
+	/// Returns the currently used zoom factor in which the second image is shown.
+	double GetZoom2() {return picscale2;}
 	/// Zooms in (true) or out (false) in nice steps
 	void Zoom(bool in);
 	/// Sets the 'Other' pic window
@@ -124,6 +129,8 @@ public:
 	void LinkWindows(bool bLink) {bLinked = bLink;}
 
 	void ShowInfo(bool bShow = true) {bShowInfo = bShow; InvalidateRect(*this, NULL, false);}
+	/// Sets up the scrollbars as needed
+	void SetupScrollBars();
 
 	bool HasMultipleImages();
 protected:
@@ -133,8 +140,6 @@ protected:
 	void				DrawViewTitle(HDC hDC, RECT * rect);
 	/// Creates the image buttons
 	bool				CreateButtons();
-	/// Sets up the scrollbars as needed
-	void				SetupScrollBars();
 	/// Handles vertical scrolling
 	void				OnVScroll(UINT nSBCode, UINT nPos);
 	/// Handles horizontal scrolling
@@ -160,24 +165,31 @@ protected:
 	HWND				CreateTrackbar(HWND hwndParent);
 	/// Moves the alpha slider trackbar to the correct position
 	void				PositionTrackBar();
+	/// creates the info string used in the info box and the tooltips
+	void				BuildInfoString(TCHAR * buf, int size, bool bTooltip);
 
 	stdstring			picpath;			///< the path to the image we show
 	stdstring			pictitle;			///< the string to show in the image view as a title
 	CPicture			picture;			///< the picture object of the image
 	bool				bValid;				///< true if the picture object is valid, i.e. if the image could be loaded and can be shown
 	double				picscale;			///< the scale factor of the image
+	double				picscale2;			///< the scale factor of the second image
 	bool				bFirstpaint;		///< true if the image is painted the first time. Used to initialize some stuff when the window is valid for sure.
 	CPicture *			pSecondPic;			///< if set, this is the picture to draw transparently above the original
 	CPicWindow *		pTheOtherPic;		///< pointer to the other picture window. Used for "linking" the two windows when scrolling/zooming/...
-	bool				bLinked;			///< if true, the two pic windows are linked together for scrolling/zooming/...
+	bool				bLinked;			///< if true, the two image windows are linked together for scrolling/zooming/...
+	bool				bFitTogether;		///< if true, the two image windows are always zoomed so they match their size
 	stdstring 			pictitle2;			///< the title of the second picture
 	stdstring 			picpath2;			///< the path of the second picture
 	BYTE				alphalive;			///< the alpha value for the transparency live-preview of the second picture
 	bool				bShowInfo;			///< true if the info rectangle of the image should be shown
+	TCHAR				m_wszTip[8192];
+	char				m_szTip[8192];
+	HWND				hwndTT;
 	// scrollbar info
 	int					nVScrollPos;		///< vertical scroll position
 	int					nHScrollPos;		///< horizontal scroll position
-	POINT				ptPanStart;			///< the point of the last mouseclick
+	POINT				ptPanStart;			///< the point of the last mouse click
 	int					startVScrollPos;	///< the vertical scroll position when panning starts
 	int					startHScrollPos;	///< the horizontal scroll position when panning starts
 	// image frames/dimensions

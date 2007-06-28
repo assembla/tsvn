@@ -29,10 +29,50 @@
 #include "svn_opt.h"
 
 #include "UnicodeUtils.h"
+#include "PathUtils.h"
 #include "TSVNPath.h"
 #include "SVN.h"
 #include "SVNInfo.h"
 #include "SVNError.h"
+
+// make sure, we can iterator over the given range for the given path
+
+void CCacheLogQuery::CLogFiller::MakeRangeIterable ( const CDictionaryBasedPath& path
+												   , revision_t startRevision
+												   , revision_t count)
+{
+	// trim the range to cover only missing data
+	// (we may already have enough information
+	// to iterate over the whole range -> don't
+	// ask the server in that case)
+
+	CStrictLogIterator iterator ( cache
+								, startRevision + count-1
+								, CDictionaryBasedTempPath (path));
+
+	iterator.Retry();
+	while (   !iterator.EndOfPath() 
+		   && !iterator.DataIsMissing() 
+		   && (iterator.GetRevision() >= startRevision))
+	{
+		iterator.Advance();
+	}
+
+	if (iterator.EndOfPath() || !iterator.DataIsMissing())
+		return;
+
+	// o.k., some data is missing. Ask for it.
+
+	CLogFiller().FillLog ( cache
+						 , URL
+						 , svnQuery
+						 , iterator.GetRevision()
+						 , startRevision
+						 , CDictionaryBasedTempPath (path)
+						 , 0
+						 , true
+						 , NULL);
+}
 
 // implement ILogReceiver
 
@@ -93,7 +133,19 @@ void CCacheLogQuery::CLogFiller::ReceiveLog ( LogChangedPathArray* changes
 								, revision+1
 								, firstNARevision - revision);
 		}
+		else
+		{
+			// we must fill this range! Otherwise, we will stumble
+			// over this gap and will try to fetch the data again
+			// to no avail ... causing an endless loop.
+
+			MakeRangeIterable ( currentPath->GetBasePath()
+							  , revision+1
+							  , firstNARevision - revision);
+		}
 	}
+
+	// due to renames / copies, we may continue on a different path
 
 	if (followRenames)
 	{
@@ -102,6 +154,9 @@ void CCacheLogQuery::CLogFiller::ReceiveLog ( LogChangedPathArray* changes
 
 		*currentPath = iterator.GetPath();
 	}
+
+	// the first revision we may not have information about is the one
+	// immediately preceeding the on we just received from the server
 
 	firstNARevision = revision-1;
 
@@ -145,14 +200,22 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 				  , strictNodeHistory
 				  , this);
 
-	if (   (firstNARevision == startRevision) 
-		&& currentPath->IsFullyCachedPath())
+	if (firstNARevision == startRevision) 
 	{
 		// the log was empty
 
-		cache->AddSkipRange ( currentPath->GetBasePath()
-							, endRevision
-							, startRevision - endRevision + 1);
+		if (currentPath->IsFullyCachedPath())
+		{
+			cache->AddSkipRange ( currentPath->GetBasePath()
+								, endRevision
+								, startRevision - endRevision + 1);
+		}
+		else
+		{
+			MakeRangeIterable ( currentPath->GetBasePath()
+							  , endRevision
+							  , startRevision - endRevision + 1);
+		}
 	}
 
 	return firstNARevision+1;
@@ -375,7 +438,7 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 
 	iterator->Retry();
 
-	// report starts at endRevision or earlier revisions
+	// report starts at startRevision or earlier revision
 
 	revision_t lastReported = startRevision+1;
 
@@ -390,6 +453,11 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 	{
 		if (iterator->DataIsMissing())
 		{
+			// we must not fetch revisions twice
+			// (this may cause an indefinite loop)
+
+			assert (iterator->GetRevision() < lastReported);
+
 			// our cache is incomplete -> fill it.
 			// Report entries immediately to the receiver 
 			// (as to allow the user to cancel this action).
@@ -514,11 +582,13 @@ CDictionaryBasedTempPath CCacheLogQuery::GetRelativeRepositoryPath (SVNInfoData&
 		URL = CUnicodeUtils::GetUTF8(svn.GetRepositoryRoot (CTSVNPath (info.url)));
 	}
 
-	// get path object
+	// get path object 
+	// (URLs are always escaped, so we must unescape them)
 
 	CStringA relPath = CUnicodeUtils::GetUTF8 (info.url).Mid (URL.GetLength());
-	const CPathDictionary* paths = &cache->GetLogInfo().GetPaths();
+	relPath = CPathUtils::PathUnescape (relPath);
 
+	const CPathDictionary* paths = &cache->GetLogInfo().GetPaths();
 	return CDictionaryBasedTempPath (paths, (const char*)relPath);
 }
 
