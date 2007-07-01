@@ -122,6 +122,10 @@ private:
 	CCachedLogInfo* cache;
 	CStringA URL;
 
+	// used, if caches is NULL
+
+	CCachedLogInfo* tempCache;
+
 	// connection to the SVN repository (may be NULL)
 
 	ILogQuery* svnQuery;
@@ -219,4 +223,9 @@ public:
 					 , int limit
 					 , bool strictNodeHistory
 					 , ILogReceiver* receiver);
+
+	// access to the cache
+	// (only valid after calling Log())
+
+	CCachedLogInfo* GetCache();
 };

@@ -100,11 +100,29 @@ public:
 	CDictionaryBasedTempPath GetCommonRoot 
 		(const CDictionaryBasedTempPath& rhs) const;
 
+    // general comparison
+
+    bool operator==(const CDictionaryBasedPath& rhs) const
+    {
+        return IsFullyCachedPath() && (GetIndex() == rhs.GetIndex());
+    }
+
+    bool operator!=(const CDictionaryBasedPath& rhs) const
+    {
+        return !operator==(rhs);
+    }
+
+    bool operator==(const CDictionaryBasedTempPath& rhs) const;
+    bool operator!=(const CDictionaryBasedTempPath& rhs) const
+    {
+        return !operator==(rhs);
+    }
+
 	// create a path object with the parent renamed
 
 	CDictionaryBasedTempPath ReplaceParent 
 		( const CDictionaryBasedPath& oldParent
-		, const CDictionaryBasedPath& newParent);
+		, const CDictionaryBasedPath& newParent) const;
 
 	// call this after cache updates:
 	// try to remove the leading entries from relPathElements, if possible
