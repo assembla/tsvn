@@ -48,19 +48,17 @@ private:
 	log_entry& operator= (const log_entry&);
 };
 
-struct SCopyTo
+class CRevisionEntry;
+
+struct SCopyInfo
 {
 	revision_t fromRevision;
 	index_t fromPathIndex;
 	revision_t toRevision;
 	index_t toPathIndex;
 
-	bool operator< (const SCopyTo& rhs) const
-	{
-		return (fromRevision < rhs.fromRevision)
-			|| (   (fromRevision == rhs.fromRevision) 
-				&& (fromPathIndex < rhs.fromPathIndex));
-	}
+	CRevisionEntry* sourceEntry;
+	CRevisionEntry* targetEntry;
 };
 
 class CSearchPathTree
@@ -70,6 +68,7 @@ private:
 	CDictionaryBasedTempPath path;
 
 	revision_t startRevision;
+	CRevisionEntry* lastEntry;
 
 	CSearchPathTree* parent;
 	CSearchPathTree* firstChild;
@@ -98,6 +97,10 @@ public:
 	void Insert ( const CDictionaryBasedTempPath& path
 				, revision_t startrev);
 	void Remove();
+
+	// there is a new revision entry for this path
+
+	void ChainEntries (CRevisionEntry* entry);
 
 	// property access
 
@@ -181,8 +184,11 @@ public:
 	CDictionaryBasedTempPath path;
 
 	Action			action;
-	int				level;
+	CRevisionEntry* next;
+
 	std::vector<CRevisionEntry*>	copyTargets;
+
+	int				level;
 	int				leftconnections;
 	int				rightconnections;
 	int				bottomconnections;
@@ -226,7 +232,7 @@ public:
 	CString						GetLastErrorMessage();
 	static bool					IsParentOrItself(const char * parent, const char * child);
 	static bool					IsParentOrItself(const wchar_t * parent, const wchar_t * child);
-	CPtrArray					m_arEntryPtrs;
+	std::vector<CRevisionEntry*> m_entryPtrs;
 	size_t						m_maxurllength;
 	CString						m_maxurl;
 	int							m_maxlevel;
@@ -246,28 +252,27 @@ private:
 												 , revision_t startrev
 												 , bool bShowAll);
 	void						AnalyzeRevisions ( revision_t revision
-												 , const CDictionaryBasedTempPath& path
 												 , CRevisionInfoContainer::CChangesIterator first
 												 , CRevisionInfoContainer::CChangesIterator last
 												 , CSearchPathTree* rootNode
 												 , CSearchPathTree* startNode
-												 , std::vector<SCopyTo>::const_iterator firstCopy
-												 , std::vector<SCopyTo>::const_iterator lastCopy
+												 , std::vector<SCopyInfo*>::const_iterator firstFromCopy
+												 , std::vector<SCopyInfo*>::const_iterator lastFromCopy
+												 , std::vector<SCopyInfo*>::const_iterator firstToCopy
+												 , std::vector<SCopyInfo*>::const_iterator lastToCopy
 												 , bool bShowAll
 												 , std::vector<CSearchPathTree*>& toRemove);
-	bool						Cleanup(bool bArrangeByPath);
+	void						ApplyForwardCopies();
+	void						AssignLevels ( CRevisionEntry* start
+											 , std::vector<int>& levelByRevision);
+	void						AssignLevels();
+	void						Cleanup();
+	void						ClearRevisionEntries();
 	
-	bool						SetCopyTo(const CString& uiCopyFromPath, svn_revnum_t copyfrom_rev, 
-											const CString& copyto_path, svn_revnum_t copyto_rev);
-	CString 					GetRename(const CString& url, LONG rev);
-
 #ifdef DEBUG	
 	void						PrintDebugInfo();
 #endif
 
-	static int __cdecl			SortCompareRevUrl(const void * pElem1, const void * pElem2);	///< sort callback function
-	static int __cdecl			SortCompareRevLevels(const void * pElem1, const void * pElem2);	///< sort callback function
-	static int __cdecl			SortCompareSourceEntry(const void * pElem1, const void * pElem2);	///< sort callback function
 	CStringA					m_sRepoRoot;
 	revision_t					m_lHeadRevision;
 
@@ -283,7 +288,8 @@ private:
 	std::auto_ptr<CSVNLogQuery> svnQuery;
 	std::auto_ptr<CCacheLogQuery> query;
 
-	std::vector<SCopyTo>		copyToRelation;
+	std::vector<SCopyInfo*>		copyToRelation;
+	std::vector<SCopyInfo*>		copyFromRelation;
 
 	// implement ILogReceiver
 
