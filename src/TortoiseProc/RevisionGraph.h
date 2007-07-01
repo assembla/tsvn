@@ -157,10 +157,10 @@ public:
 		deleted = 32,
 		added = 4,
 		addedwithhistory = 5,
-		renamed = 48,
-		replaced = 16,
-		lastcommit = 49,
-		initial = 50,
+		renamed = 49,
+		replaced = 17,
+		lastcommit = 50,
+		initial = 51,
 		source = 1
 	};
 	//methods
@@ -168,6 +168,7 @@ public:
 				   , revision_t revision
 				   , Action action)
 		: path (path), realPath (path.GetBasePath()), revision (revision), action (action)
+		, next (NULL), level (0)
 		, leftconnections(0), rightconnections(0), bottomconnections(0)
 		, rightlines(0), bottomlines(0)
 		, leftconnectionsleft(0), rightconnectionsleft(0), bottomconnectionsleft(0)
@@ -262,6 +263,10 @@ private:
 												 , std::vector<SCopyInfo*>::const_iterator lastToCopy
 												 , bool bShowAll
 												 , std::vector<CSearchPathTree*>& toRemove);
+	void						AddRemainingCopies ( revision_t revision
+												   , CSearchPathTree* rootNode
+												   , std::vector<SCopyInfo*>::const_iterator firstFromCopy
+												   , std::vector<SCopyInfo*>::const_iterator lastFromCopy);
 	void						ApplyForwardCopies();
 	void						AssignLevels ( CRevisionEntry* start
 											 , std::vector<int>& levelByRevision);

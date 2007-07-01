@@ -185,7 +185,7 @@ void CRevisionGraphWnd::BuildConnections()
 		CRevisionEntry * reventry = m_entryPtrs[i];
 		float vertpos = (float)m_arVertPositions[i];
 
-		for (size_t j = 0, count = m_entryPtrs.size(); j < count; ++j)
+		for (size_t j = 0, count = reventry->copyTargets.size(); j < count; ++j)
 		{
 			CRevisionEntry * reventry2 = reventry->copyTargets[j];
 			
