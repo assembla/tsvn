@@ -576,7 +576,7 @@ void CRevisionGraphDlg::UpdateStatusBar()
 	CString sFormat;
 	sFormat.Format(IDS_REVGRAPH_STATUSBARURL, m_Graph.m_sPath);
 	m_StatusBar.SetText(sFormat,1,0);
-	sFormat.Format(IDS_REVGRAPH_STATUSBARNUMNODES, m_Graph.m_arEntryPtrs.GetCount());
+	sFormat.Format(IDS_REVGRAPH_STATUSBARNUMNODES, m_Graph.m_entryPtrs.size());
 	m_StatusBar.SetText(sFormat,0,0);
 }
 

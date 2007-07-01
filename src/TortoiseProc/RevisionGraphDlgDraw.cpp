@@ -86,7 +86,7 @@ void CRevisionGraphWnd::OnPaint()
 		CWnd::OnPaint();
 		return;
 	}
-	else if ((m_bNoGraph)||(m_arEntryPtrs.GetCount()==0))
+	else if (m_bNoGraph || m_entryPtrs.empty())
 	{
 		CString sNoGraphText;
 		sNoGraphText.LoadString(IDS_REVGRAPH_ERR_NOGRAPH);
@@ -286,12 +286,8 @@ void CRevisionGraphWnd::DrawNode(CDC * pDC, const CRect& rect,
 
 			// draw the url
 			pDC->SelectObject(GetFont(TRUE));
-			temp = rentry->url;
+			temp = CUnicodeUtils::GetUnicode (rentry->path.GetPath().c_str());
 			r = textrect;
-			temp.Replace('/','\\');
-			pDC->DrawText(temp.GetBuffer(temp.GetLength()), temp.GetLength(), &r, DT_CALCRECT | DT_PATH_ELLIPSIS | DT_MODIFYSTRING);
-			temp.ReleaseBuffer();
-			temp.Replace('\\','/');
 			pDC->ExtTextOut(textrect.left + 2 + ((textrect.Width()-4-r.Width())/2), int(textrect.top + m_node_rect_heigth/4.0f + m_node_rect_heigth/3.0f), ETO_CLIPPED, &textrect, temp, NULL);
 		}
 
@@ -350,9 +346,11 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 	memDC->FillSolidRect(rect, GetSysColor(COLOR_WINDOW));
 	memDC->SetBkMode(TRANSPARENT);
 
-	for (int rectcounter = 0; rectcounter < m_arEntryPtrs.GetCount(); ++rectcounter)
+	for ( size_t rectcounter = 0, count = m_entryPtrs.size()
+		; rectcounter < count
+		; ++rectcounter)
 	{
-		((CRevisionEntry*)m_arEntryPtrs[rectcounter])->drawrect = CRect(0,0,0,0);
+		m_entryPtrs[rectcounter]->drawrect = CRect(0,0,0,0);
 	}
 
 	// find out which nodes are in the visible area of the client rect
@@ -367,7 +365,8 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 	if (vert>0)
 		vert--;
 	// vert is now the top vertical position of the first nodes to draw
-	while ((i<m_arEntryPtrs.GetCount())&&((int)m_arVertPositions[i] < vert))
+	INT_PTR entryCount = m_entryPtrs.size();
+	while ((i<entryCount)&&((int)m_arVertPositions[i] < vert))
 		++i;
 	end = i;
 	if (m_node_rect_heigth || m_node_space_top || m_node_space_bottom)
@@ -375,13 +374,13 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		while ((vert)*(m_node_rect_heigth+m_node_space_top+m_node_space_bottom) <= (rect.bottom + nVScrollPos))
 			vert++;
 	}
-	while ((end<m_arEntryPtrs.GetCount())&&((int)m_arVertPositions[end] < vert))
+	while ((end<entryCount)&&((int)m_arVertPositions[end] < vert))
 		++end;
 
-	if (i >= m_arEntryPtrs.GetCount())
-		i = m_arEntryPtrs.GetCount()-1;
-	if (end > m_arEntryPtrs.GetCount())
-		end = m_arEntryPtrs.GetCount();
+	if (i >= entryCount)
+		i = entryCount-1;
+	if (end > entryCount)
+		end = entryCount;
 
 	INT_PTR start = i;
 
@@ -394,7 +393,7 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 
 	for ( ; ((i>=0)&&(i<end)); ++i)
 	{
-		CRevisionEntry * entry = (CRevisionEntry*)m_arEntryPtrs.GetAt(i);
+		CRevisionEntry * entry = m_entryPtrs[i];
 		float vertpos = (float)m_arVertPositions[i];
 		CRect noderect;
 		noderect.top = long(vertpos*(m_node_rect_heigth+m_node_space_top+m_node_space_bottom) + m_node_space_top - float(nVScrollPos));
@@ -488,7 +487,7 @@ void CRevisionGraphWnd::DrawConnections(CDC* pDC, const CRect& rect, int nVScrol
 	std::set<INT_PTR> connections;
 	for ( ; ((start>=0)&&(start<end)); ++start)
 	{
-		CRevisionEntry * entry = (CRevisionEntry*)m_arEntryPtrs.GetAt(start);
+		CRevisionEntry * entry = m_entryPtrs[start];
 		for (std::set<INT_PTR>::iterator it = entry->connections.begin(); it != entry->connections.end(); ++it)
 		{
 			connections.insert(*it);

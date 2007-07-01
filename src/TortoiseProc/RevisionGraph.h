@@ -142,12 +142,6 @@ public:
 	bool IsEmpty() const;
 };
 
-struct source_entry
-{
-	CString	pathto;
-	LONG	revisionto;
-};
-
 /**
  * \ingroup TortoiseProc
  * Helper class, representing a revision with all the required information
@@ -173,7 +167,7 @@ public:
 	CRevisionEntry ( const CDictionaryBasedTempPath& path
 				   , revision_t revision
 				   , Action action)
-		: path (path), revision (revision), action (action)
+		: path (path), realPath (path.GetBasePath()), revision (revision), action (action)
 		, leftconnections(0), rightconnections(0), bottomconnections(0)
 		, rightlines(0), bottomlines(0)
 		, leftconnectionsleft(0), rightconnectionsleft(0), bottomconnectionsleft(0)
@@ -182,11 +176,14 @@ public:
 	//members
 	revision_t		revision;
 	CDictionaryBasedTempPath path;
+	CDictionaryBasedPath realPath;
 
 	Action			action;
 	CRevisionEntry* next;
 
 	std::vector<CRevisionEntry*>	copyTargets;
+
+	size_t			index;
 
 	int				level;
 	int				leftconnections;
@@ -238,6 +235,9 @@ public:
 	int							m_maxlevel;
 	svn_revnum_t				m_numRevisions;
 
+	std::auto_ptr<CSVNLogQuery> svnQuery;
+	std::auto_ptr<CCacheLogQuery> query;
+
 	CString						GetReposRoot() {return CString(m_sRepoRoot);}
 
 	BOOL						m_bCancelled;
@@ -284,9 +284,6 @@ private:
 	svn_error_t *				Err;			///< Global error object struct
 	apr_pool_t *				parentpool;
 	static svn_error_t*			cancel(void *baton);
-
-	std::auto_ptr<CSVNLogQuery> svnQuery;
-	std::auto_ptr<CCacheLogQuery> query;
 
 	std::vector<SCopyInfo*>		copyToRelation;
 	std::vector<SCopyInfo*>		copyFromRelation;

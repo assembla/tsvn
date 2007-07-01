@@ -717,6 +717,8 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 				CRevisionEntry::Action action 
 					= static_cast<CRevisionEntry::Action>(lastMatch->GetAction());
 				newEntry = new CRevisionEntry (path, revision, action);
+				newEntry->index = m_entryPtrs.size();
+				newEntry->realPath = lastMatch->GetPath();
 				m_entryPtrs.push_back (newEntry);
 
 				if (action == CRevisionEntry::deleted)
@@ -749,6 +751,9 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 						newEntry = new CRevisionEntry ( path
 													  , revision
 													  , CRevisionEntry::source);
+						newEntry->realPath = CDictionaryBasedPath ( path.GetDictionary()
+															      , copy->fromPathIndex);
+						newEntry->index = m_entryPtrs.size();
 						m_entryPtrs.push_back (newEntry);
 					}
 
@@ -826,8 +831,12 @@ void CRevisionGraph::AssignLevels ( CRevisionEntry* start
 	// find larges level for the chain starting at "start"
 
 	int level = 0;
+	revision_t lastRevision = NO_REVISION;
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
-		level = max (level, levelByRevision[entry->revision]);
+	{
+		level = max (level, levelByRevision[entry->revision]+1);
+		lastRevision = entry->revision;
+	}
 
 	// assign that level & collect branches
 
@@ -835,11 +844,14 @@ void CRevisionGraph::AssignLevels ( CRevisionEntry* start
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
 	{
 		entry->level = level;
-		levelByRevision[entry->revision] = level;
-
 		if (!entry->copyTargets.empty())
 			branches.push_back (entry);
 	}
+
+	// block the level for the whole chain
+
+	for (revision_t revision = start->revision; revision <= lastRevision; ++revision)
+		levelByRevision[revision] = level;
 
 	// follow the branches
 
