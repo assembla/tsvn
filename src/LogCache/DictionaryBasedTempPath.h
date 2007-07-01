@@ -117,7 +117,7 @@ public:
 
 	bool IsSameOrChildOf (index_t rhsIndex) const
 	{
-		return IsFullyCachedPath() && inherited::IsSameOrChildOf (rhsIndex);
+		return inherited::IsSameOrChildOf (rhsIndex);
 	}
 
     // general comparison
