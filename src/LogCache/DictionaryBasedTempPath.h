@@ -100,6 +100,26 @@ public:
 	CDictionaryBasedTempPath GetCommonRoot 
 		(const CDictionaryBasedTempPath& rhs) const;
 
+	bool IsSameOrParentOf (const CDictionaryBasedPath& rhs) const
+	{
+		return IsFullyCachedPath() && inherited::IsSameOrParentOf (rhs);
+	}
+
+	bool IsSameOrParentOf (index_t rhsIndex) const
+	{
+		return IsFullyCachedPath() && inherited::IsSameOrParentOf (rhsIndex);
+	}
+
+	bool IsSameOrChildOf (const CDictionaryBasedPath& rhs) const
+	{
+		return inherited::IsSameOrParentOf (rhs);
+	}
+
+	bool IsSameOrChildOf (index_t rhsIndex) const
+	{
+		return IsFullyCachedPath() && inherited::IsSameOrChildOf (rhsIndex);
+	}
+
     // general comparison
 
     bool operator==(const CDictionaryBasedPath& rhs) const
