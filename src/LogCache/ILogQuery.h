@@ -52,5 +52,6 @@ public:
 					 , const SVNRev& end
 					 , int limit
 					 , bool strictNodeHistory
-					 , ILogReceiver* receiver) = 0;
+					 , ILogReceiver* receiver
+                     , bool revs_only) = 0;
 };

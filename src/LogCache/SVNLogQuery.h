@@ -33,6 +33,14 @@ private:
 
 	apr_pool_t *pool;
 
+    // callback baton structure
+
+    struct SBaton
+    {
+        ILogReceiver* receiver;
+        bool revs_only;
+    };
+
 	// SVN callback. Route data to receiver
 
 	static svn_error_t* LogReceiver ( void* baton
@@ -60,5 +68,6 @@ public:
 					 , const SVNRev& end
 					 , int limit
 					 , bool strictNodeHistory
-					 , ILogReceiver* receiver);
+					 , ILogReceiver* receiver
+                     , bool revs_only);
 };

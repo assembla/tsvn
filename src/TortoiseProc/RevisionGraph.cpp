@@ -311,12 +311,9 @@ void CRevisionGraph::ReceiveLog ( LogChangedPathArray* changes
 								, const apr_time_t&
 								, const CString&)
 {
-	// free memory
+    // we passed revs_only to Log()
 
-	for (INT_PTR i = 0, count = changes->GetCount(); i < count; ++i)
-		delete changes->GetAt(i);
-
-	delete changes;
+    assert (changes == NULL);
 
 	// update internal data
 
@@ -408,7 +405,8 @@ BOOL CRevisionGraph::FetchRevisionData(CString path)
 				   , SVNRev(0)
 				   , 0
 				   , false
-				   , this);
+				   , this
+                   , true);
 	}
 	catch (SVNError& e)
 	{
@@ -920,7 +918,7 @@ void CRevisionGraph::AssignLevels ( CRevisionEntry* start
 {
 	// find larges level for the chain starting at "start"
 
-	revision_t lastRevision = NO_REVISION;
+	revision_t lastRevision = (revision_t)NO_REVISION;
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
 		lastRevision = entry->revision;
 
