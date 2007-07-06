@@ -342,7 +342,8 @@ revision_t CCacheLogQuery::FillLog ( revision_t startRevision
 								   , const CDictionaryBasedTempPath& startPath
 								   , int limit
 								   , bool strictNodeHistory
-								   , ILogReceiver* receiver)
+								   , ILogReceiver* receiver
+								   , bool revs_only)
 {
 	// don't try to get a full log; just enough to continue our search
 
@@ -373,7 +374,7 @@ revision_t CCacheLogQuery::FillLog ( revision_t startRevision
 								, limit
 								, strictNodeHistory
 								, receiver
-                                , false);
+                                , revs_only);
 }
 
 // fill the receiver's change list buffer 
@@ -492,7 +493,8 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 								   , iterator->GetPath()
 								   , limit
 								   , strictNodeHistory
-								   , receiver);
+								   , receiver
+								   , revs_only);
 
 			iterator->Retry();
 		}
@@ -584,7 +586,8 @@ CDictionaryBasedTempPath CCacheLogQuery::TranslatePegRevisionPath
 					, iterator.GetPath()
 					, 0
 					, false
-					, NULL);
+					, NULL
+					, true);
 
 		iterator.Advance();
 	}

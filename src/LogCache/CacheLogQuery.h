@@ -158,7 +158,8 @@ private:
 					   , const CDictionaryBasedTempPath& startPath
 					   , int limit
 					   , bool strictNodeHistory
-					   , ILogReceiver* receiver);
+					   , ILogReceiver* receiver
+					   , bool revs_only);
 
 	// fill the receiver's change list buffer 
 
