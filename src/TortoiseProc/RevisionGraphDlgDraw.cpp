@@ -346,43 +346,7 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 	memDC->FillSolidRect(rect, GetSysColor(COLOR_WINDOW));
 	memDC->SetBkMode(TRANSPARENT);
 
-	for ( size_t rectcounter = 0, count = m_entryPtrs.size()
-		; rectcounter < count
-		; ++rectcounter)
-	{
-		m_entryPtrs[rectcounter]->drawrect = CRect(0,0,0,0);
-	}
-
 	// find out which nodes are in the visible area of the client rect
-	INT_PTR i = 0;
-	INT_PTR end = 0;
-	int vert = 0;
-	if (m_node_rect_heigth || m_node_space_top || m_node_space_bottom)
-	{
-		while ((vert)*(m_node_rect_heigth+m_node_space_top+m_node_space_bottom) <= nVScrollPos)
-			vert++;
-	}
-	if (vert>0)
-		vert--;
-	// vert is now the top vertical position of the first nodes to draw
-	INT_PTR entryCount = m_entryPtrs.size();
-	while ((i<entryCount)&&((int)m_arVertPositions[i] < vert))
-		++i;
-	end = i;
-	if (m_node_rect_heigth || m_node_space_top || m_node_space_bottom)
-	{
-		while ((vert)*(m_node_rect_heigth+m_node_space_top+m_node_space_bottom) <= (rect.bottom + nVScrollPos))
-			vert++;
-	}
-	while ((end<entryCount)&&((int)m_arVertPositions[end] < vert))
-		++end;
-
-	if (i >= entryCount)
-		i = entryCount-1;
-	if (end > entryCount)
-		end = entryCount;
-
-	INT_PTR start = i;
 
 	HICON hDeletedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_DELETED), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
 	HICON hAddedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_ADDED), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
@@ -391,15 +355,25 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 	HICON hRenamedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_RENAMED), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
 	HICON hLastCommitIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_LASTCOMMIT), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
 
-	for ( ; ((i>=0)&&(i<end)); ++i)
+	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
 	{
 		CRevisionEntry * entry = m_entryPtrs[i];
-		float vertpos = (float)m_arVertPositions[i];
+
 		CRect noderect;
-		noderect.top = long(vertpos*(m_node_rect_heigth+m_node_space_top+m_node_space_bottom) + m_node_space_top - float(nVScrollPos));
+		noderect.top = long((entry->row - 1)*(m_node_rect_heigth+m_node_space_top+m_node_space_bottom) + m_node_space_top - float(nVScrollPos));
 		noderect.bottom = long(noderect.top + m_node_rect_heigth);
-		noderect.left = long(float(entry->level - 1)*(m_node_rect_width+m_node_space_left+m_node_space_right) + m_node_space_left - float(nHScrollPos));
+		noderect.left = long((entry->column - 1)*(m_node_rect_width+m_node_space_left+m_node_space_right) + m_node_space_left - float(nHScrollPos));
 		noderect.right = long(noderect.left + m_node_rect_width);
+
+		// skip it, if not visible
+
+		entry->drawrect = noderect;
+		if (   (noderect.right < rect.left) || (noderect.left > rect.right) 
+			|| (noderect.bottom < rect.top) || (noderect.top > rect.bottom))
+		{
+			continue;
+		}
+
 		switch (entry->action)
 		{
 		case CRevisionEntry::deleted:
@@ -425,7 +399,6 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 			DrawNode(memDC, noderect, GetSysColor(COLOR_WINDOWTEXT), entry, TSVNRectangle, ((m_SelectedEntry1==entry)||(m_SelectedEntry2==entry)), NULL);
 			break;
 		}
-		entry->drawrect = noderect;
 	}
 	DestroyIcon(hDeletedIcon);
 	DestroyIcon(hAddedIcon);
@@ -434,7 +407,7 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 	DestroyIcon(hRenamedIcon);
 	DestroyIcon(hLastCommitIcon);
 
-	DrawConnections(memDC, rect, nVScrollPos, nHScrollPos, start, end);
+	DrawConnections(memDC, rect, nVScrollPos, nHScrollPos);
 
 	if ((!bDirectDraw)&&(m_Preview.GetSafeHandle())&&(m_bShowOverview))
 	{
@@ -475,7 +448,7 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		delete memDC;
 }
 
-void CRevisionGraphWnd::DrawConnections(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos, INT_PTR start, INT_PTR end)
+void CRevisionGraphWnd::DrawConnections(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos)
 {
 	CRect viewrect;
 	viewrect.top = rect.top + nVScrollPos;
@@ -483,38 +456,25 @@ void CRevisionGraphWnd::DrawConnections(CDC* pDC, const CRect& rect, int nVScrol
 	viewrect.left = rect.left + nHScrollPos;
 	viewrect.right = rect.right + nHScrollPos;
 
-
-	std::set<INT_PTR> connections;
-	for ( ; ((start>=0)&&(start<end)); ++start)
-	{
-		CRevisionEntry * entry = m_entryPtrs[start];
-		for (std::set<INT_PTR>::iterator it = entry->connections.begin(); it != entry->connections.end(); ++it)
-		{
-			connections.insert(*it);
-		}
-	}
-
 	CPen newpen(PS_SOLID, 0, GetSysColor(COLOR_WINDOWTEXT));
 	CPen * pOldPen = pDC->SelectObject(&newpen);
 
-	POINT p[5];
-
-	for (std::set<INT_PTR>::iterator it = connections.begin(); it != connections.end(); ++it)
+	for (INT_PTR i = 0, count = m_arConnections.GetCount(); i < count; ++i)
 	{
-		CPoint * pt = (CPoint *)m_arConnections.GetAt(*it);
+		CPoint * pt = (CPoint *)m_arConnections.GetAt(i);
+
+		CPoint p[4];
 		// correct the scroll offset
 		p[0].x = pt[0].x - nHScrollPos;
 		p[1].x = pt[1].x - nHScrollPos;
 		p[2].x = pt[2].x - nHScrollPos;
 		p[3].x = pt[3].x - nHScrollPos;
-		p[4].x = pt[4].x - nHScrollPos;
 		p[0].y = pt[0].y - nVScrollPos;
 		p[1].y = pt[1].y - nVScrollPos;
 		p[2].y = pt[2].y - nVScrollPos;
 		p[3].y = pt[3].y - nVScrollPos;
-		p[4].y = pt[4].y - nVScrollPos;
 
-		pDC->Polyline(p, 5);
+		pDC->PolyBezier (p, 4);
 	}
 
 	pDC->SelectObject(pOldPen);

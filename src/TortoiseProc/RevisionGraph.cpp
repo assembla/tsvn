@@ -424,8 +424,8 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false 
 	ClearRevisionEntries();
 	m_maxurllength = 0;
 	m_maxurl.Empty();
-	m_numRevisions = 0;
-	m_maxlevel = 0;
+	m_maxRow = 0;
+	m_maxColumn = 0;
 
 	SVN::preparePath(path);
 	CStringA url = CUnicodeUtils::GetUTF8(path);
@@ -480,7 +480,7 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false 
 
 	AnalyzeRevisions (startPath, initialrev, bShowAll);
 	ApplyForwardCopies();
-	AssignLevels();
+	AssignCoordinates();
 	Cleanup();
 
 	return true;
@@ -913,8 +913,8 @@ void CRevisionGraph::ApplyForwardCopies()
 	copyToRelation.clear();
 }
 
-void CRevisionGraph::AssignLevels ( CRevisionEntry* start
-								  , std::vector<int>& levelByRevision)
+void CRevisionGraph::AssignColumns ( CRevisionEntry* start
+								   , std::vector<int>& columnByRevision)
 {
 	// find larges level for the chain starting at "start"
 
@@ -922,16 +922,16 @@ void CRevisionGraph::AssignLevels ( CRevisionEntry* start
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
 		lastRevision = entry->revision;
 
-	int level = 0;
+	int column = 0;
 	for (revision_t revision = start->revision; revision <= lastRevision; ++revision)
-		level = max (level, levelByRevision[revision]+1);
+		column = max (column, columnByRevision[revision]+1);
 
 	// assign that level & collect branches
 
 	std::vector<CRevisionEntry*> branches;
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
 	{
-		entry->level = level;
+		entry->column = column;
 		if (!entry->copyTargets.empty())
 			branches.push_back (entry);
 	}
@@ -939,7 +939,7 @@ void CRevisionGraph::AssignLevels ( CRevisionEntry* start
 	// block the level for the whole chain
 
 	for (revision_t revision = start->revision; revision <= lastRevision; ++revision)
-		levelByRevision[revision] = level;
+		columnByRevision[revision] = column;
 
 	// follow the branches
 
@@ -950,26 +950,42 @@ void CRevisionGraph::AssignLevels ( CRevisionEntry* start
 	{
 		const std::vector<CRevisionEntry*>& targets = (*iter)->copyTargets;
 		for (size_t i = 0, count = targets.size(); i < count; ++i)
-			AssignLevels (targets[i], levelByRevision);
+			AssignColumns (targets[i], columnByRevision);
 	}
 }
 
-void CRevisionGraph::AssignLevels()
+void CRevisionGraph::AssignCoordinates()
 {
-	// the highest used level per revision
+	// the highest used column per revision
 
-	std::vector<int> levelByRevision;
-	levelByRevision.insert (levelByRevision.begin(), m_lHeadRevision, 0);
+	std::vector<int> columnByRevision;
+	columnByRevision.insert (columnByRevision.begin(), m_lHeadRevision, 0);
 
-	AssignLevels (m_entryPtrs[0], levelByRevision);
+	AssignColumns (m_entryPtrs[0], columnByRevision);
+
+	// assign rows
+
+	int row = 0;
+	revision_t lastRevision = 0;
+	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
+	{
+		CRevisionEntry * entry = m_entryPtrs[i];
+		if (entry->revision > lastRevision)
+		{
+			lastRevision = entry->revision;
+			++row;
+		}
+		
+		entry->row = row;
+	}
 }
 
-inline bool AscendingLevelRev ( const CRevisionEntry* lhs
+inline bool AscendingColumRow ( const CRevisionEntry* lhs
 							  , const CRevisionEntry* rhs)
 {
-	return (lhs->level < rhs->level)
-		|| (   (lhs->level == rhs->level)
-		    && (lhs->revision < rhs->revision));
+	return (lhs->column < rhs->column)
+		|| (   (lhs->column == rhs->column)
+		    && (lhs->row < rhs->row));
 }
 
 void CRevisionGraph::Cleanup()
@@ -985,7 +1001,7 @@ void CRevisionGraph::Cleanup()
 
 		// sort targets by level and revision
 
-		sort (targets.begin(), targets.end(), &AscendingLevelRev);
+		sort (targets.begin(), targets.end(), &AscendingColumRow);
 	}
 }
 
@@ -1015,26 +1031,3 @@ CString CRevisionGraph::GetLastErrorMessage()
 {
 	return SVN::GetErrorString(Err);
 }
-
-#ifdef DEBUG
-void CRevisionGraph::PrintDebugInfo()
-{
-	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
-	{
-		CRevisionEntry * entry = m_entryPtrs[i];
-		ATLTRACE("-------------------------------\n");
-		ATLTRACE("entry        : %s\n", entry->path.GetPath());
-		ATLTRACE("revision     : %ld\n", entry->revision);
-		ATLTRACE("action       : %d\n", entry->action);
-		ATLTRACE("level        : %d\n", entry->level);
-
-		for (size_t k = 0, count = entry->copyTargets.size(); k < count; ++k)
-		{
-			CRevisionEntry * target = entry->copyTargets[k];
-			ATLTRACE("pathto       : %s\n", target->path.GetPath());
-			ATLTRACE("revisionto   : %ld\n", target->revision);
-		}
-	}
-		ATLTRACE("*******************************\n");
-}
-#endif

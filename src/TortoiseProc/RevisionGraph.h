@@ -168,11 +168,8 @@ public:
 				   , revision_t revision
 				   , Action action)
 		: path (path), realPath (path.GetBasePath()), revision (revision), action (action)
-		, next (NULL), level (0)
-		, leftconnections(0), rightconnections(0), bottomconnections(0)
-		, rightlines(0), bottomlines(0)
-		, leftconnectionsleft(0), rightconnectionsleft(0), bottomconnectionsleft(0)
-		, rightlinesleft(0), bottomlinesleft(0) {};
+		, next (NULL)
+		, row (0), column (0) {};
 
 	//members
 	revision_t		revision;
@@ -186,20 +183,9 @@ public:
 
 	size_t			index;
 
-	int				level;
-	int				leftconnections;
-	int				rightconnections;
-	int				bottomconnections;
-	int				rightlines;
-	int				bottomlines;
+	int				column;
+	int				row;
 
-	int				leftconnectionsleft;
-	int				rightconnectionsleft;
-	int				bottomconnectionsleft;
-	int				rightlinesleft;
-	int				bottomlinesleft;
-	std::set<INT_PTR>	connections;
-	
 	CRect			drawrect;
 };
 
@@ -233,8 +219,8 @@ public:
 	std::vector<CRevisionEntry*> m_entryPtrs;
 	size_t						m_maxurllength;
 	CString						m_maxurl;
-	int							m_maxlevel;
-	svn_revnum_t				m_numRevisions;
+	int							m_maxColumn;
+	int							m_maxRow;
 
 	std::auto_ptr<CSVNLogQuery> svnQuery;
 	std::auto_ptr<CCacheLogQuery> query;
@@ -268,16 +254,12 @@ private:
 												   , std::vector<SCopyInfo*>::const_iterator firstFromCopy
 												   , std::vector<SCopyInfo*>::const_iterator lastFromCopy);
 	void						ApplyForwardCopies();
-	void						AssignLevels ( CRevisionEntry* start
-											 , std::vector<int>& levelByRevision);
-	void						AssignLevels();
+	void						AssignColumns ( CRevisionEntry* start
+											  , std::vector<int>& columnByRevision);
+	void						AssignCoordinates();
 	void						Cleanup();
 	void						ClearRevisionEntries();
 	
-#ifdef DEBUG	
-	void						PrintDebugInfo();
-#endif
-
 	CStringA					m_sRepoRoot;
 	revision_t					m_lHeadRevision;
 

@@ -85,11 +85,7 @@ protected:
 	CRect			m_OverviewPosRect;
 	CRect			m_OverviewRect;
 	CPtrArray		m_arConnections;
-	CDWordArray		m_arVertPositions;
 	BOOL			m_bShowOverview;
-	
-	std::multimap<CRevisionEntry*, CRevisionEntry*>		m_targetsbottom;
-	std::multimap<CRevisionEntry*, CRevisionEntry*>		m_targetsright;
 	
 	CRevisionEntry * m_SelectedEntry1;
 	CRevisionEntry * m_SelectedEntry2;
@@ -153,10 +149,9 @@ private:
 	void			DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos, bool bDirectDraw);
 
 	void			BuildConnections();
-	void			ClearEntryConnections();
 	void			MarkSpaceLines(CRevisionEntry* entry, int level, revision_t startrev, revision_t endrev);
 	void			DecrementSpaceLines(CRevisionEntry* reventry);
-	void			DrawConnections(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos, INT_PTR start, INT_PTR end);
+	void			DrawConnections(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos);
 	int				GetEncoderClsid(const WCHAR* format, CLSID* pClsid);
 	void			DoZoom(float nZoomFactor);
 	void			DrawRubberBand();
