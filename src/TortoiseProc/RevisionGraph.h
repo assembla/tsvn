@@ -256,6 +256,7 @@ private:
 	void						ApplyForwardCopies();
 	void						AssignColumns ( CRevisionEntry* start
 											  , std::vector<int>& columnByRevision);
+	void						Optimize();
 	void						AssignCoordinates();
 	void						Cleanup();
 	void						ClearRevisionEntries();

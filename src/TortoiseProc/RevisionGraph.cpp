@@ -480,6 +480,7 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false 
 
 	AnalyzeRevisions (startPath, initialrev, bShowAll);
 	ApplyForwardCopies();
+	Optimize();
 	AssignCoordinates();
 	Cleanup();
 
@@ -954,6 +955,66 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 	}
 }
 
+void CRevisionGraph::Optimize()
+{
+	// say "renamed" for "Deleted"/"Added" entries
+
+	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
+	{
+		CRevisionEntry * entry = m_entryPtrs[i];
+		CRevisionEntry * next = entry->next;
+
+		if ((next != NULL) && (next->action == CRevisionEntry::deleted))
+		{
+			// this line will be deleted. 
+			// will it be continued under a different name?
+
+			if (entry->copyTargets.size() == 1)
+			{
+				CRevisionEntry * target = entry->copyTargets[0];
+				assert (target->action == CRevisionEntry::addedwithhistory);
+
+				if (target->revision == next->revision)
+				{
+					// that's actually a rename
+
+					target->action = CRevisionEntry::renamed;
+
+					// make it part of this line (not a branch)
+
+					entry->next = target;
+					entry->copyTargets.clear();
+
+					// mark the old "deleted" entry for removal
+
+					next->action = CRevisionEntry::nothing;
+				}
+			}
+		}
+	}
+
+	// compract
+
+	std::vector<CRevisionEntry*>::iterator target = m_entryPtrs.begin();
+	for ( std::vector<CRevisionEntry*>::iterator source = target
+		, end = m_entryPtrs.end()
+		; source != end
+		; ++source)
+	{
+		if ((*source)->action == CRevisionEntry::nothing)
+		{
+			delete *source;
+		}
+		else
+		{
+			*target = *source;
+			++target;
+		}
+	}
+
+	m_entryPtrs.erase (target, m_entryPtrs.end());
+}
+
 void CRevisionGraph::AssignCoordinates()
 {
 	// the highest used column per revision
@@ -990,6 +1051,8 @@ inline bool AscendingColumRow ( const CRevisionEntry* lhs
 
 void CRevisionGraph::Cleanup()
 {
+	// add "next" to "targets"
+
 	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
 	{
 		// add the parent line to the target list
