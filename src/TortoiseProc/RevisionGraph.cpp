@@ -111,8 +111,8 @@ CSearchPathTree::~CSearchPathTree()
 
 // add a node for the given path and rev. to the tree
 
-void CSearchPathTree::Insert ( const CDictionaryBasedTempPath& path
-							 , revision_t startrev)
+CSearchPathTree* CSearchPathTree::Insert ( const CDictionaryBasedTempPath& path
+										 , revision_t startrev)
 {
 	assert (startrev != NO_REVISION);
 
@@ -121,7 +121,7 @@ void CSearchPathTree::Insert ( const CDictionaryBasedTempPath& path
 	if (this->path == path)
 	{
 		startRevision = startrev;
-		return;
+		return this;
 	}
 
 	// (partly or fully) overlap with an existing child?
@@ -140,7 +140,7 @@ void CSearchPathTree::Insert ( const CDictionaryBasedTempPath& path
 				if (child->startRevision == NO_REVISION)
 					child->startRevision = startrev;
 				else
-					new CSearchPathTree (path, startrev, this);
+					return new CSearchPathTree (path, startrev, this);
 			}
 			else
 			{
@@ -148,7 +148,7 @@ void CSearchPathTree::Insert ( const CDictionaryBasedTempPath& path
 				{
 					// the path is a (true) sub-node of the child
 
-					child->Insert (path, startrev);
+					return child->Insert (path, startrev);
 				}
 				else
 				{
@@ -162,23 +162,18 @@ void CSearchPathTree::Insert ( const CDictionaryBasedTempPath& path
 					child->DeLink();
 					child->Link (commonParent);
 
-					new CSearchPathTree (path, startrev, commonParent);
+					return new CSearchPathTree (path, startrev, commonParent);
 				}
 			}
 
-			return;
+			return this;
 		}
 	}
 
 	// no overlap with any existing node
 	// -> create a new child
 
-	new CSearchPathTree (path, startrev, this);
-}
-
-bool CSearchPathTree::IsEmpty() const
-{
-	return (startRevision == NO_REVISION) && (firstChild == NULL);
+	return new CSearchPathTree (path, startrev, this);
 }
 
 void CSearchPathTree::Remove()
@@ -201,7 +196,14 @@ void CSearchPathTree::Remove()
 void CSearchPathTree::ChainEntries (CRevisionEntry* entry)
 {
 	if (lastEntry != NULL)
-		lastEntry->next = entry;
+	{
+		// branch or chain?
+
+		if (entry->action == CRevisionEntry::addedwithhistory)
+			lastEntry->copyTargets.push_back (entry);
+		else
+			lastEntry->next = entry;
+	}
 
 	lastEntry = entry;
 }
@@ -261,6 +263,12 @@ void CRevisionGraph::ClearRevisionEntries()
 		delete m_entryPtrs[i];
 
 	m_entryPtrs.clear();
+
+	for (size_t i = 0, count = copyToRelation.size(); i < count; ++i)
+		delete copyToRelation[i];
+
+	copyToRelation.clear();
+	copyFromRelation.clear();
 }
 
 bool CRevisionGraph::SetFilter(svn_revnum_t minrev, svn_revnum_t maxrev, const CString& sPathFilter)
@@ -454,8 +462,6 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false 
 	url = CPathUtils::PathUnescape(url);
 	url = url.Mid(CPathUtils::PathUnescape(m_sRepoRoot).GetLength());
 
-	BuildForwardCopies();
-	
 	// in case our path was renamed and had a different name in the past,
 	// we have to find out that name now, because we will analyze the data
 	// from lower to higher revisions
@@ -478,10 +484,24 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false 
 
 	startPath = iterator.GetPath();
 
+	// step 1: create "copy-to" lists based on the "copy-from" info
+
+	BuildForwardCopies();
+
+	// step 2: crawl the history upward, follow branches and create revision info graph
+
 	AnalyzeRevisions (startPath, initialrev, bShowAll);
-	ApplyForwardCopies();
+
+	// step 3: reduce graph by saying "renamed" instead of "deleted"+"addedWithHistory" etc.
+
 	Optimize();
+
+	// step 4: place the nodes on a row, column grid
+
 	AssignCoordinates();
+
+	// step 5: final sorting etc.
+
 	Cleanup();
 
 	return true;
@@ -538,9 +558,6 @@ void CRevisionGraph::BuildForwardCopies()
 					copyInfo->toRevision = revision;
 					copyInfo->toPathIndex = iter->GetPathID();
 
-					copyInfo->sourceEntry = NULL;
-					copyInfo->targetEntry = NULL;
-
 					copyToRelation.push_back (copyInfo);
 					copyFromRelation.push_back (copyInfo);
 				}
@@ -570,25 +587,8 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 
 	// the range of copy-to info that applies to the current revision
 
-	std::vector<SCopyInfo*>::const_iterator firstFromCopy = copyFromRelation.begin();
-	std::vector<SCopyInfo*>::const_iterator lastFromCopy = firstFromCopy;
-	std::vector<SCopyInfo*>::const_iterator endFromCopy = copyFromRelation.end();
-
-	while (   (firstFromCopy != endFromCopy) 
-		   && ((*firstFromCopy)->fromRevision < startrev))
-		++firstFromCopy;
-
-	lastFromCopy = firstFromCopy;
-
-	std::vector<SCopyInfo*>::const_iterator firstToCopy = copyToRelation.begin();
-	std::vector<SCopyInfo*>::const_iterator lastToCopy = firstToCopy;
-	std::vector<SCopyInfo*>::const_iterator endToCopy = copyToRelation.end();
-
-	while (   (firstToCopy != endToCopy) 
-		   && ((*firstToCopy)->toRevision < startrev))
-		++firstToCopy;
-
-	lastToCopy = firstToCopy;
+	TSCopyIterator lastFromCopy = copyFromRelation.begin();
+	TSCopyIterator lastToCopy = copyToRelation.begin();
 
 	// collect nodes to draw ... revision by revision
 
@@ -598,17 +598,12 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 		if (index == NO_INDEX)
 			continue;
 
-		// update copy-to info interators
+		// handle remaining copy-to entries
+		// (some may have a fromRevision that does not touch the fromPath)
 
-		firstToCopy = lastToCopy;
-		while (   (lastToCopy != endToCopy) 
-			   && ((*lastToCopy)->toRevision <= revision))
-			++lastToCopy;
-
-		firstFromCopy = lastFromCopy;
-		while (   (lastFromCopy != endFromCopy) 
-			   && ((*lastFromCopy)->fromRevision <= revision))
-			++lastFromCopy;
+		AddCopiedPaths ( revision
+					   , searchTree.get()
+					   , lastToCopy);
 
 		// we are looking for search paths that (may) overlap 
 		// with the revisions' changes
@@ -634,19 +629,28 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 				AnalyzeRevisions ( revision
 								 , revisionInfo.GetChangesBegin (index)
 								 , revisionInfo.GetChangesEnd (index)
-								 , searchTree.get()
 								 , searchNode
-								 , firstFromCopy
-								 , lastFromCopy
-								 , firstToCopy
-								 , lastToCopy
 								 , bShowAll
 								 , toRemove);
 			}
 			else
 			{
-				if (   (searchNode->GetFirstChild() != NULL)
-					&& searchNode->GetPath().IsSameOrParentOf (basePath))
+				bool subTreeTouched 
+					= searchNode->GetPath().IsSameOrParentOf (basePath);
+
+				// show intermediate nodes as well?
+
+				if (bShowAll && subTreeTouched && searchNode->IsActive())
+				{
+					AnalyzeRevisions ( revision
+									 , revisionInfo.GetChangesBegin (index)
+									 , revisionInfo.GetChangesEnd (index)
+									 , searchNode
+									 , bShowAll
+									 , toRemove);
+				}
+
+				if ((searchNode->GetFirstChild() != NULL) && subTreeTouched)
 				{
 					// the sub-nodes may be a match
 
@@ -668,10 +672,9 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 		// handle remaining copy-to entries
 		// (some may have a fromRevision that does not touch the fromPath)
 
-		AddRemainingCopies ( revision
-						   , searchTree.get()
-						   , firstFromCopy
-						   , lastFromCopy);
+		FillCopyTargets ( revision
+						, searchTree.get()
+						, lastFromCopy);
 
 		// remove deleted search paths
 
@@ -683,12 +686,7 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 									  , CRevisionInfoContainer::CChangesIterator first
 									  , CRevisionInfoContainer::CChangesIterator last
-									  , CSearchPathTree* rootNode
 									  , CSearchPathTree* startNode
-									  , std::vector<SCopyInfo*>::const_iterator firstFromCopy
-									  , std::vector<SCopyInfo*>::const_iterator lastFromCopy
-									  , std::vector<SCopyInfo*>::const_iterator firstToCopy
-									  , std::vector<SCopyInfo*>::const_iterator lastToCopy
 									  , bool bShowAll
 									  , std::vector<CSearchPathTree*>& toRemove)
 {
@@ -699,104 +697,60 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 	{
 		// is this search path active?
 
-		if (   (searchNode->GetStartRevision() != NO_REVISION)
-			&& (searchNode->GetStartRevision() <= revision))
+		if (searchNode->IsActive())
 		{
 			const CDictionaryBasedTempPath& path = searchNode->GetPath();
 
 			// looking for the closet change that affected the path
 
-			CRevisionInfoContainer::CChangesIterator lastMatch = last; 
 			for ( CRevisionInfoContainer::CChangesIterator iter = first
 				; iter != last
 				; ++iter)
 			{
-				if (   iter->GetPath().IsSameOrParentOf (path.GetBasePath())
-					&& (   (iter->GetAction() != CRevisionInfoContainer::ACTION_CHANGED)
-						|| bShowAll))
+				CDictionaryBasedPath changePath = iter->GetPath();
+				if (   (  bShowAll 
+					   && path.GetBasePath().IsSameOrParentOf (changePath))
+					|| (  (iter->GetAction() != CRevisionInfoContainer::ACTION_CHANGED)
+					   && changePath.IsSameOrParentOf (path.GetBasePath())))
 				{
-					lastMatch = iter;
+					// construct the action member
+
+					int actionValue = iter->GetAction();
+					if (iter->HasFromPath())
+						++actionValue;
+
+					CRevisionEntry::Action action 
+						= static_cast<CRevisionEntry::Action>(actionValue);
+
+					// show modifications within the sub-tree as "modified"
+					// (otherwise, deletions would terminate the path)
+
+					if (bShowAll && (path.GetBasePath().GetIndex() < changePath.GetIndex()))
+						action = CRevisionEntry::modified;
+
+					// create & init the new graph node
+
+					CRevisionEntry* newEntry 
+						= new CRevisionEntry (path, revision, action);
+					newEntry->index = m_entryPtrs.size();
+					newEntry->realPath = changePath;
+					m_entryPtrs.push_back (newEntry);
+
+					// link entries for the same search path
+
+					if (newEntry)
+						searchNode->ChainEntries (newEntry);
+
+					// end of path?
+
+					if (action == CRevisionEntry::deleted)
+						toRemove.push_back (searchNode);
+
+					// we will create at most one node per path and revision
+
+					break;
 				}
 			}
-
-			// has the path actually been touched?
-
-			CRevisionEntry* newEntry = NULL;
-			if (lastMatch != last)
-			{
-				int actionValue = lastMatch->GetAction();
-				if (lastMatch->HasFromPath())
-					++actionValue;
-
-				CRevisionEntry::Action action 
-					= static_cast<CRevisionEntry::Action>(actionValue);
-
-				newEntry = new CRevisionEntry (path, revision, action);
-				newEntry->index = m_entryPtrs.size();
-				newEntry->realPath = lastMatch->GetPath();
-				m_entryPtrs.push_back (newEntry);
-
-				if (action == CRevisionEntry::deleted)
-					toRemove.push_back (searchNode);
-			}
-
-			// add new paths (due to copy operations)
-
-			for ( std::vector<SCopyInfo*>::const_iterator iter = firstFromCopy
-				; iter != lastFromCopy
-				; ++iter)
-			{
-				SCopyInfo* copy = *iter;
-				if (searchNode->GetPath().IsSameOrChildOf (copy->fromPathIndex))
-				{
-					// add & schedule the new search path
-
-					CDictionaryBasedTempPath targetPath 
-						= path.ReplaceParent ( CDictionaryBasedPath ( path.GetDictionary()
-																    , copy->fromPathIndex)
-										     , CDictionaryBasedPath ( path.GetDictionary()
-																    , copy->toPathIndex));
-
-					rootNode->Insert (targetPath, copy->fromRevision);
-
-					// add a revision entry for the source, if not yet available
-
-					if (newEntry == NULL)
-					{
-						newEntry = new CRevisionEntry ( path
-													  , revision
-													  , CRevisionEntry::source);
-						newEntry->realPath = CDictionaryBasedPath ( path.GetDictionary()
-															      , copy->fromPathIndex);
-						newEntry->index = m_entryPtrs.size();
-						m_entryPtrs.push_back (newEntry);
-					}
-
-					// mark the copy source
-
-					copy->sourceEntry = newEntry;
-				}
-			}
-
-			// mark copy targets
-
-			for ( std::vector<SCopyInfo*>::const_iterator iter = firstToCopy
-				; (iter != lastToCopy) && (newEntry != NULL)
-				; ++iter)
-			{
-				SCopyInfo* copy = *iter;
-				if (searchNode->GetPath().IsSameOrChildOf (copy->toPathIndex))
-				{
-					// mark the copy target
-
-					copy->targetEntry = newEntry;
-				}
-			}
-
-			// link entries for the same search path
-
-			if (newEntry)
-				searchNode->ChainEntries (newEntry);
 		}
 
 		// select next node
@@ -818,20 +772,66 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 	while (searchNode != startNode);
 }
 
-void CRevisionGraph::AddRemainingCopies ( revision_t revision
-									    , CSearchPathTree* rootNode
-									    , std::vector<SCopyInfo*>::const_iterator firstFromCopy
-									    , std::vector<SCopyInfo*>::const_iterator lastFromCopy)
+void CRevisionGraph::AddCopiedPaths ( revision_t revision
+								    , CSearchPathTree* rootNode
+								    , TSCopyIterator& lastToCopy)
 {
-	for ( std::vector<SCopyInfo*>::const_iterator iter = firstFromCopy
-		; iter != lastFromCopy
-		; ++iter)
-	{
-		// skip those that already have a source revision entry
+	TSCopyIterator endToCopy = copyToRelation.end();
 
+	// find first entry for this revision (or first beyond)
+
+	TSCopyIterator firstToCopy = lastToCopy;
+	while (   (firstToCopy != endToCopy) 
+		   && ((*firstToCopy)->toRevision < revision))
+		++firstToCopy;
+
+	// find first beyond this revision
+
+	lastToCopy = firstToCopy;
+	while (   (lastToCopy != endToCopy) 
+		   && ((*lastToCopy)->toRevision <= revision))
+		++lastToCopy;
+
+	// create search paths for all *relevant* paths added in this revision
+
+	for (TSCopyIterator iter = firstToCopy; iter != lastToCopy; ++iter)
+	{
+		const std::vector<SCopyInfo::STarget>& targets = (*iter)->targets;
+		for (size_t i = 0, count = targets.size(); i < count; ++i)
+		{
+			const SCopyInfo::STarget& target = targets[i];
+			CSearchPathTree* node = rootNode->Insert (target.path, revision);
+			node->ChainEntries (target.source);
+		}
+	}
+}
+
+void CRevisionGraph::FillCopyTargets ( revision_t revision
+								     , CSearchPathTree* rootNode
+								     , TSCopyIterator& lastFromCopy)
+{
+	TSCopyIterator endFromCopy = copyFromRelation.end();
+
+	// find first entry for this revision (or first beyond)
+
+	TSCopyIterator firstFromCopy = lastFromCopy;
+	while (   (firstFromCopy != endFromCopy) 
+		   && ((*firstFromCopy)->fromRevision < revision))
+		++firstFromCopy;
+
+	// find first beyond this revision
+
+	lastFromCopy = firstFromCopy;
+	while (   (lastFromCopy != endFromCopy) 
+		   && ((*lastFromCopy)->fromRevision <= revision))
+		++lastFromCopy;
+
+	// create search paths for all *relevant* paths added in this revision
+
+	for (TSCopyIterator iter = firstFromCopy; iter != lastFromCopy; ++iter)
+	{
 		SCopyInfo* copy = *iter;
-		if (copy->sourceEntry != NULL)
-			continue;
+		std::vector<SCopyInfo::STarget>& targets = copy->targets;
 
 		// crawl the whole sub-tree for path matches
 
@@ -844,33 +844,34 @@ void CRevisionGraph::AddRemainingCopies ( revision_t revision
 
 			if (path.IsSameOrChildOf (copy->fromPathIndex))
 			{
-				CRevisionEntry*	newEntry 
-					= new CRevisionEntry ( path
-										 , revision
-										 , CRevisionEntry::source);
-				newEntry->realPath 
-					= CDictionaryBasedPath ( path.GetDictionary()
-									       , copy->fromPathIndex);
-				newEntry->index = m_entryPtrs.size();
-				m_entryPtrs.push_back (newEntry);
+				CRevisionEntry*	entry = searchNode->GetLastEntry();
+				if ((entry == NULL) || (entry->revision != revision))
+				{
+					// the copy source graph node has yet to be created
+
+					entry = new CRevisionEntry ( path
+											   , revision
+											   , CRevisionEntry::source);
+					entry->realPath 
+						= CDictionaryBasedPath ( path.GetDictionary()
+											   , copy->fromPathIndex);
+
+					entry->index = m_entryPtrs.size();
+					m_entryPtrs.push_back (entry);
+
+					searchNode->ChainEntries (entry);
+				}
 
 				// add & schedule the new search path
 
-				CDictionaryBasedTempPath targetPath 
-					= path.ReplaceParent ( CDictionaryBasedPath ( path.GetDictionary()
+				SCopyInfo::STarget target 
+					( entry
+					, path.ReplaceParent ( CDictionaryBasedPath ( path.GetDictionary()
 															    , copy->fromPathIndex)
 									     , CDictionaryBasedPath ( path.GetDictionary()
-															    , copy->toPathIndex));
+															    , copy->toPathIndex)));
 
-				rootNode->Insert (targetPath, copy->fromRevision);
-
-				// link with existing revision entries
-
-				searchNode->ChainEntries (newEntry);
-
-				// mark the copy source
-
-				copy->sourceEntry = newEntry;
+				targets.push_back (target);
 			}
 
 			// select next node
@@ -890,28 +891,6 @@ void CRevisionGraph::AddRemainingCopies ( revision_t revision
 			}
 		}
 	}
-}
-
-void CRevisionGraph::ApplyForwardCopies()
-{
-	// add copy-to links between existing revision entries
-
-	for ( std::vector<SCopyInfo*>::const_iterator iter = copyToRelation.begin()
-		, end = copyToRelation.end()
-		; iter != end
-		; ++iter)
-	{
-		SCopyInfo* copyInfo = *iter;
-		if ((copyInfo->sourceEntry != NULL) && (copyInfo->targetEntry != NULL))
-			copyInfo->sourceEntry->copyTargets.push_back (copyInfo->targetEntry);
-
-		delete copyInfo;
-	}
-
-	// now, all copy-to info has been deleted
-
-	copyFromRelation.clear();
-	copyToRelation.clear();
 }
 
 void CRevisionGraph::AssignColumns ( CRevisionEntry* start
@@ -1020,7 +999,7 @@ void CRevisionGraph::AssignCoordinates()
 	// the highest used column per revision
 
 	std::vector<int> columnByRevision;
-	columnByRevision.insert (columnByRevision.begin(), m_lHeadRevision, 0);
+	columnByRevision.insert (columnByRevision.begin(), m_lHeadRevision+1, 0);
 
 	AssignColumns (m_entryPtrs[0], columnByRevision);
 

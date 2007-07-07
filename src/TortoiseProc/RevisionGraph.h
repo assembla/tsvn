@@ -57,8 +57,20 @@ struct SCopyInfo
 	revision_t toRevision;
 	index_t toPathIndex;
 
-	CRevisionEntry* sourceEntry;
-	CRevisionEntry* targetEntry;
+	struct STarget
+	{
+		CRevisionEntry* source;
+		CDictionaryBasedTempPath path;
+
+		STarget ( CRevisionEntry* source
+				, const CDictionaryBasedTempPath& path)
+			: source (source)
+			, path (path)
+		{
+		}
+	};
+
+	std::vector<STarget> targets;
 };
 
 class CSearchPathTree
@@ -94,8 +106,8 @@ public:
 
 	// add a node for the given path and rev. to the tree
 
-	void Insert ( const CDictionaryBasedTempPath& path
-				, revision_t startrev);
+	CSearchPathTree* Insert ( const CDictionaryBasedTempPath& path
+							, revision_t startrev);
 	void Remove();
 
 	// there is a new revision entry for this path
@@ -112,6 +124,11 @@ public:
 	revision_t GetStartRevision() const
 	{
 		return startRevision;
+	}
+
+	CRevisionEntry* GetLastEntry() const
+	{
+		return lastEntry;
 	}
 
 	CSearchPathTree* GetParent() const
@@ -139,7 +156,16 @@ public:
 		return previous;
 	}
 
-	bool IsEmpty() const;
+	bool IsActive() const
+	{
+		return startRevision != NO_REVISION;
+	}
+
+	bool IsEmpty() const
+	{
+		return !IsActive() && (firstChild == NULL);
+	}
+
 };
 
 /**
@@ -234,6 +260,9 @@ public:
 	SVNPrompt					m_prompt;
 
 private:
+
+	typedef std::vector<SCopyInfo*>::const_iterator TSCopyIterator;
+
 	void						BuildForwardCopies();
 	void						AnalyzeRevisions ( const CDictionaryBasedTempPath& url
 												 , revision_t startrev
@@ -241,19 +270,15 @@ private:
 	void						AnalyzeRevisions ( revision_t revision
 												 , CRevisionInfoContainer::CChangesIterator first
 												 , CRevisionInfoContainer::CChangesIterator last
-												 , CSearchPathTree* rootNode
 												 , CSearchPathTree* startNode
-												 , std::vector<SCopyInfo*>::const_iterator firstFromCopy
-												 , std::vector<SCopyInfo*>::const_iterator lastFromCopy
-												 , std::vector<SCopyInfo*>::const_iterator firstToCopy
-												 , std::vector<SCopyInfo*>::const_iterator lastToCopy
 												 , bool bShowAll
 												 , std::vector<CSearchPathTree*>& toRemove);
-	void						AddRemainingCopies ( revision_t revision
-												   , CSearchPathTree* rootNode
-												   , std::vector<SCopyInfo*>::const_iterator firstFromCopy
-												   , std::vector<SCopyInfo*>::const_iterator lastFromCopy);
-	void						ApplyForwardCopies();
+	void						AddCopiedPaths ( revision_t revision
+											   , CSearchPathTree* rootNode
+											   , TSCopyIterator& lastToCopy);
+	void						FillCopyTargets ( revision_t revision
+											    , CSearchPathTree* rootNode
+											    , TSCopyIterator& lastFromCopy);
 	void						AssignColumns ( CRevisionEntry* start
 											  , std::vector<int>& columnByRevision);
 	void						Optimize();
