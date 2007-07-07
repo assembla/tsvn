@@ -463,16 +463,29 @@ void CRevisionGraphWnd::DrawConnections(CDC* pDC, const CRect& rect, int nVScrol
 	{
 		CPoint * pt = (CPoint *)m_arConnections.GetAt(i);
 
-		CPoint p[4];
+		// skip connections that are definitely out of view
+
+		if (   (max (pt[0].x, pt[3].x) < viewrect.left) 
+			|| (min (pt[0].x, pt[3].x) > viewrect.right) 
+			|| (max (pt[0].y, pt[3].y) < viewrect.top) 
+			|| (min (pt[0].y, pt[3].y) > viewrect.bottom))
+		{
+			continue;
+		}
+
 		// correct the scroll offset
+
+		CPoint p[4];
 		p[0].x = pt[0].x - nHScrollPos;
-		p[1].x = pt[1].x - nHScrollPos;
-		p[2].x = pt[2].x - nHScrollPos;
-		p[3].x = pt[3].x - nHScrollPos;
 		p[0].y = pt[0].y - nVScrollPos;
+		p[1].x = pt[1].x - nHScrollPos;
 		p[1].y = pt[1].y - nVScrollPos;
+		p[2].x = pt[2].x - nHScrollPos;
 		p[2].y = pt[2].y - nVScrollPos;
+		p[3].x = pt[3].x - nHScrollPos;
 		p[3].y = pt[3].y - nVScrollPos;
+
+		// draw the connection
 
 		pDC->PolyBezier (p, 4);
 	}
