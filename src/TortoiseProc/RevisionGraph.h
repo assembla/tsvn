@@ -280,7 +280,8 @@ private:
 											    , CSearchPathTree* rootNode
 											    , TSCopyIterator& lastFromCopy);
 	void						AssignColumns ( CRevisionEntry* start
-											  , std::vector<int>& columnByRevision);
+											  , std::vector<int>& columnByRevision
+                                              , int column);
 	void						Optimize();
 	void						AssignCoordinates();
 	void						Cleanup();

@@ -709,7 +709,7 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 			{
 				CDictionaryBasedPath changePath = iter->GetPath();
 				if (   (  bShowAll 
-					   && path.GetBasePath().IsSameOrParentOf (changePath))
+					   && path.IsSameOrParentOf (changePath))
 					|| (  (iter->GetAction() != CRevisionInfoContainer::ACTION_CHANGED)
 					   && changePath.IsSameOrParentOf (path.GetBasePath())))
 				{
@@ -842,7 +842,8 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
 
 			// got this path copied?
 
-			if (path.IsSameOrChildOf (copy->fromPathIndex))
+            bool sameOrChild = path.IsSameOrChildOf (copy->fromPathIndex);
+			if (searchNode->IsActive() && sameOrChild)
 			{
 				CRevisionEntry*	entry = searchNode->GetLastEntry();
 				if ((entry == NULL) || (entry->revision != revision))
@@ -877,7 +878,7 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
 			// select next node
 
 			if (   (searchNode->GetFirstChild() != NULL)
-				&& path.IsSameOrParentOf (copy->fromPathIndex))
+                && (sameOrChild || path.IsSameOrParentOf (copy->fromPathIndex)))
 			{
 				searchNode = searchNode->GetFirstChild();
 			}
@@ -894,7 +895,8 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
 }
 
 void CRevisionGraph::AssignColumns ( CRevisionEntry* start
-								   , std::vector<int>& columnByRevision)
+								   , std::vector<int>& columnByRevision
+                                   , int column)
 {
 	// find larges level for the chain starting at "start"
 
@@ -902,7 +904,6 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
 		lastRevision = entry->revision;
 
-	int column = 0;
 	for (revision_t revision = start->revision; revision <= lastRevision; ++revision)
 		column = max (column, columnByRevision[revision]+1);
 
@@ -930,7 +931,7 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 	{
 		const std::vector<CRevisionEntry*>& targets = (*iter)->copyTargets;
 		for (size_t i = 0, count = targets.size(); i < count; ++i)
-			AssignColumns (targets[i], columnByRevision);
+			AssignColumns (targets[i], columnByRevision, column+1);
 	}
 }
 
@@ -1001,7 +1002,7 @@ void CRevisionGraph::AssignCoordinates()
 	std::vector<int> columnByRevision;
 	columnByRevision.insert (columnByRevision.begin(), m_lHeadRevision+1, 0);
 
-	AssignColumns (m_entryPtrs[0], columnByRevision);
+	AssignColumns (m_entryPtrs[0], columnByRevision, 1);
 
 	// assign rows
 
