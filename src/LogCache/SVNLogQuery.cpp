@@ -37,7 +37,7 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void* baton
 									   , const char* msg
 									   , apr_pool_t* pool)
 {
-	// where to send the pre-processed informat
+	// where to send the pre-processed in-format
 
     SBaton* receiverBaton = reinterpret_cast<SBaton*>(baton);
     ILogReceiver* receiver = receiverBaton->receiver;

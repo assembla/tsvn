@@ -321,7 +321,7 @@ void CTokenizedStringContainer::AppendToken ( std::string& target
 	}
 }
 
-// insertion utilties
+// insertion utilities
 
 void CTokenizedStringContainer::Append (index_t token)
 {
@@ -341,6 +341,7 @@ void CTokenizedStringContainer::Append (const std::string& s)
 	index_t lastToken = EMPTY_TOKEN;
 	size_t nextPos = std::string::npos;
 
+	size_t stringStart = stringData.size();
 	for (size_t pos = 0, length = s.length(); pos < length; pos = nextPos)
 	{
 		// extract the next word / token
@@ -352,18 +353,39 @@ void CTokenizedStringContainer::Append (const std::string& s)
 		std::string word = s.substr (pos, nextPos - pos);
 		index_t token = GetWordToken (words.AutoInsert (word.c_str()));
 
-		// auto-compress, if pair with last token is already known
+		// auto-compress as long as we can fold token pairs
 
-		index_t pairIndex = pairs.Find (std::make_pair (lastToken, token));
-		if (pairIndex == NO_INDEX)
+		for ( index_t pairIndex = pairs.Find (std::make_pair (lastToken, token))
+			; pairIndex != NO_INDEX
+			; pairIndex = pairs.Find (std::make_pair (lastToken, token)))
 		{
-			Append (lastToken);
-			lastToken = token;
+			// the current token can be paired up with lastToken
+
+			token = GetPairToken (pairIndex);
+			size_t dataSize = stringData.size();
+			if (dataSize == stringStart)
+			{
+				// there is no previous token -> end of compression chain
+
+				lastToken = NO_INDEX;
+			}
+			else
+			{
+				// replace (lastToken,token) with pair token
+				// next try: combine with the token before lastToken
+
+				std::vector<index_t>::iterator dataIter
+					= stringData.begin() + dataSize-1;
+
+				lastToken = *dataIter;
+				stringData.erase (dataIter);
+			}
 		}
-		else
-		{
-			lastToken = GetPairToken (pairIndex);
-		}
+
+		// currently, we cannot compress lastToken anymore
+
+		Append (lastToken);
+		lastToken = token;
 	}
 
 	// don't forget the last one 
@@ -393,7 +415,7 @@ std::string CTokenizedStringContainer::operator[] (index_t index) const
 		throw std::exception ("string container index out of range");
 
 	// the iterators over the (compressed) tokens 
-	// to buid the string from
+	// to build the string from
 
 	TSDIterator first = stringData.begin() + offsets[index];
 	TSDIterator last = stringData.begin() + offsets[index+1];
@@ -437,10 +459,10 @@ void CTokenizedStringContainer::AutoCompress()
 	// In typical repositories, the relation of string
 	// tokens to used token pairs is ~10:1.
 	
-	// We will favour compressing in small caches while
+	// We will favor compressing in small caches while
 	// making this expensive operation less likely for
 	// larger caches with already a reasonable number of
-	// token pairs. Threashold: log n > n / p
+	// token pairs. Threshold: log n > n / p
 
 	size_t relation = stringData.size() / ((size_t)pairs.size() + 1);
 	if (stringData.size() < ((size_t)1 << relation))

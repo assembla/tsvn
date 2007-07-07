@@ -626,7 +626,7 @@ trevor = rw
 			affect large numbers of files.
 		</para>
 		<para>
-			Authentication and authorizarion are separate processes. If
+			Authentication and authorization are separate processes. If
 			a user wants to gain access to a repository path, she has to meet
 			<emphasis>both</emphasis>, the usual authentication requirements
 			and the authorization requirements of the access file.
@@ -657,7 +657,7 @@ trevor = rw
 		</indexterm>
 		<para>
 			The original SSPI module was offered by Syneapps including
-			sourcecode. But the development for it has been stopped. 
+			source code. But the development for it has been stopped. 
 			But don't despair, the community has picked it up and improved
 			it. It has a new home on 
 			<ulink url="http://sourceforge.net/projects/mod-auth-sspi/">
@@ -841,7 +841,7 @@ SetEnvIf User-Agent ".*MSIE.*" \
 					add the following entries within the 
 					<literal>&lt;Location&gt;</literal> block of your Apache config file:
 <screen>
-AuthAthoritative Off
+AuthAuthoritative Off
 SSPIAuthoritative Off
 </screen>
 				</para>
