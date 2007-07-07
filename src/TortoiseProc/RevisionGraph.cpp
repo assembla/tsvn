@@ -895,17 +895,17 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
 }
 
 void CRevisionGraph::AssignColumns ( CRevisionEntry* start
-								   , std::vector<int>& columnByRevision
+								   , std::vector<int>& columnByRow
                                    , int column)
 {
 	// find larges level for the chain starting at "start"
 
-	revision_t lastRevision = (revision_t)NO_REVISION;
+	int lastRow = 0;
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
-		lastRevision = entry->revision;
+		lastRow = entry->row;
 
-	for (revision_t revision = start->revision; revision <= lastRevision; ++revision)
-		column = max (column, columnByRevision[revision]+1);
+	for (int row = start->row; row <= lastRow; ++row)
+		column = max (column, columnByRow[row]+1);
 
 	// assign that level & collect branches
 
@@ -919,8 +919,8 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 
 	// block the level for the whole chain
 
-	for (revision_t revision = start->revision; revision <= lastRevision; ++revision)
-		columnByRevision[revision] = column;
+	for (int row = start->row; row <= lastRow; ++row)
+		columnByRow[row] = column;
 
 	// follow the branches
 
@@ -931,7 +931,7 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 	{
 		const std::vector<CRevisionEntry*>& targets = (*iter)->copyTargets;
 		for (size_t i = 0, count = targets.size(); i < count; ++i)
-			AssignColumns (targets[i], columnByRevision, column+1);
+			AssignColumns (targets[i], columnByRow, column+1);
 	}
 }
 
@@ -997,13 +997,6 @@ void CRevisionGraph::Optimize()
 
 void CRevisionGraph::AssignCoordinates()
 {
-	// the highest used column per revision
-
-	std::vector<int> columnByRevision;
-	columnByRevision.insert (columnByRevision.begin(), m_lHeadRevision+1, 0);
-
-	AssignColumns (m_entryPtrs[0], columnByRevision, 1);
-
 	// assign rows
 
 	int row = 0;
@@ -1019,6 +1012,13 @@ void CRevisionGraph::AssignCoordinates()
 		
 		entry->row = row;
 	}
+
+	// the highest used column per revision
+
+	std::vector<int> columnByRow;
+	columnByRow.insert (columnByRow.begin(), row+1, 0);
+
+	AssignColumns (m_entryPtrs[0], columnByRow, 1);
 }
 
 inline bool AscendingColumRow ( const CRevisionEntry* lhs
