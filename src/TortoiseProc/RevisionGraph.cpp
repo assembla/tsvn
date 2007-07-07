@@ -425,7 +425,7 @@ BOOL CRevisionGraph::FetchRevisionData(CString path)
 	return TRUE;
 }
 
-BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false */, bool /* bArrangeByPath = false */)
+BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false */, bool groupBranches /*= false */)
 {
 	svn_error_clear(Err);
 
@@ -498,7 +498,7 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false 
 
 	// step 4: place the nodes on a row, column grid
 
-	AssignCoordinates();
+	AssignCoordinates (groupBranches);
 
 	// step 5: final sorting etc.
 
@@ -995,10 +995,8 @@ void CRevisionGraph::Optimize()
 	m_entryPtrs.erase (target, m_entryPtrs.end());
 }
 
-void CRevisionGraph::AssignCoordinates()
+int CRevisionGraph::AssignOneRowPerRevision()
 {
-	// assign rows
-
 	int row = 0;
 	revision_t lastRevision = 0;
 	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
@@ -1012,6 +1010,47 @@ void CRevisionGraph::AssignCoordinates()
 		
 		entry->row = row;
 	}
+
+	// return number of rows
+
+	return row;
+}
+
+int CRevisionGraph::AssignOneRowPerBranchNode (CRevisionEntry* start, int row)
+{
+	int maxRow = row;
+	for (CRevisionEntry* node = start; node != NULL; node = node->next)
+	{
+		const std::vector<CRevisionEntry*>& targets = node->copyTargets;
+		if (targets.empty())
+		{
+			node->row = row;
+			++row;
+			maxRow = max (maxRow, row);
+		}
+		else
+		{
+			row = maxRow;
+			node->row = row;
+			++row;
+
+			for (size_t i = 0, count = targets.size(); i < count; ++i)
+				maxRow = max (maxRow, AssignOneRowPerBranchNode (targets[i], row));
+		}
+	}
+
+	// return number of rows
+
+	return maxRow;
+}
+
+void CRevisionGraph::AssignCoordinates (bool groupBranches)
+{
+	// assign rows
+
+	int row = groupBranches
+			? AssignOneRowPerBranchNode (m_entryPtrs[0], 1)
+			: AssignOneRowPerRevision();
 
 	// the highest used column per revision
 

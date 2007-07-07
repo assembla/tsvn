@@ -283,7 +283,9 @@ private:
 											  , std::vector<int>& columnByRow
                                               , int column);
 	void						Optimize();
-	void						AssignCoordinates();
+	int							AssignOneRowPerRevision();
+	int							AssignOneRowPerBranchNode (CRevisionEntry* start, int row);
+	void						AssignCoordinates (bool groupBranches);
 	void						Cleanup();
 	void						ClearRevisionEntries();
 	
