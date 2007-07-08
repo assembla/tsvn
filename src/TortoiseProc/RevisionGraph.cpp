@@ -1046,6 +1046,11 @@ int CRevisionGraph::AssignOneRowPerBranchNode (CRevisionEntry* start, int row)
 
 void CRevisionGraph::AssignCoordinates (bool groupBranches)
 {
+    // pathological but not impossible:
+
+    if (m_entryPtrs.empty())
+        return;
+
 	// assign rows
 
 	int row = groupBranches
