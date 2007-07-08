@@ -187,7 +187,7 @@ void CSVNLogQuery::Log ( const CTSVNPathList& targets
 										  , start
 										  , end
 										  , limit
-										  , revs_only
+                                          , revs_only ? FALSE : TRUE
 										  , strictNodeHistory ? TRUE : FALSE
 										  , LogReceiver
 										  , (void *)&baton
