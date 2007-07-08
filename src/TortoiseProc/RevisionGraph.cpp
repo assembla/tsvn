@@ -208,6 +208,17 @@ void CSearchPathTree::ChainEntries (CRevisionEntry* entry)
 	lastEntry = entry;
 }
 
+// more complex checks
+
+// return true for active paths that don't have a revEntry for this revision
+
+bool CSearchPathTree::YetToCover (revision_t revision) const
+{
+    return    IsActive() 
+           && ((lastEntry == NULL) || (lastEntry->revision < revision));
+}
+
+
 CRevisionGraph::CRevisionGraph(void) : m_bCancelled(FALSE)
 	, m_FilterMinRev(-1)
 	, m_FilterMaxRev(-1)
@@ -640,7 +651,7 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 
 				// show intermediate nodes as well?
 
-				if (bShowAll && subTreeTouched && searchNode->IsActive())
+				if (bShowAll && subTreeTouched && searchNode->YetToCover(revision))
 				{
 					AnalyzeRevisions ( revision
 									 , revisionInfo.GetChangesBegin (index)
@@ -697,7 +708,7 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 	{
 		// is this search path active?
 
-		if (searchNode->IsActive())
+        if (searchNode->YetToCover (revision))
 		{
 			const CDictionaryBasedTempPath& path = searchNode->GetPath();
 

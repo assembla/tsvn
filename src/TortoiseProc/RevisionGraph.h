@@ -166,6 +166,12 @@ public:
 		return !IsActive() && (firstChild == NULL);
 	}
 
+    // more complex checks
+
+    // return true for active paths that don't have a revEntry for this revision
+
+    bool YetToCover (revision_t revision) const;
+
 };
 
 /**
