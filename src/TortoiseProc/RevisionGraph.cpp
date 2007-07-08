@@ -436,7 +436,7 @@ BOOL CRevisionGraph::FetchRevisionData(CString path)
 	return TRUE;
 }
 
-BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false */, bool groupBranches /*= false */)
+BOOL CRevisionGraph::AnalyzeRevisionData (CString path, const SOptions& options)
 {
 	svn_error_clear(Err);
 
@@ -501,7 +501,7 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false 
 
 	// step 2: crawl the history upward, follow branches and create revision info graph
 
-	AnalyzeRevisions (startPath, initialrev, bShowAll);
+    AnalyzeRevisions (startPath, initialrev, options.includeSubPathChanges);
 
 	// step 3: reduce graph by saying "renamed" instead of "deleted"+"addedWithHistory" etc.
 
@@ -509,7 +509,7 @@ BOOL CRevisionGraph::AnalyzeRevisionData(CString path, bool bShowAll /* = false 
 
 	// step 4: place the nodes on a row, column grid
 
-	AssignCoordinates (groupBranches);
+	AssignCoordinates (options);
 
 	// step 5: final sorting etc.
 
@@ -1055,7 +1055,7 @@ int CRevisionGraph::AssignOneRowPerBranchNode (CRevisionEntry* start, int row)
 	return maxRow;
 }
 
-void CRevisionGraph::AssignCoordinates (bool groupBranches)
+void CRevisionGraph::AssignCoordinates (const SOptions& options)
 {
     // pathological but not impossible:
 
@@ -1064,7 +1064,7 @@ void CRevisionGraph::AssignCoordinates (bool groupBranches)
 
 	// assign rows
 
-	int row = groupBranches
+    int row = options.groupBranches
 			? AssignOneRowPerBranchNode (m_entryPtrs[0], 1)
 			: AssignOneRowPerRevision();
 

@@ -59,8 +59,7 @@ public:
 	float			m_fZoomFactor;
 protected:
 	bool			m_bFetchLogs;
-	bool			m_bShowAll;
-	bool			m_bArrangeByPath;
+    CRevisionGraph::SOptions m_options;
 	char			m_szTip[MAX_TT_LENGTH+1];
 	wchar_t			m_wszTip[MAX_TT_LENGTH+1];
 
@@ -94,7 +93,9 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
-	void			GetGraphRect(LPRECT rect);
+    void            OnToggleOption (int controlID, bool& option);
+
+    void			GetGraphRect(LPRECT rect);
 	void			UpdateStatusBar();
 
 private:

@@ -237,10 +237,24 @@ public:
 class CRevisionGraph : private ILogReceiver
 {
 public:
+
+    struct SOptions
+    {
+        bool groupBranches;         // one row per revision, if false
+        bool includeSubPathChanges; // "show all"
+
+        // not implemented yet:
+
+        bool newestAtTop;           // start with latest revision (not first / oldest revision)
+        bool showHEAD;              // show HEAD change for all branches
+        bool reduceCrossLines;      // minimize places with lines crossing a node box
+        bool exactCopySources;      // create a copy-source node, even if there was no change in that revision
+    };
+
 	CRevisionGraph(void);
 	~CRevisionGraph(void);
 	BOOL						FetchRevisionData(CString path);
-	BOOL						AnalyzeRevisionData(CString path, bool bShowAll = false, bool bArrangeByPath = false);
+	BOOL						AnalyzeRevisionData(CString path, const SOptions& options);
 	virtual BOOL				ProgressCallback(CString text1, CString text2, DWORD done, DWORD total);
 	svn_revnum_t				GetHeadRevision() {return m_lHeadRevision;}
 	bool						SetFilter(svn_revnum_t minrev, svn_revnum_t maxrev, const CString& sPathFilter);
@@ -291,7 +305,7 @@ private:
 	void						Optimize();
 	int							AssignOneRowPerRevision();
 	int							AssignOneRowPerBranchNode (CRevisionEntry* start, int row);
-	void						AssignCoordinates (bool groupBranches);
+	void						AssignCoordinates (const SOptions& options);
 	void						Cleanup();
 	void						ClearRevisionEntries();
 	

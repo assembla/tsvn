@@ -46,10 +46,14 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 	: CResizableStandAloneDialog(CRevisionGraphDlg::IDD, pParent)
 	, m_hAccel(NULL)
 	, m_bFetchLogs(true)
-	, m_bShowAll(false)
-	, m_bArrangeByPath(false)
 	, m_fZoomFactor(1.0)
 {
+    m_options.groupBranches = false;
+    m_options.includeSubPathChanges = false;
+    m_options.newestAtTop = true;
+    m_options.showHEAD = true;
+    m_options.reduceCrossLines = false;
+    m_options.exactCopySources = true;
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()
@@ -230,7 +234,10 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
 		goto cleanup;
 	}
 	pDlg->m_bFetchLogs = false;	// we've got the logs, no need to fetch them a second time
-	if (!pDlg->m_Graph.AnalyzeRevisionData(pDlg->m_Graph.m_sPath, pDlg->m_bShowAll, pDlg->m_bArrangeByPath))
+
+    // standard plus user settings
+
+	if (!pDlg->m_Graph.AnalyzeRevisionData(pDlg->m_Graph.m_sPath, pDlg->m_options))
 	{
 		CMessageBox::Show(pDlg->m_hWnd, pDlg->m_Graph.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 		pDlg->m_Graph.m_bNoGraph = TRUE;
@@ -418,34 +425,34 @@ void CRevisionGraphDlg::OnViewUnifieddiffofheadrevisions()
 	m_Graph.UnifiedDiffRevs(true);
 }
 
-void CRevisionGraphDlg::OnViewShowallrevisions()
+void CRevisionGraphDlg::OnToggleOption (int controlID, bool& option)
 {
 	if (m_Graph.m_bThreadRunning)
 	{
-		int state = m_ToolBar.GetToolBarCtrl().GetState(ID_VIEW_SHOWALLREVISIONS);
+		int state = m_ToolBar.GetToolBarCtrl().GetState(controlID);
 		if (state & TBSTATE_CHECKED)
 			state &= ~TBSTATE_CHECKED;
 		else
 			state |= TBSTATE_CHECKED;
-		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_SHOWALLREVISIONS, state);
+		m_ToolBar.GetToolBarCtrl().SetState(controlID, state);
 		return;
 	}
 	CMenu * pMenu = GetMenu();
 	if (pMenu == NULL)
 		return;
-	int tbstate = m_ToolBar.GetToolBarCtrl().GetState(ID_VIEW_SHOWALLREVISIONS);
-	UINT state = pMenu->GetMenuState(ID_VIEW_SHOWALLREVISIONS, MF_BYCOMMAND);
+	int tbstate = m_ToolBar.GetToolBarCtrl().GetState(controlID);
+	UINT state = pMenu->GetMenuState(controlID, MF_BYCOMMAND);
 	if (state & MF_CHECKED)
 	{
-		pMenu->CheckMenuItem(ID_VIEW_SHOWALLREVISIONS, MF_BYCOMMAND | MF_UNCHECKED);
-		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_SHOWALLREVISIONS, tbstate & (~TBSTATE_CHECKED));
-		m_bShowAll = false;
+		pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_UNCHECKED);
+		m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate & (~TBSTATE_CHECKED));
+		option = false;
 	}
 	else
 	{
-		pMenu->CheckMenuItem(ID_VIEW_SHOWALLREVISIONS, MF_BYCOMMAND | MF_CHECKED);
-		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_SHOWALLREVISIONS, tbstate | TBSTATE_CHECKED);
-		m_bShowAll = true;
+		pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_CHECKED);
+		m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate | TBSTATE_CHECKED);
+		option = true;
 	}
 
 	InterlockedExchange(&m_Graph.m_bThreadRunning, TRUE);
@@ -455,41 +462,14 @@ void CRevisionGraphDlg::OnViewShowallrevisions()
 	}
 }
 
+void CRevisionGraphDlg::OnViewShowallrevisions()
+{
+    OnToggleOption (ID_VIEW_SHOWALLREVISIONS, m_options.includeSubPathChanges);
+}
+
 void CRevisionGraphDlg::OnViewArrangedbypath()
 {
-	if (m_Graph.m_bThreadRunning)
-	{
-		int state = m_ToolBar.GetToolBarCtrl().GetState(ID_VIEW_ARRANGEDBYPATH);
-		if (state & TBSTATE_CHECKED)
-			state &= ~TBSTATE_CHECKED;
-		else
-			state |= TBSTATE_CHECKED;
-		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_ARRANGEDBYPATH, state);
-		return;
-	}
-	CMenu * pMenu = GetMenu();
-	if (pMenu == NULL)
-		return;
-	int tbstate = m_ToolBar.GetToolBarCtrl().GetState(ID_VIEW_ARRANGEDBYPATH);
-	UINT state = pMenu->GetMenuState(ID_VIEW_ARRANGEDBYPATH, MF_BYCOMMAND);
-	if (state & MF_CHECKED)
-	{
-		pMenu->CheckMenuItem(ID_VIEW_ARRANGEDBYPATH, MF_BYCOMMAND | MF_UNCHECKED);
-		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_ARRANGEDBYPATH, tbstate & (~TBSTATE_CHECKED));
-		m_bArrangeByPath = false;
-	}
-	else
-	{
-		pMenu->CheckMenuItem(ID_VIEW_ARRANGEDBYPATH, MF_BYCOMMAND | MF_CHECKED);
-		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_ARRANGEDBYPATH, tbstate | TBSTATE_CHECKED);
-		m_bArrangeByPath = true;
-	}
-
-	InterlockedExchange(&m_Graph.m_bThreadRunning, TRUE);
-	if (AfxBeginThread(WorkerThread, this)==NULL)
-	{
-		CMessageBox::Show(this->m_hWnd, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
-	}
+    OnToggleOption (ID_VIEW_ARRANGEDBYPATH, m_options.groupBranches);
 }
 
 void CRevisionGraphDlg::OnCancel()
