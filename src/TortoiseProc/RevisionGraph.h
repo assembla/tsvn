@@ -260,8 +260,6 @@ public:
 	bool						SetFilter(svn_revnum_t minrev, svn_revnum_t maxrev, const CString& sPathFilter);
 
 	CString						GetLastErrorMessage();
-	static bool					IsParentOrItself(const char * parent, const char * child);
-	static bool					IsParentOrItself(const wchar_t * parent, const wchar_t * child);
 	std::vector<CRevisionEntry*> m_entryPtrs;
 	size_t						m_maxurllength;
 	CString						m_maxurl;

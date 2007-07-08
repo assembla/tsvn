@@ -149,8 +149,6 @@ private:
 	void			DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos, bool bDirectDraw);
 
 	void			BuildConnections();
-	void			MarkSpaceLines(CRevisionEntry* entry, int level, revision_t startrev, revision_t endrev);
-	void			DecrementSpaceLines(CRevisionEntry* reventry);
 	void			DrawConnections(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos);
 	int				GetEncoderClsid(const WCHAR* format, CLSID* pClsid);
 	void			DoZoom(float nZoomFactor);

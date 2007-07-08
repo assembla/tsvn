@@ -1103,28 +1103,6 @@ void CRevisionGraph::Cleanup()
 	}
 }
 
-bool CRevisionGraph::IsParentOrItself(const char * parent, const char * child)
-{
-	size_t len = strlen(parent);
-	if (strncmp(parent, child, len)==0)
-	{
-		if ((child[len]=='/')||(child[len]==0))
-			return true;
-	}
-	return false;
-}
-
-bool CRevisionGraph::IsParentOrItself(const wchar_t * parent, const wchar_t * child)
-{
-	size_t len = wcslen(parent);
-	if (wcsncmp(parent, child, len)==0)
-	{
-		if ((child[len]=='/')||(child[len]==0))
-			return true;
-	}
-	return false;
-}
-
 CString CRevisionGraph::GetLastErrorMessage()
 {
 	return SVN::GetErrorString(Err);
