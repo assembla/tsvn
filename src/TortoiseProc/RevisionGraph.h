@@ -242,10 +242,10 @@ public:
     {
         bool groupBranches;         // one row per revision, if false
         bool includeSubPathChanges; // "show all"
+        bool newestAtTop;           // start with latest revision (not first / oldest revision)
 
         // not implemented yet:
 
-        bool newestAtTop;           // start with latest revision (not first / oldest revision)
         bool showHEAD;              // show HEAD change for all branches
         bool reduceCrossLines;      // minimize places with lines crossing a node box
         bool exactCopySources;      // create a copy-source node, even if there was no change in that revision
@@ -303,6 +303,7 @@ private:
 	void						Optimize();
 	int							AssignOneRowPerRevision();
 	int							AssignOneRowPerBranchNode (CRevisionEntry* start, int row);
+    void                        ReverseRowOrder (int maxRow);
 	void						AssignCoordinates (const SOptions& options);
 	void						Cleanup();
 	void						ClearRevisionEntries();

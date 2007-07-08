@@ -1055,6 +1055,15 @@ int CRevisionGraph::AssignOneRowPerBranchNode (CRevisionEntry* start, int row)
 	return maxRow;
 }
 
+void CRevisionGraph::ReverseRowOrder (int maxRow)
+{
+	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
+    {
+		CRevisionEntry * entry = m_entryPtrs[i];
+        entry->row = maxRow+1 - entry->row;
+    }
+}
+
 void CRevisionGraph::AssignCoordinates (const SOptions& options)
 {
     // pathological but not impossible:
@@ -1074,6 +1083,11 @@ void CRevisionGraph::AssignCoordinates (const SOptions& options)
 	columnByRow.insert (columnByRow.begin(), row+1, 0);
 
 	AssignColumns (m_entryPtrs[0], columnByRow, 1);
+
+    // invert order (show newest rev in first row)
+
+    if (options.newestAtTop)
+        ReverseRowOrder (row);
 }
 
 inline bool AscendingColumRow ( const CRevisionEntry* lhs
