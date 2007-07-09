@@ -166,12 +166,13 @@ public:
 		return !IsActive() && (firstChild == NULL);
 	}
 
-    // more complex checks
-
     // return true for active paths that don't have a revEntry for this revision
 
     bool YetToCover (revision_t revision) const;
 
+    // return next node in pre-order
+
+    CSearchPathTree* GetPreOrderNext (CSearchPathTree* lastNode = NULL);
 };
 
 /**
@@ -213,8 +214,6 @@ public:
 
 	std::vector<CRevisionEntry*>	copyTargets;
 
-	size_t			index;
-
 	int				column;
 	int				row;
 
@@ -243,10 +242,10 @@ public:
         bool groupBranches;         // one row per revision, if false
         bool includeSubPathChanges; // "show all"
         bool newestAtTop;           // start with latest revision (not first / oldest revision)
+        bool showHEAD;              // show HEAD change for all branches
 
         // not implemented yet:
 
-        bool showHEAD;              // show HEAD change for all branches
         bool reduceCrossLines;      // minimize places with lines crossing a node box
         bool exactCopySources;      // create a copy-source node, even if there was no change in that revision
     };
@@ -284,7 +283,7 @@ private:
 	void						BuildForwardCopies();
 	void						AnalyzeRevisions ( const CDictionaryBasedTempPath& url
 												 , revision_t startrev
-												 , bool bShowAll);
+												 , const SOptions& options);
 	void						AnalyzeRevisions ( revision_t revision
 												 , CRevisionInfoContainer::CChangesIterator first
 												 , CRevisionInfoContainer::CChangesIterator last
@@ -297,6 +296,12 @@ private:
 	void						FillCopyTargets ( revision_t revision
 											    , CSearchPathTree* rootNode
 											    , TSCopyIterator& lastFromCopy);
+    void                        AddMissingHeads (CSearchPathTree* rootNode);
+    void                        AnalyzeHeadRevision ( revision_t revision
+    									            , CRevisionInfoContainer::CChangesIterator first
+	    								            , CRevisionInfoContainer::CChangesIterator last
+		    							            , CSearchPathTree* searchNode
+				    					            , std::vector<CSearchPathTree*>& toRemove);
 	void						AssignColumns ( CRevisionEntry* start
 											  , std::vector<int>& columnByRow
                                               , int column);

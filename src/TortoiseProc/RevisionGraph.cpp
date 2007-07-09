@@ -208,8 +208,6 @@ void CSearchPathTree::ChainEntries (CRevisionEntry* entry)
 	lastEntry = entry;
 }
 
-// more complex checks
-
 // return true for active paths that don't have a revEntry for this revision
 
 bool CSearchPathTree::YetToCover (revision_t revision) const
@@ -218,6 +216,21 @@ bool CSearchPathTree::YetToCover (revision_t revision) const
            && ((lastEntry == NULL) || (lastEntry->revision < revision));
 }
 
+// return next node in pre-order
+
+CSearchPathTree* CSearchPathTree::GetPreOrderNext (CSearchPathTree* lastNode)
+{
+	if (firstChild != NULL)
+        return firstChild;
+
+    CSearchPathTree* result = this;
+    while ((result != lastNode) && (result->next == NULL))
+		result = result->parent;
+
+    return result == lastNode 
+        ? result
+        : result->next;
+}
 
 CRevisionGraph::CRevisionGraph(void) : m_bCancelled(FALSE)
 	, m_FilterMinRev(-1)
@@ -501,7 +514,7 @@ BOOL CRevisionGraph::AnalyzeRevisionData (CString path, const SOptions& options)
 
 	// step 2: crawl the history upward, follow branches and create revision info graph
 
-    AnalyzeRevisions (startPath, initialrev, options.includeSubPathChanges);
+    AnalyzeRevisions (startPath, initialrev, options);
 
 	// step 3: reduce graph by saying "renamed" instead of "deleted"+"addedWithHistory" etc.
 
@@ -582,9 +595,14 @@ void CRevisionGraph::BuildForwardCopies()
 	std::sort (copyFromRelation.begin(), copyFromRelation.end(), &AscendingFromRevision);
 }
 
+inline bool CompareByRevision (CRevisionEntry* lhs, CRevisionEntry* rhs)
+{
+    return lhs->revision < rhs->revision;
+}
+
 void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 									  , revision_t startrev
-									  , bool bShowAll)
+									  , const SOptions& options)
 {
 	const CCachedLogInfo* cache = query->GetCache();
 	const CRevisionIndex& revisions = cache->GetRevisions();
@@ -641,7 +659,7 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 								 , revisionInfo.GetChangesBegin (index)
 								 , revisionInfo.GetChangesEnd (index)
 								 , searchNode
-								 , bShowAll
+                                 , options.includeSubPathChanges
 								 , toRemove);
 			}
 			else
@@ -651,13 +669,13 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 
 				// show intermediate nodes as well?
 
-				if (bShowAll && subTreeTouched && searchNode->YetToCover(revision))
+                if (options.includeSubPathChanges && subTreeTouched && searchNode->YetToCover(revision))
 				{
 					AnalyzeRevisions ( revision
 									 , revisionInfo.GetChangesBegin (index)
 									 , revisionInfo.GetChangesEnd (index)
 									 , searchNode
-									 , bShowAll
+									 , options.includeSubPathChanges
 									 , toRemove);
 				}
 
@@ -692,6 +710,26 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 		for (size_t i = 0, count = toRemove.size(); i < count; ++i)
 			toRemove[i]->Remove();
 	}
+
+    // add head revisions, 
+    // if requested by options and not already provided by showAll
+
+    if (options.showHEAD && !options.includeSubPathChanges)
+    {
+        size_t sortedNodeCount = m_entryPtrs.size();
+
+        AddMissingHeads (searchTree.get());
+
+        // move the new nodes to their final positions according to their revnum
+
+        std::sort ( m_entryPtrs.begin() + sortedNodeCount
+                  , m_entryPtrs.end()
+                  , &CompareByRevision);
+        std::inplace_merge ( m_entryPtrs.begin()
+                           , m_entryPtrs.begin() + sortedNodeCount
+                           , m_entryPtrs.end()
+                           , &CompareByRevision);
+    }
 }
 
 void CRevisionGraph::AnalyzeRevisions ( revision_t revision
@@ -743,7 +781,6 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 
 					CRevisionEntry* newEntry 
 						= new CRevisionEntry (path, revision, action);
-					newEntry->index = m_entryPtrs.size();
 					newEntry->realPath = changePath;
 					m_entryPtrs.push_back (newEntry);
 
@@ -766,19 +803,7 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 
 		// select next node
 
-		if (searchNode->GetFirstChild() != NULL)
-		{
-			searchNode = searchNode->GetFirstChild();
-		}
-		else
-		{
-			while (    (searchNode->GetNext() == NULL)
-					&& (searchNode != startNode))
-				searchNode = searchNode->GetParent();
-
-			if (searchNode != startNode)
-				searchNode = searchNode->GetNext();
-		}
+        searchNode = searchNode->GetPreOrderNext (startNode);
 	}
 	while (searchNode != startNode);
 }
@@ -868,7 +893,6 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
 						= CDictionaryBasedPath ( path.GetDictionary()
 											   , copy->fromPathIndex);
 
-					entry->index = m_entryPtrs.size();
 					m_entryPtrs.push_back (entry);
 
 					searchNode->ChainEntries (entry);
@@ -901,6 +925,153 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
 
 				searchNode = searchNode->GetNext();
 			}
+		}
+	}
+}
+
+void CRevisionGraph::AddMissingHeads (CSearchPathTree* rootNode)
+{
+	const CCachedLogInfo* cache = query->GetCache();
+	const CRevisionIndex& revisions = cache->GetRevisions();
+	const CRevisionInfoContainer& revisionInfo = cache->GetLogInfo();
+
+    // collect search paths that have we know the head of already in this container
+    // (delay potential node deletion until we finished tree traversal)
+
+    std::vector<CSearchPathTree*> toRemove;
+
+	// collect all nodes that don't have a path used in any change
+
+	CSearchPathTree* searchNode = rootNode;
+    for ( searchNode = rootNode
+        ; searchNode != NULL
+        ; searchNode = searchNode->GetPreOrderNext())
+	{
+        if (   searchNode->IsActive() 
+            && !searchNode->GetPath().IsFullyCachedPath())
+        {
+            // path is not known in cache -> no change for this path
+
+            toRemove.push_back (searchNode);
+        }
+    }
+
+    // collect nodes to draw ... revision by revision
+
+	for ( revision_t revision = m_lHeadRevision
+        ; (revision > 0) && !rootNode->IsEmpty()
+        ; --revision)
+	{
+		index_t index = revisions[revision];
+		if (index == NO_INDEX)
+			continue;
+
+	    // remove deleted search paths
+
+	    for (size_t i = 0, count = toRemove.size(); i < count; ++i)
+		    toRemove[i]->Remove();
+
+        toRemove.clear();
+
+		// we are looking for search paths that (may) overlap 
+		// with the revisions' changes
+
+		CDictionaryBasedPath basePath = revisionInfo.GetRootPath (index);
+		if (!basePath.IsValid())
+			continue;	// empty revision
+
+		// pre-order search-tree traversal
+
+		CSearchPathTree* searchNode = rootNode;
+		while (searchNode != NULL)
+		{
+			bool subTreeTouched 
+				= searchNode->GetPath().IsSameOrParentOf (basePath);
+            bool parentTreeTouched
+                = searchNode->GetPath().IsSameOrChildOf (basePath);
+
+            // inspect sub-tree only if there is an overlap
+
+            if (subTreeTouched || parentTreeTouched)
+            {
+                // if this path is active, 
+                // check whether this is the head revision
+                // and add a node, if not already present
+                // and schedule it for removal from the search tree
+
+				AnalyzeHeadRevision ( revision
+    								, revisionInfo.GetChangesBegin (index)
+	    							, revisionInfo.GetChangesEnd (index)
+		    						, searchNode
+			    					, toRemove);
+
+                // continue on children, if there are any
+
+                if (searchNode->GetFirstChild())
+                {
+                    searchNode = searchNode->GetFirstChild();
+                    continue;
+                }
+            }
+
+			// continue with right next
+
+			while (   (searchNode->GetNext() == NULL)
+				   && (searchNode->GetParent() != NULL))
+				searchNode = searchNode->GetParent();
+
+			searchNode = searchNode->GetNext();
+		}
+	}
+}
+
+void CRevisionGraph::AnalyzeHeadRevision ( revision_t revision
+    									 , CRevisionInfoContainer::CChangesIterator first
+	    								 , CRevisionInfoContainer::CChangesIterator last
+		    							 , CSearchPathTree* searchNode
+				    					 , std::vector<CSearchPathTree*>& toRemove)
+{
+    // not an active search path anymore?
+
+    if (!searchNode->IsActive())
+        return;
+
+    // head revision already known (i.e. node already exists)?
+
+    if (!searchNode->YetToCover (revision))
+    {
+        toRemove.push_back (searchNode);
+        return;
+    }
+
+    // detailed inspection of all changes until we find a match
+
+    const CDictionaryBasedTempPath& tempPath = searchNode->GetPath();
+    const CDictionaryBasedPath& path = tempPath.GetBasePath();
+	for ( CRevisionInfoContainer::CChangesIterator iter = first
+		; iter != last
+		; ++iter)
+	{
+        if (path.IsSameOrParentOf (iter->GetPathID()))
+		{
+			// create & init the new graph node
+
+			CRevisionEntry* newEntry 
+                = new CRevisionEntry (tempPath, revision, CRevisionEntry::lastcommit);
+            newEntry->realPath = iter->GetPath();
+			m_entryPtrs.push_back (newEntry);
+
+			// link entries for the same search path
+
+			searchNode->ChainEntries (newEntry);
+
+			// head found
+
+			toRemove.push_back (searchNode);
+
+			// we will create at most one node per path and revision
+
+			break;
 		}
 	}
 }
