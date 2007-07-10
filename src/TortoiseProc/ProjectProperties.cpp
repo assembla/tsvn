@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -388,7 +388,7 @@ BOOL ProjectProperties::FindBugID(const CString& msg, CWnd * pWnd)
 							// we define group 1 as the whole issue text
 							// and group 2 as the issue number
 							CHARRANGE range;
-							if (results.cbackrefs() > 2)
+							if ((results.cbackrefs() > 2)&&(results.backref(2).matched))
 							{
 								if (results.backref(2).str().empty())
 									range.cpMin = (LONG)(offset1 + results.rlength(1));
@@ -396,7 +396,7 @@ BOOL ProjectProperties::FindBugID(const CString& msg, CWnd * pWnd)
 									range.cpMin = (LONG)(offset1 + results.rlength(1)-results.rlength(2));
 								range.cpMax =  (LONG)(offset1 + results.rlength(1));
 							}
-							else if ((results.cbackrefs() > 1)&&(results.backref(1).str().size()>0))
+							else if ((results.cbackrefs() > 1)&&(results.backref(1).matched)&&(results.backref(1).str().size()>0))
 							{
 								range.cpMin = (LONG)(offset1 + results.rstart(1)-results.rstart(0));
 								range.cpMax = (LONG)(range.cpMin + results.rlength(1));
@@ -578,7 +578,7 @@ CString ProjectProperties::FindBugID(const CString& msg)
 							// we define group 1 as the whole issue text
 							// and group 2 as the issue number
 							CHARRANGE range;
-							if (results.cbackrefs() > 2)
+							if ((results.cbackrefs() > 2)&&(results.backref(2).matched))
 							{
 								if (results.backref(2).str().empty())
 									range.cpMin = (LONG)(offset1 + results.rlength(1));
@@ -586,7 +586,7 @@ CString ProjectProperties::FindBugID(const CString& msg)
 									range.cpMin = (LONG)(offset1 + results.rlength(1)-results.rlength(2));
 								range.cpMax =  (LONG)(offset1 + results.rlength(1));
 							}
-							else if ((results.cbackrefs() > 1)&&(results.backref(1).str().size()>0))
+							else if ((results.cbackrefs() > 1)&&(results.backref(1).matched)&&(results.backref(1).str().size()>0))
 							{
 								range.cpMin = (LONG)(offset1 + results.rstart(1)-results.rstart(0));
 								range.cpMax = (LONG)(range.cpMin + results.rlength(1));
