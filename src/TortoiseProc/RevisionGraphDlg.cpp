@@ -54,6 +54,7 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
     m_options.showHEAD = true;
     m_options.reduceCrossLines = false;
     m_options.exactCopySources = true;
+    m_options.splitBranches = false;
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()

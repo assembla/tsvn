@@ -85,6 +85,8 @@
 #define IDI_REVGRAPH_LASTCOMMIT         220
 #define IDI_REVGRAPH_RENAMED            221
 #define IDI_REVGRAPH_REPLACED           222
+#define IDI_REVGRAPH_SPLIT              223
+#define IDI_REVGRAPH_TAGGED             224
 #define IDR_REVGRAPHBAR                 223
 #define IDI_SAVEDDATA                   225
 #define IDD_EDITPROPERTIES              226

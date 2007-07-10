@@ -1093,20 +1093,27 @@ void CRevisionGraph::AnalyzeHeadRevision ( revision_t revision
 	}
 }
 
+// assign columns to branches recursively from the left to the right 
+// (one branch level per recursive step)
+
 void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 								   , std::vector<int>& columnByRow
                                    , int column)
 {
-	// find larges level for the chain starting at "start"
+	// find largest column for the chain starting at "start"
+    // skip split branch sections
 
-	int lastRow = 0;
+	int lastRow = start->row;
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
+    {
+        if (entry->action != CRevisionEntry::splitEnd)
+	        for (int row = lastRow; row <= entry->row; ++row)
+		        column = max (column, columnByRow[row]+1);
+
 		lastRow = entry->row;
+    }
 
-	for (int row = start->row; row <= lastRow; ++row)
-		column = max (column, columnByRow[row]+1);
-
-	// assign that level & collect branches
+	// assign that column & collect branches
 
 	std::vector<CRevisionEntry*> branches;
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
@@ -1116,10 +1123,17 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 			branches.push_back (entry);
 	}
 
-	// block the level for the whole chain
+	// block the column for the whole chain except for split branch sections
 
-	for (int row = start->row; row <= lastRow; ++row)
-		columnByRow[row] = column;
+	lastRow = start->row;
+	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
+    {
+        if (entry->action != CRevisionEntry::splitEnd)
+	        for (int row = lastRow; row <= entry->row; ++row)
+        		columnByRow[row] = column;
+
+		lastRow = entry->row;
+    }
 
 	// follow the branches
 
@@ -1243,6 +1257,58 @@ int CRevisionGraph::AssignOneRowPerBranchNode (CRevisionEntry* start, int row)
 	return maxRow;
 }
 
+void CRevisionGraph::AutoSplitBranch ( CRevisionEntry* entry
+                                     , CRevisionEntry*& nextEntry)
+{
+    if ((nextEntry != NULL) && (nextEntry->row - entry->row > 10))
+    {
+        // split branch by creating "split nodes"
+        // that mirror the respective other end of the gap
+
+        // the split nodes
+
+        CRevisionEntry* splitStart 
+            = new CRevisionEntry ( nextEntry->path
+                                 , nextEntry->revision
+                                 , CRevisionEntry::splitStart);
+        splitStart->realPath = nextEntry->realPath;
+        splitStart->row = entry->row+1;
+        m_entryPtrs.push_back (splitStart);
+
+        CRevisionEntry* splitEnd
+            = new CRevisionEntry ( entry->path
+                                 , entry->revision
+                                 , CRevisionEntry::splitEnd);
+        splitEnd->realPath = entry->realPath;
+        splitEnd->row = nextEntry->row-1;
+        m_entryPtrs.push_back (splitEnd);
+
+        // chain them
+
+        splitStart->next = splitEnd;
+        splitEnd->next = nextEntry;
+        nextEntry = splitStart;
+    }
+}
+
+void CRevisionGraph::SplitBranches()
+{
+	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
+    {
+		CRevisionEntry * entry = m_entryPtrs[i];
+
+        // handle splits within the same branch
+
+        AutoSplitBranch (entry, entry->next);
+
+        // split where forking sub-branches
+
+		std::vector<CRevisionEntry*>& targets = entry->copyTargets;
+		for (size_t i = 0, count = targets.size(); i < count; ++i)
+            AutoSplitBranch (entry, targets[i]);
+    }
+}
+
 void CRevisionGraph::ReverseRowOrder (int maxRow)
 {
 	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
@@ -1264,6 +1330,12 @@ void CRevisionGraph::AssignCoordinates (const SOptions& options)
     int row = options.groupBranches
 			? AssignOneRowPerBranchNode (m_entryPtrs[0], 1)
 			: AssignOneRowPerRevision();
+
+    // wast less space: 
+    // split branches that have no nodes for many rows into short sections
+
+    if (options.splitBranches)
+        SplitBranches();
 
 	// the highest used column per revision
 
