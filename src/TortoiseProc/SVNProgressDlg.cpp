@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,6 +33,8 @@
 #include "SVNDiff.h"
 #include "Hooks.h"
 #include "DropFiles.h"
+#include "SVNLogHelper.h"
+#include "HistoryDlg.h"
 
 BOOL	CSVNProgressDlg::m_bAscending = FALSE;
 int		CSVNProgressDlg::m_nSortedColumn = -1;
@@ -154,6 +156,7 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, svn_wc_notify_action_t actio
 							 svn_wc_notify_state_t prop_state, LONG rev,
 							 const svn_lock_t * lock, svn_wc_notify_lock_state_t lock_state,
 							 const CString& changelistname,
+							 svn_merge_range_t * range,
 							 svn_error_t * err, apr_pool_t * pool)
 {
 	bool bNoNotify = false;
@@ -173,6 +176,8 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, svn_wc_notify_action_t actio
 	data->sPathColumnText = path.GetUIPathString();
 	if (!m_basePath.IsEmpty())
 		data->basepath = m_basePath;
+	if (range)
+		data->merge_range = *range;
 	switch (data->action)
 	{
 	case svn_wc_notify_add:
@@ -370,6 +375,13 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, svn_wc_notify_action_t actio
 		break;
 	case svn_wc_notify_changelist_failed:
 		data->sActionColumnText.Format(IDS_SVNACTION_CHANGELISTFAILED, data->changelistname);
+		break;
+	case svn_wc_notify_merge_begin:
+		if (data->merge_range.start == data->merge_range.end)
+			data->sActionColumnText.Format(IDS_SVNACTION_MERGEBEGINSINGLE, data->merge_range.start);
+		else
+			data->sActionColumnText.Format(IDS_SVNACTION_MERGEBEGINMULTIPLE, data->merge_range.start, data->merge_range.end);
+		data->bAuxItem = true;
 		break;
 	default:
 		break;
@@ -696,6 +708,7 @@ UINT CSVNProgressDlg::ProgressThread()
 	CString sIgnoreAncestry(MAKEINTRESOURCE(IDS_PROGRS_IGNOREANCESTRY));
 	CString sRespectAncestry(MAKEINTRESOURCE(IDS_PROGRS_RESPECTANCESTRY));
 	CString sDryRun(MAKEINTRESOURCE(IDS_PROGRS_DRYRUN));
+	CString sRecordOnly(MAKEINTRESOURCE(IDS_MERGE_RECORDONLY));
 	switch (m_Command)
 	{
 	case SVNProgress_Checkout:			//no tempfile!
@@ -1103,6 +1116,10 @@ UINT CSVNProgressDlg::ProgressThread()
 			{
 				sWindowTitle += _T(" ") + sDryRun;
 			}
+			if (m_options & ProgOptRecordOnly)
+			{
+				sWindowTitle += _T(" ") + sRecordOnly;
+			}
 			SetWindowText(sWindowTitle);
 			// Eeek!  m_sMessage is actually a path for this command...
 			CTSVNPath urlTo(m_sMessage);
@@ -1125,7 +1142,7 @@ UINT CSVNProgressDlg::ProgressThread()
 					// if the merge fails with the peg revision set to the end revision of the merge,
 					// try again with HEAD as the peg revision.
 					if (!m_pSvn->PegMerge(m_url, m_Revision, m_RevisionEnd, SVNRev::REV_HEAD,
-						m_targetPathList[0], true, m_depth, !!(m_options & ProgOptIgnoreAncestry), !!(m_options & ProgOptDryRun)))
+						m_targetPathList[0], true, m_depth, !!(m_options & ProgOptIgnoreAncestry), !!(m_options & ProgOptDryRun), !!(m_options & ProgOptRecordOnly)))
 					{
 						ReportSVNError();
 						bFailed = true;
@@ -1144,10 +1161,96 @@ UINT CSVNProgressDlg::ProgressThread()
 				ReportCmd(sCmdInfo);
 
 				if (!m_pSvn->Merge(m_url, m_Revision, urlTo, m_RevisionEnd, m_targetPathList[0], 
-					true, m_depth, !!(m_options & ProgOptIgnoreAncestry), !!(m_options & ProgOptDryRun)))
+					true, m_depth, !!(m_options & ProgOptIgnoreAncestry), !!(m_options & ProgOptDryRun), !!(m_options & ProgOptRecordOnly)))
 				{
 					ReportSVNError();
 					bFailed = true;
+				}
+			}
+			if ((!bFailed) && (m_url.IsEquivalentTo(urlTo)) && !(m_options & ProgOptDryRun))
+			{
+				// retrieve the log messages for all the revisions which got merged and save them
+				// in the registry as a 'previous' log message entered in the commit dialog
+
+				// first find the revision range
+				svn_revnum_t start = 0;
+				svn_revnum_t end = INT_MAX;
+				for (NotificationDataVect::const_iterator it = m_arData.begin(); it != m_arData.end(); ++it)
+				{
+					if ((*it)->merge_range.end && (*it)->merge_range.start)
+					{
+						start = max(start, (*it)->merge_range.end);
+						start = max(start, (*it)->merge_range.start);
+						end = min(end, (*it)->merge_range.end);
+						end = min(end, (*it)->merge_range.start);
+					}
+				}
+				SVNLogHelper loghelper;
+				bool bGotLogs = loghelper.GetLogMessagesAndAuthors(m_url, SVNRev(start), SVNRev(end), 
+					m_pegRev.IsValid() ? m_pegRev : (m_url.IsUrl() ? m_RevisionEnd : SVNRev(SVNRev::REV_WC)));
+				if (!bGotLogs)
+				{
+					// if this failed, try again with HEAD as the peg revision
+					bGotLogs = loghelper.GetLogMessagesAndAuthors(m_url, SVNRev(start), SVNRev(end), SVNRev::REV_HEAD);
+				}
+				if (bGotLogs)
+				{
+					CString sSuggestedMessage;
+					if ((svn_revnum_t)m_Revision == (svn_revnum_t)m_RevisionEnd)
+					{
+						sSuggestedMessage.Format(IDS_SVNPROGRESS_MERGELOGMSGONE, m_Revision.ToString(), m_url.GetUIPathString());
+					}
+					else
+					{
+						sSuggestedMessage.Format(IDS_SVNPROGRESS_MERGELOGMSGMULTIPLE, m_Revision.ToString(), m_RevisionEnd.ToString(), m_url.GetUIPathString());
+					}
+					CString sMergedLogMessage;
+					CString sSeparator = CRegString(_T("Software\\TortoiseSVN\\MergeLogSeparator"), _T("........"));
+					for (NotificationDataVect::const_iterator it = m_arData.begin(); it != m_arData.end(); ++it)
+					{
+						if ((*it)->merge_range.end && (*it)->merge_range.start)
+						{
+							if ((*it)->merge_range.start <= (*it)->merge_range.end)
+							{
+								for (svn_revnum_t r = (*it)->merge_range.start;
+									r <= (*it)->merge_range.end; ++r)
+								{
+									if ((loghelper.authors.find(r) != loghelper.authors.end()) &&
+										(loghelper.messages.find(r) != loghelper.messages.end()))
+									{
+										temp.Format(IDS_SVNPROGRESS_MERGELOGMSG, (LPCTSTR)sSeparator, (LPCTSTR)SVNRev(r).ToString(), 
+											(LPCTSTR)loghelper.authors[r], (LPCTSTR)loghelper.messages[r]);
+										sMergedLogMessage += temp;
+									}
+								}
+							}
+							else
+							{
+								for (svn_revnum_t r = (*it)->merge_range.end;
+									r <= (*it)->merge_range.start; --r)
+								{
+									if ((loghelper.authors.find(r) != loghelper.authors.end()) &&
+										(loghelper.messages.find(r) != loghelper.messages.end()))
+									{
+										temp.Format(IDS_SVNPROGRESS_MERGELOGMSG, (LPCTSTR)sSeparator, (LPCTSTR)SVNRev(r).ToString(), 
+											(LPCTSTR)loghelper.authors[r], (LPCTSTR)loghelper.messages[r]);
+										sMergedLogMessage += temp;
+									}
+								}
+							}
+						}
+					}
+					if (!sMergedLogMessage.IsEmpty())
+					{
+						sMergedLogMessage = sSuggestedMessage + _T("\n") + sMergedLogMessage + _T("\n") + sSeparator;
+						CHistoryDlg	HistoryDlg;
+						HistoryDlg.SetMaxHistoryItems((LONG)CRegDWORD(_T("Software\\TortoiseSVN\\MaxHistoryItems"), 25));
+						CString reg;
+						reg.Format(_T("Software\\TortoiseSVN\\History\\commit%s"), GetUUIDFromPath(m_targetPathList[0]));
+						HistoryDlg.LoadHistory(reg, _T("logmsgs"));
+						HistoryDlg.AddString(sMergedLogMessage);
+						HistoryDlg.SaveHistory();
+					}
 				}
 			}
 		}
@@ -1273,7 +1376,7 @@ UINT CSVNProgressDlg::ProgressThread()
 	CString info = BuildInfoString();
 	if (bFailed)
 		info.LoadString(IDS_PROGRS_INFOFAILED);
-	GetDlgItem(IDC_INFOTEXT)->SetWindowText(info);
+	SetDlgItemText(IDC_INFOTEXT, info);
 	ResizeColumns();
 	int count = m_ProgList.GetItemCount();
 	if (count > 0)
@@ -1288,7 +1391,7 @@ UINT CSVNProgressDlg::ProgressThread()
 		CTimeSpan time = CTime::GetCurrentTime() - startTime;
 		temp.Format(IDS_PROGRS_TIME, (LONG)time.GetTotalMinutes(), (LONG)time.GetSeconds());
 		sFinalInfo.Format(IDS_PROGRS_FINALINFO, m_sTotalBytesTransferred, temp);
-		GetDlgItem(IDC_PROGRESSLABEL)->SetWindowText(sFinalInfo);
+		SetDlgItemText(IDC_PROGRESSLABEL, sFinalInfo);
 	}
 	else
 		GetDlgItem(IDC_PROGRESSLABEL)->ShowWindow(SW_HIDE);
@@ -1507,7 +1610,7 @@ LRESULT CSVNProgressDlg::OnSVNProgress(WPARAM /*wParam*/, LPARAM lParam)
 	else
 		m_sTotalBytesTransferred.Format(IDS_SVN_PROGRESS_TOTALMBTRANSFERRED, (double)((double)pProgressData->overall_total / 1024000.0));
 	progText.Format(IDS_SVN_PROGRESS_TOTALANDSPEED, (LPCTSTR)m_sTotalBytesTransferred, pProgressData->SpeedString);
-	GetDlgItem(IDC_PROGRESSLABEL)->SetWindowText(progText);
+	SetDlgItemText(IDC_PROGRESSLABEL, progText);
 	return 0;
 }
 
@@ -1517,7 +1620,7 @@ void CSVNProgressDlg::OnTimer(UINT_PTR nIDEvent)
 	{
 		CString progText;
 		progText.Format(IDS_SVN_PROGRESS_TOTALANDSPEED, m_sTotalBytesTransferred, _T("0 Bytes/s"));
-		GetDlgItem(IDC_PROGRESSLABEL)->SetWindowText(progText);
+		SetDlgItemText(IDC_PROGRESSLABEL, progText);
 		KillTimer(TRANSFERTIMER);
 	}
 }
@@ -1911,7 +2014,7 @@ void CSVNProgressDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 									m_ProgList.Invalidate();
 									
 									CString info = BuildInfoString();
-									GetDlgItem(IDC_INFOTEXT)->SetWindowText(info);
+									SetDlgItemText(IDC_INFOTEXT, info);
 
 									if (m_nConflicts==0)
 									{

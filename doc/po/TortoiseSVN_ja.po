@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2005-08-30 15:16GMT Daylight Time\n"
-"PO-Revision-Date: 2007-07-05 01:02+0900\n"
+"PO-Revision-Date: 2007-07-10 03:02+0900\n"
 "Last-Translator: KURASAWA Nozomu <nabetaro@caldron.jp>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1578,8 +1578,8 @@ msgid "Note that checking every path can be an expensive operation, particularly
 msgstr "すべてのパスをチェックするのは、(特にリビジョンログに関して) 時間がかかる操作だということに注意してください。サーバは、リビジョンごとにすべてのパスを変更があるかチェックし、そこが読み込めるかどうかをチェックします。リビジョンにあるファイルが多くなれば、時間をどんどん消費してしまいます。"
 
 #: source/TortoiseSVN_en.xml:2091(para)
-msgid "Authentication and authorizarion are separate processes. If a user wants to gain access to a repository path, she has to meet <emphasis>both</emphasis>, the usual authentication requirements and the authorization requirements of the access file."
-msgstr "認証と許可は独立したプロセスです。ユーザがリポジトリパスへアクセスしたい場合、通常の認証条件とファイルへのアクセス許可条件を<emphasis>両方</emphasis>満たさなくてはなりません。"
+msgid "Authentication and authorization are separate processes. If a user wants to gain access to a repository path, she has to meet <emphasis>both</emphasis>, the usual authentication requirements and the authorization requirements of the access file."
+msgstr "認証 (authentication) と許可 (authorization) は独立したプロセスです。ユーザがリポジトリパスへアクセスしたい場合、通常の認証条件とファイルへのアクセス許可条件を<emphasis>両方</emphasis>満たさなくてはなりません。"
 
 #: source/TortoiseSVN_en.xml:2099(title)
 msgid "Authentication With a Windows Domain"
@@ -1734,12 +1734,12 @@ msgstr "Windows ドメイン認証と <literal>passwd</literal> ファイル両�
 #: source/TortoiseSVN_en.xml:2302(para)
 msgid ""
 "To enable both Windows domain and passwd file authentication, add the following entries within the <literal>&lt;Location&gt;</literal> block of your Apache config file: <screen>\n"
-"AuthAthoritative Off\n"
+"AuthAuthoritative Off\n"
 "SSPIAuthoritative Off\n"
 "</screen>"
 msgstr ""
 "Windows ドメイン認証と passwd ファイル認証の両方を有効にするには、Apache 設定ファイルの <literal>&lt;Location&gt;</literal> ブロックに以下のエントリを追加してください。<screen>\n"
-"AuthAthoritative Off\n"
+"AuthAuthoritative Off\n"
 "SSPIAuthoritative Off\n"
 "</screen>"
 
@@ -3940,7 +3940,7 @@ msgstr "通常、このオプションにチェック付けないままにして
 
 #: source/TortoiseSVN_en.xml:5512(para)
 msgid "When the Show Log dialog is invoked from within the Merge dialog, the box is always checked by default. This is because merging is most often looking at changes on branches, and going back beyond the root of the branch does not make sense in that instance."
-msgstr "マージダイアログからログダイアログを表示すると、このチェックボックスは、デフォルトでは常にチェックされています。これはマージがブランチの変更を調べるためで、ブランチのルートを越えて戻るようなことは、このインスタンスでは理解できません。"
+msgstr "マージダイアログからログ参照ダイアログを表示すると、このチェックボックスは、デフォルトでは常にチェックされています。これはマージがブランチの変更を調べるためで、ブランチのルートを越えて戻るようなことは、このインスタンスでは理解できません。"
 
 #: source/TortoiseSVN_en.xml:5519(para)
 msgid "Note that Subversion currently implements renaming as a copy/delete pair, so renaming a file or folder will also cause the log display to stop if this option is checked."
@@ -4499,7 +4499,7 @@ msgstr "パターンマッチは大文字小文字を区別しますが、これ
 
 #: source/TortoiseSVN_en.xml:6343(para)
 msgid "Subversion uses this pattern matching against every path presented to it for action. These paths are generally relative to the directory being acted upon for import, add, commit, etc. The matching pattern therefore has to take account of the fact that there may or may not be path components before the filename."
-msgstr ""
+msgstr "Subversion は上記のパターンマッチを、アクションで与えられたパスすべてに対して行います。このパスは一般的に、インポート・追加・コミットなどで実行されるディレクトリに関係します。そのためパターンマッチは、ファイル名の前にパス部分がある可能性を考慮しなければなりません。"
 
 #: source/TortoiseSVN_en.xml:6350(para)
 msgid "If directory names are present in a path, the matching algorithm will not trim them off, so pattern <literal>Fred.*</literal> will match <literal>Fred.c</literal> but not <literal>subdir/Fred.c</literal>. This is significant if you add a folder which contains some files that you want to be ignored, because those filenames will be preceded with the folder name when Subversion compares them with the ignore pattern."
@@ -5151,7 +5151,7 @@ msgstr "必要なリビジョンの範囲を選択する最も簡単な方法は
 
 #: source/TortoiseSVN_en.xml:7447(para)
 msgid "When the <guilabel>Use \"From:\" URL</guilabel> checkbox is checked, only one <guibutton>Show Log</guibutton> button is enabled. This is because the Show Log dialog sets both <guilabel>From:</guilabel> and <guilabel>To:</guilabel> revisions, so you need to use the multiple selection method outlined above."
-msgstr "<guilabel>\"元:\" URL を利用する</guilabel> チェックボックスにチェックが入っている場合、<guibutton>ログを表示</guibutton> ボタンはひとつだけ有効になります。これはログダイアログが <guilabel>元:</guilabel> リビジョンと <guilabel>先:</guilabel> リビジョン双方に設定するためです。ですから上で説明している複数選択を行う必要があります。"
+msgstr "<guilabel>\"元:\" URL を利用する</guilabel> チェックボックスにチェックが入っている場合、<guibutton>ログを表示</guibutton> ボタンはひとつだけ有効になります。これはログ参照ダイアログが <guilabel>元:</guilabel> リビジョンと <guilabel>先:</guilabel> リビジョン双方に設定するためです。ですから上で説明している複数選択を行う必要があります。"
 
 #: source/TortoiseSVN_en.xml:7455(para)
 msgid "If you have already merged some changes from this branch, hopefully you will have made a note of the last revision merged in the log message when you committed the change. In that case, you can use <guibutton>Show Log</guibutton> for the Working Copy to trace that log message. Use the end point of the last merge as the start point for this merge. For example, if you have merged revisions 37 to 39 last time, then the start point for this merge should be revision 39."
@@ -6699,7 +6699,7 @@ msgstr "キーワード、特にファイルの <literal>リビジョン</litera
 
 #: source/TortoiseSVN_en.xml:9964(para)
 msgid "You can also specify a different diff tool to use on Subversion properties. Since these tend to be short simple text strings, you may want to use a simpler more compact viewer."
-msgstr ""
+msgstr "Subversion のプロパティ用に別の diff ツールを指定することもできます。プロパティは短く簡単な文字列である傾向があるので、シンプルでもっとコンパクトなビューアを使いたくなるかもしれません。"
 
 #: source/TortoiseSVN_en.xml:9971(title)
 msgid "Merge Tool"
@@ -6837,7 +6837,7 @@ msgstr "ログメッセージ (ログ参照ダイアログ)"
 
 #: source/TortoiseSVN_en.xml:10155(para)
 msgid "TortoiseSVN caches log messages fetched by the Show Log dialog to save time when you next show the log. If someone else edits a log message and you already have that message cached, you will not see the change until you clear the cache. Log message caching is enabled on the <guilabel>Dialogs 1</guilabel> tab."
-msgstr ""
+msgstr "TortoiseSVN は、次回ログを参照した際の時間節約のため、ログ参照ダイアログが取得したログメッセージをキャッシュしています。メッセージがキャッシュされている状態で、他の誰かがログメッセージを編集した場合、キャッシュをクリアしないとその変更を参照できません。ログメッセージのキャッシュは<guilabel>ダイアログ 1</guilabel> タブで有効にできます。"
 
 #: source/TortoiseSVN_en.xml:10166(term)
 msgid "Dialog sizes and positions"
@@ -6924,7 +6924,7 @@ msgid "The Settings Dialog, Hook Scripts Page"
 msgstr "設定ダイアログ、フックスクリプトページ"
 
 #: source/TortoiseSVN_en.xml:10270(para)
-msgid "<placeholder-1/> This dialog allows you to set up hook scripts which will be executed automatically when certain Subversion actions are performed. As opposed to the hook scripts explained in <xref linkend=\"tsvn-repository-hooks\"/>, these scrips are executed locally on the client."
+msgid "<placeholder-1/> This dialog allows you to set up hook scripts which will be executed automatically when certain Subversion actions are performed. As opposed to the hook scripts explained in <xref linkend=\"tsvn-repository-hooks\"/>, these scripts are executed locally on the client."
 msgstr "<placeholder-1/> このダイアログでは、Subversion のアクションに合わせて自動的に実行される、フックスクリプトのセットアップを行えます。対照的に <xref linkend=\"tsvn-repository-hooks\"/> で説明しているフックスクリプトは、クライアントのローカルで実行されます。"
 
 #: source/TortoiseSVN_en.xml:10280(para)
@@ -8216,7 +8216,7 @@ msgid "/bugid:\"the bug id here\""
 msgstr "/bugid:\"the bug id here\""
 
 #: source/TortoiseSVN_en.xml:11818(entry)
-msgid "Opens the commit dialog. The path specifies the target directory or the list of files to commit. You can also specify the /logmsg switch to pass a predefined log message to the commit dialog. Or, if you don't want to pass the log message on the command line, use /logmsgfile:path, where <placeholder-1/> points to a file containing the log message. To prefill the bug ID box (in case you've set up integration with bugtrackers properly), you can use the <placeholder-2/> to do that."
+msgid "Opens the commit dialog. The path specifies the target directory or the list of files to commit. You can also specify the /logmsg switch to pass a predefined log message to the commit dialog. Or, if you don't want to pass the log message on the command line, use /logmsgfile:path, where <placeholder-1/> points to a file containing the log message. To pre-fill the bug ID box (in case you've set up integration with bugtrackers properly), you can use the <placeholder-2/> to do that."
 msgstr "コミットダイアログを開きます。コミットする対象ディレクトリかファイルリストを、パスに指定します。/logmsg スイッチで、コミットダイアログに渡す定義済みのログメッセージを指定することもできます。または、コマンドラインからログメッセージを渡したくなければ、/logmsgfile:path を使用してください。<placeholder-1/> にはログメッセージのファイルを指定します。(バグトラッカのプロパティで統合の設定をしてある場合) バグ ID ボックスをあらかじめ入力しておくには、<placeholder-2/> を使用できます。"
 
 #: source/TortoiseSVN_en.xml:11834(entry)
@@ -8291,7 +8291,7 @@ msgid "/path2"
 msgstr "/path2"
 
 #: source/TortoiseSVN_en.xml:11930(entry)
-msgid "Starts the external diff program specified in the TortoiseSVN settings. The <placeholder-1/> specifies the first file. If the option <placeholder-2/> is set, then the diff program is started with those two files. If <placeholder-3/> is ommitted, then the diff is done between the file in <placeholder-4/> and its BASE."
+msgid "Starts the external diff program specified in the TortoiseSVN settings. The <placeholder-1/> specifies the first file. If the option <placeholder-2/> is set, then the diff program is started with those two files. If <placeholder-3/> is omitted, then the diff is done between the file in <placeholder-4/> and its BASE."
 msgstr "TortoiseSVN 設定で指定した外部 diff プログラムを起動します。<placeholder-1/> には初めのファイルを指定します。<placeholder-2/> オプションを設定すると、その 2 ファイルに対して diff プログラムが起動します。<placeholder-3/> を省略すると、<placeholder-4/> とその BASE に対する diff を行います。"
 
 #: source/TortoiseSVN_en.xml:11943(entry)

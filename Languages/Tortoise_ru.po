@@ -42,13 +42,13 @@
 # you -- вы
 #
 # Выполнено на основе перевода Alexander <brambo@inbox.ru> из версии: 2495
-# Версии 3826 - 9946: Stanislav Petrakov <stannic@gmail.com>
+# Версии 3826 - 10024: Stanislav Petrakov <stannic@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2004-06-28 09:49+0200\n"
-"PO-Revision-Date: 2007-07-02 10:54+0300\n"
+"PO-Revision-Date: 2007-07-09 11:39+0300\n"
 "Last-Translator: Stanislav Petrakov <stannic@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -223,6 +223,19 @@ msgstr ""
 "%s\n"
 "является папкой, а не файлом!\n"
 "TortoiseMerge не может сравнивать папки."
+
+#: ID:286
+#, c-format
+msgid ""
+"%s\n"
+"r%s | %s\n"
+"\n"
+"%s\n"
+msgstr ""
+"%s\n"
+"ревизия %s | %s\n"
+"\n"
+"%s\n"
 
 #: MenuEntry
 msgid "&?"
@@ -3649,6 +3662,7 @@ msgstr "Max"
 msgid "Max. items to keep in the log message history"
 msgstr "Количество сохраняемых предыдущих сообщений журнала"
 
+#: ID:276
 #: Dlg-ID:141
 #: Control-ID:65535
 msgid "Merge"
@@ -3665,6 +3679,16 @@ msgstr "Глубина охвата при слиянии"
 #: ID:263
 msgid "Merged"
 msgstr "Слито"
+
+#: ID:286
+#, c-format
+msgid "Merged revision %s from %s:\n"
+msgstr "Слияние с ревизией %s из %s:\n"
+
+#: ID:286
+#, c-format
+msgid "Merged revisions %s to %s from %s:\n"
+msgstr "Слияние с ревизиями %s - %s из %s:\n"
 
 #: ID:10
 msgid "Merges a branch into the main trunk"
@@ -3683,6 +3707,16 @@ msgstr "Слияние %s начиная с ревизии %s и по ревиз
 #, c-format
 msgid "Merging from %s, revision %s to %s, revision %s into %s, %s%s"
 msgstr "Слияние из %s, ревизии от %s до %s, ревизия %s в %s, %s%s"
+
+#: ID:264
+#, c-format
+msgid "Merging r%ld"
+msgstr "Слияние с ревизией %ld"
+
+#: ID:264
+#, c-format
+msgid "Merging r%ld through r%ld"
+msgstr "Слияние с ревизиями с %ld по %ld"
 
 #: ID:83
 msgid "Merging requires different revisions or different URLs in 'From:' and 'To:'"
@@ -4359,6 +4393,10 @@ msgstr "Прочитайте 'Руководство по ежедневному
 #: Control-ID:65535
 msgid "Recently modified lines"
 msgstr "Недавно изменённые строки"
+
+#: ID:276
+msgid "Record Only"
+msgstr "Только регистрация"
 
 #: Control-ID:1260
 msgid "Recurse into unversioned folders"

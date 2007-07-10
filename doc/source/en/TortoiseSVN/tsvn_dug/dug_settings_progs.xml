@@ -94,10 +94,10 @@ C:\Path-To\compare.exe /max /wait /title1:%bname /title2:%yname
 		</para>
 		<para>
 			If you use the <literal>svn:keywords</literal> property to
-			expand keywords, and in particular the <literal>revision</literal>
+			expand keywords, and in particular the <emphasis>revision</emphasis>
 			of a file, then there may be a difference between files which
 			is purely due to the current value of the keyword. Also if you use
-			<literal>svn:eol-style = native</literal> the BAsE file will have
+			<literal>svn:eol-style = native</literal> the BASE file will have
 			pure <literal>LF</literal> line endings whereas your file will
 			have <literal>CR-LF</literal> line endings. TSVN will normally hide
 			these differences automatically by first parsing the BASE file to

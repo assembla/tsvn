@@ -277,7 +277,7 @@ BEGIN
     CONTROL         "",IDC_FILTERICON,"Button",BS_OWNERDRAW | BS_ICON | BS_FLAT | WS_TABSTOP,405,0,14,14,WS_EX_TRANSPARENT
     CONTROL         "",IDC_LOGLIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,7,24,405,57
     CONTROL         "",IDC_SPLITTERTOP,"Static",SS_BLACKFRAME,7,81,405,5
-    CONTROL         "",IDC_MSGVIEW,"RichEdit20W",ES_MULTILINE | ES_READONLY | ES_WANTRETURN | WS_BORDER | WS_VSCROLL | WS_TABSTOP,7,86,405,96
+    CONTROL         "",IDC_MSGVIEW,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_TABSTOP | 0x1804,7,86,405,96
     CONTROL         "",IDC_SPLITTERBOTTOM,"Static",SS_BLACKFRAME,7,182,405,4
     CONTROL         "",IDC_LOGMSG,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,7,186,405,59
     CONTROL         "H&ide unrelated changed paths",IDC_HIDEPATHS,"Button",BS_AUTO3STATE | WS_TABSTOP,7,259,293,10
@@ -425,7 +425,7 @@ BEGIN
     PUSHBUTTON      "&Configure",IDC_SOUNDS,212,59,72,14
     LTEXT           "Global ignore &pattern:",IDC_STATIC,14,103,84,18,SS_CENTERIMAGE
     EDITTEXT        IDC_TEMPEXTENSIONS,108,105,176,14,ES_AUTOHSCROLL
-    CONTROL         "Set filedates to the ""last commit &time""",IDC_COMMITFILETIMES,
+    CONTROL         "Set file dates to the ""last commit &time""",IDC_COMMITFILETIMES,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,127,270,10
     LTEXT           "Subversion configuration &file:",IDC_STATIC,14,150,192,8
     PUSHBUTTON      "&Edit",IDC_EDITCONFIG,212,145,72,14
@@ -940,9 +940,9 @@ BEGIN
     CONTROL         "Recurse into unversioned folders",IDC_UNVERSIONEDRECURSE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,21,269,10
     GROUPBOX        "Commit",IDC_COMMITGROUP,7,44,286,94
-    CONTROL         "&Use autocompletion of filepaths and keywords",IDC_AUTOCOMPLETION,
+    CONTROL         "&Use auto-completion of file paths and keywords",IDC_AUTOCOMPLETION,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,57,271,10
-    LTEXT           "&Timeout in seconds to stop the autocompletion parsing",IDC_AUTOCOMPLETIONTIMEOUTLABEL,14,74,231,8,SS_NOTIFY
+    LTEXT           "&Timeout in seconds to stop the auto-completion parsing",IDC_AUTOCOMPLETIONTIMEOUTLABEL,14,74,231,8,SS_NOTIFY
     EDITTEXT        IDC_AUTOCOMPLETIONTIMEOUT,252,72,31,12,ES_AUTOHSCROLL | ES_NUMBER,WS_EX_RIGHT
     CONTROL         "Only use s&pellchecker when tsvn:projectlanguage is set",IDC_SPELL,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,90,271,10
@@ -2356,9 +2356,9 @@ BEGIN
     IDS_SETTINGS_READONLYNAME "readonly"
     IDS_SETTINGS_LOCKEDNAME "locked"
     IDS_SETTINGS_AUTOCOMPLETION_TT 
-                            "Autocomplete suggests words (usually class or member names)\nfrom the files that you have changed as you type a log message."
+                            "Auto-complete suggests words (usually class or member names)\nfrom the files that you have changed as you type a log message."
     IDS_SETTINGS_AUTOCOMPLETIONTIMEOUT_TT 
-                            "The time in seconds after which the parsing of the selected files stops.\nA lower value will make the autocompletion list available sooner,\nbut maybe not scan all files."
+                            "The time in seconds after which the parsing of the selected files stops.\nA lower value will make the auto-completion list available sooner,\nbut maybe not scan all files."
     IDS_SETTINGS_RECURSIVE_TT 
                             "Disable this option if you have really big working copies and experience\ntoo much disk access when browsing the working copy."
     IDS_SETTINGS_USEWCURL_TT 
@@ -2544,6 +2544,8 @@ BEGIN
     IDS_SVNACTION_CHANGELISTSET "Assigned to changelist ""%s"""
     IDS_SVNACTION_CHANGELISTCLEAR "Removed from changelist"
     IDS_SVNACTION_CHANGELISTFAILED "Failed to set/remove changelist ""%s"""
+    IDS_SVNACTION_MERGEBEGINMULTIPLE "Merging r%ld through r%ld"
+    IDS_SVNACTION_MERGEBEGINSINGLE "Merging r%ld"
     IDS_SVN_SUMMARIZENORMAL "Normal"
     IDS_SVN_SUMMARIZEADDED  "Added"
     IDS_SVN_SUMMARIZEMODIFIED "Modified"
@@ -2627,6 +2629,8 @@ BEGIN
     IDS_MERGE_SELECTRANGE   "Select revision range"
     IDS_MERGE_SELECTENDREVISION "Select end revision"
     IDS_MERGE_SELECTSTARTREVISION "Select start revision"
+    IDS_MERGE_RECORDONLY    "Record Only"
+    IDS_MERGE_MERGE         "Merge"
 END
 
 STRINGTABLE 
@@ -2952,6 +2956,13 @@ END
 STRINGTABLE 
 BEGIN
     IDS_SVN_DEPTH_WORKING   "Working copy"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SVNPROGRESS_MERGELOGMSGONE "Merged revision %s from %s:\n"
+    IDS_SVNPROGRESS_MERGELOGMSGMULTIPLE "Merged revisions %s to %s from %s:\n"
+    IDS_SVNPROGRESS_MERGELOGMSG "%s\nr%s | %s\n\n%s\n"
 END
 
 #endif    // English (U.S.) resources
