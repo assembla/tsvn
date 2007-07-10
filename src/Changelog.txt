@@ -1,3 +1,5 @@
+- NEW: Various new layout options in revision graph. (Stefan Fuhrmann)
+- NEW: Log content will be cached. See issue #45 for details. (Stefan Fuhrmann)
 - NEW: A warning is shown when a modified file is about to be deleted
        in the various dialogs. See issue #274 for details. (Stefan)
 - NEW: External diff/merge programs can be specified by mime-type,
@@ -154,6 +156,14 @@
        background of the lines. See issue #364 for details. (Stefan)
 - NEW: The divider positions in the log and commit dialog are remembered
        between sessions. See issue #353 for details. (Stefan)
+- NEW: The view title scrolls now with the view. See issue #358
+       for details. (Stefan)
+- NEW: After a merge, the log messages of each merged revision are fetched
+       and inserted in the commit log history. Which means after a merge,
+       the user can get a pre-filled commit message from the history 
+       button. See issue #369 for details. (Stefan)
+- CHG: Revision graph code mainly rewritten resulting in a major 
+       performance improvement. (Stefan Fuhrmann)
 - CHG: The working copy is now the default in the branch/tag dialog
        instead of HEAD. See issue #258 for details. (Stefan)
 - CHG: When copying selected lines to the clipboard, a newline is added
@@ -223,6 +233,8 @@ Version 1.4.5
        were ignored. (Stefan)
 - BUG: The commit dialog wrongly showed added files in external folders.
        (Tobias Schäfer)
+- BUG: Selecting the 'to:' date in the log dialog didn't include the
+       selected date. (Stefan)
 
 Version 1.4.4
 - BUG: When refreshing the status list control missing files lost their
@@ -465,6 +477,7 @@ Version 1.4.0
 - BUG: Creating and accessing BDB repositories did not work. (Stefan)
 
 Version 1.4.0RC1
+- NEW: Full support of 64 bit Windows. (Stefan Fuhrmann)
 - NEW: Command line param /bugid to prefill the bug ID
        in the commit dialog. See issue #202 for details. (Stefan)
 - NEW: User defined regexes to parse the files for keywords used

@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -110,6 +110,14 @@ BOOL CCheckoutDlg::OnInitDialog()
 		m_editRevision.SetWindowText(temp);
 		CheckRadioButton(IDC_REVISION_HEAD, IDC_REVISION_N, IDC_REVISION_N);
 	}
+	if (m_strCheckoutDirectory.IsEmpty())
+	{
+		CRegString lastCheckoutPath = CRegString(_T("Software\\TortoiseSVN\\History\\lastCheckoutPath"));
+		m_strCheckoutDirectory = lastCheckoutPath;
+		if (m_strCheckoutDirectory.GetLength() <= 2)
+			m_strCheckoutDirectory += _T("\\");
+	}
+	UpdateData(FALSE);
 
 	AddAnchor(IDC_GROUPTOP, TOP_LEFT, TOP_RIGHT);
 	AddAnchor(IDC_URLOFREPO, TOP_LEFT, TOP_RIGHT);
@@ -248,6 +256,8 @@ void CCheckoutDlg::OnOK()
 		break;
 	}
 	UpdateData(FALSE);
+	CRegString lastCheckoutPath = CRegString(_T("Software\\TortoiseSVN\\History\\lastCheckoutPath"));
+	lastCheckoutPath = m_strCheckoutDirectory.Left(m_strCheckoutDirectory.ReverseFind('\\'));
 	CResizableStandAloneDialog::OnOK();
 }
 
@@ -273,35 +283,31 @@ void CCheckoutDlg::OnBnClickedBrowse()
 		if (!CString(regDefCheckoutUrl).IsEmpty())
 		{
 			m_URL = m_URLCombo.GetString();
-			CTSVNPath url = CTSVNPath(m_URL);
-			CTSVNPath defurl = CTSVNPath(CString(regDefCheckoutUrl));
-			if (defurl.IsAncestorOf(url))
-			{
-				if (CTSVNPath::CheckChild(CTSVNPath(CString(regDefCheckoutPath)), CTSVNPath(m_strCheckoutDirectory)))
-				{
-					// the default url is the parent of the specified url
-					m_strCheckoutDirectory = CString(regDefCheckoutPath).TrimRight('\\') + url.GetWinPathString().Mid(defurl.GetWinPathString().GetLength());
-					UpdateData(FALSE);
-				}
-			}
 		}
 		else
 		{
 			m_URLCombo.GetWindowText(m_URL);
 			if (m_URL.IsEmpty())
 				return;
-			CString tempURL = m_URL;
-			CString name;
-			while (name.IsEmpty() || (name.CompareNoCase(_T("branches"))==0) ||
-				(name.CompareNoCase(_T("tags"))==0) ||
-				(name.CompareNoCase(_T("trunk"))==0))
-			{
-				name = tempURL.Mid(tempURL.ReverseFind('/')+1);
-				tempURL = tempURL.Left(tempURL.ReverseFind('/'));
-			}
-			m_strCheckoutDirectory = m_sCheckoutDirOrig.TrimRight('\\')+_T('\\')+name;
-			UpdateData(FALSE);
 		}
+		CString tempURL = m_URL;
+		CString name;
+		while (name.IsEmpty() || (name.CompareNoCase(_T("branches"))==0) ||
+			(name.CompareNoCase(_T("tags"))==0) ||
+			(name.CompareNoCase(_T("trunk"))==0))
+		{
+			name = tempURL.Mid(tempURL.ReverseFind('/')+1);
+			tempURL = tempURL.Left(tempURL.ReverseFind('/'));
+		}
+		m_strCheckoutDirectory = m_sCheckoutDirOrig.TrimRight('\\')+_T('\\')+name;
+		if (m_strCheckoutDirectory.IsEmpty())
+		{
+			CRegString lastCheckoutPath = CRegString(_T("Software\\TortoiseSVN\\History\\lastCheckoutPath"));
+			m_strCheckoutDirectory = lastCheckoutPath;
+			if (m_strCheckoutDirectory.GetLength() <= 2)
+				m_strCheckoutDirectory += _T("\\");
+		}
+		UpdateData(FALSE);
 	}
 }
 
@@ -369,7 +375,7 @@ LPARAM CCheckoutDlg::OnRevSelected(WPARAM /*wParam*/, LPARAM lParam)
 {
 	CString temp;
 	temp.Format(_T("%ld"), lParam);
-	GetDlgItem(IDC_REVISION_NUM)->SetWindowText(temp);
+	SetDlgItemText(IDC_REVISION_NUM, temp);
 	CheckRadioButton(IDC_REVISION_HEAD, IDC_REVISION_N, IDC_REVISION_N);
 	return 0;
 }
@@ -392,7 +398,7 @@ void CCheckoutDlg::SetRevision(const SVNRev& rev)
 		CheckRadioButton(IDC_REVISION_HEAD, IDC_REVISION_N, IDC_REVISION_N);
 		CString sRev;
 		sRev.Format(_T("%ld"), (LONG)rev);
-		GetDlgItem(IDC_REVISION_NUM)->SetWindowText(sRev);
+		SetDlgItemText(IDC_REVISION_NUM, sRev);
 	}
 }
 
@@ -417,5 +423,12 @@ void CCheckoutDlg::OnCbnEditchangeUrlcombo()
 		tempURL = tempURL.Left(tempURL.ReverseFind('/'));
 	}
 	m_strCheckoutDirectory = m_sCheckoutDirOrig.TrimRight('\\')+_T('\\')+name;
+	if (m_strCheckoutDirectory.IsEmpty())
+	{
+		CRegString lastCheckoutPath = CRegString(_T("Software\\TortoiseSVN\\History\\lastCheckoutPath"));
+		m_strCheckoutDirectory = lastCheckoutPath;
+		if (m_strCheckoutDirectory.GetLength() <= 2)
+			m_strCheckoutDirectory += _T("\\");
+	}
 	UpdateData(FALSE);
 }

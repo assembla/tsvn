@@ -84,7 +84,7 @@ bool CDictionaryBasedTempPath::operator==(const CDictionaryBasedTempPath& rhs) c
 
 CDictionaryBasedTempPath CDictionaryBasedTempPath::ReplaceParent 
 	( const CDictionaryBasedPath& oldParent
-	, const CDictionaryBasedPath& newParent)
+	, const CDictionaryBasedPath& newParent) const
 {
 	assert (oldParent.IsSameOrParentOf (*this));
 

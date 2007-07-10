@@ -18,6 +18,7 @@
 //
 #pragma once
 
+#include "resource.h"
 #include "svn.h"
 #include "ProjectProperties.h"
 #include "StandAloneDlg.h"
@@ -26,8 +27,7 @@
 #include "SplitterControl.h"
 #include "Colors.h"
 #include "MenuButton.h"
-#include "afxwin.h"
-#include "afxdtctl.h"
+#include "LogDlgHelper.h"
 
 #define LOGFILTER_ALL      1
 #define LOGFILTER_MESSAGES 2
@@ -60,6 +60,7 @@ public:
 protected:
 	//implement the virtual methods from SVN base class
 	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions);
+	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, DWORD children);
 	virtual BOOL Cancel();
 
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -93,7 +94,9 @@ protected:
 	afx_msg void OnDtnDropdownDatefrom(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDtnDropdownDateto(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
-virtual void OnCancel();
+	afx_msg void OnBnClickedIncludemerge();
+
+	virtual void OnCancel();
 	virtual void OnOK();
 	virtual BOOL OnInitDialog();
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
@@ -105,6 +108,7 @@ virtual void OnCancel();
 public:
 	void SetParams(const CTSVNPath& path, SVNRev pegrev, SVNRev startrev, SVNRev endrev, int limit, 
 				BOOL bStrict = CRegDWORD(_T("Software\\TortoiseSVN\\LastLogStrict"), FALSE), BOOL bSaveStrict = TRUE);
+	void SetIncludeMerge(bool bInclude = true) {m_bIncludeMerges = bInclude;}
 	void SetProjectPropertiesPath(const CTSVNPath& path) {m_ProjectProperties.ReadProps(path);}
 	bool IsThreadRunning() {return !!m_bThreadRunning;}
 	void SetDialogTitle(const CString& sTitle) {m_sTitle = sTitle;}
@@ -167,6 +171,7 @@ private:
 	volatile LONG 		m_bThreadRunning;
 	BOOL				m_bStrict;
 	bool				m_bStrictStopped;
+	BOOL				m_bIncludeMerges;
 	svn_revnum_t		m_lowestRev;
 	BOOL				m_bSaveStrict;
 	LogChangedPathArray * m_currentChangedArray;
@@ -214,150 +219,9 @@ private:
 	HICON				m_hAddedIcon;
 	HICON				m_hDeletedIcon;
 
+	DWORD				m_childCounter;
 private:
-	/**
-	 * Instances of CStoreSelection save the selection of the CLogDlg. When the instance
-	 * is deleted the destructor restores the selection.
-	 */
-	class CStoreSelection
-	{
-	public:
-		CStoreSelection(CLogDlg* dlg);
-		~CStoreSelection();
-	protected:
-		CLogDlg* m_logdlg;
-		std::set<LONG> m_SetSelectedRevisions;
-	};
-	CLogDlg::CStoreSelection* m_pStoreSelection;
-
-    typedef struct LogEntryData
-    {   
-        svn_revnum_t Rev;
-        __time64_t tmDate;
-        CString sDate;
-        CString sAuthor;
-        CString sMessage;
-        CString sShortMessage;
-        DWORD dwFileChanges;
-        LogChangedPathArray* pArChangedPaths;
-        BOOL bCopies;
-        DWORD actions;
-    } LOGENTRYDATA, *PLOGENTRYDATA;
-    class CLogDataVector : 
-        public std::vector<PLOGENTRYDATA>
-    {
-    public:
-        // De-allocate log items.
-        void ClearAll()
-        {
-            if(size() > 0)
-            {
-                for(iterator it=begin(); it!=end(); ++it)
-                {
-                    LogChangedPathArray * pPaths = (*it)->pArChangedPaths;
-                    for(INT_PTR j=0; j<pPaths->GetCount(); ++j)
-                    {
-                        delete pPaths->GetAt(j);
-                    }
-                    pPaths->RemoveAll();
-                    delete pPaths;
-                    
-                    delete *it;
-                }     
-                clear();
-            }
-        }
-        // Ascending date sorting.
-        struct AscDateSort
-        {
-            bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-            {
-                return pStart->tmDate < pEnd->tmDate;
-            }
-        };
-        // Descending date sorting.
-        struct DescDateSort
-        {
-            bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-            {
-                return pStart->tmDate > pEnd->tmDate;
-            }
-        };
-        // Ascending revision sorting.
-        struct AscRevSort
-        {
-            bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-            {
-                return pStart->Rev < pEnd->Rev;
-            }
-        };
-        // Descending revision sorting.
-        struct DescRevSort
-        {
-            bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-            {
-				return pStart->Rev > pEnd->Rev;
-            }
-        };
-        // Ascending author sorting.
-        struct AscAuthorSort
-        {
-            bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-            {
-				int ret = pStart->sAuthor.CompareNoCase(pEnd->sAuthor);
-				if (ret == 0)
-					return pStart->Rev < pEnd->Rev;
-				return ret<0;
-            }
-        };
-        // Descending author sorting.
-        struct DescAuthorSort
-        {
-            bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-            {
-				int ret = pStart->sAuthor.CompareNoCase(pEnd->sAuthor);
-				if (ret == 0)
-					return pStart->Rev > pEnd->Rev;
-				return ret>0;
-            }
-        };
-        // Ascending message sorting.
-        struct AscMessageSort
-        {
-            bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-            {
-                return pStart->sShortMessage.CompareNoCase(pEnd->sShortMessage)<0;
-            }
-        };
-        // Descending message sorting.
-        struct DescMessageSort
-        {
-            bool operator()(PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-            {
-                return pStart->sShortMessage.CompareNoCase(pEnd->sShortMessage)>0;
-            }
-        };
-		// Ascending action sorting
-		struct AscActionSort
-		{
-			bool operator() (PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-			{
-				if (pStart->actions == pEnd->actions)
-					return pStart->Rev < pEnd->Rev;
-				return pStart->actions < pEnd->actions;
-			}
-		};
-		// Descending action sorting
-		struct DescActionSort
-		{
-			bool operator() (PLOGENTRYDATA& pStart, PLOGENTRYDATA& pEnd)
-			{
-				if (pStart->actions == pEnd->actions)
-					return pStart->Rev > pEnd->Rev;
-				return pStart->actions > pEnd->actions;
-			}
-		};
-    };
+	CStoreSelection* m_pStoreSelection;
     CLogDataVector m_logEntries;
 };
 static UINT WM_REVSELECTED = RegisterWindowMessage(_T("TORTOISESVN_REVSELECTED_MSG"));

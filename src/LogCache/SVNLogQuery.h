@@ -21,6 +21,11 @@
 #include "ILogQuery.h"
 #include "svn_client.h"
 
+
+/**
+ * Implements the ILogQuery interface by using the SVN API, circumventing the
+ * cache.
+ */
 class CSVNLogQuery : public ILogQuery
 {
 private:
@@ -32,6 +37,14 @@ private:
 	// the memory pool to use
 
 	apr_pool_t *pool;
+
+    // callback baton structure
+
+    struct SBaton
+    {
+        ILogReceiver* receiver;
+        bool revs_only;
+    };
 
 	// SVN callback. Route data to receiver
 
@@ -60,5 +73,6 @@ public:
 					 , const SVNRev& end
 					 , int limit
 					 , bool strictNodeHistory
-					 , ILogReceiver* receiver);
+					 , ILogReceiver* receiver
+                     , bool revs_only);
 };

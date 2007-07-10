@@ -32,20 +32,16 @@
 namespace LogCache
 {
 
-///////////////////////////////////////////////////////////////
-//
-// CPathDictionary
-//
-//		A very efficient storage for file paths. Every path
-//		is decomposed into its elements (separented by '/').
-//		Those elements are uniquely stored in a string dictionary.
-//		Paths are stored as (parentPathID, elementID) pairs
-//		with index/ID 0 designating the root path.
-//
-//		Parent(root) == root.
-//
-///////////////////////////////////////////////////////////////
 
+/**
+ * A very efficient storage for file paths. Every path is decomposed into its 
+ * elements (separated by '/').
+ * Those elements are uniquely stored in a string dictionary.
+ * Paths are stored as (parentPathID, elementID) pairs with index/ID 0 
+ * designating the root path.
+ *
+ * Parent(root) == root.
+ */
 class CPathDictionary
 {
 private:
@@ -91,6 +87,7 @@ public:
 
 	index_t GetParent (index_t index) const;
 	const char* GetPathElement (index_t index) const;
+	index_t GetPathElementID (index_t index) const;
 
 	index_t Find (index_t parent, const char* pathElement) const;
 	index_t Insert (index_t parent, const char* pathElement);
@@ -150,6 +147,10 @@ protected:
 				   , CPathDictionary* writableDictionary = NULL
 				   , std::vector<std::string>* relPath = NULL);
 
+	// comparison utility
+
+	bool IsSameOrParentOf (index_t lhsIndex, index_t rhsIndex) const;
+
 public:
 
 	// construction / destruction
@@ -208,7 +209,27 @@ public:
 
 	CDictionaryBasedPath GetCommonRoot (index_t rhsIndex) const;
 
-	bool IsSameOrParentOf (const CDictionaryBasedPath& rhs) const;
+	bool IsSameOrParentOf (index_t rhsIndex) const
+	{
+		return IsSameOrParentOf (index, rhsIndex);
+	}
+
+	bool IsSameOrParentOf (const CDictionaryBasedPath& rhs) const
+	{
+		return IsSameOrParentOf (index, rhs.index);
+	}
+
+	bool IsSameOrChildOf (index_t rhsIndex) const
+	{
+		return IsSameOrParentOf (rhsIndex, index);
+	}
+
+	bool IsSameOrChildOf (const CDictionaryBasedPath& rhs) const
+	{
+		return IsSameOrParentOf (rhs.index, index);
+	}
+
+    bool Contains (index_t pathElementID) const;
 
     // general comparison
 

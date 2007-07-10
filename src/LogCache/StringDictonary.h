@@ -45,17 +45,12 @@ namespace LogCache
 
 typedef quick_hash_map<index_t, index_t> index_mapping_t;
 
-///////////////////////////////////////////////////////////////
-//
-// CStringDictionary
-//
-//		efficiently stores a pool unique (UTF8) strings.
-//		Each string is assigned an unique, immutable index.
-//
-//		Under most circumstances, O(1) lookup is provided.
-//
-///////////////////////////////////////////////////////////////
-
+/**
+ * efficiently stores a pool unique (UTF8) strings.
+ * Each string is assigned an unique, immutable index.
+ *
+ * Under most circumstances, O(1) lookup is provided.
+ */
 class CStringDictionary
 {
 private:

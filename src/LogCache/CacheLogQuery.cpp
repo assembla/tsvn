@@ -71,7 +71,8 @@ void CCacheLogQuery::CLogFiller::MakeRangeIterable ( const CDictionaryBasedPath&
 						 , CDictionaryBasedTempPath (path)
 						 , 0
 						 , true
-						 , NULL);
+						 , NULL
+                         , false);
 }
 
 // implement ILogReceiver
@@ -156,14 +157,33 @@ void CCacheLogQuery::CLogFiller::ReceiveLog ( LogChangedPathArray* changes
 	}
 
 	// the first revision we may not have information about is the one
-	// immediately preceeding the on we just received from the server
+	// immediately preceding the on we just received from the server
 
 	firstNARevision = revision-1;
 
 	// hand on to the original log receiver
 
 	if (receiver != NULL)
-		receiver->ReceiveLog (changes, rev, author, timeStamp, message);
+        if (revs_only)
+        {
+            static const CString emptyString;
+    		receiver->ReceiveLog (NULL, rev, emptyString, 0, emptyString);
+        }
+        else
+        {
+    		receiver->ReceiveLog (changes, rev, author, timeStamp, message);
+            changes = NULL;
+        }
+
+    // clean up
+
+    if (changes != NULL)
+    {
+		for (INT_PTR i = 0, count = changes->GetCount(); i < count; ++i)
+			delete changes->GetAt (i);
+
+        delete changes;
+    }
 }
 
 // actually call SVN
@@ -178,19 +198,27 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 									, const CDictionaryBasedTempPath& startPath
 									, int limit
 									, bool strictNodeHistory
-								    , ILogReceiver* receiver)
+								    , ILogReceiver* receiver
+                                    , bool revs_only)
 {
 	this->cache = cache;
 	this->URL = URL;
 	this->svnQuery = svnQuery;
 	this->receiver = receiver;
+    this->revs_only = revs_only;
 
 	firstNARevision = startRevision;
 	currentPath.reset (new CDictionaryBasedTempPath (startPath));
 	followRenames = !strictNodeHistory;
 
+    // full path to be passed to SVN.
+    // don't append a trailing "/", if the path is empty (i.e. root)
+
 	CTSVNPath path;
-	path.SetFromSVN (URL + startPath.GetPath().c_str());
+    if (startPath.IsRoot())
+	    path.SetFromSVN (URL);
+    else
+	    path.SetFromSVN (URL + startPath.GetPath().c_str());
 
 	svnQuery->Log ( CTSVNPathList (path)
 				  , static_cast<long>(startRevision)
@@ -198,7 +226,8 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 				  , static_cast<long>(endRevision)
 			      , limit
 				  , strictNodeHistory
-				  , this);
+				  , this
+                  , false);
 
 	if (firstNARevision == startRevision) 
 	{
@@ -270,7 +299,7 @@ revision_t CCacheLogQuery::FindOldestGap ( revision_t startRevision
 									     , revision_t endRevision) const
 {
 	// consider the following trade-off:
-	// 1 server roundtrip takes about as long as receiving
+	// 1 server round trip takes about as long as receiving
 	// 100 log entries.
 	//
 	// -> filling cache data gaps of up to 100 revisions
@@ -319,7 +348,8 @@ revision_t CCacheLogQuery::FillLog ( revision_t startRevision
 								   , const CDictionaryBasedTempPath& startPath
 								   , int limit
 								   , bool strictNodeHistory
-								   , ILogReceiver* receiver)
+								   , ILogReceiver* receiver
+								   , bool revs_only)
 {
 	// don't try to get a full log; just enough to continue our search
 
@@ -349,7 +379,8 @@ revision_t CCacheLogQuery::FillLog ( revision_t startRevision
 								, startPath
 								, limit
 								, strictNodeHistory
-								, receiver);
+								, receiver
+                                , revs_only);
 }
 
 // fill the receiver's change list buffer 
@@ -415,9 +446,10 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 								 , const CDictionaryBasedTempPath& startPath
 								 , int limit
 								 , bool strictNodeHistory
-								 , ILogReceiver* receiver)
+								 , ILogReceiver* receiver
+                                 , bool revs_only)
 {
-    // clear string translatin caches
+    // clear string translating caches
 
     authorToStringMap.clear();
     pathToStringMap.clear();
@@ -467,7 +499,8 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 								   , iterator->GetPath()
 								   , limit
 								   , strictNodeHistory
-								   , receiver);
+								   , receiver
+								   , revs_only);
 
 			iterator->Retry();
 		}
@@ -476,45 +509,59 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 			// found an entry. Report it if not already done.
 
 			revision_t revision = iterator->GetRevision();
-			if (revision < lastReported)
+			if ((revision < lastReported) && (receiver != NULL))
 			{
-				index_t logIndex = cache->GetRevisions()[revision];
-				const CRevisionInfoContainer& logInfo = cache->GetLogInfo();
-
-                // extract data for this revision
-
-                // author
-
-                CString author;
-                index_t authorID = logInfo.GetAuthorID (logIndex);
-                TID2String::const_iterator iter = authorToStringMap.find (authorID);
-                if (iter == authorToStringMap.end())
+                if (revs_only)
                 {
-				    author = CUnicodeUtils::GetUnicode (logInfo.GetAuthor (logIndex));
-                    authorToStringMap.insert (authorID, author);
+                    // just notify the receiver that we made some progress
+
+                    static const CString emptyString;
+				    receiver->ReceiveLog ( NULL
+									     , revision
+									     , emptyString
+									     , 0
+									     , emptyString);
                 }
                 else
                 {
-                    author = *iter;
+				    index_t logIndex = cache->GetRevisions()[revision];
+				    const CRevisionInfoContainer& logInfo = cache->GetLogInfo();
+
+                    // extract data for this revision
+
+                    // author
+
+                    CString author;
+                    index_t authorID = logInfo.GetAuthorID (logIndex);
+                    TID2String::const_iterator iter = authorToStringMap.find (authorID);
+                    if (iter == authorToStringMap.end())
+                    {
+				        author = CUnicodeUtils::GetUnicode (logInfo.GetAuthor (logIndex));
+                        authorToStringMap.insert (authorID, author);
+                    }
+                    else
+                    {
+                        author = *iter;
+                    }
+
+                    // comment
+
+				    CStringA comment = logInfo.GetComment (logIndex).c_str();
+
+                    // change list
+
+				    std::auto_ptr<LogChangedPathArray> changes
+					    = GetChanges ( logInfo.GetChangesBegin (logIndex)
+								     , logInfo.GetChangesEnd (logIndex));
+
+                    // send it to the receiver
+
+				    receiver->ReceiveLog ( changes.release()
+									     , revision
+									     , author
+									     , logInfo.GetTimeStamp (logIndex)
+									     , CUnicodeUtils::GetUnicode (comment));
                 }
-
-                // comment
-
-				CStringA comment = logInfo.GetComment (logIndex).c_str();
-
-                // change list
-
-				std::auto_ptr<LogChangedPathArray> changes
-					= GetChanges ( logInfo.GetChangesBegin (logIndex)
-								 , logInfo.GetChangesEnd (logIndex));
-
-                // send it to the receiver
-
-				receiver->ReceiveLog ( changes.release()
-									 , revision
-									 , author
-									 , logInfo.GetTimeStamp (logIndex)
-									 , CUnicodeUtils::GetUnicode (comment));
 			}
 
 			// enough?
@@ -545,7 +592,8 @@ CDictionaryBasedTempPath CCacheLogQuery::TranslatePegRevisionPath
 					, iterator.GetPath()
 					, 0
 					, false
-					, NULL);
+					, NULL
+					, true);
 
 		iterator.Advance();
 	}
@@ -558,21 +606,34 @@ CDictionaryBasedTempPath CCacheLogQuery::TranslatePegRevisionPath
 
 CDictionaryBasedTempPath CCacheLogQuery::GetRelativeRepositoryPath (SVNInfoData& info)
 {
-	// load cache
+	// resolve URL
 
 	URL.Empty();
 	if (info.reposUUID.IsEmpty())
 	{
 		SVN svn;
-		URL = CUnicodeUtils::GetUTF8(svn.GetRepositoryRootAndUUID(
-										CTSVNPath(info.url), info.reposUUID));
+		URL = CUnicodeUtils::GetUTF8 
+				(svn.GetRepositoryRootAndUUID ( CTSVNPath (info.url)
+											  , info.reposUUID));
 	}
-
-	assert(!info.reposUUID.IsEmpty());
-	cache = caches->GetCache (info.reposUUID);
 
 	if (URL.IsEmpty())
 		URL = CUnicodeUtils::GetUTF8 (info.reposRoot);
+
+	// load / create cache
+
+	assert(!info.reposUUID.IsEmpty());
+	if (caches != NULL)
+	{
+		cache = caches->GetCache (info.reposUUID);
+	}
+	else
+	{
+		delete tempCache;
+		tempCache = new CCachedLogInfo(L"");
+
+		cache = tempCache;
+	}
 
 	// workaround for 1.2.x (and older) working copies
 
@@ -635,7 +696,7 @@ revision_t CCacheLogQuery::DecodeRevision ( const CTSVNPath& path
 		throw SVNError ( SVN_ERR_CLIENT_BAD_REVISION
 					   , "Invalid revision passed to Log().");
 
-	// efficently decode standard cases: revNum, HEAD, BASE/WORKING
+	// efficiently decode standard cases: revNum, HEAD, BASE/WORKING
 
 	switch (revision.GetKind())
 	{
@@ -696,6 +757,7 @@ CTSVNPath CCacheLogQuery::GetPath (const CTSVNPathList& targets) const
 CCacheLogQuery::CCacheLogQuery (CLogCachePool* caches, ILogQuery* svnQuery)
 	: caches (caches)
 	, cache (NULL)
+	, tempCache (NULL)
 	, URL()
 	, svnQuery (svnQuery)
 {
@@ -703,6 +765,7 @@ CCacheLogQuery::CCacheLogQuery (CLogCachePool* caches, ILogQuery* svnQuery)
 
 CCacheLogQuery::~CCacheLogQuery(void)
 {
+	delete tempCache;
 }
 
 // query a section from log for multiple paths
@@ -714,7 +777,8 @@ void CCacheLogQuery::Log ( const CTSVNPathList& targets
 						 , const SVNRev& end
 						 , int limit
 						 , bool strictNodeHistory
-						 , ILogReceiver* receiver)
+						 , ILogReceiver* receiver
+                         , bool revs_only)
 {
 	// the path to log for
 
@@ -766,5 +830,14 @@ void CCacheLogQuery::Log ( const CTSVNPathList& targets
 				, startPath
 				, limit
 				, strictNodeHistory
-				, receiver);
+				, receiver
+                , revs_only);
+}
+
+// access to the cache
+
+CCachedLogInfo* CCacheLogQuery::GetCache()
+{
+	assert (cache != NULL);
+	return cache;
 }

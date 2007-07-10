@@ -31,12 +31,22 @@
 namespace LogCache
 {
 
-///////////////////////////////////////////////////////////////
-//
-// CDictionaryBasedTempPath
-//
-///////////////////////////////////////////////////////////////
-
+/**
+ * Represents a path that may not be stored explicitly
+ * in a path dictionary. This will happen frequently 
+ * when following a path's copy history, for instance.
+ *
+ * For that, it extends the CDictionaryBasedPath class with 
+ * a list of plain string path elements. So, it is always as
+ * sub-path of some dictionary based path.
+ *
+ * IsFullyCachedPath() returns true, if this list is empty.
+ *
+ * Use RepeatLookup() when the path dictionary got extended.
+ * This method will try to find and use a dictionary based path 
+ * that is closer to this one (i.e. requires less additional
+ * path elements).
+ */
 class CDictionaryBasedTempPath : private CDictionaryBasedPath
 {
 private:
@@ -100,6 +110,26 @@ public:
 	CDictionaryBasedTempPath GetCommonRoot 
 		(const CDictionaryBasedTempPath& rhs) const;
 
+	bool IsSameOrParentOf (const CDictionaryBasedPath& rhs) const
+	{
+		return IsFullyCachedPath() && inherited::IsSameOrParentOf (rhs);
+	}
+
+	bool IsSameOrParentOf (index_t rhsIndex) const
+	{
+		return IsFullyCachedPath() && inherited::IsSameOrParentOf (rhsIndex);
+	}
+
+	bool IsSameOrChildOf (const CDictionaryBasedPath& rhs) const
+	{
+		return inherited::IsSameOrParentOf (rhs);
+	}
+
+	bool IsSameOrChildOf (index_t rhsIndex) const
+	{
+		return inherited::IsSameOrChildOf (rhsIndex);
+	}
+
     // general comparison
 
     bool operator==(const CDictionaryBasedPath& rhs) const
@@ -122,7 +152,7 @@ public:
 
 	CDictionaryBasedTempPath ReplaceParent 
 		( const CDictionaryBasedPath& oldParent
-		, const CDictionaryBasedPath& newParent);
+		, const CDictionaryBasedPath& newParent) const;
 
 	// call this after cache updates:
 	// try to remove the leading entries from relPathElements, if possible

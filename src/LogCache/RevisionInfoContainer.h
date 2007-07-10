@@ -33,55 +33,34 @@
 namespace LogCache
 {
 
-///////////////////////////////////////////////////////////////
-//
-// CRevisionInfoContainer
-//
-//		stores all log information except the actual version
-//		number. So, please note, that the indices used here
-//		are not the revision number (revisons may come in
-//		in arbitrary order while new information will only
-//		be appended here).
-//
-//		Every entry holds the data for exactly one revision.
-//		You may add change paths and merged revision info 
-//		to the last revision, only.
-//
-//		Internal storage for revision "index" is as follows:
-//
-//			* comments[index], authors[authors[index]] and
-//			  timeStamps[index] contain the values passed to 
-//			  Insert()
-//
-//			* CDictionaryBasedPath (&paths, rootPaths[index])
-//			  is the common root path for all changed paths
-//			  in that revision (returns true in IsInvalid(),
-//			  if there are no changed paths for this revision).
-//
-//			* changesOffsets[index] .. changesOffsets[index+1]-1
-//			  is the range within changes and changedPaths 
-//			  that contains all changes to the revision
-//
-//			* copyFromOffsets[index] .. copyFromOffsets[index+1]-1
-//			  is the corresponding range within copyFromPaths 
-//			  and copyFromRevisions 
-//
-//			* mergedRevisionsOffsets[index] .. mergedRevisionsOffsets[index+1]-1
-//			  is the range within mergedFromPaths, mergedToPaths,
-//			  mergedRangeStarts and mergedRangeDeltas that 
-//			  contains the info of all merges done in this
-//			  revision.	Negative mergedRangeDeltas[] denote
-//			  an "undone" merge.
-//
-//		changes contains the TChangeAction values. If a non-
-//		empty fromPath has been passed to AddChange(), "1" is
-//		added to the action value. Only in that case, there
-//		will be entries in copyFromPaths and copyFromRevisions.
-//		(so, iterators need two differen change indices to
-//		represent their current position).
-//
-///////////////////////////////////////////////////////////////
-
+/**
+ * stores all log information except the actual revision number. So, please note,
+ * that the indices used here are not the revision number (revisions may come in
+ * in arbitrary order while new information will only be \b appended here).
+ *
+ * Every entry holds the data for exactly one revision.
+ * You may add change paths and merged revision info to the last revision only.
+ *
+ * Internal storage for revision "index" is as follows:
+ *  - comments[index], authors[authors[index]] and timeStamps[index] contain 
+ *    the values passed to Insert()
+ *  - CDictionaryBasedPath (&paths, rootPaths[index]) is the common root path 
+ *    for all changed paths in that revision (returns true in IsInvalid(), if 
+ *    there are no changed paths for this revision).
+ *  - changesOffsets[index] .. changesOffsets[index+1]-1 is the range within 
+ *    changes and changedPaths that contains all changes to the revision
+ *  - copyFromOffsets[index] .. copyFromOffsets[index+1]-1 is the corresponding 
+ *    range within copyFromPaths and copyFromRevisions
+ *  - mergedRevisionsOffsets[index] .. mergedRevisionsOffsets[index+1]-1
+ *    is the range within mergedFromPaths, mergedToPaths, mergedRangeStarts and 
+ *    mergedRangeDeltas that contains the info of all merges done in this
+ *    revision. Negative mergedRangeDeltas[] denote an "undone" merge.
+ *
+ * changes contains the TChangeAction values. If a non-empty fromPath has been 
+ * passed to AddChange(), "1" is added to the action value. Only in that case, 
+ * there will be entries in copyFromPaths and copyFromRevisions. (so, iterators 
+ * need two differen change indices to represent their current position).
+ */
 class CRevisionInfoContainer
 {
 private:
@@ -245,9 +224,38 @@ public:
 
 		// general status (points to an action)
 
+<<<<<<< .working
 		bool IsValid() const;
+=======
+		index_t GetPathID() const
+		{
+			assert (IsValid());
+			return container->changedPaths[changeOffset];
+		}
 
+		CDictionaryBasedPath GetFromPath() const
+		{
+			assert (HasFromPath());
+			index_t pathID = container->copyFromPaths [copyFromOffset];
+			return CDictionaryBasedPath (&container->paths, pathID);
+		}
+>>>>>>> .merge-right.r9937
+
+<<<<<<< .working
 		// move pointer
+=======
+		index_t GetFromPathID() const
+		{
+			assert (HasFromPath());
+			return container->copyFromPaths [copyFromOffset];
+		}
+
+		revision_t GetFromRevision() const
+		{
+			assert (HasFromPath());
+			return container->copyFromRevisions [copyFromOffset];
+		}
+>>>>>>> .merge-right.r9937
 
 		CChangesIterator& operator++();		// prefix
 		CChangesIterator operator++(int);	// postfix

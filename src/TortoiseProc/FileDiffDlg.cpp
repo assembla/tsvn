@@ -531,14 +531,12 @@ void CFileDiffDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 				if (m_cFileList.GetSelectedCount() > 0)
 				{
 					// ask where to save the list
-					OPENFILENAME ofn;		// common dialog box structure
+					OPENFILENAME ofn = {0};				// common dialog box structure
 					CString temp;
 					CTSVNPath savePath;
 
-					TCHAR szFile[MAX_PATH];  // buffer for file name
-					ZeroMemory(szFile, sizeof(szFile));
+					TCHAR szFile[MAX_PATH] = {0};		// buffer for file name
 					// Initialize OPENFILENAME
-					ZeroMemory(&ofn, sizeof(OPENFILENAME));
 					ofn.lStructSize = sizeof(OPENFILENAME);
 					ofn.hwndOwner = m_hWnd;
 					ofn.lpstrFile = szFile;
@@ -762,8 +760,8 @@ void CFileDiffDlg::SetURLLabels()
 	m_cRev1Btn.SetWindowText(m_rev1.ToString());
 	m_cRev2Btn.SetWindowText(m_rev2.ToString());
 
-	GetDlgItem(IDC_FIRSTURL)->SetWindowText(m_path1.GetSVNPathString());
-	GetDlgItem(IDC_SECONDURL)->SetWindowText(m_bDoPegDiff ? m_path1.GetSVNPathString() : m_path2.GetSVNPathString());
+	SetDlgItemText(IDC_FIRSTURL, m_path1.GetSVNPathString());
+	SetDlgItemText(IDC_SECONDURL, m_bDoPegDiff ? m_path1.GetSVNPathString() : m_path2.GetSVNPathString());
 	m_tooltips.AddTool(IDC_FIRSTURL, m_path1.GetSVNPathString());
 	m_tooltips.AddTool(IDC_SECONDURL, m_bDoPegDiff ? m_path1.GetSVNPathString() : m_path2.GetSVNPathString());
 }

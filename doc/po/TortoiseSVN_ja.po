@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2005-08-30 15:16GMT Daylight Time\n"
-"PO-Revision-Date: 2007-06-25 21:07+0900\n"
+"PO-Revision-Date: 2007-07-10 03:02+0900\n"
 "Last-Translator: KURASAWA Nozomu <nabetaro@caldron.jp>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1578,8 +1578,8 @@ msgid "Note that checking every path can be an expensive operation, particularly
 msgstr "すべてのパスをチェックするのは、(特にリビジョンログに関して) 時間がかかる操作だということに注意してください。サーバは、リビジョンごとにすべてのパスを変更があるかチェックし、そこが読み込めるかどうかをチェックします。リビジョンにあるファイルが多くなれば、時間をどんどん消費してしまいます。"
 
 #: source/TortoiseSVN_en.xml:2091(para)
-msgid "Authentication and authorizarion are separate processes. If a user wants to gain access to a repository path, she has to meet <emphasis>both</emphasis>, the usual authentication requirements and the authorization requirements of the access file."
-msgstr "認証と許可は独立したプロセスです。ユーザがリポジトリパスへアクセスしたい場合、通常の認証条件とファイルへのアクセス許可条件を<emphasis>両方</emphasis>満たさなくてはなりません。"
+msgid "Authentication and authorization are separate processes. If a user wants to gain access to a repository path, she has to meet <emphasis>both</emphasis>, the usual authentication requirements and the authorization requirements of the access file."
+msgstr "認証 (authentication) と許可 (authorization) は独立したプロセスです。ユーザがリポジトリパスへアクセスしたい場合、通常の認証条件とファイルへのアクセス許可条件を<emphasis>両方</emphasis>満たさなくてはなりません。"
 
 #: source/TortoiseSVN_en.xml:2099(title)
 msgid "Authentication With a Windows Domain"
@@ -1734,12 +1734,12 @@ msgstr "Windows ドメイン認証と <literal>passwd</literal> ファイル両�
 #: source/TortoiseSVN_en.xml:2302(para)
 msgid ""
 "To enable both Windows domain and passwd file authentication, add the following entries within the <literal>&lt;Location&gt;</literal> block of your Apache config file: <screen>\n"
-"AuthAthoritative Off\n"
+"AuthAuthoritative Off\n"
 "SSPIAuthoritative Off\n"
 "</screen>"
 msgstr ""
 "Windows ドメイン認証と passwd ファイル認証の両方を有効にするには、Apache 設定ファイルの <literal>&lt;Location&gt;</literal> ブロックに以下のエントリを追加してください。<screen>\n"
-"AuthAthoritative Off\n"
+"AuthAuthoritative Off\n"
 "SSPIAuthoritative Off\n"
 "</screen>"
 
@@ -3599,7 +3599,7 @@ msgstr "関連のない複数のタスクを一度に処理する場合、変更
 
 #: source/TortoiseSVN_en.xml:4980(para)
 msgid "At the bottom of the dialog you can see a summary of the range of repository revisions in use in your working copy. These are the <literal>commit</literal> revisions, not the <literal>update</literal> revisions; they represent the range of revisions where these files were last committed, not the revisions to which they have been updated. Note that the revision range shown applies only to the items displayed, not to the entire working copy. If you want to see that information for the whole working copy you must check the <guilabel>Show unmodified files</guilabel> checkbox."
-msgstr ""
+msgstr "ダイアログの下部に、作業コピーで使われている、リポジトリリビジョンの範囲の概要を表示しています。これは <literal>更新</literal> リビジョンではなく <literal>コミット</literal> リビジョンで、ファイルが更新されたリビジョンではなく、ファイルが最後にコミットされた時のリビジョン範囲を表しています。リビジョン範囲は作業コピー全体ではなく、表示されている項目のみに対して表していることに注意してください。作業コピー全体に対してこの情報を表示する場合は、<guilabel>未変更ファイルを表示</guilabel> チェックボックスにチェックを入れなければなりません。"
 
 #: source/TortoiseSVN_en.xml:4991(para)
 msgid "If you want a flat view of your working copy, i.e. showing all files and folders at every level of the folder hierarchy, then the <guilabel>Check for Modifications</guilabel> dialog is the easiest way to achieve that. Just check the <guilabel>Show unmodified files</guilabel> checkbox to show all files in your working copy."
@@ -3679,11 +3679,11 @@ msgstr "前述の 4 つのキーワードの組み合わせたもの。"
 
 #: source/TortoiseSVN_en.xml:5050(para)
 msgid "Subversion supports CVS-like keyword expansion which can be used to embed filename and revision information within the file itself. Keywords currently supported are: <placeholder-1/>"
-msgstr ""
+msgstr "Subversion は、ファイル自身にファイル名やリビジョン情報を埋め込む CVS 風キーワード展開をサポートしています。現在キーワードは以下のものをサポートしています。<placeholder-1/>"
 
 #: source/TortoiseSVN_en.xml:5101(para)
 msgid "To find out how to use these keywords, look at the <ulink url=\"http://svnbook.red-bean.com/en/1.2/svn.advanced.props.html#svn.advanced.props.special.keywords\"><citetitle>svn:keywords section</citetitle></ulink> in the Subversion book, which gives a full description of these keywords and how to enable and use them."
-msgstr ""
+msgstr "以上のキーワードを使用法については、Subversion book の <ulink url=\"http://svnbook.red-bean.com/en/1.2/svn.advanced.props.html#svn.advanced.props.special.keywords\"><citetitle>svn:keywords section</citetitle></ulink> で、キーワードの説明とその有効化・利用法の説明をしています。 (訳注 日本語では <ulink url=\"http://subversion.bluegate.org/doc/book.html\"><citetitle>http://subversion.bluegate.org/doc/book.html</citetitle></ulink> で読めます)"
 
 #: source/TortoiseSVN_en.xml:5112(title)
 msgid "Revision Log Dialog"
@@ -3751,7 +3751,7 @@ msgstr "リビジョンログアクション"
 
 #: source/TortoiseSVN_en.xml:5191(para)
 msgid "The top pane has an <guilabel>Actions</guilabel> column containing icons that summarize what has been done in that revision. There are four different icons, each shown in its own column."
-msgstr ""
+msgstr "上部ペインには、そのリビジョンで何が行われたかをまとめた <guilabel>アクション</guilabel> 列があります。4 つのアイコンが、それぞれ 1 列ずつ表示されます。"
 
 #: source/TortoiseSVN_en.xml:5196(para)
 msgid "<graphic fileref=\"../images/ActionModifiedIcon.png\"/> If a revision modified a file or directory, the <literal>modified</literal> icon is shown in the first column."
@@ -3822,9 +3822,8 @@ msgid "Revert changes from which were made in the selected revision. The changes
 msgstr "選択したリビジョンの変更を取り消します。作業コピーの変更が取り消されるので、この操作はリポジトリ全体には影響を<emphasis>及ぼしません</emphasis>! そのリビジョンのみの変更を元に戻すということに注意してください。以前のリビジョンで作業コピーのファイル全体を置き換えるわけではありません。他に関係ない変更をおこなってから、以前の変更を元に戻すのに便利です。ローカルで変更する場合は、このコマンドは作業コピーに変更をマージします。"
 
 #: source/TortoiseSVN_en.xml:5320(para)
-#, fuzzy
 msgid "Revert to an earlier revision. If you have made several changes, and then decide that you really want to go back to how things were in revision N, this is the command you need. Again, the changes are reverted in your working copy so this operation does <emphasis>not</emphasis> affect the repository until you commit the changes. Note that this will undo <emphasis>all</emphasis> changes made after the selected revision, replacing the file/folder with the earlier version. If you have made local changes, this command will merge these changes into your working copy."
-msgstr "以前のリビジョンに変更を戻します。いくつか変更を行っており、本当にリビジョン N へ戻したい場合、このコマンドが必要です。繰り返しますが、変更の取り消しは作業コピーで行われますので、変更をコミットするまでこの操作はリポジトリに影響を与えません。これは、ファイル・フォルダを以前のリビジョンに置き換えて、選択したリビジョン以降の変更をすべて取り消してしまうことに注意してください。"
+msgstr "以前のリビジョンに変更を戻します。既にいくつか変更を行っており、本当にリビジョン N へ戻したい場合、このコマンドが必要です。繰り返しますが、変更の取り消しは作業コピーで行われますので、変更をコミットするまでこの操作はリポジトリに影響を <emphasis>与えません</emphasis>。これは、ファイル・フォルダを以前のリビジョンに置き換えて、選択したリビジョン以降の変更を <emphasis>すべて</emphasis> 取り消してしまうことに注意してください。ローカルで変更している場合、このコマンドはその変更を作業コピーにマージします。"
 
 #: source/TortoiseSVN_en.xml:5334(para)
 msgid "Make a fresh checkout of the selected folder at the selected revision. This brings up a dialog for you to confirm the URL and revision, and select a location for the checkout."
@@ -3941,7 +3940,7 @@ msgstr "通常、このオプションにチェック付けないままにして
 
 #: source/TortoiseSVN_en.xml:5512(para)
 msgid "When the Show Log dialog is invoked from within the Merge dialog, the box is always checked by default. This is because merging is most often looking at changes on branches, and going back beyond the root of the branch does not make sense in that instance."
-msgstr "マージダイアログからログダイアログを表示すると、このチェックボックスは、デフォルトでは常にチェックされています。これはマージがブランチの変更を調べるためで、ブランチのルートを越えて戻るようなことは、このインスタンスでは理解できません。"
+msgstr "マージダイアログからログ参照ダイアログを表示すると、このチェックボックスは、デフォルトでは常にチェックされています。これはマージがブランチの変更を調べるためで、ブランチのルートを越えて戻るようなことは、このインスタンスでは理解できません。"
 
 #: source/TortoiseSVN_en.xml:5519(para)
 msgid "Note that Subversion currently implements renaming as a copy/delete pair, so renaming a file or folder will also cause the log display to stop if this option is checked."
@@ -4249,7 +4248,7 @@ msgstr "イメージをオーバーレイしている場合、上部のスライ
 
 #: source/TortoiseSVN_en.xml:5964(para)
 msgid "The button above the slider toggles between two preset blends, indicated by the markers on either side of the blend slider. By default one is at the top and the other at the bottom, so the toggle button just switches between one image and the other. You can move the markers to choose the two blend values that the toggle button will use."
-msgstr ""
+msgstr "スライダの上にあるボタンで、透明度スライダの両端にしてある、定義済み透明度を切り替えられます。デフォルトでは、片方が前面になりますが、トグルボタンでそれを逆にできます。マーカを動かして、2 つの透明度の値を変更できます。"
 
 #: source/TortoiseSVN_en.xml:5973(title)
 msgid "External Diff/Merge Tools"
@@ -4400,15 +4399,15 @@ msgstr "ファイルのコピー"
 
 #: source/TortoiseSVN_en.xml:6182(para)
 msgid "It often happens that you already have the files you need in another project in your repository, and you simply want to copy them across. You could simply copy the files and add them as described above, but that would not give you any history. And if you subsequently fix a bug in the original files, you can only merge the fix automatically if the new copy is related to the original in Subversion."
-msgstr ""
+msgstr "既存ファイルを、リポジトリ内の別プロジェクトに持っていかねばならないことがしばしばあり、単純にコピーしたくなると思います。既に述べたように、単純にコピーした上で、そのファイルを追加することもできますが、それまでの履歴を失ってしまいます。また、後でオリジナルファイルにバグ修正を行った場合、Subversion 内で新しいコピーがオリジナルと関連付いている場合に限り、自動的に修正をマージできます。"
 
 #: source/TortoiseSVN_en.xml:6190(para)
 msgid "The easiest way to copy files and folders from within a working copy is to use the right-drag menu. When you <action>right-drag</action> a file or folder from one working copy to another, or even within the same folder, a context menu appears when you release the mouse. <placeholder-1/> Now you can copy existing versioned content to a new location, possibly renaming it at the same time."
-msgstr ""
+msgstr "ファイルやフォルダを、もっとも簡単に作業コピーからコピーする方法は、右ドラッグメニューを使うことです。ファイルやフォルダを、ある作業コピーから他の作業コピーや同じフォルダへ <action>右ドラッグ</action> すると、マウスのボタンを放すと同時にコンテキストメニューが現れます。<placeholder-1/> これで既存のバージョン管理下の内容を、新しい場所にコピーできました。必要なら同時に名前の変更もできます。"
 
 #: source/TortoiseSVN_en.xml:6202(para)
 msgid "You can also use the repository browser to locate content you want, and copy it into your working copy directly from the repository. Refer to <xref linkend=\"tsvn-dug-repobrowser\"/> to find out more."
-msgstr ""
+msgstr "また、リポジトリブラウザを用いて、ご希望の場所に配置したり、リポジトリから直接作業コピーにコピーできます。詳細は <xref linkend=\"tsvn-dug-repobrowser\"/> をご覧ください。"
 
 #: source/TortoiseSVN_en.xml:6209(title)
 msgid "Ignoring Files And Directories"
@@ -4431,9 +4430,8 @@ msgid "If you <action>right click</action> on a single unversioned file, and sel
 msgstr "バージョン管理外のファイルで <action>右クリック</action> し、コンテキストメニューで<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>無視リストに追加</guimenuitem></menuchoice> コマンドを選択すると、選択したファイルのみか、同じ拡張子を持つファイルすべてかを選択するサブメニューを表示します。複数のファイルを選択すると、サブメニューを表示せず、指定したファイル・フォルダを追加します。"
 
 #: source/TortoiseSVN_en.xml:6245(para)
-#, fuzzy
 msgid "If you want to remove one or more items from the ignore list, <action>right click</action> on those items and select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Remove from Ignore List</guimenuitem></menuchoice> You can also access a folder's <literal>svn:ignore</literal> property directly. That allows you to specify more general patterns using filename globbing, described in the section below. Read <xref linkend=\"tsvn-dug-propertypage\"/> for more information on setting properties directly. Please be aware that each ignore pattern has to be placed on a separate line. Separating them by spaces does not work."
-msgstr "無視リストから項目を削除したい場合、その項目で <action>右クリック</action> し、<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>無視リストから削除</guimenuitem></menuchoice> を選択してください。フォルダの <literal>svn:ignore</literal> プロパティに直接アクセスすることもできます。これで、ファイル名展開にもっと一般的なパターンが指定ができます。プロパティを直接指定するということについては、<xref linkend=\"tsvn-dug-propertypage\"/> をご覧ください。"
+msgstr "無視リストから項目を削除したい場合、その項目で <action>右クリック</action> し、<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>無視リストから削除</guimenuitem></menuchoice> を選択してください。フォルダの <literal>svn:ignore</literal> プロパティに直接アクセスすることもできます。これにより、ファイル名展開にもっと一般的なパターンが指定ができます。プロパティを直接指定することについては、<xref linkend=\"tsvn-dug-propertypage\"/> をご覧ください。無視パターンは行ごとに区切らなければならないことをご承知おきください。空白で区切ったパターンは動作しません。"
 
 #: source/TortoiseSVN_en.xml:6260(title)
 msgid "The Global Ignore List"
@@ -4493,7 +4491,7 @@ msgstr "Subversion の無視パターンは、ファイル名展開を使用で�
 
 #: source/TortoiseSVN_en.xml:6330(para)
 msgid "Subversion uses the <literal>/</literal> as the path delimiter in all internal pathnames, and all pattern matching is done against this style of path names. If you want to use a path delimiter in your ignore pattern, be sure to use <literal>/</literal>, and not the Windows backslash."
-msgstr ""
+msgstr "Subversion は、内部のパス名すべてで、パス区切り文字に <literal>/</literal> を使用し、パス名のパターンマッチすべてをこの形で行います。無視パターンにパス区切り文字を使用する場合、必ず <literal>/</literal> を使用し、Windows の ￥ を使用しないでください。"
 
 #: source/TortoiseSVN_en.xml:6336(para)
 msgid "Pattern matching is case sensitive, which can cause problems on Windows. You can force case insensitivity the hard way by pairing characters, eg. to ignore <literal>*.tmp</literal> regardless of case, you could use a pattern like <literal>*.[Tt][Mm][Pp]</literal>."
@@ -4501,16 +4499,15 @@ msgstr "パターンマッチは大文字小文字を区別しますが、これ
 
 #: source/TortoiseSVN_en.xml:6343(para)
 msgid "Subversion uses this pattern matching against every path presented to it for action. These paths are generally relative to the directory being acted upon for import, add, commit, etc. The matching pattern therefore has to take account of the fact that there may or may not be path components before the filename."
-msgstr ""
+msgstr "Subversion は上記のパターンマッチを、アクションで与えられたパスすべてに対して行います。このパスは一般的に、インポート・追加・コミットなどで実行されるディレクトリに関係します。そのためパターンマッチは、ファイル名の前にパス部分がある可能性を考慮しなければなりません。"
 
 #: source/TortoiseSVN_en.xml:6350(para)
-#, fuzzy
 msgid "If directory names are present in a path, the matching algorithm will not trim them off, so pattern <literal>Fred.*</literal> will match <literal>Fred.c</literal> but not <literal>subdir/Fred.c</literal>. This is significant if you add a folder which contains some files that you want to be ignored, because those filenames will be preceded with the folder name when Subversion compares them with the ignore pattern."
-msgstr "パスにディレクトリ名が含まれる場合、マッチングの際に含んで処理されます。つまり、パターン <literal>Fred.*</literal> は<literal>Fred.c</literal> にはマッチしますが、<literal>subdir/Fred.c</literal> にはマッチしません。無視したいファイルを含むフォルダを追加する際には、そのファイル名にフォルダ名が付加されますので、上記は重要な問題になります。"
+msgstr "パスにディレクトリ名が含まれる場合、マッチングアルゴリズムはこれを取り除きません。つまり、パターン <literal>Fred.*</literal> は<literal>Fred.c</literal> にはマッチしますが、<literal>subdir/Fred.c</literal> にはマッチしません。無視したいファイルを含むフォルダを追加する場合、Subversionが無視パターンと比較する際に、そのファイル名の前にはフォルダ名がありますので、上記は重要な問題になります。"
 
 #: source/TortoiseSVN_en.xml:6359(para)
 msgid "The <literal>/</literal> character is not treated in any special way for pattern matching purposes, so the pattern <literal>abc*xyz</literal> would match <literal>abcdxyz</literal> but also <literal>abcdir/subdir/anything/morexyz</literal>."
-msgstr ""
+msgstr "文字 <literal>/</literal> はパターンマッチにおいて特別扱いしません。そのため、<literal>abc*xyz</literal> は、<literal>abcdxyz</literal> だけでなく <literal>abcdir/subdir/anything/morexyz</literal> にもマッチします。"
 
 #: source/TortoiseSVN_en.xml:6365(para)
 msgid "To ignore all <literal>CVS</literal> folders you should either specify a pattern of <literal>*CVS</literal> or better, the pair <literal>CVS */CVS</literal>. The first option works, but would also exclude something called <literal>ThisIsNotCVS</literal>. Using <literal>*/CVS</literal> alone will not work on an immediate child <literal>CVS</literal> folder, and <literal>CVS</literal> alone will not work on subfolders."
@@ -4554,12 +4551,11 @@ msgstr "TSVN でファイル・ディレクトリを削除すると、そのフ�
 
 #: source/TortoiseSVN_en.xml:6418(para)
 msgid "When you <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> a file, it is removed from your working copy immediately as well as being marked for deletion in the repository on next commit. When you <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> a folder, it remains in your working copy, but the overlay changes to indicate that it is marked for deletion. This difference in behaviour is a part of Subversion, not TortoiseSVN."
-msgstr ""
+msgstr "ファイルを <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>削除</guimenuitem></menuchoice> すると、作業コピーからすぐに削除し、次のコミットでリポジトリから削除するようにマークを付けます。フォルダを <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>削除</guimenuitem></menuchoice> すると、作業コピーには残りますが、オーバーレイアイコンが変わり削除のマークが付きます。この違いは、Subversion の部分によるもので、TortoiseSVN によるものではありません。"
 
 #: source/TortoiseSVN_en.xml:6435(para)
-#, fuzzy
 msgid "If you want to delete an item from the repository, but keep it locally as an unversioned file/folder, use <menuchoice><guimenu>Extended Context Menu</guimenu><guimenuitem>Delete (keep local)</guimenuitem></menuchoice>. You have to hold the <keycap>Shift</keycap> while right clicking on the item in the explorer list pane (right pane) in order to see this in the extended context menu."
-msgstr "TortoiseSVN はそのような場合に <menuchoice><guimenu>拡張コンテキストメニュー</guimenu><guimenuitem>バージョン管理外のファイルを削除する...</guimenuitem></menuchoice> を使用するという選択肢を提供しています。エクスプローラのリストペイン (右ペイン) で <keycap>Shift</keycap> キーを押したまま、フォルダを右クリックすると、拡張コンテキストメニューを表示します。これにより作業コピーにあるバージョン管理外ファイルの一覧ダイアログが現れます。削除するファイルを選択状態・未選択状態にできます。"
+msgstr "リポジトリから削除したい、でもバージョン管理外のファイル・フォルダとして保持しておきたい場合には、<menuchoice><guimenu>Extended Context Menu</guimenu><guimenuitem>削除 - ローカルファイルを保持</guimenuitem></menuchoice> をお使いください。エクスプローラのリストペイン (右ペイン) で <keycap>Shift</keycap> キーを押したまま、項目を右クリックすると、拡張コンテキストメニューを表示します。"
 
 #: source/TortoiseSVN_en.xml:6451(para)
 msgid "select the files or directories you want to move"
@@ -4871,20 +4867,19 @@ msgstr "<literal>tsvn:logtemplate</literal> はログメッセージを整形す
 
 #: source/TortoiseSVN_en.xml:6957(para)
 msgid "Subversion allows you to set <quote>autoprops</quote> which will be applied to newly added or imported files, based on the file extension. This depends on every client having set appropriate autoprops in their subversion config file. <literal>tsvn:autoprops</literal> can be set on folders and these will be merged with the user's local autoprops when importing or adding files."
-msgstr ""
+msgstr "新しくファイルの追加やインポートした際に、拡張子を元にプロパティを付加するように、Subversion は <quote>autoprops</quote> を設定できます。これはクライアントごとに、Subversion 設定ファイルに適切に autoprops が設定されているかどうかに依存します。<literal>tsvn:autoprops</literal> をフォルダに設定しておくと、インポートやファイル追加の際に、ユーザのローカルに autoprops をマージするようになります。"
 
 #: source/TortoiseSVN_en.xml:6966(para)
 msgid "If there is a conflict between the local autoprops and <literal>tsvn:autoprops</literal>, the project settings take precedence because they are specific to that project."
-msgstr ""
+msgstr "ローカルの autoprops と <literal>tsvn:autoprops</literal> が競合する場合は、プロジェクトごとに指定されている、プロジェクト設定を優先します。"
 
 #: source/TortoiseSVN_en.xml:6973(para)
 msgid "In the Commit dialog you have the option to paste in the list of changed files, including the status of each file (added, modified, etc). <literal>tsvn:logfilelistenglish</literal> defines whether the file status is inserted in english or in the localized language. If the property is not set, the default is <literal>true</literal>."
 msgstr "コミットダイアログでは、変更したファイルをファイルごとに状態 (追加、変更、etc.) 込みで張り付けるオプションがあります。<literal>tsvn:logfilelistenglish</literal> は状態を英語で挿入するか、各国後で挿入するかを定義できます。このプロパティがセットされていなければ、デフォルトでは <literal>true</literal> となります。"
 
 #: source/TortoiseSVN_en.xml:6984(para)
-#, fuzzy
 msgid "TortoiseSVN can use spell checker modules which are also used by OpenOffice and Mozilla. If you have those installed this property will determine which spell checker to use, i.e. in which language the log messages for your project should be written. <literal>tsvn:projectlanguage</literal> sets the language module the spell checking engine should use when you enter a log message. You can find the values for your language on this page: <ulink url=\"http://msdn2.microsoft.com/en-us/library/ms776260.aspx\"><citetitle>MSDN: Language Identifiers</citetitle></ulink>."
-msgstr "TortoiseSVN は OpenOffice や Mozilla で使われるスペルチェッカモジュールを使用できます。これがインストールされている場合、このプロパティでどのスペルチェッカを使用するか決定します。つまり、このプロジェクトのログメッセージはどの言語で書かれていなければならないかということです。<literal>tsvn:projectlanguage</literal> では、ログメッセージ入力時にスペルチェックエンジンがどの言語でチェックを行うかを設定します。あなたの言語の値は <ulink url=\"http://msdn.microsoft.com/library/default.asp?url=/library/en-us/intl/nls_238z.asp\"><citetitle>MSDN: Language Identifiers</citetitle></ulink> で確認できます。"
+msgstr "TortoiseSVN は OpenOffice や Mozilla で使われるスペルチェッカモジュールを使用できます。スペルチェッカをインストールしている場合、このプロパティでどのスペルチェッカを使用するか決定します。つまり、どの言語でこのプロジェクトのログメッセージを書くかということでもあります。<literal>tsvn:projectlanguage</literal> では、ログメッセージ入力時にスペルチェックエンジンがどの言語でチェックを行うかを設定します。あなたの言語の値は <ulink url=\"http://msdn2.microsoft.com/en-us/library/ms776260.aspx\"><citetitle>MSDN: Language Identifiers</citetitle></ulink> で確認できます。"
 
 #: source/TortoiseSVN_en.xml:6998(para)
 msgid "You can enter this value in decimal, or in hexadecimal if prefixed with <literal>0x</literal>. For example English (US) can be entered as <literal>0x0409</literal> or <literal>1033</literal>."
@@ -4927,7 +4922,7 @@ msgstr "TortoiseSVN はいくつかの Web ベースリポジトリブラウザ�
 
 #: source/TortoiseSVN_en.xml:7061(para)
 msgid "Although the <literal>tsvn:xxx</literal> properties are extremely useful, they only work with TortoiseSVN, and some will only work in newer versions of TortoiseSVN. If people working on your project use a variety of Subversion clients, or possibly have old versions of TortoiseSVN, you may want to use repository hooks to enforce project policies. <literal>tsvn:</literal> properties can only help to implement a policy, they cannot enforce it."
-msgstr ""
+msgstr "<literal>tsvn:xxx</literal> プロパティは非常に便利ですが、TortoiseSVN でしか動作せず、またいくつかは TortoiseSVN の新しいバージョンでしか動作しません。プロジェクトのメンバが様々な Subversion のクライアントを使用している場合や、古い TortoiseSVN しか持てない場合、プロジェクトポリシーを強制するのに、リポジトリフックを使用することになるでしょう。<literal>tsvn:</literal> プロパティは、ポリシー実装の補助にしかならず、強制することはできません。"
 
 #: source/TortoiseSVN_en.xml:7074(title)
 msgid "Branching / Tagging"
@@ -5156,7 +5151,7 @@ msgstr "必要なリビジョンの範囲を選択する最も簡単な方法は
 
 #: source/TortoiseSVN_en.xml:7447(para)
 msgid "When the <guilabel>Use \"From:\" URL</guilabel> checkbox is checked, only one <guibutton>Show Log</guibutton> button is enabled. This is because the Show Log dialog sets both <guilabel>From:</guilabel> and <guilabel>To:</guilabel> revisions, so you need to use the multiple selection method outlined above."
-msgstr "<guilabel>\"元:\" URL を利用する</guilabel> チェックボックスにチェックが入っている場合、<guibutton>ログを表示</guibutton> ボタンはひとつだけ有効になります。これはログダイアログが <guilabel>元:</guilabel> リビジョンと <guilabel>先:</guilabel> リビジョン双方に設定するためです。ですから上で説明している複数選択を行う必要があります。"
+msgstr "<guilabel>\"元:\" URL を利用する</guilabel> チェックボックスにチェックが入っている場合、<guibutton>ログを表示</guibutton> ボタンはひとつだけ有効になります。これはログ参照ダイアログが <guilabel>元:</guilabel> リビジョンと <guilabel>先:</guilabel> リビジョン双方に設定するためです。ですから上で説明している複数選択を行う必要があります。"
 
 #: source/TortoiseSVN_en.xml:7455(para)
 msgid "If you have already merged some changes from this branch, hopefully you will have made a note of the last revision merged in the log message when you committed the change. In that case, you can use <guibutton>Show Log</guibutton> for the Working Copy to trace that log message. Use the end point of the last merge as the start point for this merge. For example, if you have merged revisions 37 to 39 last time, then the start point for this merge should be revision 39."
@@ -5440,9 +5435,8 @@ msgid "Applying a Patch File"
 msgstr "パッチファイルの適用"
 
 #: source/TortoiseSVN_en.xml:7957(para)
-#, fuzzy
 msgid "Patch files are applied to your working copy. This should be done from the same folder level as was used to create the patch. If you are not sure what this is, just look at the first line of the patch file. For example, if the first file being worked on was <filename>doc/source/english/chapter1.xml</filename> and the first line in the patchfile is <filename>Index: english/chapter1.xml</filename> then you need to apply the patch to the <filename>doc/source/</filename> folder. However, provided you are in the correct working copy, if you pick the wrong folder level, TSVN will notice and suggest the correct level."
-msgstr "作業コピーにパッチファイルを適用します。パッチを作成したフォルダと同じ階層で行う必要があります。よくわからなければ、パッチファイルの最初の行を見てください。たとえば、最初のファイルが <filename>doc/source/english/chapter1.xml</filename> に対するもので、パッチファイルの最初の行が <filename>Index: english/chapter1.xml</filename> なら、<filename>english</filename> フォルダでパッチを適用する必要があります。適切な作業コピーを使用していても、適用するフォルダ階層が間違っていると、TSVN は適切な階層を使用するよう注意を促します。"
+msgstr "作業コピーにパッチファイルを適用します。パッチを作成したフォルダと同じ階層で行う必要があります。よくわからなければ、パッチファイルの最初の行を見てください。たとえば、最初のファイルが <filename>doc/source/english/chapter1.xml</filename> に対するもので、パッチファイルの最初の行が <filename>Index: english/chapter1.xml</filename> なら、<filename>doc/source/</filename> フォルダでパッチを適用する必要があります。適切な作業コピーを使用していても、適用するフォルダ階層が間違っていると、TSVN は適切な階層を使用するよう注意を促します。"
 
 #: source/TortoiseSVN_en.xml:7971(para)
 msgid "In order to apply a patch file to your working copy, you need to have at least read access to the repository. The reason for this is that the merge program must reference the changes back to the revision against which they were made by the remote developer."
@@ -5542,7 +5536,7 @@ msgstr ""
 
 #: source/TortoiseSVN_en.xml:8137(para)
 msgid "Although TortoiseBlame has no settings dialog of its own, it uses the same font as TortoiseMerge, so if you want to change it, start TortoiseMerge and use the settings dialog there."
-msgstr ""
+msgstr "TortoiseBlame には設定ダイアログがありませんが、TortoiseMerge と同じフォントを使用します。変更の際には、TortoiseMerge を起動し、その設定ダイアログを使用してください。"
 
 #: source/TortoiseSVN_en.xml:8144(title)
 #: source/TortoiseSVN_en.xml:8169(term)
@@ -6145,9 +6139,8 @@ msgid "global ignore"
 msgstr "global ignore"
 
 #: source/TortoiseSVN_en.xml:9144(para)
-#, fuzzy
 msgid "Global ignore patterns are used to prevent unversioned files from showing up e.g. in the commit dialog. Files matching the patterns are also ignored by an import. Ignore files or directories by typing in the names or extensions. Patterns are separated by spaces e.g. <literal>*/bin */obj *.bak *.~?? *.jar *.[Tt]mp</literal>. Remember that these patterns may be used against paths which include N levels of parent directory. Setting ignore patterns for anything other than simple file extensions is not as trivial as it first appears, so be sure to read <xref linkend=\"tsvn-dug-ignore-glob\"/> for more information on the pattern-matching syntax, and how paths are checked."
-msgstr "共通無視パターンはバージョン管理外のファイルを、コミットダイアログなどに表示しないようにするのに使用します。パターンにマッチしたファイルはインポートでも無視されます。除外するファイルやディレクトリは、名前や拡張子で判断します。パターンは空白で区切り、<literal>*/bin */obj *.bak *.~?? *.jar *.[Tt]mp</literal> のようにします。最初の 2 つはディレクトリで、他の 4 つはファイルです。このパターンはファイル名の一致に使用します。詳細は <xref linkend=\"tsvn-dug-ignore-glob\"/> をご覧ください。"
+msgstr "共通無視パターンはバージョン管理外のファイルを、コミットダイアログなどに表示しないようにするのに使用します。パターンにマッチしたファイルはインポートでも無視されます。除外するファイルやディレクトリは、名前や拡張子で判断します。パターンは空白で区切り、<literal>*/bin */obj *.bak *.~?? *.jar *.[Tt]mp</literal> のようにします。以上のパターンは、N 階層の親ディレクトリを含むパスに対して使用されることをご承知ください。単純なファイル拡張子以外の無視パターンの設定は、前述ほど簡単ではありません。パターンマッチの文法やどのようにパスをチェックするかといった詳細情報は、<xref linkend=\"tsvn-dug-ignore-glob\"/> をご覧ください。"
 
 #: source/TortoiseSVN_en.xml:9158(para)
 msgid "Note that the ignore patterns you specify here will also affect other Subversion clients running on your PC, including the command line client."
@@ -6275,9 +6268,8 @@ msgid "Disadvantage: Status information of files and folders is not shown in Exp
 msgstr "欠点: ファイル・フォルダの状態情報は、エクスプローラに表示されません。作業コピーの変更点を見るには、\"変更のチェック\" ダイアログを使用しなければなりません。"
 
 #: source/TortoiseSVN_en.xml:9298(para)
-#, fuzzy
 msgid "Since it takes quite a while to fetch the status of a working copy, TortoiseSVN uses a cache to store the status so the explorer doesn't get hogged too much when showing the overlays. You can choose which type of cache TortoiseSVN should use according to your system and working copy size here: <placeholder-1/>"
-msgstr "作業コピーの状態を取得するには時間がかかるため、TortoiseSVN は状態をキャッシュに格納し、エクスプローラがオーバーレイアイコンを表示するのに、負荷がかからないようにします。TortoiseSVN が使用するキャッシュタイプを、自分のシステムや作業コピーのサイズで、以下から選択できます。<placeholder-1/>"
+msgstr "作業コピーの状態を取得するには時間がかかるため、エクスプローラがオーバーレイアイコンを表示するのに負荷がかからないように、TortoiseSVN は状態をキャッシュに格納します。システムや作業コピーのサイズをもとに、TortoiseSVN が使用するキャッシュタイプを以下から選択できます。<placeholder-1/>"
 
 #: source/TortoiseSVN_en.xml:9379(para)
 msgid "If you select the default option, you can also choose to mark folders as modified if they contain unversioned items. This could be useful for reminding you that you have created new files which are not yet versioned."
@@ -6707,7 +6699,7 @@ msgstr "キーワード、特にファイルの <literal>リビジョン</litera
 
 #: source/TortoiseSVN_en.xml:9964(para)
 msgid "You can also specify a different diff tool to use on Subversion properties. Since these tend to be short simple text strings, you may want to use a simpler more compact viewer."
-msgstr ""
+msgstr "Subversion のプロパティ用に別の diff ツールを指定することもできます。プロパティは短く簡単な文字列である傾向があるので、シンプルでもっとコンパクトなビューアを使いたくなるかもしれません。"
 
 #: source/TortoiseSVN_en.xml:9971(title)
 msgid "Merge Tool"
@@ -6845,7 +6837,7 @@ msgstr "ログメッセージ (ログ参照ダイアログ)"
 
 #: source/TortoiseSVN_en.xml:10155(para)
 msgid "TortoiseSVN caches log messages fetched by the Show Log dialog to save time when you next show the log. If someone else edits a log message and you already have that message cached, you will not see the change until you clear the cache. Log message caching is enabled on the <guilabel>Dialogs 1</guilabel> tab."
-msgstr ""
+msgstr "TortoiseSVN は、次回ログを参照した際の時間節約のため、ログ参照ダイアログが取得したログメッセージをキャッシュしています。メッセージがキャッシュされている状態で、他の誰かがログメッセージを編集した場合、キャッシュをクリアしないとその変更を参照できません。ログメッセージのキャッシュは<guilabel>ダイアログ 1</guilabel> タブで有効にできます。"
 
 #: source/TortoiseSVN_en.xml:10166(term)
 msgid "Dialog sizes and positions"
@@ -6932,7 +6924,7 @@ msgid "The Settings Dialog, Hook Scripts Page"
 msgstr "設定ダイアログ、フックスクリプトページ"
 
 #: source/TortoiseSVN_en.xml:10270(para)
-msgid "<placeholder-1/> This dialog allows you to set up hook scripts which will be executed automatically when certain Subversion actions are performed. As opposed to the hook scripts explained in <xref linkend=\"tsvn-repository-hooks\"/>, these scrips are executed locally on the client."
+msgid "<placeholder-1/> This dialog allows you to set up hook scripts which will be executed automatically when certain Subversion actions are performed. As opposed to the hook scripts explained in <xref linkend=\"tsvn-repository-hooks\"/>, these scripts are executed locally on the client."
 msgstr "<placeholder-1/> このダイアログでは、Subversion のアクションに合わせて自動的に実行される、フックスクリプトのセットアップを行えます。対照的に <xref linkend=\"tsvn-repository-hooks\"/> で説明しているフックスクリプトは、クライアントのローカルで実行されます。"
 
 #: source/TortoiseSVN_en.xml:10280(para)
@@ -8224,7 +8216,7 @@ msgid "/bugid:\"the bug id here\""
 msgstr "/bugid:\"the bug id here\""
 
 #: source/TortoiseSVN_en.xml:11818(entry)
-msgid "Opens the commit dialog. The path specifies the target directory or the list of files to commit. You can also specify the /logmsg switch to pass a predefined log message to the commit dialog. Or, if you don't want to pass the log message on the command line, use /logmsgfile:path, where <placeholder-1/> points to a file containing the log message. To prefill the bug ID box (in case you've set up integration with bugtrackers properly), you can use the <placeholder-2/> to do that."
+msgid "Opens the commit dialog. The path specifies the target directory or the list of files to commit. You can also specify the /logmsg switch to pass a predefined log message to the commit dialog. Or, if you don't want to pass the log message on the command line, use /logmsgfile:path, where <placeholder-1/> points to a file containing the log message. To pre-fill the bug ID box (in case you've set up integration with bugtrackers properly), you can use the <placeholder-2/> to do that."
 msgstr "コミットダイアログを開きます。コミットする対象ディレクトリかファイルリストを、パスに指定します。/logmsg スイッチで、コミットダイアログに渡す定義済みのログメッセージを指定することもできます。または、コマンドラインからログメッセージを渡したくなければ、/logmsgfile:path を使用してください。<placeholder-1/> にはログメッセージのファイルを指定します。(バグトラッカのプロパティで統合の設定をしてある場合) バグ ID ボックスをあらかじめ入力しておくには、<placeholder-2/> を使用できます。"
 
 #: source/TortoiseSVN_en.xml:11834(entry)
@@ -8299,7 +8291,7 @@ msgid "/path2"
 msgstr "/path2"
 
 #: source/TortoiseSVN_en.xml:11930(entry)
-msgid "Starts the external diff program specified in the TortoiseSVN settings. The <placeholder-1/> specifies the first file. If the option <placeholder-2/> is set, then the diff program is started with those two files. If <placeholder-3/> is ommitted, then the diff is done between the file in <placeholder-4/> and its BASE."
+msgid "Starts the external diff program specified in the TortoiseSVN settings. The <placeholder-1/> specifies the first file. If the option <placeholder-2/> is set, then the diff program is started with those two files. If <placeholder-3/> is omitted, then the diff is done between the file in <placeholder-4/> and its BASE."
 msgstr "TortoiseSVN 設定で指定した外部 diff プログラムを起動します。<placeholder-1/> には初めのファイルを指定します。<placeholder-2/> オプションを設定すると、その 2 ファイルに対して diff プログラムが起動します。<placeholder-3/> を省略すると、<placeholder-4/> とその BASE に対する diff を行います。"
 
 #: source/TortoiseSVN_en.xml:11943(entry)

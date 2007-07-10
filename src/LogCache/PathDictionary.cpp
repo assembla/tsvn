@@ -71,6 +71,11 @@ const char* CPathDictionary::GetPathElement (index_t index) const
 	return pathElements [paths [index].second];
 }
 
+index_t CPathDictionary::GetPathElementID (index_t index) const
+{
+	return paths [index].second;
+}
+
 index_t CPathDictionary::Find (index_t parent, const char* pathElement) const
 {
 	index_t pathElementIndex = pathElements.Find (pathElement);
@@ -260,24 +265,23 @@ CDictionaryBasedPath::CDictionaryBasedPath ( CPathDictionary* aDictionary
 	ParsePath (path, nextParent ? NULL : aDictionary);
 }
 
-bool CDictionaryBasedPath::IsSameOrParentOf (const CDictionaryBasedPath& rhs) const
+bool CDictionaryBasedPath::IsSameOrParentOf ( index_t lhsIndex
+											, index_t rhsIndex) const
 {
 	// the root is always a parent of / the same as rhs
 
-	if (index == 0)
+	if (lhsIndex == 0)
 		return true;
 
 	// crawl rhs up to the root until we find it to be equal to *this
 
-	for ( index_t rhsIndex = rhs.index
-		; rhsIndex != 0
-		; rhsIndex = dictionary->GetParent (rhsIndex))
+	for (; rhsIndex >= lhsIndex; rhsIndex = dictionary->GetParent (rhsIndex))
 	{
-		if (index == rhsIndex)
+		if (lhsIndex == rhsIndex)
 			return true;
 	}
 
-	// *this has not been found amoung rhs' parent paths
+	// *this has not been found among rhs' parent paths
 
 	return false;
 }
@@ -347,6 +351,21 @@ CDictionaryBasedPath CDictionaryBasedPath::GetCommonRoot (index_t rhsIndex) cons
 	}
 
 	return CDictionaryBasedPath (dictionary, lhsIndex);
+}
+
+bool CDictionaryBasedPath::Contains (index_t pathElementID) const
+{
+    for ( index_t pathIndex = index
+        ; pathIndex != 0
+        ; pathIndex = dictionary->GetParent (pathIndex))
+    {
+        if (dictionary->GetPathElementID (pathIndex) == pathElementID)
+            return true;
+    }
+
+    // not found
+
+    return false;
 }
 
 ///////////////////////////////////////////////////////////////

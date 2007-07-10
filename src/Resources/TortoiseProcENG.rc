@@ -59,6 +59,8 @@ IDI_REVGRAPH_DELETED    ICON                    "revgraph_deleted.ico"
 IDI_REVGRAPH_LASTCOMMIT ICON                    "revgraph_lastcommit.ico"
 IDI_REVGRAPH_RENAMED    ICON                    "revgraph_renamed.ico"
 IDI_REVGRAPH_REPLACED   ICON                    "revgraph_replaced.ico"
+IDI_REVGRAPH_SPLIT      ICON                    "revgraph_split.ico"
+IDI_REVGRAPH_TAGGED     ICON                    "revgraph_tag.ico"
 IDI_SAVEDDATA           ICON                    "saveddata.ico"
 IDI_GRAPHBAR            ICON                    "graph-bar.ico"
 IDI_GRAPHBARSTACKED     ICON                    "graph-bar-stacked.ico"
@@ -127,6 +129,11 @@ BEGIN
     SEPARATOR
     BUTTON      ID_VIEW_SHOWALLREVISIONS
     BUTTON      ID_VIEW_ARRANGEDBYPATH
+    BUTTON      ID_VIEW_TOPDOWN
+    BUTTON      ID_VIEW_SHOWHEAD
+    BUTTON      ID_VIEW_EXACTCOPYSOURCE
+    BUTTON      ID_VIEW_SPLITBRANCHES
+    BUTTON      ID_VIEW_FOLDTAGS
     SEPARATOR
     BUTTON      ID_VIEW_SHOWOVERVIEW
 END
@@ -255,7 +262,7 @@ BEGIN
     PUSHBUTTON      "&Help",IDHELP,243,169,50,14
 END
 
-IDD_LOGMESSAGE DIALOGEX 0, 0, 420, 318
+IDD_LOGMESSAGE DIALOGEX 0, 0, 420, 326
 STYLE DS_SETFONT | DS_SETFOREGROUND | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "Log Messages"
@@ -274,15 +281,16 @@ BEGIN
     CONTROL         "",IDC_SPLITTERBOTTOM,"Static",SS_BLACKFRAME,7,182,405,4
     CONTROL         "",IDC_LOGMSG,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | LVS_OWNERDATA | WS_BORDER | WS_TABSTOP,7,186,405,59
     CONTROL         "H&ide unrelated changed paths",IDC_HIDEPATHS,"Button",BS_AUTO3STATE | WS_TABSTOP,7,259,293,10
-    CONTROL         "",IDC_PROGRESS,"msctls_progress32",NOT WS_VISIBLE | WS_BORDER,7,277,349,9
-    PUSHBUTTON      "Show &All",IDC_GETALL,7,296,77,14
-    PUSHBUTTON      "&Next %ld",IDC_NEXTHUNDRED,89,296,64,14
-    CONTROL         "&Stop on copy/rename",IDC_CHECK_STOPONCOPY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,157,297,143,10
-    DEFPUSHBUTTON   "&OK",IDOK,304,296,52,14
+    CONTROL         "",IDC_PROGRESS,"msctls_progress32",NOT WS_VISIBLE | WS_BORDER,7,293,349,9
+    PUSHBUTTON      "Show &All",IDC_GETALL,7,304,77,14
+    PUSHBUTTON      "&Next %ld",IDC_NEXTHUNDRED,89,304,64,14
+    CONTROL         "&Stop on copy/rename",IDC_CHECK_STOPONCOPY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,270,293,10
+    DEFPUSHBUTTON   "&OK",IDOK,304,304,52,14
     PUSHBUTTON      "S&tatistics",IDC_STATBUTTON,362,257,50,14,WS_DISABLED
-    PUSHBUTTON      "&Help",IDHELP,362,276,50,14
-    PUSHBUTTON      "&Cancel",IDCANCEL,362,296,50,14
-    LTEXT           "",IDC_LOGINFO,7,248,349,8
+    PUSHBUTTON      "&Help",IDHELP,362,284,50,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,362,304,50,14
+    LTEXT           "",IDC_LOGINFO,7,248,405,8
+    CONTROL         "Include merged revisions",IDC_INCLUDEMERGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,282,293,10
 END
 
 IDD_COMMITDLG DIALOGEX 0, 0, 300, 280
@@ -417,7 +425,7 @@ BEGIN
     PUSHBUTTON      "&Configure",IDC_SOUNDS,212,59,72,14
     LTEXT           "Global ignore &pattern:",IDC_STATIC,14,103,84,18,SS_CENTERIMAGE
     EDITTEXT        IDC_TEMPEXTENSIONS,108,105,176,14,ES_AUTOHSCROLL
-    CONTROL         "Set filedates to the ""last commit &time""",IDC_COMMITFILETIMES,
+    CONTROL         "Set file dates to the ""last commit &time""",IDC_COMMITFILETIMES,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,127,270,10
     LTEXT           "Subversion configuration &file:",IDC_STATIC,14,150,192,8
     PUSHBUTTON      "&Edit",IDC_EDITCONFIG,212,145,72,14
@@ -484,18 +492,18 @@ BEGIN
     PUSHBUTTON      "Edit",IDC_EDITSERVERS,169,142,50,14
 END
 
-IDD_SVNPROGRESS DIALOGEX 0, 0, 364, 165
+IDD_SVNPROGRESS DIALOGEX 0, 0, 434, 165
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 CAPTION "Progress"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_SVNPROGRESS,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,350,113
-    PUSHBUTTON      "Show &log...",IDC_LOGBUTTON,164,143,79,14,NOT WS_VISIBLE
-    DEFPUSHBUTTON   "&OK",IDOK,250,143,50,14
-    PUSHBUTTON      "&Cancel",IDCANCEL,307,143,50,14
-    CONTROL         "",IDC_PROGRESSBAR,"msctls_progress32",NOT WS_VISIBLE | WS_BORDER,167,123,190,9
-    LTEXT           "",IDC_PROGRESSLABEL,7,123,158,8,NOT WS_VISIBLE
-    EDITTEXT        IDC_INFOTEXT,7,135,156,22,ES_MULTILINE | ES_READONLY | NOT WS_BORDER
+    CONTROL         "",IDC_SVNPROGRESS,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,420,113
+    PUSHBUTTON      "Show &log...",IDC_LOGBUTTON,237,143,79,14,NOT WS_VISIBLE
+    DEFPUSHBUTTON   "&OK",IDOK,322,143,50,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,377,143,50,14
+    CONTROL         "",IDC_PROGRESSBAR,"msctls_progress32",NOT WS_VISIBLE | WS_BORDER,237,123,190,9
+    LTEXT           "",IDC_PROGRESSLABEL,7,123,225,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_INFOTEXT,7,135,227,22,ES_MULTILINE | ES_READONLY | NOT WS_BORDER
 END
 
 IDD_SWITCH DIALOGEX 0, 0, 300, 129
@@ -932,9 +940,9 @@ BEGIN
     CONTROL         "Recurse into unversioned folders",IDC_UNVERSIONEDRECURSE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,21,269,10
     GROUPBOX        "Commit",IDC_COMMITGROUP,7,44,286,94
-    CONTROL         "&Use autocompletion of filepaths and keywords",IDC_AUTOCOMPLETION,
+    CONTROL         "&Use auto-completion of file paths and keywords",IDC_AUTOCOMPLETION,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,57,271,10
-    LTEXT           "&Timeout in seconds to stop the autocompletion parsing",IDC_AUTOCOMPLETIONTIMEOUTLABEL,14,74,231,8,SS_NOTIFY
+    LTEXT           "&Timeout in seconds to stop the auto-completion parsing",IDC_AUTOCOMPLETIONTIMEOUTLABEL,14,74,231,8,SS_NOTIFY
     EDITTEXT        IDC_AUTOCOMPLETIONTIMEOUT,252,72,31,12,ES_AUTOHSCROLL | ES_NUMBER,WS_EX_RIGHT
     CONTROL         "Only use s&pellchecker when tsvn:projectlanguage is set",IDC_SPELL,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,90,271,10
@@ -1240,7 +1248,7 @@ BEGIN
         VERTGUIDE, 300
         VERTGUIDE, 356
         TOPMARGIN, 7
-        BOTTOMMARGIN, 311
+        BOTTOMMARGIN, 319
     END
 
     IDD_COMMITDLG, DIALOG
@@ -1352,9 +1360,9 @@ BEGIN
     IDD_SVNPROGRESS, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 357
-        VERTGUIDE, 243
-        VERTGUIDE, 300
+        RIGHTMARGIN, 427
+        VERTGUIDE, 316
+        VERTGUIDE, 372
         TOPMARGIN, 7
         BOTTOMMARGIN, 157
     END
@@ -1767,6 +1775,11 @@ BEGIN
     BEGIN
         MENUITEM "Show &all revisions",         ID_VIEW_SHOWALLREVISIONS
         MENUITEM "Arranged by &path",           ID_VIEW_ARRANGEDBYPATH
+        MENUITEM "&Newest on top",              ID_VIEW_TOPDOWN
+        MENUITEM "&Show HEAD revisions",        ID_VIEW_SHOWHEAD
+        MENUITEM "E&xact copy sources",         ID_VIEW_EXACTCOPYSOURCE
+        MENUITEM "Split long &branches",        ID_VIEW_SPLITBRANCHES
+        MENUITEM "Fold &tags",                  ID_VIEW_FOLDTAGS
         MENUITEM "&Filter",                     ID_VIEW_FILTER
         MENUITEM SEPARATOR
         MENUITEM "Zoom &in\tCtrl-+",            ID_VIEW_ZOOMIN
@@ -2343,9 +2356,9 @@ BEGIN
     IDS_SETTINGS_READONLYNAME "readonly"
     IDS_SETTINGS_LOCKEDNAME "locked"
     IDS_SETTINGS_AUTOCOMPLETION_TT 
-                            "Autocomplete suggests words (usually class or member names)\nfrom the files that you have changed as you type a log message."
+                            "Auto-complete suggests words (usually class or member names)\nfrom the files that you have changed as you type a log message."
     IDS_SETTINGS_AUTOCOMPLETIONTIMEOUT_TT 
-                            "The time in seconds after which the parsing of the selected files stops.\nA lower value will make the autocompletion list available sooner,\nbut maybe not scan all files."
+                            "The time in seconds after which the parsing of the selected files stops.\nA lower value will make the auto-completion list available sooner,\nbut maybe not scan all files."
     IDS_SETTINGS_RECURSIVE_TT 
                             "Disable this option if you have really big working copies and experience\ntoo much disk access when browsing the working copy."
     IDS_SETTINGS_USEWCURL_TT 
@@ -2440,7 +2453,8 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_REVGRAPH_BOXTOOLTIP "Revision: %ld\nURL: %s\r\nAuthor: %s\r\nDate: %s\r\n\r\nLogmessage:\r\n%s"
+    IDS_REVGRAPH_BOXTOOLTIP "Revision: %ld\nURL: %S\r\nAuthor: %S\r\nDate: %s\r\n\r\nLogmessage:\r\n%S"
+    IDS_REVGRAPH_BOXTOOLTIP_TAGGED "Revision: %ld\nURL: %S\r\nAuthor: %S\r\nDate: %s\r\n\r\nTags:%S\r\n\r\nLogmessage:\r\n%S"
     IDS_REVGRAPH_STATUSBARURL "Showing graph for %s"
     IDS_REVGRAPH_STATUSBARNUMNODES "Showing %ld nodes"
     IDS_REVGRAPH_BOXREVISIONTITLE "Revision %ld"
@@ -2530,6 +2544,8 @@ BEGIN
     IDS_SVNACTION_CHANGELISTSET "Assigned to changelist ""%s"""
     IDS_SVNACTION_CHANGELISTCLEAR "Removed from changelist"
     IDS_SVNACTION_CHANGELISTFAILED "Failed to set/remove changelist ""%s"""
+    IDS_SVNACTION_MERGEBEGINMULTIPLE "Merging r%ld through r%ld"
+    IDS_SVNACTION_MERGEBEGINSINGLE "Merging r%ld"
     IDS_SVN_SUMMARIZENORMAL "Normal"
     IDS_SVN_SUMMARIZEADDED  "Added"
     IDS_SVN_SUMMARIZEMODIFIED "Modified"
@@ -2576,6 +2592,7 @@ BEGIN
     IDS_LOG_POPUP_BLAMEWITHPREVIOUS "Compare and blame with previous revision"
     IDS_LOG_POPUP_BLAME     "Blame"
     IDS_LOG_POPUP_GNUDIFF_CH "Show changes as &unified diff"
+    IDS_LOG_POPUP_GETMERGELOGS "Get merge logs"
 END
 
 STRINGTABLE 
@@ -2612,6 +2629,8 @@ BEGIN
     IDS_MERGE_SELECTRANGE   "Select revision range"
     IDS_MERGE_SELECTENDREVISION "Select end revision"
     IDS_MERGE_SELECTSTARTREVISION "Select start revision"
+    IDS_MERGE_RECORDONLY    "Record Only"
+    IDS_MERGE_MERGE         "Merge"
 END
 
 STRINGTABLE 
@@ -2710,6 +2729,11 @@ BEGIN
     ID_VIEW_SHOWALLREVISIONS 
                             "Shows all revisions where changes were made to this item"
     ID_VIEW_ARRANGEDBYPATH  "Arranges the nodes sorted by path"
+    ID_VIEW_TOPDOWN         "Show oldest node at top"
+    ID_VIEW_SHOWHEAD        "Show HEAD revision nodes"
+    ID_VIEW_EXACTCOPYSOURCE "Branch at copy-from-rev even if there was no change in that revision"
+    ID_VIEW_SPLITBRANCHES   "Split long, inactive branches into segments"
+    ID_VIEW_FOLDTAGS        "Show tags on the copy source, not as separate nodes"
 END
 
 STRINGTABLE 
@@ -2932,6 +2956,13 @@ END
 STRINGTABLE 
 BEGIN
     IDS_SVN_DEPTH_WORKING   "Working copy"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_SVNPROGRESS_MERGELOGMSGONE "Merged revision %s from %s:\n"
+    IDS_SVNPROGRESS_MERGELOGMSGMULTIPLE "Merged revisions %s to %s from %s:\n"
+    IDS_SVNPROGRESS_MERGELOGMSG "%s\nr%s | %s\n\n%s\n"
 END
 
 #endif    // English (U.S.) resources

@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -72,6 +72,9 @@
 #include "SVNAdminDir.h"
 #include "Hooks.h"
 #include "svn_types.h"
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+
 
 #include "..\version.h"
 #define STRUCT_IOVEC_DEFINED
@@ -218,6 +221,14 @@ CTortoiseProcApp::CTortoiseProcApp()
 CTortoiseProcApp::~CTortoiseProcApp()
 {
 	sasl_done();
+
+	// global application exit cleanup (after all SSL activity is shutdown)
+	// we have to clean up SSL ourselves, since neon doesn't do that (can't do it)
+	// because those cleanup functions work globally per process.
+	ERR_free_strings();
+	EVP_cleanup();
+	CRYPTO_cleanup_all_ex_data();
+
 	// since it is undefined *when* the global object SVNAdminDir is
 	// destroyed, we tell it to destroy the memory pools and terminate apr
 	// *now* instead of later when the object itself is destroyed.
@@ -587,6 +598,7 @@ BOOL CTortoiseProcApp::InitInstance()
 			CLogDlg dlg;
 			m_pMainWnd = &dlg;
 			dlg.SetParams(cmdLinePath, pegrev, revstart, revend, limit, bStrict);
+			dlg.SetIncludeMerge(!!parser.HasKey(_T("merge")));
 			val = parser.GetVal(_T("propspath"));
 			if (!val.IsEmpty())
 				dlg.SetProjectPropertiesPath(CTSVNPath(val));
@@ -763,6 +775,7 @@ BOOL CTortoiseProcApp::InitInstance()
 				{
 					rev = dlg.Revision;
 					depth = dlg.m_depth;
+					options |= dlg.m_bNoExternals ? ProgOptIgnoreExternals : 0;
 				}
 				else 
 					return FALSE;
@@ -1127,6 +1140,7 @@ BOOL CTortoiseProcApp::InitInstance()
 					progDlg.m_dwCloseOnEnd = parser.GetLongVal(_T("closeonend"));
 					int options = dlg.m_bDryRun ? ProgOptDryRun : 0;
 					options |= dlg.m_bIgnoreAncestry ? ProgOptIgnoreAncestry : 0;
+					options |= dlg.m_bRecordOnly ? ProgOptRecordOnly : 0;
 					progDlg.SetParams(CSVNProgressDlg::SVNProgress_Merge, options, pathList, dlg.m_URLFrom, dlg.m_URLTo, dlg.StartRev);		//use the message as the second url
 					// use the depth of the working copy
 					progDlg.SetDepth(dlg.m_depth);
@@ -2354,16 +2368,14 @@ CTortoiseProcApp::CreatePatchFileOpenHook(HWND hDlg, UINT uiMsg, WPARAM wParam, 
 
 BOOL CTortoiseProcApp::CreatePatch(const CTSVNPath& root, const CTSVNPathList& path, const CTSVNPath& cmdLineSavePath)
 {
-	OPENFILENAME ofn;		// common dialog box structure
+	OPENFILENAME ofn = {0};				// common dialog box structure
 	CString temp;
 	CTSVNPath savePath;
 
 	if (cmdLineSavePath.IsEmpty())
 	{
-		TCHAR szFile[MAX_PATH];  // buffer for file name
-		ZeroMemory(szFile, sizeof(szFile));
+		TCHAR szFile[MAX_PATH] = {0};  // buffer for file name
 		// Initialize OPENFILENAME
-		ZeroMemory(&ofn, sizeof(OPENFILENAME));
 		ofn.lStructSize = sizeof(OPENFILENAME);
 		ofn.hwndOwner = (EXPLORERHWND);
 		ofn.lpstrFile = szFile;
