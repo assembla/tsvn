@@ -30,6 +30,7 @@
 #include "CachedLogInfo.h"
 #include "RevisionIndex.h"
 #include "CopyFollowingLogIterator.h"
+#include "StrictLogIterator.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -703,7 +704,8 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 
 		FillCopyTargets ( revision
 						, searchTree.get()
-						, lastFromCopy);
+						, lastFromCopy
+                        , options.exactCopySources);
 
 		// remove deleted search paths
 
@@ -844,7 +846,8 @@ void CRevisionGraph::AddCopiedPaths ( revision_t revision
 
 void CRevisionGraph::FillCopyTargets ( revision_t revision
 								     , CSearchPathTree* rootNode
-								     , TSCopyIterator& lastFromCopy)
+								     , TSCopyIterator& lastFromCopy
+                                     , bool exactCopy)
 {
 	TSCopyIterator endFromCopy = copyFromRelation.end();
 
@@ -881,8 +884,22 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
             bool sameOrChild = path.IsSameOrChildOf (copy->fromPathIndex);
 			if (searchNode->IsActive() && sameOrChild)
 			{
+                revision_t sourceRevision = revision;
+                if (!exactCopy)
+                {
+                	// find latest change for the source path
+                    // (copy-from-rev may point to a newer revision that
+                    // does not actually modify the source path)
+
+                    CStrictLogIterator logIterator ( query->GetCache()
+											       , revision
+											       , path);
+                	logIterator.Retry();
+                    sourceRevision = logIterator.GetRevision();
+                }
+
 				CRevisionEntry*	entry = searchNode->GetLastEntry();
-				if ((entry == NULL) || (entry->revision != revision))
+				if ((entry == NULL) || (entry->revision != sourceRevision))
 				{
 					// the copy source graph node has yet to be created
 

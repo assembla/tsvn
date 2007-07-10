@@ -243,11 +243,11 @@ public:
         bool includeSubPathChanges; // "show all"
         bool newestAtTop;           // start with latest revision (not first / oldest revision)
         bool showHEAD;              // show HEAD change for all branches
+        bool exactCopySources;      // create a copy-source node, even if there was no change in that revision
 
         // not implemented yet:
 
         bool reduceCrossLines;      // minimize places with lines crossing a node box
-        bool exactCopySources;      // create a copy-source node, even if there was no change in that revision
     };
 
 	CRevisionGraph(void);
@@ -295,7 +295,8 @@ private:
 											   , TSCopyIterator& lastToCopy);
 	void						FillCopyTargets ( revision_t revision
 											    , CSearchPathTree* rootNode
-											    , TSCopyIterator& lastFromCopy);
+											    , TSCopyIterator& lastFromCopy
+                                                , bool exactCopy);
     void                        AddMissingHeads (CSearchPathTree* rootNode);
     void                        AnalyzeHeadRevision ( revision_t revision
     									            , CRevisionInfoContainer::CChangesIterator first
