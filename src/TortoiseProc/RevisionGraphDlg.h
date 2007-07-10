@@ -84,6 +84,11 @@ protected:
 	afx_msg void	OnViewUnifieddiffofheadrevisions();
 	afx_msg void	OnViewShowallrevisions();
 	afx_msg void	OnViewArrangedbypath();
+	afx_msg void	OnViewTopDown();
+	afx_msg void    OnViewShowHEAD();
+	afx_msg void    OnViewExactCopySource();
+	afx_msg void    OnViewSplitBranches();
+	afx_msg void    OnViewFoldTags();
 	afx_msg void	OnViewShowoverview();
 	afx_msg void	OnFileSavegraphas();
 	afx_msg void	OnMenuexit();

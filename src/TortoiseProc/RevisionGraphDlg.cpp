@@ -50,12 +50,12 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 {
     m_options.groupBranches = false;
     m_options.includeSubPathChanges = false;
-    m_options.newestAtTop = true;
-    m_options.showHEAD = true;
+    m_options.oldestAtTop = false;
+    m_options.showHEAD = false;
     m_options.reduceCrossLines = false;
     m_options.exactCopySources = false;
     m_options.splitBranches = false;
-    m_options.foldTags = true;
+    m_options.foldTags = false;
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()
@@ -84,6 +84,11 @@ BEGIN_MESSAGE_MAP(CRevisionGraphDlg, CResizableStandAloneDialog)
 	ON_COMMAND(ID_VIEW_SHOWALLREVISIONS, &CRevisionGraphDlg::OnViewShowallrevisions)
 	ON_COMMAND(ID_VIEW_ARRANGEDBYPATH, &CRevisionGraphDlg::OnViewArrangedbypath)
 	ON_COMMAND(ID_FILE_SAVEGRAPHAS, &CRevisionGraphDlg::OnFileSavegraphas)
+	ON_COMMAND(ID_VIEW_TOPDOWN, &CRevisionGraphDlg::OnViewTopDown)
+	ON_COMMAND(ID_VIEW_SHOWHEAD, &CRevisionGraphDlg::OnViewShowHEAD)
+	ON_COMMAND(ID_VIEW_EXACTCOPYSOURCE, &CRevisionGraphDlg::OnViewExactCopySource)
+	ON_COMMAND(ID_VIEW_SPLITBRANCHES, &CRevisionGraphDlg::OnViewSplitBranches)
+	ON_COMMAND(ID_VIEW_FOLDTAGS, &CRevisionGraphDlg::OnViewFoldTags)
 	ON_CBN_SELCHANGE(ID_REVGRAPH_ZOOMCOMBO, OnChangeZoom)
 	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTW, 0, 0xFFFF, OnToolTipNotify)
 	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTA, 0, 0xFFFF, OnToolTipNotify)
@@ -166,6 +171,21 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
 	index = 0;
 	while (m_ToolBar.GetItemID(index) != ID_VIEW_SHOWOVERVIEW) index++;
+	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
+	index = 0;
+	while (m_ToolBar.GetItemID(index) != ID_VIEW_TOPDOWN) index++;
+	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
+	index = 0;
+	while (m_ToolBar.GetItemID(index) != ID_VIEW_SHOWHEAD) index++;
+	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
+	index = 0;
+	while (m_ToolBar.GetItemID(index) != ID_VIEW_EXACTCOPYSOURCE) index++;
+	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
+	index = 0;
+	while (m_ToolBar.GetItemID(index) != ID_VIEW_SPLITBRANCHES) index++;
+	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
+	index = 0;
+	while (m_ToolBar.GetItemID(index) != ID_VIEW_FOLDTAGS) index++;
 	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
 
 	CMenu * pMenu = GetMenu();
@@ -472,6 +492,31 @@ void CRevisionGraphDlg::OnViewShowallrevisions()
 void CRevisionGraphDlg::OnViewArrangedbypath()
 {
     OnToggleOption (ID_VIEW_ARRANGEDBYPATH, m_options.groupBranches);
+}
+
+void CRevisionGraphDlg::OnViewTopDown()
+{
+    OnToggleOption (ID_VIEW_TOPDOWN, m_options.oldestAtTop);
+}
+
+void CRevisionGraphDlg::OnViewShowHEAD()
+{
+    OnToggleOption (ID_VIEW_SHOWHEAD, m_options.showHEAD);
+}
+
+void CRevisionGraphDlg::OnViewExactCopySource()
+{
+    OnToggleOption (ID_VIEW_EXACTCOPYSOURCE, m_options.exactCopySources);
+}
+
+void CRevisionGraphDlg::OnViewSplitBranches()
+{
+    OnToggleOption (ID_VIEW_SPLITBRANCHES, m_options.splitBranches);
+}
+
+void CRevisionGraphDlg::OnViewFoldTags()
+{
+    OnToggleOption (ID_VIEW_FOLDTAGS, m_options.foldTags);
 }
 
 void CRevisionGraphDlg::OnCancel()

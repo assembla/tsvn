@@ -1105,6 +1105,11 @@
 #define ID_FILTER_EXCLUDEREVISIONS      32808
 #define ID_VIEW_FILTER                  32809
 #define ID_VIEW_SHOWOVERVIEW            32813
+#define ID_VIEW_TOPDOWN                 32814
+#define ID_VIEW_SHOWHEAD                32815
+#define ID_VIEW_EXACTCOPYSOURCE         32816
+#define ID_VIEW_SPLITBRANCHES           32817
+#define ID_VIEW_FOLDTAGS                32818
 
 // Next default values for new objects
 // 

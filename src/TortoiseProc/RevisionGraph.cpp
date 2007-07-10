@@ -1403,7 +1403,7 @@ void CRevisionGraph::AssignCoordinates (const SOptions& options)
 
     // invert order (show newest rev in first row)
 
-    if (options.newestAtTop)
+    if (!options.oldestAtTop)
         ReverseRowOrder (row);
 }
 

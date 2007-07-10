@@ -244,7 +244,7 @@ public:
     {
         bool groupBranches;         // one row per revision, if false
         bool includeSubPathChanges; // "show all"
-        bool newestAtTop;           // start with latest revision (not first / oldest revision)
+        bool oldestAtTop;           // start with latest revision (not first / oldest revision)
         bool showHEAD;              // show HEAD change for all branches
         bool exactCopySources;      // create a copy-source node, even if there was no change in that revision
         bool splitBranches;         // long sections with no change will be replaced by "split nodes"
