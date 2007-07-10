@@ -899,7 +899,7 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
                 }
 
 				CRevisionEntry*	entry = searchNode->GetLastEntry();
-				if ((entry == NULL) || (entry->revision != sourceRevision))
+				if ((entry == NULL) || (entry->revision < sourceRevision))
 				{
 					// the copy source graph node has yet to be created
 
