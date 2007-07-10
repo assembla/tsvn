@@ -405,7 +405,17 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 			DrawNode(memDC, noderect, GetSysColor(COLOR_WINDOWTEXT), entry, TSVNRectangle, ((m_SelectedEntry1==entry)||(m_SelectedEntry2==entry)), NULL);
 			break;
 		}
-	}
+
+    	// Draw the "tagged" icon
+
+        if (m_nIconSize && !entry->tagNames.empty())
+		{
+			// draw the icon
+			CPoint iconpoint = CPoint(noderect.right - 7*m_nIconSize/6, noderect.top + m_nIconSize/6);
+			CSize iconsize = CSize(m_nIconSize, m_nIconSize);
+			memDC->DrawState(iconpoint, iconsize, hTaggedIcon, DST_ICON, (HBRUSH)NULL);
+		}
+    }
 	DestroyIcon(hDeletedIcon);
 	DestroyIcon(hAddedIcon);
 	DestroyIcon(hAddedWithHistoryIcon);

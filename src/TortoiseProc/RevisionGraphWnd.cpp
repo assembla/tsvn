@@ -497,12 +497,30 @@ BOOL CRevisionGraphWnd::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRe
 			TCHAR date[SVN_DATE_BUFFER];
 			apr_time_t timeStamp = revisionInfo.GetTimeStamp(index);
 			SVN::formatDate(date, timeStamp);
-			strTipText.Format(IDS_REVGRAPH_BOXTOOLTIP,
-							rentry->revision,
-							rentry->realPath.GetPath().c_str(),
-							revisionInfo.GetAuthor(index), 
-							date,
-							revisionInfo.GetComment(index).c_str());
+
+            if (rentry->tagNames.empty())
+            {
+			    strTipText.Format(IDS_REVGRAPH_BOXTOOLTIP,
+							    rentry->revision,
+							    rentry->realPath.GetPath().c_str(),
+							    revisionInfo.GetAuthor(index), 
+							    date,
+							    revisionInfo.GetComment(index).c_str());
+            }
+            else
+            {
+                std::string tags;
+                for (size_t i = 0; i < rentry->tagNames.size(); ++i)
+                    tags += "\r\n" + rentry->tagNames[i].GetPath();
+
+			    strTipText.Format(IDS_REVGRAPH_BOXTOOLTIP_TAGGED,
+							    rentry->revision,
+							    rentry->realPath.GetPath().c_str(),
+							    revisionInfo.GetAuthor(index), 
+							    date,
+                                tags.c_str(),
+							    revisionInfo.GetComment(index).c_str());
+            }
 		}
 	}
 	else

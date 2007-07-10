@@ -60,7 +60,7 @@ IDI_REVGRAPH_LASTCOMMIT ICON                    "revgraph_lastcommit.ico"
 IDI_REVGRAPH_RENAMED    ICON                    "revgraph_renamed.ico"
 IDI_REVGRAPH_REPLACED   ICON                    "revgraph_replaced.ico"
 IDI_REVGRAPH_SPLIT      ICON                    "revgraph_split.ico"
-IDI_REVGRAPH_TAGGEDED   ICON                    "revgraph_tag.ico"
+IDI_REVGRAPH_TAGGED     ICON                    "revgraph_tag.ico"
 IDI_SAVEDDATA           ICON                    "saveddata.ico"
 IDI_GRAPHBAR            ICON                    "graph-bar.ico"
 IDI_GRAPHBARSTACKED     ICON                    "graph-bar-stacked.ico"
@@ -2444,6 +2444,7 @@ END
 STRINGTABLE 
 BEGIN
     IDS_REVGRAPH_BOXTOOLTIP "Revision: %ld\nURL: %S\r\nAuthor: %S\r\nDate: %s\r\n\r\nLogmessage:\r\n%S"
+    IDS_REVGRAPH_BOXTOOLTIP_TAGGED "Revision: %ld\nURL: %S\r\nAuthor: %S\r\nDate: %s\r\n\r\nTags:%S\r\n\r\nLogmessage:\r\n%S"
     IDS_REVGRAPH_STATUSBARURL "Showing graph for %s"
     IDS_REVGRAPH_STATUSBARNUMNODES "Showing %ld nodes"
     IDS_REVGRAPH_BOXREVISIONTITLE "Revision %ld"

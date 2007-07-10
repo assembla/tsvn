@@ -215,6 +215,7 @@ public:
 	CRevisionEntry* next;
 
 	std::vector<CRevisionEntry*>	copyTargets;
+    std::vector<CDictionaryBasedPath> tagNames;
 
 	int				column;
 	int				row;
@@ -247,6 +248,7 @@ public:
         bool showHEAD;              // show HEAD change for all branches
         bool exactCopySources;      // create a copy-source node, even if there was no change in that revision
         bool splitBranches;         // long sections with no change will be replaced by "split nodes"
+        bool foldTags;              // show tags as property to the source - not as separate nodes
 
         // not implemented yet:
 
@@ -309,7 +311,11 @@ private:
 	void						AssignColumns ( CRevisionEntry* start
 											  , std::vector<int>& columnByRow
                                               , int column);
-	void						Optimize();
+
+    void                        FindReplacements();
+    void                        FoldTags();
+	void						Optimize (const SOptions& options);
+
 	int							AssignOneRowPerRevision();
 	int							AssignOneRowPerBranchNode (CRevisionEntry* start, int row);
     void                        AutoSplitBranch ( CRevisionEntry* entry

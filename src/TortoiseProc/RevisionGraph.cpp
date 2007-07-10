@@ -519,7 +519,7 @@ BOOL CRevisionGraph::AnalyzeRevisionData (CString path, const SOptions& options)
 
 	// step 3: reduce graph by saying "renamed" instead of "deleted"+"addedWithHistory" etc.
 
-	Optimize();
+	Optimize (options);
 
 	// step 4: place the nodes on a row, column grid
 
@@ -1093,6 +1093,123 @@ void CRevisionGraph::AnalyzeHeadRevision ( revision_t revision
 	}
 }
 
+void CRevisionGraph::FindReplacements()
+{
+	// say "renamed" for "Deleted"/"Added" entries
+
+	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
+	{
+		CRevisionEntry * entry = m_entryPtrs[i];
+		CRevisionEntry * next = entry->next;
+
+		if ((next != NULL) && (next->action == CRevisionEntry::deleted))
+		{
+			// this line will be deleted. 
+			// will it be continued under a different name?
+
+			if (entry->copyTargets.size() == 1)
+			{
+				CRevisionEntry * target = entry->copyTargets[0];
+				assert (target->action == CRevisionEntry::addedwithhistory);
+
+				if (target->revision == next->revision)
+				{
+					// that's actually a rename
+
+					target->action = CRevisionEntry::renamed;
+
+					// make it part of this line (not a branch)
+
+					entry->next = target;
+					entry->copyTargets.clear();
+
+					// mark the old "deleted" entry for removal
+
+					next->action = CRevisionEntry::nothing;
+				}
+			}
+		}
+	}
+}
+
+void CRevisionGraph::FoldTags()
+{
+    // lookup the id of the "tags" element in any path
+
+    const CStringDictionary& pathElementDictionary
+        = query->GetCache()->GetLogInfo().GetPaths().GetPathElements();
+
+    index_t tagsPathElement = pathElementDictionary.Find ("tags");
+    if (tagsPathElement == NO_INDEX)
+        return;
+
+    // look for copy targets that have no further nodes and contain "tags"
+
+	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
+	{
+		CRevisionEntry * entry = m_entryPtrs[i];
+
+        std::vector<CRevisionEntry*>& targets = entry->copyTargets;
+		for (size_t k = 0, targetsCount = targets.size(); k < targetsCount; ++k)
+        {
+    		CRevisionEntry * target = targets[k];
+            assert (target->action == CRevisionEntry::addedwithhistory);
+
+            // this copy target will be considered a "tag", 
+            // if it is unchanged and its path contains "tags"
+
+            if (   (target->next == NULL) 
+                && target->path.GetBasePath().Contains (tagsPathElement))
+            {
+                entry->tagNames.push_back (target->realPath);
+                target->action = CRevisionEntry::nothing;
+                targets[k] = NULL;
+            }
+        }
+
+        // remove all NULLs from targets vector
+
+        targets.erase ( std::remove_copy ( targets.begin()
+                                         , targets.end()
+                                         , targets.begin()
+                                         , (CRevisionEntry*)NULL)
+                      , targets.end());
+	}
+}
+
+void CRevisionGraph::Optimize (const SOptions& options)
+{
+	// say "renamed" for "Deleted"/"Added" entries
+
+    FindReplacements();
+
+    // fold tags if requested
+
+    if (options.foldTags)
+        FoldTags();
+
+	// compact
+
+	std::vector<CRevisionEntry*>::iterator target = m_entryPtrs.begin();
+	for ( std::vector<CRevisionEntry*>::iterator source = target
+		, end = m_entryPtrs.end()
+		; source != end
+		; ++source)
+	{
+		if ((*source)->action == CRevisionEntry::nothing)
+		{
+			delete *source;
+		}
+		else
+		{
+			*target = *source;
+			++target;
+		}
+	}
+
+	m_entryPtrs.erase (target, m_entryPtrs.end());
+}
+
 // assign columns to branches recursively from the left to the right 
 // (one branch level per recursive step)
 
@@ -1146,66 +1263,6 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 		for (size_t i = 0, count = targets.size(); i < count; ++i)
 			AssignColumns (targets[i], columnByRow, column+1);
 	}
-}
-
-void CRevisionGraph::Optimize()
-{
-	// say "renamed" for "Deleted"/"Added" entries
-
-	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
-	{
-		CRevisionEntry * entry = m_entryPtrs[i];
-		CRevisionEntry * next = entry->next;
-
-		if ((next != NULL) && (next->action == CRevisionEntry::deleted))
-		{
-			// this line will be deleted. 
-			// will it be continued under a different name?
-
-			if (entry->copyTargets.size() == 1)
-			{
-				CRevisionEntry * target = entry->copyTargets[0];
-				assert (target->action == CRevisionEntry::addedwithhistory);
-
-				if (target->revision == next->revision)
-				{
-					// that's actually a rename
-
-					target->action = CRevisionEntry::renamed;
-
-					// make it part of this line (not a branch)
-
-					entry->next = target;
-					entry->copyTargets.clear();
-
-					// mark the old "deleted" entry for removal
-
-					next->action = CRevisionEntry::nothing;
-				}
-			}
-		}
-	}
-
-	// compract
-
-	std::vector<CRevisionEntry*>::iterator target = m_entryPtrs.begin();
-	for ( std::vector<CRevisionEntry*>::iterator source = target
-		, end = m_entryPtrs.end()
-		; source != end
-		; ++source)
-	{
-		if ((*source)->action == CRevisionEntry::nothing)
-		{
-			delete *source;
-		}
-		else
-		{
-			*target = *source;
-			++target;
-		}
-	}
-
-	m_entryPtrs.erase (target, m_entryPtrs.end());
 }
 
 int CRevisionGraph::AssignOneRowPerRevision()
