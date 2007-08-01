@@ -810,7 +810,8 @@ bool CMainFrame::FileSave(bool bCheckResolved /*=true*/)
 	if (!this->m_Data.m_mergedFile.InUse())
 		return FileSaveAs(bCheckResolved);
 	// check if the file has the readonly attribute set
-	if (GetFileAttributes(m_Data.m_mergedFile.GetFilename()) & FILE_ATTRIBUTE_READONLY)
+	DWORD fAttribs = GetFileAttributes(m_Data.m_mergedFile.GetFilename());
+	if ((fAttribs != INVALID_FILE_ATTRIBUTES)&&(fAttribs & FILE_ATTRIBUTE_READONLY))
 		return FileSaveAs(bCheckResolved);
 	if (bCheckResolved)
 	{
