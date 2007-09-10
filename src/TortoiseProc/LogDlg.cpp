@@ -35,7 +35,6 @@
 #include "StringUtils.h"
 #include "UnicodeUtils.h"
 #include "TempFile.h"
-#include "InsertControl.h"
 #include "SVNInfo.h"
 #include "SVNDiff.h"
 #include "RevisionRangeDlg.h"
@@ -112,8 +111,11 @@ CLogDlg::CLogDlg(CWnd* pParent /*=NULL*/)
 	, m_pStoreSelection(NULL)
 	, m_limit(0)
 	, m_childCounter(0)
+	, m_maxChild(0)
 	, m_bIncludeMerges(FALSE)
+	, m_hAccel(NULL)
 {
+	m_bFilterWithRegex = !!CRegDWORD(_T("Software\\TortoiseSVN\\UseRegexFilter"), TRUE);
 }
 
 CLogDlg::~CLogDlg()
@@ -143,12 +145,11 @@ void CLogDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_SEARCHEDIT, m_sFilterText);
 	DDX_Control(pDX, IDC_DATEFROM, m_DateFrom);
 	DDX_Control(pDX, IDC_DATETO, m_DateTo);
-	DDX_Control(pDX, IDC_FILTERCANCEL, m_cFilterCancelButton);
-	DDX_Control(pDX, IDC_FILTERICON, m_cFilterIcon);
 	DDX_Control(pDX, IDC_HIDEPATHS, m_cHidePaths);
 	DDX_Control(pDX, IDC_GETALL, m_btnShow);
 	DDX_Text(pDX, IDC_LOGINFO, m_sLogInfo);
 	DDX_Check(pDX, IDC_INCLUDEMERGE, m_bIncludeMerges);
+	DDX_Control(pDX, IDC_SEARCHEDIT, m_cFilter);
 }
 
 BEGIN_MESSAGE_MAP(CLogDlg, CResizableStandAloneDialog)
@@ -163,7 +164,8 @@ BEGIN_MESSAGE_MAP(CLogDlg, CResizableStandAloneDialog)
 	ON_NOTIFY(EN_LINK, IDC_MSGVIEW, OnEnLinkMsgview)
 	ON_BN_CLICKED(IDC_STATBUTTON, OnBnClickedStatbutton)
 	ON_NOTIFY(NM_CUSTOMDRAW, IDC_LOGLIST, OnNMCustomdrawLoglist)
-	ON_STN_CLICKED(IDC_FILTERICON, OnStnClickedFiltericon)
+	ON_MESSAGE(WM_FILTEREDIT_INFOCLICKED, OnClickedInfoIcon)
+	ON_MESSAGE(WM_FILTEREDIT_CANCELCLICKED, OnClickedCancelFilter)
 	ON_NOTIFY(LVN_GETDISPINFO, IDC_LOGLIST, OnLvnGetdispinfoLoglist)
 	ON_EN_CHANGE(IDC_SEARCHEDIT, OnEnChangeSearchedit)
 	ON_WM_TIMER()
@@ -172,7 +174,6 @@ BEGIN_MESSAGE_MAP(CLogDlg, CResizableStandAloneDialog)
 	ON_BN_CLICKED(IDC_NEXTHUNDRED, OnBnClickedNexthundred)
 	ON_NOTIFY(NM_CUSTOMDRAW, IDC_LOGMSG, OnNMCustomdrawChangedFileList)
 	ON_NOTIFY(LVN_GETDISPINFO, IDC_LOGMSG, OnLvnGetdispinfoChangedFileList)
-	ON_BN_CLICKED(IDC_FILTERCANCEL, OnBnClickedFiltercancel)
 	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LOGLIST, OnLvnColumnclick)
 	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LOGMSG, OnLvnColumnclickChangedFileList)
 	ON_BN_CLICKED(IDC_HIDEPATHS, OnBnClickedHidepaths)
@@ -182,6 +183,10 @@ BEGIN_MESSAGE_MAP(CLogDlg, CResizableStandAloneDialog)
 	ON_NOTIFY(DTN_DROPDOWN, IDC_DATETO, &CLogDlg::OnDtnDropdownDateto)
 	ON_WM_SIZE()
 	ON_BN_CLICKED(IDC_INCLUDEMERGE, &CLogDlg::OnBnClickedIncludemerge)
+	ON_BN_CLICKED(IDC_REFRESH, &CLogDlg::OnBnClickedRefresh)
+	ON_COMMAND(ID_LOGDLG_REFRESH,&CLogDlg::OnRefresh)
+	ON_COMMAND(ID_LOGDLG_FIND,&CLogDlg::OnFind)
+	ON_COMMAND(ID_LOGDLG_FOCUSFILTER,&CLogDlg::OnFocusFilter)
 END_MESSAGE_MAP()
 
 void CLogDlg::SetParams(const CTSVNPath& path, SVNRev pegrev, SVNRev startrev, SVNRev endrev, int limit, BOOL bStrict /* = FALSE */, BOOL bSaveStrict /* = TRUE */)
@@ -202,6 +207,8 @@ void CLogDlg::SetParams(const CTSVNPath& path, SVNRev pegrev, SVNRev startrev, S
 BOOL CLogDlg::OnInitDialog()
 {
 	CResizableStandAloneDialog::OnInitDialog();
+
+	m_hAccel = LoadAccelerators(AfxGetResourceHandle(),MAKEINTRESOURCE(IDR_ACC_LOGDLG));
 
 	// use the state of the "stop on copy/rename" option from the last time
 	if (!m_bStrict)
@@ -304,16 +311,19 @@ BOOL CLogDlg::OnInitDialog()
 	else
 		SetWindowText(m_sTitle + _T(" - ") + m_path.GetFilename());
 
+	m_tooltips.Create(this);
+	CheckRegexpTooltip();
+
 	SetSplitterRange();
 	
 	// the filter control has a 'cancel' button (the red 'X'), we need to load its bitmap
-	m_cFilterCancelButton.LoadBitmaps(IDB_CANCELNORMAL, IDB_CANCELPRESSED, 0, 0);
-	m_cFilterCancelButton.SizeToContent();
-	m_cFilterIcon.LoadBitmaps(IDB_LOGFILTER);
-	m_cFilterIcon.SizeToContent();
+	m_cFilter.SetCancelBitmaps(IDI_CANCELNORMAL, IDI_CANCELPRESSED);
+	m_cFilter.SetInfoIcon(IDI_LOGFILTER);
+	m_cFilter.SetValidator(this);
 	
 	AdjustControlSize(IDC_HIDEPATHS);
 	AdjustControlSize(IDC_CHECK_STOPONCOPY);
+	AdjustControlSize(IDC_INCLUDEMERGE);
 
 	// resizable stuff
 	AddAnchor(IDC_FROMLABEL, TOP_LEFT);
@@ -323,8 +333,6 @@ BOOL CLogDlg::OnInitDialog()
 
 	SetFilterCueText();
 	AddAnchor(IDC_SEARCHEDIT, TOP_LEFT, TOP_RIGHT);
-	InsertControl(GetDlgItem(IDC_SEARCHEDIT)->GetSafeHwnd(), GetDlgItem(IDC_FILTERICON)->GetSafeHwnd(), INSERTCONTROL_LEFT);
-	InsertControl(GetDlgItem(IDC_SEARCHEDIT)->GetSafeHwnd(), GetDlgItem(IDC_FILTERCANCEL)->GetSafeHwnd(), INSERTCONTROL_RIGHT);
 	
 	AddAnchor(IDC_LOGLIST, TOP_LEFT, ANCHOR(100, 40));
 	AddAnchor(IDC_SPLITTERTOP, ANCHOR(0, 40), ANCHOR(100, 40));
@@ -338,6 +346,7 @@ BOOL CLogDlg::OnInitDialog()
 	AddAnchor(IDC_INCLUDEMERGE, BOTTOM_LEFT);
 	AddAnchor(IDC_GETALL, BOTTOM_LEFT);
 	AddAnchor(IDC_NEXTHUNDRED, BOTTOM_LEFT);
+	AddAnchor(IDC_REFRESH, BOTTOM_LEFT);
 	AddAnchor(IDC_STATBUTTON, BOTTOM_RIGHT);
 	AddAnchor(IDC_PROGRESS, BOTTOM_LEFT, BOTTOM_RIGHT);
 	AddAnchor(IDOK, BOTTOM_RIGHT);
@@ -356,8 +365,8 @@ BOOL CLogDlg::OnInitDialog()
 		m_wndSplitter1.GetWindowRect(&rectSplitter);
 		ScreenToClient(&rectSplitter);
 		int delta = yPos1 - rectSplitter.top;
-		DoSizeV1(delta);
 		m_wndSplitter1.SetWindowPos(NULL, 0, yPos1, 0, 0, SWP_NOSIZE);
+		DoSizeV1(delta);
 	}
 	if (yPos2)
 	{
@@ -365,8 +374,8 @@ BOOL CLogDlg::OnInitDialog()
 		m_wndSplitter2.GetWindowRect(&rectSplitter);
 		ScreenToClient(&rectSplitter);
 		int delta = yPos2 - rectSplitter.top;
-		DoSizeV2(delta);
 		m_wndSplitter2.SetWindowPos(NULL, 0, yPos2, 0, 0, SWP_NOSIZE);
+		DoSizeV2(delta);
 	}
 
 	
@@ -410,6 +419,20 @@ BOOL CLogDlg::OnInitDialog()
 		CMessageBox::Show(NULL, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
 	}
 	return FALSE;
+}
+
+void CLogDlg::CheckRegexpTooltip()
+{
+	CWnd *pWnd = GetDlgItem(IDC_SEARCHEDIT);
+	// Since tooltip describes regexp features, show it only if regexps are enabled.
+	if (m_bFilterWithRegex)
+	{
+		m_tooltips.AddTool(pWnd, IDS_LOG_FILTER_REGEX_TT);
+		// Anchor may overlap input box, obstructing user's view, so disable it.
+		m_tooltips.ModifyStyles(0, BALLOON_ANCHOR, pWnd);
+	}
+	else
+		m_tooltips.RemoveTool(pWnd);
 }
 
 void CLogDlg::EnableOKButton()
@@ -628,10 +651,17 @@ void CLogDlg::GetAll(bool bForceAll /* = false */)
 	InterlockedExchange(&m_bNoDispUpdates, FALSE);
 }
 
+void CLogDlg::OnBnClickedRefresh()
+{
+	Refresh();
+}
+
 void CLogDlg::Refresh()
 {
 	// refreshing means re-downloading the already shown log messages
 	UpdateData();
+	m_maxChild = 0;
+	m_childCounter = 0;
 
 	if ((m_limit == 0)||(m_bStrict)||(int(m_logEntries.size()-1) > m_limit))
 	{
@@ -758,8 +788,14 @@ BOOL CLogDlg::Log(svn_revnum_t rev, const CString& author, const CString& date, 
 {
 	return Log(rev, author, date, message, cpaths, time, filechanges, copies, actions, 0);
 }
-BOOL CLogDlg::Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, DWORD children)
+BOOL CLogDlg::Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, BOOL haschildren)
 {
+	if (rev == SVN_INVALID_REVNUM)
+	{
+		m_childCounter--;
+		delete cpaths;
+		return TRUE;
+	}
 	// this is the callback function which receives the data for every revision we ask the log for
 	// we store this information here one by one.
 	int found = 0;
@@ -789,7 +825,11 @@ BOOL CLogDlg::Log(svn_revnum_t rev, const CString& author, const CString& date, 
 	sShortMessage.Replace(_T("\t"), _T(" "));
 	
 	found = sShortMessage.Find(_T("\n\n"));
-	if (found >=0)
+	// to avoid too short 'short' messages 
+	// (e.g. if the message looks something like "Bugfix:\n\n*done this\n*done that")
+	// only use the empty newline as a separator if it comes
+	// after at least 15 chars.
+	if (found >= 15)
 	{
 		sShortMessage = sShortMessage.Left(found);
 	}
@@ -804,13 +844,12 @@ BOOL CLogDlg::Log(svn_revnum_t rev, const CString& author, const CString& date, 
 	pLogItem->sShortMessage = sShortMessage;
 	pLogItem->dwFileChanges = filechanges;
 	pLogItem->actions = actions;
-	pLogItem->children = children;
-	pLogItem->isChild = (m_childCounter > 0);
+	pLogItem->haschildren = haschildren;
+	pLogItem->childStackDepth = m_childCounter;
+	m_maxChild = max(m_childCounter, m_maxChild);
+	if (haschildren)
+		m_childCounter++;
 	pLogItem->sBugIDs = m_ProjectProperties.FindBugID(message).Trim();
-
-	if (m_childCounter > 0)
-		m_childCounter--;
-	m_childCounter += children;
 	
 	// split multi line log entries and concatenate them
 	// again but this time with \r\n as line separators
@@ -860,7 +899,9 @@ UINT CLogDlg::LogThread()
 	DialogEnableWindow(IDC_GETALL, FALSE);
 	DialogEnableWindow(IDC_NEXTHUNDRED, FALSE);
 	DialogEnableWindow(IDC_CHECK_STOPONCOPY, FALSE);
+	DialogEnableWindow(IDC_INCLUDEMERGE, FALSE);
 	DialogEnableWindow(IDC_STATBUTTON, FALSE);
+	DialogEnableWindow(IDC_REFRESH, FALSE);
 	
 	// change the text of the close button to "Cancel" since now the thread
 	// is running, and simply closing the dialog doesn't work.
@@ -892,7 +933,7 @@ UINT CLogDlg::LogThread()
 		// returns the path in a native format
 		sUrl = CPathUtils::PathUnescape(sUrl);
 	}
-	m_sRelativeRoot = sUrl.Mid(m_sRepositoryRoot.GetLength());
+	m_sRelativeRoot = sUrl.Mid(CPathUtils::PathUnescape(m_sRepositoryRoot).GetLength());
 	
 	if (!m_mergePath.IsEmpty() && m_mergedRevs.empty())
 	{
@@ -971,17 +1012,27 @@ UINT CLogDlg::LogThread()
 	m_bStrictStopped = false;
 	if (m_bIncludeMerges)
 	{
-		if (!GetLogWithMergeInfo(CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, m_bStrict))
+		BOOL bLogRes = GetLogWithMergeInfo(CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, m_bStrict);
+		if ((!bLogRes)&&(!m_path.IsUrl()))
 		{
-			CMessageBox::Show(m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
+			// try again with REV_WC as the start revision, just in case the path doesn't
+			// exist anymore in HEAD
+			bLogRes = GetLogWithMergeInfo(CTSVNPathList(m_path), SVNRev(), SVNRev::REV_WC, m_endrev, m_limit, m_bStrict);
 		}
+		if (!bLogRes)
+			CMessageBox::Show(m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 	}
 	else
 	{
-		if (!ReceiveLog(CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, m_bStrict))
+		BOOL bLogRes = ReceiveLog(CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, m_bStrict);
+		if ((!bLogRes)&&(!m_path.IsUrl()))
 		{
-			CMessageBox::Show(m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
+			// try again with REV_WC as the start revision, just in case the path doesn't
+			// exist anymore in HEAD
+			bLogRes = ReceiveLog(CTSVNPathList(m_path), SVNRev(), SVNRev::REV_WC, m_endrev, m_limit, m_bStrict);
 		}
+		if (!bLogRes)
+			CMessageBox::Show(m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 	}
 	if (m_bStrict && (m_lowestRev>1) && ((m_limit>0) ? ((startcount + m_limit)>m_logEntries.size()) : (m_endrev<m_lowestRev)))
 		m_bStrictStopped = true;
@@ -999,7 +1050,9 @@ UINT CLogDlg::LogThread()
 	if (!m_bShowedAll)
 		DialogEnableWindow(IDC_NEXTHUNDRED, TRUE);
 	DialogEnableWindow(IDC_CHECK_STOPONCOPY, TRUE);
+	DialogEnableWindow(IDC_INCLUDEMERGE, TRUE);
 	DialogEnableWindow(IDC_STATBUTTON, TRUE);
+	DialogEnableWindow(IDC_REFRESH, TRUE);
 
 	GetDlgItem(IDC_PROGRESS)->ShowWindow(FALSE);
 	m_bCancelled = true;
@@ -1180,15 +1233,8 @@ LRESULT CLogDlg::OnFindDialogMessage(WPARAM /*wParam*/, LPARAM /*lParam*/)
         CString FindText = m_pFindDialog->GetFindString();
         bool bMatchCase = (m_pFindDialog->MatchCase() == TRUE);
 		bool bFound = false;
-		bool bRegex = false;
 		rpattern pat;
-		try
-		{
-			pat.init( (LPCTSTR)FindText, MULTILINE | (bMatchCase ? NOFLAGS : NOCASE) );
-			bRegex = true;
-		}
-		catch (bad_alloc) {}
-		catch (bad_regexpr) {}
+		bool bRegex = ValidateRegexp(FindText, pat, bMatchCase);
 
 		int i;
 		for (i = this->m_nSearchIndex; i<m_arShownList.GetCount()&&!bFound; i++)
@@ -1464,12 +1510,32 @@ void CLogDlg::OnNMDblclkChangedFileList(NMHDR * /*pNMHDR*/, LRESULT *pResult)
 			}
 			DoDiffFromLog(selIndex, rev1, rev2, false, false);
 		}
-		else if (changedpath->action == LOGACTIONS_DELETED)
+		else 
+		{
+			CTSVNPath tempfile = CTempFiles::Instance().GetTempFilePath(true, CTSVNPath(changedpath->sPath));
+			CTSVNPath tempfile2 = CTempFiles::Instance().GetTempFilePath(true, CTSVNPath(changedpath->sPath));
+			SVNRev r = rev1;
 			// deleted files must be opened from the revision before the deletion
-			Open(false,changedpath->sPath,rev1-1);
-		else
-			// added files must be opened with the actual revision
-			Open(false,changedpath->sPath,rev1);
+			if (changedpath->action == LOGACTIONS_DELETED)
+				r = rev1-1;
+			m_bCancelled = false;
+			if (!Cat(CTSVNPath(m_sRepositoryRoot + changedpath->sPath), r, r, tempfile))
+			{
+				m_bCancelled = false;
+				if (!Cat(CTSVNPath(m_sRepositoryRoot + changedpath->sPath), SVNRev::REV_HEAD, r, tempfile))
+				{
+					CMessageBox::Show(m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
+					return;
+				}
+			}
+			CString sName1, sName2;
+			sName1.Format(_T("%s - Revision %ld"), CPathUtils::GetFileNameFromPath(changedpath->sPath), (svn_revnum_t)rev1);
+			sName2.Format(_T("%s - Revision %ld"), CPathUtils::GetFileNameFromPath(changedpath->sPath), (svn_revnum_t)rev1-1);
+			if (changedpath->action == LOGACTIONS_DELETED)
+				CAppUtils::StartExtDiff(tempfile, tempfile2, sName2, sName1);
+			else
+				CAppUtils::StartExtDiff(tempfile2, tempfile, sName2, sName1);
+		}
 	}
 }
 
@@ -1571,6 +1637,7 @@ BOOL CLogDlg::Open(bool bOpenWith,CString changedpath, svn_revnum_t rev)
 
 	CProgressDlg progDlg;
 	progDlg.SetTitle(IDS_APPNAME);
+	progDlg.SetAnimation(IDR_DOWNLOAD);
 	CString sInfoLine;
 	sInfoLine.Format(IDS_PROGRESSGETFILEREVISION, filepath, SVNRev(rev).ToString());
 	progDlg.SetLine(1, sInfoLine);
@@ -1682,20 +1749,22 @@ void CLogDlg::EditLogMessage(int index)
 		}
 		else
 		{
-			// Add as many characters from the log message to the list control
-			// so it has a fixed width. If the log message is longer than
-			// this predefined fixed with, add "..." as an indication.
 			CString sShortMessage = dlg.m_sInputText;
-			// Remove newlines 'cause those are not shown nicely in the listcontrol
 			sShortMessage.Replace(_T("\r"), _T(""));
-			sShortMessage.Replace('\n', ' ');
 
+			// to avoid too short 'short' messages 
+			// (e.g. if the message looks something like "Bugfix:\n\n*done this\n*done that")
+			// only use the empty newline as a separator if it comes
+			// after at least 15 chars.
 			int found = sShortMessage.Find(_T("\n\n"));
-			if (found >=0)
+			if (found >= 15)
 			{
 				sShortMessage = sShortMessage.Left(found);
 			}
-			sShortMessage.Replace('\n', ' ');
+
+			// Remove newlines and tabs 'cause those are not shown nicely in the listcontrol
+			sShortMessage.Replace(_T("\n"), _T(" "));
+			sShortMessage.Replace(_T("\t"), _T(" "));
 
 			pLogEntry->sShortMessage = sShortMessage;
 			// split multi line log entries and concatenate them
@@ -1725,51 +1794,14 @@ void CLogDlg::EditLogMessage(int index)
 
 BOOL CLogDlg::PreTranslateMessage(MSG* pMsg)
 {
-	if (pMsg->message == WM_KEYDOWN)
+	if (m_hAccel)
 	{
-		switch (pMsg->wParam)
-		{
-		case VK_F5:
-			{
-				if (!GetDlgItem(IDC_GETALL)->IsWindowEnabled())
-					return __super::PreTranslateMessage(pMsg);
-				Refresh();
-			}
-			break;
-		case 'F':
-			{
-				if (GetKeyState(VK_CONTROL)&0x8000)
-				{
-					if (m_pFindDialog)
-					{
-						break;
-					}
-					else
-					{
-						m_pFindDialog = new CFindReplaceDialog();
-						m_pFindDialog->Create(TRUE, NULL, NULL, FR_HIDEUPDOWN | FR_HIDEWHOLEWORD, this);									
-					}
-				}
-			}	
-			break;
-		case VK_F3:
-			{
-				if (m_pFindDialog)
-				{
-					break;
-				}
-				else
-				{
-					m_pFindDialog = new CFindReplaceDialog();
-					m_pFindDialog->Create(TRUE, NULL, NULL, FR_HIDEUPDOWN | FR_HIDEWHOLEWORD, this);									
-				}
-			}
-			break;
-		default:
-			break;
-		}
+		int ret = TranslateAccelerator(m_hWnd, m_hAccel, pMsg);
+		if (ret)
+			return TRUE;
 	}
-
+	
+	m_tooltips.RelayEvent(pMsg);
 	return __super::PreTranslateMessage(pMsg);
 }
 
@@ -1911,7 +1943,7 @@ void CLogDlg::OnNMCustomdrawLoglist(NMHDR *pNMHDR, LRESULT *pResult)
 				{
 					if (data->bCopies)
 						crText = m_Colors.GetColor(CColors::Modified);
-					if ((data->isChild)||(m_mergedRevs.find(data->Rev) != m_mergedRevs.end()))
+					if ((data->childStackDepth)||(m_mergedRevs.find(data->Rev) != m_mergedRevs.end()))
 						crText = GetSysColor(COLOR_GRAYTEXT);
 				}
 			}
@@ -1940,7 +1972,7 @@ void CLogDlg::OnNMCustomdrawLoglist(NMHDR *pNMHDR, LRESULT *pResult)
 
 				int		nIcons = 0;
 				int		iconwidth = ::GetSystemMetrics(SM_CXSMICON);
-				int		iconheigth = ::GetSystemMetrics(SM_CYSMICON);
+				int		iconheight = ::GetSystemMetrics(SM_CYSMICON);
 
 				PLOGENTRYDATA pLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(pLVCD->nmcd.dwItemSpec));
 
@@ -1973,19 +2005,19 @@ void CLogDlg::OnNMCustomdrawLoglist(NMHDR *pNMHDR, LRESULT *pResult)
 				::DeleteObject(brush);
 				// Draw the icon(s) into the compatible DC
 				if (pLogEntry->actions & LOGACTIONS_MODIFIED)
-					::DrawIconEx(pLVCD->nmcd.hdc, rect.left + ICONITEMBORDER, rect.top, m_hModifiedIcon, iconwidth, iconheigth, 0, NULL, DI_NORMAL);
+					::DrawIconEx(pLVCD->nmcd.hdc, rect.left + ICONITEMBORDER, rect.top, m_hModifiedIcon, iconwidth, iconheight, 0, NULL, DI_NORMAL);
 				nIcons++;
 
 				if (pLogEntry->actions & LOGACTIONS_ADDED)
-					::DrawIconEx(pLVCD->nmcd.hdc, rect.left+nIcons*iconwidth + ICONITEMBORDER, rect.top, m_hAddedIcon, iconwidth, iconheigth, 0, NULL, DI_NORMAL);
+					::DrawIconEx(pLVCD->nmcd.hdc, rect.left+nIcons*iconwidth + ICONITEMBORDER, rect.top, m_hAddedIcon, iconwidth, iconheight, 0, NULL, DI_NORMAL);
 				nIcons++;
 
 				if (pLogEntry->actions & LOGACTIONS_DELETED)
-					::DrawIconEx(pLVCD->nmcd.hdc, rect.left+nIcons*iconwidth + ICONITEMBORDER, rect.top, m_hDeletedIcon, iconwidth, iconheigth, 0, NULL, DI_NORMAL);
+					::DrawIconEx(pLVCD->nmcd.hdc, rect.left+nIcons*iconwidth + ICONITEMBORDER, rect.top, m_hDeletedIcon, iconwidth, iconheight, 0, NULL, DI_NORMAL);
 				nIcons++;
 
 				if (pLogEntry->actions & LOGACTIONS_REPLACED)
-					::DrawIconEx(pLVCD->nmcd.hdc, rect.left+nIcons*iconwidth + ICONITEMBORDER, rect.top, m_hReplacedIcon, iconwidth, iconheigth, 0, NULL, DI_NORMAL);
+					::DrawIconEx(pLVCD->nmcd.hdc, rect.left+nIcons*iconwidth + ICONITEMBORDER, rect.top, m_hReplacedIcon, iconwidth, iconheight, 0, NULL, DI_NORMAL);
 				nIcons++;
 
 				*pResult = CDRF_SKIPDEFAULT;
@@ -2139,13 +2171,12 @@ void CLogDlg::SetSplitterRange()
 	}
 }
 
-void CLogDlg::OnStnClickedFiltericon()
+LRESULT CLogDlg::OnClickedInfoIcon(WPARAM /*wParam*/, LPARAM lParam)
 {
-	CRect rect;
+	RECT * rect = (LPRECT)lParam;
 	CPoint point;
 	CString temp;
-	GetDlgItem(IDC_FILTERICON)->GetWindowRect(rect);
-	point = CPoint(rect.left, rect.bottom);
+	point = CPoint(rect->left, rect->bottom);
 #define LOGMENUFLAGS(x) (MF_STRING | MF_ENABLED | (m_nSelectedFilter == x ? MF_CHECKED : MF_UNCHECKED))
 	CMenu popup;
 	if (popup.CreatePopupMenu())
@@ -2163,14 +2194,74 @@ void CLogDlg::OnStnClickedFiltericon()
 		popup.AppendMenu(LOGMENUFLAGS(LOGFILTER_AUTHORS), LOGFILTER_AUTHORS, temp);
 		temp.LoadString(IDS_LOG_FILTER_REVS);
 		popup.AppendMenu(LOGMENUFLAGS(LOGFILTER_REVS), LOGFILTER_REVS, temp);
-		int oldfilter = m_nSelectedFilter;
-		m_nSelectedFilter = popup.TrackPopupMenu(TPM_RETURNCMD | TPM_LEFTALIGN | TPM_NONOTIFY, point.x, point.y, this, 0);
-		if (m_nSelectedFilter == 0)
-			m_nSelectedFilter = oldfilter;
-		SetFilterCueText();
-		SetTimer(LOGFILTER_TIMER, 1000, NULL);
+		
+		popup.AppendMenu(MF_SEPARATOR, NULL);
+
+		temp.LoadString(IDS_LOG_FILTER_REGEX);
+		popup.AppendMenu(MF_STRING | MF_ENABLED | (m_bFilterWithRegex ? MF_CHECKED : MF_UNCHECKED), LOGFILTER_REGEX, temp);
+
+		m_tooltips.Pop();
+		int selection = popup.TrackPopupMenu(TPM_RETURNCMD | TPM_LEFTALIGN | TPM_NONOTIFY, point.x, point.y, this, 0);
+		if (selection != 0)
+		{
+
+			if (selection == LOGFILTER_REGEX)
+			{
+				m_bFilterWithRegex = !m_bFilterWithRegex;
+				CRegDWORD b = CRegDWORD(_T("Software\\TortoiseSVN\\UseRegexFilter"), TRUE);
+				b = m_bFilterWithRegex;
+				CheckRegexpTooltip();
+			}
+			else
+			{
+				m_nSelectedFilter = selection;
+				SetFilterCueText();
+			}
+			SetTimer(LOGFILTER_TIMER, 1000, NULL);
+		}
 	}
+	return 0L;
 }
+
+LRESULT CLogDlg::OnClickedCancelFilter(WPARAM /*wParam*/, LPARAM /*lParam*/)
+{
+	KillTimer(LOGFILTER_TIMER);
+
+	m_sFilterText.Empty();
+	UpdateData(FALSE);
+	theApp.DoWaitCursor(1);
+	CStoreSelection storeselection(this);
+	FillLogMessageCtrl(false);
+	InterlockedExchange(&m_bNoDispUpdates, TRUE);
+	m_arShownList.RemoveAll();
+
+	// reset the time filter too
+	m_timFrom = (__time64_t(m_tFrom));
+	m_timTo = (__time64_t(m_tTo));
+	m_DateFrom.SetTime(&m_timFrom);
+	m_DateTo.SetTime(&m_timTo);
+	m_DateFrom.SetRange(&m_timFrom, &m_timTo);
+	m_DateTo.SetRange(&m_timFrom, &m_timTo);
+
+	for (DWORD i=0; i<m_logEntries.size(); ++i)
+	{
+		m_arShownList.Add(m_logEntries[i]);
+	}
+	InterlockedExchange(&m_bNoDispUpdates, FALSE);
+	m_LogList.DeleteAllItems();
+	m_LogList.SetItemCountEx(m_bStrictStopped ? m_arShownList.GetCount()+1 : m_arShownList.GetCount());
+	m_LogList.RedrawItems(0, m_bStrictStopped ? m_arShownList.GetCount()+1 : m_arShownList.GetCount());
+	m_LogList.SetRedraw(false);
+	ResizeAllListCtrlCols(m_LogList);
+	m_LogList.SetRedraw(true);
+	theApp.DoWaitCursor(-1);
+	GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_SHOW);
+	GetDlgItem(IDC_SEARCHEDIT)->SetFocus();
+	UpdateLogInfoLabel();
+	return 0L;	
+}
+
 
 void CLogDlg::SetFilterCueText()
 {
@@ -2191,8 +2282,9 @@ void CLogDlg::SetFilterCueText()
 		break;
 	}
 	// to make the cue banner text appear more to the right of the edit control
-	temp = _T("   ")+temp;	
-	::SendMessage(GetDlgItem(IDC_SEARCHEDIT)->GetSafeHwnd(), EM_SETCUEBANNER, 0, (LPARAM)(LPCTSTR)temp);
+	temp = _T("   ")+temp;
+	m_cFilter.SetCueBanner(temp);
+	//::SendMessage(GetDlgItem(IDC_SEARCHEDIT)->GetSafeHwnd(), EM_SETCUEBANNER, 0, (LPARAM)(LPCTSTR)temp);
 }
 
 void CLogDlg::OnLvnGetdispinfoLoglist(NMHDR *pNMHDR, LRESULT *pResult)
@@ -2226,10 +2318,18 @@ void CLogDlg::OnLvnGetdispinfoLoglist(NMHDR *pNMHDR, LRESULT *pResult)
 		case 0:	//revision
 			if (itemid < m_arShownList.GetCount())
 			{
-				if (pLogEntry->isChild)
-					_stprintf_s(pItem->pszText, pItem->cchTextMax, _T("%ld"), pLogEntry->Rev);
-				else
-					_stprintf_s(pItem->pszText, pItem->cchTextMax, _T("%ld  "), pLogEntry->Rev);
+				_stprintf_s(pItem->pszText, pItem->cchTextMax, _T("%ld"), pLogEntry->Rev);
+				// to make the child entries indented, add spaces
+				int len = _tcslen(pItem->pszText);
+				TCHAR * pBuf = pItem->pszText + len;
+				DWORD nSpaces = m_maxChild-pLogEntry->childStackDepth;
+				while ((pItem->cchTextMax >= len)&&(nSpaces))
+				{
+					*pBuf = ' ';
+					pBuf++;
+					nSpaces--;
+				}
+				*pBuf = 0;
 			}
 			else
 				lstrcpyn(pItem->pszText, _T(""), pItem->cchTextMax);
@@ -2345,46 +2445,6 @@ void CLogDlg::OnLvnGetdispinfoChangedFileList(NMHDR *pNMHDR, LRESULT *pResult)
 	*pResult = 0;
 }
 
-void CLogDlg::OnBnClickedFiltercancel()
-{
-	KillTimer(LOGFILTER_TIMER);
-	
-	m_sFilterText.Empty();
-	UpdateData(FALSE);
-	theApp.DoWaitCursor(1);
-	CStoreSelection storeselection(this);
-	FillLogMessageCtrl(false);
-	InterlockedExchange(&m_bNoDispUpdates, TRUE);
-	m_arShownList.RemoveAll();
-
-	// reset the time filter too
-	m_timFrom = (__time64_t(m_tFrom));
-	m_timTo = (__time64_t(m_tTo));
-	m_DateFrom.SetTime(&m_timFrom);
-	m_DateTo.SetTime(&m_timTo);
-	m_DateFrom.SetRange(&m_timFrom, &m_timTo);
-	m_DateTo.SetRange(&m_timFrom, &m_timTo);
-
-	for (DWORD i=0; i<m_logEntries.size(); ++i)
-	{
-		m_arShownList.Add(m_logEntries[i]);
-	}
-	InterlockedExchange(&m_bNoDispUpdates, FALSE);
-	m_LogList.DeleteAllItems();
-	m_LogList.SetItemCountEx(m_bStrictStopped ? m_arShownList.GetCount()+1 : m_arShownList.GetCount());
-	m_LogList.RedrawItems(0, m_bStrictStopped ? m_arShownList.GetCount()+1 : m_arShownList.GetCount());
-	m_LogList.SetRedraw(false);
-	ResizeAllListCtrlCols(m_LogList);
-	m_LogList.SetRedraw(true);
-	theApp.DoWaitCursor(-1);
-	m_cFilterCancelButton.ShowWindow(SW_HIDE);
-	GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_HIDE);
-	GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_SHOW);
-	GetDlgItem(IDC_SEARCHEDIT)->SetFocus();
-	UpdateLogInfoLabel();
-	return;	
-}
-
 void CLogDlg::OnEnChangeSearchedit()
 {
 	UpdateData();
@@ -2410,33 +2470,50 @@ void CLogDlg::OnEnChangeSearchedit()
 		ResizeAllListCtrlCols(m_LogList);
 		m_LogList.SetRedraw(true);
 		theApp.DoWaitCursor(-1);
-		m_cFilterCancelButton.ShowWindow(SW_HIDE);
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_HIDE);
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_SHOW);
 		GetDlgItem(IDC_SEARCHEDIT)->SetFocus();
 		DialogEnableWindow(IDC_STATBUTTON, !(((m_bThreadRunning)||(m_arShownList.IsEmpty()))));
 		return;
 	}
-	SetTimer(LOGFILTER_TIMER, 1000, NULL);
+	if (Validate(m_sFilterText))
+		SetTimer(LOGFILTER_TIMER, 1000, NULL);
+	else
+		KillTimer(LOGFILTER_TIMER);
+}
+
+bool CLogDlg::ValidateRegexp(LPCTSTR regexp_str, rpattern& pat, bool bMatchCase /* = false */)
+{
+	try
+	{
+		pat.init(regexp_str, MULTILINE | (bMatchCase ? NOFLAGS : NOCASE));
+		return true;
+	}
+	catch (bad_alloc) {}
+	catch (bad_regexpr) {}
+	return false;
+}
+
+bool CLogDlg::Validate(LPCTSTR string)
+{
+	if (!m_bFilterWithRegex)
+		return true;
+	rpattern pat;
+	return ValidateRegexp(string, pat);
 }
 
 void CLogDlg::RecalculateShownList(CPtrArray * pShownlist)
 {
 	pShownlist->RemoveAll();
-	bool bRegex = false;
 	rpattern pat;
-	try
-	{
-		pat.init( (LPCTSTR)m_sFilterText, MULTILINE | NOCASE );
-		bRegex = true;
-	}
-	catch (bad_alloc) {}
-	catch (bad_regexpr) {}
+	bool bRegex = false;
+	if (m_bFilterWithRegex)
+		bRegex = ValidateRegexp(m_sFilterText, pat);
 
 	CString sRev;
 	for (DWORD i=0; i<m_logEntries.size(); ++i)
 	{
-		if (bRegex)
+		if ((bRegex)&&(m_bFilterWithRegex))
 		{
 			match_results results;
 			match_results::backref_type br;
@@ -2504,7 +2581,8 @@ void CLogDlg::RecalculateShownList(CPtrArray * pShownlist)
 		} // if (bRegex)
 		else
 		{
-			CString find = m_sFilterText.MakeLower();
+			CString find = m_sFilterText;
+			find.MakeLower();
 			if ((m_nSelectedFilter == LOGFILTER_ALL)||(m_nSelectedFilter == LOGFILTER_MESSAGES))
 			{
 				CString msg = m_logEntries[i]->sMessage;
@@ -2618,7 +2696,6 @@ void CLogDlg::OnTimer(UINT_PTR nIDEvent)
 			m_LogList.SetItemState(0, LVIS_SELECTED, LVIS_SELECTED);
 		}
 		theApp.DoWaitCursor(-1);
-		m_cFilterCancelButton.ShowWindow(SW_SHOW);
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_HIDE);
 		GetDlgItem(IDC_SEARCHEDIT)->ShowWindow(SW_SHOW);
 		if (bSetFocusToFilterControl)
@@ -3155,9 +3232,6 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 			temp.LoadString(IDS_MENUEXPORT);
 			popup.AppendMenu(MF_STRING | MF_ENABLED, ID_EXPORT, temp);
 			popup.AppendMenu(MF_SEPARATOR, NULL);
-			temp.LoadString(IDS_LOG_POPUP_GETMERGELOGS);
-			popup.AppendMenu(MF_STRING | MF_ENABLED, ID_GETMERGELOGS, temp);
-			popup.AppendMenu(MF_SEPARATOR, NULL);
 		}
 		else if (m_LogList.GetSelectedCount() >= 2)
 		{
@@ -3349,56 +3423,24 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 		case ID_SAVEAS:
 			{
 				//now first get the revision which is selected
-				OPENFILENAME ofn = {0};				// common dialog box structure
-				TCHAR szFile[MAX_PATH] = {0};		// buffer for file name
+				CString revFilename;
 				if (m_hasWC)
 				{
-					CString revFilename;
 					CString strWinPath = m_path.GetWinPathString();
 					int rfind = strWinPath.ReverseFind('.');
 					if (rfind > 0)
 						revFilename.Format(_T("%s-%ld%s"), (LPCTSTR)strWinPath.Left(rfind), (LONG)revSelected, (LPCTSTR)strWinPath.Mid(rfind));
 					else
 						revFilename.Format(_T("%s-%ld"), (LPCTSTR)strWinPath, revSelected);
-					_tcscpy_s(szFile, MAX_PATH, revFilename);
 				}
-				// Initialize OPENFILENAME
-				ofn.lStructSize = sizeof(OPENFILENAME);
-				ofn.hwndOwner = this->m_hWnd;
-				ofn.lpstrFile = szFile;
-				ofn.nMaxFile = sizeof(szFile)/sizeof(TCHAR);
-				CString temp;
-				temp.LoadString(IDS_LOG_POPUP_SAVE);
-				//ofn.lpstrTitle = "Save revision to...\0";
-				CStringUtils::RemoveAccelerators(temp);
-				if (temp.IsEmpty())
-					ofn.lpstrTitle = NULL;
-				else
-					ofn.lpstrTitle = temp;
-				ofn.Flags = OFN_OVERWRITEPROMPT;
-
-				CString sFilter;
-				sFilter.LoadString(IDS_COMMONFILEFILTER);
-				TCHAR * pszFilters = new TCHAR[sFilter.GetLength()+4];
-				_tcscpy_s (pszFilters, sFilter.GetLength()+4, sFilter);
-				// Replace '|' delimiters with '\0's
-				TCHAR *ptr = pszFilters + _tcslen(pszFilters);  //set ptr at the NULL
-				while (ptr != pszFilters)
+				if (CAppUtils::FileOpenSave(revFilename, IDS_LOG_POPUP_SAVE, IDS_COMMONFILEFILTER, false, m_hWnd))
 				{
-					if (*ptr == '|')
-						*ptr = '\0';
-					ptr--;
-				}
-				ofn.lpstrFilter = pszFilters;
-				ofn.nFilterIndex = 1;
-				// Display the Open dialog box. 
-				CTSVNPath tempfile;
-				if (GetSaveFileName(&ofn)==TRUE)
-				{
-					tempfile.SetFromWin(ofn.lpstrFile);
+					CTSVNPath tempfile;
+					tempfile.SetFromWin(revFilename);
 					SVN svn;
 					CProgressDlg progDlg;
 					progDlg.SetTitle(IDS_APPNAME);
+					progDlg.SetAnimation(IDR_DOWNLOAD);
 					CString sInfoLine;
 					sInfoLine.Format(IDS_PROGRESSGETFILEREVISION, m_path.GetWinPath(), revSelected.ToString());
 					progDlg.SetLine(1, sInfoLine);
@@ -3411,7 +3453,6 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 						{
 							progDlg.Stop();
 							svn.SetAndClearProgressInfo((HWND)NULL);
-							delete [] pszFilters;
 							CMessageBox::Show(this->m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 							EnableOKButton();
 							break;
@@ -3420,7 +3461,6 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 					progDlg.Stop();
 					svn.SetAndClearProgressInfo((HWND)NULL);
 				}
-				delete [] pszFilters;
 			}
 			break;
 		case ID_OPENWITH:
@@ -3429,6 +3469,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 			{
 				CProgressDlg progDlg;
 				progDlg.SetTitle(IDS_APPNAME);
+				progDlg.SetAnimation(IDR_DOWNLOAD);
 				CString sInfoLine;
 				sInfoLine.Format(IDS_PROGRESSGETFILEREVISION, m_path.GetWinPath(), revSelected.ToString());
 				progDlg.SetLine(1, sInfoLine);
@@ -3476,7 +3517,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 					CBlame blame;
 					CString tempfile;
 					CString logfile;
-					tempfile = blame.BlameToTempFile(m_path, dlg.StartRev, dlg.EndRev, dlg.EndRev, logfile, TRUE);
+					tempfile = blame.BlameToTempFile(m_path, dlg.StartRev, dlg.EndRev, dlg.EndRev, logfile, _T(""), TRUE);
 					if (!tempfile.IsEmpty())
 					{
 						if (dlg.m_bTextView)
@@ -3541,9 +3582,9 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 		case ID_REPOBROWSE:
 			{
 				CString sCmd;
-				sCmd.Format(_T("%s /command:repobrowser /path:\"%s\" /rev:%ld"),
+				sCmd.Format(_T("%s /command:repobrowser /path:\"%s\" /rev:%s"),
 					CPathUtils::GetAppDirectory()+_T("TortoiseProc.exe"),
-					pathURL, revSelected);
+					pathURL, revSelected.ToString());
 
 				CAppUtils::LaunchApplication(sCmd, NULL, false);
 			}
@@ -3569,7 +3610,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 				CString url = _T("tsvn:")+pathURL;
 				sCmd.Format(_T("%s /command:export /url:\"%s\" /revision:%ld"),
 					CPathUtils::GetAppDirectory()+_T("TortoiseProc.exe"),
-					url, revSelected);
+					url, (LONG)revSelected);
 				CAppUtils::LaunchApplication(sCmd, NULL, false);
 			}
 			break;
@@ -3579,17 +3620,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 				CString url = _T("tsvn:")+pathURL;
 				sCmd.Format(_T("%s /command:checkout /url:\"%s\" /revision:%ld"),
 					CPathUtils::GetAppDirectory()+_T("TortoiseProc.exe"),
-					url, revSelected);
-				CAppUtils::LaunchApplication(sCmd, NULL, false);
-			}
-			break;
-		case ID_GETMERGELOGS:
-			{
-				CString sCmd;
-				CString url = _T("tsvn:")+pathURL;
-				sCmd.Format(_T("%s /command:log /path:\"%s\" /revision:%ld /merge"),
-					CPathUtils::GetAppDirectory()+_T("TortoiseProc.exe"),
-					pathURL, revSelected);
+					url, (LONG)revSelected);
 				CAppUtils::LaunchApplication(sCmd, NULL, false);
 			}
 			break;
@@ -3710,7 +3741,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 					if (selRealIndex == nItem)
 					{
 						selIndex = hiddenindex;
-						changedlogpath = pLogEntry->pArChangedPaths->GetAt(nItem);
+						changedlogpath = pLogEntry->pArChangedPaths->GetAt(selIndex);
 						break;
 					}
 				}
@@ -3760,6 +3791,8 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_POPPROPS, temp);			// "Show Properties"
 				temp.LoadString(IDS_MENULOG);
 				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_LOG, temp);					// "Show Log"				
+				temp.LoadString(IDS_LOG_POPUP_GETMERGELOGS);
+				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_GETMERGELOGS, temp);		// "Show merge log"
 				temp.LoadString(IDS_LOG_POPUP_SAVE);
 				popup.AppendMenu(MF_STRING | MF_ENABLED, ID_SAVEAS, temp);
 				bEntryAdded = true;
@@ -3785,6 +3818,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 			return;
 		int cmd = popup.TrackPopupMenu(TPM_RETURNCMD | TPM_LEFTALIGN | TPM_NONOTIFY, point.x, point.y, this, 0);
 		bool bOpenWith = false;
+		bool bMergeLog = false;
 		m_bCancelled = false;
 		switch (cmd)
 		{
@@ -3951,8 +3985,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 				}
 				else
 				{
-					OPENFILENAME ofn = {0};				// common dialog box structure
-					TCHAR szFile[MAX_PATH] = {0};		// buffer for file name
+					// Display the Open dialog box. 
 					CString revFilename;
 					temp = CPathUtils::GetFileNameFromPath(changedpaths[0]);
 					int rfind = temp.ReverseFind('.');
@@ -3960,43 +3993,14 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 						revFilename.Format(_T("%s-%ld%s"), temp.Left(rfind), rev1, temp.Mid(rfind));
 					else
 						revFilename.Format(_T("%s-%ld"), temp, rev1);
-					_tcscpy_s(szFile, MAX_PATH, revFilename);
-					// Initialize OPENFILENAME
-					ofn.lStructSize = sizeof(OPENFILENAME);
-					ofn.hwndOwner = this->m_hWnd;
-					ofn.lpstrFile = szFile;
-					ofn.nMaxFile = sizeof(szFile)/sizeof(TCHAR);
-					temp.LoadString(IDS_LOG_POPUP_SAVE);
-					CStringUtils::RemoveAccelerators(temp);
-					if (temp.IsEmpty())
-						ofn.lpstrTitle = NULL;
-					else
-						ofn.lpstrTitle = temp;
-					ofn.Flags = OFN_OVERWRITEPROMPT;
-
-					CString sFilter;
-					sFilter.LoadString(IDS_COMMONFILEFILTER);
-					TCHAR * pszFilters = new TCHAR[sFilter.GetLength()+4];
-					_tcscpy_s (pszFilters, sFilter.GetLength()+4, sFilter);
-					// Replace '|' delimiters with '\0's
-					TCHAR *ptr = pszFilters + _tcslen(pszFilters);  //set ptr at the NULL
-					while (ptr != pszFilters)
-					{
-						if (*ptr == '|')
-							*ptr = '\0';
-						ptr--;
-					}
-					ofn.lpstrFilter = pszFilters;
-					ofn.nFilterIndex = 1;
-					// Display the Open dialog box. 
-					bTargetSelected = !!GetSaveFileName(&ofn);
-					TargetPath.SetFromWin(ofn.lpstrFile);
-					delete [] pszFilters;
+					bTargetSelected = CAppUtils::FileOpenSave(revFilename, IDS_LOG_POPUP_SAVE, IDS_COMMONFILEFILTER, false, m_hWnd);
+					TargetPath.SetFromWin(revFilename);
 				}
 				if (bTargetSelected)
 				{
 					CProgressDlg progDlg;
 					progDlg.SetTitle(IDS_APPNAME);
+					progDlg.SetAnimation(IDR_DOWNLOAD);
 					for (std::vector<LogChangedPath*>::iterator it = changedlogpaths.begin(); it!= changedlogpaths.end(); ++it)
 					{
 						SVNRev getrev = ((*it)->action == LOGACTIONS_DELETED) ? rev2 : rev1;
@@ -4089,7 +4093,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 					CBlame blame;
 					CString tempfile;
 					CString logfile;
-					tempfile = blame.BlameToTempFile(CTSVNPath(filepath), dlg.StartRev, dlg.EndRev, dlg.EndRev, logfile, TRUE);
+					tempfile = blame.BlameToTempFile(CTSVNPath(filepath), dlg.StartRev, dlg.EndRev, dlg.EndRev, logfile, _T(""), TRUE);
 					if (!tempfile.IsEmpty())
 					{
 						if (dlg.m_bTextView)
@@ -4113,6 +4117,9 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 				}
 			}
 			break;
+		case ID_GETMERGELOGS:
+			bMergeLog = true;
+			// fall through
 		case ID_LOG:
 			{
 				DialogEnableWindow(IDOK, FALSE);
@@ -4150,7 +4157,8 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 				}
 				CString sCmd;
 				sCmd.Format(_T("\"%s\" /command:log /path:\"%s\" /startrev:%ld"), CPathUtils::GetAppDirectory()+_T("TortoiseProc.exe"), filepath, logrev);
-
+				if (bMergeLog)
+					sCmd += _T(" /merge");
 				CAppUtils::LaunchApplication(sCmd, NULL, false);
 				EnableOKButton();
 				theApp.DoWaitCursor(-1);
@@ -4204,4 +4212,22 @@ void CLogDlg::OnSize(UINT nType, int cx, int cy)
 	SetSplitterRange();
 }
 
+void CLogDlg::OnRefresh()
+{
+	if (GetDlgItem(IDC_GETALL)->IsWindowEnabled())
+		Refresh();
+}
 
+void CLogDlg::OnFind()
+{
+	if (!m_pFindDialog)
+	{
+		m_pFindDialog = new CFindReplaceDialog();
+		m_pFindDialog->Create(TRUE, NULL, NULL, FR_HIDEUPDOWN | FR_HIDEWHOLEWORD, this);									
+	}
+}
+
+void CLogDlg::OnFocusFilter()
+{
+	GetDlgItem(IDC_SEARCHEDIT)->SetFocus();	
+}

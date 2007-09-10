@@ -29,7 +29,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2007-07-09 21:34+0100\n"
+"PO-Revision-Date: 2007-08-05 01:57+0100\n"
 "Last-Translator: Mario Šarić <msaric@helix.hr>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -549,6 +549,11 @@ msgstr "&Od revizije"
 msgid "&Go To Line..."
 msgstr "&Skoči na redak..."
 
+# ID:13,
+#: MenuEntry
+msgid "&Group branches"
+msgstr "&Grupiraj grane"
+
 # Control-ID:1032,#:
 # Control-ID:1115,#:
 # Control-ID:1019,#:
@@ -677,6 +682,10 @@ msgstr "&Mrežni diskovi"
 #: Control-ID:65535
 msgid "&New "
 msgstr "&Novo"
+
+#: MenuEntry
+msgid "&Newest on top"
+msgstr "&Najnoviji na vrhu"
 
 # Control-ID:1208,
 #: ID:115
@@ -817,6 +826,14 @@ msgstr "&Snimi..."
 msgid "&Settings"
 msgstr "&Postavke"
 
+# Control-ID:1032,#:
+# Control-ID:1115,#:
+# Control-ID:1019,#:
+# Control-ID:1019,
+#: MenuEntry
+msgid "&Show HEAD revisions"
+msgstr "&Pokaćže glavne (HEAD) revizije"
+
 # ID:238,
 #: Control-ID:1185
 msgid "&Specific revision in repository"
@@ -849,7 +866,7 @@ msgstr "&Veličina taba:"
 
 # Control-ID:1222,
 #: Control-ID:1222
-msgid "&Timeout in seconds to stop the autocompletion parsing"
+msgid "&Timeout in seconds to stop the auto-completion parsing"
 msgstr "&Vrijeme u sekundama do zaustavljanja parsiranja autodopune"
 
 # Control-ID:65535,
@@ -938,7 +955,7 @@ msgstr "&Obnovi prema reviziji..."
 
 # Control-ID:1184,
 #: Control-ID:1184
-msgid "&Use autocompletion of filepaths and keywords"
+msgid "&Use auto-completion of file paths and keywords"
 msgstr "&Koristite autozavršavanje staza datoteka i ključnih riječi"
 
 # Control-ID:65535,#:
@@ -1508,14 +1525,6 @@ msgstr "Jeste li sigurni da želite vratiti na staro %d stavki? Izgubiti ćete <
 msgid "Arrange &Vertical"
 msgstr "Posloži &okomito"
 
-#: MenuEntry
-msgid "Arranged by &path"
-msgstr "Razvrstano po &stazi"
-
-#: ID:2050
-msgid "Arranges the nodes sorted by path"
-msgstr "Uređuje čvorove razvrstane po stazi"
-
 # ID:13,
 #: ID:264
 #, c-format
@@ -1594,7 +1603,7 @@ msgstr "Automatski zatvori ako nema spajanja, dodavanja ili brisanja"
 # ID:195,
 #: ID:195
 msgid ""
-"Autocomplete suggests words (usually class or member names)\n"
+"Auto-complete suggests words (usually class or member names)\n"
 "from the files that you have changed as you type a log message."
 msgstr ""
 "Za vrijeme upisa poruke dnevnika automatska dopuna predlaže riječi\n"
@@ -1656,6 +1665,11 @@ msgstr "Pr&etraži..."
 #: ID:115
 msgid "Branch / tag created successfully!"
 msgstr "Grana / oznaka uspješno napravljena!"
+
+# ID:2052,
+#: ID:2052
+msgid "Branch at copy-from-rev even if there was no change in that revision"
+msgstr "Granaj na copy-from-rev čak i ako nije bilo promjene u toj reviziji"
 
 # ID:9,
 #: ID:9
@@ -2793,6 +2807,10 @@ msgid "Dry Run"
 msgstr "Proba"
 
 #: MenuEntry
+msgid "E&xact copy sources"
+msgstr "I&zdvoji izvore kopiranja"
+
+#: MenuEntry
 msgid "E&xit"
 msgstr "I&zlaz"
 
@@ -3305,6 +3323,10 @@ msgstr "Uklopi slike &zajedno"
 msgid "Floppy drives (A: B:)"
 msgstr "Disketa (A: B:)"
 
+#: MenuEntry
+msgid "Fold &tags"
+msgstr "Skupi &oznake"
+
 # Control-ID:65535,
 #: Control-ID:65535
 msgid "Font"
@@ -3489,6 +3511,11 @@ msgstr "Vrsta grafa:"
 msgid "Group changelists"
 msgstr "Grupiraj popis izmjena"
 
+# ID:2050,
+#: ID:2050
+msgid "Groups branches together"
+msgstr "Grupira grane"
+
 # Control-ID:1229,
 #: Control-ID:1229
 msgid "H&ide unrelated changed paths"
@@ -3631,6 +3658,36 @@ msgstr "ID:32809:V C +F"
 msgid "ID:32810:V   +T"
 msgstr "ID:32810:V   +Z"
 
+#. Accelerator Entry for Menu ID:32814; '&Newest on top'
+#: Corresponding Menu ID:32814
+#: ; '&Newest on top'
+msgid "ID:32814:V C +L"
+msgstr "ID:32814:V C +L"
+
+#. Accelerator Entry for Menu ID:32814; '&Newest on top'
+#: Corresponding Menu ID:32814
+#: ; '&Newest on top'
+msgid "ID:32814:VA  +D"
+msgstr "ID:32814:VA  +D"
+
+#. Accelerator Entry for Menu ID:32821; ''
+#: Corresponding Menu ID:32821
+#: ; ''
+msgid "ID:32821:V C +F"
+msgstr "ID:32821:V C +F"
+
+#. Accelerator Entry for Menu ID:32825; ''
+#: Corresponding Menu ID:32825
+#: ; ''
+msgid "ID:32825:V C +L"
+msgstr "ID:32825:V C +L"
+
+#. Accelerator Entry for Menu ID:32825; ''
+#: Corresponding Menu ID:32825
+#: ; ''
+msgid "ID:32825:VA  +D"
+msgstr "ID:32825:VA  +D"
+
 #. Accelerator Entry for Menu ID:57601; '&Open Ctrl-O'
 #: Corresponding Menu ID:57601
 #: ; '&Open Ctrl-O'
@@ -3649,6 +3706,7 @@ msgstr "ID:57603:V C +S"
 msgid "ID:57604:V CS+S"
 msgstr "ID:57604:V CS+S"
 
+#. Accelerator Entry for Menu ID:57634; ''
 #. Accelerator Entry for Menu ID:57634; '&Copy'
 #: Corresponding Menu ID:57634
 #: ; '&Copy'
@@ -5166,6 +5224,11 @@ msgstr "Prije pohrane"
 msgid "Pre-Update Hook"
 msgstr "Skript prije obnavljanja"
 
+# ID:2052,
+#: ID:2052
+msgid "Prevents most cases in which connection lines cross revision nodes"
+msgstr "Spriječava većinu slučajeva u kojima spojnice križaju čvorove revizija"
+
 # ID:376,
 #: ID:376
 msgid "Preview patched file"
@@ -5338,6 +5401,10 @@ msgstr ""
 "Ponovi prethodno poništenu akciju\n"
 "Ponovi"
 
+#: MenuEntry
+msgid "Reduce cross-&lines"
+msgstr "Smanji križanja &linija"
+
 # ID:3825,
 #: ID:3825
 msgid "Reduce the window to an icon"
@@ -5347,6 +5414,7 @@ msgstr "Smanji prozor u ikonu"
 # ID:135,
 #: ID:101
 #: ID:135
+#: Control-ID:1382
 msgid "Refresh"
 msgstr "Osvježi"
 
@@ -5772,6 +5840,30 @@ msgstr ""
 "Poruka dnevnika:\r\n"
 "%s"
 
+# ID:272,
+#: ID:272
+#, c-format
+msgid ""
+"Revision: %ld\n"
+"URL: %s\r\n"
+"Author: %s\r\n"
+"Date: %s\r\n"
+"\r\n"
+"Tags:%s\r\n"
+"\r\n"
+"Logmessage:\r\n"
+"%s"
+msgstr ""
+"Revizija: %ld\n"
+"URL: %s\r\n"
+"Autor: %s\r\n"
+"Datum: %s\r\n"
+"\r\n"
+"Oznake:%s\r\n"
+"\r\n"
+"Poruka dnevnika:\r\n"
+"%s"
+
 # ID:76,#:
 # Control-ID:65535,#:
 # Control-ID:65535,
@@ -6139,7 +6231,7 @@ msgstr "&Adresa poslužitelja:"
 
 # Control-ID:1088,
 #: Control-ID:1088
-msgid "Set filedates to the \"last commit &time\""
+msgid "Set file dates to the \"last commit &time\""
 msgstr "Postavi datume datoteka na \"vrijeme zadnje &pohrane\""
 
 # ID:13,
@@ -6236,6 +6328,11 @@ msgstr "Prikaži datoteke bez &verzija"
 msgid "Show File List"
 msgstr "Prikaži popis datoteka"
 
+# ID:76,
+#: ID:2051
+msgid "Show HEAD revision nodes"
+msgstr "Prikaži čvorove glavne revizije"
+
 # Control-ID:1126,
 #: Control-ID:1126
 msgid "Show Lock dialog before locking files"
@@ -6281,6 +6378,11 @@ msgstr "Prikaži traku s razlikama u &redku"
 msgid "Show linenumber&s"
 msgstr "Prikaži brojeve lini&ja"
 
+# ID:2051,
+#: ID:2051
+msgid "Show oldest node at top"
+msgstr "Prikaži počevši od najstarijeg čvora"
+
 # ID:3713,
 #: ID:3713
 msgid ""
@@ -6307,6 +6409,11 @@ msgid ""
 msgstr ""
 "Prikaži posebne znakove za razmake\n"
 "Prikaži razmake"
+
+# ID:2052,
+#: ID:2052
+msgid "Show tags on the copy source, not as separate nodes"
+msgstr "Pokaži oznake na izvoru kopiranja, a ne kao odvojene čvorove"
 
 # Control-ID:1073,#:
 # Control-ID:1073,
@@ -6419,6 +6526,16 @@ msgstr "Odredite raspon revizija koje želite stopiti:"
 #: ID:376
 msgid "Split lines"
 msgstr "Podijeli retke"
+
+# ID:376,
+#: MenuEntry
+msgid "Split long &branches"
+msgstr "Razdijeli dugačke &grane"
+
+# ID:2052,
+#: ID:2052
+msgid "Split long, inactive branches into segments"
+msgstr "Razdijeli dugačke i neaktivne grane"
 
 # ID:3604,
 #: ID:3604
@@ -6992,12 +7109,12 @@ msgstr ""
 #: ID:195
 msgid ""
 "The time in seconds after which the parsing of the selected files stops.\n"
-"A lower value will make the autocompletion list available sooner,\n"
+"A lower value will make the auto-completion list available sooner,\n"
 "but maybe not scan all files."
 msgstr ""
 "Vrijeme u sekundama nakon kojeg se zaustavlja parsiranje odabranih datoteka.\n"
 "Manja vrijednost uzrokovati će bržu pojavu popisa automatskih dopuna,\n"
-"ali možda neće sve datoteke biti pretražene."
+"ali tada sve datoteke možda neće biti pretražene."
 
 # ID:82,
 #: ID:82
@@ -8305,12 +8422,14 @@ msgstr ""
 #: ID:14
 msgid ""
 "svn:externals\n"
-"A newline separated list of module specifiers, each of which consists of a relative directory path, optional revision flags, and an URL. For example\n"
+"A newline separated list of module specifiers, each of which consists of\n"
+"a relative directory path, optional revision flags, and a URL. For example\n"
 "foo\t\thttp://example.com/repos/zig\n"
 "foo/bar -r 1234\thttp://example.com/repos/zag"
 msgstr ""
 "svn:externals\n"
-"Popis opisnika modula odvojenih novim redom, pri čemu se svaki od njih sastoji od relativne staze direktorija, neobavezne zastavice revizije i URL-a. Na primjer:\n"
+"Popis opisnika modula odvojenih novim redom, pri čemu se svaki od njih sastoji od\n"
+"relativne staze mape, neobavezne zastavice revizije i URL-a. Na primjer:\n"
 "foo\t\thttp://primjer.hr/repos/cik\n"
 "foo/bar -r 1234\thttp://primjer.hr/repos/cak"
 

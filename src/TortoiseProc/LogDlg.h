@@ -28,12 +28,14 @@
 #include "Colors.h"
 #include "MenuButton.h"
 #include "LogDlgHelper.h"
+#include "FilterEdit.h"
 
 #define LOGFILTER_ALL      1
 #define LOGFILTER_MESSAGES 2
 #define LOGFILTER_PATHS    3
 #define LOGFILTER_AUTHORS  4
 #define LOGFILTER_REVS	   5
+#define LOGFILTER_REGEX	   6
 
 
 #define LOGFILTER_TIMER		101
@@ -44,7 +46,7 @@ typedef int (__cdecl *GENERICCOMPAREFN)(const void * elem1, const void * elem2);
  * \ingroup TortoiseProc
  * Shows log messages of a single file or folder in a listbox. 
  */
-class CLogDlg : public CResizableStandAloneDialog, public SVN //CResizableStandAloneDialog
+class CLogDlg : public CResizableStandAloneDialog, public SVN, IFilterEditValidator
 {
 	DECLARE_DYNAMIC(CLogDlg)
 	
@@ -60,12 +62,15 @@ public:
 protected:
 	//implement the virtual methods from SVN base class
 	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions);
-	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, DWORD children);
+	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, BOOL haschildren);
 	virtual BOOL Cancel();
+	virtual bool Validate(LPCTSTR string);
 
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	afx_msg LRESULT OnFindDialogMessage(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnClickedInfoIcon(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnClickedCancelFilter(WPARAM wParam, LPARAM lParam);
 	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	afx_msg void OnLvnKeydownLoglist(NMHDR *pNMHDR, LRESULT *pResult);
@@ -79,8 +84,6 @@ protected:
 	afx_msg void OnNMCustomdrawChangedFileList(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnGetdispinfoLoglist(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnGetdispinfoChangedFileList(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnStnClickedFiltericon();
-	afx_msg void OnBnClickedFiltercancel();
 	afx_msg void OnEnChangeSearchedit();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnDtnDatetimechangeDateto(NMHDR *pNMHDR, LRESULT *pResult);
@@ -95,6 +98,10 @@ protected:
 	afx_msg void OnDtnDropdownDateto(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnBnClickedIncludemerge();
+	afx_msg void OnBnClickedRefresh();
+	afx_msg void OnRefresh();
+	afx_msg void OnFind();
+	afx_msg void OnFocusFilter();
 
 	virtual void OnCancel();
 	virtual void OnOK();
@@ -140,6 +147,9 @@ private:
 	void GetAll(bool bForceAll = false);
 	void UpdateLogInfoLabel();
 	void SaveSplitterPos();
+	bool ValidateRegexp(LPCTSTR regexp_str, rpattern& pat, bool bMatchCase = false);
+	void CheckRegexpTooltip();
+
 
 	virtual LRESULT DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 	static int __cdecl	SortCompare(const void * pElem1, const void * pElem2);	///< sort callback function
@@ -157,6 +167,7 @@ private:
 	CString				m_sRepositoryRoot;
 	CListCtrl			m_LogList;
 	CListCtrl			m_ChangedFileListCtrl;
+	CFilterEdit			m_cFilter;
 	CProgressCtrl		m_LogProgress;
 	CMenuButton			m_btnShow;
 	CTSVNPath			m_path;
@@ -180,6 +191,7 @@ private:
 	CPtrArray			m_arShownList;
 	bool				m_hasWC;
 	int					m_nSearchIndex;
+	bool				m_bFilterWithRegex;
 	static const UINT	m_FindDialogMessage;
 	CFindReplaceDialog *m_pFindDialog;
 	CFont				m_logFont;
@@ -195,8 +207,6 @@ private:
 	DWORD				m_tTo;
 	int					m_limit;
 	int					m_limitcounter;
-	CBitmapButton		m_cFilterCancelButton;
-	CBitmapButton		m_cFilterIcon;
 	int                 m_nSortColumn;
 	bool                m_bAscending;
 	static int			m_nSortColumnPathList;
@@ -210,6 +220,8 @@ private:
 	CString				m_sLogInfo;
 	std::set<svn_revnum_t> m_mergedRevs;
 
+	CBalloon			m_tooltips;
+
 	CTime				m_timFrom;
 	CTime				m_timTo;
 	CColors				m_Colors;
@@ -220,8 +232,10 @@ private:
 	HICON				m_hDeletedIcon;
 
 	DWORD				m_childCounter;
-private:
-	CStoreSelection* m_pStoreSelection;
-    CLogDataVector m_logEntries;
+	DWORD				m_maxChild;
+	HACCEL				m_hAccel;
+
+	CStoreSelection*	m_pStoreSelection;
+    CLogDataVector		m_logEntries;
 };
 static UINT WM_REVSELECTED = RegisterWindowMessage(_T("TORTOISESVN_REVSELECTED_MSG"));

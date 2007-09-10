@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -201,9 +201,15 @@ void CSearchPathTree::ChainEntries (CRevisionEntry* entry)
 		// branch or chain?
 
 		if (entry->action == CRevisionEntry::addedwithhistory)
+		{
 			lastEntry->copyTargets.push_back (entry);
+			entry->copySources.push_back (lastEntry);
+		}
 		else
+		{
 			lastEntry->next = entry;
+			entry->prev = lastEntry;
+		}
 	}
 
 	lastEntry = entry;
@@ -224,6 +230,15 @@ CSearchPathTree* CSearchPathTree::GetPreOrderNext (CSearchPathTree* lastNode)
 	if (firstChild != NULL)
         return firstChild;
 
+    // there is no sub-tree
+
+    return GetSkipSubTreeNext (lastNode);
+}
+
+// return next node in pre-order but skip this sub-tree
+
+CSearchPathTree* CSearchPathTree::GetSkipSubTreeNext (CSearchPathTree* lastNode)
+{
     CSearchPathTree* result = this;
     while ((result != lastNode) && (result->next == NULL))
 		result = result->parent;
@@ -235,7 +250,7 @@ CSearchPathTree* CSearchPathTree::GetPreOrderNext (CSearchPathTree* lastNode)
 
 CRevisionGraph::CRevisionGraph(void) : m_bCancelled(FALSE)
 	, m_FilterMinRev(-1)
-	, m_FilterMaxRev(-1)
+	, m_FilterMaxRev(LONG_MAX)
 {
 	memset (&m_ctx, 0, sizeof (m_ctx));
 	parentpool = svn_pool_create(NULL);
@@ -310,14 +325,14 @@ bool CRevisionGraph::SetFilter(svn_revnum_t minrev, svn_revnum_t maxrev, const C
 			CString sTemp = sPathFilter;
 			while (pos>=0)
 			{
-				m_filterpaths.insert((LPCWSTR)sTemp.Left(pos));
+				m_filterpaths.insert(CUnicodeUtils::StdGetUTF8((LPCTSTR)sTemp.Left(pos)));
 				sTemp = sTemp.Mid(pos+1);
 				pos = sTemp.Find('*');
 			}
-			m_filterpaths.insert((LPCWSTR)sTemp);
+			m_filterpaths.insert(CUnicodeUtils::StdGetUTF8((LPCTSTR)sTemp));
 		}
 		else
-			m_filterpaths.insert((LPCWSTR)sPathFilter);
+			m_filterpaths.insert(CUnicodeUtils::StdGetUTF8((LPCTSTR)sPathFilter));
 	}
 	return true;
 }
@@ -692,11 +707,7 @@ void CRevisionGraph::AnalyzeRevisions ( const CDictionaryBasedTempPath& path
 			// this sub-tree has fully been covered (or been no match at all)
 			// -> to the next node
 
-			while (   (searchNode->GetNext() == NULL)
-				   && (searchNode->GetParent() != NULL))
-				searchNode = searchNode->GetParent();
-
-			searchNode = searchNode->GetNext();
+            searchNode = searchNode->GetSkipSubTreeNext();
 		}
 
 		// handle remaining copy-to entries
@@ -929,19 +940,12 @@ void CRevisionGraph::FillCopyTargets ( revision_t revision
 
 			// select next node
 
-			if (   (searchNode->GetFirstChild() != NULL)
-                && (sameOrChild || path.IsSameOrParentOf (copy->fromPathIndex)))
-			{
-				searchNode = searchNode->GetFirstChild();
-			}
-			else
-			{
-				while (    (searchNode->GetNext() == NULL)
-						&& (searchNode->GetParent() != NULL))
-					searchNode = searchNode->GetParent();
+            bool copyInSubTree = sameOrChild 
+                              || path.IsSameOrParentOf (copy->fromPathIndex);
 
-				searchNode = searchNode->GetNext();
-			}
+			searchNode = copyInSubTree
+                       ? searchNode->GetPreOrderNext()
+                       : searchNode->GetSkipSubTreeNext();
 		}
 	}
 }
@@ -1033,11 +1037,7 @@ void CRevisionGraph::AddMissingHeads (CSearchPathTree* rootNode)
 
 			// continue with right next
 
-			while (   (searchNode->GetNext() == NULL)
-				   && (searchNode->GetParent() != NULL))
-				searchNode = searchNode->GetParent();
-
-			searchNode = searchNode->GetNext();
+            searchNode = searchNode->GetSkipSubTreeNext();
 		}
 	}
 }
@@ -1121,6 +1121,7 @@ void CRevisionGraph::FindReplacements()
 					// make it part of this line (not a branch)
 
 					entry->next = target;
+                    target->prev = entry;
 					entry->copyTargets.clear();
 
 					// mark the old "deleted" entry for removal
@@ -1177,13 +1178,66 @@ void CRevisionGraph::FoldTags()
 	}
 }
 
+void CRevisionGraph::ApplyFilter()
+{
+	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
+	{
+		CRevisionEntry * entry = m_entryPtrs[i];
+
+		bool bRemove = false;
+		if (m_filterpaths.size() > 0)
+		{
+			for (std::set<std::string>::iterator fi = m_filterpaths.begin(); fi != m_filterpaths.end(); ++fi)
+			{
+				if (entry->realPath.GetPath().find(fi->c_str()) != std::string::npos)
+				{
+					bRemove = true;
+					break;
+				}
+			}
+		}
+		if (((svn_revnum_t)entry->revision < m_FilterMinRev) ||
+			((svn_revnum_t)entry->revision > m_FilterMaxRev) ||
+			(bRemove))
+		{
+			std::vector<CRevisionEntry*>& sources = entry->copySources;
+			for (size_t k = 0, sourcesCount = sources.size(); k < sourcesCount; ++k)
+			{
+				CRevisionEntry * src = sources[k];
+
+				for (std::vector<CRevisionEntry*>::iterator it = src->copyTargets.begin(); it != src->copyTargets.end(); ++it)
+				{
+					if (*it == entry)
+					{
+						src->copyTargets.erase(it);
+						break;
+					}
+				}
+			}
+			if (entry->prev)
+			{
+				entry->prev->next = entry->next;
+			}
+            if (entry->next)
+            {
+				entry->next->prev = entry->prev;
+            }
+			entry->action = CRevisionEntry::nothing;
+		}
+	}
+}
+
 void CRevisionGraph::Optimize (const SOptions& options)
 {
 	// say "renamed" for "Deleted"/"Added" entries
 
     FindReplacements();
 
-    // fold tags if requested
+	// apply the custom filter
+
+	ApplyFilter();
+	
+	// fold tags if requested
 
     if (options.foldTags)
         FoldTags();
@@ -1215,12 +1269,28 @@ void CRevisionGraph::Optimize (const SOptions& options)
 
 void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 								   , std::vector<int>& columnByRow
-                                   , int column)
+                                   , int column
+								   , const SOptions& options)
 {
+	// find the first row that will be occupied by this branch
+
+	int startRow = start->row;
+	if (options.reduceCrossLines && (startRow > 0))
+	{
+		// in most cases of lines cross boxes, the reason is
+		// one branch ending on one line with the next one
+		// starting at the next (using the same column)
+		// -> just mark one additional row as "used" by this
+		//    branch. So, there will be at least one "space"
+		//    row between branches in the same column.
+
+		--startRow;
+	}
+
 	// find largest column for the chain starting at "start"
     // skip split branch sections
 
-	int lastRow = start->row;
+	int lastRow = startRow;
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
     {
         if (entry->action != CRevisionEntry::splitEnd)
@@ -1242,7 +1312,7 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 
 	// block the column for the whole chain except for split branch sections
 
-	lastRow = start->row;
+	lastRow = startRow;
 	for (CRevisionEntry* entry = start; entry != NULL; entry = entry->next)
     {
         if (entry->action != CRevisionEntry::splitEnd)
@@ -1261,7 +1331,7 @@ void CRevisionGraph::AssignColumns ( CRevisionEntry* start
 	{
 		const std::vector<CRevisionEntry*>& targets = (*iter)->copyTargets;
 		for (size_t i = 0, count = targets.size(); i < count; ++i)
-			AssignColumns (targets[i], columnByRow, column+1);
+			AssignColumns (targets[i], columnByRow, column+1, options);
 	}
 }
 
@@ -1342,8 +1412,11 @@ void CRevisionGraph::AutoSplitBranch ( CRevisionEntry* entry
 
         // chain them
 
+        splitStart->prev = nextEntry;
         splitStart->next = splitEnd;
+        splitEnd->prev = splitStart;
         splitEnd->next = nextEntry;
+        nextEntry->prev = splitEnd;
         nextEntry = splitStart;
     }
 }
@@ -1399,7 +1472,7 @@ void CRevisionGraph::AssignCoordinates (const SOptions& options)
 	std::vector<int> columnByRow;
 	columnByRow.insert (columnByRow.begin(), row+1, 0);
 
-	AssignColumns (m_entryPtrs[0], columnByRow, 1);
+	AssignColumns (m_entryPtrs[0], columnByRow, 1, options);
 
     // invert order (show newest rev in first row)
 

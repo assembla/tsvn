@@ -21,7 +21,6 @@
 #include "LogDlg.h"
 #include "StandAloneDlg.h"
 #include "HistoryCombo.h"
-#include "Balloon.h"
 #include "afxwin.h"
 
 #define MERGE_REVSELECTSTART	 1
@@ -92,4 +91,6 @@ public:
 	BOOL		m_bIgnoreAncestry;
 	BOOL		m_bRecordOnly;
 	svn_depth_t	m_depth;
+	BOOL		m_bIgnoreEOL;
+	svn_diff_file_ignore_space_t	m_IgnoreSpaces;
 };

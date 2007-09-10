@@ -188,14 +188,14 @@ bool CDirectoryWatcher::AddPath(const CTSVNPath& path)
 	}
 	if (!newroot.IsEmpty())
 	{
-		ATLTRACE("add path to watch %ws\n", newroot.GetWinPath());
+		ATLTRACE(_T("add path to watch %s\n"), newroot.GetWinPath());
 		watchedPaths.AddPath(newroot);
 		watchedPaths.RemoveChildren();
 		CloseInfoMap();
 		m_hCompPort = INVALID_HANDLE_VALUE;
 		return true;
 	}
-	ATLTRACE("add path to watch %ws\n", path.GetWinPath());
+	ATLTRACE(_T("add path to watch %s\n"), path.GetWinPath());
 	watchedPaths.AddPath(path);
 	CloseInfoMap();
 	m_hCompPort = INVALID_HANDLE_VALUE;
@@ -257,7 +257,7 @@ void CDirectoryWatcher::WorkerThread()
 					if (hDir == INVALID_HANDLE_VALUE)
 					{
 						// this could happen if a watched folder has been removed/renamed
-						ATLTRACE("CDirectoryWatcher: CreateFile failed. Can't watch directory %ws\n", watchedPaths[i].GetWinPath());
+						ATLTRACE(_T("CDirectoryWatcher: CreateFile failed. Can't watch directory %s\n"), watchedPaths[i].GetWinPath());
 						CloseHandle(m_hCompPort);
 						m_hCompPort = INVALID_HANDLE_VALUE;
 						AutoLocker lock(m_critSec);
@@ -278,7 +278,7 @@ void CDirectoryWatcher::WorkerThread()
 					m_hCompPort = CreateIoCompletionPort(hDir, m_hCompPort, (ULONG_PTR)pDirInfo, 0);
 					if (m_hCompPort == NULL)
 					{
-						ATLTRACE("CDirectoryWatcher: CreateIoCompletionPort failed. Can't watch directory %ws\n", watchedPaths[i].GetWinPath());
+						ATLTRACE(_T("CDirectoryWatcher: CreateIoCompletionPort failed. Can't watch directory %s\n"), watchedPaths[i].GetWinPath());
 						AutoLocker lock(m_critSec);
 						ClearInfoMap();
 						delete pDirInfo;
@@ -296,7 +296,7 @@ void CDirectoryWatcher::WorkerThread()
 												&pDirInfo->m_Overlapped,
 												NULL))	//no completion routine!
 					{
-						ATLTRACE("CDirectoryWatcher: ReadDirectoryChangesW failed. Can't watch directory %ws\n", watchedPaths[i].GetWinPath());
+						ATLTRACE(_T("CDirectoryWatcher: ReadDirectoryChangesW failed. Can't watch directory %s\n"), watchedPaths[i].GetWinPath());
 						AutoLocker lock(m_critSec);
 						ClearInfoMap();
 						delete pDirInfo;
@@ -307,7 +307,7 @@ void CDirectoryWatcher::WorkerThread()
 					}
 					AutoLocker lock(m_critSec);
 					watchInfoMap[pDirInfo->m_hDir] = pDirInfo;
-					ATLTRACE("watching path %ws\n", pDirInfo->m_DirName.GetWinPath());
+					ATLTRACE(_T("watching path %s\n"), pDirInfo->m_DirName.GetWinPath());
 				}
 			}
 			else
@@ -330,7 +330,7 @@ void CDirectoryWatcher::WorkerThread()
 					do 
 					{
 						nOffset = pnotify->NextEntryOffset;
-						if (pnotify->FileNameLength >= READ_DIR_CHANGE_BUFFER_SIZE)
+						if (pnotify->FileNameLength >= (READ_DIR_CHANGE_BUFFER_SIZE*sizeof(TCHAR)))
 							continue;
 						ZeroMemory(buf, READ_DIR_CHANGE_BUFFER_SIZE*sizeof(TCHAR));
 						_tcsncpy_s(buf, READ_DIR_CHANGE_BUFFER_SIZE, pdi->m_DirPath, READ_DIR_CHANGE_BUFFER_SIZE);
@@ -340,7 +340,7 @@ void CDirectoryWatcher::WorkerThread()
 							pnotify = (PFILE_NOTIFY_INFORMATION)((LPBYTE)pnotify + nOffset);
 							continue;
 						}
-						buf[READ_DIR_CHANGE_BUFFER_SIZE-1] = 0;
+						buf[(pnotify->FileNameLength/sizeof(TCHAR))+pdi->m_DirPath.GetLength()] = 0;
 						pnotify = (PFILE_NOTIFY_INFORMATION)((LPBYTE)pnotify + nOffset);
 						if (m_FolderCrawler)
 						{

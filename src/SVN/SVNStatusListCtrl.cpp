@@ -85,11 +85,12 @@ const UINT CSVNStatusListCtrl::SVNSLNM_CHECKCHANGED
 #define IDSVNLC_REPAIRMOVE		26
 #define IDSVNLC_REMOVEFROMCS	27
 #define IDSVNLC_CREATECS		28
-#define IDSVNLC_CHECKGROUP		29
-#define IDSVNLC_UNCHECKGROUP	30
+#define IDSVNLC_CREATEIGNORECS	29
+#define IDSVNLC_CHECKGROUP		30
+#define IDSVNLC_UNCHECKGROUP	31
 // the IDSVNLC_MOVETOCS *must* be the last index, because it contains a dynamic submenu where 
 // the submenu items get command ID's sequent to this number
-#define IDSVNLC_MOVETOCS		31
+#define IDSVNLC_MOVETOCS		32
 
 
 BEGIN_MESSAGE_MAP(CSVNStatusListCtrl, CListCtrl)
@@ -138,6 +139,7 @@ CSVNStatusListCtrl::CSVNStatusListCtrl() : CListCtrl()
 	, m_bHasLocks(false)
 	, m_bBlock(false)
 	, m_bBlockUI(false)
+	, m_bHasCheckboxes(false)
 {
 	ZeroMemory(m_arColumnWidths, sizeof(m_arColumnWidths));
 	m_critSec.Init();
@@ -201,6 +203,7 @@ void CSVNStatusListCtrl::Init(DWORD dwColumns, const CString& sColumnInfoContain
 	CRegDWORD regColInfo(_T("Software\\TortoiseSVN\\StatusColumns\\")+sColumnInfoContainer, dwColumns);
 	m_dwColumns = regColInfo;
 	m_dwContextMenus = dwContextMenus;
+	m_bHasCheckboxes = bHasCheckboxes;
 	// set the extended style of the listcontrol
 	// the style LVS_EX_FULLROWSELECT interferes with the background watermark image but it's more important to be able to select in the whole row.
 	CRegDWORD regFullRowSelect(_T("Software\\TortoiseSVN\\FullRowSelect"), TRUE);
@@ -1034,7 +1037,8 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, DWORD dwCheck /*=0*/, bool bShowFold
 					m_arListArray.push_back(i);
 					if ((dwCheck & SVNSLC_SHOWREMOVEDANDPRESENT)||((dwCheck & SVNSLC_SHOWDIRECTS)&&(entry->direct)))
 					{
-						entry->checked = true;
+						if (entry->changelist.Compare(SVNSLC_IGNORECHANGELIST) != 0)
+							entry->checked = true;
 					}
 					AddEntry(entry, langID, listIndex++);
 				}
@@ -1044,7 +1048,8 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, DWORD dwCheck /*=0*/, bool bShowFold
 				m_arListArray.push_back(i);
 				if ((dwCheck & showFlags)||((dwCheck & SVNSLC_SHOWDIRECTS)&&(entry->direct)))
 				{
-					entry->checked = true;
+					if (entry->changelist.Compare(SVNSLC_IGNORECHANGELIST) != 0)
+						entry->checked = true;
 				}
 				AddEntry(entry, langID, listIndex++);
 			}
@@ -1053,7 +1058,8 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, DWORD dwCheck /*=0*/, bool bShowFold
 				m_arListArray.push_back(i);
 				if ((dwCheck & showFlags)||((dwCheck & SVNSLC_SHOWDIRECTS)&&(entry->direct)))
 				{
-					entry->checked = true;
+					if (entry->changelist.Compare(SVNSLC_IGNORECHANGELIST) != 0)
+						entry->checked = true;
 				}
 				AddEntry(entry, langID, listIndex++);
 			}
@@ -1162,7 +1168,8 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, const CTSVNPathList& checkedList, bo
 			{
 				if (entry->GetPath().IsEquivalentTo(checkedList[npath]))
 				{
-					entry->checked = true;
+					if (entry->changelist.Compare(SVNSLC_IGNORECHANGELIST) != 0)
+						entry->checked = true;
 					break;
 				}
 			}
@@ -2090,7 +2097,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 			ClientToScreen(&rect);
 			point = rect.CenterPoint();
 		}
-		if ((GetSelectedCount() == 0)&&(XPorLater))
+		if ((GetSelectedCount() == 0)&&(XPorLater)&&(m_bHasCheckboxes))
 		{
 			// nothing selected could mean the context menu is requested for
 			// a group header
@@ -2441,7 +2448,8 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 					popup.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_COPY, temp);
 					temp.LoadString(IDS_STATUSLIST_CONTEXT_COPYEXT);
 					popup.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_COPYEXT, temp);
-					if ((m_dwContextMenus & SVNSLC_POPCHANGELISTS)&&(XPorLater))
+					if ((m_dwContextMenus & SVNSLC_POPCHANGELISTS)&&(XPorLater)
+						&&(wcStatus != svn_wc_status_unversioned)&&(wcStatus != svn_wc_status_none))
 					{
 						popup.AppendMenu(MF_SEPARATOR);
 						// changelist commands
@@ -2455,15 +2463,30 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 						{
 							temp.LoadString(IDS_STATUSLIST_CONTEXT_CREATECS);
 							changelistSubMenu.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_CREATECS, temp);
-							if (m_changelists.size() > 0)
+
+							if (entry->changelist.Compare(SVNSLC_IGNORECHANGELIST))
 							{
 								changelistSubMenu.AppendMenu(MF_SEPARATOR);
+								changelistSubMenu.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_CREATEIGNORECS, SVNSLC_IGNORECHANGELIST);
+							}
+
+							if (m_changelists.size() > 0)
+							{
 								// find the changelist names
+								bool bNeedSeparator = true;
 								int cmdID = IDSVNLC_MOVETOCS;
 								for (std::map<CString, int>::const_iterator it = m_changelists.begin(); it != m_changelists.end(); ++it)
 								{
-									changelistSubMenu.AppendMenu(MF_STRING | MF_ENABLED, cmdID, it->first);
-									cmdID++;
+									if ((entry->changelist.Compare(it->first))&&(it->first.Compare(SVNSLC_IGNORECHANGELIST)))
+									{
+										if (bNeedSeparator)
+										{
+											changelistSubMenu.AppendMenu(MF_SEPARATOR);
+											bNeedSeparator = false;
+										}
+										changelistSubMenu.AppendMenu(MF_STRING | MF_ENABLED, cmdID, it->first);
+										cmdID++;
+									}
 								}
 							}
 							temp.LoadString(IDS_STATUSLIST_CONTEXT_MOVETOCS);
@@ -2550,6 +2573,8 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 							targetList.SortByPathname(true);
 
 							SVN svn;
+							CTSVNPathList delList = targetList;
+							delList.DeleteAllFiles(true);
 							if (!svn.Revert(targetList, FALSE))
 							{
 								CMessageBox::Show(this->m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
@@ -2963,7 +2988,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 									break;
 								}
 							}
-							CString name = ignorelist[j].GetFileOrDirectoryName();
+							CString name = CPathUtils::PathPatternEscape(ignorelist[j].GetFileOrDirectoryName());
 							CTSVNPath parentfolder = ignorelist[j].GetContainingDirectory();
 							SVNProperties props(parentfolder);
 							CStringA value;
@@ -3145,6 +3170,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 									CMessageBox::Show(m_hWnd, stat.GetLastErrorMsg(), _T("TortoiseSVN"), MB_ICONERROR);
 									break;
 								}
+								fentry->GetPath().Delete(true);
 								CopyFile(theirs.GetWinPath(), fentry->GetPath().GetWinPath(), FALSE);
 								if (!svn.Resolve(fentry->GetPath(), FALSE))
 								{
@@ -3200,6 +3226,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 									CMessageBox::Show(m_hWnd, stat.GetLastErrorMsg(), _T("TortoiseSVN"), MB_ICONERROR);
 									break;
 								}
+								fentry->GetPath().Delete(true);
 								CopyFile(mine.GetWinPath(), fentry->GetPath().GetWinPath(), FALSE);
 								if (!svn.Resolve(fentry->GetPath(), FALSE))
 								{
@@ -3228,7 +3255,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 
 						ProjectProperties props;
 						props.ReadPropsPathList(itemsToAdd);
-						if (svn.Add(itemsToAdd, &props, FALSE, TRUE, TRUE))
+						if (svn.Add(itemsToAdd, &props, FALSE, TRUE, TRUE, TRUE))
 						{
 							// The add went ok, but we now need to run through the selected items again
 							// and update their status
@@ -3396,58 +3423,15 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 						}
 					}
 					break;
+				case IDSVNLC_CREATEIGNORECS:
+					CreateChangeList(SVNSLC_IGNORECHANGELIST);
+					break;
 				case IDSVNLC_CREATECS:
 					{
-						CTSVNPathList changelistItems;
-						FillListOfSelectedItemPaths(changelistItems);
 						CCreateChangelistDlg dlg;
 						if (dlg.DoModal() == IDOK)
 						{
-							SVN svn;
-							if (svn.AddToChangeList(changelistItems, dlg.m_sName))
-							{
-								// The changelists were removed, but we now need to run through the selected items again
-								// and update their changelist
-								PrepareGroups(true);
-								if (m_changelists.size() == 0)
-								{
-									// there are no groups defined yet.
-									// before we can add our new group, we must assign all entries
-									// to the null-group (not assigned to a changeset)
-									for (int ii = 0; ii < GetItemCount(); ++ii)
-										SetItemGroup(ii, 0);
-								}
-								TCHAR groupname[1024];
-								LVGROUP grp = {0};
-								grp.cbSize = sizeof(LVGROUP);
-								grp.mask = LVGF_ALIGN | LVGF_GROUPID | LVGF_HEADER;
-								_tcsncpy_s(groupname, 1024, dlg.m_sName, 1023);
-								grp.pszHeader = groupname;
-								grp.iGroupId = m_changelists.size()+1;
-								grp.uAlign = LVGA_HEADER_LEFT;
-								m_changelists[dlg.m_sName] = InsertGroup(-1, &grp);
-								
-								POSITION pos = GetFirstSelectedItemPosition();
-								int index;
-								while ((index = GetNextSelectedItem(pos)) >= 0)
-								{
-									FileEntry * e = GetListEntry(index);
-									e->changelist = dlg.m_sName;
-								}
-
-								for (index = 0; index < GetItemCount(); ++index)
-								{
-									FileEntry * e = GetListEntry(index);
-									if (m_changelists.find(e->changelist)!=m_changelists.end())
-										SetItemGroup(index, m_changelists[e->changelist]);
-									else
-										SetItemGroup(index, 0);
-								}
-							}
-							else
-							{
-								CMessageBox::Show(m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
-							}
+							CreateChangeList(dlg.m_sName);
 						}
 					}
 					break;
@@ -3463,11 +3447,14 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 						int cmdID = IDSVNLC_MOVETOCS;
 						for (std::map<CString, int>::const_iterator it = m_changelists.begin(); it != m_changelists.end(); ++it)
 						{
-							if (cmd == cmdID)
+							if ((it->first.Compare(SVNSLC_IGNORECHANGELIST))&&(entry->changelist.Compare(it->first)))
 							{
-								sChangelist = it->first;
+								if (cmd == cmdID)
+								{
+									sChangelist = it->first;
+								}
+								cmdID++;
 							}
-							cmdID++;
 						}
 						if (!sChangelist.IsEmpty())
 						{
@@ -3585,6 +3572,57 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 				EnableGroupView(!IsGroupViewEnabled());
 			}
 		}
+	}
+}
+
+void CSVNStatusListCtrl::CreateChangeList(const CString& name)
+{
+	CTSVNPathList changelistItems;
+	FillListOfSelectedItemPaths(changelistItems);
+	SVN svn;
+	if (svn.AddToChangeList(changelistItems, name))
+	{
+		// The changelists were removed, but we now need to run through the selected items again
+		// and update their changelist
+		PrepareGroups(true);
+		if (m_changelists.size() == 0)
+		{
+			// there are no groups defined yet.
+			// before we can add our new group, we must assign all entries
+			// to the null-group (not assigned to a changeset)
+			for (int ii = 0; ii < GetItemCount(); ++ii)
+				SetItemGroup(ii, 0);
+		}
+		TCHAR groupname[1024];
+		LVGROUP grp = {0};
+		grp.cbSize = sizeof(LVGROUP);
+		grp.mask = LVGF_ALIGN | LVGF_GROUPID | LVGF_HEADER;
+		_tcsncpy_s(groupname, 1024, name, 1023);
+		grp.pszHeader = groupname;
+		grp.iGroupId = m_changelists.size()+1;
+		grp.uAlign = LVGA_HEADER_LEFT;
+		m_changelists[name] = InsertGroup(-1, &grp);
+
+		POSITION pos = GetFirstSelectedItemPosition();
+		int index;
+		while ((index = GetNextSelectedItem(pos)) >= 0)
+		{
+			FileEntry * e = GetListEntry(index);
+			e->changelist = name;
+		}
+
+		for (index = 0; index < GetItemCount(); ++index)
+		{
+			FileEntry * e = GetListEntry(index);
+			if (m_changelists.find(e->changelist)!=m_changelists.end())
+				SetItemGroup(index, m_changelists[e->changelist]);
+			else
+				SetItemGroup(index, 0);
+		}
+	}
+	else
+	{
+		CMessageBox::Show(m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 	}
 }
 
@@ -3750,7 +3788,7 @@ void CSVNStatusListCtrl::StartDiff(int fileindex)
 	if (entry == NULL)
 		return;
 	if (((entry->status == svn_wc_status_normal)&&(entry->remotestatus <= svn_wc_status_normal))||
-		(entry->status == svn_wc_status_unversioned))
+		(entry->status == svn_wc_status_unversioned)||(entry->status == svn_wc_status_none))
 	{
 		int ret = (int)ShellExecute(this->m_hWnd, NULL, entry->path.GetWinPath(), NULL, NULL, SW_SHOW);
 		if (ret <= HINSTANCE_ERROR)

@@ -39,7 +39,9 @@ CBlame::~CBlame()
 	m_progressDlg.Stop();
 }
 
-BOOL CBlame::BlameCallback(LONG linenumber, LONG revision, const CString& author, const CString& date, const CStringA& line)
+BOOL CBlame::BlameCallback(LONG linenumber, svn_revnum_t revision, const CString& author, const CString& date,
+						   svn_revnum_t merged_revision, const CString& merged_author, const CString& merged_date, const CString& merged_path,
+						   const CStringA& line)
 {
 	CStringA infolineA;
 	CStringA fulllineA;
@@ -51,11 +53,19 @@ BOOL CBlame::BlameCallback(LONG linenumber, LONG revision, const CString& author
 
 	CStringA dateA(date);
 	CStringA authorA(author);
+	CStringA pathA(merged_path);
+	if (!merged_author.IsEmpty())
+	{
+		dateA = CStringA(merged_date);
+		authorA = CStringA(merged_author);
+		revision = merged_revision;
+		m_bHasMerges = true;
+	}
 
 	if (m_bNoLineNo)
-		infolineA.Format("%6ld %30s %-30s ", revision, dateA, authorA);
+		infolineA.Format("%6ld %-30s %-60s %-30s ", revision, dateA, pathA, authorA);
 	else
-		infolineA.Format("%6ld %6ld %30s %-30s ", linenumber, revision, dateA, authorA);
+		infolineA.Format("%6ld %6ld %-30s %-60s %-30s ", linenumber, revision, dateA, pathA, authorA);
 	fulllineA = line;
 	fulllineA.TrimRight("\r\n");
 	fulllineA += "\n";
@@ -67,6 +77,11 @@ BOOL CBlame::BlameCallback(LONG linenumber, LONG revision, const CString& author
 	else
 		return FALSE;
 	return TRUE;
+}
+
+BOOL CBlame::Log(svn_revnum_t revision, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, BOOL /*children*/)
+{
+	return Log(revision, author, date, message, cpaths, time, filechanges, copies, actions);
 }
 
 BOOL CBlame::Log(svn_revnum_t revision, const CString& /*author*/, const CString& /*date*/, const CString& message, LogChangedPathArray * cpaths, apr_time_t /*time*/, int /*filechanges*/, BOOL /*copies*/, DWORD /*actions*/)
@@ -94,7 +109,7 @@ BOOL CBlame::Cancel()
 	return m_bCancelled;
 }
 
-CString CBlame::BlameToTempFile(const CTSVNPath& path, SVNRev startrev, SVNRev endrev, SVNRev pegrev, CString& logfile, BOOL showprogress /* = TRUE */)
+CString CBlame::BlameToTempFile(const CTSVNPath& path, SVNRev startrev, SVNRev endrev, SVNRev pegrev, CString& logfile, const CString& options, BOOL showprogress /* = TRUE */)
 {
 	// if the user specified to use another tool to show the blames, there's no
 	// need to fetch the log later: only TortoiseBlame uses those logs to give 
@@ -112,11 +127,11 @@ CString CBlame::BlameToTempFile(const CTSVNPath& path, SVNRev startrev, SVNRev e
 		return _T("");
 	CString headline;
 	m_bNoLineNo = false;
-	headline.Format(_T("%-6s %-6s %-30s %-30s %-s \n"), _T("line"), _T("rev"), _T("date"), _T("author"), _T("content"));
+	headline.Format(_T("%-6s %-6s %-30s %-60s %-30s %-s \n"), _T("line"), _T("rev"), _T("date"), _T("path"), _T("author"), _T("content"));
 	m_saveFile.WriteString(headline);
 	m_saveFile.WriteString(_T("\n"));
 	m_progressDlg.SetTitle(IDS_BLAME_PROGRESSTITLE);
-	m_progressDlg.SetAnimation(IDR_SEARCH);
+	m_progressDlg.SetAnimation(IDR_DOWNLOAD);
 	m_progressDlg.SetShowProgressBar(TRUE);
 	if (showprogress)
 	{
@@ -131,11 +146,12 @@ CString CBlame::BlameToTempFile(const CTSVNPath& path, SVNRev startrev, SVNRev e
 		m_nHeadRev = GetHEADRevision(path);
 	m_progressDlg.SetProgress(0, m_nHeadRev);
 
-	BOOL bBlameSuccesful = this->Blame(path, startrev, endrev, pegrev);
+	m_bHasMerges = false;
+	BOOL bBlameSuccesful = this->Blame(path, startrev, endrev, pegrev, options);
 	if ( !bBlameSuccesful && !pegrev.IsValid() )
 	{
 		// retry with the endrev as pegrev
-		if ( this->Blame(path, startrev, endrev, endrev) )
+		if ( this->Blame(path, startrev, endrev, endrev, options) )
 		{
 			bBlameSuccesful = TRUE;
 			pegrev = endrev;
@@ -161,7 +177,12 @@ CString CBlame::BlameToTempFile(const CTSVNPath& path, SVNRev startrev, SVNRev e
 		// will error out. Bug in Subversion?
 		if (pegrev.IsWorking() && !path.IsUrl())
 			pegrev = SVNRev();
-		if (!this->ReceiveLog(CTSVNPathList(path), pegrev, m_nHeadRev, m_lowestrev, 0, FALSE))
+		BOOL bRet = FALSE;
+		if (m_bHasMerges)
+			bRet = GetLogWithMergeInfo(CTSVNPathList(path), pegrev, m_nHeadRev, m_lowestrev, 0, FALSE);
+		else
+			bRet = ReceiveLog(CTSVNPathList(path), pegrev, m_nHeadRev, m_lowestrev, 0, FALSE);
+		if (!bRet)
 		{
 			m_saveLog.Close();
 			DeleteFile(logfile);
@@ -190,7 +211,7 @@ BOOL CBlame::Notify(const CTSVNPath& /*path*/, svn_wc_notify_action_t /*action*/
 	return TRUE;
 }
 
-bool CBlame::BlameToFile(const CTSVNPath& path, SVNRev startrev, SVNRev endrev, SVNRev peg, const CTSVNPath& tofile)
+bool CBlame::BlameToFile(const CTSVNPath& path, SVNRev startrev, SVNRev endrev, SVNRev peg, const CTSVNPath& tofile, const CString& options)
 {
 	CString temp;
 	if (!m_saveFile.Open(tofile.GetWinPathString(), CFile::typeText | CFile::modeReadWrite | CFile::modeCreate))
@@ -199,11 +220,24 @@ bool CBlame::BlameToFile(const CTSVNPath& path, SVNRev startrev, SVNRev endrev, 
 	m_nHeadRev = endrev;
 	if (m_nHeadRev < 0)
 		m_nHeadRev = GetHEADRevision(path);
-	if (!this->Blame(path, startrev, endrev, peg))
+
+	BOOL bBlameSuccesful = this->Blame(path, startrev, endrev, peg, options);
+	if ( !bBlameSuccesful && !peg.IsValid() )
+	{
+		// retry with the endrev as pegrev
+		if ( this->Blame(path, startrev, endrev, endrev, options) )
+		{
+			bBlameSuccesful = TRUE;
+			peg = endrev;
+		}
+	}
+
+	if (!bBlameSuccesful)
 	{
 		m_saveFile.Close();
 		return false;
 	}
+
 	if (m_saveFile.m_hFile != INVALID_HANDLE_VALUE)
 		m_saveFile.Close();
 

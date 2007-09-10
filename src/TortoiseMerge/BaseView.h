@@ -32,6 +32,7 @@
  */
 class CBaseView : public CView
 {
+    DECLARE_DYNCREATE(CBaseView)
 friend class CLineDiffBar;
 public:
 	CBaseView();
@@ -65,12 +66,15 @@ public:
 	void			SetModified(BOOL bModified = TRUE) {m_bModified = bModified;}
 	BOOL			HasSelection() {return (!((m_nSelBlockEnd < 0)||(m_nSelBlockStart < 0)||(m_nSelBlockStart > m_nSelBlockEnd)));}
 	BOOL			GetSelection(int& start, int& end) {start=m_nSelBlockStart; end=m_nSelBlockEnd; return HasSelection();}
+	void			SetInlineWordDiff(bool bWord) {m_bInlineWordDiff = bWord;}
 
-	CStdCStringArray* m_arDiffLines;	///< Array of Strings containing all lines of the text file
-	CStdCStringArray* m_arDiffDiffLines;///< Array of Strings containing all lines of the 'other' text file
-	CStdDWORDArray* m_arDiffDiffStates;///< Array containing the diff states for each line of the 'other' text file
-	CStdDWORDArray*	m_arLineStates;		///< Array containing the diff states for each line
-	CStdDWORDArray*	m_arLineLines;		///< Array of line numbers
+	BOOL			IsLineRemoved(int nLineIndex);
+	bool			IsBlockWhitespaceOnly(int nLineIndex, bool& bIdentical);
+	bool			IsLineConflicted(int nLineIndex);
+
+	CViewData *		m_pViewData;
+	CViewData *		m_pOtherViewData;
+
 	CString			m_sWindowName;		///< The name of the view which is shown as a window title to the user
 	CString			m_sFullFilePath;	///< The full path of the file shown
 	CFileTextLines::UnicodeType texttype;	///< the text encoding this view uses
@@ -108,7 +112,7 @@ protected:
 	afx_msg void	OnMergePreviousconflict();
 	afx_msg void	OnMergeNextconflict();
 	afx_msg void	OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	afx_msg void	OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void	OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void	OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void	OnEditCopy();
 	afx_msg void	OnMouseMove(UINT nFlags, CPoint point);
@@ -120,9 +124,6 @@ protected:
 	void			DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex);
 	void			DrawSingleLine(CDC *pdc, const CRect &rc, int nLineIndex);
 	void			ExpandChars(LPCTSTR pszChars, int nOffset, int nCount, CString &line);
-
-	BOOL			IsLineRemoved(int nLineIndex);
-	bool			IsBlockWhitespaceOnly(int nLineIndex, bool& bIdentical);
 
 	void			RecalcVertScrollBar(BOOL bPositionOnly = FALSE);
 	void			RecalcAllVertScrollBars(BOOL bPositionOnly = FALSE);
@@ -163,8 +164,7 @@ protected:
 	void			RefreshViews();
 	COLORREF		IntenseColor(long scale, COLORREF col);
 
-	virtual BOOL	ShallShowContextMenu(CDiffData::DiffStates state, int nLine);
-	virtual	void	OnContextMenu(CPoint point, int nLine);
+	virtual	void	OnContextMenu(CPoint point, int nLine, DiffStates state);
 	/**
 	 * Updates the status bar pane. Call this if the document changed.
 	 */
@@ -194,6 +194,7 @@ protected:
 	int				m_nOffsetChar;
 	int				m_nTabSize;
 	int				m_nDigits;
+	bool			m_bInlineWordDiff;
 
 	int				m_nSelBlockStart;
 	int				m_nSelBlockEnd;
@@ -208,8 +209,13 @@ protected:
 	HICON			m_hWhitespaceBlockIcon;
 	HICON			m_hEqualIcon;
 
+	HICON			m_hLineEndingCR;
+	HICON			m_hLineEndingCRLF;
+	HICON			m_hLineEndingLF;
+
 	LOGFONT			m_lfBaseFont;
 	CFont *			m_apFonts[8];
+	CString			m_sConflictedText;
 
 	CBitmap *		m_pCacheBitmap;
 	CDC *			m_pDC;

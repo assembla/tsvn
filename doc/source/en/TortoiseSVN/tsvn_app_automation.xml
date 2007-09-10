@@ -57,7 +57,7 @@
 			from your batch file or from the TortoiseSVN context menu.
 		</para>
 		<para>
-			To specify a different location of the configuration file, use the param
+			To specify a different location of the configuration file, use the parameter
 			<option>/configdir:"path\to\config\directory"</option>.
 			This will override the default path, including any registry setting.
 		</para>
@@ -127,14 +127,14 @@ Don't touch these lines:
 						<row>
 							<entry condition="pot">:about</entry>
 							<entry>
-								Shows the About-dialog. This is also shown if no
+								Shows the about dialog. This is also shown if no
 								command is given.
 							</entry>
 						</row>
 						<row>
 							<entry condition="pot">:log</entry>
 							<entry>
-								Opens the log dialog. The path specifies the
+								Opens the log dialog. The <option>/path</option> specifies the
 								file or folder for which the log should be shown.
 								Three additional options can be set:
 								<option>/startrev:xxx</option>, 
@@ -153,8 +153,8 @@ Don't touch these lines:
 						<row>
 							<entry condition="pot">:import</entry>
 							<entry>
-								Opens the import dialog. The path specifies
-								the directory with the data to import.
+								Opens the import dialog. The <option>/path</option>
+								specifies the directory with the data to import.
 							</entry>
 						</row>
 						<row>
@@ -172,12 +172,13 @@ Don't touch these lines:
 						<row>
 							<entry condition="pot">:commit</entry>
 							<entry>
-								Opens the commit dialog. The path specifies the
+								Opens the commit dialog. The <option>/path</option> specifies the
 								target directory or the list of files to commit.
-								You can also specify the /logmsg switch to pass
-								a predefined log message to the commit dialog.
+								You can also specify the <option>/logmsg</option> switch
+								to pass a predefined log message to the commit dialog.
 								Or, if you don't want to pass the log message on the
-								command line, use /logmsgfile:path, where <option>path</option>
+								command line, use <option>/logmsgfile:path</option>,
+								where <option>path</option>
 								points to a file containing the log message.
 								To pre-fill the bug ID box (in case you've set up
 								integration with bug trackers properly), you can use
@@ -226,7 +227,7 @@ Don't touch these lines:
 						<row>
 							<entry condition="pot">:switch</entry>
 							<entry>
-								Opens the switch dialog. The path specifies the
+								Opens the switch dialog. The <option>/path</option> specifies the
 								target directory.
 							</entry>
 						</row>
@@ -242,7 +243,7 @@ Don't touch these lines:
 						<row>
 							<entry condition="pot">:merge</entry>
 							<entry>
-								Opens the merge dialog. The path specifies the
+								Opens the merge dialog. The <option>/path</option> specifies the
 								target directory.
 								Three additional options can be set:
 								<option>/mergefrom:xxx</option>, 
@@ -318,7 +319,7 @@ Don't touch these lines:
 						<row>
 							<entry condition="pot">:repostatus</entry>
 							<entry>
-								Opens the check-for-modifications dialog. The path
+								Opens the check-for-modifications dialog. The <option>/path</option>
 								specifies the working copy directory.
 							</entry>
 						</row>
@@ -338,24 +339,35 @@ Don't touch these lines:
 						<row>
 							<entry condition="pot">:ignore</entry>
 							<entry>
-							Adds all targets in <option>/path</option> to the
-							ignore list, i.e. adds the svn:ignore property
-							to those files.
+								Adds all targets in <option>/path</option> to the
+								ignore list, i.e. adds the <literal>svn:ignore</literal>
+								property to those files.
 							</entry>
 						</row>
 						<row>
 							<entry condition="pot">:blame</entry>
 							<entry>
+								<para>
 								Opens the blame dialog for the file specified 
 								in <option>/path</option>.
-								If the options <option>startrev</option> and
-								<option>endrev</option> are set, then the dialog
+								</para>
+								<para>
+								If the options <option>/startrev</option> and
+								<option>/endrev</option> are set, then the dialog
 								asking for the blame range is not shown but
 								the revision values of those options are used
 								instead.
+								</para>
+								<para>
 								If the option <option>/line:nnn</option> is set,
 								TortoiseBlame will open with the specified line
 								number showing.
+								</para>
+								<para>
+								The options <option>/ignoreeol</option>, 
+								<option>/ignorespaces</option> and
+								<option>/ignoreallspaces</option> are also supported.
+								</para>
 							</entry>
 						</row>
 						<row>
@@ -422,7 +434,8 @@ Don't touch these lines:
 		<para>
 			Examples (which should be entered on one line):
 <screen>
-TortoiseProc.exe /command:commit /path:"c:\svn_wc\file1.txt*c:\svn_wc\file2.txt"
+TortoiseProc.exe /command:commit
+                 /path:"c:\svn_wc\file1.txt*c:\svn_wc\file2.txt"
                  /logmsg:"test log message" /closeonend
 
 TortoiseProc.exe /command:update /path:"c:\svn_wc\" /closeonend
@@ -432,4 +445,105 @@ TortoiseProc.exe /command:log /path:"c:\svn_wc\file1.txt"
 </screen>
 		</para>
 	</sect1>
+
+	<sect1 id="tsvn-automation-idiff">
+		<title>TortoiseIDiff Commands</title>
+		<indexterm>
+			<primary>automation</primary>
+		</indexterm>
+		<indexterm>
+			<primary>command line</primary>
+		</indexterm>
+		<para>
+			The image diff tool has a few command line options which you
+			can use to control how the tool is started.
+			The program is called <literal>TortoiseIDiff.exe</literal>.
+		</para>
+		<para>
+			The table below lists all the options which can be passed
+			to the image diff tool on the command line.
+		</para>
+<!--
+ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION
+Don't touch these lines:
+<entry condition="pot">:about</entry>
+
+  The condition="pot" prevents the strings from being extracted into
+	the .pot file, so nobody translates them.
+  The colons in front of the command have to stay there to prevent these strings
+  from being translated if the po file "by chance" contains a matching translation.
+-->
+		<para>
+			<table id="tsvn-automation-idiff-1-table">
+				<title>List of available options</title>
+				<tgroup cols="2">
+					<colspec colnum="1" colwidth="1*"/>
+					<colspec colnum="2" colwidth="3*"/>
+					<thead>
+						<row>
+							<entry>Option</entry>
+							<entry>Description</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry condition="pot">:left</entry>
+							<entry>
+								Path to the file shown on the left.
+							</entry>
+						</row>
+						<row>
+							<entry condition="pot">:lefttitle</entry>
+							<entry>
+								A title string. This string is used in the image view
+								title instead of the full path to the image file.
+							</entry>
+						</row>
+						<row>
+							<entry condition="pot">:right</entry>
+							<entry>
+								Path to the file shown on the right.
+							</entry>
+						</row>
+						<row>
+							<entry condition="pot">:righttitle</entry>
+							<entry>
+								A title string. This string is used in the image view
+								title instead of the full path to the image file.
+							</entry>
+						</row>
+						<row>
+							<entry condition="pot">:overlay</entry>
+							<entry>
+								If specified, the image diff tool switches
+								to the overlay mode (alpha blend).
+							</entry>
+						</row>
+						<row>
+							<entry condition="pot">:fit</entry>
+							<entry>
+								If specified, the image diff tool fits both
+								images together.
+							</entry>
+						</row>
+						<row>
+							<entry condition="pot">:showinfo</entry>
+							<entry>
+								Shows the image info box.
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+		<para>
+			Example (which should be entered on one line):
+<screen>
+TortoiseIDiff.exe /left:"c:\images\img1.jpg" /lefttitle:"image 1"
+                  /right:"c:\images\img2.jpg" /righttitle:"image 2"
+                  /fit /overlay
+</screen>
+		</para>
+	</sect1>
+
 </appendix>

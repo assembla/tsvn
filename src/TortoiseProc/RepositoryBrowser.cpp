@@ -94,6 +94,7 @@ CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev)
 	, m_pListDropTarget(NULL)
 	, m_bCancelled(false)
 	, m_diffKind(svn_node_none)
+	, m_hAccel(NULL)
 {
 }
 
@@ -165,6 +166,12 @@ BEGIN_MESSAGE_MAP(CRepositoryBrowser, CResizableStandAloneDialog)
 	ON_NOTIFY(LVN_ENDLABELEDIT, IDC_REPOLIST, &CRepositoryBrowser::OnLvnEndlabeleditRepolist)
 	ON_NOTIFY(TVN_ENDLABELEDIT, IDC_REPOTREE, &CRepositoryBrowser::OnTvnEndlabeleditRepotree)
 	ON_WM_TIMER()
+	ON_COMMAND(ID_URL_FOCUS, &CRepositoryBrowser::OnUrlFocus)
+	ON_COMMAND(ID_EDIT_COPY, &CRepositoryBrowser::OnCopy)
+	ON_COMMAND(ID_INLINEEDIT, &CRepositoryBrowser::OnInlineedit)
+	ON_COMMAND(ID_REFRESHBROWSER, &CRepositoryBrowser::OnRefresh)
+	ON_NOTIFY(TVN_BEGINDRAG, IDC_REPOTREE, &CRepositoryBrowser::OnTvnBegindragRepotree)
+	ON_NOTIFY(TVN_BEGINRDRAG, IDC_REPOTREE, &CRepositoryBrowser::OnTvnBeginrdragRepotree)
 END_MESSAGE_MAP()
 
 SVNRev CRepositoryBrowser::GetRevision() const
@@ -180,6 +187,8 @@ CString CRepositoryBrowser::GetPath() const
 BOOL CRepositoryBrowser::OnInitDialog()
 {
 	CResizableStandAloneDialog::OnInitDialog();
+
+	m_hAccel = LoadAccelerators(AfxGetResourceHandle(),MAKEINTRESOURCE(IDR_ACC_REPOBROWSER));
 
 	m_cnrRepositoryBar.SubclassDlgItem(IDC_REPOS_BAR_CNR, this);
 	m_barRepository.Create(&m_cnrRepositoryBar, 12345);
@@ -980,7 +989,7 @@ HTREEITEM CRepositoryBrowser::FindUrl(const CString& fullurl, const CString& url
 		hNewItem = m_RepoTree.InsertItem(&tvinsert);
 		sTemp.ReleaseBuffer();
 		sUrl = sUrl.Mid(slash+1);
-		ATLTRACE("created tree entry %ws, url %ws\n", sTemp, pTreeItem->url);
+		ATLTRACE(_T("created tree entry %s, url %s\n"), sTemp, pTreeItem->url);
 	}
 	CTreeItem * pTreeItem = new CTreeItem();
 	sTemp = sUrl;
@@ -1063,68 +1072,83 @@ BOOL CRepositoryBrowser::PreTranslateMessage(MSG* pMsg)
 	if (pMsg->message>=WM_KEYFIRST && pMsg->message<=WM_KEYLAST)
 	{
 		// Check if there is an Inplace Edit active:
-		// Done in a fast check. Inplace edit controls are child
-		// windows of our dialog. So if we check the parent of the
-		// window with the focus we will find it.
+		// inplace edits are done with an edit control, where the parent
+		// is the control with the editable item (tree or list control here)
 		HWND hWndFocus = ::GetFocus();
-		if (hWndFocus && ::GetParent(hWndFocus)!=m_hWnd)
+		if (hWndFocus)
+			hWndFocus = ::GetParent(hWndFocus);
+		if (hWndFocus && ((hWndFocus == m_RepoTree.GetSafeHwnd())||(hWndFocus == m_RepoList.GetSafeHwnd())))
 		{
-			// Might be the sub control of the tree control that has the focus
 			// Do a direct translation.
 			::TranslateMessage(pMsg);
 			::DispatchMessage(pMsg);
 			return TRUE;
 		}
-	}
-	if (pMsg->message == WM_KEYDOWN)
-	{
-		switch (pMsg->wParam)
+		if (m_hAccel)
 		{
-		case VK_F5:
-			m_blockEvents = true;
-			RefreshNode(m_RepoTree.GetSelectedItem(), true, !!(GetAsyncKeyState(VK_CONTROL)&0x8000));
-			m_blockEvents = false;
-			break;
-		case VK_F2:
+			if (pMsg->message == WM_KEYDOWN)
 			{
-				POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
-				int selIndex = m_RepoList.GetNextSelectedItem(pos);
-				m_blockEvents = true;
-				if (selIndex >= 0)
+				switch (pMsg->wParam)
 				{
-					m_RepoList.SetFocus();
-					m_RepoList.EditLabel(selIndex);
-				}
-				else
-				{
-					m_RepoTree.SetFocus();
-					m_RepoTree.EditLabel(m_RepoTree.GetSelectedItem());
-				}
-				m_blockEvents = false;
-			}
-			break;
-		case 'C':
-		case 'c':
-			{
-				if (GetAsyncKeyState(VK_CONTROL)&0x8000)
-				{
-					// Ctrl-C : copy the selected item urls to the clipboard
-					CStringA url;
-					POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
-					int index = -1;
-					while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
+				case 'C':
 					{
-						CItem * pItem = (CItem *)m_RepoList.GetItemData(index);
-						url += CPathUtils::PathEscape(CUnicodeUtils::GetUTF8(pItem->absolutepath)) + "\r\n";
+						if ((pMsg->hwnd == m_barRepository.GetSafeHwnd())||(::IsChild(m_barRepository.GetSafeHwnd(), pMsg->hwnd)))
+							return __super::PreTranslateMessage(pMsg);
 					}
-					if (!url.IsEmpty())
-						CStringUtils::WriteAsciiStringToClipboard(url);
+					break;
 				}
 			}
-			break;
+			int ret = TranslateAccelerator(m_hWnd, m_hAccel, pMsg);
+			if (ret)
+				return TRUE;
 		}
 	}
 	return __super::PreTranslateMessage(pMsg);
+}
+
+void CRepositoryBrowser::OnUrlFocus()
+{
+	m_barRepository.SetFocusToURL();
+}
+
+void CRepositoryBrowser::OnCopy()
+{
+	// Ctrl-C : copy the selected item urls to the clipboard
+	CStringA url;
+	POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+	int index = -1;
+	while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
+	{
+		CItem * pItem = (CItem *)m_RepoList.GetItemData(index);
+		url += CPathUtils::PathEscape(CUnicodeUtils::GetUTF8(pItem->absolutepath)) + "\r\n";
+	}
+	if (!url.IsEmpty())
+		CStringUtils::WriteAsciiStringToClipboard(url);
+}
+
+void CRepositoryBrowser::OnInlineedit()
+{
+	POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+	int selIndex = m_RepoList.GetNextSelectedItem(pos);
+	m_blockEvents = true;
+	if (selIndex >= 0)
+	{
+		m_RepoList.SetFocus();
+		m_RepoList.EditLabel(selIndex);
+	}
+	else
+	{
+		m_RepoTree.SetFocus();
+		m_RepoTree.EditLabel(m_RepoTree.GetSelectedItem());
+	}
+	m_blockEvents = false;
+}
+
+void CRepositoryBrowser::OnRefresh()
+{
+	m_blockEvents = true;
+	RefreshNode(m_RepoTree.GetSelectedItem(), true, !!(GetKeyState(VK_CONTROL)&0x8000));
+	m_blockEvents = false;
 }
 
 void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult)
@@ -1357,6 +1381,11 @@ void CRepositoryBrowser::OnLvnEndlabeleditRepolist(NMHDR *pNMHDR, LRESULT *pResu
 	input.SetUUID(m_sUUID);
 	input.SetProjectProperties(&m_ProjectProperties);
 	CTSVNPath targetUrl = CTSVNPath(EscapeUrl(CTSVNPath(pItem->absolutepath.Left(pItem->absolutepath.ReverseFind('/')+1)+pDispInfo->item.pszText)));
+	if (!targetUrl.IsValidOnWindows())
+	{
+		if (CMessageBox::Show(GetSafeHwnd(), IDS_WARN_NOVALIDPATH, IDS_APPNAME, MB_ICONINFORMATION|MB_YESNO) != IDYES)
+			return;
+	}
 	CString sHint;
 	sHint.Format(IDS_INPUT_RENAME, (LPCTSTR)(pItem->absolutepath), (LPCTSTR)targetUrl.GetSVNPathString());
 	input.SetActionText(sHint);
@@ -1393,6 +1422,11 @@ void CRepositoryBrowser::OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResu
 	input.SetUUID(m_sUUID);
 	input.SetProjectProperties(&m_ProjectProperties);
 	CTSVNPath targetUrl = CTSVNPath(EscapeUrl(CTSVNPath(pItem->url.Left(pItem->url.ReverseFind('/')+1)+pTVDispInfo->item.pszText)));
+	if (!targetUrl.IsValidOnWindows())
+	{
+		if (CMessageBox::Show(GetSafeHwnd(), IDS_WARN_NOVALIDPATH, IDS_APPNAME, MB_ICONINFORMATION|MB_YESNO) != IDYES)
+			return;
+	}
 	CString sHint;
 	sHint.Format(IDS_INPUT_RENAME, (LPCTSTR)(pItem->url), (LPCTSTR)targetUrl.GetSVNPathString());
 	input.SetActionText(sHint);
@@ -1463,9 +1497,58 @@ void CRepositoryBrowser::OnBeginDrag(NMHDR *pNMHDR)
 	pdobj->Release();
 }
 
+void CRepositoryBrowser::OnTvnBegindragRepotree(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	m_bRightDrag = false;
+	*pResult = 0;
+	OnBeginDragTree(pNMHDR);
+}
+
+void CRepositoryBrowser::OnTvnBeginrdragRepotree(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	m_bRightDrag = true;
+	*pResult = 0;
+	OnBeginDragTree(pNMHDR);
+}
+
+void CRepositoryBrowser::OnBeginDragTree(NMHDR *pNMHDR)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+
+	if (m_blockEvents)
+		return;
+
+	CTreeItem * pTreeItem = (CTreeItem *)pNMTreeView->itemNew.lParam;
+
+	CIDropSource* pdsrc = new CIDropSource;
+	if (pdsrc == NULL)
+		return;
+	pdsrc->AddRef();
+
+	CTSVNPathList sourceURLs;
+	sourceURLs.AddPath(CTSVNPath(EscapeUrl(CTSVNPath(pTreeItem->url))));
+
+	SVNDataObject* pdobj = new SVNDataObject(sourceURLs, GetRevision(), GetRevision());
+	if (pdobj == NULL)
+	{
+		delete pdsrc;
+		return;
+	}
+	pdobj->AddRef();
+
+	CDragSourceHelper dragsrchelper;
+	dragsrchelper.InitializeFromWindow(m_RepoTree.GetSafeHwnd(), pNMTreeView->ptDrag, pdobj);
+	// Initiate the Drag & Drop
+	DWORD dwEffect;
+	::DoDragDrop(pdobj, pdsrc, DROPEFFECT_MOVE|DROPEFFECT_COPY, &dwEffect);
+	pdsrc->Release();
+	pdobj->Release();
+}
+
+
 bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pathlist, DWORD dwEffect)
 {
-	ATLTRACE("dropped %ld items on %ws, dwEffect is %ld\n", pathlist.GetCount(), (LPCTSTR)target.GetSVNPathString(), dwEffect);
+	ATLTRACE(_T("dropped %ld items on %s, dwEffect is %ld\n"), pathlist.GetCount(), (LPCTSTR)target.GetSVNPathString(), dwEffect);
 	if (pathlist.GetCount() == 0)
 		return false;
 
@@ -1514,6 +1597,11 @@ bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pa
 					if (dlg.DoModal() != IDOK)
 						return false;
 					targetName = dlg.m_name;
+					if (!CTSVNPath(targetName).IsValidOnWindows())
+					{
+						if (CMessageBox::Show(GetSafeHwnd(), IDS_WARN_NOVALIDPATH, IDS_APPNAME, MB_ICONINFORMATION|MB_YESNO) != IDYES)
+							return false;
+					}
 				}
 				break;
 			case 5: // move rename drop
@@ -1526,6 +1614,11 @@ bool CRepositoryBrowser::OnDrop(const CTSVNPath& target, const CTSVNPathList& pa
 					if (dlg.DoModal() != IDOK)
 						return false;
 					targetName = dlg.m_name;
+					if (!CTSVNPath(targetName).IsValidOnWindows())
+					{
+						if (CMessageBox::Show(GetSafeHwnd(), IDS_WARN_NOVALIDPATH, IDS_APPNAME, MB_ICONINFORMATION|MB_YESNO) != IDYES)
+							return false;
+					}
 				}
 				break;
 			}
@@ -1982,6 +2075,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 					CProgressDlg progDlg;
 					int counter = 0;		// the file counter
 					progDlg.SetTitle(IDS_REPOBROWSE_SAVEASPROGTITLE);
+					progDlg.SetAnimation(IDR_DOWNLOAD);
 					progDlg.ShowModeless(GetSafeHwnd());
 					progDlg.SetProgress((DWORD)0, (DWORD)urlList.GetCount());
 					SetAndClearProgressInfo(&progDlg);
@@ -2163,6 +2257,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 				CWaitCursorEx wait_cursor;
 				CProgressDlg progDlg;
 				progDlg.SetTitle(IDS_APPNAME);
+				progDlg.SetAnimation(IDR_DOWNLOAD);
 				CString sInfoLine;
 				sInfoLine.Format(IDS_PROGRESSGETFILEREVISION, urlList[0].GetFileOrDirectoryName(), GetRevision().ToString());
 				progDlg.SetLine(1, sInfoLine);
@@ -2276,41 +2371,11 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 			break;
 		case ID_IMPORT:
 			{
-				OPENFILENAME ofn = {0};				// common dialog box structure
-				TCHAR szFile[MAX_PATH] = {0};		// buffer for file name
-				// Initialize OPENFILENAME
-				ofn.lStructSize = sizeof(OPENFILENAME);
-				ofn.hwndOwner = this->m_hWnd;
-				ofn.lpstrFile = szFile;
-				ofn.nMaxFile = sizeof(szFile)/sizeof(TCHAR);
-				CString sFilter;
-				sFilter.LoadString(IDS_COMMONFILEFILTER);
-				TCHAR * pszFilters = new TCHAR[sFilter.GetLength()+4];
-				_tcscpy_s (pszFilters, sFilter.GetLength()+4, sFilter);
-				// Replace '|' delimiters with '\0's
-				TCHAR *ptr = pszFilters + _tcslen(pszFilters);  //set ptr at the NULL
-				while (ptr != pszFilters)
-				{
-					if (*ptr == '|')
-						*ptr = '\0';
-					ptr--;
-				}
-				ofn.lpstrFilter = pszFilters;
-				ofn.nFilterIndex = 1;
-				ofn.lpstrFileTitle = NULL;
-				ofn.nMaxFileTitle = 0;
-				ofn.lpstrInitialDir = NULL;
-				CString temp;
-				temp.LoadString(IDS_REPOBROWSE_IMPORT);
-				CStringUtils::RemoveAccelerators(temp);
-				ofn.lpstrTitle = temp;
-				ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-
 				// Display the Open dialog box. 
-
-				if (GetOpenFileName(&ofn)==TRUE)
+				CString openPath;
+				if (CAppUtils::FileOpenSave(openPath, IDS_REPOBROWSE_IMPORT, IDS_COMMONFILEFILTER, true, m_hWnd))
 				{
-					CTSVNPath path(ofn.lpstrFile);
+					CTSVNPath path(openPath);
 					CWaitCursorEx wait_cursor;
 					CString filename = path.GetFileOrDirectoryName();
 					CInputLogDlg input(this);
@@ -2337,7 +2402,6 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 						{
 							progDlg.Stop();
 							SetAndClearProgressInfo((HWND)NULL);
-							delete [] pszFilters;
 							wait_cursor.Hide();
 							CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 							return;
@@ -2347,7 +2411,6 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 						RefreshNode(m_RepoTree.GetSelectedItem(), true);
 					}
 				}
-				delete [] pszFilters;
 			}
 			break;
 		case ID_RENAME:
@@ -2389,6 +2452,11 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 					CString sHint;
 					sHint.Format(IDS_INPUT_COPY, (LPCTSTR)urlList[0].GetSVNPathString(), (LPCTSTR)dlg.m_name);
 					input.SetActionText(sHint);
+					if (!CTSVNPath(dlg.m_name).IsValidOnWindows())
+					{
+						if (CMessageBox::Show(GetSafeHwnd(), IDS_WARN_NOVALIDPATH, IDS_APPNAME, MB_ICONINFORMATION|MB_YESNO) != IDYES)
+							break;
+					}
 					if (input.DoModal() == IDOK)
 					{
 						if (!Copy(urlList, CTSVNPath(dlg.m_name), GetRevision(), GetRevision(), input.GetLogMessage()))
@@ -2414,6 +2482,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 					CWaitCursorEx wait_cursor;
 
 					CProgressDlg progDlg;
+					progDlg.SetAnimation(IDR_DOWNLOAD);
 					progDlg.SetTitle(IDS_APPNAME);
 					SetAndClearProgressInfo(&progDlg);
 					progDlg.ShowModeless(m_hWnd);
@@ -2523,7 +2592,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 					CBlame blame;
 					CString tempfile;
 					CString logfile;
-					tempfile = blame.BlameToTempFile(CTSVNPath(EscapeUrl(urlList[0])), dlg.StartRev, dlg.EndRev, dlg.EndRev, logfile, TRUE);
+					tempfile = blame.BlameToTempFile(CTSVNPath(EscapeUrl(urlList[0])), dlg.StartRev, dlg.EndRev, dlg.EndRev, logfile, _T(""), TRUE);
 					if (!tempfile.IsEmpty())
 					{
 						if (dlg.m_bTextView)
@@ -2560,43 +2629,10 @@ bool CRepositoryBrowser::AskForSavePath(const CTSVNPathList& urlList, CTSVNPath 
 	bool bSavePathOK = false;
 	if (urlList.GetCount() == 1)
 	{
-		OPENFILENAME ofn = {0};				// common dialog box structure
-		TCHAR szFile[MAX_PATH] = {0};		// buffer for file name
-		CString filename = m_path.GetFileOrDirectoryName();
-		_tcscpy_s(szFile, MAX_PATH, filename);
-		// Initialize OPENFILENAME
-		ofn.lStructSize = sizeof(OPENFILENAME);
-		ofn.hwndOwner = this->m_hWnd;
-		ofn.lpstrFile = szFile;
-		ofn.nMaxFile = sizeof(szFile)/sizeof(TCHAR);
-		CString temp;
-		temp.LoadString(IDS_REPOBROWSE_SAVEAS);
-		CStringUtils::RemoveAccelerators(temp);
-		if (temp.IsEmpty())
-			ofn.lpstrTitle = NULL;
-		else
-			ofn.lpstrTitle = temp;
-		ofn.Flags = OFN_OVERWRITEPROMPT;
-
-		CString sFilter;
-		sFilter.LoadString(IDS_COMMONFILEFILTER);
-		TCHAR * pszFilters = new TCHAR[sFilter.GetLength()+4];
-		_tcscpy_s (pszFilters, sFilter.GetLength()+4, sFilter);
-		// Replace '|' delimiters with '\0's
-		TCHAR *ptr = pszFilters + _tcslen(pszFilters);  //set ptr at the NULL
-		while (ptr != pszFilters)
-		{
-			if (*ptr == '|')
-				*ptr = '\0';
-			ptr--;
-		}
-		ofn.lpstrFilter = pszFilters;
-		ofn.nFilterIndex = 1;
-		// Display the Open dialog box. 
-		bSavePathOK = (GetSaveFileName(&ofn)==TRUE);
+		CString savePath;
+		bSavePathOK = CAppUtils::FileOpenSave(savePath, IDS_REPOBROWSE_SAVEAS, IDS_COMMONFILEFILTER, false, m_hWnd);
 		if (bSavePathOK)
-			tempfile.SetFromWin(ofn.lpstrFile);
-		delete [] pszFilters;
+			tempfile.SetFromWin(savePath);
 	}
 	else
 	{
@@ -2661,3 +2697,5 @@ void CRepositoryBrowser::SaveColumnWidths(bool bSaveToRegistry /* = false */)
 		regColWidth = sWidths;
 	}
 }
+
+

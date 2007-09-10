@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -276,19 +276,47 @@ void CRevisionGraphWnd::DrawNode(CDC * pDC, const CRect& rect,
 			CString temp;
 			CRect r;
 			CRect textrect = rect;
-			textrect.left += 10;
-			textrect.right -= 10;
+			textrect.left += (m_nIconSize+2);
+			textrect.right -= (m_nIconSize+2);
 			TEXTMETRIC textMetric;
 			pDC->GetOutputTextMetrics(&textMetric);
 			temp.Format(IDS_REVGRAPH_BOXREVISIONTITLE, rentry->revision);
 			pDC->DrawText(temp, &r, DT_CALCRECT);
-			pDC->ExtTextOut(textrect.left + ((rect.Width()-r.Width())/2), int(textrect.top + m_node_rect_heigth/4.0f), ETO_CLIPPED, NULL, temp, NULL);
+			int offset = (int)m_node_rect_height;
+			bool bShowUrl = true;
+			int th = r.Height();
+			if ((th+2) < (m_node_rect_height/2))
+			{
+				offset = (offset - (m_nFontSize*2) - 2)/4;
+				if (offset == 0)
+				{
+					bShowUrl = false;
+					offset = ((int)m_node_rect_height - m_nFontSize - 2)/2;
+				}
+			}
+			else
+			{
+				offset = (offset - m_nFontSize - 2)/2;
+				bShowUrl = false;
+			}
+			if (offset > 0)
+			{
+				// only draw the revision text if the node rectangle is big enough for it
+				pDC->ExtTextOut(textrect.left + ((rect.Width()-r.Width())/2), textrect.top + offset, ETO_CLIPPED, NULL, temp, NULL);
+			}
 
-			// draw the url
-			pDC->SelectObject(GetFont(TRUE));
-			temp = CUnicodeUtils::GetUnicode (rentry->path.GetPath().c_str());
-			r = textrect;
-			pDC->ExtTextOut(textrect.left + 2 + ((textrect.Width()-4-r.Width())/2), int(textrect.top + m_node_rect_heigth/4.0f + m_node_rect_heigth/3.0f), ETO_CLIPPED, &textrect, temp, NULL);
+			if (bShowUrl)
+			{
+				// draw the url only if the rectangle is big enough, otherwise we only draw the revision
+				pDC->SelectObject(GetFont(TRUE));
+				temp = CUnicodeUtils::GetUnicode (rentry->path.GetPath().c_str());
+				temp.Replace('/','\\');
+				r = textrect;
+				pDC->DrawText(temp.GetBuffer(temp.GetLength()), temp.GetLength(), &r, DT_CALCRECT | DT_PATH_ELLIPSIS | DT_MODIFYSTRING);
+				temp.ReleaseBuffer();
+				temp.Replace('\\','/');
+				pDC->ExtTextOut(textrect.left + 2 + ((textrect.Width()-4-r.Width())/2), textrect.top + (2*offset) + th, ETO_CLIPPED, &textrect, temp, NULL);
+			}
 		}
 
 		if (m_nIconSize)
@@ -362,14 +390,15 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		CRevisionEntry * entry = m_entryPtrs[i];
 
 		CRect noderect;
-		noderect.top = long((entry->row - 1)*(m_node_rect_heigth+m_node_space_top+m_node_space_bottom) + m_node_space_top - float(nVScrollPos));
-		noderect.bottom = long(noderect.top + m_node_rect_heigth);
-		noderect.left = long((entry->column - 1)*(m_node_rect_width+m_node_space_left+m_node_space_right) + m_node_space_left - float(nHScrollPos));
-		noderect.right = long(noderect.left + m_node_rect_width);
+		float top = (entry->row - 1)*(m_node_rect_height+m_node_space_top+m_node_space_bottom) + m_node_space_top - float(nVScrollPos);
+		noderect.top = long(top);
+		noderect.bottom = long(top + m_node_rect_height);
+		float left = (entry->column - 1)*(m_node_rect_width+m_node_space_left+m_node_space_right) + m_node_space_left - float(nHScrollPos);
+		noderect.left = long(left);
+		noderect.right = long(left + m_node_rect_width);
 
 		// skip it, if not visible
 
-		entry->drawrect = noderect;
 		if (   (noderect.right < rect.left) || (noderect.left > rect.right) 
 			|| (noderect.bottom < rect.top) || (noderect.top > rect.bottom))
 		{
@@ -433,25 +462,25 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		CMemDC memDC2(memDC, true);
 		memDC2.SetWindowOrg(0, 0);
 		HBITMAP oldhbm = (HBITMAP)memDC2.SelectObject(&m_Preview);
-		memDC->BitBlt(rect.Width()-REVGRAPH_PREVIEW_WIDTH, 0, REVGRAPH_PREVIEW_WIDTH, REVGRAPH_PREVIEW_HEIGTH, 
+		memDC->BitBlt(rect.Width()-m_previewWidth, 0, m_previewWidth, m_previewHeight, 
 			&memDC2, 0, 0, SRCCOPY);
 		memDC2.SelectObject(oldhbm);
 		// draw the border for the overview rectangle
-		m_OverviewRect.left = rect.Width()-REVGRAPH_PREVIEW_WIDTH;
+		m_OverviewRect.left = rect.Width()-m_previewWidth;
 		m_OverviewRect.top = 0;
 		m_OverviewRect.right = rect.Width();
-		m_OverviewRect.bottom = REVGRAPH_PREVIEW_HEIGTH;
+		m_OverviewRect.bottom = m_previewHeight;
 		memDC->DrawEdge(&m_OverviewRect, EDGE_BUMP, BF_RECT);
 		// now draw a rectangle where the current view is located in the overview
-		LONG width = REVGRAPH_PREVIEW_WIDTH * rect.Width() / m_ViewRect.Width();
-		LONG heigth = REVGRAPH_PREVIEW_HEIGTH * rect.Height() / m_ViewRect.Height();
-		LONG xpos = nHScrollPos * REVGRAPH_PREVIEW_WIDTH / m_ViewRect.Width();
-		LONG ypos = nVScrollPos * REVGRAPH_PREVIEW_HEIGTH / m_ViewRect.Height();
+		LONG width = m_previewWidth * rect.Width() / m_ViewRect.Width();
+		LONG height = m_previewHeight * rect.Height() / m_ViewRect.Height();
+		LONG xpos = nHScrollPos * m_previewWidth / m_ViewRect.Width();
+		LONG ypos = nVScrollPos * m_previewHeight / m_ViewRect.Height();
 		RECT tempRect;
-		tempRect.left = rect.Width()-REVGRAPH_PREVIEW_WIDTH+xpos;
+		tempRect.left = rect.Width()-m_previewWidth+xpos;
 		tempRect.top = ypos;
 		tempRect.right = tempRect.left + width;
-		tempRect.bottom = tempRect.top + heigth;
+		tempRect.bottom = tempRect.top + height;
 		// make sure the position rect is not bigger than the preview window itself
 		::IntersectRect(&m_OverviewPosRect, &m_OverviewRect, &tempRect);
 		memDC->SetROP2(R2_MASKPEN);
@@ -516,7 +545,8 @@ void CRevisionGraphWnd::DrawRubberBand()
 	CDC * pDC = GetDC();
 	pDC->SetROP2(R2_NOT);
 	pDC->SelectObject(GetStockObject(NULL_BRUSH));
-	pDC->Rectangle(m_ptRubberStart.x, m_ptRubberStart.y, m_ptRubberEnd.x, m_ptRubberEnd.y);
+	pDC->Rectangle(min(m_ptRubberStart.x, m_ptRubberEnd.x), min(m_ptRubberStart.y, m_ptRubberEnd.y), 
+		max(m_ptRubberStart.x, m_ptRubberEnd.x), max(m_ptRubberStart.y, m_ptRubberEnd.y));
 	ReleaseDC(pDC);
 }
 

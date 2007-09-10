@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -64,13 +64,13 @@ void CRevisionGraphWnd::BuildPreview()
 	DoZoom(1.0);
 	GetViewSize();
 	float horzfact = float(m_GraphRect.Width())/float(REVGRAPH_PREVIEW_WIDTH);
-	float vertfact = float(m_GraphRect.Height())/float(REVGRAPH_PREVIEW_HEIGTH);
+	float vertfact = float(m_GraphRect.Height())/float(REVGRAPH_PREVIEW_HEIGHT);
 	float fZoom = 1.0f/(max(horzfact, vertfact));
 	if (fZoom > 1.0f)
 		fZoom = 1.0f;
 	int trycounter = 0;
 	m_fZoomFactor = fZoom;
-	while ((trycounter < 5)&&((m_GraphRect.Width()>REVGRAPH_PREVIEW_WIDTH)||(m_GraphRect.Height()>REVGRAPH_PREVIEW_HEIGTH)))
+	while ((trycounter < 5)&&((m_GraphRect.Width()>REVGRAPH_PREVIEW_WIDTH)||(m_GraphRect.Height()>REVGRAPH_PREVIEW_HEIGHT)))
 	{
 		m_fZoomFactor = fZoom;
 		DoZoom(m_fZoomFactor);
@@ -78,12 +78,25 @@ void CRevisionGraphWnd::BuildPreview()
 		fZoom *= 0.95f;
 		trycounter++;
 	}
+	// make sure the preview window has a minimal size
+	if ((m_GraphRect.Width()>10) && (m_GraphRect.Height()>10))
+	{
+		m_previewWidth = max(m_GraphRect.Width(), 30);
+		m_previewHeight = max(m_GraphRect.Height(), 30);
+	}
+	else
+	{
+		// if the preview window is too small (at least one side is zero)
+		// then don't show the preview at all.
+		m_previewHeight = 0;
+		m_previewWidth = 0;
+	}
 
 	CClientDC ddc(this);
 	CDC dc;
 	if (!dc.CreateCompatibleDC(&ddc))
 		return;
-	m_Preview.CreateCompatibleBitmap(&ddc, REVGRAPH_PREVIEW_WIDTH, REVGRAPH_PREVIEW_HEIGTH);
+	m_Preview.CreateCompatibleBitmap(&ddc, REVGRAPH_PREVIEW_WIDTH, REVGRAPH_PREVIEW_HEIGHT);
 	HBITMAP oldbm = (HBITMAP)dc.SelectObject(m_Preview);
 	// paint the whole graph
 	DrawGraph(&dc, m_ViewRect, 0, 0, true);
@@ -136,7 +149,7 @@ void CRevisionGraphWnd::BuildConnections()
 	// the spacing of the row/col grid (left-top to next left-top)
 
 	float columnSpacing = m_node_rect_width + m_node_space_left + m_node_space_right;
-	float rowSpacing = m_node_rect_heigth + m_node_space_top + m_node_space_bottom;
+	float rowSpacing = m_node_rect_height + m_node_space_top + m_node_space_bottom;
 
 	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
 	{
@@ -177,16 +190,16 @@ void CRevisionGraphWnd::BuildConnections()
 				target.y = targetLeftTop.y;
 
 				if (target.y < source.y)
-					target.y += (long)(m_node_rect_heigth);
+					target.y += (long)(m_node_rect_height);
 				else
-					source.y += (long)(m_node_rect_heigth);
+					source.y += (long)(m_node_rect_height);
 			}
 			else if (sourceEntry->row == targetEntry->row)
 			{
 				// straight horizontal line
 
 				source.x = sourceLeftTop.x;
-				source.y = (long)(sourceLeftTop.y + m_node_rect_heigth / 2);
+				source.y = (long)(sourceLeftTop.y + m_node_rect_height / 2);
 
 				target.x = targetLeftTop.x;
 				target.y = source.y;
@@ -201,7 +214,7 @@ void CRevisionGraphWnd::BuildConnections()
 				// curved line: source left / right -> target top / bottom
 
 				source.x = sourceLeftTop.x;
-				source.y = (long)(sourceLeftTop.y + m_node_rect_heigth / 2);
+				source.y = (long)(sourceLeftTop.y + m_node_rect_height / 2);
 
 				target.x = (long)(targetLeftTop.x + m_node_rect_width / 2);
 				target.y = targetLeftTop.y;
@@ -209,7 +222,7 @@ void CRevisionGraphWnd::BuildConnections()
 				if (source.x < target.x)
 					source.x += (long)(m_node_rect_width);
 				if (source.y > target.y)
-					target.y += (long)(m_node_rect_heigth);
+					target.y += (long)(m_node_rect_height);
 			}
 
 			// bezier points
@@ -271,7 +284,7 @@ CRect * CRevisionGraphWnd::GetGraphSize()
 	ReleaseDC(pDC);
 
 	m_GraphRect.right = long(float(m_maxColumn) * (m_node_rect_width + m_node_space_left + m_node_space_right));
-	m_GraphRect.bottom = long(float(m_maxRow) * (m_node_rect_heigth + m_node_space_top + m_node_space_bottom));
+	m_GraphRect.bottom = long(float(m_maxRow) * (m_node_rect_height + m_node_space_top + m_node_space_bottom));
 	return &m_GraphRect;
 }
 
@@ -453,14 +466,15 @@ CTSVNPath CRevisionGraphWnd::DoUnifiedDiff(bool bHead, CString& sRoot, bool& bIs
 
 void CRevisionGraphWnd::DoZoom(float fZoomFactor)
 {
+	float oldzoom = m_fZoomFactor;
 	m_fZoomFactor = fZoomFactor;
 	m_node_space_left = NODE_SPACE_LEFT * fZoomFactor;
 	m_node_space_right = NODE_SPACE_RIGHT * fZoomFactor;
 	m_node_space_line = NODE_SPACE_LINE * fZoomFactor;
-	m_node_rect_heigth = NODE_RECT_HEIGTH * fZoomFactor;
+	m_node_rect_height = NODE_RECT_HEIGHT * fZoomFactor;
 	m_node_space_top = NODE_SPACE_TOP * fZoomFactor;
 	m_node_space_bottom = NODE_SPACE_BOTTOM * fZoomFactor;
-	m_nFontSize = int(12.0f * fZoomFactor);
+	m_nFontSize = max(7, int(12.0f * fZoomFactor));
 	m_RoundRectPt.x = int(ROUND_RECT * fZoomFactor);
 	m_RoundRectPt.y = int(ROUND_RECT * fZoomFactor);
 	m_nIconSize = int(32 * fZoomFactor);
@@ -473,7 +487,17 @@ void CRevisionGraphWnd::DoZoom(float fZoomFactor)
 		}
 		m_apFonts[i] = NULL;
 	}
+	SCROLLINFO si1 = {0};
+	si1.cbSize = sizeof(SCROLLINFO);
+	GetScrollInfo(SB_VERT, &si1);
+	SCROLLINFO si2 = {0};
+	si2.cbSize = sizeof(SCROLLINFO);
+	GetScrollInfo(SB_HORZ, &si2);
 	InitView();
+	si1.nPos = int(float(si1.nPos)*m_fZoomFactor/oldzoom);
+	si2.nPos = int(float(si2.nPos)*m_fZoomFactor/oldzoom);
+	SetScrollPos(SB_VERT, si1.nPos);
+	SetScrollPos(SB_HORZ, si2.nPos);
 	Invalidate();
 }
 

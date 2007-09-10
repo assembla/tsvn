@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 #include "Colors.h"
 
 #define REVGRAPH_PREVIEW_WIDTH 100
-#define REVGRAPH_PREVIEW_HEIGTH 200
+#define REVGRAPH_PREVIEW_HEIGHT 200
 
 enum NodeShape
 {
@@ -46,7 +46,7 @@ enum NodeShape
 #define NODE_SPACE_LEFT			12.0f
 #define NODE_SPACE_RIGHT		100.0f
 #define NODE_SPACE_LINE			20.0f
-#define NODE_RECT_HEIGTH		60.0f
+#define NODE_RECT_HEIGHT		60.0f
 #define NODE_SPACE_TOP			20.0f
 #define NODE_SPACE_BOTTOM		20.0f
 
@@ -100,7 +100,7 @@ protected:
 	float			m_node_space_left;
 	float			m_node_space_right;
 	float			m_node_space_line;
-	float			m_node_rect_heigth;
+	float			m_node_rect_height;
 	float			m_node_space_top;
 	float			m_node_space_bottom;
 	int				m_nIconSize;
@@ -108,13 +108,13 @@ protected:
 	float			m_fZoomFactor;
 	CColors			m_Colors;
 	bool			m_bFetchLogs;
-	bool			m_bShowAll;
-	bool			m_bArrangeByPath;
 	bool			m_bIsRubberBand;
 	CPoint			m_ptRubberStart;
 	CPoint			m_ptRubberEnd;
 
 	CBitmap			m_Preview;
+	int				m_previewWidth;
+	int				m_previewHeight;
 	
 	virtual BOOL	ProgressCallback(CString text, CString text2, DWORD done, DWORD total);
 	virtual void	DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -141,6 +141,8 @@ private:
 	CRect *			GetViewSize();
 	CRect *			GetGraphSize();
 	CFont*			GetFont(BOOL bItalic = FALSE, BOOL bBold = FALSE);
+
+    CRevisionEntry* GetHitNode (CPoint point) const;
 
 	void			DrawOctangle(CDC * pDC, const CRect& rect);
 	void			DrawNode(CDC * pDC, const CRect& rect,

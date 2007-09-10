@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2006 - Stefan Kueng
+// Copyright (C) 2006-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -77,7 +77,10 @@ protected:
 	afx_msg void	OnEditUseMine();
 	afx_msg void	OnEditUseTheirsThenMine();
 	afx_msg void	OnEditUseMineThenTheirs();
-	afx_msg void	OnUpdateTextBlockSelection(CCmdUI *pCmdUI);
+	afx_msg void	OnUpdateEditUseminethentheirblock(CCmdUI *pCmdUI);
+	afx_msg void	OnUpdateEditUsemyblock(CCmdUI *pCmdUI);
+	afx_msg void	OnUpdateEditUsetheirblock(CCmdUI *pCmdUI);
+	afx_msg void	OnUpdateEditUsetheirthenmyblock(CCmdUI *pCmdUI);
 	afx_msg void	OnUpdateMergeMarkasresolved(CCmdUI *pCmdUI);
 	afx_msg void	OnMergeMarkasresolved();
 	afx_msg void	OnUpdateMergeNextconflict(CCmdUI *pCmdUI);
@@ -88,6 +91,10 @@ protected:
 	afx_msg void	OnUpdateViewSwitchleft(CCmdUI *pCmdUI);
 	afx_msg void	OnUpdateViewShowfilelist(CCmdUI *pCmdUI);
 	afx_msg void	OnViewShowfilelist();
+	afx_msg void	OnEditUndo();
+	afx_msg void	OnUpdateEditUndo(CCmdUI *pCmdUI);
+	afx_msg void	OnViewInlinediffword();
+	afx_msg void	OnUpdateViewInlinediffword(CCmdUI *pCmdUI);
 
 	DECLARE_MESSAGE_MAP()
 protected:
@@ -134,6 +141,7 @@ protected:
 	CFindDlg *		m_pFindDialog;
 	bool			m_bHasConflicts;
 
+	bool			m_bInlineWordDiff;
 public:
 	CLeftView *		m_pwndLeftView;
 	CRightView *	m_pwndRightView;
@@ -143,10 +151,8 @@ public:
 	CDiffData		m_Data;
 	bool			m_bReadOnly;
 	bool			m_bBlame;
-public:
-	afx_msg void OnEditUndo();
-public:
-	afx_msg void OnUpdateEditUndo(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateEditCreateunifieddifffile(CCmdUI *pCmdUI);
+	afx_msg void OnEditCreateunifieddifffile();
 };
 
 

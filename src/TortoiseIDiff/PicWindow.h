@@ -32,6 +32,8 @@
 #define RIGHTBUTTON_ID			102
 #define PLAYBUTTON_ID			103
 #define ALPHATOGGLEBUTTON_ID	104
+#define BLENDALPHA_ID			105
+#define BLENDXOR_ID				106
 
 #define TRACKBAR_ID 101
 #define SLIDER_HEIGHT 30
@@ -58,9 +60,11 @@ public:
 		, nHScrollPos(0)
 		, nVScrollPos(0)
 		, picscale(1.0)
+		, picscale2(1.0)
+		, backColor(0)
 		, pSecondPic(NULL)
 		, alphalive(0)
-		, bShowInfo(true)
+		, bShowInfo(false)
 		, nDimensions(0)
 		, nCurrentDimension(1)
 		, nFrames(0)
@@ -70,10 +74,18 @@ public:
 		, bLinked(true)
 		, hwndAlphaSlider(NULL)
 		, bFitTogether(false)
+		, m_blend(BLEND_ALPHA)
 	{ 
 		SetWindowTitle(_T("Picture Window"));
+		m_lastTTPos.x = 0;
+		m_lastTTPos.y = 0;
 	};
 
+	enum BlendType
+	{
+		BLEND_ALPHA,
+		BLEND_XOR,
+	};
 	/// Registers the window class and creates the window
 	bool RegisterAndCreateWindow(HWND hParent);
 
@@ -94,8 +106,9 @@ public:
 	/// Returns the currently used alpha blending value (0-255)
 	BYTE GetSecondPicAlpha() {return alphalive;}
 	/// Sets the alpha blending value
-	void SetSecondPicAlpha(BYTE a) 
+	void SetSecondPicAlpha(BlendType type, BYTE a) 
 	{
+		m_blend = type;
 		alphalive = a;
 		if (hwndAlphaSlider)
 			SendMessage(hwndAlphaSlider, TBM_SETPOS, (WPARAM)1, (LPARAM)a);
@@ -106,23 +119,27 @@ public:
 	{
 		UINT nLeft = (BYTE)SendMessage(hwndAlphaSlider, ALPHA_GETLEFTPOS, 0, 0);
 		if(nLeft != GetSecondPicAlpha())
-			SetSecondPicAlpha(nLeft);
+			SetSecondPicAlpha(m_blend, nLeft);
 		else
-			SetSecondPicAlpha((BYTE)SendMessage(hwndAlphaSlider, ALPHA_GETRIGHTPOS, 0, 0));
+			SetSecondPicAlpha(m_blend, (BYTE)SendMessage(hwndAlphaSlider, ALPHA_GETRIGHTPOS, 0, 0));
 	}
+
+	/// Set the color that this PicWindow will display behind transparent images.
+	void SetBackColor(COLORREF back) { backColor = back; InvalidateRect(*this, NULL, false); }
+
 	/// Resizes the image to fit into the window. Small images are not enlarged.
 	void FitImageInWindow();
 	/// Makes both images the same size, fitting into the window
 	void FitTogether(bool bFit);
 	/// Sets the zoom factor of the image
-	void SetZoom(double dZoom);
+	void SetZoom(double dZoom, bool centermouse);
 	void SetZoom2(double dZoom) {picscale2 = dZoom;}
 	/// Returns the currently used zoom factor in which the image is shown.
 	double GetZoom() {return picscale;}
 	/// Returns the currently used zoom factor in which the second image is shown.
 	double GetZoom2() {return picscale2;}
 	/// Zooms in (true) or out (false) in nice steps
-	void Zoom(bool in);
+	void Zoom(bool in, bool centermouse);
 	/// Sets the 'Other' pic window
 	void SetOtherPicWindow(CPicWindow * pWnd) {pTheOtherPic = pWnd;}
 	/// Links/Unlinks the two pic windows
@@ -151,6 +168,8 @@ protected:
 	void				GetClientRect(RECT * pRect);
 	/// the WM_PAINT function
 	void				Paint(HWND hwnd);
+	/// Draw pic to hdc, with a border, scaled by scale.
+	void				ShowPicWithBorder(HDC hdc, const RECT &bounds, CPicture &pic, double scale);
 	/// Positions the buttons
 	void				PositionChildren();
 	/// Rounds a double to a given precision
@@ -174,17 +193,20 @@ protected:
 	bool				bValid;				///< true if the picture object is valid, i.e. if the image could be loaded and can be shown
 	double				picscale;			///< the scale factor of the image
 	double				picscale2;			///< the scale factor of the second image
+	COLORREF			backColor;			///< the colour to draw under the images
 	bool				bFirstpaint;		///< true if the image is painted the first time. Used to initialize some stuff when the window is valid for sure.
 	CPicture *			pSecondPic;			///< if set, this is the picture to draw transparently above the original
 	CPicWindow *		pTheOtherPic;		///< pointer to the other picture window. Used for "linking" the two windows when scrolling/zooming/...
 	bool				bLinked;			///< if true, the two image windows are linked together for scrolling/zooming/...
 	bool				bFitTogether;		///< if true, the two image windows are always zoomed so they match their size
+	BlendType			m_blend;			///< type of blending to use
 	stdstring 			pictitle2;			///< the title of the second picture
 	stdstring 			picpath2;			///< the path of the second picture
 	BYTE				alphalive;			///< the alpha value for the transparency live-preview of the second picture
 	bool				bShowInfo;			///< true if the info rectangle of the image should be shown
 	TCHAR				m_wszTip[8192];
 	char				m_szTip[8192];
+	POINT				m_lastTTPos;
 	HWND				hwndTT;
 	// scrollbar info
 	int					nVScrollPos;		///< vertical scroll position

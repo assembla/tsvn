@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -73,6 +73,12 @@ bool SVNDiff::DiffWCFile(const CTSVNPath& filePath,
 	{
 		DiffProps(filePath, SVNRev::REV_HEAD, SVNRev::REV_WC);
 	}
+	if (prop_status > svn_wc_status_normal)
+	{
+		DiffProps(filePath, SVNRev::REV_WC, SVNRev::REV_BASE);
+	}
+	if (filePath.IsDirectory())
+		return true;
 
 	if (text_status > svn_wc_status_normal)
 		basePath = SVN::GetPristinePath(filePath);
@@ -83,6 +89,7 @@ bool SVNDiff::DiffWCFile(const CTSVNPath& filePath,
 
 		CProgressDlg progDlg;
 		progDlg.SetTitle(IDS_APPNAME);
+		progDlg.SetAnimation(IDR_DOWNLOAD);
 		progDlg.SetTime(false);
 		m_pSVN->SetAndClearProgressInfo(&progDlg, true);	// activate progress bar
 		progDlg.ShowModeless(m_hWnd);
@@ -226,6 +233,7 @@ bool SVNDiff::UnifiedDiff(CTSVNPath& tempfile, const CTSVNPath& url1, const SVNR
 	
 	CProgressDlg progDlg;
 	progDlg.SetTitle(IDS_APPNAME);
+	progDlg.SetAnimation(IDR_DOWNLOAD);
 	progDlg.SetLine(1, CString(MAKEINTRESOURCE(IDS_PROGRESS_UNIFIEDDIFF)));
 	progDlg.SetTime(false);
 	m_pSVN->SetAndClearProgressInfo(&progDlg);
@@ -298,6 +306,7 @@ bool SVNDiff::ShowCompare(const CTSVNPath& url1, const SVNRev& rev1,
 	
 	CProgressDlg progDlg;
 	progDlg.SetTitle(IDS_APPNAME);
+	progDlg.SetAnimation(IDR_DOWNLOAD);
 	progDlg.SetTime(false);
 	m_pSVN->SetAndClearProgressInfo(&progDlg);
 
@@ -384,11 +393,11 @@ bool SVNDiff::ShowCompare(const CTSVNPath& url1, const SVNRev& rev1,
 			CBlame blamer;
 			if (blame)
 			{
-				if (!blamer.BlameToFile(url1, 1, rev1, peg.IsValid() ? peg : rev1, tempfile1))
+				if (!blamer.BlameToFile(url1, 1, rev1, peg.IsValid() ? peg : rev1, tempfile1, _T("")))
 				{
 					if ((peg.IsValid())&&(blamer.Err->apr_err != SVN_ERR_CLIENT_IS_BINARY_FILE))
 					{
-						if (!blamer.BlameToFile(url1, 1, rev1, rev1, tempfile1))
+						if (!blamer.BlameToFile(url1, 1, rev1, rev1, tempfile1, _T("")))
 						{
 							progDlg.Stop();
 							m_pSVN->SetAndClearProgressInfo((HWND)NULL);
@@ -439,11 +448,11 @@ bool SVNDiff::ShowCompare(const CTSVNPath& url1, const SVNRev& rev1,
 			progDlg.FormatPathLine(1, IDS_PROGRESSGETFILEREVISION, (LPCTSTR)url2.GetUIPathString(), rev2.ToString());
 			if (blame)
 			{
-				if (!blamer.BlameToFile(url2, 1, rev2, peg.IsValid() ? peg : rev2, tempfile2))
+				if (!blamer.BlameToFile(url2, 1, rev2, peg.IsValid() ? peg : rev2, tempfile2, _T("")))
 				{
 					if (peg.IsValid())
 					{
-						if (!blamer.BlameToFile(url2, 1, rev2, rev2, tempfile2))
+						if (!blamer.BlameToFile(url2, 1, rev2, rev2, tempfile2, _T("")))
 						{
 							progDlg.Stop();
 							m_pSVN->SetAndClearProgressInfo((HWND)NULL);
@@ -543,11 +552,11 @@ bool SVNDiff::ShowCompare(const CTSVNPath& url1, const SVNRev& rev1,
 			if (blame)
 			{
 				CBlame blamer;
-				if (!blamer.BlameToFile(url1, 1, rev2, (peg.IsValid() ? peg : SVNRev::REV_WC), tempfile))
+				if (!blamer.BlameToFile(url1, 1, rev2, (peg.IsValid() ? peg : SVNRev::REV_WC), tempfile, _T("")))
 				{
 					if (peg.IsValid())
 					{
-						if (!blamer.BlameToFile(url1, 1, rev2, SVNRev::REV_WC, tempfile))
+						if (!blamer.BlameToFile(url1, 1, rev2, SVNRev::REV_WC, tempfile, _T("")))
 						{
 							progDlg.Stop();
 							m_pSVN->SetAndClearProgressInfo((HWND)NULL);
@@ -569,7 +578,7 @@ bool SVNDiff::ShowCompare(const CTSVNPath& url1, const SVNRev& rev1,
 					m_pSVN->SetAndClearProgressInfo((HWND)NULL);
 					SetFileAttributes(tempfile.GetWinPath(), FILE_ATTRIBUTE_READONLY);
 					CTSVNPath tempfile2 = CTempFiles::Instance().GetTempFilePath(true, url1);
-					if (!blamer.BlameToFile(url1, 1, SVNRev::REV_WC, SVNRev::REV_WC, tempfile2))
+					if (!blamer.BlameToFile(url1, 1, SVNRev::REV_WC, SVNRev::REV_WC, tempfile2, _T("")))
 					{
 						progDlg.Stop();
 						m_pSVN->SetAndClearProgressInfo((HWND)NULL);

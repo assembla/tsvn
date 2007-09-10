@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ typedef enum
  * in a listbox. Since several Subversion commands have similar notify
  * messages they are grouped together in this single class.
  */
-class CSVNProgressDlg : public CResizableStandAloneDialog, SVN
+class CSVNProgressDlg : public CResizableStandAloneDialog, public SVN
 {
 public:
 	typedef enum
@@ -147,11 +147,18 @@ public:
 	 * \param revision the revision to work on or to get
 	 */
 	void SetParams(Command cmd, int options, const CTSVNPathList& pathList, const CString& url = CString(), const CString& message = CString(), SVNRev revision = -1); 
+	void SetDiffOptions(const CString& opts) {m_diffoptions = opts;}
 	void SetDepth(svn_depth_t depth = svn_depth_unknown) {m_depth = depth;}
 	void SetPegRevision(SVNRev pegrev = SVNRev()) {m_pegRev = pegrev;}
 	void SetProjectProperties(ProjectProperties props) {m_ProjectProperties = props;}
 	void SetChangeList(const CString& changelist, bool keepchangelist) {m_changelist = changelist; m_keepchangelist = keepchangelist;}
 	void SetSelectedList(const CTSVNPathList& selPaths);
+	/**
+	 * If the number of items for which the operation is done on is known
+	 * beforehand, that number can be set here. It is then used to show a more
+	 * accurate progress bar during the operation.
+	 */
+	void SetItemCount(long count) {if(count) m_itemCountTotal = count;}
 	CString BuildInfoString();
 	
 	bool DidErrorsOccur() {return m_bErrorsOccurred;}
@@ -168,6 +175,7 @@ protected:
 		const CString& changelistname,
 		svn_merge_range_t * range,
 		svn_error_t * err, apr_pool_t * pool);
+	virtual svn_wc_conflict_result_t ConflictResolveCallback(const svn_wc_conflict_description_t *description);
 	virtual BOOL	Cancel();
 	virtual void	OnCancel();
 	virtual BOOL	PreTranslateMessage(MSG* pMsg);
@@ -240,6 +248,7 @@ private:
 	CTSVNPathList m_selectedPaths;
 	CTSVNPath	m_url;
 	CString		m_sMessage;
+	CString		m_diffoptions;
 	SVNRev		m_Revision;
 	SVNRev		m_pegRev;
 
@@ -264,6 +273,10 @@ private:
 	bool		m_bFinishedItemAdded;
 	bool		m_bLastVisible;
 
+	int			m_itemCount;
+	int			m_itemCountTotal;
+
+	bool		m_AlwaysConflicted;
 private:
 	// In preparation for removing SVN as base class
 	// Currently needed to avoid ambiguities with the Command Enum

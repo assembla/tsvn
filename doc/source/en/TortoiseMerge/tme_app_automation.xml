@@ -36,7 +36,7 @@ Don't touch these lines:
 
   The condition="pot" prevents the strings from being extracted into
   the .pot file, so nobody translates them.
-  The colons in front of the command have to stay there to prevent these strings
+  The '/' in front of the command has to stay there to prevent these strings
   from being translated if the po file "by chance" contains a matching translation.
 -->
 		<para>
@@ -171,6 +171,22 @@ Don't touch these lines:
 							<entry>
 								Switches the left and right view of the specified
 								two files to diff.
+							</entry>
+						</row>
+						<row>
+							<entry condition="pot">/createunifieddiff</entry>
+							<entry>
+								Creates a unified diff file (patch file) of two files
+								specified with
+								<literal>/origfile:"path_to_original_file"</literal> and
+								<literal>/modifiedfile:"path_to_modified_file"</literal>.
+								The target path is set with
+								<literal>/outfile:"path_to_resulting_patchfile"</literal>.
+								If <literal>/outfile</literal> is not set, a file save dialog
+								is shown so the user can choose the location to save the
+								patch file.
+								Note: If <literal>/createunifieddiff</literal> is set,
+								all other parameters are ignored.
 							</entry>
 						</row>
 					</tbody>

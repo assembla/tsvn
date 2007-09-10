@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ BOOL CRevertDlg::OnInitDialog()
 	m_RevertList.SetConfirmButton((CButton*)GetDlgItem(IDOK));
 	m_RevertList.SetSelectButton(&m_SelectAll);
 	m_RevertList.SetCancelBool(&m_bCancelled);
-	m_RevertList.SetBackgroundImage(IDI_REVERT);
+	m_RevertList.SetBackgroundImage(IDI_REVERT_BKG);
 
 	GetWindowText(m_sWindowTitle);
 	
@@ -131,15 +131,29 @@ void CRevertDlg::OnOK()
 		if (!m_RevertList.GetCheck(i))
 		{
 			m_bRecursive = FALSE;
-			break;
 		}
-		else if (m_RevertList.GetListEntry(i)->IsInExternal())
-			m_bRecursive = FALSE;
+		else 
+		{
+			CSVNStatusListCtrl::FileEntry * entry = m_RevertList.GetListEntry(i);
+			// add all selected entries to the list, except the ones with 'added'
+			// status: we later *delete* all the entries in the list before
+			// the actual revert is done (so the user has the reverted files
+			// still in the trashbin to recover from), but it's not good to
+			// delete added files because they're not restored by the revert.
+			if (entry->status != svn_wc_status_added)
+				m_selectedPathList.AddPath(entry->GetPath());
+			// if an entry inside an external is selected, we can't revert
+			// recursively anymore because the recursive revert stops at the
+			// external boundaries.
+			if (entry->IsInExternal())
+				m_bRecursive = FALSE;
+		}
 	}
 	if (!m_bRecursive)
 	{
 		m_RevertList.WriteCheckedNamesToPathList(m_pathList);
 	}
+	m_selectedPathList.SortByPathname();
 
 	CResizableStandAloneDialog::OnOK();
 }

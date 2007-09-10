@@ -343,6 +343,173 @@
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
+		<Configuration
+			Name="release_static|Win32"
+			OutputDirectory="..\..\bin\ReleaseStatic\bin"
+			IntermediateDirectory="..\..\obj\TortoiseIDiff\ReleaseStatic"
+			ConfigurationType="1"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="1"
+				FavorSizeOrSpeed="2"
+				AdditionalIncludeDirectories="..\Utils;..\Utils\MiscUI"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				BufferSecurityCheck="true"
+				EnableEnhancedInstructionSet="0"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="false"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="gdiplus.lib"
+				LinkIncremental="1"
+				DelayLoadDLLs="gdiplus.dll"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				OptimizeForWindows98="1"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="release_static|x64"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="1"
+				FavorSizeOrSpeed="2"
+				AdditionalIncludeDirectories="..\Utils;..\Utils\MiscUI"
+				PreprocessorDefinitions="WIN64;NDEBUG;_WINDOWS"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="false"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="gdiplus.lib"
+				LinkIncremental="1"
+				DelayLoadDLLs="gdiplus.dll"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				OptimizeForWindows98="1"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -353,7 +520,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\AboutDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\AlphaControl.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Utils\MiscUI\BaseDialog.cpp"
 				>
 			</File>
 			<File
@@ -362,6 +537,10 @@
 			</File>
 			<File
 				RelativePath="..\Utils\CmdLineParser.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Utils\MiscUI\hyperlink_base.cpp"
 				>
 			</File>
 			<File
@@ -419,6 +598,22 @@
 						UsePrecompiledHeader="1"
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="release_static|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="release_static|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\TortoiseIDiff.cpp"
@@ -431,7 +626,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\AboutDlg.h"
+				>
+			</File>
+			<File
 				RelativePath=".\AlphaControl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Utils\MiscUI\BaseDialog.h"
 				>
 			</File>
 			<File
@@ -440,6 +643,10 @@
 			</File>
 			<File
 				RelativePath="..\Utils\CmdLineParser.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Utils\MiscUI\hyperlink_base.h"
 				>
 			</File>
 			<File
@@ -489,6 +696,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\blend.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\blendAlpha.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\blendXOR.ico"
+				>
+			</File>
+			<File
 				RelativePath=".\fitinwindow.ico"
 				>
 			</File>
@@ -513,19 +732,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Resources\pan.cur"
-				>
-			</File>
-			<File
 				RelativePath=".\pan.cur"
 				>
 			</File>
 			<File
-				RelativePath=".\pandown.cur"
+				RelativePath="..\Resources\pan.cur"
 				>
 			</File>
 			<File
 				RelativePath="..\Resources\pandown.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\pandown.cur"
 				>
 			</File>
 			<File

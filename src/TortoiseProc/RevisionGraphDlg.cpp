@@ -48,14 +48,14 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 	, m_bFetchLogs(true)
 	, m_fZoomFactor(1.0)
 {
-    m_options.groupBranches = false;
-    m_options.includeSubPathChanges = false;
-    m_options.oldestAtTop = false;
-    m_options.showHEAD = false;
-    m_options.reduceCrossLines = false;
-    m_options.exactCopySources = false;
-    m_options.splitBranches = false;
-    m_options.foldTags = false;
+	m_options.groupBranches = true;
+	m_options.includeSubPathChanges = false;
+	m_options.oldestAtTop = false;
+	m_options.showHEAD = false;
+	m_options.reduceCrossLines = false;
+	m_options.exactCopySources = false;
+	m_options.splitBranches = false;
+	m_options.foldTags = false;
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()
@@ -82,13 +82,14 @@ BEGIN_MESSAGE_MAP(CRevisionGraphDlg, CResizableStandAloneDialog)
 	ON_COMMAND(ID_VIEW_UNIFIEDDIFF, OnViewUnifieddiff)
 	ON_COMMAND(ID_VIEW_UNIFIEDDIFFOFHEADREVISIONS, OnViewUnifieddiffofheadrevisions)
 	ON_COMMAND(ID_VIEW_SHOWALLREVISIONS, &CRevisionGraphDlg::OnViewShowallrevisions)
-	ON_COMMAND(ID_VIEW_ARRANGEDBYPATH, &CRevisionGraphDlg::OnViewArrangedbypath)
+	ON_COMMAND(ID_VIEW_GROUPBRANCHES, &CRevisionGraphDlg::OnViewArrangedbypath)
 	ON_COMMAND(ID_FILE_SAVEGRAPHAS, &CRevisionGraphDlg::OnFileSavegraphas)
 	ON_COMMAND(ID_VIEW_TOPDOWN, &CRevisionGraphDlg::OnViewTopDown)
 	ON_COMMAND(ID_VIEW_SHOWHEAD, &CRevisionGraphDlg::OnViewShowHEAD)
 	ON_COMMAND(ID_VIEW_EXACTCOPYSOURCE, &CRevisionGraphDlg::OnViewExactCopySource)
 	ON_COMMAND(ID_VIEW_SPLITBRANCHES, &CRevisionGraphDlg::OnViewSplitBranches)
 	ON_COMMAND(ID_VIEW_FOLDTAGS, &CRevisionGraphDlg::OnViewFoldTags)
+	ON_COMMAND(ID_VIEW_REDUCECROSSLINES, &CRevisionGraphDlg::OnViewReduceCrosslines)
 	ON_CBN_SELCHANGE(ID_REVGRAPH_ZOOMCOMBO, OnChangeZoom)
 	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTW, 0, 0xFFFF, OnToolTipNotify)
 	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTA, 0, 0xFFFF, OnToolTipNotify)
@@ -96,24 +97,15 @@ BEGIN_MESSAGE_MAP(CRevisionGraphDlg, CResizableStandAloneDialog)
 	ON_COMMAND(ID_VIEW_SHOWOVERVIEW, &CRevisionGraphDlg::OnViewShowoverview)
 END_MESSAGE_MAP()
 
-BOOL CRevisionGraphDlg::OnInitDialog()
+BOOL CRevisionGraphDlg::InitializeToolbar()
 {
-	CResizableStandAloneDialog::OnInitDialog();
-
-	EnableToolTips();
-
-	// set up the status bar
-	m_StatusBar.Create(WS_CHILD|WS_VISIBLE|SBT_OWNERDRAW,
-		CRect(0,0,0,0), this, 1);
-	int strPartDim[2]= {120, -1};
-	m_StatusBar.SetParts(2, strPartDim);
-
 	// set up the toolbar
 	// add the tool bar to the dialog
 	m_ToolBar.CreateEx(this, TBSTYLE_FLAT | TBSTYLE_WRAPABLE | TBSTYLE_TRANSPARENT | CBRS_SIZE_DYNAMIC);
 	m_ToolBar.LoadToolBar(IDR_REVGRAPHBAR);
 	m_ToolBar.ShowWindow(SW_SHOW);
 	m_ToolBar.SetBarStyle(CBRS_ALIGN_TOP | CBRS_TOOLTIPS | CBRS_FLYBY);
+
 	// toolbars aren't true-color without some tweaking:
 	{
 		CImageList	cImageList;
@@ -140,11 +132,11 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 
 #define SNAP_WIDTH 60 //the width of the combo box
 	// set up the ComboBox control as a snap mode select box
-	// First get the index of the placeholder's position in the toolbar
+	// First get the index of the placeholders position in the toolbar
 	int index = 0;
 	while (m_ToolBar.GetItemID(index) != ID_REVGRAPH_ZOOMCOMBO) index++;
 
-	// next convert that button to a seperator and get its position
+	// next convert that button to a separator and get its position
 	m_ToolBar.SetButtonInfo(index, ID_REVGRAPH_ZOOMCOMBO, TBBS_SEPARATOR,
 		SNAP_WIDTH);
 	RECT rect;
@@ -163,30 +155,76 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	}
 	m_ToolBar.m_ZoomCombo.ShowWindow(SW_SHOW);
 
-	index = 0;
-	while (m_ToolBar.GetItemID(index) != ID_VIEW_ARRANGEDBYPATH) index++;
-	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
-	index = 0;
-	while (m_ToolBar.GetItemID(index) != ID_VIEW_SHOWALLREVISIONS) index++;
-	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
-	index = 0;
-	while (m_ToolBar.GetItemID(index) != ID_VIEW_SHOWOVERVIEW) index++;
-	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
-	index = 0;
-	while (m_ToolBar.GetItemID(index) != ID_VIEW_TOPDOWN) index++;
-	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
-	index = 0;
-	while (m_ToolBar.GetItemID(index) != ID_VIEW_SHOWHEAD) index++;
-	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
-	index = 0;
-	while (m_ToolBar.GetItemID(index) != ID_VIEW_EXACTCOPYSOURCE) index++;
-	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
-	index = 0;
-	while (m_ToolBar.GetItemID(index) != ID_VIEW_SPLITBRANCHES) index++;
-	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
-	index = 0;
-	while (m_ToolBar.GetItemID(index) != ID_VIEW_FOLDTAGS) index++;
-	m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|TBBS_CHECKBOX);
+	// set toolbar button styles
+
+	UINT styles[] = { TBBS_CHECKBOX|TBBS_CHECKED
+					, TBBS_CHECKBOX
+					, 0};
+
+	UINT itemIDs[] = { ID_VIEW_GROUPBRANCHES 
+					 , 0		// separate styles by "0"
+					 , ID_VIEW_SHOWOVERVIEW
+					 , ID_VIEW_TOPDOWN
+					 , ID_VIEW_SHOWHEAD
+					 , ID_VIEW_EXACTCOPYSOURCE
+					 , ID_VIEW_SPLITBRANCHES
+					 , ID_VIEW_FOLDTAGS
+					 , ID_VIEW_REDUCECROSSLINES
+					 , 0};
+
+	for (UINT* itemID = itemIDs, *style = styles; *style != 0; ++itemID)
+	{
+		if (*itemID == 0)
+		{
+			++style;
+			continue;
+		}
+
+		int index = 0;
+		while (m_ToolBar.GetItemID(index) != *itemID)
+			index++;
+		m_ToolBar.SetButtonStyle(index, m_ToolBar.GetButtonStyle(index)|*style);
+	}
+
+	// fill the combo box
+
+	TCHAR* texts[] = { _T("5%")
+					 , _T("10%")
+					 , _T("20%")
+					 , _T("40%")
+					 , _T("50%")
+					 , _T("100%")
+					 , NULL};
+
+	COMBOBOXEXITEM cbei;
+	ZeroMemory(&cbei, sizeof cbei);
+	cbei.mask = CBEIF_TEXT;
+
+	for (TCHAR** text = texts; *text != NULL; ++text)
+	{
+		cbei.pszText = *text;
+		m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
+	}
+
+	m_ToolBar.m_ZoomCombo.SetCurSel(0);
+
+	return TRUE;
+}
+
+BOOL CRevisionGraphDlg::OnInitDialog()
+{
+	CResizableStandAloneDialog::OnInitDialog();
+
+	EnableToolTips();
+
+	// set up the status bar
+	m_StatusBar.Create(WS_CHILD|WS_VISIBLE|SBT_OWNERDRAW,
+		CRect(0,0,0,0), this, 1);
+	int strPartDim[2]= {120, -1};
+	m_StatusBar.SetParts(2, strPartDim);
+
+	if (InitializeToolbar() != TRUE)
+		return FALSE;
 
 	CMenu * pMenu = GetMenu();
 	if (pMenu)
@@ -197,25 +235,6 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 		int tbstate = m_ToolBar.GetToolBarCtrl().GetState(ID_VIEW_SHOWOVERVIEW);
 		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_SHOWOVERVIEW, tbstate | (DWORD(reg) ? TBSTATE_CHECKED : 0));
 	}
-	// fill the combo box
-	COMBOBOXEXITEM cbei;
-	ZeroMemory(&cbei, sizeof cbei);
-	cbei.mask = CBEIF_TEXT;
-	cbei.pszText = _T("5%");
-	m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
-	cbei.pszText = _T("10%");
-	m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
-	cbei.pszText = _T("20%");
-	m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
-	cbei.pszText = _T("40%");
-	m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
-	cbei.pszText = _T("50%");
-	m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
-	cbei.pszText = _T("80%");
-	m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
-	cbei.pszText = _T("100%");
-	m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
-	m_ToolBar.m_ZoomCombo.SetCurSel(0);
 
 	m_hAccel = LoadAccelerators(AfxGetResourceHandle(),MAKEINTRESOURCE(IDR_ACC_REVISIONGRAPH));
 
@@ -281,10 +300,14 @@ cleanup:
 void CRevisionGraphDlg::OnSize(UINT nType, int cx, int cy)
 {
 	__super::OnSize(nType, cx, cy);
+	CRect rect;
+	GetClientRect(&rect);
+	if (IsWindow(m_ToolBar))
+	{
+		RepositionBars(AFX_IDW_CONTROLBAR_FIRST, AFX_IDW_CONTROLBAR_LAST, 0);
+	}
 	if (IsWindow(m_StatusBar))
 	{
-		CRect rect;
-		GetClientRect(&rect);
 		CRect statusbarrect;
 		m_StatusBar.GetClientRect(&statusbarrect);
 		statusbarrect.top = rect.bottom - statusbarrect.top + statusbarrect.bottom;
@@ -296,8 +319,6 @@ void CRevisionGraphDlg::OnSize(UINT nType, int cx, int cy)
 		GetGraphRect(&rect);
 		m_Graph.MoveWindow(&rect);
 	}
-	if (IsWindow(m_ToolBar)) 
-		RepositionBars(AFX_IDW_CONTROLBAR_FIRST, AFX_IDW_CONTROLBAR_LAST, 0); 
 }
 
 BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
@@ -376,7 +397,7 @@ void CRevisionGraphDlg::OnViewZoomin()
 void CRevisionGraphDlg::OnViewZoomout()
 {
 	if ((m_Graph.m_node_space_left > 1) || (m_Graph.m_node_space_right > 1) || (m_Graph.m_node_space_line > 1) ||
-		(m_Graph.m_node_rect_heigth > 1) || (m_Graph.m_node_space_top > 1) || (m_Graph.m_node_space_bottom > 1))
+		(m_Graph.m_node_rect_height > 1) || (m_Graph.m_node_space_top > 1) || (m_Graph.m_node_space_bottom > 1))
 	{
 		m_fZoomFactor = m_fZoomFactor - (m_fZoomFactor*0.1f);
 		m_Graph.DoZoom(m_fZoomFactor);
@@ -491,7 +512,7 @@ void CRevisionGraphDlg::OnViewShowallrevisions()
 
 void CRevisionGraphDlg::OnViewArrangedbypath()
 {
-    OnToggleOption (ID_VIEW_ARRANGEDBYPATH, m_options.groupBranches);
+    OnToggleOption (ID_VIEW_GROUPBRANCHES, m_options.groupBranches);
 }
 
 void CRevisionGraphDlg::OnViewTopDown()
@@ -517,6 +538,11 @@ void CRevisionGraphDlg::OnViewSplitBranches()
 void CRevisionGraphDlg::OnViewFoldTags()
 {
     OnToggleOption (ID_VIEW_FOLDTAGS, m_options.foldTags);
+}
+
+void CRevisionGraphDlg::OnViewReduceCrosslines()
+{
+    OnToggleOption (ID_VIEW_REDUCECROSSLINES, m_options.reduceCrossLines);
 }
 
 void CRevisionGraphDlg::OnCancel()
@@ -619,7 +645,7 @@ void CRevisionGraphDlg::OnChangeZoom()
 		return;
 	m_fZoomFactor = (float)(_tstof(strItem)/100.0);
 	UpdateZoomBox();
-	ATLTRACE("OnChangeZoom to %ws\n", strItem);
+	ATLTRACE(_T("OnChangeZoom to %s\n"), strItem);
 	m_Graph.DoZoom(m_fZoomFactor);
 }
 
@@ -674,7 +700,7 @@ BOOL CRevisionGraphDlg::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRe
 		lstrcpyn(m_wszTip, strTipText, strTipText.GetLength()+1);
 		pTTTW->lpszText = m_wszTip;
 	}
-	// bring the tooltip window above other popup windows
+	// bring the tooltip window above other pop up windows
 	::SetWindowPos(pNMHDR->hwndFrom, HWND_TOP, 0, 0, 0, 0,
 		SWP_NOACTIVATE|SWP_NOSIZE|SWP_NOMOVE|SWP_NOOWNERZORDER);
 	return TRUE;    // message was handled

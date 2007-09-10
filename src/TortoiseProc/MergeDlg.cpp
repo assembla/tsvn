@@ -20,7 +20,6 @@
 #include "TortoiseProc.h"
 #include "MergeDlg.h"
 #include "RepositoryBrowser.h"
-#include "Balloon.h"
 #include "BrowseFolder.h"
 #include "MessageBox.h"
 #include "registry.h"
@@ -43,6 +42,8 @@ CMergeDlg::CMergeDlg(CWnd* pParent /*=NULL*/)
 	, m_pLogDlg2(NULL)
 	, bRepeating(FALSE)
 	, m_bRecordOnly(FALSE)
+	, m_depth(svn_depth_unknown)
+	, m_bIgnoreEOL(FALSE)
 {
 }
 
@@ -65,6 +66,7 @@ void CMergeDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_IGNOREANCESTRY, m_bIgnoreAncestry);
 	DDX_Control(pDX, IDC_DEPTH, m_depthCombo);
 	DDX_Control(pDX, IDOK, m_mergeButton);
+	DDX_Check(pDX, IDC_IGNOREEOL, m_bIgnoreEOL);
 }
 
 BEGIN_MESSAGE_MAP(CMergeDlg, CStandAloneDialog)
@@ -95,10 +97,17 @@ BOOL CMergeDlg::OnInitDialog()
 
 	AdjustControlSize(IDC_REVISION_HEAD1);
 	AdjustControlSize(IDC_REVISION_N1);
-	AdjustControlSize(IDC_IGNOREANCESTRY);
 	AdjustControlSize(IDC_USEFROMURL);
 	AdjustControlSize(IDC_REVISION_HEAD);
 	AdjustControlSize(IDC_REVISION_N);
+
+	AdjustControlSize(IDC_IGNOREANCESTRY);
+	AdjustControlSize(IDC_IGNOREEOL);
+	AdjustControlSize(IDC_COMPAREWHITESPACES);
+	AdjustControlSize(IDC_IGNOREWHITESPACECHANGES);
+	AdjustControlSize(IDC_IGNOREALLWHITESPACES);
+
+	CheckRadioButton(IDC_COMPAREWHITESPACES, IDC_IGNOREALLWHITESPACES, IDC_COMPAREWHITESPACES);
 
 	m_bFile = !PathIsDirectory(m_URLFrom);
 	SVN svn;
@@ -156,7 +165,7 @@ BOOL CMergeDlg::OnInitDialog()
 		else
 		{
 			DialogEnableWindow(IDC_URLCOMBO2, TRUE);
-			GetDlgItem(IDC_URLCOMBO2)->SetWindowText(m_URLTo);
+			SetDlgItemText(IDC_URLCOMBO2, m_URLTo);
 		}
 		UpdateData(FALSE);
 	}
@@ -174,7 +183,27 @@ BOOL CMergeDlg::OnInitDialog()
 	m_depthCombo.AddString(CString(MAKEINTRESOURCE(IDS_SVN_DEPTH_IMMEDIATE)));
 	m_depthCombo.AddString(CString(MAKEINTRESOURCE(IDS_SVN_DEPTH_FILES)));
 	m_depthCombo.AddString(CString(MAKEINTRESOURCE(IDS_SVN_DEPTH_EMPTY)));
-	m_depthCombo.SetCurSel(0);
+	switch (m_depth)
+	{
+	case svn_depth_unknown:
+		m_depthCombo.SetCurSel(0);
+		break;
+	case svn_depth_infinity:
+		m_depthCombo.SetCurSel(1);
+		break;
+	case svn_depth_immediates:
+		m_depthCombo.SetCurSel(2);
+		break;
+	case svn_depth_files:
+		m_depthCombo.SetCurSel(3);
+		break;
+	case svn_depth_empty:
+		m_depthCombo.SetCurSel(4);
+		break;
+	default:
+		m_depthCombo.SetCurSel(0);
+		break;
+	}
 
 	// set the choices for the "Show All" button
 	CString temp;
@@ -203,7 +232,7 @@ BOOL CMergeDlg::CheckData(bool bShowErrors /* = true */)
 	if (!StartRev.IsValid())
 	{
 		if (bShowErrors)
-			CBalloon::ShowBalloon(this, CBalloon::GetCtrlCentre(this,IDC_REVISION_START), IDS_ERR_INVALIDREV, TRUE, IDI_EXCLAMATION);
+			ShowBalloon(IDC_REVISION_START, IDS_ERR_INVALIDREV);
 		return FALSE;
 	}
 
@@ -215,7 +244,7 @@ BOOL CMergeDlg::CheckData(bool bShowErrors /* = true */)
 	if (!EndRev.IsValid())
 	{
 		if (bShowErrors)
-			CBalloon::ShowBalloon(this, CBalloon::GetCtrlCentre(this,IDC_REVISION_END), IDS_ERR_INVALIDREV, TRUE, IDI_EXCLAMATION);
+			ShowBalloon(IDC_REVISION_END, IDS_ERR_INVALIDREV);
 		return FALSE;
 	}
 
@@ -232,7 +261,7 @@ BOOL CMergeDlg::CheckData(bool bShowErrors /* = true */)
 	if ( (LONG)StartRev == (LONG)EndRev && m_URLFrom==m_URLTo)
 	{
 		if (bShowErrors)
-			CBalloon::ShowBalloon(this, CBalloon::GetCtrlCentre(this,IDC_REVISION_HEAD1), IDS_ERR_MERGEIDENTICALREVISIONS, TRUE, IDI_EXCLAMATION);
+			ShowBalloon(IDC_REVISION_HEAD1, IDS_ERR_MERGEIDENTICALREVISIONS);
 		return FALSE;
 	}
 
@@ -255,6 +284,21 @@ BOOL CMergeDlg::CheckData(bool bShowErrors /* = true */)
 		break;
 	default:
 		m_depth = svn_depth_empty;
+		break;
+	}
+
+	int rb = GetCheckedRadioButton(IDC_COMPAREWHITESPACES, IDC_IGNOREALLWHITESPACES);
+	switch (rb)
+	{
+	case IDC_IGNOREWHITESPACECHANGES:
+		m_IgnoreSpaces = svn_diff_file_ignore_space_change;
+		break;
+	case IDC_IGNOREALLWHITESPACES:
+		m_IgnoreSpaces = svn_diff_file_ignore_space_all;
+		break;
+	case IDC_COMPAREWHITESPACES:
+	default:
+		m_IgnoreSpaces = svn_diff_file_ignore_space_none;
 		break;
 	}
 

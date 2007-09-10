@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@ CPicture::CPicture()
 	nCurrentIcon = 0;
 	bIsIcon = false;
 	m_nSize = 0;
+	m_ColorDepth = 0;
 }
 
 CPicture::~CPicture()
@@ -395,6 +396,8 @@ bool CPicture::Load(stdstring sFilePathName)
 		}
 	}
 
+	m_ColorDepth = GetColorDepth();
+
 	return(bResult);
 }
 
@@ -476,8 +479,11 @@ bool CPicture::Show(HDC hDC, RECT DrawRect)
 	{
 		Graphics graphics(hDC);
 		graphics.SetInterpolationMode(m_ip);
+		graphics.SetPixelOffsetMode(PixelOffsetModeHighQuality);
+		ImageAttributes attr;
+		attr.SetWrapMode(WrapModeTileFlipXY);
 		Rect rect(DrawRect.left, DrawRect.top, DrawRect.right-DrawRect.left, DrawRect.bottom-DrawRect.top);
-		graphics.DrawImage(pBitmap, rect);
+		graphics.DrawImage(pBitmap, rect, 0, 0, m_Width, m_Height, UnitPixel, &attr);
 		return true;
 	}
 

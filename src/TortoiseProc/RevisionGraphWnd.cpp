@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -64,14 +64,12 @@ CRevisionGraphWnd::CRevisionGraphWnd()
 	, m_node_space_left(NODE_SPACE_LEFT)
 	, m_node_space_right(NODE_SPACE_RIGHT)
 	, m_node_space_line(NODE_SPACE_LINE)
-	, m_node_rect_heigth(NODE_RECT_HEIGTH)
+	, m_node_rect_height(NODE_RECT_HEIGHT)
 	, m_node_space_top(NODE_SPACE_TOP)
 	, m_node_space_bottom(NODE_SPACE_BOTTOM)
 	, m_nIconSize(32)
 	, m_RoundRectPt(ROUND_RECT, ROUND_RECT)
 	, m_bFetchLogs(true)
-	, m_bShowAll(false)
-	, m_bArrangeByPath(false)
 	, m_fZoomFactor(1.0)
 	, m_ptRubberEnd(0,0)
 	, m_ptRubberStart(0,0)
@@ -205,6 +203,46 @@ BOOL CRevisionGraphWnd::ProgressCallback(CString text, CString text2, DWORD done
 	return TRUE;
 }
 
+CRevisionEntry * CRevisionGraphWnd::GetHitNode (CPoint point) const
+{
+    // translate point into row, column coordinates
+
+    float columnSpacing = m_node_rect_width + m_node_space_left + m_node_space_right;
+    float rowSpacing = m_node_rect_height + m_node_space_top + m_node_space_bottom;
+
+    int nVScrollPos = GetScrollPos(SB_VERT);
+    int nHScrollPos = GetScrollPos(SB_HORZ);
+
+    int row = (int)((point.y - m_node_space_top + nVScrollPos) / rowSpacing + 1);
+    int column = (int)((point.x - m_node_space_left + nHScrollPos) / columnSpacing + 1);
+
+    // the node rectangle at that position (maybe unused)
+
+    CRect noderect;
+    noderect.left = (long)((column - 1) * columnSpacing + m_node_space_left - nHScrollPos);
+    noderect.top = (long)((row - 1) * rowSpacing + m_node_space_top - nVScrollPos);
+    noderect.right = (long)(noderect.left + m_node_rect_width);
+    noderect.bottom = (long)(noderect.top + m_node_rect_height);
+
+    // hit the (potential) node position and not the space in between nodes?
+
+    if (!noderect.PtInRect(point))
+        return NULL;
+
+    // search the nodes for one at that grid position
+
+    for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
+    {
+	    CRevisionEntry * reventry = m_entryPtrs[i];
+	    if ((reventry->row == row) && (reventry->column == column))
+            return reventry;
+    }
+
+    // there is no node at that grid position
+		    
+    return NULL;
+}
+
 void CRevisionGraphWnd::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
 	SCROLLINFO sinfo = {0};
@@ -320,45 +358,42 @@ void CRevisionGraphWnd::OnLButtonDown(UINT nFlags, CPoint point)
 	bool bControl = !!(GetKeyState(VK_CONTROL)&0x8000);
 	if (!m_OverviewRect.PtInRect(point))
 	{
-		for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
-		{
-			CRevisionEntry * reventry = m_entryPtrs[i];
-			if (reventry->drawrect.PtInRect(point))
-			{
-				if (bControl)
-				{
-					if (m_SelectedEntry1 == reventry)
-					{
-						if (m_SelectedEntry2)
-						{
-							m_SelectedEntry1 = m_SelectedEntry2;
-							m_SelectedEntry2 = NULL;
-						}
-						else
-							m_SelectedEntry1 = NULL;
-					}
-					else if (m_SelectedEntry2 == reventry)
-						m_SelectedEntry2 = NULL;
-					else if (m_SelectedEntry1)
-						m_SelectedEntry2 = reventry;
-					else
-						m_SelectedEntry1 = reventry;
-				}
-				else
-				{
-					if (m_SelectedEntry1 == reventry)
-						m_SelectedEntry1 = NULL;
-					else
-						m_SelectedEntry1 = reventry;
-					m_SelectedEntry2 = NULL;
-				}
-				bHit = true;
-				Invalidate();
-				break;
-			}
-		}
-	}
-	if ((!bHit)&&(!bControl))
+        CRevisionEntry * reventry = GetHitNode (point);
+	    if (reventry != NULL)
+	    {
+		    if (bControl)
+		    {
+			    if (m_SelectedEntry1 == reventry)
+			    {
+				    if (m_SelectedEntry2)
+				    {
+					    m_SelectedEntry1 = m_SelectedEntry2;
+					    m_SelectedEntry2 = NULL;
+				    }
+				    else
+					    m_SelectedEntry1 = NULL;
+			    }
+			    else if (m_SelectedEntry2 == reventry)
+				    m_SelectedEntry2 = NULL;
+			    else if (m_SelectedEntry1)
+				    m_SelectedEntry2 = reventry;
+			    else
+				    m_SelectedEntry1 = reventry;
+		    }
+		    else
+		    {
+			    if (m_SelectedEntry1 == reventry)
+				    m_SelectedEntry1 = NULL;
+			    else
+				    m_SelectedEntry1 = reventry;
+			    m_SelectedEntry2 = NULL;
+		    }
+		    bHit = true;
+		    Invalidate();
+	    }
+    }
+
+    if ((!bHit)&&(!bControl))
 	{
 		m_SelectedEntry1 = NULL;
 		m_SelectedEntry2 = NULL;
@@ -414,8 +449,8 @@ void CRevisionGraphWnd::OnLButtonUp(UINT nFlags, CPoint point)
 	float fact = max(yfact, xfact);
 
 	// find out where to scroll to
-	x = m_ptRubberStart.x + GetScrollPos(SB_HORZ);
-	y = m_ptRubberStart.y + GetScrollPos(SB_VERT);
+	x = min(m_ptRubberStart.x, point.x) + GetScrollPos(SB_HORZ);
+	y = min(m_ptRubberStart.y, point.y) + GetScrollPos(SB_VERT);
 
 	float fZoomfactor = m_fZoomFactor*fact;
 	if (fZoomfactor > 20.0)
@@ -449,20 +484,17 @@ INT_PTR CRevisionGraphWnd::OnToolHitTest(CPoint point, TOOLINFO* pTI) const
 	if (m_bThreadRunning)
 		return -1;
 
-	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
-	{
-		CRevisionEntry * reventry = m_entryPtrs[i];
-		if (reventry->drawrect.PtInRect(point))
-		{
-			pTI->hwnd = this->m_hWnd;
-			this->GetClientRect(&pTI->rect);
-			pTI->uFlags  |= TTF_ALWAYSTIP | TTF_IDISHWND;
-			pTI->uId = (UINT)m_hWnd;
-			pTI->lpszText = LPSTR_TEXTCALLBACK;
-			return 1;
-		}
-	}
-	return -1;
+	CRevisionEntry * reventry = GetHitNode (point);
+    if (reventry == NULL)
+        return -1;
+
+	pTI->hwnd = this->m_hWnd;
+	this->GetClientRect(&pTI->rect);
+	pTI->uFlags  |= TTF_ALWAYSTIP | TTF_IDISHWND;
+	pTI->uId = (UINT)m_hWnd;
+	pTI->lpszText = LPSTR_TEXTCALLBACK;
+
+    return 1;
 }
 
 BOOL CRevisionGraphWnd::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pResult)
@@ -478,15 +510,8 @@ BOOL CRevisionGraphWnd::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRe
 	ScreenToClient(&point);
 	if (pNMHDR->idFrom == (UINT)m_hWnd)
 	{
-		for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
-		{
-			CRevisionEntry * reventry = m_entryPtrs[i];
-			if (reventry->drawrect.PtInRect(point))
-			{
-				rentry = reventry;
-			}
-		}
-		if (rentry)
+        rentry = GetHitNode (point);
+        if (rentry)
 		{
 			const CCachedLogInfo* cache = query->GetCache();
 			const CRevisionIndex& revisions = cache->GetRevisions();
@@ -502,10 +527,10 @@ BOOL CRevisionGraphWnd::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRe
             {
 			    strTipText.Format(IDS_REVGRAPH_BOXTOOLTIP,
 							    rentry->revision,
-							    rentry->realPath.GetPath().c_str(),
-							    revisionInfo.GetAuthor(index), 
+							    CUnicodeUtils::StdGetUnicode(rentry->realPath.GetPath()).c_str(),
+								CUnicodeUtils::StdGetUnicode(revisionInfo.GetAuthor(index)).c_str(), 
 							    date,
-							    revisionInfo.GetComment(index).c_str());
+								CUnicodeUtils::StdGetUnicode(revisionInfo.GetComment(index)).c_str());
             }
             else
             {
@@ -515,11 +540,11 @@ BOOL CRevisionGraphWnd::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRe
 
 			    strTipText.Format(IDS_REVGRAPH_BOXTOOLTIP_TAGGED,
 							    rentry->revision,
-							    rentry->realPath.GetPath().c_str(),
-							    revisionInfo.GetAuthor(index), 
+							    CUnicodeUtils::StdGetUnicode(rentry->realPath.GetPath()).c_str(),
+							    CUnicodeUtils::StdGetUnicode(revisionInfo.GetAuthor(index)).c_str(), 
 							    date,
-                                tags.c_str(),
-							    revisionInfo.GetComment(index).c_str());
+                                CUnicodeUtils::StdGetUnicode(tags).c_str(),
+							    CUnicodeUtils::StdGetUnicode(revisionInfo.GetComment(index)).c_str());
             }
 		}
 	}
@@ -722,22 +747,14 @@ void CRevisionGraphWnd::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 	if (m_bThreadRunning)
 		return;
 
-	CRevisionEntry * clickedentry = NULL;
 	CPoint clientpoint = point;
 	this->ScreenToClient(&clientpoint);
 	ATLTRACE("right clicked on x=%d y=%d\n", clientpoint.x, clientpoint.y);
 
-	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
-	{
-		CRevisionEntry * reventry = m_entryPtrs[i];
-		if (reventry->drawrect.PtInRect(clientpoint))
-		{
-			clickedentry = reventry;
-			break;
-		}
-	}
+	CRevisionEntry * clickedentry = GetHitNode (clientpoint);
 	if ((m_SelectedEntry1 == NULL)&&(clickedentry == NULL))
 		return;
+
 	if (m_SelectedEntry1 == NULL)
 	{
 		m_SelectedEntry1 = clickedentry;
@@ -838,8 +855,8 @@ void CRevisionGraphWnd::OnMouseMove(UINT nFlags, CPoint point)
 		if ((!m_OverviewRect.IsRectEmpty())&&(m_OverviewRect.PtInRect(point))&&(nFlags & MK_LBUTTON))
 		{
 			// scrolling
-			int x = (point.x-m_OverviewRect.left - (m_OverviewPosRect.Width()/2)) * m_ViewRect.Width() / m_OverviewRect.Width();
-			int y = (point.y - (m_OverviewPosRect.Height()/2)) * m_ViewRect.Height() / m_OverviewRect.Height();
+			int x = (point.x-m_OverviewRect.left - (m_OverviewPosRect.Width()/2)) * m_ViewRect.Width() / m_previewWidth;
+			int y = (point.y - (m_OverviewPosRect.Height()/2)) * m_ViewRect.Height() / m_previewHeight;
 			SetScrollbars(y, x);
 			Invalidate(FALSE);
 			return __super::OnMouseMove(nFlags, point);

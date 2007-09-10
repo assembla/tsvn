@@ -118,36 +118,17 @@
 #define IDS_MENUAPPLYPATCH              207
 #define IDS_MENUDESCCREATEPATCH         208
 #define IDS_MENUDESCAPPLYPATCH          209
-#define IDS_TT_IGNORE                   210
-#define IDS_TT_KEYWORDS                 211
-#define IDS_TT_EXECUTABLE               212
-#define IDS_TT_EOLSTYLE                 213
-#define IDS_TT_MIMETYPE                 214
-#define IDS_TT_EXTERNALS                215
 #define IDS_COLTITLEMIMETYPE            216
 #define IDS_COLDESCMIMETYPE             217
 #define IDS_DROPEXPORTMENU              218
 #define IDS_DROPEXPORTEXTENDEDMENU      219
-#define IDS_TT_BQLABEL                  220
-#define IDS_TT_BQMESSAGE                221
-#define IDS_TT_BQNUMBER                 222
-#define IDS_TT_BQURL                    223
-#define IDS_TT_TSVNLOGTEMPLATE          224
-#define IDS_TT_TSVNLOGWIDTHMARKER       225
-#define IDS_TT_TSVNLOGMINSIZE           226
-#define IDS_TT_BQWARNNOISSUE            227
-#define IDS_TT_TSVNLOGFILELISTENGLISH   228
-#define IDS_TT_BQAPPEND                 229
 #define IDS_ERR_PROPNOTONFILE           230
 #define IDS_MENUIGNOREMULTIPLE          231
 #define IDS_ERR_PROPNOMULTILINE         232
 #define IDS_MENUREVISIONGRAPH           233
 #define IDS_MENUDESCREVISIONGRAPH       234
-#define IDS_TT_TSVNPROJECTLANGUAGE      235
-#define IDS_TT_BQLOGREGEX               236
 #define IDS_MENUUNIGNORE                237
 #define IDS_MENUDESCUNIGNORE            238
-#define IDS_TT_RECURSIVE                239
 #define IDS_MENU_LOCK                   240
 #define IDS_MENU_UNLOCK                 241
 #define IDS_MENUDESC_LOCK               242
@@ -157,7 +138,6 @@
 #define IDS_MENU_LOCKFORCE              246
 #define IDS_COLTITLEOWNER               247
 #define IDS_COLDESCOWNER                248
-#define IDS_TT_NEEDSLOCK                249
 #define IDS_DROPCOPYRENAMEMENU          250
 #define IDS_COLTITLEAUTHOR              251
 #define IDS_COLDESCAUTHOR               252
@@ -172,16 +152,19 @@
 #define IDS_MENUURLDIFF                 261
 #define IDS_MENUDESCURLDIFF             262
 #define IDS_PROPBIN                     263
-#define IDS_TT_WEBVIEWERREVISION        264
-#define IDS_TT_WEBVIEWERPATHREVISION    265
-#define IDS_TT_USERFILEPROPERTIES       266
-#define IDS_TT_USERFOLDERPROPERTIES     267
 #define IDS_MENUDELUNVERSIONED          268
 #define IDS_MENUDESCDELUNVERSIONED      269
-#define IDS_TT_TSVNLOCKMSGMINSIZE       270
 #define IDS_MENUREMOVEKEEP              271
 #define IDS_MENUDESCREMOVEKEEP          272
-#define IDS_TT_TSVNAUTOPROPS            273
+#define IDS_YES                         273
+#define IDS_NO                          274
+#define IDS_SVN_DEPTH_INFINITE          300
+#define IDS_SVN_DEPTH_IMMEDIATE         301
+#define IDS_SVN_DEPTH_FILES             302
+#define IDS_SVN_DEPTH_EMPTY             303
+#define IDS_SVN_DEPTH_EXCLUDE           304
+#define IDS_SVN_DEPTH_UNKNOWN           305
+#define IDS_SVN_DEPTH_WORKING           306
 #define IDC_REVISION                    1001
 #define IDC_LOCKED                      1002
 #define IDC_REPOURL                     1003
@@ -193,7 +176,9 @@
 #define IDC_PROPSTATUS                  1009
 #define IDC_PROPDATE                    1010
 #define IDC_PROPLIST                    1011
+#define IDC_SWITCHED                    1011
 #define IDC_ADDBUTTON                   1012
+#define IDC_COPIED                      1012
 #define IDC_REMOVEBUTTON                1013
 #define IDC_EDITNAME                    1014
 #define IDC_EDITVALUE                   1015
@@ -216,6 +201,12 @@
 #define IDC_LOCKOWNER                   11019
 #define IDC_LOCKDATE                    11020
 #define IDC_EDITPROPERTIES              11021
+#define IDC_REPOURLUNESCAPED            11022
+#define IDC_ESCAPEDURLLABEL             11023
+#define IDC_REPOUUID                    11024
+#define IDC_CHANGELIST                  11025
+#define IDC_DEPTHEDIT                   11026
+#define IDC_CHECKSUM                    11027
 
 // Next default values for new objects
 // 
@@ -223,7 +214,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        5160
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         11022
+#define _APS_NEXT_CONTROL_VALUE         11026
 #define _APS_NEXT_SYMED_VALUE           5101
 #endif
 #endif

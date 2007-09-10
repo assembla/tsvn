@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -250,27 +250,17 @@ public:
 	 * \param crMid the middle color for three colored gradients
 	 * \param crEnd the end color for gradients
 	 */
-	static CBalloon *	ShowBalloon(CWnd * pWnd, CPoint pt, UINT nIdText, BOOL showCloseButton = TRUE, HICON hIcon = NULL, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
 	/**
 	 * \overload ShowBalloon(CWnd * pWnd, CPoint pt, UINT nIdText, BOOL showCloseButton, UINT nIdIcon, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
 	 */
-	static CBalloon *	ShowBalloon(CWnd * pWnd, CPoint pt, UINT nIdText, BOOL showCloseButton, UINT nIdIcon, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
+	static void ShowBalloon(
+		CWnd * pWnd, CPoint pt, CString sText, BOOL showCloseButton, HICON hIcon,
+		UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID,
+		COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
 	/**
-	 * \overload ShowBalloon(CWnd * pWnd, CPoint pt, UINT nIdText, BOOL showCloseButton, UINT nIdIcon, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
+	 * \overload ShowBalloon(CWnd * pWnd, CPoint pt, UINT nIdText, BOOL showCloseButton, LPCTSTR szIcon);
 	 */
-	static CBalloon *	ShowBalloon(CWnd * pWnd, CPoint pt, CString sText, BOOL showCloseButton = TRUE, HICON hIcon = NULL, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
-	/**
-	 * \overload ShowBalloon(CWnd * pWnd, CPoint pt, CString sText, BOOL showCloseButton = TRUE, HICON hIcon = NULL, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
-	 */
-	static CBalloon *	ShowBalloon(CWnd * pWnd, CPoint pt, CString sText, BOOL showCloseButton, UINT nIdIcon, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
-	/**
-	 * \overload ShowBalloon(CWnd * pWnd, CPoint pt, CString sText, BOOL showCloseButton, UINT nIdIcon, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
-	 */
-	static CBalloon *	ShowBalloon(CWnd * pWnd, CPoint pt, UINT nIdText, BOOL showCloseButton, LPCTSTR szIcon, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
-	/**
-	 * \overload ShowBalloon(CWnd * pWnd, CPoint pt, UINT nIdText, BOOL showCloseButton, LPCTSTR szIcon, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
-	 */
-	static CBalloon *	ShowBalloon(CWnd * pWnd, CPoint pt, CString sText, BOOL showCloseButton, LPCTSTR szIcon, UINT nDirection = BALLOON_RIGHT_TOP, UINT nEffect = BALLOON_EFFECT_SOLID, COLORREF crStart = NULL, COLORREF crMid = NULL, COLORREF crEnd = NULL);
+	static void ShowBalloon(CWnd * pWnd, CPoint pt, UINT nIdText, BOOL showCloseButton, LPCTSTR szIcon);
 	//@}
 
 	/** 
@@ -505,6 +495,11 @@ public:
 	 */
 	void	RelayEvent(MSG* pMsg);
 	
+	/**
+	 * Hide tooltip immediately.
+	 */
+	void	Pop();
+
 	// Generated message map functions
 protected:
 	void	SetSize(int nSizeIndex, UINT nValue);
@@ -517,8 +512,7 @@ protected:
 	void	DisplayToolTip(CPoint * pt = NULL);
 	void	DisplayToolTip(CPoint * pt, CRect * rect);
 	
-	void	SetNewToolTip(CWnd * pWnd, CPoint * pt = NULL);
-	void	Pop();
+	void	SetNewToolTip(CWnd * pWnd);
 	void	GetMonitorWorkArea(const CPoint& sourcePoint, CRect& monitorRect);
 
 	/**

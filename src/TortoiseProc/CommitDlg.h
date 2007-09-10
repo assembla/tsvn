@@ -19,7 +19,6 @@
 #pragma once
 
 #include "StandAloneDlg.h"
-#include "Balloon.h"
 #include "SVNStatusListCtrl.h"
 #include "ProjectProperties.h"
 #include "HistoryDlg.h"
@@ -103,6 +102,7 @@ public:
 	CString				m_sBugID;
 	CString				m_sChangeList;
 	BOOL				m_bKeepChangeList;
+	int					m_itemsCount;
 
 private:
 	CWinThread*			m_pThread;

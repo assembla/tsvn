@@ -15,7 +15,7 @@
 		It is important to understand how branching and merging works in
 		Subversion before you start using it, as it can become quite complex.
 		It is highly recommended that you read the chapter
-		<ulink url="http://svnbook.red-bean.com/en/1.2/svn.branchmerge.html">
+		<ulink url="http://svnbook.red-bean.com/en/1.4/svn.branchmerge.html">
 			<citetitle>Branching and Merging</citetitle>
 		</ulink>
 		in the Subversion book, which gives a full description and many 
@@ -69,7 +69,7 @@
 				<listitem>
 					<para>
 						In the <guilabel>From:</guilabel> field enter the full
-						folder url of the branch or tag containing the changes
+						folder URL of the branch or tag containing the changes
 						you want to port into your working copy.
 						You may also click
 						<guibutton>...</guibutton>
@@ -107,7 +107,7 @@ Rev Comments
 34. Working on trunk
          ...
 </screen>
-						If you now want to merge all the changes from MyBranch into
+						If you now want to merge all the changes from <filename>MyBranch</filename> into
 						the trunk you have to choose 36 as the
 						<guilabel>From Revision</guilabel>, not 37 as you might think.
 						If you select revision 37 as the start point, then the
@@ -176,17 +176,25 @@ Rev Comments
 			Conflicts often arise if the branch has drifted far from the trunk.
 		</para>
 		<para>
+			For Subversion clients and servers prior to 1.5, no merge information
+			is stored and merged revisions have to be tracked manually. 
 			When you have tested the changes and come to commit this revision,
 			your commit log message should <emphasis>always</emphasis>
 			include the revision numbers which have been ported in the merge.
 			If you want to apply another merge at a later time you will need to
 			know what you have already merged, as you do not want to port a
-			change more than once. Unfortunately merge information is not
-			stored by Subversion. For more information about this, refer to
-			<ulink url="http://svnbook.red-bean.com/en/1.2/svn.branchmerge.copychanges.html">
+			change more than once. For more information about this, refer to
+			<ulink url="http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac">
 				<citetitle>Best Practices for Merging</citetitle>
 			</ulink>
 			in the Subversion book.
+		</para>
+		<para>
+			If your server and all clients are running Subversion 1.5 or higher,
+			the merge tracking facility will record the revisions merged and avoid
+			a revision being merged more than once. This makes your life much simpler
+			as you can simply merge the entire revision range each time and know
+			that only new revisions will actually be merged.
 		</para>
 		<para>
 			Branch management is important. If you want to keep this branch up to
@@ -200,7 +208,7 @@ Rev Comments
 				folders to folders and files to files. If you click on a file and
 				open up the merge dialog, then you have to give a path to a file
 				in that dialog. If you select a folder and bring up the dialog,
-				then you must specify a folder url for the merge.
+				then you must specify a folder URL for the merge.
 			</para>
 		</important>
 	</sect2>
@@ -229,7 +237,7 @@ Rev Comments
 				<listitem>
 					<para>
 						In the <guilabel>From:</guilabel> field enter the full
-						folder url of the <emphasis>trunk</emphasis>. This
+						folder URL of the <emphasis>trunk</emphasis>. This
 						may sound wrong, but remember that the trunk is the
 						start point to which you want to add the branch changes.
 						You may also click
@@ -247,7 +255,7 @@ Rev Comments
 				<listitem>
 					<para>
 						In the <guilabel>To:</guilabel> field enter the full
-						folder url of the feature branch.
+						folder URL of the feature branch.
 					</para>
 				</listitem>
 				<listitem>
@@ -328,9 +336,23 @@ Rev Comments
 			differences rather than history-based differences, check the
 			<guilabel>Ignore ancestry</guilabel> box. Read more about this 
 			topic in the Subversion book,
-			<ulink url="http://svnbook.red-bean.com/en/1.2/svn.branchmerge.copychanges.html">
+			<ulink url="http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac.ancestry">
 				<citetitle>Noticing or Ignoring Ancestry</citetitle>
 			</ulink>
+		</para>
+	</sect2>
+	<sect2 id="tsvn-dug-merge-settings">
+		<title>Other Merge Options</title>
+		<para>
+			You can specify the way that line ending and whitespace changes are handled.
+			These options are described in <xref linkend="tsvn-dug-diff-eol-whitespace"/>.
+			The default behaviour is to treat all whitespace and line-end differences
+			as real changes to be merged.
+		</para>
+		<para>
+			You can also specify the depth to use for the merge. The depth terms used
+			are described in <xref linkend="tsvn-dug-checkout-depth"/>. The default depth
+			is <guilabel>Working copy</guilabel>, which uses the existing depth setting.
 		</para>
 	</sect2>
 </sect1>

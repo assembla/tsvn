@@ -179,7 +179,7 @@ bool CSVNStatusCache::SaveCache()
 			fclose(pFile);
 		}
 	}
-	ATLTRACE("cache saved to disk at %ws\n", path);
+	ATLTRACE(_T("cache saved to disk at %s\n"), path);
 	return true;
 error:
 	fclose(pFile);
@@ -247,6 +247,7 @@ CSVNStatusCache::~CSVNStatusCache(void)
 void CSVNStatusCache::Refresh()
 {
 	m_shellCache.ForceRefresh();
+	m_pInstance->m_svnHelp.ReloadConfig();
 	if (m_pInstance->m_directoryCache.size())
 	{
 		CCachedDirectory::CachedDirMap::iterator I = m_pInstance->m_directoryCache.begin();
@@ -310,7 +311,7 @@ bool CSVNStatusCache::RemoveCacheForDirectory(CCachedDirectory * cdir)
 	}
 	cdir->m_childDirectories.clear();
 	m_directoryCache.erase(cdir->m_directoryPath);
-	ATLTRACE("removed path %ws from cache\n", cdir->m_directoryPath);
+	ATLTRACE(_T("removed path %s from cache\n"), cdir->m_directoryPath);
 	delete cdir;
 	cdir = NULL;
 	return true;
@@ -437,7 +438,7 @@ CStatusCacheEntry CSVNStatusCache::GetStatusForPath(const CTSVNPath& path, DWORD
 			return m_mostRecentStatus;
 		}
 	}
-	ATLTRACE("ignored no good path %ws\n", path.GetWinPath());
+	ATLTRACE(_T("ignored no good path %s\n"), path.GetWinPath());
 	m_mostRecentStatus = CStatusCacheEntry();
 	if (m_shellCache.ShowExcludedAsNormal() && path.IsDirectory() && m_shellCache.HasSVNAdminDir(path.GetWinPath(), true))
 	{

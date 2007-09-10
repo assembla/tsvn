@@ -21,6 +21,10 @@
 #define IDD_FIND                        139
 #define IDI_WHITESPACELINE              140
 #define IDI_EQUALLINE                   141
+#define IDI_LINEENDINGCR                142
+#define IDI_LINEENDINGCRLF              143
+#define IDI_ICON1                       144
+#define IDI_LINEENDINGLF                144
 #define IDB_LOGOFLIPPED                 168
 #define IDD_PATCH_FILE_OPEN_CUSTOM      180
 #define IDS_SELECTFILE                  200
@@ -81,6 +85,8 @@
 #define IDC_BKEMPTY                     1040
 #define IDS_ERR_MAINFRAME_FILEHASCONFLICTS 1041
 #define IDC_FGEMPTY                     1041
+#define IDC_BKEMPTY2                    1041
+#define IDC_BKCONFLICTRESOLVED          1041
 #define IDC_BKCONFLICTED                1042
 #define IDC_FGCONFLICTED                1043
 #define IDC_BKCONFLICTEDADDED           1044
@@ -208,13 +214,16 @@
 #define ID_EDIT_USEMYBLOCK              32820
 #define ID_EDIT_USETHEIRTHENMYBLOCK     32821
 #define ID_EDIT_USEMINETHENTHEIRBLOCK   32822
+#define ID_VIEW_INLINEDIFFWORD          32825
+#define ID_EDIT_                        32827
+#define ID_EDIT_CREATEUNIFIEDDIFFFILE   32828
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        142
-#define _APS_NEXT_COMMAND_VALUE         32825
+#define _APS_NEXT_RESOURCE_VALUE        145
+#define _APS_NEXT_COMMAND_VALUE         32829
 #define _APS_NEXT_CONTROL_VALUE         1072
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

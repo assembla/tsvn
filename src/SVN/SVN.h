@@ -65,8 +65,10 @@ public:
 							svn_merge_range_t * range,
 							svn_error_t * err, apr_pool_t * pool);
 	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions);
-	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, DWORD children);
-	virtual BOOL BlameCallback(LONG linenumber, svn_revnum_t revision, const CString& author, const CString& date, const CStringA& line);
+	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, BOOL haschildren);
+	virtual BOOL BlameCallback(LONG linenumber, svn_revnum_t revision, const CString& author, const CString& date,
+							svn_revnum_t merged_revision, const CString& merged_author, const CString& merged_date, const CString& merged_path,
+							const CStringA& line);
 	virtual svn_error_t* DiffSummarizeCallback(const CTSVNPath& path, svn_client_diff_summarize_kind_t kind, bool propchanged, svn_node_kind_t node);
 	virtual BOOL ReportList(const CString& path, svn_node_kind_t kind,
 							svn_filesize_t size, bool has_props,
@@ -76,6 +78,7 @@ public:
 							const CString& lockcomment, bool is_dav_comment,
 							apr_time_t lock_creationdate, apr_time_t lock_expirationdate,
 							const CString& absolutepath);
+	virtual svn_wc_conflict_result_t ConflictResolveCallback(const svn_wc_conflict_description_t *description);
 
 	struct SVNLock
 	{
@@ -168,9 +171,11 @@ public:
 	 * \param force if TRUE, then an adding an already versioned folder will add
 	 *              all unversioned files in it (in combination with \a recurse)
 	 * \param no_ignore if FALSE, then don't add ignored files.
+	 * \param addparents if true, recurse up path's directory and look for a versioned directory. 
+	 *                   If found, add all intermediate paths between it and path.
 	 * \return TRUE if successful
 	 */
-	BOOL Add(const CTSVNPathList& pathList, ProjectProperties * props, BOOL recurse, BOOL force = FALSE, BOOL no_ignore = FALSE);
+	BOOL Add(const CTSVNPathList& pathList, ProjectProperties * props, BOOL recurse, BOOL force, BOOL no_ignore, BOOL addparents);
 	/**
 	 * Assigns the files/folders in \c pathList to a \c changelist.
 	 * \return TRUE if successful
@@ -216,12 +221,12 @@ public:
 	 *                   anything unless it's a member of changelist \c changelist. 
 	 * \param keepchangelist After the commit completes successfully, remove \c changelist 
 	 *                       associations from the targets, unless \c keepchangelist is set.
-	 * \param recurse 
+	 * \param depth how deep to commit 
 	 * \param keep_locks if TRUE, the locks are not removed on commit
 	 * \return the resulting revision number.
 	 */
 	svn_revnum_t Commit(const CTSVNPathList& pathlist, CString message, 
-		const CString& changelist, BOOL keepchangelist, BOOL recurse, BOOL keep_locks);
+		const CString& changelist, BOOL keepchangelist, svn_depth_t depth, BOOL keep_locks);
 	/**
 	 * Copy srcPath to destPath.
 	 * 
@@ -354,7 +359,7 @@ public:
 	 * if there are any unversioned obstructing items.
 	 * \return TRUE if successful
 	 */
-	BOOL Switch(const CTSVNPath& path, const CTSVNPath& url, SVNRev revision, svn_depth_t depth, BOOL allow_unver_obstruction = TRUE);
+	BOOL Switch(const CTSVNPath& path, const CTSVNPath& url, SVNRev revision, svn_depth_t depth, BOOL ignore_externals, BOOL allow_unver_obstruction = TRUE);
 	/**
 	 * Import file or directory path into repository directory url at
 	 * head and using LOG_MSG as the log message for the (implied)
@@ -413,7 +418,7 @@ public:
 	 * \return TRUE if successful
 	 */
 	BOOL Merge(const CTSVNPath& path1, SVNRev revision1, const CTSVNPath& path2, SVNRev revision2, 
-		const CTSVNPath& localPath, BOOL force, svn_depth_t depth, 
+		const CTSVNPath& localPath, BOOL force, svn_depth_t depth, const CString& options,
 		BOOL ignoreanchestry = FALSE, BOOL dryrun = FALSE, BOOL record_only = FALSE);
 
 	/**
@@ -449,7 +454,7 @@ public:
 	 * \return TRUE if successful
 	 */
 	BOOL PegMerge(const CTSVNPath& source, SVNRev revision1, SVNRev revision2, SVNRev pegrevision, 
-		const CTSVNPath& destpath, BOOL force, svn_depth_t depth, 
+		const CTSVNPath& destpath, BOOL force, svn_depth_t depth, const CString& options, 
 		BOOL ignoreancestry = FALSE, BOOL dryrun = FALSE, BOOL record_only = FALSE);
 	/**
 	 * Produce diff output which describes the delta between \a path1/\a revision1 and \a path2/\a revision2
@@ -611,10 +616,14 @@ public:
 	 * \param startrev the revision from which the check is done from
 	 * \param endrev the end revision where the check is stopped
 	 * \param peg the peg revision to use
+	 * \param diffoptions options for the internal diff to use when blaming
 	 * \param ignoremimetype set to true if you want to ignore the mimetype and blame everything
+	 * \param includemerge if true, also return data based upon revisions which have been merged to path.
+
+
 	 * \return TRUE if successful
 	 */
-	BOOL Blame(const CTSVNPath& path, SVNRev startrev, SVNRev endrev, SVNRev peg = SVNRev(), bool ignoremimetype = false);
+	BOOL Blame(const CTSVNPath& path, SVNRev startrev, SVNRev endrev, SVNRev peg, const CString& diffoptions, bool ignoremimetype = false, bool includemerge = true);
 	
 	/**
 	 * Lock a file for exclusive use so no other users are allowed to edit
@@ -801,11 +810,6 @@ public:
 	static CString GetSummarizeActionText(svn_client_diff_summarize_kind_t kind);
 
 	/**
-	 * Returns the string representation of a depth.
-	 */
-	static CString GetDepthString(svn_depth_t depth);
-
-	/**
 	 * Returns the string representation of the error object \c Err, wrapped
 	 * (if possible) at \c wrap chars.
 	 */
@@ -837,6 +841,13 @@ public:
 	 * currently used.
 	 */
 	static void UseIEProxySettings(apr_hash_t * cfg);
+
+	/**
+	 * Returns a string which can be passed as the options string for the Merge()
+	 * methods and the Blame() method.
+	 */
+	static CString GetOptionsString(BOOL bIgnoreEOL, BOOL bIgnoreSpaces = FALSE, BOOL bIgnoreAllSpaces = FALSE);
+	static CString GetOptionsString(BOOL bIgnoreEOL, svn_diff_file_ignore_space_t space = svn_diff_file_ignore_space_none);
 
 	/**
 	 * Returns the log cache pool singleton. You will need that to 
@@ -872,18 +883,26 @@ protected:
 						apr_pool_t *pool);
 	static svn_error_t* summarize_func(const svn_client_diff_summarize_t *diff, 
 					void *baton, apr_pool_t *pool);
-	static svn_error_t* blameReceiver(void* baton,
-					apr_off_t line_no,
-					svn_revnum_t revision,
-					const char * author,
-					const char * date,
-					const char * line,
-					apr_pool_t * pool);
+	static svn_error_t* blameReceiver(void *baton, 
+					apr_int64_t line_no, 
+					svn_revnum_t revision, 
+					const char *author, 
+					const char *date, 
+					svn_revnum_t merged_revision, 
+					const char *merged_author, 
+					const char *merged_date, 
+					const char *merged_path, 
+					const char *line, 
+					apr_pool_t *pool);
 	static svn_error_t* listReceiver(void* baton,
 					const char* path,
 					const svn_dirent_t *dirent, 
 					const svn_lock_t *lock, 
 					const char *abs_path, 
+					apr_pool_t *pool);
+	static svn_error_t* conflict_resolver(svn_wc_conflict_result_t *result, 
+					const svn_wc_conflict_description_t *description, 
+					void *baton, 
 					apr_pool_t *pool);
 	static svn_error_t* logMergeReceiver(void* baton,
 					svn_log_entry_t* log_entry, apr_pool_t* pool);

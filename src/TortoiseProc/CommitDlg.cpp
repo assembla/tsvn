@@ -49,6 +49,7 @@ CCommitDlg::CCommitDlg(CWnd* pParent /*=NULL*/)
 	, m_pThread(NULL)
 	, m_bKeepLocks(FALSE)
 	, m_bKeepChangeList(TRUE)
+	, m_itemsCount(0)
 {
 }
 
@@ -113,7 +114,7 @@ BOOL CCommitDlg::OnInitDialog()
 	m_ListCtrl.SetCancelBool(&m_bCancelled);
 	m_ListCtrl.SetEmptyString(IDS_COMMITDLG_NOTHINGTOCOMMIT);
 	m_ListCtrl.EnableFileDrop();
-	m_ListCtrl.SetBackgroundImage(IDI_COMMIT);
+	m_ListCtrl.SetBackgroundImage(IDI_COMMIT_BKG);
 	
 	m_ProjectProperties.ReadPropsPathList(m_pathList);
 	m_cLogMessage.Init(m_ProjectProperties);
@@ -180,8 +181,8 @@ BOOL CCommitDlg::OnInitDialog()
 		m_wndSplitter.GetWindowRect(&rectSplitter);
 		ScreenToClient(&rectSplitter);
 		int delta = yPos - rectSplitter.top;
-		DoSize(delta);
 		m_wndSplitter.SetWindowPos(NULL, 0, yPos, 0, 0, SWP_NOSIZE);
+		DoSize(delta);
 	}
 
 	// add all directories to the watcher
@@ -209,7 +210,7 @@ BOOL CCommitDlg::OnInitDialog()
 	if ((((DWORD)err)!=FALSE)&&((((DWORD)historyhint)==FALSE)))
 	{
 		historyhint = TRUE;
-		CBalloon::ShowBalloon(this, CBalloon::GetCtrlCentre(this, IDC_HISTORY), IDS_COMMITDLG_HISTORYHINT_TT, TRUE, IDI_INFORMATION);
+		ShowBalloon(IDC_HISTORY, IDS_COMMITDLG_HISTORYHINT_TT, IDI_INFORMATION);
 	}
 	err = FALSE;
 
@@ -239,7 +240,7 @@ void CCommitDlg::OnOK()
 	GetDlgItem(IDC_BUGID)->GetWindowText(id);
 	if (!m_ProjectProperties.CheckBugID(id))
 	{
-		CBalloon::ShowBalloon(this, CBalloon::GetCtrlCentre(this,IDC_BUGID), IDS_COMMITDLG_ONLYNUMBERS, TRUE, IDI_EXCLAMATION);
+		ShowBalloon(IDC_BUGID, IDS_COMMITDLG_ONLYNUMBERS, IDI_EXCLAMATION);
 		return;
 	}
 	m_sLogMessage = m_cLogMessage.GetText();
@@ -362,50 +363,57 @@ void CCommitDlg::OnOK()
 	// are added before their children
 	itemsToAdd.SortByPathname();
 	SVN svn;
-	svn.Add(itemsToAdd, &m_ProjectProperties, FALSE);
+	svn.Add(itemsToAdd, &m_ProjectProperties, FALSE, FALSE, FALSE, TRUE);
 
 	// Remove any missing items
 	// Not sure that this sort is really necessary - indeed, it might be better to do a reverse sort at this point
 	itemsToRemove.SortByPathname();
 	svn.Remove(itemsToRemove, TRUE);
 
-	if ((nUnchecked != 0)||(bCheckedInExternal)||(bHasConflicted)||(!m_bRecursive))
+	//the next step: find all deleted files and check if they're 
+	//inside a deleted folder. If that's the case, then remove those
+	//files from the list since they'll get deleted by the parent
+	//folder automatically.
+	m_ListCtrl.Block(TRUE, FALSE);
+	int nDeleted = arDeleted.GetCount();
+	for (int i=0; i<arDeleted.GetCount(); i++)
 	{
-		//the next step: find all deleted files and check if they're 
-		//inside a deleted folder. If that's the case, then remove those
-		//files from the list since they'll get deleted by the parent
-		//folder automatically.
-		m_ListCtrl.Block(TRUE, FALSE);
-		for (int i=0; i<arDeleted.GetCount(); i++)
+		if (m_ListCtrl.GetCheck(arDeleted.GetAt(i)))
 		{
-			if (m_ListCtrl.GetCheck(arDeleted.GetAt(i)))
+			const CTSVNPath& path = m_ListCtrl.GetListEntry(arDeleted.GetAt(i))->GetPath();
+			if (path.IsDirectory())
 			{
-				const CTSVNPath& path = m_ListCtrl.GetListEntry(arDeleted.GetAt(i))->GetPath();
-				if (path.IsDirectory())
+				//now find all children of this directory
+				for (int j=0; j<arDeleted.GetCount(); j++)
 				{
-					//now find all children of this directory
-					for (int j=0; j<arDeleted.GetCount(); j++)
+					if (i!=j)
 					{
-						if (i!=j)
+						CSVNStatusListCtrl::FileEntry* childEntry = m_ListCtrl.GetListEntry(arDeleted.GetAt(j));
+						if (childEntry->IsChecked())
 						{
-							CSVNStatusListCtrl::FileEntry* childEntry = m_ListCtrl.GetListEntry(arDeleted.GetAt(j));
-							if (childEntry->IsChecked())
+							if (path.IsAncestorOf(childEntry->GetPath()))
 							{
-								if (path.IsAncestorOf(childEntry->GetPath()))
-								{
-									m_ListCtrl.SetEntryCheck(childEntry, arDeleted.GetAt(j), false);
-								}
+								m_ListCtrl.SetEntryCheck(childEntry, arDeleted.GetAt(j), false);
+								nDeleted--;
 							}
 						}
 					}
 				}
 			}
-		} 
-		m_ListCtrl.Block(FALSE, FALSE);
+		}
+	} 
+	m_ListCtrl.Block(FALSE, FALSE);
+
+	if ((nUnchecked != 0)||(bCheckedInExternal)||(bHasConflicted)||(!m_bRecursive))
+	{
 		//save only the files the user has checked into the temporary file
 		m_ListCtrl.WriteCheckedNamesToPathList(m_pathList);
 	}
 	m_ListCtrl.WriteCheckedNamesToPathList(m_selectedPathList);
+	// the item count is used in the progress dialog to show the overall commit
+	// progress.
+	// deleted items only send one notification event, all others send two
+	m_itemsCount = ((m_selectedPathList.GetCount() - nDeleted - itemsToRemove.GetCount()) * 2) + nDeleted + itemsToRemove.GetCount();
 
 	if ((m_bRecursive)&&(checkedLists.size() == 1))
 	{
@@ -703,13 +711,15 @@ LRESULT CCommitDlg::OnFileDropped(WPARAM, LPARAM lParam)
 	// restart the timer.
 	CTSVNPath path;
 	path.SetFromWin((LPCTSTR)lParam);
+
+	// just add all the items we get here.
+	// if the item is versioned, the add will fail but nothing
+	// more will happen.
+	SVN svn;
+	svn.Add(CTSVNPathList(path), &m_ProjectProperties, false, false, true, true);
+
 	if (!m_ListCtrl.HasPath(path))
 	{
-		// just add all the items we get here.
-		// if the item was not unversioned, the add will fail but nothing
-		// more will happen.
-		SVN svn;
-		svn.Add(CTSVNPathList(path), &m_ProjectProperties, false, false, true);
 		if (m_pathList.AreAllPathsFiles())
 		{
 			m_pathList.AddPath(path);
@@ -740,7 +750,7 @@ LRESULT CCommitDlg::OnFileDropped(WPARAM, LPARAM lParam)
 	
 	// Always start the timer, since the status of an existing item might have changed
 	SetTimer(REFRESHTIMER, 200, NULL);
-	ATLTRACE("Item %ws dropped, timer started\n", path.GetWinPath());
+	ATLTRACE(_T("Item %s dropped, timer started\n"), path.GetWinPath());
 	return 0;
 }
 
@@ -811,7 +821,6 @@ void CCommitDlg::GetAutocompletionList()
 	sRegexFile += _T("autolist.txt");
 	if (!m_bRunThread)
 		return;
-	ATLTRACE("start parsing regex file for autocompletion\n");
 	ParseRegexFile(sRegexFile, mapRegex);
 	SHGetFolderPath(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, sRegexFile.GetBuffer(MAX_PATH+1));
 	sRegexFile.ReleaseBuffer();
@@ -839,7 +848,6 @@ void CCommitDlg::GetAutocompletionList()
 		{
 			// add the path parts to the autocompletion list too
 			CString sPartPath = entry->GetRelativeSVNPath();
-			ATLTRACE(_T("parse file %s for autocompletion\n"), (LPCTSTR)sPartPath);
 			m_autolist.insert(sPartPath);
 			int pos = 0;
 			while ((pos = sPartPath.Find('/', pos)) >= 0)
@@ -895,7 +903,6 @@ void CCommitDlg::ScanFile(const CString& sFilePath, const CString& sRegex, REGEX
 		if (opts & IS_TEXT_UNICODE_NULL_BYTES)
 		{
 			delete buffer;
-			ATLTRACE("file %ws is either binary or unicode\n", (LPCTSTR)sFilePath);
 			return;
 		}
 		if (opts & IS_TEXT_UNICODE_UNICODE_MASK)
@@ -912,7 +919,6 @@ void CCommitDlg::ScanFile(const CString& sFilePath, const CString& sRegex, REGEX
 	}
 	if (sFileContent.IsEmpty()|| !m_bRunThread)
 	{
-		ATLTRACE("file %ws is empty\n", (LPCTSTR)sFilePath);
 		return;
 	}
 	match_results results;
@@ -930,7 +936,6 @@ void CCommitDlg::ScanFile(const CString& sFilePath, const CString& sRegex, REGEX
 				for (size_t i=1; i<results.cbackrefs(); ++i)
 				{
 					m_autolist.insert((LPCTSTR)results.backref(i).str().c_str());
-					ATLTRACE("group %d is \"%ws\"\n", i, results.backref(i).str().c_str());
 				}
 				offset += results.rstart(0);
 				offset += results.rlength(0);
@@ -938,8 +943,8 @@ void CCommitDlg::ScanFile(const CString& sFilePath, const CString& sRegex, REGEX
 		} while((br.matched)&&(m_bRunThread));
 		sFileContent.ReleaseBuffer();
 	}
-	catch (bad_alloc) {ATLTRACE("bad alloc exception when parsing file %ws\n", (LPCTSTR)sFilePath);}
-	catch (bad_regexpr) {ATLTRACE("bad regexp exception when parsing file %ws\n", (LPCTSTR)sFilePath);}
+	catch (bad_alloc) {ATLTRACE(_T("bad alloc exception when parsing file %s\n"), (LPCTSTR)sFilePath);}
+	catch (bad_regexpr) {ATLTRACE(_T("bad regexp exception when parsing file %s\n"), (LPCTSTR)sFilePath);}
 }
 
 // CSciEditContextMenuInterface

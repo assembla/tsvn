@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -175,7 +175,6 @@ void CCreatePatch::OnOK()
 	if (m_bThreadRunning)
 		return;
 
-	int nAddedFolders = 0;
 	int nListItems = m_PatchList.GetItemCount();
 	m_filesToRevert.Clear();
 	
@@ -184,29 +183,6 @@ void CCreatePatch::OnOK()
 		const CSVNStatusListCtrl::FileEntry * entry = m_PatchList.GetListEntry(j);
 		if (entry->IsChecked())
 		{
-			if (entry->status == svn_wc_status_added)
-			{
-				if (entry->IsFolder())
-					nAddedFolders++;
-				else
-				{
-					// an added file. Is it inside an added folder?
-					for (int i=0; i<nListItems; ++i)
-					{
-						const CSVNStatusListCtrl::FileEntry * parententry = m_PatchList.GetListEntry(i);
-						if (parententry->status == svn_wc_status_added)
-						{
-							CTSVNPath checkpath = entry->GetPath().GetContainingDirectory();
-							while (!checkpath.IsEmpty())
-							{
-								if (checkpath.IsEquivalentTo(parententry->GetPath()))
-									nAddedFolders++;
-								checkpath = checkpath.GetContainingDirectory();
-							}
-						}
-					}
-				}	
-			}
 			// Unversioned files are not included in the resulting patchfile!
 			// We add those files to a list which will be used to add those files
 			// before creating the patch.
@@ -217,12 +193,6 @@ void CCreatePatch::OnOK()
 		}
 	}
 
-	if (nAddedFolders != 0)
-	{
-		if (CMessageBox::Show(m_hWnd, IDS_CREATEPATCH_ADDEDFOLDERS, IDS_APPNAME, MB_YESNO | MB_ICONQUESTION)!=IDYES)
-			return;
-	}
-
 	if (m_filesToRevert.GetCount())
 	{
 		// add all unversioned files to version control
@@ -231,7 +201,7 @@ void CCreatePatch::OnOK()
 		// has been created! Since this dialog doesn't create the patch
 		// itself, the calling function is responsible to revert these files!
 		SVN svn;
-		svn.Add(m_filesToRevert, NULL, false);
+		svn.Add(m_filesToRevert, NULL, false, false, false, true);
 	}
 	
 	//save only the files the user has selected into the pathlist

@@ -20,7 +20,6 @@
 #include "TortoiseProc.h"
 #include "RevisionDlg.h"
 #include "Balloon.h"
-#include ".\revisiondlg.h"
 
 
 IMPLEMENT_DYNAMIC(CRevisionDlg, CDialog)
@@ -84,10 +83,9 @@ void CRevisionDlg::OnOK()
 	}
 	if ((!IsValid())||((!m_bAllowWCRevs)&&(IsPrev() || IsCommitted() || IsBase())))
 	{
-		CWnd* ctrl = GetDlgItem(IDC_REVNUM);
-		CRect rt;
-		ctrl->GetWindowRect(rt);
-		CBalloon::ShowBalloon(this, CBalloon::GetCtrlCentre(this, IDC_REVNUM), m_bAllowWCRevs ? IDS_ERR_INVALIDREV : IDS_ERR_INVALIDREVNOWC, TRUE, IDI_EXCLAMATION);
+		CBalloon::ShowBalloon(
+			this, CBalloon::GetCtrlCentre(this, IDC_REVNUM),
+			m_bAllowWCRevs ? IDS_ERR_INVALIDREV : IDS_ERR_INVALIDREVNOWC, TRUE, IDI_EXCLAMATION);
 		return;
 	}
 

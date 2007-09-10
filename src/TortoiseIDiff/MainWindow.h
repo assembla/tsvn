@@ -24,7 +24,7 @@
 
 #define SPLITTER_BORDER 2
 
-#define WINDOW_MINHEIGTH 200
+#define WINDOW_MINHEIGHT 200
 #define WINDOW_MINWIDTH 200
 
 /**
@@ -43,10 +43,12 @@ public:
 		, bDragMode(false)
 		, nSplitterPos(100)
 		, bOverlap(false)
-		, bShowInfo(true)
+		, bShowInfo(false)
 		, bVertical(false)
 		, bLinked(true)
 		, bFitTogether(false)
+		, backColor(::GetSysColor(COLOR_WINDOW))
+		, m_BlendType(CPicWindow::BLEND_ALPHA)
 	{ 
 		SetWindowTitle((LPCTSTR)ResString(hResource, IDS_APP_TITLE));
 	};
@@ -100,6 +102,7 @@ protected:
 	CPicWindow		picWindow1;
 	CPicWindow		picWindow2;
 	bool			bShowInfo;
+	COLORREF		backColor;
 
 	// splitter data
 	int				oldx;
@@ -113,6 +116,7 @@ protected:
 	bool			bVertical;
 	bool			bLinked;
 	bool			bFitTogether;
+	CPicWindow::BlendType	m_BlendType;
 
 };
 

@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style type="text/css"> /* <![CDATA[ */
+  @import "branding/css/tigris.css";
+  @import "branding/css/inst.css";
+  /* ]]> */</style>
+<link rel="stylesheet" type="text/css" media="print"
+  href="branding/css/print.css"/>
+<script type="text/javascript" src="branding/scripts/tigris.js"></script>
+<title>TortoiseSVN 1.5 Release Notes</title>
+</head>
+
+<body>
+<div class="app">
+
+<h1 style="text-align: center">TortoiseSVN 1.5 Release Notes</h1>
+
+<div class="h2" id="news" title="news">
+<h2>What's New in TortoiseSVN 1.5</h2>
+
+<ul>
+  <li>Merge Tracking</li>
+  <li>Sparse checkouts</li>
+  <li>Cyrus SASL support for ra_svn and <tt>svnserve</tt></li>
+  <li>Changelist support</li>
+  <li>Log message caching</li>
+  <li>Repository browser</li>
+  <li>Revision graph</li>
+</ul>
+
+<p>Details are described below.</p>
+
+<p>TortoiseSVN 1.5 is a superset of all previous TortoiseSVN releases,
+and is considered the current stable and "best" release.  Anything in 1.0.x,
+1.1.x, 1.2.x or 1.3.x is also in 1.5, but 1.5 contains features and
+bugfixes not present in any earlier release.</p>
+
+</div>  <!-- news -->
+
+<div class="h2" id="compatibility" title="compatibility">
+<h2>Compatibility Concerns</h2>
+
+<p>Older clients and servers interoperate transparently with 1.5
+servers and clients.  Of course, some of the new 1.5 features may not
+be available unless both client and server are the latest version
+(e.g. <a href="http://subversion.tigris.org/merge-tracking/func-spec.html#migration-and-interoperability"
+>Merge Tracking</a>).</p>
+
+</div>  <!-- compatibility -->
+
+<div class="h2" id="merge-tracking" title="merge-tracking">
+<h2>Merge Tracking</h2>
+
+<p>Merge Tracking in Subversion 1.5.0 is roughly equivalent in
+functionality to <a
+href="http://www.orcaware.com/svn/wiki/Svnmerge.py">svnmerge.py</a>,
+recording and using merge history to avoid common cases of the
+repeated merge problem, and allowing for cherry-picking of changes.
+It exposes merge history via properties, and allows for repository
+dump/load (including the ability to re-create the merge history
+index).</p>
+
+<p>Some merge tracking features can't be used for repositories served
+by pre-1.5.x servers.</p>
+
+<div class="h3" id="repeated-merge">
+<h3>Repeated Merge</h3>
+
+<p>When working on a branch, Subversion now tracks each revision which
+gets merged. This makes it easier to merge changes e.g., from trunk
+because it is possible to always merge the whole revision range without
+the risk of merging the same revision twice. Subversion will automatically
+omit the already merged revisions when doing the merge.</p>
+
+<img src="/images/LogWithGrayedMerge.png" alt="Log dialog showing already 
+merged entries grayed out" />
+
+<p>When showing the log from the merge dialog to find the revisions to
+merge, TortoiseSVN shows the already merged revisions grayed out as
+a visual hint. If a grayed out revision is selected, Subversion does
+not merge that revision again because it was already merged.</p>
+
+</div>  <!-- repeated-merge -->
+
+<div class="h3" id="manual-merge">
+<h3>Record Manual Merge</h3>
+
+<p>To block a revision from being merged, TortoiseSVN provides a button
+in the merge dialog named "record only". This will tell Subversion that
+the revision has already been merged, without doing the merge itself.</p>
+
+</div>  <!-- manual-merge -->
+
+<div class="h3" id="merge-info">
+<h3>Merge Information</h3>
+
+<p>When inspecting revisions with the log dialog, the messages of revisions
+where a merge occurred aren't usually very useful. Most people write
+log messages in the form "merged revisions XXX to YYY from /branches/ZZZ"
+or something similar. But what's really interesting when examining the
+log of a folder/file would be the log messages of all the revisions
+that got merged.</p>
+
+<img src="/images/LogWithoutMerge.png" alt="Log dialog showing entries 
+without merge history" />
+
+<p>TortoiseSVN can show you those log messages if you want. The log dialog
+has a checkbox which when activated will fetch all the log messages of
+merged revisions. The log entries of merged revisions are shown a little
+intended.</p>
+
+<img src="/images/LogWithMerge.png" alt="Log dialog showing entries 
+with merge history" />
+
+
+</div>  <!-- merge-info -->
+
+</div> <!-- merge-tracking -->
+
+
+
+<div class="h2" id="sparse-checkouts" title="sparse-checkouts">
+<h2>Sparse checkouts</h2>
+
+<p>Many users have very large trees of which they only want to checkout 
+certain parts. In case of folders with many subfolders, some of the
+subfolders might not be needed.</p>
+<p>TortoiseSVN provides the user with a combo box to choose the depth
+of a checkout:
+<ul>
+<li>Fully recursive</li>
+<li>Immediate children, including folders</li>
+<li>Only file children</li>
+<li>Only this item</li>
+</ul>
+The depth of the checkout is remembered, so that a later <em>update</em>
+will respect that depth and not fetch everything again.</p>
+
+</div> <!-- sparse-checkouts -->
+
+
+<div class="h2" id="cyrus-sasl" title="cyrus-sasl">
+<h2>Cyrus SASL support for <tt>svnserve</tt></h2>
+
+<p>In Subversion 1.5, svnserve can use SASL for authentication. 
+TortoiseSVN has SASL implemented too. The following SASL authentication
+methods are available with TortoiseSVN 1.5:
+<ul>
+<li>ANONYMOUS</li>
+<li>CRAM-MD5</li>
+<li>PLAIN</li>
+<li>DIGEST-MD5</li>
+<li>LOGIN</li>
+<li>NTLM</li>
+</ul>
+</p>
+
+</div> <!-- cyrus-sasl -->
+
+
+<div class="h2" id="changelist-support" title="changelist-support">
+<h2>Changelist support</h2>
+
+<p>Sometimes you are working on several different problems at once
+in your working copy, and it becomes difficult to track which files are
+involved in which change. TortoiseSVN now allows you to group files together
+into logical <em>changesets</em>. These appear in the Commit dialog and the
+Check for Modifications dialog. As well as giving a visual indication, you
+can also select groups for commit.
+</p>
+<img src="/images/ChangeList.png" alt="Commit dialog showing changelists
+grouped together" />
+
+</div>  <!-- changelist-support -->
+
+
+<div class="h2" id="log-cache" title="Log Cache">
+<h2>Log Cache</h2>
+
+<p>Fetching the log information from the repository can take a long
+time, especially for repositories with thousands of revisions.</p>
+
+<p>TortoiseSVN 1.5 can cache the log entries on the local drive. Only
+the entries which are not yet in the local cache are fetched from the
+repository.</p>
+
+</div>  <!-- log-cache -->
+
+
+<div class="h2" id="repository-browser" title="repository-browser">
+<h2>Repository browser</h2>
+
+<p>The repository browser has been completely rewritten and now
+resembles more the Windows explorer. It has two panes, with a tree
+view on the left and the file/folder list on the right.</p>
+
+<img src="/images/RepositoryBrowser.png" alt="Repository Browser" />
+
+<p>Part of the rewrite also included a performance improvement when
+showing very big directories.</p>
+
+</div>  <!-- repository-browser -->
+
+
+<div class="h2" id="revision-graph" title="revision-graph">
+<h2>Revision Graph</h2>
+
+<p>The revision graph has changed dramatically since the last release.
+Apart from using the log cache if available, it is also much faster when
+analyzing the log data.</p>
+
+<p>A small window on the top right of the graph shows an overview of the
+whole graph.</p>
+
+<p>The new revision graph has much more options to tweak the output.
+For example, the direction of the graph, how the nodes are arranged in
+the graph or which nodes/paths/urls should be filtered out completely.</p>
+
+</div>  <!-- revision-graph -->
+
+
+<div class="h2" id="client-side-hooks" title="client-side-hooks">
+<h2>Client-side hook scripts</h2>
+
+<p>
+
+</div>  <!-- client-side-hooks -->
+
+
+</div>  <!-- app -->
+</body>
+</html>

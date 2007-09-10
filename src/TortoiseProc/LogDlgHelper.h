@@ -53,8 +53,8 @@ typedef struct LogEntryData
 	LogChangedPathArray* pArChangedPaths;
 	BOOL bCopies;
 	DWORD actions;
-	DWORD children;
-	BOOL isChild;
+	BOOL haschildren;
+	DWORD childStackDepth;
 } LOGENTRYDATA, *PLOGENTRYDATA;
 
 /**

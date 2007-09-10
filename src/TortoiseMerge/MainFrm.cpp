@@ -84,12 +84,16 @@ BEGIN_MESSAGE_MAP(CMainFrame, CNewFrameWnd)
     ON_COMMAND(ID_EDIT_USEMYBLOCK, &CMainFrame::OnEditUseMine)
     ON_COMMAND(ID_EDIT_USETHEIRTHENMYBLOCK, &CMainFrame::OnEditUseTheirsThenMine)
     ON_COMMAND(ID_EDIT_USEMINETHENTHEIRBLOCK, &CMainFrame::OnEditUseMineThenTheirs)
-	ON_UPDATE_COMMAND_UI(ID_EDIT_USETHEIRBLOCK, &CMainFrame::OnUpdateTextBlockSelection)
-	ON_UPDATE_COMMAND_UI(ID_EDIT_USEMYBLOCK, &CMainFrame::OnUpdateTextBlockSelection)
-	ON_UPDATE_COMMAND_UI(ID_EDIT_USETHEIRTHENMYBLOCK, &CMainFrame::OnUpdateTextBlockSelection)
-	ON_UPDATE_COMMAND_UI(ID_EDIT_USEMINETHENTHEIRBLOCK, &CMainFrame::OnUpdateTextBlockSelection)
 	ON_COMMAND(ID_EDIT_UNDO, &CMainFrame::OnEditUndo)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_UNDO, &CMainFrame::OnUpdateEditUndo)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_USEMINETHENTHEIRBLOCK, &CMainFrame::OnUpdateEditUseminethentheirblock)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_USEMYBLOCK, &CMainFrame::OnUpdateEditUsemyblock)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_USETHEIRBLOCK, &CMainFrame::OnUpdateEditUsetheirblock)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_USETHEIRTHENMYBLOCK, &CMainFrame::OnUpdateEditUsetheirthenmyblock)
+	ON_COMMAND(ID_VIEW_INLINEDIFFWORD, &CMainFrame::OnViewInlinediffword)
+	ON_UPDATE_COMMAND_UI(ID_VIEW_INLINEDIFFWORD, &CMainFrame::OnUpdateViewInlinediffword)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_CREATEUNIFIEDDIFFFILE, &CMainFrame::OnUpdateEditCreateunifieddifffile)
+	ON_COMMAND(ID_EDIT_CREATEUNIFIEDDIFFFILE, &CMainFrame::OnEditCreateunifieddifffile)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -114,6 +118,7 @@ CMainFrame::CMainFrame()
 	m_bOneWay = (0 != ((DWORD)CRegDWORD(_T("Software\\TortoiseMerge\\OnePane"))));
 	m_bReversedPatch = FALSE;
 	m_bHasConflicts = false;
+	m_bInlineWordDiff = true;
 }
 
 CMainFrame::~CMainFrame()
@@ -485,7 +490,7 @@ BOOL CMainFrame::LoadViews(BOOL bReload)
 			return FALSE;
 		}
 	}
-	BOOL bGoFirstDiff = (0 != ((DWORD)CRegDWORD(_T("Software\\TortoiseMerge\\FirstDiffOnLoad"))));
+	BOOL bGoFirstDiff = (0 != ((DWORD)CRegDWORD(_T("Software\\TortoiseMerge\\FirstDiffOnLoad"), TRUE)));
 	if (!m_Data.IsBaseFileInUse())
 	{
 		if (m_Data.IsYourFileInUse() && m_Data.IsTheirFileInUse())
@@ -565,9 +570,7 @@ BOOL CMainFrame::LoadViews(BOOL bReload)
 				m_wndSplitter2.HideColumn(1);
 			if (bReload)
 			{
-				m_pwndLeftView->m_arDiffLines = &m_Data.m_arDiffYourBaseBoth;
-				m_pwndLeftView->m_arLineStates = &m_Data.m_arStateYourBaseBoth;
-				m_pwndLeftView->m_arLineLines = &m_Data.m_arLinesYourBaseBoth;
+				m_pwndLeftView->m_pViewData = &m_Data.m_YourBaseBoth;
 				m_pwndLeftView->texttype = m_Data.m_arYourFile.GetUnicodeType();
 				m_pwndLeftView->lineendings = m_Data.m_arYourFile.GetLineEndings();
 			}
@@ -586,9 +589,7 @@ BOOL CMainFrame::LoadViews(BOOL bReload)
 				m_wndSplitter2.ShowColumn();
 			if (bReload)
 			{
-				m_pwndLeftView->m_arDiffLines = &m_Data.m_arDiffYourBaseLeft;
-				m_pwndLeftView->m_arLineStates = &m_Data.m_arStateYourBaseLeft;
-				m_pwndLeftView->m_arLineLines = &m_Data.m_arLinesYourBaseLeft;
+				m_pwndLeftView->m_pViewData = &m_Data.m_YourBaseLeft;
 				m_pwndLeftView->texttype = m_Data.m_arBaseFile.GetUnicodeType();
 				m_pwndLeftView->lineendings = m_Data.m_arBaseFile.GetLineEndings();
 			}
@@ -596,9 +597,7 @@ BOOL CMainFrame::LoadViews(BOOL bReload)
 			m_pwndLeftView->m_sFullFilePath = m_Data.m_baseFile.GetFilename();
 			if (bReload)
 			{
-				m_pwndRightView->m_arDiffLines = &m_Data.m_arDiffYourBaseRight;
-				m_pwndRightView->m_arLineStates = &m_Data.m_arStateYourBaseRight;
-				m_pwndRightView->m_arLineLines = &m_Data.m_arLinesYourBaseRight;
+				m_pwndRightView->m_pViewData = &m_Data.m_YourBaseRight;
 				m_pwndRightView->texttype = m_Data.m_arYourFile.GetUnicodeType();
 				m_pwndRightView->lineendings = m_Data.m_arYourFile.GetLineEndings();
 			}
@@ -616,9 +615,7 @@ BOOL CMainFrame::LoadViews(BOOL bReload)
 		//diff between THEIR, YOUR and BASE
 		if (bReload)
 		{
-			m_pwndLeftView->m_arDiffLines = &m_Data.m_arDiffTheirBaseBoth;
-			m_pwndLeftView->m_arLineStates = &m_Data.m_arStateTheirBaseBoth;
-			m_pwndLeftView->m_arLineLines = &m_Data.m_arLinesTheirBaseBoth;
+			m_pwndLeftView->m_pViewData = &m_Data.m_TheirBaseBoth;
 			m_pwndLeftView->texttype = m_Data.m_arTheirFile.GetUnicodeType();
 			m_pwndLeftView->lineendings = m_Data.m_arTheirFile.GetLineEndings();
 		}
@@ -627,9 +624,7 @@ BOOL CMainFrame::LoadViews(BOOL bReload)
 		m_pwndLeftView->m_sFullFilePath = m_Data.m_theirFile.GetFilename();
 		if (bReload)
 		{
-			m_pwndRightView->m_arDiffLines = &m_Data.m_arDiffYourBaseBoth;
-			m_pwndRightView->m_arLineStates = &m_Data.m_arStateYourBaseBoth;
-			m_pwndRightView->m_arLineLines = &m_Data.m_arLinesYourBaseBoth;
+			m_pwndRightView->m_pViewData = &m_Data.m_YourBaseBoth;
 			m_pwndRightView->texttype = m_Data.m_arYourFile.GetUnicodeType();
 			m_pwndRightView->lineendings = m_Data.m_arYourFile.GetLineEndings();
 		}
@@ -638,9 +633,7 @@ BOOL CMainFrame::LoadViews(BOOL bReload)
 		m_pwndRightView->m_sFullFilePath = m_Data.m_yourFile.GetFilename();
 		if (bReload)
 		{
-			m_pwndBottomView->m_arDiffLines = &m_Data.m_arDiff3;
-			m_pwndBottomView->m_arLineStates = &m_Data.m_arStateDiff3;
-			m_pwndBottomView->m_arLineLines = &m_Data.m_arLinesDiff3;
+			m_pwndBottomView->m_pViewData = &m_Data.m_Diff3;
 			m_pwndBottomView->texttype = m_Data.m_arTheirFile.GetUnicodeType();
 			m_pwndBottomView->lineendings = m_Data.m_arTheirFile.GetLineEndings();
 		}
@@ -744,11 +737,11 @@ int CMainFrame::CheckResolved()
 	m_bHasConflicts = true;
 	if (this->m_pwndBottomView->IsWindowVisible())
 	{
-		if (this->m_pwndBottomView->m_arLineStates)
+		if (this->m_pwndBottomView->m_pViewData)
 		{
-			for (int i=0; i<this->m_pwndBottomView->m_arLineStates->GetCount(); i++)
+			for (int i=0; i<this->m_pwndBottomView->m_pViewData->GetCount(); i++)
 			{
-				if (CDiffData::DIFFSTATE_CONFLICTED == (CDiffData::DiffStates)this->m_pwndBottomView->m_arLineStates->GetAt(i))
+				if (DIFFSTATE_CONFLICTED == m_pwndBottomView->m_pViewData->GetState(i))
 					return i;
 			}
 		}
@@ -759,23 +752,20 @@ int CMainFrame::CheckResolved()
 
 void CMainFrame::SaveFile(const CString& sFilePath)
 {
-	CStdCStringArray * arText = NULL;
-	CStdDWORDArray * arStates = NULL;
+	CViewData * pViewData = NULL;
 	CFileTextLines * pOriginFile = &m_Data.m_arBaseFile;
 	if ((m_pwndBottomView)&&(m_pwndBottomView->IsWindowVisible()))
 	{
-		arText = m_pwndBottomView->m_arDiffLines;
-		arStates = m_pwndBottomView->m_arLineStates;
+		pViewData = m_pwndBottomView->m_pViewData;
 		Invalidate();
 	}
 	else if ((m_pwndRightView)&&(m_pwndRightView->IsWindowVisible()))
 	{
-		arText = m_pwndRightView->m_arDiffLines;
+		pViewData = m_pwndRightView->m_pViewData;
 		if (m_Data.IsYourFileInUse())
 			pOriginFile = &m_Data.m_arYourFile;
 		else if (m_Data.IsTheirFileInUse())
 			pOriginFile = &m_Data.m_arTheirFile;
-		arStates = m_pwndRightView->m_arLineStates;
 		Invalidate();
 	} 
 	else
@@ -783,56 +773,56 @@ void CMainFrame::SaveFile(const CString& sFilePath)
 		// nothing to save!
 		return;
 	}
-	if ((arText)&&(arStates)&&(pOriginFile))
+	if ((pViewData)&&(pOriginFile))
 	{
 		CFileTextLines file;
 		pOriginFile->CopySettings(&file);
-		for (int i=0; i<arText->GetCount(); i++)
+		for (int i=0; i<pViewData->GetCount(); i++)
 		{
 			//only copy non-removed lines
-			CDiffData::DiffStates state = (CDiffData::DiffStates)arStates->GetAt(i);
+			DiffStates state = pViewData->GetState(i);
 			switch (state)
 			{
-			case CDiffData::DIFFSTATE_ADDED:
-			case CDiffData::DIFFSTATE_CONFLICTADDED:
-			case CDiffData::DIFFSTATE_IDENTICALADDED:
-			case CDiffData::DIFFSTATE_NORMAL:
-			case CDiffData::DIFFSTATE_THEIRSADDED:
-			case CDiffData::DIFFSTATE_UNKNOWN:
-			case CDiffData::DIFFSTATE_YOURSADDED:
-			case CDiffData::DIFFSTATE_ADDEDWHITESPACE:
-			case CDiffData::DIFFSTATE_WHITESPACE:
-			case CDiffData::DIFFSTATE_WHITESPACE_DIFF:
-				file.Add(arText->GetAt(i));
+			case DIFFSTATE_ADDED:
+			case DIFFSTATE_CONFLICTADDED:
+			case DIFFSTATE_IDENTICALADDED:
+			case DIFFSTATE_NORMAL:
+			case DIFFSTATE_THEIRSADDED:
+			case DIFFSTATE_UNKNOWN:
+			case DIFFSTATE_YOURSADDED:
+			case DIFFSTATE_ADDEDWHITESPACE:
+			case DIFFSTATE_WHITESPACE:
+			case DIFFSTATE_WHITESPACE_DIFF:
+				file.Add(pViewData->GetLine(i));
 				break;
-			case CDiffData::DIFFSTATE_CONFLICTED:
+			case DIFFSTATE_CONFLICTED:
 				{
 					int first = i;
 					int last = i;
 					do 
 					{
 						last++;
-					} while( last<arStates->GetCount() && ((CDiffData::DiffStates)arStates->GetAt(last))==CDiffData::DIFFSTATE_CONFLICTED);
+					} while( last<pViewData->GetCount() && (pViewData->GetState(last))==DIFFSTATE_CONFLICTED);
 					file.Add(_T("<<<<<<< .mine"));
 					for (int j=first; j<last; j++)
 					{
-						file.Add(m_pwndRightView->m_arDiffLines->GetAt(j));
+						file.Add(m_pwndRightView->m_pViewData->GetLine(j));
 					}
 					file.Add(_T("======="));
 					for (int j=first; j<last; j++)
 					{
-						file.Add(m_pwndLeftView->m_arDiffLines->GetAt(j));
+						file.Add(m_pwndLeftView->m_pViewData->GetLine(j));
 					}
 					file.Add(_T(">>>>>>> .theirs"));
 					i = last-1;
 				}
 				break;
-			case CDiffData::DIFFSTATE_EMPTY:
-			case CDiffData::DIFFSTATE_CONFLICTEMPTY:
-			case CDiffData::DIFFSTATE_IDENTICALREMOVED:
-			case CDiffData::DIFFSTATE_REMOVED:
-			case CDiffData::DIFFSTATE_THEIRSREMOVED:
-			case CDiffData::DIFFSTATE_YOURSREMOVED:
+			case DIFFSTATE_EMPTY:
+			case DIFFSTATE_CONFLICTEMPTY:
+			case DIFFSTATE_IDENTICALREMOVED:
+			case DIFFSTATE_REMOVED:
+			case DIFFSTATE_THEIRSREMOVED:
+			case DIFFSTATE_YOURSREMOVED:
 				break;
 			default:
 				break;
@@ -875,7 +865,7 @@ bool CMainFrame::FileSave(bool bCheckResolved /*=true*/)
 		if (nConflictLine >= 0)
 		{
 			CString sTemp;
-			sTemp.Format(IDS_ERR_MAINFRAME_FILEHASCONFLICTS, this->m_pwndBottomView->m_arLineLines->GetAt(nConflictLine)+1);
+			sTemp.Format(IDS_ERR_MAINFRAME_FILEHASCONFLICTS, m_pwndBottomView->m_pViewData->GetLineNumber(nConflictLine)+1);
 			if (MessageBox(sTemp, 0, MB_ICONERROR | MB_YESNO)!=IDYES)
 			{
 				if (m_pwndBottomView)
@@ -941,7 +931,7 @@ bool CMainFrame::FileSaveAs(bool bCheckResolved /*=true*/)
 		if (nConflictLine >= 0)
 		{
 			CString sTemp;
-			sTemp.Format(IDS_ERR_MAINFRAME_FILEHASCONFLICTS, this->m_pwndBottomView->m_arLineLines->GetAt(nConflictLine)+1);
+			sTemp.Format(IDS_ERR_MAINFRAME_FILEHASCONFLICTS, this->m_pwndBottomView->m_pViewData->GetLineNumber(nConflictLine)+1);
 			if (MessageBox(sTemp, 0, MB_ICONERROR | MB_YESNO)!=IDYES)
 			{
 				if (m_pwndBottomView)
@@ -996,14 +986,14 @@ void CMainFrame::OnUpdateFileSave(CCmdUI *pCmdUI)
 	{
 		if (m_pwndBottomView)
 		{
-			if ((m_pwndBottomView->IsWindowVisible())&&(m_pwndBottomView->m_arDiffLines))
+			if ((m_pwndBottomView->IsWindowVisible())&&(m_pwndBottomView->m_pViewData))
 			{
 				bEnable = TRUE;
 			} 
 		}
 		if (m_pwndRightView)
 		{
-			if ((m_pwndRightView->IsWindowVisible())&&(m_pwndRightView->m_arDiffLines))
+			if ((m_pwndRightView->IsWindowVisible())&&(m_pwndRightView->m_pViewData))
 			{
 				if (m_pwndRightView->IsModified() || (m_Data.m_yourFile.GetWindowName().Right(9).Compare(_T(": patched"))==0))
 					bEnable = TRUE;
@@ -1018,14 +1008,14 @@ void CMainFrame::OnUpdateFileSaveAs(CCmdUI *pCmdUI)
 	BOOL bEnable = FALSE;
 	if (m_pwndBottomView)
 	{
-		if ((m_pwndBottomView->IsWindowVisible())&&(m_pwndBottomView->m_arDiffLines))
+		if ((m_pwndBottomView->IsWindowVisible())&&(m_pwndBottomView->m_pViewData))
 		{
 			bEnable = TRUE;
 		}
 	}
 	if (m_pwndRightView)
 	{
-		if ((m_pwndRightView->IsWindowVisible())&&(m_pwndRightView->m_arDiffLines))
+		if ((m_pwndRightView->IsWindowVisible())&&(m_pwndRightView->m_pViewData))
 		{
 			bEnable = TRUE;
 		}
@@ -1196,21 +1186,21 @@ void CMainFrame::Search(SearchDirection srchDir)
 	if (m_sFindText.IsEmpty())
 		return;
 
-	if ((m_pwndLeftView)&&(m_pwndLeftView->m_arDiffLines))
+	if ((m_pwndLeftView)&&(m_pwndLeftView->m_pViewData))
 	{
 		bool bFound = FALSE;
 
 		CString left;
 		CString right;
 		CString bottom;
-		CDiffData::DiffStates leftstate = CDiffData::DIFFSTATE_NORMAL;
-		CDiffData::DiffStates rightstate = CDiffData::DIFFSTATE_NORMAL;
-		CDiffData::DiffStates bottomstate = CDiffData::DIFFSTATE_NORMAL;
+		DiffStates leftstate = DIFFSTATE_NORMAL;
+		DiffStates rightstate = DIFFSTATE_NORMAL;
+		DiffStates bottomstate = DIFFSTATE_NORMAL;
 		int i = 0;
 		
 		m_nSearchIndex = FindSearchStart(m_nSearchIndex);
 		m_nSearchIndex++;
-		if (m_nSearchIndex >= m_pwndLeftView->m_arDiffLines->GetCount())
+		if (m_nSearchIndex >= m_pwndLeftView->m_pViewData->GetCount())
 			m_nSearchIndex = 0;
 		if (srchDir == SearchPrevious)
 		{
@@ -1219,29 +1209,29 @@ void CMainFrame::Search(SearchDirection srchDir)
 			m_nSearchIndex -= 2;
 			// if at the top, start again from the end
 			if (m_nSearchIndex < 0)
-				m_nSearchIndex += m_pwndLeftView->m_arDiffLines->GetCount();
+				m_nSearchIndex += m_pwndLeftView->m_pViewData->GetCount();
 		}
-		const int idxLimits[2][2][2]={{{m_nSearchIndex, m_pwndLeftView->m_arDiffLines->GetCount()},
+		const int idxLimits[2][2][2]={{{m_nSearchIndex, m_pwndLeftView->m_pViewData->GetCount()},
 									   {0, m_nSearchIndex}},
 									  {{m_nSearchIndex, -1},
-									   {m_pwndLeftView->m_arDiffLines->GetCount()-1, m_nSearchIndex}}};
+									   {m_pwndLeftView->m_pViewData->GetCount()-1, m_nSearchIndex}}};
 		const int offsets[2]={+1, -1};
 		
 		for (int j=0; j != 2 && !bFound; ++j)
 		{
 			for (i=idxLimits[srchDir][j][0]; i != idxLimits[srchDir][j][1]; i += offsets[srchDir])
 			{
-				left = m_pwndLeftView->m_arDiffLines->GetAt(i);
-				leftstate = (CDiffData::DiffStates)m_pwndLeftView->m_arLineStates->GetAt(i);
-				if ((!m_bOneWay)&&(m_pwndRightView->m_arDiffLines))
+				left = m_pwndLeftView->m_pViewData->GetLine(i);
+				leftstate = m_pwndLeftView->m_pViewData->GetState(i);
+				if ((!m_bOneWay)&&(m_pwndRightView->m_pViewData))
 				{
-					right = m_pwndRightView->m_arDiffLines->GetAt(i);
-					rightstate = (CDiffData::DiffStates)m_pwndRightView->m_arLineStates->GetAt(i);
+					right = m_pwndRightView->m_pViewData->GetLine(i);
+					rightstate = m_pwndRightView->m_pViewData->GetState(i);
 				}
-				if ((m_pwndBottomView)&&(m_pwndBottomView->m_arDiffLines))
+				if ((m_pwndBottomView)&&(m_pwndBottomView->m_pViewData))
 				{
-					bottom = m_pwndBottomView->m_arDiffLines->GetAt(i);
-					bottomstate = (CDiffData::DiffStates)m_pwndBottomView->m_arLineStates->GetAt(i);
+					bottom = m_pwndBottomView->m_pViewData->GetLine(i);
+					bottomstate = m_pwndBottomView->m_pViewData->GetState(i);
 				}
 
 				if (!m_bMatchCase)
@@ -1253,7 +1243,7 @@ void CMainFrame::Search(SearchDirection srchDir)
 				}
 				if (StringFound(left))
 				{
-					if ((!m_bLimitToDiff)||(leftstate != CDiffData::DIFFSTATE_NORMAL))
+					if ((!m_bLimitToDiff)||(leftstate != DIFFSTATE_NORMAL))
 					{
 						bFound = TRUE;
 						break;
@@ -1261,7 +1251,7 @@ void CMainFrame::Search(SearchDirection srchDir)
 				} 
 				else if (StringFound(right))
 				{
-					if ((!m_bLimitToDiff)||(rightstate != CDiffData::DIFFSTATE_NORMAL))
+					if ((!m_bLimitToDiff)||(rightstate != DIFFSTATE_NORMAL))
 					{
 						bFound = TRUE;
 						break;
@@ -1269,7 +1259,7 @@ void CMainFrame::Search(SearchDirection srchDir)
 				} 
 				else if (StringFound(bottom))
 				{
-					if ((!m_bLimitToDiff)||(bottomstate != CDiffData::DIFFSTATE_NORMAL))
+					if ((!m_bLimitToDiff)||(bottomstate != DIFFSTATE_NORMAL))
 					{
 						bFound = TRUE;
 						break;
@@ -1389,33 +1379,60 @@ void CMainFrame::OnEditUseTheirs()
 	if (m_pwndBottomView)
 		m_pwndBottomView->UseTheirTextBlock();
 }
+void CMainFrame::OnUpdateEditUsetheirblock(CCmdUI *pCmdUI)
+{
+	int nSelBlockStart = -1;
+	int nSelBlockEnd = -1;
+	if (m_pwndBottomView)
+		m_pwndBottomView->GetSelection(nSelBlockStart, nSelBlockEnd);
+	pCmdUI->Enable((nSelBlockStart >= 0)&&(nSelBlockEnd >= 0));
+}
+
 
 void CMainFrame::OnEditUseMine()
 {
 	if (m_pwndBottomView)
 		m_pwndBottomView->UseMyTextBlock();
 }
+void CMainFrame::OnUpdateEditUsemyblock(CCmdUI *pCmdUI)
+{
+	int nSelBlockStart = -1;
+	int nSelBlockEnd = -1;
+	if (m_pwndBottomView)
+		m_pwndBottomView->GetSelection(nSelBlockStart, nSelBlockEnd);
+	pCmdUI->Enable((nSelBlockStart >= 0)&&(nSelBlockEnd >= 0));
+}
+
 
 void CMainFrame::OnEditUseTheirsThenMine()
 {
 	if (m_pwndBottomView)
 		m_pwndBottomView->UseTheirThenMyTextBlock();
 }
+void CMainFrame::OnUpdateEditUsetheirthenmyblock(CCmdUI *pCmdUI)
+{
+	int nSelBlockStart = -1;
+	int nSelBlockEnd = -1;
+	if (m_pwndBottomView)
+		m_pwndBottomView->GetSelection(nSelBlockStart, nSelBlockEnd);
+	pCmdUI->Enable((nSelBlockStart >= 0)&&(nSelBlockEnd >= 0));
+}
+
 
 void CMainFrame::OnEditUseMineThenTheirs()
 {
 	if (m_pwndBottomView)
 		m_pwndBottomView->UseMyThenTheirTextBlock();
 }
-
-void CMainFrame::OnUpdateTextBlockSelection(CCmdUI *pCmdUI)
+void CMainFrame::OnUpdateEditUseminethentheirblock(CCmdUI *pCmdUI)
 {
-	BOOL bEnable = FALSE;
+	int nSelBlockStart = -1;
+	int nSelBlockEnd = -1;
 	if (m_pwndBottomView)
-		bEnable = m_pwndBottomView->CanSelectTextBlocks();
-
-	pCmdUI->Enable(bEnable);
+		m_pwndBottomView->GetSelection(nSelBlockStart, nSelBlockEnd);
+	pCmdUI->Enable((nSelBlockStart >= 0)&&(nSelBlockEnd >= 0));
 }
+
 
 void CMainFrame::OnFileReload()
 {
@@ -1506,7 +1523,7 @@ void CMainFrame::OnUpdateMergeMarkasresolved(CCmdUI *pCmdUI)
 	{
 		if (m_pwndBottomView)
 		{
-			if ((m_pwndBottomView->IsWindowVisible())&&(m_pwndBottomView->m_arDiffLines))
+			if ((m_pwndBottomView->IsWindowVisible())&&(m_pwndBottomView->m_pViewData))
 			{
 				bEnable = TRUE;
 			} 
@@ -1521,7 +1538,7 @@ void CMainFrame::OnMergeMarkasresolved()
 	if (nConflictLine >= 0)
 	{
 		CString sTemp;
-		sTemp.Format(IDS_ERR_MAINFRAME_FILEHASCONFLICTS, this->m_pwndBottomView->m_arLineLines->GetAt(nConflictLine)+1);
+		sTemp.Format(IDS_ERR_MAINFRAME_FILEHASCONFLICTS, m_pwndBottomView->m_pViewData->GetLineNumber(nConflictLine)+1);
 		if (MessageBox(sTemp, 0, MB_ICONERROR | MB_YESNO)!=IDYES)
 		{
 			if (m_pwndBottomView)
@@ -1534,7 +1551,7 @@ void CMainFrame::OnMergeMarkasresolved()
 	{
 		if (m_pwndBottomView)
 		{
-			if ((m_pwndBottomView->IsWindowVisible())&&(m_pwndBottomView->m_arDiffLines))
+			if ((m_pwndBottomView->IsWindowVisible())&&(m_pwndBottomView->m_pViewData))
 			{
 				FileSave(false);
 			} 
@@ -1705,4 +1722,93 @@ int CMainFrame::CheckForSave()
 		}
 	}
 	return ret;
+}
+
+void CMainFrame::OnViewInlinediffword()
+{
+	m_bInlineWordDiff = !m_bInlineWordDiff;
+	if (m_pwndLeftView)
+	{
+		m_pwndLeftView->SetInlineWordDiff(m_bInlineWordDiff);
+		m_pwndLeftView->Invalidate();
+	}
+	if (m_pwndRightView)
+	{
+		m_pwndRightView->SetInlineWordDiff(m_bInlineWordDiff);
+		m_pwndRightView->Invalidate();
+	}
+	if (m_pwndBottomView)
+	{
+		m_pwndBottomView->SetInlineWordDiff(m_bInlineWordDiff);
+		m_pwndBottomView->Invalidate();
+	}
+	m_wndLineDiffBar.Invalidate();
+}
+
+void CMainFrame::OnUpdateViewInlinediffword(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(m_pwndLeftView && m_pwndLeftView->IsWindowVisible() &&
+		m_pwndRightView && m_pwndRightView->IsWindowVisible());
+	pCmdUI->SetCheck(m_bInlineWordDiff);
+}
+
+void CMainFrame::OnUpdateEditCreateunifieddifffile(CCmdUI *pCmdUI)
+{
+	// "create unified diff file" is only available if two files
+	// are diffed, not three.
+	bool bEnabled = true;
+	if ((m_pwndLeftView == NULL)||(!m_pwndLeftView->IsWindowVisible()))
+		bEnabled = false;
+	if ((m_pwndRightView == NULL)||(!m_pwndRightView->IsWindowVisible()))
+		bEnabled = false;
+	if ((m_pwndBottomView)&&(m_pwndBottomView->IsWindowVisible()))
+		bEnabled = false;
+	pCmdUI->Enable(bEnabled);
+}
+
+void CMainFrame::OnEditCreateunifieddifffile()
+{
+	CString origFile, modifiedFile, outputFile;
+	// the original file is the one on the left
+	if (m_pwndLeftView)
+		origFile = m_pwndLeftView->m_sFullFilePath;
+	if (m_pwndRightView)
+		modifiedFile = m_pwndRightView->m_sFullFilePath;
+	if (!origFile.IsEmpty() && !modifiedFile.IsEmpty())
+	{
+		// ask for the path to save the unified diff file to
+		OPENFILENAME ofn = {0};			// common dialog box structure
+		TCHAR szFile[MAX_PATH] = {0};	// buffer for file name
+		ofn.lStructSize = sizeof(OPENFILENAME);
+		ofn.lpstrFile = szFile;
+		ofn.nMaxFile = sizeof(szFile)/sizeof(TCHAR);
+		CString temp;
+		temp.LoadString(IDS_SAVEASTITLE);
+		if (!temp.IsEmpty())
+			ofn.lpstrTitle = temp;
+		ofn.Flags = OFN_OVERWRITEPROMPT;
+		CString sFilter;
+		sFilter.LoadString(IDS_COMMONFILEFILTER);
+		TCHAR * pszFilters = new TCHAR[sFilter.GetLength()+4];
+		_tcscpy_s (pszFilters, sFilter.GetLength()+4, sFilter);
+		// Replace '|' delimiters with '\0's
+		TCHAR *ptr = pszFilters + _tcslen(pszFilters);  //set ptr at the NULL
+		while (ptr != pszFilters)
+		{
+			if (*ptr == '|')
+				*ptr = '\0';
+			ptr--;
+		}
+		ofn.lpstrFilter = pszFilters;
+		ofn.nFilterIndex = 1;
+
+		// Display the Save dialog box. 
+		CString sFile;
+		if (GetSaveFileName(&ofn)==TRUE)
+		{
+			outputFile = CString(ofn.lpstrFile);
+			CAppUtils::CreateUnifiedDiff(origFile, modifiedFile, outputFile);
+		}
+		delete [] pszFilters;
+	}
 }
