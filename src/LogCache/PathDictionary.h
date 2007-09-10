@@ -78,6 +78,13 @@ public:
 	CPathDictionary();
 	virtual ~CPathDictionary(void);
 
+    // member access
+
+    const CStringDictionary& GetPathElements() const
+    {
+        return pathElements;
+    }
+
 	// dictionary operations
 
 	index_t size() const

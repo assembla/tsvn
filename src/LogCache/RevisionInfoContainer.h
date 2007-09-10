@@ -220,42 +220,15 @@ public:
 
 		bool HasFromPath() const;
 		CDictionaryBasedPath GetFromPath() const;
+        index_t GetFromPathID() const;
 		revision_t GetFromRevision() const;
 
 		// general status (points to an action)
 
-<<<<<<< .working
 		bool IsValid() const;
-=======
-		index_t GetPathID() const
-		{
-			assert (IsValid());
-			return container->changedPaths[changeOffset];
-		}
+        index_t GetPathID() const;
 
-		CDictionaryBasedPath GetFromPath() const
-		{
-			assert (HasFromPath());
-			index_t pathID = container->copyFromPaths [copyFromOffset];
-			return CDictionaryBasedPath (&container->paths, pathID);
-		}
->>>>>>> .merge-right.r9937
-
-<<<<<<< .working
-		// move pointer
-=======
-		index_t GetFromPathID() const
-		{
-			assert (HasFromPath());
-			return container->copyFromPaths [copyFromOffset];
-		}
-
-		revision_t GetFromRevision() const
-		{
-			assert (HasFromPath());
-			return container->copyFromRevisions [copyFromOffset];
-		}
->>>>>>> .merge-right.r9937
+        // move pointer
 
 		CChangesIterator& operator++();		// prefix
 		CChangesIterator operator++(int);	// postfix
@@ -456,6 +429,13 @@ CRevisionInfoContainer::CChangesIterator::GetPath() const
 	return CDictionaryBasedPath (&container->paths, pathID);
 }
 
+inline index_t 
+CRevisionInfoContainer::CChangesIterator::GetFromPathID() const
+{
+	assert (HasFromPath());
+	return container->copyFromPaths [copyFromOffset];
+}
+
 inline CDictionaryBasedPath 
 CRevisionInfoContainer::CChangesIterator::GetFromPath() const
 {
@@ -480,6 +460,12 @@ inline bool CRevisionInfoContainer::CChangesIterator::IsValid() const
 	return (container != NULL)
 		&& (changeOffset < (index_t)container->changes.size())
 		&& (copyFromOffset <= (index_t)container->copyFromPaths.size());
+}
+
+inline index_t CRevisionInfoContainer::CChangesIterator::GetPathID() const
+{
+	assert (IsValid());
+	return container->changedPaths[changeOffset];
 }
 
 ///////////////////////////////////////////////////////////////
