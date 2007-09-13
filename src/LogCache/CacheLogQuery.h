@@ -41,6 +41,7 @@ namespace LogCache
 {
 	class CLogCachePool;
 	class CCachedLogInfo;
+    class CRepositoryInfo;
 }
 
 using namespace LogCache;
@@ -105,6 +106,7 @@ private:
 
 	/// we get our cache from here
 	CLogCachePool* caches;
+    CRepositoryInfo* repositoryInfoCache;
 
 	/// cache to use & update
 	CCachedLogInfo* cache;

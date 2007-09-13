@@ -611,10 +611,10 @@ CDictionaryBasedTempPath CCacheLogQuery::GetRelativeRepositoryPath (SVNInfoData&
 	URL.Empty();
 	if (info.reposUUID.IsEmpty())
 	{
-		SVN svn;
 		URL = CUnicodeUtils::GetUTF8 
-				(svn.GetRepositoryRootAndUUID ( CTSVNPath (info.url)
-											  , info.reposUUID));
+				(repositoryInfoCache->GetRepositoryRootAndUUID 
+                    ( CTSVNPath (info.url)
+					, info.reposUUID));
 	}
 
 	if (URL.IsEmpty())
@@ -639,8 +639,8 @@ CDictionaryBasedTempPath CCacheLogQuery::GetRelativeRepositoryPath (SVNInfoData&
 
 	if (URL.IsEmpty())
 	{
-		SVN svn;
-		URL = CUnicodeUtils::GetUTF8(svn.GetRepositoryRoot (CTSVNPath (info.url)));
+		URL = CUnicodeUtils::GetUTF8 
+				(repositoryInfoCache->GetRepositoryRoot (CTSVNPath (info.url)));
 	}
 
 	// get path object 
@@ -756,7 +756,8 @@ CTSVNPath CCacheLogQuery::GetPath (const CTSVNPathList& targets) const
 
 CCacheLogQuery::CCacheLogQuery (CLogCachePool* caches, ILogQuery* svnQuery)
 	: caches (caches)
-	, cache (NULL)
+    , repositoryInfoCache (&caches->GetRepositoryInfo())
+    , cache (NULL)
 	, tempCache (NULL)
 	, URL()
 	, svnQuery (svnQuery)

@@ -79,6 +79,12 @@ private:
     typedef std::map<CString, SPerRepositoryInfo> TData;
     TData data;
 
+    // has the data been modified
+
+    bool modified;
+
+    // where to store the cached data
+
     CString cacheFolder;
 
     // construct the dump file name
@@ -91,7 +97,7 @@ private:
 
     // find cache entry (or data::end())
 
-    TData::const_iterator Lookup (const CTSVNPath& url);
+    TData::iterator Lookup (const CTSVNPath& url);
 
 public:
 
@@ -105,6 +111,8 @@ public:
 
 	CString GetRepositoryRoot (const CTSVNPath& url);
 	CString GetRepositoryRootAndUUID (const CTSVNPath& url, CString& sUUID);
+
+    revision_t GetHeadRevision (const CTSVNPath& url);
 
     // find the root folder to a given UUID (e.g. URL for given cache file).
     // Returns an empty string, if no suitable entry has been found.

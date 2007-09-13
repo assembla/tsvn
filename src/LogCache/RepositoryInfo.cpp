@@ -41,6 +41,13 @@ CString CRepositoryInfo::GetFileName() const
 
 void CRepositoryInfo::Load()
 {
+    modified = false;
+
+    // any cached info at all?
+
+	if (GetFileAttributes (GetFileName()) == INVALID_FILE_ATTRIBUTES)
+        return;
+
     CFile file (GetFileName(), CFile::modeRead);
     CArchive stream (&file, CArchive::load);
 
@@ -62,24 +69,31 @@ void CRepositoryInfo::Load()
 
 // find cache entry (or data::end())
 
-CRepositoryInfo::TData::const_iterator 
+CRepositoryInfo::TData::iterator 
 CRepositoryInfo::Lookup (const CTSVNPath& url)
 {
     CString fullURL (url.GetSVNPathString());
 
     // the repository root URL should be a prefix of url
 
-    TData::const_iterator iter = data.lower_bound (fullURL);
+    TData::iterator iter = data.lower_bound (fullURL);
 
     // no suitable prefix?
 
-    if (iter == data.end())
+    if (data.empty())
         return iter;
 
     // does prefix match?
 
-    if (iter->first == fullURL.Left (iter->first.GetLength()))
+    if ((iter != data.end()) && (iter->first == fullURL))
         return iter;
+
+    if (iter != data.begin())
+    {
+        --iter;
+        if (iter->first == fullURL.Left (iter->first.GetLength()))
+            return iter;
+    }
 
     // not found
 
@@ -90,13 +104,13 @@ CRepositoryInfo::Lookup (const CTSVNPath& url)
 
 CRepositoryInfo::CRepositoryInfo (const CString& cacheFolderPath)
     : cacheFolder (cacheFolderPath)
+    , modified (false)
 {
     Load();
 }
 
 CRepositoryInfo::~CRepositoryInfo(void)
 {
-    Flush();
 }
 
 // look-up and ask SVN if the info is not in cache. 
@@ -119,11 +133,55 @@ CString CRepositoryInfo::GetRepositoryRootAndUUID ( const CTSVNPath& url
         info.headRevision = NO_REVISION;
         info.headLookupTime = -1;
 
-        data [info.root] = info;
+        if (!info.root.IsEmpty())
+        {
+            data [info.root] = info;
+            modified = true;
+        }
+
         return info.root;
     }
 
     return iter->first;
+}
+
+revision_t CRepositoryInfo::GetHeadRevision (const CTSVNPath& url)
+{
+    // get the entry for that repository
+
+    TData::iterator iter = Lookup (url);
+    if (iter == data.end())
+    {
+        GetRepositoryRoot (url);
+        iter = Lookup (url);
+    }
+
+    if (iter == data.end())
+    {
+        // there was some problem connecting to the repository
+
+        return NO_REVISION;
+    }
+
+    // if there a valid cached entry?
+
+    __time64_t now = CTime::GetCurrentTime().GetTime();
+    if (   (now - iter->second.headLookupTime > 300)
+        || (   url.GetSVNPathString().Left (iter->second.headURL.GetLength())
+            != iter->second.headURL))
+    {
+        // entry outdated or for not valid for this path
+
+        iter->second.headLookupTime = now;
+        iter->second.headURL = url.GetSVNPathString();
+        iter->second.headRevision = SVN().GetHEADRevision (url);
+
+        modified = true;
+    }
+
+    // ready
+
+    return iter->second.headRevision;
 }
 
 // find the root folder to a given UUID (e.g. URL for given cache file).
@@ -150,10 +208,13 @@ CString CRepositoryInfo::GetRootFromUUID (const CString& sUUID)
 
 void CRepositoryInfo::Flush()
 {
+    if (!modified)
+        return;
+
     CFile file (GetFileName(), CFile::modeWrite | CFile::modeCreate);
     CArchive stream (&file, CArchive::store);
 
-    stream << static_cast<int>(data.size()) << L'\t';
+    stream << static_cast<int>(data.size());
 
     for ( TData::const_iterator iter = data.begin(), end = data.end()
         ; iter != end
@@ -165,6 +226,8 @@ void CRepositoryInfo::Flush()
                << iter->second.headRevision 
                << iter->second.headLookupTime;
     }
+
+    modified = false;
 }
 
 // clear cache
