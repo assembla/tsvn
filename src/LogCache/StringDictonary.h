@@ -124,7 +124,7 @@ private:
 
 	// test for the worst effects of data corruption
 
-	void CheckOffsets();
+	void RebuildIndexes();
 
 	// construction utility
 
