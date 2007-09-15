@@ -24,6 +24,7 @@
 
 #include "SVN.h"
 #include "TSVNPath.h"
+#include "Registry.h"
 
 // begin namespace LogCache
 
@@ -163,10 +164,14 @@ revision_t CRepositoryInfo::GetHeadRevision (const CTSVNPath& url)
         return NO_REVISION;
     }
 
-    // if there a valid cached entry?
+    // get time stamps and maximum head info age (default: 5 mins)
 
     __time64_t now = CTime::GetCurrentTime().GetTime();
-    if (   (now - iter->second.headLookupTime > 300)
+    CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\HeadCacheAgeLimit"), 300);
+
+    // if there a valid cached entry?
+
+    if (   (now - iter->second.headLookupTime > useLogCache)
         || (   url.GetSVNPathString().Left (iter->second.headURL.GetLength())
             != iter->second.headURL))
     {

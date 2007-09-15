@@ -41,6 +41,13 @@ namespace LogCache
  * Cache for frequently needed repository properties such as root URL
  * and UUID. Also, cache the last known head revision.
  *
+ * However, there is a minor difference in how the head revision is
+ * treated: if the head rev. of some parent path is already known,
+ * it will be returned for every sub-path where SVN may return a
+ * smaller number. However, this higher HEAD will still be valid 
+ * for the path (i.e. it didn't get deleted etc.). To determine the
+ * head *change*, call the SVN method directly.
+ *
  * Mimic some methods of the SVN class. Results will automatically
  * be put into this cache.
  * 
