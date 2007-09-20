@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -139,6 +139,7 @@ private:
 	CPersonalDictionary m_personalDict;
 protected:
 	virtual BOOL OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pLResult);
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	void		CheckSpelling(void);
 	void		SuggestSpellingAlternatives(void);
 	void		DoAutoCompletion(void);
