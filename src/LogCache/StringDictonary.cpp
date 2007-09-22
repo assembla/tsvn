@@ -110,16 +110,19 @@ void CStringDictionary::RebuildIndexes()
 
     // current position in string data (i.e. first char of the current string)
 
-    size_t offset = 0;
+    index_t offset = 0;
 
     // hash & index all strings
 
-	for ( index_t i = 0, count = (index_t)offsets.size()-1; i < count; ++i)
+	hashIndex.clear();
+	hashIndex.reserve (offsets.size());
+
+	for (index_t i = 0, count = (index_t)offsets.size()-1; i < count; ++i)
     {
         *(begin+i) = offset;
 		hashIndex.insert (stringBase + offset, i);
 
-        offset += strlen (stringBase + offset) +1;
+        offset += static_cast<index_t>(strlen (stringBase + offset) +1);
     }
 
     // "end of table" entry
@@ -231,6 +234,52 @@ index_mapping_t CStringDictionary::Merge (const CStringDictionary& source)
 		result.insert (i, AutoInsert (source[i]));
 
 	return result;
+}
+
+// rearrange strings: put [sourceIndex[index]] into [index]
+
+void CStringDictionary::Reorder (const std::vector<index_t>& sourceIndices)
+{
+	// we must remap all entries
+
+	assert (size() == sourceIndices.size());
+
+	// we must not remap the empty string
+
+	assert (sourceIndices[0] == 0);
+
+	// we will copy the string data in this temp. array
+
+	std::vector<char> target;
+	target.resize (packedStrings.size());
+
+    // start of the string & offset arrays
+
+	const char* sourceBase = &packedStrings.at(0);
+	char* targetString = &target.at(0);
+
+    // copy string by string
+
+	index_t targetOffset = 0;
+
+	for (index_t i = 0, count = size(); i < count; ++i)
+    {
+		index_t sourceIndex = sourceIndices[i];
+
+		index_t sourceOffset = offsets[sourceIndex];
+		index_t length = offsets[sourceIndex+1] - sourceOffset;
+
+		memcpy (targetString, sourceBase + sourceOffset, length);
+        targetString += length;
+    }
+
+	// the new order is now complete -> switch to it
+
+	packedStrings.swap (target);
+
+	// re-build hash and offsets
+
+	RebuildIndexes();
 }
 
 // stream I/O

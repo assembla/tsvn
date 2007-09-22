@@ -160,6 +160,10 @@ public:
 
 	index_mapping_t Merge (const CStringDictionary& source);
 
+	// rearrange strings: put [sourceIndex[index]] into [index]
+
+	void Reorder (const std::vector<index_t>& sourceIndices);
+
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
