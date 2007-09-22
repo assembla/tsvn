@@ -108,6 +108,11 @@ private:
 	std::vector<revision_t> mergedRangeStarts;
 	std::vector<revision_t> mergedRangeDeltas;
 
+	// for auto-optimization: number of entries on disk
+	// (will be compared with current number of entries)
+
+	mutable index_t storedSize;
+
 	// sub-stream IDs
 
 	enum
@@ -154,6 +159,11 @@ private:
 	void Append ( const CRevisionInfoContainer& newData
 				, const index_mapping_t& indexMap
 			    , const index_mapping_t& pathIDMapping);
+
+	// the individual optimization steps
+
+	void OptimizeAuthors();
+	void OptimizeChangeOrder();
 
 public:
 
@@ -213,9 +223,10 @@ public:
 						 , index_t aChangeOffset
 						 , index_t aCopyFromOffset);
 
-		// data access
+		// data access (raw change: don't mask out HAS_COPY_FROM)
 
 		CRevisionInfoContainer::TChangeAction GetAction() const;
+		CRevisionInfoContainer::TChangeAction GetRawChange() const;
 		CDictionaryBasedPath GetPath() const;
 
 		bool HasFromPath() const;
@@ -369,6 +380,12 @@ public:
 				, bool updateChanges
 				, bool updateMergers);
 
+	// rearrange the data to minimize disk and cache footprint.
+	// AutoOptimize() will call Optimize() when size() crossed 2^n boundaries.
+
+	void Optimize();
+	void AutoOptimize();
+
 	// stream I/O
 
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
@@ -411,6 +428,14 @@ CRevisionInfoContainer::CChangesIterator::GetAction() const
 {
 	assert (IsValid());
 	int action = container->changes[changeOffset] & ANY_ACTION;
+	return (CRevisionInfoContainer::TChangeAction)(action);
+}
+
+inline CRevisionInfoContainer::TChangeAction 
+CRevisionInfoContainer::CChangesIterator::GetRawChange() const
+{
+	assert (IsValid());
+	int action = container->changes[changeOffset];
 	return (CRevisionInfoContainer::TChangeAction)(action);
 }
 

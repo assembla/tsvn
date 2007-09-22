@@ -316,9 +316,164 @@ void CRevisionInfoContainer::Append
 	}
 }
 
+// sort authors by frequency
+// (reduces average diff between authors -> less disk space
+// and clusters author access -> cache friendly)
+
+void CRevisionInfoContainer::OptimizeAuthors()
+{
+	struct SPerAuthorInfo
+	{
+		index_t frequency;
+		index_t author;
+
+		SPerAuthorInfo (index_t author)
+			: frequency (0)
+			, author (author)
+		{
+		}
+
+		bool operator<(const SPerAuthorInfo& rhs) const
+		{
+			return (frequency > rhs.frequency)
+				|| (   (frequency == rhs.frequency) 
+				    && (author < rhs.author));
+		}
+	};
+
+	// initialize the counter array: counter[author].author == author
+
+	std::vector<SPerAuthorInfo> counter;
+	counter.reserve (authorPool.size());
+
+	for (index_t i = 0, count = authorPool.size(); i < count; ++i)
+		counter.push_back (i);
+
+	// count occurances
+
+	for ( std::vector<index_t>::const_iterator iter = authors.begin()
+		, end = authors.end()
+		; iter != end
+		; ++iter)
+	{
+		++counter[*iter].frequency;
+	}
+
+	// sort by frequency and "age", but keep empty string untouched
+
+	std::sort (++counter.begin(), counter.end());
+
+	// re-arrange authors according to this new order
+
+	std::vector<index_t> indices;
+	indices.reserve (authorPool.size());
+
+	for (index_t i = 0, count = authorPool.size(); i < count; ++i)
+		indices.push_back (counter[i].author);
+
+	authorPool.Reorder (indices);
+
+	// re-map the author indices
+
+	for (index_t i = 0, count = authorPool.size(); i < count; ++i)
+		indices [counter[i].author] = i;
+
+	for ( std::vector<index_t>::iterator iter = authors.begin()
+		, end = authors.end()
+		; iter != end
+		; ++iter)
+	{
+		*iter = indices[*iter];
+	}
+}
+
+// sort changes by pathID; parent change still before leave change
+// (reduces average diff between changes -> less disk space
+// and sorts path access patterns -> cache friendly)
+
+void CRevisionInfoContainer::OptimizeChangeOrder()
+{
+	struct SPerChangeInfo
+	{
+		index_t changedPath;
+		unsigned char change;
+		index_t copyFromPath;
+		revision_t copyFromRevision;
+
+		SPerChangeInfo (const CRevisionInfoContainer::CChangesIterator& iter)
+			: changedPath (iter->GetPathID())
+			, change (iter->GetRawChange())
+		{
+			if (iter->HasFromPath())
+			{
+				copyFromPath = iter->GetFromPathID();
+				copyFromRevision = iter->GetFromRevision();
+			}
+		}
+
+		bool operator<(const SPerChangeInfo& rhs) const
+		{
+			// report deletes of a given path *before* any other change
+			// (probably an "add") to this path
+
+			return (changedPath < rhs.changedPath)
+				|| (   (changedPath == rhs.changedPath) 
+				    && (change > rhs.change));
+		}
+	};
+
+	std::vector<SPerChangeInfo> revisionChanges;
+	for (index_t index = 0, count = size(); index < count; ++index)
+	{
+		// collect all changes of this revision
+
+		revisionChanges.clear();
+
+		for ( CChangesIterator iter = GetChangesBegin (index)
+			, end = GetChangesEnd (index)
+			; iter != end
+			; ++iter)
+		{
+			revisionChanges.push_back (iter);
+		}
+
+		// sort them by path
+
+		std::sort (revisionChanges.begin(), revisionChanges.end());
+
+		// overwrite old data with new ordering
+
+		index_t changeOffset = changesOffsets[index];
+		index_t copyFromOffset = copyFromOffsets[index];
+
+		for ( std::vector<SPerChangeInfo>::iterator iter = revisionChanges.begin()
+			, end = revisionChanges.end()
+			; iter != end
+			; ++iter)
+		{
+			changedPaths[changeOffset] = iter->changedPath;
+			changes[changeOffset] = iter->change;
+			++changeOffset;
+
+			if (iter->change & HAS_COPY_FROM)
+			{
+				copyFromPaths[copyFromOffset] = iter->copyFromPath;
+				copyFromRevisions[copyFromOffset] = iter->copyFromRevision;
+				++copyFromOffset;
+			}
+		}
+
+		// we must have used the exact same memory
+
+		assert (changeOffset == changesOffsets[index+1]);
+		assert (copyFromOffset == copyFromOffsets[index+1]);
+	}
+}
+
 // construction / destruction
 
 CRevisionInfoContainer::CRevisionInfoContainer(void)
+	: storedSize (0)
 {
 	// [lastIndex+1] must point to [size()]
 
@@ -500,6 +655,34 @@ void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
 	Append (newData, indexMap, pathIDMapping);
 }
 
+// rearrange the data to minimize disk and cache footprint
+
+void CRevisionInfoContainer::Optimize()
+{
+	OptimizeAuthors();
+	OptimizeChangeOrder();
+}
+
+// AutoOptimize() will call Optimize() when size() crossed 2^n boundaries.
+
+void CRevisionInfoContainer::AutoOptimize()
+{
+	// bitwise XOR old and new size
+
+	index_t currentSize = size();
+	index_t diffBits = currentSize ^ storedSize;
+
+	// if the position of highest bit set is equal (no 2^n boundary crossed),
+	// diffBits will have that bit reset -> smaller than both input values
+
+	if ((currentSize <= diffBits) || (storedSize <= diffBits))
+	{
+		// shrink or growth cross a 2^n bounary
+
+		Optimize();
+	}
+}
+
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
@@ -595,6 +778,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 			(stream.GetSubStream (CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID));
 	*mergedRangeDeltasStream >> container.mergedRangeDeltas;
 
+	// update size info
+
+	container.storedSize = container.size();
+
 	// ready
 
 	return stream;
@@ -603,6 +790,8 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 								   , const CRevisionInfoContainer& container)
 {
+	const_cast<CRevisionInfoContainer*>(&container)->AutoOptimize();
+
 	// write the pools
 
 	IHierarchicalOutStream* authorPoolStream
@@ -709,6 +898,10 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID
 								  , DIFF_INTEGER_STREAM_TYPE_ID));
 	*mergedRangeDeltasStream << container.mergedRangeDeltas;
+
+	// update size info
+
+	container.storedSize = container.size();
 
 	// ready
 
