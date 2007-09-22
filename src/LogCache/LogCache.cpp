@@ -34,8 +34,11 @@
 
 using namespace LogCache;
 
-//std::wstring path = L"E:\\temp\\tsvn";
-std::wstring path = L"E:\\temp\\kde";
+#ifdef _DEBUG
+std::wstring path = L"C:\\temp\\tsvn";
+#else
+std::wstring path = L"C:\\temp\\kde";
+#endif
 
 void ReadStream (const std::wstring& fileName)
 {
