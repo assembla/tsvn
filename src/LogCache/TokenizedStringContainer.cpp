@@ -403,6 +403,90 @@ void CTokenizedStringContainer::CheckIndex (index_t index) const
 		throw std::exception ("string container index out of range");
 }
 
+// call this to re-assign indices in an attempt to reduce file size
+
+void CTokenizedStringContainer::OptimizePairs()
+{
+	// markes for all pairs that have aready been processed
+
+	std::vector<bool> done;
+	done.resize (pairs.size());
+
+	// build new pair order: put directly used pairs in front
+	// and sort them by point of occurance
+
+	std::vector<index_t> new2Old;
+	new2Old.reserve (pairs.size());
+
+	for (IT iter = stringData.begin(), end = stringData.end()
+		; iter != end
+		; ++iter)
+	{
+		index_t token = *iter;
+		if (!IsDictionaryWord (token) && !done[token])
+		{
+			new2Old.push_back (token);
+			done[token] = true;
+		}
+	}
+
+	// append all indirectly used pairs
+
+	for (index_t i = 0; i < new2Old.size(); ++i)
+	{
+		std::pair<index_t, index_t> tokens = pairs[new2Old[i]];
+
+		if (!IsDictionaryWord (tokens.first) && !done[tokens.first])
+		{
+			new2Old.push_back (tokens.first);
+			done[tokens.first] = true;
+		}
+		if (!IsDictionaryWord (tokens.second) && !done[tokens.second])
+		{
+			new2Old.push_back (tokens.second);
+			done[tokens.second] = true;
+		}
+	}
+
+	// construct old->new mapping
+
+	std::vector<index_t> old2New;
+	old2New.resize (pairs.size());
+
+	for (index_t i = 0, count = (index_t)new2Old.size(); i < count; ++i)
+		old2New[new2Old[i]] = i;
+
+	// replace pair index
+
+	CIndexPairDictionary temp;
+	temp.reserve (new2Old.size());
+
+	for (index_t i = 0, count = (index_t)new2Old.size(); i < count; ++i)
+	{
+		std::pair<index_t, index_t> tokens = pairs[new2Old[i]];
+
+		if (!IsDictionaryWord (tokens.first))
+			tokens.first = old2New [tokens.first];
+		if (!IsDictionaryWord (tokens.second))
+			tokens.second = old2New [tokens.second];
+
+		temp.Insert (tokens);
+	}
+
+	pairs.Swap (temp);
+
+	// update token strings
+
+	for (IT iter = stringData.begin(), end = stringData.end()
+		; iter != end
+		; ++iter)
+	{
+		index_t token = *iter;
+		if (!IsDictionaryWord (token))
+			*iter = old2New [token];
+	}
+}
+
 // construction / destruction
 
 CTokenizedStringContainer::CTokenizedStringContainer(void)
@@ -484,6 +568,8 @@ void CTokenizedStringContainer::Compress()
 	while (packer.OneRound() > 0);
 
 	packer.Compact();
+
+	OptimizePairs();
 }
 
 void CTokenizedStringContainer::AutoCompress()
@@ -499,6 +585,9 @@ void CTokenizedStringContainer::AutoCompress()
 	// token pairs. Threshold: log n > n / p
 
 	size_t relation = stringData.size() / ((size_t)pairs.size() + 1);
+	if (relation >= sizeof (size_t) * 8)
+		relation = sizeof (size_t) * 8-1;
+
 	if (stringData.size() < ((size_t)1 << relation))
 		Compress();
 }

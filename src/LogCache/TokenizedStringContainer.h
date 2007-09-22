@@ -223,6 +223,10 @@ private:
 
 	void CheckIndex (index_t index) const;
 
+	// call this to re-assign indices in an attempt to reduce file size
+
+	void OptimizePairs();
+
 public:
 
 	// construction / destruction
