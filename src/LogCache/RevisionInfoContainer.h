@@ -42,7 +42,7 @@ namespace LogCache
  * You may add change paths and merged revision info to the last revision only.
  *
  * Internal storage for revision "index" is as follows:
- *  - comments[index], authors[authors[index]] and timeStamps[index] contain 
+ *  - comments[index], authorPool[authors[index]] and timeStamps[index] contain 
  *    the values passed to Insert()
  *  - CDictionaryBasedPath (&paths, rootPaths[index]) is the common root path 
  *    for all changed paths in that revision (returns true in IsInvalid(), if 
@@ -55,6 +55,10 @@ namespace LogCache
  *    is the range within mergedFromPaths, mergedToPaths, mergedRangeStarts and 
  *    mergedRangeDeltas that contains the info of all merges done in this
  *    revision. Negative mergedRangeDeltas[] denote an "undone" merge.
+ *  - userRevPropOffsets[index] .. userRevPropOffsets[index+1]-1
+ *    is the range within userRevPropNames and userRevPropValues that contains
+ *    the user-defined revision properties for the respective revision.
+ *    Name of revProp is userRevPropsPool[userRevPropNames[n]].
  *
  * changes contains the TChangeAction values. If a non-empty fromPath has been 
  * passed to AddChange(), "1" is added to the action value. Only in that case, 
@@ -92,6 +96,10 @@ private:
 
 	std::vector<index_t> mergedRevisionsOffsets;
 
+	// mark the ranges that contain the user-defined revision properties
+
+	std::vector<index_t> userRevPropOffsets;
+
 	// changed path info
 	// (note, that copyFrom info will have less entries)
 
@@ -108,6 +116,15 @@ private:
 	std::vector<revision_t> mergedRangeStarts;
 	std::vector<revision_t> mergedRangeDeltas;
 
+    // all names of user-defined revision properties
+
+	CStringDictionary userRevPropsPool;
+
+    // names & values of user-defined revision properties
+
+    std::vector<index_t> userRevPropNames;
+    CTokenizedStringContainer userRevPropValues;
+
 	// for auto-optimization: number of entries on disk
 	// (will be compared with current number of entries)
 
@@ -123,17 +140,24 @@ private:
 		AUTHORS_STREAM_ID = 4,
 		TIMESTAMPS_STREAM_ID = 5,
 		ROOTPATHS_STREAM_ID = 6,
-		CHANGES_OFFSETS_STREAM_ID = 7,
+
+        CHANGES_OFFSETS_STREAM_ID = 7,
 		COPYFROM_OFFSETS_STREAM_ID = 8,
 		CHANGES_STREAM_ID = 9,
 		CHANGED_PATHS_STREAM_ID = 10,
 		COPYFROM_PATHS_STREAM_ID = 11,
 		COPYFROM_REVISIONS_STREAM_ID = 12,
-		MERGEDREVISION_OFFSETS_STREAM_ID = 13,
+
+        MERGEDREVISION_OFFSETS_STREAM_ID = 13,
 		MERGED_FROM_PATHS_STREAM_ID = 14,
 		MERGED_TO_PATHS_STREAM_ID = 15,
 		MERGED_RANGE_STARTS_STREAM_ID = 16,
-		MERGED_RANGE_DELTAS_STREAM_ID = 17
+		MERGED_RANGE_DELTAS_STREAM_ID = 17,
+
+        USER_REVPROPS_OFFSETS_STREAM_ID = 18,
+        USER_REVPROPS_POOL_STREAM_ID = 19,
+        USER_REVPROPS_NAME_STREAM_ID = 20,
+        USER_REVPROPS_VALUE_STREAM_ID = 21
 	};
 
 	// index checking utility
@@ -254,7 +278,54 @@ public:
 		const CChangesIterator* operator->() const;
 	};
 
-	friend class CChangesIterator;
+	///////////////////////////////////////////////////////////////
+	//
+	// CMergedRevisionsIterator<>
+	//
+	//		base class template for very simplistic forward 
+    //      iterator classes. It contains an use-case specific
+    //      offset (e.g. within mergedInfo) and a pointer to
+    //      the structure that encapsulates the containers we
+    //      want to access.
+	//
+	///////////////////////////////////////////////////////////////
+
+    template<class T>
+	class CPerRevisionInfoIteratorBase
+	{
+	protected:
+
+		// the container we operate on 
+
+		const CRevisionInfoContainer* container;
+
+		// the info index
+
+		index_t offset;
+
+		// construction / destruction
+
+		CPerRevisionInfoIteratorBase();
+		CPerRevisionInfoIteratorBase ( const CRevisionInfoContainer* container
+								     , index_t offset);
+        ~CPerRevisionInfoIteratorBase();
+
+	public:
+
+		// move pointer
+
+		T& operator++();	// prefix
+		T operator++(int);	// postfix
+
+		// comparison
+
+		bool operator== (const T& rhs);
+		bool operator!= (const T& rhs);
+
+		// pointer-like behavior
+
+		const T* operator->() const;
+	};
 
 	///////////////////////////////////////////////////////////////
 	//
@@ -267,17 +338,8 @@ public:
 	///////////////////////////////////////////////////////////////
 
 	class CMergedRevisionsIterator
+        : public CPerRevisionInfoIteratorBase<CMergedRevisionsIterator>
 	{
-	private:
-
-		// the container we operate on 
-
-		const CRevisionInfoContainer* container;
-
-		// the merged revision info index
-
-		index_t offset;
-
 	public:
 
 		// construction
@@ -286,6 +348,10 @@ public:
 		CMergedRevisionsIterator ( const CRevisionInfoContainer* container
 								 , index_t offset);
 
+		// general status (points to an action)
+
+		bool IsValid() const;
+
 		// data access
 
 		CDictionaryBasedPath GetFromPath() const;
@@ -293,27 +359,42 @@ public:
 
 		revision_t GetRangeStart() const;
 		revision_t GetRangeDelta() const;
+	};
+
+	///////////////////////////////////////////////////////////////
+	//
+	// CUserRevPropsIterator
+	//
+	//		a very simplistic forward iterator class.
+	//		It will be used to provide a convenient
+	//		interface to a revision's user-defined revprops.
+	//
+	///////////////////////////////////////////////////////////////
+
+	class CUserRevPropsIterator
+        : public CPerRevisionInfoIteratorBase<CUserRevPropsIterator>
+	{
+	public:
+
+		// construction
+
+		CUserRevPropsIterator();
+		CUserRevPropsIterator ( const CRevisionInfoContainer* container
+							  , index_t offset);
+
+		// data access
+
+        const char* GetName() const;
+        std::string GetValue() const;
 
 		// general status (points to an action)
 
 		bool IsValid() const;
-
-		// move pointer
-
-		CMergedRevisionsIterator& operator++();		// prefix
-		CMergedRevisionsIterator operator++(int);	// postfix
-
-		// comparison
-
-		bool operator== (const CMergedRevisionsIterator& rhs);
-		bool operator!= (const CMergedRevisionsIterator& rhs);
-
-		// pointer-like behavior
-
-		const CMergedRevisionsIterator* operator->() const;
 	};
 
+	friend class CChangesIterator;
 	friend class CMergedRevisionsIterator;
+	friend class CUserRevPropsIterator;
 
 	// construction / destruction
 
@@ -321,7 +402,8 @@ public:
 	~CRevisionInfoContainer(void);
 
 	// add information
-	// AddChange() and AddMergedRevision() always adds to the last revision
+	// AddChange(), AddMergedRevision() and AddUserRevProp() always 
+    // add to the last revision
 
 	index_t Insert ( const std::string& author
 				   , const std::string& comment
@@ -336,6 +418,9 @@ public:
 				           , const std::string& toPath
 				           , revision_t revisionStart
 				           , revision_t revisionDelta);
+
+	void AddUserRevProp ( const std::string& revProp
+				        , const std::string& value);
 
 	// reset content
 
@@ -361,6 +446,11 @@ public:
 
 	CMergedRevisionsIterator GetMergedRevisionsBegin (index_t index) const;
 	CMergedRevisionsIterator GetMergedRevisionsEnd (index_t index) const;
+
+	// iterate over all user-defined revision properties
+
+	CUserRevPropsIterator GetUserRevPropsBegin (index_t index) const;
+	CUserRevPropsIterator GetUserRevPropsEnd (index_t index) const;
 
 	// r/o access to internal pools
 
@@ -543,22 +633,101 @@ CRevisionInfoContainer::CChangesIterator::operator->() const
 }
 
 ///////////////////////////////////////////////////////////////
+// CPerRevisionInfoIteratorBase<>
+///////////////////////////////////////////////////////////////
+// construction / destruction
+///////////////////////////////////////////////////////////////
+
+template<class T>
+inline CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>
+    ::CPerRevisionInfoIteratorBase()
+	: container (NULL)
+	, offset(0)
+{
+}
+
+template<class T>
+inline CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>
+    ::CPerRevisionInfoIteratorBase 
+	( const CRevisionInfoContainer* container
+	, index_t offset)
+	: container (container)
+	, offset (offset)
+{
+}
+
+template<class T>
+inline CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>
+    ::~CPerRevisionInfoIteratorBase()
+{
+}
+
+///////////////////////////////////////////////////////////////
+// move pointer
+///////////////////////////////////////////////////////////////
+
+template<class T>
+inline T& 
+CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>::operator++()		// prefix
+{
+	++offset;
+	return static_cast<T&>(*this);
+}
+
+template<class T>
+inline T
+CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>::operator++(int)	// postfix
+{
+	T result (container, offset);
+	++offset;
+	return result;
+}
+
+///////////////////////////////////////////////////////////////
+// comparison
+///////////////////////////////////////////////////////////////
+
+template<class T>
+inline bool CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>::operator== 
+	(const T& rhs)
+{
+	return (container == rhs.container)
+		&& (offset == rhs.offset);
+}
+
+template<class T>
+inline bool CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>::operator!= 
+	(const T& rhs)
+{
+	return !operator==(rhs);
+}
+
+///////////////////////////////////////////////////////////////
+// pointer-like behavior
+///////////////////////////////////////////////////////////////
+
+template<class T>
+inline const T* 
+CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>::operator->() const
+{
+	return static_cast<T*>(this);
+}
+
+///////////////////////////////////////////////////////////////
 // CMergedRevisionsIterator
 ///////////////////////////////////////////////////////////////
 // construction
 ///////////////////////////////////////////////////////////////
 
 inline CRevisionInfoContainer::CMergedRevisionsIterator::CMergedRevisionsIterator()
-	: container (NULL)
-	, offset(0)
+	: CPerRevisionInfoIteratorBase<CMergedRevisionsIterator>()
 {
 }
 
 inline CRevisionInfoContainer::CMergedRevisionsIterator::CMergedRevisionsIterator 
 	( const CRevisionInfoContainer* container
 	, index_t offset)
-	: container (container)
-	, offset (offset)
+	: CPerRevisionInfoIteratorBase<CMergedRevisionsIterator> (container, offset)
 {
 }
 
@@ -604,49 +773,49 @@ CRevisionInfoContainer::CMergedRevisionsIterator::IsValid() const
 }
 
 ///////////////////////////////////////////////////////////////
-// move pointer
+// CUserRevPropsIterator
+///////////////////////////////////////////////////////////////
+// construction
 ///////////////////////////////////////////////////////////////
 
-inline CRevisionInfoContainer::CMergedRevisionsIterator& 
-CRevisionInfoContainer::CMergedRevisionsIterator::operator++()		// prefix
+inline CRevisionInfoContainer::CUserRevPropsIterator::CUserRevPropsIterator()
+	: CPerRevisionInfoIteratorBase<CUserRevPropsIterator>()
 {
-	++offset;
-	return *this;
 }
 
-inline CRevisionInfoContainer::CMergedRevisionsIterator 
-CRevisionInfoContainer::CMergedRevisionsIterator::operator++(int)	// postfix
+inline CRevisionInfoContainer::CUserRevPropsIterator::CUserRevPropsIterator 
+	( const CRevisionInfoContainer* container
+	, index_t offset)
+	: CPerRevisionInfoIteratorBase<CUserRevPropsIterator> (container, offset)
 {
-	CMergedRevisionsIterator result (*this);
-	++offset;
-	return result;
-}
-
-///////////////////////////////////////////////////////////////
-// comparison
-///////////////////////////////////////////////////////////////
-
-inline bool CRevisionInfoContainer::CMergedRevisionsIterator::operator== 
-	(const CMergedRevisionsIterator& rhs)
-{
-	return (container == rhs.container)
-		&& (offset == rhs.offset);
-}
-
-inline bool CRevisionInfoContainer::CMergedRevisionsIterator::operator!= 
-	(const CMergedRevisionsIterator& rhs)
-{
-	return !operator==(rhs);
 }
 
 ///////////////////////////////////////////////////////////////
-// pointer-like behavior
+// data access
 ///////////////////////////////////////////////////////////////
 
-inline const CRevisionInfoContainer::CMergedRevisionsIterator* 
-CRevisionInfoContainer::CMergedRevisionsIterator::operator->() const
+inline const char* 
+CRevisionInfoContainer::CUserRevPropsIterator::GetName() const
 {
-	return this;
+    index_t revPropName = container->userRevPropNames[offset];
+    return container->userRevPropsPool [revPropName];
+}
+
+inline std::string 
+CRevisionInfoContainer::CUserRevPropsIterator::GetValue() const
+{
+    return container->userRevPropValues[offset];
+}
+
+///////////////////////////////////////////////////////////////
+// general status (points to an action)
+///////////////////////////////////////////////////////////////
+
+inline bool 
+CRevisionInfoContainer::CUserRevPropsIterator::IsValid() const
+{
+	return (container != NULL)
+		&& (offset < (index_t)container->userRevPropNames.size());
 }
 
 ///////////////////////////////////////////////////////////////
@@ -737,6 +906,24 @@ CRevisionInfoContainer::GetMergedRevisionsEnd (index_t index) const
 	CheckIndex (index);
 	return CMergedRevisionsIterator ( this
 									, mergedRevisionsOffsets[index+1]);
+}
+
+// iterate over all user-defined revision properties
+
+inline CRevisionInfoContainer::CUserRevPropsIterator 
+CRevisionInfoContainer::GetUserRevPropsBegin (index_t index) const
+{
+	CheckIndex (index);
+	return CUserRevPropsIterator ( this
+								 , userRevPropOffsets[index]);
+}
+
+inline CRevisionInfoContainer::CUserRevPropsIterator 
+CRevisionInfoContainer::GetUserRevPropsEnd (index_t index) const
+{
+	CheckIndex (index);
+	return CUserRevPropsIterator ( this
+								 , userRevPropOffsets[index+1]);
 }
 
 // r/o access to internal pools

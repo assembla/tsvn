@@ -574,10 +574,10 @@ void CRevisionInfoContainer::AddMergedRevision ( const std::string& fromPath
 
 	// under x64, there might actually be an overflow
 
-	if (changes.size() == NO_INDEX)
+	if (mergedRangeStarts.size() == NO_INDEX)
 		throw std::exception ("revision container change list overflow");
 
-	// another change
+	// another merge
 
 	++(*mergedRevisionsOffsets.rbegin());
 
@@ -591,6 +591,31 @@ void CRevisionInfoContainer::AddMergedRevision ( const std::string& fromPath
 	mergedRangeStarts.push_back (revisionStart);
 	mergedRangeDeltas.push_back (revisionDelta);
 }
+
+void CRevisionInfoContainer::AddUserRevProp ( const std::string& revProp
+	                        		        , const std::string& value)
+{
+    // store standard rev-props somewhere else!
+
+    assert (   (revProp != "svn:author") 
+            && (revProp != "svn:date")
+            && (revProp != "svn:log"));
+
+	// under x64, there might actually be an overflow
+
+	if (userRevPropNames.size() == NO_INDEX)
+		throw std::exception ("revision container change list overflow");
+
+	// another revProp
+
+	++(*userRevPropOffsets.rbegin());
+
+	// add (revPropName, value) pair
+
+	userRevPropNames.push_back (userRevPropsPool.AutoInsert (revProp.c_str()));
+	userRevPropValues.Insert (value);
+}
+
 
 // reset content
 
@@ -778,6 +803,26 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 			(stream.GetSubStream (CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID));
 	*mergedRangeDeltasStream >> container.mergedRangeDeltas;
 
+    // user-defined revision properties
+    
+	CDiffIntegerInStream* userRevPropsOffsetsStream 
+		= dynamic_cast<CDiffIntegerInStream*>
+			(stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_OFFSETS_STREAM_ID));
+    *userRevPropsOffsetsStream >> container.userRevPropOffsets;
+
+	IHierarchicalInStream* userRevPropsPoolStream
+		= stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_POOL_STREAM_ID);
+    *userRevPropsPoolStream >> container.userRevPropsPool;
+
+    CPackedDWORDInStream* userRevPropsNameStream 
+		= dynamic_cast<CPackedDWORDInStream*>
+			(stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_NAME_STREAM_ID));
+    *userRevPropsNameStream >> container.userRevPropNames;
+
+	IHierarchicalInStream* userRevPropsValuesStream
+		= stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_VALUE_STREAM_ID);
+    *userRevPropsValuesStream >> container.userRevPropValues;
+
 	// update size info
 
 	container.storedSize = container.size();
@@ -898,6 +943,30 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID
 								  , DIFF_INTEGER_STREAM_TYPE_ID));
 	*mergedRangeDeltasStream << container.mergedRangeDeltas;
+
+    // user-defined revision properties
+    
+	CDiffIntegerOutStream* userRevPropsOffsetsStream 
+		= dynamic_cast<CDiffIntegerOutStream*>
+			(stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_OFFSETS_STREAM_ID
+								  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *userRevPropsOffsetsStream << container.userRevPropOffsets;
+
+	IHierarchicalOutStream* userRevPropsPoolStream
+		= stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_POOL_STREAM_ID
+							   , COMPOSITE_STREAM_TYPE_ID);
+    *userRevPropsPoolStream << container.userRevPropsPool;
+
+    CPackedDWORDOutStream* userRevPropsNameStream 
+		= dynamic_cast<CPackedDWORDOutStream*>
+			(stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_NAME_STREAM_ID
+								  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *userRevPropsNameStream << container.userRevPropNames;
+
+	IHierarchicalOutStream* userRevPropsValuesStream
+		= stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_VALUE_STREAM_ID
+							   , COMPOSITE_STREAM_TYPE_ID);
+    *userRevPropsValuesStream << container.userRevPropValues;
 
 	// update size info
 
