@@ -17,6 +17,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 #pragma once
+#include "EOL.h"
 
 // A template class to make an array which looks like a CStringArray or CDWORDArray but
 // is in fact based on a STL array, which is much faster at large sizes
@@ -53,15 +54,6 @@ public:
 	CFileTextLines(void);
 	~CFileTextLines(void);
 
-	enum LineEndings
-	{
-		AUTOLINE,
-		LF,
-		CRLF,
-		LFCR,
-		CR,
-		NOENDING,
-	};
 	enum UnicodeType
 	{
 		AUTOTYPE,
@@ -94,16 +86,23 @@ public:
 	void		CopySettings(CFileTextLines * pFileToCopySettingsTo);
 
 	CFileTextLines::UnicodeType GetUnicodeType() const  {return m_UnicodeType;}
-	CFileTextLines::LineEndings GetLineEndings() const {return m_LineEndings;}
+	EOL GetLineEndings() const {return m_LineEndings;}
 
-	std::vector<CFileTextLines::LineEndings>	m_endings;
+	void		Add(const CString& sLine, EOL ending) {CStdCStringArray::Add(sLine); m_endings.push_back(ending);}
+	void		RemoveAt(int index)	{CStdCStringArray::RemoveAt(index); m_endings.erase(m_endings.begin()+index);}
+	void		InsertAt(int index, const CString& strVal, EOL ending) {CStdCStringArray::InsertAt(index, strVal); m_endings.insert(m_endings.begin()+index, ending);}
+
+	EOL			GetLineEnding(int index) {return m_endings[index];}
+	void		SetLineEnding(int index, EOL ending) {m_endings[index] = ending;}
+	
+	void		RemoveAll() {CStdCStringArray::RemoveAll(); m_endings.clear();}
 private:
 	/**
 	 * Checks the line endings in a text buffer
 	 * \param pBuffer pointer to the buffer containing text
 	 * \param cd size of the text buffer in bytes
 	 */
-	CFileTextLines::LineEndings CheckLineEndings(LPVOID pBuffer, int cb); 
+	EOL CheckLineEndings(LPVOID pBuffer, int cb); 
 	/**
 	 * Checks the Unicode type in a text buffer
 	 * \param pBuffer pointer to the buffer containing text
@@ -120,8 +119,9 @@ private:
 
 
 private:
+	std::vector<EOL>							m_endings;
 	CString										m_sErrorString;
 	CFileTextLines::UnicodeType					m_UnicodeType;
-	CFileTextLines::LineEndings					m_LineEndings;
+	EOL											m_LineEndings;
 	bool										m_bReturnAtEnd;
 };

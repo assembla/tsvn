@@ -28,6 +28,7 @@
 #define WINDOW_MINWIDTH 200
 
 /**
+ * \ingroup TortoiseIDiff
  * The main window of TortoiseIDiff.
  * Hosts the two image views, the menu, toolbar, slider, ...
  */
@@ -45,9 +46,9 @@ public:
 		, bOverlap(false)
 		, bShowInfo(false)
 		, bVertical(false)
-		, bLinked(true)
-		, bFitTogether(false)
-		, backColor(::GetSysColor(COLOR_WINDOW))
+		, bLinkedPositions(true)
+		, bFitSizes(false)
+		, transparentColor(::GetSysColor(COLOR_WINDOW))
 		, m_BlendType(CPicWindow::BLEND_ALPHA)
 	{ 
 		SetWindowTitle((LPCTSTR)ResString(hResource, IDS_APP_TITLE));
@@ -102,7 +103,7 @@ protected:
 	CPicWindow		picWindow1;
 	CPicWindow		picWindow2;
 	bool			bShowInfo;
-	COLORREF		backColor;
+	COLORREF		transparentColor;
 
 	// splitter data
 	int				oldx;
@@ -114,8 +115,8 @@ protected:
 	// one/two pane view
 	bool			bOverlap;
 	bool			bVertical;
-	bool			bLinked;
-	bool			bFitTogether;
+	bool			bLinkedPositions;
+	bool			bFitSizes;
 	CPicWindow::BlendType	m_BlendType;
 
 };

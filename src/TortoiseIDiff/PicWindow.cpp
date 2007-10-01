@@ -153,19 +153,19 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 		else
 		{
 			OnVScroll(LOWORD(wParam), HIWORD(wParam));
-			if (bLinked)
+			if (bLinkedPositions)
 				pTheOtherPic->OnVScroll(LOWORD(wParam), HIWORD(wParam));
 		}
 		break;
 	case WM_HSCROLL:
 		OnHScroll(LOWORD(wParam), HIWORD(wParam));
-		if (bLinked)
+		if (bLinkedPositions)
 			pTheOtherPic->OnHScroll(LOWORD(wParam), HIWORD(wParam));
 		break;
 	case WM_MOUSEWHEEL:
 		{
 			OnMouseWheel(GET_KEYSTATE_WPARAM(wParam), GET_WHEEL_DELTA_WPARAM(wParam));
-			if (bLinked)
+			if (bFitSizes)
 				pTheOtherPic->OnMouseWheel(GET_KEYSTATE_WPARAM(wParam), GET_WHEEL_DELTA_WPARAM(wParam));
 		}
 		break;
@@ -175,6 +175,8 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 		ptPanStart.y = GET_Y_LPARAM(lParam);
 		startVScrollPos = nVScrollPos;
 		startHScrollPos = nHScrollPos;
+		startVSecondScrollPos = nVSecondScrollPos;
+		startHSecondScrollPos = nHSecondScrollPos;
 		SetCapture(*this);
 		break;
 	case WM_LBUTTONUP:
@@ -219,13 +221,21 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 			{
 				// pan the image
 				int xPos = GET_X_LPARAM(lParam); 
-				int yPos = GET_Y_LPARAM(lParam); 
-				nHScrollPos = startHScrollPos + (ptPanStart.x - xPos);
-				nVScrollPos = startVScrollPos + (ptPanStart.y - yPos);
+				int yPos = GET_Y_LPARAM(lParam);
+				if (wParam & MK_CONTROL)
+				{
+					nHSecondScrollPos = startHSecondScrollPos + (ptPanStart.x - xPos);
+					nVSecondScrollPos = startVSecondScrollPos + (ptPanStart.y - yPos);
+				}
+				else
+				{
+					nHScrollPos = startHScrollPos + (ptPanStart.x - xPos);
+					nVScrollPos = startVScrollPos + (ptPanStart.y - yPos);
+				}
 				SetupScrollBars();
 				InvalidateRect(*this, NULL, TRUE);
 				UpdateWindow(*this);
-				if (bLinked)
+				if (bLinkedPositions)
 				{
 					pTheOtherPic->nHScrollPos = nHScrollPos;
 					pTheOtherPic->nVScrollPos = nVScrollPos;
@@ -254,7 +264,7 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 
 				bool bPicWidthBigger = (int(double(width)*picscale) > (rect.right-rect.left));
 				bool bPicHeightBigger = (int(double(height)*picscale) > (rect.bottom-rect.top));
-				if (bPicHeightBigger || bPicWidthBigger)
+				if ((bPicHeightBigger || bPicWidthBigger)||(!bLinkedPositions && pSecondPic && (GetKeyState(VK_CONTROL)&0x8000)))
 				{
 					// only show the hand cursors if the image can be dragged
 					// an image can be dragged if it's bigger than the window it is shown in
@@ -278,7 +288,7 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 			TCHAR szFileName[MAX_PATH];
 			// we only use the first file dropped (if multiple files are dropped)
 			DragQueryFile(hDrop, 0, szFileName, sizeof(szFileName));
-			SetPic(szFileName, _T(""));
+			SetPic(szFileName, _T(""), bMainPic);
 			FitImageInWindow();
 			InvalidateRect(*this, NULL, TRUE);
 		}
@@ -290,7 +300,7 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 			case LEFTBUTTON_ID:
 				{
 					PrevImage();
-					if (bLinked)
+					if (bLinkedPositions)
 						pTheOtherPic->PrevImage();
 					return 0;
 				}
@@ -298,7 +308,7 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 			case RIGHTBUTTON_ID:
 				{
 					NextImage();
-					if (bLinked)
+					if (bLinkedPositions)
 						pTheOtherPic->NextImage();
 					return 0;
 				}
@@ -307,7 +317,7 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
 				{
 					bPlaying = !bPlaying;
 					Animate(bPlaying);
-					if (bLinked)
+					if (bLinkedPositions)
 						pTheOtherPic->Animate(bPlaying);
 					return 0;
 				}
@@ -449,8 +459,9 @@ void CPicWindow::Animate(bool bStart)
 	}
 }
 
-void CPicWindow::SetPic(stdstring path, stdstring title)
+void CPicWindow::SetPic(stdstring path, stdstring title, bool bFirst)
 {
+	bMainPic = bFirst;
 	picpath=path;pictitle=title;
 	picture.SetInterpolationMode(InterpolationModeHighQualityBicubic);
 	bValid = picture.Load(picpath);
@@ -567,8 +578,8 @@ void CPicWindow::SetupScrollBars()
 	double height = double(picture.m_Height)*picscale;
 	if (pSecondPic)
 	{
-		width = max(width, double(pSecondPic->m_Width)*picscale2);
-		height = max(height, double(pSecondPic->m_Height)*picscale2);
+		width = max(width, double(pSecondPic->m_Width)*pTheOtherPic->GetZoom());
+		height = max(height, double(pSecondPic->m_Height)*pTheOtherPic->GetZoom());
 	}
 
 	bool bPicWidthBigger = (int(width) > (rect.right-rect.left));
@@ -730,6 +741,10 @@ void CPicWindow::OnMouseWheel(short fwKeys, short zDelta)
 		SetupScrollBars();
 		PositionChildren();
 		InvalidateRect(*this, NULL, FALSE);
+		if ((bLinkedPositions)&&(pTheOtherPic))
+		{
+			pTheOtherPic->OnHScroll(SB_THUMBPOSITION, pTheOtherPic->GetHPos()-zDelta);
+		}
 	}
 	else if (fwKeys & MK_CONTROL)
 	{
@@ -749,6 +764,10 @@ void CPicWindow::OnMouseWheel(short fwKeys, short zDelta)
 		SetupScrollBars();
 		PositionChildren();
 		InvalidateRect(*this, NULL, FALSE);
+		if ((bLinkedPositions)&&(pTheOtherPic))
+		{
+			pTheOtherPic->OnVScroll(SB_THUMBPOSITION, pTheOtherPic->GetVPos()-zDelta);
+		}
 	}
 }
 
@@ -786,15 +805,15 @@ void CPicWindow::SetZoom(double dZoom, bool centermouse)
 	}
 	picscale = dZoom;
 
-	if ((pSecondPic)&&(bFitTogether))
+	if ((bFitSizes)&&(bMainPic))
 	{
 		double width, height;
 		double zoomWidth, zoomHeight;
 		width = double(picture.m_Width)*dZoom;
 		height = double(picture.m_Height)*dZoom;
-		zoomWidth = width/double(pSecondPic->m_Width);
-		zoomHeight = height/double(pSecondPic->m_Height);
-		picscale2 = min(zoomWidth, zoomHeight);
+		zoomWidth = width/double(pTheOtherPic->GetPic()->m_Width);
+		zoomHeight = height/double(pTheOtherPic->GetPic()->m_Height);
+		pTheOtherPic->SetZoom(min(zoomWidth, zoomHeight), centermouse);
 	}
 
 	// adjust the scrollbar positions according to the new zoom and the
@@ -851,14 +870,14 @@ void CPicWindow::Zoom(bool in, bool centermouse)
 	// Set zoom
 	if (in)
 	{
-		if ((pSecondPic)&&(!bFitTogether))
-			picscale2 = picscale2+zoomFactor;
+		if ((pSecondPic)&&(!bFitSizes))
+			pTheOtherPic->SetZoom(pTheOtherPic->GetZoom()+zoomFactor, false);
 		SetZoom(picscale+zoomFactor, centermouse);
 	}
 	else
 	{
-		if ((pSecondPic)&&(!bFitTogether))
-			picscale2 = picscale2-zoomFactor;
+		if ((pSecondPic)&&(!bFitSizes))
+			pTheOtherPic->SetZoom(pTheOtherPic->GetZoom()-zoomFactor, false);
 		SetZoom(picscale-zoomFactor, centermouse);
 	}
 }
@@ -908,15 +927,17 @@ void CPicWindow::FitImageInWindow()
 			if (((rect.right - rect.left) > pSecondPic->m_Width)&&((rect.bottom - rect.top)> pSecondPic->m_Height))
 			{
 				// image is smaller than the window
-				picscale2 = min(1.0, dZoom);
+				pTheOtherPic->SetZoom(min(1.0, dZoom), false);
 			}
 			else
 			{
 				// image is bigger than the window
 				double xscale = double(rect.right-rect.left)/double(pSecondPic->m_Width);
 				double yscale = double(rect.bottom-rect.top)/double(pSecondPic->m_Height);
-				picscale2 = min(yscale, xscale);
+				pTheOtherPic->SetZoom(min(yscale, xscale), false);
 			}
+			nHSecondScrollPos = 0;
+			nVSecondScrollPos = 0;
 		}
 		SetZoom(dZoom, false);
 	}
@@ -924,12 +945,15 @@ void CPicWindow::FitImageInWindow()
 	InvalidateRect(*this, NULL, TRUE);
 }
 
-void CPicWindow::FitTogether(bool bFit)
+void CPicWindow::FitSizes(bool bFit)
 {
-	bFitTogether = bFit;
+	bFitSizes = bFit;
 
-	if (pSecondPic == NULL)
-		return;
+	if (bFitSizes)
+	{
+		nHSecondScrollPos = 0;
+		nVSecondScrollPos = 0;
+	}
 	SetZoom(GetZoom(), false);
 }
 
@@ -940,8 +964,13 @@ void CPicWindow::ShowPicWithBorder(HDC hdc, const RECT &bounds, CPicture &pic, d
 
 	RECT picrect;
 	picrect.left =  bounds.left - nHScrollPos;
-	picrect.right = (picrect.left + LONG(double(pic.m_Width) * scale));
 	picrect.top = bounds.top - nVScrollPos;
+	if (!bLinkedPositions && (pTheOtherPic) && (&pic != &picture))
+	{
+		picrect.left -=  nHSecondScrollPos;
+		picrect.top -= nVSecondScrollPos;
+	}
+	picrect.right = (picrect.left + LONG(double(pic.m_Width) * scale));
 	picrect.bottom = (picrect.top + LONG(double(pic.m_Height) * scale));
 
 	if ((bounds.left < picrect.left) ||
@@ -956,7 +985,7 @@ void CPicWindow::ShowPicWithBorder(HDC hdc, const RECT &bounds, CPicture &pic, d
 		border.bottom = picrect.bottom+1;
 		::FillRect(hdc, &border, (HBRUSH)(COLOR_3DDKSHADOW+1));
 	}
-	::SetBkColor(hdc, backColor);
+	::SetBkColor(hdc, transparentColor);
 	::ExtTextOut(hdc, 0, 0, ETO_OPAQUE, &picrect, NULL, 0, NULL);
 	pic.Show(hdc, picrect);
 }
@@ -991,7 +1020,7 @@ void CPicWindow::Paint(HWND hwnd)
 				HBITMAP hOldBitmap = (HBITMAP)SelectObject(secondhdc, hBitmap);
 				SetWindowOrgEx(secondhdc, rect.left, rect.top, NULL);
 
-				ShowPicWithBorder(secondhdc, rect, *pSecondPic, picscale2);
+				ShowPicWithBorder(secondhdc, rect, *pSecondPic, pTheOtherPic->GetZoom());
 
 				if (m_blend == BLEND_ALPHA)
 				{
@@ -1220,22 +1249,22 @@ void CPicWindow::BuildInfoString(TCHAR * buf, int size, bool bTooltip)
 	{
 		_stprintf_s(buf, size, 
 			(TCHAR const *)ResString(hResource, bTooltip ? IDS_DUALIMAGEINFOTT : IDS_DUALIMAGEINFO),
-			picture.GetFileSizeAsText().c_str(),
+			picture.GetFileSizeAsText().c_str(), picture.GetFileSizeAsText(false).c_str(),
 			picture.m_Width, picture.m_Height,
 			picture.GetHorizontalResolution(), picture.GetVerticalResolution(),
 			picture.m_ColorDepth,
 			(UINT)(GetZoom()*100.0),
-			pSecondPic->GetFileSizeAsText().c_str(),
+			pSecondPic->GetFileSizeAsText().c_str(), pSecondPic->GetFileSizeAsText(false).c_str(),
 			pSecondPic->m_Width, pSecondPic->m_Height,
 			pSecondPic->GetHorizontalResolution(), pSecondPic->GetVerticalResolution(),
 			pSecondPic->m_ColorDepth,
-			(UINT)(GetZoom2()*100.0));
+			(UINT)(pTheOtherPic->GetZoom()*100.0));
 	}
 	else
 	{
 		_stprintf_s(buf, size, 
 			(TCHAR const *)ResString(hResource, bTooltip ? IDS_IMAGEINFOTT : IDS_IMAGEINFO),
-			picture.m_FileSize.c_str(), 
+			picture.GetFileSizeAsText().c_str(), picture.GetFileSizeAsText(false).c_str(),
 			picture.m_Width, picture.m_Height,
 			picture.GetHorizontalResolution(), picture.GetVerticalResolution(),
 			picture.m_ColorDepth,

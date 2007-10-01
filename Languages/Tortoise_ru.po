@@ -45,13 +45,13 @@
 # you -- вы
 #
 # Выполнено на основе перевода Alexander <brambo@inbox.ru> из версии: 2495
-# Версии 3826 - 10517: Stanislav Petrakov <stannic@gmail.com>
+# Версии 3826 - 10744: Stanislav Petrakov <stannic@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2004-06-28 09:49+0200\n"
-"PO-Revision-Date: 2007-09-07 17:37+0300\n"
+"PO-Revision-Date: 2007-09-27 15:05+0300\n"
 "Last-Translator: Stanislav Petrakov <stannic@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -591,9 +591,10 @@ msgstr "&Язык:"
 msgid "&Limit search to modified lines"
 msgstr "Поиск только в &изменённых строках"
 
+# было: связать картинки
 #: MenuEntry
-msgid "&Link images together"
-msgstr "&Связать картинки"
+msgid "&Link image positions"
+msgstr "&Связать позиции в картинках"
 
 #: Control-ID:1172,
 msgid "&List View"
@@ -607,9 +608,11 @@ msgstr "&Загрузить..."
 msgid "&Merge"
 msgstr "С&лияние"
 
+# The context is "view->merge paths". If the menu entry is checked,
+# TBlame shows you the path that each line was last merged from.
 #: MenuEntry
 msgid "&Merge paths"
-msgstr "&Слить пути"
+msgstr "&Слитые пути"
 
 #: ID:9,
 msgid "&Merge..."
@@ -635,10 +638,6 @@ msgstr "С&етевые диски"
 #: Control-ID:65535,
 msgid "&New "
 msgstr "&Новый"
-
-#: MenuEntry
-msgid "&Newest on top"
-msgstr "Новые свер&ху"
 
 #: ID:115,#:
 #: Control-ID:1208,
@@ -903,6 +902,10 @@ msgstr "(не найден)"
 #: ID:208,
 msgid "(property change only)"
 msgstr "(изменение только свойств)"
+
+#: ID:245,
+msgid "(unknown)"
+msgstr "(неизвестно)"
 
 #: ID:188,
 #, c-format
@@ -1418,10 +1421,6 @@ msgstr "В среднем"
 msgid "B&rowse..."
 msgstr "О&бзор..."
 
-#: MenuEntry
-msgid "Background &color..."
-msgstr "&Цвет фона..."
-
 #: ID:246,
 msgid "Bar Graph"
 msgstr "Гистограмма"
@@ -1695,6 +1694,10 @@ msgstr "Извлечение из %s, ревизия %s, %s, %s"
 msgid "Checksum:"
 msgstr "Контрольная сумма:"
 
+#: Control-ID:1402,
+msgid "Choose item:"
+msgstr "Использовать изменения:"
+
 #: ID:146,
 msgid "Cleaning up."
 msgstr "Производится очистка."
@@ -1900,6 +1903,11 @@ msgstr "Настройка программы, используемой для �
 msgid "Configure viewer program for GNU diff files (patch files)."
 msgstr "Настройка программы просмотра файлов различий GNU (файлов заплаток)"
 
+# цвет строк
+#: Control-ID:65535,
+msgid "Conflict resolved"
+msgstr "Улаженный конфликт"
+
 #: ID:263,#:
 #: Control-ID:65535,
 msgid "Conflicted"
@@ -2038,6 +2046,11 @@ msgstr "Исправления"
 msgid "Could not add %s to the ignore list!"
 msgstr "Не могу добавить %s в список игнорирования!"
 
+#: ID:582,
+#, c-format
+msgid "Could not add \"%s\" because"
+msgstr "Не могу добавить \"%s\" из-за того, что"
+
 #: ID:201,
 msgid "Could not check for a newer version!"
 msgstr "Не могу проверить на наличие новой версии!"
@@ -2053,9 +2066,19 @@ msgstr ""
 "<hr=100%%>\n"
 "%s"
 
+#: ID:582,
+#, c-format
+msgid "Could not delete \"%s\" because"
+msgstr "Не могу удалить \"%s\" из-за того, что"
+
 #: ID:81,
 msgid "Could not get the status!"
 msgstr "Не могу получить статус!"
+
+#: ID:582,
+#, c-format
+msgid "Could not merge \"%s\" because"
+msgstr "Не могу слить \"%s\" из-за того, что"
 
 #: ID:69,
 #, c-format
@@ -2168,8 +2191,8 @@ msgstr ""
 "%s"
 
 #: ID:8,
-msgid "Create repositor&y here..."
-msgstr "Создать здесь &хранилище..."
+msgid "Create repositor&y here"
+msgstr "Создать здесь &хранилище"
 
 #: MenuEntry
 msgid "Create unified diff file"
@@ -2387,6 +2410,17 @@ msgstr ""
 " %s,\n"
 "сделаные в этой ревизии? Эти изменения будут убраны путём обратного слияния (т.е. исключения) убираемой ревизии с вашей рабочей копией."
 
+#: ID:99,
+#, c-format
+msgid ""
+"Do you want to make this working copy unversioned?\n"
+"This will remove all Subversion admin directories from\n"
+"%s!"
+msgstr ""
+"Вы действительно желаете разверсировать эту рабочую копию?\n"
+"Будут удалены все административные папки Subversion из\n"
+"%s!"
+
 #: ID:76,
 msgid "Do you want to proceed?"
 msgstr "Желаете продолжить?"
@@ -2409,8 +2443,12 @@ msgid "Do you want to save your changes?"
 msgstr "Вы хотите сохранить изменения?"
 
 #: Control-ID:65535,
-msgid "Documentation - Simon Large"
-msgstr "Документация - Simon Large"
+msgid ""
+"Documentation : Simon Large\n"
+"Code : Tobias Schäfer, Stefan Fuhrmann"
+msgstr ""
+"Документация: Simon Large\n"
+"Код : Tobias Schäfer, Stefan Fuhrmann"
 
 #: ID:73,#:
 #: ID:80,
@@ -2457,6 +2495,10 @@ msgstr "Изменить автора"
 #: ID:115,
 msgid "Edit author name"
 msgstr "Редактировать имя автора"
+
+#: Control-ID:1399,
+msgid "Edit conflict"
+msgstr "Редактировать конфликт"
 
 #: ID:110,
 msgid "Edit extension specific diff program"
@@ -2729,7 +2771,7 @@ msgstr "Заплатки файла"
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2737,7 +2779,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Размер файла:\t\t%s\n"
+"Размер файла:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld пиксел(ов)\n"
 "Высота:\t\t\t%ld пиксел(ов)\n"
 "Разреш. по горизонтали:\t%.1f dpi\n"
@@ -2748,7 +2790,7 @@ msgstr ""
 #: ID:8,
 #, c-format
 msgid ""
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2756,7 +2798,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%\n"
 "\n"
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2764,7 +2806,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Размер файла:\t\t%s\n"
+"Размер файла:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld пиксел(ов)\n"
 "Высота:\t\t\t%ld пиксел(ов)\n"
 "Разреш. по горизонтали:\t%.1f dpi\n"
@@ -2772,7 +2814,7 @@ msgstr ""
 "Глубина цвета:\t\t%d бит\n"
 "Увеличение:\t\t%d%%\n"
 "\n"
-"Размер файла:\t\t%s\n"
+"Размер файла:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld пиксел(ов)\n"
 "Высота:\t\t\t%ld пиксел(ов)\n"
 "Разреш. по горизонтали:\t%.1f dpi\n"
@@ -2783,7 +2825,7 @@ msgstr ""
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2791,7 +2833,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Размер файла:\t\t%s\n"
+"Размер файла:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld пиксел(ов)\n"
 "Высота:\t\t\t%ld пиксел(ов)\n"
 "Разреш. по горизонтали:\t%.1f dpi\n"
@@ -2802,7 +2844,7 @@ msgstr ""
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2810,7 +2852,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%\n"
 "\n"
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2818,7 +2860,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Размер файла:\t\t%s\n"
+"Размер файла:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld пиксел(ов)\n"
 "Высота:\t\t\t%ld пиксел(ов)\n"
 "Разреш. по горизонтали:\t%.1f dpi\n"
@@ -2826,7 +2868,7 @@ msgstr ""
 "Глубина цвета:\t\t%d бит\n"
 "Увеличение:\t\t%d%%\n"
 "\n"
-"Размер файла:\t\t%s\n"
+"Размер файла:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld пиксел(ов)\n"
 "Высота:\t\t\t%ld пиксел(ов)\n"
 "Разреш. по горизонтали:\t%.1f dpi\n"
@@ -2862,8 +2904,8 @@ msgid "Finished!"
 msgstr "Закончено!"
 
 #: MenuEntry
-msgid "Fit Images &together"
-msgstr "&Вписать обе картинки"
+msgid "Fit image &sizes"
+msgstr "&Подогнать размеры картинок"
 
 #: Control-ID:1315,
 msgid "Floppy drives (A: B:)"
@@ -3158,21 +3200,21 @@ msgstr "ID:32796:V C +A"
 msgid "ID:32809:V C +F"
 msgstr "ID:32809:V C +F"
 
-#. Accelerator Entry for Menu ID:32810; 'Fit Images &together'
+#. Accelerator Entry for Menu ID:32810; 'Fit image &sizes'
 #: Corresponding Menu ID:32810;
-#: 'Fit Images &together'
+#: 'Fit image &sizes'
 msgid "ID:32810:V   +T"
 msgstr "ID:32810:V   +T"
 
-#. Accelerator Entry for Menu ID:32814; '&Newest on top'
+#. Accelerator Entry for Menu ID:32814; 'Oldest on to&p'
 #: Corresponding Menu ID:32814;
-#: '&Newest on top'
+#: 'Oldest on to&p'
 msgid "ID:32814:V C +L"
 msgstr "ID:32814:V C +L"
 
-#. Accelerator Entry for Menu ID:32814; '&Newest on top'
+#. Accelerator Entry for Menu ID:32814; 'Oldest on to&p'
 #: Corresponding Menu ID:32814;
-#: '&Newest on top'
+#: 'Oldest on to&p'
 msgid "ID:32814:VA  +D"
 msgstr "ID:32814:VA  +D"
 
@@ -3212,6 +3254,7 @@ msgstr "ID:57603:V C +S"
 msgid "ID:57604:V CS+S"
 msgstr "ID:57604:V CS+S"
 
+#. Accelerator Entry for Menu ID:57634; ''
 #. Accelerator Entry for Menu ID:57634; ''
 #. Accelerator Entry for Menu ID:57634; '&Copy'
 #: Corresponding Menu ID:57634;
@@ -3652,6 +3695,10 @@ msgstr "Запускает внешнюю программу различий / 
 msgid "Least active author:"
 msgstr "Наименее активный автор:"
 
+#: Control-ID:1404,
+msgid "Leave conflicted:"
+msgstr "Оставить с конфликтом:"
+
 #: ID:188,
 msgid "Left View: "
 msgstr "Вид слева:"
@@ -3879,6 +3926,14 @@ msgstr "Слияние - TortoiseSVN"
 msgid "Merge depth:"
 msgstr "Глубина при слиянии:"
 
+#: ID:114,
+msgid "Merge revision to..."
+msgstr "Слить ревизию с..."
+
+#: ID:114,
+msgid "Merge revisions to..."
+msgstr "Слить ревизии с..."
+
 #: Control-ID:1377,
 msgid "Merge settings"
 msgstr "Настройки слияния"
@@ -3890,13 +3945,8 @@ msgstr "Слито"
 
 #: ID:286,
 #, c-format
-msgid "Merged revision %s from %s:\n"
-msgstr "Слияние с ревизией %s из %s:\n"
-
-#: ID:286,
-#, c-format
-msgid "Merged revisions %s to %s from %s:\n"
-msgstr "Слияние с ревизиями %s - %s из %s:\n"
+msgid "Merged revision(s) %s from %s:\n"
+msgstr "Слияние с ревизией(ями) %s из %s:\n"
 
 #: ID:10,
 msgid "Merges a branch into the main trunk"
@@ -4115,6 +4165,17 @@ msgstr "Ошибки не произошло."
 msgid "No files or folders were modified. There is nothing for TortoiseSVN to revert!"
 msgstr "Ни один файл или папка не были изменены. TortoiseSVN нечего убирать!"
 
+#: ID:239,
+msgid ""
+"No files to show with the current setting.\n"
+"Check one or more settings below to see unversioned, ignored and/or unmodified files.\n"
+"To see remote changes, click on \"Check Repository\""
+msgstr ""
+"Нет ни одного файла для отображения, исходя из текущих настроек.\n"
+"Отметьте один или более флажков ниже для того, чтобы увидеть\n"
+"неверсированные, игнорируемые и/или неизменённые файлы.\n"
+"Чтобы увидеть удалённые изменения, нажмите на \"Проверить хранилище\""
+
 #: ID:77,
 msgid ""
 "No files were changed or added since\n"
@@ -4211,6 +4272,10 @@ msgstr "OVR"
 #: Control-ID:65535,
 msgid "Older lines"
 msgstr "Более старые строки"
+
+#: MenuEntry
+msgid "Oldest on to&p"
+msgstr "Старые свер&ху"
 
 # Род?
 #: ID:99,#:
@@ -4457,6 +4522,10 @@ msgstr ""
 "изменения отправлялись в только что созданную копию или ответвление, вам необходимо\n"
 "переключить вашу рабочую копию на новый URL.\n"
 "Используйте для этого команду <b>Переключить</b>."
+
+#: Control-ID:1287,
+msgid "Please resolve the conflict by choosing one of the following options:"
+msgstr "Пожалуйста, уладьте конфликт, выбрав одно из следующего:"
 
 #: ID:3858,#:
 #: ID:3858,
@@ -4908,6 +4977,15 @@ msgstr "Улаживание"
 msgid "Resolve - TortoiseSVN"
 msgstr "Улаживание - TortoiseSVN"
 
+# Заголовок окна
+#: Dlg-ID:268,
+msgid "Resolve Conflict"
+msgstr "Улаживание конфликта"
+
+#: Control-ID:1382,
+msgid "Resolve all later"
+msgstr "Уладить все позже"
+
 #: ID:282,
 msgid "Resolve conflict using \"mine\""
 msgstr "Уладить конфликт, используя \"мой\" файл"
@@ -4916,8 +4994,17 @@ msgstr "Уладить конфликт, используя \"мой\" файл"
 msgid "Resolve conflict using \"theirs\""
 msgstr "Уладить конфликт, используя \"их\" файл"
 
+#: Control-ID:1403,
+msgid "Resolve conflict:"
+msgstr "Уладить конфликт:"
+
+#: Control-ID:2,
+msgid "Resolve later"
+msgstr "Уладить позже"
+
 #: ID:74,#:
-#: ID:209,
+#: ID:209,#:
+#: Control-ID:1400,
 msgid "Resolved"
 msgstr "Улажено"
 
@@ -5322,6 +5409,10 @@ msgstr "Выбрать файл скрипта ловушки"
 msgid "Select merge application"
 msgstr "Выбрать приложение слияния"
 
+#: ID:119,
+msgid "Select merge target"
+msgstr "Выберите с чем производить слияние"
+
 #: ID:276,
 msgid "Select revision range"
 msgstr "Выберите ряд ревизий"
@@ -5344,7 +5435,7 @@ msgid ""
 "Select All"
 msgstr ""
 "Выбрать весь документ\n"
-"Выбрать все"
+"Выбрать всё"
 
 #: Control-ID:65535,
 msgid "Select the type of repository you want to create:"
@@ -5836,23 +5927,6 @@ msgstr "Статус текста:"
 msgid "Text status"
 msgstr "Статус текста"
 
-#: ID:69,
-#, c-format
-msgid ""
-"The File\n"
-"%s\n"
-"is not a valid text file!\n"
-"Note that UTF32 files are treated as binary too."
-msgstr ""
-"Файл\n"
-"%s\n"
-"не является корректым текстовым файлом!\n"
-"Примечание: файлы UTF32 рассматриваются как двоичные."
-
-#: ID:80,
-msgid "The Repository was successfully created."
-msgstr "Хранилище создано успешно."
-
 #: ID:63,
 msgid "The chunk size did not match the number of added/removed lines!"
 msgstr "Размер куска кода на соответствует количеству добавленных/удаленных строк!"
@@ -5908,6 +5982,19 @@ msgstr ""
 "Файл\n"
 "%s\n"
 "уже существует! Вы хотите перезаписать его?"
+
+#: ID:69,
+#, c-format
+msgid ""
+"The file\n"
+"%s\n"
+"is not a valid text file!\n"
+"Note that UTF32 files are treated as binary too."
+msgstr ""
+"Файл\n"
+"%s\n"
+"не является корректым текстовым файлом!\n"
+"Примечание: файлы UTF32 также рассматриваются как двоичные."
 
 #: ID:145,
 #, c-format
@@ -6087,6 +6174,10 @@ msgstr ""
 "Но TortoiseMerge нашла путь\n"
 "<i>%s</i>\n"
 "который подходит больше. Хотите-ли вы использовать предложенный путь вместо исходного?"
+
+#: ID:80,
+msgid "The repository was successfully created."
+msgstr "Хранилище создано успешно."
 
 #: Control-ID:65535,
 msgid "The result of the merge is stored in the working copy at:"
@@ -6326,7 +6417,10 @@ msgid ""
 "/left:\"path to left picture\"\n"
 "/lefttitle:\"title to show for the left picture\"\n"
 "/right:\"path to right picture\"\n"
-"/righttitle:\"title to show for the right picture\""
+"/righttitle:\"title to show for the right picture\"\n"
+"/overlay\t\tto enable overlay mode\n"
+"/fit\t\tto fit the images sizes\n"
+"/showinfo\t\tto show the image info boxes"
 msgstr ""
 "TortoiseIDiff: программа для просмотра различий в картинках для TortoiseSVN\n"
 "\n"
@@ -6334,7 +6428,10 @@ msgstr ""
 "/left:\"путь до левой картинки\"\n"
 "/lefttitle:\"заголовок для левой картинки\"\n"
 "/right:\"путь до правой картинки\"\n"
-"/righttitle:\"заголовок для правой картинки\""
+"/righttitle:\"заголовок для правой картинки\"\n"
+"/overlay\t\tдля включения режима наложения\n"
+"/fit\t\tдля подгона размеров картинок\n"
+"/showinfo\t\tдля показа окон информации о картинках"
 
 #: ID:7,#:
 #: ID:3585,#:
@@ -6413,6 +6510,10 @@ msgstr "Всего файлов изменено:"
 #, c-format
 msgid "Transferring at %s"
 msgstr "Передача на %s"
+
+#: MenuEntry
+msgid "Transparent &color..."
+msgstr "Прозрачный &цвет..."
 
 #: ID:251,
 msgid "Try a \"Cleanup\". If that doesn't work you need to do a fresh checkout."
@@ -6553,9 +6654,18 @@ msgstr "Разблокирован"
 msgid "Untitled"
 msgstr "Неназванный"
 
+#: ID:146,
+msgid "Unversion"
+msgstr "Разверсировать"
+
 #: Control-ID:1313,
 msgid "Unversioned files mark parent folder as modified"
 msgstr "Неверсированные файлы помечают родительскую папку как изменённую"
+
+#: ID:286,
+#, c-format
+msgid "Unversioning %s"
+msgstr "Разверсирование %s"
 
 # Заголовок окна
 #: Dlg-ID:152,
@@ -6638,10 +6748,20 @@ msgstr "Использовать оба текстовых блока (этот 
 msgid "Use both text blocks (this one last)"
 msgstr "Использовать оба текстовых блока (этот в конце)"
 
+# Использовать изменения:
+#: Control-ID:3,
+msgid "Use local"
+msgstr "Локальные"
+
 # фильтрация в диалоге журнала
 #: ID:116,
 msgid "Use regular expression"
 msgstr "Регулярное выражение"
+
+# Использовать изменения:
+#: Control-ID:4,
+msgid "Use repository"
+msgstr "Из хранилища"
 
 #: Control-ID:1066,
 msgid "Use stri&keout for removed lines"
@@ -7039,6 +7159,10 @@ msgstr "и"
 msgid "and support the developers"
 msgstr "и поддержать разработчиков"
 
+#: ID:583,
+msgid "another item already exists in its place."
+msgstr "другой элемент уже существует на этом месте."
+
 #: ID:245,
 msgid "author"
 msgstr "автор"
@@ -7171,6 +7295,18 @@ msgstr "игнорируя предков"
 #: ID:13,
 msgid "incomplete"
 msgstr "незакончен"
+
+#: ID:583,
+msgid "it does not exist."
+msgstr "этот элемент не существует."
+
+#: ID:583,
+msgid "it is already deleted."
+msgstr "оно уже удалено."
+
+#: ID:583,
+msgid "it is unversioned."
+msgstr "этот элемент не версирован."
 
 #: ID:214,
 msgid "item kept locally"
@@ -7331,6 +7467,21 @@ msgstr ""
 
 #: ID:576,
 msgid ""
+"svn:mergeinfo\n"
+"A newline separated list of merge tracking info. Each line consists of an absolute\n"
+"path followed by a colon and a list of comma separated revision numbers.\n"
+"For example\n"
+"/trunk:123-125,129"
+msgstr ""
+"svn:mergeinfo\n"
+"Список отслеживания информации о слиянии, по одной записи в строке.\n"
+"Каждая строка состоит из абсолютного пути, после которого идёт\n"
+"двоеточие и список разделённых запятыми номеров ревизий.\n"
+"Например,\n"
+"/trunk:123-125,129"
+
+#: ID:576,
+msgid ""
 "svn:mime-type\n"
 "The mime type of the file. Used to determine whether to merge the file, and how to serve it from Apache.\n"
 "A mime type beginning with 'text/' (or an absent mime type) is treated as text.\n"
@@ -7367,6 +7518,10 @@ msgstr ""
 #: Control-ID:65535,
 msgid "switched:"
 msgstr "переключено:"
+
+#: ID:583,
+msgid "there are conflicting modifications."
+msgstr "есть конфликтующие изменения."
 
 #: ID:80,#:
 #: ID:103,#:

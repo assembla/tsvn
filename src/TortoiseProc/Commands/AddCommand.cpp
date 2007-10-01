@@ -29,7 +29,7 @@ bool AddCommand::Execute()
 		SVN svn;
 		ProjectProperties props;
 		props.ReadPropsPathList(pathList);
-		svn.Add(pathList, &props, FALSE, FALSE, FALSE, TRUE);
+		svn.Add(pathList, &props, svn_depth_empty, FALSE, FALSE, TRUE);
 	}
 	else
 	{
@@ -40,9 +40,10 @@ bool AddCommand::Execute()
 			if (dlg.m_pathList.GetCount() == 0)
 				return FALSE;
 			CSVNProgressDlg progDlg;
-			progDlg.m_dwCloseOnEnd = parser.GetLongVal(_T("closeonend"));
 			theApp.m_pMainWnd = &progDlg;
-			progDlg.SetParams(CSVNProgressDlg::SVNProgress_Add, 0, dlg.m_pathList);
+			progDlg.SetCommand(CSVNProgressDlg::SVNProgress_Add);
+			progDlg.SetAutoClose(parser.GetLongVal(_T("closeonend")));
+			progDlg.SetPathList(dlg.m_pathList);
 			ProjectProperties props;
 			props.ReadPropsPathList(dlg.m_pathList);
 			progDlg.SetProjectProperties(props);

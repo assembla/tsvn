@@ -90,7 +90,7 @@
 - NEW: TortoiseBlame remembers its window position. (Stefan)
 - NEW: Performance improvement when resolving a file in TortoiseMerge.
        See issue #328 for details. (Stefan)
-- NEW: Ability to create file-based changesets. 
+- NEW: Ability to create file-based changelists. 
        See issue #333 for details. (Stefan)
 - NEW: When applying patches with absolute paths which don't exist
        TortoiseMerge now tries to guess the correct path by stripping
@@ -167,7 +167,7 @@
 - NEW: "Settings" entry in the TSVN start menu. On x64, provide separated 
        settings for 32 and 64 bit TSVN. (Stefan Fuhrmann)
 - NEW: The project properties are automatically added to new folders. (Stefan)
-- NEW: special changeset for 'ignoring' versioned files. (Stefan)
+- NEW: special changelist for 'ignoring' versioned files. (Stefan)
 - NEW: TortoiseBlame has a locator bar if the age coloring is active.
        See issue #376 for details. (Stefan)
 - NEW: the file diff dialog has a filter. See issue #379 for details. (Stefan)
@@ -177,6 +177,8 @@
        files it shows. See issue #381 for details. (Stefan)
 - NEW: Improved indication on how the filter in the log dialog works.
        See issue #384 for details. (Stefan)
+- NEW: Merging from the log dialog and the revision graph. See issue #385
+       for details. (Stefan)
 - CHG: Revision graph code mainly rewritten resulting in a major 
        performance improvement. (Stefan Fuhrmann)
 - CHG: The working copy is now the default in the branch/tag dialog
@@ -238,6 +240,8 @@
        consistently  to /startrev, /endrev and /pegrev. (Tobias Schäfer)
 - CHG: The log dialog now opens up with the topmost revision being
        preselected. (Tobias Schäfer)
+- CHG: The second context menu item for links now only appears if the
+       destination is in a working copy. (Tobias Schäfer)
 - BUG: TortoiseMerge didn't always ask to save the modifications first before
        the user did something which would lose those modifications
        (e.g. open new files). (Stefan)
@@ -250,6 +254,12 @@ Version 1.4.6
 - BUG: The overlay include paths weren't checked correctly which lead
        to paths directly below the include paths *not* to be included.
        (Stefan)
+- BUG: Sorting in the commit dialog sometimes lost the check marks
+       if the list had previously been refreshed. (Tobias Schäfer)
+- BUG: Memory leak in the shell context menu. (Stefan)
+- BUG: Exporting could leave the exported folders still versioned. (Stefan)
+- BUG: Pressing the tabulator deleted the contents of the log message in
+       the commit dialog. (Tobias Schäfer)
 
 Version 1.4.5
 - BUG: The setting "unversioned files mark parent folder as modified" for the

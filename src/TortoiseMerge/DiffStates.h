@@ -18,7 +18,10 @@
 //
 #pragma once
 
-
+/**
+ * \ingroup TortoiseMerge
+ * the different diff states a line can have.
+ */
 enum DiffStates
 {
 	DIFFSTATE_UNKNOWN,					///< e.g. an empty file
@@ -31,6 +34,7 @@ enum DiffStates
 	DIFFSTATE_WHITESPACE_DIFF,			///< the in-line diffs of whitespaces
 	DIFFSTATE_EMPTY,					///< empty line
 	DIFFSTATE_CONFLICTED,				///< conflicted line
+	DIFFSTATE_CONFLICTED_IGNORED,		///< a conflict which isn't conflicted due to ignore settings
 	DIFFSTATE_CONFLICTADDED,			///< added line results in conflict
 	DIFFSTATE_CONFLICTEMPTY,			///< removed line results in conflict
 	DIFFSTATE_CONFLICTRESOLVED,			///< previously conflicted line, now resolved
@@ -40,5 +44,6 @@ enum DiffStates
 	DIFFSTATE_THEIRSADDED,				///< added line in theirs
 	DIFFSTATE_YOURSREMOVED,				///< removed line in yours
 	DIFFSTATE_YOURSADDED,				///< added line in yours
+	DIFFSTATE_EDITED,					///< manually edited line
 	DIFFSTATE_END						///< end marker for enum
 };

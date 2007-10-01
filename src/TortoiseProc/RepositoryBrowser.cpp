@@ -402,9 +402,7 @@ UINT CRepositoryBrowser::InitThread()
 	// Why we do this inside a thread.
 
 	// force the cursor to change
-	POINT pt;
-	GetCursorPos(&pt);
-	SetCursorPos(pt.x, pt.y);
+	RefreshCursor();
 
 	DialogEnableWindow(IDOK, FALSE);
 	DialogEnableWindow(IDCANCEL, FALSE);
@@ -417,8 +415,7 @@ UINT CRepositoryBrowser::InitThread()
 	
 	m_bThreadRunning = false;
 
-	GetCursorPos(&pt);
-	SetCursorPos(pt.x, pt.y);
+	RefreshCursor();
 	return 0;
 }
 
@@ -916,15 +913,15 @@ void CRepositoryBrowser::FillList(deque<CItem> * pItems)
 	if (!CString(regColWidths).IsEmpty())
 	{
 		StringToWidthArray(regColWidths, m_arColumnWidths);
-	}
-	int maxcol = ((CHeaderCtrl*)(m_RepoList.GetDlgItem(0)))->GetItemCount()-1;
-	int col;
-	for (col = 1; col <= maxcol; col++)
-	{
-		if (m_arColumnWidths[col] == 0)
-			m_RepoList.SetColumnWidth(col, LVSCW_AUTOSIZE_USEHEADER);
-		else
-			m_RepoList.SetColumnWidth(col, m_arColumnWidths[col]);
+		
+		int maxcol = ((CHeaderCtrl*)(m_RepoList.GetDlgItem(0)))->GetItemCount()-1;
+		for (int col = 1; col <= maxcol; col++)
+		{
+			if (m_arColumnWidths[col] == 0)
+				m_RepoList.SetColumnWidth(col, LVSCW_AUTOSIZE_USEHEADER);
+			else
+				m_RepoList.SetColumnWidth(col, m_arColumnWidths[col]);
+		}
 	}
 
 	m_RepoList.SetRedraw(true);
@@ -1794,8 +1791,10 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 		while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
 		{
 			CItem * pItem = (CItem *)m_RepoList.GetItemData(index);
-			urlList.AddPath(CTSVNPath(pItem->absolutepath));
-			urlListEscaped.AddPath(CTSVNPath(EscapeUrl(CTSVNPath(pItem->absolutepath))));
+			CString absPath = pItem->absolutepath;
+			absPath.Replace(_T("\\"), _T("%5C"));
+			urlList.AddPath(CTSVNPath(absPath));
+			urlListEscaped.AddPath(CTSVNPath(EscapeUrl(CTSVNPath(absPath))));
 			if (pItem->kind == svn_node_dir)
 				nFolders++;
 			if (!pItem->locktoken.IsEmpty())
@@ -2066,7 +2065,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 		case ID_SAVEAS:
 			{
 				CTSVNPath tempfile;
-				bool bSavePathOK = AskForSavePath(urlList, tempfile);
+				bool bSavePathOK = AskForSavePath(urlList, tempfile, nFolders > 0);
 				if (bSavePathOK)
 				{
 					CWaitCursorEx wait_cursor;
@@ -2223,7 +2222,11 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 						opts |= ProgOptEolCR;
 					if (dlg.m_eolStyle.CompareNoCase(_T("LF"))==0)
 						opts |= ProgOptEolLF;
-					progDlg.SetParams(CSVNProgressDlg::SVNProgress_Export, opts, CTSVNPathList(exportDirectory), dlg.m_URL, _T(""), dlg.Revision);
+					progDlg.SetCommand(CSVNProgressDlg::SVNProgress_Export);
+					progDlg.SetOptions(opts);
+					progDlg.SetPathList(CTSVNPathList(exportDirectory));
+					progDlg.SetUrl(dlg.m_URL);
+					progDlg.SetRevision(dlg.Revision);
 					progDlg.SetDepth(dlg.m_depth);
 					progDlg.DoModal();
 				}
@@ -2476,7 +2479,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 		case ID_COPYTOWC:
 			{
 				CTSVNPath tempfile;
-				bool bSavePathOK = AskForSavePath(urlList, tempfile);
+				bool bSavePathOK = AskForSavePath(urlList, tempfile, nFolders > 0);
 				if (bSavePathOK)
 				{
 					CWaitCursorEx wait_cursor;
@@ -2487,7 +2490,8 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 					SetAndClearProgressInfo(&progDlg);
 					progDlg.ShowModeless(m_hWnd);
 
-					if (!Copy(urlList, tempfile, GetRevision(), GetRevision())||(progDlg.HasUserCancelled()))
+					bool bCopyAsChild = (urlList.GetCount() > 1);
+					if (!Copy(urlList, tempfile, GetRevision(), GetRevision(), CString(), bCopyAsChild)||(progDlg.HasUserCancelled()))
 					{
 						progDlg.Stop();
 						SetAndClearProgressInfo((HWND)NULL);
@@ -2624,10 +2628,10 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 }
 
 
-bool CRepositoryBrowser::AskForSavePath(const CTSVNPathList& urlList, CTSVNPath &tempfile)
+bool CRepositoryBrowser::AskForSavePath(const CTSVNPathList& urlList, CTSVNPath &tempfile, bool bFolder)
 {
 	bool bSavePathOK = false;
-	if (urlList.GetCount() == 1)
+	if ((!bFolder)&&(urlList.GetCount() == 1))
 	{
 		CString savePath;
 		bSavePathOK = CAppUtils::FileOpenSave(savePath, IDS_REPOBROWSE_SAVEAS, IDS_COMMONFILEFILTER, false, m_hWnd);

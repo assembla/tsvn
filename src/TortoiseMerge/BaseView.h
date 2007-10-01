@@ -57,6 +57,7 @@ public:
 	void			ScrollAllToLine(int nNewTopLine, BOOL bTrackScrollBar = TRUE);
 	void			ScrollSide(int delta);
 	void			GoToLine(int nNewLine, BOOL bAll = TRUE);
+	void			UseCaret(bool bUse = true) {m_bCaretHidden = !bUse;}
 
 	void			SelectLines(int nLine1, int nLine2 = -1);
 	void			HiglightLines(int start, int end = -1);
@@ -65,6 +66,7 @@ public:
 	inline BOOL		IsModified() const  {return m_bModified;}
 	void			SetModified(BOOL bModified = TRUE) {m_bModified = bModified;}
 	BOOL			HasSelection() {return (!((m_nSelBlockEnd < 0)||(m_nSelBlockStart < 0)||(m_nSelBlockStart > m_nSelBlockEnd)));}
+	BOOL			HasTextSelection() {return ((m_ptSelectionStartPos.x != m_ptSelectionEndPos.x)||(m_ptSelectionStartPos.y != m_ptSelectionEndPos.y));}
 	BOOL			GetSelection(int& start, int& end) {start=m_nSelBlockStart; end=m_nSelBlockEnd; return HasSelection();}
 	void			SetInlineWordDiff(bool bWord) {m_bInlineWordDiff = bWord;}
 
@@ -78,7 +80,7 @@ public:
 	CString			m_sWindowName;		///< The name of the view which is shown as a window title to the user
 	CString			m_sFullFilePath;	///< The full path of the file shown
 	CFileTextLines::UnicodeType texttype;	///< the text encoding this view uses
-	CFileTextLines::LineEndings lineendings; ///< the line endings the view uses
+	EOL lineendings; ///< the line endings the view uses
 
 	BOOL			m_bViewWhitespace;	///< If TRUE, then SPACE and TAB are shown as special characters
 	BOOL			m_bShowInlineDiff;	///< If TRUE, diffs in lines are marked colored
@@ -116,13 +118,31 @@ protected:
 	afx_msg void	OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void	OnEditCopy();
 	afx_msg void	OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void	OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void	OnCaretDown();
+	afx_msg void	OnCaretLeft();
+	afx_msg void	OnCaretRight();
+	afx_msg void	OnCaretUp();
+	afx_msg void	OnCaretWordleft();
+	afx_msg void	OnCaretWordright();
+	afx_msg void	OnEditCut();
+	afx_msg void	OnEditPaste();
 
 	DECLARE_MESSAGE_MAP()
 
 protected:
 	void			DrawHeader(CDC *pdc, const CRect &rect);
 	void			DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex);
-	void			DrawSingleLine(CDC *pdc, const CRect &rc, int nLineIndex);
+	void			DrawDiffTokens(CDC *pDC, const CRect &rc, int& nLineIndex, int& nLineOffset, CPoint& origin, apr_off_t nTokenCount, bool bInlineDiff);
+	void			DrawSingleLine(CDC *pDC, const CRect &rc, int nLineIndex);
+	/**
+	 * Draws the horizontal lines around current diff block or selection block.
+	 */
+	void			DrawBlockLine(CDC *pDC, const CRect &rc, int nLineIndex);
+	/**
+	 * Draws the line ending 'char'.
+	 */
+	void			DrawLineEnding(CDC *pDC, const CRect &rc, int nLineIndex, const CPoint& origin);
 	void			ExpandChars(LPCTSTR pszChars, int nOffset, int nCount, CString &line);
 
 	void			RecalcVertScrollBar(BOOL bPositionOnly = FALSE);
@@ -149,20 +169,21 @@ protected:
 	int				GetCharWidth();
 	int				GetMaxLineLength();
 	int				GetLineLength(int index) const;
-	int				GetDiffLineLength(int index) const;
 	int				GetScreenChars();
 	int				GetAllMinScreenChars() const;
 	int				GetAllMaxLineLength() const;
 	int				GetAllLineCount() const;
 	int				GetAllMinScreenLines() const;
 	LPCTSTR			GetLineChars(int index) const;
-	LPCTSTR			GetDiffLineChars(int index);
 	int				GetLineNumber(int index) const;
 	CFont *			GetFont(BOOL bItalic = FALSE, BOOL bBold = FALSE, BOOL bStrikeOut = FALSE);
 	int				GetLineFromPoint(CPoint point);
 	int				GetMarginWidth();
 	void			RefreshViews();
 	COLORREF		IntenseColor(long scale, COLORREF col);
+	COLORREF		InlineDiffColor(int nLineIndex);
+	void			CheckOtherView();
+	static CString	GetWhitespaceBlock(CViewData *viewData, int nLineIndex);
 
 	virtual	void	OnContextMenu(CPoint point, int nLine, DiffStates state);
 	/**
@@ -174,6 +195,24 @@ protected:
 	void			UseYourAndTheirBlock(viewstate &rightstate, viewstate &bottomstate, viewstate &leftstate);
 	void			UseBothLeftFirst(viewstate &rightstate, viewstate &leftstate);
 	void			UseBothRightFirst(viewstate &rightstate, viewstate &leftstate);
+
+	bool			IsLeftViewGood() const {return ((m_pwndLeft)&&(m_pwndLeft->IsWindowVisible()));}
+	bool			IsRightViewGood() const {return ((m_pwndRight)&&(m_pwndRight->IsWindowVisible()));}
+	bool			IsBottomViewGood() const {return ((m_pwndBottom)&&(m_pwndBottom->IsWindowVisible()));}
+
+	void			UpdateCaret();
+	void			EnsureCaretVisible();
+	int				CalculateActualOffset(int nLineIndex, int nCharIndex);
+	POINT			TextToClient(const POINT& point);
+	void			DrawText(CDC * pDC, const CRect &rc, LPCTSTR text, int textlength, int nLineIndex, POINT coords, bool bModified, bool bInlineDiff);
+	void			ClearCurrentSelection();
+	void			ClearSelection();
+	void			AdjustSelection(bool bStartSelection, bool bForward);
+
+	void			AddEmptyLine(int nLineIndex);
+	void			RemoveLine(int nLineIndex);
+	void			RemoveSelectedText();
+	void			PasteText();
 protected:
 	COLORREF		m_InlineRemovedBk;
 	COLORREF		m_InlineAddedBk;
@@ -203,11 +242,21 @@ protected:
 
 	int				m_nMouseLine;
 
+	bool			m_bCaretHidden;
+	POINT			m_ptCaretPos;
+	POINT			m_ptSelectionStartPos;
+	POINT			m_ptSelectionEndPos;
+	POINT			m_ptSelectionDrawStartPos;
+	POINT			m_ptSelectionDrawEndPos;
+
+
 	HICON			m_hAddedIcon;
 	HICON			m_hRemovedIcon;
 	HICON			m_hConflictedIcon;
+	HICON			m_hConflictedIgnoredIcon;
 	HICON			m_hWhitespaceBlockIcon;
 	HICON			m_hEqualIcon;
+	HICON			m_hEditedIcon;
 
 	HICON			m_hLineEndingCR;
 	HICON			m_hLineEndingCRLF;

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2004-06-28 14:09+0200\n"
-"PO-Revision-Date: 2007-09-10 10:02+0100\n"
+"PO-Revision-Date: 2007-10-01 10:43+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -668,8 +668,8 @@ msgid "&Limit search to modified lines"
 msgstr "Suche auf geänderte Zeilen &einschränken"
 
 #: MenuEntry
-msgid "&Link images together"
-msgstr "Parallel &verschieben"
+msgid "&Link image positions"
+msgstr "Bildpositionen &verbinden"
 
 # Control-ID:1172,
 #: Control-ID:1172,
@@ -722,10 +722,6 @@ msgstr "&Netzlaufwerke"
 msgid "&New "
 msgstr "&Neu"
 
-#: MenuEntry
-msgid "&Newest on top"
-msgstr "&Neuester nach oben"
-
 # ID:115,#:
 # Control-ID:1208,
 #: ID:115,#:
@@ -765,7 +761,8 @@ msgid "&Password:"
 msgstr "&Passwort:"
 
 # ID:376,
-#: ID:376,
+#: ID:376,#:
+#: ID:501,
 msgid "&Paste"
 msgstr "E&infügen"
 
@@ -1055,6 +1052,10 @@ msgstr "(nicht gefunden)"
 msgid "(property change only)"
 msgstr "(Nur Eigenschaftsänderung)"
 
+#: ID:245,
+msgid "(unknown)"
+msgstr "(Unbekannt)"
+
 # ID:188,
 #: ID:188,
 #, c-format
@@ -1312,6 +1313,7 @@ msgid "Add to &ignore list"
 msgstr "&Ignorieren"
 
 # Control-ID:1279,
+#: ID:209,#:
 #: Control-ID:1279,
 msgid "Add..."
 msgstr "Hinzufügen..."
@@ -1709,10 +1711,6 @@ msgstr "Mittelwert"
 msgid "B&rowse..."
 msgstr "S&uchen..."
 
-#: MenuEntry
-msgid "Background &color..."
-msgstr "&Hintergrundfarbe..."
-
 # ID:246,
 # ID:246,
 #: ID:246,
@@ -1820,6 +1818,11 @@ msgstr "E&rstelle Verzweigung/Markierung von Revision"
 #: ID:101,
 msgid "C&reate folder..."
 msgstr "Ordner &anlegen..."
+
+# ID:376,
+#: ID:501,
+msgid "C&ut"
+msgstr "A&usschneiden"
 
 # ID:3697,
 #: ID:3697,
@@ -2242,6 +2245,18 @@ msgstr "Übertragungen pro Woche:"
 #: ID:9,
 msgid "Commits your changes to the repository"
 msgstr "Überträgt Ihre Änderungen ins Projektarchiv"
+
+#: ID:170,
+msgid ""
+"Committing an unversioned folder will not recursively add its child items!\n"
+"You might want to add these folders recursively by using the \"Add...\" context menu item.\n"
+"\n"
+"Are you sure that you want to continue the commit?"
+msgstr ""
+"Beim Übertragen eines unversionierten Ordners werden dessen Unterobjekte nicht automatisch hinzugefügt!\n"
+"Die Unterordner müssen vorher per \"Hinzufügen...\" rekursiv in die Versionskontrolle übernommen werden.\n"
+"\n"
+"Wollen Sie die Übertragung fortsetzen?"
 
 #: MenuEntry
 msgid "Compare &HEAD revisions"
@@ -2705,7 +2720,7 @@ msgstr "Danksagung:"
 # ID:376,
 #: ID:376,
 msgid "Cu&t"
-msgstr "Ausschnei&den"
+msgstr "A&usschneiden"
 
 # Control-ID:1113,
 #: Control-ID:1113,
@@ -2939,6 +2954,17 @@ msgstr ""
 "%s,\n"
 "die in dieser Revision durchgeführt wurden, rückgängig machen? Die Vorgängerversionen werden rückwärts in Ihrer Arbeitskopie zusammengeführt."
 
+#: ID:99,
+#, c-format
+msgid ""
+"Do you want to make this working copy unversioned?\n"
+"This will remove all Subversion admin directories from\n"
+"%s!"
+msgstr ""
+"Wollen Sie diese Arbeitskopie aus der Versionskontrolle entfernen?\n"
+"Damit werden alle Subversion Verwaltungsverzeichnisse aus\n"
+"%s gelöscht!"
+
 # ID:76,
 #: ID:76,
 msgid "Do you want to proceed?"
@@ -2964,10 +2990,13 @@ msgstr "Wollen Sie die Eigenschaft %s rekursiv löschen?"
 msgid "Do you want to save your changes?"
 msgstr "Wollen Sie Ihre Änderungen speichern?"
 
-# Control-ID:65535,
 #: Control-ID:65535,
-msgid "Documentation - Simon Large"
-msgstr "Documentation - Simon Large"
+msgid ""
+"Documentation : Simon Large\n"
+"Code : Tobias Schäfer, Stefan Fuhrmann"
+msgstr ""
+"Dokumentation : Simon Large\n"
+"Code : Tobias Schäfer, Stefan Fuhrmann"
 
 # ID:73,#:
 # ID:80,
@@ -3373,7 +3402,7 @@ msgstr "Datei Patches"
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -3381,7 +3410,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Dateigröße:\t\t%s\n"
+"Dateigröße:\t\t%s (%s)\n"
 "Breite:\t\t\t%ld pixel\n"
 "Höhe:\t\t\t%ld pixel\n"
 "Horizontale Auflösung:\t%.1f dpi\n"
@@ -3394,7 +3423,7 @@ msgstr ""
 #: ID:8,
 #, c-format
 msgid ""
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -3402,7 +3431,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%\n"
 "\n"
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -3410,7 +3439,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Dateigröße:\t\t%s\n"
+"Dateigröße:\t\t%s (%s)\n"
 "Breite:\t\t\t%ld pixel\n"
 "Höhe:\t\t\t%ld pixel\n"
 "Horizontale Auflösung:\t%.1f dpi\n"
@@ -3418,7 +3447,7 @@ msgstr ""
 "Farbtiefe:\t\t%d bit\n"
 "Zoom:\t\t\t%d%%\n"
 "\n"
-"Dateigröße:\t\t%s\n"
+"Dateigröße:\t\t%s (%s)\n"
 "Breite:\t\t\t%ld pixel\n"
 "Höhe:\t\t\t%ld pixel\n"
 "Horizontale Auflösung:\t%.1f dpi\n"
@@ -3431,7 +3460,7 @@ msgstr ""
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -3439,7 +3468,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Dateigröße:\t\t%s\n"
+"Dateigröße:\t\t%s (%s)\n"
 "Breite:\t\t\t%ld pixel\n"
 "Höhe:\t\t\t%ld pixel\n"
 "Horizontale Auflösung:\t%.1f dpi\n"
@@ -3452,7 +3481,7 @@ msgstr ""
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -3460,7 +3489,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%\n"
 "\n"
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -3468,7 +3497,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Dateigröße:\t\t%s\n"
+"Dateigröße:\t\t%s (%s)\n"
 "Breite:\t\t\t%ld pixel\n"
 "Höhe:\t\t\t%ld pixel\n"
 "Horizontale Auflösung:\t%.1f dpi\n"
@@ -3476,7 +3505,7 @@ msgstr ""
 "Farbtiefe:\t\t%d bit\n"
 "Zoom:\t\t\t%d%%\n"
 "\n"
-"Dateigröße:\t\t%s\n"
+"Dateigröße:\t\t%s (%s)\n"
 "Breite:\t\t\t%ld pixel\n"
 "Höhe:\t\t\t%ld pixel\n"
 "Horizontale Auflösung:\t%.1f dpi\n"
@@ -3518,7 +3547,7 @@ msgid "Finished!"
 msgstr "Fertig!"
 
 #: MenuEntry
-msgid "Fit Images &together"
+msgid "Fit image &sizes"
 msgstr "Bildgrößen &angleichen"
 
 # Control-ID:1315,
@@ -3872,21 +3901,21 @@ msgstr "ID:32796:V C +A"
 msgid "ID:32809:V C +F"
 msgstr "ID:32809:V C +F"
 
-#. Accelerator Entry for Menu ID:32810; 'Fit Images &together'
+#. Accelerator Entry for Menu ID:32810; 'Fit image &sizes'
 #: Corresponding Menu ID:32810;
-#: 'Fit Images &together'
+#: 'Fit image &sizes'
 msgid "ID:32810:V   +T"
 msgstr "ID:32810:V   +T"
 
-#. Accelerator Entry for Menu ID:32814; '&Newest on top'
+#. Accelerator Entry for Menu ID:32814; 'Oldest on to&p'
 #: Corresponding Menu ID:32814;
-#: '&Newest on top'
+#: 'Oldest on to&p'
 msgid "ID:32814:V C +L"
 msgstr "ID:32814:V C +L"
 
-#. Accelerator Entry for Menu ID:32814; '&Newest on top'
+#. Accelerator Entry for Menu ID:32814; 'Oldest on to&p'
 #: Corresponding Menu ID:32814;
-#: '&Newest on top'
+#: 'Oldest on to&p'
 msgid "ID:32814:VA  +D"
 msgstr "ID:32814:VA  +D"
 
@@ -3926,6 +3955,7 @@ msgstr "ID:57603:V C +S"
 msgid "ID:57604:V CS+S"
 msgstr "ID:57604:V CS+S"
 
+#. Accelerator Entry for Menu ID:57634; ''
 #. Accelerator Entry for Menu ID:57634; ''
 #. Accelerator Entry for Menu ID:57634; '&Copy'
 #: Corresponding Menu ID:57634;
@@ -4731,6 +4761,16 @@ msgstr "Zusammenführen - TortoiseSVN"
 msgid "Merge depth:"
 msgstr "Rekursionstiefe:"
 
+# ID:76,
+#: ID:114,
+msgid "Merge revision to..."
+msgstr "Revision zusammenführen in..."
+
+# ID:76,
+#: ID:114,
+msgid "Merge revisions to..."
+msgstr "Revisionen zusammenführen in..."
+
 # ID:110,
 #: Control-ID:1377,
 msgid "Merge settings"
@@ -4746,15 +4786,8 @@ msgstr "Zusammengeführt"
 # ID:286,
 #: ID:286,
 #, c-format
-msgid "Merged revision %s from %s:\n"
-msgstr "Revision %s von %s zusammengeführt:\n"
-
-# ID:229,
-# ID:286,
-#: ID:286,
-#, c-format
-msgid "Merged revisions %s to %s from %s:\n"
-msgstr "Revisionen %s bis %s von %s zusammengeführt:\n"
+msgid "Merged revision(s) %s from %s:\n"
+msgstr "Revision(en) %s von %s zusammengeführt:\n"
 
 # ID:10,
 #: ID:10,
@@ -5038,6 +5071,17 @@ msgstr ""
 "Es wurden keine Dateien / Ordner modifiziert.\n"
 "Es sind keine Änderungen vorhanden, die rückgängig gemacht werden könnten."
 
+#: ID:239,
+msgid ""
+"No files to show with the current setting.\n"
+"Check one or more settings below to see unversioned, ignored and/or unmodified files.\n"
+"To see remote changes, click on \"Check Repository\""
+msgstr ""
+"Mit der aktuellen Einstellung werden keine Dateien angezeigt.\n"
+"Wählen Sie eine oder mehrere der untenstehenden Optionen, um\n"
+"unversionierte, ignorierte oder unmodifizierte Dateien zu sehen\n"
+"Änderungen im Projektarchiv werden erst nach \"Projektarchiv prüfen\" angezeigt."
+
 # ID:77,
 #: ID:77,
 msgid ""
@@ -5160,6 +5204,10 @@ msgstr "ÜB"
 #: Control-ID:65535,
 msgid "Older lines"
 msgstr "Ältere Zeilen"
+
+#: MenuEntry
+msgid "Oldest on to&p"
+msgstr "&Ältester nach oben"
 
 # ID:99,#:
 # Control-ID:1202,#:
@@ -6577,6 +6625,11 @@ msgstr "Skriptdatei auswählen"
 msgid "Select merge application"
 msgstr "Konflikteditor auswählen"
 
+# ID:78,
+#: ID:119,
+msgid "Select merge target"
+msgstr "Ziel auswählen"
+
 # ID:276,
 #: ID:276,
 msgid "Select revision range"
@@ -6739,8 +6792,8 @@ msgid ""
 "Show Inline-Diff word by word\n"
 "Inline diff word-wise"
 msgstr ""
-"Unterschiede in der Zeile\n"
-"Wort für Wort anzeigen."
+"Unterschiede in der Zeile Wort für Wort anzeigen\n"
+"Inline Diff wortweise"
 
 # Control-ID:1126,
 # Control-ID:1126,
@@ -7221,25 +7274,6 @@ msgstr "Objekt / Inhalt:"
 msgid "Text status"
 msgstr "Text Status"
 
-# ID:69,
-#: ID:69,
-#, c-format
-msgid ""
-"The File\n"
-"%s\n"
-"is not a valid text file!\n"
-"Note that UTF32 files are treated as binary too."
-msgstr ""
-"Die Datei\n"
-"%s\n"
-"ist keine gültige Textdatei!\n"
-"Beachten Sie, dass UTF32 Dateien auch als Binärdateien behandelt werden."
-
-# ID:80,
-#: ID:80,
-msgid "The Repository was successfully created."
-msgstr "Das Projektarchiv wurde erfolgreich erstellt."
-
 # ID:63,
 #: ID:63,
 msgid "The chunk size did not match the number of added/removed lines!"
@@ -7308,6 +7342,20 @@ msgstr ""
 "Die Datei\n"
 "%s\n"
 "existiert bereits! Möchten Sie sie wirklich überschreiben?"
+
+# ID:69,
+#: ID:69,
+#, c-format
+msgid ""
+"The file\n"
+"%s\n"
+"is not a valid text file!\n"
+"Note that UTF32 files are treated as binary too."
+msgstr ""
+"Die Datei\n"
+"%s\n"
+"ist keine gültige Textdatei!\n"
+"Beachten Sie, dass UTF32 Dateien als Binärdateien behandelt werden."
 
 # ID:145,
 # ID:145,
@@ -7510,6 +7558,11 @@ msgstr ""
 "TortoiseMerge hat herausgefunden, dass der Pfad\n"
 "<i>%s</i>\n"
 "besser übereinstimmt. Soll der gefundene Pfad verwendet werden?"
+
+# ID:80,
+#: ID:80,
+msgid "The repository was successfully created."
+msgstr "Das Projektarchiv wurde erfolgreich erstellt."
 
 # Control-ID:65535,
 #: Control-ID:65535,
@@ -7801,15 +7854,20 @@ msgid ""
 "/left:\"path to left picture\"\n"
 "/lefttitle:\"title to show for the left picture\"\n"
 "/right:\"path to right picture\"\n"
-"/righttitle:\"title to show for the right picture\""
+"/righttitle:\"title to show for the right picture\"\n"
+"/overlay\t\tto enable overlay mode\n"
+"/fit\t\tto fit the images sizes\n"
+"/showinfo\t\tto show the image info boxes"
 msgstr ""
 "TortoiseIDiff: Das Programm zum Vergleichen von Bildern\n"
 "\n"
-"Mögliche Kommandozeilenparameter sind:\n"
+"Kommandozeilenparameter sind:\n"
 "/left:\"Pfad zum linken Bild\"\n"
 "/lefttitle:\"Titel für linkes Bild\"\n"
 "/right:\"Pfad zum rechten Bild\"\n"
-"/righttitle:\"Titel für rechtes Bild\""
+"/righttitle:\"Titel für rechtes Bild\"/overlay\t\tAktiviert die Überlagerung\n"
+"/fit\t\tGleicht die Bildgrößen an\n"
+"/showinfo\t\tZeigt die Bildinformationen an"
 
 # ID:7,#:
 # ID:3585,#:
@@ -7902,6 +7960,10 @@ msgstr "Dateiänderungen gesamt:"
 #, c-format
 msgid "Transferring at %s"
 msgstr "Übertragung bei %s"
+
+#: MenuEntry
+msgid "Transparent &color..."
+msgstr "&Transparente Farbe..."
 
 # ID:251,
 #: ID:251,
@@ -8071,11 +8133,23 @@ msgstr "Entsperrt"
 msgid "Untitled"
 msgstr "Unbenannt"
 
+# Control-ID:1075,#:
+# Control-ID:1075,
+#: ID:146,
+msgid "Unversion"
+msgstr "Versionierung aufheben"
+
 # Control-ID:1313,
 # Control-ID:1313,
 #: Control-ID:1313,
 msgid "Unversioned files mark parent folder as modified"
 msgstr "Nicht versionierte Dateien markieren Elternordner als modifiziert"
+
+# ID:201,
+#: ID:286,
+#, c-format
+msgid "Unversioning %s"
+msgstr "Hebe Versionierung von %s auf"
 
 # Dlg-ID:152,
 #: Dlg-ID:152,
@@ -9021,6 +9095,20 @@ msgstr ""
 "Date, LastChangedDate\t\tDas Datum / die Zeit, zu der das Objekt zuletzt geändert wurde.\n"
 "Rev, LastChangedRevision\tDie letzte Revision, in der das Objekt geändert wurde.\n"
 "Id\t\t\t\tEine komprimierte Zusammenfassung der vier genannten Schlüsselworte."
+
+#: ID:576,
+msgid ""
+"svn:mergeinfo\n"
+"A newline separated list of merge tracking info. Each line consists of an absolute\n"
+"path followed by a colon and a list of comma separated revision numbers.\n"
+"For example\n"
+"/trunk:123-125,129"
+msgstr ""
+"svn:mergeinfo\n"
+"Eine durch Zeilenumbrüche getrennte Liste mit Informationen über die in diesem Pfad zusammengeführten Revisionen.\n"
+"Jede Zeile enthält einen absoluten Pfad, gefolgt von einem Doppelpunkt und einer kommaseparierten Liste von Revisionsnummern.\n"
+"Zum Beispiel\n"
+"/trunk:123-125,129"
 
 # ID:14,
 #: ID:576,

@@ -89,6 +89,14 @@ IDI_CANCELNORMAL        ICON                    "cancel-normal.ico"
 IDI_CANCELPRESSED       ICON                    "cancel-pressed.ico"
 IDI_LOGFILTER           ICON                    "logfilter.ico"
 IDI_FILTEREDIT          ICON                    "filteredit.ico"
+IDI_CHECKOUT_BKG        ICON                    "CheckoutBackground.ico"
+IDI_COPY_BKG            ICON                    "CopyBackground.ico"
+IDI_EXPORT_BKG          ICON                    "ExportBackground.ico"
+IDI_IMPORT_BKG          ICON                    "ImportBackground.ico"
+IDI_MERGE_BKG           ICON                    "MergeBackground.ico"
+IDI_RENAME_BKG          ICON                    "RenameBackground.ico"
+IDI_SWITCH_BKG          ICON                    "SwitchBackground.ico"
+IDI_UPDATE_BKG          ICON                    "UpdateBackground.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -165,7 +173,7 @@ BEGIN
     LTEXT           "Authors:",IDC_STATIC,14,68,54,8
     LTEXT           "Stefan Küng, Lübbe Onken",IDC_STATIC,68,68,258,8
     LTEXT           "Credits:",IDC_STATIC,14,80,54,8
-    LTEXT           "Documentation - Simon Large",IDC_STATIC,68,80,258,33
+    LTEXT           "Documentation : Simon Large\nCode : Tobias Schäfer, Stefan Fuhrmann",IDC_STATIC,68,80,258,33
     LTEXT           "Visit our website",IDC_WEBLINK,14,114,312,8
     LTEXT           "and support the developers",IDC_SUPPORTLINK,14,124,312,8
     GROUPBOX        "Version",IDC_VERSIONBOX,7,138,319,99
@@ -1822,7 +1830,7 @@ BEGIN
     BEGIN
         MENUITEM "Show &all revisions",         ID_VIEW_SHOWALLREVISIONS
         MENUITEM "&Group branches",             ID_VIEW_GROUPBRANCHES, CHECKED
-        MENUITEM "&Newest on top",              ID_VIEW_TOPDOWN
+        MENUITEM "Oldest on to&p",              ID_VIEW_TOPDOWN
         MENUITEM "&Show HEAD revisions",        ID_VIEW_SHOWHEAD
         MENUITEM "E&xact copy sources",         ID_VIEW_EXACTCOPYSOURCE
         MENUITEM "Split long &branches",        ID_VIEW_SPLITBRANCHES
@@ -1864,9 +1872,10 @@ IDR_ACC_LOGDLG ACCELERATORS
 BEGIN
     "F",            ID_LOGDLG_FIND,         VIRTKEY, CONTROL, NOINVERT
     VK_F3,          ID_LOGDLG_FIND,         VIRTKEY, NOINVERT
-    VK_F5,          ID_LOGDLG_REFRESH,      VIRTKEY, NOINVERT
-    "L",            ID_LOGDLG_FOCUSFILTER,  VIRTKEY, CONTROL, NOINVERT
     "D",            ID_LOGDLG_FOCUSFILTER,  VIRTKEY, ALT, NOINVERT
+    "L",            ID_LOGDLG_FOCUSFILTER,  VIRTKEY, CONTROL, NOINVERT
+    VK_F5,          ID_LOGDLG_REFRESH,      VIRTKEY, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
 END
 
 IDR_ACC_REVISIONGRAPH ACCELERATORS 
@@ -2036,7 +2045,7 @@ BEGIN
     IDS_PROC_SETTINGS_TITLE "Settings - TortoiseSVN"
     IDS_PROC_OVERWRITE_CONFIRM 
                             "The file\n%s\nalready exists! Do you want to overwrite it?"
-    IDS_PROC_REPOCREATEFINISHED "The Repository was successfully created."
+    IDS_PROC_REPOCREATEFINISHED "The repository was successfully created."
     IDS_PROC_RELOCATEFINISHED "Working copy relocated to\n%s"
     IDS_PROC_MOVING         "Moving..."
     IDS_PROC_RELOCATING     "Relocating..."
@@ -2143,6 +2152,7 @@ BEGIN
     IDS_LOG_REVERTREV_ERROR "Unable to reconstruct working copy path!\nThis can happen if the file has been renamed.\nPlease start the log dialog on this specific file alone and then revert the changes\nfrom the top pane in the log dialog."
     IDS_LOG_STOPONCOPY_HINT "For complete history deselect ""Stop on copy/rename"""
     IDS_LOG_SAVEFOLDERTOHINT "Select folder to save the selected files to"
+    IDS_LOG_MERGETO         "Select merge target"
     IDS_PROGRESSGETFILE     "Getting file %s"
     IDS_PROGRESSREVISION    "Revision %d"
     IDS_PROGRESSWAIT        "Please wait..."
@@ -2314,6 +2324,7 @@ BEGIN
                             "Only numbers (optionally separated by commas)\nare allowed!"
     IDS_COMMITDLG_NOISSUEWARNING 
                             "You haven't entered an issue number!\nAre you sure you want to commit without an issue number?"
+	IDS_COMMITDLG_UNVERSIONEDFOLDERWARNING "Committing an unversioned folder will not recursively add its child items!\nYou might want to add these folders recursively by using the ""Add..."" context menu item.\n\nAre you sure that you want to continue the commit?"
 END
 
 STRINGTABLE 
@@ -2484,6 +2495,7 @@ BEGIN
     IDS_STATGRAPH_COMMITSBYDATEXMONTH "month"
     IDS_STATGRAPH_COMMITSBYDATEXQUARTER "quarter of year"
     IDS_STATGRAPH_COMMITSBYDATEXYEAR "year"
+	IDS_STATGRAPH_EMPTYAUTHOR "(unknown)"
 END
 
 STRINGTABLE 
@@ -2533,6 +2545,7 @@ END
 STRINGTABLE 
 BEGIN
     IDS_STATUSLIST_CONTEXT_ADD "Add"
+	IDS_STATUSLIST_CONTEXT_ADD_RECURSIVE "Add..."
     IDS_STATUSLIST_CONTEXT_EXPLORE "Explore to"
     IDS_STATUSLIST_CONTEXT_RESOLVED "Resolved"
     IDS_STATUSLIST_CONTEXT_COMMIT "Commit"
@@ -2663,6 +2676,8 @@ BEGIN
     IDS_LOG_POPUP_BLAME     "Blame"
     IDS_LOG_POPUP_GNUDIFF_CH "Show changes as &unified diff"
     IDS_LOG_POPUP_GETMERGELOGS "Get merge logs"
+    IDS_LOG_POPUP_MERGEREV  "Merge revision to..."
+    IDS_LOG_POPUP_MERGEREVS "Merge revisions to..."
 END
 
 STRINGTABLE 
@@ -2865,6 +2880,7 @@ BEGIN
     IDS_PROC_DIFFLABEL      "With URL:"
     IDS_PROC_CLEANUP_INFO1  "Cleaning up."
     IDS_PROC_CLEANUP_INFO2  "Please wait..."
+    IDS_PROC_UNVERSION      "Unversion"
 END
 
 STRINGTABLE 
@@ -2887,6 +2903,8 @@ BEGIN
     IDS_PROC_OVERWRITEEXPORT_OVERWRITE "Overwrite"
     IDS_PROC_OVERWRITEEXPORT_RENAME "Auto Rename"
     IDS_PROC_OVERWRITEEXPORT_CANCEL "Cancel"
+    IDS_PROC_EXPORTUNVERSION 
+                            "Do you want to make this working copy unversioned?\nThis will remove all Subversion admin directories from\n%s!"
 END
 
 STRINGTABLE 
@@ -3020,9 +3038,9 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_SVNPROGRESS_MERGELOGMSGONE "Merged revision %s from %s:\n"
-    IDS_SVNPROGRESS_MERGELOGMSGMULTIPLE "Merged revisions %s to %s from %s:\n"
+    IDS_SVNPROGRESS_MERGELOGRANGE "Merged revision(s) %s from %s:\n"
     IDS_SVNPROGRESS_MERGELOGMSG "%s\nr%s | %s\n\n%s\n"
+    IDS_SVNPROGRESS_UNVERSION "Unversioning %s"
 END
 
 STRINGTABLE 
@@ -3034,6 +3052,7 @@ BEGIN
     IDS_PROP_TT_MIMETYPE    "svn:mime-type\nThe mime type of the file. Used to determine whether to merge the file, and how to serve it from Apache.\nA mime type beginning with 'text/' (or an absent mime type) is treated as text.\nAnything else is treated as binary."
     IDS_PROP_TT_EXTERNALS   "svn:externals\nA newline separated list of module specifiers, each of which consists of\na relative directory path, optional revision flags, and a URL. For example\nfoo\t\thttp://example.com/repos/zig\nfoo/bar -r 1234\thttp://example.com/repos/zag"
     IDS_PROP_TT_NEEDSLOCK   "svn:needs-lock\nSet this to any value (e.g. '*') to enforce locking for this file.\nThe file will be set to read-only when checked out or updated,\nindicating that a user must acquire a lock on the file\nbefore they can edit it and commit changes."
+    IDS_PROP_TT_MERGEINFO   "svn:mergeinfo\nA newline separated list of merge tracking info. Each line consists of an absolute\npath followed by a colon and a list of comma separated revision numbers.\nFor example\n/trunk:123-125,129"
 END
 
 STRINGTABLE 
@@ -3103,6 +3122,12 @@ BEGIN
     IDS_EDITCONFLICT_REASONINFO_DELETED "it is already deleted."
     IDS_EDITCONFLICT_REASONINFO_MISSING "it does not exist."
     IDS_EDITCONFLICT_REASONINFO_UNVERSIONED "it is unversioned."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_REPOSTATUS_EMPTYFILELIST 
+                            "No files to show with the current setting.\nCheck one or more settings below to see unversioned, ignored and/or unmodified files.\nTo see remote changes, click on ""Check Repository"""
 END
 
 #endif    // English (U.S.) resources

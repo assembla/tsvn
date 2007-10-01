@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -45,6 +45,7 @@
 #include "SVNAdminDir.h"
 #include ".\svnstatuslistctrl.h"
 #include "DropFiles.h"
+#include "AddDlg.h"
 #include "EditPropertiesDlg.h"
 #include "CreateChangelistDlg.h"
 
@@ -88,9 +89,10 @@ const UINT CSVNStatusListCtrl::SVNSLNM_CHECKCHANGED
 #define IDSVNLC_CREATEIGNORECS	29
 #define IDSVNLC_CHECKGROUP		30
 #define IDSVNLC_UNCHECKGROUP	31
+#define IDSVNLC_ADD_RECURSIVE   32
 // the IDSVNLC_MOVETOCS *must* be the last index, because it contains a dynamic submenu where 
 // the submenu items get command ID's sequent to this number
-#define IDSVNLC_MOVETOCS		32
+#define IDSVNLC_MOVETOCS		33
 
 
 BEGIN_MESSAGE_MAP(CSVNStatusListCtrl, CListCtrl)
@@ -1639,6 +1641,7 @@ void CSVNStatusListCtrl::OnHdnItemclick(NMHDR *pNMHDR, LRESULT *pResult)
 	else
 		m_bAscending = TRUE;
 	m_nSortedColumn = phdr->iItem;
+	m_mapFilenameToChecked.clear();
 	Sort();
 
 	CHeaderCtrl * pHeader = GetHeaderCtrl();
@@ -2329,8 +2332,16 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 					{
 						if (m_dwContextMenus & SVNSLC_POPADD)
 						{
-							temp.LoadString(IDS_STATUSLIST_CONTEXT_ADD);
-							popup.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_ADD, temp);
+							if ( entry->IsFolder() )
+							{
+								temp.LoadString(IDS_STATUSLIST_CONTEXT_ADD_RECURSIVE);
+								popup.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_ADD_RECURSIVE, temp);
+							}
+							else
+							{
+								temp.LoadString(IDS_STATUSLIST_CONTEXT_ADD);
+								popup.AppendMenu(MF_STRING | MF_ENABLED, IDSVNLC_ADD, temp);
+							}
 						}
 					}
 					if ((wcStatus == svn_wc_status_unversioned))
@@ -2573,8 +2584,20 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 							targetList.SortByPathname(true);
 
 							SVN svn;
-							CTSVNPathList delList = targetList;
+
+							// put all reverted files in the trashbin, except the ones with 'added'
+							// status because they are not restored by the revert.
+							CTSVNPathList delList;
+							POSITION pos = GetFirstSelectedItemPosition();
+							int index;
+							while ((index = GetNextSelectedItem(pos)) >= 0)
+							{
+								FileEntry * entry = GetListEntry(index);
+								if (entry->status != svn_wc_status_added)
+									delList.AddPath(entry->GetPath());
+							}
 							delList.DeleteAllFiles(true);
+
 							if (!svn.Revert(targetList, FALSE))
 							{
 								CMessageBox::Show(this->m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
@@ -2659,7 +2682,9 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 						CTSVNPathList targetList;
 						FillListOfSelectedItemPaths(targetList);
 						CSVNProgressDlg dlg;
-						dlg.SetParams(CSVNProgressDlg::SVNProgress_Update, 0, targetList);
+						dlg.SetCommand(CSVNProgressDlg::SVNProgress_Update);
+						dlg.SetPathList(targetList);
+						dlg.SetRevision(SVNRev::REV_HEAD);
 						dlg.DoModal();
 					}
 					break;
@@ -3255,7 +3280,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 
 						ProjectProperties props;
 						props.ReadPropsPathList(itemsToAdd);
-						if (svn.Add(itemsToAdd, &props, FALSE, TRUE, TRUE, TRUE))
+						if (svn.Add(itemsToAdd, &props, svn_depth_empty, TRUE, TRUE, TRUE))
 						{
 							// The add went ok, but we now need to run through the selected items again
 							// and update their status
@@ -3279,6 +3304,35 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 						NotifyCheck();
 					}
 					break;
+				case IDSVNLC_ADD_RECURSIVE:
+					{
+						CTSVNPathList itemsToAdd;
+						FillListOfSelectedItemPaths(itemsToAdd);
+
+						CAddDlg dlg;
+						dlg.m_pathList = itemsToAdd;
+						if (dlg.DoModal() == IDOK)
+						{
+							if (dlg.m_pathList.GetCount() == 0)
+								break;
+							CSVNProgressDlg progDlg;
+							progDlg.SetCommand(CSVNProgressDlg::SVNProgress_Add);
+							progDlg.SetPathList(dlg.m_pathList);
+							ProjectProperties props;
+							props.ReadPropsPathList(dlg.m_pathList);
+							progDlg.SetProjectProperties(props);
+							progDlg.SetItemCount(dlg.m_pathList.GetCount());
+							progDlg.DoModal();
+
+							// refresh!
+							CWnd* pParent = GetParent();
+							if (NULL != pParent && NULL != pParent->GetSafeHwnd())
+							{
+								pParent->SendMessage(SVNSLNM_NEEDSREFRESH);
+							}
+						}
+					}
+					break;
 				case IDSVNLC_LOCK:
 				{
 					CTSVNPathList itemsToLock;
@@ -3295,7 +3349,10 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 					if (inpDlg.DoModal()==IDOK)
 					{
 						CSVNProgressDlg progDlg;
-						progDlg.SetParams(CSVNProgressDlg::SVNProgress_Lock, inpDlg.m_iCheck ? ProgOptLockForce : 0, itemsToLock, CString(), inpDlg.m_sInputText);
+						progDlg.SetCommand(CSVNProgressDlg::SVNProgress_Lock);
+						progDlg.SetOptions(inpDlg.m_iCheck ? ProgOptLockForce : ProgOptNone);
+						progDlg.SetPathList(itemsToLock);
+						progDlg.SetCommitMessage(inpDlg.m_sInputText);
 						progDlg.DoModal();
 						// refresh!
 						CWnd* pParent = GetParent();
@@ -3313,7 +3370,9 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 					CTSVNPathList itemsToUnlock;
 					FillListOfSelectedItemPaths(itemsToUnlock);
 					CSVNProgressDlg progDlg;
-					progDlg.SetParams(CSVNProgressDlg::SVNProgress_Unlock, bForce ? ProgOptLockForce : 0, itemsToUnlock);
+					progDlg.SetCommand(CSVNProgressDlg::SVNProgress_Unlock);
+					progDlg.SetOptions(bForce ? ProgOptLockForce : ProgOptNone);
+					progDlg.SetPathList(itemsToUnlock);
 					progDlg.DoModal();
 					// refresh!
 					CWnd* pParent = GetParent();
@@ -3415,7 +3474,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 								SetItemGroup(index, 0);
 							}
 							// TODO: Should we go through all entries here and check if we also could
-							// remove the changeset from m_changelists ?
+							// remove the changelist from m_changelists ?
 						}
 						else
 						{
@@ -3589,7 +3648,7 @@ void CSVNStatusListCtrl::CreateChangeList(const CString& name)
 		{
 			// there are no groups defined yet.
 			// before we can add our new group, we must assign all entries
-			// to the null-group (not assigned to a changeset)
+			// to the null-group (not assigned to a changelist)
 			for (int ii = 0; ii < GetItemCount(); ++ii)
 				SetItemGroup(ii, 0);
 		}
@@ -4412,7 +4471,7 @@ void CSVNStatusListCtrl::OnPaint()
 			memDC.SetBkColor(clrTextBk);
 			memDC.FillSolidRect(rc, clrTextBk);
 			rc.top += 10;
-			CGdiObject * oldfont = memDC.SelectStockObject(ANSI_VAR_FONT);
+			CGdiObject * oldfont = memDC.SelectStockObject(DEFAULT_GUI_FONT);
 			memDC.DrawText(str, rc, DT_CENTER | DT_VCENTER |
 				DT_WORDBREAK | DT_NOPREFIX | DT_NOCLIP);
 			memDC.SelectObject(oldfont);

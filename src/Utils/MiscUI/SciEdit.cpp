@@ -389,6 +389,28 @@ void CSciEdit::SetAutoCompletionList(const std::set<CString>& list, const TCHAR 
 	m_separator = separator;
 }
 
+BOOL CSciEdit::IsMisspelled(const CString& sWord)
+{
+	// convert the string from the control to the encoding of the spell checker module.
+	CStringA sWordA;
+	if (m_spellcodepage)
+	{
+		char * buf;
+		buf = sWordA.GetBuffer(sWord.GetLength()*4 + 1);
+		int lengthIncTerminator =
+			WideCharToMultiByte(m_spellcodepage, 0, sWord, -1, buf, sWord.GetLength()*4, NULL, NULL);
+		sWordA.ReleaseBuffer(lengthIncTerminator-1);
+	}
+	else
+		sWordA = CStringA(sWord);
+	
+	return
+		!_istdigit(sWord.GetAt(0)) &&
+		(m_autolist.find(sWord) == m_autolist.end()) && // check if the word is in our autocompletion list
+		!pChecker->spell(sWordA) &&
+		!m_personalDict.FindWord(sWord);
+}
+
 void CSciEdit::CheckSpelling()
 {
 	if (pChecker == NULL)
@@ -415,42 +437,50 @@ void CSciEdit::CheckSpelling()
 			continue;
 		}
 		ATLASSERT(textrange.chrg.cpMax >= textrange.chrg.cpMin);
-		char * textbuffer = new char[textrange.chrg.cpMax - textrange.chrg.cpMin + 1];
+		char * textbuffer = new char[textrange.chrg.cpMax - textrange.chrg.cpMin + 2];
 		textrange.lpstrText = textbuffer;
+		textrange.chrg.cpMax++;
 		Call(SCI_GETTEXTRANGE, 0, (LPARAM)&textrange);
+		int len = strlen(textrange.lpstrText);
+		if (len && textrange.lpstrText[len - 1] == '.')
+		{
+			// Try to ignore file names from the autolist.
+			// Do do this, for each word ending with '.' we extract next word and check
+			// whether the combined string is present in autolist. 
+			TEXTRANGEA twoWords;
+			twoWords.chrg.cpMin = textrange.chrg.cpMin;
+			twoWords.chrg.cpMax = Call(SCI_WORDENDPOSITION, textrange.chrg.cpMax + 1, TRUE);
+			twoWords.lpstrText = new char[twoWords.chrg.cpMax - twoWords.chrg.cpMin + 1];
+			Call(SCI_GETTEXTRANGE, 0, (LPARAM)&twoWords);
+			CString sWord = StringFromControl(twoWords.lpstrText);
+			delete twoWords.lpstrText;
+			if (m_autolist.find(sWord) != m_autolist.end())
+			{
+				//mark word as correct (remove the squiggle line)
+				Call(SCI_STARTSTYLING, twoWords.chrg.cpMin, INDICS_MASK);
+				Call(SCI_SETSTYLING, twoWords.chrg.cpMax - twoWords.chrg.cpMin, 0);
+				textrange.chrg.cpMax = twoWords.chrg.cpMax;
+				delete textbuffer;
+				continue;
+			}
+		}
+		textrange.lpstrText[len - 1] = 0;
+		textrange.chrg.cpMax--;
 		if (strlen(textrange.lpstrText) > 0)
 		{
 			CString sWord = StringFromControl(textrange.lpstrText);
-			// convert the string from the control to the encoding of the spell checker
-			// module.
-			CStringA sWordA;
-			if (m_spellcodepage)
-			{
-				char * buf;
-				buf = sWordA.GetBuffer(sWord.GetLength()*4 + 1);
-				int lengthIncTerminator = WideCharToMultiByte(m_spellcodepage, 0, sWord, -1, buf, sWord.GetLength()*4, NULL, NULL);
-				sWordA.ReleaseBuffer(lengthIncTerminator-1);
-			}
-			else
-				sWordA = CStringA(sWord);
-			// first check if the word is in our autocompletion list
-			if (((m_autolist.find(sWord) == m_autolist.end())&&(!pChecker->spell(sWordA)))&&
-				(!_istdigit(sWord.GetAt(0)))&&(!m_personalDict.FindWord(sWord)))
+			if (IsMisspelled(sWord))
 			{
 				//mark word as misspelled
 				Call(SCI_STARTSTYLING, textrange.chrg.cpMin, INDICS_MASK);
-				Call(SCI_SETSTYLING, textrange.chrg.cpMax - textrange.chrg.cpMin, INDIC1_MASK);	
+				Call(SCI_SETSTYLING, textrange.chrg.cpMax - textrange.chrg.cpMin, INDIC1_MASK);
 			}
 			else
 			{
 				//mark word as correct (remove the squiggle line)
 				Call(SCI_STARTSTYLING, textrange.chrg.cpMin, INDICS_MASK);
-				Call(SCI_SETSTYLING, textrange.chrg.cpMax - textrange.chrg.cpMin, 0);			
+				Call(SCI_SETSTYLING, textrange.chrg.cpMax - textrange.chrg.cpMin, 0);
 			}
-		}
-		else
-		{
-			textrange.chrg.cpMin = textrange.chrg.cpMax;
 		}
 		delete textbuffer;
 	}
@@ -485,14 +515,14 @@ void CSciEdit::SuggestSpellingAlternatives()
 
 }
 
-void CSciEdit::DoAutoCompletion()
+void CSciEdit::DoAutoCompletion(int nMinPrefixLength)
 {
 	if (m_autolist.size()==0)
 		return;
 	if (Call(SCI_AUTOCACTIVE))
 		return;
 	CString word = GetWordUnderCursor();
-	if (word.GetLength() < 3)
+	if (word.GetLength() < nMinPrefixLength)
 		return;		//don't autocomplete yet, word is too short
 	int pos = Call(SCI_GETCURRENTPOS);
 	if (pos != Call(SCI_WORDENDPOSITION, pos, TRUE))
@@ -539,7 +569,7 @@ BOOL CSciEdit::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT
 				Call(SCI_DELETEBACK);
 			else
 			{
-				DoAutoCompletion();
+				DoAutoCompletion(3);
 			}
 			return TRUE;
 			break;
@@ -566,40 +596,52 @@ void CSciEdit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	switch (nChar)
 	{
-	case (VK_TAB):
-		{
-			if (GetKeyState(VK_CONTROL)&0x8000)
-			{
-				//Ctrl-Tab was pressed, this means we should provide the user with
-				//a list of possible spell checking alternatives to the word under
-				//the cursor
-				SuggestSpellingAlternatives();
-				return;
-			}
-			else if (!Call(SCI_AUTOCACTIVE))
-			{
-				::PostMessage(GetParent()->GetSafeHwnd(), WM_NEXTDLGCTL, GetKeyState(VK_SHIFT)&0x8000, 0);
-				return;
-			}
-		}
-		break;
 	case (VK_ESCAPE):
 		{
 			if ((Call(SCI_AUTOCACTIVE)==0)&&(Call(SCI_CALLTIPACTIVE)==0))
 				::SendMessage(GetParent()->GetSafeHwnd(), WM_CLOSE, 0, 0);
 		}
 		break;
-	case (VK_SPACE):
-		{
-			if ((GetKeyState(VK_CONTROL)&0x8000)&&(GetKeyState(VK_SHIFT)&0x8000))
-			{
-				DoAutoCompletion();
-				return;
-			}
-		}
-		break;
 	}
 	CWnd::OnKeyDown(nChar, nRepCnt, nFlags);
+}
+
+BOOL CSciEdit::PreTranslateMessage(MSG* pMsg)
+{
+	if (pMsg->message == WM_KEYDOWN)
+	{
+		switch (pMsg->wParam)
+		{
+		case VK_SPACE:
+			{
+				if (GetKeyState(VK_CONTROL) & 0x8000)
+				{
+					DoAutoCompletion(1);
+					return TRUE;
+				}
+			}
+			break;
+		case VK_TAB:
+			// The TAB cannot be handled in OnKeyDown because it is too late by then.
+			{
+				if (GetKeyState(VK_CONTROL)&0x8000)
+				{
+					//Ctrl-Tab was pressed, this means we should provide the user with
+					//a list of possible spell checking alternatives to the word under
+					//the cursor
+					SuggestSpellingAlternatives();
+					return TRUE;
+				}
+				else if (!Call(SCI_AUTOCACTIVE))
+				{
+					::PostMessage(GetParent()->GetSafeHwnd(), WM_NEXTDLGCTL, GetKeyState(VK_SHIFT)&0x8000, 0);
+					return TRUE;
+				}
+			}
+			break;
+		}
+	}
+	return CWnd::PreTranslateMessage(pMsg);
 }
 
 void CSciEdit::OnContextMenu(CWnd* /*pWnd*/, CPoint point)

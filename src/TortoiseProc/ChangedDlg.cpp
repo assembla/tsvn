@@ -79,6 +79,7 @@ BOOL CChangedDlg::OnInitDialog()
 						SVNSLC_POPALL, false);
 	m_FileListCtrl.SetCancelBool(&m_bCanceled);
 	m_FileListCtrl.SetBackgroundImage(IDI_CFM_BKG);
+	m_FileListCtrl.SetEmptyString(IDS_REPOSTATUS_EMPTYFILELIST);
 	
 	AdjustControlSize(IDC_SHOWUNVERSIONED);
 	AdjustControlSize(IDC_SHOWUNMODIFIED);
@@ -143,9 +144,7 @@ UINT CChangedDlg::ChangedStatusThread()
 	DialogEnableWindow(IDC_SHOWUNMODIFIED, TRUE);
 	DialogEnableWindow(IDC_SHOWIGNORED, TRUE);
 	InterlockedExchange(&m_bBlock, FALSE);
-	POINT pt;
-	GetCursorPos(&pt);
-	SetCursorPos(pt.x, pt.y);
+	RefreshCursor();
 	return 0;
 }
 

@@ -27,7 +27,7 @@ CViewData::~CViewData(void)
 {
 }
 
-void CViewData::AddData(const CString& sLine, DiffStates state, int linenumber, CFileTextLines::LineEndings ending)
+void CViewData::AddData(const CString& sLine, DiffStates state, int linenumber, EOL ending)
 {
 	viewdata data;
 	data.sLine = sLine;
@@ -42,7 +42,7 @@ void CViewData::AddData(const viewdata& data)
 	return m_data.push_back(data);
 }
 
-void CViewData::InsertData(int index, const CString& sLine, DiffStates state, int linenumber, CFileTextLines::LineEndings ending)
+void CViewData::InsertData(int index, const CString& sLine, DiffStates state, int linenumber, EOL ending)
 {
 	viewdata data;
 	data.sLine = sLine;

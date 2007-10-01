@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2006 - Stefan Kueng
+// Copyright (C) 2006-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,10 +29,6 @@
  *
  * Handles unified diff files, parses them and also is able to
  * apply those diff files.
- *
- * \todo enhance the parser to work with other diff files than
- * those created by subversion clients.
- * \todo rewrite the parser to use regular expressions
  */
 class CPatch
 {
@@ -73,6 +69,7 @@ protected:
 		LONG					lAddLength;
 		CStdCStringArray		arLines;
 		CStdDWORDArray			arLinesStates;
+		std::vector<EOL>		arEOLs;
 	};
 
 	struct Chunks

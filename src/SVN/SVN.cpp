@@ -397,7 +397,7 @@ BOOL SVN::Revert(const CTSVNPathList& pathlist, BOOL recurse)
 }
 
 
-BOOL SVN::Add(const CTSVNPathList& pathList, ProjectProperties * props, BOOL recurse, BOOL force, BOOL no_ignore, BOOL addparents)
+BOOL SVN::Add(const CTSVNPathList& pathList, ProjectProperties * props, svn_depth_t depth, BOOL force, BOOL no_ignore, BOOL addparents)
 {
 	// the add command should use the mime-type file
 	const char *mimetypes_file;
@@ -426,7 +426,7 @@ BOOL SVN::Add(const CTSVNPathList& pathList, ProjectProperties * props, BOOL rec
 			return FALSE;
 		}
 		SVNPool subpool(pool);
-		Err = svn_client_add4 (pathList[nItem].GetSVNApiPath(subpool), recurse, force, no_ignore, addparents, m_pctx, subpool);
+		Err = svn_client_add4 (pathList[nItem].GetSVNApiPath(subpool), depth, force, no_ignore, addparents, m_pctx, subpool);
 		if(Err != NULL)
 		{
 			return FALSE;
@@ -535,7 +535,7 @@ svn_revnum_t SVN::Commit(const CTSVNPathList& pathlist, CString message,
 
 BOOL SVN::Copy(const CTSVNPathList& srcPathList, const CTSVNPath& destPath, 
 			   SVNRev revision, SVNRev pegrev, CString logmsg, bool copy_as_child, 
-			   bool make_parents)
+			   bool make_parents, bool withMergeHistory)
 {
 	SVNPool subpool(pool);
 
@@ -551,6 +551,7 @@ BOOL SVN::Copy(const CTSVNPathList& srcPathList, const CTSVNPath& destPath,
 							destPath.GetSVNApiPath(subpool),
 							copy_as_child,
 							make_parents,
+							withMergeHistory,
 							m_pctx,
 							subpool);
 	if(Err != NULL)
@@ -579,7 +580,8 @@ BOOL SVN::Copy(const CTSVNPathList& srcPathList, const CTSVNPath& destPath,
 
 BOOL SVN::Move(const CTSVNPathList& srcPathList, const CTSVNPath& destPath, 
 			   BOOL force, CString message /* = _T("")*/, 
-			   bool move_as_child /* = false*/, bool make_parents /* = false */)
+			   bool move_as_child /* = false*/, bool make_parents /* = false */,
+			   bool withMergeHistory /* = true */)
 {
 	SVNPool subpool(pool);
 
@@ -593,6 +595,7 @@ BOOL SVN::Move(const CTSVNPathList& srcPathList, const CTSVNPath& destPath,
 							force,
 							move_as_child,
 							make_parents,
+							withMergeHistory,
 							m_pctx,
 							subpool);
 	if(Err != NULL)
@@ -1199,7 +1202,7 @@ BOOL SVN::GetLogWithMergeInfo(const CTSVNPathList& pathlist, SVNRev revisionPeg,
 							TRUE,			// discover changed paths
 							strict,
 							TRUE,			// include merged revisions
-							FALSE,			// omit log messages
+							NULL,			// receive all rev props
 							logMergeReceiver,
 							(void *)this, m_pctx, localpool);
 
@@ -1212,6 +1215,9 @@ BOOL SVN::GetLogWithMergeInfo(const CTSVNPathList& pathlist, SVNRev revisionPeg,
 
 svn_error_t * SVN::logMergeReceiver(void* baton, svn_log_entry_t* log_entry, apr_pool_t* pool)
 {
+	const char * author = NULL;
+	const char * date = NULL;
+	const char * message = NULL;
 	svn_error_t * error = NULL;
 	TCHAR date_native[SVN_DATE_BUFFER] = {0};
 	CString author_native;
@@ -1221,14 +1227,18 @@ svn_error_t * SVN::logMergeReceiver(void* baton, svn_log_entry_t* log_entry, apr
 	if (log_entry == NULL)
 		return SVN_NO_ERROR;
 
+	svn_compat_log_revprops_out(&author, &date, &message, log_entry->revprops);
+
 	SVN * svn = (SVN *)baton;
-	author_native = CUnicodeUtils::GetUnicode(log_entry->author);
+	if (author)
+		author_native = CUnicodeUtils::GetUnicode(author);
 	apr_time_t time_temp = NULL;
 
-	if (log_entry->date && log_entry->date[0])
+
+	if (date && date[0])
 	{
 		//Convert date to a format for humans.
-		error = svn_time_from_cstring (&time_temp, log_entry->date, pool);
+		error = svn_time_from_cstring (&time_temp, date, pool);
 		if (error)
 			return error;
 
@@ -1237,10 +1247,10 @@ svn_error_t * SVN::logMergeReceiver(void* baton, svn_log_entry_t* log_entry, apr
 	else
 		_tcscat_s(date_native, SVN_DATE_BUFFER, _T("(no date)"));
 
-	if (log_entry->message == NULL)
-		log_entry->message = "";
+	if (message == NULL)
+		message = "";
 
-	msg_native = CUnicodeUtils::GetUnicode(log_entry->message);
+	msg_native = CUnicodeUtils::GetUnicode(message);
 	int filechanges = 0;
 	BOOL copies = FALSE;
 	std::auto_ptr<LogChangedPathArray> arChangedPaths (new LogChangedPathArray);
@@ -1949,8 +1959,7 @@ BOOL SVN::IsBDBRepository(CString url)
 
 CString SVN::GetRepositoryRoot(const CTSVNPath& url)
 {
-	const char * returl;
-	svn_ra_session_t *ra_session;
+	const char * returl = NULL;
 
 	SVNPool localpool(pool);
 	svn_error_clear(Err);
@@ -1975,17 +1984,12 @@ CString SVN::GetRepositoryRoot(const CTSVNPath& url)
     }
     else
     {
-	    /* use subpool to create a temporary RA session */
-	    Err = svn_client_open_ra_session (&ra_session, goodurl, m_pctx, localpool);
-	    if (Err)
-		    return _T("");
-    	
-	    Err = svn_ra_get_repos_root(ra_session, &returl, localpool);
-	    if (Err)
-		    return _T("");
+	Err = svn_client_root_url_from_path(&returl, goodurl, m_pctx, pool);
+	if (Err)
+		return _T("");
 
-    	return CString(returl);
-    }
+	return CString(returl);
+}
 }
 
 CString SVN::GetRepositoryRootAndUUID(const CTSVNPath& url, CString& sUUID)
@@ -2090,21 +2094,21 @@ BOOL SVN::GetRootAndHead(const CTSVNPath& path, CTSVNPath& url, svn_revnum_t& re
     {
         // non-cached access
 
-    	/* use subpool to create a temporary RA session */
+	/* use subpool to create a temporary RA session */
 
-	    Err = svn_client_open_ra_session (&ra_session, urla, m_pctx, localpool);
-	    if (Err)
-		    return FALSE;
+	Err = svn_client_open_ra_session (&ra_session, urla, m_pctx, localpool);
+	if (Err)
+		return FALSE;
 
-	    Err = svn_ra_get_latest_revnum(ra_session, &rev, localpool);
-	    if (Err)
-		    return FALSE;
+	Err = svn_ra_get_latest_revnum(ra_session, &rev, localpool);
+	if (Err)
+		return FALSE;
 
-	    Err = svn_ra_get_repos_root(ra_session, &returl, localpool);
-	    if (Err)
-		    return FALSE;
-    		
-	    url.SetFromSVN(CUnicodeUtils::GetUnicode(returl));
+	Err = svn_ra_get_repos_root(ra_session, &returl, localpool);
+	if (Err)
+		return FALSE;
+		
+	url.SetFromSVN(CUnicodeUtils::GetUnicode(returl));
     }
 	
 	return TRUE;

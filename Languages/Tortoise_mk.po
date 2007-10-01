@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-09-03 08:44+0100\n"
+"PO-Revision-Date: 2007-09-27 15:18+0100\n"
 "Last-Translator: Срѓан Стокиќ <srdjan.stokic@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -554,8 +554,8 @@ msgid "&Limit search to modified lines"
 msgstr "&Ограничи пребарување на изменетите линии"
 
 #: MenuEntry
-msgid "&Link images together"
-msgstr "&Сврзи ги сликите заедно"
+msgid "&Link image positions"
+msgstr "&Сврзи ги позициите на сликите"
 
 #: Control-ID:1172,
 msgid "&List View"
@@ -598,10 +598,6 @@ msgstr "&Мрежни дискови"
 #: Control-ID:65535,
 msgid "&New "
 msgstr "&Ново"
-
-#: MenuEntry
-msgid "&Newest on top"
-msgstr "&Најново на врвот"
 
 #: ID:115,#:
 #: Control-ID:1208,
@@ -671,7 +667,7 @@ msgid "&Rename"
 msgstr "&Преименувај"
 
 #: Control-ID:1316,
-msgid "&Reopen commit dialog after a commit failed"
+msgid "&Reopen commit and branch/tag dialog after a commit failed"
 msgstr "&Повторно отвори дијалог за складирање во случај на грешка"
 
 #: ID:13,
@@ -862,6 +858,10 @@ msgstr "(не е пронајдено)"
 #: ID:208,
 msgid "(property change only)"
 msgstr "(само измена на својствата)"
+
+#: ID:245,
+msgid "(unknown)"
+msgstr "(непознато)"
 
 #: ID:188,
 #, c-format
@@ -1375,10 +1375,6 @@ msgstr "Просек"
 msgid "B&rowse..."
 msgstr "П&регледај..."
 
-#: MenuEntry
-msgid "Background &color..."
-msgstr "Позадинска &боја"
-
 #: ID:246,
 msgid "Bar Graph"
 msgstr "Bar Graph"
@@ -1648,6 +1644,10 @@ msgstr "Превземање од %s, ревизија %s, %s, %s"
 msgid "Checksum:"
 msgstr "Провери"
 
+#: Control-ID:1402,
+msgid "Choose item:"
+msgstr "Избери ставка:"
+
 #: ID:146,
 msgid "Cleaning up."
 msgstr "Чистење."
@@ -1852,6 +1852,10 @@ msgstr "Конфигурирај го програмот кој се корис�
 msgid "Configure viewer program for GNU diff files (patch files)."
 msgstr "Подеси програм за преглед на GNU diff датотеки (patch датотеки)."
 
+#: Control-ID:65535,
+msgid "Conflict resolved"
+msgstr "Конфликт разрешен"
+
 #: ID:263,#:
 #: Control-ID:65535,
 msgid "Conflicted"
@@ -1989,6 +1993,11 @@ msgstr "Корекции"
 msgid "Could not add %s to the ignore list!"
 msgstr "Не можам да го додадам %s на листата за игнорирање!"
 
+#: ID:582,
+#, c-format
+msgid "Could not add \"%s\" because"
+msgstr "Не можам да го додадам \"%s\" затоа што"
+
 #: ID:201,
 msgid "Could not check for a newer version!"
 msgstr "Не можам да проверам за нова верзија!"
@@ -2004,9 +2013,19 @@ msgstr ""
 "<hr=100%%>\n"
 "%s"
 
+#: ID:582,
+#, c-format
+msgid "Could not delete \"%s\" because"
+msgstr "Не можам да го избришам \"%s\" поради"
+
 #: ID:81,
 msgid "Could not get the status!"
 msgstr "Не можам да го земам статусот!"
+
+#: ID:582,
+#, c-format
+msgid "Could not merge \"%s\" because"
+msgstr "Не можам да го соединам \"%s\" затоа што"
 
 #: ID:69,
 #, c-format
@@ -2117,7 +2136,7 @@ msgstr ""
 "%s"
 
 #: ID:8,
-msgid "Create repositor&y here..."
+msgid "Create repositor&y here"
 msgstr "Креирај с&кладиште тука..."
 
 #: MenuEntry
@@ -2335,6 +2354,17 @@ msgstr ""
 "%s\n"
 "кои се направени во оваа ревизија? Овие измени ќе бидат повратени со обратно спојување на ревизијата во вашата работна копија."
 
+#: ID:99,
+#, c-format
+msgid ""
+"Do you want to make this working copy unversioned?\n"
+"This will remove all Subversion admin directories from\n"
+"%s!"
+msgstr ""
+"Да ли сакате да ја направите оваа работна копија неверзионирана?\n"
+"Ова ќе ги острани сите Subversion директориуми од\n"
+"%s!"
+
 #: ID:76,
 msgid "Do you want to proceed?"
 msgstr "Дали сакате да продолжите?"
@@ -2357,8 +2387,12 @@ msgid "Do you want to save your changes?"
 msgstr "Дали сакате да ги сочувате измените?"
 
 #: Control-ID:65535,
-msgid "Documentation - Simon Large"
-msgstr "Документација - Simon Large"
+msgid ""
+"Documentation : Simon Large\n"
+"Code : Tobias Schäfer, Stefan Fuhrmann"
+msgstr ""
+"Документација : Simon Large\n"
+"Кодирање : Tobias Schäfer, Stefan Fuhrmann"
 
 #: ID:73,#:
 #: ID:80,
@@ -2405,6 +2439,10 @@ msgstr "Измени автор"
 #: ID:115,
 msgid "Edit author name"
 msgstr "Измени име на авторот"
+
+#: Control-ID:1399,
+msgid "Edit conflict"
+msgstr "Едитирај го конфликтот"
 
 #: ID:110,
 msgid "Edit extension specific diff program"
@@ -2673,7 +2711,7 @@ msgstr "Закрпи за датотеки"
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2681,7 +2719,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Големина:\t\t%s\n"
+"Големина:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld точки\n"
 "Висина:\t\t\t%ld точки\n"
 "Хоризонтална резолуција:\t%.1f dpi\n"
@@ -2692,7 +2730,7 @@ msgstr ""
 #: ID:8,
 #, c-format
 msgid ""
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2700,7 +2738,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%\n"
 "\n"
-"File size:\t\t%s\n"
+"File size:\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2708,7 +2746,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Големина:\t\t%s\n"
+"Големина:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld точки\n"
 "Висина:\t\t\t%ld точки\n"
 "Хоризонтална резолуција:\t%.1f dpi\n"
@@ -2716,7 +2754,7 @@ msgstr ""
 "Длабочина:\t\t\t%d бити\n"
 "Зум:\t\t\t%d%%\n"
 "\n"
-"Големина:\t\t%s\n"
+"Големина:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld точки\n"
 "Висина:\t\t\t%ld точки\n"
 "Хоризонтална резолуција:\t%.1f dpi\n"
@@ -2727,7 +2765,7 @@ msgstr ""
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2735,7 +2773,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Големина:\t\t%s\n"
+"Големина:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld точки\n"
 "Висина:\t\t\t%ld точки\n"
 "Хоризонтална резолуција:\t%.1f dpi\n"
@@ -2746,7 +2784,7 @@ msgstr ""
 #: ID:7,
 #, c-format
 msgid ""
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2754,7 +2792,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%\n"
 "\n"
-"File size:\t\t\t%s\n"
+"File size:\t\t\t%s (%s)\n"
 "Width:\t\t\t%ld pixel\n"
 "Height:\t\t\t%ld pixel\n"
 "Horizontal Resolution:\t%.1f dpi\n"
@@ -2762,7 +2800,7 @@ msgid ""
 "Depth:\t\t\t%d bit\n"
 "Zoom:\t\t\t%d%%"
 msgstr ""
-"Големина:\t\t%s\n"
+"Големина:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld точки\n"
 "Висина:\t\t\t%ld точки\n"
 "Хоризонтална резолуција:\t%.1f dpi\n"
@@ -2770,7 +2808,7 @@ msgstr ""
 "Длабочина:\t\t\t%d бити\n"
 "Зум:\t\t\t%d%%\n"
 "\n"
-"Големина:\t\t%s\n"
+"Големина:\t\t%s (%s)\n"
 "Ширина:\t\t\t%ld точки\n"
 "Висина:\t\t\t%ld точки\n"
 "Хоризонтална резолуција:\t%.1f dpi\n"
@@ -2804,8 +2842,8 @@ msgid "Finished!"
 msgstr "Готово!"
 
 #: MenuEntry
-msgid "Fit Images &together"
-msgstr "Вклопи ги сликите &заедно"
+msgid "Fit image &sizes"
+msgstr "Вклопи ги големините на &сликите"
 
 #: Control-ID:1315,
 msgid "Floppy drives (A: B:)"
@@ -3098,21 +3136,21 @@ msgstr "ID:32796:V C +A"
 msgid "ID:32809:V C +F"
 msgstr "ID:32809:V C +F"
 
-#. Accelerator Entry for Menu ID:32810; 'Fit Images &together'
+#. Accelerator Entry for Menu ID:32810; 'Fit image &sizes'
 #: Corresponding Menu ID:32810;
-#: 'Fit Images &together'
+#: 'Fit image &sizes'
 msgid "ID:32810:V   +T"
 msgstr "ID:32810:V   +T"
 
-#. Accelerator Entry for Menu ID:32814; '&Newest on top'
+#. Accelerator Entry for Menu ID:32814; 'Oldest on to&p'
 #: Corresponding Menu ID:32814;
-#: '&Newest on top'
+#: 'Oldest on to&p'
 msgid "ID:32814:V C +L"
 msgstr "ID:32814:V C +L"
 
-#. Accelerator Entry for Menu ID:32814; '&Newest on top'
+#. Accelerator Entry for Menu ID:32814; 'Oldest on to&p'
 #: Corresponding Menu ID:32814;
-#: '&Newest on top'
+#: 'Oldest on to&p'
 msgid "ID:32814:VA  +D"
 msgstr "ID:32814:VA  +D"
 
@@ -3152,6 +3190,7 @@ msgstr "ID:57603:V C +S"
 msgid "ID:57604:V CS+S"
 msgstr "ID:57604:V CS+S"
 
+#. Accelerator Entry for Menu ID:57634; ''
 #. Accelerator Entry for Menu ID:57634; ''
 #. Accelerator Entry for Menu ID:57634; '&Copy'
 #: Corresponding Menu ID:57634;
@@ -3586,6 +3625,10 @@ msgstr "Стартува надворешен програм за споредб
 msgid "Least active author:"
 msgstr "Најмалку активен автор:"
 
+#: Control-ID:1404,
+msgid "Leave conflicted:"
+msgstr "Остави конфликтно:"
+
 #: ID:188,
 msgid "Left View: "
 msgstr "Лев поглед:"
@@ -3809,6 +3852,14 @@ msgstr "Спој - TortoiseSVN"
 msgid "Merge depth:"
 msgstr "Длабочина на спојувањето"
 
+#: ID:114,
+msgid "Merge revision to..."
+msgstr "Спој ревизија со..."
+
+#: ID:114,
+msgid "Merge revisions to..."
+msgstr "Спој ревизии во..."
+
 #: Control-ID:1377,
 msgid "Merge settings"
 msgstr "Напредни подесувања за спојување"
@@ -3820,13 +3871,8 @@ msgstr "Споено"
 
 #: ID:286,
 #, c-format
-msgid "Merged revision %s from %s:\n"
-msgstr "Споена ревизија %s од %s:\n"
-
-#: ID:286,
-#, c-format
-msgid "Merged revisions %s to %s from %s:\n"
-msgstr "Споени ревизии %s до %s од %s:\n"
+msgid "Merged revision(s) %s from %s:\n"
+msgstr "Споена ревизија(и) %s од %s:\n"
 
 #: ID:10,
 msgid "Merges a branch into the main trunk"
@@ -4045,6 +4091,16 @@ msgstr "Грешката не се појавила."
 msgid "No files or folders were modified. There is nothing for TortoiseSVN to revert!"
 msgstr "Ниедна датотека или директориум не се изменети. TortoiseSVN нема што да поврати!"
 
+#: ID:239,
+msgid ""
+"No files to show with the current setting.\n"
+"Check one or more settings below to see unversioned, ignored and/or unmodified files.\n"
+"To see remote changes, click on \"Check Repository\""
+msgstr ""
+"Нема што да прикажам со сегашните подесувања.\n"
+"Изберете едно или повеќе подесувања за да видите неверзионирани,игнорирани или немодифицирани датотеки.\n"
+"За да ги видите измените, изберете \"Провери го складиштето\""
+
 #: ID:77,
 msgid ""
 "No files were changed or added since\n"
@@ -4139,6 +4195,10 @@ msgstr "OVR"
 #: Control-ID:65535,
 msgid "Older lines"
 msgstr "Постари линии"
+
+#: MenuEntry
+msgid "Oldest on to&p"
+msgstr "&Најново на врвот"
 
 #: ID:99,#:
 #: Control-ID:1202,#:
@@ -4384,6 +4444,10 @@ msgstr ""
 " да бидат внесени на копија или на гранката која што ја креиравте\n"
 " тогаш морате да ја смените вашата работна копија на ново URL.\n"
 "Употребете ја Смени командата за тоа."
+
+#: Control-ID:1287,
+msgid "Please resolve the conflict by choosing one of the following options:"
+msgstr "Ве молиме разрешете го конфликтот со избирање на една од опциите:"
 
 #: ID:3858,#:
 #: ID:3858,
@@ -4831,6 +4895,14 @@ msgstr "Разреши"
 msgid "Resolve - TortoiseSVN"
 msgstr "Разреши - TortoiseSVN"
 
+#: Dlg-ID:268,
+msgid "Resolve Conflict"
+msgstr "Разреши конфликт"
+
+#: Control-ID:1382,
+msgid "Resolve all later"
+msgstr "Разреши ги сите подоцна"
+
 #: ID:282,
 msgid "Resolve conflict using \"mine\""
 msgstr "Разреши конфликт користејќи \"мое\""
@@ -4839,8 +4911,17 @@ msgstr "Разреши конфликт користејќи \"мое\""
 msgid "Resolve conflict using \"theirs\""
 msgstr "Разреши конфликт користејќи \"нивно\""
 
+#: Control-ID:1403,
+msgid "Resolve conflict:"
+msgstr "Разреши конфликт:"
+
+#: Control-ID:2,
+msgid "Resolve later"
+msgstr "Разреши подоцна"
+
 #: ID:74,#:
-#: ID:209,
+#: ID:209,#:
+#: Control-ID:1400,
 msgid "Resolved"
 msgstr "Разрешено"
 
@@ -5239,6 +5320,10 @@ msgstr "Изберете hook script датотека"
 #: ID:78,
 msgid "Select merge application"
 msgstr "Изберете апликација за спојување"
+
+#: ID:119,
+msgid "Select merge target"
+msgstr "Изберете цел за спојување"
 
 #: ID:276,
 msgid "Select revision range"
@@ -5750,23 +5835,6 @@ msgstr "Статус на текстот:"
 msgid "Text status"
 msgstr "Статус на текстот"
 
-#: ID:69,
-#, c-format
-msgid ""
-"The File\n"
-"%s\n"
-"is not a valid text file!\n"
-"Note that UTF32 files are treated as binary too."
-msgstr ""
-"Датотеката\n"
-"%s\n"
-"не е валиден текстуален фајл!\n"
-"Забелешка: UTF32 датотеките се третираат како бинарни."
-
-#: ID:80,
-msgid "The Repository was successfully created."
-msgstr "Складиштето е успешно креирано."
-
 #: ID:63,
 msgid "The chunk size did not match the number of added/removed lines!"
 msgstr "Големината на парчето не е иста со бројот на додадени/отстранети линии!"
@@ -5822,6 +5890,19 @@ msgstr ""
 "Датотеката\n"
 "%s\n"
 "Веќе постои! Дали сакате да ја презапишете?"
+
+#: ID:69,
+#, c-format
+msgid ""
+"The file\n"
+"%s\n"
+"is not a valid text file!\n"
+"Note that UTF32 files are treated as binary too."
+msgstr ""
+"Датотеката\n"
+"%s\n"
+"не е валиден текстуален фајл!\n"
+"Забелешка: UTF32 датотеките се третираат како бинарни."
 
 #: ID:145,
 #, c-format
@@ -5997,6 +6078,10 @@ msgstr ""
 "Но TortoiseMerge пронајде патека\n"
 "<i>%s</i>\n"
 "која се поклопува. Дали сакате да ја користите предложената патека?"
+
+#: ID:80,
+msgid "The repository was successfully created."
+msgstr "Складиштето е успешно креирано."
 
 #: Control-ID:65535,
 msgid "The result of the merge is stored in the working copy at:"
@@ -6235,7 +6320,10 @@ msgid ""
 "/left:\"path to left picture\"\n"
 "/lefttitle:\"title to show for the left picture\"\n"
 "/right:\"path to right picture\"\n"
-"/righttitle:\"title to show for the right picture\""
+"/righttitle:\"title to show for the right picture\"\n"
+"/overlay\t\tto enable overlay mode\n"
+"/fit\t\tto fit the images sizes\n"
+"/showinfo\t\tto show the image info boxes"
 msgstr ""
 "TortoiseIDiff: визуелен прегледник на разлики за TortoiseSVN\n"
 "\n"
@@ -6243,7 +6331,9 @@ msgstr ""
 "/left:\"патека до левата слика\"\n"
 "/lefttitle:\"наслов за левата слика\"\n"
 "/right:\"патека до десната слика\"\n"
-"/righttitle:\"наслов за десната слика\""
+"/righttitle:\"наслов за десната слика\"/overlay\t\tовозможи overlay режим\n"
+"/fit\t\tсобери ги сите слики\n"
+"/showinfo\t\tприкажи информации за сликите"
 
 #: ID:7,#:
 #: ID:3585,#:
@@ -6321,6 +6411,10 @@ msgstr "Вкупно измени на датотеки:"
 #, c-format
 msgid "Transferring at %s"
 msgstr "Префрлувам на %s"
+
+#: MenuEntry
+msgid "Transparent &color..."
+msgstr "Позадинска &боја"
 
 #: ID:251,
 msgid "Try a \"Cleanup\". If that doesn't work you need to do a fresh checkout."
@@ -6455,9 +6549,18 @@ msgstr "Отклучено"
 msgid "Untitled"
 msgstr "Без Наслов"
 
+#: ID:146,
+msgid "Unversion"
+msgstr "Одверзионирај"
+
 #: Control-ID:1313,
 msgid "Unversioned files mark parent folder as modified"
 msgstr "Неверзионирани датотеки го означуваат главниот директориум како изменет"
+
+#: ID:286,
+#, c-format
+msgid "Unversioning %s"
+msgstr "Одверзионирам: %s"
 
 #: Dlg-ID:152,
 msgid "Update"
@@ -6538,9 +6641,17 @@ msgstr "Користи ги и двата блокови со текст (ово
 msgid "Use both text blocks (this one last)"
 msgstr "Користи ги и двата блокови со текст (овој последен)"
 
+#: Control-ID:3,
+msgid "Use local"
+msgstr "Користи локално"
+
 #: ID:116,
 msgid "Use regular expression"
 msgstr "Користи го обичниот израз"
+
+#: Control-ID:4,
+msgid "Use repository"
+msgstr "Користи складиште"
 
 #: Control-ID:1066,
 msgid "Use stri&keout for removed lines"
@@ -6869,6 +6980,16 @@ msgstr ""
 "Забелешка: Note: Ажурирање со нова ревизија нема да ги пребрише измените така да работната копија\n"
 "нема да биде идентична со ревизијата со која ажурирате!"
 
+#: ID:89,
+msgid ""
+"Your working copy has local modifications.\n"
+"If you branch/tag from the HEAD revision, your local changes won't\n"
+"show up in the branch/tag!"
+msgstr ""
+"Вашата работна копија има локални модификации. \n"
+"Доколку направите гранка од HEAD ревизијата, вашите измени\n"
+"нема да се прикажат во гранката!"
+
 #: MenuEntry
 msgid "Zoo&m out"
 msgstr "Одзу&мирај"
@@ -6923,6 +7044,10 @@ msgstr "и"
 #: Control-ID:1085,
 msgid "and support the developers"
 msgstr "и подржете ги програмерите"
+
+#: ID:583,
+msgid "another item already exists in its place."
+msgstr "друга ставка веќе постои на тоа место."
 
 #: ID:245,
 msgid "author"
@@ -7056,6 +7181,18 @@ msgstr "игнорира наследство"
 #: ID:13,
 msgid "incomplete"
 msgstr "некомплетно"
+
+#: ID:583,
+msgid "it does not exist."
+msgstr "не постои."
+
+#: ID:583,
+msgid "it is already deleted."
+msgstr "е веќе избришан."
+
+#: ID:583,
+msgid "it is unversioned."
+msgstr "е н верзионирано."
 
 #: ID:214,
 msgid "item kept locally"
@@ -7209,6 +7346,20 @@ msgstr ""
 
 #: ID:576,
 msgid ""
+"svn:mergeinfo\n"
+"A newline separated list of merge tracking info. Each line consists of an absolute\n"
+"path followed by a colon and a list of comma separated revision numbers.\n"
+"For example\n"
+"/trunk:123-125,129"
+msgstr ""
+"svn:mergeinfo\n"
+"Листа на информации за спојувањето. Секоја линија содржиапсолутна\n"
+"патека следена од две точки и броеви на ревизии одделени со запирка.\n"
+"На пример\n"
+"/trunk:123,125,129"
+
+#: ID:576,
+msgid ""
 "svn:mime-type\n"
 "The mime type of the file. Used to determine whether to merge the file, and how to serve it from Apache.\n"
 "A mime type beginning with 'text/' (or an absent mime type) is treated as text.\n"
@@ -7247,6 +7398,10 @@ msgid "switched:"
 msgstr ""
 "префрлено на\r\n"
 "%s"
+
+#: ID:583,
+msgid "there are conflicting modifications."
+msgstr "постојат конфликтни модификации."
 
 #: ID:80,#:
 #: ID:103,#:

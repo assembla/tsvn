@@ -18,6 +18,7 @@
 //
 #include "StdAfx.h"
 #include "Resource.h"
+#include "AppUtils.h"
 #include ".\bottomview.h"
 
 IMPLEMENT_DYNCREATE(CBottomView, CBaseView)
@@ -66,6 +67,18 @@ void CBottomView::OnContextMenu(CPoint point, int /*nLine*/, DiffStates state)
 		temp.LoadString(IDS_VIEWCONTEXTMENU_USETHEIRANDYOURBLOCK);
 		popup.AppendMenu(MF_STRING | uEnabled | (bImportantBlock ? MF_ENABLED : MF_DISABLED|MF_GRAYED), ID_USETHEIRANDYOURBLOCK, temp);
 
+		popup.AppendMenu(MF_SEPARATOR, NULL);
+
+		temp.LoadString(IDS_EDIT_COPY);
+		popup.AppendMenu(MF_STRING | (HasTextSelection() ? MF_ENABLED : MF_DISABLED|MF_GRAYED), ID_EDIT_COPY, temp);
+		if (!m_bCaretHidden)
+		{
+			temp.LoadString(IDS_EDIT_CUT);
+			popup.AppendMenu(MF_STRING | (HasTextSelection() ? MF_ENABLED : MF_DISABLED|MF_GRAYED), ID_EDIT_CUT, temp);
+			temp.LoadString(IDS_EDIT_PASTE);
+			popup.AppendMenu(MF_STRING | (CAppUtils::HasClipboardFormat(CF_UNICODETEXT)||CAppUtils::HasClipboardFormat(CF_TEXT) ? MF_ENABLED : MF_DISABLED|MF_GRAYED), ID_EDIT_PASTE, temp);
+		}
+
 		int cmd = popup.TrackPopupMenu(TPM_RETURNCMD | TPM_LEFTALIGN | TPM_NONOTIFY, point.x, point.y, this, 0);
 		switch (cmd)
 		{
@@ -80,6 +93,16 @@ void CBottomView::OnContextMenu(CPoint point, int /*nLine*/, DiffStates state)
 			break;
 		case ID_USETHEIRANDYOURBLOCK:
 			UseTheirThenMyTextBlock();
+			break;
+		case ID_EDIT_COPY:
+			OnEditCopy();
+			break;
+		case ID_EDIT_CUT:
+			OnEditCopy();
+			RemoveSelectedText();
+			break;
+		case ID_EDIT_PASTE:
+			PasteText();
 			break;
 		}
 	}
@@ -169,8 +192,8 @@ void CBottomView::UseTheirThenMyTextBlock()
 	for (int emptyblocks=0; emptyblocks < m_nSelBlockEnd-m_nSelBlockStart+1; ++emptyblocks)
 	{
 		leftstate.addedlines.push_back(m_nSelBlockStart);
-		m_pwndLeft->m_pViewData->InsertData(m_nSelBlockStart, _T(""), DIFFSTATE_EMPTY, -1, CFileTextLines::NOENDING);
-		m_pwndRight->m_pViewData->InsertData(m_nSelBlockEnd+1, _T(""), DIFFSTATE_EMPTY, -1, CFileTextLines::NOENDING);
+		m_pwndLeft->m_pViewData->InsertData(m_nSelBlockStart, _T(""), DIFFSTATE_EMPTY, -1, EOL_NOENDING);
+		m_pwndRight->m_pViewData->InsertData(m_nSelBlockEnd+1, _T(""), DIFFSTATE_EMPTY, -1, EOL_NOENDING);
 		rightstate.addedlines.push_back(m_nSelBlockEnd+1);
 	}
 	CUndo::GetInstance().AddState(leftstate, rightstate, bottomstate);
@@ -226,8 +249,8 @@ void CBottomView::UseMyThenTheirTextBlock()
 	for (int emptyblocks=0; emptyblocks < m_nSelBlockEnd-m_nSelBlockStart+1; ++emptyblocks)
 	{
 		leftstate.addedlines.push_back(m_nSelBlockStart);
-		m_pwndLeft->m_pViewData->InsertData(m_nSelBlockStart, _T(""), DIFFSTATE_EMPTY, -1, CFileTextLines::NOENDING);
-		m_pwndRight->m_pViewData->InsertData(m_nSelBlockEnd+1, _T(""), DIFFSTATE_EMPTY, -1, CFileTextLines::NOENDING);
+		m_pwndLeft->m_pViewData->InsertData(m_nSelBlockStart, _T(""), DIFFSTATE_EMPTY, -1, EOL_NOENDING);
+		m_pwndRight->m_pViewData->InsertData(m_nSelBlockEnd+1, _T(""), DIFFSTATE_EMPTY, -1, EOL_NOENDING);
 		rightstate.addedlines.push_back(m_nSelBlockEnd+1);
 	}
 	CUndo::GetInstance().AddState(leftstate, rightstate, bottomstate);

@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -205,12 +205,16 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 				FORMATETC etc = { CF_HDROP, NULL, DVASPECT_CONTENT, -1, TYMED_HGLOBAL };
 				STGMEDIUM stg = { TYMED_HGLOBAL };
 				if ( FAILED( pDataObj->GetData ( &etc, &stg )))
+				{
+					ReleaseStgMedium ( &medium );
 					return E_INVALIDARG;
+				}
 
 
 				HDROP drop = (HDROP)GlobalLock(stg.hGlobal);
 				if ( NULL == drop )
 				{
+					ReleaseStgMedium ( &stg );
 					ReleaseStgMedium ( &medium );
 					return E_INVALIDARG;
 				}
@@ -294,6 +298,7 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 					}
 				} // for (int i = 0; i < count; i++)
 				GlobalUnlock ( drop );
+				ReleaseStgMedium ( &stg );
 			} // if (m_State == FileStateDropHandler) 
 			else
 			{
@@ -318,7 +323,6 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 						strpath.SetFromWin(str.c_str());
 						itemStates |= (strpath.GetFileExtension().CompareNoCase(_T(".diff"))==0) ? ITEMIS_PATCHFILE : 0;
 						itemStates |= (strpath.GetFileExtension().CompareNoCase(_T(".patch"))==0) ? ITEMIS_PATCHFILE : 0;
-						itemStates |= (strpath.GetFileExtension().CompareNoCase(_T(".lnk"))==0) ? ITEMIS_SHORTCUT : 0;
 						if (!statfetched)
 						{
 							//get the Subversion status of the item
@@ -421,7 +425,7 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 				}
 			}
 
-
+			ReleaseStgMedium ( &medium );
 			if (medium.pUnkForRelease)
 			{
 				IUnknown* relInterface = (IUnknown*)medium.pUnkForRelease;
@@ -743,9 +747,9 @@ STDMETHODIMP CShellExt::QueryDropContext(UINT uFlags, UINT idCmdFirst, HMENU hMe
 		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPCOPYRENAMEMENU, 0, idCmdFirst, ShellMenuDropCopyRename, uFlags);
 	if ((itemStates & ITEMIS_FOLDERINSVN)&&((~itemStates) & ITEMIS_INSVN))
 		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPCOPYADDMENU, 0, idCmdFirst, ShellMenuDropCopyAdd, uFlags);
-	if (((itemStates & ITEMIS_FOLDERINSVN)==0)&&(itemStates & ITEMIS_INSVN))
+	if (itemStates & ITEMIS_INSVN)
 		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPEXPORTMENU, 0, idCmdFirst, ShellMenuDropExport, uFlags);
-	if (((itemStates & ITEMIS_FOLDERINSVN)==0)&&(itemStates & ITEMIS_INSVN))
+	if (itemStates & ITEMIS_INSVN)
 		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_DROPEXPORTEXTENDEDMENU, 0, idCmdFirst, ShellMenuDropExportExtended, uFlags);
 	if ((itemStates & ITEMIS_FOLDERINSVN)&&(itemStates & ITEMIS_PATCHFILE))
 		InsertSVNMenu(FALSE, hMenu, indexMenu++, idCmd++, IDS_MENUAPPLYPATCH, 0, idCmdFirst, ShellMenuApplyPatch, uFlags);
@@ -846,6 +850,20 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 		GetMenuItemInfo(hMenu, i, TRUE, &miif);
 		if (miif.dwItemData == (ULONG_PTR)g_MenuIDString)
 			return NOERROR;
+	}
+
+	const BOOL bShortcut = !!(uFlags & CMF_VERBSONLY);
+	if ( bShortcut && (files_.size()==1))
+	{
+		// Don't show the context menu for a link if the
+		// destination is not part of a working copy.
+		// It would only show the standard menu items
+		// which are already shown for the lnk-file.
+		CString path = files_.front().c_str();
+		if ( !g_SVNAdminDir.HasAdminDir(path) )
+		{
+			return NOERROR;
+		}
 	}
 
 	LoadLangDll();
@@ -991,13 +1009,13 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
 		myIDMap[idCmd] = ShellSubMenuFolder;
 		menuiteminfo.dwItemData = (ULONG_PTR)g_MenuIDString;
 	}
-	else if (((~itemStates) & ITEMIS_SHORTCUT) && (files_.size()==1))
+	else if (!bShortcut && (files_.size()==1))
 	{
 		uIcon = bShowIcons ? IDI_MENUFILE : 0;
 		myIDMap[idCmd - idCmdFirst] = ShellSubMenuFile;
 		myIDMap[idCmd] = ShellSubMenuFile;
 	}
-	else if ((itemStates & ITEMIS_SHORTCUT) && (files_.size()==1))
+	else if (bShortcut && (files_.size()==1))
 	{
 		uIcon = bShowIcons ? IDI_MENULINK : 0;
 		myIDMap[idCmd - idCmdFirst] = ShellSubMenuLink;

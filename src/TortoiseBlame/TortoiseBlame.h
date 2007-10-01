@@ -1,6 +1,6 @@
 // TortoiseBlame - a Viewer for Subversion Blames
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -46,7 +46,11 @@ const int blockSize = 128 * 1024;
 #define GET_Y_LPARAM(lp)                        ((int)(short)HIWORD(lp))
 #endif
 
-
+/**
+ * \ingroup TortoiseBlame
+ * Main class for TortoiseBlame.
+ * Handles all child windows, loads the blame files, ...
+ */
 class TortoiseBlame
 {
 public:
@@ -108,6 +112,7 @@ public:
 	long						m_highestrev;
 	bool						m_colorage;
 
+	std::vector<bool>			mergelines;
 	std::vector<LONG>			revs;
 	std::vector<std::string>	dates;
 	std::vector<std::string>	authors;
@@ -125,6 +130,7 @@ protected:
 	COLORREF InterColor(COLORREF c1, COLORREF c2, int Slider);
 	std::vector<COLORREF>		colors;
 	HFONT						m_font;
+	HFONT						m_italicfont;
 	LONG						m_blamewidth;
 	LONG						m_revwidth;
 	LONG						m_datewidth;
