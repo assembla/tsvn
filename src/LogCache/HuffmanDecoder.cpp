@@ -169,37 +169,33 @@ void CHuffmanDecoder::WriteDecodedStream ( const BYTE* first
 }
 
 // decompress the source data and return the target buffer.
-// The caller must delete the target buffer.
 
-std::pair<CHuffmanDecoder::BYTE*, DWORD> 
-CHuffmanDecoder::Decode (const BYTE* source, size_t byteCount)
+void CHuffmanDecoder::Decode (const BYTE*& source, BYTE*& target)
 {
 	// get size info from stream
 
-	DWORD decodedSize = *reinterpret_cast<const DWORD*>(source);
-	source += sizeof (DWORD);
-	size_t encodedSize = *reinterpret_cast<const DWORD*>(source);
-	source += sizeof (DWORD);
+	const BYTE* localSource = source;
+	DWORD decodedSize = *reinterpret_cast<const DWORD*>(localSource);
+	localSource += sizeof (DWORD);
+	size_t encodedSize = *reinterpret_cast<const DWORD*>(localSource);
+	localSource += sizeof (DWORD);
 
 	// special case: empty stream (hence, emtpy tables etc.)
 
 	if (decodedSize == 0)
-		return std::pair<BYTE*, DWORD> (NULL, 0);
-
-	// allocate buffer for decoded stream
-
-	std::auto_ptr<BYTE> buffer (new BYTE [decodedSize]);
+		return;
 
 	// read all the decode-info 
 
-	BuildDecodeTable (source);
+	BuildDecodeTable (localSource);
 
 	// aktually decode
 
-	WriteDecodedStream (source, buffer.get(), decodedSize);
+	WriteDecodedStream (localSource, target, decodedSize);
 
-	// return the result
+	// update source and target buffer pointers
 
-	return std::pair<BYTE*, DWORD> (buffer.release(), decodedSize);
+	source += encodedSize;
+	target += decodedSize;
 }
 

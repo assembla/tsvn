@@ -77,8 +77,7 @@ protected:
 
 	void Add (DWORD value) throw();
 
-	virtual const unsigned char* GetStreamData();
-	virtual size_t GetStreamSize();
+	virtual void FlushData();
 
 public:
 

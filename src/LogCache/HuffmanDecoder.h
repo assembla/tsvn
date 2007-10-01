@@ -66,7 +66,6 @@ public:
 	virtual ~CHuffmanDecoder() {};
 
 	// decompress the source data and return the target buffer.
-	// The caller must delete the target buffer.
 
-	std::pair<BYTE*, DWORD> Decode (const BYTE* source, size_t byteCount);
+	void Decode (const BYTE*& source, BYTE*& target);
 };

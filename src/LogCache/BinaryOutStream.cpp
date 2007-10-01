@@ -27,27 +27,10 @@
 
 // buffer management
 
-void CBinaryOutStreamBase::Grow() throw()
+void CBinaryOutStreamBase::Flush() throw()
 {
-	if (data.get() == NULL)
-	{
-		data.reset (new unsigned char[1024 * 1024]);
-		current = data.get();
-		last = current + 1024 * 1024;
-	}
-	else
-	{
-		size_t newSize = (last - data.get()) * 2;
-		size_t currentPos = current - data.get();
-
-		std::auto_ptr<unsigned char> newData (new unsigned char[newSize]);
-		memcpy (newData.get(), data.get(), currentPos);
-
-		data.reset (newData.release());
-
-		current = data.get() + currentPos;
-		last = data.get() + newSize;
-	}
+	WriteThisStream();
+	current = data.get();
 }
 
 // write our data to the file
@@ -83,6 +66,9 @@ CBinaryOutStreamBase::CBinaryOutStreamBase ( CCacheFileOutBuffer* aBuffer
 	, current (NULL)
 	, last (NULL)
 {
+	data.reset (new unsigned char[64 * 1024]);
+	current = data.get();
+	last = current + 64 * 1024;
 }
 
 ///////////////////////////////////////////////////////////////

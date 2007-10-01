@@ -75,6 +75,14 @@ public:
 //		  (index, id, type)
 //		* M bytes of local stream content
 //
+//		The local stream content is as follows:
+//
+//		* one or more Huffman compressed blocks
+//		  (block size depending on the chunk size
+//		   chosen by the respective sub-class)
+//		* commulative size of the decoded local stream
+//		  content (4 bytes)
+//
 ///////////////////////////////////////////////////////////////
 
 class CHierachicalOutStreamBase : public IHierarchicalOutStream
@@ -87,6 +95,13 @@ private:
 
 	CCacheFileOutBuffer* buffer;
 	STREAM_INDEX index;	// (-1) while stream is open
+	bool isOpen;
+
+	// cumulated stream size *before* huffman-encoding it
+
+	size_t decodedSize;
+
+	// sub-streams
 
 	std::vector<IHierarchicalOutStream*> subStreams;
 
@@ -95,13 +110,18 @@ private:
 	virtual const unsigned char* GetStreamData() = 0;
 	virtual size_t GetStreamSize() = 0;
 	virtual void ReleaseStreamData() {};
+	virtual void FlushData() {};
 
 	// close (write) stream
 
-	void CloseSubStreams();
+	void AutoOpen();
+	void CloseLatestSubStream();
 	void WriteSubStreamList();
-	void WriteThisStream();
 	void Close();
+
+protected:
+
+	void WriteThisStream();
 
 public:
 

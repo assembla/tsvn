@@ -48,7 +48,7 @@ private:
 
 	// buffer management
 
-	void Grow() throw();
+	void Flush() throw();
 
 protected:
 
@@ -63,7 +63,7 @@ protected:
 	void Add (const unsigned char* source, size_t byteCount) throw()
 	{
 		while (current + byteCount > last)
-			Grow();
+			Flush();
 
 		memcpy (current, source, byteCount);
 		current += byteCount;
@@ -72,7 +72,7 @@ protected:
 	void Add (unsigned char c) throw()
 	{
 		if (current == last)
-			Grow();
+			Flush();
 
 		*current = c;
 		++current;

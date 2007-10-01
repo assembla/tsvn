@@ -62,16 +62,20 @@ void CHierachicalInStreamBase::ReadSubStreams ( CCacheFileInBuffer* buffer
 
 void CHierachicalInStreamBase::DecodeThisStream()
 {
+	// allocate a sufficiently large buffer to receive the decoded data
+
+	DWORD decodedSize = *(reinterpret_cast<const DWORD*>(last)-1);
+	BYTE* target = new BYTE [decodedSize];
+
 	// Huffman-compress the raw stream data
 
 	CHuffmanDecoder decoder;
-	std::pair<unsigned char*, DWORD> plainData
-		= decoder.Decode (first, last - first);
+	const BYTE* source = first;
+	first = target;
+	last = target + decodedSize;
 
-	// add it to the target file
-
-	first = plainData.first;
-	last = first + plainData.second;
+	while (target != last)
+		decoder.Decode (source, target);
 }
 
 // construction / destruction

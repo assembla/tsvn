@@ -39,16 +39,9 @@ void CPackedDWORDOutStreamBase::FlushLastValue() throw()
 
 // prepare our data for being written to the file
 
-const unsigned char* CPackedDWORDOutStreamBase::GetStreamData()
+void CPackedDWORDOutStreamBase::FlushData()
 {
 	FlushLastValue();
-	return CBinaryOutStreamBase::GetStreamData();
-}
-
-size_t CPackedDWORDOutStreamBase::GetStreamSize()
-{
-	FlushLastValue();
-	return CBinaryOutStreamBase::GetStreamSize();
 }
 
 // construction: nothing special to do
