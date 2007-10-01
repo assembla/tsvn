@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="8.00"
 	Name="LogCacheLib"
 	ProjectGUID="{BD0854A3-E300-4E57-8C17-E4771AE1CA01}"
 	RootNamespace="LogCache"
@@ -242,6 +242,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="3"
+				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="..\..\ext\apr\include;&quot;..\..\ext\apr-util\include&quot;;..\..\ext\Subversion\subversion\include;..\..\ext\GRETA;..\Utils;..\SVN;..\TortoiseProc"
 				PreprocessorDefinitions="WIN64;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
