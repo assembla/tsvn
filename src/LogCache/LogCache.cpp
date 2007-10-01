@@ -34,11 +34,11 @@
 
 using namespace LogCache;
 
-#ifdef _DEBUG
-std::wstring path = L"C:\\temp\\tsvn";
-#else
-std::wstring path = L"C:\\temp\\kde";
-#endif
+//#ifdef _DEBUG
+//std::wstring path = L"E:\\temp\\tsvn";
+//#else
+std::wstring path = L"E:\\temp\\kde";
+//#endif
 
 void ReadStream (const std::wstring& fileName)
 {
@@ -76,15 +76,16 @@ void TestXMLIO()
 	logInfo.Load();
 	clock2.Stop();
 
-	CHighResClock clock3;
-	CXMLLogWriter::SaveToXML (path + L".xml.out", logInfo, true);
-	clock3.Stop();
-
-	Sleep(5000);
+	logInfo.Save();
+	Sleep(2000);
 
 	CHighResClock clock4;
 	logInfo.Save();
 	clock4.Stop();
+
+	CHighResClock clock3;
+	CXMLLogWriter::SaveToXML (path + L".xml.out", logInfo, true);
+	clock3.Stop();
 
 	CStringA s;
 	s.Format ("\nimport: %5.4f  load: %5.4f  export: %5.4f  save: %5.4f\n"
