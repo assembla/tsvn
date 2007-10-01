@@ -459,7 +459,7 @@ void CTokenizedStringContainer::OptimizePairs()
 	// replace pair index
 
 	CIndexPairDictionary temp;
-	temp.reserve (new2Old.size());
+	temp.reserve (static_cast<index_t>(new2Old.size()));
 
 	for (index_t i = 0, count = (index_t)new2Old.size(); i < count; ++i)
 	{
