@@ -480,6 +480,7 @@ CRevisionInfoContainer::CRevisionInfoContainer(void)
 	changesOffsets.push_back(0);
 	copyFromOffsets.push_back(0);
 	mergedRevisionsOffsets.push_back(0);
+    userRevPropOffsets.push_back(0);
 }
 
 CRevisionInfoContainer::~CRevisionInfoContainer(void)
@@ -491,7 +492,8 @@ CRevisionInfoContainer::~CRevisionInfoContainer(void)
 
 index_t CRevisionInfoContainer::Insert ( const std::string& author
 									   , const std::string& comment
-									   , __time64_t timeStamp)
+									   , __time64_t timeStamp
+                                       , char flags)
 {
 	// this should newer throw as there are usually more
 	// changes than revisions. But you never know ...
@@ -504,6 +506,7 @@ index_t CRevisionInfoContainer::Insert ( const std::string& author
 	authors.push_back (authorPool.AutoInsert (author.c_str()));
 	timeStamps.push_back (timeStamp);
 	comments.Insert (comment);
+	presenceFlags.push_back (flags);
 
 	// no changes yet -> no common root path info
 
@@ -525,7 +528,9 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
 									   , const std::string& fromPath
 									   , revision_t fromRevision)
 {
-	// under x64, there might actually be an overflow
+    assert (*userRevPropOffsets.rbegin() & HAS_CHANGEDPATHS);
+
+    // under x64, there might actually be an overflow
 
 	if (changes.size() == NO_INDEX)
 		throw std::exception ("revision container change list overflow");
@@ -571,6 +576,7 @@ void CRevisionInfoContainer::AddMergedRevision ( const std::string& fromPath
 											   , revision_t revisionDelta)
 {
 	assert (revisionDelta != 0);
+    assert (*userRevPropOffsets.rbegin() & HAS_MERGEINFO);
 
 	// under x64, there might actually be an overflow
 
@@ -600,6 +606,7 @@ void CRevisionInfoContainer::AddUserRevProp ( const std::string& revProp
     assert (   (revProp != "svn:author") 
             && (revProp != "svn:date")
             && (revProp != "svn:log"));
+    assert (*userRevPropOffsets.rbegin() & HAS_USERREVPROPS);
 
 	// under x64, there might actually be an overflow
 
@@ -625,6 +632,7 @@ void CRevisionInfoContainer::Clear()
 	paths.Clear();
 	comments.Clear();
 
+    presenceFlags.clear();
 	authors.clear();
 	timeStamps.clear();
 
@@ -633,6 +641,7 @@ void CRevisionInfoContainer::Clear()
 	changesOffsets.erase (changesOffsets.begin()+1, changesOffsets.end());
 	copyFromOffsets.erase (copyFromOffsets.begin()+1, copyFromOffsets.end());
 	mergedRevisionsOffsets.erase (mergedRevisionsOffsets.begin()+1, mergedRevisionsOffsets.end());
+	userRevPropOffsets.erase (userRevPropOffsets.begin()+1, userRevPropOffsets.end());
 
 	changes.clear();
 	changedPaths.clear();
@@ -643,6 +652,10 @@ void CRevisionInfoContainer::Clear()
 	mergedToPaths.clear();
 	mergedRangeStarts.clear();
 	mergedRangeDeltas.clear();
+
+	userRevPropsPool.Clear();
+    userRevPropValues.Clear();
+    userRevPropNames.clear();
 }
 
 // update / modify existing data
@@ -823,6 +836,13 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 		= stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_VALUE_STREAM_ID);
     *userRevPropsValuesStream >> container.userRevPropValues;
 
+    // data presence flags
+
+    CPackedDWORDInStream* dataPresenceStream 
+		= dynamic_cast<CPackedDWORDInStream*>
+			(stream.GetSubStream ( CRevisionInfoContainer::DATA_PRESENCE_STREAM_ID));
+    *dataPresenceStream >> container.presenceFlags;
+
 	// update size info
 
 	container.storedSize = container.size();
@@ -960,13 +980,21 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
     CPackedDWORDOutStream* userRevPropsNameStream 
 		= dynamic_cast<CPackedDWORDOutStream*>
 			(stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_NAME_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
+								  , PACKED_DWORD_STREAM_TYPE_ID));
     *userRevPropsNameStream << container.userRevPropNames;
 
 	IHierarchicalOutStream* userRevPropsValuesStream
 		= stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_VALUE_STREAM_ID
 							   , COMPOSITE_STREAM_TYPE_ID);
     *userRevPropsValuesStream << container.userRevPropValues;
+
+    // data presence flags
+
+    CPackedDWORDOutStream* dataPresenceStream 
+		= dynamic_cast<CPackedDWORDOutStream*>
+			(stream.OpenSubStream ( CRevisionInfoContainer::DATA_PRESENCE_STREAM_ID
+								  , PACKED_DWORD_STREAM_TYPE_ID));
+    *dataPresenceStream << container.presenceFlags;
 
 	// update size info
 

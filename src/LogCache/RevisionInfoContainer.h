@@ -60,6 +60,10 @@ namespace LogCache
  *    the user-defined revision properties for the respective revision.
  *    Name of revProp is userRevPropsPool[userRevPropNames[n]].
  *
+ * Not all information may be available for all revisions. The presenceFlags
+ * array describes what information is available for the respective resivion.
+ * The individual flags are defined in TDataPresenceFlag.
+ *
  * changes contains the TChangeAction values. If a non-empty fromPath has been 
  * passed to AddChange(), "1" is added to the action value. Only in that case, 
  * there will be entries in copyFromPaths and copyFromRevisions. (so, iterators 
@@ -76,6 +80,11 @@ private:
 	// common directory for all paths
 
 	CPathDictionary paths;
+
+    // per-revision flags what information is available
+    // (see TChangeAction)
+
+    std::vector<char> presenceFlags;
 
 	// comment, author and timeStamp per revision index
 
@@ -157,7 +166,9 @@ private:
         USER_REVPROPS_OFFSETS_STREAM_ID = 18,
         USER_REVPROPS_POOL_STREAM_ID = 19,
         USER_REVPROPS_NAME_STREAM_ID = 20,
-        USER_REVPROPS_VALUE_STREAM_ID = 21
+        USER_REVPROPS_VALUE_STREAM_ID = 21,
+
+        DATA_PRESENCE_STREAM_ID = 22
 	};
 
 	// index checking utility
@@ -213,6 +224,34 @@ public:
 						| ACTION_CHANGED
 						| ACTION_REPLACED
 						| ACTION_DELETED
+	};
+
+	///////////////////////////////////////////////////////////////
+	//
+	// TDataPresenceFlag
+	//
+	//		indicator flags. If set, the respective data is 
+    //      available in / valid for the respective revision.
+	//
+	///////////////////////////////////////////////////////////////
+
+	enum TDataPresenceFlags
+	{
+		HAS_AUTHTOR      = 0x02,
+        HAS_TIME_STAMP   = 0x04,
+        HAS_COMMENT      = 0x08,
+        HAS_CHANGEDPATHS = 0x10,
+        HAS_USERREVPROPS = 0x20,
+        HAS_MERGEINFO    = 0x40,
+
+        HAS_STANDARD_INFO= HAS_AUTHTOR 
+                         | HAS_TIME_STAMP 
+                         | HAS_COMMENT 
+                         | HAS_CHANGEDPATHS,
+
+        HAS_ALL          = HAS_STANDARD_INFO
+                         | HAS_USERREVPROPS
+                         | HAS_MERGEINFO
 	};
 
 	///////////////////////////////////////////////////////////////
@@ -407,7 +446,8 @@ public:
 
 	index_t Insert ( const std::string& author
 				   , const std::string& comment
-				   , __time64_t timeStamp);
+				   , __time64_t timeStamp
+                   , char flags = HAS_STANDARD_INFO);
 
 	void AddChange ( TChangeAction action
 				   , const std::string& path
@@ -429,6 +469,8 @@ public:
 	// get information
 
 	index_t size() const;
+
+	char GetPresenceFlags (index_t index) const;
 
 	const char* GetAuthor (index_t index) const;
 	__time64_t GetTimeStamp (index_t index) const;
@@ -837,6 +879,12 @@ inline void CRevisionInfoContainer::CheckIndex (index_t index) const
 inline index_t CRevisionInfoContainer::size() const
 {
 	return (index_t)authors.size();
+}
+
+inline char CRevisionInfoContainer::GetPresenceFlags (index_t index) const
+{
+	CheckIndex (index);
+	return presenceFlags [index];
 }
 
 inline index_t CRevisionInfoContainer::GetAuthorID (index_t index) const
