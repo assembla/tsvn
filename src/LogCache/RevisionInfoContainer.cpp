@@ -528,7 +528,7 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
 									   , const std::string& fromPath
 									   , revision_t fromRevision)
 {
-    assert (*userRevPropOffsets.rbegin() & HAS_CHANGEDPATHS);
+    assert (*presenceFlags.rbegin() & HAS_CHANGEDPATHS);
 
     // under x64, there might actually be an overflow
 
@@ -576,7 +576,7 @@ void CRevisionInfoContainer::AddMergedRevision ( const std::string& fromPath
 											   , revision_t revisionDelta)
 {
 	assert (revisionDelta != 0);
-    assert (*userRevPropOffsets.rbegin() & HAS_MERGEINFO);
+    assert (*presenceFlags.rbegin() & HAS_MERGEINFO);
 
 	// under x64, there might actually be an overflow
 
@@ -606,7 +606,7 @@ void CRevisionInfoContainer::AddUserRevProp ( const std::string& revProp
     assert (   (revProp != "svn:author") 
             && (revProp != "svn:date")
             && (revProp != "svn:log"));
-    assert (*userRevPropOffsets.rbegin() & HAS_USERREVPROPS);
+    assert (*presenceFlags.rbegin() & HAS_USERREVPROPS);
 
 	// under x64, there might actually be an overflow
 
