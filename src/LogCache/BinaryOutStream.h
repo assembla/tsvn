@@ -40,6 +40,11 @@ class CBinaryOutStreamBase : public CHierachicalOutStreamBase
 {
 private:
 
+	// size of the data chunk
+	// (flush & compress upon overflow or Close())
+
+	enum {CHUNK_SIZE = 128 * 1024};
+
 	// data to write (may be NULL)
 
 	std::auto_ptr<unsigned char> data;
