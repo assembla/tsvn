@@ -546,6 +546,33 @@ index_t CTokenizedStringContainer::Insert (const std::string& s)
 	return (index_t)(offsets.size()-2);
 }
 
+index_t CTokenizedStringContainer::Insert (const std::string& s, size_t count)
+{
+    index_t result = (index_t)(offsets.size()-1);
+
+    if (count > 0)
+    {
+	    // write entry once
+
+        index_t oldSize = (index_t)stringData.size();
+	    Append (s);
+        index_t newSize = (index_t)stringData.size();
+        index_t itemSize = newSize - oldSize;
+
+        // duplicate it
+
+        for (size_t i = 0; i < itemSize * (count-1); ++i)
+            stringData.push_back (stringData[oldSize + i]);
+
+	    // write the index info
+
+        for (size_t i = 0; i < itemSize * count; i += itemSize)
+	        offsets.push_back (newSize + i);
+    }
+
+    return result;
+}
+
 void CTokenizedStringContainer::Remove (index_t index)
 {
 	// range check

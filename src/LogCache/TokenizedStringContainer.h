@@ -250,6 +250,7 @@ public:
 	// modification
 
 	index_t Insert (const std::string& s);
+    index_t Insert (const std::string& s, size_t count);
 	void Remove (index_t index);
 
 	void Compress();
