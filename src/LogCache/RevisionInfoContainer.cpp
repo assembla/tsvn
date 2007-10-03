@@ -35,7 +35,8 @@ namespace LogCache
 
 void CRevisionInfoContainer::UpdateAuthors 
 	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap)
+	, const index_mapping_t& indexMap
+    , bool keepOldDataForMissingNew)
 {
 	index_mapping_t idMapping = authorPool.Merge (newData.authorPool);
 
@@ -46,13 +47,18 @@ void CRevisionInfoContainer::UpdateAuthors
 		; ++iter)
 	{
 		assert (iter->key < count);
-		authors[iter->key] = *idMapping.find (newData.authors[iter->value]);
+        if (   !keepOldDataForMissingNew 
+            || (newData.presenceFlags[iter->value] & HAS_AUTHOR))
+        {
+    		authors[iter->key] = *idMapping.find (newData.authors[iter->value]);
+        }
 	}
 }
 
 void CRevisionInfoContainer::UpdateTimeStamps 
 	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap)
+	, const index_mapping_t& indexMap
+    , bool keepOldDataForMissingNew)
 {
 	index_t count = size();
 	for ( index_mapping_t::const_iterator iter = indexMap.begin()
@@ -61,13 +67,18 @@ void CRevisionInfoContainer::UpdateTimeStamps
 		; ++iter)
 	{
 		assert (iter->key < count);
-		timeStamps[iter->key] = newData.timeStamps[iter->value];
+        if (   !keepOldDataForMissingNew 
+            || (newData.presenceFlags[iter->value] & HAS_TIME_STAMP))
+        {
+		    timeStamps[iter->key] = newData.timeStamps[iter->value];
+        }
 	}
 }
 
 void CRevisionInfoContainer::UpdateComments 
 	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap)
+	, const index_mapping_t& indexMap
+    , bool keepOldDataForMissingNew)
 {
 	index_mapping_t toReplace;
 
@@ -78,7 +89,11 @@ void CRevisionInfoContainer::UpdateComments
 		; ++iter)
 	{
 		assert (iter->key < count);
-		toReplace.insert (iter->key, iter->value);
+        if (   !keepOldDataForMissingNew 
+            || (newData.presenceFlags[iter->value] & HAS_COMMENT))
+        {
+    		toReplace.insert (iter->key, iter->value);
+        }
 	}
 
 	comments.Replace (newData.comments, toReplace);
@@ -87,7 +102,8 @@ void CRevisionInfoContainer::UpdateComments
 void CRevisionInfoContainer::UpdateChanges 
 	( const CRevisionInfoContainer& newData
 	, const index_mapping_t& indexMap
-	, const index_mapping_t& pathIDMapping)
+	, const index_mapping_t& pathIDMapping
+    , bool keepOldDataForMissingNew)
 {
 	// save & remove old data
 
@@ -122,7 +138,9 @@ void CRevisionInfoContainer::UpdateChanges
 		lastCopy = copyFromOffsets[i+1];
 
         index_mapping_t::const_iterator iter = indexMap.find (i);
-		if (iter != mapEnd)
+		if ((iter != mapEnd)
+            && (   !keepOldDataForMissingNew 
+                || (newData.presenceFlags[iter->value] & HAS_CHANGEDPATHS)))
 		{
 			// copy & translate
 
@@ -144,6 +162,8 @@ void CRevisionInfoContainer::UpdateChanges
 				copyFromRevisions.push_back (newData.copyFromRevisions[k]);
 				copyFromPaths.push_back (*pathIDMapping.find (newData.copyFromPaths[k]));
 			}
+
+            rootPaths[i] = *pathIDMapping.find (newData.rootPaths[sourceIndex]);
 		}
 		else
 		{
@@ -187,7 +207,8 @@ void CRevisionInfoContainer::UpdateChanges
 void CRevisionInfoContainer::UpdateMergers 
 	( const CRevisionInfoContainer& newData
 	, const index_mapping_t& indexMap
-	, const index_mapping_t& pathIDMapping)
+	, const index_mapping_t& pathIDMapping
+    , bool keepOldDataForMissingNew)
 {
 	// save & remove old data
 
@@ -218,7 +239,9 @@ void CRevisionInfoContainer::UpdateMergers
 		lastMerge = mergedRevisionsOffsets[i+1];
 
 		index_mapping_t::const_iterator iter = indexMap.find (i);
-		if (iter != mapEnd)
+		if ((iter != mapEnd)
+            && (   !keepOldDataForMissingNew 
+                || (newData.presenceFlags[iter->value] & HAS_MERGEINFO)))
 		{
 			// copy & translate
 
@@ -261,7 +284,8 @@ void CRevisionInfoContainer::UpdateMergers
 
 void CRevisionInfoContainer::UpdateUserRevProps 
 	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap)
+	, const index_mapping_t& indexMap
+    , bool keepOldDataForMissingNew)
 {
 	index_mapping_t propIDMapping 
         = userRevPropsPool.Merge (newData.userRevPropsPool);
@@ -294,7 +318,9 @@ void CRevisionInfoContainer::UpdateUserRevProps
 		lastProp = userRevPropNames[i+1];
 
 		index_mapping_t::const_iterator iter = indexMap.find (i);
-		if (iter != mapEnd)
+		if ((iter != mapEnd)
+            && (   !keepOldDataForMissingNew 
+                || (newData.presenceFlags[iter->value] & HAS_USERREVPROPS)))
 		{
 			// copy & translate
 
@@ -331,6 +357,29 @@ void CRevisionInfoContainer::UpdateUserRevProps
     userRevPropValues.Replace (newData.userRevPropValues, newValueMapping);
 }
 
+void CRevisionInfoContainer::UpdatePresenceFlags
+	( const CRevisionInfoContainer& newData
+	, const index_mapping_t& indexMap
+    , char flags
+    , bool keepOldDataForMissingNew)
+{
+	for ( index_mapping_t::const_iterator iter = indexMap.begin()
+		, end = indexMap.end()
+		; iter != end
+		; ++iter)
+	{
+        // values that have been copied
+
+        char setValues = newData.presenceFlags[iter->value] & flags;
+
+        if (keepOldDataForMissingNew)
+            presenceFlags[iter->key] |= setValues;
+        else
+            presenceFlags[iter->key] = (presenceFlags[iter->key] & ~flags) 
+                                     | setValues;
+    }
+}
+
 void CRevisionInfoContainer::AppendNewEntries 
 	(const index_mapping_t& indexMap)
 {
@@ -357,6 +406,7 @@ void CRevisionInfoContainer::AppendNewEntries
         authors.insert (authors.end(), toAppend, NO_INDEX);
         timeStamps.insert (timeStamps.end(), toAppend, 0);
         presenceFlags.insert (presenceFlags.end(), toAppend, 0);
+        rootPaths.insert (rootPaths.end(), toAppend, NO_INDEX);
 
         static const std::string emptyComment;
     	comments.Insert (emptyComment, toAppend);
@@ -711,7 +761,8 @@ void CRevisionInfoContainer::Clear()
 
 void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
 									, const index_mapping_t& indexMap
-                                    , char flags)
+                                    , char flags
+                                    , bool keepOldDataForMissingNew)
 {
 	// first, create new indices where necessary
 
@@ -724,18 +775,20 @@ void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
 	// replace exising data
 
 	if (flags & HAS_AUTHOR)
-		UpdateAuthors (newData, indexMap);
+		UpdateAuthors (newData, indexMap, keepOldDataForMissingNew);
 	if (flags & HAS_TIME_STAMP)
-		UpdateTimeStamps (newData, indexMap);
+		UpdateTimeStamps (newData, indexMap, keepOldDataForMissingNew);
 	if (flags & HAS_COMMENT)
-		UpdateComments (newData, indexMap);
+		UpdateComments (newData, indexMap, keepOldDataForMissingNew);
 
 	if (flags & HAS_CHANGEDPATHS)
-		UpdateChanges (newData, indexMap, pathIDMapping);
+		UpdateChanges (newData, indexMap, pathIDMapping, keepOldDataForMissingNew);
 	if (flags & HAS_MERGEINFO)
-		UpdateMergers (newData, indexMap, pathIDMapping);
+		UpdateMergers (newData, indexMap, pathIDMapping, keepOldDataForMissingNew);
 	if (flags & HAS_USERREVPROPS)
-		UpdateUserRevProps (newData, indexMap);
+		UpdateUserRevProps (newData, indexMap, keepOldDataForMissingNew);
+
+    UpdatePresenceFlags (newData, indexMap, flags, keepOldDataForMissingNew);
 }
 
 // rearrange the data to minimize disk and cache footprint

@@ -178,22 +178,33 @@ private:
 	// update / modify utilities
 
 	void UpdateAuthors ( const CRevisionInfoContainer& newData
-					   , const index_mapping_t& indexMap);
+					   , const index_mapping_t& indexMap
+                       , bool keepOldDataForMissingNew);
 	void UpdateTimeStamps ( const CRevisionInfoContainer& newData
-						  , const index_mapping_t& indexMap);
+						  , const index_mapping_t& indexMap
+                          , bool keepOldDataForMissingNew);
 	void UpdateComments ( const CRevisionInfoContainer& newData
-						, const index_mapping_t& indexMap);
+						, const index_mapping_t& indexMap
+                        , bool keepOldDataForMissingNew);
 
 	void UpdateChanges ( const CRevisionInfoContainer& newData
 					   , const index_mapping_t& indexMap
-					   , const index_mapping_t& pathIDMapping);
+					   , const index_mapping_t& pathIDMapping
+                       , bool keepOldDataForMissingNew);
 	void UpdateMergers ( const CRevisionInfoContainer& newData
 					   , const index_mapping_t& indexMap
-					   , const index_mapping_t& pathIDMapping);
+					   , const index_mapping_t& pathIDMapping
+                       , bool keepOldDataForMissingNew);
     void UpdateUserRevProps ( const CRevisionInfoContainer& newData
-                    	    , const index_mapping_t& indexMap);
+                    	    , const index_mapping_t& indexMap
+                            , bool keepOldDataForMissingNew);
 
-	void AppendNewEntries (const index_mapping_t& indexMap);
+    void UpdatePresenceFlags ( const CRevisionInfoContainer& newData
+	                         , const index_mapping_t& indexMap
+                             , char flags
+                             , bool keepOldDataForMissingNew);
+
+    void AppendNewEntries (const index_mapping_t& indexMap);
 
 	// the individual optimization steps
 
@@ -506,7 +517,8 @@ public:
 
 	void Update ( const CRevisionInfoContainer& newData
 				, const index_mapping_t& indexMap
-                , char flags = HAS_ALL);
+                , char flags = HAS_ALL
+                , bool keepOldDataForMissingNew = true);
 
 	// rearrange the data to minimize disk and cache footprint.
 	// AutoOptimize() will call Optimize() when size() crossed 2^n boundaries.

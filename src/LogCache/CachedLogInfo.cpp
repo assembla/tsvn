@@ -139,7 +139,8 @@ void CCachedLogInfo::Clear()
 // update / modify existing data
 
 void CCachedLogInfo::Update ( const CCachedLogInfo& newData
-							, char flags)
+							, char flags
+                            , bool keepOldDataForMissingNew)
 {
 	// build revision index map
 
@@ -166,7 +167,8 @@ void CCachedLogInfo::Update ( const CCachedLogInfo& newData
 
 	logInfo.Update ( newData.logInfo
 				   , indexMap
-				   , flags);
+				   , flags
+                   , keepOldDataForMissingNew);
 
 	// our skip ranges should still be valid
 	// but we check them anyway

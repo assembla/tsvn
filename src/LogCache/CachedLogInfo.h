@@ -125,7 +125,8 @@ public:
 	// update / modify existing data
 
 	void Update ( const CCachedLogInfo& newData
-                , char flags = CRevisionInfoContainer::HAS_ALL);
+                , char flags = CRevisionInfoContainer::HAS_ALL
+                , bool keepOldDataForMissingNew = true);
 };
 
 ///////////////////////////////////////////////////////////////

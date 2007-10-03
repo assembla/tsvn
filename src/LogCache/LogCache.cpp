@@ -150,15 +150,15 @@ void TestUpdate()
 	newData.Insert (1234, "dummy", "", 0);
 
 	CHighResClock clock1;
-	logInfo.Update (copied, true, true, true, true, true);
+	logInfo.Update (copied);
 	clock1.Stop();
 
 	CHighResClock clock2;
-	logInfo.Update (newData, true, true, true, true, true);
+	logInfo.Update (newData);
 	clock2.Stop();
 
 	CHighResClock clock3;
-	logInfo.Update (newData, true, false, false, false, false);
+    logInfo.Update (newData, CRevisionInfoContainer::HAS_AUTHOR);
 	clock3.Stop();
 
 	CStringA s;
