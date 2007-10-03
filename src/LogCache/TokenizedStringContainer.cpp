@@ -521,6 +521,17 @@ std::string CTokenizedStringContainer::operator[] (index_t index) const
 	return result;
 }
 
+// STL-like bahavior
+
+void CTokenizedStringContainer::swap (CTokenizedStringContainer& rhs)
+{
+    words.swap (rhs.words);
+	pairs.Swap (rhs.pairs);
+
+    stringData.swap (stringData);
+	offsets.swap (offsets);
+}
+
 // modification
 
 index_t CTokenizedStringContainer::Insert (const std::string& s)

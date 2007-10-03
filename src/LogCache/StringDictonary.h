@@ -147,6 +147,8 @@ public:
 	const char* operator[](index_t index) const;
 	index_t GetLength (index_t index) const;
 
+    void swap (CStringDictionary& rhs);
+
 	index_t Find (const char* string) const;
 	index_t Insert (const char* string);
 	index_t AutoInsert (const char* string);

@@ -243,6 +243,10 @@ public:
 
 	std::string operator[] (index_t index) const;
 
+    // STL-like bahavior
+
+    void swap (CTokenizedStringContainer& rhs);
+
 	// modification
 
 	index_t Insert (const std::string& s);

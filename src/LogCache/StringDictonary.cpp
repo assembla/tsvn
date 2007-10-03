@@ -156,6 +156,13 @@ CStringDictionary::~CStringDictionary(void)
 
 // dictionary operations
 
+void CStringDictionary::swap (CStringDictionary& rhs)
+{
+    packedStrings.swap (rhs.packedStrings);
+	offsets.swap (rhs.offsets);
+    hashIndex.swap (rhs.hashIndex);
+}
+
 index_t CStringDictionary::Find (const char* string) const
 {
 	return hashIndex.find (string);
