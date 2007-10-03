@@ -178,9 +178,9 @@ DWORD CHuffmanEncoder::CalculatePackedSize()
 
 	// Huffman table: 
 	//		* 1 byte entry count
-	//		* 2 bytes per entry
+	//		* 1.5 bytes per entry
 	
-	result += (DWORD)(1 + 2 * sortedCount) * sizeof (BYTE);
+	result += (DWORD)(1 + (3 * sortedCount + 1) / 2) * sizeof (BYTE);
 
 	// calculate total bit count
 
@@ -211,10 +211,16 @@ void CHuffmanEncoder::WriteHuffmanTable (BYTE*& dest)
 
 		*dest = sorted[i];
 		++dest;
+    }
+    
+    for (size_t i = 0; i < sortedCount; i+=2)
+	{
+        assert (MAX_ENCODING_LENGTH < 0x10);
 
-		// number of bits used
+        // number of bits used (use 4 bits per value)
 
-		*dest = keyLength[sorted[i]];
+		*dest = keyLength[sorted[i]]
+              + keyLength[sorted[i+1]] * 0x10;
 		++dest;
 	}
 }

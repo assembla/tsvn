@@ -19,8 +19,12 @@ void CHuffmanDecoder::BuildDecodeTable (const BYTE*& first)
 	{
 		values[i] = *first;
 		++first;
+    }
 
-		keyLength[i] = *first;
+	for (size_t i = 0; i < entryCount; i += 2)
+    {
+		keyLength[i] = *first & 0x0f;
+		keyLength[i+1] = *first / 0x10;
 		++first;
 	}
 
