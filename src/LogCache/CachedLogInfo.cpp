@@ -139,20 +139,8 @@ void CCachedLogInfo::Clear()
 // update / modify existing data
 
 void CCachedLogInfo::Update ( const CCachedLogInfo& newData
-							, bool updateAuthors
-							, bool updateTimeStamps
-							, bool updateComments
-							, bool updateChanges
-							, bool updateMergers)
+							, char flags)
 {
-	// to append new revision info, the source info must be complete
-
-	bool allowAppend =    updateAuthors
-					   && updateTimeStamps
-					   && updateComments
-					   && updateChanges
-					   && updateMergers;
-
 	// build revision index map
 
 	index_mapping_t indexMap;
@@ -168,12 +156,7 @@ void CCachedLogInfo::Update ( const CCachedLogInfo& newData
 		{
 			index_t destIndex = revisions[i];
 			if (destIndex == NO_INDEX)
-			{
-				if (!allowAppend)
-					continue;
-				else
-					destIndex = newIndex++;
-			}
+				destIndex = newIndex++;
 
 			indexMap.insert (destIndex, sourceIndex);
 		}
@@ -183,11 +166,7 @@ void CCachedLogInfo::Update ( const CCachedLogInfo& newData
 
 	logInfo.Update ( newData.logInfo
 				   , indexMap
-				   , updateAuthors
-				   , updateTimeStamps
-				   , updateComments
-				   , updateChanges
-				   , updateMergers);
+				   , flags);
 
 	// our skip ranges should still be valid
 	// but we check them anyway

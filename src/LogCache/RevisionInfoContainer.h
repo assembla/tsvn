@@ -190,10 +190,10 @@ private:
 	void UpdateMergers ( const CRevisionInfoContainer& newData
 					   , const index_mapping_t& indexMap
 					   , const index_mapping_t& pathIDMapping);
+    void UpdateUserRevProps ( const CRevisionInfoContainer& newData
+                    	    , const index_mapping_t& indexMap);
 
-	void Append ( const CRevisionInfoContainer& newData
-				, const index_mapping_t& indexMap
-			    , const index_mapping_t& pathIDMapping);
+	void AppendNewEntries (const index_mapping_t& indexMap);
 
 	// the individual optimization steps
 
@@ -237,14 +237,14 @@ public:
 
 	enum TDataPresenceFlags
 	{
-		HAS_AUTHTOR      = 0x02,
+		HAS_AUTHOR       = 0x02,
         HAS_TIME_STAMP   = 0x04,
         HAS_COMMENT      = 0x08,
         HAS_CHANGEDPATHS = 0x10,
         HAS_USERREVPROPS = 0x20,
         HAS_MERGEINFO    = 0x40,
 
-        HAS_STANDARD_INFO= HAS_AUTHTOR 
+        HAS_STANDARD_INFO= HAS_AUTHOR 
                          | HAS_TIME_STAMP 
                          | HAS_COMMENT 
                          | HAS_CHANGEDPATHS,
@@ -502,15 +502,11 @@ public:
 
 	// update / modify existing data
 	// indexes must be in ascending order
-	// indexes[] may be size() -> results in an Append()
+	// indexes[x] may be size() -> results in an Append()
 
 	void Update ( const CRevisionInfoContainer& newData
 				, const index_mapping_t& indexMap
-				, bool updateAuthors
-				, bool updateTimeStamps
-				, bool updateComments
-				, bool updateChanges
-				, bool updateMergers);
+                , char flags = HAS_ALL);
 
 	// rearrange the data to minimize disk and cache footprint.
 	// AutoOptimize() will call Optimize() when size() crossed 2^n boundaries.

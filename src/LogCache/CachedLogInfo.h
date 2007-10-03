@@ -125,11 +125,7 @@ public:
 	// update / modify existing data
 
 	void Update ( const CCachedLogInfo& newData
-				, bool updateAuthors
-				, bool updateTimeStamps
-				, bool updateComments
-				, bool updateChanges
-				, bool updateMergers);
+                , char flags = CRevisionInfoContainer::HAS_ALL);
 };
 
 ///////////////////////////////////////////////////////////////
