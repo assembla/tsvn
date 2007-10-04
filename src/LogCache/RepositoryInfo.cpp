@@ -140,9 +140,11 @@ CString CRepositoryInfo::GetRepositoryRootAndUUID ( const CTSVNPath& url
             modified = true;
         }
 
+        sUUID = info.uuid;
         return info.root;
     }
 
+    sUUID = iter->second.uuid;
     return iter->first;
 }
 
