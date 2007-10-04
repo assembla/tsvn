@@ -816,8 +816,15 @@ void CCacheLogQuery::Log ( const CTSVNPathList& targets
 		pegRevision = startRevision;
 
 	// load cache and find path to start from
+    // (don't get the repo info from SVN, if it had to be fetched from the server
+    //  -> let GetRelativeRepositoryPath() use our repository property cache)
 
-	SVNInfoData& info = GetRepositoryInfo (path, peg_revision, baseInfo, headInfo);
+    SVNInfoData& info = path.IsUrl()
+        ? headInfo 
+        : GetRepositoryInfo (path, peg_revision, baseInfo, headInfo);
+
+    if (info.url.IsEmpty())
+        info.url = path.GetSVNPathString();
 
 	CDictionaryBasedTempPath startPath 
 		= TranslatePegRevisionPath ( pegRevision
