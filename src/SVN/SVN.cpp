@@ -1974,6 +1974,7 @@ CString SVN::GetRepositoryRoot(const CTSVNPath& url)
 
 	SVNPool localpool(pool);
 	svn_error_clear(Err);
+    Err = NULL;
 
 	// make sure the url is canonical.
 	const char * goodurl = svn_path_canonicalize(url.GetSVNApiPath(localpool), localpool);
@@ -2073,6 +2074,7 @@ BOOL SVN::GetRootAndHead(const CTSVNPath& path, CTSVNPath& url, svn_revnum_t& re
 
 	SVNPool localpool(pool);
 	svn_error_clear(Err);
+    Err = NULL;
 
 	if (!path.IsUrl())
 		SVN::get_url_from_target(&urla, path.GetSVNApiPath(localpool));
@@ -2105,21 +2107,21 @@ BOOL SVN::GetRootAndHead(const CTSVNPath& path, CTSVNPath& url, svn_revnum_t& re
     {
         // non-cached access
 
-	/* use subpool to create a temporary RA session */
+	    /* use subpool to create a temporary RA session */
 
-	Err = svn_client_open_ra_session (&ra_session, urla, m_pctx, localpool);
-	if (Err)
-		return FALSE;
+	    Err = svn_client_open_ra_session (&ra_session, urla, m_pctx, localpool);
+	    if (Err)
+		    return FALSE;
 
-	Err = svn_ra_get_latest_revnum(ra_session, &rev, localpool);
-	if (Err)
-		return FALSE;
+	    Err = svn_ra_get_latest_revnum(ra_session, &rev, localpool);
+	    if (Err)
+		    return FALSE;
 
-	Err = svn_ra_get_repos_root(ra_session, &returl, localpool);
-	if (Err)
-		return FALSE;
-		
-	url.SetFromSVN(CUnicodeUtils::GetUnicode(returl));
+	    Err = svn_ra_get_repos_root(ra_session, &returl, localpool);
+	    if (Err)
+		    return FALSE;
+    		
+	    url.SetFromSVN(CUnicodeUtils::GetUnicode(returl));
     }
 	
 	return TRUE;
