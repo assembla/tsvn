@@ -1163,7 +1163,7 @@ LogCache::CCachedLogInfo* SVN::GetLogCache (const CTSVNPath& path)
         return NULL;
 
     CString uuid;
-    logCachePool.GetRepositoryInfo().GetRepositoryRootAndUUID (path, &uuid);
+    logCachePool.GetRepositoryInfo().GetRepositoryRootAndUUID (path, uuid);
     return logCachePool.GetCache (uuid);
 }
 
