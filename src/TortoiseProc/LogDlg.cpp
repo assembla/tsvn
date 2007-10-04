@@ -722,7 +722,11 @@ void CLogDlg::OnBnClickedNexthundred()
 	m_startrev = rev;
 	m_endrev = 0;
 	m_bCancelled = FALSE;
-	m_limit = (int)(DWORD)CRegDWORD(_T("Software\\TortoiseSVN\\NumberOfLogs"), 100);
+
+    // rev is is revision we already have and we will receive it again
+    // -> fetch one extra revision to get NumberOfLogs *new* revisions
+
+	m_limit = (int)(DWORD)CRegDWORD(_T("Software\\TortoiseSVN\\NumberOfLogs"), 100) +1;
 	InterlockedExchange(&m_bNoDispUpdates, TRUE);
 	SetSortArrow(&m_LogList, -1, true);
 	InterlockedExchange(&m_bThreadRunning, TRUE);
