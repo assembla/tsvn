@@ -315,7 +315,7 @@ void CRevisionInfoContainer::UpdateUserRevProps
 	for (index_t i = 0, count = size(); i < count; ++i)
 	{
         index_t firstProp = lastProp;
-		lastProp = userRevPropNames[i+1];
+		lastProp = userRevPropOffsets[i+1];
 
 		index_mapping_t::const_iterator iter = indexMap.find (i);
 		if ((iter != mapEnd)
@@ -348,7 +348,7 @@ void CRevisionInfoContainer::UpdateUserRevProps
 
 		// update positions
 
-		userRevPropNames[i+1] = static_cast<index_t>(userRevPropNames.size());
+		userRevPropOffsets[i+1] = static_cast<index_t>(userRevPropNames.size());
 	}
 
     // actually write the combined revprop values
@@ -614,6 +614,7 @@ index_t CRevisionInfoContainer::Insert ( const std::string& author
 	changesOffsets.push_back (*changesOffsets.rbegin());
 	copyFromOffsets.push_back (*copyFromOffsets.rbegin());
 	mergedRevisionsOffsets.push_back (*mergedRevisionsOffsets.rbegin());
+    userRevPropOffsets.push_back (*userRevPropOffsets.rbegin());
 
 	// ready
 
