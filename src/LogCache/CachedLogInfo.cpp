@@ -29,6 +29,16 @@ namespace LogCache
 
 // construction / destruction (nothing to do)
 
+CCachedLogInfo::CCachedLogInfo()
+	: fileName()
+	, revisions()
+	, logInfo()
+	, skippedRevisions (logInfo.GetPaths(), revisions)
+	, modified (false)
+	, revisionAdded (false)
+{
+}
+
 CCachedLogInfo::CCachedLogInfo (const std::wstring& aFileName)
 	: fileName (aFileName)
 	, revisions()

@@ -86,6 +86,7 @@ public:
 
 	// construction / destruction (nothing to do)
 
+	CCachedLogInfo();
 	CCachedLogInfo (const std::wstring& aFileName);
 	~CCachedLogInfo (void);
 

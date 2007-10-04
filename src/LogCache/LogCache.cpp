@@ -146,7 +146,7 @@ void TestUpdate()
 	CCachedLogInfo copied (path + L".stream");
 	copied.Load();
 
-	CCachedLogInfo newData (path + L".dummy.stream");
+	CCachedLogInfo newData;
 	newData.Insert (1234, "dummy", "", 0);
 
 	CHighResClock clock1;
