@@ -112,7 +112,8 @@ void CCachedLogInfo::Save (const std::wstring& newFileName)
 void CCachedLogInfo::Insert ( revision_t revision
 							 , const std::string& author
 							 , const std::string& comment
-							 , __time64_t timeStamp)
+							 , __time64_t timeStamp
+                             , char flags)
 {
 	// there will be a modification
 
@@ -120,7 +121,7 @@ void CCachedLogInfo::Insert ( revision_t revision
 
 	// add entry to cache and update the revision index
 
-	index_t index = logInfo.Insert (author, comment, timeStamp);
+	index_t index = logInfo.Insert (author, comment, timeStamp, flags);
 	revisions.SetRevisionIndex (revision, index);
 
 	// you may call AddChange() now

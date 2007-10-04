@@ -43,6 +43,7 @@
 #include "Blame.h"
 #include "SVNHelpers.h"
 #include "LogDlgHelper.h"
+#include "CachedLogInfo.h"
 
 #define ICONITEMBORDER 5
 
@@ -1755,6 +1756,24 @@ void CLogDlg::EditAuthor(int index)
 		{
 			pLogEntry->sAuthor = dlg.m_sInputText;
 			m_LogList.Invalidate();
+
+            // update the log cache 
+
+            LogCache::CCachedLogInfo* toUpdate 
+                = GetLogCache (CTSVNPath (m_sRepositoryRoot));
+            if (toUpdate != NULL)
+            {
+                // log caching is active
+
+                LogCache::CCachedLogInfo newInfo;
+                newInfo.Insert ( pLogEntry->Rev
+                               , (const char*) CUnicodeUtils::GetUTF8 (pLogEntry->sAuthor)
+                               , ""
+                               , 0
+                               , LogCache::CRevisionInfoContainer::HAS_AUTHOR);
+
+                toUpdate->Update (newInfo);
+            }
 		}
 	}
 	theApp.DoWaitCursor(-1);
@@ -1831,7 +1850,25 @@ void CLogDlg::EditLogMessage(int index)
 			pMsgView->SetWindowText(dlg.m_sInputText);
 			m_ProjectProperties.FindBugID(dlg.m_sInputText, pMsgView);
 			m_LogList.Invalidate();
-		}
+        
+            // update the log cache 
+
+            LogCache::CCachedLogInfo* toUpdate 
+                = GetLogCache (CTSVNPath (m_sRepositoryRoot));
+            if (toUpdate != NULL)
+            {
+                // log caching is active
+
+                LogCache::CCachedLogInfo newInfo;
+                newInfo.Insert ( pLogEntry->Rev
+                               , ""
+                               , (const char*) CUnicodeUtils::GetUTF8 (pLogEntry->sMessage)
+                               , 0
+                               , LogCache::CRevisionInfoContainer::HAS_COMMENT);
+
+                toUpdate->Update (newInfo);
+            }
+        }
 	}
 	theApp.DoWaitCursor(-1);
 	EnableOKButton();

@@ -1156,6 +1156,17 @@ bool SVN::DiffSummarizePeg(const CTSVNPath& path, SVNRev peg, SVNRev rev1, SVNRe
 	return true;
 }
 
+LogCache::CCachedLogInfo* SVN::GetLogCache (const CTSVNPath& path)
+{
+	CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\UseLogCache"), TRUE);
+	if (useLogCache == FALSE)
+        return NULL;
+
+    CString uuid;
+    logCachePool.GetRepositoryInfo().GetRepositoryRootAndUUID (path, &uuid);
+    return logCachePool.GetCache (uuid);
+}
+
 BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev revisionStart, SVNRev revisionEnd, int limit, BOOL strict /* = FALSE */)
 {
 	svn_error_clear(Err);

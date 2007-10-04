@@ -110,7 +110,8 @@ public:
 	void Insert ( revision_t revision
 				, const std::string& author
 				, const std::string& comment
-				, __time64_t timeStamp);
+				, __time64_t timeStamp
+                , char flags = CRevisionInfoContainer::HAS_STANDARD_INFO);
 
 	void AddChange ( TChangeAction action
 				   , const std::string& path
