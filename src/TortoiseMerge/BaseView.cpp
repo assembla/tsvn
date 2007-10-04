@@ -2210,6 +2210,7 @@ void CBaseView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		{
 			bool bStartSelection = ((m_ptSelectionStartPos.x == m_ptCaretPos.x)&&(m_ptSelectionStartPos.y == m_ptCaretPos.y));
 			m_ptCaretPos.y -= GetScreenLines();
+            m_ptCaretPos.y = max(m_ptCaretPos.y, 0);
 			if (bShift)
 				AdjustSelection(bStartSelection, false);
 			else
@@ -2222,6 +2223,8 @@ void CBaseView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		{
 			bool bStartSelection = ((m_ptSelectionStartPos.x == m_ptCaretPos.x)&&(m_ptSelectionStartPos.y == m_ptCaretPos.y));
 			m_ptCaretPos.y += GetScreenLines();
+            if (m_ptCaretPos.y >= GetLineCount())
+                m_ptCaretPos.y = GetLineCount()-1;
 			if (bShift)
 				AdjustSelection(bStartSelection, true);
 			else
@@ -2566,6 +2569,7 @@ void CBaseView::OnMouseMove(UINT nFlags, CPoint point)
 			m_nSelBlockStart = m_ptSelectionStartPos.y;
 			m_nSelBlockEnd = m_ptSelectionEndPos.y;
 			SetupSelection(m_nSelBlockStart, m_nSelBlockEnd);
+			UpdateCaret();
 			Invalidate();
 			UpdateWindow();
 		}
@@ -3144,6 +3148,14 @@ void CBaseView::AdjustSelection(bool bStartSelection, bool bForward)
 		m_ptSelectionStartPos = m_ptCaretPos;
 	else
 		m_ptSelectionEndPos = m_ptCaretPos;
+	if ((m_ptSelectionEndPos.y < m_ptSelectionStartPos.y) ||
+		((m_ptSelectionEndPos.y == m_ptSelectionStartPos.y)&&
+		(m_ptSelectionEndPos.x < m_ptSelectionStartPos.x)))
+	{
+		POINT pt = m_ptSelectionStartPos;
+		m_ptSelectionStartPos = m_ptSelectionEndPos;
+		m_ptSelectionEndPos = pt;
+	}
 
 	m_ptSelectionDrawStartPos = m_ptSelectionStartPos;
 	m_ptSelectionDrawEndPos = m_ptSelectionEndPos;
