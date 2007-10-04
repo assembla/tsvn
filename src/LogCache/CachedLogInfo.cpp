@@ -185,6 +185,10 @@ void CCachedLogInfo::Update ( const CCachedLogInfo& newData
 	// but we check them anyway
 
 	skippedRevisions.Compress();
+
+    // this cache has been touched
+
+    modified = true;
 }
 
 // end namespace LogCache
