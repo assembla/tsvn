@@ -130,7 +130,8 @@ private:
 								     , revision_t endRevision) const;
 
 	/// Determine an end-revision that would fill many cache gaps efficiently
-	revision_t FindOldestGap ( revision_t startRevision
+	revision_t FindOldestGap ( const CDictionaryBasedTempPath& path
+					         , revision_t startRevision
 							 , revision_t endRevision) const;
 
 	/// ask SVN to fill the log -- at least a bit
