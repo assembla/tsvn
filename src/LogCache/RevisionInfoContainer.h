@@ -326,6 +326,10 @@ public:
 		// pointer-like behavior
 
 		const CChangesIterator* operator->() const;
+
+        // pointer arithmetics
+
+        size_t operator- (const CChangesIterator& rhs) const;
 	};
 
 	///////////////////////////////////////////////////////////////
@@ -375,6 +379,10 @@ public:
 		// pointer-like behavior
 
 		const T* operator->() const;
+
+        // pointer arithmetics
+
+        size_t operator- (const T& rhs) const;
 	};
 
 	///////////////////////////////////////////////////////////////
@@ -683,6 +691,17 @@ CRevisionInfoContainer::CChangesIterator::operator->() const
 }
 
 ///////////////////////////////////////////////////////////////
+// pointer arithmetics
+///////////////////////////////////////////////////////////////
+
+inline size_t 
+CRevisionInfoContainer::CChangesIterator::operator- 
+    (const CChangesIterator& rhs) const
+{
+	return changeOffset - rhs.changeOffset;
+}
+
+///////////////////////////////////////////////////////////////
 // CPerRevisionInfoIteratorBase<>
 ///////////////////////////////////////////////////////////////
 // construction / destruction
@@ -761,6 +780,18 @@ inline const T*
 CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>::operator->() const
 {
 	return static_cast<T*>(this);
+}
+
+///////////////////////////////////////////////////////////////
+// pointer arithmetics
+///////////////////////////////////////////////////////////////
+
+template<class T>
+inline size_t 
+CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>::operator- 
+    (const T& rhs) const
+{
+	return offset - rhs.offset;
 }
 
 ///////////////////////////////////////////////////////////////
