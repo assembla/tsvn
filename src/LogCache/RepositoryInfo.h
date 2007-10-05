@@ -121,6 +121,10 @@ public:
 
     revision_t GetHeadRevision (const CTSVNPath& url);
 
+    // make sure, we will ask the repository for the HEAD
+
+    void ResetHeadRevision (const CTSVNPath& url);
+
     // find the root folder to a given UUID (e.g. URL for given cache file).
     // Returns an empty string, if no suitable entry has been found.
 

@@ -191,6 +191,23 @@ revision_t CRepositoryInfo::GetHeadRevision (const CTSVNPath& url)
     return iter->second.headRevision;
 }
 
+// make sure, we will ask the repository for the HEAD
+
+void CRepositoryInfo::ResetHeadRevision (const CTSVNPath& url)
+{
+    // get the entry for that repository
+
+    TData::iterator iter = Lookup (url);
+    if (iter != data.end())
+    {
+        // there is actually a cache for this URL.
+        // Invalidate the HEAD info
+
+        iter->second.headLookupTime = 0;
+    }
+}
+
+
 // find the root folder to a given UUID (e.g. URL for given cache file).
 // Returns an empty string, if no suitable entry has been found.
 

@@ -694,6 +694,10 @@ void CLogDlg::Refresh()
 	m_arShownList.RemoveAll();
 	m_logEntries.ClearAll();
 
+    // reset the cached HEAD property
+
+    logCachePool.GetRepositoryInfo().ResetHeadRevision (CTSVNPath (m_sRepositoryRoot));
+
 	InterlockedExchange(&m_bThreadRunning, TRUE);
 	if (AfxBeginThread(LogThreadEntry, this)==NULL)
 	{
