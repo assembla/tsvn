@@ -68,9 +68,9 @@ typedef CArray<LogChangedPath*, LogChangedPath*> LogChangedPathArray;
 
 struct StandardRevProps
 {
-    CString& author;
-    apr_time_t& timeStamp;
-    CString& message;
+    CString author;
+    apr_time_t timeStamp;
+    CString message;
 };
 
 /**

@@ -61,7 +61,7 @@ public:
 					 , int limit
 					 , bool strictNodeHistory
 					 , ILogReceiver* receiver
-                     , bool revs_only
+                     , bool includeChanges
                      , bool includeMerges
                      , bool includeStandardRevProps
                      , bool includeUserRevProps
