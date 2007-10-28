@@ -62,6 +62,28 @@ enum
 
 typedef CArray<LogChangedPath*, LogChangedPath*> LogChangedPathArray;
 
+/**
+ * standard revision properties
+ */
+
+struct StandardRevProps
+{
+    CString& author;
+    apr_time_t& timeStamp;
+    CString& message;
+};
+
+/**
+ * data structure to accommodate the list of user-defined revision properties.
+ */
+struct UserRevProp
+{
+	CString name;
+	CString value;
+};
+
+typedef CArray<UserRevProp*, UserRevProp*> UserRevPropArray;
+
 
 /**
  * Interface for receiving log information. It will be used as a callback
@@ -75,11 +97,17 @@ public:
 
 	/// call-back for every revision found
 	/// (called at most once per revision)
+    ///
+    /// the implementation may modify but not delete()
+    /// the data containers passed to it
+    ///
+    /// any pointer may be NULL
 	///
 	/// may throw a SVNError to cancel the log
+
 	virtual void ReceiveLog ( LogChangedPathArray* changes
 							, svn_revnum_t rev
-							, const CString& author
-							, const apr_time_t& timeStamp
-							, const CString& message) = 0;
+                            , const StandardRevProps* stdRevProps
+                            , UserRevPropArray* userRevProps
+                            , bool mergesFollow) = 0;
 };
