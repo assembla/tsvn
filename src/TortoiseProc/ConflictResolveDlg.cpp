@@ -30,7 +30,7 @@ IMPLEMENT_DYNAMIC(CConflictResolveDlg, CResizableStandAloneDialog)
 CConflictResolveDlg::CConflictResolveDlg(CWnd* pParent /*=NULL*/)
 	: CResizableStandAloneDialog(CConflictResolveDlg::IDD, pParent)
 	, m_pConflictDescription(NULL)
-	, m_result(svn_wc_conflict_result_conflicted)
+    , m_result()
 {
 
 }
@@ -140,13 +140,13 @@ BOOL CConflictResolveDlg::OnInitDialog()
 
 void CConflictResolveDlg::OnBnClickedUselocal()
 {
-	m_result = svn_wc_conflict_result_choose_user;
+    m_result.choice = svn_wc_conflict_choose_mine;
 	EndDialog(IDOK);
 }
 
 void CConflictResolveDlg::OnBnClickedUserepo()
 {
-	m_result = svn_wc_conflict_result_choose_repos;
+	m_result.choice = svn_wc_conflict_choose_theirs;
 	EndDialog(IDOK);
 }
 
@@ -159,30 +159,30 @@ void CConflictResolveDlg::OnBnClickedEditconflict()
 	n2.Format(IDS_DIFF_BASENAME, filename);
 	n3.Format(IDS_DIFF_REMOTENAME, filename);
 
-	CAppUtils::StartExtMerge(CTSVNPath(CUnicodeUtils::GetUnicode(m_pConflictDescription->base_file)),
+/*	CAppUtils::StartExtMerge(CTSVNPath(CUnicodeUtils::GetUnicode(m_pConflictDescription->base_file)),
 							CTSVNPath(CUnicodeUtils::GetUnicode(m_pConflictDescription->repos_file)),
 							CTSVNPath(CUnicodeUtils::GetUnicode(m_pConflictDescription->user_file)),
 							CTSVNPath(CUnicodeUtils::GetUnicode(m_pConflictDescription->merged_file)),
 							n2, n3, n1, CString(), false);
-
+*/
 	GetDlgItem(IDC_RESOLVED)->EnableWindow(TRUE);
 }
 
 void CConflictResolveDlg::OnBnClickedResolved()
 {
-	m_result = svn_wc_conflict_result_resolved;
+//    m_result.choice = svn_wc_conflict_result_resolved;
 	EndDialog(IDOK);
 }
 
 void CConflictResolveDlg::OnBnClickedResolvealllater()
 {
-	m_result = svn_wc_conflict_result_conflicted;
+//	m_result = svn_wc_conflict_result_conflicted;
 	EndDialog(IDOK);
 }
 
 void CConflictResolveDlg::OnCancel()
 {
-	m_result = svn_wc_conflict_result_conflicted;
+//	m_result = svn_wc_conflict_result_conflicted;
 
 	CResizableStandAloneDialog::OnCancel();
 }

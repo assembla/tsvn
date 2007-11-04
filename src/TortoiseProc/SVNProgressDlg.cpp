@@ -138,7 +138,7 @@ svn_wc_conflict_result_t CSVNProgressDlg::ConflictResolveCallback(const svn_wc_c
 			dlg.SetConflictDescription(description);
 			if (dlg.DoModal() == IDOK)
 			{
-				if (dlg.GetResult() == svn_wc_conflict_result_conflicted)
+                if (dlg.GetResult().choice == svn_wc_conflict_choose_postpone)
 				{
 					// if the result is conflicted and the dialog returned IDOK,
 					// that means we should not ask again in case of a conflict
@@ -149,7 +149,7 @@ svn_wc_conflict_result_t CSVNProgressDlg::ConflictResolveCallback(const svn_wc_c
 		}
 	}
 
-	return svn_wc_conflict_result_conflicted;
+	return svn_wc_conflict_result_t();
 }
 
 void CSVNProgressDlg::AddItemToList(const NotificationData* pData)

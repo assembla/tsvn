@@ -82,7 +82,7 @@ SVN::SVN(void) : m_progressWnd(0)
 	m_pctx->notify_baton2 = this;
 	m_pctx->notify_func = NULL;
 	m_pctx->notify_baton = NULL;
-	m_pctx->conflict_func = conflict_resolver;
+	m_pctx->conflict_func = NULL;
 	m_pctx->conflict_baton = this;
 	m_pctx->cancel_func = cancel;
 	m_pctx->cancel_baton = this;
@@ -166,7 +166,7 @@ BOOL SVN::ReportList(const CString& path, svn_node_kind_t kind,
 					 const CString& lockowner, const CString& lockcomment, 
 					 bool is_dav_comment, apr_time_t lock_creationdate, 
 					 apr_time_t lock_expirationdate, const CString& absolutepath) {return TRUE;}
-svn_wc_conflict_result_t SVN::ConflictResolveCallback(const svn_wc_conflict_description_t *description) {return svn_wc_conflict_result_conflicted;}
+svn_wc_conflict_result_t SVN::ConflictResolveCallback(const svn_wc_conflict_description_t *description) {return svn_wc_conflict_result_t();}
 
 #pragma warning(pop)
 
@@ -858,6 +858,7 @@ BOOL SVN::Switch(const CTSVNPath& path, const CTSVNPath& url, SVNRev revision, s
 							 path.GetSVNApiPath(subpool),
 							 url.GetSVNApiPath(subpool),
 							 revision,
+							 revision,
 							 depth,
 							 ignore_externals,
 							 allow_unver_obstruction,
@@ -969,8 +970,7 @@ BOOL SVN::PegMerge(const CTSVNPath& source, SVNRev revision1, SVNRev revision2, 
 
 	svn_error_clear(Err);
 	Err = svn_client_merge_peg3 (source.GetSVNApiPath(subpool),
-		revision1,
-		revision2,
+		NULL,
 		pegrevision,
 		destpath.GetSVNApiPath(subpool),
 		depth,
@@ -1241,7 +1241,6 @@ svn_error_t * SVN::logMergeReceiver(void* baton, svn_log_entry_t* log_entry, apr
 	if (log_entry == NULL)
 		return SVN_NO_ERROR;
 
-	svn_compat_log_revprops_out(&author, &date, &message, log_entry->revprops);
 
 	SVN * svn = (SVN *)baton;
 	if (author)
