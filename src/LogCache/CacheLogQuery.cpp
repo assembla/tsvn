@@ -800,14 +800,13 @@ void CCacheLogQuery::SendToReceiver ( revision_t revision
     {
         // author
 
-        CString author;
         index_t authorID = logInfo.GetAuthorID (logIndex);
         TID2String::const_iterator iter = authorToStringMap.find (authorID);
         if (iter == authorToStringMap.end())
         {
             standardRevProps.author     
                 = CUnicodeUtils::GetUnicode (logInfo.GetAuthor (logIndex));
-            authorToStringMap.insert (authorID, author);
+            authorToStringMap.insert (authorID, standardRevProps.author);
         }
         else
         {
@@ -896,7 +895,7 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 
 	while ((iterator->GetRevision() >= endRevision) && !iterator->EndOfPath())
 	{
-		if (dataAvailable (iterator.get()))
+		if (!dataAvailable (iterator.get()))
 		{
 			// we must not fetch revisions twice
 			// (this may cause an indefinite loop)

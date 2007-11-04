@@ -135,8 +135,8 @@ inline bool CLogIteratorBase::InternalDataIsMissing() const
 {
     index_t index = logInfo->GetRevisions()[revision];
 	return (index == NO_INDEX)
-        && (  logInfo->GetLogInfo().GetPresenceFlags(index) 
-            & CRevisionInfoContainer::HAS_CHANGEDPATHS);
+        || (0 == (  logInfo->GetLogInfo().GetPresenceFlags(index) 
+                  & CRevisionInfoContainer::HAS_CHANGEDPATHS));
 }
 
 ///////////////////////////////////////////////////////////////
