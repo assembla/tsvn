@@ -1267,7 +1267,7 @@ svn_error_t * SVN::logMergeReceiver(void* baton, svn_log_entry_t* log_entry, apr
 	msg_native = CUnicodeUtils::GetUnicode(message);
 	int filechanges = 0;
 	BOOL copies = FALSE;
-	std::auto_ptr<LogChangedPathArray> arChangedPaths (new LogChangedPathArray);
+	LogChangedPathArray arChangedPaths;
 	try
 	{
 		if (log_entry->changed_paths)
@@ -1314,7 +1314,7 @@ svn_error_t * SVN::logMergeReceiver(void* baton, svn_log_entry_t* log_entry, apr
 				{
 					changedpath->lCopyFromRev = 0;
 				}
-				arChangedPaths->Add(changedpath.release());
+				arChangedPaths.Add(changedpath.release());
 			} // for (int i = 0; i < sorted_paths->nelts; i++) 
 		} // if (ch_paths)
 	}
@@ -1327,7 +1327,7 @@ svn_error_t * SVN::logMergeReceiver(void* baton, svn_log_entry_t* log_entry, apr
 	SVN_ERR (svn->cancel(baton));
 #pragma warning(pop)
 
-	svn->Log(log_entry->revision, author_native, date_native, msg_native, arChangedPaths.release(), time_temp, filechanges, copies, actions, log_entry->has_children);
+	svn->Log(log_entry->revision, author_native, date_native, msg_native, &arChangedPaths, time_temp, filechanges, copies, actions, log_entry->has_children);
 	return error;
 }
 

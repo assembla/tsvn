@@ -798,7 +798,6 @@ BOOL CLogDlg::Log(svn_revnum_t rev, const CString& author, const CString& date, 
 	if (rev == SVN_INVALID_REVNUM)
 	{
 		m_childCounter--;
-		delete cpaths;
 		return TRUE;
 	}
 	// this is the callback function which receives the data for every revision we ask the log for
@@ -872,8 +871,12 @@ BOOL CLogDlg::Log(svn_revnum_t rev, const CString& author, const CString& date, 
 		else
 			m_sMessageBuf.Empty();
         pLogItem->sMessage = m_sMessageBuf;
-        pLogItem->pArChangedPaths = cpaths;
         pLogItem->Rev = rev;
+
+        // move-construct path array
+
+        pLogItem->pArChangedPaths = new LogChangedPathArray (*cpaths);
+        cpaths->RemoveAll();
 	}
 	catch (CException * e)
 	{

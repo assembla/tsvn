@@ -32,9 +32,7 @@ BOOL SVNLogHelper::Log(LONG rev, const CString& author, const CString& /*date*/,
 			m_copyfromurl = m_reposroot + cpath->sCopyFromPath;
 			m_rev = cpath->lCopyFromRev;
 		}
-		delete cpath;
 	}
-	delete cpaths;
 	return TRUE;
 }
 

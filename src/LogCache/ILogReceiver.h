@@ -67,6 +67,17 @@ class CAutoArray : public CArray<T*,T*>
 {
 public:
 
+    // default and copy construction
+
+    CAutoArray() 
+    {
+    }
+
+    CAutoArray (const CAutoArray& rhs)
+    {
+        Copy (rhs);
+    }
+
     // destruction deletes members
 
     ~CAutoArray()

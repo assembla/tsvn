@@ -92,10 +92,6 @@ BOOL CBlame::Log(svn_revnum_t revision, const CString& /*author*/, const CString
 		m_saveLog.Write(&length, sizeof(int));
 		m_saveLog.Write((LPCSTR)msgutf8, length);
 	}
-	for (INT_PTR i=0; i<cpaths->GetCount(); ++i)
-		delete cpaths->GetAt(i);
-	cpaths->RemoveAll();
-	delete cpaths;
 	return TRUE;
 }
 
