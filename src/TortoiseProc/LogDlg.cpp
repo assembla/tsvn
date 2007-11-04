@@ -1022,12 +1022,12 @@ UINT CLogDlg::LogThread()
 	{
 		// if we have to get the logs with the merge info,
 		// we can't use the log cache (because the cache doesn't know about merge info)
-		BOOL bLogRes = GetLogWithMergeInfo(CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, m_bStrict);
+		BOOL bLogRes = ReceiveLog (CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, m_bStrict, TRUE);
 		if ((!bLogRes)&&(!m_path.IsUrl()))
 		{
 			// try again with REV_WC as the start revision, just in case the path doesn't
 			// exist anymore in HEAD
-			bLogRes = GetLogWithMergeInfo(CTSVNPathList(m_path), SVNRev(), SVNRev::REV_WC, m_endrev, m_limit, m_bStrict);
+			bLogRes = ReceiveLog(CTSVNPathList(m_path), SVNRev(), SVNRev::REV_WC, m_endrev, m_limit, m_bStrict, TRUE);
 		}
 		if (!bLogRes)
 			CMessageBox::Show(m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);

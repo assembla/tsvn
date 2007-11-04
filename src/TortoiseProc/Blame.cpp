@@ -170,11 +170,7 @@ CString CBlame::BlameToTempFile(const CTSVNPath& path, SVNRev startrev, SVNRev e
 		// will error out. Bug in Subversion?
 		if (pegrev.IsWorking() && !path.IsUrl())
 			pegrev = SVNRev();
-		BOOL bRet = FALSE;
-		if (m_bHasMerges)
-			bRet = GetLogWithMergeInfo(CTSVNPathList(path), pegrev, m_nHeadRev, m_lowestrev, 0, FALSE);
-		else
-			bRet = ReceiveLog(CTSVNPathList(path), pegrev, m_nHeadRev, m_lowestrev, 0, FALSE);
+		BOOL bRet = ReceiveLog(CTSVNPathList(path), pegrev, m_nHeadRev, m_lowestrev, 0, FALSE, m_bHasMerges);
 		if (!bRet)
 		{
 			m_saveLog.Close();
