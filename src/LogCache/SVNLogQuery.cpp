@@ -55,9 +55,9 @@ const TRevPropNames& CSVNLogQuery::GetStandardRevProps()
 
     if (standardRevProps.empty())
     {
-        standardRevProps.push_back (_T("svn:log"));
-        standardRevProps.push_back (_T("svn:date"));
-        standardRevProps.push_back (_T("svn:author"));
+        standardRevProps.push_back (CString (SVN_PROP_REVISION_LOG));
+        standardRevProps.push_back (CString (SVN_PROP_REVISION_DATE));
+        standardRevProps.push_back (CString (SVN_PROP_REVISION_AUTHOR));
     }
 
     return standardRevProps;
@@ -71,9 +71,9 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void *baton
 {
     // a few globals
 
-    static const CString svnLog = _T("svn:log");
-    static const CString svnDate = _T("svn:date");
-    static const CString svnAuthor = _T("svn:author");
+    static const CString svnLog (SVN_PROP_REVISION_LOG);
+    static const CString svnDate (SVN_PROP_REVISION_DATE);
+    static const CString svnAuthor (SVN_PROP_REVISION_AUTHOR);
 
     // just in case ...
 
@@ -104,7 +104,7 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void *baton
 
                 const char* key = NULL;
                 ptrdiff_t keyLen;
-                char* val = NULL;
+                const char** val = NULL;
 
                 apr_hash_this ( index
                               , reinterpret_cast<const void**>(&key)
@@ -114,7 +114,7 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void *baton
                 // decode / dispatch it
 
         	    CString name = CUnicodeUtils::GetUnicode (key);
-	            CString value = CUnicodeUtils::GetUnicode (val);
+	            CString value = CUnicodeUtils::GetUnicode (*val);
 
                 if (name == svnLog)
                     standardRevProps.message = value;
@@ -125,7 +125,7 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void *baton
 	                standardRevProps.timeStamp = NULL;
 	                if (value[0])
 		                SVN_ERR (svn_time_from_cstring 
-                                    (&standardRevProps.timeStamp, val, pool));
+                                    (&standardRevProps.timeStamp, *val, pool));
                 }
                 else
                 {
@@ -319,7 +319,7 @@ void CSVNLogQuery::Log ( const CTSVNPathList& targets
 										  , start
 										  , end
 										  , limit
-                                          , includeChanges ? FALSE : TRUE
+                                          , includeChanges ? TRUE : FALSE
 										  , strictNodeHistory ? TRUE : FALSE
                                           , includeMerges ? TRUE : FALSE
                                           , revprops

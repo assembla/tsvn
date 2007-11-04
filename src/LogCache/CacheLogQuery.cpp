@@ -345,26 +345,6 @@ void CCacheLogQuery::CLogFiller::ReceiveLog
         }
         else
         {
-            if ((userRevProps != NULL) && (!options.GetUserRevProps().empty()))
-            {
-                // we must filter the revProps
-
-                TRevPropNames::const_iterator begin 
-                    = options.GetUserRevProps().begin();
-                TRevPropNames::const_iterator end 
-                    = options.GetUserRevProps().end();
-
-	            for (INT_PTR i = userRevProps->GetCount()-1; i >= 0; --i)
-	            {
-		            const UserRevProp* revprop = userRevProps->GetAt (i);
-                    if (std::find (begin, end, revprop->name) == end)
-                    {
-                        userRevProps->RemoveAt (i);
-                        delete revprop;
-                    }
-	            }
-            }
-
     		options.GetReceiver()->ReceiveLog ( changes
                                               , rev
                                               , stdRevProps
@@ -402,7 +382,6 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 									, const CLogOptions& options)
 {
     this->cache = cache;
-    this->updateData = updateData;
 	this->URL = URL;
     this->svnQuery = svnQuery;
     this->options = options;
@@ -544,7 +523,7 @@ CCacheLogQuery::NextAvailableRevision ( const CDictionaryBasedTempPath& path
 
 		while (   (startRevision >= lastRevisionToCheck) 
 			   && (startRevision != NO_REVISION)
-			   && (dataAvailable (startRevision)))
+			   && (!dataAvailable (startRevision)))
 		{
 			--startRevision;
 		}
