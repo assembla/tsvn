@@ -55,7 +55,17 @@ CCacheLogQuery::CLogOptions::CLogOptions ( bool strictNodeHistory
     , includeStandardRevProps (includeStandardRevProps)
     , includeUserRevProps (includeUserRevProps)
     , userRevProps (userRevProps)
+    , presenceMask (0)
+    , revsOnly (   !includeChanges 
+                && !includeStandardRevProps 
+                && !includeUserRevProps)
 {
+    if (includeStandardRevProps)
+        presenceMask = CRevisionInfoContainer::HAS_STANDARD_REVPROPS;
+    if (includeChanges)
+        presenceMask |= CRevisionInfoContainer::HAS_CHANGEDPATHS;
+    if (includeUserRevProps)
+        presenceMask |= CRevisionInfoContainer::HAS_USERREVPROPS;
 }
 
 CCacheLogQuery::CLogOptions::CLogOptions ( const CLogOptions& rhs
@@ -67,6 +77,8 @@ CCacheLogQuery::CLogOptions::CLogOptions ( const CLogOptions& rhs
     , includeStandardRevProps (rhs.includeStandardRevProps)
     , includeUserRevProps (rhs.includeUserRevProps)
     , userRevProps (rhs.userRevProps)
+    , presenceMask (rhs.presenceMask)
+    , revsOnly (rhs.revsOnly)
 {
 }
 
@@ -88,27 +100,6 @@ ILogIterator* CCacheLogQuery::CLogOptions::CreateIterator
             (new CCopyFollowingLogIterator ( cache
 							               , startRevision
 							               , startPath));
-}
-
-char CCacheLogQuery::CLogOptions::GetPresenceMask() const
-{
-    char result = 0;
-
-    if (includeStandardRevProps)
-        result = CRevisionInfoContainer::HAS_STANDARD_REVPROPS;
-    if (includeChanges)
-        result |= CRevisionInfoContainer::HAS_CHANGEDPATHS;
-    if (includeUserRevProps)
-        result |= CRevisionInfoContainer::HAS_USERREVPROPS;
-
-    return result;
-}
-
-bool CCacheLogQuery::CLogOptions::GetRevsOnly() const
-{
-    return !includeChanges 
-        && !includeStandardRevProps 
-        && !includeUserRevProps;
 }
 
 ///////////////////////////////////////////////////////////////

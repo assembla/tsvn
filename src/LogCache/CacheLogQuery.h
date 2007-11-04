@@ -84,6 +84,11 @@ private:
         bool includeUserRevProps;
         TRevPropNames userRevProps;
 
+        // derived properties
+
+	    char presenceMask;
+        bool revsOnly;
+
     public:
 
         /// construction
@@ -101,21 +106,23 @@ private:
         /// data access
 
         bool GetStrictNodeHistory() const;
+
         ILogReceiver* GetReceiver() const;
+
         bool GetIncludeChanges() const;
         bool GetIncludeMerges() const;
         bool GetIncludeStandardRevProps() const;
         bool GetIncludeUserRevProps() const;
         const TRevPropNames& GetUserRevProps() const;
 
+	    char GetPresenceMask() const;
+        bool GetRevsOnly() const;
+
         /// utility methods
 
 	    ILogIterator* CreateIterator ( CCachedLogInfo* cache
 								     , revision_t startRevision
 									 , const CDictionaryBasedTempPath& startPath) const;
-
-	    char GetPresenceMask() const;
-        bool GetRevsOnly() const;
     };
 
     /**
@@ -411,4 +418,14 @@ inline bool CCacheLogQuery::CLogOptions::GetIncludeUserRevProps() const
 inline const TRevPropNames& CCacheLogQuery::CLogOptions::GetUserRevProps() const
 {
     return userRevProps;
+}
+
+inline char CCacheLogQuery::CLogOptions::GetPresenceMask() const
+{
+    return presenceMask;
+}
+
+inline bool CCacheLogQuery::CLogOptions::GetRevsOnly() const
+{
+    return revsOnly;
 }
