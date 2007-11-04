@@ -156,7 +156,6 @@ BOOL SVN::Notify(const CTSVNPath& path, svn_wc_notify_action_t action,
 				const CString& changelistname,
 				svn_merge_range_t * range,
 				svn_error_t * err, apr_pool_t * pool) {return TRUE;};
-BOOL SVN::Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions) {return TRUE;};
 BOOL SVN::Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, BOOL haschildren) {return TRUE;};
 BOOL SVN::BlameCallback(LONG linenumber, svn_revnum_t revision, const CString& author, const CString& date, svn_revnum_t merged_revision, const CString& merged_author, const CString& merged_date, const CString& merged_path, const CStringA& line) {return TRUE;}
 svn_error_t* SVN::DiffSummarizeCallback(const CTSVNPath& path, svn_client_diff_summarize_kind_t kind, bool propchanged, svn_node_kind_t node) {return SVN_NO_ERROR;}
@@ -1190,7 +1189,11 @@ BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev r
 				   , limit
 				   , strict != FALSE
 				   , this
-                   , false);
+                   , true
+                   , false
+                   , true
+                   , false
+                   , TRevPropNames());
 	}
 	catch (SVNError& e)
 	{
@@ -1551,44 +1554,50 @@ svn_error_t* SVN::listReceiver(void* baton, const char* path,
 
 void SVN::ReceiveLog ( LogChangedPathArray* changes
 					 , svn_revnum_t rev
-					 , const CString& author
-					 , const apr_time_t& timeStamp
-					 , const CString& message)
+                     , const StandardRevProps* stdRevProps
+                     , UserRevPropArray* /* userRevProps*/
+                     , bool mergesFollow)
 {
-	std::auto_ptr<LogChangedPathArray> arChanges (changes);
-
 	// aggregate common change mask
 
 	DWORD actions = 0;
 	BOOL copies = FALSE;
-	for (INT_PTR i = 0, count = changes->GetCount(); i < count; ++i)
-	{
-		const LogChangedPath* change = changes->GetAt (i);
-		actions |= change->action;
-		copies |= change->lCopyFromRev != 0;
-	}
+    if (changes != NULL)
+    {
+	    for (INT_PTR i = 0, count = changes->GetCount(); i < count; ++i)
+	    {
+		    const LogChangedPath* change = changes->GetAt (i);
+		    actions |= change->action;
+		    copies |= change->lCopyFromRev != 0;
+	    }
+    }
 
 	// convert time stamp to string
 
 	TCHAR date_native[SVN_DATE_BUFFER] = {0};
-	apr_time_t temp = timeStamp;
-	formatDate (date_native, temp);
-
+    if (stdRevProps != NULL)
+    {
+        apr_time_t temp = stdRevProps->timeStamp;
+	    formatDate (date_native, temp);
+    }
+    
 	// check for user pressing "Cancel" somewhere
 
 	cancel();
 
 	// finally, use the log info (in a derived class specific way)
 
+    static const CString emptyString;
 	Log ( rev
-		, author
+		, stdRevProps == NULL ? emptyString : stdRevProps->author
 		, date_native
-		, message
-		, arChanges.release()
-		, timeStamp
+        , stdRevProps == NULL ? emptyString : stdRevProps->message
+		, changes
+        , stdRevProps == NULL ? apr_time_t(0) : stdRevProps->timeStamp
 		, static_cast<int>(changes->GetCount())
 		, copies
-		, actions);
+		, actions
+        , mergesFollow);
 }
 
 void SVN::notify( void *baton,

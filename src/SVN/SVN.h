@@ -64,7 +64,6 @@ public:
 							const CString& changelistname,
 							svn_merge_range_t * range,
 							svn_error_t * err, apr_pool_t * pool);
-	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions);
 	virtual BOOL Log(svn_revnum_t rev, const CString& author, const CString& date, const CString& message, LogChangedPathArray * cpaths, apr_time_t time, int filechanges, BOOL copies, DWORD actions, BOOL haschildren);
 	virtual BOOL BlameCallback(LONG linenumber, svn_revnum_t revision, const CString& author, const CString& date,
 							svn_revnum_t merged_revision, const CString& merged_author, const CString& merged_date, const CString& merged_path,
@@ -918,9 +917,9 @@ protected:
 
 	void ReceiveLog ( LogChangedPathArray* changes
 					, svn_revnum_t rev
-					, const CString& author
-					, const apr_time_t& timeStamp
-					, const CString& message);
+                    , const StandardRevProps* stdRevProps
+                    , UserRevPropArray* userRevProps
+                    , bool mergesFollow);
 
 	static void progress_func(apr_off_t progress, apr_off_t total, void *baton, apr_pool_t *pool);
 	SVNProgress		m_SVNProgressMSG;
