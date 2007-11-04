@@ -60,7 +60,23 @@ enum
 	LOGACTIONS_DELETED	= 0x00000008
 };
 
-typedef CArray<LogChangedPath*, LogChangedPath*> LogChangedPathArray;
+/// auto-deleting extension of MFC Arrays for pointer arrays
+
+template<class T>
+class CAutoArray : public CArray<T*,T*>
+{
+public:
+
+    // destruction deletes members
+
+    ~CAutoArray()
+    {
+	    for (INT_PTR i = 0, count = GetCount(); i < count; ++i)
+		    delete GetAt (i);
+    }
+};
+
+typedef CAutoArray<LogChangedPath> LogChangedPathArray;
 
 /**
  * standard revision properties
@@ -82,7 +98,7 @@ struct UserRevProp
 	CString value;
 };
 
-typedef CArray<UserRevProp*, UserRevProp*> UserRevPropArray;
+typedef CAutoArray<UserRevProp> UserRevPropArray;
 
 
 /**

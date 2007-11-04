@@ -63,15 +63,6 @@ const TRevPropNames& CSVNLogQuery::GetStandardRevProps()
     return standardRevProps;
 }
 
-// utility to clean up MFC Arrays
-
-template<class T>
-void ClearArray (CArray<T,T>& array)
-{
-	for (INT_PTR i = 0, count = array.GetCount(); i < count; ++i)
-		delete array.GetAt (i);
-}
-
 // receive the information from SVN and relay it to our 
 
 svn_error_t* CSVNLogQuery::LogReceiver ( void *baton
@@ -230,20 +221,12 @@ svn_error_t* CSVNLogQuery::LogReceiver ( void *baton
 	}
 	catch (SVNError& e)
 	{
-        ClearArray (changedPaths);
-        ClearArray (userRevProps);
-
         return svn_error_create (e.GetCode(), NULL, e.GetMessage());
 	}
 	catch (...)
 	{
 		// we must not leak exceptions back into SVN
 	}
-
-    // we are responsible for cleaning up
-
-    ClearArray (changedPaths);
-    ClearArray (userRevProps);
 
 	return NULL;
 }
