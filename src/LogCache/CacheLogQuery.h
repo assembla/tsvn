@@ -68,15 +68,15 @@ private:
     {
     private:
 
-        // history tracing options
+        /// history tracing options
 
         bool strictNodeHistory;
 
-        // log target options
+        /// log target options
 
         ILogReceiver* receiver;
 
-        // log content options
+        /// log content options
 
         bool includeChanges;
         bool includeMerges;
@@ -86,7 +86,7 @@ private:
 
     public:
 
-        // construction
+        /// construction
 
         CLogOptions ( bool strictNodeHistory = true
                     , ILogReceiver* receiver = NULL
@@ -95,8 +95,10 @@ private:
                     , bool includeStandardRevProps = true
                     , bool includeUserRevProps = false
                     , const TRevPropNames& userRevProps = TRevPropNames());
+        CLogOptions ( const CLogOptions& rhs
+                    , ILogReceiver* receiver);
 
-        // data access
+        /// data access
 
         bool GetStrictNodeHistory() const;
         ILogReceiver* GetReceiver() const;
@@ -106,7 +108,7 @@ private:
         bool GetIncludeUserRevProps() const;
         const TRevPropNames& GetUserRevProps() const;
 
-        // utility methods
+        /// utility methods
 
 	    ILogIterator* CreateIterator ( CCachedLogInfo* cache
 								     , revision_t startRevision
@@ -177,8 +179,7 @@ private:
 							   , revision_t startRevision
 							   , revision_t count);
 
-        // cache data
-
+        /// cache data
         void WriteToCache ( LogChangedPathArray* changes
                           , revision_t revision
                           , const StandardRevProps* stdRevProps
@@ -193,8 +194,7 @@ private:
 
 	public:
 
-        // default construction / destruction
-
+        /// default construction / destruction
         CLogFiller();
         ~CLogFiller();
 
@@ -208,6 +208,38 @@ private:
 						   , const CDictionaryBasedTempPath& startPath
 						   , int limit
 						   , const CLogOptions& options);
+	};
+
+    /** utility class that receives (only) the revisions in the log
+     * including merged revisions. The parent CCacheLogQuery is used
+     * to add the other info from cache (auto-fill the cache if data
+     * is missing) and send it to the receiver.
+     */
+
+    class CMergeLogger : public ILogReceiver
+	{
+	private:
+
+        /// we will use the parent to actually update the cache
+        /// and to send data to the receiver
+        CCacheLogQuery* parentQuery;
+
+        /// log options (including receiver)
+        CLogOptions options;
+
+		/// implement ILogReceiver
+	    virtual void ReceiveLog ( LogChangedPathArray* changes
+							    , svn_revnum_t rev
+                                , const StandardRevProps* stdRevProps
+                                , UserRevPropArray* userRevProps
+                                , bool mergesFollow);
+
+	public:
+
+        /// construction
+
+        CMergeLogger ( CCacheLogQuery* parentQuery
+                     , const CLogOptions& options);
 	};
 
 	/// we get our cache from here
@@ -266,6 +298,9 @@ private:
     void SendToReceiver ( revision_t revision
 					    , const CLogOptions& options
                         , bool mergesFollow);
+
+    /// clear string translating caches
+    void ResetObjectTranslations();
 
 	/// crawl the history and forward it to the receiver
 	void InternalLog ( revision_t startRevision
@@ -329,6 +364,12 @@ public:
                      , bool includeStandardRevProps
                      , bool includeUserRevProps
                      , const TRevPropNames& userRevProps);
+
+    /// relay the content of a single revision to the receiver
+    /// (if the latter is not NULL)
+    void LogRevision ( revision_t revision
+                     , const CLogOptions& options
+                     , bool mergesFollow);
 
 	/// access to the cache
 	/// (only valid after calling Log())

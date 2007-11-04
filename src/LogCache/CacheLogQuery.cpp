@@ -58,6 +58,18 @@ CCacheLogQuery::CLogOptions::CLogOptions ( bool strictNodeHistory
 {
 }
 
+CCacheLogQuery::CLogOptions::CLogOptions ( const CLogOptions& rhs
+                                         , ILogReceiver* receiver)
+    : strictNodeHistory (rhs.strictNodeHistory)
+    , receiver (receiver)
+    , includeChanges (rhs.includeChanges)
+    , includeMerges (rhs.includeMerges)
+    , includeStandardRevProps (rhs.includeStandardRevProps)
+    , includeUserRevProps (rhs.includeUserRevProps)
+    , userRevProps (rhs.userRevProps)
+{
+}
+
 ///////////////////////////////////////////////////////////////
 // utility methods
 ///////////////////////////////////////////////////////////////
@@ -454,6 +466,57 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 }
 
 ///////////////////////////////////////////////////////////////
+// CMergeLogger
+///////////////////////////////////////////////////////////////
+// implement ILogReceiver
+///////////////////////////////////////////////////////////////
+
+void CCacheLogQuery::CMergeLogger::ReceiveLog 
+    ( LogChangedPathArray* changes
+    , svn_revnum_t rev
+    , const StandardRevProps* stdRevProps
+    , UserRevPropArray* userRevProps
+    , bool mergesFollow)
+{
+    // we want to receive revision numbers and "mergesFollow" only
+
+    assert (changes == NULL);
+    assert (stdRevProps == NULL);
+    assert (userRevProps == NULL);
+
+    // special case: end of merge list?
+
+    if (rev == SVN_INVALID_REVNUM)
+    {
+        if (options.GetReceiver() != NULL)
+        {
+            options.GetReceiver()->ReceiveLog ( NULL
+                                              , NO_REVISION
+                                              , NULL
+                                              , NULL
+                                              , mergesFollow);
+        }
+    }
+    else
+    {
+        parentQuery->LogRevision ( static_cast<revision_t>(rev)
+                                 , options
+                                 , mergesFollow);
+    }
+}
+
+///////////////////////////////////////////////////////////////
+// construction
+///////////////////////////////////////////////////////////////
+
+CCacheLogQuery::CMergeLogger::CMergeLogger ( CCacheLogQuery* parentQuery
+                                           , const CLogOptions& options)
+    : parentQuery (parentQuery)
+    , options (options)
+{
+}
+
+///////////////////////////////////////////////////////////////
 // CCacheLogQuery
 ///////////////////////////////////////////////////////////////
 // when asking SVN to fill our cache, we want it to cover
@@ -710,7 +773,21 @@ void CCacheLogQuery::SendToReceiver ( revision_t revision
 								    , const CLogOptions& options
                                     , bool mergesFollow)
 {
-    assert (options.GetReceiver() != NULL);
+    // special cases
+
+    if (options.GetReceiver() == NULL)
+        return;
+
+    if (options.GetRevsOnly())
+    {
+        // just notify the receiver that we made some progress
+
+	    options.GetReceiver()->ReceiveLog ( NULL
+						                  , revision
+						                  , NULL
+						                  , NULL
+						                  , mergesFollow);
+    }
 
     // access to the cached log info for this revision
 
@@ -780,6 +857,16 @@ void CCacheLogQuery::SendToReceiver ( revision_t revision
                      , mergesFollow);
 }
 
+// clear string translating caches
+
+void CCacheLogQuery::ResetObjectTranslations()
+{
+    authorToStringMap.clear();
+    pathToStringMap.clear();
+}
+
+// log from cach w/o merge history. Auto-fill cache if data is missing.
+
 void CCacheLogQuery::InternalLog ( revision_t startRevision
 								 , revision_t endRevision
 								 , const CDictionaryBasedTempPath& startPath
@@ -788,8 +875,7 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 {
     // clear string translating caches
 
-    authorToStringMap.clear();
-    pathToStringMap.clear();
+    ResetObjectTranslations();
 
 	// create the right iterator
 
@@ -801,8 +887,6 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
     // what data we need
 
     CDataAvailable dataAvailable (cache, options);
-
-    bool revsOnly = options.GetRevsOnly();
 
 	// find first suitable entry or cache gap
 
@@ -846,25 +930,8 @@ void CCacheLogQuery::InternalLog ( revision_t startRevision
 			// found an entry. Report it if not already done.
 
 			revision_t revision = iterator->GetRevision();
-			if ((revision < lastReported) && (options.GetReceiver() != NULL))
-			{
-                if (revsOnly)
-                {
-                    // just notify the receiver that we made some progress
-
-				    options.GetReceiver()->ReceiveLog ( NULL
-									                  , revision
-									                  , NULL
-									                  , NULL
-									                  , false);
-                }
-                else
-                {
-                    SendToReceiver ( revision
-								   , options
-                                   , false);
-                }
-			}
+			if (revision < lastReported) 
+                SendToReceiver (revision, options, false);
 
 			// enough?
 
@@ -882,7 +949,36 @@ void CCacheLogQuery::InternalLogWithMerge ( revision_t startRevision
 								          , int limit
                                           , const CLogOptions& options)
 {
-    assert (0);
+    // clear string translating caches
+
+    ResetObjectTranslations();
+
+    // this object will only receive the revision numbers
+    // and give us a callback to add the other info from cache
+    // (auto-fill the latter)
+
+    CMergeLogger logger (this, options);
+
+    // fetch revisions only but include merge children
+
+	CTSVNPath path;
+    if (startPath.IsRoot())
+	    path.SetFromSVN (URL);
+    else
+	    path.SetFromSVN (URL + startPath.GetPath().c_str());
+
+    svnQuery->Log ( CTSVNPathList (path)
+				  , static_cast<long>(startRevision)
+				  , static_cast<long>(startRevision)
+				  , static_cast<long>(endRevision)
+			      , limit
+				  , options.GetStrictNodeHistory()
+				  , &logger
+                  , false
+                  , true
+                  , false
+                  , false
+                  , TRevPropNames());
 }
 
 // follow copy history until the startRevision is reached
@@ -1170,6 +1266,38 @@ void CCacheLogQuery::Log ( const CTSVNPathList& targets
 				    , startPath
 				    , limit
 				    , options);
+}
+
+// relay the content of a single revision to the receiver
+// (if the latter is not NULL)
+
+void CCacheLogQuery::LogRevision ( revision_t revision
+                                 , const CLogOptions& options
+                                 , bool mergesFollow)
+{
+    // make sure the data is in our cache
+
+    CDataAvailable dataAvailable (cache, options);
+    if (!dataAvailable (revision))
+    {
+        // we will fetch the next ~100 revs at the respository root
+        // but we will not send them to the receiver, yet (cache fill only)
+
+        CLogOptions fillOptions (options, NULL);
+        CDictionaryBasedTempPath root ( &cache->GetLogInfo().GetPaths()
+                                      , std::string());
+
+        FillLog ( revision
+			    , 1
+			    , root
+			    , 100
+                , fillOptions
+                , dataAvailable);
+    }
+
+    // send it to the receiver
+
+    SendToReceiver (revision, options, mergesFollow);
 }
 
 // access to the cache
