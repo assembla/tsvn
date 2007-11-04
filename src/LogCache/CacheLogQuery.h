@@ -39,7 +39,11 @@ class CTSVNPath;
 
 namespace LogCache
 {
+    class ILogIterator;
+
 	class CLogCachePool;
+    class CRevisionIndex;
+    class CRevisionInfoContainer;
 	class CCachedLogInfo;
     class CRepositoryInfo;
 }
@@ -55,12 +59,106 @@ class CCacheLogQuery : public ILogQuery
 {
 private:
 
-	class CLogFiller : private ILogReceiver
+    /** utility class to group all options that controls
+     * the behavior of the log command. It's used to pass
+     * those options through a single variable.
+     */
+
+    class CLogOptions
+    {
+    private:
+
+        // history tracing options
+
+        bool strictNodeHistory;
+
+        // log target options
+
+        ILogReceiver* receiver;
+
+        // log content options
+
+        bool includeChanges;
+        bool includeMerges;
+        bool includeStandardRevProps;
+        bool includeUserRevProps;
+        TRevPropNames userRevProps;
+
+    public:
+
+        // construction
+
+        CLogOptions ( bool strictNodeHistory = true
+                    , ILogReceiver* receiver = NULL
+                    , bool includeChanges = true
+                    , bool includeMerges = false
+                    , bool includeStandardRevProps = true
+                    , bool includeUserRevProps = false
+                    , const TRevPropNames& userRevProps = TRevPropNames());
+
+        // data access
+
+        bool GetStrictNodeHistory() const;
+        ILogReceiver* GetReceiver() const;
+        bool GetIncludeChanges() const;
+        bool GetIncludeMerges() const;
+        bool GetIncludeStandardRevProps() const;
+        bool GetIncludeUserRevProps() const;
+        const TRevPropNames& GetUserRevProps() const;
+
+        // utility methods
+
+	    ILogIterator* CreateIterator ( CCachedLogInfo* cache
+								     , revision_t startRevision
+									 , const CDictionaryBasedTempPath& startPath) const;
+
+	    char GetPresenceMask() const;
+        bool GetRevsOnly() const;
+    };
+
+    /**
+     * Simple utility class that checks the revision pointed to
+     * by the iterator for available cached log data.
+     */
+
+    class CDataAvailable
+    {
+    private:
+
+        /// required to map revison -> log entry
+
+        const CRevisionIndex& revisions;
+        const CRevisionInfoContainer& logInfo;
+
+        /// presence flags that must be set for the respective revision
+
+        char requiredMask;
+
+    public:
+
+        /// initialize & pre-compile
+
+        CDataAvailable ( CCachedLogInfo* cache
+                       , const CLogOptions& options);
+
+        /// all required log info has been cached?
+
+        bool operator() (ILogIterator* iterator) const;
+        bool operator() (revision_t revision) const;
+    };
+
+    /** utility class that implements the ILogReceiver interface
+     */
+
+    class CLogFiller : private ILogReceiver
 	{
 	private:
 
 		/// cache to use & update
+        /// collect *changed* data in updateData because updates are expensive
+        /// (merge them into cache when necessary)
 		CCachedLogInfo* cache;
+        CCachedLogInfo* updateData;
 		CStringA URL;
 
 		/// connection to the SVN repository
@@ -70,25 +168,35 @@ private:
 		/// in the log for that path
 		std::auto_ptr<CDictionaryBasedTempPath> currentPath;
 		revision_t firstNARevision;
-		bool followRenames;
-        bool revs_only;
 
-		/// the original log receiver (may be NULL)
-		ILogReceiver* receiver;
+        /// log options (including receiver)
+        CLogOptions options;
 
 		/// make sure, we can iterator over the given range for the given path
 		void MakeRangeIterable ( const CDictionaryBasedPath& path
 							   , revision_t startRevision
 							   , revision_t count);
 
+        // cache data
+
+        void WriteToCache ( LogChangedPathArray* changes
+                          , revision_t revision
+                          , const StandardRevProps* stdRevProps
+                          , UserRevPropArray* userRevProps);
+
 		/// implement ILogReceiver
-		virtual void ReceiveLog ( LogChangedPathArray* changes
-								, svn_revnum_t rev
-								, const CString& author
-								, const apr_time_t& timeStamp
-								, const CString& message);
+	    virtual void ReceiveLog ( LogChangedPathArray* changes
+							    , svn_revnum_t rev
+                                , const StandardRevProps* stdRevProps
+                                , UserRevPropArray* userRevProps
+                                , bool mergesFollow);
 
 	public:
+
+        // default construction / destruction
+
+        CLogFiller();
+        ~CLogFiller();
 
 		/// actually call SVN
 		/// return the last revision sent to the receiver
@@ -99,9 +207,7 @@ private:
 						   , revision_t endRevision
 						   , const CDictionaryBasedTempPath& startPath
 						   , int limit
-						   , bool strictNodeHistory
-                           , ILogReceiver* receiver
-                           , bool revs_only);
+						   , const CLogOptions& options);
 	};
 
 	/// we get our cache from here
@@ -127,12 +233,14 @@ private:
 	/// Determine the revision range to pass to SVN.
 	revision_t NextAvailableRevision ( const CDictionaryBasedTempPath& path
 									 , revision_t firstMissingRevision
-								     , revision_t endRevision) const;
+								     , revision_t endRevision
+                                     , const CDataAvailable& dataAvailable) const;
 
 	/// Determine an end-revision that would fill many cache gaps efficiently
 	revision_t FindOldestGap ( const CDictionaryBasedTempPath& path
 					         , revision_t startRevision
-							 , revision_t endRevision) const;
+							 , revision_t endRevision
+                             , const CDataAvailable& dataAvailable) const;
 
 	/// ask SVN to fill the log -- at least a bit
 	/// Possibly, it will stop long before endRevision and limit!
@@ -140,23 +248,37 @@ private:
 					   , revision_t endRevision
 					   , const CDictionaryBasedTempPath& startPath
 					   , int limit
-					   , bool strictNodeHistory
-					   , ILogReceiver* receiver
-					   , bool revs_only);
+					   , const CLogOptions& options
+                       , const CDataAvailable& dataAvailable);
 
 	/// fill the receiver's change list buffer 
-	std::auto_ptr<LogChangedPathArray> GetChanges 
-		( CRevisionInfoContainer::CChangesIterator& first
-		, CRevisionInfoContainer::CChangesIterator& last);
+	void GetChanges ( LogChangedPathArray& result
+                    , CRevisionInfoContainer::CChangesIterator& first
+		            , CRevisionInfoContainer::CChangesIterator& last);
+
+    /// fill the receiver's user rev-prop list buffer 
+    void GetUserRevProps ( UserRevPropArray& result
+                         , CRevisionInfoContainer::CUserRevPropsIterator& first
+	                     , CRevisionInfoContainer::CUserRevPropsIterator& last
+                         , const TRevPropNames& userRevProps);
+
+    /// relay an existing cache entry to the receiver
+    void SendToReceiver ( revision_t revision
+					    , const CLogOptions& options
+                        , bool mergesFollow);
 
 	/// crawl the history and forward it to the receiver
 	void InternalLog ( revision_t startRevision
 					 , revision_t endRevision
 					 , const CDictionaryBasedTempPath& startPath
 					 , int limit
-					 , bool strictNodeHistory
-					 , ILogReceiver* receiver
-                     , bool revs_only);
+					 , const CLogOptions& options);
+
+    void InternalLogWithMerge ( revision_t startRevision
+					          , revision_t endRevision
+					          , const CDictionaryBasedTempPath& startPath
+					          , int limit
+                              , const CLogOptions& options);
 
 	/// follow copy history until the startRevision is reached
 	CDictionaryBasedTempPath TranslatePegRevisionPath 
@@ -202,9 +324,50 @@ public:
 					 , int limit
 					 , bool strictNodeHistory
 					 , ILogReceiver* receiver
-                     , bool revs_only);
+                     , bool includeChanges
+                     , bool includeMerges
+                     , bool includeStandardRevProps
+                     , bool includeUserRevProps
+                     , const TRevPropNames& userRevProps);
 
 	/// access to the cache
 	/// (only valid after calling Log())
 	CCachedLogInfo* GetCache();
 };
+
+/// Log options inline implementations for data access
+
+inline bool CCacheLogQuery::CLogOptions::GetStrictNodeHistory() const
+{
+    return strictNodeHistory;
+}
+
+inline ILogReceiver* CCacheLogQuery::CLogOptions::GetReceiver() const
+{
+    return receiver;
+}
+
+inline bool CCacheLogQuery::CLogOptions::GetIncludeChanges() const
+{
+    return includeChanges;
+}
+
+inline bool CCacheLogQuery::CLogOptions::GetIncludeMerges() const
+{
+    return includeMerges;
+}
+
+inline bool CCacheLogQuery::CLogOptions::GetIncludeStandardRevProps() const
+{
+    return includeStandardRevProps;
+}
+
+inline bool CCacheLogQuery::CLogOptions::GetIncludeUserRevProps() const
+{
+    return includeUserRevProps;
+}
+
+inline const TRevPropNames& CCacheLogQuery::CLogOptions::GetUserRevProps() const
+{
+    return userRevProps;
+}
