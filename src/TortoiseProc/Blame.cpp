@@ -84,6 +84,9 @@ BOOL CBlame::BlameCallback(LONG linenumber, LONG revision, const CString& author
 	CStringA dateA(date);
 	CStringA authorA(author);
 
+	if (authorA.GetLength() > 30 )
+		authorA = authorA.Left(30);
+
 	if (m_bNoLineNo)
 		infolineA.Format("%6ld %30s %-30s ", revision, dateA, authorA);
 	else
