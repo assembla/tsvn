@@ -138,7 +138,7 @@ void CRevisionGraphWnd::DrawNode(CDC * pDC, const CRect& rect,
     // special case: line deleted but deletion node removed
 
     if (   (rentry->next == NULL) 
-        && (rentry->classification & CPathClassificator::IS_DELETED))
+        && (rentry->classification & CNodeClassification::IS_DELETED))
     {
         contour = m_Colors.GetColor(CColors::DeletedNode);
     }

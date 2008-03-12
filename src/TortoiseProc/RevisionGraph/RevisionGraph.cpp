@@ -1275,13 +1275,13 @@ void CRevisionGraph::ForwardClassification()
         switch (entry->action)
         {
         case CRevisionEntry::deleted:
-            entry->classification |= CPathClassificator::SUBTREE_DELETED;
+            entry->classification |= CNodeClassification::SUBTREE_DELETED;
             break;
 
         case CRevisionEntry::modified:
         case CRevisionEntry::source:
         case CRevisionEntry::lastcommit:
-            entry->classification |= CPathClassificator::IS_MODIFIED;
+            entry->classification |= CNodeClassification::IS_MODIFIED;
         }
     }
 }
@@ -1299,8 +1299,8 @@ void CRevisionGraph::BackwardClassification (const SOptions& options)
 
         if (entry->next != NULL)
         {
-            DWORD mask =   CPathClassificator::SUBTREE_DELETED
-                         + CPathClassificator::IS_MODIFIED;
+            DWORD mask =   CNodeClassification::SUBTREE_DELETED
+                         + CNodeClassification::IS_MODIFIED;
 
             classification |=  entry->next->classification & mask;
         }
@@ -1315,22 +1315,22 @@ void CRevisionGraph::BackwardClassification (const SOptions& options)
             // deletion info (is there at least one surviving copy?)
 
             bool subTreeDeleted 
-                =    (targetClassification & CPathClassificator::SUBTREE_DELETED)
-                  == CPathClassificator::SUBTREE_DELETED;
+                =    (targetClassification & CNodeClassification::SUBTREE_DELETED)
+                  == CNodeClassification::SUBTREE_DELETED;
 
             if (!subTreeDeleted)
-                classification &= ~CPathClassificator::ALL_COPIES_DELETED;
+                classification &= ~CNodeClassification::ALL_COPIES_DELETED;
 
             // transitive and immediate copy and modification info
             // (don't propagate copy target info if it will be removed anyway)
 
             if (!subTreeDeleted || !options.removeDeletedOnes)
             {
-                const DWORD transitiveMask =   CPathClassificator::COPIES_TO_MASK
-                                             + CPathClassificator::IS_MODIFIED;
+                const DWORD transitiveMask =   CNodeClassification::COPIES_TO_MASK
+                                             + CNodeClassification::IS_MODIFIED;
 
                 classification |=   (targetClassification & transitiveMask)
-                                  | ((targetClassification & CPathClassificator::IS_MASK) * 0x10);
+                                  | ((targetClassification & CNodeClassification::IS_MASK) * 0x10);
             }
         }
 
@@ -1349,8 +1349,8 @@ void CRevisionGraph::RemoveDeletedOnes()
     {
         CRevisionEntry* entry = m_entryPtrs[i];
 
-        if (   (entry->classification & CPathClassificator::SUBTREE_DELETED)
-            == CPathClassificator::SUBTREE_DELETED)
+        if (   (entry->classification & CNodeClassification::SUBTREE_DELETED)
+            == CNodeClassification::SUBTREE_DELETED)
         {
             // mark this node for deletion
 
@@ -1428,7 +1428,7 @@ void CRevisionGraph::FoldTags ( CRevisionEntry * collectorNode
                 CRevisionEntry::SFoldedTag tag 
                     ( entry->path
                     , !firstRun
-                    , (entry->classification & CPathClassificator::IS_DELETED) != 0
+                    , (entry->classification & CNodeClassification::IS_DELETED) != 0
                     , depth);
 
                 collectorNode->tags.push_back (tag);
@@ -1479,11 +1479,11 @@ void CRevisionGraph::FoldTags()
 {
     // look for copy targets that have no further nodes and contain "tags"
 
-    DWORD nonTagOpMask =   CPathClassificator::IS_MASK 
-                         - CPathClassificator::IS_TAG
-                         + CPathClassificator::COPIES_TO_MASK 
-                         - CPathClassificator::COPIES_TO_TAG
-                         + CPathClassificator::IS_MODIFIED;
+    DWORD nonTagOpMask =   CNodeClassification::IS_MASK 
+                         - CNodeClassification::IS_TAG
+                         + CNodeClassification::COPIES_TO_MASK 
+                         - CNodeClassification::COPIES_TO_TAG
+                         + CNodeClassification::IS_MODIFIED;
 
 	for (size_t i = 0, count = m_entryPtrs.size(); i < count; ++i)
 	{

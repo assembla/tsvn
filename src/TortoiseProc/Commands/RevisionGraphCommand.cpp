@@ -19,7 +19,7 @@
 #include "StdAfx.h"
 #include "RevisionGraphCommand.h"
 
-#include "RevisionGraphDlg.h"
+#include "RevisionGraph\RevisionGraphDlg.h"
 
 
 bool RevisionGraphCommand::Execute()
