@@ -29,31 +29,6 @@
 
 typedef int (__cdecl *GENERICCOMPAREFN)(const void * elem1, const void * elem2);
 
-/**
- * \ingroup TortoiseProc
- * helper class which handles one log entry used in the revision graph
- */
-class log_entry
-{
-public:
-
-	std::auto_ptr<LogChangedPathArray> changes;
-	svn_revnum_t rev;
-	CString author;
-	apr_time_t timeStamp;
-	CString message;
-
-	// default construction
-
-	log_entry() {};
-
-private:
-
-	// copy is not allowed (due to std::auto_ptr)
-
-	log_entry (const log_entry&);
-	log_entry& operator= (const log_entry&);
-};
 
 class CRevisionEntry;
 
