@@ -369,7 +369,7 @@ CString CFullHistory::GetLastErrorMessage()
 
 void CFullHistory::GetCopyFromRange ( SCopyInfo**& first
                                     , SCopyInfo**& last
-                                    , revision_t revision)
+                                    , revision_t revision) const
 {
 	// find first entry for this revision (or first beyond)
 
@@ -387,7 +387,7 @@ void CFullHistory::GetCopyFromRange ( SCopyInfo**& first
 
 void CFullHistory::GetCopyToRange ( SCopyInfo**& first
                                   , SCopyInfo**& last
-                                  , revision_t revision)
+                                  , revision_t revision) const
 {
 	// find first entry for this revision (or first beyond)
 

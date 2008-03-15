@@ -106,8 +106,10 @@ public:
 
     SCopyInfo**                 GetFirstCopyFrom() const {return copyFromRelation;}
     SCopyInfo**                 GetFirstCopyTo() const {return copyToRelation;}
-    void                        GetCopyFromRange (SCopyInfo**& first, SCopyInfo**& last, revision_t revision);
-    void                        GetCopyToRange (SCopyInfo**& first, SCopyInfo**& last, revision_t revision);
+    void                        GetCopyFromRange (SCopyInfo**& first, SCopyInfo**& last, revision_t revision) const;
+    void                        GetCopyToRange (SCopyInfo**& first, SCopyInfo**& last, revision_t revision) const;
+
+    const CCachedLogInfo*       GetCache() const {return query->GetCache();}
 
 private:
 

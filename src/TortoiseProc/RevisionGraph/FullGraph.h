@@ -29,9 +29,43 @@ private:
     /// the graph is actually a tree
 
     CFullGraphNode* root;
+    size_t nodeCount;
 
 public:
 
+    /// construction / destruction
+
     CFullGraph(void);
     ~CFullGraph(void);
+
+    /// modification
+
+    CFullGraphNode* Add ( const CDictionaryBasedTempPath& path
+                        , revision_t revision
+                        , CNodeClassification classification
+                        , CFullGraphNode* source);
+
+    /// member access
+
+    CFullGraphNode* GetRoot();
+    const CFullGraphNode* GetRoot() const;
+
+    size_t GetNodeCount() const;
 };
+
+/// member access
+
+inline const CFullGraphNode* CFullGraph::GetRoot() const
+{
+    return root;
+}
+
+inline CFullGraphNode* CFullGraph::GetRoot()
+{
+    return root;
+}
+
+inline size_t CFullGraph::GetNodeCount() const
+{
+    return nodeCount;
+}

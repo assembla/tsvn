@@ -87,7 +87,7 @@ public:
     /// empty construction
 
     CNodeClassification();
-    CNodeClassification (EFlags flags);
+    CNodeClassification (DWORD flags);
 
     /// operations
 
@@ -106,7 +106,7 @@ inline CNodeClassification::CNodeClassification()
 {
 }
 
-inline CNodeClassification::CNodeClassification (EFlags flags)
+inline CNodeClassification::CNodeClassification (DWORD flags)
     : flags (flags) 
 {
 }
