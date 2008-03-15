@@ -104,6 +104,9 @@ public:
     const CDictionaryBasedTempPath* GetStartPath() const {return startPath.get();}
     revision_t                  GetStartRevision() const {return startRevision;}
 
+    const CDictionaryBasedTempPath* GetWCPath() const {return wcPath.get();}
+    revision_t                  GetWCRevision() const {return wcRevision;}
+
     SCopyInfo**                 GetFirstCopyFrom() const {return copyFromRelation;}
     SCopyInfo**                 GetFirstCopyTo() const {return copyToRelation;}
     void                        GetCopyFromRange (SCopyInfo**& first, SCopyInfo**& last, revision_t revision) const;
@@ -136,6 +139,9 @@ private:
 
     std::auto_ptr<CDictionaryBasedTempPath> startPath;
     revision_t                  startRevision;
+
+	std::auto_ptr<CDictionaryBasedTempPath> wcPath;
+    revision_t                  wcRevision;
 
     boost::pool<>               copyInfoPool;
 	std::vector<SCopyInfo*>		copiesContainer;

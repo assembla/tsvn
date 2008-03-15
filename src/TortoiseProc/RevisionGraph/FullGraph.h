@@ -45,6 +45,10 @@ public:
                         , CNodeClassification classification
                         , CFullGraphNode* source);
 
+    void Replace ( CFullGraphNode* toReplace
+                 , CFullGraphNode::CCopyTarget*& toMove
+                 , CNodeClassification newClassification);
+
     /// member access
 
     CFullGraphNode* GetRoot();

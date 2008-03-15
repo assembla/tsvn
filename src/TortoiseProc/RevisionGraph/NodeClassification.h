@@ -91,11 +91,16 @@ public:
 
     /// operations
 
+    void Add (DWORD value);
+    void Remove (DWORD value);
+
     /// specific data access
 
     bool Matches (DWORD required, DWORD forbidden) const;
     bool Is (DWORD value) const;
     bool IsAnyOf (DWORD value) const;
+
+    DWORD GetFlags() const;
 };
 
 
@@ -109,6 +114,18 @@ inline CNodeClassification::CNodeClassification()
 inline CNodeClassification::CNodeClassification (DWORD flags)
     : flags (flags) 
 {
+}
+
+/// operations
+
+inline void CNodeClassification::Add (DWORD value)
+{
+    flags |= value;
+}
+
+inline void CNodeClassification::Remove (DWORD value)
+{
+    flags |= ~value;
 }
 
 /// specific data access
@@ -126,4 +143,9 @@ inline bool CNodeClassification::Is (DWORD value) const
 inline bool CNodeClassification::IsAnyOf (DWORD value) const
 {
     return (flags & value) != 0;
+}
+
+inline DWORD CNodeClassification::GetFlags() const
+{
+    return flags;
 }

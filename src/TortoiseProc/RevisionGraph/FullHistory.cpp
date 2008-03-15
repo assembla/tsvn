@@ -42,6 +42,7 @@ static char THIS_FILE[] = __FILE__;
 CFullHistory::CFullHistory(void) 
     : cancelled (false)
     , progress (NULL)
+    , wcRevision ((revision_t)NO_REVISION)
     , copyInfoPool (sizeof (SCopyInfo), 1024)
     , copyToRelation (NULL)
     , copyToRelationEnd (NULL)
@@ -241,6 +242,13 @@ bool CFullHistory::FetchRevisionData (CString path, SVNRev revision, CProgressDl
                    , false		// includeUserRevProps
                    , TRevPropNames());
 
+        // store WC path
+
+	    const CCachedLogInfo* cache = query->GetCache();
+	    const CPathDictionary* paths = &cache->GetLogInfo().GetPaths();
+        wcPath.reset (new CDictionaryBasedTempPath (paths, (const char*)relPath));
+        wcRevision = revision;
+
         // analyse the data
 
         AnalyzeRevisionData (revision);
@@ -268,11 +276,9 @@ void CFullHistory::AnalyzeRevisionData (SVNRev revision)
 	// we have to find out that name now, because we will analyze the data
 	// from lower to higher revisions
 
-	const CCachedLogInfo* cache = query->GetCache();
-	const CPathDictionary* paths = &cache->GetLogInfo().GetPaths();
-    startPath.reset (new CDictionaryBasedTempPath (paths, (const char*)relPath));
+    startPath.reset (new CDictionaryBasedTempPath (*wcPath));
 
-	CCopyFollowingLogIterator iterator (cache, revision, *startPath);
+    CCopyFollowingLogIterator iterator (query->GetCache(), revision, *startPath);
 	iterator.Retry();
 	startRevision = revision;
 

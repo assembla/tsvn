@@ -39,6 +39,25 @@ CFullGraphNode* CFullGraphNode::CFactory::Create
     return result;
 }
 
+void CFullGraphNode::CFactory::Replace ( CFullGraphNode* toReplace
+                                       , CFullGraphNode::CCopyTarget*& toMove
+                                       , CNodeClassification newClassification)
+{
+    // remove the old node
+
+    CFullGraphNode* previousNode = toReplace->GetPrevious();
+    Destroy (toReplace);
+
+    // extract the new node
+
+    CFullGraphNode* toInsert = copyTargetFactory.remove (toMove);
+
+    // (re-)insert the new node
+
+    toInsert->classification = newClassification;
+    toInsert->InsertAt (previousNode, copyTargetFactory);
+}
+
 void CFullGraphNode::CFactory::Destroy (CFullGraphNode* node)
 {
     node->DestroySubNodes (*this, copyTargetFactory);
@@ -64,19 +83,7 @@ CFullGraphNode::CFullGraphNode
     , revision (revision)
     , classification (classification)
 {
-    if (source != NULL)
-        if (classification.Is (CNodeClassification::IS_COPY_TARGET))
-        {
-            copySource = source;
-            copyTargetFactory.insert (this, source->firstCopyTarget);
-        }
-        else
-        {
-            assert (source->next == NULL);
-
-            source->next = this;
-            this->prev = source;
-        }
+    InsertAt (source, copyTargetFactory);
 }
 
 CFullGraphNode::~CFullGraphNode() 
@@ -84,6 +91,26 @@ CFullGraphNode::~CFullGraphNode()
     assert (next == NULL);
     assert (firstCopyTarget == NULL);
 };
+
+void CFullGraphNode::InsertAt ( CFullGraphNode* source
+                              , CCopyTarget::factory& copyTargetFactory)
+{
+    if (source != NULL)
+        if (classification.Is (CNodeClassification::IS_COPY_TARGET))
+        {
+            copySource = source;
+            prev = NULL;
+            copyTargetFactory.insert (this, source->firstCopyTarget);
+        }
+        else
+        {
+            assert (source->next == NULL);
+
+            copySource = NULL;
+            source->next = this;
+            prev = source;
+        }
+}
 
 void CFullGraphNode::DestroySubNodes 
     ( CFactory& factory

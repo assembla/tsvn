@@ -37,3 +37,22 @@ CFullGraphNode* CFullGraph::Add ( const CDictionaryBasedTempPath& path
     return result;
 }
 
+void CFullGraph::Replace ( CFullGraphNode* toReplace
+                         , CFullGraphNode::CCopyTarget*& toMove
+                         , CNodeClassification newClassification)
+{
+    // we support simple cases only
+
+    assert (toReplace->GetPrevious() != NULL);
+    assert (toReplace->GetNext() == NULL);
+    assert (toReplace->GetFirstCopyTarget() == NULL);
+    assert (toMove->value() != NULL);
+
+    // replace
+
+    nodeFactory.Replace (toReplace, toMove, newClassification);
+
+    --nodeCount;
+}
+
+

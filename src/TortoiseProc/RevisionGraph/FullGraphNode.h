@@ -58,6 +58,9 @@ public:
                                , revision_t revision
                                , CNodeClassification classification
                                , CFullGraphNode* source);
+        void Replace ( CFullGraphNode* toReplace
+                     , CFullGraphNode::CCopyTarget*& toMove
+                     , CNodeClassification newClassification);
         void Destroy (CFullGraphNode* node);
     };
 
@@ -93,10 +96,16 @@ protected:
 
     /// destruction utility
 
+    void InsertAt ( CFullGraphNode* source
+                  , CCopyTarget::factory& copyTargetFactory);
     void DestroySubNodes ( CFactory& factory
                          , CCopyTarget::factory& copyTargetFactory);
 
 public:
+
+    /// modification
+
+    void AddClassification (DWORD toAdd);
 
     /// data access
 
@@ -105,14 +114,24 @@ public:
 
 	const CFullGraphNode* GetCopySource() const;
 	const CCopyTarget* GetFirstCopyTarget() const;
+	CCopyTarget*& GetFirstCopyTarget();
 
 	const CFullGraphNode* GetPrevious() const;
+	CFullGraphNode* GetPrevious();
 	const CFullGraphNode* GetNext() const;
+	CFullGraphNode* GetNext();
 
 	revision_t GetRevision() const;
 	CNodeClassification GetClassification() const;
 
 };
+
+/// CVisibleGraphNode  modification
+
+inline void CFullGraphNode::AddClassification (DWORD toAdd)
+{
+    classification.Add (toAdd);
+}
 
 /// CVisibleGraphNode data access
 
@@ -137,12 +156,27 @@ CFullGraphNode::GetFirstCopyTarget() const
     return firstCopyTarget;
 }
 
+inline CFullGraphNode::CCopyTarget*& CFullGraphNode::GetFirstCopyTarget()
+{
+    return firstCopyTarget;
+}
+
 inline const CFullGraphNode* CFullGraphNode::GetPrevious() const
 {
     return prev;
 }
 
+inline CFullGraphNode* CFullGraphNode::GetPrevious()
+{
+    return prev;
+}
+
 inline const CFullGraphNode* CFullGraphNode::GetNext() const
+{
+    return next;
+}
+
+inline CFullGraphNode* CFullGraphNode::GetNext()
 {
     return next;
 }

@@ -90,7 +90,7 @@ public:
     {
         return _next;
     }
-    simple_list<T>* next()
+    simple_list<T>*& next()
     {
         return _next;
     }
