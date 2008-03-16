@@ -99,8 +99,7 @@ private:
 
     CNodeClassification classification;
 
-	int				    column;
-	int				    row;
+	index_t			    index;
 
     /// construction / destruction via pool
 
@@ -131,12 +130,12 @@ public:
 
 	const CVisibleGraphNode* GetPrevious() const;
 	const CVisibleGraphNode* GetNext() const;
+	CVisibleGraphNode* GetNext();
 
 	revision_t GetRevision() const;
 	CNodeClassification GetClassification() const;
 
-	int GetColumn() const;
-	int	GetRow() const;
+	index_t GetIndex() const;
 };
 
 /// CVisibleGraphNode::CFoldedTag construction
@@ -211,6 +210,11 @@ inline const CVisibleGraphNode* CVisibleGraphNode::GetNext() const
     return next;
 }
 
+inline CVisibleGraphNode* CVisibleGraphNode::GetNext() 
+{
+    return next;
+}
+
 inline revision_t CVisibleGraphNode::GetRevision() const
 {
     return base->GetRevision();
@@ -221,12 +225,7 @@ inline CNodeClassification CVisibleGraphNode::GetClassification() const
     return classification;
 }
 
-inline int CVisibleGraphNode::GetColumn() const
+inline index_t CVisibleGraphNode::GetIndex() const
 {
-    return column;
-}
-
-inline int CVisibleGraphNode::GetRow() const
-{
-    return row;
+    return index;
 }

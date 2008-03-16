@@ -70,7 +70,7 @@ CVisibleGraphNode::CVisibleGraphNode
 	, firstCopyTarget (NULL), firstTag (NULL)
 	, prev (NULL), next (NULL), copySource (NULL)
     , classification (base->GetClassification())
-	, row (0), column (0) 
+	, index (NO_INDEX) 
 {
     if (prev != NULL)
         if (classification.Is (CNodeClassification::IS_COPY_TARGET))
