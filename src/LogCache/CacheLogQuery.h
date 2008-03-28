@@ -347,7 +347,10 @@ private:
 	CDictionaryBasedTempPath GetRelativeRepositoryPath 
         ( const CTSVNPath& info);
 
-	/// decode special revisions:
+    /// utility method: we throw that error in several places
+    void ThrowBadRevision() const;
+
+    /// decode special revisions:
 	/// base / head must be initialized with NO_REVISION
 	/// and will be used to cache these values.
 	revision_t DecodeRevision ( const CTSVNPath& path
@@ -389,7 +392,15 @@ public:
 
 	/// access to the cache
 	/// (only valid after calling Log())
-	CCachedLogInfo* GetCache();
+	CCachedLogInfo* GetCache() const;
+
+    /// could we get at least some data?
+    /// (such as an empty log but still UUID and HEAD info)
+    bool GotAnyData() const;
+
+    /// for tempCaches: write content to "real" cache files
+    /// (no-op if this is does not use a temp. cache)
+    void UpdateCache (CLogCachePool* caches);
 };
 
 /// Log options inline implementations for data access

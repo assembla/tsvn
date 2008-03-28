@@ -33,6 +33,7 @@
 #include "RevisionGraphDlg.h"
 #include "CachedLogInfo.h"
 #include "RevisionIndex.h"
+#include "RepositoryInfo.h"
 #include "BrowseFolder.h"
 #include "SVNProgressDlg.h"
 
@@ -72,7 +73,6 @@ CRevisionGraphWnd::CRevisionGraphWnd()
 	, m_node_space_bottom(NODE_SPACE_BOTTOM)
 	, m_nIconSize(32)
 	, m_RoundRectPt(ROUND_RECT, ROUND_RECT)
-	, m_bFetchLogs(true)
 	, m_fZoomFactor(1.0)
 	, m_ptRubberEnd(0,0)
 	, m_ptRubberStart(0,0)
@@ -197,6 +197,9 @@ BOOL CRevisionGraphWnd::ProgressCallback(CString text, CString text2, DWORD done
 		m_dwTicks = GetTickCount();
 		m_pProgress->SetLine(1, text);
 		m_pProgress->SetLine(2, text2);
+        if (!m_pProgress->IsVisible() && (total > 1))
+    	    m_pProgress->ShowModeless (GetParent());
+
 		m_pProgress->SetProgress(done, total);
 		if (m_pProgress->HasUserCancelled())
 			return FALSE;
@@ -1085,5 +1088,24 @@ LRESULT CRevisionGraphWnd::OnWorkerThreadDone(WPARAM, LPARAM)
 	BuildPreview();
     Invalidate(FALSE);
 
+	LogCache::CRepositoryInfo& cachedProperties 
+        = svn.GetLogCachePool()->GetRepositoryInfo();
+	SetDlgTitle (cachedProperties.IsOffline (GetReposRoot(), false));
+
     return 0;
 }
+
+void CRevisionGraphWnd::SetDlgTitle (bool offline)
+{
+	if (m_sTitle.IsEmpty())
+		GetParent()->GetWindowText(m_sTitle);
+
+	CString newTitle;
+	if (offline)
+    	newTitle.Format (IDS_REVGRAPH_DLGTITLEOFFLINE, m_sTitle);
+    else
+        newTitle = m_sTitle;
+
+	GetParent()->SetWindowText (newTitle);
+}
+

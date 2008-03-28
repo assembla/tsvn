@@ -32,6 +32,7 @@
 #include "SVNDiff.h"
 #include "RevGraphFilterDlg.h"
 #include ".\revisiongraphdlg.h"
+#include "RepositoryInfo.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -271,7 +272,7 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	m_Graph.SetOwner(this);
 	m_Graph.UpdateWindow();
 
-	EnableSaveRestore(_T("RevisionGraphDlg"), TRUE);
+	EnableSaveRestore(_T("RevisionGraphDlg"));
 
 	if (AfxBeginThread(WorkerThread, this)==NULL)
 	{
@@ -296,7 +297,6 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
 	    pDlg->m_Graph.m_pProgress->SetTitle(IDS_REVGRAPH_PROGTITLE);
 	    pDlg->m_Graph.m_pProgress->SetCancelMsg(IDS_REVGRAPH_PROGCANCEL);
 	    pDlg->m_Graph.m_pProgress->SetTime();
-	    pDlg->m_Graph.m_pProgress->ShowModeless(pDlg->m_hWnd);
 	    pDlg->m_Graph.m_pProgress->SetProgress(0, 100);
 
 	    if (!pDlg->m_Graph.FetchRevisionData(pDlg->m_Graph.m_sPath, pDlg->m_options))
@@ -353,22 +353,6 @@ void CRevisionGraphDlg::OnSize(UINT nType, int cx, int cy)
 
 BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
 {
-	if (::IsWindow(m_Graph.m_pDlgTip->m_hWnd) && pMsg->hwnd == m_hWnd)
-	{
-		switch(pMsg->message)
-		{
-		case WM_LBUTTONDOWN: 
-		case WM_MOUSEMOVE:
-		case WM_LBUTTONUP: 
-		case WM_RBUTTONDOWN:
-		case WM_MBUTTONDOWN: 
-		case WM_RBUTTONUP:
-		case WM_MBUTTONUP:
-			// This will reactivate the tooltip
-			m_Graph.m_pDlgTip->Activate(TRUE);
-			break;
-		}
-	}
 #define SCROLL_STEP  20
 	if (pMsg->message == WM_KEYDOWN)
 	{
@@ -404,6 +388,17 @@ BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
 			pos = m_Graph.GetScrollPos(SB_VERT);
 			m_Graph.SetScrollPos(SB_VERT, pos + 10*SCROLL_STEP);
 			m_Graph.Invalidate();
+			break;
+		case VK_F5:
+	        m_Graph.SetDlgTitle (false);
+
+        	LogCache::CRepositoryInfo& cachedProperties 
+                = m_Graph.svn.GetLogCachePool()->GetRepositoryInfo();
+            cachedProperties.ResetHeadRevision (CTSVNPath (m_Graph.GetReposRoot()));
+
+            m_bFetchLogs = true;
+            StartWorkerThread();
+
 			break;
 		}
 	}
@@ -546,10 +541,18 @@ void CRevisionGraphDlg::OnToggleOption(int controlID, bool& option)
 		option = true;
 	}
 
-	InterlockedExchange(&m_Graph.m_bThreadRunning, TRUE);
+    StartWorkerThread();
+}
+
+void CRevisionGraphDlg::StartWorkerThread()
+{
+	if (InterlockedExchange(&m_Graph.m_bThreadRunning, TRUE) == TRUE)
+        return;
+
 	if (AfxBeginThread(WorkerThread, this)==NULL)
 	{
 		CMessageBox::Show(this->m_hWnd, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
+	    InterlockedExchange(&m_Graph.m_bThreadRunning, FALSE);
 	}
 }
 

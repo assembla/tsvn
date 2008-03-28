@@ -61,6 +61,7 @@
 		</Property>
 		<CustomAction Id="Set_ShowChangelog" Property="ShowChangelog" Value="Yes" Return="check" />
 		<CustomAction Id="ShowChangelogAction" Property="TEXTEDITOR" ExeCommand="[INSTALLDIR]changelog.txt" Return="asyncNoWait" />
+		<CustomAction Id="ShowDonatePage" BinaryKey="CustomActionsDLL" DllEntry="OpenDonatePage" />
 		<CustomAction Id="KillCache" BinaryKey="CustomActionsDLL" DllEntry="TerminateCache" />
 		<Binary Id="CustomActionsDLL" src="..\..\bin\$(var.ReleasePath)\bin\CustomActions.dll" />
 
@@ -93,6 +94,7 @@
 			<!-- AppSearch must be done before RemoveExistingProducts and before FindRelatedProducts -->
 			<AppSearch Sequence="1"></AppSearch>
 			<LaunchConditions After="AppSearch" />
+			<Custom Action="DefaultTargetDir" After="LaunchConditions">INSTALLDIR=""</Custom>
 			<RemoveExistingProducts After="InstallValidate"><![CDATA[PREVIOUSVERSIONSINSTALLED OR (NOT NEWERVERSIONDETECTED AND OKTODOWNGRADE = 1)]]></RemoveExistingProducts>
 			<Custom Action="KillCache" After="RemoveExistingProducts">Installed</Custom>
 			<ScheduleReboot After="RegisterProduct" />

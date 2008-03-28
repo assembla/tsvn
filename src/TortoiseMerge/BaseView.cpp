@@ -120,6 +120,7 @@ CBaseView::CBaseView()
 									IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
 	for (int i=0; i<1024; ++i)
 		m_sConflictedText += _T("??");
+	m_sNoLineNr.LoadString(IDS_EMPTYLINETT);
 	EnableToolTips();
 }
 
@@ -773,7 +774,7 @@ void CBaseView::OnDoVScroll(UINT nSBCode, UINT /*nPos*/, CScrollBar* /*pScrollBa
 			if (line >= 0)
 				m_ScrollTool.SetText(&thumbpoint, sFormat, m_nDigits, GetLineNumber(nNewTopLine)+1);
 			else
-				m_ScrollTool.SetText(&thumbpoint, _T(" "));
+				m_ScrollTool.SetText(&thumbpoint, m_sNoLineNr);
 		}
 		break;
 	default:
@@ -1285,7 +1286,8 @@ void CBaseView::DrawText(
 
 	pDC->SetBkColor(crBkgnd);
 	pDC->SetTextColor(crText);
-	VERIFY(pDC->ExtTextOut(coords.x, coords.y, ETO_CLIPPED, &rc, text, selectedStart, NULL));
+	if (selectedStart>=0)
+		VERIFY(pDC->ExtTextOut(coords.x, coords.y, ETO_CLIPPED, &rc, text, selectedStart, NULL));
 
 	long intenseColorScale = m_bFocused ? 70 : 30;
 	pDC->SetBkColor(IntenseColor(intenseColorScale, crBkgnd));
@@ -1296,9 +1298,10 @@ void CBaseView::DrawText(
 
 	pDC->SetBkColor(crBkgnd);
 	pDC->SetTextColor(crText);
-	VERIFY(pDC->ExtTextOut(
-		coords.x + selectedEnd * GetCharWidth(), coords.y, ETO_CLIPPED, &rc,
-		text + selectedEnd, textlength - selectedEnd, NULL));
+	if (textlength - selectedEnd >= 0)
+		VERIFY(pDC->ExtTextOut(
+					coords.x + selectedEnd * GetCharWidth(), coords.y, ETO_CLIPPED, &rc,
+					text + selectedEnd, textlength - selectedEnd, NULL));
 }
 
 bool CBaseView::DrawInlineDiff(CDC *pDC, const CRect &rc, int nLineIndex, const CString &line, CPoint &origin)
@@ -1771,6 +1774,8 @@ void CBaseView::GoToFirstDifference()
 				break;
 			nCenterPos++;
 		}
+		if (nCenterPos >= m_pViewData->GetCount())
+			nCenterPos = m_pViewData->GetCount()-1;
 		int nTopPos = nCenterPos - (GetScreenLines()/2);
 		if (nTopPos < 0)
 			nTopPos = 0;
@@ -2150,8 +2155,34 @@ void CBaseView::OnEditCopy()
 	CString sCopyData;
 	for (int i=m_ptSelectionStartPos.y; i<=m_ptSelectionEndPos.y; i++)
 	{
-		sCopyData += m_pViewData->GetLine(i);
-		sCopyData += _T("\r\n");
+		switch (m_pViewData->GetState(i))
+		{
+		case DIFFSTATE_EMPTY:
+			break;
+		case DIFFSTATE_UNKNOWN:
+		case DIFFSTATE_NORMAL:
+		case DIFFSTATE_REMOVED:
+		case DIFFSTATE_REMOVEDWHITESPACE:
+		case DIFFSTATE_ADDED:
+		case DIFFSTATE_ADDEDWHITESPACE:
+		case DIFFSTATE_WHITESPACE:
+		case DIFFSTATE_WHITESPACE_DIFF:
+		case DIFFSTATE_CONFLICTED:
+		case DIFFSTATE_CONFLICTED_IGNORED:
+		case DIFFSTATE_CONFLICTADDED:
+		case DIFFSTATE_CONFLICTEMPTY:
+		case DIFFSTATE_CONFLICTRESOLVED:
+		case DIFFSTATE_IDENTICALREMOVED:
+		case DIFFSTATE_IDENTICALADDED:
+		case DIFFSTATE_THEIRSREMOVED:
+		case DIFFSTATE_THEIRSADDED:
+		case DIFFSTATE_YOURSREMOVED:
+		case DIFFSTATE_YOURSADDED:
+		case DIFFSTATE_EDITED:
+			sCopyData += m_pViewData->GetLine(i);
+			sCopyData += _T("\r\n");
+			break;
+		}
 	}
 	// remove the last \r\n
 	sCopyData = sCopyData.Left(sCopyData.GetLength()-2);
@@ -2297,7 +2328,7 @@ void CBaseView::UseYourAndTheirBlock(viewstate &rightstate, viewstate &bottomsta
 		index++;
 	}
 	// adjust line numbers
-	for (int i=m_nSelBlockEnd+1; i<GetLineCount(); ++i)
+	for (int i=m_nSelBlockEnd+1; i<m_pwndBottom->GetLineCount(); ++i)
 	{
 		long oldline = (long)m_pwndBottom->m_pViewData->GetLineNumber(i);
 		if (oldline >= 0)
@@ -2340,7 +2371,7 @@ void CBaseView::UseBothRightFirst(viewstate &rightstate, viewstate &leftstate)
 	}
 	// adjust line numbers
 	index--;
-	for (int i=m_nSelBlockEnd+1; i<GetLineCount(); ++i)
+	for (int i=m_nSelBlockEnd+1; i<m_pwndRight->GetLineCount(); ++i)
 	{
 		long oldline = (long)m_pwndRight->m_pViewData->GetLineNumber(i);
 		if (oldline >= 0)
@@ -2373,7 +2404,7 @@ void CBaseView::UseBothLeftFirst(viewstate &rightstate, viewstate &leftstate)
 		m_pwndRight->m_pViewData->InsertData(i, m_pwndLeft->m_pViewData->GetLine(i), DIFFSTATE_THEIRSADDED, linenumber++, m_pwndLeft->m_pViewData->GetLineEnding(i));
 	}
 	// adjust line numbers
-	for (int i=m_nSelBlockEnd+1; i<GetLineCount(); ++i)
+	for (int i=m_nSelBlockEnd+1; i<m_pwndRight->GetLineCount(); ++i)
 	{
 		long oldline = (long)m_pwndRight->m_pViewData->GetLineNumber(i);
 		if (oldline >= 0)

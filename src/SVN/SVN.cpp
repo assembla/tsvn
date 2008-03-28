@@ -148,6 +148,7 @@ CString SVN::CheckConfigFile()
 			msg += _T("\n") + temp;
 		}
 		svn_error_clear(Err);
+        Err = NULL;
 	}
 	return msg;
 }
@@ -415,6 +416,8 @@ BOOL SVN::Add(const CTSVNPathList& pathList, ProjectProperties * props, svn_dept
 	// the add command should use the mime-type file
 	const char *mimetypes_file;
 	svn_error_clear(Err);
+    Err = NULL;
+
 	svn_config_t * opt = (svn_config_t *)apr_hash_get (m_pctx->config, SVN_CONFIG_CATEGORY_CONFIG,
 		APR_HASH_KEY_STRING);
 	svn_config_get(opt, &mimetypes_file,
@@ -702,6 +705,8 @@ BOOL SVN::Resolve(const CTSVNPath& path, svn_wc_conflict_choice_t result, BOOL r
 {
 	SVNPool subpool(pool);
 	svn_error_clear(Err);
+    Err = NULL;
+
 	// before marking a file as resolved, we move the conflicted parts
 	// to the trash bin: just in case the user later wants to get those
 	// files back anyway
@@ -734,11 +739,11 @@ BOOL SVN::Resolve(const CTSVNPath& path, svn_wc_conflict_choice_t result, BOOL r
 			conflictedEntries.DeleteAllFiles(true);
 		}
 	}
-	Err = svn_client_resolved2(path.GetSVNApiPath(subpool),
-								recurse ? svn_depth_infinity : svn_depth_empty,
-								result,
-								m_pctx,
-								subpool);
+	Err = svn_client_resolve(path.GetSVNApiPath(subpool),
+							 recurse ? svn_depth_infinity : svn_depth_empty,
+							 result,
+							 m_pctx,
+							 subpool);
 	if(Err != NULL)
 	{
 		return FALSE;
@@ -752,6 +757,8 @@ BOOL SVN::Export(const CTSVNPath& srcPath, const CTSVNPath& destPath, SVNRev peg
 				 BOOL extended, CString eol)
 {
 	svn_error_clear(Err);
+    Err = NULL;
+
 	if (revision.IsWorking())
 	{
 		if (g_SVNAdminDir.IsAdminDirPath(srcPath.GetWinPath()))
@@ -1296,8 +1303,7 @@ bool SVN::DiffSummarizePeg(const CTSVNPath& path, SVNRev peg, SVNRev rev1, SVNRe
 
 LogCache::CCachedLogInfo* SVN::GetLogCache (const CTSVNPath& path)
 {
-	CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\UseLogCache"), TRUE);
-	if (useLogCache == FALSE)
+	if (!logCachePool.IsEnabled())
         return NULL;
 
     CString uuid;
@@ -1305,7 +1311,7 @@ LogCache::CCachedLogInfo* SVN::GetLogCache (const CTSVNPath& path)
     return logCachePool.GetCache (uuid);
 }
 
-BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev revisionStart, SVNRev revisionEnd, int limit, BOOL strict /* = FALSE */, BOOL withMerges /* = FALSE */)
+BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev revisionStart, SVNRev revisionEnd, int limit, BOOL strict, BOOL withMerges, bool refresh)
 {
 	svn_error_clear(Err);
 	Err = NULL;
@@ -1313,12 +1319,13 @@ BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev r
 	{
 		SVNPool localpool(pool);
 
-		CSVNLogQuery svnQuery (m_pctx, localpool);
+        CSVNLogQuery svnQuery (m_pctx, localpool);
 		CCacheLogQuery cacheQuery (&logCachePool, &svnQuery);
+		CCacheLogQuery refreshQuery (*this, &svnQuery);
 
-		CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\UseLogCache"), TRUE);
-		ILogQuery* query = useLogCache != FALSE
-						 ? static_cast<ILogQuery*>(&cacheQuery)
+		ILogQuery* query = logCachePool.IsEnabled()
+						 ? refresh ? static_cast<ILogQuery*>(&refreshQuery)
+                                   : static_cast<ILogQuery*>(&cacheQuery)
 						 : static_cast<ILogQuery*>(&svnQuery);
 
 		query->Log ( pathlist
@@ -1333,6 +1340,26 @@ BOOL SVN::ReceiveLog(const CTSVNPathList& pathlist, SVNRev revisionPeg, SVNRev r
                    , true
                    , false
                    , TRevPropNames());
+
+        if (refresh && logCachePool.IsEnabled())
+        {
+            // handle cache refresh results
+
+            if (refreshQuery.GotAnyData())
+            {
+                refreshQuery.UpdateCache (&logCachePool);
+            }
+            else
+            {
+                // no connection to the repository but also not cancelled 
+                // (no exception thrown) -> re-run from cache
+
+                return ReceiveLog ( pathlist
+                                  , revisionPeg, revisionStart, revisionEnd
+                                  , limit, strict, withMerges
+                                  , false);
+            }
+        }
 	}
 	catch (SVNError& e)
 	{
@@ -1698,11 +1725,15 @@ void * SVN::logMessage (const char * message, char * baseDirectory)
 
 void SVN::PathToUrl(CString &path)
 {
+	bool bUNC = false;
 	path.Trim();
+	if (path.Left(2).Compare(_T("\\\\"))==0)
+		bUNC = true;
 	// convert \ to /
 	path.Replace('\\','/');
-	// prepend file:///
-	if (path.GetAt(0) == '/')
+	path.TrimLeft('/');
+	// prepend file://
+	if (bUNC)
 		path.Insert(0, _T("file://"));
 	else
 		path.Insert(0, _T("file:///"));
@@ -1718,26 +1749,31 @@ void SVN::UrlToPath(CString &url)
 	url.Trim();
 	url.Replace('\\','/');
 	url = url.Mid(7);	// "file://" has seven chars
-	if (url.GetAt(1) != '/')
-		url = url.Mid(1);
+	url.TrimLeft('/');
+	// if we have a ':' that means the file:// url points to an absolute path
+	// like file:///D:/Development/test
+	// if we don't have a ':' we assume it points to an UNC path, and those
+	// actually _need_ the slashes before the paths
+	if ((url.Find(':')<0) && (url.Find('|')<0))
+		url.Insert(0, _T("\\\\"));
 	SVN::preparePath(url);
 	// now we need to unescape the url
 	url = CPathUtils::PathUnescape(url);
 }
 
-void	SVN::preparePath(CString &path)
+void SVN::preparePath(CString &path)
 {
 	path.Trim();
 	path.TrimRight(_T("/\\"));			//remove trailing slashes
 	path.Replace('\\','/');
-	// workaround for Subversions UNC-path bug
+
 	if (path.Left(10).CompareNoCase(_T("file://///"))==0)
 	{
-		path.Replace(_T("file://///"), _T("file:///\\"));
+		path.Replace(_T("file://///"), _T("file://"));
 	}
 	else if (path.Left(9).CompareNoCase(_T("file:////"))==0)
 	{
-		path.Replace(_T("file:////"), _T("file:///\\"));
+		path.Replace(_T("file:////"), _T("file://"));
 	}
 }
 
@@ -1946,8 +1982,7 @@ CString SVN::GetRepositoryRoot(const CTSVNPath& url)
 	
     // use cached information, if allowed
 
-    CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\UseLogCache"), TRUE);
-	if (useLogCache != FALSE)
+	if (logCachePool.IsEnabled())
     {
         // look up in cached repository properties
         // (missing entries will be added automatically)
@@ -2012,6 +2047,7 @@ svn_revnum_t SVN::GetHEADRevision(const CTSVNPath& url)
 
 	SVNPool localpool(pool);
 	svn_error_clear(Err);
+    Err = NULL;
 
 	if (!url.IsUrl())
 		SVN::get_url_from_target(&urla, url.GetSVNApiPath(localpool));
@@ -2058,8 +2094,7 @@ BOOL SVN::GetRootAndHead(const CTSVNPath& path, CTSVNPath& url, svn_revnum_t& re
 
     // use cached information, if allowed
 
-    CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\UseLogCache"), TRUE);
-	if (useLogCache != FALSE)
+	if (logCachePool.IsEnabled())
     {
         // look up in cached repository properties
         // (missing entries will be added automatically)
@@ -2077,7 +2112,7 @@ BOOL SVN::GetRootAndHead(const CTSVNPath& path, CTSVNPath& url, svn_revnum_t& re
         else
         {
             rev = cachedProperties.GetHeadRevision (canonicalURL);
-            if (rev == NO_REVISION)
+            if ((rev == NO_REVISION) && (Err == NULL))
             {
                 Err = svn_client_open_ra_session (&ra_session, urla, m_pctx, localpool);
                 if (Err)

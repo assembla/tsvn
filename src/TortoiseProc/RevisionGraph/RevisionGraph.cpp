@@ -180,7 +180,7 @@ void CRevisionGraph::ReceiveLog ( LogChangedPathArray* changes
 	}
 }
 
-BOOL CRevisionGraph::FetchRevisionData (CString path, const SOptions& options)
+BOOL CRevisionGraph::FetchRevisionData (CString path, const SOptions& /*options*/)
 {
 	// set some text on the progress dialog, before we wait
 	// for the log operation to start
@@ -203,9 +203,9 @@ BOOL CRevisionGraph::FetchRevisionData (CString path, const SOptions& options)
 
 	CTSVNPath dummy;
     svn_revnum_t headRevision = NO_REVISION;
-    svn.GetRootAndHead (urlpath, dummy, headRevision);
 
-	if (m_sRepoRoot.IsEmpty())
+	if (   (svn.GetRootAndHead (urlpath, dummy, headRevision) == FALSE)
+        || m_sRepoRoot.IsEmpty())
 	{
 		Err = svn_error_dup(svn.Err);
 		return FALSE;
@@ -214,13 +214,11 @@ BOOL CRevisionGraph::FetchRevisionData (CString path, const SOptions& options)
 	m_lHeadRevision = (revision_t)NO_REVISION;
 	try
 	{
-		CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\UseLogCache"), TRUE);
-
         // select / construct query object and optimize revision range to fetch
 
 		svnQuery.reset (new CSVNLogQuery (&m_ctx, pool));
         SVNRev firstRevision = 0;
-        if (useLogCache != FALSE)
+        if (svn.GetLogCachePool()->IsEnabled())
         {
             CLogCachePool* pool = svn.GetLogCachePool();
 		    query.reset (new CCacheLogQuery (pool, svnQuery.get()));
@@ -252,8 +250,16 @@ BOOL CRevisionGraph::FetchRevisionData (CString path, const SOptions& options)
 
         // initialize path classificator
 
+        CRegStdString trunkPattern (_T("Software\\TortoiseSVN\\RevisionGraph\\TrunkPattern"), _T("trunk"));
+        CRegStdString branchesPattern (_T("Software\\TortoiseSVN\\RevisionGraph\\BranchPattern"), _T("branches"));
+        CRegStdString tagsPattern (_T("Software\\TortoiseSVN\\RevisionGraph\\TagsPattern"), _T("tags"));
+
         const CPathDictionary& paths = query->GetCache()->GetLogInfo().GetPaths();
-        pathClassification.reset (new CPathClassificator (paths));
+        pathClassification.reset 
+            (new CPathClassificator ( paths
+                                    , CUnicodeUtils::StdGetUTF8 (trunkPattern)
+                                    , CUnicodeUtils::StdGetUTF8 (branchesPattern)
+                                    , CUnicodeUtils::StdGetUTF8 (tagsPattern)));
 	}
 	catch (SVNError& e)
 	{
@@ -267,6 +273,7 @@ BOOL CRevisionGraph::FetchRevisionData (CString path, const SOptions& options)
 void CRevisionGraph::AnalyzeRevisionData (CString path, const SOptions& options)
 {
 	svn_error_clear(Err);
+    Err = NULL;
 
 	ClearRevisionEntries();
 	m_maxurllength = 0;
@@ -724,7 +731,7 @@ void CRevisionGraph::AnalyzeRevisions ( revision_t revision
 					if (bShowAll && (path.GetBasePath().GetIndex() < changePath.GetIndex()))
 						action = CRevisionEntry::modified;
 
-					if (   (actionValue == CRevisionInfoContainer::ACTION_ADDED)
+					if (   (action == CRevisionEntry::added)
 						&& (searchNode->GetLastEntry() != NULL))
 					{
 						// we may not add paths that already exist:
@@ -1795,3 +1802,9 @@ CString CRevisionGraph::GetLastErrorMessage()
 {
 	return SVN::GetErrorString(Err);
 }
+
+CString CRevisionGraph::GetReposRoot() 
+{
+    return CUnicodeUtils::GetUnicode (CPathUtils::PathUnescape (m_sRepoRoot));
+}
+

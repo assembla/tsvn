@@ -39,14 +39,9 @@ bool CreatePatchCommand::Execute()
 	{
 		if (cmdLinePath.IsEmpty())
 		{
-			if (pathList.GetCount() == 1)
-				cmdLinePath = pathList[0];
-			else
-			{
-				cmdLinePath = pathList.GetCommonRoot();
-			}
+			cmdLinePath = pathList.GetCommonRoot();
 		}
-		CreatePatch(cmdLinePath, dlg.m_pathList, CTSVNPath(savepath));
+		CreatePatch(cmdLinePath.GetDirectory(), dlg.m_pathList, CTSVNPath(savepath));
 		SVN svn;
 		svn.Revert(dlg.m_filesToRevert, CStringArray(), false);
 	}
@@ -158,10 +153,7 @@ bool CreatePatchCommand::CreatePatch(const CTSVNPath& root, const CTSVNPathList&
 	::DeleteFile(tempPatchFilePath.GetWinPath());
 
 	CTSVNPath sDir;
-	if (root.GetWinPathString().Find('*')>=0)
-		sDir = path.GetCommonRoot();
-	else
-		sDir = CTSVNPath(root);
+	sDir = path.GetCommonRoot();
 	if (sDir.IsEmpty())
 		sDir = root;
 
@@ -169,7 +161,7 @@ bool CreatePatchCommand::CreatePatch(const CTSVNPath& root, const CTSVNPathList&
 	for (int fileindex = 0; fileindex < path.GetCount(); ++fileindex)
 	{
 		svn_depth_t depth = path[fileindex].IsDirectory() ? svn_depth_empty : svn_depth_files;
-		if (!svn.CreatePatch(path[fileindex], SVNRev::REV_BASE, path[fileindex], SVNRev::REV_WC, sDir, depth, FALSE, FALSE, FALSE, _T(""), true, tempPatchFilePath))
+		if (!svn.CreatePatch(path[fileindex], SVNRev::REV_BASE, path[fileindex], SVNRev::REV_WC, sDir.GetDirectory(), depth, FALSE, FALSE, FALSE, _T(""), true, tempPatchFilePath))
 		{
 			progDlg.Stop();
 			::MessageBox(hwndExplorer, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);

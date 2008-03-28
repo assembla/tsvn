@@ -192,7 +192,10 @@ CRepositoryInfo::CRepositoryInfo (SVN& svn, const CString& cacheFolderPath)
     , modified (false)
     , svn (svn)
 {
-    Load();
+    // load the list only if the URL->UUID,head etc. mapping cache shall be used
+
+    if (IsPermanent())
+        Load();
 }
 
 CRepositoryInfo::~CRepositoryInfo(void)
@@ -262,11 +265,11 @@ revision_t CRepositoryInfo::GetHeadRevision (const CTSVNPath& url)
     // get time stamps and maximum head info age (default: 0 mins)
 
     __time64_t now = CTime::GetCurrentTime().GetTime();
-    CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\HeadCacheAgeLimit"), 0);
+    CRegStdWORD ageLimit (_T("Software\\TortoiseSVN\\HeadCacheAgeLimit"), 0);
 
     // is there a valid cached entry?
 
-    if (   (now - iter->second.headLookupTime > useLogCache)
+    if (   (now - iter->second.headLookupTime > ageLimit)
         || (   url.GetSVNPathString().Left (iter->second.headURL.GetLength())
             != iter->second.headURL)
         || (iter->second.headRevision == NO_REVISION))
@@ -407,8 +410,11 @@ void CRepositoryInfo::DropEntry (const CString& sUUID)
 
 void CRepositoryInfo::Flush()
 {
-    if (!modified)
+    if (!modified || !IsPermanent())
+    {
+        modified = false;
         return;
+    }
 
 	CString filename = GetFileName();
 	CPathUtils::MakeSureDirectoryPathExists(filename.Left(filename.ReverseFind('\\')));
@@ -457,6 +463,14 @@ SVN& CRepositoryInfo::GetSVN() const
 svn_error_t* CRepositoryInfo::GetLastError() const
 {
     return svn.Err;
+}
+
+// is this only temporary data?
+
+bool CRepositoryInfo::IsPermanent() const
+{
+	CRegStdWORD ambiguousURL (_T("Software\\TortoiseSVN\\SupportAmbiguousURL"), FALSE);
+	return ambiguousURL == FALSE;
 }
 
 // end namespace LogCache

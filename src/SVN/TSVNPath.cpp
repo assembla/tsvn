@@ -242,15 +242,6 @@ void CTSVNPath::SetFwdslashPath(const CString& sPath) const
 	if ((m_sFwdslashPath.GetLength() == 2)&&(m_sFwdslashPath[1] == ':'))
 		m_sFwdslashPath += _T("/");
 
-	//workaround for Subversions UNC-path bug
-	if (m_sFwdslashPath.Left(10).CompareNoCase(_T("file://///"))==0)
-	{
-		m_sFwdslashPath.Replace(_T("file://///"), _T("file:///\\"));
-	}
-	else if (m_sFwdslashPath.Left(9).CompareNoCase(_T("file:////"))==0)
-	{
-		m_sFwdslashPath.Replace(_T("file:////"), _T("file:///\\"));
-	}
 	m_sUTF8FwdslashPath.Empty();
 }
 
@@ -268,8 +259,6 @@ void CTSVNPath::SetBackslashPath(const CString& sPath) const
 
 void CTSVNPath::SetUTF8FwdslashPath(const CString& sPath) const
 {
-	// Only set this from a forward-slash path
-	ATLASSERT(sPath.Find('\\') == -1);
 	m_sUTF8FwdslashPath = CUnicodeUtils::GetUTF8(sPath);
 }
 
@@ -988,6 +977,8 @@ CTSVNPath CTSVNPathList::GetCommonRoot() const
 	CString sRoot, sTempRoot;
 	bool bEqual = true;
 
+	if (GetCount() == 1)
+		return m_paths[0];
 	for (int i=0; i<MAX_PATH; ++i)
 	{
 		sTempRoot.Empty();
@@ -1387,11 +1378,14 @@ private:
 	{
 		CTSVNPath pathA (_T("C:\\Development\\LogDlg.cpp"));
 		CTSVNPath pathB (_T("C:\\Development\\LogDlg.h"));
+		CTSVNPath pathC (_T("C:\\Development\\SomeDir\\LogDlg.h"));
 		
 		CTSVNPathList list;
 		list.AddPath(pathA);
+		ATLASSERT(list.GetCommonRoot().GetWinPathString().CompareNoCase(_T("C:\\Development\\LogDlg.cpp"))==0);
 		list.AddPath(pathB);
-		
+		ATLASSERT(list.GetCommonRoot().GetWinPathString().CompareNoCase(_T("C:\\Development"))==0);
+		list.AddPath(pathC);
 		ATLASSERT(list.GetCommonRoot().GetWinPathString().CompareNoCase(_T("C:\\Development"))==0);
 	}
 	

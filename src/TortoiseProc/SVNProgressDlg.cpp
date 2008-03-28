@@ -601,12 +601,21 @@ void CSVNProgressDlg::SetSelectedList(const CTSVNPathList& selPaths)
 void CSVNProgressDlg::ResizeColumns()
 {
 	m_ProgList.SetRedraw(FALSE);
+
+	TCHAR textbuf[MAX_PATH];
+
 	int maxcol = ((CHeaderCtrl*)(m_ProgList.GetDlgItem(0)))->GetItemCount()-1;
 	for (int col = 0; col <= maxcol; col++)
 	{
 		// find the longest width of all items
-		int cx = 20;
 		int count = m_ProgList.GetItemCount();
+		HDITEM hdi = {0};
+		hdi.mask = HDI_TEXT;
+		hdi.pszText = textbuf;
+		hdi.cchTextMax = sizeof(textbuf);
+		((CHeaderCtrl*)(m_ProgList.GetDlgItem(0)))->GetItem(col, &hdi);
+		int cx = m_ProgList.GetStringWidth(hdi.pszText)+20; // 20 pixels for col separator and margin
+
 		for (int index = 0; index<count; ++index)
 		{
 			// get the width of the string and add 12 pixels for the column separator and margins
@@ -679,7 +688,7 @@ BOOL CSVNProgressDlg::OnInitDialog()
 	SetPromptParentWindow(this->m_hWnd);
 	if (hWndExplorer)
 		CenterWindow(CWnd::FromHandle(hWndExplorer));
-	EnableSaveRestore(_T("SVNProgressDlg"), TRUE);
+	EnableSaveRestore(_T("SVNProgressDlg"));
 	return TRUE;
 }
 
@@ -1081,7 +1090,7 @@ void CSVNProgressDlg::OnNMDblclkSvnprogress(NMHDR *pNMHDR, LRESULT *pResult)
 		if (bOpenWith)
 		{
 			CString cmd = _T("RUNDLL32 Shell32,OpenAs_RunDLL ");
-			cmd += data->path.GetWinPathString();
+			cmd += data->path.GetWinPathString() + _T(" ");
 			CAppUtils::LaunchApplication(cmd, NULL, false);
 		}
 	}
@@ -1442,13 +1451,8 @@ void CSVNProgressDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 							CString sPath = CPathUtils::ParsePathInString(data->sPathColumnText);
 							if (sPath.Find(':')<0)
 							{
-								// the path is not absolute: add the current directory in front of it
-								DWORD len = GetCurrentDirectory(0, NULL);
-								TCHAR * buf = new TCHAR[len+1];
-								GetCurrentDirectory(len, buf);
-								sPath = buf;
-								sPath += _T("\\") + CPathUtils::ParsePathInString(data->sPathColumnText);
-								delete [] buf;
+								// the path is not absolute: add the common root of all paths to it
+								sPath = m_targetPathList.GetCommonRoot().GetDirectory().GetWinPathString() + _T("\\") + CPathUtils::ParsePathInString(data->sPathColumnText);
 							}
 
 							CTSVNPath path = CTSVNPath(sPath);
@@ -1528,13 +1532,8 @@ void CSVNProgressDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 							CString sWinPath = data->path.GetWinPathString();
 							if (sWinPath.Find(':')<0)
 							{
-								// the path is not absolute: add the current directory in front of it
-								DWORD len = GetCurrentDirectory(0, NULL);
-								TCHAR * buf = new TCHAR[len+1];
-								GetCurrentDirectory(len, buf);
-								sWinPath = buf;
-								sWinPath += _T("\\") + data->path.GetWinPathString();
-								delete [] buf;
+								// the path is not absolute: add the common root of all paths to it
+								sWinPath = m_targetPathList.GetCommonRoot().GetDirectory().GetWinPathString() + _T("\\") + CPathUtils::ParsePathInString(data->sPathColumnText);
 							}
 							SVNDiff::StartConflictEditor(CTSVNPath(sWinPath));
 						}
@@ -1626,13 +1625,8 @@ void CSVNProgressDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 							CString sWinPath = data->path.GetWinPathString();
 							if (sWinPath.Find(':')<0)
 							{
-								// the path is not absolute: add the current directory in front of it
-								DWORD len = GetCurrentDirectory(0, NULL);
-								TCHAR * buf = new TCHAR[len+1];
-								GetCurrentDirectory(len, buf);
-								sWinPath = buf;
-								sWinPath += _T("\\") + data->path.GetWinPathString();
-								delete [] buf;
+								// the path is not absolute: add the common root of all paths to it
+								sWinPath = m_targetPathList.GetCommonRoot().GetDirectory().GetWinPathString() + _T("\\") + CPathUtils::ParsePathInString(data->sPathColumnText);
 							}
 							dlg.SetParams(CTSVNPath(sWinPath), SVNRev(), SVNRev::REV_HEAD, 1, limit, TRUE);
 							dlg.DoModal();
@@ -1646,20 +1640,16 @@ void CSVNProgressDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 							CString sWinPath = data->path.GetWinPathString();
 							if (sWinPath.Find(':')<0)
 							{
-								// the path is not absolute: add the current directory in front of it
-								DWORD len = GetCurrentDirectory(0, NULL);
-								TCHAR * buf = new TCHAR[len+1];
-								GetCurrentDirectory(len, buf);
-								sWinPath = buf;
-								sWinPath += _T("\\") + data->path.GetWinPathString();
-								delete [] buf;
+								// the path is not absolute: add the common root of all paths to it
+								sWinPath = m_targetPathList.GetCommonRoot().GetDirectory().GetWinPathString() + _T("\\") + CPathUtils::ParsePathInString(data->sPathColumnText);
 							}
+							TRACE(_T("test: %s\n"), m_targetPathList.GetCommonRoot().GetDirectory().GetWinPathString() + _T("\\") + CPathUtils::ParsePathInString(data->sPathColumnText));
 							if (!bOpenWith)
 								ret = (int)ShellExecute(this->m_hWnd, NULL, (LPCTSTR)sWinPath, NULL, NULL, SW_SHOWNORMAL);
 							if ((ret <= HINSTANCE_ERROR)||bOpenWith)
 							{
 								CString cmd = _T("RUNDLL32 Shell32,OpenAs_RunDLL ");
-								cmd += sWinPath;
+								cmd += sWinPath + _T(" ");
 								CAppUtils::LaunchApplication(cmd, NULL, false);
 							}
 						}
@@ -1865,6 +1855,7 @@ bool CSVNProgressDlg::CmdCommit(CString& sWindowTitle, bool& /*localoperation*/)
 		m_depth, m_options & ProgOptKeeplocks))
 	{
 		ReportSVNError();
+		error = GetLastErrorMessage();
 		// if a non-recursive commit failed with SVN_ERR_UNSUPPORTED_FEATURE,
 		// that means a folder deletion couldn't be committed.
 		if ((m_Revision != 0)&&(Err->apr_err == SVN_ERR_UNSUPPORTED_FEATURE))
@@ -2351,16 +2342,8 @@ bool CSVNProgressDlg::CmdUpdate(CString& sWindowTitle, bool& /*localoperation*/)
 				m_Revision = SVNRev::REV_HEAD;
 		} // if (m_Revision.IsHead()) 
 	} // for(int nItem = 0; nItem < targetcount; nItem++) 
-	if (m_targetPathList.GetCount() > 1)
-	{
-		sWindowTitle = m_targetPathList.GetCommonRoot().GetWinPathString()+_T(" - ")+sWindowTitle;
-		SetWindowText(sWindowTitle);
-	}
-	else if (m_targetPathList.GetCount() == 1)
-	{
-		sWindowTitle = m_targetPathList[0].GetWinPathString()+_T(" - ")+sWindowTitle;
-		SetWindowText(sWindowTitle);
-	}
+	sWindowTitle = m_targetPathList.GetCommonRoot().GetWinPathString()+_T(" - ")+sWindowTitle;
+	SetWindowText(sWindowTitle);
 
 	DWORD exitcode = 0;
 	CString error;

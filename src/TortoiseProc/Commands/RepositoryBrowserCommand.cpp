@@ -50,14 +50,21 @@ bool RepositoryBrowserCommand::Execute()
 				// The path points to a local repository.
 				// Add 'file:///' so the repository browser recognizes
 				// it as an URL to the local repository.
-				url = _T("file:///")+cmdLinePath.GetWinPathString();
+				if (cmdLinePath.GetWinPathString().GetAt(0) == '\\')	// starts with '\' means an UNC path
+				{
+					CString p = cmdLinePath.GetWinPathString();
+					p.TrimLeft('\\');
+					url = _T("file://")+cmdLinePath.GetWinPathString();
+				}
+				else
+					url = _T("file:///")+cmdLinePath.GetWinPathString();
 				url.Replace('\\', '/');
 			}
 		}
 	}
-	if (cmdLinePath.GetUIPathString().Left(8).CompareNoCase(_T("file:///"))==0)
+	if (cmdLinePath.GetUIPathString().Left(7).CompareNoCase(_T("file://"))==0)
 	{
-		cmdLinePath.SetFromUnknown(cmdLinePath.GetUIPathString().Mid(8));
+		cmdLinePath.SetFromUnknown(cmdLinePath.GetUIPathString().Mid(7));
 	}
 	bFile = PathFileExists(cmdLinePath.GetWinPath()) ? !cmdLinePath.IsDirectory() : FALSE;
 

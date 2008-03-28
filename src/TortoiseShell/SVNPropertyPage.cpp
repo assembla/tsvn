@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - TortoiseSVN
+// Copyright (C) 2003-2008 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ STDMETHODIMP CShellExt::AddPages (LPFNADDPROPSHEETPAGE lpfnAddPage,
     psp.dwFlags = PSP_USEREFPARENT | PSP_USETITLE | PSP_USEICONID | PSP_USECALLBACK;	
 	psp.hInstance = g_hResInst;
 	psp.pszTemplate = MAKEINTRESOURCE(IDD_PROPPAGE);
-    psp.pszIcon = MAKEINTRESOURCE(IDI_APP);
+    psp.pszIcon = MAKEINTRESOURCE(IDI_APPSMALL);
     psp.pszTitle = _T("Subversion");
     psp.pfnDlgProc = (DLGPROC) PageProc;
     psp.lParam = (LPARAM) sheetpage;
@@ -353,7 +353,7 @@ void CSVNPropertyPage::InitWorkfileView()
 				if (svn.status->entry->uuid)
 					SetDlgItemText(m_hwnd, IDC_REPOUUID, UTF8ToWide(svn.status->entry->uuid).c_str());
 				if (svn.status->entry->changelist)
-					SetDlgItemText(m_hwnd, IDC_REPOUUID, UTF8ToWide(svn.status->entry->changelist).c_str());
+					SetDlgItemText(m_hwnd, IDC_CHANGELIST, UTF8ToWide(svn.status->entry->changelist).c_str());
 				SVNStatus::GetDepthString(g_hResInst, svn.status->entry->depth, buf, sizeof(buf)/sizeof(TCHAR), (WORD)CRegStdWORD(_T("Software\\TortoiseSVN\\LanguageID"), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT)));
 				SetDlgItemText(m_hwnd, IDC_DEPTHEDIT, buf);
 

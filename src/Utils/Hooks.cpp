@@ -198,38 +198,46 @@ hooktype CHooks::GetHookType(const CString& s)
 	return unknown_hook;
 }
 
-void CHooks::SubstitutePaths(CString& sCmd, const CTSVNPathList& pathList)
+void CHooks::AddParam(CString& sCmd, const CString& param)
 {
-	if (sCmd.Find(_T("%PATH%")) >= 0)
-	{
-		CTSVNPath temppath = CTempFiles::Instance().GetTempFilePath(true);
-		pathList.WriteToFile(temppath.GetWinPathString(), true);
-		sCmd.Replace(_T("%PATH%"), temppath.GetWinPathString());
-	}
-	sCmd.Replace(_T("%PATHS%"), pathList.CreateAsteriskSeparatedString());
+	sCmd += _T(" \"");
+	sCmd += param;
+	sCmd += _T("\"");
 }
 
-void CHooks::SubstituteCWD(CString& sCmd, const CTSVNPathList& pathList)
+void CHooks::AddPathParam(CString& sCmd, const CTSVNPathList& pathList)
 {
-	sCmd.Replace(_T("%CWD%"), pathList.GetCommonRoot().GetWinPathString());
+	CTSVNPath temppath = CTempFiles::Instance().GetTempFilePath(true);
+	pathList.WriteToFile(temppath.GetWinPathString(), true);
+	AddParam(sCmd, temppath.GetWinPathString());
 }
 
-void CHooks::SubstituteDepth(CString& sCmd, svn_depth_t depth)
+void CHooks::AddCWDParam(CString& sCmd, const CTSVNPathList& pathList)
+{
+	AddParam(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPathString());
+}
+
+void CHooks::AddDepthParam(CString& sCmd, svn_depth_t depth)
 {
 	CString sTemp;
 	sTemp.Format(_T("%d"), depth);
-	sCmd.Replace(_T("%DEPTH%"), sTemp);
+	AddParam(sCmd, sTemp);
 }
 
-CTSVNPath CHooks::SubstituteMessageFile(CString& sCmd, const CString& message)
+void CHooks::AddErrorParam(CString& sCmd, const CString& error)
 {
 	CTSVNPath tempPath;
-	if (sCmd.Find(_T("%MESSAGEFILE%")) >= 0)
-	{
-		tempPath = CTempFiles::Instance().GetTempFilePath(true);
-		CStringUtils::WriteStringToTextFile(tempPath.GetWinPath(), (LPCTSTR)message);
-		sCmd.Replace(_T("%MESSAGEFILE%"), tempPath.GetWinPathString());
-	}
+	tempPath = CTempFiles::Instance().GetTempFilePath(true);
+	CStringUtils::WriteStringToTextFile(tempPath.GetWinPath(), (LPCTSTR)error);
+	AddParam(sCmd, tempPath.GetWinPathString());
+}
+
+CTSVNPath CHooks::AddMessageFileParam(CString& sCmd, const CString& message)
+{
+	CTSVNPath tempPath;
+	tempPath = CTempFiles::Instance().GetTempFilePath(true);
+	CStringUtils::WriteStringToTextFile(tempPath.GetWinPath(), (LPCTSTR)message);
+	AddParam(sCmd, tempPath.GetWinPathString());
 	return tempPath;
 }
 
@@ -239,10 +247,10 @@ bool CHooks::StartCommit(const CTSVNPathList& pathList, CString& message, DWORD&
 	if (it == end())
 		return false;
 	CString sCmd = it->second.commandline;
-	SubstitutePaths(sCmd, pathList);
-	SubstituteCWD(sCmd, pathList);
-	CTSVNPath temppath = SubstituteMessageFile(sCmd, message);
-	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetWinPath(), error, it->second.bWait, it->second.bShow);
+	AddPathParam(sCmd, pathList);
+	CTSVNPath temppath = AddMessageFileParam(sCmd, message);
+	AddCWDParam(sCmd, pathList);
+	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPath(), error, it->second.bWait, it->second.bShow);
 	if (!exitcode && !temppath.IsEmpty())
 	{
 		CStringUtils::ReadStringFromTextFile(temppath.GetWinPathString(), message);
@@ -256,11 +264,11 @@ bool CHooks::PreCommit(const CTSVNPathList& pathList, svn_depth_t depth, const C
 	if (it == end())
 		return false;
 	CString sCmd = it->second.commandline;
-	SubstitutePaths(sCmd, pathList);
-	SubstituteCWD(sCmd, pathList);
-	SubstituteDepth(sCmd, depth);
-	SubstituteMessageFile(sCmd, message);
-	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetWinPath(), error, it->second.bWait, it->second.bShow);
+	AddPathParam(sCmd, pathList);
+	AddDepthParam(sCmd, depth);
+	AddMessageFileParam(sCmd, message);
+	AddCWDParam(sCmd, pathList);
+	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPath(), error, it->second.bWait, it->second.bShow);
 	return true;
 }
 
@@ -270,12 +278,13 @@ bool CHooks::PostCommit(const CTSVNPathList& pathList, svn_depth_t depth, SVNRev
 	if (it == end())
 		return false;
 	CString sCmd = it->second.commandline;
-	SubstitutePaths(sCmd, pathList);
-	SubstituteCWD(sCmd, pathList);
-	SubstituteDepth(sCmd, depth);
-	sCmd.Replace(_T("%REVISION%"), rev.ToString());
-	SubstituteMessageFile(sCmd, message);
-	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetWinPath(), error, it->second.bWait, it->second.bShow);
+	AddPathParam(sCmd, pathList);
+	AddDepthParam(sCmd, depth);
+	AddMessageFileParam(sCmd, message);
+	AddParam(sCmd, rev.ToString());
+	AddErrorParam(sCmd, error);
+	AddCWDParam(sCmd, pathList);
+	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPath(), error, it->second.bWait, it->second.bShow);
 	return true;
 }
 
@@ -285,9 +294,9 @@ bool CHooks::StartUpdate(const CTSVNPathList& pathList, DWORD& exitcode, CString
 	if (it == end())
 		return false;
 	CString sCmd = it->second.commandline;
-	SubstitutePaths(sCmd, pathList);
-	SubstituteCWD(sCmd, pathList);
-	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetWinPath(), error, it->second.bWait, it->second.bShow);
+	AddPathParam(sCmd, pathList);
+	AddCWDParam(sCmd, pathList);
+	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPath(), error, it->second.bWait, it->second.bShow);
 	return true;
 }
 
@@ -297,10 +306,11 @@ bool CHooks::PreUpdate(const CTSVNPathList& pathList, svn_depth_t depth, SVNRev 
 	if (it == end())
 		return false;
 	CString sCmd = it->second.commandline;
-	SubstitutePaths(sCmd, pathList);
-	SubstituteCWD(sCmd, pathList);
-	SubstituteDepth(sCmd, depth);
-	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetWinPath(), error, it->second.bWait, it->second.bShow);
+	AddPathParam(sCmd, pathList);
+	AddDepthParam(sCmd, depth);
+	AddParam(sCmd, rev.ToString());
+	AddCWDParam(sCmd, pathList);
+	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPath(), error, it->second.bWait, it->second.bShow);
 	return true;
 }
 
@@ -310,11 +320,12 @@ bool CHooks::PostUpdate(const CTSVNPathList& pathList, svn_depth_t depth, SVNRev
 	if (it == end())
 		return false;
 	CString sCmd = it->second.commandline;
-	SubstitutePaths(sCmd, pathList);
-	SubstituteCWD(sCmd, pathList);
-	SubstituteDepth(sCmd, depth);
-	sCmd.Replace(_T("%REVISION%"), rev.ToString());
-	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetWinPath(), error, it->second.bWait, it->second.bShow);
+	AddPathParam(sCmd, pathList);
+	AddDepthParam(sCmd, depth);
+	AddParam(sCmd, rev.ToString());
+	AddErrorParam(sCmd, error);
+	AddCWDParam(sCmd, pathList);
+	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPath(), error, it->second.bWait, it->second.bShow);
 	return true;
 }
 
@@ -332,10 +343,10 @@ bool CHooks::IssueTracker(const CTSVNPathList& pathList, CString& message, DWORD
 	if (it == end())
 		return false;
 	CString sCmd = it->second.commandline;
-	SubstitutePaths(sCmd, pathList);
-	SubstituteCWD(sCmd, pathList);
-	CTSVNPath temppath = SubstituteMessageFile(sCmd, message);
-	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetWinPath(), error, it->second.bWait, it->second.bShow);
+	AddPathParam(sCmd, pathList);
+	AddCWDParam(sCmd, pathList);
+	CTSVNPath temppath = AddMessageFileParam(sCmd, message);
+	exitcode = RunScript(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPath(), error, it->second.bWait, it->second.bShow);
 	if (!exitcode && !temppath.IsEmpty())
 	{
 		CStringUtils::ReadStringFromTextFile(temppath.GetWinPathString(), message);

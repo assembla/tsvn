@@ -119,6 +119,7 @@ protected:
 	CToolTipCtrl *	m_pDlgTip;
 	char			m_szTip[MAX_TT_LENGTH+1];
 	wchar_t			m_wszTip[MAX_TT_LENGTH+1];
+    CString			m_sTitle;
 
 	float			m_node_rect_width;
 	float			m_node_space_left;
@@ -131,7 +132,6 @@ protected:
 	CPoint			m_RoundRectPt;
 	float			m_fZoomFactor;
 	CColors			m_Colors;
-	bool			m_bFetchLogs;
 	bool			m_bIsRubberBand;
 	CPoint			m_ptRubberStart;
 	CPoint			m_ptRubberEnd;
@@ -186,5 +186,8 @@ private:
 	void			DrawRubberBand();
 
 	void			BuildPreview();
-friend class CRevisionGraphDlg;
+
+    void            SetDlgTitle (bool offline);
+
+    friend class CRevisionGraphDlg;
 };

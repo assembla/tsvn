@@ -278,7 +278,9 @@ BOOL CLogDlg::OnInitDialog()
 	m_LogList.InsertColumn(3, temp);
 	if (m_bShowBugtraqColumn)
 	{
-		temp.LoadString(IDS_LOG_BUGIDS);
+		temp = m_ProjectProperties.sLabel;
+		if (temp.IsEmpty())
+			temp.LoadString(IDS_LOG_BUGIDS);
 		m_LogList.InsertColumn(4, temp);
 	}
 	temp.LoadString(IDS_LOG_MESSAGE);
@@ -362,18 +364,28 @@ BOOL CLogDlg::OnInitDialog()
 	SetPromptParentWindow(m_hWnd);
 	if (hWndExplorer)
 		CenterWindow(CWnd::FromHandle(hWndExplorer));
-	EnableSaveRestore(_T("LogDlg"), TRUE);
+	EnableSaveRestore(_T("LogDlg"));
 
 	DWORD yPos1 = CRegDWORD(_T("Software\\TortoiseSVN\\TortoiseProc\\ResizableState\\LogDlgSizer1"));
 	DWORD yPos2 = CRegDWORD(_T("Software\\TortoiseSVN\\TortoiseProc\\ResizableState\\LogDlgSizer2"));
+	RECT rcDlg, rcLogList, rcChgMsg;
+	GetClientRect(&rcDlg);
+	m_LogList.GetWindowRect(&rcLogList);
+	ScreenToClient(&rcLogList);
+	m_ChangedFileListCtrl.GetWindowRect(&rcChgMsg);
+	ScreenToClient(&rcChgMsg);
 	if (yPos1)
 	{
 		RECT rectSplitter;
 		m_wndSplitter1.GetWindowRect(&rectSplitter);
 		ScreenToClient(&rectSplitter);
 		int delta = yPos1 - rectSplitter.top;
-		m_wndSplitter1.SetWindowPos(NULL, 0, yPos1, 0, 0, SWP_NOSIZE);
-		DoSizeV1(delta);
+
+		if ((rcLogList.bottom + delta > rcLogList.top)&&(rcLogList.bottom + delta < rcChgMsg.bottom - 30))
+		{
+			m_wndSplitter1.SetWindowPos(NULL, 0, yPos1, 0, 0, SWP_NOSIZE);
+			DoSizeV1(delta);
+		}
 	}
 	if (yPos2)
 	{
@@ -381,8 +393,12 @@ BOOL CLogDlg::OnInitDialog()
 		m_wndSplitter2.GetWindowRect(&rectSplitter);
 		ScreenToClient(&rectSplitter);
 		int delta = yPos2 - rectSplitter.top;
-		m_wndSplitter2.SetWindowPos(NULL, 0, yPos2, 0, 0, SWP_NOSIZE);
-		DoSizeV2(delta);
+
+		if ((rcChgMsg.top + delta < rcChgMsg.bottom)&&(rcChgMsg.top + delta > rcLogList.top + 30))
+		{
+			m_wndSplitter2.SetWindowPos(NULL, 0, yPos2, 0, 0, SWP_NOSIZE);
+			DoSizeV2(delta);
+		}
 	}
 
 	
@@ -682,10 +698,10 @@ void CLogDlg::GetAll(bool bForceAll /* = false */)
 
 void CLogDlg::OnBnClickedRefresh()
 {
-	Refresh();
+	Refresh (true);
 }
 
-void CLogDlg::Refresh()
+void CLogDlg::Refresh (bool autoGoOnline)
 {
 	// refreshing means re-downloading the already shown log messages
 	UpdateData();
@@ -724,8 +740,11 @@ void CLogDlg::Refresh()
 
     // reset the cached HEAD property & go on-line
 
-	SetDlgTitle (false);
-    logCachePool.GetRepositoryInfo().ResetHeadRevision (CTSVNPath (m_sRepositoryRoot));
+    if (autoGoOnline)
+    {
+	    SetDlgTitle (false);
+        logCachePool.GetRepositoryInfo().ResetHeadRevision (CTSVNPath (m_sRepositoryRoot));
+    }
 
 	InterlockedExchange(&m_bThreadRunning, TRUE);
 	if (AfxBeginThread(LogThreadEntry, this)==NULL)
@@ -959,6 +978,10 @@ UINT CLogDlg::LogThread()
 {
 	InterlockedExchange(&m_bThreadRunning, TRUE);
 
+    //does the user force the cache to refresh (shift or control key down)?
+    bool refresh =    (GetKeyState (VK_CONTROL) < 0) 
+                   || (GetKeyState (VK_SHIFT) < 0);
+
 	//disable the "Get All" button while we're receiving
 	//log messages.
 	DialogEnableWindow(IDC_GETALL, FALSE);
@@ -1075,12 +1098,12 @@ UINT CLogDlg::LogThread()
 
     if (succeeded == TRUE)
     {
-        succeeded = ReceiveLog (CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, m_bStrict, m_bIncludeMerges);
+        succeeded = ReceiveLog (CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, m_bStrict, m_bIncludeMerges, refresh);
         if ((!succeeded)&&(!m_path.IsUrl()))
         {
 	        // try again with REV_WC as the start revision, just in case the path doesn't
 	        // exist anymore in HEAD
-	        succeeded = ReceiveLog(CTSVNPathList(m_path), SVNRev(), SVNRev::REV_WC, m_endrev, m_limit, m_bStrict, m_bIncludeMerges);
+	        succeeded = ReceiveLog(CTSVNPathList(m_path), SVNRev(), SVNRev::REV_WC, m_endrev, m_limit, m_bStrict, m_bIncludeMerges, refresh);
         }
     }
     if (succeeded == FALSE)
@@ -1855,7 +1878,7 @@ BOOL CLogDlg::Open(bool bOpenWith,CString changedpath, svn_revnum_t rev)
 	if (bOpenWith)
 	{
 		CString cmd = _T("RUNDLL32 Shell32,OpenAs_RunDLL ");
-		cmd += tempfile.GetWinPathString();
+		cmd += tempfile.GetWinPathString() + _T(" ");
 		CAppUtils::LaunchApplication(cmd, NULL, false);
 	}
 	EnableOKButton();
@@ -3815,7 +3838,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 					if ((ret <= HINSTANCE_ERROR)||bOpenWith)
 					{
 						CString cmd = _T("RUNDLL32 Shell32,OpenAs_RunDLL ");
-						cmd += tempfile.GetWinPathString();
+						cmd += tempfile.GetWinPathString() + _T(" ");
 						CAppUtils::LaunchApplication(cmd, NULL, false);
 					}
 				}
@@ -4541,7 +4564,7 @@ void CLogDlg::OnSize(UINT nType, int cx, int cy)
 void CLogDlg::OnRefresh()
 {
 	if (GetDlgItem(IDC_GETALL)->IsWindowEnabled())
-		Refresh();
+		Refresh (true);
 }
 
 void CLogDlg::OnFind()

@@ -1104,9 +1104,19 @@ CDictionaryBasedTempPath CCacheLogQuery::GetRelativeRepositoryPath
 	URL = CUnicodeUtils::GetUTF8 
     		(repositoryInfoCache->GetRepositoryRootAndUUID (url, uuid));
 
+    // URL and / or uuid may be unknown if there is no repository list entry
+    // (e.g. this is a temp. cache object) and there is no server connection
+
+    assert (uuid.IsEmpty() == URL.IsEmpty());
+    if (uuid.IsEmpty())
+    {
+        // we can't cache the data -> return an invalid path
+
+        return CDictionaryBasedTempPath (NULL);
+    }
+
 	// load / create cache
 
-	assert(!uuid.IsEmpty());
 	if (caches != NULL)
 	{
 		cache = caches->GetCache (uuid);
@@ -1130,6 +1140,14 @@ CDictionaryBasedTempPath CCacheLogQuery::GetRelativeRepositoryPath
 	return CDictionaryBasedTempPath (paths, (const char*)relPath);
 }
 
+// utility method: we throw that error in several places
+
+void CCacheLogQuery::ThrowBadRevision() const
+{
+	throw SVNError ( SVN_ERR_CLIENT_BAD_REVISION
+				   , "Invalid revision passed to Log().");
+}
+
 // decode special revisions:
 // base / head must be initialized with NO_REVISION
 // and will be used to cache these values.
@@ -1139,24 +1157,26 @@ revision_t CCacheLogQuery::DecodeRevision ( const CTSVNPath& path
 				  			              , const SVNRev& revision) const
 {
 	if (!revision.IsValid())
-		throw SVNError ( SVN_ERR_CLIENT_BAD_REVISION
-					   , "Invalid revision passed to Log().");
+        ThrowBadRevision();
 
 	// efficiently decode standard cases: revNum, HEAD, BASE/WORKING
 
+    revision_t result = (revision_t)NO_REVISION;
 	switch (revision.GetKind())
 	{
 	case svn_opt_revision_number:
-		return static_cast<LONG>(revision);
+        {
+            result = static_cast<LONG>(revision);
+		    break;
+        }
 
 	case svn_opt_revision_head:
         {
-            revision_t head = repositoryInfoCache->GetHeadRevision (url);
+            result = repositoryInfoCache->GetHeadRevision (url);
 
-			if (head == NO_REVISION)
+			if (result == NO_REVISION)
 				throw SVNError (repositoryInfoCache->GetLastError());
-
-        	return head;
+            break;
         }
 
     default:
@@ -1167,9 +1187,16 @@ revision_t CCacheLogQuery::DecodeRevision ( const CTSVNPath& path
 			if (baseInfo == NULL)
 				throw SVNError(info.GetError());
 
-       		return static_cast<LONG>(baseInfo->rev);
+            result = static_cast<LONG>(baseInfo->rev);
         }
 	}
+
+    // did we actually get a valid revision?
+
+	if (result == NO_REVISION)
+        ThrowBadRevision();
+
+	return result;
 }
 
 // get the (exactly) one path from targets
@@ -1244,6 +1271,7 @@ void CCacheLogQuery::Log ( const CTSVNPathList& targets
 		: CTSVNPath (repositoryInfoCache->GetSVN().GetURLFromPath (path));
 
 	// decode revisions
+    // makes also sure that these aren't NO_REVISION values
 
 	revision_t startRevision = DecodeRevision (path, url, start);
 	revision_t endRevision = DecodeRevision (path, url, end);
@@ -1269,10 +1297,14 @@ void CCacheLogQuery::Log ( const CTSVNPathList& targets
     // (don't get the repo info from SVN, if it had to be fetched from the server
     //  -> let GetRelativeRepositoryPath() use our repository property cache)
 
+    CDictionaryBasedTempPath repoPath = GetRelativeRepositoryPath (url);
+    if (!repoPath.IsValid())
+        return;
+
 	CDictionaryBasedTempPath startPath 
 		= TranslatePegRevisionPath ( pegRevision
 								   , startRevision
-								   , GetRelativeRepositoryPath (url));
+								   , repoPath);
 
 	// do it 
 
@@ -1332,8 +1364,42 @@ void CCacheLogQuery::LogRevision ( revision_t revision
 
 // access to the cache
 
-CCachedLogInfo* CCacheLogQuery::GetCache()
+CCachedLogInfo* CCacheLogQuery::GetCache() const
 {
 	assert (cache != NULL);
 	return cache;
+}
+
+// could we get at least some data
+
+bool CCacheLogQuery::GotAnyData() const
+{
+    return cache != NULL;
+}
+
+// for tempCaches: write content to "real" cache files
+// (no-op if this is does not use a temp. cache)
+
+void CCacheLogQuery::UpdateCache (CLogCachePool* caches)
+{
+	// resolve URL
+
+	CTSVNPath path;
+    path.SetFromSVN (URL);
+
+    CString uuid = repositoryInfoCache->GetRepositoryUUID (path);
+
+    // UUID may be unknown if there is no repository list entry
+    // (e.g. this is a temp. cache object) and there is no server connection
+
+    if (uuid.IsEmpty())
+        return;
+
+	// load / create cache and merge it with our results
+
+	assert(!uuid.IsEmpty());
+
+    CCachedLogInfo* cache = caches->GetCache (uuid);
+    if ((cache != this->cache) && (this->cache != NULL))
+        cache->Update (*this->cache);
 }

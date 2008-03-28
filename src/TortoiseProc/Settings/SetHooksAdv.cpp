@@ -105,7 +105,7 @@ BOOL CSetHooksAdv::OnInitDialog()
 	AddAnchor(IDC_HIDECHECK, BOTTOM_LEFT, BOTTOM_RIGHT);
 	AddAnchor(IDOK, BOTTOM_RIGHT);
 	AddAnchor(IDCANCEL, BOTTOM_RIGHT);
-	EnableSaveRestore(_T("SetHooksAdvDlg"), TRUE);
+	EnableSaveRestore(_T("SetHooksAdvDlg"));
 	return TRUE;
 }
 
@@ -155,9 +155,13 @@ void CSetHooksAdv::OnBnClickedHookbrowse()
 
 void CSetHooksAdv::OnBnClickedHookcommandbrowse()
 {
+	CString sCmdLine = m_sCommandLine;
+	if (!PathFileExists(sCmdLine))
+		sCmdLine.Empty();
 	// Display the Open dialog box. 
-	if (CAppUtils::FileOpenSave(m_sCommandLine, NULL, IDS_SETTINGS_HOOKS_SELECTSCRIPTFILE, IDS_COMMONFILEFILTER, true, m_hWnd))
+	if (CAppUtils::FileOpenSave(sCmdLine, NULL, IDS_SETTINGS_HOOKS_SELECTSCRIPTFILE, IDS_COMMONFILEFILTER, true, m_hWnd))
 	{
+		m_sCommandLine = sCmdLine;
 		UpdateData(FALSE);
 	}
 }
