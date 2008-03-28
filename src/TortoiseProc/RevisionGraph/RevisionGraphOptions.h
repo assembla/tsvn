@@ -46,41 +46,6 @@ public:
 
 };
 
-class CRevisionGraphOptionList;
-
-class CRevisionGraphOption : public IRevisionGraphOption
-{
-private:
-
-    /// data members
-
-    int priority;
-    WORD id;
-    bool selected;
-
-protected:
-
-    /// construction / destruction
-
-    CRevisionGraphOption ( CRevisionGraphOptionList& list
-                         , int priority
-                         , WORD id);
-    virtual ~CRevisionGraphOption() {};
-
-public:
-
-    /// implement IRevisionGraphOption
-
-    virtual WORD CommandID() const;
-    virtual int Priority() const; 
-
-    virtual bool IsAvailable() const;
-    virtual bool IsSelected() const;
-    virtual bool IsActive() const; 
-
-    virtual void ToggleSelection();
-};
-
 class CRevisionGraphOptionList
 {
 private:

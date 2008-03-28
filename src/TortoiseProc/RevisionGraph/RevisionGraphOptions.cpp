@@ -22,50 +22,6 @@
 #include "VisibleGraph.h"
 #include "VisibleGraphNode.h"
 
-// construction / destruction
-
-CRevisionGraphOption::CRevisionGraphOption ( CRevisionGraphOptionList& list
-                                           , int priority
-                                           , WORD id)
-    : priority (priority)
-    , id (id)
-    , selected (false)
-{
-    list.Add (this);
-}
-
-// implement IRevisionGraphOption
-
-WORD CRevisionGraphOption::CommandID() const
-{
-    return id;
-}
-
-int CRevisionGraphOption::Priority() const
-{
-    return priority;
-}
-
-bool CRevisionGraphOption::IsAvailable() const
-{
-    return true;
-}
-
-bool CRevisionGraphOption::IsSelected() const
-{
-    return selected;
-}
-
-bool CRevisionGraphOption::IsActive() const
-{
-    return IsSelected();
-}
-
-void CRevisionGraphOption::ToggleSelection()
-{
-    selected = !selected;
-}
-
 // called by CRevisionGraphOption constructor
 
 void CRevisionGraphOptionList::Add (IRevisionGraphOption* option)
