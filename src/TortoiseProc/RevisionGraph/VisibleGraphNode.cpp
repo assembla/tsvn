@@ -108,3 +108,23 @@ void CVisibleGraphNode::DestroySubNodes
         factory.Destroy (copyTargetFactory.remove (firstCopyTarget));
     }
 }
+
+// set index members within the whole sub-tree
+
+index_t CVisibleGraphNode::InitIndex (index_t startIndex)
+{
+    for (CVisibleGraphNode* node = this; node != NULL; node = node->next)
+    {
+        node->index = startIndex;
+        ++startIndex;
+
+        for ( CCopyTarget* target = node->firstCopyTarget
+            ; target != NULL
+            ; target = target->next())
+        {
+            startIndex = target->value()->InitIndex (startIndex);
+        }
+    }
+
+    return startIndex;
+}

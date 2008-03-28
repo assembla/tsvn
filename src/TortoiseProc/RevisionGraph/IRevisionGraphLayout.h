@@ -18,6 +18,10 @@
 //
 #pragma once
 
+#include "LogCacheGlobals.h"
+
+using namespace LogCache;
+
 class ILayoutItemList
 {
 public:
@@ -26,7 +30,7 @@ public:
 
     virtual index_t GetCount() const = 0;
 
-    virtual std::string GetToolTip (index_t index) const = 0;
+    virtual CString GetToolTip (index_t index) const = 0;
 
     /// lookup (return NO_INDEX if not found)
 
@@ -59,7 +63,7 @@ public:
 
     /// standard data access
 
-    virtual const SConnection& GetConnection (index_t index) const = 0;
+    virtual SConnection GetConnection (index_t index) const = 0;
 };
 
 class ILayoutNodeList : public ILayoutItemList
@@ -87,7 +91,7 @@ public:
 
     /// standard data access
 
-    virtual const SNode& GetNode (index_t index) const = 0;
+    virtual SNode GetNode (index_t index) const = 0;
 };
 
 class ILayoutTextList : public ILayoutItemList
@@ -110,7 +114,7 @@ public:
 
         /// The text.
 
-        const wchar_t* text;
+        CString text;
 
         /// Area occupied by this text.
 
@@ -119,7 +123,7 @@ public:
 
     /// standard data access
 
-    virtual const SText& GetText (index_t index) const = 0;
+    virtual SText GetText (index_t index) const = 0;
 };
 
 /** The 'graph' layout contains of three collections:
@@ -136,11 +140,11 @@ public:
 
     /// total graph size (logical units)
 
-    CRect GetRect() const;
+    virtual CRect GetRect() const = 0;
 
     /// access to the sub-structures
 
-    const ILayoutNodesList* GetNodes() const = 0;
-    const ILayoutConnectionList* GetConnections() const = 0;
-    const ILayoutTextList* GetTexts() const = 0;
+    virtual const ILayoutNodeList* GetNodes() const = 0;
+    virtual const ILayoutConnectionList* GetConnections() const = 0;
+    virtual const ILayoutTextList* GetTexts() const = 0;
 };

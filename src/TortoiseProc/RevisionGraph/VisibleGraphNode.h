@@ -136,6 +136,10 @@ public:
 	CNodeClassification GetClassification() const;
 
 	index_t GetIndex() const;
+
+    /// set index members within the whole sub-tree
+
+    index_t InitIndex (index_t startIndex);
 };
 
 /// CVisibleGraphNode::CFoldedTag construction
