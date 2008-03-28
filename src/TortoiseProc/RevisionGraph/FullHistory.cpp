@@ -204,13 +204,11 @@ bool CFullHistory::FetchRevisionData (CString path, SVNRev revision, CProgressDl
 
 	try
 	{
-		CRegStdWORD useLogCache (_T("Software\\TortoiseSVN\\UseLogCache"), TRUE);
-
         // select / construct query object and optimize revision range to fetch
 
 		svnQuery.reset (new CSVNLogQuery (&ctx, pool));
         revision_t firstRevision = 0;
-        if (useLogCache != FALSE)
+        if (svn.GetLogCachePool()->IsEnabled())
         {
             CLogCachePool* pool = svn.GetLogCachePool();
 		    query.reset (new CCacheLogQuery (pool, svnQuery.get()));
@@ -269,6 +267,7 @@ bool CFullHistory::FetchRevisionData (CString path, SVNRev revision, CProgressDl
 void CFullHistory::AnalyzeRevisionData (SVNRev revision)
 {
 	svn_error_clear(Err);
+    Err = NULL;
 
 	ClearCopyInfo();
 

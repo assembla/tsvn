@@ -42,6 +42,13 @@ CFullHistoryBuilder::~CFullHistoryBuilder(void)
 
 void CFullHistoryBuilder::Run()
 {
+    // special case: empty log
+
+    if (history.GetHeadRevision() == NO_REVISION)
+        return;
+
+    // frequently used objects
+
 	const CCachedLogInfo* cache = history.GetCache();
 	const CRevisionIndex& revisions = cache->GetRevisions();
 	const CRevisionInfoContainer& revisionInfo = cache->GetLogInfo();
