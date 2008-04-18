@@ -169,6 +169,55 @@ public:
 	/**
 	 * \ingroup TortoiseProc
 	 * Helper class for CSVNStatusListCtrl which represents
+	 * the user properties and their respective values for each file shown.
+	 */
+	class PropertyList
+	{
+	public:
+
+        /// only default construction / destruction
+
+        PropertyList() {};
+        ~PropertyList() {};
+
+        /// assign property list
+
+        PropertyList& operator= (const char* rhs);
+
+        /// collect property names in a set
+
+        void GetPropertyNames (std::set<CString>& names);
+
+        /// get a property value. 
+        /// Returns an empty string if there is no such property.
+
+        CString operator[](const CString& name) const;
+
+        /// set a property value.
+        /// The function assert()s that the name is a key in the 
+        /// properties map. If it is not, a dummy will be returned.
+
+        CString& operator[](const CString& name);
+
+        /// due to frequent use: special check for svn:needs-lock
+
+        bool IsNeedsLockSet() const;
+
+    private:
+
+        /// all the data we have. map: propname -> value
+
+        std::map<CString,CString> properties;
+
+        /// just a shorthand
+
+        typedef std::map<CString,CString>::const_iterator CIT;
+        typedef std::map<CString,CString>::iterator IT;
+    };
+
+	/**
+	 * \ingroup TortoiseProc
+	 * Helper class for CSVNStatusListCtrl which represents
 	 * the data for each file shown.
 	 */
 	class FileEntry
@@ -194,7 +243,7 @@ public:
 			, isNested(false)
 			, Revision(0)
 			, isConflicted(false)
-			, present_props(_T(""))
+			, present_props()
 			, needslock(false)
 			, working_size(SVN_WC_ENTRY_WORKING_SIZE_UNKNOWN)
 			, keeplocal(false)
@@ -290,7 +339,7 @@ public:
 		bool					isConflicted;			///< TRUE if a file entry is conflicted, i.e. if it has the conflicted paths set
 		bool					needslock;				///< TRUE if the svn:needs-lock property is set
 		svn_revnum_t			Revision;				///< the base revision
-		CString					present_props;			///< cacheable properties present in BASE
+		PropertyList			present_props;			///< cacheable properties present in BASE
 		apr_off_t				working_size;			///< Size of the file after being translated into local representation or SVN_WC_ENTRY_WORKING_SIZE_UNKNOWN
 		bool					keeplocal;				///< Whether a local copy of this entry should be kept in the working copy after a deletion has been committed
 		svn_depth_t				depth;					///< the depth of this entry

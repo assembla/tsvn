@@ -123,6 +123,78 @@ END_MESSAGE_MAP()
 bool	CSVNStatusListCtrl::m_bAscending = false;
 int		CSVNStatusListCtrl::m_nSortedColumn = -1;
 
+// assign property list
+
+CSVNStatusListCtrl::PropertyList& 
+CSVNStatusListCtrl::PropertyList::operator= (const char* rhs)
+{
+    // do you really want to replace the property list?
+
+    assert (properties.empty());
+    properties.clear();
+
+    // add all properties in the list
+
+    while ((rhs != NULL) && (*rhs != 0))
+    {
+        const char* next = strchr (rhs, ' ');
+
+        CString name (rhs, static_cast<int>(next == NULL ? strlen (rhs) : next - rhs));
+        properties.insert (std::make_pair (name, CString()));
+
+        rhs = next == NULL ? NULL : next+1;
+    }
+
+    // done
+
+    return *this;
+}
+
+// collect property names in a set
+
+void CSVNStatusListCtrl::PropertyList::GetPropertyNames (std::set<CString>& names)
+{
+    for ( CIT iter = properties.begin(), end = properties.end()
+        ; iter != end
+        ; ++iter)
+    {
+        names.insert (iter->first);
+    }
+}
+
+// get a property value. 
+
+CString CSVNStatusListCtrl::PropertyList::operator[](const CString& name) const
+{
+    CIT iter = properties.find (name);
+
+    return iter == properties.end()
+        ? CString()
+        : iter->second;
+}
+
+// set a property value.
+
+CString& CSVNStatusListCtrl::PropertyList::operator[](const CString& name)
+{
+    static CString dummy;
+
+    IT iter = properties.find (name);
+
+    assert (iter != properties.end());
+    return iter == properties.end()
+        ? dummy
+        : iter->second;
+}
+
+// due to frequent use: special check for svn:needs-lock
+
+bool CSVNStatusListCtrl::PropertyList::IsNeedsLockSet() const
+{
+    static const CString svnNeedsLock = _T("svn:needs-lock");
+    return properties.find (svnNeedsLock) != properties.end();
+}
+
 CSVNStatusListCtrl::CSVNStatusListCtrl() : CListCtrl()
 	, m_HeadRev(SVNRev::REV_HEAD)
 	, m_pbCanceled(NULL)
@@ -1475,7 +1547,7 @@ void CSVNStatusListCtrl::AddEntry(FileEntry * entry, WORD langID, int listIndex)
 	else
 		SetItemText(index, nCol++, _T(""));
 	// SVNSLC_COLSVNNEEDSLOCK
-	BOOL bFoundSVNNeedsLock = (entry->present_props.Find(_T("svn:needs-lock"))!=-1);
+    BOOL bFoundSVNNeedsLock = entry->present_props.IsNeedsLockSet();
 	CString strSVNNeedsLock = (bFoundSVNNeedsLock) ? _T("*") : _T("");
 	SetItemText(index, nCol++, strSVNNeedsLock);
 	// SVNSLC_COLCOPYFROM
