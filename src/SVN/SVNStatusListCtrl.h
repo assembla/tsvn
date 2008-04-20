@@ -405,7 +405,7 @@ public:
 
         /// tracking column modifications
 
-        void ColumnMoved (int column);
+        void ColumnMoved (int column, int position);
         void ColumnResized (int column);
 
         /// call these to update the user-prop list
@@ -779,14 +779,6 @@ private:
 
 	int CellRectFromPoint(CPoint& point, RECT *cellrect, int *col) const;
 
-	bool StringToOrderArray(const CString& OrderString, int OrderArray[]);
-	CString OrderArrayToString(int OrderArray[]);
-	bool StringToWidthArray(const CString& WidthString, int WidthArray[]);
-	CString WidthArrayToString(int WidthArray[]);
-
-	void HideColumn(int col);
-	void ShowColumn(int col);
-
 	virtual void PreSubclassWindow();
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual INT_PTR OnToolHitTest(CPoint point, TOOLINFO* pTI) const;
@@ -795,7 +787,9 @@ private:
 	afx_msg void OnHdnItemclick(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnLvnItemchanging(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg BOOL OnLvnItemchanged(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
+    afx_msg void OnColumnResized(NMHDR *pNMHDR, LRESULT *pResult);
+    afx_msg void OnColumnMoved(NMHDR *pNMHDR, LRESULT *pResult);
+    afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 
 	void CreateChangeList(const CString& name);
 
@@ -840,7 +834,6 @@ private:
 	LONG						m_nTotal;
 	LONG						m_nSelected;
 
-	DWORD						m_dwColumns;
 	DWORD						m_dwShow;
 	bool						m_bShowFolders;
 	bool						m_bShowIgnores;
@@ -866,12 +859,11 @@ private:
 	CString						m_sBusy;
 
 	bool						m_bUnversionedRecurse;
-	DWORD						m_ColumnShown[SVNSLC_NUMCOLUMNS];
-	CString						m_sColumnInfoContainer;
-	int							m_arColumnWidths[SVNSLC_NUMCOLUMNS];
 
 	bool						m_bCheckChildrenWithParent;
 	CSVNStatusListCtrlDropTarget * m_pDropTarget;
+
+    ColumnManager               m_ColumnManager;
 
 	std::map<CString,bool>		m_mapFilenameToChecked; ///< Remember manually de-/selected items
 	CComCriticalSection			m_critSec;
