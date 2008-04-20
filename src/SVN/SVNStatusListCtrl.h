@@ -121,6 +121,15 @@ SVNSLC_SHOWINCOMPLETE|SVNSLC_SHOWEXTERNAL|SVNSLC_SHOWINEXTERNALS)
 
 #define SVNSLC_IGNORECHANGELIST			_T("ignore-on-commit")
 
+// This gives up to 64 standard properties and menu entries
+// plus 192 user-defined properties (should be plenty).
+// User-defined properties will start at column SVNSLC_NUMCOLUMNS+1
+// but in the registry, we will record them starting at SVNSLC_USERPROPCOLOFFSET.
+
+#define SVNSLC_USERPROPCOLOFFSET        0x40
+#define SVNSLC_USERPROPCOLLIMIT         0xff
+#define SVNSLC_MAXCOLUMNCOUNT           0xff
+
 typedef int (__cdecl *GENERICCOMPAREFN)(const void * elem1, const void * elem2);
 typedef CComCritSecLock<CComCriticalSection> Locker;
 
@@ -346,6 +355,125 @@ public:
 		friend class CSVNStatusListCtrl;
 		friend class CSVNStatusListCtrlDropTarget;
 	};
+
+	/**
+	 * \ingroup TortoiseProc
+	 * Helper class for CSVNStatusListCtrl that represents
+	 * the columns visible and their order as well as 
+     * persisting that data in the registry.
+     *
+     * It assigns logical index values to the (potential) columns:
+     * 0 .. SVNSLC_NUMCOLUMNS-1 contain the standard attributes
+     * SVNSLC_USERPROPCOLOFFSET .. SVNSLC_MAXCOLUMNCOUNT are user props.
+     *
+     * The column vector contains the columns that are actually
+     * available in the control.
+     *
+     * Since the set of userprops may change from one WC to another,
+     * we also store the settings (width and order) for those
+     * userprops that are not used in this WC.
+     *
+     * A userprop is considerd "in use", if the respective column
+     * is not hidden or if at least one item has this property set.
+	 */
+	class ColumnManager
+	{
+    public:
+
+        /// construction / destruction
+
+        ColumnManager (CListCtrl* control) : control (control) {};
+        ~ColumnManager() {};
+
+        /// registry access
+
+        void ReadSettings (DWORD defaultColumns, const CString& containerName);
+        void WriteSettings() const;
+
+        /// read column definitions
+
+        int GetColumnCount() const;                     ///< total number of columns
+        bool IsVisible (int column) const;
+        bool IsUserProp (int column) const;
+        CString GetName (int column) const;
+        int GetWidth (int column) const;
+        int GetVisibleWidth (int column) const;
+
+        /// switch columns on and off
+
+        void SetVisible (int column, bool visible);
+
+        /// tracking column modifications
+
+        void ColumnMoved (int column);
+        void ColumnResized (int column);
+
+        /// call these to update the user-prop list
+        /// (will also auto-insert /-remove new list columns)
+
+        void UpdateUserPropList (const std::vector<FileEntry*>& files);
+        void RemoveUnusedProps();
+
+        /// bring everything back to its "natural" order
+
+        void ResetColumnOrder();
+
+    private:
+
+        /// initialization utilities
+
+        void ParseUserPropSettings ( const CString& userPropList
+                                   , const CString& shownUserProps);
+        void ParseWidths (const CString& widths);
+        void SetStandardColumnVisibility (DWORD visibility);
+        void ParseColumnOrder (const CString& widths);
+        void ApplyColumnOrder();
+
+        /// utilities used when writing data to the registry
+
+        DWORD GetSelectedStandardColumns() const;
+        CString GetUserPropList() const;
+        CString GetShownUserProps() const;
+        CString GetWidthString() const;
+        CString GetColumnOrderString() const;
+
+        /// our parent control and its data
+
+        CListCtrl* control;
+
+        /// where to store in the registry
+
+        CString registryPrefix;
+
+        /// all columns in their "natural" order
+
+        struct ColumnInfo
+        {
+            int index;          ///< is a user prop when < SVNSLC_USERPROPCOLOFFSET
+            int width;
+            bool visible;
+        };
+
+        std::vector<ColumnInfo> columns;
+
+        /// user-defined properties
+
+        struct UserProp
+        {
+            CString name;       ///< is a user prop when < SVNSLC_USERPROPCOLOFFSET
+            int width;
+        };
+
+        std::vector<UserProp> userProps;
+
+        /// stored result from last UpdateUserPropList() call
+
+        std::set<CString> itemProps;
+
+        /// global column ordering including unused user props
+
+        std::vector<int> columnOrder;
+    };
 
 	/**
 	 * Initializes the control, sets up the columns.
