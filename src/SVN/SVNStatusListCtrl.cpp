@@ -591,6 +591,13 @@ void CSVNStatusListCtrl::ColumnManager::UpdateRelevance
         }
 }
 
+// don't clutter the context menu with irrelevant prop info
+
+bool CSVNStatusListCtrl::ColumnManager::AnyUnusedProperties() const
+{
+    return columns.size() < userProps.size() + SVNSLC_NUMCOLUMNS;
+}
+
 void CSVNStatusListCtrl::ColumnManager::RemoveUnusedProps()
 {
     // determine what column indexes / IDs to keep.
@@ -659,8 +666,18 @@ void CSVNStatusListCtrl::ColumnManager::RemoveUnusedProps()
 
 // bring everything back to its "natural" order
 
-void CSVNStatusListCtrl::ColumnManager::ResetColumnOrder()
+void CSVNStatusListCtrl::ColumnManager::ResetColumns()
 {
+    // update internal data
+
+    std::sort (columnOrder.begin(), columnOrder.end());
+
+    for (size_t i = 0, count = columns.size(); i < count; ++i)
+        columns[i].width = 0;
+
+    for (size_t i = 0, count = userProps.size(); i < count; ++i)
+        userProps[i].width = 0;
+
     // update UI
 
     int order[SVNSLC_MAXCOLUMNCOUNT+1];
@@ -669,9 +686,9 @@ void CSVNStatusListCtrl::ColumnManager::ResetColumnOrder()
 
     control->SetColumnOrderArray (GetColumnCount(), order);
 
-    // update internal data
-
-    std::sort (columnOrder.begin(), columnOrder.end());
+    for (int i = 0, count = GetColumnCount(); i < count; ++i)
+        if (IsVisible(i))
+            control->SetColumnWidth (i, GetVisibleWidth(i));
 }
 
 // initialization utilities
@@ -4405,12 +4422,24 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
             CString temp;
 			UINT uCheckedFlags = MF_STRING | MF_ENABLED | MF_CHECKED;
 			UINT uUnCheckedFlags = MF_STRING | MF_ENABLED;
-			if (XPorLater)
+
+            // build control menu
+
+            if (XPorLater)
 			{
 				temp.LoadString(IDS_STATUSLIST_SHOWGROUPS);
 				popup.AppendMenu(IsGroupViewEnabled() ? uCheckedFlags : uUnCheckedFlags, columnCount, temp);
-				popup.AppendMenu(MF_SEPARATOR);
-			}
+            }
+
+            if (m_ColumnManager.AnyUnusedProperties())
+            {
+				temp.LoadString(IDS_STATUSLIST_REMOVEUNUSEDPROPS);
+				popup.AppendMenu(IsGroupViewEnabled() ? uCheckedFlags : uUnCheckedFlags, columnCount+1, temp);
+            }
+
+			temp.LoadString(IDS_STATUSLIST_RESETCOLUMNORDER);
+			popup.AppendMenu(IsGroupViewEnabled() ? uCheckedFlags : uUnCheckedFlags, columnCount+2, temp);
+            popup.AppendMenu(MF_SEPARATOR);
 
             // standard columns
 
@@ -4463,10 +4492,18 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 				{
 					ShowColumn(cmd);
 				}
-			}
-            if (cmd == columnCount)
+			} 
+            else if (cmd == columnCount)
 			{
 				EnableGroupView(!IsGroupViewEnabled());
+			} 
+            else if (cmd == columnCount+1)
+			{
+				m_ColumnManager.RemoveUnusedProps();
+			} 
+            else if (cmd == columnCount+2)
+			{
+				m_ColumnManager.ResetColumns();
 			}
 		}
 	}

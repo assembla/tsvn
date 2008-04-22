@@ -426,11 +426,15 @@ public:
         void UpdateUserPropList (const std::vector<FileEntry*>& files);
         void UpdateRelevance ( const std::vector<FileEntry*>& files
                              , const std::vector<size_t>& visibleFiles);
+
+        /// don't clutter the context menu with irrelevant prop info
+
+        bool AnyUnusedProperties() const;
         void RemoveUnusedProps();
 
         /// bring everything back to its "natural" order
 
-        void ResetColumnOrder();
+        void ResetColumns();
 
     private:
 
