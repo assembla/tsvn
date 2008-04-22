@@ -404,6 +404,7 @@ public:
 
         int GetColumnCount() const;                     ///< total number of columns
         bool IsVisible (int column) const;
+        bool IsRelevant (int column) const;
         bool IsUserProp (int column) const;
         CString GetName (int column) const;
         int GetWidth (int column, bool useDefaults = false) const;
@@ -422,6 +423,8 @@ public:
         /// (will also auto-insert /-remove new list columns)
 
         void UpdateUserPropList (const std::vector<FileEntry*>& files);
+        void UpdateRelevance ( const std::vector<FileEntry*>& files
+                             , const std::vector<size_t>& visibleFiles);
         void RemoveUnusedProps();
 
         /// bring everything back to its "natural" order
@@ -462,6 +465,7 @@ public:
             int index;          ///< is a user prop when < SVNSLC_USERPROPCOLOFFSET
             int width;
             bool visible;
+            bool relevant;      ///< set to @a visible, if no *shown* item has that property
         };
 
         std::vector<ColumnInfo> columns;

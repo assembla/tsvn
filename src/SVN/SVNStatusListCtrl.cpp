@@ -213,6 +213,7 @@ void CSVNStatusListCtrl::ColumnManager::ReadSettings
         columns[i].index = static_cast<int>(i);
         columns[i].width = 0;
         columns[i].visible = true;
+        columns[i].relevant = true;
     }
 
     userProps.clear();
@@ -321,6 +322,14 @@ bool CSVNStatusListCtrl::ColumnManager::IsVisible (int column) const
     return columns[index].visible;
 }
 
+bool CSVNStatusListCtrl::ColumnManager::IsRelevant (int column) const
+{
+    size_t index = static_cast<size_t>(column);
+    assert (columns.size() > index);
+
+    return columns[index].relevant;
+}
+
 bool CSVNStatusListCtrl::ColumnManager::IsUserProp (int column) const
 {
     size_t index = static_cast<size_t>(column);
@@ -408,6 +417,7 @@ void CSVNStatusListCtrl::ColumnManager::SetVisible
     if (columns[index].visible != visible)
     {
         columns[index].visible = visible;
+        columns[index].relevant |= visible;
         if (!visible)
             columns[index].width = 0; 
     }
@@ -557,6 +567,29 @@ void CSVNStatusListCtrl::ColumnManager::UpdateUserPropList
     ApplyColumnOrder();
 }
 
+void CSVNStatusListCtrl::ColumnManager::UpdateRelevance 
+    ( const std::vector<FileEntry*>& files
+    , const std::vector<size_t>& visibleFiles)
+{
+    // collect all user-defined props that belong to shown files
+
+    std::set<CString> aggregatedProps;
+    for (size_t i = 0, count = visibleFiles.size(); i < count; ++i)
+        files[visibleFiles[i]]->present_props.GetPropertyNames (aggregatedProps);
+
+    aggregatedProps.erase (_T("svn:needs-lock"));
+    itemProps = aggregatedProps;
+
+    // invisible columns for unused props are not relevant
+
+    for (int i = 0, count = GetColumnCount(); i < count; ++i)
+        if (IsUserProp(i) && !IsVisible(i))
+        {
+            columns[i].relevant 
+                = aggregatedProps.find (GetName(i)) != aggregatedProps.end();
+        }
+}
+
 void CSVNStatusListCtrl::ColumnManager::RemoveUnusedProps()
 {
     // determine what column indexes / IDs to keep.
@@ -684,6 +717,7 @@ void CSVNStatusListCtrl::ColumnManager::ParseUserPropSettings
             ColumnInfo newColumn;
             newColumn.width = 0;
             newColumn.visible = true;
+            newColumn.relevant = true;
             newColumn.index = static_cast<int>(userProps.size()) 
                             + SVNSLC_USERPROPCOLOFFSET - 1;
 
@@ -1815,6 +1849,8 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, DWORD dwCheck /*=0*/, bool bShowFold
 	}
 
 	SetItemCount(listIndex);
+
+    m_ColumnManager.UpdateRelevance (m_arStatusArray, m_arListArray);
 
 	int maxcol = ((CHeaderCtrl*)(GetDlgItem(0)))->GetItemCount()-1;
 	for (int col = 0; col <= maxcol; col++)
@@ -4346,19 +4382,19 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
                                  , m_ColumnManager.GetName(i));
             }
 
-            // user-prop columns
+            // user-prop columns:
+            // find relevant ones and sort 'em
 
-            if (SVNSLC_NUMCOLUMNS < columnCount)
-            {
-				popup.AppendMenu(MF_SEPARATOR);
-
-                // sort 'em
-
-                std::map<CString, int> sortedProps;
-                for (int i = SVNSLC_NUMCOLUMNS; i < columnCount; ++i)
+            std::map<CString, int> sortedProps;
+            for (int i = SVNSLC_NUMCOLUMNS; i < columnCount; ++i)
+                if (m_ColumnManager.IsRelevant(i))
                     sortedProps[m_ColumnManager.GetName(i)] = i;
 
+            if (!sortedProps.empty())
+            {
                 // add 'em to the menu
+
+				popup.AppendMenu(MF_SEPARATOR);
 
                 typedef std::map<CString, int>::const_iterator CIT;
                 for ( CIT iter = sortedProps.begin(), end = sortedProps.end()
