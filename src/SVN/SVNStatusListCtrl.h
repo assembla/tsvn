@@ -396,7 +396,7 @@ public:
         bool IsVisible (int column) const;
         bool IsUserProp (int column) const;
         CString GetName (int column) const;
-        int GetWidth (int column) const;
+        int GetWidth (int column, bool useDefaults = false) const;
         int GetVisibleWidth (int column) const;
 
         /// switch columns on and off
@@ -779,6 +779,9 @@ private:
 
 	int CellRectFromPoint(CPoint& point, RECT *cellrect, int *col) const;
 
+	void HideColumn(int col);
+	void ShowColumn(int col);
+
 	virtual void PreSubclassWindow();
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual INT_PTR OnToolHitTest(CPoint point, TOOLINFO* pTI) const;
@@ -834,6 +837,7 @@ private:
 	LONG						m_nTotal;
 	LONG						m_nSelected;
 
+	DWORD						m_dwColumns;
 	DWORD						m_dwShow;
 	bool						m_bShowFolders;
 	bool						m_bShowIgnores;
@@ -859,6 +863,9 @@ private:
 	CString						m_sBusy;
 
 	bool						m_bUnversionedRecurse;
+	DWORD						m_ColumnShown[SVNSLC_NUMCOLUMNS];
+	CString						m_sColumnInfoContainer;
+	int							m_arColumnWidths[SVNSLC_NUMCOLUMNS];
 
 	bool						m_bCheckChildrenWithParent;
 	CSVNStatusListCtrlDropTarget * m_pDropTarget;

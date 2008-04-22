@@ -377,25 +377,23 @@ CString CSVNStatusListCtrl::ColumnManager::GetName (int column) const
     return CString();
 }
 
-int CSVNStatusListCtrl::ColumnManager::GetWidth (int column) const
+int CSVNStatusListCtrl::ColumnManager::GetWidth (int column, bool useDefaults) const
 {
     size_t index = static_cast<size_t>(column);
     assert (columns.size() > index);
 
-    return columns[index].width;
+    int width = columns[index].width;
+    if ((width == 0) && useDefaults)
+        width = LVSCW_AUTOSIZE_USEHEADER;
+
+    return width;
 }
 
 int CSVNStatusListCtrl::ColumnManager::GetVisibleWidth (int column) const
 {
-    int width = 0;
-    if (IsVisible (column))
-    {
-        width = GetWidth (column);
-        if (width == 0)
-           width = LVSCW_AUTOSIZE_USEHEADER;
-    }
-
-    return width;
+    return IsVisible (column)
+        ? GetWidth (column, true)
+        : 0;
 }
 
 // switch columns on and off
@@ -410,7 +408,8 @@ void CSVNStatusListCtrl::ColumnManager::SetVisible
     if (columns[index].visible != visible)
     {
         columns[index].visible = visible;
-        control->SetColumnWidth (column, GetVisibleWidth (column));
+        if (!visible)
+            columns[index].width = 0; 
     }
 }
 
@@ -1715,7 +1714,7 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, DWORD dwCheck /*=0*/, bool bShowFold
 
 	int maxcol = ((CHeaderCtrl*)(GetDlgItem(0)))->GetItemCount()-1;
 	for (int col = 0; col <= maxcol; col++)
-        SetColumnWidth (col, m_ColumnManager.GetVisibleWidth (col));
+        SetColumnWidth (col, m_ColumnManager.GetWidth (col, true));
 
     SetRedraw(TRUE);
 	GetStatisticsString();
@@ -1844,7 +1843,7 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, const CTSVNPathList& checkedList, bo
 
 	int maxcol = ((CHeaderCtrl*)(GetDlgItem(0)))->GetItemCount()-1;
 	for (int col = 0; col <= maxcol; col++)
-        SetColumnWidth (col, m_ColumnManager.GetVisibleWidth (col));
+        SetColumnWidth (col, m_ColumnManager.GetWidth (col, true));
 
     SetRedraw(TRUE);
 	GetStatisticsString();
@@ -4226,8 +4225,16 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 
 			int cmd = popup.TrackPopupMenu(TPM_RETURNCMD | TPM_LEFTALIGN | TPM_NONOTIFY, point.x, point.y, this, 0);
 			if ((cmd >= 1)&&(cmd < SVNSLC_NUMCOLUMNS))
-                m_ColumnManager.SetVisible (cmd, !m_ColumnManager.IsVisible (cmd));
-
+			{
+				if (m_ColumnManager.IsVisible(cmd))
+				{
+					HideColumn(cmd);
+				}
+				else
+				{
+					ShowColumn(cmd);
+				}
+			}
             if (cmd == SVNSLC_NUMCOLUMNS)
 			{
 				EnableGroupView(!IsGroupViewEnabled());
@@ -4276,6 +4283,18 @@ void CSVNStatusListCtrl::CreateChangeList(const CString& name)
 	{
 		CMessageBox::Show(m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 	}
+}
+
+void CSVNStatusListCtrl::ShowColumn(int col)
+{
+    m_ColumnManager.SetVisible (col, true);
+	SetColumnWidth (col, LVSCW_AUTOSIZE_USEHEADER);
+}
+
+void CSVNStatusListCtrl::HideColumn(int col)
+{
+	SetColumnWidth (col,0);
+    m_ColumnManager.SetVisible (col, false);
 }
 
 void CSVNStatusListCtrl::OnNMDblclk(NMHDR *pNMHDR, LRESULT *pResult)
