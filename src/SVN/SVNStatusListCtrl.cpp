@@ -122,9 +122,6 @@ BEGIN_MESSAGE_MAP(CSVNStatusListCtrl, CListCtrl)
 END_MESSAGE_MAP()
 
 
-bool	CSVNStatusListCtrl::m_bAscending = false;
-int		CSVNStatusListCtrl::m_nSortedColumn = -1;
-
 // assign property list
 
 CSVNStatusListCtrl::PropertyList& 
@@ -905,6 +902,186 @@ CString CSVNStatusListCtrl::ColumnManager::GetColumnOrderString() const
     return result;
 }
 
+// sorter utility class
+
+CSVNStatusListCtrl::CSorter::CSorter ( ColumnManager* columnManager
+                                     , int sortedColumn
+                                     , bool ascending)
+    : columnManager (columnManager)
+    , sortedColumn (sortedColumn)
+    , ascending (ascending)
+{
+}
+
+bool CSVNStatusListCtrl::CSorter::operator()
+    ( const FileEntry* entry1
+    , const FileEntry* entry2) const
+{
+	#define SGN(x) ((x)==0?0:((x)>0?1:-1))
+
+	int result = 0;
+	switch (sortedColumn)
+	{
+	case 17:
+		{
+			if (result == 0)
+			{
+				__int64 writetime1 = entry1->GetPath().GetLastWriteTime();
+				__int64 writetime2 = entry2->GetPath().GetLastWriteTime();
+
+				FILETIME* filetime1 = (FILETIME*)(__int64*)&writetime1;
+				FILETIME* filetime2 = (FILETIME*)(__int64*)&writetime2;
+	
+				result = CompareFileTime(filetime1,filetime2);
+			}
+		}
+	case 16:
+		{
+			if (result == 0)
+			{
+				result = entry1->copyfrom_url.CompareNoCase(entry2->copyfrom_url);
+			}
+		}
+	case 15:
+		{
+			if (result == 0)
+			{
+				result = SGN(entry1->needslock - entry2->needslock);
+			}
+		}
+	case 14:
+		{
+			if (result == 0)
+			{
+				result = SGN(entry1->last_commit_date - entry2->last_commit_date);
+			}
+		}
+	case 13:
+		{
+			if (result == 0)
+			{
+				result = entry1->last_commit_rev - entry2->last_commit_rev;
+			}
+		}
+	case 12:
+		{
+			if (result == 0)
+			{
+				result = entry1->last_commit_author.CompareNoCase(entry2->last_commit_author);
+			}
+		}
+	case 11:
+		{
+			if (result == 0)
+			{
+				result = entry1->lock_comment.CompareNoCase(entry2->lock_comment);
+			}
+		}
+	case 10:
+		{
+			if (result == 0)
+			{
+				result = entry1->lock_owner.CompareNoCase(entry2->lock_owner);
+			}
+		}
+	case 9:
+		{
+			if (result == 0)
+			{
+				result = entry1->url.CompareNoCase(entry2->url);
+			}
+		}
+	case 8:
+		{
+			if (result == 0)
+			{
+				result = entry1->remotepropstatus - entry2->remotepropstatus;
+			}
+		}
+	case 7:
+		{
+			if (result == 0)
+			{
+				result = entry1->remotetextstatus - entry2->remotetextstatus;
+			}
+		}
+	case 6:
+		{
+			if (result == 0)
+			{
+				result = entry1->propstatus - entry2->propstatus;
+			}
+		}
+	case 5:
+		{
+			if (result == 0)
+			{
+				result = entry1->textstatus - entry2->textstatus;
+			}
+		}
+	case 4:
+		{
+			if (result == 0)
+			{
+				result = entry1->remotestatus - entry2->remotestatus;
+			}
+		}
+	case 3:
+		{
+			if (result == 0)
+			{
+				result = entry1->status - entry2->status;
+			}
+		}
+	case 2:
+		{
+			if (result == 0)
+			{
+				result = entry1->path.GetFileExtension().CompareNoCase(entry2->path.GetFileExtension());
+			}
+		}
+	case 1:
+		{
+			if (result == 0)
+			{
+				result = entry1->path.GetFileOrDirectoryName().CompareNoCase(entry2->path.GetFileOrDirectoryName());
+			}
+		}
+	case 0:		// path column
+		{
+			if (result == 0)
+			{
+				result = CTSVNPath::Compare(entry1->path, entry2->path);
+			}
+		}
+	default:
+		if ((result == 0) && (sortedColumn > 0))
+        {
+            // N/A props are "less than" empty props
+
+            const CString& propName = columnManager->GetName (sortedColumn);
+
+            bool entry1HasProp = entry1->present_props.HasProperty (propName);
+            bool entry2HasProp = entry2->present_props.HasProperty (propName);
+
+            if (entry1HasProp)
+            {
+                result = entry2HasProp
+                        ? entry1->present_props[propName].Compare 
+                            (entry2->present_props[propName])
+                        : 1;
+            }
+            else
+            {
+                result = entry2HasProp ? -1 : 0;
+            }
+        }
+	} // switch (m_nSortedColumn)
+	if (!ascending)
+		result = -result;
+
+	return result < 0;
+}
 
 CSVNStatusListCtrl::CSVNStatusListCtrl() : CListCtrl()
 	, m_HeadRev(SVNRev::REV_HEAD)
@@ -929,6 +1106,8 @@ CSVNStatusListCtrl::CSVNStatusListCtrl() : CListCtrl()
 	, m_bFileDropsEnabled(false)
 	, m_bOwnDrag(false)
     , m_ColumnManager(this)
+    , m_bAscending(false)
+    , m_nSortedColumn(-1)
 {
 	m_critSec.Init();
 }
@@ -2272,158 +2451,12 @@ bool CSVNStatusListCtrl::SetItemGroup(int item, int groupindex)
 void CSVNStatusListCtrl::Sort()
 {
 	Locker lock(m_critSec);
-	std::sort(m_arStatusArray.begin(), m_arStatusArray.end(), SortCompare);
+
+    CSorter predicate (&m_ColumnManager, m_nSortedColumn, m_bAscending);
+
+	std::sort(m_arStatusArray.begin(), m_arStatusArray.end(), predicate);
 	SaveColumnWidths();
 	Show(m_dwShow, 0, m_bShowFolders);
-}
-
-bool CSVNStatusListCtrl::SortCompare(const FileEntry* entry1, const FileEntry* entry2)
-{
-	#define SGN(x) ((x)==0?0:((x)>0?1:-1))
-
-	int result = 0;
-	switch (m_nSortedColumn)
-	{
-	case 17:
-		{
-			if (result == 0)
-			{
-				__int64 writetime1 = entry1->GetPath().GetLastWriteTime();
-				__int64 writetime2 = entry2->GetPath().GetLastWriteTime();
-
-				FILETIME* filetime1 = (FILETIME*)(__int64*)&writetime1;
-				FILETIME* filetime2 = (FILETIME*)(__int64*)&writetime2;
-	
-				result = CompareFileTime(filetime1,filetime2);
-			}
-		}
-	case 16:
-		{
-			if (result == 0)
-			{
-				result = entry1->copyfrom_url.CompareNoCase(entry2->copyfrom_url);
-			}
-		}
-	case 15:
-		{
-			if (result == 0)
-			{
-				result = SGN(entry1->needslock - entry2->needslock);
-			}
-		}
-	case 14:
-		{
-			if (result == 0)
-			{
-				result = SGN(entry1->last_commit_date - entry2->last_commit_date);
-			}
-		}
-	case 13:
-		{
-			if (result == 0)
-			{
-				result = entry1->last_commit_rev - entry2->last_commit_rev;
-			}
-		}
-	case 12:
-		{
-			if (result == 0)
-			{
-				result = entry1->last_commit_author.CompareNoCase(entry2->last_commit_author);
-			}
-		}
-	case 11:
-		{
-			if (result == 0)
-			{
-				result = entry1->lock_comment.CompareNoCase(entry2->lock_comment);
-			}
-		}
-	case 10:
-		{
-			if (result == 0)
-			{
-				result = entry1->lock_owner.CompareNoCase(entry2->lock_owner);
-			}
-		}
-	case 9:
-		{
-			if (result == 0)
-			{
-				result = entry1->url.CompareNoCase(entry2->url);
-			}
-		}
-	case 8:
-		{
-			if (result == 0)
-			{
-				result = entry1->remotepropstatus - entry2->remotepropstatus;
-			}
-		}
-	case 7:
-		{
-			if (result == 0)
-			{
-				result = entry1->remotetextstatus - entry2->remotetextstatus;
-			}
-		}
-	case 6:
-		{
-			if (result == 0)
-			{
-				result = entry1->propstatus - entry2->propstatus;
-			}
-		}
-	case 5:
-		{
-			if (result == 0)
-			{
-				result = entry1->textstatus - entry2->textstatus;
-			}
-		}
-	case 4:
-		{
-			if (result == 0)
-			{
-				result = entry1->remotestatus - entry2->remotestatus;
-			}
-		}
-	case 3:
-		{
-			if (result == 0)
-			{
-				result = entry1->status - entry2->status;
-			}
-		}
-	case 2:
-		{
-			if (result == 0)
-			{
-				result = entry1->path.GetFileExtension().CompareNoCase(entry2->path.GetFileExtension());
-			}
-		}
-	case 1:
-		{
-			if (result == 0)
-			{
-				result = entry1->path.GetFileOrDirectoryName().CompareNoCase(entry2->path.GetFileOrDirectoryName());
-			}
-		}
-	case 0:		// path column
-		{
-			if (result == 0)
-			{
-				result = CTSVNPath::Compare(entry1->path, entry2->path);
-			}
-		}
-		break;
-	default:
-		break;
-	} // switch (m_nSortedColumn)
-	if (!m_bAscending)
-		result = -result;
-
-	return result < 0;
 }
 
 void CSVNStatusListCtrl::OnHdnItemclick(NMHDR *pNMHDR, LRESULT *pResult)

@@ -364,6 +364,7 @@ public:
 		svn_depth_t				depth;					///< the depth of this entry
 		friend class CSVNStatusListCtrl;
 		friend class CSVNStatusListCtrlDropTarget;
+        friend class CSorter;
 	};
 
 	/**
@@ -487,6 +488,28 @@ public:
         /// global column ordering including unused user props
 
         std::vector<int> columnOrder;
+    };
+
+	/**
+	 * \ingroup TortoiseProc
+	 * Simple utility class that defines the sort column order.
+	 */
+    class CSorter
+    {
+    public:
+
+        CSorter ( ColumnManager* columnManager
+                , int sortedColumn
+                , bool ascending);
+
+        bool operator() ( const FileEntry* entry1
+                        , const FileEntry* entry2) const;
+
+    private:
+
+        ColumnManager* columnManager;
+        int sortedColumn;
+        bool ascending;
     };
 
 	/**
@@ -734,7 +757,6 @@ private:
 	void RemoveListEntry(int index);	///< removes an entry from the listcontrol and both arrays
 	bool BuildStatistics();	///< build the statistics and correct the case of files/folders
 	void StartDiff(int fileindex);	///< start the external diff program
-	static bool SortCompare(const FileEntry* entry1, const FileEntry* entry2);
 
     /// fetch all user properties for all items
     void FetchUserProperties();
@@ -827,8 +849,8 @@ private:
 
 private:
 	bool *						m_pbCanceled;
-	static bool					m_bAscending;		///< sort direction
-	static int					m_nSortedColumn;	///< which column to sort
+	bool					    m_bAscending;		///< sort direction
+	int					        m_nSortedColumn;	///< which column to sort
 	bool						m_bHasCheckboxes;
 	bool						m_bUnversionedLast;
 	bool						m_bHasExternalsFromDifferentRepos;
