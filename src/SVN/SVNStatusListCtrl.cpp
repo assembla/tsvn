@@ -267,7 +267,11 @@ void CSVNStatusListCtrl::ColumnManager::ReadSettings
 
     // restore column ordering
 
-    ParseColumnOrder (CRegString (registryPrefix + _T("_Order")));
+    if (valid)
+        ParseColumnOrder (CRegString (registryPrefix + _T("_Order")));
+    else
+        ParseColumnOrder (CString());
+
     ApplyColumnOrder();
 }
 
@@ -383,9 +387,13 @@ int CSVNStatusListCtrl::ColumnManager::GetWidth (int column) const
 
 int CSVNStatusListCtrl::ColumnManager::GetVisibleWidth (int column) const
 {
-    int width = GetWidth (column);
-    if ((width == 0) && IsVisible (column))
-        width = LVSCW_AUTOSIZE_USEHEADER;
+    int width = 0;
+    if (IsVisible (column))
+    {
+        width = GetWidth (column);
+        if (width == 0)
+           width = LVSCW_AUTOSIZE_USEHEADER;
+    }
 
     return width;
 }
@@ -939,13 +947,13 @@ void CSVNStatusListCtrl::Init(DWORD dwColumns, const CString& sColumnInfoContain
 	SetRedraw(false);
 	SetExtendedStyle(exStyle);
 
-    m_ColumnManager.ReadSettings (dwColumns | 1, sColumnInfoContainer);
-
-    CXPTheme theme;
+	CXPTheme theme;
 	theme.SetWindowTheme(m_hWnd, L"Explorer", NULL);
 
 	m_nIconFolder = SYS_IMAGE_LIST().GetDirIconIndex();
 	SetImageList(&SYS_IMAGE_LIST(), LVSIL_SMALL);
+
+    m_ColumnManager.ReadSettings (dwColumns | 1, sColumnInfoContainer);
 
 	// enable file drops
 	if (m_pDropTarget == NULL)
@@ -4941,7 +4949,7 @@ void CSVNStatusListCtrl::OnHdnItemchanging(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMHEADER phdr = reinterpret_cast<LPNMHEADER>(pNMHDR);
 	*pResult = 0;
-	if ((phdr->iItem < 0)||(phdr->iItem >= SVNSLC_NUMCOLUMNS))
+    if ((phdr->iItem < 0)||(phdr->iItem >= m_ColumnManager.GetColumnCount()))
 		return;
     if (m_ColumnManager.IsVisible (phdr->iItem))
 	{
@@ -4992,13 +5000,13 @@ void CSVNStatusListCtrl::OnBeginDrag(NMHDR* /*pNMHDR*/, LRESULT* pResult)
 
 void CSVNStatusListCtrl::SaveColumnWidths(bool bSaveToRegistry /* = false */)
 {
-	if (bSaveToRegistry)
-        m_ColumnManager.WriteSettings();
-
 	int maxcol = ((CHeaderCtrl*)(GetDlgItem(0)))->GetItemCount()-1;
 	for (int col = 0; col <= maxcol; col++)
         if (m_ColumnManager.IsVisible (col))
             m_ColumnManager.ColumnResized (col);
+
+	if (bSaveToRegistry)
+        m_ColumnManager.WriteSettings();
 }
 
 bool CSVNStatusListCtrl::EnableFileDrop()
