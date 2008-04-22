@@ -130,6 +130,12 @@ SVNSLC_SHOWINCOMPLETE|SVNSLC_SHOWEXTERNAL|SVNSLC_SHOWINEXTERNALS)
 #define SVNSLC_USERPROPCOLLIMIT         0xff
 #define SVNSLC_MAXCOLUMNCOUNT           0xff
 
+// Supporting extreamly long user props makes no sense here --
+// especially for binary properties. CString uses a pool allocator
+// that works for up to 256 chars. Make sure we are well below that.
+
+#define SVNSLC_MAXUSERPROPLENGTH        0x70
+
 typedef int (__cdecl *GENERICCOMPAREFN)(const void * elem1, const void * elem2);
 typedef CComCritSecLock<CComCriticalSection> Locker;
 
@@ -725,6 +731,9 @@ private:
 	bool BuildStatistics();	///< build the statistics and correct the case of files/folders
 	void StartDiff(int fileindex);	///< start the external diff program
 	static bool SortCompare(const FileEntry* entry1, const FileEntry* entry2);
+
+    /// fetch all user properties for all items
+    void FetchUserProperties();
 
 	/// Process one line of the command file supplied to GetStatus
 	bool FetchStatusForSingleTarget(SVNConfig& config, SVNStatus& status, const CTSVNPath& target, bool bFetchStatusFromRepository, CStringA& strCurrentRepositoryUUID, CTSVNPathList& arExtPaths, bool bAllDirect, svn_depth_t depth = svn_depth_infinity, bool bShowIgnores = false);

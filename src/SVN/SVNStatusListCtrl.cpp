@@ -39,7 +39,7 @@
 #include "TSVNPath.h"
 #include "Registry.h"
 #include "SVNStatus.h"
-#include "SVNDiff.h"
+#include "SVNHelpers.h"
 #include "InputDlg.h"
 #include "ShellUpdater.h"
 #include "SVNAdminDir.h"
@@ -179,14 +179,7 @@ CString CSVNStatusListCtrl::PropertyList::operator[](const CString& name) const
 
 CString& CSVNStatusListCtrl::PropertyList::operator[](const CString& name)
 {
-    static CString dummy;
-
-    IT iter = properties.find (name);
-
-    assert (iter != properties.end());
-    return iter == properties.end()
-        ? dummy
-        : iter->second;
+    return properties[name];
 }
 
 /// check whether that property has been set on this item.
@@ -366,11 +359,11 @@ CString CSVNStatusListCtrl::ColumnManager::GetName (int column) const
 
     // standard columns
 
-    size_t index = static_cast<size_t>(SVNSLC_NUMCOLUMNS);
-    if (column < SVNSLC_NUMCOLUMNS)
+    size_t index = static_cast<size_t>(column);
+    if (index < SVNSLC_NUMCOLUMNS)
     {
         CString result;
-        result.LoadString (standardColumnNames[column]);
+        result.LoadString (standardColumnNames[index]);
         return result;
     }
 
@@ -1161,6 +1154,8 @@ BOOL CSVNStatusListCtrl::GetStatus(const CTSVNPathList& pathList, bool bUpdate /
 		refetchcounter++;
 	} while(!BuildStatistics() && (refetchcounter < 2) && (*m_pbCanceled==false));
 
+    FetchUserProperties();
+
     m_ColumnManager.UpdateUserPropList (m_arStatusArray);
 
 	m_bBlock = FALSE;
@@ -1169,6 +1164,75 @@ BOOL CSVNStatusListCtrl::GetStatus(const CTSVNPathList& pathList, bool bUpdate /
 	SetCursorPos(pt.x, pt.y);
 	return bRet;
 }
+
+//
+// Fetch all local properties for all elements in the status array
+//
+void CSVNStatusListCtrl::FetchUserProperties()
+{
+	SVNPool globalPool;
+
+    for (size_t i = 0, count = m_arStatusArray.size(); i < count; ++i)
+    {
+        // local / temp pool to hold parameters and props for a single item
+
+    	SVNPool localPool ((apr_pool_t*)globalPool);
+
+        // open working copy for this path
+
+        const char* path = m_arStatusArray[i]->path.GetSVNApiPath (localPool);
+         
+	    svn_wc_adm_access_t *adm_access = NULL;          
+        svn_error_t * error = svn_wc_adm_probe_open2 ( &adm_access
+                                                     , NULL
+                                                     , path
+                                                     , FALSE
+                                                     , 0
+                                                     , localPool);
+        if (error == NULL)
+        {
+            // get the props and add them to the status info
+
+            apr_hash_t* props = NULL;
+            svn_error_t * error = svn_wc_prop_list ( &props
+                                                   , path
+                                                   , adm_access
+                                                   , localPool);
+            if (error == NULL)
+            {
+                for ( apr_hash_index_t *index 
+                        = apr_hash_first (localPool, props)
+                    ; index != NULL
+                    ; index = apr_hash_next (index))
+                {
+                    // extract next entry from hash
+
+                    const char* key = NULL;
+                    ptrdiff_t keyLen;
+                    const char** val = NULL;
+
+                    apr_hash_this ( index
+                                  , reinterpret_cast<const void**>(&key)
+                                  , &keyLen
+                                  , reinterpret_cast<void**>(&val));
+
+                    // decode / dispatch it
+
+        	        CString name = CUnicodeUtils::GetUnicode (key);
+	                CString value = CUnicodeUtils::GetUnicode (*val);
+
+                    // store in property container (truncate it after ~100 chars)
+
+                    m_arStatusArray[i]->present_props[name] 
+                        = value.Left (SVNSLC_MAXUSERPROPLENGTH);
+                }
+            }
+        }
+
+        svn_error_clear (NULL);
+    }
+}
+
 
 //
 // Work on a single item from the list of paths which is provided to us
@@ -3242,7 +3306,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 					CopySelectedEntriesToClipboard(0);
 					break;
 				case IDSVNLC_COPYEXT:
-					CopySelectedEntriesToClipboard(-1);
+					CopySelectedEntriesToClipboard((DWORD)-1);
 					break;
 				case IDSVNLC_PROPERTIES:
 					{
@@ -4288,13 +4352,24 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
             {
 				popup.AppendMenu(MF_SEPARATOR);
 
+                // sort 'em
+
+                std::map<CString, int> sortedProps;
                 for (int i = SVNSLC_NUMCOLUMNS; i < columnCount; ++i)
+                    sortedProps[m_ColumnManager.GetName(i)] = i;
+
+                // add 'em to the menu
+
+                typedef std::map<CString, int>::const_iterator CIT;
+                for ( CIT iter = sortedProps.begin(), end = sortedProps.end()
+                    ; iter != end
+                    ; ++iter)
                 {
-                    popup.AppendMenu ( m_ColumnManager.IsVisible(i) 
+                    popup.AppendMenu ( m_ColumnManager.IsVisible(iter->second) 
                                           ? uCheckedFlags 
                                           : uUnCheckedFlags
-                                     , i
-                                     , m_ColumnManager.GetName(i));
+                                     , iter->second
+                                     , iter->first);
                 }
             }
 
@@ -4926,7 +5001,7 @@ BOOL CSVNStatusListCtrl::OnToolTipText(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRes
 		return FALSE;	// no custom tooltip for the path, we use the infotip there!
 
 	// get the internal column from the visible columns
-	UINT_PTR internalcol = 0;
+	int internalcol = 0;
 	UINT_PTR currentcol = 0;
     for (;    (currentcol != col) 
            && (internalcol < m_ColumnManager.GetColumnCount()-1)
