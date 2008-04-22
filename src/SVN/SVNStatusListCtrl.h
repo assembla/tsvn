@@ -208,6 +208,10 @@ public:
 
         CString& operator[](const CString& name);
 
+        /// check whether that property has been set on this item.
+
+        bool HasProperty (const CString& name) const;
+
         /// due to frequent use: special check for svn:needs-lock
 
         bool IsNeedsLockSet() const;

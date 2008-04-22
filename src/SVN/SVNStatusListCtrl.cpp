@@ -189,12 +189,19 @@ CString& CSVNStatusListCtrl::PropertyList::operator[](const CString& name)
         : iter->second;
 }
 
+/// check whether that property has been set on this item.
+
+bool CSVNStatusListCtrl::PropertyList::HasProperty (const CString& name) const
+{
+    return properties.find (name) != properties.end();
+}
+
 // due to frequent use: special check for svn:needs-lock
 
 bool CSVNStatusListCtrl::PropertyList::IsNeedsLockSet() const
 {
     static const CString svnNeedsLock = _T("svn:needs-lock");
-    return properties.find (svnNeedsLock) != properties.end();
+    return HasProperty (svnNeedsLock);
 }
 
 // registry access
@@ -370,7 +377,7 @@ CString CSVNStatusListCtrl::ColumnManager::GetName (int column) const
     // user-prop columns
 
     if (index < columns.size())
-        return userProps[columns[index].index].name;
+        return userProps[columns[index].index - SVNSLC_USERPROPCOLOFFSET].name;
 
     // default: empty
 
@@ -455,8 +462,9 @@ void CSVNStatusListCtrl::ColumnManager::ColumnResized (int column)
     int width = control->GetColumnWidth (column);
     columns[index].width = width;
 
-    if (columns[index].index >= SVNSLC_USERPROPCOLOFFSET)
-        userProps[index - SVNSLC_USERPROPCOLOFFSET].width = width;
+    int propertyIndex = columns[index].index;
+    if (propertyIndex >= SVNSLC_USERPROPCOLOFFSET)
+        userProps[propertyIndex - SVNSLC_USERPROPCOLOFFSET].width = width;
 }
 
 // call these to update the user-prop list
@@ -496,7 +504,8 @@ void CSVNStatusListCtrl::ColumnManager::UpdateUserPropList
         userProps.push_back (userProp);
     }
 
-    // remove unused columns from control
+    // remove unused columns from control.
+    // remove used ones from the set of aggregatedProps.
 
     for (size_t i = columns.size(); i > 0; --i)
         if (   (columns[i-1].index >= SVNSLC_USERPROPCOLOFFSET)
@@ -508,7 +517,10 @@ void CSVNStatusListCtrl::ColumnManager::UpdateUserPropList
                 control->DeleteColumn (static_cast<int>(i-1));
         }
 
-    // aggregatedProps now contains new columns only
+    // aggregatedProps now contains new columns only.
+    // we can't use newProps here because some props may have been used
+    // earlier but were not in the recent list of used props.
+    // -> they are neither in columns[] nor in newProps.
 
     for ( CIT iter = aggregatedProps.begin(), end = aggregatedProps.end()
         ; iter != end
@@ -554,27 +566,46 @@ void CSVNStatusListCtrl::ColumnManager::UpdateUserPropList
 
 void CSVNStatusListCtrl::ColumnManager::RemoveUnusedProps()
 {
-    // determine what column indexes / IDs to keep
+    // determine what column indexes / IDs to keep.
+    // map them onto new IDs (we may delete some IDs in between)
 
-    std::set<int> validIndices;
+    std::map<int, int> validIndices;
+    int userPropID = SVNSLC_USERPROPCOLOFFSET;
+
     for (size_t i = 0, count = columns.size(); i < count; ++i)
+    {
+        int index = columns[i].index;
+
         if (   itemProps.find (GetName((int)i)) != itemProps.end()
             || columns[i].visible
-            || columns[i].index < SVNSLC_USERPROPCOLOFFSET)
+            || index < SVNSLC_USERPROPCOLOFFSET)
         {
-            validIndices.insert (columns[i].index);
+            validIndices[index] = index < SVNSLC_USERPROPCOLOFFSET
+                                ? index
+                                : userPropID++;
         }
+    }
 
     // remove everything else:
 
-    // remove from columns and control
+    // remove from columns and control.
+    // also update index values in columns
 
     for (size_t i = columns.size(); i > 0; --i)
-        if (validIndices.find (columns[i-1].index) == validIndices.end())
+    {
+        std::map<int, int>::const_iterator iter 
+            = validIndices.find (columns[i-1].index);
+
+        if (iter == validIndices.end())
         {
             control->DeleteColumn (static_cast<int>(i-1));
             columns.erase (columns.begin() + i-1);
         }
+        else
+        {
+            columns[i-1].index = iter->second;
+        }
+    }
 
     // remove from user props
 
@@ -585,11 +616,18 @@ void CSVNStatusListCtrl::ColumnManager::RemoveUnusedProps()
             userProps.erase (userProps.begin() + i-1);
     }
 
-    // remove from column order
+    // remove from and update column order
 
     for (size_t i = columnOrder.size(); i > 0; --i)
-        if (validIndices.find (columnOrder[i-1]) == validIndices.end())
+    {
+        std::map<int, int>::const_iterator iter 
+            = validIndices.find (columnOrder[i-1]);
+
+        if (iter == validIndices.end())
             columnOrder.erase (columnOrder.begin() + i-1);
+        else
+            columnOrder[i-1] = iter->second;
+    }
 }
 
 // bring everything back to its "natural" order
@@ -617,7 +655,7 @@ void CSVNStatusListCtrl::ColumnManager::ParseUserPropSettings
 {
     assert (userProps.empty());
 
-    static CString delimiters (_T(""));
+    static CString delimiters (_T(" "));
 
     // parse list of visible user-props
 
@@ -1122,6 +1160,8 @@ BOOL CSVNStatusListCtrl::GetStatus(const CTSVNPathList& pathList, bool bUpdate /
 		}
 		refetchcounter++;
 	} while(!BuildStatistics() && (refetchcounter < 2) && (*m_pbCanceled==false));
+
+    m_ColumnManager.UpdateUserPropList (m_arStatusArray);
 
 	m_bBlock = FALSE;
 	m_bBusy = false;
@@ -2088,6 +2128,21 @@ void CSVNStatusListCtrl::AddEntry(FileEntry * entry, WORD langID, int listIndex)
 	{
 		SetItemText(index, nCol++, _T(""));
 	}
+
+    // user-defined properties
+    for ( int i = SVNSLC_NUMCOLUMNS, count = m_ColumnManager.GetColumnCount()
+        ; i < count
+        ; ++i)
+    {
+        assert (i == nCol++);
+        assert (m_ColumnManager.IsUserProp (i));
+
+        CString name = m_ColumnManager.GetName(i);
+        if (entry->present_props.HasProperty (name))
+            SetItemText(index, i, entry->present_props [name]);
+        else
+            SetItemText(index, i, _T(""));
+    }
 
 	SetCheck(index, entry->checked);
 	if (entry->checked)
@@ -4204,15 +4259,19 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 		CMenu popup;
 		if (popup.CreatePopupMenu())
 		{
-			CString temp;
+            int columnCount = m_ColumnManager.GetColumnCount();
+
+            CString temp;
 			UINT uCheckedFlags = MF_STRING | MF_ENABLED | MF_CHECKED;
 			UINT uUnCheckedFlags = MF_STRING | MF_ENABLED;
 			if (XPorLater)
 			{
 				temp.LoadString(IDS_STATUSLIST_SHOWGROUPS);
-				popup.AppendMenu(IsGroupViewEnabled() ? uCheckedFlags : uUnCheckedFlags, SVNSLC_NUMCOLUMNS, temp);
+				popup.AppendMenu(IsGroupViewEnabled() ? uCheckedFlags : uUnCheckedFlags, columnCount, temp);
 				popup.AppendMenu(MF_SEPARATOR);
 			}
+
+            // standard columns
 
             for (int i = 1; i < SVNSLC_NUMCOLUMNS; ++i)
             {
@@ -4223,8 +4282,26 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
                                  , m_ColumnManager.GetName(i));
             }
 
+            // user-prop columns
+
+            if (SVNSLC_NUMCOLUMNS < columnCount)
+            {
+				popup.AppendMenu(MF_SEPARATOR);
+
+                for (int i = SVNSLC_NUMCOLUMNS; i < columnCount; ++i)
+                {
+                    popup.AppendMenu ( m_ColumnManager.IsVisible(i) 
+                                          ? uCheckedFlags 
+                                          : uUnCheckedFlags
+                                     , i
+                                     , m_ColumnManager.GetName(i));
+                }
+            }
+
+            // show menu & let user pick an entry
+
 			int cmd = popup.TrackPopupMenu(TPM_RETURNCMD | TPM_LEFTALIGN | TPM_NONOTIFY, point.x, point.y, this, 0);
-			if ((cmd >= 1)&&(cmd < SVNSLC_NUMCOLUMNS))
+			if ((cmd >= 1)&&(cmd < columnCount))
 			{
 				if (m_ColumnManager.IsVisible(cmd))
 				{
@@ -4235,7 +4312,7 @@ void CSVNStatusListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 					ShowColumn(cmd);
 				}
 			}
-            if (cmd == SVNSLC_NUMCOLUMNS)
+            if (cmd == columnCount)
 			{
 				EnableGroupView(!IsGroupViewEnabled());
 			}
