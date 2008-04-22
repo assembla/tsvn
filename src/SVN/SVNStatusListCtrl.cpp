@@ -514,7 +514,10 @@ void CSVNStatusListCtrl::ColumnManager::UpdateUserPropList
             // this user-prop has not been set on any item
 
             if (!columns[i-1].visible)
+            {
                 control->DeleteColumn (static_cast<int>(i-1));
+                columns.erase (columns.begin() + i-1);
+            }
         }
 
     // aggregatedProps now contains new columns only.
@@ -556,7 +559,8 @@ void CSVNStatusListCtrl::ColumnManager::UpdateUserPropList
 
         // update control
 
-        control->InsertColumn (pos, *iter, LVCFMT_LEFT, GetVisibleWidth(pos));
+        int result = control->InsertColumn (pos, *iter, LVCFMT_LEFT, GetVisibleWidth(pos));
+        assert (result != -1);
     }
 
     // update column order
@@ -1222,7 +1226,10 @@ bool CSVNStatusListCtrl::SetBackgroundImage(UINT nID)
 	return CAppUtils::SetListCtrlBackgroundImage(GetSafeHwnd(), nID);
 }
 
-BOOL CSVNStatusListCtrl::GetStatus(const CTSVNPathList& pathList, bool bUpdate /* = FALSE */, bool bShowIgnores /* = false */)
+BOOL CSVNStatusListCtrl::GetStatus ( const CTSVNPathList& pathList
+                                   , bool bUpdate /* = FALSE */
+                                   , bool bShowIgnores /* = false */
+                                   , bool bShowUserProps /* = false */)
 {
 	Locker lock(m_critSec);
 	int refetchcounter = 0;
@@ -1367,7 +1374,8 @@ BOOL CSVNStatusListCtrl::GetStatus(const CTSVNPathList& pathList, bool bUpdate /
 		refetchcounter++;
 	} while(!BuildStatistics() && (refetchcounter < 2) && (*m_pbCanceled==false));
 
-    FetchUserProperties();
+    if (bShowUserProps)
+        FetchUserProperties();
 
     m_ColumnManager.UpdateUserPropList (m_arStatusArray);
 

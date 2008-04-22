@@ -551,7 +551,10 @@ public:
 	 * \param bUpdate TRUE if the remote status is requested too.
 	 * \return TRUE on success.
 	 */
-	BOOL GetStatus(const CTSVNPathList& pathList, bool bUpdate = false, bool bShowIgnores = false);
+	BOOL GetStatus ( const CTSVNPathList& pathList
+                   , bool bUpdate = false
+                   , bool bShowIgnores = false
+                   , bool bShowUserProps = false);
 
 	/**
 	 * Populates the list control with the previously (with GetStatus) gathered status information.
