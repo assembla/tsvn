@@ -60,12 +60,6 @@ protected:
 
     template<class T, class I> T GetFilteredList() const;
 
-    /// called by CRevisionGraphOption constructor
-
-    void Add (IRevisionGraphOption* option);
-
-    friend class CRevisionGraphOption;
-
     /// utility method
 
     IRevisionGraphOption* GetOptionByID (WORD id) const;
@@ -80,6 +74,10 @@ public:
     /// find a particular option
 
     template<class T> T* GetOption() const;
+
+    /// called by CRevisionGraphOption constructor
+
+    void Add (IRevisionGraphOption* option);
 
     /// menu interaction
 

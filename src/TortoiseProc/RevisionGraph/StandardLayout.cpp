@@ -11,6 +11,12 @@
 
 CStandardLayoutNodeInfo::CStandardLayoutNodeInfo()
     : node (NULL)
+    , nextInBranch (NULL)
+    , previousInBranch (NULL)
+    , lastInBranch (NULL)
+    , nextBranch (NULL)
+    , previousBranch (NULL)
+    , lastBranch (NULL)
     , subTreeWidth (1)
     , subTreeHeight (1)
     , subTreeWeight (1)
@@ -27,25 +33,51 @@ CStandardLayoutNodeInfo::CStandardLayoutNodeInfo()
 
 void CStandardLayout::InitializeNodes (const CVisibleGraphNode* start)
 {
-    // measure subtree size and calculate branch length
+    CStandardLayoutNodeInfo* previousInBranch = NULL;
+    CStandardLayoutNodeInfo* lastInBranch = NULL;
+
+    // measure subtree size, calculate branch length and back-link it
 
     index_t branchLength = 0;
     for ( const CVisibleGraphNode* node = start 
         ; node != NULL
         ; node = node->GetNext())
     {
+        // get the node, initialize it and update pointers
+
         CStandardLayoutNodeInfo& nodeInfo = nodes[node->GetIndex()];
+        ++branchLength;
 
         assert (nodeInfo.node == NULL);
         nodeInfo.node = node;
+        nodeInfo.previousInBranch = previousInBranch;
+        if (previousInBranch != NULL)
+            previousInBranch->nextInBranch = &nodeInfo;
+        
+        previousInBranch = &nodeInfo;
+        lastInBranch = &nodeInfo;
+
+        CStandardLayoutNodeInfo* previousBranch = NULL;
+        CStandardLayoutNodeInfo* lastBranch = NULL;
+
+        // measure sub-branches and back-link them 
 
         for ( const CVisibleGraphNode::CCopyTarget* 
                 target = node->GetFirstCopyTarget()
             ; target != NULL
             ; target = target->next())
         {
+            // get sub-branch node, initialize it and update pointers
+
             const CVisibleGraphNode* subNode = target->value();
             CStandardLayoutNodeInfo& subNodeInfo = nodes[subNode->GetIndex()];
+
+            subNodeInfo.previousBranch = previousBranch;
+            if (previousBranch != NULL)
+                previousBranch->nextBranch = &subNodeInfo;
+
+            previousBranch = &subNodeInfo;
+            lastBranch = &subNodeInfo;
 
             // add branch
 
@@ -59,10 +91,18 @@ void CStandardLayout::InitializeNodes (const CVisibleGraphNode* start)
                 nodeInfo.subTreeHeight = subNodeInfo.subTreeHeight+1;
         }
 
-        ++branchLength;
+        // link sub-branches forward
+
+        for ( const CVisibleGraphNode::CCopyTarget* 
+                target = node->GetFirstCopyTarget()
+            ; target != NULL
+            ; target = target->next())
+        {
+            nodes[target->value()->GetIndex()].lastBranch = lastBranch;
+        }
     }
 
-    // write branch lengths and adjust sub-tree heights
+    // write branch lengths, adjust sub-tree heights and link forward
 
     for ( const CVisibleGraphNode* node = start 
         ; node != NULL
@@ -70,6 +110,7 @@ void CStandardLayout::InitializeNodes (const CVisibleGraphNode* start)
     {
         CStandardLayoutNodeInfo& nodeInfo = nodes[node->GetIndex()];
         nodeInfo.branchLength = branchLength;
+        nodeInfo.lastInBranch = lastInBranch;
 
         if (nodeInfo.subTreeHeight < branchLength)
             nodeInfo.subTreeHeight = branchLength;

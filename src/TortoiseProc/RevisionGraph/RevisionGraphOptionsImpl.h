@@ -56,7 +56,7 @@ public:
     virtual void ToggleSelection();
 };
 
-// construction / destruction
+// construction
 
 template<class Base>
 IRevisionGraphOptionImpl<Base>::IRevisionGraphOptionImpl 
@@ -68,11 +68,6 @@ IRevisionGraphOptionImpl<Base>::IRevisionGraphOptionImpl
     , selected (false)
 {
     list.Add (this);
-}
-
-template<class Base>
-IRevisionGraphOptionImpl<Base>::~IRevisionGraphOptionImpl() 
-{
 }
 
 // implement IRevisionGraphOption
@@ -116,7 +111,7 @@ void IRevisionGraphOptionImpl<Base>::ToggleSelection()
 /** Implement a simple boolean option.
 */
 
-template<class Base, int priority, WORD id>
+template<class Base, int Prio, WORD ID>
 class CRevisionGraphOptionImpl : public IRevisionGraphOptionImpl<Base>
 {
 public:
@@ -124,7 +119,7 @@ public:
     /// construction / destruction
 
     CRevisionGraphOptionImpl (CRevisionGraphOptionList& list)
-        : IRevisionGraphOptionImpl<Base>(list, priority, id)
+        : IRevisionGraphOptionImpl<Base>(list, Prio, ID)
     {
     }
 };

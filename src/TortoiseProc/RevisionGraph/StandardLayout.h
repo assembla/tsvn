@@ -36,6 +36,15 @@ public:
 
     const CVisibleGraphNode* node;
 
+    /// links for faster navigation
+
+    CStandardLayoutNodeInfo* nextInBranch;
+    CStandardLayoutNodeInfo* previousInBranch;
+    CStandardLayoutNodeInfo* lastInBranch;
+    CStandardLayoutNodeInfo* nextBranch;
+    CStandardLayoutNodeInfo* previousBranch;
+    CStandardLayoutNodeInfo* lastBranch;
+
     /// branch sizes
 
     index_t subTreeWidth;
