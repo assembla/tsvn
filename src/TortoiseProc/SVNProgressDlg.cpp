@@ -1883,6 +1883,10 @@ bool CSVNProgressDlg::CmdCommit(CString& sWindowTitle, bool& /*localoperation*/)
 		}
 		return false;
 	}
+	if (!PostCommitErr.IsEmpty())
+	{
+		ReportWarning(PostCommitErr);
+	}
 	if (CHooks::Instance().PostCommit(m_selectedPaths, m_depth, m_RevisionEnd, m_sMessage, exitcode, error))
 	{
 		if (exitcode)
@@ -2064,7 +2068,7 @@ bool CSVNProgressDlg::CmdMerge(CString& sWindowTitle, bool& /*localoperation*/)
 
 		if (!PegMerge(m_url, m_revisionArray, 
 			m_pegRev.IsValid() ? m_pegRev : (m_url.IsUrl() ? SVNRev::REV_HEAD : SVNRev(SVNRev::REV_WC)),
-			m_targetPathList[0], true, m_depth, m_diffoptions, !!(m_options & ProgOptIgnoreAncestry), !!(m_options & ProgOptDryRun)))
+			m_targetPathList[0], true, m_depth, m_diffoptions, !!(m_options & ProgOptIgnoreAncestry), !!(m_options & ProgOptDryRun), !!(m_options & ProgOptRecordOnly)))
 		{
 			// if the merge fails with the peg revision set,
 			// try again with HEAD as the peg revision.
