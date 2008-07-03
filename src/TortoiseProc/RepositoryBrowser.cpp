@@ -327,6 +327,13 @@ void CRepositoryBrowser::InitRepo()
 	m_strReposRoot = data->reposRoot;
 	m_sUUID = data->reposUUID;
 	m_strReposRoot = CPathUtils::PathUnescape(m_strReposRoot);
+	// the initial url can be in the format file:///\, but the
+	// repository root returned would still be file://
+	// to avoid string length comparison faults, we adjust
+	// the repository root here to match the initial url
+	if ((m_InitialUrl.Left(9).CompareNoCase(_T("file:///\\")) == 0) &&
+		(m_strReposRoot.Left(9).CompareNoCase(_T("file:///\\")) != 0))
+		m_strReposRoot.Replace(_T("file://"), _T("file:///\\"));
 	SetWindowText(m_strReposRoot + _T(" - ") + m_origDlgTitle);
 	// now check the repository root for the url type, then
 	// set the corresponding background image
@@ -1391,7 +1398,7 @@ void CRepositoryBrowser::OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResu
 		return;
 
 	// rename the item in the repository
-	HTREEITEM hSelectedItem = m_RepoTree.GetSelectedItem();
+	HTREEITEM hSelectedItem = pTVDispInfo->item.hItem;
 	CTreeItem * pItem = (CTreeItem *)m_RepoTree.GetItemData(hSelectedItem);
 	if (pItem == NULL)
 		return;
@@ -1424,7 +1431,8 @@ void CRepositoryBrowser::OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResu
 		pItem->url = targetUrl.GetSVNPathString();
 		pItem->unescapedname = pTVDispInfo->item.pszText;
 		m_RepoTree.SetItemData(hSelectedItem, (DWORD_PTR)pItem);
-		RefreshNode(hSelectedItem, true);
+		if (hSelectedItem == m_RepoTree.GetSelectedItem())
+			RefreshNode(hSelectedItem, true);
 	}
 }
 
