@@ -36,12 +36,12 @@ class SCopyInfo;
 /**
  * \ingroup TortoiseProc
  */
-class CFullHistoryBuilder
+class CFullGraphBuilder
 {
 public:
 
-	CFullHistoryBuilder (const CFullHistory& history, CFullGraph& graph);
-	~CFullHistoryBuilder(void);
+	CFullGraphBuilder (const CFullHistory& history, CFullGraph& graph);
+	~CFullGraphBuilder(void);
 
 	void Run();
 

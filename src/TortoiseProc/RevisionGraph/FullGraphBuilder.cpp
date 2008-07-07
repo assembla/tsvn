@@ -17,7 +17,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 #include "StdAfx.h"
-#include "FullHistoryBuilder.h"
+#include "FullGraphBuilder.h"
 #include "CachedLogInfo.h"
 #include "RevisionIndex.h"
 #include "SearchPathTree.h"
@@ -30,17 +30,17 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-CFullHistoryBuilder::CFullHistoryBuilder (const CFullHistory& history, CFullGraph& graph)
+CFullGraphBuilder::CFullGraphBuilder (const CFullHistory& history, CFullGraph& graph)
     : history (history)
     , graph (graph)
 {
 }
 
-CFullHistoryBuilder::~CFullHistoryBuilder(void)
+CFullGraphBuilder::~CFullGraphBuilder(void)
 {
 }
 
-void CFullHistoryBuilder::Run()
+void CFullGraphBuilder::Run()
 {
     // special case: empty log
 
@@ -176,7 +176,7 @@ void CFullHistoryBuilder::Run()
 	}
 }
 
-void CFullHistoryBuilder::AnalyzeReplacements ( revision_t revision
+void CFullGraphBuilder::AnalyzeReplacements ( revision_t revision
 									          , CRevisionInfoContainer::CChangesIterator first
 									          , CRevisionInfoContainer::CChangesIterator last
 									          , CSearchPathTree* startNode
@@ -255,7 +255,7 @@ void CFullHistoryBuilder::AnalyzeReplacements ( revision_t revision
 
 }
 
-void CFullHistoryBuilder::AnalyzeRevisions ( revision_t revision
+void CFullGraphBuilder::AnalyzeRevisions ( revision_t revision
 									  , CRevisionInfoContainer::CChangesIterator first
 									  , CRevisionInfoContainer::CChangesIterator last
 									  , CSearchPathTree* startNode
@@ -385,7 +385,7 @@ void CFullHistoryBuilder::AnalyzeRevisions ( revision_t revision
 
 }
 
-void CFullHistoryBuilder::AddCopiedPaths ( revision_t revision
+void CFullGraphBuilder::AddCopiedPaths ( revision_t revision
 								         , CSearchPathTree* rootNode
 								         , SCopyInfo**& lastToCopy)
 {
@@ -408,7 +408,7 @@ void CFullHistoryBuilder::AddCopiedPaths ( revision_t revision
 	}
 }
 
-void CFullHistoryBuilder::FillCopyTargets ( revision_t revision
+void CFullGraphBuilder::FillCopyTargets ( revision_t revision
 								          , CSearchPathTree* rootNode
 								          , SCopyInfo**& lastFromCopy)
 {
@@ -493,7 +493,7 @@ void CFullHistoryBuilder::FillCopyTargets ( revision_t revision
 	}
 }
 
-bool CFullHistoryBuilder::IsLatestCopySource ( revision_t fromRevision
+bool CFullGraphBuilder::IsLatestCopySource ( revision_t fromRevision
                                              , revision_t toRevision
                                              , const CDictionaryBasedPath& fromPath
                                              , const CDictionaryBasedTempPath& currentPath)
