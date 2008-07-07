@@ -22,10 +22,32 @@
 #include "RevisionGraphOptionsImpl.h"
 
 class IRevisionGraphLayout;
+class CStandardLayoutNodeInfo;
 
 class CStandardNodePositioning 
     : public CRevisionGraphOptionImpl<ILayoutOption, 200, 0>
 {
+private:
+
+    /// the individual placement stages
+
+    void StackSubTree 
+        ( CStandardLayoutNodeInfo* node
+        , std::vector<long>& branchColumnStarts
+        , std::vector<long>& branchColumnHeights
+        , std::vector<long>& localColumnStarts
+        , std::vector<long>& localColumnHeights);
+    void AppendBranch 
+        ( CStandardLayoutNodeInfo* node
+        , std::vector<long>& columnStarts
+        , std::vector<long>& columnHeights
+        , const std::vector<long>& localColumnStarts
+        , const std::vector<long>& localColumnHeights);
+    void PlaceBranch 
+        ( CStandardLayoutNodeInfo* start
+        , std::vector<long>& columnStarts
+        , std::vector<long>& columnHeights);
+
 public:
 
     /// construction

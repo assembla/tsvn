@@ -18,7 +18,7 @@
 //
 #pragma once
 #include "StandAloneDlg.h"
-#include "RevisionGraph.h"
+#include "RevisionGraph/AllGraphOptions.h"
 #include "ProgressDlg.h"
 #include "Colors.h"
 #include "RevisionGraphWnd.h"
@@ -57,7 +57,7 @@ public:
 	float			m_fZoomFactor;
 protected:
 	bool			m_bFetchLogs;
-    CRevisionGraph::SOptions m_options;
+    CAllRevisionGraphOptions m_options;
 	char			m_szTip[MAX_TT_LENGTH+1];
 	wchar_t			m_wszTip[MAX_TT_LENGTH+1];
 

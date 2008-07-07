@@ -95,7 +95,7 @@ public:
 
     /// data access
 
-	CString						GetLastErrorMessage();
+	CString						GetLastErrorMessage() const;
 
 	svn_revnum_t				GetHeadRevision() const {return headRevision;}
 	CString						GetRepositoryRoot() const {return CString (repoRoot);}

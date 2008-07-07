@@ -62,6 +62,11 @@ public:
 
     CSize requiredSize;
 
+    /// temp. value used to store the offset of the final position
+    /// to the current one (logical coordinates)
+
+    CSize subTreeShift;
+
     /// actual position (logical coordinates)
 
     CRect rect;

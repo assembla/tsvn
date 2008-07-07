@@ -51,7 +51,7 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 {
 	DWORD dwOpts = CRegStdWORD(_T("Software\\TortoiseSVN\\RevisionGraphOptions"), 0x211);
 
-	m_options.groupBranches = ((dwOpts & 0x01) != 0);
+/*	m_options.groupBranches = ((dwOpts & 0x01) != 0);
 	m_options.includeSubPathChanges = ((dwOpts & 0x02) != 0);
 	m_options.oldestAtTop = ((dwOpts & 0x04) != 0);
 	m_options.showHEAD = ((dwOpts & 0x08) != 0);
@@ -59,12 +59,12 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 	m_options.exactCopySources = ((dwOpts & 0x20) != 0);
 	m_options.foldTags = ((dwOpts & 0x80) != 0);
 	m_options.removeDeletedOnes = ((dwOpts & 0x100) != 0);
-	m_options.showWCRev = ((dwOpts & 0x200) != 0);
+	m_options.showWCRev = ((dwOpts & 0x200) != 0);*/
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()
 {
-	CRegStdWORD regOpts = CRegStdWORD(_T("Software\\TortoiseSVN\\RevisionGraphOptions"), 1);
+/*	CRegStdWORD regOpts = CRegStdWORD(_T("Software\\TortoiseSVN\\RevisionGraphOptions"), 1);
 	DWORD dwOpts = 0;
 	dwOpts |= m_options.groupBranches ? 0x01 : 0;
 	dwOpts |= m_options.includeSubPathChanges ? 0x02 : 0;
@@ -75,7 +75,7 @@ CRevisionGraphDlg::~CRevisionGraphDlg()
 	dwOpts |= m_options.foldTags ? 0x80 : 0;
     dwOpts |= m_options.removeDeletedOnes ? 0x100 : 0;
     dwOpts |= m_options.showWCRev ? 0x200 : 0;
-	regOpts = dwOpts;
+	regOpts = dwOpts;*/
 }
 
 void CRevisionGraphDlg::DoDataExchange(CDataExchange* pDX)
@@ -244,7 +244,7 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	if (InitializeToolbar() != TRUE)
 		return FALSE;
 
-	SetOption(ID_VIEW_GROUPBRANCHES, m_options.groupBranches);
+/*	SetOption(ID_VIEW_GROUPBRANCHES, m_options.groupBranches);
 	SetOption(ID_VIEW_SHOWALLREVISIONS, m_options.includeSubPathChanges);
 	SetOption(ID_VIEW_TOPDOWN, m_options.oldestAtTop);
 	SetOption(ID_VIEW_SHOWHEAD, m_options.showHEAD);
@@ -253,12 +253,12 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	SetOption(ID_VIEW_REDUCECROSSLINES, m_options.reduceCrossLines);
     SetOption(ID_VIEW_REMOVEDELETEDONES, m_options.removeDeletedOnes);
     SetOption(ID_VIEW_SHOWWCREV, m_options.showWCRev);
-
+*/
 	CMenu * pMenu = GetMenu();
 	if (pMenu)
 	{
 		CRegDWORD reg = CRegDWORD(_T("Software\\TortoiseSVN\\ShowRevGraphOverview"), FALSE);
-		m_Graph.m_bShowOverview = (BOOL)(DWORD)reg;
+		m_Graph.SetShowOverview ((DWORD)reg != FALSE);
 		pMenu->CheckMenuItem(ID_VIEW_SHOWOVERVIEW, MF_BYCOMMAND | (DWORD(reg) ? MF_CHECKED : 0));
 		int tbstate = m_ToolBar.GetToolBarCtrl().GetState(ID_VIEW_SHOWOVERVIEW);
 		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_SHOWOVERVIEW, tbstate | (DWORD(reg) ? TBSTATE_CHECKED : 0));
@@ -290,7 +290,6 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
 	InterlockedExchange(&pDlg->m_Graph.m_bThreadRunning, TRUE);
 	CoInitialize(NULL);
 
-    pDlg->m_Graph.m_bNoGraph = FALSE;
     if (pDlg->m_bFetchLogs)
     {
 	    pDlg->m_Graph.m_pProgress = new CProgressDlg();
@@ -299,11 +298,8 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
 	    pDlg->m_Graph.m_pProgress->SetTime();
 	    pDlg->m_Graph.m_pProgress->SetProgress(0, 100);
 
-	    if (!pDlg->m_Graph.FetchRevisionData(pDlg->m_Graph.m_sPath, pDlg->m_options))
-	    {
-		    CMessageBox::Show(pDlg->m_hWnd, pDlg->m_Graph.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
-		    pDlg->m_Graph.m_bNoGraph = TRUE;
-	    }
+	    if (!pDlg->m_Graph.FetchRevisionData (pDlg->m_Graph.m_sPath, SVNRev (svn_opt_revision_head)))
+		    CMessageBox::Show (pDlg->m_hWnd, pDlg->m_Graph.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 
         pDlg->m_Graph.m_pProgress->Stop();
         delete pDlg->m_Graph.m_pProgress;
@@ -314,11 +310,8 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
 
     // standard plus user settings
 
-    if (pDlg->m_Graph.m_bNoGraph == FALSE)
-    {
-	    pDlg->m_Graph.AnalyzeRevisionData(pDlg->m_Graph.m_sPath, pDlg->m_options);
-	    pDlg->UpdateStatusBar();
-    }
+    if (pDlg->m_Graph.AnalyzeRevisionData (pDlg->m_options))
+        pDlg->UpdateStatusBar();
 
 	CoUninitialize();
 	InterlockedExchange(&pDlg->m_Graph.m_bThreadRunning, FALSE);
@@ -390,12 +383,12 @@ BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
 			m_Graph.Invalidate();
 			break;
 		case VK_F5:
-	        m_Graph.SetDlgTitle (false);
+/*	        m_Graph.SetDlgTitle (false);
 
         	LogCache::CRepositoryInfo& cachedProperties 
                 = m_Graph.svn.GetLogCachePool()->GetRepositoryInfo();
             cachedProperties.ResetHeadRevision (CTSVNPath (m_Graph.GetReposRoot()));
-
+*/
             m_bFetchLogs = true;
             StartWorkerThread();
 
@@ -421,8 +414,7 @@ void CRevisionGraphDlg::OnViewZoomin()
 
 void CRevisionGraphDlg::OnViewZoomout()
 {
-	if ((m_Graph.m_node_space_left > 1) || (m_Graph.m_node_space_right > 1) || (m_Graph.m_node_space_line > 1) ||
-		(m_Graph.m_node_rect_height > 1) || (m_Graph.m_node_space_top > 1) || (m_Graph.m_node_space_bottom > 1))
+	if (m_fZoomFactor > 0.01)
 	{
 		m_fZoomFactor = m_fZoomFactor - (m_fZoomFactor*0.1f);
 		m_Graph.DoZoom(m_fZoomFactor);
@@ -443,15 +435,15 @@ void CRevisionGraphDlg::OnViewZoomAll()
 	CRect windowrect;
 	m_Graph.DoZoom(1.0);
 	GetGraphRect(windowrect);
-	CRect * viewrect = m_Graph.GetViewSize();
-	float horzfact = float(viewrect->Width())/float(windowrect.Width());
-	float vertfact = float(viewrect->Height())/float(windowrect.Height());
+	CRect viewrect = m_Graph.GetViewSize();
+	float horzfact = float(viewrect.Width())/float(windowrect.Width());
+	float vertfact = float(viewrect.Height())/float(windowrect.Height());
 	float fZoom = 1.0f/(max(horzfact, vertfact));
 	if (fZoom > 1.0f)
 		fZoom = 1.0f;
 	int trycounter = 0;
 	m_fZoomFactor = fZoom;
-	while ((trycounter < 5)&&((viewrect->Width()>windowrect.Width())||(viewrect->Height()>windowrect.Height())))
+	while ((trycounter < 5)&&((viewrect.Width()>windowrect.Width())||(viewrect.Height()>windowrect.Height())))
 	{
 		m_fZoomFactor = fZoom;
 		m_Graph.DoZoom(m_fZoomFactor);
@@ -558,47 +550,47 @@ void CRevisionGraphDlg::StartWorkerThread()
 
 void CRevisionGraphDlg::OnViewShowallrevisions()
 {
-    OnToggleOption (ID_VIEW_SHOWALLREVISIONS, m_options.includeSubPathChanges);
+//    OnToggleOption (ID_VIEW_SHOWALLREVISIONS, m_options.includeSubPathChanges);
 }
 
 void CRevisionGraphDlg::OnViewArrangedbypath()
 {
-    OnToggleOption (ID_VIEW_GROUPBRANCHES, m_options.groupBranches);
+//    OnToggleOption (ID_VIEW_GROUPBRANCHES, m_options.groupBranches);
 }
 
 void CRevisionGraphDlg::OnViewTopDown()
 {
-    OnToggleOption (ID_VIEW_TOPDOWN, m_options.oldestAtTop);
+//    OnToggleOption (ID_VIEW_TOPDOWN, m_options.oldestAtTop);
 }
 
 void CRevisionGraphDlg::OnViewShowHEAD()
 {
-    OnToggleOption (ID_VIEW_SHOWHEAD, m_options.showHEAD);
+//    OnToggleOption (ID_VIEW_SHOWHEAD, m_options.showHEAD);
 }
 
 void CRevisionGraphDlg::OnViewExactCopySource()
 {
-    OnToggleOption (ID_VIEW_EXACTCOPYSOURCE, m_options.exactCopySources);
+//    OnToggleOption (ID_VIEW_EXACTCOPYSOURCE, m_options.exactCopySources);
 }
 
 void CRevisionGraphDlg::OnViewFoldTags()
 {
-    OnToggleOption (ID_VIEW_FOLDTAGS, m_options.foldTags);
+//    OnToggleOption (ID_VIEW_FOLDTAGS, m_options.foldTags);
 }
 
 void CRevisionGraphDlg::OnViewReduceCrosslines()
 {
-    OnToggleOption (ID_VIEW_REDUCECROSSLINES, m_options.reduceCrossLines);
+//    OnToggleOption (ID_VIEW_REDUCECROSSLINES, m_options.reduceCrossLines);
 }
 
 void CRevisionGraphDlg::OnViewRemoveDeletedOnes()
 {
-    OnToggleOption (ID_VIEW_REMOVEDELETEDONES, m_options.removeDeletedOnes);
+//    OnToggleOption (ID_VIEW_REMOVEDELETEDONES, m_options.removeDeletedOnes);
 }
 
 void CRevisionGraphDlg::OnViewShowWCRev()
 {
-    OnToggleOption (ID_VIEW_SHOWWCREV, m_options.showWCRev);
+//    OnToggleOption (ID_VIEW_SHOWWCREV, m_options.showWCRev);
 }
 
 void CRevisionGraphDlg::OnCancel()
@@ -652,7 +644,7 @@ void CRevisionGraphDlg::UpdateStatusBar()
 	CString sFormat;
 	sFormat.Format(IDS_REVGRAPH_STATUSBARURL, m_Graph.m_sPath);
 	m_StatusBar.SetText(sFormat,1,0);
-	sFormat.Format(IDS_REVGRAPH_STATUSBARNUMNODES, m_Graph.m_entryPtrs.size());
+	sFormat.Format(IDS_REVGRAPH_STATUSBARNUMNODES, m_Graph.GetNodeCount());
 	m_StatusBar.SetText(sFormat,0,0);
 }
 
@@ -731,7 +723,7 @@ BOOL CRevisionGraphDlg::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRe
 
 void CRevisionGraphDlg::OnViewFilter()
 {
-	CRevGraphFilterDlg dlg;
+/*	CRevGraphFilterDlg dlg;
 	dlg.SetMaxRevision(m_Graph.GetHeadRevision());
 	dlg.SetFilterString(m_sFilter);
 	if (dlg.DoModal()==IDOK)
@@ -747,7 +739,7 @@ void CRevisionGraphDlg::OnViewFilter()
 		{
 			CMessageBox::Show(this->m_hWnd, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
 		}
-	}
+	}*/
 }
 
 void CRevisionGraphDlg::OnViewShowoverview()
@@ -761,21 +753,17 @@ void CRevisionGraphDlg::OnViewShowoverview()
 	{
 		pMenu->CheckMenuItem(ID_VIEW_SHOWOVERVIEW, MF_BYCOMMAND | MF_UNCHECKED);
 		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_SHOWOVERVIEW, tbstate & (~TBSTATE_CHECKED));
-		m_Graph.m_bShowOverview = false;
+		m_Graph.SetShowOverview (false);
 	}
 	else
 	{
 		pMenu->CheckMenuItem(ID_VIEW_SHOWOVERVIEW, MF_BYCOMMAND | MF_CHECKED);
 		m_ToolBar.GetToolBarCtrl().SetState(ID_VIEW_SHOWOVERVIEW, tbstate | TBSTATE_CHECKED);
-		m_Graph.m_bShowOverview = true;
+		m_Graph.SetShowOverview (true);
 	}
 
 	CRegDWORD reg = CRegDWORD(_T("Software\\TortoiseSVN\\ShowRevGraphOverview"), FALSE);
-	reg = m_Graph.m_bShowOverview;
-	if (m_Graph.m_bShowOverview)
-	{
-		m_Graph.BuildPreview();
-	}
+	reg = m_Graph.GetShowOverview();
 	m_Graph.Invalidate(FALSE);
 }
 

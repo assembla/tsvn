@@ -22,6 +22,8 @@
 
 using namespace LogCache;
 
+class CVisibleGraphNode;
+
 class ILayoutItemList
 {
 public:
@@ -74,6 +76,15 @@ public:
 
     struct SNode
     {
+        /// Area occupied by this node.
+
+        CRect rect;
+
+        /// tree node represented by this graphical node.
+        /// Can be NULL, if there is none or multiple such nodes
+
+        const CVisibleGraphNode* node;
+
         /// style (shape, border, filling) index. 
         /// To be interpreted by drawing code. Starts with 0.
 
@@ -84,9 +95,6 @@ public:
 
         DWORD styleFlags;
 
-        /// Area occupied by this node.
-
-        CRect rect;
     };
 
     /// standard data access

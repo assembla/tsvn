@@ -21,6 +21,8 @@
 #include "FullHistory.h"
 #include "FullGraph.h"
 #include "CachedLogInfo.h"
+#include "Registry.h"
+#include "UnicodeUtils.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -141,6 +141,7 @@ CStandardLayoutNodeList::GetNode (index_t index) const
     result.style = 0;
     result.styleFlags = 0;
     result.rect = nodes[index].rect;
+    result.node = nodes[index].node;
 
     return result;
 }

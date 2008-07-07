@@ -367,7 +367,7 @@ void CFullHistory::BuildForwardCopies()
 	std::sort (copyFromRelation, copyFromRelationEnd, &AscendingFromRevision);
 }
 
-CString CFullHistory::GetLastErrorMessage()
+CString CFullHistory::GetLastErrorMessage() const
 {
 	return SVN::GetErrorString(Err);
 }

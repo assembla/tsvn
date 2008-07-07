@@ -25,15 +25,15 @@
 
 void CStandardNodePositioning::StackSubTree 
     ( CStandardLayoutNodeInfo* node
-    , const std::vector<long>& branchColumnStarts
-    , const std::vector<long>& branchColumnHeights
+    , std::vector<long>& branchColumnStarts
+    , std::vector<long>& branchColumnHeights
     , std::vector<long>& localColumnStarts
     , std::vector<long>& localColumnHeights)
 {
     // the highest position allowed for any branch
     // (if actually reached, node must be at 0,0)
 
-    long branchMinY = localColumnHeights[0] + node->requiredSize.y;
+    long branchMinY = localColumnHeights[0] + node->requiredSize.cy;
 
     // shift subtree downwards until there is no overlap with upper sub-trees
 
@@ -47,18 +47,18 @@ void CStandardNodePositioning::StackSubTree
     // store how much the sub-tree has to be shifted
     // (will be applied to rect in a second pass)
 
-    node->subTreeShift.x = node->requiredSize.x + 50;
-    node->subTreeShift.y = max (branchMinY, subTreeMinY);
+    node->subTreeShift.cx = node->requiredSize.cx + 50;
+    node->subTreeShift.cy = max (branchMinY, subTreeMinY);
 
     // adjust y-coord of the start node
 
-    long nodeYShift = node->subTreeShift.y - branchMinY;
+    long nodeYShift = node->subTreeShift.cy - branchMinY;
     node->rect.top += nodeYShift;
     node->rect.bottom += nodeYShift;
 
     // update column heights
 
-    long subTreeMinY = 0;
+    subTreeMinY = 0;
     for (size_t i = 0, count = branchColumnStarts.size(); i < count; ++i)
     {
         branchColumnStarts[i] = min ( branchColumnStarts[i]
@@ -126,7 +126,7 @@ void CStandardNodePositioning::PlaceBranch
 
 CStandardNodePositioning::CStandardNodePositioning 
     ( CRevisionGraphOptionList& list)
-    : CRevisionGraphOptionImpl<ILayoutOption, 100, 0> (list)
+    : CRevisionGraphOptionImpl<ILayoutOption, 200, 0> (list)
 {
 }
 
