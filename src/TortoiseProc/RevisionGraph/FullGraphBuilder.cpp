@@ -327,7 +327,9 @@ void CFullGraphBuilder::AnalyzeRevisions ( revision_t revision
                     // handle copy-from special case:
 
                     if (   (classification.Is (CNodeClassification::IS_ADDED))
-						&& (searchNode->GetLastEntry() != NULL))
+						&& (searchNode->GetLastEntry() != NULL)
+                        && (   searchNode->GetLastEntry()->GetPath().GetBasePath().GetIndex()
+                            != iter->GetFromPathID()))
 					{
 						// we may not add paths that already exist:
 						// D /trunk/OldSub

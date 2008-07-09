@@ -186,79 +186,98 @@ void CFullGraphFinalizer::MarkHead (CFullGraphNode* node)
 
 void CFullGraphFinalizer::ForwardClassification (CFullGraphNode* node)
 {
-    // add local classification
+    do
+    {
+        // add local classification
 
-    MarkRoot (node);
-    MarkCopySource (node);
-    MarkWCRevision (node);
-    MarkHead (node);
+        MarkRoot (node);
+        MarkCopySource (node);
+        MarkWCRevision (node);
+        MarkHead (node);
 
-    // add path-based classification
+        // add path-based classification
 
-    node->AddClassification ((*pathClassification)[node->GetPath()]);
+        node->AddClassification ((*pathClassification)[node->GetPath()]);
 
-    // recourse
+        // recourse
 
-    for ( const CFullGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
-        ; copy != NULL
-        ; copy = copy->next())
-	{
-        ForwardClassification (copy->value());
+        for ( const CFullGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
+            ; copy != NULL
+            ; copy = copy->next())
+	    {
+            ForwardClassification (copy->value());
+        }
+
+        node = node->GetNext();
     }
-
-    if (node->GetNext())
-        ForwardClassification (node->GetNext());
+    while (node != NULL);
 }
 
 // propagate classifation back along copy history
 
 DWORD CFullGraphFinalizer::BackwardClassification (CFullGraphNode* node)
 {
-    // set classification on copies first
+    // start at the end of this chain
 
-    DWORD commonCopyClassfication = (DWORD)(-1);  // flags set in all copyies
-    DWORD aggregatedCopyClassification = 0;      // flags set in at least one copy
+    assert (node->GetPrevious()== NULL);
 
-    for ( const CFullGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
-        ; copy != NULL
-        ; copy = copy->next())
-	{
-        DWORD classification = BackwardClassification (copy->value());
-        commonCopyClassfication &= classification;
-        aggregatedCopyClassification |= classification;
-    }
+    while (node->GetNext())
+        node = node->GetNext();
 
     // classify this branch
 
-    DWORD branchClassification = node->GetNext()
-                               ? BackwardClassification (node->GetNext())
-                               : 0;
+    DWORD branchClassification = 0;
 
-    // construct the common classification
+    do
+    {
+        // set classification on copies first
 
-    DWORD classification // aggregate changes along the branch
-        =   branchClassification 
-          & ~CNodeClassification::ALL_COPIES_MASK;
+        DWORD commonCopyClassfication = (DWORD)(-1);  // flags set in all copyies
+        DWORD aggregatedCopyClassification = 0;      // flags set in at least one copy
 
-    classification      // add what applies to all branches
-        |=   commonCopyClassfication & branchClassification
-           & CNodeClassification::ALL_COPIES_MASK;
+        for ( const CFullGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
+            ; copy != NULL
+            ; copy = copy->next())
+	    {
+            DWORD classification = BackwardClassification (copy->value());
+            commonCopyClassfication &= classification;
+            aggregatedCopyClassification |= classification;
+        }
 
-    classification      // any change to this node applies to all copies as well
-        |=  (node->GetClassification().GetFlags() * CNodeClassification::ALL_COPIES_SHIFT)
-          & CNodeClassification::ALL_COPIES_MASK;
+        // construct the common classification
 
-    classification      // add changes that occur in *any* sub-tree
-        |=  (aggregatedCopyClassification * CNodeClassification::COPIES_TO_SHIFT)
-          & CNodeClassification::COPIES_TO_MASK;
+        DWORD classification // aggregate changes along the branch
+            =   branchClassification 
+              & ~CNodeClassification::ALL_COPIES_MASK;
 
-    // store and return the flags
+        classification      // add what applies to all branches
+            |=   commonCopyClassfication & branchClassification
+               & CNodeClassification::ALL_COPIES_MASK;
 
-    DWORD nodeClassification 
-        =   classification 
-          & (CNodeClassification::ALL_COPIES_MASK + CNodeClassification::COPIES_TO_MASK);
+        classification      // any change to this node applies to all copies as well
+            |=  (node->GetClassification().GetFlags() * CNodeClassification::ALL_COPIES_SHIFT)
+              & CNodeClassification::ALL_COPIES_MASK;
 
-    node->AddClassification (nodeClassification);
+        classification      // add changes that occur in *any* sub-tree
+            |=  (aggregatedCopyClassification * CNodeClassification::COPIES_TO_SHIFT)
+              & CNodeClassification::COPIES_TO_MASK;
 
-    return classification | node->GetClassification().GetFlags();
+        // store and return the flags
+
+        DWORD nodeClassification 
+            =   classification 
+              & (CNodeClassification::ALL_COPIES_MASK + CNodeClassification::COPIES_TO_MASK);
+
+        node->AddClassification (nodeClassification);
+
+        // current path classification
+
+        branchClassification = classification | node->GetClassification().GetFlags();
+        node = node->GetPrevious();
+    }
+    while (node != NULL);
+
+    // done
+
+    return branchClassification;
 }

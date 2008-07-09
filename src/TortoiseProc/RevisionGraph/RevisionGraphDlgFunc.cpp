@@ -31,6 +31,7 @@
 #include "CachedLogInfo.h"
 #include "RevisionGraph/IRevisionGraphLayout.h"
 #include "RevisionGraph/FullGraphBuilder.h"
+#include "RevisionGraph/FullGraphFinalizer.h"
 #include "RevisionGraph/VisibleGraphBuilder.h"
 #include "RevisionGraph/StandardLayout.h"
 
@@ -244,6 +245,9 @@ bool CRevisionGraphWnd::FetchRevisionData
     {
         CFullGraphBuilder builder (m_fullHistory, m_fullGraph);
         builder.Run();
+
+        CFullGraphFinalizer finalizer (m_fullHistory, m_fullGraph);
+        finalizer.Run();
     }
 
     return result;
