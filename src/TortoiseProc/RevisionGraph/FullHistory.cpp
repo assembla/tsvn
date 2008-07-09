@@ -197,6 +197,9 @@ bool CFullHistory::FetchRevisionData (CString path, SVNRev revision, CProgressDl
 		return false;
 	}
 
+    if (revision.IsHead())
+        revision = head;
+
     headRevision = head;
     repoRoot = rootPath.GetSVNPathString();
     relPath = CPathUtils::PathUnescape (url.Mid (repoRoot.GetLength()));
