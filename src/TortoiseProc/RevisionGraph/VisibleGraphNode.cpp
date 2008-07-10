@@ -97,10 +97,13 @@ void CVisibleGraphNode::DestroySubNodes
     ( CFactory& factory
     , CCopyTarget::factory& copyTargetFactory)
 {
-    if (next)
+    while (next != NULL)
     {
-        factory.Destroy (next);
-        next = NULL;
+        CVisibleGraphNode* toDestroy = next; 
+        next = toDestroy->next;
+        toDestroy->next = NULL;
+
+        factory.Destroy (toDestroy);
     }
 
     while (firstCopyTarget)
