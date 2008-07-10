@@ -44,5 +44,9 @@ void CStandardNodeSizeAssignment::ApplyTo (IRevisionGraphLayout* layout)
     // run
 
     for (index_t i = 0, count = nodeAccess->GetNodeCount(); i < count; ++i)
-        nodeAccess->GetNode(i)->requiredSize = CSize (200, 60);
+    {
+        CStandardLayoutNodeInfo* node = nodeAccess->GetNode(i);
+        node->requiredSize = CSize (200, 60);
+        node->rect = CRect (0, 0, 200, 60);
+    }
 }

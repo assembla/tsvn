@@ -11,6 +11,7 @@
 
 CStandardLayoutNodeInfo::CStandardLayoutNodeInfo()
     : node (NULL)
+    , firstSubBranch (NULL)
     , nextInBranch (NULL)
     , previousInBranch (NULL)
     , lastInBranch (NULL)
@@ -24,6 +25,9 @@ CStandardLayoutNodeInfo::CStandardLayoutNodeInfo()
     , requiresRevision (true)
     , requiresPath (true)
     , requiresGap (true)
+    , requiredSize (0, 0)
+    , subTreeShift (0, 0)
+    , rect (0, 0, 0, 0)
 {
 }
 
@@ -57,48 +61,59 @@ void CStandardLayout::InitializeNodes (const CVisibleGraphNode* start)
         previousInBranch = &nodeInfo;
         lastInBranch = &nodeInfo;
 
-        CStandardLayoutNodeInfo* previousBranch = NULL;
-        CStandardLayoutNodeInfo* lastBranch = NULL;
-
-        // measure sub-branches and back-link them 
-
-        for ( const CVisibleGraphNode::CCopyTarget* 
-                target = node->GetFirstCopyTarget()
-            ; target != NULL
-            ; target = target->next())
+        if (node->GetFirstCopyTarget())
         {
-            // get sub-branch node, initialize it and update pointers
+            CStandardLayoutNodeInfo* previousBranch = NULL;
+            CStandardLayoutNodeInfo* lastBranch = NULL;
 
-            const CVisibleGraphNode* subNode = target->value();
-            CStandardLayoutNodeInfo& subNodeInfo = nodes[subNode->GetIndex()];
+            // measure sub-branches and back-link them 
 
-            subNodeInfo.previousBranch = previousBranch;
-            if (previousBranch != NULL)
-                previousBranch->nextBranch = &subNodeInfo;
+            for ( const CVisibleGraphNode::CCopyTarget* 
+                    target = node->GetFirstCopyTarget()
+                ; target != NULL
+                ; target = target->next())
+            {
+                // get sub-branch node, initialize it and update pointers
 
-            previousBranch = &subNodeInfo;
-            lastBranch = &subNodeInfo;
+                const CVisibleGraphNode* subNode = target->value();
+                CStandardLayoutNodeInfo& subNodeInfo = nodes[subNode->GetIndex()];
 
-            // add branch
+                if (previousBranch != NULL)
+                {
+                    previousBranch->nextBranch = &subNodeInfo;
+                    subNodeInfo.previousBranch = previousBranch;
+                }
+                else
+                {
+                    // mark the first branch
 
-            InitializeNodes (subNode);
+                    nodeInfo.firstSubBranch = &subNodeInfo;
+                }
 
-            // accumulate branch into sub-tree
+                previousBranch = &subNodeInfo;
+                lastBranch = &subNodeInfo;
 
-            nodeInfo.subTreeWidth += subNodeInfo.subTreeWidth;
-            nodeInfo.subTreeWeight += subNodeInfo.subTreeWeight;
-            if (nodeInfo.subTreeHeight <= subNodeInfo.subTreeHeight)
-                nodeInfo.subTreeHeight = subNodeInfo.subTreeHeight+1;
-        }
+                // add branch
 
-        // link sub-branches forward
+                InitializeNodes (subNode);
 
-        for ( const CVisibleGraphNode::CCopyTarget* 
-                target = node->GetFirstCopyTarget()
-            ; target != NULL
-            ; target = target->next())
-        {
-            nodes[target->value()->GetIndex()].lastBranch = lastBranch;
+                // accumulate branch into sub-tree
+
+                nodeInfo.subTreeWidth += subNodeInfo.subTreeWidth;
+                nodeInfo.subTreeWeight += subNodeInfo.subTreeWeight;
+                if (nodeInfo.subTreeHeight <= subNodeInfo.subTreeHeight)
+                    nodeInfo.subTreeHeight = subNodeInfo.subTreeHeight+1;
+            }
+
+            // link sub-branches forward
+
+            for ( const CVisibleGraphNode::CCopyTarget* 
+                    target = node->GetFirstCopyTarget()
+                ; target != NULL
+                ; target = target->next())
+            {
+                nodes[target->value()->GetIndex()].lastBranch = lastBranch;
+            }
         }
     }
 
@@ -158,7 +173,7 @@ void CStandardLayout::CreateConnections()
         if (FALSE == CRect().IntersectRect (rect, previousRect))
             continue;
 
-        // an actual
+        // an actual connection
 
         connections.push_back (std::make_pair (previousNode->GetIndex(), i));
     }

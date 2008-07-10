@@ -1067,8 +1067,9 @@ LRESULT CRevisionGraphWnd::OnWorkerThreadDone(WPARAM, LPARAM)
 	BuildPreview();
     Invalidate(FALSE);
 
+    SVN svn;
 	LogCache::CRepositoryInfo& cachedProperties 
-        = SVN().GetLogCachePool()->GetRepositoryInfo();
+        = svn.GetLogCachePool()->GetRepositoryInfo();
 	SetDlgTitle (cachedProperties.IsOffline (m_fullHistory.GetRepositoryRoot(), false));
 
     return 0;

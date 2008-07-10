@@ -30,7 +30,7 @@ CLayoutOptions::CLayoutOptions
 
 // apply all filters 
 
-void CLayoutOptions::ApplyAllTo (IRevisionGraphLayout* layout) const
+void CLayoutOptions::Apply (IRevisionGraphLayout* layout) const
 {
     for (size_t i = 0; i < options.size(); ++i)
         options[i]->ApplyTo (layout);

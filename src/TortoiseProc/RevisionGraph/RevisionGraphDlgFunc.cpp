@@ -266,15 +266,17 @@ bool CRevisionGraphWnd::AnalyzeRevisionData
                                      , options.GetCopyFilterOptions());
         builder.Run();
         options.GetModificationOptions().Apply (&m_visibleGraph);
+        m_visibleGraph.GetRoot()->InitIndex(0);
 
         // layout nodes
 
-        CStandardLayout* newLayout 
-            = new CStandardLayout ( m_fullHistory.GetCache()
-                                  , &m_visibleGraph);
+        std::auto_ptr<CStandardLayout> newLayout 
+            ( new CStandardLayout ( m_fullHistory.GetCache()
+                                  , &m_visibleGraph));
+        options.GetLayoutOptions().Apply (newLayout.get());
         newLayout->Finalize();
 
-        m_layout.reset (newLayout);
+        m_layout = newLayout;
     }
 
     return m_layout.get() != NULL;

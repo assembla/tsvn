@@ -20,10 +20,17 @@
 #include "StdAfx.h"
 #include "AllGraphOptions.h"
 
+#include "StandardNodeSizeAssignment.h"
+#include "StandardNodePositioning.h"
+
 // construction (create all option objects) / destruction
 
 CAllRevisionGraphOptions::CAllRevisionGraphOptions()
 {
+    // create layout options
+
+    (new CStandardNodeSizeAssignment (*this))->ToggleSelection();
+    (new CStandardNodePositioning (*this))->ToggleSelection();
 }
 
 // access specific sub-sets
@@ -36,4 +43,9 @@ CCopyFilterOptions CAllRevisionGraphOptions::GetCopyFilterOptions() const
 CModificationOptions CAllRevisionGraphOptions::GetModificationOptions() const
 {
     return GetFilteredList<CModificationOptions, IModificationOption>();
+}
+
+CLayoutOptions CAllRevisionGraphOptions::GetLayoutOptions() const
+{
+    return GetFilteredList<CLayoutOptions, ILayoutOption>();
 }

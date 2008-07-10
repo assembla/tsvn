@@ -46,5 +46,5 @@ public:
 
     /// apply all filters 
 
-    void ApplyAllTo (IRevisionGraphLayout* layout) const;
+    void Apply (IRevisionGraphLayout* layout) const;
 };

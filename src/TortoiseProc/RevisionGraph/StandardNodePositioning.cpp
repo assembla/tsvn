@@ -41,40 +41,51 @@ void CStandardNodePositioning::StackSubTree
     for (size_t i = 0, count = branchColumnStarts.size(); i < count; ++i)
     {
         subTreeMinY = min ( subTreeMinY
-                          , localColumnHeights[i] - branchColumnStarts[i] + 10);
+                          , localColumnHeights[i+1] - branchColumnStarts[i] + 10);
     }
 
     // store how much the sub-tree has to be shifted
-    // (will be applied to rect in a second pass)
+    // (will be applied to .rect in a second pass)
 
     node->subTreeShift.cx = node->requiredSize.cx + 50;
     node->subTreeShift.cy = max (branchMinY, subTreeMinY);
 
     // adjust y-coord of the start node
 
-    long nodeYShift = node->subTreeShift.cy - branchMinY;
+    long nodeYShift = node->subTreeShift.cy - node->requiredSize.cy;
     node->rect.top += nodeYShift;
     node->rect.bottom += nodeYShift;
 
     // update column heights
 
-    subTreeMinY = 0;
+    long subTreeYShift = node->subTreeShift.cy;
+    localColumnStarts[0] = min (localColumnStarts[0], node->rect.top);
+    localColumnHeights[0] = max (localColumnHeights[0], node->rect.top + node->requiredSize.cy);
+
     for (size_t i = 0, count = branchColumnStarts.size(); i < count; ++i)
     {
-        branchColumnStarts[i] = min ( branchColumnStarts[i]
-                                    , subTreeMinY + branchColumnStarts[i]);
-        localColumnHeights[i] = max ( localColumnHeights[i]
-                                    , subTreeMinY + branchColumnHeights[i]);
+        localColumnStarts[i+1] = min ( localColumnStarts[i+1]
+                                     , subTreeYShift + branchColumnStarts[i]);
+        localColumnHeights[i+1] = max ( localColumnHeights[i+1]
+                                      , subTreeYShift + branchColumnHeights[i]);
     }
 }
 
 void CStandardNodePositioning::AppendBranch 
-    ( CStandardLayoutNodeInfo* node
-    , std::vector<long>& columnStarts
+    ( std::vector<long>& columnStarts
     , std::vector<long>& columnHeights
     , const std::vector<long>& localColumnStarts
     , const std::vector<long>& localColumnHeights)
 {
+    // just append the column y-ranges 
+    // (column 0 is for the chain that starts at node)
+
+    columnStarts.insert ( columnStarts.end()
+                        , localColumnStarts.begin()
+                        , localColumnStarts.end());
+    columnHeights.insert ( columnHeights.end()
+                         , localColumnHeights.begin()
+                         , localColumnHeights.end());
 }
 
 void CStandardNodePositioning::PlaceBranch 
@@ -82,10 +93,12 @@ void CStandardNodePositioning::PlaceBranch
     , std::vector<long>& columnStarts
     , std::vector<long>& columnHeights)
 {
+    // lower + upper bounds for the start node and all its branche columns
+
     std::vector<long> localColumnStarts;
-    localColumnStarts.resize (start->subTreeWidth, LONG_MAX);
     std::vector<long> localColumnHeights;
-    localColumnHeights.resize (start->subTreeWidth, 0);
+
+    // lower + upper bounds for the columns of one sub-branch of the start node
 
     std::vector<long> branchColumnStarts;
     std::vector<long> branchColumnHeights;
@@ -94,32 +107,58 @@ void CStandardNodePositioning::PlaceBranch
         ; node != NULL
         ; node = node->nextInBranch)
     {
+        // collect branches
+
         branchColumnStarts.clear();
-        localColumnStarts.resize (node->subTreeWidth-1, LONG_MAX);
         branchColumnHeights.clear();
-        localColumnHeights.resize (node->subTreeWidth-1, 0);
 
-        // add branches
-
-        for ( CStandardLayoutNodeInfo* branch = node->lastBranch
+        for ( CStandardLayoutNodeInfo* branch = node->firstSubBranch
             ; branch != NULL
-            ; branch = branch->previousBranch)
+            ; branch = branch->nextBranch)
         {
             PlaceBranch (branch, branchColumnStarts, branchColumnHeights);
         }
 
         // stack them and this node
 
+        size_t subTreeWidth = branchColumnHeights.size()+1;
+        if (localColumnStarts.size() < subTreeWidth)
+        {
+            localColumnStarts.resize (subTreeWidth, LONG_MAX);
+            localColumnHeights.resize (subTreeWidth, 0);
+        }
+
         StackSubTree ( node
                      , branchColumnStarts, branchColumnHeights
                      , localColumnStarts, localColumnHeights);
     }
 
-    // append branch horizontally to sibblings
+    // append node and branchs horizontally to sibblings of the start node
 
-    AppendBranch ( start
-                 , columnStarts, columnHeights
+    AppendBranch ( columnStarts, columnHeights
                  , localColumnStarts, localColumnHeights);
+}
+
+void CStandardNodePositioning::ShiftNodes 
+    ( CStandardLayoutNodeInfo* node
+    , const CSize& delta)
+{
+    // walk along this branch
+
+    for ( ; node != NULL; node = node->nextInBranch)
+    {
+        node->rect += delta;
+        node->subTreeShift += delta;
+
+        // shift sub-branches
+
+        for ( CStandardLayoutNodeInfo* branch = node->firstSubBranch
+            ; branch != NULL
+            ; branch = branch->previousBranch)
+        {
+            ShiftNodes (branch, node->subTreeShift);
+        }
+    }
 }
 
 // construction
@@ -142,11 +181,15 @@ void CStandardNodePositioning::ApplyTo (IRevisionGraphLayout* layout)
     if (nodeAccess == NULL) 
         return;
 
-    // run
+    // calculate the displacement for every node (member subTreeShift)
 
-    for (index_t i = 0, count = nodeAccess->GetNodeCount(); i < count; ++i)
-    {
-        CStandardLayoutNodeInfo* node = nodeAccess->GetNode(i);
-        node->requiredSize = CSize (200, 60);
-    }
+    CStandardLayoutNodeInfo* root = nodeAccess->GetNode(0);
+    std::vector<long> columnStarts;
+    std::vector<long> columnHeights;
+
+    PlaceBranch (root, columnStarts, columnHeights);
+
+    // actually move the node rects to thier final position
+
+    ShiftNodes (root, CSize (0,0));
 }

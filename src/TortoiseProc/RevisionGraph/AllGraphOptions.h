@@ -20,6 +20,7 @@
 
 #include "CopyFilterOptions.h"
 #include "ModificationOptions.h"
+#include "LayoutOptions.h"
 
 class CAllRevisionGraphOptions : public CRevisionGraphOptionList
 {
@@ -34,4 +35,5 @@ public:
 
     CCopyFilterOptions GetCopyFilterOptions() const;
     CModificationOptions GetModificationOptions() const;
+    CLayoutOptions GetLayoutOptions() const;
 };

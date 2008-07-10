@@ -38,6 +38,7 @@ public:
 
     /// links for faster navigation
 
+    CStandardLayoutNodeInfo* firstSubBranch;
     CStandardLayoutNodeInfo* nextInBranch;
     CStandardLayoutNodeInfo* previousInBranch;
     CStandardLayoutNodeInfo* lastInBranch;
