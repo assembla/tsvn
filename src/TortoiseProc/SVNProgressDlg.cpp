@@ -269,6 +269,7 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, svn_wc_notify_action_t actio
 	case svn_wc_notify_resolved:
 		data->sActionColumnText.LoadString(IDS_SVNACTION_RESOLVE);
 		break;
+	case svn_wc_notify_update_replace:
 	case svn_wc_notify_commit_replaced:
 		data->sActionColumnText.LoadString(IDS_SVNACTION_REPLACED);
 		data->color = m_Colors.GetColor(CColors::Deleted);
@@ -429,6 +430,7 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, svn_wc_notify_action_t actio
 	case svn_wc_notify_changelist_moved:
 		data->sActionColumnText.Format(IDS_SVNACTION_CHANGELISTMOVED, data->changelistname);
 		break;
+	case svn_wc_notify_foreign_merge_begin:
 	case svn_wc_notify_merge_begin:
 		if (range == NULL)
 			data->sActionColumnText.LoadString(IDS_SVNACTION_MERGEBEGINNONE);
