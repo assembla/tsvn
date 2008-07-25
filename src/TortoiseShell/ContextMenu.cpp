@@ -474,6 +474,16 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 						if (strstr(stat.status->entry->present_props, "svn:needs-lock"))
 							itemStates |= ITEMIS_NEEDSLOCK;
 					}
+					if ((status != svn_wc_status_unversioned)&&(status != svn_wc_status_ignored)&&(status != svn_wc_status_none))
+						itemStatesFolder |= ITEMIS_INSVN;
+					if (status == svn_wc_status_normal)
+						itemStatesFolder |= ITEMIS_NORMAL;
+					if (status == svn_wc_status_conflicted)
+						itemStatesFolder |= ITEMIS_CONFLICTED;
+					if (status == svn_wc_status_added)
+						itemStatesFolder |= ITEMIS_ADDED;
+					if (status == svn_wc_status_deleted)
+						itemStatesFolder |= ITEMIS_DELETED;
 				}
 				else
 				{
