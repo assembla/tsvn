@@ -57,6 +57,8 @@ private:
 						  , CRevisionInfoContainer::CChangesIterator last
 						  , CSearchPathTree* startNode
 						  , std::vector<CSearchPathTree*>& toRemove);
+    void AnalyzeAsChanges ( revision_t revision
+    					  , CSearchPathTree* searchNode);
 	void AddCopiedPaths ( revision_t revision
 					    , CSearchPathTree* rootNode
 					    , SCopyInfo**& lastToCopy);

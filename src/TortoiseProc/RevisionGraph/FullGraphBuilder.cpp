@@ -146,20 +146,31 @@ void CFullGraphBuilder::Run()
 			startNode = searchTree->FindCommonParent (commonRoot.GetIndex());
 		}
 
+    #ifdef _DEBUG
+        if (startNode != NULL)
+        {
+            // only valid for parents of the uppermost modified path
+
+	        for (CRevisionInfoContainer::CChangesIterator iter = revisionInfo.GetChangesBegin (index)
+                , last = revisionInfo.GetChangesEnd (index)
+                ; iter != last
+                ; ++iter)
+            {
+                assert (startNode->GetPath().IsSameOrParentOf (iter->GetPathID()));
+            }
+        }
+    #endif
+
 		// mark changes on parent search nodes
+
+        assert (revisionInfo.GetChangesBegin (index) != revisionInfo.GetChangesEnd (index));
 
 		for ( CSearchPathTree* searchNode = startNode
 			; searchNode != NULL
 			; searchNode = searchNode->GetParent())
 	    {
 			if (searchNode->IsActive())
-			{
-				AnalyzeRevisions ( revision
-								 , revisionInfo.GetChangesBegin (index)
-								 , revisionInfo.GetChangesEnd (index)
-								 , searchNode
-								 , toRemove);
-			}
+				AnalyzeAsChanges (revision, searchNode);
 	    }
 
 		// handle remaining copy-to entries
@@ -387,6 +398,21 @@ void CFullGraphBuilder::AnalyzeRevisions ( revision_t revision
 
 }
 
+void CFullGraphBuilder::AnalyzeAsChanges ( revision_t revision
+    									 , CSearchPathTree* searchNode)
+{
+	// create & init the new graph node
+
+    CFullGraphNode* newNode = graph.Add ( searchNode->GetPath()
+                                        , revision
+                                        , CNodeClassification::IS_MODIFIED
+                                        , searchNode->GetLastEntry());
+
+	// link entries for the same search path
+
+	searchNode->ChainEntries (newNode);
+}
+
 void CFullGraphBuilder::AddCopiedPaths ( revision_t revision
 								         , CSearchPathTree* rootNode
 								         , SCopyInfo**& lastToCopy)
@@ -464,15 +490,14 @@ void CFullGraphBuilder::FillCopyTargets ( revision_t revision
 				    {
 					    // the copy source graph node has yet to be created
 
-                        CFullGraphNode* newNode 
-                            = graph.Add ( path
-                                        , revision
-                                        , CNodeClassification::IS_COPY_SOURCE
-                                        , searchNode->GetLastEntry());
+                        entry = graph.Add ( path
+                                          , revision
+                                          , CNodeClassification::IS_COPY_SOURCE
+                                          , entry);
 
 					    // link entries for the same search path
 
-					    searchNode->ChainEntries (newNode);
+					    searchNode->ChainEntries (entry);
 				    }
 
                     // add & schedule the new search path
