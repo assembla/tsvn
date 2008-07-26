@@ -27,6 +27,7 @@ CStandardLayoutNodeInfo::CStandardLayoutNodeInfo()
     , requiresGap (true)
     , requiredSize (0, 0)
     , subTreeShift (0, 0)
+    , treeShift (0, 0)
     , rect (0, 0, 0, 0)
 {
 }
@@ -165,12 +166,13 @@ void CStandardLayout::CreateConnections()
                                               ? node->GetCopySource()
                                               : node->GetPrevious();
 
-        const CRect& rect = nodes[i].rect;
         const CRect& previousRect = nodes[previousNode->GetIndex()].rect;
+        CRect rect = nodes[i].rect;
 
         // no line because nodes touch or overlap?
 
-        if (FALSE == CRect().IntersectRect (rect, previousRect))
+        rect.InflateRect (1, 1, 1, 1);
+        if (TRUE == CRect().IntersectRect (rect, previousRect))
             continue;
 
         // an actual connection

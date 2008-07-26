@@ -66,6 +66,7 @@ public:
     /// temp. value used to store the offset of the final position
     /// to the current one (logical coordinates)
 
+    CSize treeShift;
     CSize subTreeShift;
 
     /// actual position (logical coordinates)
