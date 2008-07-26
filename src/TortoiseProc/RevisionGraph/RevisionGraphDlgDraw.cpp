@@ -431,6 +431,7 @@ void CRevisionGraphWnd::DrawTexts (CDC* pDC, const CRect& logRect, const CSize& 
 
     // iterate over all visible nodes
 
+    pDC->SetTextAlign (TA_CENTER | TA_TOP);
     const ILayoutTextList* texts = m_layout->GetTexts();
     for ( index_t index = texts->GetFirstVisible (logRect)
         ; index != NO_INDEX
@@ -448,7 +449,7 @@ void CRevisionGraphWnd::DrawTexts (CDC* pDC, const CRect& logRect, const CSize& 
 
 		pDC->SetTextColor (textcolor);
 		pDC->SelectObject (GetFont(FALSE, FALSE));
-        pDC->ExtTextOut (textRect.left, textRect.top, ETO_CLIPPED, &textRect, text.text, NULL);
+        pDC->ExtTextOut ((textRect.left + textRect.right)/2, textRect.top, ETO_CLIPPED, &textRect, text.text, NULL);
     }
 }
 
