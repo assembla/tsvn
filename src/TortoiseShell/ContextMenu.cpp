@@ -475,15 +475,15 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 							itemStates |= ITEMIS_NEEDSLOCK;
 					}
 					if ((status != svn_wc_status_unversioned)&&(status != svn_wc_status_ignored)&&(status != svn_wc_status_none))
-						itemStatesFolder |= ITEMIS_INSVN;
+						itemStates |= ITEMIS_INSVN;
 					if (status == svn_wc_status_normal)
-						itemStatesFolder |= ITEMIS_NORMAL;
+						itemStates |= ITEMIS_NORMAL;
 					if (status == svn_wc_status_conflicted)
-						itemStatesFolder |= ITEMIS_CONFLICTED;
+						itemStates |= ITEMIS_CONFLICTED;
 					if (status == svn_wc_status_added)
-						itemStatesFolder |= ITEMIS_ADDED;
+						itemStates |= ITEMIS_ADDED;
 					if (status == svn_wc_status_deleted)
-						itemStatesFolder |= ITEMIS_DELETED;
+						itemStates |= ITEMIS_DELETED;
 				}
 				else
 				{
