@@ -217,7 +217,6 @@ void CSearchPathTree::Remove()
 		node = node->parent;
 
 		delete temp;
-		temp = NULL;
 	}
 }
 
