@@ -38,10 +38,11 @@ private:
         , std::vector<long>& localColumnStarts
         , std::vector<long>& localColumnHeights);
     void AppendBranch 
-        ( std::vector<long>& columnStarts
+        ( CStandardLayoutNodeInfo* start
+        , std::vector<long>& columnStarts
         , std::vector<long>& columnHeights
-        , const std::vector<long>& localColumnStarts
-        , const std::vector<long>& localColumnHeights);
+        , std::vector<long>& localColumnStarts
+        , std::vector<long>& localColumnHeights);
     void PlaceBranch 
         ( CStandardLayoutNodeInfo* start
         , std::vector<long>& columnStarts
@@ -49,7 +50,7 @@ private:
 
     void ShiftNodes 
         ( CStandardLayoutNodeInfo* node
-        , const CSize& delta);
+        , CSize delta);
 
 public:
 

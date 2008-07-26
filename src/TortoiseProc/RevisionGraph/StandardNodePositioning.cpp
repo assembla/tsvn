@@ -40,8 +40,8 @@ void CStandardNodePositioning::StackSubTree
     long subTreeMinY = 0;
     for (size_t i = 0, count = branchColumnStarts.size(); i < count; ++i)
     {
-        subTreeMinY = min ( subTreeMinY
-                          , localColumnHeights[i+1] - branchColumnStarts[i] + 10);
+        subTreeMinY = max ( subTreeMinY
+                          , localColumnHeights[i+1] - branchColumnStarts[i] + 30);
     }
 
     // store how much the sub-tree has to be shifted
@@ -72,11 +72,16 @@ void CStandardNodePositioning::StackSubTree
 }
 
 void CStandardNodePositioning::AppendBranch 
-    ( std::vector<long>& columnStarts
+    ( CStandardLayoutNodeInfo* start
+    , std::vector<long>& columnStarts
     , std::vector<long>& columnHeights
-    , const std::vector<long>& localColumnStarts
-    , const std::vector<long>& localColumnHeights)
+    , std::vector<long>& localColumnStarts
+    , std::vector<long>& localColumnHeights)
 {
+    // move the whole branch to the right
+
+    start->treeShift.cx = columnStarts.size() * 250;
+    
     // just append the column y-ranges 
     // (column 0 is for the chain that starts at node)
 
@@ -135,16 +140,18 @@ void CStandardNodePositioning::PlaceBranch
 
     // append node and branchs horizontally to sibblings of the start node
 
-    AppendBranch ( columnStarts, columnHeights
+    AppendBranch ( start
+                 , columnStarts, columnHeights
                  , localColumnStarts, localColumnHeights);
 }
 
 void CStandardNodePositioning::ShiftNodes 
     ( CStandardLayoutNodeInfo* node
-    , const CSize& delta)
+    , CSize delta)
 {
     // walk along this branch
 
+    delta += node->treeShift;
     for ( ; node != NULL; node = node->nextInBranch)
     {
         node->rect += delta;
@@ -154,7 +161,7 @@ void CStandardNodePositioning::ShiftNodes
 
         for ( CStandardLayoutNodeInfo* branch = node->firstSubBranch
             ; branch != NULL
-            ; branch = branch->previousBranch)
+            ; branch = branch->nextBranch)
         {
             ShiftNodes (branch, node->subTreeShift);
         }
