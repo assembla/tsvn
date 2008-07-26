@@ -77,8 +77,8 @@ CStandardLayoutConnectionList::GetConnection (index_t index) const
 
         startPoint.x = source->right;
         startPoint.y = (source->top + source->bottom) / 2;
-        endPoint.x = dest->left;
-        endPoint.y = (dest->top + dest->bottom) / 2;
+        endPoint.x = (dest->left + dest->right) / 2;
+        endPoint.y = dest->top;
     }
     else
     {
