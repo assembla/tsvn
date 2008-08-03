@@ -27,6 +27,11 @@ private:
     const CCachedLogInfo* cache;
     const std::vector<CStandardLayoutNodeInfo>& nodes;
 
+	/// utilities
+
+	index_t GetStyle (const CVisibleGraphNode* node) const;
+	DWORD GetStyleFlags (const CVisibleGraphNode* node) const;
+
 public:
 
     /// construction

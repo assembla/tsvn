@@ -6,6 +6,31 @@
 #include "SVN.h"
 #include "UnicodeUtils.h"
 
+/// utilities
+
+index_t CStandardLayoutNodeList::GetStyle 
+	(const CVisibleGraphNode* node) const
+{
+	CNodeClassification classification = node->GetClassification();
+
+	if (classification.Is (CNodeClassification::IS_ADDED))
+		return ILayoutNodeList::SNode::STYLE_ADDED;
+	else if (classification.Is (CNodeClassification::IS_DELETED))
+		return ILayoutNodeList::SNode::STYLE_DELETED;
+	else if (classification.Is (CNodeClassification::IS_RENAMED))
+		return ILayoutNodeList::SNode::STYLE_RENAMED;
+	else if (classification.Is (CNodeClassification::IS_LAST))
+		return ILayoutNodeList::SNode::STYLE_LAST;
+	else
+		return ILayoutNodeList::SNode::STYLE_DEFAULT;
+}
+
+DWORD CStandardLayoutNodeList::GetStyleFlags 
+	(const CVisibleGraphNode* node) const
+{
+	return 0;
+}
+
 // construction
 
 CStandardLayoutNodeList::CStandardLayoutNodeList 
@@ -138,10 +163,12 @@ CStandardLayoutNodeList::GetNode (index_t index) const
 {
     SNode result;
 
-    result.style = 0;
-    result.styleFlags = 0;
+	const CVisibleGraphNode* node = nodes[index].node;
+
     result.rect = nodes[index].rect;
-    result.node = nodes[index].node;
+    result.node = node;
+    result.style = GetStyle (node);
+    result.styleFlags = GetStyleFlags (node);
 
     return result;
 }

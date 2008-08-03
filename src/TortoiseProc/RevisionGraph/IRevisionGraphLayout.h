@@ -76,6 +76,18 @@ public:
 
     struct SNode
     {
+		/// style-flags
+
+		enum 
+		{
+			STYLE_DEFAULT  = 0,
+
+			STYLE_ADDED    = 1,
+			STYLE_DELETED  = 2,
+			STYLE_RENAMED  = 3,
+			STYLE_LAST	   = 4
+		};
+
         /// Area occupied by this node.
 
         CRect rect;
@@ -110,6 +122,14 @@ public:
 
     struct SText
     {
+		/// Values allowed for @a style 
+
+		enum
+		{
+            STYLE_DEFAULT   = 0,
+			STYLE_HEADING   = 1
+		};
+
         /// style (shape, font, size) index. 
         /// To be interpreted by drawing code. Starts with 0.
 

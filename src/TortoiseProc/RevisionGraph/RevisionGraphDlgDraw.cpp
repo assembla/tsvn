@@ -341,24 +341,18 @@ void CRevisionGraphWnd::DrawNodes (CDC* pDC, const CRect& logRect, const CSize& 
 
 		switch (node.style)
 		{
-/*		case CRevisionEntry::deleted:
-			DrawNode(memDC, noderect, m_Colors.GetColor(CColors::DeletedNode), entry, TSVNOctangle, ((m_SelectedEntry1==entry)||(m_SelectedEntry2==entry)), hDeletedIcon);
+		case ILayoutNodeList::SNode::STYLE_DELETED:
+			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::DeletedNode), node.node, TSVNOctangle, hDeletedIcon);
 			break;
-		case CRevisionEntry::added:
-			DrawNode(memDC, noderect, m_Colors.GetColor(CColors::AddedNode), entry, TSVNRoundRect, ((m_SelectedEntry1==entry)||(m_SelectedEntry2==entry)), hAddedIcon);
+		case ILayoutNodeList::SNode::STYLE_ADDED:
+			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::AddedNode), node.node, TSVNRoundRect, hAddedIcon);
 			break;
-		case CRevisionEntry::addedwithhistory:
-			DrawNode(memDC, noderect, m_Colors.GetColor(CColors::AddedNode), entry, TSVNRoundRect, ((m_SelectedEntry1==entry)||(m_SelectedEntry2==entry)), hAddedWithHistoryIcon);
+		case ILayoutNodeList::SNode::STYLE_RENAMED:
+			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::RenamedNode), node.node, TSVNOctangle, hRenamedIcon);
 			break;
-		case CRevisionEntry::replaced:
-			DrawNode(memDC, noderect, m_Colors.GetColor(CColors::ReplacedNode), entry, TSVNOctangle, ((m_SelectedEntry1==entry)||(m_SelectedEntry2==entry)), hReplacedIcon);
+		case ILayoutNodeList::SNode::STYLE_LAST:
+			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::LastCommitNode), node.node, TSVNEllipse, hLastCommitIcon);
 			break;
-		case CRevisionEntry::renamed:
-			DrawNode(memDC, noderect, m_Colors.GetColor(CColors::RenamedNode), entry, TSVNOctangle, ((m_SelectedEntry1==entry)||(m_SelectedEntry2==entry)), hRenamedIcon);
-			break;
-		case CRevisionEntry::lastcommit:
-			DrawNode(memDC, noderect, m_Colors.GetColor(CColors::LastCommitNode), entry, TSVNEllipse, ((m_SelectedEntry1==entry)||(m_SelectedEntry2==entry)), hLastCommitIcon);
-			break;*/
 		default:
             DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle, NULL);
 			break;
@@ -448,7 +442,7 @@ void CRevisionGraphWnd::DrawTexts (CDC* pDC, const CRect& logRect, const CSize& 
 		// draw the revision text
 
 		pDC->SetTextColor (textcolor);
-		pDC->SelectObject (GetFont(FALSE, FALSE));
+        pDC->SelectObject (GetFont (FALSE, text.style));
         pDC->ExtTextOut ((textRect.left + textRect.right)/2, textRect.top, ETO_CLIPPED, &textRect, text.text, NULL);
     }
 }

@@ -57,7 +57,7 @@ index_t CStandardLayoutTextList::GetAt
 CStandardLayoutTextList::SText 
 CStandardLayoutTextList::GetText (index_t index) const
 {
-    // determine the end points of the connection
+    // determine the text and its bounding rect
 
     const std::pair<index_t, bool>& textInfo = texts[index];
     const CStandardLayoutNodeInfo& nodeInfo = nodes[textInfo.first];
@@ -83,7 +83,7 @@ CStandardLayoutTextList::GetText (index_t index) const
 
     SText result;
 
-    result.style = 0;
+    result.style = !textInfo.second;
     result.rotation = 0;
     result.rect = rect;
     result.text = text;
