@@ -82,26 +82,17 @@ protected:
 	afx_msg void	OnViewComparerevisions();
 	afx_msg void	OnViewUnifieddiff();
 	afx_msg void	OnViewUnifieddiffofheadrevisions();
-	afx_msg void	OnViewShowallrevisions();
-	afx_msg void	OnViewArrangedbypath();
-	afx_msg void	OnViewTopDown();
-	afx_msg void    OnViewShowHEAD();
-	afx_msg void    OnViewExactCopySource();
-	afx_msg void    OnViewFoldTags();
-	afx_msg void    OnViewReduceCrosslines();
-    afx_msg void    OnViewRemoveDeletedOnes();
-    afx_msg void    OnViewShowWCRev();
 	afx_msg void	OnViewShowoverview();
 	afx_msg void	OnFileSavegraphas();
 	afx_msg void	OnMenuexit();
 	afx_msg void	OnMenuhelp();
 	afx_msg void	OnChangeZoom();
-	afx_msg BOOL	OnToolTipNotify(UINT id, NMHDR *pNMHDR, LRESULT *pResult);
+    afx_msg BOOL    OnToggleOption (UINT controlID);
+	afx_msg BOOL	OnToolTipNotify (UINT id, NMHDR *pNMHDR, LRESULT *pResult);
 
 	DECLARE_MESSAGE_MAP()
 
-	void			SetOption(int controlID, bool option);
-    void            OnToggleOption(int controlID, bool& option);
+	void			SetOption (UINT controlID);
 
     void			GetGraphRect(LPRECT rect);
 	void			UpdateStatusBar();

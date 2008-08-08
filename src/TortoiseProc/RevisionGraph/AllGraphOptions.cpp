@@ -19,6 +19,9 @@
 
 #include "StdAfx.h"
 #include "AllGraphOptions.h"
+#include "Resource.h"
+
+#include "RemoveSimpleChanges.h"
 
 #include "StandardNodeSizeAssignment.h"
 #include "StandardNodePositioning.h"
@@ -27,6 +30,22 @@
 
 CAllRevisionGraphOptions::CAllRevisionGraphOptions()
 {
+    // create options.
+
+    // The order is critical as it determines the option bit position
+    // in the registry DWORD.
+
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_GROUPBRANCHES> (*this);
+    new CRemoveSimpleChanges (*this);
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_TOPDOWN> (*this);
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_SHOWHEAD> (*this);
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_REDUCECROSSLINES> (*this);
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_EXACTCOPYSOURCE> (*this);
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, 0> (*this);   // 0x40 is not used
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_FOLDTAGS> (*this);
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_REMOVEDELETEDONES> (*this);
+    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_SHOWWCREV> (*this);
+
     // create layout options
 
     (new CStandardNodeSizeAssignment (*this))->ToggleSelection();

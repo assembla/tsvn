@@ -49,33 +49,18 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 	, m_bFetchLogs(true)
 	, m_fZoomFactor(1.0)
 {
-	DWORD dwOpts = CRegStdWORD(_T("Software\\TortoiseSVN\\RevisionGraphOptions"), 0x211);
+    // restore option state
 
-/*	m_options.groupBranches = ((dwOpts & 0x01) != 0);
-	m_options.includeSubPathChanges = ((dwOpts & 0x02) != 0);
-	m_options.oldestAtTop = ((dwOpts & 0x04) != 0);
-	m_options.showHEAD = ((dwOpts & 0x08) != 0);
-	m_options.reduceCrossLines = ((dwOpts & 0x10) != 0);
-	m_options.exactCopySources = ((dwOpts & 0x20) != 0);
-	m_options.foldTags = ((dwOpts & 0x80) != 0);
-	m_options.removeDeletedOnes = ((dwOpts & 0x100) != 0);
-	m_options.showWCRev = ((dwOpts & 0x200) != 0);*/
+	DWORD dwOpts = CRegStdWORD(_T("Software\\TortoiseSVN\\RevisionGraphOptions"), 0x211);
+    m_options.SetRegistryFlags (dwOpts, 0x2ff);
 }
 
 CRevisionGraphDlg::~CRevisionGraphDlg()
 {
-/*	CRegStdWORD regOpts = CRegStdWORD(_T("Software\\TortoiseSVN\\RevisionGraphOptions"), 1);
-	DWORD dwOpts = 0;
-	dwOpts |= m_options.groupBranches ? 0x01 : 0;
-	dwOpts |= m_options.includeSubPathChanges ? 0x02 : 0;
-	dwOpts |= m_options.oldestAtTop ? 0x04 : 0;
-	dwOpts |= m_options.showHEAD ? 0x08 : 0;
-	dwOpts |= m_options.reduceCrossLines ? 0x10 : 0;
-	dwOpts |= m_options.exactCopySources ? 0x20 : 0;
-	dwOpts |= m_options.foldTags ? 0x80 : 0;
-    dwOpts |= m_options.removeDeletedOnes ? 0x100 : 0;
-    dwOpts |= m_options.showWCRev ? 0x200 : 0;
-	regOpts = dwOpts;*/
+    // save option state
+
+	CRegStdWORD regOpts = CRegStdWORD(_T("Software\\TortoiseSVN\\RevisionGraphOptions"), 1);
+    regOpts = m_options.GetRegistryFlags();
 }
 
 void CRevisionGraphDlg::DoDataExchange(CDataExchange* pDX)
@@ -97,16 +82,16 @@ BEGIN_MESSAGE_MAP(CRevisionGraphDlg, CResizableStandAloneDialog)
 	ON_COMMAND(ID_VIEW_COMPAREREVISIONS, OnViewComparerevisions)
 	ON_COMMAND(ID_VIEW_UNIFIEDDIFF, OnViewUnifieddiff)
 	ON_COMMAND(ID_VIEW_UNIFIEDDIFFOFHEADREVISIONS, OnViewUnifieddiffofheadrevisions)
-	ON_COMMAND(ID_VIEW_SHOWALLREVISIONS, &CRevisionGraphDlg::OnViewShowallrevisions)
-	ON_COMMAND(ID_VIEW_GROUPBRANCHES, &CRevisionGraphDlg::OnViewArrangedbypath)
 	ON_COMMAND(ID_FILE_SAVEGRAPHAS, &CRevisionGraphDlg::OnFileSavegraphas)
-	ON_COMMAND(ID_VIEW_TOPDOWN, &CRevisionGraphDlg::OnViewTopDown)
-	ON_COMMAND(ID_VIEW_SHOWHEAD, &CRevisionGraphDlg::OnViewShowHEAD)
-	ON_COMMAND(ID_VIEW_EXACTCOPYSOURCE, &CRevisionGraphDlg::OnViewExactCopySource)
-	ON_COMMAND(ID_VIEW_FOLDTAGS, &CRevisionGraphDlg::OnViewFoldTags)
-	ON_COMMAND(ID_VIEW_REDUCECROSSLINES, &CRevisionGraphDlg::OnViewReduceCrosslines)
-	ON_COMMAND(ID_VIEW_REMOVEDELETEDONES, &CRevisionGraphDlg::OnViewRemoveDeletedOnes)
-	ON_COMMAND(ID_VIEW_SHOWWCREV, &CRevisionGraphDlg::OnViewShowWCRev)
+	ON_COMMAND_EX(ID_VIEW_SHOWALLREVISIONS, &CRevisionGraphDlg::OnToggleOption)
+	ON_COMMAND_EX(ID_VIEW_GROUPBRANCHES, &CRevisionGraphDlg::OnToggleOption)
+	ON_COMMAND_EX(ID_VIEW_TOPDOWN, &CRevisionGraphDlg::OnToggleOption)
+	ON_COMMAND_EX(ID_VIEW_SHOWHEAD, &CRevisionGraphDlg::OnToggleOption)
+	ON_COMMAND_EX(ID_VIEW_EXACTCOPYSOURCE, &CRevisionGraphDlg::OnToggleOption)
+	ON_COMMAND_EX(ID_VIEW_FOLDTAGS, &CRevisionGraphDlg::OnToggleOption)
+	ON_COMMAND_EX(ID_VIEW_REDUCECROSSLINES, &CRevisionGraphDlg::OnToggleOption)
+	ON_COMMAND_EX(ID_VIEW_REMOVEDELETEDONES, &CRevisionGraphDlg::OnToggleOption)
+	ON_COMMAND_EX(ID_VIEW_SHOWWCREV, &CRevisionGraphDlg::OnToggleOption)
 	ON_CBN_SELCHANGE(ID_REVGRAPH_ZOOMCOMBO, OnChangeZoom)
 	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTW, 0, 0xFFFF, OnToolTipNotify)
 	ON_NOTIFY_EX_RANGE(TTN_NEEDTEXTA, 0, 0xFFFF, OnToolTipNotify)
@@ -244,16 +229,16 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	if (InitializeToolbar() != TRUE)
 		return FALSE;
 
-/*	SetOption(ID_VIEW_GROUPBRANCHES, m_options.groupBranches);
-	SetOption(ID_VIEW_SHOWALLREVISIONS, m_options.includeSubPathChanges);
-	SetOption(ID_VIEW_TOPDOWN, m_options.oldestAtTop);
-	SetOption(ID_VIEW_SHOWHEAD, m_options.showHEAD);
-	SetOption(ID_VIEW_EXACTCOPYSOURCE, m_options.exactCopySources);
-	SetOption(ID_VIEW_FOLDTAGS, m_options.foldTags);
-	SetOption(ID_VIEW_REDUCECROSSLINES, m_options.reduceCrossLines);
-    SetOption(ID_VIEW_REMOVEDELETEDONES, m_options.removeDeletedOnes);
-    SetOption(ID_VIEW_SHOWWCREV, m_options.showWCRev);
-*/
+	SetOption(ID_VIEW_GROUPBRANCHES);
+	SetOption(ID_VIEW_SHOWALLREVISIONS);
+	SetOption(ID_VIEW_TOPDOWN);
+	SetOption(ID_VIEW_SHOWHEAD);
+	SetOption(ID_VIEW_EXACTCOPYSOURCE);
+	SetOption(ID_VIEW_FOLDTAGS);
+	SetOption(ID_VIEW_REDUCECROSSLINES);
+    SetOption(ID_VIEW_REMOVEDELETEDONES);
+    SetOption(ID_VIEW_SHOWWCREV);
+
 	CMenu * pMenu = GetMenu();
 	if (pMenu)
 	{
@@ -485,13 +470,14 @@ void CRevisionGraphDlg::OnViewUnifieddiffofheadrevisions()
 	m_Graph.UnifiedDiffRevs(true);
 }
 
-void CRevisionGraphDlg::SetOption(int controlID, bool option)
+void CRevisionGraphDlg::SetOption (UINT controlID)
 {
 	CMenu * pMenu = GetMenu();
 	if (pMenu == NULL)
 		return;
+
 	int tbstate = m_ToolBar.GetToolBarCtrl().GetState(controlID);
-	if (option)
+    if (m_options.IsSelected (controlID))
 	{
 		pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_CHECKED);
 		m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate | TBSTATE_CHECKED);
@@ -503,8 +489,10 @@ void CRevisionGraphDlg::SetOption(int controlID, bool option)
 	}
 }
 
-void CRevisionGraphDlg::OnToggleOption(int controlID, bool& option)
+BOOL CRevisionGraphDlg::OnToggleOption (UINT controlID)
 {
+    // check request for validity
+
 	if (m_Graph.m_bThreadRunning)
 	{
 		int state = m_ToolBar.GetToolBarCtrl().GetState(controlID);
@@ -512,28 +500,37 @@ void CRevisionGraphDlg::OnToggleOption(int controlID, bool& option)
 			state &= ~TBSTATE_CHECKED;
 		else
 			state |= TBSTATE_CHECKED;
-		m_ToolBar.GetToolBarCtrl().SetState(controlID, state);
-		return;
+		m_ToolBar.GetToolBarCtrl().SetState (controlID, state);
+		return FALSE;
 	}
+
 	CMenu * pMenu = GetMenu();
 	if (pMenu == NULL)
-		return;
+		return FALSE;
+
+    // actually toggle the option
+
 	int tbstate = m_ToolBar.GetToolBarCtrl().GetState(controlID);
 	UINT state = pMenu->GetMenuState(controlID, MF_BYCOMMAND);
 	if (state & MF_CHECKED)
 	{
 		pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_UNCHECKED);
 		m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate & (~TBSTATE_CHECKED));
-		option = false;
 	}
 	else
 	{
 		pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_CHECKED);
 		m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate | TBSTATE_CHECKED);
-		option = true;
 	}
 
+    if (((state & MF_CHECKED) != 0) == m_options.IsSelected (controlID))
+        m_options.ToggleSelection (controlID);
+
+    // re-process the data
+
     StartWorkerThread();
+
+    return TRUE;
 }
 
 void CRevisionGraphDlg::StartWorkerThread()
@@ -546,51 +543,6 @@ void CRevisionGraphDlg::StartWorkerThread()
 		CMessageBox::Show(this->m_hWnd, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
 	    InterlockedExchange(&m_Graph.m_bThreadRunning, FALSE);
 	}
-}
-
-void CRevisionGraphDlg::OnViewShowallrevisions()
-{
-//    OnToggleOption (ID_VIEW_SHOWALLREVISIONS, m_options.includeSubPathChanges);
-}
-
-void CRevisionGraphDlg::OnViewArrangedbypath()
-{
-//    OnToggleOption (ID_VIEW_GROUPBRANCHES, m_options.groupBranches);
-}
-
-void CRevisionGraphDlg::OnViewTopDown()
-{
-//    OnToggleOption (ID_VIEW_TOPDOWN, m_options.oldestAtTop);
-}
-
-void CRevisionGraphDlg::OnViewShowHEAD()
-{
-//    OnToggleOption (ID_VIEW_SHOWHEAD, m_options.showHEAD);
-}
-
-void CRevisionGraphDlg::OnViewExactCopySource()
-{
-//    OnToggleOption (ID_VIEW_EXACTCOPYSOURCE, m_options.exactCopySources);
-}
-
-void CRevisionGraphDlg::OnViewFoldTags()
-{
-//    OnToggleOption (ID_VIEW_FOLDTAGS, m_options.foldTags);
-}
-
-void CRevisionGraphDlg::OnViewReduceCrosslines()
-{
-//    OnToggleOption (ID_VIEW_REDUCECROSSLINES, m_options.reduceCrossLines);
-}
-
-void CRevisionGraphDlg::OnViewRemoveDeletedOnes()
-{
-//    OnToggleOption (ID_VIEW_REMOVEDELETEDONES, m_options.removeDeletedOnes);
-}
-
-void CRevisionGraphDlg::OnViewShowWCRev()
-{
-//    OnToggleOption (ID_VIEW_SHOWWCREV, m_options.showWCRev);
 }
 
 void CRevisionGraphDlg::OnCancel()
