@@ -75,6 +75,10 @@ void CVisibleGraphBuilder::Copy (const CFullGraphNode* source, CVisibleGraphNode
 
             if (source == NULL)
                 return;
+
+            // test next node
+
+            filterAction = copyFilter.ShallRemove (source);
         }
 
         // copy the node itself
