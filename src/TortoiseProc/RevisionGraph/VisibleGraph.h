@@ -40,6 +40,7 @@ public:
 
     /// modification
 
+    void Clear();
     CVisibleGraphNode* Add ( const CFullGraphNode* base
                            , CVisibleGraphNode* source);
 

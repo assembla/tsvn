@@ -48,11 +48,7 @@ CVisibleGraphBuilder::~CVisibleGraphBuilder(void)
 
 void CVisibleGraphBuilder::Run()
 {
-    assert (visibleGraph.GetRoot() == NULL);
-
-    if (fullGraph.GetRoot() == NULL)
-        return;
-
+    visibleGraph.Clear();
     Copy (fullGraph.GetRoot(), NULL);
 }
 

@@ -12,11 +12,20 @@ CVisibleGraph::CVisibleGraph()
 
 CVisibleGraph::~CVisibleGraph()
 {
-    if (root)
-        nodeFactory.Destroy (root);
+    Clear();
 }
 
 // modification
+
+void CVisibleGraph::Clear()
+{
+    if (root)
+    {
+        nodeFactory.Destroy (root);
+        root = NULL;
+        nodeCount = 0;
+    }
+}
 
 CVisibleGraphNode* CVisibleGraph::Add ( const CFullGraphNode* base
                                       , CVisibleGraphNode* source)
