@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="TortoiseProc"
 	ProjectGUID="{50797F06-39C5-4802-8E2B-7B7A4EF03214}"
 	RootNamespace="TortoiseProc"
@@ -3100,34 +3100,6 @@
 					<File
 						RelativePath=".\RevisionGraph\SearchPathTree.cpp"
 						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|x64"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath=".\RevisionGraph\SearchPathTree.h"
@@ -3282,6 +3254,18 @@
 						</File>
 						<File
 							RelativePath=".\RevisionGraph\StandardNodeSizeAssignment.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Copy"
+						>
+						<File
+							RelativePath=".\RemoveSimpleChanges.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\RemoveSimpleChanges.h"
 							>
 						</File>
 					</Filter>
