@@ -135,7 +135,7 @@ public:
     /// registry encoding
 
     DWORD GetRegistryFlags() const;
-    void SetRegistryFlags (DWORD flags);
+    void SetRegistryFlags (DWORD flags, DWORD mask);
 };
 
 // options owner and filter management

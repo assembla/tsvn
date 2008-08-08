@@ -86,16 +86,15 @@ DWORD CRevisionGraphOptionList::GetRegistryFlags() const
     return result;
 }
 
-void CRevisionGraphOptionList::SetRegistryFlags (DWORD flags)
+void CRevisionGraphOptionList::SetRegistryFlags (DWORD flags, DWORD mask)
 {
-    for (size_t i = 0, count = options.size(); i < count; ++i, flags /= 2)
+    for (size_t i = 0, count = options.size(); i < count; ++i)
     {
-        if (((flags & 1) != 0) != options[i]->IsSelected())
+        bool optionMask = (mask & (1 << i)) != 0;
+        bool optionFlag = (flags & (1 << i)) != 0;
+
+        if (optionMask && (optionFlag != options[i]->IsSelected()))
             options[i]->ToggleSelection();
     }
-
-    // no flags set for unknown options
-
-    assert (flags == 0);
 }
 
