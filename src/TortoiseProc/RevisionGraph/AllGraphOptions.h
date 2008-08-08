@@ -22,6 +22,11 @@
 #include "ModificationOptions.h"
 #include "LayoutOptions.h"
 
+/**
+* Common container for all revision graph options.
+* Provides access to per-stage sub-sets.
+*/
+
 class CAllRevisionGraphOptions : public CRevisionGraphOptionList
 {
 public:

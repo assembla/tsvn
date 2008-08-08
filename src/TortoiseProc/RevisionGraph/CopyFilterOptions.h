@@ -18,7 +18,14 @@
 //
 #pragma once
 
+// include base classes
+
 #include "RevisionGraphOptions.h"
+
+/**
+* Extends the base interface with a method that decides
+* whether a node or sub-tree shall be copied at all.
+*/
 
 class ICopyFilterOption : public IRevisionGraphOption
 {
@@ -31,8 +38,16 @@ public:
         REMOVE_SUBTREE = 2
     };
 
-    virtual EResult ShallRemove (const CFullGraphNode* node) const;
+    virtual EResult ShallRemove (const CFullGraphNode* node) const = 0;
 };
+
+/**
+* Filtered sub-set of \ref CAllRevisionGraphOptions.
+* It allows the aggregated application of all copy options 
+* at once during the copy process.
+*
+* Contains only \ref ICopyFilterOption instances.
+*/
 
 class CCopyFilterOptions : public CRevisionGraphOptionList
 {
