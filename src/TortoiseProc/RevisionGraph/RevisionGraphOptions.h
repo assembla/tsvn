@@ -22,29 +22,75 @@ class CFullGraphNode;
 class CVisibleGraph;
 class CVisibleGraphNode;
 
+/**
+* Base interface for all binary options.
+*/
+
 class IRevisionGraphOption
 {
 public:
 
-    virtual WORD CommandID() const = 0;
+    /// toolbar button ID
+
+    virtual UINT CommandID() const = 0;
+
+    /// controls the execution order. 
+    /// Lower numbers take precedence before higher ones.
+
     virtual int Priority() const = 0; 
 
+    /// false -> currently grayed out
+
     virtual bool IsAvailable() const = 0;
+
+    /// button shown as "pressed"
+
     virtual bool IsSelected() const = 0;
+
+    /// The actual option may be "reversed".
+    /// IsActive() should either *always* be equal to IsSelected()
+    /// or *always* be equal to !IsSelected().
+
     virtual bool IsActive() const = 0; 
 
-    virtual void ToggleSelection() = 0;
+    /// for simple "on-click" handling
 
+    virtual void ToggleSelection() = 0;
 };
+
+/**
+* Base interface extension for options that must be applied onto
+* the graph nodes in a particular traversal order.
+*/
 
 class IOrderedTraversalOption : public IRevisionGraphOption
 {
 public:
 
+    /// breadth-first traversal
+
     virtual bool WantsCopiesFirst() const = 0;
+
+    /// if false, start with the HEAD / branch end nodes
+
     virtual bool WantsRootFirst() const = 0;
 
 };
+
+/**
+* Container base class for all revision graph options.
+*
+* Options are expected to be created on the heap and
+* to auto-add themselves to an instance of this class.
+* That instance will take over ownership of the options.
+*
+* Every option is expected to provide its own class,
+* i.e. no two options of the same class are allowed
+* in any given CRevisionGraphOptionList instance.
+*
+* Individual options as well as sub-lists are being
+* accessed through RTTI-based filtering.
+*/
 
 class CRevisionGraphOptionList
 {
@@ -62,7 +108,7 @@ protected:
 
     /// utility method
 
-    IRevisionGraphOption* GetOptionByID (WORD id) const;
+    IRevisionGraphOption* GetOptionByID (UINT id) const;
 
     /// construction / destruction (frees all owned options)
 
@@ -81,10 +127,10 @@ public:
 
     /// menu interaction
 
-    bool IsAvailable (WORD id) const;
-    bool IsSelected (WORD id) const;
+    bool IsAvailable (UINT id) const;
+    bool IsSelected (UINT id) const;
 
-    void ToggleSelection (WORD id);
+    void ToggleSelection (UINT id);
 
     /// registry encoding
 

@@ -18,6 +18,10 @@
 //
 #pragma once
 
+// forward declarations
+
+class CRevisionGraphOptionList;
+
 /** Default implementation class for interfaces
 * that derive from IRevisionGraphOption.
 */
@@ -30,7 +34,7 @@ private:
     /// data members
 
     int priority;
-    WORD id;
+    UINT id;
     bool selected;
 
 protected:
@@ -39,14 +43,14 @@ protected:
 
     IRevisionGraphOptionImpl ( CRevisionGraphOptionList& list
                              , int priority
-                             , WORD id);
+                             , UINT id);
     virtual ~IRevisionGraphOptionImpl() {};
 
 public:
 
     /// implement IRevisionGraphOption
 
-    virtual WORD CommandID() const;
+    virtual UINT CommandID() const;
     virtual int Priority() const; 
 
     virtual bool IsAvailable() const;
@@ -62,7 +66,7 @@ template<class Base>
 IRevisionGraphOptionImpl<Base>::IRevisionGraphOptionImpl 
     ( CRevisionGraphOptionList& list
     , int priority
-    , WORD id)
+    , UINT id)
     : priority (priority)
     , id (id)
     , selected (false)
@@ -73,7 +77,7 @@ IRevisionGraphOptionImpl<Base>::IRevisionGraphOptionImpl
 // implement IRevisionGraphOption
 
 template<class Base>
-WORD IRevisionGraphOptionImpl<Base>::CommandID() const
+UINT IRevisionGraphOptionImpl<Base>::CommandID() const
 {
     return id;
 }
@@ -111,9 +115,13 @@ void IRevisionGraphOptionImpl<Base>::ToggleSelection()
 /** Implement a simple boolean option.
 */
 
-template<class Base, int Prio, WORD ID>
+template<class Base, int Prio, UINT ID>
 class CRevisionGraphOptionImpl : public IRevisionGraphOptionImpl<Base>
 {
+protected:
+
+    typedef typename CRevisionGraphOptionImpl<Base, Prio, ID> inherited;
+
 public:
 
     /// construction / destruction

@@ -31,7 +31,7 @@ void CRevisionGraphOptionList::Add (IRevisionGraphOption* option)
 
 // utility method
 
-IRevisionGraphOption* CRevisionGraphOptionList::GetOptionByID (WORD id) const
+IRevisionGraphOption* CRevisionGraphOptionList::GetOptionByID (UINT id) const
 {
     for (size_t i = 0, count = options.size(); i < count; ++i)
         if (options[i]->CommandID() == id)
@@ -54,17 +54,17 @@ CRevisionGraphOptionList::~CRevisionGraphOptionList()
 
 // menu interaction
 
-bool CRevisionGraphOptionList::IsAvailable (WORD id) const
+bool CRevisionGraphOptionList::IsAvailable (UINT id) const
 {
     return GetOptionByID (id)->IsAvailable();
 }
 
-bool CRevisionGraphOptionList::IsSelected (WORD id) const
+bool CRevisionGraphOptionList::IsSelected (UINT id) const
 {
     return GetOptionByID (id)->IsSelected();
 }
 
-void CRevisionGraphOptionList::ToggleSelection (WORD id)
+void CRevisionGraphOptionList::ToggleSelection (UINT id)
 {
     GetOptionByID (id)->ToggleSelection();
 }
