@@ -18,15 +18,19 @@
 //
 #pragma once
 
+#include "CopyFilterOptions.h"
+
 class CFullGraph;
 class CFullGraphNode;
-class CVisibleGraph;
-class CVisibleGraphNode;
-class CCopyFilterOptions;
 
 /**
  * \ingroup TortoiseProc
+ *
+ * Create a filtered copy of the given full graph.
+ * The \a copyFilter determines what nodes and branches 
+ * will be removed.
  */
+
 class CVisibleGraphBuilder
 {
 public:
@@ -52,5 +56,5 @@ private:
 
 	const CFullGraph& fullGraph;
     CVisibleGraph& visibleGraph;
-    const CCopyFilterOptions& copyFilter;
+    CCopyFilterOptions copyFilter;
 };
