@@ -19,6 +19,7 @@
 
 #include "StdAfx.h"
 #include "VisibleGraphNode.h"
+#include "VisibleGraph.h"
 
 // CVisibleGraphNode::CFoldedTag methods
 
@@ -39,9 +40,12 @@ bool CVisibleGraphNode::CFoldedTag::IsAlias() const
 
 CVisibleGraphNode::CFactory::CFactory()
     : nodePool (sizeof (CVisibleGraphNode), 1024)
+    , tagPool (sizeof (CFoldedTag), 1024)
     , copyTargetFactory()
 {
 }
+
+// factory interface
 
 CVisibleGraphNode* CVisibleGraphNode::CFactory::Create 
     ( const CFullGraphNode* base
@@ -55,9 +59,26 @@ CVisibleGraphNode* CVisibleGraphNode::CFactory::Create
 void CVisibleGraphNode::CFactory::Destroy (CVisibleGraphNode* node)
 {
     node->DestroySubNodes (*this, copyTargetFactory);
+    node->DestroyTags (*this);
 
     node->~CVisibleGraphNode();
     nodePool.free (node);
+}
+
+CVisibleGraphNode::CFoldedTag* CVisibleGraphNode::CFactory::Create 
+    ( const CFullGraphNode* tagNode
+    , size_t depth
+    , CFoldedTag* next)
+{
+    CFoldedTag * result = static_cast<CFoldedTag *>(tagPool.malloc());
+    new (result) CFoldedTag (tagNode, depth, next);
+    return result;
+}
+
+void CVisibleGraphNode::CFactory::Destroy (CFoldedTag* tag)
+{
+    tag->~CFoldedTag();
+    tagPool.free (tag);
 }
 
 // CVisibleGraphNode construction / destruction 
@@ -70,7 +91,7 @@ CVisibleGraphNode::CVisibleGraphNode
 	, firstCopyTarget (NULL), firstTag (NULL)
 	, prev (NULL), next (NULL), copySource (NULL)
     , classification (base->GetClassification())
-	, index (NO_INDEX) 
+	, index ((index_t)NO_INDEX) 
 {
     if (prev != NULL)
         if (classification.Is (CNodeClassification::IS_COPY_TARGET))
@@ -91,7 +112,10 @@ CVisibleGraphNode::~CVisibleGraphNode()
 {
     assert (next == NULL);
     assert (firstCopyTarget == NULL);
+    assert (firstTag == NULL);
 };
+
+// destruction utilities
 
 void CVisibleGraphNode::DestroySubNodes 
     ( CFactory& factory
@@ -109,6 +133,16 @@ void CVisibleGraphNode::DestroySubNodes
     while (firstCopyTarget)
     {
         factory.Destroy (copyTargetFactory.remove (firstCopyTarget));
+    }
+}
+
+void CVisibleGraphNode::DestroyTags (CFactory& factory)
+{
+    while (firstTag != NULL)
+    {
+        CFoldedTag* toDestroy = firstTag; 
+        firstTag = toDestroy->next;
+        factory.Destroy (toDestroy);
     }
 }
 
@@ -130,4 +164,142 @@ index_t CVisibleGraphNode::InitIndex (index_t startIndex)
     }
 
     return startIndex;
+}
+
+// remove node and move links to pre-decessor
+
+void CVisibleGraphNode::DropNode (CVisibleGraph* graph)
+{
+    // previous node to receive all our links
+
+    CVisibleGraphNode* target = copySource == NULL
+                              ? prev
+                              : copySource;
+
+    // not valid operation for the root node
+
+    assert (target != NULL);
+
+    // move all branches
+
+    if (firstCopyTarget != NULL)
+    {
+        // find insertion point
+
+        CCopyTarget** targetFirstCopyTarget = &target->firstCopyTarget;
+        while (*targetFirstCopyTarget != NULL)
+            targetFirstCopyTarget = &(*targetFirstCopyTarget)->next();
+
+        // concatenate list
+
+        *targetFirstCopyTarget = firstCopyTarget;
+
+        // adjust copy sources and reset firstCopyTarget
+
+        for (; firstCopyTarget != NULL; firstCopyTarget = firstCopyTarget->next())
+            firstCopyTarget->value()->copySource = target;
+    }
+
+    // move all tags
+
+    if (firstTag != NULL)
+    {
+        // find insertion point
+
+        CFoldedTag** targetFirstTag = &target->firstTag;
+        while (*targetFirstTag != NULL)
+            targetFirstTag = &(*targetFirstTag)->next;
+
+        // concatenate list and reset firstTag
+
+        *targetFirstTag = firstTag;
+        firstTag = NULL;
+    }
+
+    // de-link this node
+
+    if (prev != NULL)
+    {
+        prev->next = next;
+        if (next)
+            next->prev = prev;
+    }
+    else
+    {
+        // find the copy struct that links to *this
+
+        CCopyTarget** copy = &target->firstCopyTarget;
+        for (
+            ; (*copy != NULL) && ((*copy)->value() == this)
+            ; copy = &(*copy)->next())
+        {
+        }
+
+        assert (*copy != NULL);
+
+        // make it point to next or remove it
+
+        if (next)
+        {
+            (*copy)->value() = next;
+            next->prev = NULL;
+            next->copySource = target;
+        }
+        else
+        {
+            // remove from original list and attach it to *this for destruction
+
+            firstCopyTarget = *copy;
+            *copy = (*copy)->next();
+            firstCopyTarget->next() = NULL;
+        }
+    }
+
+    // destruct this
+
+    next = NULL;
+    graph->GetFactory().Destroy (this);
+}
+
+// remove node and add it as folded tag to the parent
+
+void CVisibleGraphNode::FoldTag (CVisibleGraph* graph)
+{
+    assert (copySource && "This operation is only valid for copy nodes!");
+
+    // fold the whole branch into this node
+
+    while (next != NULL)
+        next->DropNode (graph);
+
+    // fold all sub-branches as tags into this node
+
+    while (firstCopyTarget != NULL)
+        firstCopyTarget->value()->FoldTag (graph);
+
+    // move tags to parent
+
+    if (firstTag != NULL)
+    {
+        CFoldedTag* lastTag = NULL;
+        for (CFoldedTag* tag = firstTag; tag != NULL; tag = tag->next)
+        {
+            tag->depth++;
+            lastTag = tag;
+        }
+
+        firstTag->next = copySource->firstTag;
+        copySource->firstTag = firstTag;
+        firstTag = NULL;
+    }
+
+    // create a tag for this node
+
+    CFoldedTag* newTag 
+        = graph->GetFactory().Create (base, 0, copySource->firstTag);
+    copySource->firstTag = newTag;
+
+    // remove this node
+
+    DropNode (graph);
 }

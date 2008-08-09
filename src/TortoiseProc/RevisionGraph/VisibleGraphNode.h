@@ -20,6 +20,10 @@
 
 #include "FullGraphNode.h"
 
+// forward declarations
+
+class CVisibleGraph;
+
 /**
  * \ingroup TortoiseProc
  * Helper class, representing a revision with all the required information
@@ -28,6 +32,11 @@
 class CVisibleGraphNode
 {
 public:
+
+    /**
+    * Represents a branch that has been recognized as "tag" 
+    * and folded into the copy source node.
+    */
 
     class CFoldedTag
     {
@@ -53,6 +62,10 @@ public:
 
         bool IsAlias() const;
         bool IsDeleted() const;
+
+        /// used to modify the depth
+
+        friend CVisibleGraphNode;
     };
 
     /// copy target list type
@@ -66,6 +79,7 @@ public:
     private:
 
         boost::pool<> nodePool;
+        boost::pool<> tagPool;
         CCopyTarget::factory copyTargetFactory;
 
     public:
@@ -79,6 +93,11 @@ public:
         CVisibleGraphNode* Create ( const CFullGraphNode* base
                                   , CVisibleGraphNode* prev);
         void Destroy (CVisibleGraphNode* node);
+
+        CFoldedTag* Create ( const CFullGraphNode* tagNode
+                           , size_t depth
+                           , CFoldedTag* next);
+        void Destroy (CFoldedTag* tag);
     };
 
     friend class CFactory;
@@ -112,10 +131,11 @@ protected:
                       , CCopyTarget::factory& copyTargetFactory);
     ~CVisibleGraphNode();
 
-    /// destruction utility
+    /// destruction utilities
 
     void DestroySubNodes ( CFactory& factory
                          , CCopyTarget::factory& copyTargetFactory);
+    void DestroyTags (CFactory& factory);
 
 public:
 
@@ -140,6 +160,14 @@ public:
     /// set index members within the whole sub-tree
 
     index_t InitIndex (index_t startIndex);
+
+    /// remove node and move links to pre-decessor
+
+    void DropNode (CVisibleGraph* graph);
+
+    /// remove node and add it as folded tag to the parent
+
+    void FoldTag (CVisibleGraph* graph);
 };
 
 /// CVisibleGraphNode::CFoldedTag construction
