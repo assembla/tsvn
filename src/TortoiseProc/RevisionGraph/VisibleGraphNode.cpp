@@ -42,6 +42,7 @@ CVisibleGraphNode::CFactory::CFactory()
     : nodePool (sizeof (CVisibleGraphNode), 1024)
     , tagPool (sizeof (CFoldedTag), 1024)
     , copyTargetFactory()
+    , nodeCount (0)
 {
 }
 
@@ -53,6 +54,8 @@ CVisibleGraphNode* CVisibleGraphNode::CFactory::Create
 {
     CVisibleGraphNode * result = static_cast<CVisibleGraphNode *>(nodePool.malloc());
     new (result) CVisibleGraphNode (base, prev, copyTargetFactory);
+
+    ++nodeCount;
     return result;
 }
 
@@ -63,6 +66,8 @@ void CVisibleGraphNode::CFactory::Destroy (CVisibleGraphNode* node)
 
     node->~CVisibleGraphNode();
     nodePool.free (node);
+
+    --nodeCount;
 }
 
 CVisibleGraphNode::CFoldedTag* CVisibleGraphNode::CFactory::Create 
@@ -132,7 +137,9 @@ void CVisibleGraphNode::DestroySubNodes
 
     while (firstCopyTarget)
     {
-        factory.Destroy (copyTargetFactory.remove (firstCopyTarget));
+        CVisibleGraphNode* target = copyTargetFactory.remove (firstCopyTarget);
+        if (target != NULL)
+            factory.Destroy (target);
     }
 }
 
@@ -230,7 +237,7 @@ void CVisibleGraphNode::DropNode (CVisibleGraph* graph)
 
         CCopyTarget** copy = &target->firstCopyTarget;
         for (
-            ; (*copy != NULL) && ((*copy)->value() == this)
+            ; (*copy != NULL) && ((*copy)->value() != this)
             ; copy = &(*copy)->next())
         {
         }
@@ -251,7 +258,9 @@ void CVisibleGraphNode::DropNode (CVisibleGraph* graph)
 
             firstCopyTarget = *copy;
             *copy = (*copy)->next();
+
             firstCopyTarget->next() = NULL;
+            firstCopyTarget->value() = NULL;
         }
     }
 

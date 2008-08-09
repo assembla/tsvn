@@ -37,7 +37,6 @@ private:
     /// the graph is actually a tree
 
     CVisibleGraphNode* root;
-    size_t nodeCount;
 
 public:
 
@@ -78,7 +77,7 @@ inline CVisibleGraphNode* CVisibleGraph::GetRoot()
 
 inline size_t CVisibleGraph::GetNodeCount() const
 {
-    return nodeCount;
+    return nodeFactory.GetNodeCount();
 }
 
 inline CVisibleGraphNode::CFactory& CVisibleGraph::GetFactory()

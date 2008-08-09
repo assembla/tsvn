@@ -6,7 +6,6 @@
 CVisibleGraph::CVisibleGraph()
     : nodeFactory()
     , root (NULL)
-    , nodeCount (0)
 {
 }
 
@@ -23,7 +22,8 @@ void CVisibleGraph::Clear()
     {
         nodeFactory.Destroy (root);
         root = NULL;
-        nodeCount = 0;
+
+        assert (GetNodeCount() == 0);
     }
 }
 
@@ -37,7 +37,6 @@ CVisibleGraphNode* CVisibleGraph::Add ( const CFullGraphNode* base
     CVisibleGraphNode* result 
         = nodeFactory.Create (base, source);
 
-    ++nodeCount;
     if (root == NULL)
         root = result;
 

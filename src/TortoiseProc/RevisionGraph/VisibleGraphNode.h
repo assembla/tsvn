@@ -82,6 +82,8 @@ public:
         boost::pool<> tagPool;
         CCopyTarget::factory copyTargetFactory;
 
+        size_t nodeCount;
+
     public:
 
         /// factory creation
@@ -98,6 +100,10 @@ public:
                            , size_t depth
                            , CFoldedTag* next);
         void Destroy (CFoldedTag* tag);
+
+        /// instance tracking
+
+        size_t GetNodeCount() const;
     };
 
     friend class CFactory;
@@ -202,6 +208,13 @@ inline bool CVisibleGraphNode::CFoldedTag::IsDeleted() const
 {
     return tagNode->GetClassification()
         .Is (CNodeClassification::SUBTREE_DELETED);
+}
+
+/// CVisibleGraphNode::CFactory data access
+
+inline size_t CVisibleGraphNode::CFactory::GetNodeCount() const
+{
+    return nodeCount;
 }
 
 /// CVisibleGraphNode data access
