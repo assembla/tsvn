@@ -85,6 +85,10 @@ public:
     {
         return item;
     }
+    T*& value()
+    {
+        return item;
+    }
 
     const simple_list<T>* next() const
     {
