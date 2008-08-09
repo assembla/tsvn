@@ -23,6 +23,7 @@
 
 #include "RemoveSimpleChanges.h"
 #include "RemoveDeletedBranches.h"
+#include "FoldTags.h"
 
 #include "StandardNodeSizeAssignment.h"
 #include "StandardNodePositioning.h"
@@ -43,7 +44,7 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_REDUCECROSSLINES> (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_EXACTCOPYSOURCE> (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, 0> (*this);   // 0x40 is not used
-    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_FOLDTAGS> (*this);
+    new CFoldTags (*this);
     new CRemoveDeletedBranches (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_SHOWWCREV> (*this);
 
