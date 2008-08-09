@@ -256,6 +256,7 @@ DWORD CFullGraphFinalizer::BackwardClassification (CFullGraphNode* node)
 
         classification      // any change to this node applies to all copies as well
             |=  (node->GetClassification().GetFlags() * CNodeClassification::ALL_COPIES_SHIFT)
+              & commonCopyClassfication
               & CNodeClassification::ALL_COPIES_MASK;
 
         classification      // add changes that occur in *any* sub-tree
