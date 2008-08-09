@@ -66,12 +66,13 @@ public:
     enum 
     {
         IS_MASK            = 0x000000ff,
+        IS_OPERATION_MASK  = 0x000000f0,
         COPIES_TO_MASK     = 0x0000ff00,
         ALL_COPIES_MASK    = 0x000f0000,
         SPECIAL_PROPS_MASK = 0xff000000,
 
         COPIES_TO_SHIFT    = 0x00000100,
-        ALL_COPIES_SHIFT   = 0x00010000,
+        ALL_COPIES_SHIFT   = 0x00001000,
 
         SUBTREE_DELETED    = IS_DELETED | ALL_COPIES_DELETED
     };
