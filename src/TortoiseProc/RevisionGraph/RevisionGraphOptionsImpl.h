@@ -132,3 +132,42 @@ public:
     }
 };
 
+/** Implement an IOrderedTraversalOption boolean option.
+*/
+
+template<class Base, int Prio, UINT ID, bool CopyiesFirst, bool RootFirst>
+class COrderedTraversalOptionImpl 
+    : public CRevisionGraphOptionImpl<Base, Prio, ID>
+{
+protected:
+
+    /// for simplied construction by the _derived_ class
+
+    typedef typename COrderedTraversalOptionImpl< Base
+                                                , Prio
+                                                , ID
+                                                , CopyiesFirst
+                                                , RootFirst> inherited;
+
+public:
+
+    /// construction / destruction
+
+    COrderedTraversalOptionImpl (CRevisionGraphOptionList& list)
+        : CRevisionGraphOptionImpl<Base, Prio, ID>(list)
+    {
+    }
+
+    /// implement IOrderedTraversalOption
+
+    virtual bool WantsCopiesFirst() const
+    {
+        return CopyiesFirst;
+    }
+
+    virtual bool WantsRootFirst() const
+    {
+        return RootFirst;
+    }
+};
+
