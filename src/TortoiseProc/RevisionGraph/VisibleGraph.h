@@ -18,7 +18,15 @@
 //
 #pragma once
 
+// required includes
+
 #include "VisibleGraphNode.h"
+
+/**
+* Contains a filtered copy of some \ref CFullGraph instance.
+* 
+* Acts as factory and container for all nodes and their sub-structres.
+*/
 
 class CVisibleGraph
 {
@@ -50,6 +58,10 @@ public:
     const CVisibleGraphNode* GetRoot() const;
 
     size_t GetNodeCount() const;
+
+    /// factory access
+
+    CVisibleGraphNode::CFactory& GetFactory();
 };
 
 /// member access
@@ -67,4 +79,9 @@ inline CVisibleGraphNode* CVisibleGraph::GetRoot()
 inline size_t CVisibleGraph::GetNodeCount() const
 {
     return nodeCount;
+}
+
+inline CVisibleGraphNode::CFactory& CVisibleGraph::GetFactory()
+{
+    return nodeFactory;
 }
