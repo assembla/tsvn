@@ -18,7 +18,14 @@
 //
 #pragma once
 
+// include base classes
+
 #include "RevisionGraphOptions.h"
+
+/**
+* Extends the base interface with a method that has full
+* modifying access to a given visible graph.
+*/
 
 class IModificationOption : public IOrderedTraversalOption
 {
@@ -26,6 +33,14 @@ public:
 
     virtual void Apply (CVisibleGraph* graph, CVisibleGraphNode* node) = 0;
 };
+
+/**
+* Filtered sub-set of \ref CAllRevisionGraphOptions.
+* It applies all options in the order defined by their \ref priority.
+* The option instances may transform the graph any way they consider fit.
+*
+* Contains only \ref IModificationOption instances.
+*/
 
 class CModificationOptions : public CRevisionGraphOptionList
 {
@@ -49,6 +64,8 @@ private:
                                   , CVisibleGraphNode* node);
 
 public:
+
+    /// construction / destruction
 
     CModificationOptions (const std::vector<IModificationOption*>& options);
     virtual ~CModificationOptions() {}

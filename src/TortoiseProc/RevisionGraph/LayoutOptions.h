@@ -18,10 +18,20 @@
 //
 #pragma once
 
+// include base classes
+
 #include "RevisionGraphOptions.h"
-#include "RevisionGraphOptionsImpl.h"
+
+// forward declarations
 
 class IRevisionGraphLayout;
+
+/**
+* Extends the base interface with a method that has full
+* modifying access to a given graph layout. In most cases,
+* the derived class will require \ref layout to be of
+* a particular sub-class and use that classes' interface.
+*/
 
 class ILayoutOption : public IRevisionGraphOption
 {
@@ -33,6 +43,14 @@ public:
     virtual void ApplyTo (IRevisionGraphLayout* layout) = 0;
 };
 
+/**
+* Filtered sub-set of \ref CAllRevisionGraphOptions.
+* It applies all options in the order defined by their \ref priority.
+* The option instances may transform the layout any way they consider fit.
+*
+* Contains only \ref ILayoutOption instances.
+*/
+
 class CLayoutOptions : public CRevisionGraphOptionList
 {
 private:
@@ -40,6 +58,8 @@ private:
     std::vector<ILayoutOption*> options;
 
 public:
+
+    // construction / destruction
 
     CLayoutOptions (const std::vector<ILayoutOption*>& options);
     virtual ~CLayoutOptions() {}
