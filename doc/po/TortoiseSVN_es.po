@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2008-07-20 22:35 +0000\n"
-"PO-Revision-Date: 2008-08-31 13:49+0100\n"
+"PO-Revision-Date: 2008-08-31 16:12+0100\n"
 "Last-Translator: Fernando P. Nájera Cano <yo@FernandoNajera.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -5138,9 +5138,8 @@ msgstr "Características de registro de fusión"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:5948
-#, fuzzy
 msgid "merge tracking log"
-msgstr "controlando errores"
+msgstr "historial de registro de fusión"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:5950
@@ -5179,9 +5178,8 @@ msgstr "A veces querrá cambiar un mensaje de registro que introdujo en su día,
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:5991
-#, fuzzy
 msgid "Subversion lets you change both the log message and the author of revisions any time you want. But since such changes can't be undone (those changes are not versioned) this feature is disabled by default. To make this work, you must set up a pre-revprop-change hook. Please refer to the chapter on <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts</citetitle></ulink> in the Subversion Book for details about how to do that. Read <xref linkend=\"tsvn-repository-hooks\"/> to find some further notes on implementing hooks on a Windows machine."
-msgstr "Subversion le deja cambiar tanto el mensaje de registro como el autor de las revisiones en cualquier momento. Pero como estos cambios no se pueden deshacer (estos cambios no se versionan), esta característica está deshabilitada por defecto. Para hacer que ésto funcione, debe preparar un gancho pre-revprop-change. Por favor consulte el capítulo sobre <ulink url=\"http://svnbook.red-bean.com/en/1.1/ch05s02.html#svn-ch-5-sect-2.1\"><citetitle>Scripts Gancho</citetitle></ulink> en el Libro de Subversion para tener más detalles sobre cómo hacerlo. Lea <xref linkend=\"tsvn-repository-hooks\"/> para encontrar más notas sobre cómo implementar ganchos en una máquina Windows."
+msgstr "Subversion le deja cambiar tanto el mensaje de registro como el autor de las revisiones en cualquier momento. Pero como estos cambios no se pueden deshacer (estos cambios no se versionan), esta característica está deshabilitada por defecto. Para hacer que ésto funcione, debe preparar un gancho pre-revprop-change. Por favor consulte el capítulo sobre <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Scripts gancho</citetitle></ulink> en el Libro de Subversion para tener más detalles sobre cómo hacerlo. Lea <xref linkend=\"tsvn-repository-hooks\"/> para encontrar más notas sobre cómo implementar ganchos en una máquina Windows."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6004
@@ -5220,7 +5218,6 @@ msgstr "Tenga en cuenta que estos filtros actúan sobre los mensajes ya obtenido
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6049
-#, fuzzy
 msgid "You can also filter the path names in the bottom pane using the <guilabel>Hide unrelated changed paths</guilabel> checkbox. Related paths are those which contain the path used to display the log. If you fetch the log for a folder, that means anything in that folder or below it. For a file it means just that one file. The checkbox is tristate: you can show all paths, grey out the unrelated ones, or hide the unrelated paths completely."
 msgstr "También puede filtrar los nombres de las rutas en el panel inferior utilizando la casilla <guilabel>Ocultar rutas cambiadas no relacionadas</guilabel>. Las rutas relacionadas son aquellas que contienen la ruta utilizada para mostrar el registro. Si está obteniendo el registro de una carpeta, eso significa todo lo que esté en esa carpeta o debajo de ella. Para un fichero, significa sólo ese fichero. La casilla tiene tres estados: puede mostrar todas las rutas, poner en gris las rutas no relacionadas, u ocultar esas rutas completamente."
 
@@ -5276,7 +5273,6 @@ msgstr "<placeholder-1/> Este gráfico le muestra qué autores han estado activo
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6105
-#, fuzzy
 msgid "Where there are a few major authors and many minor contributors, the number of tiny segments can make the graph more difficult to read. The slider at the bottom allows you to set a threshold (as a percentage of total commits) below which any activity is grouped into an <emphasis>Others</emphasis> category."
 msgstr "Cuando hay unos pocos autores muy activos y muchos pequeños contribuyentes, el número de segmentos pequeños puede hacer que el gráfico sea más dificil de leer. El selector deslizante en la parte inferior le permite establecer un límite (el porcentaje sobre el total de confirmaciones) bajo el cual cualquier actividad se agrupa en una categoría <emphasis>Otros</emphasis>."
 
@@ -5302,7 +5298,6 @@ msgstr "Cuando hay varios autores, puede obtener muchas líneas en el gráfico. 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6135
-#, fuzzy
 msgid "By default the analysis is case-sensitive, so users <literal>PeterEgan</literal> and <literal>PeteRegan</literal> are treated as different authors. However, in many cases user names are not case-sensitive, and are sometimes entered inconsistently, so you may want <literal>DavidMorgan</literal> and <literal>davidmorgan</literal> to be treated as the same person. Use the <guilabel>Authors case insensitive</guilabel> checkbox to control how this is handled."
 msgstr "Por defecto el análisis distingue mayúsculas y minúsculas, por lo que los usuarios <literal>PeterEgan</literal> y <literal>PeteRegan</literal> se tratan como autores diferentes. Sin embargo, en muchos casos los nombres de usuario no distinguen mayúsculas y minúsculas, y a veces se introducen de forma inconsistente, por lo que puede querer que <literal>DavidMorgan</literal> y <literal>davidmorgan</literal> se traten como la misma persona. Utilice la casilla <guilabel>Autores sin importar mayús/minús</guilabel> para controlar este comportamiento."
 
@@ -5357,7 +5352,6 @@ msgstr "comparar"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6189
-#, fuzzy
 msgid "One of the commonest requirements in project development is to see what has changed. You might want to look at the differences between two revisions of the same file, or the differences between two separate files. TortoiseSVN provides a built-in tool named <application>TortoiseMerge</application> for viewing differences of text files. For viewing differences of image files, TortoiseSVN also has a tool named <application>TortoiseIDiff</application>. Of course, you can use your own favourite diff program if you like."
 msgstr "Uno de los requisitos más comunes en el desarrollo de proyectos es ver qué ha cambiado. Puede querer ver las diferencias entre dos revisiones del mismo fichero, o las diferencias entre dos ficheros separados. TortoiseSVN provee una herramienta integrada llamada <application>TortoiseMerge</application> para ver las diferencias entre ficheros de texto. Para ver las diferencias entre ficheros de imagen, TortoiseSVN también tiene una herramienta llamada <application>TortoiseIDiff</application>. Por supuesto, puede utilizar su herramienta de diferencias favorita si lo desea."
 
@@ -5448,7 +5442,6 @@ msgstr "Diferencias entre un fichero/carpeta en la copia de trabajo y una URL"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6323
-#, fuzzy
 msgid "If you want to see the differences between a file in your working copy, and a file in any Subversion repository, you can do that directly in explorer by selecting the file then holding down the <keycap>Shift</keycap> key whilst right clicking to obtain the context menu. Select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff with URL</guimenuitem></menuchoice>. You can do the same thing for a working copy folder. TortoiseMerge shows these differences in the same way as it shows a patch file - a list of changed files which you can view one at a time."
 msgstr "Si desea ver las diferencias entre un fichero en su copia de trabajo, y un fichero en cualquier repositorio de Subversion, puede hacerlo directamente en el explorador seleccionando el fichero y pulsando la tecla <keycap>Mayúsculas</keycap> mientras hace click con el botón derecho para obtener el menú contextual. Seleccione <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diferenciar con URL</guimenuitem></menuchoice>. Puede hacer lo mismo para una carpeta de copia de trabajo. TortoiseMerge muestra esas diferencias de la misma forma que muestra un fichero de parche - una lista de ficheros cambiados que puede ver de uno en uno."
 
@@ -5469,15 +5462,13 @@ msgstr "Diferencias entre carpetas"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6354
-#, fuzzy
 msgid "The built-in tools supplied with TortoiseSVN do not support viewing differences between directory hierarchies. But if you have an external tool which does support that feature, you can use that instead. In <xref linkend=\"tsvn-dug-diff-tools\"/> we tell you about some tools which we have used."
 msgstr "Las herramientas proporcionadas con TortoiseSVN no le permiten ver las diferencias entre jerarquías de directorios. Pero si tiene una herramienta externa que soporte esta funcionalidad, puede utilizarla. En <xref linkend=\"tsvn-dug-diff-tools\"/> le contamos algunas de las herramientas que hemos utilizado."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6364
-#, fuzzy
 msgid "If you have configured a third party diff tool, you can use <keycap>Shift</keycap> when selecting the Diff command to use the alternate tool. Read <xref linkend=\"tsvn-dug-settings-progs\"/> to find out about configuring other diff tools."
-msgstr "Si ha configurado una herramienta de diferenciado de terceros, puede utilizar <action>Mayús</action> cuando seleccione el comando Diferenciar para utilizar la herramienta alternativa. Lea <xref linkend=\"tsvn-dug-settings-progs\"/> para saber más sobre configurar otras herramientas de diferenciación."
+msgstr "Si ha configurado una herramienta de diferenciado de terceros, puede utilizar <keycap>Mayúsculas</keycap>cuando seleccione el comando Diferenciar para utilizar la herramienta alternativa. Lea <xref linkend=\"tsvn-dug-settings-progs\"/> para saber más sobre configurar otras herramientas de diferenciación."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:6373
@@ -5551,9 +5542,8 @@ msgstr "También puede exportar la lista de ficheros cambiados a un fichero de t
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6441
-#, fuzzy
 msgid "If you want to export the list of files <emphasis>and</emphasis> the actions (modified, added, deleted) as well, you can do that using the keyboard shortcuts <keycap>Ctrl-A</keycap> to select all entries and <keycap>Ctrl-C</keycap> to copy the detailed list to the clipboard."
-msgstr "Si quiere exportar la lista de ficheros <emphasis>y también</emphasis> las acciones (modificado, añadido, borrado), puede hacerlo utilizando los atajos de teclado <action>Ctrl-A</action> para seleccionar todas las entradas y <action>Ctrl-C</action> para copiar la lista detallada al portapapeles."
+msgstr "Si quiere exportar la lista de ficheros <emphasis>y también</emphasis> las acciones (modificado, añadido, borrado), puede hacerlo utilizando los atajos de teclado <keycap>Ctrl-A</keycap> para seleccionar todas las entradas y <keycap>Ctrl-C</keycap> para copiar la lista detallada al portapapeles."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6447
@@ -5597,31 +5587,26 @@ msgstr "El visor de diferencias de imágenes"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6478
-#, fuzzy
 msgid "<placeholder-1/><menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff</guimenuitem></menuchoice> for any of the common image file formats will start TortoiseIDiff to show image differences. By default the images are displayed side-by-side but you can use the View menu or toolbar to switch to a top-bottom view instead, or if you prefer, you can overlay the images and pretend you are using a lightbox."
-msgstr "<placeholder-1/><menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff</guimenuitem></menuchoice> para cualquiera de los formatos de imágenes comunes iniciará TortoiseIDiff para mostrar las diferencias entre las imágenes. Por defecto las imágenes se muestran una al lado de la otra, pero puede utilizar el menú Ver o la barra de herramientas para cambiar a una vista arriba-abajo, o si lo prefiere, puede superponer las imágenes y simular que está usando una caja de luces. Un deslizador en la parte superior controla la intensidad relativa de las imágenes (fundido alpha). También puede utilizar <action>Ctrl-Mayús-Rueda</action> para cambiar el fundido."
+msgstr "<placeholder-1/><menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff</guimenuitem></menuchoice> para cualquiera de los formatos de imágenes comunes iniciará TortoiseIDiff para mostrar las diferencias entre las imágenes. Por defecto las imágenes se muestran una al lado de la otra, pero puede utilizar el menú Ver o la barra de herramientas para cambiar a una vista arriba-abajo, o si lo prefiere, puede superponer las imágenes y simular que está usando una caja de luces."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6493
-#, fuzzy
 msgid "Naturally you can also zoom in and out and pan around the image. You can also pan the image simply by left-dragging it. If you select the <guilabel>Link images together</guilabel> option, then the pan controls (scrollbars, mousewheel) on both images are linked."
-msgstr "Naturalmente, también puede acercar y alejar el zoom y moverse por la imagen. Si selecciona la opción <guilabel>Unir las imágenes</guilabel>, los controles de desplazamiento (barras de desplazamiento, rueda del ratón) de ambas imágenes quedan unidos."
+msgstr "Naturalmente, también puede acercar y alejar el zoom y moverse por la imagen. También puede desplazarse por la imagen símplemente arrastrando con el botón izquierdo. Si selecciona la opción <guilabel>Unir las imágenes</guilabel>, los controles de desplazamiento (barras de desplazamiento, rueda del ratón) de ambas imágenes quedan unidos."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6499
-#, fuzzy
 msgid "An image info box shows details about the image file, such as the size in pixels, resolution and colour depth. If this box gets in the way, use <menuchoice><guimenu>View</guimenu><guimenuitem>Image Info</guimenuitem></menuchoice> to hide it. You can get the same information in a tooltip if you hover the mouse over the image title bar."
-msgstr "Un cuadro de información de imagen le muestra detalles sobre el fichero de imagen, tales como el tamaño en pixeles, la resolución y la profundidad de color. Si la caja le molesta, utilice <menuchoice><guimenu>Ver</guimenu><guimenuitem>Información de imagen</guimenuitem></menuchoice> para ocultarla."
+msgstr "Un cuadro de información de imagen le muestra detalles sobre el fichero de imagen, tales como el tamaño en pixeles, la resolución y la profundidad de color. Si la caja le molesta, utilice <menuchoice><guimenu>Ver</guimenu><guimenuitem>Información de imagen</guimenuitem></menuchoice> para ocultarla. Puede obtener la misma información en una etiqueta de ayuda si pasa el cursor por encima de la barra de título de la imagen."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6511
-#, fuzzy
 msgid "When the images are overlaid, the relative intensity of the images (alpha blend) is controlled by a slider control at the left side. You can click anywhere in the slider to set the blend directly, or you can drag the slider to change the blend interactively. <keycap>Ctrl+Shift</keycap>-<action>Wheel</action> to change the blend."
-msgstr "Cuando las imágenes se superponen, la intensidad relativa de las imágenes (alpha blend) se controla mediante un control deslizante en el lado izquierdo. Puede pulsar en cualquier parte del deslizador para establecer el blend directamente, o puede arrastrar el deslizador para cambiar el blend de forma interactiva. <action>Ctrl-Mays-Rueda</action> para cambiar el blend."
+msgstr "Cuando las imágenes se superponen, la intensidad relativa de las imágenes (alpha blend) se controla mediante un control deslizante en el lado izquierdo. Puede pulsar en cualquier parte del deslizador para establecer el blend directamente, o puede arrastrar el deslizador para cambiar el blend de forma interactiva. <keycap>Ctrl+Mayúsculas</keycap>-<action>Rueda</action> para cambiar el blend."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6518
-#, fuzzy
 msgid "The button above the slider toggles between two preset blends, indicated by the markers on either side of the blend slider. By default one is at the top and the other at the bottom, so the toggle button just switches between one image and the other. You can move the markers to choose the two blend values that the toggle button will use."
 msgstr "El botón que está encima del deslizador cambia entre dos blends predefinidos, indicados por los marcadores en cada lado del deslizador de blend. Por defecto uno está en la parte superior y otro en la inferior, por lo que el botón de cambio simplemente cambia entre una imagen y la otra. Puede mover estos marcadores para elegir dos valores de blend que utilizará el botón de cambio."
 
@@ -5707,7 +5692,6 @@ msgstr "Araxis Merge"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6618
-#, fuzzy
 msgid "Araxis Merge is a useful commercial tool for diff and merging both files and folders. It does three-way comparison in merges and has synchronization links to use if you've changed the order of functions. Download it from <ulink url=\"http://www.araxis.com/merge/index.html\"><citetitle>Araxis</citetitle></ulink>."
 msgstr "Araxis Merge es una útil herramienta comercial para ver diferencias y fusionar tanto ficheros como carpetas. Hace comparaciones a tres bandas en las fusiones y tiene vínculos de sincronización para utilizar si ha cambiado el orden las funciones. Descárgelo desde <ulink url=\"http://www.araxis.com/merge/index.html\"><citetitle>Araxis</citetitle></ulink>."
 
@@ -5775,9 +5759,8 @@ msgstr "Añadir muchos"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6696
-#, fuzzy
 msgid "You can also use the Add command on already versioned folders. In that case, the add dialog will show you all unversioned files inside that versioned folder. This helps if you have many new files and need to add them all at once."
-msgstr "También puede usar el comando Añadir en carpetas que ya estén versionadas. En ese caso, el diálogo de añadir le mostrará todos los ficheros sin versionar dentro de la carpeta versionada. Esto ayuda si tiene muchos ficheros nuevos y necesita añadirlos todos de golpe."
+msgstr "También puede usar el comando Añadir en carpetas que ya estén versionadas. En ese caso, el diálogo de añadir le mostrará todos los ficheros sin versionar dentro de esa carpeta versionada. Esto ayuda si tiene muchos ficheros nuevos y necesita añadirlos todos de golpe."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6709
@@ -5815,9 +5798,8 @@ msgstr "También puede añadir ficheros dentro de una copia de trabajo simplemen
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6741
-#, fuzzy
 msgid "If you add a file or folder by mistake, you can undo the addition before you commit using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Undo add...</guimenuitem></menuchoice>."
-msgstr "En su copia de trabajo seleccione <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Fusionar</guimenuitem></menuchoice>."
+msgstr "Si añade un fichero o carpeta por error, puede deshacer la adición antes de confirmar utilizando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Deshacer añadir...</guimenuitem></menuchoice>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:6751
@@ -5865,21 +5847,18 @@ msgstr "La manera más fácil de copiar ficheros y carpetas desde dentro de una 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6787
-#, fuzzy
 msgid "You can copy files and folders from your working copy to another location in the repository using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Branch/Tag</guimenuitem></menuchoice>. Refer to <xref linkend=\"tsvn-dug-branch-1\"/> to find out more."
-msgstr "Quiere cambiar a una rama o a un directorio diferente dentro del mismo repositorio. Para hacer eso debería utilizar <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Cambiar...</guimenuitem></menuchoice>. Para más información, lea <xref linkend=\"tsvn-dug-switch-1\"/>."
+msgstr "Puede copiar ficheros y carpetas desde su copia de trabajo a otro lugar del repositorio utilizando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Rama/Etiqueta</guimenuitem></menuchoice>. Para saber más, vea <xref linkend=\"tsvn-dug-branch-1\"/>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6796
-#, fuzzy
 msgid "You can locate an older version of a file or folder in the log dialog and copy it to a new location in the repository directly from the log dialog using <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Create branch/tag from revision</guimenuitem></menuchoice>. Refer to <xref linkend=\"tsvn-dug-showlog-2\"/> to find out more."
-msgstr "Quiere cambiar a una rama o a un directorio diferente dentro del mismo repositorio. Para hacer eso debería utilizar <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Cambiar...</guimenuitem></menuchoice>. Para más información, lea <xref linkend=\"tsvn-dug-switch-1\"/>."
+msgstr "Puede localizar una versión anterior de un fichero o carpeta en el diálogo de registro y copiarlo a un nuevo lugar del repositorio directamente desde el diálogo de registro utilizando <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>Crear rama/etiqueta desde la revisión</guimenuitem></menuchoice>. Para saber más, vea <xref linkend=\"tsvn-dug-showlog-2\"/>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6806
-#, fuzzy
 msgid "You can also use the repository browser to locate content you want, and copy it into your working copy directly from the repository, or copy between two locations within the repository. Refer to <xref linkend=\"tsvn-dug-repobrowser\"/> to find out more."
-msgstr "También puede utilizar el navegador de repositorio para localizar el contenido que quiere, y copiarlo en su copia de trabajo directamente desde el repositorio. Para más información lea <xref linkend=\"tsvn-dug-repobrowser\"/>."
+msgstr "También puede utilizar el navegador de repositorio para localizar el contenido que quiere, y copiarlo en su copia de trabajo directamente desde el repositorio, o copiar entre dos lugares dentro del repositorio. Para más información lea <xref linkend=\"tsvn-dug-repobrowser\"/>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:6813
@@ -5913,9 +5892,8 @@ msgstr "ficheros/carpetas no versionados"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6840
-#, fuzzy
 msgid "<placeholder-1/> In most projects you will have files and folders that should not be subject to version control. These might include files created by the compiler, <filename>*.obj, *.lst</filename>, maybe an output folder used to store the executable. Whenever you commit changes, TortoiseSVN shows your unversioned files, which fills up the file list in the commit dialog. Of course you can turn off this display, but then you might forget to add a new source file."
-msgstr "<placeholder-1/> En la mayoría de los proyectos tendrá ficheros y carpetas que no deberán estar sujetos al control de versiones. Éstas pueden incluir ficheros creados por el compilador, <filename>*.obj, *.lst</filename>, quizás incluyan una carpeta de salida donde se almacenan los ejecutables. Cuando confirma los cambios, TSVN le muestra los ficheros no versionados, que rellenan a la lista de ficheros del diálogo de confirmar. Por supuesto que puede desactivarlos para que no se muestren, pero entonces quizás se olvide de añadir un nuevo fichero fuente."
+msgstr "<placeholder-1/> En la mayoría de los proyectos tendrá ficheros y carpetas que no deberán estar sujetos al control de versiones. Esto puede incluir ficheros creados por el compilador, <filename>*.obj, *.lst</filename>, o quizás una carpeta de salida donde se almacenan los ejecutables. Cuando confirma los cambios, TortoiseSVN le muestra los ficheros no versionados, que rellenan la lista de ficheros del diálogo de confirmar. Por supuesto que puede desactivarlos para que no se muestren, pero entonces quizás se olvide de añadir un nuevo fichero de código fuente."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6853
@@ -5929,9 +5907,8 @@ msgstr "Si <action>hace click con el botón derecho</action> en un único ficher
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6871
-#, fuzzy
 msgid "If you want to remove one or more items from the ignore list, <action>right click</action> on those items and select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Remove from Ignore List</guimenuitem></menuchoice> You can also access a folder's <literal>svn:ignore</literal> property directly. That allows you to specify more general patterns using filename globbing, described in the section below. Read <xref linkend=\"tsvn-dug-propertypage\"/> for more information on setting properties directly. Please be aware that each ignore pattern has to be placed on a separate line. Separating them by spaces does not work."
-msgstr "Si desea eliminar uno o más ítems de la lista de ignorados, <action>haga click con el botón derecho</action> en dichos ítems y seleccione <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Eliminar de la Lista de Ignorados</guimenuitem></menuchoice> También puede acceder a la propiedad <literal>svn:ignore</literal> de la carpeta directamente. Esto le permitirá especificar patrones más generales utilizando expansión de comodines en los nombres de los ficheros, descrito en la sección siguiente. Para más información sobre establecer propiedades directamente, lea <xref linkend=\"tsvn-dug-propertypage\"/>."
+msgstr "Si desea eliminar uno o más ítems de la lista de ignorados, <action>haga click con el botón derecho</action> en dichos ítems y seleccione <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Eliminar de la Lista de Ignorados</guimenuitem></menuchoice> También puede acceder a la propiedad <literal>svn:ignore</literal> de la carpeta directamente. Esto le permitirá especificar patrones más generales utilizando expansión de comodines en los nombres de los ficheros, descrito más adelante. Para más información sobre establecer propiedades directamente, lea <xref linkend=\"tsvn-dug-propertypage\"/>. Por favor, tenga en cuenta que cada patrón de ignorar debe escribirse en una nueva línea. No funcionará si los separa por espacios."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:6886
@@ -5955,9 +5932,8 @@ msgstr "Los ficheros y las carpetas verisonadas nunca pueden ser ignoradas - est
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:6909
-#, fuzzy
 msgid "Pattern Matching in Ignore Lists"
-msgstr "Expansión de comodines en los nombres de los ficheros de la lista de ignorados"
+msgstr "Concordancia de patrones en las listas de ignorados"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:6911
@@ -6021,9 +5997,8 @@ msgstr "Subversion utiliza esta concordancia de patrones contra cada ruta que se
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6976
-#, fuzzy
 msgid "If directory names are present in a path, the matching algorithm will not trim them off, so pattern <literal>Fred.*</literal> will match <literal>Fred.c</literal> but not <literal>subdir/Fred.c</literal>. This is significant if you add a folder which contains some files that you want to be ignored, because those filenames will be preceded with the folder name when Subversion compares them with the ignore pattern."
-msgstr "Si hay nombres de directorios presentes en una ruta, se incluyen en la concordancia, por lo que el patrón <literal>Fred.*</literal> concuerda con <literal>Fred.c</literal> pero no con <literal>subdir/Fred.c</literal>. Esto es importante sobre todo si añade una carpeta que contenga algunos ficheros que desea ignorar, dado que dichos ficheros vendrán precedidos por el nombre de la carpeta."
+msgstr "Si hay nombres de directorios presentes en una ruta, el algoritmo de concordancia no los eliminará, por lo que el patrón <literal>Fred.*</literal> concuerda con <literal>Fred.c</literal> pero no con <literal>subdir/Fred.c</literal>. Esto es importante sobre todo si añade una carpeta que contiene algunos ficheros que desea ignorar, dado que dichos ficheros vendrán precedidos por el nombre de la carpeta cuando Subversion los compare con el patrón de ignorar."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6985
@@ -6032,9 +6007,8 @@ msgstr "El carácter <literal>/</literal> no se trata de ninguna forma especial 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:6991
-#, fuzzy
 msgid "To ignore all <literal>CVS</literal> folders you should either specify a pattern of <literal>*CVS</literal> or better, the pair <literal>CVS */CVS</literal>. The first option works, but would also exclude something called <literal>ThisIsNotCVS</literal>. Using <literal>*/CVS</literal> alone will not work on an immediate child <literal>CVS</literal> folder, and <literal>CVS</literal> alone will not work on sub-folders."
-msgstr "Para ignorar todas las carpetas <literal>CVS</literal> debería especificar o bien un patrón <literal>*CVS</literal> o, mejor aún, el par <literal>CVS */CVS</literal>. La primera opción funciona, pero también excluye algo llamado <literal>EstoNoEsCVS</literal>. Utilizar <literal>*/CVS</literal> por sí mismo no funcionará para los hijos inmediatos de la carpeta <literal>CVS</literal>, y <literal>CVS</literal> solo no funcionará en las subcarpetas."
+msgstr "Para ignorar todas las carpetas <literal>CVS</literal> debería especificar o bien un patrón <literal>*CVS</literal> o, mejor aún, el par <literal>CVS */CVS</literal>. La primera opción funciona, pero también excluye algo llamado <literal>EstoNoEsCVS</literal>. Utilizar <literal>*/CVS</literal> por sí mismo no funcionará para los hijos <literal>CVS</literal> directos de la carpeta, y usar únicamente <literal>CVS</literal> no funcionará en las subcarpetas."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7000
@@ -6073,15 +6047,13 @@ msgstr "eliminar"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7028
-#, fuzzy
 msgid "Use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> to remove files or folders from subversion."
-msgstr "<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Confirmar</guimenuitem></menuchoice> la carpeta eliminada para quitarla del repositorio."
+msgstr "Utilice <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Eliminar</guimenuitem></menuchoice> para eliminar ficheros o carpetas de Subversion."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7036
-#, fuzzy
 msgid "When you <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> a file, it is removed from your working copy immediately as well as being marked for deletion in the repository on next commit. The file's parent folder shows a <quote>deleted</quote> icon overlay. Up until you commit the change, you can get the file back using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revert</guimenuitem></menuchoice> on the parent folder."
-msgstr "Si borra un fichero/directorio utilizando TSVN, el fichero se elimina de su copia de trabajo y se marca para ser borrado. La carpeta padre del fichero muestra un icono sobreimpresionado \"borrado\". Siempre puede recuperar de nuevo el fichero borrado, si llama a  <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>revertir</guimenuitem></menuchoice> en la carpeta padre."
+msgstr "Cuando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Elimina</guimenuitem></menuchoice> un fichero, se elimina de su copia de trabajo inmediatamente, a la vez que se marca para su borrado en el repositorio para la próxima confirmación. La carpeta padre del fichero muestra un icono sobreimpresionado de <quote>eliminado</quote>. Hasta que confirme el cambio, puede recuperar el fichero utilizando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revertir</guimenuitem></menuchoice> sobre la carpeta padre."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7052
@@ -6134,9 +6106,8 @@ msgstr "mover"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7138
-#, fuzzy
 msgid "If you want to do a simple in-place rename of a file or folder, use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Rename...</guimenuitem></menuchoice> Enter the new name for the item and you're done."
-msgstr "Si <action>hace click con el botón derecho</action> en una revisión, puede utilizar <menuchoice><guimenu>Menú Contextual</guimenu><guimenuitem>Mostrar registro</guimenuitem></menuchoice> para ver la historia."
+msgstr "Si desea simplemente renombrar en el sitio un fichero o una carpeta, utillice <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>Renombrar...</guimenuitem></menuchoice> Introduzca el nuevo nombre para el ítem, y ya está."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7153
@@ -6150,9 +6121,8 @@ msgstr "en el menú contextual seleccione <menuchoice><guimenu>Menú contextual<
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7147
-#, fuzzy
 msgid "If you want to move files around inside your working copy, perhaps to a different sub-folder, use the right-mouse drag-and-drop handler: <placeholder-1/>"
-msgstr "Si quiere mover ficheros dentro de una copia de trabajo, puede usar de nuevo el manejador de arrastrar-y-soltar: <placeholder-1/>"
+msgstr "Si quiere mover ficheros dentro de una copia de trabajo, quizás a una subcarpeta distinta, utilice el manejador de arrastrar-y-soltar con el botón derecho del ratón: <placeholder-1/>"
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:7180
@@ -6161,9 +6131,8 @@ msgstr "Confirmar la carpeta padre"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7181
-#, fuzzy
 msgid "Since renames and moves are done as a delete followed by an add you must commit the parent folder of the renamed/moved file so that the deleted part of the rename/move will show up in the commit dialog. If you don't commit the removed part of the rename/move, it will stay behind in the repository and when your co-workers update, the old file will not be removed. i.e. they will have <emphasis>both</emphasis> the old and the new copies."
-msgstr "Dado que las operaciones mover y renombrar se realizan como un borrado seguido de un añadir, debe confirmar la carpeta padre de los ficheros movidos/renombrados para que se muestre la parte de borrado de la operación en el diálogo de confirmación. Si no confirma la parte eliminada de los ficheros movidos/renombrados, se quedarán en el repositorio y cuando sus compañeros se actualicen no se eliminará el fichero antiguo, es decir, que ellos tendrán <emphasis>ambas</emphasis> copias, la antigua y la nueva."
+msgstr "Dado que las operaciones mover y renombrar se realizan como un borrado seguido de un añadir, debe confirmar la carpeta padre de los ficheros movidos/renombrados para que se muestre la parte de borrado de la operación en el diálogo de confirmación. Si no confirma la parte eliminada de los ficheros movidos/renombrados, se quedarán en el repositorio, y cuando sus compañeros se actualicen no se eliminará el fichero antiguo, es decir, que ellos tendrán <emphasis>ambas</emphasis> copias, la antigua y la nueva."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7191
@@ -6172,9 +6141,8 @@ msgstr "Usted <emphasis>debe</emphasis> confirmar un cambio de nombre de carpeta
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7197
-#, fuzzy
 msgid "You can also use the repository browser to move items around. Read <xref linkend=\"tsvn-dug-repobrowser\"/> to find out more."
-msgstr "También puede integrarse con algunos visores de repositorios basados en web. Para más información, lea <xref linkend=\"tsvn-dug-repoviewerr\"/>."
+msgstr "También puede utilizar el navegador de repositorios para mover ítems. Lea <xref linkend=\"tsvn-dug-repobrowser\"/> para saber más."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:7202
@@ -6203,9 +6171,8 @@ msgstr "Hacer cambios sólo en las mayúsculas/minúsculas de un nombre de fiche
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7229
-#, fuzzy
 msgid "Fortunately there are (at least) two possible methods to rename a file without losing its log history. It is important to rename it within subversion. Just renaming in the explorer will corrupt your working copy!"
-msgstr "Hay (al menos) dos soluciones posibles para renombrar un fichero sin perder su historia de registro. Es importante renombrarlo dentro de Subversion. ¡¡¡Renombrarlo únicamente en el explorador corromperá su copia de trabajo!!!"
+msgstr "Afortunadamente hay (al menos) dos soluciones posibles para renombrar un fichero sin perder su historia de registro. Es importante renombrarlo dentro de Subversion. ¡Renombrarlo únicamente en el explorador corromperá su copia de trabajo!"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7239
@@ -6256,9 +6223,8 @@ msgstr "Lidiando con conflictos en las mayúsculas/minúsculas de un nombre de f
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7285
-#, fuzzy
 msgid "If the repository already contains two files with the same name but differing only in case (e.g. <filename>TEST.TXT</filename> and <filename>test.txt</filename>), you will not be able to update or checkout the parent directory on a Windows client. Whilst Subversion supports case-sensitive filenames, Windows does not."
-msgstr "En el caso de que tenga dos ficheros en el repositorio con el mismo nombre pero diferenciándose únicamente en las mayúsculas (por ejemplo, TEST.TXT y test.txt), ya no podrá actualizar u obtener el directorio donde están esos ficheros."
+msgstr "En el caso de que tenga dos ficheros en el repositorio con el mismo nombre pero diferenciándose únicamente en las mayúsculas (por ejemplo, <filename>TEST.TXT</filename> y <filename>test.txt</filename>), ya no podrá actualizar u obtener el directorio padre en un cliente de Windows. Aunque Subversion soporta los nombres de ficheros que se distinguen en las mayúsculas, Windows no."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7293
@@ -6302,9 +6268,8 @@ msgstr "Eliminando ficheros no versionados"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7340
-#, fuzzy
 msgid "Usually you set your ignore list such that all generated files are ignored in Subversion. But what if you want to clear all those ignored items to produce a clean build? Usually you would set that in your makefile, but if you are debugging the makefile, or changing the build system it is useful to have a way of clearing the decks."
-msgstr "Normalmente especifica un la lista de ignorados tal que todos los ficheros generados se ignoran en Subversion. Pero y si lo que quiere es limpiar todos esos ítems ignorados para producir una compilación limpia? Normalmente lo haría en su makefile (fichero de compilación), pero si está depurando el makefile, o cambiando el sistema de compilación es útil tener una forma de limpiar la casa."
+msgstr "Normalmente especifica un la lista de ignorados tal que todos los ficheros generados se ignoran en Subversion. Pero ¿y si lo que quiere es limpiar todos esos ítems ignorados para producir una compilación limpia? Normalmente lo haría en su makefile (fichero de instrucciones de compilación), pero si está depurando el makefile, o cambiando el sistema de compilación, es útil tener una forma de barrer la casa."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7347
@@ -6350,9 +6315,8 @@ msgstr "Si desea deshacer un borrado o un renombrado, necesitará utilizar Rever
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7396
-#, fuzzy
 msgid "If you want to undo the addition of an item, this appears in the context menu as <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Undo add...</guimenuitem></menuchoice>. This is really a revert as well, but the name has been changed to make it more obvious."
-msgstr "Si <action>hace click con el botón derecho</action> en una revisión, puede utilizar <menuchoice><guimenu>Menú Contextual</guimenu><guimenuitem>Mostrar registro</guimenuitem></menuchoice> para ver la historia."
+msgstr "Si quiere deshacer la adición de un ítem, esto aparece en el menú contextual como <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Deshacer añadir...</guimenuitem></menuchoice>. Esto también es revertir, en realidad, pero su nombre se ha cambiado para hacerlo más obvio."
 
 #. (para)
 #. (para)
@@ -6404,9 +6368,8 @@ msgstr "Si un comando de Subversion no puede completarse de forma correcta, quiz
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7453
-#, fuzzy
 msgid "Cleanup has another useful side effect. If a file date changes but its content doesn't, Subversion cannot tell whether it has really changed except by doing a byte-by-byte comparison with the pristine copy. If you have a lot of files in this state it makes acquiring status very slow, which will make many dialogs slow to respond. Executing a Cleanup on your working copy will repair these <quote>broken</quote> timestamps and restore status checks to full speed."
-msgstr "La limpieza tiene otro efecto secundario muy útil. Si ha cambiado la fecha de un fichero pero no su contenido, Subversion no puede determinar si el fichero ha cambiado realmente excepto haciendo una comparación byte-a-byte con la copia prístina. Si tiene muchos ficheros en este estado, comprobar su estado será muy lento, lo que hará que muchos diálogos ralenticen su respuesta. Ejecutando una Limpieza en su copia de trabajo reparará esas fechas <quote>rotas</quote> y restaurará las comprobaciones de estado a la máxima velocidad."
+msgstr "El comando Limpiar tiene otro efecto secundario muy útil. Si ha cambiado la fecha de un fichero pero no su contenido, Subversion no puede determinar si el fichero ha cambiado realmente excepto haciendo una comparación byte-a-byte con la copia prístina. Si tiene muchos ficheros en este estado, comprobar su estado será muy lento, lo que hará que muchos diálogos ralenticen su respuesta. Ejecutando el comando Limpiar en su copia de trabajo reparará esas fechas <quote>rotas</quote> y restaurará las comprobaciones de estado a la máxima velocidad."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:7464
@@ -6455,15 +6418,13 @@ msgstr "Página de propiedades de Subversion"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7507
-#, fuzzy
 msgid "<placeholder-1/> You can read and set the Subversion properties from the Windows properties dialog, but also from <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>properties</guimenuitem></menuchoice> and within TortoiseSVN's status lists, from <menuchoice><guimenu>Context menu</guimenu><guimenuitem>properties</guimenuitem></menuchoice>."
-msgstr "<placeholder-1/> Puede leer y establecer las propiedades de Subversion desde el diálogo de propiedades de Windows, pero también desde <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Propiedades</guimenuitem></menuchoice> y dentro de las listas de estado de TSVN's, desde <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>Propiedades</guimenuitem></menuchoice>."
+msgstr "<placeholder-1/> Puede leer y establecer las propiedades de Subversion desde el diálogo de propiedades de Windows, pero también desde <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Propiedades</guimenuitem></menuchoice> y dentro de las listas de estado de TortoiseSVN, desde <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>Propiedades</guimenuitem></menuchoice>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7524
-#, fuzzy
 msgid "You can add your own properties, or some properties with a special meaning in Subversion. These begin with <literal>svn:</literal>. <literal>svn:externals</literal> is such a property; see how to handle externals in <xref linkend=\"tsvn-dug-import-4\"/>."
-msgstr "Puede añadir sus propias propiedades, o algunas propiedades con un significado especial en Subversion. Éstas empiezan con <literal>svn:</literal>. <literal>svn:externals</literal> es una de esas propiedades; vea cómo manejar externos en <xref linkend=\"tsvn-dug-import-4\"/>. Para más información sobre las propiedades en Subversion vea el <ulink url=\"http://svnbook.red-bean.com/en/1.1/ch07s02.html#svn-ch-7-sect-2.3\"><citetitle>Manual de Subversion</citetitle></ulink>."
+msgstr "Puede añadir sus propias propiedades, o algunas propiedades con un significado especial en Subversion. Éstas empiezan con <literal>svn:</literal>. <literal>svn:externals</literal> es una de esas propiedades; vea cómo manejar externos en <xref linkend=\"tsvn-dug-import-4\"/>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:7531
@@ -6512,15 +6473,13 @@ msgstr "Subversion soporta expansión de palabras clave similar a CVS, lo que pu
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7589
-#, fuzzy
 msgid "To find out how to use these keywords, look at the <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.advanced.props.special.keywords.html\"><citetitle>svn:keywords section</citetitle></ulink> in the Subversion book, which gives a full description of these keywords and how to enable and use them."
-msgstr "Para averiguar cómo utilizar estas palabras clave, lea la sección <ulink url=\"http://svnbook.red-bean.com/en/1.2/svn.advanced.props.html#svn.advanced.props.special.keywords\"><citetitle>svn:keywords</citetitle></ulink> del libro de Subversion, que porporciona información completa sobre estas palabras clave y cómo habilitarlas y utilizarlas."
+msgstr "Para averiguar cómo utilizar estas palabras clave, lea la <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.advanced.props.special.keywords.html\"><citetitle>sección svn:keywords</citetitle></ulink> del libro de Subversion, que porporciona información completa sobre estas palabras clave y cómo habilitarlas y utilizarlas."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7599
-#, fuzzy
 msgid "For more information about properties in Subversion see the <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.advanced.props.html\"><citetitle>Special Properties</citetitle></ulink>."
-msgstr "Puede encontrar más información sobre svnserve en el <ulink url=\"http://svnbook.red-bean.com\"><citetitle>libro de SVN</citetitle></ulink>."
+msgstr "Puede encontrar más información sobre las propiedades en Subversion en <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.advanced.props.html\"><citetitle>Propiedades especiales</citetitle></ulink>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:7606
@@ -6624,9 +6583,8 @@ msgstr "auto-props"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7717
-#, fuzzy
 msgid "You can configure Subversion and TortoiseSVN to set properties automatically on files and folders when they are added to the repository. There are two ways of doing this."
-msgstr "Puede configurar Subversion para que establezca propiedades automáticamente en ficheros y carpetas cuando se añaden al repositorio. Para más información, lea <xref linkend=\"tsvn-dug-settings\"/>."
+msgstr "Puede configurar Subversion y TortoiseSVN para que establezca propiedades automáticamente en ficheros y carpetas cuando se añaden al repositorio. Hay dos formas de hacerlo."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7722
@@ -6705,9 +6663,8 @@ msgstr "<literal>tsvn:logtemplate</literal> se utiliza en proyectos que tienen r
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7831
-#, fuzzy
 msgid "Subversion allows you to set <quote>autoprops</quote> which will be applied to newly added or imported files, based on the file extension. This depends on every client having set appropriate autoprops in their subversion configuration file. <literal>tsvn:autoprops</literal> can be set on folders and these will be merged with the user's local autoprops when importing or adding files. The format is the same as for subversion autoprops, e.g. <literal>*.sh = svn:eol-style=native;svn:executable</literal> sets two properties on files with the <literal>.sh</literal> extension."
-msgstr "Subversion le permite establecer <quote>autoprops</quote> (autopropiedades), que serán aplicadas a los ficheros recién añadidos o importados, basándose en la extensión del fichero. Esto necesita que todos los clientes hayan establecido las autoprops adecuadas en el fichero de configuración de Subversion. <literal>tsvn:autoprops</literal> puede establecerse en carpetas y éstas se fusionarán con las autoprops locales del usuario cuando se importen o añadan ficheros."
+msgstr "Subversion le permite establecer <quote>autoprops</quote> (autopropiedades), que serán aplicadas a los ficheros recién añadidos o importados, basándose en la extensión del fichero. Esto necesita que todos los clientes hayan establecido las autoprops adecuadas en el fichero de configuración de Subversion. <literal>tsvn:autoprops</literal> puede establecerse en carpetas y éstas se fusionarán con las autoprops locales del usuario cuando se importen o añadan ficheros. El formato es el mismo que para las autopropiedades de Subversion, por ejemplo <literal>*.sh = svn:eol-style=native;svn:executable</literal> establece dos propiedades en los ficheros con extensión <literal>.sh</literal>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7844
@@ -6716,15 +6673,13 @@ msgstr "Si hay un conflicto entre las autoprops locales y <literal>tsvn:autoprop
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7851
-#, fuzzy
 msgid "In the Commit dialog you have the option to paste in the list of changed files, including the status of each file (added, modified, etc). <literal>tsvn:logfilelistenglish</literal> defines whether the file status is inserted in English or in the localized language. If the property is not set, the default is <literal>true</literal>."
 msgstr "En el diálogo de Confirmar tiene la opción de pegar la lista de ficheros cambiados, incluyendo el estado de cada fichero (añadido, modificado, etc). <literal>tsvn:logfilelistenglish</literal> define si el estado del fichero se inserta en inglés o en el idioma traducido. Si la propiedad no se establece, el valor por defecto es <literal>true</literal>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7862
-#, fuzzy
 msgid "TortoiseSVN can use spell checker modules which are also used by OpenOffice and Mozilla. If you have those installed this property will determine which spell checker to use, i.e. in which language the log messages for your project should be written. <literal>tsvn:projectlanguage</literal> sets the language module the spell checking engine should use when you enter a log message. You can find the values for your language on this page: <ulink url=\"http://msdn2.microsoft.com/en-us/library/ms776260.aspx\"><citetitle>MSDN: Language Identifiers</citetitle></ulink>."
-msgstr "TortoiseSVN puede utilizar los módulos de corrector ortográfico que se utilizan también por OpenOffice y Mozilla. Si tiene éstos instalados, esta propiedad determinará qué corrector ortográfico utilizar, es decir, en qué lenguaje deberían estar escritos los mensajes de registro para su proyecto. <literal>tsvn:projectlanguage</literal> establece el módulo de idioma que el motor del corrector ortográfico debería utilizar cuando introduzca un mensaje de registro. Puede encontrar los valores para su idioma en esta página: <ulink url=\"http://msdn.microsoft.com/library/default.asp?url=/library/en-us/intl/nls_238z.asp\"><citetitle>MSDN: Language Identifiers</citetitle></ulink>."
+msgstr "TortoiseSVN puede utilizar los módulos de corrector ortográfico que se utilizan también por OpenOffice y Mozilla. Si tiene éstos instalados, esta propiedad determinará qué corrector ortográfico utilizar, es decir, en qué lenguaje deberían estar escritos los mensajes de registro para su proyecto. <literal>tsvn:projectlanguage</literal> establece el módulo de idioma que el motor del corrector ortográfico debería utilizar cuando introduzca un mensaje de registro. Puede encontrar los valores para su idioma en esta página: <ulink url=\"http://msdn2.microsoft.com/en-us/library/ms776260.aspx\"><citetitle>MSDN: Language Identifiers</citetitle></ulink>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7876
@@ -6760,39 +6715,33 @@ msgstr "TortoiseSVN tiene unas pocas propiedades especiales para sí mismo, y es
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7919
 #: ../source/TortoiseSVN_en.xml:10309
-#, fuzzy
 msgid "Some <literal>tsvn:</literal> properties require a <literal>true/false</literal> value. TortoiseSVN also understands <literal>yes</literal> as a synonym for <literal>true</literal> and <literal>no</literal> as a synonym for <literal>false</literal>."
-msgstr "Algunas propiedades <literal>tsvn:</literal> necesitan un valor <literal>true/false</literal> (verdad/mentira). TSVN también entiende <literal>yes</literal> (sí) como un sinónimo de <literal>true</literal> y <literal>no</literal> como un sinónimo de <literal>false</literal>."
+msgstr "Algunas propiedades <literal>tsvn:</literal> necesitan un valor <literal>true/false</literal> (verdadero/falso). TortoiseSVN también entiende <literal>yes</literal> (sí) como un sinónimo de <literal>true</literal> y <literal>no</literal> como un sinónimo de <literal>false</literal>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7925
-#, fuzzy
 msgid "TortoiseSVN can integrate with some bug tracking tools. This uses project properties that start with <literal>bugtraq:</literal>. Read <xref linkend=\"tsvn-dug-bugtracker\"/> for further information."
-msgstr "TortoiseSVN puede integrarse con algunas herramientas de control de errores. Esto utiliza propiedades, que comienzan con <literal>bugtraq:</literal>. Para más información, lea <xref linkend=\"tsvn-dug-bugtracker\"/>."
+msgstr "TortoiseSVN puede integrarse con algunas herramientas de control de errores. Esto utiliza propiedades de proyecto que comienzan con <literal>bugtraq:</literal>. Para más información, lea <xref linkend=\"tsvn-dug-bugtracker\"/>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7930
-#, fuzzy
 msgid "It can also integrate with some web-based repository browsers, using project properties that start with <literal>webviewer:</literal>. Read <xref linkend=\"tsvn-dug-repoviewer\"/> for further information."
-msgstr "También puede integrarse con algunos visores de repositorios basados en web. Para más información, lea <xref linkend=\"tsvn-dug-repoviewerr\"/>."
+msgstr "También puede integrarse con algunos visores de repositorios basados en web, utilizando propiedades de proyecto que comienzan con <literal>webviewer:</literal>. Para más información, lea <xref linkend=\"tsvn-dug-repoviewer\"/>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:7936
-#, fuzzy
 msgid "Set the project properties on folders"
-msgstr "Estableciendo las propiedades en las carpetas"
+msgstr "Establecer las propiedades de proyecto en carpetas"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7937
-#, fuzzy
 msgid "These special project properties must be set on <emphasis>folders</emphasis> for the system to work. When you commit a file or folder the properties are read from that folder. If the properties are not found there, TortoiseSVN will search upwards through the folder tree to find them until it comes to an unversioned folder, or the tree root (eg. <literal>C:\\</literal>) is found. If you can be sure that each user checks out only from e.g <filename>trunk/</filename> and not some sub-folder, then it is sufficient to set the properties on <filename>trunk/</filename>. If you can't be sure, you should set the properties recursively on each sub-folder. A property setting deeper in the project hierarchy overrides settings on higher levels (closer to <filename>trunk/</filename>)."
-msgstr "Estas propiedades <literal>tsvn:</literal> deben estar establecidas en <emphasis>carpetas</emphasis> para que el sistema funcione. Cuando confirma un fichero o una carpeta, se leen las propiedades de esa carpeta. Si no se encuentran allí las propiedades, TortoiseSVN las buscará hacia arriba en el árbol de carpetas para encontrarlas, hasta que llega a una carpeta sin versionar, o se encuentra la raíz del árbol (por ejemplo, <literal>C:\\</literal>). Si puede estar seguro de que cada usuario obtiene sólo desde por ejemplo <filename>trunk/</filename> y no desde alguna subcarpeta, entonces es suficiente establecer las propiedades en <filename>trunk/</filename>. Si no puede estar seguro, debería establecer las propiedades recursivamente en cada subcarpeta. Una propiedad establecida hacia las profundidades de la jerarquía del proyecto tiene preferencia sobre las propiedades establecidas en niveles más altos (más cerca de <filename>trunk/</filename>)."
+msgstr "Estas propiedades especiales del proyecto deben estar establecidas en <emphasis>carpetas</emphasis> para que el sistema funcione. Cuando confirma un fichero o una carpeta, se leen las propiedades de esa carpeta. Si no se encuentran allí las propiedades, TortoiseSVN las buscará hacia arriba en el árbol de carpetas para encontrarlas, hasta que llega a una carpeta sin versionar, o se encuentra la raíz del árbol (por ejemplo, <literal>C:\\</literal>). Si puede estar seguro de que cada usuario obtiene sólo desde por ejemplo <filename>trunk/</filename> y no desde alguna subcarpeta, entonces es suficiente establecer las propiedades en <filename>trunk/</filename>. Si no puede estar seguro, debería establecer las propiedades recursivamente en cada subcarpeta. Una propiedad establecida en una carpeta más profunda dentro de la jerarquía del proyecto tiene preferencia sobre las propiedades establecidas en niveles más altos (más cerca de <filename>trunk/</filename>)."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7951
-#, fuzzy
 msgid "For project properties <emphasis>only</emphasis> you can use the <guilabel>Recursive</guilabel> checkbox to set the property to all sub-folders in the hierarchy, without also setting it on all files."
-msgstr "Para las propiedades <literal>tsvn:</literal> <emphasis>sólo</emphasis> puede utilizar la casilla <guilabel>Recursivo</guilabel> para establecer la propiedad en todas las subcarpetas de la jerarquía, sin establecera en todos los ficheros."
+msgstr "Para las propiedades de proyecto <emphasis>sólo</emphasis> puede utilizar la casilla <guilabel>Recursivo</guilabel> para establecer la propiedad en todas las subcarpetas de la jerarquía, sin establecerla en todos los ficheros."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:7958
@@ -6833,9 +6782,8 @@ msgstr "Otra característica de los sistemas de control de versiones es la posib
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8007
-#, fuzzy
 msgid "Subversion does not have special commands for branching or tagging, but uses so-called <quote>cheap copies</quote> instead. Cheap copies are similar to hard links in Unix, which means that instead of making a complete copy in the repository, an internal link is created, pointing to a specific tree/revision. As a result branches and tags are very quick to create, and take up almost no extra space in the repository."
-msgstr "Subversion no tiene comandos especiales para hacer ramas o etiquetas, pero en cambio utiliza lo que se denomina <literal>copias baratas</literal>. Las copias baratas son similares a los vínculos duros de Unix, que significa que en vez de hacer una copia completa en el repositorio, se crea un vínculo interno, apuntando a una revisión y árbol específicos. Como resultado, las ramas y las etiquetas son muy rápidas de crear, y casi no conllevan espacio extra en el repositorio."
+msgstr "Subversion no tiene comandos especiales para hacer ramas o etiquetas, pero en cambio utiliza lo que se denomina <quote>copias baratas</quote>. Las copias baratas son similares a los vínculos duros de Unix, que significa que en vez de hacer una copia completa en el repositorio, se crea un vínculo interno, apuntando a una revisión y árbol específicos. Como resultado, las ramas y las etiquetas son muy rápidas de crear, y casi no conllevan espacio extra en el repositorio."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8017
@@ -6911,9 +6859,8 @@ msgstr "Pulse <guibutton>Aceptar</guibutton> para confirmar la nueva copia al re
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8107
-#, fuzzy
 msgid "Note that unless you opted to switch your working copy to the newly created branch, creating a Branch or Tag does <emphasis>not</emphasis> affect your working copy. Even if you create the branch from your WC, those changes are committed to the new branch, not to the trunk, so your WC may still be marked as modified with respect to the trunk."
-msgstr "Tenga en cuenta que crear una Etiqueta o una Rama <emphasis>no</emphasis> afecta a su copia de trabajo. Incluso si copia su copia de trabajo, estos cambios se confirmarán en la rama nueva, no en el tronco, así que su copia de trabajo todavía se marcará como modificada."
+msgstr "Tenga en cuenta que, salvo que haya optado por cambiar su copia de trabajo a la rama recién creada, crear una etiqueta o una rama <emphasis>no</emphasis> afecta a su copia de trabajo. Incluso si creó la rama desde su copia de trabajo, estos cambios se confirmarán en la rama nueva, no en el tronco, así que su copia de trabajo todavía se marcará como modificada respecto al tronco."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8116
@@ -6927,9 +6874,8 @@ msgstr "cambiar"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8121
-#, fuzzy
 msgid "...that is (not really) the question. While a checkout downloads everything from the desired branch in the repository to your working directory, <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Switch...</guimenuitem></menuchoice> only transfers the changed data to your working copy. Good for the network load, good for your patience. :-)"
-msgstr "...esa (realmente no) es la cuestión. Mientras que obtener obtiene todo de la rama elegida a su directorio de trabajo, <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Cambiar...</guimenuitem></menuchoice> sólo transfiere los datos cambiados a su copia de trabajo. Bueno para la carga de la red, bueno para su paciencia. :-)"
+msgstr "...esa (realmente no) es la cuestión. Mientras que obtener descarga todo de la rama elegida a su directorio de trabajo, <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Cambiar...</guimenuitem></menuchoice> sólo transfiere los datos cambiados a su copia de trabajo. Bueno para la carga de la red, bueno para su paciencia. :-)"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8137
@@ -6953,9 +6899,8 @@ msgstr "Cambiar trabaja igual que Actualizar, en el sentido de que nunca pierde 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8177
-#, fuzzy
 msgid "If you want to work on trunk and branch, but don't want the expense of a fresh checkout, you can use Windows Explorer to make a copy of your trunk checkout in another folder, then <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Switch...</guimenuitem></menuchoice> that copy to your new branch."
-msgstr "Cambiar su copia de trabajo actual a la copia recién creada en el repositorio. De nuevo seleccione la carpeta superior de su proyecto y utilice <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Cambiar...</guimenuitem></menuchoice> del menú contextual."
+msgstr "Si desea trabajar en el tronco (trunk) y en la rama, pero no desea el coste de una obtención nueva, puede utilizar el Explorador de Windows para hacer una copia de la copia de trabajo obtenida, y luego <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Cambiar...</guimenuitem></menuchoice> esa copia a su nueva rama."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8190
@@ -6964,9 +6909,8 @@ msgstr "El diálogo Cambiar"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8132
-#, fuzzy
 msgid "To be able to work with your freshly generated branch or tag you have several ways to handle it. You can: <placeholder-1/><placeholder-2/>"
-msgstr "Para poder trabajar con su copia recientemente generada tiene varias formas de manejarlo. Puede: <placeholder-1/><placeholder-2/>"
+msgstr "Para poder trabajar con su rama o etiqueta recién generada tiene varias opciones. Puede: <placeholder-1/><placeholder-2/>"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8199
@@ -7011,9 +6955,8 @@ msgstr "Mientras que las ramas se utilizan para mantener líneas de desarrollo s
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8248
-#, fuzzy
 msgid "It is important to understand how branching and merging works in Subversion before you start using it, as it can become quite complex. It is highly recommended that you read the chapter <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.html\"><citetitle>Branching and Merging</citetitle></ulink> in the Subversion book, which gives a full description and many examples of how it is used."
-msgstr "Es importante entender cómo funcionan las ramas y la mezcla en Subversion antes de empezar a utilizarlos, porque puede convertirse en algo bastante complejo. Le recomendamos encarecidamente que lea el capítulo <ulink url=\"http://svnbook.red-bean.com/en/1.1/ch04.html\"><citetitle>Branching and Merging</citetitle></ulink> en el <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>Libro de Subversion</citetitle></ulink> que le proporciona una descripción completa, y muchos ejemplos de cómo se utiliza."
+msgstr "Es importante entender cómo funcionan las ramas y la fusión en Subversion antes de empezar a utilizarlos, porque puede convertirse en algo bastante complejo. Le recomendamos encarecidamente que lea el capítulo <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.html\"><citetitle>Creando ramas y fusionando</citetitle></ulink> en el libro de Subversion, que le proporcionará una descripción completa, y muchos ejemplos de cómo se utiliza."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8258
@@ -7027,9 +6970,8 @@ msgstr "En general es una buena idea realizar fusiones en una copia de trabajo s
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8276
-#, fuzzy
 msgid "There are three common use cases for merging which are handled in slightly different ways, as described below. The first page of the merge wizard asks you to select the method you need."
-msgstr "Hay dos casos de uso comunes para fusionar que se manejan de formas ligeramente diferentes, como se describen a continuación."
+msgstr "Hay tres casos de uso comunes para fusionar que se manejan de formas ligeramente diferentes, como se describen a continuación. La primera página del asistente de fusión le pide seleccionar el método que necesita."
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:8284
@@ -7055,9 +6997,8 @@ msgstr "Reintegrando una rama."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8302
-#, fuzzy
 msgid "This method covers the case when you have made a feature branch as discussed in the Subversion book. All trunk changes have been ported to the feature branch, week by week, and now the feature is complete you want to merge it back into the trunk. Because you have kept the feature branch synchronized with the trunk, the latest versions of branch and trunk will be absolutely identical except for your branch changes."
-msgstr "Este método cubre el caso cuando ha realizado una rama de funcionalidad como se discute en el libro de Subversion. Todos los cambios del tronco han sido portados a la rama de la funcionalidad, semana a semana, y ahora que la funcionalidad está completa desea fusionarla de nuevo en el tronco. Dado que ha mantenido la rama de la funcionalidad sincronizada con el tronco, las últimas versiones de la rama y del tronco serán absolutamente iguales excepto por sus cambios en la rama. En este caso especial, fusionaría comparando la rama con el tronco."
+msgstr "Este método cubre el caso cuando ha realizado una rama de funcionalidad como se discute en el libro de Subversion. Todos los cambios del tronco han sido portados a la rama de la funcionalidad, semana a semana, y ahora que la funcionalidad está completa desea fusionarla de nuevo en el tronco. Dado que ha mantenido la rama de la funcionalidad sincronizada con el tronco, las últimas versiones de la rama y del tronco serán absolutamente iguales excepto por sus cambios en la rama."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8311
@@ -7066,9 +7007,8 @@ msgstr "Este es un caso especial de la fusión de árboles describa más abajo, 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8321
-#, fuzzy
 msgid "After the merge, all branch development has been completely merged back into the main development line. The branch is now redundant and can be deleted."
-msgstr "Tras la fusión, el tronco y la rama son idénticos y el desarrollo de la rama ha sido completamente fusionado de vuelta a la línea principal de desarrollo. La rama ahora es redundante y puede eliminarse."
+msgstr "Tras la fusión, todo el desarrollo en las ramas ha sido completamente fusionado de vuelta a la línea principal. La rama ahora es redundante y puede eliminarse."
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:8329
@@ -7077,15 +7017,13 @@ msgstr "Fusionando dos árboles diferentes."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8331
-#, fuzzy
 msgid "This is a more general case of the reintegrate method. What you are asking Subversion to do is: <quote>Calculate the changes necessary to get [FROM] the head revision of the trunk [TO] the head revision of the branch, and apply those changes to my working copy (of the trunk).</quote> The net result is that trunk now looks exactly like the branch."
-msgstr "En este caso lo que le está pidiendo a Subversion que haga es: <quote>Calcula los cambios necesarios para ir [DESDE] la revisión HEAD del tronco [HASTA] la revisión HEAD de la rama, y aplica esos cambios a mi copia de trabajo (del tronco).</quote> El resultado neto es que el tronco ahora es exactamente igual a la rama."
+msgstr "Este es un caso más general del método de reintegración. Lo que le está pidiendo a Subversion que haga es: <quote>Calcula los cambios necesarios para ir [DESDE] la revisión HEAD del tronco [HASTA] la revisión HEAD de la rama, y aplica esos cambios a mi copia de trabajo (del tronco).</quote> El resultado neto es que el tronco ahora es exactamente igual a la rama."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8339
-#, fuzzy
 msgid "If your server/repository does not support merge-tracking then this is the only way to merge a branch back to trunk. Another use case occurs when you are using vendor branches and you need to merge the changes following a new vendor drop into your trunk code. For more information read the chapter on <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.advanced.vendorbr.html\"><citetitle>vendor branches</citetitle></ulink> in the Subversion Book."
-msgstr "Otro caso de uso ocurre cuando está utilizando ramas vendor y necesita fusionar los cambios siguiendo una nueva versión del vendor en su código del tronco. Para más información lea el capítulo sobre <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.advanced.vendorbr.html\"><citetitle>ramas vendor</citetitle></ulink> en el Libro de Subversion."
+msgstr "Si su servidor/repositorio no soporta el registro de fusiones, entonces esta es la única forma de fusionar una rama de nuevo al tronco (trunk). Otro caso de uso ocurre cuando utiliza ramas de vendedor y necesita fusionar los cambios después de incorporar una nueva versión de ese código en el tronco. Para más información lea el capítulo sobre <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.advanced.vendorbr.html\"><citetitle>ramas de vendedor</citetitle></ulink> en el Libro de Subversion."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8354
@@ -7104,9 +7042,8 @@ msgstr "El asistente de fusionado - Seleccionar el rango de revisiones"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8360
-#, fuzzy
 msgid "<placeholder-1/> In the <guilabel>From:</guilabel> field enter the full folder URL of the branch or tag containing the changes you want to port into your working copy. You may also click <guibutton>...</guibutton> to browse the repository and find the desired branch. If you have merged from this branch before, then just use the drop down list which shows a history of previously used URLs."
-msgstr "En el campo <guilabel>Desde:</guilabel> introduzca la URL completa de la carpeta de la rama o la etiqueta que contiene los cambios que desea portar a su copia de trabajo. También puede pulsar <guibutton>...</guibutton> para navegar el repositorio y encontrar la rama deseada. Si ha fusionado desde esta rama antes, entonces utilice la lista desplegable que le muestra una historia de las URLs utilizadas anteriormente."
+msgstr "<placeholder-1/> En el campo <guilabel>Desde:</guilabel> introduzca la URL completa de la carpeta de la rama o la etiqueta que contiene los cambios que desea portar a su copia de trabajo. También puede pulsar <guibutton>...</guibutton> para navegar el repositorio y encontrar la rama deseada. Si ha fusionado desde esta rama antes, entonces utilice la lista desplegable que le muestra una historia de las URLs utilizadas anteriormente."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8375
@@ -7115,9 +7052,8 @@ msgstr "En el campo <guilabel>Rango de revisiones a fusionar</guilabel> introduz
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8382
-#, fuzzy
 msgid "The easiest way to select the range of revisions you need is to click on <guibutton>Show Log</guibutton>, as this will list recent changes with their log comments. If you want to merge the changes from a single revision, just select that revision. If you want to merge changes from several revisions, then select that range (using the usual <keycap>Shift</keycap>-modifier). Click on <guibutton>OK</guibutton> and the list of revision numbers to merge will be filled in for you."
-msgstr "La manera más sencilla de seleccionar el rango de revisiones que necesita es pulsar en <guibutton>Mostrar Registro</guibutton>, dado que esto mostrará los cambios recientes con sus comentarios de registro. Si desea fusionar los cambios de una única revisión, seleccione esa revisión. Si desea fusionar los cambios de varias revisiones, entonces seleccione ese rango (utilizando el modificador habitual <keycap>Mayúsculast</keycap>). Pulse <guibutton>Aceptar</guibutton> y <emphasis>los dos</emphasis> números de revisión <guilabel>Desde la Revisión</guilabel> y <guilabel>Hasta la Revisión</guilabel> se rellenarán por usted en el diálogo Fusionar."
+msgstr "La manera más sencilla de seleccionar el rango de revisiones que necesita es pulsar en <guibutton>Mostrar Registro</guibutton>, dado que esto mostrará los cambios recientes con sus comentarios de registro. Si desea fusionar los cambios de una única revisión, seleccione esa revisión. Si desea fusionar los cambios de varias revisiones, entonces seleccione ese rango (utilizando el modificador habitual <keycap>Mayúsculas</keycap>). Pulse <guibutton>Aceptar</guibutton> y la lista de números de revisión a fusionar se rellenará automáticamente."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8393
@@ -7156,15 +7092,13 @@ msgstr "El asistente de fusión - Fusionar reintegración"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8436
-#, fuzzy
 msgid "<placeholder-1/> To merge a feature branch back into the trunk you must start the merge wizard from within a working copy of the trunk."
-msgstr "Para fusionar la rama de la característica en el tronco necesita ir a una copia de trabajo del tronco. Seleccione <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Fusionar..</guimenuitem></menuchoice> desde el menú contextual. <placeholder-1/>"
+msgstr "<placeholder-1/> Para fusionar una rama de la característica en el tronco necesita iniciar el asistente de fusión desde una copia de trabajo del tronco."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8444
-#, fuzzy
 msgid "In the <guilabel>From URL:</guilabel> field enter the full folder URL of the branch that you want to merge back. You may also click <guibutton>...</guibutton> to browse the repository."
-msgstr "En el campo <guilabel>Desde:</guilabel> introduzca la URL completa de la carpeta del <emphasis>tronco</emphasis> (trunk). Esto puede sonar erróneo, pero recuerde que el tronco es el punto de inicio al que desea añadir los cambios de la rama. También puede pulsar <guibutton>...</guibutton> para navegar el repositorio."
+msgstr "En el campo <guilabel>Desde la URL:</guilabel> introduzca la URL completa de la carpeta que quiere fusionar. También puede pulsar <guibutton>...</guibutton> para navegar el repositorio."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8451
@@ -7193,15 +7127,13 @@ msgstr "<placeholder-1/> Si está utilizando este método para fusioanr una rama
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8477
-#, fuzzy
 msgid "In the <guilabel>From:</guilabel> field enter the full folder URL of the <emphasis>trunk</emphasis>. This may sound wrong, but remember that the trunk is the start point to which you want to add the branch changes. You may also click <guibutton>...</guibutton> to browse the repository."
-msgstr "En el campo <guilabel>Desde:</guilabel> introduzca la URL completa de la carpeta del <emphasis>tronco</emphasis> (trunk). Esto puede sonar erróneo, pero recuerde que el tronco es el punto de inicio al que desea añadir los cambios de la rama. También puede pulsar <guibutton>...</guibutton> para navegar el repositorio."
+msgstr "En el campo <guilabel>Desde:</guilabel> introduzca la URL completa del <emphasis>tronco</emphasis> (trunk). Esto puede sonar erróneo, pero recuerde que el tronco es el punto de inicio al que desea añadir los cambios de la rama. También puede pulsar <guibutton>...</guibutton> para navegar el repositorio."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8486
-#, fuzzy
 msgid "In the <guilabel>To:</guilabel> field enter the full folder URL of the feature branch."
-msgstr "En el campo <guilabel>Hasta:</guilabel> introduzca la URL completa de la carpeta con la rama de la característica."
+msgstr "En el campo <guilabel>A:</guilabel> introduzca la URL completa de la rama de la característica."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8490
@@ -7210,9 +7142,8 @@ msgstr "En los dos campos <guilabel>Desde la Revisión</guilabel> y <guilabel>Ha
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8500
-#, fuzzy
 msgid "You can also use <guibutton>Show Log</guibutton> to select the revision."
-msgstr "Pulse <guibutton>Aceptar</guibutton> para completar la fusión."
+msgstr "También puede usar <guibutton>Mostrar registro</guibutton> para seleccionar la revisión."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8506
@@ -7231,9 +7162,8 @@ msgstr "Puede especificar la profundidad de la fusión, es decir, cuántos nivel
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8520
-#, fuzzy
 msgid "Most of the time you want merge to take account of the file's history, so that changes relative to a common ancestor are merged. Sometimes you may need to merge files which are perhaps related, but not in your repository. For example you may have imported versions 1 and 2 of a third party library into two separate directories. Although they are logically related, Subversion has no knowledge of this because it only sees the tarballs you imported. If you attempt to merge the difference between these two trees you would see a complete removal followed by a complete add. To make Subversion use only path-based differences rather than history-based differences, check the <guilabel>Ignore ancestry</guilabel> box. Read more about this topic in the Subversion book, <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac.ancestry\"><citetitle>Noticing or Ignoring Ancestry</citetitle></ulink>"
-msgstr "La mayoría del tiempo desea fusionar para tener en cuenta el historial de un fichero, para que se fusionen los cambios relativos a un ancestro en común. A veces puede necesitar fusionar ficheros que quizás estén relacionados, pero no en su repositorio. Por ejemplo, puede haber importado las versiones 1 y 2 de una biblioteca de terceros en dos directorios separados. Aunque están relacionados de forma lógica, subversion no tiene conocimiento de ello porque sólo ve los ficheros que ha importado. Si intenta fusionar las diferencias entre estos dos ficheros vería un borrado completo seguido de un añadir completo. Para hacer que Subversion sólo utilice las diferencias basadas-en-ruta en vez de diferencias basadas-en-historial, seleccione la casilla <guilabel>Ignorar ancestros</guilabel>. Puede leer más sobre este tema en el libro de Subversion; <ulink url=\"http://svnbook.red-bean.com/en/1.1/ch04s03.html#svn-ch-4-sect-3.3.4\"><citetitle>Noticing or Ignoring Ancestry</citetitle></ulink>"
+msgstr "La mayoría del tiempo desea que la fustión tenga en cuenta el historial de un fichero, para que se fusionen los cambios relativos a un ancestro en común. A veces puede necesitar fusionar ficheros que quizás estén relacionados, pero no en su repositorio. Por ejemplo, puede haber importado las versiones 1 y 2 de una biblioteca de terceros en dos directorios separados. Aunque están relacionados de forma lógica, Subversion no tiene conocimiento de ello porque sólo ve los ficheros que ha importado. Si intenta fusionar las diferencias entre estos dos ficheros vería un borrado completo seguido de un adición completa. Para hacer que Subversion sólo utilice las diferencias basadas-en-ruta en vez de diferencias basadas-en-historial, seleccione la casilla <guilabel>Ignorar ancestros</guilabel>. Puede leer más sobre este tema en el libro de Subversion; <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac.ancestry\"><citetitle>Teniendo en cuenta o ignorando los ancestros</citetitle></ulink>"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8537
@@ -7247,9 +7177,8 @@ msgstr "Si está utilizando el registro de fusiones y desea marcar una revisión
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8554
-#, fuzzy
 msgid "Now everything is set up, all you have to do is click on the <guibutton>Merge</guibutton> button. If you want to preview the results <guibutton>Test Merge</guibutton> performs the merge operation, but does <emphasis>not</emphasis> modify the working copy at all. It shows you a list of the files that will be changed by a real merge, and notes those areas where conflicts will occur."
-msgstr "<guibutton>Simular</guibutton> realiza la operación de fusión, pero <emphasis>no</emphasis> modifica la copia de trabajo en absoluto. Le muestra una lista de ficheros que se fusionarán con una fusión real, y especifica esas áreas donde ocurrirán conflictos."
+msgstr "Ahora que todo está preparado, todo lo que debe hacer es pulsar en el botón <guibutton>Fusionar</guibutton>. Si quiere previsualizar los resultados, el botón <guibutton>Probar fusión</guibutton> realiza la operación de la fusión, pero <emphasis>no</emphasis> modifica la copia de trabajo en absoluto. Le muestra una lista de ficheros que serán cambiados por la fusión real, y le notifica las áreas donde ocurrirán conflictos."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8562
@@ -7268,9 +7197,8 @@ msgstr "La fusión ya ha concluído. Es una buena idea observar la fusión y com
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8581
-#, fuzzy
 msgid "For Subversion clients and servers prior to 1.5, no merge information is stored and merged revisions have to be tracked manually. When you have tested the changes and come to commit this revision, your commit log message should <emphasis>always</emphasis> include the revision numbers which have been ported in the merge. If you want to apply another merge at a later time you will need to know what you have already merged, as you do not want to port a change more than once. For more information about this, refer to <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>Best Practices for Merging</citetitle></ulink> in the Subversion book."
-msgstr "Cuando haya comprobado los cambios y vaya a confirmar esta revisión, su mensaje de registro debería incluir <emphasis>siempre</emphasis> los números de revisión que han sido portados en la fusión. Si desea aplicar otra fusión más tarde, necesitará saber lo que ya ha fusionado, porque no querrá portar un cambio más de una vez. Desafortunadamente, Subversion no almacena la información de fusiones. Para más información sobre esto, consulte <ulink url=\"http://svnbook.red-bean.com/en/1.1/ch04s03.html#svn-ch-4-sect-3.2.1\"><citetitle>Tracking Merges Manually</citetitle></ulink> en el <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>Libro de Subversion</citetitle></ulink>"
+msgstr "Los clientes y servidores de Subversion anteriores a la versión 1.5 no almacenan la información de fusión, y las revisiones fusionadas deben ser registradas de forma manual. Cuando haya comprobado los cambios y vaya a confirmar esta revisión, su mensaje de registro de confirmación debería incluir <emphasis>siempre</emphasis> los números de revisión que han sido portados en la fusión. Si desea aplicar otra fusión más tarde, necesitará saber lo que ya ha fusionado, porque no querrá portar un cambio más de una vez. Puede encontrar más información sobre esto en <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>Las mejores prácticas para fusionar</citetitle></ulink> en el libro de Subversion."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8595
@@ -7284,15 +7212,13 @@ msgstr "El manejo de las ramas es importante. Si desea mantener esta rama actual
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8609
-#, fuzzy
 msgid "If you have just merged a feature branch back into the trunk, the trunk now contains all the new feature code, and the branch is obsolete. You can now delete it from the repository if required."
-msgstr "En este caso no necesitará la rama de la característica de nuevo porque la característica ya está fusionada en el tronco. La rama de la característica es redundante y puede ser borrada del repositorio si se necesita."
+msgstr "Si acaba de fusionar una rama de característica en el tronco, el tronco contiene ahora todo el código de la nueva característica, y la rama es obsoleta. Si lo necesita, puede borrar la rama del repositorio."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8617
-#, fuzzy
 msgid "Subversion can't merge a file with a folder and vice versa - only folders to folders and files to files. If you click on a file and open up the merge dialog, then you have to give a path to a file in that dialog. If you select a folder and bring up the dialog, then you must specify a folder URL for the merge."
-msgstr "Subversion no puede fusionar un fichero con una carpeta, y viceversa - sólo carpetas con carpetas y ficheros con ficheros. Si pulsa en un fichero y abre el diálogo de fusionar, entonces deberá darle una ruta a un fichero en ese diálogo. Si selecciona una carpeta y saca el diálogo, debe especificar una URL de una carpeta para la fusión."
+msgstr "Subversion no puede fusionar un fichero con una carpeta, y viceversa - sólo carpetas con carpetas y ficheros con ficheros. Si pulsa en un fichero y abre el diálogo de fusionar, entonces deberá darle una ruta a un fichero en ese diálogo. Si selecciona una carpeta y llama al diálogo, debe especificar una URL de una carpeta para la fusión."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8627
@@ -7331,15 +7257,13 @@ msgstr "Subversion 1.5 introdujo facilidades para el registro de fusiones.. Cuan
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8661
-#, fuzzy
 msgid "Merge tracking information is stored in the <literal>svn:mergeinfo</literal> property by the client when it performs a merge. When the merge is committed the server stores that information in a database, and when you request merge, log or blame information, the server can respond appropriately. For the system to work properly you must ensure that the server, the repository and all clients are upgraded. Earlier clients will not store the <literal>svn:mergeinfo</literal> property and earlier servers will not provide the information requested by new clients."
-msgstr "La información de registro de fusiones es almacenado en la propiedad <literal>svn:mergeinfo</literal> por parte del cliente que realiza la fusión. Cuando la fusión se confirma el servidor almacena dicha información en una base de datos, y cuando le pide información de la fusión, registro o autoría, el servidor puede responer apropiadamente. Para que el sistema funcione correctamente debe asegurarse de que el servidor y todos los clientes estén actualizados. Los clientes anteriores no almacenarán la propiedad <literal>svn:mergeinfo</literal> y los servidores anteriores no proporcionarán la información que piden los nuevos clientes."
+msgstr "La información de registro de fusiones se almacena en la propiedad <literal>svn:mergeinfo</literal> por parte del cliente cuando realiza la fusión. Cuando la fusión se confirma, el servidor almacena dicha información en una base de datos, y cuando le pide información de la fusión, registro o autoría, el servidor puede responer apropiadamente. Para que el sistema funcione correctamente debe asegurarse de que el servidor y todos los clientes estén actualizados. Los clientes antiguos no almacenarán la propiedad <literal>svn:mergeinfo</literal> y los servidores anteriores no proporcionarán la información que piden los nuevos clientes."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8671
-#, fuzzy
 msgid "Find out more about merge tracking from Subversion's <ulink url=\"http://subversion.tigris.org/merge-tracking/index.html\"><citetitle>Merge tracking documentation</citetitle></ulink>."
-msgstr "Descargue la última versión de Subversion desde <ulink url=\"http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=91\"><citetitle>http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=91</citetitle></ulink>."
+msgstr "Averigue más sobre el registro de fusión desde la <ulink url=\"http://subversion.tigris.org/merge-tracking/index.html\"><citetitle>Documentación de registro de fusión</citetitle></ulink> de Subversion."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8679
@@ -7353,15 +7277,13 @@ msgstr "conflictos de fusión"
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8691
-#, fuzzy
 msgid "The Merge Conflict Callback Dialog"
-msgstr "El diálogo Fusionar"
+msgstr "El diálogo Información de conflicto de fusión"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8684
-#, fuzzy
 msgid "Merging does not always go smoothly. Sometimes there is a conflict, and if you are merging multiple ranges, you generally want to resolve the conflict before merging of the next range starts. TortoiseSVN helps you through this process by showing the <emphasis>merge conflict callback</emphasis> dialog. <placeholder-1/>"
-msgstr "Las fusiones no siempre son fáciles. A menudo ocurre algún conflicto, y si está fusionando múltiples rangos, generalmente querrá resolver el conflicto antes de que comience la fusión del siguiente rango. TortoiseSVN le ayuda durante este proceso mostrándole el diálogo <emphasis>callback de conflicto de fusión</emphasis>. <placeholder-1/>"
+msgstr "Las fusiones no siempre van bien. A menudo ocurre algún conflicto, y si está fusionando múltiples rangos, generalmente querrá resolver el conflicto antes de que comience la fusión del siguiente rango. TortoiseSVN le ayuda durante este proceso mostrándole el diálogo <emphasis>información de conflicto de fusión</emphasis>. <placeholder-1/>"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8700
@@ -7395,15 +7317,13 @@ msgstr "fusión de reintegración"
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8745
-#, fuzzy
 msgid "The Merge reintegrate Dialog"
-msgstr "El diálogo Fusionar todo"
+msgstr "El diálogo Fusionar reintegración"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8735
-#, fuzzy
 msgid "If you want to merge all changes from a feature branch back to trunk, then you can use the <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Merge reintegrate...</guimenuitem></menuchoice> from the extended context menu (hold down the <keycap>Shift</keycap> key while you right click on the file). <placeholder-1/> This dialog is very easy. All you have to do is set the options for the merge, as described in <xref linkend=\"tsvn-dug-merge-options\"/>. The rest is done by TortoiseSVN automatically using merge tracking."
-msgstr "Si desea fusionar todos los cambios desde el tronco hacia la rama en la que está trabajando, puede utilizar <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Fusionar todo...</guimenuitem></menuchoice> desde el menú contextual extendido (mantenga pulsada la tecla <keycap>Mayús</keycap> mientras hace click con el botón derecho en el fichero). <placeholder-1/> Este diálogo es muy simple. Todo lo que debe hacer es seleccionar las opciones para la fusión, como se describe en <xref linkend=\"tsvn-dug-merge-options\"/>. El resto lo realiza automáticamente TortoiseSVN utilizando el registro de fusiones."
+msgstr "Si desea fusionar todos los cambios desde una rama de característica al tronco, entonces puede utilizar el comando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Fusionar reintegración...</guimenuitem></menuchoice> desde el menú contextual extendido (mantenga pulsada la tecla <keycap>Mayúsculas</keycap> mientras hace click con el botón derecho en el fichero). <placeholder-1/> Este diálogo es muy sencillo. Todo lo que tiene que hacer el establecer las opciones para la fusión, como se describe en <xref linkend=\"tsvn-dug-merge-options\"/>. El resto se hace por TortoiseSVN automáticamente utilizando el registro de fusiones."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8755
@@ -7427,9 +7347,8 @@ msgstr "Está utilizando ficheros <quote>no fusionables</quote>, por ejemplo, fi
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8778
-#, fuzzy
 msgid "Your company has always used a locking revision control system in the past and there has been a management decision that <quote>locking is best</quote>."
-msgstr "Su compañía ha utilizado en el pasado un SCV bloqueante, y la dirección ha decidido que <quote>bloquear es lo mejor</quote>."
+msgstr "Su compañía ha utilizado en el pasado un sistema de control de versiones bloqueante, y la dirección ha decidido que <quote>bloquear es lo mejor</quote>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8762
@@ -7438,9 +7357,8 @@ msgstr "Subversion generalmente trabaja mejor sin bloqueos, utilizando los méto
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8786
-#, fuzzy
 msgid "Firstly you need to ensure that your Subversion server is upgraded to at least version 1.2. Earlier versions do not support locking at all. If you are using <literal>file://</literal> access, then of course only your client needs to be updated."
-msgstr "Primero necesita asegurarse de que su servidor de Subversion está actualizo al menos a la versión 1.2. Las versiones anteriores no tienen ningún soporte de bloqueos. Si está usando el acceso <filename>file:///</filename>, sólo necesita actualizar sus clientes, por supuesto."
+msgstr "Primero necesita asegurarse de que su servidor de Subversion está actualizado al menos a la versión 1.2. Las versiones anteriores no tienen ningún soporte de bloqueos. Si está usando el acceso <filename>file://</filename>, sólo necesitará actualizar sus clientes, por supuesto."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8793
@@ -7494,9 +7412,8 @@ msgstr "Seleccione el fichero o ficheros en su copia de trabajo para los que des
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8869
-#, fuzzy
 msgid "If you select a folder and then use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Get Lock...</guimenuitem></menuchoice> the lock dialog will open with <emphasis>every</emphasis> file in <emphasis>every</emphasis> sub-folder selected for locking. If you really want to lock an entire hierarchy, that is the way to do it, but you could become very unpopular with your co-workers if you lock them out of the whole project. Use with care ..."
-msgstr "Si selecciona una carpeta y luego utiliza <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Obtener Bloqueo...</guimenuitem></menuchoice> se abrirá el diálogo de bloquear con <emphasis>todos</emphasis> los ficheros en <emphasis>todas</emphasis> las subcarpetas seleccionados para bloquearlos. Si realmente quiere bloquear una jerarquía completa, ésta es la forma de conseguirlo, pero puede convertirse en persona non grata para sus compañeros de trabajo si les bloquea todo el proyecto. Utilícelo con cuidado..."
+msgstr "Si selecciona una carpeta y luego utiliza <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Obtener Bloqueo...</guimenuitem></menuchoice> se abrirá el diálogo de bloquear con <emphasis>todos</emphasis> los ficheros en <emphasis>todas</emphasis> las subcarpetas seleccionados para bloquearlos. Si realmente quiere bloquear una jerarquía completa, ésta es la forma de conseguirlo, pero puede ganarse la antipatía de sus compañeros de trabajo si les bloquea todo el proyecto. Utilícelo con cuidado..."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8883
@@ -7555,9 +7472,8 @@ msgstr "Como se menciona arriba, la manera más efectiva de utilizar los bloqueo
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8953
-#, fuzzy
 msgid "If you operate a policy where every file has to be locked then you may find it easier to use Subversion's auto-props feature to set the property automatically every time you add new files. Read <xref linkend=\"tsvn-dug-propertypage-auto-props\"/> for further information."
-msgstr "Si opera una política donde todos los ficheros han de ser bloqueados, puede que encuentre más fácil utilizar la característica de Subversion auto-props para establecer la propiedad automáticamente cada vez que añada nuevos ficheros. Para más información, lea <xref linkend=\"tsvn-dug-settings\"/>."
+msgstr "Si opera una política donde todos los ficheros han de ser bloqueados, puede que encuentre más fácil utilizar la característica de Subversion auto-props para establecer la propiedad automáticamente cada vez que añada nuevos ficheros. Para más información, lea <xref linkend=\"tsvn-dug-propertypage-auto-props\"/>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8962
@@ -7651,9 +7567,8 @@ msgstr "Aplicando un fichero parche"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9069
-#, fuzzy
 msgid "Patch files are applied to your working copy. This should be done from the same folder level as was used to create the patch. If you are not sure what this is, just look at the first line of the patch file. For example, if the first file being worked on was <filename>doc/source/english/chapter1.xml</filename> and the first line in the patch file is <filename>Index: english/chapter1.xml</filename> then you need to apply the patch to the <filename>doc/source/</filename> folder. However, provided you are in the correct working copy, if you pick the wrong folder level, TortoiseSVN will notice and suggest the correct level."
-msgstr "Los ficheros de parches se aplican en su copia de trabajo. Esto debe hacerse desde el mismo nivel de carpetas que se utilizó para crear el parche. Si no está seguro de cuál es, mire la primera línea del fichero de parche. Por ejemplo, si el primer fichero en el que se trabajó era <filename>doc/source/english/chapter1.xml</filename> y la primera línea en el fichero de parche es <filename>Index: english/chapter1.xml</filename> entonces necesita aplicar el parche en la carpeta <filename>english</filename>. Sin embargo, suponiendo que esté en la copia de trabajo correcta, si ha seleccionado un nivel de carpeta erróneo, TSVN se dará cuenta y le sugerirá el nivel correcto."
+msgstr "Los ficheros de parches se aplican en su copia de trabajo. Esto debe hacerse desde el mismo nivel de carpetas que se utilizó para crear el parche. Si no está seguro de cuál es, mire la primera línea del fichero de parche. Por ejemplo, si el primer fichero en el que se trabajó era <filename>doc/source/english/chapter1.xml</filename> y la primera línea en el fichero de parche es <filename>Index: english/chapter1.xml</filename> entonces necesita aplicar el parche en la carpeta <filename>english</filename>. Sin embargo, suponiendo que esté en la copia de trabajo correcta, si ha seleccionado un nivel de carpeta erróneo, TortoiseSVN se dará cuenta y le sugerirá el nivel correcto."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9083
@@ -7662,9 +7577,8 @@ msgstr "Para aplicar un fichero de parche en su copia de trabajo, necesita al me
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9090
-#, fuzzy
 msgid "From the context menu for that folder, click on <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Apply Patch...</guimenuitem></menuchoice> This will bring up a file open dialog allowing you to select the patch file to apply. By default only <filename>.patch</filename> or <filename>.diff</filename> files are shown, but you can opt for <quote>All files</quote>. If you previously saved a patch to the clipboard, you can use <guibutton>Open from clipboard...</guibutton> in the file open dialog."
-msgstr "Desde el menú contextual de esa carpeta, pulse en <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Aplicar Parche...</guimenuitem></menuchoice> Esto mostrará un diálogo de abrir fichero que le permitirá seleccionar el fichero de parche a aplicar. Por defecto sólo aparecen los ficheros <filename>.patch</filename> o <filename>.diff</filename>, pero puede elegir \"Todos los ficheros\"."
+msgstr "Desde el menú contextual de esa carpeta, pulse en <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Aplicar Parche...</guimenuitem></menuchoice> Esto mostrará un diálogo de abrir fichero que le permitirá seleccionar el fichero de parche a aplicar. Por defecto sólo aparecen los ficheros <filename>.patch</filename> o <filename>.diff</filename>, pero puede elegir <quote>Todos los ficheros</quote>. Si había guardado previamente un parche en el portapapeles, puede usar <guibutton>Abrir desde el portapapeles...</guibutton> en el diálogo de abrir fichero."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9104
@@ -7793,15 +7707,13 @@ msgstr "Si está utilizando Registro de fusiones, cuando las líneas hayan cambi
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9274
-#, fuzzy
 msgid "If you want to see the paths involved in the merge, select <menuchoice><guimenu>View</guimenu><guimenuitem>Merge paths</guimenuitem></menuchoice>."
-msgstr "En su copia de trabajo seleccione <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Fusionar</guimenuitem></menuchoice>."
+msgstr "Si quiere ver las rutas involucradas en la fusión, seleccione <menuchoice><guimenu>Ver</guimenu><guimenuitem>Rutas de fusión</guimenuitem></menuchoice>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9281
-#, fuzzy
 msgid "The settings for TortoiseBlame can be accessed using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings...</guimenuitem></menuchoice> on the TortoiseBlame tab. Refer to <xref linkend=\"tsvn-dug-settings-tortoiseblame\"/>."
-msgstr "Se pueden mover/copiar ficheros de uno en uno utilizando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Renombrar...</guimenuitem></menuchoice>. Pero si desea mover/copiar muchos ficheros, esta forma es muy lenta y trabajosa."
+msgstr "Las configuraciones para TortoiseBlame se pueden acceder utilizando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Configuración...</guimenuitem></menuchoice> en la pestaña TortoiseBlame. Para más información, vea <xref linkend=\"tsvn-dug-settings-tortoiseblame\"/>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:9292
@@ -7830,9 +7742,8 @@ msgstr "Ver la autoría de los cambios"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9319
-#, fuzzy
 msgid "Select one revision in the top pane, then pick one file in the bottom pane and select <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Blame changes</guimenuitem></menuchoice>. This will fetch the blame data for the selected revision and the previous revision, then use the diff viewer to compare the two blame files."
-msgstr "Seleccione una revisión en el panel superior, luego seleccione un fichero en el panel inferior y seleccione <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>Ver autoría de las diferencias</guimenuitem></menuchoice>. Esto obtendrá los datos de autoría de la revisión seleccionada y la anterior, y utilizará el visor de diferencias para comparar los dos ficheros de autoría."
+msgstr "Seleccione una revisión en el panel superior, luego seleccione un fichero en el panel inferior y seleccione <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>Autoría de los cambios</guimenuitem></menuchoice>. Esto obtendrá los datos de autoría de la revisión seleccionada y la anterior, y utilizará el visor de diferencias para comparar los dos ficheros de autoría."
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:9333
@@ -7888,9 +7799,8 @@ msgstr "Al igual que el explorador de Windows, puede pulsar sobre los encabezado
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9407
-#, fuzzy
 msgid "Save an unversioned copy of the file to your hard drive."
-msgstr "cree una nueva carpeta en su disco duro"
+msgstr "Guardar una copia no versionada del fichero en su disco duro."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9412
@@ -7939,15 +7849,13 @@ msgstr "Obtener la carpeta para producir una copia de trabajo local en su disco 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9460
-#, fuzzy
 msgid "Create a new folder in the repository."
-msgstr "Ítems añadidos al repositorio."
+msgstr "Crear una nueva carpeta en el repositorio."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9465
-#, fuzzy
 msgid "Add files or folders directly to the repository."
-msgstr "Ítems añadidos al repositorio."
+msgstr "Añadir ficheros o carpetas directamente al repositorio."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9470
@@ -7971,9 +7879,8 @@ msgstr "Marcar la carpeta para comparación. La carpeta marcada se mostrará en 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9491
-#, fuzzy
 msgid "Compare the folder with a previously marked folder, either as a unified diff, or as a list of changed files which can then be visually diffed using the default diff tool. This can be particularly useful for comparing two tags, or trunk and branch to see what changed."
-msgstr "Si selecciona dos ítems, puede ver las diferencias bien como diff unificado, o bien como una lista de ficheros que pueden diferenciarse visualmente utilizando la herramienta de diferencias por defecto. Esto puede ser particularmente útil para comparar dos etiquetas y ver qué ha cambiado."
+msgstr "Comparar la carpeta con una carpeta marcada previamente, bien como diff unificado, o bien como una lista de ficheros que pueden diferenciarse visualmente utilizando la herramienta de diferencias por defecto. Esto puede ser particularmente útil para comparar dos etiquetas, o el tronco y una rama para ver qué se ha cambiado."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9440
@@ -7982,9 +7889,8 @@ msgstr "El menú contextual para una carpeta le parmite: <placeholder-1/>"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9500
-#, fuzzy
 msgid "If you select two folders in the right pane, you can view the differences either as a unified-diff, or as a list of files which can be visually diffed using the default diff tool."
-msgstr "Si selecciona dos ítems, puede ver las diferencias bien como diff unificado, o bien como una lista de ficheros que pueden diferenciarse visualmente utilizando la herramienta de diferencias por defecto. Esto puede ser particularmente útil para comparar dos etiquetas y ver qué ha cambiado."
+msgstr "Si selecciona dos carpetas en el panel derecho, puede ver las diferencias bien como diff unificado, o bien como una lista de ficheros que pueden diferenciarse visualmente utilizando la herramienta de diferencias por defecto."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9505
@@ -7998,27 +7904,23 @@ msgstr "Si selecciona dos etiquetas que se han copiado desde la misma raíz (tip
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9518
-#, fuzzy
 msgid "You can use <keycap>F5</keycap> to refresh the view as usual. This will refresh everything which is currently displayed. If you want to pre-fetch or refresh the information for nodes which have not been opened yet, use <keycap>Ctrl-F5</keycap>. After that, expanding any node will happen instantly without a network delay while the information is fetched."
-msgstr "Puede utilizar <action>F5</action> para refrescar la vista como siempre. Esto refrescará todo lo que se esté viendo actualmente. Si quiere precargar o refrescar la información para los nodos que aún no han sido abiertos, utilice <action>CTRL-F5</action>. Después de eso, la expansión de cualquier nodo ocurrirá automáticamente sin que haya una pausa por la red mientras se recoge la información."
+msgstr "Puede utilizar <keycap>F5</keycap> para refrescar la vista como siempre. Esto refrescará todo lo que se esté viendo actualmente. Si quiere precargar o refrescar la información para los nodos que aún no han sido abiertos, utilice <keycap>Ctrl-F5</keycap>. Después de eso, la expansión de cualquier nodo ocurrirá automáticamente sin que haya una pausa por la red mientras se recoge la información."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9525
-#, fuzzy
 msgid "You can also use the repository browser for drag-and-drop operations. If you drag a folder from explorer into the repo-browser, it will be imported into the repository. Note that if you drag multiple items, they will be imported in separate commits."
-msgstr "También puede utilizar el navegador de repositorios para operaciones de arrastrar-y-soltar. Si arrastra una carpeta desde el Explorador al navegador de repositorios, se importará esa carpeta en el repositorios. Tenga en cuenta que si arrastra múltiples items, se importarán en confirmaciones separadas."
+msgstr "También puede utilizar el navegador de repositorios para operaciones de arrastrar-y-soltar. Si arrastra una carpeta desde el Explorador al navegador de repositorios, se importará esa carpeta en el repositorio. Tenga en cuenta que si arrastra múltiples items, se importarán en confirmaciones separadas."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9531
-#, fuzzy
 msgid "If you want to move an item within the repository, just <action>left drag</action> it to the new location. If you want to create a copy rather than moving the item, <keycap>Ctrl</keycap>-<action>left drag</action> instead. When copying, the cursor has a <quote>plus</quote> symbol on it, just as it does in Explorer."
-msgstr "Si desea mover un ítem en el repositorio, simplemente <action>arrastre con el botón izquierdo</action> el ítem a su nueva localización. Si desea crear una copia en vez de mover el ítem, <action>arrastre con el botón izquierdo manteniendo la tecla Control pulsada</action>. Cuando copia, el cursor tiene un símbolo <quote>más</quote> en él, tal y como lo hace en el Explorador."
+msgstr "Si desea mover un ítem dentro del repositorio, simplemente <action>arrastre con el botón izquierdo</action> el ítem a su nuevo lugar. Si desea crear una copia en vez de mover el ítem, entonces deberá <keycap>Ctrl</keycap>-<action>arrastrar con el botón izquierdo</action>. Cuando copia, el cursor tiene un símbolo <quote>más</quote> en él, tal y como lo hace en el Explorador."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9537
-#, fuzzy
 msgid "If you want to copy/move a file or folder to another location and also give it a new name at the same time, you can <action>right drag</action> or <keycap>Ctrl</keycap>-<action>right drag</action> the item instead of using <action>left drag</action>. In that case, a rename dialog is shown where you can enter a new name for the file or folder."
-msgstr "Si desea copiar/mover un fichero o una carpeta a otro lugar y darle también otro nombre a la vez, puede <action>arrastrar con el botón derecho</action> o <action>arrastrar con el botón derecho pulsando Control</action> el ítem en vez de <action>arrastrarlo con el botón izquierdo</action>. En ese caso, aparece un diálogo para renombrar en el que puede introducir un nuevo nombre para el fichero o la carpeta."
+msgstr "Si desea copiar/mover un fichero o una carpeta a otro lugar y darle también otro nombre a la vez, puede <action>arrastrar con el botón derecho</action> o <keycap>Ctrl</keycap>-<action>arrastrar con el botón derecho</action> el ítem en vez de <action>arrastrarlo con el botón izquierdo</action>. En ese caso, aparece un diálogo en el que puede introducir un nuevo nombre para el fichero o la carpeta."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9544
@@ -8027,9 +7929,8 @@ msgstr "Siempre que haga cambios en el repositorio utiizando uno de estos métod
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9549
-#, fuzzy
 msgid "Sometimes when you try to open a path you will get an error message in place of the item details. This might happen if you specified an invalid URL, or if you don't have access permission, or if there is some other server problem. If you need to copy this message to include it in an email, just right click on it and use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Copy error message to clipboard</guimenuitem></menuchoice>, or simply use <keycap>Ctrl+C</keycap>."
-msgstr "A veces cuando intenta abrir una ruta obtendrá un mensaje de error en vez de los detalles del ítem. Esto puede ocurrir si ha especificado una URL inválida, o si no tiene permisos de acceso, o si hay algún otro problema en el servidor. Si necesita copiar este mensaje para incluirlo en un email, simplemente haga click con el botón derecho sobre él y utilice <menuchoice><guimenu>Menú Contextual</guimenu><guimenuitem>Copiar mensaje de error al portapapeles</guimenuitem></menuchoice>, o simplemente utilice <action>CTRL+C</action>."
+msgstr "A veces cuando intenta abrir una ruta obtendrá un mensaje de error en vez de los detalles del ítem. Esto puede ocurrir si ha especificado una URL inválida, si no tiene permisos de acceso, o si hay algún otro problema en el servidor. Si necesita copiar este mensaje para incluirlo en un email, simplemente haga click con el botón derecho sobre él y utilice <menuchoice><guimenu>Menú Contextual</guimenu><guimenuitem>Copiar mensaje de error al portapapeles</guimenuitem></menuchoice>, o simplemente utilice <keycap>Ctrl+C</keycap>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:9564
@@ -8063,9 +7964,8 @@ msgstr "Este comando analiza la historia de las revisiones e intenta crear un á
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9593
-#, fuzzy
 msgid "In order to generate the graph, TortoiseSVN must fetch all log messages from the repository root. Needless to say this can take several minutes even with a repository of a few thousand revisions, depending on server speed, network bandwidth, etc. If you try this with something like the <emphasis>Apache</emphasis> project which currently has over 500,000 revisions you could be waiting for some time."
-msgstr "Para generar el gráfico, TortoiseSVN debe obtener todos los mensajes de registro desde la raíz del repositorio. No es necesario decir que esto puede llevar varios minutos incluso con un repositorio con unos pocos miles de revisiones, dependiendo de la velocidad del servidor, el ancho de la red, etc. Si intenta esto con algo como el proyecto <literal>Apache</literal>, que actualmente tiene más de 300.000 revisiones, puede estar esperando un buen rato."
+msgstr "Para generar el gráfico, TortoiseSVN debe obtener todos los mensajes de registro desde la raíz del repositorio. No es necesario decir que esto puede llevar varios minutos incluso con un repositorio con unos pocos miles de revisiones, dependiendo de la velocidad del servidor, el ancho de banda de la red, etc. Si intenta esto con algo como el proyecto <emphasis>Apache</emphasis>, que actualmente tiene más de 500.000 revisiones, puede estar esperando un buen rato."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9601
@@ -8104,9 +8004,8 @@ msgstr "Revisión punta de la rama"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9633
-#, fuzzy
 msgid "Where a branch (or trunk or tag) has been modified since the last branch node, this is shown using an ellipse. Shown when the <guilabel>Show HEAD revisions</guilabel> option is selected."
-msgstr "Si una rama (o tronco o etiqueta) ha sido modificado desde el último nodo de rama, este hecho se muestra utilizando una elipse. Esto significa que en el gráfico siempre se muestra la última revisión de cada rama."
+msgstr "Cuando una rama (o tronco o etiqueta) ha sido modificada desde el último nodo de rama, este hecho se muestra utilizando una elipse. Se muestra cuando la opción <guilabel>Mostrar los nodos de la revisión HEAD</guilabel> está seleccionada."
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:9642
@@ -8120,9 +8019,8 @@ msgstr "Todos los demás ítems se muestran utilizando un rectángulo normal."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9609
-#, fuzzy
 msgid "The revision graph shows several types of node: <placeholder-1/>"
-msgstr "Muestra el gráfico de revisiones para la ruta dada en <placeholder-1/>."
+msgstr "El gráfico de revisiones muestra diferentes tipos de nodos: <placeholder-1/>"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9651
@@ -8231,9 +8129,8 @@ msgstr "La fecha de la revisión, el autor y los comentarios se muestran en una 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9772
-#, fuzzy
 msgid "If you select two revisions (Use <keycap>Ctrl</keycap>-<action>left click</action>), you can use the context menu to show the differences between these revisions. You can choose to show differences as at the branch creation points, but usually you will want to show the differences at the branch end points, i.e. at the HEAD revision."
-msgstr "Si selecciona dos revisiones (utilice <action>Ctrl + click con el botón izquierdo</action>), puede utilizar el menú contextual para mostrar las diferencias entre esas revisiones. Puede elegir mostrar las diferencias en los puntos de creación de las ramas, pero normalmente querrá mostrar las diferencias en los puntos finales de las ramas, esto es, en la revisión HEAD."
+msgstr "Si selecciona dos revisiones (mediante <keycap>Ctrl</keycap>-<action>click con el botón izquierdo</action>), puede utilizar el menú contextual para mostrar las diferencias entre esas revisiones. Puede elegir mostrar las diferencias en los puntos de creación de las ramas, pero normalmente querrá mostrar las diferencias en los puntos finales de las ramas, esto es, en la revisión HEAD."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9779
@@ -8282,15 +8179,13 @@ msgstr "'copia de trabajo' no versionada"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9845
-#, fuzzy
 msgid "Sometimes you may want a copy of your working tree without any of those <filename>.svn</filename> directories, e.g. to create a zipped tarball of your source, or to export to a web server. Instead of making a copy and then deleting all those <filename>.svn</filename> directories manually, TortoiseSVN offers the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Export...</guimenuitem></menuchoice>. Exporting from a URL and exporting from a working copy are treated slightly differently."
-msgstr "A veces querrá una copia de su árbol de trabajo sin ninguno de esos directorios <filename>.svn</filename>, por ejemplo para crear un fichero comprimido de sus fuentes, o para exportarlo a un servidor web. En vez de hacer una copia y borrar todos esos directorios <filename>.svn</filename> manualmente, TortoiseSVN ofrece el comando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Exportar...</guimenuitem></menuchoice>. Si ejecuta este comando en su copia de trabajo, se le preguntará por el lugar donde guardar la copia de trabajo <emphasis>limpia</emphasis> sin las carpetas <filename>.svn</filename>. Por defecto, sólo se exportan los ficheros versionados, pero puede utilizar la casilla <guilabel>Exportar también los ficheros no versionados</guilabel> para incluir cualquier otro fichero sin versionar que exista en su copia de trabajo y no en el repositorio. Las referencias externas definidas por <literal>svn:externals</literal> se pueden omitir si se necesita."
+msgstr "A veces querrá una copia de su árbol de trabajo sin ninguno de esos directorios <filename>.svn</filename>, por ejemplo para crear un fichero comprimido de sus fuentes, o para exportarlo a un servidor web. En vez de hacer una copia y borrar todos esos directorios <filename>.svn</filename> manualmente, TortoiseSVN ofrece el comando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Exportar...</guimenuitem></menuchoice>. Las operaciones exportar desde una URL y exportar desde una copia de trabajo se tratan de forma ligeramente distinta."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:9860
-#, fuzzy
 msgid "The Export-from-URL Dialog"
-msgstr "El diálogo Importar"
+msgstr "El diálogo Exportar-desde-URL"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9858
@@ -8299,33 +8194,28 @@ msgstr "<placeholder-1/> Si ejecuta este comando sobre una carpeta sin versionar
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9870
-#, fuzzy
 msgid "Of course you can export directly from the repository too. Use the Repository Browser to navigate to the relevant subtree in your repository, then use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Export</guimenuitem></menuchoice>. You will get the <guilabel>Export from URL</guilabel> dialog described above."
-msgstr "Y por supuesto también puede exportar directamente desde el repositorio. Utilice el Navegador de repositorios para navegar al árbol relevante en su repositorio, y luego utilice <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>Exportar</guimenuitem></menuchoice>."
+msgstr "Por supuesto también puede exportar directamente desde el repositorio. Utilice el Navegador de repositorios para navegar al subárbol relevante en su repositorio, y luego utilice <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>Exportar</guimenuitem></menuchoice>. Obtendrá el diálogo <guilabel>Exportar desde URL</guilabel> descrito más arriba."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9880
-#, fuzzy
 msgid "If you execute this command on your working copy you'll be asked for a place to save the <emphasis>clean</emphasis> working copy without the <filename>.svn</filename> folders. By default, only the versioned files are exported, but you can use the <guilabel>Export unversioned files too</guilabel> checkbox to include any other unversioned files which exist in your WC and not in the repository. External references using <literal>svn:externals</literal> can be omitted if required."
-msgstr "A veces querrá una copia de su árbol de trabajo sin ninguno de esos directorios <filename>.svn</filename>, por ejemplo para crear un fichero comprimido de sus fuentes, o para exportarlo a un servidor web. En vez de hacer una copia y borrar todos esos directorios <filename>.svn</filename> manualmente, TortoiseSVN ofrece el comando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Exportar...</guimenuitem></menuchoice>. Si ejecuta este comando en su copia de trabajo, se le preguntará por el lugar donde guardar la copia de trabajo <emphasis>limpia</emphasis> sin las carpetas <filename>.svn</filename>. Por defecto, sólo se exportan los ficheros versionados, pero puede utilizar la casilla <guilabel>Exportar también los ficheros no versionados</guilabel> para incluir cualquier otro fichero sin versionar que exista en su copia de trabajo y no en el repositorio. Las referencias externas definidas por <literal>svn:externals</literal> se pueden omitir si se necesita."
+msgstr "Si ejecuta este comando en su copia de trabajo, se le preguntará por el lugar donde guardar la copia de trabajo <emphasis>limpia</emphasis> sin las carpetas <filename>.svn</filename>. Por defecto, sólo se exportan los ficheros versionados, pero puede utilizar la casilla <guilabel>Exportar también los ficheros o versionados</guilabel> para incluir cualquier otro fichero no versionado que exista en su copia de trabajo y no esté en el repositorio. Las referencias externas utilizando <literal>svn:externals</literal> pueden omitirse si es necesario."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9890
-#, fuzzy
 msgid "Another way to export from a working copy is to <action>right drag</action> the working copy folder to another location and choose <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>SVN Export here</guimenuitem></menuchoice> or <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>SVN Export all here</guimenuitem></menuchoice>. The second option includes the unversioned files as well."
-msgstr "Otra forma de hacer una exportación es <action>arrastrar con el botón derecho</action> una carpeta con una copia de trabajo a otro lugar y elegir <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>SVN Exportar aquí</guimenuitem></menuchoice> o <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>SVN Exportar todo aquí</guimenuitem></menuchoice>. La segunda opción incluirá también los ficheros sin versionar."
+msgstr "Otra forma de exportar su copia de trabajo es <action>arrastrar con el botón derecho</action> la carpeta con la copia de trabajo a otro lugar y elegir <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>SVN Exportar aquí</guimenuitem></menuchoice> o <menuchoice><guimenu>Menú contextual</guimenu><guimenuitem>SVN Exportar todo aquí</guimenuitem></menuchoice>. La segunda opción incluirá también los ficheros sin versionar."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9904
-#, fuzzy
 msgid "When exporting from a working copy, if the target folder already contains a folder of the same name as the one you are exporting, you will be given the option to overwrite the existing content, or to create a new folder with an automatically generated name, eg. <literal>Target (1)</literal>."
-msgstr "Si en la carpeta de destino ya existe otra con el nombre de la que está exportando, se le dará la opción de sobreescribir el contenido existente, o crear una nueva carpeta con un nombre generado automáticamente, por ejemplo, <literal>Destino (1)</literal>."
+msgstr "Cuando exporte desde una copia de trabajo, si en la carpeta de destino ya existe otra con el nombre de la que está exportando, se le dará la opción de sobreescribir el contenido existente, o de crear una nueva carpeta con un nombre generado automáticamente, por ejemplo, <literal>Destino (1)</literal>."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:9912
-#, fuzzy
 msgid "Removing a working copy from version control"
-msgstr "Elimina el/los fichero/s en <placeholder-1/> del control de versiones."
+msgstr "Eliminando una copia de trabajo del control de versiones"
 
 #. (primary)
 #. (primary)
@@ -8381,9 +8271,8 @@ msgstr "El diálogo Relocalizar"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9950
-#, fuzzy
 msgid "<placeholder-1/> If your repository has for some reason changed it's location (IP/URL). Maybe you're even stuck and can't commit and you don't want to checkout your working copy again from the new location and to move all your changed data back into the new working copy, <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Relocate</guimenuitem></menuchoice> is the command you are looking for. It basically does very little: it scans all <filename>entries</filename> files in the <filename>.svn</filename> folder and changes the URL of the entries to the new value."
-msgstr "<placeholder-1/> Si su repositorio ha cambiado por algún motivo de lugar (IP/URL); o quizás está estancado y no puede confirmar y no quiere obtener de nuevo su copia de trabajo de la nueva localización y mover todos sus datos cambiados a la copia de trabajo nueva: el comando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Relocalizar</guimenuitem></menuchoice> es lo que está buscando. Básicamente hace muy poco: escanea todos los ficheros \"entries\" en las carpetas <filename>.svn</filename> y cambia la URL de las entradas al nuevo valor."
+msgstr "<placeholder-1/> Si su repositorio ha cambiado por algún motivo de lugar (IP/URL); o quizás está estancado y no puede confirmar y no quiere obtener de nuevo su copia de trabajo de la nueva localización y mover todos sus datos cambiados a la copia de trabajo nueva: el comando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Relocalizar</guimenuitem></menuchoice> es lo que está buscando. Básicamente hace muy poco: escanea todos los ficheros <filename>entries</filename> en las carpetas <filename>.svn</filename> y cambia la URL de las entradas al nuevo valor."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:9976
