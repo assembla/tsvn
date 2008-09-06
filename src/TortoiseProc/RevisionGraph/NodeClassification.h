@@ -60,7 +60,12 @@ public:
         IS_FIRST           = 0x04000000,
         IS_LAST            = 0x08000000,
 
-        IS_WORKINGCOPY     = 0x10000000
+        IS_WORKINGCOPY     = 0x10000000,
+
+        // if set, the node should not be removed
+        // (only valid in visible graph)
+
+        MUST_BE_PRESERVED  = 0x80000000
     };
 
     enum 

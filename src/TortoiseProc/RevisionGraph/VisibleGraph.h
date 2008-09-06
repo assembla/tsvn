@@ -49,7 +49,8 @@ public:
 
     void Clear();
     CVisibleGraphNode* Add ( const CFullGraphNode* base
-                           , CVisibleGraphNode* source);
+                           , CVisibleGraphNode* source
+                           , bool preserveNode);
 
     /// member access
 

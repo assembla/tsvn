@@ -59,7 +59,8 @@ void CVisibleGraphBuilder::Copy (const CFullGraphNode* source, CVisibleGraphNode
     do
     {
         ICopyFilterOption::EResult filterAction = copyFilter.ShallRemove (source);
-        while (filterAction != ICopyFilterOption::KEEP_NODE)
+        while (   (filterAction != ICopyFilterOption::KEEP_NODE)
+               && (filterAction != ICopyFilterOption::PRESERVE_NODE))
         {
             // stop copy here, if the whole sub-tree shall be removed
 
@@ -83,7 +84,8 @@ void CVisibleGraphBuilder::Copy (const CFullGraphNode* source, CVisibleGraphNode
 
         // copy the node itself
 
-        target = visibleGraph.Add (source, target);
+        bool preserveNode = filterAction != ICopyFilterOption::PRESERVE_NODE;
+        target = visibleGraph.Add (source, target, preserveNode);
 
         // copy branches
 

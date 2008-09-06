@@ -93,7 +93,8 @@ public:
         /// factory interface
 
         CVisibleGraphNode* Create ( const CFullGraphNode* base
-                                  , CVisibleGraphNode* prev);
+                                  , CVisibleGraphNode* prev
+                                  , bool preserveNode);
         void Destroy (CVisibleGraphNode* node);
 
         CFoldedTag* Create ( const CFullGraphNode* tagNode
@@ -134,7 +135,8 @@ protected:
 
 	CVisibleGraphNode ( const CFullGraphNode* base
                       , CVisibleGraphNode* prev
-                      , CCopyTarget::factory& copyTargetFactory);
+                      , CCopyTarget::factory& copyTargetFactory
+                      , bool preserveNode);
     ~CVisibleGraphNode();
 
     /// destruction utilities

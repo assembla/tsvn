@@ -50,10 +50,11 @@ CVisibleGraphNode::CFactory::CFactory()
 
 CVisibleGraphNode* CVisibleGraphNode::CFactory::Create 
     ( const CFullGraphNode* base
-    , CVisibleGraphNode* prev)
+    , CVisibleGraphNode* prev
+    , bool preserveNode)
 {
     CVisibleGraphNode * result = static_cast<CVisibleGraphNode *>(nodePool.malloc());
-    new (result) CVisibleGraphNode (base, prev, copyTargetFactory);
+    new (result) CVisibleGraphNode (base, prev, copyTargetFactory, preserveNode);
 
     ++nodeCount;
     return result;
@@ -91,11 +92,15 @@ void CVisibleGraphNode::CFactory::Destroy (CFoldedTag* tag)
 CVisibleGraphNode::CVisibleGraphNode 
     ( const CFullGraphNode* base
     , CVisibleGraphNode* prev
-    , CCopyTarget::factory& copyTargetFactory)
+    , CCopyTarget::factory& copyTargetFactory
+    , bool preserveNode)
 	: base (base)
 	, firstCopyTarget (NULL), firstTag (NULL)
 	, prev (NULL), next (NULL), copySource (NULL)
-    , classification (base->GetClassification())
+    , classification (  preserveNode 
+                      ? base->GetClassification().GetFlags()
+                      : (   base->GetClassification().GetFlags() 
+                          | CNodeClassification::MUST_BE_PRESERVED))
 	, index ((index_t)NO_INDEX) 
 {
     if (prev != NULL)

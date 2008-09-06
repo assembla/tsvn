@@ -28,14 +28,15 @@ void CVisibleGraph::Clear()
 }
 
 CVisibleGraphNode* CVisibleGraph::Add ( const CFullGraphNode* base
-                                      , CVisibleGraphNode* source)
+                                      , CVisibleGraphNode* source
+                                      , bool preserveNode)
 {
     // (only) the first node must have no parent / prev node
 
     assert ((source == NULL) == (root == NULL));
 
     CVisibleGraphNode* result 
-        = nodeFactory.Create (base, source);
+        = nodeFactory.Create (base, source, preserveNode);
 
     if (root == NULL)
         root = result;

@@ -35,7 +35,8 @@ public:
     {
         KEEP_NODE = 0,
         REMOVE_NODE = 1,
-        REMOVE_SUBTREE = 2
+        REMOVE_SUBTREE = 2,
+        PRESERVE_NODE = 3  // shall not be removed, even by other filters
     };
 
     virtual EResult ShallRemove (const CFullGraphNode* node) const = 0;
