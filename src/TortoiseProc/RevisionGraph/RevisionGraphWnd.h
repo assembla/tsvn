@@ -104,7 +104,8 @@ public:
 	void			SaveGraphAs(CString sSavePath);
 
     bool            FetchRevisionData ( const CString& path
-                                      , SVNRev pegRevision);
+                                      , SVNRev pegRevision
+                                      , const CAllRevisionGraphOptions& options);
     bool            AnalyzeRevisionData (const CAllRevisionGraphOptions& options);
     CString         GetLastErrorMessage() const;
 
@@ -127,7 +128,7 @@ protected:
 
 	BOOL			m_bShowOverview;
 
-    CFullHistory    m_fullHistory;
+    std::auto_ptr<CFullHistory>    m_fullHistory;
     CFullGraph      m_fullGraph;
     CVisibleGraph   m_visibleGraph;
     std::auto_ptr<IRevisionGraphLayout> m_layout;

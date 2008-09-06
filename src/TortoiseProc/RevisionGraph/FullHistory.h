@@ -91,7 +91,7 @@ public:
 
     /// query data
 
-	bool						FetchRevisionData (CString path, SVNRev revision, CProgressDlg* progress);
+	bool						FetchRevisionData (CString path, SVNRev revision, bool showWCRev, CProgressDlg* progress);
 
     /// data access
 

@@ -25,7 +25,6 @@ CRemoveSimpleChanges::ShallRemove (const CFullGraphNode* node) const
 
     return     (node->GetClassification().Is (CNodeClassification::IS_MODIFIED))
             && (node->GetFirstCopyTarget() == NULL)
-            && (node->GetNext() != NULL)
         ? ICopyFilterOption::REMOVE_NODE
         : ICopyFilterOption::KEEP_NODE;
 }

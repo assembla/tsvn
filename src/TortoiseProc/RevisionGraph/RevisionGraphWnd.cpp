@@ -633,7 +633,7 @@ CString CRevisionGraphWnd::TooltipText (const CVisibleGraphNode* node)
 {
     CString strTipText;
 
-    const CCachedLogInfo* cache = m_fullHistory.GetCache();
+    const CCachedLogInfo* cache = m_fullHistory->GetCache();
     const CRevisionIndex& revisions = cache->GetRevisions();
     const CRevisionInfoContainer& revisionInfo = cache->GetLogInfo();
 
@@ -951,7 +951,7 @@ void CRevisionGraphWnd::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 		case ID_SHOWLOG:
 			{
 				CString sCmd;
-				CString URL = m_fullHistory.GetRepositoryRoot() 
+				CString URL = m_fullHistory->GetRepositoryRoot() 
                             + CUnicodeUtils::GetUnicode (m_SelectedEntry1->GetPath().GetPath().c_str());
 				sCmd.Format(_T("\"%s\" /command:log /path:\"%s\" /startrev:%ld"), 
 					CPathUtils::GetAppDirectory()+_T("TortoiseProc.exe"), 
@@ -970,7 +970,7 @@ void CRevisionGraphWnd::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 			break;
 		case ID_MERGETO:
 			{
-				CString URL = m_fullHistory.GetRepositoryRoot() 
+				CString URL = m_fullHistory->GetRepositoryRoot() 
                             + CUnicodeUtils::GetUnicode (m_SelectedEntry1->GetPath().GetPath().c_str());
 
 				CString path = m_sPath;
@@ -1070,7 +1070,7 @@ LRESULT CRevisionGraphWnd::OnWorkerThreadDone(WPARAM, LPARAM)
     SVN svn;
 	LogCache::CRepositoryInfo& cachedProperties 
         = svn.GetLogCachePool()->GetRepositoryInfo();
-	SetDlgTitle (cachedProperties.IsOffline (m_fullHistory.GetRepositoryRoot(), false));
+	SetDlgTitle (cachedProperties.IsOffline (m_fullHistory->GetRepositoryRoot(), false));
 
     return 0;
 }

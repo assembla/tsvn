@@ -24,23 +24,21 @@
 #include "revisiongraphoptionsimpl.h"
 #include "Resource.h"
 
-/** Remove all "M" nodes that are neither HEAD nor the root of sub-paths.
+/** 
+* "Pin" current working copy revision, 
+* i.e. keep it from being removed by other rules.
 */
 
-class CRemoveSimpleChanges 
+class CShowWC
     : public CRevisionGraphOptionImpl< ICopyFilterOption
-                                     , 200
-                                     , ID_VIEW_SHOWALLREVISIONS>
+                                     , 100
+                                     , ID_VIEW_SHOWWCREV>
 {
 public:
 
     /// construction
 
-    CRemoveSimpleChanges (CRevisionGraphOptionList& list);
-
-    /// implement IRevisionGraphOption: This option is negated.
-
-    virtual bool IsActive() const; 
+    CShowWC (CRevisionGraphOptionList& list);
 
     /// implement ICopyFilterOption
 

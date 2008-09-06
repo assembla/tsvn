@@ -24,23 +24,19 @@
 #include "revisiongraphoptionsimpl.h"
 #include "Resource.h"
 
-/** Remove all "M" nodes that are neither HEAD nor the root of sub-paths.
+/** "Pin" all Head nodes, i.e. keep them from being removed by other rules.
 */
 
-class CRemoveSimpleChanges 
+class CShowHead
     : public CRevisionGraphOptionImpl< ICopyFilterOption
-                                     , 200
-                                     , ID_VIEW_SHOWALLREVISIONS>
+                                     , 100
+                                     , ID_VIEW_SHOWHEAD>
 {
 public:
 
     /// construction
 
-    CRemoveSimpleChanges (CRevisionGraphOptionList& list);
-
-    /// implement IRevisionGraphOption: This option is negated.
-
-    virtual bool IsActive() const; 
+    CShowHead (CRevisionGraphOptionList& list);
 
     /// implement ICopyFilterOption
 

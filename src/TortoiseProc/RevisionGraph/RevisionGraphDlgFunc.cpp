@@ -34,6 +34,7 @@
 #include "RevisionGraph/FullGraphFinalizer.h"
 #include "RevisionGraph/VisibleGraphBuilder.h"
 #include "RevisionGraph/StandardLayout.h"
+#include "RevisionGraph/ShowWC.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -219,7 +220,9 @@ void CRevisionGraphWnd::Compare (TDiffFunc func, bool bHead)
 	ASSERT(m_SelectedEntry1 != NULL);
 	ASSERT(m_SelectedEntry2 != NULL);
 
-	CString sRepoRoot = m_fullHistory.GetRepositoryRoot();
+	CString sRepoRoot = m_fullHistory.get() != NULL
+                      ? m_fullHistory->GetRepositoryRoot()
+                      : CString();
 
 	CTSVNPath url1;
 	CTSVNPath url2;
@@ -238,15 +241,21 @@ void CRevisionGraphWnd::Compare (TDiffFunc func, bool bHead)
 
 bool CRevisionGraphWnd::FetchRevisionData 
     ( const CString& path
-    , SVNRev pegRevision)
+    , SVNRev pegRevision
+    , const CAllRevisionGraphOptions& options)
 {
-	bool result = m_fullHistory.FetchRevisionData (path, pegRevision, m_pProgress);
+    // (re-)fetch the data
+
+    m_fullHistory.reset (new CFullHistory());
+
+    bool showWCRev = options.GetOption<CShowWC>()->IsActive();
+	bool result = m_fullHistory->FetchRevisionData (path, pegRevision, showWCRev, m_pProgress);
     if (result)
     {
-        CFullGraphBuilder builder (m_fullHistory, m_fullGraph);
+        CFullGraphBuilder builder (*m_fullHistory, m_fullGraph);
         builder.Run();
 
-        CFullGraphFinalizer finalizer (m_fullHistory, m_fullGraph);
+        CFullGraphFinalizer finalizer (*m_fullHistory, m_fullGraph);
         finalizer.Run();
     }
 
@@ -271,7 +280,7 @@ bool CRevisionGraphWnd::AnalyzeRevisionData
         // layout nodes
 
         std::auto_ptr<CStandardLayout> newLayout 
-            ( new CStandardLayout ( m_fullHistory.GetCache()
+            ( new CStandardLayout ( m_fullHistory->GetCache()
                                   , &m_visibleGraph));
         options.GetLayoutOptions().Apply (newLayout.get());
         newLayout->Finalize();
@@ -284,7 +293,7 @@ bool CRevisionGraphWnd::AnalyzeRevisionData
 
 CString CRevisionGraphWnd::GetLastErrorMessage() const
 {
-    return m_fullHistory.GetLastErrorMessage();
+    return m_fullHistory->GetLastErrorMessage();
 }
 
 bool CRevisionGraphWnd::GetShowOverview() const

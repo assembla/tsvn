@@ -24,6 +24,8 @@
 #include "RemoveSimpleChanges.h"
 #include "RemoveDeletedBranches.h"
 #include "FoldTags.h"
+#include "ShowHeads.h"
+#include "ShowWC.h"
 
 #include "StandardNodeSizeAssignment.h"
 #include "StandardNodePositioning.h"
@@ -40,13 +42,13 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_GROUPBRANCHES> (*this);
     new CRemoveSimpleChanges (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_TOPDOWN> (*this);
-    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_SHOWHEAD> (*this);
+    new CShowHead (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_REDUCECROSSLINES> (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_EXACTCOPYSOURCE> (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, 0> (*this);   // 0x40 is not used
     new CFoldTags (*this);
     new CRemoveDeletedBranches (*this);
-    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_SHOWWCREV> (*this);
+    new CShowWC (*this);
 
     // create layout options
 

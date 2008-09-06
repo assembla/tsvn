@@ -167,7 +167,10 @@ void CFullHistory::ReceiveLog ( LogChangedPathArray* changes
 	}
 }
 
-bool CFullHistory::FetchRevisionData (CString path, SVNRev revision, CProgressDlg* progress)
+bool CFullHistory::FetchRevisionData ( CString path
+                                     , SVNRev revision
+                                     , bool showWCRev
+                                     , CProgressDlg* progress)
 {
 	// set some text on the progress dialog, before we wait
 	// for the log operation to start
@@ -249,6 +252,27 @@ bool CFullHistory::FetchRevisionData (CString path, SVNRev revision, CProgressDl
 	    const CPathDictionary* paths = &cache->GetLogInfo().GetPaths();
         wcPath.reset (new CDictionaryBasedTempPath (paths, (const char*)relPath));
         wcRevision = revision;
+
+	    // Find the revision the working copy is on, we mark that revision
+	    // later in the graph (handle option changes properly!).
+        // For performance reasons, we only don't do it if we want to display it.
+
+        if (showWCRev)
+        {
+            svn_revnum_t maxrev = revision;
+            svn_revnum_t minrev;
+	        bool switched, modified, sparse;
+	        if (svn.GetWCRevisionStatus ( CTSVNPath (path)
+								        , true
+								        , minrev
+								        , maxrev
+								        , switched
+								        , modified
+								        , sparse))
+	        {
+		        wcRevision = maxrev;
+	        }
+        }
 
         // analyse the data
 

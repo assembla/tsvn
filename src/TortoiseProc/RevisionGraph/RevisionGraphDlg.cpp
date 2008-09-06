@@ -283,7 +283,7 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
 	    pDlg->m_Graph.m_pProgress->SetTime();
 	    pDlg->m_Graph.m_pProgress->SetProgress(0, 100);
 
-        if (!pDlg->m_Graph.FetchRevisionData (pDlg->m_Graph.m_sPath, SVNRev (SVNRev::REV_HEAD)))
+        if (!pDlg->m_Graph.FetchRevisionData (pDlg->m_Graph.m_sPath, SVNRev (SVNRev::REV_HEAD), pDlg->m_options))
 		    CMessageBox::Show (pDlg->m_hWnd, pDlg->m_Graph.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
 
         pDlg->m_Graph.m_pProgress->Stop();
