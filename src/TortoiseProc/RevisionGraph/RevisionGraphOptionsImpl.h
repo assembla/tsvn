@@ -71,7 +71,7 @@ IRevisionGraphOptionImpl<Base>::IRevisionGraphOptionImpl
     , id (id)
     , selected (false)
 {
-    list.Add (this);
+    list.Add (static_cast<typename Base::I*>(this));
 }
 
 // implement IRevisionGraphOption
@@ -171,3 +171,13 @@ public:
     }
 };
 
+/** Allow for two or more interfaces to be implemented by the same option.
+*/
+
+template<class I1, class I2>
+class CCombineInterface 
+    : public virtual I1
+    , public virtual I2
+{
+    typedef I1 I;
+};

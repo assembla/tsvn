@@ -56,6 +56,10 @@ public:
     /// for simple "on-click" handling
 
     virtual void ToggleSelection() = 0;
+
+    /// required typedef for multi-interface support
+
+    typedef IRevisionGraphOption I;
 };
 
 /**
