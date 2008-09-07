@@ -501,8 +501,9 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
         // for this path even if we didn't follow renamed 
         // (we will not get here in case of an error or user cancel)
 
+        bool limitReached = (limit > 0) && (receiveCount >= limit);
         if (   (receiveCount == 0)
-            || (!options.GetStrictNodeHistory() && (receiveCount < limit)))
+            || (!options.GetStrictNodeHistory() && !limitReached))
         {
             AutoAddSkipRange (max (endRevision,1)-1);
         }
@@ -1075,35 +1076,47 @@ CDictionaryBasedTempPath CCacheLogQuery::TranslatePegRevisionPath
 	iterator.Retry();
 
 	CString url = CUnicodeUtils::GetUnicode (URL);
-    bool offline = repositoryInfoCache->IsOffline (url, false);
-
 	while ((iterator.GetRevision() > startRevision) && !iterator.EndOfPath())
 	{
-        // try to fill gaps but try to connect the server only once
-        // (i.e. if we went "offline", don't try to connect a second time)
+        if (iterator.DataIsMissing())
+		{
+			// don't try to fetch data when in "disconnected" mode
+			
+			if (repositoryInfoCache->IsOffline (url, false))
+			{
+				// just skip unknown revisions
+				// (we already warned the use that this might
+				// result bogus results)
 
-		if (!offline && iterator.DataIsMissing())
-        {
-            CLogOptions options (false);
-			FillLog ( iterator.GetRevision()
-					, startRevision
-					, iterator.GetPath()
-					, 0
-					, options
-                    , CDataAvailable (cache, options));
+				iterator.ToNextAvailableData();
+			}
+			else
+			{
+				// our cache is incomplete -> fill it.
+				// Report entries immediately to the receiver 
+				// (as to allow the user to cancel this action).
 
-            offline = repositoryInfoCache->IsOffline (url, false);
-        }
+                CLogOptions options (false);
+				FillLog ( iterator.GetRevision()
+					    , startRevision
+					    , iterator.GetPath()
+					    , 0
+					    , options
+					    , CDataAvailable (cache, options));
+			}
 
-        // skip ranges of missing data (happens if we are "offline")
+            // the current iterator position should contain data now.
+            // continue looking for the next *relevant* entry.
 
-		if (offline && iterator.DataIsMissing())
-            iterator.ToNextAvailableData();
-        else
-    		iterator.Advance();
+            iterator.Retry();
+		}
+		else
+		{
+			iterator.Advance();
+		}
 	}
 
-	return iterator.GetPath();
+    return iterator.GetPath();
 }
 
 // extract the repository-relative path of the URL / file name
