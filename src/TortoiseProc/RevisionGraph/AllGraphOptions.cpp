@@ -26,6 +26,7 @@
 #include "FoldTags.h"
 #include "ShowHeads.h"
 #include "ShowWC.h"
+#include "ExactCopyFroms.h"
 
 #include "StandardNodeSizeAssignment.h"
 #include "StandardNodePositioning.h"
@@ -44,7 +45,7 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_TOPDOWN> (*this);
     new CShowHead (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_REDUCECROSSLINES> (*this);
-    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_EXACTCOPYSOURCE> (*this);
+    new CExactCopyFroms (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, 0> (*this);   // 0x40 is not used
     new CFoldTags (*this);
     new CRemoveDeletedBranches (*this);
