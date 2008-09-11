@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2008-09-11 09:03+0100\n"
+"PO-Revision-Date: 2008-09-11 12:41+0100\n"
 "Last-Translator: David Trasbo <davidtrasbo@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -954,6 +954,10 @@ msgstr "&Nulstil anvendelsesdata"
 msgid "&Reset to Default"
 msgstr "&Gendan til standard"
 
+#. Resource IDs: (114)
+msgid "&Revert changes from these revisions"
+msgstr "Tilbagefør ændringer fra disse revisioner"
+
 #. Resource IDs: (113)
 msgid "&Revert changes from this revision"
 msgstr "&Tilbagefør ændringer fra denne revision"
@@ -1095,6 +1099,10 @@ msgstr "&TortoiseMerge"
 #. Resource IDs: (9)
 msgid "&TortoiseSVN"
 msgstr "&TortoiseSVN"
+
+#. Resource IDs: (1096)
+msgid "&TortoiseUDiff"
+msgstr "TortoiseIDiff"
 
 #. Resource IDs: (3845)
 msgid "&Two Page"
@@ -1849,14 +1857,6 @@ msgstr "Forgre&n/mærk..."
 msgid "Break loc&k"
 msgstr "Br&yd lås"
 
-#. Resource IDs: (1009)
-msgid "Bro&wse..."
-msgstr "Genne&mse..."
-
-#. Resource IDs: (1007)
-msgid "Brows&e..."
-msgstr "Gennem&se..."
-
 #. Resource IDs: (78)
 msgid "Browse for the external diff program"
 msgstr "Vælg eksternt sammenligningsprogram"
@@ -1884,6 +1884,10 @@ msgstr "Knapudseende"
 #. Resource IDs: (1215)
 msgid "C&heck now"
 msgstr "C&heck nu"
+
+#. Resource IDs: (1132)
+msgid "C&heck repository"
+msgstr "Check versionsarkiv"
 
 #. Resource IDs: (65535)
 msgid "C&ommands:"
@@ -2074,10 +2078,6 @@ msgstr "Check for ændringer"
 #. Resource IDs: (9)
 msgid "Check out a working copy from a repository"
 msgstr "Hent en arbejdskopi fra et versionsarkiv"
-
-#. Resource IDs: (1132)
-msgid "Check repository"
-msgstr "Check versionsarkiv"
 
 #. Resource IDs: (95)
 msgid ""
@@ -2302,6 +2302,10 @@ msgstr "Arkivér - TortoiseSVN"
 #. Resource IDs: (1110)
 msgid "Commit to:"
 msgstr "Arkivér til:"
+
+#. Resource IDs: (209)
+msgid "Commit..."
+msgstr "&Arkivér..."
 
 #. Resource IDs: (244)
 msgid "Commits by author"
@@ -3135,6 +3139,10 @@ msgstr "Drevtyper"
 msgid "E&xact copy sources"
 msgstr "&Præcise kopioprindelser"
 
+#. Resource IDs: (65535)
+msgid "E&xclude paths:"
+msgstr "Udelad stierne:"
+
 #. Resource IDs: (105, 57665)
 msgid "E&xit"
 msgstr "&Afslut"
@@ -3390,10 +3398,6 @@ msgstr ""
 #. Resource IDs: (1413)
 msgid "Exceptions:"
 msgstr "Undtagelser:"
-
-#. Resource IDs: (65535)
-msgid "Exclude paths:"
-msgstr "Udelad stierne:"
 
 #. Resource IDs: (1002)
 msgid "Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
@@ -3758,10 +3762,6 @@ msgstr "Tryk F1 for hjælp. Rul horisontalt med Ctrl+rullehjulet"
 msgid "For complete history deselect \"Stop on copy/rename\""
 msgstr "For at vise komplet historik, skal du fravælge \"Stop ved kopiering/omdøbning\""
 
-#. Resource IDs: (1432)
-msgid "Force blame"
-msgstr "Tving angivelse af ansvar"
-
 #. Resource IDs: (1064)
 msgid "Forward"
 msgstr "Fremad"
@@ -4009,7 +4009,7 @@ msgid "Hint: Press F5 to refresh the selected subtree and Ctrl-F5 to load all ch
 msgstr "Tip: Tryk F5 for at genopfriske det valgte deltræ og Ctrl-F5 for at genopfriske alle niveauer under også"
 
 #. Resource IDs: (16519)
-msgid "Hint: select the context menu, change the page to \"Commands\" and drag the toolbar buttons into the menu window."
+msgid "Hint: select the context menu, change the page to 'Commands' and drag the toolbar buttons into the menu window."
 msgstr "Tip: vælg højrekliksmenuen, skift til siden 'Kommandoer' og træk værktøjslinjens knapper ind i menuvinduet."
 
 #. Resource IDs: (1064)
@@ -4036,6 +4036,10 @@ msgstr "Tilkoblingstype:"
 #, c-format
 msgid "Hostname mismatch (%s)"
 msgstr "Værtsnavnet passer ikke (%s)"
+
+#. Resource IDs: (65535)
+msgid "I&nclude paths:"
+msgstr "Inkluder stierne:"
 
 #. Accelerator Entry for Menu ID:32771; '&Find...'
 msgid "ID:32771:V C +F"
@@ -4406,10 +4410,6 @@ msgstr "Inkluder flettede revisioner"
 #. Resource IDs: (65535)
 msgid "Include only the following revision range:"
 msgstr "Inkluder kun følgende interval af revisioner:"
-
-#. Resource IDs: (65535)
-msgid "Include paths:"
-msgstr "Inkluder stierne:"
 
 #. Resource IDs: (3857)
 msgid "Incorrect filename."
@@ -4898,10 +4898,6 @@ msgstr "Flet et interval af revisioner"
 msgid "Merge all"
 msgstr "Flet alle"
 
-#. Resource IDs: (14)
-msgid "Merge all..."
-msgstr "Flet alle..."
-
 #. Resource IDs: (65535)
 msgid "Merge depth:"
 msgstr "Fletningsdybde:"
@@ -4913,6 +4909,10 @@ msgstr "Flet ikke-interaktive"
 #. Resource IDs: (595, 65535)
 msgid "Merge options"
 msgstr "Egenskaber for fletning"
+
+#. Resource IDs: (14)
+msgid "Merge reintegrate..."
+msgstr "Reintegreringsfletning"
 
 #. Resource IDs: (595)
 msgid "Merge revision range"
@@ -4961,6 +4961,10 @@ msgstr "Fletning"
 #, c-format
 msgid "Merging %s into %s, %s"
 msgstr "Fletter %s ind i %s, %s"
+
+#. Resource IDs: (264)
+msgid "Merging differences between repository urls"
+msgstr "Fletter forskelle mellem versionsarkiv URL'er"
 
 #. Resource IDs: (229)
 #, c-format
@@ -6337,6 +6341,16 @@ msgstr "Prøv igen"
 msgid "Reverse merge"
 msgstr "Fortryd fletning"
 
+#. Resource IDs: (264)
+#, fuzzy, c-format
+msgid "Reverse merging %ld"
+msgstr "Fortryd fletning"
+
+#. Resource IDs: (264)
+#, c-format
+msgid "Reverse merging %ld through %ld"
+msgstr "Fletter fra r%ld til r%ld"
+
 #. Resource IDs: (175, 229)
 msgid "Revert"
 msgstr "Tilbagefør"
@@ -6344,10 +6358,6 @@ msgstr "Tilbagefør"
 #. Resource IDs: (77)
 msgid "Revert - TortoiseSVN"
 msgstr "Tilbagefør - TortoiseSVN"
-
-#. Resource IDs: (114)
-msgid "Revert changes from these revisions"
-msgstr "Tilbagefør ændringer fra disse revisioner"
 
 #. Resource IDs: (73)
 msgid "Reverted"
@@ -6415,7 +6425,7 @@ msgstr "Revision: "
 #. Resource IDs: (272)
 #, c-format
 msgid ""
-"Revision: %ld\n"
+"Revision: %ld\r\n"
 "URL: %s\r\n"
 "Author: %s\r\n"
 "Date: %s\r\n"
@@ -6434,7 +6444,7 @@ msgstr ""
 #. Resource IDs: (272)
 #, c-format
 msgid ""
-"Revision: %ld\n"
+"Revision: %ld\r\n"
 "URL: %s\r\n"
 "Author: %s\r\n"
 "Date: %s\r\n"
@@ -6933,6 +6943,10 @@ msgstr "&Vis log..."
 msgid "Show &overlays and context menu only in explorer"
 msgstr "Vis kun &overdækninger og kontekstmenu i Windows Stifinder"
 
+#. Resource IDs: (1265)
+msgid "Show &properties"
+msgstr "Vis egenskaber"
+
 #. Resource IDs: (1073)
 msgid "Show &unversioned files"
 msgstr "Vis &ikke-versionerede filer"
@@ -7016,7 +7030,7 @@ msgid "Show f&ull menus after a short delay"
 msgstr "Vis f%ulde menuer efter en kort forsinkelse"
 
 #. Resource IDs: (1264)
-msgid "Show ignored files"
+msgid "Show i&gnored files"
 msgstr "Vis ignorerede filer"
 
 #. Resource IDs: (1063)
@@ -7067,10 +7081,6 @@ msgstr "Vis overdækning for ignorerede emner"
 msgid "Show overlay for unversioned items"
 msgstr "Vis overdækning for ikke-versionerede emner"
 
-#. Resource IDs: (1265)
-msgid "Show properties"
-msgstr "Vis egenskaber"
-
 #. Resource IDs: (102)
 msgid "Show revision properties"
 msgstr "Vis egenskaber for revision"
@@ -7096,11 +7106,11 @@ msgid "Show tags on the copy source, not as separate nodes"
 msgstr "Vis mærker på kilden til kopieringen, ikke som separate knuder"
 
 #. Resource IDs: (1209)
-msgid "Show unmodified files"
+msgid "Show un&modified files"
 msgstr "Vis ikke-ændrede filer"
 
 #. Resource IDs: (1073)
-msgid "Show unversioned files"
+msgid "Show un&versioned files"
 msgstr "Vis ikke-versionerede filer"
 
 #. Resource IDs: (198)
@@ -8406,7 +8416,7 @@ msgid "Use URL of &WC as the default \"From:\" URL"
 msgstr "Benyt URL for &arbejdskopi som standard \"Fra:\"-URL"
 
 #. Resource IDs: (1064)
-msgid "Use Unified Diff from clipboard"
+msgid "Use Unified Diff from &clipboard"
 msgstr "Benyt unified diff fra udklipsholder"
 
 #. Resource IDs: (1296)
@@ -8670,6 +8680,10 @@ msgid ""
 msgstr ""
 "Ved låsning af én eller flere filer vises dialogen\n"
 "hvor der kan indtastes en beskrivende besked om låsningen"
+
+#. Resource IDs: (65535)
+msgid "Whitespaces"
+msgstr "&Blanktegn"
 
 #. Resource IDs: (1065)
 msgid "Window Position"
@@ -9356,12 +9370,13 @@ msgstr ""
 
 # Kontekst: http://subversion.tigris.org/svn_1.5_releasenotes.html#externals
 #. Resource IDs: (576)
+#, fuzzy
 msgid ""
 "svn:externals\n"
 "A newline separated list of module specifiers, each of which consists of\n"
-"a relative directory path, optional revision flags, and an URL. For example\n"
-"foo\t\thttp://example.com/repos/zig\n"
-"foo/bar -r 1234\thttp://example.com/repos/zag\n"
+"an optional revision, an URL and a relative directory path. For example\n"
+"http://example.com/repos/zig\tfoo\n"
+"-r 1234\thttp://example.com/repos/zag\tfoo/bar\n"
 "\n"
 "The URLs can either be full URLs or relative. The format for\n"
 "the relative URLs is:\n"
@@ -9645,4 +9660,13 @@ msgstr "ja"
 #. Resource IDs: (1382)
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
+
+#~ msgid "Bro&wse..."
+#~ msgstr "Genne&mse..."
+#~ msgid "Brows&e..."
+#~ msgstr "Gennem&se..."
+#~ msgid "Force blame"
+#~ msgstr "Tving angivelse af ansvar"
+#~ msgid "Merge all..."
+#~ msgstr "Flet alle..."
 
