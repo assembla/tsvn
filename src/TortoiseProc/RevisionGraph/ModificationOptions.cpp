@@ -29,23 +29,23 @@ void CModificationOptions::TraverseFromRootCopiesFirst
     , CVisibleGraph* graph
     , CVisibleGraphNode* node)
 {
-    // copies first
+    for (CVisibleGraphNode* next = node->GetNext(); node != NULL; node = next)
+    {
+        next = node->GetNext();
 
-    for ( const CVisibleGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
-        ; copy != NULL
-        ; copy = copy->next())
-	{
-        TraverseFromRootCopiesFirst (option, graph, copy->value());
+        // copies first
+
+        for ( const CVisibleGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
+            ; copy != NULL
+            ; copy = copy->next())
+	    {
+            TraverseFromRootCopiesFirst (option, graph, copy->value());
+        }
+
+        // node afterwards
+
+        option->Apply (graph, node);
     }
-
-    // node afterwards
-
-    option->Apply (graph, node);
-
-    // follow branch last
-
-    if (node->GetNext() != NULL)
-        TraverseFromRootCopiesFirst (option, graph, node->GetNext());
 }
 
 void CModificationOptions::TraverseToRootCopiesFirst 
@@ -53,23 +53,28 @@ void CModificationOptions::TraverseToRootCopiesFirst
     , CVisibleGraph* graph
     , CVisibleGraphNode* node)
 {
-    // follow branch first
+    // crawl to branch end
 
-    if (node->GetNext() != NULL)
-        TraverseToRootCopiesFirst (option, graph, node->GetNext());
+    while (node->GetNext() != NULL)
+        node = node->GetNext();
 
-    // copies second
+    for (CVisibleGraphNode* prev = node->GetPrevious(); node != NULL; node = prev)
+    {
+        prev = node->GetPrevious();
 
-    for ( const CVisibleGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
-        ; copy != NULL
-        ; copy = copy->next())
-	{
-        TraverseToRootCopiesFirst (option, graph, copy->value());
+        // copies second
+
+        for ( const CVisibleGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
+            ; copy != NULL
+            ; copy = copy->next())
+	    {
+            TraverseToRootCopiesFirst (option, graph, copy->value());
+        }
+
+        // node last
+
+        option->Apply (graph, node);
     }
-
-    // node last
-
-    option->Apply (graph, node);
 }
 
 void CModificationOptions::TraverseFromRootCopiesLast 
@@ -77,22 +82,22 @@ void CModificationOptions::TraverseFromRootCopiesLast
     , CVisibleGraph* graph
     , CVisibleGraphNode* node)
 {
-    // node first
+    for (CVisibleGraphNode* next = node->GetNext(); node != NULL; node = next)
+    {
+        next = node->GetNext();
 
-    option->Apply (graph, node);
+        // node first
 
-    // follow branch afterwards
+        option->Apply (graph, node);
 
-    if (node->GetNext() != NULL)
-        TraverseFromRootCopiesLast (option, graph, node->GetNext());
+        // copies last
 
-    // copies last
-
-    for ( const CVisibleGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
-        ; copy != NULL
-        ; copy = copy->next())
-	{
-        TraverseFromRootCopiesLast (option, graph, copy->value());
+        for ( const CVisibleGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
+            ; copy != NULL
+            ; copy = copy->next())
+	    {
+            TraverseFromRootCopiesLast (option, graph, copy->value());
+        }
     }
 }
 
@@ -101,22 +106,27 @@ void CModificationOptions::TraverseToRootCopiesLast
     , CVisibleGraph* graph
     , CVisibleGraphNode* node)
 {
-    // follow branch first
+    // crawl to branch end
 
-    if (node->GetNext() != NULL)
-        TraverseToRootCopiesLast (option, graph, node->GetNext());
+    while (node->GetNext() != NULL)
+        node = node->GetNext();
 
-    // node afterwards
+    for (CVisibleGraphNode* prev = node->GetPrevious(); node != NULL; node = prev)
+    {
+        prev = node->GetPrevious();
 
-    option->Apply (graph, node);
+        // node afterwards
 
-    // copies last
+        option->Apply (graph, node);
 
-    for ( const CVisibleGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
-        ; copy != NULL
-        ; copy = copy->next())
-	{
-        TraverseToRootCopiesLast (option, graph, copy->value());
+        // copies last
+
+        for ( const CVisibleGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
+            ; copy != NULL
+            ; copy = copy->next())
+	    {
+            TraverseToRootCopiesLast (option, graph, copy->value());
+        }
     }
 }
 

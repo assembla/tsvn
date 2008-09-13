@@ -157,6 +157,7 @@ public:
     const CCopyTarget* GetFirstCopyTarget() const;
 
 	const CVisibleGraphNode* GetPrevious() const;
+	CVisibleGraphNode* GetPrevious();
 	const CVisibleGraphNode* GetNext() const;
 	CVisibleGraphNode* GetNext();
 
@@ -248,6 +249,11 @@ CVisibleGraphNode::GetFirstCopyTarget() const
 }
 
 inline const CVisibleGraphNode* CVisibleGraphNode::GetPrevious() const
+{
+    return prev;
+}
+
+inline CVisibleGraphNode* CVisibleGraphNode::GetPrevious()
 {
     return prev;
 }
