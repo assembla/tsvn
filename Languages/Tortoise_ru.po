@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2008-09-10 12:22+0100\n"
-"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
+"PO-Revision-Date: 2008-09-13 21:09+0300\n"
+"Last-Translator: Stanislav Petrakov <stannic@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -749,7 +749,7 @@ msgstr "С&етевые диски"
 
 #. Resource IDs: (65535)
 msgid "&New "
-msgstr "&Новый"
+msgstr "Со&здать"
 
 # Так проще, поскольку создаваемое может быть любого рода...
 #. Resource IDs: (16509, 16615)
@@ -2020,7 +2020,7 @@ msgstr "Отметьте для использования более корот
 
 #. Resource IDs: (65535)
 msgid "Checking if a newer version of TortoiseSVN is available..."
-msgstr "Производится проверка на наличие новых версий TortoiseSVN..."
+msgstr "Проверка на наличие новых версий TortoiseSVN..."
 
 # Заголовок окна
 #. Resource IDs: (133, 65535)
@@ -2120,7 +2120,7 @@ msgid ""
 "Clears the stored authentication.\n"
 "You will have to enter your username/password again for all repositories."
 msgstr ""
-"Очищает все сохраненные данные авторизации.\n"
+"Очищает все сохраненные данные аутентификации.\n"
 "Вам нужно будет заново ввести имя-пользователя/пароль для всех хранилищ."
 
 #. Resource IDs: (196)
@@ -2549,7 +2549,7 @@ msgstr "Не могу получить статус!"
 #. Resource IDs: (582)
 #, c-format
 msgid "Could not merge \"%s\" because"
-msgstr "Не могу слить \"%s\" из-за того, что"
+msgstr "Не могу произвести слияние \"%s\" из-за того, что"
 
 #. Resource IDs: (582)
 #, c-format
@@ -4103,9 +4103,7 @@ msgstr "Значки/Дизайн/Код:     Luebbe Onken"
 
 #. Resource IDs: (194)
 msgid "If activated, prevents the overlays and the context menu from showing in \"save as...\" or \"open\" dialogs"
-msgstr ""
-"Если отмечено, то контекстное меню и пометки на значках не будут отображаться\n"
-"в диалогах \"сохранить как...\" и \"открыть\""
+msgstr "Если отмечено, то контекстное меню и пометки на значках не будут отображаться в диалогах \"сохранить как...\" и \"открыть\""
 
 #. Resource IDs: (198)
 msgid ""
@@ -4825,7 +4823,7 @@ msgstr "Воссоединительное слияние"
 
 #. Resource IDs: (1468)
 msgid "Merge a range of revisions"
-msgstr "Произвести слияние диапазона ревизий"
+msgstr "Cлияние диапазона ревизий"
 
 #. Resource IDs: (277)
 msgid "Merge all"
@@ -4861,7 +4859,7 @@ msgstr "Слить ревизии с..."
 
 #. Resource IDs: (1470)
 msgid "Merge two different trees"
-msgstr "Произвести слияние двух различных деревьев"
+msgstr "Слияние двух различных деревьев"
 
 #. Resource IDs: (595, 65535)
 msgid "Merge type"
@@ -8338,7 +8336,7 @@ msgid ""
 "To separate multiple exceptions, use commas (',').\n"
 "Example: *.mylan.com, *.company.com"
 msgstr ""
-"Используйте '*' для обозначения групп при указании исключений.\n"
+"Используйте '*' в качестве обобщающего символа при задании исключений.\n"
 "Для разделения нескольких исключений используйте запятые (',').\n"
 "Например: *.mylan.com, *.company.com"
 
@@ -9022,7 +9020,7 @@ msgid ""
 "gets replaced with the issue number."
 msgstr ""
 "bugtraq:url\n"
-"URL указывает на программу отслеживания проблем. Он должен содержать подстроку \"%BUGID%\",\n"
+"Адрес URL, указывающий на систему отслеживания проблем. Он должен содержать подстроку \"%BUGID%\",\n"
 "которая будет заменена на номер проблемы."
 
 #. Resource IDs: (65535)
@@ -9307,7 +9305,7 @@ msgid ""
 msgstr ""
 "svn:executable\n"
 "Если присутствует, то помечает файл как выполняемый. Это свойство не может быть установлено на папки.\n"
-"Нерекурсивная попытка закончится неудачей, а рекурсивная - установит свойство только на дочерние файлы."
+"Нерекурсивная попытка закончится неудачей, а рекурсивная - установит свойство только на дочерние файлы этой папки."
 
 #. Resource IDs: (576)
 msgid ""
@@ -9399,7 +9397,7 @@ msgid ""
 msgstr ""
 "svn:needs-lock\n"
 "Установите в любое значение (например, '*') для принудительной блокировки файла.\n"
-"Файл помечается как только-для-чтения при извлечении или обновлении, напоминая,\n"
+"Файл помечается как только-для-чтения при извлечении или обновлении, показывая,\n"
 "что пользователь должен получить блокировку этого файла перед тем, как его\n"
 "редактировать и фиксировать изменения."
 
@@ -9457,7 +9455,7 @@ msgid ""
 "Minimum size in chars a lock message must have before a lock is allowed."
 msgstr ""
 "tsvn:lockmsgminsize\n"
-"Минимальное разрешенное количество символов в сообщении блокирования."
+"Минимально разрешённое количество символов в сообщении блокирования."
 
 #. Resource IDs: (578)
 msgid ""
@@ -9467,7 +9465,7 @@ msgid ""
 msgstr ""
 "tsvn:logfilelistenglish\n"
 "Установите в \"false\", если вы не желаете, чтобы список измененных файлов в диалоге фиксации\n"
-"копировался в буфер обмена на английском."
+"копировался в буфер обмена на английском языке."
 
 #. Resource IDs: (578)
 msgid ""
@@ -9475,7 +9473,7 @@ msgid ""
 "Minimum size in chars a log message must have before a commit is allowed."
 msgstr ""
 "tsvn:logminsize\n"
-"Минимальное разрешённое количество символов в сообщении журнала."
+"Минимально разрешённое количество символов в сообщении журнала."
 
 #. Resource IDs: (578)
 msgid ""
@@ -9494,7 +9492,7 @@ msgid ""
 msgstr ""
 "tsvn:logtemplate\n"
 "Строка, вставляемая в поле сообщения журнала в диалоге фиксации.\n"
-"Используйте как заполняемый пользователем шаблон сообщения журнала."
+"Применяется как заполняемый пользователем шаблон сообщения журнала."
 
 #. Resource IDs: (578)
 msgid ""
@@ -9503,7 +9501,7 @@ msgid ""
 "A faded line is shown in the commit dialogs at that position. The default is 80 chars."
 msgstr ""
 "tsvn:logwidthmarker\n"
-"Установите в то количество символов, которое не должна превышать длина строки сообщения.\n"
+"Задаёт то количество символов, которое не должна превышать длина строки сообщения.\n"
 "Неяркая линия будет показана в диалоге фиксации в заданной позиции. По умолчанию 80 символов."
 
 #. Resource IDs: (578)
@@ -9523,8 +9521,8 @@ msgid ""
 "be shown in the property dialog to choose from."
 msgstr ""
 "tsvn:userfileproperties\n"
-"Список определяемых пользователем свойств для файлов.\n"
-"Задать эти свойства можно будет в диалоге свойств. Разделитель в списке - новая строка."
+"Список (по одному элементу в строке) определяемых пользователем свойств для\n"
+"файлов, которые будут доступны для выбора в диалоге свойств."
 
 #. Resource IDs: (581)
 msgid ""
@@ -9533,8 +9531,8 @@ msgid ""
 "be shown in the property dialog to choose from."
 msgstr ""
 "tsvn:userfolderproperties\n"
-"Список определяемых пользователем свойств для папок.\n"
-"Задать эти свойства можно будет в диалоге свойств. Разделитель в списке - новая строка."
+"Список (по одному элементу в строке) определяемых пользователем свойств для\n"
+"папок, которые будут доступны для выбора в диалоге свойств."
 
 #. Resource IDs: (577)
 msgid ""
