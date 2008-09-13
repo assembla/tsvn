@@ -85,12 +85,6 @@ void CFullGraphFinalizer::FindRenames (CFullGraphNode* node)
     {
         if (next->GetClassification().Is (CNodeClassification::IS_DELETED))
 	    {
-            {
-                CString s;
-                s.Format (_T("FindRenames %d %x %S\n"), next->GetRevision(), next->GetClassification().GetFlags(), next->GetPath().GetPath().c_str());
-                OutputDebugString (s);
-            }
-
             // this line will be deleted. 
 		    // will it be continued exactly once under a different name?
 
