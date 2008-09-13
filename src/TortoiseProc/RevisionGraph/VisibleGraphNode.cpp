@@ -30,6 +30,19 @@ bool CVisibleGraphNode::CFoldedTag::IsAlias() const
             ? tagNode->GetCopySource()
             : tagNode->GetPrevious();
 
+    // skip all non-modifying nodes and make prev point to
+    // either the copy node or the last modification
+
+    while (   (prev != NULL) 
+           && (!prev->GetClassification().IsAnyOf 
+                  (CNodeClassification::IS_OPERATION_MASK)))
+    {
+        prev = prev->GetPrevious();
+    }
+
+    // it's an alias if the previous node is a tag and has
+    // not been modified since
+
     return    (prev != NULL) 
            && prev->GetClassification().Is (CNodeClassification::IS_TAG)
            && prev->GetClassification().IsAnyOf (  CNodeClassification::IS_ADDED
@@ -302,7 +315,7 @@ void CVisibleGraphNode::FoldTag (CVisibleGraph* graph)
             lastTag = tag;
         }
 
-        firstTag->next = copySource->firstTag;
+        lastTag->next = copySource->firstTag;
         copySource->firstTag = firstTag;
         firstTag = NULL;
     }

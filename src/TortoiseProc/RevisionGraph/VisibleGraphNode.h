@@ -209,7 +209,7 @@ inline size_t CVisibleGraphNode::CFoldedTag::GetDepth() const
 inline bool CVisibleGraphNode::CFoldedTag::IsDeleted() const
 {
     return tagNode->GetClassification()
-        .Is (CNodeClassification::SUBTREE_DELETED);
+        .Is (CNodeClassification::PATH_ONLY_DELETED);
 }
 
 /// CVisibleGraphNode::CFactory data access
