@@ -324,7 +324,7 @@ void CRevisionGraphWnd::DrawNodes (CDC* pDC, const CRect& logRect, const CSize& 
 
     // iterate over all visible nodes
 
-    const ILayoutNodeList* nodes = m_layout->GetNodes();
+    std::auto_ptr<const ILayoutNodeList> nodes (m_layout->GetNodes());
     for ( index_t index = nodes->GetFirstVisible (logRect)
         ; index != NO_INDEX
         ; index = nodes->GetNextVisible (index, logRect))
@@ -390,7 +390,7 @@ void CRevisionGraphWnd::DrawConnections (CDC* pDC, const CRect& logRect, const C
 
     // iterate over all visible lines
 
-    const ILayoutConnectionList* connections = m_layout->GetConnections();
+    std::auto_ptr<const ILayoutConnectionList> connections (m_layout->GetConnections());
     for ( index_t index = connections->GetFirstVisible (logRect)
         ; index != NO_INDEX
         ; index = connections->GetNextVisible (index, logRect))
@@ -426,7 +426,7 @@ void CRevisionGraphWnd::DrawTexts (CDC* pDC, const CRect& logRect, const CSize& 
     // iterate over all visible nodes
 
     pDC->SetTextAlign (TA_CENTER | TA_TOP);
-    const ILayoutTextList* texts = m_layout->GetTexts();
+    std::auto_ptr<const ILayoutTextList> texts (m_layout->GetTexts());
     for ( index_t index = texts->GetFirstVisible (logRect)
         ; index != NO_INDEX
         ; index = texts->GetNextVisible (index, logRect))

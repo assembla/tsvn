@@ -170,7 +170,8 @@ public:
 
     virtual CRect GetRect() const = 0;
 
-    /// access to the sub-structures
+    /// access to the sub-structures.
+    /// The caller is required to delete the return objects.
 
     virtual const ILayoutNodeList* GetNodes() const = 0;
     virtual const ILayoutConnectionList* GetConnections() const = 0;

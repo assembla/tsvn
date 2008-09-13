@@ -215,7 +215,7 @@ const CVisibleGraphNode* CRevisionGraphWnd::GetHitNode (CPoint point) const
 
     // search the nodes for one at that grid position
 
-    const ILayoutNodeList* nodeList = m_layout->GetNodes();
+    std::auto_ptr<const ILayoutNodeList> nodeList (m_layout->GetNodes());
     index_t nodeIndex = nodeList->GetAt (logCoordinates, 0);
     if (nodeIndex == NO_INDEX)
         return NULL;
