@@ -30,6 +30,10 @@ class IRevisionGraphOption
 {
 public:
 
+    /// make all interface destructors virtual
+
+    virtual ~IRevisionGraphOption() {}
+
     /// toolbar button ID
 
     virtual UINT CommandID() const = 0;
