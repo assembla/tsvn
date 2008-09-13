@@ -39,7 +39,7 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
 
     // The order is critical as it determines the option bit position
     // in the registry DWORD.
-/*
+
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_GROUPBRANCHES> (*this);
     new CRemoveSimpleChanges (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_TOPDOWN> (*this);
@@ -54,7 +54,7 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     // create layout options
 
     (new CStandardNodeSizeAssignment (*this))->ToggleSelection();
-    (new CStandardNodePositioning (*this))->ToggleSelection();*/
+    (new CStandardNodePositioning (*this))->ToggleSelection();
 }
 
 // access specific sub-sets
