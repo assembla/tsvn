@@ -44,7 +44,7 @@ public:
 
     CExactCopyFroms (CRevisionGraphOptionList& list);
 
-    /// implement IRevisionGraphOption: This option is negated.
+    /// implement IRevisionGraphOption: This option must always be applied.
 
     virtual bool IsActive() const; 
 

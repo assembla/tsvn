@@ -10,11 +10,11 @@ CExactCopyFroms::CExactCopyFroms (CRevisionGraphOptionList& list)
 {
 }
 
-// implement IRevisionGraphOption: This option is negated.
+// implement IRevisionGraphOption: This option must always be applied.
 
 bool CExactCopyFroms::IsActive() const
 {
-    return !IsSelected();
+    return true;
 }
 
 // implement ICopyFilterOption: 
@@ -23,6 +23,11 @@ bool CExactCopyFroms::IsActive() const
 ICopyFilterOption::EResult 
 CExactCopyFroms::ShallRemove (const CFullGraphNode* node) const
 {
+    // we don't need to pin any nodes, if none shall be removed later on
+
+    if (IsSelected())
+        return ICopyFilterOption::KEEP_NODE;
+
     const CFullGraphNode* next = node->GetNext();
 
     // next node has no "M", "A", "D" nor "R"
@@ -42,7 +47,8 @@ void CExactCopyFroms::Apply (CVisibleGraph* graph, CVisibleGraphNode* node)
 {
     // remove node, if it is neither "M", "A", "D" nor "R"
 
-    if (node->GetClassification().Matches (0, CNodeClassification::IS_OPERATION_MASK))
+    if (   !IsSelected()
+        && node->GetClassification().Matches (0, CNodeClassification::IS_OPERATION_MASK))
     {
         node->DropNode (graph);
     }
