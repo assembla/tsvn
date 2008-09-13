@@ -42,7 +42,7 @@ private:
 
     /// simplify graph
 
-    void FindReplacements (CFullGraphNode* node);
+    void FindRenames (CFullGraphNode* node);
 
     /// mark nodes according to local properties
 

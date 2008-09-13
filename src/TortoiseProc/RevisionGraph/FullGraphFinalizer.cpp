@@ -63,7 +63,7 @@ void CFullGraphFinalizer::Run()
 
 	// say "renamed" for "Deleted"/"Added" entries
 
-    FindReplacements (graph.GetRoot());
+    FindRenames (graph.GetRoot());
 
     // classify all nodes (needs to fully passes):
     // classify nodes on by one
@@ -75,72 +75,82 @@ void CFullGraphFinalizer::Run()
     BackwardClassification (graph.GetRoot());
 }
 
-void CFullGraphFinalizer::FindReplacements (CFullGraphNode* node)
+void CFullGraphFinalizer::FindRenames (CFullGraphNode* node)
 {
 	// say "renamed" for "Deleted"/"Added" entries
 
-    CFullGraphNode * next = node->GetNext();
+    for ( CFullGraphNode * next = node->GetNext()
+        ; next != NULL
+        ; node = next, next = next->GetNext())
+    {
+        if (next->GetClassification().Is (CNodeClassification::IS_DELETED))
+	    {
+            {
+                CString s;
+                s.Format (_T("FindRenames %d %x %S\n"), next->GetRevision(), next->GetClassification().GetFlags(), next->GetPath().GetPath().c_str());
+                OutputDebugString (s);
+            }
 
-    if (   (next != NULL) 
-        && (next->GetClassification().Is (CNodeClassification::IS_DELETED)))
-	{
-		// this line will be deleted. 
-		// will it be continued exactly once under a different name?
+            // this line will be deleted. 
+		    // will it be continued exactly once under a different name?
 
-        CFullGraphNode* renameTarget = NULL;
-        CFullGraphNode::CCopyTarget** renameCopy = NULL;
+            CFullGraphNode* renameTarget = NULL;
+            CFullGraphNode::CCopyTarget** renameCopy = NULL;
 
-        for ( CFullGraphNode::CCopyTarget** copy = &node->GetFirstCopyTarget()
-            ; copy != NULL
-            ; copy = &(*copy)->next())
-		{
-            CFullGraphNode * target = (*copy)->value();
-            assert (target->GetClassification().Is (CNodeClassification::IS_COPY_TARGET));
+            for ( CFullGraphNode::CCopyTarget** copy = &node->GetFirstCopyTarget()
+                ; *copy != NULL
+                ; copy = &(*copy)->next())
+		    {
+                CFullGraphNode * target = (*copy)->value();
+                assert (target->GetClassification().Is (CNodeClassification::IS_COPY_TARGET));
 
-			if (target->GetRevision() == next->GetRevision())
-			{
-				// that actually looks like a rename
+			    if (target->GetRevision() == next->GetRevision())
+			    {
+				    // that actually looks like a rename
 
-                if (renameTarget != NULL)
-                {
-                    // there is more than one copy target 
-                    // -> display all individual deletion and additions 
+                    if (renameTarget != NULL)
+                    {
+                        // there is more than one copy target 
+                        // -> display all individual deletion and additions 
 
-                    renameTarget = NULL;
-                    break;
-                }
-                else
-                {
-                    // remember the (potential) rename target
+                        renameTarget = NULL;
+                        break;
+                    }
+                    else
+                    {
+                        // remember the (potential) rename target
 
-                    renameTarget = target;
-                    renameCopy = copy;
+                        renameTarget = target;
+                        renameCopy = copy;
+                    }
                 }
             }
+
+            // did we find a unambigous rename target?
+
+            if (renameTarget != NULL)
+            {
+                // optimize graph
+
+                graph.Replace ( node->GetNext()
+                              , *renameCopy
+                              , CNodeClassification::IS_RENAMED);
+
+                // "next" has just been destroyed
+
+                next = node->GetNext();
+		    }
         }
-
-        // did we find a unambigous rename target?
-
-        if (renameTarget != NULL)
-        {
-            // optimize graph
-
-            graph.Replace ( node->GetNext()
-                          , *renameCopy
-                          , CNodeClassification::IS_RENAMED);
-		}
 
         // recourse
 
         for ( const CFullGraphNode::CCopyTarget* copy = node->GetFirstCopyTarget()
             ; copy != NULL
             ; copy = copy->next())
-		{
-            FindReplacements (copy->value());
+	    {
+            FindRenames (copy->value());
         }
-
-        FindReplacements (next);
-	}
+    }
 }
 
 // mark nodes according to local properties

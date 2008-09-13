@@ -104,8 +104,6 @@ void CFullGraphNode::InsertAt ( CFullGraphNode* source
         }
         else
         {
-            assert (source->next == NULL);
-
             copySource = NULL;
             source->next = this;
             prev = source;
