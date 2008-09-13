@@ -260,6 +260,10 @@ DWORD CFullGraphFinalizer::BackwardClassification (CFullGraphNode* node)
             =   branchClassification 
               & ~CNodeClassification::ALL_COPIES_MASK;
 
+        classification      
+            |=  (node->GetClassification().GetFlags() * CNodeClassification::PATH_ONLY_SHIFT)
+              & CNodeClassification::PATH_ONLY_MASK;
+
         classification      // add what applies to all branches
             |=   commonCopyClassfication & branchClassification
                & CNodeClassification::ALL_COPIES_MASK;
@@ -277,7 +281,9 @@ DWORD CFullGraphFinalizer::BackwardClassification (CFullGraphNode* node)
 
         DWORD nodeClassification 
             =   classification 
-              & (CNodeClassification::ALL_COPIES_MASK + CNodeClassification::COPIES_TO_MASK);
+              & (  CNodeClassification::ALL_COPIES_MASK 
+                 + CNodeClassification::COPIES_TO_MASK
+                 + CNodeClassification::PATH_ONLY_MASK);
 
         node->AddClassification (nodeClassification);
 
