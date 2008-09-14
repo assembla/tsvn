@@ -27,6 +27,7 @@
 #include "ShowHeads.h"
 #include "ShowWC.h"
 #include "ExactCopyFroms.h"
+#include "RevisionInRange.h"
 
 #include "StandardNodeSizeAssignment.h"
 #include "StandardNodePositioning.h"
@@ -35,7 +36,7 @@
 
 CAllRevisionGraphOptions::CAllRevisionGraphOptions()
 {
-    // create options.
+    // create filter options.
 
     // The order is critical as it determines the option bit position
     // in the registry DWORD.
@@ -50,6 +51,8 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     new CFoldTags (*this);
     new CRemoveDeletedBranches (*this);
     new CShowWC (*this);
+
+    (new CRevisionInRange (*this))->ToggleSelection();
 
     // create layout options
 
