@@ -178,12 +178,18 @@ void CFullGraphFinalizer::MarkHead (CFullGraphNode* node)
 	// scan all "latest" nodes 
     // (they must be either HEADs or special nodes)
 
-    if (   (node->GetNext() == NULL)
-        && !(node->GetClassification().IsAnyOf 
-                (CNodeClassification::SUBTREE_DELETED)))
-    {
-        node->AddClassification (CNodeClassification::IS_LAST);
-    }
+    if (   (node->GetNext() != NULL)
+        || (node->GetClassification().IsAnyOf 
+               (CNodeClassification::SUBTREE_DELETED)))
+        return;
+
+    // look for the latest change
+    // (there may be several "copy-source-only" nodes trailing HEAD
+
+    while (node->GetClassification().Matches (0, CNodeClassification::IS_OPERATION_MASK))
+        node = node->GetPrevious();
+
+    node->AddClassification (CNodeClassification::IS_LAST);
 }
 
 // classify nodes on by one
