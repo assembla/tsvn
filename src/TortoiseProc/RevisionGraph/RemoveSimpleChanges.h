@@ -21,6 +21,7 @@
 // include base classes
 
 #include "CopyFilterOptions.h"
+#include "ModificationOptions.h"
 #include "revisiongraphoptionsimpl.h"
 #include "Resource.h"
 
@@ -28,9 +29,14 @@
 */
 
 class CRemoveSimpleChanges 
-    : public CRevisionGraphOptionImpl< ICopyFilterOption
-                                     , 200
-                                     , ID_VIEW_SHOWALLREVISIONS>
+    : public COrderedTraversalOptionImpl
+                < CCombineInterface 
+                    < ICopyFilterOption
+                    , IModificationOption>
+                , 200
+                , ID_VIEW_SHOWALLREVISIONS
+                , true          // crawl branches first
+                , true>         // root first      
 {
 public:
 
@@ -42,7 +48,11 @@ public:
 
     virtual bool IsActive() const; 
 
-    /// implement ICopyFilterOption
+    /// implement ICopyFilterOption (pre-filter most nodes)
 
     virtual EResult ShallRemove (const CFullGraphNode* node) const;
+
+    /// implement IModificationOption (post-filter unused copy-from nodes)
+
+    virtual void Apply (CVisibleGraph* graph, CVisibleGraphNode* node);
 };

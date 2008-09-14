@@ -20,7 +20,6 @@
 
 // include base classes
 
-#include "CopyFilterOptions.h"
 #include "ModificationOptions.h"
 #include "revisiongraphoptionsimpl.h"
 #include "Resource.h"
@@ -30,9 +29,7 @@
 
 class CExactCopyFroms 
     : public COrderedTraversalOptionImpl
-                < CCombineInterface 
-                    < ICopyFilterOption
-                    , IModificationOption>
+                < IModificationOption
                 , 150
                 , ID_VIEW_EXACTCOPYSOURCE
                 , true          // fold branches first
@@ -47,10 +44,6 @@ public:
     /// implement IRevisionGraphOption: This option must always be applied.
 
     virtual bool IsActive() const; 
-
-    /// implement ICopyFilterOption
-
-    virtual EResult ShallRemove (const CFullGraphNode* node) const;
 
     /// implement IModificationOption
 

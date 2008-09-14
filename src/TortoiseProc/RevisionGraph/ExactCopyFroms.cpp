@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "ExactCopyFroms.h"
-#include "FullGraphNode.h"
 #include "VisibleGraphNode.h"
 
 // construction
@@ -17,29 +16,6 @@ bool CExactCopyFroms::IsActive() const
     return true;
 }
 
-// implement ICopyFilterOption: 
-// keep the previous node, if we plan to remove the pure copy sources
-
-ICopyFilterOption::EResult 
-CExactCopyFroms::ShallRemove (const CFullGraphNode* node) const
-{
-    // we don't need to pin any nodes, if none shall be removed later on
-
-    if (IsSelected())
-        return ICopyFilterOption::KEEP_NODE;
-
-    const CFullGraphNode* next = node->GetNext();
-
-    // next node has no "M", "A", "D" nor "R"
-    // -> keep *this* node
-    // (the "next" node will be removed in the second phase)
-
-    return (   (next != NULL)
-            && next->GetClassification().Matches (0, CNodeClassification::IS_OPERATION_MASK))
-         ? ICopyFilterOption::PRESERVE_NODE
-         : ICopyFilterOption::KEEP_NODE;
-}
-
 // implement IModificationOption:
 // remove the pure copy sources
 
@@ -47,9 +23,21 @@ void CExactCopyFroms::Apply (CVisibleGraph* graph, CVisibleGraphNode* node)
 {
     // remove node, if it is neither "M", "A", "D" nor "R"
 
-    if (   !IsSelected()
-        && node->GetClassification().Matches (0, CNodeClassification::IS_OPERATION_MASK))
+    if (node->GetClassification().Matches (0, CNodeClassification::IS_OPERATION_MASK))
     {
-        node->DropNode (graph);
+        // is this node still necessary?
+
+        CVisibleGraphNode* next = node->GetNext();
+
+        bool isCopySource =    (node->GetFirstTag() != NULL)
+                            || (node->GetFirstCopyTarget() != NULL)
+                            || (   (next != NULL) 
+                                && (next->GetClassification().Is 
+                                        (CNodeClassification::IS_RENAMED)));
+
+        // remove it, if it is either no longer necessary or not wanted at all
+
+        if (!IsSelected() || !isCopySource)
+            node->DropNode (graph);
     }
 }
