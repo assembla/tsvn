@@ -37,7 +37,7 @@ CCopyFilterOptions::ShallRemove (const CFullGraphNode* node) const
     ICopyFilterOption::EResult result = ICopyFilterOption::KEEP_NODE;
 
     for ( IT iter = options.begin(), end = options.end()
-        ; (iter != end) && (result < ICopyFilterOption::REMOVE_SUBTREE)
+        ; (iter != end) && (result == ICopyFilterOption::KEEP_NODE)
         ; ++iter)
     {
         result = max (result, (*iter)->ShallRemove (node));
