@@ -18,11 +18,9 @@ CVisibleGraph::~CVisibleGraph()
 void CVisibleGraph::Clear()
 {
     for (size_t i = roots.size(); i > 0; --i)
-    {
         nodeFactory.Destroy (roots[i-1]);
-        assert (GetNodeCount() == 0);
-    }
 
+    assert (GetNodeCount() == 0);
     roots.clear();
 }
 
@@ -46,6 +44,9 @@ CVisibleGraphNode* CVisibleGraph::Add ( const CFullGraphNode* base
 void CVisibleGraph::ReplaceRoot ( CVisibleGraphNode* oldRoot
                                 , CVisibleGraphNode* newRoot)
 {
+    assert (newRoot->GetPrevious() == NULL);
+    assert (newRoot->GetCopySource() == NULL);
+
     for (size_t i = 0, count = roots.size(); i < count; ++i)
         if (roots[i] == oldRoot)
         {
@@ -72,5 +73,13 @@ void CVisibleGraph::RemoveRoot (CVisibleGraphNode* root)
     // we should never get here
 
     assert (0);
+}
+
+void CVisibleGraph::AddRoot (CVisibleGraphNode* root)
+{
+    assert (root->GetPrevious() == NULL);
+    assert (root->GetCopySource() == NULL);
+
+    roots.push_back (root);
 }
 

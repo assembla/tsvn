@@ -54,6 +54,7 @@ public:
 
     void ReplaceRoot (CVisibleGraphNode* oldRoot, CVisibleGraphNode* newRoot);
     void RemoveRoot (CVisibleGraphNode* root);
+    void AddRoot (CVisibleGraphNode* root);
 
     /// member access
 

@@ -205,6 +205,8 @@ void CVisibleGraphNode::DropNode (CVisibleGraph* graph)
 
     if (target == NULL)
     {
+        // handle this branch
+
         if (next)
         {
             next->prev = NULL;
@@ -214,6 +216,18 @@ void CVisibleGraphNode::DropNode (CVisibleGraph* graph)
         {
             graph->RemoveRoot (this);
         }
+
+        // add sub-branches as new roots
+
+        for (; firstCopyTarget != NULL; firstCopyTarget = firstCopyTarget->next())
+        {
+            firstCopyTarget->value()->copySource = NULL;
+            graph->AddRoot (firstCopyTarget->value());
+        }
+
+        // no tag-folding supported here
+
+        assert (firstTag == NULL);
     }
     else
     {
