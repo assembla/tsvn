@@ -157,15 +157,19 @@ void CStandardLayout::CreateConnections()
     // there can't be more connections than nodes
 
     connections.reserve (nodes.size());
-
-    // (root is at index 0)
-
-    for (index_t i = 1, count = (index_t)nodes.size(); i < count; ++i)
+    for (index_t i = 0, count = (index_t)nodes.size(); i < count; ++i)
     {
         const CVisibleGraphNode* node = nodes[i].node;
         const CVisibleGraphNode* previousNode = node->GetCopySource()
                                               ? node->GetCopySource()
                                               : node->GetPrevious();
+
+        // skip roots
+
+        if (previousNode == NULL)
+            continue;
+
+        // source rect
 
         const CRect& previousRect = nodes[previousNode->GetIndex()].rect;
         CRect rect = nodes[i].rect;
