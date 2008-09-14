@@ -50,6 +50,7 @@ private:
 
     /// the actual copy loop
 
+    void CopyBranches (const CFullGraphNode* source, CVisibleGraphNode* target);
     void Copy (const CFullGraphNode* source, CVisibleGraphNode* target);
 
     /// data members

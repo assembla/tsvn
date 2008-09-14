@@ -54,7 +54,19 @@ void CVisibleGraphBuilder::Run()
 
 // the actual copy loop
 
-void CVisibleGraphBuilder::Copy (const CFullGraphNode* source, CVisibleGraphNode* target)
+void CVisibleGraphBuilder::CopyBranches ( const CFullGraphNode* source
+                                        , CVisibleGraphNode* target)
+{
+    for ( const CFullGraphNode::CCopyTarget* copy = source->GetFirstCopyTarget()
+        ; copy != NULL
+        ; copy = copy->next())
+    {
+        Copy (copy->value(), target);
+    }
+}
+
+void CVisibleGraphBuilder::Copy ( const CFullGraphNode* source
+                                , CVisibleGraphNode* target)
 {
     do
     {
@@ -70,6 +82,8 @@ void CVisibleGraphBuilder::Copy (const CFullGraphNode* source, CVisibleGraphNode
             // skip this node
 
             assert (filterAction == ICopyFilterOption::REMOVE_NODE);
+            CopyBranches (source, NULL);
+
             source = source->GetNext();
 
             // end of branch?
@@ -89,12 +103,7 @@ void CVisibleGraphBuilder::Copy (const CFullGraphNode* source, CVisibleGraphNode
 
         // copy branches
 
-        for ( const CFullGraphNode::CCopyTarget* copy = source->GetFirstCopyTarget()
-            ; copy != NULL
-            ; copy = copy->next())
-        {
-            Copy (copy->value(), target);
-        }
+        CopyBranches (source, target);
 
         // next node
 
