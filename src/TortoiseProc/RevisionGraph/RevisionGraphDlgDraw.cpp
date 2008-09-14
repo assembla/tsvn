@@ -358,7 +358,7 @@ void CRevisionGraphWnd::DrawNodes (CDC* pDC, const CRect& logRect, const CSize& 
 			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::LastCommitNode), node.node, TSVNEllipse, hLastCommitIcon);
 			break;
 		case ILayoutNodeList::SNode::STYLE_MODIFIED:
-			DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle, hLastCommitIcon);
+			DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle, NULL);
 			break;
 		default:
             DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOW), node.node, TSVNRectangle, NULL);
