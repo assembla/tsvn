@@ -28,6 +28,10 @@ class ILayoutItemList
 {
 public:
 
+    /// make sub-classes deletable through the base interface
+
+    virtual ~ILayoutItemList() {};
+
     /// standard data access
 
     virtual index_t GetCount() const = 0;
@@ -165,6 +169,10 @@ public:
 class IRevisionGraphLayout
 {
 public:
+
+    /// make sub-classes deletable through the base interface
+
+    virtual ~IRevisionGraphLayout() {};
 
     /// total graph size (logical units)
 

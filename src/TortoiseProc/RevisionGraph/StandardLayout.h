@@ -78,9 +78,19 @@ public:
     CStandardLayoutNodeInfo();
 };
 
+/**
+* utility interface that gives layout options access to the layout info
+*/
+
 class IStandardLayoutNodeAccess
 {
 public:
+
+    /// make sub-classes deletable through the base interface
+
+    virtual ~IStandardLayoutNodeAccess() {};
+
+    /// access graph node layout
 
     virtual index_t GetNodeCount() const = 0;
     virtual CStandardLayoutNodeInfo* GetNode (index_t index) = 0;
