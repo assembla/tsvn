@@ -19,6 +19,8 @@ void CFoldTags::Apply (CVisibleGraph* graph, CVisibleGraphNode* node)
 
     DWORD forbidden = CNodeClassification::IS_MODIFIED
                     | CNodeClassification::COPIES_TO_MODIFIED 
+                    | CNodeClassification::ALL_COPIES_MODIFIED
+                    | CNodeClassification::PATH_ONLY_MODIFIED
                     | CNodeClassification::COPIES_TO_TRUNK 
                     | CNodeClassification::COPIES_TO_BRANCH 
                     | CNodeClassification::COPIES_TO_OTHER;
