@@ -275,7 +275,10 @@ bool CRevisionGraphWnd::AnalyzeRevisionData
                                      , options.GetCopyFilterOptions());
         builder.Run();
         options.GetModificationOptions().Apply (&m_visibleGraph);
-        m_visibleGraph.GetRoot()->InitIndex(0);
+
+        index_t index = 0;
+        for (size_t i = 0, count = m_visibleGraph.GetRootCount(); i < count; ++i)
+            index = m_visibleGraph.GetRoot (i)->InitIndex (index);
 
         // layout nodes
 

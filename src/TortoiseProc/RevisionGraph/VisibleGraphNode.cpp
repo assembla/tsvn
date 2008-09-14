@@ -201,84 +201,97 @@ void CVisibleGraphNode::DropNode (CVisibleGraph* graph)
                               ? prev
                               : copySource;
 
-    // not valid operation for the root node
+    // special case: remove one of the roots
 
-    assert (target != NULL);
-
-    // move all branches
-
-    if (firstCopyTarget != NULL)
+    if (target == NULL)
     {
-        // find insertion point
-
-        CCopyTarget** targetFirstCopyTarget = &target->firstCopyTarget;
-        while (*targetFirstCopyTarget != NULL)
-            targetFirstCopyTarget = &(*targetFirstCopyTarget)->next();
-
-        // concatenate list
-
-        *targetFirstCopyTarget = firstCopyTarget;
-
-        // adjust copy sources and reset firstCopyTarget
-
-        for (; firstCopyTarget != NULL; firstCopyTarget = firstCopyTarget->next())
-            firstCopyTarget->value()->copySource = target;
-    }
-
-    // move all tags
-
-    if (firstTag != NULL)
-    {
-        // find insertion point
-
-        CFoldedTag** targetFirstTag = &target->firstTag;
-        while (*targetFirstTag != NULL)
-            targetFirstTag = &(*targetFirstTag)->next;
-
-        // concatenate list and reset firstTag
-
-        *targetFirstTag = firstTag;
-        firstTag = NULL;
-    }
-
-    // de-link this node
-
-    if (prev != NULL)
-    {
-        prev->next = next;
-        if (next)
-            next->prev = prev;
-    }
-    else
-    {
-        // find the copy struct that links to *this
-
-        CCopyTarget** copy = &target->firstCopyTarget;
-        for (
-            ; (*copy != NULL) && ((*copy)->value() != this)
-            ; copy = &(*copy)->next())
-        {
-        }
-
-        assert (*copy != NULL);
-
-        // make it point to next or remove it
-
         if (next)
         {
-            (*copy)->value() = next;
             next->prev = NULL;
-            next->copySource = target;
+            graph->ReplaceRoot (this, next);
         }
         else
         {
-            // remove from original list and attach it to *this for destruction
+            graph->RemoveRoot (this);
+        }
+    }
+    else
+    {
+        // move all branches
 
-            firstCopyTarget = *copy;
-            *copy = (*copy)->next();
+        if (firstCopyTarget != NULL)
+        {
+            // find insertion point
 
-            firstCopyTarget->next() = NULL;
-            firstCopyTarget->value() = NULL;
+            CCopyTarget** targetFirstCopyTarget = &target->firstCopyTarget;
+            while (*targetFirstCopyTarget != NULL)
+                targetFirstCopyTarget = &(*targetFirstCopyTarget)->next();
+
+            // concatenate list
+
+            *targetFirstCopyTarget = firstCopyTarget;
+
+            // adjust copy sources and reset firstCopyTarget
+
+            for (; firstCopyTarget != NULL; firstCopyTarget = firstCopyTarget->next())
+                firstCopyTarget->value()->copySource = target;
+        }
+
+        // move all tags
+
+        if (firstTag != NULL)
+        {
+            // find insertion point
+
+            CFoldedTag** targetFirstTag = &target->firstTag;
+            while (*targetFirstTag != NULL)
+                targetFirstTag = &(*targetFirstTag)->next;
+
+            // concatenate list and reset firstTag
+
+            *targetFirstTag = firstTag;
+            firstTag = NULL;
+        }
+
+        // de-link this node
+
+        if (prev != NULL)
+        {
+            prev->next = next;
+            if (next)
+                next->prev = prev;
+        }
+        else
+        {
+            // find the copy struct that links to *this
+
+            CCopyTarget** copy = &target->firstCopyTarget;
+            for (
+                ; (*copy != NULL) && ((*copy)->value() != this)
+                ; copy = &(*copy)->next())
+            {
+            }
+
+            assert (*copy != NULL);
+
+            // make it point to next or remove it
+
+            if (next)
+            {
+                (*copy)->value() = next;
+                next->prev = NULL;
+                next->copySource = target;
+            }
+            else
+            {
+                // remove from original list and attach it to *this for destruction
+
+                firstCopyTarget = *copy;
+                *copy = (*copy)->next();
+
+                firstCopyTarget->next() = NULL;
+                firstCopyTarget->value() = NULL;
+            }
         }
     }
 

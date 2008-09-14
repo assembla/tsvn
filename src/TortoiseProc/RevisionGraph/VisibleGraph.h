@@ -34,9 +34,9 @@ private:
 
     CVisibleGraphNode::CFactory nodeFactory;
 
-    /// the graph is actually a tree
+    /// the graph is actually a forest of trees
 
-    CVisibleGraphNode* root;
+    std::vector<CVisibleGraphNode*> roots;
 
 public:
 
@@ -52,10 +52,14 @@ public:
                            , CVisibleGraphNode* source
                            , bool preserveNode);
 
+    void ReplaceRoot (CVisibleGraphNode* oldRoot, CVisibleGraphNode* newRoot);
+    void RemoveRoot (CVisibleGraphNode* root);
+
     /// member access
 
-    CVisibleGraphNode* GetRoot();
-    const CVisibleGraphNode* GetRoot() const;
+    size_t GetRootCount() const;
+    CVisibleGraphNode* GetRoot (size_t index);
+    const CVisibleGraphNode* GetRoot (size_t index) const;
 
     size_t GetNodeCount() const;
 
@@ -66,14 +70,19 @@ public:
 
 /// member access
 
-inline const CVisibleGraphNode* CVisibleGraph::GetRoot() const
+inline size_t CVisibleGraph::GetRootCount() const
 {
-    return root;
+    return roots.size();
 }
 
-inline CVisibleGraphNode* CVisibleGraph::GetRoot()
+inline const CVisibleGraphNode* CVisibleGraph::GetRoot (size_t index) const
 {
-    return root;
+    return roots[index];
+}
+
+inline CVisibleGraphNode* CVisibleGraph::GetRoot (size_t index)
+{
+    return roots[index];
 }
 
 inline size_t CVisibleGraph::GetNodeCount() const

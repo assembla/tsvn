@@ -5,7 +5,6 @@
 
 CVisibleGraph::CVisibleGraph()
     : nodeFactory()
-    , root (NULL)
 {
 }
 
@@ -18,13 +17,13 @@ CVisibleGraph::~CVisibleGraph()
 
 void CVisibleGraph::Clear()
 {
-    if (root)
+    for (size_t i = roots.size(); i > 0; --i)
     {
-        nodeFactory.Destroy (root);
-        root = NULL;
-
+        nodeFactory.Destroy (roots[i-1]);
         assert (GetNodeCount() == 0);
     }
+
+    roots.clear();
 }
 
 CVisibleGraphNode* CVisibleGraph::Add ( const CFullGraphNode* base
@@ -33,14 +32,45 @@ CVisibleGraphNode* CVisibleGraph::Add ( const CFullGraphNode* base
 {
     // (only) the first node must have no parent / prev node
 
-    assert ((source == NULL) == (root == NULL));
+    assert ((source == NULL) || !roots.empty());
 
     CVisibleGraphNode* result 
         = nodeFactory.Create (base, source, preserveNode);
 
-    if (root == NULL)
-        root = result;
+    if (source == NULL)
+        roots.push_back (result);
 
     return result;
+}
+
+void CVisibleGraph::ReplaceRoot ( CVisibleGraphNode* oldRoot
+                                , CVisibleGraphNode* newRoot)
+{
+    for (size_t i = 0, count = roots.size(); i < count; ++i)
+        if (roots[i] == oldRoot)
+        {
+            roots[i] = newRoot;
+            return;
+        }
+
+    // we should never get here
+
+    assert (0);
+}
+
+void CVisibleGraph::RemoveRoot (CVisibleGraphNode* root)
+{
+    for (size_t i = 0, count = roots.size(); i < count; ++i)
+        if (roots[i] == root)
+        {
+            roots[i] = roots[count-1];
+            roots.pop_back();
+
+            return;
+        }
+
+    // we should never get here
+
+    assert (0);
 }
 

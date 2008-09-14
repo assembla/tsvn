@@ -147,16 +147,20 @@ void CModificationOptions::Apply (CVisibleGraph* graph)
         ; (iter != end)
         ; ++iter)
     {
-        if ((*iter)->WantsCopiesFirst())
-            if ((*iter)->WantsRootFirst())
-                TraverseFromRootCopiesFirst (*iter, graph, graph->GetRoot());
+        for (size_t i = 0, count = graph->GetRootCount(); i < count; ++i)
+        {
+            CVisibleGraphNode* root = graph->GetRoot(i);
+            if ((*iter)->WantsCopiesFirst())
+                if ((*iter)->WantsRootFirst())
+                    TraverseFromRootCopiesFirst (*iter, graph, root);
+                else
+                    TraverseToRootCopiesFirst (*iter, graph, root);
             else
-                TraverseToRootCopiesFirst (*iter, graph, graph->GetRoot());
-        else
-            if ((*iter)->WantsRootFirst())
-                TraverseFromRootCopiesLast (*iter, graph, graph->GetRoot());
-            else
-                TraverseToRootCopiesLast (*iter, graph, graph->GetRoot());
+                if ((*iter)->WantsRootFirst())
+                    TraverseFromRootCopiesLast (*iter, graph, root);
+                else
+                    TraverseToRootCopiesLast (*iter, graph, root);
+        }
     }
 }
 

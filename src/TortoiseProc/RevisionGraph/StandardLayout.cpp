@@ -141,7 +141,8 @@ void CStandardLayout::InitializeNodes (const CVisibleGraph* graph)
 {
     nodes.resize (graph->GetNodeCount());
 
-    InitializeNodes (graph->GetRoot());
+    for (size_t i = 0, count = graph->GetRootCount(); i < count; ++i)
+        InitializeNodes (graph->GetRoot (i));
 
     // every node info must actually refer to a node
 
