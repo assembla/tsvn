@@ -51,6 +51,8 @@ private:
     void ShiftNodes 
         ( CStandardLayoutNodeInfo* node
         , CSize delta);
+    CRect BoundingRect 
+        (const CStandardLayoutNodeInfo* node);
 
 public:
 

@@ -168,6 +168,29 @@ void CStandardNodePositioning::ShiftNodes
     }
 }
 
+CRect CStandardNodePositioning::BoundingRect 
+    (const CStandardLayoutNodeInfo* node)
+{
+    // walk along this branch
+
+    CRect result = node->rect;
+    for ( ; node != NULL; node = node->nextInBranch)
+    {
+        result.UnionRect (result, node->rect);
+
+        // shift sub-branches
+
+        for ( CStandardLayoutNodeInfo* branch = node->firstSubBranch
+            ; branch != NULL
+            ; branch = branch->nextBranch)
+        {
+            result.UnionRect (result, BoundingRect (branch));
+        }
+    }
+
+    return result;
+}
+
 // construction
 
 CStandardNodePositioning::CStandardNodePositioning 
@@ -190,13 +213,24 @@ void CStandardNodePositioning::ApplyTo (IRevisionGraphLayout* layout)
 
     // calculate the displacement for every node (member subTreeShift)
 
-    CStandardLayoutNodeInfo* root = nodeAccess->GetNode(0);
-    std::vector<long> columnStarts;
-    std::vector<long> columnHeights;
+    CSize treeShift (0,0);
+    for (index_t i = 0, count = nodeAccess->GetNodeCount(); i < count; ++i)
+    {
+        CStandardLayoutNodeInfo* node = nodeAccess->GetNode(i);
+        if (   (node->node->GetPrevious() == NULL)
+            && (node->node->GetCopySource() == NULL))
+        {
+            // we found a root -> place it
 
-    PlaceBranch (root, columnStarts, columnHeights);
+            std::vector<long> columnStarts;
+            std::vector<long> columnHeights;
 
-    // actually move the node rects to thier final position
+            PlaceBranch (node, columnStarts, columnHeights);
 
-    ShiftNodes (root, CSize (0,0));
+            // actually move the node rects to thier final position
+
+            ShiftNodes (node, treeShift);
+            treeShift.cx = BoundingRect (node).right + 50;
+        }
+    }
 }
