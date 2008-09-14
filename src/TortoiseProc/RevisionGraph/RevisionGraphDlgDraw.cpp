@@ -221,7 +221,11 @@ void CRevisionGraphWnd::DrawNode(CDC * pDC, const CRect& rect,
 		}
 
         bool isWorkingCopy = node->GetClassification().Is (CNodeClassification::IS_WORKINGCOPY);
-        pen2.CreatePen(penStyle, isWorkingCopy ? 3 : 1, contour);
+        COLORREF penColor = (contour == 0xffffff) || isWorkingCopy
+                          ? textcolor
+                          : contour;
+
+        pen2.CreatePen(penStyle, isWorkingCopy ? 3 : 1, penColor);
 		pDC->SelectObject(&pen2);
 
 		// Draw the main shape
@@ -353,8 +357,11 @@ void CRevisionGraphWnd::DrawNodes (CDC* pDC, const CRect& logRect, const CSize& 
 		case ILayoutNodeList::SNode::STYLE_LAST:
 			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::LastCommitNode), node.node, TSVNEllipse, hLastCommitIcon);
 			break;
+		case ILayoutNodeList::SNode::STYLE_MODIFIED:
+			DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle, hLastCommitIcon);
+			break;
 		default:
-            DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle, NULL);
+            DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOW), node.node, TSVNRectangle, NULL);
 			break;
 		}
 

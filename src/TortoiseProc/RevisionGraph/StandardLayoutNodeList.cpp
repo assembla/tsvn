@@ -21,6 +21,8 @@ index_t CStandardLayoutNodeList::GetStyle
 		return ILayoutNodeList::SNode::STYLE_RENAMED;
 	else if (classification.Is (CNodeClassification::IS_LAST))
 		return ILayoutNodeList::SNode::STYLE_LAST;
+    else if (classification.Is (CNodeClassification::IS_MODIFIED))
+		return ILayoutNodeList::SNode::STYLE_MODIFIED;
 	else
 		return ILayoutNodeList::SNode::STYLE_DEFAULT;
 }

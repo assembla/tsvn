@@ -89,7 +89,8 @@ public:
 			STYLE_ADDED    = 1,
 			STYLE_DELETED  = 2,
 			STYLE_RENAMED  = 3,
-			STYLE_LAST	   = 4
+			STYLE_LAST	   = 4,
+            STYLE_MODIFIED = 5
 		};
 
         /// Area occupied by this node.
