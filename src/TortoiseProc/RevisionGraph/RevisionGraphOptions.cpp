@@ -98,3 +98,10 @@ void CRevisionGraphOptionList::SetRegistryFlags (DWORD flags, DWORD mask)
     }
 }
 
+// called before applying the options
+
+void CRevisionGraphOptionList::Prepare()
+{
+    for (size_t i = 0, count = options.size(); i < count; ++i)
+        options[i]->Prepare();
+}

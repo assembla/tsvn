@@ -58,6 +58,8 @@ public:
     virtual bool IsActive() const; 
 
     virtual void ToggleSelection();
+
+    virtual void Prepare();
 };
 
 // construction
@@ -110,6 +112,11 @@ template<class Base>
 void IRevisionGraphOptionImpl<Base>::ToggleSelection()
 {
     selected = !selected;
+}
+
+template<class Base>
+void IRevisionGraphOptionImpl<Base>::Prepare()
+{
 }
 
 /** Implement a simple boolean option.

@@ -61,6 +61,11 @@ public:
 
     virtual void ToggleSelection() = 0;
 
+    /// will be called before a new graph gets created.
+    /// Use this method to reset internal caches etc.
+
+    virtual void Prepare() = 0;
+
     /// required typedef for multi-interface support
 
     typedef IRevisionGraphOption I;
@@ -144,6 +149,10 @@ public:
 
     DWORD GetRegistryFlags() const;
     void SetRegistryFlags (DWORD flags, DWORD mask);
+
+    /// called before applying the options
+
+    void Prepare();
 };
 
 // options owner and filter management
