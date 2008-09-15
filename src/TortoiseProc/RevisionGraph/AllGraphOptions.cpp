@@ -28,6 +28,7 @@
 #include "ShowWC.h"
 #include "ExactCopyFroms.h"
 #include "RevisionInRange.h"
+#include "RemovePathsBySubString.h"
 
 #include "StandardNodeSizeAssignment.h"
 #include "StandardNodePositioning.h"
@@ -53,6 +54,7 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     new CShowWC (*this);
 
     (new CRevisionInRange (*this))->ToggleSelection();
+    (new CRemovePathsBySubString (*this))->ToggleSelection();
 
     // create layout options
 
