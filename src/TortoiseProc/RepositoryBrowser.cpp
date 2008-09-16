@@ -1244,7 +1244,7 @@ void CRepositoryBrowser::OnNMDblclkRepolist(NMHDR *pNMHDR, LRESULT *pResult)
 	if ((pItem)&&(pItem->kind == svn_node_dir))
 	{
 		// a double click on a folder results in selecting that folder
-		ChangeToUrl(pItem->absolutepath, m_initialRev);
+		ChangeToUrl(pItem->absolutepath, m_initialRev, true);
 	}
 }
 
