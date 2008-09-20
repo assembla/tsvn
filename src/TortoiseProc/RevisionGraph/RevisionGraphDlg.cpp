@@ -33,6 +33,8 @@
 #include "RevGraphFilterDlg.h"
 #include ".\revisiongraphdlg.h"
 #include "RepositoryInfo.h"
+#include "RevisionInRange.h"
+#include "RemovePathsBySubString.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -676,7 +678,7 @@ BOOL CRevisionGraphDlg::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRe
 
 void CRevisionGraphDlg::OnViewFilter()
 {
-/*	CRevGraphFilterDlg dlg;
+	CRevGraphFilterDlg dlg;
 	dlg.SetMaxRevision(m_Graph.GetHeadRevision());
 	dlg.SetFilterString(m_sFilter);
 	if (dlg.DoModal()==IDOK)
@@ -686,13 +688,31 @@ void CRevisionGraphDlg::OnViewFilter()
 		svn_revnum_t minrev, maxrev;
 		dlg.GetRevisionRange(minrev, maxrev);
 		m_sFilter = dlg.GetFilterString();
-		m_Graph.SetFilter(minrev, maxrev, m_sFilter);
-		InterlockedExchange(&m_Graph.m_bThreadRunning, TRUE);
+
+        CRevisionInRange* revisionRange = m_options.GetOption<CRevisionInRange>();
+        revisionRange->SetLowerLimit (minrev);
+        revisionRange->SetUpperLimit (maxrev);
+
+        std::set<std::string>& filterPaths 
+            = m_options.GetOption<CRemovePathsBySubString>()->GetFilterPaths();
+
+        int index = 0;
+        filterPaths.clear();
+
+        CString path = m_sFilter.Tokenize (_T("*"),  index);
+        while (!path.IsEmpty())
+        {
+            filterPaths.insert (CUnicodeUtils::StdGetUTF8 ((LPCTSTR)path));
+            path = m_sFilter.Tokenize (_T("*"),  index);
+        }
+
+        InterlockedExchange(&m_Graph.m_bThreadRunning, TRUE);
+
 		if (AfxBeginThread(WorkerThread, this)==NULL)
 		{
 			CMessageBox::Show(this->m_hWnd, IDS_ERR_THREADSTARTFAILED, IDS_APPNAME, MB_OK | MB_ICONERROR);
 		}
-	}*/
+	}
 }
 
 void CRevisionGraphDlg::OnViewShowoverview()

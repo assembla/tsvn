@@ -182,6 +182,13 @@ int CRevisionGraphWnd::GetNodeCount()
     return static_cast<int>(m_visibleGraph.GetNodeCount());
 }
 
+svn_revnum_t CRevisionGraphWnd::GetHeadRevision() const
+{
+    return m_fullHistory.get() != NULL
+        ? m_fullHistory->GetHeadRevision()
+        : 0;
+}
+
 int CRevisionGraphWnd::GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
 {
 	UINT  num = 0;          // number of image encoders

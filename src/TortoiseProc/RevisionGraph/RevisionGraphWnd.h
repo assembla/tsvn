@@ -119,6 +119,8 @@ public:
     int             GetNodeCount();
 	void			DoZoom(float nZoomFactor);
 
+    svn_revnum_t    GetHeadRevision() const;             
+
 protected:
 	DWORD			m_dwTicks;
 	CRect			m_ViewRect;

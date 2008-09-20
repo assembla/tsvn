@@ -26,7 +26,7 @@
 #include "Resource.h"
 
 /** Remove all branches / tags that have been deleted and have
-* no surviving copy.
+* no surviving copy. Upper and lower bounds are inclusive.
 */
 
 using namespace LogCache;
