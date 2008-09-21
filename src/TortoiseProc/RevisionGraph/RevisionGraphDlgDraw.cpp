@@ -163,23 +163,7 @@ void CRevisionGraphWnd::DrawNode(CDC * pDC, const CRect& rect,
 		if (rect.Height() > 10)
 		{
 			CRect shadow = rect;
-			CPoint shadowoffset = SHADOW_OFFSET_PT;
-			if (rect.Height() < 40)
-			{
-				shadowoffset.x--;
-				shadowoffset.y--;
-			}
-			if (rect.Height() < 30)
-			{
-				shadowoffset.x--;
-				shadowoffset.y--;
-			}
-			if (rect.Height() < 20)
-			{
-				shadowoffset.x--;
-				shadowoffset.y--;
-			}
-			shadow.OffsetRect(shadowoffset);
+			shadow.OffsetRect(SHADOW_OFFSET_PT);
 
 			brush.CreateSolidBrush(shadowc);
 			pOldBrush = pDC->SelectObject(&brush);
@@ -346,16 +330,16 @@ void CRevisionGraphWnd::DrawNodes (CDC* pDC, const CRect& logRect, const CSize& 
 		switch (node.style)
 		{
 		case ILayoutNodeList::SNode::STYLE_DELETED:
-			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::DeletedNode), node.node, TSVNOctangle, hDeletedIcon);
+			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::DeletedNode), node.node, TSVNOctangle, NULL);
 			break;
 		case ILayoutNodeList::SNode::STYLE_ADDED:
-			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::AddedNode), node.node, TSVNRoundRect, hAddedIcon);
+			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::AddedNode), node.node, TSVNRoundRect, NULL);
 			break;
 		case ILayoutNodeList::SNode::STYLE_RENAMED:
-			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::RenamedNode), node.node, TSVNOctangle, hRenamedIcon);
+			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::RenamedNode), node.node, TSVNOctangle, NULL);
 			break;
 		case ILayoutNodeList::SNode::STYLE_LAST:
-			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::LastCommitNode), node.node, TSVNEllipse, hLastCommitIcon);
+			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::LastCommitNode), node.node, TSVNEllipse, NULL);
 			break;
 		case ILayoutNodeList::SNode::STYLE_MODIFIED:
 			DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle, NULL);

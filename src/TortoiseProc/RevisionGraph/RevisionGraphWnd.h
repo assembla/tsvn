@@ -47,8 +47,7 @@ enum NodeShape
 	TSVNOctangle,
 	TSVNEllipse
 };
-#define STARTPOINT_PT		(CPoint(5, 5))
-#define SHADOW_OFFSET_PT	(CPoint(4, 4))
+#define SHADOW_OFFSET_PT	(CPoint(2, 2))
 #define ROUND_RECT			(12)
 
 #define RGB_DEF_SEL				RGB(160, 160, 160)
