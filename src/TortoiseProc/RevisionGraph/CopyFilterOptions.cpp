@@ -40,7 +40,7 @@ CCopyFilterOptions::ShallRemove (const CFullGraphNode* node) const
         ; (iter != end) && (result == ICopyFilterOption::KEEP_NODE)
         ; ++iter)
     {
-        result = max (result, (*iter)->ShallRemove (node));
+        result = (*iter)->ShallRemove (node);
     }
 
     return result;
