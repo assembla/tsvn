@@ -80,10 +80,11 @@ void CFullGraphFinalizer::FindRenames (CFullGraphNode* node)
 	// say "renamed" for "Deleted"/"Added" entries
 
     for ( CFullGraphNode * next = node->GetNext()
-        ; next != NULL
-        ; node = next, next = next->GetNext())
+        ; node != NULL
+        ; node = next, next = (next == NULL ? NULL : next->GetNext()))
     {
-        if (next->GetClassification().Is (CNodeClassification::IS_DELETED))
+        if (   (next != NULL) 
+            && (next->GetClassification().Is (CNodeClassification::IS_DELETED)))
 	    {
             // this line will be deleted. 
 		    // will it be continued exactly once under a different name?
