@@ -220,9 +220,11 @@ void CStandardLayout::CreateTexts()
         const CStandardLayoutNodeInfo& info = nodes[i];
 
         if (info.requiresRevision)
-            texts.push_back (std::make_pair (i, false));
+            texts.push_back (STextInfo (i, 0));
+
         if (info.requiresPath)
-            texts.push_back (std::make_pair (i, true));
+            for (index_t k = info.node->GetPath().GetDepth(); k > 0; --k)
+                texts.push_back (STextInfo (i, k));
     }
 }
 

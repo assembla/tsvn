@@ -20,6 +20,7 @@
 #include "StdAfx.h"
 #include "StandardNodeSizeAssignment.h"
 #include "StandardLayout.h"
+#include "VisibleGraphNode.h"
 
 // construction
 
@@ -46,7 +47,16 @@ void CStandardNodeSizeAssignment::ApplyTo (IRevisionGraphLayout* layout)
     for (index_t i = 0, count = nodeAccess->GetNodeCount(); i < count; ++i)
     {
         CStandardLayoutNodeInfo* node = nodeAccess->GetNode(i);
-        node->requiredSize = CSize (200, 60);
-        node->rect = CRect (0, 0, 200, 60);
+
+        node->requiresPath =   (node->previousInBranch == NULL)
+                            || (   node->previousInBranch->node->GetPath() 
+                                != node->node->GetPath());
+
+        int hight = 28;
+        if (node->requiresPath)
+            hight += 3 + node->node->GetPath().GetDepth() * 21;
+
+        node->requiredSize = CSize (200, hight);
+        node->rect = CRect (0, 0, 200, hight);
     }
 }

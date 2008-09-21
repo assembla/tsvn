@@ -100,6 +100,20 @@ class CStandardLayout
     : public IRevisionGraphLayout
     , public IStandardLayoutNodeAccess
 {
+public:
+
+    struct STextInfo
+    {
+        index_t nodeIndex;
+        int subPathIndex;   // 0 -> revNum, pathElementIndex otherwise
+
+        STextInfo (index_t nodeIndex, int subPathIndex)
+            : nodeIndex (nodeIndex)
+            , subPathIndex (subPathIndex) 
+        {
+        }
+    };
+
 private:
 
     /// source of revision data
@@ -116,7 +130,7 @@ private:
 
     /// non-empty texts. Stored as node index, 'is path' pairs
 
-    std::vector<std::pair<index_t, bool> > texts;
+    std::vector<STextInfo> texts;
 
     /// area that covers all visible items
 

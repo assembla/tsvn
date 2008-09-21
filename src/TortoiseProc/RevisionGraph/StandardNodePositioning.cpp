@@ -41,7 +41,7 @@ void CStandardNodePositioning::StackSubTree
     for (size_t i = 0, count = branchColumnStarts.size(); i < count; ++i)
     {
         subTreeMinY = max ( subTreeMinY
-                          , localColumnHeights[i+1] - branchColumnStarts[i] + 30);
+            , localColumnHeights[i+1] - branchColumnStarts[i] + node->rect.Height() / 2 + 8);
     }
 
     // store how much the sub-tree has to be shifted

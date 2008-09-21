@@ -25,7 +25,7 @@ class CStandardLayoutTextList : public ILayoutTextList
 private:
 
     const std::vector<CStandardLayoutNodeInfo>& nodes;
-    const std::vector<std::pair<index_t, bool> >& texts;
+    const std::vector<CStandardLayout::STextInfo>& texts;
 
 public:
 
@@ -33,7 +33,7 @@ public:
 
     CStandardLayoutTextList 
         ( const std::vector<CStandardLayoutNodeInfo>& nodes
-        , const std::vector<std::pair<index_t, bool> >& texts);
+        , const std::vector<CStandardLayout::STextInfo>& texts);
 
     /// implement ILayoutItemList
 

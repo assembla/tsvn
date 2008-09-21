@@ -25,7 +25,7 @@
 
 CStandardLayoutTextList::CStandardLayoutTextList 
     ( const std::vector<CStandardLayoutNodeInfo>& nodes
-    , const std::vector<std::pair<index_t, bool> >& texts)
+    , const std::vector<CStandardLayout::STextInfo>& texts)
     : nodes (nodes)
     , texts (texts)
 {
@@ -55,8 +55,10 @@ index_t CStandardLayoutTextList::GetNextVisible
 {
     for (size_t i = prev+1, count = texts.size(); i < count; ++i)
     {
-        const std::pair<index_t, bool>& text = texts[i];
-        if (FALSE != CRect().IntersectRect (nodes[text.first].rect, viewRect))
+        const CStandardLayout::STextInfo& text = texts[i];
+        const CRect& nodeRect = nodes[text.nodeIndex].rect;
+
+        if (FALSE != CRect().IntersectRect (nodeRect, viewRect))
             return static_cast<index_t>(i);
     }
 
@@ -77,20 +79,26 @@ CStandardLayoutTextList::GetText (index_t index) const
 {
     // determine the text and its bounding rect
 
-    const std::pair<index_t, bool>& textInfo = texts[index];
-    const CStandardLayoutNodeInfo& nodeInfo = nodes[textInfo.first];
+    const CStandardLayout::STextInfo& textInfo = texts[index];
+    const CStandardLayoutNodeInfo& nodeInfo = nodes[textInfo.nodeIndex];
 
     CString text;
     CRect rect = nodeInfo.rect;
-    if (textInfo.second)
+    if (textInfo.subPathIndex > 0)
     {
-        rect.top = (rect.top + rect.bottom) / 2;
-        text = CUnicodeUtils::StdGetUnicode 
-                  (nodeInfo.node->GetPath().GetPath()).c_str();
+        rect.top = rect.top + 25 + 21 * (textInfo.subPathIndex-1);
+
+        CString path = CUnicodeUtils::StdGetUnicode 
+                         (nodeInfo.node->GetPath().GetPath()).c_str();
+        int index = 0;
+        for (int i = textInfo.subPathIndex; i > 0; --i)
+            text = path.Tokenize (_T("/"), index);
+
+        text.Insert (0, _T('/'));
     }
     else
     {
-        rect.bottom = (rect.top + rect.bottom) / 2;
+        rect.top += 3;
 
         TCHAR buffer[20];
         _itot_s (nodeInfo.node->GetRevision(), buffer, 10);
@@ -101,7 +109,7 @@ CStandardLayoutTextList::GetText (index_t index) const
 
     SText result;
 
-    result.style = !textInfo.second;
+    result.style = textInfo.subPathIndex == 0;
     result.rotation = 0;
     result.rect = rect;
     result.text = text;
