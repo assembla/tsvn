@@ -339,13 +339,13 @@ void CFullGraphBuilder::AnalyzeRevisions ( revision_t revision
 
                     if (   (classification.Is (CNodeClassification::IS_ADDED))
 						&& (searchNode->GetLastEntry() != NULL)
-                        && (   searchNode->GetLastEntry()->GetPath().GetBasePath().GetIndex()
-                            != iter->GetFromPathID()))
+                        && !iter->HasFromPath())
 					{
 						// we may not add paths that already exist:
 						// D /trunk/OldSub
 						// A /trunk/New
 						// A /trunk/New/OldSub	/trunk/OldSub@r-1
+                        // don't add /trunk/New again
 
 						continue;
 					}
@@ -483,32 +483,40 @@ void CFullGraphBuilder::FillCopyTargets ( revision_t revision
                                        , fromPath
                                        , path))
                 {
-                    // o.k. this is actual a copy we have to add to the tree
+                    // check for another special case:
+                    // A /branches/b    /trunk 100
+                    // D /branches/b/a
+                    // -> don't add a path if we are following /trunk/a
 
-                    CFullGraphNode* entry = searchNode->GetLastEntry();
-                    if ((entry == NULL) || (entry->GetRevision() < revision))
-				    {
-					    // the copy source graph node has yet to be created
-
-                        entry = graph.Add ( path
-                                          , revision
-                                          , CNodeClassification::IS_COPY_SOURCE
-                                          , entry);
-
-					    // link entries for the same search path
-
-					    searchNode->ChainEntries (entry);
-				    }
-
-                    // add & schedule the new search path
-
-				    SCopyInfo::STarget target 
-					    ( entry
-					    , path.ReplaceParent ( fromPath
+        			CDictionaryBasedTempPath targetPath
+					    = path.ReplaceParent ( fromPath
 									         , CDictionaryBasedPath ( path.GetDictionary()
-															        , copy->toPathIndex)));
+															        , copy->toPathIndex));
 
-				    targets.push_back (target);
+                    if (TargetPathExists (copy->toRevision, targetPath.GetBasePath()))
+                    {
+                        // o.k. this is actual a copy we have to add to the tree
+
+                        CFullGraphNode* entry = searchNode->GetLastEntry();
+                        if ((entry == NULL) || (entry->GetRevision() < revision))
+				        {
+					        // the copy source graph node has yet to be created
+
+                            entry = graph.Add ( path
+                                              , revision
+                                              , CNodeClassification::IS_COPY_SOURCE
+                                              , entry);
+
+					        // link entries for the same search path
+
+					        searchNode->ChainEntries (entry);
+				        }
+
+                        // add & schedule the new search path
+
+				        SCopyInfo::STarget target (entry, targetPath);
+				        targets.push_back (target);
+                    }
 			    }
             }
 
@@ -564,5 +572,72 @@ bool CFullGraphBuilder::IsLatestCopySource ( revision_t fromRevision
     // (fromRevision, fromGraph) is the best match
 
     return true;
+}
+
+bool CFullGraphBuilder::TargetPathExists ( revision_t revision
+                                         , const CDictionaryBasedPath& path)
+{
+    // follow additions and deletions to determine whether the path exists
+    // after the given revision
+
+    // A /branches/b    /trunk 100
+    // D /branches/b/a
+    // -> /branches/b/a does not exist
+
+    const CCachedLogInfo* cache = history.GetCache();
+    const CRevisionInfoContainer& logInfo = cache->GetLogInfo();
+    index_t index = cache->GetRevisions()[revision];
+
+    // short-cut: if there are no deletions, we should be fine
+
+    if (!(logInfo.GetSumChanges (index) & CRevisionInfoContainer::ACTION_DELETED))
+        return true;
+
+    // crawl changes and update this flag:
+
+    bool exists = false;
+    for ( CRevisionInfoContainer::CChangesIterator 
+          iter = logInfo.GetChangesBegin (index)
+        , end = logInfo.GetChangesEnd (index)
+        ; iter != end
+        ; ++iter)
+    {
+        // does this change affect the path?
+
+        if (path.IsSameOrChildOf (iter->GetPathID()))
+        {
+            switch (iter->GetRawChange())
+            {
+            case CRevisionInfoContainer::ACTION_DELETED :
+                // deletion? -> does not exist
+
+                exists = false;
+                break;
+
+            case CRevisionInfoContainer::ACTION_ADDED
+               + CRevisionInfoContainer::HAS_COPY_FROM:
+            case CRevisionInfoContainer::ACTION_REPLACED
+               + CRevisionInfoContainer::HAS_COPY_FROM:
+                // copy? -> does exist
+
+                // We can safely assume here, that the source tree
+                // contains the path in question as this is why we
+                // called this function at all.
+
+                exists = true;
+                break;
+
+            case CRevisionInfoContainer::ACTION_ADDED:
+                // exact addition? -> does exist
+
+                if (iter->GetPathID() == path.GetIndex())
+                    exists = true;
+
+                break;
+            }
+        }
+    }
+
+    return exists;
 }
 

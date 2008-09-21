@@ -69,6 +69,8 @@ private:
                             , revision_t toRevision
                             , const CDictionaryBasedPath& fromPath
                             , const CDictionaryBasedTempPath& currentPath);
+    bool TargetPathExists ( revision_t revision
+                          , const CDictionaryBasedPath& path);
 
     /// data members
 
