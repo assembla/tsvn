@@ -63,8 +63,9 @@ void CRemoveSimpleChanges::Apply (CVisibleGraph* graph, CVisibleGraphNode* node)
 {
     // "M", not a branch point, not the HEAD
 
-    if (   (node->GetClassification().Matches ( CNodeClassification::IS_MODIFIED
-                                              , CNodeClassification::MUST_BE_PRESERVED))
+    if (   (node->GetClassification().Matches 
+                ( CNodeClassification::IS_MODIFIED
+                , static_cast<DWORD>(CNodeClassification::MUST_BE_PRESERVED)))
         && (node->GetFirstTag() == NULL)
         && (node->GetFirstCopyTarget() == NULL))
     {

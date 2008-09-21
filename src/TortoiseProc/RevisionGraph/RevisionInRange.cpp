@@ -24,8 +24,8 @@
 
 CRevisionInRange::CRevisionInRange (CRevisionGraphOptionList& list)
     : inherited (list)
-    , lowerLimit (NO_REVISION)
-    , upperLimit (NO_REVISION)
+    , lowerLimit (static_cast<revision_t>(NO_REVISION))
+    , upperLimit (static_cast<revision_t>(NO_REVISION))
 {
 }
 
