@@ -118,7 +118,10 @@ public:
     int             GetNodeCount();
 	void			DoZoom(float nZoomFactor);
 
+    void            SetDlgTitle (bool offline);
+
     svn_revnum_t    GetHeadRevision() const;             
+    CString         GetRepositoryRoot() const;             
 
 protected:
 	DWORD			m_dwTicks;
@@ -127,9 +130,9 @@ protected:
 
 	BOOL			m_bShowOverview;
 
-    std::auto_ptr<CFullHistory>    m_fullHistory;
-    CFullGraph      m_fullGraph;
-    CVisibleGraph   m_visibleGraph;
+    std::auto_ptr<CFullHistory>         m_fullHistory;
+    std::auto_ptr<CFullGraph>           m_fullGraph;
+    std::auto_ptr<CVisibleGraph>        m_visibleGraph;
     std::auto_ptr<IRevisionGraphLayout> m_layout;
 
 	const CVisibleGraphNode * m_SelectedEntry1;
@@ -206,6 +209,4 @@ private:
 	void			DrawRubberBand();
 
 	void			BuildPreview();
-
-    void            SetDlgTitle (bool offline);
 };

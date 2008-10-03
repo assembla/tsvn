@@ -162,7 +162,7 @@ CRect CRevisionGraphWnd::GetViewRect()
 
 int CRevisionGraphWnd::GetNodeCount()
 {
-    return static_cast<int>(m_visibleGraph.GetNodeCount());
+    return static_cast<int>(m_visibleGraph->GetNodeCount());
 }
 
 svn_revnum_t CRevisionGraphWnd::GetHeadRevision() const
@@ -170,6 +170,13 @@ svn_revnum_t CRevisionGraphWnd::GetHeadRevision() const
     return m_fullHistory.get() != NULL
         ? m_fullHistory->GetHeadRevision()
         : 0;
+}
+
+CString CRevisionGraphWnd::GetRepositoryRoot() const
+{
+    return m_fullHistory.get() != NULL
+        ? m_fullHistory->GetRepositoryRoot()
+        : CString();
 }
 
 int CRevisionGraphWnd::GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
@@ -242,10 +249,14 @@ bool CRevisionGraphWnd::FetchRevisionData
 	bool result = m_fullHistory->FetchRevisionData (path, pegRevision, showWCRev, m_pProgress);
     if (result)
     {
-        CFullGraphBuilder builder (*m_fullHistory, m_fullGraph);
+        m_fullGraph.reset (new CFullGraph());
+        m_visibleGraph.reset();
+        m_layout.reset();
+
+        CFullGraphBuilder builder (*m_fullHistory, *m_fullGraph);
         builder.Run();
 
-        CFullGraphFinalizer finalizer (*m_fullHistory, m_fullGraph);
+        CFullGraphFinalizer finalizer (*m_fullHistory, *m_fullGraph);
         finalizer.Run();
     }
 
@@ -256,25 +267,26 @@ bool CRevisionGraphWnd::AnalyzeRevisionData
     (const CAllRevisionGraphOptions& options)
 {
     m_layout.reset();
-    if (m_fullGraph.GetNodeCount() > 0)
+    if (m_fullGraph->GetNodeCount() > 0)
     {
         // filter graph
 
-        CVisibleGraphBuilder builder ( m_fullGraph
-                                     , m_visibleGraph
+        m_visibleGraph.reset (new CVisibleGraph());
+        CVisibleGraphBuilder builder ( *m_fullGraph
+                                     , *m_visibleGraph
                                      , options.GetCopyFilterOptions());
         builder.Run();
-        options.GetModificationOptions().Apply (&m_visibleGraph);
+        options.GetModificationOptions().Apply (m_visibleGraph.get());
 
         index_t index = 0;
-        for (size_t i = 0, count = m_visibleGraph.GetRootCount(); i < count; ++i)
-            index = m_visibleGraph.GetRoot (i)->InitIndex (index);
+        for (size_t i = 0, count = m_visibleGraph->GetRootCount(); i < count; ++i)
+            index = m_visibleGraph->GetRoot (i)->InitIndex (index);
 
         // layout nodes
 
         std::auto_ptr<CStandardLayout> newLayout 
             ( new CStandardLayout ( m_fullHistory->GetCache()
-                                  , &m_visibleGraph));
+                                  , m_visibleGraph.get()));
         options.GetLayoutOptions().Apply (newLayout.get());
         newLayout->Finalize();
 

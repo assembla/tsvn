@@ -365,12 +365,13 @@ BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
 			m_Graph.Invalidate();
 			break;
 		case VK_F5:
-/*	        m_Graph.SetDlgTitle (false);
+	        m_Graph.SetDlgTitle (false);
 
+            SVN svn;
         	LogCache::CRepositoryInfo& cachedProperties 
-                = m_Graph.svn.GetLogCachePool()->GetRepositoryInfo();
-            cachedProperties.ResetHeadRevision (CTSVNPath (m_Graph.GetReposRoot()));
-*/
+                = svn.GetLogCachePool()->GetRepositoryInfo();
+            cachedProperties.ResetHeadRevision (CTSVNPath (m_Graph.GetRepositoryRoot()));
+
             m_bFetchLogs = true;
             StartWorkerThread();
 
