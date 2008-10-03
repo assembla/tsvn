@@ -52,6 +52,23 @@ CRevisionGraphOptionList::~CRevisionGraphOptionList()
         delete options[i];
 }
 
+// member access
+
+size_t CRevisionGraphOptionList::count() const
+{
+    return options.size();
+}
+
+const IRevisionGraphOption* CRevisionGraphOptionList::operator[](size_t index) const
+{
+    return options[index];
+}
+
+IRevisionGraphOption* CRevisionGraphOptionList::operator[](size_t index)
+{
+    return options[index];
+}
+
 // menu interaction
 
 bool CRevisionGraphOptionList::IsAvailable (UINT id) const

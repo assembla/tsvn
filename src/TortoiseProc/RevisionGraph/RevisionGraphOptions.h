@@ -130,6 +130,13 @@ protected:
 
 public:
 
+    /// member access
+
+    size_t count() const;
+
+    const IRevisionGraphOption* operator[](size_t index) const;
+    IRevisionGraphOption* operator[](size_t index);
+
     /// find a particular option
 
     template<class T> T* GetOption() const;

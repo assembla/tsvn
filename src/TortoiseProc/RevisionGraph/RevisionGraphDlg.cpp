@@ -231,15 +231,9 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	if (InitializeToolbar() != TRUE)
 		return FALSE;
 
-	SetOption(ID_VIEW_GROUPBRANCHES);
-	SetOption(ID_VIEW_SHOWALLREVISIONS);
-	SetOption(ID_VIEW_TOPDOWN);
-	SetOption(ID_VIEW_SHOWHEAD);
-	SetOption(ID_VIEW_EXACTCOPYSOURCE);
-	SetOption(ID_VIEW_FOLDTAGS);
-	SetOption(ID_VIEW_REDUCECROSSLINES);
-    SetOption(ID_VIEW_REMOVEDELETEDONES);
-    SetOption(ID_VIEW_SHOWWCREV);
+    for (size_t i = 0; i < m_options.count(); ++i)
+        if (m_options[i]->CommandID() != 0)
+        	SetOption (m_options[i]->CommandID());
 
 	CMenu * pMenu = GetMenu();
 	if (pMenu)
@@ -480,16 +474,19 @@ void CRevisionGraphDlg::SetOption (UINT controlID)
 		return;
 
 	int tbstate = m_ToolBar.GetToolBarCtrl().GetState(controlID);
-    if (m_options.IsSelected (controlID))
-	{
-		pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_CHECKED);
-		m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate | TBSTATE_CHECKED);
-	}
-	else
-	{
-		pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_UNCHECKED);
-		m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate & (~TBSTATE_CHECKED));
-	}
+    if (tbstate != -1)
+    {
+        if (m_options.IsSelected (controlID))
+	    {
+		    pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_CHECKED);
+		    m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate | TBSTATE_CHECKED);
+	    }
+	    else
+	    {
+		    pMenu->CheckMenuItem(controlID, MF_BYCOMMAND | MF_UNCHECKED);
+		    m_ToolBar.GetToolBarCtrl().SetState(controlID, tbstate & (~TBSTATE_CHECKED));
+	    }
+    }
 }
 
 BOOL CRevisionGraphDlg::OnToggleOption (UINT controlID)
@@ -739,10 +736,3 @@ void CRevisionGraphDlg::OnViewShowoverview()
 	reg = m_Graph.GetShowOverview();
 	m_Graph.Invalidate(FALSE);
 }
-
-
-
-
-
-
-
