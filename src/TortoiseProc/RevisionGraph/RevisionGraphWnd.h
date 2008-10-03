@@ -114,7 +114,7 @@ public:
 	void			CompareRevs(bool bHead);
 	void			UnifiedDiffRevs(bool bHead);
 
-	const CRect&    GetViewSize();
+	CRect           GetViewRect();
     int             GetNodeCount();
 	void			DoZoom(float nZoomFactor);
 
@@ -122,8 +122,6 @@ public:
 
 protected:
 	DWORD			m_dwTicks;
-	CRect			m_ViewRect;
-	CRect			m_GraphRect;
 	CRect			m_OverviewPosRect;
 	CRect			m_OverviewRect;
 
@@ -185,7 +183,7 @@ private:
     void Compare (TDiffFunc func, bool bHead);
 
 	void			SetScrollbars(int nVert = 0, int nHorz = 0, int oldwidth = 0, int oldheight = 0);
-	const CRect&	GetGraphSize();
+	CRect       	GetGraphRect();
 	CFont*			GetFont(BOOL bItalic = FALSE, BOOL bBold = FALSE);
 
     CSize           UsableTooltipRect();

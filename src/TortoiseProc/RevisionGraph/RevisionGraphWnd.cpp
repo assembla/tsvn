@@ -71,8 +71,6 @@ CRevisionGraphWnd::CRevisionGraphWnd()
 	, m_ptRubberStart(0,0)
 	, m_bShowOverview(false)
 {
-	m_GraphRect.SetRectEmpty();
-	m_ViewRect.SetRectEmpty();
 	memset(&m_lfBaseFont, 0, sizeof(LOGFONT));	
 	for (int i=0; i<MAXFONTS; i++)
 	{
@@ -710,7 +708,7 @@ void CRevisionGraphWnd::SaveGraphAs(CString sSavePath)
 		m_fZoomFactor = 1.0;
 		DoZoom(m_fZoomFactor);
 		CRect rect;
-		rect = GetViewSize();
+		rect = GetViewRect();
 		DrawGraph(&wmfDC, rect, 0, 0, true);
 		HENHMETAFILE hemf = wmfDC.CloseEnhanced();
 		DeleteEnhMetaFile(hemf);
@@ -762,7 +760,7 @@ void CRevisionGraphWnd::SaveGraphAs(CString sSavePath)
 				return;
 			}
 			CRect rect;
-			rect = GetViewSize();
+			rect = GetViewRect();
 			HBITMAP hbm = ::CreateCompatibleBitmap(ddc.m_hDC, rect.Width(), rect.Height());
 			if (hbm==0)
 			{
@@ -1005,8 +1003,9 @@ void CRevisionGraphWnd::OnMouseMove(UINT nFlags, CPoint point)
 		if ((!m_OverviewRect.IsRectEmpty())&&(m_OverviewRect.PtInRect(point))&&(nFlags & MK_LBUTTON))
 		{
 			// scrolling
-			int x = (point.x-m_OverviewRect.left - (m_OverviewPosRect.Width()/2)) * m_ViewRect.Width() / m_previewWidth;
-			int y = (point.y - (m_OverviewPosRect.Height()/2)) * m_ViewRect.Height() / m_previewHeight;
+            CRect viewRect = GetViewRect();
+			int x = (point.x-m_OverviewRect.left - (m_OverviewPosRect.Width()/2)) * viewRect.Width() / m_previewWidth;
+			int y = (point.y - (m_OverviewPosRect.Height()/2)) * viewRect.Height() / m_previewHeight;
 			SetScrollbars(y, x);
 			Invalidate(FALSE);
 			return __super::OnMouseMove(nFlags, point);
@@ -1038,7 +1037,9 @@ void CRevisionGraphWnd::OnMouseMove(UINT nFlags, CPoint point)
 
 BOOL CRevisionGraphWnd::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
-	if ((nHitTest == HTCLIENT)&&(pWnd == this)&&(m_ViewRect.Width())&&(m_ViewRect.Height())&&(message))
+    CRect viewRect = GetViewRect();
+
+	if ((nHitTest == HTCLIENT)&&(pWnd == this)&&(viewRect.Width())&&(viewRect.Height())&&(message))
 	{
 		POINT pt;
 		if (GetCursorPos(&pt))

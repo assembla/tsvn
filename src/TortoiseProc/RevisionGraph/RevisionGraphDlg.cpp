@@ -417,7 +417,7 @@ void CRevisionGraphDlg::OnViewZoomAll()
 	CRect windowrect;
 	m_Graph.DoZoom(1.0);
 	GetGraphRect(windowrect);
-	CRect viewrect = m_Graph.GetViewSize();
+	CRect viewrect = m_Graph.GetViewRect();
 	float horzfact = float(viewrect.Width())/float(windowrect.Width());
 	float vertfact = float(viewrect.Height())/float(windowrect.Height());
 	float fZoom = 1.0f/(max(horzfact, vertfact));
@@ -429,7 +429,6 @@ void CRevisionGraphDlg::OnViewZoomAll()
 	{
 		m_fZoomFactor = fZoom;
 		m_Graph.DoZoom(m_fZoomFactor);
-		viewrect = m_Graph.GetViewSize();
 		fZoom *= 0.95f;
 		trycounter++;
 	}
@@ -736,3 +735,10 @@ void CRevisionGraphDlg::OnViewShowoverview()
 	reg = m_Graph.GetShowOverview();
 	m_Graph.Invalidate(FALSE);
 }
+
+
+
+
+
+
+

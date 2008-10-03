@@ -95,8 +95,8 @@ void CRevisionGraphWnd::OnPaint()
 		dc.ExtTextOut(20,20,ETO_CLIPPED,NULL,sNoGraphText,NULL);
 		return;
 	}
-	GetViewSize();
-	DrawGraph(&dc, rect, GetScrollPos(SB_VERT), GetScrollPos(SB_HORZ), false);
+	
+    DrawGraph(&dc, rect, GetScrollPos(SB_VERT), GetScrollPos(SB_HORZ), false);
 }
 
 void CRevisionGraphWnd::DrawOctangle(CDC * pDC, const CRect& rect)
@@ -479,10 +479,12 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		m_OverviewRect.bottom = m_previewHeight;
 		memDC->DrawEdge(&m_OverviewRect, EDGE_BUMP, BF_RECT);
 		// now draw a rectangle where the current view is located in the overview
-		LONG width = m_previewWidth * rect.Width() / m_ViewRect.Width();
-		LONG height = m_previewHeight * rect.Height() / m_ViewRect.Height();
-		LONG xpos = nHScrollPos * m_previewWidth / m_ViewRect.Width();
-		LONG ypos = nVScrollPos * m_previewHeight / m_ViewRect.Height();
+
+        CRect viewRect = GetViewRect();
+		LONG width = m_previewWidth * rect.Width() / viewRect.Width();
+		LONG height = m_previewHeight * rect.Height() / viewRect.Height();
+		LONG xpos = nHScrollPos * m_previewWidth / viewRect.Width();
+		LONG ypos = nVScrollPos * m_previewHeight / viewRect.Height();
 		RECT tempRect;
 		tempRect.left = rect.Width()-m_previewWidth+xpos;
 		tempRect.top = ypos;
