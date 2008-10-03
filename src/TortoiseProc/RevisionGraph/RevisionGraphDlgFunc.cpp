@@ -60,56 +60,46 @@ void CRevisionGraphWnd::BuildPreview()
 
 	// is there a point in drawing this at all?
 
-	if (GetNodeCount() > REVGRAPH_PREVIEW_MAX_NODES)
+    int nodeCount = GetNodeCount();
+	if ((nodeCount > REVGRAPH_PREVIEW_MAX_NODES) || (nodeCount == 0))
 		return;
 
 	float origZoom = m_fZoomFactor;
-	// zoom the graph so that it is completely visible in the window
-	DoZoom(1.0);
 
+    CRect clientRect;
+    GetClientRect (&clientRect);
+    CSize preViewSize (max (REVGRAPH_PREVIEW_WIDTH, clientRect.Width() / 4)
+                      ,max (REVGRAPH_PREVIEW_HEIGHT, clientRect.Height() / 4));
+
+    // zoom the graph so that it is completely visible in the window
     CRect graphRect = GetGraphRect();
-	float horzfact = float(graphRect.Width())/float(REVGRAPH_PREVIEW_WIDTH);
-	float vertfact = float(graphRect.Height())/float(REVGRAPH_PREVIEW_HEIGHT);
-	float fZoom = 1.0f/(max(horzfact, vertfact));
-	if (fZoom > 1.0f)
-		fZoom = 1.0f;
-	int trycounter = 0;
-	m_fZoomFactor = fZoom;
+	float horzfact = float(graphRect.Width())/float(preViewSize.cx);
+	float vertfact = float(graphRect.Height())/float(preViewSize.cy);
+	m_previewZoom = min (1.0f, 1.0f/(max(horzfact, vertfact)));
 
-	while ((trycounter < 5)&&((graphRect.Width()>REVGRAPH_PREVIEW_WIDTH)||(graphRect.Height()>REVGRAPH_PREVIEW_HEIGHT)))
-	{
-		m_fZoomFactor = fZoom;
-		DoZoom(m_fZoomFactor);
-		fZoom *= 0.95f;
-		trycounter++;
-	}
-	// make sure the preview window has a minimal size
-	if ((graphRect.Width()>10) && (graphRect.Height()>10))
-	{
-		m_previewWidth = max(graphRect.Width(), 30);
-		m_previewHeight = max(graphRect.Height(), 30);
-	}
-	else
-	{
-		// if the preview window is too small (at least one side is zero)
-		// then don't show the preview at all.
-		m_previewHeight = 0;
-		m_previewWidth = 0;
-	}
+    // make sure the preview window has a minimal size
+
+    m_previewWidth = min (max (graphRect.Width() * m_previewZoom, 30), preViewSize.cx);
+	m_previewHeight = max (max (graphRect.Height() * m_previewZoom, 30), preViewSize.cy);
 
 	CClientDC ddc(this);
 	CDC dc;
 	if (!dc.CreateCompatibleDC(&ddc))
 		return;
-	m_Preview.CreateCompatibleBitmap(&ddc, REVGRAPH_PREVIEW_WIDTH, REVGRAPH_PREVIEW_HEIGHT);
-	HBITMAP oldbm = (HBITMAP)dc.SelectObject(m_Preview);
-	// paint the whole graph
-	DrawGraph(&dc, GetViewRect(), 0, 0, true);
+
+	m_Preview.CreateCompatibleBitmap(&ddc, m_previewWidth, m_previewHeight);
+	HBITMAP oldbm = (HBITMAP)dc.SelectObject (m_Preview);
+
+    // paint the whole graph
+    DoZoom (m_previewZoom);
+    CRect rect (0, 0, m_previewWidth, m_previewHeight);
+	DrawGraph(&dc, rect, 0, 0, true);
+
 	// now we have a bitmap the size of the preview window
 	dc.SelectObject(oldbm);
 	dc.DeleteDC();
 
-	DoZoom(origZoom);
+	DoZoom (origZoom);
 }
 
 void CRevisionGraphWnd::SetScrollbars(int nVert, int nHorz, int oldwidth, int oldheight)
@@ -162,7 +152,9 @@ CRect CRevisionGraphWnd::GetViewRect()
 
 int CRevisionGraphWnd::GetNodeCount()
 {
-    return static_cast<int>(m_visibleGraph->GetNodeCount());
+    return m_visibleGraph.get() != NULL
+        ? static_cast<int>(m_visibleGraph->GetNodeCount())
+        : 0;
 }
 
 svn_revnum_t CRevisionGraphWnd::GetHeadRevision() const

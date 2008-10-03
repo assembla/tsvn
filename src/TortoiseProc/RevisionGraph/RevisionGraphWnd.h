@@ -156,6 +156,7 @@ protected:
 	CBitmap			m_Preview;
 	int				m_previewWidth;
 	int				m_previewHeight;
+    float           m_previewZoom;
 	
 	virtual BOOL	ProgressCallback(CString text, CString text2, DWORD done, DWORD total);
 	virtual void	DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
