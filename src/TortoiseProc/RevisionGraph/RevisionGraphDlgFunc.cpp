@@ -316,7 +316,10 @@ void CRevisionGraphWnd::DoZoom(float fZoomFactor)
 	float oldzoom = m_fZoomFactor;
 	m_fZoomFactor = fZoomFactor;
 
-    m_nFontSize = max(7, int(12.0f * fZoomFactor));
+    m_nFontSize = max(1, int(12.0f * fZoomFactor));
+    if (m_nFontSize < 7)
+        m_nFontSize = min (7, int(15.0f * fZoomFactor));
+
 	m_RoundRectPt.x = int(ROUND_RECT * fZoomFactor);
 	m_RoundRectPt.y = int(ROUND_RECT * fZoomFactor);
 	m_nIconSize = int(32 * fZoomFactor);

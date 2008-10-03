@@ -53,8 +53,7 @@ public:
 
 
 	void			SetPath(const CString& sPath) {m_Graph.m_sPath = sPath;}
-	void			UpdateZoomBox();
-	float			m_fZoomFactor;
+    void            DoZoom (float factor);
 protected:
 	bool			m_bFetchLogs;
     CAllRevisionGraphOptions m_options;
@@ -94,13 +93,16 @@ protected:
 
 	void			SetOption (UINT controlID);
 
-    void			GetGraphRect(LPRECT rect);
+    CRect			GetGraphRect();
 	void			UpdateStatusBar();
 
 private:
+	void			UpdateZoomBox();
+
     void            StartWorkerThread();
 	static UINT		WorkerThread(LPVOID pVoid);
 
+	float			m_fZoomFactor;
 	CRevisionGraphWnd	m_Graph;
 	CStatusBarCtrl		m_StatusBar;
 	CRevGraphToolBar	m_ToolBar;

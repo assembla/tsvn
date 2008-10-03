@@ -208,8 +208,8 @@ const CVisibleGraphNode* CRevisionGraphWnd::GetHitNode (CPoint point) const
     int nVScrollPos = GetScrollPos(SB_VERT);
     int nHScrollPos = GetScrollPos(SB_HORZ);
 
-    CSize logCoordinates ( (int)(point.x / m_fZoomFactor) + nHScrollPos
-                         , (int)(point.y / m_fZoomFactor) + nVScrollPos);
+    CSize logCoordinates ( (int)((point.x + nHScrollPos) / m_fZoomFactor)
+                         , (int)((point.y + nVScrollPos) / m_fZoomFactor));
 
     // search the nodes for one at that grid position
 
@@ -451,10 +451,8 @@ void CRevisionGraphWnd::OnLButtonUp(UINT nFlags, CPoint point)
 	if (pDlg)
 	{
 		m_fZoomFactor = fZoomfactor;
-		pDlg->m_fZoomFactor = m_fZoomFactor;
-		DoZoom(m_fZoomFactor);
+		pDlg->DoZoom (m_fZoomFactor);
 		SetScrollbars(int(float(y)*fact), int(float(x)*fact));
-		pDlg->UpdateZoomBox();
 	}
 	__super::OnLButtonUp(nFlags, point);
 }

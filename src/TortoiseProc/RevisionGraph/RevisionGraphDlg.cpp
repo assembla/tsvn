@@ -49,7 +49,7 @@ CRevisionGraphDlg::CRevisionGraphDlg(CWnd* pParent /*=NULL*/)
 	: CResizableStandAloneDialog(CRevisionGraphDlg::IDD, pParent)
 	, m_hAccel(NULL)
 	, m_bFetchLogs(true)
-	, m_fZoomFactor(1.0)
+	, m_fZoomFactor(0.5)
 {
     // restore option state
 
@@ -198,7 +198,9 @@ BOOL CRevisionGraphDlg::InitializeToolbar()
 					 , _T("20%")
 					 , _T("40%")
 					 , _T("50%")
+					 , _T("75%")
 					 , _T("100%")
+					 , _T("200%")
 					 , NULL};
 
 	COMBOBOXEXITEM cbei;
@@ -211,7 +213,7 @@ BOOL CRevisionGraphDlg::InitializeToolbar()
 		m_ToolBar.m_ZoomCombo.InsertItem(&cbei);
 	}
 
-	m_ToolBar.m_ZoomCombo.SetCurSel(0);
+	m_ToolBar.m_ZoomCombo.SetCurSel(1);
 
 	return TRUE;
 }
@@ -247,11 +249,11 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 
 	m_hAccel = LoadAccelerators(AfxGetResourceHandle(),MAKEINTRESOURCE(IDR_ACC_REVISIONGRAPH));
 
-	RECT graphrect;
-	GetGraphRect(&graphrect);
+	CRect graphrect = GetGraphRect();
 	m_Graph.Init(this, &graphrect);
 	m_Graph.SetOwner(this);
 	m_Graph.UpdateWindow();
+    DoZoom (0.75);
 
 	EnableSaveRestore(_T("RevisionGraphDlg"));
 
@@ -320,9 +322,7 @@ void CRevisionGraphDlg::OnSize(UINT nType, int cx, int cy)
 	}
 	if (IsWindow(m_Graph))
 	{
-		CRect rect;
-		GetGraphRect(&rect);
-		m_Graph.MoveWindow(&rect);
+		m_Graph.MoveWindow (GetGraphRect());
 	}
 }
 
@@ -356,12 +356,12 @@ BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
 			break;
 		case VK_PRIOR:
 			pos = m_Graph.GetScrollPos(SB_VERT);
-			m_Graph.SetScrollPos(SB_VERT, pos - 10*SCROLL_STEP);
+			m_Graph.SetScrollPos(SB_VERT, pos - GetGraphRect().Height() / 2);
 			m_Graph.Invalidate();
 			break;
 		case VK_NEXT:
 			pos = m_Graph.GetScrollPos(SB_VERT);
-			m_Graph.SetScrollPos(SB_VERT, pos + 10*SCROLL_STEP);
+			m_Graph.SetScrollPos(SB_VERT, pos + GetGraphRect().Height() / 2);
 			m_Graph.Invalidate();
 			break;
 		case VK_F5:
@@ -384,55 +384,38 @@ BOOL CRevisionGraphDlg::PreTranslateMessage(MSG* pMsg)
 	return __super::PreTranslateMessage(pMsg);
 }
 
+void CRevisionGraphDlg::DoZoom (float zoom)
+{
+    m_fZoomFactor = zoom;
+    m_Graph.DoZoom (zoom);
+    UpdateZoomBox();
+}
+
 void CRevisionGraphDlg::OnViewZoomin()
 {
-	if (m_fZoomFactor < 2.0)
-	{
-		m_fZoomFactor = m_fZoomFactor + (m_fZoomFactor*0.1f);
-		m_Graph.DoZoom(m_fZoomFactor);
-		UpdateZoomBox();
-	}
+    DoZoom (min (2.0f, m_fZoomFactor / .9f));
 }
 
 void CRevisionGraphDlg::OnViewZoomout()
 {
-	if (m_fZoomFactor > 0.01)
-	{
-		m_fZoomFactor = m_fZoomFactor - (m_fZoomFactor*0.1f);
-		m_Graph.DoZoom(m_fZoomFactor);
-		UpdateZoomBox();
-	}
+    DoZoom (max (0.01f, m_fZoomFactor * .9f));
 }
 
 void CRevisionGraphDlg::OnViewZoom100()
 {
-	m_fZoomFactor = 1.0;
-	m_Graph.DoZoom(m_fZoomFactor);
-	UpdateZoomBox();
+	DoZoom (1.0);
 }
 
 void CRevisionGraphDlg::OnViewZoomAll()
 {
 	// zoom the graph so that it is completely visible in the window
-	CRect windowrect;
-	m_Graph.DoZoom(1.0);
-	GetGraphRect(windowrect);
-	CRect viewrect = m_Graph.GetViewRect();
-	float horzfact = float(viewrect.Width())/float(windowrect.Width());
-	float vertfact = float(viewrect.Height())/float(windowrect.Height());
-	float fZoom = 1.0f/(max(horzfact, vertfact));
-	if (fZoom > 1.0f)
-		fZoom = 1.0f;
-	int trycounter = 0;
-	m_fZoomFactor = fZoom;
-	while ((trycounter < 5)&&((viewrect.Width()>windowrect.Width())||(viewrect.Height()>windowrect.Height())))
-	{
-		m_fZoomFactor = fZoom;
-		m_Graph.DoZoom(m_fZoomFactor);
-		fZoom *= 0.95f;
-		trycounter++;
-	}
-	UpdateZoomBox();
+	CRect windowrect = GetGraphRect();
+    CRect viewrect = m_Graph.GetViewRect();
+
+	float horzfact = float(viewrect.Width())/float(windowrect.Width()-6);
+	float vertfact = float(viewrect.Height())/float(windowrect.Height()-6);
+
+    DoZoom (1.0f/(max (1.0f, max(horzfact, vertfact))));
 }
 
 void CRevisionGraphDlg::OnMenuexit()
@@ -579,15 +562,20 @@ void CRevisionGraphDlg::OnFileSavegraphas()
 	}
 }
 
-void CRevisionGraphDlg::GetGraphRect(LPRECT rect)
+CRect CRevisionGraphDlg::GetGraphRect()
 {
-	RECT statusbarrect;
-	RECT toolbarrect;
-	GetClientRect(rect);
-	m_StatusBar.GetClientRect(&statusbarrect);
-	rect->bottom += statusbarrect.top-statusbarrect.bottom;
-	m_ToolBar.GetClientRect(&toolbarrect);
-	rect->top -= toolbarrect.top-toolbarrect.bottom;
+    CRect rect;
+    GetClientRect(&rect);
+
+    CRect statusbarrect;
+    m_StatusBar.GetClientRect(&statusbarrect);
+    rect.bottom -= statusbarrect.Height();
+
+    CRect toolbarrect;
+    m_ToolBar.GetClientRect(&toolbarrect);
+    rect.top += toolbarrect.Height();
+
+    return rect;
 }
 
 void CRevisionGraphDlg::UpdateStatusBar()
@@ -609,10 +597,9 @@ void CRevisionGraphDlg::OnChangeZoom()
 	pCBox->GetWindowText(strItem);
 	if (strItem.IsEmpty())
 		return;
-	m_fZoomFactor = (float)(_tstof(strItem)/100.0);
-	UpdateZoomBox();
 	ATLTRACE(_T("OnChangeZoom to %s\n"), strItem);
-	m_Graph.DoZoom(m_fZoomFactor);
+
+    DoZoom ((float)(_tstof(strItem)/100.0));
 }
 
 void CRevisionGraphDlg::UpdateZoomBox()
