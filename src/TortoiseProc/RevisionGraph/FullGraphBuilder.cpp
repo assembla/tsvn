@@ -173,17 +173,17 @@ void CFullGraphBuilder::Run()
 				AnalyzeAsChanges (revision, searchNode);
 	    }
 
+		// remove deleted search paths
+
+		for (size_t i = 0, count = toRemove.size(); i < count; ++i)
+			toRemove[i]->Remove();
+
 		// handle remaining copy-to entries
 		// (some may have a fromRevision that does not touch the fromPath)
 
 		FillCopyTargets ( revision
 						, searchTree.get()
 						, lastFromCopy);
-
-		// remove deleted search paths
-
-		for (size_t i = 0, count = toRemove.size(); i < count; ++i)
-			toRemove[i]->Remove();
 	}
 }
 
