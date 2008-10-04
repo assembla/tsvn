@@ -324,9 +324,6 @@ void CRevisionGraphWnd::DoZoom(float fZoomFactor)
     if (m_nFontSize < 7)
         m_nFontSize = min (7, int(15.0f * fZoomFactor));
 
-	m_RoundRectPt.x = int(ROUND_RECT * fZoomFactor);
-	m_RoundRectPt.y = int(ROUND_RECT * fZoomFactor);
-	m_nIconSize = int(32 * fZoomFactor);
 	for (int i=0; i<MAXFONTS; i++)
 	{
 		if (m_apFonts[i] != NULL)

@@ -19,7 +19,6 @@
 #include "stdafx.h"
 #include "TortoiseProc.h"
 #include "MemDC.h"
-#include <gdiplus.h>
 #include "Revisiongraphdlg.h"
 #include "MessageBox.h"
 #include "SVN.h"
@@ -99,217 +98,145 @@ void CRevisionGraphWnd::OnPaint()
     DrawGraph(&dc, rect, GetScrollPos(SB_VERT), GetScrollPos(SB_HORZ), false);
 }
 
-void CRevisionGraphWnd::DrawOctangle(CDC * pDC, const CRect& rect)
+void CRevisionGraphWnd::CutawayPoints (const RectF& rect, float cutLen, TCutRectangle& result)
 {
-	int cutLen = rect.Height() / 4;
-	CPoint point1(rect.left, rect.top + cutLen);
-	CPoint point2(rect.left + cutLen, rect.top);
-	CPoint point3(rect.right - cutLen, rect.top);
-	CPoint point4(rect.right, rect.top + cutLen);
-	CPoint point5(rect.right, rect.bottom - cutLen);
-	CPoint point6(rect.right - cutLen, rect.bottom);
-	CPoint point7(rect.left + cutLen, rect.bottom);
-	CPoint point8(rect.left, rect.bottom - cutLen);
-	CPoint arrPoints[8] = {
-							point1,
-							point2,
-							point3,
-							point4,
-							point5,
-							point6,
-							point7,
-							point8};
-
-		pDC->Polygon(arrPoints, 8);
+    result[0] = PointF (rect.X, rect.Y + cutLen);
+    result[1] = PointF (rect.X + cutLen, rect.Y);
+    result[2] = PointF (rect.GetRight() - cutLen, rect.Y);
+    result[3] = PointF (rect.GetRight(), rect.Y + cutLen);
+    result[4] = PointF (rect.GetRight(), rect.GetBottom() - cutLen);
+    result[5] = PointF (rect.GetRight() - cutLen, rect.GetBottom());
+    result[6] = PointF (rect.X + cutLen, rect.GetBottom());
+    result[7] = PointF (rect.X, rect.GetBottom() - cutLen);
 }
 
-void CRevisionGraphWnd::DrawNode(CDC * pDC, const CRect& rect,
-                                 COLORREF contour, const CVisibleGraphNode *node, NodeShape shape, 
-								 HICON hIcon, int penStyle /*= PS_SOLID*/)
+void CRevisionGraphWnd::DrawRoundedRect (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect)
 {
-#define minmax(x, y, z) (x > 0 ? min<long>(y, z) : max<long>(y, z))
-	CPen* pOldPen = 0L;
-	CBrush* pOldBrush = 0L;
-	CPen pen, pen2;
-	CBrush brush;
-	COLORREF background = GetSysColor(COLOR_WINDOW);
-	COLORREF textcolor = GetSysColor(COLOR_WINDOWTEXT);
+    enum {POINT_COUNT = 8};
 
+    float radius = 16 * m_fZoomFactor;
+	PointF points[POINT_COUNT];
+    CutawayPoints (rect, radius, points);
+
+    GraphicsPath path;
+    path.AddArc (points[0].X, points[1].Y, radius, radius, 180, 90);
+    path.AddArc (points[2].X, points[2].Y, radius, radius, 270, 90);
+    path.AddArc (points[5].X, points[4].Y, radius, radius, 0, 90);
+    path.AddArc (points[7].X, points[7].Y, radius, radius, 90, 90);
+
+    points[0].Y -= radius / 2;
+    path.AddLine (points[7], points[0]);
+
+    graphics.FillPath (&brush, &path);
+    graphics.DrawPath (&pen, &path);
+}
+
+void CRevisionGraphWnd::DrawOctangle (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect)
+{
+    enum {POINT_COUNT = 8};
+
+	PointF points[POINT_COUNT];
+    CutawayPoints (rect, rect.Height / 4, points);
+
+    graphics.FillPolygon (&brush, points, POINT_COUNT);
+    graphics.DrawPolygon (&pen, points, POINT_COUNT);
+}
+
+void CRevisionGraphWnd::DrawShape (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect, NodeShape shape)
+{
+	switch( shape )
+	{
+	case TSVNRectangle:
+        graphics.FillRectangle (&brush, rect);
+        graphics.DrawRectangle (&pen, rect);
+		break;
+	case TSVNRoundRect:
+		DrawRoundedRect (graphics, pen, brush, rect);
+		break;
+	case TSVNOctangle:
+		DrawOctangle (graphics, pen, brush, rect);
+		break;
+	case TSVNEllipse:
+        graphics.FillEllipse (&brush, rect);
+        graphics.DrawEllipse(&pen, rect);
+		break;
+	default:
+		ASSERT(FALSE);	//unknown type
+		return;
+	}
+}
+
+inline BYTE LimitedScaleColor (BYTE c1, BYTE c2, float factor)
+{
+    BYTE scaled = c2 + (BYTE)((c1-c2)*factor);
+    return c1 < c2
+        ? max (c1, scaled)
+        : min (c1, scaled);
+}
+
+Color LimitedScaleColor (const Color& c1, const Color& c2, float factor)
+{
+    return Color ( LimitedScaleColor (c1.GetA(), c2.GetA(), factor)
+                 , LimitedScaleColor (c1.GetR(), c2.GetR(), factor)
+                 , LimitedScaleColor (c1.GetG(), c2.GetG(), factor)
+                 , LimitedScaleColor (c1.GetB(), c2.GetB(), factor));
+}
+
+void CRevisionGraphWnd::DrawNode(Graphics& graphics, const RectF& rect,
+                                 COLORREF contourRef, const CVisibleGraphNode *node, NodeShape shape)
+{
     // special case: line deleted but deletion node removed
 
     if (   (node->GetNext() == NULL) 
-        && (node->GetClassification().Is (CNodeClassification::IS_DELETED)))
+        && (node->GetClassification().Is (CNodeClassification::PATH_ONLY_DELETED)))
     {
-        contour = m_Colors.GetColor(CColors::DeletedNode);
+        contourRef = m_Colors.GetColor(CColors::DeletedNode);
     }
 
     bool nodeSelected = (m_SelectedEntry1 == node) || (m_SelectedEntry2 == node);
 
-	COLORREF selcolor = contour;
-	int rval = (GetRValue(background)-GetRValue(contour))/2;
-	int gval = (GetGValue(background)-GetGValue(contour))/2;
-	int bval = (GetBValue(background)-GetBValue(contour))/2;
-	selcolor = RGB(minmax(rval, GetRValue(contour)+rval, GetRValue(background)),
-		minmax(gval, GetGValue(contour)+gval, GetGValue(background)),
-		minmax(bval, GetBValue(contour)+bval, GetBValue(background)));
+    // calculate the RGB color values we need to draw the node
 
-	COLORREF shadowc = RGB(abs(GetRValue(background)-GetRValue(textcolor))/2,
-							abs(GetGValue(background)-GetGValue(textcolor))/2,
-							abs(GetBValue(background)-GetBValue(textcolor))/2);
+    Color contour;
+    contour.SetFromCOLORREF (contourRef);
 
-	TRY
+    Color background;
+    background.SetFromCOLORREF (GetSysColor(COLOR_WINDOW));
+    Color textColor;
+    textColor.SetFromCOLORREF (GetSysColor(COLOR_WINDOWTEXT));
+
+    Color shadowColor = LimitedScaleColor (background, Color::Black, 0.5f);
+	Color selColor = LimitedScaleColor (background, contour, 0.5f);
+	Color brightColor = LimitedScaleColor (background, contour, 0.9f);
+
+	// draw the shadow
+
+	if (m_fZoomFactor > 0.2f)
 	{
-		// Prepare the shadow
-		if (rect.Height() > 10)
-		{
-			CRect shadow = rect;
-			shadow.OffsetRect(SHADOW_OFFSET_PT);
+		RectF shadow = rect;
+        shadow.Offset (2, 2);
 
-			brush.CreateSolidBrush(shadowc);
-			pOldBrush = pDC->SelectObject(&brush);
-			pen.CreatePen(penStyle, 1, shadowc);
-			pOldPen = pDC->SelectObject(&pen);
+		SolidBrush brush (shadowColor);
+		Pen pen (shadowColor, 0);
 
-			// Draw the shadow
-			switch( shape )
-			{
-			case TSVNRectangle:
-				pDC->Rectangle(shadow);
-				break;
-			case TSVNRoundRect:
-				pDC->RoundRect(shadow, m_RoundRectPt);
-				break;
-			case TSVNOctangle:
-				DrawOctangle(pDC, shadow);
-				break;
-			case TSVNEllipse:
-				pDC->Ellipse(shadow);
-				break;
-			default:
-				ASSERT(FALSE);	//unknown type
-				return;
-			}
-		}
-
-		// Prepare selection
-		if( nodeSelected )
-		{
-			brush.DeleteObject();
-			brush.CreateSolidBrush(selcolor);
-			pDC->SelectObject(&brush);
-		}
-		else
-		{
-			pDC->SelectObject(pOldBrush);
-			pOldBrush = 0L;
-		}
-
-        bool isWorkingCopy = node->GetClassification().Is (CNodeClassification::IS_WORKINGCOPY);
-        COLORREF penColor = (contour == 0xffffff) || isWorkingCopy
-                          ? textcolor
-                          : contour;
-
-        pen2.CreatePen(penStyle, isWorkingCopy ? 3 : 1, penColor);
-		pDC->SelectObject(&pen2);
-
-		// Draw the main shape
-		switch( shape )
-		{
-		case TSVNRectangle:
-			pDC->Rectangle(rect);
-			break;
-		case TSVNRoundRect:
-			pDC->RoundRect(rect, m_RoundRectPt);
-			break;
-		case TSVNOctangle:
-			DrawOctangle(pDC, rect);
-			break;
-		case TSVNEllipse:
-			pDC->Ellipse(rect);
-			break;
-		default:
-			ASSERT(FALSE);	//unknown type
-			return;
-		}
-		
-		COLORREF brightcol = contour;
-		int rval = (GetRValue(background)-GetRValue(contour))*9/10;
-		int gval = (GetGValue(background)-GetGValue(contour))*9/10;
-		int bval = (GetBValue(background)-GetBValue(contour))*9/10;
-		brightcol = RGB(minmax(rval, GetRValue(contour)+rval, GetRValue(background)),
-						minmax(gval, GetGValue(contour)+gval, GetGValue(background)),
-						minmax(bval, GetBValue(contour)+bval, GetBValue(background)));
-
-		brush.DeleteObject();
-        brush.CreateSolidBrush(nodeSelected ? selcolor : brightcol);
-		pOldBrush = pDC->SelectObject(&brush);
-
-		// Draw the main shape
-		switch( shape )
-		{
-		case TSVNRectangle:
-			pDC->Rectangle(rect);
-			break;
-		case TSVNRoundRect:
-			pDC->RoundRect(rect, m_RoundRectPt);
-			break;
-		case TSVNOctangle:
-			DrawOctangle(pDC, rect);
-			break;
-		case TSVNEllipse:
-			pDC->Ellipse(rect);
-			break;
-		default:
-			ASSERT(FALSE);	//unknown type
-			return;
-		}
-		if (m_nIconSize)
-		{
-			// draw the icon
-			CPoint iconpoint = CPoint(rect.left + m_nIconSize/6, rect.top + m_nIconSize/6);
-			CSize iconsize = CSize(m_nIconSize, m_nIconSize);
-			pDC->DrawState(iconpoint, iconsize, hIcon, DST_ICON, (HBRUSH)NULL);
-		}
-		// Cleanup
-		if (pOldPen != 0L)
-		{
-			pDC->SelectObject(pOldPen);
-			pOldPen = 0L;
-		}
-
-		if (pOldBrush != 0L)
-		{
-			pDC->SelectObject(pOldBrush);
-			pOldBrush = 0L;
-		}
-
-		pen.DeleteObject();
-		pen2.DeleteObject();
-		brush.DeleteObject();
+        DrawShape (graphics, pen, brush, shadow, shape);
 	}
-	CATCH_ALL(e)
-	{
-		if( pOldPen != 0L )
-			pDC->SelectObject(pOldPen);
 
-		if( pOldBrush != 0L )
-			pDC->SelectObject(pOldBrush);
-	}
-	END_CATCH_ALL
+	// Draw the main shape
+
+    bool isWorkingCopy = node->GetClassification().Is (CNodeClassification::IS_WORKINGCOPY);
+    Color penColor = (contour.GetValue() == Color::White) || isWorkingCopy
+                     ? textColor
+                     : contour;
+
+    Pen pen (penColor, isWorkingCopy ? 3.0f : 1.0f);
+    SolidBrush brush (nodeSelected ? selColor : brightColor);
+
+    DrawShape (graphics, pen, brush, rect, shape);
 }
 
-void CRevisionGraphWnd::DrawNodes (CDC* pDC, const CRect& logRect, const CSize& offset)
+void CRevisionGraphWnd::DrawNodes (Graphics& graphics, const CRect& logRect, const CSize& offset)
 {
-    // load icons
-
-	HICON hDeletedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_DELETED), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
-	HICON hAddedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_ADDED), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
-	HICON hAddedWithHistoryIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_ADDEDPLUS), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
-	HICON hReplacedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_REPLACED), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
-	HICON hRenamedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_RENAMED), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
-	HICON hLastCommitIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_LASTCOMMIT), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
-	HICON hTaggedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_REVGRAPH_TAGGED), IMAGE_ICON, m_nIconSize, m_nIconSize, LR_DEFAULTCOLOR);
-
     // iterate over all visible nodes
 
     std::auto_ptr<const ILayoutNodeList> nodes (m_layout->GetNodes());
@@ -320,55 +247,56 @@ void CRevisionGraphWnd::DrawNodes (CDC* pDC, const CRect& logRect, const CSize& 
         // get node and position
 
         ILayoutNodeList::SNode node = nodes->GetNode (index);
-		CRect noderect ( (int)(node.rect.left * m_fZoomFactor) - offset.cx
-                       , (int)(node.rect.top * m_fZoomFactor) - offset.cy
-                       , (int)(node.rect.right * m_fZoomFactor) - offset.cx
-                       , (int)(node.rect.bottom * m_fZoomFactor) - offset.cy);
+        PointF leftTop ( node.rect.left * m_fZoomFactor
+                       , node.rect.top * m_fZoomFactor);
+		RectF noderect ( leftTop.X - offset.cx
+                       , leftTop.Y - offset.cy
+                       , node.rect.right * m_fZoomFactor - leftTop.X - 1
+                       , node.rect.bottom * m_fZoomFactor - leftTop.Y - 1);
 
         // actual drawing
 
 		switch (node.style)
 		{
 		case ILayoutNodeList::SNode::STYLE_DELETED:
-			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::DeletedNode), node.node, TSVNOctangle, NULL);
+			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::DeletedNode), node.node, TSVNOctangle);
 			break;
 		case ILayoutNodeList::SNode::STYLE_ADDED:
-			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::AddedNode), node.node, TSVNRoundRect, NULL);
+			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::AddedNode), node.node, TSVNRoundRect);
 			break;
 		case ILayoutNodeList::SNode::STYLE_RENAMED:
-			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::RenamedNode), node.node, TSVNOctangle, NULL);
+			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::RenamedNode), node.node, TSVNOctangle);
 			break;
 		case ILayoutNodeList::SNode::STYLE_LAST:
-			DrawNode(pDC, noderect, m_Colors.GetColor(CColors::LastCommitNode), node.node, TSVNEllipse, NULL);
+			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::LastCommitNode), node.node, TSVNEllipse);
 			break;
 		case ILayoutNodeList::SNode::STYLE_MODIFIED:
-			DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle, NULL);
+			DrawNode(graphics, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle);
 			break;
 		default:
-            DrawNode(pDC, noderect, GetSysColor(COLOR_WINDOW), node.node, TSVNRectangle, NULL);
+            DrawNode(graphics, noderect, GetSysColor(COLOR_WINDOW), node.node, TSVNRectangle);
 			break;
 		}
 
     	// Draw the "tagged" icon
 
-        if (m_nIconSize && (node.node->GetFirstTag() != NULL))
+        if (node.node->GetFirstTag() != NULL)
 		{
 			// draw the icon
-			CPoint iconpoint = CPoint(noderect.right - 7*m_nIconSize/6, noderect.top + m_nIconSize/6);
-			CSize iconsize = CSize(m_nIconSize, m_nIconSize);
-			pDC->DrawState(iconpoint, iconsize, hTaggedIcon, DST_ICON, (HBRUSH)NULL);
+            float squareSize = 16 * m_fZoomFactor;
+            float squareDist = min ( (noderect.Height - squareSize) / 2
+                                   , squareSize / 2);
+
+            PointF leftTop (noderect.GetRight() - squareSize * 3 / 2, noderect.Y + squareDist);
+            PointF leftBottom (leftTop.X, leftTop.Y + squareSize);
+            RectF square (leftTop, SizeF (squareSize, squareSize));
+
+            Pen pen (Color(128, 0, 0, 0));
+            LinearGradientBrush lgBrush (leftTop, leftBottom, Color (250, 250, 92), Color (230, 230, 64));
+            graphics.FillRectangle (&lgBrush, square);
+            graphics.DrawRectangle (&pen, square);
 		}
     }
-
-    // destroy items
-
-	DestroyIcon(hDeletedIcon);
-	DestroyIcon(hAddedIcon);
-	DestroyIcon(hAddedWithHistoryIcon);
-	DestroyIcon(hReplacedIcon);
-	DestroyIcon(hRenamedIcon);
-	DestroyIcon(hLastCommitIcon);
-	DestroyIcon(hTaggedIcon);
 }
 
 void CRevisionGraphWnd::DrawConnections (CDC* pDC, const CRect& logRect, const CSize& offset)
@@ -434,7 +362,7 @@ void CRevisionGraphWnd::DrawTexts (CDC* pDC, const CRect& logRect, const CSize& 
 
 		pDC->SetTextColor (textcolor);
         pDC->SelectObject (GetFont (FALSE, text.style));
-        pDC->ExtTextOut ((textRect.left + textRect.right)/2, textRect.top, ETO_CLIPPED, &textRect, text.text, NULL);
+        pDC->ExtTextOut ((textRect.left + textRect.right)/2, textRect.top, 0, &textRect, text.text, NULL);
     }
 }
 
@@ -457,7 +385,10 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 
     // draw the different components
 
-    DrawNodes (memDC, logRect, offset);
+    Graphics graphics (*memDC);
+    graphics.SetPageUnit (UnitPixel);
+
+    DrawNodes (graphics, logRect, offset);
     DrawConnections (memDC, logRect, offset);
     DrawTexts (memDC, logRect, offset);
 

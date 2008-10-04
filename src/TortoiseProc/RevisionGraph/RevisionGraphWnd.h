@@ -24,6 +24,8 @@
 #include "Colors.h"
 #include "SVNDiff.h"
 
+using namespace Gdiplus;
+
 #define REVGRAPH_PREVIEW_WIDTH 100
 #define REVGRAPH_PREVIEW_HEIGHT 200
 
@@ -47,23 +49,6 @@ enum NodeShape
 	TSVNOctangle,
 	TSVNEllipse
 };
-#define SHADOW_OFFSET_PT	(CPoint(2, 2))
-#define ROUND_RECT			(12)
-
-#define RGB_DEF_SEL				RGB(160, 160, 160)
-#define RGB_DEF_SHADOW			RGB(128, 128, 128)
-#define RGB_DEF_HEADER			RGB(255, 0, 0)
-#define RGB_DEF_TAG				RGB(0, 0, 0)
-#define RGB_DEF_BRANCH			RGB(0, 0, 255)
-#define RGB_DEF_NODE			RGB(0, 0, 255)
-
-#define NODE_RECT_WIDTH			200.0f
-#define NODE_SPACE_LEFT			12.0f
-#define NODE_SPACE_RIGHT		100.0f
-#define NODE_SPACE_LINE			20.0f
-#define NODE_RECT_HEIGHT		60.0f
-#define NODE_SPACE_TOP			20.0f
-#define NODE_SPACE_BOTTOM		20.0f
 
 #define MAXFONTS				4
 #define	MAX_TT_LENGTH			60000
@@ -145,8 +130,6 @@ protected:
 	wchar_t			m_wszTip[MAX_TT_LENGTH+1];
     CString			m_sTitle;
 
-	int				m_nIconSize;
-	CPoint			m_RoundRectPt;
 	float			m_fZoomFactor;
 	CColors			m_Colors;
 	bool			m_bIsRubberBand;
@@ -196,12 +179,16 @@ private:
 
     const CVisibleGraphNode* GetHitNode (CPoint point) const;
 
-	void			DrawOctangle(CDC * pDC, const CRect& rect);
-	void			DrawNode(CDC * pDC, const CRect& rect,
-							COLORREF contour, const CVisibleGraphNode *node,
-							NodeShape shape, HICON hIcon, int penStyle = PS_SOLID);
+    typedef PointF TCutRectangle[8];
+    void            CutawayPoints (const RectF& rect, float cutLen, TCutRectangle& result);
+    void            DrawRoundedRect (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect);
+	void			DrawOctangle (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect);
+    void            DrawShape (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect, NodeShape shape);
+	void			DrawNode(Graphics& graphics, const RectF& rect,
+							 COLORREF contourRef, const CVisibleGraphNode *node,
+							 NodeShape shape);
 
-    void            DrawNodes (CDC* pDC, const CRect& logRect, const CSize& offset);
+    void            DrawNodes (Graphics& graphics, const CRect& logRect, const CSize& offset);
     void            DrawConnections (CDC* pDC, const CRect& logRect, const CSize& offset);
     void            DrawTexts (CDC* pDC, const CRect& logRect, const CSize& offset);
     void			DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, int nHScrollPos, bool bDirectDraw);
