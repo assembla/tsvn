@@ -30,7 +30,7 @@
 class CExactCopyFroms 
     : public COrderedTraversalOptionImpl
                 < IModificationOption
-                , 150
+                , 50
                 , ID_VIEW_EXACTCOPYSOURCE
                 , true          // fold branches first
                 , true>         // root first      
