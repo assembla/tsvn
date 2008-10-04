@@ -155,9 +155,9 @@ void CModificationOptions::Apply (CVisibleGraph* graph)
         ; (iter != end)
         ; ++iter)
     {
-        for (size_t i = 0, count = graph->GetRootCount(); i < count; ++i)
+        for (size_t i = graph->GetRootCount(); i > 0; --i)
         {
-            CVisibleGraphNode* root = graph->GetRoot(i);
+            CVisibleGraphNode* root = graph->GetRoot (i-1);
             if ((*iter)->WantsCopiesFirst())
                 if ((*iter)->WantsRootFirst())
                     TraverseFromRootCopiesFirst (*iter, graph, root);
