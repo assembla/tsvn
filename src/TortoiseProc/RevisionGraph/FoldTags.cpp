@@ -41,9 +41,10 @@ void CFoldTags::Apply (CVisibleGraph* graph, CVisibleGraphNode* node)
 
     // fold tags at the point of their creation
 
-    if (   (node->GetCopySource() != NULL)
-        && node->GetClassification().Matches (CNodeClassification::IS_TAG, forbidden))
-    {
-        node->FoldTag (graph);
-    }
+    if (node->GetClassification().Matches (CNodeClassification::IS_TAG, forbidden))
+        if (   (node->GetCopySource() != NULL)
+            || node->GetClassification().Is (CNodeClassification::IS_RENAMED))
+        {
+            node->FoldTag (graph);
+        }
 }
