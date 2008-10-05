@@ -194,7 +194,7 @@ BOOL CRevisionGraphWnd::ProgressCallback(CString text, CString text2, DWORD done
 	return TRUE;
 }
 
-const CVisibleGraphNode* CRevisionGraphWnd::GetHitNode (CPoint point) const
+index_t CRevisionGraphWnd::GetHitNode (CPoint point) const
 {
     // any nodes at all?
 
@@ -212,13 +212,7 @@ const CVisibleGraphNode* CRevisionGraphWnd::GetHitNode (CPoint point) const
     // search the nodes for one at that grid position
 
     std::auto_ptr<const ILayoutNodeList> nodeList (m_layout->GetNodes());
-    index_t nodeIndex = nodeList->GetAt (logCoordinates, 0);
-    if (nodeIndex == NO_INDEX)
-        return NULL;
-
-    // found it
-
-    return nodeList->GetNode (nodeIndex).node;
+    return nodeList->GetAt (logCoordinates, 0);
 }
 
 void CRevisionGraphWnd::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
@@ -336,9 +330,11 @@ void CRevisionGraphWnd::OnLButtonDown(UINT nFlags, CPoint point)
 	bool bControl = !!(GetKeyState(VK_CONTROL)&0x8000);
 	if (!m_OverviewRect.PtInRect(point))
 	{
-        const CVisibleGraphNode* reventry = GetHitNode (point);
-	    if (reventry != NULL)
+        index_t nodeIndex = GetHitNode (point);
+	    if (nodeIndex != NO_INDEX)
 	    {
+            std::auto_ptr<const ILayoutNodeList> nodeList (m_layout->GetNodes());
+            const CVisibleGraphNode* reventry = nodeList->GetNode (nodeIndex).node;
 		    if (bControl)
 		    {
 			    if (m_SelectedEntry1 == reventry)
@@ -460,8 +456,7 @@ INT_PTR CRevisionGraphWnd::OnToolHitTest(CPoint point, TOOLINFO* pTI) const
 	if (m_bThreadRunning)
 		return -1;
 
-	const CVisibleGraphNode* reventry = GetHitNode (point);
-    if (reventry == NULL)
+    if (GetHitNode (point) == NO_INDEX)
         return -1;
 
 	pTI->hwnd = this->m_hWnd;
@@ -481,15 +476,12 @@ BOOL CRevisionGraphWnd::OnToolTipNotify(UINT /*id*/, NMHDR *pNMHDR, LRESULT *pRe
     // need to handle both ANSI and UNICODE versions of the message
 	TOOLTIPTEXTA* pTTTA = (TOOLTIPTEXTA*)pNMHDR;
 	TOOLTIPTEXTW* pTTTW = (TOOLTIPTEXTW*)pNMHDR;
-	CString strTipText;
 
 	POINT point;
 	GetCursorPos(&point);
 	ScreenToClient(&point);
 
-    const CVisibleGraphNode* node = GetHitNode (point);
-    if (node)
-        strTipText = TooltipText (node);
+    CString strTipText = TooltipText (GetHitNode (point));
 
 	*pResult = 0;
 	if (strTipText.IsEmpty())
@@ -623,97 +615,15 @@ CString CRevisionGraphWnd::DisplayableText ( const CString& wholeText
     return result;
 }
 
-CString CRevisionGraphWnd::TooltipText (const CVisibleGraphNode* node)
+CString CRevisionGraphWnd::TooltipText (index_t index)
 {
-    CString strTipText;
-
-    const CCachedLogInfo* cache = m_fullHistory->GetCache();
-    const CRevisionIndex& revisions = cache->GetRevisions();
-    const CRevisionInfoContainer& revisionInfo = cache->GetLogInfo();
-
-    // find the revision in our cache. 
-    // May not be present if this is the WC / HEAD revision.
-
-    index_t index = revisions [node->GetRevision()];
-    if (index == NO_INDEX)
-        return strTipText;
-
-    // construct the tooltip
-
-	TCHAR date[SVN_DATE_BUFFER];
-	apr_time_t timeStamp = revisionInfo.GetTimeStamp(index);
-	SVN::formatDate(date, timeStamp);
-
-    if (node->GetFirstTag() == NULL)
+    if (index != NO_INDEX)
     {
-	    strTipText.Format ( IDS_REVGRAPH_BOXTOOLTIP
-                          , node->GetRevision()
-                          , CUnicodeUtils::StdGetUnicode(node->GetRealPath().GetPath()).c_str()
-                          , CUnicodeUtils::StdGetUnicode(revisionInfo.GetAuthor(index)).c_str()
-                          , date
-                          , CUnicodeUtils::StdGetUnicode(revisionInfo.GetComment(index)).c_str());
-    }
-    else
-    {
-        CString tags;
-        int tagCount = 0;
-        for ( const CVisibleGraphNode::CFoldedTag* tag = node->GetFirstTag()
-            ; tag != NULL
-            ; tag = tag->GetNext())
-        {
-            ++tagCount;
-
-            CString attributes;
-            if (tag->IsModified())
-                attributes.LoadString (IDS_REVGRAPH_TAGMODIFIED);
-
-            if (tag->IsDeleted())
-            {
-                CString attribute;
-                attribute.LoadString (IDS_REVGRAPH_TAGDELETED);
-                if (attributes.IsEmpty())
-                    attributes = attribute;
-                else
-                    attributes += _T(", ") + attribute;
-            }
-
-            CString tagInfo;
-            std::string tagPath = tag->GetTag()->GetPath().GetPath();
-
-            if (attributes.IsEmpty())
-            {
-                tagInfo.Format (   tag->IsAlias() 
-                                 ? IDS_REVGRAPH_TAGALIAS 
-                                 : IDS_REVGRAPH_TAG
-                               , CUnicodeUtils::StdGetUnicode (tagPath).c_str());
-            }
-            else
-            {
-                tagInfo.Format (   tag->IsAlias() 
-                                 ? IDS_REVGRAPH_TAGALIASATTRIBUTED
-                                 : IDS_REVGRAPH_TAGATTRIBUTED
-                               , (LPCTSTR)attributes
-                               , CUnicodeUtils::StdGetUnicode (tagPath).c_str());
-            }
-
-            tags +=   _T("\r\n")
-                    + CString (' ', tag->GetDepth() * 6) 
-                    + tagInfo;
-        }
-
-	    strTipText.Format ( IDS_REVGRAPH_BOXTOOLTIP_TAGGED
-		  			      , node->GetRevision()
-					      , CUnicodeUtils::StdGetUnicode(node->GetRealPath().GetPath()).c_str()
-					      , CUnicodeUtils::StdGetUnicode(revisionInfo.GetAuthor(index)).c_str()
-					      , date
-                          , tagCount
-                          , (LPCTSTR)tags
-					      , CUnicodeUtils::StdGetUnicode(revisionInfo.GetComment(index)).c_str());
+        std::auto_ptr<const ILayoutNodeList> nodeList (m_layout->GetNodes());
+        return nodeList->GetToolTip (index);
     }
 
-    // ready
-
-    return strTipText;
+    return CString();
 }
 
 void CRevisionGraphWnd::SaveGraphAs(CString sSavePath)
@@ -891,7 +801,14 @@ void CRevisionGraphWnd::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 	this->ScreenToClient(&clientpoint);
 	ATLTRACE("right clicked on x=%d y=%d\n", clientpoint.x, clientpoint.y);
 
-	const CVisibleGraphNode * clickedentry = GetHitNode (clientpoint);
+    index_t nodeIndex = GetHitNode (clientpoint);
+	const CVisibleGraphNode * clickedentry = NULL;
+    if (nodeIndex != NO_INDEX)
+    {
+        std::auto_ptr<const ILayoutNodeList> nodeList (m_layout->GetNodes());
+        clickedentry = nodeList->GetNode (nodeIndex).node;
+    }
+
 	if ((m_SelectedEntry1 == NULL)&&(clickedentry == NULL))
 		return;
 

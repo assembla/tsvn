@@ -175,9 +175,9 @@ private:
 
     CSize           UsableTooltipRect();
     CString         DisplayableText (const CString& wholeText, const CSize& tooltipSize);
-    CString         TooltipText (const CVisibleGraphNode* node);
+    CString         TooltipText (index_t index);
 
-    const CVisibleGraphNode* GetHitNode (CPoint point) const;
+    index_t         GetHitNode (CPoint point) const;
 
     typedef PointF TCutRectangle[8];
     void            CutawayPoints (const RectF& rect, float cutLen, TCutRectangle& result);

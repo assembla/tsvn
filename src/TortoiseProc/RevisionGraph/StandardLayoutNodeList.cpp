@@ -159,7 +159,7 @@ CString CStandardLayoutNodeList::GetToolTip (index_t index) const
 
 	    strTipText.Format ( IDS_REVGRAPH_BOXTOOLTIP_TAGGED
                           , revision, (LPCTSTR)realPath, (LPCTSTR)author
-                          , date, (LPCTSTR)tags, (LPCTSTR)comment);
+                          , date, tagCount, (LPCTSTR)tags, (LPCTSTR)comment);
     }
 
     // ready
