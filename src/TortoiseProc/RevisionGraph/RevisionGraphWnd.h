@@ -181,12 +181,12 @@ private:
 
     typedef PointF TCutRectangle[8];
     void            CutawayPoints (const RectF& rect, float cutLen, TCutRectangle& result);
-    void            DrawRoundedRect (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect);
-	void			DrawOctangle (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect);
-    void            DrawShape (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect, NodeShape shape);
+    void            DrawRoundedRect (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect);
+	void			DrawOctangle (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect);
+    void            DrawShape (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect, NodeShape shape);
 	void			DrawNode(Graphics& graphics, const RectF& rect,
-							 COLORREF contourRef, const CVisibleGraphNode *node,
-							 NodeShape shape);
+							 COLORREF contourRef, Color overlayColor,
+                             const CVisibleGraphNode *node, NodeShape shape);
 
     void            DrawNodes (Graphics& graphics, const CRect& logRect, const CSize& offset);
     void            DrawConnections (CDC* pDC, const CRect& logRect, const CSize& offset);

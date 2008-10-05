@@ -110,7 +110,7 @@ void CRevisionGraphWnd::CutawayPoints (const RectF& rect, float cutLen, TCutRect
     result[7] = PointF (rect.X, rect.GetBottom() - cutLen);
 }
 
-void CRevisionGraphWnd::DrawRoundedRect (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect)
+void CRevisionGraphWnd::DrawRoundedRect (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect)
 {
     enum {POINT_COUNT = 8};
 
@@ -127,28 +127,34 @@ void CRevisionGraphWnd::DrawRoundedRect (Graphics& graphics, const Pen& pen, con
     points[0].Y -= radius / 2;
     path.AddLine (points[7], points[0]);
 
-    graphics.FillPath (&brush, &path);
-    graphics.DrawPath (&pen, &path);
+    if (brush != NULL)
+        graphics.FillPath (brush, &path);
+    if (pen != NULL)
+        graphics.DrawPath (pen, &path);
 }
 
-void CRevisionGraphWnd::DrawOctangle (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect)
+void CRevisionGraphWnd::DrawOctangle (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect)
 {
     enum {POINT_COUNT = 8};
 
 	PointF points[POINT_COUNT];
     CutawayPoints (rect, min (rect.Height, rect.Width) / 4, points);
 
-    graphics.FillPolygon (&brush, points, POINT_COUNT);
-    graphics.DrawPolygon (&pen, points, POINT_COUNT);
+    if (brush != NULL)
+        graphics.FillPolygon (brush, points, POINT_COUNT);
+    if (pen != NULL)
+        graphics.DrawPolygon (pen, points, POINT_COUNT);
 }
 
-void CRevisionGraphWnd::DrawShape (Graphics& graphics, const Pen& pen, const Brush& brush, const RectF& rect, NodeShape shape)
+void CRevisionGraphWnd::DrawShape (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect, NodeShape shape)
 {
 	switch( shape )
 	{
 	case TSVNRectangle:
-        graphics.FillRectangle (&brush, rect);
-        graphics.DrawRectangle (&pen, rect);
+        if (brush != NULL)
+            graphics.FillRectangle (brush, rect);
+        if (pen != NULL)
+            graphics.DrawRectangle (pen, rect);
 		break;
 	case TSVNRoundRect:
 		DrawRoundedRect (graphics, pen, brush, rect);
@@ -157,8 +163,10 @@ void CRevisionGraphWnd::DrawShape (Graphics& graphics, const Pen& pen, const Bru
 		DrawOctangle (graphics, pen, brush, rect);
 		break;
 	case TSVNEllipse:
-        graphics.FillEllipse (&brush, rect);
-        graphics.DrawEllipse(&pen, rect);
+        if (brush != NULL)
+            graphics.FillEllipse (brush, rect);
+        if (pen != NULL)
+            graphics.DrawEllipse(pen, rect);
 		break;
 	default:
 		ASSERT(FALSE);	//unknown type
@@ -183,7 +191,8 @@ Color LimitedScaleColor (const Color& c1, const Color& c2, float factor)
 }
 
 void CRevisionGraphWnd::DrawNode(Graphics& graphics, const RectF& rect,
-                                 COLORREF contourRef, const CVisibleGraphNode *node, NodeShape shape)
+                                 COLORREF contourRef, Color overlayColor, 
+                                 const CVisibleGraphNode *node, NodeShape shape)
 {
     // special case: line deleted but deletion node removed
 
@@ -205,7 +214,7 @@ void CRevisionGraphWnd::DrawNode(Graphics& graphics, const RectF& rect,
     Color textColor;
     textColor.SetFromCOLORREF (GetSysColor(COLOR_WINDOWTEXT));
 
-    Color shadowColor = LimitedScaleColor (background, Color::Black, 0.5f);
+    Color shadowColor = LimitedScaleColor (background, ARGB (Color::Black), 0.5f);
 	Color selColor = LimitedScaleColor (background, contour, 0.5f);
 	Color brightColor = LimitedScaleColor (background, contour, 0.9f);
 
@@ -216,10 +225,10 @@ void CRevisionGraphWnd::DrawNode(Graphics& graphics, const RectF& rect,
 		RectF shadow = rect;
         shadow.Offset (2, 2);
 
+        Pen pen (shadowColor);
 		SolidBrush brush (shadowColor);
-		Pen pen (shadowColor, 0);
 
-        DrawShape (graphics, pen, brush, shadow, shape);
+        DrawShape (graphics, &pen, &brush, shadow, shape);
 	}
 
 	// Draw the main shape
@@ -228,11 +237,25 @@ void CRevisionGraphWnd::DrawNode(Graphics& graphics, const RectF& rect,
     Color penColor = (contour.GetValue() == Color::White) || isWorkingCopy
                      ? textColor
                      : contour;
+    Color brushColor = nodeSelected ? selColor : brightColor;
 
     Pen pen (penColor, isWorkingCopy ? 3.0f : 1.0f);
-    SolidBrush brush (nodeSelected ? selColor : brightColor);
+    SolidBrush brush (brushColor);
 
-    DrawShape (graphics, pen, brush, rect, shape);
+    Pen* penRef = overlayColor.GetValue() == 0 ? &pen : NULL;
+    DrawShape (graphics, penRef, &brush, rect, shape);
+
+    // add 
+
+    if (overlayColor.GetValue() != 0)
+    {
+        PointF leftTop (rect.X, rect.Y);
+        PointF rightBottom (rect.GetRight(), rect.GetBottom());
+
+        Color startColor (0, brushColor.GetR(), brushColor.GetG(), brushColor.GetB());
+        LinearGradientBrush lgBrush (leftTop, rightBottom, overlayColor, overlayColor);
+        DrawShape (graphics, &pen, &lgBrush, rect, shape);
+    }
 }
 
 void CRevisionGraphWnd::DrawNodes (Graphics& graphics, const CRect& logRect, const CSize& offset)
@@ -262,25 +285,36 @@ void CRevisionGraphWnd::DrawNodes (Graphics& graphics, const CRect& logRect, con
 
         // actual drawing
 
+        Color transparent (0);
+        Color overlayColor = transparent;
+
 		switch (node.style)
 		{
 		case ILayoutNodeList::SNode::STYLE_DELETED:
-			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::DeletedNode), node.node, TSVNOctangle);
+			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::DeletedNode), transparent, node.node, TSVNOctangle);
 			break;
 		case ILayoutNodeList::SNode::STYLE_ADDED:
-			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::AddedNode), node.node, TSVNRoundRect);
-			break;
+            if (node.node->GetClassification().Is (CNodeClassification::IS_TAG))
+                overlayColor = Color (128, 250, 250, 92);
+            else if (node.node->GetClassification().Is (CNodeClassification::IS_TRUNK))
+                overlayColor = Color (64, 64, 255, 64);
+            DrawNode(graphics, noderect, m_Colors.GetColor(CColors::AddedNode), overlayColor, node.node, TSVNRoundRect);
+            break;
 		case ILayoutNodeList::SNode::STYLE_RENAMED:
-			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::RenamedNode), node.node, TSVNOctangle);
+            if (node.node->GetClassification().Is (CNodeClassification::IS_TAG))
+                overlayColor = Color (128, 92, 160, 160);
+            else if (node.node->GetClassification().Is (CNodeClassification::IS_TRUNK))
+                overlayColor = Color (64, 0, 255, 160);
+			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::RenamedNode), overlayColor, node.node, TSVNOctangle);
 			break;
 		case ILayoutNodeList::SNode::STYLE_LAST:
-			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::LastCommitNode), node.node, TSVNEllipse);
+			DrawNode(graphics, noderect, m_Colors.GetColor(CColors::LastCommitNode), transparent, node.node, TSVNEllipse);
 			break;
 		case ILayoutNodeList::SNode::STYLE_MODIFIED:
-			DrawNode(graphics, noderect, GetSysColor(COLOR_WINDOWTEXT), node.node, TSVNRectangle);
+			DrawNode(graphics, noderect, GetSysColor(COLOR_WINDOWTEXT), transparent, node.node, TSVNRectangle);
 			break;
 		default:
-            DrawNode(graphics, noderect, GetSysColor(COLOR_WINDOW), node.node, TSVNRectangle);
+            DrawNode(graphics, noderect, GetSysColor(COLOR_WINDOW), transparent, node.node, TSVNRectangle);
 			break;
 		}
 
