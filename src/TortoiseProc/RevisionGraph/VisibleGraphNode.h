@@ -62,6 +62,7 @@ public:
 
         bool IsAlias() const;
         bool IsDeleted() const;
+        bool IsModified() const;
 
         /// used to modify the depth
 
@@ -211,6 +212,12 @@ inline bool CVisibleGraphNode::CFoldedTag::IsDeleted() const
 {
     return tagNode->GetClassification()
         .Is (CNodeClassification::PATH_ONLY_DELETED);
+}
+
+inline bool CVisibleGraphNode::CFoldedTag::IsModified() const
+{
+    return tagNode->GetClassification()
+        .Is (CNodeClassification::PATH_ONLY_MODIFIED);
 }
 
 /// CVisibleGraphNode::CFactory data access

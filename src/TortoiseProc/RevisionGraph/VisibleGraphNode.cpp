@@ -319,12 +319,26 @@ void CVisibleGraphNode::DropNode (CVisibleGraph* graph)
 
 void CVisibleGraphNode::FoldTag (CVisibleGraph* graph)
 {
-    assert (copySource && "This operation is only valid for copy nodes!");
+    assert ((copySource || classification.Is (CNodeClassification::IS_RENAMED))
+            && "This operation is only valid for copy nodes!");
 
-    // fold the whole branch into this node
+    // fold the whole branch into this node.
+    // Handle renames as sub-tags
 
-    while (next != NULL)
-        next->DropNode (graph);
+    CVisibleGraphNode* node = this;
+    while (node->next)
+        node = node->next;
+
+    while (node != this)
+    {
+        CVisibleGraphNode* previous = node->prev;
+        if (node->classification.Is (CNodeClassification::IS_RENAMED))
+            node->FoldTag (graph);
+        else
+            node->DropNode (graph);
+
+        node = previous;
+    }
 
     // fold all sub-branches as tags into this node
 
@@ -333,6 +347,7 @@ void CVisibleGraphNode::FoldTag (CVisibleGraph* graph)
 
     // move tags to parent
 
+    CVisibleGraphNode* source = copySource == NULL ? prev : copySource;
     if (firstTag != NULL)
     {
         CFoldedTag* lastTag = NULL;
@@ -342,16 +357,16 @@ void CVisibleGraphNode::FoldTag (CVisibleGraph* graph)
             lastTag = tag;
         }
 
-        lastTag->next = copySource->firstTag;
-        copySource->firstTag = firstTag;
+        lastTag->next = source->firstTag;
+        source->firstTag = firstTag;
         firstTag = NULL;
     }
 
     // create a tag for this node
 
     CFoldedTag* newTag 
-        = graph->GetFactory().Create (base, 0, copySource->firstTag);
-    copySource->firstTag = newTag;
+        = graph->GetFactory().Create (base, 0, source->firstTag);
+    source->firstTag = newTag;
 
     // remove this node
 
