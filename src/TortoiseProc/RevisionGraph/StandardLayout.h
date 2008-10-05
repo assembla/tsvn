@@ -138,6 +138,7 @@ private:
 
     /// layout creation
 
+    void SortNodes();
     void InitializeNodes (const CVisibleGraphNode* node);
     void InitializeNodes (const CVisibleGraph* graph);
 

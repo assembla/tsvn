@@ -50,6 +50,63 @@ CStandardLayoutNodeInfo::CStandardLayoutNodeInfo()
 {
 }
 
+// sort nodes: make "heaviest" branch the first one
+
+void CStandardLayout::SortNodes()
+{
+    for (size_t i = 0, count = nodes.size(); i < count; ++i)
+        if (nodes[i].firstSubBranch != NULL)
+        {
+            // find first deepest sub-branch
+
+            CStandardLayoutNodeInfo* firstBranch = nodes[i].firstSubBranch;
+            CStandardLayoutNodeInfo* heaviestBranch = firstBranch;
+            index_t maxWeight = heaviestBranch->subTreeWeight;
+
+            for ( CStandardLayoutNodeInfo* node = heaviestBranch->nextBranch
+                ; node != NULL
+                ; node = node->nextBranch)
+            {
+                if (node->subTreeWeight > maxWeight)
+                {
+                    maxWeight = node->subTreeWeight;
+                    heaviestBranch = node;
+                }
+            }
+
+            // already the first one?
+
+            if (firstBranch == heaviestBranch)
+                continue;
+
+            // update "last" pointers, if necessary
+
+            CStandardLayoutNodeInfo* nextBranch = heaviestBranch->nextBranch;
+            if (nextBranch == NULL)
+            {
+                CStandardLayoutNodeInfo* newLast = heaviestBranch->previousBranch;
+                for ( CStandardLayoutNodeInfo* node = firstBranch
+                    ; node != NULL
+                    ; node = node->nextBranch)
+                {
+                    node->lastBranch = newLast;
+                }
+            }
+
+            // mode branch to front
+
+            heaviestBranch->previousBranch->nextBranch = nextBranch;
+            if (nextBranch != NULL)
+                nextBranch->previousBranch = heaviestBranch->previousBranch;
+
+            heaviestBranch->previousBranch = NULL;
+            heaviestBranch->nextBranch = firstBranch;
+            firstBranch->previousBranch = heaviestBranch;
+
+            nodes[i].firstSubBranch = heaviestBranch;
+        }
+}
+
 // layout creation: 
 // * create a node info object for every node
 // * calculate branch and tree sizes (in nodes)
@@ -148,10 +205,6 @@ void CStandardLayout::InitializeNodes (const CVisibleGraphNode* start)
 
         if (nodeInfo.subTreeHeight < branchLength)
             nodeInfo.subTreeHeight = branchLength;
-
-        --branchLength;
-
-        nodeInfo.subTreeWeight += branchLength;
     }
 }
 
@@ -166,6 +219,28 @@ void CStandardLayout::InitializeNodes (const CVisibleGraph* graph)
 
     for (size_t i = 0, count = nodes.size(); i < count; ++i)
         assert (nodes[i].node != NULL);
+
+    // adjust sub-tree weights
+
+    for (size_t i = nodes.size(); i > 0; --i)
+    {
+        CStandardLayoutNodeInfo& node = nodes[i-1];
+
+        index_t weight = node.nextInBranch != NULL 
+                       ? node.nextInBranch->subTreeWeight+1
+                       : 1;
+
+        for ( CStandardLayoutNodeInfo* branch = node.firstSubBranch
+            ; branch != NULL
+            ; branch = branch->nextBranch)
+            weight += branch->subTreeWeight;
+
+        node.subTreeWeight = weight;
+    }
+
+    // prevent degenerated branches from growing too far to the right
+
+    SortNodes();
 }
 
 // scan tree for connections between non-overlapping nodes
