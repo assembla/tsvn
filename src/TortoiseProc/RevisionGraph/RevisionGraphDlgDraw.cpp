@@ -136,7 +136,7 @@ void CRevisionGraphWnd::DrawOctangle (Graphics& graphics, const Pen& pen, const 
     enum {POINT_COUNT = 8};
 
 	PointF points[POINT_COUNT];
-    CutawayPoints (rect, rect.Height / 4, points);
+    CutawayPoints (rect, min (rect.Height, rect.Width) / 4, points);
 
     graphics.FillPolygon (&brush, points, POINT_COUNT);
     graphics.DrawPolygon (&pen, points, POINT_COUNT);
