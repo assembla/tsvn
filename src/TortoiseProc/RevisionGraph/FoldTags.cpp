@@ -35,11 +35,7 @@ void CFoldTags::Apply (CVisibleGraph* graph, CVisibleGraphNode* node)
     // or any of its sub-branches.
     // Also, we will not remove tags that get copied to non-tags.
 
-    DWORD forbidden = CNodeClassification::IS_MODIFIED
-                    | CNodeClassification::COPIES_TO_MODIFIED 
-                    | CNodeClassification::ALL_COPIES_MODIFIED
-                    | CNodeClassification::PATH_ONLY_MODIFIED
-                    | CNodeClassification::COPIES_TO_TRUNK 
+    DWORD forbidden = CNodeClassification::COPIES_TO_TRUNK 
                     | CNodeClassification::COPIES_TO_BRANCH 
                     | CNodeClassification::COPIES_TO_OTHER;
 

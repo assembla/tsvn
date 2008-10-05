@@ -656,22 +656,45 @@ CString CRevisionGraphWnd::TooltipText (const CVisibleGraphNode* node)
     else
     {
         CString tags;
+        int tagCount = 0;
         for ( const CVisibleGraphNode::CFoldedTag* tag = node->GetFirstTag()
             ; tag != NULL
             ; tag = tag->GetNext())
         {
-            UINT format = tag->IsAlias()
-                        ? tag->IsDeleted()
-                            ? IDS_REVGRAPH_TAGALIASDELETED
-                            : IDS_REVGRAPH_TAGALIAS
-                        : tag->IsDeleted()
-                            ? IDS_REVGRAPH_TAGDELETED
-                            : IDS_REVGRAPH_TAG;
+            ++tagCount;
 
-            std::string tagPath = tag->GetTag()->GetPath().GetPath();
+            CString attributes;
+            if (tag->IsModified())
+                attributes.LoadString (IDS_REVGRAPH_TAGMODIFIED);
+
+            if (tag->IsDeleted())
+            {
+                CString attribute;
+                attribute.LoadString (IDS_REVGRAPH_TAGDELETED);
+                if (attributes.IsEmpty())
+                    attributes = attribute;
+                else
+                    attributes += _T(", ") + attribute;
+            }
+
             CString tagInfo;
-            tagInfo.Format ( format
-                           , CUnicodeUtils::StdGetUnicode (tagPath).c_str());
+            std::string tagPath = tag->GetTag()->GetPath().GetPath();
+
+            if (attributes.IsEmpty())
+            {
+                tagInfo.Format (   tag->IsAlias() 
+                                 ? IDS_REVGRAPH_TAGALIAS 
+                                 : IDS_REVGRAPH_TAG
+                               , CUnicodeUtils::StdGetUnicode (tagPath).c_str());
+            }
+            else
+            {
+                tagInfo.Format (   tag->IsAlias() 
+                                 ? IDS_REVGRAPH_TAGALIASATTRIBUTED
+                                 : IDS_REVGRAPH_TAGATTRIBUTED
+                               , (LPCTSTR)attributes
+                               , CUnicodeUtils::StdGetUnicode (tagPath).c_str());
+            }
 
             tags +=   _T("\r\n")
                     + CString (' ', tag->GetDepth() * 6) 
@@ -683,6 +706,7 @@ CString CRevisionGraphWnd::TooltipText (const CVisibleGraphNode* node)
 					      , CUnicodeUtils::StdGetUnicode(node->GetRealPath().GetPath()).c_str()
 					      , CUnicodeUtils::StdGetUnicode(revisionInfo.GetAuthor(index)).c_str()
 					      , date
+                          , tagCount
                           , (LPCTSTR)tags
 					      , CUnicodeUtils::StdGetUnicode(revisionInfo.GetComment(index)).c_str());
     }
