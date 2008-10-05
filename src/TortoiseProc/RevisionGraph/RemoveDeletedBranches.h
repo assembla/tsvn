@@ -21,6 +21,7 @@
 // include base classes
 
 #include "CopyFilterOptions.h"
+#include "ModificationOptions.h"
 #include "revisiongraphoptionsimpl.h"
 #include "Resource.h"
 
@@ -29,9 +30,14 @@
 */
 
 class CRemoveDeletedBranches 
-    : public CRevisionGraphOptionImpl< ICopyFilterOption
-                                     , 90
-                                     , ID_VIEW_REMOVEDELETEDONES>
+    : public COrderedTraversalOptionImpl
+                < CCombineInterface 
+                    < ICopyFilterOption
+                    , IModificationOption>
+                , 250
+                , ID_VIEW_REMOVEDELETEDONES
+                , true          // crawl branches first
+                , false>        // root last
 {
 public:
 
@@ -39,7 +45,11 @@ public:
 
     CRemoveDeletedBranches (CRevisionGraphOptionList& list);
 
-    /// implement ICopyFilterOption
+    /// implement ICopyFilterOption (pre-filter most nodes)
 
     virtual EResult ShallRemove (const CFullGraphNode* node) const;
+
+    /// implement IModificationOption (post-filter deleted non-tagged branches)
+
+    virtual void Apply (CVisibleGraph* graph, CVisibleGraphNode* node);
 };

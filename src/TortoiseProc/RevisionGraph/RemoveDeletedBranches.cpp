@@ -19,6 +19,7 @@
 #include "StdAfx.h"
 #include "RemoveDeletedBranches.h"
 #include "FullGraphNode.h"
+#include "VisibleGraphNode.h"
 
 // construction
 
@@ -37,4 +38,17 @@ CRemoveDeletedBranches::ShallRemove (const CFullGraphNode* node) const
     return node->GetClassification().Is (CNodeClassification::ALL_COPIES_DELETED)
          ? ICopyFilterOption::REMOVE_SUBTREE
          : ICopyFilterOption::KEEP_NODE;
+}
+
+/// implement IModificationOption (post-filter deleted non-tagged branches)
+
+void CRemoveDeletedBranches::Apply (CVisibleGraph* graph, CVisibleGraphNode* node)
+{
+    if (   (node->GetNext() == NULL) 
+        && (node->GetFirstCopyTarget() == NULL)
+        && (node->GetFirstTag() == NULL)
+        && (node->GetClassification().Is (CNodeClassification::PATH_ONLY_DELETED)))
+    {
+        node->DropNode (graph);
+    }
 }
