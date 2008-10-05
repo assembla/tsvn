@@ -34,19 +34,19 @@ private:
     void StackSubTree 
         ( CStandardLayoutNodeInfo* node
         , std::vector<long>& branchColumnStarts
-        , std::vector<long>& branchColumnHeights
+        , std::vector<long>& branchColumnEnds
         , std::vector<long>& localColumnStarts
-        , std::vector<long>& localColumnHeights);
+        , std::vector<long>& localColumnEnds);
     void AppendBranch 
         ( CStandardLayoutNodeInfo* start
         , std::vector<long>& columnStarts
-        , std::vector<long>& columnHeights
+        , std::vector<long>& columnEnds
         , std::vector<long>& localColumnStarts
-        , std::vector<long>& localColumnHeights);
+        , std::vector<long>& localColumnEnds);
     void PlaceBranch 
         ( CStandardLayoutNodeInfo* start
         , std::vector<long>& columnStarts
-        , std::vector<long>& columnHeights);
+        , std::vector<long>& columnEnds);
 
     void ShiftNodes 
         ( CStandardLayoutNodeInfo* node
