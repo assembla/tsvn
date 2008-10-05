@@ -252,7 +252,13 @@ void CRevisionGraphWnd::DrawNodes (Graphics& graphics, const CRect& logRect, con
 		RectF noderect ( leftTop.X - offset.cx
                        , leftTop.Y - offset.cy
                        , node.rect.right * m_fZoomFactor - leftTop.X - 1
-                       , node.rect.bottom * m_fZoomFactor - leftTop.Y - 1);
+                       , node.rect.bottom * m_fZoomFactor - leftTop.Y);
+
+        // show two separate lines for touching nodes, 
+        // unless the scale is too small
+
+        if (noderect.Height > 4.0f)
+            noderect.Height -= 1.0f;
 
         // actual drawing
 
