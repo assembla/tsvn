@@ -517,11 +517,11 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 		tempRect.bottom = tempRect.top + height;
 		// make sure the position rect is not bigger than the preview window itself
 		::IntersectRect(&m_OverviewPosRect, &m_OverviewRect, &tempRect);
-		memDC->SetROP2(R2_MASKPEN);
-		HGDIOBJ oldbrush = memDC->SelectObject(GetStockObject(GRAY_BRUSH));
-		memDC->Rectangle(&m_OverviewPosRect);
-		memDC->SetROP2(R2_NOT);
-		memDC->SelectObject(oldbrush);
+
+        RectF rect ( (float)m_OverviewPosRect.left, (float)m_OverviewPosRect.top
+                   , (float)m_OverviewPosRect.Width(), (float)m_OverviewPosRect.Height());
+        SolidBrush brush (Color (64, 0, 0, 0));
+        graphics.FillRectangle (&brush, rect);
 		memDC->DrawEdge(&m_OverviewPosRect, EDGE_BUMP, BF_RECT);
 	}
 
