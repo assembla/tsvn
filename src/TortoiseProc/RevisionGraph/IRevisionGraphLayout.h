@@ -24,6 +24,16 @@ using namespace LogCache;
 
 class CVisibleGraphNode;
 
+// Scintilla uses defines :/
+
+#ifdef STYLE_DEFAULT
+#undef STYLE_DEFAULT
+#endif
+
+/**
+* Base interface to all layout info access interfaces.
+*/
+
 class ILayoutItemList
 {
 public:

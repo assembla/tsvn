@@ -190,6 +190,20 @@ Color LimitedScaleColor (const Color& c1, const Color& c2, float factor)
                  , LimitedScaleColor (c1.GetB(), c2.GetB(), factor));
 }
 
+void CRevisionGraphWnd::DrawShadow (Graphics& graphics, const RectF& rect,
+                                    Color shadowColor, NodeShape shape)
+{
+	// draw the shadow
+
+	RectF shadow = rect;
+    shadow.Offset (2, 2);
+
+    Pen pen (shadowColor);
+	SolidBrush brush (shadowColor);
+
+    DrawShape (graphics, &pen, &brush, shadow, shape);
+}
+
 void CRevisionGraphWnd::DrawNode(Graphics& graphics, const RectF& rect,
                                  COLORREF contourRef, Color overlayColor, 
                                  const CVisibleGraphNode *node, NodeShape shape)
@@ -214,22 +228,8 @@ void CRevisionGraphWnd::DrawNode(Graphics& graphics, const RectF& rect,
     Color textColor;
     textColor.SetFromCOLORREF (GetSysColor(COLOR_WINDOWTEXT));
 
-    Color shadowColor = LimitedScaleColor (background, ARGB (Color::Black), 0.5f);
 	Color selColor = LimitedScaleColor (background, contour, 0.5f);
 	Color brightColor = LimitedScaleColor (background, contour, 0.9f);
-
-	// draw the shadow
-
-	if (m_fZoomFactor > 0.2f)
-	{
-		RectF shadow = rect;
-        shadow.Offset (2, 2);
-
-        Pen pen (shadowColor);
-		SolidBrush brush (shadowColor);
-
-        DrawShape (graphics, &pen, &brush, shadow, shape);
-	}
 
 	// Draw the main shape
 
@@ -245,16 +245,78 @@ void CRevisionGraphWnd::DrawNode(Graphics& graphics, const RectF& rect,
     Pen* penRef = overlayColor.GetValue() == 0 ? &pen : NULL;
     DrawShape (graphics, penRef, &brush, rect, shape);
 
-    // add 
+    // overlay with some other color
 
     if (overlayColor.GetValue() != 0)
     {
-        PointF leftTop (rect.X, rect.Y);
-        PointF rightBottom (rect.GetRight(), rect.GetBottom());
+        SolidBrush brush (overlayColor);
+        DrawShape (graphics, &pen, &brush, rect, shape);
+    }
+}
 
-        Color startColor (0, brushColor.GetR(), brushColor.GetG(), brushColor.GetB());
-        LinearGradientBrush lgBrush (leftTop, rightBottom, overlayColor, overlayColor);
-        DrawShape (graphics, &pen, &lgBrush, rect, shape);
+RectF CRevisionGraphWnd::GetNodeRect (const ILayoutNodeList::SNode& node, const CSize& offset) const
+{
+    // get node and position
+
+    PointF leftTop ( node.rect.left * m_fZoomFactor
+                   , node.rect.top * m_fZoomFactor);
+	RectF noderect ( leftTop.X - offset.cx
+                   , leftTop.Y - offset.cy
+                   , node.rect.right * m_fZoomFactor - leftTop.X - 1
+                   , node.rect.bottom * m_fZoomFactor - leftTop.Y);
+
+    // show two separate lines for touching nodes, 
+    // unless the scale is too small
+
+    if (noderect.Height > 4.0f)
+        noderect.Height -= 1.0f;
+
+    // done
+
+    return noderect;
+}
+
+void CRevisionGraphWnd::DrawShadows (Graphics& graphics, const CRect& logRect, const CSize& offset)
+{
+    // shadow color to use
+
+    Color background;
+    background.SetFromCOLORREF (GetSysColor(COLOR_WINDOW));
+    Color textColor;
+    textColor.SetFromCOLORREF (GetSysColor(COLOR_WINDOWTEXT));
+
+    Color shadowColor = LimitedScaleColor (background, ARGB (Color::Black), 0.5f);
+
+    // iterate over all visible nodes
+
+    std::auto_ptr<const ILayoutNodeList> nodes (m_layout->GetNodes());
+    for ( index_t index = nodes->GetFirstVisible (logRect)
+        ; index != NO_INDEX
+        ; index = nodes->GetNextVisible (index, logRect))
+	{
+        // get node and position
+
+        ILayoutNodeList::SNode node = nodes->GetNode (index);
+		RectF noderect (GetNodeRect (node, offset));
+
+        // actual drawing
+
+		switch (node.style)
+		{
+		case ILayoutNodeList::SNode::STYLE_DELETED:
+		case ILayoutNodeList::SNode::STYLE_RENAMED:
+			DrawShadow (graphics, noderect, shadowColor, TSVNOctangle);
+			break;
+		case ILayoutNodeList::SNode::STYLE_ADDED:
+            DrawShadow(graphics, noderect, shadowColor, TSVNRoundRect);
+            break;
+		case ILayoutNodeList::SNode::STYLE_LAST:
+			DrawShadow(graphics, noderect, shadowColor, TSVNEllipse);
+			break;
+		default:
+            DrawShadow(graphics, noderect, shadowColor, TSVNRectangle);
+			break;
+		}
     }
 }
 
@@ -270,18 +332,7 @@ void CRevisionGraphWnd::DrawNodes (Graphics& graphics, const CRect& logRect, con
         // get node and position
 
         ILayoutNodeList::SNode node = nodes->GetNode (index);
-        PointF leftTop ( node.rect.left * m_fZoomFactor
-                       , node.rect.top * m_fZoomFactor);
-		RectF noderect ( leftTop.X - offset.cx
-                       , leftTop.Y - offset.cy
-                       , node.rect.right * m_fZoomFactor - leftTop.X - 1
-                       , node.rect.bottom * m_fZoomFactor - leftTop.Y);
-
-        // show two separate lines for touching nodes, 
-        // unless the scale is too small
-
-        if (noderect.Height > 4.0f)
-            noderect.Height -= 1.0f;
+		RectF noderect (GetNodeRect (node, offset));
 
         // actual drawing
 
@@ -427,6 +478,9 @@ void CRevisionGraphWnd::DrawGraph(CDC* pDC, const CRect& rect, int nVScrollPos, 
 
     Graphics graphics (*memDC);
     graphics.SetPageUnit (UnitPixel);
+
+	if (m_fZoomFactor > 0.2f)
+        DrawShadows (graphics, logRect, offset);
 
     DrawNodes (graphics, logRect, offset);
     DrawConnections (memDC, logRect, offset);

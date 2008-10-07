@@ -20,6 +20,7 @@
 #include "RevisionGraph/FullHistory.h"
 #include "RevisionGraph/FullGraph.h"
 #include "RevisionGraph/VisibleGraph.h"
+#include "RevisionGraph/IRevisionGraphLayout.h"
 #include "ProgressDlg.h"
 #include "Colors.h"
 #include "SVNDiff.h"
@@ -184,10 +185,14 @@ private:
     void            DrawRoundedRect (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect);
 	void			DrawOctangle (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect);
     void            DrawShape (Graphics& graphics, const Pen* pen, const Brush* brush, const RectF& rect, NodeShape shape);
+	void			DrawShadow(Graphics& graphics, const RectF& rect,
+							   Color shadowColor, NodeShape shape);
 	void			DrawNode(Graphics& graphics, const RectF& rect,
 							 COLORREF contourRef, Color overlayColor,
                              const CVisibleGraphNode *node, NodeShape shape);
+    RectF           GetNodeRect (const ILayoutNodeList::SNode& node, const CSize& offset) const;
 
+    void            DrawShadows (Graphics& graphics, const CRect& logRect, const CSize& offset);
     void            DrawNodes (Graphics& graphics, const CRect& logRect, const CSize& offset);
     void            DrawConnections (CDC* pDC, const CRect& logRect, const CSize& offset);
     void            DrawTexts (CDC* pDC, const CRect& logRect, const CSize& offset);
