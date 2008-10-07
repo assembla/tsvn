@@ -33,6 +33,7 @@
 #include "StandardNodeSizeAssignment.h"
 #include "StandardNodePositioning.h"
 #include "StrictOrderNodePositioning.h"
+#include "UpsideDownLayout.h"
 
 // construction (create all option objects) / destruction
 
@@ -46,7 +47,7 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     CStandardNodePositioning* standardNodePositioning 
         = new CStandardNodePositioning (*this);
     new CRemoveSimpleChanges (*this);
-    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_TOPDOWN> (*this);
+    new CUpsideDownLayout (*this);
     new CShowHead (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_REDUCECROSSLINES> (*this);
     new CExactCopyFroms (*this);
