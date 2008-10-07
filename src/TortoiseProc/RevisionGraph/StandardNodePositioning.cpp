@@ -228,7 +228,7 @@ CRect CStandardNodePositioning::BoundingRect
 
 CStandardNodePositioning::CStandardNodePositioning 
     ( CRevisionGraphOptionList& list)
-    : CRevisionGraphOptionImpl<ILayoutOption, 200, 0> (list)
+    : CRevisionGraphOptionImpl<ILayoutOption, 200, ID_VIEW_GROUPBRANCHES> (list)
 {
 }
 

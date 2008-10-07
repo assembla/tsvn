@@ -32,6 +32,7 @@
 
 #include "StandardNodeSizeAssignment.h"
 #include "StandardNodePositioning.h"
+#include "StrictOrderNodePositioning.h"
 
 // construction (create all option objects) / destruction
 
@@ -42,7 +43,8 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     // The order is critical as it determines the option bit position
     // in the registry DWORD.
 
-    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_GROUPBRANCHES> (*this);
+    CStandardNodePositioning* standardNodePositioning 
+        = new CStandardNodePositioning (*this);
     new CRemoveSimpleChanges (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_TOPDOWN> (*this);
     new CShowHead (*this);
@@ -59,7 +61,7 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     // create layout options
 
     (new CStandardNodeSizeAssignment (*this))->ToggleSelection();
-    (new CStandardNodePositioning (*this))->ToggleSelection();
+    new CStrictOrderNodePositioning (*this, standardNodePositioning);
 }
 
 // access specific sub-sets

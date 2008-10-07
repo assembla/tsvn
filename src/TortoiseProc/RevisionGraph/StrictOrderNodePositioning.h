@@ -18,48 +18,56 @@
 //
 #pragma once
 
-#include "Resource.h"
 #include "LayoutOptions.h"
 #include "RevisionGraphOptionsImpl.h"
+#include "LogCacheGlobals.h"
 
 class IRevisionGraphLayout;
+class IStandardLayoutNodeAccess;
 class CStandardLayoutNodeInfo;
 
-class CStandardNodePositioning 
-    : public CRevisionGraphOptionImpl<ILayoutOption, 200, ID_VIEW_GROUPBRANCHES>
+using namespace LogCache;
+
+class CStrictOrderNodePositioning 
+    : public CRevisionGraphOptionImpl<ILayoutOption, 200, 0>
 {
 private:
 
+    // active, if this is one not active
+
+    ILayoutOption* standardNodePositioning;
+
     /// the individual placement stages
 
-    void StackSubTree 
-        ( CStandardLayoutNodeInfo* node
-        , std::vector<long>& branchColumnStarts
-        , std::vector<long>& branchColumnEnds
-        , std::vector<long>& localColumnStarts
-        , std::vector<long>& localColumnEnds);
-    void AppendBranch 
+    void SortRevisions 
+        ( IStandardLayoutNodeAccess* nodeAccess
+        , std::vector<std::pair<revision_t, CStandardLayoutNodeInfo*> >& nodes);
+    void AssignColumns 
         ( CStandardLayoutNodeInfo* start
-        , std::vector<long>& columnStarts
-        , std::vector<long>& columnEnds
-        , std::vector<long>& localColumnStarts
-        , std::vector<long>& localColumnEnds);
-    void PlaceBranch 
-        ( CStandardLayoutNodeInfo* start
-        , std::vector<long>& columnStarts
-        , std::vector<long>& columnEnds);
-
+        , size_t column
+        , std::vector<revision_t>& startRevisions
+        , std::vector<revision_t>& endRevisions
+        , std::vector<int>& maxWidths);
+    void AssignColumns 
+        ( std::vector<std::pair<revision_t, CStandardLayoutNodeInfo*> >& nodes
+        , std::vector<int>& maxWidths);
+    void AssignRows
+        (std::vector<std::pair<revision_t, CStandardLayoutNodeInfo*> >& nodes);
     void ShiftNodes 
-        ( CStandardLayoutNodeInfo* node
-        , CSize delta);
-    CRect BoundingRect 
-        (const CStandardLayoutNodeInfo* node);
-
+        ( std::vector<std::pair<revision_t, CStandardLayoutNodeInfo*> >& nodes
+        , std::vector<int>& columWidths);
+    
 public:
 
     /// construction
 
-    CStandardNodePositioning (CRevisionGraphOptionList& list);
+    CStrictOrderNodePositioning 
+        ( CRevisionGraphOptionList& list
+        , ILayoutOption* standardNodePositioning);
+
+    /// implement IRevisionGraphOption: Active if standard layout is disabled.
+
+    virtual bool IsActive() const; 
 
     /// cast @a layout pointer to the respective modification
     /// interface and write the data.
