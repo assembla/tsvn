@@ -199,7 +199,7 @@ index_t CRevisionGraphWnd::GetHitNode (CPoint point) const
     // any nodes at all?
 
     if (m_layout.get() == NULL)
-        return NULL;
+        return NO_INDEX;
 
     // translate point into logical coordinates
 
