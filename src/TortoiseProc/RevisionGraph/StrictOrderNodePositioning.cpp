@@ -46,7 +46,7 @@ void CStrictOrderNodePositioning::SortRevisions
 
     // sort it
 
-    std::sort (nodes.begin(), nodes.end(), CompareNodes);
+    std::sort (nodes.begin(), nodes.end()/*, CompareNodes*/);
 }
 
 void CStrictOrderNodePositioning::AssignColumns 
@@ -89,6 +89,19 @@ void CStrictOrderNodePositioning::AssignColumns
         startRevisions.push_back (firstRevision);
         endRevisions.push_back (lastRevision);
         maxWidths.push_back (0);
+    }
+
+    // prevent crossing lines / nodes
+
+    if (start->parentBranch != NULL)
+    {
+        int connectionFirstRevision = start->parentBranch->node->GetRevision();
+        int connectionLastRevision = firstRevision-1;
+        for (int i = start->parentBranch->treeShift.cx+1; i <= column; ++i)
+        {
+            startRevisions[i] = min (connectionFirstRevision, startRevisions[i]);
+            endRevisions[i] = max (connectionLastRevision, endRevisions[i]);
+        }
     }
 
     // assign colum to this branch and proceed with sub-branches
@@ -178,25 +191,54 @@ void CStrictOrderNodePositioning::AssignRows
 
         for (size_t i = rangeStart; i < rangeEnd; ++i)
         {
-            int column = nodes[i].second->treeShift.cx;
-            int height = nodes[i].second->rect.Height();
+            // row must be larger than the top of any column changed 
+            // in that revision
 
-            rowStart = max (rowStart, columnTops[column] + height);
+            const CStandardLayoutNodeInfo* node = nodes[i].second;
+            int column = node->treeShift.cx;
+            rowStart = max (rowStart, columnTops[column]);
+
+            // copy targets must be pushed down even further
+
+            const CStandardLayoutNodeInfo* parent = node->parentBranch;
+            if ((parent != NULL) && (node->previousInBranch == NULL))
+            {
+                int sourceBottom = parent->rect.bottom + parent->treeShift.cy;
+                rowStart = max (rowStart, sourceBottom);
+            }
+
+            // copy sources as well
+
+            int maxTargetColumn = column;
+            for ( const CStandardLayoutNodeInfo* subBranch = node->firstSubBranch
+                ; subBranch != NULL
+                ; subBranch = subBranch->nextBranch)
+            {
+                maxTargetColumn = max (maxTargetColumn, subBranch->treeShift.cx);
+            }
+
+            int halfHeight = node->rect.Height() / 2;
+            for (int i = column+1; i <= maxTargetColumn; ++i)
+            {
+                rowStart = max (rowStart, columnTops[i] - halfHeight + 6);
+            }
         }
 
         // assign rowStarts
 
         for (size_t i = rangeStart; i < rangeEnd; ++i)
         {
-            int column = nodes[i].second->treeShift.cx;
+            CStandardLayoutNodeInfo* node = nodes[i].second;
+            int column = node->treeShift.cx;
+            int height = node->rect.Height();
 
-            columnTops[column] = rowStart;
-            nodes[i].second->treeShift.cy = rowStart;
+            columnTops[column] = rowStart + height;
+            node->treeShift.cy = rowStart;
         }
 
         // minimum shift between consequtive revisions on different branches
 
-        rowStart += 8;
+        rowStart += 10;
     }
 }
 
