@@ -95,8 +95,6 @@ CStandardLayoutConnectionList::GetConnection (index_t index) const
 
         startPoint.x = source->right;
         startPoint.y = (source->top + source->bottom) / 2;
-        endPoint.x = (dest->left + dest->right) / 2;
-        endPoint.y = dest->top > startPoint.y ? dest->top : dest->bottom;
     }
     else
     {
@@ -107,9 +105,10 @@ CStandardLayoutConnectionList::GetConnection (index_t index) const
 
         startPoint.x = (source->left + source->right) / 2;
         startPoint.y = source->bottom;
-        endPoint.x = (dest->left + dest->right) / 2;
-        endPoint.y = dest->top;
     }
+
+    endPoint.x = (dest->left + dest->right) / 2;
+    endPoint.y = dest->top > startPoint.y ? dest->top : dest->bottom;
     
     // Bezier points
 
