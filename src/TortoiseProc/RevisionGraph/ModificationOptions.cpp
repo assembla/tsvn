@@ -151,23 +151,31 @@ CModificationOptions::CModificationOptions
 void CModificationOptions::Apply (CVisibleGraph* graph)
 {
     typedef std::vector<IModificationOption*>::const_iterator IT;
-    for ( IT iter = options.begin(), end = options.end()
-        ; (iter != end)
-        ; ++iter)
+
+    // apply filters until the graph is stable
+
+    size_t nodeCount = 0;
+    while (nodeCount != graph->GetNodeCount())
     {
-        for (size_t i = graph->GetRootCount(); i > 0; --i)
+        nodeCount = graph->GetNodeCount();
+        for ( IT iter = options.begin(), end = options.end()
+            ; (iter != end)
+            ; ++iter)
         {
-            CVisibleGraphNode* root = graph->GetRoot (i-1);
-            if ((*iter)->WantsCopiesFirst())
-                if ((*iter)->WantsRootFirst())
-                    TraverseFromRootCopiesFirst (*iter, graph, root);
+            for (size_t i = graph->GetRootCount(); i > 0; --i)
+            {
+                CVisibleGraphNode* root = graph->GetRoot (i-1);
+                if ((*iter)->WantsCopiesFirst())
+                    if ((*iter)->WantsRootFirst())
+                        TraverseFromRootCopiesFirst (*iter, graph, root);
+                    else
+                        TraverseToRootCopiesFirst (*iter, graph, root);
                 else
-                    TraverseToRootCopiesFirst (*iter, graph, root);
-            else
-                if ((*iter)->WantsRootFirst())
-                    TraverseFromRootCopiesLast (*iter, graph, root);
-                else
-                    TraverseToRootCopiesLast (*iter, graph, root);
+                    if ((*iter)->WantsRootFirst())
+                        TraverseFromRootCopiesLast (*iter, graph, root);
+                    else
+                        TraverseToRootCopiesLast (*iter, graph, root);
+            }
         }
     }
 }
