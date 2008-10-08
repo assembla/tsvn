@@ -49,7 +49,8 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     new CRemoveSimpleChanges (*this);
     new CUpsideDownLayout (*this);
     new CShowHead (*this);
-    new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_REDUCECROSSLINES> (*this);
+    IRevisionGraphOption* reduceCrossLines
+        = new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, ID_VIEW_REDUCECROSSLINES> (*this);
     new CExactCopyFroms (*this);
     new CRevisionGraphOptionImpl<IRevisionGraphOption, 0, 0> (*this);   // 0x40 is not used
     new CFoldTags (*this);
@@ -62,7 +63,11 @@ CAllRevisionGraphOptions::CAllRevisionGraphOptions()
     // create layout options
 
     (new CStandardNodeSizeAssignment (*this))->ToggleSelection();
-    new CStrictOrderNodePositioning (*this, standardNodePositioning);
+    new CStrictOrderNodePositioning (*this, standardNodePositioning, reduceCrossLines);
+
+    // link options as necessary
+
+    standardNodePositioning->SetReduceCrossLines (reduceCrossLines);
 }
 
 // access specific sub-sets

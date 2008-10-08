@@ -30,6 +30,10 @@ class CStandardNodePositioning
 {
 private:
 
+    // additional options that modify the behavior of this one
+
+    IRevisionGraphOption* reduceCrossLines;
+
     /// the individual placement stages
 
     void StackSubTree 
@@ -60,6 +64,10 @@ public:
     /// construction
 
     CStandardNodePositioning (CRevisionGraphOptionList& list);
+
+    /// link to sub-option
+
+    void SetReduceCrossLines (IRevisionGraphOption* reduceCrossLines);
 
     /// cast @a layout pointer to the respective modification
     /// interface and write the data.

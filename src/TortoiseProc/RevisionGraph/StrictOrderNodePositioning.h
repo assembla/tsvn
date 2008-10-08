@@ -35,7 +35,11 @@ private:
 
     // active, if this is one not active
 
-    ILayoutOption* standardNodePositioning;
+    IRevisionGraphOption* standardNodePositioning;
+
+    // additional options that modify the behavior of this one
+
+    IRevisionGraphOption* reduceCrossLines;
 
     /// the individual placement stages
 
@@ -63,7 +67,8 @@ public:
 
     CStrictOrderNodePositioning 
         ( CRevisionGraphOptionList& list
-        , ILayoutOption* standardNodePositioning);
+        , IRevisionGraphOption* standardNodePositioning
+        , IRevisionGraphOption* reduceCrossLines);
 
     /// implement IRevisionGraphOption: Active if standard layout is disabled.
 

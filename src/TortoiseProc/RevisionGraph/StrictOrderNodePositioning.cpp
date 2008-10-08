@@ -93,7 +93,7 @@ void CStrictOrderNodePositioning::AssignColumns
 
     // prevent crossing lines / nodes
 
-    if (start->parentBranch != NULL)
+    if (reduceCrossLines->IsActive() && (start->parentBranch != NULL))
     {
         int connectionFirstRevision = start->parentBranch->node->GetRevision();
         int connectionLastRevision = firstRevision-1;
@@ -205,22 +205,26 @@ void CStrictOrderNodePositioning::AssignRows
             {
                 int sourceBottom = parent->rect.bottom + parent->treeShift.cy;
                 rowStart = max (rowStart, sourceBottom);
+                rowStart = max (rowStart, columnTops[column] + 6);
             }
 
             // copy sources as well
 
-            int maxTargetColumn = column;
-            for ( const CStandardLayoutNodeInfo* subBranch = node->firstSubBranch
-                ; subBranch != NULL
-                ; subBranch = subBranch->nextBranch)
+            if (reduceCrossLines->IsActive())
             {
-                maxTargetColumn = max (maxTargetColumn, subBranch->treeShift.cx);
-            }
+                int maxTargetColumn = column;
+                for ( const CStandardLayoutNodeInfo* subBranch = node->firstSubBranch
+                    ; subBranch != NULL
+                    ; subBranch = subBranch->nextBranch)
+                {
+                    maxTargetColumn = max (maxTargetColumn, subBranch->treeShift.cx);
+                }
 
-            int halfHeight = node->rect.Height() / 2;
-            for (int i = column+1; i <= maxTargetColumn; ++i)
-            {
-                rowStart = max (rowStart, columnTops[i] - halfHeight + 6);
+                int halfHeight = node->rect.Height() / 2;
+                for (int i = column+1; i <= maxTargetColumn; ++i)
+                {
+                    rowStart = max (rowStart, columnTops[i] - halfHeight + 6);
+                }
             }
         }
 
@@ -272,9 +276,11 @@ void CStrictOrderNodePositioning::ShiftNodes
 
 CStrictOrderNodePositioning::CStrictOrderNodePositioning 
     ( CRevisionGraphOptionList& list
-    , ILayoutOption* standardNodePositioning)
+    , IRevisionGraphOption* standardNodePositioning
+    , IRevisionGraphOption* reduceCrossLines)
     : CRevisionGraphOptionImpl<ILayoutOption, 200, 0> (list)
     , standardNodePositioning (standardNodePositioning)
+    , reduceCrossLines (reduceCrossLines)
 {
 }
 

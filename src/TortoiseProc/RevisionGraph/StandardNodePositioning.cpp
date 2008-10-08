@@ -229,7 +229,16 @@ CRect CStandardNodePositioning::BoundingRect
 CStandardNodePositioning::CStandardNodePositioning 
     ( CRevisionGraphOptionList& list)
     : CRevisionGraphOptionImpl<ILayoutOption, 200, ID_VIEW_GROUPBRANCHES> (list)
+    , reduceCrossLines (NULL)
 {
+}
+
+// link to sub-option
+
+void CStandardNodePositioning::SetReduceCrossLines 
+    (IRevisionGraphOption* reduceCrossLines)
+{
+    this->reduceCrossLines = reduceCrossLines;
 }
 
 // cast @a layout pointer to the respective modification
