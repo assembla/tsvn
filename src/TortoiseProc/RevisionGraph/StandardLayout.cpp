@@ -111,7 +111,8 @@ void CStandardLayout::SortNodes()
 // * create a node info object for every node
 // * calculate branch and tree sizes (in nodes)
 
-void CStandardLayout::InitializeNodes (const CVisibleGraphNode* start)
+void CStandardLayout::InitializeNodes ( const CVisibleGraphNode* start
+                                      , CStandardLayoutNodeInfo* parentBranch)
 {
     CStandardLayoutNodeInfo* previousInBranch = NULL;
     CStandardLayoutNodeInfo* lastInBranch = NULL;
@@ -131,6 +132,7 @@ void CStandardLayout::InitializeNodes (const CVisibleGraphNode* start)
         assert (nodeInfo.node == NULL);
         nodeInfo.node = node;
         nodeInfo.previousInBranch = previousInBranch;
+        nodeInfo.parentBranch = parentBranch;
         if (previousInBranch != NULL)
             previousInBranch->nextInBranch = &nodeInfo;
         
@@ -171,7 +173,7 @@ void CStandardLayout::InitializeNodes (const CVisibleGraphNode* start)
 
                 // add branch
 
-                InitializeNodes (subNode);
+                InitializeNodes (subNode, &nodeInfo);
 
                 // accumulate branch into sub-tree
 
@@ -213,7 +215,7 @@ void CStandardLayout::InitializeNodes (const CVisibleGraph* graph)
     nodes.resize (graph->GetNodeCount());
 
     for (size_t i = 0, count = graph->GetRootCount(); i < count; ++i)
-        InitializeNodes (graph->GetRoot (i));
+        InitializeNodes (graph->GetRoot (i), NULL);
 
     // every node info must actually refer to a node
 

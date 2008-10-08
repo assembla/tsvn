@@ -38,6 +38,7 @@ public:
 
     /// links for faster navigation
 
+    CStandardLayoutNodeInfo* parentBranch;
     CStandardLayoutNodeInfo* firstSubBranch;
     CStandardLayoutNodeInfo* nextInBranch;
     CStandardLayoutNodeInfo* previousInBranch;
@@ -139,7 +140,8 @@ private:
     /// layout creation
 
     void SortNodes();
-    void InitializeNodes (const CVisibleGraphNode* node);
+    void InitializeNodes ( const CVisibleGraphNode* node
+                         , CStandardLayoutNodeInfo* parentBranch);
     void InitializeNodes (const CVisibleGraph* graph);
 
     void CreateConnections();
