@@ -38,10 +38,21 @@ void CStandardNodePositioning::StackSubTree
     // shift subtree downwards until there is no overlap with upper sub-trees
 
     long subTreeMinY = 0;
-    for (size_t i = 0, count = branchColumnStarts.size(); i < count; ++i)
+    if (reduceCrossLines->IsActive())
     {
-        subTreeMinY = max ( subTreeMinY
-            , localColumnEnds[i+1] - branchColumnStarts[i] + node->rect.Height() / 2 + 10);
+        for (size_t i = 0, count = branchColumnStarts.size(); i < count; ++i)
+        {
+            subTreeMinY = max ( subTreeMinY
+                , localColumnEnds[i+1] + node->rect.Height() / 2 + 10);
+        }
+    }
+    else
+    {
+        for (size_t i = 0, count = branchColumnStarts.size(); i < count; ++i)
+        {
+            subTreeMinY = max ( subTreeMinY
+                , localColumnEnds[i+1] - branchColumnStarts[i] + node->rect.Height() / 2 + 10);
+        }
     }
 
     // store how much the sub-tree has to be shifted
