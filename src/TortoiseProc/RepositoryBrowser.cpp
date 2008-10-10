@@ -2769,7 +2769,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 					CBlame blame;
 					CString tempfile;
 					CString logfile;
-					tempfile = blame.BlameToTempFile(CTSVNPath(EscapeUrl(urlList[0])), dlg.StartRev, dlg.EndRev, dlg.EndRev, logfile, _T(""), TRUE, TRUE);
+					tempfile = blame.BlameToTempFile(CTSVNPath(EscapeUrl(urlList[0])), dlg.StartRev, dlg.EndRev, dlg.EndRev, logfile, SVN::GetOptionsString(dlg.m_bIgnoreEOL, dlg.m_IgnoreSpaces), TRUE, TRUE);
 					if (!tempfile.IsEmpty())
 					{
 						if (dlg.m_bTextView)
