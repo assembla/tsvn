@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2008-09-25 16:17+0100\n"
-"Last-Translator: Grokwik <grokwik@free.fr>\n"
+"PO-Revision-Date: 2008-10-12 20:21-0300\n"
+"Last-Translator: Humberto Osório <humberto@virtual.ufc.br>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -833,9 +833,8 @@ msgid "&Reset to Default"
 msgstr "&Restaurar padrão"
 
 #. Resource IDs: (114)
-#, fuzzy
 msgid "&Revert changes from these revisions"
-msgstr "Reverter as alterações destas revisões"
+msgstr "Reverter as alterações dessas revisões"
 
 #. Resource IDs: (113)
 msgid "&Revert changes from this revision"
@@ -923,8 +922,9 @@ msgid "&Tab size:"
 msgstr "&Tamanho da Tabulação:"
 
 #. Resource IDs: (1069)
+#, fuzzy
 msgid "&Tabbed Document"
-msgstr ""
+msgstr "Documento com A&bas"
 
 #. Resource IDs: (1382)
 msgid "&Test merge"
@@ -1165,12 +1165,14 @@ msgid "?"
 msgstr "?"
 
 #. Resource IDs: (579)
+#, fuzzy
 msgid "A list of user defined properties for files to show in the combo box"
-msgstr ""
+msgstr "Uma lista de propriedades definidas pelo usuário para arquivos a serem mostrados na caixa de combinação"
 
 #. Resource IDs: (579)
+#, fuzzy
 msgid "A list of user defined properties for folders to show in the combo box"
-msgstr ""
+msgstr "Uma lista de propriedades definidas pelo usuário para pastas a serem mostradas na caixa de combinação"
 
 #. Resource IDs: (201)
 msgid "A newer version is available. Please go to http://tortoisesvn.tigris.org and download the current version! Click _here_ to go directly to our website."
@@ -1264,11 +1266,13 @@ msgid "Active Files"
 msgstr "Arquivos ativos"
 
 #. Resource IDs: (3865)
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "ActiveX objects cannot be saved while exiting Windows!\n"
 "Discard all changes to %1?"
 msgstr ""
+"Objetos ActiveX não podem ser salvos enquanto o Windows está sendo encerrado!\n"
+"Descartar todas as alterações em %1?"
 
 #. Resource IDs: (155, 209, 229)
 msgid "Add"
@@ -1309,7 +1313,7 @@ msgstr "Adicionar à lista de &ignorados"
 
 #. Resource IDs: (1068)
 msgid "Add to Quick Access Toolbar"
-msgstr ""
+msgstr "Adicionar uma Barra de Ferramentas de Acesso Rápido"
 
 #. Resource IDs: (209, 1279)
 msgid "Add..."
@@ -1404,31 +1408,35 @@ msgstr "Todos os Arquivos (*.*)|*.*||"
 
 #. Resource IDs: (1008)
 msgid "All your changes will be lost! Do you really want to reset all toolbars and menus?"
-msgstr ""
+msgstr "Todas as alterações serão perdidas! Você realmente deseja reiniciar todas as barras de ferramentas e menus?"
 
 #. Resource IDs: (1008)
 msgid "All your changes will be lost! Do you really want to reset the keyboard assignments?"
-msgstr ""
+msgstr "Todas as alterações serão perdidas! Você realmente deseja reiniciar os atalhos de teclado?"
 
 #. Resource IDs: (1008)
 #, c-format
 msgid "All your changes will be lost! Do you really want to reset the menu '%s'?"
-msgstr ""
+msgstr "Todas as alterações serão perdidas! Você realmente deseja reiniciar o menu '%s'?"
 
 #. Resource IDs: (1007)
 #, c-format
 msgid "All your changes will be lost! Do you really want to reset the toolbar '%s'?"
-msgstr ""
+msgstr "Todas as alterações serão perdidas! Você realmente deseja reiniciar a barra de ferramentas '%s'?"
 
 #. Resource IDs: (345)
+#, fuzzy
 msgid ""
 "Allow different repositories to use the same URL, e.g. http://localhost/myrepos/\n"
 "Note: This will disable offline log access."
 msgstr ""
+"Permitir que repositórios diferentes usem a mesma URL, e.g. http://localhost/myrepos/\n"
+"Nota: O acesso offline ao histórico será desabilitado."
 
 #. Resource IDs: (197)
+#, fuzzy
 msgid "Always use the system locale settings to show times and dates"
-msgstr ""
+msgstr "Sempre utilizar as preferências de idioma para mostrar horários e datas "
 
 #. Resource IDs: (339)
 msgid "Amount of memory required to load the cache"
@@ -1493,8 +1501,9 @@ msgid "An unknown line type was found in line %d !"
 msgstr "Um tipo de linha desconhecido foi encontrado na linha %d !"
 
 #. Resource IDs: (65535)
+#, fuzzy
 msgid "Application Frame Menus: "
-msgstr ""
+msgstr "Menus de Aplicação:"
 
 # Pode ser: "aplica  um Diff (ou comparação de arquivos) a cópia de trabalho"?
 #. Resource IDs: (14)
@@ -1541,7 +1550,7 @@ msgstr "Ordenar &Verticalmente"
 
 #. Resource IDs: (199)
 msgid "Ask user"
-msgstr ""
+msgstr "Perguntar ao usuário"
 
 #. Resource IDs: (264)
 #, c-format
@@ -1549,8 +1558,9 @@ msgid "Assigned to changelist \"%s\""
 msgstr "Associado a lista de alterações \"%s\""
 
 #. Resource IDs: (16528)
+#, fuzzy
 msgid "Assigned to:"
-msgstr ""
+msgstr "Associado a:"
 
 #. Resource IDs: (77)
 #, c-format
@@ -1610,7 +1620,7 @@ msgstr "Ocultar automaticamente"
 
 #. Resource IDs: (1003)
 msgid "Auto Hide All"
-msgstr ""
+msgstr "Ocultar Tudo Automaticamente"
 
 #. Resource IDs: (99)
 msgid "Auto Rename"
@@ -1654,7 +1664,7 @@ msgstr "Média"
 
 #. Resource IDs: (32850)
 msgid "B&lack Style"
-msgstr ""
+msgstr "Estilo B&lack"
 
 #. Resource IDs: (1001)
 msgid "B&rowse..."
@@ -1678,6 +1688,8 @@ msgid ""
 "Bitmap\n"
 "a bitmap"
 msgstr ""
+"Bitmap\n"
+"um bitmap"
 
 #. Resource IDs: (114, 162)
 msgid "Blame"
@@ -1700,6 +1712,8 @@ msgid ""
 "Both /logmsg and /logmsgfile were specified!\n"
 "Only one of those can be specified."
 msgstr ""
+"/logmsg e /logmsgfile foram especificados!\n"
+"Apenas um deles pode ser especificado."
 
 #. Resource IDs: (1003)
 msgid "Br&owse..."
@@ -1743,16 +1757,15 @@ msgstr "Bug-ID / Issue-Nr:"
 
 #. Resource IDs: (16132)
 msgid "Button Appearance"
-msgstr ""
+msgstr "Aparência do Butão"
 
 #. Resource IDs: (1215)
 msgid "C&heck now"
 msgstr "&Verificar Agora"
 
 #. Resource IDs: (1132)
-#, fuzzy
 msgid "C&heck repository"
-msgstr "Verificar Repositório"
+msgstr "Verifi&car Repositório"
 
 #. Resource IDs: (65535)
 msgid "C&ommands:"
@@ -1780,8 +1793,9 @@ msgid "CAP"
 msgstr "CAP"
 
 #. Resource IDs: (199)
+#, fuzzy
 msgid "Cache size [kB]"
-msgstr ""
+msgstr "Tamanho do cache [kB]"
 
 #. Resource IDs: (1440)
 msgid "Cached Repositories"
@@ -1798,7 +1812,7 @@ msgstr "Duplo-clique na listagem de mensagens de log para comparar com revisão 
 
 #. Resource IDs: (3865)
 msgid "Can not activate a static ActiveX object."
-msgstr ""
+msgstr "Não foi possível ativar o objeto estático ActiveX."
 
 #. Resource IDs: (82)
 #, c-format
@@ -1820,7 +1834,7 @@ msgstr "Não foi possível copiar a imagem para a área de transferência!"
 
 #. Resource IDs: (1001)
 msgid "Can't create a new image!"
-msgstr ""
+msgstr "Não foi possível criar uma nova imagem!"
 
 #. Resource IDs: (1001)
 msgid "Can't customize menues!"
@@ -1828,7 +1842,7 @@ msgstr "Não é possível editar os menus!"
 
 #. Resource IDs: (1001)
 msgid "Can't paste bitmap image from the clipboard!"
-msgstr ""
+msgstr "Não foi possível colar a imagem que está na área de transferência!"
 
 #. Resource IDs: (2, 73, 99, 563, 1069)
 msgid "Cancel"
@@ -2188,6 +2202,10 @@ msgid ""
 "\n"
 "Are you sure that you want to continue the commit?"
 msgstr ""
+"Submetendo uma pasta que não está sob controle de versão não irá adicionar recursivamente seus ítens!\n"
+"Seria interessante adicionar essas pastas recursivamente usando o comando \"Adicionar...\" do menu de contexto.\n"
+"\n"
+"Você tem certeza que deseja continuar com a submissão?"
 
 #. Resource IDs: (274, 32784)
 msgid "Compare &HEAD revisions"
@@ -2269,7 +2287,7 @@ msgstr "Conflitos: %d"
 
 #. Resource IDs: (345)
 msgid "Connect to the repository server and download missing log data"
-msgstr ""
+msgstr "Conecta ao servidor do repositório e faça o download dos dados de histórico perdidos"
 
 #. Resource IDs: (65535)
 #, fuzzy
@@ -2630,6 +2648,8 @@ msgid ""
 "Creates a patch file from the differences of the two files\n"
 "Create patch file"
 msgstr ""
+"Cria um arquivo de correção a partir das diferenças entre dois arquivos\n"
+"Cria um arquivo de correção"
 
 #. Resource IDs: (10)
 msgid "Creates a repository database at the current location"
@@ -2675,15 +2695,15 @@ msgstr "Personalizar"
 
 #. Resource IDs: (17076)
 msgid "Customize Keyboard"
-msgstr ""
+msgstr "Personalização do Teclado"
 
 #. Resource IDs: (1069)
 msgid "Customize Quick Access Toolbar"
-msgstr ""
+msgstr "Personalização da Barra de Ferramentas de Acesso Rápido"
 
 #. Resource IDs: (1068)
 msgid "Customize Quick Access Toolbar..."
-msgstr ""
+msgstr "Personalização da Barra de Ferramentas de Acesso Rápido..."
 
 #. Resource IDs: (3603)
 msgid ""
@@ -2715,7 +2735,7 @@ msgstr "URL padrão:"
 
 #. Resource IDs: (1007)
 msgid "Default application menu. Appears when no documents are open."
-msgstr ""
+msgstr "Menu padrão de aplicação. Aparece quando não há documentos abertos."
 
 #. Resource IDs: (65535)
 msgid "Default path:"
@@ -2786,6 +2806,8 @@ msgid ""
 "Device Independent Bitmap\n"
 "a device independent bitmap"
 msgstr ""
+"Bitmap Independente de Dispositivo\n"
+"um bitmap independente de dispositivo"
 
 #. Resource IDs: (1277)
 msgid "Dialog sizes and positions"
@@ -2813,7 +2835,7 @@ msgstr "Comparando"
 
 #. Resource IDs: (14)
 msgid "Diffs the working copy file with the one before the last commit."
-msgstr ""
+msgstr "Diferencia o arquivo da cópia de trabalho do arquivo submetido anteriormente."
 
 #. Resource IDs: (65535)
 msgid "Directory:"
@@ -2839,7 +2861,7 @@ msgstr "Disparar exceção: %1"
 
 #. Resource IDs: (65535)
 msgid "Display &buttons in this order"
-msgstr ""
+msgstr "Mostra os &butões nessa ordem"
 
 #. Resource IDs: (3605)
 msgid ""
@@ -2911,6 +2933,9 @@ msgid ""
 "This will remove all Subversion admin directories from\n"
 "%s!"
 msgstr ""
+"Você deseja tirar o controle de versões dessa cópia de trabalho?\n"
+"Essa ação removerá todos os diretórios de administração do Subversion de \n"
+"%s!"
 
 #. Resource IDs: (76)
 msgid "Do you want to proceed?"
@@ -2967,9 +2992,8 @@ msgid "E&xact copy sources"
 msgstr "Cópia e&xata da fonte"
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "E&xclude paths:"
-msgstr "Excluir caminhos:"
+msgstr "E&xcluir caminhos:"
 
 #. Resource IDs: (105, 57665)
 msgid "E&xit"
@@ -3041,10 +3065,13 @@ msgid "Either the name or IP of the proxy server"
 msgstr "Nome ou IP do servidor proxy"
 
 #. Resource IDs: (1057)
+#, fuzzy
 msgid ""
 "Ellipse Tools\n"
 "Ellipse"
 msgstr ""
+"Ferramentas de Elipse\n"
+"Elipse"
 
 #. Resource IDs: (65535)
 msgid "Empty"
@@ -3076,28 +3103,28 @@ msgid "Encountered a hardware I/O error while accessing %1."
 msgstr "Foi encontrado um erro E/S de hardware durante o acesso a %1."
 
 #. Resource IDs: (3867)
-#, fuzzy, c-format
+#, c-format
 msgid "Encountered a locking violation while accessing %1."
-msgstr "Uma violação de bloqueio ocorreu ao acessar %1."
+msgstr "Houve uma violação dede bloqueio ao acessar %1."
 
 #. Resource IDs: (3867)
-#, fuzzy, c-format
+#, c-format
 msgid "Encountered a sharing violation while accessing %1."
-msgstr "Houve uma violação de compartilhamento durante o acesso a %1."
+msgstr "Houve uma violação de compartilhamento ao acessar %1."
 
 #. Resource IDs: (3843)
 msgid "Encountered an improper argument."
-msgstr ""
+msgstr "Encontrado um argumento impróprio."
 
 #. Resource IDs: (3859)
-#, fuzzy, c-format
+#, c-format
 msgid "Encountered an unexpected error while reading %1."
-msgstr "Um erro inesperado ocorreu ao ler %1."
+msgstr "Erro inesperado ao ler %1."
 
 #. Resource IDs: (3859)
-#, fuzzy, c-format
+#, c-format
 msgid "Encountered an unexpected error while writing %1."
-msgstr "Um erro inesperado ocorreu ao escrever %1."
+msgstr "Erro inesperado ao escrever %1."
 
 #. Resource IDs: (65535)
 msgid "End Revision"
@@ -3226,7 +3253,7 @@ msgstr "Exceções:"
 
 #. Resource IDs: (1002)
 msgid "Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
-msgstr ""
+msgstr "Executável (*.exe)|*.exe|Comando (*.com)|*.com|Informação (*.pdf)|*.pdf|Lote (*.bat)|*.bat|Todos os arquivos (*.*)|*.*||"
 
 #. Resource IDs: (1002)
 msgid "Existing"
@@ -3263,7 +3290,7 @@ msgstr "Exportar diretório:"
 
 #. Resource IDs: (345)
 msgid "Export the selected cache as a set of Comma Separated Value (CSV) files"
-msgstr ""
+msgstr "Exporta o cache selecionado como um conjunto de arquivos de Valores Separados por Vírgula - Comma Separated Value (CSV)"
 
 #. Resource IDs: (79)
 msgid "Export unversioned files too"
@@ -3585,9 +3612,8 @@ msgid "For complete history deselect \"Stop on copy/rename\""
 msgstr "Para um histórico completo desmarque \"Parar na cópia/mudança de nome\" "
 
 #. Resource IDs: (1064)
-#, fuzzy
 msgid "Forward"
-msgstr "Voltar"
+msgstr "Adiantar"
 
 #. Resource IDs: (65535)
 msgid "From URL:"
@@ -9270,9 +9296,9 @@ msgid "there are conflicting modifications."
 msgstr "existem alterações conflitantes."
 
 #. Resource IDs: (3845)
-#, fuzzy, c-format
+#, c-format
 msgid "to %1"
-msgstr "to %1"
+msgstr "para %1"
 
 #. Resource IDs: (80, 103, 284)
 #, c-format
