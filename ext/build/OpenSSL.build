@@ -24,8 +24,6 @@
 				<arg value="Configure" />
 				<arg value="VC-WIN32" />
 				<arg value="-D_USE_32BIT_TIME_T" />
-				<arg value="enable-capieng" />
-				<arg value="-DOPENSSL_SSL_CLIENT_ENGINE_AUTO=capi" />
 			</exec>
 			<exec program="cmd" workingdir="..\..\..\common\openssl">
 				<arg value="/c" />
