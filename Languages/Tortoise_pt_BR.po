@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2008-10-29 22:56-0300\n"
+"PO-Revision-Date: 2008-10-29 22:58-0300\n"
 "Last-Translator: Humberto Osório <humberto@virtual.ufc.br>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -2179,6 +2179,11 @@ msgstr "submeter - TortoiseSVN"
 msgid "Commit to:"
 msgstr "Submeter para:"
 
+#. Resource IDs: (209)
+#, fuzzy
+msgid "Commit..."
+msgstr "&Submeter..."
+
 #. Resource IDs: (244)
 msgid "Commits by author"
 msgstr "Submissões por autor"
@@ -3861,7 +3866,8 @@ msgid "Hint: Press F5 to refresh the selected subtree and Ctrl-F5 to load all ch
 msgstr "Dica: Pressione F5 para atualizar a sub-árvore selecionada e Ctrl-F5 para carregar também todos os filhos"
 
 #. Resource IDs: (16519)
-msgid "Hint: select the context menu, change the page to \"Commands\" and drag the toolbar buttons into the menu window."
+#, fuzzy
+msgid "Hint: select the context menu, change the page to 'Commands' and drag the toolbar buttons into the menu window."
 msgstr "Dica: selecione o menu de contexto, altere a página para \"Comandos\" e arraste os botões da barra de ferramentas para a janela de menu."
 
 #. Resource IDs: (1064)
@@ -4757,10 +4763,6 @@ msgstr "Combinar um intervalo de revisões"
 msgid "Merge all"
 msgstr "Combinar tudo"
 
-#. Resource IDs: (14)
-msgid "Merge all..."
-msgstr "Combinar tudo..."
-
 #. Resource IDs: (65535)
 msgid "Merge depth:"
 msgstr "Combinar profundidade:"
@@ -4773,6 +4775,11 @@ msgstr "Combinação não interativa"
 #. Resource IDs: (595, 65535)
 msgid "Merge options"
 msgstr "Opções de combinação"
+
+#. Resource IDs: (14)
+#, fuzzy
+msgid "Merge reintegrate..."
+msgstr "Reintegrar Combinação"
 
 #. Resource IDs: (595)
 msgid "Merge revision range"
@@ -4820,6 +4827,10 @@ msgstr "Combinando"
 #, c-format
 msgid "Merging %s into %s, %s"
 msgstr "Combinando %s em %s, %s"
+
+#. Resource IDs: (264)
+msgid "Merging differences between repository urls"
+msgstr ""
 
 #. Resource IDs: (229)
 #, c-format
@@ -6175,6 +6186,16 @@ msgstr "Tentar novamente"
 #. Resource IDs: (1423)
 msgid "Reverse merge"
 msgstr "Reverter combinação"
+
+#. Resource IDs: (264)
+#, fuzzy, c-format
+msgid "Reverse merging %ld"
+msgstr "Reverter combinação"
+
+#. Resource IDs: (264)
+#, fuzzy, c-format
+msgid "Reverse merging %ld through %ld"
+msgstr "Combinando r%ld através de r%ld"
 
 #. Resource IDs: (175, 229)
 msgid "Revert"
@@ -9467,6 +9488,8 @@ msgstr "Sim"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "Merge all..."
+#~ msgstr "Combinar tudo..."
 #~ msgid "Bro&wse..."
 #~ msgstr "Nave&gar..."
 #~ msgid "Brows&e..."
