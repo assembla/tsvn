@@ -54,9 +54,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2008-07-20 22:35 +0000\n"
-"PO-Revision-Date: 2008-09-10 10:30+0800\n"
-"Last-Translator: Dongsheng Song <dongsheng@users.sourceforge.net>\n"
+"POT-Creation-Date: 2008-12-01 21:44 +0000\n"
+"PO-Revision-Date: 2008-12-02 11:37+0800\n"
+"Last-Translator: Dongsheng Song <dongsheng.song@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3306,11 +3306,12 @@ msgstr ""
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:2271
+#, fuzzy
 msgid ""
 "Next you need to create an SSL certificate. To do that open a command prompt "
 "(DOS-Box) and change to the Apache folder (e.g. <filename>C:\\program files"
 "\\apache group\\apache2</filename>) and type the following command: <screen>\n"
-"bin\\openssl req -config bin\\openssl.cnf -new -out my-server.csr\n"
+"bin\\openssl req -config conf\\openssl.cnf -new -out my-server.csr\n"
 "</screen> You will be asked for a passphrase. Please don't use simple words "
 "but whole sentences, e.g. a part of a poem. The longer the phrase the better. "
 "Also you have to enter the URL of your server. All other questions are "
@@ -4948,6 +4949,9 @@ msgid ""
 "&lt;a href=\"tsvn:https://tortoisesvn.tigris.org/svn/tortoisesvn/trunk\"&gt;\n"
 "&lt;/a&gt;\n"
 msgstr ""
+"\n"
+"&lt;a href=\"tsvn:https://tortoisesvn.tigris.org/svn/tortoisesvn/trunk\"&gt;\n"
+"&lt;/a&gt;\n"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:3424
@@ -4969,6 +4973,9 @@ msgid ""
 "&lt;a href=\"tsvn:https://tortoisesvn.tigris.org/svn/tortoisesvn/trunk\"&gt;\n"
 "&lt;img src=TortoiseCheckout.png&gt;&lt;/a&gt;\n"
 msgstr ""
+"\n"
+"&lt;a href=\"tsvn:https://tortoisesvn.tigris.org/svn/tortoisesvn/trunk\"&gt;\n"
+"&lt;img src=TortoiseCheckout.png&gt;&lt;/a&gt;\n"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:3432
@@ -5064,7 +5071,7 @@ msgstr "开始"
 #. (title)
 #. (title)
 #: ../source/TortoiseSVN_en.xml:3506 ../source/TortoiseSVN_en.xml:5014
-#: ../source/TortoiseSVN_en.xml:14944
+#: ../source/TortoiseSVN_en.xml:14939
 msgid "Icon Overlays"
 msgstr "图标重载"
 
@@ -5387,7 +5394,7 @@ msgstr "向版本库增加文件"
 #. (title)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:3718 ../source/TortoiseSVN_en.xml:13715
-#: ../source/TortoiseSVN_en.xml:14875 ../source/TortoiseSVN_en.xml:15636
+#: ../source/TortoiseSVN_en.xml:14870 ../source/TortoiseSVN_en.xml:15637
 msgid "Import"
 msgstr "导入"
 
@@ -6014,7 +6021,7 @@ msgstr "只检出目录。不包含其中的文件或子目录。"
 #. (term)
 #. (listitem)
 #: ../source/TortoiseSVN_en.xml:4200 ../source/TortoiseSVN_en.xml:8079
-#: ../source/TortoiseSVN_en.xml:14792
+#: ../source/TortoiseSVN_en.xml:14787
 msgid "Working copy"
 msgstr "工作副本"
 
@@ -7160,7 +7167,7 @@ msgstr ""
 
 #. (primary)
 #. (primary)
-#: ../source/TortoiseSVN_en.xml:5016 ../source/TortoiseSVN_en.xml:14949
+#: ../source/TortoiseSVN_en.xml:5016 ../source/TortoiseSVN_en.xml:14944
 msgid "overlays"
 msgstr "重载"
 
@@ -7382,7 +7389,7 @@ msgstr "修改"
 
 #. (title)
 #. (title)
-#: ../source/TortoiseSVN_en.xml:5156 ../source/TortoiseSVN_en.xml:14639
+#: ../source/TortoiseSVN_en.xml:5156 ../source/TortoiseSVN_en.xml:14634
 msgid "Check for Modifications"
 msgstr "检查所作的修改"
 
@@ -10581,7 +10588,7 @@ msgstr ""
 #. (title)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:7438 ../source/TortoiseSVN_en.xml:13703
-#: ../source/TortoiseSVN_en.xml:14744 ../source/TortoiseSVN_en.xml:15529
+#: ../source/TortoiseSVN_en.xml:14739 ../source/TortoiseSVN_en.xml:15530
 msgid "Cleanup"
 msgstr "清理"
 
@@ -11463,7 +11470,7 @@ msgstr ""
 
 #. (term)
 #. (listitem)
-#: ../source/TortoiseSVN_en.xml:8053 ../source/TortoiseSVN_en.xml:14790
+#: ../source/TortoiseSVN_en.xml:8053 ../source/TortoiseSVN_en.xml:14785
 msgid "HEAD revision in the repository"
 msgstr "版本库中的最新版本"
 
@@ -11944,6 +11951,7 @@ msgstr ""
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8399
+#, fuzzy
 msgid ""
 "If you have already merged some changes from this branch, hopefully you will "
 "have made a note of the last revision merged in the log message when you "
@@ -11951,7 +11959,7 @@ msgid ""
 "guibutton> for the Working Copy to trace that log message. Use the end point "
 "of the last merge as the start point for this merge. For example, if you have "
 "merged revisions 37 to 39 last time, then the start point for this merge "
-"should be revision 39."
+"should be revision 40."
 msgstr ""
 "如果你已经从这个分支合并了一些修改，希望你在提交日志中注明最后一个合并的版本"
 "号。这时，你可以在工作服本上使用<guibutton>显示日志</guibutton>对话框跟踪日"
@@ -11994,9 +12002,8 @@ msgstr "复兴"
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8438
-#, fuzzy
 msgid "The Merge Wizard - Reintegrate Merge"
-msgstr "合并向导 - 树合并"
+msgstr "合并向导 - 复兴合并"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8436
@@ -12424,15 +12431,13 @@ msgstr ""
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:8733
-#, fuzzy
 msgid "merge reintegrate"
-msgstr "复兴"
+msgstr "合并复兴分枝"
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:8745
-#, fuzzy
 msgid "The Merge reintegrate Dialog"
-msgstr "合并全部对话框"
+msgstr "合并复兴分枝对话框"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8735
@@ -16506,7 +16511,7 @@ msgid ""
 "TortoiseSVN caches log messages fetched by the Show Log dialog to save time "
 "when you next show the log. If someone else edits a log message and you "
 "already have that message cached, you will not see the change until you clear "
-"the cache. Log message caching is enabled on the <guilabel>Dialogs 1</"
+"the cache. Log message caching is enabled on the <guilabel>Log Cache</"
 "guilabel> tab."
 msgstr ""
 
@@ -16710,9 +16715,8 @@ msgstr ""
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:11855
-#, fuzzy
 msgid "Last update"
-msgstr "更新之后"
+msgstr "最近更新"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:11857
@@ -16766,9 +16770,8 @@ msgstr ""
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:11900
-#, fuzzy
 msgid "Max revision"
-msgstr "修订版本"
+msgstr "最大版本号"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:11902
@@ -16777,9 +16780,8 @@ msgstr ""
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:11908
-#, fuzzy
 msgid "Revision count"
-msgstr "Revision"
+msgstr "版本计数"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:11910
@@ -17429,9 +17431,8 @@ msgstr "COM"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:12435
-#, fuzzy
 msgid "version number in files"
-msgstr "Subversion配置文件"
+msgstr "文件中的版本号"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:12438
@@ -17514,7 +17515,7 @@ msgstr "列出可用的命令行开关"
 #. (title)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:12496 ../source/TortoiseSVN_en.xml:13711
-#: ../source/TortoiseSVN_en.xml:14802 ../source/TortoiseSVN_en.xml:15812
+#: ../source/TortoiseSVN_en.xml:14797 ../source/TortoiseSVN_en.xml:15813
 msgid "Switch"
 msgstr "切换"
 
@@ -17525,7 +17526,7 @@ msgstr "切换"
 #. (entry)
 #: ../source/TortoiseSVN_en.xml:12497 ../source/TortoiseSVN_en.xml:12582
 #: ../source/TortoiseSVN_en.xml:12790 ../source/TortoiseSVN_en.xml:13967
-#: ../source/TortoiseSVN_en.xml:14372
+#: ../source/TortoiseSVN_en.xml:14367
 msgid "Description"
 msgstr "描述"
 
@@ -17787,7 +17788,7 @@ msgstr "$WCNEEDSLOCK?TText:FText$"
 #. (literal)
 #: ../source/TortoiseSVN_en.xml:12678
 msgid "svn:needs-lock"
-msgstr ""
+msgstr "svn:needs-lock"
 
 #. (entry)
 #: ../source/TortoiseSVN_en.xml:12675
@@ -17950,9 +17951,8 @@ msgstr "COM 接口"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:12775
-#, fuzzy
 msgid "COM SubWCRev interface"
-msgstr "COM 接口"
+msgstr "SubWCRev 的 COM 接口"
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:12783
@@ -18283,15 +18283,13 @@ msgstr "日志信息"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:12999
-#, fuzzy
 msgid "commit message"
-msgstr "提交日志信息"
+msgstr "提交信息"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:13002
-#, fuzzy
 msgid "empty message"
-msgstr "日志信息"
+msgstr "空信息"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:13004
@@ -18425,13 +18423,11 @@ msgstr "回滚"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:13088
-#, fuzzy
 msgid "undo commit"
-msgstr "提交"
+msgstr "撤销提交"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:13091
-#, fuzzy
 msgid "undo change"
 msgstr "撤消更改"
 
@@ -18629,9 +18625,8 @@ msgstr "比较文件"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:13243
-#, fuzzy
 msgid "changes"
-msgstr "修改列表"
+msgstr "修改"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:13245
@@ -18983,9 +18978,8 @@ msgstr ""
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:13510
-#, fuzzy
 msgid "Useful Tips For Administrators"
-msgstr "管理员"
+msgstr "对管理员有用的技巧"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:13512
@@ -19007,7 +19001,7 @@ msgstr "组策略"
 
 #. (primary)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13524 ../source/TortoiseSVN_en.xml:15620
+#: ../source/TortoiseSVN_en.xml:13524 ../source/TortoiseSVN_en.xml:15621
 msgid "GPO"
 msgstr "GPO"
 
@@ -19269,54 +19263,54 @@ msgstr "菜单入口"
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13683 ../source/TortoiseSVN_en.xml:14496
-#: ../source/TortoiseSVN_en.xml:15520
+#: ../source/TortoiseSVN_en.xml:13683 ../source/TortoiseSVN_en.xml:14491
+#: ../source/TortoiseSVN_en.xml:15521
 msgid "Checkout"
 msgstr "检出"
 
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13687 ../source/TortoiseSVN_en.xml:14514
-#: ../source/TortoiseSVN_en.xml:15826
+#: ../source/TortoiseSVN_en.xml:13687 ../source/TortoiseSVN_en.xml:14509
+#: ../source/TortoiseSVN_en.xml:15827
 msgid "Update"
 msgstr "更新"
 
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13691 ../source/TortoiseSVN_en.xml:14553
-#: ../source/TortoiseSVN_en.xml:15546
+#: ../source/TortoiseSVN_en.xml:13691 ../source/TortoiseSVN_en.xml:14548
+#: ../source/TortoiseSVN_en.xml:15547
 msgid "Commit"
 msgstr "提交"
 
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13695 ../source/TortoiseSVN_en.xml:14865
-#: ../source/TortoiseSVN_en.xml:15463
+#: ../source/TortoiseSVN_en.xml:13695 ../source/TortoiseSVN_en.xml:14860
+#: ../source/TortoiseSVN_en.xml:15464
 msgid "Add"
 msgstr "添加"
 
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13699 ../source/TortoiseSVN_en.xml:14722
-#: ../source/TortoiseSVN_en.xml:15759
+#: ../source/TortoiseSVN_en.xml:13699 ../source/TortoiseSVN_en.xml:14717
+#: ../source/TortoiseSVN_en.xml:15760
 msgid "Revert"
 msgstr "恢复"
 
 #. (entry)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13707 ../source/TortoiseSVN_en.xml:15747
+#: ../source/TortoiseSVN_en.xml:13707 ../source/TortoiseSVN_en.xml:15748
 msgid "Resolve"
 msgstr "解决"
 
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13719 ../source/TortoiseSVN_en.xml:14826
-#: ../source/TortoiseSVN_en.xml:15601
+#: ../source/TortoiseSVN_en.xml:13719 ../source/TortoiseSVN_en.xml:14821
+#: ../source/TortoiseSVN_en.xml:15602
 msgid "Export"
 msgstr "输出"
 
@@ -19327,29 +19321,29 @@ msgstr "在当前位置创建版本库"
 
 #. (entry)
 #. (title)
-#: ../source/TortoiseSVN_en.xml:13727 ../source/TortoiseSVN_en.xml:14778
+#: ../source/TortoiseSVN_en.xml:13727 ../source/TortoiseSVN_en.xml:14773
 msgid "Branch/Tag"
 msgstr "分支/标记"
 
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13731 ../source/TortoiseSVN_en.xml:14809
-#: ../source/TortoiseSVN_en.xml:15673
+#: ../source/TortoiseSVN_en.xml:13731 ../source/TortoiseSVN_en.xml:14804
+#: ../source/TortoiseSVN_en.xml:15674
 msgid "Merge"
 msgstr "合并"
 
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13735 ../source/TortoiseSVN_en.xml:14716
-#: ../source/TortoiseSVN_en.xml:15580
+#: ../source/TortoiseSVN_en.xml:13735 ../source/TortoiseSVN_en.xml:14711
+#: ../source/TortoiseSVN_en.xml:15581
 msgid "Delete"
 msgstr "删除"
 
 #. (entry)
 #. (title)
-#: ../source/TortoiseSVN_en.xml:13739 ../source/TortoiseSVN_en.xml:14710
+#: ../source/TortoiseSVN_en.xml:13739 ../source/TortoiseSVN_en.xml:14705
 msgid "Rename"
 msgstr "改名"
 
@@ -19361,28 +19355,28 @@ msgstr "更新到版本"
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13747 ../source/TortoiseSVN_en.xml:14600
-#: ../source/TortoiseSVN_en.xml:15592
+#: ../source/TortoiseSVN_en.xml:13747 ../source/TortoiseSVN_en.xml:14595
+#: ../source/TortoiseSVN_en.xml:15593
 msgid "Diff"
 msgstr "差异"
 
 #. (entry)
 #. (title)
-#: ../source/TortoiseSVN_en.xml:13751 ../source/TortoiseSVN_en.xml:14621
+#: ../source/TortoiseSVN_en.xml:13751 ../source/TortoiseSVN_en.xml:14616
 msgid "Show Log"
 msgstr "显示日志"
 
 #. (entry)
 #. (title)
-#: ../source/TortoiseSVN_en.xml:13755 ../source/TortoiseSVN_en.xml:14696
+#: ../source/TortoiseSVN_en.xml:13755 ../source/TortoiseSVN_en.xml:14691
 msgid "Edit Conflicts"
 msgstr "编辑冲突"
 
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13759 ../source/TortoiseSVN_en.xml:14851
-#: ../source/TortoiseSVN_en.xml:15719
+#: ../source/TortoiseSVN_en.xml:13759 ../source/TortoiseSVN_en.xml:14846
+#: ../source/TortoiseSVN_en.xml:15720
 msgid "Relocate"
 msgstr "重新定位"
 
@@ -19404,20 +19398,20 @@ msgstr "版本库浏览器"
 #. (entry)
 #. (title)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13775 ../source/TortoiseSVN_en.xml:14885
-#: ../source/TortoiseSVN_en.xml:15484
+#: ../source/TortoiseSVN_en.xml:13775 ../source/TortoiseSVN_en.xml:14880
+#: ../source/TortoiseSVN_en.xml:15485
 msgid "Blame"
 msgstr "追溯"
 
 #. (entry)
 #. (title)
-#: ../source/TortoiseSVN_en.xml:13779 ../source/TortoiseSVN_en.xml:14911
+#: ../source/TortoiseSVN_en.xml:13779 ../source/TortoiseSVN_en.xml:14906
 msgid "Create Patch"
 msgstr "创建补丁"
 
 #. (entry)
 #. (title)
-#: ../source/TortoiseSVN_en.xml:13783 ../source/TortoiseSVN_en.xml:14921
+#: ../source/TortoiseSVN_en.xml:13783 ../source/TortoiseSVN_en.xml:14916
 msgid "Apply Patch"
 msgstr "应用补丁(Apply Patch)"
 
@@ -19428,7 +19422,7 @@ msgstr "版本图"
 
 #. (entry)
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:13791 ../source/TortoiseSVN_en.xml:15645
+#: ../source/TortoiseSVN_en.xml:13791 ../source/TortoiseSVN_en.xml:15646
 msgid "Lock"
 msgstr "锁"
 
@@ -19531,19 +19525,19 @@ msgstr ""
 
 #. (title)
 #. (title)
-#: ../source/TortoiseSVN_en.xml:13868 ../source/TortoiseSVN_en.xml:14494
+#: ../source/TortoiseSVN_en.xml:13868 ../source/TortoiseSVN_en.xml:14489
 msgid "TortoiseSVN Commands"
 msgstr "TortoiseSVN 命令"
 
 #. (primary)
 #. (primary)
-#: ../source/TortoiseSVN_en.xml:13870 ../source/TortoiseSVN_en.xml:14339
+#: ../source/TortoiseSVN_en.xml:13870 ../source/TortoiseSVN_en.xml:14334
 msgid "automation"
 msgstr "自动化"
 
 #. (primary)
 #. (primary)
-#: ../source/TortoiseSVN_en.xml:13873 ../source/TortoiseSVN_en.xml:14342
+#: ../source/TortoiseSVN_en.xml:13873 ../source/TortoiseSVN_en.xml:14337
 msgid "command line"
 msgstr "命令行"
 
@@ -19717,28 +19711,28 @@ msgstr "显示关于对话框。如果没有给命令也会显示。"
 #: ../source/TortoiseSVN_en.xml:14059 ../source/TortoiseSVN_en.xml:14068
 #: ../source/TortoiseSVN_en.xml:14074 ../source/TortoiseSVN_en.xml:14081
 #: ../source/TortoiseSVN_en.xml:14082 ../source/TortoiseSVN_en.xml:14084
-#: ../source/TortoiseSVN_en.xml:14090 ../source/TortoiseSVN_en.xml:14102
-#: ../source/TortoiseSVN_en.xml:14110 ../source/TortoiseSVN_en.xml:14131
-#: ../source/TortoiseSVN_en.xml:14138 ../source/TortoiseSVN_en.xml:14148
-#: ../source/TortoiseSVN_en.xml:14154 ../source/TortoiseSVN_en.xml:14187
-#: ../source/TortoiseSVN_en.xml:14193 ../source/TortoiseSVN_en.xml:14206
-#: ../source/TortoiseSVN_en.xml:14215 ../source/TortoiseSVN_en.xml:14221
-#: ../source/TortoiseSVN_en.xml:14229 ../source/TortoiseSVN_en.xml:14264
-#: ../source/TortoiseSVN_en.xml:14274 ../source/TortoiseSVN_en.xml:14281
-#: ../source/TortoiseSVN_en.xml:14288 ../source/TortoiseSVN_en.xml:14297
-#: ../source/TortoiseSVN_en.xml:14314
+#: ../source/TortoiseSVN_en.xml:14090 ../source/TortoiseSVN_en.xml:14097
+#: ../source/TortoiseSVN_en.xml:14105 ../source/TortoiseSVN_en.xml:14126
+#: ../source/TortoiseSVN_en.xml:14133 ../source/TortoiseSVN_en.xml:14143
+#: ../source/TortoiseSVN_en.xml:14149 ../source/TortoiseSVN_en.xml:14182
+#: ../source/TortoiseSVN_en.xml:14188 ../source/TortoiseSVN_en.xml:14201
+#: ../source/TortoiseSVN_en.xml:14210 ../source/TortoiseSVN_en.xml:14216
+#: ../source/TortoiseSVN_en.xml:14224 ../source/TortoiseSVN_en.xml:14259
+#: ../source/TortoiseSVN_en.xml:14269 ../source/TortoiseSVN_en.xml:14276
+#: ../source/TortoiseSVN_en.xml:14283 ../source/TortoiseSVN_en.xml:14292
+#: ../source/TortoiseSVN_en.xml:14309
 msgid "/path"
 msgstr "/path"
 
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:13984 ../source/TortoiseSVN_en.xml:14156
+#: ../source/TortoiseSVN_en.xml:13984 ../source/TortoiseSVN_en.xml:14151
 msgid "/startrev:xxx"
 msgstr "/startrev:xxx"
 
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:13985 ../source/TortoiseSVN_en.xml:14157
+#: ../source/TortoiseSVN_en.xml:13985 ../source/TortoiseSVN_en.xml:14152
 msgid "/endrev:xxx"
 msgstr "/endrev:xxx"
 
@@ -19759,7 +19753,7 @@ msgstr ""
 
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:13993 ../source/TortoiseSVN_en.xml:14112
+#: ../source/TortoiseSVN_en.xml:13993 ../source/TortoiseSVN_en.xml:14107
 msgid "/url"
 msgstr "/url"
 
@@ -19813,19 +19807,19 @@ msgstr ""
 
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14021 ../source/TortoiseSVN_en.xml:14114
+#: ../source/TortoiseSVN_en.xml:14021 ../source/TortoiseSVN_en.xml:14109
 msgid "/logmsg"
 msgstr "/logmsg"
 
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14024 ../source/TortoiseSVN_en.xml:14117
+#: ../source/TortoiseSVN_en.xml:14024 ../source/TortoiseSVN_en.xml:14112
 msgid "/logmsgfile:path"
 msgstr "/logmsgfile:path"
 
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14025 ../source/TortoiseSVN_en.xml:14118
+#: ../source/TortoiseSVN_en.xml:14025 ../source/TortoiseSVN_en.xml:14113
 msgid "path"
 msgstr "path"
 
@@ -19873,8 +19867,8 @@ msgstr "清理中断和终止的操作，将工作副本的<placeholder-1/>解�
 #. (option)
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14060 ../source/TortoiseSVN_en.xml:14141
-#: ../source/TortoiseSVN_en.xml:14307
+#: ../source/TortoiseSVN_en.xml:14060 ../source/TortoiseSVN_en.xml:14136
+#: ../source/TortoiseSVN_en.xml:14302
 msgid "/noquestion"
 msgstr "/noquestion"
 
@@ -19909,34 +19903,15 @@ msgstr ""
 "将<placeholder-1/>的工作副本导出到另一个目录，如果<placeholder-2/>指向另一个未"
 "版本控制目录，对话框会询问要导出到<placeholder-3/>的URL。"
 
-#. (option)
-#: ../source/TortoiseSVN_en.xml:14093
-msgid "/mergefrom:xxx"
-msgstr "/mergefrom:xxx"
-
-#. (option)
-#: ../source/TortoiseSVN_en.xml:14094
-msgid "/mergeto:xxx"
-msgstr "/mergeto:xxx"
-
-#. (option)
-#: ../source/TortoiseSVN_en.xml:14095
-msgid "/fromurl:URL"
-msgstr "/fromurl:URL"
-
 #. (entry)
 #: ../source/TortoiseSVN_en.xml:14089
+#, fuzzy
 msgid ""
-"Opens the merge dialog. The <placeholder-1/> specifies the target directory. "
-"Three additional options can be set: <placeholder-2/>, <placeholder-3/> and "
-"<placeholder-4/>. These pre-fill the relevant fields in the merge dialog."
-msgstr ""
-"打开合并对话框，<placeholder-1/> 指定了目标目录，可以设置另外三个参数: "
-"<placeholder-2/>、<placeholder-3/>和<placeholder-4/>，这些值将会预先填入相关的"
-"字段。"
+"Opens the merge dialog. The <placeholder-1/> specifies the target directory."
+msgstr "打开选项对话框。<placeholder-1/> 指定目标目录。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14101
+#: ../source/TortoiseSVN_en.xml:14096
 #, fuzzy
 msgid ""
 "Opens the merge all dialog. The <placeholder-1/> specifies the target "
@@ -19944,7 +19919,7 @@ msgid ""
 msgstr "打开选项对话框。<placeholder-1/> 指定目标目录。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14108
+#: ../source/TortoiseSVN_en.xml:14103
 #, fuzzy
 msgid ""
 "Brings up the branch/tag dialog. The <placeholder-1/> is the working copy to "
@@ -19961,17 +19936,17 @@ msgstr ""
 "<placeholder-5/>完成这个任务。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14124
+#: ../source/TortoiseSVN_en.xml:14119
 msgid "Opens the settings dialog."
 msgstr "打开设置对话框。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14130
+#: ../source/TortoiseSVN_en.xml:14125
 msgid "Removes the file(s) in <placeholder-1/> from version control."
 msgstr "从版本控制里移除<placeholder-1/>中的文件。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14137
+#: ../source/TortoiseSVN_en.xml:14132
 msgid ""
 "Renames the file in <placeholder-1/>. The new name for the file is asked with "
 "a dialog. To avoid the question about renaming similar files in one step, "
@@ -19983,18 +19958,18 @@ msgstr ""
 #. (option)
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14150 ../source/TortoiseSVN_en.xml:14152
-#: ../source/TortoiseSVN_en.xml:14158
+#: ../source/TortoiseSVN_en.xml:14145 ../source/TortoiseSVN_en.xml:14147
+#: ../source/TortoiseSVN_en.xml:14153
 msgid "/path2"
 msgstr "/path2"
 
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14158
+#: ../source/TortoiseSVN_en.xml:14153
 msgid "/blame"
 msgstr "/blame"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14146
+#: ../source/TortoiseSVN_en.xml:14141
 #, fuzzy
 msgid ""
 "Starts the external diff program specified in the TortoiseSVN settings. The "
@@ -20010,7 +19985,7 @@ msgstr ""
 ">，比较程序会比较<placeholder-4/>和它的 BASE。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14166
+#: ../source/TortoiseSVN_en.xml:14161
 msgid ""
 "Depending on the URLs and revisions to compare, this either shows a unified "
 "diff (if the option <option>unified</option> is set), a dialog with a list of "
@@ -20019,7 +19994,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14173
+#: ../source/TortoiseSVN_en.xml:14168
 msgid ""
 "The options <option>url1</option>, <option>url2</option>, <option>revision1</"
 "option> and <option>revision2</option> must be specified. The options "
@@ -20028,7 +20003,7 @@ msgid ""
 msgstr ""
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14184
+#: ../source/TortoiseSVN_en.xml:14179
 #, fuzzy
 msgid ""
 "Starts the conflict editor specified in the TortoiseSVN settings with the "
@@ -20038,19 +20013,19 @@ msgstr ""
 "件。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14192
+#: ../source/TortoiseSVN_en.xml:14187
 msgid ""
 "Opens the relocate dialog. The <placeholder-1/> specifies the working copy "
 "path to relocate."
 msgstr "打开重定位对话框，<placeholder-1/>指定了重定位的工作副本路径。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14199
+#: ../source/TortoiseSVN_en.xml:14194
 msgid "Opens the help file."
 msgstr "打开帮助文件"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14205
+#: ../source/TortoiseSVN_en.xml:14200
 msgid ""
 "Opens the check-for-modifications dialog. The <placeholder-1/> specifies the "
 "working copy directory."
@@ -20058,17 +20033,17 @@ msgstr "打开为修改检出对话框，<placeholder-1/> 指定了工作副本�
 
 #. (option)
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14217 ../source/TortoiseSVN_en.xml:14219
+#: ../source/TortoiseSVN_en.xml:14212 ../source/TortoiseSVN_en.xml:14214
 msgid "/rev:xxx"
 msgstr "/rev:xxx"
 
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14222
+#: ../source/TortoiseSVN_en.xml:14217
 msgid "/projectpropertiespath:path/to/wc"
 msgstr "/projectpropertiespath:path/to/wc"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14212
+#: ../source/TortoiseSVN_en.xml:14207
 #, fuzzy
 msgid ""
 "Starts the repository browser dialog, pointing to the URL of the working copy "
@@ -20083,12 +20058,12 @@ msgstr ""
 "省略<placeholder-4/>，缺省是HEAD。"
 
 #. (literal)
-#: ../source/TortoiseSVN_en.xml:14230
+#: ../source/TortoiseSVN_en.xml:14225
 msgid "svn:ignore"
 msgstr "svn:ignore"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14228
+#: ../source/TortoiseSVN_en.xml:14223
 msgid ""
 "Adds all targets in <placeholder-1/> to the ignore list, i.e. adds the "
 "<placeholder-2/> property to those files."
@@ -20097,12 +20072,12 @@ msgstr ""
 "2/> 属性。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14237
+#: ../source/TortoiseSVN_en.xml:14232
 msgid "Opens the blame dialog for the file specified in <option>/path</option>."
 msgstr "为 <option>/path</option> 选项指定的文件打开追溯对话框。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14241
+#: ../source/TortoiseSVN_en.xml:14236
 msgid ""
 "If the options <option>/startrev</option> and <option>/endrev</option> are "
 "set, then the dialog asking for the blame range is not shown but the revision "
@@ -20112,7 +20087,7 @@ msgstr ""
 "示询问追溯范围对话框，直接使用这些选项中的版本号。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14248
+#: ../source/TortoiseSVN_en.xml:14243
 msgid ""
 "If the option <option>/line:nnn</option> is set, TortoiseBlame will open with "
 "the specified line number showing."
@@ -20120,7 +20095,7 @@ msgstr ""
 "如果设置了 <option>/line:nnn</option> 选项，TortoiseBlame 会显示指定行数。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14253
+#: ../source/TortoiseSVN_en.xml:14248
 msgid ""
 "The options <option>/ignoreeol</option>, <option>/ignorespaces</option> and "
 "<option>/ignoreallspaces</option> are also supported."
@@ -20129,17 +20104,17 @@ msgstr ""
 "<option>/ignoreallspaces</option> 选项。"
 
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14265
+#: ../source/TortoiseSVN_en.xml:14260
 msgid "/savepath:path"
 msgstr "/savepath:path"
 
 #. (option)
-#: ../source/TortoiseSVN_en.xml:14266
+#: ../source/TortoiseSVN_en.xml:14261
 msgid "/revision:xxx"
 msgstr "/revision:xxx"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14262
+#: ../source/TortoiseSVN_en.xml:14257
 msgid ""
 "Saves a file from an URL or working copy path given in <placeholder-1/> to "
 "the location given in <placeholder-2/>. The revision is given in <placeholder-"
@@ -20149,17 +20124,17 @@ msgstr ""
 "在<placeholder-3/>，这样可以得到特定修订版本的文件。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14272
+#: ../source/TortoiseSVN_en.xml:14267
 msgid "Creates a patch file for the path given in <placeholder-1/>."
 msgstr "创建<placeholder-1/>下的补丁文件。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14279
+#: ../source/TortoiseSVN_en.xml:14274
 msgid "Shows the revision graph for the path given in <placeholder-1/>."
 msgstr "显示<placeholder-1/>目录下的版本变化图。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14286
+#: ../source/TortoiseSVN_en.xml:14281
 #, fuzzy
 msgid ""
 "Locks a file or all files in a directory given in <placeholder-1/>. The "
@@ -20169,13 +20144,13 @@ msgstr ""
 "入注释。<placeholder-1/>"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14295
+#: ../source/TortoiseSVN_en.xml:14290
 #, fuzzy
 msgid "Unlocks a file or all files in a directory given in <placeholder-1/>."
 msgstr "解锁一个文件或一个目录内的所有文件... <placeholder-1/>"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14302
+#: ../source/TortoiseSVN_en.xml:14297
 #, fuzzy
 msgid ""
 "Rebuilds the windows icon cache. Only use this in case the windows icons are "
@@ -20187,12 +20162,12 @@ msgstr ""
 "是(不可避免)桌面的图标会重新组织。<placeholder-1/>"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14312
+#: ../source/TortoiseSVN_en.xml:14307
 msgid "Shows the properties dialog for the path given in <placeholder-1/>."
 msgstr "显示 <placeholder-1/> 给出的路径之属性对话框。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14321
+#: ../source/TortoiseSVN_en.xml:14316
 #, fuzzy
 msgid ""
 "Examples (which should be entered on one line): <screen>\n"
@@ -20218,12 +20193,12 @@ msgstr ""
 "</screen>"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14337
+#: ../source/TortoiseSVN_en.xml:14332
 msgid "TortoiseIDiff Commands"
 msgstr "TortoiseIDiff 命令"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14344
+#: ../source/TortoiseSVN_en.xml:14339
 msgid ""
 "The image diff tool has a few command line options which you can use to "
 "control how the tool is started. The program is called <literal>TortoiseIDiff."
@@ -20233,58 +20208,58 @@ msgstr ""
 "exe</literal>。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14349
+#: ../source/TortoiseSVN_en.xml:14344
 msgid ""
 "The table below lists all the options which can be passed to the image diff "
 "tool on the command line."
 msgstr "下表列出可以在命令行传递给图形比较工具的所有选项。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14365
+#: ../source/TortoiseSVN_en.xml:14360
 msgid "List of available options"
 msgstr "可用选项列表"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14371
+#: ../source/TortoiseSVN_en.xml:14366
 msgid "Option"
 msgstr "选项"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14378
+#: ../source/TortoiseSVN_en.xml:14373
 msgid "Path to the file shown on the left."
 msgstr "显示在左边的文件路径。"
 
 #. (entry)
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14384 ../source/TortoiseSVN_en.xml:14397
+#: ../source/TortoiseSVN_en.xml:14379 ../source/TortoiseSVN_en.xml:14392
 msgid ""
 "A title string. This string is used in the image view title instead of the "
 "full path to the image file."
 msgstr "标题字符串。此字符串用于图形视图标题，替换图形文件的全路径名称。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14391
+#: ../source/TortoiseSVN_en.xml:14386
 msgid "Path to the file shown on the right."
 msgstr "显示在右边的文件路径。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14404
+#: ../source/TortoiseSVN_en.xml:14399
 msgid ""
 "If specified, the image diff tool switches to the overlay mode (alpha blend)."
 msgstr "如果指定，图形比较工具切换到重载模式(alpha 混合)。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14411
+#: ../source/TortoiseSVN_en.xml:14406
 msgid "If specified, the image diff tool fits both images together."
 msgstr "如果指定，图形比较工具最大化所有图形。"
 
 #. (entry)
-#: ../source/TortoiseSVN_en.xml:14418
+#: ../source/TortoiseSVN_en.xml:14413
 msgid "Shows the image info box."
 msgstr "显示图片信息框。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14426
+#: ../source/TortoiseSVN_en.xml:14421
 msgid ""
 "Example (which should be entered on one line): <screen>\n"
 "TortoiseIDiff.exe /left:\"c:\\images\\img1.jpg\" /lefttitle:\"image 1\"\n"
@@ -20299,22 +20274,22 @@ msgstr ""
 "</screen>"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14438
+#: ../source/TortoiseSVN_en.xml:14433
 msgid "Command Line Interface Cross Reference"
 msgstr "命令行交叉索引"
 
 #. (primary)
-#: ../source/TortoiseSVN_en.xml:14440
+#: ../source/TortoiseSVN_en.xml:14435
 msgid "command line client"
 msgstr "命令行客户端"
 
 #. (primary)
-#: ../source/TortoiseSVN_en.xml:14443
+#: ../source/TortoiseSVN_en.xml:14438
 msgid "CLI"
 msgstr "CLI"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14446
+#: ../source/TortoiseSVN_en.xml:14441
 msgid ""
 "Sometimes this manual refers you to the main Subversion documentation, which "
 "describes Subversion in terms of the Command Line Interface (CLI). To help "
@@ -20327,7 +20302,7 @@ msgstr ""
 "TortoiseSVN的GUI操作的关系。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14455
+#: ../source/TortoiseSVN_en.xml:14450
 msgid ""
 "Even though there are CLI equivalents to what TortoiseSVN does, remember that "
 "TortoiseSVN does <emphasis>not</emphasis> call the CLI but uses the "
@@ -20337,7 +20312,7 @@ msgstr ""
 "调用命令行，而是直接使用了Subversion库。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14461
+#: ../source/TortoiseSVN_en.xml:14456
 #, fuzzy
 msgid ""
 "If you think you have found a bug in TortoiseSVN, we may ask you to try to "
@@ -20348,12 +20323,12 @@ msgstr ""
 "是TSVN还是Subversion的问题，这个参考告诉你该找那个命令。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14469
+#: ../source/TortoiseSVN_en.xml:14464
 msgid "Conventions and Basic Rules"
 msgstr "约定和基本规则"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14470
+#: ../source/TortoiseSVN_en.xml:14465
 #, fuzzy
 msgid ""
 "In the descriptions which follow, the URL for a repository location is shown "
@@ -20368,7 +20343,7 @@ msgstr ""
 "literal>。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14480
+#: ../source/TortoiseSVN_en.xml:14475
 msgid ""
 "Because TortoiseSVN is a Windows Shell Extension, it is not able to use the "
 "notion of a current working directory. All working copy paths must be given "
@@ -20378,7 +20353,7 @@ msgstr ""
 "副本必须使用绝对路径，而不是相对的。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14487
+#: ../source/TortoiseSVN_en.xml:14482
 msgid ""
 "Certain items are optional, and these are often controlled by checkboxes or "
 "radio buttons in TortoiseSVN. These options are shown in [square brackets] in "
@@ -20388,7 +20363,7 @@ msgstr ""
 "行定义的[方括号]里显示的。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14497
+#: ../source/TortoiseSVN_en.xml:14492
 #, no-wrap
 msgid ""
 "\n"
@@ -20398,7 +20373,7 @@ msgstr ""
 "svn checkout [-N] [--ignore-externals] [-r rev] URL PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14500
+#: ../source/TortoiseSVN_en.xml:14495
 msgid ""
 "If <guilabel>Only checkout the top folder</guilabel> is checked, use the "
 "<literal>-N</literal> switch."
@@ -20408,7 +20383,7 @@ msgstr ""
 
 #. (para)
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14504 ../source/TortoiseSVN_en.xml:14547
+#: ../source/TortoiseSVN_en.xml:14499 ../source/TortoiseSVN_en.xml:14542
 msgid ""
 "If <guilabel>Omit externals</guilabel> is checked, use the <literal>--ignore-"
 "externals</literal> switch."
@@ -20417,14 +20392,14 @@ msgstr ""
 "literal>选型。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14508
+#: ../source/TortoiseSVN_en.xml:14503
 msgid ""
 "If you are checking out a specific revision, specify that after the URL using "
 "<literal>-r</literal> switch."
 msgstr "如果你正在检出特定的修订版本，在URL后使用<literal>-r</literal>指定。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14515
+#: ../source/TortoiseSVN_en.xml:14510
 #, no-wrap
 msgid ""
 "\n"
@@ -20436,7 +20411,7 @@ msgstr ""
 "svn update [-r rev] PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14519
+#: ../source/TortoiseSVN_en.xml:14514
 msgid ""
 "Updating multiple items is currently not an atomic operation in Subversion. "
 "So TortoiseSVN first finds the HEAD revision of the repository, and then "
@@ -20447,7 +20422,7 @@ msgstr ""
 "修订版本，然后将所有项目更新到特定修订版本，防止出现混合修订版本的工作副本。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14526
+#: ../source/TortoiseSVN_en.xml:14521
 msgid ""
 "If only one item is selected for updating or the selected items are not all "
 "from the same repository, TortoiseSVN just updates to HEAD."
@@ -20456,7 +20431,7 @@ msgstr ""
 "到HEAD。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14531
+#: ../source/TortoiseSVN_en.xml:14526
 msgid ""
 "No command line options are used here. <guilabel>Update to revision</"
 "guilabel> also implements the update command, but offers more options."
@@ -20465,12 +20440,12 @@ msgstr ""
 "供了更多的选项。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14538
+#: ../source/TortoiseSVN_en.xml:14533
 msgid "Update to Revision"
 msgstr "更新到版本"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14539
+#: ../source/TortoiseSVN_en.xml:14534
 #, no-wrap
 msgid ""
 "\n"
@@ -20482,7 +20457,7 @@ msgstr ""
 "svn update [-r rev] [-N] [--ignore-externals] PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14543
+#: ../source/TortoiseSVN_en.xml:14538
 msgid ""
 "If <guilabel>Only update the top folder</guilabel> is checked, use the "
 "<literal>-N</literal> switch."
@@ -20490,7 +20465,7 @@ msgstr ""
 "如果希望<guilabel>只更新顶级目录</guilabel>，使用<literal>-N</literal>选项。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14554
+#: ../source/TortoiseSVN_en.xml:14549
 msgid ""
 "In TortoiseSVN, the commit dialog uses several Subversion commands. The first "
 "stage is a status check which determines the items in your working copy which "
@@ -20503,8 +20478,8 @@ msgstr ""
 #. (screen)
 #. (screen)
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14561 ../source/TortoiseSVN_en.xml:14723
-#: ../source/TortoiseSVN_en.xml:14751
+#: ../source/TortoiseSVN_en.xml:14556 ../source/TortoiseSVN_en.xml:14718
+#: ../source/TortoiseSVN_en.xml:14746
 #, no-wrap
 msgid ""
 "\n"
@@ -20515,7 +20490,7 @@ msgstr ""
 
 #. (para)
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14564 ../source/TortoiseSVN_en.xml:14652
+#: ../source/TortoiseSVN_en.xml:14559 ../source/TortoiseSVN_en.xml:14647
 msgid ""
 "If <guilabel>Show unversioned files</guilabel> is checked, TortoiseSVN will "
 "also show all unversioned files and folders in the working copy hierarchy, "
@@ -20528,7 +20503,7 @@ msgstr ""
 "作，因为<literal>svn status</literal> 命令不扫描未版本控制的文件夹。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14572
+#: ../source/TortoiseSVN_en.xml:14567
 msgid ""
 "If you check any unversioned files and folders, those items will first be "
 "added to your working copy."
@@ -20537,7 +20512,7 @@ msgstr ""
 
 #. (screen)
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14576 ../source/TortoiseSVN_en.xml:14866
+#: ../source/TortoiseSVN_en.xml:14571 ../source/TortoiseSVN_en.xml:14861
 #, no-wrap
 msgid ""
 "\n"
@@ -20547,7 +20522,7 @@ msgstr ""
 "svn add PATH...\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14579
+#: ../source/TortoiseSVN_en.xml:14574
 msgid ""
 "When you click on OK, the Subversion commit takes place. If you have left all "
 "the file selection checkboxes in their default state, TortoiseSVN uses a "
@@ -20560,7 +20535,7 @@ msgstr ""
 "交 (<literal>-N</literal>) ，每个路径都必须在命令行上单独指定。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14587
+#: ../source/TortoiseSVN_en.xml:14582
 #, no-wrap
 msgid ""
 "\n"
@@ -20572,15 +20547,15 @@ msgstr ""
 #. (para)
 #. (para)
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14590 ../source/TortoiseSVN_en.xml:14796
-#: ../source/TortoiseSVN_en.xml:14879
+#: ../source/TortoiseSVN_en.xml:14585 ../source/TortoiseSVN_en.xml:14791
+#: ../source/TortoiseSVN_en.xml:14874
 msgid ""
 "<literal>LogMessage</literal> here represents the contents of the log message "
 "edit box. This can be empty."
 msgstr "<literal>日志消息</literal>是日志编辑框的内容。它可以为空。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14594
+#: ../source/TortoiseSVN_en.xml:14589
 msgid ""
 "If <guilabel>Keep locks</guilabel> is checked, use the <literal>--no-unlock</"
 "literal> switch."
@@ -20589,7 +20564,7 @@ msgstr ""
 "关。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14601
+#: ../source/TortoiseSVN_en.xml:14596
 #, no-wrap
 msgid ""
 "\n"
@@ -20599,7 +20574,7 @@ msgstr ""
 "svn diff PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14604
+#: ../source/TortoiseSVN_en.xml:14599
 #, fuzzy
 msgid ""
 "If you use Diff from the main context menu, you are diffing a modified file "
@@ -20615,7 +20590,7 @@ msgstr ""
 "等价操作。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14613
+#: ../source/TortoiseSVN_en.xml:14608
 msgid ""
 "You can also diff any 2 files using TortoiseSVN, whether or not they are "
 "version controlled. TortoiseSVN just feeds the two files into the chosen diff "
@@ -20625,7 +20600,7 @@ msgstr ""
 "TortoiseSVN只是把这两个文件传递给已经选择的比较差异程序，让它比较差异。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14622
+#: ../source/TortoiseSVN_en.xml:14617
 #, no-wrap
 msgid ""
 "\n"
@@ -20639,7 +20614,7 @@ msgstr ""
 "svn log -v -r M:N [--stop-on-copy] PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14627
+#: ../source/TortoiseSVN_en.xml:14622
 msgid ""
 "By default, TortoiseSVN tries to fetch 100 log messages using the --limit "
 "method. If the settings instruct it to use old APIs, then the second form is "
@@ -20649,7 +20624,7 @@ msgstr ""
 "旧借口，那么就使用第二种个是获得100个日志消息。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14633
+#: ../source/TortoiseSVN_en.xml:14628
 msgid ""
 "If <guilabel>Stop on copy/rename</guilabel> is checked, use the <literal>--"
 "stop-on-copy</literal> switch."
@@ -20658,7 +20633,7 @@ msgstr ""
 "copy</literal>开关。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14640
+#: ../source/TortoiseSVN_en.xml:14635
 #, no-wrap
 msgid ""
 "\n"
@@ -20672,7 +20647,7 @@ msgstr ""
 "svn status -u -v PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14645
+#: ../source/TortoiseSVN_en.xml:14640
 msgid ""
 "The initial status check looks only at your working copy. If you click on "
 "<guibutton>Check repository</guibutton> then the repository is also checked "
@@ -20684,19 +20659,19 @@ msgstr ""
 "u</literal>开关。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14662
+#: ../source/TortoiseSVN_en.xml:14657
 msgid "Revision Graph"
 msgstr "版本图"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14663
+#: ../source/TortoiseSVN_en.xml:14658
 msgid ""
 "The revision graph is a feature of TortoiseSVN only. There's no equivalent in "
 "the command line client."
 msgstr "版本图是TortoiseSVN特有的，命令行客户端没有等价实现。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14667
+#: ../source/TortoiseSVN_en.xml:14662
 msgid ""
 "What TortoiseSVN does is an <screen>\n"
 "svn info URL_of_WC\n"
@@ -20710,12 +20685,12 @@ msgstr ""
 "</screen>其中URL是版本库的 <emphasis>根</emphasis>，返回分析数据。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14678
+#: ../source/TortoiseSVN_en.xml:14673
 msgid "Repo Browser"
 msgstr "版本库浏览器"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14679
+#: ../source/TortoiseSVN_en.xml:14674
 #, no-wrap
 msgid ""
 "\n"
@@ -20727,7 +20702,7 @@ msgstr ""
 "svn list [-r rev] -v URL\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14683
+#: ../source/TortoiseSVN_en.xml:14678
 msgid ""
 "You can use <literal>svn info</literal> to determine the repository root, "
 "which is the top level shown in the repository browser. You cannot navigate "
@@ -20739,14 +20714,14 @@ msgstr ""
 "本库浏览器的锁信息。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14690
+#: ../source/TortoiseSVN_en.xml:14685
 msgid ""
 "The <literal>svn list</literal> call will list the contents of a directory, "
 "given a URL and revision."
 msgstr "给出URL和可选的版本号，<literal>svn list</literal>列出目录中的内容。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14697
+#: ../source/TortoiseSVN_en.xml:14692
 msgid ""
 "This command has no CLI equivalent. It invokes TortoiseMerge or an external 3-"
 "way diff/merge tool to look at the files involved in the conflict and sort "
@@ -20756,12 +20731,12 @@ msgstr ""
 "手的冲突，挑选出冲突行。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14704
+#: ../source/TortoiseSVN_en.xml:14699
 msgid "Resolved"
 msgstr "已解决"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14705
+#: ../source/TortoiseSVN_en.xml:14700
 #, no-wrap
 msgid ""
 "\n"
@@ -20771,7 +20746,7 @@ msgstr ""
 "svn resolved PATH\n"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14711
+#: ../source/TortoiseSVN_en.xml:14706
 #, no-wrap
 msgid ""
 "\n"
@@ -20781,7 +20756,7 @@ msgstr ""
 "svn rename CURR_PATH NEW_PATH\n"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14717
+#: ../source/TortoiseSVN_en.xml:14712
 #, no-wrap
 msgid ""
 "\n"
@@ -20791,7 +20766,7 @@ msgstr ""
 "svn delete PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14726
+#: ../source/TortoiseSVN_en.xml:14721
 msgid ""
 "The first stage is a status check which determines the items in your working "
 "copy which can potentially be reverted. You can review the list, diff files "
@@ -20801,7 +20776,7 @@ msgstr ""
 "查这些文件的修改，然后选择你要撤销的项目。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14732
+#: ../source/TortoiseSVN_en.xml:14727
 msgid ""
 "When you click on OK, the Subversion revert takes place. If you have left all "
 "the file selection checkboxes in their default state, TortoiseSVN uses a "
@@ -20814,7 +20789,7 @@ msgstr ""
 "些文件，那么就必须使用非递归撤销 ，每个路径都必须在命令行上单独指定。\""
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14739
+#: ../source/TortoiseSVN_en.xml:14734
 #, no-wrap
 msgid ""
 "\n"
@@ -20824,7 +20799,7 @@ msgstr ""
 "svn revert [-R] PATH...\n"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14745
+#: ../source/TortoiseSVN_en.xml:14740
 #, no-wrap
 msgid ""
 "\n"
@@ -20834,12 +20809,12 @@ msgstr ""
 "svn cleanup PATH\n"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14750
+#: ../source/TortoiseSVN_en.xml:14745
 msgid "Get Lock"
 msgstr "获得锁"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14754
+#: ../source/TortoiseSVN_en.xml:14749
 msgid ""
 "The first stage is a status check which determines the files in your working "
 "copy which can potentially be locked. You can select the items you want to be "
@@ -20849,7 +20824,7 @@ msgstr ""
 "目。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14759
+#: ../source/TortoiseSVN_en.xml:14754
 #, no-wrap
 msgid ""
 "\n"
@@ -20859,14 +20834,14 @@ msgstr ""
 "svn lock -m \"LockMessage\" [--force] PATH...\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14762
+#: ../source/TortoiseSVN_en.xml:14757
 msgid ""
 "<literal>LockMessage</literal> here represents the contents of the lock "
 "message edit box. This can be empty."
 msgstr "<literal>加锁信息</literal>是加锁编辑框的内容。它可以为空。\""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14766
+#: ../source/TortoiseSVN_en.xml:14761
 msgid ""
 "If <guilabel>Steal the locks</guilabel> is checked, use the <literal>--force</"
 "literal> switch."
@@ -20875,12 +20850,12 @@ msgstr ""
 "关。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14772
+#: ../source/TortoiseSVN_en.xml:14767
 msgid "Release Lock"
 msgstr "释放锁"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14773
+#: ../source/TortoiseSVN_en.xml:14768
 #, no-wrap
 msgid ""
 "\n"
@@ -20890,7 +20865,7 @@ msgstr ""
 "svn unlock PATH\n"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14779
+#: ../source/TortoiseSVN_en.xml:14774
 #, no-wrap
 msgid ""
 "\n"
@@ -20908,12 +20883,12 @@ msgstr ""
 "svn copy -m \"LogMessage\" PATH URL\n"
 
 #. (listitem)
-#: ../source/TortoiseSVN_en.xml:14791
+#: ../source/TortoiseSVN_en.xml:14786
 msgid "Specific revision in repository"
 msgstr "指定版本库中的版本"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14786
+#: ../source/TortoiseSVN_en.xml:14781
 msgid ""
 "The Branch/Tag dialog performs a copy to the repository. There are 3 radio "
 "button options: <placeholder-1/> which correspond to the 3 command line "
@@ -20923,7 +20898,7 @@ msgstr ""
 "个命令行参数。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14803
+#: ../source/TortoiseSVN_en.xml:14798
 #, no-wrap
 msgid ""
 "\n"
@@ -20935,7 +20910,7 @@ msgstr ""
 "svn switch [-r rev] URL PATH\n"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14810
+#: ../source/TortoiseSVN_en.xml:14805
 #, no-wrap
 msgid ""
 "\n"
@@ -20945,7 +20920,7 @@ msgstr ""
 "svn merge [--dry-run] --force From_URL@revN To_URL@revM PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14813
+#: ../source/TortoiseSVN_en.xml:14808
 msgid ""
 "The <guibutton>Dry run</guibutton> performs the same merge with the "
 "<literal>--dry-run</literal> switch."
@@ -20954,7 +20929,7 @@ msgstr ""
 "同。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14817
+#: ../source/TortoiseSVN_en.xml:14812
 #, no-wrap
 msgid ""
 "\n"
@@ -20964,14 +20939,14 @@ msgstr ""
 "svn diff From_URL@revN To_URL@revM\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14820
+#: ../source/TortoiseSVN_en.xml:14815
 msgid ""
 "The <guibutton>Unified diff</guibutton> shows the diff operation which will "
 "be used to do the merge."
 msgstr "<guibutton>Unified diff</guibutton>显示了用来合并的区别操作。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14827
+#: ../source/TortoiseSVN_en.xml:14822
 #, no-wrap
 msgid ""
 "\n"
@@ -20981,14 +20956,14 @@ msgstr ""
 "svn export [-r rev] [--ignore-externals] URL Export_PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14830
+#: ../source/TortoiseSVN_en.xml:14825
 msgid ""
 "This form is used when accessed from an unversioned folder, and the folder is "
 "used as the destination."
 msgstr "这个形式是当从一个未版本控制目录访问，并且文件夹作为目标。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14834
+#: ../source/TortoiseSVN_en.xml:14829
 msgid ""
 "Exporting a working copy to a different location is done without using the "
 "Subversion library, so there's no matching command line equivalent."
@@ -20996,7 +20971,7 @@ msgstr ""
 "导出一个工作副本到一个目录没有使用Subversion的库，所以没有等同的命令行匹配。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14839
+#: ../source/TortoiseSVN_en.xml:14834
 msgid ""
 "What TortoiseSVN does is to copy all files to the new location while showing "
 "you the progress of the operation. Unversioned files/folders can optionally "
@@ -21006,7 +20981,7 @@ msgstr ""
 "控制的文件/文件夹也可以被导出。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14844
+#: ../source/TortoiseSVN_en.xml:14839
 msgid ""
 "In both cases, if <guilabel>Omit externals</guilabel> is checked, use the "
 "<literal>--ignore-externals</literal> switch."
@@ -21015,7 +20990,7 @@ msgstr ""
 "<literal>--ignore-externals</literal>选项。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14852
+#: ../source/TortoiseSVN_en.xml:14847
 #, no-wrap
 msgid ""
 "\n"
@@ -21025,12 +21000,12 @@ msgstr ""
 "svn switch --relocate From_URL To_URL\n"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14857
+#: ../source/TortoiseSVN_en.xml:14852
 msgid "Create Repository Here"
 msgstr "在当前位置创建版本库"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14858
+#: ../source/TortoiseSVN_en.xml:14853
 #, no-wrap
 msgid ""
 "\n"
@@ -21044,14 +21019,14 @@ msgstr ""
 "svnadmin create --fs-type bdb PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14869
+#: ../source/TortoiseSVN_en.xml:14864
 msgid ""
 "If you selected a folder, TortoiseSVN first scans it recursively for items "
 "which can be added."
 msgstr "如果选择了一个文件夹，TortoiseSVN会首先会递归的访问可以添加的条目。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14876
+#: ../source/TortoiseSVN_en.xml:14871
 #, no-wrap
 msgid ""
 "\n"
@@ -21061,7 +21036,7 @@ msgstr ""
 "svn import -m LogMessage PATH URL\n"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14886
+#: ../source/TortoiseSVN_en.xml:14881
 #, no-wrap
 msgid ""
 "\n"
@@ -21073,7 +21048,7 @@ msgstr ""
 "svn log -r N:M PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14890
+#: ../source/TortoiseSVN_en.xml:14885
 #, fuzzy
 msgid ""
 "If you use TortoiseBlame to view the blame info, the file log is also "
@@ -21084,12 +21059,12 @@ msgstr ""
 "息，如果你以文件方式查看追溯，这个信息不是必须的。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14898
+#: ../source/TortoiseSVN_en.xml:14893
 msgid "Add to Ignore List"
 msgstr "加入忽略列表"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14899
+#: ../source/TortoiseSVN_en.xml:14894
 #, no-wrap
 msgid ""
 "\n"
@@ -21103,7 +21078,7 @@ msgstr ""
 "svn propset svn:ignore -F tempfile PATH\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14904
+#: ../source/TortoiseSVN_en.xml:14899
 #, fuzzy
 msgid ""
 "Because the <literal>svn:ignore</literal> property is often a multi-line "
@@ -21113,7 +21088,7 @@ msgstr ""
 "因为svn:ignore通常是多行的，这里是通过文件显示，而不是直接使用命令行操作。"
 
 #. (screen)
-#: ../source/TortoiseSVN_en.xml:14912
+#: ../source/TortoiseSVN_en.xml:14907
 #, no-wrap
 msgid ""
 "\n"
@@ -21123,7 +21098,7 @@ msgstr ""
 "svn diff PATH &gt; patch-file\n"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14915
+#: ../source/TortoiseSVN_en.xml:14910
 #, fuzzy
 msgid ""
 "TortoiseSVN creates a patch file in unified diff format by comparing the "
@@ -21133,7 +21108,7 @@ msgstr ""
 "format)的补丁文件。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14922
+#: ../source/TortoiseSVN_en.xml:14917
 msgid ""
 "Applying patches is a tricky business unless the patch and working copy are "
 "at the same revision. Luckily for you, you can use TortoiseMerge, which has "
@@ -21143,12 +21118,12 @@ msgstr ""
 "是，你可以使用 TortoiseMerge(在Subversion中没有等同的工具)。"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:14936
+#: ../source/TortoiseSVN_en.xml:14931
 msgid "Implementation Details"
 msgstr "实现细节"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14938
+#: ../source/TortoiseSVN_en.xml:14933
 #, fuzzy
 msgid ""
 "This appendix contains a more detailed discussion of the implementation of "
@@ -21156,12 +21131,12 @@ msgid ""
 msgstr "这个附录包括了 TortoiseSVN 使用中可能碰到的一些困难或疑问的解决方法。"
 
 #. (primary)
-#: ../source/TortoiseSVN_en.xml:14946
+#: ../source/TortoiseSVN_en.xml:14941
 msgid "overlay priority"
 msgstr "重载优先级"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14951
+#: ../source/TortoiseSVN_en.xml:14946
 msgid ""
 "Every file and folder has a Subversion status value as reported by the "
 "Subversion library. In the command line client, these are represented by "
@@ -21171,7 +21146,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14959
+#: ../source/TortoiseSVN_en.xml:14954
 msgid ""
 "<graphic fileref=\"images/ConflictIcon.png\"/> The <emphasis>Conflicted</"
 "emphasis> overlay is used to represent the <literal>conflicted</literal> "
@@ -21182,7 +21157,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14968
+#: ../source/TortoiseSVN_en.xml:14963
 msgid ""
 "<graphic fileref=\"images/ModifiedIcon.png\"/> The <emphasis>Modified</"
 "emphasis> overlay represents the <literal>modified</literal> state, where you "
@@ -21193,7 +21168,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14978
+#: ../source/TortoiseSVN_en.xml:14973
 msgid ""
 "<graphic fileref=\"images/DeletedIcon.png\"/> The <emphasis>Deleted</"
 "emphasis> overlay represents the <literal>deleted</literal> state, where an "
@@ -21204,7 +21179,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14987
+#: ../source/TortoiseSVN_en.xml:14982
 #, fuzzy
 msgid ""
 "<graphic fileref=\"images/AddedIcon.png\"/> The <emphasis>Added</emphasis> "
@@ -21215,7 +21190,7 @@ msgstr ""
 "被计划<literal>加入</literal>版本控制。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:14993
+#: ../source/TortoiseSVN_en.xml:14988
 msgid ""
 "<graphic fileref=\"images/InSubVersionIcon.png\"/> The <emphasis>In "
 "Subversion</emphasis> overlay is used to represent an item which is in the "
@@ -21225,7 +21200,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15002
+#: ../source/TortoiseSVN_en.xml:14997
 msgid ""
 "<graphic fileref=\"images/ReadOnlyIcon.png\"/> The <emphasis>Needs Lock</"
 "emphasis> overlay is used to indicate when a file has the <literal>svn:needs-"
@@ -21240,7 +21215,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15016
+#: ../source/TortoiseSVN_en.xml:15011
 msgid ""
 "<graphic fileref=\"images/LockedIcon.png\"/> The <emphasis>Locked</emphasis> "
 "overlay is used when the local working copy holds a lock for that file."
@@ -21249,7 +21224,7 @@ msgstr ""
 "用于本地工作副本持有此文件的锁。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15021
+#: ../source/TortoiseSVN_en.xml:15016
 #, fuzzy
 msgid ""
 "<graphic fileref=\"images/IgnoredIcon.png\"/> The <emphasis>Ignored</"
@@ -21262,7 +21237,7 @@ msgstr ""
 "被计划<literal>加入</literal>版本控制。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15029
+#: ../source/TortoiseSVN_en.xml:15024
 #, fuzzy
 msgid ""
 "<graphic fileref=\"images/UnversionedIcon.png\"/> The <emphasis>Unversioned</"
@@ -21274,7 +21249,7 @@ msgstr ""
 "被计划<literal>加入</literal>版本控制。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15037
+#: ../source/TortoiseSVN_en.xml:15032
 msgid ""
 "If an item has subversion status <literal>none</literal> (the item is not "
 "within a working copy) then no overlay is shown. If you have chosen to "
@@ -21283,7 +21258,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15044
+#: ../source/TortoiseSVN_en.xml:15039
 msgid ""
 "An item can only have one Subversion status value. For example a file could "
 "be locally modified and it could be marked for deletion at the same time. "
@@ -21295,7 +21270,7 @@ msgstr ""
 "Subversion 自己定义的。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15051
+#: ../source/TortoiseSVN_en.xml:15046
 msgid ""
 "When TortoiseSVN displays the status recursively (the default setting), each "
 "folder displays an overlay reflecting its own status and the status of all "
@@ -21308,7 +21283,7 @@ msgstr ""
 "定使用哪个重载，<emphasis>冲突</emphasis>重载使用最高优先级。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15060
+#: ../source/TortoiseSVN_en.xml:15055
 #, fuzzy
 msgid ""
 "In fact, you may find that not all of these icons are used on your system. "
@@ -21324,7 +21299,7 @@ msgstr ""
 "民(TM)</quote>，限制自身的使用，为别的应用留下机会。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15071
+#: ../source/TortoiseSVN_en.xml:15066
 #, fuzzy
 msgid ""
 "<emphasis>Normal</emphasis>, <emphasis>Modified</emphasis> and "
@@ -21334,7 +21309,7 @@ msgstr ""
 "是被载入，并可见。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15079
+#: ../source/TortoiseSVN_en.xml:15074
 #, fuzzy
 msgid ""
 "<emphasis>Deleted</emphasis> is loaded if possible, but falls back to "
@@ -21344,7 +21319,7 @@ msgstr ""
 "<literal>已修改</literal>来代替。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15086
+#: ../source/TortoiseSVN_en.xml:15081
 #, fuzzy
 msgid ""
 "<emphasis>Read-Only</emphasis> is loaded if possible, but falls back to "
@@ -21354,7 +21329,7 @@ msgstr ""
 "常</literal>来代替。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15093
+#: ../source/TortoiseSVN_en.xml:15088
 #, fuzzy
 msgid ""
 "<emphasis>Locked</emphasis> is only loaded if there are fewer than 13 "
@@ -21365,7 +21340,7 @@ msgstr ""
 "个条件就使用<literal>正常</literal>来代替。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15101
+#: ../source/TortoiseSVN_en.xml:15096
 #, fuzzy
 msgid ""
 "<emphasis>Added</emphasis> is only loaded if there are fewer than 14 overlays "
@@ -21376,12 +21351,12 @@ msgstr ""
 "个条件就使用<literal>已修改</literal>来代替"
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15112
+#: ../source/TortoiseSVN_en.xml:15107
 msgid "Securing Svnserve using SSH"
 msgstr "用 SSH 使服务器更安全"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15114
+#: ../source/TortoiseSVN_en.xml:15109
 msgid ""
 "This section provides a step-by-step guide to setting up Subversion and "
 "TortoiseSVN to use the <literal>svn+ssh</literal> protocol. If you already "
@@ -21393,7 +21368,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15124
+#: ../source/TortoiseSVN_en.xml:15119
 msgid ""
 "In this implementation we create a single SSH user account for all subversion "
 "users, and use different authentication keys to differentiate between the "
@@ -21401,7 +21376,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15129
+#: ../source/TortoiseSVN_en.xml:15124
 msgid ""
 "In this appendix we assume that you already have the subversion tools "
 "installed, and that you have created a repository as detailed elsewhere in "
@@ -21410,7 +21385,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15135
+#: ../source/TortoiseSVN_en.xml:15130
 msgid ""
 "Much of the information here comes from a tutorial provided by Marc Logemann, "
 "which can be found at <ulink url=\"http://www.logemann.org/2007/03/13/"
@@ -21420,12 +21395,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15146
+#: ../source/TortoiseSVN_en.xml:15141
 msgid "Setting Up a Linux Server"
 msgstr "配置 Linux 服务器"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15147
+#: ../source/TortoiseSVN_en.xml:15142
 msgid ""
 "You need to have SSH enabled on the server, and here we assume that you will "
 "be using OpenSSH. On most distributions this will already be installed. To "
@@ -21435,7 +21410,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15156
+#: ../source/TortoiseSVN_en.xml:15151
 msgid ""
 "One point to note is that if you build Subversion from source and do not "
 "provide any argument to <filename>./configure</filename>, Subversion creates "
@@ -21450,7 +21425,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15169
+#: ../source/TortoiseSVN_en.xml:15164
 msgid ""
 "To check that everything is OK, login in as the target user with SSH and "
 "type: <screen>\n"
@@ -21459,7 +21434,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15177
+#: ../source/TortoiseSVN_en.xml:15172
 msgid ""
 "Create a new user which we will use to access the svn repository: <screen>\n"
 "useradd -m svnuser\n"
@@ -21467,12 +21442,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15186
+#: ../source/TortoiseSVN_en.xml:15181
 msgid "Setting Up a Windows Server"
 msgstr "配置 Windows 服务器"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15187
+#: ../source/TortoiseSVN_en.xml:15182
 msgid ""
 "Install Cygwin SSH daemon as described here: <ulink url=\"http://pigtail.net/"
 "LRP/printsrv/cygwin-sshd.html\"><citetitle>http://pigtail.net/LRP/printsrv/"
@@ -21480,7 +21455,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15193
+#: ../source/TortoiseSVN_en.xml:15188
 msgid ""
 "Create a new Windows user account <literal>svnuser</literal> which we will "
 "use to access the repository. Be sure to give this user full access rights to "
@@ -21488,7 +21463,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15198
+#: ../source/TortoiseSVN_en.xml:15193
 msgid ""
 "If there is no password file yet then create one from the Cygwin console "
 "using: <screen>\n"
@@ -21497,13 +21472,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15206
-#, fuzzy
+#: ../source/TortoiseSVN_en.xml:15201
 msgid "SSH Client Tools for use with TortoiseSVN"
-msgstr "使用 TortoiseSVN 创建版本库"
+msgstr "用于 TortoiseSVN 的 SSH 客户端工具"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15207
+#: ../source/TortoiseSVN_en.xml:15202
 msgid ""
 "Grab the tools we need for using SSH on the windows client from this site: "
 "<ulink url=\"http://www.chiark.greenend.org.uk/~sgtatham/putty/"
@@ -21514,12 +21488,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15220
+#: ../source/TortoiseSVN_en.xml:15215
 msgid "Creating OpenSSH Certificates"
 msgstr "创建 OpenSSH 证书"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15221
+#: ../source/TortoiseSVN_en.xml:15216
 msgid ""
 "The next step is to create a key pair for authentication. There are two "
 "possible ways to create keys. The first is to create the keys with PuTTYgen "
@@ -21530,12 +21504,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15231
+#: ../source/TortoiseSVN_en.xml:15226
 msgid "Create Keys using ssh-keygen"
 msgstr "使用 ssh-keygen 创建密钥"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15232
+#: ../source/TortoiseSVN_en.xml:15227
 msgid ""
 "Login to the server as <literal>root</literal> or <literal>svnuser</literal> "
 "and type: <screen>\n"
@@ -21550,7 +21524,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15249
+#: ../source/TortoiseSVN_en.xml:15244
 msgid ""
 "Append the public key to those in the <filename>.ssh</filename> folder within "
 "the <literal>svnuser</literal> home directory: <screen>\n"
@@ -21559,7 +21533,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15256
+#: ../source/TortoiseSVN_en.xml:15251
 msgid ""
 "In order to use the private key we generated, we have to convert it to a "
 "putty format. This is because the private key file format is not specified by "
@@ -21572,12 +21546,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15273
+#: ../source/TortoiseSVN_en.xml:15268
 msgid "Create Keys using PuTTYgen"
 msgstr "使用 PuTTYgen 创建密钥"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15274
+#: ../source/TortoiseSVN_en.xml:15269
 msgid ""
 "Use PuTTYgen to generate a public-key/private-key pair and save it. Copy the "
 "public key to the server and append it to those in the <filename>.ssh</"
@@ -21588,12 +21562,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15286
+#: ../source/TortoiseSVN_en.xml:15281
 msgid "Test using PuTTY"
 msgstr "使用 PuTTY 测试"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15287
+#: ../source/TortoiseSVN_en.xml:15282
 msgid ""
 "To test the connection we will use PuTTY. Start the program and on the "
 "<guilabel>Session</guilabel> tab set the hostname to the name or IP address "
@@ -21608,7 +21582,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15300
+#: ../source/TortoiseSVN_en.xml:15295
 msgid ""
 "Click on <guilabel>Open</guilabel> and you should see a telnet style login "
 "prompt. Use <literal>svnuser</literal> as the user name and if all is well "
@@ -21616,7 +21590,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15306
+#: ../source/TortoiseSVN_en.xml:15301
 msgid ""
 "You may need to edit <filename>/etc/sshd_config</filename> on the server. "
 "Edit lines as follows and restart the SSH service afterwards. <screen>\n"
@@ -21628,12 +21602,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15318
+#: ../source/TortoiseSVN_en.xml:15313
 msgid "Testing SSH with TortoiseSVN"
 msgstr "使用 TortoiseSVN 测试 SSH"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15319
+#: ../source/TortoiseSVN_en.xml:15314
 msgid ""
 "So far we have only tested that you can login using SSH. Now we need to make "
 "sure that the SSH connection can actually run svnserve. On the server modify "
@@ -21644,7 +21618,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15328
+#: ../source/TortoiseSVN_en.xml:15323
 msgid ""
 "Note: This is all on one very long line. <screen>\n"
 "command=\"svnserve -t -r &lt;ReposRootPath&gt; --tunnel-user=&lt;author&gt;"
@@ -21656,7 +21630,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15337
+#: ../source/TortoiseSVN_en.xml:15332
 msgid ""
 "<literal>&lt;ReposRootPath&gt;</literal> should be replaced with the path to "
 "the directory containing your repositories. This avoids the need to specify "
@@ -21667,7 +21641,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15346
+#: ../source/TortoiseSVN_en.xml:15341
 msgid ""
 "<literal>&lt;author&gt;</literal> should be replaced with the svn author that "
 "you want to be stored on commit. This also allows svnserve to use its own "
@@ -21675,21 +21649,21 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15351
+#: ../source/TortoiseSVN_en.xml:15346
 msgid ""
 "<literal>&lt;PublicKey&gt;</literal> should be replaced with the public key "
 "that you generated earlier."
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15355
+#: ../source/TortoiseSVN_en.xml:15350
 msgid ""
 "<literal>&lt;Comment&gt;</literal> can be any comment you like, but it is "
 "useful for mapping an svn author name to the person's real name."
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15359
+#: ../source/TortoiseSVN_en.xml:15354
 msgid ""
 "Right click on any folder in Windows Explorer and select "
 "<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Repo-Browser</"
@@ -21707,7 +21681,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15379
+#: ../source/TortoiseSVN_en.xml:15374
 msgid ""
 "Click on <guibutton>OK</guibutton> and you should be able to browse the "
 "repository content. If so you now have a running SSH tunnel in conjunction "
@@ -21715,7 +21689,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15384
+#: ../source/TortoiseSVN_en.xml:15379
 msgid ""
 "Note that by default TortoiseSVN uses its own version of Plink to connect. "
 "This avoids a console window popping up for every authentication attempt, but "
@@ -21726,12 +21700,12 @@ msgid ""
 msgstr ""
 
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15394
+#: ../source/TortoiseSVN_en.xml:15389
 msgid "SSH Configuration Variants"
 msgstr "SSH 配置参数"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15395
+#: ../source/TortoiseSVN_en.xml:15390
 msgid ""
 "One way to simplify the URL in TortoiseSVN is to set the user inside the "
 "PuTTY session. For this you have to load your already defined session "
@@ -21746,7 +21720,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15410
+#: ../source/TortoiseSVN_en.xml:15405
 msgid ""
 "At the time of writing PuTTY does not check all saved configurations, so if "
 "you have multiple configurations with the same server name, it will pick the "
@@ -21755,7 +21729,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15417
+#: ../source/TortoiseSVN_en.xml:15412
 msgid ""
 "Many people like to use Pageant for storing all their keys. Because a PuTTY "
 "session is capable of storing a key, you don't always need Pageant. But "
@@ -21768,7 +21742,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15428
+#: ../source/TortoiseSVN_en.xml:15423
 msgid ""
 "For this task, simply run Pageant and add the private key. It should be the "
 "same private key you defined in the PuTTY session above. If you use Pageant "
@@ -21778,7 +21752,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15435
+#: ../source/TortoiseSVN_en.xml:15430
 msgid ""
 "If you don't want to repeat this procedure after every reboot of your client, "
 "you should place Pageant in the auto-start group of your Windows "
@@ -21787,7 +21761,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15441
+#: ../source/TortoiseSVN_en.xml:15436
 msgid ""
 "The last way to connect to an SSH server is simply by using this URL inside "
 "TortoiseSVN: <screen>\n"
@@ -21800,13 +21774,23 @@ msgid ""
 "the PuTTY suite, TortoiseSVN will also try all the keys stored in Pageant."
 msgstr ""
 
+#. (para)
+#: ../source/TortoiseSVN_en.xml:15450
+msgid ""
+"If you use this last method, be sure you do not have a default username set "
+"in PuTTY. We have had reports of a bug in PuTTY causing connections to close "
+"in this case. To remove the default user, simply clear "
+"<filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%"
+"20Settings\\HostName</filename>"
+msgstr ""
+
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15461
+#: ../source/TortoiseSVN_en.xml:15462
 msgid "Glossary"
 msgstr "术语表"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15465
+#: ../source/TortoiseSVN_en.xml:15466
 msgid ""
 "A Subversion command that is used to add a file or directory to your working "
 "copy. The new items are added to the repository when you commit."
@@ -21815,12 +21799,12 @@ msgstr ""
 "就会被加入到版本库中。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15473
+#: ../source/TortoiseSVN_en.xml:15474
 msgid "BASE revision"
 msgstr "基础版本(BASE revision)"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15475
+#: ../source/TortoiseSVN_en.xml:15476
 msgid ""
 "The current base revision of a file or folder in your <emphasis>working copy</"
 "emphasis>. This is the revision the file or folder was in, when the last "
@@ -21831,7 +21815,7 @@ msgstr ""
 "检出、更新或者提交时的版本。基础版本通常和HEAD版本不一致。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15486
+#: ../source/TortoiseSVN_en.xml:15487
 msgid ""
 "This command is for text files only, and it annotates every line to show the "
 "repository revision in which it was last changed, and the author who made "
@@ -21844,12 +21828,12 @@ msgstr ""
 "时，它也会显示时间和日志信息。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15496
+#: ../source/TortoiseSVN_en.xml:15497
 msgid "BDB"
 msgstr "BDB"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15498
+#: ../source/TortoiseSVN_en.xml:15499
 msgid ""
 "Berkeley DB. A well tested database backend for repositories, that cannot be "
 "used on network shares. Default for pre 1.2 repositories."
@@ -21859,12 +21843,12 @@ msgstr ""
 "格式。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15505
+#: ../source/TortoiseSVN_en.xml:15506
 msgid "Branch"
 msgstr "分支"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15507
+#: ../source/TortoiseSVN_en.xml:15508
 #, fuzzy
 msgid ""
 "A term frequently used in revision control systems to describe what happens "
@@ -21881,7 +21865,7 @@ msgstr ""
 "支是使用<quote>廉价的复制</quote>实现的。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15522
+#: ../source/TortoiseSVN_en.xml:15523
 msgid ""
 "A Subversion command which creates a local working copy in an empty directory "
 "by downloading versioned files from the repository."
@@ -21889,7 +21873,7 @@ msgstr ""
 "一个 Subversion 命令在空目录通过从版本库下载版本控制的文件来创建本地工作副本。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15531
+#: ../source/TortoiseSVN_en.xml:15532
 #, fuzzy
 msgid ""
 "To quote from the Subversion book: <quote> Recursively clean up the working "
@@ -21904,7 +21888,7 @@ msgstr ""
 "的锁定，并将工作副本恢复到可用状态。</quote>"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15548
+#: ../source/TortoiseSVN_en.xml:15549
 msgid ""
 "This Subversion command is used to pass the changes in your local working "
 "copy back into the repository, creating a new repository revision."
@@ -21913,12 +21897,12 @@ msgstr ""
 "版本。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15556
+#: ../source/TortoiseSVN_en.xml:15557
 msgid "Conflict"
 msgstr "冲突"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15558
+#: ../source/TortoiseSVN_en.xml:15559
 msgid ""
 "When changes from the repository are merged with local changes, sometimes "
 "those changes occur on the same lines. In this case Subversion cannot "
@@ -21930,12 +21914,12 @@ msgstr ""
 "不能自动决定使用文件的那一行，在提交之前，你需要手工编辑文件解决冲突。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15568
+#: ../source/TortoiseSVN_en.xml:15569
 msgid "Copy"
 msgstr "复制"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15570
+#: ../source/TortoiseSVN_en.xml:15571
 msgid ""
 "In a Subversion repository you can create a copy of a single file or an "
 "entire tree. These are implemented as <quote>cheap copies</quote> which act a "
@@ -21948,7 +21932,7 @@ msgstr ""
 "保存历史的副本，这样你就可以跟踪副本之前的修改。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15582
+#: ../source/TortoiseSVN_en.xml:15583
 #, fuzzy
 msgid ""
 "When you delete a versioned item (and commit the change) the item no longer "
@@ -21962,7 +21946,7 @@ msgstr ""
 "条目回来，并且保持所有的历史。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15594
+#: ../source/TortoiseSVN_en.xml:15595
 msgid ""
 "Shorthand for <quote>Show Differences</quote>. Very useful when you want to "
 "see exactly what changes have been made."
@@ -21970,7 +21954,7 @@ msgstr ""
 "<quote>显示区别</quote>的快捷方式，当你希望查看你所做修改的时候非常有用。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15603
+#: ../source/TortoiseSVN_en.xml:15604
 msgid ""
 "This command produces a copy of a versioned folder, just like a working copy, "
 "but without the local <literal>.svn</literal> folders."
@@ -21979,80 +21963,78 @@ msgstr ""
 "literal>目录。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15611
+#: ../source/TortoiseSVN_en.xml:15612
 msgid "FSFS"
 msgstr "FSFS"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15613
-#, fuzzy
+#: ../source/TortoiseSVN_en.xml:15614
 msgid ""
 "A proprietary Subversion filesystem backend for repositories. Can be used on "
 "network shares. Default for 1.2 and newer repositories."
 msgstr ""
-"FS文件系统，版本库可以使用的一种 Subversion 专用的后台文件系统格式，能够在通过"
-"网络共享的文件系统上使用，FSFS 是Subversion 1.2 版本以后的缺省版本库格式。"
+"Subversion 专用的版本库文件系统格式。能够在通过网络共享的文件系统上使用。是 "
+"Subversion 1.2 版本以后的缺省版本库格式。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15622
+#: ../source/TortoiseSVN_en.xml:15623
 msgid "Group policy object"
 msgstr "组策略对象"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15628
+#: ../source/TortoiseSVN_en.xml:15629
 msgid "HEAD revision"
 msgstr "最新版本(HEAD revision)"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15630
+#: ../source/TortoiseSVN_en.xml:15631
 msgid ""
 "The latest revision of a file or folder in the <emphasis>repository</"
 "emphasis>."
 msgstr "<emphasis>版本库</emphasis>里文件或目录的最新版本。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15638
+#: ../source/TortoiseSVN_en.xml:15639
 msgid ""
 "Subversion command to import an entire folder hierarchy into the repository "
 "in a single revision."
 msgstr "在一个修订里将整个目录导入到版本库的 Subversion 命令。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15647
-#, fuzzy
+#: ../source/TortoiseSVN_en.xml:15648
 msgid ""
 "When you take out a lock on a versioned item, you mark it in the repository "
 "as non-committable, except from the working copy where the lock was taken out."
 msgstr ""
-"当一个版本控制条目的被你锁定，就是将它在版本库里标示为不可提交，只有作出锁定的"
+"当一个版本控制条目的被你锁定，就是将它在版本库里标示为不可提交，只有发出锁定的"
 "工作副本可以提交。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15655
+#: ../source/TortoiseSVN_en.xml:15656
 msgid "Log"
 msgstr "日志"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15657
+#: ../source/TortoiseSVN_en.xml:15658
 msgid ""
 "Show the revision history of a file or folder. Also known as <quote>History</"
 "quote>."
 msgstr "显示一个文件或是文件夹的版本历史。也就是<quote>历史</quote>。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15664
+#: ../source/TortoiseSVN_en.xml:15665
 msgid "History"
 msgstr "历史"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15666
+#: ../source/TortoiseSVN_en.xml:15667
 msgid ""
 "Show the revision history of a file or folder. Also known as <quote>Log</"
 "quote>."
 msgstr "显示文件或目录的历史修订，也被称为<quote>Log</quote>。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15675
+#: ../source/TortoiseSVN_en.xml:15676
 msgid ""
 "The process by which changes from the repository are added to your working "
 "copy without disrupting any changes you have already made locally. Sometimes "
@@ -22063,7 +22045,7 @@ msgstr ""
 "些修改可能不会自动的结合，也就是冲突了。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15681
+#: ../source/TortoiseSVN_en.xml:15682
 msgid ""
 "Merging happens automatically when you update your working copy. You can also "
 "merge specific changes from another branch using TortoiseSVN's Merge command."
@@ -22072,12 +22054,12 @@ msgstr ""
 "行合并。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15689
+#: ../source/TortoiseSVN_en.xml:15690
 msgid "Patch"
 msgstr "补丁"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15691
+#: ../source/TortoiseSVN_en.xml:15692
 msgid ""
 "If a working copy has changes to text files only, it is possible to use "
 "Subversion's Diff command to generate a single file summary of those changes "
@@ -22093,12 +22075,12 @@ msgstr ""
 "授权的人来应用补丁，或者是在不确定修改时提交补丁给别人进行评审。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15704
+#: ../source/TortoiseSVN_en.xml:15705
 msgid "Property"
 msgstr "属性"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15706
+#: ../source/TortoiseSVN_en.xml:15707
 msgid ""
 "In addition to versioning your directories and files, Subversion allows you "
 "to add versioned metadata - referred to as <quote>properties</quote> to each "
@@ -22115,7 +22097,7 @@ msgstr ""
 "择名称和值添加你自己的属性。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15721
+#: ../source/TortoiseSVN_en.xml:15722
 msgid ""
 "If your repository moves, perhaps because you have moved it to a different "
 "directory on your server, or the server domain name has changed, you need to "
@@ -22126,7 +22108,7 @@ msgstr ""
 "<quote>relocate</quote>你的工作副本，这样你的版本库URL指向新的地址。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15727
+#: ../source/TortoiseSVN_en.xml:15728
 msgid ""
 "Note: you should only use this command if your working copy is referring to "
 "the same location in the same repository, but the repository itself has "
@@ -22137,12 +22119,12 @@ msgstr ""
 "种情况下，你很有可能是需要<quote>Switch</quote>命令。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15736
+#: ../source/TortoiseSVN_en.xml:15737
 msgid "Repository"
 msgstr "版本库"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15738
+#: ../source/TortoiseSVN_en.xml:15739
 msgid ""
 "A repository is a central place where data is stored and maintained. A "
 "repository can be a place where multiple databases or files are located for "
@@ -22153,7 +22135,7 @@ msgstr ""
 "件组成，也可以存放在用户不需要通过网络就可以直接访问的某个位置。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15749
+#: ../source/TortoiseSVN_en.xml:15750
 msgid ""
 "When files in a working copy are left in a conflicted state following a "
 "merge, those conflicts must be sorted out by a human using an editor (or "
@@ -22166,7 +22148,7 @@ msgstr ""
 "突文件标示为解决，将会运行提交这个文件。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15761
+#: ../source/TortoiseSVN_en.xml:15762
 msgid ""
 "Subversion keeps a local <quote>pristine</quote> copy of each file as it was "
 "when you last updated your working copy. If you have made changes and decide "
@@ -22177,12 +22159,12 @@ msgstr ""
 "做出了修改，并希望取消修改，你可以使用<quote>revert</quote>回到原始状态。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15770
+#: ../source/TortoiseSVN_en.xml:15771
 msgid "Revision"
 msgstr "Revision"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15772
+#: ../source/TortoiseSVN_en.xml:15773
 msgid ""
 "Every time you commit a set of changes, you create one new <quote>revision</"
 "quote> in the repository. Each revision represents the state of the "
@@ -22194,19 +22176,19 @@ msgstr ""
 "N。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15779
+#: ../source/TortoiseSVN_en.xml:15780
 msgid ""
 "In another sense, a revision can refer to the set of changes that were made "
 "when that revision was created."
 msgstr "另一种情况下，你可以把修订看作修订版本建立的修改集。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15786
+#: ../source/TortoiseSVN_en.xml:15787
 msgid "Revision Property (revprop)"
 msgstr "版本属性(revprop)"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15788
+#: ../source/TortoiseSVN_en.xml:15789
 msgid ""
 "Just as files can have properties, so can each revision in the repository. "
 "Some special revprops are added automatically when the revision is created, "
@@ -22221,24 +22203,24 @@ msgstr ""
 "都是永久的，不可回退的。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15800
+#: ../source/TortoiseSVN_en.xml:15801
 msgid "SVN"
 msgstr "SVN"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15802
+#: ../source/TortoiseSVN_en.xml:15803
 msgid "A frequently-used abbreviation for Subversion."
 msgstr "Subversion 的常见缩写形式。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15805
+#: ../source/TortoiseSVN_en.xml:15806
 msgid ""
 "The name of the Subversion custom protocol used by the <quote>svnserve</"
 "quote> repository server."
 msgstr "Subversion 的<quote>svnserve</quote>版本库服务器使用的自定义协议名称。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15814
+#: ../source/TortoiseSVN_en.xml:15815
 msgid ""
 "Just as <quote>Update-to-revision</quote> changes the time window of a "
 "working copy to look at a different point in history, so <quote>Switch</"
@@ -22252,7 +22234,7 @@ msgstr ""
 "这个命令非常有用，你可以在目录之间跳转，而只会有很小区别需要传输。"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15828
+#: ../source/TortoiseSVN_en.xml:15829
 msgid ""
 "This Subversion command pulls down the latest changes from the repository "
 "into your working copy, merging any changes made by others with local changes "
@@ -22262,12 +22244,12 @@ msgstr ""
 "改。"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15836
+#: ../source/TortoiseSVN_en.xml:15837
 msgid "Working Copy"
 msgstr "工作副本"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15838
+#: ../source/TortoiseSVN_en.xml:15839
 msgid ""
 "This is your local <quote>sandbox</quote>, the area where you work on the "
 "versioned files, and it normally resides on your local hard disk. You create "
