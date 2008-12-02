@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2008-09-22 15:28 +0000\n"
-"PO-Revision-Date: 2008-09-28 21:18+0200\n"
-"Last-Translator: Kari Granö <kari.grano@gmail.com>\n"
+"POT-Creation-Date: 2008-12-01 21:44 +0000\n"
+"PO-Revision-Date: 2008-12-02 21:43+0200\n"
+"Last-Translator: kari grano <kari.grano@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2026,11 +2026,11 @@ msgstr ""
 #: ../source/TortoiseSVN_en.xml:2271
 msgid ""
 "Next you need to create an SSL certificate. To do that open a command prompt (DOS-Box) and change to the Apache folder (e.g. <filename>C:\\program files\\apache group\\apache2</filename>) and type the following command: <screen>\n"
-"bin\\openssl req -config bin\\openssl.cnf -new -out my-server.csr\n"
+"bin\\openssl req -config conf\\openssl.cnf -new -out my-server.csr\n"
 "</screen> You will be asked for a passphrase. Please don't use simple words but whole sentences, e.g. a part of a poem. The longer the phrase the better. Also you have to enter the URL of your server. All other questions are optional but we recommend you fill those in too."
 msgstr ""
 "Seuraavaksi sinun pitää luoda SSL-varmenne. Avaa komentorivikehote (DOS-ikkuna) ja vaihda Apache-kansioon (esim. <filename>C:\\program files\\apache group\\apache2</filename>) ja anna seuraava komento: <screen>\n"
-"bin\\openssl req -config bin\\openssl.cnf -new -out my-server.csr\n"
+"bin\\openssl req -config conf\\openssl.cnf -new -out my-server.csr\n"
 "</screen> Sinua pyydetään antamaan salauslause. Älä käytä pelkkiä sanoja, vaan kokonaisia lauseita, esim. osia runosta. Mitä pidempi salauslause, sen parempi. Sinulta kysytään myös palvelimesi paikannin. Muut kysymykset ovat vapaaehtoisia, mutta suosittelemme sinua vastaamaan myös niiihin."
 
 #. (para)
@@ -3403,7 +3403,7 @@ msgstr "lisää tiedostoja arkistoon"
 #: ../source/TortoiseSVN_en.xml:3718
 #: ../source/TortoiseSVN_en.xml:13715
 #: ../source/TortoiseSVN_en.xml:14870
-#: ../source/TortoiseSVN_en.xml:15631
+#: ../source/TortoiseSVN_en.xml:15637
 msgid "Import"
 msgstr "Tuo"
 
@@ -6347,7 +6347,7 @@ msgstr "Kun palautat muutoksia, saatat havaita, että toiminto vie pidempään k
 #: ../source/TortoiseSVN_en.xml:7438
 #: ../source/TortoiseSVN_en.xml:13703
 #: ../source/TortoiseSVN_en.xml:14739
-#: ../source/TortoiseSVN_en.xml:15524
+#: ../source/TortoiseSVN_en.xml:15530
 msgid "Cleanup"
 msgstr "Siivoaminen"
 
@@ -7057,8 +7057,8 @@ msgstr "Jos haluat käyttää yhdistämistä <emphasis>poistamaan</emphasis> aie
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8399
-msgid "If you have already merged some changes from this branch, hopefully you will have made a note of the last revision merged in the log message when you committed the change. In that case, you can use <guibutton>Show Log</guibutton> for the Working Copy to trace that log message. Use the end point of the last merge as the start point for this merge. For example, if you have merged revisions 37 to 39 last time, then the start point for this merge should be revision 39."
-msgstr "Jos  olet jo aiemmin yhdistänyt muita muutoksia tästä haarasta, olet toivottavasti kirjannut lokiviestiin tiedon viimeisestä yhdistetystä versiosta, kun toimitit muutokset arkistoon. Siinä tapauksessa voit käyttää työkopiosi  <guibutton>Näytä loki</guibutton> -komentoa etsiäksesi tuon lokiviestin. Käytä edellisen yhdistämisen loppupistettä alkupisteenä uudelle yhdistämiselle. Jos esimerkiksi viimeksi yhdistit versiot 37-39, niin uuden yhdistämisen aloitusversion tulisi olla 39."
+msgid "If you have already merged some changes from this branch, hopefully you will have made a note of the last revision merged in the log message when you committed the change. In that case, you can use <guibutton>Show Log</guibutton> for the Working Copy to trace that log message. Use the end point of the last merge as the start point for this merge. For example, if you have merged revisions 37 to 39 last time, then the start point for this merge should be revision 40."
+msgstr "Jos  olet jo aiemmin yhdistänyt muita muutoksia tästä haarasta, olet toivottavasti kirjannut lokiviestiin tiedon viimeisestä yhdistetystä versiosta, kun toimitit muutokset arkistoon. Siinä tapauksessa voit käyttää työkopiosi  <guibutton>Näytä loki</guibutton> -komentoa etsiäksesi tuon lokiviestin. Käytä edellisen yhdistämisen loppupistettä alkupisteenä uudelle yhdistämiselle. Jos esimerkiksi viimeksi yhdistit versiot 37-39, niin uuden yhdistämisen aloitusversion tulisi olla 40."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8410
@@ -9591,8 +9591,8 @@ msgstr "Lokiviestit (Näytä loki -ikkuna)"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:11684
-msgid "TortoiseSVN caches log messages fetched by the Show Log dialog to save time when you next show the log. If someone else edits a log message and you already have that message cached, you will not see the change until you clear the cache. Log message caching is enabled on the <guilabel>Dialogs 1</guilabel> tab."
-msgstr "TortoiseSVN tallettaa Näytä loki-komennon hakemat lokiviestit säästääkseen aikaa, kun seuraavan kerran avaat lokin. Jos joku muu muokkaa aiemmin talletettua lokiviestiä, et näe muutosta, ennen kuin tyhjennät talletetut lokiviestit. Lokiviestien talletus asetetaan päälle <guilabel>Ikkunat 1</guilabel> -sivulla."
+msgid "TortoiseSVN caches log messages fetched by the Show Log dialog to save time when you next show the log. If someone else edits a log message and you already have that message cached, you will not see the change until you clear the cache. Log message caching is enabled on the <guilabel>Log Cache</guilabel> tab."
+msgstr "TortoiseSVN tallettaa Näytä loki-komennon hakemat lokiviestit säästääkseen aikaa, kun seuraavan kerran avaat lokin. Jos joku muu muokkaa aiemmin talletettua lokiviestiä, et näe muutosta, ennen kuin tyhjennät talletetut lokiviestit. Lokiviestien talletus otetaan käyttöön asetusten <guilabel>Lokiviestien talletus</guilabel> -välilehdellä."
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:11695
@@ -10311,7 +10311,7 @@ msgstr "Lista käytettävissä olevista komentorivivalitsimista"
 #: ../source/TortoiseSVN_en.xml:12496
 #: ../source/TortoiseSVN_en.xml:13711
 #: ../source/TortoiseSVN_en.xml:14797
-#: ../source/TortoiseSVN_en.xml:15807
+#: ../source/TortoiseSVN_en.xml:15813
 msgid "Switch"
 msgstr "Vaihda"
 
@@ -11372,7 +11372,7 @@ msgstr "ryhmäkäytännöt"
 #. (primary)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13524
-#: ../source/TortoiseSVN_en.xml:15615
+#: ../source/TortoiseSVN_en.xml:15621
 msgid "GPO"
 msgstr "GPO"
 
@@ -11542,7 +11542,7 @@ msgstr "Valikon komento"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13683
 #: ../source/TortoiseSVN_en.xml:14491
-#: ../source/TortoiseSVN_en.xml:15515
+#: ../source/TortoiseSVN_en.xml:15521
 msgid "Checkout"
 msgstr "Hae työkopio"
 
@@ -11551,7 +11551,7 @@ msgstr "Hae työkopio"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13687
 #: ../source/TortoiseSVN_en.xml:14509
-#: ../source/TortoiseSVN_en.xml:15821
+#: ../source/TortoiseSVN_en.xml:15827
 msgid "Update"
 msgstr "Päivitä"
 
@@ -11560,7 +11560,7 @@ msgstr "Päivitä"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13691
 #: ../source/TortoiseSVN_en.xml:14548
-#: ../source/TortoiseSVN_en.xml:15541
+#: ../source/TortoiseSVN_en.xml:15547
 msgid "Commit"
 msgstr "Toimita"
 
@@ -11569,7 +11569,7 @@ msgstr "Toimita"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13695
 #: ../source/TortoiseSVN_en.xml:14860
-#: ../source/TortoiseSVN_en.xml:15458
+#: ../source/TortoiseSVN_en.xml:15464
 msgid "Add"
 msgstr "Lisää"
 
@@ -11578,14 +11578,14 @@ msgstr "Lisää"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13699
 #: ../source/TortoiseSVN_en.xml:14717
-#: ../source/TortoiseSVN_en.xml:15754
+#: ../source/TortoiseSVN_en.xml:15760
 msgid "Revert"
 msgstr "Palauta"
 
 #. (entry)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13707
-#: ../source/TortoiseSVN_en.xml:15742
+#: ../source/TortoiseSVN_en.xml:15748
 msgid "Resolve"
 msgstr "Ratkaise"
 
@@ -11594,7 +11594,7 @@ msgstr "Ratkaise"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13719
 #: ../source/TortoiseSVN_en.xml:14821
-#: ../source/TortoiseSVN_en.xml:15596
+#: ../source/TortoiseSVN_en.xml:15602
 msgid "Export"
 msgstr "Vie"
 
@@ -11615,7 +11615,7 @@ msgstr "Haaraudu/luo merkki"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13731
 #: ../source/TortoiseSVN_en.xml:14804
-#: ../source/TortoiseSVN_en.xml:15668
+#: ../source/TortoiseSVN_en.xml:15674
 msgid "Merge"
 msgstr "Yhdistä"
 
@@ -11624,7 +11624,7 @@ msgstr "Yhdistä"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13735
 #: ../source/TortoiseSVN_en.xml:14711
-#: ../source/TortoiseSVN_en.xml:15575
+#: ../source/TortoiseSVN_en.xml:15581
 msgid "Delete"
 msgstr "Poista"
 
@@ -11645,7 +11645,7 @@ msgstr "Päivitä versioon"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13747
 #: ../source/TortoiseSVN_en.xml:14595
-#: ../source/TortoiseSVN_en.xml:15587
+#: ../source/TortoiseSVN_en.xml:15593
 msgid "Diff"
 msgstr "Vertaa"
 
@@ -11668,7 +11668,7 @@ msgstr "Muokkaa ristiriitoja"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13759
 #: ../source/TortoiseSVN_en.xml:14846
-#: ../source/TortoiseSVN_en.xml:15714
+#: ../source/TortoiseSVN_en.xml:15720
 msgid "Relocate"
 msgstr "Siirrä"
 
@@ -11692,7 +11692,7 @@ msgstr "Arkistoselain"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13775
 #: ../source/TortoiseSVN_en.xml:14880
-#: ../source/TortoiseSVN_en.xml:15479
+#: ../source/TortoiseSVN_en.xml:15485
 msgid "Blame"
 msgstr "Selvitä tekijät"
 
@@ -11718,7 +11718,7 @@ msgstr "Versiograafi"
 #. (entry)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13791
-#: ../source/TortoiseSVN_en.xml:15640
+#: ../source/TortoiseSVN_en.xml:15646
 msgid "Lock"
 msgstr "Lukitse"
 
@@ -13423,273 +13423,278 @@ msgstr ""
 "svn+ssh://svnuser@mydomain.com/repos\n"
 "</screen> Kuten näet, emme käytä talletettua PuTTY-istuntoa vaan IP-osoitetta (tai nimeä) yhteyden kohteena. Annamme myös käyttäjän nimen, mutta saatat kysyä, miten salainen avaintiedosto löydetään. Koska TortoisePlink.exe on vain muunnos Plink-ohjelmasta, TortoiseSVN koettaa myös kaikkia Pageantiin talletettuja avaimia."
 
+#. (para)
+#: ../source/TortoiseSVN_en.xml:15450
+msgid "If you use this last method, be sure you do not have a default username set in PuTTY. We have had reports of a bug in PuTTY causing connections to close in this case. To remove the default user, simply clear <filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%20Settings\\HostName</filename>"
+msgstr "Jos käytät tätä viimeistä menetelmää, varmista, että et ole asettanut PuTTY-oletuskäyttäjää. PuTTY-ohjelmassa oleva virhe saattaa aiheuttaa tässä tapauksessa yhteyksien katkeamista. Oletuskäyttäjän poistamiseksi riittää tyhjentää rekisteriavain <filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%20Settings\\HostName</filename>."
+
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15456
+#: ../source/TortoiseSVN_en.xml:15462
 msgid "Glossary"
 msgstr "Sanasto"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15460
+#: ../source/TortoiseSVN_en.xml:15466
 msgid "A Subversion command that is used to add a file or directory to your working copy. The new items are added to the repository when you commit."
 msgstr "Subversion-komento, jota käytetään lisäämään tiedosto tai kansio työkopioosi. Uudet alkiot lisätään arkistoon, kun teet toimituksen."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15468
+#: ../source/TortoiseSVN_en.xml:15474
 msgid "BASE revision"
 msgstr "Kantaversio (BASE)"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15470
+#: ../source/TortoiseSVN_en.xml:15476
 msgid "The current base revision of a file or folder in your <emphasis>working copy</emphasis>. This is the revision the file or folder was in, when the last checkout, update or commit was run. The BASE revision is normally not equal to the HEAD revision."
 msgstr "Tiedoston tai kansion nykyinen kantaversion <emphasis>työkopiossasi</emphasis>. Tämä on se versio, johon tiedosto tai kansio siirtyi, kun viimeksi teit työkopion haun, päivityksen tai toimituksen. BASE-version ei tavallisesti ole sama kuin HEAD-versio."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15481
+#: ../source/TortoiseSVN_en.xml:15487
 msgid "This command is for text files only, and it annotates every line to show the repository revision in which it was last changed, and the author who made that change. Our GUI implementation is called TortoiseBlame and it also shows the commit date/time and the log message when you hover the mouse of the revision number."
 msgstr "Tämä komento on vain tekstitiedostoille; se yhdistää jokaiseen riviin tiedon siitä, missä arkistoversiossa sitä viimeksi muutettiin, ja kuka muutoksen teki. Graafisella käyttöliittymällä varustettu versiomme tästä on nimeltään TortoiseBlame; se myös näyttää toimituspäiväyksen, kellonajan ja lokiviestin, kun viet hiiren versionumeron päälle."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15491
+#: ../source/TortoiseSVN_en.xml:15497
 msgid "BDB"
 msgstr "BDB"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15493
+#: ../source/TortoiseSVN_en.xml:15499
 msgid "Berkeley DB. A well tested database backend for repositories, that cannot be used on network shares. Default for pre 1.2 repositories."
 msgstr "Berkeley-tietokanta. Koeteltu ja vakaa Subversion-arkiston toteuttamistekniikka, jota ei voi käyttää verkkojakojen kanssa. Oletustekniikka ennen Subversion-versiota 1.2."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15500
+#: ../source/TortoiseSVN_en.xml:15506
 msgid "Branch"
 msgstr "Haara"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15502
+#: ../source/TortoiseSVN_en.xml:15508
 msgid "A term frequently used in revision control systems to describe what happens when development forks at a particular point and follows 2 separate paths. You can create a branch off the main development line so as to develop a new feature without rendering the main line unstable. Or you can branch a stable release to which you make only bug fixes, while new developments take place on the unstable trunk. In Subversion a branch is implemented as a <quote>cheap copy</quote>."
 msgstr "Versionhallintajärjestelmissä käytetty termi, joka kuvaa tilannetta, jossa ohjelmiston kehitys eriytyy kahdelle eri polulle. Voit luoda haaran pääkehityshaarasta (usein \"trunk\") kehittääksesi uutta ominaisuutta ilman, että pääkehityshaara muuttuu epävakaaksi. Voit toisaalta myös tehdä vakautushaaran, johon korjataan vain virheitä, samalla kun uudet ominaisuudet lisätään (epävakaaseen) päähaaraan. Subversionissa haarat on toteutettu <quote>halpoina kopioina</quote>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15517
+#: ../source/TortoiseSVN_en.xml:15523
 msgid "A Subversion command which creates a local working copy in an empty directory by downloading versioned files from the repository."
 msgstr "Subversion-komento, joka luo paikallisen työkopion tyhjään hakemistoon noutamalla versioidut tiedostot arkistosta."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15526
+#: ../source/TortoiseSVN_en.xml:15532
 msgid "To quote from the Subversion book: <quote> Recursively clean up the working copy, removing locks and resuming unfinished operations. If you ever get a <emphasis>working copy locked</emphasis> error, run this command to remove stale locks and get your working copy into a usable state again. </quote> Note that in this context <emphasis>lock</emphasis> refers to local filesystem locking, not repository locking."
 msgstr "Lainaus Subversion-kirjasta: <quote>Siivoa työkopio palautuvasti, poistamalla lukitukset ja jatkamalla kesken jääneitä toimintoja. Jos törmäät joskus virheeseen <emphasis>työkopio lukittu</emphasis>, suorita tämä komento poistaaksesi vanhentuneet lukot ja saadaksesi työkopiosi jälleen käyttökelpoiseksi.</quote> Huomaa, että tässä yhteydessä <emphasis>lukitus</emphasis> viittaa tiedostojärjestelmän lukitukseen, ei arkiston lukkoihin."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15543
+#: ../source/TortoiseSVN_en.xml:15549
 msgid "This Subversion command is used to pass the changes in your local working copy back into the repository, creating a new repository revision."
 msgstr "Tämä Subversion-komento siirtää muutokset paikallisesta työkopiostasi arkistoon, luoden samalla uuden arkistoversion."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15551
+#: ../source/TortoiseSVN_en.xml:15557
 msgid "Conflict"
 msgstr "Ristiriita"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15553
+#: ../source/TortoiseSVN_en.xml:15559
 msgid "When changes from the repository are merged with local changes, sometimes those changes occur on the same lines. In this case Subversion cannot automatically decide which version to use and the file is said to be in conflict. You have to edit the file manually and resolve the conflict before you can commit any further changes."
 msgstr "Kun arkiston muutokset yhdistetään paikallisiin muutoksiin, ne ovat joskus samojen tiedostojen samoilla riveillä. Tässä tapauksessa Subversion ei voi automaattisesti päättää, mitä versiota käyttää - tiedoston sanotaan olevan ristiriitainen. Sinun on muokattava tiedostoa käsin ja ratkaistava ristiriita ennen kuin voit toimittaa uusia muutoksia arkistoon."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15563
+#: ../source/TortoiseSVN_en.xml:15569
 msgid "Copy"
 msgstr "Kopio"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15565
+#: ../source/TortoiseSVN_en.xml:15571
 msgid "In a Subversion repository you can create a copy of a single file or an entire tree. These are implemented as <quote>cheap copies</quote> which act a bit like a link to the original in that they take up almost no space. Making a copy preserves the history of the item in the copy, so you can trace changes made before the copy was made."
 msgstr "Subversion-arkistossa voi kopioida yksittäisiä tiedostoja tai kokonaisen puun. Nämä toiminnot on toteutettu <quote>halpoina kopioina</quote>, jotka ovat ikään kuin linkkejä alkuperäiseen ja vievät siten erittäin vähän tilaa. Kopiointi säilyttää alkion historian kopiossa, joten voit jäljittää muutoksia, jotka tehtiin ennen kopion tekoa."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15577
+#: ../source/TortoiseSVN_en.xml:15583
 msgid "When you delete a versioned item (and commit the change) the item no longer exists in the repository after the committed revision. But of course it still exists in earlier repository revisions, so you can still access it. If necessary, you can copy a deleted item and <quote>resurrect</quote> it complete with history."
 msgstr "Kun poistat versioidun alkion (ja toimitat muutoksen arkistoon), alkiota ei ole enää arkistossa toimitetun version jälkeen. Se on kuitenkin olemassa aiemmissa arkistoversioissa, joten voit yhä päästä siihen käsiksi. Jos tarpeen, voit kopioida poistetun alkion ja <quote>herättää sen henkiin</quote> muutoshistoria mukaan lukien."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15589
+#: ../source/TortoiseSVN_en.xml:15595
 msgid "Shorthand for <quote>Show Differences</quote>. Very useful when you want to see exactly what changes have been made."
 msgstr "Lyhennysmerkintä komennolle <quote>Vertaa</quote>. Hyödyllinen, jos haluat nähdä, mitä muutoksia on tehty."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15598
+#: ../source/TortoiseSVN_en.xml:15604
 msgid "This command produces a copy of a versioned folder, just like a working copy, but without the local <literal>.svn</literal> folders."
 msgstr "Komento tuottaa kopion versioidusta kansiosta ilman <literal>.svn</literal>-kansioita."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15606
+#: ../source/TortoiseSVN_en.xml:15612
 msgid "FSFS"
 msgstr "FSFS"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15608
+#: ../source/TortoiseSVN_en.xml:15614
 msgid "A proprietary Subversion filesystem backend for repositories. Can be used on network shares. Default for 1.2 and newer repositories."
 msgstr "Tiedostojärjestelmä, jota käytetään Subversion-arkistojen toteutustekniikkana. Voidaan käyttää verkkojakojen kanssa. Oletustekniikka Subversion-versiosta 1.2 eteenpäin."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15617
+#: ../source/TortoiseSVN_en.xml:15623
 msgid "Group policy object"
 msgstr "Ryhmäkäytäntöolio"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15623
+#: ../source/TortoiseSVN_en.xml:15629
 msgid "HEAD revision"
 msgstr "HEAD-versio"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15625
+#: ../source/TortoiseSVN_en.xml:15631
 msgid "The latest revision of a file or folder in the <emphasis>repository</emphasis>."
 msgstr "Tiedoston tai kansion viimeisin versio <emphasis>arkistossa</emphasis>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15633
+#: ../source/TortoiseSVN_en.xml:15639
 msgid "Subversion command to import an entire folder hierarchy into the repository in a single revision."
 msgstr "Subversion-komento, joka tuo kokonaisen kansiohierarkian arkistoon yhtenä versiona."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15642
+#: ../source/TortoiseSVN_en.xml:15648
 msgid "When you take out a lock on a versioned item, you mark it in the repository as non-committable, except from the working copy where the lock was taken out."
 msgstr "Kun lukitset versioidun alkion, siihen ei voida toimittaa muutoksia muualta kuin siitä työkopiosta, jossa lukitus tehtiin."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15650
+#: ../source/TortoiseSVN_en.xml:15656
 msgid "Log"
 msgstr "Loki"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15652
+#: ../source/TortoiseSVN_en.xml:15658
 msgid "Show the revision history of a file or folder. Also known as <quote>History</quote>."
 msgstr "Näyttää tiedoston tai kansio versiohistorian. Tunnetaan myös nimellä <quote>Historia</quote>."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15659
+#: ../source/TortoiseSVN_en.xml:15665
 msgid "History"
 msgstr "Historia"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15661
+#: ../source/TortoiseSVN_en.xml:15667
 msgid "Show the revision history of a file or folder. Also known as <quote>Log</quote>."
 msgstr "Näyttää tiedoston tai kansion versiohistorian. Tunnetaan myös nimellä <quote>Loki</quote>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15670
+#: ../source/TortoiseSVN_en.xml:15676
 msgid "The process by which changes from the repository are added to your working copy without disrupting any changes you have already made locally. Sometimes these changes cannot be reconciled automatically and the working copy is said to be in conflict."
 msgstr "Prosessi, jolla arkiston muutokset lisätään työkopioosi hävittämättä paikallisesti tekemiäsi muutoksia. Joskus näitä muutoksia ei voida ratkoa automaattisesti, ja silloin työkopion sanotaan olevan ristiriitainen."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15676
+#: ../source/TortoiseSVN_en.xml:15682
 msgid "Merging happens automatically when you update your working copy. You can also merge specific changes from another branch using TortoiseSVN's Merge command."
 msgstr "Yhdistäminen tapahtuu automaattisesti, kun päivität työkopiosi. Voit myös yhdistää yksittäisiä muutoksia toisesta haarasta TortoiseSVN:n yhdistämisikkunassa."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15684
+#: ../source/TortoiseSVN_en.xml:15690
 msgid "Patch"
 msgstr "Paikka"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15686
+#: ../source/TortoiseSVN_en.xml:15692
 msgid "If a working copy has changes to text files only, it is possible to use Subversion's Diff command to generate a single file summary of those changes in Unified Diff format. A file of this type is often referred to as a <quote>Patch</quote>, and it can be emailed to someone else (or to a mailing list) and applied to another working copy. Someone without commit access can make changes and submit a patch file for an authorized committer to apply. Or if you are unsure about a change you can submit a patch for others to review."
 msgstr "Jos työkopiossa on muutoksia vain tekstitiedostoihin, on mahdollista käyttää Subversionin Vertaa-komentoa (diff) näiden muutosten kuvaamiseksi yhdessä tiedostossa unified diff-muodossa. Tällaista tiedostoa kutsutaan usein <quote>Paikaksi</quote> (patch), ja se voidaan välittää sähköpostilla jollekulle ja käyttää toisessa työkopiossa.  Henkilö, jolla ei ole toimitusoikeuksia, voi toimittaa paikkatiedoston kehittäjälle, jolla tällainen oikeus on. Paikan voi myös lähettää postituslistalle katselmoitavaksi."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15699
+#: ../source/TortoiseSVN_en.xml:15705
 msgid "Property"
 msgstr "Ominaisuus"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15701
+#: ../source/TortoiseSVN_en.xml:15707
 msgid "In addition to versioning your directories and files, Subversion allows you to add versioned metadata - referred to as <quote>properties</quote> to each of your versioned directories and files. Each property has a name and a value, rather like a registry key. Subversion has some special properties which it uses internally, such as <literal>svn:eol-style</literal>. TortoiseSVN has some too, such as <literal>tsvn:logminsize</literal>. You can add your own properties with any name and value you choose."
 msgstr "Tiedostojen ja kansioiden versioinnin lisäksi Subversion sallii versioidun metatiedon (<quote>ominaisuuksien</quote>) lisäämisen yksittäisille tiedostoille ja kansioille. Kullakin ominaisuudella on nimi ja arvo (vrt. rekisteriavain). Subversion käyttää sisäisesti muutamia ominaisuuksia, joilla on erityismerkitys (esim. <literal>svn:eol-style</literal>). Sama pätee TortoiseSVN:ään (esim. <literal>tsvn:logminsize</literal>). Voit myös vapaasti lisätä omia ominaisuuksiasi."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15716
+#: ../source/TortoiseSVN_en.xml:15722
 msgid "If your repository moves, perhaps because you have moved it to a different directory on your server, or the server domain name has changed, you need to <quote>relocate</quote> your working copy so that its repository URLs point to the new location."
 msgstr "Jos arkistosi siirtyy esim. uuteen hakemistoon tai uudelle palvelimelle, joudut <quote>sijoittamaan työkopion uudelleen</quote> jotta sen arkistopaikantimet osoittavat uuteen paikkaan."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15722
+#: ../source/TortoiseSVN_en.xml:15728
 msgid "Note: you should only use this command if your working copy is referring to the same location in the same repository, but the repository itself has moved. In any other circumstance you probably need the <quote>Switch</quote> command instead."
 msgstr "Huomaa: tätä komentoa tulee käyttää vain, jos työkopio viittaa saman arkiston samaan paikkaan ja itse arkisto siirtyy. Useimmissa muissa tapauksissa haluat sen sijaan luultavasti käyttää komentoa <quote>Vaihda</quote>."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15731
+#: ../source/TortoiseSVN_en.xml:15737
 msgid "Repository"
 msgstr "Arkisto"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15733
+#: ../source/TortoiseSVN_en.xml:15739
 msgid "A repository is a central place where data is stored and maintained. A repository can be a place where multiple databases or files are located for distribution over a network, or a repository can be a location that is directly accessible to the user without having to travel across a network."
 msgstr "Arkisto on keskeinen paikka, mihin tietoa talletetaan ja missä sitä ylläpidetään. Arkisto voi olla paikka, joka jakaa useita tietokantoja tai tiedostoja verkon yli; arkisto voi myös olla paikka, joka on suoraan käyttäjän saatavilla ilman, että tietoa tarvitsee hakea verkosta."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15744
+#: ../source/TortoiseSVN_en.xml:15750
 msgid "When files in a working copy are left in a conflicted state following a merge, those conflicts must be sorted out by a human using an editor (or perhaps TortoiseMerge). This process is referred to as <quote>Resolving Conflicts</quote>. When this is complete you can mark the conflicted files as being resolved, which allows them to be committed."
 msgstr "Kun työkopion tiedostot jäävät yhdistämisen jälkeen ristiriitatilaan, ristiriidat on ratkottava kehittäjän toimesta jollain työkalulla (esim. TortoiseMerge). Tätä toimenpidettä kutsutaan <quote>ristiriitojen ratkaisemiseksi</quote>. Kun työ on valmis, voit merkitä ristiriitaiset tiedostot ratkaistuiksi, minkä jälkeen ne voidaan toimittaa arkistoon."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15756
+#: ../source/TortoiseSVN_en.xml:15762
 msgid "Subversion keeps a local <quote>pristine</quote> copy of each file as it was when you last updated your working copy. If you have made changes and decide you want to undo them, you can use the <quote>revert</quote> command to go back to the pristine copy."
 msgstr "Subversion säilyttää paikallista <quote>alkuperäistä</quote> kopiota jokaisesta tiedostosta sellaisena, kuin se oli viimeisen työkopion päivityksen yhteydessä. Jos teet muutoksia ja päätät perua ne, voit käyttää komentoa <quote>palauta</quote> palauttaaksesi alkuperäisen version."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15765
+#: ../source/TortoiseSVN_en.xml:15771
 msgid "Revision"
 msgstr "Versio"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15767
+#: ../source/TortoiseSVN_en.xml:15773
 msgid "Every time you commit a set of changes, you create one new <quote>revision</quote> in the repository. Each revision represents the state of the repository tree at a certain point in its history. If you want to go back in time you can examine the repository as it was at revision N."
 msgstr "Joka kerta kun toimitat joukon muutoksia, luot uuden <quote>version</quote> arkistoon. Jokainen versio esittää arkiston tilaa tietyssä kohtaa sen historiassa. Jos haluat siirtyä taakse päin ajassa, voit tutkia arkistoa sellaisena kuin se oli versiossa N."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15774
+#: ../source/TortoiseSVN_en.xml:15780
 msgid "In another sense, a revision can refer to the set of changes that were made when that revision was created."
 msgstr "Toisessa mielessä versio voi viitata siihen muutosten joukkoon, jotka tehtiin versiota luotaessa."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15781
+#: ../source/TortoiseSVN_en.xml:15787
 msgid "Revision Property (revprop)"
 msgstr "Versio-ominaisuus (revprop)"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15783
+#: ../source/TortoiseSVN_en.xml:15789
 msgid "Just as files can have properties, so can each revision in the repository. Some special revprops are added automatically when the revision is created, namely: <literal>svn:date svn:author svn:log</literal> which represent the commit date/time, the committer and the log message respectively. These properties can be edited, but they are not versioned, so any change is permanent and cannot be undone."
 msgstr "Aivan kuten tiedostoilla voi olla ominaisuuksia, niin voi myös kullakin arkiston versiolla. Joitakin erityisiä versio-ominaisuuksia lisätään automaatitsesti, kun versio luodaan, nimittäin: <literal>svn:date svn:author svn:log</literal>, joiden avulla esitetään toimitusaika, toimittaja ja lokiviesti. Näitä ominaisuuksia voi muokata, mutta niitä ei versioida, joten kaikki muutokset ovat pysyviä eikä niitä voida perua."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15795
+#: ../source/TortoiseSVN_en.xml:15801
 msgid "SVN"
 msgstr "SVN"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15797
+#: ../source/TortoiseSVN_en.xml:15803
 msgid "A frequently-used abbreviation for Subversion."
 msgstr "Subversionista usein käytetty lyhenne"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15800
+#: ../source/TortoiseSVN_en.xml:15806
 msgid "The name of the Subversion custom protocol used by the <quote>svnserve</quote> repository server."
 msgstr "Erityisen Subversion-yhteyskäytännön nimi, jota käyttää <quote>svnserve</quote> -arkistopalvelu."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15809
+#: ../source/TortoiseSVN_en.xml:15815
 msgid "Just as <quote>Update-to-revision</quote> changes the time window of a working copy to look at a different point in history, so <quote>Switch</quote> changes the space window of a working copy so that it points to a different part of the repository. It is particularly useful when working on trunk and branches where only a few files differ. You can switch your working copy between the two and only the changed files will be transferred."
 msgstr "Samoin kuin <quote>päivitä-versioon</quote> muuttaa työkopion aikaikkunan osoittamaan eri kohtaan historiassa, samoin komento <quote>vaihda</quote> muuttaa työkopion tilaikkunaa siten, että se osoittaa eri osaan arkistoa. Se on erityisen hyödyllinen kun työskennellään sellaisen päähaaran ja kehityshaarojen kanssa, joissa vain muutamat tiedostot poikkeavat toisistaan. Voit vaihtaa työkopiosi näitten välillä, ja vain muuttuneet tiedostot siirretään."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15823
+#: ../source/TortoiseSVN_en.xml:15829
 msgid "This Subversion command pulls down the latest changes from the repository into your working copy, merging any changes made by others with local changes in the working copy."
 msgstr "Tämä Subversion-komento hakee viimeisimmät muutokset arkistosta työkopioosi, yhdistäen muitten mahdollisesti tekemät muutokset paikallisiin muutoksiisi."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15831
+#: ../source/TortoiseSVN_en.xml:15837
 msgid "Working Copy"
 msgstr "Työkopio"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15833
+#: ../source/TortoiseSVN_en.xml:15839
 msgid "This is your local <quote>sandbox</quote>, the area where you work on the versioned files, and it normally resides on your local hard disk. You create a working copy by doing a <quote>Checkout</quote> from a repository, and you feed your changes back into the repository using <quote>Commit</quote>."
 msgstr "Paikallinen <quote>hiekkalaatikkosi</quote>, alue jossa työskentelet versioitujen tiedostojen kanssa.  Sijaitsee tavallisesti paikallisella kiintolevylläsi. Työkopio luodaan suorittamalla <quote>Hae työkopio</quote> -komento arkistosta, ja saat siirrettyä muutoksesi takaisin arkistoon komennolla <quote>Toimita</quote>."
 
