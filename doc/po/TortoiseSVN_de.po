@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2008-09-22 15:28 +0000\n"
-"PO-Revision-Date: 2008-09-24 11:03+0100\n"
+"POT-Creation-Date: 2008-12-01 21:44 +0000\n"
+"PO-Revision-Date: 2008-12-02 14:48+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -2037,11 +2037,11 @@ msgstr ""
 #: ../source/TortoiseSVN_en.xml:2271
 msgid ""
 "Next you need to create an SSL certificate. To do that open a command prompt (DOS-Box) and change to the Apache folder (e.g. <filename>C:\\program files\\apache group\\apache2</filename>) and type the following command: <screen>\n"
-"bin\\openssl req -config bin\\openssl.cnf -new -out my-server.csr\n"
+"bin\\openssl req -config conf\\openssl.cnf -new -out my-server.csr\n"
 "</screen> You will be asked for a passphrase. Please don't use simple words but whole sentences, e.g. a part of a poem. The longer the phrase the better. Also you have to enter the URL of your server. All other questions are optional but we recommend you fill those in too."
 msgstr ""
 "Als nächstes benötigen Sie ein SSL Zertifikat. Dazu starten Sie eine Kommandozeile (DOS-Box) und wechseln in den Apache Ordner (z.B. <filename>C:\\Programme\\apache group\\apache2</filename>) und geben den folgenden Befehl ein:\n"
-"<screen>bin\\openssl req -config bin\\openssl.cnf -new -out my-server.csr</screen>\n"
+"<screen>conf\\openssl req -config bin\\openssl.cnf -new -out my-server.csr</screen>\n"
 "Sie werden nach einer Passphrase gefragt. Bitte nutzen Sie keine einfachen Wörter sondern ganze Sätze, z.B. ein Teil eines Gedichts. Je länger die Passphrase ist, desto besser. Außerdem müssen Sie die URL Ihres Servers angeben. Alle anderen Angaben sind optional. Sie sollten Sie aber trotzdem ausfüllen."
 
 #. (para)
@@ -3423,7 +3423,7 @@ msgstr "Dateien zum Projektarchiv hinzufügen"
 #: ../source/TortoiseSVN_en.xml:3718
 #: ../source/TortoiseSVN_en.xml:13715
 #: ../source/TortoiseSVN_en.xml:14870
-#: ../source/TortoiseSVN_en.xml:15631
+#: ../source/TortoiseSVN_en.xml:15637
 msgid "Import"
 msgstr "Importieren"
 
@@ -6385,7 +6385,7 @@ msgstr "Wenn Sie Änderungen zurücknehmen, kommt Ihnen diese Aktion unter Umst�
 #: ../source/TortoiseSVN_en.xml:7438
 #: ../source/TortoiseSVN_en.xml:13703
 #: ../source/TortoiseSVN_en.xml:14739
-#: ../source/TortoiseSVN_en.xml:15524
+#: ../source/TortoiseSVN_en.xml:15530
 msgid "Cleanup"
 msgstr "Aufräumen"
 
@@ -7095,8 +7095,8 @@ msgstr "Wenn Sie bereits übertragene Änderungen rückgängig machen wollen, er
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8399
-msgid "If you have already merged some changes from this branch, hopefully you will have made a note of the last revision merged in the log message when you committed the change. In that case, you can use <guibutton>Show Log</guibutton> for the Working Copy to trace that log message. Use the end point of the last merge as the start point for this merge. For example, if you have merged revisions 37 to 39 last time, then the start point for this merge should be revision 39."
-msgstr "Wenn Sie bereits Änderungen aus diesem Zweig zusammengeführt haben, so haben Sie hoffentlich auch in der Logmeldung notiert, welche Revisionen das waren. In diesem Fall können Sie einfach mit Hilfe der <guibutton>Zeige Log</guibutton> Schaltfläche nachschauen. Verwenden Sie die Endrevision des letzten Zusammenführens als Startrevision der geplanten Aktion. Wenn Sie zum Beispiel zuletzt die Revisionen 37 bis 39 mit Ihrer Arbeitskopie zusammengeführt haben, sollte die Startrevision für die aktuelle Aktion 39 sein."
+msgid "If you have already merged some changes from this branch, hopefully you will have made a note of the last revision merged in the log message when you committed the change. In that case, you can use <guibutton>Show Log</guibutton> for the Working Copy to trace that log message. Use the end point of the last merge as the start point for this merge. For example, if you have merged revisions 37 to 39 last time, then the start point for this merge should be revision 40."
+msgstr "Wenn Sie bereits Änderungen aus diesem Zweig zusammengeführt haben, so haben Sie hoffentlich auch in der Logmeldung notiert, welche Revisionen das waren. In diesem Fall können Sie einfach mit Hilfe der <guibutton>Zeige Log</guibutton> Schaltfläche nachschauen. Verwenden Sie die Endrevision des letzten Zusammenführens als Startrevision der geplanten Aktion. Wenn Sie zum Beispiel zuletzt die Revisionen 37 bis 39 mit Ihrer Arbeitskopie zusammengeführt haben, sollte die Startrevision für die aktuelle Aktion 40 sein."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8410
@@ -9631,8 +9631,8 @@ msgstr "Logmeldungen (Zeige Log-Dialog)"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:11684
-msgid "TortoiseSVN caches log messages fetched by the Show Log dialog to save time when you next show the log. If someone else edits a log message and you already have that message cached, you will not see the change until you clear the cache. Log message caching is enabled on the <guilabel>Dialogs 1</guilabel> tab."
-msgstr "TortoiseSVN speichert bereits übertragene Logmeldungen lokal, um beim nächsten Anzeigen desselben Logs Zeit zu sparen. Wenn jemand eine Logmeldung ändert, die bereits lokal vorhanden ist, werden Sie die Änderung nicht sehen bevor Sie den Zwischenspeicher gelöscht haben. Das Speichern von Logmeldungen wird auf <guilabel>Dialoge 1</guilabel> Seite in den TortoiseSVN Einstellungen aktiviert."
+msgid "TortoiseSVN caches log messages fetched by the Show Log dialog to save time when you next show the log. If someone else edits a log message and you already have that message cached, you will not see the change until you clear the cache. Log message caching is enabled on the <guilabel>Log Cache</guilabel> tab."
+msgstr "TortoiseSVN speichert bereits übertragene Logmeldungen lokal, um beim nächsten Anzeigen desselben Logs Zeit zu sparen. Wenn jemand eine Logmeldung ändert, die bereits lokal vorhanden ist, werden Sie die Änderung nicht sehen bevor Sie den Zwischenspeicher gelöscht haben. Das Speichern von Logmeldungen wird auf <guilabel>Log-Puffer</guilabel> Seite in den TortoiseSVN Einstellungen aktiviert."
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:11695
@@ -10350,7 +10350,7 @@ msgstr "Liste der Kommandozeilenoptionen"
 #: ../source/TortoiseSVN_en.xml:12496
 #: ../source/TortoiseSVN_en.xml:13711
 #: ../source/TortoiseSVN_en.xml:14797
-#: ../source/TortoiseSVN_en.xml:15807
+#: ../source/TortoiseSVN_en.xml:15813
 msgid "Switch"
 msgstr "Wechseln zu"
 
@@ -11403,7 +11403,7 @@ msgstr "Gruppenrichtlinien"
 #. (primary)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13524
-#: ../source/TortoiseSVN_en.xml:15615
+#: ../source/TortoiseSVN_en.xml:15621
 msgid "GPO"
 msgstr "GPO"
 
@@ -11574,7 +11574,7 @@ msgstr "Menüeintrag"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13683
 #: ../source/TortoiseSVN_en.xml:14491
-#: ../source/TortoiseSVN_en.xml:15515
+#: ../source/TortoiseSVN_en.xml:15521
 msgid "Checkout"
 msgstr "Auschecken"
 
@@ -11583,7 +11583,7 @@ msgstr "Auschecken"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13687
 #: ../source/TortoiseSVN_en.xml:14509
-#: ../source/TortoiseSVN_en.xml:15821
+#: ../source/TortoiseSVN_en.xml:15827
 msgid "Update"
 msgstr "Aktualisieren"
 
@@ -11592,7 +11592,7 @@ msgstr "Aktualisieren"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13691
 #: ../source/TortoiseSVN_en.xml:14548
-#: ../source/TortoiseSVN_en.xml:15541
+#: ../source/TortoiseSVN_en.xml:15547
 msgid "Commit"
 msgstr "Übertragen"
 
@@ -11601,7 +11601,7 @@ msgstr "Übertragen"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13695
 #: ../source/TortoiseSVN_en.xml:14860
-#: ../source/TortoiseSVN_en.xml:15458
+#: ../source/TortoiseSVN_en.xml:15464
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -11610,14 +11610,14 @@ msgstr "Hinzufügen"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13699
 #: ../source/TortoiseSVN_en.xml:14717
-#: ../source/TortoiseSVN_en.xml:15754
+#: ../source/TortoiseSVN_en.xml:15760
 msgid "Revert"
 msgstr "Rückgängig"
 
 #. (entry)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13707
-#: ../source/TortoiseSVN_en.xml:15742
+#: ../source/TortoiseSVN_en.xml:15748
 msgid "Resolve"
 msgstr "Konflikt lösen"
 
@@ -11626,7 +11626,7 @@ msgstr "Konflikt lösen"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13719
 #: ../source/TortoiseSVN_en.xml:14821
-#: ../source/TortoiseSVN_en.xml:15596
+#: ../source/TortoiseSVN_en.xml:15602
 msgid "Export"
 msgstr "Exportieren"
 
@@ -11647,7 +11647,7 @@ msgstr "Verzweigen / Markieren"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13731
 #: ../source/TortoiseSVN_en.xml:14804
-#: ../source/TortoiseSVN_en.xml:15668
+#: ../source/TortoiseSVN_en.xml:15674
 msgid "Merge"
 msgstr "Zusammenführen"
 
@@ -11656,7 +11656,7 @@ msgstr "Zusammenführen"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13735
 #: ../source/TortoiseSVN_en.xml:14711
-#: ../source/TortoiseSVN_en.xml:15575
+#: ../source/TortoiseSVN_en.xml:15581
 msgid "Delete"
 msgstr "Löschen"
 
@@ -11677,7 +11677,7 @@ msgstr "Aktualisiere zu Revision"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13747
 #: ../source/TortoiseSVN_en.xml:14595
-#: ../source/TortoiseSVN_en.xml:15587
+#: ../source/TortoiseSVN_en.xml:15593
 msgid "Diff"
 msgstr "Vergleich"
 
@@ -11700,7 +11700,7 @@ msgstr "Konflikt bearbeiten"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13759
 #: ../source/TortoiseSVN_en.xml:14846
-#: ../source/TortoiseSVN_en.xml:15714
+#: ../source/TortoiseSVN_en.xml:15720
 msgid "Relocate"
 msgstr "Umplatzieren"
 
@@ -11724,7 +11724,7 @@ msgstr "Projektarchivbetrachter"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13775
 #: ../source/TortoiseSVN_en.xml:14880
-#: ../source/TortoiseSVN_en.xml:15479
+#: ../source/TortoiseSVN_en.xml:15485
 msgid "Blame"
 msgstr "Annotieren"
 
@@ -11750,7 +11750,7 @@ msgstr "Revisionsgraph"
 #. (entry)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13791
-#: ../source/TortoiseSVN_en.xml:15640
+#: ../source/TortoiseSVN_en.xml:15646
 msgid "Lock"
 msgstr "Sperren"
 
@@ -13468,273 +13468,278 @@ msgstr ""
 "svn+ssh://svnuser@mydomain.com/repos</screen>\n"
 "Wie Sie sehen verwenden wir keine gespeicherte PuTTY Sitzung sondern eine IP Adresse (oder einen Domänennamen) als Verbindungsziel. Wir geben auch den Benutzer an, aber Sie fragen sich sicherlich wie die private Schlüsseldatei gefunden wird. Da TortoisePlink nur eine abgewandelte Version des Standard Plink aus dem PuTTY Paket ist, verwendet TortoiseSVN alle in Pageant abgespeicherten Schlüssel."
 
+#. (para)
+#: ../source/TortoiseSVN_en.xml:15450
+msgid "If you use this last method, be sure you do not have a default username set in PuTTY. We have had reports of a bug in PuTTY causing connections to close in this case. To remove the default user, simply clear <filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%20Settings\\HostName</filename>"
+msgstr "Wenn Sie die letztgenannte Methode verwenden, geben Sie bitte keinen Standard Benutzernamen in PuTTY an. Wir haben Berichte über einen Fehler in PuTTY erhalten, dass Verbindungen in diesem Fall geschlossen werden. Um den Standardbenutzer zu entfernen, löschen Sie einfach den Registrierungsschlüssel <filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%20Settings\\HostName</filename>"
+
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15456
+#: ../source/TortoiseSVN_en.xml:15462
 msgid "Glossary"
 msgstr "Glossar"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15460
+#: ../source/TortoiseSVN_en.xml:15466
 msgid "A Subversion command that is used to add a file or directory to your working copy. The new items are added to the repository when you commit."
 msgstr "Ein Subversion Befehl, der zum Hinzufügen von Dateien oder Ordnern zu einem Projektarchiv benutzt wird. Die neuen Objekte werden beim Übertragen zum Projektarchiv hinzugefügt."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15468
+#: ../source/TortoiseSVN_en.xml:15474
 msgid "BASE revision"
 msgstr "BASE Revision"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15470
+#: ../source/TortoiseSVN_en.xml:15476
 msgid "The current base revision of a file or folder in your <emphasis>working copy</emphasis>. This is the revision the file or folder was in, when the last checkout, update or commit was run. The BASE revision is normally not equal to the HEAD revision."
 msgstr "Die aktuelle Basisrevision einer Datei oder eines Ordners in Ihrer <emphasis>Arbeitskopie</emphasis>. Dies ist die Revision in der sich die Datei oder der Ordners befand als zuletzt Auschecken, Aktualisieren oder Übertragen aufgerufen wurde. Die BASE Revision entspricht normalerweise nicht der HEAD Revision"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15481
+#: ../source/TortoiseSVN_en.xml:15487
 msgid "This command is for text files only, and it annotates every line to show the repository revision in which it was last changed, and the author who made that change. Our GUI implementation is called TortoiseBlame and it also shows the commit date/time and the log message when you hover the mouse of the revision number."
 msgstr "Dieser Befehl steht nur für Textdateien zur Verfügung und er annotiert jede Zeile mit der Revision und dem letzten Autor. In unserer GUI Anwendung namens TortoiseBlame wird zusätzlich die Logmeldung angezeigt, wenn Sie mit der Maus über die Revisionsnummer fahren."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15491
+#: ../source/TortoiseSVN_en.xml:15497
 msgid "BDB"
 msgstr "BDB"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15493
+#: ../source/TortoiseSVN_en.xml:15499
 msgid "Berkeley DB. A well tested database backend for repositories, that cannot be used on network shares. Default for pre 1.2 repositories."
 msgstr "Berkeley DB. Ein bewährtes Datenbanksystem für Projektarchive. Kann nicht über Netzwerkfreigaben genutzt werden. Standard für Projektarchive von Subversion vor Version 1.2."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15500
+#: ../source/TortoiseSVN_en.xml:15506
 msgid "Branch"
 msgstr "Verzweigen"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15502
+#: ../source/TortoiseSVN_en.xml:15508
 msgid "A term frequently used in revision control systems to describe what happens when development forks at a particular point and follows 2 separate paths. You can create a branch off the main development line so as to develop a new feature without rendering the main line unstable. Or you can branch a stable release to which you make only bug fixes, while new developments take place on the unstable trunk. In Subversion a branch is implemented as a <quote>cheap copy</quote>."
 msgstr "Ein Begriff der häufig in Versionskontrollsystemen verwendet wird, um zu beschreiben, wenn sich die Entwicklung an einem bestimmten Punkt verzweigt und verschiedenen Wegen folgt. Sie können von der Hauptentwicklungslinie abzweigen, um neue Funktionen zu implementieren ohne den Hauptzweig instabil zu machen. Genauso können Sie eine stabile, freigegebene Version abzweigen, an der Sie nur noch Fehler beseitigen, während die Weiterentwicklung am instabilen Hauptzweig erfolgt. In Subversion sind Zweige als <quote>billige Kopien</quote> implementiert."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15517
+#: ../source/TortoiseSVN_en.xml:15523
 msgid "A Subversion command which creates a local working copy in an empty directory by downloading versioned files from the repository."
 msgstr "Ein Subversionbefehl, der eine lokale Arbeitskopie in einem leeren Verzeichnis erstellt, indem versionierte Dateien aus einem Projektarchiv heruntergeladen werden."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15526
+#: ../source/TortoiseSVN_en.xml:15532
 msgid "To quote from the Subversion book: <quote> Recursively clean up the working copy, removing locks and resuming unfinished operations. If you ever get a <emphasis>working copy locked</emphasis> error, run this command to remove stale locks and get your working copy into a usable state again. </quote> Note that in this context <emphasis>lock</emphasis> refers to local filesystem locking, not repository locking."
 msgstr "Ein Zitat aus dem Subversion Buch: <quote>Räumt die Arbeitskopie rekursiv auf, entfernt dabei Sperren und setzt unvollendete Operationen fort. Wenn Sie jemals einen <emphasis>Arbeitskopie gesperrt</emphasis> Fehler bekommen, führen Sie diesen Befehl aus, um veraltete Sperren zu entfernen und Ihre Arbeitskopie wieder in einen nutzbaren Zustand zu versetzen.</quote> Beachten Sie, dass in diesem Zusammenhang <emphasis>Sperren</emphasis> lokale Dateisystemsperren bezeichnet und keine Sperren im Projektarchiv."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15543
+#: ../source/TortoiseSVN_en.xml:15549
 msgid "This Subversion command is used to pass the changes in your local working copy back into the repository, creating a new repository revision."
 msgstr "Dieser Subversionbefehl wird verwendet, um die Änderungen in Ihrer lokalen Arbeitskopie zurück in das Projektarchiv zu übertragen."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15551
+#: ../source/TortoiseSVN_en.xml:15557
 msgid "Conflict"
 msgstr "Konflikt"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15553
+#: ../source/TortoiseSVN_en.xml:15559
 msgid "When changes from the repository are merged with local changes, sometimes those changes occur on the same lines. In this case Subversion cannot automatically decide which version to use and the file is said to be in conflict. You have to edit the file manually and resolve the conflict before you can commit any further changes."
 msgstr "Wenn Änderungen vom Projektarchiv mit den lokalen Änderungen zusammengeführt werden sollen, kann es vorkommen dass diese Änderungen in den selben Zeilen der Datei auftreten. In diesem Fall kann Subversion nicht selbst entscheiden welche Version zu verwenden ist und die Datei wird somit als <quote>in Konflikt</quote> markiert. Sie müssen die Datei von Hand editieren und den Konflikt auflösen, bevor Sie weitere Änderungen übertragen können."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15563
+#: ../source/TortoiseSVN_en.xml:15569
 msgid "Copy"
 msgstr "Kopieren"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15565
+#: ../source/TortoiseSVN_en.xml:15571
 msgid "In a Subversion repository you can create a copy of a single file or an entire tree. These are implemented as <quote>cheap copies</quote> which act a bit like a link to the original in that they take up almost no space. Making a copy preserves the history of the item in the copy, so you can trace changes made before the copy was made."
 msgstr "In einem Subversion Projektarchiv können Sie eine Kopie einer einzelnen Datei oder eines ganzen Baumes erstellen. Diese sind als <quote>billige Kopien</quote> in Form eines Verweises auf das Original implementiert. Somit benötigt selbst die Kopie eines Dateibaumes fast keinen Platz. Eine Kopie behält die Historie ihrer Vorgänger, so dass auch Logmeldungen über die Kopie hinaus verfolgt werden können."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15577
+#: ../source/TortoiseSVN_en.xml:15583
 msgid "When you delete a versioned item (and commit the change) the item no longer exists in the repository after the committed revision. But of course it still exists in earlier repository revisions, so you can still access it. If necessary, you can copy a deleted item and <quote>resurrect</quote> it complete with history."
 msgstr "Wenn Sie ein versioniertes Objekt löschen (und dann Übertragen), existiert die Datei oder Ordner nach der übertragenen Revision nicht mehr im Projektarchiv. Aber selbstverständlich existiert diese noch in früheren Revisionen und es kann immer noch darauf zugegriffen werden. Falls notwendig, können Sie das gelöschte Objekt wieder in die Arbeitskopie kopieren und diese so mit der kompletten Historie <quote>wieder herstellen</quote>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15589
+#: ../source/TortoiseSVN_en.xml:15595
 msgid "Shorthand for <quote>Show Differences</quote>. Very useful when you want to see exactly what changes have been made."
 msgstr "Abkürzung für <quote>Zeige Unterschiede</quote>. Sehr nützlich, wenn Sie genau sehen wollen, welche Änderungen Sie vorgenommen haben."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15598
+#: ../source/TortoiseSVN_en.xml:15604
 msgid "This command produces a copy of a versioned folder, just like a working copy, but without the local <literal>.svn</literal> folders."
 msgstr "Dieser Befehl erzeugt eine Kopie eines versionierten Ordners. Wie eine Arbeitskopie jedoch ohne die lokalen <literal>.svn</literal> Verzeichnisse."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15606
+#: ../source/TortoiseSVN_en.xml:15612
 msgid "FSFS"
 msgstr "FSFS"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15608
+#: ../source/TortoiseSVN_en.xml:15614
 msgid "A proprietary Subversion filesystem backend for repositories. Can be used on network shares. Default for 1.2 and newer repositories."
 msgstr "Ein proprietäres Subversion-Dateisystem für Projektarchive. Kann über Netzwerkfreigaben genutzt werden. Seit Version 1.2 Standard für neue Projektarchive."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15617
+#: ../source/TortoiseSVN_en.xml:15623
 msgid "Group policy object"
 msgstr "Gruppenrichtlinienobjekt"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15623
+#: ../source/TortoiseSVN_en.xml:15629
 msgid "HEAD revision"
 msgstr "HEAD Revision"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15625
+#: ../source/TortoiseSVN_en.xml:15631
 msgid "The latest revision of a file or folder in the <emphasis>repository</emphasis>."
 msgstr "Die neueste Version einer Datei oder eines Ordners im <emphasis>Projektarchiv</emphasis>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15633
+#: ../source/TortoiseSVN_en.xml:15639
 msgid "Subversion command to import an entire folder hierarchy into the repository in a single revision."
 msgstr "Ein Subversionbefehl mit dem eine vollständige Ordnerhierarchie mit einer einzigen Revision in ein Projektarchiv importiert wird."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15642
+#: ../source/TortoiseSVN_en.xml:15648
 msgid "When you take out a lock on a versioned item, you mark it in the repository as non-committable, except from the working copy where the lock was taken out."
 msgstr "Wenn Sie eine Datei sperren, wird diese im Projektarchiv als nicht übertragbar markiert, mit Ausnahme der Arbeitskopie von der aus aus die Sperre gesetzt wurde."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15650
+#: ../source/TortoiseSVN_en.xml:15656
 msgid "Log"
 msgstr "Protokoll"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15652
+#: ../source/TortoiseSVN_en.xml:15658
 msgid "Show the revision history of a file or folder. Also known as <quote>History</quote>."
 msgstr "Zeigt das Änderungsprotokoll einer Datei oder eines Ordners. Auch <quote>Historie</quote> genannt."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15659
+#: ../source/TortoiseSVN_en.xml:15665
 msgid "History"
 msgstr "Historie"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15661
+#: ../source/TortoiseSVN_en.xml:15667
 msgid "Show the revision history of a file or folder. Also known as <quote>Log</quote>."
 msgstr "Zeigt die Revisionshistorie einer Datei oder eines Ordners. Auch als <quote>Log</quote> bekannt."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15670
+#: ../source/TortoiseSVN_en.xml:15676
 msgid "The process by which changes from the repository are added to your working copy without disrupting any changes you have already made locally. Sometimes these changes cannot be reconciled automatically and the working copy is said to be in conflict."
 msgstr "Der Prozess mit welchem Änderungen vom Projektarchiv zur Arbeitskopie hinzugefügt werden, ohne lokale Änderungen zu beeinträchtigen. Manchmal können diese Änderungen nicht automatisch hinzugefügt werden und die Arbeitskopie befindet sich dann in einem Konflikt."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15676
+#: ../source/TortoiseSVN_en.xml:15682
 msgid "Merging happens automatically when you update your working copy. You can also merge specific changes from another branch using TortoiseSVN's Merge command."
 msgstr "Das Zusammenführen passiert automatisch, wenn Sie ihre Arbeitskopie aktualisieren. Sie können auch mit dem TortoiseSVN Befehl <quote>Zusammenführen</quote> spezifische Änderungen von einem Zweig in der Arbeitskopie zusammenführen."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15684
+#: ../source/TortoiseSVN_en.xml:15690
 msgid "Patch"
 msgstr "Patch"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15686
+#: ../source/TortoiseSVN_en.xml:15692
 msgid "If a working copy has changes to text files only, it is possible to use Subversion's Diff command to generate a single file summary of those changes in Unified Diff format. A file of this type is often referred to as a <quote>Patch</quote>, and it can be emailed to someone else (or to a mailing list) and applied to another working copy. Someone without commit access can make changes and submit a patch file for an authorized committer to apply. Or if you are unsure about a change you can submit a patch for others to review."
 msgstr "Wenn eine Arbeitskopie nur Änderungen an Textdateien aufweist, ist es möglich mit dem Diff-Befehl von Subversion eine Datei zu erstellen, welche diese Änderungen im Standard-Diff Format enthält. Eine Datei mit solchem Inhalt wird üblicherweise als <quote>Patch</quote> bezeichnet und kann zum Beispiel jemand anderem per Mail geschickt werden, der diese Änderungen dann in seine Arbeitskopie übernehmen kann. Jemand ohne Übertragungsrechte zum Projektarchiv kann so Änderungen vornehmen, diese Änderungen an eine Person mit Übertragungsrechten schicken, welche dann diese Änderungen übertragen kann. Oder man kann eine solche Patchdatei anderen zuerst zur Diskussion schicken, bevor man die Änderungen überträgt."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15699
+#: ../source/TortoiseSVN_en.xml:15705
 msgid "Property"
 msgstr "Eigenschaft"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15701
+#: ../source/TortoiseSVN_en.xml:15707
 msgid "In addition to versioning your directories and files, Subversion allows you to add versioned metadata - referred to as <quote>properties</quote> to each of your versioned directories and files. Each property has a name and a value, rather like a registry key. Subversion has some special properties which it uses internally, such as <literal>svn:eol-style</literal>. TortoiseSVN has some too, such as <literal>tsvn:logminsize</literal>. You can add your own properties with any name and value you choose."
 msgstr "Zusätzlich zur Versionierung von Dateien und Ordnern erlaubt Subversion die Versionierung von Metadaten für Ordner und Dateien, auch als <quote>Eigenschaften</quote> bezeichnet. Jede Eigenschaft hat einen Namen und einen Wert, ähnlich wie ein Registrierungsschlüssel. Subversion selbst hat einige spezielle Eigenschaften definiert, welche intern benutzt werden, wie zum Beispiel <literal>svn:eol-style</literal>. TortoiseSVN nutzt ebenfalls spezielle Eigenschaften, so zum Beispiel <literal>tsvn:logminsize</literal>. Sie können eigene Eigenschaften mit jedem Namen und Wert erstellen den sie möchten."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15716
+#: ../source/TortoiseSVN_en.xml:15722
 msgid "If your repository moves, perhaps because you have moved it to a different directory on your server, or the server domain name has changed, you need to <quote>relocate</quote> your working copy so that its repository URLs point to the new location."
 msgstr "Wenn das Projektarchiv verschoben wird, vielleicht weil Sie es in einen anderen Ordner auf dem Server verschoben haben oder der Domänenname des Servers ändert, dann müssen Sie die Arbeitskopie <quote>umplatzieren</quote>, so dass die Projektarchiv-URL zum neuen Ort zeigt."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15722
+#: ../source/TortoiseSVN_en.xml:15728
 msgid "Note: you should only use this command if your working copy is referring to the same location in the same repository, but the repository itself has moved. In any other circumstance you probably need the <quote>Switch</quote> command instead."
 msgstr "Hinweis: Sie sollten diesen Befehl nur benutzen wenn die Arbeitskopie zur selben Stelle im Projektarchiv selbst zeigt und nur das Projektarchiv selbst verschoben wurde. In allen anderen Situationen müssen Sie den Befehl <quote>Wechseln zu</quote> verwenden."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15731
+#: ../source/TortoiseSVN_en.xml:15737
 msgid "Repository"
 msgstr "Projektarchiv"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15733
+#: ../source/TortoiseSVN_en.xml:15739
 msgid "A repository is a central place where data is stored and maintained. A repository can be a place where multiple databases or files are located for distribution over a network, or a repository can be a location that is directly accessible to the user without having to travel across a network."
 msgstr "Ein Projektarchiv ist ein zentraler Platz in dem Daten gespeichert und verwaltet werden. Das Projektarchiv kann sowohl auf einem Server liegen und über das Netzwerk angesprochen werden, als auch auf der lokalen Platte liegen."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15744
+#: ../source/TortoiseSVN_en.xml:15750
 msgid "When files in a working copy are left in a conflicted state following a merge, those conflicts must be sorted out by a human using an editor (or perhaps TortoiseMerge). This process is referred to as <quote>Resolving Conflicts</quote>. When this is complete you can mark the conflicted files as being resolved, which allows them to be committed."
 msgstr "Wenn sich Dateien in einer Arbeitskopie nach einem Zusammenführen in einem Konflikt befinden, müssen diese Konflikte von einer Person mittels eines Editors (oder vielleicht TortoiseMerge) aufgelöst werden. Dieser Prozess wird als <quote>Konflikt lösen</quote> bezeichnet. Wenn die Konflikte aufgelöst sind, können diese Dateien als aufgelöst markiert werden, was eine Übertragung erlaubt."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15756
+#: ../source/TortoiseSVN_en.xml:15762
 msgid "Subversion keeps a local <quote>pristine</quote> copy of each file as it was when you last updated your working copy. If you have made changes and decide you want to undo them, you can use the <quote>revert</quote> command to go back to the pristine copy."
 msgstr "Subversion hält eine lokale <quote>Basis</quote>-Kopie von jeder Datei in dem Zustand, in dem sie zuletzt aktualisiert wurde in der Arbeitskopie. Wenn Sie Änderungen gemacht haben und diese rückgängig machen wollen, können Sie den Befehl <quote>Rückgängig</quote> verwenden, um zurück zur Basisversion der Datei zu kommen."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15765
+#: ../source/TortoiseSVN_en.xml:15771
 msgid "Revision"
 msgstr "Revision"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15767
+#: ../source/TortoiseSVN_en.xml:15773
 msgid "Every time you commit a set of changes, you create one new <quote>revision</quote> in the repository. Each revision represents the state of the repository tree at a certain point in its history. If you want to go back in time you can examine the repository as it was at revision N."
 msgstr "Jedes Mal, wenn Sie Änderungen übertragen, wird eine neue <quote>Revision</quote> im Projektarchiv erstellt. Jede Revision stellt den Status des Projektarchivs zu einem bestimmten Zeitpunkt in der Vergangenheit dar. Wenn Sie in der Zeit zurückgehen möchten, können Sie den Zustand des Projektarchivs, wie es zur Revision N war, ansehen."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15774
+#: ../source/TortoiseSVN_en.xml:15780
 msgid "In another sense, a revision can refer to the set of changes that were made when that revision was created."
 msgstr "Anders ausgedrückt bezieht sich eine Revision auf eine Menge von Änderungen, die, als diese Revision erstellt wurde, vorgenommen wurden."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15781
+#: ../source/TortoiseSVN_en.xml:15787
 msgid "Revision Property (revprop)"
 msgstr "Revisionseigenschaft (revprop)"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15783
+#: ../source/TortoiseSVN_en.xml:15789
 msgid "Just as files can have properties, so can each revision in the repository. Some special revprops are added automatically when the revision is created, namely: <literal>svn:date svn:author svn:log</literal> which represent the commit date/time, the committer and the log message respectively. These properties can be edited, but they are not versioned, so any change is permanent and cannot be undone."
 msgstr "So wie Dateien Eigenschaften haben können, hat auch jede Revision im Projektarchiv Eigenschaften. Einige spezielle Revisionseigenschaften werden automatisch hinzugefügt, wenn die Revision erstellt wird. Diese sind: <literal>svn:date, svn:author svn:log</literal> welche das Übertragungsdatum, die Person welche die Übertragung gemacht hat und die Logmeldung darstellen. Diese Eigenschaften können verändert werden, aber sie sind nicht versioniert, was bedeutet dass jede Änderung permanent ist und nicht rückgängig gemacht werden kann."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15795
+#: ../source/TortoiseSVN_en.xml:15801
 msgid "SVN"
 msgstr "SVN"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15797
+#: ../source/TortoiseSVN_en.xml:15803
 msgid "A frequently-used abbreviation for Subversion."
 msgstr "Eine häufig verwendete Abkürzung für Subversion"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15800
+#: ../source/TortoiseSVN_en.xml:15806
 msgid "The name of the Subversion custom protocol used by the <quote>svnserve</quote> repository server."
 msgstr "Der Name des spezifischen Protokolls, das von <quote>svnserve</quote> genutzt wird."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15809
+#: ../source/TortoiseSVN_en.xml:15815
 msgid "Just as <quote>Update-to-revision</quote> changes the time window of a working copy to look at a different point in history, so <quote>Switch</quote> changes the space window of a working copy so that it points to a different part of the repository. It is particularly useful when working on trunk and branches where only a few files differ. You can switch your working copy between the two and only the changed files will be transferred."
 msgstr "So wie <quote>Aktualisieren zu Revision</quote> den Zeitpunkt der Arbeitskopie ändert, um auf einen anderen Punkt in der Vergangenheit zu zeigen, ändert <quote>Wechseln zu</quote> die Position der Arbeitskopie, so dass sie an einen anderen Ort im Projektarchiv zeigt. Dies ist vor allem nützlich, wenn Sie mit verschiedenen Zweigen arbeiten, in denen nur wenige Dateien unterschiedlich sind. Sie können ihre Arbeitskopie zwischen den Zweigen hin und her wechseln wobei jeweils nur die Unterschiede übertragen werden."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15823
+#: ../source/TortoiseSVN_en.xml:15829
 msgid "This Subversion command pulls down the latest changes from the repository into your working copy, merging any changes made by others with local changes in the working copy."
 msgstr "Dieser Subversionbefehl holt die neuesten Änderungen aus dem Projektarchiv in Ihre Arbeitskopie und führt dabei die Änderungen von anderen mit Ihren Änderungen zusammen."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15831
+#: ../source/TortoiseSVN_en.xml:15837
 msgid "Working Copy"
 msgstr "Arbeitskopie"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15833
+#: ../source/TortoiseSVN_en.xml:15839
 msgid "This is your local <quote>sandbox</quote>, the area where you work on the versioned files, and it normally resides on your local hard disk. You create a working copy by doing a <quote>Checkout</quote> from a repository, and you feed your changes back into the repository using <quote>Commit</quote>."
 msgstr "Dies ist Ihr lokaler <quote>Sandkasten</quote>, der Bereich, in dem Sie an versionierten Dateien arbeiten, und er liegt normalerweise auf Ihrer lokalen Festplatte. Sie erzeugen eine Arbeitskopie, indem Sie einen Ordner aus einem Projektarchiv <quote>Auschecken</quote> und Sie führen Ihre Änderungen mit einem <quote>Übertragen</quote> in das Projektarchiv zurück."
 
