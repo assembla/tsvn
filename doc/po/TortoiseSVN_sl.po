@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2008-09-22 15:28 +0000\n"
-"PO-Revision-Date: 2008-10-02 19:23+0100\n"
+"POT-Creation-Date: 2008-12-01 21:44 +0000\n"
+"PO-Revision-Date: 2008-12-07 14:37+0100\n"
 "Last-Translator: Matjaz Cepon <matjaz.cepon@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -2025,7 +2025,7 @@ msgstr ""
 #: ../source/TortoiseSVN_en.xml:2271
 msgid ""
 "Next you need to create an SSL certificate. To do that open a command prompt (DOS-Box) and change to the Apache folder (e.g. <filename>C:\\program files\\apache group\\apache2</filename>) and type the following command: <screen>\n"
-"bin\\openssl req -config bin\\openssl.cnf -new -out my-server.csr\n"
+"bin\\openssl req -config conf\\openssl.cnf -new -out my-server.csr\n"
 "</screen> You will be asked for a passphrase. Please don't use simple words but whole sentences, e.g. a part of a poem. The longer the phrase the better. Also you have to enter the URL of your server. All other questions are optional but we recommend you fill those in too."
 msgstr ""
 "Nato morate ustvariti certifikat SSL. Odprite ukazni poziv (okno DOS) in pojdite v namestitveno mapo strežnika Apache (n. pr. <filename>C:\\program files\\apache group\\apache2</filename>) in vpišite naslednji ukaz: <screen>\n"
@@ -3404,7 +3404,7 @@ msgstr "dodaj datoteke v skladišče"
 #: ../source/TortoiseSVN_en.xml:3718
 #: ../source/TortoiseSVN_en.xml:13715
 #: ../source/TortoiseSVN_en.xml:14870
-#: ../source/TortoiseSVN_en.xml:15631
+#: ../source/TortoiseSVN_en.xml:15637
 msgid "Import"
 msgstr "Uvoz"
 
@@ -6348,7 +6348,7 @@ msgstr "Povrnitev krajevnih sprememb lahko traja dalj časa, kot mogoče pričak
 #: ../source/TortoiseSVN_en.xml:7438
 #: ../source/TortoiseSVN_en.xml:13703
 #: ../source/TortoiseSVN_en.xml:14739
-#: ../source/TortoiseSVN_en.xml:15524
+#: ../source/TortoiseSVN_en.xml:15530
 msgid "Cleanup"
 msgstr "Čiščenje"
 
@@ -7058,8 +7058,8 @@ msgstr "Če želite spremembe spojiti nazaj <emphasis>ven</emphasis> iz delovne 
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8399
-msgid "If you have already merged some changes from this branch, hopefully you will have made a note of the last revision merged in the log message when you committed the change. In that case, you can use <guibutton>Show Log</guibutton> for the Working Copy to trace that log message. Use the end point of the last merge as the start point for this merge. For example, if you have merged revisions 37 to 39 last time, then the start point for this merge should be revision 39."
-msgstr "Če ste že spajali s te veje, ste verjetno v sporočilo objave vpisali komentar s številko zadnje spojene revizije. Če je temu tako, lahko uporabite gumb <guibutton>Pokaži dnevnik</guibutton>, da poiščete ustrezen dnevniški zapis za delovno kopijo. Končno revizijo prejšnjega spajanja uporabite kot začetno revizijo za tokratno spajanje. Primer: če ste pri zadnjem spajanju spojili spremembe med revizijama 37 in 39, potem mora biti začetna točka za to spajanje revizija 39."
+msgid "If you have already merged some changes from this branch, hopefully you will have made a note of the last revision merged in the log message when you committed the change. In that case, you can use <guibutton>Show Log</guibutton> for the Working Copy to trace that log message. Use the end point of the last merge as the start point for this merge. For example, if you have merged revisions 37 to 39 last time, then the start point for this merge should be revision 40."
+msgstr "Če ste že spajali s te veje, ste verjetno v sporočilo objave vpisali komentar s številko zadnje spojene revizije. Če je temu tako, lahko uporabite gumb <guibutton>Pokaži dnevnik</guibutton>, da poiščete ustrezen dnevniški zapis za delovno kopijo. Končno revizijo prejšnjega spajanja uporabite kot začetno revizijo za tokratno spajanje. Primer: če ste pri zadnjem spajanju spojili spremembe med revizijama 37 in 39, potem mora biti začetna točka za to spajanje revizija 40."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:8410
@@ -9592,8 +9592,8 @@ msgstr "Dnevniška sporočila (okno Prikaži dnevnik)"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:11684
-msgid "TortoiseSVN caches log messages fetched by the Show Log dialog to save time when you next show the log. If someone else edits a log message and you already have that message cached, you will not see the change until you clear the cache. Log message caching is enabled on the <guilabel>Dialogs 1</guilabel> tab."
-msgstr "TortoiseSVN si ob prikazu okna sporočila dnevniških zapisov shrani v predpomnilnik, tako da naslednjič, ko jih mora prikazati, prihrani čas. Če nekdo dnevniški zapis popravi, vi pa ta zapis že imate v predpomnilniku, te spremembe ne boste videli, dokler ne izbrišete predpomnilnika. Predpomnenje dnevniških zapisov se vključi v zavihku <guilabel>Pogovorna okna 1</guilabel>."
+msgid "TortoiseSVN caches log messages fetched by the Show Log dialog to save time when you next show the log. If someone else edits a log message and you already have that message cached, you will not see the change until you clear the cache. Log message caching is enabled on the <guilabel>Log Cache</guilabel> tab."
+msgstr "TortoiseSVN si ob prikazu okna sporočila dnevniških zapisov shrani v predpomnilnik, tako da naslednjič, ko jih mora prikazati, prihrani čas. Če nekdo dnevniški zapis popravi, vi pa ta zapis že imate v predpomnilniku, te spremembe ne boste videli, dokler ne izbrišete predpomnilnika. Predpomnenje dnevniških zapisov se vključi v zavihku <guilabel>Predpomnilnik dnevnika</guilabel>."
 
 #. (term)
 #: ../source/TortoiseSVN_en.xml:11695
@@ -10312,7 +10312,7 @@ msgstr "Seznam stikal ukazne vrstice, ki so na voljo"
 #: ../source/TortoiseSVN_en.xml:12496
 #: ../source/TortoiseSVN_en.xml:13711
 #: ../source/TortoiseSVN_en.xml:14797
-#: ../source/TortoiseSVN_en.xml:15807
+#: ../source/TortoiseSVN_en.xml:15813
 msgid "Switch"
 msgstr "Preklop"
 
@@ -11373,7 +11373,7 @@ msgstr "pravice skupin"
 #. (primary)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13524
-#: ../source/TortoiseSVN_en.xml:15615
+#: ../source/TortoiseSVN_en.xml:15621
 msgid "GPO"
 msgstr "GPO"
 
@@ -11543,7 +11543,7 @@ msgstr "Vnos v meniju"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13683
 #: ../source/TortoiseSVN_en.xml:14491
-#: ../source/TortoiseSVN_en.xml:15515
+#: ../source/TortoiseSVN_en.xml:15521
 msgid "Checkout"
 msgstr "Prevzemi"
 
@@ -11552,7 +11552,7 @@ msgstr "Prevzemi"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13687
 #: ../source/TortoiseSVN_en.xml:14509
-#: ../source/TortoiseSVN_en.xml:15821
+#: ../source/TortoiseSVN_en.xml:15827
 msgid "Update"
 msgstr "Posodobi"
 
@@ -11561,7 +11561,7 @@ msgstr "Posodobi"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13691
 #: ../source/TortoiseSVN_en.xml:14548
-#: ../source/TortoiseSVN_en.xml:15541
+#: ../source/TortoiseSVN_en.xml:15547
 msgid "Commit"
 msgstr "Objavi"
 
@@ -11570,7 +11570,7 @@ msgstr "Objavi"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13695
 #: ../source/TortoiseSVN_en.xml:14860
-#: ../source/TortoiseSVN_en.xml:15458
+#: ../source/TortoiseSVN_en.xml:15464
 msgid "Add"
 msgstr "Dodaj"
 
@@ -11579,14 +11579,14 @@ msgstr "Dodaj"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13699
 #: ../source/TortoiseSVN_en.xml:14717
-#: ../source/TortoiseSVN_en.xml:15754
+#: ../source/TortoiseSVN_en.xml:15760
 msgid "Revert"
 msgstr "Povrni"
 
 #. (entry)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13707
-#: ../source/TortoiseSVN_en.xml:15742
+#: ../source/TortoiseSVN_en.xml:15748
 msgid "Resolve"
 msgstr "Reši"
 
@@ -11595,7 +11595,7 @@ msgstr "Reši"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13719
 #: ../source/TortoiseSVN_en.xml:14821
-#: ../source/TortoiseSVN_en.xml:15596
+#: ../source/TortoiseSVN_en.xml:15602
 msgid "Export"
 msgstr "Izvozi"
 
@@ -11616,7 +11616,7 @@ msgstr "Veja/Oznaka"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13731
 #: ../source/TortoiseSVN_en.xml:14804
-#: ../source/TortoiseSVN_en.xml:15668
+#: ../source/TortoiseSVN_en.xml:15674
 msgid "Merge"
 msgstr "Spoji"
 
@@ -11625,7 +11625,7 @@ msgstr "Spoji"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13735
 #: ../source/TortoiseSVN_en.xml:14711
-#: ../source/TortoiseSVN_en.xml:15575
+#: ../source/TortoiseSVN_en.xml:15581
 msgid "Delete"
 msgstr "Izbriši"
 
@@ -11646,7 +11646,7 @@ msgstr "Posodobi na revizijo"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13747
 #: ../source/TortoiseSVN_en.xml:14595
-#: ../source/TortoiseSVN_en.xml:15587
+#: ../source/TortoiseSVN_en.xml:15593
 msgid "Diff"
 msgstr "Razlikuj"
 
@@ -11669,7 +11669,7 @@ msgstr "Uredi spore"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13759
 #: ../source/TortoiseSVN_en.xml:14846
-#: ../source/TortoiseSVN_en.xml:15714
+#: ../source/TortoiseSVN_en.xml:15720
 msgid "Relocate"
 msgstr "Premakni"
 
@@ -11693,7 +11693,7 @@ msgstr "Brskalnik po skladišču"
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13775
 #: ../source/TortoiseSVN_en.xml:14880
-#: ../source/TortoiseSVN_en.xml:15479
+#: ../source/TortoiseSVN_en.xml:15485
 msgid "Blame"
 msgstr "Okrivi"
 
@@ -11719,7 +11719,7 @@ msgstr "Revision graph"
 #. (entry)
 #. (glossterm)
 #: ../source/TortoiseSVN_en.xml:13791
-#: ../source/TortoiseSVN_en.xml:15640
+#: ../source/TortoiseSVN_en.xml:15646
 msgid "Lock"
 msgstr "Zaklep"
 
@@ -13424,273 +13424,278 @@ msgstr ""
 "svn+ssh://svnuporabnik@mojadomena.si/sklad\n"
 "</screen> Kot vidite, ne uporabljamo shranjene seje programa PuTTY, ampak naslov IP (ali domeno) kot cilj priklopa. Dodamo tudi uporabnika. Verjetno se vprašate, kako najdemo zasebni ključ. Ker je TortoisePlink.exe le predelana verzija standardnega programa Plink iz svežnja programov PuTTY, TortoiseSVN poskusi uporabiti vse ključe, ki so shranjeni v Pageantu."
 
+#. (para)
+#: ../source/TortoiseSVN_en.xml:15450
+msgid "If you use this last method, be sure you do not have a default username set in PuTTY. We have had reports of a bug in PuTTY causing connections to close in this case. To remove the default user, simply clear <filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%20Settings\\HostName</filename>"
+msgstr "Če uporabite zadnjo metodo, v programu PuTTY ne smete imeti nastavljenega privzetega uporabniškega imena. Zaradi napake v aplikaciji PuTTY lahko pride do prenitve v povezavi. Če želite privzetega uporabnika odstraniti, izpraznite vnos <filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%20Settings\\HostName</filename>"
+
 #. (title)
-#: ../source/TortoiseSVN_en.xml:15456
+#: ../source/TortoiseSVN_en.xml:15462
 msgid "Glossary"
 msgstr "Slovar"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15460
+#: ../source/TortoiseSVN_en.xml:15466
 msgid "A Subversion command that is used to add a file or directory to your working copy. The new items are added to the repository when you commit."
 msgstr "Ukaz Subversion, ki se uporablja za dodajanje datoteke ali mape v delovno kopijo. Novi elementi so dodani v skladišče, ko naredite objavo."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15468
+#: ../source/TortoiseSVN_en.xml:15474
 msgid "BASE revision"
 msgstr "Revizija BASE"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15470
+#: ../source/TortoiseSVN_en.xml:15476
 msgid "The current base revision of a file or folder in your <emphasis>working copy</emphasis>. This is the revision the file or folder was in, when the last checkout, update or commit was run. The BASE revision is normally not equal to the HEAD revision."
 msgstr "Trenutna osnovna revizija datoteke v vaši <emphasis>delovni kopiji</emphasis>. To je različica datoteke, kakršna je bila pri zadnjem prevzemu, posodobitvi ali objavi. Revizija BASE običajno ni ista kot revizija HEAD."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15481
+#: ../source/TortoiseSVN_en.xml:15487
 msgid "This command is for text files only, and it annotates every line to show the repository revision in which it was last changed, and the author who made that change. Our GUI implementation is called TortoiseBlame and it also shows the commit date/time and the log message when you hover the mouse of the revision number."
 msgstr "Ta ukaz se uporablja samo pri besedilnih datotekah. Vsako vrstico datoteke označi z informacijo, v kateri reviziji je bila nazadnje spremenjena in kdo je spremembo naredil. Grafični ekvivalent temu ukazu je TortoiseBlame, ki vam pokaže tudi datum in dnevniški zapis, če greste z miško na številko revizije."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15491
+#: ../source/TortoiseSVN_en.xml:15497
 msgid "BDB"
 msgstr "BDB"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15493
+#: ../source/TortoiseSVN_en.xml:15499
 msgid "Berkeley DB. A well tested database backend for repositories, that cannot be used on network shares. Default for pre 1.2 repositories."
 msgstr "Berkeley DB. Dobro preizkušena baza podatkov za skladišča, ki se ne more uporabljati v mapah v skupni rabi v omrežju. To je privzeta baza za skladišča pred različico 1.2."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15500
+#: ../source/TortoiseSVN_en.xml:15506
 msgid "Branch"
 msgstr "Veja"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15502
+#: ../source/TortoiseSVN_en.xml:15508
 msgid "A term frequently used in revision control systems to describe what happens when development forks at a particular point and follows 2 separate paths. You can create a branch off the main development line so as to develop a new feature without rendering the main line unstable. Or you can branch a stable release to which you make only bug fixes, while new developments take place on the unstable trunk. In Subversion a branch is implemented as a <quote>cheap copy</quote>."
 msgstr "Ta izraz, ki se pri nadzoru različic pogosto uporablja, opisuje, kaj se zgodi, ko se razvoj prelomi v določeni točki in se nadaljuje v dveh smereh. Iz glavne veje lahko ustvarite vejo, da razvijate novo zmožnost programa, ne da bi naredili glavno vejo nestabilno. Lahko pa naredite vejo iz stabilne verzije programa, da naredite popravke, razvoj pa se nadaljuje na nestabilni veji. V sistemu Subversion so veje izvedene kot <quote>poceni kopije</quote>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15517
+#: ../source/TortoiseSVN_en.xml:15523
 msgid "A Subversion command which creates a local working copy in an empty directory by downloading versioned files from the repository."
 msgstr "Ukaz, ki ustvari krajevno delovno kopijo v prazni mapi in prenese datoteke pod nadzorom iz skladišča."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15526
+#: ../source/TortoiseSVN_en.xml:15532
 msgid "To quote from the Subversion book: <quote> Recursively clean up the working copy, removing locks and resuming unfinished operations. If you ever get a <emphasis>working copy locked</emphasis> error, run this command to remove stale locks and get your working copy into a usable state again. </quote> Note that in this context <emphasis>lock</emphasis> refers to local filesystem locking, not repository locking."
 msgstr "Citat iz knjige The Subversion Book: <quote> Rekurzivno počisti delovno kopijo, tako da odstrani zaklepe in zaključi nedokončane operacije. Če se vam kdaj prikaže sporočilo <emphasis>delovna kopija zaklenjena</emphasis>, poženite ta ukaz, da ostranite zaklepe in naredite delovno kopijo spet uporabno.</quote> Upoštevajte, da v tem kontekstu <emphasis>zaklep</emphasis> pomeni zaklepanje datotečnega sistema in ne zaklepanje skladišča."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15543
+#: ../source/TortoiseSVN_en.xml:15549
 msgid "This Subversion command is used to pass the changes in your local working copy back into the repository, creating a new repository revision."
 msgstr "Ta ukaz sistema Subversion se uporablja za pošiljanje sprememb v delovni kopiji nazaj na skladišče. S tem se tam ustvari nova revizija."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15551
+#: ../source/TortoiseSVN_en.xml:15557
 msgid "Conflict"
 msgstr "Spor"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15553
+#: ../source/TortoiseSVN_en.xml:15559
 msgid "When changes from the repository are merged with local changes, sometimes those changes occur on the same lines. In this case Subversion cannot automatically decide which version to use and the file is said to be in conflict. You have to edit the file manually and resolve the conflict before you can commit any further changes."
 msgstr "Ko spremembe iz skladišča spojimo s krajevnimi spremembami, se včasih spremembe zgodijo na isti vrstici. V takšnem primeru se Subversion ne more sam odločiti, katero različico naj uporabi in datoteka je v spornem stanju. Pred objavo morate datoteko ročno urediti in rešiti spor."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15563
+#: ../source/TortoiseSVN_en.xml:15569
 msgid "Copy"
 msgstr "Kopiraj"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15565
+#: ../source/TortoiseSVN_en.xml:15571
 msgid "In a Subversion repository you can create a copy of a single file or an entire tree. These are implemented as <quote>cheap copies</quote> which act a bit like a link to the original in that they take up almost no space. Making a copy preserves the history of the item in the copy, so you can trace changes made before the copy was made."
 msgstr "V skladišču Subversion lahko naredite kopijo datoteke ali celotnega drevesa. Kopije so izvedene kot <quote>poceni kopije</quote>, kar je nekaj podobnega kot povezava na originalen element in ne zavzema skoraj nič prostora. Kopija ohrani zgodovino originala, tako da lahko vedno pogledate spremembe, ki so bile narejene preden se je element prekopiral."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15577
+#: ../source/TortoiseSVN_en.xml:15583
 msgid "When you delete a versioned item (and commit the change) the item no longer exists in the repository after the committed revision. But of course it still exists in earlier repository revisions, so you can still access it. If necessary, you can copy a deleted item and <quote>resurrect</quote> it complete with history."
 msgstr "Ko izbrišete datoteko pod nadzorom (in objavite spremembo), tega elementa ni več v skladišču od objavljene revizije naprej. Seveda pa še vedno obstaja v prejšnjih revizijah skladišča in tako lahko še vedno dostopate do njega. Če je potrebno, lahko skopirate izbrisan element in ga pripeljete nazaj med žive s celotno zgodovino."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15589
+#: ../source/TortoiseSVN_en.xml:15595
 msgid "Shorthand for <quote>Show Differences</quote>. Very useful when you want to see exactly what changes have been made."
 msgstr "Bližnica za <quote>Prikaži razlike</quote>. Zelo uporabno, ko želite vedeti, kaj točno se je spremenilo."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15598
+#: ../source/TortoiseSVN_en.xml:15604
 msgid "This command produces a copy of a versioned folder, just like a working copy, but without the local <literal>.svn</literal> folders."
 msgstr "Ta ukaz ustvari kopijo mape pod nadzorom, prav takšno, kot je delovna kopija, vendar brez krajevnih map <literal>.svn</literal>."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15606
+#: ../source/TortoiseSVN_en.xml:15612
 msgid "FSFS"
 msgstr "FSFS"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15608
+#: ../source/TortoiseSVN_en.xml:15614
 msgid "A proprietary Subversion filesystem backend for repositories. Can be used on network shares. Default for 1.2 and newer repositories."
 msgstr "Ekskluziven datotečni sistem za skladišča sistema Subversion. Uporablja se lahko tudi v omrežnih datotekah v skupni rabi. Privzet sistem pri različicah 1.2 in novejših."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15617
+#: ../source/TortoiseSVN_en.xml:15623
 msgid "Group policy object"
 msgstr "Group policy object"
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15623
+#: ../source/TortoiseSVN_en.xml:15629
 msgid "HEAD revision"
 msgstr "Revizija HEAD"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15625
+#: ../source/TortoiseSVN_en.xml:15631
 msgid "The latest revision of a file or folder in the <emphasis>repository</emphasis>."
 msgstr "Najnovejša revizija datoteke ali mape v <emphasis>skladišču</emphasis>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15633
+#: ../source/TortoiseSVN_en.xml:15639
 msgid "Subversion command to import an entire folder hierarchy into the repository in a single revision."
 msgstr "Ukaz sistema Subversion, ki omogoča uvoz celotne hierarhije map v skladišče v eni reviziji."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15642
+#: ../source/TortoiseSVN_en.xml:15648
 msgid "When you take out a lock on a versioned item, you mark it in the repository as non-committable, except from the working copy where the lock was taken out."
 msgstr "Ko element pod nadzorom zaklenete, ga s tem označite v skladišču in preprečite objave, razen iz delovne kopije, ki je zaklep zahtevala."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15650
+#: ../source/TortoiseSVN_en.xml:15656
 msgid "Log"
 msgstr "Dnevnik"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15652
+#: ../source/TortoiseSVN_en.xml:15658
 msgid "Show the revision history of a file or folder. Also known as <quote>History</quote>."
 msgstr "Prikaže zgodovino revizij datoteke ali mape. Uporablja se tudi termin <quote>Zgodovina</quote>."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15659
+#: ../source/TortoiseSVN_en.xml:15665
 msgid "History"
 msgstr "Zgodovina"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15661
+#: ../source/TortoiseSVN_en.xml:15667
 msgid "Show the revision history of a file or folder. Also known as <quote>Log</quote>."
 msgstr "Prikaže zgodovino revizij datoteke ali mape. Uporablja se tudi termin <quote>Dnevnik</quote>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15670
+#: ../source/TortoiseSVN_en.xml:15676
 msgid "The process by which changes from the repository are added to your working copy without disrupting any changes you have already made locally. Sometimes these changes cannot be reconciled automatically and the working copy is said to be in conflict."
 msgstr "Proces dodajanja sprememb iz skladišča v vašo delovno kopijo, ne da ob tem povozite krajevne spremembe. Včasih sprememb ni možno samodejno spojiti in takrat je delovna kopija sporna."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15676
+#: ../source/TortoiseSVN_en.xml:15682
 msgid "Merging happens automatically when you update your working copy. You can also merge specific changes from another branch using TortoiseSVN's Merge command."
 msgstr "Spajanje se zgodi samodejno, ko posodabljate delovno kopijo. Lahko pa opravljate spajanje specifičnih sprememb iz druge veje z uporabo ukaza Spoji."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15684
+#: ../source/TortoiseSVN_en.xml:15690
 msgid "Patch"
 msgstr "Popravek"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15686
+#: ../source/TortoiseSVN_en.xml:15692
 msgid "If a working copy has changes to text files only, it is possible to use Subversion's Diff command to generate a single file summary of those changes in Unified Diff format. A file of this type is often referred to as a <quote>Patch</quote>, and it can be emailed to someone else (or to a mailing list) and applied to another working copy. Someone without commit access can make changes and submit a patch file for an authorized committer to apply. Or if you are unsure about a change you can submit a patch for others to review."
 msgstr "Če so se v delovni kopiji spremenile le besedilne datoteke, je možno z ukazom Razlikuj ustvariti datoteko s povzetkom sprememb v obliki poenotene razlike (unified diff). Datoteka takšnega tipa se pogosto imenuje <quote>popravek</quote> in se lahko uporablja za pošiljanje sprememb po elektronski pošti vašemu sodelavcu ali dopisnemu seznamu. Ta datoteka se potem uporabi na neki drugi delovni kopiji. Nekdo, ki nima pravic pisanja po skladišču, lahko naredi spremembe in ustvari popravek, ki ga objavi nek drug uporabnik, ki ustrezne pravice ima. Ali pa če niste prepričani, da so vaše spremembe dobre, lahko na ta način drugim uporabnikom pošljete spremembe v pregled."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15699
+#: ../source/TortoiseSVN_en.xml:15705
 msgid "Property"
 msgstr "Lastnost"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15701
+#: ../source/TortoiseSVN_en.xml:15707
 msgid "In addition to versioning your directories and files, Subversion allows you to add versioned metadata - referred to as <quote>properties</quote> to each of your versioned directories and files. Each property has a name and a value, rather like a registry key. Subversion has some special properties which it uses internally, such as <literal>svn:eol-style</literal>. TortoiseSVN has some too, such as <literal>tsvn:logminsize</literal>. You can add your own properties with any name and value you choose."
 msgstr "Poleg vodenja različic map in datotek Subversion omogoča tudi vodenje različic meta podatkov - rečemo jim <quote>lastnosti</quote> - za vsak element pod nadzorom. Vsaka lastnost ima ime in vrednost, podobno kot register. Subversion interno uporablja nekaj posebnih lastnosti, n. pr. <literal>svn:eol-style</literal>. Tudi TortoiseSVN uporablja nekaj internih lastnosti, n. pr. <literal>tsvn:logminsize</literal>. Lahko pa dodate svoje lastnosti s poljubnim imenom in vrednostjo."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15716
+#: ../source/TortoiseSVN_en.xml:15722
 msgid "If your repository moves, perhaps because you have moved it to a different directory on your server, or the server domain name has changed, you need to <quote>relocate</quote> your working copy so that its repository URLs point to the new location."
 msgstr "Če se skladišče premakne (ker ste ga premaknili v drugo mapo na strežniku ali pa se je spremenilo domensko ime),  morate narediti <quote>premik</quote> delovne kopije, da bodo poti URL do skladišča kazale na novo lokacijo."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15722
+#: ../source/TortoiseSVN_en.xml:15728
 msgid "Note: you should only use this command if your working copy is referring to the same location in the same repository, but the repository itself has moved. In any other circumstance you probably need the <quote>Switch</quote> command instead."
 msgstr "Opomba: ta ukaz uporabljajte le, če delovna kopija kaže na isto lokacijo znotraj istega skladišča, skladišče pa se je premaknilo na drugo lokacijo. V vseh ostalih primerih uporabite ukaz <quote>Preklopi</quote>."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15731
+#: ../source/TortoiseSVN_en.xml:15737
 msgid "Repository"
 msgstr "Skladišče"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15733
+#: ../source/TortoiseSVN_en.xml:15739
 msgid "A repository is a central place where data is stored and maintained. A repository can be a place where multiple databases or files are located for distribution over a network, or a repository can be a location that is directly accessible to the user without having to travel across a network."
 msgstr "Skladišče je središčna lokacija, kjer se podatki shranjujejo in vzdržujejo. Skladišče je lahko lokacija, kjer so shranjene številne baze podatkov ali datoteke za distibucijo preko omrežja, lahko pa je tudi lokacija, ki je neposredno dostopna uporabniku, ne da bi uporabljal omrežje."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15744
+#: ../source/TortoiseSVN_en.xml:15750
 msgid "When files in a working copy are left in a conflicted state following a merge, those conflicts must be sorted out by a human using an editor (or perhaps TortoiseMerge). This process is referred to as <quote>Resolving Conflicts</quote>. When this is complete you can mark the conflicted files as being resolved, which allows them to be committed."
 msgstr "Ko so datoteke v delovni kopiji sporne (zaradi spajanja), mora uporabnik te spore rešiti z uporabo urejevalnika (ali pa programa TortoiseMerge). Procesu rečemo <quote>reševanje sporov</quote>. Ko ste spore rešili, označite datoteko kot rešeno, kar vam omogoča njeno objavo."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15756
+#: ../source/TortoiseSVN_en.xml:15762
 msgid "Subversion keeps a local <quote>pristine</quote> copy of each file as it was when you last updated your working copy. If you have made changes and decide you want to undo them, you can use the <quote>revert</quote> command to go back to the pristine copy."
 msgstr "Subversion hrani krajevno <quote>izvirno</quote> kopijo vsake datoteke, kakršna je bila ob zadnji posodobitvi. Če ste na datoteki naredili spremembe in jih želite povrniti, uporabite ukaz <quote>povrni</quote>, da dobite nazaj izvirno datoteko."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15765
+#: ../source/TortoiseSVN_en.xml:15771
 msgid "Revision"
 msgstr "Revizija"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15767
+#: ../source/TortoiseSVN_en.xml:15773
 msgid "Every time you commit a set of changes, you create one new <quote>revision</quote> in the repository. Each revision represents the state of the repository tree at a certain point in its history. If you want to go back in time you can examine the repository as it was at revision N."
 msgstr "Vsakič ko objavite spremembe, naredite novo <quote>revizijo</quote> v skladišču. Vsaka revizija predstavlja stanje skladišča ob določeni točki v njegovi zgodovini. Če želite, si lahko ogledate skladišče, kakršno je bilo ob reviziji številka N."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15774
+#: ../source/TortoiseSVN_en.xml:15780
 msgid "In another sense, a revision can refer to the set of changes that were made when that revision was created."
 msgstr "Drug pogled: revizija je množica sprememb, ki so bile narejene, ko je bila revizija ustvarjena."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15781
+#: ../source/TortoiseSVN_en.xml:15787
 msgid "Revision Property (revprop)"
 msgstr "Lastnost revizije (revprop)"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15783
+#: ../source/TortoiseSVN_en.xml:15789
 msgid "Just as files can have properties, so can each revision in the repository. Some special revprops are added automatically when the revision is created, namely: <literal>svn:date svn:author svn:log</literal> which represent the commit date/time, the committer and the log message respectively. These properties can be edited, but they are not versioned, so any change is permanent and cannot be undone."
 msgstr "Prav tako, kot imajo lastnosti datoteke, jih imajo tudi revizije v skladišču. Nekatere posebne se dodajo samodejno, ko se revizija ustvari: <literal>svn:date svn:author svn:log</literal>, ki predstavljajo datum/čas objave, avtorja in sporočilo dnevniškega zapisa. Vrednosti teh lastnosti lahko urejate, vendar upoštevajte, da niso pod nadzorom različic, tako da so spremembe trajne in se jih ne da povrniti."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15795
+#: ../source/TortoiseSVN_en.xml:15801
 msgid "SVN"
 msgstr "SVN"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15797
+#: ../source/TortoiseSVN_en.xml:15803
 msgid "A frequently-used abbreviation for Subversion."
 msgstr "Pogosto uporabljena okrajšava za Subversion."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15800
+#: ../source/TortoiseSVN_en.xml:15806
 msgid "The name of the Subversion custom protocol used by the <quote>svnserve</quote> repository server."
 msgstr "Ime lastnega protokola sistema Subversion, ki ga uporablja strežnik skladišč <quote>svnserve</quote>."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15809
+#: ../source/TortoiseSVN_en.xml:15815
 msgid "Just as <quote>Update-to-revision</quote> changes the time window of a working copy to look at a different point in history, so <quote>Switch</quote> changes the space window of a working copy so that it points to a different part of the repository. It is particularly useful when working on trunk and branches where only a few files differ. You can switch your working copy between the two and only the changed files will be transferred."
 msgstr "Prav tako kot ukaz <quote>posodobi-na-revizijo</quote> spremeni časovno okno delovne kopije, da izgleda tako, kot v neki določeni točki v zgodovini, ukaz <quote>Preklopi</quote> spremeni prostorsko okno delovne kopije, da kaže na drugo mesto v skladišču. To je uporabno predvsem takrat, kot delate na glavni veji in na stranskih vejah, na katerih je spremenjenih le nekaj datotek. Delovno kopijo lahko preklapljate, prenesejo pa se le spremenjene datoteke."
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15823
+#: ../source/TortoiseSVN_en.xml:15829
 msgid "This Subversion command pulls down the latest changes from the repository into your working copy, merging any changes made by others with local changes in the working copy."
 msgstr "Ta ukaz prenese vse zadnje spremembe iz skladišča v delovno kopijo, pri tem pa spoji spremebe, ki so jih naredili ostali uporabniki, z vašimi spremembami v delovni kopiji."
 
 #. (glossterm)
-#: ../source/TortoiseSVN_en.xml:15831
+#: ../source/TortoiseSVN_en.xml:15837
 msgid "Working Copy"
 msgstr "Delovna kopija"
 
 #. (para)
-#: ../source/TortoiseSVN_en.xml:15833
+#: ../source/TortoiseSVN_en.xml:15839
 msgid "This is your local <quote>sandbox</quote>, the area where you work on the versioned files, and it normally resides on your local hard disk. You create a working copy by doing a <quote>Checkout</quote> from a repository, and you feed your changes back into the repository using <quote>Commit</quote>."
 msgstr "To je vaš krajeni <quote>peskovnik</quote>, področje, kjer lahko delate z datotekami pod nadzorom in se običajno nahaja na vašem trdem disku. Z uporabno ukaza <quote>Prevzemi</quote> naredite delovno kopijo iz skladišča, spremembe, ki jih naredite, pa shranite v skladišče z ukazom <quote>Objavi</quote>."
 
