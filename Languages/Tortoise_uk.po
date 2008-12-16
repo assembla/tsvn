@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2008-12-15 18:15+0200\n"
+"PO-Revision-Date: 2008-12-16 17:23+0200\n"
 "Last-Translator: Vadim Mikhnevych <vadim.mikhnevych@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1621,12 +1621,11 @@ msgid "Auto-close if no merges, adds or deletes"
 msgstr "Самозакривати, якщо нема злиттів, додавань або знищень"
 
 #. Resource IDs: (195)
-#, fuzzy
 msgid ""
 "Auto-complete suggests words (usually class or member names)\n"
 "from the files that you have changed as you type a log message."
 msgstr ""
-"Автодоповнення під час набору повідомлення логу пропонує слова\r\n"
+"Автодоповнення під час набору повідомлення логу пропонує слова\n"
 "(звично імена класів або членів) зі змінених вами файлів."
 
 #. Resource IDs: (438)
@@ -5809,7 +5808,7 @@ msgid "Refresh"
 msgstr "Оновити"
 
 #. Resource IDs: (117)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Regular expressions filter:\n"
 ".\t\t\tany character\n"
@@ -5827,21 +5826,21 @@ msgid ""
 "\\d\t\t\tdigits 0-9\n"
 "\\s\t\t\twhitespaces"
 msgstr ""
-"Фільтр регулярних виразів:\r\n"
-".   : будь-який символ\r\n"
-"c+   : співпадає з символом c один або більше разів\r\n"
-"c*   : співпадає з символом c нуль або більше разів\r\n"
-"^   : початок рядка\r\n"
-"$   : кінець рядка\r\n"
-"(string){n} : співпадає з рядком n разів\r\n"
-"(abcd)   : підвираз\r\n"
-"[aei0-9]   : співпадає з  a,e,i та 0..9\r\n"
-"[^aei0-9] : будь-що, крім a,e,i та 0..9\r\n"
-"\r\n"
-"\\w   : співпадає з  a-z,A-Z,0-9 та _\r\n"
-"\\W   : будь-який не буквоцифровий символ\r\n"
-"\\d   : цифри 0-9\r\n"
-"\\s   : пробіли"
+"Фільтр регулярних виразів:\n"
+".\t\t\tбудь-який символ\n"
+"c+\t\t\tспівпадає з символом c один або більше разів\n"
+"c*\t\t\tспівпадає з символом c нуль або більше разів\n"
+"^\t\t\tпочаток рядка\n"
+"$\t\t\tкінець рядка\n"
+"(string){n}\tспівпадає з рядком n разів\n"
+"(abcd)\t\tпідвираз\n"
+"[aei0-9]\t\tспівпадає з  a,e,i та 0..9\n"
+"[^aei0-9]\tбудь-що, крім a,e,i та 0..9\n"
+"<hr=100%>\n"
+"\\w\t\t\tспівпадає з  a-z,A-Z,0-9 та _\n"
+"\\W\t\t\tбудь-який не буквоцифровий символ\n"
+"\\d\t\t\tцифри 0-9\n"
+"\\s\t\t\tпробіли"
 
 #. Resource IDs: (1469)
 msgid "Reintegrate a branch"
@@ -5939,12 +5938,12 @@ msgid "Remove from changelist"
 msgstr "Видалити зі списку змін"
 
 #. Resource IDs: (127)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Remove property \"%s\" from\r\n"
 "%s"
 msgstr ""
-"Видалити властивість '%s' з\r\n"
+"Видалити властивість \"%s\" з\n"
 "%s"
 
 #. Resource IDs: (345)
@@ -6101,14 +6100,12 @@ msgid "Resolve all later"
 msgstr "Владнати все потім"
 
 #. Resource IDs: (282)
-#, fuzzy
 msgid "Resolve conflict using \"mine\""
-msgstr "Владнати конфлікт використовуючи 'моє'"
+msgstr "Владнати конфлікт використовуючи \"моє\""
 
 #. Resource IDs: (282)
-#, fuzzy
 msgid "Resolve conflict using \"theirs\""
-msgstr "Владнати конфлікт використовуючи 'їхнє'"
+msgstr "Владнати конфлікт використовуючи \"їхнє\""
 
 #. Resource IDs: (1403)
 msgid "Resolve conflict:"
@@ -6256,7 +6253,7 @@ msgstr ""
 "%s"
 
 #. Resource IDs: (272)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Revision: %ld\r\n"
 "URL: %s\r\n"
@@ -6273,7 +6270,7 @@ msgstr ""
 "Автор: %s\r\n"
 "Дата: %s\r\n"
 "\r\n"
-"Зрізи (%d):%s\r\n"
+"Зрізи:%s\r\n"
 "\r\n"
 "Логове повідомлення:\r\n"
 "%s"
@@ -7565,14 +7562,13 @@ msgstr ""
 "Дійсно вивірити/експортувати до цього каталога?"
 
 #. Resource IDs: (195)
-#, fuzzy
 msgid ""
 "The time in seconds after which the parsing of the selected files stops.\n"
 "A lower value will make the auto-completion list available sooner,\n"
 "but maybe not scan all files."
 msgstr ""
-"Час у секундах, після якого синтаксичний аналіз вибраних файлів припиняється.\r\n"
-"Менше значення швидше зробить список автодоповнення доступним,\r\n"
+"Час у секундах, після якого синтаксичний аналіз вибраних файлів припиняється.\n"
+"Менше значення швидше зробить доступним список автодоповнення,\n"
 "але може не встигнути просканувати всі файли."
 
 #. Resource IDs: (82)
@@ -7619,13 +7615,12 @@ msgid "Theirs"
 msgstr "Їхнє"
 
 #. Resource IDs: (169)
-#, fuzzy
 msgid ""
 "There are changes or unversioned items inside one or more directories which you have included with svn:externals.\n"
 "Those files are <b>not</b> listed for commit. You need to commit those files separately."
 msgstr ""
 "Усередині одного чи кількох каталогів, включених у svn:externals, є зміни або неверсійні елементи.\n"
-"Ті файли відсутні у списку для фіксації. Їх потрібно зафіксувати окремо."
+"Ті файли <b>відсутні</b> у списку для фіксації. Їх потрібно зафіксувати окремо."
 
 #. Resource IDs: (64)
 msgid "There are no issue-tracker providers available."
@@ -7765,12 +7760,11 @@ msgstr ""
 "яка не дозволяє знищення каталога."
 
 #. Resource IDs: (284)
-#, fuzzy
 msgid ""
 "To steal the lock, right-click on the parent folder of this item and select \"Get Lock\" from the context menu.\n"
 "This will bring up the locking dialog where you can enforce the lock, i.e., 'steal' it from the one currently holding it."
 msgstr ""
-"Щоб перехопити блокування, клацніть правою кнопкою по батьківському каталозі цього елемента і виберіть із контекстного меню пункт 'Отримати блокування'.\n"
+"Щоб перехопити блокування, клацніть правою кнопкою по батьківському каталозі цього елемента і виберіть із контекстного меню пункт \"Отримати блокування\".\n"
 "Це викличе діалог блокування, у якому можна примусово здійснити блокування, наприклад, 'перехопити' його у поточного власника."
 
 #. Resource IDs: (1201, 65535)
@@ -7898,7 +7892,7 @@ msgid "TortoiseSVN %d.%d.%d, Build %d - %s, %s"
 msgstr "TortoiseSVN %d.%d.%d, Побудова %d - %s, %s"
 
 #. Resource IDs: (107)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
 "Subversion %d.%d.%d, %s\r\n"
@@ -7913,6 +7907,7 @@ msgstr ""
 "Subversion %d.%d.%d, %s\r\n"
 "apr %d.%d.%d\r\n"
 "apr-utils %d.%d.%d\r\n"
+"berkeley db %d.%d.%d\r\n"
 "neon %s\r\n"
 "%s\r\n"
 "zlib %s"
@@ -7960,9 +7955,8 @@ msgid "Tree merge"
 msgstr "Злиття дерев"
 
 #. Resource IDs: (251)
-#, fuzzy
 msgid "Try a \"Cleanup\". If that doesn't work you need to do a fresh checkout."
-msgstr "Спробуйте 'Прибрати'. Якщо це не спрацює, доведеться зробити свіжу вивірку."
+msgstr "Спробуйте \"Прибрати\". Якщо це не спрацює, доведеться зробити свіжу вивірку."
 
 #. Resource IDs: (73)
 msgid "Try again"
@@ -8201,14 +8195,13 @@ msgid "Use &text viewer to view blames"
 msgstr "Використовувати переглядач &тексту для перегляду коментарів"
 
 #. Resource IDs: (195)
-#, fuzzy
 msgid ""
 "Use '*' as a wildcard character when specifying an exception.\n"
 "To separate multiple exceptions, use commas (',').\n"
 "Example: *.mylan.com, *.company.com"
 msgstr ""
-"Використовуйте '*' як символ узагальнення, вказуючи виключення.\r\n"
-"Щоб розділити декілька виключень, користуйтеся комами (',').\r\n"
+"Використовуйте '*' як символ узагальнення, вказуючи виключення.\n"
+"Щоб розділити декілька виключень, користуйтеся комами (',').\n"
 "Приклад: *.mylan.com, *.company.com"
 
 #. Resource IDs: (1230)
@@ -8304,44 +8297,40 @@ msgid "Use text block from \"m&ine\" before \"theirs\""
 msgstr "Використати блок тексту з \"м&ого\" перед \"їхнім\""
 
 #. Resource IDs: (2052)
-#, fuzzy
 msgid ""
 "Use text block from \"mine\" before \"theirs\"\n"
 "Use \"mine\" text block then \"theirs\""
 msgstr ""
-"Використати блок тексту з 'мого' перед 'їхнім'\n"
-"Використати 'мій' блок тексту, а потім 'їхній'"
+"Використати блок тексту з \"мого\" перед \"їхнім\"\n"
+"Використати \"мій\" блок тексту, а потім \"їхній\""
 
 #. Resource IDs: (2052)
-#, fuzzy
 msgid ""
 "Use text block from \"mine\"\n"
 "Use \"mine\" text block"
 msgstr ""
-"Використати блок тексту з 'мого'\n"
-"Використати 'мій' блок тексту"
+"Використати блок тексту з \"мого\"\n"
+"Використати \"мій\" блок тексту"
 
 #. Resource IDs: (251, 32821)
 msgid "Use text block from \"t&heirs\" before \"mine\""
 msgstr "Використати блок тексту з \"ї&хнього\" перед \"моїм\""
 
 #. Resource IDs: (2052)
-#, fuzzy
 msgid ""
 "Use text block from \"theirs\" before \"mine\"\n"
 "Use \"theirs\" text block then \"mine\""
 msgstr ""
-"Використати блок тексту з 'їхнього' перед 'моїм'\n"
-"Використати 'їхній' блок тексту, а потім 'мій'"
+"Використати блок тексту з \"їхнього\" перед \"моїм\"\n"
+"Використати \"їхній\" блок тексту, а потім \"мій\""
 
 #. Resource IDs: (2052)
-#, fuzzy
 msgid ""
 "Use text block from \"theirs\"\n"
 "Use \"theirs\" text block"
 msgstr ""
-"Використати блок тексту з 'їхнього'\n"
-"Використати їхній' блок тексту"
+"Використати блок тексту з \"їхнього\"\n"
+"Використати \"їхній\" блок тексту"
 
 #. Resource IDs: (2054)
 msgid ""
@@ -8465,7 +8454,6 @@ msgid "Warning!"
 msgstr "Увага!"
 
 #. Resource IDs: (344)
-#, fuzzy
 msgid ""
 "When connecting to the respository server is not possible,\n"
 "TSVN can switch to using cached data only.\n"
@@ -8777,9 +8765,8 @@ msgid "[Unassigned]"
 msgstr "[Не призначено]"
 
 #. Resource IDs: (338)
-#, fuzzy
 msgid "\"skip ranges\" are used to mark revision ranges that have not been cached yet"
-msgstr "'пропустити діапазони' застосовуєтсья для позначення діапазонів модифікацій, які ще не закешовано"
+msgstr "\"пропустити діапазони\" застосовуєтсья для позначення діапазонів модифікацій, які ще не закешовано"
 
 #. Resource IDs: (65535)
 msgid "_POPUP_"
@@ -8836,7 +8823,6 @@ msgid "authors: "
 msgstr "автори:"
 
 #. Resource IDs: (577)
-#, fuzzy
 msgid ""
 "bugtraq:append\n"
 "Set to \"false\" if you want the bugtracking ID to be inserted at the top of the\n"
@@ -8844,61 +8830,58 @@ msgid ""
 "is appended to the log message."
 msgstr ""
 "bugtraq:append\r\n"
-"Встановіть у 'false', якщо багоблікове ID слід вставляти на початку логового\r\n"
-"повідомлення. Типово це 'true', тобто багоблікове ID\r\n"
+"Встановіть у \"false\", якщо багоблікове ID слід вставляти на початку логового\n"
+"повідомлення. Типово це \"true\", тобто багоблікове ID\n"
 "дописується в кінець логового повідомлення."
 
 #. Resource IDs: (577)
-#, fuzzy
 msgid ""
 "bugtraq:label\n"
 "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
-"bugtraq:label\r\n"
+"bugtraq:label\n"
 "Текстова мітка, що відображається для поля редагування, в якому користувач вводить номер проблеми."
 
 #. Resource IDs: (577)
-#, fuzzy
 msgid ""
 "bugtraq:logregex\n"
 "two regular expressions separated by a newline.\n"
 "The first expression is used to find a string referring to an issue,\n"
 "the second expression is used to extract the bare bug ID from that string."
 msgstr ""
-"bugtraq:logregex\r\n"
-"два регулярні вирази, розділені новим рядком.\r\n"
-"Перший вираз використовується для пошуку рядка, що стосується проблеми,\r\n"
+"bugtraq:logregex\n"
+"два регулярні вирази, розділені новим рядком.\n"
+"Перший вираз використовується для пошуку рядка, що стосується проблеми,\n"
 "другий - для видобування чистого ID бага з цього рядка."
 
 #. Resource IDs: (577)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "bugtraq:message\n"
 "String which is appended to a log message when an issue number is entered.\n"
 "The string must contain \"%BUGID%\" which gets replaced with the issue number."
 msgstr ""
-"bugtraq:message\r\n"
-"Рядок, що дописується до логового повідомлення, коли введено номер проблеми.\r\n"
-"Рядок мусить містити '%BUGID%' , що заміниться номером проблеми."
+"bugtraq:message\n"
+"Рядок, що дописується до логового повідомлення, коли введено номер проблеми.\n"
+"Рядок мусить містити \"%BUGID%\" , що заміниться номером проблеми."
 
 #. Resource IDs: (577)
-#, fuzzy
 msgid ""
 "bugtraq:number\n"
 "Set to \"false\" if your bugtracking system has issues which are referenced not by numbers."
 msgstr ""
-"bugtraq:number\r\n"
-"Встановіть у 'false', якщо система багобліку містить проблеми, подані не в нумерованому вигляді."
+"bugtraq:number\n"
+"Встановіть у \"'false\", якщо система багобліку містить проблеми, подані не в нумерованому вигляді."
 
 #. Resource IDs: (577)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "bugtraq:url\n"
 "URL pointing to the issue tracker. It must contain \"%BUGID%\" which\n"
 "gets replaced with the issue number."
 msgstr ""
-"bugtraq:url\r\n"
-"URL, що вказує на проблемоблік. Він повінен містити '%BUGID%', що\r\n"
+"bugtraq:url\n"
+"URL, що вказує на проблемоблік. Він повінен містити \"%BUGID%\", що\n"
 "замінятиметься номером проблеми."
 
 #. Resource IDs: (65535)
@@ -9155,27 +9138,24 @@ msgid "skip ranges: "
 msgstr "пропустити діапазони:"
 
 #. Resource IDs: (576)
-#, fuzzy
 msgid ""
 "svn:eol-style\n"
 "One of 'native', 'LF', 'CR', 'CRLF'."
 msgstr ""
-"svn:eol-style\r\n"
+"svn:eol-style\n"
 "Одне з:  'native', 'LF', 'CR', 'CRLF'."
 
 #. Resource IDs: (576)
-#, fuzzy
 msgid ""
 "svn:executable\n"
 "If present, make the file executable. This property cannot be set on a directory.\n"
 "A non-recursive attempt will fail, and a recursive attempt will set the property only on the file children of the directory."
 msgstr ""
-"svn:executable\r\n"
-"Якщо присутня, робить файл виконуваним. Цю властивість не можна встановити для каталога.\r\n"
+"svn:executable\n"
+"Якщо присутня, робить файл виконуваним. Цю властивість не можна встановити для каталога.\n"
 "Нерекурсивна спроба зазнає невдачі, а рекурсивна встановить цю властивість лише для файлів цього каталога."
 
 #. Resource IDs: (576)
-#, fuzzy
 msgid ""
 "svn:externals\n"
 "A newline separated list of module specifiers, each of which consists of\n"
@@ -9190,30 +9170,28 @@ msgid ""
 "//\trelative to the URL scheme\n"
 "/\trelative to the server's hostname"
 msgstr ""
-"svn:externals\r\n"
-"Розділений новими рядками список модульних специфікаторів, кожен з яких складається з\r\n"
-"необов'язкової модифікації, URL і відносного шляху до каталога. Наприклад\r\n"
-"http://example.com/repos/zig foo\r\n"
-"-r 1234 http://example.com/repos/zag foo/bar\r\n"
-"\r\n"
-"URL можуть бути або повними URL, або відносними. Формат для\r\n"
-"відносних URL :\r\n"
-"../ відносно батьківського каталогу зовнішніх\r\n"
-"^/ відносно кореня сховища\r\n"
-"// відносно схеми URL\r\n"
-"/ відносно імені хоста сервера"
+"svn:externals\n"
+"Розділений новими рядками список модульних специфікаторів, кожен з яких складається з\n"
+"необов'язкової модифікації, URL і відносного шляху до каталога. Наприклад\n"
+"http://example.com/repos/zig\tfoo\n"
+"-r 1234 http://example.com/repos/zag\tfoo/bar\n"
+"\n"
+"URL можуть бути або повними URL, або відносними. Формат для\n"
+"відносних URL :\n"
+"../\tвідносно батьківського каталогу зовнішніх\n"
+"^/\tвідносно кореня сховища\n"
+"//\tвідносно схеми URL\n"
+"/\tвідносно імені хоста сервера"
 
 #. Resource IDs: (576)
-#, fuzzy
 msgid ""
 "svn:ignore\n"
 "A newline separated list of file patterns to ignore."
 msgstr ""
-"svn:ignore\r\n"
+"svn:ignore\n"
 "Список розділених новими рядками шаблонів ігнорованих файлів."
 
 #. Resource IDs: (576)
-#, fuzzy
 msgid ""
 "svn:keywords\n"
 "Keywords to be expanded. Valid keywords are:\n"
@@ -9223,16 +9201,15 @@ msgid ""
 "Rev, LastChangedRevision\tThe last revision the object changed.\n"
 "Id\t\t\t\tA compressed summary of the previous 4 keywords."
 msgstr ""
-"svn:keywords\r\n"
-"Keywords to be expanded. Valid keywords are:\r\n"
-"URL, HeadURL : The URL for the head revision of the object.\r\n"
-"Author, LastChangedBy : The last person to modify the file.\r\n"
-"Date, LastChangedDate : The date/time the object was last modified.\r\n"
-"Rev, LastChangedRevision : The last revision the object changed.\r\n"
-"Id : A compressed summary of the previous 4 keywords."
+"svn:keywords\n"
+"Ключові слова, які слід розгорнути. Допустимі ключові слова:\n"
+"URL, HeadURL\t\t\tURL для HEAD модифікації об'єкта.\n"
+"Author, LastChangedBy\t\tОстання людина, що змінила файл.\n"
+"Date, LastChangedDate\t\tДата/час останньої зміни об'єкта.\n"
+"Rev, LastChangedRevision\tОстання модифікація, за якої об'єкт змінився.\n"
+"Id\t\t\t\tСтисле резюме попередніх 4 ключових слів."
 
 #. Resource IDs: (576)
-#, fuzzy
 msgid ""
 "svn:mergeinfo\n"
 "A newline separated list of merge tracking info. Each line consists of an absolute\n"
@@ -9240,27 +9217,25 @@ msgid ""
 "For example\n"
 "/trunk:123-125,129"
 msgstr ""
-"svn:mergeinfo\r\n"
-"Список розділеної новими рядками інформаціх про злиття. Кожен рядок\r\n"
-"складається з двокрапки та списку розділених комами номерів модифікацій.\r\n"
-"Наприклад:\r\n"
+"svn:mergeinfo\n"
+"Список розділеної новими рядками інформаціх про злиття. Кожен рядок складається з абсолютного шляху,\n"
+"двокрапки за ним та списку розділених комами номерів модифікацій.\n"
+"Наприклад:\n"
 "/trunk:123-125,129"
 
 #. Resource IDs: (576)
-#, fuzzy
 msgid ""
 "svn:mime-type\n"
 "The mime type of the file. Used to determine whether to merge the file, and how to serve it from Apache.\n"
 "A mime type beginning with 'text/' (or an absent mime type) is treated as text.\n"
 "Anything else is treated as binary."
 msgstr ""
-"svn:mime-type\r\n"
-"Тип mime файла. Використовується для визначення того, чи зливати файл, і як обслуговувати його з Apache.\r\n"
-"Тип mime, що починається з 'text/' (або відсутній тип mime) вважається текстом.\r\n"
+"svn:mime-type\n"
+"Тип mime файла. Використовується для визначення того, чи зливати файл, і як обслуговувати його з Apache.\n"
+"Тип mime, що починається з 'text/' (або відсутній тип mime) вважається текстом.\n"
 "Усі інші вважаються двійковими."
 
 #. Resource IDs: (576)
-#, fuzzy
 msgid ""
 "svn:needs-lock\n"
 "Set this to any value (e.g. '*') to enforce locking for this file.\n"
@@ -9268,10 +9243,10 @@ msgid ""
 "indicating that a user must acquire a lock on the file\n"
 "before they can edit it and commit changes."
 msgstr ""
-"svn:needs-lock\r\n"
-"Задайте цьому будь-яке значення (напр. '*'), для вимушення блокування цього файла.\r\n"
-"Під час вивірки або оновлення цей файл буде переведено в режим лише для читання,\r\n"
-"щоб показати, що користувач повинен отримати блокування на цей файл\r\n"
+"svn:needs-lock\n"
+"Задайте цьому будь-яке значення (напр. '*'), для вимушення блокування цього файла.\n"
+"Під час вивірки або оновлення цей файл буде переведено в режим лише для читання,\n"
+"щоб показати, що користувач повинен отримати блокування на цей файл\n"
 "перш ніж зможе редагувати його та фіксувати зміни."
 
 #. Resource IDs: (208)
@@ -9310,119 +9285,108 @@ msgid "to %s"
 msgstr "до %s"
 
 #. Resource IDs: (578)
-#, fuzzy
 msgid ""
 "tsvn:autoprops\n"
 "A list of properties separated by newlines which get applied automatically when adding/importing files.\n"
 "Format: <filemask> = property=value;property=value\n"
 "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 msgstr ""
-"tsvn:autoprops\r\n"
-"Список розділених новими рядками властивостей, які застосовуються атоматично під час додавання/імпортування файлів.\r\n"
-"Формат: <маска файла> = властивість=значення;властивість=значення\r\n"
+"tsvn:autoprops\n"
+"Список розділених новими рядками властивостей, які застосовуються атоматично під час додавання/імпортування файлів.\n"
+"Формат: <маска файла> = властивість=значення;властивість=значення\n"
 "Приклад: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 
 #. Resource IDs: (578)
-#, fuzzy
 msgid ""
 "tsvn:lockmsgminsize\n"
 "Minimum size in chars a lock message must have before a lock is allowed."
 msgstr ""
-"tsvn:lockmsgminsize\r\n"
+"tsvn:lockmsgminsize\n"
 "Мінімальна кількість симовлів у повідомленні про блокування, за якої блокування буде дозволено."
 
 #. Resource IDs: (578)
-#, fuzzy
 msgid ""
 "tsvn:logfilelistenglish\n"
 "Set to \"false\" if you don't want the list of changed files to be pasted in english\n"
 "in the commit dialog."
 msgstr ""
-"tsvn:logfilelistenglish\r\n"
-"Встановіть у 'false', якщо не потрібно до діалогу фіксації вклеювати список\r\n"
+"tsvn:logfilelistenglish\n"
+"Встановіть у \"false\", якщо не потрібно до діалогу фіксації вклеювати список\n"
 "змінених файлів на англійській мові."
 
 #. Resource IDs: (578)
-#, fuzzy
 msgid ""
 "tsvn:logminsize\n"
 "Minimum size in chars a log message must have before a commit is allowed."
 msgstr ""
-"tsvn:logminsize\r\n"
-"Мінімальна кількість символів у логовому повідомленні, за якої дозволяєтсья фіксація."
+"tsvn:logminsize\n"
+"Мінімальна кількість символів у логовому повідомленні, за якої дозволяється фіксація."
 
 #. Resource IDs: (578)
-#, fuzzy
 msgid ""
 "tsvn:logsummary\n"
 "A regex string which extracts a summary from a log message in its first group."
 msgstr ""
-"tsvn:logsummary\r\n"
+"tsvn:logsummary\n"
 "Регулярний вираз, що видобуває резюме з логового повідомлення у його першій групі."
 
 #. Resource IDs: (578)
-#, fuzzy
 msgid ""
 "tsvn:logtemplate\n"
 "String which is inserted in the log message boxes in the commit dialogs.\n"
 "Use this as a log message templates for users to fill in."
 msgstr ""
-"tsvn:logtemplate\r\n"
-"Рядок, що вставляється в поле логових повідомлень у діалогах фіксації.\r\n"
+"tsvn:logtemplate\n"
+"Рядок, що вставляється в поле логових повідомлень у діалогах фіксації.\n"
 "Використовується як шаблон логового повідомлення, що заповнюється користувачами."
 
 #. Resource IDs: (578)
-#, fuzzy
 msgid ""
 "tsvn:logwidthmarker\n"
 "Set this to the number of chars the log message should not exceed its width.\n"
 "A faded line is shown in the commit dialogs at that position. The default is 80 chars."
 msgstr ""
-"tsvn:logwidthmarker\r\n"
-"Встановіть це рівним кількості символів, яку логовому повідомленню не слід перевищувати вшир.\r\n"
+"tsvn:logwidthmarker\n"
+"Встановіть це рівним кількості символів, яку логовому повідомленню не слід перевищувати вшир.\n"
 "У діалозі фіксації після такої довжини рядок зникатиме. Типово це 80 символів."
 
 #. Resource IDs: (578)
-#, fuzzy
 msgid ""
 "tsvn:projectlanguage\n"
 "Set this to the language number you want your log messages written in.\n"
 "TortoiseSVN will then load the appropriate spell checker module if available."
 msgstr ""
-"tsvn:projectlanguage\r\n"
-"Задайте тут номер мови, на якій слід писати логові повідомлення.\r\n"
+"tsvn:projectlanguage\n"
+"Задайте тут номер мови, на якій слід писати логові повідомлення.\n"
 "TortoiseSVN завантажить відповідний модуль перевірки правопису, за наявності останнього."
 
 #. Resource IDs: (581)
-#, fuzzy
 msgid ""
 "tsvn:userfileproperties\n"
 "Newline separated list of user defined properties for files which will\n"
 "be shown in the property dialog to choose from."
 msgstr ""
-"tsvn:userfileproperties\r\n"
-"Список розділених новими рядками визначених користувачем властивостей для файлів,\r\n"
+"tsvn:userfileproperties\n"
+"Список розділених новими рядками визначених користувачем властивостей для файлів,\n"
 "які відображатимуться для вибору в діалозі властивостей."
 
 #. Resource IDs: (581)
-#, fuzzy
 msgid ""
 "tsvn:userfolderproperties\n"
 "Newline separated list of user defined properties for folders which will\n"
 "be shown in the property dialog to choose from."
 msgstr ""
-"tsvn:userfolderproperties\r\n"
-"Список розділених новими рядками визначених користувачем властивостей для каталогів,\r\n"
+"tsvn:userfolderproperties\n"
+"Список розділених новими рядками визначених користувачем властивостей для каталогів,\n"
 "які відображатимуться для вибору в діалозі властивостей."
 
 #. Resource IDs: (577)
-#, fuzzy
 msgid ""
 "tsvn:warnifnoissue\n"
 "Set to \"yes\" if a warning shall be shown when no issue is entered in the commit dialog."
 msgstr ""
-"tsvn:warnifnoissue\r\n"
-"Встановіть у 'yes', якщо потрібно показувати попередження, коли у діалозі фіксації не введено проблеми."
+"tsvn:warnifnoissue\n"
+"Встановіть у \"yes\', якщо потрібно показувати попередження, коли у діалозі фіксації не введено проблеми."
 
 #. Resource IDs: (65535)
 msgid "user revprops total: "
@@ -9433,27 +9397,27 @@ msgid "values are different"
 msgstr "значення відрізняються"
 
 #. Resource IDs: (579)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "webviewer:pathrevision\n"
 "URL pointing to the web viewer for the repository for a specific file and revision.\n"
 "The string %REVISION% in the URL is replaced with the revision number,\n"
 "the string %PATH% is replaced with the path to the file relative to the repository root."
 msgstr ""
-"webviewer:pathrevision\r\n"
-"URL, що вказує на веб-переглядач для сховища для певного файла та модифікації.\r\n"
-"Рядок %REVISION% у цьому URL замінюється номером модифікації,\r\n"
+"webviewer:pathrevision\n"
+"URL, що вказує на веб-переглядач для сховища для певного файла та модифікації.\n"
+"Рядок %REVISION% у цьому URL замінюється номером модифікації,\n"
 "рядок %PATH% замінюється шляхом до файла відносно кореня сховища."
 
 #. Resource IDs: (579)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "webviewer:revision\n"
 "URL pointing to the web viewer for the repository for a specific revision.\n"
 "The string %REVISION% in that URL is replaced with the revision number."
 msgstr ""
-"webviewer:revision\r\n"
-"URL, що вказує на веб-переглядач для сховища для певної модифікації.\r\n"
+"webviewer:revision\n"
+"URL, що вказує на веб-переглядач сховища для певної модифікації.\n"
 "Рядок %REVISION% у цьому URL замінюється номером модифікації."
 
 #. Resource IDs: (245)
