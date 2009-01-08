@@ -2431,7 +2431,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
 				input.SetActionText(hint);
 				if (input.DoModal() == IDOK)
 				{
-					if (!Remove(urlList, true, false, input.GetLogMessage()))
+					if (!Remove(urlListEscaped, true, false, input.GetLogMessage()))
 					{
 						wait_cursor.Hide();
 						CMessageBox::Show(this->m_hWnd, GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
