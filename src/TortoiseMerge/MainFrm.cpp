@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2004-2008 - TortoiseSVN
+// Copyright (C) 2004-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -204,6 +204,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	m_wndLocatorBar.EnableGripper(FALSE);
 	m_wndLineDiffBar.EnableGripper(FALSE);
+
 	return 0;
 }
 
@@ -871,6 +872,24 @@ void CMainFrame::OnViewOnewaydiff()
 		m_wndLocatorBar.DocumentUpdated();
 	}
 	LoadViews(true);
+}
+
+void CMainFrame::ShowDiffBar(bool bShow)
+{
+	if (bShow)
+	{
+		// restore the line diff bar
+		m_wndLineDiffBar.ShowPane(m_bLineDiff, false, true);
+		m_wndLineDiffBar.DocumentUpdated();
+		m_wndLocatorBar.ShowPane(m_bLocatorBar, false, true);
+		m_wndLocatorBar.DocumentUpdated();
+	}
+	else
+	{
+		// in one way view, hide the line diff bar
+		m_wndLineDiffBar.ShowPane(false, false, true);
+		m_wndLineDiffBar.DocumentUpdated();
+	}
 }
 
 int CMainFrame::CheckResolved()
