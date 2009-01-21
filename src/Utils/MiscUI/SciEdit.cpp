@@ -1161,6 +1161,7 @@ BOOL CSciEdit::MarkEnteredBugID(int startstylepos, int endstylepos)
 
 				// (*it)[0] is the matched string
 				wstring matchedString = (*it)[0];
+				LONG matchedpos = 0;
 				for (tr1::wsregex_iterator it2(matchedString.begin(), matchedString.end(), regBugID); it2 != end; ++it2)
 				{
 					ATLTRACE(_T("matched id : %s\n"), (*it2)[0].str().c_str());
@@ -1168,10 +1169,11 @@ BOOL CSciEdit::MarkEnteredBugID(int startstylepos, int endstylepos)
 					// bold style up to the id match
 					ATLTRACE("position = %ld\n", it2->position(0));
 					if (it2->position(0))
-						Call(SCI_SETSTYLING, it2->position(0), STYLE_ISSUEBOLD);
+						Call(SCI_SETSTYLING, it2->position(0)-matchedpos, STYLE_ISSUEBOLD);
 					// bold and recursive style for the bug ID itself
 					if ((*it2)[0].str().size())
 						Call(SCI_SETSTYLING, (*it2)[0].str().size(), STYLE_ISSUEBOLDITALIC);
+					matchedpos = it2->position(0) + (*it2)[0].str().size();
 				}
 				pos = it->position(0) + matchedString.size();
 			}
