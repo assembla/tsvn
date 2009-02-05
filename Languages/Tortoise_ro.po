@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2009-01-23 01:43+0200\n"
+"PO-Revision-Date: 2009-02-05 23:46+0200\n"
 "Last-Translator: Ben Felt <benwfelt@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -896,7 +896,6 @@ msgid "&Specific revision in repository"
 msgstr "Revizie &specifică în depozit"
 
 #. Resource IDs: (16917)
-#, fuzzy
 msgid "&Start Group"
 msgstr "Grup de &pornire"
 
@@ -1475,7 +1474,7 @@ msgstr ""
 "%base\t\tfişierul original fără schimbările dumneavoastră"
 
 #. Resource IDs: (3867)
-#, fuzzy, c-format
+#, c-format
 msgid "An incorrect file handle was associated with %1."
 msgstr "Un identificator de fişier invalid a fost asociat cu %1."
 
@@ -2187,7 +2186,6 @@ msgid "Commits your changes to the repository"
 msgstr "Transmite schimbările tale la depozit"
 
 #. Resource IDs: (170)
-#, fuzzy
 msgid ""
 "Committing an unversioned folder will not recursively add its child items!\n"
 "You might want to add these folders recursively by using the \"Add...\" context menu item.\n"
@@ -2195,9 +2193,9 @@ msgid ""
 "Are you sure that you want to continue the commit?"
 msgstr ""
 "Transmiterea unui dosar fără versiune nu va adăuga recursiv elementele copii ale acestuia!\n"
-"Poate vreţi să adăugaţi eceste dosare recursiv folosind elementul meniului contextual 'Adaugă...'.\n"
+"Poate doriţi să adăugaţi eceste dosare recursiv folosind elementul meniului contextual 'Adaugă...'.\n"
 "\n"
-"Sigur vreţi să continuaţi aceasta transmitere?"
+"Sigur doriţi să continuaţi aceasta transmitere?"
 
 #. Resource IDs: (274, 32784)
 msgid "Compare &HEAD revisions"
@@ -3603,9 +3601,8 @@ msgid "For Help, press F1. Scroll horizontally with Ctrl-Scrollwheel"
 msgstr "Pentru ajutor, apăsaţi F1. Derulaţi orizontal cu Ctrl + rotiţa de derulare"
 
 #. Resource IDs: (119)
-#, fuzzy
 msgid "For complete history deselect \"Stop on copy/rename\""
-msgstr "Pentru istoria completă, nu selectaţi 'Opreşte când se copiază/redenumeşte'"
+msgstr "Pentru istoria completă, deselectaţi 'Opreşte când se copiază/redenumeşte'"
 
 #. Resource IDs: (1064)
 msgid "Forward"
@@ -3686,7 +3683,6 @@ msgid "Get merge logs"
 msgstr "Obţine jurnalele de îmbinare"
 
 #. Resource IDs: (89)
-#, fuzzy
 msgid ""
 "Getting a lock for files without the 'svn:needs-lock' property will <b>not</b> prevent others from editing them in their working copies.\n"
 "To enable strict locking please add the 'svn:needs-lock' property to all files that need locking, and commit those files.\n"
@@ -3696,7 +3692,7 @@ msgstr ""
 "Obţinerea unei blocări pentru fişiere fără proprietatea 'svn:needs-lock' <b>nu</b> îi va preveni pe alţii de a le edita în copiile lor de lucru.\n"
 "Pentru a activa blocare strictă, adăugaţi proprietatea 'svn:needs-lock' tuturor fişierelor care necesită blocare şi transmiteţi acele fişiere.\n"
 "Fiecare fişier va avea indicatorul sistemului 'strict citire' şi obţinerea blocării îl va face editabil.\n"
-"Alţi utilizatori vor trebui să-şi actualizează copiile înainte de a vedea fişierele ca fiind în starea 'strict citire'."
+"Alţi utilizatori vor trebui să-şi actualizeze copiile de lucru înainte de a vedea fişierele ca fiind în starea 'strict citire'."
 
 #. Resource IDs: (119)
 #, c-format
@@ -4018,12 +4014,10 @@ msgid "Icons/Design/Code:                 Luebbe Onken"
 msgstr "Iconiţe/Design/Cod:                 Luebbe Onken"
 
 #. Resource IDs: (194)
-#, fuzzy
 msgid "If activated, prevents the overlays and the context menu from showing in \"save as...\" or \"open\" dialogs"
 msgstr "Dacă este activat, previne suprapunerile şi meniul contextual de a fi afişate în dialogurile 'salvează ca' sau 'deschide'"
 
 #. Resource IDs: (198)
-#, fuzzy
 msgid ""
 "If activated, the menu entry \"Get Lock\" is always shown in the top level menu\n"
 "if the selected file has the svn:needs-lock property set"
@@ -4126,7 +4120,6 @@ msgstr ""
 "Sunteţi absolut sigur(ă) că vreţi să continuaţi?"
 
 #. Resource IDs: (251)
-#, fuzzy
 msgid "If you want to break the lock, use the \"Check For Modifications\" dialog."
 msgstr "Dacă vreţi să forţaţi deblocarea, folosiţi dialogul 'Caută modificări'."
 
@@ -4265,9 +4258,8 @@ msgid "Initial import"
 msgstr "Importul iniţial"
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "Inline differences"
-msgstr "Diferenţele inline"
+msgstr "Diferenţe între linii"
 
 #. Resource IDs: (161)
 msgid "Input"
@@ -4406,6 +4398,17 @@ msgid ""
 "If you are not sure what to do, please refer to our docs on <i>relocate</i>.\n"
 "Do you really want to relocate?"
 msgstr ""
+"Încercaţi să <b>relocaţi</b> copia de lucru la o altă cale în acelaşi depozit.\n"
+"\n"
+"De la:\t%s\n"
+"La:\t\t%s\n"
+"\n"
+"Relocarea este necesară numai dacă s-a schimbat calea <b>la</b> un depozit.\n"
+"Schimbarea la o altă cale <b>în</b> depozit se face prin operaţiunea de comutare.\n"
+"\n"
+"Folosinţa greşită de relocare <b>va corupta copia de lucru!</b>\n"
+"Dacă nu sunteţi sigur ce să faceţi, citiţi documentaţia despre <i>relocare</i>.\n"
+"Sigur doriţi să relocaţi copia de lucru?"
 
 #. Resource IDs: (1203)
 msgid "Keep &locks"
@@ -4797,9 +4800,8 @@ msgid "Merging %s into %s, %s"
 msgstr "Se îmbină %s cu %s, %s"
 
 #. Resource IDs: (264)
-#, fuzzy
 msgid "Merging differences between repository urls"
-msgstr "Se îmbină diferenţele între URL-uri de deopzit"
+msgstr "Se îmbină diferenţele între URL-uri de depozit"
 
 #. Resource IDs: (229)
 #, c-format
@@ -5074,7 +5076,6 @@ msgid "No files or folders were modified. There is nothing for TortoiseSVN to re
 msgstr "Nici un fişier sau dosar nu a fost modificat. TortoiseSVN nu are ce să inverseze!"
 
 #. Resource IDs: (239)
-#, fuzzy
 msgid ""
 "No files to show with the current setting.\n"
 "Check one or more settings below to see unversioned, ignored and/or unmodified files.\n"
@@ -5233,7 +5234,6 @@ msgid "Older lines"
 msgstr "Linii mai vechi"
 
 #. Resource IDs: (32814)
-#, fuzzy
 msgid "Oldest on to&p"
 msgstr "Cei mai vechi &sus"
 
@@ -5279,7 +5279,7 @@ msgstr ""
 
 #. Resource IDs: (1424)
 msgid "Only record the merge"
-msgstr ""
+msgstr "Înregistrează numai îmbinarea"
 
 #. Resource IDs: (19)
 msgid "Only this item"
@@ -5287,7 +5287,7 @@ msgstr "Numai acest element"
 
 #. Resource IDs: (1224)
 msgid "Only use s&pellchecker when tsvn:projectlanguage is set"
-msgstr ""
+msgstr "FOloseşte corector ortografic numai dacă este activat tsvn:projectlanguage"
 
 #. Resource IDs: (3841)
 msgid "Open"
@@ -5326,8 +5326,9 @@ msgstr ""
 "Subiecte ajutor"
 
 #. Resource IDs: (13)
+#, fuzzy
 msgid "Opens the repository browser to tweak the repository online"
-msgstr ""
+msgstr "Deschide navigatorul de depozit pentru a edita depozitul conectat"
 
 #. Resource IDs: (199)
 msgid "Operate from log cache for now only"
@@ -5497,7 +5498,7 @@ msgstr ""
 
 #. Resource IDs: (1287)
 msgid "Please resolve the conflict by choosing one of the following options:"
-msgstr ""
+msgstr "Resolvă conflictul folosind una dintre următoarele opţiuni:"
 
 #. Resource IDs: (83)
 msgid "Please select a hook type"
@@ -5764,7 +5765,7 @@ msgstr "In&versează..."
 
 #. Resource IDs: (12)
 msgid "Read the 'Daily Use Guide' before you are stuck..."
-msgstr ""
+msgstr "Citiţi 'gidul de folosinţa zilnică' întainte sa vă încurcaţi..."
 
 #. Resource IDs: (1002)
 msgid "Recent"
@@ -6645,7 +6646,6 @@ msgid "Select the type of merge"
 msgstr "Selectaţi tipul de îmbinare"
 
 #. Resource IDs: (595)
-#, fuzzy
 msgid "Select the urls for the tree merge"
 msgstr "Selectaţi URL-urile pentru îmbinarea de arbore"
 
@@ -6830,9 +6830,8 @@ msgid "Show differences as &unified diff"
 msgstr "Afişează diferenţe ca o diferenţiere &unificată"
 
 #. Resource IDs: (1126)
-#, fuzzy
 msgid "Show excluded folders as normal"
-msgstr "Afişează dosare excluse ca normal"
+msgstr "Afişează dosare excluse ca fiind normale"
 
 #. Resource IDs: (16656)
 msgid "Show f&ull menus after a short delay"
@@ -7250,7 +7249,7 @@ msgid "The chunk size did not match the number of added/removed lines!"
 msgstr "Mărimea de chunk nu s-a potrivit cu numărul de linii adăugate/eliminate!"
 
 #. Resource IDs: (63)
-#, fuzzy, c-format
+#, c-format
 msgid "The chunk start \"@@\" was expected in line %d !"
 msgstr "Începutul de chunk '@@' s-a aşteptat în linia %d !"
 
@@ -7543,7 +7542,7 @@ msgstr ""
 "există deja!"
 
 #. Resource IDs: (88)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The target folder \n"
 "%s\n"
@@ -7553,7 +7552,7 @@ msgstr ""
 "Dosarul destinatar \n"
 "%s\n"
 "nu este gol!\n"
-"Sigur vreţi să faceţi checkout/exportare în acel dosar?"
+"Sigur doriţi să faceţi checkout/exportare în acel dosar?"
 
 #. Resource IDs: (195)
 msgid ""
@@ -7761,6 +7760,8 @@ msgid ""
 "Toggle One/Two Pages display\n"
 "Toggle One/Two Pages display"
 msgstr ""
+"Comută afişarea de una/două pagini\n"
+"Comută afişarea de una/două pagini"
 
 #. Resource IDs: (65535)
 msgid "Toolbar"
@@ -8127,7 +8128,6 @@ msgid "Updated"
 msgstr "Actualizat"
 
 #. Resource IDs: (11)
-#, fuzzy
 msgid "Updates the working copy to a specific revision"
 msgstr "Actualizează copia de lucru la o revizie specifică"
 
@@ -8432,7 +8432,6 @@ msgid "Warning!"
 msgstr "Atenţie!"
 
 #. Resource IDs: (344)
-#, fuzzy
 msgid ""
 "When connecting to the respository server is not possible,\n"
 "TSVN can switch to using cached data only.\n"
@@ -8719,7 +8718,6 @@ msgid "[Unassigned]"
 msgstr "[Nedelegat]"
 
 #. Resource IDs: (338)
-#, fuzzy
 msgid "\"skip ranges\" are used to mark revision ranges that have not been cached yet"
 msgstr "'intervale de saltare' sunt folosite pentru a marca intervale de revizii care încă nu au fost salvate în cache"
 
