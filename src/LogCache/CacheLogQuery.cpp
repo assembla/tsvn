@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2008 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -482,7 +482,10 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
 		// if the problem was caused by SVN and the user wants
 		// to go off-line, swallow the error
 
-		if (receiverError || e.GetCode() == SVN_ERR_CANCELLED || !repositoryInfoCache->IsOffline (url, true))
+		if (   receiverError 
+            || e.GetCode() == SVN_ERR_CANCELLED 
+            || e.GetCode() == SVN_ERR_FS_NOT_FOUND  // deleted paths etc. 
+            || !repositoryInfoCache->IsOffline (url, true))
 		{
 			// we want to cache whatever data we could receive so far ..
 

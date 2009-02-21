@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2008 - TortoiseSVN
+// Copyright (C) 2008-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -697,12 +697,17 @@ void CSVNStatusListCtrl::ColumnManager::ParseWidths (const CString& widths)
             // a user-prop column
 
             size_t index = static_cast<size_t>(i - SVNSLC_USERPROPCOLOFFSET);
-            assert (index < userProps.size());
+
+            // someone may have tweaked the registry settings by hand ...
+
+            if (index < userProps.size())
+            {
             userProps[index].width = width;
 
             for (size_t k = 0, count = columns.size(); k < count; ++k)
                 if (columns[k].index == i)
                     columns[k].width = width;
+        }
         }
         else
         {
