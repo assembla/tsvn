@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseMerge\n"
 "POT-Creation-Date: 2006-10-11 21:52GMT Daylight Time\n"
-"PO-Revision-Date: 2009-02-26 21:37+0200\n"
+"PO-Revision-Date: 2009-02-26 21:59+0200\n"
 "Last-Translator: Bob Hulst <bob.hulst@hiq.fi>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -216,7 +216,7 @@ msgstr ""
 #: ../source/TortoiseMerge_en.xml:198
 #, fuzzy
 msgid "If you're working with a version control system (e.g. Subversion) then you sometimes get <emphasis>conflicts</emphasis> when you update your working copy. This happens if someone else changed the same parts of the file you're currently working on as you did. Then you have to resolve those conflicts manually. This is where TortoiseMerge can help you."
-msgstr "<emphasis></emphasis> TortoiseMerge."
+msgstr "If you're working with a version control system (e.g. Subversion) then you sometimes get <emphasis>conflicts</emphasis> when you update your working copy. This happens if someone else changed the same parts of the file you're currently working on as you did. Then you have to resolve those conflicts manually. This is where TortoiseMerge can help you."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:206
@@ -234,13 +234,13 @@ msgstr "Bestands konflikt"
 #: ../source/TortoiseMerge_en.xml:214
 #, fuzzy
 msgid "A conflict can also occur if you try to apply an outdated patch file. In such cases, without TortoiseMerge, you would either have to ask the person you got that patch file from for a current version or try to apply that patch file manually."
-msgstr "TortoiseMerge."
+msgstr "A conflict can also occur if you try to apply an outdated patch file. In such cases, without TortoiseMerge, you would either have to ask the person you got that patch file from for a current version or try to apply that patch file manually."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:220
 #, fuzzy
 msgid "But now with TortoiseMerge this isn't necessary anymore - at least not if you're working with a version control system like Subversion. TortoiseMerge parses the patch file for the revision/version the patch was created for and automatically tries to fetch that specific version from your source-control. Then it applies the patch and lets you review both your changes to the file, and theirs. Then you can decide which changes you want to keep."
-msgstr "TortoiseMerge TortoiseMerge."
+msgstr "But now with TortoiseMerge this isn't necessary anymore - at least not if you're working with a version control system like Subversion. TortoiseMerge parses the patch file for the revision/version the patch was created for and automatically tries to fetch that specific version from your source-control. Then it applies the patch and lets you review both your changes to the file, and theirs. Then you can decide which changes you want to keep."
 
 #. (title)
 #: ../source/TortoiseMerge_en.xml:235
@@ -450,6 +450,7 @@ msgstr "Lijst met Patch Bestanden"
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:479
+#, fuzzy
 msgid "After TortoiseMerge parses the patch file it will show you a small window with all the files which have changes according to the patch file. <placeholder-1/> If the filename is shown in black, then the patch can be applied without any problems. That means the file is not outdated according to the patch. However, if the filename is shown in red, then the patch can't get applied directly because you already changed that file."
 msgstr "After TortoiseMerge parses the patch file it will show you a small window with all the files which have changes according to the patch file. <placeholder-1/> If the filename is shown in black, then the patch can be applied without any problems. That means the file is not outdated according to the patch. However, if the filename is shown in red, then the patch can't get applied directly because you already changed that file."
 
@@ -457,7 +458,7 @@ msgstr "After TortoiseMerge parses the patch file it will show you a small windo
 #: ../source/TortoiseMerge_en.xml:493
 #, fuzzy
 msgid "But don't worry. If you're working with Subversion you can retrieve an older version of the file and resolve the conflict. In fact, TortoiseMerge automatically tries to get that older version of the file and then shows you the diff between <emphasis>Base</emphasis> (the older version of the file), <emphasis>Mine</emphasis> (the file as it is currently in your working copy) and <emphasis>Theirs</emphasis> (the older version of the file with the patch already applied). Then you can resolve possible conflicts manually."
-msgstr "TortoiseMerge<literal></literal><literal></literal><literal></literal>."
+msgstr "But don't worry. If you're working with Subversion you can retrieve an older version of the file and resolve the conflict. In fact, TortoiseMerge automatically tries to get that older version of the file and then shows you the diff between <emphasis>Base</emphasis> (the older version of the file), <emphasis>Mine</emphasis> (the file as it is currently in your working copy) and <emphasis>Theirs</emphasis> (the older version of the file with the patch already applied). Then you can resolve possible conflicts manually."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:504
@@ -492,9 +493,8 @@ msgstr "<guibutton>Bewaar</guibutton> schrijft alle veranderingen weg naar disk.
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:543
-#, fuzzy
 msgid "<guibutton>Reload</guibutton> discards any changes you have made in TortoiseMerge and reloads the files from disk."
-msgstr "<guibutton></guibutton> TortoiseMerge."
+msgstr "<guibutton>Herladen</guibutton> verwijderd alle wijzigingen door TortoiseMerge en herlaad de bestanden van schijf."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:550
@@ -596,17 +596,17 @@ msgstr ""
 #. (para)
 #: ../source/TortoiseMerge_en.xml:688
 msgid "<graphic fileref=\"images/TMerge_lineadded.png\"/> A line has been added."
-msgstr ""
+msgstr "<graphic fileref=\"images/TMerge_lineadded.png\"/> Een regel was toegevoegd."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:692
 msgid "<graphic fileref=\"images/TMerge_lineremoved.png\"/> A line has been removed."
-msgstr ""
+msgstr "<graphic fileref=\"images/TMerge_lineremoved.png\"/> Een regel was verwijderd."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:696
 msgid "<graphic fileref=\"images/TMerge_lineequal.png\"/> A change has been undone by reverting to the original content of the line."
-msgstr ""
+msgstr "<graphic fileref=\"images/TMerge_lineequal.png\"/> Een verandering was ongedaan gemaakt door de orginele regel terug te halen."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:700
@@ -616,12 +616,12 @@ msgstr ""
 #. (para)
 #: ../source/TortoiseMerge_en.xml:706
 msgid "<graphic fileref=\"images/TMerge_lineedited.png\"/> A line has been edited by hand, using TortoiseMerge as a text editor."
-msgstr ""
+msgstr "<graphic fileref=\"images/TMerge_lineedited.png\"/> Een regel is met de hand gewijzigd, mbv. de text editor in TortoiseMerge."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:710
 msgid "<graphic fileref=\"images/TMerge_lineconflicted.png\"/> This line is in conflict."
-msgstr ""
+msgstr "<graphic fileref=\"images/TMerge_lineconflicted.png\"/> Deze regel heeft een konflikt."
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:714
@@ -851,7 +851,7 @@ msgstr "Waar de zelfde regel is veranderd in beide bestanden."
 #. (term)
 #: ../source/TortoiseMerge_en.xml:986
 msgid "Conflict resolved"
-msgstr "Conflikt verholpen"
+msgstr "Konflikt verholpen"
 
 #. (listitem)
 #: ../source/TortoiseMerge_en.xml:987
@@ -931,7 +931,6 @@ msgstr "ctrl-C"
 
 #. (para)
 #: ../source/TortoiseMerge_en.xml:1043
-#, fuzzy
 msgid "Copy the selected text to the clipboard"
 msgstr "Kopieer de geselecteerde regel(s) naar het clipboard"
 
@@ -1207,9 +1206,8 @@ msgstr ""
 
 #. (entry)
 #: ../source/TortoiseMerge_en.xml:1308
-#, fuzzy
 msgid "Forces TortoiseMerge to start with the one-way view instead of the view the user specified in the settings."
-msgstr "TortoiseMerge."
+msgstr "Forceer het opstarten van TortoiseMerge met de een-venster schermindeling zoals door de gebruiker aangegeven in de instellingen."
 
 #. (entry)
 #: ../source/TortoiseMerge_en.xml:1315
