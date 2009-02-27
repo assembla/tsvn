@@ -4678,17 +4678,6 @@ bool CSVNStatusListCtrl::CopySelectedEntriesToClipboard(DWORD dwCols)
 		}
 		if (selection & SVNSLC_COLLOCKCOMMENT)
 			sClipboard += _T("\t")+entry->lock_comment;
-		if (selection & SVNSLC_COLLOCKDATE)
-		{
-			TCHAR datebuf[SVN_DATE_BUFFER];
-            apr_time_t date = entry->lock_date;
-			SVN::formatDate(datebuf, date, true);
-			if (date)
-				temp = datebuf;
-			else
-				temp.Empty();
-			sClipboard += _T("\t")+temp;
-		}
 
 		if (selection & SVNSLC_COLAUTHOR)
 			sClipboard += _T("\t")+entry->last_commit_author;
@@ -4696,13 +4685,6 @@ bool CSVNStatusListCtrl::CopySelectedEntriesToClipboard(DWORD dwCols)
 		{
 			temp.Format(_T("%ld"), entry->last_commit_rev);
 			if (entry->last_commit_rev == 0)
-				temp.Empty();
-			sClipboard += _T("\t")+temp;
-		}
-		if (selection & SVNSLC_COLREMOTEREVISION)
-		{
-			temp.Format(_T("%ld"), entry->remoterev);
-			if (entry->remoterev <= 0)
 				temp.Empty();
 			sClipboard += _T("\t")+temp;
 		}
