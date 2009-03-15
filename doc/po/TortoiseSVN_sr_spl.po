@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2008-12-01 21:44 +0000\n"
-"PO-Revision-Date: 2009-03-13 23:09+0100\n"
+"PO-Revision-Date: 2009-03-15 19:54+0100\n"
 "Last-Translator: Milorad Popović <MiloradSPopovic@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -603,7 +603,6 @@ msgstr "Ili možete instalirati rečnik sami. Ako imate OpenOfis ili Mozilu inst
 
 #. (filename)
 #: ../source/TortoiseSVN_en.xml:661
-#, fuzzy
 msgid "en_US.aff"
 msgstr "en_US.aff"
 
@@ -664,9 +663,8 @@ msgstr "Ovo poglavlje je kratak, neobavezan uvod u Subverziju. Ako ste novi u ko
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:743
-#, fuzzy
 msgid "Even though the examples in this chapter show people sharing collections of program source code, keep in mind that Subversion can manage any sort of file collection - it's not limited to helping computer programmers."
-msgstr "Uprkos tome što primeri u ovom poglavlju prikazuju ljudske deljive kolekcije izvornog koda programa, imajte na umu da Subverzija može upravljati bilo kojom vrstom kolekcije fajlova - nije ograničena na pomoć komputerskim programerima."
+msgstr "Uprkos tome što primere u ovom poglavlju prikazuju ljudi koji dele kolekcije izvornog koda programa, imajte na umu da Subverzija može upravljati bilo kojom vrstom kolekcija fajlova - nije ograničena na pomoć kompjuterskim programerima."
 
 #. (title)
 #. (title)
@@ -674,7 +672,6 @@ msgstr "Uprkos tome što primeri u ovom poglavlju prikazuju ljudske deljive kole
 #: ../source/TortoiseSVN_en.xml:751
 #: ../source/TortoiseSVN_en.xml:1256
 #: ../source/TortoiseSVN_en.xml:2945
-#, fuzzy
 msgid "The Repository"
 msgstr "Spremište"
 
@@ -682,61 +679,51 @@ msgstr "Spremište"
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:753
 #: ../source/TortoiseSVN_en.xml:3711
-#, fuzzy
 msgid "repository"
 msgstr "spremište"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:755
-#, fuzzy
 msgid "Subversion is a centralized system for sharing information. At its core is a <firstterm>repository</firstterm>, which is a central store of data. The repository stores information in the form of a <firstterm>filesystem tree</firstterm> - a typical hierarchy of files and directories. Any number of <firstterm>clients</firstterm> connect to the repository, and then read or write to these files. By writing data, a client makes the information available to others; by reading data, the client receives information from others."
 msgstr "Subverzija je centralizovan sistem za deljenje informcija. U srži je <firstterm>spremište</firstterm>, koje je centralno stovarište podataka. Spremište smešta informacije u obliku <firstterm>fajlsistem stabla</firstterm> - tipična hijerarhija fajlova i imenika. Bilo koji broj <firstterm>klijenata</firstterm> spaja se na spremište i čita ili upisuje u te fajlove. Upisivanjem podataka klijent omogućava da informacija bude dostupna drugima; čitanjem podataka klijent prima informacije od drugih."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:767
-#, fuzzy
 msgid "A Typical Client/Server System"
 msgstr "Tipični klijent/server sistem"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:770
-#, fuzzy
 msgid "So why is this interesting? So far, this sounds like the definition of a typical file server. And indeed, the repository <emphasis>is</emphasis> a kind of file server, but it's not your usual breed. What makes the Subversion repository special is that <emphasis>it remembers every change</emphasis> ever written to it: every change to every file, and even changes to the directory tree itself, such as the addition, deletion, and rearrangement of files and directories."
-msgstr "Dakle zašto je ovo interesantno? Zato što je pesma od definicije tipičnog fajl servera. I svakako, spremište <emphasis>je</emphasis> vrsta fajl servera, ali nije to vaš uobičajen soj. Šta čini Subverziono spremište specijalnim je da  <emphasis>ono pamti sve izmene</emphasis> ikad upisane u njega: sve izmene svakog fajla, i čak izmene samog stabla imenika, kao što je dodavanje, brisanje, i preuređenje fajlova u imenika."
+msgstr "Dakle zašto je ovo interesantno? Zato što je ovo pesma od definicije tipičnog fajl servera. I svakako, spremište <emphasis>je</emphasis> vrsta fajl servera, ali nije to vaš uobičajen soj. Šta čini Subverziono spremište specijalnim je da  <emphasis>ono pamti sve izmene</emphasis> ikad upisane u njega: sve izmene svakog fajla, i čak izmene samog stabla imenika, kao što je dodavanje, brisanje, i preuređenje fajlova u imenika."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:780
-#, fuzzy
 msgid "When a client reads data from the repository, it normally sees only the latest version of the filesystem tree. But the client also has the ability to view <emphasis>previous</emphasis> states of the filesystem. For example, a client can ask historical questions like, <quote>what did this directory contain last Wednesday?</quote>, or <quote>who was the last person to change this file, and what changes did they make?</quote> These are the sorts of questions that are at the heart of any <firstterm>version control system</firstterm>: systems that are designed to record and track changes to data over time."
 msgstr "Kada klijent čita podatke iz spremišta, on normalno vidi samo zadnju verziju stabla fajlsistema. Ali klijent takođe ima mogućnost da vidi <emphasis>prethodno</emphasis> stanje fajlsistema. Na primer, klijent može postaviti istorijska pitanja kao,  <quote>šta je ovaj imenik sadržao prošle srede?</quote>, ili <quote>koja je poslednja osoba koja je menjala ovaj fajl, i koje izmene je uradila?</quote> Ovo je vrsta pitanja koja su srce svakog  <firstterm>sistema kontrole verzija</firstterm>: sistema koji su dizajnirani da aktivno beleže i prate izmene podataka."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:795
-#, fuzzy
 msgid "Versioning Models"
 msgstr "Modeli verzionisanja"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:796
-#, fuzzy
 msgid "All version control systems have to solve the same fundamental problem: how will the system allow users to share information, but prevent them from accidentally stepping on each other's feet? It's all too easy for users to accidentally overwrite each other's changes in the repository."
 msgstr "Svi sistemi kontrole verzija imaju da reše iste osnovne probleme: kako će sistem omogućiti korisnicima da dele informacije, ali da ih spreči da nehotično koračaju stopama jedni drugih? Veoma je lako da jedni drugima korisnici  incidentno prepišu promene u spremištu."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:805
-#, fuzzy
 msgid "The Problem of File-Sharing"
 msgstr "Problem Fajl-Deljenja"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:806
-#, fuzzy
 msgid "Consider this scenario: suppose we have two co-workers, Harry and Sally. They each decide to edit the same repository file at the same time. If Harry saves his changes to the repository first, then it's possible that (a few moments later) Sally could accidentally overwrite them with her own new version of the file. While Harry's version of the file won't be lost forever (because the system remembers every change), any changes Harry made <emphasis>won't</emphasis> be present in Sally's newer version of the file, because she never saw Harry's changes to begin with. Harry's work is still effectively lost - or at least missing from the latest version of the file - and probably by accident. This is definitely a situation we want to avoid!"
-msgstr "Zamislimo ovaj scenario: pretpostavimo da imamo dva saradnika, Hari i Sali. Svaki odluči da uredi isti fajl iz spremišta  u isto vreme. Ako Hari prvi sačuva svoje izmene u spremište, tada je moguće (nekoliko trenutaka kasnije) da ih Sali nehotice prepiše svojom novom verzijom fajla. Pošto Harijeva verzija fajla neće biti izgubljena zauvek (jer sistem pamti sve promene), sve promene koje je uradio Hari <emphasis>neće</emphasis> biti prisutne u Salinu noviju verziju fajla, jer ona nije videla Harijeve izmene na početku rada. Harijev rad je efektivno izgubljen - ili u najmanjem nedostaje u zadnjoj verziji fajla - i verovatno mimo plana. Ovo je defintivno situacija koju želimo da izbegnemo. "
+msgstr "Zamislimo ovaj scenario: pretpostavimo da imamo dva saradnika, Hari i Sali. Svaki odluči da uredi isti fajl iz spremišta  u isto vreme. Ako Hari prvi sačuva svoje izmene u spremište, tada je moguće (nekoliko trenutaka kasnije) da ih Sali nehotice prepiše svojom novom verzijom fajla. Pošto Harijeva verzija fajla neće biti izgubljena zauvek (jer sistem pamti sve promene), sve promene koje je uradio Hari <emphasis>neće</emphasis> biti prisutne u Salinoj novoj verziji fajla, jer ona nije videla Harijeve izmene na početku rada. Harijev rad je efektivno izgubljen - ili u najmanjem nedostaje u zadnjoj verziji fajla - i verovatno mimo plana. Ovo je defintivno situacija koju želimo da izbegnemo. "
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:822
-#, fuzzy
 msgid "The Problem to Avoid"
 msgstr "Kako izbeći problem"
 
@@ -744,37 +731,31 @@ msgstr "Kako izbeći problem"
 #. (title)
 #: ../source/TortoiseSVN_en.xml:827
 #: ../source/TortoiseSVN_en.xml:843
-#, fuzzy
 msgid "The Lock-Modify-Unlock Solution"
 msgstr "Zaključaj-Menjaj-Otključaj rešenje"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:828
-#, fuzzy
 msgid "Many version control systems use a <firstterm>lock-modify-unlock</firstterm> model to address this problem, which is a very simple solution. In such a system, the repository allows only one person to change a file at a time. First Harry must <emphasis>lock</emphasis> the file before he can begin making changes to it. Locking a file is a lot like borrowing a book from the library; if Harry has locked a file, then Sally cannot make any changes to it. If she tries to lock the file, the repository will deny the request. All she can do is read the file, and wait for Harry to finish his changes and release his lock. After Harry unlocks the file, his turn is over, and now Sally can take her turn by locking and editing."
 msgstr "Mnogi sistemi kontrole verzija koriste <firstterm>zaključaj-izmeni-otključaj</firstterm> model da označe ovaj problem, što je veoma jednostavno rešenje. U takvim sistemima, spremište dozvoljava samo jednoj osobi da menja fajl u isto vreme. Prvo Hari mora <emphasis>zaključati</emphasis> fajl pre nego što može da ga menja. Zaključavanje fajla je mnogo slično pozajmljivanju knjige iz biblioteke; ako Hari ima zaključani fajl, onda Sali ne može da napravi bilo kakvu izmenu na njemu. Ako ona pokuša da zaključa fajl spremište će zabraniti zahtev. Sve što može uraditi je da čita fajl i čeka da Hari završi svoje izmene i otključa fajl. Kada Hari otključa fajl, on ga vraća i Sali  ga može uzeti zaključavanjem i da ga uređuje. "
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:846
-#, fuzzy
 msgid "The problem with the lock-modify-unlock model is that it's a bit restrictive, and often becomes a roadblock for users:"
 msgstr "Problem sa zaključaj-izmeni-otključaj modelom je da je pomalo restriktiv i često postaje prepreka za korisnike:"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:853
-#, fuzzy
 msgid "<emphasis>Locking may cause administrative problems.</emphasis> Sometimes Harry will lock a file and then forget about it. Meanwhile, because Sally is still waiting to edit the file, her hands are tied. And then Harry goes on vacation. Now Sally has to get an administrator to release Harry's lock. The situation ends up causing a lot of unnecessary delay and wasted time."
 msgstr "<emphasis>Zaključavanje može da napravi administrativni problem.</emphasis> Ponekad Hari će zaključati fajl i zaboraviti na njega. Međutim, pošto Sali još čeka da uredi fajl, njene ruke se vezane. I onda Hari odlazi na odmor. Sada Sali ima da dobije od Administratora oslobađanje Harijevog zaključavanja. Situacija se završava uzrokujući puno nepotrebnog kašnjenja i izgubljenog vremena."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:864
-#, fuzzy
 msgid "<emphasis>Locking may cause unnecessary serialization.</emphasis> What if Harry is editing the beginning of a text file, and Sally simply wants to edit the end of the same file? These changes don't overlap at all. They could easily edit the file simultaneously, and no great harm would come, assuming the changes were properly merged together. There's no need for them to take turns in this situation."
 msgstr "<emphasis>Zaključavanje može da prouzrokuje neželjenu serijalizaciju.</emphasis> Šta ako Hari uređuje početak tekst fajla, a Sali jednostavno želi da uredi kraj istog fajla? Ove izmene se uopšte ne preklapaju. Oni mogu lako da uređuju fajl istovremeno, neće doći do velike štete, uzevši da se izmene odgovarajuće ujedine. NJima nije potrebno da se okrenu od ovakve situacije."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:876
-#, fuzzy
 msgid "<emphasis>Locking may create a false sense of security.</emphasis> Pretend that Harry locks and edits file A, while Sally simultaneously locks and edits file B. But suppose that A and B depend on one another, and the changes made to each are semantically incompatible. Suddenly A and B don't work together anymore. The locking system was powerless to prevent the problem - yet it somehow provided a sense of false security. It's easy for Harry and Sally to imagine that by locking files, each is beginning a safe, insulated task, and thus inhibits them from discussing their incompatible changes early on."
 msgstr "<emphasis>Zaključavanje može da stvori lažni osećaj sigurnosti.</emphasis> Uzmimo da Hari zaključa i uređuje fajl A, dok Sali istovremeno zaključa i uređuje fajl B. Pretpostavimo da A i B zavise jedan od drugog i da izmene urađene na bilo kome semantički nisu kompatibilne. Iznenada A i B ne rade više zajedno. Zaključavajući sistem nema snage da predupredi problem - čak nekako daje osećaj lažne sigurnosti. Lako je da Hari i Sali zamisle to zaključavanjem fajlova, svako počinje siguran, izdvojen zadatak i to ga sprečava da razmatra nekompatibilne izmene učinjene ranije. "
 
@@ -782,25 +763,21 @@ msgstr "<emphasis>Zaključavanje može da stvori lažni osećaj sigurnosti.</emp
 #. (title)
 #: ../source/TortoiseSVN_en.xml:894
 #: ../source/TortoiseSVN_en.xml:922
-#, fuzzy
 msgid "The Copy-Modify-Merge Solution"
 msgstr "Kopiraj-Menjaj-Stopi rešenje"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:895
-#, fuzzy
 msgid "Subversion, CVS, and other version control systems use a <firstterm>copy-modify-merge</firstterm> model as an alternative to locking. In this model, each user's client reads the repository and creates a personal <firstterm>working copy</firstterm> of the file or project. Users then work in parallel, modifying their private copies. Finally, the private copies are merged together into a new, final version. The version control system often assists with the merging, but ultimately a human being is responsible for making it happen correctly."
 msgstr "Subverzija, CVS i drugi sistemi kontrole verzija koriste <firstterm>kopiraj-menjaj-stopi</firstterm> model kao alternativu zaključavanju. U ovom modelu svaki korisnički klijent čita spremište i kreira ličnu <firstterm>radnu kopiju</firstterm> fajla ili projekta. Korisnici onda rade paralelno, menjajući svoje privatne kopije. Finalno, privatne kopije se spajaju u novu, finalnu verziju. Sistem kontrole verzija često posreduje u spajanju, ali ljudi su odgovorni da učine da sve bude korektno."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:907
-#, fuzzy
 msgid "Here's an example. Say that Harry and Sally each create working copies of the same project, copied from the repository. They work concurrently, and make changes to the same file <filename>A</filename> within their copies. Sally saves her changes to the repository first. When Harry attempts to save his changes later, the repository informs him that his file A is <firstterm>out-of-date</firstterm>. In other words, that file A in the repository has somehow changed since he last copied it. So Harry asks his client to <firstterm>merge</firstterm> any new changes from the repository into his working copy of file A. Chances are that Sally's changes don't overlap with his own; so once he has both sets of changes integrated, he saves his working copy back to the repository."
 msgstr "Evo primera. Recimo da Hari i Sali kreiraju radne kopije istog projekta, kopiranjem iz spremišta. Oni rade istovremeno, i prave izmene na istom fajlu <filename>A</filename> u okviru svojih kopija. Sali sačuva svoje izmene u spremište prva. Kada Hari pokuša da sačuva svoje izmene kasnije, spremište ga informiše da je njegov fajl A <firstterm>zastareo</firstterm>. Drugim rečima, fajl A u spremištu ima nečije izmene od zadnjeg kopiranja. Tako Hari pita svog klijenta da <firstterm>stopi</firstterm> bilo koje nove izmene iz spremišta u njegovu radnu kopiju fajla A. Postoji šansa da Saline izmene ne prekrivaju njegove; tako da će imati oba skupa izmena integrisano, on sačuva svoju radnu kopiju nazad u spremište. "
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:926
-#, fuzzy
 msgid "...Copy-Modify-Merge Continued"
 msgstr "...Kopiraj-Menjaj-Stopi nastavak"
 
@@ -808,111 +785,93 @@ msgstr "...Kopiraj-Menjaj-Stopi nastavak"
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:930
 #: ../source/TortoiseSVN_en.xml:4891
-#, fuzzy
 msgid "conflict"
 msgstr "konflikt"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:932
-#, fuzzy
 msgid "But what if Sally's changes <emphasis>do</emphasis> overlap with Harry's changes? What then? This situation is called a <firstterm>conflict</firstterm>, and it's usually not much of a problem. When Harry asks his client to merge the latest repository changes into his working copy, his copy of file A is somehow flagged as being in a state of conflict: he'll be able to see both sets of conflicting changes, and manually choose between them. Note that software can't automatically resolve conflicts; only humans are capable of understanding and making the necessary intelligent choices. Once Harry has manually resolved the overlapping changes (perhaps by discussing the conflict with Sally!), he can safely save the merged file back to the repository."
 msgstr "Ali šta ako Saline izmene <emphasis>prekrivaju</emphasis> Harijeve izmene? Šta tada? Ova situacija se zove <firstterm>konflikt</firstterm>, i to obično nije veliki problem. Kada Hari traži od svog klijenta da stopi zadnje izmene u spremištu u njegovu radnu kopiju, njegova kopija fajla A je nekako označena da je u stanju konflikta: on će biti u mogućnosti da vidi oba skupa konfliktnih izmena, i ručno da izabere između njih. Primetimo da softver ne može automatski da reši konflikt; samo ljudi su sposobni da razumeju i urade neophodne inteligentne izbore. Jednom kad Hari ručno reši preklapanje izmena (možda diskusijom konflikta sa Sali!), on može bezbedno da sačuva stopljen fajl nazad u spremište.  "
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:947
-#, fuzzy
 msgid "The copy-modify-merge model may sound a bit chaotic, but in practice, it runs extremely smoothly. Users can work in parallel, never waiting for one another. When they work on the same files, it turns out that most of their concurrent changes don't overlap at all; conflicts are infrequent. And the amount of time it takes to resolve conflicts is far less than the time lost by a locking system."
 msgstr "Kopiraj-menjaj-stopi model može da zvuči pomalo haotično, ali u praksi, radi ekstremno glatko. Korisnici mogu da rade paralelno, nikada ne čekaju jedan drugog. Kada rade na istim fajlovima isključeno je da njihove istovremene izmene ne budu upisane; konflikti su retki. I iznos vremena uzet za rešavanje konflikta je manji od vremena izgubljenog zaključavanjem sistema. "
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:956
-#, fuzzy
 msgid "In the end, it all comes down to one critical factor: user communication. When users communicate poorly, both syntactic and semantic conflicts increase. No system can force users to communicate perfectly, and no system can detect semantic conflicts. So there's no point in being lulled into a false promise that a locking system will somehow prevent conflicts; in practice, locking seems to inhibit productivity more than anything else."
-msgstr "Na kraju, sve dolazi u jedan kritičan faktor: korisnička komunikacija. Kada je loša komunikacija između korisnika sintaksni i semantički konflikti rastu. Nema sistema koji će naterati korisnike da kompuniciraju perfektno, i nema sistema koji može da detektuje semantički konflikt. Tako da nije poenta da se bude umiren lažnim obećanjem da sistem zaključavanja nekako predupređuje konflikt; u praksi, zaključavanje izgleda sprečava više produktivnost nego bilo šta drugo."
+msgstr "Na kraju, sve dolazi u jedan kritičan faktor: korisnička komunikacija. Kada je loša komunikacija između korisnika sintaksni i semantički konflikti rastu. Nema sistema koji će naterati korisnike da komuniciraju perfektno, i nema sistema koji može da detektuje semantički konflikt. Tako da nije poenta da se bude umiren lažnim obećanjem da sistem zaključavanja nekako predupređuje konflikt; u praksi, zaključavanje izgleda sprečava više produktivnost nego bilo šta drugo."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:966
-#, fuzzy
 msgid "There is one common situation where the lock-modify-unlock model comes out better, and that is where you have unmergeable files. For example if your repository contains some graphic images, and two people change the image at the same time, there is no way for those changes to be merged together. Either Harry or Sally will lose their changes."
-msgstr "Postoji jedna obična situacija gde zaključaj-menjaj-otključaj model je bolji, i to je gde imate ne stopive fajlove. Na primer ako vaše spremište sadrži neke grafičke slike, i dva čoveka menjaju slike u isto vreme, nema načina da se te izmene spoje zajedno. Ili Hari ili Sali će izgubiti svoje izmene."
+msgstr "Postoji jedna obična situacija gde je  zaključaj-menjaj-otključaj model bolji, i to gde imate nestopive fajlove. Na primer ako vaše spremište sadrži neke grafičke slike, i dva čoveka menjaju slike u isto vreme, nema načina da se te izmene spoje zajedno. Ili Hari ili Sali će izgubiti svoje izmene."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:976
-#, fuzzy
 msgid "What does Subversion Do?"
 msgstr "Šta Subverzija radi?"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:977
-#, fuzzy
 msgid "Subversion uses the copy-modify-merge solution by default, and in many cases this is all you will ever need. However, as of Version 1.2, Subversion also supports file locking, so if you have unmergeable files, or if you are simply forced into a locking policy by management, Subversion will still provide the features you need."
-msgstr "Subverzija koristi kopiraj-izmeni-stopi rešenje uobičajeno, i u mnogim slučajevimaovo je sve što vam je potrebno. Međutim, od Verzije 1.2 Subverzija takođe podržava zaključavanje fajlova, tako da ako imate nestopive fajlove, ili ako jednostavno forsirate politiku zaključavanja preko uprave, Subverzija će još omogućavati željene osobine."
+msgstr "Subverzija koristi kopiraj-izmeni-stopi rešenje uobičajeno, i u mnogim slučajevima ovo je sve što vam je potrebno. Međutim, od Verzije 1.2 Subverzija takođe podržava zaključavanje fajlova, tako da ako imate nestopive fajlove, ili ako jednostavno forsirate politiku zaključavanja preko uprave, Subverzija će još omogućavati željene osobine."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:989
-#, fuzzy
 msgid "Subversion in Action"
 msgstr "Subverzija u akcija"
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:991
-#, fuzzy
 msgid "Working Copies"
 msgstr "Radna kopija"
 
 #. (primary)
 #: ../source/TortoiseSVN_en.xml:993
-#, fuzzy
 msgid "working copy"
 msgstr "radna kopija"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:995
-#, fuzzy
 msgid "You've already read about working copies; now we'll demonstrate how the Subversion client creates and uses them."
 msgstr "Već ste čitali o radnoj kopiji; sada ćemo demonstrirati kako je Subverzioni klijent kreira i koristi. "
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:1000
-#, fuzzy
 msgid "A Subversion working copy is an ordinary directory tree on your local system, containing a collection of files. You can edit these files however you wish, and if they're source code files, you can compile your program from them in the usual way. Your working copy is your own private work area: Subversion will never incorporate other people's changes, nor make your own changes available to others, until you explicitly tell it to do so."
-msgstr "Subverziona radna kopija je obično stablo imenika u vašem lokalnom sistemu, koje sadrži kolekciju fajlova. Vi možete urediti ove fajlove kako želite, i  ako su fajlovi izvornog koda, možete kompajlirati vaš program od njih na uobičajen način. Vaša radna kopija je vaša lična privatna radna površina: Subverzija neće inkorporirati izmene drugih ljudi, niti će uraditi vaše promene dostupne drugima, sve dok joj eksplicitno ne kažete da to uradi. "
+msgstr "Subverziona radna kopija je obično stablo imenika u vašem lokalnom sistemu, koje sadrži kolekciju fajlova. Vi možete urediti ove fajlove kako želite, i  ako su fajlovi izvornog koda, možete od njih kompajlirati vaš program  na uobičajen način. Vaša radna kopija je vaša lična privatna radna površina: Subverzija neće inkorporirati izmene drugih ljudi, niti će uraditi vaše promene dostupne drugima, sve dok joj eksplicitno ne kažete da to uradi. "
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:1010
-#, fuzzy
 msgid "After you've made some changes to the files in your working copy and verified that they work properly, Subversion provides you with commands to <emphasis>publish</emphasis> your changes to the other people working with you on your project (by writing to the repository). If other people publish their own changes, Subversion provides you with commands to merge those changes into your working directory (by reading from the repository)."
-msgstr "Kada ste napravili neke izmene u fajlovima u vašoj radnoj kopiji i proverite da to radi ispravno, Subverzija vam omogućava komandama da <emphasis>publikujete</emphasis> vaše izmene drugim ljudima koji rade sa vama na vašem projektu (pisanjem u spremište). Ako drugi ljudi publikuju svoje izmene, Subverzija vam omogućava  komandama za spajanje tih izmena u vaš radni imenik (čitanjem iz spremišta)."
+msgstr "Kada ste napravili neke izmene u fajlovima u vašoj radnoj kopiji i proverite da to radi ispravno, Subverzija vam omogućava da komandama <emphasis>publikujete</emphasis> vaše izmene drugim ljudima koji rade sa vama na vašem projektu (pisanjem u spremište). Ako drugi ljudi publikuju svoje izmene, Subverzija vam omogućava  komandama za spajanje tih izmena u vaš radni imenik (čitanjem iz spremišta)."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:1020
-#, fuzzy
 msgid "A working copy also contains some extra files, created and maintained by Subversion, to help it carry out these commands. In particular, each directory in your working copy contains a subdirectory named <filename>.svn</filename>, also known as the working copy <firstterm>administrative directory</firstterm>. The files in each administrative directory help Subversion recognize which files contain unpublished changes, and which files are out-of-date with respect to others' work."
-msgstr "Radna kopija takođe sadrži neke ekstra fajlove, kreirane i održavane Subverzijom, dajoj  pomognu da izvuče ove komande. Posebno, svaki imenik u vašoj radnoj kopiji sadrži podimenike označene <filename>.svn</filename>, takođe poznat kao radna kopija <firstterm>administrativni imenik</firstterm>. Fajlovi u svakom administrativnom imeniku pomažu Subverziji da prepozna koji fajlovi sadrže nepublikovane izmene, i koji fajlovi su zastreli u odnosu na rad drugih."
+msgstr "Radna kopija takođe sadrži neke ekstra fajlove, kreirane i održavane Subverzijom, da joj  pomognu da izvuče ove komande. Posebno, svaki imenik u vašoj radnoj kopiji sadrži podimenike označene <filename>.svn</filename>, takođe poznat kao radna kopija <firstterm>administrativni imenik</firstterm>. Fajlovi u svakom administrativnom imeniku pomažu Subverziji da prepozna koji fajlovi sadrže nepublikovane izmene, i koji fajlovi su zastreli u odnosu na rad drugih."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:1031
-#, fuzzy
 msgid "A typical Subversion repository often holds the files (or source code) for several projects; usually, each project is a subdirectory in the repository's filesystem tree. In this arrangement, a user's working copy will usually correspond to a particular subtree of the repository."
 msgstr "Tipično Subverziono spremište često sadrži fajlove (ili izvorni kod) za više projekata; obično, svaki projekat je subimenik u stablu fajlsistema u spremištu. U ovom uređenju korisnička radna kopija obično će korespondirati posebnom podstablu spremišta."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:1038
-#, fuzzy
 msgid "For example, suppose you have a repository that contains two software projects."
 msgstr "Na primer, pretpostavimo da imate spremište koje sadrži dva sofverska projekta."
 
 #. (title)
 #: ../source/TortoiseSVN_en.xml:1043
-#, fuzzy
 msgid "The Repository's Filesystem"
 msgstr "Fajlsistem spremišta"
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:1046
-#, fuzzy
 msgid "In other words, the repository's root directory has two subdirectories: <filename>paint</filename> and <filename>calc</filename>."
-msgstr "Drugim rečima, koreini imenik spremišta ima dva podimenika: <filename>pejnt</filename> i <filename>kalk</filename>."
+msgstr "Drugim rečima, koreni imenik spremišta ima dva podimenika: <filename>paint</filename> and <filename>calc</filename>."
 
 #. (para)
 #: ../source/TortoiseSVN_en.xml:1051
