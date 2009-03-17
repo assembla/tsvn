@@ -15,9 +15,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2009-03-16 00:11 +0000\n"
-"PO-Revision-Date: 2009-03-16 09:44+0100\n"
-"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
+"POT-Creation-Date: 2009-03-16 22:17 +0000\n"
+"PO-Revision-Date: 2009-03-17 21:08+0100\n"
+"Last-Translator: Lübbe Onken <luebbe@tigris.org>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3658,7 +3658,7 @@ msgstr "Der Dialog zum Auflösen von Konflikten bietet Ihnen an, die Änderungen
 
 #. (title)
 msgid "Local edit, incoming delete upon update"
-msgstr "Lokale Änderung, eingehendes Löschen beim Aktualisieren"
+msgstr "Lokal geändert, eingehendes Löschen beim Aktualisieren"
 
 #. (para)
 msgid "Developer A moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository."
@@ -3708,7 +3708,7 @@ msgstr "Für einen Ordnerkonflikt: <placeholder-1/>"
 #. (para)
 #. (para)
 msgid "Developer B now has to decide whether to go with developer A's reorganisation and merge her changes into the corresponding file in the new structure, or simply revert A's changes and keep the local file."
-msgstr ""
+msgstr "Entwickler B muss nun entscheiden, ob er die Reorganisation durch Entwickler A übernehmen will und seine Änderungen in der entsprechenden Datei in der neuen Struktur zusammenführt oder ob er einfach die Änderungen von A rückgängig macht und die lokale Datei beibehält."
 
 #. (para)
 msgid "To merge her local changes with the reshuffle, Developer B must first find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog. The changes must then be merged by hand as there is currently no way to automate or even simplify this process. Once the changes have been ported across, the conflicted path is redundant and can be deleted. In this case use the <guilabel>Remove</guilabel> button in the conflict editor dialog to clean up and mark the conflict as resolved."
@@ -3716,7 +3716,7 @@ msgstr "Um seine lokalen Änderungen mit der Umstrukturierung zusammenzuführen,
 
 #. (para)
 msgid "If Developer B decides that A's changes were wrong then she must choose the <guilabel>Keep</guilabel> button in the conflict editor dialog. This marks the conflicted file/folder as resolved, but Developer A's changes need to be removed by hand. Again the log dialog helps to track down what was moved."
-msgstr "Falls Entwickler B beschließt, dass die Änderungen von A falsch waren, muss er die <guilabel>Beibehalten</guilabel> im Konflikteditor wählen. Dadurch wird der Konflikt als aufgeöst markiert, aber die Änderungen von Entwickler A müssen manuell zurückgenommen werden. Der Log-Dialog hilft Ihnen wieder dabei festzustellen, was verschoben wurde."
+msgstr "Falls Entwickler B beschließt, dass die Änderungen von A falsch waren, muss er <guilabel>Beibehalten</guilabel> im Konflikteditor wählen. Dadurch wird der Konflikt als aufgeöst markiert, aber die Änderungen von Entwickler A müssen manuell zurückgenommen werden. Der Log-Dialog hilft Ihnen wieder dabei festzustellen, was verschoben wurde."
 
 #. (title)
 msgid "Local delete, incoming delete upon update"
@@ -3754,19 +3754,19 @@ msgstr "Danach muss sich Entwickler B entscheiden, welchen neuen Dateinamen von 
 #. (para)
 #. (para)
 msgid "After developer B has manually resolved the conflict, the tree conflict has to be marked as resolved with the button in the conflict editor dialog."
-msgstr ""
+msgstr "Nachdem Entwickler B den Konflikt manuell aufgelöst hat, muss der Baumkonflikt mit der Schaltfläche im Konflikteditor als aufgelöst markiert werden."
 
 #. (title)
 msgid "Local missing, incoming edit upon merge"
-msgstr ""
+msgstr "Lokal fehlend, eingehende Änderung beim Aktualisieren"
 
 #. (para)
 msgid "Developer A working on trunk modifies <filename>Foo.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Entwickler A verändert im Stamm die Datei <filename>Foo.c</filename> um und überträgt die Änderung ins Projektarchiv."
 
 #. (para)
 msgid "Developer B working on a branch moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Entwickler B, der auf einem Zweig arbeitet, benennt <filename>Foo.c</filename> in <filename>Bar.c</filename> um und überträgt die Änderung ins Projektarchiv."
 
 #. (para)
 msgid "<filename>Bar.c</filename> is already in the working copy with status 'normal'."
@@ -3774,42 +3774,42 @@ msgstr "Die Datei <filename>Bar.c</filename> befindet sich bereits mit dem Statu
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as missing with a tree conflict."
-msgstr ""
+msgstr "Die Datei <filename>Foo.c</filename> ist als <emphasis>fehlend</emphasis> markiert und hat einen Baumkonflikt."
 
 #. (para)
 #. (para)
 #. (para)
 msgid "A merge of developer A's trunk changes to developer B's branch working copy results in a tree conflict: <placeholder-1/>"
-msgstr ""
+msgstr "Das Zusammenführen der Änderungen von Entwickler A im Stamm mit der Arbeitskopie von Entwickler B führt zu einem Baumkonflikt: <placeholder-1/>"
 
 #. (para)
 msgid "To resolve this conflict, Developer B has to mark the file as resolved in the conflict editor dialog, which will remove it from the conflict list. She then has to decide whether to copy the missing file <filename>Foo.c</filename> from the repository to the working copy, whether to merge Developer A's changes to <filename>Foo.c</filename> into the renamed <filename>Bar.c</filename> or whether to ignore the changes by marking the conflict as resolved and doing nothing else."
-msgstr ""
+msgstr "Um diesen Konflikt aufzulösen, muss Entwickler B den Dateikonflikt im Konflikteditor als aufgelöst markieren, wodurch er aus der Konfliktliste entfernt wird. Danach muss er entscheiden, ob er die fehlende Datei <filename>Foo.c</filename> aus dem Projektarchiv in die Arbeitskopie kopiert, die Änderungen von Entwickler A an <filename>Foo.c</filename> in die umbenannte Datei <filename>Bar.c</filename> überträgt oder die Änderungen ignoriert, indem er den Konflikt als aufgelöst markiert und nichts weiter unternimmt."
 
 #. (para)
 msgid "Note that if you copy the missing file from the repository and then mark as resolved, your copy will be removed again. You have to resolve the conflict first."
-msgstr ""
+msgstr "Beachten Sie, dass wenn Sie die fehlende Datei aus dem Projektarchiv kopieren und danach den Konflikt als aufgelöst markieren, ihre Kopie wieder entfernt wird. Sie müssen den Konflikt erst auflösen und danach die Datei kopieren."
 
 #. (title)
 msgid "Local edit, incoming delete upon merge"
-msgstr ""
+msgstr "Lokal bearbeitet, eingehende Löschung beim Zusammenführen"
 
 #. (para)
 #. (para)
 msgid "Developer A working on trunk moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Entwickler A benennt im Stamm die Datei <filename>Foo.c</filename> in <filename>Bar.c</filename> um und überträgt die Änderung ins Projektarchiv."
 
 #. (para)
 msgid "Developer B working on a branch modifies <filename>Foo.c</filename> and commits it to the repository."
-msgstr ""
+msgstr "Entwickler B, der auf einem Zweig arbeitet, modifiziert <filename>Foo.c</filename> und überträgt die Änderung ins Projektarchiv."
 
 #. (para)
 msgid "There is an equivalent case for folder moves, but it is not yet detected in Subversion 1.6 ..."
-msgstr ""
+msgstr "Es gibt einen äquivalenten Fall für verschobene Ordner, dieser wird aber in Subversion 1.6 noch nicht erkannt ..."
 
 #. (para)
 msgid "Developer A working on trunk moves parent folder <filename>FooFolder</filename> to <filename>BarFolder</filename> and commits it to the repository."
-msgstr "Entwickler A benennt den Ordner <filename>FooOrdner</filename> in <filename>BarOrdner</filename> um und überträgt die Änderung ins Projektarchiv."
+msgstr "Entwickler A benennt im Stamm den Ordner <filename>FooOrdner</filename> in <filename>BarOrdner</filename> um und überträgt die Änderung ins Projektarchiv."
 
 #. (para)
 msgid "Developer B working on a branch modifies <filename>Foo.c</filename> in her working copy."
@@ -3825,19 +3825,19 @@ msgstr "Die Datei <filename>Foo.c</filename> ist als <emphasis>verändert</empha
 
 #. (para)
 msgid "To merge her local changes with the reshuffle, Developer B must first find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog for the merge source. The conflict editor only shows the log for the working copy as it does not know which path was used in the merge, so you will have to find that yourself. The changes must then be merged by hand as there is currently no way to automate or even simplify this process. Once the changes have been ported across, the conflicted path is redundant and can be deleted. In this case use the <guilabel>Remove</guilabel> button in the conflict editor dialog to clean up and mark the conflict as resolved."
-msgstr ""
+msgstr "Um die lokalen Änderungen mit der Reorganisation zusammenzuführen, muss Entwickler B zunächst herausfinden wie die konfliktbehaftete Datei <filename>Foo.c</filename> im Projektarchiv umbenannt wurde. Dies kann mit Hilfe des Log-Dialogs für die Quelle des Zusammenführens geschehen. Der Konflikteditor zeigt nur das Log für die Arbeitskopie an, da er nicht wissen kann, welcher Pfad zum Zusammenführen genutzt wurde. Aus diesem Grund müssen Sie das selbst herausfinden. Die Änderungen müssen manuell zusammengeführt werden, da es derzeit keine Möglichkeit gibt, dies zu automatisieren oder zu vereinfachen. Sobald die Änderungen übernommen wurden, ist der konfliktbehaftete Pfad überflüssig und kann gelöscht werden. Verwenden Sie dazu die <guilabel>Entfernen</guilabel> Schaltfläche im Konflikteditor. Damit wird dieser Konflikt als aufgelöst markiert."
 
 #. (para)
 msgid "If Developer B decides that A's changes were wrong then she must choose the <guilabel>Keep</guilabel> button in the conflict editor dialog. This marks the conflicted file/folder as resolved, but Developer A's changes need to be removed by hand. Again the log dialog for the merge source helps to track down what was moved."
-msgstr ""
+msgstr "Falls Entwickler B beschließt, dass die Änderungen von A falsch waren, muss er <guilabel>Beibehalten</guilabel> im Konflikteditor wählen. Dadurch wird der Konflikt als aufgeöst markiert, aber die Änderungen von Entwickler A müssen manuell zurückgenommen werden. Der Log-Dialog hilft Ihnen wieder dabei festzustellen, was verschoben wurde."
 
 #. (title)
 msgid "Local delete, incoming delete upon merge"
-msgstr ""
+msgstr "Lokal gelöscht, eingehende Löschung beim Zusammenführen"
 
 #. (para)
 msgid "Developer B working on a branch moves <filename>Foo.c</filename> to <filename>Bix.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Entwickler B, der auf einem Zweig arbeitet, benennt <filename>Foo.c</filename> in <filename>Bix.c</filename> um und überträgt die Änderung ins Projektarchiv."
 
 #. (para)
 msgid "<filename>Bix.c</filename> is marked with normal (unmodified) status."
@@ -3853,7 +3853,7 @@ msgstr "Die Datei <filename>Foo.c</filename> ist als <emphasis>fehlend</emphasis
 
 #. (para)
 msgid "To resolve this conflict, Developer B has to find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog for the merge source. The conflict editor only shows the log for the working copy as it does not know which path was used in the merge, so you will have to find that yourself."
-msgstr ""
+msgstr "Um diesen Konflikt aufzulösen, muss Entwickler B zunächst herausfinden wie die konfliktbehaftete Datei <filename>Foo.c</filename> im Projektarchiv umbenannt wurde. Dies kann mit Hilfe des Log-Dialogs für die Quelle des Zusammenführens geschehen. Der Konflikteditor zeigt nur das Log für die Arbeitskopie an, da er nicht wissen kann, welcher Pfad zum Zusammenführen genutzt wurde. Aus diesem Grund müssen Sie das selbst herausfinden."
 
 #. (title)
 msgid "Getting Status Information"
@@ -4196,7 +4196,7 @@ msgstr "<placeholder-1/> Es gibt mehrere Orte, von denen Sie den Log-Dialog star
 
 #. (para)
 msgid "If the repository is unavailable you will see the <guilabel>Want to go offline?</guilabel> dialog, described in <xref linkend=\"tsvn-dug-showlog-cache\"/>."
-msgstr ""
+msgstr "Falls das Projektarchiv nicht erreicht werden kann wird der <guilabel>Offline gehen</guilabel> Dialog, angezeigt, der in <xref linkend=\"tsvn-dug-showlog-cache\"/> beschrieben wird."
 
 #. (title)
 msgid "Revision Log Actions"
@@ -4405,7 +4405,7 @@ msgstr "Zeige Revisionseigenschaften"
 
 #. (para)
 msgid "View and edit any revision property, not just log message and author. Refer to <xref linkend=\"tsvn-dug-showlog-4\"/>."
-msgstr ""
+msgstr "Eine beliebige Revisionseigenschaft, nicht nur Logmeldung und Autor, bearbeiten. Weiteres in <xref linkend=\"tsvn-dug-showlog-4\"/>."
 
 #. (term)
 #. (term)
@@ -4455,7 +4455,7 @@ msgstr "Die gewählten Revisionen annotieren und die Ergebnisse mit einem Vergle
 
 #. (term)
 msgid "Show differences as unified diff"
-msgstr ""
+msgstr "Unterschiede als Standard-Diff anzeigen"
 
 #. (para)
 msgid "View the differences between the two selected revisions as a Unified-Diff file. This works for files and folders."
@@ -4803,38 +4803,36 @@ msgid "Offline Mode"
 msgstr "Offline Modus"
 
 #. (title)
-#, fuzzy
 msgid "Go Offline Dialog"
-msgstr "Offline Modus"
+msgstr "Offline gehen"
 
 #. (para)
 msgid "<placeholder-1/> If the server is not reachable, and you have log caching enabled you can use the log dialog and revision graph in offline mode. This uses data from the cache, which allows you to continue working although the information may not be up-to-date or even complete."
 msgstr "<placeholder-1/> Wenn der Server nicht erreichbar ist und Sie den Log-Puffer aktiviert haben, können Sie den Log-Dialog und den Revisionsgraphen auch offline benutzen. Dabei werden die Daten aus dem Puffer gelesen, so dass Sie wie gewohnt weiterarbeiten können. Allerdings ist es möglich, dass die angezeigten Informationen veraltent oder unvollständig sind."
 
 #. (term)
-#, fuzzy
 msgid "Offline for now"
-msgstr "Offline Modus"
+msgstr "Für diese Aktion offline"
 
 #. (para)
 msgid "Complete the current operation in offline mode, but retry the repository next time log data is requested."
-msgstr ""
+msgstr "Beendet die aktuelle Operation im Offline-Modus, versucht aber, wenn das nächste Mal Logdaten angefordert werden, wieder auf das Projektarchiv zuzugreifern."
 
 #. (term)
 msgid "Permanently offline"
-msgstr ""
+msgstr "Permanent offline"
 
 #. (para)
 msgid "Remain in offline mode until a repository check is specifically requested. See <xref linkend=\"tsvn-dug-showlog-refresh\"/>."
-msgstr ""
+msgstr "Bleibt im Offline-Modus bis eine Aktualisierung der Logdaten explizit angefortert wird. Siehe <xref linkend=\"tsvn-dug-showlog-refresh\"/>."
 
 #. (term)
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #. (para)
 msgid "If you don't want to continue the operation with possibly stale data, just cancel."
-msgstr ""
+msgstr "Wenn Sie die Operation wegen möglicherweise veralteter Logdaten nicht fortsetzen wollen, brechen Sie einfach ab."
 
 #. (para)
 msgid "Here you have three options: <placeholder-1/>"
@@ -4842,7 +4840,7 @@ msgstr "Hier haben Sie drei Möglichkeiten: <placeholder-1/>"
 
 #. (para)
 msgid "The <guilabel>Make this the default</guilabel> checkbox prevents this dialog from re-appearing and always picks the option you choose next. You can still change (or remove) the default after doing this from <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "Die Option <guilabel>Diese Einstellung immer verwenden</guilabel> verhindert, dass der Dialog wieder erscheint und verwendet stets die von Ihnen gewählte Aktion. Sie können die Vorgabe jederzeit über <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Optionen</guimenuitem></menuchoice> ändern."
 
 #. (title)
 #. (title)
@@ -6017,9 +6015,8 @@ msgstr ""
 "Klicken Sie auf <guibutton>Setzen</guibutton> und übertragen Sie Ihre Änderungen. Sobald jetzt jemand seine Arbeitskopie aktualisiert, wird Subversion einen Unterordner <filename>D:\\dev\\projekt1\\sounds</filename> anlegen und in diesen das <quote>Sounds</quote> Projekt auschecken, einen weiteren Unterordner <filename>D:\\dev\\projekt1\\quick_graphs</filename> mit dem <quote>Graphics</quote> Projekt, und schließlich einen verschachtelten Unterordner <filename>D:\\dev\\project1\\skins\\toolkit</filename>, der Revision 21 des <quote>Skinmaker</quote> Projekts enthält."
 
 #. (title)
-#, fuzzy
 msgid "Use explicit revision numbers"
-msgstr "Globale Revisionsnummern"
+msgstr ""
 
 #. (para)
 msgid "You should strongly consider using explicit revision numbers in all of your externals definitions, as described above. Doing so means that you get to decide when to pull down a different snapshot of external information, and exactly which snapshot to pull. Besides the common sense aspect of not being surprised by changes to third-party repositories that you might not have any control over, using explicit revision numbers also means that as you backdate your working copy to a previous revision, your externals definitions will also revert to the way they looked in that previous revision, which in turn means that the external working copies will be updated to match they way <emphasis>they</emphasis> looked back when your repository was at that previous revision. For software projects, this could be the difference between a successful and a failed build of an older snapshot of your complex code base."
@@ -7190,12 +7187,11 @@ msgstr "Knoten des Revisionsgraphen"
 
 #. (term)
 msgid "Added or copied items"
-msgstr ""
+msgstr "Hinzugefügte oder kopierte Objekte"
 
 #. (para)
-#, fuzzy
 msgid "Items which have been added, or created by copying another file/folder are shown using a rounded rectangle. The default colour is green. Tags and trunks are treated as a special case and use a different shade, depending on the <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings</guimenuitem></menuchoice>"
-msgstr "Elemente, die hinzugefügt oder durch Kopieren erstellt wurden, werden als abgerundetes Rechteck dargestellt. Die Standardfarbe ist grün. Marken werden als Sonderfall behandelt und in eine anderen Schattierung dargestellt."
+msgstr "Elemente, die hinzugefügt oder durch Kopieren erstellt wurden, werden als abgerundetes Rechteck dargestellt. Die Standardfarbe ist grün. Marken und der Stamm werden als Sonderfall behandelt und in eine anderen Schattierung dargestellt, die Sie in <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Optionen</guimenuitem></menuchoice> anpassen können"
 
 #. (term)
 msgid "Deleted items"
@@ -7222,9 +7218,8 @@ msgid "The graph is normally restricted to showing branch points, but it is ofte
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Working copy revision"
-msgstr "Aktuelle Revision der Arbeitskopie"
+msgstr "Revision der Arbeitskopie"
 
 #. (para)
 msgid "If you invoked the revision graph from a working copy, you can opt to show the BASE revision on the graph using <guilabel>Show WC revision</guilabel>, which marks the BASE node with a bold outline."
@@ -7331,9 +7326,8 @@ msgid "Fold tags"
 msgstr "Zweige ausblenden"
 
 #. (para)
-#, fuzzy
 msgid "When a project has many tags, showing every tag as a separate node on the graph takes a lot of space and obscures the more interesting development branch structure. At the same time you may need to be able to access the tag content easily so that you can compare revisions. This option hides the nodes for tags and shows them instead in the tooltip for the node that they were copied from. A tag icon on the right side of the source node indicates that tags were made."
-msgstr "Wenn Sie den Graphen eines Entwicklungsprojektes betrachten sind Marken unter Umständen uninteressant für Sie. Diese Option verbirgt die Zweige und zeigt sie stattdessen im Hinweistext des Knotens an, von dem Sie erstellt wurden. Ein Symbol am rechten Rand kennzeichnet die entsprechenden Quellknoten."
+msgstr "Wenn ein Projekt viele Marken enthält, würde es viel Platz beanspruchen, alle diese Marken darzustellen und wichtigere Teile der Verzweigungsstruktur verschleiern. Gleichzeitig möchten Sie einfach auf die Marken zugreifen können, um Revisionen zu vergleichen. Diese Option verbirgt die Knoten für Marken und zeigt sie stattdessen im Hinweistext des Knotens an, von dem aus sie erstellt wurden. Ein Symbol am rechten Rand des Quellknotens zeigt an, dass eine Marke erstellt wurde."
 
 #. (term)
 msgid "Hide deleted paths"
@@ -8946,7 +8940,7 @@ msgstr "Wartezeit vor Aktualisierung der HEAD Revision"
 
 #. (para)
 msgid "When you invoke the log dialog you will normally want to contact the server to check for any newer log messages. If the timeout set here is non-zero then the server will only be contacted when the timeout has elapsed since the last time contact. This can reduce server round-trips if you open the log dialog frequently and the server is slow, but the data shown may not be completely up-to-date. If you want to use this feature we suggest using a value of 300 (5 minutes) as a compromise."
-msgstr "Wenn Sie den Log-Dialog aufrufen, soll normalerweise der Server kontaktiert werden, um neue Logmeldungen abzurufen. Wenn die eingestellte Wartezeit nicht Null ist, wird der Server nur kontaktiert, falls die Wartezeit seit dem letzten Aufruf abgelaufen ist. Dies kann die Reaktionszeit beim Aufruf des Log-Dialogs beschleunigen, wenn Sie diesen häufig aufrufen und der Server langsam ist. Andererseits ist es mögliche, dass die Log-Daten dadurch nicht aktuell sind. Wenn Sie diese Funktion nutzen wollen, würden wir einen Wert von 300 Sekunden (5 Minuten) als Kompromiss vorschlagen."
+msgstr "Wenn Sie den Log-Dialog aufrufen, soll normalerweise der Server kontaktiert werden, um neue Logmeldungen abzurufen. Wenn die eingestellte Wartezeit nicht Null ist, wird der Server nur kontaktiert, falls die Wartezeit seit dem letzten Aufruf abgelaufen ist. Dies kann die Reaktionszeit beim Aufruf des Log-Dialogs beschleunigen, wenn Sie diesen häufig aufrufen und der Server langsam ist. Andererseits ist es mögliche, dass die Logdaten dadurch nicht aktuell sind. Wenn Sie diese Funktion nutzen wollen, würden wir einen Wert von 300 Sekunden (5 Minuten) als Kompromiss vorschlagen."
 
 #. (term)
 msgid "Days of inactivity until small caches get removed"
@@ -10390,7 +10384,7 @@ msgstr "Wenn Sie Revisionen desselben Objekts in zwei verschiedenen Entwicklungs
 
 #. (para)
 msgid "If you want to compare two trees to see what has changed, for example the trunk and a tagged release, you can use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revision Graph</guimenuitem></menuchoice> Select the two nodes to compare, then use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Compare HEAD Revisions</guimenuitem></menuchoice>. This will show a list of changed files, and you can then select individual files to view the changes in detail. You can also export a tree structure containing all the changed files, or simply a list of all changed files. Read <xref linkend=\"tsvn-dug-compare-revs\"/> for more information. Alternatively use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Unified Diff of HEAD Revisions</guimenuitem></menuchoice> to see a summary of all differences, with minimal context."
-msgstr "Wenn Sie zwei vollständige Zweige miteinander vergleichen wollen, verwenden Sie <menuchoice> <guimenu>TortoiseSVN</guimenu> <guimenuitem>Revisionsgraph</guimenuitem> </menuchoice>. Markieren Sie dort die beiden zu vergleichenden Knoten und wählen Sie <menuchoice> <guimenu>Kontextmenü</guimenu> <guimenuitem>HEAD Revisionen vergleichen</guimenuitem> </menuchoice>. Dies erzeugt eine Liste der unterschiedlichen Dateien und Sie können sich die Detailunterschiede aus der Liste heraus anschauen. Sie können auch eine Baumstruktur mit allen geänderten Dateien oder einfach eine Liste aller geänderten Dateien exportieren. Mehr dazu finden Sie in <xref linkend=\"tsvn-dug-compare-revs\"/>. Alternativ können Sie <menuchoice> <guimenu>Kontextmenü</guimenu> <guimenuitem>Standard Diff der HEAD Revisionen</guimenuitem> </menuchoice> wählen, um eine Zusammenfassung der Unterschiede mit minimalem Kontext zu erhalten."
+msgstr "Wenn Sie zwei vollständige Zweige miteinander vergleichen wollen, verwenden Sie <menuchoice> <guimenu>TortoiseSVN</guimenu> <guimenuitem>Revisionsgraph</guimenuitem> </menuchoice>. Markieren Sie dort die beiden zu vergleichenden Knoten und wählen Sie <menuchoice> <guimenu>Kontextmenü</guimenu> <guimenuitem>HEAD Revisionen vergleichen</guimenuitem> </menuchoice>. Dies erzeugt eine Liste der unterschiedlichen Dateien und Sie können sich die Detailunterschiede aus der Liste heraus anschauen. Sie können auch eine Baumstruktur mit allen geänderten Dateien oder einfach eine Liste aller geänderten Dateien exportieren. Mehr dazu finden Sie in <xref linkend=\"tsvn-dug-compare-revs\"/>. Alternativ können Sie <menuchoice> <guimenu>Kontextmenü</guimenu> <guimenuitem>Standard-Diff der HEAD Revisionen</guimenuitem> </menuchoice> wählen, um eine Zusammenfassung der Unterschiede mit minimalem Kontext zu erhalten."
 
 #. (title)
 msgid "Include a common sub-project"
@@ -12333,7 +12327,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-msgid "<placeholder-1/> This is the main method of the plugin. This method is called from the TortoiseSVN commit dialog when the user clicks on the plugin button. The <literal>parameters</literal> string is the string the user has to enter in the settings dialog when he configures the plugin. Usually a plugin would use this to find the URL of the issue tracker and/or login information or more. The <literal>commonRoot</literal> string contains the parent path of all items selected to bring up the commit dialog. Note that this is not the root path of all items which the user has selected in the commit dialog. The <literal>pathList</literal> parameter contains an array of paths (as strings) which the user has selected for the commit. The <literal>originalMessage</literal> parameter contains the text entered in the log message box in the commit dialog. If the user has not yet entered any text, this string will be empty. The <literal>newMessage</literal> return string is copied into the log message edit box in the commit dialog, replacing whatever is already there. If a plugin does not modify the <literal>originalMessage</literal> string, it must return the same string again here, otherwise any text the user has entered will be lost."
+msgid "<placeholder-1/> This is the main method of the plugin. This method is called from the TortoiseSVN commit dialog when the user clicks on the plugin button. The <literal>parameters</literal> string is the string the user has to enter in the settings dialog when he configures the plugin. Usually a plugin would use this to find the URL of the issue tracker and/or login information or more. The <literal>commonRoot</literal> string contains the parent path of all items selected to bring up the commit dialog. Note that this is <emphasis>not</emphasis> the root path of all items which the user has selected in the commit dialog. The <literal>pathList</literal> parameter contains an array of paths (as strings) which the user has selected for the commit. The <literal>originalMessage</literal> parameter contains the text entered in the log message box in the commit dialog. If the user has not yet entered any text, this string will be empty. The <literal>newMessage</literal> return string is copied into the log message edit box in the commit dialog, replacing whatever is already there. If a plugin does not modify the <literal>originalMessage</literal> string, it must return the same string again here, otherwise any text the user has entered will be lost."
 msgstr ""
 
 #. (title)
@@ -12386,7 +12380,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-msgid "<placeholder-1/> This method is called right before the commit dialog is closed and the commit begins. A plugin can use this method to validate the selected files/folders for the commit and/or the commit message entered by the user. The parameters are the same as for <literal>GetCommitMessage2()</literal>. The return parameter <literal>errorMessage</literal> must either contain an error message which TortoiseSVN shows to the user or be empty for the commit to start. If an error message is returned, TortoiseSVN shows the error string in a dialog and keeps the commit dialog open so the user can correct whatever is wrong. A plugin should therefore return an error string which informs the user <emphasis>what</emphasis> is wrong and how to correct it."
+msgid "<placeholder-1/> This method is called right before the commit dialog is closed and the commit begins. A plugin can use this method to validate the selected files/folders for the commit and/or the commit message entered by the user. The parameters are the same as for <literal>GetCommitMessage2()</literal>, with the difference that <literal>commonURL</literal> is now the common URL of all <emphasis>checked</emphasis> items, and <literal>commonRoot</literal> the root path of all checked items. The return parameter <literal>errorMessage</literal> must either contain an error message which TortoiseSVN shows to the user or be empty for the commit to start. If an error message is returned, TortoiseSVN shows the error string in a dialog and keeps the commit dialog open so the user can correct whatever is wrong. A plugin should therefore return an error string which informs the user <emphasis>what</emphasis> is wrong and how to correct it."
 msgstr ""
 
 #. (programlisting)
