@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2009-03-07 18:45-0300\n"
+"PO-Revision-Date: 2009-03-19 17:35-0300\n"
 "Last-Translator: Humberto Osório <humberto@virtual.ufc.br>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -171,9 +171,9 @@ msgid "%s : Working Base"
 msgstr "%s : Base de Trabalho"
 
 #. Resource IDs: (151)
-#, fuzzy, c-format
+#, c-format
 msgid "%s : Working Base, Revision %ld"
-msgstr "%s : Base de Trabalho"
+msgstr "%s : Base de Trabalho, Revisão %ld"
 
 #. Resource IDs: (151)
 #, c-format
@@ -206,9 +206,9 @@ msgid "%s, but it was already added locally."
 msgstr "%s, mas já foi adicionado localmente."
 
 #. Resource IDs: (609)
-#, fuzzy, c-format
+#, c-format
 msgid "%s, but it was already edited."
-msgstr "já foi apagado."
+msgstr "%s, mas já foi editado."
 
 #. Resource IDs: (609)
 #, c-format
@@ -216,9 +216,9 @@ msgid "%s, but it was deleted, moved or renamed locally."
 msgstr "%s, mas já foi deletado, movido ou renomeado localmente."
 
 #. Resource IDs: (609)
-#, fuzzy, c-format
+#, c-format
 msgid "%s, but it was obstructed in the working copy."
-msgstr "O resultado da combinação está armazenado na cópia de trabalho em:"
+msgstr "%s, mas foi obstruído na cópia de trabalho."
 
 #. Resource IDs: (145)
 #, c-format
@@ -365,9 +365,8 @@ msgid "&Blue:"
 msgstr "&Azul:"
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "&Branches"
-msgstr "&Cancelar"
+msgstr "&Ramos"
 
 #. Resource IDs: (138)
 msgid "&Browse repository"
@@ -390,9 +389,8 @@ msgid "&CD-ROM"
 msgstr "&CD-ROM"
 
 #. Resource IDs: (2)
-#, fuzzy
 msgid "&Cancel"
-msgstr "Cancelar"
+msgstr "&Cancelar"
 
 #. Resource IDs: (65535)
 msgid "&Categories:"
@@ -639,7 +637,7 @@ msgid "&Icon Set:"
 msgstr "&Conjunto de Ícones:"
 
 #. Resource IDs: (15)
-#, fuzzy, c-format
+#, c-format
 msgid "&Ignore %d items by name"
 msgstr "&Ignorar %d itens pelo nome"
 
@@ -664,7 +662,6 @@ msgid "&Import..."
 msgstr "&Importar..."
 
 #. Resource IDs: (1480)
-#, fuzzy
 msgid "&Include merge info"
 msgstr "&Incluir informação de combinação"
 
@@ -814,14 +811,13 @@ msgid "&Open"
 msgstr "&Abrir"
 
 #. Resource IDs: (1382)
-#, fuzzy
 msgid "&Options"
-msgstr "Opções"
+msgstr "&Opções"
 
 #. Resource IDs: (32772)
 #, fuzzy
 msgid "&Overlay images"
-msgstr "&Sobrepor imagens"
+msgstr "S&obrepor imagens"
 
 #. Resource IDs: (1411, 65535)
 msgid "&Password:"
@@ -2178,6 +2174,10 @@ msgstr ""
 
 #. Resource IDs: (612)
 msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to keep your rename/move or the one from the repository. Then mark the conflict as resolved."
+msgstr ""
+
+#. Resource IDs: (612)
+msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to merge the change into your renamed file, or restore the original file."
 msgstr ""
 
 #. Resource IDs: (251)
@@ -3591,6 +3591,11 @@ msgstr ""
 #. Resource IDs: (1413)
 msgid "Exceptions:"
 msgstr "Exceções:"
+
+#. Resource IDs: (20)
+#, fuzzy
+msgid "Exclude"
+msgstr "Excluir caminhos:"
 
 #. Resource IDs: (1002)
 #, fuzzy
@@ -5285,9 +5290,9 @@ msgid "Merge revisions to..."
 msgstr "Combinar revisão &para..."
 
 #. Resource IDs: (610)
-#, c-format
-msgid "Merge the changes into the file '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "Merge the changes into '%s'"
+msgstr "Associado a lista de alterações \"%s\""
 
 #. Resource IDs: (1470)
 #, fuzzy
@@ -9925,7 +9930,7 @@ msgstr "copiado:"
 
 #. Resource IDs: (245)
 msgid "day"
-msgstr ""
+msgstr "dia"
 
 #. Resource IDs: (10, 272)
 msgid "deleted"
@@ -9936,8 +9941,9 @@ msgid "disk [kB]: "
 msgstr "disco [kB]: "
 
 #. Resource IDs: (58116)
+#, fuzzy
 msgid "dummy"
-msgstr ""
+msgstr "boneco"
 
 #. Resource IDs: (1342)
 msgid "eol style"
@@ -9998,8 +10004,9 @@ msgid "item kept locally"
 msgstr "ítem mantido localmente"
 
 #. Resource IDs: (65535)
+#, fuzzy
 msgid "last head update: "
-msgstr ""
+msgstr "última atualização:"
 
 #. Resource IDs: (65535)
 msgid "last read: "
@@ -10098,7 +10105,7 @@ msgstr "ou"
 
 #. Resource IDs: (65535)
 msgid "pair tokens: "
-msgstr ""
+msgstr "tokens em par:"
 
 #. Resource IDs: (65535)
 #, fuzzy
@@ -10157,11 +10164,11 @@ msgstr "Revisões:"
 
 #. Resource IDs: (214)
 msgid "root project"
-msgstr ""
+msgstr "projeto raiz:"
 
 #. Resource IDs: (65535)
 msgid "skip ranges: "
-msgstr ""
+msgstr "intervalos omitidos:"
 
 #. Resource IDs: (576)
 #, fuzzy
@@ -10298,11 +10305,11 @@ msgstr "alternado:"
 
 #. Resource IDs: (601)
 msgid "temp. offline"
-msgstr ""
+msgstr "temp. desconectado"
 
 #. Resource IDs: (65535)
 msgid "text [token count]: "
-msgstr ""
+msgstr "texto [número de tokens]: "
 
 #. Resource IDs: (583)
 msgid "there are conflicting modifications."
@@ -10375,6 +10382,8 @@ msgid ""
 "tsvn:logsummary\r\n"
 "A regex string which extracts a summary from a log message in its first group."
 msgstr ""
+"tsvn:logsummary\r\n"
+"Uma expressão regular que extrai um resumo de uma mensagem do histórico no seu primeiro grupo."
 
 #. Resource IDs: (578)
 #, fuzzy
@@ -10442,7 +10451,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "user revprops total: "
-msgstr ""
+msgstr "total de revprops do usuário:"
 
 #. Resource IDs: (563)
 msgid "values are different"
@@ -10477,8 +10486,9 @@ msgid "week"
 msgstr "semana"
 
 #. Resource IDs: (65535)
+#, fuzzy
 msgid "word tokens: "
-msgstr ""
+msgstr "tokens: "
 
 #. Resource IDs: (65535)
 msgid "words [uncompressed]: "
