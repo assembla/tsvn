@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2009-03-18 23:13+0700\n"
+"PO-Revision-Date: 2009-03-20 22:02+0700\n"
 "Last-Translator: Thomas Edwin Santosa <thomas@katalisindonesia.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1089,7 +1089,7 @@ msgstr "&Set ulang ke Bawaan"
 
 #. Resource IDs: (1382)
 msgid "&Resolve using local property"
-msgstr ""
+msgstr "&Selesaikan dengan menggunakan properti lokal"
 
 # Control-ID:1254,
 #. Resource IDs: (1488)
@@ -1205,7 +1205,7 @@ msgstr "Tukar SB ke path dan revisi"
 
 #. Resource IDs: (275)
 msgid "&Switch WC to path@HEAD"
-msgstr ""
+msgstr "&Tukar SB ke path@HEAD"
 
 # Control-ID:1173,
 #. Resource IDs: (1173)
@@ -1223,7 +1223,7 @@ msgstr "Dokumen Ber&tab"
 
 #. Resource IDs: (65535)
 msgid "&Tags"
-msgstr ""
+msgstr "&Tag"
 
 #. Resource IDs: (1382)
 msgid "&Test merge"
@@ -1502,7 +1502,7 @@ msgstr "..."
 
 #. Resource IDs: (269)
 msgid "... checking cache and preparing log query"
-msgstr ""
+msgstr "... memeriksa tembolok dan mempersiapkan pertanyaan log"
 
 # ID:79,
 #. Resource IDs: (270)
@@ -1903,9 +1903,8 @@ msgid "Age"
 msgstr "Umur"
 
 #. Resource IDs: (32822)
-#, fuzzy
 msgid "Align trees on top"
-msgstr "Tert&ua di atas"
+msgstr "Jajarkan pohon-pohon di atas"
 
 #. Resource IDs: (1007)
 msgid "All Commands"
@@ -2369,7 +2368,7 @@ msgstr "Peri&ksa repositori"
 
 #. Resource IDs: (275)
 msgid "C&ollapse sub-trees"
-msgstr ""
+msgstr "Meruntuhkan subpohon"
 
 # ID:198,
 #. Resource IDs: (65535)
@@ -2610,11 +2609,11 @@ msgstr ""
 
 #. Resource IDs: (612)
 msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to keep your rename/move or the one from the repository. Then mark the conflict as resolved."
-msgstr ""
+msgstr "Memeriksa log untuk menemukan bagaimana berkas/folder diganti nama/dipindah dan memutuskan apakah Anda ingin menyimpan penggantian nama/perpindahan atau yang dari repositori. Jika sudah, silakan tanda konflik itu sebagai terselesaikan."
 
 #. Resource IDs: (612)
 msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to merge the change into your renamed file, or restore the original file."
-msgstr ""
+msgstr "Memeriksa log untuk menemukan bagaimana berkas/folder diganti nama/dipindah dan memutuskan apakah Anda ingin menggabung perubahan itu ke berkas yang diganti nama atau mengembalikan berkas asli."
 
 # ID:251,
 #. Resource IDs: (251)
@@ -2823,11 +2822,11 @@ msgstr "Tutup jendela aktif dan tanya untuk menyimpan dokumen"
 
 #. Resource IDs: (275)
 msgid "Coll&apse source tree"
-msgstr ""
+msgstr "Run&tuhkan pohon sumber"
 
 #. Resource IDs: (275)
 msgid "Collapse &following tree"
-msgstr ""
+msgstr "Runtuhkan &pohon berikut"
 
 # Dlg-ID:138,
 #. Resource IDs: (16662)
@@ -2932,7 +2931,6 @@ msgid "Commits your changes to the repository"
 msgstr "Mengkomit perubahan anda ke repositori"
 
 #. Resource IDs: (170)
-#, fuzzy
 msgid ""
 "Committing an unversioned folder will not recursively add its child items!\n"
 "You might want to add these folders recursively by using the 'Add...' context menu item.\n"
@@ -2940,7 +2938,7 @@ msgid ""
 "Are you sure that you want to continue the commit?"
 msgstr ""
 "Mengkomit folder tak berversi tidak akan menambahkan item-item anaknya secara rekursif!\n"
-"Anda mungkin ingin untuk menambahkan folder ini secara rekursif dengan menggunakan menu konteks \"Tambah...\".\n"
+"Anda mungkin ingin untuk menambahkan folder ini secara rekursif dengan menggunakan menu konteks 'Tambah...'.\n"
 "\n"
 "Apakah Anda yakin untuk meneruskan komit?"
 
@@ -6117,11 +6115,12 @@ msgstr ""
 "Tandai diselesaikan"
 
 #. Resource IDs: (596)
-#, fuzzy
 msgid ""
 "Marks the revisions as merged, without actually doing the merge.\r\n"
 "This blocks the revisions from getting merged in the future."
-msgstr "Tandai revisi-revisi tersebut sebagai tergabung, tanpa melakukan penggabungan sungguhan"
+msgstr ""
+"Tandai revisi-revisi tersebut sebagai tergabung, tanpa melakukan penggabungan sungguhan.\r\n"
+"Ini akan menghalangi revisi-revisi tersebut dari penggabungan di masa depan."
 
 # Control-ID:1064,
 #. Resource IDs: (1064)
@@ -6625,7 +6624,6 @@ msgid "No files or folders were modified. There is nothing for TortoiseSVN to re
 msgstr "Tidak ada berkas atau folder yang diubah. Tidak ada yang perlu dibalik oleh TortoiseSVN!"
 
 #. Resource IDs: (239)
-#, fuzzy
 msgid ""
 "No files to show with the current setting.\n"
 "Check one or more settings below to see unversioned, ignored and/or unmodified files.\n"
@@ -8118,7 +8116,7 @@ msgstr "Revisi:"
 
 # ID:272,
 #. Resource IDs: (272)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Revision: %ld %s\r\n"
 "URL: %s\r\n"
@@ -8128,17 +8126,17 @@ msgid ""
 "Logmessage:\r\n"
 "%s"
 msgstr ""
-"Revisi: %ld\r\n"
+"Revisi: %ld %s\r\n"
 "URL: %s\r\n"
-"Pembuat: %s\r\n"
+"%sPembuat: %s\r\n"
 "Tanggal: %s\r\n"
 "\r\n"
-"Pesan log:\r\n"
+"Pesanlog:\r\n"
 "%s"
 
 # ID:272,
 #. Resource IDs: (272)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Revision: %ld %s\r\n"
 "URL: %s\r\n"
@@ -8150,14 +8148,14 @@ msgid ""
 "Logmessage:\r\n"
 "%s"
 msgstr ""
-"Revisi: %ld\r\n"
+"Revisi: %ld %s\r\n"
 "URL: %s\r\n"
-"Pembuat: %s\r\n"
+"%sPembuat: %s\r\n"
 "Tanggal: %s\r\n"
 "\r\n"
-"Tags (%d):%s\r\n"
+"Tag (%d):%s\r\n"
 "\r\n"
-"Pesan log:\r\n"
+"Pesanlog:\r\n"
 "%s"
 
 # ID:116,
@@ -9102,18 +9100,16 @@ msgid "Split &source tree"
 msgstr "Pisah pohon &sumber"
 
 #. Resource IDs: (275)
-#, fuzzy
 msgid "Split following &tree"
-msgstr "Garis pemisah"
+msgstr "Pisah &pohon berikut"
 
 #. Resource IDs: (376)
 msgid "Split lines"
 msgstr "Garis pemisah"
 
 #. Resource IDs: (275)
-#, fuzzy
 msgid "Split sub-trees"
-msgstr "Garis pemisah"
+msgstr "Pisah subpohon"
 
 # ID:3604,
 #. Resource IDs: (3604)
@@ -9220,9 +9216,8 @@ msgstr "Stefan Küng, Lübbe Onken"
 # ID:11,#:
 # Control-ID:65535,
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "Stripes"
-msgstr "Penggabungan pohon"
+msgstr "Garis"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -9606,14 +9601,14 @@ msgid "The last merge operation tried to add the file '%s'"
 msgstr "Tindakan gabung terakhir mencoba untuk menambah berkas '%s'"
 
 #. Resource IDs: (608)
-#, fuzzy, c-format
+#, c-format
 msgid "The last merge operation tried to delete/move/rename the directory '%s'"
-msgstr "Tindakan gabung terakhir mencoba untuk menghapus direktori '%s'"
+msgstr "Tindakan gabung terakhir mencoba untuk menghapus/memindahkan/mengganti nama direktori '%s'"
 
 #. Resource IDs: (607)
-#, fuzzy, c-format
+#, c-format
 msgid "The last merge operation tried to delete/move/rename the file '%s'"
-msgstr "Tindakan gabung terakhir mencoba untuk menghapus berkas '%s'"
+msgstr "Tindakan gabung terakhir mencoba untuk menghapus/memindahkan/mengganti nama berkas '%s'"
 
 #. Resource IDs: (608)
 #, c-format
@@ -9637,15 +9632,15 @@ msgid "The last switch operation tried to add the file '%s'"
 msgstr ""
 
 #. Resource IDs: (608)
-#, fuzzy, c-format
+#, c-format
 msgid "The last switch operation tried to delete/move/rename the directory '%s'"
-msgstr "Tindakan gabung terakhir mencoba untuk menghapus direktori '%s'"
+msgstr "Tindakan penukaran terakhir mencoba untuk menghapus/memindahkan/mengganti nama direktori '%s'"
 
 # ID:16,
 #. Resource IDs: (607)
-#, fuzzy, c-format
+#, c-format
 msgid "The last switch operation tried to delete/move/rename the file '%s'"
-msgstr "Tindakan penukaran yang terakhir mencoba untuk mengubah berkas '%s'"
+msgstr "Tindakan penukaran yang terakhir mencoba untuk mengubah/memindahkan/mengganti nama berkas '%s'"
 
 #. Resource IDs: (608)
 #, c-format
@@ -9669,14 +9664,14 @@ msgid "The last update operation tried to add the file '%s'"
 msgstr ""
 
 #. Resource IDs: (607)
-#, fuzzy, c-format
+#, c-format
 msgid "The last update operation tried to delete/move/rename the directory '%s'"
-msgstr "Tindakan gabung terakhir mencoba untuk menghapus direktori '%s'"
+msgstr "Tindakan pemutakhiran terakhir mencoba untuk menghapus/memindahkan/mengganti nama direktori '%s'"
 
 #. Resource IDs: (607)
-#, fuzzy, c-format
+#, c-format
 msgid "The last update operation tried to delete/move/rename the file '%s'"
-msgstr "Tindakan gabung terakhir mencoba untuk menghapus berkas '%s'"
+msgstr "Tindakan pemutakhiran terakhir mencoba untuk menghapus/memindahkan/mengganti nama berkas '%s'"
 
 #. Resource IDs: (607)
 #, c-format
@@ -9991,7 +9986,6 @@ msgstr ""
 "Apakah Anda ingin menyimpan perubahan anda?"
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid ""
 "There has been a problem contacting the server.\n"
 "Do you want to see the cached data instead?\n"
@@ -10118,7 +10112,6 @@ msgstr ""
 "yang tidak membolehkan penghapusan direktori."
 
 #. Resource IDs: (284)
-#, fuzzy
 msgid ""
 "To steal the lock, right-click on the parent folder of this item and select 'Get Lock' from the context menu.\n"
 "This will bring up the locking dialog where you can enforce the lock, i.e., 'steal' it from the one currently holding it."
@@ -10320,9 +10313,8 @@ msgstr "Jumlah properti revisi pengguna"
 # ID:11,#:
 # Control-ID:65535,
 #. Resource IDs: (32821)
-#, fuzzy
 msgid "Tr&ee stripes"
-msgstr "Penggabungan pohon"
+msgstr "Garis-garis pohon"
 
 # ID:357,
 #. Resource IDs: (357)
