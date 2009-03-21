@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-03-19 15:26 +0000\n"
-"PO-Revision-Date: 2009-03-19 19:07+0300\n"
+"PO-Revision-Date: 2009-03-21 12:53+0300\n"
 "Last-Translator: Stanislav Petrakov <stannic@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -4283,7 +4283,7 @@ msgstr "<placeholder-1/> Есть несколько мест, из которы
 
 #. (para)
 msgid "If the repository is unavailable you will see the <guilabel>Want to go offline?</guilabel> dialog, described in <xref linkend=\"tsvn-dug-showlog-cache\"/>."
-msgstr ""
+msgstr "Если хранилище недоступно, вы увидите диалог <guilabel>Перейти в автономный режим?</guilabel>, который описывает <xref linkend=\"tsvn-dug-showlog-cache\"/>."
 
 #. (title)
 msgid "Revision Log Actions"
@@ -4318,57 +4318,49 @@ msgid "The Revision Log Dialog Top Pane with Context Menu"
 msgstr "Контекстное меню верхней панели диалогового окна журнала ревизий"
 
 #. (term)
-#, fuzzy
 msgid "Compare with working copy"
-msgstr "создание рабочей копии"
+msgstr "Сравнить с рабочей копией"
 
 #. (para)
 msgid "Compare the selected revision with your working copy. The default Diff-Tool is TortoiseMerge which is supplied with TortoiseSVN. If the log dialog is for a folder, this will show you a list of changed files, and allow you to review the changes made to each file individually."
 msgstr "Сравнить выбранную ревизию с вашей рабочей копией. По умолчанию в качестве программы сравнения используется TortoiseMerge, поставляемая с TortoiseSVN. Если диалог журнала вызван для папки, он отобразит список изменённых файлов, и позволит просмотреть изменения, сделанные в каждом отдельном файле."
 
 #. (term)
-#, fuzzy
 msgid "Compare and blame with working BASE"
-msgstr "Сравнить с рабочей базой вместе с просмотром авторства"
+msgstr "Сравнить с рабочей базой с просмотром авторства"
 
 #. (para)
 msgid "Blame the selected revision, and the file in your working BASE and compare the blame reports using a visual diff tool. Read <xref linkend=\"tsvn-dug-blame-diffs\"/> for more detail. (files only)."
 msgstr "Получить авторство для выбранной ревизии и для файла из рабочей базы, после чего сравнить результаты об авторстве с применением визуального средства просмотра различий. Прочтите <xref linkend=\"tsvn-dug-blame-diffs\"/> для дополнительной информации (только для файлов)."
 
 #. (term)
-#, fuzzy
 msgid "Show changes as unified diff"
-msgstr "объединённые различия"
+msgstr "Показать изменения как объединённые различия"
 
 #. (para)
 msgid "View the changes made in the selected revision as a Unified-Diff file (GNU patch format). This shows only the differences with a few lines of context. It is harder to read than a visual file compare, but will show all file changes together in a compact format."
 msgstr "Просмотреть сделанные в выбранной ревизии изменения в виде объединённого файла различий (Unified-Diff) (формат заплаток GNU). Отображаются только различия (с несколькими строками контекста). Этот вид сложнее для изучения, чем визуальное сравнение файлов, но позволяет показать все изменения в файле в компактном формате."
 
 #. (term)
-#, fuzzy
 msgid "Compare with previous revision"
-msgstr "Различия между двумя предыдущими ревизиями"
+msgstr "Сравнить с предыдущей ревизией"
 
 #. (para)
-#, fuzzy
 msgid "Compare the selected revision with the previous revision. This works in a similar manner to comparing with your working copy. For folders this option will first show the changed files dialog allowing you to select files to compare."
-msgstr "Сравнить выбранную ревизию с предыдущей. Это работает подобно сравнению с вашей рабочей копией."
+msgstr "Сравнивает выбранную ревизию с предыдущей. Это работает подобно сравнению с вашей рабочей копией. Для папок этот пункт покажет сначала диалог изменённых файлов, позволяющий выбрать файлы для сравнения."
 
 #. (term)
-#, fuzzy
 msgid "Compare and blame with previous revision"
-msgstr "Сравнить с рабочей базой вместе с просмотром авторства"
+msgstr "Сравнить с предыдущей ревизией с просмотром авторства"
 
 #. (para)
-#, fuzzy
 msgid "Show the changed files dialog allowing you to select files. Blame the selected revision, and the previous revision, and compare the results using a visual diff tool. (folders only)."
-msgstr "Получить авторство для выбранной и для предыдущей ревизий, после чего сравнить результаты с применением визуального средства просмотра различий (только для папок)."
+msgstr "Показывает диалог изменённых файлов, позволяющий выбирать файлы. Получает авторство для выбранной и для предыдущей ревизий, после чего сравнивает результаты с применением визуального средства просмотра различий (только для папок)."
 
 #. (term)
 #. (term)
-#, fuzzy
 msgid "Save revision to..."
-msgstr "Max ревизия"
+msgstr "Сохранить ревизию в..."
 
 #. (para)
 msgid "Save the selected revision to a file so you have an older version of that file. (files only)."
@@ -4377,7 +4369,7 @@ msgstr "Сохранить выбранную ревизию в файл, что
 #. (term)
 #. (term)
 msgid "Open / Open with..."
-msgstr ""
+msgstr "Открыть / Открыть с помощью..."
 
 #. (para)
 msgid "Open the selected file, either with the default viewer for that file type, or with a program you choose. (files only)."
@@ -4385,56 +4377,49 @@ msgstr "Открыть выбранный файл, либо в программ
 
 #. (term)
 #. (term)
-#, fuzzy
 msgid "Blame..."
-msgstr "Авторство (Blame)"
+msgstr "Авторство..."
 
 #. (para)
 msgid "Blame the file up to the selected revision. (files only)."
 msgstr "Получить информацию об авторстве для файла вплоть до выбранной ревизии (только для файлов)."
 
 #. (term)
-#, fuzzy
 msgid "Browse repository"
-msgstr "Просмотр хранилища при помощи веб-обозревателя"
+msgstr "Обзор хранилища"
 
 #. (para)
 msgid "Open the repository browser to examine the selected file or folder in the repository as it was at the selected revision."
 msgstr "Открыть обозреватель хранилища для исследования выделенных файлов или папок в хранилище, какими они были в выбранной ревизии."
 
 #. (term)
-#, fuzzy
 msgid "Create branch/tag from revision"
-msgstr "Слияние с диапазоном ревизий"
+msgstr "Создать ответвление/метку из ревизии"
 
 #. (para)
-#, fuzzy
 msgid "Create a branch or tag from a selected revision. This is useful e.g. if you forgot to create a tag and already committed some changes which weren't supposed to get into that release."
-msgstr "Создать ответвление/метку из выбранной ревизии. Это полезно, например, если вы забыли создать метку и уже зафиксировали некоторые изменения, не предназначенные для этого выпуска."
+msgstr "Создаёт ответвление или метку из выбранной ревизии. Это полезно, например, если вы забыли создать метку и уже зафиксировали некоторые изменения, не предназначенные для этого выпуска."
 
 #. (term)
-#, fuzzy
 msgid "Update item to revision"
-msgstr "Обновить до ревизии"
+msgstr "Обновить элемент до ревизии"
 
 #. (para)
-#, fuzzy
 msgid "Update your working copy to the selected revision. Useful if you want to have your working copy reflect a time in the past, or if there have been further commits to the repository and you want to update your working copy one step at a time. It is best to update a whole directory in your working copy, not just one file, otherwise your working copy could be inconsistent."
-msgstr "Обновить вашу рабочую копию до выбранной ревизии. Это полезно, если вам нужна рабочая копия, соответствующая какому-либо времени в прошлом. Лучше обновить всю папку целиком в вашей рабочей копии, а не только один файл, иначе ваша рабочая копия будет несогласованной и вы не сможете зафиксировать изменения."
+msgstr "Обновляет вашу рабочую копию до выбранной ревизии. Это полезно, если вам нужна рабочая копия, соответствующая какому-либо времени в прошлом, или если произошли последующие фиксации в хранилище и вы желаете обновлять вашу рабочую копию по одному шагу за раз. Лучше обновить всю папку целиком в вашей рабочей копии, а не только один файл, иначе ваша рабочая копия может стать несогласованной."
 
 #. (para)
 msgid "If you want to undo an earlier change permanently, use <guilabel>Revert to this revision</guilabel> instead."
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Revert to this revision"
-msgstr "Обновить до ревизии"
+msgstr "Вернуть к этой ревизии"
 
+# Если вы сделали какие-либо локальные изменения, эта команда внесёт (сольёт) эти изменения в вашу рабочую копию.
 #. (para)
-#, fuzzy
 msgid "Revert to an earlier revision. If you have made several changes, and then decide that you really want to go back to how things were in revision N, this is the command you need. The changes are undone in your working copy so this operation does <emphasis>not</emphasis> affect the repository until you commit the changes. Note that this will undo <emphasis>all</emphasis> changes made after the selected revision, replacing the file/folder with the earlier version."
-msgstr "Вернуться к более ранней ревизии. Если вы уже выполнили несколько изменений, и затем решили, что вам действительно необходимо вернуться назад, к состоянию как в ревизии N, то это та команда, которая вам нужна. И снова, изменения отменяются в вашей рабочей копии, так что эта операция <emphasis>не влияет</emphasis> на хранилище, пока вы не зафиксировали эти изменения. Обратите внимание, что она отменяет <emphasis>все</emphasis> изменения, сделанные после выбранной ревизии, заменяя файл/папку более ранней версией. Если вы сделали какие-либо локальные изменения, эта команда внесёт (сольёт) эти изменения в вашу рабочую копию."
+msgstr "Вернуться к более ранней ревизии. Если вы уже выполнили несколько изменений, и затем решили, что вам действительно необходимо вернуться назад, к состоянию как в ревизии N, то это та команда, которая вам нужна. Изменения отменяются в вашей рабочей копии, так что эта операция <emphasis>не влияет</emphasis> на хранилище, пока вы не зафиксировали эти изменения. Обратите внимание, что она отменяет <emphasis>все</emphasis> изменения, сделанные после выбранной ревизии, заменяя файл/папку более ранней версией."
 
 #. (para)
 #. (para)
@@ -4455,14 +4440,13 @@ msgstr ""
 
 #. (term)
 #. (term)
-#, fuzzy
 msgid "Revert changes from this revision"
-msgstr "Различия с предыдущей ревизией"
+msgstr "Отменить изменения из этой ревизии"
 
+# Если вы сделали какие-либо локальные изменения, эта команда внесёт (сольёт) эти изменения в вашу рабочую копию.
 #. (para)
-#, fuzzy
 msgid "Undo changes from which were made in the selected revision. The changes are undone in your working copy so this operation does <emphasis>not</emphasis> affect the repository at all! Note that this will undo the changes made in that revision only; it does not replace your working copy with the entire file at the earlier revision. This is very useful for undoing an earlier change when other unrelated changes have been made since."
-msgstr "Отменить изменения, которые были сделаны в выбранной ревизии. Изменения отменяются в вашей рабочей копии, так что эта операция <emphasis>не влияет</emphasis> на хранилище вообще! Обратите внимание: отменяются изменения, сделанные только в этой ревизии. Эта операция не заменяет целиком файл в вашей рабочей копии файлом более ранней ревизии. Это очень полезно для отмены более ранних изменений, после которых были произведены другие, не связанные с ними, изменения. Если вы сделали какие-либо локальные изменения, эта команда внесёт (сольёт) эти изменения в вашу рабочую копию."
+msgstr "Отменить изменения, которые были сделаны в выбранной ревизии. Изменения отменяются в вашей рабочей копии, так что эта операция <emphasis>не влияет</emphasis> на хранилище вообще! Обратите внимание: отменяются изменения, сделанные только в этой ревизии. Эта операция не заменяет целиком файл в вашей рабочей копии файлом более ранней ревизии. Это очень полезно для отмены более ранних изменений, после которых были произведены другие, не связанные с ними, изменения."
 
 #. (para)
 msgid "What is happening internally is that Subversion performs a reverse merge of that one revision, undoing its effect from a previous commit."
@@ -4473,55 +4457,49 @@ msgid "You can <emphasis>undo the undo</emphasis> as described above in <guilabe
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Merge revision to..."
-msgstr "Max ревизия"
+msgstr "Слить ревизию с..."
 
 #. (para)
-#, fuzzy
 msgid "Merge the selected revision(s) into a different working copy. A folder selection dialog allows you to choose the working copy to merge into, but after that there is no confirmation dialog, nor any opportunity to try a test merge. It is a good idea to merge into an unmodified working copy so that you can revert the changes if it doesn't work out! This is a useful feature if you want to merge selected revisions from one branch to another."
-msgstr "Произвести слияние выделенных ревизий с другой рабочей копией. При помощи диалога выбора папки можно выбрать рабочую копию для проведения слияния, но после этого не предоставляется ни запроса подтверждения, ни возможности выполнить пробный запуск. Хорошей практикой является производить слияние с неизменённой рабочей копией, чтобы вы смогли отменить изменения, если слияние не сработает! Это полезная возможность, если вы желаете слить выбранные ревизии из одного ответвления в другое."
+msgstr "Произвести слияние выделенных ревизий с другой рабочей копией. При помощи диалога выбора папки можно выбрать рабочую копию для проведения слияния, но после этого не предоставляется ни запроса подтверждения, ни возможности выполнить пробное слияние. Хорошей практикой является производить слияние с неизменённой рабочей копией, чтобы вы смогли отменить изменения, если слияние не сработает! Это полезная возможность, если вы желаете слить выбранные ревизии из одного ответвления с другим."
 
 #. (term)
-#, fuzzy
 msgid "Checkout..."
-msgstr "Извлечь"
+msgstr "Извлечь..."
 
 #. (para)
 msgid "Make a fresh checkout of the selected folder at the selected revision. This brings up a dialog for you to confirm the URL and revision, and select a location for the checkout."
 msgstr "Сделать свежее извлечение выбранной папки из заданной ревизии. При этом открывается окно, в котором необходимо подтвердить URL-адрес и ревизию, а также выбрать место для извлечения."
 
 #. (term)
-#, fuzzy
 msgid "Export..."
-msgstr "Экспорт"
+msgstr "Экспорт..."
 
 #. (para)
 msgid "Export the selected file/folder at the selected revision. This brings up a dialog for you to confirm the URL and revision, and select a location for the export."
 msgstr "Экспортировать выделенный файл/папку из выбранной ревизии. При этом открывается диалог для подтверждения URL-адреса и ревизии, а также выбора места для размещения экспорта."
 
 #. (term)
-#, fuzzy
 msgid "Edit author / log message"
-msgstr "Шрифт сообщений журнала"
+msgstr "Изменить автора / Изменить сообщение журнала"
 
 #. (para)
 msgid "Edit the log message or author attached to a previous commit. Read <xref linkend=\"tsvn-dug-showlog-4\"/> to find out how this works."
 msgstr "Отредактировать сообщение журнала или автора, относящихся к одной из предыдущих фиксаций. Прочтите <xref linkend=\"tsvn-dug-showlog-4\"/>, чтобы узнать, как это работает."
 
 #. (term)
-#, fuzzy
 msgid "Show revision properties"
-msgstr "свойства Subversion"
+msgstr "Показать свойства ревизии"
 
 #. (para)
 msgid "View and edit any revision property, not just log message and author. Refer to <xref linkend=\"tsvn-dug-showlog-4\"/>."
-msgstr ""
+msgstr "Просмотр и редактирование любого свойства ревизии, а не только сообщения или автора. Подробнее - <xref linkend=\"tsvn-dug-showlog-4\"/>."
 
 #. (term)
 #. (term)
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Копировать в буфер обмена"
 
 #. (para)
 msgid "Copy the log details of the selected revisions to the clipboard. This will copy the revision number, author, date, log message and the list of changed items for each revision."
@@ -4529,9 +4507,8 @@ msgstr "Скопировать в буфер обмена подробности
 
 #. (term)
 #. (term)
-#, fuzzy
 msgid "Search log messages..."
-msgstr "сообщения журнала"
+msgstr "Найти в сообщениях журнала..."
 
 #. (para)
 msgid "Search log messages for the text you enter. This searches the log messages that you entered and also the action summaries created by Subversion (shown in the bottom pane). The search is not case sensitive."
@@ -4546,9 +4523,8 @@ msgid "Top Pane Context Menu for 2 Selected Revisions"
 msgstr "Контекстное меню верхней панели для двух выбранных ревизий"
 
 #. (term)
-#, fuzzy
 msgid "Compare revisions"
-msgstr "сравнение ревизий"
+msgstr "Сравнить ревизии"
 
 #. (para)
 msgid "Compare the two selected revisions using a visual difference tool. The default Diff-Tool is TortoiseMerge which is supplied with TortoiseSVN."
@@ -4559,7 +4535,6 @@ msgid "If you select this option for a folder, a further dialog pops up listing 
 msgstr "Если вы выберите эту опцию для папок, появится диалог со списком изменённых файлов, в котором можно выбрать дальнейшие возможные действия по сравнению. Больше о диалоге сравнения ревизий можно прочитать в <xref linkend=\"tsvn-dug-compare-revs\"/>."
 
 #. (term)
-#, fuzzy
 msgid "Blame revisions"
 msgstr "Авторство ревизий"
 
@@ -4569,7 +4544,7 @@ msgstr "Получить авторство для двух ревизий и с
 
 #. (term)
 msgid "Show differences as unified diff"
-msgstr ""
+msgstr "Показать различия как объединённые различия"
 
 #. (para)
 msgid "View the differences between the two selected revisions as a Unified-Diff file. This works for files and folders."
@@ -4597,23 +4572,21 @@ msgstr "Также можно произвести слияние выбранн
 
 #. (para)
 msgid "If all selected revisions have the same author, you can edit the author of all those revisions in one go."
-msgstr ""
+msgstr "Если у всех выбранных ревизий один автор, вы можете изменить автора всех этих ревизий сразу."
 
 #. (title)
 msgid "The Log Dialog Bottom Pane with Context Menu"
 msgstr "Контекстное меню нижней панели окна журнала"
 
 #. (term)
-#, fuzzy
 msgid "Show changes"
-msgstr "просмотр изменений"
+msgstr "Показать изменения"
 
 #. (para)
 msgid "Show changes made in the selected revision for the selected file. This context menu is only available for files shown as <emphasis>modified</emphasis>."
 msgstr "Показать изменения, сделанные в выбранной ревизии для выделенного файла. Это контекстное меню доступно только для файлов, отображаемых как <emphasis>изменённый</emphasis>."
 
 #. (term)
-#, fuzzy
 msgid "Blame changes"
 msgstr "Авторство изменений"
 
@@ -4622,14 +4595,12 @@ msgid "Blame the selected revision and the previous revision for the selected fi
 msgstr "Получить авторство для выбранной и предыдущей ревизий выделенного файла и сравнить полученные результаты с применением визуального средства просмотра различий. Прочтите <xref linkend=\"tsvn-dug-blame-diffs\"/> для дополнительной информации."
 
 #. (term)
-#, fuzzy
 msgid "Show as unified diff"
-msgstr "объединённые различия"
+msgstr "Показать как объединённые различия"
 
 #. (para)
-#, fuzzy
 msgid "Show file changes in unified diff format. This context menu is only available for files shown as <emphasis>modified</emphasis>."
-msgstr "Показать изменения, сделанные в выбранной ревизии для выделенного файла. Это контекстное меню доступно только для файлов, отображаемых как <emphasis>изменённый</emphasis>."
+msgstr "Показать изменения в формате объединённых различий. Это контекстное меню доступно только для файлов, отображаемых как <emphasis>изменённый</emphasis>."
 
 #. (para)
 #. (para)
@@ -4638,38 +4609,35 @@ msgstr "Открыть выбранный файл, либо в программ
 
 #. (para)
 msgid "Opens the Blame dialog, allowing you to blame up to the selected revision."
-msgstr ""
+msgstr "Открывает диалог авторства, позволяет посмотреть авторство в выбранной ревизии."
 
 #. (para)
 msgid "Revert the changes made to the selected file in that revision."
 msgstr "Отменить изменения, сделанные в выделенном файле в этой ревизии."
 
 #. (term)
-#, fuzzy
 msgid "Show properties"
-msgstr "свойства"
+msgstr "Показать свойства"
 
 #. (para)
 msgid "View the Subversion properties for the selected item."
 msgstr "Посмотреть свойства Subversion для выбранных элементов."
 
 #. (term)
-#, fuzzy
 msgid "Show log"
-msgstr "Показать журнал"
+msgstr "Журнал"
 
 #. (para)
 msgid "Show the revision log for the selected single file."
 msgstr "Показать журнал ревизий для одного выбранного файла."
 
 #. (term)
-#, fuzzy
 msgid "Get merge logs"
-msgstr "Используя диалог слияния"
+msgstr "Получить информацию о слияниях"
 
 #. (para)
 msgid "Show the revision log for the selected single file, including merged changes. Find out more in <xref linkend=\"tsvn-dug-showlog-mergetrack\"/>."
-msgstr ""
+msgstr "Показывает журнал ревизий для единственного выбранного файла, включая слитые изменения. Больше информации об этом содержит <xref linkend=\"tsvn-dug-showlog-mergetrack\"/>."
 
 #. (para)
 msgid "Save the selected revision to a file so you have an older version of that file."
@@ -4788,32 +4756,28 @@ msgid "edit log/author"
 msgstr "редактирование журнала/автора"
 
 #. (primary)
-#, fuzzy
 msgid "revision properties"
-msgstr "свойства Subversion"
+msgstr "свойства ревизии"
 
 #. (primary)
-#, fuzzy
 msgid "revprops"
-msgstr "обозреватель хранилища"
+msgstr "свойства_ревизии"
 
 #. (para)
 msgid "Revision properties are completely different from the Subversion properties of each item. Revprops are descriptive items which are associated with one specific revision number in the repository, such as log message, commit date and committer name (author)."
-msgstr ""
+msgstr "Свойства ревизии полностью отличны от свойств Subversion каждого элемента. Свойства ревизии - элементы описания, которые связаны с одним конкретным номером ревизии в хранилище, такие как сообщение журнала, дата фиксации и имя зафиксировавшего (автора)."
 
 #. (para)
 msgid "Sometimes you might want to change a log message you once entered, maybe because there's a spelling error in it or you want to improve the message or change it for other reasons. Or you want to change the author of the commit because you forgot to set up authentication or..."
 msgstr "Иногда вы можете пожелать изменить введённое вами сообщение журнала, может быть из-за обнаруженной вами орфографической ошибки, или вы желаете улучшить сообщение, или же изменить его по другим причинам. Или, возможно, вы захотите изменить автора фиксации, т.к. вы забыли настроить идентификацию, или ..."
 
 #. (para)
-#, fuzzy
 msgid "Subversion lets you change revision properties any time you want. But since such changes can't be undone (those changes are not versioned) this feature is disabled by default. To make this work, you must set up a pre-revprop-change hook. Please refer to the chapter on <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts</citetitle></ulink> in the Subversion Book for details about how to do that. Read <xref linkend=\"tsvn-repository-hooks\"/> to find some further notes on implementing hooks on a Windows machine."
-msgstr "Subversion позволяет изменять как сообщение журнала, так и автора ревизии в любое удобное для вас время. Но, поскольку такие изменения не могут быть отменены (эти изменения не версируются), эта возможность по умолчанию отключена. Для того, чтобы её включить, вы должны установить ловушку pre-revprop-change (перед-изменением-свойства_ревизии). Пожалуйста, за подробным описанием того, как это сделать, обратитесь к главе <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts (Скрипты ловушек)</citetitle></ulink> в Книге о Subversion. Прочтите <xref linkend=\"tsvn-repository-hooks\"/>, в котором содержатся несколько дополнительных заметок о реализации ловушек на машине с Windows."
+msgstr "Subversion позволяет изменить свойства ревизии в любое удобное для вас время. Но, поскольку такие изменения не могут быть отменены (эти изменения не версируются), эта возможность по умолчанию отключена. Для того, чтобы её включить, вы должны установить ловушку pre-revprop-change (перед-изменением-свойства_ревизии). Пожалуйста, за подробным описанием того, как это сделать, обратитесь к главе <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts (Скрипты ловушек)</citetitle></ulink> в Книге о Subversion. Прочтите <xref linkend=\"tsvn-repository-hooks\"/>, в котором содержатся несколько дополнительных заметок о реализации ловушек на компьютере с Windows."
 
 #. (para)
-#, fuzzy
 msgid "Once you've set up your server with the required hooks, you can change the author and log message (or any other revprop) of any revision, using the context menu from the top pane of the Log dialog. You can also edit a log message using the context menu for the middle pane."
-msgstr "После того, как вы настроили на сервере необходимые ловушки, вы можете изменять как автора, так и сообщение любой ревизии, используя контекстное меню из верхней панели окна журнала. Вы также можете отредактировать сообщение журнала, воспользовавшись контекстным меню в средней панели."
+msgstr "После того, как вы настроили на сервере необходимые ловушки, вы можете изменять автора и сообщение (или любое другое свойство) любой ревизии, используя контекстное меню из верхней панели окна журнала. Вы также можете отредактировать сообщение журнала, воспользовавшись контекстным меню в средней панели."
 
 #. (para)
 msgid "Because Subversion's revision properties are not versioned, making modifications to such a property (for example, the <literal>svn:log</literal> commit message property) will overwrite the previous value of that property <emphasis>forever</emphasis>."
@@ -4852,14 +4816,12 @@ msgid "Sometimes your working practices will require log messages to follow a pa
 msgstr "Иногда установленный порядок работы требует, чтобы сообщения журнала соответствовали определённому формату, и это иногда означает, что текст, описывающий изменения, не виден в краткой сводке, показываемой в верхней панели. Свойство <literal>tsvn:logsummary</literal> может быть использовано для извлечения части сообщения журнала, которая будет показана в верхней панели. Прочтите <xref linkend=\"tsvn-dug-propertypage-tsvn-props\"/>, чтобы узнать, как применить это свойство."
 
 #. (title)
-#, fuzzy
 msgid "No Log Formatting from Repository Browser"
-msgstr "Обозреватель хранилища"
+msgstr "Никакого форматирования журнала в обозревателе хранилища"
 
 #. (para)
-#, fuzzy
 msgid "Because the formatting depends upon accessing subversion properties, you will only see the results when using a checked out working copy. Fetching properties remotely is a slow operation, so you will not see this feature in action from the repo browser."
-msgstr "Поскольку интеграция с системой отслеживания проблем зависит от доступа к свойствам Subversion, вы сможете увидеть результаты только при использовании извлечённой рабочей копии. Получение свойств удалённо - медленная операция, поэтому вы не увидите работу этой воможности из обозревателя хранилища. "
+msgstr "Поскольку форматирование зависит от доступа к свойствам Subversion, вы сможете увидеть результаты только при использовании извлечённой рабочей копии. Получение свойств удалённо - медленная операция, поэтому вы не увидите работу этой воможности из обозревателя хранилища. "
 
 #. (title)
 msgid "Statistical Information"
@@ -4930,19 +4892,16 @@ msgid "Offline Mode"
 msgstr "Автономный режим"
 
 #. (title)
-#, fuzzy
 msgid "Go Offline Dialog"
-msgstr "Автономный режим"
+msgstr "Диалог перехода в автономный режим"
 
 #. (para)
-#, fuzzy
 msgid "<placeholder-1/> If the server is not reachable, and you have log caching enabled you can use the log dialog and revision graph in offline mode. This uses data from the cache, which allows you to continue working although the information may not be up-to-date or even complete."
-msgstr "Если сервер недоступен, и включено кэширование журнала, то вы можете использовать диалог журнала и граф ревизий в автономном режиме. Этот режим использует закэшированные данные, что позволяет продолжить работу, несмотря на то, что информация может быть устаревшей или даже неполной."
+msgstr "<placeholder-1/> Если сервер недоступен, и включено кэширование журнала, то вы можете использовать диалог журнала и граф ревизий в автономном режиме. Этот режим использует закэшированные данные, что позволяет продолжить работу, несмотря на то, что информация может быть устаревшей или даже неполной."
 
 #. (term)
-#, fuzzy
 msgid "Offline for now"
-msgstr "Автономный режим"
+msgstr "Автономно в этот раз"
 
 #. (para)
 msgid "Complete the current operation in offline mode, but retry the repository next time log data is requested."
@@ -4965,9 +4924,8 @@ msgid "If you don't want to continue the operation with possibly stale data, jus
 msgstr ""
 
 #. (para)
-#, fuzzy
 msgid "Here you have three options: <placeholder-1/>"
-msgstr "Создаёт хранилище в папке, указанной параметром <placeholder-1/>"
+msgstr "Здесь у вас есть три возможности: <placeholder-1/>"
 
 #. (para)
 msgid "The <guilabel>Make this the default</guilabel> checkbox prevents this dialog from re-appearing and always picks the option you choose next. You can still change (or remove) the default after doing this from <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings</guimenuitem></menuchoice>."
@@ -5858,9 +5816,8 @@ msgstr "<placeholder-1/> Вы можете вызвать диалог для п
 
 # !!! externals
 #. (para)
-#, fuzzy
 msgid "You can add your own properties, or some properties with a special meaning in Subversion. These begin with <literal>svn:</literal>. <literal>svn:externals</literal> is such a property; see how to handle externals in <xref linkend=\"tsvn-dug-externals\"/>."
-msgstr "Вы можете добавить ваши собственные свойства, а также некоторые свойства, имеющие специальное значение в Subversion. Такие свойства начинаются с <literal>svn:</literal>. Одним из таких свойств является <literal>svn:externals</literal>; посмотреть, как обращаться с внешними включениями, можно в <xref linkend=\"tsvn-dug-import-4\"/>."
+msgstr "Вы можете добавить ваши собственные свойства, а также некоторые свойства, имеющие специальное значение в Subversion. Такие свойства начинаются с <literal>svn:</literal>. Одним из таких свойств является <literal>svn:externals</literal>; посмотреть, как обращаться с внешними включениями, можно в <xref linkend=\"tsvn-dug-externals\"/>."
 
 #. (title)
 msgid "svn:keywords"
@@ -6126,9 +6083,8 @@ msgid "Although TortoiseSVN's project properties are extremely useful, they only
 msgstr "Хотя свойства проекта, реализованные в TortoiseSVN, исключительно полезны, они работают только c TortoiseSVN, и некоторые из них будут работать только в свежих версиях TortoiseSVN. Если люди, работающие над вашим проектом, пользуются также и другими клиентами Subversion, или, быть может, у них установлены старые версии TortoiseSVN, то, возможно, лучше использовать ловушки на стороне хранилища для принудительного применения политик проекта. Свойства проекта могут только помочь выполнить политику, но они не могут принудительно применить её."
 
 #. (title)
-#, fuzzy
 msgid "External Items"
-msgstr "внешние включения"
+msgstr "Внешние включения"
 
 #. (primary)
 msgid "external repositories"
@@ -6142,7 +6098,7 @@ msgstr "внешние включения"
 #. (para)
 #, fuzzy
 msgid "Sometimes it is useful to construct a working copy that is made out of a number of different checkouts. For example, you may want different files or subdirectories to come from different locations in a repository, or perhaps from different repositories altogether. If you want every user to have the same layout, you can define the <literal>svn:externals</literal> properties to pull in the specified resource at the locations where they are needed."
-msgstr "Иногда бывает полезно создать рабочую копию, включающую несколько частей, извлечённых из различных источников. Например, вы можете пожелать, чтобы различные папки соответствовали разным местоположениям в хранилище, или, возможно, были вообще из различных хранилищ. Если вы хотите, чтобы у каждого пользователя была такая же компоновка, вы можете определить свойства <literal>svn:externals</literal>."
+msgstr "Иногда бывает полезно создать рабочую копию, включающую несколько частей, извлечённых из различных источников. Например, вы можете пожелать, чтобы различные папки соответствовали разным местоположениям в хранилище, или, возможно, были вообще из различных хранилищ. Если вы хотите, чтобы у всех пользователей была одинаковая компоновка, вы можете определить свойства <literal>svn:externals</literal>."
 
 #. (title)
 #, fuzzy
@@ -12874,7 +12830,7 @@ msgstr "Свойство ревизии (revprop)"
 
 #. (para)
 msgid "Just as files can have properties, so can each revision in the repository. Some special revprops are added automatically when the revision is created, namely: <literal>svn:date svn:author svn:log</literal> which represent the commit date/time, the committer and the log message respectively. These properties can be edited, but they are not versioned, so any change is permanent and cannot be undone."
-msgstr "Так же как и файлы, каждая ревизия в хранилище может обладать свойствами. Некоторые свойства добавляются автоматически при создании ревизии, а именно <literal>svn:date svn:author svn:log</literal>, представляющие дату/время фиксации, того, кто её произвёл и сообщение журнала, соответственно. Эти свойства могут быть отредактированы, но они не версируются, поэтому любое изменение является постоянным и не может быть отменено."
+msgstr "Так же как и файлы, каждая ревизия в хранилище может обладать свойствами. Некоторые специальные свойства добавляются автоматически при создании ревизии, а именно <literal>svn:date svn:author svn:log</literal>, представляющие дату/время фиксации, того, кто её произвёл и сообщение журнала, соответственно. Эти свойства могут быть отредактированы, но они не версируются, поэтому любое изменение является постоянным и не может быть отменено."
 
 #. (glossterm)
 msgid "SVN"
@@ -12917,6 +12873,9 @@ msgstr ""
 msgid "translator-translation"
 msgstr "Перевод"
 
+#, fuzzy
+#~ msgid "Context Menu Icons"
+#~ msgstr "Контекстные меню"
 #~ msgid ""
 #~ "Because Subversion cannot provide all the information required, a certain "
 #~ "amount of interpretation is required, which can sometimes give strange "
