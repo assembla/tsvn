@@ -1,6 +1,6 @@
 #
 # Czech translation for TortoiseSVN
-# Copyright (C) 2004-2008 the TortoiseSVN team
+# Copyright (C) 2004-2009 the TortoiseSVN team
 # This file is distributed under the same license as TortoiseSVN
 #
 # Last commit by:
@@ -11,14 +11,15 @@
 # Authors:
 # RADEK SVARZ <translate@svarz.cz>, 2005
 # VOJTECH VONDRA <mailbox@ameeck.net>, 2007
+# Jiri Sedlak, 2009
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2009-03-21 11:20+0100\n"
-"Last-Translator: Oto BREZINA <translator@e-posta.sk>\n"
+"PO-Revision-Date: 2009-03-25 16:08+0100\n"
+"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -558,7 +559,7 @@ msgstr "&Soubor"
 
 #. Resource IDs: (32809)
 msgid "&Filter"
-msgstr "&Filter"
+msgstr "&Filtr"
 
 #. Resource IDs: (1, 57636)
 msgid "&Find"
@@ -825,7 +826,7 @@ msgstr "&Nastavení"
 #. Resource IDs: (32772)
 #, fuzzy
 msgid "&Overlay images"
-msgstr "Překrývané &obrázky"
+msgstr "Překrýt &obrázky"
 
 #. Resource IDs: (1411, 65535)
 msgid "&Password:"
@@ -906,7 +907,7 @@ msgstr "&Přednastavit nástrojovou lištu"
 
 #. Resource IDs: (16657)
 msgid "&Reset my usage data"
-msgstr "&Vymazat moje uživatelské dáta"
+msgstr "&Vymazat moje uživatelské data"
 
 #. Resource IDs: (16910)
 msgid "&Reset to Default"
@@ -1008,12 +1009,11 @@ msgstr "Za&stavit na kopírování/přejmenování"
 #. Resource IDs: (276)
 #, fuzzy
 msgid "&Switch WC to path and revision"
-msgstr "&Překlopit pracovní kopií (WC) na cestu a revizi"
+msgstr "Překlopit %s na %s, Revize %s"
 
 #. Resource IDs: (275)
-#, fuzzy
 msgid "&Switch WC to path@HEAD"
-msgstr "&Překlopit pracovní kopií (WC) na cestu@HEAD"
+msgstr ""
 
 #. Resource IDs: (1173)
 msgid "&Symbol View"
@@ -1258,14 +1258,13 @@ msgid "..."
 msgstr "..."
 
 #. Resource IDs: (269)
-#, fuzzy
 msgid "... checking cache and preparing log query"
-msgstr "... kontrola cache a příprava 'log query'"
+msgstr ""
 
 #. Resource IDs: (270)
 #, fuzzy
 msgid "... reading working copy status"
-msgstr "... načítávání stavu pracovní kopie (WC)"
+msgstr "Označkovaná pracovní kopie (WC) na %s"
 
 #. Resource IDs: (16527)
 msgid "....."
@@ -1493,7 +1492,7 @@ msgstr "Přidat do seznamu k &ignorování"
 
 #. Resource IDs: (1068)
 msgid "Add to Quick Access Toolbar"
-msgstr "Přidat do Lišty Rýchlého Přístupu"
+msgstr "Přidat do Lišty Rychlého Přístupu"
 
 #. Resource IDs: (209, 1279)
 msgid "Add..."
@@ -1593,7 +1592,7 @@ msgstr "Všechny soubory (*.*)|*.*||"
 #. Resource IDs: (1008)
 #, fuzzy
 msgid "All your changes will be lost! Do you really want to reset all toolbars and menus?"
-msgstr "Všechny vaše změny budou ztraceny! Skutečně chcete obnovit všechny nástroje lišty a menu?"
+msgstr "Všechny vaše změny budou ztraceny! Skutečně chcete obnovit všechny nástrojové lišty a menu?"
 
 #. Resource IDs: (1008)
 #, fuzzy
@@ -1622,11 +1621,11 @@ msgstr "Povolit rozdílné úložiště se stejnou URL, např. http://localhost/
 #. Resource IDs: (345)
 #, fuzzy
 msgid "Allow different repositories to use the same UUID, e.g. copied repositories"
-msgstr "Povolit rozdílné úložiště se stejnou UUID, např. pro zrcadlené uložiště"
+msgstr "Povolit rozdílné úložiště se stejnou UUID, např. pro zrcadlené úložiště"
 
 #. Resource IDs: (197)
 msgid "Always use the system locale settings to show times and dates"
-msgstr "Vždy používat systémové nastavení pro zobrazovaní času a datumu"
+msgstr "Vždy používat systémové nastavení pro zobrazovaní času a data"
 
 #. Resource IDs: (339)
 msgid "Amount of memory required to load the cache"
@@ -1796,7 +1795,7 @@ msgstr "Autor"
 
 #. Resource IDs: (65535)
 msgid "Author:                                    Stefan Kueng"
-msgstr "Author:                                    Stefan Kueng"
+msgstr "Autor:                                    Stefan Kueng"
 
 #. Resource IDs: (116)
 msgid "Authors"
@@ -2006,7 +2005,7 @@ msgstr "Velikost cache [kB]"
 #. Resource IDs: (1440)
 #, fuzzy
 msgid "Cached Repositories"
-msgstr "Cache úložistě"
+msgstr "Cache úložiště"
 
 #. Resource IDs: (197)
 msgid "Caches the log messages to speed up log fetching"
@@ -2150,7 +2149,7 @@ msgstr "Zjistit aktualizovanou verzi..."
 #. Resource IDs: (276)
 #, fuzzy
 msgid "Check for &modifications"
-msgstr "Zjistit &modifikace"
+msgstr "Zjistit modifikace"
 
 #. Resource IDs: (13)
 msgid "Check for modi&fications"
@@ -2176,12 +2175,12 @@ msgstr ""
 #. Resource IDs: (612)
 #, fuzzy
 msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to keep your rename/move or the one from the repository. Then mark the conflict as resolved."
-msgstr "Zkontroluj log jak se soubor/složka přejmenovala/přesunula a rozhodni se jestli chceš ponechat své přejmenování/přesunutí nebo to z úložiště. Pak označ problém za vyřešený."
+msgstr "Zkontroluj log jak se soubor/složka přejmenovala/přesunula a rozhodni se, jestli chceš ponechat své přejmenování/přesunutí nebo to z úložiště. Pak označ problém za vyřešený."
 
 #. Resource IDs: (612)
 #, fuzzy
 msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to merge the change into your renamed file, or restore the original file."
-msgstr "Zkontroluj log jak se soubor/složka přejmenovala/přesunula a rozhodni se jestli chceš změny sloučiť do přejmenovaného souboru, nebo obnovit původní soubor."
+msgstr "Zkontroluj log jak se soubor/složka přejmenovala/přesunula a rozhodni se, jestli chceš ponechat své přejmenování/přesunutí nebo to z úložiště. Pak označ problém za vyřešený."
 
 #. Resource IDs: (251)
 msgid "Check the path and/or URL you've entered."
@@ -2304,7 +2303,7 @@ msgid ""
 "Clears the stored authentication.\r\n"
 "You will have to enter your username/password again for all repositories."
 msgstr ""
-"Smaže uloženou autentifikaci.\r\n"
+"Smaže uloženou autentikaci.\r\n"
 "Budete muset znovu zadávat uživatelské jméno/heslo pro všechna úložiště."
 
 #. Resource IDs: (196)
@@ -2446,7 +2445,7 @@ msgstr "Počet odevzdání v týdnu:"
 
 #. Resource IDs: (9)
 msgid "Commits your changes to the repository"
-msgstr "Odevzdat změny do uložiště"
+msgstr "Odevzdat změny do úložiště"
 
 #. Resource IDs: (170)
 #, fuzzy
@@ -2501,7 +2500,7 @@ msgstr "Porovná vybraný soubor se souborem v úložišti"
 #. Resource IDs: (120)
 #, fuzzy, c-format
 msgid "Comparing %s to %s"
-msgstr "Porovnávnávam %s s %s"
+msgstr "Porovnávám %s s %s"
 
 #. Resource IDs: (74)
 msgid "Completed"
@@ -2534,7 +2533,7 @@ msgstr "Nastavte program používaný pro prohlížení rozdílových souborů G
 #. Resource IDs: (1503)
 #, fuzzy
 msgid "Conflict Sources"
-msgstr "Konfliktní zdroje"
+msgstr "Konfliktu vyřešen"
 
 #. Resource IDs: (65535)
 msgid "Conflict resolved"
@@ -2556,7 +2555,7 @@ msgstr "Připojit se na server úložiště a stáhnout chybějící data logu"
 
 #. Resource IDs: (65535)
 msgid "Container sizes"
-msgstr "Velikosti kontainerů"
+msgstr "Velikosti kontejnerů"
 
 #. Resource IDs: (16520)
 msgid "Context Menus: "
@@ -2621,7 +2620,7 @@ msgid ""
 "Copy %s\r\n"
 "to %s"
 msgstr ""
-"Kopíovat %s\r\n"
+"Kopírovat %s\r\n"
 "do %s"
 
 #. Resource IDs: (142)
@@ -2687,7 +2686,7 @@ msgstr ""
 #. Resource IDs: (613)
 #, fuzzy, c-format
 msgid "Copy to %1"
-msgstr "Kopíovat do %1"
+msgstr "Kopírovat do %1"
 
 #. Resource IDs: (114)
 msgid "Copy to clipboard"
@@ -3092,7 +3091,7 @@ msgstr "Mazání"
 #. Resource IDs: (207)
 #, fuzzy
 msgid "Depth"
-msgstr "Hloubka"
+msgstr "Hloubka:"
 
 #. Resource IDs: (65535)
 msgid "Depth:"
@@ -3299,7 +3298,7 @@ msgstr "Příště tuto zprávu nezobrazovat"
 
 #. Resource IDs: (1002)
 msgid "Drag to make this menu float"
-msgstr "Přesunutím uděláte menu plavoucí"
+msgstr "Přesunutím uděláte menu plovoucí"
 
 #. Resource IDs: (16513)
 msgid "Draw"
@@ -3429,7 +3428,7 @@ msgstr "Prázdný"
 
 #. Resource IDs: (344)
 msgid "Enable log caching to speed up log and revision graph dialogs"
-msgstr "Povolení kešovaní logu zrychlí log a graf revizí"
+msgstr "Povolení kešování logu zrychlí log a graf revizí"
 
 #. Resource IDs: (196)
 msgid ""
@@ -3464,7 +3463,7 @@ msgstr "Nastala chyba sdílení při zpracovávání %1."
 
 #. Resource IDs: (3843)
 msgid "Encountered an improper argument."
-msgstr "Byl schledán nesprávný argument."
+msgstr "Byl shledán nesprávný argument."
 
 #. Resource IDs: (3859)
 #, c-format
@@ -3604,7 +3603,7 @@ msgstr "Výjimky:"
 #. Resource IDs: (20)
 #, fuzzy
 msgid "Exclude"
-msgstr "Vynechat"
+msgstr "V&ynechat cesty:"
 
 #. Resource IDs: (1002)
 msgid "Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
@@ -3717,7 +3716,7 @@ msgstr "Externí programy::Prohlížeč Unifikovaného Diff"
 #. Resource IDs: (263)
 #, fuzzy
 msgid "External failed"
-msgstr "Externí se nezdařilo"
+msgstr "Externí přiloženy"
 
 #. Resource IDs: (226)
 msgid "Externals excluded"
@@ -4271,7 +4270,7 @@ msgstr "Tip: Zmáčkněte F5 pro znovunačtení vybraného podstromu a Ctrl-F5 p
 
 #. Resource IDs: (16519)
 msgid "Hint: select the context menu, change the page to 'Commands' and drag the toolbar buttons into the menu window."
-msgstr "Tip: vyberte kontextový menu, změnte stranu na 'Příkazy' a přesuňte tlačítka nástrojové lišty do menu okna."
+msgstr "Tip: vyberte kontextový menu, změňte stranu na 'Příkazy' a přesuňte tlačítka nástrojové lišty do menu okna."
 
 #. Resource IDs: (1064)
 msgid "Home"
@@ -4454,7 +4453,7 @@ msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'branch'."
 msgstr ""
-"Když element (část mezi dvěmi '/') cesty se shoduje\n"
+"Když element (část mezi dvěma '/') cesty se shoduje\n"
 "s jedno z cest, je považován za 'větev'."
 
 #. Resource IDs: (346)
@@ -4462,7 +4461,7 @@ msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'tag'."
 msgstr ""
-"Když element (část mezi dvěmi '/') cesty se shoduje\n"
+"Když element (část mezi dvěma '/') cesty se shoduje\n"
 "s jedno z cest, je považován za 'značku'."
 
 #. Resource IDs: (346)
@@ -4470,7 +4469,7 @@ msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'trunk'."
 msgstr ""
-"Když element (část mezi dvěmi '/') cesty se shoduje\n"
+"Když element (část mezi dvěma '/') cesty se shoduje\n"
 "s jedno z cest, je považován za 'kmen'."
 
 #. Resource IDs: (194)
@@ -4534,7 +4533,7 @@ msgid ""
 "You don't have to click on 'Check Repository' anymore."
 msgstr ""
 "Pokud nastaveno, úložiště je kontaktováno, když nastartuje dialog.\r\n"
-"Nemusíte již kliknout na 'Zkontrolovat Úložiště'."
+"Nemusíte již kliknout na 'Zkontrolovat úložiště'."
 
 #. Resource IDs: (197)
 msgid ""
@@ -4969,7 +4968,7 @@ msgstr "Čas posledního přístupu ke cache"
 
 #. Resource IDs: (338)
 msgid "Last time the repository was asked for the HEAD revision number"
-msgstr "Čas posledního vyžádání čísla HEAD revize v uložišti"
+msgstr "Čas posledního vyžádání čísla HEAD revize v úložišti"
 
 #. Resource IDs: (12)
 msgid "Launches the external diff / merge program to solve the conflicts"
@@ -5009,7 +5008,7 @@ msgstr ""
 
 #. Resource IDs: (32853)
 msgid "Line diff bar"
-msgstr "Lišta rozdílú v řádce"
+msgstr "Lišta rozdílů v řádce"
 
 #. Resource IDs: (65535)
 msgid "Line differences"
@@ -5034,7 +5033,7 @@ msgstr ""
 
 #. Resource IDs: (344)
 msgid "List of repositories for which log information has been cached"
-msgstr "Seznam uložišť pro která jsou informace logu cache."
+msgstr "Seznam úložišť pro která jsou informace logu cache."
 
 #. Resource IDs: (16631, 16992)
 msgid "List1"
@@ -5055,7 +5054,7 @@ msgid ""
 "repository URL will be saved to."
 msgstr ""
 "Umístění, kam se obsah\n"
-"úložiště daného URL má uložit."
+"Úložiště daného URL má uložit."
 
 #. Resource IDs: (32854)
 msgid "Locator Bar"
@@ -5222,7 +5221,7 @@ msgid ""
 "Marks the revisions as merged, without actually doing the merge.\r\n"
 "This blocks the revisions from getting merged in the future."
 msgstr ""
-"Označit revizi za sloučenou, bez vykonání samotného slučování.\r\n"
+"Označit revizi za sloučenou, bez vykonání samotného slučovaní.\r\n"
 "Toto znemožní sloučit tento rozsah revizí v budoucnu."
 
 #. Resource IDs: (1064)
@@ -5288,7 +5287,7 @@ msgstr "Hloubka sloučení:"
 #. Resource IDs: (1432)
 #, fuzzy
 msgid "Merge non-interactive"
-msgstr "Neinteraktivní sloučování"
+msgstr "Neinteraktívní slučování"
 
 #. Resource IDs: (595, 65535)
 msgid "Merge options"
@@ -5314,7 +5313,7 @@ msgstr "Sloučit revize do..."
 #. Resource IDs: (610)
 #, fuzzy, c-format
 msgid "Merge the changes into '%s'"
-msgstr "Sloučit změny do '%s'"
+msgstr "Sloučit změny do souboru '%s'"
 
 #. Resource IDs: (1470)
 #, fuzzy
@@ -5354,7 +5353,7 @@ msgstr "Sloučení %s do %s, %s"
 #. Resource IDs: (264)
 #, fuzzy
 msgid "Merging differences between repository URLs"
-msgstr "Sloučuji rozdíly mezi URL úložišť"
+msgstr "Sloučit rozdíly mezi URL úložišť"
 
 #. Resource IDs: (229)
 #, c-format
@@ -5799,8 +5798,8 @@ msgid ""
 "Number of times a log cache can fail to close properly\n"
 "due to crashes etc. until it gets deleted automatically."
 msgstr ""
-"Počet zlyhání zavírání log cache z důvodu pádu atd.\n"
-"než se automaticky vymaže."
+"Počet chyb log keše než se zavře standardně\n"
+"z důvodu pádu atd. než se automaticky vymaže."
 
 #. Resource IDs: (1160)
 msgid "Number of weeks:"
@@ -6112,11 +6111,11 @@ msgstr ""
 
 #. Resource IDs: (1287)
 msgid "Please resolve the conflict by choosing one of the following options:"
-msgstr "Prosím, vyřešte konflikt výběrem jedné z nasledovních možností:"
+msgstr "Prosím, vyřešte konflikt výběrem jedné z následujících možností:"
 
 #. Resource IDs: (83)
 msgid "Please select a hook type"
-msgstr "Vyberte prosím typ hooku"
+msgstr "Vyberte prosím typ háku"
 
 #. Resource IDs: (76)
 msgid "Please specify the certificate type"
@@ -6133,7 +6132,7 @@ msgstr "Prosím, čekejte během stornování..."
 
 #. Resource IDs: (319)
 msgid "Please wait while differences are obtained..."
-msgstr "Prosím, počekejte na zjištění rozdílů..."
+msgstr "Prosím, počkejte na zjištění rozdílů..."
 
 #. Resource IDs: (104)
 #, fuzzy
@@ -6185,7 +6184,7 @@ msgstr "Stlačte &Novou Zkratkovou Klávesu:"
 #. Resource IDs: (65535)
 #, fuzzy
 msgid "Press &new shortcut key:"
-msgstr "Stlačte &novou zkratkovou klávesu:"
+msgstr "Stlačte &novou Zkratkovou klávesu:"
 
 #. Resource IDs: (2052)
 #, fuzzy
@@ -6305,12 +6304,12 @@ msgstr "Vlastnost %s: pracovní kopie (WC)"
 #. Resource IDs: (262)
 #, fuzzy, c-format
 msgid "Property '%s' deleted"
-msgstr "Vlastnost %s vymazána"
+msgstr "Vlastnost %s: vzdálené"
 
 #. Resource IDs: (262)
 #, fuzzy, c-format
 msgid "Property '%s' set"
-msgstr "Vlastnost %s nastavena"
+msgstr "Vlastnost %s: vzdálené"
 
 #. Resource IDs: (107)
 msgid "Property Page"
@@ -6494,7 +6493,7 @@ msgstr ""
 "[^aei0-9] : cokoliv kromě a,e,i nebo 0..9\r\n"
 "\r\n"
 "\\w   : a-z,A-Z,0-9 nebo _\r\n"
-"\\W   : jakýkoliv neafanumerický znak\r\n"
+"\\W   : jakýkoliv nealfanumerický znak\r\n"
 "\\d   : číslo 0-9\r\n"
 "\\s   : bílý znak"
 
@@ -6651,7 +6650,7 @@ msgstr "Odstraní soubory (nebo dle masky) ze seznamu k ignorování"
 
 #. Resource IDs: (581)
 msgid "Removes the selected properties"
-msgstr "Odstrání vybranou vlastnost"
+msgstr "Odstraní vybranou vlastnost"
 
 #. Resource IDs: (16616)
 msgid "Rena&me..."
@@ -6782,7 +6781,7 @@ msgstr "Vyřešit konflikt:"
 
 #. Resource IDs: (2)
 msgid "Resolve later"
-msgstr "Vyřešit pozdeji"
+msgstr "Vyřešit později"
 
 #. Resource IDs: (74, 209, 1400)
 msgid "Resolved"
@@ -7620,7 +7619,7 @@ msgstr ""
 
 #. Resource IDs: (345)
 msgid "Show statistics for the selected log cache"
-msgstr "Zobrazit statistiku pro vybránou cache logů"
+msgstr "Zobrazit statistiku pro vybranou cache logů"
 
 #. Resource IDs: (2052)
 msgid "Show tags on the copy source, not as separate nodes"
@@ -7688,7 +7687,7 @@ msgstr "Ukáže typ MIME verzovaného souboru"
 
 #. Resource IDs: (32775)
 msgid "Single/&double-pane view"
-msgstr "Jedno/&dvoupanelové zobrazení"
+msgstr "Jedno/&dvou panelové zobrazení"
 
 #. Resource IDs: (74)
 msgid "Size"
@@ -7725,12 +7724,12 @@ msgstr "Uspořádat podle počtu odevzdání"
 #. Resource IDs: (1501)
 #, fuzzy
 msgid "Source Left:"
-msgstr "Zdroj vlevo:"
+msgstr "Skrolovat vlevo"
 
 #. Resource IDs: (1502)
 #, fuzzy
 msgid "Source Right:"
-msgstr "Zdroj vpravo:"
+msgstr "Skrolovat vpravo"
 
 #. Resource IDs: (196)
 msgid "Specifies how many items you want to keep in the most recent log messages dialog."
@@ -7871,12 +7870,12 @@ msgid ""
 "file %s, line %ld\n"
 "expression = %s"
 msgstr ""
-"Ve Subversion se vyskytl závažný problém.\n"
+"V Subversion se vyskytl závažný problém.\n"
 "Prosím, oznamte toto na náš mailing list\n"
 "s co nejvíce informacemi o tom\n"
 "co jste se pokoušeli dělat.\n"
 "\n"
-"Ve Subversion se vyskytl závažný problém v:\n"
+"V Subversion se vyskytl závažný problém v:\n"
 "soubor %s, řádka %ld\n"
 "výraz = %s"
 
@@ -7890,7 +7889,7 @@ msgid ""
 "\n"
 "Subversion reported the following:"
 msgstr ""
-"Ve Subversion se vyskytl závažný problém.\n"
+"V Subversion se vyskytl závažný problém.\n"
 "Prosím, oznamte toto na náš mailing list\n"
 "s co nejvíce informacemi o tom\n"
 "co jste se pokoušeli dělat.\n"
@@ -8054,12 +8053,12 @@ msgstr "Start dávky '@@' byl očekáván na řádce %d !"
 #. Resource IDs: (346)
 #, fuzzy
 msgid "The color of creation, copy and rename nodes of tags will be shifted towards yellow."
-msgstr "Barva vytvoření, kopie a přejmenovaní uzlů značek bude posunuta ke žluté."
+msgstr "Barva vytvoření, kopie a přejmenování uzlů značek bude posunuta ke žluté."
 
 #. Resource IDs: (346)
 #, fuzzy
 msgid "The color of creation, copy and rename nodes of the trunk will be shifted towards green."
-msgstr "Barva vytvoření, kopie a přejmenovaní uzlů kmene bude posunuta k zelené."
+msgstr "Barva vytvoření, kopie a přejmenování uzlů kmene bude posunuta k zelené."
 
 #. Resource IDs: (197)
 msgid "The default URL to checkout from if nothing else is specified"
@@ -8613,7 +8612,7 @@ msgstr "Tato metoda pokrývá případ kdy jste vytvořili větev jak je popsán
 #. Resource IDs: (594)
 #, fuzzy
 msgid "This method covers the case when you have made one or more revisions to a branch (or to the trunk) and you want to port those changes across to a different branch."
-msgstr "Tato metoda pokrývá případ kdy jste vytvořili jednu nebo více revizí do větvě (nebo kmene) a chcete portovat tito změny do jiné větve."
+msgstr "Tato metoda pokrývá případ kdy jste vytvořili jednu nebo více revizí do větve (nebo kmene) a chcete portovat tito změny do jiné větve."
 
 #. Resource IDs: (594)
 msgid "This method covers the case when you want to merge the differences of two different branches into your working copy."
@@ -8698,7 +8697,7 @@ msgid ""
 "Toggle One/Two Pages display"
 msgstr ""
 "Přepnout Jedeno/Dvou Stranové zobrazení\n"
-"Toggle One/Two Pages display"
+"Přepnout Jedeno/Dvou Stranové zobrazení"
 
 #. Resource IDs: (65535)
 msgid "Toolbar"
@@ -8711,7 +8710,7 @@ msgstr "Jméno Nástrojoví lišty"
 #. Resource IDs: (1064)
 #, fuzzy
 msgid "Toolbar Options"
-msgstr "Nastavení Nástrojoví lišty"
+msgstr "Nastavení Nástrojové lišty"
 
 #. Resource IDs: (1001)
 msgid "Toolbar internal error. Please contact your application vendor."
@@ -9065,7 +9064,7 @@ msgid ""
 "Unused log caches will only be removed if the respective\n"
 "file is smaller than the given size in kBytes."
 msgstr ""
-"Nepoužívaný log cache jsou odstraněny pouze\n"
+"Nepoužívané log cache jsou odstraněny pouze\n"
 "pokud jsou menší než určitá velikost v kBytech."
 
 #. Resource IDs: (146)
@@ -9100,7 +9099,7 @@ msgstr "Hloubka aktualizace"
 #. Resource IDs: (275)
 #, fuzzy
 msgid "Update WC to revision"
-msgstr "Aktualizovat pracovní kopií (WC) na revizi"
+msgstr "Akt&ualizovat položku na revizi"
 
 #. Resource IDs: (74)
 msgid "Updated"
@@ -9191,7 +9190,7 @@ msgid ""
 "Use block from left before right"
 msgstr ""
 "Použít blok z levého pohledu před pravím blokem\n"
-"Použít blok z leva před pravím"
+"Použít blok z leva před pravým"
 
 #. Resource IDs: (32859)
 msgid "Use block from right before left"
@@ -9202,8 +9201,8 @@ msgid ""
 "Use block from right view before block from left view\n"
 "Use block from right before left"
 msgstr ""
-"Použít blok z pravého pohledu před levím blokem\n"
-"Použít blok z prava před levím"
+"Použít blok z pravého pohledu před levým blokem\n"
+"Použít blok z prava před levým"
 
 #. Resource IDs: (251)
 msgid "Use both text blocks (this one first)"
@@ -9556,7 +9555,7 @@ msgid ""
 "Are you absolutely sure that you want to move\n"
 "the trunk folder?"
 msgstr ""
-"Pokoušíte se přesunou trunk adresář!\n"
+"Pokoušíte se přesunout trunk adresář!\n"
 "Jste si opravdu jistí, že chcete přesunout \n"
 "trunk adresář?"
 
@@ -9667,7 +9666,7 @@ msgid ""
 "That change won't take effect until you restart your computer or logoff and logon again!"
 msgstr ""
 "Změnil(a) jste sadu ikon z <i>%s</i> na <i>%s</i>.\n"
-"Tato změna bude brána v potaz až po restartu počítače nebo pokud se odlogujete a znova přihlásíte!"
+"Tato změna bude brána v potaz až po restartu počítače nebo pokud se odhlásíte a znova přihlásíte!"
 
 #. Resource IDs: (170)
 msgid ""
@@ -9715,7 +9714,7 @@ msgid ""
 "Note: updating to another revision won't lose those modifications so the working copy\n"
 "won't look exactly as it was in the revision you're updating to!"
 msgstr ""
-"Vaše pracovní kopie (WC) je lokálně zmodifikovaná!\n"
+"Vaše pracovní kopie (WC) je lokálně modifikovaná!\n"
 "Poznámka: aktualizace na jinou revizi neztratí tyto modifikace, takže pracovní kopie\n"
 "nebude vypadat přesně stejně, jako v revizi, na kterou aktualizujete!"
 
@@ -9858,7 +9857,7 @@ msgstr "a podpořte vývojáře"
 
 #. Resource IDs: (583)
 msgid "another item already exists in its place."
-msgstr "na tomhle míste již existuje jiná položka."
+msgstr "na tomhle místě již existuje jiná položka."
 
 #. Resource IDs: (340)
 msgid ""
@@ -10502,10 +10501,10 @@ msgid ""
 "The string %REVISION% in the URL is replaced with the revision number,\r\n"
 "the string %PATH% is replaced with the path to the file relative to the repository root."
 msgstr ""
-"webviewer:pathrevision\r\n"
+"web prohlížeč:revize cesty\r\n"
 "URL ukazující na web prohlížeč pro úložiště pro specifický soubor a revizi.\r\n"
 "Text %REVISION% v URL je nahrazen číslem revize,\r\n"
-"text %PATH% je nahrazen cestou k souboru relativní ke kořenu uložiště."
+"text %PATH% je nahrazen cestou k souboru relativní ke kořenu úložiště."
 
 #. Resource IDs: (579)
 #, fuzzy, c-format
@@ -10514,7 +10513,7 @@ msgid ""
 "URL pointing to the web viewer for the repository for a specific revision.\r\n"
 "The string %REVISION% in that URL is replaced with the revision number."
 msgstr ""
-"webviewer:revision\r\n"
+"web prohlížeč:revize\r\n"
 "URL ukazující na web prohlížeč pro úložiště pro specifickou revizi.\r\n"
 "Text %REVISION% v URL je nahrazen číslem revize."
 
@@ -10659,5 +10658,5 @@ msgstr "{BugTraq}"
 #~ "foo\t\thttp://example.com/repos/zig\n"
 #~ "foo/bar -r 1234\thttp://example.com/repos/zag"
 #~ msgid "which points to the repository at URL:"
-#~ msgstr "které ukazuje na uložiště na URL:"
+#~ msgstr "které ukazuje na úložiště na URL:"
 
