@@ -16,8 +16,8 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "StdAfx.h"
-#include ".\revisioninfocontainer.h"
+#include "stdafx.h"
+#include "RevisionInfoContainer.h"
 
 // begin namespace LogCache
 
@@ -26,330 +26,330 @@ namespace LogCache
 
 // update / modify utilities
 
-void CRevisionInfoContainer::UpdateAuthors 
-	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap
+void CRevisionInfoContainer::UpdateAuthors
+    ( const CRevisionInfoContainer& newData
+    , const index_mapping_t& indexMap
     , bool keepOldDataForMissingNew)
 {
-	index_mapping_t idMapping = authorPool.Merge (newData.authorPool);
+    index_mapping_t idMapping = authorPool.Merge (newData.authorPool);
 
-	for ( index_mapping_t::const_iterator iter = indexMap.begin()
-		, end = indexMap.end()
-		; iter != end
-		; ++iter)
-	{
-        if (   !keepOldDataForMissingNew 
-            || (newData.presenceFlags[iter->value] & HAS_AUTHOR))
+    for (index_mapping_t::const_iterator iter = indexMap.begin()
+            , end = indexMap.end()
+                    ; iter != end
+            ; ++iter)
+    {
+        if (!keepOldDataForMissingNew
+                || (newData.presenceFlags[iter->value] & HAS_AUTHOR))
         {
-    		authors[iter->key] = *idMapping.find (newData.authors[iter->value]);
+            authors[iter->key] = *idMapping.find (newData.authors[iter->value]);
         }
-	}
+    }
 }
 
-void CRevisionInfoContainer::UpdateTimeStamps 
-	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap
+void CRevisionInfoContainer::UpdateTimeStamps
+    ( const CRevisionInfoContainer& newData
+    , const index_mapping_t& indexMap
     , bool keepOldDataForMissingNew)
 {
-	for ( index_mapping_t::const_iterator iter = indexMap.begin()
-		, end = indexMap.end()
-		; iter != end
-		; ++iter)
-	{
-        if (   !keepOldDataForMissingNew 
-            || (newData.presenceFlags[iter->value] & HAS_TIME_STAMP))
+    for (index_mapping_t::const_iterator iter = indexMap.begin()
+            , end = indexMap.end()
+                    ; iter != end
+            ; ++iter)
+    {
+        if (!keepOldDataForMissingNew
+                || (newData.presenceFlags[iter->value] & HAS_TIME_STAMP))
         {
-		    timeStamps[iter->key] = newData.timeStamps[iter->value];
+            timeStamps[iter->key] = newData.timeStamps[iter->value];
         }
-	}
+    }
 }
 
-void CRevisionInfoContainer::UpdateComments 
-	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap
+void CRevisionInfoContainer::UpdateComments
+    ( const CRevisionInfoContainer& newData
+    , const index_mapping_t& indexMap
     , bool keepOldDataForMissingNew)
 {
-	index_mapping_t toReplace;
+    index_mapping_t toReplace;
 
-	for ( index_mapping_t::const_iterator iter = indexMap.begin()
-		, end = indexMap.end()
-		; iter != end
-		; ++iter)
-	{
-        if (   !keepOldDataForMissingNew 
-            || (newData.presenceFlags[iter->value] & HAS_COMMENT))
+    for (index_mapping_t::const_iterator iter = indexMap.begin()
+            , end = indexMap.end()
+                    ; iter != end
+            ; ++iter)
+    {
+        if (!keepOldDataForMissingNew
+                || (newData.presenceFlags[iter->value] & HAS_COMMENT))
         {
-    		toReplace.insert (iter->key, iter->value);
+            toReplace.insert (iter->key, iter->value);
         }
-	}
+    }
 
-	comments.Replace (newData.comments, toReplace);
+    comments.Replace (newData.comments, toReplace);
 }
 
-void CRevisionInfoContainer::UpdateChanges 
-	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap
-	, const index_mapping_t& pathIDMapping
+void CRevisionInfoContainer::UpdateChanges
+    ( const CRevisionInfoContainer& newData
+    , const index_mapping_t& indexMap
+    , const index_mapping_t& pathIDMapping
     , bool keepOldDataForMissingNew)
 {
-	// save & remove old data
+    // save & remove old data
 
-	std::vector<unsigned char> oldChanges;
-	changes.swap (oldChanges);
-	changes.reserve (oldChanges.size());
+    std::vector<unsigned char> oldChanges;
+    changes.swap (oldChanges);
+    changes.reserve (oldChanges.size());
 
-	std::vector<index_t> oldChangedPaths;
-	changedPaths.swap (oldChangedPaths);
-	changedPaths.reserve (oldChangedPaths.size());
+    std::vector<index_t> oldChangedPaths;
+    changedPaths.swap (oldChangedPaths);
+    changedPaths.reserve (oldChangedPaths.size());
 
-	std::vector<svn_node_kind_t> oldChangedPathTypes;
-	changedPathTypes.swap (oldChangedPathTypes);
-	changedPathTypes.reserve (oldChangedPathTypes.size());
+    std::vector<svn_node_kind_t> oldChangedPathTypes;
+    changedPathTypes.swap (oldChangedPathTypes);
+    changedPathTypes.reserve (oldChangedPathTypes.size());
 
-	std::vector<index_t> oldCopyFromPaths;
-	copyFromPaths.swap (oldCopyFromPaths);
-	copyFromPaths.reserve (oldCopyFromPaths.size());
+    std::vector<index_t> oldCopyFromPaths;
+    copyFromPaths.swap (oldCopyFromPaths);
+    copyFromPaths.reserve (oldCopyFromPaths.size());
 
-	std::vector<revision_t> oldCopyFromRevisions;
-	copyFromRevisions.swap (oldCopyFromRevisions);
-	copyFromRevisions.reserve (oldCopyFromRevisions.size());
+    std::vector<revision_t> oldCopyFromRevisions;
+    copyFromRevisions.swap (oldCopyFromRevisions);
+    copyFromRevisions.reserve (oldCopyFromRevisions.size());
 
     // the container sizes must match
 
-    assert (changesOffsets.size() == size()+1);
-    assert (copyFromOffsets.size() == size()+1);
+    assert (changesOffsets.size() == size() +1);
+    assert (copyFromOffsets.size() == size() +1);
 
-	// splice
+    // splice
 
     index_mapping_t::const_iterator mapEnd = indexMap.end();
-	for (index_t i = 0, count = size(); i < count; ++i)
-	{
+    for (index_t i = 0, count = size(); i < count; ++i)
+    {
         index_mapping_t::const_iterator iter = indexMap.find (i);
-		if ((iter != mapEnd)
-            && (   !keepOldDataForMissingNew 
-                || (newData.presenceFlags[iter->value] & HAS_CHANGEDPATHS)))
-		{
-			// copy & translate
+        if ( (iter != mapEnd)
+                && (!keepOldDataForMissingNew
+                    || (newData.presenceFlags[iter->value] & HAS_CHANGEDPATHS)))
+        {
+            // copy & translate
 
-			index_t sourceIndex = iter->value;
-			for ( index_t k = newData.changesOffsets [sourceIndex]
-				, last = newData.changesOffsets [sourceIndex+1]
-				; k != last
-				; ++k)
-			{
-				changes.push_back (newData.changes[k]);
-				changedPathTypes.push_back (newData.changedPathTypes[k]);
-				changedPaths.push_back (*pathIDMapping.find (newData.changedPaths[k]));
-			}
+            index_t sourceIndex = iter->value;
+            for (index_t k = newData.changesOffsets [sourceIndex]
+                             , last = newData.changesOffsets [sourceIndex+1]
+                                      ; k != last
+                    ; ++k)
+            {
+                changes.push_back (newData.changes[k]);
+                changedPathTypes.push_back (newData.changedPathTypes[k]);
+                changedPaths.push_back (*pathIDMapping.find (newData.changedPaths[k]));
+            }
 
-			for ( index_t k = newData.copyFromOffsets [sourceIndex]
-				, last = newData.copyFromOffsets [sourceIndex+1]
-				; k != last
-				; ++k)
-			{
-				copyFromRevisions.push_back (newData.copyFromRevisions[k]);
-				copyFromPaths.push_back (*pathIDMapping.find (newData.copyFromPaths[k]));
-			}
+            for (index_t k = newData.copyFromOffsets [sourceIndex]
+                             , last = newData.copyFromOffsets [sourceIndex+1]
+                                      ; k != last
+                    ; ++k)
+            {
+                copyFromRevisions.push_back (newData.copyFromRevisions[k]);
+                copyFromPaths.push_back (*pathIDMapping.find (newData.copyFromPaths[k]));
+            }
 
             rootPaths[i] = *pathIDMapping.find (newData.rootPaths[sourceIndex]);
-			sumChanges[i] = newData.sumChanges[sourceIndex];
-		}
-		else
-		{
-			// keep existing data
+            sumChanges[i] = newData.sumChanges[sourceIndex];
+        }
+        else
+        {
+            // keep existing data
 
-		    index_t firstChange = changesOffsets[i];
-			index_t lastChange = changesOffsets[i+1];
+            index_t firstChange = changesOffsets[i];
+            index_t lastChange = changesOffsets[i+1];
 
-		    index_t firstCopy = copyFromOffsets[i];
-			index_t lastCopy = copyFromOffsets[i+1];
+            index_t firstCopy = copyFromOffsets[i];
+            index_t lastCopy = copyFromOffsets[i+1];
 
-			// standard per-path info
+            // standard per-path info
 
-			changes.insert ( changes.end()
-						   , oldChanges.begin() + firstChange
-						   , oldChanges.begin() + lastChange);
-			changedPathTypes.insert ( changedPathTypes.end()
-						            , oldChangedPathTypes.begin() + firstChange
-						            , oldChangedPathTypes.begin() + lastChange);
-			changedPaths.insert ( changedPaths.end()
-								, oldChangedPaths.begin() + firstChange
-								, oldChangedPaths.begin() + lastChange);
+            changes.insert (changes.end()
+                            , oldChanges.begin() + firstChange
+                            , oldChanges.begin() + lastChange);
+            changedPathTypes.insert (changedPathTypes.end()
+                                     , oldChangedPathTypes.begin() + firstChange
+                                     , oldChangedPathTypes.begin() + lastChange);
+            changedPaths.insert (changedPaths.end()
+                                 , oldChangedPaths.begin() + firstChange
+                                 , oldChangedPaths.begin() + lastChange);
 
-			// copy-from info, if available
+            // copy-from info, if available
 
-			if (firstCopy != lastCopy)
-			{
-				copyFromPaths.insert ( copyFromPaths.end()
-								     , oldCopyFromPaths.begin() + firstCopy
-								     , oldCopyFromPaths.begin() + lastCopy);
-				copyFromRevisions.insert ( copyFromRevisions.end()
-										 , oldCopyFromRevisions.begin() + firstCopy
-										 , oldCopyFromRevisions.begin() + lastCopy);
-			}
-		}
+            if (firstCopy != lastCopy)
+            {
+                copyFromPaths.insert (copyFromPaths.end()
+                                      , oldCopyFromPaths.begin() + firstCopy
+                                      , oldCopyFromPaths.begin() + lastCopy);
+                copyFromRevisions.insert (copyFromRevisions.end()
+                                          , oldCopyFromRevisions.begin() + firstCopy
+                                          , oldCopyFromRevisions.begin() + lastCopy);
+            }
+        }
 
-		// update positions
+        // update positions
 
-		changesOffsets[i+1] = static_cast<index_t>(changes.size());
-		copyFromOffsets[i+1] = static_cast<index_t>(copyFromPaths.size());
-	}
+        changesOffsets[i+1] = static_cast<index_t> (changes.size());
+        copyFromOffsets[i+1] = static_cast<index_t> (copyFromPaths.size());
+    }
 }
 
-void CRevisionInfoContainer::UpdateMergers 
-	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap
-	, const index_mapping_t& pathIDMapping
+void CRevisionInfoContainer::UpdateMergers
+    ( const CRevisionInfoContainer& newData
+    , const index_mapping_t& indexMap
+    , const index_mapping_t& pathIDMapping
     , bool keepOldDataForMissingNew)
 {
-	// save & remove old data
+    // save & remove old data
 
-	std::vector<index_t> oldMergedFromPaths;
-	mergedFromPaths.swap (oldMergedFromPaths);
-	mergedFromPaths.reserve (oldMergedFromPaths.size());
+    std::vector<index_t> oldMergedFromPaths;
+    mergedFromPaths.swap (oldMergedFromPaths);
+    mergedFromPaths.reserve (oldMergedFromPaths.size());
 
-	std::vector<index_t> oldMergedToPaths;
-	mergedToPaths.swap (oldMergedToPaths);
-	mergedToPaths.reserve (oldMergedToPaths.size());
+    std::vector<index_t> oldMergedToPaths;
+    mergedToPaths.swap (oldMergedToPaths);
+    mergedToPaths.reserve (oldMergedToPaths.size());
 
-	std::vector<revision_t> oldMergedRangeStarts;
-	mergedRangeStarts.swap (oldMergedRangeStarts);
-	mergedRangeStarts.reserve (oldMergedRangeStarts.size());
+    std::vector<revision_t> oldMergedRangeStarts;
+    mergedRangeStarts.swap (oldMergedRangeStarts);
+    mergedRangeStarts.reserve (oldMergedRangeStarts.size());
 
-	std::vector<revision_t> oldMergedRangeDeltas;
-	mergedRangeDeltas.swap (oldMergedRangeDeltas);
-	mergedRangeDeltas.reserve (oldMergedRangeDeltas.size());
+    std::vector<revision_t> oldMergedRangeDeltas;
+    mergedRangeDeltas.swap (oldMergedRangeDeltas);
+    mergedRangeDeltas.reserve (oldMergedRangeDeltas.size());
 
     // the container sizes must match
 
-    assert (mergedRevisionsOffsets.size() == size()+1);
+    assert (mergedRevisionsOffsets.size() == size() +1);
 
-	// splice
+    // splice
 
-	index_mapping_t::const_iterator mapEnd = indexMap.end();
-	for (index_t i = 0, count = size(); i < count; ++i)
-	{
-		index_mapping_t::const_iterator iter = indexMap.find (i);
-		if ((iter != mapEnd)
-            && (   !keepOldDataForMissingNew 
-                || (newData.presenceFlags[iter->value] & HAS_MERGEINFO)))
-		{
-			// copy & translate
+    index_mapping_t::const_iterator mapEnd = indexMap.end();
+    for (index_t i = 0, count = size(); i < count; ++i)
+    {
+        index_mapping_t::const_iterator iter = indexMap.find (i);
+        if ( (iter != mapEnd)
+                && (!keepOldDataForMissingNew
+                    || (newData.presenceFlags[iter->value] & HAS_MERGEINFO)))
+        {
+            // copy & translate
 
-			index_t sourceIndex = iter->value;
-			for ( index_t k = newData.mergedRevisionsOffsets [sourceIndex]
-				, last = newData.mergedRevisionsOffsets [sourceIndex+1]
-				; k != last
-				; ++k)
-			{
-				mergedFromPaths.push_back (*pathIDMapping.find (newData.mergedFromPaths[k]));
-				mergedToPaths.push_back (*pathIDMapping.find (newData.mergedToPaths[k]));
+            index_t sourceIndex = iter->value;
+            for (index_t k = newData.mergedRevisionsOffsets [sourceIndex]
+                             , last = newData.mergedRevisionsOffsets [sourceIndex+1]
+                                      ; k != last
+                    ; ++k)
+            {
+                mergedFromPaths.push_back (*pathIDMapping.find (newData.mergedFromPaths[k]));
+                mergedToPaths.push_back (*pathIDMapping.find (newData.mergedToPaths[k]));
 
-				mergedRangeStarts.push_back (newData.mergedRangeStarts[k]);
-				mergedRangeDeltas.push_back (newData.mergedRangeDeltas[k]);
-			}
-		}
-		else
-		{
-			// keep existing data
+                mergedRangeStarts.push_back (newData.mergedRangeStarts[k]);
+                mergedRangeDeltas.push_back (newData.mergedRangeDeltas[k]);
+            }
+        }
+        else
+        {
+            // keep existing data
 
             index_t firstMerge = mergedRevisionsOffsets[i];
-		    index_t lastMerge = mergedRevisionsOffsets[i+1];
+            index_t lastMerge = mergedRevisionsOffsets[i+1];
 
-			mergedFromPaths.insert ( mergedFromPaths.end()
-								   , oldMergedFromPaths.begin() + firstMerge
-								   , oldMergedFromPaths.begin() + lastMerge);
-			mergedToPaths.insert ( mergedToPaths.end()
-								 , oldMergedToPaths.begin() + firstMerge
-								 , oldMergedToPaths.begin() + lastMerge);
-			mergedRangeStarts.insert ( mergedRangeStarts.end()
-									 , oldMergedRangeStarts.begin() + firstMerge
-									 , oldMergedRangeStarts.begin() + lastMerge);
-			mergedRangeDeltas.insert ( mergedRangeDeltas.end()
-									 , oldMergedRangeDeltas.begin() + firstMerge
-									 , oldMergedRangeDeltas.begin() + lastMerge);
-		}
+            mergedFromPaths.insert (mergedFromPaths.end()
+                                    , oldMergedFromPaths.begin() + firstMerge
+                                    , oldMergedFromPaths.begin() + lastMerge);
+            mergedToPaths.insert (mergedToPaths.end()
+                                  , oldMergedToPaths.begin() + firstMerge
+                                  , oldMergedToPaths.begin() + lastMerge);
+            mergedRangeStarts.insert (mergedRangeStarts.end()
+                                      , oldMergedRangeStarts.begin() + firstMerge
+                                      , oldMergedRangeStarts.begin() + lastMerge);
+            mergedRangeDeltas.insert (mergedRangeDeltas.end()
+                                      , oldMergedRangeDeltas.begin() + firstMerge
+                                      , oldMergedRangeDeltas.begin() + lastMerge);
+        }
 
-		// update positions
+        // update positions
 
-		mergedRevisionsOffsets[i+1] = static_cast<index_t>(mergedFromPaths.size());
-	}
+        mergedRevisionsOffsets[i+1] = static_cast<index_t> (mergedFromPaths.size());
+    }
 }
 
-void CRevisionInfoContainer::UpdateUserRevProps 
-	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap
+void CRevisionInfoContainer::UpdateUserRevProps
+    ( const CRevisionInfoContainer& newData
+    , const index_mapping_t& indexMap
     , bool keepOldDataForMissingNew)
 {
-	index_mapping_t propIDMapping 
-        = userRevPropsPool.Merge (newData.userRevPropsPool);
+    index_mapping_t propIDMapping
+    = userRevPropsPool.Merge (newData.userRevPropsPool);
 
     index_mapping_t oldValueMapping;
     index_mapping_t newValueMapping;
 
-	// save & remove old data
+    // save & remove old data
 
     std::vector<index_t> oldUserRevPropNames;
-	userRevPropNames.swap (oldUserRevPropNames);
-	userRevPropNames.reserve (oldUserRevPropNames.size());
+    userRevPropNames.swap (oldUserRevPropNames);
+    userRevPropNames.reserve (oldUserRevPropNames.size());
 
     CTokenizedStringContainer oldUserRevPropValues;
-	userRevPropValues.swap (oldUserRevPropValues);
+    userRevPropValues.swap (oldUserRevPropValues);
 
     static const std::string emptyValue;
-    userRevPropValues.Insert (emptyValue,  userRevPropValues.size() 
-                                         + newData.userRevPropValues.size());
+    userRevPropValues.Insert (emptyValue,  userRevPropValues.size()
+                              + newData.userRevPropValues.size());
 
     // the container sizes must match
 
-    assert (userRevPropOffsets.size() == size()+1);
+    assert (userRevPropOffsets.size() == size() +1);
 
-	// splice
+    // splice
 
     index_t valueIndex = 0;
 
-	index_mapping_t::const_iterator mapEnd = indexMap.end();
-	for (index_t i = 0, count = size(); i < count; ++i)
-	{
-		index_mapping_t::const_iterator iter = indexMap.find (i);
-		if ((iter != mapEnd)
-            && (   !keepOldDataForMissingNew 
-                || (newData.presenceFlags[iter->value] & HAS_USERREVPROPS)))
-		{
-			// copy & translate
+    index_mapping_t::const_iterator mapEnd = indexMap.end();
+    for (index_t i = 0, count = size(); i < count; ++i)
+    {
+        index_mapping_t::const_iterator iter = indexMap.find (i);
+        if ( (iter != mapEnd)
+                && (!keepOldDataForMissingNew
+                    || (newData.presenceFlags[iter->value] & HAS_USERREVPROPS)))
+        {
+            // copy & translate
 
-			if ( newData.userRevPropNames.size() )
-			{
-				index_t sourceIndex = iter->value;
-				for ( index_t k = newData.userRevPropOffsets [sourceIndex]
-					, last = newData.userRevPropOffsets [sourceIndex+1]
-					; k != last
-					; ++k)
-				{
-					userRevPropNames.push_back (*propIDMapping.find (newData.userRevPropNames [k]));
-					newValueMapping.insert (valueIndex++, k);
-				}
-			}
-		}
-		else
-		{
-			// keep existing data
+            if (newData.userRevPropNames.size())
+            {
+                index_t sourceIndex = iter->value;
+                for (index_t k = newData.userRevPropOffsets [sourceIndex]
+                                 , last = newData.userRevPropOffsets [sourceIndex+1]
+                                          ; k != last
+                        ; ++k)
+                {
+                    userRevPropNames.push_back (*propIDMapping.find (newData.userRevPropNames [k]));
+                    newValueMapping.insert (valueIndex++, k);
+                }
+            }
+        }
+        else
+        {
+            // keep existing data
 
             index_t firstProp = userRevPropOffsets[i];
-		    index_t lastProp = userRevPropOffsets[i+1];
+            index_t lastProp = userRevPropOffsets[i+1];
 
-			userRevPropNames.insert ( userRevPropNames.end()
-								    , oldUserRevPropNames.begin() + firstProp
-								    , oldUserRevPropNames.begin() + lastProp);
+            userRevPropNames.insert (userRevPropNames.end()
+                                     , oldUserRevPropNames.begin() + firstProp
+                                     , oldUserRevPropNames.begin() + lastProp);
 
             for (index_t k = firstProp; k != lastProp; ++k)
                 oldValueMapping.insert (valueIndex++, k);
-		}
+        }
 
-		// update positions
+        // update positions
 
-		userRevPropOffsets[i+1] = static_cast<index_t>(userRevPropNames.size());
-	}
+        userRevPropOffsets[i+1] = static_cast<index_t> (userRevPropNames.size());
+    }
 
     // actually write the combined rev prop values
 
@@ -358,16 +358,16 @@ void CRevisionInfoContainer::UpdateUserRevProps
 }
 
 void CRevisionInfoContainer::UpdatePresenceFlags
-	( const CRevisionInfoContainer& newData
-	, const index_mapping_t& indexMap
+    ( const CRevisionInfoContainer& newData
+    , const index_mapping_t& indexMap
     , char flags
     , bool keepOldDataForMissingNew)
 {
-	for ( index_mapping_t::const_iterator iter = indexMap.begin()
-		, end = indexMap.end()
-		; iter != end
-		; ++iter)
-	{
+    for ( index_mapping_t::const_iterator iter = indexMap.begin()
+        , end = indexMap.end()
+        ; iter != end
+        ; ++iter)
+    {
         // values that have been copied
 
         char setValues = newData.presenceFlags[iter->value] & flags;
@@ -375,42 +375,42 @@ void CRevisionInfoContainer::UpdatePresenceFlags
         if (keepOldDataForMissingNew)
             presenceFlags[iter->key] |= setValues;
         else
-            presenceFlags[iter->key] = (presenceFlags[iter->key] & ~flags) 
-                                     | setValues;
+            presenceFlags[iter->key] = (presenceFlags[iter->key] & ~flags)
+                                       | setValues;
     }
 }
 
-void CRevisionInfoContainer::AppendNewEntries 
-	(const index_mapping_t& indexMap)
+void CRevisionInfoContainer::AppendNewEntries
+(const index_mapping_t& indexMap)
 {
     // count the number of new entries required
 
-	size_t oldCount = size();
+    size_t oldCount = size();
     size_t toAppend = 0;
 
-	for ( index_mapping_t::const_iterator iter = indexMap.begin()
-		, end = indexMap.end()
-		; iter != end
-		; ++iter)
-	{
-		if (iter->key >= oldCount)
+    for ( index_mapping_t::const_iterator iter = indexMap.begin()
+        , end = indexMap.end()
+        ; iter != end
+        ; ++iter)
+    {
+        if (iter->key >= oldCount)
             ++toAppend;
     }
 
     // append new entries
 
     if (toAppend > 0)
-	{
+    {
         // append a new revision info (no info available)
 
-        authors.insert (authors.end(), toAppend, (index_t)NO_INDEX);
+        authors.insert (authors.end(), toAppend, (index_t) NO_INDEX);
         timeStamps.insert (timeStamps.end(), toAppend, 0);
         presenceFlags.insert (presenceFlags.end(), toAppend, 0);
-        rootPaths.insert (rootPaths.end(), toAppend, (index_t)NO_INDEX);
+        rootPaths.insert (rootPaths.end(), toAppend, (index_t) NO_INDEX);
         sumChanges.insert (sumChanges.end(), toAppend, 0);
 
         static const std::string emptyComment;
-    	comments.Insert (emptyComment, toAppend);
+        comments.Insert (emptyComment, toAppend);
 
         // all changes, revprops and merge info is empty as well
 
@@ -418,180 +418,187 @@ void CRevisionInfoContainer::AppendNewEntries
         copyFromOffsets.insert (copyFromOffsets.end(), toAppend, *copyFromOffsets.rbegin());
         mergedRevisionsOffsets.insert (mergedRevisionsOffsets.end(), toAppend, *mergedRevisionsOffsets.rbegin());
         userRevPropOffsets.insert (userRevPropOffsets.end(), toAppend, *userRevPropOffsets.rbegin());
-	}
+    }
 }
 
 // sort authors by frequency
 // (reduces average diff between authors -> less disk space
 // and clusters author access -> cache friendly)
 
+namespace
+{
+
+    struct SPerAuthorInfo
+    {
+        index_t frequency;
+        index_t author;
+
+        SPerAuthorInfo (index_t author)
+            : frequency (0)
+            , author (author)
+        {
+        }
+
+        bool operator< (const SPerAuthorInfo& rhs) const
+        {
+            return (frequency > rhs.frequency)
+                   || ( (frequency == rhs.frequency)
+                        && (author < rhs.author));
+        }
+    };
+}
+
 void CRevisionInfoContainer::OptimizeAuthors()
 {
-	struct SPerAuthorInfo
-	{
-		index_t frequency;
-		index_t author;
+    // initialize the counter array: counter[author].author == author
 
-		SPerAuthorInfo (index_t author)
-			: frequency (0)
-			, author (author)
-		{
-		}
+    std::vector<SPerAuthorInfo> counter;
+    counter.reserve (authorPool.size());
 
-		bool operator<(const SPerAuthorInfo& rhs) const
-		{
-			return (frequency > rhs.frequency)
-				|| (   (frequency == rhs.frequency) 
-				    && (author < rhs.author));
-		}
-	};
+    for (index_t i = 0, count = authorPool.size(); i < count; ++i)
+        counter.push_back (i);
 
-	// initialize the counter array: counter[author].author == author
+    // count occurrences
 
-	std::vector<SPerAuthorInfo> counter;
-	counter.reserve (authorPool.size());
+    for ( std::vector<index_t>::const_iterator iter = authors.begin()
+        , end = authors.end()
+        ; iter != end
+        ; ++iter)
+    {
+        ++counter[*iter].frequency;
+    }
 
-	for (index_t i = 0, count = authorPool.size(); i < count; ++i)
-		counter.push_back (i);
+    // sort by frequency and "age", but keep empty string untouched
 
-	// count occurrences
+    std::sort (++counter.begin(), counter.end());
 
-	for ( std::vector<index_t>::const_iterator iter = authors.begin()
-		, end = authors.end()
-		; iter != end
-		; ++iter)
-	{
-		++counter[*iter].frequency;
-	}
+    // re-arrange authors according to this new order
 
-	// sort by frequency and "age", but keep empty string untouched
+    std::vector<index_t> indices;
+    indices.reserve (authorPool.size());
 
-	std::sort (++counter.begin(), counter.end());
+    for (index_t i = 0, count = authorPool.size(); i < count; ++i)
+        indices.push_back (counter[i].author);
 
-	// re-arrange authors according to this new order
+    authorPool.Reorder (indices);
 
-	std::vector<index_t> indices;
-	indices.reserve (authorPool.size());
+    // re-map the author indices
 
-	for (index_t i = 0, count = authorPool.size(); i < count; ++i)
-		indices.push_back (counter[i].author);
+    for (index_t i = 0, count = authorPool.size(); i < count; ++i)
+        indices [counter[i].author] = i;
 
-	authorPool.Reorder (indices);
-
-	// re-map the author indices
-
-	for (index_t i = 0, count = authorPool.size(); i < count; ++i)
-		indices [counter[i].author] = i;
-
-	for ( std::vector<index_t>::iterator iter = authors.begin()
-		, end = authors.end()
-		; iter != end
-		; ++iter)
-	{
-		*iter = indices[*iter];
-	}
+    for (std::vector<index_t>::iterator iter = authors.begin()
+            , end = authors.end()
+                    ; iter != end
+            ; ++iter)
+    {
+        *iter = indices[*iter];
+    }
 }
 
 // sort changes by pathID; parent change still before leave change
 // (reduces average diff between changes -> less disk space
 // and sorts path access patterns -> cache friendly)
 
+namespace
+{
+    struct SPerChangeInfo
+    {
+        index_t changedPath;
+        svn_node_kind_t changedPathType;
+        unsigned char change;
+        index_t copyFromPath;
+        revision_t copyFromRevision;
+
+        SPerChangeInfo (const CRevisionInfoContainer::CChangesIterator& iter)
+            : changedPath (iter->GetPathID())
+            , changedPathType (iter->GetPathType())
+            , change ( (unsigned char) iter->GetRawChange())
+        {
+            if (iter->HasFromPath())
+            {
+                copyFromPath = iter->GetFromPathID();
+                copyFromRevision = iter->GetFromRevision();
+            }
+        }
+
+        bool operator< (const SPerChangeInfo& rhs) const
+        {
+            // report deletes of a given path *before* any other change
+            // (probably an "add") to this path
+
+            return (changedPath < rhs.changedPath)
+                   || ( (changedPath == rhs.changedPath)
+                        && (change > rhs.change));
+        }
+    };
+}
+
 void CRevisionInfoContainer::OptimizeChangeOrder()
 {
-	struct SPerChangeInfo
-	{
-		index_t changedPath;
-        svn_node_kind_t changedPathType;
-		unsigned char change;
-		index_t copyFromPath;
-		revision_t copyFromRevision;
+    std::vector<SPerChangeInfo> revisionChanges;
+    for (index_t index = 0, count = size(); index < count; ++index)
+    {
+        // collect all changes of this revision
 
-		SPerChangeInfo (const CRevisionInfoContainer::CChangesIterator& iter)
-			: changedPath (iter->GetPathID())
-            , changedPathType (iter->GetPathType())
-			, change ((unsigned char)iter->GetRawChange())
-		{
-			if (iter->HasFromPath())
-			{
-				copyFromPath = iter->GetFromPathID();
-				copyFromRevision = iter->GetFromRevision();
-			}
-		}
+        revisionChanges.clear();
 
-		bool operator<(const SPerChangeInfo& rhs) const
-		{
-			// report deletes of a given path *before* any other change
-			// (probably an "add") to this path
+        for (CChangesIterator iter = GetChangesBegin (index)
+                                     , end = GetChangesEnd (index)
+                                             ; iter != end
+                ; ++iter)
+        {
+            revisionChanges.push_back (iter);
+        }
 
-			return (changedPath < rhs.changedPath)
-				|| (   (changedPath == rhs.changedPath) 
-				    && (change > rhs.change));
-		}
-	};
+        // sort them by path
 
-	std::vector<SPerChangeInfo> revisionChanges;
-	for (index_t index = 0, count = size(); index < count; ++index)
-	{
-		// collect all changes of this revision
+        std::sort (revisionChanges.begin(), revisionChanges.end());
 
-		revisionChanges.clear();
+        // overwrite old data with new ordering
 
-		for ( CChangesIterator iter = GetChangesBegin (index)
-			, end = GetChangesEnd (index)
-			; iter != end
-			; ++iter)
-		{
-			revisionChanges.push_back (iter);
-		}
+        index_t changeOffset = changesOffsets[index];
+        index_t copyFromOffset = copyFromOffsets[index];
 
-		// sort them by path
+        for (std::vector<SPerChangeInfo>::iterator iter = revisionChanges.begin()
+                , end = revisionChanges.end()
+                        ; iter != end
+                ; ++iter)
+        {
+            changedPaths[changeOffset] = iter->changedPath;
+            changedPathTypes[changeOffset] = iter->changedPathType;
+            changes[changeOffset] = iter->change;
+            ++changeOffset;
 
-		std::sort (revisionChanges.begin(), revisionChanges.end());
+            if (iter->change & HAS_COPY_FROM)
+            {
+                copyFromPaths[copyFromOffset] = iter->copyFromPath;
+                copyFromRevisions[copyFromOffset] = iter->copyFromRevision;
+                ++copyFromOffset;
+            }
+        }
 
-		// overwrite old data with new ordering
+        // we must have used the exact same memory
 
-		index_t changeOffset = changesOffsets[index];
-		index_t copyFromOffset = copyFromOffsets[index];
-
-		for ( std::vector<SPerChangeInfo>::iterator iter = revisionChanges.begin()
-			, end = revisionChanges.end()
-			; iter != end
-			; ++iter)
-		{
-			changedPaths[changeOffset] = iter->changedPath;
-			changedPathTypes[changeOffset] = iter->changedPathType;
-			changes[changeOffset] = iter->change;
-			++changeOffset;
-
-			if (iter->change & HAS_COPY_FROM)
-			{
-				copyFromPaths[copyFromOffset] = iter->copyFromPath;
-				copyFromRevisions[copyFromOffset] = iter->copyFromRevision;
-				++copyFromOffset;
-			}
-		}
-
-		// we must have used the exact same memory
-
-		assert (changeOffset == changesOffsets[index+1]);
-		assert (copyFromOffset == copyFromOffsets[index+1]);
-	}
+        assert (changeOffset == changesOffsets[index+1]);
+        assert (copyFromOffset == copyFromOffsets[index+1]);
+    }
 }
 
 // construction / destruction
 
-CRevisionInfoContainer::CRevisionInfoContainer(void)
-	: storedSize (0)
+CRevisionInfoContainer::CRevisionInfoContainer (void)
+    : storedSize (0)
 {
-	// [lastIndex+1] must point to [size()]
+    // [lastIndex+1] must point to [size()]
 
-	changesOffsets.push_back(0);
-	copyFromOffsets.push_back(0);
-	mergedRevisionsOffsets.push_back(0);
-    userRevPropOffsets.push_back(0);
+    changesOffsets.push_back (0);
+    copyFromOffsets.push_back (0);
+    mergedRevisionsOffsets.push_back (0);
+    userRevPropOffsets.push_back (0);
 }
 
-CRevisionInfoContainer::~CRevisionInfoContainer(void)
+CRevisionInfoContainer::~CRevisionInfoContainer (void)
 {
 }
 
@@ -599,145 +606,145 @@ CRevisionInfoContainer::~CRevisionInfoContainer(void)
 // AddChange() always adds to the last revision
 
 index_t CRevisionInfoContainer::Insert ( const std::string& author
-									   , const std::string& comment
-									   , __time64_t timeStamp
+                                       , const std::string& comment
+                                       , __time64_t timeStamp
                                        , char flags)
 {
-	// this should newer throw as there are usually more
-	// changes than revisions. But you never know ...
+    // this should newer throw as there are usually more
+    // changes than revisions. But you never know ...
 
-	if (authors.size() == NO_INDEX)
-		throw std::exception ("revision container overflow");
+    if (authors.size() == NO_INDEX)
+        throw CContainerException ("revision container overflow");
 
-	// store the given revision info
+    // store the given revision info
 
-	authors.push_back (authorPool.AutoInsert (author.c_str()));
-	timeStamps.push_back (timeStamp);
-	comments.Insert (comment);
-	presenceFlags.push_back (flags);
+    authors.push_back (authorPool.AutoInsert (author.c_str()));
+    timeStamps.push_back (timeStamp);
+    comments.Insert (comment);
+    presenceFlags.push_back (flags);
 
-	// no changes yet -> no common root path info
+    // no changes yet -> no common root path info
 
-	rootPaths.push_back ((index_t)NO_INDEX);
-	sumChanges.push_back (0);
+    rootPaths.push_back ( (index_t) NO_INDEX);
+    sumChanges.push_back (0);
 
-	// empty range for changes 
+    // empty range for changes
 
-	changesOffsets.push_back (*changesOffsets.rbegin());
-	copyFromOffsets.push_back (*copyFromOffsets.rbegin());
-	mergedRevisionsOffsets.push_back (*mergedRevisionsOffsets.rbegin());
+    changesOffsets.push_back (*changesOffsets.rbegin());
+    copyFromOffsets.push_back (*copyFromOffsets.rbegin());
+    mergedRevisionsOffsets.push_back (*mergedRevisionsOffsets.rbegin());
     userRevPropOffsets.push_back (*userRevPropOffsets.rbegin());
 
-	// ready
+    // ready
 
-	return size()-1;
+    return size()-1;
 }
 
 void CRevisionInfoContainer::AddChange ( TChangeAction action
                                        , svn_node_kind_t pathType
-									   , const std::string& path
-									   , const std::string& fromPath
-									   , revision_t fromRevision)
+                                       , const std::string& path
+                                       , const std::string& fromPath
+                                       , revision_t fromRevision)
 {
     assert (*presenceFlags.rbegin() & HAS_CHANGEDPATHS);
 
     // under x64, there might actually be an overflow
 
-	if (changes.size() == NO_INDEX)
-		throw std::exception ("revision container change list overflow");
+    if (changes.size() == NO_INDEX)
+        throw CContainerException ("revision container change list overflow");
 
-	// another change
+    // another change
 
-	++(*changesOffsets.rbegin());
+    ++ (*changesOffsets.rbegin());
 
-	// add change path index and update the root path 
-	// of all changes in this revision
+    // add change path index and update the root path
+    // of all changes in this revision
 
-	CDictionaryBasedPath parsedPath (&paths, path, false);
-	changedPaths.push_back (parsedPath.GetIndex());
+    CDictionaryBasedPath parsedPath (&paths, path, false);
+    changedPaths.push_back (parsedPath.GetIndex());
 
-	index_t& rootPathIndex = *rootPaths.rbegin();
-	rootPathIndex = rootPathIndex == NO_INDEX
-				  ? parsedPath.GetIndex()
-				  : parsedPath.GetCommonRoot (rootPathIndex).GetIndex();
+    index_t& rootPathIndex = *rootPaths.rbegin();
+    rootPathIndex = rootPathIndex == NO_INDEX
+                    ? parsedPath.GetIndex()
+                    : parsedPath.GetCommonRoot (rootPathIndex).GetIndex();
 
     // store the node kind as well
 
-  	changedPathTypes.push_back (pathType);
+    changedPathTypes.push_back (pathType);
 
-	// add changes info (flags), and indicate presence of fromPath (if given)
+    // add changes info (flags), and indicate presence of fromPath (if given)
 
     char flags = fromPath.empty()
-        ? (char)action 
-        : (char)action | HAS_COPY_FROM;
+                 ? (char) action
+                 : (char) action | HAS_COPY_FROM;
 
-	*sumChanges.rbegin() |= flags;
-	changes.push_back (flags);
+    *sumChanges.rbegin() |= flags;
+    changes.push_back (flags);
 
-	if (!fromPath.empty())
-	{
-		// add fromPath info
+    if (!fromPath.empty())
+    {
+        // add fromPath info
 
-		CDictionaryBasedPath parsedFromPath (&paths, fromPath, false);
-		copyFromPaths.push_back (parsedFromPath.GetIndex());
-		copyFromRevisions.push_back (fromRevision);
+        CDictionaryBasedPath parsedFromPath (&paths, fromPath, false);
+        copyFromPaths.push_back (parsedFromPath.GetIndex());
+        copyFromRevisions.push_back (fromRevision);
 
-		++(*copyFromOffsets.rbegin());
-	}
+        ++ (*copyFromOffsets.rbegin());
+    }
 
 }
 
 void CRevisionInfoContainer::AddMergedRevision ( const std::string& fromPath
-											   , const std::string& toPath
-											   , revision_t revisionStart
-											   , revision_t revisionDelta)
+                                               , const std::string& toPath
+                                               , revision_t revisionStart
+                                               , revision_t revisionDelta)
 {
-	assert (revisionDelta != 0);
+    assert (revisionDelta != 0);
     assert (*presenceFlags.rbegin() & HAS_MERGEINFO);
 
-	// under x64, there might actually be an overflow
+    // under x64, there might actually be an overflow
 
-	if (mergedRangeStarts.size() == NO_INDEX)
-		throw std::exception ("revision container change list overflow");
+    if (mergedRangeStarts.size() == NO_INDEX)
+        throw CContainerException ("revision container change list overflow");
 
-	// another merge
+    // another merge
 
-	++(*mergedRevisionsOffsets.rbegin());
+    ++ (*mergedRevisionsOffsets.rbegin());
 
-	// add merged revision range and path info
+    // add merged revision range and path info
 
-	CDictionaryBasedPath parsedFromPath (&paths, fromPath, false);
-	mergedFromPaths.push_back (parsedFromPath.GetIndex());
-	CDictionaryBasedPath parsedToPath (&paths, toPath, false);
-	mergedToPaths.push_back (parsedToPath.GetIndex());
+    CDictionaryBasedPath parsedFromPath (&paths, fromPath, false);
+    mergedFromPaths.push_back (parsedFromPath.GetIndex());
+    CDictionaryBasedPath parsedToPath (&paths, toPath, false);
+    mergedToPaths.push_back (parsedToPath.GetIndex());
 
-	mergedRangeStarts.push_back (revisionStart);
-	mergedRangeDeltas.push_back (revisionDelta);
+    mergedRangeStarts.push_back (revisionStart);
+    mergedRangeDeltas.push_back (revisionDelta);
 }
 
-void CRevisionInfoContainer::AddUserRevProp ( const std::string& revProp
-	                        		        , const std::string& value)
+void CRevisionInfoContainer::AddUserRevProp (const std::string& revProp
+        , const std::string& value)
 {
     // store standard rev-props somewhere else!
 
-    assert (   (revProp != "svn:author") 
-            && (revProp != "svn:date")
-            && (revProp != "svn:log"));
+    assert (    (revProp != "svn:author")
+             && (revProp != "svn:date")
+             && (revProp != "svn:log"));
     assert (*presenceFlags.rbegin() & HAS_USERREVPROPS);
 
-	// under x64, there might actually be an overflow
+    // under x64, there might actually be an overflow
 
-	if (userRevPropNames.size() == NO_INDEX)
-		throw std::exception ("revision container change list overflow");
+    if (userRevPropNames.size() == NO_INDEX)
+        throw CContainerException ("revision container change list overflow");
 
-	// another revProp
+    // another revProp
 
-	++(*userRevPropOffsets.rbegin());
+    ++ (*userRevPropOffsets.rbegin());
 
-	// add (revPropName, value) pair
+    // add (revPropName, value) pair
 
-	userRevPropNames.push_back (userRevPropsPool.AutoInsert (revProp.c_str()));
-	userRevPropValues.Insert (value);
+    userRevPropNames.push_back (userRevPropsPool.AutoInsert (revProp.c_str()));
+    userRevPropValues.Insert (value);
 }
 
 
@@ -745,34 +752,34 @@ void CRevisionInfoContainer::AddUserRevProp ( const std::string& revProp
 
 void CRevisionInfoContainer::Clear()
 {
-	authorPool.Clear();
-	paths.Clear();
-	comments.Clear();
+    authorPool.Clear();
+    paths.Clear();
+    comments.Clear();
 
     presenceFlags.clear();
-	authors.clear();
-	timeStamps.clear();
+    authors.clear();
+    timeStamps.clear();
 
-	rootPaths.clear();
-	sumChanges.clear();
+    rootPaths.clear();
+    sumChanges.clear();
 
-	changesOffsets.erase (changesOffsets.begin()+1, changesOffsets.end());
-	copyFromOffsets.erase (copyFromOffsets.begin()+1, copyFromOffsets.end());
-	mergedRevisionsOffsets.erase (mergedRevisionsOffsets.begin()+1, mergedRevisionsOffsets.end());
-	userRevPropOffsets.erase (userRevPropOffsets.begin()+1, userRevPropOffsets.end());
+    changesOffsets.erase (changesOffsets.begin() +1, changesOffsets.end());
+    copyFromOffsets.erase (copyFromOffsets.begin() +1, copyFromOffsets.end());
+    mergedRevisionsOffsets.erase (mergedRevisionsOffsets.begin() +1, mergedRevisionsOffsets.end());
+    userRevPropOffsets.erase (userRevPropOffsets.begin() +1, userRevPropOffsets.end());
 
-	changes.clear();
-	changedPaths.clear();
-	changedPathTypes.clear();
-	copyFromPaths.clear();
-	copyFromRevisions.clear();
+    changes.clear();
+    changedPaths.clear();
+    changedPathTypes.clear();
+    copyFromPaths.clear();
+    copyFromRevisions.clear();
 
-	mergedFromPaths.clear();
-	mergedToPaths.clear();
-	mergedRangeStarts.clear();
-	mergedRangeDeltas.clear();
+    mergedFromPaths.clear();
+    mergedToPaths.clear();
+    mergedRangeStarts.clear();
+    mergedRangeDeltas.clear();
 
-	userRevPropsPool.Clear();
+    userRevPropsPool.Clear();
     userRevPropValues.Clear();
     userRevPropNames.clear();
 }
@@ -781,34 +788,34 @@ void CRevisionInfoContainer::Clear()
 // indexes must be in ascending order
 // indexes[] may be size() -> results in an Append()
 
-void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
-									, const index_mapping_t& indexMap
-                                    , char flags
-                                    , bool keepOldDataForMissingNew)
+void CRevisionInfoContainer::Update (const CRevisionInfoContainer& newData
+                                     , const index_mapping_t& indexMap
+                                     , char flags
+                                     , bool keepOldDataForMissingNew)
 {
-	// first, create new indices where necessary
+    // first, create new indices where necessary
 
-	AppendNewEntries (indexMap);
+    AppendNewEntries (indexMap);
 
     // make new paths available
 
-	index_mapping_t pathIDMapping = paths.Merge (newData.paths);
+    index_mapping_t pathIDMapping = paths.Merge (newData.paths);
 
-	// replace existing data
+    // replace existing data
 
-	if (flags & HAS_AUTHOR)
-		UpdateAuthors (newData, indexMap, keepOldDataForMissingNew);
-	if (flags & HAS_TIME_STAMP)
-		UpdateTimeStamps (newData, indexMap, keepOldDataForMissingNew);
-	if (flags & HAS_COMMENT)
-		UpdateComments (newData, indexMap, keepOldDataForMissingNew);
+    if (flags & HAS_AUTHOR)
+        UpdateAuthors (newData, indexMap, keepOldDataForMissingNew);
+    if (flags & HAS_TIME_STAMP)
+        UpdateTimeStamps (newData, indexMap, keepOldDataForMissingNew);
+    if (flags & HAS_COMMENT)
+        UpdateComments (newData, indexMap, keepOldDataForMissingNew);
 
-	if (flags & HAS_CHANGEDPATHS)
-		UpdateChanges (newData, indexMap, pathIDMapping, keepOldDataForMissingNew);
-	if (flags & HAS_MERGEINFO)
-		UpdateMergers (newData, indexMap, pathIDMapping, keepOldDataForMissingNew);
-	if (flags & HAS_USERREVPROPS)
-		UpdateUserRevProps (newData, indexMap, keepOldDataForMissingNew);
+    if (flags & HAS_CHANGEDPATHS)
+        UpdateChanges (newData, indexMap, pathIDMapping, keepOldDataForMissingNew);
+    if (flags & HAS_MERGEINFO)
+        UpdateMergers (newData, indexMap, pathIDMapping, keepOldDataForMissingNew);
+    if (flags & HAS_USERREVPROPS)
+        UpdateUserRevProps (newData, indexMap, keepOldDataForMissingNew);
 
     UpdatePresenceFlags (newData, indexMap, flags, keepOldDataForMissingNew);
 }
@@ -817,187 +824,187 @@ void CRevisionInfoContainer::Update ( const CRevisionInfoContainer& newData
 
 void CRevisionInfoContainer::Optimize()
 {
-	OptimizeAuthors();
-	OptimizeChangeOrder();
+    OptimizeAuthors();
+    OptimizeChangeOrder();
 }
 
 // AutoOptimize() will call Optimize() when size() crossed 2^n boundaries.
 
 void CRevisionInfoContainer::AutoOptimize()
 {
-	// bitwise XOR old and new size
+    // bitwise XOR old and new size
 
-	index_t currentSize = size();
-	index_t diffBits = currentSize ^ storedSize;
+    index_t currentSize = size();
+    index_t diffBits = currentSize ^ storedSize;
 
-	// if the position of highest bit set is equal (no 2^n boundary crossed),
-	// diffBits will have that bit reset -> smaller than both input values
+    // if the position of highest bit set is equal (no 2^n boundary crossed),
+    // diffBits will have that bit reset -> smaller than both input values
 
-	if ((currentSize <= diffBits) || (storedSize <= diffBits))
-	{
-		// shrink or growth cross a 2^n boundary
+    if ( (currentSize <= diffBits) || (storedSize <= diffBits))
+    {
+        // shrink or growth cross a 2^n boundary
 
-		Optimize();
-	}
+        Optimize();
+    }
 }
 
 // reconstruct derived data
 
 void CRevisionInfoContainer::CalculateSumChanges()
 {
-	// initialize all sums with "0"
+    // initialize all sums with "0"
 
-	sumChanges.clear();
-	sumChanges.resize (rootPaths.size());
+    sumChanges.clear();
+    sumChanges.resize (rootPaths.size());
 
-	if (changes.empty())
-		return;
+    if (changes.empty())
+        return;
 
-	// fold all changes 
-	// (hand-tuned code because vector iterators do expensive checking
-	//  ~6 ticks vs. ~20 ticks per change)
+    // fold all changes
+    // (hand-tuned code because vector iterators do expensive checking
+    //  ~6 ticks vs. ~20 ticks per change)
 
-	const index_t *iter = &changesOffsets.at(1);
-	unsigned char *target = &sumChanges.at(0);
-	const unsigned char *source = &changes.at(0);
+    const index_t *iter = &changesOffsets.at (1);
+    unsigned char *target = &sumChanges.at (0);
+    const unsigned char *source = &changes.at (0);
 
-	unsigned char sum = 0;
-	for (size_t i = 0, count = changes.size(); i < count; ++i)
-	{
-		while (*iter <= i)
-		{
-			*target = sum;
-			++iter;
-			++target;
-			sum = 0;
-		}
+    unsigned char sum = 0;
+    for (size_t i = 0, count = changes.size(); i < count; ++i)
+    {
+        while (*iter <= i)
+        {
+            *target = sum;
+            ++iter;
+            ++target;
+            sum = 0;
+        }
 
-		sum |= *(source+i);
-	}
+        sum |= * (source+i);
+    }
 
-	*target = sum;
+    *target = sum;
 }
 
 // stream I/O
 
-IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
-								  , CRevisionInfoContainer& container)
+IHierarchicalInStream& operator>> (IHierarchicalInStream& stream
+                                   , CRevisionInfoContainer& container)
 {
-	// read the pools
+    // read the pools
 
-	IHierarchicalInStream* authorPoolStream
-		= stream.GetSubStream (CRevisionInfoContainer::AUTHOR_POOL_STREAM_ID);
-	*authorPoolStream >> container.authorPool;
+    IHierarchicalInStream* authorPoolStream
+        = stream.GetSubStream (CRevisionInfoContainer::AUTHOR_POOL_STREAM_ID);
+    *authorPoolStream >> container.authorPool;
 
-	IHierarchicalInStream* commentsStream
-		= stream.GetSubStream (CRevisionInfoContainer::COMMENTS_STREAM_ID);
-	*commentsStream >> container.comments;
+    IHierarchicalInStream* commentsStream
+        = stream.GetSubStream (CRevisionInfoContainer::COMMENTS_STREAM_ID);
+    *commentsStream >> container.comments;
 
-	IHierarchicalInStream* pathsStream
-		= stream.GetSubStream (CRevisionInfoContainer::PATHS_STREAM_ID);
-	*pathsStream >> container.paths;
+    IHierarchicalInStream* pathsStream
+        = stream.GetSubStream (CRevisionInfoContainer::PATHS_STREAM_ID);
+    *pathsStream >> container.paths;
 
-	// read the revision info
+    // read the revision info
 
-	CDiffIntegerInStream* authorsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::AUTHORS_STREAM_ID));
-	*authorsStream >> container.authors;
+    CDiffIntegerInStream* authorsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::AUTHORS_STREAM_ID));
+    *authorsStream >> container.authors;
 
-	CPackedTime64InStream* timeStampsStream 
-		= dynamic_cast<CPackedTime64InStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::TIMESTAMPS_STREAM_ID));
-	*timeStampsStream >> container.timeStamps;
+    CPackedTime64InStream* timeStampsStream
+        = dynamic_cast<CPackedTime64InStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::TIMESTAMPS_STREAM_ID));
+    *timeStampsStream >> container.timeStamps;
 
-	CDiffIntegerInStream* rootPathsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::ROOTPATHS_STREAM_ID));
-	*rootPathsStream >> container.rootPaths;
+    CDiffIntegerInStream* rootPathsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::ROOTPATHS_STREAM_ID));
+    *rootPathsStream >> container.rootPaths;
 
-	CDiffDWORDInStream* changesOffsetsStream 
-		= dynamic_cast<CDiffDWORDInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::CHANGES_OFFSETS_STREAM_ID));
-	*changesOffsetsStream >> container.changesOffsets;
+    CDiffDWORDInStream* changesOffsetsStream
+        = dynamic_cast<CDiffDWORDInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::CHANGES_OFFSETS_STREAM_ID));
+    *changesOffsetsStream >> container.changesOffsets;
 
-	CDiffDWORDInStream* copyFromOffsetsStream 
-		= dynamic_cast<CDiffDWORDInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::COPYFROM_OFFSETS_STREAM_ID));
-	*copyFromOffsetsStream >> container.copyFromOffsets;
+    CDiffDWORDInStream* copyFromOffsetsStream
+        = dynamic_cast<CDiffDWORDInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::COPYFROM_OFFSETS_STREAM_ID));
+    *copyFromOffsetsStream >> container.copyFromOffsets;
 
-	CDiffDWORDInStream* mergedRevisionsOffsetsStream 
-		= dynamic_cast<CDiffDWORDInStream*>
-		(stream.GetSubStream (CRevisionInfoContainer::MERGEDREVISION_OFFSETS_STREAM_ID));
-	*mergedRevisionsOffsetsStream >> container.mergedRevisionsOffsets;
+    CDiffDWORDInStream* mergedRevisionsOffsetsStream
+        = dynamic_cast<CDiffDWORDInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::MERGEDREVISION_OFFSETS_STREAM_ID));
+    *mergedRevisionsOffsetsStream >> container.mergedRevisionsOffsets;
 
-	// read the changes info
+    // read the changes info
 
-	CPackedDWORDInStream* changesStream 
-		= dynamic_cast<CPackedDWORDInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::CHANGES_STREAM_ID));
-	*changesStream >> container.changes;
+    CPackedDWORDInStream* changesStream
+        = dynamic_cast<CPackedDWORDInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::CHANGES_STREAM_ID));
+    *changesStream >> container.changes;
 
-	CDiffIntegerInStream* changedPathsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::CHANGED_PATHS_STREAM_ID));
-	*changedPathsStream >> container.changedPaths;
+    CDiffIntegerInStream* changedPathsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::CHANGED_PATHS_STREAM_ID));
+    *changedPathsStream >> container.changedPaths;
 
-	CDiffIntegerInStream* copyFromPathsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::COPYFROM_PATHS_STREAM_ID));
-	*copyFromPathsStream >> container.copyFromPaths;
+    CDiffIntegerInStream* copyFromPathsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::COPYFROM_PATHS_STREAM_ID));
+    *copyFromPathsStream >> container.copyFromPaths;
 
-	CDiffIntegerInStream* copyFromRevisionsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::COPYFROM_REVISIONS_STREAM_ID));
-	*copyFromRevisionsStream >> container.copyFromRevisions;
+    CDiffIntegerInStream* copyFromRevisionsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::COPYFROM_REVISIONS_STREAM_ID));
+    *copyFromRevisionsStream >> container.copyFromRevisions;
 
-	// merged revisions
+    // merged revisions
 
-	CDiffIntegerInStream* mergedFromPathsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::MERGED_FROM_PATHS_STREAM_ID));
-	*mergedFromPathsStream >> container.mergedFromPaths;
+    CDiffIntegerInStream* mergedFromPathsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::MERGED_FROM_PATHS_STREAM_ID));
+    *mergedFromPathsStream >> container.mergedFromPaths;
 
-	CDiffIntegerInStream* mergedToPathsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::MERGED_TO_PATHS_STREAM_ID));
-	*mergedToPathsStream >> container.mergedToPaths;
+    CDiffIntegerInStream* mergedToPathsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::MERGED_TO_PATHS_STREAM_ID));
+    *mergedToPathsStream >> container.mergedToPaths;
 
-	CDiffIntegerInStream* mergedRangeStartsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::MERGED_RANGE_STARTS_STREAM_ID));
-	*mergedRangeStartsStream >> container.mergedRangeStarts;
+    CDiffIntegerInStream* mergedRangeStartsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::MERGED_RANGE_STARTS_STREAM_ID));
+    *mergedRangeStartsStream >> container.mergedRangeStarts;
 
-	CDiffIntegerInStream* mergedRangeDeltasStream
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID));
-	*mergedRangeDeltasStream >> container.mergedRangeDeltas;
+    CDiffIntegerInStream* mergedRangeDeltasStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID));
+    *mergedRangeDeltasStream >> container.mergedRangeDeltas;
 
     // user-defined revision properties
-    
-	CDiffIntegerInStream* userRevPropsOffsetsStream 
-		= dynamic_cast<CDiffIntegerInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_OFFSETS_STREAM_ID));
+
+    CDiffIntegerInStream* userRevPropsOffsetsStream
+        = dynamic_cast<CDiffIntegerInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_OFFSETS_STREAM_ID));
     *userRevPropsOffsetsStream >> container.userRevPropOffsets;
 
-	IHierarchicalInStream* userRevPropsPoolStream
-		= stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_POOL_STREAM_ID);
+    IHierarchicalInStream* userRevPropsPoolStream
+        = stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_POOL_STREAM_ID);
     *userRevPropsPoolStream >> container.userRevPropsPool;
 
-    CPackedDWORDInStream* userRevPropsNameStream 
-		= dynamic_cast<CPackedDWORDInStream*>
-			(stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_NAME_STREAM_ID));
+    CPackedDWORDInStream* userRevPropsNameStream
+        = dynamic_cast<CPackedDWORDInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_NAME_STREAM_ID));
     *userRevPropsNameStream >> container.userRevPropNames;
 
-	IHierarchicalInStream* userRevPropsValuesStream
-		= stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_VALUE_STREAM_ID);
+    IHierarchicalInStream* userRevPropsValuesStream
+        = stream.GetSubStream (CRevisionInfoContainer::USER_REVPROPS_VALUE_STREAM_ID);
     *userRevPropsValuesStream >> container.userRevPropValues;
 
     // data presence flags
 
-    CPackedDWORDInStream* dataPresenceStream 
-		= dynamic_cast<CPackedDWORDInStream*>
-			(stream.GetSubStream ( CRevisionInfoContainer::DATA_PRESENCE_STREAM_ID));
+    CPackedDWORDInStream* dataPresenceStream
+        = dynamic_cast<CPackedDWORDInStream*>
+            (stream.GetSubStream (CRevisionInfoContainer::DATA_PRESENCE_STREAM_ID));
     *dataPresenceStream >> container.presenceFlags;
 
     // latest additions:
@@ -1005,189 +1012,189 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
 
     if (stream.HasSubStream (CRevisionInfoContainer::CHANGED_PATHS_TYPES_STREAM_ID))
     {
-	    CDiffIntegerInStream* changedPathTypesStream 
-		    = dynamic_cast<CDiffIntegerInStream*>
-			    (stream.GetSubStream (CRevisionInfoContainer::CHANGED_PATHS_TYPES_STREAM_ID));
-	    *changedPathTypesStream >> container.changedPathTypes;
+        CDiffIntegerInStream* changedPathTypesStream
+            = dynamic_cast<CDiffIntegerInStream*>
+                (stream.GetSubStream (CRevisionInfoContainer::CHANGED_PATHS_TYPES_STREAM_ID));
+        *changedPathTypesStream >> container.changedPathTypes;
     }
     else
     {
         container.changedPathTypes.clear();
-        container.changedPathTypes.insert ( container.changedPathTypes.begin()
-                                          , container.changedPaths.size()
-                                          , svn_node_unknown);
+        container.changedPathTypes.insert (container.changedPathTypes.begin()
+                                           , container.changedPaths.size()
+                                           , svn_node_unknown);
     }
 
-	// update size info
+    // update size info
 
-	container.storedSize = container.size();
+    container.storedSize = container.size();
 
-	// reconstruct derived data
+    // reconstruct derived data
 
-	container.CalculateSumChanges();
+    container.CalculateSumChanges();
 
-	// ready
+    // ready
 
-	return stream;
+    return stream;
 }
 
-IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
-								   , const CRevisionInfoContainer& container)
+IHierarchicalOutStream& operator<< (IHierarchicalOutStream& stream
+                                    , const CRevisionInfoContainer& container)
 {
-	const_cast<CRevisionInfoContainer*>(&container)->AutoOptimize();
+    const_cast<CRevisionInfoContainer*> (&container)->AutoOptimize();
 
-	// write the pools
+    // write the pools
 
-	IHierarchicalOutStream* authorPoolStream
-		= stream.OpenSubStream ( CRevisionInfoContainer::AUTHOR_POOL_STREAM_ID
-							   , COMPOSITE_STREAM_TYPE_ID);
-	*authorPoolStream << container.authorPool;
+    IHierarchicalOutStream* authorPoolStream
+        = stream.OpenSubStream ( CRevisionInfoContainer::AUTHOR_POOL_STREAM_ID
+                               , COMPOSITE_STREAM_TYPE_ID);
+    *authorPoolStream << container.authorPool;
 
-	IHierarchicalOutStream* commentsStream
-		= stream.OpenSubStream ( CRevisionInfoContainer::COMMENTS_STREAM_ID
-							   , COMPOSITE_STREAM_TYPE_ID);
-	*commentsStream << container.comments;
+    IHierarchicalOutStream* commentsStream
+        = stream.OpenSubStream ( CRevisionInfoContainer::COMMENTS_STREAM_ID
+                               , COMPOSITE_STREAM_TYPE_ID);
+    *commentsStream << container.comments;
 
-	IHierarchicalOutStream* pathsStream
-		= stream.OpenSubStream ( CRevisionInfoContainer::PATHS_STREAM_ID
-							   , COMPOSITE_STREAM_TYPE_ID);
-	*pathsStream << container.paths;
+    IHierarchicalOutStream* pathsStream
+        = stream.OpenSubStream ( CRevisionInfoContainer::PATHS_STREAM_ID
+                               , COMPOSITE_STREAM_TYPE_ID);
+    *pathsStream << container.paths;
 
-	// write the revision info
+    // write the revision info
 
-	CDiffIntegerOutStream* authorsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::AUTHORS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*authorsStream << container.authors;
+    CDiffIntegerOutStream* authorsStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::AUTHORS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *authorsStream << container.authors;
 
-	CPackedTime64OutStream* timeStampsStream 
-		= dynamic_cast<CPackedTime64OutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::TIMESTAMPS_STREAM_ID
-								  , PACKED_TIME64_STREAM_TYPE_ID));
-	*timeStampsStream << container.timeStamps;
+    CPackedTime64OutStream* timeStampsStream
+        = dynamic_cast<CPackedTime64OutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::TIMESTAMPS_STREAM_ID
+                                  , PACKED_TIME64_STREAM_TYPE_ID));
+    *timeStampsStream << container.timeStamps;
 
-	CDiffIntegerOutStream* rootPathsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::ROOTPATHS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*rootPathsStream << container.rootPaths;
+    CDiffIntegerOutStream* rootPathsStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::ROOTPATHS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *rootPathsStream << container.rootPaths;
 
-	CDiffDWORDOutStream* changesOffsetsStream 
-		= dynamic_cast<CDiffDWORDOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::CHANGES_OFFSETS_STREAM_ID
-								  , DIFF_DWORD_STREAM_TYPE_ID));
-	*changesOffsetsStream << container.changesOffsets;
+    CDiffDWORDOutStream* changesOffsetsStream
+        = dynamic_cast<CDiffDWORDOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::CHANGES_OFFSETS_STREAM_ID
+                                  , DIFF_DWORD_STREAM_TYPE_ID));
+    *changesOffsetsStream << container.changesOffsets;
 
-	CDiffDWORDOutStream* copyFromOffsetsStream 
-		= dynamic_cast<CDiffDWORDOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::COPYFROM_OFFSETS_STREAM_ID
-								  , DIFF_DWORD_STREAM_TYPE_ID));
-	*copyFromOffsetsStream << container.copyFromOffsets;
+    CDiffDWORDOutStream* copyFromOffsetsStream
+        = dynamic_cast<CDiffDWORDOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::COPYFROM_OFFSETS_STREAM_ID
+                                  , DIFF_DWORD_STREAM_TYPE_ID));
+    *copyFromOffsetsStream << container.copyFromOffsets;
 
-	CDiffDWORDOutStream* mergedRevisionsOffsetsStream 
-		= dynamic_cast<CDiffDWORDOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::MERGEDREVISION_OFFSETS_STREAM_ID
-								  , DIFF_DWORD_STREAM_TYPE_ID));
-	*mergedRevisionsOffsetsStream << container.mergedRevisionsOffsets;
+    CDiffDWORDOutStream* mergedRevisionsOffsetsStream
+        = dynamic_cast<CDiffDWORDOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::MERGEDREVISION_OFFSETS_STREAM_ID
+                                  , DIFF_DWORD_STREAM_TYPE_ID));
+    *mergedRevisionsOffsetsStream << container.mergedRevisionsOffsets;
 
-	// write the changes info
+    // write the changes info
 
-	CPackedDWORDOutStream* changesStream 
-		= dynamic_cast<CPackedDWORDOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::CHANGES_STREAM_ID
-								  , PACKED_DWORD_STREAM_TYPE_ID));
-	*changesStream << container.changes;
+    CPackedDWORDOutStream* changesStream
+        = dynamic_cast<CPackedDWORDOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::CHANGES_STREAM_ID
+                                  , PACKED_DWORD_STREAM_TYPE_ID));
+    *changesStream << container.changes;
 
-	CDiffIntegerOutStream* changedPathsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::CHANGED_PATHS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*changedPathsStream << container.changedPaths;
+    CDiffIntegerOutStream* changedPathsStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::CHANGED_PATHS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *changedPathsStream << container.changedPaths;
 
-	CDiffIntegerOutStream* changedPathTypesStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::CHANGED_PATHS_TYPES_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*changedPathTypesStream << container.changedPathTypes;
+    CDiffIntegerOutStream* changedPathTypesStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::CHANGED_PATHS_TYPES_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *changedPathTypesStream << container.changedPathTypes;
 
-	CDiffIntegerOutStream* copyFromPathsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::COPYFROM_PATHS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*copyFromPathsStream << container.copyFromPaths;
+    CDiffIntegerOutStream* copyFromPathsStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::COPYFROM_PATHS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *copyFromPathsStream << container.copyFromPaths;
 
-	CDiffIntegerOutStream* copyFromRevisionsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::COPYFROM_REVISIONS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*copyFromRevisionsStream << container.copyFromRevisions;
+    CDiffIntegerOutStream* copyFromRevisionsStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::COPYFROM_REVISIONS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *copyFromRevisionsStream << container.copyFromRevisions;
 
-	// merged revisions
+    // merged revisions
 
-	CDiffIntegerOutStream* mergedFromPathsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_FROM_PATHS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*mergedFromPathsStream << container.mergedFromPaths;
+    CDiffIntegerOutStream* mergedFromPathsStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::MERGED_FROM_PATHS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *mergedFromPathsStream << container.mergedFromPaths;
 
-	CDiffIntegerOutStream* mergedToPathsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_TO_PATHS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*mergedToPathsStream << container.mergedToPaths;
+    CDiffIntegerOutStream* mergedToPathsStream
+         = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::MERGED_TO_PATHS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *mergedToPathsStream << container.mergedToPaths;
 
-	CDiffIntegerOutStream* mergedRangeStartsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_RANGE_STARTS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*mergedRangeStartsStream << container.mergedRangeStarts;
+    CDiffIntegerOutStream* mergedRangeStartsStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::MERGED_RANGE_STARTS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *mergedRangeStartsStream << container.mergedRangeStarts;
 
-	CDiffIntegerOutStream* mergedRangeDeltasStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
-	*mergedRangeDeltasStream << container.mergedRangeDeltas;
+    CDiffIntegerOutStream* mergedRangeDeltasStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::MERGED_RANGE_DELTAS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
+    *mergedRangeDeltasStream << container.mergedRangeDeltas;
 
     // user-defined revision properties
-    
-	CDiffIntegerOutStream* userRevPropsOffsetsStream 
-		= dynamic_cast<CDiffIntegerOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_OFFSETS_STREAM_ID
-								  , DIFF_INTEGER_STREAM_TYPE_ID));
+
+    CDiffIntegerOutStream* userRevPropsOffsetsStream
+        = dynamic_cast<CDiffIntegerOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_OFFSETS_STREAM_ID
+                                  , DIFF_INTEGER_STREAM_TYPE_ID));
     *userRevPropsOffsetsStream << container.userRevPropOffsets;
 
-	IHierarchicalOutStream* userRevPropsPoolStream
-		= stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_POOL_STREAM_ID
-							   , COMPOSITE_STREAM_TYPE_ID);
+    IHierarchicalOutStream* userRevPropsPoolStream
+        = stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_POOL_STREAM_ID
+                               , COMPOSITE_STREAM_TYPE_ID);
     *userRevPropsPoolStream << container.userRevPropsPool;
 
-    CPackedDWORDOutStream* userRevPropsNameStream 
-		= dynamic_cast<CPackedDWORDOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_NAME_STREAM_ID
-								  , PACKED_DWORD_STREAM_TYPE_ID));
+    CPackedDWORDOutStream* userRevPropsNameStream
+        = dynamic_cast<CPackedDWORDOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_NAME_STREAM_ID
+                                  , PACKED_DWORD_STREAM_TYPE_ID));
     *userRevPropsNameStream << container.userRevPropNames;
 
-	IHierarchicalOutStream* userRevPropsValuesStream
-		= stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_VALUE_STREAM_ID
-							   , COMPOSITE_STREAM_TYPE_ID);
+    IHierarchicalOutStream* userRevPropsValuesStream
+        = stream.OpenSubStream ( CRevisionInfoContainer::USER_REVPROPS_VALUE_STREAM_ID
+                               , COMPOSITE_STREAM_TYPE_ID);
     *userRevPropsValuesStream << container.userRevPropValues;
 
     // data presence flags
 
-    CPackedDWORDOutStream* dataPresenceStream 
-		= dynamic_cast<CPackedDWORDOutStream*>
-			(stream.OpenSubStream ( CRevisionInfoContainer::DATA_PRESENCE_STREAM_ID
-								  , PACKED_DWORD_STREAM_TYPE_ID));
+    CPackedDWORDOutStream* dataPresenceStream
+        = dynamic_cast<CPackedDWORDOutStream*>
+            (stream.OpenSubStream ( CRevisionInfoContainer::DATA_PRESENCE_STREAM_ID
+                                  , PACKED_DWORD_STREAM_TYPE_ID));
     *dataPresenceStream << container.presenceFlags;
 
-	// update size info
+    // update size info
 
-	container.storedSize = container.size();
+    container.storedSize = container.size();
 
-	// ready
+    // ready
 
-	return stream;
+    return stream;
 }
 
 // end namespace LogCache

@@ -16,9 +16,9 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "StdAfx.h"
-#include "./cachedloginfo.h"
-#include "./LogCacheSettings.h"
+#include "stdafx.h"
+#include "CachedLogInfo.h"
+#include "LogCacheSettings.h"
 
 #include "./Streams/RootInStream.h"
 #include "./Streams/RootOutStream.h"

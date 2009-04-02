@@ -41,7 +41,7 @@ public:
 
 	// access a sub-stream
 
-    virtual bool HasSubStream (SUB_STREAM_ID subStreamID) const = 0;
+	virtual bool HasSubStream (SUB_STREAM_ID subStreamID) const = 0;
 	virtual IHierarchicalInStream* GetSubStream (SUB_STREAM_ID subStreamID) = 0;
 
 	// required for proper destruction of sub-class instances
@@ -74,8 +74,9 @@ protected:
 	// stream content
 	// (sub-stream info will be excluded after ReadSubStreams()) 
 
-	const unsigned char* first;
-	const unsigned char* last;
+	typedef unsigned char BYTE;
+	const BYTE* first;
+	const BYTE* last;
 
 	// for usage with CRootInStream
 
@@ -84,7 +85,7 @@ protected:
 	// read stream content
 
 	void ReadSubStreams ( CCacheFileInBuffer* buffer
-				        , STREAM_INDEX index);
+	                    , STREAM_INDEX index);
 	void DecodeThisStream();
 
 public:
@@ -92,12 +93,12 @@ public:
 	// construction / destruction
 
 	CHierachicalInStreamBase ( CCacheFileInBuffer* buffer
-							 , STREAM_INDEX index);
+				 , STREAM_INDEX index);
 	virtual ~CHierachicalInStreamBase(void);
 
 	// implement IHierarchicalOutStream
 
-    virtual bool HasSubStream (SUB_STREAM_ID subStreamID) const;
+	virtual bool HasSubStream (SUB_STREAM_ID subStreamID) const;
 	virtual IHierarchicalInStream* GetSubStream (SUB_STREAM_ID subStreamID);
 };
 

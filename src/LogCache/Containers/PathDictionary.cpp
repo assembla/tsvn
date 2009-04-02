@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2008 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,8 +16,9 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "StdAfx.h"
-#include ".\pathdictionary.h"
+#include "stdafx.h"
+#include "PathDictionary.h"
+#include "ContainerException.h"
 
 ///////////////////////////////////////////////////////////////
 // begin namespace LogCache
@@ -35,10 +36,10 @@ namespace LogCache
 void CPathDictionary::CheckParentIndex (index_t index) const
 {
 #if !defined (_SECURE_SCL)
-	if (index >= paths.size())
-		throw std::exception ("parent path index out of range");
+    if (index >= paths.size())
+        throw CContainerException ("parent path index out of range");
 #else
-    UNREFERENCED_PARAMETER(index);
+    UNREFERENCED_PARAMETER (index);
 #endif
 }
 
@@ -46,17 +47,17 @@ void CPathDictionary::CheckParentIndex (index_t index) const
 
 void CPathDictionary::Initialize()
 {
-	paths.Insert (std::make_pair (NO_INDEX, 0));
+    paths.Insert (std::make_pair ( (index_t) NO_INDEX, 0));
 }
 
 // construction (create root path) / destruction
 
 CPathDictionary::CPathDictionary()
 {
-	Initialize();
+    Initialize();
 }
 
-CPathDictionary::~CPathDictionary(void)
+CPathDictionary::~CPathDictionary (void)
 {
 }
 
@@ -64,12 +65,12 @@ CPathDictionary::~CPathDictionary(void)
 
 index_t CPathDictionary::GetParent (index_t index) const
 {
-	return paths[index].first;
+    return paths[index].first;
 }
 
 const char* CPathDictionary::GetPathElement (index_t index) const
 {
-	return pathElements [paths [index].second];
+    return pathElements [paths [index].second];
 }
 
 index_t CPathDictionary::GetPathElementSize (index_t index) const
@@ -79,42 +80,42 @@ index_t CPathDictionary::GetPathElementSize (index_t index) const
 
 index_t CPathDictionary::GetPathElementID (index_t index) const
 {
-	return paths [index].second;
+    return paths [index].second;
 }
 
 index_t CPathDictionary::Find (index_t parent, const char* pathElement) const
 {
-	index_t pathElementIndex = pathElements.Find (pathElement);
-	return pathElementIndex == NO_INDEX
-		? NO_INDEX
-		: paths.Find (std::make_pair (parent, pathElementIndex));
+    index_t pathElementIndex = pathElements.Find (pathElement);
+    return pathElementIndex == NO_INDEX
+           ? NO_INDEX
+           : paths.Find (std::make_pair (parent, pathElementIndex));
 }
 
 index_t CPathDictionary::Insert (index_t parent, const char* pathElement)
 {
-	CheckParentIndex (parent);
+    CheckParentIndex (parent);
 
-	index_t pathElementIndex = pathElements.AutoInsert (pathElement);
-	return paths.Insert (std::make_pair (parent, pathElementIndex));
+    index_t pathElementIndex = pathElements.AutoInsert (pathElement);
+    return paths.Insert (std::make_pair (parent, pathElementIndex));
 }
 
 index_t CPathDictionary::AutoInsert (index_t parent, const char* pathElement)
 {
-	CheckParentIndex (parent);
+    CheckParentIndex (parent);
 
-	index_t pathElementIndex = pathElements.AutoInsert (pathElement);
-	return paths.AutoInsert (std::make_pair ( parent
-											, pathElementIndex));
+    index_t pathElementIndex = pathElements.AutoInsert (pathElement);
+    return paths.AutoInsert (std::make_pair ( parent
+                                            , pathElementIndex));
 }
 
 // reset content
 
 void CPathDictionary::Clear()
 {
-	pathElements.Clear();
-	paths.Clear();
+    pathElements.Clear();
+    paths.Clear();
 
-	Initialize();
+    Initialize();
 }
 
 // "merge" with another container:
@@ -122,67 +123,67 @@ void CPathDictionary::Clear()
 
 index_mapping_t CPathDictionary::Merge (const CPathDictionary& source)
 {
-	index_mapping_t result;
-	result.insert (0, 0);
-	result.insert ((index_t)NO_INDEX, (index_t)NO_INDEX);
+    index_mapping_t result;
+    result.insert (0, 0);
+    result.insert ( (index_t) NO_INDEX, (index_t) NO_INDEX);
 
-	index_mapping_t elementMapping = pathElements.Merge (source.pathElements);
-	for (index_t i = 1, count = source.size(); i < count; ++i)
-	{
-		const std::pair<index_t, index_t>& sourcePath = source.paths[i];
+    index_mapping_t elementMapping = pathElements.Merge (source.pathElements);
+    for (index_t i = 1, count = source.size(); i < count; ++i)
+    {
+        const std::pair<index_t, index_t>& sourcePath = source.paths[i];
 
-		std::pair<index_t, index_t> destEntry 
-			( *result.find (sourcePath.first)
-			, *elementMapping.find (sourcePath.second));
+        std::pair<index_t, index_t> destEntry
+            ( *result.find (sourcePath.first)
+            , *elementMapping.find (sourcePath.second));
 
-		result.insert (i, paths.AutoInsert (destEntry));
-	}
+        result.insert (i, paths.AutoInsert (destEntry));
+    }
 
-	return result;
+    return result;
 }
 
 // stream I/O
 
-IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
-								  , CPathDictionary& dictionary)
+IHierarchicalInStream& operator>> (IHierarchicalInStream& stream
+                                   , CPathDictionary& dictionary)
 {
-	// read the path elements
+    // read the path elements
 
-	IHierarchicalInStream* elementsStream
-		= stream.GetSubStream (CPathDictionary::ELEMENTS_STREAM_ID);
-	*elementsStream >> dictionary.pathElements;
+    IHierarchicalInStream* elementsStream
+        = stream.GetSubStream (CPathDictionary::ELEMENTS_STREAM_ID);
+    *elementsStream >> dictionary.pathElements;
 
-	// read the second elements
+    // read the second elements
 
-	IHierarchicalInStream* pathsStream
-		= stream.GetSubStream (CPathDictionary::PATHS_STREAM_ID);
-	*pathsStream >> dictionary.paths;
+    IHierarchicalInStream* pathsStream
+        = stream.GetSubStream (CPathDictionary::PATHS_STREAM_ID);
+    *pathsStream >> dictionary.paths;
 
-	// ready
+    // ready
 
-	return stream;
+    return stream;
 }
 
-IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
-								   , const CPathDictionary& dictionary)
+IHierarchicalOutStream& operator<< (IHierarchicalOutStream& stream
+                                    , const CPathDictionary& dictionary)
 {
-	// write path elements
+    // write path elements
 
-	IHierarchicalOutStream* elementsStream 
-		= stream.OpenSubStream ( CPathDictionary::ELEMENTS_STREAM_ID
-							   , COMPOSITE_STREAM_TYPE_ID);
-	*elementsStream << dictionary.pathElements;
+    IHierarchicalOutStream* elementsStream
+        = stream.OpenSubStream ( CPathDictionary::ELEMENTS_STREAM_ID
+                               , COMPOSITE_STREAM_TYPE_ID);
+    *elementsStream << dictionary.pathElements;
 
-	// write paths
+    // write paths
 
-	IHierarchicalOutStream* pathsStream
-		= stream.OpenSubStream ( CPathDictionary::PATHS_STREAM_ID
-							   , COMPOSITE_STREAM_TYPE_ID);
-	*pathsStream << dictionary.paths;
+    IHierarchicalOutStream* pathsStream
+        = stream.OpenSubStream ( CPathDictionary::PATHS_STREAM_ID
+                               , COMPOSITE_STREAM_TYPE_ID);
+    *pathsStream << dictionary.paths;
 
-	// ready
+    // ready
 
-	return stream;
+    return stream;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -194,63 +195,63 @@ IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
 // construction utility: lookup and optionally auto-insert
 
 void CDictionaryBasedPath::ParsePath ( const std::string& path
-								     , CPathDictionary* writableDictionary
-									 , std::vector<std::string>* relPath)
+                                     , CPathDictionary* writableDictionary
+                                     , std::vector<std::string>* relPath)
 {
     if (!path.empty())
-	{
-		std::string temp (path);
-		assert (path[0] == '/');
+    {
+        std::string temp (path);
+        assert (path[0] == '/');
 
-		index_t currentIndex = index;
-		for ( size_t pos = 0, nextPos = temp.find ('/', 1)
-			; pos != std::string::npos
-			; pos = nextPos, nextPos = temp.find ('/', nextPos))
-		{
-			// get the current path element and terminate it properly
+        index_t currentIndex = index;
+        for ( size_t pos = 0, nextPos = temp.find ('/', 1)
+            ; pos != std::string::npos
+            ; pos = nextPos, nextPos = temp.find ('/', nextPos))
+        {
+            // get the current path element and terminate it properly
 
-			const char* pathElement = temp.c_str() + pos+1;
-			if (nextPos != std::string::npos)
-				temp[nextPos] = 0;
+            const char* pathElement = temp.c_str() + pos+1;
+            if (nextPos != std::string::npos)
+                temp[nextPos] = 0;
 
-			// try move to the next sub-path
+            // try move to the next sub-path
 
-			index_t nextIndex = dictionary->Find (currentIndex, pathElement);
-			if (nextIndex == NO_INDEX)
-			{
-				// not found. Do we have to stop here?
+            index_t nextIndex = dictionary->Find (currentIndex, pathElement);
+            if (nextIndex == NO_INDEX)
+            {
+                // not found. Do we have to stop here?
 
-				if (writableDictionary != NULL)
-				{
-					// auto-insert
+                if (writableDictionary != NULL)
+                {
+                    // auto-insert
 
-					nextIndex = writableDictionary->Insert ( currentIndex
-														   , pathElement);
-					index = nextIndex;
-				}
-				else if (relPath != NULL)
-				{
-					// build relative path
+                    nextIndex = writableDictionary->Insert ( currentIndex
+                                                           , pathElement);
+                    index = nextIndex;
+                }
+                else if (relPath != NULL)
+                {
+                    // build relative path
 
-					relPath->push_back (pathElement);
-				}
-				else
-				{
-					// must stop at the last known parent
+                    relPath->push_back (pathElement);
+                }
+                else
+                {
+                    // must stop at the last known parent
 
-					break;
-				}
-			}
-			else
-			{
-				// we are now one level deeper
+                    break;
+                }
+            }
+            else
+            {
+                // we are now one level deeper
 
-				index = nextIndex;
-			}
+                index = nextIndex;
+            }
 
-			currentIndex = nextIndex;
-		}
-	}
+            currentIndex = nextIndex;
+        }
+    }
 
 #ifdef _DEBUG
     _path = GetPath();
@@ -272,20 +273,20 @@ std::string CDictionaryBasedPath::ReverseAt (size_t reverseIndex) const
 // construction: lookup (stop at last known parent, if necessary)
 
 CDictionaryBasedPath::CDictionaryBasedPath ( const CPathDictionary* aDictionary
-										   , const std::string& path)
-	: dictionary (aDictionary)
-	, index (0)
+                                           , const std::string& path)
+    : dictionary (aDictionary)
+    , index (0)
 {
-	ParsePath (path, NULL);
+    ParsePath (path, NULL);
 }
 
 CDictionaryBasedPath::CDictionaryBasedPath ( CPathDictionary* aDictionary
-										   , const std::string& path
-										   , bool nextParent)
-	: dictionary (aDictionary)
-	, index (0)
+                                           , const std::string& path
+                                           , bool nextParent)
+    : dictionary (aDictionary)
+    , index (0)
 {
-	ParsePath (path, nextParent ? NULL : aDictionary);
+    ParsePath (path, nextParent ? NULL : aDictionary);
 }
 
 index_t CDictionaryBasedPath::GetDepth() const
@@ -299,28 +300,28 @@ index_t CDictionaryBasedPath::GetDepth() const
         return result;
     }
     else
-        return static_cast<index_t>(NO_INDEX);
+        return static_cast<index_t> (NO_INDEX);
 }
 
 bool CDictionaryBasedPath::IsSameOrParentOf ( index_t lhsIndex
-											, index_t rhsIndex) const
+                                            , index_t rhsIndex) const
 {
-	// the root is always a parent of / the same as rhs
+    // the root is always a parent of / the same as rhs
 
-	if (lhsIndex == 0)
-		return true;
+    if (lhsIndex == 0)
+        return true;
 
-	// crawl rhs up to the root until we find it to be equal to *this
+    // crawl rhs up to the root until we find it to be equal to *this
 
-	for (; rhsIndex >= lhsIndex; rhsIndex = dictionary->GetParent (rhsIndex))
-	{
-		if (lhsIndex == rhsIndex)
-			return true;
-	}
+    for (; rhsIndex >= lhsIndex; rhsIndex = dictionary->GetParent (rhsIndex))
+    {
+        if (lhsIndex == rhsIndex)
+            return true;
+    }
 
-	// *this has not been found among rhs' parent paths
+    // *this has not been found among rhs' parent paths
 
-	return false;
+    return false;
 }
 
 // convert to string
@@ -339,66 +340,66 @@ std::string CDictionaryBasedPath::GetPath() const
 #else
         // an assertion is of little use here ...
 
-        throw std::exception ("Access to invalid path object");
+        throw CContainerException ("Access to invalid path object");
 #endif
     }
 
-	// fetch all path elements bottom-up except the root
-	// and calculate the total string length
+    // fetch all path elements bottom-up except the root
+    // and calculate the total string length
 
-	const char* pathElements [MAX_PATH];
-	index_t sizes[MAX_PATH];
+    const char* pathElements [MAX_PATH];
+    index_t sizes[MAX_PATH];
     size_t depth = 0;
 
-	size_t size = 0;
-	for ( index_t currentIndex = index
-		; (currentIndex != 0) && (depth < MAX_PATH)
-		; currentIndex = dictionary->GetParent (currentIndex))
-	{
-		pathElements[depth] = dictionary->GetPathElement (currentIndex);
+    size_t size = 0;
+    for ( index_t currentIndex = index
+        ; (currentIndex != 0) && (depth < MAX_PATH)
+        ; currentIndex = dictionary->GetParent (currentIndex))
+    {
+        pathElements[depth] = dictionary->GetPathElement (currentIndex);
         sizes[depth] = dictionary->GetPathElementSize (currentIndex);
         size += sizes[depth] + 1;
         ++depth;
-	}
+    }
 
-	// build result
+    // build result
 
-	std::string result (max (1, size), '/');
+    std::string result (std::max ((size_t)1, size), '/');
     char* target = &result[0];
 
-	for (size_t i = depth; i > 0; --i)
-	{
+    for (size_t i = depth; i > 0; --i)
+    {
         memcpy (++target, pathElements[i-1], sizes[i-1]);
         target += sizes[i-1];
-	}
+    }
 
-	// ready
+    // ready
 
-	return result;
+    return result;
 }
 
 CDictionaryBasedPath CDictionaryBasedPath::GetCommonRoot (index_t rhsIndex) const
 {
-	assert ((index != NO_INDEX) && (rhsIndex != NO_INDEX));
+    assert ( (index != NO_INDEX) && (rhsIndex != NO_INDEX));
 
-	index_t lhsIndex = index;
+    index_t lhsIndex = index;
 
-	while (lhsIndex != rhsIndex)
-	{
-		// the parent has *always* a smaller index
-		// -> a common parent cannot be larger than lhs or rhs
+    while (lhsIndex != rhsIndex)
+    {
+        // the parent has *always* a smaller index
+        // -> a common parent cannot be larger than lhs or rhs
 
-		if (lhsIndex < rhsIndex)
-		{
-			rhsIndex = dictionary->GetParent (rhsIndex);
-		}
-		else
-		{
-			lhsIndex = dictionary->GetParent (lhsIndex);
-		}
-	}
+        if (lhsIndex < rhsIndex)
+        {
+            rhsIndex = dictionary->GetParent (rhsIndex);
+        }
+        else
+        {
+            lhsIndex = dictionary->GetParent (lhsIndex);
+        }
+    }
 
-	return CDictionaryBasedPath (dictionary, lhsIndex);
+    return CDictionaryBasedPath (dictionary, lhsIndex);
 }
 
 bool CDictionaryBasedPath::Contains (index_t pathElementID) const

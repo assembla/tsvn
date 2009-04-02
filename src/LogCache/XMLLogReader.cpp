@@ -16,7 +16,7 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "./XMLLogReader.h"
 #include "./Streams/MappedInFile.h"
 
@@ -32,26 +32,26 @@ namespace LogCache
 ///////////////////////////////////////////////////////////////
 
 const char* CXMLLogReader::limited_strstr ( const char* first
-										  , const char* last
-										  , const char* sub
-										  , size_t subLen)
+                                          , const char* last
+                                          , const char* sub
+                                          , size_t subLen)
 {
-	assert (last > first);
-	assert (sub != NULL);
+    assert (last > first);
+    assert (sub != NULL);
 
-	while (true)
-	{
-		first = (const char*) memchr (first, *sub, last - first);
-		if ((first == NULL) || (last < first + subLen))
-			return NULL;
+    while (true)
+    {
+        first = (const char*) memchr (first, *sub, last - first);
+        if ( (first == NULL) || (last < first + subLen))
+            return NULL;
 
-		if (memcmp (first, sub, subLen) == 0)
-			break;
+        if (memcmp (first, sub, subLen) == 0)
+            break;
 
-		++first;
-	}
+        ++first;
+    }
 
-	return first;
+    return first;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -59,75 +59,75 @@ const char* CXMLLogReader::limited_strstr ( const char* first
 ///////////////////////////////////////////////////////////////
 
 bool CXMLLogReader::GetXMLTag ( const char* start
-							  , const char* parentEnd
-							  , const char* startTagName
-							  , size_t startTagNameLen
-							  , const char* endTagName
-							  , size_t endTagNameLen
-							  , const char*& tagStart
-							  , const char*& tagEnd)
+                              , const char* parentEnd
+                              , const char* startTagName
+                              , size_t startTagNameLen
+                              , const char* endTagName
+                              , size_t endTagNameLen
+                              , const char*& tagStart
+                              , const char*& tagEnd)
 {
-	// check our internal logic
+    // check our internal logic
 
-	assert (start < parentEnd);
-	assert (start != NULL);
+    assert (start < parentEnd);
+    assert (start != NULL);
 
-	// find the next tag with the given name
+    // find the next tag with the given name
 
-	tagStart = limited_strstr (start, parentEnd, startTagName, startTagNameLen);
-	if (tagStart == NULL)
-		return false;
+    tagStart = limited_strstr (start, parentEnd, startTagName, startTagNameLen);
+    if (tagStart == NULL)
+        return false;
 
-	// tag has been found. return first attribute or content position
+    // tag has been found. return first attribute or content position
 
-	tagStart += startTagNameLen;
+    tagStart += startTagNameLen;
 
-	// find end tag
+    // find end tag
 
-	tagEnd = limited_strstr (tagStart, parentEnd, endTagName, endTagNameLen);
-	if (tagEnd == NULL)
-		return false;
+    tagEnd = limited_strstr (tagStart, parentEnd, endTagName, endTagNameLen);
+    if (tagEnd == NULL)
+        return false;
 
-	// both tags have been found
+    // both tags have been found
 
-	return true;
+    return true;
 }
 
 bool CXMLLogReader::GetLogTag ( const char* start
-							  , const char* parentEnd
-							  , const char*& tagStart
-							  , const char*& tagEnd)
+                              , const char* parentEnd
+                              , const char*& tagStart
+                              , const char*& tagEnd)
 {
-	// find the next tag with the given name
+    // find the next tag with the given name
 
-	tagStart = limited_strstr (start, parentEnd, "<log", 4);
-	if (tagStart == NULL)
-		return false;
+    tagStart = limited_strstr (start, parentEnd, "<log", 4);
+    if (tagStart == NULL)
+        return false;
 
-	// tag has been found. return first attribute or content position
+    // tag has been found. return first attribute or content position
 
-	tagStart += 4;
+    tagStart += 4;
 
-	// find end tag
-	// be clever and look at the end of the buffer
+    // find end tag
+    // be clever and look at the end of the buffer
 
-	const char* endTagSearchStart = parentEnd - tagStart > 100
-		? parentEnd - 100
-		: tagStart;
+    const char* endTagSearchStart = parentEnd - tagStart > 100
+                                  ? parentEnd - 100
+                                  : tagStart;
 
-	tagEnd = limited_strstr (endTagSearchStart, parentEnd, "</log>", 6);
-	if (tagEnd == NULL)
-	{
-		// try harder
+    tagEnd = limited_strstr (endTagSearchStart, parentEnd, "</log>", 6);
+    if (tagEnd == NULL)
+    {
+        // try harder
 
-		tagEnd = limited_strstr (tagStart, parentEnd, "</log>", 6);
-		if (tagEnd == NULL)
-			return false;
-	}
+        tagEnd = limited_strstr (tagStart, parentEnd, "</log>", 6);
+        if (tagEnd == NULL)
+            return false;
+    }
 
-	// both tags have been found
+    // both tags have been found
 
-	return true;
+    return true;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -135,54 +135,54 @@ bool CXMLLogReader::GetLogTag ( const char* start
 ///////////////////////////////////////////////////////////////
 
 const char* CXMLLogReader::GetXMLAttributeOffset ( const char* start
-												 , const char* end
-												 , const char* attribute
-												 , size_t attributeLen)
+                                                 , const char* end
+                                                 , const char* attribute
+                                                 , size_t attributeLen)
 {
-	const char* tagEnd = (const char*) memchr (start, '>', end - start);
-	if ((tagEnd != NULL) && (tagEnd < end))
-		end = tagEnd;
+    const char* tagEnd = (const char*) memchr (start, '>', end - start);
+    if ((tagEnd != NULL) && (tagEnd < end))
+        end = tagEnd;
 
-	while (start != NULL)
-	{
-		start = (const char*) memchr (start, '=', end - start);
-		if (start == NULL)
-			break;
+    while (start != NULL)
+    {
+        start = (const char*) memchr (start, '=', end - start);
+        if (start == NULL)
+            break;
 
-		bool found = memcmp (start - attributeLen, attribute, attributeLen) == 0;
-		start += 2;
+        bool found = memcmp (start - attributeLen, attribute, attributeLen) == 0;
+        start += 2;
 
-		if (found)
-			break;
+        if (found)
+            break;
 
-		start = (const char*) memchr (start, '"', end - start);
-	}
+        start = (const char*) memchr (start, '"', end - start);
+    }
 
-	return start;
+    return start;
 }
 
 revision_t CXMLLogReader::GetXMLRevisionAttribute ( const char* start
-												  , const char* end
-												  , const char* attribute
-												  , size_t attributeLen)
+                                                  , const char* end
+                                                  , const char* attribute
+                                                  , size_t attributeLen)
 {
-	start = GetXMLAttributeOffset (start, end, attribute, attributeLen);
-	return start == NULL
-		? NO_REVISION
-		: atoi (start);
+    start = GetXMLAttributeOffset (start, end, attribute, attributeLen);
+    return start == NULL
+           ? NO_REVISION
+           : atoi (start);
 }
 
 std::string CXMLLogReader::GetXMLTextAttribute ( const char* start
-											   , const char* end
-											   , const char* attribute
-											   , size_t attributeLen)
+                                               , const char* end
+                                               , const char* attribute
+                                               , size_t attributeLen)
 {
-	start = GetXMLAttributeOffset (start, end, attribute, attributeLen);
-	if (start == NULL)
-		return std::string();
+    start = GetXMLAttributeOffset (start, end, attribute, attributeLen);
+    if (start == NULL)
+        return std::string();
 
-	const char* quotes = (const char*)memchr (start, '"', end - start);
-	return std::string (start, quotes == NULL ? end : quotes);
+    const char* quotes = (const char*) memchr (start, '"', end - start);
+    return std::string (start, quotes == NULL ? end : quotes);
 }
 
 ///////////////////////////////////////////////////////////////
@@ -190,176 +190,176 @@ std::string CXMLLogReader::GetXMLTextAttribute ( const char* start
 ///////////////////////////////////////////////////////////////
 
 std::string CXMLLogReader::GetXMLTaggedText ( const char* start
-										    , const char* end
-										    , const char* startTagName
-										    , size_t startTagNameLen
-										    , const char* endTagName
-										    , size_t endTagNameLen)
+                                            , const char* end
+                                            , const char* startTagName
+                                            , size_t startTagNameLen
+                                            , const char* endTagName
+                                            , size_t endTagNameLen)
 {
-	if (GetXMLTag ( start
-				  , end
-				  , startTagName
-				  , startTagNameLen
-				  , endTagName
-				  , endTagNameLen
-				  , start
-				  , end))
-	{
-		start = (const char*) memchr (start, '>', end - start)+1;
-		if (start != NULL)
-			return std::string (start, end);
-	}
+    if (GetXMLTag ( start
+                  , end
+                  , startTagName
+                  , startTagNameLen
+                  , endTagName
+                  , endTagNameLen
+                  , start
+                  , end))
+    {
+        start = (const char*) memchr (start, '>', end - start) +1;
+        if (start != NULL)
+            return std::string (start, end);
+    }
 
-	return std::string();
+    return std::string();
 }
 
 ///////////////////////////////////////////////////////////////
 // parse all <path> tags within a <logentry> tag
 ///////////////////////////////////////////////////////////////
 
-void CXMLLogReader::ParseChanges ( const char* current
-								 , const char* changesEnd
-								 , CCachedLogInfo& target)
+void CXMLLogReader::ParseChanges (const char* current
+                                  , const char* changesEnd
+                                  , CCachedLogInfo& target)
 {
-	const char* changeEnd = NULL;
-	while (GetXMLTag ( current
-					 , changesEnd
-					 , "<path"
-					 , 5
-					 , "</path>"
-					 , 7
-					 , current
-					 , changeEnd))
-	{
-		std::string actionText
-			= GetXMLTextAttribute (current, changesEnd, "action", 6);
-		std::string fromPath
-			= GetXMLTextAttribute (current, changesEnd, "copyfrom-path", 13);
-		revision_t fromRevision
-			= GetXMLRevisionAttribute (current, changesEnd, "copyfrom-rev", 12);
+    const char* changeEnd = NULL;
+    while (GetXMLTag ( current
+                     , changesEnd
+                     , "<path"
+                     , 5
+                     , "</path>"
+                     , 7
+                     , current
+                     , changeEnd))
+    {
+        std::string actionText
+            = GetXMLTextAttribute (current, changesEnd, "action", 6);
+        std::string fromPath
+            = GetXMLTextAttribute (current, changesEnd, "copyfrom-path", 13);
+        revision_t fromRevision
+            = GetXMLRevisionAttribute (current, changesEnd, "copyfrom-rev", 12);
 
-		current = (const char*) memchr (current, '>', changesEnd - current)+1;
-		std::string path (current, changeEnd);
+        current = (const char*) memchr (current, '>', changesEnd - current) +1;
+        std::string path (current, changeEnd);
 
-		TChangeAction action = CRevisionInfoContainer::ACTION_ADDED;
+        TChangeAction action = CRevisionInfoContainer::ACTION_ADDED;
 
-		switch (actionText[0])
-		{
-		case 'A': 
-			break;
+        switch (actionText[0])
+        {
+            case 'A':
+                break;
 
-		case 'M': 
-			action = CRevisionInfoContainer::ACTION_CHANGED;
-			break;
+            case 'M':
+                action = CRevisionInfoContainer::ACTION_CHANGED;
+                break;
 
-		case 'R': 
-			action = CRevisionInfoContainer::ACTION_REPLACED;
-			break;
+            case 'R':
+                action = CRevisionInfoContainer::ACTION_REPLACED;
+                break;
 
-		case 'D': 
-			action = CRevisionInfoContainer::ACTION_DELETED;
-			break;
+            case 'D':
+                action = CRevisionInfoContainer::ACTION_DELETED;
+                break;
 
-		default:
+            default:
 
-			throw std::exception ("unknown action type");
-		}
+                throw std::exception ("unknown action type");
+        }
 
-		target.AddChange (action, svn_node_unknown, path, fromPath, fromRevision);
-	}
+        target.AddChange (action, svn_node_unknown, path, fromPath, fromRevision);
+    }
 }
 
 ///////////////////////////////////////////////////////////////
 // parse all <logentry> tags
 ///////////////////////////////////////////////////////////////
 
-void CXMLLogReader::ParseXMLLog ( const char* current
-								, const char* logEnd
-								, CCachedLogInfo& target)
+void CXMLLogReader::ParseXMLLog (const char* current
+                                 , const char* logEnd
+                                 , CCachedLogInfo& target)
 {
-	const char* revisionEnd = NULL;
-	while (GetXMLTag ( current
-					 , logEnd
-					 , "<logentry"
-					 , 9
-					 , "</logentry>"
-					 , 11
-					 , current
-					 , revisionEnd))
-	{
-		revision_t revision 
-			= GetXMLRevisionAttribute (current, revisionEnd, "revision", 8);
-		std::string author
-			= GetXMLTaggedText (current, revisionEnd, "<author", 7, "</author>", 9);
-		std::string date
-			= GetXMLTaggedText (current, revisionEnd, "<date", 5, "</date>", 7);
-		std::string comment
-			= GetXMLTaggedText (current, revisionEnd, "<msg", 4, "</msg>", 6);
+    const char* revisionEnd = NULL;
+    while (GetXMLTag ( current
+                     , logEnd
+                     , "<logentry"
+                     , 9
+                     , "</logentry>"
+                     , 11
+                     , current
+                     , revisionEnd))
+    {
+        revision_t revision
+            = GetXMLRevisionAttribute (current, revisionEnd, "revision", 8);
+        std::string author
+            = GetXMLTaggedText (current, revisionEnd, "<author", 7, "</author>", 9);
+        std::string date
+            = GetXMLTaggedText (current, revisionEnd, "<date", 5, "</date>", 7);
+        std::string comment
+            = GetXMLTaggedText (current, revisionEnd, "<msg", 4, "</msg>", 6);
 
-		if (revision % 10000 == 0)
-			printf (".");
+        if (revision % 10000 == 0)
+            printf (".");
 
-		__time64_t timeStamp = 0;
-		if (!date.empty())
-		{
-			tm time = {0,0,0, 0,0,0, 0,0,0};
-			int musecs = 0;
-			sscanf_s ( date.c_str()
-				, "%04d-%02d-%02dT%02d:%02d:%02d.%06d"
-				, &time.tm_year
-				, &time.tm_mon
-				, &time.tm_mday
-				, &time.tm_hour
-				, &time.tm_min
-				, &time.tm_sec
-				, &musecs);
-			time.tm_isdst = 0;
-			time.tm_year -= 1900;
-			time.tm_mon -= 1;
+        __time64_t timeStamp = 0;
+        if (!date.empty())
+        {
+            tm time = {0,0,0, 0,0,0, 0,0,0};
+            int musecs = 0;
+            sscanf_s ( date.c_str()
+                     , "%04d-%02d-%02dT%02d:%02d:%02d.%06d"
+                     , &time.tm_year
+                     , &time.tm_mon
+                     , &time.tm_mday
+                     , &time.tm_hour
+                     , &time.tm_min
+                     , &time.tm_sec
+                     , &musecs);
+            time.tm_isdst = 0;
+            time.tm_year -= 1900;
+            time.tm_mon -= 1;
 
-			timeStamp = _mkgmtime64 (&time)*1000000 + musecs;
-		}
+            timeStamp = _mkgmtime64 (&time) *1000000 + musecs;
+        }
 
-		target.Insert (revision, author, comment, timeStamp);
+        target.Insert (revision, author, comment, timeStamp);
 
-		const char* pathsEnd = NULL;
-		if (GetXMLTag ( current
-					  , revisionEnd
-					  , "<paths"
-					  , 6
-					  , "</paths>"
-					  , 8
-					  , current
-					  , pathsEnd))
-		{
-			ParseChanges (current, pathsEnd, target);
-		}
+        const char* pathsEnd = NULL;
+        if (GetXMLTag ( current
+                      , revisionEnd
+                      , "<paths"
+                      , 6
+                      , "</paths>"
+                      , 8
+                      , current
+                      , pathsEnd))
+        {
+            ParseChanges (current, pathsEnd, target);
+        }
 
-		current = revisionEnd;
-	}
+        current = revisionEnd;
+    }
 }
 
 // map file to memory, parse it and fill the target
 
-void CXMLLogReader::LoadFromXML ( const std::wstring& xmlFileName
-								, CCachedLogInfo& target)
+void CXMLLogReader::LoadFromXML ( const TFileName& xmlFileName
+                                , CCachedLogInfo& target)
 {
-	CMappedInFile file (xmlFileName);
+    CMappedInFile file (xmlFileName);
 
-	const char* logStart = NULL;
-	const char* logEnd = NULL;
+    const char* logStart = NULL;
+    const char* logEnd = NULL;
 
-	if (GetLogTag ( (const char*)file.GetBuffer()
-				  , (const char*)file.GetBuffer() + file.GetSize()
-				  , logStart
-				  , logEnd))
-	{
-		ParseXMLLog (logStart, logEnd, target);
-	}
-	else
-	{
-		throw std::exception ("XML file contains no log information");
-	}
+    if (GetLogTag ( (const char*) file.GetBuffer()
+                  , (const char*) file.GetBuffer() + file.GetSize()
+                  , logStart
+                  , logEnd))
+    {
+        ParseXMLLog (logStart, logEnd, target);
+    }
+    else
+    {
+        throw std::exception ("XML file contains no log information");
+    }
 }
 
 ///////////////////////////////////////////////////////////////

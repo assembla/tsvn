@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2007 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,7 +16,7 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "StrictLogIterator.h"
 
 // begin namespace LogCache
@@ -28,38 +28,38 @@ namespace LogCache
 
 bool CStrictLogIterator::HandleCopyAndDelete()
 {
-	// revision data lookup
+    // revision data lookup
 
-	index_t index = revisionIndices[revision];
+    index_t index = revisionIndices[revision];
 
-	// switch to new path, if necessary
+    // switch to new path, if necessary
 
-	bool result = InternalHandleCopyAndDelete ( revisionInfo.GetChangesBegin(index)
-											  , revisionInfo.GetChangesEnd(index)
-											  , revisionInfo.GetRootPath (index)
-											  , path
-											  , revision);
-	if (result)
-	{
-		// stop on copy
+    bool result = InternalHandleCopyAndDelete ( revisionInfo.GetChangesBegin (index)
+                                              , revisionInfo.GetChangesEnd (index)
+                                              , revisionInfo.GetRootPath (index)
+                                              , path
+                                              , revision);
+    if (result)
+    {
+        // stop on copy
 
-		revision = (revision_t)NO_REVISION;
-	}
+        revision = (revision_t) NO_REVISION;
+    }
 
-	return result;
+    return result;
 }
 
-// construction / destruction 
+// construction / destruction
 // (nothing special to do)
 
 CStrictLogIterator::CStrictLogIterator ( const CCachedLogInfo* cachedLog
-									   , revision_t startRevision
-									   , const CDictionaryBasedTempPath& startPath)
-	: CLogIteratorBase (cachedLog, startRevision, startPath)
+                                       , revision_t startRevision
+                                       , const CDictionaryBasedTempPath& startPath)
+    : CLogIteratorBase (cachedLog, startRevision, startPath)
 {
 }
 
-CStrictLogIterator::~CStrictLogIterator(void)
+CStrictLogIterator::~CStrictLogIterator (void)
 {
 }
 

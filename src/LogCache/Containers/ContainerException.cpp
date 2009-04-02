@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009 - TortoiseSVN
+// Copyright (C) 2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,12 +17,31 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 #include "stdafx.h"
-#include "CompositeOutStream.h"
+#include "ContainerException.h"
 
-// construction: nothing special to do
-
-CCompositeOutStreamBase::CCompositeOutStreamBase ( CCacheFileOutBuffer* aBuffer
-												 , SUB_STREAM_ID anID)
-	: CHierachicalOutStreamBase (aBuffer, anID)
+namespace LogCache
 {
+
+// construction / destruction
+
+CContainerException::CContainerException(const char* message)
+    : std::exception()
+{
+    strncpy (this->message, message, MAX_MESSAGE_LEN);
+    this->message[MAX_MESSAGE_LEN] = 0;
+}
+
+
+CContainerException::~CContainerException() throw()
+{
+}
+
+
+// implement message access
+
+const char* CContainerException::what() const throw()
+{
+    return message;
+}
+
 }

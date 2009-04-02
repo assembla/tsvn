@@ -85,11 +85,15 @@ private:
 
         /// if we own the file, we will keep it open
 
+#ifdef WIN32
         HANDLE fileHandle;
+#else
+	FILE* file;
+#endif
 
-	    /// we need that info to manipulate the file attributes
+        /// we need that info to manipulate the file attributes
 
-	    std::wstring fileName;
+        TFileName fileName;
 
         /// number of times this cache was not released propertly
 
@@ -121,7 +125,7 @@ private:
         /// call this *before* opening the file
         /// (will auto-drop crashed files etc.)
 
-        void AutoAcquire (const std::wstring& fileName);
+        void AutoAcquire (const TFileName& fileName);
 
         /// call this *after* releasing a cache file
         /// (resets the "hidden" flag and closes the handle

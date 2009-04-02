@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2007 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,8 +22,9 @@
 // necessary includes
 ///////////////////////////////////////////////////////////////
 
-#include "QuickHash.h"
+#include "../../Utils/QuickHash.h"
 #include "LogCacheGlobals.h"
+#include "ContainerException.h"
 
 ///////////////////////////////////////////////////////////////
 // forward declarations
@@ -143,7 +144,7 @@ public:
 	{
 	#if !defined (_SECURE_SCL)
 		if (index >= data.size())
-			throw std::exception ("pair dictionary index out of range");
+			throw CContainerException ("pair dictionary index out of range");
 	#endif
 
 		return data[index];
@@ -157,11 +158,11 @@ public:
 	void Swap (CIndexPairDictionary& rhs);
 
 	/// stream I/O
-
+	
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
-											 , CIndexPairDictionary& dictionary);
+	                                         , CIndexPairDictionary& dictionary);
 	friend IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
-											  , const CIndexPairDictionary& dictionary);
+	                                          , const CIndexPairDictionary& dictionary);
 
 	/// for statistics
 
@@ -171,9 +172,9 @@ public:
 /// stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
-								  , CIndexPairDictionary& dictionary);
+                                  , CIndexPairDictionary& dictionary);
 IHierarchicalOutStream& operator<< ( IHierarchicalOutStream& stream
-								   , const CIndexPairDictionary& dictionary);
+                                   , const CIndexPairDictionary& dictionary);
 
 ///////////////////////////////////////////////////////////////
 // end namespace LogCache

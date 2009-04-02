@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2008 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,8 +16,9 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "StdAfx.h"
-#include ".\revisionindex.h"
+#include "stdafx.h"
+#include "RevisionIndex.h"
+#include "Containers/ContainerException.h"
 
 // begin namespace LogCache
 
@@ -95,7 +96,7 @@ void CRevisionIndex::SetRevisionIndex (revision_t revision, index_t index)
 	assert (index != NO_INDEX);
 
 	if (revision == NO_REVISION)
-		throw std::exception ("Invalid revision");
+		throw CContainerException ("Invalid revision");
 
 	// special cases
 
@@ -121,7 +122,7 @@ void CRevisionIndex::SetRevisionIndex (revision_t revision, index_t index)
 		revision_t indexSize = (revision_t)indices.size();
 		revision_t newFirstRevision = firstRevision < indexSize
 			? 0
-			: min (firstRevision - indexSize, revision);
+			: std::min (firstRevision - indexSize, revision);
 
 		indices.insert (indices.begin(), firstRevision - newFirstRevision, (index_t)NO_INDEX);
 		firstRevision = newFirstRevision;
@@ -133,7 +134,7 @@ void CRevisionIndex::SetRevisionIndex (revision_t revision, index_t index)
 		{
 			// efficiently grow on the upper end
 
-			size_t toAdd = max (size, revision + 1 - firstRevision - size);
+			size_t toAdd = std::max (size, revision + 1 - firstRevision - size);
 			indices.insert (indices.end(), toAdd, (index_t)NO_INDEX);
 		}
 	}

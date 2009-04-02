@@ -38,7 +38,7 @@ namespace LogCache
 #else
 
 	/// log caching index
-	typedef DWORD index_t;
+	typedef unsigned index_t;
 	/// revision number
 	typedef index_t revision_t;
 

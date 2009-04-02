@@ -119,8 +119,8 @@ public:
 
 	// map file to memory, parse it and fill the target
 
-	static void LoadFromXML ( const std::wstring& xmlFileName
-						    , CCachedLogInfo& target);
+	static void LoadFromXML ( const TFileName& xmlFileName
+	                        , CCachedLogInfo& target);
 };
 
 ///////////////////////////////////////////////////////////////

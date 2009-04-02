@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2007 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 // necessary includes
 ///////////////////////////////////////////////////////////////
 
-#include "./Containers/logCacheGlobals.h"
+#include "./Containers/LogCacheGlobals.h"
 
 ///////////////////////////////////////////////////////////////
 // forward declarations
@@ -85,9 +85,9 @@ public:
 
 private:
 
-	/**
-	 * Contains all "header" data for a repository.
-	 */
+    /**
+     * Contains all "header" data for a repository.
+     */
 
     struct SPerRepositoryInfo
     {
