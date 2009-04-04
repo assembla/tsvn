@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009 - TortoiseSVN
+// Copyright (C) 2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,28 +25,16 @@
 #include "QuickHash.h"
 
 /**
- * A quick associative container that maps K (key) to V (value) instances.
- * K must implicitly convert to size_t.
+ * A quick container implementation for unique values to T.
  */
-template<class K, class V>
-class quick_hash_map
+template<class T>
+class quick_hash_set
 {    
 private:
     
     /// our actual data container
-    struct element_type
-    {
-        K key;
-        V value;
-    
-        element_type (K key, const V& value)
-            : key (key)
-            , value (value)
-        {
-        }
-    };
-    
-    typedef std::vector<element_type> data_type;
+
+    typedef std::vector<T> data_type;
     data_type data;
     
     /// used temporarily while batch-inserting
@@ -65,42 +53,51 @@ private:
     private:
     
         /// the data container we index with the hash
-        /// (used to map key -> (key, value))
-        typedef typename quick_hash_map<K, V>::data_type data_type;
+
+        typedef typename quick_hash_set<T>::data_type data_type;
         data_type* data;
     
     public:
     
         // simple construction
     
-        CHashFunction (data_type* map)
-            : data (map)
+        CHashFunction (data_type* data)
+            : data (data)
         {
         }
     
         // required typedefs and constants
     
-        typedef K value_type;
+        typedef T value_type;
         typedef size_t index_type;
     
         enum {NO_INDEX = (index_type)(-1)};
     
         /// the actual hash function
-        size_t operator() (value_type value) const
+        size_t operator() (const value_type& value) const
         {
-            return value;
+            size_t result = 0;
+            for ( const unsigned char* iter = reinterpret_cast<const unsigned char*>(&value)
+                , *end = iter + sizeof (T)
+                ; iter != end
+                ; ++iter)
+            {
+                result = result * 33 ^ *iter;
+            }
+
+            return result;
         }
     
         /// dictionary lookup
-        value_type value (index_type index) const
+        const value_type& value (index_type index) const
         {
-            return (*data) [index].key;
+            return data->at (index);
         }
     
         /// lookup and comparison
-        bool equal (value_type value, index_type index) const
+        bool equal (const value_type& value, index_type index) const
         {
-            return value == (*data) [index].key;
+            return value == data->at (index);
         }
     };
     
@@ -114,15 +111,14 @@ public:
     
     // publicly available types
     
-    typedef K key_type;
-    typedef V value_type;
+    typedef T value_type;
     
     class const_iterator
     {
     private:
     
-        typedef typename quick_hash_map<K,V>::data_type::const_iterator iterator;
-        typedef typename quick_hash_map<K,V>::element_type value_type;
+        typedef typename quick_hash_set<T>::data_type::const_iterator iterator;
+        typedef typename quick_hash_set<T>::value_type value_type;
     
         iterator iter;
     
@@ -137,7 +133,7 @@ public:
     
         // pointer-like behavior
     
-        const V& operator*() const
+        const value_type& operator*() const
         {
             return iter->value;
         }
@@ -202,13 +198,13 @@ public:
     // construction
     // (default-implemented destruction works as desired)
     
-    quick_hash_map()
+    quick_hash_set()
         : hash (CHashFunction (&data))
         , batch_insert_start ( (size_t)-1)
     {
     }
     
-    quick_hash_map (const quick_hash_map& rhs)
+    quick_hash_set (const quick_hash_set& rhs)
         : hash (CHashFunction (&data))
         , batch_insert_start ( (size_t)-1)
     {
@@ -217,7 +213,7 @@ public:
     
     // assignment
     
-    quick_hash_map& operator= (const quick_hash_map& rhs)
+    quick_hash_set& operator= (const quick_hash_set& rhs)
     {
         hash = rhs.hash;
         data = rhs.data;
@@ -238,10 +234,10 @@ public:
         return data.end();
     }
     
-    const_iterator find (key_type key) const
+    const_iterator find (const value_type& value) const
     {
         assert (batch_insert_start == (size_t)-1);
-        size_t index = hash.find (key);
+        size_t index = hash.find (value);
         return index == CHashFunction::NO_INDEX
                ? end()
                : begin() + index;
@@ -249,20 +245,20 @@ public:
     
     // insert a new key, value pair
     
-    void insert (key_type key, const value_type& value)
+    void insert (const value_type& value)
     {
-        assert (find (key) == end());
+        assert (find (value) == end());
     
-        data.push_back (element_type (key, value));
-        hash.insert (key, data.size()-1);
+        data.push_back (value);
+        hash.insert (value, data.size()-1);
     }
     
-    void auto_insert (key_type key, const value_type& value)
+    void auto_insert (const value_type& value)
     {
-        if (hash.find (key) == CHashFunction::NO_INDEX)
+        if (hash.find (value) == CHashFunction::NO_INDEX)
         {
-            data.push_back (element_type (key, value));
-            hash.insert (key, data.size()-1);
+            data.push_back (value);
+            hash.insert (value, data.size()-1);
         }
     }
 
@@ -282,9 +278,9 @@ public:
         batch_insert_start = data.size();
     }
     
-    void batch_insert (key_type key, const value_type& value)
+    void batch_insert (const value_type& value)
     {
-        data.push_back (element_type (key, value));
+        data.push_back (value);
     }
     
     void end_batch_insert (size_t startIndex)
@@ -309,4 +305,5 @@ public:
         hash.clear();
         data.clear();
     }
+
 };
