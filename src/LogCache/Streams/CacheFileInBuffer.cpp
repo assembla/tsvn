@@ -56,9 +56,9 @@ void CCacheFileInBuffer::ReadStreamOffsets()
 	streamContents.push_back (lastStream);
 
 	size_t contentEnd = GetSize() - (streamCount+1) * sizeof (DWORD);
-	const DWORD* streamSizes = GetDWORD (contentEnd);
+	const unsigned* streamSizes = GetDWORD (contentEnd);
 
-	for (DWORD i = 0; i < streamCount; ++i)
+	for (unsigned i = 0; i < streamCount; ++i)
 	{
 		lastStream += streamSizes[i];
 		streamContents.push_back (lastStream);

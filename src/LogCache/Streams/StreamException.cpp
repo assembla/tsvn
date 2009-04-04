@@ -24,7 +24,7 @@
 CStreamException::CStreamException(const char* message)
     : std::exception()
 {
-    strncpy (this->message, message, MAX_MESSAGE_LEN);
+    strncpy_s (this->message, message, MAX_MESSAGE_LEN);
     this->message[MAX_MESSAGE_LEN] = 0;
 }
 

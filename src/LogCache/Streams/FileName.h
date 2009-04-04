@@ -17,7 +17,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 #ifdef WIN32
-typedef std::wtring TFileName;
+typedef std::wstring TFileName;
 #else
 typedef std::string TFileName;
 #endif
