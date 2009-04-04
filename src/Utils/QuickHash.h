@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2007 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -178,7 +178,7 @@ private:
 		size_t new_capacity = grower.capacity();
 	
 		data = new index_type[new_capacity];
-		stdext::unchecked_fill_n (data, new_capacity, NO_INDEX);
+		stdext::unchecked_fill_n (data, new_capacity, (index_type)NO_INDEX);
 	}
 	
 	/// add a value to the hash 
@@ -317,7 +317,7 @@ public:
 
         // preparation
 
-        size_t clusterSize = max (1, (last - first) / MAX_CLUSTERS);
+        size_t clusterSize = std::max (1, (last - first) / MAX_CLUSTERS);
         size_t shift = 0;
         while (((size_t)MAX_CLUSTERS << shift) < grower.capacity())
             ++shift;
