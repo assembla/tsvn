@@ -145,14 +145,6 @@ CLogDlg::CLogDlg(CWnd* pParent /*=NULL*/)
 	, m_hAccel(NULL)
 {
 	m_bFilterWithRegex = !!CRegDWORD(_T("Software\\TortoiseSVN\\UseRegexFilter"), TRUE);
-	// use the default GUI font, create a copy of it and
-	// change the copy to BOLD (leave the rest of the font
-	// the same)
-	HFONT hFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
-	LOGFONT lf = {0};
-	GetObject(hFont, sizeof(LOGFONT), &lf);
-	lf.lfWeight = FW_BOLD;
-	m_boldFont = CreateFontIndirect(&lf);
 }
 
 CLogDlg::~CLogDlg()
@@ -250,6 +242,14 @@ void CLogDlg::SetParams(const CTSVNPath& path, SVNRev pegrev, SVNRev startrev, S
 BOOL CLogDlg::OnInitDialog()
 {
 	CResizableStandAloneDialog::OnInitDialog();
+	// use the default GUI font, create a copy of it and
+	// change the copy to BOLD (leave the rest of the font
+	// the same)
+	HFONT hFont = (HFONT)m_LogList.SendMessage(WM_GETFONT);
+	LOGFONT lf = {0};
+	GetObject(hFont, sizeof(LOGFONT), &lf);
+	lf.lfWeight = FW_BOLD;
+	m_boldFont = CreateFontIndirect(&lf);
 
 	EnableToolTips();
 	m_LogList.SetTooltipProvider(this);
@@ -3602,11 +3602,12 @@ void CLogDlg::ResizeAllListCtrlCols()
 					PLOGENTRYDATA pCurLogEntry = reinterpret_cast<PLOGENTRYDATA>(m_arShownList.GetAt(index));
 					if ((pCurLogEntry)&&(pCurLogEntry->Rev == m_wcRev))
 					{
+						HFONT hFont = (HFONT)m_LogList.SendMessage(WM_GETFONT);
 						// set the bold font and ask for the string width again
 						m_LogList.SendMessage(WM_SETFONT, (WPARAM)m_boldFont, NULL);
 						linewidth = m_LogList.GetStringWidth(m_LogList.GetItemText(index, col)) + 14;
 						// restore the system font
-						m_LogList.SendMessage(WM_SETFONT, NULL, NULL);
+						m_LogList.SendMessage(WM_SETFONT, (WPARAM)hFont, NULL);
 					}
 				}
 				if (index == 0)
