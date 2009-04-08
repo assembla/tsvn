@@ -135,7 +135,7 @@ public:
     
         const value_type& operator*() const
         {
-            return iter->value;
+            return *iter;
         }
     
         const value_type* operator->() const
