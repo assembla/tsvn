@@ -24,31 +24,21 @@
  */
 namespace LogCache
 {
-#ifdef HUGE_LOG_CACHE
-
-	typedef size_t index_t;
-	typedef index_t revision_t;
-
-	enum
-	{
-		NO_INDEX = (size_t)0xffffffffffffffff,
-		NO_REVISION = NO_INDEX,
-	};
-
-#else
-
 	/// log caching index
+#ifdef HUGE_LOG_CACHE
+	typedef size_t index_t;
+#else
 	typedef unsigned index_t;
+#endif
+
 	/// revision number
 	typedef index_t revision_t;
 
 	enum
 	{
 		/// invalid/unknown index
-		NO_INDEX = (revision_t)0xffffffff,
+		NO_INDEX = (index_t)(-1),
 		/// invalid/unknown revision
-		NO_REVISION = NO_INDEX,
+		NO_REVISION = (revision_t)(-1),
 	};
-
-#endif
 };
