@@ -75,7 +75,10 @@
 #include <map>
 #include <set>
 #include <vector>
+#include <iostream>
 #include <fstream>
+
+#include "tstring.h"
 
 // Commonly used log cache streams
 // (others may be included locally)
@@ -86,6 +89,3 @@
 #include "./Streams/PackedTime64OutStream.h"
 #include "./Streams/CompositeInStream.h"
 #include "./Streams/CompositeOutStream.h"
-
-
-

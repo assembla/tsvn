@@ -23,6 +23,8 @@
 ///////////////////////////////////////////////////////////////
 
 #include "./Containers/LogCacheGlobals.h"
+#include "./Streams/FileName.h"
+#include "./ConnectionState.h"
 
 ///////////////////////////////////////////////////////////////
 // forward declarations
@@ -59,30 +61,6 @@ namespace LogCache
 
 class CRepositoryInfo
 {
-public:
-
-    /**
-     * Per-repository server connectivity state: Default is 
-     * @a online, user can switch to one of the other states
-     * upon connection failure. Refreshing a view will always 
-     * reset to default.
-     */
-
-    enum ConnectionState 
-    {
-        /// call the server whenever necessary (default)
-
-        online = 0,
-
-        /// don't call the server, except when HEAD info needs to be refreshed
-
-        tempOffline = 1,
-
-        /// don't contact the server for any reason whatsoever
-
-        offline = 2
-    };
-
 private:
 
     /**
@@ -93,19 +71,19 @@ private:
     {
         /// the repository root URL
 
-        CString root;
+        std::string root;
 
         /// repository URL
 
-        CString uuid;
+        std::string uuid;
 
         /// cached repository file
 
-        CString fileName;
+        tstring fileName;
 
         /// path we used to ask SVN for the head revision
 
-        CString headURL;
+        std::string headURL;
 
         /// the answer we got
 
@@ -131,11 +109,11 @@ private:
 
         /// several indices for faster access
 
-        typedef std::multimap<CString, SPerRepositoryInfo*> TPartialIndex;
+        typedef std::multimap<std::string, SPerRepositoryInfo*> TPartialIndex;
         TPartialIndex uuidIndex;
         TPartialIndex urlIndex;
 
-        typedef std::map<std::pair<CString, CString>, SPerRepositoryInfo*> TFullIndex;
+        typedef std::map<std::pair<std::string, std::string>, SPerRepositoryInfo*> TFullIndex;
         TFullIndex fullIndex;
 
         /**
@@ -151,10 +129,10 @@ private:
 
         // a lookup utility that scans an index range
 
-        CString FindRoot 
+        std::string FindRoot 
             ( TPartialIndex::const_iterator begin
             , TPartialIndex::const_iterator end
-            , const CString& url) const;
+            , const std::string& url) const;
 
     public:
 
@@ -166,8 +144,8 @@ private:
         /// lookup (using current rules setting);
         /// pass empty strings for unknown values.
 
-        CString FindRoot (const CString& uuid, const CString& url) const;
-        SPerRepositoryInfo* Lookup (const CString& uuid, const CString& root) const;
+        std::string FindRoot (const std::string& uuid, const std::string& url) const;
+        SPerRepositoryInfo* Lookup (const std::string& uuid, const std::string& root) const;
 
         /// modification
 
@@ -176,8 +154,8 @@ private:
 
         /// read / write file
 
-        void Load (const CString& fileName);
-        void Save (const CString& fileName) const;
+        void Load (const TFileName& fileName);
+        void Save (const TFileName& fileName) const;
         void Clear();
 
         /// status info
@@ -200,7 +178,7 @@ private:
 
     /// where to store the cached data
 
-    CString cacheFolder;
+    TFileName cacheFolder;
 
     /// use this instance for all SVN access
 
@@ -222,48 +200,48 @@ public:
 
     /// construction / destruction: auto-load and save
 
-    CRepositoryInfo (SVN& svn, const CString& cacheFolderPath);
+    CRepositoryInfo (SVN& svn, const TFileName& cacheFolderPath);
     ~CRepositoryInfo();
 
     /// look-up and ask SVN if the info is not in cache. 
     /// cache the result.
 
-	CString GetRepositoryRoot (const CTSVNPath& url);
-	CString GetRepositoryUUID (const CTSVNPath& url);
-	CString GetRepositoryRootAndUUID (const CTSVNPath& url, CString& uuid);
+    std::string GetRepositoryRoot (const CTSVNPath& url);
+    std::string GetRepositoryUUID (const CTSVNPath& url);
+    std::string GetRepositoryRootAndUUID (const CTSVNPath& url, std::string& uuid);
 
-    revision_t GetHeadRevision (CString uuid, const CTSVNPath& url);
+    revision_t GetHeadRevision (std::string uuid, const CTSVNPath& url);
 
     /// make sure, we will ask the repository for the HEAD
 
-    void ResetHeadRevision (const CString& uuid, const CString& root);
+    void ResetHeadRevision (const std::string& uuid, const std::string& root);
 
     /// is the repository offline? 
 	/// Don't modify the state if autoSet is false.
 
-    bool IsOffline (const CString& uuid, const CString& url, bool autoSet);
+    bool IsOffline (const std::string& uuid, const std::string& url, bool autoSet);
 
     /// get the connection state (uninterpreted)
 
-    ConnectionState GetConnectionState (const CString& uuid, const CString& url);
+    ConnectionState GetConnectionState (const std::string& uuid, const std::string& url);
 
     /// remove a specific entry.
     /// Parameters must be copied because they may stem from the
     /// info object being deleted.
 
-    void DropEntry (CString uuid, CString url);
+    void DropEntry (std::string uuid, std::string url);
 
-	/// write all changes to disk
+    /// write all changes to disk
 
-	void Flush();
+    void Flush();
 
     /// clear cache
 
     void Clear();
 
-	/// get the owning SVN instance
+    /// get the owning SVN instance
 
-	SVN& GetSVN() const;
+    SVN& GetSVN() const;
 
     /// access to the result of the last SVN operation
 
@@ -271,12 +249,12 @@ public:
 
     /// construct the dump file name
 
-    CString GetFileName() const;
+    TFileName GetFileName() const;
 
     /// for statistics
 
-	friend class CLogCacheStatistics;
-	friend class CLogCachePool;
+    friend class CLogCacheStatistics;
+    friend class CLogCachePool;
 };
 
 ///////////////////////////////////////////////////////////////

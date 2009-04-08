@@ -1,15 +1,21 @@
 noinst_LIBRARIES = liblogcache.a
 liblogcache_a_SOURCES = \
+	CachedLogInfo.cpp\
 	CopyFollowingLogIterator.cpp\
 	CSVWriter.cpp\
 	LogIteratorBase.cpp\
+	LogCacheSettings.cpp\
+	RepositoryInfo.cpp\
 	RevisionIndex.cpp\
 	RevisionInfoContainer.cpp\
 	SkipRevisionInfo.cpp\
-	StrictLogIterator.cpp
+	StrictLogIterator.cpp\
+	XMLLogReader.cpp\
+	XMLLogWriter.cpp
 
 AM_CPPFLAGS = \
 	-I$(srcdir)/../Utils\
+	-I$(srcdir)/../UtilsProject\
 	-I$(srcdir)/../CompatibilityHeaders\
 	-I$(srcdir)/../Subversion/subversion/include\
 	-I$(srcdir)/../apr/include\

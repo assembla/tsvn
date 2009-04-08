@@ -78,6 +78,7 @@ private:
     {
     private:
 
+#ifdef WIN32
         /// only this value means "no crash" because "0" means
         /// TSVN didn't crash *before* the .lock file was set.
 
@@ -85,11 +86,8 @@ private:
 
         /// if we own the file, we will keep it open
 
-#ifdef WIN32
         HANDLE fileHandle;
-#else
 	FILE* file;
-#endif
 
         /// we need that info to manipulate the file attributes
 
@@ -98,17 +96,18 @@ private:
         /// number of times this cache was not released propertly
 
         int failureCount;
+#endif
 
         /// "in use" (hidden flag) file flag handling
 
-        bool IsMarked (const std::wstring& name) const;
-        void SetMark (const std::wstring& name);
+        bool IsMarked (const TFileName& name) const;
+        void SetMark (const TFileName& name);
         void ResetMark();
 
         /// allow for multiple failures 
 
-        bool ShouldDrop (const std::wstring& name);
-        void UpdateMark (const std::wstring& name);
+        bool ShouldDrop (const TFileName& name);
+        void UpdateMark (const TFileName& name);
 
         /// copying is not supported
 
@@ -117,7 +116,7 @@ private:
 
     public:
 
-        // default construction / destruction
+        /// default construction / destruction
 
         CCacheFileManager();
         ~CCacheFileManager();
@@ -140,11 +139,11 @@ private:
 
 	/// where we load / save our cached data
 
-	std::wstring fileName;
+	TFileName fileName;
 
-    /// crash detection.
-
-    CCacheFileManager fileManager;
+	/// crash detection.
+	
+	CCacheFileManager fileManager;
 
 	/// revision index and the log info itself
 
@@ -178,27 +177,27 @@ public:
 	/// construction / destruction (nothing to do)
 
 	CCachedLogInfo();
-	CCachedLogInfo (const std::wstring& aFileName);
+	CCachedLogInfo (const TFileName& aFileName);
 	~CCachedLogInfo (void);
 
 	/// cache persistence
 
 	void Load();
 	bool IsModified() const;
-    bool IsEmpty() const;
+	bool IsEmpty() const;
 	void Save();
-	void Save (const std::wstring& newFileName);
+	void Save (const TFileName& newFileName);
 
 	/// data access
 
-	const std::wstring& GetFileName() const;
+	const TFileName& GetFileName() const;
 	const CRevisionIndex& GetRevisions() const;
 	const CRevisionInfoContainer& GetLogInfo() const;
 	const CSkipRevisionInfo& GetSkippedRevisions() const;
 
-    /// find the highest revision not exceeding the given timestamp
-
-    revision_t FindRevisionByDate (__time64_t maxTimeStamp) const;
+	/// find the highest revision not exceeding the given timestamp
+	
+	revision_t FindRevisionByDate (__time64_t maxTimeStamp) const;
 
 	/// data modification 
 	/// (mirrors CRevisionInfoContainer and CSkipRevisionInfo)
@@ -223,7 +222,7 @@ public:
 	void AddUserRevProp ( const std::string& revProp
 				        , const std::string& value);
 
-    void AddSkipRange ( const CDictionaryBasedPath& path
+	void AddSkipRange ( const CDictionaryBasedPath& path
 					  , revision_t startRevision
 					  , revision_t count);
 
@@ -258,7 +257,7 @@ inline void CCachedLogInfo::Save()
 // data access
 ///////////////////////////////////////////////////////////////
 
-inline const std::wstring& CCachedLogInfo::GetFileName() const
+inline const TFileName& CCachedLogInfo::GetFileName() const
 {
 	return fileName;
 }

@@ -262,7 +262,8 @@ void CXMLLogReader::ParseChanges (const char* current
 
             default:
 
-                throw std::exception ("unknown action type");
+                std::cerr << "ignoring unknown action type" << std::endl;
+                continue;
         }
 
         target.AddChange (action, svn_node_unknown, path, fromPath, fromRevision);
@@ -317,7 +318,12 @@ void CXMLLogReader::ParseXMLLog (const char* current
             time.tm_year -= 1900;
             time.tm_mon -= 1;
 
+        #ifdef WIN32
             timeStamp = _mkgmtime64 (&time) *1000000 + musecs;
+        #else
+            timeStamp = mktime (&time);
+            timeStamp = timeStamp * 1000000 + musecs;
+        #endif
         }
 
         target.Insert (revision, author, comment, timeStamp);
@@ -358,7 +364,7 @@ void CXMLLogReader::LoadFromXML ( const TFileName& xmlFileName
     }
     else
     {
-        throw std::exception ("XML file contains no log information");
+        std::cerr << "XML file contains no log information" << std::endl;
     }
 }
 

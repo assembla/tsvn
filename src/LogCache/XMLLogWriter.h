@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2007 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -87,7 +87,7 @@ public:
 
 	// write the whole change content
 
-	static void SaveToXML ( const std::wstring& xmlFileName
+	static void SaveToXML ( const TFileName& xmlFileName
 						  , const CCachedLogInfo& source
 						  , bool topDown);
 };

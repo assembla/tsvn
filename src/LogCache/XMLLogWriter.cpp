@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2007 - TortoiseSVN
+// Copyright (C) 2007-2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,7 +16,7 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "XMLLogWriter.h"
 #include "./Streams/BufferedOutFile.h"
 
@@ -32,39 +32,44 @@ namespace LogCache
 ///////////////////////////////////////////////////////////////
 
 void CXMLLogWriter::WriteTimeStamp ( CBufferedOutFile& file
-								   , __time64_t timeStamp)
+                                   , __time64_t timeStamp )
 {
-	// empty time stamps don't show up in the log
+    // empty time stamps don't show up in the log
 
-	if (timeStamp == 0)
-		return;
+    if ( timeStamp == 0 )
+        return;
 
-	// decode 64 bit time stamp
+    // decode 64 bit time stamp
 
-	int musecs = (int)(timeStamp % 1000000);
-	timeStamp /= 1000000;
-	tm time;
+    int musecs = ( int ) ( timeStamp % 1000000 );
+    timeStamp /= 1000000;
+    tm time;
 
-	if (_gmtime64_s (&time, &timeStamp) != 0)
-		return;
+#ifdef WIN32
+    if ( _gmtime64_s ( &time, &timeStamp ) != 0 )
+        return;
+#else
+    time_t temp = (time_t)(timeStamp);
+    time = *gmtime (&temp);
+#endif
 
-	// fill the template & write to stream
+    // fill the template & write to stream
 
-	enum {BUFFER_SIZE = 100};
-	char buffer[BUFFER_SIZE];
+    enum {BUFFER_SIZE = 100};
+    char buffer[BUFFER_SIZE];
 
-	_snprintf_s ( buffer
- 			    , BUFFER_SIZE
-			    , "<date>%04d-%02d-%02dT%02d:%02d:%02d.%06dZ</date>\n"
-			    , time.tm_year + 1900
-			    , time.tm_mon + 1
-			    , time.tm_mday
-			    , time.tm_hour
-			    , time.tm_min
-			    , time.tm_sec
-			    , musecs);
+    _snprintf_s ( buffer
+                , BUFFER_SIZE
+                , "<date>%04d-%02d-%02dT%02d:%02d:%02d.%06dZ</date>\n"
+                , time.tm_year + 1900
+                , time.tm_mon + 1
+                , time.tm_mday
+                , time.tm_hour
+                , time.tm_min
+                , time.tm_sec
+                , musecs );
 
-	file << buffer;
+    file << buffer;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -72,74 +77,74 @@ void CXMLLogWriter::WriteTimeStamp ( CBufferedOutFile& file
 ///////////////////////////////////////////////////////////////
 
 void CXMLLogWriter::WriteChanges ( CBufferedOutFile& file
-								 , CChangesIterator iter	
-								 , const CChangesIterator& last)	
+                                 , CChangesIterator iter
+                                 , const CChangesIterator& last )
 {
-	// empty change sets won't show up in the log
+    // empty change sets won't show up in the log
 
-	if (iter == last)
-		return;
+    if ( iter == last )
+        return;
 
-	// static text blocks
+    // static text blocks
 
-	static const std::string startText = "<paths>\n";
-	static const std::string pathStartText = "<path";
+    static const std::string startText = "<paths>\n";
+    static const std::string pathStartText = "<path";
 
-	static const std::string copyFromPathText = "\n   copyfrom-path=\"";
-	static const std::string copyFromRevisionText = "\"\n   copyfrom-rev=\"";
-	static const std::string copyFromEndText = "\"";
+    static const std::string copyFromPathText = "\n   copyfrom-path=\"";
+    static const std::string copyFromRevisionText = "\"\n   copyfrom-rev=\"";
+    static const std::string copyFromEndText = "\"";
 
-	static const std::string addedActionText = "\n   action=\"A\"";
-	static const std::string modifiedActionText = "\n   action=\"M\"";
-	static const std::string replacedActionText = "\n   action=\"R\"";
-	static const std::string deletedActionText = "\n   action=\"D\"";
+    static const std::string addedActionText = "\n   action=\"A\"";
+    static const std::string modifiedActionText = "\n   action=\"M\"";
+    static const std::string replacedActionText = "\n   action=\"R\"";
+    static const std::string deletedActionText = "\n   action=\"D\"";
 
-	static const std::string pathText = ">";
-	static const std::string pathEndText = "</path>\n";
-	static const std::string endText = "</paths>\n";
+    static const std::string pathText = ">";
+    static const std::string pathEndText = "</path>\n";
+    static const std::string endText = "</paths>\n";
 
-	// write all changes
+    // write all changes
 
-	file << startText;
+    file << startText;
 
-	for (; iter != last; ++iter) 
-	{
-		file << pathStartText;
+    for ( ; iter != last; ++iter )
+    {
+        file << pathStartText;
 
-		if (iter->HasFromPath())
-		{
-			file << copyFromPathText;
-			file << iter->GetFromPath().GetPath();
-			file << copyFromRevisionText;
-			file << iter->GetFromRevision();
-			file << copyFromEndText;
-		}
+        if ( iter->HasFromPath() )
+        {
+            file << copyFromPathText;
+            file << iter->GetFromPath().GetPath();
+            file << copyFromRevisionText;
+            file << iter->GetFromRevision();
+            file << copyFromEndText;
+        }
 
-		switch (iter->GetAction())
-		{
-			case CRevisionInfoContainer::ACTION_CHANGED:
-				file << modifiedActionText;
-				break;
-			case CRevisionInfoContainer::ACTION_ADDED:
-				file << addedActionText;
-				break;
-			case CRevisionInfoContainer::ACTION_DELETED:
-				file << deletedActionText;
-				break;
-			case CRevisionInfoContainer::ACTION_REPLACED:
-				file << replacedActionText;
-				break;
-			default:
-				break;
-		}
+        switch ( iter->GetAction() )
+        {
+            case CRevisionInfoContainer::ACTION_CHANGED:
+                file << modifiedActionText;
+                break;
+            case CRevisionInfoContainer::ACTION_ADDED:
+                file << addedActionText;
+                break;
+            case CRevisionInfoContainer::ACTION_DELETED:
+                file << deletedActionText;
+                break;
+            case CRevisionInfoContainer::ACTION_REPLACED:
+                file << replacedActionText;
+                break;
+            default:
+                break;
+        }
 
-		file << pathText;
-		file << iter->GetPath().GetPath();
+        file << pathText;
+        file << iter->GetPath().GetPath();
 
-		file << pathEndText;
-	}
+        file << pathEndText;
+    }
 
-	file << endText;
+    file << endText;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -147,47 +152,47 @@ void CXMLLogWriter::WriteChanges ( CBufferedOutFile& file
 ///////////////////////////////////////////////////////////////
 
 void CXMLLogWriter::WriteRevisionInfo ( CBufferedOutFile& file
-									  , const CRevisionInfoContainer& info
-									  , revision_t revision
-									  , index_t index)
+                                      , const CRevisionInfoContainer& info
+                                      , revision_t revision
+                                      , index_t index )
 {
-	static const std::string startText = "<logentry\n   revision=\"";
-	static const std::string revisionEndText = "\">\n";
-	static const std::string startAuthorText = "<author>";
-	static const std::string endAuthorText = "</author>\n";
-	static const std::string msgText = "<msg>";
-	static const std::string endText = "</msg>\n</logentry>\n";
+    static const std::string startText = "<logentry\n   revision=\"";
+    static const std::string revisionEndText = "\">\n";
+    static const std::string startAuthorText = "<author>";
+    static const std::string endAuthorText = "</author>\n";
+    static const std::string msgText = "<msg>";
+    static const std::string endText = "</msg>\n</logentry>\n";
 
-	// <logentry> start tag (includes revision)
+    // <logentry> start tag (includes revision)
 
-	file << startText;
-	file << revision;
-	file << revisionEndText;
+    file << startText;
+    file << revision;
+    file << revisionEndText;
 
-	// write the author, if given
+    // write the author, if given
 
-	const char* author = info.GetAuthor (index);
-	if (*author != 0)
-	{
-		file << startAuthorText;
-		file << author;
-		file << endAuthorText;
-	}
+    const char* author = info.GetAuthor ( index );
+    if ( *author != 0 )
+    {
+        file << startAuthorText;
+        file << author;
+        file << endAuthorText;
+    }
 
-	// add time stamp, if given
+    // add time stamp, if given
 
-	WriteTimeStamp (file, info.GetTimeStamp (index));
+    WriteTimeStamp ( file, info.GetTimeStamp ( index ) );
 
-	// list the changed paths, if given
+    // list the changed paths, if given
 
-	WriteChanges (file, info.GetChangesBegin(index), info.GetChangesEnd(index));
+    WriteChanges ( file, info.GetChangesBegin ( index ), info.GetChangesEnd ( index ) );
 
-	// always add the commit message
+    // always add the commit message
 
-	file << msgText;
-	file << info.GetComment (index);
+    file << msgText;
+    file << info.GetComment ( index );
 
-	file << endText;
+    file << endText;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -195,22 +200,22 @@ void CXMLLogWriter::WriteRevisionInfo ( CBufferedOutFile& file
 ///////////////////////////////////////////////////////////////
 
 void CXMLLogWriter::WriteRevionsTopDown ( CBufferedOutFile& file
-										, const CCachedLogInfo& source)
+        , const CCachedLogInfo& source )
 {
-	const CRevisionIndex& revisions = source.GetRevisions();
-	const CRevisionInfoContainer& info = source.GetLogInfo();
+    const CRevisionIndex& revisions = source.GetRevisions();
+    const CRevisionInfoContainer& info = source.GetLogInfo();
 
-	for ( revision_t revision = revisions.GetLastRevision()-1
-		, fristRevision = revisions.GetFirstRevision()
-		; revision+1 > fristRevision
-		; --revision)
-	{
-		index_t index = revisions[revision];
-		if (index != NO_INDEX)
-		{
-			WriteRevisionInfo (file, info, revision, index);
-		}
-	}
+    for ( revision_t revision = revisions.GetLastRevision()-1
+        , fristRevision = revisions.GetFirstRevision()
+        ; revision+1 > fristRevision
+        ; --revision )
+    {
+        index_t index = revisions[revision];
+        if ( index != NO_INDEX )
+        {
+            WriteRevisionInfo ( file, info, revision, index );
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////
@@ -218,22 +223,22 @@ void CXMLLogWriter::WriteRevionsTopDown ( CBufferedOutFile& file
 ///////////////////////////////////////////////////////////////
 
 void CXMLLogWriter::WriteRevionsBottomUp ( CBufferedOutFile& file
-										 , const CCachedLogInfo& source)
+                                         , const CCachedLogInfo& source )
 {
-	const CRevisionIndex& revisions = source.GetRevisions();
-	const CRevisionInfoContainer& info = source.GetLogInfo();
+    const CRevisionIndex& revisions = source.GetRevisions();
+    const CRevisionInfoContainer& info = source.GetLogInfo();
 
-	for ( revision_t revision = revisions.GetFirstRevision()
-		, lastRevision = revisions.GetLastRevision()
-		; revision < lastRevision
-		; ++revision)
-	{
-		index_t index = revisions[revision];
-		if (index != NO_INDEX)
-		{
-			WriteRevisionInfo (file, info, revision, index);
-		}
-	}
+    for ( revision_t revision = revisions.GetFirstRevision()
+        , lastRevision = revisions.GetLastRevision()
+        ; revision < lastRevision
+        ; ++revision )
+    {
+        index_t index = revisions[revision];
+        if ( index != NO_INDEX )
+        {
+            WriteRevisionInfo ( file, info, revision, index );
+        }
+    }
 }
 
 
@@ -241,27 +246,27 @@ void CXMLLogWriter::WriteRevionsBottomUp ( CBufferedOutFile& file
 // write the whole change content
 ///////////////////////////////////////////////////////////////
 
-void CXMLLogWriter::SaveToXML ( const std::wstring& xmlFileName
-							  , const CCachedLogInfo& source
-							  , bool topDown)
+void CXMLLogWriter::SaveToXML ( const TFileName& xmlFileName
+                              , const CCachedLogInfo& source
+                              , bool topDown )
 {
-	CBufferedOutFile file (xmlFileName);
+    CBufferedOutFile file ( xmlFileName );
 
-	const char* header = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<log>\n";
-	const char* footer = "</log>\n";
+    const char* header = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<log>\n";
+    const char* footer = "</log>\n";
 
-	file << header;
+    file << header;
 
-	if (topDown)
-	{
-		WriteRevionsTopDown (file, source);
-	}
-	else
-	{
-		WriteRevionsBottomUp (file, source);
-	}
+    if ( topDown )
+    {
+        WriteRevionsTopDown ( file, source );
+    }
+    else
+    {
+        WriteRevionsBottomUp ( file, source );
+    }
 
-	file << footer;
+    file << footer;
 }
 
 

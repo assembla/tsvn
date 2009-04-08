@@ -16,13 +16,13 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "LogCacheSettings.h"
 
 // TSVN log cache settings path within the registry
 
-#define REGKEY(x) _T("Software\\TortoiseSVN\\LogCache\\" ## _T(x))
-#define REGKEY15(x) _T("Software\\TortoiseSVN\\" ## _T(x))
+#define REGKEY(x) _T("Software\\TortoiseSVN\\LogCache\\" x)
+#define REGKEY15(x) _T("Software\\TortoiseSVN\\" x)
 
 // begin namespace LogCache
 
@@ -33,8 +33,8 @@ namespace LogCache
 
 CSettings::CSettings()
     : enableLogCaching (REGKEY ("UseLogCache"), TRUE)
-	, supportAmbiguousURL (REGKEY ("SupportAmbiguousURL"), TRUE)
-	, supportAmbiguousUUID (REGKEY ("SupportAmbiguousUUID"), TRUE)
+    , supportAmbiguousURL (REGKEY ("SupportAmbiguousURL"), TRUE)
+    , supportAmbiguousUUID (REGKEY ("SupportAmbiguousUUID"), TRUE)
     , defaultConnectionState (REGKEY ("DefaultConnectionState"), 0)
     , maxHeadAge (REGKEY ("HeadCacheAgeLimit"), 0)
     , cacheDropAge (REGKEY ("CacheDropAge"), 10)
@@ -43,7 +43,7 @@ CSettings::CSettings()
 {
     // auto-migration
 
-	if (CRegDWORD (REGKEY ("Version"), 150) < 160)
+    if (CRegDWORD (REGKEY ("Version"), 150) < 160)
         Migrate();
 }
 
@@ -59,7 +59,7 @@ CSettings& CSettings::GetInstance()
 
 void CSettings::Migrate()
 {
-	CRegDWORD oldEnableLogCaching (REGKEY15 ("UseLogCache"), TRUE);
+    CRegDWORD oldEnableLogCaching (REGKEY15 ("UseLogCache"), TRUE);
     if (oldEnableLogCaching.exists())
     {
         SetEnabled ((DWORD)oldEnableLogCaching != FALSE);
@@ -97,7 +97,7 @@ void CSettings::Migrate()
 
     // current registry format
 
-	CRegDWORD (REGKEY ("Version")) = 160;
+    CRegDWORD (REGKEY ("Version")) = 160;
 }
 
 /// has log caching been enabled?
