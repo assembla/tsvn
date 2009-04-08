@@ -22,7 +22,7 @@
 // required includes
 ///////////////////////////////////////////////////////////////
 
-#include "RepositoryInfo.h"
+#include "ConnectionState.h"
 
 #ifdef WIN32
 #include "Registry.h"
@@ -108,8 +108,8 @@ public:
 
     /// "go offline" usage
 
-    static CRepositoryInfo::ConnectionState GetDefaultConnectionState();
-    static void SetDefaultConnectionState (CRepositoryInfo::ConnectionState state);
+    static ConnectionState GetDefaultConnectionState();
+    static void SetDefaultConnectionState (ConnectionState state);
 
     /// controls when to bypass the repository HEAD lookup 
 

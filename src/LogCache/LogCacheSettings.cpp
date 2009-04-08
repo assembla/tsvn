@@ -80,8 +80,8 @@ void CSettings::Migrate()
     CRegDWORD oldDefaultConnectionState (REGKEY15 ("DefaultConnectionState"), 0);
     if (oldDefaultConnectionState.exists())
     {
-        CRepositoryInfo::ConnectionState state 
-            = static_cast<CRepositoryInfo::ConnectionState>
+        ConnectionState state 
+            = static_cast<ConnectionState>
                 ((DWORD)oldDefaultConnectionState);
 
         SetDefaultConnectionState (state);
@@ -136,13 +136,13 @@ void CSettings::SetAllowAmbiguousUUID (bool allowed)
 
 /// "go offline" usage
 
-CRepositoryInfo::ConnectionState CSettings::GetDefaultConnectionState()
+ConnectionState CSettings::GetDefaultConnectionState()
 {
-    return static_cast<CRepositoryInfo::ConnectionState>
+    return static_cast<ConnectionState>
             ((DWORD)GetInstance().defaultConnectionState);
 }
 
-void CSettings::SetDefaultConnectionState (CRepositoryInfo::ConnectionState state)
+void CSettings::SetDefaultConnectionState (ConnectionState state)
 {
     Store (state, GetInstance().defaultConnectionState);
 }

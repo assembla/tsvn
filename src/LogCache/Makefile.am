@@ -5,7 +5,6 @@ liblogcache_a_SOURCES = \
 	CSVWriter.cpp\
 	LogIteratorBase.cpp\
 	LogCacheSettings.cpp\
-	RepositoryInfo.cpp\
 	RevisionIndex.cpp\
 	RevisionInfoContainer.cpp\
 	SkipRevisionInfo.cpp\
