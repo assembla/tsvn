@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2009-03-31 09:17+0200\n"
+"PO-Revision-Date: 2009-04-08 11:18+0200\n"
 "Last-Translator: Bob Hulst <bob.hulst@hiq.fi>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -676,7 +676,7 @@ msgstr "Subversion in Actie"
 
 #. (title)
 msgid "Working Copies"
-msgstr ""
+msgstr "Werk kopieën"
 
 #. (primary)
 msgid "working copy"
@@ -756,7 +756,7 @@ msgstr "Archief Toegang URLs"
 
 #. (entry)
 msgid "Schema"
-msgstr ""
+msgstr "Schema"
 
 #. (entry)
 msgid "Access Method"
@@ -1066,7 +1066,7 @@ msgstr ""
 
 #. (title)
 msgid "The TortoiseSVN menu for unversioned folders"
-msgstr ""
+msgstr "Het TortoiseSVN menu voor bestanden zonder versie controle"
 
 #. (para)
 msgid "Open the windows explorer"
@@ -1102,7 +1102,7 @@ msgstr "Lokale Toegang tot het Archief"
 
 #. (primary)
 msgid "Access"
-msgstr ""
+msgstr "Toegang"
 
 #. (primary)
 msgid "UNC paths"
@@ -1337,7 +1337,7 @@ msgstr ""
 
 #. (primary)
 msgid "TortoiseSVN link"
-msgstr ""
+msgstr "TortoiseSVN verwijzing"
 
 #. (primary)
 msgid "link"
@@ -1853,7 +1853,7 @@ msgstr ""
 
 #. (para)
 msgid "Restart the Apache service again."
-msgstr ""
+msgstr "Herstart de Apache service nogmaals."
 
 #. (para)
 msgid "Point your browser to <systemitem class=\"url\">http://MyServer/svn/MyNewRepository</systemitem> (where <filename>MyNewRepository</filename> is the name of the Subversion repository you created before). If all went well you should be prompted for a username and password, then you can see the contents of your repository."
@@ -1875,7 +1875,7 @@ msgstr "SVNParentPath"
 
 #. (title)
 msgid "Apache <filename>httpd.conf</filename> Settings"
-msgstr ""
+msgstr "Apache <filename>httpd.conf</filename> Instellingen"
 
 #. (entry)
 msgid "Setting"
@@ -2556,7 +2556,7 @@ msgstr "Maximaliseren van Windows"
 
 #. (primary)
 msgid "maximize"
-msgstr ""
+msgstr "maximaliseer"
 
 #. (para)
 msgid "Many of TortoiseSVN's dialogs have a lot of information to display, but it is often useful to maximize only the height, or only the width, rather than maximizing to fill the screen. As a convenience, there are shortcuts for this on the <guilabel>Maximize</guilabel> button. Use the <action>middle mouse</action> button to maximize vertically, and <action>right mouse</action> to maximize horizontally."
@@ -2568,7 +2568,7 @@ msgstr ""
 
 #. (primary)
 msgid "import"
-msgstr ""
+msgstr "importeer"
 
 #. (primary)
 msgid "add files to repository"
@@ -2579,7 +2579,7 @@ msgstr "bestanden toevoegen aan archief"
 #. (title)
 #. (glossterm)
 msgid "Import"
-msgstr ""
+msgstr "Importeer"
 
 #. (primary)
 msgid "temporary files"
@@ -3049,7 +3049,7 @@ msgstr ""
 #. (term)
 #. (term)
 msgid "Blue"
-msgstr ""
+msgstr "Blauw"
 
 #. (para)
 msgid "Committing a modification."
@@ -3059,7 +3059,7 @@ msgstr ""
 #. (term)
 #. (term)
 msgid "Purple"
-msgstr ""
+msgstr "Paars"
 
 #. (para)
 msgid "Committing a new addition."
@@ -3069,7 +3069,7 @@ msgstr "Een nieuwe toevoeging committen."
 #. (term)
 #. (term)
 msgid "Dark red"
-msgstr ""
+msgstr "Donker rood"
 
 #. (para)
 msgid "Committing a deletion or a replacement."
@@ -3079,7 +3079,7 @@ msgstr ""
 #. (term)
 #. (term)
 msgid "Black"
-msgstr ""
+msgstr "Zwart"
 
 #. (para)
 msgid "All other items."
@@ -3136,7 +3136,7 @@ msgstr ""
 #. (term)
 #. (term)
 msgid "Bright red"
-msgstr ""
+msgstr "Fel rood"
 
 #. (para)
 msgid "Changes from repository merged with local changes, resulting in conflicts which you need to resolve."
@@ -3200,7 +3200,7 @@ msgstr ""
 
 #. (title)
 msgid "Resolving Conflicts"
-msgstr ""
+msgstr "Konflikten oplossen"
 
 #. (primary)
 msgid "tree conflict"
@@ -3208,7 +3208,7 @@ msgstr "tree conflicten"
 
 #. (primary)
 msgid "resolve"
-msgstr ""
+msgstr "los op"
 
 #. (term)
 msgid "file conflicts"
@@ -3798,7 +3798,7 @@ msgstr "log"
 
 #. (primary)
 msgid "history"
-msgstr ""
+msgstr "geschiedenis"
 
 #. (primary)
 msgid "commit messages"
@@ -4465,18 +4465,16 @@ msgid "Offline Mode"
 msgstr "Offline Mode"
 
 #. (title)
-#, fuzzy
 msgid "Go Offline Dialog"
-msgstr "Toon optie-dialoog"
+msgstr "Ga Offline Dialoog"
 
 #. (para)
 msgid "<placeholder-1/> If the server is not reachable, and you have log caching enabled you can use the log dialog and revision graph in offline mode. This uses data from the cache, which allows you to continue working although the information may not be up-to-date or even complete."
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Offline for now"
-msgstr "Openen van '%s' voor %s mislukt"
+msgstr "Tijdelijk offline"
 
 #. (para)
 msgid "Complete the current operation in offline mode, but retry the repository next time log data is requested."
@@ -4491,7 +4489,6 @@ msgid "Remain in offline mode until a repository check is specifically requested
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -5644,9 +5641,8 @@ msgid "Although TortoiseSVN's project properties are extremely useful, they only
 msgstr ""
 
 #. (title)
-#, fuzzy
 msgid "External Items"
-msgstr "Externe editor"
+msgstr "Externe Objecten"
 
 #. (primary)
 msgid "external repositories"
@@ -5662,9 +5658,8 @@ msgid "Sometimes it is useful to construct a working copy that is made out of a 
 msgstr ""
 
 #. (title)
-#, fuzzy
 msgid "External Folders"
-msgstr "Externe editor"
+msgstr "Externe Folders"
 
 #. (para)
 msgid ""
@@ -5787,9 +5782,8 @@ msgid "To find out about different methods of accessing common sub-projects read
 msgstr ""
 
 #. (title)
-#, fuzzy
 msgid "External Files"
-msgstr "Bestanden toevoegen"
+msgstr "Externe Bestanden"
 
 #. (para)
 msgid "As of Subversion 1.6 you can add single file externals to your working copy using the same syntax as for folders. However, there are some restrictions."
@@ -6868,18 +6862,16 @@ msgid "The graph is normally restricted to showing branch points, but it is ofte
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Working copy revision"
-msgstr "Kopiëren van bestand '%s' naar '%s' mislukt"
+msgstr "Revisie werk bestand"
 
 #. (para)
 msgid "If you invoked the revision graph from a working copy, you can opt to show the BASE revision on the graph using <guilabel>Show WC revision</guilabel>, which marks the BASE node with a bold outline."
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Modified working copy"
-msgstr "Kopiëren van bestand '%s' naar '%s' mislukt"
+msgstr "Modificeer werk bestand"
 
 #. (para)
 msgid "If you invoked the revision graph from a working copy, you can opt to show an additional node representing your modified working copy using <guilabel>Show WC modifications</guilabel>. This is an elliptical node with a bold outline in red by default."
@@ -8029,9 +8021,8 @@ msgid "If you opt to show an extra node for your modified working copy, attached
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "WC Node Border"
-msgstr "Kan lettertype node '%s' niet vinden."
+msgstr "WC Node Border"
 
 #. (para)
 msgid "If you opt to show whether the working copy is modified, use this color border on the WC node when modifications are found."
@@ -8042,7 +8033,7 @@ msgid "Tag Nodes"
 msgstr "Tag Nodes"
 
 #. (para)
-msgid "Nodes classified as tags may be blended with this color. If you use tag folding to save space, tags are marked on the copy source using a block in this color."
+msgid "Nodes classified as tags may be blended with this color."
 msgstr ""
 
 #. (term)
@@ -8977,9 +8968,8 @@ msgid "To show the command line parameters passed from the shell extension to To
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Context Menu Icons"
-msgstr "context menu ingangen"
+msgstr "Context Menu Ikonen"
 
 #. (para)
 msgid "This can be useful if you use something other than the windows explorer or if you get problems with the context menu displaying correctly. create a <literal>DWORD</literal> key with a value of 0 at <literal>HKCU\\Software\\TortoiseSVN\\ShowContextMenuIcons</literal> if you don't want TortoiseSVN to not show icons for the shell context menu items. Set this value to 1 to show the icons again."
@@ -11572,9 +11562,8 @@ msgid "IBugtraqProvider interface"
 msgstr ""
 
 #. (primary)
-#, fuzzy
 msgid "plugin"
-msgstr "link"
+msgstr "plugin"
 
 #. (primary)
 msgid "IBugtraqProvider"
