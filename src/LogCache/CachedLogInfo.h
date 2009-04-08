@@ -22,6 +22,7 @@
 // necessary includes
 ///////////////////////////////////////////////////////////////
 
+#include "./Streams/FileName.h"
 #include "RevisionIndex.h"
 #include "RevisionInfoContainer.h"
 #include "SkipRevisionInfo.h"
@@ -87,7 +88,6 @@ private:
         /// if we own the file, we will keep it open
 
         HANDLE fileHandle;
-	FILE* file;
 
         /// we need that info to manipulate the file attributes
 

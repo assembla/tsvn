@@ -52,6 +52,7 @@
 #define NOSOUND
 #define NOCOMM
 #define NORPC
+#define NOMINMAX
 
 // streamline APIs
 

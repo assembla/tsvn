@@ -591,7 +591,7 @@ bool CRepositoryInfo::IsOffline (const CString& uuid, const CString& root, bool 
 
 // get the connection state (uninterpreted)
 
-CRepositoryInfo::ConnectionState 
+ConnectionState 
 CRepositoryInfo::GetConnectionState (const CString& uuid, const CString& url)
 {
 	// find the info

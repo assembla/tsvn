@@ -334,7 +334,7 @@ void CLogCacheStatistics::Reset()
 	fileSize = 0;
 	ramSize = 0;
 
-    connectionState = CRepositoryInfo::online;
+    connectionState = online;
 
 	headTimeStamp = 0; 
 	lastWriteAccess = 0;

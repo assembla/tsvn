@@ -523,7 +523,7 @@ CCacheLogQuery::CLogFiller::FillLog ( CCachedLogInfo* cache
         bool limitReached = (limit > 0) && (receiveCount >= limit);
         if ((receiveCount == 0) || !limitReached)
         {
-            AutoAddSkipRange (max (endRevision,1)-1);
+            AutoAddSkipRange (max (endRevision, (revision_t)1)-1);
         }
     }
 
@@ -758,7 +758,7 @@ revision_t CCacheLogQuery::FillLog ( revision_t startRevision
                         , uuid
 						, svnQuery
 						, startRevision
-						, max (min (startRevision, endRevision), 0)
+						, max (min (startRevision, endRevision), (revision_t)0)
 						, startPath
 						, limit
 						, options);

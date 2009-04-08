@@ -23,7 +23,6 @@
 ///////////////////////////////////////////////////////////////
 
 #include "./Containers/LogCacheGlobals.h"
-#include "./Streams/FileName.h"
 #include "./ConnectionState.h"
 
 ///////////////////////////////////////////////////////////////
@@ -71,19 +70,19 @@ private:
     {
         /// the repository root URL
 
-        std::string root;
+        CString root;
 
         /// repository URL
 
-        std::string uuid;
+        CString uuid;
 
         /// cached repository file
 
-        tstring fileName;
+        CString fileName;
 
         /// path we used to ask SVN for the head revision
 
-        std::string headURL;
+        CString headURL;
 
         /// the answer we got
 
@@ -109,11 +108,11 @@ private:
 
         /// several indices for faster access
 
-        typedef std::multimap<std::string, SPerRepositoryInfo*> TPartialIndex;
+        typedef std::multimap<CString, SPerRepositoryInfo*> TPartialIndex;
         TPartialIndex uuidIndex;
         TPartialIndex urlIndex;
 
-        typedef std::map<std::pair<std::string, std::string>, SPerRepositoryInfo*> TFullIndex;
+        typedef std::map<std::pair<CString, CString>, SPerRepositoryInfo*> TFullIndex;
         TFullIndex fullIndex;
 
         /**
@@ -129,10 +128,10 @@ private:
 
         // a lookup utility that scans an index range
 
-        std::string FindRoot 
+        CString FindRoot 
             ( TPartialIndex::const_iterator begin
             , TPartialIndex::const_iterator end
-            , const std::string& url) const;
+            , const CString& url) const;
 
     public:
 
@@ -144,8 +143,8 @@ private:
         /// lookup (using current rules setting);
         /// pass empty strings for unknown values.
 
-        std::string FindRoot (const std::string& uuid, const std::string& url) const;
-        SPerRepositoryInfo* Lookup (const std::string& uuid, const std::string& root) const;
+        CString FindRoot (const CString& uuid, const CString& url) const;
+        SPerRepositoryInfo* Lookup (const CString& uuid, const CString& root) const;
 
         /// modification
 
@@ -154,8 +153,8 @@ private:
 
         /// read / write file
 
-        void Load (const TFileName& fileName);
-        void Save (const TFileName& fileName) const;
+        void Load (const CString& fileName);
+        void Save (const CString& fileName) const;
         void Clear();
 
         /// status info
@@ -178,7 +177,7 @@ private:
 
     /// where to store the cached data
 
-    TFileName cacheFolder;
+    CString cacheFolder;
 
     /// use this instance for all SVN access
 
@@ -200,36 +199,36 @@ public:
 
     /// construction / destruction: auto-load and save
 
-    CRepositoryInfo (SVN& svn, const TFileName& cacheFolderPath);
+    CRepositoryInfo (SVN& svn, const CString& cacheFolderPath);
     ~CRepositoryInfo();
 
     /// look-up and ask SVN if the info is not in cache. 
     /// cache the result.
 
-    std::string GetRepositoryRoot (const CTSVNPath& url);
-    std::string GetRepositoryUUID (const CTSVNPath& url);
-    std::string GetRepositoryRootAndUUID (const CTSVNPath& url, std::string& uuid);
+	CString GetRepositoryRoot (const CTSVNPath& url);
+	CString GetRepositoryUUID (const CTSVNPath& url);
+	CString GetRepositoryRootAndUUID (const CTSVNPath& url, CString& uuid);
 
-    revision_t GetHeadRevision (std::string uuid, const CTSVNPath& url);
+    revision_t GetHeadRevision (CString uuid, const CTSVNPath& url);
 
     /// make sure, we will ask the repository for the HEAD
 
-    void ResetHeadRevision (const std::string& uuid, const std::string& root);
+    void ResetHeadRevision (const CString& uuid, const CString& root);
 
     /// is the repository offline? 
 	/// Don't modify the state if autoSet is false.
 
-    bool IsOffline (const std::string& uuid, const std::string& url, bool autoSet);
+    bool IsOffline (const CString& uuid, const CString& url, bool autoSet);
 
     /// get the connection state (uninterpreted)
 
-    ConnectionState GetConnectionState (const std::string& uuid, const std::string& url);
+    ConnectionState GetConnectionState (const CString& uuid, const CString& url);
 
     /// remove a specific entry.
     /// Parameters must be copied because they may stem from the
     /// info object being deleted.
 
-    void DropEntry (std::string uuid, std::string url);
+    void DropEntry (CString uuid, CString url);
 
     /// write all changes to disk
 
@@ -249,7 +248,7 @@ public:
 
     /// construct the dump file name
 
-    TFileName GetFileName() const;
+    CString GetFileName() const;
 
     /// for statistics
 

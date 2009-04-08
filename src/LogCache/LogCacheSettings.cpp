@@ -21,8 +21,8 @@
 
 // TSVN log cache settings path within the registry
 
-#define REGKEY(x) _T("Software\\TortoiseSVN\\LogCache\\" x)
-#define REGKEY15(x) _T("Software\\TortoiseSVN\\" x)
+#define REGKEY(x) _T("Software\\TortoiseSVN\\LogCache\\") _T(x)
+#define REGKEY15(x) _T("Software\\TortoiseSVN\\") _T(x)
 
 // begin namespace LogCache
 

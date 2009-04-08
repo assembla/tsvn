@@ -151,8 +151,8 @@ void CBlobDictionary::Initialize()
 // construction / destruction
 
 CBlobDictionary::CBlobDictionary (void)
-        : hashIndex (CHashFunction (this))
-        , packedBlobsStart (NULL)
+    : hashIndex (CHashFunction (this))
+    , packedBlobsStart (NULL)
 {
     Initialize();
 }

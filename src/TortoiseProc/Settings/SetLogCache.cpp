@@ -131,8 +131,8 @@ BOOL CSetLogCache::OnApply()
     CSettings::SetAllowAmbiguousURL (m_bSupportAmbiguousURL != FALSE);
     CSettings::SetAllowAmbiguousUUID (m_bSupportAmbiguousUUID != FALSE);
 
-    CRepositoryInfo::ConnectionState state 
-        = static_cast<CRepositoryInfo::ConnectionState>
+    ConnectionState state 
+        = static_cast<ConnectionState>
             (m_cDefaultConnectionState.GetCurSel());
 	CSettings::SetDefaultConnectionState (state);
 
