@@ -512,13 +512,13 @@ void CDirectoryWatcher::ClearInfoMap()
 
 CTSVNPath CDirectoryWatcher::CloseInfoMap(HDEVNOTIFY hdev)
 {
+	AutoLocker lock(m_critSec);
     CloseWatchHandles();
 
     CTSVNPath path;
 	if (watchInfoMap.empty())
 		return path;
 
-	AutoLocker lock(m_critSec);
 	for (TInfoMap::iterator I = watchInfoMap.begin(); I != watchInfoMap.end(); ++I)
 	{
 		CDirectoryWatcher::CDirWatchInfo * info = I->second;
@@ -539,12 +539,12 @@ CTSVNPath CDirectoryWatcher::CloseInfoMap(HDEVNOTIFY hdev)
 
 bool CDirectoryWatcher::CloseHandlesForPath(const CTSVNPath& path)
 {
+	AutoLocker lock(m_critSec);
     CloseWatchHandles();
 
 	if (watchInfoMap.empty())
 		return false;
 
-    AutoLocker lock(m_critSec);
 	for (TInfoMap::iterator I = watchInfoMap.begin(); I != watchInfoMap.end(); ++I)
 	{
 		CDirectoryWatcher::CDirWatchInfo * info = I->second;
