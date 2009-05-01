@@ -237,7 +237,8 @@ BOOL TortoiseBlame::OpenFile(const char *fileName)
 		{
 			break;
 		}
-		Sleep(100);
+		File.clear();
+		Sleep(500);
 		retrycount--;
 	}
 	if (!File.good())
