@@ -317,7 +317,7 @@ public:
 
         // preparation
 
-        size_t clusterSize = std::max (1, (last - first) / MAX_CLUSTERS);
+        size_t clusterSize = std::max<ptrdiff_t> (1, (last - first) / MAX_CLUSTERS);
         size_t shift = 0;
         while (((size_t)MAX_CLUSTERS << shift) < grower.capacity())
             ++shift;
@@ -338,7 +338,7 @@ public:
             size_t offset = used[clusterIndex] + clusterIndex * clusterSize;
 
             TPair& current = temp[offset];
-            current.first = bucket;
+            current.first = static_cast<index_type>(bucket);
             current.second = index++;
 
             if (++used[clusterIndex] == clusterSize)
