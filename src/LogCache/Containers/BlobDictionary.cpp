@@ -129,7 +129,7 @@ void CBlobDictionary::RebuildIndexes()
                     ; iter != end
             ; ++iter, ++index)
     {
-        size_t size = *iter - offset;
+        index_t size = *iter - offset;
         hashIndex.insert (SBlob (packedBlobsStart + offset, size), index);
 
         offset += size;
