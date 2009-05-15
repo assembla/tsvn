@@ -317,7 +317,7 @@ public:
 
         // preparation
 
-        size_t clusterSize = std::max<ptrdiff_t> (1, (last - first) / MAX_CLUSTERS);
+        size_t clusterSize = std::max<size_t> (1, (last - first) / MAX_CLUSTERS);
         size_t shift = 0;
         while (((size_t)MAX_CLUSTERS << shift) < grower.capacity())
             ++shift;
