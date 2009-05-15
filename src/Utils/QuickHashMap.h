@@ -309,4 +309,14 @@ public:
         hash.clear();
         data.clear();
     }
+
+    /// efficiently exchange two containers
+
+    void swap (quick_hash_map& rhs)
+    {
+        data.swap (rhs.data);
+        std::swap (batch_insert_start, rhs.batch_insert_start);
+        hash.swap (rhs.hash);
+    }
+
 };
