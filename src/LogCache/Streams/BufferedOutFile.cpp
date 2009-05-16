@@ -47,16 +47,11 @@ void CBufferedOutFile::Flush()
 #ifdef WIN32
 CBufferedOutFile::CBufferedOutFile (const std::wstring& fileName)
 	: file (INVALID_HANDLE_VALUE)
-#else
-CBufferedOutFile::CBufferedOutFile (const std::string& fileName)
-	: stream (fileName.c_str(), std::ios::binary | std::ios::out)
-#endif
 	, buffer (new unsigned char [BUFFER_SIZE])
 	, used (0)
 	, fileSize (0)
 {
 	CPathUtils::MakeSureDirectoryPathExists(fileName.substr(0, fileName.find_last_of('\\')).c_str());
-#ifdef WIN32
 	file = CreateFile ( fileName.c_str()
 					  , GENERIC_WRITE
 					  , 0
@@ -65,11 +60,20 @@ CBufferedOutFile::CBufferedOutFile (const std::string& fileName)
 					  , FILE_ATTRIBUTE_NORMAL
 					  , NULL);
 	if (file == INVALID_HANDLE_VALUE)
-#else
-	if (stream.is_open())
-#endif
 		throw CStreamException ("can't create log cache file");
 }
+#else
+CBufferedOutFile::CBufferedOutFile (const std::string& fileName)
+    : buffer (new unsigned char [BUFFER_SIZE])
+    , used (0)
+    , fileSize (0)
+{
+    CPathUtils::MakeSureDirectoryPathExists(fileName.substr(0, fileName.find_last_of('/')).c_str());
+    stream.open (fileName.c_str(), std::ios::binary | std::ios::out);
+    if (!stream.is_open())
+        throw CStreamException ("can't create log cache file");
+}
+#endif
 
 CBufferedOutFile::~CBufferedOutFile()
 {
