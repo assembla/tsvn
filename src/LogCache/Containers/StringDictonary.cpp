@@ -175,7 +175,7 @@ index_t CStringDictionary::Find (const char* string) const
 const char* CStringDictionary::operator[] (index_t index) const
 {
 #if !defined (_SECURE_SCL)
-    if (index+1 < (index_t) offsets.size())
+    if (index >= (index_t) offsets.size()-1)
         throw CContainerException ("dictionary string index out of range");
 #endif
 
@@ -185,7 +185,7 @@ const char* CStringDictionary::operator[] (index_t index) const
 index_t CStringDictionary::GetLength (index_t index) const
 {
 #if !defined (_SECURE_SCL)
-    if (index+1 < (index_t) offsets.size())
+    if (index >= (index_t) offsets.size()-1)
         throw CContainerException ("dictionary string index out of range");
 #endif
 
