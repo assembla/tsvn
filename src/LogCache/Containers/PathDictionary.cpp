@@ -201,12 +201,12 @@ void CDictionaryBasedPath::ParsePath ( const std::string& path
     if (!path.empty())
     {
         std::string temp (path);
-        assert (path[0] == '/');
 
         index_t currentIndex = index;
-        for ( size_t pos = 0, nextPos = temp.find ('/', 1)
-            ; pos != std::string::npos
-            ; pos = nextPos, nextPos = temp.find ('/', nextPos))
+        size_t pos = temp[0] == '/' ? 0 : (size_t)(-1);
+        size_t nextPos = temp.find ('/', pos+1);
+
+        do
         {
             // get the current path element and terminate it properly
 
@@ -250,7 +250,10 @@ void CDictionaryBasedPath::ParsePath ( const std::string& path
             }
 
             currentIndex = nextIndex;
+            pos = nextPos;
+            nextPos = temp.find ('/', nextPos);
         }
+        while (pos != std::string::npos);
     }
 
 #ifdef _DEBUG
