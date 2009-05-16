@@ -480,8 +480,8 @@ public:
 				           , revision_t revisionStart
 				           , revision_t revisionDelta);
 
-	void AddUserRevProp ( const std::string& revProp
-				        , const std::string& value);
+	void AddRevProp ( const std::string& revProp
+				    , const std::string& value);
 
 	/// reset content
 

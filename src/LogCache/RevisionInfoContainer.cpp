@@ -722,29 +722,84 @@ void CRevisionInfoContainer::AddMergedRevision ( const std::string& fromPath
     mergedRangeDeltas.push_back (revisionDelta);
 }
 
-void CRevisionInfoContainer::AddUserRevProp (const std::string& revProp
-        , const std::string& value)
+void CRevisionInfoContainer::AddRevProp ( const std::string& revProp
+                                        , const std::string& value)
 {
-    // store standard rev-props somewhere else!
+    static const std::string svnAuthor ("svn:author");
+    static const std::string svnDate ("svn:date");
+    static const std::string svnLog ("svn:log");
 
-    assert (    (revProp != "svn:author")
-             && (revProp != "svn:date")
-             && (revProp != "svn:log"));
-    assert (*presenceFlags.rbegin() & HAS_USERREVPROPS);
+    // store standard rev-props somewhere else
 
-    // under x64, there might actually be an overflow
+    if (revProp == svnAuthor)
+    {
+        // update the revision info
 
-    if (userRevPropNames.size() == NO_INDEX)
-        throw CContainerException ("revision container change list overflow");
+        assert (*presenceFlags.rbegin() & HAS_AUTHOR);
+        *authors.rbegin() = authorPool.AutoInsert (value.c_str());
+    }
+    else if (revProp == svnDate)
+    {
+        // update the revision info
 
-    // another revProp
+        assert (*presenceFlags.rbegin() & HAS_TIME_STAMP);
 
-    ++ (*userRevPropOffsets.rbegin());
+        __time64_t timeStamp = 0;
+        if (!value.empty())
+        {
+            tm time = {0,0,0, 0,0,0, 0,0,0};
+            int musecs = 0;
+            sscanf_s ( value.c_str()
+                     , "%04d-%02d-%02dT%02d:%02d:%02d.%06d"
+                     , &time.tm_year
+                     , &time.tm_mon
+                     , &time.tm_mday
+                     , &time.tm_hour
+                     , &time.tm_min
+                     , &time.tm_sec
+                     , &musecs);
+            time.tm_isdst = 0;
+            time.tm_year -= 1900;
+            time.tm_mon -= 1;
 
-    // add (revPropName, value) pair
+        #ifdef WIN32
+            timeStamp = _mkgmtime64 (&time) *1000000 + musecs;
+        #else
+            timeStamp = mktime (&time);
+            timeStamp = timeStamp * 1000000 + musecs;
+        #endif
+        }
 
-    userRevPropNames.push_back (userRevPropsPool.AutoInsert (revProp.c_str()));
-    userRevPropValues.Insert (value);
+        *timeStamps.rbegin() = timeStamp;
+    }
+    else if (revProp == svnLog)
+    {
+        // update the revision info
+
+        assert (*presenceFlags.rbegin() & HAS_COMMENT);
+        comments.Remove (comments.size()-1);
+        comments.Insert (value);
+    }
+    else
+    {
+        // it's a user rev prop
+
+        assert (*presenceFlags.rbegin() & HAS_USERREVPROPS);
+
+        // under x64, there might actually be an overflow
+
+        if (userRevPropNames.size() == NO_INDEX)
+            throw CContainerException ("revision container change list overflow");
+
+        // another revProp
+
+        ++ (*userRevPropOffsets.rbegin());
+
+        // add (revPropName, value) pair
+
+        userRevPropNames.push_back (userRevPropsPool.AutoInsert (revProp.c_str()));
+        userRevPropValues.Insert (value);
+    }
 }
 
 

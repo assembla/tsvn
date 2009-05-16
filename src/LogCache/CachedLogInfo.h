@@ -219,8 +219,8 @@ public:
 				           , revision_t revisionStart
 				           , revision_t revisionDelta);
 
-	void AddUserRevProp ( const std::string& revProp
-				        , const std::string& value);
+	void AddRevProp ( const std::string& revProp
+			        , const std::string& value);
 
 	void AddSkipRange ( const CDictionaryBasedPath& path
 					  , revision_t startRevision
@@ -302,12 +302,12 @@ inline void CCachedLogInfo::AddMergedRevision ( const std::string& fromPath
 	logInfo.AddMergedRevision (fromPath, toPath, revisionStart, revisionDelta);
 }
 
-inline void CCachedLogInfo::AddUserRevProp ( const std::string& revProp
-				                           , const std::string& value)
+inline void CCachedLogInfo::AddRevProp ( const std::string& revProp
+				                       , const std::string& value)
 {
 	assert (revisionAdded);
 
-	logInfo.AddUserRevProp (revProp, value);
+	logInfo.AddRevProp (revProp, value);
 }
 
 ///////////////////////////////////////////////////////////////
