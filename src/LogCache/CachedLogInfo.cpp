@@ -273,7 +273,7 @@ void CCachedLogInfo::CCacheFileManager::AutoRelease()
 
 bool CCachedLogInfo::CCacheFileManager::OwnsFile() const
 {
-    return false;
+    return true;
 }
 
 #endif
