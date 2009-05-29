@@ -259,6 +259,11 @@ NAnt build script for the TortoiseSVN language pack installers
 			input="${langline}"
 		/>
 		<echo message="Building ${langweb} dlls and installer" />
+		<delete>
+			<fileset>
+				<include name="..\bin\Tortoise*.dll" />
+			</fileset>
+		</delete>
 
 		<!-- create the dlls -->
 		<exec program="${ResTextFileName}" failonerror="false">
@@ -310,6 +315,22 @@ NAnt build script for the TortoiseSVN language pack installers
 			</do>
 		</foreach> 
 		
+		<if test="${file::exists('..\signinfo.txt')}">
+			<foreach item="File" property="filename">
+				<in>
+					<items>
+						<include name="..\bin\*.dll" />
+					</items>
+				</in>
+				<do>
+					<exec program="signtool">
+						<arg value="sign" />
+						<arg value="${signinfo}" />
+						<arg value="${filename}" />
+					</exec>
+				</do>
+			</foreach>
+		</if>
 		<!-- create the files for the installer -->		
 		<if test="${environment::variable-exists('MajorVersion')}">
 			<loadfile file="LanguagePack.wxs" property="versionwxsfile" encoding="utf-8" >
@@ -382,6 +403,13 @@ NAnt build script for the TortoiseSVN language pack installers
 				<include name="..\bin\*.wixpdb" />
 			</fileset>
 		</delete>
+		<if test="${file::exists('..\signinfo.txt')}">
+			<exec program="signtool">
+				<arg value="sign" />
+				<arg value="${signinfo}" />
+				<arg value="..\bin\LanguagePack_${verstring}${devrelease}-${platform}-${langISO}.msi" />
+			</exec>
+		</if>
 
 		<delete file="LanguagePack_${langISO}.wxs" failonerror="false" />
 		<delete file="..\bin\TortoiseProc${langCC}.dll" failonerror="false" />
