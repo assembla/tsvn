@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2009-02-13 22:41+0330\n"
+"PO-Revision-Date: 2009-05-31 08:41+0330\n"
 "Last-Translator: mohsen sajjadi <mohsensajjadi@yahoo.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -696,7 +696,7 @@ msgstr "اتصال همه"
 
 #. Resource IDs: (275)
 msgid "&Join with sub-trees"
-msgstr ""
+msgstr "الحاق با زیر شاخه ها"
 
 #. Resource IDs: (1016)
 msgid "&Jump to first difference when loading"
@@ -768,7 +768,7 @@ msgstr "حداقل"
 
 #. Resource IDs: (1493)
 msgid "&Modify color for tag copies"
-msgstr ""
+msgstr "تغییر رنگ برای کپی های تَگ"
 
 #. Resource IDs: (1492)
 msgid "&Modify color for trunk copies"
@@ -828,13 +828,12 @@ msgid "&Open"
 msgstr "&بازکردن"
 
 #. Resource IDs: (1382)
-#, fuzzy
 msgid "&Options"
-msgstr "تنظیمات"
+msgstr "تنظیمات&"
 
 #. Resource IDs: (32772)
-msgid "&Overlap images"
-msgstr "&Overlap images"
+msgid "&Overlay images"
+msgstr "تصاویر &پوشش ها"
 
 #. Resource IDs: (1411, 65535)
 msgid "&Password:"
@@ -1012,6 +1011,14 @@ msgstr "&دزدیدن قفل ها"
 msgid "&Stop on copy/rename"
 msgstr "توقف در کپی/تغییر نام"
 
+#. Resource IDs: (276)
+msgid "&Switch WC to path and revision"
+msgstr "سوئیچ نسخه کاری به مسیر و اصلاحیه"
+
+#. Resource IDs: (275)
+msgid "&Switch WC to path@HEAD"
+msgstr "سوییچ کردن نسخه کاری به مسیر@HEAD"
+
 #. Resource IDs: (1173)
 msgid "&Symbol View"
 msgstr "&مشاهده سمبلیک"
@@ -1025,9 +1032,8 @@ msgid "&Tabbed Document"
 msgstr "&Tabbed Document"
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "&Tags"
-msgstr "&Tags"
+msgstr "تگ ها"
 
 #. Resource IDs: (1382)
 msgid "&Test merge"
@@ -1206,7 +1212,7 @@ msgstr "(عدم وجود شماره خط)"
 
 #. Resource IDs: (276)
 msgid "(no modification but copy created from here)"
-msgstr ""
+msgstr "(بدون تغییر اما از اینجا کپی ایجاد شد)"
 
 #. Resource IDs: (214)
 msgid "(no value)"
@@ -1230,7 +1236,7 @@ msgstr "(تغییر نام)"
 
 #. Resource IDs: (276)
 msgid "(tagged)"
-msgstr ""
+msgstr "(تَگ شد)"
 
 #. Resource IDs: (245)
 msgid "(unknown)"
@@ -1253,6 +1259,14 @@ msgstr "------------------------------------------------------------------------
 #. Resource IDs: (1002, 1003, 1021, 1022, 1035, 1036, 1089, 1104, 1187, 1324, 1333, 1362, 1474)
 msgid "..."
 msgstr "..."
+
+#. Resource IDs: (269)
+msgid "... checking cache and preparing log query"
+msgstr "... در حال بررسی کَش و آماده سازی درخواست گزارشات"
+
+#. Resource IDs: (270)
+msgid "... reading working copy status"
+msgstr "...در حال بررسی وضعیت نسخه کاری"
 
 #. Resource IDs: (16527)
 msgid "....."
@@ -1464,6 +1478,11 @@ msgstr "Add extension specific diff program"
 msgid "Add extension specific merge program"
 msgstr "Add extension specific merge program"
 
+#. Resource IDs: (1065)
+#, fuzzy
+msgid "Add new files automatically to SVN"
+msgstr "SVN کپی و اضافه کردن فایلها به این نسخه کاری"
+
 #. Resource IDs: (89)
 msgid "Add the item anyway"
 msgstr "Add the item anyway"
@@ -1564,6 +1583,10 @@ msgstr "عمر"
 msgid "Align trees on top"
 msgstr "Align trees on top"
 
+#. Resource IDs: (1505)
+msgid "All"
+msgstr "همه"
+
 #. Resource IDs: (1007)
 msgid "All Commands"
 msgstr "همه دستورها"
@@ -1605,6 +1628,10 @@ msgstr "http://localhost/myrepos/ یکسان، مثال:  URL اجازه است�
 #. Resource IDs: (345)
 msgid "Allow different repositories to use the same UUID, e.g. copied repositories"
 msgstr "اجازه استفاده مخزنهای مختلف از UUIDهای یکسان, مثال مخزنهای کپی شده"
+
+#. Resource IDs: (1480)
+msgid "Always close dialogs for local operations"
+msgstr "بستن پنجره ها برای عملیات محلی"
 
 #. Resource IDs: (197)
 msgid "Always use the system locale settings to show times and dates"
@@ -1696,6 +1723,8 @@ msgid ""
 "Apply 'Power User' defaults. Those will provide a smoother experience.\n"
 "You should know the meaning of all the settings above."
 msgstr ""
+"اعمال پیش فرض های 'کاربر قوی'. این تنظیمات موجب تجربه کاری بهتری میشوند.\n"
+"شما بایستی از معنی تمامی تنظیمات بالا مطلع باشید."
 
 #. Resource IDs: (1294)
 msgid "Apply property recursively"
@@ -1799,10 +1828,6 @@ msgstr "پنهان سازی خودکار همه"
 #. Resource IDs: (99)
 msgid "Auto Rename"
 msgstr "تغییر نام خودکار"
-
-#. Resource IDs: (222)
-msgid "Auto-close for local operations"
-msgstr "بستن خودکار برای عملیات محلی"
 
 #. Resource IDs: (222)
 msgid "Auto-close if no conflicts"
@@ -1933,7 +1958,6 @@ msgid "Bug-ID / Issue-Nr:"
 msgstr "کد خطا/ش. درخواست:"
 
 #. Resource IDs: (117)
-#, fuzzy
 msgid "Bug-IDs"
 msgstr "کد خطا"
 
@@ -2124,6 +2148,10 @@ msgstr "بررسی وجود ویرایشهای جدید"
 msgid "Check For Updates..."
 msgstr "بررسی وجود ویرایشهای جدید..."
 
+#. Resource IDs: (276)
+msgid "Check for &modifications"
+msgstr "بررسی وجود تغییرات"
+
 #. Resource IDs: (13)
 msgid "Check for modi&fications"
 msgstr "بررسی وجود ت&غییرات"
@@ -2146,7 +2174,11 @@ msgstr ""
 
 #. Resource IDs: (612)
 msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to keep your rename/move or the one from the repository. Then mark the conflict as resolved."
-msgstr ""
+msgstr "از گزارشات ثبت شده برای اطلاع از نحوه تغییر نام/جابجایی این فایل/پوشه استفاده و تصمیم بگیرید که مایلید تغییر نام/جابجایی مربوط به خود یا مخزن را حفظ کنید. سپس برخورد را بصورت رفع شده علامت بزنید."
+
+#. Resource IDs: (612)
+msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to merge the change into your renamed file, or restore the original file."
+msgstr "از گزارشات ثبت شده برای اطلاع از نحوه تغییر نام/جابجایی این فایل/پوشه استفاده و تصمیم بگیرید که مایلید تغییرات به فایل تغییر نام داده شده شما نیز ادغام گردد، یا فایل اولیه بازنشان گردد."
 
 #. Resource IDs: (251)
 msgid "Check the path and/or URL you've entered."
@@ -2163,6 +2195,10 @@ msgstr "برای استفاده از یک فرمت تاریخ و زمان مخت
 #. Resource IDs: (2052)
 msgid "Check working copy for modifications"
 msgstr "بررسی نسخه کاری برای تغییرات"
+
+#. Resource IDs: (1504)
+msgid "Check:"
+msgstr "بررسیپ:"
 
 #. Resource IDs: (65535)
 msgid "Checking if a newer version of TortoiseSVN is available..."
@@ -2206,8 +2242,9 @@ msgid "Cleaning up"
 msgstr "پاکسازی"
 
 #. Resource IDs: (146)
-msgid "Cleaning up."
-msgstr "پاکسازی."
+#, c-format
+msgid "Cleaning up directory \"%s\""
+msgstr "در حال پاکسازی پوشه \"%s\""
 
 #. Resource IDs: (83)
 #, c-format
@@ -2274,7 +2311,7 @@ msgstr ""
 #. Resource IDs: (196)
 #, fuzzy, c-format
 msgid "Clears the stored sizes and positions of %ld dialogs"
-msgstr "اندازه و مکان %ld دیالوگ ذخیره شده را پاکسازی میکند"
+msgstr "محاوره ها % ld پاکهااندازه های ذخیره شده ووضعیتهااز "
 
 #. Resource IDs: (1466)
 msgid "Click here to go to the website"
@@ -2325,9 +2362,8 @@ msgid "Coll&apse source tree"
 msgstr "Coll&apse source tree"
 
 #. Resource IDs: (275)
-#, fuzzy
 msgid "Collapse &following tree"
-msgstr "تنهامحدوده تجدیدنظردنباله راشامل بشوید : "
+msgstr "بستن پوشه بعدی"
 
 #. Resource IDs: (16662)
 msgid "Color"
@@ -2491,6 +2527,10 @@ msgstr "پیکربندی برنامه استفاده شده برای رفع فا
 msgid "Configure viewer program for GNU diff files (patch files)."
 msgstr "پیکریندی برنامه نمایشگر برای فایلهای GNU diff (فایلهای وصله)."
 
+#. Resource IDs: (1503)
+msgid "Conflict Sources"
+msgstr "منابع تضاد"
+
 #. Resource IDs: (65535)
 msgid "Conflict resolved"
 msgstr "برخورد حل شد"
@@ -2510,7 +2550,7 @@ msgstr "اتصال به سرویس دهنده مخزن جهت بارگزاری �
 
 #. Resource IDs: (65535)
 msgid "Container sizes"
-msgstr "Container sizes"
+msgstr "اندازه های محتوی"
 
 #. Resource IDs: (16520)
 msgid "Context Menus: "
@@ -2522,7 +2562,7 @@ msgstr "ادامه"
 
 #. Resource IDs: (1001)
 msgid "Contract docked window"
-msgstr "Contract docked window"
+msgstr "پنجره قابل حرکت کنتراکت"
 
 #. Resource IDs: (376)
 msgid "Cop&y"
@@ -2639,9 +2679,9 @@ msgstr ""
 "کپی"
 
 #. Resource IDs: (613)
-#, fuzzy, c-format
+#, c-format
 msgid "Copy to %1"
-msgstr "&کپی شود به..."
+msgstr "کپی به %1"
 
 #. Resource IDs: (114)
 msgid "Copy to clipboard"
@@ -2946,7 +2986,6 @@ msgstr ""
 "کپی"
 
 #. Resource IDs: (1279)
-#, fuzzy
 msgid "D&etails"
 msgstr "جزئیات"
 
@@ -2968,7 +3007,7 @@ msgstr "منوی پیش فرض"
 
 #. Resource IDs: (65535)
 msgid "Default URL:"
-msgstr "URL پیش فرض:"
+msgstr "آدرس پیش فرض:"
 
 #. Resource IDs: (1007)
 #, fuzzy
@@ -2994,7 +3033,7 @@ msgstr "حذف اقلام فاقد نسخه"
 #. Resource IDs: (14)
 #, c-format
 msgid "Delete and &ignore %d items by name"
-msgstr ""
+msgstr "حذف و نادیده گرفتن %d قلم با نام"
 
 #. Resource IDs: (14)
 #, fuzzy
@@ -3004,7 +3043,7 @@ msgstr "لیست اضافه بنماید ! ignore به % s نمی توانست "
 #. Resource IDs: (14)
 #, c-format
 msgid "Delete and ignore %d items by &extension"
-msgstr ""
+msgstr "حذف و نادیده گرفتن %d قلم با پسوند"
 
 #. Resource IDs: (17)
 msgid "Delete unversioned items..."
@@ -3039,6 +3078,10 @@ msgstr "فایل ثبت عملیاتها را پاک میکند"
 #. Resource IDs: (263)
 msgid "Deleting"
 msgstr "در حال حذف کردن"
+
+#. Resource IDs: (207)
+msgid "Depth"
+msgstr "عمق"
 
 #. Resource IDs: (65535)
 msgid "Depth:"
@@ -3083,7 +3126,7 @@ msgstr "تنظیمات Diff"
 
 #. Resource IDs: (146, 279)
 msgid "Diff with URL"
-msgstr "Diff با URL"
+msgstr "مقایسه با آدرس"
 
 #. Resource IDs: (1302)
 msgid "Difference between"
@@ -3102,6 +3145,10 @@ msgstr "Diffing"
 #, fuzzy
 msgid "Diffs the working copy file with the one before the last commit."
 msgstr "Diffs the working copy file with the one before the last commit."
+
+#. Resource IDs: (1513)
+msgid "Directories"
+msgstr "پوشه ها"
 
 #. Resource IDs: (65535)
 msgid "Directory:"
@@ -3122,7 +3169,7 @@ msgstr "در دسترسی به %1 دیسک پر مشاهده شد."
 #. Resource IDs: (3860)
 #, c-format
 msgid "Dispatch exception: %1"
-msgstr "Dispatch exception: %1"
+msgstr "استثناء ارسال: %1"
 
 #. Resource IDs: (65535)
 msgid "Display &buttons in this order"
@@ -3162,7 +3209,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Do not show the context menu for the following paths:"
-msgstr ""
+msgstr "منوی راست کلیک برای مسیرهای مقایل نمایش نشود:"
 
 #. Resource IDs: (1007)
 #, fuzzy, c-format
@@ -3258,18 +3305,17 @@ msgid "Drive Types"
 msgstr "نوع درایوها"
 
 #. Resource IDs: (1315)
-#, fuzzy
 msgid "Drives A: and B:"
-msgstr "&درایوهای شبکه"
+msgstr "درایوهای A: و B:"
 
 #. Resource IDs: (613)
-#, fuzzy, c-format
+#, c-format
 msgid "Drop not possible on %1"
-msgstr "عدم موفقیت در اضافه کردن خصوصیت \"%s\" روی %s چراکه"
+msgstr "Drop not possible on %1"
 
 #. Resource IDs: (32816)
 msgid "E&xact copy sources"
-msgstr "E&xact copy sources"
+msgstr "&کپی دقیق منابع"
 
 #. Resource IDs: (65535)
 msgid "E&xclude paths:"
@@ -3280,9 +3326,8 @@ msgid "E&xit"
 msgstr "خ&روج"
 
 #. Resource IDs: (275)
-#, fuzzy
 msgid "E&xpand all"
-msgstr "تمام فایل ها (*.*)"
+msgstr "بازکردن همه"
 
 #. Resource IDs: (275)
 #, fuzzy
@@ -3315,16 +3360,12 @@ msgid "Edit Properties"
 msgstr "ویرایش خصوصیات"
 
 #. Resource IDs: (297)
-#, fuzzy
 msgid "Edit Property Conflict"
-msgstr ""
-"ویرایش خصوصیت \"%s\" روی\r\n"
-"%s"
+msgstr "ویرایش تضاد در خصوصیت"
 
 #. Resource IDs: (298)
-#, fuzzy
 msgid "Edit Tree Conflicts"
-msgstr "نام تالیف کردن ویرایش کنید "
+msgstr "ویرایش تضاد شاخه"
 
 #. Resource IDs: (113)
 msgid "Edit author"
@@ -3351,12 +3392,12 @@ msgid "Edit log message"
 msgstr "ویرایش پیام گزارش"
 
 #. Resource IDs: (127)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Edit property '%s' on\r\n"
 "%s"
 msgstr ""
-"ویرایش خصوصیت \"%s\" روی\r\n"
+"ویرایش خصوصیت '%s' روی\r\n"
 "%s"
 
 #. Resource IDs: (1331, 1382)
@@ -3376,8 +3417,8 @@ msgid ""
 "Ellipse Tools\n"
 "Ellipse"
 msgstr ""
-"Ellipse Tools\n"
-"Ellipse"
+"ابزار ادغام\n"
+"ادغام"
 
 #. Resource IDs: (65535)
 msgid "Empty"
@@ -3419,7 +3460,7 @@ msgstr "خطای قفل گذاری در دسترسی به %1 رخ داد."
 #. Resource IDs: (3867)
 #, c-format
 msgid "Encountered a sharing violation while accessing %1."
-msgstr "Encountered a sharing violation while accessing %1."
+msgstr "مواجهه با یک تناقض اشتراکی در هنگام دستیابی به %1."
 
 #. Resource IDs: (3843)
 msgid "Encountered an improper argument."
@@ -3449,7 +3490,7 @@ msgstr "پیغام وارد نمائید"
 
 #. Resource IDs: (80)
 msgid "Enter URL"
-msgstr "URL وارد نمائید"
+msgstr "وراد نمود آدرس"
 
 #. Resource IDs: (3858)
 msgid "Enter a GUID."
@@ -3561,10 +3602,13 @@ msgstr ""
 msgid "Exceptions:"
 msgstr "استثناءها:"
 
+#. Resource IDs: (20)
+msgid "Exclude"
+msgstr "استثنا گردد"
+
 #. Resource IDs: (1002)
-#, fuzzy
 msgid "Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
-msgstr "Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
+msgstr "اجرائی (*.exe)|*.exe|دستور (*.com)|*.com|اطلاعات (*.pdf)|*.pdf|Batch (*.bat)|*.bat|همه فایلها (*.*)|*.*||"
 
 #. Resource IDs: (1002)
 msgid "Existing"
@@ -3572,12 +3616,11 @@ msgstr "موجود"
 
 #. Resource IDs: (275)
 msgid "Exp&and source tree"
-msgstr ""
+msgstr "بازکردن درختواره منبع"
 
 #. Resource IDs: (275)
-#, fuzzy
 msgid "Expand &following tree"
-msgstr "تنهامحدوده تجدیدنظردنباله راشامل بشوید : "
+msgstr "بازکردن پوشه بعدی"
 
 #. Resource IDs: (1002)
 #, c-format
@@ -3590,9 +3633,8 @@ msgid "Expand docked window"
 msgstr "پنهان سازی پنجره"
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "Expert settings"
-msgstr "پراکسی "
+msgstr "تنظیمات تخصصی"
 
 #. Resource IDs: (209)
 msgid "Explore to"
@@ -3673,6 +3715,11 @@ msgstr "برنامه های خارجی::ابزار ادغام"
 #. Resource IDs: (194)
 msgid "External Programs::Unified Diff Viewer"
 msgstr "برنامه های خارجی::نمایشگر Unified Diff"
+
+#. Resource IDs: (263)
+#, fuzzy
+msgid "External failed"
+msgstr "فرمان خراب شده "
 
 #. Resource IDs: (226)
 msgid "Externals excluded"
@@ -3889,6 +3936,10 @@ msgstr ""
 msgid "Filename"
 msgstr "نام فایل"
 
+#. Resource IDs: (1512)
+msgid "Files"
+msgstr "فایلها"
+
 #. Resource IDs: (1057)
 msgid ""
 "Fill Tool\n"
@@ -3952,6 +4003,11 @@ msgstr ""
 msgid "Fold &tags"
 msgstr "Fold &tags"
 
+#. Resource IDs: (65535)
+#, fuzzy
+msgid "Folded tag"
+msgstr "شاخه/تگ..."
+
 #. Resource IDs: (1002)
 msgid "Folder"
 msgstr "پوشه"
@@ -3976,7 +4032,7 @@ msgstr "جلو"
 
 #. Resource IDs: (65535)
 msgid "From URL:"
-msgstr "از URL:"
+msgstr "از آدرس:"
 
 #. Resource IDs: (1200, 65535)
 msgid "From:"
@@ -4010,13 +4066,13 @@ msgstr "در حال جمع آوری اطلاعات. لطفا صبر کنید..."
 msgid "General"
 msgstr "عمومی"
 
-#. Resource IDs: (195)
-msgid "General::Context Menu"
-msgstr "عمومی::منوی راست کلیک"
-
 #. Resource IDs: (212)
 #, fuzzy
-msgid "General::Dialog Colors"
+msgid "General::Colors"
+msgstr "عمومی::رنگها"
+
+#. Resource IDs: (195)
+msgid "General::Context Menu"
 msgstr "عمومی::منوی راست کلیک"
 
 #. Resource IDs: (196)
@@ -4026,16 +4082,6 @@ msgstr "عمومی::دیالوگ 1"
 #. Resource IDs: (213)
 msgid "General::Dialogs 2"
 msgstr "عمومی::دیالوگ 2"
-
-#. Resource IDs: (296)
-#, fuzzy
-msgid "General::Revision Graph"
-msgstr "فیلتر گراف اصلاحیه ها"
-
-#. Resource IDs: (299)
-#, fuzzy
-msgid "General::Revision Graph Colors"
-msgstr "عمومی::رنگها"
 
 #. Resource IDs: (144)
 msgid "Generating patchfile..."
@@ -4158,7 +4204,7 @@ msgstr "&پنهان کردن مسیرهای تغییری نامربوط"
 
 #. Resource IDs: (65535)
 msgid "H&ue:"
-msgstr "H&ue:"
+msgstr "&ظاهر:"
 
 #. Resource IDs: (1353, 1354)
 msgid "HEAD"
@@ -4192,7 +4238,7 @@ msgstr "پنهان کردن مسیرهای حذف شده"
 
 #. Resource IDs: (2052)
 msgid "Hide all branches that did not modify the item"
-msgstr ""
+msgstr "پنهان سازی همه انشعابهایی که قلم را تغییر نداده اند"
 
 #. Resource IDs: (2052)
 #, fuzzy
@@ -4399,7 +4445,7 @@ msgstr "پوشش آیکونها::مجموعه آیکون"
 
 #. Resource IDs: (65535)
 msgid "Icons/Design/Code:                 Luebbe Onken"
-msgstr "Icons/Design/Code:                 Luebbe Onken"
+msgstr "آیکون ها/طراحی/کدنویسی:                 Luebbe Onken"
 
 #. Resource IDs: (346)
 msgid ""
@@ -4567,7 +4613,7 @@ msgstr "نادیده گرفتن تمام حروف خالی"
 
 #. Resource IDs: (1267)
 msgid "Ignore ancestry"
-msgstr "Ignore ancestry"
+msgstr "نادیده گرفتن ریشه"
 
 #. Resource IDs: (1018)
 msgid "Ignore line &endings (recommended)"
@@ -4656,9 +4702,9 @@ msgstr ""
 "به %s"
 
 #. Resource IDs: (613)
-#, fuzzy, c-format
+#, c-format
 msgid "Import to %1"
-msgstr "وارد کردن %s به %s%s"
+msgstr "ورود به %1"
 
 #. Resource IDs: (120)
 #, c-format
@@ -4730,7 +4776,7 @@ msgstr "واحد پولی نامعتبر."
 
 #. Resource IDs: (102)
 msgid "Invalid data object dropped!"
-msgstr "Invalid data object dropped!"
+msgstr "شیء داده نامعتبر رها شد!"
 
 #. Resource IDs: (82)
 msgid ""
@@ -4842,11 +4888,11 @@ msgstr "کپی کردن کاریتان به یک مسیر < / b جابه جاس�
 
 #. Resource IDs: (275)
 msgid "Join with following &tree"
-msgstr ""
+msgstr "الحاق با بعدی شاخه ها"
 
 #. Resource IDs: (275)
 msgid "Join with source tree"
-msgstr ""
+msgstr "الحاق با شاخه منبع"
 
 #. Resource IDs: (1203)
 msgid "Keep &locks"
@@ -4872,9 +4918,8 @@ msgid "Keep the local directory"
 msgstr "حذف (حفظ نسخه محلی)"
 
 #. Resource IDs: (610)
-#, fuzzy
 msgid "Keep the local file"
-msgstr "حذف (حفظ نسخه محلی)"
+msgstr "نگهداری نسخه محلی"
 
 #. Resource IDs: (16136)
 msgid "Keyboard"
@@ -4950,7 +4995,7 @@ msgstr ""
 
 #. Resource IDs: (32853)
 msgid "Line diff bar"
-msgstr "Line diff bar"
+msgstr "میله مقایسه خط"
 
 #. Resource IDs: (65535)
 msgid "Line differences"
@@ -4999,16 +5044,15 @@ msgstr ""
 
 #. Resource IDs: (32854)
 msgid "Locator Bar"
-msgstr "Locator Bar"
+msgstr "میله جایگزین"
 
 #. Resource IDs: (207, 221, 229, 65535)
 msgid "Lock"
 msgstr "قفل"
 
 #. Resource IDs: (208)
-#, fuzzy
 msgid "Lock Date"
-msgstr "تاریخ ایجادبندید :"
+msgstr "قفل کردن تاریخ"
 
 #. Resource IDs: (191)
 msgid "Lock Files"
@@ -5109,11 +5153,11 @@ msgstr "پائینترین اصلاحیه نمایش شده: %ld - بالاتر�
 
 #. Resource IDs: (16973)
 msgid "Lum"
-msgstr "Lum"
+msgstr "نوک"
 
 #. Resource IDs: (3866)
 msgid "Mail system DLL is invalid."
-msgstr "Mail system DLL is invalid."
+msgstr "فایل کتابخانه ای  سیستم ایمیل نامعتبر است."
 
 #. Resource IDs: (1431)
 msgid "Make this the default"
@@ -5143,6 +5187,10 @@ msgstr "جهت مقایسه علامتگذاری شود"
 #, fuzzy
 msgid "Mark the conflict as resolved"
 msgstr "بعنوان حل شده علامتگذاری شود"
+
+#. Resource IDs: (65535)
+msgid "Markers"
+msgstr "مارکر"
 
 #. Resource IDs: (2051)
 msgid ""
@@ -5206,7 +5254,7 @@ msgstr "ادغام - TortoiseSVN"
 
 #. Resource IDs: (221)
 msgid "Merge Reintegrate"
-msgstr "Merge Reintegrate"
+msgstr "ادغام مجدد"
 
 #. Resource IDs: (1468)
 msgid "Merge a range of revisions"
@@ -5247,8 +5295,8 @@ msgstr "ادغام اصلاحیه ها به..."
 
 #. Resource IDs: (610)
 #, fuzzy, c-format
-msgid "Merge the changes into the file '%s'"
-msgstr "فایل هرهفته تبدیل می کند : "
+msgid "Merge the changes into '%s'"
+msgstr "تجمیع مجدد و ادغام %s در %s"
 
 #. Resource IDs: (1470)
 msgid "Merge two different trees"
@@ -5350,7 +5398,7 @@ msgstr "غیره"
 
 #. Resource IDs: (3887)
 msgid "Mixed"
-msgstr "Mixed"
+msgstr "مخلوط"
 
 #. Resource IDs: (208)
 msgid "Modification date"
@@ -5428,9 +5476,8 @@ msgid "Move Item Up"
 msgstr "انتقال قلم به بالا"
 
 #. Resource IDs: (147)
-#, fuzzy
 msgid "Move and rename"
-msgstr "TortoiseSVN Rename/move"
+msgstr "جابجا کردن و تغییر نام"
 
 #. Resource IDs: (104)
 msgid "Move and rename item to here"
@@ -5441,9 +5488,9 @@ msgid "Move items to here"
 msgstr "جابجائی اقلام به اینجا"
 
 #. Resource IDs: (613)
-#, fuzzy, c-format
+#, c-format
 msgid "Move to %1"
-msgstr "انتقال به لیست تغییرات"
+msgstr "انتقال به %1"
 
 #. Resource IDs: (209)
 msgid "Move to changelist"
@@ -5485,17 +5532,16 @@ msgid "N&ext Conflict"
 msgstr "تناقض بعدی"
 
 #. Resource IDs: (3697)
-#, fuzzy
 msgid "NUM"
 msgstr "NUM"
 
 #. Resource IDs: (17004)
 msgid "Navigation Pane Options"
-msgstr "Navigation Pane Options"
+msgstr "اختیارات بخش هدایتگر"
 
 #. Resource IDs: (1065)
 msgid "Navigation Pane Options..."
-msgstr "Navigation Pane Options..."
+msgstr "اختیارات بخش هدایتگر..."
 
 #. Resource IDs: (208)
 msgid "Needs lock"
@@ -5744,7 +5790,6 @@ msgid "OK"
 msgstr "تائید"
 
 #. Resource IDs: (3697)
-#, fuzzy
 msgid "OVR"
 msgstr "OVR"
 
@@ -5770,11 +5815,11 @@ msgstr "قدیمی ترین بالا"
 
 #. Resource IDs: (99, 1202)
 msgid "Omit e&xternals"
-msgstr "Omit e&xternals"
+msgstr "حذف &خارجی ها"
 
 #. Resource IDs: (145)
 msgid "Omit externals"
-msgstr "Omit externals"
+msgstr "حذف خارجی ها"
 
 #. Resource IDs: (63)
 msgid ""
@@ -5798,7 +5843,7 @@ msgstr "فقط دریافت شاخه اول"
 
 #. Resource IDs: (19)
 msgid "Only file children"
-msgstr "Only file children"
+msgstr "فقط فایلهای فرزند"
 
 #. Resource IDs: (169)
 msgid ""
@@ -5822,7 +5867,7 @@ msgstr "فقط وقتی که tsvn:projectlanguage تنظیم شده است از 
 
 #. Resource IDs: (65535)
 msgid "Opacity"
-msgstr ""
+msgstr "شفافیت"
 
 #. Resource IDs: (3841)
 msgid "Open"
@@ -5830,7 +5875,7 @@ msgstr "بازکردن"
 
 #. Resource IDs: (76)
 msgid "Open client certificate file"
-msgstr "Open client certificate file"
+msgstr "باز کردن فایل مجوز کلاینت"
 
 #. Resource IDs: (3601)
 msgid "Open file"
@@ -5866,7 +5911,7 @@ msgstr "مرورگر مخزن را برای دستکاری مخزن بصورت �
 
 #. Resource IDs: (199)
 msgid "Operate from log cache for now only"
-msgstr "Operate from log cache for now only"
+msgstr "استفاده از کَش گزارشات فقط برای این دفعه"
 
 #. Resource IDs: (16137)
 msgid "Options"
@@ -5878,7 +5923,7 @@ msgstr "اندازه اصلی"
 
 #. Resource IDs: (1065)
 msgid "Other Task Panes"
-msgstr "Other Task Panes"
+msgstr "سایر قابهای کار"
 
 #. Resource IDs: (245)
 msgid "Others"
@@ -5893,7 +5938,6 @@ msgid "Output.prn"
 msgstr "Output.prn"
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "Overlays"
 msgstr "پوشش آیکونها"
 
@@ -5902,8 +5946,8 @@ msgid ""
 "Override the svn:eol-style property setting.\n"
 "Files which don't have this property set are not affected."
 msgstr ""
-"Override the svn:eol-style property setting.\n"
-"Files which don't have this property set are not affected."
+"لغو تنظیمات خاصیت svn:eol-style.\n"
+"فایلهایی که این خاصیت بر روی آنها اعمال نشده باشد تحت تاثیر قرار نخواهند گرفت."
 
 #. Resource IDs: (99)
 msgid "Overwrite"
@@ -5965,7 +6009,7 @@ msgstr "چسباندن لیست فایلها"
 
 #. Resource IDs: (15)
 msgid "Pastes the svn path from the clipboard, resulting in a move (cut) or copy operation"
-msgstr "Pastes the svn path from the clipboard, resulting in a move (cut) or copy operation"
+msgstr "چسباندن مسیر svn از کلیپبرد، نتیجه شده از عمگر برش یا رونوشت"
 
 #. Resource IDs: (376)
 msgid "Patch all"
@@ -5977,7 +6021,7 @@ msgstr "وصله انتخاب شده ها"
 
 #. Resource IDs: (157)
 msgid "Patchfiles (*.diff, *.patch)|*.diff;*.patch|All (*.*)|*.*||"
-msgstr "فایلهای وصله (*.diff, *.patch)|*.diff;*.patch|All (*.*)|*.*||"
+msgstr "فایلهای وصله (*.diff, *.patch)|*.diff;*.patch|همه (*.*)|*.*||"
 
 #. Resource IDs: (20, 63, 77, 198, 207)
 msgid "Path"
@@ -6013,7 +6057,7 @@ msgstr "تصویر:"
 
 #. Resource IDs: (157)
 msgid "Pictures (*.wmf, *.jpg, *.png, *.bmp, *.gif)|*.wmf;*.jpg;*.jpeg;*.png;*.bmp;*.gif|All (*.*)|*.*||"
-msgstr "تصاویر (*.wmf, *.jpg, *.png, *.bmp, *.gif)|*.wmf;*.jpg;*.jpeg;*.png;*.bmp;*.gif|All (*.*)|*.*||"
+msgstr "تصاویر (*.wmf, *.jpg, *.png, *.bmp, *.gif)|*.wmf;*.jpg;*.jpeg;*.png;*.bmp;*.gif|همه (*.*)|*.*||"
 
 #. Resource IDs: (246)
 msgid "Pie Graph"
@@ -6028,9 +6072,8 @@ msgid "Please enter a path where to apply the hook script to."
 msgstr "لطفا یک مسیر جهت اجرای اسکریپت قلاب وارد نمائید."
 
 #. Resource IDs: (251)
-#, fuzzy
 msgid "Please execute the 'Cleanup' command."
-msgstr "لطفا دستور \"پاکسازی\"را اجرا نمائید."
+msgstr "لطفا دستور 'پاکسازی'را اجرا نمائید."
 
 #. Resource IDs: (78)
 msgid ""
@@ -6074,9 +6117,8 @@ msgid "Please wait while the repository browser is initializing..."
 msgstr "لطفا منتظر باشید تا مرورگر مخزن راه اندازی گردد..."
 
 #. Resource IDs: (1368)
-#, fuzzy
 msgid "Please wait while we gather more information..."
-msgstr "لطفا منتظر باشید تا تغییرات دریافت شوند..."
+msgstr "لطفا تا دریافت اطلاعات بیشتر منتظر باشید..."
 
 #. Resource IDs: (104, 119, 146, 213)
 msgid "Please wait..."
@@ -6086,13 +6128,17 @@ msgstr "لطفا منتظر باشید..."
 msgid "Port :"
 msgstr "درگاه :"
 
+#. Resource IDs: (347)
+msgid "Possible values: 0 (fully transparent) .. 255 (opaque)"
+msgstr "مقادیر ممکن: 0 (کامل شفاف) .. 255 (کاملا کدر)"
+
 #. Resource IDs: (569)
 msgid "Post-Commit Hook"
-msgstr "Post-Commit Hook"
+msgstr "Hook قبل­اعمال"
 
 #. Resource IDs: (570)
 msgid "Post-Update Hook"
-msgstr "Post-Update Hook"
+msgstr "Hook قبل­اعمال"
 
 #. Resource IDs: (58115)
 msgid "Pre&v Page"
@@ -6100,11 +6146,11 @@ msgstr "صفحه قبلی"
 
 #. Resource IDs: (569)
 msgid "Pre-Commit Hook"
-msgstr "Pre-Commit Hook"
+msgstr "Hook قبل­اعمال"
 
 #. Resource IDs: (570)
 msgid "Pre-Update Hook"
-msgstr "Pre-Update Hook"
+msgstr "Hook قبل­بروزرسانی"
 
 #. Resource IDs: (65535)
 msgid "Press &New Shortcut Key:"
@@ -6116,7 +6162,7 @@ msgstr "کلید میانبر &جدید را بزنید:"
 
 #. Resource IDs: (2052)
 msgid "Prevents most cases in which connection lines cross revision nodes"
-msgstr "Prevents most cases in which connection lines cross revision nodes"
+msgstr "جلوگیری از بیشتر موارد درهر کدام از خطوط اتصال بر روی گره های مرور "
 
 #. Resource IDs: (1069)
 msgid "Preview"
@@ -6160,7 +6206,7 @@ msgstr "چاپگر:"
 
 #. Resource IDs: (3845)
 msgid "Printer Files (*.prn)|*.prn|All Files (*.*)|*.*||"
-msgstr "فایلهای چاپگر (*.prn)|*.prn|All Files (*.*)|*.*||"
+msgstr "فایلهای چاپگر (*.prn)|*.prn|همه فایلها*||"
 
 #. Resource IDs: (65535)
 msgid "Printing"
@@ -6177,7 +6223,7 @@ msgstr "برنامه"
 
 #. Resource IDs: (157)
 msgid "Programs (*.exe)|*.exe|All Files (*.*)|*.*||"
-msgstr "برنامه ها (*.exe)|*.exe|All Files (*.*)|*.*||"
+msgstr "برنامه ها (*.exe)|*.exe|همه فایلها (*.*)|*.*||"
 
 #. Resource IDs: (134)
 msgid "Progress"
@@ -6189,7 +6235,7 @@ msgstr "خصوصیات"
 
 #. Resource IDs: (157)
 msgid "Properties (*.svnprops)|*.svnprops|All Files (*.*)|*.*||"
-msgstr "خصوصیات (*.svnprops)|*.svnprops|All Files (*.*)|*.*||"
+msgstr "خصوصیات (*.svnprops)|*.svnprops|همه فایلها (*.*)|*.*||"
 
 #. Resource IDs: (1287)
 msgid "Properties for"
@@ -6209,9 +6255,9 @@ msgid "Property %s : Revision %s"
 msgstr "خاصیت %s : اصلاحیه %s"
 
 #. Resource IDs: (151)
-#, fuzzy, c-format
+#, c-format
 msgid "Property %s : Working Base, Revision %ld"
-msgstr "خاصیت %s : اصلاحیه %s"
+msgstr "خاصیت %s : پایه کاری, اصلاحیه %ld"
 
 #. Resource IDs: (151)
 #, c-format
@@ -6227,6 +6273,16 @@ msgstr "خاصیت %s : پایه کاری"
 #, c-format
 msgid "Property %s : working copy"
 msgstr "خاصیت %s : نسخه کاری"
+
+#. Resource IDs: (262)
+#, c-format
+msgid "Property '%s' deleted"
+msgstr "خاصیت '%s' حذف شد"
+
+#. Resource IDs: (262)
+#, c-format
+msgid "Property '%s' set"
+msgstr "خاصیت '%s' ایجاد شد"
 
 #. Resource IDs: (107)
 msgid "Property Page"
@@ -6283,7 +6339,7 @@ msgstr ""
 
 #. Resource IDs: (1073)
 msgid "R&AM drives"
-msgstr "درایوهای RAM"
+msgstr "درایوهای رَم"
 
 #. Resource IDs: (16623)
 msgid "R&eset"
@@ -6295,7 +6351,7 @@ msgstr "بازگشت به اصلاحیه"
 
 #. Resource IDs: (65535)
 msgid "RAM [kB]: "
-msgstr "RAM [kB]: "
+msgstr "رَم [kB]"
 
 #. Resource IDs: (3697)
 msgid "REC"
@@ -6318,9 +6374,8 @@ msgid "Re&set All"
 msgstr "بازنشانی همه"
 
 #. Resource IDs: (1382)
-#, fuzzy
 msgid "Re&store defaults"
-msgstr "درباره گرداننده های قابل حرکت &"
+msgstr "بازگرداندن پیش فرض ها"
 
 #. Resource IDs: (8)
 msgid "Re&vert..."
@@ -6352,7 +6407,7 @@ msgstr ""
 
 #. Resource IDs: (1260)
 msgid "Recurse into unversioned folders"
-msgstr "Recurse into unversioned folders"
+msgstr "پیمایش پوشه های بدون نسخه بصورت بازگشتی"
 
 #. Resource IDs: (563)
 msgid "Recursive"
@@ -6368,7 +6423,7 @@ msgstr ""
 
 #. Resource IDs: (32819)
 msgid "Reduce cross-&lines"
-msgstr "Reduce cross-&lines"
+msgstr "کاهش cross-&lines"
 
 #. Resource IDs: (3825)
 msgid "Reduce the window to an icon"
@@ -6417,6 +6472,10 @@ msgstr ""
 msgid "Reintegrate a branch"
 msgstr "تجمیع مجدد شاخه"
 
+#. Resource IDs: (595)
+msgid "Reintegrate merge"
+msgstr "Reintegrate merge"
+
 #. Resource IDs: (230)
 #, c-format
 msgid "Reintegrate merge %s into %s"
@@ -6451,8 +6510,8 @@ msgid ""
 "Reloads the opened files and reverts all changes.\n"
 "Reload"
 msgstr ""
-"Reloads the opened files and reverts all changes.\n"
-"Reload"
+"بارگذاری مجدد فایلهای باز شده و برگشت همه تغییرات.\n"
+"بارگذاری مجدد"
 
 #. Resource IDs: (157)
 msgid "Relocate"
@@ -6468,7 +6527,7 @@ msgstr "در حال تغییر مکان"
 
 #. Resource IDs: (207)
 msgid "Remote property status"
-msgstr "Remote property status"
+msgstr "وضعیت خاصیت راه دور"
 
 #. Resource IDs: (208)
 #, fuzzy
@@ -6477,11 +6536,11 @@ msgstr "&از نسخه"
 
 #. Resource IDs: (63, 207)
 msgid "Remote status"
-msgstr "Remote status"
+msgstr "وضعیت راه دور"
 
 #. Resource IDs: (207)
 msgid "Remote text status"
-msgstr "Remote text status"
+msgstr "وضعیت متن راه دور"
 
 #. Resource IDs: (1332, 1470)
 msgid "Remove"
@@ -6611,9 +6670,8 @@ msgid "Renames files / folders inside version control"
 msgstr "فایلها یا پوشه های تحت مدیریت ویرایش را تغییر نام میدهد"
 
 #. Resource IDs: (209)
-#, fuzzy
 msgid "Repair move"
-msgstr "انتقال اصلاح کنید"
+msgstr "اصلاح جابجایی"
 
 #. Resource IDs: (3603)
 msgid ""
@@ -6684,14 +6742,12 @@ msgid "Resolve all later"
 msgstr "بعدا همه حل کردن همه برخورد/تضاد ها vh pg ;k"
 
 #. Resource IDs: (282)
-#, fuzzy
 msgid "Resolve conflict using 'mine'"
-msgstr "کاربردتضادمال من دوباره حل کنید "
+msgstr "حل کردن تضاد با نسخه 'من'"
 
 #. Resource IDs: (282)
-#, fuzzy
 msgid "Resolve conflict using 'theirs'"
-msgstr "کاربردتضادمال ایشان دوباره حل کنید "
+msgstr "حل کردن تضاد با نسخه 'آنها'"
 
 #. Resource IDs: (1403)
 msgid "Resolve conflict:"
@@ -6739,14 +6795,14 @@ msgid "Reverse merge"
 msgstr "ادغام معکوس"
 
 #. Resource IDs: (264)
-#, fuzzy, c-format
+#, c-format
 msgid "Reverse merging %ld"
-msgstr "در حال ادغام r%ld تا r%ld"
+msgstr "در حال ادغام معکوس %ld"
 
 #. Resource IDs: (264)
-#, fuzzy, c-format
+#, c-format
 msgid "Reverse merging %ld through %ld"
-msgstr "در حال ادغام r%ld تا r%ld"
+msgstr "در حال ادغام معکوس %ld تا %ld"
 
 #. Resource IDs: (175, 229)
 msgid "Revert"
@@ -6758,7 +6814,7 @@ msgstr "بازگشت - TortoiseSVN"
 
 #. Resource IDs: (345)
 msgid "Revert to default settings. Recommended for unexperienced users."
-msgstr "Revert to default settings. Recommended for unexperienced users."
+msgstr "بازگشت به تنظیمات پیش فرض. برای کاربران بی تجربه توصیه می شود."
 
 #. Resource IDs: (73)
 msgid "Reverted"
@@ -6806,6 +6862,10 @@ msgstr "نمودار اصلاحیه"
 #. Resource IDs: (239)
 msgid "Revision Graph Filter"
 msgstr "فیلتر گراف اصلاحیه ها"
+
+#. Resource IDs: (299)
+msgid "Revision Graph::Colors"
+msgstr "گراف اصلاحیه ها::رنگ ها"
 
 #. Resource IDs: (228)
 msgid "Revision Range"
@@ -6961,7 +7021,7 @@ msgstr "SVN کپی فایلهای نسخه دار به این مکان"
 
 #. Resource IDs: (16)
 msgid "SVN Local lock owner"
-msgstr "SVN Local lock owner"
+msgstr "SVN مالک محلی قفل "
 
 #. Resource IDs: (17)
 #, fuzzy
@@ -6983,7 +7043,7 @@ msgstr "وضعیت SVN"
 
 #. Resource IDs: (12)
 msgid "SVN URL"
-msgstr "SVN URL"
+msgstr "آدرس SVN"
 
 #. Resource IDs: (17)
 msgid "SVN eol-style"
@@ -7091,7 +7151,7 @@ msgstr "رشته مورد نظر یافت نشد!"
 #. Resource IDs: (3867)
 #, c-format
 msgid "Seek failed on %1"
-msgstr "Seek failed on %1"
+msgstr "جستجوی ناموفق در %1"
 
 #. Resource IDs: (376)
 msgid "Select &All"
@@ -7131,7 +7191,7 @@ msgstr "انتخاب اصلاحیه"
 
 #. Resource IDs: (78)
 msgid "Select SSH client"
-msgstr "Select SSH client"
+msgstr "انتخاب کلاینت SSH"
 
 #. Resource IDs: (3858)
 msgid "Select a button."
@@ -7139,7 +7199,7 @@ msgstr "یک دگمه انتخاب کنید."
 
 #. Resource IDs: (3585)
 msgid "Select an object on which to get Help"
-msgstr "Select an object on which to get Help"
+msgstr "برای گرفتن کمک شیء مورد نظر را انتخاب کنید"
 
 #. Resource IDs: (213)
 msgid "Select changelist"
@@ -7213,6 +7273,11 @@ msgstr "انتخاب برنامه ویرایش متن"
 
 #. Resource IDs: (595)
 #, fuzzy
+msgid "Select the URL from which to reintegrate"
+msgstr "Select the urls for the tree merge"
+
+#. Resource IDs: (595)
+#, fuzzy
 msgid "Select the URLs for the tree merge"
 msgstr "Select the urls for the tree merge"
 
@@ -7246,6 +7311,10 @@ msgstr "نوع ادغام را انتخاب کنید"
 #, fuzzy
 msgid "Select viewer for diff-files"
 msgstr "Select viewer for diff-files"
+
+#. Resource IDs: (65535)
+msgid "Selected node"
+msgstr "گره انتخاب شده"
 
 #. Resource IDs: (3866)
 #, fuzzy
@@ -7334,7 +7403,7 @@ msgstr "نمایش همه"
 #. Resource IDs: (1132)
 #, fuzzy
 msgid "Show &Log"
-msgstr "کنده نشان بدهید &"
+msgstr "نمایش گزارشات ثبت شده"
 
 #. Resource IDs: (115)
 msgid "Show &Range..."
@@ -7411,7 +7480,7 @@ msgstr "دگمه های بیشتری نمایش بده"
 
 #. Resource IDs: (32813)
 msgid "Show Ove&rview"
-msgstr "Show Ove&rview"
+msgstr "نمایش &بررسی عمومی"
 
 #. Resource IDs: (1068)
 #, fuzzy
@@ -7429,9 +7498,8 @@ msgid "Show Screen&Tips on toolbars"
 msgstr "Show Screen&Tips on toolbars"
 
 #. Resource IDs: (32831)
-#, fuzzy
 msgid "Show WC &modifications"
-msgstr "نمایش اصلاحیه نسخه کاری"
+msgstr "نمایش تغییرات نسخه کاری"
 
 #. Resource IDs: (2051)
 #, fuzzy
@@ -7469,6 +7537,11 @@ msgstr "نمایش فایلهای &نادیده گرفته شده"
 #, fuzzy
 msgid "Show items in externals"
 msgstr "نشان بدهیدتنهادرمرورگرجای بگذارد &"
+
+#. Resource IDs: (1037)
+#, fuzzy
+msgid "Show l&og"
+msgstr "نمایش گزارشات ثبت شده"
 
 #. Resource IDs: (1063)
 msgid "Show linenumber&s"
@@ -7665,6 +7738,14 @@ msgstr "مقصد موجود نبود و پرش شد"
 msgid "Sort by commit count"
 msgstr "Sort by commit count"
 
+#. Resource IDs: (1501)
+msgid "Source Left:"
+msgstr "منبع چپ:"
+
+#. Resource IDs: (1502)
+msgid "Source Right:"
+msgstr "منبع راست:"
+
 #. Resource IDs: (196)
 #, fuzzy
 msgid "Specifies how many items you want to keep in the most recent log messages dialog."
@@ -7684,7 +7765,7 @@ msgstr "Spin1"
 
 #. Resource IDs: (275)
 msgid "Split &source tree"
-msgstr ""
+msgstr "شکافتن شاخه مبنا"
 
 #. Resource IDs: (275)
 #, fuzzy
@@ -7693,7 +7774,7 @@ msgstr "تنهامحدوده تجدیدنظردنباله راشامل بشوی�
 
 #. Resource IDs: (376)
 msgid "Split lines"
-msgstr "Split lines"
+msgstr "جداسازی خط ها"
 
 #. Resource IDs: (275)
 #, fuzzy
@@ -7705,8 +7786,8 @@ msgid ""
 "Split the active window into panes\n"
 "Split"
 msgstr ""
-"Split the active window into panes\n"
-"Split"
+"جداسازی پنجره فعال به چند قسمت\n"
+"جداسازی"
 
 #. Resource IDs: (246)
 msgid "Stacked Bar Graph"
@@ -8827,9 +8908,8 @@ msgid "Transparent &color..."
 msgstr "رنگ &شفاف..."
 
 #. Resource IDs: (264)
-#, fuzzy
 msgid "Tree conflict"
-msgstr "N&ext Conflict"
+msgstr "تضاد/برخورد در شاخه"
 
 #. Resource IDs: (595)
 msgid "Tree merge"
@@ -8851,10 +8931,9 @@ msgstr "مجددا سعی کنید"
 
 #. Resource IDs: (10)
 msgid "Tweak TortoiseSVN"
-msgstr "Tweak TortoiseSVN"
+msgstr "تنظیمات بهینه TortoiseSVN"
 
 #. Resource IDs: (1436)
-#, fuzzy
 msgid "U&pdate"
 msgstr "بروزرسانی"
 
@@ -8881,11 +8960,11 @@ msgstr "آدرس جهت ادغام"
 
 #. Resource IDs: (144, 11023, 65535)
 msgid "URL:"
-msgstr "URL:"
+msgstr "آدرس:"
 
 #. Resource IDs: (75)
 msgid "URL: "
-msgstr "URL: "
+msgstr "آدرس:"
 
 #. Resource IDs: (220)
 #, fuzzy, c-format
@@ -8935,13 +9014,12 @@ msgid "Unable to write to %1, it is read-only or opened by someone else."
 msgstr "عدم موفقیت در نوشتن به %1، این قلم فقط-خواندنی یا توسط شخص دیگری باز است."
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "Unchanged node"
-msgstr "گره اضافه شده"
+msgstr "گره فاقد تغییر"
 
 #. Resource IDs: (3887)
 msgid "Uncheck"
-msgstr "Uncheck"
+msgstr "برداشتن تیک"
 
 #. Resource IDs: (1069)
 #, c-format
@@ -9028,6 +9106,10 @@ msgstr ""
 msgid "Unversion"
 msgstr "حذف نسخه"
 
+#. Resource IDs: (1507)
+msgid "Unversioned"
+msgstr "فاقد نسخه"
+
 #. Resource IDs: (1313)
 #, fuzzy
 msgid "Unversioned files mark parent folder as modified"
@@ -9054,6 +9136,10 @@ msgstr "بروزرسانی - TortoiseSVN"
 #. Resource IDs: (1377)
 msgid "Update Depth"
 msgstr "عمق بروزرسانی"
+
+#. Resource IDs: (275)
+msgid "Update WC to revision"
+msgstr "بروزرسانی نسخه کاری به اصلاحیه"
 
 #. Resource IDs: (74)
 msgid "Updated"
@@ -9184,7 +9270,7 @@ msgstr "Use recycle bin when reverting"
 
 #. Resource IDs: (116)
 msgid "Use regular expression"
-msgstr "Use regular expression"
+msgstr "استفاده از عبارت با قاعده"
 
 #. Resource IDs: (4)
 msgid "Use repository"
@@ -9201,52 +9287,52 @@ msgid "Use system locale for date/time"
 msgstr "Use system locale for date/time"
 
 #. Resource IDs: (251)
-#, fuzzy
 msgid "Use text block from '&mine'"
-msgstr "بلوک متن استفاده ازمال من & "
+msgstr "از بلوک متن '&من' استفاده شود"
 
 #. Resource IDs: (251)
-#, fuzzy
 msgid "Use text block from '&theirs'"
-msgstr "بلوک متن استفاده ازمال ایشان & "
+msgstr "از بلوک متن '&آنها' استفاده شود"
 
 #. Resource IDs: (251)
-#, fuzzy
 msgid "Use text block from 'm&ine' before 'theirs'"
-msgstr "قبلامال ایشان Ine m بلوک متن استفاده از & "
+msgstr "از بلوک متن 'من' قبل از 'آنها' استفاده شود"
 
 #. Resource IDs: (2052)
-#, fuzzy
 msgid ""
 "Use text block from 'mine' before 'theirs'\n"
 "Use 'mine' text block then 'theirs'"
-msgstr "استفاده مال من بلوک متن سپس مال ایشان n بلوک متن استفاده ازمال من قبلامال ایشان "
+msgstr ""
+"از بلوک متن 'من' قبل از 'آنها' استفاده کن\n"
+"از بلوک متن 'من' و سپس 'آنها' استفاده کن"
 
 #. Resource IDs: (2052)
-#, fuzzy
 msgid ""
 "Use text block from 'mine'\n"
 "Use 'mine' text block"
-msgstr "استفاده مال من بلوک متن n بلوک متن استفاده ازمال من "
+msgstr ""
+"از بلوک متن 'من' استفاده کن\n"
+" استفاده از بلوک متن 'من'"
 
 #. Resource IDs: (251)
-#, fuzzy
 msgid "Use text block from 't&heirs' before 'mine'"
-msgstr "وارثهاقبلامال من t بلوک متن استفاده از & "
+msgstr "از بلوک متن 'آنها' قبل از 'من' استفاده کن"
 
 #. Resource IDs: (2052)
-#, fuzzy
 msgid ""
 "Use text block from 'theirs' before 'mine'\n"
 "Use 'theirs' text block then 'mine'"
-msgstr "استفاده مال من بلوک متن سپس مال ایشان n بلوک متن استفاده ازمال من قبلامال ایشان "
+msgstr ""
+"از بلوک متن 'آنها' قبل از 'من' استفاده کن\n"
+"از بلوک متن 'آنها' و سپس 'من' استفاده کن"
 
 #. Resource IDs: (2052)
-#, fuzzy
 msgid ""
 "Use text block from 'theirs'\n"
 "Use 'theirs' text block"
-msgstr "استفاده مال ایشان بلوک متن n بلوک متن استفاده ازمال ایشان "
+msgstr ""
+"از بلوک متن 'آنها' استفاده کن\n"
+" استفاده از بلوک متن 'آنها'"
 
 #. Resource IDs: (32820)
 msgid "Use text block from \"&mine\""
@@ -9374,9 +9460,13 @@ msgid "Visual Studio.NET 200&5"
 msgstr "Visual Studio.NET 200&5"
 
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "WC node"
-msgstr "گره اضافه شده"
+msgstr "گره نسخه کاری"
+
+#. Resource IDs: (65535)
+#, fuzzy
+msgid "WC node border"
+msgstr "نمایش اصلاحیه نسخه کاری"
 
 #. Resource IDs: (198)
 msgid "Wait"
@@ -9450,7 +9540,7 @@ msgstr "ویندوز &2000"
 
 #. Resource IDs: (146)
 msgid "With URL:"
-msgstr "با URL:"
+msgstr "با آدرس:"
 
 #. Resource IDs: (158, 65535)
 msgid "Working Copy"
@@ -9492,10 +9582,10 @@ msgid ""
 "Accessing a repository via file:// on a network share may corrupt your data!\n"
 "Create the repository anyway?"
 msgstr ""
-"You are creating a repository on a network share.\n"
-"This is safe, but once the repository is created you must access it by some other means.\n"
-"Accessing a repository via file:// on a network share may corrupt your data!\n"
-"Create the repository anyway?"
+"شما در حال ایجاد یک مخزن در یک مکان اشتراکی شبکه میباشید.\n"
+"این کار بی خطر است، ولی وقتیکه مخزن ایجاد شد شما باید بوسیله ابزار دیگری با آن کار کنید.\n"
+"دستیابی از طریق file:// در یک مکان اشتراکی شبکه شده ممکن است منجر به تخریب اطلاعات شما گردد!!\n"
+"آیا می خواهید مخزن ایجاد شود؟"
 
 #. Resource IDs: (88)
 msgid ""
@@ -9504,10 +9594,10 @@ msgid ""
 "This could lead to severe repository corruption!\n"
 "Do you really want to do that?"
 msgstr ""
-"You are trying to access a repository via file:// on\n"
-"a shared network drive.\n"
-"This could lead to severe repository corruption!\n"
-"Do you really want to do that?"
+"شماسعی دارید به مخزن بصورت file:// در\n"
+"یک درایو شبکه اشتراکی دسترسی داشته باشید.\n"
+"این می تواند منجر به تخریب شدید در مخزن شود!\n"
+"آیا شما واقعا می خواهید این کار را انجام دهید؟"
 
 #. Resource IDs: (105)
 #, fuzzy
@@ -9536,9 +9626,9 @@ msgid ""
 "If you want to set it on all files within that folder,\n"
 "you must activate the 'recursive' checkbox."
 msgstr ""
-"You can't set this property on folders, only on files!\n"
-"If you want to set it on all files within that folder,\n"
-"you must activate the 'recursive' checkbox."
+"شما نمی توانید این خاصیت را بر روی پوش ها اعمال کنید، فقط بر فایلها!\n"
+"اگر می خواهید این را بر روی فایلهای داخل پوشه اعمال کنید،\n"
+"شما باید گزینه 'بازگشتی' را فعال کنید."
 
 #. Resource IDs: (105)
 #, fuzzy
@@ -9560,8 +9650,8 @@ msgid ""
 "You have modified properties without saving them first.\n"
 "Do you want to save them now?"
 msgstr ""
-"You have modified properties without saving them first.\n"
-"Do you want to save them now?"
+"شما خصوصیات را بدون ذخیره نمودن آنهادر ابتدا ویرایش کردید.\n"
+"آیا می خواهید هم اکنون آن را ذخیره کنید؟"
 
 #. Resource IDs: (251)
 msgid "You have to update your working copy first."
@@ -9955,11 +10045,11 @@ msgstr "دیسک [kB]: "
 
 #. Resource IDs: (58116)
 msgid "dummy"
-msgstr "dummy"
+msgstr "ساختگی"
 
 #. Resource IDs: (1342)
 msgid "eol style"
-msgstr "eol style"
+msgstr "سبک eol"
 
 #. Resource IDs: (79)
 #, c-format
@@ -9993,7 +10083,7 @@ msgstr "نادیده گرفته شده"
 
 #. Resource IDs: (220)
 msgid "ignoring ancestry"
-msgstr "ignoring ancestry"
+msgstr "نادیده گرفتن اصل و ریشه"
 
 #. Resource IDs: (13)
 msgid "incomplete"
@@ -10014,11 +10104,11 @@ msgstr "فاقد نسخه است."
 
 #. Resource IDs: (214)
 msgid "item kept locally"
-msgstr "item kept locally"
+msgstr "نگهداری مورد  بصورت محلی"
 
 #. Resource IDs: (65535)
 msgid "last head update: "
-msgstr "last head update: "
+msgstr "آخرین بروزرسانی شاخه اصلی:"
 
 #. Resource IDs: (65535)
 msgid "last read: "
@@ -10046,7 +10136,7 @@ msgstr "ادغام شده"
 
 #. Resource IDs: (65535)
 msgid "merges total: "
-msgstr "merges total: "
+msgstr "مجموع ادغام ها:"
 
 #. Resource IDs: (10)
 msgid "missing"
@@ -10133,7 +10223,7 @@ msgstr "پیکسل"
 
 #. Resource IDs: (65535)
 msgid "possible or real conflict / obstructed"
-msgstr "possible or real conflict / obstructed"
+msgstr "احتمال یا حتم در وقوع تضاد / جلوگیری شد"
 
 #. Resource IDs: (3845)
 msgid "prn"
@@ -10153,7 +10243,7 @@ msgstr "جایگزین شده"
 
 #. Resource IDs: (220)
 msgid "respecting ancestry"
-msgstr "respecting ancestry"
+msgstr "بادرنظر گرفتن اصل و ریشه"
 
 #. Resource IDs: (326)
 #, c-format
@@ -10383,6 +10473,12 @@ msgstr ""
 "tsvn:logminsize\n"
 "Minimum size in chars a log message must have before a commit is allowed."
 
+#. Resource IDs: (579)
+msgid ""
+"tsvn:logrevregex\r\n"
+"A regular expression matching revision numbers in a log message"
+msgstr ""
+
 #. Resource IDs: (578)
 #, fuzzy
 msgid ""
@@ -10458,7 +10554,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "user revprops total: "
-msgstr "user revprops total: "
+msgstr "مجموع بازنگرهای کاربر:"
 
 #. Resource IDs: (563)
 msgid "values are different"
@@ -10490,7 +10586,7 @@ msgstr "هفته"
 
 #. Resource IDs: (65535)
 msgid "word tokens: "
-msgstr "word tokens: "
+msgstr "نشانه های واژه:"
 
 #. Resource IDs: (65535)
 msgid "words [uncompressed]: "
@@ -10508,6 +10604,16 @@ msgstr "بله"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "Cleaning up."
+#~ msgstr "پاکسازی."
+
+#, fuzzy
+#~ msgid "General::Revision Graph"
+#~ msgstr "فیلتر گراف اصلاحیه ها"
+
+#, fuzzy
+#~ msgid "General::Revision Graph Colors"
+#~ msgstr "عمومی::رنگها"
 #~ msgid "&?"
 #~ msgstr "&؟"
 #~ msgid "Floppy drives (A: B:)"
