@@ -22,7 +22,7 @@
 // necessary includes
 ///////////////////////////////////////////////////////////////
 
-#include "./Streams/FileName.h"
+#include "../Streams/FileName.h"
 #include "RevisionIndex.h"
 #include "RevisionInfoContainer.h"
 #include "SkipRevisionInfo.h"
@@ -106,7 +106,7 @@ private:
 
         /// allow for multiple failures 
 
-        bool ShouldDrop (const TFileName& name);
+        bool ShouldDrop (const TFileName& name, int maxFailures);
         void UpdateMark (const TFileName& name);
 
         /// copying is not supported
@@ -124,7 +124,7 @@ private:
         /// call this *before* opening the file
         /// (will auto-drop crashed files etc.)
 
-        void AutoAcquire (const TFileName& fileName);
+        void AutoAcquire (const TFileName& fileName, int maxFailures);
 
         /// call this *after* releasing a cache file
         /// (resets the "hidden" flag and closes the handle
@@ -182,7 +182,7 @@ public:
 
 	/// cache persistence
 
-	void Load();
+	void Load (int maxFailures);
 	bool IsModified() const;
 	bool IsEmpty() const;
 	void Save();
@@ -209,7 +209,7 @@ public:
                 , char flags = CRevisionInfoContainer::HAS_STANDARD_INFO);
 
 	void AddChange ( TChangeAction action
-                   , svn_node_kind_t pathType
+                   , node_kind_t pathType
 				   , const std::string& path
 				   , const std::string& fromPath
 				   , revision_t fromRevision);
@@ -282,7 +282,7 @@ inline const CSkipRevisionInfo& CCachedLogInfo::GetSkippedRevisions() const
 ///////////////////////////////////////////////////////////////
 
 inline void CCachedLogInfo::AddChange ( TChangeAction action
-                                      , svn_node_kind_t pathType
+                                      , node_kind_t pathType
 								      , const std::string& path
 									  , const std::string& fromPath
 									  , revision_t fromRevision)

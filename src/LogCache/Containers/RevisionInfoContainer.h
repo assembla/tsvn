@@ -22,10 +22,9 @@
 // necessary includes
 ///////////////////////////////////////////////////////////////
 
-#include "svn_types.h"
-#include "./Containers/StringDictonary.h"
-#include "./Containers/PathDictionary.h"
-#include "./Containers/TokenizedStringContainer.h"
+#include "StringDictonary.h"
+#include "PathDictionary.h"
+#include "TokenizedStringContainer.h"
 
 ///////////////////////////////////////////////////////////////
 // begin namespace LogCache
@@ -33,6 +32,31 @@
 
 namespace LogCache
 {
+
+/**
+ * Replacement for the svn_node_kind_t from svn_types.h
+ * This serves two goals: 
+ * (1) make the storage layer compile-time-independent
+ *     from the SVN interface layer
+ * (2) support more / less node types than the respective 
+ *     SVN version that we build against. In particular,
+ *     define the binary interpretation of the enum values.
+ */
+
+enum node_kind_t
+{
+  /** absent */
+  node_none = 0,
+
+  /** regular file */
+  node_file = 1,
+
+  /** directory */
+  node_dir = 2,
+
+  /** something's here, but we don't know what */
+  node_unknown = 3
+};
 
 /**
  * stores all log information except the actual revision number. So, please note,
@@ -122,7 +146,7 @@ private:
 
 	std::vector<unsigned char> changes;
 	std::vector<index_t> changedPaths;
-	std::vector<svn_node_kind_t> changedPathTypes;
+	std::vector<node_kind_t> changedPathTypes;
 	std::vector<index_t> copyFromPaths;
 	std::vector<revision_t> copyFromRevisions;
 
@@ -310,7 +334,7 @@ public:
 		CRevisionInfoContainer::TChangeAction GetAction() const;
         int GetRawChange() const;
 
-        svn_node_kind_t GetPathType() const;
+        node_kind_t GetPathType() const;
         CDictionaryBasedPath GetPath() const;
         index_t GetPathID() const;
 
@@ -470,7 +494,7 @@ public:
                    , char flags = HAS_STANDARD_INFO);
 
 	void AddChange ( TChangeAction action
-                   , svn_node_kind_t pathType
+                   , node_kind_t pathType
 				   , const std::string& path
 				   , const std::string& fromPath
 				   , revision_t fromRevision);
@@ -587,7 +611,7 @@ CRevisionInfoContainer::CChangesIterator::GetAction() const
 	return (CRevisionInfoContainer::TChangeAction)(action);
 }
 
-inline svn_node_kind_t 
+inline node_kind_t 
 CRevisionInfoContainer::CChangesIterator::GetPathType() const
 {
 	assert (IsValid());

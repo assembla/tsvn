@@ -266,7 +266,7 @@ void CXMLLogReader::ParseChanges (const char* current
                 continue;
         }
 
-        target.AddChange (action, svn_node_unknown, path, fromPath, fromRevision);
+        target.AddChange (action, node_unknown, path, fromPath, fromRevision);
     }
 }
 

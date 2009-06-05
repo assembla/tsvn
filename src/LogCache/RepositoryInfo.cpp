@@ -19,7 +19,7 @@
 
 #include "StdAfx.h"
 #include "RepositoryInfo.h"
-#include "CachedLogInfo.h"
+#include "./Containers/CachedLogInfo.h"
 #include "LogCacheSettings.h"
 
 #include "svn_client.h"

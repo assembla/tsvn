@@ -18,10 +18,10 @@
 //
 #include "stdafx.h"
 #include "CachedLogInfo.h"
-#include "LogCacheSettings.h"
+//#include "LogCacheSettings.h"
 
-#include "./Streams/RootInStream.h"
-#include "./Streams/RootOutStream.h"
+#include "../Streams/RootInStream.h"
+#include "../Streams/RootOutStream.h"
 
 // begin namespace LogCache
 
@@ -59,7 +59,9 @@ void CCachedLogInfo::CCacheFileManager::ResetMark()
 
 // allow for multiple failures 
 
-bool CCachedLogInfo::CCacheFileManager::ShouldDrop (const TFileName& name)
+bool CCachedLogInfo::CCacheFileManager::ShouldDrop 
+    ( const TFileName& name
+    , int maxFailures)
 {
     // no mark -> no crash -> no drop here
 
@@ -100,7 +102,7 @@ bool CCachedLogInfo::CCacheFileManager::ShouldDrop (const TFileName& name)
         // to many of them?
 
         CloseHandle (tempHandle);
-        return failureCount >= CSettings::GetMaxFailuresUntilDrop();
+        return failureCount >= maxFailures;
     }
     catch (CException* /*e*/)
     {
@@ -157,7 +159,9 @@ CCachedLogInfo::CCacheFileManager::~CCacheFileManager()
 /// call this *before* opening the file
 /// (will auto-drop crashed files etc.)
 
-void CCachedLogInfo::CCacheFileManager::AutoAcquire (const TFileName& fileName)
+void CCachedLogInfo::CCacheFileManager::AutoAcquire 
+    ( const TFileName& fileName
+    , int maxFailures)
 {
     assert (!OwnsFile());
 
@@ -165,7 +169,7 @@ void CCachedLogInfo::CCacheFileManager::AutoAcquire (const TFileName& fileName)
     // (DeleteFile() will fail for open files)
 
     std::wstring lockFileName = fileName + L".lock";
-    if (ShouldDrop (lockFileName))
+    if (ShouldDrop (lockFileName, maxFailures))
     {
         if (DeleteFile (lockFileName.c_str()) == TRUE)
         {
@@ -307,7 +311,7 @@ CCachedLogInfo::~CCachedLogInfo (void)
 
 // cache persistence
 
-void CCachedLogInfo::Load()
+void CCachedLogInfo::Load (int maxFailures)
 {
 	assert (revisions.GetLastRevision() == 0);
 
@@ -315,7 +319,7 @@ void CCachedLogInfo::Load()
 	{
 		// handle crashes and lock file
 	
-		fileManager.AutoAcquire (fileName);
+		fileManager.AutoAcquire (fileName, maxFailures);
 	
 		// does log cache file exist?
 	
@@ -364,7 +368,7 @@ void CCachedLogInfo::Save (const TFileName& newFileName)
     if (fileName != newFileName)
     {
         fileManager.AutoRelease();
-        fileManager.AutoAcquire (newFileName);
+        fileManager.AutoAcquire (newFileName, 0);
     }
 
 	// write the data file, if we were the first to open it

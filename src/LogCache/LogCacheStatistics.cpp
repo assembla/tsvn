@@ -18,7 +18,7 @@
 //
 #include "stdafx.h"
 #include "LogCacheStatistics.h"
-#include "CachedLogInfo.h"
+#include "./Containers/CachedLogInfo.h"
 #include "RepositoryInfo.h"
 #include "LogCachePool.h"
 

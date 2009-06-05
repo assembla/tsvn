@@ -19,8 +19,8 @@
 #include "stdafx.h"
 #include "CSVWriter.h"
 
-#include "RevisionInfoContainer.h"
-#include "CachedLogInfo.h"
+#include "./Containers/RevisionInfoContainer.h"
+#include "./Containers/CachedLogInfo.h"
 
 ///////////////////////////////////////////////////////////////
 // begin namespace LogCache

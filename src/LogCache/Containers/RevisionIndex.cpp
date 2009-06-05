@@ -18,7 +18,7 @@
 //
 #include "stdafx.h"
 #include "RevisionIndex.h"
-#include "Containers/ContainerException.h"
+#include "ContainerException.h"
 
 // begin namespace LogCache
 

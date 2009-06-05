@@ -25,7 +25,7 @@
 #include "ILogIterator.h"
 
 #include "./Containers/DictionaryBasedTempPath.h"
-#include "CachedLogInfo.h"
+#include "./Containers/CachedLogInfo.h"
 
 ///////////////////////////////////////////////////////////////
 // begin namespace LogCache

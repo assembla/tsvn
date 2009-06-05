@@ -102,7 +102,7 @@ void CRevisionInfoContainer::UpdateChanges
     changedPaths.swap (oldChangedPaths);
     changedPaths.reserve (oldChangedPaths.size());
 
-    std::vector<svn_node_kind_t> oldChangedPathTypes;
+    std::vector<node_kind_t> oldChangedPathTypes;
     changedPathTypes.swap (oldChangedPathTypes);
     changedPathTypes.reserve (oldChangedPathTypes.size());
 
@@ -505,7 +505,7 @@ namespace
     struct SPerChangeInfo
     {
         index_t changedPath;
-        svn_node_kind_t changedPathType;
+        node_kind_t changedPathType;
         unsigned char change;
         index_t copyFromPath;
         revision_t copyFromRevision;
@@ -641,7 +641,7 @@ index_t CRevisionInfoContainer::Insert ( const std::string& author
 }
 
 void CRevisionInfoContainer::AddChange ( TChangeAction action
-                                       , svn_node_kind_t pathType
+                                       , node_kind_t pathType
                                        , const std::string& path
                                        , const std::string& fromPath
                                        , revision_t fromRevision)
@@ -1075,9 +1075,9 @@ IHierarchicalInStream& operator>> (IHierarchicalInStream& stream
     else
     {
         container.changedPathTypes.clear();
-        container.changedPathTypes.insert (container.changedPathTypes.begin()
-                                           , container.changedPaths.size()
-                                           , svn_node_unknown);
+        container.changedPathTypes.insert ( container.changedPathTypes.begin()
+                                          , container.changedPaths.size()
+                                          , node_unknown);
     }
 
     // update size info
