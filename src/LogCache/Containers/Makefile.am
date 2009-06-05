@@ -6,7 +6,11 @@ liblogcachecontainers_a_SOURCES = \
 	PathDictionary.cpp\
 	StringDictonary.cpp\
 	TokenizedStringContainer.cpp\
-	ContainerException.cpp
+	ContainerException.cpp \
+	RevisionIndex.cpp\
+	RevisionInfoContainer.cpp\
+	SkipRevisionInfo.cpp\
+	CachedLogInfo.cpp
 
 AM_CPPFLAGS = -I$(srcdir)/../../Utils  -I$(srcdir)/../../CompatibilityHeaders
 

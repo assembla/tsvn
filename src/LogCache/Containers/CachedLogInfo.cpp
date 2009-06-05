@@ -235,12 +235,12 @@ bool CCachedLogInfo::CCacheFileManager::OwnsFile() const
 
 // dummy implementation for non-Windows OS
 
-bool CCachedLogInfo::CCacheFileManager::IsMarked (const TFileName& name) const
+bool CCachedLogInfo::CCacheFileManager::IsMarked (const TFileName&) const
 {
     return false;
 }
 
-void CCachedLogInfo::CCacheFileManager::SetMark (const TFileName& name)
+void CCachedLogInfo::CCacheFileManager::SetMark (const TFileName&)
 {
 }
 
@@ -248,12 +248,12 @@ void CCachedLogInfo::CCacheFileManager::ResetMark()
 {
 }
 
-bool CCachedLogInfo::CCacheFileManager::ShouldDrop (const TFileName& name)
+bool CCachedLogInfo::CCacheFileManager::ShouldDrop (const TFileName&, int)
 {
     return false;
 }
 
-void CCachedLogInfo::CCacheFileManager::UpdateMark (const TFileName& name)
+void CCachedLogInfo::CCacheFileManager::UpdateMark (const TFileName&)
 {
 }
 
@@ -267,7 +267,7 @@ CCachedLogInfo::CCacheFileManager::~CCacheFileManager()
 {
 }
 
-void CCachedLogInfo::CCacheFileManager::AutoAcquire (const TFileName&)
+void CCachedLogInfo::CCacheFileManager::AutoAcquire (const TFileName&, int)
 {
 }
 

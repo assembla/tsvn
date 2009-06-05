@@ -1,13 +1,9 @@
 noinst_LIBRARIES = liblogcache.a
 liblogcache_a_SOURCES = \
-	CachedLogInfo.cpp\
 	CopyFollowingLogIterator.cpp\
 	CSVWriter.cpp\
 	LogIteratorBase.cpp\
 	LogCacheSettings.cpp\
-	RevisionIndex.cpp\
-	RevisionInfoContainer.cpp\
-	SkipRevisionInfo.cpp\
 	StrictLogIterator.cpp\
 	XMLLogReader.cpp\
 	XMLLogWriter.cpp
