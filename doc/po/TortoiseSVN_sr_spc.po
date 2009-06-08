@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2009-04-04 14:55 +0000\n"
-"PO-Revision-Date: 2009-04-05 19:57+0100\n"
+"POT-Creation-Date: 2009-06-07 23:32 +0000\n"
+"PO-Revision-Date: 2009-06-08 20:00+0100\n"
 "Last-Translator: Milorad Popović <MiloradSPopovic@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -4597,8 +4597,8 @@ msgid "Because the log dialog shows you the log from HEAD, not from the current 
 msgstr "Зато што дневник дијалог приказује дневник од ГЛАВНЕ, не од текуће ревизије радне копије, то се често дешава тамо где је дневник порука приказан за садржај који још није ажуриран у вашој радној копији. Помоћ то чини јаснијим, порука урезивања која одговара ревизији коју имате у вашој радној копији приказана је масним словима."
 
 #. (para)
-msgid "By default this only works for files. This is because the update revision for a folder may not correspond to the update revision of its content, and the only way to find the effective update revision for the folder is to crawl the working copy. This can be a slow operation for large working copies so if you want to enable this feature you must create a <literal>DWORD</literal> registry key with value 1 at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>."
-msgstr "Уобичајено ово само ради за фајлове. То је зато што ажурирана ревизија за именике не одговара ажурираној ревизији њеног садржаја, и једини је начин да се нађе ефективно ажурирана ревизија за именик је пузање кроз радну копију. Ово може бити спора операција за велике радне копије тако да ако желите да омогућите ову особину морате креирати <literal>DWORD</literal>кључ регистра са вредношћу 1 у <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>."
+msgid "When you show the log for a folder the revision highlighted is the highest revision found anywhere within that folder, which requires a crawl of the working copy. This can be a slow operation for large working copies, and the log messages are not displayed until the crawl completes. If you want to disable or limit this feature you need to set a registry key <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> as described in <xref linkend=\"tsvn-dug-settings-registry\"/>."
+msgstr "Када приказујете дневник именика осветљена ревизија је највиша ревизија нађена било где унутар именика, која захтева пузање радне копије. Ово може бити спора операција за велике радне копије и дневник поруке нису приказане док се пузање не заврши. Ако желите да онемогућите или ограничите ову особину потребно је да подесите регистар кључ <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> како је описано у <xref linkend=\"tsvn-dug-settings-registry\"/>."
 
 #. (title)
 msgid "Merge Tracking Features"
@@ -9386,8 +9386,8 @@ msgid "Current revision highlighting for folders in log dialog"
 msgstr "Текуће ревизијско осветљавање за именике у дневник дијалогу"
 
 #. (para)
-msgid "The log dialog highlights the current working copy revision when the log is shown for a file. To do the same thing for a folder requires a working copy crawl, which can be a slow operation for large working copies. If you want to enable this feature you must create a <literal>DWORD</literal> registry key at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. A value of 0 disables the feature (no highlighting for folders), a value of 1 (default) will fetch the status recursively (find the highest revision in the working copy tree), and a value of 2 will check the revision of the selected folder itself, but will not check any child items."
-msgstr "Дневник дијалог осветљава текућу  радну копију ревизије када је приказан дневник фајла. Да се уради иста ствар за именик захтева се пузање кроз радну копију, што може бити спора операција за велике радне копије. Ако желите да омогућите ову особину морате креирати <literal>DWORD</literal> регистар кључ у <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. Вредност 0 онемогућава особину (нема осветљавања именика),  вреднст 1 (уобичајена) ће наћи статус рекурзивно (налази највиши ревизиони број у стаблу радне копије), и вредност 2 проверава ревизију самог изабраног именика, али неће проверити било коју потомачку ставку."
+msgid "The log dialog highlights the current working copy revision when the log is shown for a file. To do the same thing for a folder requires a working copy crawl, which is the default action, but it can be a slow operation for large working copies. If you want to change the operation of this feature you must create a <literal>DWORD</literal> registry key at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. A value of 0 disables the feature (no highlighting for folders), a value of 1 (default) will fetch the status recursively (find the highest revision in the working copy tree), and a value of 2 will check the revision of the selected folder itself, but will not check any child items."
+msgstr "Дневник дијалог осветљава текућу  радну копију ревизије када је приказан дневник фајла. Да се уради иста ствар за именик захтева се пузање кроз радну копију, што може бити спора операција за велике радне копије. Ако желите да измените операцију ове особине морате креирати <literal>DWORD</literal> регистар кључ у <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. Вредност 0 онемогућава особину (нема осветљавања именика),  вредност 1 (уобичајена) ће наћи статус рекурзивно (налази највиши ревизиони број у стаблу радне копије), и вредност 2 проверава ревизију самог изабраног именика, али неће проверити било коју потомачку ставку."
 
 #. (term)
 msgid "Make checkout fail if an item of the same name exists"
@@ -12816,13 +12816,3 @@ msgstr "Милорад Поповић <MiloradSPopovic@gmail.com>"
 #. (None)
 msgid "translator-translation"
 msgstr "Превод"
-
-#~ msgid ""
-#~ "Nodes classified as tags may be blended with this color. If you use tag "
-#~ "folding to save space, tags are marked on the copy source using a block "
-#~ "in this color."
-#~ msgstr ""
-#~ "Чворови означени као ознаке могу бити мешани са овим бојама. Ако "
-#~ "користите знак именовање да чувате простор, знаци су означени у извору "
-#~ "копије коришћењем блока у овој боји."
-
