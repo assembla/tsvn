@@ -105,6 +105,11 @@ public:
 
 	void SetRevisionIndex (revision_t revision, index_t index);
 
+    /// return false if concurrent read accesses
+    /// would potentially access invalid data.
+
+    bool CanSetRevisionIndexThreadSafely (revision_t revision) const;
+
 	/// reset content
 
 	void Clear();

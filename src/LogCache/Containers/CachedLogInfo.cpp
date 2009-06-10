@@ -463,6 +463,21 @@ void CCachedLogInfo::Clear()
 	logInfo.Clear();
 }
 
+// return false if concurrent read accesses
+// would potentially access invalid data.
+
+bool CCachedLogInfo::CanInsertThreadSafely
+    ( revision_t revision
+    , const std::string& author
+    , const std::string& comment
+    , __time64_t timeStamp) const
+{
+    // check feasibility & add revision index
+
+    return logInfo.CanInsertThreadSafely (author, comment, timeStamp)
+        && revisions.CanSetRevisionIndexThreadSafely (revision);
+}
+
 // update / modify existing data
 
 void CCachedLogInfo::Update ( const CCachedLogInfo& newData

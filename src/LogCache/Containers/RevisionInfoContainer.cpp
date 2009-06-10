@@ -802,6 +802,124 @@ void CRevisionInfoContainer::AddRevProp ( const std::string& revProp
     }
 }
 
+// return false if concurrent read accesses
+// would potentially access invalid data.
+
+bool CRevisionInfoContainer::CanInsertThreadSafely 
+    ( const std::string& author
+    , const std::string& comment
+    , __time64_t) const
+{
+    // will any of our containers need to be re-allocated?
+
+    if (   (authorPool.Find (author.c_str()) != NO_INDEX)
+        || !comments.CanInsertThreadSafely (comment)
+        || (authors.capacity() == authors.size())
+        || (timeStamps.capacity() == timeStamps.size())
+
+        || (presenceFlags.capacity() == presenceFlags.size())
+        || (rootPaths.capacity() == rootPaths.size())
+        || (sumChanges.capacity() == sumChanges.size())
+
+        || (changesOffsets.capacity() == changesOffsets.size())
+        || (copyFromOffsets.capacity() == copyFromOffsets.size())
+        || (mergedRevisionsOffsets.capacity() == mergedRevisionsOffsets.size())
+        || (userRevPropOffsets.capacity() == userRevPropOffsets.size()))
+    {
+        return false;
+    }
+
+    // all fine
+
+    return true;
+}
+
+bool CRevisionInfoContainer::CanAddChangeThreadSafely 
+    ( TChangeAction
+    , node_kind_t
+    , const std::string& path
+    , const std::string& fromPath
+    , revision_t) const
+{
+    // will any of our containers need to be re-allocated?
+
+    if (   !CDictionaryBasedPath::CanParsePathThreadSafely (&paths, path)
+        || (changedPaths.capacity() == changedPaths.size())
+        || (changedPathTypes.capacity() == changedPathTypes.size())
+        || (changes.capacity() == changes.size()))
+    {
+        return false;
+    }
+
+    // add changes info (flags), and indicate presence of fromPath (if given)
+
+    if (!fromPath.empty())
+        if (   !CDictionaryBasedPath::CanParsePathThreadSafely (&paths, fromPath)
+            || (copyFromPaths.capacity() == copyFromPaths.size())
+            || (copyFromRevisions.capacity() == copyFromRevisions.size()))
+        {
+            return false;
+        }
+
+    // all fine
+
+    return true;
+}
+
+bool CRevisionInfoContainer::CanAddMergedRevisionThreadSafely 
+    ( const std::string& fromPath
+    , const std::string& toPath
+    , revision_t
+    , revision_t) const
+{
+    // will any of our containers need to be re-allocated?
+
+    if (   !CDictionaryBasedPath::CanParsePathThreadSafely (&paths, fromPath)
+        || !CDictionaryBasedPath::CanParsePathThreadSafely (&paths, toPath)
+        || (mergedFromPaths.capacity() == mergedFromPaths.size())
+        || (mergedToPaths.capacity() == mergedToPaths.size())
+        || (mergedRangeStarts.capacity() == mergedRangeStarts.size())
+        || (mergedRangeDeltas.capacity() == mergedRangeDeltas.size()))
+    {
+        return false;
+    }
+
+    // all fine
+
+    return true;
+}
+
+bool CRevisionInfoContainer::CanAddRevPropThreadSafely 
+    ( const std::string& revProp
+    , const std::string& value) const
+{
+    static const std::string svnAuthor ("svn:author");
+    static const std::string svnDate ("svn:date");
+    static const std::string svnLog ("svn:log");
+
+    // store standard rev-props somewhere else
+
+    if (revProp == svnAuthor)
+    {
+        return authorPool.Find (value.c_str()) != NO_INDEX;
+    }
+    else if (revProp == svnDate)
+    {
+        return true;
+    }
+    else if (revProp == svnLog)
+    {
+        return comments.CanInsertThreadSafely (value);
+    }
+    else
+    {
+        // it's a user rev prop
+
+        return (userRevPropNames.capacity() > userRevPropNames.size())
+            && (userRevPropsPool.Find (revProp.c_str()) != NO_INDEX)
+            && (userRevPropValues.CanInsertThreadSafely (value));
+    }
+}
 
 // reset content
 

@@ -721,6 +721,17 @@ void CTokenizedStringContainer::AutoCompress()
 		Compress();
 }
 
+// return false if concurrent read accesses
+// would potentially access invalid data.
+
+bool CTokenizedStringContainer::CanInsertThreadSafely 
+    (const std::string& s) const
+{
+    // behavior in non-trival cases is too hard to predict
+
+    return s.empty() && (offsets.size() < offsets.capacity());
+}
+
 // reset content
 
 void CTokenizedStringContainer::Clear()

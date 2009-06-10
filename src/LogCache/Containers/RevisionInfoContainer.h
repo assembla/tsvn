@@ -507,6 +507,27 @@ public:
 	void AddRevProp ( const std::string& revProp
 				    , const std::string& value);
 
+    /// return false if concurrent read accesses
+    /// would potentially access invalid data.
+
+    bool CanInsertThreadSafely ( const std::string& author
+				               , const std::string& comment
+				               , __time64_t timeStamp) const;
+
+	bool CanAddChangeThreadSafely ( TChangeAction action
+                                  , node_kind_t pathType
+				                  , const std::string& path
+				                  , const std::string& fromPath
+				                  , revision_t fromRevision) const;
+
+	bool CanAddMergedRevisionThreadSafely ( const std::string& fromPath
+				                          , const std::string& toPath
+				                          , revision_t revisionStart
+				                          , revision_t revisionDelta) const;
+
+	bool CanAddRevPropThreadSafely ( const std::string& revProp
+				                   , const std::string& value) const;
+
 	/// reset content
 
 	void Clear();
@@ -576,6 +597,12 @@ public:
 
 ///////////////////////////////////////////////////////////////
 // inlines
+///////////////////////////////////////////////////////////////
+
+#pragma endregion 
+
+#pragma region CMergedRevisionsIterator inlines
+
 ///////////////////////////////////////////////////////////////
 // CMergedRevisionsIterator
 ///////////////////////////////////////////////////////////////
@@ -740,6 +767,10 @@ CRevisionInfoContainer::CChangesIterator::operator-
 	return changeOffset - rhs.changeOffset;
 }
 
+#pragma endregion 
+
+#pragma region CMergedRevisionsIterator<> implementation
+
 ///////////////////////////////////////////////////////////////
 // CPerRevisionInfoIteratorBase<>
 ///////////////////////////////////////////////////////////////
@@ -833,6 +864,10 @@ CRevisionInfoContainer::CPerRevisionInfoIteratorBase<T>::operator-
 	return offset - rhs.offset;
 }
 
+#pragma endregion
+
+#pragma region CMergedRevisionsIterator inlines
+
 ///////////////////////////////////////////////////////////////
 // CMergedRevisionsIterator
 ///////////////////////////////////////////////////////////////
@@ -904,6 +939,10 @@ CRevisionInfoContainer::CMergedRevisionsIterator::IsValid() const
 		&& (offset < (index_t)container->mergedFromPaths.size());
 }
 
+#pragma endregion
+
+#pragma region CUserRevPropsIterator inlines
+
 ///////////////////////////////////////////////////////////////
 // CUserRevPropsIterator
 ///////////////////////////////////////////////////////////////
@@ -955,6 +994,10 @@ CRevisionInfoContainer::CUserRevPropsIterator::IsValid() const
 	return (container != NULL)
 		&& (offset < (index_t)container->userRevPropNames.size());
 }
+
+#pragma endregion
+
+#pragma region CRevisionInfoContainer inlines
 
 ///////////////////////////////////////////////////////////////
 // CRevisionInfoContainer
@@ -1102,6 +1145,8 @@ inline const CStringDictionary& CRevisionInfoContainer::GetUserRevProps() const
 {
 	return userRevPropsPool;
 }
+
+#pragma endregion
 
 ///////////////////////////////////////////////////////////////
 // stream I/O

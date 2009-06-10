@@ -208,6 +208,12 @@ public:
 	{
 	}
 
+    /// return false if concurrent read accesses
+    /// would potentially access invalid data.
+
+    static bool CanParsePathThreadSafely ( const CPathDictionary* dictionary
+						                 , const std::string& path);
+
 	/// data access
 
 	index_t GetIndex() const

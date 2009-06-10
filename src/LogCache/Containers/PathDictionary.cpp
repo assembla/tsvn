@@ -292,6 +292,51 @@ CDictionaryBasedPath::CDictionaryBasedPath ( CPathDictionary* aDictionary
     ParsePath (path, nextParent ? NULL : aDictionary);
 }
 
+// return false if concurrent read accesses
+// would potentially access invalid data.
+
+bool CDictionaryBasedPath::CanParsePathThreadSafely 
+    ( const CPathDictionary* dictionary
+    , const std::string& path)
+{
+    // trivial case
+
+    if (path.empty())
+        return true;
+
+    // parse path and look for a suitable chain of parsed elements
+    // within the path dictionary
+
+    std::string temp (path);
+
+    index_t currentIndex = (index_t)NO_INDEX;
+    size_t pos = temp[0] == '/' ? 0 : (size_t)(-1);
+    size_t nextPos = temp.find ('/', pos+1);
+
+    do
+    {
+        // get the current path element and terminate it properly
+
+        const char* pathElement = temp.c_str() + pos+1;
+        if (nextPos != std::string::npos)
+            temp[nextPos] = 0;
+
+        // try move to the next sub-path
+
+        currentIndex = dictionary->Find (currentIndex, pathElement);
+        if (currentIndex == NO_INDEX)
+            return false;
+
+        pos = nextPos;
+        nextPos = temp.find ('/', nextPos);
+    }
+    while (pos != std::string::npos);
+
+    // no problems found
+
+    return true;
+}
+
 index_t CDictionaryBasedPath::GetDepth() const
 {
     if (IsValid())

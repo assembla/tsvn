@@ -144,6 +144,24 @@ void CRevisionIndex::SetRevisionIndex (revision_t revision, index_t index)
 	indices [revision - firstRevision] = index;
 }
 
+// return false if concurrent read accesses
+// would potentially access invalid data.
+
+bool CRevisionIndex::CanSetRevisionIndexThreadSafely (revision_t revision) const
+{
+	// special cases
+
+	if (indices.empty())
+        return false;
+
+	// make sure, there is an entry in indices for that revision
+
+	if (revision < firstRevision)
+        return false;
+
+	return revision - firstRevision < (revision_t)indices.capacity();
+}
+
 // reset content
 
 void CRevisionIndex::Clear()

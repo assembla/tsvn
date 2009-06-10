@@ -228,6 +228,23 @@ public:
 
 	void Clear();
 
+    /// return false if concurrent read accesses
+    /// would potentially access invalid data.
+
+	bool CanInsertThreadSafely ( revision_t revision
+				               , const std::string& author
+				               , const std::string& comment
+				               , __time64_t timeStamp) const;
+
+	bool CanAddChangeThreadSafely ( TChangeAction action
+                                  , node_kind_t pathType
+   				                  , const std::string& path
+				                  , const std::string& fromPath
+				                  , revision_t fromRevision) const;
+
+	bool CanAddRevPropThreadSafely ( const std::string& revProp
+            			           , const std::string& value) const;
+
 	/// update / modify existing data
 
 	void Update ( const CCachedLogInfo& newData
@@ -288,7 +305,6 @@ inline void CCachedLogInfo::AddChange ( TChangeAction action
 									  , revision_t fromRevision)
 {
 	assert (revisionAdded);
-
 	logInfo.AddChange (action, pathType, path, fromPath, fromRevision);
 }
 
@@ -298,7 +314,6 @@ inline void CCachedLogInfo::AddMergedRevision ( const std::string& fromPath
 				                              , revision_t revisionDelta)
 {
 	assert (revisionAdded);
-
 	logInfo.AddMergedRevision (fromPath, toPath, revisionStart, revisionDelta);
 }
 
@@ -306,8 +321,33 @@ inline void CCachedLogInfo::AddRevProp ( const std::string& revProp
 				                       , const std::string& value)
 {
 	assert (revisionAdded);
-
 	logInfo.AddRevProp (revProp, value);
+}
+
+///////////////////////////////////////////////////////////////
+// 'pseudo-thread-safe' variants of the above:
+///////////////////////////////////////////////////////////////
+
+inline bool 
+CCachedLogInfo::CanAddChangeThreadSafely
+    ( TChangeAction action
+    , node_kind_t pathType
+    , const std::string& path
+    , const std::string& fromPath
+    , revision_t fromRevision) const
+{
+	assert (revisionAdded);
+	return logInfo.CanAddChangeThreadSafely 
+        (action, pathType, path, fromPath, fromRevision);
+}
+
+inline bool 
+CCachedLogInfo::CanAddRevPropThreadSafely 
+    ( const std::string& revProp
+ 	, const std::string& value) const
+{
+	assert (revisionAdded);
+	return logInfo.CanAddRevPropThreadSafely (revProp, value);
 }
 
 ///////////////////////////////////////////////////////////////
