@@ -315,6 +315,18 @@ CLogIteratorBase::~CLogIteratorBase(void)
 {
 }
 
+// provide custom assignment operator to silence C4512
+
+CLogIteratorBase& CLogIteratorBase::operator=(const CLogIteratorBase& rhs)
+{
+    assert (&revisionInfo == &rhs.revisionInfo);
+
+    revision = rhs.revision;
+    path = rhs.path;
+
+    return *this;
+}
+
 // implement ILogIterator
 
 bool CLogIteratorBase::DataIsMissing() const

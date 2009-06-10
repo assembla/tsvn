@@ -422,6 +422,23 @@ CSkipRevisionInfo::~CSkipRevisionInfo(void)
 }
 
 ///////////////////////////////////////////////////////////////
+/// provide custom assignment operator to silence C4512
+///////////////////////////////////////////////////////////////
+
+CSkipRevisionInfo& CSkipRevisionInfo::operator=(const CSkipRevisionInfo& rhs)
+{
+    if (this != &rhs)
+    {
+        assert (&logInfo == &rhs.logInfo);
+
+        data = rhs.data;
+        index = rhs.index;
+    }
+
+    return *this;
+}
+
+///////////////////////////////////////////////////////////////
 // query data
 ///////////////////////////////////////////////////////////////
 

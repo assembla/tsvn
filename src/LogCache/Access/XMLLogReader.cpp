@@ -18,7 +18,7 @@
 //
 #include "stdafx.h"
 #include "./XMLLogReader.h"
-#include "./Streams/MappedInFile.h"
+#include "../Streams/MappedInFile.h"
 
 ///////////////////////////////////////////////////////////////
 // begin namespace LogCache
@@ -39,7 +39,7 @@ const char* CXMLLogReader::limited_strstr ( const char* first
     assert (last > first);
     assert (sub != NULL);
 
-    while (true)
+    for (; ; ++first)
     {
         first = (const char*) memchr (first, *sub, last - first);
         if ( (first == NULL) || (last < first + subLen))
@@ -47,8 +47,6 @@ const char* CXMLLogReader::limited_strstr ( const char* first
 
         if (memcmp (first, sub, subLen) == 0)
             break;
-
-        ++first;
     }
 
     return first;

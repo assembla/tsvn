@@ -18,7 +18,7 @@
 //
 #include "stdafx.h"
 #include "XMLLogWriter.h"
-#include "./Streams/BufferedOutFile.h"
+#include "../Streams/BufferedOutFile.h"
 
 ///////////////////////////////////////////////////////////////
 // begin namespace LogCache

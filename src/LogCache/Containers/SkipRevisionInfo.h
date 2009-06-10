@@ -223,6 +223,10 @@ public:
                       , const CRevisionInfoContainer& logInfo);
 	~CSkipRevisionInfo(void);
 
+    /// provide custom assignment operator to silence C4512
+
+    CSkipRevisionInfo& operator=(const CSkipRevisionInfo& rhs);
+
 	/// query data (return NO_REVISION, if not found)
 
 	revision_t GetNextRevision (const CDictionaryBasedPath& path, revision_t revision) const;
