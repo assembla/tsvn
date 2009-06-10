@@ -18,6 +18,7 @@
 //
 #pragma once
 
+#include "tstring.h"
 
 /**
  * \ingroup TortoiseProc

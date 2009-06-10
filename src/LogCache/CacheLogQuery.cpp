@@ -20,9 +20,9 @@
 
 #include "CacheLogQuery.h"
 
-#include "CachedLogInfo.h"
-#include "CopyFollowingLogIterator.h"
-#include "StrictLogIterator.h"
+#include "Containers/CachedLogInfo.h"
+#include "Access/CopyFollowingLogIterator.h"
+#include "Access/StrictLogIterator.h"
 #include "LogCachePool.h"
 #include "RepositoryInfo.h"
 
@@ -290,7 +290,7 @@ void CCacheLogQuery::CLogFiller::WriteToCache
 			    : static_cast<revision_t>(change->lCopyFromRev);
 
 		    targetCache->AddChange ( action
-                                   , change->nodeKind
+                                   , static_cast<node_kind_t>(change->nodeKind)
                                    , path
                                    , copyFromPath
                                    , copyFromRevision);
@@ -310,7 +310,7 @@ void CCacheLogQuery::CLogFiller::WriteToCache
             std::string value 
                 = (const char*)CUnicodeUtils::GetUTF8 (revprop->value);
 
-            targetCache->AddUserRevProp (name, value);
+            targetCache->AddRevProp (name, value);
 	    }
     }
 
@@ -794,7 +794,8 @@ void CCacheLogQuery::GetChanges
 
         // path type (aka node kind)
 
-        changedPath->nodeKind = first->GetPathType();
+        changedPath->nodeKind 
+            = static_cast<svn_node_kind_t>(first->GetPathType());
 
 		// decode the action
 
