@@ -3,7 +3,6 @@ liblogcacheaccess_a_SOURCES = \
 	CopyFollowingLogIterator.cpp\
 	CSVWriter.cpp\
 	LogIteratorBase.cpp\
-	LogCacheSettings.cpp\
 	StrictLogIterator.cpp\
 	XMLLogReader.cpp\
 	XMLLogWriter.cpp
@@ -11,7 +10,7 @@ liblogcacheaccess_a_SOURCES = \
 AM_CPPFLAGS = \
 	-I$(srcdir)/../../Utils\
 	-I$(srcdir)/../../UtilsProject\
-	-I$(srcdir)/../../CompatibilityHeaders\
+	-I$(srcdir)/../../CompatibilityHeaders
 
 # set the include path found by configure
 INCLUDES= $(all_includes)

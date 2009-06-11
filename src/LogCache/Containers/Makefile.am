@@ -12,7 +12,9 @@ liblogcachecontainers_a_SOURCES = \
 	SkipRevisionInfo.cpp\
 	CachedLogInfo.cpp
 
-AM_CPPFLAGS = -I$(srcdir)/../../Utils  -I$(srcdir)/../../CompatibilityHeaders
+AM_CPPFLAGS = \
+	-I$(srcdir)/../../Utils\
+	-I$(srcdir)/../../CompatibilityHeaders
 
 # set the include path found by configure
 INCLUDES= $(all_includes)
