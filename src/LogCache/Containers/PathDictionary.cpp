@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "PathDictionary.h"
 #include "ContainerException.h"
+#include <iostream>
 
 ///////////////////////////////////////////////////////////////
 // begin namespace LogCache
@@ -106,6 +107,17 @@ index_t CPathDictionary::AutoInsert (index_t parent, const char* pathElement)
     index_t pathElementIndex = pathElements.AutoInsert (pathElement);
     return paths.AutoInsert (std::make_pair ( parent
                                             , pathElementIndex));
+}
+
+// return false if concurrent read accesses
+// would potentially access invalid data.
+
+bool CPathDictionary::CanInsertThreadSafely 
+    ( index_t elements
+    , size_t chars) const
+{
+    return paths.CanInsertThreadSafely (elements)
+        && pathElements.CanInsertThreadSafely (elements, chars);
 }
 
 // reset content
@@ -309,10 +321,11 @@ bool CDictionaryBasedPath::CanParsePathThreadSafely
 
     std::string temp (path);
 
-    index_t currentIndex = (index_t)NO_INDEX;
+    index_t currentIndex = (index_t)0;
     size_t pos = temp[0] == '/' ? 0 : (size_t)(-1);
     size_t nextPos = temp.find ('/', pos+1);
 
+    index_t toAdd = 0;
     do
     {
         // get the current path element and terminate it properly
@@ -323,9 +336,11 @@ bool CDictionaryBasedPath::CanParsePathThreadSafely
 
         // try move to the next sub-path
 
-        currentIndex = dictionary->Find (currentIndex, pathElement);
+        if (currentIndex != NO_INDEX)
+            currentIndex = dictionary->Find (currentIndex, pathElement);
+
         if (currentIndex == NO_INDEX)
-            return false;
+            ++toAdd;
 
         pos = nextPos;
         nextPos = temp.find ('/', nextPos);
@@ -334,7 +349,7 @@ bool CDictionaryBasedPath::CanParsePathThreadSafely
 
     // no problems found
 
-    return true;
+    return (toAdd == 0) || dictionary->CanInsertThreadSafely (toAdd, path.size());
 }
 
 index_t CDictionaryBasedPath::GetDepth() const

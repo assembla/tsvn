@@ -98,6 +98,15 @@ void CIndexPairDictionary::Swap (CIndexPairDictionary& rhs)
 	hashIndex.swap (rhs.hashIndex);
 }
 
+// return false if concurrent read accesses
+// would potentially access invalid data.
+
+bool CIndexPairDictionary::CanInsertThreadSafely (index_t count) const
+{
+    return (data.size() + count <= data.capacity())
+        && !hashIndex.may_cause_growth (count);
+}
+
 // stream I/O
 
 IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

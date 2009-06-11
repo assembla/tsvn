@@ -228,6 +228,18 @@ index_t CStringDictionary::AutoInsert (const char* string)
     return result;
 }
 
+// return false if concurrent read accesses
+// would potentially access invalid data.
+
+bool CStringDictionary::CanInsertThreadSafely 
+    ( index_t elements
+    , size_t chars) const
+{
+    return (packedStrings.size() + chars <= packedStrings.capacity())
+        && (offsets.size() + elements <= offsets.capacity())
+        && !hashIndex.may_cause_growth (elements);
+}
+
 // reset content
 
 void CStringDictionary::Clear()

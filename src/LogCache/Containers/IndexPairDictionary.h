@@ -157,6 +157,11 @@ public:
 	void Clear();
 	void Swap (CIndexPairDictionary& rhs);
 
+    // return false if concurrent read accesses
+    // would potentially access invalid data.
+
+    bool CanInsertThreadSafely (index_t count) const;
+
 	/// stream I/O
 	
 	friend IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream

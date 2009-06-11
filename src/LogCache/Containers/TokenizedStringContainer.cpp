@@ -727,9 +727,14 @@ void CTokenizedStringContainer::AutoCompress()
 bool CTokenizedStringContainer::CanInsertThreadSafely 
     (const std::string& s) const
 {
-    // behavior in non-trival cases is too hard to predict
+    // behavior in non-trival cases is too hard to predict.
+    // So, do a gross worst-case overestimation.
 
-    return s.empty() && (offsets.size() < offsets.capacity());
+    size_t length = s.size();
+
+    return (offsets.size() + length + 1 < offsets.capacity())
+        && (stringData.size() + length + 1 < stringData.capacity())
+        && words.CanInsertThreadSafely ((index_t)length, length);
 }
 
 // reset content

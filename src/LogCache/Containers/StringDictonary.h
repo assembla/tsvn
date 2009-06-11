@@ -153,6 +153,11 @@ public:
 	index_t Insert (const char* string);
 	index_t AutoInsert (const char* string);
 
+    /// return false if concurrent read accesses
+    /// would potentially access invalid data.
+
+    bool CanInsertThreadSafely (index_t elements, size_t chars) const;
+
 	/// reset content
 
 	void Clear();
