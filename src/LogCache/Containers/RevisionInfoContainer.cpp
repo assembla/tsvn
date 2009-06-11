@@ -653,10 +653,6 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
     if (changes.size() == NO_INDEX)
         throw CContainerException ("revision container change list overflow");
 
-    // another change
-
-    ++ (*changesOffsets.rbegin());
-
     // add change path index and update the root path
     // of all changes in this revision
 
@@ -692,6 +688,9 @@ void CRevisionInfoContainer::AddChange ( TChangeAction action
         ++ (*copyFromOffsets.rbegin());
     }
 
+    // another change
+
+    ++ (*changesOffsets.rbegin());
 }
 
 void CRevisionInfoContainer::AddMergedRevision ( const std::string& fromPath
@@ -812,7 +811,7 @@ bool CRevisionInfoContainer::CanInsertThreadSafely
 {
     // will any of our containers need to be re-allocated?
 
-    if (   (authorPool.Find (author.c_str()) != NO_INDEX)
+    if (   (authorPool.Find (author.c_str()) == NO_INDEX)
         || !comments.CanInsertThreadSafely (comment)
         || (authors.capacity() == authors.size())
         || (timeStamps.capacity() == timeStamps.size())
