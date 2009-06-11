@@ -462,6 +462,18 @@ public:
 	{
 		return grower.get_statistics();
 	}
+
+    /// test, whether a given numbers of additional entries
+    /// might cause the cache to be resized
+
+    bool may_cause_growth (size_t toAdd) const
+    {
+        size_t maxEffectiveSize 
+            = grower.size() + grower.collisions() + 2 * toAdd;
+
+        return maxEffectiveSize >= grower.capacity();
+    }
+
 };
 
 template<class HF>
