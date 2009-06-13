@@ -38,6 +38,8 @@ private:
 	// the memory mapping
 
 	HANDLE mapping;
+#else
+    int file;
 #endif
 
 	// file content memory address

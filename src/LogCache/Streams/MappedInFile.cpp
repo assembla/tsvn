@@ -70,29 +70,22 @@ void CMappedInFile::MapToMemory (const TFileName& fileName)
 #else
     // open file
 
-    FILE* file = fopen (fileName.c_str(), "rb");
-    if (file == NULL)
+    file = open (fileName.c_str(), O_RDONLY, (mode_t)0600);
+    if (file == -1)
         throw CStreamException ("can't read log cache file");
 
-    // get size & allocate buffer
+    // get size
 
-    fseek (file, 0, SEEK_END);
-    size = ftell (file);
-    buffer = new unsigned char [size];
+    size = lseek (file, 0, SEEK_END);
+
+    // try to map the content into memory
+
+    buffer = (unsigned char*)mmap (NULL, size, PROT_READ, MAP_SHARED, file, 0);
     if (buffer == NULL)
     {
-        fclose (file);
-        throw CStreamException ("can't allocate a memory buffer of sufficient size");
+        close (file);
+        throw CStreamException ("can't map the log cache file into memory");
     }
-
-    // read content
-
-    fseek (file, 0, SEEK_SET);
-    fread (buffer, 1, size, file);
-
-    // done here
-
-    fclose (file);
 #endif
 }
 
@@ -110,21 +103,24 @@ void CMappedInFile::UnMap()
     if (file != INVALID_HANDLE_VALUE)
         CloseHandle (file);
 #else
-    delete buffer;
-    buffer = NULL;
+    if (buffer != NULL)
+        munmap (buffer, size);
+
+    if (file != -1)
+        close (file);
 #endif
 }
 
 // construction / destruction: auto- open/close
 
 CMappedInFile::CMappedInFile (const TFileName& fileName)
-    :
 #ifdef WIN32
-      file (INVALID_HANDLE_VALUE)
+    : file (INVALID_HANDLE_VALUE)
     , mapping (INVALID_HANDLE_VALUE)
-    ,
+#else
+    : file (-1)
 #endif
-      buffer (NULL)
+    , buffer (NULL)
     , size (0)
 {
     MapToMemory (fileName);
