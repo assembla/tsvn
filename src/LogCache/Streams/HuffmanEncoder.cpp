@@ -48,7 +48,7 @@ void CHuffmanEncoder::CountValues ( const unsigned char* source
 		++localCount[2][(block >> 16) & 0xff];
 		++localCount[3][(block >> 24) & 0xff];
 
-#ifdef _WIN64
+#if defined (_WIN64) || (__WORDSIZE == 64)
 
 		++localCount[4][(block >> 32) & 0xff];
 		++localCount[5][(block >> 40) & 0xff];
@@ -235,7 +235,7 @@ void CHuffmanEncoder::WriteHuffmanEncoded ( const BYTE* source
 	key_type cachedCode = 0;
 	BYTE cachedBits = 0;
 
-#ifdef _WIN64
+#if defined (_WIN64) || (__WORDSIZE == 64)
 
 	// main loop (22 1/3 clock ticks per 4 chars on K8) 
 

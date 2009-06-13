@@ -39,7 +39,7 @@ public:
 	// value counting chunk type
 	// plain text data chunk type
 
-#ifdef _WIN64
+#if defined (_WIN64) || (__WORDSIZE == 64)
 	typedef QWORD key_type;
 	typedef QWORD count_block_type;
 	typedef DWORD encode_block_type;
