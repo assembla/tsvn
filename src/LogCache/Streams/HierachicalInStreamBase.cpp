@@ -65,6 +65,9 @@ void CHierachicalInStreamBase::DecodeThisStream()
 {
 	// allocate a sufficiently large buffer to receive the decoded data
 
+    packedLast = last;
+    packedFirst = first;
+
 	DWORD decodedSize = *(reinterpret_cast<const DWORD*>(last)-1);
 	BYTE* target = new BYTE [decodedSize];
 
@@ -84,6 +87,8 @@ void CHierachicalInStreamBase::DecodeThisStream()
 CHierachicalInStreamBase::CHierachicalInStreamBase()
 	: first (NULL)
 	, last (NULL)
+    , packedFirst (NULL)
+    , packedLast (NULL)
 {
 }
 
@@ -91,9 +96,10 @@ CHierachicalInStreamBase::CHierachicalInStreamBase ( CCacheFileInBuffer* buffer
 												   , STREAM_INDEX index)
 	: first (NULL)
 	, last (NULL)
+    , packedFirst (NULL)
+    , packedLast (NULL)
 {
 	ReadSubStreams (buffer, index);
-	DecodeThisStream();
 }
 
 CHierachicalInStreamBase::~CHierachicalInStreamBase()
@@ -104,10 +110,30 @@ CHierachicalInStreamBase::~CHierachicalInStreamBase()
 		; ++iter)
 		delete iter->second;
 
-	delete[] first;
+	AutoClose();
 }
 
 // implement IHierarchicalOutStream
+
+void CHierachicalInStreamBase::AutoOpen()
+{
+    if (packedFirst == NULL)
+        DecodeThisStream();
+}
+
+void CHierachicalInStreamBase::AutoClose()
+{
+    if (packedLast != NULL)
+    {
+        delete[] first;
+
+        first = packedFirst;
+        last = packedLast;
+
+        packedFirst = NULL;
+        packedLast = NULL;
+    }
+}
 
 bool 
 CHierachicalInStreamBase::HasSubStream (SUB_STREAM_ID subStreamID) const
@@ -116,11 +142,15 @@ CHierachicalInStreamBase::HasSubStream (SUB_STREAM_ID subStreamID) const
 }
 
 IHierarchicalInStream* 
-CHierachicalInStreamBase::GetSubStream (SUB_STREAM_ID subStreamID)
+CHierachicalInStreamBase::GetSubStream ( SUB_STREAM_ID subStreamID
+                                       , bool autoOpen)
 {
 	TSubStreams::const_iterator iter = subStreams.find (subStreamID);
 	if (iter == subStreams.end())
 		throw CStreamException ("no such sub-stream");
+
+    if (autoOpen)
+        iter->second->AutoOpen();
 
 	return iter->second;
 }

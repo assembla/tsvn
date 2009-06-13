@@ -39,10 +39,16 @@ class IHierarchicalInStream
 {
 public:
 
+    // prepare / finish data access
+
+    virtual void AutoOpen() = 0;
+    virtual void AutoClose() = 0;
+
 	// access a sub-stream
 
 	virtual bool HasSubStream (SUB_STREAM_ID subStreamID) const = 0;
-	virtual IHierarchicalInStream* GetSubStream (SUB_STREAM_ID subStreamID) = 0;
+	virtual IHierarchicalInStream* GetSubStream ( SUB_STREAM_ID subStreamID
+                                                , bool autoOpen = true) = 0;
 
 	// required for proper destruction of sub-class instances
 
@@ -78,6 +84,11 @@ protected:
 	const BYTE* first;
 	const BYTE* last;
 
+    // original stream data. NULL while not open
+
+    const BYTE* packedLast;
+    const BYTE* packedFirst;
+
 	// for usage with CRootInStream
 
 	CHierachicalInStreamBase();
@@ -98,8 +109,12 @@ public:
 
 	// implement IHierarchicalOutStream
 
+    virtual void AutoOpen();
+    virtual void AutoClose();
+
 	virtual bool HasSubStream (SUB_STREAM_ID subStreamID) const;
-	virtual IHierarchicalInStream* GetSubStream (SUB_STREAM_ID subStreamID);
+	virtual IHierarchicalInStream* GetSubStream ( SUB_STREAM_ID subStreamID
+                                                , bool autoOpen = true);
 };
 
 ///////////////////////////////////////////////////////////////
