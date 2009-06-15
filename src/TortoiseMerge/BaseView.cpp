@@ -2732,6 +2732,8 @@ void CBaseView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		sLine.Insert(m_ptCaretPos.x, (wchar_t)nChar);
 		m_pViewData->SetLine(m_ptCaretPos.y, sLine);
 		m_pViewData->SetState(m_ptCaretPos.y, DIFFSTATE_EDITED);
+		if (m_pViewData->GetLineEnding(m_ptCaretPos.y) == EOL_NOENDING)
+			m_pViewData->SetLineEnding(m_ptCaretPos.y, EOL_AUTOLINE);
 		m_ptCaretPos.x++;
 		UpdateGoalPos();
 	}
@@ -2774,10 +2776,10 @@ void CBaseView::AddEmptyLine(int nLineIndex)
 		CString sPartLine = GetLineChars(nLineIndex);
 		m_pViewData->SetLine(nLineIndex, sPartLine.Left(m_ptCaretPos.x));
 		sPartLine = sPartLine.Mid(m_ptCaretPos.x);
-		m_pViewData->InsertData(nLineIndex+1, sPartLine, DIFFSTATE_EDITED, -1, m_pViewData->GetLineEnding(nLineIndex));
+		m_pViewData->InsertData(nLineIndex+1, sPartLine, DIFFSTATE_EDITED, -1, m_pViewData->GetLineEnding(nLineIndex) == EOL_NOENDING ? EOL_AUTOLINE : m_pViewData->GetLineEnding(nLineIndex));
 	}
 	else
-		m_pViewData->InsertData(nLineIndex+1, _T(""), DIFFSTATE_EDITED, -1, m_pViewData->GetLineEnding(nLineIndex));
+		m_pViewData->InsertData(nLineIndex+1, _T(""), DIFFSTATE_EDITED, -1, m_pViewData->GetLineEnding(nLineIndex) == EOL_NOENDING ? EOL_AUTOLINE : m_pViewData->GetLineEnding(nLineIndex));
 	Invalidate(FALSE);
 }
 
@@ -2831,6 +2833,8 @@ void CBaseView::RemoveSelectedText()
 			}
 			m_pViewData->SetLine(i, newLine);
 			m_pViewData->SetState(i, DIFFSTATE_EDITED);
+			if (m_pViewData->GetLineEnding(i) == EOL_NOENDING)
+				m_pViewData->SetLineEnding(i, EOL_AUTOLINE);
 			SetModified();
 		}
 		else
