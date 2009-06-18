@@ -22,7 +22,7 @@
 #    msgfmt --statistics -c --check-accelerators Tortoise_zh_CN.po
 #
 # Please format your translation before commit:
-#    msgmerge --width=80 -o Tortoise_zh_CN_new.po Tortoise_zh_CN.po Tortoise.pot
+#    msgmerge --no-wrap -o Tortoise_zh_CN_new.po Tortoise_zh_CN.po Tortoise.pot
 #    mv -f Tortoise_zh_CN_new.po Tortoise_zh_CN.po
 #
 # Dictionary:
@@ -55,7 +55,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN zh_CN\n"
-"Report-Msgid-Bugs-To: TortoiseSVN translation team <translators@tortoisesvn.tigris.org>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
 "PO-Revision-Date: 2009-04-14 10:39+0800\n"
 "Last-Translator: Dongsheng Song <dongsheng.song@gmail.com>\n"
@@ -1181,8 +1181,7 @@ msgid "&Working copy"
 msgstr "工作副本(&W)"
 
 #. Resource IDs: (338)
-msgid ""
-"'skip ranges' are used to mark revision ranges that have not been cached yet"
+msgid "'skip ranges' are used to mark revision ranges that have not been cached yet"
 msgstr "使用“忽略范围”标记尚未缓存的版本范围"
 
 #. Resource IDs: (272)
@@ -1321,10 +1320,8 @@ msgstr "<未命名>"
 msgid ""
 "<b>TortoiseSVN</b> is a shell extension.\n"
 "That means it is integrated into the Windows explorer.\n"
-"To use <b>TortoiseSVN</b> please open the explorer and right-click on any "
-"folder you like\n"
-"to bring up the context menu where you will find all <b>TortoiseSVN</b> "
-"commands.\n"
+"To use <b>TortoiseSVN</b> please open the explorer and right-click on any folder you like\n"
+"to bring up the context menu where you will find all <b>TortoiseSVN</b> commands.\n"
 "And <u>read the manual!</u>"
 msgstr ""
 "<b>TortoiseSVN</b> 是一个 Windows 外壳扩展，\n"
@@ -1354,18 +1351,13 @@ msgid "A list of user defined properties for folders to show in the combo box"
 msgstr "在组合框中显示的用户定义的目录属性列表"
 
 #. Resource IDs: (201)
-msgid ""
-"A newer version is available. Please go to http://tortoisesvn.tigris.org and "
-"download the current version! Click _here_ to go directly to our website."
-msgstr ""
-"有更新的版本。请到 http://tortoisesvn.tigris.org 下载！点击这里直接进入我们的"
-"站点。"
+msgid "A newer version is available. Please go to http://tortoisesvn.tigris.org and download the current version! Click _here_ to go directly to our website."
+msgstr "有更新的版本。请到 http://tortoisesvn.tigris.org 下载！点击这里直接进入我们的站点。"
 
 #. Resource IDs: (195)
 msgid ""
 "A newline separated list of paths for which icon overlays are shown.\r\n"
-"If you add an '*' char at the end of a path, then all files and subdirs "
-"inside that path are included too."
+"If you add an '*' char at the end of a path, then all files and subdirs inside that path are included too."
 msgstr ""
 "以换行分隔的列表，包含要显示图标覆盖的目录。\r\n"
 "如果你在路径后面加上字符“*”，那么此路径下的所有文件及子目录也都会显示。"
@@ -1373,8 +1365,7 @@ msgstr ""
 #. Resource IDs: (197)
 msgid ""
 "A newline separated list of paths for which no context menu is shown.\r\n"
-"If you add an '*' char at the end of a path, then all files and subdirs "
-"inside that path are excluded too.\r\n"
+"If you add an '*' char at the end of a path, then all files and subdirs inside that path are excluded too.\r\n"
 "An empty list will allow the context menu on all paths."
 msgstr ""
 "以换行分隔的列表，列出的目录不显示上下文菜单。\r\n"
@@ -1384,8 +1375,7 @@ msgstr ""
 #. Resource IDs: (194)
 msgid ""
 "A newline separated list of paths for which no icon overlays are shown.\r\n"
-"If you add an '*' char at the end of a path, then all files and subdirs "
-"inside that path are excluded too.\r\n"
+"If you add an '*' char at the end of a path, then all files and subdirs inside that path are excluded too.\r\n"
 "An empty list will allow overlays on all paths."
 msgstr ""
 "以换行分隔的列表，列出的目录不显示图标覆盖。\r\n"
@@ -1616,27 +1606,21 @@ msgid "All Files (*.*)|*.*||"
 msgstr "所有文件 (*.*)|*.*||"
 
 #. Resource IDs: (1008)
-msgid ""
-"All your changes will be lost! Do you really want to reset all toolbars and "
-"menus?"
+msgid "All your changes will be lost! Do you really want to reset all toolbars and menus?"
 msgstr "将要丢弃你的全部修改! 你真的要重置全部工具栏和菜单吗?"
 
 #. Resource IDs: (1008)
-msgid ""
-"All your changes will be lost! Do you really want to reset the keyboard "
-"assignments?"
+msgid "All your changes will be lost! Do you really want to reset the keyboard assignments?"
 msgstr "将要丢弃你的全部修改! 你真的要重置全部键盘分配吗?"
 
 #. Resource IDs: (1008)
 #, c-format
-msgid ""
-"All your changes will be lost! Do you really want to reset the menu '%s'?"
+msgid "All your changes will be lost! Do you really want to reset the menu '%s'?"
 msgstr "将要丢弃你的全部修改! 你真的要重置菜单“%s”吗?"
 
 #. Resource IDs: (1007)
 #, c-format
-msgid ""
-"All your changes will be lost! Do you really want to reset the toolbar '%s'?"
+msgid "All your changes will be lost! Do you really want to reset the toolbar '%s'?"
 msgstr "将要丢弃你的全部修改! 你真的要重置工具栏“%s”吗?"
 
 #. Resource IDs: (1484)
@@ -1644,14 +1628,11 @@ msgid "Allow ambiguous &UUIDs"
 msgstr "允许不明确的 UUID(&U)"
 
 #. Resource IDs: (345)
-msgid ""
-"Allow different repositories to use the same URL, e.g. http://localhost/"
-"myrepos/"
+msgid "Allow different repositories to use the same URL, e.g. http://localhost/myrepos/"
 msgstr "允许不同的版本库使用同一 URL, 例如: http://localhost/myrepos/ 。"
 
 #. Resource IDs: (345)
-msgid ""
-"Allow different repositories to use the same UUID, e.g. copied repositories"
+msgid "Allow different repositories to use the same UUID, e.g. copied repositories"
 msgstr "允许不同的版本库使用同一 UUID, 例如复制的版本库。"
 
 #. Resource IDs: (197)
@@ -1764,9 +1745,7 @@ msgstr "确定要将选中 %d 项的缓存删除？"
 
 #. Resource IDs: (79)
 #, c-format
-msgid ""
-"Are you sure you want to revert %d item(s)? You will lose <b>all</b> changes "
-"since the last update!"
+msgid "Are you sure you want to revert %d item(s)? You will lose <b>all</b> changes since the last update!"
 msgstr "是否确定要复原 %d 个项目? 从上次更新之后的<b>所有</b>变更都会消失！"
 
 #. Resource IDs: (32793)
@@ -2197,31 +2176,19 @@ msgstr ""
 "的文件。"
 
 #. Resource IDs: (612)
-msgid ""
-"Check the log to find out how the file/folder got renamed/moved and decide "
-"whether you want to keep your rename/move or the one from the repository. "
-"Then mark the conflict as resolved."
-msgstr ""
-"检查文件/目录是如何改名/移动的，决定是否在版本库中保持这些改名/移动。然后标记"
-"冲突已经解决。"
+msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to keep your rename/move or the one from the repository. Then mark the conflict as resolved."
+msgstr "检查文件/目录是如何改名/移动的，决定是否在版本库中保持这些改名/移动。然后标记冲突已经解决。"
 
 #. Resource IDs: (612)
-msgid ""
-"Check the log to find out how the file/folder got renamed/moved and decide "
-"whether you want to merge the change into your renamed file, or restore the "
-"original file."
-msgstr ""
-"检查日志，查找文件/目录是如何改名/移动的，决定是否合并修改到已改名的文件中，或"
-"者使用原始文件。"
+msgid "Check the log to find out how the file/folder got renamed/moved and decide whether you want to merge the change into your renamed file, or restore the original file."
+msgstr "检查日志，查找文件/目录是如何改名/移动的，决定是否合并修改到已改名的文件中，或者使用原始文件。"
 
 #. Resource IDs: (251)
 msgid "Check the path and/or URL you've entered."
 msgstr "请检查你输入的路径或 URL。"
 
 #. Resource IDs: (194)
-msgid ""
-"Check those menu entries you want to appear in the top context menu instead "
-"of the TortoiseSVN submenu"
+msgid "Check those menu entries you want to appear in the top context menu instead of the TortoiseSVN submenu"
 msgstr "选中你希望出现在右键菜单，二不是 TortoiseSVN 子菜单中的菜单项"
 
 #. Resource IDs: (80)
@@ -2323,8 +2290,7 @@ msgstr "清除%ld条日志，它们存储在%ld个工作副本中"
 
 #. Resource IDs: (196)
 #, c-format
-msgid ""
-"Clears %ld username/password pairs, %ld ssl certificates and %ld usernames"
+msgid "Clears %ld username/password pairs, %ld ssl certificates and %ld usernames"
 msgstr "清除%ld个用户名/密码、%ld个SSL认证数据及%ld个用户名"
 
 #. Resource IDs: (197)
@@ -2354,15 +2320,11 @@ msgid "Click here to select a recently typed message"
 msgstr "点击这里选择一条最近输入过的信息"
 
 #. Resource IDs: (65535)
-msgid ""
-"Click on \"Advanced\" to specify alternate diff programs based on file "
-"extension"
+msgid "Click on \"Advanced\" to specify alternate diff programs based on file extension"
 msgstr "点击“高级设置”可根据不同扩展名指定不同的差异比较程序"
 
 #. Resource IDs: (65535)
-msgid ""
-"Click on \"Advanced\" to specify alternate merge programs based on file "
-"extension"
+msgid "Click on \"Advanced\" to specify alternate merge programs based on file extension"
 msgstr "点击“高级设置”可根据不同扩展名指定不同合并程序"
 
 #. Resource IDs: (257)
@@ -2484,8 +2446,7 @@ msgstr "将你所做的修改提交至版本库"
 #. Resource IDs: (170)
 msgid ""
 "Committing an unversioned folder will not recursively add its child items!\n"
-"You might want to add these folders recursively by using the 'Add...' context "
-"menu item.\n"
+"You might want to add these folders recursively by using the 'Add...' context menu item.\n"
 "\n"
 "Are you sure that you want to continue the commit?"
 msgstr ""
@@ -2523,9 +2484,7 @@ msgid "Compare with previous revision"
 msgstr "与前一版本比较差异"
 
 #. Resource IDs: (12)
-msgid ""
-"Compares the file with the last committed revision to show you the changes "
-"you made"
+msgid "Compares the file with the last committed revision to show you the changes you made"
 msgstr "比较此文件与上次提交的版本并列出你所做的修改"
 
 #. Resource IDs: (17)
@@ -2554,8 +2513,7 @@ msgid "Configure the program used for comparing different revisions of files"
 msgstr "设置用来比较不同版本文件的程序。"
 
 #. Resource IDs: (65535)
-msgid ""
-"Configure the program used for comparing different revisions of properties"
+msgid "Configure the program used for comparing different revisions of properties"
 msgstr "设置用来比较不同版本属性的程序。"
 
 #. Resource IDs: (65535)
@@ -2951,8 +2909,7 @@ msgid "Created folder remotely"
 msgstr "远程创建文件夹完成"
 
 #. Resource IDs: (10)
-msgid ""
-"Creates a 'cheap' copy inside the repository used for branches or tagging"
+msgid "Creates a 'cheap' copy inside the repository used for branches or tagging"
 msgstr "在版本库中快速创建副本用作分支或标记"
 
 #. Resource IDs: (2052)
@@ -3095,8 +3052,7 @@ msgid "Deleted node"
 msgstr "删除的节点"
 
 #. Resource IDs: (15)
-msgid ""
-"Deletes and adds the selected file(s) or the filemask to the 'ignore' list"
+msgid "Deletes and adds the selected file(s) or the filemask to the 'ignore' list"
 msgstr "将选定的文件或文件匹配列表删除，并且加入忽略列表"
 
 #. Resource IDs: (11)
@@ -3255,8 +3211,7 @@ msgstr "你确认要移动这个文件或目录吗？"
 msgid ""
 "Do you really want to revert all changes in\n"
 "%s\n"
-"and go back to this revision? These changes will be reverted by reverse-"
-"merging the revisions into your working copy."
+"and go back to this revision? These changes will be reverted by reverse-merging the revisions into your working copy."
 msgstr ""
 "你确定要恢复\n"
 "%s\n"
@@ -3267,8 +3222,7 @@ msgstr ""
 msgid ""
 "Do you really want to revert all changes in\n"
 "%s\n"
-"which were made in this revision? These changes will be reverted by reverse-"
-"merging the revision into your working copy."
+"which were made in this revision? These changes will be reverted by reverse-merging the revision into your working copy."
 msgstr ""
 "你确定要恢复此版本对\n"
 "%s\n"
@@ -3630,12 +3584,8 @@ msgid "Exclude"
 msgstr "排除"
 
 #. Resource IDs: (1002)
-msgid ""
-"Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|"
-"Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
-msgstr ""
-"可执行 (*.exe)|*.exe|命令 (*.com)|*.com|信息 (*.pdf)|*.pdf|批处理 (*.bat)|*."
-"bat|全部文件 (*.*)|*.*||"
+msgid "Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
+msgstr "可执行 (*.exe)|*.exe|命令 (*.com)|*.com|信息 (*.pdf)|*.pdf|批处理 (*.bat)|*.bat|全部文件 (*.*)|*.*||"
 
 #. Resource IDs: (1002)
 msgid "Existing"
@@ -3700,9 +3650,7 @@ msgid "Exporting..."
 msgstr "正在导出..."
 
 #. Resource IDs: (10)
-msgid ""
-"Exports a repository to a clean working copy without the svn administrative "
-"folders"
+msgid "Exports a repository to a clean working copy without the svn administrative folders"
 msgstr "从版本库中导出干净的工作副本, 不生成 svn 的管理文件夹"
 
 #. Resource IDs: (581)
@@ -3774,9 +3722,7 @@ msgid "Failed to create empty document."
 msgstr "无法创建空文件。"
 
 #. Resource IDs: (3865)
-msgid ""
-"Failed to create object.  Make sure the application is entered in the system "
-"registry."
+msgid "Failed to create object.  Make sure the application is entered in the system registry."
 msgstr "创建对象失败。请确认此应用在系统注册表中。"
 
 #. Resource IDs: (3857)
@@ -4038,7 +3984,7 @@ msgstr "取消选择“复制/改名时停止”，以查看完整的历史列�
 
 #. Resource IDs: (1064)
 msgid "Forward"
-msgstr "转发"
+msgstr "前进"
 
 #. Resource IDs: (65535)
 msgid "From URL:"
@@ -4065,8 +4011,7 @@ msgid "GDI+ couldn't be initialized!"
 msgstr "无法初始化 GDI+"
 
 #. Resource IDs: (273)
-msgid ""
-"GDI+ couldn't create a bitmap object. You probably don't have enough memory."
+msgid "GDI+ couldn't create a bitmap object. You probably don't have enough memory."
 msgstr "GDI+ 无法创建位图对象，有可能是由于系统内存不足造成的。"
 
 #. Resource IDs: (284)
@@ -4107,19 +4052,13 @@ msgstr "取得合并日志"
 
 #. Resource IDs: (89)
 msgid ""
-"Getting a lock for files without the 'svn:needs-lock' property will <b>not</"
-"b> prevent others from editing them in their working copies.\n"
-"To enable strict locking please add the 'svn:needs-lock' property to all "
-"files that need locking, and commit those files.\n"
-"Each file will have the file-system read-only flag set, and getting a lock "
-"will make the file writable.\n"
-"Note that other users will need to update their working copies before they "
-"see the files as read-only."
+"Getting a lock for files without the 'svn:needs-lock' property will <b>not</b> prevent others from editing them in their working copies.\n"
+"To enable strict locking please add the 'svn:needs-lock' property to all files that need locking, and commit those files.\n"
+"Each file will have the file-system read-only flag set, and getting a lock will make the file writable.\n"
+"Note that other users will need to update their working copies before they see the files as read-only."
 msgstr ""
-"在没有设置 'svn:needs-lock' 属性的情况下给一个文件设置锁定将<b>不能</b>防止其"
-"他人修改其工作副本。\n"
-"如要确保锁定，请给所有需要锁定的文件增加 'svn:needs-lock' 属性，并提交这些文"
-"件。\n"
+"在没有设置 'svn:needs-lock' 属性的情况下给一个文件设置锁定将<b>不能</b>防止其他人修改其工作副本。\n"
+"如要确保锁定，请给所有需要锁定的文件增加 'svn:needs-lock' 属性，并提交这些文件。\n"
 "在文件系统中，这些文件将被设置为只读权限，只有当文件获得锁定后会才变成可写。\n"
 "注意，其他人需要更新其工作副本才能使其变为只读。"
 
@@ -4287,15 +4226,11 @@ msgid "Highest revision number in the cache"
 msgstr "最高版本号在缓存中"
 
 #. Resource IDs: (1127)
-msgid ""
-"Hint: Press F5 to refresh the selected subtree and Ctrl-F5 to load all "
-"children too"
+msgid "Hint: Press F5 to refresh the selected subtree and Ctrl-F5 to load all children too"
 msgstr "提示: 按下 F5 可以重新整理选择的子树，而 Ctrl-F5 可以重新加载全部子树"
 
 #. Resource IDs: (16519)
-msgid ""
-"Hint: select the context menu, change the page to 'Commands' and drag the "
-"toolbar buttons into the menu window."
+msgid "Hint: select the context menu, change the page to 'Commands' and drag the toolbar buttons into the menu window."
 msgstr "提示: 在上下文菜单中，进入“命令”页，将工具栏按钮拖到菜单窗口中。"
 
 #. Resource IDs: (1064)
@@ -4498,15 +4433,12 @@ msgstr ""
 "被认为是“主干”。"
 
 #. Resource IDs: (194)
-msgid ""
-"If activated, prevents the overlays and the context menu from showing in "
-"'save as...' or 'open' dialogs"
+msgid "If activated, prevents the overlays and the context menu from showing in 'save as...' or 'open' dialogs"
 msgstr "如果选中该项，在“另存为...”或“打开”对话框中不显示覆盖图标和上下文菜单。"
 
 #. Resource IDs: (198)
 msgid ""
-"If activated, the menu entry 'Get Lock' is always shown in the top level "
-"menu\n"
+"If activated, the menu entry 'Get Lock' is always shown in the top level menu\n"
 "if the selected file has the svn:needs-lock property set"
 msgstr ""
 "如果选中该项，而且选中的文件设置了“svn:needs-lock”属性，\n"
@@ -4524,34 +4456,27 @@ msgstr ""
 msgid ""
 "If checked, TortoiseSVN creates a temporary file of the BASE to do the diff\n"
 "with the keywords expanded and the line endings adjusted."
-msgstr ""
-"如果选中该项，TortoiseSVN 创建用于比较差异的基础版本的临时文件，该临时文件将展"
-"开关键词以及调整行结束符。"
+msgstr "如果选中该项，TortoiseSVN 创建用于比较差异的基础版本的临时文件，该临时文件将展开关键词以及调整行结束符。"
 
 #. Resource IDs: (197)
-msgid ""
-"If checked, double-clicking on a revision in the log list compares it with "
-"the previous revision"
+msgid "If checked, double-clicking on a revision in the log list compares it with the previous revision"
 msgstr "如果选中该项，可以在日志列表中的一个版本上双击，与其比较"
 
 #. Resource IDs: (196)
 msgid ""
-"If checked, the commit dialog will be started again automatically after an "
-"error,\r\n"
+"If checked, the commit dialog will be started again automatically after an error,\r\n"
 "while preserving your last selection and log message."
 msgstr ""
 "如果选中该项，则如果在提交过程中发生错误，提交对话框将自动重新\r\n"
 "打开，并保留原有的选择内容和记录日志信息。"
 
 #. Resource IDs: (194)
-msgid ""
-"If enabled, TortoiseSVN checks once a week if a newer version is available"
+msgid "If enabled, TortoiseSVN checks once a week if a newer version is available"
 msgstr "如果启用，TortoiseSVN 每周会检查一次最新版本"
 
 #. Resource IDs: (195)
 msgid ""
-"If enabled, the Merge dialog initializes the 'From:' URL with the URL of the "
-"selected working copy\r\n"
+"If enabled, the Merge dialog initializes the 'From:' URL with the URL of the selected working copy\r\n"
 "instead of the last used URL."
 msgstr ""
 "如果选中该项，合并对话框在初始化“From:”地址时将使用选中的\r\n"
@@ -4569,8 +4494,7 @@ msgstr ""
 msgid ""
 "If enabled, working copy folders which are excluded from\n"
 "showing overlays still show the overlay for status 'normal'"
-msgstr ""
-"如果选中该项，已从覆盖显示排除的工作副本目录仍旧会按照“正常”情况覆盖显示"
+msgstr "如果选中该项，已从覆盖显示排除的工作副本目录仍旧会按照“正常”情况覆盖显示"
 
 #. Resource IDs: (195)
 msgid ""
@@ -4582,8 +4506,7 @@ msgstr ""
 
 #. Resource IDs: (196)
 msgid ""
-"If set, files inside unversioned folders can be shown in the status control."
-"\r\n"
+"If set, files inside unversioned folders can be shown in the status control.\r\n"
 "The status control is used for example in the commit dialog."
 msgstr ""
 "如果选中该项，无版本控制的文件夹中的文件将出现在“状态控制”中。\r\n"
@@ -4591,17 +4514,14 @@ msgstr ""
 
 #. Resource IDs: (196)
 msgid ""
-"If set, then unversioned files will mark the status of the parent directory "
-"as modified\r\n"
+"If set, then unversioned files will mark the status of the parent directory as modified\r\n"
 "i.e. they get the modified overlay icon."
 msgstr ""
 "如果选中该项，包含无版本控制的文件的文件夹将标志为已修改。\r\n"
 "例如，图标显示为修改状态。"
 
 #. Resource IDs: (2052)
-msgid ""
-"If the graph contains multiple trees, separate them by slight variations in "
-"background color."
+msgid "If the graph contains multiple trees, separate them by slight variations in background color."
 msgstr "如果图形包含多个树，就用背景色的轻微变化来区分它们。"
 
 #. Resource IDs: (1439)
@@ -4610,8 +4530,7 @@ msgstr "如果不能连接到版本库"
 
 #. Resource IDs: (196)
 msgid ""
-"If you change this value, your existing working copies won't be recognized "
-"anymore!\n"
+"If you change this value, your existing working copies won't be recognized anymore!\n"
 "You must check out your working copies again.\n"
 "If you're not sure about this, then please read the docs.\n"
 "Are you absolutely sure you want to do this?"
@@ -4906,15 +4825,13 @@ msgstr ""
 #. Resource IDs: (88)
 #, c-format
 msgid ""
-"It seems you are trying to <b>relocate</b> your working copy to a different "
-"path inside the same repository.\n"
+"It seems you are trying to <b>relocate</b> your working copy to a different path inside the same repository.\n"
 "\n"
 "From:\t%s\n"
 "To:\t\t%s\n"
 "\n"
 "A relocate is only needed if the path <b>to</b> a repository has changed.\n"
-"Changing to a different path <b>inside</b> a repository is done by a switch "
-"operation.\n"
+"Changing to a different path <b>inside</b> a repository is done by a switch operation.\n"
 "\n"
 "Improper use of relocate <b>will corrupt your working copy!</b>\n"
 "If you are not sure what to do, please refer to our docs on <i>relocate</i>.\n"
@@ -5184,8 +5101,7 @@ msgstr "最低显示版本: %ld - 最高显示版本: %ld"
 
 #. Resource IDs: (238)
 #, c-format
-msgid ""
-"Lowest shown revision: %ld - Highest shown revision: %ld - HEAD revision: %ld"
+msgid "Lowest shown revision: %ld - Highest shown revision: %ld - HEAD revision: %ld"
 msgstr "最低显示版本 %ld - 最高显示版本: %ld - 最新版本: %ld"
 
 #. Resource IDs: (16973)
@@ -5355,9 +5271,7 @@ msgid "Merges a branch into the main trunk"
 msgstr "将分支合并回主干"
 
 #. Resource IDs: (14)
-msgid ""
-"Merges all missing revisions back into the working copy using merge-tracking "
-"information"
+msgid "Merges all missing revisions back into the working copy using merge-tracking information"
 msgstr "使用合并跟踪信息将所有丢失的版本合并到工作副本"
 
 #. Resource IDs: (65535)
@@ -5389,8 +5303,7 @@ msgid "Merging r%ld through r%ld"
 msgstr "正在合并 r%ld，经由 r%ld"
 
 #. Resource IDs: (83)
-msgid ""
-"Merging requires different revisions or different URLs in 'From:' and 'To:'"
+msgid "Merging requires different revisions or different URLs in 'From:' and 'To:'"
 msgstr "合并指定的不同版本差异或从“起始: ” URL 到“结束: ” URL 之间的差异"
 
 #. Resource IDs: (229)
@@ -5633,8 +5546,7 @@ msgstr "否"
 msgid ""
 "No command specified!\n"
 "<hr=100%>\n"
-"TortoiseProc.exe is used by the Shell extension and should not be called "
-"directly!"
+"TortoiseProc.exe is used by the Shell extension and should not be called directly!"
 msgstr ""
 "未指定命令！\n"
 "<hr=100%>\n"
@@ -5657,15 +5569,13 @@ msgid "No error occurred."
 msgstr "没有发生错误。"
 
 #. Resource IDs: (82)
-msgid ""
-"No files or folders were modified. There is nothing for TortoiseSVN to revert!"
+msgid "No files or folders were modified. There is nothing for TortoiseSVN to revert!"
 msgstr "从上次提交以来没有任何文件修改或加入。TortoiseSVN 不需要进行复原！"
 
 #. Resource IDs: (239)
 msgid ""
 "No files to show with the current setting.\n"
-"Check one or more settings below to see unversioned, ignored and/or "
-"unmodified files.\n"
+"Check one or more settings below to see unversioned, ignored and/or unmodified files.\n"
 "To see remote changes, click on 'Check Repository'"
 msgstr ""
 "根据当前配置，没有文件显示。\n"
@@ -5706,9 +5616,7 @@ msgid "No spell corrections"
 msgstr "没有要修正的拼写"
 
 #. Resource IDs: (196)
-msgid ""
-"No status cache. Only versioned folders get an overlay, files don't get an "
-"overlay"
+msgid "No status cache. Only versioned folders get an overlay, files don't get an overlay"
 msgstr "无状态缓存。仅影响版本控制的文件夹，不影响文件"
 
 #. Resource IDs: (188)
@@ -5789,13 +5697,11 @@ msgid "Number of cached revisions whose change list is not cached yet"
 msgstr "有尚未缓存的修改列表的缓存的版本数量"
 
 #. Resource IDs: (339)
-msgid ""
-"Number of cached revisions whose user revision properties are not cached yet"
+msgid "Number of cached revisions whose user revision properties are not cached yet"
 msgstr "有尚未缓存的用户版本属性的缓存的版本数量"
 
 #. Resource IDs: (338)
-msgid ""
-"Number of different paths shown in the log dialog, including parent paths"
+msgid "Number of different paths shown in the log dialog, including parent paths"
 msgstr "在日志对话框中显示的不同路径(包含父路径)数量"
 
 #. Resource IDs: (338)
@@ -5807,9 +5713,7 @@ msgid "Number of merged revisions that are not cached yet"
 msgstr "尚未缓存的已经合并版本的数量"
 
 #. Resource IDs: (338)
-msgid ""
-"Number of path elements. A path element is a folder or file name like 'foo."
-"txt' or 'mybranch'."
+msgid "Number of path elements. A path element is a folder or file name like 'foo.txt' or 'mybranch'."
 msgstr "路径元素数量: 路径元素是目录或文件名称，例如“foo.txt”或“mybranch”。"
 
 #. Resource IDs: (345)
@@ -6044,9 +5948,7 @@ msgid "Paste filename list"
 msgstr "粘贴文件名列表"
 
 #. Resource IDs: (15)
-msgid ""
-"Pastes the svn path from the clipboard, resulting in a move (cut) or copy "
-"operation"
+msgid "Pastes the svn path from the clipboard, resulting in a move (cut) or copy operation"
 msgstr "从剪贴板粘帖 svn 路径，它是移动(剪切)或复制操作的结果"
 
 #. Resource IDs: (376)
@@ -6094,12 +5996,8 @@ msgid "Picture:"
 msgstr "图画:"
 
 #. Resource IDs: (157)
-msgid ""
-"Pictures (*.wmf, *.jpg, *.png, *.bmp, *.gif)|*.wmf;*.jpg;*.jpeg;*.png;*.bmp;*."
-"gif|All (*.*)|*.*||"
-msgstr ""
-"图像文件 (*.jpg, *.png, *.bmp, *.gif)|*.jpg;*.jpeg;*.png;*.bmp;*.gif|所有文件"
-"(*.*)|*.*||"
+msgid "Pictures (*.wmf, *.jpg, *.png, *.bmp, *.gif)|*.wmf;*.jpg;*.jpeg;*.png;*.bmp;*.gif|All (*.*)|*.*||"
+msgstr "图像文件 (*.jpg, *.png, *.bmp, *.gif)|*.jpg;*.jpeg;*.png;*.bmp;*.gif|所有文件(*.*)|*.*||"
 
 #. Resource IDs: (246)
 msgid "Pie Graph"
@@ -6120,8 +6018,7 @@ msgstr "请执行“清理”命令。"
 #. Resource IDs: (78)
 msgid ""
 "Please note:\n"
-"Your working copy remains on the previous path. If you want your next "
-"changes\n"
+"Your working copy remains on the previous path. If you want your next changes\n"
 "to be committed to the copy or branch you have just created,\n"
 "then you need to switch your working copy over to the new URL.\n"
 "Use the Switch command to do that."
@@ -7382,8 +7279,7 @@ msgid "Shell Icon Cache was rebuilt!"
 msgstr "图标缓存重建完成！"
 
 #. Resource IDs: (2052)
-msgid ""
-"Shift trees to the top of the window. Alignment to other trees will be lost."
+msgid "Shift trees to the top of the window. Alignment to other trees will be lost."
 msgstr "移动树到窗口顶部。现存的树对齐状态将会丢失。"
 
 #. Resource IDs: (101)
@@ -7555,9 +7451,7 @@ msgid "Show oldest node at top"
 msgstr "在顶部显示最老的节点"
 
 #. Resource IDs: (2052)
-msgid ""
-"Show only the changed parts of the path name. Replace unchanged elements with "
-"dots."
+msgid "Show only the changed parts of the path name. Replace unchanged elements with dots."
 msgstr "只显示路径名称中修改的部分。将没有改变的元素用点来代替。"
 
 #. Resource IDs: (2054)
@@ -7643,11 +7537,8 @@ msgstr "显示 %ld 个节点"
 
 #. Resource IDs: (115)
 #, c-format
-msgid ""
-"Showing %ld revision(s), from revision %ld to revision %ld - %ld revision(s) "
-"selected."
-msgstr ""
-"正在显示 %ld 个版本（介于版本 %ld 到版本 %ld 之间）， 选中了 %ld 个版本。"
+msgid "Showing %ld revision(s), from revision %ld to revision %ld - %ld revision(s) selected."
+msgstr "正在显示 %ld 个版本（介于版本 %ld 到版本 %ld 之间）， 选中了 %ld 个版本。"
 
 #. Resource IDs: (272)
 #, c-format
@@ -7659,9 +7550,7 @@ msgid "Shows a graphical representation of copies/tags/branches"
 msgstr "以图形方式显示版本和标签的分支图"
 
 #. Resource IDs: (13)
-msgid ""
-"Shows all files which were changed since the last update, locally and in the "
-"repository"
+msgid "Shows all files which were changed since the last update, locally and in the repository"
 msgstr "不论在版本库中或在本地端都显示从上次更新以后有改动的文件"
 
 #. Resource IDs: (2050)
@@ -7733,9 +7622,7 @@ msgid "Source Right:"
 msgstr "源右:"
 
 #. Resource IDs: (196)
-msgid ""
-"Specifies how many items you want to keep in the most recent log messages "
-"dialog."
+msgid "Specifies how many items you want to keep in the most recent log messages dialog."
 msgstr "设定在最新的日志对话框中显示的条目数量。"
 
 #. Resource IDs: (79)
@@ -7824,8 +7711,7 @@ msgid "Status cache"
 msgstr "状态缓存"
 
 #. Resource IDs: (196)
-msgid ""
-"Status cache kept in an external process, can show the overlay recursively"
+msgid "Status cache kept in an external process, can show the overlay recursively"
 msgstr "在外部进程中保存状态缓存信息，能够递归的显示"
 
 #. Resource IDs: (196)
@@ -7994,9 +7880,7 @@ msgid "System &sounds"
 msgstr "系统声音(&S)"
 
 #. Resource IDs: (3857)
-msgid ""
-"System registry entries have been removed and the INI file (if any) was "
-"deleted."
+msgid "System registry entries have been removed and the INI file (if any) was deleted."
 msgstr "系统注册表及 INI 文件(如果有) 删除完成。"
 
 #. Resource IDs: (7)
@@ -8050,15 +7934,11 @@ msgid "The chunk start '@@' was expected in line %d !"
 msgstr "区块起始标记“@@”应该位于第 %d 行！"
 
 #. Resource IDs: (346)
-msgid ""
-"The color of creation, copy and rename nodes of tags will be shifted towards "
-"yellow."
+msgid "The color of creation, copy and rename nodes of tags will be shifted towards yellow."
 msgstr "创建、复制和改名的标签节点的颜色应该向黄色渐变。"
 
 #. Resource IDs: (346)
-msgid ""
-"The color of creation, copy and rename nodes of the trunk will be shifted "
-"towards green."
+msgid "The color of creation, copy and rename nodes of the trunk will be shifted towards green."
 msgstr "创建、复制和改名的主干节点的颜色应该向绿色渐变。"
 
 #. Resource IDs: (197)
@@ -8179,9 +8059,7 @@ msgid "The image can not be shown."
 msgstr "无法显示图片。"
 
 #. Resource IDs: (63)
-msgid ""
-"The issue-tracker provider could not be created. Please check that it is "
-"installed correctly."
+msgid "The issue-tracker provider could not be created. Please check that it is installed correctly."
 msgstr "不能创建问题跟踪器提供者。请检查它是否已经正确安装。"
 
 #. Resource IDs: (64)
@@ -8358,8 +8236,7 @@ msgid ""
 "The path/URL you've entered seems to be illegal on Windows!\n"
 "You can try it anyway, but you might get an error later.\n"
 "\n"
-"A valid path on windows must not contain '<<>|\"?*:' or one of the following "
-"device names:\n"
+"A valid path on windows must not contain '<<>|\"?*:' or one of the following device names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\n"
 "\n"
 "Do you want to proceed anyway?"
@@ -8399,8 +8276,7 @@ msgid ""
 "The path\n"
 "<i>%s</i>\n"
 "in the patchfile does not exist.\n"
-"TortoiseMerge tried to apply the patch by stripping prefixes but no matching "
-"path could be found."
+"TortoiseMerge tried to apply the patch by stripping prefixes but no matching path could be found."
 msgstr ""
 "补丁文件中的路径\n"
 "<i>%s</i>\n"
@@ -8526,10 +8402,8 @@ msgstr "远程文件（theirs）"
 
 #. Resource IDs: (169)
 msgid ""
-"There are changes or unversioned items inside one or more directories which "
-"you have included with svn:externals.\n"
-"Those files are not listed for commit. You need to commit those files "
-"separately."
+"There are changes or unversioned items inside one or more directories which you have included with svn:externals.\n"
+"Those files are not listed for commit. You need to commit those files separately."
 msgstr ""
 "以 svn:externals 包含的目录中有修改或未版本控制的对象。\n"
 "那些文件<b>不会</b>在提交列表中列出，您需要单独提交。"
@@ -8544,8 +8418,7 @@ msgid ""
 "There are still unresolved conflicts in line %d!\n"
 "You should resolve those conflicts first before saving.\n"
 "Do you want to save the file with the conflicts still there?\n"
-"If you click YES, then you have to manually resolve the conflicts in another "
-"editor!"
+"If you click YES, then you have to manually resolve the conflicts in another editor!"
 msgstr ""
 "%d 行还有尚未处理的冲突！\n"
 "请在保存之前先解决它们。\n"
@@ -8573,13 +8446,8 @@ msgstr ""
 "请注意缓存中的数据可能已经过时、不完全，甚至由于不完全的历史而令人误解。"
 
 #. Resource IDs: (82)
-msgid ""
-"There is nothing to add. All the files and folders are either under version "
-"control or have been ignored using the svn:ignore property or the global "
-"ignore configuration setting."
-msgstr ""
-"没有可增加的条目，所有文件和文件夹都已经用 Subversion 进行了版本控制或者在 "
-"svn:ignore 属性或全局忽略设置中设为忽略。"
+msgid "There is nothing to add. All the files and folders are either under version control or have been ignored using the svn:ignore property or the global ignore configuration setting."
+msgstr "没有可增加的条目，所有文件和文件夹都已经用 Subversion 进行了版本控制或者在 svn:ignore 属性或全局忽略设置中设为忽略。"
 
 #. Resource IDs: (83)
 msgid "There's nothing to unlock. No file has a lock in this working copy."
@@ -8600,8 +8468,7 @@ msgstr ""
 #. Resource IDs: (82)
 msgid ""
 "This is not a valid path!\n"
-"A valid path must not contain '<<>|\"?*:' or one of the following device "
-"names:\n"
+"A valid path must not contain '<<>|\"?*:' or one of the following device names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$"
 msgstr ""
 "这是一个无效路径！\n"
@@ -8609,45 +8476,28 @@ msgstr ""
 "com1-com9，lpt1-lpt9，prn，aux，con，nul，clock$"
 
 #. Resource IDs: (594)
-msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"这个方法适用于你创建了在 Subversion 手册中讨论的新特性分支，要合并分支到主干的"
-"场合。"
+msgid "This method covers the case when you have made a feature branch as discussed in the Subversion book. Use this to merge all changes of a branch back to trunk."
+msgstr "这个方法适用于你创建了在 Subversion 手册中讨论的新特性分支，要合并分支到主干的场合。"
 
 #. Resource IDs: (594)
-msgid ""
-"This method covers the case when you have made one or more revisions to a "
-"branch (or to the trunk) and you want to port those changes across to a "
-"different branch."
-msgstr ""
-"这个方法适用于你已经在分支(或主干)提交了版本，要合并这些修改到不同分支的场合。"
+msgid "This method covers the case when you have made one or more revisions to a branch (or to the trunk) and you want to port those changes across to a different branch."
+msgstr "这个方法适用于你已经在分支(或主干)提交了版本，要合并这些修改到不同分支的场合。"
 
 #. Resource IDs: (594)
-msgid ""
-"This method covers the case when you want to merge the differences of two "
-"different branches into your working copy."
+msgid "This method covers the case when you want to merge the differences of two different branches into your working copy."
 msgstr "此方法适用于合并两个分支的差异到工作副本"
 
 #. Resource IDs: (65535)
-msgid ""
-"This product includes software developed by CollabNet (http://www.Collab.Net/)"
+msgid "This product includes software developed by CollabNet (http://www.Collab.Net/)"
 msgstr "本产品包含由 CollabNet(http://www.Collab.Net/) 所开发的软件"
 
 #. Resource IDs: (65535)
-msgid ""
-"This product includes software developed by the OpenSSL Project for use in "
-"the OpenSSL Toolkit (http://www.openssl.org/)"
-msgstr ""
-"本产品包含了由 OpenSSL项目开发的 OpenSSL Toolkit(http://www.openssl.org/)"
+msgid "This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)"
+msgstr "本产品包含了由 OpenSSL项目开发的 OpenSSL Toolkit(http://www.openssl.org/)"
 
 #. Resource IDs: (3857)
 #, c-format
-msgid ""
-"This program is linked to the missing export %s in the file %s. This machine "
-"may have an incompatible version of %s."
+msgid "This program is linked to the missing export %s in the file %s. This machine may have an incompatible version of %s."
 msgstr "找不到本程序链接的 %s (包含于 %s)，可能 %s 的已安装版本不兼容。"
 
 #. Resource IDs: (3857)
@@ -8664,13 +8514,8 @@ msgid "This property must not have multiple lines. Only one line is allowed."
 msgstr "该属性只允许增加一行，不能增加多行文本。"
 
 #. Resource IDs: (1016)
-msgid ""
-"This will delete the record of commands you've used in this application and "
-"restore the default set of visible commands to the menus and toolbars. It "
-"will not undo any explicit customizations. Are you sure you want to do this?"
-msgstr ""
-"这会删除你在应用程序中使用的命令记录，恢复到默认菜单和工具栏的可视化命令集合。"
-"它不会撤销任何显式的的定制。你确认吗？"
+msgid "This will delete the record of commands you've used in this application and restore the default set of visible commands to the menus and toolbars. It will not undo any explicit customizations. Are you sure you want to do this?"
+msgstr "这会删除你在应用程序中使用的命令记录，恢复到默认菜单和工具栏的可视化命令集合。它不会撤销任何显式的的定制。你确认吗？"
 
 #. Resource IDs: (16924)
 msgid "Tile &Horizontally"
@@ -8699,10 +8544,8 @@ msgstr ""
 
 #. Resource IDs: (284)
 msgid ""
-"To steal the lock, right-click on the parent folder of this item and select "
-"'Get Lock' from the context menu.\n"
-"This will bring up the locking dialog where you can enforce the lock, i.e., "
-"'steal' it from the one currently holding it."
+"To steal the lock, right-click on the parent folder of this item and select 'Get Lock' from the context menu.\n"
+"This will bring up the locking dialog where you can enforce the lock, i.e., 'steal' it from the one currently holding it."
 msgstr ""
 "为了窃取锁定，在此项目的父目录上点击右键，在上下文菜单中选择“获得锁定”。\n"
 "这就会出现锁定对话框，你可以强制锁定操作，例如从当前持有人那里“窃取”锁。"
@@ -8761,15 +8604,13 @@ msgid ""
 "TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
 "instead.\n"
 "\n"
-"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
-"originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
 msgstr ""
 "TortoiseBlame 不应该被直接启动！请使用\n"
 "TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
 "来代替。\n"
 "\n"
-"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
-"originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -8982,8 +8823,7 @@ msgstr "无法读取只写属性。"
 msgid ""
 "Unable to reconstruct working copy path!\n"
 "This can happen if the file has been renamed.\n"
-"Please start the log dialog on this specific file alone and then revert the "
-"changes\n"
+"Please start the log dialog on this specific file alone and then revert the changes\n"
 "from the top pane in the log dialog."
 msgstr ""
 "不能重构工作副本路径！\n"
@@ -9338,16 +9178,13 @@ msgstr "使用此文本块(&I)"
 
 #. Resource IDs: (594)
 msgid ""
-"Use the log dialog to select the revisions you want to merge, or enter the "
-"revisions to merge, separated by commas. A revision range can be specified by "
-"a dash.\r\n"
+"Use the log dialog to select the revisions you want to merge, or enter the revisions to merge, separated by commas. A revision range can be specified by a dash.\r\n"
 "\r\n"
 "Example: 4-7,9,11,15-HEAD\r\n"
 "\r\n"
 "To merge all revisions, leave the box empty."
 msgstr ""
-"使用日志对话框选择你要合并的版本，或者输入用逗号隔开的版本。版本范围用减号指"
-"定。\r\n"
+"使用日志对话框选择你要合并的版本，或者输入用逗号隔开的版本。版本范围用减号指定。\r\n"
 "\r\n"
 "例如: 4-7,9,11,15-HEAD\r\n"
 "\r\n"
@@ -9476,9 +9313,7 @@ msgstr ""
 "请选择缺省行为。"
 
 #. Resource IDs: (197)
-msgid ""
-"When enabled, the versioned items listed in the commit dialog are "
-"automatically selected"
+msgid "When enabled, the versioned items listed in the commit dialog are automatically selected"
 msgstr "启用时，在提交对话框中列出的受版本控制的项目会被自动选择"
 
 #. Resource IDs: (197)
@@ -9543,8 +9378,7 @@ msgstr "你已经安装了最新版。"
 #. Resource IDs: (144)
 msgid ""
 "You are creating a repository on a network share.\n"
-"This is safe, but once the repository is created you must access it by some "
-"other means.\n"
+"This is safe, but once the repository is created you must access it by some other means.\n"
 "Accessing a repository via file:// on a network share may corrupt your data!\n"
 "Create the repository anyway?"
 msgstr ""
@@ -9598,15 +9432,13 @@ msgstr ""
 #. Resource IDs: (105)
 msgid ""
 "You dropped more than one file or folder to add to the repository.\n"
-"It's not possible to do that in one step, so TortoiseSVN will add each file/"
-"folder\n"
+"It's not possible to do that in one step, so TortoiseSVN will add each file/folder\n"
 "individually, creating a new revision for every added item.\n"
 "\n"
 "Do you still want to do this?"
 msgstr ""
 "你拖动了了多个文件或文件夹以增加到仓库中。\n"
-"在一个操作步骤中无法实现该操作，所以 TortoiseSVN 将单独增加每一个文件/文件"
-"夹，\n"
+"在一个操作步骤中无法实现该操作，所以 TortoiseSVN 将单独增加每一个文件/文件夹，\n"
 "并为每一个新增加的文件/文件夹创建一个新的版本号。\n"
 "\n"
 "确定要继续执行该操作吗？"
@@ -9681,8 +9513,7 @@ msgstr ""
 #, c-format
 msgid ""
 "You've changed the icon set from <i>%s</i> to <i>%s</i>.\n"
-"That change won't take effect until you restart your computer or logoff and "
-"logon again!"
+"That change won't take effect until you restart your computer or logoff and logon again!"
 msgstr ""
 "你把图标集从 <i>%s</i> 修改为 <i>%s</i>。\n"
 "此改变将在下次系统重启或注销后再登录时生效！"
@@ -9730,8 +9561,7 @@ msgstr ""
 #. Resource IDs: (88)
 msgid ""
 "Your working copy has local modifications!\n"
-"Note: updating to another revision won't lose those modifications so the "
-"working copy\n"
+"Note: updating to another revision won't lose those modifications so the working copy\n"
 "won't look exactly as it was in the revision you're updating to!"
 msgstr ""
 "您本地的工作副本已经修改！\n"
@@ -9897,8 +9727,7 @@ msgstr "作者: "
 #. Resource IDs: (577)
 msgid ""
 "bugtraq:append\r\n"
-"Set to 'false' if you want the bugtracking ID to be inserted at the top of the"
-"\r\n"
+"Set to 'false' if you want the bugtracking ID to be inserted at the top of the\r\n"
 "log message. The default is 'true' which means the bugtracking ID\r\n"
 "is appended to the log message."
 msgstr ""
@@ -9940,8 +9769,7 @@ msgstr ""
 #. Resource IDs: (577)
 msgid ""
 "bugtraq:number\r\n"
-"Set to 'false' if your bugtracking system has issues which are referenced not "
-"by numbers."
+"Set to 'false' if your bugtracking system has issues which are referenced not by numbers."
 msgstr ""
 "bugtraq:number\r\n"
 "如果你的错误追踪系统不是以编号来管理问题，请设为“否”"
@@ -10250,10 +10078,8 @@ msgstr ""
 #. Resource IDs: (576)
 msgid ""
 "svn:executable\r\n"
-"If present, make the file executable. This property cannot be set on a "
-"directory.\r\n"
-"A non-recursive attempt will fail, and a recursive attempt will set the "
-"property only on the file children of the directory."
+"If present, make the file executable. This property cannot be set on a directory.\r\n"
+"A non-recursive attempt will fail, and a recursive attempt will set the property only on the file children of the directory."
 msgstr ""
 "svn:executable\r\n"
 "设置后文件将具备执行权限。该属性不能设置到一个目录上。\r\n"
@@ -10314,8 +10140,7 @@ msgstr ""
 #. Resource IDs: (576)
 msgid ""
 "svn:mergeinfo\r\n"
-"A newline separated list of merge tracking info. Each line consists of an "
-"absolute\r\n"
+"A newline separated list of merge tracking info. Each line consists of an absolute\r\n"
 "path followed by a colon and a list of comma separated revision numbers.\r\n"
 "For example\r\n"
 "/trunk:123-125,129"
@@ -10328,15 +10153,12 @@ msgstr ""
 #. Resource IDs: (576)
 msgid ""
 "svn:mime-type\r\n"
-"The mime type of the file. Used to determine whether to merge the file, and "
-"how to serve it from Apache.\r\n"
-"A mime type beginning with 'text/' (or an absent mime type) is treated as "
-"text.\r\n"
+"The mime type of the file. Used to determine whether to merge the file, and how to serve it from Apache.\r\n"
+"A mime type beginning with 'text/' (or an absent mime type) is treated as text.\r\n"
 "Anything else is treated as binary."
 msgstr ""
 "svn:mime-type\r\n"
-"此文件的 mime 类型。用来决定文件是否要合并，以及由 Apache 传输时要怎么处理。"
-"\r\n"
+"此文件的 mime 类型。用来决定文件是否要合并，以及由 Apache 传输时要怎么处理。\r\n"
 "以“text/”开头(或没有设置)的 mime 类型视为文本文件，\r\n"
 "其它则视为二进制文件。"
 
@@ -10399,8 +10221,7 @@ msgstr "树冲突: "
 #. Resource IDs: (578)
 msgid ""
 "tsvn:autoprops\r\n"
-"A list of properties separated by newlines which get applied automatically "
-"when adding/importing files.\r\n"
+"A list of properties separated by newlines which get applied automatically when adding/importing files.\r\n"
 "Format: <filemask> = property=value;property=value\r\n"
 "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 msgstr ""
@@ -10420,8 +10241,7 @@ msgstr ""
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logfilelistenglish\r\n"
-"Set to 'false' if you don't want the list of changed files to be pasted in "
-"English\r\n"
+"Set to 'false' if you don't want the list of changed files to be pasted in English\r\n"
 "in the commit dialog."
 msgstr ""
 "tsvn:logfilelistenglish\r\n"
@@ -10457,10 +10277,8 @@ msgstr ""
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logwidthmarker\r\n"
-"Set this to the number of chars the log message should not exceed its width."
-"\r\n"
-"A faded line is shown in the commit dialogs at that position. The default is "
-"80 chars."
+"Set this to the number of chars the log message should not exceed its width.\r\n"
+"A faded line is shown in the commit dialogs at that position. The default is 80 chars."
 msgstr ""
 "tsvn:logwidthmarker\r\n"
 "设置日志信息一行的最大字符数。\r\n"
@@ -10499,8 +10317,7 @@ msgstr ""
 #. Resource IDs: (577)
 msgid ""
 "tsvn:warnifnoissue\r\n"
-"Set to 'yes' if a warning shall be shown when no issue is entered in the "
-"commit dialog."
+"Set to 'yes' if a warning shall be shown when no issue is entered in the commit dialog."
 msgstr ""
 "tsvn:warnifnoissue\r\n"
 "如果设为“是”，则在提交对话框没有输入问题时，会显示警告信息。"
@@ -10517,11 +10334,9 @@ msgstr "所取值是不同的"
 #, c-format
 msgid ""
 "webviewer:pathrevision\r\n"
-"URL pointing to the web viewer for the repository for a specific file and "
-"revision.\r\n"
+"URL pointing to the web viewer for the repository for a specific file and revision.\r\n"
 "The string %REVISION% in the URL is replaced with the revision number,\r\n"
-"the string %PATH% is replaced with the path to the file relative to the "
-"repository root."
+"the string %PATH% is replaced with the path to the file relative to the repository root."
 msgstr ""
 "webviewer:pathrevision\r\n"
 "指向版本库的特定文件和版本的 URL，用于在 Web 浏览器中浏览。\r\n"
