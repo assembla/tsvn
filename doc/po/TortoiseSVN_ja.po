@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2009-03-20 16:18 +0000\n"
-"PO-Revision-Date: 2009-04-07 21:40+0900\n"
+"POT-Creation-Date: 2009-06-07 23:32 +0000\n"
+"PO-Revision-Date: 2009-06-18 00:36+0900\n"
 "Last-Translator: KURASAWA Nozomu <nabetaro@caldron.jp>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -433,7 +433,7 @@ msgstr "必要なシステム"
 
 #. (para)
 msgid "TortoiseSVN runs on Windows 2000 SP2, Windows XP or higher. Windows 98, Windows ME and Windows NT4 are no longer supported since TortoiseSVN 1.2.0, but you can still download the older versions if you really need them."
-msgstr "TortoiseSVN は Windows 2000 SP2, WinXP 以上で動作します。Windows 98, Windows ME, Windows NT4 は TortoiseSVN 1.2.0 からサポートされませんが、本当に必要なら古いバージョンの物をまだダウンロードできます。"
+msgstr "TortoiseSVN は Windows 2000 SP2, WinXP 以上で動作します。Windows 98, Windows ME, Windows NT4 は TortoiseSVN 1.2.0 からサポートされませんが、本当に必要なら旧バージョンをまだダウンロードできます。"
 
 #. (para)
 msgid "If you encounter any problems during or after installing TortoiseSVN please refer to <xref linkend=\"tsvn-faq\"/> first."
@@ -1439,7 +1439,7 @@ msgstr "TortoiseSVN (や、その他の Subversion クライアント) を使用
 
 #. (para)
 msgid "If you are using a public hosting service such as <ulink url=\"http://code.google.com/hosting/\"><citetitle>Google Code</citetitle></ulink> or your server has already been setup by someone else then there is nothing else you need to do. Move along to <xref linkend=\"tsvn-dug\"/>."
-msgstr ""
+msgstr "<ulink url=\"http://code.google.com/hosting/\"><citetitle>Google Code</citetitle></ulink> のような公開ホスティングサービスを使用している場合や、誰かがすでにサーバをセットアップしている場合、何もする必要はありません。<xref linkend=\"tsvn-dug\"/> に進んでください。"
 
 #. (para)
 msgid "If you don't have a server and you work alone, or if you are just evaluating Subversion and TortoiseSVN in isolation, then local repositories are probably your best choice. Just create a repository on your own PC as described earlier in <xref linkend=\"tsvn-repository\"/>. You can skip the rest of this chapter and go directly to <xref linkend=\"tsvn-dug\"/> to find out how to start using it."
@@ -1450,9 +1450,8 @@ msgid "If you were thinking about setting up a multi-user repository on a networ
 msgstr "ネットワーク共有上に、マルチユーザリポジトリをセットアップしようと考えているなら、考え直してください。なぜそれがまずいアイディアだと考えているかは、<xref linkend=\"tsvn-repository-local-share\"/> をお読みください。サーバのセットアップは印象ほど難しくありませんし、信頼性の向上と、もしかしたら高速化をもたらすことでしょう。"
 
 #. (para)
-#, fuzzy
 msgid "The next sections are a step-by-step guide on how you can set up such a server on a Windows machine. Of course you can also set up a server on a Linux machine, but that is beyond the scope of this guide. More detailed information on the Subversion server options, and how to choose the best architecture for your situation, can be found in the Subversion book under <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.serverconfig.html\"><citetitle>Server Configuration</citetitle></ulink>."
-msgstr "Subversion サーバのオプションのより詳細な情報や、あなたにピッタリなアーキテクチャの選択する方法は、Subversion book の <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.serverconfig.html\"><citetitle>Server Configuration</citetitle></ulink> にあります。"
+msgstr "以下の節は、そのようなサーバを Windows マシンにセットアップする方法の段階的ガイドです。もちろん、Linux マシンにもサーバをセットアップできますが、このガイドでは扱いません。Subversion サーバのオプションのより詳細な情報や、あなたにピッタリなアーキテクチャの選択する方法は、Subversion book の <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.serverconfig.html\"><citetitle>Server Configuration</citetitle></ulink> にあります。"
 
 #. (title)
 msgid "Svnserve Based Server"
@@ -1460,12 +1459,11 @@ msgstr "svnserve ベースのサーバ"
 
 #. (para)
 msgid "Subversion includes Svnserve - a lightweight stand-alone server which uses a custom protocol over an ordinary TCP/IP connection. It is ideal for smaller installations, or where a full blown Apache server cannot be used."
-msgstr ""
+msgstr "Subversion には、Svnserve (通常の TCP/IP 接続上でカスタムプロトコルを使用する軽量スタンドアロンサーバ) があります。小規模構成にしたい場合や、本格的な Apache サーバを使用できない場合には申し分ありませんし、"
 
 #. (para)
-#, fuzzy
 msgid "In most cases svnserve is easier to setup and runs faster than the Apache based server, although it doesn't have some of the advanced features. And now that SASL support is included it is easy to secure as well."
-msgstr "ほとんどの場合、svnserve は Apache ベースサーバより簡単にセットアップ・実行できます。また今では、さらに安全しやすくする SASL サポートも含まれています。"
+msgstr "ほとんどの場合、svnserve は Apache ベースサーバよりセットアップが簡単で、早く実行できますが、高度な機能のいくつかはありません。また今では、さらに安全にしやすくする SASL サポートも含まれています。"
 
 #. (title)
 msgid "Installing svnserve"
@@ -2837,6 +2835,10 @@ msgid ""
 "rmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n"
 "</screen> You can find a description of how to install such scripts at <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>windows-help-central.com</citetitle></ulink>."
 msgstr ""
+"Windows のログオフ時やシャットダウン時に、認証データを削除したいと言う人もいます。そのようにするには、<filename>%APPDATA%\\Subversion\\auth</filename> ディレクトリを削除するシャットダウンスクリプトを使用します。以下のようになります。<screen>\n"
+"@echo off\n"
+"rmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n"
+"</screen> このようなスクリプトをインストールする方法は、<ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>windows-help-central.com</citetitle></ulink> に説明があります。"
 
 #. (para)
 msgid "For more information on how to set up your server for authentication and access control, refer to <xref linkend=\"tsvn-serversetup\"/>"
@@ -3071,7 +3073,7 @@ msgstr "除外"
 
 #. (para)
 msgid "Used to reduce working copy depth after a folder has already been populated. This option is only available in the <guilabel>Update to revision</guilabel> dialog."
-msgstr ""
+msgstr "フォルダをすでに取り込んでしまった後で、作業コピーの深さを小さくするために使用します。このオプションは、<guilabel>特定のリビジョンへ更新</guilabel> ダイアログでしか使用できません。"
 
 #. (para)
 msgid "You can choose the <firstterm>depth</firstterm> you want to checkout, which allows you to specify the depth of recursion into child folders. If you want just a few sections of a large tree, You can checkout the top level folder only, then update selected folders recursively. <placeholder-1/>"
@@ -3118,9 +3120,8 @@ msgid "Changing working copy depth"
 msgstr "作業コピーの深さの変更"
 
 #. (para)
-#, fuzzy
 msgid "Once you have checked out a working copy to a particular depth you can change that depth later to get more or less content using <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Update item to revision...</guimenuitem></menuchoice>."
-msgstr "ファイルやフォルダを間違って追加した場合は、コミットする前に <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>追加を元に戻す...</guimenuitem></menuchoice> を使用して、追加の取り消しができます。"
+msgstr "一度、作業コピーを特定の深さでチェックアウトしている場合、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>項目を特定リビジョンへ更新...</guimenuitem></menuchoice> を使用して後から深さを変更できます。"
 
 #. (title)
 msgid "Using an older server"
@@ -3463,14 +3464,12 @@ msgid "If you update a file or folder to a specific revision, you should not mak
 msgstr "リビジョンを指定してファイルやフォルダを更新した場合、そのファイルを変更するべきではありません。これをコミットしようとすると、<quote>out of date</quote> エラーが発生します! ファイルへの変更を取り消し、以前のリビジョンから新しくはじめたい場合、リビジョンログダイアログから以前のリビジョンにロールバックしてください。詳しい方法や代替案については、<xref linkend=\"tsvn-howto-rollback\"/> をご覧ください。"
 
 #. (para)
-#, fuzzy
 msgid "<menuchoice><guimenuitem>Update to Revision</guimenuitem></menuchoice> can occasionally be useful to see what your project looked like at some earlier point in its history. But in general, updating individual files to an earlier revision is not a good idea as it leaves your working copy in an inconsistent state. If the file you are updating has changed name, you may even find that the file just disappears from your working copy because no file of that name existed in the earlier revision. You should also note that the item will show a normal green overlay, so it is indistinguishable from files which are up-to-date."
-msgstr "<menuchoice><guimenuitem>特定のリビジョンへ更新</guimenuitem></menuchoice> は、履歴中の以前のポイントではどうだったかを見るのに時々は便利です。ですが一般的に、個々のファイルを以前のリビジョンに更新するのは、作業コピーを矛盾した状態にしたままにしかねないので、よい考えとは言えません。更新したファイルの名前を変更すると、作業コピーからそのファイルが消えてしまい、見つからなくなる可能性があります。以前のリビジョンにはそんな名前のファイルは存在しないからです。単にそのファイルの古いリビジョンを手元のコピーに欲しければ、ログダイアログで選んだファイルに対して <menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>リビジョンを保存...</guimenuitem></menuchoice> コマンドを使用する方がよいでしょう。"
+msgstr "<menuchoice><guimenuitem>特定のリビジョンへ更新</guimenuitem></menuchoice> は、履歴中の以前のポイントではどうだったかを見るのに時々は便利です。ですが一般的に、個々のファイルを以前のリビジョンに更新するのは、作業コピーを矛盾した状態にしたままにしかねないので、よい考えとは言えません。更新したファイルの名前を変更すると、作業コピーからそのファイルが消えてしまい、見つからなくなる可能性があります。以前のリビジョンにはそんな名前のファイルは存在しないからです。更新によって現れたファイルとの区別が付かないため、通常の、緑のオーバーレイの付いた項目にも注意を払うべきです。"
 
 #. (para)
-#, fuzzy
 msgid "If you simply want a local copy of an old version of a file it is better to use the <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Save revision to...</guimenuitem></menuchoice> command from the log dialog for that file."
-msgstr "ファイル・フォルダの名前の変更をその場で行う場合、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>名前の変更...</guimenuitem></menuchoice> を使用してください。新しい項目名を入力すると完了します。"
+msgstr "単にそのファイルの古いリビジョンを手元のコピーに欲しければ、ログダイアログで選んだファイルに対して、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>リビジョンを保存...</guimenuitem></menuchoice> コマンドを使用する方がよいでしょう。"
 
 #. (title)
 msgid "Multiple Files/Folders"
@@ -3514,7 +3513,7 @@ msgstr "ファイル競合"
 
 #. (para)
 msgid "A file conflict occurs if two (or more) developers have changed the same few lines of a file."
-msgstr ""
+msgstr "複数の開発者が、同じファイルの同じ行を変更すると、ファイルの競合が発生します。"
 
 #. (term)
 msgid "tree conflicts"
@@ -3522,11 +3521,11 @@ msgstr "ツリー競合"
 
 #. (para)
 msgid "A tree conflict occurs when a developer moved/renamed/deleted a file or folder, which another developer either also has moved/renamed/deleted or just modified."
-msgstr ""
+msgstr "開発者がファイルやフォルダの移動・名前変更・削除を行い、別の開発者も移動・名前変更・削除を行ったり、単に変更すると、ツリーの競合が発生します。"
 
 #. (para)
 msgid "Once in a while, you will get a <emphasis>conflict</emphasis> when you update/merge your files from the repository or when you switch your working copy to a different URL. There are two kinds of conflicts: <placeholder-1/>"
-msgstr ""
+msgstr "リポジトリからあなたのファイルを更新・マージしたり、別の URL に作業コピーを切り替えたりすると、時には <emphasis>競合</emphasis> することもあります。競合には以下の二種類があります。<placeholder-1/>"
 
 #. (title)
 msgid "File Conflicts"
@@ -3557,7 +3556,6 @@ msgid "This is the file that your Subversion client just received from the serve
 msgstr "作業コピーを更新したときに Subversion クライアントが受信したファイルです。リポジトリの最新 (HEAD) リビジョンに相当します。"
 
 #. (para)
-#, fuzzy
 msgid ""
 "A file conflict occurs when two or more developers have changed the same few lines of a file. As Subversion knows nothing of your project, it leaves resolving the conflicts to the developers. Whenever a conflict is reported, you should open the file in question, and search for lines starting with the string <literal>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</literal>. The conflicting area is marked like this: <screen>\n"
 "\t&lt;&lt;&lt;&lt;&lt;&lt;&lt; filename\n"
@@ -3567,13 +3565,13 @@ msgid ""
 "\t&gt;&gt;&gt;&gt;&gt;&gt;&gt; revision\n"
 "\t</screen> Also, for every conflicted file Subversion places three additional files in your directory: <placeholder-1/>"
 msgstr ""
-"時々、リポジトリからファイルを更新すると <emphasis>競合</emphasis> という状態になることがあります。競合は複数の開発者が、あるファイルの同じ行を変更した際に発生します。Subversion はプロジェクトについては何も知りませんから、開発者間の競合については解決できません。競合が報告されたら、問題のファイルを開き、<literal>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</literal> で始まる行を探してください。競合のある箇所は以下のようにマークがつけられています。<screen>\n"
-"&lt;&lt;&lt;&lt;&lt;&lt;&lt; filename\n"
-"    あなたの変更\n"
-"=======\n"
-"    リポジトリからマージされたコード\n"
-"&gt;&gt;&gt;&gt;&gt;&gt;&gt; revision\n"
-"</screen> また、競合のあるファイルごとに Subversion は手元のディレクトリにファイルを 3 つ追加します。<placeholder-1/>"
+"競合は複数の開発者が、あるファイルの同じ行を変更した際に発生します。Subversion はプロジェクトについては何も知りませんから、開発者間の競合については解決できません。競合が報告されたら、問題のファイルを開き、<literal>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</literal> で始まる行を探してください。競合のある箇所は以下のようにマークがつけられています。<screen>\n"
+"\t&lt;&lt;&lt;&lt;&lt;&lt;&lt; filename\n"
+"\t\tあなたの変更\n"
+"\t=======\n"
+"\t\tリポジトリからマージされたコード\n"
+"\t&gt;&gt;&gt;&gt;&gt;&gt;&gt; revision\n"
+"\t</screen> また、競合のあるファイルごとに Subversion は手元のディレクトリにファイルを 3 つ追加します。<placeholder-1/>"
 
 #. (para)
 msgid "You can either launch an external merge tool / conflict editor with <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Edit Conflicts</guimenuitem></menuchoice> or you can use any other editor to manually resolve the conflict. You should decide what the code should look like, do the necessary changes and save the file."
@@ -3597,19 +3595,19 @@ msgstr "ツリーの競合"
 
 #. (para)
 msgid "A tree conflict occurs when a developer moved/renamed/deleted a file or folder, which another developer either also has moved/renamed/deleted or just modified. There are many different situations that can result in a tree conflict, and all of them require different steps to resolve the conflict."
-msgstr ""
+msgstr "開発者がファイルやフォルダを移動・名前変更・削除したときに、別の開発者が移動・名前変更・削除を行っていたり、変更をしていたりすると、ツリーの競合が発生します。ツリーの競合はさまざまな状況で起こり得ますし、その競合を解消するにはそれぞれ異なった手順が必要です。"
 
 #. (para)
 msgid "When a file is deleted locally in Subversion, the file is also deleted from the local file system, so even if it is part of a tree conflict it cannot show a conflicted overlay and you cannot right click on it to resolve the conflict. Use the <guilabel>Check for Modifications</guilabel> dialog instead to access the <guilabel>Edit conflicts</guilabel> option."
-msgstr ""
+msgstr "また、ファイルが Subversion によりローカルで削除されると、ローカルファイルシステムからも削除されるため、ツリーの競合があったとしても競合のオーバーレイを表示できず、競合を解消しようと右クリックもできません。<guilabel>競合の編集</guilabel> オプションを用いる代わりに、<guilabel>変更をチェック</guilabel> ダイアログを使用してください。"
 
 #. (para)
 msgid "TortoiseSVN can help find the right place to merge changes, but there may be additional work required to sort out the conflicts. Remember that after an update the working BASE will always contain the revision of each item as it was in the repository at the time of update. If you revert a change after updating it goes back to the repository state, not to the way it was when you started making your own local changes."
-msgstr ""
+msgstr "TortoiseSVN は 変更をマージするための正しい場所を見つけるのを支援しますが、競合を整理するにはさらに作業が必要かもしれません。作業中の BASE を更新すると、常に更新時のリポジトリにある各項目のリビジョンが含まれます。更新後に変更を取り消した場合、そのリポジトリの状態へと戻り、変更開始時の状態には戻りません。"
 
 #. (title)
 msgid "Local delete, incoming edit upon update"
-msgstr ""
+msgstr "ローカルで削除、更新により編集を受信"
 
 #. (para)
 msgid "Developer A modifies <filename>Foo.c</filename> and commits it to the repository"
@@ -3617,32 +3615,32 @@ msgstr "開発者 A が<filename>Foo.c</filename> を変更し、リポジトリ
 
 #. (para)
 msgid "Developer B has simultaneously moved <filename>Foo.c</filename> to <filename>Bar.c</filename> in his working copy, or simply deleted <filename>Foo.c</filename> or its parent folder."
-msgstr ""
+msgstr "開発者 B は、同時に作業コピーで <filename>Foo.c</filename> を <filename>Bar.c</filename> に移動したり、単にその親フォルダで <filename>Foo.c</filename> を削除しました。"
 
 #. (para)
 msgid "<filename>Foo.c</filename> has been deleted from working copy, but is marked with a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> が作業コピーからすでに削除されていますが、ツリーの競合としてマークされます。"
 
 #. (para)
 msgid "If the conflict results from a rename rather than a delete then <filename>Bar.c</filename> is marked as added, but does not contain developer A's modifications."
-msgstr ""
+msgstr "削除ではなく名前変更の結果の競合の場合、<filename>Bar.c</filename> は追加としてマークされますが、開発者 A の変更点は含まれていません。"
 
 #. (para)
 #. (para)
 msgid "An update of developer B's working copy results in a tree conflict: <placeholder-1/>"
-msgstr ""
+msgstr "開発者 B の作業コピーを更新した結果、以下のようにツリーの競合が発生します。<placeholder-1/>"
 
 #. (para)
 msgid "Developer B now has to choose whether to keep Developer A's changes. In the case of a file rename, he can merge the changes to <filename>Foo.c</filename> into the renamed file <filename>Bar.c</filename>. For simple file or directory deletions he can choose to keep the item with Developer A's changes and discard the deletion. Or, by marking the conflict as resolved without doing anything he effectively discards Developer A's changes."
-msgstr ""
+msgstr "開発者 B は、現在、開発者 A の変更を保持するかどうかを選ばなければなりません。ファイルの名前変更の場合では、名前変更されたファイル <filename>Bar.c</filename> に、<filename>Foo.c</filename> に行った変更をマージできます。シンプルなファイルやディレクトリの削除の場合には、開発者 A の変更を保持し削除を取り消すという選択もできます。もしくは、何もせずに競合解決マークをつけ、事実上開発者 A の変更を破棄します。"
 
 #. (para)
 msgid "The conflict edit dialog offers to merge changes if it can find the original file of the renamed <filename>Bar.c</filename>. Depending on where the update was invoked, it may not be possible to find the source file."
-msgstr ""
+msgstr "名前変更された <filename>Bar.c</filename> のオリジナルファイルが見つかれば、競合編集ダイアログは変更をマージするか訊いてきます。どこで更新を実行したかによって、ソースファイルが見つからない可能性があります。"
 
 #. (title)
 msgid "Local edit, incoming delete upon update"
-msgstr "ローカルで編集、削除される更新"
+msgstr "ローカルで編集、更新により削除を受信"
 
 #. (para)
 msgid "Developer A moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository."
@@ -3651,7 +3649,7 @@ msgstr "開発者 A が <filename>Foo.c</filename> を <filename>Bar.c</filename
 #. (para)
 #. (para)
 msgid "Developer B modifies <filename>Foo.c</filename> in his working copy."
-msgstr ""
+msgstr "開発者 B は <filename>Foo.c</filename> を、自分の作業コピーで変更します。"
 
 #. (para)
 msgid "Or in the case of a folder move ..."
@@ -3659,52 +3657,52 @@ msgstr "またはフォルダ移動の場合..."
 
 #. (para)
 msgid "Developer A moves parent folder <filename>FooFolder</filename> to <filename>BarFolder</filename> and commits it to the repository."
-msgstr ""
+msgstr "開発者 A は、親フォルダ <filename>FooFolder</filename> を <filename>BarFolder</filename> に移動し、リポジトリへコミットします。"
 
 #. (para)
 msgid "<filename>Bar.c</filename> is added to the working copy as a normal file."
-msgstr ""
+msgstr "<filename>Bar.c</filename> へ作業コピーへ通常ファイルとして追加されます。"
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as added (with history) and has a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> は (履歴と共に) 追加されたとマークされ、ツリーの競合があります。"
 
 #. (para)
 msgid "An update of developer B's working copy results in a tree conflict. For a simple file conflict: <placeholder-1/>"
-msgstr ""
+msgstr "開発者 B の作業コピーを更新した結果、ツリーが競合しました。単純なファイルの競合では以下のようになります。<placeholder-1/>"
 
 #. (para)
 msgid "<filename>BarFolder</filename> is added to the working copy as a normal folder."
-msgstr ""
+msgstr "<filename>BarFolder</filename> が作業コピーに、通常のフォルダとして追加されます。"
 
 #. (para)
 msgid "<filename>FooFolder</filename> is marked as added (with history) and has a tree conflict."
-msgstr ""
+msgstr "<filename>FooFolder</filename> (履歴と共に) 追加されたとマークされ、ツリーの競合があります。"
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as modified."
-msgstr ""
+msgstr "<filename>Foo.c</filename> は変更されたとマークされます。"
 
 #. (para)
 msgid "For a folder conflict: <placeholder-1/>"
-msgstr ""
+msgstr "フォルダの競合では以下のようになります。<placeholder-1/>"
 
 #. (para)
 #. (para)
 msgid "Developer B now has to decide whether to go with developer A's reorganisation and merge her changes into the corresponding file in the new structure, or simply revert A's changes and keep the local file."
-msgstr ""
+msgstr "開発者 B は今回、開発者 A の再編成を受け入れ、新しい構造にある対応するファイルに変更をマージするか、開発者 A の変更を取り消し、自分のファイルを保持するかを決めねばなりません。"
 
 #. (para)
 msgid "To merge her local changes with the reshuffle, Developer B must first find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog. The changes must then be merged by hand as there is currently no way to automate or even simplify this process. Once the changes have been ported across, the conflicted path is redundant and can be deleted. In this case use the <guilabel>Remove</guilabel> button in the conflict editor dialog to clean up and mark the conflict as resolved."
-msgstr ""
+msgstr "自分の変更を入れ替えてマージするため、開発者 B はまず、競合ファイル <filename>Foo.c</filename> がリポジトリ中で名前変更・削除されたファイル名を探さなければなりません。ログダイアログを使用するとわかります。その後、その変更を手でマージしなければなりません。現在のところ、この手順を自動化する方法はなく、単純にする方法すらないからです。一旦変更を移植してしまえば、競合したパスは余分なものとなり、削除できます。この場合、競合エディタダイアログの <guilabel>削除</guilabel> ボタンを使用し、掃除と競合解決マークを付けてください。"
 
 #. (para)
 msgid "If Developer B decides that A's changes were wrong then she must choose the <guilabel>Keep</guilabel> button in the conflict editor dialog. This marks the conflicted file/folder as resolved, but Developer A's changes need to be removed by hand. Again the log dialog helps to track down what was moved."
-msgstr ""
+msgstr "開発者 A の変更は誤りだと開発者 B が判断した場合、競合エディタダイアログの <guilabel>保持</guilabel> ボタンを選択しなければなりません。これは 競合したファイルやフォルダを、解決としてマークますが、開発者 A の変更は手で削除する必要があります。何が移動されたかを見つけ出すには、またログダイアログが役に立ちます。"
 
 #. (title)
 msgid "Local delete, incoming delete upon update"
-msgstr ""
+msgstr "ローカルで削除、更新により削除を受信"
 
 #. (para)
 msgid "Developer A moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
@@ -3716,96 +3714,96 @@ msgstr "開発者 B が <filename>Foo.c</filename> を <filename>Bix.c</filename
 
 #. (para)
 msgid "<filename>Bix.c</filename> is marked as added with history."
-msgstr ""
+msgstr "<filename>Bix.c</filename> は、履歴と共に、追加されたとマークされます。"
 
 #. (para)
 msgid "<filename>Bar.c</filename> is added to the working copy with status 'normal'."
-msgstr ""
+msgstr "<filename>Bar.c</filename> は、作業コピーへ「通常」状態で追加されます。"
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as deleted and has a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> は削除マークが付き、ツリーが競合した状態となります。"
 
 #. (para)
 msgid "To resolve this conflict, Developer B has to find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog."
-msgstr ""
+msgstr "競合を解決するには、<filename>Foo.c</filename> がリポジトリで名前変更・移動したことに対する競合したファイルの名前を、開発者 B が調べなければなりません。ログダイアログで行えます。"
 
 #. (para)
 #. (para)
 msgid "Then developer B has to decide which new filename of <filename>Foo.c</filename> to keep - the one done by developer A or the rename done by himself."
-msgstr ""
+msgstr "開発者 B が、<filename>Foo.c</filename> の新しい名前の方を残すと決めた場合、開発者 A にしてもらうか、自分で名前変更できます。"
 
 #. (para)
 #. (para)
 msgid "After developer B has manually resolved the conflict, the tree conflict has to be marked as resolved with the button in the conflict editor dialog."
-msgstr ""
+msgstr "開発者 B が、手で競合を解決した後で、競合エディタダイアログのボタンで、ツリーの競合二回血マークを付ける必要があります。"
 
 #. (title)
 msgid "Local missing, incoming edit upon merge"
-msgstr ""
+msgstr "ローカルで紛失、マージにより編集を受信"
 
 #. (para)
 msgid "Developer A working on trunk modifies <filename>Foo.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "トランクで作業している開発者 A が、<filename>Foo.c</filename> を変更しリポジトリにコミットします。"
 
 #. (para)
 msgid "Developer B working on a branch moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "ブランチで作業している開発者 B が、<filename>Foo.c</filename> を <filename>Bar.c</filename> に移動し、リポジトリにコミットします。"
 
 #. (para)
 msgid "<filename>Bar.c</filename> is already in the working copy with status 'normal'."
-msgstr ""
+msgstr "<filename>Bar.c</filename> は、状態が「通常」で、すでに作業コピーにあります。"
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as missing with a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> はツリーの競合として、紛失マークが付きます。"
 
 #. (para)
 #. (para)
 #. (para)
 msgid "A merge of developer A's trunk changes to developer B's branch working copy results in a tree conflict: <placeholder-1/>"
-msgstr ""
+msgstr "開発者 A のトランクへの変更を、開発者 B のブランチにマージすると、作業コピーが以下のようにツリーの競合状態になります。<placeholder-1/>"
 
 #. (para)
 msgid "To resolve this conflict, Developer B has to mark the file as resolved in the conflict editor dialog, which will remove it from the conflict list. She then has to decide whether to copy the missing file <filename>Foo.c</filename> from the repository to the working copy, whether to merge Developer A's changes to <filename>Foo.c</filename> into the renamed <filename>Bar.c</filename> or whether to ignore the changes by marking the conflict as resolved and doing nothing else."
-msgstr ""
+msgstr "この競合を解決するには、開発者 B が競合エディタダイアログでファイルに解決マークを付け、競合リストから取り除く必要があります。さらに、紛失ファイル <filename>Foo.c</filename> を、リポジトリから作業コピーへコピーするか、<filename>Foo.c</filename> へ行った開発者 A の変更を、名前変更した <filename>Bar.c</filename> にマージするか、競合に解決マークを付ける他は何も市内かを決めなければなりません。"
 
 #. (para)
 msgid "Note that if you copy the missing file from the repository and then mark as resolved, your copy will be removed again. You have to resolve the conflict first."
-msgstr ""
+msgstr "紛失したファイルをリポジトリから取得し、それから解決マークを付けると、あなたのコピーが再度削除されます。まず競合を解決しなければなりません。"
 
 #. (title)
 msgid "Local edit, incoming delete upon merge"
-msgstr ""
+msgstr "ローカルで編集、マージにより削除を受信"
 
 #. (para)
 #. (para)
 msgid "Developer A working on trunk moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "トランクで作業している開発者 A が、<filename>Foo.c</filename> を <filename>Bar.c</filename> に移動し、リポジトリにコミットします。"
 
 #. (para)
 msgid "Developer B working on a branch modifies <filename>Foo.c</filename> and commits it to the repository."
-msgstr ""
+msgstr "ブランチで作業している開発者 B が、<filename>Foo.c</filename> を変更しリポジトリにコミットします。"
 
 #. (para)
 msgid "There is an equivalent case for folder moves, but it is not yet detected in Subversion 1.6 ..."
-msgstr ""
+msgstr "フォルダの移動と同等ですが、Subversion 1.6 でもまだ検出できません……"
 
 #. (para)
 msgid "Developer A working on trunk moves parent folder <filename>FooFolder</filename> to <filename>BarFolder</filename> and commits it to the repository."
-msgstr ""
+msgstr "トランクで作業している開発者 A が、親フォルダ <filename>FooFolder</filename> を <filename>BarFolder</filename> に移動し、リポジトリにコミットします。"
 
 #. (para)
 msgid "Developer B working on a branch modifies <filename>Foo.c</filename> in her working copy."
-msgstr ""
+msgstr "ブランチで作業している開発者 B が、自分の作業コピーにある <filename>Foo.c</filename> を変更します。"
 
 #. (para)
 msgid "<filename>Bar.c</filename> is marked as added."
-msgstr ""
+msgstr "<filename>Bar.c</filename> には追加マークが付きます。"
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as modified with a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> はツリーの競合として、変更マークが付きます。"
 
 #. (para)
 msgid "To merge her local changes with the reshuffle, Developer B must first find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog for the merge source. The conflict editor only shows the log for the working copy as it does not know which path was used in the merge, so you will have to find that yourself. The changes must then be merged by hand as there is currently no way to automate or even simplify this process. Once the changes have been ported across, the conflicted path is redundant and can be deleted. In this case use the <guilabel>Remove</guilabel> button in the conflict editor dialog to clean up and mark the conflict as resolved."
@@ -3817,23 +3815,23 @@ msgstr ""
 
 #. (title)
 msgid "Local delete, incoming delete upon merge"
-msgstr ""
+msgstr "ローカルで削除、マージにより削除を受信"
 
 #. (para)
 msgid "Developer B working on a branch moves <filename>Foo.c</filename> to <filename>Bix.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "ブランチで作業している開発者 B が、<filename>Foo.c</filename> を <filename>Bix.c</filename> に移動し、リポジトリにコミットします。"
 
 #. (para)
 msgid "<filename>Bix.c</filename> is marked with normal (unmodified) status."
-msgstr ""
+msgstr "<filename>Bix.c</filename> は通常 (未変更) 状態としてマークされます。"
 
 #. (para)
 msgid "<filename>Bar.c</filename> is marked as added with history."
-msgstr ""
+msgstr "<filename>Bar.c</filename> は履歴と共に追加マークが付きます。"
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as missing and has a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> には紛失マークが付き、ツリーの競合状態となります。"
 
 #. (para)
 msgid "To resolve this conflict, Developer B has to find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog for the merge source. The conflict editor only shows the log for the working copy as it does not know which path was used in the merge, so you will have to find that yourself."
@@ -3963,9 +3961,8 @@ msgid "<placeholder-1/> It's often very useful to know which files you have chan
 msgstr "<placeholder-1/> あなたがどのファイルを変更したか、また他の人がどのファイルを変更しコミットしたかを知ることは非常に有用です。これには <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>変更をチェック...</guimenuitem></menuchoice> コマンドが役に立ちます。このダイアログは作業コピー内で何らかの変更をした全てのファイルを表示し、バージョン管理外のファイルも指定すれば同様に表示します。"
 
 #. (para)
-#, fuzzy
 msgid "If you click on the <guibutton>Check Repository</guibutton> then you can also look for changes in the repository. That way you can check before an update if there's a possible conflict. You can also update selected files from the repository without updating the whole folder. By default, the <guibutton>Check Repository</guibutton> button only fetches the remote status with the checkout depth of the working copy. If you want to see all files and folders in the repository, even those you have not checked out, then you have to hold down the <keycap>Shift</keycap> key when you click on the <guibutton>Check Repository</guibutton> button."
-msgstr "<guibutton>リポジトリをチェック</guibutton> をクリックすると、リポジトリの変更点も参照できます。競合が起こりそうな場合、これにより更新前に変更点を確認できます。リポジトリの全てのフォルダを更新しないで、選択したファイルのみ更新することもできます。"
+msgstr "<guibutton>リポジトリをチェック</guibutton> をクリックすると、リポジトリの変更点も参照できます。競合が起こりそうな場合、更新前にこれで変更点を確認できます。リポジトリの全てのフォルダを更新しないで、選択したファイルのみ更新することもできます。デフォルトでは、<guibutton>リポジトリをチェック</guibutton> ボタンは、作業コピーに対してチェックアウトした深さまでしか、リモートの状態を取得しません。リポジトリ内のファイル・フォルダすべてを、チェックアウトしていなくても見たい場合は、<keycap>Shift</keycap> キーを押しながら、<guibutton>リポジトリをチェック</guibutton> ボタンをクリックしてください。"
 
 #. (para)
 msgid "Locally modified items."
@@ -4165,7 +4162,7 @@ msgstr "<placeholder-1/> いろいろな場所からログダイアログを表�
 
 #. (para)
 msgid "If the repository is unavailable you will see the <guilabel>Want to go offline?</guilabel> dialog, described in <xref linkend=\"tsvn-dug-showlog-cache\"/>."
-msgstr ""
+msgstr "リポジトリが利用できない場合、<xref linkend=\"tsvn-dug-showlog-cache\"/> で説明する、<guilabel>オフラインにしますか?</guilabel> ダイアログを目にすることになります。"
 
 #. (title)
 msgid "Revision Log Actions"
@@ -4209,11 +4206,11 @@ msgstr "作業コピーと選択したリビジョンを比較します。デフ
 
 #. (term)
 msgid "Compare and blame with working BASE"
-msgstr "作業ベースとの比較と注釈"
+msgstr "作業中の BASE との比較と注釈"
 
 #. (para)
 msgid "Blame the selected revision, and the file in your working BASE and compare the blame reports using a visual diff tool. Read <xref linkend=\"tsvn-dug-blame-diffs\"/> for more detail. (files only)."
-msgstr "選択したリビジョンと作業 BASE のファイルの注釈をとり、差分ツールを使って注釈レポートを比較できます。詳細は、<xref linkend=\"tsvn-dug-blame-diffs\"/> をご覧ください (ファイルのみ)。"
+msgstr "選択したリビジョンと作業中の BASE にあるファイルの注釈をとり、差分ツールを使って注釈レポートを比較できます。詳細は、<xref linkend=\"tsvn-dug-blame-diffs\"/> をご覧ください (ファイルのみ)。"
 
 #. (term)
 msgid "Show changes as unified diff"
@@ -4228,18 +4225,16 @@ msgid "Compare with previous revision"
 msgstr "前のリビジョンとの比較"
 
 #. (para)
-#, fuzzy
 msgid "Compare the selected revision with the previous revision. This works in a similar manner to comparing with your working copy. For folders this option will first show the changed files dialog allowing you to select files to compare."
-msgstr "選択したリビジョンを過去のリビジョンと比較できます。作業コピーとの比較と同じように動作します。"
+msgstr "選択したリビジョンを直前のリビジョンと比較できます。作業コピーとの比較と同じように動作します。フォルダに対するこの操作は、比較するファイルを選択する、「変更されたファイル」ダイアログを、まず表示します。"
 
 #. (term)
 msgid "Compare and blame with previous revision"
 msgstr "前のリビジョンとの比較と注釈"
 
 #. (para)
-#, fuzzy
 msgid "Show the changed files dialog allowing you to select files. Blame the selected revision, and the previous revision, and compare the results using a visual diff tool. (folders only)."
-msgstr "選択したリビジョンと以前のリビジョンの注釈をとり、差分ツールを使って結果を比較できます (フォルダのみ)。"
+msgstr "ファイルを選択できるように、「変更されたファイル」ダイアログを表示します。選択したリビジョンと直前のリビジョンの注釈をとり、ビジュアル差分ツールを使って結果を比較できます (フォルダのみ)。"
 
 #. (term)
 #. (term)
@@ -4289,39 +4284,37 @@ msgid "Update item to revision"
 msgstr "項目を特定リビジョンへ更新"
 
 #. (para)
-#, fuzzy
 msgid "Update your working copy to the selected revision. Useful if you want to have your working copy reflect a time in the past, or if there have been further commits to the repository and you want to update your working copy one step at a time. It is best to update a whole directory in your working copy, not just one file, otherwise your working copy could be inconsistent."
-msgstr "選択したリビジョンに作業コピーを更新します。作業コピーを過去の状態に時間をさかのぼるのに便利です。1 ファイルだけでなく、作業コピー全体のディレクトリを更新するのが最善です。そうでなければ作業コピーに矛盾が生じ、変更をコミットできなくなってしまいます。"
+msgstr "選択したリビジョンに作業コピーを更新します。時間をさかのぼり、作業コピーを過去の状態にしたり、リポジトリにさらにコミットが行われており、作業コピーを一度に更新したい場合に便利です。1 ファイルだけでなく、作業コピー全体のディレクトリを更新するのが最善です。そうでなければ作業コピーに矛盾が生じ、変更をコミットできなくなってしまいます。"
 
 #. (para)
 msgid "If you want to undo an earlier change permanently, use <guilabel>Revert to this revision</guilabel> instead."
-msgstr ""
+msgstr "以前の変更点を恒久的に取り消したい場合、<guilabel>このリビジョンに戻す</guilabel> を代わりに使用してください。"
 
 #. (term)
 msgid "Revert to this revision"
 msgstr "このリビジョンへ元に戻す"
 
 #. (para)
-#, fuzzy
 msgid "Revert to an earlier revision. If you have made several changes, and then decide that you really want to go back to how things were in revision N, this is the command you need. The changes are undone in your working copy so this operation does <emphasis>not</emphasis> affect the repository until you commit the changes. Note that this will undo <emphasis>all</emphasis> changes made after the selected revision, replacing the file/folder with the earlier version."
-msgstr "以前のリビジョンに変更を戻します。既にいくつか変更を行っており、本当にリビジョン N へ戻したい場合、このコマンドが必要です。繰り返しますが、変更の取り消しは作業コピーで行われますので、変更をコミットするまでこの操作はリポジトリに影響を <emphasis>与えません</emphasis>。これは、ファイル・フォルダを以前のリビジョンに置き換えて、選択したリビジョン以降の変更を <emphasis>すべて</emphasis> 取り消してしまうことに注意してください。ローカルで変更している場合、このコマンドはその変更を作業コピーにマージします。"
+msgstr "以前のリビジョンに変更を戻します。既にいくつか変更を行っており、本当にリビジョン N へ戻したい場合、あなたの求めるものがこのコマンドです。変更の取り消しは作業コピーで行われますので、変更をコミットするまでこの操作はリポジトリに影響を <emphasis>与えません</emphasis>。これは、ファイル・フォルダを以前のリビジョンに置き換えて、選択したリビジョン以降の変更を <emphasis>すべて</emphasis> 取り消してしまうことに注意してください。ローカルで変更している場合、このコマンドはその変更を作業コピーにマージします。"
 
 #. (para)
 #. (para)
 msgid "If your working copy is in an unmodified state, after you perform this action your working copy will show as modified. If you already have local changes, this command will merge the <emphasis>undo</emphasis> changes into your working copy."
-msgstr ""
+msgstr "作業コピーが未変更の場合、この操作を実行すると、作業コピーが変更されます。すでに変更している場合、このコマンドは作業コピーの変更を<emphasis>取り消す</emphasis>方向にマージします。"
 
 #. (para)
 msgid "What is happening internally is that Subversion performs a reverse merge of all the changes made after the selected revision, undoing the effect of those previous commits."
-msgstr ""
+msgstr "内部的に起こっていることは、選択したリビジョンの後に行われた、すべての変更の逆マージを Subversion が実行し、以前のコミットの効果を元に戻すということです。"
 
 #. (para)
 msgid "If after performing this action you decide that you want to <emphasis>undo the undo</emphasis> and get your working copy back to its previous unmodified state, you should use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revert</guimenuitem></menuchoice> from within Windows Explorer, which will discard the local modifications made by this reverse merge action."
-msgstr ""
+msgstr "この操作後に、<emphasis>元に戻したものを元に戻し</emphasis>、作業コピーを前回の未変更状態に戻す場合、Windows エクスプローラから <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>元に戻す</guimenuitem></menuchoice> を使用し、逆マージ操作で行われたローカルの変更を取り消してください。"
 
 #. (para)
 msgid "If you simply want to see what a file or folder looked like at an earlier revision, use <guilabel>Update to revision</guilabel> or <guilabel>Save revision as...</guilabel> instead."
-msgstr ""
+msgstr "以前のリビジョンで、どんなファイル・フォルダがあったのか見たいだけであれば、代わりに <guilabel>特定のリビジョンへ更新</guilabel> や <guilabel>リビジョンを保存...</guilabel> を使用してください。"
 
 #. (term)
 #. (term)
@@ -4329,26 +4322,24 @@ msgid "Revert changes from this revision"
 msgstr "このリビジョンにおける変更を元に戻す"
 
 #. (para)
-#, fuzzy
 msgid "Undo changes from which were made in the selected revision. The changes are undone in your working copy so this operation does <emphasis>not</emphasis> affect the repository at all! Note that this will undo the changes made in that revision only; it does not replace your working copy with the entire file at the earlier revision. This is very useful for undoing an earlier change when other unrelated changes have been made since."
-msgstr "選択したリビジョンの変更を取り消します。作業コピーの変更が取り消されるので、この操作はリポジトリ全体には影響を<emphasis>及ぼしません</emphasis>! そのリビジョンのみの変更を元に戻すということに注意してください。以前のリビジョンで作業コピーのファイル全体を置き換えるわけではありません。他に関係ない変更をおこなってから、以前の変更を元に戻すのに便利です。ローカルで変更する場合は、このコマンドは作業コピーに変更をマージします。"
+msgstr "選択したリビジョンの変更を取り消します。作業コピーの変更が取り消されるので、この操作はリポジトリにまったく影響を<emphasis>及ぼしません</emphasis>! そのリビジョンのみの変更を元に戻すということに注意してください。以前のリビジョンで作業コピーのファイル全体を置き換えるわけではありません。他に関係ない変更をおこなってから、以前の変更を元に戻すのに便利です。"
 
 #. (para)
 msgid "What is happening internally is that Subversion performs a reverse merge of that one revision, undoing its effect from a previous commit."
-msgstr ""
+msgstr "内部的に起こっていることは、ひとつのリビジョンに対して逆マージを Subversion が実行し、以前のコミットの効果を元に戻すということです。"
 
 #. (para)
 msgid "You can <emphasis>undo the undo</emphasis> as described above in <guilabel>Revert to this revision</guilabel>."
-msgstr ""
+msgstr "<guilabel>このリビジョンへ元に戻す</guilabel> で説明しているように、<emphasis>元に戻したものを元に戻す</emphasis>ことができます。"
 
 #. (term)
 msgid "Merge revision to..."
 msgstr "このリビジョンをマージ..."
 
 #. (para)
-#, fuzzy
 msgid "Merge the selected revision(s) into a different working copy. A folder selection dialog allows you to choose the working copy to merge into, but after that there is no confirmation dialog, nor any opportunity to try a test merge. It is a good idea to merge into an unmodified working copy so that you can revert the changes if it doesn't work out! This is a useful feature if you want to merge selected revisions from one branch to another."
-msgstr "異なる作業コピーにあるリビジョンを選択し、マージを行います。フォルダ選択ダイアログにより、マージ結果の作業コピーを選択できますが、確認ダイアログはなく、また動作チェックもできません。変更していない作業コピーを用い、選択したリビジョンをマージするのに失敗したら変更を取り消すのがうまい方法です! これはあるブランチから別のブランチへ、選択したリビジョンをマージするのに便利です。"
+msgstr "異なる作業コピーにあるリビジョンを選択し、マージを行います。フォルダ選択ダイアログにより、マージ結果の作業コピーを選択できますが、確認ダイアログはなく、また動作チェックもできません。変更していない作業コピーを用い、選択したリビジョンをマージするのに失敗したら変更を取り消すのがうまい方法です! これはあるブランチから別のブランチへ、選択したリビジョンをマージするのに便利な機能です。"
 
 #. (term)
 msgid "Checkout..."
@@ -4380,7 +4371,7 @@ msgstr "リビジョン属性の表示"
 
 #. (para)
 msgid "View and edit any revision property, not just log message and author. Refer to <xref linkend=\"tsvn-dug-showlog-4\"/>."
-msgstr ""
+msgstr "ログメッセージと作者以外の、任意のリビジョンプロパティを、表示・編集します。<xref linkend=\"tsvn-dug-showlog-4\"/> をご覧ください。"
 
 #. (term)
 #. (term)
@@ -4430,7 +4421,7 @@ msgstr "2 つのリビジョンの注釈をとり、視覚差分ツールを使�
 
 #. (term)
 msgid "Show differences as unified diff"
-msgstr ""
+msgstr "Unified Diff 形式で差分を表示"
 
 #. (para)
 msgid "View the differences between the two selected revisions as a Unified-Diff file. This works for files and folders."
@@ -4458,7 +4449,7 @@ msgstr "また、前述のとおり、選択したリビジョンを別の作業
 
 #. (para)
 msgid "If all selected revisions have the same author, you can edit the author of all those revisions in one go."
-msgstr ""
+msgstr "選択したすべてのリビジョンが、同じ作者のものであれば、すべてのリビジョンの作者を一気に編集できます。"
 
 #. (title)
 msgid "The Log Dialog Bottom Pane with Context Menu"
@@ -4485,9 +4476,8 @@ msgid "Show as unified diff"
 msgstr "unified diff での表示"
 
 #. (para)
-#, fuzzy
 msgid "Show file changes in unified diff format. This context menu is only available for files shown as <emphasis>modified</emphasis>."
-msgstr "選択したファイルの選択したリビジョンの差分を表示します。このコンテキストメニューは、ファイルに <emphasis>変更</emphasis> がある時のみ有効です。"
+msgstr "ファイルの変更点を unified diff 形式で表示します。このコンテキストメニューは、ファイルに <emphasis>変更</emphasis> がある時のみ有効です。"
 
 #. (para)
 #. (para)
@@ -4524,7 +4514,7 @@ msgstr "マージログの取得"
 
 #. (para)
 msgid "Show the revision log for the selected single file, including merged changes. Find out more in <xref linkend=\"tsvn-dug-showlog-mergetrack\"/>."
-msgstr ""
+msgstr "選択した 1 ファイルに対して、マージされた変更を含めリビジョンログを表示します。詳細は <xref linkend=\"tsvn-dug-showlog-mergetrack\"/> をご確認ください。"
 
 #. (para)
 msgid "Save the selected revision to a file so you have an older version of that file."
@@ -4607,8 +4597,8 @@ msgid "Because the log dialog shows you the log from HEAD, not from the current 
 msgstr "ログダイアログには、現在の作業コピーのリビジョンではなく、HEAD からログを表示するため、作業コピーがまだ取得していない内容のログメッセージを表示することが、しばしばあります。これを明確にするために、作業コピーが持つリビジョンに一致するコミットメッセージを太字で表示します。"
 
 #. (para)
-msgid "By default this only works for files. This is because the update revision for a folder may not correspond to the update revision of its content, and the only way to find the effective update revision for the folder is to crawl the working copy. This can be a slow operation for large working copies so if you want to enable this feature you must create a <literal>DWORD</literal> registry key with value 1 at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>."
-msgstr "デフォルトでは、これはファイルにのみ動作します。これはフォルダの更新リビジョンと、その内容の更新リビジョンが一致しない可能性があり、意味のあるフォルダの更新リビジョンを探すには、作業コピーをクロールするしかないからです。大きな作業コピーでは遅い処理になりますが、それでもこの機能を有効にするには、<literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> に <literal>DWORD</literal> のレジストリキーを作成し、値を 1 にしてください。"
+msgid "When you show the log for a folder the revision highlighted is the highest revision found anywhere within that folder, which requires a crawl of the working copy. This can be a slow operation for large working copies, and the log messages are not displayed until the crawl completes. If you want to disable or limit this feature you need to set a registry key <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> as described in <xref linkend=\"tsvn-dug-settings-registry\"/>."
+msgstr ""
 
 #. (title)
 msgid "Merge Tracking Features"
@@ -4781,14 +4771,12 @@ msgid "Offline Mode"
 msgstr "オフラインモード"
 
 #. (title)
-#, fuzzy
 msgid "Go Offline Dialog"
-msgstr "現在オフラインです。オンラインにしますか?"
+msgstr "オフライン化ダイアログ"
 
 #. (para)
-#, fuzzy
 msgid "<placeholder-1/> If the server is not reachable, and you have log caching enabled you can use the log dialog and revision graph in offline mode. This uses data from the cache, which allows you to continue working although the information may not be up-to-date or even complete."
-msgstr "サーバに到達せず、ログキャッシュを有効にしている場合、ログダイアログやリビジョングラフはオフラインモードで利用できます。これはキャッシュからのデータを使用し、作業を継続できますが、おそらく最新でも完全でもありません。"
+msgstr "<placeholder-1/> サーバに到達せず、ログキャッシュを有効にしている場合、ログダイアログやリビジョングラフはオフラインモードで利用できます。これはキャッシュからのデータを使用し、作業を継続できますが、おそらく最新でも完全でもありません。"
 
 #. (term)
 msgid "Offline for now"
@@ -4796,7 +4784,7 @@ msgstr "オフラインにする"
 
 #. (para)
 msgid "Complete the current operation in offline mode, but retry the repository next time log data is requested."
-msgstr ""
+msgstr "完全に現在の操作をオフラインモードにしますが、ログデータが要求された次の回に、リポジトリに再試行します。"
 
 #. (term)
 msgid "Permanently offline"
@@ -4804,7 +4792,7 @@ msgstr "常にオフライン"
 
 #. (para)
 msgid "Remain in offline mode until a repository check is specifically requested. See <xref linkend=\"tsvn-dug-showlog-refresh\"/>."
-msgstr ""
+msgstr "リポジトリチェックを明確に要求されるまで、オフラインモードのままにします。<xref linkend=\"tsvn-dug-showlog-refresh\"/> をご覧ください。"
 
 #. (term)
 msgid "Cancel"
@@ -4812,7 +4800,7 @@ msgstr "キャンセル"
 
 #. (para)
 msgid "If you don't want to continue the operation with possibly stale data, just cancel."
-msgstr ""
+msgstr "おそらく陳腐化したであろうデータで、操作を継続したくない場合は、単にキャンセルとしてください。"
 
 #. (para)
 msgid "Here you have three options: <placeholder-1/>"
@@ -4886,7 +4874,7 @@ msgstr "特定のリビジョンと作業コピーの差分を取るのなら、
 
 #. (para)
 msgid "If you want to see the difference between the last committed revision and your working copy, assuming that the working copy hasn't been modified, just right click on the file. Then select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff with previous version</guimenuitem></menuchoice>. This will perform a diff between the revision before the last-commit-date (as recorded in your working copy) and the working BASE. This shows you the last change made to that file to bring it to the state you now see in your working copy. It will not show changes newer than your working copy."
-msgstr "最後にコミットしたリビジョンと、変更されていないと見なせる自分の作業コピーとの差分を見る場合、単にファイルを右クリックし、<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>以前のバージョンと差分</guimenuitem></menuchoice> を選択してください。ここでは、(作業コピーに記録されている) 最後にコミットした日時と、作業ベースとの diff を実行します。これにより、現在の作業コピーにある状態に持っていった最後の変更点を参照できます。作業コピーにあるものよりも新しい変更点は表示されないでしょう。"
+msgstr "最後にコミットしたリビジョンと、変更されていないと見なせる自分の作業コピーとの差分を見る場合、単にファイルを右クリックし、<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>以前のバージョンと差分</guimenuitem></menuchoice> を選択してください。ここでは、(作業コピーに記録されている) 最後にコミットした日時と、作業中の BASE との diff を実行します。これにより、現在の作業コピーにある状態に持っていった最後の変更点を参照できます。作業コピーにあるものよりも新しい変更点は表示されないでしょう。"
 
 #. (term)
 msgid "Difference between two previous revisions"
@@ -5696,9 +5684,8 @@ msgid "<placeholder-1/> You can read and set the Subversion properties from the 
 msgstr "<placeholder-1/> Windows のプロパティダイアログから、Subversion の属性を確認・設定できますが、さらに <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>属性</guimenuitem></menuchoice> や <menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>属性</guimenuitem></menuchoice> からの TortoiseSVN の状態リストでも確認できます。"
 
 #. (para)
-#, fuzzy
 msgid "You can add your own properties, or some properties with a special meaning in Subversion. These begin with <literal>svn:</literal>. <literal>svn:externals</literal> is such a property; see how to handle externals in <xref linkend=\"tsvn-dug-externals\"/>."
-msgstr "自分で定義した属性の他、Subversion で特別な意味のある属性も追加できます。これは <literal>svn:</literal> で始まります。<literal>svn:externals</literal> も、そのような属性です。<xref linkend=\"tsvn-dug-import-4\"/> で外部参照の説明をしていますのでご覧ください。"
+msgstr "自分で定義した属性の他、Subversion で特別な意味のある属性も追加できます。これは <literal>svn:</literal> で始まります。<literal>svn:externals</literal> も、そのような属性です。<xref linkend=\"tsvn-dug-externals\"/> で外部参照の説明をしていますのでご覧ください。"
 
 #. (title)
 msgid "svn:keywords"
@@ -5777,9 +5764,8 @@ msgid "If you wish to remove an existing property, select that property from the
 msgstr "既存の属性を削除したい場合、属性の一覧から削除する属性を選択し、<guibutton>削除</guibutton> をクリックしてください。"
 
 #. (para)
-#, fuzzy
 msgid "The <literal>svn:externals</literal> property can be used to pull in other projects from the same repository or a completely different repository. For more information, read <xref linkend=\"tsvn-dug-externals\"/>."
-msgstr "<literal>svn:externals</literal> 属性は、同じリポジトリからでも完全に異なるリポジトリからでも他のプロジェクトを取得するのに使用できます。詳細は <xref linkend=\"tsvn-dug-import-4\"/> をご覧ください。"
+msgstr "<literal>svn:externals</literal> 属性は、同じリポジトリからでも完全に異なるリポジトリからでも、他のプロジェクトを取得するのに使用できます。詳細は <xref linkend=\"tsvn-dug-externals\"/> をご覧ください。"
 
 #. (title)
 msgid "Exporting and Importing Properties"
@@ -5987,9 +5973,9 @@ msgstr "外部フォルダ"
 #. (para)
 #, fuzzy
 msgid ""
-"Let's say you check out a working copy of <filename>/project1</filename> to <filename>D:\\dev\\project1</filename>. Select the folder <filename>D:\\dev\\project1</filename>, <action>right click</action> and choose <menuchoice><guimenu>Windows Menu</guimenu><guimenuitem>Properties</guimenuitem></menuchoice> from the context menu. The Properties Dialog comes up. Then go to the Subversion tab. There, you can set properties. Click <guibutton>Add...</guibutton>. Select the <literal>svn:externals</literal> property from the combobox and write in the edit box the repository URL in the format <literal>url folder</literal> or if you want to specify a particular revision, <literal>-rREV url folder</literal> You can add multiple external projects, 1 per line. Note that URLs must be properly escaped or they will not work. For example you must replace each space with <literal>%20</literal>. Note that it is not possible to use folder names with spaces in them. Suppose that you have set these properties on <filename>D:\\dev\\project1</filename>: <screen>\n"
+"Let's say you check out a working copy of <filename>/project1</filename> to <filename>D:\\dev\\project1</filename>. Select the folder <filename>D:\\dev\\project1</filename>, <action>right click</action> and choose <menuchoice><guimenu>Windows Menu</guimenu><guimenuitem>Properties</guimenuitem></menuchoice> from the context menu. The Properties Dialog comes up. Then go to the Subversion tab. There, you can set properties. Click <guibutton>Add...</guibutton>. Select the <literal>svn:externals</literal> property from the combobox and write in the edit box the repository URL in the format <literal>url folder</literal> or if you want to specify a particular revision, <literal>-rREV url folder</literal> You can add multiple external projects, 1 per line. Suppose that you have set these properties on <filename>D:\\dev\\project1</filename>: <screen>\n"
 "http://sounds.red-bean.com/repos  sounds\n"
-"http://graphics.red-bean.com/repos/fast%20graphics  quick_graphs\n"
+"http://graphics.red-bean.com/repos/fast%20graphics  \"quick graphs\"\n"
 "-r21 http://svn.red-bean.com/repos/skin-maker  skins/toolkit\n"
 "</screen> Now click <guibutton>Set</guibutton> and commit your changes. When you (or any other user) update your working copy, Subversion will create a sub-folder <filename>D:\\dev\\project1\\sounds</filename> and checkout the sounds project, another sub-folder <filename>D:\\dev\\project1\\quick_graphs</filename> containing the graphics project, and finally a nested sub-folder <filename>D:\\dev\\project1\\skins\\toolkit</filename> containing revision 21 of the skin-maker project."
 msgstr ""
@@ -5998,6 +5984,14 @@ msgstr ""
 "quick_graphs  http://graphics.red-bean.com/repos/fast%20graphics\n"
 "skins/toolkit -r21 http://svn.red-bean.com/repos/skin-maker\n"
 "</screen> 次いで <guibutton>設定</guibutton> をクリックしコミットしてください。作業コピーを更新すると、Subversion は <filename>D:\\dev\\project1\\sounds</filename> サブフォルダを作成し、sounds プロジェクトをチェックアウトします。また、<filename>D:\\dev\\project1\\quick graphs</filename> サブフォルダには graphics プロジェクトを含み、ネストした <filename>D:\\dev\\project1\\skins\\toolkit</filename> サブフォルダには、skin-maker プロジェクトのリビジョン 21 が入っています。"
+
+#. (para)
+msgid "URLs must be properly escaped or they will not work, e.g. you must replace each space with <literal>%20</literal> as shown in the second example above."
+msgstr "URL は適切にエスケープされねばならず、そうでなければ動作しません。例えば、前述の 2 番目の例にあるように、各空白を <literal>%20</literal> に置換しなければなりません。"
+
+#. (para)
+msgid "If you want the local path to include spaces or other special characters, you can enclose it in double quotes, or you can use the <literal>\\</literal> (backslash) character as a Unix shell style escape character preceding any special character. Of course this also means that you must use <literal>/</literal> (forward slash) as a path delimiter. Note that this behaviour is new in Subversion 1.6 and will not work with older clients."
+msgstr ""
 
 #. (title)
 msgid "Use explicit revision numbers"
@@ -6013,7 +6007,7 @@ msgstr "古い svn:external の定義"
 
 #. (para)
 msgid "The format shown here was introduced in Subversion 1.5. You may also see the older format which has the same information in a different order. The new format is preferred as it supports several useful features described below, but it will not work on older clients. The differences are shown in the <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.advanced.externals.html\"><citetitle>Subversion Book</citetitle></ulink>."
-msgstr ""
+msgstr "この形式は Subversion 1.5 で導入されました。古い形式で、同じ情報を異なる順番で見ることもできます。新しい形式は、以下で説明する便利な機能を提供するため好まれていますが、古いクライアントでは動作しないでしょう。差異は <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.advanced.externals.html\"><citetitle>Subversion Book</citetitle></ulink> でご覧になれます。"
 
 #. (para)
 #. (para)
@@ -6105,7 +6099,7 @@ msgstr ""
 
 #. (para)
 msgid "You can also specify a peg revision after the URL if required, e.g. <systemitem class=\"url\">http://sounds.red-bean.com/repos@19</systemitem>."
-msgstr ""
+msgstr "必要であれば、URL の後にペグリビジョンも指定できます。例えば <systemitem class=\"url\">http://sounds.red-bean.com/repos@19</systemitem> といった形です。"
 
 #. (para)
 msgid "If you need more information how TortoiseSVN handles Properties read <xref linkend=\"tsvn-dug-propertypage\"/>."
@@ -6121,10 +6115,10 @@ msgstr "外部ファイル"
 
 #. (para)
 msgid "As of Subversion 1.6 you can add single file externals to your working copy using the same syntax as for folders. However, there are some restrictions."
-msgstr ""
+msgstr "Subversion 1.6 では、フォルダと同じ文法を用いて、単一ファイルの外部項目を作業コピーに追加できます。しかし、いくつか制限事項があります。"
 
 #. (para)
-msgid "The path to the file external must be in a working copy that is already checked out. While directory externals can place the external directory at any depth and it will create any intermediate directories, file externals must be placed into a working copy that is already checked out."
+msgid "The path to the file external must place the file in an existing versioned folder. In general it makes most sense to place the file directly in the folder that has <literal>svn:externals</literal> set, but it can be in a versioned sub-folder if necessary. By contrast, directory externals will automatically create any intermediate unversioned folders as required."
 msgstr ""
 
 #. (para)
@@ -6137,7 +6131,7 @@ msgstr ""
 
 #. (title)
 msgid "File externals support incomplete in Subversion 1.6"
-msgstr ""
+msgstr "Subversion 1.6 でのファイル外部項目サポートは不完全"
 
 #. (para)
 msgid "In subversion 1.6 it is not possible to remove a file external from your working copy once you have added it, even if you delete the <literal>svn:externals</literal> property altogether. You have to checkout a fresh working copy to remove the file."
@@ -6985,11 +6979,11 @@ msgstr "上部ペインでリビジョンをひとつ選択し、下部ペイン
 
 #. (term)
 msgid "Compare and Blame with Working BASE"
-msgstr "作業ベースとの比較と注釈"
+msgstr "作業 BASE との比較と注釈"
 
 #. (para)
 msgid "Show the log for a single file, and in the top pane, select a single revision, then select <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Compare and Blame with Working BASE</guimenuitem></menuchoice>. This will fetch the blame data for the selected revision, and for the file in the working BASE, then use the diff viewer to compare the two blame files."
-msgstr "画面上部のリビジョンをひとつ選択し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>作業ベースとの比較・注釈履歴を行う</guimenuitem></menuchoice> を選択すると、そのファイルのログを表示します。選択したリビジョンと作業ベースのファイルの注釈データを取得し、差分ビューアで注釈を比較します。"
+msgstr "画面上部のリビジョンをひとつ選択し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>作業ベースとの比較・注釈履歴を行う</guimenuitem></menuchoice> を選択すると、そのファイルのログを表示します。選択したリビジョンと作業中の BASE にあるファイルの注釈データを取得し、差分ビューアで注釈を比較します。"
 
 #. (para)
 msgid "The revision log dialog includes several options which allow you to do this. <placeholder-1/>"
@@ -7161,7 +7155,6 @@ msgid "In order to generate the graph, TortoiseSVN must fetch all log messages f
 msgstr "TortoiseSVN がグラフを生成するには、リポジトリのルートからログメッセージをすべて取得しなければなりません。言うまでもなく、数千リビジョンのリポジトリがある場合 (サーバの速度やネットワークの帯域などににもよりますが) 数分かかるでしょう。現在 500,000 リビジョンを越えている <emphasis>Apache</emphasis> プロジェクトのようなところで試せば、しばらく待っていなければなりません。"
 
 #. (para)
-#, fuzzy
 msgid "The good news is that if you are using log caching, you only have to suffer this delay once. After that, log data is held locally. Log caching is enabled in TortoiseSVN's settings."
 msgstr "朗報としては、ログキャッシュを使用している場合は、一度この遅さを我慢すればいいということです。これ以後は、ローカルにログデータを保持しています。ログキャッシュは TortoiseSVN 設定で有効にできます。"
 
@@ -8136,9 +8129,8 @@ msgid "Max. items to keep in the log message history"
 msgstr "ログメッセージの履歴で表示する最大の項目数"
 
 #. (para)
-#, fuzzy
 msgid "When you type in a log message in the commit dialog, TortoiseSVN stores it for possible re-use later. By default it will keep the last 25 log messages for each repository, but you can customize that number here. If you have many different repositories, you may wish to reduce this to avoid filling your registry."
-msgstr "TortoiseSVN は、リポジトリごとに最新のログメッセージを 25 個記憶しています。ここでその数をカスタマイズできます。たくさんの異なるリポジトリがあるなら、レジストリがいっぱいにならないように、少なくしておくといいでしょう。"
+msgstr "コミットダイアログでログメッセージを入力すると、TortoiseSVN は後で再利用できるようにメッセージを記憶します。デフォルトでは、リポジトリごとに最新のログメッセージを 25 個記憶していますが、ここでその数をカスタマイズできます。たくさんの異なるリポジトリがあるなら、レジストリがいっぱいにならないように、少なくしておくといいでしょう。"
 
 #. (para)
 msgid "Note that this setting applies only to messages that you type in on this computer. It has nothing to do with the log cache."
@@ -8381,7 +8373,7 @@ msgid "Tag Nodes"
 msgstr "タグノード"
 
 #. (para)
-msgid "Nodes classified as tags may be blended with this color. If you use tag folding to save space, tags are marked on the copy source using a block in this color."
+msgid "Nodes classified as tags may be blended with this color."
 msgstr ""
 
 #. (term)
@@ -8971,9 +8963,8 @@ msgid "Cached Repositories"
 msgstr "キャッシュされたリポジトリ"
 
 #. (para)
-#, fuzzy
 msgid "On this page you can see a list of the repositories that are cached locally, and the space used for the cache. If you select one of the repositories you can then use the buttons underneath."
-msgstr "設定の下部では、ローカルにキャッシュしたリポジトリの一覧を、キャッシュに使用した領域とともに参照できます。リポジトリを選択すると、その下のボタンを使用できます。"
+msgstr "このページでは、ローカルにキャッシュしたリポジトリの一覧を、キャッシュに使用した領域とともに参照できます。リポジトリを選択すると、その下のボタンを使用できます。"
 
 #. (para)
 msgid "Click on the <guibutton>Update</guibutton> to completely refresh the cache and fill in any holes. For a large repository this could be very time consuming, but useful if you are about to go offline and want the best available cache."
@@ -9274,9 +9265,8 @@ msgid "This property specifies the COM UUID of the IBugtraqProvider, for example
 msgstr ""
 
 #. (para)
-#, fuzzy
 msgid "This property specifies the parameters passed to the IBugtraqProvider."
-msgstr "この属性は、IBugTraqProvider に渡す引数を指定します。"
+msgstr "この属性は、IBugtraqProvider に渡すパラメータを指定します。"
 
 #. (para)
 #, fuzzy
@@ -9328,9 +9318,8 @@ msgid "registry"
 msgstr "レジストリ"
 
 #. (para)
-#, fuzzy
 msgid "A few infrequently used settings are available only by editing the registry directly. It goes without saying that you should only edit registry values if you know what you are doing."
-msgstr "まれに使われる設定は、レジストリを直接編集するしか方法はありません。"
+msgstr "まれに使われる設定は、レジストリを直接編集するしか方法はありません。何をしているのか明確にわかっている場合に限り、レジストリの値を編集してください。"
 
 #. (para)
 msgid "You can specify a different location for the Subversion configuration file using registry location <literal>HKCU\\Software\\TortoiseSVN\\ConfigDir</literal>. This will affect all TortoiseSVN operations."
@@ -9349,9 +9338,8 @@ msgid "Debug"
 msgstr "デバッグ"
 
 #. (para)
-#, fuzzy
 msgid "To show the command line parameters passed from the shell extension to TortoiseProc.exe create a <literal>DWORD</literal> key with a value of 1 at <literal>HKCU\\Software\\TortoiseSVN\\Debug</literal>."
-msgstr "コミットメッセージエディタの自動補完リストには、コミットするファイル名が表示されます。この名前から拡張子を除くには、<literal>HKCU\\Software\\TortoiseSVN\\AutocompleteRemovesExtensions</literal> に<literal>DWORD</literal> のキーを作成し、値を 1 としてください。"
+msgstr "シェル拡張から TortoiseProc.exe に渡されたコマンドラインパラメータを表示するには、<literal>HKCU\\Software\\TortoiseSVN\\Debug</literal> に <literal>DWORD</literal> のキーを作成し、値を 1 としてください。"
 
 #. (term)
 msgid "Context Menu Icons"
@@ -9362,14 +9350,12 @@ msgid "This can be useful if you use something other than the windows explorer o
 msgstr ""
 
 #. (term)
-#, fuzzy
 msgid "Block Overlay Status"
-msgstr "このモジュールの状態"
+msgstr "状態オーバーレイの抑止"
 
 #. (para)
-#, fuzzy
 msgid "If you don't want the explorer to update the status overlays while another TortoiseSVN command is running (e.g. Update, Commit, ...) then create a <literal>DWORD</literal> key with a value of 1 at <literal>HKCU\\Software\\TortoiseSVN\\BlockStatus</literal>."
-msgstr "コミットメッセージエディタの自動補完リストには、コミットするファイル名が表示されます。この名前から拡張子を除くには、<literal>HKCU\\Software\\TortoiseSVN\\AutocompleteRemovesExtensions</literal> に<literal>DWORD</literal> のキーを作成し、値を 1 としてください。"
+msgstr "他の TortoiseSVN コマンド (更新、コミットなど) を実行している間、エクスプローラの状態オーバーレイアイコンを更新したくない場合、<literal>HKCU\\Software\\TortoiseSVN\\BlockStatus</literal> に <literal>DWORD</literal> のキーを作成し、値を 1 としてください。"
 
 #. (term)
 #, fuzzy
@@ -9386,7 +9372,7 @@ msgstr "自動補完リストのファイル名からの拡張子省略"
 
 #. (para)
 msgid "The auto-completion list shown in the commit message editor displays the names of files listed for commit. To also include these names with extensions removed, create a <literal>DWORD</literal> key with a value of 1 at <literal>HKCU\\Software\\TortoiseSVN\\AutocompleteRemovesExtensions</literal>."
-msgstr "コミットメッセージエディタの自動補完リストには、コミットするファイル名が表示されます。この名前から拡張子を除くには、<literal>HKCU\\Software\\TortoiseSVN\\AutocompleteRemovesExtensions</literal> に<literal>DWORD</literal> のキーを作成し、値を 1 としてください。"
+msgstr "コミットメッセージエディタの自動補完リストには、コミットするファイル名が表示されます。この名前から拡張子を除くには、<literal>HKCU\\Software\\TortoiseSVN\\AutocompleteRemovesExtensions</literal> に <literal>DWORD</literal> のキーを作成し、値を 1 としてください。"
 
 #. (term)
 msgid "Explorer columns everywhere"
@@ -9418,8 +9404,8 @@ msgstr "ログダイアログでフォルダの現在のバージョンも強調
 
 #. (para)
 #, fuzzy
-msgid "The log dialog highlights the current working copy revision when the log is shown for a file. To do the same thing for a folder requires a working copy crawl, which can be a slow operation for large working copies. If you want to enable this feature you must create a <literal>DWORD</literal> registry key at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. A value of 0 disables the feature (no highlighting for folders), a value of 1 (default) will fetch the status recursively (find the highest revision in the working copy tree), and a value of 2 will check the revision of the selected folder itself, but will not check any child items."
-msgstr "ログダイアログでは、ファイルについてsh用事する際、現在の作業コピーリビジョンを強調しています。フォルダに対して同じことをするには、作業コピーに対してクロールしなければなりませんが、作業コピーが大きいと、この操作に時間がかかります。この機能を有効にするには、<literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> に <literal>DWORD</literal> のレジストリキーを、値 1 で作成しなければなりません。"
+msgid "The log dialog highlights the current working copy revision when the log is shown for a file. To do the same thing for a folder requires a working copy crawl, which is the default action, but it can be a slow operation for large working copies. If you want to change the operation of this feature you must create a <literal>DWORD</literal> registry key at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. A value of 0 disables the feature (no highlighting for folders), a value of 1 (default) will fetch the status recursively (find the highest revision in the working copy tree), and a value of 2 will check the revision of the selected folder itself, but will not check any child items."
+msgstr "ログダイアログでは、ファイルについて表示する際、現在の作業コピーのリビジョンを強調しています。フォルダに対して同じことをするには、作業コピーに対してクロールしなければなりませんが、作業コピーが大きいと、この操作に時間がかかります。この機能を有効にするには、<literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> に <literal>DWORD</literal> のレジストリキーを、値 1 で作成しなければなりません。0 に設定するとこの機能を無効にします (フォルダの強調なし)。1 (デフォルト) に設定すると、状態を再帰的に取得します (作業コピーツリーの最新リビジョンを検索)。2 に設定すると、選択したフォルダ自体のリビジョンをチェックしますが、子項目へはチェックしません。"
 
 #. (term)
 msgid "Make checkout fail if an item of the same name exists"
@@ -10373,9 +10359,8 @@ msgid "The only way to remove data from the repository is to use the Subversion 
 msgstr "リポジトリからデータを削除する唯一の方法は、Subversion コマンドラインツールの <literal>svnadmin</literal> を使うことです。この実行方法の説明は、<ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.reposadmin.maint.html\"><citetitle>Repository Maintenance</citetitle></ulink> にあります。(訳注: 日本語訳は <ulink url=\"http://subversion.bluegate.org/doc/ch05s03.html#svn.reposadmin.maint.tk.svndumpfilter\"><citetitle>Subversion によるバージョン管理</citetitle></ulink> にあります)"
 
 #. (title)
-#, fuzzy
 msgid "Compare two revisions of a file or folder"
-msgstr "ファイルの 2 つのリビジョンの比較"
+msgstr "ファイルやフォルダに対して 2 リビジョン間の比較"
 
 #. (primary)
 msgid "compare files"
@@ -10390,19 +10375,16 @@ msgid "changes"
 msgstr "変更点"
 
 #. (para)
-#, fuzzy
 msgid "If you want to compare two revisions in an item's history, for example revisions 100 and 200 of the same file, just use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Show Log</guimenuitem></menuchoice> to list the revision history for that file. Pick the two revisions you want to compare then use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Compare Revisions</guimenuitem></menuchoice>."
-msgstr "ファイルの履歴にある 2 つのリビジョン (例えば同じファイルのリビジョン 100 と 200) を比較したい場合、単純に <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>ログを表示</guimenuitem></menuchoice> を使用してそのファイルのリビジョンの履歴を表示してください。比較したい 2 つのリビジョンを取り出し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>リビジョンを比較</guimenuitem></menuchoice> を使用してください。"
+msgstr "項目の履歴にある 2 つのリビジョン (例えば同じファイルのリビジョン 100 と 200) を比較したい場合、単純に <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>ログを表示</guimenuitem></menuchoice> を使用して、そのファイルのリビジョンの履歴を表示します。そこで、比較したい 2 つのリビジョンを取り出し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>リビジョンを比較</guimenuitem></menuchoice> を使用してください。"
 
 #. (para)
-#, fuzzy
 msgid "If you want to compare the same item in two different trees, for example the trunk and a branch, you can use the repository browser to open up both trees, select the file in both places, then use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Compare Revisions</guimenuitem></menuchoice>."
-msgstr "2 つの別ツリーにある同じファイル (例えばトランクとブランチ) を比較したい場合、両方のツリーを開くのにリポジトリブラウザを使用できます。それから同じ場所のファイルを選択し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>リビジョンの比較</guimenuitem></menuchoice> を使用してください。"
+msgstr "2 つの別ツリーにある同じ項目 (例えばトランクとブランチ) を比較したい場合、両方のツリーを開くのにリポジトリブラウザを使用できます。それから同じ場所のファイルを選択し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>リビジョンの比較</guimenuitem></menuchoice> を使用してください。"
 
 #. (para)
-#, fuzzy
 msgid "If you want to compare two trees to see what has changed, for example the trunk and a tagged release, you can use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revision Graph</guimenuitem></menuchoice> Select the two nodes to compare, then use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Compare HEAD Revisions</guimenuitem></menuchoice>. This will show a list of changed files, and you can then select individual files to view the changes in detail. You can also export a tree structure containing all the changed files, or simply a list of all changed files. Read <xref linkend=\"tsvn-dug-compare-revs\"/> for more information. Alternatively use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Unified Diff of HEAD Revisions</guimenuitem></menuchoice> to see a summary of all differences, with minimal context."
-msgstr "2つのツリーでどこが変更されか (例えばトランクとタグ付けされたリリース) を比較したい場合、<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>リビジョングラフ</guimenuitem></menuchoice> を使用できます。比較する 2 つのノードを選択し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>最新のリビジョンを比較</guimenuitem></menuchoice> を使用してください。これで変更されたファイルの一覧が表示され、変更の詳細を見るよう特定のファイルを選択できます。その他には、変更の全サマリを最小コンテキストで見るのに、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>最新のリビジョンに対する Unified 形式での差分</guimenuitem></menuchoice> を使用してください。"
+msgstr "2つのツリーでどこが変更されか (例えばトランクとタグ付けされたリリース) を比較したい場合、<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>リビジョングラフ</guimenuitem></menuchoice> を使用できます。比較する 2 つのノードを選択し、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>最新のリビジョンを比較</guimenuitem></menuchoice> を使用してください。これで変更されたファイルの一覧が表示され、変更の詳細を見るよう特定のファイルを選択できます。また、変更したファイルすべてを含むツリー構造をエクスポートしたり、単純に変更したファイルをすべて表示したりできます。詳細は <xref linkend=\"tsvn-dug-compare-revs\"/> をご覧ください。その他には、変更の全サマリを最小コンテキストで見るのに、<menuchoice><guimenu>コンテキストメニュー</guimenu><guimenuitem>最新のリビジョンに対する Unified 形式での差分</guimenuitem></menuchoice> を使用してください。"
 
 #. (title)
 msgid "Include a common sub-project"
@@ -10425,9 +10407,8 @@ msgid "Use svn:externals"
 msgstr "svn:externals の利用"
 
 #. (para)
-#, fuzzy
 msgid "Set the <literal>svn:externals</literal> property for a folder in your project. This property consists of one or more lines; each line has the name of a sub-folder which you want to use as the checkout folder for common code, and the repository URL that you want to be checked out there. For full details refer to <xref linkend=\"tsvn-dug-externals\"/>."
-msgstr "プロジェクトにあるフォルダに <literal>svn:externals</literal> 属性をセットしてください。この属性は複数行からなります。各行には、共通コードをチェックアウトするフォルダとして使用するサブフォルダ名と、そこにチェックアウトするリポジトリの URL を記述します。もっと詳しいことは <xref linkend=\"tsvn-dug-import-4\"/> をご覧ください。"
+msgstr "プロジェクトにあるフォルダに <literal>svn:externals</literal> 属性をセットしてください。この属性は複数行からなります。各行には、共通コードをチェックアウトするフォルダとして使用するサブフォルダ名と、そこにチェックアウトするリポジトリの URL を記述します。もっと詳しいことは <xref linkend=\"tsvn-dug-externals\"/> をご覧ください。"
 
 #. (para)
 msgid "Commit the new folder. Now when you update, Subversion will pull a copy of that project from its repository into your working copy. The sub-folders will be created automatically if required. Each time you update your main working copy, you will also receive the latest version of all external projects."
@@ -11768,9 +11749,8 @@ msgstr ""
 "svn merge [--dry-run] --force From_URL@revN To_URL@revM PATH\n"
 
 #. (para)
-#, fuzzy
 msgid "The <guibutton>Test Merge</guibutton> performs the same merge with the <literal>--dry-run</literal> switch."
-msgstr "<guibutton>動作チェック</guibutton> は、<literal>--dry-run</literal> スイッチ付きの merge と同じ動作をします。"
+msgstr "<guibutton>マージのテスト</guibutton> は、<literal>--dry-run</literal> スイッチ付きの merge と同じ動作をします。"
 
 #. (screen)
 #, no-wrap
@@ -12851,6 +12831,21 @@ msgstr "倉澤 望 (鍋太郎) <nabetaro @ caldron.jp>"
 msgid "translator-translation"
 msgstr "翻訳"
 
+#~ msgid ""
+#~ "By default this only works for files. This is because the update revision "
+#~ "for a folder may not correspond to the update revision of its content, "
+#~ "and the only way to find the effective update revision for the folder is "
+#~ "to crawl the working copy. This can be a slow operation for large working "
+#~ "copies so if you want to enable this feature you must create a "
+#~ "<literal>DWORD</literal> registry key with value 1 at <literal>HKCU"
+#~ "\\Software\\TortoiseSVN\\RecursiveLogRev</literal>."
+#~ msgstr ""
+#~ "デフォルトでは、これはファイルにのみ動作します。これはフォルダの更新リビ"
+#~ "ジョンと、その内容の更新リビジョンが一致しない可能性があり、意味のあるフォ"
+#~ "ルダの更新リビジョンを探すには、作業コピーをクロールするしかないからです。"
+#~ "大きな作業コピーでは遅い処理になりますが、それでもこの機能を有効にするに"
+#~ "は、<literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> に "
+#~ "<literal>DWORD</literal> のレジストリキーを作成し、値を 1 にしてください。"
 #~ msgid ""
 #~ "Even most Subversion users will never have to set up a server themselves. "
 #~ "The next chapter deals with how to set up such a server, and is useful "
