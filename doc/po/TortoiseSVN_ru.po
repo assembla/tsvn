@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2009-03-20 16:18 +0000\n"
-"PO-Revision-Date: 2009-05-15 08:46+0300\n"
+"POT-Creation-Date: 2009-06-07 23:32 +0000\n"
+"PO-Revision-Date: 2009-06-19 18:36+0300\n"
 "Last-Translator: Stanislav Petrakov <stannic@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -4723,8 +4723,9 @@ msgid "Because the log dialog shows you the log from HEAD, not from the current 
 msgstr "Поскольку окно сообщений журнала показывает журнал для ведущей ревизии, а не для текущей ревизии рабочей копии, часто случается, что показываются сообщения журнала для содержимого, которое ещё не было обновлено в вашей рабочей копии. Чтобы сделать это более наглядным, сообщение фиксации, соответствующее ревизии вашей рабочей копии, отображается полужирным шрифтом."
 
 #. (para)
-msgid "By default this only works for files. This is because the update revision for a folder may not correspond to the update revision of its content, and the only way to find the effective update revision for the folder is to crawl the working copy. This can be a slow operation for large working copies so if you want to enable this feature you must create a <literal>DWORD</literal> registry key with value 1 at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>."
-msgstr "По умолчанию, это распространяется только на файлы: ревизия обновления папки может не соответствовать ревизии обновления её содержимого, и единственный способ найти фактическую ревизию обновления для папки заключается в обходе рабочей копии. Это может быть медленной операцией для больших рабочих копий, поэтому, если вы желаете включить эту возможность, вы должны создать ключ реестра <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> типа <literal>DWORD</literal> со значением 1."
+#, fuzzy
+msgid "When you show the log for a folder the revision highlighted is the highest revision found anywhere within that folder, which requires a crawl of the working copy. This can be a slow operation for large working copies, and the log messages are not displayed until the crawl completes. If you want to disable or limit this feature you need to set a registry key <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> as described in <xref linkend=\"tsvn-dug-settings-registry\"/>."
+msgstr "Когда вы запускаете просмотр журнала для папки, происходит выделение наибольшей ревизии, обнаруженной где-либо в этой папке, и это требует обхода рабочей копии. Обход производится в отдельном потоке, чтобы не задерживать отображение журнала, но в результате выделение для папок может появлятся не сразу."
 
 #. (title)
 msgid "Merge Tracking Features"
@@ -6106,17 +6107,25 @@ msgstr "Внешние папки"
 # !!! оригинал не совсем соответствует действительности
 #. (para)
 msgid ""
-"Let's say you check out a working copy of <filename>/project1</filename> to <filename>D:\\dev\\project1</filename>. Select the folder <filename>D:\\dev\\project1</filename>, <action>right click</action> and choose <menuchoice><guimenu>Windows Menu</guimenu><guimenuitem>Properties</guimenuitem></menuchoice> from the context menu. The Properties Dialog comes up. Then go to the Subversion tab. There, you can set properties. Click <guibutton>Add...</guibutton>. Select the <literal>svn:externals</literal> property from the combobox and write in the edit box the repository URL in the format <literal>url folder</literal> or if you want to specify a particular revision, <literal>-rREV url folder</literal> You can add multiple external projects, 1 per line. Note that URLs must be properly escaped or they will not work. For example you must replace each space with <literal>%20</literal>. Note that it is not possible to use folder names with spaces in them. Suppose that you have set these properties on <filename>D:\\dev\\project1</filename>: <screen>\n"
+"Let's say you check out a working copy of <filename>/project1</filename> to <filename>D:\\dev\\project1</filename>. Select the folder <filename>D:\\dev\\project1</filename>, <action>right click</action> and choose <menuchoice><guimenu>Windows Menu</guimenu><guimenuitem>Properties</guimenuitem></menuchoice> from the context menu. The Properties Dialog comes up. Then go to the Subversion tab. There, you can set properties. Click <guibutton>Add...</guibutton>. Select the <literal>svn:externals</literal> property from the combobox and write in the edit box the repository URL in the format <literal>url folder</literal> or if you want to specify a particular revision, <literal>-rREV url folder</literal> You can add multiple external projects, 1 per line. Suppose that you have set these properties on <filename>D:\\dev\\project1</filename>: <screen>\n"
 "http://sounds.red-bean.com/repos  sounds\n"
-"http://graphics.red-bean.com/repos/fast%20graphics  quick_graphs\n"
+"http://graphics.red-bean.com/repos/fast%20graphics  \"quick graphs\"\n"
 "-r21 http://svn.red-bean.com/repos/skin-maker  skins/toolkit\n"
 "</screen> Now click <guibutton>Set</guibutton> and commit your changes. When you (or any other user) update your working copy, Subversion will create a sub-folder <filename>D:\\dev\\project1\\sounds</filename> and checkout the sounds project, another sub-folder <filename>D:\\dev\\project1\\quick_graphs</filename> containing the graphics project, and finally a nested sub-folder <filename>D:\\dev\\project1\\skins\\toolkit</filename> containing revision 21 of the skin-maker project."
 msgstr ""
-"Предположим, вы извлекаете рабочую копию <filename>/project1</filename> в <filename>D:\\dev\\project1</filename>. Выберите папку <filename>D:\\dev\\project1</filename>, сделайте <action>правый щелчок</action> и выберите <menuchoice><guimenu>Меню Windows</guimenu><guimenuitem>Свойства</guimenuitem></menuchoice> в контекстном меню. Появится диалог 'Свойства'. Перейдите на вкладку Subversion. Здесь есть кнопка <guibutton>Свойства...</guibutton>, вызывающая диалог работы со свойствами. После появления диалога нажмите кнопку <guibutton>Добавить...</guibutton> и выберите свойство <literal>svn:externals</literal> из выпадающего списка, после чего введите URL-адрес хранилища в формате <literal>url папка</literal> или, если вы желаете указать конкретную ревизию, <literal>-rREV url папка</literal>. Вы можете добавить несколько внешних проектов, по одному в строке. Обратите внимание, что некоторые символы в URL должны быть правильно заэкранированы, иначе они не будут правильно работать. Например, вы должны заменить каждый пробел на <literal>%20</literal>. Обратите внимание: невозможно использование имён папок, содержащих пробелы. Допустим, вы установили эти свойства для <filename>D:\\dev\\project1</filename>: <screen>\n"
+"Предположим, вы извлекаете рабочую копию <filename>/project1</filename> в <filename>D:\\dev\\project1</filename>. Выберите папку <filename>D:\\dev\\project1</filename>, сделайте <action>правый щелчок</action> и выберите <menuchoice><guimenu>Меню Windows</guimenu><guimenuitem>Свойства</guimenuitem></menuchoice> в контекстном меню. Появится диалог 'Свойства'. Перейдите на вкладку Subversion. Здесь есть кнопка <guibutton>Свойства...</guibutton>, вызывающая диалог работы со свойствами. После появления диалога нажмите кнопку <guibutton>Добавить...</guibutton> и выберите свойство <literal>svn:externals</literal> из выпадающего списка, после чего введите URL-адрес хранилища в формате <literal>url папка</literal> или, если вы желаете указать конкретную ревизию, <literal>-rREV url папка</literal>. Вы можете добавить несколько внешних проектов, по одному в строке. Допустим, вы установили эти свойства для <filename>D:\\dev\\project1</filename>: <screen>\n"
 "http://sounds.red-bean.com/repos  sounds\n"
 "http://graphics.red-bean.com/repos/fast%20graphics  quick_graphs\n"
 "-r21 http://svn.red-bean.com/repos/skin-maker  skins/toolkit\n"
-"</screen> Теперь нажмите на <guibutton>ОК</guibutton> и зафиксируйте ваши изменения. Когда вы (или кто-либо другой) обновите вашу рабочую копию, Subversion создаст подпапку <filename>D:\\dev\\project1\\sounds</filename> и извлечёт проект sounds, другая подпапка <filename>D:\\dev\\project1\\quick graphs</filename> будет содержать проект графики, и, наконец, вложенная подпапка <filename>D:\\dev\\project1\\skins\\toolkit</filename> будет содержать ревизию 21 проекта skin-maker."
+"</screen> Нажмите на <guibutton>ОК</guibutton> и зафиксируйте ваши изменения. Когда вы (или кто-либо другой) обновите вашу рабочую копию, Subversion создаст подпапку <filename>D:\\dev\\project1\\sounds</filename> и извлечёт проект sounds, другая подпапка <filename>D:\\dev\\project1\\quick graphs</filename> будет содержать проект графики, и, наконец, вложенная подпапка <filename>D:\\dev\\project1\\skins\\toolkit</filename> будет содержать ревизию 21 проекта skin-maker."
+
+#. (para)
+msgid "URLs must be properly escaped or they will not work, e.g. you must replace each space with <literal>%20</literal> as shown in the second example above."
+msgstr "Некоторые символы в URL должны быть правильно заэкранированы, иначе это работать не будет. Например, вы должны заменить каждый пробел на <literal>%20</literal>, как показано во втором примере выше."
+
+#. (para)
+msgid "If you want the local path to include spaces or other special characters, you can enclose it in double quotes, or you can use the <literal>\\</literal> (backslash) character as a Unix shell style escape character preceding any special character. Of course this also means that you must use <literal>/</literal> (forward slash) as a path delimiter. Note that this behaviour is new in Subversion 1.6 and will not work with older clients."
+msgstr "Если вы желаете, чтобы локальные пути включали пробелы или другие специальные символы, вы можете заключить их в двойные кавычки, или использовать перед специальным символом символ <literal>\\</literal> (обратную косую черту)  для экранирования в стиле оболочки Unix. Конечно же, это также означает, что вы должны использовать <literal>/</literal> (прямую косую черту) в качестве разделителя пути. Обратите внимание: такое поведение появилось в Subversion 1.6 и это не будет работать с более старыми клиентами."
 
 #. (title)
 msgid "Use explicit revision numbers"
@@ -6243,8 +6252,8 @@ msgid "As of Subversion 1.6 you can add single file externals to your working co
 msgstr "Начиная с Subversion 1.6, вы можете добавлять отдельные внешние файловые включения в вашу рабочую копию, используя тот же синтаксис, что и для папок. Однако, есть некоторые ограничения."
 
 #. (para)
-msgid "The path to the file external must be in a working copy that is already checked out. While directory externals can place the external directory at any depth and it will create any intermediate directories, file externals must be placed into a working copy that is already checked out."
-msgstr "Внешнее файловое включение должно располагаться в уже извлечённой рабочей копии. В то время, как внешние включения папок могут размещать внешнюю папку на любой глубине вложенности и при этом будут созданы все промежуточные папки, внешие файловые включения должны помещаться в уже извлечённую рабочую копию."
+msgid "The path to the file external must place the file in an existing versioned folder. In general it makes most sense to place the file directly in the folder that has <literal>svn:externals</literal> set, but it can be in a versioned sub-folder if necessary. By contrast, directory externals will automatically create any intermediate unversioned folders as required."
+msgstr "Внешнее файловое включение должно помещать файл в уже извлечённую рабочую копию. Вообще, имеет смысл размещать файл непосредственно в папке, у которой задано <literal>svn:externals</literal>, но это при необходимости может быть и версированная подпапка. Для сравнения: внешние включения папок, напротив, автоматически создают все необходимые промежуточные неверсированные папки."
 
 #. (para)
 msgid "The URL for a file external must be in the same repository as the URL that the file external will be inserted into; inter-repository file externals are not supported."
@@ -8400,161 +8409,148 @@ msgid "The original item has been deleted and a new item with the same name repl
 msgstr "Элемент, который был замещён новым элементом с таким же именем после удаления исходного."
 
 #. (title)
-#, fuzzy
 msgid "Revision Graph Settings"
-msgstr "Узлы графа ревизий"
+msgstr "Настройки графа ревизий"
 
 #. (title)
-#, fuzzy
 msgid "The Settings Dialog, Revision Graph Page"
-msgstr "Страница 'Общее' в диалоге настроек"
+msgstr "Страница 'Граф ревизий' в диалоге настроек"
 
 #. (term)
 msgid "Classification Patterns"
-msgstr ""
+msgstr "Шаблоны классификации"
 
 #. (para)
 msgid "The revision graph attempts to show a clearer picture of your repository structure by distinguishing between trunk, branches and tags. As there is no such classification built into Subversion, this information is extracted from the path names. The default settings assume that you use the conventional English names as suggested in the Subversion documentation, but of course your usage may vary."
-msgstr ""
+msgstr "Граф ревизий пытается показать более ясную картину структуры вашего хранилища, выделяя ствол, ответвления и метки. Поскольку такой встроенной классификации в Suversion нет, эта информация извлекается из путей. Настройки по умолчанию предполагают, что вы используете традиционные наименования на английском, предложенные в документации Subversion, но, конечно же, вы можете использовать и что-нибудь другое."
 
 #. (para)
 msgid "Specify the patterns used to recognise these paths in the three boxes provided. The patterns will be matched case-insensitively, but you must specify them in lower case. Wild cards <literal>*</literal> and <literal>?</literal> will work as usual, and you can use <literal>;</literal> to separate multiple patterns. Do not include any extra white space as it will be included in the matching specification."
-msgstr ""
+msgstr "Укажите шаблоны, используемые для выделения путей, в соответсвующих полях ввода. Шаблоны распознаются независимо от регистра, но вы должны ввести их в нижнем регистре. Подстановочные символы <literal>*</literal> и <literal>?</literal> работают как обычно, и вы можете использовать <literal>;</literal> для разделения нескольких шаблонов. Не вводите дополнительные пробельные символы, поскольку они также будут включены в шаблон при сопоставлении."
 
 #. (term)
-#, fuzzy
 msgid "Modify Colors"
-msgstr "Цвета"
+msgstr "Изменение цвета"
 
 #. (para)
 msgid "Colors are used in the revision graph to indicate the node type, i.e. whether a node is added, deleted, renamed. In order to help pick out node classifications, you can allow the revision graph to blend colors to give an indication of both node type and classification. If the box is checked, blending is used. If the box is unchecked, color is used to indicate node type only. Use the color selection dialog to allocate the specific colors used."
-msgstr ""
+msgstr "Цвета используются в графе ревизий для обозначения типа узла, т.е. был ли узел добавлен, удалён, переименован. Для того, чтобы помочь в классификации узлов, вы можете разрешить в графе ревизий смешивать цвета, что даст информацию сразу и о типе узла, и о его классификации. Смешивание используется, если флажок отмечен. Если флажок не отмечен, цвет используется только для обозначения только типа узла. Воспользуйтесь диалогом выбора цветов для того, чтобы задействовать определённые цвета."
 
 #. (title)
-#, fuzzy
 msgid "Revision Graph Colors"
-msgstr "Графы ревизий"
+msgstr "Цвета в графе ревизий"
 
 #. (title)
-#, fuzzy
 msgid "The Settings Dialog, Revision Graph Colors Page"
-msgstr "Страница 'Цвета' в диалоге настроек"
+msgstr "Страница 'Цвета' графа ревизий в диалоге настроек"
 
 #. (para)
 msgid "<placeholder-1/> This page allows you to configure the colors used. Note that the color specified here is the solid color. Most nodes are colored using a blend of the node type color, the background color and optionally the classification color."
-msgstr ""
+msgstr "<placeholder-1/> Эта страница позволяет настроить используемые цвета. Учтите, что здесь указывается читый цвет. Большинство узлов разцвечиваются смесью цвета типа узла, цвета фона и, при выборе, цветом классиикации."
 
 #. (term)
-#, fuzzy
 msgid "Deleted Node"
 msgstr "Удалённый узел"
 
 #. (para)
 msgid "Items which have been deleted and not copied anywhere else in the same revision."
-msgstr ""
+msgstr "Элементы, которые были удалены и не были скопированы куда-либо ещё в той же ревизии."
 
 #. (term)
-#, fuzzy
 msgid "Added Node"
 msgstr "Добавленный узел"
 
 #. (para)
 msgid "Items newly added, or copied (add with history)."
-msgstr ""
+msgstr "Вновь добавленные элементы, или скопированные (добавленные с историей)."
 
 #. (term)
-#, fuzzy
 msgid "Renamed Node"
 msgstr "Переименованный узел"
 
 #. (para)
 msgid "Items deleted from one location and added in another in the same revision."
-msgstr ""
+msgstr "Элементы, удалённые в одном месте и добавленные в другом в той же ревизии."
 
 #. (term)
-#, fuzzy
 msgid "Modified Node"
-msgstr "Изменён / скопирован"
+msgstr "Изменённый узел"
 
 #. (para)
 msgid "Simple modifications without any add or delete."
-msgstr ""
+msgstr "Простые изменения без добавлений или удалений."
 
 #. (term)
-#, fuzzy
 msgid "Unchanged Node"
-msgstr "Не изменялся и не устарел"
+msgstr "Неизменённый узел"
 
 #. (para)
 msgid "May be used to show the revision used as the source of a copy, even when no change (to the item being graphed) took place in that revision."
-msgstr ""
+msgstr "Может быть использован для отображения ревизии, использованной как источник копирования, даже если в этой ревизии изменений не было (у элемента, показываемом в графе)."
 
 #. (term)
-#, fuzzy
 msgid "HEAD node"
-msgstr "Добавленный узел"
+msgstr "Ведущий узел"
 
 #. (para)
-#, fuzzy
 msgid "Current HEAD revision in the repository."
-msgstr "Ведущая ревизия в хранилище (HEAD)"
+msgstr "Текущая ведущая ревизия в хранилище (HEAD)."
 
 #. (term)
 msgid "WC Node"
-msgstr ""
+msgstr "Узел рабочей копии"
 
 #. (para)
 msgid "If you opt to show an extra node for your modified working copy, attached to its last-commit revision on the graph, use this color."
-msgstr ""
+msgstr "Если вы задали отображение дополнительного узла для вашей изменённой рабочей копии, соединённого с последней зафиксированной ревизией в графе, то используется этот цвет."
 
 #. (term)
 msgid "WC Node Border"
-msgstr ""
+msgstr "Рамка узла рабочей копии"
 
 #. (para)
 msgid "If you opt to show whether the working copy is modified, use this color border on the WC node when modifications are found."
-msgstr ""
+msgstr "Если вы задали отображение того факта, что рабочая копия была изменена, этот цвет используется для рамки узла рабочей копии при наличии изменений."
 
 #. (term)
 msgid "Tag Nodes"
-msgstr ""
+msgstr "Узлы меток"
 
 #. (para)
-msgid "Nodes classified as tags may be blended with this color. If you use tag folding to save space, tags are marked on the copy source using a block in this color."
-msgstr ""
+msgid "Nodes classified as tags may be blended with this color."
+msgstr "К узлам, классифицированным как метки, может быть примешан этот цвет."
 
 #. (term)
 msgid "Trunk Nodes"
-msgstr ""
+msgstr "Узлы ствола"
 
 #. (para)
 msgid "Nodes classified as trunk may be blended with this color."
-msgstr ""
+msgstr "К узлам, классифицированным как ствол, может быть примешан этот цвет."
 
 #. (term)
 msgid "Folded Tag Markers"
-msgstr ""
+msgstr "Обозначение свёрнутых меток"
 
 #. (para)
 msgid "If you use tag folding to save space, tags are marked on the copy source using a block in this color."
-msgstr ""
+msgstr "Если вы используете сворачивание меток для экономии пространства, метки в источнике копирования обозначаются при помощи прямоугольника этого цвета."
 
 #. (term)
-#, fuzzy
 msgid "Selected Node Markers"
-msgstr "Удалённый узел"
+msgstr "Обозначение выбранного узла"
 
 #. (para)
 msgid "When you left click on a node to select it, the marker used to indicate selection is a block in this color."
-msgstr ""
+msgstr "При выделении узла щелчком левой кнопки, выбор обозначается прямоугольником этого цвета."
 
 #. (term)
 msgid "Stripes"
-msgstr ""
+msgstr "Полосы"
 
 #. (para)
 msgid "These colors are used when the graph is split into sub-trees and the background is colored in alternating stripes to help pick out the separate trees."
-msgstr ""
+msgstr "Эти цвета используются, когда граф разделён на под-деревья и фон раскрашен в чередующиеся полосы, способствующие разделению различных деревьев."
 
 #. (title)
 msgid "Icon Overlay Settings"
@@ -8747,12 +8743,14 @@ msgid "You can also specify which program TortoiseSVN should use to establish a 
 msgstr "Вы также можете указать, какую программу должен использовать TortoiseSVN для установки безопасного соединения с хранилищем по svn+ssh. Мы рекомендуем использовать TortoisePlink.exe. Это версия популярной программы Plink, идущая вместе с TortoiseSVN, только она скомпилирована как безоконное приложение, и благодаря чему окна DOS не будут выскакивать при каждой аутентификации."
 
 #. (para)
-#, fuzzy
 msgid ""
 "You must specify the full path to the executable. For TortoisePlink.exe this is the standard TortoiseSVN bin directory. Use the <guibutton>Browse</guibutton> button to help locate it. Note that if the path contains spaces, you must enclose it in quotes, e.g. <screen>\n"
 "\"C:\\Program Files\\TortoiseSVN\\bin\\TortoisePlink.exe\"\n"
 "</screen>"
-msgstr "Вы должны указать полный путь к выполняемому файлу. Для TortoisePlink.exe это стандартная папка <filename>bin</filename> TortoiseSVN. Кнопка <guibutton>Обзор...</guibutton> поможет задать его местоположение."
+msgstr ""
+"Вы должны указать полный путь к выполняемому файлу. Для TortoisePlink.exe это стандартная папка <filename>bin</filename> TortoiseSVN. Воспользуйтесь кнопкой <guibutton>Обзор...</guibutton>, чтобы его найти. Обратите внимание: если путь содержит пробелы, вы должны заключить его в кавычки, например,  <screen>\n"
+"\"C:\\Program Files\\TortoiseSVN\\bin\\TortoisePlink.exe\"\n"
+"</screen>"
 
 #. (para)
 msgid "One side-effect of not having a window is that there is nowhere for any error messages to go, so if authentication fails you will simply get a message saying something like <quote>Unable to write to standard output</quote>. For this reason we recommend that you first set up using standard Plink. When everything is working, you can use TortoisePlink with exactly the same parameters."
@@ -9561,7 +9559,7 @@ msgstr "Подсветка текущей ревизии для папок в д
 
 #. (para)
 #, fuzzy
-msgid "The log dialog highlights the current working copy revision when the log is shown for a file. To do the same thing for a folder requires a working copy crawl, which can be a slow operation for large working copies. If you want to enable this feature you must create a <literal>DWORD</literal> registry key at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. A value of 0 disables the feature (no highlighting for folders), a value of 1 (default) will fetch the status recursively (find the highest revision in the working copy tree), and a value of 2 will check the revision of the selected folder itself, but will not check any child items."
+msgid "The log dialog highlights the current working copy revision when the log is shown for a file. To do the same thing for a folder requires a working copy crawl, which is the default action, but it can be a slow operation for large working copies. If you want to change the operation of this feature you must create a <literal>DWORD</literal> registry key at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. A value of 0 disables the feature (no highlighting for folders), a value of 1 (default) will fetch the status recursively (find the highest revision in the working copy tree), and a value of 2 will check the revision of the selected folder itself, but will not check any child items."
 msgstr "В диалоге журнала подсвечивается текущая ревизия рабочей копии при показе журнала для файла. Чтобы сделать то же самое для папки, необходим обход рабочей копии, что может быть медленной операцией для больших рабочих копий. Если вы желаете задействовать эту возможность, вы должны создать ключ реестра <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> типа <literal>DWORD</literal> со значением 1."
 
 #. (term)
@@ -12893,34 +12891,89 @@ msgid "translator-translation"
 msgstr "Перевод"
 
 #~ msgid ""
-#~ "The path to the file external must place the file in an existing "
-#~ "versioned folder. In general it makes most sense to place the file "
-#~ "directly in the folder that has <literal>svn:externals</literal> set, but "
-#~ "it can be in a versioned sub-folder if necessary. By contrast, directory "
-#~ "externals will automatically create any intermediate unversioned folders "
-#~ "as required."
+#~ "The property <literal>tsvn:logrevregex</literal> defines a regular "
+#~ "expression which matches references to revisions in a log message. This "
+#~ "is used in the log dialog to turn such references into links which when "
+#~ "clicked will either scroll to that revision (if the revision is already "
+#~ "shown in the log dialog, or if it's available from the log cache) or open "
+#~ "a new log dialog showing that revision."
 #~ msgstr ""
-#~ "Внешнее файловое включение должно помещать файл в уже извлечённую рабочую "
-#~ "копию. Вообще, имеет смысл размещать файл непосредственно в папке, у "
-#~ "которой задано <literal>svn:externals</literal>, но это при необходимости "
-#~ "может быть и версированная подпапка. Для сравнения: внешние включения "
-#~ "папок, напротив, автоматически создают все необходимые промежуточные "
-#~ "неверсированные папки."
+#~ "Свойство <literal>tsvn:logrevregex</literal> задаёт регулярное выражение, "
+#~ "соответсвующее ссылкам на ревизии в сообщении журнала. Это используется в "
+#~ "диалоге журнала, позволяя при щелчке по такой ссылке перейти к указанной "
+#~ "ревизии либо в том же окне (если ревизия уже отображается в диалоге "
+#~ "журнала, или находится в кэше сообщений), либо открыть новый диалог "
+#~ "журнала, показывающий эту ревизию."
+#~ msgid ""
+#~ "The regular expression must match the whole reference, not just the "
+#~ "revision number. The revision number is extracted from the matched "
+#~ "reference string automatically."
+#~ msgstr ""
+#~ "Это регулярное выражение должно соответствовать ссылке целиком, а не "
+#~ "только номеру ревизии. Номер ревизии извлекается из обнаруженной строки "
+#~ "ссылки автоматически."
+#~ msgid ""
+#~ "If this property is not set, a default regular expression is used to link "
+#~ "revision references."
+#~ msgstr ""
+#~ "Если это свойство не задано, для создания ссылок на ревизии используется "
+#~ "регулярное выражение по умолчанию."
+#~ msgid ""
+#~ "In the <guilabel>Check for Modifications</guilabel> dialog you can opt to "
+#~ "see ignored items. If this box is checked then whenever an ignored folder "
+#~ "is found, all child items will be shown as well."
+#~ msgstr ""
+#~ "В диалоге <guilabel>Проверка на наличие изменений</guilabel> вы можете "
+#~ "включить отображение игнорируемых элементов. Если этот флажок отмечен, то "
+#~ "при обнаружении игнорируемой папки также будут показаны все её дочерние "
+#~ "элементы."
 
 #, fuzzy
 #~ msgid "/remote"
 #~ msgstr "удаление"
 
 #, fuzzy
+#~ msgid "Check repository"
+#~ msgstr "Хранилище"
+
+#, fuzzy
 #~ msgid ""
 #~ "Opens the check-for-modifications dialog. The <placeholder-1/> specifies "
 #~ "the working copy directory. If <placeholder-2/> is specified, the dialog "
 #~ "contacts the repository immediately on startup, as if the user clicked on "
-#~ "the \"Check repository\" button."
+#~ "the <placeholder-3/> button."
 #~ msgstr ""
 #~ "Открывает диалог извлечения. Параметр <placeholder-1/> задаёт целевую "
 #~ "папку, а <placeholder-2/> задаёт URL, из которого будет происходить "
 #~ "извлечение."
+#~ msgid ""
+#~ "By default this only works for files. This is because the update revision "
+#~ "for a folder may not correspond to the update revision of its content, "
+#~ "and the only way to find the effective update revision for the folder is "
+#~ "to crawl the working copy. This can be a slow operation for large working "
+#~ "copies so if you want to enable this feature you must create a "
+#~ "<literal>DWORD</literal> registry key with value 1 at <literal>HKCU"
+#~ "\\Software\\TortoiseSVN\\RecursiveLogRev</literal>."
+#~ msgstr ""
+#~ "По умолчанию, это распространяется только на файлы: ревизия обновления "
+#~ "папки может не соответствовать ревизии обновления её содержимого, и "
+#~ "единственный способ найти фактическую ревизию обновления для папки "
+#~ "заключается в обходе рабочей копии. Это может быть медленной операцией "
+#~ "для больших рабочих копий, поэтому, если вы желаете включить эту "
+#~ "возможность, вы должны создать ключ реестра <literal>HKCU\\Software"
+#~ "\\TortoiseSVN\\RecursiveLogRev</literal> типа <literal>DWORD</literal> со "
+#~ "значением 1."
+#~ msgid ""
+#~ "The path to the file external must be in a working copy that is already "
+#~ "checked out. While directory externals can place the external directory "
+#~ "at any depth and it will create any intermediate directories, file "
+#~ "externals must be placed into a working copy that is already checked out."
+#~ msgstr ""
+#~ "Внешнее файловое включение должно располагаться в уже извлечённой рабочей "
+#~ "копии. В то время, как внешние включения папок могут размещать внешнюю "
+#~ "папку на любой глубине вложенности и при этом будут созданы все "
+#~ "промежуточные папки, внешие файловые включения должны помещаться в уже "
+#~ "извлечённую рабочую копию."
 #~ msgid ""
 #~ "Because Subversion cannot provide all the information required, a certain "
 #~ "amount of interpretation is required, which can sometimes give strange "
