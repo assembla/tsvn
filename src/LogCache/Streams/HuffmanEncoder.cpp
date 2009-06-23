@@ -380,19 +380,37 @@ CHuffmanEncoder::Encode (const BYTE* source, size_t byteCount)
 
 	// create buffer
 
-	DWORD targetSize = CalculatePackedSize();
+	DWORD targetSize = std::max<DWORD>(byteCount, CalculatePackedSize());
 	std::auto_ptr<BYTE> buffer (new BYTE[targetSize]);
 
 	// fill it
 
-	BYTE* dest = buffer.get();
-	*reinterpret_cast<DWORD*>(dest) = static_cast<DWORD>(byteCount);
-	dest += sizeof (DWORD);
-	*reinterpret_cast<DWORD*>(dest) = targetSize;
-	dest += sizeof (DWORD);
+    BYTE* dest = buffer.get();
+    *reinterpret_cast<DWORD*>(dest) = static_cast<DWORD>(byteCount);
+    dest += sizeof (DWORD);
+    *reinterpret_cast<DWORD*>(dest) = targetSize;
+    dest += sizeof (DWORD);
 
-	WriteHuffmanTable (dest);
-	WriteHuffmanEncoded (source, source + byteCount, dest);
+    // special case: no compression possible
+
+    if (byteCount == targetSize)
+    {
+        // empty huffman table (to discern it from legacy files)
+
+        *(dest++) = 0;
+
+        // copy plain content
+
+        memcpy (dest, source, byteCount);
+        dest += byteCount;
+    }
+    else
+    {
+        // write huffman-encoded data
+
+	    WriteHuffmanTable (dest);
+	    WriteHuffmanEncoded (source, source + byteCount, dest);
+    }
 
 	return std::make_pair (buffer.release(), targetSize);
 }
