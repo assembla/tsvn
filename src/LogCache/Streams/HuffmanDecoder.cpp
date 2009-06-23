@@ -90,7 +90,7 @@ void CHuffmanDecoder::WriteDecodedStream ( const BYTE* first
 	key_type cachedCode = 0;
 	BYTE cachedBits = 0;
 
-#if defined (_WIN64) || (__WORDSIZE == 64)
+#ifdef _64BITS
 
 	// main loop
 

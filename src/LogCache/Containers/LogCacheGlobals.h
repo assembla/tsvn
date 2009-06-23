@@ -18,6 +18,11 @@
 //
 #pragma once
 
+/// used to enable optimized implementations on 64 bit systems
+
+#if (defined (_WIN64) || (__WORDSIZE == 64)) && !defined(_64BITS)
+#define _64BITS
+#endif
 
 /**
  * defines global types and their associated "invalid" values.
