@@ -380,7 +380,7 @@ CHuffmanEncoder::Encode (const BYTE* source, size_t byteCount)
 
 	// create buffer
 
-	DWORD targetSize = std::max<DWORD>(byteCount, CalculatePackedSize());
+	DWORD targetSize = std::min<DWORD>(byteCount+1, CalculatePackedSize());
 	std::auto_ptr<BYTE> buffer (new BYTE[targetSize]);
 
 	// fill it
@@ -393,7 +393,7 @@ CHuffmanEncoder::Encode (const BYTE* source, size_t byteCount)
 
     // special case: no compression possible
 
-    if (byteCount == targetSize)
+    if (byteCount+1 == targetSize)
     {
         // empty huffman table (to discern it from legacy files)
 
