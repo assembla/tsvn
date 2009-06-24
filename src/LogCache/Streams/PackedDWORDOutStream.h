@@ -224,29 +224,29 @@ S& operator<< (S& stream, const std::vector<V>& data)
 
 
 template<class S, class T, class V>
-S& WriteStream (S& stream, const std::vector<T>& data, V T::*member)
+S* WriteStream (S* stream, const std::vector<T>* data, V T::*member)
 {
     // write total entry count and entries
 
-    size_t count = data.size();
-    stream.AddSizeValue (count);
+    size_t count = data->size();
+    stream->AddSizeValue (count);
 
     // efficiently add all entries
     // (don't use iterators here as they come with some index checking overhead)
 
     if (count > 0)
-        for ( const T* iter = &data.at(0), *end = iter + count
+        for ( const T* iter = &data->at(0), *end = iter + count
             ; iter != end
             ; ++iter)
         {
-            stream.Add ((typename S::value_type)((*iter).*member));
+            stream->Add ((typename S::value_type)((*iter).*member));
         }
 
 
     // just close the stream 
     // (i.e. flush to disk and empty internal buffers)
 
-    stream.AutoClose();
+    stream->AutoClose();
 
     return stream;
 }
