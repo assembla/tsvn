@@ -821,49 +821,40 @@ void CCachedDirectory::RefreshStatus(bool bRecursive)
 	// Make sure that our own status is up-to-date
 	GetStatusForMember(m_directoryPath,bRecursive);
 
-	AutoLocker lock(m_critSec);
-	// We also need to check if all our file members have the right date on them
-	CacheEntryMap::iterator itMembers;
-	std::set<CTSVNPath> refreshedpaths;
+	CTSVNPathList updatePathList;
 	DWORD now = GetTickCount();
-	if (m_entryCache.size() == 0)
-		return;
-	// TODO: optimize!
-	for (itMembers = m_entryCache.begin(); itMembers != m_entryCache.end(); ++itMembers)
 	{
-		if (itMembers->first)
+		AutoLocker lock(m_critSec);
+		// We also need to check if all our file members have the right date on them
+		if (m_entryCache.size() == 0)
+			return;
+
+		for (CacheEntryMap::iterator itMembers = m_entryCache.begin(); itMembers != m_entryCache.end(); ++itMembers)
 		{
-			CTSVNPath filePath(m_directoryPath);
-			filePath.AppendPathString(itMembers->first);
-			std::set<CTSVNPath>::iterator refr_it;
-			if ((!filePath.IsEquivalentToWithoutCase(m_directoryPath))&&
-				(((refr_it = refreshedpaths.lower_bound(filePath)) == refreshedpaths.end()) || !filePath.IsEquivalentToWithoutCase(*refr_it)))
+			if ((itMembers->first)&&(!itMembers->first.IsEmpty()))
 			{
-				if ((itMembers->second.HasExpired(now))||(!itMembers->second.DoesFileTimeMatch(filePath.GetLastWriteTime())))
+				CTSVNPath filePath(m_directoryPath);
+				filePath.AppendPathString(itMembers->first);
+				std::set<CTSVNPath>::iterator refr_it;
+				if (!filePath.IsEquivalentToWithoutCase(m_directoryPath))
 				{
-					lock.Unlock();
-					// We need to request this item as well
-					GetStatusForMember(filePath,bRecursive);
-					// GetStatusForMember now has recreated the m_entryCache map.
-					// So start the loop again, but add this path to the refreshed paths set
-					// to make sure we don't refresh this path again. This is to make sure
-					// that we don't end up in an endless loop.
-					lock.Lock();
-					refreshedpaths.insert(refr_it, filePath);
-					itMembers = m_entryCache.begin();
-					if (m_entryCache.size()==0)
-						return;
-					continue;
-				}
-				else if ((bRecursive)&&(itMembers->second.IsDirectory()))
-				{
-					// crawl all sub folders too! Otherwise a change deep inside the
-					// tree which has changed won't get propagated up the tree.
-					CSVNStatusCache::Instance().AddFolderForCrawling(filePath);
+					if ((itMembers->second.HasExpired(now))||(!itMembers->second.DoesFileTimeMatch(filePath.GetLastWriteTime())))
+					{
+						// We need to request this item as well
+						updatePathList.AddPath(filePath);
+					}
+					else if ((bRecursive)&&(itMembers->second.IsDirectory()))
+					{
+						// crawl all sub folders too! Otherwise a change deep inside the
+						// tree which has changed won't get propagated up the tree.
+						CSVNStatusCache::Instance().AddFolderForCrawling(filePath);
+					}
 				}
 			}
 		}
 	}
+	for (int i = 0; i < updatePathList.GetCount(); ++i)
+		GetStatusForMember(updatePathList[i], bRecursive);
 }
 
 void CCachedDirectory::RefreshMostImportant()
