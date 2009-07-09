@@ -217,11 +217,11 @@ void CHuffmanDecoder::Decode (const BYTE*& source, BYTE*& target)
 
     // special case: unpacked data
 
-    if ((encodedSize == decodedSize) && (*localSource == 0))
+    if ((encodedSize == decodedSize+MIN_HEADER_LENGTH) && (*localSource == 0))
     {
         // plain copy (and skip empty huffman table)
 
-        memcpy (target, ++localSource, encodedSize);
+        memcpy (target, ++localSource, decodedSize);
     }
     else
     {
