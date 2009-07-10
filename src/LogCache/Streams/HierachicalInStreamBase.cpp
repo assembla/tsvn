@@ -135,6 +135,20 @@ void CHierachicalInStreamBase::AutoClose()
     }
 }
 
+void CHierachicalInStreamBase::Prefetch()
+{
+    // no-op, if already open
+
+    if (packedFirst == NULL)
+    {
+        // force all stream data to be read from disk
+
+        static volatile BYTE dummy = 0;
+        for (const BYTE* prefetch = first; prefetch < last; prefetch += 4096)
+            dummy += *prefetch;
+    }
+}
+
 bool 
 CHierachicalInStreamBase::HasSubStream (SUB_STREAM_ID subStreamID) const
 {

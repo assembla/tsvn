@@ -43,6 +43,7 @@ public:
 
     virtual void AutoOpen() = 0;
     virtual void AutoClose() = 0;
+    virtual void Prefetch() = 0;
 
 	// access a sub-stream
 
@@ -111,6 +112,7 @@ public:
 
     virtual void AutoOpen();
     virtual void AutoClose();
+    virtual void Prefetch();
 
 	virtual bool HasSubStream (SUB_STREAM_ID subStreamID) const;
 	virtual IHierarchicalInStream* GetSubStream ( SUB_STREAM_ID subStreamID

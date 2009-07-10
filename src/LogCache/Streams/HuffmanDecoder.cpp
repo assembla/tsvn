@@ -215,16 +215,6 @@ void CHuffmanDecoder::Decode (const BYTE*& source, BYTE*& target)
 	if (decodedSize == 0)
 		return;
 
-    // prefetch data
-
-    static volatile BYTE dummy = 0;
-    for (const BYTE* prefetch = source, *end = source + encodedSize
-        ; prefetch < end
-        ; prefetch += 4096)
-    {
-        dummy += *prefetch;
-    }
-
     // special case: unpacked data
 
     if ((encodedSize == decodedSize+MIN_HEADER_LENGTH) && (*localSource == 0))
