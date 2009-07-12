@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-06-07 23:32 +0000\n"
-"PO-Revision-Date: 2009-06-25 15:53+0900\n"
+"PO-Revision-Date: 2009-07-12 21:52+0900\n"
 "Last-Translator: KURASAWA Nozomu <nabetaro@caldron.jp>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -9027,6 +9027,13 @@ msgid ""
 "\\Software\\TortoiseSVN\\RecursiveLogRev</literal> as described in <xref "
 "linkend=\"tsvn-dug-settings-registry\"/>."
 msgstr ""
+"フォルダのリビジョンを表示する際、強調されたリビジョンは、そのフォルダの近辺"
+"にある最大のリビジョンになります。これには作業コピーのクロールが必要です。こ"
+"れは大きな作業コピーでは、遅い処理になり、クロールが完了するまでログメッセー"
+"ジが表示されません。この機能を無効にしたり、制限したりしたい場合は、<xref "
+"linkend=\"tsvn-dug-settings-registry\"/> で説明するように、レジストリキー "
+"<literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> をセットして"
+"ください。"
 
 #. (title)
 msgid "Merge Tracking Features"
@@ -9474,6 +9481,10 @@ msgid ""
 "<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings</"
 "guimenuitem></menuchoice>."
 msgstr ""
+"<guilabel>デフォルトに設定する</guilabel> チェックボックスは、このダイアログ"
+"を再度表示しないようにし、選択した内容を常に使用します。ここで設定したとして"
+"も、<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings</"
+"guimenuitem></menuchoice> で、デフォルト値の変更 (削除) が行えます。"
 
 #. (title)
 #. (title)
@@ -15062,6 +15073,15 @@ msgid ""
 "node when the graph is shown with oldest node at the bottom. The reference "
 "edge is significant because the node shapes are not all the same height."
 msgstr ""
+"デフォルトの表示 (グループ化無効) では、ノードを縦方向に、厳密なリビジョン順"
+"で配置するため、実行された順番の、視覚的な手がかりがあります。同じ列にあるふ"
+"たつのノードの順番は明白です。ふたつのノードが隣接する列にある場合、ノードが"
+"重なる心配がないため、補正は少なくて済みます。そしてそのため、少々明白でない"
+"場合があります。そのような最適化が、複雑なグラフを妥当な大きさにしておくため"
+"に必要です。この順序づけでは、<emphasis>古い方</emphasis>にあるノードの"
+"<emphasis>端</emphasis> (つまり、グラフを古いノードを下に表示する場合は、ノー"
+"ドの下端) を、参照として使用することにご注意ください。ノードの形がすべて同じ"
+"大きさであるわけではないため、参照する端は重要です。"
 
 #. (title)
 msgid "Changing the View"
@@ -15153,6 +15173,13 @@ msgid ""
 "the last two levels, <literal>doc</literal> and <literal>html</literal>, did "
 "not change."
 msgstr ""
+"長いパス名はたくさんのスペースを取ってしまい、ノードボックスを非常に大きくし"
+"てしまいます。パスの変更された部分のみを表示し、共通部分を点に置換する場合、"
+"このオプションを使用してください。つまり、<literal>/trunk/doc/html</literal> "
+"から ブランチ <literal>/branches/1.2.x/doc/html</literal> を作成した場合、"
+"<literal>/branches/1.2.x/..</literal> という短縮形で表示します。最後のふたつ"
+"の階層 (<literal>doc</literal> と <literal>html</literal>) が変更されていない"
+"からです。"
 
 #. (term)
 msgid "Show all revisions"
@@ -15164,6 +15191,8 @@ msgid ""
 "the tree that you are graphing) has changed. For long histories this can "
 "produce a truly huge graph."
 msgstr ""
+"予想通り、(グラフ化したツリーの) 変更されたすべてのリビジョンを表示します。履"
+"歴が長いと、非常に大きなグラフになります。"
 
 #. (term)
 msgid "Show HEAD revisions"
@@ -15227,6 +15256,8 @@ msgid ""
 "Hides paths which are no longer present at the HEAD revision of the "
 "repository, e.g. deleted branches."
 msgstr ""
+"リポジトリの HEAD (最新) リビジョンに、すでにもうないパス (削除されたブランチ"
+"など) を隠します。"
 
 #. (term)
 msgid "Hide unchanged branches"
@@ -15238,6 +15269,10 @@ msgid ""
 "folder. This does not necessarily indicate that the branch was not used, "
 "just that no changes were made to <emphasis>this</emphasis> part of it."
 msgstr ""
+"それぞれのファイルやサブフォルダに対して、変更をコミットしていないブランチを"
+"隠します。これは必ずしも、そのブランチが使われなかったことを表すわけではあり"
+"ません。ただ、<emphasis>この</emphasis>部分では変更されていないことを表しま"
+"す。"
 
 #. (term)
 msgid "Show WC revision"
@@ -15251,6 +15286,10 @@ msgid ""
 "may be a few revisions lower down. The node is marked by giving it a bold "
 "outline."
 msgstr ""
+"グラフ用に取得した項目の更新リビジョンに一致する、グラフのリビジョンをマーク"
+"します。更新したばかりの時は、HEAD (最新) になるでしょうが、最後に更新してか"
+"ら、別の人がコミットしていると、作業コピーのリビジョンは若干古くなります。"
+"ノードは太い輪郭線でマークされます。"
 
 #. (term)
 msgid "Show WC modifications"
@@ -15263,6 +15302,10 @@ msgid ""
 "The default outline colour is red. You may need to refresh the graph using "
 "<keycap>F5</keycap> to capture recent changes."
 msgstr ""
+"作業コピーにローカルな変更がある場合、このオプションはその変更を分かれた楕円"
+"のノードとして描画し、作業コピーの最終更新リビジョンの後ろに接続します。デ"
+"フォルトの輪郭色は赤です。最新の変更を取得するため、<keycap>F5</keycap> を押"
+"してグラフを再表示する必要があります。"
 
 #. (term)
 msgid "Filter"
@@ -15287,6 +15330,8 @@ msgid ""
 "Where the graph contains several trees, it is sometimes useful to use "
 "alternating colours on the background to help distinguish between trees."
 msgstr ""
+"複数のツリーを含むグラフでは、それぞれのツリーを識別するのに、交互に背景色が"
+"付いていると便利です。"
 
 #. (term)
 msgid "Show overview"
@@ -15299,6 +15344,10 @@ msgid ""
 "easily. Note that for very large graphs the overview may become useless due "
 "to the extreme zoom factor and will therefore not be shown in such cases."
 msgstr ""
+"現在の表示ウィンドウをドラッグできる矩形で表した、グラフ全体の小さな画像を表"
+"示します。これによりグラフをもっと簡単にナビゲートできます。非常に大きいグラ"
+"フの場合、極端な縮小のため役に立たない可能性があります。その場合表示されない"
+"ことにご注意ください。"
 
 #. (para)
 msgid ""
@@ -15402,6 +15451,11 @@ msgid ""
 "start with the leftmost options in the toolbar and customize the graph step-"
 "by-step until it comes close to your mental model."
 msgstr ""
+"初めて見たユーザは、ユーザのメンタルモデルと異なるリビジョングラフに驚くかも"
+"しれません。例えばリビジョンが、ファイルやフォルダに対して、複数のコピーやブ"
+"ランチを変更すると、ひとつのリビジョンから複数のノードが生成されます。ツール"
+"バーの左端から初めて、ひとつひとつメンタルモデルと合うまで、グラフをカスタマ"
+"イズするのもいい実践法です。"
 
 #. (para)
 msgid ""
@@ -15412,6 +15466,11 @@ msgid ""
 "initially expected outcome of the filter operation would either be "
 "inaccurate or misleading."
 msgstr ""
+"フィルタオプションはすべて、可能な限り情報を少しも失わないように試みます。そ"
+"れにより、例えばいくつかのノードは色が変わる可能性があります。予期しない結果"
+"となった場合は、常に最後に行ったフィルタを取り消し、特定のリビジョンやブラン"
+"チに対して何が特別であったのか、理解するように努めてください。多くの場合、は"
+"じめに予想したフィルタ操作の結果は、的確でないか誤解しています。"
 
 #. (para)
 msgid ""
@@ -15452,6 +15511,9 @@ msgid ""
 "hover the mouse over the point where a node link enters or leaves the node "
 "you will see one or more popup buttons which allow you to do this."
 msgstr ""
+"大きなツリーはナビゲートしにくい場合があり、一部を隠したり、小さなツリー群に"
+"分割したりしたくなると思います。ノードに出入りするノードリンクの点の上にマウ"
+"スを移動すると、このための複数のポップアップボタンを目にすることになります。"
 
 #. (para)
 msgid ""
@@ -15647,6 +15709,9 @@ msgid ""
 "two revisions, use the compare revisions feature described in <xref linkend="
 "\"tsvn-dug-compare-revs\"/>."
 msgstr ""
+"プロジェクトツリー構造のコピーをエクスポートしたいのに、特定のリビジョンやふ"
+"たつのリビジョン間にしかないファイルのみを含めたい場合、<xref linkend=\"tsvn-"
+"dug-compare-revs\"/> で説明する、リビジョン比較機構を使用してください。"
 
 #. (title)
 msgid "Removing a working copy from version control"
@@ -16749,6 +16814,8 @@ msgid ""
 "TortoiseSVN's context menu to appear at all, you can list them in the box at "
 "the bottom."
 msgstr ""
+"TortoiseSVN のコンテキストメニューにも現れて欲しくない、コンピュータ上のパス"
+"がある場合、下にあるボックスの項目を一覧できます。"
 
 #. (title)
 msgid "TortoiseSVN Dialog Settings 1"
@@ -16811,7 +16878,7 @@ msgstr ""
 
 #. (term)
 msgid "Can double-click in log list to compare with previous revision"
-msgstr ""
+msgstr "ログリスト内でダブルクリックすることで以前のリビジョンと比較する"
 
 #. (para)
 msgid ""
@@ -16821,6 +16888,11 @@ msgid ""
 "and many people prefer to avoid the wait after an accidental double-click, "
 "which is why this option is not enabled by default."
 msgstr ""
+"ログダイアログの上部ペインでリビジョンを比較しているなら、ダブルクリックで実"
+"行するため、このオプションを使用できます。差分の取得は長いプロセスになりがち"
+"なので、デフォルトでは有効ではありません。また、多くの人は間違ってダブルク"
+"リックしたあとで待ちたくないでしょうから、その意味でもデフォルトで有効にして"
+"いません。"
 
 #. (term)
 msgid "Progress Dialog"
@@ -16895,7 +16967,7 @@ msgstr ""
 
 #. (term)
 msgid "Use recycle bin when reverting"
-msgstr ""
+msgstr "元に戻す際にゴミ箱を利用する"
 
 #. (para)
 msgid ""
@@ -16904,6 +16976,10 @@ msgid ""
 "bin before bringing back the pristine copy. If you prefer to skip the "
 "recycle bin, uncheck this option."
 msgstr ""
+"ローカルの変更を元に戻す際、あなたの変更は破棄されます。TortoiseSVN は元のコ"
+"ピーに戻す前に、変更したファイルをゴミ箱に送るというセーフティネットを用意し"
+"ています。ゴミ箱に入れるのをスキップしたい場合は、このオプションのチェックを"
+"外してください。"
 
 #. (term)
 msgid "Use URL of WC as the default <quote>From:</quote> URL"
@@ -17050,6 +17126,8 @@ msgid ""
 "Note that this setting applies only to messages that you type in on this "
 "computer. It has nothing to do with the log cache."
 msgstr ""
+"この設定は、このコンピュータで入力したメッセージにのみ適用されることに、ご注"
+"意ください。ログキャッシュには何も影響を与えません。"
 
 #. (term)
 msgid "Re-open commit and branch/tag dialog after a commit failed"
@@ -17272,6 +17350,10 @@ msgid ""
 "conventional English names as suggested in the Subversion documentation, but "
 "of course your usage may vary."
 msgstr ""
+"リビジョングラフは、トランク、ブランチ、タグを見分けることで、リポジトリを明"
+"確に可視化しようとします。これは Subversion に組み込まれた分類ではなく、パス"
+"名から抽出した情報です。デフォルト設定では、Subversion のドキュメントで推奨さ"
+"れている英語名規約ですが、もちろんあなたの使い方はことなるかもしれません。"
 
 #. (para)
 msgid ""
@@ -17282,6 +17364,11 @@ msgid ""
 "separate multiple patterns. Do not include any extra white space as it will "
 "be included in the matching specification."
 msgstr ""
+"みっつの矩形で表すパスを、認識するため使用するパターンを指定してください。パ"
+"ターンは大文字小文字を区別しませんが、小文字で書いてください。<literal>*</"
+"literal> や <literal>?</literal> といったワイルドカードはいつものように使用で"
+"きます。また、<literal>;</literal> で複数のパターンを区切ってください。マッチ"
+"ングに使用されてしまうため、余計な空白は含めないでください。"
 
 #. (term)
 msgid "Modify Colors"
@@ -17297,6 +17384,11 @@ msgid ""
 "type only. Use the color selection dialog to allocate the specific colors "
 "used."
 msgstr ""
+"リビジョングラフで、ノードタイプ (つまり追加、削除、名前変更といったノード) "
+"を表すのに使用する色です。ノードの分類を識別するため、ノードタイプと分類の両"
+"方を表示するよう、リビジョングラフに色をませるよう指示できます。このチェック"
+"が付いていないと、ノードタイプを表すためだけに色を使用します。使用するそれぞ"
+"れの色を指定するには、色選択ダイアログを使用してください。"
 
 #. (title)
 msgid "Revision Graph Colors"
@@ -17393,6 +17485,8 @@ msgid ""
 "If you opt to show whether the working copy is modified, use this color "
 "border on the WC node when modifications are found."
 msgstr ""
+"作業コピーが変更されたことを表示するように選択した場合、変更を検出すると作業"
+"コピーの境界線にこの色を使用します。"
 
 #. (term)
 msgid "Tag Nodes"
@@ -17431,10 +17525,12 @@ msgid ""
 "When you left click on a node to select it, the marker used to indicate "
 "selection is a block in this color."
 msgstr ""
+"ノードを選択するためクリックしたままにした場合、選択状態を表すマーカはこの色"
+"のかたまりとなります。"
 
 #. (term)
 msgid "Stripes"
-msgstr "ストライプ"
+msgstr "縞模様"
 
 #. (para)
 msgid ""
@@ -17442,6 +17538,8 @@ msgid ""
 "background is colored in alternating stripes to help pick out the separate "
 "trees."
 msgstr ""
+"グラフがサブツリーに分割された時にその色を使い、背景にその他の色が付いている"
+"場合、分割ツリーを際だたせるため、縞模様にします。"
 
 #. (title)
 msgid "Icon Overlay Settings"
