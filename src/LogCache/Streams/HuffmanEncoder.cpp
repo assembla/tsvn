@@ -408,6 +408,12 @@ CHuffmanEncoder::Encode (const BYTE* source, size_t byteCount)
     }
     else
     {
+        // clear last 64 bits of the buffer
+        // (they will contain random data if we shouldn't need that much padding)
+
+        BYTE* padding = buffer.get() + targetSize - sizeof (QWORD);
+        *reinterpret_cast<QWORD*>(padding) = 0;
+
         // write huffman-encoded data
 
 	    WriteHuffmanTable (dest);
