@@ -75,7 +75,6 @@ CRevisionGraphWnd::CRevisionGraphWnd()
 	: CWnd()
 	, m_SelectedEntry1(NULL)
 	, m_SelectedEntry2(NULL)
-	, m_bThreadRunning(TRUE)
 	, m_pDlgTip(NULL)
 	, m_nFontSize(12)
     , m_bTweakTrunkColors(true)
@@ -428,7 +427,7 @@ void CRevisionGraphWnd::OnSize(UINT nType, int cx, int cy)
 
 void CRevisionGraphWnd::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	if (m_bThreadRunning)
+    if (IsUpdateJobRunning())
 		return __super::OnLButtonDown(nFlags, point);
 
     CSyncPointer<const ILayoutNodeList> nodeList (m_state.GetNodes());
@@ -519,8 +518,9 @@ void CRevisionGraphWnd::OnLButtonUp(UINT nFlags, CPoint point)
 
 	m_bIsRubberBand = false;
 	ReleaseCapture();
-	if (m_bThreadRunning)
+	if (IsUpdateJobRunning())
 		return __super::OnLButtonUp(nFlags, point);
+
 	// zooming is finished
 	m_ptRubberEnd = CPoint(0,0);
 	CRect rect = GetClientRect();
@@ -582,7 +582,7 @@ bool CRevisionGraphWnd::CancelMouseZoom()
 
 INT_PTR CRevisionGraphWnd::OnToolHitTest(CPoint point, TOOLINFO* pTI) const
 {
-	if (m_bThreadRunning)
+	if (IsUpdateJobRunning())
 		return -1;
 
     index_t nodeIndex = GetHitNode (point);
@@ -901,8 +901,9 @@ void CRevisionGraphWnd::SaveGraphAs(CString sSavePath)
 
 BOOL CRevisionGraphWnd::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
-	if (m_bThreadRunning)
+	if (IsUpdateJobRunning())
 		return __super::OnMouseWheel(nFlags, zDelta, pt);
+
 	int orientation = GetKeyState(VK_CONTROL)&0x8000 ? SB_HORZ : SB_VERT;
 	int pos = GetScrollPos(orientation);
 	pos -= (zDelta);
@@ -1218,7 +1219,7 @@ void CRevisionGraphWnd::ToggleNodeFlag (const CVisibleGraphNode *node, DWORD fla
 
 void CRevisionGraphWnd::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 {
-	if (m_bThreadRunning)
+	if (IsUpdateJobRunning())
 		return;
 
     CSyncPointer<const ILayoutNodeList> nodeList (m_state.GetNodes());
@@ -1322,7 +1323,7 @@ void CRevisionGraphWnd::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 
 void CRevisionGraphWnd::OnMouseMove(UINT nFlags, CPoint point)
 {
-	if (m_bThreadRunning)
+	if (IsUpdateJobRunning())
 	{
 		return __super::OnMouseMove(nFlags, point);
 	}
@@ -1444,6 +1445,12 @@ void CRevisionGraphWnd::OnTimer (UINT_PTR nIDEvent)
 
 LRESULT CRevisionGraphWnd::OnWorkerThreadDone(WPARAM, LPARAM)
 {
+    // handle potential race condition between PostMessage and leaving job:
+    // the background job may not have exited, yet
+
+    if (updateJob.get())
+        updateJob->WaitUntilDone();
+
 	InitView();
 	BuildPreview();
     Invalidate(FALSE);

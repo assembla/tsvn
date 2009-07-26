@@ -265,6 +265,11 @@ bool CRevisionGraphWnd::AnalyzeRevisionData()
     return m_state.GetNodes().get() != NULL;
 }
 
+bool CRevisionGraphWnd::IsUpdateJobRunning() const
+{
+    return (updateJob.get() != NULL) && (updateJob->GetStatus() < IJob::done);
+}
+
 bool CRevisionGraphWnd::GetShowOverview() const
 {
     return m_bShowOverview;

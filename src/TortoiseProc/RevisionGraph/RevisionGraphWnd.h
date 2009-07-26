@@ -18,6 +18,7 @@
 //
 #pragma once
 #include "RevisionGraph/RevisionGraphState.h"
+#include "AsyncCall.h"
 #include "ProgressDlg.h"
 #include "Colors.h"
 #include "SVNDiff.h"
@@ -99,8 +100,8 @@ public:
 
 	CString			m_sPath;
     SVNRev          m_pegRev;
-	volatile LONG	m_bThreadRunning;
 
+    std::auto_ptr<CAsyncCall> updateJob;
     CRevisionGraphState m_state;
 
 	void			InitView();
@@ -111,6 +112,7 @@ public:
                                       , SVNRev pegRevision
                                       , CProgressDlg* progress);
     bool            AnalyzeRevisionData();
+    bool            IsUpdateJobRunning() const;
 
     bool            GetShowOverview() const;
     void            SetShowOverview (bool value);
