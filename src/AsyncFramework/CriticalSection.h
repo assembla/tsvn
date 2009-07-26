@@ -20,6 +20,9 @@
 
 #pragma once
 
+namespace async
+{
+
 class CCriticalSection
 {
 private:
@@ -74,3 +77,5 @@ public:
         section.Release();
     }
 };
+
+}

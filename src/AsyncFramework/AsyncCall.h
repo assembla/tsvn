@@ -22,6 +22,9 @@
 
 #include "JobBase.h"
 
+namespace async
+{
+
 class CAsyncCall : public CJobBase
 {
 private:
@@ -240,3 +243,5 @@ public:
         delete call;
     }
 };
+
+}

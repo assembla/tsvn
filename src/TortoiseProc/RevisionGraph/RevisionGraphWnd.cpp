@@ -1449,7 +1449,7 @@ LRESULT CRevisionGraphWnd::OnWorkerThreadDone(WPARAM, LPARAM)
     // the background job may not have exited, yet
 
     if (updateJob.get())
-        updateJob->WaitUntilDone();
+        updateJob->GetResult();
 
 	InitView();
 	BuildPreview();

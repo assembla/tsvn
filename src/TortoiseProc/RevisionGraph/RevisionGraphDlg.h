@@ -110,7 +110,7 @@ private:
     void            UpdateOptionAvailability (UINT id, bool available);
     void            UpdateOptionAvailability();
 
-	void		    UpdateData();
+	bool		    UpdateData();
 
 	float			m_fZoomFactor;
 	CRevisionGraphWnd	m_Graph;

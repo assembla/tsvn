@@ -23,6 +23,9 @@
 #include "CriticalSection.h"
 #include "WaitableEvent.h"
 
+namespace async
+{
+
 class IJob;
 class CThread;
 
@@ -271,3 +274,5 @@ public:
     static void UseAllCPUs();
     static size_t GetHWThreadCount();
 };
+
+}

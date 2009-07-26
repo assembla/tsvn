@@ -20,6 +20,9 @@
 
 #pragma once
 
+namespace async
+{
+   
 class CJobScheduler;
 
 class IJob
@@ -52,3 +55,5 @@ public:
     virtual Status GetStatus() const = 0;
     virtual void WaitUntilDone() = 0;
 };
+
+}

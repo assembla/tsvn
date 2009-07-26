@@ -23,6 +23,9 @@
 #include "IJob.h"
 #include "WaitableEvent.h"
 
+namespace async
+{
+
 class CJobBase : public IJob
 {
 private:
@@ -62,3 +65,5 @@ public:
     virtual Status GetStatus() const;
     virtual void WaitUntilDone();
 };
+
+}

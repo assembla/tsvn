@@ -267,7 +267,7 @@ bool CRevisionGraphWnd::AnalyzeRevisionData()
 
 bool CRevisionGraphWnd::IsUpdateJobRunning() const
 {
-    return (updateJob.get() != NULL) && (updateJob->GetStatus() < IJob::done);
+    return (updateJob.get() != NULL) && !updateJob->IsDone();
 }
 
 bool CRevisionGraphWnd::GetShowOverview() const

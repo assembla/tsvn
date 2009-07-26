@@ -253,7 +253,7 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	return TRUE;  // return TRUE unless you set the focus to a control
 }
 
-void CRevisionGraphDlg::UpdateData()
+bool CRevisionGraphDlg::UpdateData()
 {
 	CoInitialize(NULL);
 
@@ -290,6 +290,8 @@ void CRevisionGraphDlg::UpdateData()
 
 	CoUninitialize();
     m_Graph.PostMessage (CRevisionGraphWnd::WM_WORKERTHREADDONE, 0, 0);
+
+    return true;
 }
 
 void CRevisionGraphDlg::OnSize(UINT nType, int cx, int cy)
@@ -576,7 +578,7 @@ BOOL CRevisionGraphDlg::OnToggleRedrawOption (UINT controlID)
 void CRevisionGraphDlg::StartWorkerThread()
 {
     if (!m_Graph.IsUpdateJobRunning())
-        m_Graph.updateJob.reset (new CAsyncCall (this, &CRevisionGraphDlg::UpdateData));
+        m_Graph.updateJob.reset (new CFuture<bool>(this, &CRevisionGraphDlg::UpdateData));
 }
 
 void CRevisionGraphDlg::OnCancel()

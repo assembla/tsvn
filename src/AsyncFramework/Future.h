@@ -22,6 +22,9 @@
 
 #include "JobBase.h"
 
+namespace async
+{
+
 template<class R>
 class CFuture
 {
@@ -346,3 +349,5 @@ public:
         return job->GetStatus() == IJob::done;
     }
 };
+
+}
