@@ -264,25 +264,23 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
 
     if (pDlg->m_bFetchLogs)
     {
-	    pDlg->m_Graph.m_pProgress = new CProgressDlg();
-	    pDlg->m_Graph.m_pProgress->SetTitle(IDS_REVGRAPH_PROGTITLE);
-	    pDlg->m_Graph.m_pProgress->SetCancelMsg(IDS_REVGRAPH_PROGCANCEL);
-	    pDlg->m_Graph.m_pProgress->SetTime();
-	    pDlg->m_Graph.m_pProgress->SetProgress(0, 100);
+    	CProgressDlg progress;
+	    progress.SetTitle(IDS_REVGRAPH_PROGTITLE);
+	    progress.SetCancelMsg(IDS_REVGRAPH_PROGCANCEL);
+	    progress.SetTime();
+	    progress.SetProgress(0, 100);
 
         svn_revnum_t pegRev = pDlg->m_Graph.m_pegRev.IsNumber()
                             ? (svn_revnum_t)pDlg->m_Graph.m_pegRev
                             : (svn_revnum_t)-1;
 
-	    if (!pDlg->m_Graph.FetchRevisionData (pDlg->m_Graph.m_sPath, pegRev))
+	    if (!pDlg->m_Graph.FetchRevisionData (pDlg->m_Graph.m_sPath, pegRev, &progress))
 		    CMessageBox::Show ( pDlg->m_hWnd
                               , pDlg->m_Graph.m_state.GetLastErrorMessage()
                               , _T("TortoiseSVN")
                               , MB_ICONERROR);
 
-        pDlg->m_Graph.m_pProgress->Stop();
-        delete pDlg->m_Graph.m_pProgress;
-        pDlg->m_Graph.m_pProgress = NULL;
+        progress.Stop();
 
     	pDlg->m_bFetchLogs = false;	// we've got the logs, no need to fetch them a second time
     }

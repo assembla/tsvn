@@ -100,7 +100,6 @@ public:
 	CString			m_sPath;
     SVNRev          m_pegRev;
 	volatile LONG	m_bThreadRunning;
-	CProgressDlg* 	m_pProgress;
 
     CRevisionGraphState m_state;
 
@@ -109,7 +108,8 @@ public:
 	void			SaveGraphAs(CString sSavePath);
 
     bool            FetchRevisionData ( const CString& path
-                                      , SVNRev pegRevision);
+                                      , SVNRev pegRevision
+                                      , CProgressDlg* progress);
     bool            AnalyzeRevisionData();
 
     bool            GetShowOverview() const;
