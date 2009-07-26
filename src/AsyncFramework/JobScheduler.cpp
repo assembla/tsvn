@@ -439,7 +439,8 @@ void CJobScheduler::WaitForSomeJobs()
 {
     {
         CCriticalSectionLock lock (mutex);
-        if (InterlockedIncrement (&waitingThreads) < threads.runningCount)
+        if (  static_cast<size_t>(InterlockedIncrement (&waitingThreads))
+            < threads.runningCount)
         {
             // there are enough running job threads left
             // -> wait for one of them to run idle *or* 
