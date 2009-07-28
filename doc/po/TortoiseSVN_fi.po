@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2009-04-04 14:55 +0000\n"
-"PO-Revision-Date: 2009-04-07 00:40+0200\n"
+"POT-Creation-Date: 2009-06-07 23:32 +0000\n"
+"PO-Revision-Date: 2009-07-28 02:19+0200\n"
 "Last-Translator: Kari Granö <kari.grano@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -4595,8 +4595,8 @@ msgid "Because the log dialog shows you the log from HEAD, not from the current 
 msgstr "Koska loki-ikkuna näyttää HEAD-version (eikä työkopion nykyversion) lokin, saattaa usein käydä niin, että näet lokiviestejä sisällölle, joka ei ole vielä mukana työkopiossa. Jotta tämä olisi selkeämpää, työkopiosi versiota vastaava toimitusviesti näytetään lihavoituna."
 
 #. (para)
-msgid "By default this only works for files. This is because the update revision for a folder may not correspond to the update revision of its content, and the only way to find the effective update revision for the folder is to crawl the working copy. This can be a slow operation for large working copies so if you want to enable this feature you must create a <literal>DWORD</literal> registry key with value 1 at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>."
-msgstr "Oletusarvoisesti tämä toimii vain tiedostoille, koska kansion päivitysversio saattaa poiketa sen sisällön päivitysversioista, ja ainoa tapa selvittää kansion todellinen versio on käydä läpi sen sisältö tiedosto kerrallaan. Tämä voi olla hidasta suurille työkopioille, joten toiminto on aktivoitava erikseen luomalla <literal>DWORD</literal>-rekisteriavain <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> arvolla 1."
+msgid "When you show the log for a folder the revision highlighted is the highest revision found anywhere within that folder, which requires a crawl of the working copy. This can be a slow operation for large working copies, and the log messages are not displayed until the crawl completes. If you want to disable or limit this feature you need to set a registry key <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> as described in <xref linkend=\"tsvn-dug-settings-registry\"/>."
+msgstr "Kun näytät loki-ikkunan kansiolle, sen sisältämä suurin versionumero korostetaan; tämä vaatii työkopion läpikäymisen ja voi olla hidasta suurille työkopioille (lokiviestit näytetään vasta läpikäynnin päätyttyä.). Rajoittaaksesi operaatiota sinun on muutettava rekisteriavainta <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> luvussa <xref linkend=\"tsvn-dug-settings-registry\"/> kuvatulla tavalla."
 
 #. (title)
 msgid "Merge Tracking Features"
@@ -9383,8 +9383,8 @@ msgid "Current revision highlighting for folders in log dialog"
 msgstr "Nykyisen version korostus loki-ikkunan kansioille"
 
 #. (para)
-msgid "The log dialog highlights the current working copy revision when the log is shown for a file. To do the same thing for a folder requires a working copy crawl, which can be a slow operation for large working copies. If you want to enable this feature you must create a <literal>DWORD</literal> registry key at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. A value of 0 disables the feature (no highlighting for folders), a value of 1 (default) will fetch the status recursively (find the highest revision in the working copy tree), and a value of 2 will check the revision of the selected folder itself, but will not check any child items."
-msgstr "Loki-ikkuna korostaa nykyisen työkopion version, kun lokia näytetään tiedostolle. Kansioille tämä vaatii työkopion läpikäymistä, mikä voi olla hidasta suurille työkopioille. Jos haluat aktivoida tämän toiminnon, sinun on luotava <literal>DWORD</literal>-rekisteriavain <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. Arvo 0 poistaa toiminnon (ei korostusta kansioille), arvo 1 (oletus) hakee tilan palautuvasti (etsii suurimman versionumeron työkopiosta) ja arvo 2 tarkistaa itse kansion versionumeron, mutta ei tarkista sen alapuolista puuta."
+msgid "The log dialog highlights the current working copy revision when the log is shown for a file. To do the same thing for a folder requires a working copy crawl, which is the default action, but it can be a slow operation for large working copies. If you want to change the operation of this feature you must create a <literal>DWORD</literal> registry key at <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. A value of 0 disables the feature (no highlighting for folders), a value of 1 (default) will fetch the status recursively (find the highest revision in the working copy tree), and a value of 2 will check the revision of the selected folder itself, but will not check any child items."
+msgstr "Loki-ikkuna korostaa nykyisen työkopion version, kun lokia näytetään tiedostolle. Kansioille tämä vaatii työkopion läpikäymistä, mikä voi olla hidasta suurille työkopioille. Jos haluat muuttaa tämän toiminnan, sinun on luotava <literal>DWORD</literal>-rekisteriavain <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal>. Arvo 0 poistaa toiminnon (ei korostusta kansioille), arvo 1 (oletus) hakee tilan palautuvasti (etsii suurimman versionumeron työkopiosta) ja arvo 2 tarkistaa itse kansion versionumeron, mutta ei tarkista sen alapuolista puuta."
 
 #. (term)
 msgid "Make checkout fail if an item of the same name exists"
@@ -12801,6 +12801,22 @@ msgstr "Kari Granö <kari.grano@gmail.com>"
 msgid "translator-translation"
 msgstr "Käännös"
 
+#~ msgid ""
+#~ "By default this only works for files. This is because the update revision "
+#~ "for a folder may not correspond to the update revision of its content, "
+#~ "and the only way to find the effective update revision for the folder is "
+#~ "to crawl the working copy. This can be a slow operation for large working "
+#~ "copies so if you want to enable this feature you must create a "
+#~ "<literal>DWORD</literal> registry key with value 1 at <literal>HKCU"
+#~ "\\Software\\TortoiseSVN\\RecursiveLogRev</literal>."
+#~ msgstr ""
+#~ "Oletusarvoisesti tämä toimii vain tiedostoille, koska kansion "
+#~ "päivitysversio saattaa poiketa sen sisällön päivitysversioista, ja ainoa "
+#~ "tapa selvittää kansion todellinen versio on käydä läpi sen sisältö "
+#~ "tiedosto kerrallaan. Tämä voi olla hidasta suurille työkopioille, joten "
+#~ "toiminto on aktivoitava erikseen luomalla <literal>DWORD</literal>-"
+#~ "rekisteriavain <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</"
+#~ "literal> arvolla 1."
 #~ msgid ""
 #~ "The path to the file external must be in a working copy that is already "
 #~ "checked out. While directory externals can place the external directory "
