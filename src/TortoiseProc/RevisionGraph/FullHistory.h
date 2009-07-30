@@ -22,6 +22,7 @@
 #include "SVNPrompt.h"
 #include "SVNLogQuery.h"
 #include "CacheLogQuery.h"
+#include "JobScheduler.h"
 
 class CFullGraphNode;
 
@@ -163,13 +164,20 @@ private:
 	SCopyInfo**		            copyFromRelation;
 	SCopyInfo**		            copyFromRelationEnd;
 
+    /// asynchronuous execution queues
+    /// (one per independent resource)
+
+    async::CJobScheduler        diskIOScheduler;
+    async::CJobScheduler        cpuLoadScheduler;
+
     /// SVN callback
 
 	static svn_error_t*			cancel(void *baton);
 
     /// utility methods
 
-    void                        ClearCopyInfo();
+    bool                        ClearCopyInfo();
+    void                        QueryWCRevision (bool doQuery, CString path);
 	void						AnalyzeRevisionData();
 	void						BuildForwardCopies();
 	
