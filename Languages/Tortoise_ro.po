@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2009-05-06 13:23+0200\n"
+"PO-Revision-Date: 2009-07-30 15:36-0000\n"
 "Last-Translator: Ben Felt <benwfelt@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -325,7 +325,7 @@ msgstr "&Delegează"
 
 #. Resource IDs: (16633)
 msgid "&Associate double-click event with:"
-msgstr "&Asociază evenimentul clic dublu cu:"
+msgstr "&Asociază evenimentul dublu-clic cu:"
 
 #. Resource IDs: (1066)
 msgid "&Auto Hide"
@@ -791,7 +791,7 @@ msgstr "Pagina &următoare"
 
 #. Resource IDs: (16632)
 msgid "&No double-click event"
-msgstr "&Nici un eveniment de clic dublu"
+msgstr "&Nici un eveniment de dublu-clic"
 
 #. Resource IDs: (1)
 msgid "&OK"
@@ -1204,9 +1204,8 @@ msgstr "(negăsit)"
 
 # noun or verb?
 #. Resource IDs: (276)
-#, fuzzy
 msgid "(open branch)"
-msgstr "(ramură deschisă)"
+msgstr "(deschide ramură)"
 
 #. Resource IDs: (208)
 msgid "(property change only)"
@@ -1989,7 +1988,7 @@ msgstr "Salvează mesajele jurnalului în cache pentru a înbunătăţi accesare
 
 #. Resource IDs: (1127)
 msgid "Can double-click in log list to compare with previous revision"
-msgstr "Se poate face clic dublu în lista de jurnale pentru a compara cu revizii precedente"
+msgstr "Se poate face dublu-clic în lista de jurnale pentru a compara cu revizii precedente"
 
 #. Resource IDs: (3865)
 msgid "Can not activate a static ActiveX object."
@@ -2103,16 +2102,16 @@ msgstr "Lista de schimbări:"
 
 #. Resource IDs: (1242)
 msgid "Changes made (double-click on file for diff):"
-msgstr "S-au făcut schimbări (faceţi clic dublu pe fişier pentru diferenţierea):"
+msgstr "S-au făcut schimbări (faceţi dublu-clic pe fişier pentru diferenţierea):"
 
 #. Resource IDs: (8)
 msgid "Chec&kout..."
 msgstr "Chec&kout..."
 
-# Bifează? Caută?
+# Bifează? Caută? Verifică? Not all latin languages have the same translation.
 #. Resource IDs: (3887)
 msgid "Check"
-msgstr "Verifică"
+msgstr "Bifează"
 
 #. Resource IDs: (174)
 msgid "Check For Updates"
@@ -3379,7 +3378,6 @@ msgid "Empty"
 msgstr "Gol"
 
 #. Resource IDs: (344)
-#, fuzzy
 msgid "Enable log caching to speed up log and revision graph dialogs"
 msgstr "Activează salvarea jurnalului în cache pentru a înbunătăţi dialogurile de jurnal şi diagrame"
 
@@ -4427,7 +4425,7 @@ msgstr ""
 
 #. Resource IDs: (197)
 msgid "If checked, double-clicking on a revision in the log list compares it with the previous revision"
-msgstr "Dacă este bifat, a face clic dublu pe o revizie din lista de jurnale o va compara cu revizia precedentă"
+msgstr "Dacă este bifat, a face dublu-clic pe o revizie din lista de jurnale o va compara cu revizia precedentă"
 
 #. Resource IDs: (196)
 msgid ""
@@ -5055,9 +5053,8 @@ msgid "Log messages"
 msgstr "Mesaje de jurnal"
 
 #. Resource IDs: (1274)
-#, fuzzy
 msgid "Log messages (Input dialog)"
-msgstr "Mesaje din jurnal (Dialog Input)"
+msgstr "Mesaje din jurnal (dialog input)"
 
 #. Resource IDs: (1280)
 msgid "Log messages (Show log dialog)"
@@ -6767,9 +6764,8 @@ msgid "Revision Graph Filter"
 msgstr "Filtrul graficelor reviziei"
 
 #. Resource IDs: (299)
-#, fuzzy
 msgid "Revision Graph::Colors"
-msgstr "Graficul reviziei"
+msgstr "Graficul reviziei::Culori"
 
 #. Resource IDs: (228)
 msgid "Revision Range"
@@ -7002,7 +6998,7 @@ msgstr "Date salvate"
 
 #. Resource IDs: (344)
 msgid "Saves expensive server roundtrips when set to longer than 0 seconds"
-msgstr ""
+msgstr "Elimină cominicare excesivă cu server când este stabilit la nu mai mult de 0 secunde"
 
 #. Resource IDs: (581)
 msgid "Saves the selected property value to a file"
@@ -7071,7 +7067,6 @@ msgid "Select / deselect &all"
 msgstr "Selecte&ază / deselectează tot"
 
 #. Resource IDs: (1057)
-#, fuzzy
 msgid ""
 "Select Color Tool\n"
 "Select Color"
@@ -9606,14 +9601,12 @@ msgid "Zoom to fit"
 msgstr "Potriveşte"
 
 #. Resource IDs: (2051)
-#, fuzzy
 msgid "Zoom to fit in height"
-msgstr "Măreşte ca să încapă înălţimea"
+msgstr "Potrivește mărimea ca să încapă înălţimea"
 
 #. Resource IDs: (2051)
-#, fuzzy
 msgid "Zoom to fit in width"
-msgstr "Măreşte ca să încapă lăţimea"
+msgstr "Potrivește mărimea ca să încapă lăţimea"
 
 #. Resource IDs: (1001)
 msgid "[Unassigned]"
@@ -9679,7 +9672,7 @@ msgid ""
 "ask repository first if 'online' -\n"
 "work entirely from cache if 'offline'"
 msgstr ""
-"Solicitaţi mai întăi depozitul când conectat -\n"
+"solicitaţi mai întăi depozitul când conectat -\n"
 "Foloseşte numai cache când deconectat"
 
 #. Resource IDs: (245)
@@ -9725,6 +9718,9 @@ msgid ""
 "String which is appended to a log message when an issue number is entered.\r\n"
 "The string must contain '%BUGID%' which gets replaced with the issue number."
 msgstr ""
+"bugtraq:message\r\n"
+"Textul adăugat la mesaje din jurnal când se înregistrează un număr de problemă.\r\n"
+"Textul trebuie să conțină '%BUGID%' care este înlocuit cu numărul problemei."
 
 #. Resource IDs: (577)
 msgid ""
@@ -9757,6 +9753,9 @@ msgid ""
 "URL pointing to the issue tracker. It must contain '%BUGID%' which\r\n"
 "gets replaced with the issue number."
 msgstr ""
+"bugtraq:url\r\n"
+"URL-ul indicând monitorul de probleme. Acesta trebuie să conțină '%BUGID%' \r\n"
+"care este înlocuit cu numărul problemei."
 
 #. Resource IDs: (65535)
 msgid "changes total: "
@@ -10260,7 +10259,7 @@ msgstr "tokeni de cuvinte:"
 
 #. Resource IDs: (65535)
 msgid "words [uncompressed]: "
-msgstr "cuvinte [necompresaţi]: "
+msgstr "cuvinte [necompresate]: "
 
 #. Resource IDs: (245)
 msgid "year"
