@@ -184,14 +184,20 @@ void CJobScheduler::CThreadPool::AddStarving (CJobScheduler* scheduler)
     starving.push_back (scheduler);
 }
 
-void CJobScheduler::CThreadPool::RemoveStarving (CJobScheduler* scheduler)
+bool CJobScheduler::CThreadPool::RemoveStarving (CJobScheduler* scheduler)
 {
     CCriticalSectionLock lock (mutex);
 
-    std::vector<CJobScheduler*>::iterator begin = starving.begin();
-    std::vector<CJobScheduler*>::iterator end = starving.end();
+    typedef std::vector<CJobScheduler*>::iterator TI;
+    TI begin = starving.begin();
+    TI end = starving.end();
 
-    starving.erase (std::remove_copy (begin, end, begin, scheduler), end);
+    TI newEnd = std::remove_copy (begin, end, begin, scheduler);
+    if (newEnd == end)
+        return false;
+
+    starving.erase (newEnd, end);
+    return true;
 }
 
 // job execution helpers
@@ -228,11 +234,7 @@ CJobScheduler::TJob CJobScheduler::AssignJob (SThreadInfo* info)
                 {
                     // if we are actually idle, we aren't starving anymore
 
-                    if (threads.starved)
-                    {
-                        threads.starved = false;
-                        CThreadPool::GetInstance().RemoveStarving (this);
-                    }
+                    StopStarvation();
 
                     // put back to global pool
 
@@ -299,6 +301,19 @@ bool CJobScheduler::AllocateSharedThread()
     return false;
 }
 
+// unregister from "starving" list.
+// This may race with CThreadPool::Release -> must loop here.
+
+void CJobScheduler::StopStarvation()
+{
+    while (threads.starved)
+        if (CThreadPool::GetInstance().RemoveStarving (this))
+        {
+            threads.starved = false;
+            break;
+        }
+}
+
 // worker thread function
 
 void CJobScheduler::ThreadFunc (void* arg)
@@ -316,8 +331,12 @@ void CJobScheduler::ThreadFunc (void* arg)
 
 // Create & remove threads
 
-CJobScheduler::CJobScheduler (size_t threadCount, size_t sharedThreads)
+CJobScheduler::CJobScheduler 
+    ( size_t threadCount
+    , size_t sharedThreads
+    , bool aggressiveThreadStart)
     : waitingThreads (0)
+    , aggressiveThreadStart (aggressiveThreadStart)
 {
     threads.runningCount = 0;
     threads.suspendedCount = threadCount;
@@ -346,7 +365,7 @@ CJobScheduler::CJobScheduler (size_t threadCount, size_t sharedThreads)
 
 CJobScheduler::~CJobScheduler(void)
 {
-    CThreadPool::GetInstance().RemoveStarving (this);
+    StopStarvation();
 
     WaitForEmptyQueue();
 
@@ -382,8 +401,12 @@ void CJobScheduler::Schedule (IJob* job, bool transferOwnership)
         empty.Reset();
 
     queue.push (toAdd);
-    if (   (queue.size() > 2 * threads.runningCount)
-        && (threads.unusedCount > 0))
+
+    bool addThread = aggressiveThreadStart
+                 || (   (queue.size() > 2 * threads.runningCount)
+                     && (threads.unusedCount > 0));
+
+    if (addThread)
     {
         if (threads.suspendedCount > 0) 
         {

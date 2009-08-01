@@ -23,38 +23,53 @@
 namespace async
 {
 
+/**
+* Just a simple critical section (i.e. recursive mutex)
+* implementation with minimal overhead.
+*/
+
 class CCriticalSection
 {
 private:
 
-    // OS-specific critical section object
+    /// OS-specific critical section object
 
     CRITICAL_SECTION section;
 
 public:
 
-    // construction / destruction
+    /// construction 
 
     CCriticalSection(void);
+
+    /// destruction
+
     ~CCriticalSection(void);
 
-    // Mutex functionality
+    /// Acquire the mutex, i.e. enter the critical section
 
     void Acquire();
+
+    /// Release the mutex, i.e. leave the critical section
+
     void Release();
 };
 
 // Mutex functionality
 
-inline void CCriticalSection::Acquire()
+__forceinline void CCriticalSection::Acquire()
 {
     EnterCriticalSection (&section);
 }
 
-inline void CCriticalSection::Release()
+__forceinline void CCriticalSection::Release()
 {
     LeaveCriticalSection (&section);
 }
+
+/**
+* RAII lock class for \ref CCriticalSection mutexes.
+*/
 
 class CCriticalSectionLock
 {
@@ -64,15 +79,13 @@ private:
 
 public:
 
-    // RAII
-
-    CCriticalSectionLock (CCriticalSection& section)
+    __forceinline CCriticalSectionLock (CCriticalSection& section)
         : section (section)
     {
         section.Acquire();
     }
 
-    ~CCriticalSectionLock()
+    __forceinline ~CCriticalSectionLock()
     {
         section.Release();
     }
