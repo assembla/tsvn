@@ -260,6 +260,7 @@ bool CFullHistory::FetchRevisionData ( CString path
 
 		svnQuery.reset (new CSVNLogQuery (&ctx, pool));
 
+        bool cacheIsComplete = false;
         if (svn.GetLogCachePool()->IsEnabled())
         {
             CLogCachePool* pool = svn.GetLogCachePool();
@@ -280,7 +281,10 @@ bool CFullHistory::FetchRevisionData ( CString path
 			// HEAD+1 - that revision does not exist and would throw an error later
 
 			if (firstRevision > headRevision)
+            {
+                cacheIsComplete = true;
 				firstRevision = headRevision;
+            }
         }
         else
         {
@@ -302,18 +306,19 @@ bool CFullHistory::FetchRevisionData ( CString path
 
         // actually fetch the data
 
-		query->Log ( CTSVNPathList (rootPath)
-				   , headRevision
-				   , headRevision
-				   , firstRevision
-				   , 0
-				   , false		// strictNodeHistory
-				   , this
-                   , false		// includeChanges (log cache fetches them automatically)
-                   , false		// includeMerges
-                   , true		// includeStandardRevProps
-                   , false		// includeUserRevProps
-                   , TRevPropNames());
+        if (!cacheIsComplete)
+		    query->Log ( CTSVNPathList (rootPath)
+				       , headRevision
+				       , headRevision
+				       , firstRevision
+				       , 0
+				       , false		// strictNodeHistory
+				       , this
+                       , false		// includeChanges (log cache fetches them automatically)
+                       , false		// includeMerges
+                       , true		// includeStandardRevProps
+                       , false		// includeUserRevProps
+                       , TRevPropNames());
 
         // Store updated cache data
 
@@ -323,9 +328,10 @@ bool CFullHistory::FetchRevisionData ( CString path
         }
         else
         {
-            new CAsyncCall ( cache
-                           , &LogCache::CCachedLogInfo::Save
-                           , &cpuLoadScheduler);
+            if (cache->IsModified())
+                new CAsyncCall ( cache
+                               , &LogCache::CCachedLogInfo::Save
+                               , &cpuLoadScheduler);
         }
 
         // store WC path
