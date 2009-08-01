@@ -23,11 +23,26 @@
 namespace async
 {
    
+// forward declaration
+
 class CJobScheduler;
+
+/**
+ * Common interface to all job objects that can be handled by
+ * \ref CJobScheduler instances.
+ *
+ * Jobs will be executed only once making the \ref done state
+ * the final state of the internal state machine.
+ */
 
 class IJob
 {
 public:
+
+    /**
+     * Possible values returned by \ref GetStatus().
+     * The state machine linearly follows the value order.
+     */
 
     enum Status
     {
@@ -37,22 +52,30 @@ public:
         done = 3
     };
 
-    // destruction
+    /// destruction
 
     virtual ~IJob(void) {}
 
-    // call this to put the job into the scheduler
+    /// call this to put the job into the scheduler.
+    /// If \ref transferOwnership is set, the scheduler must
+    /// delete this instance after exection.
 
     virtual void Schedule ( bool transferOwnership
                           , CJobScheduler* scheduler) = 0;
 
-    // will be called by job execution thread
+    /// will be called by job execution thread
 
     virtual void Execute() = 0;
 
-    // may be called by other (observing) threads
+    /// may be called by other (observing) threads.
+    /// Please note that the information returned may already
+    /// be outdated as soon as the function returns.
 
     virtual Status GetStatus() const = 0;
+
+    /// Efficiently wait for instance to reach the 
+    /// \ref done \ref Status.
+
     virtual void WaitUntilDone() = 0;
 };
 

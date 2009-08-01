@@ -26,6 +26,10 @@ namespace async
 /**
 * A waitable event that can be signaled only once.
 * Also, only one waiting thread is allowed.
+*
+* This is a more lightweight implementation than
+* \ref CWaitableEvent as the \ref event handle is
+* only allocated, if \ref WaitFor() requires it.
 */
 
 class COneShotEvent
@@ -53,6 +57,9 @@ public:
 
 /**
 * A waitable event that must be reset manually.
+* This implementation uses a global pool of event
+* handles to minimize OS handle creation and destruction
+* overhead.
 */
 
 class CWaitableEvent

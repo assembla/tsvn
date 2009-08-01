@@ -26,6 +26,12 @@
 namespace async
 {
 
+/**
+ * Common base implementation of \ref IJob.
+ * All your job class deriving from this one
+ * has to do is to implement \ref InternalExecute.
+ */
+
 class CJobBase : public IJob
 {
 private:

@@ -25,6 +25,21 @@
 namespace async
 {
 
+/**
+ * Execute a call to a funtion asynchronuously in the background.
+ * Return the result in \ref GetResult. The latter will wait for
+ * the call to finished, if necessary.
+ *
+ * Accepts a pointer to some free function or member function plus
+ * parameters and schedules it for execution it in the given job scheduler.
+ * If no scheduler is given, the default scheduler is used (see
+ * \ref CJobScheduler::GetDefault for details).
+ *
+ * Please note that the parameters must remain valid until the call
+ * actually got executed. Therefore, only pointer and value parameter
+ * are possible; reference parameters won't compile.
+ */
+
 template<class R>
 class CFuture
 {
