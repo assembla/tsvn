@@ -58,8 +58,8 @@ CFullHistory::CFullHistory(void)
     , copyFromRelation (NULL)
     , copyFromRelationEnd (NULL)
     , cache (NULL)
-    , diskIOScheduler (1, 0)  // one thread for crawling the disk
-    , cpuLoadScheduler (1, INT_MAX) // at least one thread for CPU intense ops
+    , diskIOScheduler (1, 0, true)  // one thread for crawling the disk
+    , cpuLoadScheduler (1, INT_MAX, true) // at least one thread for CPU intense ops
                                     // plus as much as we got left from the shared pool
 {
 	memset (&ctx, 0, sizeof (ctx));
@@ -315,10 +315,20 @@ bool CFullHistory::FetchRevisionData ( CString path
                    , false		// includeUserRevProps
                    , TRevPropNames());
 
-        // store WC path
+        // Store updated cache data
 
         if (cache == NULL)
+        {
 	        cache = query->GetCache();
+        }
+        else
+        {
+            new CAsyncCall ( cache
+                           , &LogCache::CCachedLogInfo::Save
+                           , &cpuLoadScheduler);
+        }
+
+        // store WC path
 
 	    const CPathDictionary* paths = &cache->GetLogInfo().GetPaths();
         wcPath.reset (new CDictionaryBasedTempPath (paths, (const char*)relPath));

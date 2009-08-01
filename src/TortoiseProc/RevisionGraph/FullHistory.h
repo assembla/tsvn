@@ -146,7 +146,7 @@ private:
 
 	bool						cancelled;
 
-    const CCachedLogInfo*       cache;
+    CCachedLogInfo*             cache;
 	std::auto_ptr<CSVNLogQuery> svnQuery;
 	std::auto_ptr<CCacheLogQuery> query;
 
