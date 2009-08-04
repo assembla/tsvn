@@ -2378,35 +2378,32 @@ bool CSVNProgressDlg::CmdResolve(CString& sWindowTitle, bool& localoperation)
 				bool doCheck = true;
 				if (targetPath.Exists() && !targetPath.IsDirectory())	// only check existing files
 				{
-					if (targetPath.GetFileSize() < 100*1024)			// only check files smaller than 100kBytes
+					SVNProperties props = SVNProperties(targetPath, SVNRev::REV_WC, false);
+					for (int i=0; i<props.GetCount(); i++)
 					{
-						SVNProperties props = SVNProperties(targetPath, SVNRev::REV_WC, false);
-						for (int i=0; i<props.GetCount(); i++)
+						if (props.GetItemName(i).compare(_T("svn:mime-type"))==0)
 						{
-							if (props.GetItemName(i).compare(_T("svn:mime-type"))==0)
+							CString mimetype = CUnicodeUtils::GetUnicode((char *)props.GetItemValue(i).c_str());
+							if ((!mimetype.IsEmpty())&&(mimetype.Left(4).CompareNoCase(_T("text"))))
 							{
-								CString mimetype = CUnicodeUtils::GetUnicode((char *)props.GetItemValue(i).c_str());
-								if ((!mimetype.IsEmpty())&&(mimetype.Left(4).CompareNoCase(_T("text"))))
-								{
-									doCheck = false;	// do not check files with a non-text mimetype
-									break;
-								}
+								doCheck = false;	// do not check files with a non-text mimetype
+								break;
 							}
 						}
-						if (doCheck)
+					}
+					if (doCheck)
+					{
+						CStdioFile file(targetPath.GetWinPath(), CFile::typeBinary | CFile::modeRead);
+						CString strLine = _T("");
+						while (file.ReadString(strLine))
 						{
-							CStdioFile file(targetPath.GetWinPath(), CFile::typeBinary | CFile::modeRead);
-							CString strLine = _T("");
-							while (file.ReadString(strLine))
+							if (strLine.Find(_T("<<<<<<<"))==0)
 							{
-								if (strLine.Find(_T("<<<<<<<"))==0)
-								{
-									bMarkers = TRUE;
-									break;
-								}
+								bMarkers = TRUE;
+								break;
 							}
-							file.Close();
 						}
+						file.Close();
 					}
 				}
 			}
