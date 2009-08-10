@@ -36,7 +36,7 @@
 			</filterchain>
 		</loadfile>
 		<echo file="subversion\svn_private_config.h" message="${configfile}" />
-
+		
 
 		<property name="machineoption" value="/MACHINE:X86" if="${platform == 'win32'}" />
 		<property name="machineoption" value="/MACHINE:x64" if="${platform == 'x64'}" />
@@ -93,7 +93,6 @@
 						<define name="_USE_32BIT_TIME_T" if="${platform == 'win32'}" />
 						<define name="APR_DECLARE_STATIC" if="${static == 'static'}"/>
 						<define name="APU_DECLARE_STATIC" if="${static == 'static'}"/>
-						<define name="APU_HAVE_DB=1" />
 						<define name="ENABLE_NLS" if="${static != 'static'}"/>
 						<define name="SVN_NEON_0_26=1" />
 						<define name="SVN_NEON_0_27=1" />
@@ -174,7 +173,6 @@
 						<define name="_USE_32BIT_TIME_T" if="${platform == 'win32'}" />
 						<define name="APR_DECLARE_STATIC" if="${static == 'static'}"/>
 						<define name="APU_DECLARE_STATIC" if="${static == 'static'}"/>
-						<define name="APU_HAVE_DB=1" />
 						<define name="SVN_LIBSVN_FS_LINKS_FS_BASE=1" />
 						<define name="ENABLE_NLS" if="${static != 'static'}"/>
 						<define name="SVN_LIBSVN_CLIENT_LINKS_RA_NEON=1" />
@@ -270,7 +268,6 @@
 							<define name="APU_DECLARE_EXPORT" if="${static != 'static'}"/>
 							<define name="APR_DECLARE_STATIC" if="${static == 'static'}"/>
 							<define name="APU_DECLARE_STATIC" if="${static == 'static'}"/>
-							<define name="APU_HAVE_DB=1" />
 							<define name="ENABLE_NLS" if="${static != 'static'}"/>
 							<define name="SVN_NEON_0_26=1" />
 							<define name="SVN_NEON_0_27=1" />
