@@ -1,5 +1,7 @@
 Version 1.6.5
-- BUG: fixed access to freed memory. (Stefan)
+- BUG: fixed access to freed memory which could crash
+       the 'resolve' command. (Stefan)
+- BUG: the ssl certificate files weren't saved. (Stefan)
 - BUG: Y coordinate in log statistics graph Repository had 
        inconsistent scaling. (Stefan Fuhrmann)
 
