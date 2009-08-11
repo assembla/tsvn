@@ -2378,7 +2378,7 @@ bool CSVNProgressDlg::CmdResolve(CString& sWindowTitle, bool& localoperation)
 				bool doCheck = true;
 				if (targetPath.Exists() && !targetPath.IsDirectory())	// only check existing files
 				{
-					SVNProperties props = SVNProperties(targetPath, SVNRev::REV_WC, false);
+					SVNProperties props(targetPath, SVNRev::REV_WC, false);
 					for (int i=0; i<props.GetCount(); i++)
 					{
 						if (props.GetItemName(i).compare(_T("svn:mime-type"))==0)
