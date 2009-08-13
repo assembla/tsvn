@@ -4970,6 +4970,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
 				SVNRev rev = pLogEntry2->Rev;
 				CString relurl = changedpaths[0];
 				CString url = m_ProjectProperties.sWebViewerPathRev;
+				url = GetAbsoluteUrlFromRelativeUrl(url);
 				url.Replace(_T("%REVISION%"), rev.ToString());
 				url.Replace(_T("%PATH%"), relurl);
 				relurl = relurl.Mid(relurl.Find('/'));
