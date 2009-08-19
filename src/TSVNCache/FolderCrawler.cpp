@@ -142,6 +142,7 @@ void CFolderCrawler::WorkerThread()
 			// Termination event
 			break;
 		}
+		CTraceToOutputDebugString::Instance()(_T("FolderCrawler.cpp: waking up crawler\n"));
 
 		if (SysInfo::Instance().IsVistaOrLater())
 		{
@@ -264,6 +265,7 @@ void CFolderCrawler::WorkerThread()
 						nCurrentCrawledpathIndex++;
 						if (nCurrentCrawledpathIndex >= MAX_CRAWLEDPATHS)
 							nCurrentCrawledpathIndex = 0;
+						CTraceToOutputDebugString::Instance()(_T("FolderCrawler.cpp: Invalidating/refreshing folder %s\n"), workingPath.GetWinPath());
 					}
 					InvalidateRect(hWnd, NULL, FALSE);
 					CSVNStatusCache::Instance().WaitToRead();
@@ -319,6 +321,7 @@ void CFolderCrawler::WorkerThread()
 						nCurrentCrawledpathIndex++;
 						if (nCurrentCrawledpathIndex >= MAX_CRAWLEDPATHS)
 							nCurrentCrawledpathIndex = 0;
+						CTraceToOutputDebugString::Instance()(_T("FolderCrawler.cpp: updating path %s\n"), workingPath.GetWinPath());
 					}
 					InvalidateRect(hWnd, NULL, FALSE);
 					// HasAdminDir() already checks if the path points to a dir
@@ -392,6 +395,7 @@ void CFolderCrawler::WorkerThread()
 					nCurrentCrawledpathIndex++;
 					if (nCurrentCrawledpathIndex >= MAX_CRAWLEDPATHS)
 						nCurrentCrawledpathIndex = 0;
+					CTraceToOutputDebugString::Instance()(_T("FolderCrawler.cpp: Crawling folder %s\n"), workingPath.GetWinPath());
 				}
 				InvalidateRect(hWnd, NULL, FALSE);
 				CSVNStatusCache::Instance().WaitToRead();

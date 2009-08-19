@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007 - TortoiseSVN
+// Copyright (C) 2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,14 +17,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 #pragma once
-#include <Windows.h>
-
-/**
- * \ingroup Utils
- * Trace macro for win32 applications where the MFC or ATL trace macro is
- * not available.
- */
-void TRACE(LPCTSTR str, ...);
+#include "registry.h"
 
 
 class CTraceToOutputDebugString
@@ -72,14 +65,14 @@ private:
 	}
 
 	bool m_bActive;
-	static CTraceToOutputDebugString& m_pInstance;
+	static CTraceToOutputDebugString * m_pInstance;
 
 	// Non Unicode output helper
     void TraceV(PCSTR pszFormat, va_list args)
     {
         // Format the output buffer
         char szBuffer[1024];
-        _vsnprintf(szBuffer, _countof(szBuffer), pszFormat, args);
+        _vsnprintf_s(szBuffer, 1024, _countof(szBuffer), pszFormat, args);
         OutputDebugStringA(szBuffer);
     }
  
@@ -87,7 +80,7 @@ private:
     void TraceV(PCWSTR pszFormat, va_list args)
     {
         wchar_t szBuffer[1024];
-        _vsnwprintf(szBuffer, _countof(szBuffer), pszFormat, args);
+        _vsnwprintf_s(szBuffer, 1024, _countof(szBuffer), pszFormat, args);
         OutputDebugStringW(szBuffer);
     }
 };

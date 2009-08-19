@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007 - TortoiseSVN
+// Copyright (C) 2009 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,26 +16,8 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-#include "Debug.h"
-#include <tchar.h>
-
-#if defined(_DEBUG) || defined(DEBUG)
-#include <stdlib.h>
-#include <stdarg.h>
-void TRACE(LPCTSTR str, ...)
-{
-	static TCHAR buf[20*1024];
-
-	va_list ap;
-	va_start(ap, str);
-
-	_vstprintf_s(buf, 20*1024, str, ap);
-	OutputDebugString(buf);
-	va_end(ap);
-
-};
-#else
-void TRACE(LPCTSTR str, ...) {UNREFERENCED_PARAMETER(str);}
-#endif
+#pragma once
+#include "stdafx.h"
+#include "DebugOutput.h"
 
 CTraceToOutputDebugString* CTraceToOutputDebugString::m_pInstance;
