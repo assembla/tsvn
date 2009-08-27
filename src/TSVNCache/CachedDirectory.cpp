@@ -267,6 +267,7 @@ CStatusCacheEntry CCachedDirectory::GetStatusForMember(const CTSVNPath& path, bo
 			{
 				return dirEntry->GetOwnStatus(bRecursive);
 			}
+		}
 		else
 		{
 			{
