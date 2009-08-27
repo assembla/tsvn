@@ -418,7 +418,7 @@ CCachedDirectory * CSVNStatusCache::GetDirectoryCacheEntry(const CTSVNPath& path
 				{
 					CCachedDirectory * cdir = m_directoryCache.insert(m_directoryCache.lower_bound(path), std::make_pair(path, newcdir))->second;
 					if ((!path.IsEmpty())&&(path.HasAdminDir()))
-						watcher.AddPath(path);
+						CSVNStatusCache::Instance().AddFolderForCrawling(path);
 					return cdir;		
 				}
 				m_bClearMemory = true;
