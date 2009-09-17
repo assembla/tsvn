@@ -39,7 +39,10 @@ CShellExtClassFactory::~CShellExtClassFactory()
 STDMETHODIMP CShellExtClassFactory::QueryInterface(REFIID riid,
                                                    LPVOID FAR *ppv)
 {
-    *ppv = NULL;
+    if(ppv == 0)
+		return E_POINTER;
+
+	*ppv = NULL;
 
     // Any interface on this object is the object pointer
 	
@@ -74,7 +77,10 @@ STDMETHODIMP CShellExtClassFactory::CreateInstance(LPUNKNOWN pUnkOuter,
 												   REFIID riid,
 												   LPVOID *ppvObj)
 {
-    *ppvObj = NULL;
+	if(ppvObj == 0)
+		return E_POINTER;
+
+	*ppvObj = NULL;
 	
     // Shell extensions typically don't support aggregation (inheritance)
 	
@@ -90,9 +96,11 @@ STDMETHODIMP CShellExtClassFactory::CreateInstance(LPUNKNOWN pUnkOuter,
     if (NULL == pShellExt)
         return E_OUTOFMEMORY;
 	
-    return pShellExt->QueryInterface(riid, ppvObj);
+    const HRESULT hr = pShellExt->QueryInterface(riid, ppvObj);
+	if(FAILED(hr))
+		delete pShellExt;
+	return hr;
 }
-
 
 STDMETHODIMP CShellExtClassFactory::LockServer(BOOL /*fLock*/)
 {
