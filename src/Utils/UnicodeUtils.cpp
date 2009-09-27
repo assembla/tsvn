@@ -37,7 +37,7 @@ CStringA CUnicodeUtils::GetUTF8(const CStringW& string)
 	if (len==0)
 		return retVal;
 	buf = retVal.GetBuffer(len*4 + 1);
-//	SecureZeroMemory(buf, (string.GetLength()*4 + 1)*sizeof(char));
+	SecureZeroMemory(buf, (string.GetLength()*4 + 1)*sizeof(char));
 	int lengthIncTerminator = WideCharToMultiByte(CP_UTF8, 0, string, -1, buf, len*4, NULL, NULL);
 	retVal.ReleaseBuffer(lengthIncTerminator-1);
 	return retVal;
