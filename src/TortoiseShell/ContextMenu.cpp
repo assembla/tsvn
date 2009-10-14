@@ -487,8 +487,10 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 		svn_wc_status_kind status = svn_wc_status_none;
 		if (IsClipboardFormatAvailable(CF_HDROP)) 
 			itemStatesFolder |= ITEMIS_PATHINCLIPBOARD;
-		if ((folder_.compare(statuspath)!=0)&&(g_ShellCache.IsContextPathAllowed(folder_.c_str())))
+		if (g_ShellCache.IsContextPathAllowed(folder_.c_str()))
 		{
+			if (folder_.compare(statuspath)!=0)
+			{
 			CTSVNPath askedpath;
 			askedpath.SetFromWin(folder_.c_str());
 			try
@@ -535,6 +537,12 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 			{
 				ATLTRACE2(_T("Exception in SVNStatus::GetAllStatus()\n"));
 			}
+		}
+		else
+		{
+			status = fetchedstatus;
+			itemStatesFolder = itemStates;
+		}
 		}
 		else
 		{
@@ -616,7 +624,6 @@ STDMETHODIMP CShellExt::Initialize(LPCITEMIDLIST pIDFolder,
 void CShellExt::InsertSVNMenu(BOOL istop, HMENU menu, UINT pos, UINT_PTR id, UINT stringid, UINT icon, UINT idCmdFirst, SVNCommands com, UINT uFlags)
 {
 	TCHAR menutextbuffer[255] = {0};
-	TCHAR verbsbuffer[255] = {0};
 	MAKESTRING(stringid);
 
 	if (istop)
