@@ -213,6 +213,7 @@ HRESULT __stdcall SubWCRev::GetWCInfo(/*[in]*/ BSTR wcPath, /*[in]*/VARIANT_BOOL
 	{
 		hr = S_FALSE;
 	}
+	apr_pool_destroy(pool);
 	return hr;
 }
 
