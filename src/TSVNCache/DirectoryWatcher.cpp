@@ -403,7 +403,8 @@ void CDirectoryWatcher::WorkerThread()
 					// Recrawl the watched folder we lost changes for.
 					if (numBytes == 0)
 					{
-						m_FolderCrawler->AddPathForUpdate(pdi->m_DirName);
+						if (m_FolderCrawler)
+							m_FolderCrawler->AddPathForUpdate(pdi->m_DirName);
 						continue;
 					}
 
