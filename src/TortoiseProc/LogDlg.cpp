@@ -3793,6 +3793,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 
 	// calculate some information the context menu commands can use
 	CString pathURL = GetURLFromPath(m_path);
+	CString relPathURL = pathURL.Mid(m_sRepositoryRoot.GetLength());
 	POSITION pos = m_LogList.GetFirstSelectedItemPosition();
 	int indexNext = m_LogList.GetNextSelectedItem(pos);
 	if (indexNext < 0)
@@ -3805,7 +3806,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 		for (int i=0; i<pSelLogEntry->pArChangedPaths->GetCount(); ++i)
 		{
 			LogChangedPath * changedpath = (LogChangedPath *)pSelLogEntry->pArChangedPaths->GetAt(i);
-			if (changedpath->lCopyFromRev)
+			if ((changedpath->lCopyFromRev) && (changedpath->sPath.Compare(relPathUrl)==0))
 				revPrevious = changedpath->lCopyFromRev;
 		}
 	}
