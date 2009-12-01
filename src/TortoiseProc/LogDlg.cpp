@@ -3806,7 +3806,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 		for (int i=0; i<pSelLogEntry->pArChangedPaths->GetCount(); ++i)
 		{
 			LogChangedPath * changedpath = (LogChangedPath *)pSelLogEntry->pArChangedPaths->GetAt(i);
-			if ((changedpath->lCopyFromRev) && (changedpath->sPath.Compare(relPathUrl)==0))
+			if ((changedpath->lCopyFromRev) && (changedpath->sPath.Compare(relPathURL)==0))
 				revPrevious = changedpath->lCopyFromRev;
 		}
 	}
