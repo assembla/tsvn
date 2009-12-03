@@ -101,11 +101,14 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /* lpReserved */)
 		// in that case, we do it ourselves
 		if (g_cRefThisDll > 0)
 		{
-			std::set<CShellExt *>::iterator it = g_exts.begin();
-			while (it != g_exts.end())
+			if (g_exts.size())
 			{
-				delete *it;
-				it = g_exts.begin();
+				std::set<CShellExt *>::iterator it = g_exts.begin();
+				while (it != g_exts.end())
+				{
+					delete *it;
+					it = g_exts.begin();
+				}
 			}
 			while (g_cAprInit--)
 			{
