@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2009-08-30 23:10 +0000\n"
-"PO-Revision-Date: 2009-10-14 09:49+0100\n"
+"PO-Revision-Date: 2009-12-04 10:58+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -344,15 +344,15 @@ msgstr "TortoiseSVN integreert naadloos in de Windows shell (i.e. de Verkenner).
 
 #. (para)
 msgid "And you are not even forced to use the Windows Explorer. TortoiseSVN's context menus work in many other file managers, and in the File/Open dialog which is common to most standard Windows applications. You should, however, bear in mind that TortoiseSVN is intentionally developed as extension for the Windows Explorer. Thus it is possible that in other applications the integration is not as complete and e.g. the icon overlays may not be shown."
-msgstr "En daarbij komt nog dat je de Windows Verkenner niet persee hoeft te gebruiken. TortoiseSVN's context menus werken in vele andere bestandbeheer programma's, alsook in de Bestand/Open dialoog, welke in de meeste standaard Windows applicaties aanwezig is. Je moet hierbij wel bedenken dat TortoiseSVN in eerste instantie ontwikkeld is als uitbreiding op de Windows Verkenner. Daardoor is het mogelijk dat in andere applicaties de integratie niet zo compleet is en bijvoorbeeld de laag over de pictogrammen niet zichtbaar is."
+msgstr "En daarbij komt nog dat je de Windows Verkenner niet persee hoeft te gebruiken. TortoiseSVN's context menus werken in vele andere bestandbeheer programma's, alsook in de Bestand/Open dialoog, welke in de meeste standaard Windows applicaties aanwezig is. Je moet hierbij wel bedenken dat TortoiseSVN in eerste instantie ontwikkeld is als uitbreiding op de Windows Verkenner. Daardoor is het mogelijk dat in andere applicaties de integratie niet zo compleet is en bijvoorbeeld de overlappende pictogrammen niet zichtbaar zijn."
 
 #. (term)
 msgid "Icon overlays"
-msgstr "Pictogrammen overlays"
+msgstr "Overlappende pictogrammen"
 
 #. (para)
 msgid "The status of every versioned file and folder is indicated by small overlay icons. That way you can see right away what the status of your working copy is."
-msgstr "De status van elk bestand en folder onder versiebeheer wordt weergegeven met een klein overlay pictogram. Op die manier kun je direct zien wat de status is van je werk kopie."
+msgstr "De status van elk bestand en folder onder versiebeheer wordt weergegeven met een klein overlappend pictogram. Op die manier kun je direct zien wat de status is van je werk kopie."
 
 #. (term)
 msgid "Easy access to Subversion commands"
@@ -1291,7 +1291,7 @@ msgstr "Archief Reservekopie"
 
 #. (primary)
 msgid "backup"
-msgstr "backup"
+msgstr "reservekopie"
 
 #. (para)
 msgid "Whichever type of repository you use, it is vitally important that you maintain regular backups, and that you verify the backup. If the server fails, you may be able to access a recent version of your files, but without the repository all your history is lost forever."
@@ -1317,7 +1317,7 @@ msgstr "De <literal>svnadmin</literal> tool wordt automatisch geïnstalleerd als
 
 #. (title)
 msgid "Server side hook scripts"
-msgstr "Server side hook scripts"
+msgstr "Server gesitueerde hook scripts"
 
 #. (primary)
 msgid "hooks"
@@ -1513,7 +1513,7 @@ msgid ""
 "svn://localhost/repos/TestRepo\n"
 "</screen> when prompted by the repo browser."
 msgstr ""
-"Stel dat je archief opgeslagen is op <filename>c:\\repos\\TestRepo</filename> en je server heeft de naam <filename>localhost</filename>, voer dan <screen>\n"
+"Stel dat je archief opgeslagen is op <filename>c:\\repos\\TestRepo</filename> en je server heeft de naam <filename>localhost</filename>, voer dan: <screen>\n"
 "svn://localhost/repos/TestRepo\n"
 "</screen> in als de archief-verkenner daar om vraagt."
 
@@ -1527,13 +1527,13 @@ msgid ""
 "svn://localhost/TestRepo\n"
 "</screen> Note that the --root switch is also needed if your repository is located on a different partition or drive than the location of svnserve on your server."
 msgstr ""
-"Het is ook mogelijk in de veiligheid te verhogen en tijd te besparen bij het invoeren van URLs met svnserve door gebruik te maken van de –root optie  voor het instellen van de hoofd map en beperken van toegang tot een bepaalde map op de server: <screen>\n"
+"Het is ook mogelijk in de veiligheid te verhogen en tijd te besparen bij het invoeren van URLs met svnserve door gebruik te maken van de --root optie voor het instellen van de hoofd map en het beperken van toegang tot een bepaalde map op de server: <screen>\n"
 "svnserve.exe --daemon --root drive:\\path\\to\\repository\\root\n"
-"</screen> Met de vorige test kan svnserve  opstarten met: <screen>\n"
+"</screen> Met de vorige test kan svnserve  opstarten als: <screen>\n"
 "svnserve.exe --daemon --root c:\\repos\n"
-"</screen> En in TortoiseSVN is de archief-verkenner URL verkort tot: <screen>\n"
+"</screen> En in TortoiseSVN is de archiefverkenner URL verkort tot: : <screen>\n"
 "svn://localhost/TestRepo\n"
-"</screen> Merk op dat de –root optie ook nodig als het archief op een andere partitie of schijf dan svnserve is opgeslagen."
+"</screen> Merk op dat de --root optie ook nodig als het archief op een andere partitie of schijf dan svnserve is opgeslagen."
 
 #. (para)
 msgid "Svnserve will service any number of repositories. Just locate them somewhere below the root folder you just defined, and access them using a URL relative to that root."
@@ -2127,7 +2127,7 @@ msgstr "Als je de <literal>SVNParentPath</literal> optie hebt gebruikt, hoef je 
 
 #. (para)
 msgid "If you are using Subversion 1.3 or later, you can use the <literal>SVNListParentPath on</literal> directive to allow Apache to produce a listing of all available projects if you point your browser at the parent path rather than at a specific repository."
-msgstr ""
+msgstr "Als je Subversion 1.3 of later gebruikt, kun je de <literal>SVNListParentPath on</literal> optie gebruiken om Apache toe te staan een lijst te maken van alle beschikbare projecten als je met je browser naar het pad van de hoofdmap gaat in plaats van een specifiek archief."
 
 #. (title)
 msgid "Path-Based Authorization"
@@ -2139,7 +2139,7 @@ msgstr "Authorisatie"
 
 #. (para)
 msgid "The <literal>mod_authz_svn</literal> module permits fine-grained control of access permissions based on user names and repository paths. This is available with the Apache server, and as of Subversion 1.3 it is available with svnserve as well."
-msgstr ""
+msgstr "De <literal>mod_authz_svn</literal> module maakt het mogelijk om nauwkeurig afgestemde toegangscontrole gebaseerd op gebruikers namen en archiefpaden te organiseren. Deze methode is beschikbaar in Apache en, vanaf Subversion 1.3, ook in svnserve."
 
 #. (para)
 msgid ""
@@ -2173,14 +2173,43 @@ msgid ""
 "@training = rw\n"
 "</screen>"
 msgstr ""
+"Een voorbeeld bestand kan er zo uit zien: <screen>\n"
+"[groups]\n"
+"admin = john, kate\n"
+"devteam1 = john, rachel, sally\n"
+"devteam2 = kate, peter, mark\n"
+"docs = bob, jane, mike\n"
+"training = zak\n"
+"# Standaard toegangsregel voor alle archieven \n"
+"# Iedereen can lezen, admins kunnen schrijven, Dan German is uitgesloten.\n"
+"[/]\n"
+"* = r\n"
+"@admin = rw\n"
+"dangerman =\n"
+"# Geef ontwikkelaars complete toegang tot hun project archieven \n"
+"[proj1:/]\n"
+"@devteam1 = rw\n"
+"[proj2:/]\n"
+"@devteam2 = rw\n"
+"[bigproj:/]\n"
+"@devteam1 = rw\n"
+"@devteam2 = rw\n"
+"trevor = rw\n"
+"# Geef de documentatie mensen schrijfrechten op alle document mappen\n"
+"[/trunk/doc]\n"
+"@docs = rw\n"
+"# Geeft stagiaires alleen schrijfrechten in training archieven\n"
+"[TrainingRepos:/]\n"
+"@training = rw\n"
+"</screen>"
 
 #. (para)
 msgid "Note that checking every path can be an expensive operation, particularly in the case of the revision log. The server checks every changed path in each revision and checks it for readability, which can be time-consuming on revisions which affect large numbers of files."
-msgstr ""
+msgstr "Merk op dat het controleren van elk pad tijdrovend is, vooral bij een revisie log. De server controleert elk gewijzigd pad in elke revisie and controleert of er gelezen kan worden, hetgeen erg lang kan duren voor revisies die veel bestanden betreffen."
 
 #. (para)
 msgid "Authentication and authorization are separate processes. If a user wants to gain access to a repository path, she has to meet <emphasis>both</emphasis>, the usual authentication requirements and the authorization requirements of the access file."
-msgstr ""
+msgstr "Authenticatie en autorisatie zijn losstaande processen. Als een gebruiker toegang wil tot een archief, dan moet <emphasis>zowel</emphasis> aan de authenticatie voorwaarden <emphasis>als ook</emphasis> aan de autorisatie voorwaarden voldaan worden."
 
 #. (title)
 msgid "Authentication With a Windows Domain"
@@ -2196,11 +2225,11 @@ msgstr "domeincontroller"
 
 #. (para)
 msgid "As you might have noticed you need to make a username/password entry in the <filename>passwd</filename> file for each user separately. And if (for security reasons) you want your users to periodically change their passwords you have to make the change manually."
-msgstr ""
+msgstr "Zoals je mogelijk al opgemerkt hebt, moet je voor elke gebruiker een aparte gebruikersnaam/wachtwoord combinatie opnemen in het <filename>passwd</filename> bestand. Als je (vanwege veiligheidsredenen) wilt dat gebruikers periodiek hun wachtwoord wijzigen, dan moet je dat handmatig doen."
 
 #. (para)
 msgid "But there's a solution for that problem - at least if you're accessing the repository from inside a LAN with a windows domain controller: <literal>mod_auth_sspi</literal>!"
-msgstr ""
+msgstr "Maar er is een oplossing voor dat probleem – tenminste als je het archief benaderd vanbinnen een LAN met een windows domein controller: <literal>mod_auth_sspi</literal>!"
 
 #. (primary)
 msgid "SSPI"
@@ -2212,11 +2241,11 @@ msgstr "NTLM"
 
 #. (para)
 msgid "The original SSPI module was offered by Syneapps including source code. But the development for it has been stopped. But don't despair, the community has picked it up and improved it. It has a new home on <ulink url=\"http://sourceforge.net/projects/mod-auth-sspi/\"><citetitle>SourceForge</citetitle></ulink>."
-msgstr ""
+msgstr "De originele SSPI module is aangeleverd door Syneapps, inclusief broncode. Maar de ontwikkeling daarvan is gestopt. Maar wanhoop niet, de community heeft het opgepakt en verbeterd. Het heeft een nieuw thuis op <ulink url=\"http://sourceforge.net/projects/mod-auth-sspi/\"><citetitle>SourceForge</citetitle></ulink>."
 
 #. (para)
 msgid "Download the module which matches your apache version, then copy the file <filename>mod_auth_sspi.so</filename> into the Apache modules folder."
-msgstr ""
+msgstr "Haal de module die bij jouw apache versie hoort op en kopieer het bestand <filename>mod_auth_sspi.so</filename> naar de Apache module map."
 
 #. (para)
 msgid ""
@@ -2226,6 +2255,11 @@ msgid ""
 "LoadModule auth_module modules/mod_auth.so\n"
 "</screen>"
 msgstr ""
+"Bewerk het Apache configuratie bestand: voeg de regel <screen>\n"
+"LoadModule sspi_auth_module modules/mod_auth_sspi.so\n"
+"</screen> toen aan de <literal>LoadModule</literal> sectie. Let op dat je deze regel toevoegt <emphasis>voor</emphasis> de regel <screen>\n"
+"LoadModule auth_module modules/mod_auth.so\n"
+"</screen>"
 
 #. (para)
 msgid ""
@@ -2243,38 +2277,51 @@ msgid ""
 "SSPIOfferBasic On\n"
 "</screen> within the <literal>&lt;Location /svn&gt;</literal> block. If you don't have a domain controller, leave the name of the domain control as <literal>&lt;domaincontroller&gt;</literal>."
 msgstr ""
+"Om ervoor te zorgen dat op deze Subversion locatie deze methode van euthenticatie gebruikt, moet je de regel <screen>\n"
+"AuthType Basic\n"
+"</screen> wijzigen in <screen>\n"
+"AuthType SSPI\n"
+"</screen> en moet je ook <screen>\n"
+"SSPIAuth On\n"
+"SSPIAuthoritative On\n"
+"SSPIDomain &lt;domaincontroller&gt;\n"
+"SSPIOmitDomain on\n"
+"SSPIUsernameCase lower\n"
+"SSPIPerRequestAuth on\n"
+"SSPIOfferBasic On\n"
+"</screen> toevoegen binnen het <literal>&lt;Location /svn&gt;</literal> blok. Als je geen domein controller hebt, laat dan de naam van de domein controle staan op <literal>&lt;domaincontroller&gt;</literal>."
 
 #. (para)
 msgid "Note that if you are authenticating using SSPI, then you don't need the <literal>AuthUserFile</literal> line to define a password file any more. Apache authenticates your username and password against your windows domain instead. You will need to update the users list in your <filename>svnaccessfile</filename> to reference <literal>DOMAIN\\username</literal> as well."
-msgstr ""
+msgstr "Merk op dat als je SSPI gebruikt voor authenticatie, dat je dan de regel <literal>AuthUserFile</literal> niet meer nodig hebt om een wachtwoord bestand te definiëren. Apache authenticeert je gebruikersnaam en wachtwoord dan via je windows domein. Je moet dan je gebruikerslijst in je <filename>svnaccessfile</filename> naar <literal>DOMAIN\\username</literal> laten verwijzen."
 
 #. (para)
 msgid "The SSPI authentication is only enabled for SSL secured connections (https). If you're only using normal http connections to your server, it won't work."
-msgstr ""
+msgstr "De SSPI authenticatie is alleen mogelijk voor met SSL beveiligde verbindingen (https). Als je alleen normale http verbindingen gebruikt naar je server, dan zal het niet werken. "
 
 #. (para)
 msgid "To enable SSL on your server, see the chapter: <xref linkend=\"tsvn-serversetup-apache-7\"/>"
-msgstr ""
+msgstr "Om SSL op je server aan te zetten, lees hoofdstuk: <xref linkend=\"tsvn-serversetup-apache-7\"/>"
 
 #. (para)
 msgid "Subversion <filename>AuthzSVNAccessFile</filename> files are case sensitive in regard to user names (<literal>JUser</literal> is different from <literal>juser</literal>)."
-msgstr ""
+msgstr "Subversion <filename>AuthzSVNAccessFile</filename> bestanden zijn hoofdlettergevoelig in relatie tot gebruikersnamen (<literal>JUser</literal> is anders dan <literal>juser</literal>)."
 
 #. (para)
 msgid "In Microsoft's world, Windows domains and user names are not case sensitive. Even so, some network administrators like to create user accounts in CamelCase (e.g. <literal>JUser</literal>)."
-msgstr ""
+msgstr "In Microsoft’s wereld, Windows domeinen en gebruikersnamen zijn niet hoofdlettergevoelig. Sommige netwerkbeheerders vinden het leuk om voor gebruikersnamen CamelCase te gebruiken (bijv. <literal>JUser</literal>)."
 
 #. (para)
 msgid "This difference can bite you when using SSPI authentication as the windows domain and user names are passed to Subversion in the same case as the user types them in at the prompt. Internet Explorer often passes the username to Apache automatically using whatever case the account was created with."
-msgstr ""
+msgstr "Door dit verschil kun je gebeten worden als je SSPI authenticatie gebruikt onder windows en de gebruikersnamen op dezelfde manier als de gebruiker deze heeft ingevoerd worden doorgegeven aan Subversion, omdat <liteal>JUser</literal> en <literal>juser</literal> voor Subversion verschillende gebruikers zijn. Internet Explorer geeft vaak de gebruikersnaam automatisch door aan Apache onafhankelijk van de manier waarop het geschreven is."
 
 #. (para)
 msgid "The end result is that you may need at least two entries in your <literal>AuthzSVNAccessFile</literal> for each user -- a lowercase entry and an entry in the same case that Internet Explorer passes to Apache. You will also need to train your users to also type in their credentials using lower case when accessing repositories via TortoiseSVN."
-msgstr ""
+msgstr "Het eindresultaat is dat je voor elke gebruiker soms op zijn minst twee vermeldingen nodig hebt in je <literal>AuthzSVNAccessFile</literal> voor elke gebruiker -- één met kleine letters en één met de zelfde indeling zoals Internet Explorer deze doorgeeft aan Apache. Je zult je gebruikers ook moeten aanleren om voor hun inloggegevens altijd kleine letters te gebruiken als zij de archieven benaderen via TortoiseSVN."
 
 #. (para)
 msgid "Apache's Error and Access logs are your best friend in deciphering problems such as these as they will help you determine the username string passed onto Subversion's <literal>AuthzSVNAccessFile</literal> module. You may need to experiment with the exact format of the user string in the <literal>svnaccessfile</literal> (e.g. <literal>DOMAIN\\user</literal> vs. <literal>DOMAIN//user</literal>) in order to get everything working."
-msgstr ""
+msgstr "De fout and toegang logbestanden van Apache zijn je beste vriend bij het ontrafelen van dit soort problemen, omdat deze je helpen de gebruikersnaam te bepalen die doorgegeven zijn aan Subversion’s <literal>AuthzSVNAccessFile</literal> module. Om alles werkend te krijgen zul je soms wat moeten experimenteren met het exacte formaat van de gebruikersregel in de <literal>svnaccessfile</literal> (bijv. <literal>DOMAIN\\user</literal> vs. <literal>DOMAIN//user</literal>)."
 
 #. (title)
 msgid "Multiple Authentication Sources"
@@ -2286,11 +2333,11 @@ msgstr "Meervoudige authenticatie"
 
 #. (para)
 msgid "It is also possible to have more than one authentication source for your Subversion repository. To do this, you need to make each authentication type non-authoritative, so that Apache will check multiple sources for a matching username/password."
-msgstr ""
+msgstr "Het is mogelijk om meer dan één authenticatiebron te gebruiken voor je Subversion archief. Om dit te gebruiken, moet je elke authenticatie type instellen als niet-gezaghebbend (non-authoritive), zodat Apache bij meerdere bronnen de gebruikersnaam/wachtwoordcombinatie zal controleren."
 
 #. (para)
 msgid "A common scenario is to use both Windows domain authentication and a <literal>passwd</literal> file, so that you can provide SVN access to users who don't have a Windows domain login."
-msgstr ""
+msgstr "Een gebruikelijke oplossing is om de Windows domein authenticatie en een <literal>passwd</literal> bestand te gebruiken, zodat je gebruikers zonder een Windows domein account toch toegang kunt geven tot het SVN archief."
 
 #. (para)
 msgid ""
@@ -2299,6 +2346,10 @@ msgid ""
 "SSPIAuthoritative Off\n"
 "</screen>"
 msgstr ""
+"Om Windows domein en <filename>passwd</filename> bestand authenticatie te gebruiken, moet je de volgende opties opnemen binnen het <literal>&lt;Location&gt;</literal> blok van je Apache configuratiebestand: <screen>\n"
+"AuthBasicAuthoritative Off\n"
+"SSPIAuthoritative Off\n"
+"</screen>"
 
 #. (para)
 msgid ""
@@ -2327,10 +2378,34 @@ msgid ""
 "&lt;/Location&gt;\n"
 "</screen>"
 msgstr ""
+"Dit is een voorbeeld van de complete Apache configuratie met de gecombineerd Windows domein en <literal>passwd</literal> bestand authenticatie: <screen>\n"
+"&lt;Location /svn&gt;\n"
+"  DAV svn\n"
+"  SVNListParentPath on\n"
+"  SVNParentPath D:\\SVN\n"
+"\n"
+"  AuthName \"Subversion repositories\"\n"
+"  AuthzSVNAccessFile svnaccessfile.txt\n"
+"\n"
+"# NT Domain Logins.\n"
+"  AuthType SSPI\n"
+"  SSPIAuth On\n"
+"  SSPIAuthoritative Off\n"
+"  SSPIDomain &lt;domaincontroller&gt;\n"
+"  SSPIOfferBasic On\n"
+"\n"
+"# Htpasswd Logins.\n"
+"  AuthType Basic\n"
+"  AuthBasicAuthoritative Off\n"
+"  AuthUserFile passwd\n"
+"\n"
+"  Require valid-user\n"
+"&lt;/Location&gt;\n"
+"</screen>"
 
 #. (title)
 msgid "Securing the server with SSL"
-msgstr ""
+msgstr "De server beveiligen met SSL"
 
 #. (primary)
 msgid "SSL"
@@ -2338,7 +2413,7 @@ msgstr "SSL"
 
 #. (para)
 msgid "Even though Apache 2.2.x has OpenSSL support, it is not activated by default. You need to activate this manually."
-msgstr ""
+msgstr "Apache 2.2.x ondersteunt OpenSSL, maar dit is niet standaard ingeschakeld. Je moet dit handmatig aanzetten."
 
 #. (para)
 msgid ""
@@ -2353,6 +2428,16 @@ msgid ""
 "SSLMutex default\n"
 "</screen>"
 msgstr ""
+"Verwijder in het apache configuratiebestand de commentaar tekens op de regels: <screen>\n"
+"#LoadModule ssl_module modules/mod_ssl.so\n"
+"</screen> en onderaan <screen>\n"
+"#Include conf/extra/httpd-ssl.conf\n"
+"</screen> verander dan de regel (op een regel) <screen>\n"
+"SSLMutex \"file:C:/Program Files/Apache Software Foundation/\\\n"
+"Apache2.2/logs/ssl_mutex\"\n"
+"</screen> in <screen>\n"
+"SSLMutex default\n"
+"</screen>"
 
 #. (para)
 msgid ""
@@ -2360,6 +2445,9 @@ msgid ""
 "bin\\openssl req -config conf\\openssl.cnf -new -out my-server.csr\n"
 "</screen> You will be asked for a passphrase. Please don't use simple words but whole sentences, e.g. a part of a poem. The longer the phrase the better. Also you have to enter the URL of your server. All other questions are optional but we recommend you fill those in too."
 msgstr ""
+"Vervolgens moet je een SSL certificaat aanmaken. Open hiervoor een opdrachtprompt (DOS-scherm) en ga naar de Apache map (bijv. <filename>C:\\program files\\apache group\\apache2</filename>) en geef het volgende commando: <screen>\n"
+"bin\\openssl req -config conf\\openssl.cnf -new -out my-server.csr\n"
+"</screen> Je zult gevraagd worden om een beveiligingszin op te geven. Gebruik hiervoor niet alleen korte eenvoudige woorden, maar gebruik een hele zin (bijv. een deel van een gedicht). Hoe langer de zin is, hoe beter. Je moet ook de URL van je server opgeven. Alle andere vragen zijn optioneel, maar we bevelen aan om die ook in te vullen."
 
 #. (para)
 msgid ""
@@ -2367,8 +2455,12 @@ msgid ""
 "bin\\openssl genrsa -out conf\\privkey.pem 2048\n"
 "</screen>"
 msgstr ""
+"Normaalgesproken zal het <filename>privkey.pem</filename> automatisch gegenereerd worden, als dit niet gedaan wordt, moet je dit commando geven om het alsnog te genereren: <screen>\n"
+"bin\\openssl genrsa -out conf\\privkey.pem 2048\n"
+"</screen>"
 
 #. (para)
+#, fuzzy
 msgid ""
 "Next type the commands <screen>\n"
 "bin\\openssl rsa -in conf\\privkey.pem -out conf\\server.key\n"
@@ -2383,14 +2475,26 @@ msgid ""
 "                 -outform DER\n"
 "</screen> These commands created some files in the Apache <filename>conf</filename> folder (<filename>server.der.crt</filename>, <filename>server.csr</filename>, <filename>server.key</filename>, <filename>.rnd</filename>, <filename>privkey.pem</filename>, <filename>server.cert</filename>)."
 msgstr ""
+"Voer vervolgens de volgende commando’s in <screen>\n"
+"bin\\openssl rsa -in conf\\privkey.pem -out conf\\server.key\n"
+"</screen> en (op ééb regel) <screen>\n"
+"bin\\openssl req -new -key conf\\server.key -out conf\\server.csr \\\n"
+"-config conf\\openssl.cnf\n"
+"</screen> en dan (op één regel) <screen>\n"
+"bin\\openssl x509 -in conf\\server.csr -out conf\\server.cert\n"
+"                 -req -signkey conf\\server.key -days 4000\n"
+"</screen> Hiermee wordt een certificaat aangemaakt die over 4000 dagen verloopt. Als geef als laatste commando (op één regel): <screen>\n"
+"bin\\openssl x509 -in conf\\server.cert -out conf\\server.der.crt\n"
+"                 -outform DER\n"
+"</screen> Deze commando’s genereren enkele bestanden in de Apache <filename>conf</filename> map (<filename>server.der.crt</filename>, <filename>server.csr</filename>, <filename>server.key</filename>, <filename>.rnd</filename>, <filename>privkey.pem</filename>, <filename>server.cert</filename>)."
 
 #. (para)
 msgid "Restart the Apache service."
-msgstr ""
+msgstr "Herstart de Apache service."
 
 #. (para)
 msgid "Point your browser to <systemitem class=\"url\">https://servername/svn/project</systemitem> ..."
-msgstr ""
+msgstr "Ga met je browser naar <systemitem class=\"url\">https://servername/svn/project</systemitem> ..."
 
 #. (title)
 msgid "SSL and Internet Explorer"
@@ -2398,15 +2502,15 @@ msgstr "SSL en Internet Explorer"
 
 #. (para)
 msgid "If you're securing your server with SSL and use authentication against a windows domain you will encounter that browsing the repository with the Internet Explorer doesn't work anymore. Don't worry - this is only the Internet Explorer not able to authenticate. Other browsers don't have that problem and TortoiseSVN and any other Subversion client are still able to authenticate."
-msgstr ""
+msgstr "Als je je server met SSL beveiligd en je gebruikt authenticatie met een Windows domein, dan zul je merken dat het verkennen van je archief met Internet Explorer niet meer werkt. Geen zorgen – dit komt alleen doordat Internet Explorer niet kan authenticeren. Andere browsers hebben dit probleem niet en TortoiseSVN en andere Subversion applicaties kunnen nog steeds authenticeren. "
 
 #. (para)
 msgid "define a separate <literal>&lt;Location /path&gt;</literal> directive in the Apache config file, and add the <literal>SSPIBasicPreferred On</literal>. This will allow IE to authenticate again, but other browsers and Subversion won't be able to authenticate against that location."
-msgstr ""
+msgstr "een aparte <literal>&lt;Location /path&gt;</literal> richtlijn in het Apache configuratiebestand definieren en de <literal>SSPIBasicPreferred On</literal> optie toevoegen. Dit zorgt er voor dat IE weer kan authenticeren, maar andere browsers en Subversion kunnen niet op deze locatie authenticeren. "
 
 #. (para)
 msgid "Offer browsing with unencrypted authentication (without SSL) too. Strangely IE doesn't have any problems with authenticating if the connection is not secured with SSL."
-msgstr ""
+msgstr "Verkennen met unencrypteed authenticatie (zonder SSL). Vreemd genoeg heeft IE geen problemen met authenticeren als een verbinding niet beveiligd is met SSL."
 
 #. (para)
 msgid ""
@@ -2416,10 +2520,15 @@ msgid ""
 "             downgrade-1.0 force-response-1.0\n"
 "</screen> There are (were?) good reasons for this configuration, see <ulink url=\"http://www.modssl.org/docs/2.8/ssl_faq.html#ToC49\"><citetitle>http://www.modssl.org/docs/2.8/ssl_faq.html#ToC49</citetitle></ulink> But if you want NTLM authentication you have to use <literal>keepalive</literal>. If You uncomment the whole <literal>SetEnvIf</literal> you should be able to authenticate IE with windows authentication over SSL against the Apache on Win32 with included <literal>mod_auth_sspi</literal>."
 msgstr ""
+"Bij de “standaard” SSL installatie staat vaak het volgende statement in Apache’s virtuele SSL host: <screen>\n"
+"SetEnvIf User-Agent \".*MSIE.*\" \\\n"
+"             nokeepalive ssl-unclean-shutdown \\\n"
+"             downgrade-1.0 force-response-1.0\n"
+"</screen> Er zijn (waren?) goede redenen voor deze configuratie, lees <ulink url=\"http://www.modssl.org/docs/2.8/ssl_faq.html#ToC49\"><citetitle>http://www.modssl.org/docs/2.8/ssl_faq.html#ToC49</citetitle></ulink>. Als je NTLM authenticatie wilt gebruiken, dan moet je <literal>keepalive</literal> gebruiken.  Als de commentaartekens weghaalt bij <literal>SetEnvIf</literal> dan moet het mogelijk zijn om IE met Windows authenticatie over SSL te laten authenticeren met Apache op Win32 inclusief <literal>mod_auth_sspi</literal>."
 
 #. (para)
 msgid "If you still want to use IE to browse the repository you can either: <placeholder-1/>"
-msgstr ""
+msgstr "Als je IE nog steeds wilt kunnen gebruiken om het archief te verkennen, kun je: "
 
 #. (title)
 msgid "Forcing SSL access"
@@ -2427,7 +2536,7 @@ msgstr "SSL toegang forceren"
 
 #. (para)
 msgid "When you've set up SSL to make your repository more secure, you might want to disable the normal access via non-SSL (http) and only allow https access. To do this, you have to add another directive to the Subversion <literal>&lt;Location&gt;</literal> block: <literal>SSLRequireSSL</literal>."
-msgstr ""
+msgstr "Als je SSL ingesteld hebt om je archief veiliger te maken, dan wil je waarschijnlijk de normale toegang zonder SSL (http) uitschakelen en dus alleen https toegang toestaan. Om dit te doen moet je nog een extra richtlijn toevoegen aan het Subversion <literal>&lt;Location&gt;</literal> blok: <literal>SSLRequireSSL</literal>."
 
 #. (para)
 msgid ""
@@ -2444,6 +2553,18 @@ msgid ""
 "&lt;/Location&gt;\n"
 "</screen>"
 msgstr ""
+"Een voorbeeld <literal>&lt;Location&gt;</literal> blok zal er dan zo uit zien: <screen>\n"
+"&lt;Location /svn&gt;\n"
+"  DAV svn\n"
+"  SVNParentPath D:\\SVN\n"
+"  SSLRequireSSL\n"
+"  AuthType Basic\n"
+"  AuthName \"Subversion repositories\"\n"
+"  AuthUserFile passwd\n"
+"  #AuthzSVNAccessFile svnaccessfile\n"
+"  Require valid-user\n"
+"&lt;/Location&gt;\n"
+"</screen>"
 
 #. (title)
 msgid "Using client certificates with virtual SSL hosts"
@@ -2455,11 +2576,11 @@ msgstr "Door Nigel Green naar de TortoiseSVN mailinglijst gestuurd. Bedankt!"
 
 #. (para)
 msgid "In some server configurations you may need to setup a single server containing 2 virtual SSL hosts: The first one for public web access, with no requirement for a client certificate. The second one to be secure with a required client certificate, running a Subversion server."
-msgstr ""
+msgstr "Bij bepaalde server configuraties moet je een enkele server opzetten met 2 virtuele SSL hosts: De eerste voor publieke toegang zonder eisen voor een client certificaat. De tweede als beveiligde, die een client certificaat vereist, waarop de Subversion server draait."
 
 #. (para)
 msgid "Adding an <literal>SSLVerifyClient Optional</literal> directive to the <emphasis>per-server</emphasis> section of the Apache configuration (i.e. outside of any <literal>VirtualHost</literal> and <literal>Directory</literal> blocks) forces Apache to request a client Certificate in the initial SSL handshake. Due to a bug in <literal>mod_ssl</literal> it is essential that the certificate is requested at this point as it does not work if the SSL connection is re-negotiated."
-msgstr ""
+msgstr "Door een <literal>SSLVerifyClient Optional</literal> richtlijn aan de <emphasis>per-server</emphasis> sectie van de Apache configuratie toe te voegen (d.w.z. buiten de <literal>VirtualHost</literal> en <literal>Directory</literal> blokken), moet Apache een client certificaat opvragen voor de initiële SSL handdruk. Door een fout in the <literal>mod_ssl</literal> is het van essentieel belang dat dit certificaat op dit moment opgevraagd wordt, omdat het niet werkt als de SSL verbinding opnieuw uitonderhandeld wordt. "
 
 #. (para)
 msgid ""
@@ -2467,6 +2588,9 @@ msgid ""
 "SSLRequire %{SSL_CLIENT_VERIFY} eq \"SUCCESS\"\n"
 "</screen> This directive grants access to the directory only if a client certificate was received and verified successfully."
 msgstr ""
+"Dit kan opgelost worden door de volgende richtlijn toe te voegen aan de Virtuele host map die je wilt afsluiten voor Subversion: <screen>\n"
+"SSLRequire %{SSL_CLIENT_VERIFY} eq \"SUCCESS\"\n"
+"</screen> Deze richtlijn geeft alleen toegang tot de map als een client certificaat ontvangen en succesvol geverifieerd is."
 
 #. (para)
 msgid ""
@@ -2495,6 +2619,30 @@ msgid ""
 "&lt;/VirtualHost&gt;\n"
 "</screen>"
 msgstr ""
+"Samenvattend zijn dit de relevante regels in de Apache configuratie: <screen>\n"
+"SSLVerifyClient Optional\n"
+"\n"
+"### Virtual host configuration for the PUBLIC host \n"
+"### (not requiring a certificate)\n"
+"\n"
+"&lt;VirtualHost 127.0.0.1:443&gt;\n"
+"  &lt;Directory \"pathtopublicfileroot\"&gt;\n"
+"  &lt;/Directory&gt;\n"
+"&lt;/VirtualHost&gt;\n"
+"\n"
+"### Virtual host configuration for SUBVERSION \n"
+"### (requiring a client certificate)\n"
+"&lt;VirtualHost 127.0.0.1:443&gt;\n"
+"  &lt;Directory \"subversion host root path\"&gt;\n"
+"    SSLRequire %{SSL_CLIENT_VERIFY} eq \"SUCCESS\"\n"
+"  &lt;/Directory&gt;\n"
+"\n"
+"  &lt;Location /svn&gt;\n"
+"    DAV svn\n"
+"    SVNParentPath /pathtorepository\n"
+"  &lt;/Location&gt;\n"
+"&lt;/VirtualHost&gt;\n"
+"</screen>"
 
 #. (title)
 msgid "Daily Use Guide"
@@ -2502,35 +2650,35 @@ msgstr "Dagelijkse gebruikersgids"
 
 #. (para)
 msgid "This document describes day to day usage of the TortoiseSVN client. It is <emphasis>not</emphasis> an introduction to version control systems, and <emphasis>not</emphasis> an introduction to Subversion (SVN). It is more like a place you may turn to when you know approximately what you want to do, but don't quite remember how to do it."
-msgstr ""
+msgstr "Dit document beschrijft het dagelijkse gebruik van de TortoiseSVN client. Het is <emphasis>geen</emphasis> introductie tot versiebeheersystemen en <emphasis>geen</emphasis> introductie tot Subversion (SVN). Het is meer een document wat je opent als je ongeveer weet wat je wilt doen, maar niet meer weet hoe je het moet doen."
 
 #. (para)
 msgid "If you need an introduction to version control with Subversion, then we recommend you read the fantastic book: <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>Version Control with Subversion</citetitle></ulink>."
-msgstr ""
+msgstr "Als je een introductie tot versiebeheer met Subversion zoekt, dan bevelen we het fantastische boek <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>Version Control with Subversion</citetitle></ulink> aan."
 
 #. (para)
 msgid "This document is also a work in progress, just as TortoiseSVN and Subversion are. If you find any mistakes, please report them to the mailing list so we can update the documentation. Some of the screenshots in the Daily Use Guide (DUG) might not reflect the current state of the software. Please forgive us. We're working on TortoiseSVN in our free time."
-msgstr ""
+msgstr "Dit document wordt continue verbeterd, net zoals TortoiseSVN en Subversion.  Als je een fout vindt, meld deze dan aan via de maillijst, zodat we de documentatie kunnen bijwerken. Enkele screenshots in dit document geven mogelijk niet de actuele status van de software weer. Vergeef ons alsjeblieft. We werken aan TortoiseSVN in onze vrije tijd."
 
 #. (para)
 msgid "You should have installed TortoiseSVN already."
-msgstr ""
+msgstr "TortoiseSVN al geïnstalleerd hebben."
 
 #. (para)
 msgid "You should be familiar with version control systems."
-msgstr ""
+msgstr "bekend zijn met versiebeheersystemen."
 
 #. (para)
 msgid "You should know the basics of Subversion."
-msgstr ""
+msgstr "de basis van Subversion kennen."
 
 #. (para)
 msgid "You should have set up a server and/or have access to a Subversion repository."
-msgstr ""
+msgstr "een server geïnstalleerd hebben en/of toegang hebben tot een Subversion archief."
 
 #. (para)
 msgid "In order to get the most out of the Daily Use Guide: <placeholder-1/>"
-msgstr ""
+msgstr "Om het meeste effect te bereiken met de Daily User Guide, moet je: <placeholder-1/>"
 
 #. (title)
 msgid "Getting Started"
@@ -2540,16 +2688,16 @@ msgstr "Aan de slag"
 #. (title)
 #. (title)
 msgid "Icon Overlays"
-msgstr "Laag over pictogram"
+msgstr "Overlappende Pictogrammen"
 
 #. (title)
 #. (title)
 msgid "Explorer showing icon overlays"
-msgstr ""
+msgstr "Overlappende pictogrammen weergegeven in de verkenner"
 
 #. (para)
 msgid "<placeholder-1/> One of the most visible features of TortoiseSVN is the icon overlays which appear on files in your working copy. These show you at a glance which of your files have been modified. Refer to <xref linkend=\"tsvn-dug-wcstatus-1\"/> to find out what the different overlays represent."
-msgstr ""
+msgstr "<placeholder-1/>Eén van de meest zichtbare functies van TortoiseSVN zijn de overlappende pictogrammen (ook wel icon overlays genoemd), welke weergegeven worden op bestanden in je werkkopie. Deze laten in één oogopslag zien welke bestanden gewijzigd zijn. Lees <xref linkend=\"tsvn-dug-wcstatus-1\"/> om te leren wat de verschillende overlappende pictogrammen betekenen."
 
 #. (title)
 msgid "Context Menus"
@@ -2569,23 +2717,23 @@ msgstr "Contekstmenu van een directory reeds onder versiebeheer"
 
 #. (para)
 msgid "<placeholder-1/> All TortoiseSVN commands are invoked from the context menu of the windows explorer. Most are directly visible, when you <action>right click</action> on a file or folder. The commands that are available depend on whether the file or folder or its parent folder is under version control or not. You can also see the TortoiseSVN menu as part of the Explorer file menu."
-msgstr ""
+msgstr "<placeholder-1/>Alle TortoiseSVN commando’s worden vanuit het context menu van een verkenner gegeven. De meeste zijn direct zichtbaar als je met <action>rechts klikt</action> op een bestand of map. Welke commando’s beschikbaar zijn, hangt af van het feit of het bestand, de map of de bovenliggende map beheerd wordt met versiebeheer. Het TortoiseSVN menu is ook te zien als onderdeel van het Verkenner bestandsmenu."
 
 #. (para)
 msgid "Some commands which are very rarely used are only available in the extended context menu. To bring up the extended context menu, hold down the <keycap>Shift</keycap> key when you <action>right-click</action>."
-msgstr ""
+msgstr "Commando’s die minder vaak worden gebruikt, zijn alleen beschikbaar in het uitgebreide context menu. Om het uitgebreidere menu aan te roepen, hou dan de <keycap>Shift</keycap> toets ingedrukt als je met <action>rechts klikt</action>."
 
 #. (title)
 msgid "Explorer file menu for a shortcut in a versioned folder"
-msgstr ""
+msgstr "Verkenner bestandmenu van een snelkoppeling in een versiebeheerde map"
 
 #. (para)
 msgid "In some cases you may see several TortoiseSVN entries. This is not a bug! <placeholder-1/> This example is for an unversioned shortcut within a versioned folder, and in the Explorer file menu there are <emphasis>three</emphasis> entries for TortoiseSVN. One is for the folder, one for the shortcut itself, and the third for the object the shortcut is pointing to. To help you distinguish between them, the icons have an indicator in the lower right corner to show whether the menu entry is for a file, a folder, a shortcut or for multiple selected items."
-msgstr ""
+msgstr "In enkele gevallen kun je meerdere TortoiseSVN instanties zien. Dit is geen bug! <placeholder-1/> Dit is een voorbeeld van een snelkoppeling zonder versiebeheer in een map met versiebeheer, waarbij in het verkenner bestandsmenu <emphasis>drie</emphasis>instanties van TortoiseSVN aanwezig zijn. Een is voor de map, een voor de snelkoppeling zelf en een derde voor het object waar de snelkoppeling naar wijst. Om deze instanties te onderscheiden, hebben de iconen een rechtsonder indicator waarmee aangegeven wordt of het een menu is voor een bestand, een map, een snelkoppeling of voor meerdere geselecteerde items."
 
 #. (para)
 msgid "If you are using Windows 2000 you will find that the context menus are shown as plain text, without the menu icons shown above. We are aware that this was working in previous versions, but Microsoft has changed the way its icon handlers work for Vista, requiring us to use a different display method which unfortunately does not work on Windows 2000."
-msgstr ""
+msgstr "Als je Windows 200 gebruikt zul je zien dat de context menu’s in platte tekst worden weergegeven, zonder menu iconen erboven. We zijn ons bewust dat dit in eerdere versies wel werkte, maar Microsoft heeft de manier waarop de iconen gebruikt kunnen worden veranderd voor Vista. Wat tot gevolg had dat wij een andere manier van weergeven moesten gaan gebruiken, welke helaas niet werkt onder Windows 2000."
 
 #. (title)
 #. (title)
@@ -2594,11 +2742,11 @@ msgstr "Slepen en Plaatsen"
 
 #. (primary)
 msgid "drag handler"
-msgstr ""
+msgstr "Drag and drop"
 
 #. (primary)
 msgid "drag-n-drop"
-msgstr ""
+msgstr "Drag and drop"
 
 #. (primary)
 msgid "right drag"
@@ -2607,11 +2755,11 @@ msgstr "rechts slepen"
 #. (title)
 #. (title)
 msgid "Right drag menu for a directory under version control"
-msgstr ""
+msgstr "Rechts-slepen-menu voor een map met versiebeheer"
 
 #. (para)
 msgid "<placeholder-1/> Other commands are available as drag handlers, when you <action>right drag</action> files or folders to a new location inside working copies or when you <action>right drag</action> a non-versioned file or folder into a directory which is under version control."
-msgstr ""
+msgstr "Er zijn andere commando’s beschikbaar bij <action>Slepen en plaatsen</action>. Als je bestanden of mappen met<action>rechts sleept</action> naar een nieuwe locatie binnen je werk kopie of als je een bestand of map zonder versiebeheer naar een map met versiebeheer sleept."
 
 #. (title)
 msgid "Common Shortcuts"
@@ -2631,7 +2779,7 @@ msgstr "F5"
 
 #. (para)
 msgid "Refresh the current view. This is perhaps the single most useful one-key command. For example ... In Explorer this will refresh the icon overlays on your working copy. In the commit dialog it will re-scan the working copy to see what may need to be committed. In the Revision Log dialog it will contact the repository again to check for more recent changes."
-msgstr ""
+msgstr "Ververs de huidige weergave. Dit is waarschijnlijk het enige meest nuttige één-knopscommando. Bijvoorbeeld ... In de verkenner ververst dit de overlappende pictogrammen van je werkkopie. In het vastleggen venster zal je werkkopie opnieuw gescand worden om na te gaan wat er vastgelegd moet worden. In het revisie log venster zal er in het archief gekeken worden of er recente wijzigingen zijn."
 
 #. (term)
 msgid "Ctrl-A"
@@ -2639,7 +2787,7 @@ msgstr "Ctrl-A"
 
 #. (para)
 msgid "Select all. This can be used if you get an error message and want to copy and paste into an email. Use Ctrl-A to select the error message and then ..."
-msgstr ""
+msgstr "Selecteer alles. Dit kun je gebruiken als je een foutmelding krijgt en deze wilt kopiëren en plakken in bijvoorbeeld een email. Gebruik Ctrl-A om een foutmelding de selecteren en dan..."
 
 #. (term)
 msgid "Ctrl-C"
@@ -2651,7 +2799,7 @@ msgstr "...Kopieer de geselecteerde tekst."
 
 #. (para)
 msgid "Some common operations have well-known Windows shortcuts, but do not appear on buttons or in menus. If you can't work out how to do something obvious, like refreshing a view, check here. <placeholder-1/>"
-msgstr ""
+msgstr "Enkele veel gebruikte acties hebben de welke bekende Windows sneltoets combinaties, hoewel deze niet zijn aangegeven bij de knoppen of in menu’s. Als je niet weet hoe je de voor de hand liggende functies moet gebruiken, bijvoorbeeld verversen, lees dan deze paragraaf."
 
 #. (primary)
 msgid "authentication"
@@ -2662,24 +2810,25 @@ msgid "Authentication Dialog"
 msgstr "Authenticatie dialoog"
 
 #. (para)
+#, fuzzy
 msgid "<filename>svn.simple</filename> contains credentials for basic authentication (username/password)."
-msgstr ""
+msgstr "<filename>svn.username</filename> bevat alleen gebruikersnamen, voor authenticatie zonder wachtwoord."
 
 #. (para)
 msgid "<filename>svn.ssl.server</filename> contains SSL server certificates."
-msgstr ""
+msgstr "<filename>svn.ssl.server</filename> bevat SSL server certificaten."
 
 #. (para)
 msgid "<filename>svn.username</filename> contains credentials for username-only authentication (no password needed)."
-msgstr ""
+msgstr "<filename>svn.username</filename> bevat alleen gebruikersnamen, voor authenticatie zonder wachtwoord."
 
 #. (para)
 msgid "If the repository that you are trying to access is password protected, an authentication Dialog will show up. <placeholder-1/> Enter your username and password. The checkbox will make TortoiseSVN store the credentials in Subversion's default directory: <filename>%APPDATA%\\Subversion\\auth</filename> in three subdirectories: <placeholder-2/>"
-msgstr ""
+msgstr "Als je een archief met wachtwoordbeveiliging probeert te bereiken, dan krijg je een authenticatie scherm te zien.<placeholder-1/> Voer je gebruikersnaam en wachtwoord in. Het selectievakje zorgt ervoor dat TortoiseSVN je logingegevens opslaat in Subversion’s standaard map: <filename>%APPDATA%\\Subversion\\auth</filename> in drie submappen.<placeholder-2/>"
 
 #. (para)
 msgid "If you want to clear the authentication cache for all servers, you can do so from the <guilabel>Saved Data</guilabel> page of TortoiseSVN's settings dialog. That button will clear all cached authentication data from the Subversion <filename>auth</filename> directories, as well as any authentication data stored in the registry by earlier versions of TortoiseSVN. Refer to <xref linkend=\"tsvn-dug-settings-saved-data\"/>."
-msgstr ""
+msgstr "Als je de authenticatie cache voor alle servers wilt wissen, ga dan naar de<guilabel>Opgeslagen Gegevens</guilabel> sectie van het Instellingen venster van TortoiseSVN. Met de “Wissen” knop bij de optie “Authenticatie gegevens” kun je alle opgeslagen gegevens uit de <filename>auth</filename> mappen wissen, alsook de gegevens opgeslagen in het register door oudere TortoiseSVN versies. Lees ook <xref linkend=\"tsvn-dug-settings-saved-data\"/>."
 
 #. (para)
 msgid ""
@@ -2688,10 +2837,14 @@ msgid ""
 "rmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n"
 "</screen> You can find a description of how to install such scripts at <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>windows-help-central.com</citetitle></ulink>."
 msgstr ""
+"Sommige mensen hebben graag dat de authenticatie gegevens worden verwijderd als ze uitloggen uit Windows of de pc uitschakelen. Dat kan gedaan worden met een script dat gestart wordt bij het afsluiten. Dit script kan de welke <filename>%APPDATA%\\Subversion\\auth</filename> map wissen, bijvoorbeeld <screen>\n"
+"@echo off\n"
+"rmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n"
+"</screen> Je kunt een beschrijving vinden over hoe je zo’n script moet maken op  <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>windows-help-central.com</citetitle></ulink>."
 
 #. (para)
 msgid "For more information on how to set up your server for authentication and access control, refer to <xref linkend=\"tsvn-serversetup\"/>"
-msgstr ""
+msgstr "Lees <xref linkend=\"tsvn-serversetup\"/> voor meer informatie over hoe je authenticatie en toegangsbeveiliging installeert op je server."
 
 #. (title)
 msgid "Maximizing Windows"
@@ -2703,15 +2856,15 @@ msgstr "maximaliseer"
 
 #. (para)
 msgid "Many of TortoiseSVN's dialogs have a lot of information to display, but it is often useful to maximize only the height, or only the width, rather than maximizing to fill the screen. As a convenience, there are shortcuts for this on the <guilabel>Maximize</guilabel> button. Use the <action>middle mouse</action> button to maximize vertically, and <action>right mouse</action> to maximize horizontally."
-msgstr ""
+msgstr "In verschillende vensters van TortoiseSVN wordt er veel informatie weergegeven. Het is vaak alleen maar nodig om verticaal of horizontaal de volledige schermbreedte te gebruiken, in plaats van te maximaliseren zodat het hele scherm gevuld is. Voor het gemak zijn er snelkoppelingen toegevoegd aan de <guilabel>Maximaliseren</guilabel> knop. Gebruik de <action>middelste muisknop</action> om verticaal te maximaliseren en de<action>rechter muisknop</action> om horizontaal te maximaliseren."
 
 #. (title)
 msgid "Importing Data Into A Repository"
-msgstr "Data importeren in een repository"
+msgstr "Data Importeren In Een Archief"
 
 #. (primary)
 msgid "import"
-msgstr "importeer"
+msgstr "importeren"
 
 #. (primary)
 msgid "add files to repository"
@@ -2722,51 +2875,52 @@ msgstr "bestanden toevoegen aan archief"
 #. (title)
 #. (glossterm)
 msgid "Import"
-msgstr "Importeer"
+msgstr "Importeren"
 
 #. (primary)
 msgid "temporary files"
 msgstr "tijdelijke bestanden"
 
 #. (para)
+#, fuzzy
 msgid "If you are importing into an existing repository which already contains some projects, then the repository structure will already have been decided. If are importing data into a new repository then it is worth taking the time to think about how it will be organised. Read <xref linkend=\"tsvn-repository-layout\"/> for further advice."
-msgstr ""
+msgstr "Als je data importeert in een bestaand archief waarin al enkele projecten aanwezig zijn, dan is de structuur van het archief al vastgesteld. Als je gegevens importeert in een nieuw archief, dan is het de moeite waard om even goed na te denken over de structuur van het archief. Lees <xref linkend=\"tsvn-repository-layout\"/> voor advies hierover."
 
 #. (para)
 msgid "There is no way to select files and folders to include, aside from using the global ignore settings."
-msgstr ""
+msgstr "Het is niet mogelijk om aan te geven welke bestanden en mappen geïmporteerd moeten worden, behalve dan door het gebruik van globale negeer instellingen."
 
 #. (para)
 msgid "The folder imported does not become a working copy. You have to do a checkout to copy the files back from the server."
-msgstr ""
+msgstr "De geïmporteerde map wordt geen werkkopie. Je moet het Ophalen commando gebruiken om weer een kopie van de bestanden van de server te halen."
 
 #. (para)
 msgid "It is easy to import to the wrong folder level in the repository."
-msgstr ""
+msgstr "Het importeren vanaf een verkeerd mapniveau gaat erg makkelijk."
 
 #. (para)
 msgid "This section describes the Subversion import command, which was designed for importing a directory hierarchy into the repository in one shot. Although it does the job, it has several shortcomings: <placeholder-1/> For these reasons we recommend that you do not use the import command at all but rather follow the two-step method described in <xref linkend=\"tsvn-dug-import-in-place\"/>. But since you are here, this is how the basic import works ..."
-msgstr ""
+msgstr "Deze sectie beschrijft het Subversion Importeren commando, welke ontwikkeld is voor het importeren van een complete mapstructuur in een archief in één keer. De functie heeft echter wel wat tekortkomingen: <placeholder-1/>Vanwege deze redenen adviseren wij het importeer commando niet te gebruiken. In plaats daarvan is het beter om een twee-staps methode te gebruiken die beschreven is in <xref linkend=\"tsvn-dug-import-in-place\"/>. Maar omdat je dit toch leest, volgt hier een korte beschrijving hoe de importeer functie werkt..."
 
 #. (para)
 msgid "Remove all files which are not needed to build the project (temporary files, files which are generated by a compiler e.g. *.obj, compiled binaries, ...)"
-msgstr ""
+msgstr "Alle bestanden verwijderen die niet nodig zijn om het project te bouwen (tijdelijke bestanden, bestanden die door een compiler gemaakt worden bijv. *.obj, gecompileerde binaire bestanden,...)"
 
 #. (para)
 msgid "Organize the files in folders and sub-folders. Although it is possible to rename/move files later it is highly recommended to get your project's structure straight before importing!"
-msgstr ""
+msgstr "De bestanden in mappen en sub-mappen sorteren. Ondanks dat het mogelijk is om bestanden te hernoemen of verplaatsen, is het verstandig om je projectstructuur in één keer goed te hebben voordat je importeert."
 
 #. (para)
 msgid "Before you import your project into a repository you should: <placeholder-1/>"
-msgstr ""
+msgstr "Voordat je je project in het archief importeert, moet je:<placeholder-1/>"
 
 #. (title)
 msgid "The Import dialog"
-msgstr "De invoer dialoog"
+msgstr "Het invoer venster"
 
 #. (para)
 msgid "Now select the top-level folder of your project directory structure in the windows explorer and <action>right click</action> to open the context menu. Select the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Import...</guimenuitem></menuchoice> which brings up a dialog box: <placeholder-1/>"
-msgstr ""
+msgstr "Selecteer nu in de Windows verkenner de hoofdmap van je project mapstructuur en <action>klik met rechts</action> om het context menu te openen. Selecteer <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Importeren...</guimenuitem></menuchoice> waardoor dit venster wordt geopend: <placeholder-1/>"
 
 #. (para)
 msgid ""
@@ -2776,46 +2930,51 @@ msgid ""
 "C:\\Projects\\Widget\\images\n"
 "</screen> and you import <filename>C:\\Projects\\Widget</filename> into <systemitem class=\"url\">http://mydomain.com/svn/trunk</systemitem> then you may be surprised to find that your subdirectories go straight into <literal>trunk</literal> rather than being in a <literal>Widget</literal> subdirectory. You need to specify the subdirectory as part of the URL, <systemitem class=\"url\">http://mydomain.com/svn/trunk/Widget-X</systemitem>. Note that the import command will automatically create subdirectories within the repository if they do not exist."
 msgstr ""
+"In dit venster moet je de URL van het archief en de locatie in het archief opgeven waar je je project wilt importeren. Het is belangrijk je te realiseren dat je de lokale map zelf niet in het archief zal verschijnen, alleen maar de inhoud daarvan. Bijvoorbeeld als je een structuur hebt als:<screen>\n"
+"C:\\Projects\\Widget\\source\n"
+"C:\\Projects\\Widget\\doc\n"
+"C:\\Projects\\Widget\\images\n"
+"</screen> en je importeert <filename>C:\\Projects\\Widget</filename> in <systemitem class=\"url\">http://mydomain.com/svn/trunk</systemitem>, dan zul je misschien verrast zijn dat je de submappen direct in de <literal>trunk</literal> vindt in plaats van in de <literal>Widget</literal> submap. Je moet de submap ook in de URL opnemen. <systemitem class=\"url\">http://mydomain.com/svn/trunk/Widget-X</systemitem>.  Merk op dat met het importeren commando automatisch de benodigde mappen in het archief aanmaakt als deze niet bestaan."
 
 #. (para)
 msgid "The import message is used as a log message."
-msgstr ""
+msgstr "Het import bericht wordt gebruikt als bericht in het logboek."
 
 #. (para)
 msgid "By default, files and folders which match the global-ignore patterns are <emphasis>not</emphasis> imported. To override this behaviour you can use the <guilabel>Include ignored files</guilabel> checkbox. Refer to <xref linkend=\"tsvn-dug-settings-main\"/> for more information on setting a global ignore pattern."
-msgstr ""
+msgstr "Bestanden en mappen die het overeen komen met de globale-negeren patronen worden <emphasis>niet</emphasis> geïmporteerd.Om dit gedrag te omzeilen kun je de optie <guilabel>Genegeerde bestanden meenemen</guilabel> selecteren. Lees <xref linkend=\"tsvn-dug-settings-main\"/> voor meer informatie voor het instellen van een globaal negeren patroon."
 
 #. (para)
 msgid "As soon as you press <guibutton>OK</guibutton> TortoiseSVN imports the complete directory tree including all files into the repository. The project is now stored in the repository under version control. Please note that the folder you imported is <emphasis>NOT</emphasis> under version control! To get a version-controlled <firstterm>working copy</firstterm> you need to do a Checkout of the version you just imported. Or read on to find out how to import a folder in place."
-msgstr ""
+msgstr "Zodra je op <guibutton>OK</guibutton> klikt zal TortoiseSVN de complete mapstructuur inclusief alle bestanden in het archief importeren. Het archief is nu in het archief met versiebeheer opgeslagen. Merk op dat de map die je geïmporteerd hebt<emphasis>NIET</emphasis> nog geen versiebeheer heeft. Om een <firstterm>werkkopie</firstterm> met versiebeheer te krijgen moet je eerst nog het project nog Ophalen uit het archief. Of lees verder om te weten te komen hoe je een map direct in versiebeheer opneemt."
 
 #. (title)
 msgid "Import in Place"
-msgstr "Invoer op zijn Plaats"
+msgstr "Invoeren op zijn Plaats"
 
 #. (primary)
 msgid "import in place"
-msgstr "invoer op zijn plaats"
+msgstr "invoeren op zijn plaats"
 
 #. (para)
 msgid "Use the repository browser to create a new project folder directly in the repository."
-msgstr ""
+msgstr "Gebruik de archief-verkennerom een nieuwe project map direct in het archief te maken."
 
 #. (para)
 msgid "Checkout the new folder over the top of the folder you want to import. You will get a warning that the local folder is not empty. Now you have a versioned top level folder with unversioned content."
-msgstr ""
+msgstr "Haal de nieuwe map op en sla deze op dezelfde locatie als de map die je wilt importeren. Het lijkt dus er op dat je de lokale map overschijft. Geen zorgen. Je zult een waarschuwing krijgen dat de lokale map niet leeg is. Dat is niet erg. Je hebt uiteindelijk dan een hoofdmap met versiebeheer met inhoud zonder versiebeheer."
 
 #. (para)
 msgid "Use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Add...</guimenuitem></menuchoice> on this versioned folder to add some or all of the content. You can add and remove files, set <literal>svn:ignore</literal> properties on folders and make any other changes you need to."
-msgstr ""
+msgstr "Gebruik de optie <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Toevoegen...</guimenuitem></menuchoice> op deze map met versiebeheer om bepaalde of alle inhoud toe te voegen. Je kunt bestanden toevoegen en verwijderen, <literal>svn:ignore</literal> eigenschappen instellen op mappen en andere wijzigingen die je nodig hebt."
 
 #. (para)
 msgid "Commit the top level folder, and you have a new versioned tree, and a local working copy, created from your existing folder."
-msgstr ""
+msgstr "Leg de hoofmmap vast (SVN Vastleggen) en je hebt een nieuwe mapstructuur met versiebeheer en een lokale werkkopie gemaakt van je bestaande map."
 
 #. (para)
 msgid "Assuming you already have a repository, and you want to add a new folder structure to it, just follow these steps: <placeholder-1/>"
-msgstr ""
+msgstr "Als je al een archief hebt en je daar een nieuwe mapstructuur aan wilt toevoegen, volg dan deze stappen: <placeholder-1/>"
 
 #. (title)
 msgid "Special Files"
@@ -2827,23 +2986,23 @@ msgstr "speciale bestanden"
 
 #. (para)
 msgid "Sometimes you need to have a file under version control which contains user specific data. That means you have a file which every developer/user needs to modify to suit his/her local setup. But versioning such a file is difficult because every user would commit his/her changes every time to the repository."
-msgstr ""
+msgstr "Soms wil je een bestand van versiebeheer voorzien, waarin gebruiker specifieke data staat. Dat houdt dat je een bestand hebt die elke ontwikkelaar/gebruiker aan zijn/haar lokale instellingen wil aanpassen. Het is lastig om zo'n bestand van versiebeheer te voorzien, want elke gebruiker zou zijn/haar wijzigingen telkens opslaan in het archief."
 
 #. (para)
 msgid "In such cases we suggest to use <emphasis>template</emphasis> files. You create a file which contains all the data your developers will need, add that file to version control and let the developers check this file out. Then, each developer has to <emphasis>make a copy</emphasis> of that file and rename that copy. After that, modifying the copy is not a problem anymore."
-msgstr ""
+msgstr "In zulke situaties bevelen we het gebruik van sjablonen aan. Maak een bestand aan met alle gegevens die je gebruikers nodig hebben. Sla het bestand op in het archief en laat de ontwikkelaars het bestand ophalen. Vervolgens moet elke ontwikkelaar een <emphasis>kopie maken</emphasis> en deze hernoemen. Daarna levert het wijzigen van het bestand geen problemen meer op."
 
 #. (para)
 msgid "As an example, you can have a look at TortoiseSVN's build script. It calls a file named <filename>TortoiseVars.bat</filename> which doesn't exist in the repository. Only the file <filename>TortoiseVars.tmpl</filename>. <filename>TortoiseVars.tmpl</filename> is the template file which every developer has to create a copy from and rename that file to <filename>TortoiseVars.bat</filename>. Inside that file, we added comments so that the users will see which lines they have to edit and change according to their local setup to get it working."
-msgstr ""
+msgstr "Het TortoiseSVN bouwscript kun je als voorbeeld bekijken. Deze roept het bestand <filename>TortoiseVars.bat</filename> aan, welke niet in het archief bestaat. Het bestand <filename>TortoiseVars.tmpl</filename> is wel aanwezig. <filename>TortoiseVars.tmpl</filename> is de sjabloon waarvan elke ontwikkelaar een kopie moet maken en deze moet hernoemen naar <filename>TortoiseVars.bat</filename>. In dat bestand is commentaar toegevoegd, zodat elke ontwikkelaar weet welke regels hij/zij in zijn/haar gewenste lokale instellingen moet wijzigen."
 
 #. (para)
 msgid "So as not to disturb the users, we also added the file <filename>TortoiseVars.bat</filename> to the ignore list of its parent folder, i.e. we've set the Subversion property <literal>svn:ignore</literal> to include that filename. That way it won't show up as unversioned on every commit."
-msgstr ""
+msgstr "Om de gebruikers niet te verstoren, hebben ook het bestand <filename>TortoiseVars.bat</filename> op de negeerlijst van de bovenliggende map gezet, oftewel we hebben de bestandsnaam in de Subversion eigenschap <literal>svn:ignore</literal> opgenomen. Hierdoor wordt hij niet telkens als bestand zonder versie beheer aangegeven bij een vastlegging."
 
 #. (title)
 msgid "Checking Out A Working Copy"
-msgstr "Een lokale werkkopie (WC) uitchecken"
+msgstr "Een lokale werkkopie (WC) ophalen"
 
 #. (primary)
 msgid "checkout"
@@ -2855,19 +3014,19 @@ msgstr "maak een werkkopie"
 
 #. (para)
 msgid "To obtain a working copy you need to do a <firstterm>checkout</firstterm> from a repository."
-msgstr ""
+msgstr "Om een werkkopie te verkrijgen, moet je de bestanden <firstterm>ophalen</firstterm> uit het archief."
 
 #. (title)
 msgid "The Checkout dialog"
-msgstr "De Ophalen dialoog"
+msgstr "Het Ophalen venster"
 
 #. (para)
 msgid "Select a directory in windows explorer where you want to place your working copy. <action>Right click</action> to pop up the context menu and select the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Checkout...</guimenuitem></menuchoice>, which brings up the following dialog box: <placeholder-1/> If you enter a folder name that does not yet exist, then a directory with that name is created."
-msgstr ""
+msgstr "Selecteer in windows verkenner een map waarin je je werkkopie wilt hebben. <action>Klik rechts</action> om het context menu te openen en selecteer <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>SVN Ophalen...</guimenuitem></menuchoice>, waarna het volgende venster wordt geopend: <placeholder-1/> Als je een mapnaam invoert die nog niet bestaat, dan zal deze automatisch worden aangemaakt."
 
 #. (title)
 msgid "Checkout Depth"
-msgstr "Uitcheck diepte"
+msgstr "Ophaaldiepte"
 
 #. (term)
 msgid "Fully recursive"
@@ -2879,11 +3038,11 @@ msgstr "Gehele boom uitchecken, inclusief alle knopen en subfolders"
 
 #. (term)
 msgid "Immediate children, including folders"
-msgstr "Directe knopen, inclusief folders"
+msgstr "Enkel niveau, inclusief folders"
 
 #. (para)
 msgid "Checkout the specified directory, including all files and child folders, but do not populate the child folders."
-msgstr ""
+msgstr "Haal de gespecificeerd map op, inclusief alle bestanden en onderliggende mappen, maar niet de inhoud van de onderliggende mappen."
 
 #. (term)
 msgid "Only file children"
@@ -2891,15 +3050,15 @@ msgstr "Alleen bestanden"
 
 #. (para)
 msgid "Checkout the specified directory, including all files but do not checkout any child folders."
-msgstr ""
+msgstr "Haal de gespecificeerde map op, inclusief alle bestanden, maar haal niet de mappen op."
 
 #. (term)
 msgid "Only this item"
-msgstr "Alleen dit item"
+msgstr "Alleen dit object"
 
 #. (para)
 msgid "Checkout the directory only. Do not populate it with files or child folders."
-msgstr ""
+msgstr "Haal alleen de map op. Haal de bestanden en onderliggende mappen niet op."
 
 #. (term)
 #. (term)
@@ -2909,7 +3068,7 @@ msgstr "Werkkopie"
 
 #. (para)
 msgid "Retain the depth specified in the working copy. This option is not used in the checkout dialog, but it is the default in all other dialogs which have a depth setting."
-msgstr ""
+msgstr "Behoudt de mapdiepte zoals in de werkkopie gespecificeerd is. Deze optie is niet gebruikt in het Ophalen venster, maar wordt standaard gebruikt bij vensters die mapdiepte gebruiken."
 
 #. (term)
 msgid "Exclude"
@@ -2917,49 +3076,48 @@ msgstr "Exclusief"
 
 #. (para)
 msgid "Used to reduce working copy depth after a folder has already been populated. This option is only available in the <guilabel>Update to revision</guilabel> dialog."
-msgstr ""
+msgstr "Wordt gebruikt om de werkkopie mapdiepte te beperken, nadat een map al met de inhoud is gevuld. Deze optie is alleen beschikbaar in het <guilabel>Verversen naar revisie</guilabel> venster."
 
 #. (para)
 msgid "You can choose the <firstterm>depth</firstterm> you want to checkout, which allows you to specify the depth of recursion into child folders. If you want just a few sections of a large tree, You can checkout the top level folder only, then update selected folders recursively. <placeholder-1/>"
-msgstr ""
+msgstr "Je kunt de <firstterm>diepte</firstterm> van de recursiviteit instellen van de mappen en gegevens die je wilt ophalen. Als je maar een bepaald deel wilt hebben van een grote mapstructuur, dan kun je alleen de hoofdmap ophalen en vervolgens de mappen selecteren die je recursief wilt ophalen. <placeholder-1/>"
 
 #. (para)
 msgid "If you check out a sparse working copy (i.e., by choosing something other than <literal>fully recursive</literal> for the checkout depth), you can fetch additional sub-folders by using the repository browser (<xref linkend=\"tsvn-dug-repobrowser\"/>) or the check for modifications dialog (<xref linkend=\"tsvn-dug-wcstatus-2\"/>)."
-msgstr ""
+msgstr "Als je een uitgedunde werkkopie ophaalt door iets anders te kiezen dan <literal>volledig recursief</literal> voor de ophaaldiepte, dan kun je additionele submappen selecteren met de archief-verkenner (browser (<xref linkend=\"tsvn-dug-repobrowser\"/>) of met het “kijk of er updates zijn” venster (<xref linkend=\"tsvn-dug-wcstatus-2\"/>)."
 
 #. (para)
 msgid "In the repository browser, <action>Right click</action> on the checked out folder, then use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Repo-Browser</guimenuitem></menuchoice> to bring up the repository browser. Find the sub-folder you would like to add to your working copy, then use <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Update item to revision...</guimenuitem></menuchoice> That menu will only be visible if the selected item does not exist yet in your working copy, but the parent item does exist."
-msgstr ""
+msgstr "<action>Klik met rechts</action> in de windows verkenner op de opgehaalde map en selecteer <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Archief-verkenner</guimenuitem></menuchoice> om de archief-verkenner te openen. Ga naar de submap die je aan je werkkopie wilt toevoegen en kies <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Verversen naar Revisie...</guimenuitem></menuchoice>. Deze optie wordt alleen zichtbaar als het geselecteerde object nog niet in je werkkopie bestaat, maar de bovenliggende map wel."
 
 #. (para)
 msgid "In the check for modifications dialog, first click on the button <guibutton>Check repository</guibutton>. The dialog will show all the files and folders which are in the repository but which you have not checked out as <literal>remotely added</literal>. <action>Right click</action> on the folder(s) you would like to add to your working copy, then use <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Update</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "In het kijk of er updates zijn venster, klik op de knop <guibutton>Controleer archief</guibutton>. Het venster zal alle bestanden en mappen laten zien die in het archief zijn, maar die je niet opgehaald hebt als <literal>Op afstand toegevoegd</literal>. <action>Klik rechts</action> op de map(pen) die je aan je werkkopie wilt toevoegen en kies dan <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Verversen</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "This feature is very useful when you only want to checkout parts of a large tree, but you want the convenience of updating a single working copy. Suppose you have a large tree which has sub-folders <literal>Project01</literal> to <literal>Project99</literal>, and you only want to checkout <literal>Project03</literal>, <literal>Project25</literal> and <literal>Project76/SubProj</literal>. Use these steps:"
-msgstr ""
+msgstr "Deze functie is handig als je maar een klein deel wilt ophalen van een grote mapstructuur, maar ook het gemak wilt hebben dat je maar één werkkopie hoeft bij te werken. Stel je heb een grote mapstructuur met de submappen <literal>Project01</literal> tot <literal>Project99</literal>, waarvan je alleen <literal>Project03</literal>, <literal>Project25</literal> en <literal>Project76/SubProj</literal> wilt ophalen. Doorloop dan de volgende stappen:"
 
 #. (para)
 msgid "Checkout the parent folder with depth <quote>Only this item</quote> You now have an empty top level folder."
-msgstr ""
+msgstr "Haal de hoofdmap op met diepte <quote>Alleen dit object</quote>. Je krijgt dan alleen een lege hoofdmap."
 
 #. (para)
 msgid "Select the new folder and use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Repo browser</guimenuitem></menuchoice> to display the repository content."
-msgstr ""
+msgstr "Selecteer de nieuwe map en kies <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Archief-verkenner</guimenuitem></menuchoice> om de inhoud van het archief te bekijken."
 
 #. (para)
 msgid "Right click on <literal>Project03</literal> and <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Update item to revision...</guimenuitem></menuchoice>. Keep the default settings and click on <guibutton>OK</guibutton>. You now have that folder fully populated."
-msgstr ""
+msgstr "Klik met rechts op <literal>Project03</literal> en <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Verversen naar revisie...</guimenuitem></menuchoice>. Laat de standaard instellingen zo staan en klik op <guibutton>OK</guibutton>. Die map is nu volledig gevuld."
 
 #. (para)
 msgid "Repeat the same process for <literal>Project25</literal>."
-msgstr ""
+msgstr "Herhaal dezelfde stappen voor <literal>Project25</literal>."
 
 #. (para)
 msgid "Navigate to <literal>Project76/SubProj</literal> and do the same. This time note that the <literal>Project76</literal> folder has no content except for <literal>SubProj</literal>, which itself is fully populated. Subversion has created the intermediate folders for you without populating them."
-msgstr ""
+msgstr "Ga naar literal>Project76/SubProj</literal> en herhaal dezelfde stappen. Merk in dit geval op dat <literal>Project76</literal> nu alleen <literal>SubProj</literal> bevat met daarin de bijbehorende bestanden. Subversion heeft de tussenliggende mappen voor je aangemaakt zonder deze verder te vullen."
 
-# Het is lastig om een goede vertaling te bedenken voor de "diepte" van een tree.
 #. (title)
 msgid "Changing working copy depth"
 msgstr "Veranderen van de werkkopie mapdiepte"
@@ -2974,35 +3132,35 @@ msgstr "Een oudere server gebruiken"
 
 #. (para)
 msgid "Pre-1.5 servers do not understand the working copy depth request, so they cannot always deal with requests efficiently. The command will still work, but an older server may send all the data, leaving the client to filter out what is not required, which may mean a lot of network traffic. If possible you should upgrade your server to 1.5."
-msgstr ""
+msgstr "Servers met oudere versies dan 1.5 begrijpen de werkkopie mapdiepte aanvragen niet. Deze kunnen dus niet altijd efficiënt met zulke aanvragen omgaan. Het commando werkt wel, maar een oudere server verzend waarschijnlijk alle data. De gebruiker moet dan eruit filteren wat hij/zij er niet bij wil hebben. Dit kan betekenen dat er meer netwerkverkeer optreedt dan gewenst. Als het mogelijk is, zou je de server moeten bijwerken naar versie 1.5."
 
 #. (para)
 msgid "If the project contains references to external projects which you do <emphasis>not</emphasis> want checked out at the same time, use the <guilabel>Omit externals</guilabel> checkbox."
-msgstr ""
+msgstr "Als het project referenties heeft naar externe projecten die je <emphasis>niet</emphasis> direct wilt ophalen, gebruik dan het selectievak <guilabel>Externen uitsluiten</guilabel>."
 
 #. (para)
 msgid "If <guilabel>Omit externals</guilabel> is checked, or if you wish to increase the depth value, you will have to perform updates to your working copy using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to Revision...</guimenuitem></menuchoice> instead of <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice>. The standard update will include all externals and keep the existing depth."
-msgstr ""
+msgstr "Als <guilabel>Externen uitslaten</guilabel> aangevinkt is of je wilt de mapdiepte vergroten, dan moet je hiervoor gebruikmaken van <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verversen naar revisie...</guimenuitem></menuchoice> in plaats van <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verversen</guimenuitem></menuchoice>. De normale Verversen functie zal alle externe verbindingen verversen en de bestaande mapdiepte blijven gebruiken. "
 
 #. (para)
 msgid "It is recommended that you check out only the <literal>trunk</literal> part of the directory tree, or lower. If you specify the parent path of the directory tree in the URL then you might end up with a full hard disk since you will get a copy of the entire repository tree including every branch and tag of your project!"
-msgstr ""
+msgstr "Het is aanbevolen om alleen de <literal>trunk</literal> of dieper gelegen mappen van je mapstructuur op te halen. Als je de hoofdmap van het hele archief in je URL opneemt, dan zal je harddisk waarschijnlijk vollopen. Je krijgt dan namelijk een complete kopie van het hele archief, inclusief alle takken en labels van je project."
 
 #. (title)
 msgid "Exporting"
-msgstr ""
+msgstr "Exporteren"
 
 #. (para)
 msgid "Sometimes you may want to create a local copy without any of those <filename>.svn</filename> directories, e.g. to create a zipped tarball of your source. Read <xref linkend=\"tsvn-dug-export\"/> to find out how to do that."
-msgstr ""
+msgstr "Soms wil je een locale kopie maken zonder de <filename>.svn</filename> mappen, bijvoorbeeld om een zip-bestand te maken van je bronbestanden. Lees <xref linkend=\"tsvn-dug-export\"/> om te weten te komen hoe dit moet."
 
 #. (title)
 msgid "Committing Your Changes To The Repository"
-msgstr ""
+msgstr "Je Wijzigingen Vastleggen In Het Archief"
 
 #. (primary)
 msgid "commit"
-msgstr ""
+msgstr "vastleggen"
 
 #. (primary)
 msgid "send changes"
@@ -3014,7 +3172,7 @@ msgstr "check in"
 
 #. (para)
 msgid "Sending the changes you made to your working copy is known as <firstterm>committing</firstterm> the changes. But before you commit you have to make sure that your working copy is up to date. You can either use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice> directly. Or you can use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Check for Modifications</guimenuitem></menuchoice> first, to see which files have changed locally or on the server."
-msgstr ""
+msgstr "Het versturen van de wijzigingen die jij hebt gedaan, staat bekend als <firstterm>vastleggen</firstterm> van de wijzigingen.  Voordat je je wijzigingen vastlegt, moet je zekerstellen dat je werkkopie bijgewerkt is naar de laatste stand van zaken. Dit kun je doen door <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verversen</guimenuitem></menuchoice> te kiezen. Je kunt ook eerst <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Kijk of er updates zijn</guimenuitem></menuchoice> gebruiken, om te bekijken welke bestanden er lokaal en op de server gewijzigd zijn."
 
 #. (title)
 msgid "The Commit Dialog"
@@ -3026,99 +3184,99 @@ msgstr "De Commit dialoog"
 
 #. (para)
 msgid "If your working copy is up to date and there are no conflicts, you are ready to commit your changes. Select any file and/or folders you want to commit, then <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice>. <placeholder-1/>"
-msgstr ""
+msgstr "Als je werkkopie helemaal bij is en er zijn geen conflicten, dan ben je klaar om je wijzigingen vast te leggen. Selecteer de bestanden en mappen die je wilt vastleggen en kies <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Vastleggen...</guimenuitem></menuchoice>. <placeholder-1/>"
 
 #. (para)
 msgid "The commit dialog will show you every changed file, including added, deleted and unversioned files. If you don't want a changed file to be committed, just uncheck that file. If you want to include an unversioned file, just check that file to add it to the commit."
-msgstr ""
+msgstr "De vastleggen dialoog geeft elk gewijzigd bestand weer, inclusief toegevoegde, verwijderde en bestanden zonder versiebeheer. Deselecteer een gewijzigd bestand, als je deze niet wilt vastleggen. Als je een bestand zonder versiebeheer in het archief wilt opnemen, dan kun je deze direct aanvinken zodat deze ook vastgelegd wordt."
 
 #. (para)
 #. (para)
 msgid "Items which have been switched to a different repository path are also indicated using an <literal>(s)</literal> marker. You may have switched something while working on a branch and forgotten to switch back to trunk. This is your warning sign!"
-msgstr ""
+msgstr "Objecten die verplaatst zijn naar een andere archieflocatie worden aangeduid met een <literal>(s)</literal> teken. Het kan zijn dat je omgeschakeld bent terwijl je werkte aan een tak en vergeten was om terug te schakelen naar de trunk. Dit is je waarschuwing!"
 
 #. (title)
 msgid "Commit files or folders?"
-msgstr ""
+msgstr "Bestanden of mappen vastleggen?"
 
 #. (para)
 msgid "When you commit files, the commit dialog shows only the files you have selected. When you commit a folder the commit dialog will select the changed files automatically. If you forget about a new file you created, committing the folder will find it anyway. Committing a folder does <emphasis>not</emphasis> mean that every file gets marked as changed; It just makes your life easier by doing more work for you."
-msgstr ""
+msgstr "Als je bestanden vastlegt, dan zal de vastleggen dialoog alleen de bestanden laten zien die je geselecteerd hebt. Als je een map vastlegt, dan zal de vastleggen dialoog de gewijzigde bestanden automatisch selecteren. Als je een nieuw aangemaakt bestand vergeten bent, dan wordt deze automatisch gevonden als je een map vastlegt. Het vastleggen van een map betekend <emphasis>niet</emphasis> dat elk bestand als gewijzigd wordt aangeduid; het wordt alleen maar eenvoudiger voor doordat het je werk uit handen neemt."
 
 #. (para)
 msgid "If you have modified files which have been included from a different repository using <literal>svn:externals</literal>, those changes cannot be included in the same atomic commit. A warning symbol below the file list tells you if this has happened, and the tooltip explains that those external files have to be committed separately."
-msgstr ""
+msgstr "Als je bestanden hebt gewijzigd die vanuit een ander archief komen door het gebruik van <literal>svn:externals</literal>, dan kunnen die wijzigingen niet als één enkele vastlegging worden vastgelegd.  Een waarschuwingsteken onderaan de lijst geeft aan of dit gebeurd is. De tooltip geeft aan dat die externe bestanden apart vastgelegd moeten worden."
 
 #. (title)
 msgid "Many unversioned files in the commit dialog"
-msgstr ""
+msgstr "Veel bestanden zonder versiebeheer in de vastleggen dialoog."
 
 #. (para)
 msgid "add the file (or a wildcard extension) to the list of files to exclude on the settings page. This will affect every working copy you have."
-msgstr ""
+msgstr "het bestand (of een wildcard extensie) toevoegen aan de lijst met de te negeren bestanden op de instellingen pagina. Dit zal op elke werkkopie die je hebt worden toegepast."
 
 #. (para)
 msgid "add the file to the <literal>svn:ignore</literal> list using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Add to ignore list</guimenuitem></menuchoice> This will only affect the directory on which you set the <literal>svn:ignore</literal> property. Using the SVN Property Dialog, you can alter the <literal>svn:ignore</literal> property for a directory."
-msgstr ""
+msgstr "het bestand toevoegen aan de literal>svn:ignore</literal> met <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verwijder en voeg toe aan negeerlijst </guimenuitem></menuchoice>. Dit zal alleen de mappen raken waarvoor de <literal>svn:ignore</literal> eigenschap is ingesteld. Met het SVN Eigenschappen venster kun je de <literal>svn:ignore</literal> eigenschap van een map aanpassen."
 
 #. (para)
 msgid "If you think that the commit dialog shows you too many unversioned (e.g. compiler generated or editor backup) files, there are several ways to handle this. You can: <placeholder-1/> Read <xref linkend=\"tsvn-dug-ignore\"/> for more information."
-msgstr ""
+msgstr "Als je vindt dat het vastleggen venster te veel bestanden zonder versiebeheer weergeeft (bijv. reservekopie bestanden van de compiler of tekstverwerker), dan zijn daar verschillende oplossingen voor. Je kunt: <placeholder-1> Lees <xref linkend=\"tsvn-dug-ignore\"/>  voor meer informatie."
 
 #. (para)
 msgid "<action>Double clicking</action> on any modified file in the commit dialog will launch the external diff tool to show your changes. The context menu will give you more options, as shown in the screenshot. You can also drag files from here into another application such as a text editor or an IDE."
-msgstr ""
+msgstr "<action>Dubbelklikken</action> op een gewijzigd bestand in het vastleggen venster zal het externe vergelijkingsprogramma opstarten om jouw wijzigingen te laten zien. Het context menu zal je meer opties geven, zoals weergegeven in de screenshot. Je kunt ook bestanden hier vandaan verslepen naar andere programma’s zoals een tekstverwerker of IDE."
 
 #. (para)
 msgid "You can select or deselect items by clicking on the checkbox to the left of the item. For directories you can use <keycap>Shift</keycap>-<action>select</action> to make the action recursive."
-msgstr ""
+msgstr "Je kunt objecten selecteren en de-selecteren door op het selectievak links ervan te klikken. Bij mappen kun je <keycap>Shift</keycap>-<action>selecteren</action> gebruiken om de actie recursief te maken."
 
 #. (para)
 msgid "The columns displayed in the bottom pane are customizable. If you <action>right click</action> on any column header you will see a context menu allowing you to select which columns are displayed. You can also change column width by using the drag handle which appears when you move the mouse over a column boundary. These customizations are preserved, so you will see the same headings next time."
-msgstr ""
+msgstr "De kolommen in het onderste venster kunnen aangepast worden. Als je met <action>rechts klikt</action> op de koptekst van een kolom, dan wordt er een context menu weergegeven waarmee je kunt selecteren welke kolommen er getoond moeten worden. Je kunt ook de breedte van de kolommen aanpassen door de overgang tussen twee kolommen in het koptekst van de kolommen te verslepen. De aanpassingen worden opgeslagen, waardoor je de volgende keer dezelfde weergave weer terugkrijgt."
 
 #. (para)
 msgid "By default when you commit changes, any locks that you hold on files are released automatically after the commit succeeds. If you want to keep those locks, make sure the <guilabel>Keep locks</guilabel> checkbox is checked. The default state of this checkbox is taken from the <literal>no_unlock</literal> option in the Subversion configuration file. Read <xref linkend=\"tsvn-dug-settings-main\"/> for information on how to edit the Subversion configuration file."
-msgstr ""
+msgstr "Als je een vastlegging opstart, wordt standaard alle blokkades die jij gezet hebt op bestanden verwijderd nadat de vastlegging succesvol is afgerond. Als je deze blokkades wilt behouden, zorg er dan voor dat het <guilabel>Blokkades behouden</guilabel> selectievak is aangekruist. De standaard status van deze optie wordt gelezen uit de <literal>no_unlock</literal> optie in het Subversion configuratiebestand. Lees <xref linkend=\"tsvn-dug-settings-main\"/> voor informatie over hoe je het configuratiebestand kunt aanpassen."
 
 #. (para)
 msgid "You can drag files into the commit dialog from elsewhere, so long as the working copies are checked out from the same repository. For example, you may have a huge working copy with several explorer windows open to look at distant folders of the hierarchy. If you want to avoid committing from the top level folder (with a lengthy folder crawl to check for changes) you can open the commit dialog for one folder and drag in items from the other windows to include within the same atomic commit."
-msgstr ""
+msgstr "Je kunt bestanden van een andere locatie naar het vastleggen venster slepen, als de werkkopieën maar in het zelfde archief zitten. Bijvoorbeeld, je hebt een enorm grote werkkopie met meerdere windows verkenners open om verschillende mappen in de hiërarchie te bekijken. Als je niet vanaf je hoofdmap wilt vastleggen (met een langdurende zoektoch naar alle wijzigingen), dan kun je het vastleggen venster openen op één map en bestanden vanaf een andere locatie in het venster slepen, zodat het in één actie meegenomen wordt bij het vastleggen."
 
 #. (para)
 msgid "You can drag unversioned files which reside within a working copy into the commit dialog, and they will be SVN added automatically."
-msgstr ""
+msgstr "Je kunt bestanden zonder versiebeheer in de werkkopie ook naar het vastleggen venster slepen, dan worden deze automatisch in SVN opgeslagen."
 
 #. (title)
 #. (title)
 msgid "Repairing External Renames"
-msgstr ""
+msgstr "Externe Hernoemingen Repareren"
 
 #. (para)
 #. (para)
 msgid "Sometimes files get renamed outside of Subversion, and they show up in the file list as a missing file and an unversioned file. To avoid losing the history you need to notify Subversion about the connection. Simply select both the old name (missing) and the new name (unversioned) and use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Repair Move</guimenuitem></menuchoice> to pair the two files as a rename."
-msgstr ""
+msgstr "Soms worden bestanden hernoemt buiten Subversion, waardoor deze bestanden in de lijst weergegeven worden als missend of zonder versiebeheer. Om te voorkomen dat je de geschiedenis verliest, moet je Subversion vertellen dat er een verbinding is. Selecteer de oude (missende) naam en de nieuwe nieuwe en gebruik <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Repareer Verplaatsing</guimenuitem></menuchoice> om de bestanden aan elkaar te koppelen als hernoemden."
 
 #. (title)
 #. (title)
 msgid "Change Lists"
-msgstr "Wijzig Lijsten"
+msgstr "Wijzigingen Lijsten"
 
 #. (para)
 msgid "The commit dialog supports Subversion's changelist feature to help with grouping related files together. Find out about this feature in <xref linkend=\"tsvn-dug-changelists\"/>."
-msgstr ""
+msgstr "Het vastleggen venster ondersteunt de lijst met wijzigingen functie van Subversion om te helpen bij het groeperen van gerelateerde bestanden. Lees meer over deze functie in <xref linkend=\"tsvn-dug-changelists\"/>."
 
 #. (title)
 msgid "Excluding Items from the Commit List"
-msgstr ""
+msgstr "Objecten van de vastleggingslijst uitsluiten"
 
 #. (para)
 msgid "Sometimes you have versioned files that change frequently but that you really don't want to commit. Sometimes this indicates a flaw in your build process - why are those files versioned? should you be using template files? But occasionally it is inevitable. A classic reason is that your IDE changes a timestamp in the project file every time you build. The project file has to be versioned as it includes all the build settings, but it doesn't need to be committed just because the timestamp changed."
-msgstr ""
+msgstr "Soms heb je bestanden met versiebeheer die regelmatig wijzigen, maar die je eigenlijk niet wilt vastleggen. Dit kan er op duiden dat je een zwak punt heb in je bouwproces – waarom zitten die bestanden in versiebeheer? Zou je sjablonen moeten gebruiken? Soms is het gewoon onoverkomelijk. Een klassieke reden is dat je IDE  de tijdstempel wijzigt elke keer als je het bouwproces hebt doorlopen. Het projectbestand moet wel in subverion komen, omdat het je instellingen bevat, maar het is niet nodig om deze elke keer vast te leggen als de alleen de tijdstempel is gewijzigd."
 
 #. (para)
 msgid "To help out in awkward cases like this, we have reserved a changelist called <literal>ignore-on-commit</literal>. Any file added to this changelist will automatically be unchecked in the commit dialog. You can still commit changes, but you have to select it manually in the commit dialog."
-msgstr ""
+msgstr "Om je uit dit soort vervelende situaties te helpen, hebben we een wijzigingenlijst gemaakt met de naam <literal>ignore-on-commit</literal> (negeren-bij-vastleggen). Elk bestand dat op deze lijst staat, zal automatisc gedeselecteerd worden in het vastleggen venster. Je kunt wijzigingen nog steeds wel vastleggen, maar je moet de bestanden dan handmatig selecteren in het vastleggen venster."
 
 #. (title)
 msgid "Commit Log Messages"
@@ -3126,11 +3284,11 @@ msgstr "Vastleg Log Meldingen"
 
 #. (para)
 msgid "Be sure to enter a log message which describes the changes you are committing. This will help you to see what happened and when, as you browse through the project log messages at a later date. The message can be as long or as brief as you like; many projects have guidelines for what should be included, the language to use, and sometimes even a strict format."
-msgstr ""
+msgstr "Zorg er voor dat je een log bericht invult, welke de wijzigingen beschrijft die je doorgevoerd hebt. Dit helpt om te bepalen wat er wanneer gewijzigd is als je op een later moment door de log berichten bladert. Het bericht kan zo kort of lang zijn als je wilt; bij veel project is gedefinieerd wat je er in moet zetten, welke taal je moet gebruiken en soms zelfs een strakke formattering."
 
 #. (para)
 msgid "You can apply simple formatting to your log messages using a convention similar to that used within emails. To apply styling to <literal>text</literal>, use <literal>*text*</literal> for bold, <literal>_text_</literal> for underlining, and <literal>^text^</literal> for italics."
-msgstr ""
+msgstr "Je kunt je tekst eenvoudig opmaken door gebruik te maken van stijlregels die lijken op de regels van emails. Om stijlen toe te passen op <literal>tekst</literal>, gebruikt <literal>*tekst*</literal> voor vet, <literal>_tekst_</literal> voor onderstrepen  en <literal>^tekst^</literal> voor cursief."
 
 #. (title)
 msgid "The Commit Dialog Spellchecker"
@@ -3138,55 +3296,55 @@ msgstr "De Vastleggen Dialoog Spellingscontrole"
 
 #. (para)
 msgid "<placeholder-1/> TortoiseSVN includes a spellchecker to help you get your log messages right. This will highlight any mis-spelled words. Use the context menu to access the suggested corrections. Of course, it doesn't know <emphasis>every</emphasis> technical term that you do, so correctly spelt words will sometimes show up as errors. But don't worry. You can just add them to your personal dictionary using the context menu."
-msgstr ""
+msgstr "<placeholder-1/> TortoiseSVN bevat spellingscontrole om je te helpen berichten te maken zonder typefouten. Verkeerd gespelde woorden worden gemarkeerd. Gebruik het context menu om de suggesties te bekijken.  Natuurlijk is niet <emphasis>technische</emphasis> technische term die je kent bekend, waardoor correct gespelde worden soms worden aangeduid als verkeerd gespeld. Maak je geen zorgen. Je kunt deze toevoegen aan je persoonlijke woordenboek via het context menu."
 
 #. (para)
 msgid "The log message window also includes a filename and function auto-completion facility. This uses regular expressions to extract class and function names from the (text) files you are committing, as well as the filenames themselves. If a word you are typing matches anything in the list (after you have typed at least 3 characters, or pressed <keycap>Ctrl+Space</keycap>), a drop-down appears allowing you to select the full name. The regular expressions supplied with TortoiseSVN are held in the TortoiseSVN installation <filename>bin</filename> folder. You can also define your own regexes and store them in <filename>%APPDATA%\\TortoiseSVN\\autolist.txt</filename>. Of course your private autolist will not be overwritten when you update your installation of TortoiseSVN. If you are unfamiliar with regular expressions, take a look at the introduction at <ulink url=\"http://en.wikipedia.org/wiki/Regular_expression\"><citetitle>http://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>, and the online documentation and tutorial at <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>."
-msgstr ""
+msgstr "Het log venster heeft ook een automatisch aanvullingsfunctie voor bestandsnamen en functies. Hiervoor worden gebruikelijke expressies en functienamen uit en de namen van de (tekst)bestanden, die je wilt vastleggen, gelezen. Als een woord dat je aan het typen bent overeen komt met een woord uit de lijst (als je tenminste 3 karakters hebt getypt of <keycap>Ctrl+Spatie</keycap> hebt ingedrukt), verschijnt er een lijst met complete namen waaruit je kunt selecteren. De gebruikelijke expressies die meegeleverd worden met TortoiseSVN worden opgeslagen in de TortoiseSVN installatie <filename>bin</filename> map. Je kunt ook je eigen gebruikelijke expressies definiëren en deze opslaan in <filename>%APPDATA%\\TortoiseSVN\\autolist.txt</filename>. Uiteraard wordt je eigen lijst niet overschrijven als je je TortoiseSVN installatie update. Als je niet bekend bent met reguliere expressies, bekijk dan eens <ulink url=\"http://en.wikipedia.org/wiki/Regular_expression\"><citetitle>http://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink> en de online documentatie en tutorial: <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>. "
 
 #. (para)
 msgid "You can re-use previously entered log messages. Just click on <guibutton>Recent messages</guibutton> to view a list of the last few messages you entered for this working copy. The number of stored messages can be customized in the TortoiseSVN settings dialog."
-msgstr ""
+msgstr "Je kunt eerder gebruikte log berichten hergebruiken. Klik hiervoor op <guibutton>Recente boodschappen</guibutton>. Je kunt dan de laatste paar berichten die je gebruikt hebt bij deze werkkopie zien. Het aantal opgeslagen berichten kan aangepast worden in het TortoiseSVN instellingen venster."
 
 #. (para)
 msgid "You can clear all stored commit messages from the <guilabel>Saved data</guilabel> page of TortoiseSVN's settings, or you can clear individual messages from within the <guilabel>Recent messages</guilabel> dialog using the <keycap>Delete</keycap> key."
-msgstr ""
+msgstr "Je kunt alle opgeslagen vastleggingsberichten wissen bij de <guilabel>Opgeslagen gegevens</guilabel> pagina van TortoiseSVN’s instellingen. Je kunt ook individuele berichten wissen vanuit het <guilabel>Recente boodschappen</guilabel> venster door op de <keycap>Delete</keycap> knop te drukken."
 
 #. (para)
 msgid "If you want to include the checked paths in your log message, you can use the command <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Paste filename list</guimenuitem></menuchoice> in the edit control."
-msgstr ""
+msgstr "Met het commando <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Plak lijst bestandsnamen </guimenuitem></menuchoice> kun je de gemarkeerde paden in het bericht invoegen."
 
 #. (para)
 msgid "Another way to insert the paths into the log message is to simply drag the files from the file list onto the edit control."
-msgstr ""
+msgstr "Een andere methode voor het invoegen van de paden is door de bestanden te slepen van de bestandslijst naar het bewerk venster."
 
 #. (title)
 msgid "Special Folder Properties"
-msgstr ""
+msgstr "Speciale Map Instellingen"
 
 #. (para)
 msgid "There are several special folder properties which can be used to help give more control over the formatting of commit log messages and the language used by the spellchecker module. Read <xref linkend=\"tsvn-dug-propertypage\"/> for further information."
-msgstr ""
+msgstr "Er zijn verschillende speciale mapeigenschappen, waarmee er meer controle gekregen wordt over de formattering van vastleggingsberichten en de taal van de spellingscontrole. Lees voor meer informatie <xref linkend=\"tsvn-dug-propertypage\"/>."
 
 #. (title)
 msgid "Integration with Bug Tracking Tools"
-msgstr ""
+msgstr "Integratie met Bug Tracking Programma's"
 
 #. (para)
 msgid "If you have activated the bug tracking system, you can set one or more Issues in the <guilabel>Bug-ID / Issue-Nr:</guilabel> text box. Multiple issues should be comma separated. Alternatively, if you are using regex-based bug tracking support, just add your issue references as part of the log message. Learn more in <xref linkend=\"tsvn-dug-bugtracker\"/>."
-msgstr ""
+msgstr "Als het bug tracking systeem hebt geactiveerd, dan kun je één of meerdere Problemen in het <guilabel>Bug-ID / Issue-Nr:</guilabel> tekstveld invullen. Meerdere problemen moeten gescheiden worden door komma’s. Als je gebruik maakt van gebruikelijke expressies bij Bug tracking, voeg dan je referenties toe als onderdeel van het log bericht. Voor meer informatie: <xref linkend=\"tsvn-dug-bugtracker\"/>."
 
 #. (title)
 msgid "Commit Progress"
-msgstr ""
+msgstr "Vastlegging voortgang"
 
 #. (title)
 msgid "The Progress dialog showing a commit in progress"
-msgstr ""
+msgstr "Het voortgangsvenster geeft de voortgang van een vastlegging weer"
 
 #. (para)
 msgid "After pressing <guibutton>OK</guibutton>, a dialog appears displaying the progress of the commit. <placeholder-1/>"
-msgstr ""
+msgstr "Na het drukken op de <guibutton>OK</guibutton> knop zal een venster verschijnen met de voortgang van de vastlegging. <placeholder-1/>"
 
 #. (term)
 #. (term)
@@ -3195,7 +3353,7 @@ msgstr "Blauw"
 
 #. (para)
 msgid "Committing a modification."
-msgstr ""
+msgstr "Vastleggen van een wijziging."
 
 #. (term)
 #. (term)
@@ -3215,7 +3373,7 @@ msgstr "Donker rood"
 
 #. (para)
 msgid "Committing a deletion or a replacement."
-msgstr ""
+msgstr "Vastleggen van een verwijdering of vervanging."
 
 #. (term)
 #. (term)
@@ -3229,22 +3387,22 @@ msgstr "Alle andere items."
 
 #. (para)
 msgid "The progress dialog uses colour coding to highlight different commit actions <placeholder-1/>"
-msgstr ""
+msgstr "Het voortgangsvenster gebruikt kleurcodering om de verschillende vastleggingsacties weer te geven. <placeholder-1/>"
 
 #. (para)
 #. (para)
 #. (para)
 msgid "This is the default colour scheme, but you can customise those colours using the settings dialog. Read <xref linkend=\"tsvn-dug-settings-colours\"/> for more information."
-msgstr ""
+msgstr "Dit is het standaard kleurenschema, maar je kunt deze naar je eigen wensen aanpassen in het instellingen venster. Lees voor meer informatie <xref linkend=\"tsvn-dug-settings-colours\"/>."
 
 #. (title)
 msgid "Update Your Working Copy With Changes From Others"
-msgstr ""
+msgstr "Je Werkkopie Bijwerken Met De Wijzigingen Van Anderen"
 
 #. (primary)
 #. (primary)
 msgid "update"
-msgstr "update"
+msgstr "verversen"
 
 #. (primary)
 msgid "fetch changes"
@@ -3252,19 +3410,19 @@ msgstr "wijzigingen ophalen"
 
 #. (title)
 msgid "Progress dialog showing finished update"
-msgstr ""
+msgstr "Voorgangsvenster van een afgeronde verversing"
 
 #. (para)
 msgid "<placeholder-1/> Periodically, you should ensure that changes done by others get incorporated in your local working copy. The process of getting changes from the server to your local copy is known as <emphasis>updating</emphasis>. Updating may be done on single files, a set of selected files, or recursively on entire directory hierarchies. To update, select the files and/or directories you want, <action>right click</action> and select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice> in the explorer context menu. A window will pop up displaying the progress of the update as it runs. Changes done by others will be merged into your files, keeping any changes you may have done to the same files. The repository is <emphasis>not</emphasis> affected by an update."
-msgstr ""
+msgstr "<placeholder-1/> Je moet regelmatig er voor zorgen dat wijzigingen die door anderen gemaakt zijn, in jouw werkkopie meegenomen worden. Het proces van het ophalen van de wijzigingen vanaf de server naar je lokale werkkopie staat bekend als <emphasis>verversen</emphasis>. Verversen kan op een enkel bestand, een aantal bestanden of recursief op een hele mapstructuur. Om te verversen, selecteer de bestanden en mappen. <action>Klik rechts</action> en selecteer <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verversen</guimenuitem></menuchoice> in het verkenner context menu. Er zal een venster getoond worden die de voortgang van de verversing weergeeft. Wijzigingen van anderen worden in jouw bestanden verwerkt, zonder dat jouw wijzigingen in (mogelijk) dezelfde bestanden daarbij verloren gaan. Het archief wordt niet door het verversen bijgewerkt of veranderd."
 
 #. (para)
 msgid "New item added to your WC."
-msgstr ""
+msgstr "Nieuw object toegevoegd aan je werkkopie."
 
 #. (para)
 msgid "Redundant item deleted from your WC, or missing item replaced in your WC."
-msgstr ""
+msgstr "Overtollig object verwijdert uit je werkkopie, of missend object vervangen in je werkkopie."
 
 #. (term)
 #. (term)
@@ -3273,7 +3431,7 @@ msgstr "Groen"
 
 #. (para)
 msgid "Changes from repository successfully merged with your local changes."
-msgstr ""
+msgstr "Wijzigingen uit het archief succesvol samengevoegd met je lokale wijzigingen."
 
 #. (term)
 #. (term)
@@ -3282,39 +3440,39 @@ msgstr "Fel rood"
 
 #. (para)
 msgid "Changes from repository merged with local changes, resulting in conflicts which you need to resolve."
-msgstr ""
+msgstr "Het samenvoegen van wijzigingen uit het archief met de lokale wijzigingen heeft geresulteerd in conflicten die opgelost moeten worden."
 
 #. (para)
 msgid "Unchanged item in your WC updated with newer version from the repository."
-msgstr ""
+msgstr "Ongewijzigd object in je werkkopie bijgewerkt met de nieuwe versie uit het archief."
 
 #. (para)
 msgid "The progress dialog uses colour coding to highlight different update actions <placeholder-1/>"
-msgstr ""
+msgstr "Het voortgangsvenster gebruikt kleurcodering om verschillende acties te markeren. <placeholder-1/>"
 
 #. (para)
 msgid "If you get any <emphasis>conflicts</emphasis> during an update (this can happen if others changed the same lines in the same file as you did and those changes don't match) then the dialog shows those conflicts in red. You can <action>double click</action> on these lines to start the external merge tool to resolve the conflicts."
-msgstr ""
+msgstr "Als er tijdens het samenvoegen <emphasis>conflicten</emphasis> zijn opgetreden (als bijvoorbeeld anderen dezelfde regel op een andere manier hebben gewijzigd als jijzelf hebt gedaan), dan zal het venster deze met rood weergeven. Je kunt <action>dubbel klikken</action> op deze regels om het externe samenvoegprogramma te starten."
 
 #. (para)
 msgid "When the update is complete, the progress dialog shows a summary of the number of items updated, added, removed, conflicted, etc. below the file list. This summary information can be copied to the clipboard using <keycap>Ctrl+C</keycap>."
-msgstr ""
+msgstr "Als het verversen afgerond is, geeft het voortgangsvenster onder de bestandslijst een samenvatting weer van het aantal vernieuwingen, toevoegingen, verwijderingen, conflicten, etc.. Deze samenvatting kan naar het klembord gekopieerd worden met <keycap>Ctrl+C</keycap>."
 
 #. (para)
 msgid "The standard Update command has no options and just updates your working copy to the HEAD revision of the repository, which is the most common use case. If you want more control over the update process, you should use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to Revision...</guimenuitem></menuchoice> instead. This allows you to update your working copy to a specific revision, not only to the most recent one. Suppose your working copy is at revision 100, but you want it to reflect the state which it had in revision 50 - then simply update to revision 50. In the same dialog you can also choose the <firstterm>depth</firstterm> at which to update the current folder. The terms used are described in <xref linkend=\"tsvn-dug-checkout-depth\"/>. The default depth is <guilabel>Working copy</guilabel>, which preserves the existing depth setting. You can also choose whether to ignore any external projects in the update (i.e. projects referenced using <literal>svn:externals</literal>)."
-msgstr ""
+msgstr "Het normale Verversen commando heeft geen opties en zorgt er alleen voor dat je werkkopie ververst wordt naar de HEAD revisie van het archief. Dat is wat je eigenlijk normaal gesproken altijd wilt doen.  Als je meer controle wilt hebben over het ververs proces, dan moet je de functie  <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verversen naar revisie...</guimenuitem></menuchoice> gebruiken. Hiermee kun je je werkkopie bijwerken naar een specifieke revisie, niet alleen de meest recente. Stel, je werkkopie bevat revisie 100 en je wilt de status van revisie 50 bekijken. Je kunt dan eenvoudig verversen naar revisie 50. In hetzelfde venster kun je ook de <firstterm>mapdiepte</firstterm> instellen van de huidige map. De termen die gebruikt worden, staan beschreven in <xref linkend=\"tsvn-dug-checkout-depth\"/>. De standaard diepte is <guilabel>Werkkopie</guilabel>, waarmee de huidige mapdiepte behouden wordt. Je kunt ook aangeven of externe referenties genegeerd moeten worden bij de verversing (oftewel projecten die gekoppeld zijn met <literal>svn:externals</literal>)."
 
 #. (para)
 msgid "If you update a file or folder to a specific revision, you should not make changes to those files. You will get <quote>out of date</quote> error messages when you try to commit them! If you want to undo changes to a file and start afresh from an earlier revision, you can rollback to a previous revision from the revision log dialog. Take a look at <xref linkend=\"tsvn-howto-rollback\"/> for further instructions, and alternative methods."
-msgstr ""
+msgstr "Als je een bestand of map naar een bepaalde revisie ververst, dan moet je geen wijzigingen in die bestanden aanbrengen. Je krijgt dan een foutmelding als je je wijzigingen probeert vast te leggen dat je niet aan de laatste versie hebt gewerkt. Als je wijzigingen ongedaan wilt maken en opnieuw wilt starten vanaf een eerdere revisie, dan kun je dat doen via het revisie log venster. Lees <xref linkend=\"tsvn-howto-rollback\"/>  voor meer instructies en alternatieve methodes."
 
 #. (para)
 msgid "<menuchoice><guimenuitem>Update to Revision</guimenuitem></menuchoice> can occasionally be useful to see what your project looked like at some earlier point in its history. But in general, updating individual files to an earlier revision is not a good idea as it leaves your working copy in an inconsistent state. If the file you are updating has changed name, you may even find that the file just disappears from your working copy because no file of that name existed in the earlier revision. You should also note that the item will show a normal green overlay, so it is indistinguishable from files which are up-to-date."
-msgstr ""
+msgstr "<menuchoice><guimenuitem>Verversen naar Revisie</guimenuitem></menuchoice> kan soms handig om te bekijken hoe je project er een tijd geleden uitzag. Het verversen van individuele bestanden naar een eerdere revisie is zeker geen goed idee, omdat je werkkopie dan inconsistent wordt. Als de naam van een bestand gewijzigd is, dan zal dat bestand gewoon uit je werkkopie verdwijnen. Dit komt omdat er geen bestand met die naam in een eerdere revisie aanwezig was. Je moet je ook realiseren dat zo’n object (uit een eerdere revisie) een normaal overlappend pictogram heeft, waardoor het niet te onderscheiden is welke bestanden van de laatste revisie zijn."
 
 #. (para)
 msgid "If you simply want a local copy of an old version of a file it is better to use the <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Save revision to...</guimenuitem></menuchoice> command from the log dialog for that file."
-msgstr ""
+msgstr "Als je een lokale kopie wilt hebben van een oude versie van een bestand, dan kun je beter het <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Bewaar revisie in...</guimenuitem></menuchoice> commando gebruiken vanuit het log venster van het betreffende bestand."
 
 #. (title)
 msgid "Multiple Files/Folders"
@@ -3322,7 +3480,7 @@ msgstr "Meerdere Bestanden/Mappen"
 
 #. (para)
 msgid "If you select multiple files and folders in the explorer and then select <menuchoice><guimenuitem>Update</guimenuitem></menuchoice>, all of those files/folders are updated one by one. TortoiseSVN makes sure that all files/folders which are from the same repository are updated to the exact same revision! Even if between those updates another commit occurred."
-msgstr ""
+msgstr "Als je in de verkenner meerdere bestanden selecteert en vervolgens <menuchoice><guimenuitem>Verversen</guimenuitem></menuchoice> kiest, dan worden al die bestanden en mappen stuk voor stuk ververst. TortoiseSVN zorgt er voor dat bestanden en mappen uit hetzelfde archief bijgewerkt worden naar dezelfde revisie, zelfs als er gedurende het verversen een andere vastlegging heeft plaatsgevonden."
 
 #. (title)
 msgid "Local File Already Exists"
@@ -3330,15 +3488,15 @@ msgstr "Lokale bestandsnaam bestaat al."
 
 #. (para)
 msgid "Sometimes when you try to update, the update fails with a message to say that there is already a local file of the same name. This typically happens when Subversion tries to checkout a newly versioned file, and finds that an unversioned file of the same name already exists in your working folder. Subversion will never overwrite an unversioned file - it might contain something you are working on, which coincidentally has the same filename as another developer has used for his newly committed file."
-msgstr ""
+msgstr "Het komt soms voor dat het verversen een foutmelding geeft dat er al een lokaal bestand bestaat met dezelfde naam. Dit gebeurt als Subversion een bestand, dat recent in versiebeheer is opgeslagen, probeert op te halen en er al een lokaal bestand in de werkkopie is zonder versiebeheer, maar met dezelfde naam. Subversion zal nooit een bestand zonder versiebeheer overschrijven – het bestand bevat misschien gegevens waarmee je aan het werk bent, terwijl het per toeval dezelfde bestandsnaam heeft als een nieuw bestand die net door een andere ontwikkelaar is vastgelegd. "
 
 #. (para)
 msgid "If you get this error message, the solution is simply to rename the local unversioned file. After completing the update, you can check whether the renamed file is still needed."
-msgstr ""
+msgstr "Als je deze foutmelding krijgt, kun je dit probleem eenvoudig oplossen door het lokale bestand zonder versiebeheer te hernoemen. Nadat het verversen is afgerond, kun je kijken of het hernoemde bestand nog nodig is."
 
 #. (para)
 msgid "If you keep getting error messages, use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Check for Modifications</guimenuitem></menuchoice> instead to list all the problem files. That way you can deal with them all at once."
-msgstr ""
+msgstr "Als je foutmeldingen blijft krijgen, gebruik dan <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Kijk of er updates zijn</guimenuitem></menuchoice>om een lijst te laten maken van alle bestanden met problemen. Op die manier kun je ze allemaal in één keer afhandelen."
 
 #. (title)
 msgid "Resolving Conflicts"
@@ -3346,7 +3504,7 @@ msgstr "Conflicten oplossen"
 
 #. (primary)
 msgid "tree conflict"
-msgstr "tree conflicten"
+msgstr "mapstructuur conflicten"
 
 #. (primary)
 msgid "resolve"
@@ -3358,47 +3516,47 @@ msgstr "bestandsconflicten"
 
 #. (para)
 msgid "A file conflict occurs if two (or more) developers have changed the same few lines of a file."
-msgstr ""
+msgstr "Een bestandsconflict treedt op als er twee of meer ontwikkelaars dezelfde regel in één bestand hebben aangepast."
 
 #. (term)
 msgid "tree conflicts"
-msgstr "tree conflicten"
+msgstr "mapstructuur conflicten"
 
 #. (para)
 msgid "A tree conflict occurs when a developer moved/renamed/deleted a file or folder, which another developer either also has moved/renamed/deleted or just modified."
-msgstr ""
+msgstr "Een mapstructuur conflict treedt op als een ontwikkelaar een bestand of map verplaatst, hernoemd of verwijderd heeft, welke ook door een andere ontwikkelaar is verplaatst, hernoemd, verwijderd of gewijzigd is."
 
 #. (para)
 msgid "Once in a while, you will get a <emphasis>conflict</emphasis> when you update/merge your files from the repository or when you switch your working copy to a different URL. There are two kinds of conflicts: <placeholder-1/>"
-msgstr ""
+msgstr "Zo af en toe zul je tegen een <emphasis>conflict</emphasis> aanlopen als je bestanden in het archief ververst of samenvoegt, of als je je werkkopie omschakelt naar een andere URL. Er zijn twee soorten conflicten: <placeholder-1/>"
 
 #. (title)
 msgid "File Conflicts"
-msgstr "bestandsconflicten"
+msgstr "Bestandsconflicten"
 
 #. (term)
 msgid "filename.ext.mine"
-msgstr ""
+msgstr "filename.ext.mine"
 
 #. (para)
 msgid "This is your file as it existed in your working copy before you updated your working copy - that is, without conflict markers. This file has your latest changes in it and nothing else."
-msgstr ""
+msgstr "Dit is het bestand zoals het aanwezig was in je werkkopie, voordat je je werkkopie ging verversen. Oftewel de versie zonder conflictmarkeringen. Dit bestand bevat jouw laatste wijzigingen en niets anders."
 
 #. (term)
 msgid "filename.ext.rOLDREV"
-msgstr ""
+msgstr "filename.ext.rOLDREV"
 
 #. (para)
 msgid "This is the file that was the BASE revision before you updated your working copy. That is, it the file that you checked out before you made your latest edits."
-msgstr ""
+msgstr "Dit de BASE revisie van het is bestand voordat je je werkkopie ging verversen. Oftewel het bestand die je opgehaald hebt voordat je jouw laatste wijzigingen er in ging zetten."
 
 #. (term)
 msgid "filename.ext.rNEWREV"
-msgstr ""
+msgstr "filename.ext.rNEWREV"
 
 #. (para)
 msgid "This is the file that your Subversion client just received from the server when you updated your working copy. This file corresponds to the HEAD revision of the repository."
-msgstr ""
+msgstr "Dit is het bestand die zojuist door je Subversion applicatie is ontvangen van de server toen je jouw werkkopie ging verversen. Dit bestand komt overeen met de HEAD revisie in het archief."
 
 #. (para)
 msgid ""
@@ -3410,270 +3568,277 @@ msgid ""
 "\t&gt;&gt;&gt;&gt;&gt;&gt;&gt; revision\n"
 "\t</screen> Also, for every conflicted file Subversion places three additional files in your directory: <placeholder-1/>"
 msgstr ""
+"Een bestandsconflict treedt op als twee of meer ontwikkelaars dezelfde regels in een bestand hebben gewijzigd. Omdat Subversion niets van de projecten weer, laat het het oplossen van conflicten over aan de gebruikers. Als er een conflict gemeld wordt, dan moet je het bestand in kwestie openen en de regels zoeken die beginnen met <literal>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</literal>. Het conflicterende gedeelte wordt als volgt gemarkeerd: <screen>\n"
+"\t&lt;&lt;&lt;&lt;&lt;&lt;&lt; filename\n"
+"\t\tyour changes\n"
+"\t=======\n"
+"\t\tcode merged from repository\n"
+"\t&gt;&gt;&gt;&gt;&gt;&gt;&gt; revision\n"
+"\t</screen> Daarnaast plaatst Subversion drie additionele bestanden in je map: <placeholder-1/>"
 
 #. (para)
 msgid "You can either launch an external merge tool / conflict editor with <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Edit Conflicts</guimenuitem></menuchoice> or you can use any other editor to manually resolve the conflict. You should decide what the code should look like, do the necessary changes and save the file."
-msgstr ""
+msgstr "Je kunt of een extern samenvoeg/conflict bewerkingsprogramma openen met <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Bewerk Conflicten</guimenuitem></menuchoice> of je kunt elke tekstverwerker gebruiken om handmatig de conflicten op te lossen. Je moet beslissen hoe de code er uit zou moeten zien, de noodzakelijke wijzigingen doorvoeren en het bestand opslaan."
 
 #. (para)
 msgid "Afterwards execute the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Resolved</guimenuitem></menuchoice> and commit your modifications to the repository. Please note that the Resolve command does not really resolve the conflict. It just removes the <filename>filename.ext.mine</filename> and <filename>filename.ext.r*</filename> files, to allow you to commit your changes."
-msgstr ""
+msgstr "Daarna moet je het commando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Opgelost</guimenuitem></menuchoice> kiezen en je wijzigingen vastleggen in het archief. Merk op dat het Opgelost commando het conflict zelf niet oplost. Het zorgt er alleen voor dat de bestanden <filename>filename.ext.mine</filename> en <filename>filename.ext.r*</filename> worden verwijderd, zodat je je wijzigingen kunt vastleggen. "
 
 #. (para)
 msgid "If you have conflicts with binary files, Subversion does not attempt to merge the files itself. The local file remains unchanged (exactly as you last changed it) and you have <filename>filename.ext.r*</filename> files. If you want to discard your changes and keep the repository version, just use the Revert command. If you want to keep your version and overwrite the repository version, use the Resolved command, then commit your version."
-msgstr ""
+msgstr "Subversion zal niet proberen om conflicten met binaire bestanden zelf op te lossen. Het lokale bestand blijft ongewijzigd (precies zoals je het als laatste had opgeslagen) en je krijgt <filename>filename.ext.r*</filename> bestanden ernaast. Als je je eigen wijzigingen wilt laten vervallen en de versie in het archief wilt behouden, gebruik dan het Terugzetten commando. Als je je eigen versie wilt gebruiken en de versie in het archief wilt overschrijven, gebruik dan het Opgelost commando en leg vervolgens je wijzigingen vast."
 
 #. (para)
 msgid "You can use the Resolved command for multiple files if you right click on the parent folder and select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Resolved...</guimenuitem></menuchoice> This will bring up a dialog listing all conflicted files in that folder, and you can select which ones to mark as resolved."
-msgstr ""
+msgstr "Het is mogelijk om het Opgelost commando op meerdere bestanden toe te passen. Klik met rechts op de bovenliggende map en selecteer <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Opgelost...</guimenuitem></menuchoice>. Er wordt dan een venster geopend met alle conflicterende bestanden in die map. Je kunt dan selecteren welke bestanden gemarkeerd moeten worden als Opgelost."
 
 #. (title)
 msgid "Tree Conflicts"
-msgstr "Tree conflicten"
+msgstr "Mapstructuur conflicten"
 
 #. (para)
 msgid "A tree conflict occurs when a developer moved/renamed/deleted a file or folder, which another developer either also has moved/renamed/deleted or just modified. There are many different situations that can result in a tree conflict, and all of them require different steps to resolve the conflict."
-msgstr ""
+msgstr "Een conflict in mapstructuur ontstaat als een ontwikkelaar bestanden of mappen verplaatst, hernoemd of verwijderd heeft, die een andere ontwikkelaar toevallig ook verplaatst, hernoemd, verwijderd of gewijzigd heeft. Er zijn nog veel meer situaties die tot een mapstructuur conflict kunnen leiden en elke situatie heeft weer een andere oplossing nodig."
 
 #. (para)
 msgid "When a file is deleted locally in Subversion, the file is also deleted from the local file system, so even if it is part of a tree conflict it cannot show a conflicted overlay and you cannot right click on it to resolve the conflict. Use the <guilabel>Check for Modifications</guilabel> dialog instead to access the <guilabel>Edit conflicts</guilabel> option."
-msgstr ""
+msgstr "Als een bestand lokaal uit Subversion verwijderd is, dan wordt deze ook van het lokale bestandssysteem verwijderd. Dat houdt in dat er geen overlappend pictogram weergegeven kan worden als dit bestand onderdeel is van een mapstructuurconflict en je er dus ook niet met rechts op kunt klikken om het probleem op te lossen. Gebruik dan het <guilabel>Kijk of er updates zijn</guilabel> venster om de <guilabel>Conflicten oplossen</guilabel> optie te kunnen benaderen."
 
 #. (para)
 msgid "TortoiseSVN can help find the right place to merge changes, but there may be additional work required to sort out the conflicts. Remember that after an update the working BASE will always contain the revision of each item as it was in the repository at the time of update. If you revert a change after updating it goes back to the repository state, not to the way it was when you started making your own local changes."
-msgstr ""
+msgstr "TortoiseSVN kan helpen om de beste plaatst voor het samenvoegen van wijzigingen te vinden, maar voor het oplossen van conflicten is er toch meer handwerk nodig. Onthoudt dat na een verversing de BASE altijd de revisie van bestanden uit het archief bevat van het moment van verversen. Als je een wijziging terugzet nadat je ververst hebt, dan kom je terug op de stand van het archief, niet naar de stand die je toen je begon met het wijzigen. "
 
 #. (title)
 msgid "Local delete, incoming edit upon update"
-msgstr ""
+msgstr "Lokale verwijdering, inkomende wijziging bij verversing"
 
 #. (para)
 msgid "Developer A modifies <filename>Foo.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Ontwikkelaar A wijzigt <filename>Foo.c</filename> en legt deze vast in het archief"
 
 #. (para)
 msgid "Developer B has simultaneously moved <filename>Foo.c</filename> to <filename>Bar.c</filename> in his working copy, or simply deleted <filename>Foo.c</filename> or its parent folder."
-msgstr ""
+msgstr "Ontwikkelaar B heeft tegelijkertijd <filename>Foo.c</filename> naar <filename>Bar.c</filename> verplaatst in zijn werkkopie of heeft <filename>Foo.c</filename> of de bovenliggende map verwijderd."
 
 #. (para)
 msgid "<filename>Foo.c</filename> has been deleted from working copy, but is marked with a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> is verwijderd uit de werkkopie, maar deze is gemarkeerd als een mapstructuur conflict."
 
 #. (para)
 msgid "If the conflict results from a rename rather than a delete then <filename>Bar.c</filename> is marked as added, but does not contain developer A's modifications."
-msgstr ""
+msgstr "Als het conflict veroorzaakt is door een hernoeming in plaats van verwijdering, dan zal <filename>Bar.c</filename> gemarkeerd worden als toegevoegd, maar deze zal dan niet de wijzigingen van ontwikkelaar A bevatten."
 
 #. (para)
 #. (para)
 msgid "An update of developer B's working copy results in a tree conflict: <placeholder-1/>"
-msgstr ""
+msgstr "Een verversing van de werkkopie van ontwikkelaar B resulteert in een mapstructuur conflict: <placeholder-1/>"
 
 #. (para)
 msgid "Developer B now has to choose whether to keep Developer A's changes. In the case of a file rename, he can merge the changes to <filename>Foo.c</filename> into the renamed file <filename>Bar.c</filename>. For simple file or directory deletions he can choose to keep the item with Developer A's changes and discard the deletion. Or, by marking the conflict as resolved without doing anything he effectively discards Developer A's changes."
-msgstr ""
+msgstr "Ontwikkelaar B moet nu kiezen of hij de wijzigingen van ontwikkelaar A wil behouden. Als het om een naamswijziging gaat, dan kan hij de wijzigingen van <filename>Foo.c</filename> samenvoegen in het naar <filename>Bar.c</filename> hernoemde bestand. Bij eenvoudige bestands- of mapverwijderingen kan hij er voor kiezen om het object met de wijzigingen van ontwikkelaar A te behouden en de verwijdering te negeren. Of, door middel van het als Opgelost markeren van de conflicten zonder iets gewijzigd te hebben, worden de wijzigingen van ontwikkelaar A volledig genegeerd. "
 
 #. (para)
 msgid "The conflict edit dialog offers to merge changes if it can find the original file of the renamed <filename>Bar.c</filename>. Depending on where the update was invoked, it may not be possible to find the source file."
-msgstr ""
+msgstr "Het conflicten bewerkingsvenster beidt de mogelijkheid om wijzigingen samen te voegen, als het originele bestand van de hernoemde <filename>Bar.c</filename> aangewezen kan worden. Afhankelijk van waar de verversing was aangeroepen, is het misschien niet mogelijk om het bronbestand te vinden."
 
 #. (title)
 msgid "Local edit, incoming delete upon update"
-msgstr ""
+msgstr "Lokale wijziging, inkomende verwijdering bij verversing"
 
 #. (para)
 msgid "Developer A moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository."
-msgstr ""
+msgstr "Ontwikkelaar A hernoemt <filename>Foo.c</filename> naar <filename>Bar.c</filename> en legt de wijziging vast in het archief."
 
 #. (para)
 #. (para)
 msgid "Developer B modifies <filename>Foo.c</filename> in his working copy."
-msgstr ""
+msgstr "Ontwikkelaar B wijzigt <filename>Foo.c</filename> in zijn werkkopie."
 
 #. (para)
 msgid "Or in the case of a folder move ..."
-msgstr ""
+msgstr "Of bij een verplaatsing van een map ..."
 
 #. (para)
 msgid "Developer A moves parent folder <filename>FooFolder</filename> to <filename>BarFolder</filename> and commits it to the repository."
-msgstr ""
+msgstr "Ontwikkelaar A hernoemt hoofdmap <filename>FooFolder</filename> in <filename>BarFolder</filename> en legt de wijziging vast in het archief."
 
 #. (para)
 msgid "<filename>Bar.c</filename> is added to the working copy as a normal file."
-msgstr ""
+msgstr "<filename>Bar.c</filename> wordt toegevoegd aan de werkkopie als een normaal bestand."
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as added (with history) and has a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> wordt als toegevoegd (inclusief geschiedenis) gemarkeerd en heeft een mapstructuur conflict."
 
 #. (para)
 msgid "An update of developer B's working copy results in a tree conflict. For a simple file conflict: <placeholder-1/>"
-msgstr ""
+msgstr "Een verversing van de werkkopie van ontwikkelaar B leidt tot een mapstructuur conflict. Een eenvoudig bestandsconflict: <placeholder-1/>"
 
 #. (para)
 msgid "<filename>BarFolder</filename> is added to the working copy as a normal folder."
-msgstr ""
+msgstr "<filename>BarFolder</filename> wordt aan de werkkopie toegevoegd als een normale map."
 
 #. (para)
 msgid "<filename>FooFolder</filename> is marked as added (with history) and has a tree conflict."
-msgstr ""
+msgstr "<filename>FooFolder</filename> wordt gemarkeerd als toegevoegd (inclusief geschiedenis) en heeft een mapstructuurconflict."
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as modified."
-msgstr ""
+msgstr "<filename>Foo.c</filename> wordt gemarkeerd als gewijzigd."
 
 #. (para)
 msgid "For a folder conflict: <placeholder-1/>"
-msgstr ""
+msgstr "Een mapstructuur conflict: <placeholder-1/>"
 
 #. (para)
 #. (para)
 msgid "Developer B now has to decide whether to go with developer A's reorganisation and merge her changes into the corresponding file in the new structure, or simply revert A's changes and keep the local file."
-msgstr ""
+msgstr "Ontwikkelaar B moet nu de keuze maken of deze meegaat met de herindeling van ontwikkelaar A. Als ontwikkelaar B daarin meegaat, kan hij zijn wijzigingen in het nieuwe bestand samenvoegen. Zo niet, dan kan ontwikkelaar B de wijzigingen van A terugdraaien en zijn eigen lokale versie behouden."
 
 #. (para)
 msgid "To merge her local changes with the reshuffle, Developer B must first find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog. The changes must then be merged by hand as there is currently no way to automate or even simplify this process. Once the changes have been ported across, the conflicted path is redundant and can be deleted. In this case use the <guilabel>Remove</guilabel> button in the conflict editor dialog to clean up and mark the conflict as resolved."
-msgstr ""
+msgstr "Om de eigen wijzigingen in de herindeling te verwerken, moet ontwikkelaar B uitvinden welke naam <filename>Foo.c</filename> heeft gekregen in het archief. Dit kan met het log venster. De wijzigingen moeten vervolgens met de hand verwerkt worden, omdat er nu nog geen mogelijkheid is dit te automatiseren of te vereenvoudigen. Als de wijzigingen doorgevoerd zijn, is het conflicterende pad overbodig en kan dan verwijderd worden. Gebruik hiervoor de <guilabel>Verwijderen</guilabel> knop in de conflict bewerkingsvenster om het conflict als opgelost ge markeren."
 
 #. (para)
 msgid "If Developer B decides that A's changes were wrong then she must choose the <guilabel>Keep</guilabel> button in the conflict editor dialog. This marks the conflicted file/folder as resolved, but Developer A's changes need to be removed by hand. Again the log dialog helps to track down what was moved."
-msgstr ""
+msgstr "Als ontwikkelaar B tot de conclusie komt dat de wijzigingen van A verkeerd zijn, dan moet dat aangegeven worden met de <guilabel>Behouden</guilabel> knop in het conflict bewerkingsvenster. Hiermee wordt het conflicterende bestand of de map gemarkeerd als opgelost. De wijzigingen van ontwikkelaar A moeten wel nog met de hand verwijderd worden. Ook hier helpt het log venster met te bepalen wat er gewijzigd/hernoemd is."
 
 #. (title)
 msgid "Local delete, incoming delete upon update"
-msgstr ""
+msgstr "Lokale verwijdering, inkomende verwijdering bij verversing"
 
 #. (para)
 msgid "Developer A moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Ontwikkelaar A hernoemt <filename>Foo.c</filename> in <filename>Bar.c</filename> en legt dit vast in het archief."
 
 #. (para)
 msgid "Developer B moves <filename>Foo.c</filename> to <filename>Bix.c</filename>"
-msgstr ""
+msgstr "Ontwikkelaar B hernoemt <filename>Foo.c</filename> in <filename>Bix.c</filename>"
 
 #. (para)
 msgid "<filename>Bix.c</filename> is marked as added with history."
-msgstr ""
+msgstr "<filename>Bix.c</filename> wordt gemarkeerd als toegevoegd inclusief geschiedenis."
 
 #. (para)
 msgid "<filename>Bar.c</filename> is added to the working copy with status 'normal'."
-msgstr ""
+msgstr "<filename>Bar.c</filename> is toegevoegd aan de werkkopie met 'normale' status."
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as deleted and has a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> wordt gemarkeerd als verwijderd en leidt tot een mapstructuur conflict."
 
 #. (para)
 msgid "To resolve this conflict, Developer B has to find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog."
-msgstr ""
+msgstr "Om dit conflict op te lossen, moet ontwikkelaar B uitzoeken welke bestandsnaam de conflicterend <filename>Foo.c</filename> heeft gekregen in het archief. Het log venster kan hiervoor gebruikt worden."
 
 #. (para)
 #. (para)
 msgid "Then developer B has to decide which new filename of <filename>Foo.c</filename> to keep - the one done by developer A or the rename done by himself."
-msgstr ""
+msgstr "Ontwikkelaar B moet dan bepalen welke bestandsnaam van <filename>Foo.c</filename> behouden moet worden, degene van ontwikkelaar A of de zelf gekozen nieuwe bestandsnaam."
 
 #. (para)
 #. (para)
 msgid "After developer B has manually resolved the conflict, the tree conflict has to be marked as resolved with the button in the conflict editor dialog."
-msgstr ""
+msgstr "Wanneer ontwikkelaar B het conflict handmatig heeft opgelost, dan moet het conflict als opgelost worden gemarkeerd in het conflict bewerkingsvenster."
 
 #. (title)
 msgid "Local missing, incoming edit upon merge"
-msgstr ""
+msgstr "Lokaal missend, binnenkomende wijziging bij het samenvoegen"
 
 #. (para)
 msgid "Developer A working on trunk modifies <filename>Foo.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Ontwikkelaar A werkt in de trunk en wijzigt <filename>Foo.c</filename> en legt de wijzigingen vast in het archief."
 
 #. (para)
 msgid "Developer B working on a branch moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Ontwikkelaar B werkt aan een branch en hernoemd <filename>Foo.c</filename> in <filename>Bar.c</filename> en legt zijn wijzigingen vast in het archief."
 
 #. (para)
 msgid "<filename>Bar.c</filename> is already in the working copy with status 'normal'."
-msgstr ""
+msgstr "<filename>Bar.c</filename> bevindt zich al in de werkkopie met status 'normaal'."
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as missing with a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> wordt gemarkeerd als missend met een mapstructuur conflict."
 
 #. (para)
 #. (para)
 #. (para)
 msgid "A merge of developer A's trunk changes to developer B's branch working copy results in a tree conflict: <placeholder-1/>"
-msgstr ""
+msgstr "Het samenvoegen van de wijzigingen van A op de trunk naar de branch werkkopie van ontwikkelaar B leidt tot een mapstructuur conflict: <placeholder-1/>"
 
 #. (para)
 msgid "To resolve this conflict, Developer B has to mark the file as resolved in the conflict editor dialog, which will remove it from the conflict list. She then has to decide whether to copy the missing file <filename>Foo.c</filename> from the repository to the working copy, whether to merge Developer A's changes to <filename>Foo.c</filename> into the renamed <filename>Bar.c</filename> or whether to ignore the changes by marking the conflict as resolved and doing nothing else."
-msgstr ""
+msgstr "Ontwikkelaar B moet het bestand als opgelost markeren in het conflict bewerkingsvenster, om ervoor te zorgen dat het bestand van de conflict lijst wordt gehaald. Vervolgens moet besloten worden of het missende bestand <filename>Foo.c</filename> vanuit het archief naar de werkkopie gekopieerd moet worden, of dat de wijzigingen van ontwikkelaar A in <filename>Foo.c</filename> samengevoegd moeten worden in <filename>Bar.c</filename>, of de wijzigingen te negeren door het conflict als opgelost te markeren zonder iets gewijzigd te hebben."
 
 #. (para)
 msgid "Note that if you copy the missing file from the repository and then mark as resolved, your copy will be removed again. You have to resolve the conflict first."
-msgstr ""
+msgstr "Merk op dat als je het missende bestand eerst uit het archief kopieert en het dan als opgelost markeert, dan je kopie meteen weer verwijderd wordt. Je moet eerst het conflict oplossen en daarna pas kopiëren."
 
 #. (title)
 msgid "Local edit, incoming delete upon merge"
-msgstr ""
+msgstr "Lokale wijziging, inkomende verwijdering bij samenvoegen"
 
 #. (para)
 #. (para)
 msgid "Developer A working on trunk moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Ontwikkelaar A werkt aan de trunk en hernoemt <filename>Foo.c</filename> in <filename>Bar.c</filename> en legt de wijziging vast in het archief."
 
 #. (para)
 msgid "Developer B working on a branch modifies <filename>Foo.c</filename> and commits it to the repository."
-msgstr ""
+msgstr "Ontwikkelaar B werkt aan een vertakking (branch), wijzigt <filename>Foo.c</filename> en legt de wijziging vast in het archief."
 
 #. (para)
 msgid "There is an equivalent case for folder moves, but it is not yet detected in Subversion 1.6 ..."
-msgstr ""
+msgstr "Er is een vergelijkbare situatie voor verplaatste mappen, maar dit wordt nog niet gedetecteerd in Subversion 1.6 ..."
 
 #. (para)
 msgid "Developer A working on trunk moves parent folder <filename>FooFolder</filename> to <filename>BarFolder</filename> and commits it to the repository."
-msgstr ""
+msgstr "Ontwikkelaar A werkt aan de trunk en hernoemt de bovenliggende map <filename>FooFolder</filename> in <filename>BarFolder</filename> en legt de wijziging vast in het archief."
 
 #. (para)
 msgid "Developer B working on a branch modifies <filename>Foo.c</filename> in her working copy."
-msgstr ""
+msgstr "Ontwikkelaar B werkt aan de vertakking (branch) en wijzigt <filename>Foo.c</filename> in de werkkopie."
 
 #. (para)
 msgid "<filename>Bar.c</filename> is marked as added."
-msgstr ""
+msgstr "<filename>Bar.c</filename> is gemarkeerd als toegevoegd."
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as modified with a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> is gemarkeerd als gewijzigd en met een mapstructuur conflict. "
 
 #. (para)
 msgid "To merge her local changes with the reshuffle, Developer B must first find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog for the merge source. The conflict editor only shows the log for the working copy as it does not know which path was used in the merge, so you will have to find that yourself. The changes must then be merged by hand as there is currently no way to automate or even simplify this process. Once the changes have been ported across, the conflicted path is redundant and can be deleted. In this case use the <guilabel>Remove</guilabel> button in the conflict editor dialog to clean up and mark the conflict as resolved."
-msgstr ""
+msgstr "Om de eigen wijzigingen in de herindeling te verwerken, moet ontwikkelaar B uitvinden welke naam <filename>Foo.c</filename> heeft gekregen in het archief. Dit kan met het log venster van het samen te voegen bronbestand. De conflict verwerker toont alleen het log van de werkkopie, omdat niet bekend is welk pad gebruikt is bij het samenvoegen. Dit moet je zelf handmatig uitzoeken. De wijzigingen moeten vervolgens met de hand verwerkt worden, omdat er nu nog geen mogelijkheid is dit te automatiseren of te vereenvoudigen.  Als de wijzigingen doorgevoerd zijn, is het conflicterende pad overbodig en kan dan verwijderd worden. Gebruik hiervoor de <guilabel>Verwijderen</guilabel> knop in de conflict bewerkingsvenster om het conflict als opgelost ge markeren."
 
 #. (para)
 msgid "If Developer B decides that A's changes were wrong then she must choose the <guilabel>Keep</guilabel> button in the conflict editor dialog. This marks the conflicted file/folder as resolved, but Developer A's changes need to be removed by hand. Again the log dialog for the merge source helps to track down what was moved."
-msgstr ""
+msgstr "Als ontwikkelaar B tot de conclusie komt dat de wijzigingen van A verkeerd zijn, dan moet dat aangegeven worden met de <guilabel>Behouden</guilabel> knop in het conflict bewerkingsvenster. Hiermee wordt het conflicterende bestand of de map gemarkeerd als opgelost. De wijzigingen van ontwikkelaar A moeten wel nog met de hand verwijderd worden. Ook hier helpt het log venster met te bepalen wat er gewijzigd/hernoemd is."
 
 #. (title)
 msgid "Local delete, incoming delete upon merge"
-msgstr ""
+msgstr "Lokale verwijdering, inkomende verwijdering bij samenvoegen"
 
 #. (para)
 msgid "Developer B working on a branch moves <filename>Foo.c</filename> to <filename>Bix.c</filename> and commits it to the repository"
-msgstr ""
+msgstr "Ontwikkelaar B werkt aan een vertakking (branch) en hernoemt <filename>Foo.c</filename> naar <filename>Bix.c</filename> en legt de wijziging vast in het archief."
 
 #. (para)
 msgid "<filename>Bix.c</filename> is marked with normal (unmodified) status."
-msgstr ""
+msgstr "<filename>Bix.c</filename> is gemarkeerd met de normale (ongewijzigde) status."
 
 #. (para)
 msgid "<filename>Bar.c</filename> is marked as added with history."
-msgstr ""
+msgstr "<filename>Bar.c</filename> is gemarkeerd als toegevoegd inclusief geschiedenis."
 
 #. (para)
 msgid "<filename>Foo.c</filename> is marked as missing and has a tree conflict."
-msgstr ""
+msgstr "<filename>Foo.c</filename> is gemarkeerd als missend en heeft een mapstructuur conflict."
 
 #. (para)
 msgid "To resolve this conflict, Developer B has to find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog for the merge source. The conflict editor only shows the log for the working copy as it does not know which path was used in the merge, so you will have to find that yourself."
-msgstr ""
+msgstr "Om dit conflict op te lossen, moet ontwikkelaar B uitzoeken welke bestandsnaam de conflicterend <filename>Foo.c</filename> heeft gekregen in het archief. Het log venster van het samen te voegen bronbestand kan hiervoor gebruikt worden. Het conflict verwerker toont alleen het log van de werkkopie, omdat niet bekend is welk pad gebruikt is bij het samenvoegen. Je moet dat pad zelf handmatig opzoeken."
 
 #. (title)
 msgid "Getting Status Information"
@@ -3686,20 +3851,20 @@ msgstr "status"
 
 #. (primary)
 msgid "view changes"
-msgstr "weergeef wijzigingen"
+msgstr "wijzigingen weergeven"
 
 #. (primary)
 msgid "working copy status"
-msgstr "Werkkopie status"
+msgstr "werkkopie status"
 
 #. (para)
 msgid "While you are working on your working copy you often need to know which files you have changed/added/removed or renamed, or even which files got changed and committed by others."
-msgstr ""
+msgstr "Terwijl je aan je werkkopie werkt, wil je vaak weten welke bestanden je gewijzigd, toegevoegd, verwijderd of hernoemt hebt, maar ook welke bestanden gewijzigd en vastgelegd zijn door anderen."
 
 #. (primary)
 #. (primary)
 msgid "overlays"
-msgstr ""
+msgstr "overlays"
 
 #. (primary)
 msgid "icons"
@@ -3707,87 +3872,87 @@ msgstr "pictogrammen"
 
 #. (para)
 msgid "Now that you have checked out a working copy from a Subversion repository you can see your files in the windows explorer with changed icons. This is one of the reasons why TortoiseSVN is so popular. TortoiseSVN adds a so called overlay icon to each file icon which overlaps the original file icon. Depending on the Subversion status of the file the overlay icon is different."
-msgstr ""
+msgstr "Nu je een werkkopie hebt opgehaald uit het Subversion archief, kun je de bestanden zien in de Windows verkenner met de gewijzigde pictogrammen/iconen. Dit is één van de redenen waarom TortoiseSVN zo populair is. TortoiseSVN voegt zogenaamde overlay iconen, dat zijn iconen die over de normale iconen geprojecteerd worden, toe aan de originele iconen. Afhankelijk van de status in Subversion wordt telkens een ander pictogram weergegeven."
 
 #. (para)
 msgid "<graphic fileref=\"../images/InSubVersionIcon.png\"/> A fresh checked out working copy has a green checkmark as overlay. That means the Subversion status is <emphasis>normal</emphasis>."
-msgstr ""
+msgstr "<graphic fileref=\"../images/InSubVersionIcon.png\"/> Een verse werkkopie opgehaald uit het archief heeft een groen vinkje als overlappend pictogram. Dit betekend dat dit object de Subversion status <emphasis>normaal</emphasis> heeft."
 
 #. (para)
 msgid "<graphic fileref=\"../images/ModifiedIcon.png\"/> As soon as you start editing a file, the status changes to <emphasis>modified</emphasis> and the icon overlay then changes to a red exclamation mark. That way you can easily see which files were changed since you last updated your working copy and need to be committed."
-msgstr ""
+msgstr "<graphic fileref=\"../images/ModifiedIcon.png\"/> Zodra je een bestand gewijzigd en opgeslagen hebt, wordt de status gewijzigd in <emphasis>gewijzigd</emphasis> en zal het overlappende pictogram wijzigen in een rood pictogram met een uitroepteken. Op deze manier kun je makkelijk zien welke bestanden gewijzigd zijn sinds de laatste keer dat je je werkkopie ververst hebt."
 
 #. (para)
 msgid "<graphic fileref=\"../images/ConflictIcon.png\"/> If during an update a <emphasis>conflict</emphasis> occurs then the icon changes to a yellow exclamation mark."
-msgstr ""
+msgstr "<graphic fileref=\"../images/ConflictIcon.png\"/> Als bij het verversen zich een <emphasis>conflict</emphasis> voordoet, dan zal er een geel pictogram met een uitroepteken te zien zijn."
 
 #. (para)
 msgid "<graphic fileref=\"../images/ReadOnlyIcon.png\"/> If you have set the <literal>svn:needs-lock</literal> property on a file, Subversion makes that file read-only until you get a lock on that file. Such files have this overlay to indicate that you have to get a lock first before you can edit that file."
-msgstr ""
+msgstr "<graphic fileref=\"../images/ReadOnlyIcon.png\"/> Als je de <literal>svn:needs-lock</literal> eigenschap ingesteld hebt op een bestand, dan zal Subversion dat bestand als alleen-lezen instellen totdat het bestand voor jou vergrendeld is. Dergelijke bestanden krijgen deze pictogram om aan te geven dat je het bestand eerst moet vergrendelen, voordat je het kunt wijzigen."
 
 #. (para)
 msgid "<graphic fileref=\"../images/LockedIcon.png\"/> If you hold a lock on a file, and the Subversion status is <emphasis>normal</emphasis>, this icon overlay reminds you that you should release the lock if you are not using it to allow others to commit their changes to the file."
-msgstr ""
+msgstr "<graphic fileref=\"../images/LockedIcon.png\"/> Als je een bestand vergrendeld hebt en de Subversion status is <emphasis>normaal</emphasis>, dan herinnert dit opverlappend pictogram je eraan dat je het bestand nog vrij moet geven als je anderen de mogelijkheid wilt geven om daarin wijzigingen vast te laten leggen."
 
 #. (para)
 msgid "<graphic fileref=\"../images/DeletedIcon.png\"/> This icon shows you that some files or folders inside the current folder have been scheduled to be <emphasis>deleted</emphasis> from version control or a file under version control is missing in a folder."
-msgstr ""
+msgstr "<graphic fileref=\"../images/DeletedIcon.png\"/> Dit pictogram geeft aan dat bestanden of mappen in de huidige map gemarkeerd zijn om te <emphasis>verwijderen</emphasis> uit het archief of dat een bestand in het archief mist in de folder van je werkkopie."
 
 #. (para)
 msgid "<graphic fileref=\"../images/AddedIcon.png\"/> The plus sign tells you that a file or folder has been scheduled to be <emphasis>added</emphasis> to version control."
-msgstr ""
+msgstr "<graphic fileref=\"../images/AddedIcon.png\"/> Het plusteken geeft aan dat het bestand of de map van versiebeheer voorzien moet worden en dus aan het archief <emphasis>toegevoegd</emphasis> moet worden."
 
 #. (para)
 msgid "<graphic fileref=\"../images/IgnoredIcon.png\"/> The bar sign tells you that a file or folder is <emphasis>ignored</emphasis> for version control purposes. This overlay is optional."
-msgstr ""
+msgstr "<graphic fileref=\"../images/IgnoredIcon.png\"/> Het balk-teken geeft aan dat een bestand of map <emphasis>genegeerd</emphasis> wordt voor versiebeheer. Dit pictogram is optioneel."
 
 #. (para)
 msgid "<graphic fileref=\"../images/UnversionedIcon.png\"/> This icon shows files and folders which are not under version control, but have not been ignored. This overlay is optional."
-msgstr ""
+msgstr "<graphic fileref=\"../images/UnversionedIcon.png\"/> Dit pictogram geeft de bestanden en mappen aan die niet van versiebeheer voorzien zijn, maar ook niet genegeerd worden. Dit pictogram is optioneel."
 
 #. (para)
 msgid "In fact, you may find that not all of these icons are used on your system. This is because the number of overlays allowed by Windows is very limited and if you are also using an old version of TortoiseCVS, then there are not enough overlay slots available. TortoiseSVN tries to be a <quote>Good Citizen (TM)</quote> and limits its use of overlays to give other apps a chance too."
-msgstr ""
+msgstr "In de praktijk zul je zien dat niet alle pictogrammen gebruikt zullen worden op jouw systeem. Dit komt doordat Windows maar een beperkt aantal overlappende pictogrammen toestaat. Als je ook nog een oude versie van TortoiseCVS gebruikt, dan zijn er niet genoeg sloten voor overlappende pictogrammen beschikbaar. TortoiseSVN probeert een goede burger (<quote>Good Citizen (TM)</quote>) te zijn en beperkt het gebruik van overlappende pictogrammen om andere applicaties ook een kans te geven. "
 
 #. (para)
 msgid "Now that there are more Tortoise clients around (TortoiseCVS, TortoiseHG, ...) the icon limit becomes a real problem. To work around this, the TortoiseSVN project introduced a common shared icon set, loaded as a DLL, which can be used by all Tortoise clients. Check with your client provider to see if this has been integrated yet :-)"
-msgstr ""
+msgstr "Tegenwoordig zijn er meerdere Tortoise applicaties beschikbaar (TortoiseCVS, TortoiseHG, ...), waardoor de beperking van het aantal pictogrammen echt een probleem begint te worden.  Om dit probleem te omzeilen is er in het TortoiseSVN project een standaard gedeelde set van pictogrammen geïntroduceerd. Deze set kan geladen worden als een DLL, welke door alle Tortoise applicaties gebruikt kan worden. Ga bij jouw applicatie leverancier na of daar deze set al geïntegreerd is. :-)"
 
 #. (para)
 msgid "For a description of how icon overlays correspond to Subversion status and other technical details, read <xref linkend=\"tsvn-app-internals-overlays\"/>."
-msgstr ""
+msgstr "Een beschrijving van de overlappende pictogrammen en hoe deze zich met de Subversion status en andere technische details verhouden kun je vinden in <xref linkend=\"tsvn-app-internals-overlays\"/>."
 
 #. (title)
 msgid "TortoiseSVN Columns In Windows Explorer"
-msgstr ""
+msgstr "TortoiseSVN Kolommen In Windows Verkenner"
 
 #. (primary)
 msgid "Explorer Columns"
-msgstr ""
+msgstr "Verkenner Kolommen"
 
 #. (para)
 msgid "The same information which is available from the icon overlays (and much more) can be displayed as additional columns in Windows Explorer's Details View."
-msgstr ""
+msgstr "De informatie die door de overlappende pictogrammen weergeven (en nog veel meer), kan ook in een extra kolom weergegeven worden in de Gedetailleerde Weergave van Windows Verkenner."
 
 #. (para)
 msgid "Simply right click on one of the headings of a column, choose <guimenuitem>More...</guimenuitem> from the context menu displayed. A dialog will appear where you can specify the columns and their order, which is displayed in the <quote>Detailed View</quote>. Scroll down until the entries starting with SVN come into view. Check the ones you would like to have displayed and close the dialog by pressing <guibutton>OK</guibutton>. The columns will be appended to the right of those currently displayed. You can reorder them by drag and drop, or resize them, so that they fit your needs."
-msgstr ""
+msgstr "Klik met rechts op de koptekst van een kolom, selecteer <guimenuitem>Meer ...</guimenuitem> in het weergegeven contextmenu. Er verschijnt dan een venster waarin je de gewenste kolommen en volgorde kunt aangeven van de weer te geven kolommen in de <quote>Gedetailleerde Weergave</quote>. Scroll naar beneden totdat je de opties beginnend met SVN in beeld komen. Selecteer degene die je wilt zien en sluit af door op <guibutton>OK</guibutton> te klikken. De kolommen zullen dan aan de rechter zijde worden toegevoegd. Je kunt de volgorde veranderen door de kolommen te verslepen en de breedte aanpassen, zodat het past bij jouw wensen."
 
 #. (para)
 msgid "The additional columns in the Windows Explorer are not available on Vista, since Microsoft decided to not allow such columns for <emphasis>all</emphasis> files anymore but only for specific file types."
-msgstr ""
+msgstr "In Windows Vista zijn de extra kolommen niet beschikbaar. Microsoft heeft besloten extra kolommen niet meer voor elk type bestand toe te staan, alleen voor bepaalde bestanden kan dat nog. "
 
 #. (para)
 msgid "If you want the current layout to be displayed in all your working copies, you may want to make this the default view."
-msgstr ""
+msgstr "If you want the current layout to be displayed in all your working copies, you may want to make this the default view."
 
 #. (title)
 msgid "Local and Remote Status"
-msgstr ""
+msgstr "Lokale en Server Status"
 
 #. (primary)
 msgid "modifications"
-msgstr ""
+msgstr "wijzigingen"
 
 #. (title)
 #. (title)
@@ -3796,107 +3961,107 @@ msgstr "Controleer op Wijzigingen"
 
 #. (para)
 msgid "<placeholder-1/> It's often very useful to know which files you have changed and also which files got changed and committed by others. That's where the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Check For Modifications...</guimenuitem></menuchoice> comes in handy. This dialog will show you every file that has changed in any way in your working copy, as well as any unversioned files you may have."
-msgstr ""
+msgstr "<placeholder-1/>Het is vaak handig om te weten welke bestanden anderen gewijzigd en vastgelegd hebben. Hiervoor is het commando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Kijk of er updates zijn...</guimenuitem></menuchoice> erg handig. Het venster zal elk bestand weergeven dat op welke manier dan ook gewijzigd is in je werkkopie en ook de bestanden zonder versiebeheer."
 
 #. (para)
 msgid "If you click on the <guibutton>Check Repository</guibutton> then you can also look for changes in the repository. That way you can check before an update if there's a possible conflict. You can also update selected files from the repository without updating the whole folder. By default, the <guibutton>Check Repository</guibutton> button only fetches the remote status with the checkout depth of the working copy. If you want to see all files and folders in the repository, even those you have not checked out, then you have to hold down the <keycap>Shift</keycap> key when you click on the <guibutton>Check Repository</guibutton> button."
-msgstr ""
+msgstr "Als je op de <guibutton>Controleer Archief</guibutton> klikt, dan kun je ook de wijzigingen in het archief bekijken. Hiermee kun je, voordat je je wijzigingen vastlegt, nagaan of er conflicten zullen ontstaan. Je kunt ook alleen geselecteerde bestanden verversen, zonder dat de hele map ververst hoeft te worden. De <guibutton>Controleer Archief</guibutton> haalt standaard de status op van de werkkopie met de instelling van mapdiepte van de werkkopie. Als je alle bestanden in het archief wilt zien, ook degene die je niet opgehaald hebt, dan moet je de <keycap>Shift</keycap> ingedrukt houden als je op de knop <guibutton>Controleer Archief</guibutton> drukt."
 
 #. (para)
 msgid "Locally modified items."
-msgstr "Lokaal gewijzigde items."
+msgstr "Lokaal gewijzigde objecten."
 
 #. (para)
 msgid "Added items. Items which have been added with history have a <literal>+</literal> sign in the <guilabel>Text status</guilabel> column, and a tooltip shows where the item was copied from."
-msgstr ""
+msgstr "Toegevoegde objecten. Objecten die toegevoegd zijn met geschiedenisinformatie, hebben een <literal>+</literal> teken in de <guilabel>Tekst status</guilabel> kolom en in tooltip wordt aangegeven waar heb object vandaan gekopieerd is."
 
 #. (para)
 msgid "Deleted or missing items."
-msgstr ""
+msgstr "Verwijderde of missende objecten."
 
 #. (para)
 msgid "Items modified locally and in the repository. The changes will be merged on update. These <emphasis>may</emphasis> produce conflicts on update."
-msgstr ""
+msgstr "Objecten die lokaal en in het archief gewijzigd zijn. De wijzigingen zullen samengevoegd worden bij het verversen, waarbij  conflicten <emphasis>kunnen</emphasis> ontstaan."
 
 #. (para)
 msgid "Items modified locally and deleted in repository, or modified in repository and deleted locally. These <emphasis>will</emphasis> produce conflicts on update."
-msgstr ""
+msgstr "Objecten die lokaal gewijzigd zijn en verwijderd uit het archief, of die gewijzigd zijn in het archief en lokaal verwijderd. Hierdoor <emphasis>zal</emphasis> een conflict onstaan bij het verversen."
 
 #. (para)
 msgid "Unchanged and unversioned items."
-msgstr ""
+msgstr "Ongewijzigde objecten en objecten zonder versiebeheer."
 
 #. (para)
 msgid "The dialog uses colour coding to highlight the status. <placeholder-1/>"
-msgstr ""
+msgstr "In dit venster worden kleurcoderingen toegepast om de status weer te geven. <placeholder-1/>"
 
 #. (para)
 msgid "From the context menu of the dialog you can show a diff of the changes. Check the local changes <emphasis>you</emphasis> made using <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Compare with Base</guimenuitem></menuchoice>. Check the changes in the repository made by others using <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Show Differences as Unified Diff</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "Vanuit het context menu van het venster kun je de verschillen van de wijzigingen opvragen. Controleer de wijzigingen die <emphasis>jij</emphasis> lokaal gemaakt hebt door te kiezen voor <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Vergelijk met basis</guimenuitem></menuchoice>. Om de wijzigingen te bekijken die anderen in het archief hebben opgeslagen kies je <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Toon verschillen als unified diff</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "You can also revert changes in individual files. If you have deleted a file accidentally, it will show up as <emphasis>Missing</emphasis> and you can use <emphasis>Revert</emphasis> to recover it."
-msgstr ""
+msgstr "Het is ook mogelijk om wijzigingen in individuele bestanden terug te draaien. Als je per ongeluk een bestand verwijderd hebt, dan zal deze weergegeven worden als <emphasis>Ontbrekend</emphasis>. Je kunt deze dan terughalen met <emphasis>Maak ongedaan</emphasis>."
 
 #. (para)
 msgid "Unversioned and ignored files can be sent to the recycle bin from here using <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Delete</guimenuitem></menuchoice>. If you want to delete files permanently (bypassing the recycle bin) hold the <keycap>Shift</keycap> key while clicking on <guilabel>Delete</guilabel>."
-msgstr ""
+msgstr "Bestanden zonder versiebeheer of bestanden die op de negeren lijst staan, kunnen verwijderd worden (naar de prullenbak) van de lokale kopier door de optie <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Verwijderen</guimenuitem></menuchoice> te gebruiken. Als je bestanden permanent wilt verwijderen (zonder ze naar de prullenbak te doen), dan moet je <keycap>Shift</keycap> ingedruikt houden als je op <guilabel>Verwijderen</guilabel> klikt."
 
 #. (para)
 msgid "If you want to examine a file in detail, you can drag it from here into another application such as a text editor or IDE."
-msgstr ""
+msgstr "Als je de details van een bestand wilt bekijken, dan kun je het van hieruit naar een andere applicatie verlepen. Bijvoorbeeld naar een tekstverwerker of IDE."
 
 #. (para)
 msgid "The columns are customizable. If you <action>right click</action> on any column header you will see a context menu allowing you to select which columns are displayed. You can also change column width by using the drag handle which appears when you move the mouse over a column boundary. These customizations are preserved, so you will see the same headings next time."
-msgstr ""
+msgstr "Je kunt de kolommen aanpassen. Als je met <action>rechts klikt</action> op de koptekst van een kolom, dan krijg je een context menu te zien waarmee je kunt aangeven welke kolommen je wilt zien. De breedte van de kolommen kun je aanpassen door de kolomovergangen te verslepen. De aanpassingen worden opgeslagen, zodat deze er een volgende keer net zo uit zien."
 
 #. (para)
 msgid "If you are working on several unrelated tasks at once, you can also group files together into changelists. Read <xref linkend=\"tsvn-dug-commit-changelists\"/> for more information."
-msgstr ""
+msgstr "Je kunt groepen bestanden in een wijzigingenlijst opnemen. Dit is handig als je aan meerdere taken, die niets met elkaar de maken hebben, tegelijk werkt. Lees hiervoor <xref linkend=\"tsvn-dug-commit-changelists\"/>."
 
 #. (para)
 msgid "At the bottom of the dialog you can see a summary of the range of repository revisions in use in your working copy. These are the <emphasis>commit</emphasis> revisions, not the <emphasis>update</emphasis> revisions; they represent the range of revisions where these files were last committed, not the revisions to which they have been updated. Note that the revision range shown applies only to the items displayed, not to the entire working copy. If you want to see that information for the whole working copy you must check the <guilabel>Show unmodified files</guilabel> checkbox."
-msgstr ""
+msgstr "Onderaan het scherm kun je zien welke reeks van archiefrevisies er in je werkkopie gebruikt worden. Dit zijn de rivisies van de <emphasis>vastlegging</emphasis>, niet van de laatste <emphasis>verversing</emphasis>; dit geeft de reeks van revisies weer van de laatste vastleggingen, niet van de laatste verversing. Merk op dat de reeks van revisies alleen slaat op de objecten die weergegeven zijn in het venster, niet op je hele werkkopie. Als je deze informatie van je hele werkkopie wilt zien, dan moet je het selectievak <guilabel>Niet gewijzigde bestanden weergeven</guilabel> selecteren."
 
 #. (para)
 msgid "If you want a flat view of your working copy, i.e. showing all files and folders at every level of the folder hierarchy, then the <guilabel>Check for Modifications</guilabel> dialog is the easiest way to achieve that. Just check the <guilabel>Show unmodified files</guilabel> checkbox to show all files in your working copy."
-msgstr ""
+msgstr "Als je een platte weergave wilt hebben van je werkkopie, oftewel alle bestanden van alle niveau's uit je mapstructuur, dan kun je daarvoor het beste de <guilabel>Kijk of er updates zijn...</guilabel> functie gebruiken. Zet de optie <guilabel>Ongewijzigde bestanden weergeven</guilabel> aan om alle bestanden in je werkkopie te zien."
 
 #. (title)
 msgid "Viewing Diffs"
-msgstr ""
+msgstr "Diffs bekijken"
 
 #. (primary)
 msgid "diffing"
-msgstr ""
+msgstr "vergelijken"
 
 #. (para)
 msgid "Often you want to look inside your files, to have a look at what you've changed. You can accomplish this by selecting a file which has changed, and selecting <guimenuitem>Diff</guimenuitem> from TortoiseSVN's context menu. This starts the external diff-viewer, which will then compare the current file with the pristine copy (<literal>BASE</literal> revision), which was stored after the last checkout or update."
-msgstr ""
+msgstr "Vaak wil je de inhoud van bestanden even bekijken, om te bekijken wat je precies gewijzigd hebt. Dit kun je doen door een gewijzigd bestand te selecteren en <guimenuitem>Vergelijk</guimenuitem> in TortoiseSVN's context menu te selecteren. Hiermee wordt het externe vergelijk-programma gestart, waarmee het huidige bestand vergeleken zal worden met de ongewijzigde kopie (<literal>BASE</literal> revisie) die opgeslagen was na de laatste verversing."
 
 #. (para)
 msgid "Even when not inside a working copy or when you have multiple versions of the file lying around, you can still display diffs:"
-msgstr ""
+msgstr "Zelfs bestanden die niet in je werkkopie zitten of als je verschillende versies verspreid opgeslagen hebt, kun je verschillen bekijken:"
 
 #. (para)
 msgid "Select the two files you want to compare in explorer (e.g. using <keycap>Ctrl</keycap> and the mouse) and choose <guimenuitem>Diff</guimenuitem> from TortoiseSVN's context menu. The file clicked last (the one with the focus, i.e. the dotted rectangle) will be regarded as the later one."
-msgstr ""
+msgstr "Selecteer in de verkenner de twee bestanden die je wilt vergelijken (bijvoorbeeld met <keycap>Ctrl</keycap> en de muis) en selecteer vanuit TortoiseSVN's context menu <guimenuitem>Verschil</guimenuitem>"
 
 #. (primary)
 msgid "changelist"
-msgstr ""
+msgstr "wijzigingenlijst"
 
 #. (para)
 msgid "In an ideal world, you only ever work on one thing at a time, and your working copy contains only one set of logical changes. OK, back to reality. It often happens that you have to work on several unrelated tasks at once, and when you look in the commit dialog, all the changes are mixed in together. The <firstterm>changelist</firstterm> feature helps you group files together, making it easier to see what you are doing. Of course this can only work if the changes do not overlap. If two different tasks affect the same file, there is no way to separate the changes."
-msgstr ""
+msgstr "In de ideale wereld werk je maar aan één ding tegelijk en zal je werkkopie alleen maar logische wijzigingen bevatten. Ok, dan terug naar de werkelijkheid. Het komt vaak voor dat je aan verschillende taken, die niets met elkaar te maken hebben, tegelijk moet werken. Als je dan naar het vastleggen venster kijkt, staan alle wijzigingen door elkaar. De <firstterm>wijzigingenlijst</firstterm> functie helpt je met het groeperen van bestanden, waardoor je een beter overzicht krijgt waar je mee bezig bent. Dit werkt natuurlijk alleen als de wijzigingen elkaar niet overlappen. Als bij twee verschillende taken hetzelfde bestand gewijzigd wordt, dan is er geen methode om die wijzigingen van elkaar te scheiden."
 
 #. (para)
 msgid "The changelist feature in TortoiseSVN is only available in Windows XP and later, as it depends on a shell capability which is not present in Windows 2000. Sorry, but Win2K is really quite old now, so please don't complain."
-msgstr ""
+msgstr "De wijzigingenlijst functie is alleen in Windows XP en latere versies beschikbaar, omdat hiervoor bepaalde mogelijkheden van de shell nodig zijn die niet in Windows 2000 zitten. Sorry, maar Win2k is nu toch echt wel verouderd, dus ga alsjeblieft niet klagen."
 
 #. (para)
 msgid "You can see changelists in several places, but the most important ones are the commit dialog and the check-for-modifications dialog. Let's start in the check-for-modifications dialog after you have worked on several features and many files. When you first open the dialog, all the changed files are listed together. Suppose you now want to organise things and group those files according to feature."
-msgstr ""
+msgstr "Je kunt wijzigingelijsten vinden op verschillende plaatsen, maar de belangrijkste zijn die in het vastleggen venster en kijk-of-er-updates-zijn venster. Laten we beginnen met het kijk-of-er-updates-zijn venster nadat je aan verschillende functies en meerdere bestanden hebt gewerkt. Als je het venster voor het eerst opent, dan worden alle bestanden in de lijst weergegeven. Stel voor dat je deze lijst nu wilt organiseren en de bestanden wilt groeperen."
 
 #. (para)
 msgid "Select one or more files and use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Move to changelist</guimenuitem></menuchoice> to add an item to a changelist. Initially there will be no changelists, so the first time you do this you will create a new changelist. Give it name which describes what you are using it for, and click <guibutton>OK</guibutton>. The dialog will now change to show groups of items."
@@ -3908,7 +4073,7 @@ msgstr ""
 
 #. (title)
 msgid "Commit dialog with Changelists"
-msgstr ""
+msgstr "Vastleggen venster met Wijzigingenlijsten"
 
 #. (para)
 msgid "<placeholder-1/> In the commit dialog you can see those same files, grouped by changelist. Apart from giving an immediate visual indication of groupings, you can also use the group headings to select which files to commit."
@@ -3944,7 +4109,7 @@ msgstr "geschiedenis"
 
 #. (primary)
 msgid "commit messages"
-msgstr "commit bericht"
+msgstr "vestleggen berichten"
 
 #. (primary)
 msgid "log messages"
@@ -5127,7 +5292,7 @@ msgstr ""
 
 #. (title)
 msgid "The Global Ignore List"
-msgstr "De Globale Ignoreer Lijst"
+msgstr "De Globale Negeerlijst"
 
 #. (para)
 msgid "Another way to ignore files is to add them to the <firstterm>global ignore list</firstterm>. The big difference here is that the global ignore list is a client property. It applies to <emphasis>all</emphasis> Subversion projects, but on the client PC only. In general it is better to use the <filename>svn:ignore</filename> property where possible, because it can be applied to specific project areas, and it works for everyone who checks out the project. Read <xref linkend=\"tsvn-dug-settings-main\"/> for more information."
@@ -5191,7 +5356,7 @@ msgstr ""
 
 #. (title)
 msgid "No Paths in Global Ignore List"
-msgstr "Geen Paden in de Globale Ignoreer Lijst"
+msgstr "Geen Paden in de Globale Negeerlijst"
 
 #. (para)
 msgid "You should not include path information in your pattern. The pattern matching is intended to be used against plain file names and folder names. If you want to ignore all <literal>CVS</literal> folders, just add <literal>CVS</literal> to the ignore list. There is no need to specify <literal>CVS */CVS</literal> as you did in earlier versions. If you want to ignore all <literal>tmp</literal> folders when they exist within a <literal>prog</literal> folder but not within a <literal>doc</literal> folder you should use the <literal>svn:ignore</literal> property instead. There is no reliable way to achieve this using global ignore patterns."
@@ -6778,7 +6943,7 @@ msgstr ""
 
 #. (term)
 msgid "Blame Changes"
-msgstr "Verklaar Wijgigingen"
+msgstr "Verklaar Wijzigingen"
 
 #. (para)
 msgid "Select one revision in the top pane, then pick one file in the bottom pane and select <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Blame changes</guimenuitem></menuchoice>. This will fetch the blame data for the selected revision and the previous revision, then use the diff viewer to compare the two blame files."
@@ -7167,7 +7332,7 @@ msgstr ""
 
 #. (term)
 msgid "Show overview"
-msgstr "Weergeef overzicht"
+msgstr "Geef overzicht weer"
 
 #. (para)
 msgid "Shows a small picture of the entire graph, with the current view window as a rectangle which you can drag. This allows you to navigate the graph more easily. Note that for very large graphs the overview may become useless due to the extreme zoom factor and will therefore not be shown in such cases."
@@ -7259,11 +7424,11 @@ msgstr ""
 
 #. (primary)
 msgid "export"
-msgstr "Exporteer"
+msgstr "exporteren"
 
 #. (primary)
 msgid "unversioned 'working copy'"
-msgstr "niet-geversioneerde 'werkkopie'"
+msgstr "'werkkopie' zonder versiebeheer"
 
 #. (para)
 msgid "Sometimes you may want a copy of your working tree without any of those <filename>.svn</filename> directories, e.g. to create a zipped tarball of your source, or to export to a web server. Instead of making a copy and then deleting all those <filename>.svn</filename> directories manually, TortoiseSVN offers the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Export...</guimenuitem></menuchoice>. Exporting from a URL and exporting from a working copy are treated slightly differently."
@@ -7600,7 +7765,7 @@ msgstr "web weergave"
 
 #. (primary)
 msgid "repo viewer"
-msgstr "repository venster"
+msgstr "archief venster"
 
 #. (primary)
 msgid "ViewVC"
@@ -7704,7 +7869,7 @@ msgstr ""
 
 #. (term)
 msgid "Global ignore pattern"
-msgstr "Globaal ignoreer patroon"
+msgstr "Globaal negeer patroon"
 
 #. (primary)
 msgid "exclude pattern"
@@ -8208,7 +8373,7 @@ msgstr ""
 
 #. (title)
 msgid "Icon Overlay Settings"
-msgstr "Pictogram Laag Instellingen"
+msgstr "Overlappende Pictogram Instellingen"
 
 #. (title)
 msgid "The Settings Dialog, Icon Overlays Page"
@@ -9114,7 +9279,7 @@ msgstr ""
 
 #. (term)
 msgid "Block Overlay Status"
-msgstr "Blok Laag Status"
+msgstr "Blokkeer Overlappende Pictrogram Status"
 
 #. (para)
 msgid "If you don't want the explorer to update the status overlays while another TortoiseSVN command is running (e.g. Update, Commit, ...) then create a <literal>DWORD</literal> key with a value of 1 at <literal>HKCU\\Software\\TortoiseSVN\\BlockStatus</literal>."
@@ -10584,7 +10749,7 @@ msgstr "Hernoemen"
 
 #. (entry)
 msgid "Update to revision"
-msgstr "Update naar revisie"
+msgstr "Verversen naar revisie"
 
 #. (entry)
 #. (title)
@@ -11587,7 +11752,7 @@ msgstr ""
 
 #. (title)
 msgid "Add to Ignore List"
-msgstr "Voeg aan Ignoreer Lijst toe"
+msgstr "Voeg aan Negeerlijst toe"
 
 #. (screen)
 #, no-wrap
@@ -12159,8 +12324,61 @@ msgstr "Jeroen van Amstel"
 msgid "translator-translation"
 msgstr "Vertaling"
 
+#~ msgid "Overriding Hooks"
+#~ msgstr "Dwingende Hooks"
+#~ msgid ""
+#~ "If a hook script rejects your commit then its decision is final. But you "
+#~ "can build an override mechanism into the script itself using the "
+#~ "<emphasis>Magic Word</emphasis> technique. If the script wants to reject "
+#~ "the operation it first scans the log message for a special pass phrase, "
+#~ "either a fixed phrase or perhaps the filename with a prefix. If it finds "
+#~ "the magic word then it allows the commit to proceed. If the phrase is not "
+#~ "found then it can block the commit with a message like <quote>You didn't "
+#~ "say the magic word</quote> :-)"
+#~ msgstr ""
+#~ "Als een hook script een vastlegging weigert, dan is die beslissing "
+#~ "definitief. Het is mogelijk om een dwingend mechanisme in het script te "
+#~ "bouwen met een <emphasis>Magisch Woord</emphasis>. Als het script een "
+#~ "actie will weigeren zal het eerst het log bericht scannen op een speciale "
+#~ "zin, een standaard in of een bestandsnaam met een prefix. Als het het "
+#~ "magische woord vindt, dan zal het de vastlegging toestaan. Als de zin "
+#~ "niet gevonden is, dan kan het de vastlegging blokkeren met een bericht "
+#~ "zoals <quote>Je hebt het magische woord niet gezegd</quote> :-)"
+#~ msgid "authentication cache"
+#~ msgstr "authenticatie cache"
+#~ msgid ""
+#~ "<filename>svn.simple</filename> contains credentials for basic "
+#~ "authentication (username/password). Note that passwords are stored using "
+#~ "the WinCrypt API, not in plain text form."
+#~ msgstr ""
+#~ "<filename>svn.simple</filename> bevat inloggegevens voor basis "
+#~ "authenticatie (gebruikersnaam/wachtwoord). Merk op dat wachtwoorden "
+#~ "worden opgeslagen met WinCrypt API encryptie, niet als platte tekst."
+#~ msgid ""
+#~ "If you want to clear authentication for one realm only then you will have "
+#~ "to dig into those directories, find the file which contains the "
+#~ "information you want to clear and delete the file."
+#~ msgstr ""
+#~ "Als je de authenticatie voor maar één gebruiker wilt wissen, dan moet je "
+#~ "in die mappen duiken. Het bestand vinden met de informatie die je wilt "
+#~ "wissen en het bestand verwijderen."
 #~ msgid "Repairing External Copies"
 #~ msgstr "Herstellen van Bestandhernoemingen bij externe kopieën"
+#~ msgid ""
+#~ "If you made a copy of a file but forgot to use the Subversion command to "
+#~ "do so, you can repair that copy so the new file doesn't lose its history. "
+#~ "Simply select both the old name (normal or modified) and the new name "
+#~ "(unversioned) and use <menuchoice><guimenu>Context Menu</"
+#~ "guimenu><guimenuitem>Repair Copy</guimenuitem></menuchoice> to pair the "
+#~ "two files as a copy."
+#~ msgstr ""
+#~ "Als je een kopie van een bestand hebt gemaakt en vergeten bent om het "
+#~ "Subversion commando te gebruiken, dan kun je dat repareren om te ervoor "
+#~ "te zorgen dat de geschiedenis niet verloren gaat. Selecteer de oude "
+#~ "(normaal of gewijzigde) en de nieuwe naam (zonder versiebeheer) en "
+#~ "gebruik <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Repareer "
+#~ "Kopieer-actie</guimenuitem></menuchoice> om de twee bestanden aan elkaar "
+#~ "te koppelen als kopie."
 #~ msgid "/findstring:\"filterstring\""
 #~ msgstr "/findstring:\"filterstring\""
 #~ msgid "/findtext"
