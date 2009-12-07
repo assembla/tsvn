@@ -661,7 +661,7 @@ void CShellExt::InsertSVNMenu(BOOL istop, HMENU menu, UINT pos, UINT_PTR id, UIN
 
 	// always load the verbs from the plain dll, not the language resource dll!
 	LoadString(g_hmodThisDll, stringid, menutextbuffer, sizeof(menutextbuffer)/sizeof(TCHAR));
-	tstring verb = tstring(menutextbuffer);
+	tstring verb = _T("tsvn_") + tstring(menutextbuffer);
 	if (verb.find('&') != -1)
 	{
 		verb.erase(verb.find('&'),1);
@@ -2165,7 +2165,7 @@ void CShellExt::InsertIgnoreSubmenus(UINT &idCmd, UINT idCmdFirst,
 		{
 			ignoresubmenu = CreateMenu();
 			InsertMenu(ignoresubmenu, indexignoresub++, MF_BYPOSITION | MF_STRING , idCmd, ignorepath);
-			tstring verb = tstring(ignorepath);
+			tstring verb = _T("tsvn_") + tstring(ignorepath);
 			myVerbsMap[verb] = idCmd - idCmdFirst;
 			myVerbsMap[verb] = idCmd;
 			myVerbsIDMap[idCmd - idCmdFirst] = verb;
@@ -2186,7 +2186,7 @@ void CShellExt::InsertIgnoreSubmenus(UINT &idCmd, UINT idCmdFirst,
 					ignoresubmenu = CreateMenu();
 
 				InsertMenu(ignoresubmenu, indexignoresub++, MF_BYPOSITION | MF_STRING , idCmd, maskbuf);
-				tstring verb = tstring(maskbuf);
+				tstring verb = _T("tsvn_") + tstring(maskbuf);
 				myVerbsMap[verb] = idCmd - idCmdFirst;
 				myVerbsMap[verb] = idCmd;
 				myVerbsIDMap[idCmd - idCmdFirst] = verb;
@@ -2214,7 +2214,7 @@ void CShellExt::InsertIgnoreSubmenus(UINT &idCmd, UINT idCmdFirst,
 				{
 					_tcscat_s(maskbuf, MAX_PATH, _tcsrchr(ignorepath, '.'));
 					InsertMenu(ignoresubmenu, indexignoresub++, MF_BYPOSITION | MF_STRING , idCmd, maskbuf);
-					tstring verb = tstring(maskbuf);
+					tstring verb = _T("tsvn_") + tstring(maskbuf);
 					myVerbsMap[verb] = idCmd - idCmdFirst;
 					myVerbsMap[verb] = idCmd;
 					myVerbsIDMap[idCmd - idCmdFirst] = verb;
@@ -2234,7 +2234,7 @@ void CShellExt::InsertIgnoreSubmenus(UINT &idCmd, UINT idCmdFirst,
 				{
 					_tcscat_s(maskbuf, MAX_PATH, _tcsrchr(ignorepath, '.'));
 					InsertMenu(ignoresubmenu, indexignoresub++, MF_BYPOSITION | MF_STRING , idCmd, maskbuf);
-					tstring verb = tstring(maskbuf);
+					tstring verb = _T("tsvn_") + tstring(maskbuf);
 					myVerbsMap[verb] = idCmd - idCmdFirst;
 					myVerbsMap[verb] = idCmd;
 					myVerbsIDMap[idCmd - idCmdFirst] = verb;
