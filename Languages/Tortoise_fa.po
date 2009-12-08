@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2009-12-07 17:06+0330\n"
+"PO-Revision-Date: 2009-12-08 12:10+0330\n"
 "Last-Translator: Mohsen Sajjadi <mohsensajjadi@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -122,11 +122,6 @@ msgstr "بمیزان %I64d بایت انتقال یافت"
 
 #. Resource IDs: (357)
 #, c-format
-msgid "%I64d Bytes/s"
-msgstr "%I64d بایت/ثانیه"
-
-#. Resource IDs: (357)
-#, c-format
 msgid "%I64d kBytes transferred"
 msgstr "بمیزان %I64d ک.بایت انتقال یافت"
 
@@ -139,6 +134,11 @@ msgstr "%d پرونده انتخاب شده از %d پرونده"
 #, c-format
 msgid "%d most active author(s) with at least %d commits each (%d %%)"
 msgstr "%d فعالترین مولف با %d اعمال (%d %%)"
+
+#. Resource IDs: (357)
+#, c-format
+msgid "%ld Bytes/s"
+msgstr "%ld بایت/ثانیه"
 
 #. Resource IDs: (226)
 #, c-format
@@ -237,13 +237,13 @@ msgstr "%s, but it was obstructed in the working copy."
 
 #. Resource IDs: (145)
 #, c-format
-msgid "%s\\%s - Export"
-msgstr "%s\\%s - صدور"
+msgid "%s\\Export (%d) of %s"
+msgstr "%s\\صدور (%d) از %s"
 
 #. Resource IDs: (145)
 #, c-format
-msgid "%s\\%s - Export (%d)"
-msgstr "%s\\%s - صدور (%d)"
+msgid "%s\\Export of %s"
+msgstr "%s\\صادر کردن%s"
 
 #. Resource IDs: (3850)
 #, c-format
@@ -262,19 +262,6 @@ msgid ""
 msgstr ""
 "%s\n"
 "گزینه مورد نظر حذف شود؟"
-
-#. Resource IDs: (616)
-#, c-format
-msgid ""
-"%s\n"
-"\n"
-"Shall I update the working copy now\n"
-"and reopen the commit dialog?"
-msgstr ""
-"%s\n"
-"\n"
-"آیا مایلید نسخه کاری بروز شده\n"
-"و پنجره اعمال مجددا باز شود؟"
 
 #. Resource IDs: (69)
 #, c-format
@@ -519,10 +506,6 @@ msgstr "&حذف کردن"
 #. Resource IDs: (17)
 msgid "&Delete (keep local)"
 msgstr "حذف (حفظ نسخه محلی)"
-
-#. Resource IDs: (1514)
-msgid "&Delete unversioned items..."
-msgstr "&حذف موارد فاقد نسخه..."
 
 #. Resource IDs: (101)
 msgid "&Delete..."
@@ -882,10 +865,6 @@ msgstr "پیش نمایش چاپ"
 msgid "&Print..."
 msgstr "چاپ..."
 
-#. Resource IDs: (1265)
-msgid "&Properties"
-msgstr "&خصوصیات"
-
 #. Resource IDs: (11021)
 msgid "&Properties..."
 msgstr "&تنظیمات"
@@ -1191,10 +1170,6 @@ msgstr "'skip ranges' are used to mark revision ranges that have not been cached
 msgid "(%s) %s"
 msgstr "(%s) %s"
 
-#. Resource IDs: (119)
-msgid "(Double-click to clear error message)"
-msgstr "(برای پاک کردن پیغام خطا دو-بار کلیک کنید)"
-
 #. Resource IDs: (17, 564)
 msgid "(binary value)"
 msgstr "(مقدار دودوئی)"
@@ -1203,10 +1178,6 @@ msgstr "(مقدار دودوئی)"
 msgid "(copy)"
 msgstr "(کپی)"
 
-#. Resource IDs: (277)
-msgid "(create branch)"
-msgstr "(بازکردن بخش)"
-
 #. Resource IDs: (276)
 msgid "(created)"
 msgstr "(ایجاد شده)"
@@ -1214,10 +1185,6 @@ msgstr "(ایجاد شده)"
 #. Resource IDs: (276)
 msgid "(delete)"
 msgstr "(حذف کردن)"
-
-#. Resource IDs: (214)
-msgid "(externals)"
-msgstr "(خارجی)"
 
 #. Resource IDs: (276)
 msgid "(modified)"
@@ -1250,6 +1217,10 @@ msgstr "(عدم وجود مقدار)"
 #. Resource IDs: (314)
 msgid "(not found)"
 msgstr "(پیدا نشد)"
+
+#. Resource IDs: (276)
+msgid "(open branch)"
+msgstr "(بازکردن انشعاب)"
 
 #. Resource IDs: (208)
 msgid "(property change only)"
@@ -1404,6 +1375,10 @@ msgstr ""
 "(فایلهای وصله). GNU diff یک نمایشگر فایلهای\r\n"
 " استفاده کنید. Notepad اگر چنین برنامه ای ندارید از"
 
+#. Resource IDs: (9)
+msgid "A&bout"
+msgstr "&درباره"
+
 #. Resource IDs: (101)
 msgid "A&dd folder..."
 msgstr "اضافه کردن پوشه..."
@@ -1415,10 +1390,6 @@ msgstr "ناتمام بماند"
 #. Resource IDs: (1465)
 msgid "Abort &Merge"
 msgstr "متوقف کردن ادغام"
-
-#. Resource IDs: (9)
-msgid "About"
-msgstr "درباره"
 
 #. Resource IDs: (136)
 msgid "About TortoiseMerge"
@@ -1502,10 +1473,6 @@ msgstr "Add extension specific diff program"
 #. Resource IDs: (110)
 msgid "Add extension specific merge program"
 msgstr "Add extension specific merge program"
-
-#. Resource IDs: (1065)
-msgid "Add new files automatically to SVN"
-msgstr "اضافه کردن فایلهای جدید بطور خودکار به SVN"
 
 #. Resource IDs: (89)
 msgid "Add the item anyway"
@@ -1607,10 +1574,6 @@ msgstr "عمر"
 msgid "Align trees on top"
 msgstr "Align trees on top"
 
-#. Resource IDs: (1505)
-msgid "All"
-msgstr "همه"
-
 #. Resource IDs: (1007)
 msgid "All Commands"
 msgstr "همه دستورها"
@@ -1652,10 +1615,6 @@ msgstr "http://localhost/myrepos/ یکسان، مثال:  URL اجازه است�
 #. Resource IDs: (345)
 msgid "Allow different repositories to use the same UUID, e.g. copied repositories"
 msgstr "اجازه استفاده مخزنهای مختلف از UUIDهای یکسان, مثال مخزنهای کپی شده"
-
-#. Resource IDs: (1480)
-msgid "Always close dialogs for local operations"
-msgstr "بستن پنجره ها برای عملیات محلی"
 
 #. Resource IDs: (197)
 msgid "Always use the system locale settings to show times and dates"
@@ -1854,6 +1813,10 @@ msgid "Auto Rename"
 msgstr "تغییر نام خودکار"
 
 #. Resource IDs: (222)
+msgid "Auto-close for local operations"
+msgstr "بستن خودکار برای عملیات محلی"
+
+#. Resource IDs: (222)
 msgid "Auto-close if no conflicts"
 msgstr "بستن خودکار در صورت عدم وجود تضاد"
 
@@ -1880,10 +1843,6 @@ msgstr "خودکار"
 #. Resource IDs: (1073)
 msgid "Automatically check for &newer versions every week"
 msgstr "چک کردن برای وجود نسخه های جدید بطور هفتگی"
-
-#. Resource IDs: (306)
-msgid "Autotext Tester"
-msgstr "آزمایشگر متن خودکار"
 
 #. Resource IDs: (1157)
 msgid "Average"
@@ -2102,10 +2061,6 @@ msgstr "آبشاری"
 msgid "Cascaded context menu"
 msgstr "Cascaded context menu"
 
-#. Resource IDs: (117)
-msgid "Case-sensitive"
-msgstr "حساس به متن"
-
 #. Resource IDs: (65535)
 msgid "Cate&gories:"
 msgstr "طبقه ها:"
@@ -2227,10 +2182,6 @@ msgstr "برای استفاده از یک فرمت تاریخ و زمان مخت
 msgid "Check working copy for modifications"
 msgstr "بررسی نسخه کاری برای تغییرات"
 
-#. Resource IDs: (1504)
-msgid "Check:"
-msgstr "بررسیپ:"
-
 #. Resource IDs: (65535)
 msgid "Checking if a newer version of TortoiseSVN is available..."
 msgstr "...TortoiseSVN درحال بررسی وجود ویرایش جدیدتر"
@@ -2273,9 +2224,8 @@ msgid "Cleaning up"
 msgstr "پاکسازی"
 
 #. Resource IDs: (146)
-#, c-format
-msgid "Cleaning up directory \"%s\""
-msgstr "در حال پاکسازی پوشه \"%s\""
+msgid "Cleaning up."
+msgstr "پاکسازی."
 
 #. Resource IDs: (83)
 #, c-format
@@ -2396,18 +2346,6 @@ msgstr "Coll&apse source tree"
 msgid "Collapse &following tree"
 msgstr "بستن پوشه بعدی"
 
-#. Resource IDs: (2055)
-msgid ""
-"Collapse unchanged sections\n"
-"Collapse"
-msgstr ""
-"بستن بخشهای فاقد تغییر\n"
-"بستن"
-
-#. Resource IDs: (32870)
-msgid "Collapsed"
-msgstr "بسته شده"
-
 #. Resource IDs: (16662)
 msgid "Color"
 msgstr "رنگ"
@@ -2464,10 +2402,6 @@ msgstr "اعمال"
 msgid "Commit - TortoiseSVN"
 msgstr "اعمال - لاکپشتSVN"
 
-#. Resource IDs: (616)
-msgid "Commit failed - Update needed"
-msgstr "اعمال ناموفق - نیاز به بروزرسانی"
-
 #. Resource IDs: (1110)
 msgid "Commit to:"
 msgstr "اعمال به:"
@@ -2483,11 +2417,6 @@ msgstr "اعمالها بر اساس مولف"
 #. Resource IDs: (244)
 msgid "Commits by date"
 msgstr "اعمالها بر اساس تاریخ"
-
-#. Resource IDs: (247)
-#, c-format
-msgid "Commits each %s"
-msgstr "اعمال های هر %s"
 
 #. Resource IDs: (1135)
 msgid "Commits each week:"
@@ -2536,14 +2465,6 @@ msgstr "با نسخه پایه مقایسه کنید"
 #. Resource IDs: (114)
 msgid "Compare with previous revision"
 msgstr "با اصلاحیه قبلی مقایسه کنید"
-
-#. Resource IDs: (2055)
-msgid ""
-"Compares all whitespaces when diffing\n"
-"Compare whitespaces"
-msgstr ""
-"تمامی فضاهای خالی را هنگام مقایسه گیری مقایسه میکند\n"
-"مقایسه فضاهای خالی"
 
 #. Resource IDs: (12)
 msgid "Compares the file with the last committed revision to show you the changes you made"
@@ -2623,10 +2544,6 @@ msgstr "ادامه"
 msgid "Contract docked window"
 msgstr "پنجره قابل حرکت کنتراکت"
 
-#. Resource IDs: (15)
-msgid "Converts the working copy format to the new version"
-msgstr "ساختار نسخه کاری را به نسخه جدید تبدیل میکند"
-
 #. Resource IDs: (376)
 msgid "Cop&y"
 msgstr "کپی"
@@ -2638,10 +2555,6 @@ msgstr "کپی شده"
 #. Resource IDs: (208)
 msgid "Copied from URL"
 msgstr "کپی شده از URL"
-
-#. Resource IDs: (208)
-msgid "Copied from revision"
-msgstr "کپی شده از اصلاحیه"
 
 #. Resource IDs: (275)
 #, c-format
@@ -2970,10 +2883,6 @@ msgstr ""
 msgid "Create repositor&y here"
 msgstr "ایجاد &مخزن در این مسیر..."
 
-#. Resource IDs: (102)
-msgid "Create shortcut"
-msgstr "ایجاد میان‌بر"
-
 #. Resource IDs: (32828)
 msgid "Create unified diff file"
 msgstr "ایجاد فایل مقایسه متحد"
@@ -3209,10 +3118,6 @@ msgstr "Diffing"
 msgid "Diffs the working copy file with the one before the last commit."
 msgstr "فایل نسخه کاری را با نمونه قبل از آخرین اعمال مقایسه می کند."
 
-#. Resource IDs: (1513)
-msgid "Directories"
-msgstr "پوشه ها"
-
 #. Resource IDs: (65535)
 msgid "Directory:"
 msgstr "فهرست:"
@@ -3224,10 +3129,6 @@ msgid ""
 msgstr ""
 "اگر نسخه های کاری بزرگ دارید و دسترسی بیش از اندازه به دیسک را مشاهده میکنید،\r\n"
 "این گزینه را غیر فعال کنید."
-
-#. Resource IDs: (596)
-msgid "Discards local changes upon incoming deletes"
-msgstr "درهنگام اعمال عملیات حذف از مخزن تغییرات محلی از بین می روند"
 
 #. Resource IDs: (3867)
 #, c-format
@@ -3458,10 +3359,10 @@ msgstr "ویرایش پیام گزارش"
 #. Resource IDs: (127)
 #, c-format
 msgid ""
-"Edit property '%S' on\r\n"
+"Edit property '%s' on\r\n"
 "%s"
 msgstr ""
-"ویرایش خصوصیت '%S' روی\r\n"
+"ویرایش خصوصیت '%s' روی\r\n"
 "%s"
 
 #. Resource IDs: (1331, 1382)
@@ -3607,10 +3508,6 @@ msgstr "یک عدد مابین 0 و 255 وارد نمائید."
 msgid "Enter an integer."
 msgstr "لطفا یک عدد وارد نمائید."
 
-#. Resource IDs: (65535)
-msgid "Enter file content to test for below:"
-msgstr "محتویات فایل را برای آزمایش در قسمت پایین وارد کنید:"
-
 #. Resource IDs: (1065)
 msgid "Enter log &message:"
 msgstr "گزارش تغییرات را وارد نمائید:"
@@ -3623,10 +3520,6 @@ msgstr "گزارش تغییرات را وارد نمائید:"
 #, c-format
 msgid "Enter no more than %1 characters."
 msgstr "بیش از %1 حرف وارد نکنید."
-
-#. Resource IDs: (65535)
-msgid "Enter the regex string below:"
-msgstr "رشته regex را در قسمت پایین وارد کنید:"
 
 #. Resource IDs: (3603)
 msgid ""
@@ -3681,10 +3574,6 @@ msgstr "اجرائی (*.exe)|*.exe|دستور (*.com)|*.com|اطلاعات (*.pd
 #. Resource IDs: (1002)
 msgid "Existing"
 msgstr "موجود"
-
-#. Resource IDs: (2)
-msgid "Exit"
-msgstr "خروج"
 
 #. Resource IDs: (275)
 msgid "Exp&and source tree"
@@ -3871,11 +3760,6 @@ msgstr "در حال دریافت اصلاحیه %s از فایل:"
 msgid "File"
 msgstr "فایل"
 
-#. Resource IDs: (247)
-#, c-format
-msgid "File changes each %s"
-msgstr "تغییرات فایلها هر %s"
-
 #. Resource IDs: (1138)
 msgid "File changes each week:"
 msgstr "تغییرات هفتگی فایلها:"
@@ -4004,10 +3888,6 @@ msgstr ""
 msgid "Filename"
 msgstr "نام فایل"
 
-#. Resource IDs: (1512)
-msgid "Files"
-msgstr "فایلها"
-
 #. Resource IDs: (1057)
 msgid ""
 "Fill Tool\n"
@@ -4088,21 +3968,9 @@ msgstr "برای مشاهده راهنما F1 را فشار دهید. برای �
 msgid "For complete history deselect 'Stop on copy/rename'"
 msgstr "برای مشاهده تاریخچه کامل گزینه 'توقف در کپی/تغییر نام' را انتخاب نکنید"
 
-#. Resource IDs: (279)
-msgid "Force"
-msgstr "با اجبار"
-
-#. Resource IDs: (1480)
-msgid "Force the merge"
-msgstr "اجبار در ادغام"
-
 #. Resource IDs: (1064)
 msgid "Forward"
 msgstr "جلو"
-
-#. Resource IDs: (65535)
-msgid "Found auto words:"
-msgstr "کلمات خودکار یافت شده:"
 
 #. Resource IDs: (65535)
 msgid "From URL:"
@@ -4380,10 +4248,6 @@ msgstr "عدم تطبیق نام هاست (%s)"
 msgid "How do you want to resolve this conflict?"
 msgstr "مایلید این برخورد چگونه حل شود؟"
 
-#. Resource IDs: (1264)
-msgid "I&gnored"
-msgstr "نادیده گرفته شده"
-
 #. Resource IDs: (65535)
 msgid "I&nclude paths:"
 msgstr "مسیرهای مشمول:"
@@ -4455,10 +4319,6 @@ msgstr "ID:32814:VA  +D"
 #. Accelerator Entry for Menu ID:32824; ''
 msgid "ID:32824:V C +F"
 msgstr "ID:32824:V C +F"
-
-#. Accelerator Entry for Menu ID:32825; ''
-msgid "ID:32825:V C +K"
-msgstr "ID:32825:V C +K"
 
 #. Accelerator Entry for Menu ID:32825; ''
 msgid "ID:32825:V C +L"
@@ -4679,10 +4539,6 @@ msgstr "نادیده گرفتن تمام حروف خالی"
 msgid "Ignore &case changes"
 msgstr "نادیده گرفتن تغییرات case"
 
-#. Resource IDs: (32873)
-msgid "Ignore all whitespace changes"
-msgstr "نادیده گرفتن همه تغییرات فضاهای خالی"
-
 #. Resource IDs: (1392)
 msgid "Ignore all whitespaces"
 msgstr "نادیده گرفتن تمام حروف خالی"
@@ -4706,22 +4562,6 @@ msgstr "نادیده گرفتن تغییرات حروف خالی"
 #. Resource IDs: (226)
 msgid "Ignored items included"
 msgstr "در نظر گرفتن اقلام نادیده گرفته شده"
-
-#. Resource IDs: (2055)
-msgid ""
-"Ignores all whitespace changes when diffing\n"
-"Ignore all whitespace changes"
-msgstr ""
-"نادیده گرفتن تمامی حروف خالی هنگام مقایسه\n"
-"نادیده گرفتن تمامی حروف خالی"
-
-#. Resource IDs: (2055)
-msgid ""
-"Ignores changes in whitespaces when diffing\n"
-"Ignore whitespace changes"
-msgstr ""
-"نادیده گرفتن تغییرات در حروف خالی هنگام مقایسه\n"
-"نادیده گرفتن تغییرات در حروف خالی"
 
 #. Resource IDs: (16916)
 msgid "Image &and Text"
@@ -4987,14 +4827,6 @@ msgstr ""
 "If you are not sure what to do, please refer to our docs on <i>relocate</i>.\n"
 "Do you really want to relocate?"
 
-#. Resource IDs: (1480)
-msgid "Items in externals"
-msgstr "اقلام موجود در خارجی"
-
-#. Resource IDs: (1527)
-msgid "Items to show"
-msgstr "اقلام جهت نمایش"
-
 #. Resource IDs: (275)
 msgid "Join with following &tree"
 msgstr "الحاق با بعدی شاخه ها"
@@ -5249,12 +5081,8 @@ msgstr "پائینترین اصلاحیه نمایش شده: %ld - بالاتر�
 
 #. Resource IDs: (238)
 #, c-format
-msgid ""
-"Lowest shown revision: %ld - Highest shown revision: %ld\n"
-"HEAD revision: %ld"
-msgstr ""
-"پائینترین اصلاحیه نمایش شده: %ld - بالاترین اصلاحیه نمایش شده: %ld\n"
-"اصلاحیه HEAD: %ld"
+msgid "Lowest shown revision: %ld - Highest shown revision: %ld - HEAD revision: %ld"
+msgstr "پائینترین اصلاحیه نمایش شده: %ld - بالاترین اصلاحیه نمایش شده: %ld - اصلاحیه HEAD: %ld"
 
 #. Resource IDs: (16973)
 msgid "Lum"
@@ -5432,8 +5260,8 @@ msgstr "در حال ادغام"
 
 #. Resource IDs: (229)
 #, c-format
-msgid "Merging %s into %s, %s%s"
-msgstr "در حال ادغام %s به %s, %s%s"
+msgid "Merging %s into %s, %s"
+msgstr "در حال ادغام %s به %s, %s"
 
 #. Resource IDs: (264)
 msgid "Merging differences between repository URLs"
@@ -5441,8 +5269,8 @@ msgstr "ادغام تغییرات بین URLهای مخزن"
 
 #. Resource IDs: (229)
 #, c-format
-msgid "Merging from %s, revision %s to %s, revision %s into %s, %s%s%s"
-msgstr "ادغام از %s, اصلاحیه %s از %s, اصلاحیه %s به %s, %s%s%s"
+msgid "Merging from %s, revision %s to %s, revision %s into %s, %s%s"
+msgstr "ادغام از %s, اصلاحیه %s به %s, اصلاحیه %s به %s, %s%s"
 
 #. Resource IDs: (264)
 #, c-format
@@ -5460,8 +5288,8 @@ msgstr "برای ادغام بایستی اصلاحیه ها یا آدرسهای
 
 #. Resource IDs: (229)
 #, c-format
-msgid "Merging revisions %s of %s into %s, %s%s%s"
-msgstr "درحال ادغام اصلاحیه های %s از %s به %s, %s%s%s"
+msgid "Merging revisions %s of %s into %s, %s%s"
+msgstr "درحال ادغام اصلاحیه های %s از %s به %s, %s%s"
 
 #. Resource IDs: (76, 1359)
 msgid "Message"
@@ -5765,10 +5593,6 @@ msgstr "هیچ نموداری وجود ندارد"
 msgid "No image encoder found for %s."
 msgstr "هیچ کدکننده تصویری برای %s یافت نشد."
 
-#. Resource IDs: (84)
-msgid "No path or pathfile specified on the command line!"
-msgstr "مسیری در خط فرمان وارد نشده است!"
-
 #. Resource IDs: (188)
 msgid "No spell corrections"
 msgstr "فاقد تصحیح های املائی"
@@ -5826,11 +5650,6 @@ msgstr "توجه: تنظیمات مربوط به فانت مشاهده گر Tort
 #. Resource IDs: (88)
 msgid "Notice"
 msgstr "اعلامیه"
-
-#. Resource IDs: (247)
-#, c-format
-msgid "Number of %s"
-msgstr "تعداد %s"
 
 #. Resource IDs: (338)
 msgid "Number of authors in the cache"
@@ -6259,14 +6078,6 @@ msgstr "Hook قبل­اعمال"
 msgid "Pre-Update Hook"
 msgstr "Hook قبل­بروزرسانی"
 
-#. Resource IDs: (3)
-msgid "Prefer local"
-msgstr "برگزیدن نسخه محلی"
-
-#. Resource IDs: (4)
-msgid "Prefer repository"
-msgstr "برگزیدن نسخه مخزن"
-
 #. Resource IDs: (65535)
 msgid "Press &New Shortcut Key:"
 msgstr "کلید میانبر &جدید را بزنید:"
@@ -6586,10 +6397,6 @@ msgstr ""
 msgid "Reintegrate a branch"
 msgstr "تجمیع مجدد شاخه"
 
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "Reintegrate merge"
-
 #. Resource IDs: (230)
 #, c-format
 msgid "Reintegrate merge %s into %s"
@@ -6684,10 +6491,10 @@ msgstr "حذف از لیست تغییرات"
 #. Resource IDs: (127)
 #, c-format
 msgid ""
-"Remove property '%S' from\r\n"
+"Remove property '%s' from\r\n"
 "%s"
 msgstr ""
-"حذف خصوصیت '%S' از\r\n"
+"حذف خصوصیت '%s' از\r\n"
 "%s"
 
 #. Resource IDs: (610)
@@ -6780,10 +6587,6 @@ msgid "Renames files / folders inside version control"
 msgstr "فایلها یا پوشه های تحت مدیریت ویرایش را تغییر نام میدهد"
 
 #. Resource IDs: (209)
-msgid "Repair copy"
-msgstr "اصلاح کپی"
-
-#. Resource IDs: (209)
 msgid "Repair move"
 msgstr "اصلاح جابجایی"
 
@@ -6822,10 +6625,6 @@ msgstr "آدرس مخزن"
 #. Resource IDs: (65535)
 msgid "Repository UUID:"
 msgstr "UUID مخزن:"
-
-#. Resource IDs: (106)
-msgid "Request cancelled by TSVN"
-msgstr "درخواست توسط TSVN لغو شد"
 
 #. Resource IDs: (65535)
 msgid "Requests a username and a password"
@@ -7235,10 +7034,6 @@ msgstr "درحال ذخیره سازی فایلها"
 msgid "Saving patchfile to:"
 msgstr "ذخیره سازی فایل وصله به:"
 
-#. Resource IDs: (1522)
-msgid "Scan"
-msgstr "اسکن"
-
 #. Resource IDs: (1014, 1017, 1064, 1212)
 msgid "Scintilla"
 msgstr "Scintilla"
@@ -7262,10 +7057,6 @@ msgstr "جستجوی:"
 #. Resource IDs: (7)
 msgid "Search string not found!"
 msgstr "رشته مورد نظر یافت نشد!"
-
-#. Resource IDs: (169)
-msgid "Searching for better path to apply patch..."
-msgstr "در حال جستجو برای مسیر مناسبتر برای اعمال وصله..."
 
 #. Resource IDs: (3867)
 #, c-format
@@ -7389,10 +7180,6 @@ msgid "Select text editor application"
 msgstr "انتخاب برنامه ویرایش متن"
 
 #. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "Select the URL from which to reintegrate"
-
-#. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
 msgstr "آدرس های مورد نظر برای ادغام درختی را انتخاب نمایید"
 
@@ -7451,10 +7238,10 @@ msgstr "تنظیم زمان فایلها به \"زمان آخرین اعمال\"
 #. Resource IDs: (127)
 #, c-format
 msgid ""
-"Set property '%S' on\r\n"
+"Set property '%s' on\r\n"
 "%s"
 msgstr ""
-"تنظیم خصوصیت '%S' بر روی\r\n"
+"تنظیم خصوصیت '%s' بر روی\r\n"
 "%s"
 
 #. Resource IDs: (13)
@@ -7541,6 +7328,10 @@ msgstr "نمایش گزارشات ثبت شده..."
 msgid "Show &overlays and context menu only in explorer"
 msgstr "نمایش &پوششها و منوهای راست-کلیک فقط در اکسپلورر"
 
+#. Resource IDs: (1265)
+msgid "Show &properties"
+msgstr "نمایش خصوصیات"
+
 #. Resource IDs: (1073)
 msgid "Show &unversioned files"
 msgstr "نمایش فایلهای فاقد-نسخه"
@@ -7625,6 +7416,14 @@ msgstr "نمایش خارجیها از مخزنهای مختلف"
 msgid "Show f&ull menus after a short delay"
 msgstr "نمایش منوهای کام&ل پس از اندکی تاخیر"
 
+#. Resource IDs: (1264)
+msgid "Show i&gnored files"
+msgstr "نمایش فایلهای &نادیده گرفته شده"
+
+#. Resource IDs: (1480)
+msgid "Show items in externals"
+msgstr "نمایش اقلام موجود در خارجی"
+
 #. Resource IDs: (1037)
 msgid "Show l&og"
 msgstr "نمایش گزارشات ثبت شده"
@@ -7704,6 +7503,14 @@ msgstr "نمایش آمار برای کَش گزارشات انتخاب شده"
 #. Resource IDs: (2052)
 msgid "Show tags on the copy source, not as separate nodes"
 msgstr "Show tags on the copy source, not as separate nodes"
+
+#. Resource IDs: (1209)
+msgid "Show un&modified files"
+msgstr "نمایش فایلهای تغییر نیافته"
+
+#. Resource IDs: (1073)
+msgid "Show un&versioned files"
+msgstr "نمایش فایلهای فاقد-نسخه"
 
 #. Resource IDs: (198)
 msgid "Show/Hide"
@@ -7918,34 +7725,6 @@ msgstr "Stefan Küng, Lübbe Onken"
 msgid "Stripes"
 msgstr "راه راه"
 
-#. Resource IDs: (117)
-msgid ""
-"Sub-string filter:\r\n"
-"* Specify one or more strings, separated by spaces. All sub-strings must match.\r\n"
-"* Put a - in front of a sub-string to exclude revisions that contain this sub-string.\r\n"
-"* Enclose strings that contain spaces etc. with \".\r\n"
-"* Put a ! at the beginning of the line to invert the whole filter condition.\r\n"
-"\r\n"
-"Examples:\r\n"
-"myname  2008    : my commits of 2008\r\n"
-".h  -.cpp              : commits that changed headers but no implementations\r\n"
-"\" \"                        : commits with spaces (ex. when searching in paths only)\r\n"
-"-\"\"show all\"\"        : commits that don't contain the string '\"show all\"'\r\n"
-"!myname  .cpp    : everything but my commits to .cpp files"
-msgstr ""
-"Sub-string filter:\r\n"
-"* Specify one or more strings, separated by spaces. All sub-strings must match.\r\n"
-"* Put a - in front of a sub-string to exclude revisions that contain this sub-string.\r\n"
-"* Enclose strings that contain spaces etc. with \".\r\n"
-"* Put a ! at the beginning of the line to invert the whole filter condition.\r\n"
-"\r\n"
-"Examples:\r\n"
-"myname  2008    : my commits of 2008\r\n"
-".h  -.cpp              : commits that changed headers but no implementations\r\n"
-"\" \"                        : commits with spaces (ex. when searching in paths only)\r\n"
-"-\"\"show all\"\"        : commits that don't contain the string '\"show all\"'\r\n"
-"!myname  .cpp    : everything but my commits to .cpp files"
-
 #. Resource IDs: (65535)
 msgid "Subversion"
 msgstr "سابورژن"
@@ -8142,10 +7921,6 @@ msgstr "برچسب گره ها"
 msgid "Tagged the working copy to %s"
 msgstr "نسخه کاری نشانه گذاری شد به %s"
 
-#. Resource IDs: (80)
-msgid "Tasks"
-msgstr "فعالیتها"
-
 #. Resource IDs: (1064)
 msgid "Tasks Pane"
 msgstr "پنجره فعالیتها"
@@ -8161,14 +7936,6 @@ msgstr "وضعیت متن:"
 #. Resource IDs: (207)
 msgid "Text status"
 msgstr "وضعیت متن "
-
-#. Resource IDs: (84)
-msgid ""
-"The URL to check out refers to a file but this\n"
-"working copy path is an existing directory."
-msgstr ""
-"آدرس وارد شده به یک فایل اشاره دارد اما\n"
-"نسخه کاری فعلی یک پوشه است."
 
 #. Resource IDs: (63)
 msgid "The chunk size did not match the number of added/removed lines!"
@@ -9045,14 +8812,6 @@ msgstr "آدرس:"
 msgid "URL: "
 msgstr "آدرس:"
 
-#. Resource IDs: (1209)
-msgid "Un&modified"
-msgstr "اصلاح نشده"
-
-#. Resource IDs: (1073)
-msgid "Un&versioned"
-msgstr "فاقد نسخه"
-
 #. Resource IDs: (220)
 #, c-format
 msgid ""
@@ -9162,10 +8921,6 @@ msgstr ""
 msgid "Unknown depth"
 msgstr "عمق مشخص نیست"
 
-#. Resource IDs: (106)
-msgid "Unknown failure in SVN::List"
-msgstr "خرابی نامشخص در لیست SVN"
-
 #. Resource IDs: (221, 230, 242)
 msgid "Unlock"
 msgstr "برداشتن قفل"
@@ -9197,10 +8952,6 @@ msgstr ""
 #. Resource IDs: (146)
 msgid "Unversion"
 msgstr "حذف نسخه"
-
-#. Resource IDs: (1507)
-msgid "Unversioned"
-msgstr "فاقد نسخه"
 
 #. Resource IDs: (1313)
 msgid "Unversioned files mark parent folder as modified"
@@ -9260,10 +9011,6 @@ msgstr "در حال بروزرسانی و سعی مجدد قفل گذاری..."
 msgid "Updating log cache"
 msgstr "درحال بروزرسانی کَش گزارشات"
 
-#. Resource IDs: (15)
-msgid "Upgrade working copy"
-msgstr "بروزرسانی نسخه کاری"
-
 #. Resource IDs: (16530)
 msgid "Use &Default Image: "
 msgstr "استفاده از تصویر &پیشفرض:"
@@ -9293,10 +9040,6 @@ msgstr ""
 "Use '*' as a wildcard character when specifying an exception.\r\n"
 "To separate multiple exceptions, use commas (',').\r\n"
 "Example: *.mylan.com, *.company.com"
-
-#. Resource IDs: (1538)
-msgid "Use Aero dialogs"
-msgstr "استفاده از پنجره های Aero"
 
 #. Resource IDs: (1230)
 msgid "Use URL of &WC as the default \"From:\" URL"
@@ -9354,6 +9097,10 @@ msgstr "استفاده از هردو بلوک متنی (آخر این بلوک)"
 msgid "Use left file"
 msgstr "استفاده از فایل سمت چپ"
 
+#. Resource IDs: (3)
+msgid "Use local"
+msgstr "برگزیدن نسخه محلی"
+
 #. Resource IDs: (1432)
 msgid "Use recycle bin when reverting"
 msgstr "استفاده از سطل بازیافت در هنگام برگشت دادن "
@@ -9361,6 +9108,10 @@ msgstr "استفاده از سطل بازیافت در هنگام برگشت د�
 #. Resource IDs: (116)
 msgid "Use regular expression"
 msgstr "استفاده از عبارت با قاعده"
+
+#. Resource IDs: (4)
+msgid "Use repository"
+msgstr "برگزیدن نسخه مخزن"
 
 #. Resource IDs: (1066)
 msgid "Use stri&keout for removed lines"
@@ -10340,10 +10091,6 @@ msgstr "اصلاحیه ها:"
 msgid "root project"
 msgstr "پروژه ریشه"
 
-#. Resource IDs: (169)
-msgid "scanning path:"
-msgstr "درحال پیمایش مسیر:"
-
 #. Resource IDs: (65535)
 msgid "skip ranges: "
 msgstr "محدوده های پرش:"
@@ -10541,14 +10288,6 @@ msgstr ""
 "tsvn:logminsize\r\n"
 "Minimum size in chars a log message must have before a commit is allowed."
 
-#. Resource IDs: (579)
-msgid ""
-"tsvn:logrevregex\r\n"
-"A regular expression matching revision numbers in a log message"
-msgstr ""
-"tsvn:logrevregex\r\n"
-"یک عبارت باقاعده برای شناسایی شماره اصلاحیه ها در گزارشات ثبتی"
-
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logsummary\r\n"
@@ -10671,14 +10410,186 @@ msgstr "بله"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
-#~ msgid "Show &properties"
-#~ msgstr "نمایش خصوصیات"
-#~ msgid "Show i&gnored files"
-#~ msgstr "نمایش فایلهای &نادیده گرفته شده"
-#~ msgid "Show un&modified files"
-#~ msgstr "نمایش فایلهای تغییر نیافته"
-#~ msgid "Show un&versioned files"
-#~ msgstr "نمایش فایلهای فاقد-نسخه"
+#~ msgid "%s\\%s - Export"
+#~ msgstr "%s\\%s - صدور"
+#~ msgid ""
+#~ "%s\n"
+#~ "\n"
+#~ "Shall I update the working copy now\n"
+#~ "and reopen the commit dialog?"
+#~ msgstr ""
+#~ "%s\n"
+#~ "\n"
+#~ "آیا مایلید نسخه کاری بروز شده\n"
+#~ "و پنجره اعمال مجددا باز شود؟"
+#~ msgid "&Delete unversioned items..."
+#~ msgstr "&حذف موارد فاقد نسخه..."
+#~ msgid "&Properties"
+#~ msgstr "&خصوصیات"
+#~ msgid "(Double-click to clear error message)"
+#~ msgstr "(برای پاک کردن پیغام خطا دو-بار کلیک کنید)"
+#~ msgid "(externals)"
+#~ msgstr "(خارجی)"
+#~ msgid "Add new files automatically to SVN"
+#~ msgstr "اضافه کردن فایلهای جدید بطور خودکار به SVN"
+#~ msgid "All"
+#~ msgstr "همه"
+#~ msgid "Autotext Tester"
+#~ msgstr "آزمایشگر متن خودکار"
+#~ msgid "Case-sensitive"
+#~ msgstr "حساس به متن"
+#~ msgid "Check:"
+#~ msgstr "بررسیپ:"
+#~ msgid "Cleaning up directory \"%s\""
+#~ msgstr "در حال پاکسازی پوشه \"%s\""
+#~ msgid ""
+#~ "Collapse unchanged sections\n"
+#~ "Collapse"
+#~ msgstr ""
+#~ "بستن بخشهای فاقد تغییر\n"
+#~ "بستن"
+#~ msgid "Collapsed"
+#~ msgstr "بسته شده"
+#~ msgid "Commit failed - Update needed"
+#~ msgstr "اعمال ناموفق - نیاز به بروزرسانی"
+#~ msgid "Commits each %s"
+#~ msgstr "اعمال های هر %s"
+#~ msgid ""
+#~ "Compares all whitespaces when diffing\n"
+#~ "Compare whitespaces"
+#~ msgstr ""
+#~ "تمامی فضاهای خالی را هنگام مقایسه گیری مقایسه میکند\n"
+#~ "مقایسه فضاهای خالی"
+#~ msgid "Converts the working copy format to the new version"
+#~ msgstr "ساختار نسخه کاری را به نسخه جدید تبدیل میکند"
+#~ msgid "Copied from revision"
+#~ msgstr "کپی شده از اصلاحیه"
+#~ msgid "Create shortcut"
+#~ msgstr "ایجاد میان‌بر"
+#~ msgid "Directories"
+#~ msgstr "پوشه ها"
+#~ msgid "Discards local changes upon incoming deletes"
+#~ msgstr "درهنگام اعمال عملیات حذف از مخزن تغییرات محلی از بین می روند"
+#~ msgid "Enter file content to test for below:"
+#~ msgstr "محتویات فایل را برای آزمایش در قسمت پایین وارد کنید:"
+#~ msgid "Enter the regex string below:"
+#~ msgstr "رشته regex را در قسمت پایین وارد کنید:"
+#~ msgid "Exit"
+#~ msgstr "خروج"
+#~ msgid "File changes each %s"
+#~ msgstr "تغییرات فایلها هر %s"
+#~ msgid "Files"
+#~ msgstr "فایلها"
+#~ msgid "Force"
+#~ msgstr "با اجبار"
+#~ msgid "Force the merge"
+#~ msgstr "اجبار در ادغام"
+#~ msgid "Found auto words:"
+#~ msgstr "کلمات خودکار یافت شده:"
+#~ msgid "I&gnored"
+#~ msgstr "نادیده گرفته شده"
+#~ msgid "ID:32825:V C +K"
+#~ msgstr "ID:32825:V C +K"
+#~ msgid "Ignore all whitespace changes"
+#~ msgstr "نادیده گرفتن همه تغییرات فضاهای خالی"
+#~ msgid ""
+#~ "Ignores all whitespace changes when diffing\n"
+#~ "Ignore all whitespace changes"
+#~ msgstr ""
+#~ "نادیده گرفتن تمامی حروف خالی هنگام مقایسه\n"
+#~ "نادیده گرفتن تمامی حروف خالی"
+#~ msgid ""
+#~ "Ignores changes in whitespaces when diffing\n"
+#~ "Ignore whitespace changes"
+#~ msgstr ""
+#~ "نادیده گرفتن تغییرات در حروف خالی هنگام مقایسه\n"
+#~ "نادیده گرفتن تغییرات در حروف خالی"
+#~ msgid "Items to show"
+#~ msgstr "اقلام جهت نمایش"
+#~ msgid "No path or pathfile specified on the command line!"
+#~ msgstr "مسیری در خط فرمان وارد نشده است!"
+#~ msgid "Number of %s"
+#~ msgstr "تعداد %s"
+#~ msgid "Prefer repository"
+#~ msgstr "برگزیدن نسخه مخزن"
+#~ msgid "Reintegrate merge"
+#~ msgstr "Reintegrate merge"
+#~ msgid "Repair copy"
+#~ msgstr "اصلاح کپی"
+#~ msgid "Request cancelled by TSVN"
+#~ msgstr "درخواست توسط TSVN لغو شد"
+#~ msgid "Scan"
+#~ msgstr "اسکن"
+#~ msgid "Searching for better path to apply patch..."
+#~ msgstr "در حال جستجو برای مسیر مناسبتر برای اعمال وصله..."
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "Select the URL from which to reintegrate"
+#~ msgid ""
+#~ "Sub-string filter:\r\n"
+#~ "* Specify one or more strings, separated by spaces. All sub-strings must "
+#~ "match.\r\n"
+#~ "* Put a - in front of a sub-string to exclude revisions that contain this "
+#~ "sub-string.\r\n"
+#~ "* Enclose strings that contain spaces etc. with \".\r\n"
+#~ "* Put a ! at the beginning of the line to invert the whole filter "
+#~ "condition.\r\n"
+#~ "\r\n"
+#~ "Examples:\r\n"
+#~ "myname  2008    : my commits of 2008\r\n"
+#~ ".h  -.cpp              : commits that changed headers but no "
+#~ "implementations\r\n"
+#~ "\" \"                        : commits with spaces (ex. when searching in "
+#~ "paths only)\r\n"
+#~ "-\"\"show all\"\"        : commits that don't contain the string '\"show "
+#~ "all\"'\r\n"
+#~ "!myname  .cpp    : everything but my commits to .cpp files"
+#~ msgstr ""
+#~ "Sub-string filter:\r\n"
+#~ "* Specify one or more strings, separated by spaces. All sub-strings must "
+#~ "match.\r\n"
+#~ "* Put a - in front of a sub-string to exclude revisions that contain this "
+#~ "sub-string.\r\n"
+#~ "* Enclose strings that contain spaces etc. with \".\r\n"
+#~ "* Put a ! at the beginning of the line to invert the whole filter "
+#~ "condition.\r\n"
+#~ "\r\n"
+#~ "Examples:\r\n"
+#~ "myname  2008    : my commits of 2008\r\n"
+#~ ".h  -.cpp              : commits that changed headers but no "
+#~ "implementations\r\n"
+#~ "\" \"                        : commits with spaces (ex. when searching in "
+#~ "paths only)\r\n"
+#~ "-\"\"show all\"\"        : commits that don't contain the string '\"show "
+#~ "all\"'\r\n"
+#~ "!myname  .cpp    : everything but my commits to .cpp files"
+#~ msgid "Tasks"
+#~ msgstr "فعالیتها"
+#~ msgid ""
+#~ "The URL to check out refers to a file but this\n"
+#~ "working copy path is an existing directory."
+#~ msgstr ""
+#~ "آدرس وارد شده به یک فایل اشاره دارد اما\n"
+#~ "نسخه کاری فعلی یک پوشه است."
+#~ msgid "Un&modified"
+#~ msgstr "اصلاح نشده"
+#~ msgid "Un&versioned"
+#~ msgstr "فاقد نسخه"
+#~ msgid "Unknown failure in SVN::List"
+#~ msgstr "خرابی نامشخص در لیست SVN"
+#~ msgid "Unversioned"
+#~ msgstr "فاقد نسخه"
+#~ msgid "Upgrade working copy"
+#~ msgstr "بروزرسانی نسخه کاری"
+#~ msgid "Use Aero dialogs"
+#~ msgstr "استفاده از پنجره های Aero"
+#~ msgid "scanning path:"
+#~ msgstr "درحال پیمایش مسیر:"
+#~ msgid ""
+#~ "tsvn:logrevregex\r\n"
+#~ "A regular expression matching revision numbers in a log message"
+#~ msgstr ""
+#~ "tsvn:logrevregex\r\n"
+#~ "یک عبارت باقاعده برای شناسایی شماره اصلاحیه ها در گزارشات ثبتی"
 #~ msgid ""
 #~ "Subversion encountered a serious problem.\n"
 #~ "Please take the time to report this on our mailing list\n"
@@ -10693,8 +10604,6 @@ msgstr "{BugTraq}"
 #~ "اینکه چگونه مشکل بروز کرده را ارائه نمایید.\n"
 #~ "\n"
 #~ "گزارش سابورژن:"
-#~ msgid "Cleaning up."
-#~ msgstr "پاکسازی."
 
 #, fuzzy
 #~ msgid "General::Revision Graph"
