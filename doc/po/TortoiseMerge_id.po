@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-03-03 10:39 +0000\n"
-"PO-Revision-Date: 2009-12-07 10:47+0100\n"
+"PO-Revision-Date: 2009-12-10 11:37+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -121,7 +121,7 @@ msgstr "Ketika bekerja pada TortoiseSVN kami senang mendengarkan musik. Dan kare
 # Indonesian#: source/TortoiseMerge_en.xml:110
 #. (title)
 msgid "Acknowledgments"
-msgstr "Pengakuan"
+msgstr "Persetujuan"
 
 # Indonesian#: source/TortoiseMerge_en.xml:114
 #. (term)
@@ -297,7 +297,7 @@ msgstr "Mengedit Konflik"
 
 #. (para)
 msgid "This is sometimes referred to as a three-way merge, and is shown in three panes. However there are actually four files involved. The file which is not shown is the common base file, the last common ancestor of the two files which are now in conflict. The relationships between the three files are explained in the diagram below:"
-msgstr ""
+msgstr "Ini terkadang disebut sebagai penggabungan tiga arah, dan ditampilkan di tiga panel. Tetapi sebenarnya ada empat file yang terlibat. File yang tidak ditampilkan adalah file dasar, asal usul dari kedua file yang dalam konflik. Hubungan antara ketiga file tersebut dijelaskan pada diagram berikut:"
 
 # Indonesian#: source/TortoiseMerge_en.xml:389
 #. (para)
@@ -317,7 +317,7 @@ msgstr "Menerapkan Patch"
 
 #. (para)
 msgid "A patch file is a Subversion unified diff file, which contains the information required to apply changes to a set of files. The patch may have been supplied by another developer so that you can see changes he has made and possibly commit them to the repository. Or it may have been generated internally by TortoiseSVN when comparing two folders. This happens when you compare a repository revision with your working copy folder, or if you compare two different repository revisions, or if you compare two different repository paths."
-msgstr ""
+msgstr "File patch adalah file diff Subversion, dimana mengandung informasi yang dibutuhkan untuk mengubah file. File patch dapat disediakan oleh developer lain jadi anda dapat melihat perubahan yang telah dibuatnya dan bahkan mengkomitnya ke repositori. Atau mungkin juga dibuat secara internal oleh TortoiseSVN ketika membandingkan dua folder. Ini terjadi ketika anda membandingkan repositori revisi dengan folder kerja anda, atau jika anda membandingkan dua revisi repositori yang berbeda, atau jika anda membandingkan dua path repositori yang berbeda."
 
 #. (para)
 msgid "In either case TortoiseMerge will show a small window listing the files included in the patch. By double clicking on one of these files you fetch the relevant file and apply the changes. The left pane shows the original file content and the right pane shows it after the patch is applied."
@@ -464,11 +464,11 @@ msgstr "<guibutton>Konflik Sebelumnya/Berikutnya</guibutton> melompat secara lan
 
 #. (para)
 msgid "<guibutton>Use Theirs/Use Mine</guibutton> selects whether to use a block from the left or the right pane. Refer to the next section for more information about editing changes and conflicts."
-msgstr ""
+msgstr "<guibutton>Gunakan milik mereka/Gunakan milik saya</guibutton> memilih untuk memblokir dari panel kiri atau dari panel kanan. Lihat section berikut untuk informasi lebih lanjut dan tentang mengubah perubahan dan konflik."
 
 #. (para)
 msgid "<guibutton>Theirs before Mine/Mine before Theirs</guibutton> is used when you want to combine changes in a conflicted file. Refer to the next section for more information about editing changes and conflicts."
-msgstr ""
+msgstr "<guibutton>Punya mereka terlebih dahulu/Punya saya terlebih dahulu</guibutton> digunakan ketika anda ingin menggabung perubahan di file yang sedang konflik. Lihat section berikut untuk informasi lebih lanjut mengenai merubah perubahan dan konflik."
 
 #. (para)
 msgid "<guibutton>Mark as Resolved</guibutton> When you have resolved all the conflicts in a file and saved the changes, you can mark it as resolved from within TortoiseMerge, rather than going back to explorer and marking as resolved from there."
@@ -576,7 +576,7 @@ msgstr "Terkadang Anda sebenarnya ingin kedua blok teks, dan menu kontekstual ju
 
 #. (para)
 msgid "You can also edit the output file just as you would in a text editor. Such lines are marked using a pencil icon. Please note that if you want to make any of the line/block-based changes described above, it is better to do those first since once you start editing the file yourself it becomes impossible for TortoiseMerge to keep track of the relationship to the original files."
-msgstr ""
+msgstr "Anda juga dapat mengedit file output sebagaimana dalam text editor. Baris-baris tersebut ditandai dengan ikon pensil. Mohon diingat bahwa jika anda ingin mengubah baris-baris/merubah berdasarkan blok seperti di atas, lebih baik untuk melakukannya tersebut karena jika anda mulai mengedit file tersebut sendiri TortoiseMerge tidak lagi dapat memantau hubungan file tersebut dengan file aslinya."
 
 # Indonesian#: source/TortoiseMerge_en.xml:606
 #. (para)
@@ -584,8 +584,9 @@ msgid "If you're in three pane view (sometimes called <emphasis>merge view</emph
 msgstr "Jika Anda dalam tampilan tiga pane (kadang kala disebut <emphasis>tampilan gabungan</emphasis>) Anda hanya bisa mengedit file dalam tampilan bawah (<literal>Digabung</literal>). Seperti dalam tampilan dua pane, Anda bisa <action>mengklik-kanan</action> pada baris yang konflik dan memilih <menuchoice><guimenu>Menu Konteks</guimenu><guimenuitem>Gunakan blok teks dari <quote>mereka</quote></guimenuitem></menuchoice> atau <menuchoice><guimenu>Menu Konteks</guimenu><guimenuitem>Gunakan blok teks dari <quote>saya</quote></guimenuitem></menuchoice>. Sebagai tambahan, jika Anda menginginkan <emphasis>kedua</emphasis> blok, Anda bisa memilih <menuchoice><guimenu>Menu Konteks</guimenu><guimenuitem> Gunakan blok teks dari <quote>saya</quote> sebelum <quote>mereka</quote></guimenuitem></menuchoice> atau <menuchoice><guimenu>Menu Konteks</guimenu><guimenuitem> Gunakan blok teks dari <quote>mereka</quote> sebelum <quote>saya</quote></guimenuitem></menuchoice>. Tergantung pada perintah yang telah Anda pilih, perubahan digunakan dalam hasil file <literal>Digabung</literal>."
 
 #. (para)
+#, fuzzy
 msgid "Sometimes a file will be marked as conflicted in Subversion, yet when you view it using TortoiseMerge there are no conflicts shown. This may be due to the whitespace handling you have chosen. If you choose to ignore line-endings or whitespace changes, those lines will be marked using the <emphasis>Conflict-Ignored</emphasis> icon. To resolve the conflict you still need to pick which version you want to use."
-msgstr ""
+msgstr "Kadang-kadang file akan ditandai sebagai konflik di Subversion, padahal ketika anda melihatnya melalui TortoiseMerge tidak nampak adanya konflik."
 
 # Indonesian#: source/TortoiseMerge_en.xml:643
 #. (para)
@@ -1142,7 +1143,7 @@ msgstr "/createunifieddiff"
 
 #. (entry)
 msgid "Creates a unified diff file (patch file) of two files specified with <placeholder-1/> and <placeholder-2/>. The target path is set with <placeholder-3/>. If <placeholder-4/> is not set, a file save dialog is shown so the user can choose the location to save the patch file. Note: If <placeholder-5/> is set, all other parameters are ignored."
-msgstr ""
+msgstr "Membuat sebuah file diff (file patch) dari dua file yang ditentukan dengan <placeholder-1/> dan <placeholder-2/>. Path target ditentukan dengan <placeholder-3/>. Apabila <placeholder-4/> tidak ditentukan, dialog save file akan ditampilkan sehingga anda dapat menentukan tempat penyimpanan file patch. Catatan: Jika <placeholder-5/> ditentukan, semua parameter akan diabaikan."
 
 #. (para)
 msgid ""
