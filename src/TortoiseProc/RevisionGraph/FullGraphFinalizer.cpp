@@ -172,6 +172,28 @@ void CFullGraphFinalizer::MarkWCRevision (CFullGraphNode* node)
     {
         node->AddClassification (CNodeClassification::IS_WORKINGCOPY);
     }
+	else
+	{
+		// maybe, we have to insert the WC node first?
+		// (the sub-tree may not have been modified in that revision)
+
+		if (// between this ...
+			   (node->GetRevision() < history.GetWCRevision())
+			// ... and the next node, if there is one
+			&& (   (node->GetNext() == NULL) 
+				|| (node->GetNext()->GetRevision() > history.GetWCRevision()))
+			// on the right path
+			&& (node->GetPath().GetBasePath().Intersects 
+					(history.GetWCPath()->GetBasePath())))
+		{
+			// WC rev lies behind this node and before the next one 
+
+            graph.Add ( node->GetPath()
+					  , history.GetWCRevision()
+					  , CNodeClassification::IS_WORKINGCOPY
+					  , node);
+		}
+	}
 }
 
 void CFullGraphFinalizer::MarkHead (CFullGraphNode* node)
@@ -187,7 +209,9 @@ void CFullGraphFinalizer::MarkHead (CFullGraphNode* node)
     // look for the latest change
     // (there may be several "copy-source-only" nodes trailing HEAD
 
-    while (node->GetClassification().Matches (0, CNodeClassification::IS_OPERATION_MASK))
+	const DWORD forbidden = CNodeClassification::IS_OPERATION_MASK;
+    while (   (node->GetClassification().Matches (0, forbidden))
+		   && (node->GetPrevious() != NULL))
         node = node->GetPrevious();
 
     node->AddClassification (CNodeClassification::IS_LAST);
@@ -205,11 +229,12 @@ void CFullGraphFinalizer::AddWCModification (CFullGraphNode* node)
         {
             // add the modification node
 
-            CNodeClassification classification = node->GetClassification();
-            classification.Add (  CNodeClassification::IS_MODIFIED_WC
-                                | (node->GetNext() == NULL
-                                    ? 0
-                                    : CNodeClassification::IS_COPY_TARGET));
+            CNodeClassification classification 
+				= CNodeClassification::IS_MODIFIED_WC
+				| CNodeClassification::IS_WORKINGCOPY
+                | (node->GetNext() == NULL
+                     ? 0
+                     : CNodeClassification::IS_COPY_TARGET);
             graph.Add (node->GetPath(), node->GetRevision()+1, classification, node);
         }
     }

@@ -462,8 +462,19 @@ void CFullHistory::BuildForwardCopies()
     std::copy (copiesContainer.begin(), copiesContainer.end(), copyFromRelation);
 #pragma warning( pop ) 
 
-	std::sort (copyToRelation, copyToRelationEnd, &AscendingToRevision);
-	std::sort (copyFromRelation, copyFromRelationEnd, &AscendingFromRevision);
+	// in early phases, there will be no copies
+	// -> front() iterator is invalid
+
+	if (!copiesContainer.empty())
+	{
+		size_t bytesToCopy = copiesContainer.size() * sizeof (SCopyInfo*[1]);
+
+		memcpy (copyToRelation, &copiesContainer.front(), bytesToCopy);
+		memcpy (copyFromRelation, &copiesContainer.front(), bytesToCopy);
+
+		std::sort (copyToRelation, copyToRelationEnd, &AscendingToRevision);
+		std::sort (copyFromRelation, copyFromRelationEnd, &AscendingFromRevision);
+	}
 }
 
 CString CFullHistory::GetLastErrorMessage() const
