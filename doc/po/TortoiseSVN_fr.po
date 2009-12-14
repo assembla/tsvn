@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-12-09 09:22 +0000\n"
-"PO-Revision-Date: 2009-12-10 11:42+0100\n"
+"PO-Revision-Date: 2009-12-14 09:16+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -3676,9 +3676,8 @@ msgid "<filename>Foo.c</filename> is marked as added (with history) and has a tr
 msgstr "<filename>Foo.c</filename> est marqué comme ayant été ajouté (avec historique) et étant en conflit dans l'arborescence."
 
 #. (para)
-#, fuzzy
 msgid "An update of developer B's working copy results in a tree conflict. For a simple file conflict: <placeholder-1/>"
-msgstr "Une mise à jour de la copie de travail du développeur B mène à un conflit dans l'arborescence: <placeholder-1/>"
+msgstr "Une mise à jour de la copie de travail du développeur B mène à un conflit dans l'arborescence. Pour un simple conflit de fichier : <placeholder-1/>"
 
 #. (para)
 msgid "<filename>BarFolder</filename> is added to the working copy as a normal folder."
@@ -3752,13 +3751,12 @@ msgid "Local missing, incoming edit upon merge"
 msgstr "Copie locale incomplète, modification dans la mise à jour"
 
 #. (para)
-#, fuzzy
 msgid "Developer A working on trunk modifies <filename>Foo.c</filename> and commits it to the repository"
-msgstr "Le développeur A modifie <filename>Foo.c</filename> et en fait la livraison"
+msgstr "Le développeur A travaillant sur le tronc modifie <filename>Foo.c</filename> et en fait la livraison au dépôt."
 
 #. (para)
 msgid "Developer B working on a branch moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr "Le développeur B travaillant sur une branche renomme <filename>Foo.c</filename> en <filename>Bar.c</filename> et envoie les modifications au dépôt"
+msgstr "Le développeur B travaillant sur une branche renomme <filename>Foo.c</filename> en <filename>Bar.c</filename> et en fait la livraison au dépôt"
 
 #. (para)
 msgid "<filename>Bar.c</filename> is already in the working copy with status 'normal'."
@@ -3771,14 +3769,12 @@ msgstr "<filename>Foo.c</filename> est marqué comme manquant dans l'arborescenc
 #. (para)
 #. (para)
 #. (para)
-#, fuzzy
 msgid "A merge of developer A's trunk changes to developer B's branch working copy results in a tree conflict: <placeholder-1/>"
-msgstr "Une fusion des modifications du développeur A dans la copie de travail du développeur B conduit à un conflit dans l'arborescence: <placeholder-1/>"
+msgstr "Une fusion des modifications du tronc du développeur A dans la branche de copie de travail du développeur B conduit à un conflit dans l'arborescence: <placeholder-1/>"
 
 #. (para)
-#, fuzzy
 msgid "To resolve this conflict, Developer B has to mark the file as resolved in the conflict editor dialog, which will remove it from the conflict list. She then has to decide whether to copy the missing file <filename>Foo.c</filename> from the repository to the working copy, whether to merge Developer A's changes to <filename>Foo.c</filename> into the renamed <filename>Bar.c</filename> or whether to ignore the changes by marking the conflict as resolved and doing nothing else."
-msgstr "Pour résoudre ce conflit, le Développeur B doit supprimer le fichier manquant dans la fenêtre de résolution des conflits. Le développeur B doit alors décider s'il veut récupérer le fichier <filename>Foo.c</filename> depuis le référentiel, ou fusionner <filename>Foo.c</filename> avec le fichier renommé <filename>Bar.c</filename> ou simplement marquer le conflit comme étant résolu."
+msgstr "Pour résoudre ce conflit, les développeurs B doit marquer le fichier comme résolu dans la fenêtre de résolution de conflits, lequel sera retiré de la liste des conflits. Le développeur B doit alors décider s'il faut copier le fichier manquant <filename>Foo.c</filename> depuis le référentiel, ou fusionner <filename>Foo.c</filename> avec le fichier renommé <filename>Bar.c</filename> ou simplement s'il faut ignorer les changements en marquant le conflit comme étant résolu et ne rien faire d'autre."
 
 #. (para)
 msgid "Note that if you copy the missing file from the repository and then mark as resolved, your copy will be removed again. You have to resolve the conflict first."
@@ -3790,12 +3786,10 @@ msgstr "Modification locale, suppression dans la fusion"
 
 #. (para)
 #. (para)
-#, fuzzy
 msgid "Developer A working on trunk moves <filename>Foo.c</filename> to <filename>Bar.c</filename> and commits it to the repository"
-msgstr "Le développeur A travaillant sur trunk renomme <filename>Foo.c</filename> en <filename>Bar.c</filename> et l'envoie au dépôt"
+msgstr "Le développeur A travaillant sur le tronc renomme <filename>Foo.c</filename> en <filename>Bar.c</filename> et l'envoie au dépôt"
 
 #. (para)
-#, fuzzy
 msgid "Developer B working on a branch modifies <filename>Foo.c</filename> and commits it to the repository."
 msgstr "Le développeur B travaillant sur une branche modifie le fichier <filename>Foo.c</filename> et l'envoie au dépôt."
 
@@ -3804,14 +3798,12 @@ msgid "There is an equivalent case for folder moves, but it is not yet detected 
 msgstr "Il y a des cas équivalents pour les déplacements de répertoire, mais ce n'est pas encore détecté dans Subversion 1.6 ..."
 
 #. (para)
-#, fuzzy
 msgid "Developer A working on trunk moves parent folder <filename>FooFolder</filename> to <filename>BarFolder</filename> and commits it to the repository."
-msgstr "Le développeur A travaillant sur trunk déplace le dossier parent <filename>FooFolder</filename> vers <filename>BarFolder</filename> et l'envoie au dépôt."
+msgstr "Le développeur A travaillant sur le tronc déplace le dossier parent <filename>FooFolder</filename> vers <filename>BarFolder</filename> et l'envoie au dépôt."
 
 #. (para)
-#, fuzzy
 msgid "Developer B working on a branch modifies <filename>Foo.c</filename> in her working copy."
-msgstr "Le développeur B modifie <filename>Foo.c</filename> dans sa copie de travail"
+msgstr "Le développeur B travaillant sur une branche modifie <filename>Foo.c</filename> dans sa copie de travail."
 
 #. (para)
 msgid "<filename>Bar.c</filename> is marked as added."
@@ -3850,9 +3842,8 @@ msgid "<filename>Foo.c</filename> is marked as missing and has a tree conflict."
 msgstr "<filename>Foo.c</filename> est marqué comme manquant et générant une erreur dans l'arborescence."
 
 #. (para)
-#, fuzzy
 msgid "To resolve this conflict, Developer B has to find out to what filename the conflicted file <filename>Foo.c</filename> was renamed/moved in the repository. This can be done by using the log dialog for the merge source. The conflict editor only shows the log for the working copy as it does not know which path was used in the merge, so you will have to find that yourself."
-msgstr "Pour résoudre ce conflit, le développeur B doit trouver à quel fichier renommé/déplacé correspond la version conflictueuse de <filename>Foo.c</filename> dans le référentiel. Ce peut être fait en utilisant la fenêtre de commentaires. L'éditeur de conflit ne montre que les commentaires relatifs à la copie de travail puisqu'il ne sait pas quel chemin a été utilisé lors de la fusion, donc vous devrez le découvrir vous même."
+msgstr "Pour résoudre ce conflit, le développeur B doit trouver quel fichier renommé/déplacé correspond à la version conflictueuse de <filename>Foo.c</filename> dans le référentiel. Ce peut être fait en utilisant la fenêtre de commentaires pour les sources fusionnées. L'éditeur de conflit ne montre que les commentaires relatifs à la copie de travail puisqu'il ne sait pas quel chemin a été utilisé lors de la fusion, donc vous devrez le découvrir vous même."
 
 #. (title)
 msgid "Getting Status Information"
@@ -3949,9 +3940,8 @@ msgid "The same information which is available from the icon overlays (and much 
 msgstr "Les mêmes informations, disponibles avec le recouvrement d'icônes, (et plus encore) peuvent être affichées avec des colonnes supplémentaires dans l'affichage en détail de l'explorateur Windows."
 
 #. (para)
-#, fuzzy
 msgid "Simply right click on one of the headings of a column, choose <guimenuitem>More...</guimenuitem> from the context menu displayed. A dialog will appear where you can specify the columns and their order, which is displayed in the <quote>Detailed View</quote>. Scroll down until the entries starting with SVN come into view. Check the ones you would like to have displayed and close the dialog by pressing <guibutton>OK</guibutton>. The columns will be appended to the right of those currently displayed. You can reorder them by drag and drop, or resize them, so that they fit your needs."
-msgstr "Faites simplement un clic droit sur un des titres d'une colonne, choisissez <guimenuitem>Autres...</guimenuitem> à partir du menu contextuel affiché. Une boîte de dialogue apparaîtra où vous pourrez spécifier les colonnes et leur ordre, qui seront affichées dans la \"Vue détaillée\". Faites défiler jusqu'au moment où les entrées commençant par SVN apparaissent. Cochez celles vous voudriez afficher et fermez la boîte de dialogue en appuyant sur <guibutton>OK</guibutton>. Les colonnes seront ajoutées à droite de celles actuellement affichées. Vous pouvez les réordonner par glisser-déposer, ou les redimensionner, pour qu'elles correspondent à vos besoins."
+msgstr "Faites simplement un clic droit sur un des titres d'une colonne, choisissez <guimenuitem>Autres...</guimenuitem> à partir du menu contextuel affiché. Une boîte de dialogue apparaîtra où vous pourrez spécifier les colonnes et leur ordre, qui seront affichées dans la \"Vue détaillée\". Faites défiler la liste jusqu'au moment où les entrées commençant par SVN apparaissent. Cochez celles que vous voudriez afficher et fermer la boîte de dialogue en appuyant sur <guibutton>OK</guibutton>. Les colonnes seront ajoutées à droite de celles actuellement affichées. Vous pouvez les réordonner par glisser-déposer, ou les redimensionner, afin qu'elles correspondent à vos besoins."
 
 #. (para)
 msgid "The additional columns in the Windows Explorer are not available on Vista, since Microsoft decided to not allow such columns for <emphasis>all</emphasis> files anymore but only for specific file types."
@@ -4087,27 +4077,27 @@ msgstr "Sélectionnez un ou plusieurs fichiers et utilisez <menuchoice><guimenu>
 
 #. (para)
 msgid "Once you have created a changelist you can drag and drop items into it, either from another changelist, or from Windows Explorer. Dragging from Explorer can be useful as it allows you to add items to a changelist before the file is modified. You could do that from the check-for-modifications dialog, but only by displaying all unmodified files."
-msgstr "Dès que vous avez créé une liste de modification vous pouvez y glisser/déposer des éléments depuis une autre liste de modifications, ou depuis Windows Explorer. L'avantage de le faire depuis Explorer est de permettre d'ajouter des éléments avant qu'ils le soient modifiés. Vous pourriez faire de même depuis la fenêtre de vérification des modifications, mais seulement en affichant tous les fichiers non modifiés."
+msgstr "Dès que vous avez créé une liste de modifications vous pouvez y glisser/déposer des éléments depuis une autre liste de modifications, ou depuis Windows Explorer. L'avantage de le faire depuis Explorer est de permettre d'ajouter des éléments avant qu'ils ne soient modifiés. Vous pourriez faire de même depuis la fenêtre de vérification des modifications, mais seulement en affichant tous les fichiers non modifiés."
 
 #. (title)
 msgid "Commit dialog with Changelists"
-msgstr "Fenêtre de livraison avec les listes des modifications"
+msgstr "Fenêtre de livraison avec les listes de modifications"
 
 #. (para)
 msgid "<placeholder-1/> In the commit dialog you can see those same files, grouped by changelist. Apart from giving an immediate visual indication of groupings, you can also use the group headings to select which files to commit."
-msgstr "<placeholder-1/> Dans la fenêtre de livraison vous pouvez voir ces même fichiers, regroupées par liste de modification. En dehors de donner directement une indication sur les regroupements, vous pouvez également vous servir des entêtes des groupes pour sélectionner les fichiers à livrer."
+msgstr "<placeholder-1/> Dans la fenêtre de livraison vous pouvez voir ces mêmes fichiers, regroupés par liste de modifications. En dehors de donner directement une indication sur les regroupements, vous pouvez également vous servir des entêtes des groupes pour sélectionner les fichiers à livrer."
 
 #. (para)
 msgid "On XP, there is a context menu when you right click on a group heading which gives you the choice to check or uncheck all group entries. On Vista however the context menu is not necessary. Click on the group header to select all entries, then check one of the selected entries to check all."
-msgstr "Sous XP, menu contextuel apparait lorsque vous faites un clic droit sur l'entête d'un groupe, vous donnant le choix de cocher ou de décocher toutes les entrées.Sous Vista le menu contextuel n'est pas nécessaire. Cliquez sur l'entête du groupe pour tout sélectionner, puis cochez une des entrées sélectionnées pour toutes les cocher."
+msgstr "Sous XP, un menu contextuel apparaît lorsque vous faites un clic droit sur l'entête d'un groupe, vous donnant le choix de cocher ou de décocher toutes les entrées. Sous Vista le menu contextuel n'est pas nécessaire. Cliquez sur l'entête du groupe pour tout sélectionner, puis cochez une des entrées sélectionnées pour toutes les cocher."
 
 #. (para)
 msgid "TortoiseSVN reserves one changelist name for its own use, namely <literal>ignore-on-commit</literal>. This is used to mark versioned files which you almost never want to commit even though they have local changes. This feature is described in <xref linkend=\"tsvn-dug-commit-ignore\"/>."
-msgstr "TortoiseSVN se réserve une liste des modifications, appelée <literal>ignore-on-commit</literal>. Elle est utilisée pour marquer les fichiers versionnés que vous souhaitez rarement livrer même si vous les avez modifiés. Cette fonctionnalité estdécrite dans <xref linkend=\"tsvn-dug-commit-ignore\"/>."
+msgstr "TortoiseSVN se réserve une liste de modifications, appelée <literal>ignore-on-commit</literal>. Elle est utilisée pour marquer les fichiers versionnés que vous souhaitez rarement livrer même si vous les avez modifiés. Cette fonctionnalité est décrite dans <xref linkend=\"tsvn-dug-commit-ignore\"/>."
 
 #. (para)
 msgid "When you commit files belonging to a changelist then normally you would expect that the changelist membership is no longer needed. So by default, files are removed from changelists automatically on commit. If you wish to retain the file in its changelist, use the <guilabel>Keep changelists</guilabel> checkbox at the bottom of the commit dialog."
-msgstr "Lorsque vous livrez des fichiers faisant partie d'une liste de modifications alors vous vous attendez naturellement à ce qu'ils ne fassent plus partie de cette liste. Donc par défaut, les fichiers sont retirés automatquement de la liste des modifications après avoir été livrés. Si ce comportement ne vous convient pas, utilisez la case à cocher <guilabel>Garder les listes de modifications</guilabel> en bas de la fenêtre de livraison."
+msgstr "Lorsque vous livrez des fichiers faisant partie d'une liste de modifications alors vous vous attendez naturellement à ce qu'ils n'en fassent plus partie ensuite. Donc par défaut, les fichiers sont retirés automatiquement de la liste des modifications après avoir été livrés. Si ce comportement ne vous convient pas, utilisez la case à cocher <guilabel>Garder les listes de modifications</guilabel> en bas de la fenêtre de livraison."
 
 #. (para)
 msgid "Changelists are purely a local client feature. Creating and removing changelists will not affect the repository, nor anyone else's working copy. They are simply a convenient way for you to organise your files."
