@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-12-13 09:34 +0000\n"
-"PO-Revision-Date: 2009-12-15 09:37+0100\n"
-"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
+"PO-Revision-Date: 2009-12-15 17:46-0600\n"
+"Last-Translator: Matthias GOUPIL <mgoupil@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -814,7 +814,7 @@ msgstr "Pour la plupart, les URL de Subversion utilisent la syntaxe standard, au
 
 #. (para)
 msgid "Also, users of the <literal>file://</literal> scheme on Windows platforms will need to use an unofficially <quote>standard</quote> syntax for accessing repositories that are on the same machine, but on a different drive than the client's current working drive. Either of the two following URL path syntaxes will work where <literal>X</literal> is the drive on which the repository resides:"
-msgstr "Also, users of the <literal>file://</literal> scheme on Windows platforms will need to use an unofficially <quote>standard</quote> syntax for accessing repositories that are on the same machine, but on a different drive than the client's current working drive. Either of the two following URL path syntaxes will work where <literal>X</literal> is the drive on which the repository resides:Ainsi, les utilisateurs du système de fichier <literal>file:</literal> sur les plate-formes Windows devront utiliser une syntaxe <quote>standard</quote> non-officielle pour avoir accès aux référentiels qui sont sur la même machine, mais sur un disque différent du disque de travail. Les deux syntaxes de chemin d'URL suivantes marcheront ; <literal>X</literal> est le disque sur lequel est hébergé le référentiel :"
+msgstr "Ainsi, les utilisateurs du système de fichier <literal>file:</literal> sur les plate-formes Windows devront utiliser une syntaxe <quote>standard</quote> non-officielle pour avoir accès aux référentiels qui sont sur la même machine, mais sur un disque différent du disque de travail. Les deux syntaxes de d'URL suivantes marcheront ; <literal>X</literal> est le disque sur lequel est hébergé le référentiel :"
 
 #. (screen)
 #, no-wrap
@@ -1813,7 +1813,7 @@ msgstr "WebDAV"
 
 #. (para)
 msgid "The Apache based Subversion server uses the WebDAV protocol which is supported by many other programs as well. You could e.g. mount such a repository as a <quote>Web folder</quote> in the Windows explorer and then access it like any other folder in the file system."
-msgstr "You could e.g. mount such a repository as a <quote>Web folder</quote> in the Windows explorer and then access it like any other folder in the file system.Le serveur Subversion basé sur Apache utilise le protocole WebDAV qui est aussi supporté par beaucoup d'autres programmes. Vous pourriez par exemple monter un tel référentiel comme un <quote>Répertoire Web</quote> dans l'explorateur Windows et y accéder ensuite comme n'importe quel autre dossier."
+msgstr ".Le serveur Subversion basé sur Apache utilise le protocole WebDAV qui est aussi supporté par beaucoup d'autres programmes. Vous pourriez par exemple monter un tel référentiel comme un « Répertoire Web » dans l'explorateur Windows et y accéder ensuite comme n'importe quel autre dossier."
 
 #. (term)
 msgid "Browsing The Repository"
@@ -1846,7 +1846,7 @@ msgstr "Installer Apache"
 
 #. (para)
 msgid "Please note that Windows XP without the service pack 1 will lead to bogus network data and could therefore corrupt your repository!"
-msgstr "Veuiller noter que Windows XP sans le service pack 1 entrainera des données erronées en réseau et pourrait donc corrompre votre référentiel !"
+msgstr "Veuiller noter que Windows XP sans le service pack 1 entrainera des problèmes de données réseau et pourrait donc corrompre votre référentiel !"
 
 #. (para)
 msgid "Download the latest version of the Apache web server from <ulink url=\"http://httpd.apache.org/download.cgi\"><citetitle>http://httpd.apache.org/download.cgi</citetitle></ulink>. Make sure that you download the version 2.2.x - the version 1.3.xx won't work!"
@@ -2461,7 +2461,6 @@ msgstr ""
 "</screen>"
 
 #. (para)
-#, fuzzy
 msgid ""
 "Next type the commands <screen>\n"
 "bin\\openssl rsa -in conf\\privkey.pem -out conf\\server.key\n"
@@ -2482,9 +2481,9 @@ msgstr ""
 "bin\\openssl req -new -key conf\\server.key -out conf\\server.csr \\\n"
 "-config conf\\openssl.cnf\n"
 "</screen> puis (sur une seule ligne) <screen>\n"
-"bin\\openssl x509 -in conf\\server.csr -out conf\\server.crt\n"
+"bin\\openssl x509 -in conf\\server.csr -out conf\\server.cert\n"
 "                 -req -signkey conf\\server.key -days 4000\n"
-"</screen>Elles créeront un certificat qui expirera dans 4000 jours. Et enfin écrivez (sur une seule ligne) : <screen>\n"
+"</screen>Cela créera un certificat qui expirera dans 4000 jours. Et enfin écrivez (sur une seule ligne) : <screen>\n"
 "bin\\openssl x509 -in conf\\server.cert -out conf\\server.der.crt\n"
 "                 -outform DER\n"
 "</screen> Ces commandes ont créé quelques fichiers dans le répertoire <filename>conf</filename> de Apache (<filename>server.der.crt</filename>, <filename>server.csr</filename>, <filename>server.key</filename>, <filename>.rnd</filename>, <filename>privkey.pem</filename>, <filename>server.cert</filename>)."
@@ -4874,9 +4873,8 @@ msgid "compare"
 msgstr "comparer"
 
 #. (para)
-#, fuzzy
 msgid "One of the commonest requirements in project development is to see what has changed. You might want to look at the differences between two revisions of the same file, or the differences between two separate files. TortoiseSVN provides a built-in tool named <application>TortoiseMerge</application> for viewing differences of text files. For viewing differences of image files, TortoiseSVN also has a tool named <application>TortoiseIDiff</application>. Of course, you can use your own favourite diff program if you like."
-msgstr "Un des pré-requis les plus communs dans le développement de projet est de voir ce qui a changé. Vous pourriez vouloir regarder les différences entre deux révisions du même fichier, ou les différences entre deux fichiers séparés. TortoiseSVN fournit un outil incorporé appelé <application>TortoiseMerge</application> pour voir les différences dans les fichiers texte. Pour voir les différences dans les fichiers image, TortoiseSVN a aussi un outil appelé <application>TortoiseIDiff</application>. Bien sûr, vous pouvez utiliser votre propre programme de comparaison favori si vous le souhaitez."
+msgstr "Une des exigences les plus courantes dans le développement de projet est de voir ce qui a changé. Vous pourriez vouloir regarder les différences entre deux révisions du même fichier, ou les différences entre deux fichiers séparés. TortoiseSVN fournit un outil intégré appelé <application>TortoiseMerge</application> pour voir les différences dans les fichiers texte. Pour voir les différences dans les fichiers image, TortoiseSVN a aussi un outil appelé <application>TortoiseIDiff</application>. Bien sûr, vous pouvez utiliser votre propre programme de comparaison favori si vous le souhaitez."
 
 #. (title)
 msgid "File Differences"
@@ -4947,9 +4945,8 @@ msgid "Difference between WC file/folder and a URL"
 msgstr "Différence entre fichiers/répertoires de la CdT et une URL"
 
 #. (para)
-#, fuzzy
 msgid "If you want to see the differences between a file in your working copy, and a file in any Subversion repository, you can do that directly in explorer by selecting the file then holding down the <keycap>Shift</keycap> key whilst right clicking to obtain the context menu. Select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff with URL</guimenuitem></menuchoice>. You can do the same thing for a working copy folder. TortoiseMerge shows these differences in the same way as it shows a patch file - a list of changed files which you can view one at a time."
-msgstr "Si vous voulez voir les différences entre un fichier de votre copie de travail, et un fichier dans un référentiel Subversion, vous pouvez le faire directement dans l'explorateur en sélectionnant le fichier puis en maintenant la touche <keycap>Shift</keycap> en faisant un clic droit pour obtenir le menu contextuel. Sélectionnez <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff avec l'URL</guimenuitem></menuchoice>. Vous pouvez faire la même chose pour un répertoire de la copie de travail. TortoiseMerge vous montre ces différences de la même manière qu'un patch - une liste des fichiers modifiés que vous pouvez voir un par un."
+msgstr "Si vous voulez voir les différences entre un fichier de votre copie de travail, et un fichier dans n'importe quel référentiel Subversion, vous pouvez le faire directement dans l'explorateur en sélectionnant le fichier puis en maintenant enfoncé la touche <keycap>Shift</keycap> en faisant un clic droit pour obtenir le menu contextuel. Sélectionnez <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff avec l'URL</guimenuitem></menuchoice>. Vous pouvez faire la même chose pour un répertoire de la copie de travail. TortoiseMerge vous montre ces différences de la même manière qu'un patch - une liste des fichiers modifiés que vous pouvez voir un par un."
 
 #. (term)
 msgid "Difference with blame information"
@@ -4964,7 +4961,6 @@ msgid "Difference between folders"
 msgstr "Comparaison entre répertoires"
 
 #. (para)
-#, fuzzy
 msgid "The built-in tools supplied with TortoiseSVN do not support viewing differences between directory hierarchies. But if you have an external tool which does support that feature, you can use that instead. In <xref linkend=\"tsvn-dug-diff-tools\"/> we tell you about some tools which we have used."
 msgstr "Les outils intégrés fournis avec TortoiseSVN ne supportent pas l'observation de différences entre les hiérarchies de répertoire. Mais si vous avez un outil externe qui supporte vraiment cette fonctionnalité, vous pouvez l'utiliser à la place. Dans <xref linkend=\"tsvn-dug-diff-tools\"/> nous vous parlerons de quelques outils que nous avons utilisés."
 
@@ -5029,14 +5025,12 @@ msgid "You can export a <emphasis>change tree</emphasis>, which is useful if you
 msgstr "Vous pouvez exporter un <emphasis>arbre des modifications</emphasis>, qui est utile si vous avez besoin d'envoyer la structure de l'arbre de votre projet à un tiers, contenant uniquement les fichiers qui ont été modifiés. Cette opération fonctionne sur les fichiers sélectionnés uniquement, ainsi vous devez sélectionner les fichiers qui vous intéressent - ce qui signifie souvent tous les fichiers - puis ensuite sélectionner <menuchoice><guimenu>Menu Contextuel</guimenu><guimenuitem>Exporter la sélection vers...</guimenuitem></menuchoice>. Vous serez invités à chosir un emplacement où sauvegarder l'arbre des modifications. "
 
 #. (para)
-#, fuzzy
 msgid "You can also export the <emphasis>list</emphasis> of changed files to a text file using <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Save list of selected files to...</guimenuitem></menuchoice>."
-msgstr "Vous pouvez aussi aller à une ligne particulière en utilisant <menuchoice><guimenu>Editer</guimenu><guimenuitem>Aller à la ligne...</guimenuitem></menuchoice>."
+msgstr "Vous pouvez également exporter la <emphasis>liste</emphasis> des fichiers modifiés dans un fichier texte en utilisant <menuchoice><guimenu>le menu contextuel</guimenu><guimenuitem>Enregistrer la liste de fichiers sélectionnés vers...</guimenuitem></menuchoice>."
 
 #. (para)
-#, fuzzy
 msgid "If you want to export the list of files <emphasis>and</emphasis> the actions (modified, added, deleted) as well, you can do that using <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Copy selection to clipboard</guimenuitem></menuchoice>."
-msgstr "Si vous voulez exporter la listes des fichiers <emphasis>et</emphasis> aussi les actions (modifié, ajouté, supprimé), vous pouvez le faire en utilisant les raccourcis clavier <action>Ctrl-A</action> pour sélectionner les entrées et <action>Ctrl-C</action> pour copier la liste détaillée dans le presse-papier."
+msgstr "Si vous voulez exporter la listes des fichiers <emphasis>et</emphasis> aussi les actions (modifié, ajouté, supprimé), vous pouvez le faire en utilisant <menuchoice><guimenu>le menu contextuel</guimenu><guimenuitem>Copier la sélection dans le presse-papier</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "The button at the top allows you to change the direction of comparison. You can show the changes need to get from A to B, or if you prefer, from B to A."
@@ -5044,7 +5038,7 @@ msgstr "Le bouton en haut vous permet de modifier le sens de la comparaison. Vou
 
 #. (para)
 msgid "The buttons with the revision numbers on can be used to change to a different revision range. When you change the range, the list of items which differ between the two revisions will be updated automatically."
-msgstr "Les boutons flanqués des numéros de révision peuvent être utilisés pour passer à un éventail de révisions différent. Lorsque vous changez d'éventail, la liste des éléments qui diffèrent entre les deux révisions sera mise à jour automatiquement."
+msgstr "Les boutons avec les numéros de révision peuvent être utilisés pour passer à un éventail de révisions différent. Lorsque vous changez d'éventail, la liste des éléments qui diffèrent entre les deux révisions sera mise à jour automatiquement."
 
 #. (para)
 msgid "If the list of filenames is very long, you can use the search box to reduce the list to filenames containing specific text. Note that a simple text search is used, so if you want to restrict the list to C source files you should enter <filename>.c</filename> rather than <filename>*.c</filename>."
@@ -5071,19 +5065,16 @@ msgid "The image difference viewer"
 msgstr "Le visualiseur de différences d'images"
 
 #. (para)
-#, fuzzy
 msgid "<placeholder-1/><menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Diff</guimenuitem></menuchoice> for any of the common image file formats will start TortoiseIDiff to show image differences. By default the images are displayed side-by-side but you can use the View menu or toolbar to switch to a top-bottom view instead, or if you prefer, you can overlay the images and pretend you are using a lightbox."
-msgstr "<placeholder-1/><menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Voir les différences</guimenuitem></menuchoice> pour n'importe quel format d'image commun démarrera TortoiseIDiff pour afficher les différences d'image. Par défaut les images sont affichées côte à côte mais vous pouvez utiliser le menu Affichage ou la barre d'outil pour basculer vers une vue haut-bas à la place, ou si vous préférez, vous pouvez superposer les images et prétendre utiliser de la lumière. Un slider en haut contrôle l'intensité relative des images (transparence alpha). Vous pouvez aussi utiliser <action>Ctrl-Maj-Molettel</action> pour changer la transparence."
+msgstr "<placeholder-1/><menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Voir les différences</guimenuitem></menuchoice> pour n'importe quel format d'image commun démarrera TortoiseIDiff pour afficher les différences d'image. Par défaut les images sont affichées côte à côte mais vous pouvez utiliser le menu Affichage ou la barre d'outils pour basculer vers une vue haut-bas à la place, ou si vous préférez, vous pouvez superposer les images et prétendre utiliser une visionneuse."
 
 #. (para)
-#, fuzzy
 msgid "Naturally you can also zoom in and out and pan around the image. You can also pan the image simply by left-dragging it. If you select the <guilabel>Link images together</guilabel> option, then the pan controls (scrollbars, mousewheel) on both images are linked."
-msgstr "Naturellement vous pouvez aussi agrandir, réduire et vous déplacer dans l'image. Si vous sélectionnez l'option <guilabel>Lier les images ensemble</guilabel>, alors les contrôles de déplacement (barre de déroulement, molette) des deux images sont réliés."
+msgstr "Naturellement vous pouvez aussi faire un zoom avant, arrière tout en vous déplacant sur l'image. Vous pouvez également effectuer un mouvement de l'image à gauche simplement en le faisant glisser. Si vous sélectionnez l'option <guilabel>Lier les images ensemble</guilabel>, alors les contrôles de déplacement (barre de déroulement, molette) des deux images sont réliés."
 
 #. (para)
-#, fuzzy
 msgid "An image info box shows details about the image file, such as the size in pixels, resolution and colour depth. If this box gets in the way, use <menuchoice><guimenu>View</guimenu><guimenuitem>Image Info</guimenuitem></menuchoice> to hide it. You can get the same information in a tooltip if you hover the mouse over the image title bar."
-msgstr "Dans l'image, une boîte d'informations affiche les détails concernant le fichier image, comme la taille en pixels, la résolution et la profondeur des couleurs. Si cette boîte se trouve dans le chemin, utilisez <menuchoice><guimenu>Affichage</guimenu><guimenuitem>Informations de l'image</guimenuitem></menuchoice> pour la masquer."
+msgstr "Dans l'image, une boîte d'informations affiche les détails concernant le fichier image, comme la taille en pixels, la résolution et la profondeur des couleurs. Si cette boîte se trouve dans le chemin, utilisez <menuchoice><guimenu>Affichage</guimenu><guimenuitem>Informations de l'image</guimenuitem></menuchoice> pour la masquer. Vous pouvez obtenir la même information dans une info-bulle lorsque vous passez la souris sur la barre de titre de l'image."
 
 #. (para)
 msgid "When the images are overlaid, the relative intensity of the images (alpha blend) is controlled by a slider control at the left side. You can click anywhere in the slider to set the blend directly, or you can drag the slider to change the blend interactively. <keycap>Ctrl+Shift</keycap>-<action>Wheel</action> to change the blend."
@@ -5095,7 +5086,7 @@ msgstr "Le bouton au dessus de l'ascenseur permet de passer de 0% à 100% de tra
 
 #. (para)
 msgid "Sometimes you want to see a difference rather than a blend. You might have the image files for two revisions of a printed circuit board and want to see which tracks have changed. If you disable alpha blend mode, the difference will be shown as an <emphasis>XOR</emphasis> of the pixel colour values. Unchanged areas will be plain white and changes will be coloured."
-msgstr ""
+msgstr "Parfois vous voulez voir une différence plutot qu'un mélange. Vous pourriez avoir les fichiers d'images de deux révisions d'un circuit imprimé et dont vous souhaitez voir quelles pistes ont changées. Si vous désactivez le mode alpha blend, la différence sera présenté comme un <emphasis>XOR</emphasis> de la valeur des pixels de couleur. Les zones inchangées seront de couleur blanche et les changements seront colorés."
 
 #. (title)
 msgid "External Diff/Merge Tools"
@@ -5433,22 +5424,20 @@ msgid "remove"
 msgstr "enlever"
 
 #. (para)
-#, fuzzy
 msgid "Use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> to remove files or folders from subversion."
-msgstr "<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Supprimer</guimenuitem></menuchoice> le dossier de votre copie de travail."
+msgstr "Utiliser <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Supprimer</guimenuitem></menuchoice> pour effacer des fichiers ou répertoires dans subversion."
 
 #. (para)
-#, fuzzy
 msgid "When you <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> a file, it is removed from your working copy immediately as well as being marked for deletion in the repository on next commit. The file's parent folder shows a <quote>deleted</quote> icon overlay. Up until you commit the change, you can get the file back using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revert</guimenuitem></menuchoice> on the parent folder."
-msgstr "Si vous supprimez un fichier/répertoire en utilisant TSVN, le fichier est supprimé de votre copie de travail et marqué à supprimer. Le dossier parent du fichier affiche un recouvrement d'icône \"supprimé \". Vous pouvez toujours récupérer le fichier, si vous appelez <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revenir en arrière</guimenuitem></menuchoice> sur le dossier parent."
+msgstr "Lorsque vous utilisez la commande <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Supprimer</guimenuitem></menuchoice> sur un fichier,  il est supprimé immédiatement de votre copie de travail tout en étant marqué pour suppression dans le référentiel jusqu'au prochain envoi au dépôt. Il s'affiche sur le dossier parent du fichier un icône <quote>supprimé</quote>. Jusqu'à ce que vous envoyez les modifications au dépot, vous pouvez toujours récupérer le fichier comme à l'origine si vous appelez <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revenir en arrière</guimenuitem></menuchoice> sur le dossier parent."
 
 #. (para)
 msgid "When you <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> a folder, it remains in your working copy, but the overlay changes to indicate that it is marked for deletion. Up until you commit the change, you can get the folder back using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revert</guimenuitem></menuchoice> on the folder itself. This difference in behaviour between files and folders is a part of Subversion, not TortoiseSVN."
-msgstr ""
+msgstr "Lorsque vous utilisez la commande <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Supprimer</guimenuitem></menuchoice> sur un répertoire, il est conservé dans votre copie de travail, mais l'icône change pour indiquer qu'il est marqué pour suppression. Jusqu'à ce que vous envoyez les modifications au référentiel, vous pouvez revenir en arrière et récupérer le dossier en faisant<menuchoice><guimenu>TortoiseSVN</ guimenu><guimenuitem>Revenir en arrière</ guimenuitem></ menuchoice> sur le dossier lui-même. Cette différence de comportement entre les fichiers et dossiers est une caractéristique de Subversion, pas de TortoiseSVN."
 
 #. (para)
 msgid "If you want to delete an item from the repository, but keep it locally as an unversioned file/folder, use <menuchoice><guimenu>Extended Context Menu</guimenu><guimenuitem>Delete (keep local)</guimenuitem></menuchoice>. You have to hold the <keycap>Shift</keycap> key while right clicking on the item in the explorer list pane (right pane) in order to see this in the extended context menu."
-msgstr ""
+msgstr "Si vous voulez supprimer un élément dans le référentiel, mais le conserver localement comme un fichier/répertoire sans version, utilisez <menuchoice><guimenu>Menu Contextuel Avancé</ guimenu><guimenuitem>Supprimer (conserver localement)</ guimenuitem></ menuchoice>. Vous devez tenir la touche <keycap>Maj</ keycap> enfoncée tout eeffectuant un clic droit avec la souris sur l'élément désiré dans le volet de l'explorateur (volet droit) afin de voir dans le menu contextuel avancé."
 
 #. (para)
 msgid "If a <emphasis>file</emphasis> is deleted via the explorer instead of using the TortoiseSVN context menu, the commit dialog shows those files and lets you remove them from version control too before the commit. However, if you update your working copy, Subversion will spot the missing file and replace it with the latest version from the repository. If you need to delete a version-controlled file, always use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> so that Subversion doesn't have to guess what you really want to do."
@@ -5481,9 +5470,8 @@ msgid "move"
 msgstr "déplacer"
 
 #. (para)
-#, fuzzy
 msgid "If you want to do a simple in-place rename of a file or folder, use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Rename...</guimenuitem></menuchoice> Enter the new name for the item and you're done."
-msgstr "Si vous faites un <action>clic droit</action> sur une révision, vous pouvez utiliser <menuchoice><guimenu>Menu contextuel</guimenu><guimenuitem>Voir le journal</guimenuitem></menuchoice> pour voir l'historique."
+msgstr "Si vous voulez faire un simplement renommer un fichier ou un dossier, utilisez <menuchoice><guimenu>Menu contextuel</ guimenu><guimenuitem>Renommer...</ guimenuitem></ menuchoice> Entrez le nouveau nom de l'objet et vous avez terminé."
 
 #. (para)
 msgid "select the files or directories you want to move"
@@ -5494,18 +5482,16 @@ msgid "in the popup menu select <menuchoice><guimenu>Context Menu</guimenu><guim
 msgstr "Dans le menu qui apparaît, sélectionnez <menuchoice><guimenu>Menu contextuel</guimenu><guimenuitem>SVN Déplacer les fichiers dans Subversion ici</guimenuitem></menuchoice>"
 
 #. (para)
-#, fuzzy
 msgid "If you want to move files around inside your working copy, perhaps to a different sub-folder, use the right-mouse drag-and-drop handler: <placeholder-1/>"
-msgstr "Si vous voulez déplacer des fichiers à l'intérieur d'une copie de travail, utilisez une nouvelle fois le glisser-déplacer : <placeholder-1/>"
+msgstr "Si vous voulez déplacer des fichiers à l'intérieur d'une copie de travail, peut-être vers un différent sous-répertoire, utilisez une nouvelle fois le glisser-déplacer : <placeholder-1/>"
 
 #. (title)
 msgid "Commit the parent folder"
 msgstr "Livrez le répertoire parent"
 
 #. (para)
-#, fuzzy
 msgid "Since renames and moves are done as a delete followed by an add you must commit the parent folder of the renamed/moved file so that the deleted part of the rename/move will show up in the commit dialog. If you don't commit the removed part of the rename/move, it will stay behind in the repository and when your co-workers update, the old file will not be removed. i.e. they will have <emphasis>both</emphasis> the old and the new copies."
-msgstr "Puisque les renommages et les déplacements sont gérés comme une suppression suivie d'un ajout vous devez livrer le dossier parent du fichier renommé/déplacé pour que la partie supprimée du renommage/déplacement apparaisse dans la boîte de dialogue Livrer. Si vous ne livrez pas la partie supprimée du renommage/déplacement, il restera dans le référentiel et une mise à jour par vos collègues ne supprimera pas le vieux fichier. C'est-à-dire qu'ils auront <emphasis>tant</emphasis> les vieilles que les nouvelles copies."
+msgstr "Puisque les renommages et les déplacements sont gérés comme une suppression suivie d'un ajout vous devez livrer le dossier parent du fichier renommé/déplacé pour que la partie supprimée du renommage/déplacement apparaisse dans la boîte de dialogue Livrer. Si vous ne livrez pas la partie supprimée du renommage/déplacement, il restera dans le référentiel et une mise à jour par vos collègues ne supprimera pas le vieux fichier. C'est-à-dire qu'ils auront <emphasis>les deux</emphasis>, les vieilles et les nouvelles copies."
 
 #. (para)
 msgid "You <emphasis>must</emphasis> commit a folder rename before changing any of the files inside the folder, otherwise your working copy can get really messed up."
@@ -5513,12 +5499,11 @@ msgstr "Vous <emphasis>devez</emphasis> livrer un renommage de dossier avant de 
 
 #. (para)
 msgid "Another way of moving or copying files is to use the Windows copy/cut commands. Select the files you want to copy, right-click and choose <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Copy</guimenuitem></menuchoice> from the explorer context menu. Then browse to the target folder, right-click and choose <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Paste</guimenuitem></menuchoice>. For moving files, choose <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Cut</guimenuitem></menuchoice> instead of <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Copy</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "Une autre manière de déplacer ou copier des fichiers est d'utiliser les commandes Windows copier/couper. Sélectionnez les fichiers que vous souhaitez copier, faites un clic droit et choisissez <menuchoice><guimenu>Menu contextuel</guimenu><guimenuitem>Copier</guimenuitem></menuchoice> dans le menu contextuel de l'explorateur. Ensuite allez dans le dossier cible, faites un clique droit et choisissez <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Coller</guimenuitem></menuchoice>. Pour déplacer des fichiers, choisissez <menuchoice><guimenu>Menu contextuel</guimenu><guimenuitem>Couper</guimenuitem></menuchoice> au lieu de <menuchoice><guimenu>Menu contextuel</guimenu><guimenuitem>Copier</guimenuitem></menuchoice>."
 
 #. (para)
-#, fuzzy
 msgid "You can also use the repository browser to move items around. Read <xref linkend=\"tsvn-dug-repobrowser\"/> to find out more."
-msgstr "Il peut aussi s'intégrer à certains explorateurs de référentiel en ligne.  Lisez <xref linkend=\"tsvn-dug-repoviewer\"/> pour plus d'informations."
+msgstr "Vous pouvez aussi utiliser le navigateur du référentiel pour déplacer des éléments. <xref Lire linkend=\"tsvn-dug-repobrowser\"/> pour en savoir plus."
 
 #. (title)
 msgid "Do Not SVN Move Externals"
