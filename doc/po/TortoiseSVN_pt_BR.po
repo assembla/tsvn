@@ -10,13 +10,14 @@
 #
 # Authors:
 # Rafael M. Heise rmheise@gmail.com
+# Rafael F. M. Mores rafael.mores@gmail.com
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-12-13 09:34 +0000\n"
-"PO-Revision-Date: 2009-12-14 21:38-0300\n"
-"Last-Translator: Rafael M. Heise <rmheise@gmail.com>\n"
+"PO-Revision-Date: 2009-12-19 07:18-0300\n"
+"Last-Translator: Rafael Fernandes Maia Mores <rafael.mores@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3179,7 +3180,7 @@ msgstr ""
 
 #. (title)
 msgid "Update Your Working Copy With Changes From Others"
-msgstr ""
+msgstr "Atualizar sua Cópia de Trabalho com mudanças feitas por outros"
 
 #. (primary)
 #. (primary)
@@ -3192,11 +3193,11 @@ msgstr "buscar mudanças"
 
 #. (title)
 msgid "Progress dialog showing finished update"
-msgstr ""
+msgstr "Janela de progresso mostrando atualização terminada"
 
 #. (para)
 msgid "<placeholder-1/> Periodically, you should ensure that changes done by others get incorporated in your local working copy. The process of getting changes from the server to your local copy is known as <emphasis>updating</emphasis>. Updating may be done on single files, a set of selected files, or recursively on entire directory hierarchies. To update, select the files and/or directories you want, <action>right click</action> and select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice> in the explorer context menu. A window will pop up displaying the progress of the update as it runs. Changes done by others will be merged into your files, keeping any changes you may have done to the same files. The repository is <emphasis>not</emphasis> affected by an update."
-msgstr ""
+msgstr "<placeholder-1/> Periodicamente, você deve garantir que mudanças feitas por outros sejam incorporadas na sua cópia de trabalho. O processo de pegar as mudanças do servidor para sua cópia local é conhecido como <emphasis>atualização</emphasis>. A atualização pode ser feita em arquivos, uma seleção de arquivos, ou recursivamente na herarquia inteira de diretórios. Para atualizar, selecione os arquivos e/ou diretórios que quiser, <action>clique com o botão direito</action> e selecione <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Atualizar</guimenuitem></menuchoice> no menu de contexto do explorer. Uma janela aparecerá mostrando o progresso da atualização em tempo real. As mudanças feitas por outros serão consolidadas com seus arquivos, mantendo quaisquer mudanças que você possa ter feito nos mesmos arquivos. O repositório <emphasis>não</emphasis> é afetado por uma atualização."
 
 #. (para)
 msgid "New item added to your WC."
@@ -3204,7 +3205,7 @@ msgstr "Novo item adicionado à CT."
 
 #. (para)
 msgid "Redundant item deleted from your WC, or missing item replaced in your WC."
-msgstr ""
+msgstr "Item redundante apagado da sua CT, ou item substituído na sua CT."
 
 #. (term)
 #. (term)
@@ -3213,7 +3214,7 @@ msgstr "Verde"
 
 #. (para)
 msgid "Changes from repository successfully merged with your local changes."
-msgstr ""
+msgstr "Mudanças no repositório consolidadas com suas mudanças locais com sucesso"
 
 #. (term)
 #. (term)
@@ -3222,39 +3223,39 @@ msgstr "Vermelho vivo"
 
 #. (para)
 msgid "Changes from repository merged with local changes, resulting in conflicts which you need to resolve."
-msgstr ""
+msgstr "Mudanças no repositório consolidadas com mudanças locais, resultando em conflitos que você precisa resolver."
 
 #. (para)
 msgid "Unchanged item in your WC updated with newer version from the repository."
-msgstr ""
+msgstr "Item inalterado em sua CT atualizado com nova versão do repositório."
 
 #. (para)
 msgid "The progress dialog uses colour coding to highlight different update actions <placeholder-1/>"
-msgstr ""
+msgstr "A janela de progresso faz uso de código de cores para sublinhar diferentes ações de atualização <placeholder-1/>"
 
 #. (para)
 msgid "If you get any <emphasis>conflicts</emphasis> during an update (this can happen if others changed the same lines in the same file as you did and those changes don't match) then the dialog shows those conflicts in red. You can <action>double click</action> on these lines to start the external merge tool to resolve the conflicts."
-msgstr ""
+msgstr "Se você receber quaisquer <emphasis>conflitos</emphasis> durante uma atualização (isso pode acontecer se outras pessoas alteraram as mesmas linhas no mesmo arquivo que você e essas mudanças não são compatíveis) então a janela mostra esses conflitos em vermelho. Você pode efetuar um <action>clique duplo</action> nessas linhas para começar a ferramenta consolidação externa para resolver esses conflitos."
 
 #. (para)
 msgid "When the update is complete, the progress dialog shows a summary of the number of items updated, added, removed, conflicted, etc. below the file list. This summary information can be copied to the clipboard using <keycap>Ctrl+C</keycap>."
-msgstr ""
+msgstr "Quando a atualização estiver completa, a janela de progresso mostrará um sumário do número de itens atualizados, adicionados, removidos, em conflito, etc. abaixo da lista de arquivos. Esta informação pode ser copiada para a área de transferência usando <keycap>Ctrl+C</keycap>."
 
 #. (para)
 msgid "The standard Update command has no options and just updates your working copy to the HEAD revision of the repository, which is the most common use case. If you want more control over the update process, you should use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to Revision...</guimenuitem></menuchoice> instead. This allows you to update your working copy to a specific revision, not only to the most recent one. Suppose your working copy is at revision 100, but you want it to reflect the state which it had in revision 50 - then simply update to revision 50. In the same dialog you can also choose the <firstterm>depth</firstterm> at which to update the current folder. The terms used are described in <xref linkend=\"tsvn-dug-checkout-depth\"/>. The default depth is <guilabel>Working copy</guilabel>, which preserves the existing depth setting. You can also choose whether to ignore any external projects in the update (i.e. projects referenced using <literal>svn:externals</literal>)."
-msgstr ""
+msgstr "O Comando de Atualização padrão não possui opções e simplesmente atualizada sua cópia de trabalho para a revisão HEAD do repositório,que é o uso de caso mais comum. Se você deseja mais controle sobre o processo de atualização, você deve usar <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Atualizar para revisão...</guimenuitem></menuchoice> ao invés. Isto permite que você atualize sua cópia de trabalho para uma revisão específica, não somente a mais recente. Suponha que sua cópia de trabalho está na revisão 100, mas você deseja refletir o estado que tinha na revisão 50 - então simplesmente atualize para a revisão 50. Na mesma janela você pode ainda escolher a <firstterm>profundidade</firstterm> na qual atualizar a pasta atual. Os termos usados estão descritos em <xref linkend=\"tsvn-dug-checkout-depth\"/>. A profundidade padrão é <guilabel>Cópia de trabalho</guilabel>, que preserva a configuração de profundidade existente. Você pode também escolher entre ignorar quaisquer projetos externos nesta atualização (ex: projetos referenciados usando <literal>svn:externals</literal>)."
 
 #. (para)
 msgid "If you update a file or folder to a specific revision, you should not make changes to those files. You will get <quote>out of date</quote> error messages when you try to commit them! If you want to undo changes to a file and start afresh from an earlier revision, you can rollback to a previous revision from the revision log dialog. Take a look at <xref linkend=\"tsvn-howto-rollback\"/> for further instructions, and alternative methods."
-msgstr ""
+msgstr "Se você atualizar um arquivo ou pasta para uma versõa específica, você não deve fazer mudanças nesses arquivos. Você receberá mensagens de erro do tipo <quote>desatualizados</quote> quando tentar submetê-las! Se você quiser desfazer mudanças feitas em um arquivo e começar novamente de uma versão anterior, você pode reverter para uma versão anterior a partir da janela de log de revisões. Dê uma olhada em <xref linkend=\"tsvn-howto-rollback\"/> para mais instruções, e métodos alternativos."
 
 #. (para)
 msgid "<menuchoice><guimenuitem>Update to Revision</guimenuitem></menuchoice> can occasionally be useful to see what your project looked like at some earlier point in its history. But in general, updating individual files to an earlier revision is not a good idea as it leaves your working copy in an inconsistent state. If the file you are updating has changed name, you may even find that the file just disappears from your working copy because no file of that name existed in the earlier revision. You should also note that the item will show a normal green overlay, so it is indistinguishable from files which are up-to-date."
-msgstr ""
+msgstr "<menuchoice><guimenuitem>Atualizar para Revisão</guimenuitem></menuchoice> pode ser ocasionalmente útil para ver como seu projeto parecia em um momento anterior de sua história. Mas de modo geral, atualizar arquivos individualmente para uma versão anterior não é uma boa idéia porque deixa sua cópia de trabalho em estado inconsistente. Se o arquivo que você está atualizando mudou de nome, você pode até descobrir que o arquivo simplesmente desaparece da sua cópia de trabalho porque não havia arquivo com aquele nome na revisão anterior. Você também deve notar que o item terá umrevestimento verde normal, para que seja indistinguível dos arquivos que estão atualizados com a última versão."
 
 #. (para)
 msgid "If you simply want a local copy of an old version of a file it is better to use the <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Save revision to...</guimenuitem></menuchoice> command from the log dialog for that file."
-msgstr ""
+msgstr "Se você simplesmente quer uma cópia local de uma versão anterior de um arquivo é melhor usar o comando <menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Salvar revisão para...</guimenuitem></menuchoice> a partir da janela de log daquele arquivo."
 
 #. (title)
 msgid "Multiple Files/Folders"
@@ -3262,7 +3263,7 @@ msgstr "Múltiplos Arquivos/Diretórios"
 
 #. (para)
 msgid "If you select multiple files and folders in the explorer and then select <menuchoice><guimenuitem>Update</guimenuitem></menuchoice>, all of those files/folders are updated one by one. TortoiseSVN makes sure that all files/folders which are from the same repository are updated to the exact same revision! Even if between those updates another commit occurred."
-msgstr ""
+msgstr "Se você selecionar múltiplos arquivos e pastas no explorer e depois selecionar <menuchoice><guimenuitem>Atualizar</guimenuitem></menuchoice>, todos estes arquivos/pastas serão atualizados um a um. O TortoiseSVN garantirá que todos arquivos/pastas que são do mesmo repositório serão atualizados para a mesma revisão! Mesmo se entre estas atualizações uma outra submissão tenha ocorrido."
 
 #. (title)
 msgid "Local File Already Exists"
@@ -3270,15 +3271,15 @@ msgstr "Arquivo Já Existe Localmente"
 
 #. (para)
 msgid "Sometimes when you try to update, the update fails with a message to say that there is already a local file of the same name. This typically happens when Subversion tries to checkout a newly versioned file, and finds that an unversioned file of the same name already exists in your working folder. Subversion will never overwrite an unversioned file - it might contain something you are working on, which coincidentally has the same filename as another developer has used for his newly committed file."
-msgstr ""
+msgstr "Algumas vezes quando você tenta atualizar, a atualização falha com uma mensagem dizendo que já existe um arquivo local de mesmo nome. Isto típicamente acontece quando o Subversion tenta baixar um arquivo que acabou de ser versionado, e desobre que um arquivo não versionado de mesmo nome já existe na sua pasta de trabalho. O Subversion nunca irá sobrescrever um arquivo não versionado - ele pode conter algo que você está trabalhando, que conhecidentemente tem o mesmo nome que outro desenvolvedor usou para seu novo arquivo submetido."
 
 #. (para)
 msgid "If you get this error message, the solution is simply to rename the local unversioned file. After completing the update, you can check whether the renamed file is still needed."
-msgstr ""
+msgstr "Se você receber esta mensagem de erro, a solução é simplesmente renomear o arquivo local não versionado. Após completar a atualização, você pode verificar se o arquivo renomeado ainda é necessário."
 
 #. (para)
 msgid "If you keep getting error messages, use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Check for Modifications</guimenuitem></menuchoice> instead to list all the problem files. That way you can deal with them all at once."
-msgstr ""
+msgstr "Se você ainda está recebendo mensagens de erro, use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verificar por Modificações</guimenuitem></menuchoice> ao invés de listar todos os arquivos com problema. Desta maneira você poderá lidar com todos eles ao mesmo tempo."
 
 #. (title)
 msgid "Resolving Conflicts"
@@ -3624,7 +3625,7 @@ msgstr ""
 
 #. (title)
 msgid "Getting Status Information"
-msgstr ""
+msgstr "Obtendo Informações de Estado"
 
 #. (primary)
 #. (primary)
@@ -3641,7 +3642,7 @@ msgstr "situação da cópia de trabalho"
 
 #. (para)
 msgid "While you are working on your working copy you often need to know which files you have changed/added/removed or renamed, or even which files got changed and committed by others."
-msgstr ""
+msgstr "Enquanto você estiver trabalhando na sua cópia de trabalho você frequentemente precisa saber quais arquivos foram alterados/adicionados/removidos ou renomeados, ou ainda quais arquivos foram alterados por outros."
 
 #. (primary)
 #. (primary)
@@ -3654,83 +3655,84 @@ msgstr "ícones"
 
 #. (para)
 msgid "Now that you have checked out a working copy from a Subversion repository you can see your files in the windows explorer with changed icons. This is one of the reasons why TortoiseSVN is so popular. TortoiseSVN adds a so called overlay icon to each file icon which overlaps the original file icon. Depending on the Subversion status of the file the overlay icon is different."
-msgstr ""
+msgstr "Agora que você obteve uma cópia de trabalho do repositório Subversion você pode ver seus arquivos no windows explorer com ícones modificados. Esta é uma das razões para que o TortoiseSVN seja tão popular. O TortoiseSVN adiciona um ícone de revestimento sobre o ícone de cada arquivo. Dependendo do status do arquivo no Subversion o revestimento é diferente."
 
 #. (para)
 msgid "<graphic fileref=\"../images/InSubVersionIcon.png\"/> A fresh checked out working copy has a green checkmark as overlay. That means the Subversion status is <emphasis>normal</emphasis>."
-msgstr ""
+msgstr "<graphic fileref=\"../images/InSubVersionIcon.png\"/> Uma cópia de trabalho recém obtida possui uma camada contendo uma marca verde. Isto significa que o estado é <emphasis>normal</emphasis>."
 
 #. (para)
 msgid "<graphic fileref=\"../images/ModifiedIcon.png\"/> As soon as you start editing a file, the status changes to <emphasis>modified</emphasis> and the icon overlay then changes to a red exclamation mark. That way you can easily see which files were changed since you last updated your working copy and need to be committed."
-msgstr ""
+msgstr "<graphic fileref=\"../images/ModifiedIcon.png\"/> Assim que você começar a editar um arquivo, o estado muda para <emphasis>modificado</emphasis> e a camada de revestimento então muda para um ponto de exclamação vermelho. Dessa maneira você pode facilmente ver quais arquivos foram alterados desde que você atualizou sua cópia de trabalho e que precisam ser submetidos."
 
 #. (para)
 msgid "<graphic fileref=\"../images/ConflictIcon.png\"/> If during an update a <emphasis>conflict</emphasis> occurs then the icon changes to a yellow exclamation mark."
-msgstr ""
+msgstr "<graphic fileref=\"../images/ConflictIcon.png\"/> Se durante uma atualização ocorrer um <emphasis>conflito</emphasis> então o ícone muda para um ponto de exclamação amarelo."
 
 #. (para)
 msgid "<graphic fileref=\"../images/ReadOnlyIcon.png\"/> If you have set the <literal>svn:needs-lock</literal> property on a file, Subversion makes that file read-only until you get a lock on that file. Such files have this overlay to indicate that you have to get a lock first before you can edit that file."
-msgstr ""
+msgstr "<graphic fileref=\"../images/ReadOnlyIcon.png\"/> Se você marcou a propriedade <literal>svn:needs-lock</literal> em um arquivo, o Subversion faz com que aquele arquivo se torne somente-leitura até que você obtenha uma trava naquele arquivo. Tais arquivos tem este revestimento para indicar que você precisa obter uma trava antes que você possa editar aquele arquivo."
 
 #. (para)
 msgid "<graphic fileref=\"../images/LockedIcon.png\"/> If you hold a lock on a file, and the Subversion status is <emphasis>normal</emphasis>, this icon overlay reminds you that you should release the lock if you are not using it to allow others to commit their changes to the file."
-msgstr ""
+msgstr "<graphic fileref=\"../images/LockedIcon.png\"/> Se você mantém uma trava em um arquivo, e o estado do Subversion é <emphasis>normal</emphasis>, o revestimento do ícone lembra você de que você deve liberar a trava se não estiver usando-o para permitir que outros possam submeter suas mudanças para quele arquivo."
 
 #. (para)
 msgid "<graphic fileref=\"../images/DeletedIcon.png\"/> This icon shows you that some files or folders inside the current folder have been scheduled to be <emphasis>deleted</emphasis> from version control or a file under version control is missing in a folder."
-msgstr ""
+msgstr "<graphic fileref=\"../images/DeletedIcon.png\"/> Este ícone mostra a você que alguns arquivos ou pastas dentro da pasta atual foram agendados para serem <emphasis>deletados</emphasis> do controle de versionamento ou um arquivo dentro do controle de versionamento está faltando em uma pasta."
 
 #. (para)
 msgid "<graphic fileref=\"../images/AddedIcon.png\"/> The plus sign tells you that a file or folder has been scheduled to be <emphasis>added</emphasis> to version control."
-msgstr ""
+msgstr "<graphic fileref=\"../images/AddedIcon.png\"/> O sinal de mais significa que um arquivo ou pasta foi agendado para ser <emphasis>addicionado</emphasis> ao controle de versões."
 
 #. (para)
 msgid "<graphic fileref=\"../images/IgnoredIcon.png\"/> The bar sign tells you that a file or folder is <emphasis>ignored</emphasis> for version control purposes. This overlay is optional."
-msgstr ""
+msgstr "<graphic fileref=\"../images/IgnoredIcon.png\"/> O sinal de barra lhe diz que um arquivo ou pasta é <emphasis>ignorado</emphasis> do controle de versões. Esse revestimento é opcional."
 
 #. (para)
 msgid "<graphic fileref=\"../images/UnversionedIcon.png\"/> This icon shows files and folders which are not under version control, but have not been ignored. This overlay is optional."
-msgstr ""
+msgstr "<graphic fileref=\"../images/UnversionedIcon.png\"/> Este ícone mostra arquivos e pastas que não estão sob o controle de versionamento, mas não foram ignorados. Este revestimento é opcional."
 
 #. (para)
 msgid "In fact, you may find that not all of these icons are used on your system. This is because the number of overlays allowed by Windows is very limited and if you are also using an old version of TortoiseCVS, then there are not enough overlay slots available. TortoiseSVN tries to be a <quote>Good Citizen (TM)</quote> and limits its use of overlays to give other apps a chance too."
-msgstr ""
+msgstr "De fato, você pode descobrir que nem todos estes ícones são usados em seu sistema. Isto é porque o número de camadas permitidas pelo Windows é bem limitado e se você também estiver usando uma versão antiga do TortoiseCVS, então não haverá espaço suficiente. O TortoiseSVN tenta ser um <quote>Good Citizen (TM) - Bom Cidadão</quote> e limita seu uso de camadas para dar outros aplicativos uma chance também."
 
 #. (para)
 msgid "Now that there are more Tortoise clients around (TortoiseCVS, TortoiseHG, ...) the icon limit becomes a real problem. To work around this, the TortoiseSVN project introduced a common shared icon set, loaded as a DLL, which can be used by all Tortoise clients. Check with your client provider to see if this has been integrated yet :-)"
-msgstr ""
+msgstr "Agora que existem mais clientes Tortoise (TortoiseCVS, TortoiseHG, ...) o limite de ícones se torna um problema real. Para contornar este problema, o projeto TortoiseSVN introduziu um conjunto compartilhado comum de ícones, carregado como uma DLL, que pode ser usada por todos os clientes Tortoise. Verifique com o fornecedor do seu cliente para verificar se isto já foi integrado à ele :-)"
 
 #. (para)
 msgid "For a description of how icon overlays correspond to Subversion status and other technical details, read <xref linkend=\"tsvn-app-internals-overlays\"/>."
-msgstr ""
+msgstr "Para uma descrição de como as camadas de ícones correspondem ao estado do Subversion e outros detalhes técnicos, leia <xref linkend=\"tsvn-app-internals-overlays\"/>."
 
 #. (title)
 msgid "TortoiseSVN Columns In Windows Explorer"
-msgstr ""
+msgstr "Colunas do TortoiseSVN no Windows Explorer"
 
 #. (primary)
+#, fuzzy
 msgid "Explorer Columns"
-msgstr ""
+msgstr "Colunas do Explorer"
 
 #. (para)
 msgid "The same information which is available from the icon overlays (and much more) can be displayed as additional columns in Windows Explorer's Details View."
-msgstr ""
+msgstr "A mesma informação que está disponível das camadas de ícones (e muito mais) pode ser exibida como colunas adicionais na Visualização em Detalhes do Windows Explorer."
 
 #. (para)
 msgid "Simply right click on one of the headings of a column, choose <guimenuitem>More...</guimenuitem> from the context menu displayed. A dialog will appear where you can specify the columns and their order, which is displayed in the <quote>Detailed View</quote>. Scroll down until the entries starting with SVN come into view. Check the ones you would like to have displayed and close the dialog by pressing <guibutton>OK</guibutton>. The columns will be appended to the right of those currently displayed. You can reorder them by drag and drop, or resize them, so that they fit your needs."
-msgstr ""
+msgstr "Simplesmente clique com o botão direito em um dos títulos de uma coluna, e escolha <guimenuitem>Mais...</guimenuitem> do menu de contexto mostrado. Uma janela aparecerá onde você pode especificar as colunas e sua ordem, que é mostrada na <quote>Visualização em Detalhes</quote>. Role para baixo até que as entradas começando com SVN comecem a aparecer. Marque aquelas que você gostaria de ver e feche a janela pressionando <guibutton>OK</guibutton>. As colunas serão concatenadas à direita daquelas já exibidas. Você pode reordená-las arrastando e soltando-as, ou redimensioná-las, para que encaixem às suas necessidades."
 
 #. (para)
 msgid "The additional columns in the Windows Explorer are not available on Vista, since Microsoft decided to not allow such columns for <emphasis>all</emphasis> files anymore but only for specific file types."
-msgstr ""
+msgstr "As colunas adicionais no Windows Explorer não estão disponíveis no Vista, já que a Microsoft decidiu não permitir tais colunas para <emphasis>todos</emphasis> os arquivos mas somente para tipos de arquivo específicos."
 
 #. (para)
 msgid "If you want the current layout to be displayed in all your working copies, you may want to make this the default view."
-msgstr ""
+msgstr "Se você deseja que o layout atual seja exibido em todas suas cópias de trabalho, você pode querer definir este como a visualização padrão."
 
 #. (title)
 msgid "Local and Remote Status"
-msgstr ""
+msgstr "Estado Local e Remoto"
 
 #. (primary)
 msgid "modifications"
@@ -3743,11 +3745,11 @@ msgstr "Procurar por Modificações"
 
 #. (para)
 msgid "<placeholder-1/> It's often very useful to know which files you have changed and also which files got changed and committed by others. That's where the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Check For Modifications...</guimenuitem></menuchoice> comes in handy. This dialog will show you every file that has changed in any way in your working copy, as well as any unversioned files you may have."
-msgstr ""
+msgstr "<placeholder-1/> É frequentemente muito útil saber quais arquivos você alterou e também quais arquivos foram alterados e submetidos por outros. É aí que o comando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verificar por Modificações...</guimenuitem></menuchoice> se torna útil. Esta janela lhe mostrará cada arquivo que foi alterado de qualquer maneira dentro da sua cópia de tabalho, assim como quaisquer arquivos não-versionados que você possa possuir."
 
 #. (para)
 msgid "If you click on the <guibutton>Check Repository</guibutton> then you can also look for changes in the repository. That way you can check before an update if there's a possible conflict. You can also update selected files from the repository without updating the whole folder. By default, the <guibutton>Check Repository</guibutton> button only fetches the remote status with the checkout depth of the working copy. If you want to see all files and folders in the repository, even those you have not checked out, then you have to hold down the <keycap>Shift</keycap> key when you click on the <guibutton>Check Repository</guibutton> button."
-msgstr ""
+msgstr "Se você clicar no botão <guibutton>Verificar Repositório</guibutton> então você também pode olhar as mudanças no repositório. Dessa maneira você pode checar antes de uma atualização se pode haver um possível conflito. Você também pode atualizar arquivos selecionados do repositório sem atualizar toda a pasta. Por padrão, o botão <guibutton>Verificar Repositório</guibutton> somente busca o estado remoto com a profundidade de obtenção da sua cópia de trabalho. Se você deseja ver todos os arquivos e pastas no repositório, mesmo aquelas que você não obteve, então você deve manter pressionada a tecla <keycap>Shift</keycap> quando clicar no botão <guibutton>Verificar Repositório</guibutton>."
 
 #. (para)
 msgid "Locally modified items."
@@ -3755,7 +3757,7 @@ msgstr "Itens modificados localmente."
 
 #. (para)
 msgid "Added items. Items which have been added with history have a <literal>+</literal> sign in the <guilabel>Text status</guilabel> column, and a tooltip shows where the item was copied from."
-msgstr ""
+msgstr "Itens adicionados. Itens que foram adicionados com histórico tem um sinal <literal>+</literal> na coluna de <guilabel>Estado de Texto</guilabel>, e uma janela mostra de onde o item foi copiado."
 
 #. (para)
 msgid "Deleted or missing items."
@@ -3763,11 +3765,11 @@ msgstr "Itens excluídos ou perdidos."
 
 #. (para)
 msgid "Items modified locally and in the repository. The changes will be merged on update. These <emphasis>may</emphasis> produce conflicts on update."
-msgstr ""
+msgstr "Itens modificados localmente e no repositório. As mudanças serão juntadas ao atualizar. Isto <emphasis>pode</emphasis> produzir conflitos ao atualizar."
 
 #. (para)
 msgid "Items modified locally and deleted in repository, or modified in repository and deleted locally. These <emphasis>will</emphasis> produce conflicts on update."
-msgstr ""
+msgstr "Itens modificados localmente e apagados no repositório, ou modificados no repositório e apagados localmente. Isto <emphasis>irá</emphasis> produzir conflitos durante a atualização."
 
 #. (para)
 msgid "Unchanged and unversioned items."
@@ -3775,39 +3777,41 @@ msgstr "Itens não modificados ou não controlados."
 
 #. (para)
 msgid "The dialog uses colour coding to highlight the status. <placeholder-1/>"
-msgstr ""
+msgstr "A janela usa codificação de cores para demarcar o estado. <placeholder-1/>"
 
 #. (para)
 msgid "From the context menu of the dialog you can show a diff of the changes. Check the local changes <emphasis>you</emphasis> made using <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Compare with Base</guimenuitem></menuchoice>. Check the changes in the repository made by others using <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Show Differences as Unified Diff</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "Do menu de contexto da janela você pode ver um diff de mudanças. Marque as mudanças localis que <emphasis>você</emphasis> fez usando <menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Comparar com Base</guimenuitem></menuchoice>. Marque as mudanças no repositório feitas por outros usando <menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Mostrar Diferenças como Diff Unificado</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "You can also revert changes in individual files. If you have deleted a file accidentally, it will show up as <emphasis>Missing</emphasis> and you can use <emphasis>Revert</emphasis> to recover it."
-msgstr ""
+msgstr "Você também pode reverter as mudanças em arquivos individuais. Se você apagou um arquivo acidentalmente, ele aparecerá como <emphasis>Faltando</emphasis> e você pode usar <emphasis>Reverter</emphasis> para recuperá-lo."
 
 #. (para)
 msgid "Unversioned and ignored files can be sent to the recycle bin from here using <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Delete</guimenuitem></menuchoice>. If you want to delete files permanently (bypassing the recycle bin) hold the <keycap>Shift</keycap> key while clicking on <guilabel>Delete</guilabel>."
-msgstr ""
+msgstr "Arquivos não-versionados e ignorados podem ser enviados para a lixeira daqui usando <menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Apagar</guimenuitem></menuchoice>. Se você deseja apagar arquivos permanentemente (ignorando a lixeira) matenha pressionada a tecla <keycap>Shift</keycap> enquanto cliclar em <guilabel>Apagar</guilabel>."
 
 #. (para)
 msgid "If you want to examine a file in detail, you can drag it from here into another application such as a text editor or IDE."
-msgstr ""
+msgstr "Se você deseja examinar o arquivo em detalhes, você pode arrastá-lo daqui para um outro aplicativo como um editor de texto ou uma IDE."
 
+# headings não está claro para mim
 #. (para)
+#, fuzzy
 msgid "The columns are customizable. If you <action>right click</action> on any column header you will see a context menu allowing you to select which columns are displayed. You can also change column width by using the drag handle which appears when you move the mouse over a column boundary. These customizations are preserved, so you will see the same headings next time."
-msgstr ""
+msgstr "As colunas são personalizáveis. Se você <action>clicar com o botão direito</action> em qualquer cabeçalho de coluna você verá um menu de contexto permitindo-o selecionar quais colunas serão exibidas. Você pode também alterar a largura das colunas usando o ícone de arrastar que aparece quando você passa o mouse em cima de uma borda de coluna. Essas personalizações  são preservadas, então você verá os mesmos títulos da próxima vez."
 
 #. (para)
 msgid "If you are working on several unrelated tasks at once, you can also group files together into changelists. Read <xref linkend=\"tsvn-dug-commit-changelists\"/> for more information."
-msgstr ""
+msgstr "Se você está trabalhando em diversas tarefas independentes ao mesmo tempo, você pode também agrupar arquivos em changelists. Leia <xref linkend=\"tsvn-dug-commit-changelists\"/> para maiores informações."
 
 #. (para)
 msgid "At the bottom of the dialog you can see a summary of the range of repository revisions in use in your working copy. These are the <emphasis>commit</emphasis> revisions, not the <emphasis>update</emphasis> revisions; they represent the range of revisions where these files were last committed, not the revisions to which they have been updated. Note that the revision range shown applies only to the items displayed, not to the entire working copy. If you want to see that information for the whole working copy you must check the <guilabel>Show unmodified files</guilabel> checkbox."
-msgstr ""
+msgstr "Na parte inferior da janela você pode ver um sumário da variação das revisões do repositório em uso na sua cópia de trabalho. Essas são as revisões <emphasis>submetidas</emphasis>, não as revisões <emphasis>atualizadas</emphasis>; elas representam a variação das revisões onde estes arquivos foram submetidos pela última vez, não as revisões nas quais foram atualizados. Note que a variação de revisões mostrada aplica-se somente aos itens exibidos, não à cópia de trabalho inteira. Se você deseja ver informações sobre a cópia de trabalho inteira você deve marcar a caixa <guilabel>Mostrar arquivos não modificados</guilabel>."
 
 #. (para)
 msgid "If you want a flat view of your working copy, i.e. showing all files and folders at every level of the folder hierarchy, then the <guilabel>Check for Modifications</guilabel> dialog is the easiest way to achieve that. Just check the <guilabel>Show unmodified files</guilabel> checkbox to show all files in your working copy."
-msgstr ""
+msgstr "Se você deseja uma exibição simples da sua cópia de tabalho, p. ex. mostrando todos os arquivos e pastas em cada nível da hierarquia de pastas, então a janela <guilabel>Verificar por Modificações</guilabel> é a maneira mais fácil de conseguir isso. Simplesmente marque a caixa <guilabel>Mostrar arquivos não modificados</guilabel> para mostrar todos os arquivos na sua cópia de trabalho."
 
 #. (title)
 msgid "Viewing Diffs"
@@ -3819,15 +3823,15 @@ msgstr "gerando diferenças"
 
 #. (para)
 msgid "Often you want to look inside your files, to have a look at what you've changed. You can accomplish this by selecting a file which has changed, and selecting <guimenuitem>Diff</guimenuitem> from TortoiseSVN's context menu. This starts the external diff-viewer, which will then compare the current file with the pristine copy (<literal>BASE</literal> revision), which was stored after the last checkout or update."
-msgstr ""
+msgstr "Frequentemente você deseja olhar dentro de seus arquivos, para observar o que foi alterado. Você pode fazê-lo selecionando o arquivo que foi alterado, e selecionando <guimenuitem>Diff</guimenuitem> do menu de contexto do TortoiseSVN. Isto inicia o visualizador-diff externo, que irá então comparar o arquivo atual com a cópia pristina ( revisão <literal>BASE</literal>), que foi armazenada após a última submissão ou atualização."
 
 #. (para)
 msgid "Even when not inside a working copy or when you have multiple versions of the file lying around, you can still display diffs:"
-msgstr ""
+msgstr "Mesmo quando não não se está dentro de uma cópia de trabalho ou quando você tiver múltiplas versões do arquivo em disco, você ainda pode visualizar diffs:"
 
 #. (para)
 msgid "Select the two files you want to compare in explorer (e.g. using <keycap>Ctrl</keycap> and the mouse) and choose <guimenuitem>Diff</guimenuitem> from TortoiseSVN's context menu. The file clicked last (the one with the focus, i.e. the dotted rectangle) will be regarded as the later one."
-msgstr ""
+msgstr "Selecione os dois arquivos que você deseja comparar no explorer ( p. ex. usando <keycap>Ctrl</keycap> e o mouse) e escolha <guimenuitem>Diff</guimenuitem> do menu de contexto do TortoiseSVN. O arquivo clicado por último ( o que possui foco, ou seja, um retângulo pontilhado) será compreendido como o último."
 
 #. (primary)
 msgid "changelist"
@@ -3835,47 +3839,51 @@ msgstr "lista de alterações"
 
 #. (para)
 msgid "In an ideal world, you only ever work on one thing at a time, and your working copy contains only one set of logical changes. OK, back to reality. It often happens that you have to work on several unrelated tasks at once, and when you look in the commit dialog, all the changes are mixed in together. The <firstterm>changelist</firstterm> feature helps you group files together, making it easier to see what you are doing. Of course this can only work if the changes do not overlap. If two different tasks affect the same file, there is no way to separate the changes."
-msgstr ""
+msgstr "Em um mundo ideal, você sempre estará tabalhando em uma coisa de cada vez, e sua cópia de trabalho contém apenas um conjunto de alterações lógicas. OK, devolta a realidade. Frequentemente acontece que você precisa trabalhar em diversas tarefas não relacionadas ao mesmo tempo, e quando você olhar na janela de submissão, todas as mudanças estão misturadas. A funcionalidade das <firstterm>changelists</firstterm> ajuda-o a agrupar os arquivos, tornando mais fácil de ver o que você está fazendo. É claro que isto só pode acontecer se as mudanças não se sobrepuserem. Se duas tarefas diferentes afetarem o mesmo arquivo, não há outra maneira de separar as mudanças."
 
 #. (para)
 msgid "The changelist feature in TortoiseSVN is only available in Windows XP and later, as it depends on a shell capability which is not present in Windows 2000. Sorry, but Win2K is really quite old now, so please don't complain."
-msgstr ""
+msgstr "A funcionalidade das listas de alterações no TortoiseSVN está apenas disponível no Windows XP e posteriores, porque depende de uma capacidade da interface do Windows que não está presente no Windows 2000. Desculpe-nos, mas o Win2K é muito antigo hoje em dia, então por favor não reclame."
 
 #. (para)
 msgid "You can see changelists in several places, but the most important ones are the commit dialog and the check-for-modifications dialog. Let's start in the check-for-modifications dialog after you have worked on several features and many files. When you first open the dialog, all the changed files are listed together. Suppose you now want to organise things and group those files according to feature."
-msgstr ""
+msgstr "Você pode ver listas de alterações em diversos lugares, mas os mais importantes são na janela de submissão e na janela de verificação-de-modificações. Vamos começar na janela de verificação-de-modificações após você tiver trabalhado em diversas funcionalidades e muitos arquivos. Quando você abrir esta janela pela primeira vez, todos os arquivos alterados estarão listados juntos. Suponha que agora você queira organizar as coisas e agrupar os arquivos de acordo com a funcionalidade."
 
 #. (para)
 msgid "Select one or more files and use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Move to changelist</guimenuitem></menuchoice> to add an item to a changelist. Initially there will be no changelists, so the first time you do this you will create a new changelist. Give it name which describes what you are using it for, and click <guibutton>OK</guibutton>. The dialog will now change to show groups of items."
-msgstr ""
+msgstr "Selecione um ou mais arquivos e use <menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Mover para a changelist</guimenuitem></menuchoice> para adicionar um item à lista de alterações. Inicialmente não haverão listas de alterações, então a primeira vez que você fizer isto você criará uma nova changelist. Dê o nome que melhor descreve para que à está usando, e clique <guibutton>OK</guibutton>. A janela irá agora mudar para mostrar os grupos de itens."
 
 #. (para)
 msgid "Once you have created a changelist you can drag and drop items into it, either from another changelist, or from Windows Explorer. Dragging from Explorer can be useful as it allows you to add items to a changelist before the file is modified. You could do that from the check-for-modifications dialog, but only by displaying all unmodified files."
-msgstr ""
+msgstr "Uma vez que você tiver criado a lista de alterações você pode arrastar e soltar itens nela, tanto de outra lista de alterações, como do Windows Explorer. Arrastar do Explorer pode ser útil já que permite-o adicionar itens para a lista de modificações antes que o arquivo seja modificado. Você pode fazê-lo da janela de verificar-por-modificações, mas somente através da exibição de todos os arquivos não modificados."
 
 #. (title)
 msgid "Commit dialog with Changelists"
 msgstr "Janela de Submissão com Lista de Alterações"
 
+# headings?
 #. (para)
+#, fuzzy
 msgid "<placeholder-1/> In the commit dialog you can see those same files, grouped by changelist. Apart from giving an immediate visual indication of groupings, you can also use the group headings to select which files to commit."
-msgstr ""
+msgstr "<placeholder-1/> Na janela de submissão você pode ver os mesmos arquivos, agrupados por lista de alterações. Diferente de dar uma visualização indicativa imediata dos agrupamentos, você pode também usar os nomes de grupo que deseja submeter."
 
+# heading?
 #. (para)
+#, fuzzy
 msgid "On XP, there is a context menu when you right click on a group heading which gives you the choice to check or uncheck all group entries. On Vista however the context menu is not necessary. Click on the group header to select all entries, then check one of the selected entries to check all."
-msgstr ""
+msgstr "No XP, existe um menu de contexto quando você clica com o botão direito em um nome de grupo que lhe fornece uma escolha para marcar ou desmarcar todas as entradas de grupo. Entratanto no Vista o menu de contexto não é necessário. Clique no cabeçalho do grupo para selecionar todas as entradas, então marque uma das entradas selecionadas para marcar todas."
 
 #. (para)
 msgid "TortoiseSVN reserves one changelist name for its own use, namely <literal>ignore-on-commit</literal>. This is used to mark versioned files which you almost never want to commit even though they have local changes. This feature is described in <xref linkend=\"tsvn-dug-commit-ignore\"/>."
-msgstr ""
+msgstr "O TortoiseSVN reserva um nome de lista de alterações para uso pessoal, chamado de <literal>ignore-on-commit</literal>. Isto é usado para marcar arquivos versionados que você geralmente não deseja submeter mesmo que tenham mudanças locais. Esta funcionalidade está desrita em <xref linkend=\"tsvn-dug-commit-ignore\"/>."
 
 #. (para)
 msgid "When you commit files belonging to a changelist then normally you would expect that the changelist membership is no longer needed. So by default, files are removed from changelists automatically on commit. If you wish to retain the file in its changelist, use the <guilabel>Keep changelists</guilabel> checkbox at the bottom of the commit dialog."
-msgstr ""
+msgstr "Quando você submete arquivos pertencendo à uma lista de mudanças então normalmente você espera que a pertinência da lista de mudanças não seja mais necessária. Então por padrão, arquivos são removidos das listas automaticamente na submissão. Se você deseja reter o arquivo em sua lista, marque a caixa <guilabel>Guardar changelists</guilabel> na parte inferior da janela de submissão."
 
 #. (para)
 msgid "Changelists are purely a local client feature. Creating and removing changelists will not affect the repository, nor anyone else's working copy. They are simply a convenient way for you to organise your files."
-msgstr ""
+msgstr "Listas de Alterações são puramente uma funcionalidade local do cliente. Criar e remover Listas de Alterações não afetará o repositório, nem a cópia de tabalho de mais ninguém. Elas são simplesmente uma maneira conveniente para vocÇê organizar seus arquivos."
 
 #. (title)
 msgid "Revision Log Dialog"
