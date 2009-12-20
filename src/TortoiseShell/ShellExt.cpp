@@ -48,7 +48,7 @@ CShellExt::CShellExt(FileState state)
 
 	{
 		AutoLocker lock(g_csGlobalCOMGuard);
-		g_exts.Insert(this);
+		g_exts.insert(this);
 	}
 	
     INITCOMMONCONTROLSEX used = {
@@ -80,7 +80,7 @@ CShellExt::~CShellExt()
 		::DeleteObject(it->second);
 	}
 	bitmaps.clear();
-	InterlockedDecrement(g_cRefThisDll);
+	InterlockedDecrement(&g_cRefThisDll);
 	{
 		AutoLocker lock(g_csGlobalCOMGuard);
 		g_exts.erase(this);
