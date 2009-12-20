@@ -44,9 +44,12 @@ CShellExt::CShellExt(FileState state)
     m_State = state;
 
     m_cRef = 0L;
-    g_cRefThisDll++;
+	InterlockedIncrement(&g_cRefThisDll);
 
-	g_exts.insert(this);
+	{
+		AutoLocker lock(g_csGlobalCOMGuard);
+		g_exts.Insert(this);
+	}
 	
     INITCOMMONCONTROLSEX used = {
         sizeof(INITCOMMONCONTROLSEX),
@@ -77,8 +80,11 @@ CShellExt::~CShellExt()
 		::DeleteObject(it->second);
 	}
 	bitmaps.clear();
-	g_cRefThisDll--;
-	g_exts.erase(this);
+	InterlockedDecrement(g_cRefThisDll);
+	{
+		AutoLocker lock(g_csGlobalCOMGuard);
+		g_exts.erase(this);
+	}
 	if (hUxTheme)
 		FreeLibrary(hUxTheme);
 }

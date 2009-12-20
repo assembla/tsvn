@@ -22,7 +22,7 @@
 #include "ShellExtClassFactory.h"
 #include "svn_dso.h"
 
-UINT				g_cRefThisDll = 0;				///< reference count of this DLL.
+volatile LONG		g_cRefThisDll = 0;				///< reference count of this DLL.
 HINSTANCE			g_hmodThisDll = NULL;			///< handle to this DLL itself.
 int					g_cAprInit = 0;
 ShellCache			g_ShellCache;					///< caching of registry entries, ...
@@ -103,6 +103,7 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /* lpReserved */)
 		{
 			if (g_exts.size())
 			{
+				AutoLocker lock(g_csGlobalCOMGuard);
 				std::set<CShellExt *>::iterator it = g_exts.begin();
 				while (it != g_exts.end())
 				{
