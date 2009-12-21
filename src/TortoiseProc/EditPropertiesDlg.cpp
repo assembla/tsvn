@@ -425,6 +425,8 @@ void CEditPropertiesDlg::EditProps(bool bAdd /* = false*/)
 	dlg.RevProps(m_bRevProps);
 	if ( dlg.DoModal()==IDOK )
 	{
+		if(dlg.IsChanged())
+		{
 		sName = dlg.GetPropertyName();
 		if (!sName.IsEmpty())
 		{
@@ -478,6 +480,7 @@ void CEditPropertiesDlg::EditProps(bool bAdd /* = false*/)
 			}
 		}
 	}
+}
 }
 
 void CEditPropertiesDlg::OnOK()

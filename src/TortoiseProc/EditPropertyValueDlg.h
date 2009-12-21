@@ -44,6 +44,7 @@ public:
 	CString			GetPropertyName() {return m_sPropName;}
 	bool			GetRecursive() {return !!m_bRecursive;}
 	bool			IsBinary() {return m_bIsBinary;}
+	bool			IsChanged() { return m_bChanged;}
 
 	void			SetFolder() {m_bFolder = true;}
 	void			SetMultiple() {m_bMultiple = true;}
@@ -76,6 +77,7 @@ protected:
 	bool		m_bMultiple;
 	bool		m_bIsBinary;
 	bool		m_bRevProps;
+	bool		m_bChanged;
 	CTSVNPathList		m_pathList;
 	ProjectProperties	m_ProjectProperties;
 };
