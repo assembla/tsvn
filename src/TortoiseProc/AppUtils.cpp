@@ -775,6 +775,7 @@ bool CAppUtils::BrowseRepository(CHistoryCombo& combo, CWnd * pParent, SVNRev& r
 			{
 				combo.SetCurSel(-1);
 				combo.SetWindowText(browser.GetPath());
+				combo.SetFocus();
 				rev = browser.GetRevision();
 				return true;
 			}
@@ -792,6 +793,7 @@ bool CAppUtils::BrowseRepository(CHistoryCombo& combo, CWnd * pParent, SVNRev& r
 
 				combo.SetCurSel(-1);
 				combo.SetWindowText(strUrl);
+				combo.SetFocus();
 				return true;
 			}
 		}
@@ -807,10 +809,12 @@ bool CAppUtils::BrowseRepository(CHistoryCombo& combo, CWnd * pParent, SVNRev& r
 		{
 			combo.SetCurSel(-1);
 			combo.SetWindowText(browser.GetPath());
+			combo.SetFocus();
 			rev = browser.GetRevision();
 			return true;
 		}
 	}
+	combo.SetFocus();
 	return false;
 }
 
