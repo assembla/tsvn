@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2010-01-04 10:49+0100\n"
+"PO-Revision-Date: 2010-01-07 09:07+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -188,9 +188,9 @@ msgstr "%s (εκτός σύνδεσης) - %s"
 
 # ID:226,
 #. Resource IDs: (226)
-#, c-format
+#, fuzzy, c-format
 msgid "%s - at revision: %d"
-msgstr "%s - στον αριθμό αναθεώρημένης έκδοσης: %d"
+msgstr "%s - στην αναθεωρημένη έκδοση: %d"
 
 # ID:151,
 #. Resource IDs: (151)
@@ -219,9 +219,9 @@ msgstr "%s : Βασικό αντίγραφο πάνω στο οποίο δουλ
 # The Greek laguage is [[inflection|inflective]], so the ending of a word reflects [[grammatical gender]]. therefore 'sto' may not always be grammatically correct
 # ID:357,
 #. Resource IDs: (226)
-#, c-format
+#, fuzzy, c-format
 msgid "%s in %s"
-msgstr "%s μέσα στο %s"
+msgstr "%s στο %s"
 
 # The Greek laguage is [[inflection|inflective]], so the ending of a word reflects [[grammatical gender]]. therefore 'sto' may not always be grammatically correct
 # ID:357,
@@ -233,34 +233,33 @@ msgstr "%s, στο %s"
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but it already exists unversioned locally."
-msgstr ""
+msgstr "%s, αλλά υπάρχει ήδη τοπικά χωρίς έκδοση."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but it is missing locally."
-msgstr ""
+msgstr "%s, αλλά δεν υπάρχει τοπικά."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but it was already added locally."
-msgstr ""
+msgstr "%s, αλλά έχει ήδη προστεθέι τοπικά."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but it was already edited."
-msgstr ""
+msgstr "%s, αλλά έχει ήδη επεξεργαστεί."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but it was deleted, moved or renamed locally."
-msgstr ""
+msgstr "%s, αλλά έχει διαγραφεί, μετακινηθεί ή μετονομαστεί τοπικά."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but it was obstructed in the working copy."
-msgstr ""
+msgstr "%s, αλλά παρεμποδίστηκε στο αντίγραφο εργασίας."
 
-# ID:145,
 #. Resource IDs: (145)
 #, fuzzy, c-format
 msgid "%s\\Export (%d) of %s"
@@ -275,11 +274,13 @@ msgstr "Εξαγωγή %s"
 # The Greek laguage is [[inflection|inflective]], so the ending of a word reflects [[grammatical gender]]. therefore 'sto' may not always be grammatically correct
 # ID:357,
 #. Resource IDs: (3850)
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "%s"
-msgstr "%s μέσα στο %s"
+msgstr ""
+"%s\n"
+"%s"
 
 # ID:145,
 #. Resource IDs: (145)
@@ -329,7 +330,7 @@ msgstr "&..."
 
 #. Resource IDs: (57664)
 msgid "&About TortoiseMerge..."
-msgstr "&Για το TortoiseMerge..."
+msgstr "&Σχετικά με το TortoiseMerge..."
 
 #. Resource IDs: (16920)
 msgid "&Activate"
@@ -343,7 +344,7 @@ msgstr "&Προσθήκη >>"
 
 #. Resource IDs: (1064)
 msgid "&Add or Remove Buttons"
-msgstr "&Προσθέσετε ή αφαιρέσετε κοθμπιά"
+msgstr "&Προσθέστε ή αφαιρέστε κουμπιά"
 
 # ID:8,#:
 # Control-ID:1098,#:
@@ -360,7 +361,7 @@ msgstr "&Για προχωρημένους..."
 
 #. Resource IDs: (1471)
 msgid "&Allow ambiguous URLs"
-msgstr "&"
+msgstr "&Να επιτρέπονται ασαφή URLs"
 
 #. Resource IDs: (65535)
 msgid "&Application Look"
@@ -377,7 +378,7 @@ msgstr "&Γαλαζοπράσινο στυλ"
 
 #. Resource IDs: (65535)
 msgid "&Arguments:"
-msgstr "&Επιχειρήματα:"
+msgstr "&Παράμετροι:"
 
 #. Resource IDs: (16645)
 msgid "&Assign"
@@ -385,7 +386,7 @@ msgstr "&Ανάθεση"
 
 #. Resource IDs: (16633)
 msgid "&Associate double-click event with:"
-msgstr "&Συνδεση διπλό-κλικ με:"
+msgstr "&Συνδεση διπλό-κλικ συμβάντος με:"
 
 # ID:3842,#:
 # ID:3842,
@@ -406,7 +407,7 @@ msgstr "&Αντίγραφο ασφαλείας αρχείου"
 # Control-ID:1067,
 #. Resource IDs: (114)
 msgid "&Blame changes"
-msgstr "Αλαγές υπαιτιότητας"
+msgstr "&Αλλαγές στην υπαιτιότητα"
 
 # ID:114,#:
 # ID:322,
@@ -441,12 +442,12 @@ msgstr "&Διακλαδώσεις"
 # ID:138,
 #. Resource IDs: (138)
 msgid "&Browse repository"
-msgstr "&Περιεργασία της Αποθήκης"
+msgstr "&Αναζήτηση αποθήκης"
 
 # Control-ID:1011,
 #. Resource IDs: (1001, 1009)
 msgid "&Browse..."
-msgstr "&Περιεργασία..."
+msgstr "&Αναζήτηση..."
 
 #. Resource IDs: (16913)
 msgid "&Button Appearance..."
@@ -478,7 +479,7 @@ msgstr "&Κατηγορία:"
 
 #. Resource IDs: (65535)
 msgid "&Choose commands from:"
-msgstr "&Επιλέξετε εντολές:"
+msgstr "&Επιλέξετε εντολές από:"
 
 # ID:8,
 #. Resource IDs: (8)
@@ -521,7 +522,7 @@ msgstr "&Σύγκριση εκδόσεων"
 # Control-ID:1019,
 #. Resource IDs: (1019)
 msgid "&Compare whitespaces"
-msgstr "&Συγκριση κενών"
+msgstr "&Σύγκριση κενών"
 
 # Control-ID:1239,
 #. Resource IDs: (1239)
@@ -573,7 +574,7 @@ msgstr "&Ημέρες αδράνειας μέχρι να διαγραφούν μ
 # Control-ID:1096,
 #. Resource IDs: (1269)
 msgid "&Default"
-msgstr "&Εξ ορισμού"
+msgstr "&Προεπιλογή"
 
 # ID:11,
 #. Resource IDs: (11, 1382, 16617, 16912)
@@ -583,7 +584,7 @@ msgstr "&Διαγραφή"
 # ID:17,
 #. Resource IDs: (17)
 msgid "&Delete (keep local)"
-msgstr "&Διαγραφή (Διατηρηση τοπικού)"
+msgstr "&Διαγραφή (Διατήρηση τοπικού)"
 
 # ID:101,
 #. Resource IDs: (101)
@@ -606,7 +607,7 @@ msgstr "&Διαφορές με προηγούμενη εκδόση"
 
 #. Resource IDs: (1066)
 msgid "&Docking"
-msgstr ""
+msgstr "&Πλεύρισμα"
 
 # Control-ID:1031,#:
 #. Resource IDs: (1031, 65535)
@@ -616,7 +617,7 @@ msgstr "&Επεξεργασία"
 # ID:12,
 #. Resource IDs: (12)
 msgid "&Edit conflicts"
-msgstr "&Επεξεργασία"
+msgstr "&Επεξεργασία διενέξεων"
 
 # Control-ID:1099,#:
 # Control-ID:1282,
@@ -630,7 +631,7 @@ msgstr "&Επεξεργασία..."
 # Control-ID:1023,
 #. Resource IDs: (1023)
 msgid "&Enable Proxy Server"
-msgstr "&Χρησιμοποίηση Μεσολαβιτή Εξυπερετητή"
+msgstr "&Ενεργοποίηση διαμεσολαβητή (proxy server)"
 
 #. Resource IDs: (1434)
 msgid "&Enable log caching"
@@ -649,7 +650,7 @@ msgstr "&Εξοδος"
 # ID:79,
 #. Resource IDs: (323)
 msgid "&Export selection to..."
-msgstr "Εξαγωγή επιλογής στο..."
+msgstr "&Εξαγωγή επιλογής στο..."
 
 # Again, inflection
 # Control-ID:1092,#:
@@ -709,7 +710,7 @@ msgstr "&Από URL:"
 # Control-ID:1259,
 #. Resource IDs: (1259)
 msgid "&From WC at URL:"
-msgstr "&Από WC στο URL:"
+msgstr "&Από αντίγραφο εργασίας στο URL:"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -718,7 +719,7 @@ msgstr "&Από την έκδοση"
 
 #. Resource IDs: (32779)
 msgid "&Go To Line..."
-msgstr "&Μεταπηδηση στη γραμμή..."
+msgstr "&Μεταπήδηση στη γραμμή..."
 
 #. Resource IDs: (65535)
 msgid "&Green:"
@@ -755,7 +756,7 @@ msgstr "&Βοήθεια"
 
 #. Resource IDs: (57670)
 msgid "&Help Topics"
-msgstr "&Βοήθεια στην θεματική ενότητα"
+msgstr "&Θέματα Βοήθειας"
 
 # ID:3842,#:
 # ID:3842,
@@ -766,7 +767,7 @@ msgstr "&Απόκρυψη"
 # Control-ID:1170,
 #. Resource IDs: (1170)
 msgid "&Icon Set:"
-msgstr "&Σύνολο εικονιδίων"
+msgstr "&Ορισμός εικονιδίων"
 
 # ID:15,
 #. Resource IDs: (15)
@@ -808,17 +809,16 @@ msgstr "&Αρχικός κατάλογος:"
 
 # ID:114,
 #. Resource IDs: (32825)
-#, fuzzy
 msgid "&Inline diff word-wise"
-msgstr "&Απόδοση υπαιτιότητας της έκδοσης"
+msgstr ""
 
 #. Resource IDs: (275)
 msgid "&Join all"
-msgstr "Συναρμολόγηση"
+msgstr "&Σύνδεση όλων"
 
 #. Resource IDs: (275)
 msgid "&Join with sub-trees"
-msgstr ""
+msgstr "&Σύνδεση με υπο-δένδρα"
 
 # Control-ID:1016,
 #. Resource IDs: (1016)
@@ -842,7 +842,7 @@ msgstr "&Περιορισμός εύρεσης σε αλλαγμένα αρχε�
 
 #. Resource IDs: (32797)
 msgid "&Link image positions"
-msgstr "&Διασυνδεση θέσεων εικόνων"
+msgstr "&Διασύνδεση θέσεων εικόνων"
 
 # Control-ID:1172,
 #. Resource IDs: (1172)
@@ -856,21 +856,20 @@ msgstr "&Επιφόρτωση..."
 
 # Control-ID:1076,
 #. Resource IDs: (65535)
-#, fuzzy
 msgid "&Lum:"
-msgstr "&URL:"
+msgstr ""
 
 #. Resource IDs: (1282)
 msgid "&Manually edit property"
-msgstr ""
+msgstr "&Μη-αυτόματη επεξεργασία ιδιότητας"
 
 #. Resource IDs: (1486)
 msgid "&Maximum size [kByte] of a removed inactive cache"
-msgstr ""
+msgstr "&Μέγιστο μέγεθος [kb] ανενεργής cache που αφαιρέθηκε"
 
 #. Resource IDs: (16543)
 msgid "&Menu animations:"
-msgstr ""
+msgstr "&Κίνησεις μενού"
 
 # ID:74,
 #. Resource IDs: (16921)
@@ -904,11 +903,11 @@ msgstr "&Ελαχιστοποίηση"
 
 #. Resource IDs: (1493)
 msgid "&Modify color for tag copies"
-msgstr ""
+msgstr "&Αλλαγή χρώματος στα αντίγραφα ετικετών"
 
 #. Resource IDs: (1492)
 msgid "&Modify color for trunk copies"
-msgstr ""
+msgstr "&Αλλαγή χρώματος στα αντίγραφα κορμών"
 
 #. Resource IDs: (65535)
 msgid "&Navigate"
@@ -917,13 +916,13 @@ msgstr "&Πλοήγηση"
 # Control-ID:1049,
 #. Resource IDs: (1049)
 msgid "&Network drives"
-msgstr "&Δυκτιακοί οδηγοί συσκευών"
+msgstr "&Δικτιακοί οδηγοί συσκευών"
 
 # Control-ID:65535,#:
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "&New "
-msgstr "&Καινούργιο"
+msgstr "&Νέο"
 
 # Control-ID:65535,#:
 # Control-ID:65535,
@@ -953,7 +952,7 @@ msgstr "&Επόμενη σελίδα"
 
 #. Resource IDs: (16632)
 msgid "&No double-click event"
-msgstr ""
+msgstr "&Συμβάν μη διπλού-κλικ"
 
 # Control-ID:1,#:
 # Control-ID:1,
@@ -963,11 +962,11 @@ msgstr "&OK"
 
 #. Resource IDs: (1)
 msgid "&Offline for now"
-msgstr "Τώρα αποσυνδεμένο"
+msgstr "&Αποσυνδεμένο τώρα"
 
 #. Resource IDs: (3845)
 msgid "&One Page"
-msgstr ""
+msgstr "&Μια Σελίδα"
 
 # ID:101,#:
 # ID:113,
@@ -988,12 +987,12 @@ msgstr "&Επικάλυψη εικόνων"
 # Control-ID:65535,
 #. Resource IDs: (1411, 65535)
 msgid "&Password:"
-msgstr "&Συνθηματικό:"
+msgstr "&Κωδικός πρόσβασης:"
 
 # ID:376,
 #. Resource IDs: (15, 376, 501)
 msgid "&Paste"
-msgstr "&Επικόληση"
+msgstr "&Επικόλληση"
 
 # Control-ID:65535,
 #. Resource IDs: (1382)
@@ -1007,7 +1006,7 @@ msgstr "&Θύρα:"
 
 #. Resource IDs: (1489)
 msgid "&Power user defaults"
-msgstr ""
+msgstr "&Προεπιλογές υπερ-χρήστη"
 
 #. Resource IDs: (32780)
 msgid "&Previous Difference"
@@ -1015,7 +1014,7 @@ msgstr "&Προηγούμενη διαφορά"
 
 #. Resource IDs: (1069)
 msgid "&Print Preview"
-msgstr ""
+msgstr "&Προεπισκόπηση Εκτύπωσης"
 
 # Control-ID:1099,#:
 # Control-ID:1282,
@@ -1055,7 +1054,7 @@ msgstr "&Ανανέωση"
 # Control-ID:1285,
 #. Resource IDs: (1100, 1285, 16646)
 msgid "&Remove"
-msgstr "&Διαγραφή"
+msgstr "&Αφαίρεση"
 
 # ID:101,
 #. Resource IDs: (101)
@@ -1095,7 +1094,7 @@ msgstr "&Επαναφορά προεπιλογών"
 
 #. Resource IDs: (1382)
 msgid "&Resolve using local property"
-msgstr ""
+msgstr "&Επίλυση με χρήση τοπικής ιδιότητας"
 
 # ID:73,
 #. Resource IDs: (1488)
@@ -1105,7 +1104,7 @@ msgstr "&Αποκατάσταση προεπιλογών"
 # ID:114,
 #. Resource IDs: (114)
 msgid "&Revert changes from these revisions"
-msgstr "Επαναφορά αλλαγών από αυτές τις εκδόσεις"
+msgstr "&Επαναφορά αλλαγών από αυτές τις εκδόσεις"
 
 # ID:113,
 #. Resource IDs: (113)
@@ -1122,11 +1121,11 @@ msgstr "&Έκδοση"
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "&SSH client:"
-msgstr "&SSH πελάτης:"
+msgstr "Εφαρμογή-πελάτης &SSH:"
 
 #. Resource IDs: (65535)
 msgid "&SVN"
-msgstr ""
+msgstr "&SVN"
 
 #. Resource IDs: (65535)
 msgid "&Sat:"
@@ -1172,15 +1171,15 @@ msgstr "&Προβολή εκδόσεων HEAD"
 
 #. Resource IDs: (65535)
 msgid "&Show Menus for:"
-msgstr ""
+msgstr "&Εμφάνιση μενού για:"
 
 #. Resource IDs: (16612)
 msgid "&Show text labels"
-msgstr ""
+msgstr "&Εμφάνιση κειμένων λεζάντας"
 
 #. Resource IDs: (32851)
 msgid "&Silver Style"
-msgstr ""
+msgstr "&Ασημί Στυλ"
 
 # Control-ID:1185,
 #. Resource IDs: (1185)
@@ -1193,17 +1192,17 @@ msgstr "&Ομάδα Έναρξης"
 
 #. Resource IDs: (59393)
 msgid "&Status Bar"
-msgstr "&Ράβδος κατάστασης"
+msgstr "&Μπάρα κατάστασης"
 
 # Control-ID:1211,
 #. Resource IDs: (1211)
 msgid "&Steal the locks"
-msgstr "&Παρείσφρεση των κλειδωμένων αρχείων"
+msgstr "&Υπέκλεψε τα κλειδωμένα αρχεία"
 
 # Control-ID:1130,
 #. Resource IDs: (1130)
 msgid "&Stop on copy/rename"
-msgstr "&Στάση κατά την απάντηση αντιγραφής/μετονομασίας"
+msgstr "&Παύση κατά την αντιγραφή/μετονομασία"
 
 # ID:229,
 #. Resource IDs: (276)
@@ -1226,11 +1225,11 @@ msgstr "&Μέγεθος στηλογνώμονα."
 
 #. Resource IDs: (1069)
 msgid "&Tabbed Document"
-msgstr ""
+msgstr "&Έγγραφο σε καρτέλες"
 
 #. Resource IDs: (65535)
 msgid "&Tags"
-msgstr ""
+msgstr "&Ετικέτες"
 
 #. Resource IDs: (1382)
 msgid "&Test merge"
@@ -1304,11 +1303,11 @@ msgstr "&TortoiseUDiff"
 
 #. Resource IDs: (65535)
 msgid "&Trunk"
-msgstr ""
+msgstr "&Κορμός"
 
 #. Resource IDs: (3845)
 msgid "&Two Page"
-msgstr ""
+msgstr "&Δυο Σελίδες"
 
 # Control-ID:65535,#:
 # Control-ID:1058,
@@ -1383,12 +1382,12 @@ msgstr "&Ολόκληρη λέξη"
 
 #. Resource IDs: (32846)
 msgid "&Windows XP"
-msgstr ""
+msgstr "&Windows XP"
 
 # Control-ID:1183,
 #. Resource IDs: (1183)
 msgid "&Working copy"
-msgstr "Τρέχον Αντίγραφο Εργασίας"
+msgstr "&Τρέχον Αντίγραφο Εργασίας"
 
 #. Resource IDs: (338)
 msgid "'skip ranges' are used to mark revision ranges that have not been cached yet"
@@ -1447,7 +1446,7 @@ msgstr "(χωρίς αρίθμηση γραμμών)"
 
 #. Resource IDs: (276)
 msgid "(no modification but copy created from here)"
-msgstr ""
+msgstr "(καμμία αλλαγή αλλά το αντίγραφο δημιουργήθηκε από εδώ)"
 
 # ID:17,#:
 # ID:564,
@@ -1478,7 +1477,7 @@ msgstr "(μετονομασία)"
 
 #. Resource IDs: (276)
 msgid "(tagged)"
-msgstr ""
+msgstr "(με ετικέτα)"
 
 #. Resource IDs: (245)
 msgid "(unknown)"
@@ -1498,7 +1497,7 @@ msgstr "- %d"
 
 #. Resource IDs: (1007)
 msgid "-------------------------------------------------------------------------------------------"
-msgstr ""
+msgstr "-------------------------------------------------------------------------------------------"
 
 # Control-ID:1035,#:
 # Control-ID:1036,#:
@@ -1513,11 +1512,11 @@ msgstr "..."
 
 #. Resource IDs: (269)
 msgid "... checking cache and preparing log query"
-msgstr ""
+msgstr "...έλεγχος cache και προετοιμασία ερωτήματος καταγραφής"
 
 #. Resource IDs: (270)
 msgid "... reading working copy status"
-msgstr ""
+msgstr "...ανάγνωση κατάστασης αντιγράφου εργασίας"
 
 # Control-ID:1035,#:
 # Control-ID:1036,#:
@@ -1588,7 +1587,7 @@ msgstr ""
 
 #. Resource IDs: (16603)
 msgid "<descr>"
-msgstr ""
+msgstr "<περιγρ>"
 
 # ID:209,
 #. Resource IDs: (209)
@@ -1651,7 +1650,7 @@ msgstr ""
 #. Resource IDs: (9)
 #, fuzzy
 msgid "A&bout"
-msgstr "&Σχετικά"
+msgstr "Περί του"
 
 # ID:101,
 #. Resource IDs: (101)
@@ -1728,6 +1727,8 @@ msgid ""
 "ActiveX objects cannot be saved while exiting Windows!\n"
 "Discard all changes to %1?"
 msgstr ""
+"Αντικείμενα ActiveX δεν μπορούν να αποθηκευτούν κατά την έξοδο από τα Windows!\n"
+"Απόρριψη όλων των αλλαγών στο %1;"
 
 # ID:209,#:
 # Dlg-ID:155,
@@ -1784,7 +1785,7 @@ msgstr "Προσθήκη σε %1"
 # ID:13,
 #. Resource IDs: (13)
 msgid "Add to &ignore list"
-msgstr "Προσθήκη στον κατάλογο με τα αντιπαρέρχομενα αρχεία"
+msgstr "Προσθήκη στη λίστα &αγνοημένων"
 
 #. Resource IDs: (1068)
 msgid "Add to Quick Access Toolbar"
@@ -1932,7 +1933,7 @@ msgstr "Όλες οι αλλαγές σου θα χαθούν! Είστε σίγ
 
 #. Resource IDs: (1484)
 msgid "Allow ambiguous &UUIDs"
-msgstr ""
+msgstr "Επιτρέπονται διφορούμενα &UUIDs"
 
 #. Resource IDs: (345)
 msgid "Allow different repositories to use the same URL, e.g. http://localhost/myrepos/"
@@ -1944,11 +1945,11 @@ msgstr ""
 
 #. Resource IDs: (197)
 msgid "Always use the system locale settings to show times and dates"
-msgstr ""
+msgstr "Να χρησιμοποιούνται πάντα οι τοπικές ρυθμίσεις του συστήματος για την εμφάνιση ημερομηνίας και ώρας "
 
 #. Resource IDs: (339)
 msgid "Amount of memory required to load the cache"
-msgstr ""
+msgstr "Ποσότητα μνήμης που απαιτείται για να φορτωθεί η cache"
 
 #. Resource IDs: (78)
 #, c-format
@@ -2003,7 +2004,7 @@ msgstr "Βρέθηκε ένας άγνωστος τύπος γραμμής στ�
 
 #. Resource IDs: (65535)
 msgid "Application Frame Menus: "
-msgstr ""
+msgstr "Μενού πλαισίων εφαρμογής: "
 
 # ID:14,
 #. Resource IDs: (14)
@@ -2022,7 +2023,7 @@ msgstr ""
 # ID:13,
 #. Resource IDs: (13)
 msgid "Apply &patch..."
-msgstr "Εφαρμογή επιρράμματος..."
+msgstr "Εφαρμογή &επιρράμματος..."
 
 #. Resource IDs: (345)
 msgid ""
@@ -2232,6 +2233,8 @@ msgid ""
 "Bitmap\n"
 "a bitmap"
 msgstr ""
+"Εικόνα\n"
+"μια εικόνα"
 
 # Alternatively: Απόδοση κατηγορίας
 # Dlg-ID:162,
@@ -2248,7 +2251,7 @@ msgstr "Απόδοση ευθυνών - TortoiseSVN"
 # ID:13,
 #. Resource IDs: (114)
 msgid "Blame..."
-msgstr "&Απόδοση υπαιτιότητας..."
+msgstr "Απόδοση υπαιτιότητας..."
 
 # ID:13,
 #. Resource IDs: (13)
@@ -2257,7 +2260,7 @@ msgstr "Επιρρίπτει την υπαιτιότητα για κάθε γρ�
 
 #. Resource IDs: (32812)
 msgid "Blend Alpha"
-msgstr ""
+msgstr "Μίξη Alpha"
 
 #. Resource IDs: (83)
 msgid ""
@@ -2287,17 +2290,17 @@ msgstr "Διακλάδωση/&ετικέτα..."
 # ID:16,
 #. Resource IDs: (16)
 msgid "Break loc&k"
-msgstr "Ρήξη κλείσθρου"
+msgstr "Παραβίαση κλει&δώματος"
 
 # ID:78,
 #. Resource IDs: (78)
 msgid "Browse for the external diff program"
-msgstr "Περιεργασία για ένα εξωτερικό πρόγραμμα απεικόνησης διαφορών"
+msgstr "Αναζήτηση εξωτερικού πρόγραμματος απεικόνισης διαφορών"
 
 # Control-ID:1069,
 #. Resource IDs: (1069)
 msgid "Browse..."
-msgstr "Πε&ριεργασία..."
+msgstr "Αναζήτηση..."
 
 # ok, so, what does "Nr" stand for? Number?
 # Control-ID:1119,
@@ -2310,10 +2313,12 @@ msgstr "&Κωδικός λάθους / Αριθμός θέματος:"
 msgid "Bug-ID"
 msgstr "Αριθμός λάθους"
 
+# ok, so, what does "Nr" stand for? Number?
 # Control-ID:1119,
 #. Resource IDs: (1119)
+#, fuzzy
 msgid "Bug-ID / Issue-Nr:"
-msgstr "Αριθμός λάθους / Αριθμός Προτοκόλου:"
+msgstr "&Κωδικός λάθους / Αριθμός θέματος:"
 
 # ID:116,
 #. Resource IDs: (117)
@@ -2336,7 +2341,7 @@ msgstr "Έ&λεγχος αποθετηρίου"
 
 #. Resource IDs: (275)
 msgid "C&ollapse sub-trees"
-msgstr "Καάρρευση υπο-δέντρα"
+msgstr "Κ&ατάρρευση υπο-δένδρων"
 
 # ID:3857,#:
 # ID:3857,
@@ -2393,7 +2398,7 @@ msgstr "Δεν μπορεί να ενεργοποιήσει ένα αντικε�
 
 # ID:82,
 #. Resource IDs: (82)
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Can't copy \n"
 "%s\n"
@@ -2402,7 +2407,7 @@ msgid ""
 msgstr ""
 "Δεν γίνεται να αντιγραφεί το \n"
 "%s\n"
-"προς το\n"
+"στο\n"
 "%s"
 
 # ID:209,
@@ -2503,9 +2508,9 @@ msgstr "Αρχεία με μεταβολές"
 
 # ID:324,
 #. Resource IDs: (324)
-#, c-format
+#, fuzzy, c-format
 msgid "Changed files between %s, %s and %s, %s"
-msgstr "Αλλάχθηκαν τα αρχεία μεταξύ %s, %s και %s, %s"
+msgstr "Αλλάχθηκαν τα αρχεία μεταξύ %s, %s and %s, %s"
 
 # ID:163,
 #. Resource IDs: (163)
@@ -2621,7 +2626,7 @@ msgstr "Έλεγχος:"
 # translating word "checkout" in greek doesn't really sound nice
 #. Resource IDs: (1074)
 msgid "Checkout &directory:"
-msgstr "Φάκελος checkout"
+msgstr "&Φάκελος checkout:"
 
 # Dlg-ID:129,
 #. Resource IDs: (77)
@@ -2630,8 +2635,9 @@ msgstr "Αποχώρηση - TortoiseSVN"
 
 # Dlg-ID:133,
 #. Resource IDs: (1377)
+#, fuzzy
 msgid "Checkout Depth"
-msgstr "Έλεγχος"
+msgstr "&Βάθος αποχώρησης"
 
 # ID:229,
 #. Resource IDs: (229)
@@ -2701,22 +2707,21 @@ msgid ""
 "Clear Tool\n"
 "Clear"
 msgstr ""
-"Εργαλείο για εκκαθάριση\n"
+"Εργαλείο εκκαθάρισης\n"
 "Εκκαθάριση"
 
 # ID:196,
 #. Resource IDs: (196)
-#, c-format
+#, fuzzy, c-format
 msgid "Clears %ld URLs stored for %ld working copies"
-msgstr "Καθαρίει %ld URLs που είναι αποθηκευμένα για %ld εργαζόμενα αντίγραφα"
+msgstr "Καθαρίζει %ld URLs αποθηκευμένα για %ld αντίγραφα εργασίας"
 
 # ID:196,
 #. Resource IDs: (196)
-#, c-format
+#, fuzzy, c-format
 msgid "Clears %ld log messages stored for %ld working copies"
-msgstr "Καθάριζει %ld μυνήματα ιστορικότητας που έχουν αποθηκευτεί γιαr %ld εργαζόμενα αντίγραφα"
+msgstr "Καθάριζει%ld μυνήματα ιστορικότητας που έχουν αποθηκευτεί για %ld αντίγραφα εργασίας"
 
-# ID:196,
 #. Resource IDs: (196)
 #, c-format
 msgid "Clears %ld username/password pairs, %ld ssl certificates and %ld usernames"
@@ -2733,6 +2738,8 @@ msgid ""
 "Clears the stored authentication.\r\n"
 "You will have to enter your username/password again for all repositories."
 msgstr ""
+"Καθαρίζει την αποθηκευμένη πιστοποίηση. \r\n"
+"Θα χρειαστεί να εισάγετε το όνομα χρήστη/κωδικό ξανά για όλα τα αποθετήρια."
 
 # ID:196,
 #. Resource IDs: (196)
@@ -2772,15 +2779,15 @@ msgstr "Κλείσιμο"
 
 #. Resource IDs: (1065)
 msgid "Close Full Screen"
-msgstr "Κλείσιμο Πλήρης Οθόνη"
+msgstr "Κλείσιμο Πλήρους Οθόνης"
 
 #. Resource IDs: (3633)
 msgid ""
 "Close Print Preview\n"
 "&Close"
 msgstr ""
-"Κλείσμος Προεπισκόμηση Εκτύπωσης\n"
-"Κλείσμος"
+"Κλείσιμο προεπισκόπισης εκτύπωσης\n"
+"&Κλείσιμο"
 
 # ID:222,
 #. Resource IDs: (222)
@@ -2818,7 +2825,7 @@ msgstr "Χρώμα 2"
 # Control-ID:1068,
 #. Resource IDs: (1068)
 msgid "Color co&de in-line changes"
-msgstr ""
+msgstr "Χρωματισμός &κώδικα σε αλλαγές εσωτερικά"
 
 # Dlg-ID:138,
 #. Resource IDs: (138, 16961, 65535)
@@ -2885,7 +2892,7 @@ msgstr "Δέσμευση στο:"
 # ID:8,
 #. Resource IDs: (209)
 msgid "Commit..."
-msgstr "&Καταγραφή..."
+msgstr "Καταγραφή..."
 
 # ID:244,
 #. Resource IDs: (244)
@@ -2917,27 +2924,27 @@ msgstr ""
 
 #. Resource IDs: (274, 32784)
 msgid "Compare &HEAD revisions"
-msgstr "Συγκριση &ΚΕΦΑΛΙΚΩΝ εκδώσεων"
+msgstr "Σύγκριση &ΚΕΦΑΛΙΚΩΝ εκδόσεων"
 
 # ID:114,
 #. Resource IDs: (114)
 msgid "Compare and &blame with working BASE"
-msgstr "Σύγκριση και &μορμφή με την εργαζόμενη ΒΑΣΗ"
+msgstr "Σύγκριση και &μομφή με την εργαζόμενη ΒΑΣΗ"
 
 # ID:114,
 #. Resource IDs: (114)
 msgid "Compare and blame with previous revision"
-msgstr "Σύγκριση και &μορμφή με την προηγούμενη έκδοση"
+msgstr "Σύγκριση και μομφή με την προηγούμενη έκδοση"
 
 # Control-ID:1019,
 #. Resource IDs: (1390)
 msgid "Compare whitespaces"
-msgstr "&Σύγκριση κενών"
+msgstr "Σύγκριση κενών"
 
 # ID:76,
 #. Resource IDs: (76)
 msgid "Compare with &working copy"
-msgstr "Σύγκριση με το εργαζόμενο αντίγραφο"
+msgstr "Σύγκριση με το αντίγραφο &εργασίας"
 
 # ID:138,
 #. Resource IDs: (138)
@@ -2946,7 +2953,7 @@ msgstr "Συγκριση με τη &βάση"
 
 #. Resource IDs: (114)
 msgid "Compare with previous revision"
-msgstr "&Σύγκριση με προηγούμενη εκδόση"
+msgstr "Σύγκριση με προηγούμενη εκδόση"
 
 # ID:12,
 #. Resource IDs: (12)
@@ -2956,13 +2963,13 @@ msgstr "Συγκρίνει το αρχείο με την τελευταία δε
 # ID:17,
 #. Resource IDs: (17)
 msgid "Compares the selected file with a file in the repository"
-msgstr ""
+msgstr "Συγκρίνει το επιλεγμένο αρχείο με το αρχείο στο αποθετήριο"
 
 # ID:120,
 #. Resource IDs: (120)
-#, c-format
+#, fuzzy, c-format
 msgid "Comparing %s to %s"
-msgstr "Συγκριση του %s με το %s"
+msgstr "Σύγκριση του %s με το %2"
 
 # ID:74,
 #. Resource IDs: (74)
@@ -2976,17 +2983,17 @@ msgstr ""
 
 #. Resource IDs: (284)
 msgid "Configure Issue Tracker Integration"
-msgstr ""
+msgstr "Ρύθμιση ενσωμάτωσης Issue Tracker"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Configure the program used for comparing different revisions of files"
-msgstr ""
+msgstr "Ρύθμιση του προγράμματος για την σύγκριση διαφορετικών εκδόσεων των αρχείων"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Configure the program used for comparing different revisions of properties"
-msgstr ""
+msgstr "Ρύθμιση του προγράμματος για την σύγκριση διαφορετικών εκδόσεων των ιδιοτήτων"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -2996,7 +3003,7 @@ msgstr "Παραμετροποίσηση του χρησιμοποιούμενο
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Configure viewer program for GNU diff files (patch files)."
-msgstr ""
+msgstr "Ρύθμιση εφαρμογής για αρχεία διαφορών GNU (αρχεία patch)."
 
 # ID:263,#:
 # Control-ID:65535,
@@ -3345,12 +3352,12 @@ msgstr ""
 
 # ID:66,
 #. Resource IDs: (66)
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Could not retrieve revision %s of the file %s.\n"
 "Patching is not possible!"
 msgstr ""
-"Δεν ήταν δυνατό να ανακτηθεί η έκδωση %s του αρχείου %s.\n"
+"Δεν ήταν δυνατό να ανακτηθεί η έκδοση %s του αρχείου %s.\n"
 "Δεν μπορεί να γίνει διόρθωση!"
 
 # ID:64,
@@ -3431,7 +3438,7 @@ msgstr "Δημιουργία λίστας αλλαγών"
 # Dlg-ID:208,
 #. Resource IDs: (208)
 msgid "Create Patch"
-msgstr "Δημιουργεία Μπαλώματος"
+msgstr "Δημιουργία Μπαλώματος"
 
 # Control-ID:65535,
 #. Resource IDs: (1385)
@@ -3451,7 +3458,7 @@ msgstr ""
 # ID:8,
 #. Resource IDs: (8)
 msgid "Create repositor&y here"
-msgstr "Δημιουργία aποθητηρίου εδώ..."
+msgstr "Δημιουργία απο&θητηρίου εδώ"
 
 # ID:119,
 #. Resource IDs: (32828)
@@ -3527,15 +3534,15 @@ msgstr "Προσαρμογή"
 
 #. Resource IDs: (17076)
 msgid "Customize Keyboard"
-msgstr ""
+msgstr "Παραμετροποίηση Πληκτρολογίου"
 
 #. Resource IDs: (1069)
 msgid "Customize Quick Access Toolbar"
-msgstr ""
+msgstr "Παραμετροποίηση εργαλειοθήκης γρήγορης πρόσβασης"
 
 #. Resource IDs: (1068)
 msgid "Customize Quick Access Toolbar..."
-msgstr ""
+msgstr "Παραμετροποίηση εργαλειοθήκης γρήγορης πρόσβασης..."
 
 # ID:3603,
 #. Resource IDs: (3603)
@@ -3558,12 +3565,12 @@ msgstr "Ημερομηνία"
 # Control-ID:1096,
 #. Resource IDs: (1008)
 msgid "Default"
-msgstr "&Προεπιλογή"
+msgstr "Προεπιλογή"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Default &number of log messages"
-msgstr ""
+msgstr "Προκαθορισμένος &αριθμός μηνυμάτων αρχείου καταγραφής"
 
 # Control-ID:1269,#:
 # Control-ID:1096,
@@ -3579,7 +3586,7 @@ msgstr "Προεπιλεγμένη URL"
 
 #. Resource IDs: (1007)
 msgid "Default application menu. Appears when no documents are open."
-msgstr ""
+msgstr "Προεπιλεγμένο μενού εφαρμογής. Εμφανίζεται όταν δεν υπάρχουν ανοικτά έγγραφα."
 
 # Control-ID:1269,#:
 # Control-ID:1096,
@@ -3604,12 +3611,12 @@ msgstr "Διαγραφή αντικειμένων χωρίς έκδοση"
 #. Resource IDs: (14)
 #, c-format
 msgid "Delete and &ignore %d items by name"
-msgstr "Διαγραφή και αγνοούν %d αντικείμενα με βάση το όνομα"
+msgstr "Διέγραψε και &αγνόησε %d αντικείμενα με βάση το όνομα"
 
 # ID:13,
 #. Resource IDs: (14)
 msgid "Delete and add to &ignore list"
-msgstr "Διαγραφή και προσθήκη στη λίστα των 'αγνοημένων'"
+msgstr "Διαγραφή και προσθήκη στη λίστα &αγνοημένων"
 
 #. Resource IDs: (14)
 #, c-format
@@ -3760,7 +3767,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Display &buttons in this order"
-msgstr ""
+msgstr "Εμφάνιση &κουμπιών με αυτή τη σειρά"
 
 # ID:3605,
 #. Resource IDs: (3605)
@@ -3865,6 +3872,8 @@ msgid ""
 "Documentation : Simon Large\n"
 "Code : Tobias Schäfer, Stefan Fuhrmann"
 msgstr ""
+"Τεκμηρίωση : Simon Large\n"
+"Κώδικας : Tobias Schäfer, Stefan Fuhrmann"
 
 # ID:73,#:
 # ID:80,
@@ -3883,7 +3892,7 @@ msgstr "Ζωγραφίζω"
 # Control-ID:1079,
 #. Resource IDs: (1079)
 msgid "Drive Types"
-msgstr "Τύποι Οδ"
+msgstr "Τύποι Οδηγών δίσκων"
 
 #. Resource IDs: (1315)
 msgid "Drives A: and B:"
@@ -3896,12 +3905,12 @@ msgstr ""
 
 #. Resource IDs: (32816)
 msgid "E&xact copy sources"
-msgstr "Ακριβές αντίγραφο πηγές"
+msgstr "Α&κριβές αντίγραφο πηγών"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "E&xclude paths:"
-msgstr "Εξαίρεση καταλόγων:"
+msgstr "Ε&ξαίρεση καταλόγων:"
 
 #. Resource IDs: (105, 57665)
 msgid "E&xit"
@@ -3909,7 +3918,7 @@ msgstr "Έ&ξοδος"
 
 #. Resource IDs: (275)
 msgid "E&xpand all"
-msgstr "Ανάπτυξη όλων"
+msgstr "Α&νάπτυξη όλων"
 
 #. Resource IDs: (275)
 msgid "E&xpand sub-trees"
@@ -3955,7 +3964,7 @@ msgstr "Επεξεργασία διένεξης ιδιότητας"
 # ID:12,
 #. Resource IDs: (298)
 msgid "Edit Tree Conflicts"
-msgstr "&Επεξεργασία διένεξης δένδρου"
+msgstr "Επεξεργασία διένεξης δένδρου"
 
 # ID:113,
 #. Resource IDs: (113)
@@ -3970,7 +3979,7 @@ msgstr "Επεξεργασία ονόματος συγγραφέα"
 # ID:12,
 #. Resource IDs: (1399)
 msgid "Edit conflict"
-msgstr "&Επεξεργασία διένεξης"
+msgstr "Επεξεργασία διένεξης"
 
 # ID:110,
 #. Resource IDs: (110)
@@ -4007,7 +4016,7 @@ msgstr "Επεξεργασία..."
 
 #. Resource IDs: (581)
 msgid "Edits the selected property value"
-msgstr ""
+msgstr "Επεξεργασία τιμής της επιλεγμένης ιδιότητας"
 
 # ID:79,
 #. Resource IDs: (79)
@@ -4019,6 +4028,8 @@ msgid ""
 "Ellipse Tools\n"
 "Ellipse"
 msgstr ""
+"Εργαλεία Ellipse\n"
+"Ellipse"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -4129,8 +4140,9 @@ msgstr "Εισάγετε ένα μύνημα για το κλείστρο (πρ�
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
+#, fuzzy
 msgid "Enter a name for the changelist:"
-msgstr "Εισάγετε ένα όνομα για τον πίνακα αλλαγών:"
+msgstr "Εισάγετε ένα &όνομα για λίστα αλλαγών:"
 
 # ID:3858,#:
 # ID:3858,
@@ -4249,7 +4261,7 @@ msgstr "Εξαίρεση"
 
 #. Resource IDs: (1002)
 msgid "Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
-msgstr ""
+msgstr "Εκτελέσιμο αρχείο (*.exe)|*.exe|Εντολή com (*.com)|*.com|Έγγραφο PDF (*.pdf)|*.pdf|Batch (*.bat)|*.bat|Όλα τα αρχεία (*.*)|*.*||"
 
 # ID:10,
 #. Resource IDs: (1002)
@@ -4287,7 +4299,7 @@ msgstr "Εξερεύνηση προς"
 # ID:9,
 #. Resource IDs: (229, 238)
 msgid "Export"
-msgstr "Εξαγογή"
+msgstr "Εξαγωγή"
 
 # ID:94,
 #. Resource IDs: (1074)
@@ -4311,7 +4323,7 @@ msgstr ""
 # ID:79,
 #. Resource IDs: (79)
 msgid "Export unversioned files too"
-msgstr ""
+msgstr "Εξαγωγή και των αρχείων χωρίς έκδοση"
 
 # ID:79,
 #. Resource IDs: (284)
@@ -4322,7 +4334,7 @@ msgstr "Εξαγωγή %s"
 # ID:79,
 #. Resource IDs: (79)
 msgid "Exporting..."
-msgstr "Εξαγωγή"
+msgstr "Εξαγωγή..."
 
 # ID:10,
 #. Resource IDs: (10)
@@ -4331,7 +4343,7 @@ msgstr ""
 
 #. Resource IDs: (581)
 msgid "Exports a set of properties to a file"
-msgstr ""
+msgstr "Εξαγωγή ενός σετ ιδιοτήτων σε αρχείο"
 
 # ID:74,#:
 # ID:207,
@@ -4385,7 +4397,7 @@ msgstr "Αποτυχία εξωτερικού"
 # ID:74,
 #. Resource IDs: (226)
 msgid "Externals excluded"
-msgstr "Εξέρεση εξωτερικών"
+msgstr "Εξαίρεση εξωτερικών"
 
 # again, inflection
 # ID:74,
@@ -4422,7 +4434,7 @@ msgstr "Αποτυχημένη προσπάθεια δημιουργίας άδ�
 
 #. Resource IDs: (3865)
 msgid "Failed to create object.  Make sure the application is entered in the system registry."
-msgstr ""
+msgstr "Αποτυχία δημιουργία αντικειμένου. Βεβαιωθείτε ότι η εφαρμογή έχει καταχωρηθεί στο μητρώο του συστήματος."
 
 # ID:3857,#:
 # ID:3857,
@@ -4591,7 +4603,7 @@ msgid ""
 "Fill Tool\n"
 "Fill"
 msgstr ""
-"Εργακείο Γέμισμα\n"
+"Εργαλείο Γεμίσματος\n"
 "Γέμισμα"
 
 #. Resource IDs: (65535)
@@ -4622,7 +4634,7 @@ msgstr ""
 # ID:77,
 #. Resource IDs: (77, 219)
 msgid "Finished!"
-msgstr "Τέλος!"
+msgstr "Ολοκληρώθηκε!"
 
 # ID:246,
 #. Resource IDs: (32804)
@@ -4635,7 +4647,7 @@ msgstr "Αλλαγή σε κατάλληλο ύψος"
 
 #. Resource IDs: (32810)
 msgid "Fit image &sizes"
-msgstr "Προσαρμογή μεγεθών εικόνων"
+msgstr "Προσαρμογή &μεγεθών εικόνων"
 
 #. Resource IDs: (32803)
 msgid "Fit width"
@@ -4647,7 +4659,7 @@ msgstr ""
 
 #. Resource IDs: (32818)
 msgid "Fold &tags"
-msgstr "Δέπλωμα ετικέτες"
+msgstr "Αναδίπλωση &ετικετών"
 
 #. Resource IDs: (65535)
 msgid "Folded tag"
@@ -4656,7 +4668,7 @@ msgstr "Διπλωμένο ετικέτο"
 # MenuEntry#:
 #. Resource IDs: (1002)
 msgid "Folder"
-msgstr "&Φάκελος"
+msgstr "Φάκελος"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -4670,7 +4682,7 @@ msgstr "Για βοήθεια, πατήστε F1.  Μεταβείτε οριζό
 
 #. Resource IDs: (119)
 msgid "For complete history deselect 'Stop on copy/rename'"
-msgstr ""
+msgstr "Για πλήρες ιστορικό απο-επιλέξτε 'Παύση κατά την αντιγραφή/μετονομασία'"
 
 #. Resource IDs: (1064)
 msgid "Forward"
@@ -4680,7 +4692,7 @@ msgstr "Εμπρός"
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "From URL:"
-msgstr "&Από URL:"
+msgstr "Από URL:"
 
 # Control-ID:1200,
 #. Resource IDs: (1200, 65535)
@@ -4689,8 +4701,9 @@ msgstr "Από:"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
+#, fuzzy
 msgid "From: (start URL and revision of the range to merge)"
-msgstr "Από: (Αρχικό URL και εμβέλεια των έκδοσεων που πρόκειτε να συνενωθούν)"
+msgstr "&Από: (Αρχικό URL και εμβέλεια των έκδοσεων που πρόκειτε να συνενωθούν)"
 
 # ID:563,
 #. Resource IDs: (1065)
@@ -4811,7 +4824,7 @@ msgstr "Λήψη ενιαίων διαφορών"
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Global ignore &pattern:"
-msgstr "Παγκόσμιο πρότυπο αγνοούν"
+msgstr "Να αγνοηθεί &γενικά"
 
 # ID:107,
 #. Resource IDs: (65535)
@@ -4869,7 +4882,7 @@ msgstr "Γκρι"
 # ID:214,
 #. Resource IDs: (2050)
 msgid "Group by branch"
-msgstr "&Ομαδοποίηση ανά διακλάδωση"
+msgstr "Ομαδοποίηση ανά διακλάδωση"
 
 # ID:214,
 #. Resource IDs: (214)
@@ -4905,7 +4918,7 @@ msgstr "Η αναθεώρηση Head είναι %s"
 # Control-ID:1004,
 #. Resource IDs: (9, 73, 332, 1004)
 msgid "Help"
-msgstr "Εισαγωγή"
+msgstr "Βοήθεια"
 
 # ID:257,
 #. Resource IDs: (16982)
@@ -5323,7 +5336,7 @@ msgstr "Παράβλεψη ό&λου του κενού χώρου"
 # Control-ID:1067,
 #. Resource IDs: (1067)
 msgid "Ignore &case changes"
-msgstr "Παράβλεψη διαφοράς πεζών/κεφαλαίων"
+msgstr "Παράβλεψη &διαφοράς πεζών/κεφαλαίων"
 
 # Control-ID:1020,
 #. Resource IDs: (1392)
@@ -5332,8 +5345,9 @@ msgstr "Παράβλεψη κενών διαστημάτων"
 
 # Control-ID:1267,
 #. Resource IDs: (1267)
+#, fuzzy
 msgid "Ignore ancestry"
-msgstr "Περιφρόνηση κληρονομικότητας"
+msgstr "Να παραβλεφθεί η &προέλευση"
 
 # Control-ID:1018,
 #. Resource IDs: (1018)
@@ -5348,7 +5362,7 @@ msgstr "Παράβλεψη καταλήξεων γραμμών"
 # Control-ID:1021,
 #. Resource IDs: (1391)
 msgid "Ignore whitespace changes"
-msgstr "&Παράβλεψη αλλαγών σε κενά διαστήματα"
+msgstr "Παράβλεψη αλλαγών σε κενά διαστήματα"
 
 # ID:15,
 #. Resource IDs: (226)
@@ -5393,7 +5407,7 @@ msgstr "Εισαγωγή %s στο %s%s"
 # Control-ID:1056,
 #. Resource IDs: (1056)
 msgid "Import &message"
-msgstr "Εισαγωγή μυνήματος"
+msgstr "Εισαγωγή &μηνύματος"
 
 # Dlg-ID:129,
 #. Resource IDs: (77)
@@ -5666,8 +5680,9 @@ msgstr "Διατηρηση &κλείσθρων"
 
 # Control-ID:1126,
 #. Resource IDs: (1126)
+#, fuzzy
 msgid "Keep changelists"
-msgstr "Διατήρηση πινάκων αλλαγών"
+msgstr "Διατήρηση λίστων α&λλαγών"
 
 # ID:10,
 #. Resource IDs: (610)
@@ -5915,9 +5930,8 @@ msgstr "Αποθήκευση ιστορικού στην κρυφή μνήμη"
 
 # Dlg-ID:178,
 #. Resource IDs: (295)
-#, fuzzy
 msgid "Log Caching::Cached Repositories"
-msgstr "Δημιουργία Αποθήκης"
+msgstr ""
 
 # Dlg-ID:211,
 #. Resource IDs: (211)
@@ -5957,13 +5971,15 @@ msgid "Lowest shown revision: %ld - Highest shown revision: %ld"
 msgstr "Χαμηλότερη εμφανιζόμενη έκδοση: %ld - Υψηλότερη εμφανιζόμενη έκδοση: %ld"
 
 #. Resource IDs: (238)
-#, c-format
+#, fuzzy, c-format
 msgid "Lowest shown revision: %ld - Highest shown revision: %ld - HEAD revision: %ld"
-msgstr "Χαμηλότερη εμφανιζόμενη έκδοση: %ld - Υψηλότερη εμφανιζόμενη έκδοση: %ld - Έκδοση ΚΕΦΑΛΗ: %ld"
+msgstr ""
+"Χαμηλότερη εμφανιζόμενη έκδοση: %ld - Υψηλότερη εμφανιζόμενη έκδοση: %ld\n"
+" Έκδοση HEAD: %ld"
 
 #. Resource IDs: (16973)
 msgid "Lum"
-msgstr ""
+msgstr "Lum"
 
 # ID:3866,#:
 # ID:3866,
@@ -5988,7 +6004,7 @@ msgstr "Μαρκάρισμα ως &επιλυμένο"
 # Χρησιμοποιώ δοτική για ελεύθερη απόδοση.
 #. Resource IDs: (282)
 msgid "Mark as resolved"
-msgstr "&Σημάδευση ως επιλημένα"
+msgstr "Μάρκαρε ως επιλημένα"
 
 #. Resource IDs: (2052)
 msgid "Mark current revision of your working copy"
@@ -6028,7 +6044,7 @@ msgstr ""
 # Control-ID:1064,
 #. Resource IDs: (1064)
 msgid "Match &case"
-msgstr "Ταίριασμα πεζών/κεφαλαίων"
+msgstr "Ταίριασμα &πεζών/κεφαλαίων"
 
 # again, inflection
 # Control-ID:1159,
@@ -6047,7 +6063,7 @@ msgstr "Μέγιστος αριθμός γραμμών στο ιστορικό �
 
 #. Resource IDs: (1487)
 msgid "Maximum number of tool &failures until cache removal"
-msgstr "Μέγιστος αριθμός αποτυχίων εργαλείων ως την απομάκρυνση από την κρυφή μνήμη"
+msgstr "Μέγιστος αριθμός &αποτυχίων εργαλείων ως την αφαίρεση της cache"
 
 #. Resource IDs: (16655)
 msgid "Me&nus show recently used commands first"
@@ -6134,8 +6150,9 @@ msgid "Merge the changes into '%s'"
 msgstr "Συγχώνευση των αλλαγών στο '%s'"
 
 #. Resource IDs: (1470)
+#, fuzzy
 msgid "Merge two different trees"
-msgstr "Συγχώνευση δύο διαφορετικών δέντρων"
+msgstr "Συγχώνευση δύο διαφορετικών &δέντρων"
 
 # ID:78,
 #. Resource IDs: (595, 65535)
@@ -6313,12 +6330,12 @@ msgstr "Ποντίκι"
 
 # ID:127,
 #. Resource IDs: (127)
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Move %ld items to\r\n"
 "%s"
 msgstr ""
-"Μετακίνηση %ld αντικειμένων στο\r\n"
+"Μετακίνηση %ld στοιχείων to\r\n"
 "%s"
 
 # ID:127,
@@ -6453,29 +6470,29 @@ msgstr "Μην επιχηρήσετε να επικοινωνήσετε με τ�
 # Dlg-ID:30721,
 #. Resource IDs: (1002, 30721, 65535)
 msgid "New"
-msgstr "Καινούργιο"
+msgstr "Νέο"
 
 # Control-ID:1076,
 #. Resource IDs: (1076)
 msgid "New &name:"
-msgstr "Καινούργιο &όνομα:"
+msgstr "Νέο &όνομα:"
 
 # Control-ID:65535,#:
 # Control-ID:65535,
 #. Resource IDs: (1001)
 msgid "New Menu"
-msgstr "&Νέο μενού"
+msgstr "Νέο μενού"
 
 # ID:97,
 #. Resource IDs: (97)
 #, c-format
 msgid "New name for %s"
-msgstr "Καινούργιο &όνομα για το %s"
+msgstr "Nέο όνομα για το %s"
 
 # ID:98,
 #. Resource IDs: (98)
 msgid "New name:"
-msgstr "Καινούργιο όνομα:"
+msgstr "Νέο όνομα:"
 
 #. Resource IDs: (3633)
 msgid ""
@@ -6723,19 +6740,19 @@ msgstr "OK"
 # ID:3697,
 #. Resource IDs: (3697)
 msgid "OVR"
-msgstr ""
+msgstr "OVR"
 
 #. Resource IDs: (32845)
 msgid "Office &XP"
-msgstr ""
+msgstr "Office &XP"
 
 #. Resource IDs: (32847)
 msgid "Office 200&3"
-msgstr ""
+msgstr "Office 200&3"
 
 #. Resource IDs: (65535)
 msgid "Office 200&7"
-msgstr ""
+msgstr "Office 200&7"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -6744,13 +6761,13 @@ msgstr "Παλιότερεσ γραμμές"
 
 #. Resource IDs: (32814)
 msgid "Oldest on to&p"
-msgstr ""
+msgstr "Τα παλαιότερα στην κορυ&φή"
 
 # Control-ID:1202,#:
 # Control-ID:1202,
 #. Resource IDs: (99, 1202)
 msgid "Omit e&xternals"
-msgstr ""
+msgstr "Παράληψη ε&ξωτερικών"
 
 # ID:145,
 #. Resource IDs: (145)
@@ -6768,7 +6785,7 @@ msgstr ""
 # ID:219,
 #. Resource IDs: (219)
 msgid "One or more files are in a conflicted state."
-msgstr ""
+msgstr "Ένα ή περισσότερα αρχεία βρίσκονται σε διένεξη."
 
 # Control-ID:1073,
 #. Resource IDs: (99)
@@ -6805,7 +6822,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Opacity"
-msgstr ""
+msgstr "Αδειφάνεια"
 
 # ID:3841,#:
 # ID:3841,
@@ -6836,7 +6853,7 @@ msgstr "Άνοιγμα αρχείου εικόνας..."
 # ID:282,
 #. Resource IDs: (282)
 msgid "Open parent folder"
-msgstr ""
+msgstr "Άνοιγμα γονικού φακέλου"
 
 # ID:113,
 #. Resource IDs: (113)
@@ -6849,6 +6866,8 @@ msgid ""
 "Opens Help\n"
 "Help Topics"
 msgstr ""
+"Εμφάνιση Βοήθειας\n"
+"Θέματα Βοήθειας"
 
 # ID:13,
 #. Resource IDs: (13)
@@ -6870,7 +6889,7 @@ msgstr "Α&ρχικό μέγεθος"
 
 #. Resource IDs: (1065)
 msgid "Other Task Panes"
-msgstr ""
+msgstr "Άλλα Παράθυρα Εργασιών"
 
 # ID:245,
 #. Resource IDs: (245)
@@ -6885,7 +6904,7 @@ msgstr "Δεν ειπάρχει άλλη μνήμη."
 
 #. Resource IDs: (3845)
 msgid "Output.prn"
-msgstr ""
+msgstr "Output.prn"
 
 #. Resource IDs: (65535)
 msgid "Overlays"
@@ -6901,11 +6920,11 @@ msgstr ""
 # ID:99,
 #. Resource IDs: (99)
 msgid "Overwrite"
-msgstr ""
+msgstr "Αντικατάσταση"
 
 #. Resource IDs: (32802)
 msgid "P&revious Conflict"
-msgstr ""
+msgstr "Π&ροηγούμενη Διένεξη"
 
 # ID:76,
 #. Resource IDs: (76)
@@ -6920,7 +6939,7 @@ msgstr "PKCS12"
 #. Resource IDs: (3845)
 #, c-format
 msgid "Page %u"
-msgstr ""
+msgstr "Σελίδα %u"
 
 #. Resource IDs: (3845)
 #, c-format
@@ -6931,7 +6950,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Page :"
-msgstr ""
+msgstr "Σελίδα :"
 
 # ID:17,#:
 # Dlg-ID:177,#:
@@ -6942,7 +6961,7 @@ msgstr "Παράμετροι"
 
 #. Resource IDs: (1477)
 msgid "Parameters:"
-msgstr ""
+msgstr "Παράμετροι:"
 
 # ID:69,
 #. Resource IDs: (69)
@@ -6954,11 +6973,13 @@ msgid ""
 "Paste Tool\n"
 "Paste"
 msgstr ""
+"Εργαλείο Επικόλλησης\n"
+"Επικόλληση"
 
 # ID:172,
 #. Resource IDs: (172)
 msgid "Paste filename list"
-msgstr ""
+msgstr "Επικόλληση λίστας ονομάτων αρχείων"
 
 #. Resource IDs: (15)
 msgid "Pastes the svn path from the clipboard, resulting in a move (cut) or copy operation"
@@ -6978,7 +6999,7 @@ msgstr ""
 # ID:157,
 #. Resource IDs: (157)
 msgid "Patchfiles (*.diff, *.patch)|*.diff;*.patch|All (*.*)|*.*||"
-msgstr ""
+msgstr "Patch αρχεία (*.diff, *.patch)|*.diff;*.patch|;Όλα (*.*)|*.*||"
 
 # ID:77,
 #. Resource IDs: (20, 63, 77, 198, 207)
@@ -6995,20 +7016,24 @@ msgid ""
 "Pencil Tool\n"
 "Pencil"
 msgstr ""
+"Εργαλείο Μολύβι\n"
+"Μολύβι"
 
 #. Resource IDs: (16538)
 msgid "Personalized Menus and Toolbars"
-msgstr ""
+msgstr "Προσωποποιημένα μενού και εργαλειοθήκες"
 
 #. Resource IDs: (3849)
 msgid ""
 "Picture (Metafile)\n"
 "a picture"
 msgstr ""
+"Εικόνα (Metafile)\n"
+"μια εικόνα"
 
 #. Resource IDs: (65535)
 msgid "Picture:"
-msgstr ""
+msgstr "Εικόνα:"
 
 # ID:157,
 #. Resource IDs: (157)
@@ -7053,7 +7078,7 @@ msgstr ""
 
 #. Resource IDs: (1287)
 msgid "Please resolve the conflict by choosing one of the following options:"
-msgstr ""
+msgstr "Παρακαλώ επιλύστε τη διένεξη διαλέγοντας μια από τις παρακάτω επιλογές:"
 
 # ID:3858,#:
 # ID:3858,
@@ -7075,12 +7100,12 @@ msgstr "Παρακαλώ περιμέντε - μπορεί να πάρει αρ�
 # ID:13,
 #. Resource IDs: (13)
 msgid "Please wait while cancelling..."
-msgstr ""
+msgstr "Παρακαλώ περιμένετε όσο γίνεται ακύρωση..."
 
 # ID:319,
 #. Resource IDs: (319)
 msgid "Please wait while differences are obtained..."
-msgstr ""
+msgstr "Παρακαλώ περιμένετε όσο βρίσκονται διαφορές..."
 
 # ID:104,
 #. Resource IDs: (104)
@@ -7089,7 +7114,7 @@ msgstr ""
 
 #. Resource IDs: (1368)
 msgid "Please wait while we gather more information..."
-msgstr ""
+msgstr "Παρακαλώ περιμένετε όσο συλλέγονται περισσότερες πληροφορίες..."
 
 # ID:119,#:
 # ID:211,
@@ -7100,11 +7125,11 @@ msgstr "Παρακαλώ περιμένετε..."
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Port :"
-msgstr "&Θύρα:"
+msgstr "Θύρα:"
 
 #. Resource IDs: (347)
 msgid "Possible values: 0 (fully transparent) .. 255 (opaque)"
-msgstr ""
+msgstr "Τιμές: 0 (πλήρως διάφανο) .. 255 (αδιαφανές)"
 
 # ID:569,
 #. Resource IDs: (569)
@@ -7119,7 +7144,7 @@ msgstr ""
 # Dlg-ID:107,
 #. Resource IDs: (58115)
 msgid "Pre&v Page"
-msgstr "Προηγούμενη σελίδα"
+msgstr "&Προηγούμενη σελίδα"
 
 # ID:569,
 #. Resource IDs: (569)
@@ -7133,11 +7158,11 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Press &New Shortcut Key:"
-msgstr ""
+msgstr "Πατήστε τη συντόμευση &Νέο"
 
 #. Resource IDs: (65535)
 msgid "Press &new shortcut key:"
-msgstr ""
+msgstr "Πατήστε τη συντόμευση &νέο"
 
 #. Resource IDs: (2052)
 msgid "Prevents most cases in which connection lines cross revision nodes"
@@ -7145,7 +7170,7 @@ msgstr ""
 
 #. Resource IDs: (1069)
 msgid "Preview"
-msgstr ""
+msgstr "Προεπισκόπηση"
 
 # ID:376,
 #. Resource IDs: (376)
@@ -7163,24 +7188,28 @@ msgid ""
 "Previous Page\n"
 "Previous Page"
 msgstr ""
+"Προηγούμενη Σελίδα\n"
+"Επόμενη Σελίδα"
 
 #. Resource IDs: (1069, 16990)
 msgid "Print"
-msgstr ""
+msgstr "Εκτύπωση"
 
 #. Resource IDs: (3633)
 msgid ""
 "Print Document\n"
 "&Print"
 msgstr ""
+"Εκτύπωση Εγγράφου\n"
+"&Εκτύπωση"
 
 #. Resource IDs: (3845)
 msgid "Print to File"
-msgstr ""
+msgstr "Εκτύπωση σε αρχείο"
 
 #. Resource IDs: (65535)
 msgid "Printer :"
-msgstr ""
+msgstr "Εκτυπωτής :"
 
 # ID:157,
 #. Resource IDs: (3845)
@@ -7252,7 +7281,7 @@ msgstr "Ιδιότητα %s : Έκδοση %s"
 #. Resource IDs: (151)
 #, c-format
 msgid "Property %s : Working Base, Revision %ld"
-msgstr "Ιδιότητα %s : Τρέχουσα έκδοση βάσης, Αναθεώρηση %ld "
+msgstr "Ιδιότητα %s : Τρέχουσα έκδοση βάσης, Αναθεώρηση %ld"
 
 # ID:207,
 #. Resource IDs: (151)
@@ -7292,12 +7321,12 @@ msgstr "Σελιδα Ιδιοτήτων"
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Property Status:"
-msgstr ""
+msgstr "Κατάσταση Ιδιότητας:"
 
 # Control-ID:1292,
 #. Resource IDs: (1292)
 msgid "Property name:"
-msgstr ""
+msgstr "Ονομασία ιδιότητας:"
 
 # ID:207,
 #. Resource IDs: (207)
@@ -7307,7 +7336,7 @@ msgstr "Καθεστός Ιδιωτήτων"
 # Control-ID:1293,
 #. Resource IDs: (1293)
 msgid "Property value:"
-msgstr ""
+msgstr "Τιμή ιδιότητας:"
 
 # ID:11,
 #. Resource IDs: (63)
@@ -7316,17 +7345,17 @@ msgstr "Πάροχος"
 
 #. Resource IDs: (1475)
 msgid "Provider:"
-msgstr ""
+msgstr "Προμηθευτής:"
 
 # Control-ID:65535,
 #. Resource IDs: (1412)
 msgid "Proxy &timeout in seconds:"
-msgstr ""
+msgstr "Λήξη &χρόνου του διαμεσολαβητή σε δευτερόλεπτα"
 
 # Control-ID:1080,
 #. Resource IDs: (1080)
 msgid "Proxy Settings"
-msgstr ""
+msgstr "Ρυθμίσεις Proxy"
 
 # Control-ID:1338,
 #. Resource IDs: (1338)
@@ -7345,11 +7374,13 @@ msgid ""
 "Quit the application; prompts to save documents\n"
 "Exit"
 msgstr ""
+"Έξοδος από την εφαρμογή, υπενθύμιση για αποθήκευση των εγγράφων\n"
+"Έξοδος"
 
 # Control-ID:1073,
 #. Resource IDs: (1073)
 msgid "R&AM drives"
-msgstr ""
+msgstr "Δίσκοι RA&M"
 
 # ID:82,
 #. Resource IDs: (16623)
@@ -7363,7 +7394,7 @@ msgstr "&Επαναφορά σε αυτή την έκδοση"
 
 #. Resource IDs: (65535)
 msgid "RAM [kB]: "
-msgstr ""
+msgstr "RAM [kB]: "
 
 # ID:3697,
 #. Resource IDs: (3697)
@@ -7373,7 +7404,7 @@ msgstr "REC"
 # Control-ID:1048,
 #. Resource IDs: (1048)
 msgid "Re&movable drives"
-msgstr ""
+msgstr "Α&φαιρούμενοι δίσκοι"
 
 # ID:11,
 #. Resource IDs: (11)
@@ -7403,7 +7434,7 @@ msgstr "Ε&παναφορά..."
 # ID:12,
 #. Resource IDs: (12)
 msgid "Read the 'Daily Use Guide' before you are stuck..."
-msgstr ""
+msgstr "Διαβάστε τον 'Οδηγό Καθημερινής Χρήσης' πριν κολλήσετε..."
 
 # ID:82,
 #. Resource IDs: (1002)
@@ -7417,13 +7448,15 @@ msgstr "Προσφατα μετατροποποιημένες γραμμές"
 
 #. Resource IDs: (276)
 msgid "Record Only"
-msgstr ""
+msgstr "Μόνο Εγγραφή"
 
 #. Resource IDs: (1057)
 msgid ""
 "Rectangle Tool\n"
 "Rectangle"
 msgstr ""
+"Εργαλείο Πολύγωνο\n"
+"Πολύγωνο"
 
 # Control-ID:1260,
 #. Resource IDs: (1260)
@@ -7444,7 +7477,7 @@ msgstr ""
 
 #. Resource IDs: (32819)
 msgid "Reduce cross-&lines"
-msgstr ""
+msgstr "Μείωση των σταυρωτών &γραμμών"
 
 # ID:3825,
 #. Resource IDs: (3825)
@@ -7476,9 +7509,13 @@ msgid ""
 "\\s   : whitespaces"
 msgstr ""
 
+# ID:269,#:
+# ID:270,#:
+# ID:272,
 #. Resource IDs: (1469)
+#, fuzzy
 msgid "Reintegrate a branch"
-msgstr ""
+msgstr "Ε&πανενσωμάτωση συγχώνευσης"
 
 # ID:120,
 #. Resource IDs: (230)
@@ -7542,7 +7579,7 @@ msgstr "Γίνεται μεταστέγαση..."
 # ID:207,
 #. Resource IDs: (207)
 msgid "Remote property status"
-msgstr ""
+msgstr "Κατάσταση απομακρυσμένης ιδιότητας"
 
 # ID:114,#:
 # ID:322,
@@ -7554,18 +7591,18 @@ msgstr "Απομακρυσμένη έκδοση"
 # ID:207,
 #. Resource IDs: (63, 207)
 msgid "Remote status"
-msgstr ""
+msgstr "Κατάσταση απομακρυσμένου"
 
 # ID:207,
 #. Resource IDs: (207)
 msgid "Remote text status"
-msgstr ""
+msgstr "Κατάσταση απομακρυσμένου κειμένου"
 
 # Control-ID:1100,#:
 # Control-ID:1285,
 #. Resource IDs: (1332, 1470)
 msgid "Remove"
-msgstr "&Αφαίρεση"
+msgstr "Αφαίρεση"
 
 # ID:15,
 #. Resource IDs: (126)
@@ -7582,16 +7619,16 @@ msgstr "Αφαίρεση %s"
 # ID:15,
 #. Resource IDs: (15)
 msgid "Remove from &ignore list"
-msgstr ""
+msgstr "Αφαίρεση από τη λίστα &αγνοημένων"
 
 #. Resource IDs: (1068)
 msgid "Remove from Quick Access Toolbar"
-msgstr ""
+msgstr "Αφαίρεση από την εργαλειοθήκη γρήγορης πρόσβασης"
 
 # ID:209,
 #. Resource IDs: (209)
 msgid "Remove from changelist"
-msgstr ""
+msgstr "Αφαίρεση από τη λίστα αλλαγών"
 
 # ID:564,#:
 # Dlg-ID:227,
@@ -7620,7 +7657,7 @@ msgstr ""
 
 #. Resource IDs: (1352)
 msgid "Remove the whole subtree(s)"
-msgstr ""
+msgstr "Αφαίρεση ολόκληρου υπο-δένδρου(ων)"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -7658,7 +7695,7 @@ msgstr ""
 
 #. Resource IDs: (581)
 msgid "Removes the selected properties"
-msgstr ""
+msgstr "Αφαιρεί τις επιλεγμένες ιδιότητες"
 
 # ID:11,
 #. Resource IDs: (16616)
@@ -7676,7 +7713,6 @@ msgstr "Μετονομασία"
 msgid "Rename %s"
 msgstr "Μετονομασία %s"
 
-# ID:127,
 #. Resource IDs: (127)
 #, c-format
 msgid ""
@@ -7697,7 +7733,7 @@ msgstr "Μετονομασμένος κόμβος"
 # ID:126,
 #. Resource IDs: (126)
 msgid "Renamed remotely"
-msgstr ""
+msgstr "Το αίτημα ακυρώθηκε από το TSVN"
 
 # ID:11,
 #. Resource IDs: (11)
@@ -7716,6 +7752,8 @@ msgid ""
 "Repeat the last action\n"
 "Repeat"
 msgstr ""
+"Επανάληψη τελευταίας ενέργειας\n"
+"Επανάληψη"
 
 # ID:3603,
 #. Resource IDs: (3603)
@@ -7739,7 +7777,7 @@ msgstr "Αποθήκη"
 # Dlg-ID:153,
 #. Resource IDs: (153)
 msgid "Repository Browser"
-msgstr ""
+msgstr "Εξερεύνηση Αποθήκης"
 
 # Control-ID:65535,#:
 # Control-ID:1055,#:
@@ -7758,7 +7796,7 @@ msgstr "UUID Αποθητήριου: "
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Requests a username and a password"
-msgstr ""
+msgstr "Αίτημα για όνομα χρήστη και κωδικό πρόσβασης"
 
 # ID:8,
 #. Resource IDs: (8)
@@ -7772,7 +7810,7 @@ msgstr "Επαναφορά &Όλων"
 
 #. Resource IDs: (214)
 msgid "Reset columns"
-msgstr ""
+msgstr "Επαναφορά στηλών"
 
 # Dlg-ID:207,
 #. Resource IDs: (207, 229)
@@ -7804,7 +7842,7 @@ msgstr "Επίλυση διένεξης με χρήση 'δικά τους'"
 
 #. Resource IDs: (1403)
 msgid "Resolve conflict:"
-msgstr ""
+msgstr "Επίλυση διένεξης:"
 
 # Dlg-ID:207,
 #. Resource IDs: (2)
@@ -7824,23 +7862,23 @@ msgid ""
 "Resolved:\n"
 "%s"
 msgstr ""
-"&Επιλύθηκαν:\n"
+"Επιλύθηκαν:\n"
 "%s"
 
 # ID:9,
 #. Resource IDs: (9)
 msgid "Resolves conflicted files"
-msgstr ""
+msgstr "Επιλύει αρχεία με διένεξη"
 
 # Control-ID:1254,
 #. Resource IDs: (1254)
 msgid "Restore Default"
-msgstr ""
+msgstr "Επαναφορά προεπιλογών"
 
 # ID:3826,
 #. Resource IDs: (3826)
 msgid "Restore the window to normal size"
-msgstr ""
+msgstr "Επαναφορά παραθύρου σε κανονικό μέγεθος"
 
 # ID:73,
 #. Resource IDs: (73)
@@ -7853,8 +7891,9 @@ msgid "Retry"
 msgstr "Επανάληψη προσπαθειας"
 
 #. Resource IDs: (1423)
+#, fuzzy
 msgid "Reverse merge"
-msgstr ""
+msgstr "Α&ντιστροφή συγχώνευσης"
 
 # Control-ID:65535,
 #. Resource IDs: (264)
@@ -7863,9 +7902,9 @@ msgid "Reverse merging %ld"
 msgstr "Αντιστροφή συγχώνευσης %ld"
 
 #. Resource IDs: (264)
-#, c-format
+#, fuzzy, c-format
 msgid "Reverse merging %ld through %ld"
-msgstr ""
+msgstr "Αντιστροφή συγχώνευσης%ld μέσω %ld"
 
 # Dlg-ID:175,
 #. Resource IDs: (175, 229)
@@ -7906,11 +7945,13 @@ msgstr "Επαναφέρει μια προσθήκη στον έλεγχο εκ�
 msgid "Revision"
 msgstr "Έκδοση"
 
-# ID:119,
+# ID:269,#:
+# ID:270,#:
+# ID:272,
 #. Resource IDs: (119)
-#, c-format
+#, fuzzy, c-format
 msgid "Revision %d"
-msgstr "Έκδοση %d"
+msgstr "Έκδοση %ld"
 
 # ID:269,#:
 # ID:270,#:
@@ -7920,26 +7961,26 @@ msgstr "Έκδοση %d"
 msgid "Revision %ld"
 msgstr "Έκδοση %ld"
 
-# ID:120,
+# ID:116,
 #. Resource IDs: (120)
-#, c-format
+#, fuzzy, c-format
 msgid "Revision %s"
-msgstr "Έκδοση %s"
+msgstr "Εκδόσεις"
 
 # ID:15,
 #. Resource IDs: (15)
 msgid "Revision &graph"
-msgstr ""
+msgstr "&Γράφημα αναθεώρησης"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "Revision / Author:"
-msgstr ""
+msgstr "Αναθεώρηση / Συγγραφέας"
 
 # Dlg-ID:182,
 #. Resource IDs: (182)
 msgid "Revision Graph"
-msgstr ""
+msgstr "Γράφημα Αναθεώρησης"
 
 # ID:269,#:
 # ID:270,#:
@@ -7964,7 +8005,7 @@ msgstr ""
 # Control-ID:65535,
 #. Resource IDs: (269, 65535)
 msgid "Revision graph"
-msgstr ""
+msgstr "Γράφημα αναθεώρησης"
 
 # ID:269,#:
 # ID:270,#:
@@ -8013,9 +8054,9 @@ msgid ""
 "%s"
 msgstr ""
 "Αναθεώρηση: %ld %s\r\n"
-"URL: %s\r\n"
+"URL:  %s\r\n"
 "%sΣυγγραφέας: %s\r\n"
-"Ημερομηνία: %s\r\n"
+"Ημερομηνία:%s\r\n"
 "\r\n"
 "Ετικέτες (%d):%s\r\n"
 "\r\n"
@@ -8066,11 +8107,11 @@ msgstr "Ρ&υθμίσεις"
 
 #. Resource IDs: (1065)
 msgid "S&how Buttons on One Row"
-msgstr ""
+msgstr "Ε&μφάνιση κουμπιών σε μια σειρά"
 
 #. Resource IDs: (1065)
 msgid "S&how Buttons on Two Rows"
-msgstr ""
+msgstr "Ε&μφάνιση κουμπιών σε δυο σειρές"
 
 #. Resource IDs: (17078)
 msgid "S&how Quick Access Toolbar below the Ribbon"
@@ -8195,7 +8236,7 @@ msgstr "Αποθήκευση ώς..."
 #. Resource IDs: (3857)
 #, c-format
 msgid "Save changes to %1?"
-msgstr ""
+msgstr "Αποθήκευση αλλαγών στο %1;"
 
 # ID:232,
 #. Resource IDs: (232)
@@ -8214,6 +8255,8 @@ msgid ""
 "Save the modified file\n"
 "Save file"
 msgstr ""
+"Αποθήκευση αλλαγμένου αρχείου\n"
+"Αποθήκευση αρχείου"
 
 # Control-ID:1132,
 #. Resource IDs: (1132)
@@ -8231,13 +8274,13 @@ msgstr ""
 
 #. Resource IDs: (581)
 msgid "Saves the selected property value to a file"
-msgstr ""
+msgstr "Αποθηκεύει την τιμή της επιλεγμένης ιδιότητας σε αρχείο"
 
 # ID:103,
 #. Resource IDs: (103)
 #, c-format
 msgid "Saving file %s"
-msgstr ""
+msgstr "Αποθήκευση αρχείου %s"
 
 # ID:103,
 #. Resource IDs: (103)
@@ -8259,11 +8302,11 @@ msgstr "Ίχνος"
 
 #. Resource IDs: (1003)
 msgid "Scroll Left"
-msgstr ""
+msgstr "Μετακύλιση αριστερά"
 
 #. Resource IDs: (1003)
 msgid "Scroll Right"
-msgstr ""
+msgstr "Μετακύλιση δεξιά"
 
 # ID:113,
 #. Resource IDs: (113)
@@ -8290,7 +8333,7 @@ msgstr ""
 # ID:376,
 #. Resource IDs: (376)
 msgid "Select &All"
-msgstr "Επιλογή Όλων"
+msgstr "Επιλογή &Όλων"
 
 #. Resource IDs: (16529)
 msgid "Select &User-defined Image: "
@@ -8400,12 +8443,12 @@ msgstr "Επιλέξτε αρχείο hook script"
 
 #. Resource IDs: (1405)
 msgid "Select items automatically"
-msgstr ""
+msgstr "Αυτόματη επιλογή στοιχείων"
 
 # ID:78,
 #. Resource IDs: (78)
 msgid "Select merge application"
-msgstr ""
+msgstr "Επιλογή εφαρμογής συγχώνευσης"
 
 # ID:78,
 #. Resource IDs: (119)
@@ -8425,7 +8468,7 @@ msgstr ""
 # ID:79,
 #. Resource IDs: (79)
 msgid "Select text editor application"
-msgstr ""
+msgstr "Επιλογή κειμενογράφου"
 
 # ID:276,
 #. Resource IDs: (595)
@@ -8443,6 +8486,8 @@ msgid ""
 "Select the entire document\n"
 "Select All"
 msgstr ""
+"Επιλογή ολόκληρου του εγγράφου\n"
+"Επιλογή Όλων"
 
 # ID:276,
 #. Resource IDs: (595)
@@ -8456,7 +8501,7 @@ msgstr "Επιλέξτε τις εκδόσεις για συγχώνευση"
 
 #. Resource IDs: (595)
 msgid "Select the type of merge"
-msgstr ""
+msgstr "Επιλέξτε τύπο συνένωσης"
 
 # ID:78,
 #. Resource IDs: (78)
@@ -8472,7 +8517,7 @@ msgstr "Επιλεγμένος κόμβος"
 # ID:3866,
 #. Resource IDs: (3866)
 msgid "Send Mail failed to send message."
-msgstr ""
+msgstr "Η Αποστολή Μηνύματος απέτυχε."
 
 # ID:74,
 #. Resource IDs: (74)
@@ -8500,7 +8545,7 @@ msgid ""
 "Set property '%s' on\r\n"
 "%s"
 msgstr ""
-"Καθορισμός ιδιότητας '%s' στο\r\n"
+"Καθορισμός ιδιότητας  '%s' στο\r\n"
 "%s"
 
 # ID:13,
@@ -8535,7 +8580,7 @@ msgstr ""
 # ID:101,
 #. Resource IDs: (101)
 msgid "Sho&w properties"
-msgstr "Προβολή ιδιοτήτων"
+msgstr "Προ&βολή ιδιοτήτων"
 
 # Control-ID:1105,
 #. Resource IDs: (1105)
@@ -8560,7 +8605,7 @@ msgstr "Επίδειξη"
 
 #. Resource IDs: (16996)
 msgid "Show &Accelerator for:"
-msgstr ""
+msgstr "Εμφάνιση &Επιταχυντή για:"
 
 # ID:115,#:
 # Control-ID:1031,
@@ -8584,11 +8629,11 @@ msgstr "Επίδειξη &Εμβέλειας..."
 # Control-ID:1034,
 #. Resource IDs: (32826)
 msgid "Show &WC revision"
-msgstr "Προβολή αναθεώρησης αντιγράφου εργασίας"
+msgstr "Προβολή αναθεώρησης &αντιγράφου εργασίας"
 
 #. Resource IDs: (32796)
 msgid "Show &all revisions"
-msgstr ""
+msgstr "Εμφάνιση &όλων των αναθεωρήσεων"
 
 # ID:115,
 #. Resource IDs: (113, 32783)
@@ -8604,12 +8649,12 @@ msgstr "Εμφάνιση &αλλαγών"
 # Control-ID:1132,
 #. Resource IDs: (12, 101, 1016, 1031, 1034, 1037, 1132, 1228, 1420, 1467, 32784)
 msgid "Show &log"
-msgstr ""
+msgstr "Εμφάνιση &αρχείου καταγραφής"
 
 # Control-ID:1031,
 #. Resource IDs: (1031)
 msgid "Show &log..."
-msgstr ""
+msgstr "Εμφάνιση &αρχείου καταγραφής..."
 
 # Control-ID:1088,
 #. Resource IDs: (1088)
@@ -8625,19 +8670,19 @@ msgstr "Προβολή ιδιοτήτων"
 # Control-ID:1073,
 #. Resource IDs: (1073)
 msgid "Show &unversioned files"
-msgstr ""
+msgstr "Εμφάνιση αρχείων &χωρίς έκδοση"
 
 #. Resource IDs: (1069)
 msgid "Show Above the Ribbon"
-msgstr ""
+msgstr "Εμφάνιση Πάνω από την Κορδέλα"
 
 #. Resource IDs: (1069)
 msgid "Show Below the Ribbon"
-msgstr ""
+msgstr "Εμφάνιση Κάτω από την Κορδέλα"
 
 #. Resource IDs: (1065)
 msgid "Show Fewer Buttons"
-msgstr ""
+msgstr "Εμφάνιση λιγότερων κουμπιών"
 
 #. Resource IDs: (32817)
 msgid "Show File List"
@@ -8659,15 +8704,15 @@ msgstr ""
 # Control-ID:1126,
 #. Resource IDs: (1126)
 msgid "Show Lock dialog before locking files"
-msgstr ""
+msgstr "Εμφάνιση διαλόγου κλειδώματος πριν το κλείδωμα αρχείων"
 
 #. Resource IDs: (1065)
 msgid "Show More Buttons"
-msgstr ""
+msgstr "Εμφάνιση Περισσότερων Κουμπιών"
 
 #. Resource IDs: (32813)
 msgid "Show Ove&rview"
-msgstr ""
+msgstr "Εμφάνιση &Περίληψης"
 
 #. Resource IDs: (1068)
 msgid "Show Quick Access Toolbar Above the Ribbon"
@@ -8679,31 +8724,31 @@ msgstr ""
 
 #. Resource IDs: (16651)
 msgid "Show Screen&Tips on toolbars"
-msgstr ""
+msgstr "Εμφάνιση &συμβουλών οθόνης στις εργαλειοθήκες"
 
 # Control-ID:65535,
 #. Resource IDs: (32831)
 msgid "Show WC &modifications"
-msgstr "Εμφάνιση μεταβολών αντιγράφου εργασίας"
+msgstr "Εμφάνιση &μεταβολών αντιγράφου εργασίας"
 
 # ID:2051,
 #. Resource IDs: (2051)
 msgid "Show an overview of the whole graph"
-msgstr ""
+msgstr "Εμφάνιση επισκόπισης ολόκληρου του γραφήματος"
 
 # ID:114,
 #. Resource IDs: (114)
 msgid "Show changes as &unified diff"
-msgstr ""
+msgstr "Εμφάνιση μεταβολών ως &ενοποιημένες διαφορές"
 
 # ID:113,
 #. Resource IDs: (113)
 msgid "Show differences as &unified diff"
-msgstr ""
+msgstr "Εμφάνιση διαφορών ως &ενοποιημένες διαφορές"
 
 #. Resource IDs: (1126)
 msgid "Show excluded folders as normal"
-msgstr ""
+msgstr "Εμφάνιση εξαιρούμενων καταλόγων ως κανονικών"
 
 #. Resource IDs: (1480)
 msgid "Show externals from different repositories"
@@ -8711,19 +8756,19 @@ msgstr ""
 
 #. Resource IDs: (16656)
 msgid "Show f&ull menus after a short delay"
-msgstr ""
+msgstr "Εμφάνιση π&λήρους μενού μετά από μικρή καθυστέρηση"
 
-# Control-ID:1266,
+# Control-ID:1073,
 #. Resource IDs: (1264)
 #, fuzzy
 msgid "Show i&gnored files"
-msgstr "Συγκαταλογή αρχείων που έχουν αγνοηθεί"
+msgstr "Εμφάνιση αρχείων &χωρίς έκδοση"
 
 # ID:145,
 #. Resource IDs: (1480)
 #, fuzzy
 msgid "Show items in externals"
-msgstr "Στοιχεία σε εξωτερικά"
+msgstr "Στοιχεία σε ε&ξωτερικά"
 
 # ID:115,#:
 # Control-ID:1031,
@@ -8804,22 +8849,22 @@ msgstr ""
 msgid "Show tags on the copy source, not as separate nodes"
 msgstr ""
 
-# Control-ID:65535,
+# Control-ID:1073,
 #. Resource IDs: (1209)
 #, fuzzy
 msgid "Show un&modified files"
-msgstr "Εμφάνιση μεταβολών αντιγράφου εργασίας"
+msgstr "Εμφάνιση αρχείων &χωρίς έκδοση"
 
-# ID:12,
+# Control-ID:1073,
 #. Resource IDs: (1073)
 #, fuzzy
 msgid "Show un&versioned files"
-msgstr "Εμφάνιση επικάλυψης για τα στοιχεία χωρίς έκδοση"
+msgstr "Εμφάνιση αρχείων &χωρίς έκδοση"
 
 # ID:198,
 #. Resource IDs: (198)
 msgid "Show/Hide"
-msgstr ""
+msgstr "Εμφάνιση/Απόκρυψη"
 
 # ID:272,
 #. Resource IDs: (272)
@@ -8827,7 +8872,6 @@ msgstr ""
 msgid "Showing %ld nodes"
 msgstr "Επίδειξη %ld κόμβων"
 
-# ID:115,
 #. Resource IDs: (115)
 #, c-format
 msgid "Showing %ld revision(s), from revision %ld to revision %ld - %ld revision(s) selected."
@@ -8980,7 +9024,7 @@ msgstr ""
 
 #. Resource IDs: (16962)
 msgid "Standard"
-msgstr ""
+msgstr "Κανονικό"
 
 # ID:569,
 #. Resource IDs: (569)
@@ -9019,7 +9063,7 @@ msgstr "Κατάσταση"
 
 #. Resource IDs: (1068)
 msgid "Status Bar Configuration"
-msgstr ""
+msgstr "Διαμόρφωση Μπάρας Κατάστασης"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -9131,8 +9175,9 @@ msgstr "Αρχείο Διακομιστή Subversion:"
 
 # Control-ID:1232,
 #. Resource IDs: (1232)
+#, fuzzy
 msgid "Sw&itch working copy to new branch/tag"
-msgstr "Με&ταστροφή του επεξεργαζόμενου αντιγράφου σε μία άλλη διακλάδωση / δελτάριο"
+msgstr "Με&ταστροφή αντιγράφου εργασίας σε νέα διακλάδωση / ετικέτα"
 
 # ID:229,
 #. Resource IDs: (229)
@@ -9209,7 +9254,7 @@ msgstr "Μεταστροφή του επεξεργαζόμενου αντιγρ�
 # ID:9,
 #. Resource IDs: (1479)
 msgid "Switch:"
-msgstr "Μ&εταστροφή..."
+msgstr "Μεταστροφή:"
 
 #. Resource IDs: (325)
 msgid "Switches the comparison left<<->right"
@@ -9247,7 +9292,7 @@ msgstr "Μέγεθος στηλογνώμονα: "
 
 #. Resource IDs: (65535)
 msgid "Tag nodes"
-msgstr ""
+msgstr "Ετικέτες κόμβων"
 
 # ID:79,
 #. Resource IDs: (79)
@@ -9257,11 +9302,11 @@ msgstr ""
 
 #. Resource IDs: (1064)
 msgid "Tasks Pane"
-msgstr ""
+msgstr "Παράθυρο εργασιών"
 
 #. Resource IDs: (219)
 msgid "Test Only"
-msgstr ""
+msgstr "Δοκιμή Μόνο"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
@@ -9566,7 +9611,6 @@ msgid ""
 "You must only specify one of them."
 msgstr ""
 
-# ID:64,
 #. Resource IDs: (64)
 #, c-format
 msgid ""
@@ -9588,7 +9632,6 @@ msgid ""
 "Do you want to proceed anyway?"
 msgstr ""
 
-# ID:314,
 #. Resource IDs: (314)
 #, c-format
 msgid ""
@@ -9612,7 +9655,6 @@ msgid ""
 "TortoiseMerge tried to apply the patch by stripping prefixes but no matching path could be found."
 msgstr ""
 
-# ID:314,
 #. Resource IDs: (314)
 #, c-format
 msgid ""
@@ -9857,7 +9899,7 @@ msgstr "&Κάθετη Διάταξη"
 
 #. Resource IDs: (65535)
 msgid "Timeouts"
-msgstr ""
+msgstr "Χρόνοι λήξης"
 
 # ID:224,
 #. Resource IDs: (224)
@@ -9882,8 +9924,9 @@ msgstr "Προς:"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
+#, fuzzy
 msgid "To: (end URL and revision of the range to merge)"
-msgstr ""
+msgstr "&Έως: (Αρχικό URL και εμβέλεια των έκδοσεων που πρόκειτε να συνενωθούν)"
 
 #. Resource IDs: (3633)
 msgid ""
@@ -10056,9 +10099,8 @@ msgstr "Σύνολο ιδιοτήτων αναθεωρήσεων χρήστη"
 # ID:11,#:
 # Control-ID:65535,
 #. Resource IDs: (32821)
-#, fuzzy
 msgid "Tr&ee stripes"
-msgstr "Συγχώνευση δέντρου"
+msgstr ""
 
 # ID:357,
 #. Resource IDs: (357)
@@ -10087,7 +10129,7 @@ msgstr "Συγχώνευση δέντρου"
 
 #. Resource IDs: (65535)
 msgid "Trunk nodes"
-msgstr ""
+msgstr "Κόμβοι κορμού"
 
 #. Resource IDs: (251)
 msgid "Try a 'Cleanup'. If that doesn't work you need to do a fresh checkout."
@@ -10122,7 +10164,7 @@ msgstr "URL ιστορικότητα"
 #. Resource IDs: (199)
 #, c-format
 msgid "URL not known (UUID: %s)"
-msgstr ""
+msgstr "Άγνωστο URL (UUID: %s)"
 
 # ID:12,
 #. Resource IDs: (12)
@@ -10130,8 +10172,9 @@ msgid "URL of Subversion items"
 msgstr "URL των αντικειμένων του Subversion"
 
 #. Resource IDs: (65535)
+#, fuzzy
 msgid "URL to merge from"
-msgstr ""
+msgstr "URL για συγχώνευση &από"
 
 # ID:144,#:
 # Control-ID:65535,
@@ -10160,7 +10203,7 @@ msgstr "Δεν γίνεται να φορτωθεί η υποστήρηξη γι
 
 #. Resource IDs: (3865)
 msgid "Unable to process command, server busy."
-msgstr ""
+msgstr "Η εντολή δεν μπορεί να επεξεργαστεί, ο διακομιστής είναι απασχολημένος."
 
 # ID:3859,#:
 # ID:3859,
@@ -10252,7 +10295,6 @@ msgstr ""
 msgid "Unified &diff of HEAD revisions"
 msgstr "Ενοποιημένη &διαφορά ΚΕΦΑΛΙΔΑΣ εκδόσεων"
 
-# ID:81,
 #. Resource IDs: (81)
 #, c-format
 msgid ""
@@ -10284,7 +10326,7 @@ msgstr "Απασφαλίζμένα"
 
 #. Resource IDs: (565)
 msgid "Unrecognized or invalid property file format!"
-msgstr ""
+msgstr "Μη αναγνωρίσιμη ή έγκυρη ιδιότητα μορφής αρχείου"
 
 # ID:3841,#:
 # ID:3841,
@@ -10317,7 +10359,7 @@ msgstr "Αφαίρεση έκδοσης %s"
 
 #. Resource IDs: (106)
 msgid "Up one folder"
-msgstr ""
+msgstr "Ένας φάκελος επάνω"
 
 # Dlg-ID:152,
 #. Resource IDs: (152, 230)
@@ -10363,12 +10405,12 @@ msgstr "Γίνεται ενημέρωση %s"
 
 #. Resource IDs: (3849)
 msgid "Updating ActiveX objects"
-msgstr ""
+msgstr "Ενημέρωση αντικειμώνων ActiveX"
 
 # ID:283,
 #. Resource IDs: (283)
 msgid "Updating and retrying the lock..."
-msgstr ""
+msgstr "Ενημέρωση και επανάληψη κλειδώματος"
 
 # ID:226,
 #. Resource IDs: (199)
@@ -10478,8 +10520,9 @@ msgstr ""
 
 # ID:138,
 #. Resource IDs: (4)
+#, fuzzy
 msgid "Use repository"
-msgstr "Χρήση αποθήκης"
+msgstr "&Αναζήτηση αποθήκης"
 
 # Control-ID:1066,
 #. Resource IDs: (1066)
@@ -10593,7 +10636,7 @@ msgstr "Ο χρήστης ακύρωσε"
 # ID:69,
 #. Resource IDs: (69)
 msgid "Username:"
-msgstr "Αναγνωριστικό χρήστη:"
+msgstr "Όνομα χρήστη:"
 
 # ID:313,
 #. Resource IDs: (313)
@@ -10638,7 +10681,7 @@ msgstr "Σε έκδοση"
 # MenuEntry#:
 #. Resource IDs: (65535)
 msgid "View"
-msgstr "Επισκόπηση"
+msgstr "Εμφάνιση"
 
 # ID:114,
 #. Resource IDs: (114)
@@ -10654,11 +10697,11 @@ msgstr ""
 # Control-ID:1084,
 #. Resource IDs: (1084)
 msgid "Visit our website"
-msgstr "Επισκευθήτε την ιστοσελίδα μας"
+msgstr "Επισκευθείτε την ιστοσελίδα μας"
 
 #. Resource IDs: (32848)
 msgid "Visual Studio.NET 200&5"
-msgstr ""
+msgstr "Visual Studio.NET 200&5"
 
 #. Resource IDs: (65535)
 msgid "WC node"
@@ -10671,16 +10714,16 @@ msgstr ""
 # ID:198,
 #. Resource IDs: (198)
 msgid "Wait"
-msgstr ""
+msgstr "Αναμονή"
 
 # Control-ID:1327,
 #. Resource IDs: (1327)
 msgid "Wait for the script to finish"
-msgstr ""
+msgstr "Αναμονή για την ολοκλήρωση του script"
 
 #. Resource IDs: (280)
 msgid "Want to go offline?"
-msgstr "&Θέλετε να πάτε εκτός σύνδεσης;"
+msgstr "Θέλετε να πάτε εκτός σύνδεσης;"
 
 # ID:88,
 #. Resource IDs: (88)
@@ -10718,7 +10761,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Whitespaces"
-msgstr "&Κενά"
+msgstr "Κενά"
 
 # ID:3825,
 #. Resource IDs: (1065)
@@ -10727,11 +10770,11 @@ msgstr "Θέση παραθύρου"
 
 #. Resource IDs: (16927)
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #. Resource IDs: (32844)
 msgid "Windows &2000"
-msgstr ""
+msgstr "Windows &2000"
 
 # ID:146,
 #. Resource IDs: (146)
@@ -10852,12 +10895,12 @@ msgstr ""
 #. Resource IDs: (1002)
 #, c-format
 msgid "You may define up to %d tools."
-msgstr ""
+msgstr "Μπορείτε να ορίσετε εως και %d εργαλεία."
 
 # ID:196,
 #. Resource IDs: (196)
 msgid "You must restart your system for the changes to take effect."
-msgstr ""
+msgstr "Πρέπει να επανεκκινήσετε το σύστημα για να ολοκληρωθούν οι αλλαγές."
 
 # ID:77,
 #. Resource IDs: (77)
@@ -10868,11 +10911,11 @@ msgstr ""
 
 #. Resource IDs: (1001)
 msgid "You should enter a text!"
-msgstr ""
+msgstr "Πρέπει να εισάγετε κείμενο!"
 
 #. Resource IDs: (1001)
 msgid "You should select an image!"
-msgstr ""
+msgstr "Πρέπει να επιλέξετε μια εικόνα!"
 
 #. Resource IDs: (89)
 #, c-format
@@ -10984,6 +11027,8 @@ msgid ""
 "Zoom In\n"
 "Zoom In"
 msgstr ""
+"Μεγέθυνση\n"
+"Σμύκρινση"
 
 # ID:2051,
 #. Resource IDs: (3633)
@@ -11012,7 +11057,7 @@ msgstr "Μεγέθυνση προς τα έξω"
 # ID:2051,
 #. Resource IDs: (32801)
 msgid "Zoom to &100%"
-msgstr "Μεγέθυνση στο 100%"
+msgstr "Μεγέθυνση στο &100%"
 
 # ID:2051,
 #. Resource IDs: (2051)
@@ -11031,7 +11076,7 @@ msgstr "Μεγέθυνση για προσαρμογή στο πλάτος"
 
 #. Resource IDs: (1001)
 msgid "[Unassigned]"
-msgstr ""
+msgstr "[Χωρίς Ανάθεση]"
 
 #. Resource IDs: (346)
 msgid ""
@@ -11045,7 +11090,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "_POPUP_"
-msgstr ""
+msgstr "_POPUP_"
 
 # ID:10,
 #. Resource IDs: (10)
@@ -11273,12 +11318,12 @@ msgstr "είναι ήδη διαγραμένω"
 
 #. Resource IDs: (583)
 msgid "it is unversioned."
-msgstr ""
+msgstr "δεν έχει έκδοση"
 
 # ID:214,
 #. Resource IDs: (214)
 msgid "item kept locally"
-msgstr ""
+msgstr "το στοιχείο κρατήθηκε τοπικά"
 
 #. Resource IDs: (65535)
 msgid "last head update: "
@@ -11290,7 +11335,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "last update: "
-msgstr ""
+msgstr "τελευταία ενημέρωση: "
 
 # ID:11,#:
 # ID:195,#:
@@ -11341,12 +11386,12 @@ msgstr "λείπει από:"
 # ID:10,
 #. Resource IDs: (10, 272)
 msgid "modified"
-msgstr ""
+msgstr "μεταβλήθηκε"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "modified / copied"
-msgstr ""
+msgstr "μεταβλήθηκε / αντιγράφτηκε"
 
 # ID:245,
 #. Resource IDs: (245)
@@ -11356,7 +11401,7 @@ msgstr "μήνας"
 #. Resource IDs: (199)
 #, c-format
 msgid "multiple URLs (e.g. %s)"
-msgstr ""
+msgstr "πολλαπλά URLs (π.χ. %s)"
 
 #. Resource IDs: (18)
 msgid "no"
@@ -11370,7 +11415,7 @@ msgstr ""
 # ID:10,
 #. Resource IDs: (10)
 msgid "non-versioned"
-msgstr ""
+msgstr "χωρίς έκδοση"
 
 # again, inflection
 # ID:10,
@@ -11381,11 +11426,11 @@ msgstr "κανονικό"
 # ID:11,
 #. Resource IDs: (11)
 msgid "obstructed"
-msgstr ""
+msgstr "εμποδίζονται"
 
 #. Resource IDs: (601)
 msgid "offline"
-msgstr ""
+msgstr "εκτός σύνδεσης"
 
 # ID:80,#:
 # ID:103,#:
@@ -11410,7 +11455,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "path elements: "
-msgstr ""
+msgstr "στοιχεία καταλόγου: "
 
 # ID:116,
 #. Resource IDs: (65535)
@@ -11421,21 +11466,21 @@ msgstr "διαδρομές: "
 # ID:3869,
 #. Resource IDs: (3869)
 msgid "pixels"
-msgstr "εικονόστιγματα"
+msgstr "εικονοστοιχεία"
 
 # Control-ID:65535,
 #. Resource IDs: (65535)
 msgid "possible or real conflict / obstructed"
-msgstr ""
+msgstr "πιθανή ή πραγματική διένεξη / παρεμπόδιση"
 
 #. Resource IDs: (3845)
 msgid "prn"
-msgstr ""
+msgstr "prn"
 
 # ID:245,
 #. Resource IDs: (245)
 msgid "quarter of year"
-msgstr ""
+msgstr "τετράμηνο"
 
 # you can only translate "read only" only in a descriptive way, my apologies if the outline breaks because the translation gets to be a bit more wordy than it is in english
 # "μόνο για ανάγνωση" -> "only for reading"
@@ -11478,7 +11523,7 @@ msgstr "αναθεωρήσεις: "
 
 #. Resource IDs: (214)
 msgid "root project"
-msgstr ""
+msgstr "αρχικό έργο"
 
 #. Resource IDs: (65535)
 msgid "skip ranges: "
@@ -11563,14 +11608,16 @@ msgid ""
 "switched to\r\n"
 "%s"
 msgstr ""
+"μεταστράφηκε σε\r\n"
+"%s"
 
 #. Resource IDs: (65535)
 msgid "switched:"
-msgstr ""
+msgstr "έχει μεταστραφεί:"
 
 #. Resource IDs: (601)
 msgid "temp. offline"
-msgstr ""
+msgstr "προσωρινά εκτός σύνδεσης"
 
 #. Resource IDs: (65535)
 msgid "text [token count]: "
@@ -11715,7 +11762,7 @@ msgstr "εβδομάδα"
 
 #. Resource IDs: (65535)
 msgid "word tokens: "
-msgstr ""
+msgstr "λέξεις κλειδιά: "
 
 #. Resource IDs: (65535)
 msgid "words [uncompressed]: "
@@ -11736,31 +11783,67 @@ msgstr "ναι"
 
 #. Resource IDs: (1382)
 msgid "{BugTraq}"
-msgstr ""
+msgstr "{BugTraq}"
 
 # ID:145,
 #~ msgid "%s\\%s - Export"
 #~ msgstr "%s\\%s - Εξαγωγή"
+# ID:145,
+#~ msgid "%s\\%s - Export (%d)"
+#~ msgstr "%s\\%s - Εξαγωγή (%d)"
+#~ msgid ""
+#~ "%s\n"
+#~ "\n"
+#~ "Shall I update the working copy now\n"
+#~ "and reopen the commit dialog?"
+#~ msgstr ""
+#~ "%s\n"
+#~ "\n"
+#~ "Να ενημερώσω το αντίγραφο εργασίας τώρα\n"
+#~ "και να ξανανοίξω το διάλογο για καταγραφή?"
 # Control-ID:65535,
 #~ msgid "&Delete unversioned items..."
-#~ msgstr "&Διαγραφή στοιχείων χωρίς έκδοση"
+#~ msgstr "&Διαγραφή στοιχείων χωρίς έκδοση..."
+# Control-ID:65535,
+#~ msgid "&Directories"
+#~ msgstr "&Φάκελοι"
+# ID:12,
+#~ msgid "&Edit conflict"
+#~ msgstr "&Επεξεργασία διένεξης"
+# MenuEntry#:
+#~ msgid "&Files"
+#~ msgstr "&Αρχεία"
 # ID:17,#:
 # Dlg-ID:177,#:
 # Dlg-ID:226,
 #~ msgid "&Properties"
 #~ msgstr "&Ιδιότητες"
+#~ msgid "&file list control"
+#~ msgstr "Λίστα &αρχείων ελέγχου"
+#~ msgid "(Double-click to clear error message)"
+#~ msgstr "(Διπλο κλικ για καθαρισμό του μηνύματος λάθους)"
 # again, inflection
 # ID:13,
 #~ msgid "(externals)"
 #~ msgstr "(εξωτερικά)"
 #~ msgid "Add new files automatically to SVN"
 #~ msgstr "Προσθήκη νέων αρχείων αυτόματα στο SVN"
+# Control-ID:1090,#:
+# Control-ID:1093,
+#~ msgid "Advanced"
+#~ msgstr "Για προχωρημένους"
 #~ msgid "All"
 #~ msgstr "Όλος"
+# again, inflection, depends on context
+# ID:11,#:
+# Control-ID:65535,
+#~ msgid "Already merged"
+#~ msgstr "Ήδη συγχνωνευμένο"
 #~ msgid "Autotext Tester"
 #~ msgstr "Δοκιμή Autotext"
-#~ msgid "Bug Tracker..."
-#~ msgstr "Σφάλμα λογισμικού παρακολουθηστεις..."
+# Control-ID:1119,
+#~ msgid "Bug-ID / &Issue-Nr:"
+#~ msgstr "Κωδικός λάθους / &Αριθμός θέματος:"
 # Control-ID:1265,
 #~ msgid "Case-sensitive"
 #~ msgstr "Συγγραφέων αδιάφορο για πεζά/κεφαλαία"
@@ -11770,31 +11853,39 @@ msgstr ""
 #~ msgstr "Έλεγχος:"
 # Control-ID:1074,
 #~ msgid "Cleaning up directory \"%s\""
-#~ msgstr ""
-#~ "Καθάρισμα φακέλου:\r\n"
-#~ "%s"
+#~ msgstr "Καθάρισμα φακέλου \"%s\""
 # ID:73,
 #~ msgid "Collapsed"
 #~ msgstr "Κατέρρευσε"
+#~ msgid "Commit failed - Update needed"
+#~ msgstr "Η καταγραφή απέτυχε - Χρειάζεται ενημέρωση"
 # Control-ID:1135,
 #~ msgid "Commits each %s"
 #~ msgstr "Καταγραφές κάθε %s"
+# ID:74,
+#~ msgid "Completed!"
+#~ msgstr "Ολοκληρώθηκε!"
 # ID:11,
 #~ msgid "Converts the working copy format to the new version"
 #~ msgstr "Μετατρέπει την μορφή του ανοικτού αντιγράφου σε νεότερη έκδοση"
 # Control-ID:65535,
 #~ msgid "Copied from revision"
 #~ msgstr "Αντιγράφηκε από αναθεώρηση"
-#~ msgid "Could not delete property \"%s\" on %s because"
-#~ msgstr "Δεν ήταν δυνατή η διαγραφή ιδιοκτησίας \"%s\" σε %s επειδή"
 # Dlg-ID:208,
 #~ msgid "Create shortcut"
 #~ msgstr "Δημιουργεία συντόμευσης"
 # Control-ID:65535,
 #~ msgid "Directories"
 #~ msgstr "Κατάλογοι:"
+#~ msgid "Discards local changes upon incoming deletes"
+#~ msgstr "Απόρριψη τοπικών αλλαγών κατά τον ερχομό διαγραφών"
 #~ msgid "Exit"
-#~ msgstr "&Έξοδος"
+#~ msgstr "Έξοδος"
+# again, inflection, depends on context
+# ID:11,#:
+# Control-ID:65535,
+#~ msgid "F&orce the merge"
+#~ msgstr "Ε&ξαναγκασμός της συγχώνευσης"
 # Control-ID:1138,
 #~ msgid "File changes each %s"
 #~ msgstr "Το αρχείο μεταβάλλεται κάθε %s"
@@ -11807,21 +11898,29 @@ msgstr ""
 #~ msgstr "Αρχεία"
 #~ msgid "Force"
 #~ msgstr "Αναγκάσμος"
-# again, inflection, depends on context
-# ID:11,#:
-# Control-ID:65535,
-#~ msgid "Force the merge"
-#~ msgstr "Εξαναγκασμός της συγχώνευσης"
 #~ msgid "Found auto words:"
 #~ msgstr "Βρέθηκαν λόγια αυτόματα:"
-#~ msgid "Groups branches together"
-#~ msgstr "Ομαδοποίηση διακλαδώσεων"
+# Control-ID:1115,#:
+# Control-ID:1032,
+#~ msgid "H&EAD Revision"
+#~ msgstr "&HEAD Έκδοση"
+# Control-ID:1020,
+#~ msgid "I&gnore all whitespaces"
+#~ msgstr "Πα&ράβλεψη κενών διαστημάτων"
 # ID:73,
 #~ msgid "I&gnored"
-#~ msgstr "Έχουν παραβλεφθεί"
+#~ msgstr "Έχουν &παραβλεφθεί"
+#~ msgid "ID:32825:V C +K"
+#~ msgstr "ID:32825:V C +K"
 # Control-ID:1021,
 #~ msgid "Ignore all whitespace changes"
 #~ msgstr "Παράβλεψη αλλαγών στα κενά"
+# Control-ID:1067,
+#~ msgid "Ignore line &endings"
+#~ msgstr "Παράβλεψη &καταλήξεων γραμμών"
+# Control-ID:1021,
+#~ msgid "Ignore whitespace c&hanges"
+#~ msgstr "Παράβλεψη &αλλαγών σε κενά διαστήματα"
 #~ msgid ""
 #~ "Ignores all whitespace changes when diffing\n"
 #~ "Ignore all whitespace changes"
@@ -11838,9 +11937,33 @@ msgstr ""
 #~ msgstr "Αντικείμενα για εμφάνιση"
 #~ msgid "No path or pathfile specified on the command line!"
 #~ msgstr "Δεν έχει οριστεί μονοπάτι η αρχείο μονοπάτιου στην γραμμή εντολών!"
+# ID:276,
+#~ msgid "No such revision '%s'"
+#~ msgstr "Δεν υπάρχει έκδοση '%s'"
+# Control-ID:1075,#:
+# Control-ID:1075,
+#~ msgid "Non-versioned"
+#~ msgstr "Χωρίς έκδοση"
 # Control-ID:1160,
 #~ msgid "Number of %s"
 #~ msgstr "Αριθμός %s"
+# ID:117,
+#~ msgid "Option"
+#~ msgstr "Επιλογή"
+# ID:138,
+#~ msgid "Prefer &repository"
+#~ msgstr "Χρήση &αποθήκης"
+# ID:74,#:
+# ID:209,
+#~ msgid "Re&solved"
+#~ msgstr "Ε&πίλυση"
+# ID:76,#:
+# ID:208,#:
+# Control-ID:65535,#:
+# Control-ID:1306,#:
+# Control-ID:65535,
+#~ msgid "Re&vision"
+#~ msgstr "Έκ&δοση"
 # ID:269,#:
 # ID:270,#:
 # ID:272,
@@ -11850,24 +11973,65 @@ msgstr ""
 # Control-ID:1285,
 #~ msgid "Repair copy"
 #~ msgstr "Διόρθωση αντιγραφής"
+# ID:119,
+#~ msgid "Revision %d"
+#~ msgstr "Έκδοση %d"
+# ID:120,
+#~ msgid "Revision %s"
+#~ msgstr "Έκδοση %s"
+#~ msgid "Scan"
+#~ msgstr "Ανίχνευση"
+# ID:12,#:
+# ID:101,#:
+# Control-ID:1016,#:
+# Control-ID:1228,#:
+# Control-ID:1031,#:
+# Control-ID:1034,#:
+# Control-ID:1132,
+#~ msgid "Show lo&g"
+#~ msgstr "Εμφάνιση &αρχείου καταγραφής"
+#~ msgid "Tasks"
+#~ msgstr "Εργασίες"
+# Control-ID:65535,
+#~ msgid "The target working copy has local modifications!"
+#~ msgstr "Το αντιγράφο εργασίας (στόχος) έχει τοπικές μεταβολές"
+# ID:313,
+#~ msgid ""
+#~ "The target working copy has local modifications.\n"
+#~ "Do you want to merge anyway?"
+#~ msgstr ""
+#~ "Το αντίγραφο εργασίας (στόχος) έχει τοπικές μεταβολές.\n"
+#~ "Θέλετε να τις συγχωνεύσετε οποσδήποτε;"
 # ID:74,#:
 # ID:264,
 #~ msgid "Un&modified"
-#~ msgstr "Μη τροποποιημένα"
+#~ msgstr "Μη &τροποποιημένα"
 # Control-ID:1075,#:
 # Control-ID:1075,
 #~ msgid "Un&versioned"
-#~ msgstr "Χωρίς έκδοση"
-# Control-ID:1075,#:
-# Control-ID:1075,
-#~ msgid "Unversioned"
-#~ msgstr "Χωρίς έκδοση"
+#~ msgstr "&Χωρίς έκδοση"
 # ID:151,
 #~ msgid "Upgrade working copy"
 #~ msgstr "Αναβάθμιση αντιγράφου εργασίας"
+#~ msgid "Use Aero dialogs"
+#~ msgstr "Χρήση διαλόγων Aero"
+# ID:269,#:
+# ID:270,#:
+# ID:272,
+#~ msgid "revision has already been merged"
+#~ msgstr "η έκδοση έχει ήδη συγχωνευτεί"
 # ID:145,
 #~ msgid "scanning path:"
 #~ msgstr "Κατάλογος σάρωσης:"
+# ID:11,
+#~ msgid "the working copy is at this revision"
+#~ msgstr "το αντίγραφο εργασίας είναι σε αυτή την έκδοση"
+#~ msgid "Bug Tracker..."
+#~ msgstr "Σφάλμα λογισμικού παρακολουθηστεις..."
+#~ msgid "Could not delete property \"%s\" on %s because"
+#~ msgstr "Δεν ήταν δυνατή η διαγραφή ιδιοκτησίας \"%s\" σε %s επειδή"
+#~ msgid "Groups branches together"
+#~ msgstr "Ομαδοποίηση διακλαδώσεων"
 #~ msgid "&?"
 #~ msgstr "&;"
 #~ msgid "&Open Ctrl-O"
