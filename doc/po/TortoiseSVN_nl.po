@@ -13,9 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
-"POT-Creation-Date: 2009-11-16 07:38 +0000\n"
-"PO-Revision-Date: 2009-12-24 08:50+0100\n"
-"Last-Translator: Guus Raaphorst <GuusRaaphorst@gmail.com>\n"
+"POT-Creation-Date: 2010-01-03 00:35 +0000\n"
+"PO-Revision-Date: 2010-01-06 16:40+0100\n"
+"Last-Translator: Jeroen van Amstel <jeroen@amstelonline.demon.nl>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1033,10 +1033,6 @@ msgstr "Een archief aanmaken via de opdrachtregel applicatie."
 #. (primary)
 msgid "Create"
 msgstr "Aanmaken"
-
-#. (secondary)
-msgid "Command Line Client"
-msgstr "Command Line Client"
 
 #. (para)
 msgid "Create an empty folder with the name SVN (e.g. <filename>D:\\SVN\\</filename>), which is used as root for all your repositories."
@@ -3841,6 +3837,14 @@ msgid "To resolve this conflict, Developer B has to find out to what filename th
 msgstr "Om dit conflict op te lossen, moet ontwikkelaar B uitzoeken welke bestandsnaam de conflicterend <filename>Foo.c</filename> heeft gekregen in het archief. Het log venster van het samen te voegen bronbestand kan hiervoor gebruikt worden. Het conflict verwerker toont alleen het log van de werkkopie, omdat niet bekend is welk pad gebruikt is bij het samenvoegen. Je moet dat pad zelf handmatig opzoeken."
 
 #. (title)
+msgid "Other tree conflicts"
+msgstr "Andere mapstructuur conflicten"
+
+#. (para)
+msgid "There are other cases which are labelled as tree conflicts simply because the conflict involves a folder rather than a file. For example if you add a folder with the same name to both trunk and branch and then try to merge you will get a tree conflict. If you want to keep the folder from the merge target, just mark the conflict as resolved. If you want to use the one in the merge source then you need to SVN delete the one in the target first and run the merge again. If you need anything more complicated then you have to resolve manually."
+msgstr "Er zijn nog enkele andere situaties welke worden aangeduid als mapstructuur conflicten, dit komt doordat bij de conflicten mappen in plaats van bestanden betrokken zijn. Als je bijvoorbeeld een map met dezelfde naam in de trunk en tak toevoegd en deze vervolgens probeert samen te voegen, dan zal er een mapstructuur conflict ontstaan. Als je de map van het samenvoeg doel wilt gebruiken, markeer het conflict dan als opgelost. Als je de map uit de samenvoeg bron wilt gebruiken, dan moet je de map in de doel structuur er met SVN Verwijderen en vervolgens de samenvoeging opnieuw starten. Als je een ingewikkeldere oplossing wilt hebben, dan zul je dat handmatig moeten doen."
+
+#. (title)
 msgid "Getting Status Information"
 msgstr "Statusinformatie ophalen"
 
@@ -4621,15 +4625,15 @@ msgstr "Het logboekboodschappen venster toont de revisies van samenvoegingen"
 
 #. (para)
 msgid "If you want to see the detail of which revisions were merged as part of that commit, use the <guilabel>Include merged revisions</guilabel> checkbox. This will fetch the log messages again, but will also interleave the log messages from revisions which were merged. Merged revisions are shown in grey because they represent changes made on a different part of the tree."
-msgstr ""
+msgstr "Als je de details wilt zien welke revisies samengevoegd zijn bij die vastlegging, selecteer dan het <guilabel>Samengevoegde revisies meenemen</guilabel> selectievak. Hiermee zullen de logboekboodschappen opnieuw opgehaald worden en zullen de logboekboodschappen van de samengevoegde revisies tussen de andere logboekboodschappen ingevoegd worden. De samengevoegde revisies worden in grijs weergegeven, omdat deze wijzigingen aangegeven van een andere boomstructuur."
 
 #. (para)
 msgid "Of course, merging is never simple! During feature development on the branch there will probably be occasional merges back from trunk to keep the branch in sync with the main line code. So the merge history of the branch will also include another layer of merge history. These different layers are shown in the log dialog using indentation levels."
-msgstr ""
+msgstr "Samenvoegen is natuurlijk nooit eenvoudig. Gedurende de ontwikkelingen aan een tak zullen er soms samenvoegingen vanuit de trunk gedaan moeten worden om ervoor te zorgen dat de tak bij blijft met de hoofdbroncode. Dat houdt in dat de samenvoeggeschiedenis van een tak ook een extra laag van samenvoeggeschiedenis zal hebben. Deze verschillende lagen worden met verschillende inspringingen weergegeven."
 
 #. (title)
 msgid "Changing the Log Message and Author"
-msgstr ""
+msgstr "Logboekboodschap en Auteur Wijzigen"
 
 #. (primary)
 msgid "edit log/author"
@@ -4645,23 +4649,23 @@ msgstr "revprops"
 
 #. (para)
 msgid "Revision properties are completely different from the Subversion properties of each item. Revprops are descriptive items which are associated with one specific revision number in the repository, such as log message, commit date and committer name (author)."
-msgstr ""
+msgstr "Revisie eigenschappen zijn compleet anders dan de eigenschappen van Subversion objecten. Revprops zijn beschrijvende objecten die gerelateerd zijn aan een specifiek revisienummer in het archief, zoals logboekboodschap, vastleggingsdatum en naam van de vastlegger (auteur)."
 
 #. (para)
 msgid "Sometimes you might want to change a log message you once entered, maybe because there's a spelling error in it or you want to improve the message or change it for other reasons. Or you want to change the author of the commit because you forgot to set up authentication or..."
-msgstr ""
+msgstr "Soms wil je een logboekboodschap wijzigen, omdat er bijvoorbeeld een tikfout in staat, de beschrijving wilt verbeteren of een ander soort wijziging wilt doorvoeren. Misschien wil je wel de auteur van de vastlegging wijzigen of omdat je authenticatie bent vergeten in te stellen or..."
 
 #. (para)
 msgid "Subversion lets you change revision properties any time you want. But since such changes can't be undone (those changes are not versioned) this feature is disabled by default. To make this work, you must set up a pre-revprop-change hook. Please refer to the chapter on <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts</citetitle></ulink> in the Subversion Book for details about how to do that. Read <xref linkend=\"tsvn-repository-hooks\"/> to find some further notes on implementing hooks on a Windows machine."
-msgstr ""
+msgstr "Subversion staat wijzigingen aan revisie eigenschappen in principe altijd toe. De mogelijkheid hiervoor is standaard uitgeschakeld, omdat wijzigingen niet ongedaan gemaakt kunnen worden (die wijzigingen worden niet met versies beheerd). Om deze wijzigingen mogelijk te maken, moet je een pre-revprop-change hook instellen. Lees het hoofdstuk over <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts</citetitle></ulink> in het Subversion book voor meer informatie hierover. Lees ook <xref linkend=\"tsvn-repository-hooks\"/> voor meer informatie over het implementeren van hooks op een Windows machine."
 
 #. (para)
 msgid "Once you've set up your server with the required hooks, you can change the author and log message (or any other revprop) of any revision, using the context menu from the top pane of the Log dialog. You can also edit a log message using the context menu for the middle pane."
-msgstr ""
+msgstr "Als je eenmaal je server het met de benodigde hooks geconfigureerd hebt, dan kun je met het context menu uit het bovenste deelvenster van het Log venster de auteur en logboekboodschap (of elke andere revprop) van een revisie wijzigen. De logboekboodschap kun je ook wijzigen via het context menu van het middelste deelvenster."
 
 #. (para)
 msgid "Because Subversion's revision properties are not versioned, making modifications to such a property (for example, the <literal>svn:log</literal> commit message property) will overwrite the previous value of that property <emphasis>forever</emphasis>."
-msgstr ""
+msgstr "Omdat Subversion revisie eigenschappen niet van versiebeheer zijn voorzien, worden de oude waardes van een eigenschap (bijvoorbeeld de <literal>svn:log</literal> eigenschap) bij een wijzigingen voor <emphasis>altijd</emphasis> overschreven."
 
 #. (title)
 msgid "Filtering Log Messages"
@@ -5944,6 +5948,8 @@ msgid "For project properties <emphasis>only</emphasis> you can use the <guilabe
 msgstr ""
 
 #. (para)
+#. (para)
+#. (para)
 msgid "When you add new sub-folders using TortoiseSVN, any project properties present in the parent folder will automatically be added to the new child folder too."
 msgstr ""
 
@@ -6007,7 +6013,7 @@ msgstr ""
 
 #. (para)
 #. (para)
-msgid "If the external project is in the same repository, any changes you make there there will be included in the commit list when you commit your main project."
+msgid "If the external project is in the same repository, any changes you make there will be included in the commit list when you commit your main project."
 msgstr ""
 
 #. (para)
@@ -6474,7 +6480,7 @@ msgid "If you are using merge tracking and you want to mark a revision as having
 msgstr ""
 
 #. (para)
-msgid "Now everything is set up, all you have to do is click on the <guibutton>Merge</guibutton> button. If you want to preview the results <guibutton>Test Merge</guibutton> performs the merge operation, but does <emphasis>not</emphasis> modify the working copy at all. It shows you a list of the files that will be changed by a real merge, and notes those areas where conflicts will occur."
+msgid "Now everything is set up, all you have to do is click on the <guibutton>Merge</guibutton> button. If you want to preview the results <guibutton>Test Merge</guibutton> simulates the merge operation, but does <emphasis>not</emphasis> modify the working copy at all. It shows you a list of the files that will be changed by a real merge, and notes files where conflicts <emphasis>may</emphasis> occur. Because merge tracking makes the merge process a lot more complicated, there is no guaranteed way to find out in advance whether the merge will complete without conflicts, so files marked as conflicted in a test merge may in fact merge without any problem."
 msgstr ""
 
 #. (para)
@@ -6566,7 +6572,7 @@ msgid "Merging does not always go smoothly. Sometimes there is a conflict, and i
 msgstr ""
 
 #. (para)
-msgid "You may decide that your local changes are much more important, so you want to discard the version from the repository and keep your local version. Or you might discard your local changes in favour of the repository version. Either way, no attempt is made to merge the changes - you choose one or the other."
+msgid "You may decide that your local changes are much more important, so you want to discard the version from the repository and keep your local version. Or you might discard your local changes in favour of the repository version. This only relates to conflicting changes. Changes that can be merged are still merged. Only for the conflicting part your choice is used."
 msgstr ""
 
 #. (para)
@@ -12328,75 +12334,6 @@ msgstr "Jeroen van Amstel"
 msgid "translator-translation"
 msgstr "Vertaler"
 
-#~ msgid "Overriding Hooks"
-#~ msgstr "Dwingende Hooks"
-#~ msgid ""
-#~ "If a hook script rejects your commit then its decision is final. But you "
-#~ "can build an override mechanism into the script itself using the "
-#~ "<emphasis>Magic Word</emphasis> technique. If the script wants to reject "
-#~ "the operation it first scans the log message for a special pass phrase, "
-#~ "either a fixed phrase or perhaps the filename with a prefix. If it finds "
-#~ "the magic word then it allows the commit to proceed. If the phrase is not "
-#~ "found then it can block the commit with a message like <quote>You didn't "
-#~ "say the magic word</quote> :-)"
-#~ msgstr ""
-#~ "Als een hook script een vastlegging weigert, dan is die beslissing "
-#~ "definitief. Het is mogelijk om een dwingend mechanisme in het script te "
-#~ "bouwen met een <emphasis>Magisch Woord</emphasis>. Als het script een "
-#~ "actie will weigeren zal het eerst het log bericht scannen op een speciale "
-#~ "zin, een standaard in of een bestandsnaam met een prefix. Als het het "
-#~ "magische woord vindt, dan zal het de vastlegging toestaan. Als de zin "
-#~ "niet gevonden is, dan kan het de vastlegging blokkeren met een bericht "
-#~ "zoals <quote>Je hebt het magische woord niet gezegd</quote> :-)"
-#~ msgid "authentication cache"
-#~ msgstr "authenticatie cache"
-#~ msgid ""
-#~ "<filename>svn.simple</filename> contains credentials for basic "
-#~ "authentication (username/password). Note that passwords are stored using "
-#~ "the WinCrypt API, not in plain text form."
-#~ msgstr ""
-#~ "<filename>svn.simple</filename> bevat inloggegevens voor basis "
-#~ "authenticatie (gebruikersnaam/wachtwoord). Merk op dat wachtwoorden "
-#~ "worden opgeslagen met WinCrypt API encryptie, niet als platte tekst."
-#~ msgid ""
-#~ "If you want to clear authentication for one realm only then you will have "
-#~ "to dig into those directories, find the file which contains the "
-#~ "information you want to clear and delete the file."
-#~ msgstr ""
-#~ "Als je de authenticatie voor maar één gebruiker wilt wissen, dan moet je "
-#~ "in die mappen duiken. Het bestand vinden met de informatie die je wilt "
-#~ "wissen en het bestand verwijderen."
-#~ msgid "Repairing External Copies"
-#~ msgstr "Herstellen van Bestandhernoemingen bij externe kopieën"
-#~ msgid ""
-#~ "If you made a copy of a file but forgot to use the Subversion command to "
-#~ "do so, you can repair that copy so the new file doesn't lose its history. "
-#~ "Simply select both the old name (normal or modified) and the new name "
-#~ "(unversioned) and use <menuchoice><guimenu>Context Menu</"
-#~ "guimenu><guimenuitem>Repair Copy</guimenuitem></menuchoice> to pair the "
-#~ "two files as a copy."
-#~ msgstr ""
-#~ "Als je een kopie van een bestand hebt gemaakt en vergeten bent om het "
-#~ "Subversion commando te gebruiken, dan kun je dat repareren om te ervoor "
-#~ "te zorgen dat de geschiedenis niet verloren gaat. Selecteer de oude "
-#~ "(normaal of gewijzigde) en de nieuwe naam (zonder versiebeheer) en "
-#~ "gebruik <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Repareer "
-#~ "Kopieer-actie</guimenuitem></menuchoice> om de twee bestanden aan elkaar "
-#~ "te koppelen als kopie."
-#~ msgid "/findstring:\"filterstring\""
-#~ msgstr "/findstring:\"filterstring\""
-#~ msgid "/findtext"
-#~ msgstr "/findtext"
-#~ msgid "/findregex"
-#~ msgstr "/findregex"
-#~ msgid "/findtype:X"
-#~ msgstr "/findtype:X"
-#~ msgid "/line:xxx"
-#~ msgstr "/line:xxx"
-#~ msgid "/remote"
-#~ msgstr "/remote"
-#~ msgid "Check repository"
-#~ msgstr "Controleer archief"
-#~ msgid "URL handler"
-#~ msgstr "URL verwerker"
+#~ msgid "Command Line Client"
+#~ msgstr "Command Line Client"
 
