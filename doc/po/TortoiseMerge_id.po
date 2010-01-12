@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-03-03 10:39 +0000\n"
-"PO-Revision-Date: 2009-12-10 11:37+0100\n"
+"PO-Revision-Date: 2010-01-12 08:33+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -480,11 +480,11 @@ msgstr "<guibutton>Tampilkan Spasi Putih</guibutton> menghidup/matikan opsi untu
 
 #. (para)
 msgid "<guibutton>Inline Diff Word-wise</guibutton> toggles the method used to display inline diffs. In word-wise mode, when a character is changed, the whole word is highlighted. In char-wise mode, each individual changed character is highlighted."
-msgstr ""
+msgstr "<guibutton>Inline Diff Word-wise</guibutton> matikan metode yang digunakan untuk menampilkan diff sebaris. Dalam modus kata, ketika karakter berubah, seluruh kata akan disorot. Dalam modus karakter, masing-masing berubah karakter disorot."
 
 #. (para)
 msgid "Word-wise is the default and in most cases it works better. For example if you change a variable name, the whole name is highlighted in word-wise mode, whereas in char-wise mode you tend to get a mess of added and deleted characters which doesn't make much sense. However, some content does not resolve neatly into words, for example a hex file, and in that case, char-wise display works better."
-msgstr ""
+msgstr "Modus kata adalah default dan dalam kebanyakan kasus ini bekerja lebih baik. Sebagai contoh jika Anda mengubah nama variabel, nama seluruh disorot dalam modus kata, sedangkan pada modus karakter Anda cenderung mendapatkan berantakan menambahkan dan menghapus karakter yang tidak masuk akal. Namun, beberapa konten tidak memecahkan rapi dengan kata-kata, misalnya file hex, dan dalam hal ini, modus karakter menampilkan karya-karya lebih baik."
 
 #. (para)
 msgid "<guibutton>Switch View</guibutton> selects between one-pane and two-pane view. Disabled in 3-pane view."
@@ -584,9 +584,8 @@ msgid "If you're in three pane view (sometimes called <emphasis>merge view</emph
 msgstr "Jika Anda dalam tampilan tiga pane (kadang kala disebut <emphasis>tampilan gabungan</emphasis>) Anda hanya bisa mengedit file dalam tampilan bawah (<literal>Digabung</literal>). Seperti dalam tampilan dua pane, Anda bisa <action>mengklik-kanan</action> pada baris yang konflik dan memilih <menuchoice><guimenu>Menu Konteks</guimenu><guimenuitem>Gunakan blok teks dari <quote>mereka</quote></guimenuitem></menuchoice> atau <menuchoice><guimenu>Menu Konteks</guimenu><guimenuitem>Gunakan blok teks dari <quote>saya</quote></guimenuitem></menuchoice>. Sebagai tambahan, jika Anda menginginkan <emphasis>kedua</emphasis> blok, Anda bisa memilih <menuchoice><guimenu>Menu Konteks</guimenu><guimenuitem> Gunakan blok teks dari <quote>saya</quote> sebelum <quote>mereka</quote></guimenuitem></menuchoice> atau <menuchoice><guimenu>Menu Konteks</guimenu><guimenuitem> Gunakan blok teks dari <quote>mereka</quote> sebelum <quote>saya</quote></guimenuitem></menuchoice>. Tergantung pada perintah yang telah Anda pilih, perubahan digunakan dalam hasil file <literal>Digabung</literal>."
 
 #. (para)
-#, fuzzy
 msgid "Sometimes a file will be marked as conflicted in Subversion, yet when you view it using TortoiseMerge there are no conflicts shown. This may be due to the whitespace handling you have chosen. If you choose to ignore line-endings or whitespace changes, those lines will be marked using the <emphasis>Conflict-Ignored</emphasis> icon. To resolve the conflict you still need to pick which version you want to use."
-msgstr "Kadang-kadang file akan ditandai sebagai konflik di Subversion, padahal ketika anda melihatnya melalui TortoiseMerge tidak nampak adanya konflik."
+msgstr "Kadang-kadang berkas tersebut akan ditandai sebagai berkonflik dalam Subversion, namun ketika Anda membacanya menggunakan TortoiseMerge tidak ada konflik yang ditampilkan. Hal ini mungkin disebabkan oleh spasi-putih penanganan yang telah Anda pilih. Jika Anda memilih untuk mengabaikan baris-akhiran atau perubahan spasi-putih, baris tersebut akan ditandai dengan menggunakan ikon <emphasis>Konflik-Diabaikan</emphasis>. Untuk mengatasi konflik Anda masih perlu untuk memilih versi yang Anda ingin gunakan."
 
 # Indonesian#: source/TortoiseMerge_en.xml:643
 #. (para)
@@ -1523,8 +1522,15 @@ msgstr ""
 msgid "translator-translation"
 msgstr "Terjemahan oleh"
 
-#~ msgid "Specifies a line number to jump to after loading the files."
-#~ msgstr "Menentukan nomor baris untuk loncat ke setelah memuat berkas."
-#~ msgid "Wishlist"
-#~ msgstr "Daftar Keinginan"
+#~ msgid ""
+#~ "<guilabel>Collapse</guilabel> collapses unchanged regions to a single "
+#~ "line, leaving only the changed areas and minimal context. You can expand "
+#~ "the collapsed areas by double clicking on the collapse line, but you "
+#~ "cannot then re-collapse them unless you reload the file."
+#~ msgstr ""
+#~ "<guilabel>Runtuh</guilabel> runtuhkan daerah tidak berubah kepada satu "
+#~ "baris, hanya menyisakan berubah wilayah dan konteks sedikit. Anda dapat "
+#~ "memperluas wilayah runtuh dengan mengklik ganda pada baris keruntuhan, "
+#~ "tetapi Anda tidak dapat kemudian kembali keruntuhan mereka, kecuali jika "
+#~ "Anda memuat berkas lagi."
 
