@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-12-09 09:22 +0000\n"
-"PO-Revision-Date: 2010-01-12 08:34+0100\n"
+"PO-Revision-Date: 2010-01-18 10:16+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -9032,8 +9032,9 @@ msgid "Defines how many spaces to use for expansion when a tab character is foun
 msgstr ""
 
 #. (title)
+#, fuzzy
 msgid "Registry Settings"
-msgstr ""
+msgstr "Criação do Repositório"
 
 #. (primary)
 msgid "registry"
@@ -9064,16 +9065,18 @@ msgid "To show the command line parameters passed from the shell extension to To
 msgstr ""
 
 #. (term)
+#, fuzzy
 msgid "Context Menu Icons"
-msgstr ""
+msgstr "Menus do Contexto"
 
 #. (para)
 msgid "This can be useful if you use something other than the windows explorer or if you get problems with the context menu displaying correctly. create a <literal>DWORD</literal> key with a value of 0 at <literal>HKCU\\Software\\TortoiseSVN\\ShowContextMenuIcons</literal> if you don't want TortoiseSVN to not show icons for the shell context menu items. Set this value to 1 to show the icons again."
 msgstr ""
 
 #. (term)
+#, fuzzy
 msgid "Block Overlay Status"
-msgstr ""
+msgstr "Sobreposição dos Ícones"
 
 #. (para)
 msgid "If you don't want the explorer to update the status overlays while another TortoiseSVN command is running (e.g. Update, Commit, ...) then create a <literal>DWORD</literal> key with a value of 1 at <literal>HKCU\\Software\\TortoiseSVN\\BlockStatus</literal>."
@@ -9096,8 +9099,9 @@ msgid "The auto-completion list shown in the commit message editor displays the 
 msgstr ""
 
 #. (term)
+#, fuzzy
 msgid "Explorer columns everywhere"
-msgstr ""
+msgstr "Colunas do Explorer"
 
 #. (para)
 msgid "The extra columns the TortoiseSVN adds to the details view in Windows Explorer are normally only active in a working copy. If you want those to be accessible everywhere, not just in working copies, create a <literal>DWORD</literal> key with a value of 1 at <literal>HKCU\\Software\\TortoiseSVN\\ColumnsEveryWhere</literal>."
@@ -12112,6 +12116,10 @@ msgstr ""
 #. (None)
 msgid "translator-translation"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Limitations Using the Repository Browser"
+#~ msgstr "Acessando o Repositório"
 
 #, fuzzy
 #~ msgid "Other tree conflicts"

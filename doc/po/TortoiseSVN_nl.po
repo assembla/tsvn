@@ -13,9 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
-"POT-Creation-Date: 2009-12-09 09:22 +0000\n"
-"PO-Revision-Date: 2010-01-12 08:35+0100\n"
-"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
+"POT-Creation-Date: 2010-01-03 00:35 +0000\n"
+"PO-Revision-Date: 2010-01-16 20:45+0100\n"
+"Last-Translator: Johannes Zwart <johannes.zwart@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5156,49 +5156,49 @@ msgstr ""
 
 #. (para)
 msgid "<placeholder-1/> If you created new files and/or directories during your development process then you need to add them to source control too. Select the file(s) and/or directory and use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Add</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "<placeholder-1/> Als je tijdens het ontwikkelproces nieuwe bestanden en/of mappen hebt gemaakt, moeten die ook onder broncodebeheer worden gebracht. Selecteer de bestanden en/of de mappen, en ga naar <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Toevoegen</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "After you added the files/directories to source control the file appears with a <literal>added</literal> icon overlay which means you first have to commit your working copy to make those files/directories available to other developers. Adding a file/directory does <emphasis>not</emphasis> affect the repository!"
-msgstr ""
+msgstr "Nadat je de bestanden of mappen onder broncodebeheer hebt gebracht, verschijnt er een icoontje in de vorm van een plusje over het normale icoontje in Windows Verkenner. Dit betekent dat je de werkkopie van het bestand moet vastleggen voordat de bestanden/mappen beschikbaar zijn voor andere ontwikkelaars. Een bestand of map toevoegen heeft <emphasis>geen</emphasis> effect op het archief!"
 
 #. (title)
 msgid "Many Adds"
-msgstr "Vele Toevoegingen"
+msgstr "Vele toevoegingen"
 
 #. (para)
 msgid "You can also use the Add command on already versioned folders. In that case, the add dialog will show you all unversioned files inside that versioned folder. This helps if you have many new files and need to add them all at once."
-msgstr ""
+msgstr "Je kunt het commando 'Toevoegen' ook gebruiken op reeds geversioneerde mappen. In dat geval zal het toevoegen-dialoogscherm alle niet-geversioneerde bestanden in die geversioneerde mappen weergeven. Dit is handig als je veel nieuwe bestanden hebt en die allemaal in één keer wilt toevoegen."
 
 #. (para)
 msgid "select the files you want to add"
-msgstr ""
+msgstr "selecteer de bestanden die je wilt toevoegen"
 
 #. (para)
 #. (para)
 msgid "<action>right-drag</action> them to the new location inside the working copy"
-msgstr ""
+msgstr "<action>sleep</action> ze met de <action>rechter</action> muisknop naar de nieuwe locatie in je huidige werkkopie"
 
 #. (para)
 #. (para)
 msgid "release the right mouse button"
-msgstr ""
+msgstr "laat de rechter muisknop los"
 
 #. (para)
 msgid "select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>SVN Add files to this WC</guimenuitem></menuchoice>. The files will then be copied to the working copy and added to version control."
-msgstr ""
+msgstr "ga naar <menuchoice><guimenu>Contextmenu</guimenu><guimenuitem>SVN Kopiëren en toevoegen aan deze werkkopie</guimenuitem></menuchoice>. De bestanden worden dan naar de werkkopie gekopieerd en onder versiebeheer gebracht."
 
 #. (para)
 msgid "To add files from outside your working copy you can use the drag-and-drop handler: <placeholder-1/>"
-msgstr ""
+msgstr "Bestanden van buiten je werkkopie kun je daaraan toevoegen door middel van de volgende drag-and-drop-handeling: <placeholder-1/>"
 
 #. (para)
 msgid "You can also add files within a working copy simply by left-dragging and dropping them onto the commit dialog."
-msgstr ""
+msgstr "Ook binnen een werkkopie kun je bestanden toevoegen. Dit doe je door de bestanden (of mappen) met de linkermuisknop op te pakken, naar het vastleggen-dialoogscherm te slepen en ze vervolgens los te laten."
 
 #. (para)
 msgid "If you add a file or folder by mistake, you can undo the addition before you commit using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Undo add...</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "Het toevoegen van bestanden en mappen kun je, als je bijvoorbeeld per ongeluk een verkeerd bestand hebt toegevoegd, ongedaan maken voordat je je wijzigingen vastlegt. Dit doe je door het volgende uit te voeren: <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Toevoeging opheffen...</guimenuitem></menuchoice>."
 
 #. (title)
 msgid "Copying/Moving/Renaming Files and Folders"
@@ -5592,43 +5592,43 @@ msgstr "Herstel dialoog"
 
 #. (para)
 msgid "If you want to undo all changes you made in a file since the last update you need to select the file, <action>right click</action> to pop up the context menu and then select the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revert</guimenuitem></menuchoice> A dialog will pop up showing you the files that you've changed and can revert. Select those you want to revert and click on <guibutton>OK</guibutton>. <placeholder-1/>"
-msgstr ""
+msgstr "Als je de wijzigingen die je sinds de laatste update in een bestand hebt gemaakt, ga je als volgt te werk. Selecteer het bestand, klik er met de <action>rechter muisknop</action> op zodat het contextmenu openspringt, en klik vervolgens op het commando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Ongedaan maken</guimenuitem><menuchoice>. Nu zal een dialoog verschijnen met de gewijzigde bestanden. Selecteer de bestanden waarvan je de wijzigingen ongedaan wilt maken, en klik op <guibutton>OK</guibutton>. <placeholder-1/>"
 
 #. (para)
 msgid "If you want to undo a deletion or a rename, you need to use Revert on the parent folder as the deleted item does not exist for you to right-click on."
-msgstr ""
+msgstr "Omdat een verwijderd bestand of een verwijderde map niet meer in je werkkopie bestaat, dien je, als je het verwijderen of hernoemen van een bestand of map ongedaan wilt maken, de actie 'Terugzetten' uit te voeren op de folder waarin deze items zich bevonden."
 
 #. (para)
 msgid "If you want to undo the addition of an item, this appears in the context menu as <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Undo add...</guimenuitem></menuchoice>. This is really a revert as well, but the name has been changed to make it more obvious."
-msgstr ""
+msgstr "Als je het toevoegen van een bestand of map ongedaan wilt maken, dien je de volgende actie in het contextmenu uit te voeren: <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Toevoegen opheffen...</guimenuitem></menuchoice>. Deze actie verschilt niet van de andere acties waarmee je handelingen ongedaan kunt maken, maar heeft een andere naam gekregen om het doel ervan te verhelderen."
 
 #. (para)
 #. (para)
 msgid "The columns in this dialog can be customized in the same way as the columns in the <guilabel>Check for modifications</guilabel> dialog. Read <xref linkend=\"tsvn-dug-wcstatus-2\"/> for further details."
-msgstr ""
+msgstr "Je kunt de kolommen in dit dialoogscherm configureren op dezelfde manier als die van het dialoogscherm <guilabel>Kijk of er updates zijn</guilabel>. Ga naar <xref linkend=\"tsvn-dug-wcstatus-2\"/> voor meer informatie."
 
 #. (title)
 msgid "Undoing Changes which have been Committed"
-msgstr ""
+msgstr "Reeds vastgelegde wijzigingen ongedaan maken"
 
 #. (para)
 msgid "<menuchoice><guimenuitem>Revert</guimenuitem></menuchoice> will only undo your local changes. It does <emphasis>not</emphasis> undo any changes which have already been committed. If you want to undo all the changes which were committed in a particular revision, read <xref linkend=\"tsvn-dug-showlog\"/> for further information."
-msgstr ""
+msgstr "<menuchoice><guimenuitem>Ongedaan maken</guimenuitem></menuchoice> maakt alleen lokale wijzigingen ongedaan. Wijzigingen die al zijn vastgelegd, worden <emphasis>niet</emphasis> ongedaan gemaakt. Als je wijzigingen die in een bepaalde revisie zijn vastgelegd, ongedaan wilt maken, lees dan <xref linkend=\"tsvn-dug-showlog\"/>."
 
 #. (title)
 msgid "Revert is Slow"
-msgstr "Herstellen is Langzaam"
+msgstr "Herstellen is langzaam"
 
 #. (para)
 msgid "When you revert changes you may find that the operation takes a lot longer than you expect. This is because the modified version of the file is sent to the recycle bin, so you can retrieve your changes if you reverted by mistake. However, if your recycle bin is full, Windows takes a long time to find a place to put the file. The solution is simple: either empty the recycle bin or deactivate the <guilabel>Use recycle bin when reverting</guilabel> box in TortoiseSVN's settings."
-msgstr ""
+msgstr "Als je wijzigingen ongedaan maakt, kan het gebeuren dat dit veel langer duurt dan verwacht. De reden hiervoor is dat de gewijzigde versie van het bestand wordt weggegooid en in de prullenbak terechtkomt, zodat je je wijzigingen weer terug kunt halen als je TortoiseSVN per ongeluk instrueerde om die ongedaan te maken. Het kan echter voorkomen dat de prullenbak vol zit; in dat geval heeft Windows veel tijd nodig om een plaats voor het weggegooide bestand te vinden. Je kunt de lange wachttijd dus terugbrengen door de prullenbak te legen, of door de eigenschap <guilabel>Gebruik prullenbak bij herstellen</guilabel> in de instellingen van TortoiseSVN te deactiveren."
 
 #. (title)
 #. (entry)
 #. (title)
 #. (glossterm)
 msgid "Cleanup"
-msgstr ""
+msgstr "Schonen"
 
 #. (primary)
 msgid "cleanup"
@@ -5636,19 +5636,19 @@ msgstr ""
 
 #. (para)
 msgid "If a Subversion command cannot complete successfully, perhaps due to server problems, your working copy can be left in an inconsistent state. In that case you need to use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Cleanup</guimenuitem></menuchoice> on the folder. It is a good idea to do this at the top level of the working copy."
-msgstr ""
+msgstr "Als een commando in Subversion niet succesvol kan worden afgerond, wat mogelijk met serverproblemen te maken heeft, kan je werkkopie in een foutieve staat geraken. In dat geval dien je de contextmenu-actie <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Schonen</guimenuitem></menuchoice> op de map waarin zich je werkkopie bevindt, uit te voeren. Het is aan te raden om dit op zo hoog mogelijk niveau te doen."
 
 #. (para)
 msgid "Cleanup has another useful side effect. If a file date changes but its content doesn't, Subversion cannot tell whether it has really changed except by doing a byte-by-byte comparison with the pristine copy. If you have a lot of files in this state it makes acquiring status very slow, which will make many dialogs slow to respond. Executing a Cleanup on your working copy will repair these <quote>broken</quote> timestamps and restore status checks to full speed."
-msgstr ""
+msgstr "Schonen heeft een bruikbaar neveneffect. Als de datum van een bestand verandert zonder dat de inhoud dat doet, kan Subversion niet meer bepalen of het bestand werkelijk gewijzigd is, tenzij het dit bestand byte voor byte vergelijkt met een ongewijzigde versie ervan. Als je veel bestanden hebt die onder dit euvel lijden, kan dat het opvragen van statussen erg vertragen, waardoor veel dialoogschermen veel langzamer worden. Het commando 'Schonen' op je werkkopie uitvoeren repareert deze <quote>kapotte</quote> datum-/tijdsaanduidingen, waardoor een statuscontrole weer op volle snelheid kan plaatshebben."
 
 #. (title)
 msgid "Use Commit Timestamps"
-msgstr "Gebruik Vastleg Tijdstippen"
+msgstr "Gebruik Vastleg-tijdstippen"
 
 #. (para)
 msgid "Some earlier releases of Subversion were affected by a bug which caused timestamp mismatch when you check out with the <guilabel>Use commit timestamps</guilabel> option checked. Use the Cleanup command to speed up these working copies."
-msgstr ""
+msgstr "In enkele oudere versies van Subversion zat een bug die ervoor zorgde dat de datum-/tijdsaanduiding van een bestand niet meer klopte wanneer je een werkkopie uit een archief ophaalde en daarbij de optie <guilabel>Gebruik vastleg-tijdstippen</guilabel> had aangevinkt. Gebruik het commando 'Schonen' om de werkkopiën die hieronder lijden, weer op snelheid te brengen. "
 
 #. (title)
 msgid "Project Settings"
