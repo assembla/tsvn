@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -162,7 +162,9 @@ STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID *ppvOut)
 		g_SVNAdminDir.Init();
 		g_cAprInit++;
 		
-		CShellExtClassFactory *pcf = new CShellExtClassFactory(state);
+		CShellExtClassFactory *pcf = new (std::nothrow) CShellExtClassFactory(state);
+		if (pcf == NULL)
+			return E_OUTOFMEMORY;
 		return pcf->QueryInterface(riid, ppvOut);
     }
 	

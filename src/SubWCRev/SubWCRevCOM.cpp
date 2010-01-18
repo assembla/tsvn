@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009 - TortoiseSVN
+// Copyright (C) 2007-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -567,7 +567,7 @@ HRESULT __stdcall CFactory::CreateInstance(IUnknown* pUnknownOuter,
 	}
 
 	// Create component.
-	SubWCRev* pA = new SubWCRev();
+	SubWCRev* pA = new (std::nothrow) SubWCRev();
 	if (pA == NULL)
 	{
 		return E_OUTOFMEMORY ;
@@ -631,7 +631,7 @@ STDAPI DllGetClassObject(const CLSID& clsid,
 	}
 
 	// Create class factory.
-	CFactory* pFactory = new CFactory ;  // Reference count set to 1
+	CFactory* pFactory = new (std::nothrow) CFactory ;  // Reference count set to 1
 	// in constructor
 	if (pFactory == NULL)
 	{
