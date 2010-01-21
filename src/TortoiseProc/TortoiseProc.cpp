@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2008 - TortoiseSVN
+// Copyright (C) 2003-2008, 2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -105,7 +105,6 @@ CCrashReport crasher("tortoisesvn@gmail.com", "Crash Report for TortoiseSVN " AP
 
 BOOL CTortoiseProcApp::InitInstance()
 {
-	EnableCrashHandler();
 	svn_error_set_malfunction_handler(svn_error_handle_malfunction);
 	CheckUpgrade();
 	CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
@@ -521,39 +520,6 @@ void CTortoiseProcApp::CheckUpgrade()
 
 	// set the current version so we don't come here again until the next update!
 	regVersion = _T(STRPRODUCTVER);	
-}
-
-void CTortoiseProcApp::EnableCrashHandler()
-{
-	// the crash handler is enabled by default, but we disable it
-	// after 3 months after a release
-
-#define YEAR ((((__DATE__ [7] - '0') * 10 + (__DATE__ [8] - '0')) * 10  \
-              + (__DATE__ [9] - '0')) * 10 + (__DATE__ [10] - '0'))
-
-#define MONTH (__DATE__ [2] == 'n' ? (__DATE__ [1] == 'a' ? 1 : 6)      \
-                : __DATE__ [2] == 'b' ? 2                               \
-                : __DATE__ [2] == 'r' ? (__DATE__ [0] == 'M' ? 3 : 4)   \
-                : __DATE__ [2] == 'y' ? 5								\
-                : __DATE__ [2] == 'l' ? 7                               \
-                : __DATE__ [2] == 'g' ? 8                               \
-                : __DATE__ [2] == 'p' ? 9                               \
-                : __DATE__ [2] == 't' ? 10                               \
-                : __DATE__ [2] == 'v' ? 11 : 12)
-
- #define DAY ((__DATE__ [4] == ' ' ? 0 : __DATE__ [4] - '0') * 10       \
-              + (__DATE__ [5] - '0'))
-
- #define DATE_AS_INT (((YEAR - 2000) * 12 + MONTH) * 31 + DAY)
-
-	CTime compiletime(YEAR, MONTH, DAY, 0, 0, 0);
-	CTime now = CTime::GetCurrentTime();
-
-	CTimeSpan timediff = now-compiletime;
-	if (timediff.GetDays() > 3*31)
-	{
-		crasher.Enable(FALSE);
-	}
 }
 
 int CTortoiseProcApp::ExitInstance()
