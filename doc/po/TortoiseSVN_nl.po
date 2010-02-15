@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2010-01-29 00:06 +0000\n"
-"PO-Revision-Date: 2010-02-09 15:35+0100\n"
+"PO-Revision-Date: 2010-02-15 09:57+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -2477,13 +2477,13 @@ msgid ""
 msgstr ""
 "Voer vervolgens de volgende commando’s in <screen>\n"
 "bin\\openssl rsa -in conf\\privkey.pem -out conf\\server.key\n"
-"</screen> en (op ééb regel) <screen>\n"
+"</screen> en (op één regel) <screen>\n"
 "bin\\openssl req -new -key conf\\server.key -out conf\\server.csr \\\n"
 "-config conf\\openssl.cnf\n"
 "</screen> en dan (op één regel) <screen>\n"
 "bin\\openssl x509 -in conf\\server.csr -out conf\\server.cert\n"
 "                 -req -signkey conf\\server.key -days 4000\n"
-"</screen> Hiermee wordt een certificaat aangemaakt die over 4000 dagen verloopt. Als geef als laatste commando (op één regel): <screen>\n"
+"</screen> Hiermee wordt een certificaat aangemaakt die over 4000 dagen verloopt. Geef als laatste commando (op één regel): <screen>\n"
 "bin\\openssl x509 -in conf\\server.cert -out conf\\server.der.crt\n"
 "                 -outform DER\n"
 "</screen> Deze commando’s genereren enkele bestanden in de Apache <filename>conf</filename> map (<filename>server.der.crt</filename>, <filename>server.csr</filename>, <filename>server.key</filename>, <filename>.rnd</filename>, <filename>privkey.pem</filename>, <filename>server.cert</filename>)."
@@ -4486,7 +4486,7 @@ msgstr "Toon bestandswijzigingen in unified diff indeling. Dit context menu is a
 #. (para)
 #. (para)
 msgid "Open the selected file, either with the default viewer for that file type, or with a program you choose."
-msgstr "Open het geselecteerde bestant met het standaard programma voor dit bestandstype of met een zelf gekozen programma."
+msgstr "Open het geselecteerde bestand met het standaard programma voor dit bestandstype of met een zelf gekozen programma."
 
 #. (para)
 msgid "Opens the Blame dialog, allowing you to blame up to the selected revision."
@@ -5383,11 +5383,11 @@ msgstr ""
 
 #. (primary)
 msgid "delete"
-msgstr "verwijder"
+msgstr "verwijderen"
 
 #. (primary)
 msgid "remove"
-msgstr "haal weg"
+msgstr "weghalen"
 
 #. (para)
 msgid "Use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</guimenuitem></menuchoice> to remove files or folders from subversion."
@@ -5999,7 +5999,7 @@ msgstr "Gebruik Explicite Revisie Nummers"
 
 #. (para)
 msgid "You should strongly consider using explicit revision numbers in all of your externals definitions, as described above. Doing so means that you get to decide when to pull down a different snapshot of external information, and exactly which snapshot to pull. Besides the common sense aspect of not being surprised by changes to third-party repositories that you might not have any control over, using explicit revision numbers also means that as you backdate your working copy to a previous revision, your externals definitions will also revert to the way they looked in that previous revision, which in turn means that the external working copies will be updated to match they way <emphasis>they</emphasis> looked back when your repository was at that previous revision. For software projects, this could be the difference between a successful and a failed build of an older snapshot of your complex code base."
-msgstr ""
+msgstr "Het is verstandig om serieus te overwegen expliciete revisienummers te gebruiken in alle externe definities, zoals hierboven beschreven. Dit houdt in dat je moet beslissen wanneer je een andere momentopname van externe informatie op wilt halen en dan dus ook welke momentopname precies. Afgezien van het feit dat je dan niet verrast wordt door wijzigingen in archieven van derde partijen, waar je geen controle over hebt, biedt het gebruik van expliciete revisienummers ook het voordeel dat als je je werkkopie terugzet naar een oudere versie ook de betrokken externen naar de respectievelijke oudere versie worden teruggezet. Bij software projecten kan dit het verschil betekenen tussen een succesvolle of fout gelopen bouwproces van een oude versie van een complex project."
 
 #. (title)
 msgid "Older svn:externals definitions"
@@ -6007,29 +6007,29 @@ msgstr "Oudere svn:externals definities"
 
 #. (para)
 msgid "The format shown here was introduced in Subversion 1.5. You may also see the older format which has the same information in a different order. The new format is preferred as it supports several useful features described below, but it will not work on older clients. The differences are shown in the <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.advanced.externals.html\"><citetitle>Subversion Book</citetitle></ulink>."
-msgstr ""
+msgstr "De indeling die hier weergegeven is, is in Subversion 1.5 geïntroduceerd. Je kunt ook de oudere indeling tegenkomen waarbij de informatie in een andere volgorde is weergegeven. De nieuwe indeling heeft de voorkeur, omdat daarbij enkele nuttige functies, zoals hieronder beschreven, worden ondersteund die niet in oudere versies ondersteund worden. De verschillen zijn weergegeven in het <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.advanced.externals.html\"><citetitle>Subversion Boek</citetitle></ulink>."
 
 #. (para)
 #. (para)
 msgid "If the external project is in the same repository, any changes you make there there will be included in the commit list when you commit your main project."
-msgstr ""
+msgstr "Als het externe project zich in hetzelfde archief bevindt, dan zullen wijzigingen die je daarin aanbrengt meegenomen worden in de vastleg lijst als je het het hoofd project vastlegt."
 
 #. (para)
 #. (para)
 msgid "If the external project is in a different repository, any changes you make to the external project will be notified when you commit the main project, but you have to commit those external changes separately."
-msgstr ""
+msgstr "Als het externe project zich in een ander archief bevindt, dan zul je alleen een notificatie krijgen van de wijzigingen die je aan het externe project hebt doorgevoerd op het moment dat je het hoofd project vastlegt. Je moet de wijzigingen aan het externe project apart vastleggen."
 
 #. (para)
 msgid "If you use absolute URLs in <literal>svn:externals</literal> definitions and you have to relocate your working copy (i.e., if the URL of your repository changes), then your externals won't change and might not work anymore."
-msgstr ""
+msgstr "Als je absolute URL's gebruikt in de <literal>svn:externals</literal> definities en je moet een keer je werkkopie verplaatsen (oftewel als de URL van je archief verandert), dan zullen de externe verwijzingen niet mee veranderen en dus zullen deze niet meer werken."
 
 #. (para)
 msgid "To avoid such problems, Subversion clients version 1.5 and higher support relative external URLs. Four different methods of specifying a relative URL are supported. In the following examples, assume we have two repositories: one at <systemitem class=\"url\">http://example.com/svn/repos-1</systemitem> and another at <systemitem class=\"url\">http://example.com/svn/repos-2</systemitem>. We have a checkout of <systemitem class=\"url\">http://example.com/svn/repos-1/project/trunk</systemitem> into <filename>C:\\Working</filename> and the <literal>svn:externals</literal> property is set on trunk."
-msgstr ""
+msgstr "Om zulke problemen te voorkomen, ondersteunen de Subversion clients vanaf versie 1.5 relatieve externe URL's. Er zijn vier verschillende methodes voor het definiëren van relatieve URL's. Bij de volgende voorbeelden gaan we er van uit dat we twee archieven hebben: één op  <systemitem class=\"url\">http://example.com/svn/repos-1</systemitem> en de ander op <systemitem class=\"url\">http://example.com/svn/repos-2</systemitem>. We hebben een werkkopie opgehaald van <systemitem class=\"url\">http://example.com/svn/repos-1/project/trunk</systemitem>  naar de locatie <filename>C:\\Working</filename> en de <literal>svn:externals</literal> eigenschap is ingesteld op de trunk."
 
 #. (term)
 msgid "Relative to parent directory"
-msgstr "Relatief aan map"
+msgstr "Relatief ten opzichte van bovenliggende map"
 
 #. (para)
 msgid ""
@@ -6037,14 +6037,17 @@ msgid ""
 "../../widgets/foo  common/foo-widget\n"
 "</screen> This will extract <systemitem class=\"url\">http://example.com/svn/repos-1/widgets/foo</systemitem> into <filename>C:\\Working\\common\\foo-widget</filename>."
 msgstr ""
+"Deze URL's beginnen altijd met <literal>../</literal>, bijvoorbeeld: <screen>\n"
+"../../widgets/foo  common/foo-widget\n"
+"</screen> Hiermee wordt <systemitem class=\"url\">http://example.com/svn/repos-1/widgets/foo</systemitem> geëxtraheerd naar <filename>C:\\Working\\common\\foo-widget</filename>."
 
 #. (para)
 msgid "Note that the URL is relative to the URL of the directory with the <literal>svn:externals</literal> property, not to the directory where the external is written to disk."
-msgstr ""
+msgstr "Merk op dat de URL relatief is ten opzicht van de URL van de map met de <literal>svn:externals</literal> eigenschap, niet ten opzichte van de map waar de externe opgeslagen is op de schijf."
 
 #. (term)
 msgid "Relative to repository root"
-msgstr ""
+msgstr "Relatief ten opzichte van de archief hoofdmap"
 
 #. (para)
 msgid ""
@@ -6052,6 +6055,9 @@ msgid ""
 "^/widgets/foo  common/foo-widget\n"
 "</screen> This will extract <systemitem class=\"url\">http://example.com/svn/repos-1/widgets/foo</systemitem> into <filename>C:\\Working\\common\\foo-widget</filename>."
 msgstr ""
+"Deze URL's beginnen altijd met <literal>^/</literal>, bijvoorbeeld: <screen>\n"
+"^/widgets/foo  common/foo-widget\n"
+"</screen> Hiermee wordt <systemitem class=\"url\">http://example.com/svn/repos-1/widgets/foo</systemitem> naar <filename>C:\\Working\\common\\foo-widget</filename> geëxtraheerd."
 
 #. (para)
 msgid ""
@@ -6059,10 +6065,13 @@ msgid ""
 "^/../repos-2/hammers/claw  common/claw-hammer\n"
 "</screen> This will extract <systemitem class=\"url\">http://example.com/svn/repos-2/hammers/claw</systemitem> into <filename>C:\\Working\\common\\claw-hammer</filename>."
 msgstr ""
+"Je kunt eenvoudig naar andere archieven met dezelfde <literal>SVNParentPath</literal> (een gemeenschappelijke map met meerdere archieven) referenen. Bijvoorbeeld: <screen>\n"
+"^/../repos-2/hammers/claw  common/claw-hammer\n"
+"</screen> Hiermee wordt <systemitem class=\"url\">http://example.com/svn/repos-2/hammers/claw</systemitem> naar <filename>C:\\Working\\common\\claw-hammer</filename> geëxtraheerd."
 
 #. (term)
 msgid "Relative to scheme"
-msgstr "Relatief aan schema"
+msgstr "Relatief ten opzichte van de indeling"
 
 #. (para)
 msgid ""
@@ -6070,10 +6079,13 @@ msgid ""
 "//example.com/svn/repos-1/widgets/foo  common/foo-widget\n"
 "</screen> This will extract <systemitem class=\"url\">http://example.com/svn/repos-1/widgets/foo</systemitem> or <systemitem class=\"url\">svn+ssh://example.com/svn/repos-1/widgets/foo</systemitem> depending on which method was used to checkout <filename>C:\\Working</filename>."
 msgstr ""
+"URL's die beginnen met <literal>//</literal> kopiëren van de URL alleen het gedeelte met de indeling. Dit is nuttig als dezelfde hostnaam gebruikt wordt voor het benaderen van verschillende indelingen afhankelijk van de netwerk locatie. Bijvoorbeeld programma's op het intranet gebruiken <systemitem class=\"url\">http://</systemitem> terwijl externe programma's <systemitem class=\"url\">svn+ssh://</systemitem> gebruiken. Een voorbeeld: <screen>\n"
+"//example.com/svn/repos-1/widgets/foo  common/foo-widget\n"
+"</screen> Hiermee wordt <systemitem class=\"url\">http://example.com/svn/repos-1/widgets/foo</systemitem> of <systemitem class=\"url\">svn+ssh://example.com/svn/repos-1/widgets/foo</systemitem> geëxtraheerd afhankelijk van de methode die gebruikt is voor het ophalen van <filename>C:\\Working</filename>."
 
 #. (term)
 msgid "Relative to the server's hostname"
-msgstr "Relatief aan de servers hostnaam"
+msgstr "Relatief ten opzichte van de server hostnaam"
 
 #. (para)
 msgid ""
@@ -6081,18 +6093,21 @@ msgid ""
 "/svn/repos-1/widgets/foo  common/foo-widget\n"
 "</screen> This will extract <systemitem class=\"url\">http://example.com/svn/repos-1/widgets/foo</systemitem> into <filename>C:\\Working\\common\\foo-widget</filename>. But if you checkout your working copy from another server at <systemitem class=\"url\">svn+ssh://another.mirror.net/svn/repos-1/project1/trunk</systemitem> then the external reference will extract <systemitem class=\"url\">svn+ssh://another.mirror.net/svn/repos-1/widgets/foo</systemitem>."
 msgstr ""
+"URL's die beginnen met <literal>/</literal> kopiëren de gedeeltes met de indeling en de hostnaam van de URL, bijvoorbeeld: <screen>\n"
+"/svn/repos-1/widgets/foo  common/foo-widget\n"
+"</screen> Hiermee wordt <systemitem class=\"url\">http://example.com/svn/repos-1/widgets/foo</systemitem> naar <filename>C:\\Working\\common\\foo-widget</filename> geëxtraheerd. Als je echter je werkkopie ophaalt van een andere server vanaf <systemitem class=\"url\">svn+ssh://another.mirror.net/svn/repos-1/project1/trunk</systemitem>, dan zal de externe referentie <systemitem class=\"url\">svn+ssh://another.mirror.net/svn/repos-1/widgets/foo</systemitem> extraheren."
 
 #. (para)
 msgid "You can also specify a peg revision after the URL if required, e.g. <systemitem class=\"url\">http://sounds.red-bean.com/repos@19</systemitem>."
-msgstr ""
+msgstr "Je kunt ook een vastgepinde revisie opgeven achteraan de URL indien nodig, bijvoorbeeld <systemitem class=\"url\">http://sounds.red-bean.com/repos@19</systemitem>."
 
 #. (para)
 msgid "If you need more information how TortoiseSVN handles Properties read <xref linkend=\"tsvn-dug-propertypage\"/>."
-msgstr ""
+msgstr "Als je meer informatie wilt hebben over hoe TortoiseSVN omgaat met Eigenschappen, lees dan <xref linkend=\"tsvn-dug-propertypage\"/>."
 
 #. (para)
 msgid "To find out about different methods of accessing common sub-projects read <xref linkend=\"tsvn-howto-common-projects\"/>."
-msgstr ""
+msgstr "Lees voor meer informatie over de verschillende methodes voor het benaderen van gemeenschappelijke sub-projecten <xref linkend=\"tsvn-howto-common-projects\"/>."
 
 #. (title)
 msgid "External Files"
@@ -6100,27 +6115,27 @@ msgstr "Externe Bestanden"
 
 #. (para)
 msgid "As of Subversion 1.6 you can add single file externals to your working copy using the same syntax as for folders. However, there are some restrictions."
-msgstr ""
+msgstr "Vanaf Subversion 1.6 kun je enkele externe bestanden aan je werkkopie toevoegen, door gebruik te maken van dezelfde syntax als voor mappen. Er zijn wel enkele beperkingen."
 
 #. (para)
 msgid "The path to the file external must place the file in an existing versioned folder. In general it makes most sense to place the file directly in the folder that has <literal>svn:externals</literal> set, but it can be in a versioned sub-folder if necessary. By contrast, directory externals will automatically create any intermediate unversioned folders as required."
-msgstr ""
+msgstr "Het pad naar het externe bestand moet het bestand in een bestaande map met versiebeheer plaatsen. Over het algemeen is het het handigst om het bestand te plaatsen in de map waarin de <literal>svn:externals</literal> is ingesteld, maar dit kan ook in een sub-map met versiebeheer indien nodig. Dit in tegenstelling tot externe mappen, waarbij automatisch tussentijdse mappen zonder versiebeheer worden aangemaakt als deze nodig zijn."
 
 #. (para)
 msgid "The URL for a file external must be in the same repository as the URL that the file external will be inserted into; inter-repository file externals are not supported."
-msgstr ""
+msgstr "De URL van een extern bestand moet in hetzelfde archief zijn als de URL van het archief waarin het externe bestand wordt opgehaald, externe bestanden tussen verschillende archieven worden niet ondersteund."
 
 #. (para)
 msgid "A file external behaves just like any other versioned file in many respects, but they cannot be moved or deleted using the normal commands; the <literal>svn:externals</literal> property must be modified instead."
-msgstr ""
+msgstr "Een extern bestand gedraagt zich net zoals elk ander bestand met versiebeheer, maar deze kunnen niet verplaatst of verwijderd worden met normale commando's; de <literal>svn:externals</literal> eigenschap moet in de plaats daarvan gewijzgd worden."
 
 #. (title)
 msgid "File externals support incomplete in Subversion 1.6"
-msgstr ""
+msgstr "Incomplete ondersteuning van externe bestanden in Subversion 1.6"
 
 #. (para)
 msgid "In subversion 1.6 it is not possible to remove a file external from your working copy once you have added it, even if you delete the <literal>svn:externals</literal> property altogether. You have to checkout a fresh working copy to remove the file."
-msgstr ""
+msgstr "Het is in subversion 1.6 niet mogelijk om een extern bestand van je werkkopie te verwijderen als je deze toegevoegd hebt, zelfs als je ook de <literal>svn:externals</literal> eigenschap verwijderd. Je moet een verse werkkopie ophalen als je het bestand wilt verwijderen."
 
 #. (title)
 msgid "Branching / Tagging"
@@ -6626,11 +6641,11 @@ msgstr ""
 
 #. (title)
 msgid "Locking"
-msgstr ""
+msgstr "Blokkeren"
 
 #. (primary)
 msgid "locking"
-msgstr ""
+msgstr "blokkeren"
 
 #. (primary)
 msgid "readonly"
@@ -6638,135 +6653,135 @@ msgstr "alleen-lezen"
 
 #. (para)
 msgid "You are using <quote>unmergeable</quote> files, for example, graphics files. If two people change the same file, merging is not possible, so one of you will lose their changes."
-msgstr ""
+msgstr "Je maakt gebruik van <quote>niet samen te voegen</quote> bestanden, bijvoorbeeld grafische bestanden. Als twee mensen hetzelfde bestand wijzigen, dan is samenvoegen niet mogelijk. Oftewel, één van de twee zal de wijzigingen kwijtraken."
 
 #. (para)
 msgid "Your company has always used a locking revision control system in the past and there has been a management decision that <quote>locking is best</quote>."
-msgstr ""
+msgstr "Jouw bedrijf heeft in het verleden altijd gebruik gemaakt van een versiebeheersysteem met blokkeringsmethode en er is een management besluit genomen dat <quote>blokkeren het beste is</quote>."
 
 #. (para)
 msgid "Subversion generally works best without locking, using the <quote>Copy-Modify-Merge</quote> methods described earlier in <xref linkend=\"tsvn-basics-versioning-copymodifymerge\"/>. However there are a few instances when you may need to implement some form of locking policy. <placeholder-1/>"
-msgstr ""
+msgstr "Subversion werkt het beste als er geen gebruik wordt gemaakt van blokkeren, als je gebruik maakt van de <quote>Kopieer-Wijzig-Samenvoeg</quote> methode die eerder beschreven is in <xref linkend=\"tsvn-basics-versioning-copymodifymerge\"/>. Er zijn echter enkele gevallen waarbij je een zekere vorm van blokkeerbeleid moet gebruiken. <placeholder-1/>"
 
 #. (para)
 msgid "Firstly you need to ensure that your Subversion server is upgraded to at least version 1.2. Earlier versions do not support locking at all. If you are using <literal>file://</literal> access, then of course only your client needs to be updated."
-msgstr ""
+msgstr "Allereerst moet je er zeker van zijn dat je Subversion server is bijgewerkt tot minimaal versie 1.2. Eerdere versies ondersteunen blokkeren helemaal niet. Als je gebruik maakt van <literal>file://</literal>, hoef natuurlijk alleen maar je eigen programma bij te werken."
 
 #. (title)
 msgid "How Locking Works in Subversion"
-msgstr ""
+msgstr "Hoe Het Blokkeren Werkt In Subversion"
 
 #. (para)
 msgid "By default, nothing is locked and anyone who has commit access can commit changes to any file at any time. Others will update their working copies periodically and changes in the repository will be merged with local changes."
-msgstr ""
+msgstr "Standaard wordt er niets geblokkeerd en kan iedereen die de rechten heeft wijzigingen op elk moment vastleggen in het archief. Anderen zullen hun werkkopieën regelmatig moeten verversen en de wijzigingen in het archief worden dan samengevoegd met de lokale wijzigingen."
 
 #. (para)
 msgid "If you <firstterm>Get a Lock</firstterm> on a file, then only you can commit that file. Commits by all other users will be blocked until you release the lock. A locked file cannot be modified in any way in the repository, so it cannot be deleted or renamed either, except by the lock owner."
-msgstr ""
+msgstr "Als je een bestand <firstterm>blokkeert</firstterm>, dan heb jij alleenrecht op het vastleggen van dat bestand. Vastleggingen van andere gebruikers zullen geblokkeerd worden totdat jij de blokkade opheft. Een geblokkeerd bestand kan op geen enkele manier in het archief gewijzigd worden, dat houdt ook in dat niemand anders dan de eigenaar van de blokkade het bestand kan verwijderen of hernoemen."
 
 #. (para)
 msgid "However, other users will not necessarily know that you have taken out a lock. Unless they check the lock status regularly, the first they will know about it is when their commit fails, which in most cases is not very useful. To make it easier to manage locks, there is a new Subversion property <literal>svn:needs-lock</literal>. When this property is set (to any value) on a file, whenever the file is checked out or updated, the local copy is made read-only <emphasis>unless</emphasis> that working copy holds a lock for the file. This acts as a warning that you should not edit that file unless you have first acquired a lock. Files which are versioned and read-only are marked with a special overlay in TortoiseSVN to indicate that you need to acquire a lock before editing."
-msgstr ""
+msgstr "Andere gebruikers zullen echter niet direct weten dat jij een bestand geblokkeerd hebt, tenzij ze regelmatig de blokkade status opvragen. Het eerste moment waarop ze er meestal pas achter komen is als ze wijzigingen proberen vast te leggen, wat niet altijd handig is. Om het werken met blokkades te vereenvoudigen is er een nieuwe Subversion eigenschap geïntroduceerd, <literal>svn:needs-lock</literal>. Als deze eigenschap (met een willekeurige waarde) aan een bestand is gekoppeld, dan wordt het lokale bestand altijd als alleen-lezen gemarkeerd als deze opgehaald wordt uit het archief, <emphasis>tenzij/totdat</emphasis> die werkkopie het bestand blokkeert. Op deze manier wordt je gewaarschuwd dat je dit bestand niet moet wijzigen voordat je het geblokkeerd hebt. Bestanden, die voorzien zijn van versiebeheer en als alleen-lezen zijn gemarkeerd, hebben in TortoiseSVN een apart overlappend pictogram waarmee aangegeven wordt dat je eerst het bestand moet blokkeren."
 
 #. (para)
 msgid "Locks are recorded by working copy location as well as by owner. If you have several working copies (at home, at work) then you can only hold a lock in <emphasis>one</emphasis> of those working copies."
-msgstr ""
+msgstr "Blokkades worden geadministreerd met de werkkopie locatie en de eigenaar. Als je meerdere werkkopieën hebt (thuis, op het werk), dan kun je in maar <emphasis>één</emphasis> werkkopie zo'n blokkade initiëren."
 
 #. (para)
 msgid "If one of your co-workers acquires a lock and then goes on holiday without releasing it, what do you do? Subversion provides a means to force locks. Releasing a lock held by someone else is referred to as <firstterm>Breaking</firstterm> the lock, and forcibly acquiring a lock which someone else already holds is referred to as <firstterm>Stealing</firstterm> the lock. Naturally these are not things you should do lightly if you want to remain friends with your co-workers."
-msgstr ""
+msgstr "Stel dat één van je medewerkers zo'n blokkade instelt en vervolgens op vakantie gaat, wat doe je dan? Subversion heeft de mogelijkheid om blokkades te forceren. Het vrijgeven van een blokkade die door iemand anders is ingesteld wordt aangeduid als het <firstterm>Verbreken</firstterm> van een blokkade. Het geforceerd toe-eigenen van een blokkade die door iemand anders is ingesteld, wordt het <firstterm>Stelen</firstterm> van een blokkade genoemd. Hier moet je natuurlijk voorzichtig mee omgaan als je vrienden wilt blijven met je collega's."
 
 #. (para)
 msgid "Locks are recorded in the repository, and a lock token is created in your local working copy. If there is a discrepancy, for example if someone else has broken the lock, the local lock token becomes invalid. The repository is always the definitive reference."
-msgstr ""
+msgstr "Blokkades worden geadministreerd in het archief en er wordt ook een merkteken (een zogenaamde token) in je lokale werkkopie geplaatst. Als er een discrepantie is opgetreden, bijvoorbeeld als iemand anders de blokkade geforceerd heeft, dan zal het lokale blokkade merkteken ongeldig worden. De status in het archief is altijd leidend."
 
 #. (title)
 msgid "Getting a Lock"
-msgstr "Vergrendeling verkrijgen"
+msgstr "Blokkade verkrijgen"
 
 #. (title)
 msgid "The Locking Dialog"
-msgstr "De vergrendelingsdialoog"
+msgstr "Het blokkeringsscherm"
 
 #. (para)
 msgid "Select the file(s) in your working copy for which you want to acquire a lock, then select the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Get Lock...</guimenuitem></menuchoice>. <placeholder-1/> A dialog appears, allowing you to enter a comment, so others can see why you have locked the file. The comment is optional and currently only used with Svnserve based repositories. If (and <emphasis>only</emphasis> if) you need to steal the lock from someone else, check the <guilabel>Steal lock</guilabel> box, then click on <guibutton>OK</guibutton>."
-msgstr ""
+msgstr "Selecteer de bestanden in je werkkopie die je wilt blokkeren. Vervolgens selecteer je het commando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Plaats blokkade...</guimenuitem></menuchoice>. <placeholder-1/> Een apart venster verschijnt, waarin je aan anderen kunt aangeven waarom je de bestanden geblokkeerd hebt. Het invullen is optioneel en wordt op dit moment alleen gebruikt in archieven die op basis van Svnserve opgezet zijn. Alleen als je <emphasis>echt</emphasis> een blokkade moet stelen van iemand anders, moet je de <guilabel>Steel de blokkades</guilabel> selectie aanvinken om de blokkade te stelen. Klik vervolgens op <guibutton>OK</guibutton> om de actie in gang te zetten."
 
 #. (para)
 msgid "If you select a folder and then use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Get Lock...</guimenuitem></menuchoice> the lock dialog will open with <emphasis>every</emphasis> file in <emphasis>every</emphasis> sub-folder selected for locking. If you really want to lock an entire hierarchy, that is the way to do it, but you could become very unpopular with your co-workers if you lock them out of the whole project. Use with care ..."
-msgstr ""
+msgstr "Als je een map selecteert en vervolgens het commando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Plaats blokkade...</guimenuitem></menuchoice> kiest, zal het blokkeringsscherm geopend worden voor <emphasis>elk</emphasis> bestand in de map <emphasis>en alle</emphasis> bestanden in de sub-mappen. Als je echt de hele hiërarchie wilt blokkeren, dan is dat de methode. Je collega's zullen er mogelijk niet blij van worden als je hun helemaal buiten het project sluit. Gebruik dit dus met verstand..."
 
 #. (title)
 msgid "Releasing a Lock"
-msgstr "Een Lock vrijgeven"
+msgstr "Een Blokkade Vrijgeven"
 
 #. (para)
 msgid "To make sure you don't forget to release a lock you don't need any more, locked files are shown in the commit dialog and selected by default. If you continue with the commit, locks you hold on the selected files are removed, even if the files haven't been modified. If you don't want to release a lock on certain files, you can uncheck them (if they're not modified). If you want to keep a lock on a file you've modified, you have to enable the <guilabel>Keep locks</guilabel> checkbox before you commit your changes."
-msgstr ""
+msgstr "Om te voorkomen dat je vergeet een blokkade vrij te geven, worden geblokkeerde bestanden weergegeven in het vastleggen venster en standaard geselecteerd. Als je dan doorgaat met het vastleggen, zullen blokkades van de geselecteerde bestanden verwijderd worden, zelfs als er niets gewijzigd is. Als je de blokkade op bepaalde bestanden niet wilt vrijgeven, dan kun je deze de-selecteren (als ze niet gewijzigd zijn). Als je de blokkade op gewijzigde bestanden wilt behouden, dan moet je het <guilabel>Blokkades handhaven</guilabel> selectievak aanvinken voordat je je wijzigingen vastlegt."
 
 #. (para)
 msgid "To release a lock manually, select the file(s) in your working copy for which you want to release the lock, then select the command <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Release Lock</guimenuitem></menuchoice> There is nothing further to enter so TortoiseSVN will contact the repository and release the locks. You can also use this command on a folder to release all locks recursively."
-msgstr ""
+msgstr "Als je een blokkade handmatig wilt opheffen, moet je de bestanden in je werkkopie selecteren waarvoor je de blokkade wilt opheffen. Vervolgens kies je het commando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Blokkade opheffen<guimenuitem></menuchoice>. Er hoeft verder geen informatie ingevoerd te worden, dus TortoiseSVN zal het archief benaderen en de blokkades opheffen. Je kunt dit commando ook op mappen toepassen om alle blokkades recursief op te heffen."
 
 #. (title)
 msgid "Checking Lock Status"
-msgstr "Controleren van Blokstatus"
+msgstr "Blokkadestatus Controleren"
 
 #. (title)
 msgid "The Check for Modifications Dialog"
-msgstr ""
+msgstr "Het Kijk of er updates zijn scherm"
 
 #. (para)
 msgid "<placeholder-1/> To see what locks you and others hold, you can use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Check for Modifications...</guimenuitem></menuchoice>. Locally held lock tokens show up immediately. To check for locks held by others (and to see if any of your locks are broken or stolen) you need to click on <guibutton>Check Repository</guibutton>."
-msgstr ""
+msgstr "<placeholder-1/> Om na te gaan welke blokkades er door jou of anderen geplaatst zijn, kun je gebruik maken van <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Kijk of er updates zijn...</guimenuitem></menuchoice>. Lokale blokkade merktekens worden meteen getoond. Om de blokkades van anderen te zien (en om na te gaan of jouw blokkades verbroken of gestolen zijn) moet je op <guibutton>Controleer archief</guibutton> klikken."
 
 #. (para)
 msgid "From the context menu here, you can also get and release locks, as well as breaking and stealing locks held by others."
-msgstr ""
+msgstr "Via het context menu, kun je hier ook blokkades plaatsen en opheffen, maar ook blokkades van anderen verbreken en stelen."
 
 #. (title)
 msgid "Avoid Breaking and Stealing Locks"
-msgstr ""
+msgstr "Voorkom het verbreken en stelen van blokkades"
 
 #. (para)
 msgid "If you break or steal someone else's lock without telling them, you could potentially cause loss of work. If you are working with unmergeable file types and you steal someone else's lock, once you release the lock they are free to check in their changes and overwrite yours. Subversion doesn't lose data, but you have lost the team-working protection that locking gave you."
-msgstr ""
+msgstr "Het verbreken of stelen van iemand anders blokkade zonder dat die persoon daarvan op de hoogte is, kan verlies van gegevens tot gevolg hebben. Als je iemand zijn blokkade steelt en werkt met niet samenvoegbare bestandsformaten, dan kan iemand anders jouw wijzigingen overschrijven op het moment dat jij jouw blokkade opheft en zij hun wijzigingen vastleggen in het archief. Subversion raakt geen informatie kwijt, maar je verliest wel de beveiliging de blokkade functionaliteit je biedt bij het werken in teamverband."
 
 #. (title)
 msgid "Making Non-locked Files Read-Only"
-msgstr ""
+msgstr "Niet-geblokkeerde bestanden als Alleen-lezen instellen"
 
 #. (para)
 msgid "As mentioned above, the most effective way to use locking is to set the <literal>svn:needs-lock</literal> property on files. Refer to <xref linkend=\"tsvn-dug-propertypage\"/> for instructions on how to set properties. Files with this property set will always be checked out and updated with the read-only flag set unless your working copy holds a lock. <graphic fileref=\"../images/ReadOnlyIcon.png\"/> As a reminder, TortoiseSVN uses a special overlay to indicate this."
-msgstr ""
+msgstr "Zoals eerder beschreven, kun je blokkades het effectiefst gebruiken door gebruik te maken van de <literal>svn:needs-lock</literal> eigenschap. Lees <xref linkend=\"tsvn-dug-propertypage\"/> voor meer informatie over het instellen van eigenschappen. Bestanden die deze eigenschap hebben, krijgen meteen de alleen-lezen eigenschap mee als ze worden opgehaald uit het archief, tenzij jouw werkkopie het bestand geblokkeerd heeft. <graphic fileref=\"../images/ReadOnlyIcon.png\"/> Ter herinnering, TortoiseSVN gebruikt een apart overlappend pictogram om deze situatie aan te geven. "
 
 #. (para)
 msgid "If you operate a policy where every file has to be locked then you may find it easier to use Subversion's auto-props feature to set the property automatically every time you add new files. Read <xref linkend=\"tsvn-dug-propertypage-auto-props\"/> for further information."
-msgstr ""
+msgstr "Als je een beleid hanteert waardoor elk bestand geblokkeerd moet worden, dan is het waarschijnlijk makkelijker om automatische-eigenschappen functie van Subversion te gebruiken. Hiermee wordt automatisch dezelfde eigenschap ingesteld als je een nieuwe bestand toevoegt. Lees ook <xref linkend=\"tsvn-dug-propertypage-auto-props\"/> voor meer informatie."
 
 #. (title)
 msgid "The Locking Hook Scripts"
-msgstr ""
+msgstr "Hook Scripts Voor Blokkeringen"
 
 #. (para)
 msgid "When you create a new repository with Subversion 1.2 or higher, four hook templates are created in the repository <filename>hooks</filename> directory. These are called before and after getting a lock, and before and after releasing a lock."
-msgstr ""
+msgstr "Als je een nieuw archief aanmaakt met Subversion 1.2 of hoger, worden er vier hook sjablonen aangemaakt in de map <filename>hooks</filename> van het archief. Deze worden aangeroepen voor en na het plaatsen van een blokkade, en voor en na het opheffen van een blokkade."
 
 #. (para)
 msgid "It is a good idea to install a <literal>post-lock</literal> and <literal>post-unlock</literal> hook script on the server which sends out an email indicating the file which has been locked. With such a script in place, all your users can be notified if someone locks/unlocks a file. You can find an example hook script <filename>hooks/post-lock.tmpl</filename> in your repository folder."
-msgstr ""
+msgstr "Het is verstandig om op de server een <literal>na-het-blokkeren</literal> en <literal>na-het-deblokkeren</literal> hook script te installeren, waardoor een email verstuurd wordt waarin aangegeven wordt welk bestand ge(de)blokkeerd is. Met zo'n script kunnen alle gebruikers geïnformeerd worden over het feit dat er een blokkade geplaatst of opgeheven wordt. Je kunt een voorbeeld <filename>hooks/post-lock.tmpl</filename> vinden in je archief."
 
 #. (para)
 msgid "You might also use hooks to disallow breaking or stealing of locks, or perhaps limit it to a named administrator. Or maybe you want to email the owner when one of their locks is broken or stolen."
-msgstr ""
+msgstr "Je kunt ook hook scripts gebruiken om het verbreken of stelen van blokkades te voorkomen, of dat alleen een beheerder dit mag doen. Je kunt ook een email laten sturen naar de eigenaar van een blokkade als zijn blokkade verbroken of gestolen wordt."
 
 #. (para)
 msgid "Read <xref linkend=\"tsvn-repository-hooks\"/> to find out more."
-msgstr ""
+msgstr "Lees <xref linkend=\"tsvn-repository-hooks\"/> voor meer informatie hierover."
 
 #. (title)
 msgid "Creating and Applying Patches"
-msgstr ""
+msgstr "Een Patch Maken en Toepassen"
 
 #. (primary)
 msgid "patch"
@@ -6774,15 +6789,15 @@ msgstr "patch"
 
 #. (primary)
 msgid "unified diff"
-msgstr ""
+msgstr "unified diff"
 
 #. (para)
 msgid "For open source projects (like this one) everyone has read access to the repository, and anyone can make a contribution to the project. So how are those contributions controlled? If just anyone could commit changes, the project would be permanently unstable and probably permanently broken. In this situation the change is managed by submitting a <firstterm>patch</firstterm> file to the development team, who do have write access. They can review the patch first, and then either submit it to the repository or reject it back to the author."
-msgstr ""
+msgstr "Bij Open bron projecten (zoals deze) heeft iedereen leesrechten voor het archief en kan iedereen een bijdrage leveren aan het project. Hoe worden die bijdrages behandeld? Als iedereen wijzigingen kan vastleggen, dan zal het project bijna altijd onstabiel zijn en zelfs in de meeste gevallen niet werken. Om dit te voorkomen wordt er gebruik gemaakt van <firstterm>patch</firstterm> bestanden die naar het ontwikkelteam gestuurd kunnen worden, die natuurlijk wel schrijfrechten heeft. Zij kunnen de patch dan controleren en in het archief inbrengen of de auteur laten weten dat deze afgewezen is."
 
 #. (para)
 msgid "Patch files are simply Unified-Diff files showing the differences between your working copy and the base revision."
-msgstr ""
+msgstr "Patch bestanden zijn Unified-Diff bestanden waarin de verschillen tussen jouw werkkopie en de basis revisie zijn opgenomen."
 
 #. (title)
 msgid "Creating a Patch File"
@@ -6790,83 +6805,83 @@ msgstr "Maken van een Patchbestand"
 
 #. (para)
 msgid "First you need to make <emphasis>and test</emphasis> your changes. Then instead of using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Commit...</guimenuitem></menuchoice> on the parent folder, you select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Create Patch...</guimenuitem></menuchoice>"
-msgstr ""
+msgstr "Eerst moet je natuurlijk je wijzigingen maken <emphasis>en testen</emphasis>. Vervolgens moet je op de bovenliggende map <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Maak Patch...</guimenuitem></menuchoice> selecteren in plaats van <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Vastleggen...</guimenuitem></menuchoice>"
 
 #. (title)
 msgid "The Create Patch dialog"
-msgstr "De Maak Patch Dialoog"
+msgstr "Het Maak Patch Venster"
 
 #. (para)
 msgid "you can now select the files you want included in the patch, just as you would with a full commit. This will produce a single file containing a summary of all the changes you have made to the selected files since the last update from the repository."
-msgstr ""
+msgstr "Nu kun je de bestanden selecteren die je in je patch wilt opnemen, net zoals je zou doen bij een normale vastlegging. Hiermee wordt dan een enkel bestand gemaakt met daarin een samenvatting van alle wijzigingen die je aan de geselecteerde bestanden hebt aangebracht sinds de laatste verversing van het archief."
 
 #. (para)
 msgid "You can produce separate patches containing changes to different sets of files. Of course, if you create a patch file, make some more changes to the <emphasis>same</emphasis> files and then create another patch, the second patch file will include <emphasis>both</emphasis> sets of changes."
-msgstr ""
+msgstr "Je kunt verschillende patches aanmaken met wijzigingen aan verschillende bestandsgroepen. Als je een patch bestand aanmaakt, dan nog enkele wijzigingen aan <emphasis>dezelfde</emphasis> bestanden doorvoert en vervolgens weer een patch bestand aanmaakt, dan zal in het tweede patch bestand <emphasis>beide</emphasis> sets met wijzigingen te zien zijn."
 
 #. (para)
 msgid "Just save the file using a filename of your choice. Patch files can have any extension you like, but by convention they should use the <filename>.patch</filename> or <filename>.diff</filename> extension. You are now ready to submit your patch file."
-msgstr ""
+msgstr "Sla het bestand op met een naam naar keuze. Patch bestanden kunnen elke extensie hebben die je leuk vindt, maar standaard wordt de extensie <filename>.patch</filename> of <filename>.diff</filname> gebruikt. Nu ben je klaar om je patch bestand op te sturen."
 
 #. (para)
 msgid "You can also save the patch to the clipboard instead of to a file. You might want to do this so that you can paste it into an email for review by others. Or if you have two working copies on one machine and you want to transfer changes from one to the other, a patch on the clipboard is a convenient way of doing this."
-msgstr ""
+msgstr "Je kunt je patch ook op het klembord opslaan in plaats van in een bestand. Dit is handig als je de patch bijvoorbeeld in een mail wilt plakken zodat iemand anders hem kan controleren. Je kunt deze methode ook gebruiken als je twee PC's gebruikt en je de wijzigingen van de ene naar de andere PC wilt verplaatsen. "
 
 #. (title)
 msgid "Applying a Patch File"
-msgstr "Aanbrengen van een Patchbestand"
+msgstr "Een Patchbestand Toepassen"
 
 #. (para)
 msgid "Patch files are applied to your working copy. This should be done from the same folder level as was used to create the patch. If you are not sure what this is, just look at the first line of the patch file. For example, if the first file being worked on was <filename>doc/source/english/chapter1.xml</filename> and the first line in the patch file is <filename>Index: english/chapter1.xml</filename> then you need to apply the patch to the <filename>doc/source/</filename> folder. However, provided you are in the correct working copy, if you pick the wrong folder level, TortoiseSVN will notice and suggest the correct level."
-msgstr ""
+msgstr "Patch bestanden worden toegepast op je werkkopie. Dit moet gedaan worden vanaf hetzelfde map-niveau als waarop de patch gemaakt is. Als je niet zeker weet op welk niveau dat was, kijk dan naar de eerste regel van het patch bestand. Als bijvoorbeeld het eerste bestand waaraan gewerkt is <filename>doc/source/english/chapter1.xml</filename> is en de eerste regel in het patch bestand is <filename>Index: english/chapter1.xml</filename>, dan moet je de patch toepassen op de map <filename>doc/source/</filename>. Als je per ongeluk het verkeerde map-niveau kiest, dan zal TortoiseSVN je hiervan op de hoogte stellen en het juiste niveau voorstellen. Dit werkt alleen als je in de juiste werkkopie aan het werken bent."
 
 #. (para)
 msgid "In order to apply a patch file to your working copy, you need to have at least read access to the repository. The reason for this is that the merge program must reference the changes back to the revision against which they were made by the remote developer."
-msgstr ""
+msgstr "Als je een patch bestand wilt toepassen op je werkkopie, dan heb je op zijn minst lees-rechten nodig bij het archief. De reden hiervoor is dat het samenvoegprogramma de revisie moet kunnen traceren waarop de wijzigingen door de ontwikkelaar zijn gemaakt."
 
 #. (para)
 msgid "From the context menu for that folder, click on <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Apply Patch...</guimenuitem></menuchoice> This will bring up a file open dialog allowing you to select the patch file to apply. By default only <filename>.patch</filename> or <filename>.diff</filename> files are shown, but you can opt for <quote>All files</quote>. If you previously saved a patch to the clipboard, you can use <guibutton>Open from clipboard...</guibutton> in the file open dialog."
-msgstr ""
+msgstr "Klik in het context menu van die folder op <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Pas Patch toe...</guimenuitem></menuchoice>. Er wordt dan een nieuw scherm geopend waarin je het patch bestand, die je wilt toepassen, kunt selecteren. Standaard zullen alleen <filename>.patch</filename> of <filename>.diff</filename> bestanden weergegeven worden, maar je kunt ook <quote>Alle bestanden</quote> laten zien. Als je een patch op het klembord hebt staan, dan kun je de knop <guibutton>Openen vanaf klembord...</guibutton> klikken. Merk op dat deze optie alleen weergegeven wordt als je de patch op het klembord hebt gezet met <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Maak Patch...</guimenuitem></menuchoice>. De knop zal niet getoond worden als je een patch vanuit een ander programma naar het klembord hebt gekopieerd."
 
 #. (para)
 msgid "Alternatively, if the patch file has a <filename>.patch</filename> or <filename>.diff</filename> extension, you can right click on it directly and select <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Apply Patch...</guimenuitem></menuchoice>. In this case you will be prompted to enter a working copy location."
-msgstr ""
+msgstr "Als jouw patch bestand de extensie <filename>.patch</filename> of <filename>.diff</filename> heeft, kun je deze ook direct toepassen als je met rechts op het bestand klikt en <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Pas Patch toe...</guimenuitem></menuchoice> selecteert."
 
 #. (para)
 msgid "These two methods just offer different ways of doing the same thing. With the first method you select the WC and browse to the patch file. With the second you select the patch file and browse to the WC."
-msgstr ""
+msgstr "Dit zijn twee verschillende manieren waarmee je hetzelfde bereikt. Met de eerste methode selecteer je de werkkopie en blader je naar het patch bestand. Met de tweede selecteer je het patch bestand en blader je naar de werkkopie."
 
 #. (para)
 msgid "Once you have selected the patch file and working copy location, TortoiseMerge runs to merge the changes from the patch file with your working copy. A small window lists the files which have been changed. Double click on each one in turn, review the changes and save the merged files."
-msgstr ""
+msgstr "Als je eenmaal het patch bestand en de locatie van de werkkopie hebt geselecteerd, zal TortoiseMerge de wijzigingen van het patch bestand met je werkkopie samenvoegen. In een klein scherm zullen de gewijzigde bestanden weergegeven worden. Dubbelklik op elk bestand om de wijzigingen van de samenvoeging te bekijken en deze op te slaan."
 
 #. (para)
 msgid "The remote developer's patch has now been applied to your working copy, so you need to commit to allow everyone else to access the changes from the repository."
-msgstr ""
+msgstr "De patch van de andere ontwikkelaar is nu toegepast op jouw werkkopie. Je moet nu de wijzigingen vastleggen in het archief, zodat iedereen de wijzigingen kan ophalen."
 
 #. (title)
 msgid "Who Changed Which Line?"
-msgstr ""
+msgstr "Wie Heeft Welke Regel Gewijzigd?"
 
 #. (primary)
 msgid "blame"
-msgstr ""
+msgstr "verklaren"
 
 #. (primary)
 msgid "annotate"
-msgstr ""
+msgstr "annoteren"
 
 #. (primary)
 msgid "praise"
-msgstr ""
+msgstr "prijzen"
 
 #. (para)
 msgid "Sometimes you need to know not only what lines have changed, but also who exactly changed specific lines in a file. That's when the <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Blame...</guimenuitem></menuchoice> command, sometimes also referred to as <firstterm>annotate</firstterm> command comes in handy."
-msgstr ""
+msgstr "Soms wil je niet alleen welke regels er gewijzigd zijn, maar ook wie er precies welke regel gewijzigd heeft. Hierbij komt het commando <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Verklaren...</guimenuitem></menuchoice>, soms ook aangeduid als <firstterm>annoteren</firstterm>, goed van pas."
 
 #. (para)
 msgid "This command lists, for every line in a file, the author and the revision the line was changed."
-msgstr ""
+msgstr "Dit commando laat voor elke regel in een bestand zien wie, en in welke revisie, een regel heeft gewijzigd."
 
 #. (title)
 msgid "Blame for Files"
@@ -6874,67 +6889,67 @@ msgstr "Verklaar Bestanden"
 
 #. (title)
 msgid "The Annotate / Blame Dialog"
-msgstr "De Annoteer / Verklaar Dialoog"
+msgstr "Het Verklar/Annoteren Scherm"
 
 #. (para)
 msgid "<placeholder-1/> If you're not interested in changes from earlier revisions you can set the revision from which the blame should start. Set this to <literal>1</literal>, if you want the blame for <emphasis>every</emphasis> revision."
-msgstr ""
+msgstr "<placeholder-1/> Als je niet geïnteresseerd bent in de wijzigingen van eerdere revisies, kun je aangegeven vanaf welke revisie het verklaren moet beginnen. Stel deze waarde in op <literal>1</literal> als je de wijzigingen voor <emphasis>elke</emphasis> revisie wilt zien."
 
 #. (para)
 msgid "By default the blame file is viewed using <firstterm>TortoiseBlame</firstterm>, which highlights the different revisions to make it easier to read. If you wish to print or edit the blame file, select <guilabel>Use Text viewer to view blames</guilabel>"
-msgstr ""
+msgstr "Standaard wordt het verklaren-bestand getoond in <firstterm>TortoiseBlame</firstterm>, waarin de verschillende revisies gemarkeerd worden voor een beter overzicht. Als je het verklaren-bestand wilt afdrukken of bewerken, selecteer dan <guilabel>Gebruik &tekst editor om verklaringen te bekijken</guilabel>."
 
 #. (para)
 msgid "You can specify the way that line ending and whitespace changes are handled. These options are described in <xref linkend=\"tsvn-dug-diff-eol-whitespace\"/>. The default behaviour is to treat all whitespace and line-end differences as real changes, but if you want to ignore an indentation change and find the original author, you can choose an appropriate option here."
-msgstr ""
+msgstr "Je kunt instellen hoe regeleinden en spaties behandeld moeten worden. Deze opties staan beschreven in <xref linkend=\"tsvn-dug-diff-eol-whitespace\"/>. Standaard worden alle verschillen in spaties en regeleinden als echte wijzigingen behandeld. Als je een inspring wijziging wilt negeren en de originele auteur wilt vinden, dan kun je de benodigde instellingen hier kiezen."
 
 #. (para)
 msgid "Once you press <guibutton>OK</guibutton> TortoiseSVN starts retrieving the data to create the blame file. Please note: This can take several minutes to finish, depending on how much the file has changed and of course your network connection to the repository. Once the blame process has finished the result is written into a temporary file and you can view the results."
-msgstr ""
+msgstr "Als je eenmaal op <guibutton>OK</guibutton> hebt geklikt, start TortoiseSVN met het ophalen van de gegevens om het verklaren-bestand aan te maken. Merk op: Het kan enkele minuten duren voordat dit proces klaar is. Dit hangt natuurlijk af van het aantal wijzigingen in een bestand en de netwerkverbinding naar je archief. Als het proces klaar is, worden de resultaten naar een tijdelijk bestand geschreven, waarna je de resultaten kunt bekijken."
 
 #. (title)
 msgid "TortoiseBlame"
-msgstr ""
+msgstr "TortoiseBlame"
 
 #. (para)
 msgid "<placeholder-1/> TortoiseBlame, which is included with TortoiseSVN, makes the blame file easier to read. When you hover the mouse over a line in the blame info column, all lines with the same revision are shown with a darker background. Lines from other revisions which were changed by the same author are shown with a light background. The colouring may not work as clearly if you have your display set to 256 colour mode."
-msgstr ""
+msgstr "<placeholder-1/> TortoiseBlame, die met TortoiseSVN wordt meegeleverd, maakt het lezen van verklaren-bestanden makkelijker. Als je je muis boven een regel in de verklaren kolom houdt, dan worden alle regels van dezelfde revisie weergegeven met een donkere achtergrond. Regels van andere revisies die door dezelfde auteur gewijzigd zijn, worden weergegeven met een lichte achtergrond. De kleuren worden niet optimaal weergegeven als je je scherm hebt ingesteld op 256 kleuren mode."
 
 #. (para)
 msgid "If you <action>left click</action> on a line, all lines with the same revision are highlighted, and lines from other revisions by the same author are highlighted in a lighter colour. This highlighting is sticky, allowing you to move the mouse without losing the highlights. Click on that revision again to turn off highlighting."
-msgstr ""
+msgstr "Als je met <action>links</action> op een regel klikt, worden alle regels van dezelfde revisie gemarkeerd en regels van andere revisies van dezelfde auteur worden met een lichtere kleur gemarkeerd. De markeringen blijven actief, waardoor je je muis kunt bewegen zonder dat de markeringen verloren gaan. Als je weer op de revisie klikt, worden de markeringen weer uitgezet."
 
 #. (para)
 msgid "The revision comments (log message) are shown in a hint box whenever the mouse hovers over the blame info column. If you want to copy the log message for that revision, use the context menu which appears when you right click on the blame info column."
-msgstr ""
+msgstr "De revisie opmerkingen (logboek boodschappen) worden in een klein hint scherm weergegeven als je je muis boven de verklaring informatie kolom houdt. Als je de logboek boodschap van die revisie wilt kopieren, gebruik je het context menu door met rechts te klikken op de verklaring informatie kolom."
 
 #. (para)
 msgid "You can search within the Blame report using <menuchoice><guimenu>Edit</guimenu><guimenuitem>Find...</guimenuitem></menuchoice>. This allows you to search for revision numbers, authors and the content of the file itself. Log messages are not included in the search - you should use the Log Dialog to search those."
-msgstr ""
+msgstr "Je kunt in het verklaren rapport zoeken met <menuchoice><guimenu>Wijzigen</guimenu><guimenuitem>Zoeken...</guimenuitem></menuchoice>. Hiermee kun je zoeken op revisienummers, auteurs en de inhoud van het bestand zelf. Logboek boodschappen worden niet meegenomen in de zoekopdracht - hiervoor moet je het Logboek venster gebruiken."
 
 #. (para)
 msgid "You can also jump to a specific line number using <menuchoice><guimenu>Edit</guimenu><guimenuitem>Go To Line...</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "Je kunt ook naar een specifiek regelnummer springen met <menuchoice><guimenu>Wijzigen</guimenu><guimenuitem>Ga naar regel...</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "When the mouse is over the blame info columns, a context menu is available which helps with comparing revisions and examining history, using the revision number of the line under the mouse as a reference. <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Blame previous revision</guimenuitem></menuchoice> generates a blame report for the same file, but using the previous revision as the upper limit. This gives you the blame report for the state of the file just before the line you are looking at was last changed. <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Show changes</guimenuitem></menuchoice> starts your diff viewer, showing you what changed in the referenced revision. <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Show log</guimenuitem></menuchoice> displays the revision log dialog starting with the referenced revision."
-msgstr ""
+msgstr "In de verklaring informatie kolom is een context menu beschikbaar, waarmee je makkelijk revisies kunt vergelijken en de geschiedenis kunt onderzoeken met het revisienummer van de regel waar de muis boven gehouden wordt als referentie. <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Verklaar vorige revisie</guimenuitem></menuchoice> genereerd een verklaar rapport voor hetzelfde bestand, maar dan met de vorige revisie als bovenste limiet. Hiermee krijg je een verklaar rapport voor de staat van het bestand vlak voordat de regel die je bekijkt gewijzigd werd. <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Toon wijzigingen</guimenuitem></menuchoice> start jou vergelijk programma, waarmee dan de wijzigingen van de gerefereerde revisie worden weergegeven. <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Toon logboek</guimenuitem></menuchoice> toont het revisie log venster vanaf de geregereerde revisie."
 
 #. (para)
 msgid "If you need a better visual indicator of where the oldest and newest changes are, select <menuchoice><guimenu>View</guimenu><guimenuitem>Color age of lines</guimenuitem></menuchoice>. This will use a colour gradient to show newer lines in red and older lines in blue. The default colouring is quite light, but you can change it using the TortoiseBlame settings."
-msgstr ""
+msgstr "Als je een betere visuele indicatie wilt hebben van waar de oudste en nieuwe wijzigingen staan, selecteer dan <menuchoice><guimenu>Bekijk</guimenu><guimenuitem>Kleur regels naar leeftijd</guimenuitem></menuchoice>. Hiermee wordt een kleur verloop gebruikt om nieuwe regels met een rode kleur weer te geven en oudere met een blauwe kleur. De standaard kleurinstelling is vrij licht, maar dat kun je wijzigen bij de TortoiseBlame instellingen."
 
 #. (para)
 msgid "If you are using Merge Tracking, where lines have changed as a result of merging from another path, TortoiseBlame will show the revision and author of the last change in the original file rather than the revision where the merge took place. These lines are indicated by showing the revision and author in italics. If you do not want merged lines shown in this way, uncheck the <guilabel>Include merge info</guilabel> checkbox."
-msgstr ""
+msgstr "Als je Samenvoeg historie gebruikt, zal TortoiseBlame, als regels gewijzigd zijn als gevolg van het samenvoegen vanaf een ander pad, de revisie en auteur van de laatste wijziging weergeven in het originele bestand in plaats van de revisie waarin de samenvoeging plaatsvond. Bij deze regels worden het revisienummer en de auteur schuin gedrukt weergegeven. Als je niet wilt dat samengevoegde regels zo worden weergegeven, haal dan het vinkje weg bij <guilabel>Samenvoeg-informatie meenemen</guilabel>."
 
 #. (para)
 msgid "If you want to see the paths involved in the merge, select <menuchoice><guimenu>View</guimenu><guimenuitem>Merge paths</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "Als je de betrokken paden van het samenvoegen wilt zien, kies dan <menuchoice><guimenu>Bekijk</guimenu><guimenuitem>Voeg paden samen</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "The settings for TortoiseBlame can be accessed using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings...</guimenuitem></menuchoice> on the TortoiseBlame tab. Refer to <xref linkend=\"tsvn-dug-settings-tortoiseblame\"/>."
-msgstr ""
+msgstr "De instellingen van TortoiseBlame kunnen bekeken worden bij <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Instellingen...</guimenuitem></menuchoice>  onder de TortoiseBlame tab. Lees ook <xref linkend=\"tsvn-dug-settings-tortoiseblame\"/>."
 
 #. (title)
 msgid "Blame Differences"
@@ -6942,15 +6957,15 @@ msgstr "Verklaar Verschillen"
 
 #. (para)
 msgid "One of the limitations of the Blame report is that it only shows the file as it was in a particular revision, and shows the last person to change each line. Sometimes you want to know what change was made, as well as who made it. What you need here is a combination of the diff and blame reports."
-msgstr ""
+msgstr "Een van de beperkingen van het verklaren-rapport is dat het alleen het bestand weergeeft zoals het op het moment van een bepaalde revisie was en de laatste persoon die een regel gewijzigd heeft. Soms wil je weten welke wijziging is doorgevoerd en wie dat gedaan heeft. Hiervoor heb je een combinatie van verschil- en verklaar-rapporten nodig."
 
 #. (term)
 msgid "Blame Revisions"
-msgstr ""
+msgstr "Verklaar Revisies"
 
 #. (para)
 msgid "In the top pane, select 2 revisions, then select <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Blame revisions</guimenuitem></menuchoice>. This will fetch the blame data for the 2 revisions, then use the diff viewer to compare the two blame files."
-msgstr ""
+msgstr "Selecteer in het bovenste deelvenster 2 revisies en kies dan <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Verklaar revisies</guimenuitem></menuchoice>. Hiermee worden de verklaar-gegevens voor die 2 revisies opgehaald. Gebruik daarna dan de diff viewer om de twee verklaarde revisies te vergelijken."
 
 #. (term)
 msgid "Blame Changes"
@@ -6958,19 +6973,19 @@ msgstr "Verklaar Wijzigingen"
 
 #. (para)
 msgid "Select one revision in the top pane, then pick one file in the bottom pane and select <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Blame changes</guimenuitem></menuchoice>. This will fetch the blame data for the selected revision and the previous revision, then use the diff viewer to compare the two blame files."
-msgstr ""
+msgstr "Selecteer één revisie in het bovenste deelvenster, kies vervolgens één bestand uit het onderste deelvenster en selecteer <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Verklaar wijzigingen</guimenuitem></menuchoice>. Hiermee worden de verklaar-gegevens voor de geselecteerde revisie en de revisie daarvoor opgehaald. Gebruik daarna je diff programma om de twee verklaar-bestanden te vergelijken."
 
 #. (term)
 msgid "Compare and Blame with Working BASE"
-msgstr ""
+msgstr "Vergelijk en Verklaar met Werkbasis"
 
 #. (para)
 msgid "Show the log for a single file, and in the top pane, select a single revision, then select <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Compare and Blame with Working BASE</guimenuitem></menuchoice>. This will fetch the blame data for the selected revision, and for the file in the working BASE, then use the diff viewer to compare the two blame files."
-msgstr ""
+msgstr "Toon het logboek voor een enkel bestand en selecteer in het bovenste deelvenster een enkele revisie. Kies vervolgens <menuchoice><guimenu>Context menu</guimenu><guimenuitem>Vergelijk en verklaar met werkkopie (BASE)</guimenuitem></menuchoice>. De verklaar-gegevens worden dan voor de geselecteerde revisie en het bestand in de werkbasis opgehaald. Gebruik dan het diff programma om de twee verklaar-bestanden te vergelijken."
 
 #. (para)
 msgid "The revision log dialog includes several options which allow you to do this. <placeholder-1/>"
-msgstr ""
+msgstr "Het revisie log venster heeft enkele opties waarmee je dit kunt doen. <placeholder-1/>"
 
 #. (title)
 #. (title)
@@ -6987,31 +7002,31 @@ msgstr "server-side acties"
 
 #. (primary)
 msgid "server viewer"
-msgstr ""
+msgstr "archiefverkenner"
 
 #. (para)
 msgid "Sometimes you need to work directly on the repository, without having a working copy. That's what the <firstterm>Repository Browser</firstterm> is for. Just as the explorer and the icon overlays allow you to view your working copy, so the Repository Browser allows you to view the structure and status of the repository. <placeholder-1/> With the Repository Browser you can execute commands like copy, move, rename, ... directly on the repository."
-msgstr ""
+msgstr "Soms wil je direct dingen in het archief wijzigen, zonder dat je een werkkopie hebt. Daarvoor kun je de <firstterm>Archiefverkenner</firstterm> gebruiken. Met de archiefverkenner kun je de structuur en status van het archief bekijken, net zoals je met je verkenner en overlappende picotogrammen de status van je werkkopie kunt bekijken. <placeholder-1/> Met de archiefverkenner kun je acties zoals kopiëren, verplaatsen, hernoemen, ... direct op het archief uitvoeren."
 
 #. (para)
 msgid "The repository browser looks very similar to the Windows explorer, except that it is showing the content of the repository at a particular revision rather than files on your computer. In the left pane you can see a directory tree, and in the right pane are the contents of the selected directory. At the top of the Repository Browser Window you can enter the URL of the repository and the revision you want to browse."
-msgstr ""
+msgstr "De archiefverkenner ziet er ongeveer hetzelfde uit als de windows verkenner, behalve dan dat het de inhoud van het archief van een bepaalde revisie laat zien, in plaats van bestanden op je computer. In het linker deelvenster wordt de mapstructuur weergegeven en in het rechter de inhoud van de geselecteerd map. Aan de bovenzijde van de archiefverkenner kun je de URL en de revisie van een archief invoeren, welke je wilt bekijken."
 
 #. (para)
 msgid "Just like Windows explorer, you can click on the column headings in the right pane if you want to set the sort order. And as in explorer there are context menus available in both panes."
-msgstr ""
+msgstr "Net zoals bij de windows verkenner, kun je op de koptekst van een kolom klikken om de sorteervolgorde te wijzigen. Net zoals in de verkenner zijn er context menu's beschikbaar in beide deelvensters."
 
 #. (para)
 msgid "Save an unversioned copy of the file to your hard drive."
-msgstr ""
+msgstr "Een kopie zonder versiebeheer van een bestand opslaan op je harde schijf."
 
 #. (para)
 msgid "Show the revision log for that file, or show a graph of all revisions so you can see where the file came from."
-msgstr ""
+msgstr "Het revisie logboek laten tonen van een bestand of een figuur laten tonen met alle revisies, zodat je kunt zien waar het bestand vandaan is gekomen."
 
 #. (para)
 msgid "Blame the file, to see who changed which line and when."
-msgstr ""
+msgstr "Een bestand laten verklaren om te zien wie welke regel wanneer in een bestand gewijzigd heeft."
 
 #. (para)
 msgid "Delete or rename the file."
@@ -7019,7 +7034,7 @@ msgstr "Verwijderen of hernoemen van het bestand."
 
 #. (para)
 msgid "Make a copy of the file, either to a different part of the repository, or to a working copy rooted in the same repository."
-msgstr ""
+msgstr "Een kopie laten maken van een bestand naar een ander deel van het archief of naar een werkkopie gesitueerd in hetzelfde archief."
 
 #. (para)
 msgid "View/Edit the file's properties."
@@ -7027,87 +7042,87 @@ msgstr "Bekijken/Wijzigen van de kenmerken van het bestand."
 
 #. (para)
 msgid "The context menu for a file allows you to: <placeholder-1/>"
-msgstr ""
+msgstr "Vanuit het context menu kun je verschillende dingen doen met bestanden: <placeholder-1/>"
 
 #. (para)
 msgid "Show the revision log for that folder, or show a graph of all revisions so you can see where the folder came from."
-msgstr ""
+msgstr "Het revisie logboek laten tonen van een map of een figuur laten tonen met alle revisies, zodat je kunt zien waar de map vandaan is gekomen."
 
 #. (para)
 msgid "Export the folder to a local unversioned copy on your hard drive."
-msgstr ""
+msgstr "De map laten exporteren naar een locatie op je harde schijf zonder versiebeheer."
 
 #. (para)
 msgid "Checkout the folder to produce a local working copy on your hard drive."
-msgstr ""
+msgstr "Een map laten ophalen, zodat er een lokale werkkopie wordt gemaakt op je harde schijf."
 
 #. (para)
 msgid "Create a new folder in the repository."
-msgstr ""
+msgstr "Een nieuwe map aanmaken in het archief."
 
 #. (para)
 msgid "Add files or folders directly to the repository."
-msgstr ""
+msgstr "Bestanden of mappen direct in het archief zetten."
 
 #. (para)
 msgid "Delete or rename the folder."
-msgstr ""
+msgstr "Een map verwijderen of hernoemen."
 
 #. (para)
 msgid "Make a copy of the folder, either to a different part of the repository, or to a working copy rooted in the same repository."
-msgstr ""
+msgstr "Een kopie laten maken van een map naar een ander deel van het archief of naar een werkkopie gesitueerd in hetzelfde archief. Hiermee kan ook een vertakking/label gemaakt worden, zonder dat daarvoor een werkkopie nodig is."
 
 #. (para)
 msgid "View/Edit the folder's properties."
-msgstr ""
+msgstr "Eigenschappen van een map bekijken of wijzigen."
 
 #. (para)
 msgid "Mark the folder for comparison. A marked folder is shown in bold."
-msgstr ""
+msgstr "Een map markeren voor vergelijken. Een gemarkeerd map wordt vetgedrukt weergegeven."
 
 #. (para)
 msgid "Compare the folder with a previously marked folder, either as a unified diff, or as a list of changed files which can then be visually diffed using the default diff tool. This can be particularly useful for comparing two tags, or trunk and branch to see what changed."
-msgstr ""
+msgstr "De map vergelijken met een eerder gemarkeerde map, als unified diff of als een lijst met gewijzigde bestanden, die dan met het standaard vergelijkingsprogramma vergeleken kan worden. Dit kan in het bijzonder handig zijn als je twee labels wilt vergelijken, of een hoofdstroom (trunk) met een vertakking."
 
 #. (para)
 msgid "The context menu for a folder allows you to: <placeholder-1/>"
-msgstr ""
+msgstr "Met het context menu van een map kun je dingen doen zoals: <placeholder-1/>"
 
 #. (para)
 msgid "If you select two folders in the right pane, you can view the differences either as a unified-diff, or as a list of files which can be visually diffed using the default diff tool."
-msgstr ""
+msgstr "Als je twee mappen in het rechter deelvenster selecteert, dan kun je de verschillen als unified-diff bekijken of als lijst van bestanden, welke dan weer met een vergelijkingsprogramma bekeken kan worden."
 
 #. (para)
 msgid "If you select multiple folders in the right pane, you can checkout all of them at once into a common parent folder."
-msgstr ""
+msgstr "Als je meerdere mappen in het rechter deelvenster selecteert, dan kun je deze allemaal tegelijk ophalen naar een zelfde hoofdmap."
 
 #. (para)
 msgid "If you select 2 tags which are copied from the same root (typically <literal>/trunk/</literal>), you can use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Show Log...</guimenuitem></menuchoice> to view the list of revisions between the two tag points."
-msgstr ""
+msgstr "Als je 2 labels selecteert die van dezelfde hoofdmap gekopieerd zijn (normaal gesproken de hoofdstroom <literal>/trunk/</literal>), dan kun je met <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Toon Logboek...</guimenuitem></menuchoice> de lijst met revisies zien tussen die twee labels."
 
 #. (para)
 msgid "You can use <keycap>F5</keycap> to refresh the view as usual. This will refresh everything which is currently displayed. If you want to pre-fetch or refresh the information for nodes which have not been opened yet, use <keycap>Ctrl-F5</keycap>. After that, expanding any node will happen instantly without a network delay while the information is fetched."
-msgstr ""
+msgstr "Je kunt zoals gebruikelijk met <keycap>F5</keycap> het beeld verversen. Hiermee wordt alles ververst wat weergegeven worden. Als je de informatie van andere delen, die je nog niet geopend hebt, wilt verversen of alvast wilt ophalen, gebruik dan <keycap>Ctrl-F5</keycap>. Daarna kun je elk ander deel direct openen, zonder dat daarvoor vertraging ontstaat voor het ophalen van informatie via het netwerk."
 
 #. (para)
 msgid "You can also use the repository browser for drag-and-drop operations. If you drag a folder from explorer into the repo-browser, it will be imported into the repository. Note that if you drag multiple items, they will be imported in separate commits."
-msgstr ""
+msgstr "Je kunt de archiefverkenner ook gebruiken voor drag-and-drop acties. Als je een map vanuit de verkenner naar de archiefverkenner sleept, dan zal deze map in het archief geïmporteerd worden. Merk op dat als je meerdere objecten sleept, deze mappen als aparte vastleggingen worden behandeld."
 
 #. (para)
 msgid "If you want to move an item within the repository, just <action>left drag</action> it to the new location. If you want to create a copy rather than moving the item, <keycap>Ctrl</keycap>-<action>left drag</action> instead. When copying, the cursor has a <quote>plus</quote> symbol on it, just as it does in Explorer."
-msgstr ""
+msgstr "Als je een object binnen het archief wilt verplaatsen, dan kun je deze gewoon met <action>links verslepen</action> naar de nieuwe locatie. Als je een kopie van het object wilt hebben in plaats van het alleen te verplaatsen, houdt dan ook <keycap>Ctrl</keycap> ingedrukt tijdens het verslepen. Als je een object gaat kopiëren, dan heeft de cursor een <quote>plus</quote> teken net zoals in de windows verkenner."
 
 #. (para)
 msgid "If you want to copy/move a file or folder to another location and also give it a new name at the same time, you can <action>right drag</action> or <keycap>Ctrl</keycap>-<action>right drag</action> the item instead of using <action>left drag</action>. In that case, a rename dialog is shown where you can enter a new name for the file or folder."
-msgstr ""
+msgstr "Als je een bestand of map wilt verplaatsen/kopieren naar een andere locatie en ook tegelijkertijd de naam wilt wijzigen, dan moet je het object met <action>rechts slepen</action> of <keycap>Ctrl</keycap>-<action>rechts slepen</action> in plaats van <action>links slepen</action>. Er wordt dan een scherm getoond waarin je de nieuwe naar van de map of het bestand moet invoeren."
 
 #. (para)
 msgid "Whenever you make changes in the repository using one of these methods, you will be presented with a log message entry dialog. If you dragged something by mistake, this is also your chance to cancel the action."
-msgstr ""
+msgstr "Telkens als je op deze manier wijzigingen in het archief doorvoert, zal er een logboek boodschappen venster getoond worden. Als je per ongeluk objecten hebt versleept, dan is dit je kans om die actie te stoppen."
 
 #. (para)
 msgid "Sometimes when you try to open a path you will get an error message in place of the item details. This might happen if you specified an invalid URL, or if you don't have access permission, or if there is some other server problem. If you need to copy this message to include it in an email, just right click on it and use <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Copy error message to clipboard</guimenuitem></menuchoice>, or simply use <keycap>Ctrl+C</keycap>."
-msgstr ""
+msgstr "Soms als je een pad wilt openen, krijg je een foutmelding in plaats van de objectdetails. Dit kan komen doordat je een verkeerde URL hebt ingevoerd of doordat je geen toegangsrechten hebt of omdat er een ander probleem met de server is. Als jet de melding moet kopiëren naar bijvoorbeeld een email, klik dan met rechts en selecteer <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Kopieer foutmelding naar klembord</guimenuitem></menuchoice> of gebruikt <keycap>Ctrl+C</keycap>."
 
 #. (title)
 msgid "Revision Graphs"
@@ -7127,27 +7142,27 @@ msgstr "Een Revisie Grafiek"
 
 #. (para)
 msgid "<placeholder-1/> Sometimes you need to know where branches and tags were taken from the trunk, and the ideal way to view this sort of information is as a graph or tree structure. That's when you need to use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revision Graph...</guimenuitem></menuchoice>"
-msgstr ""
+msgstr "<placeholder-1/> Soms moet je weten op welk punt vertakkingen en labels gemaakt zijn van de hoofdstroom (trunk). De ideale manier om dit te bekijken is door de informatie te sorteren in een grafiek of bookstructuur. Hiervoor kun je gebruik maken van <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Revisie schema...</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "This command analyses the revision history and attempts to create a tree showing the points at which copies were taken, and when branches/tags were deleted."
-msgstr ""
+msgstr "Dit commando analyseert de revisiegeschiedenis en probeert daarvan een boomstructuur te maken, waarin de punten aangegeven worden waarop kopieën gemaakt en vertakkingen/labels verwijderd zijn."
 
 #. (para)
 msgid "In order to generate the graph, TortoiseSVN must fetch all log messages from the repository root. Needless to say this can take several minutes even with a repository of a few thousand revisions, depending on server speed, network bandwidth, etc. If you try this with something like the <emphasis>Apache</emphasis> project which currently has over 500,000 revisions you could be waiting for some time."
-msgstr ""
+msgstr "Om de figuur te maken, moet TortoiseSVN alle logboek boodschappen ophalen vanuit de hoofdmap van het archief. Overbodig is het om te zeggen dat dit enkele minuten kan duren, zelfs bij een archief met maar enkele duizenden revisie. Dit hangt natuurlijk sterk af van de snelheid van de server en de bandbreedte van het netwerk. Als je dit probeert te doen op bijvoorbeeld het <emphasis>Apache</emphasis> project met op dit moment meer dan 500.000 revisies, dan moet je wel een tijd wachten."
 
 #. (para)
 msgid "The good news is that if you are using log caching, you only have to suffer this delay once. After that, log data is held locally. Log caching is enabled in TortoiseSVN's settings."
-msgstr ""
+msgstr "Het goede nieuws is dat als je log caching gebruikt, je maar een keer op deze vertraging hoeft te wachten. Daarna worden de logboek boodschappen lokaal opgeslagen. Log caching kun je inschakelen bij de instellingen van TortoiseSVN."
 
 #. (title)
 msgid "Revision Graph Nodes"
-msgstr ""
+msgstr "Revisie Schema Knooppunten"
 
 #. (term)
 msgid "Added or copied items"
-msgstr ""
+msgstr "Toegevoegde of gekopieerde objecten"
 
 #. (para)
 msgid "Items which have been added, or created by copying another file/folder are shown using a rounded rectangle. The default colour is green. Tags and trunks are treated as a special case and use a different shade, depending on the <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings</guimenuitem></menuchoice>"
@@ -7155,7 +7170,7 @@ msgstr ""
 
 #. (term)
 msgid "Deleted items"
-msgstr "Verwijderde items"
+msgstr "Verwijderde objecten"
 
 #. (para)
 msgid "Deleted items eg. a branch which is no longer required, are shown using an octagon (rectangle with corners cut off). The default colour is red."
@@ -7163,7 +7178,7 @@ msgstr ""
 
 #. (term)
 msgid "Renamed items"
-msgstr "Hernoemde items"
+msgstr "Hernoemde objecten"
 
 #. (para)
 msgid "Renamed items are also shown using an octagon, but the default colour is blue."
@@ -7179,7 +7194,7 @@ msgstr ""
 
 #. (term)
 msgid "Working copy revision"
-msgstr "Werk kopie revisie"
+msgstr "Werkkopie revisie"
 
 #. (para)
 msgid "If you invoked the revision graph from a working copy, you can opt to show the BASE revision on the graph using <guilabel>Show WC revision</guilabel>, which marks the BASE node with a bold outline."
@@ -7187,7 +7202,7 @@ msgstr ""
 
 #. (term)
 msgid "Modified working copy"
-msgstr "Gewijzigde werk kopie"
+msgstr "Gewijzigde werkkopie"
 
 #. (para)
 msgid "If you invoked the revision graph from a working copy, you can opt to show an additional node representing your modified working copy using <guilabel>Show WC modifications</guilabel>. This is an elliptical node with a bold outline in red by default."
@@ -10825,7 +10840,7 @@ msgstr "Revisiegrafiek"
 #. (entry)
 #. (glossterm)
 msgid "Lock"
-msgstr "Vergrendeling"
+msgstr "Blokkade"
 
 #. (entry)
 msgid "Remove Lock"
