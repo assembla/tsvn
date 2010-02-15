@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -109,7 +109,10 @@ public:
 	void			SaveGraphAs(CString sSavePath);
 
     bool            FetchRevisionData ( const CString& path
-                                      , SVNRev pegRevision);
+                                      , SVNRev pegRevision
+                                      , CProgressDlg* progress
+									  , ITaskbarList3* pTaskbarList
+									  , HWND hWnd);
     bool            AnalyzeRevisionData();
 
     bool            GetShowOverview() const;

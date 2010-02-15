@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -217,6 +217,9 @@ BOOL CRevisionGraphDlg::OnInitDialog()
 	if (InitializeToolbar() != TRUE)
 		return FALSE;
 
+	m_pTaskbarList.Release();
+	m_pTaskbarList.CoCreateInstance(CLSID_TaskbarList);
+
     CSyncPointer<CAllRevisionGraphOptions> 
         options (m_Graph.m_state.GetOptions());
 
@@ -269,12 +272,17 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
 	    pDlg->m_Graph.m_pProgress->SetCancelMsg(IDS_REVGRAPH_PROGCANCEL);
 	    pDlg->m_Graph.m_pProgress->SetTime();
 	    pDlg->m_Graph.m_pProgress->SetProgress(0, 100);
+		if (pDlg->m_pTaskbarList)
+		{
+			pDlg->m_pTaskbarList->SetProgressState(pDlg->m_hWnd, TBPF_NORMAL);
+			pDlg->m_pTaskbarList->SetProgressValue(pDlg->m_hWnd, 0, 100);
+		}
 
         svn_revnum_t pegRev = pDlg->m_Graph.m_pegRev.IsNumber()
                             ? (svn_revnum_t)pDlg->m_Graph.m_pegRev
                             : (svn_revnum_t)-1;
 
-	    if (!pDlg->m_Graph.FetchRevisionData (pDlg->m_Graph.m_sPath, pegRev))
+	    if (!pDlg->m_Graph.FetchRevisionData (pDlg->m_Graph.m_sPath, pegRev, pDlg->m_Graph.m_pProgress, pDlg->m_pTaskbarList, pDlg->m_hWnd))
 		    CMessageBox::Show ( pDlg->m_hWnd
                               , pDlg->m_Graph.m_state.GetLastErrorMessage()
                               , _T("TortoiseSVN")
@@ -283,6 +291,10 @@ UINT CRevisionGraphDlg::WorkerThread(LPVOID pVoid)
         pDlg->m_Graph.m_pProgress->Stop();
         delete pDlg->m_Graph.m_pProgress;
         pDlg->m_Graph.m_pProgress = NULL;
+		if (pDlg->m_pTaskbarList)
+		{
+			pDlg->m_pTaskbarList->SetProgressState(pDlg->m_hWnd, TBPF_NOPROGRESS);
+		}
 
     	pDlg->m_bFetchLogs = false;	// we've got the logs, no need to fetch them a second time
     }
@@ -841,4 +853,3 @@ void CRevisionGraphDlg::UpdateOptionAvailability()
     UpdateOptionAvailability (ID_VIEW_SHOWWCREV, isWCPath);
     UpdateOptionAvailability (ID_VIEW_SHOWWCMODIFICATION, isWCPath);
 }
-

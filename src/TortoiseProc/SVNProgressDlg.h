@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include "SVN.h"
 #include "Colors.h"
 #include "..\IBugTraqProvider\IBugTraqProvider_h.h"
-#include "afxwin.h"
+#include "Win7.h"
 
 typedef int (__cdecl *GENERICCOMPAREFN)(const void * elem1, const void * elem2);
 
@@ -212,7 +212,7 @@ protected:
 	afx_msg void	OnLvnBegindragSvnprogress(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void	OnSize(UINT nType, int cx, int cy);
 	LRESULT			OnShowConflictResolver(WPARAM, LPARAM);
-
+	afx_msg LRESULT	OnTaskbarBtnCreated(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 
 	void			Sort();
@@ -325,6 +325,7 @@ private:
 	bool					m_AlwaysConflicted;
 
 	CComPtr<IBugTraqProvider> m_BugTraqProvider;
+	CComPtr<ITaskbarList3>	m_pTaskbarList;
 
 	// some strings different methods can use
 	CString					sIgnoredIncluded;
@@ -335,3 +336,5 @@ private:
 	CString					sDryRun;
 	CString					sRecordOnly;
 };
+
+static UINT	WM_TASKBARBTNCREATED = RegisterWindowMessage(_T("TaskbarButtonCreated"));

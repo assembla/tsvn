@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -174,7 +174,6 @@ protected:
 	};
 
 	static MenuInfo menuInfo[];
-	WORD fullver;
 	FileState m_State;
 	ULONG	m_cRef;
 	//std::map<int,std::string> verbMap;

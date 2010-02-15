@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2008 - TortoiseSVN
+// Copyright (C) 2008, 2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,13 +31,15 @@ private:
 public:
 	static SysInfo& Instance();
 	
-	DWORD			GetFullVersion() {return MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion);}
-	bool			IsWin2k() {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) == 0x0500);}
-	bool			IsWin2kOrLater() {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) >= 0x0500);}
-	bool			IsXP() {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) == 0x0501);}
-	bool			IsXPorLater() {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) >= 0x0501);}
+	DWORD			GetFullVersion() const {return MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion);}
+	bool			IsWin2k() const {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) == 0x0500);}
+	bool			IsWin2kOrLater() const {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) >= 0x0500);}
+	bool			IsXP() const {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) == 0x0501);}
+	bool			IsXPorLater() const {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) >= 0x0501);}
 	bool			IsVista() {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) == 0x0600);}
-	bool			IsVistaOrLater() {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) >= 0x0600);}
+	bool			IsVistaOrLater() const {return (MAKEWORD(inf.dwMinorVersion, inf.dwMajorVersion) >= 0x0600);}
+	bool			IsWin7() const {return (GetFullVersion() == 0x0601);}
+	bool			IsWin7OrLater() const {return (GetFullVersion() >= 0x0601);}
 private:
 	OSVERSIONINFOEX			inf;
 };
