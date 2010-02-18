@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -64,7 +64,7 @@ public:
 		showunversionedoverlay = CRegStdDWORD(_T("Software\\TortoiseSVN\\ShowUnversionedOverlay"), TRUE);
 		showignoredoverlay = CRegStdDWORD(_T("Software\\TortoiseSVN\\ShowIgnoredOverlay"), TRUE);
 		getlocktop = CRegStdDWORD(_T("Software\\TortoiseSVN\\GetLockTop"), TRUE);
-		excludedasnormal = CRegStdDWORD(_T("Software\\TortoiseSVN\\ShowExcludedAsNormal"), TRUE);
+		excludedasnormal = CRegStdDWORD(_T("Software\\TortoiseSVN\\ShowExcludedFoldersAsNormal"), FALSE);
 		cachetypeticker = GetTickCount();
 		recursiveticker = cachetypeticker;
 		folderoverlayticker = cachetypeticker;
