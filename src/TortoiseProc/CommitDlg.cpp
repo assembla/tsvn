@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -542,7 +542,7 @@ void CCommitDlg::OnOK()
 			CString common = m_ListCtrl.GetCommonURL(true).GetSVNPathString();
 			BSTR repositoryRoot = common.AllocSysString();
 			BSTR parameters = m_bugtraq_association.GetParameters().AllocSysString();
-			BSTR commonRoot = SysAllocString(m_pathList.GetCommonRoot().GetDirectory().GetWinPath());
+			BSTR commonRoot = SysAllocString(m_selectedPathList.GetCommonRoot().GetDirectory().GetWinPath());
 			BSTR commitMessage = m_sLogMessage.AllocSysString();
 			SAFEARRAY *pathList = SafeArrayCreateVector(VT_BSTR, 0, m_selectedPathList.GetCount());
 

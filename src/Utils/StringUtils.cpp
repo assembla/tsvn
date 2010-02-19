@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -414,6 +414,22 @@ bool CStringUtils::ReadStringFromTextFile(const CString& path, CString& text)
 		text.Empty();
 	}
 	return true;
+}
+
+int CStringUtils::GetMatchingLength (const CString& lhs, const CString& rhs)
+{
+	int lhsLength = lhs.GetLength();
+	int rhsLength = rhs.GetLength();
+	int maxResult = min (lhsLength, rhsLength);
+
+	LPCTSTR pLhs = lhs;
+	LPCTSTR pRhs = rhs;
+
+	for (int i = 0; i < maxResult; ++i)
+		if (pLhs[i] != pRhs[i])
+			return i;
+
+	return maxResult;
 }
 
 #endif // #ifdef _MFC_VER
