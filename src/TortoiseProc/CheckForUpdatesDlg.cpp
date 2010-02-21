@@ -105,7 +105,7 @@ UINT CCheckForUpdatesDlg::CheckThread()
 	{
 		sCheckURL = checkurlmachine;
 		if (sCheckURL.IsEmpty())
-			sCheckURL = SysInfo::IsWin2k()
+			sCheckURL = SysInfo::Instance().IsWin2k()
 					  ? _T("http://tortoisesvn.tigris.org/version_w2k.txt")
 					  : _T("http://tortoisesvn.tigris.org/version.txt");
 	}
