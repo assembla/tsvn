@@ -87,13 +87,13 @@ public:
 	 * Reads the string \text from the file \path in utf8 encoding.
 	 */
 	static bool ReadStringFromTextFile(const CString& path, CString& text);
+#endif
 
 	/**
 	 * Find and return the number n of starting characters equal between 
 	 * \ref lhs and \ref rhs. (max n: lhs.Left(n) == rhs.Left(n))
 	 */
 	static int GetMatchingLength (const CString& lhs, const CString& rhs);
-#endif
 
 	/**
 	 * Writes the string \text to the file \path, either in utf16 or utf8 encoding,

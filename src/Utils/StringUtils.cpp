@@ -416,6 +416,8 @@ bool CStringUtils::ReadStringFromTextFile(const CString& path, CString& text)
 	return true;
 }
 
+#endif // #ifdef _MFC_VER
+
 int CStringUtils::GetMatchingLength (const CString& lhs, const CString& rhs)
 {
 	int lhsLength = lhs.GetLength();
@@ -431,8 +433,6 @@ int CStringUtils::GetMatchingLength (const CString& lhs, const CString& rhs)
 
 	return maxResult;
 }
-
-#endif // #ifdef _MFC_VER
 
 bool CStringUtils::WriteStringToTextFile(const std::wstring& path, const std::wstring& text, bool bUTF8 /* = true */)
 {
@@ -472,6 +472,7 @@ static class StringUtilsTest
 public:
 	StringUtilsTest()
 	{
+#ifdef _MFC_VER
 		CString longline = _T("this is a test of how a string can be splitted into several lines");
 		CString splittedline = CStringUtils::WordWrap(longline, 10);
 		ATLTRACE(_T("WordWrap:\n%s\n"), splittedline);
@@ -500,6 +501,7 @@ public:
 		longline = _T("The commit comment is not properly formatted.\nFormat:\n  Field 1 : Field 2 : Field 3\nWhere:\nField 1 - Team Name|Triage|Merge|Goal\nField 2 - V1 Backlog Item ID|Triage Number|SVNBranch|Goal Name\nField 3 - Description of change\nExamples:\n\nTeam Gamma : B-12345 : Changed some code\n  Triage : 123 : Fixed production release bug\n  Merge : sprint0812 : Merged sprint0812 into prod\n  Goal : Implement Pre-Commit Hook : Commit message hook impl");
 		splittedline = CStringUtils::LinesWrap(longline, 80);
 		ATLTRACE(_T("LinesWrap:\n%s\n"), splittedline);
+#endif
 	}
 } StringUtilsTest;
 
