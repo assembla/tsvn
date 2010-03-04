@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009 - TortoiseSVN
+// Copyright (C) 2007-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -109,7 +109,7 @@ bool CommitCommand::Execute()
 			CRegDWORD err = CRegDWORD(_T("Software\\TortoiseSVN\\ErrorOccurred"), FALSE);
 			err = (DWORD)progDlg.DidErrorsOccur();
 			bFailed = progDlg.DidErrorsOccur();
-			bRet = progDlg.DidErrorsOccur();
+			bRet = !progDlg.DidErrorsOccur();
 			CRegDWORD bFailRepeat = CRegDWORD(_T("Software\\TortoiseSVN\\CommitReopen"), FALSE);
 			if (DWORD(bFailRepeat)==0)
 				bFailed = false;		// do not repeat if the user chose not to in the settings.
