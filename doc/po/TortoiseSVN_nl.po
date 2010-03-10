@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "POT-Creation-Date: 2010-02-19 21:36 +0000\n"
-"PO-Revision-Date: 2010-03-09 13:31+0100\n"
+"PO-Revision-Date: 2010-03-10 09:09+0100\n"
 "Last-Translator: Jeroen van Amstel <jeroen@amstelonline.demon.nl>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -2460,7 +2460,6 @@ msgstr ""
 "</screen>"
 
 #. (para)
-#, fuzzy
 msgid ""
 "Next type the commands <screen>\n"
 "bin\\openssl rsa -in conf\\privkey.pem -out conf\\server.key\n"
@@ -2481,7 +2480,7 @@ msgstr ""
 "bin\\openssl req -new -key conf\\server.key -out conf\\server.csr \\\n"
 "-config conf\\openssl.cnf\n"
 "</screen> en dan (op één regel) <screen>\n"
-"bin\\openssl x509 -in conf\\server.csr -out conf\\server.cert\n"
+"bin\\openssl x509 -in conf\\server.csr -out conf\\server.crt\n"
 "                 -req -signkey conf\\server.key -days 4000\n"
 "</screen> Hiermee wordt een certificaat aangemaakt die over 4000 dagen verloopt. Geef als laatste commando (op één regel): <screen>\n"
 "bin\\openssl x509 -in conf\\server.cert -out conf\\server.der.crt\n"
@@ -2810,9 +2809,8 @@ msgid "Authentication Dialog"
 msgstr "Authenticatie dialoog"
 
 #. (para)
-#, fuzzy
 msgid "<filename>svn.simple</filename> contains credentials for basic authentication (username/password)."
-msgstr "<filename>svn.username</filename> bevat alleen gebruikersnamen, voor authenticatie zonder wachtwoord."
+msgstr "<filename>svn.username</filename> bevat alleen gegevens voor basis authenticataie (gebruikersnamen, wachtwoord)."
 
 #. (para)
 msgid "<filename>svn.ssl.server</filename> contains SSL server certificates."
@@ -2882,7 +2880,6 @@ msgid "temporary files"
 msgstr "tijdelijke bestanden"
 
 #. (para)
-#, fuzzy
 msgid "If you are importing into an existing repository which already contains some projects, then the repository structure will already have been decided. If are importing data into a new repository then it is worth taking the time to think about how it will be organised. Read <xref linkend=\"tsvn-repository-layout\"/> for further advice."
 msgstr "Als je data importeert in een bestaand archief waarin al enkele projecten aanwezig zijn, dan is de structuur van het archief al vastgesteld. Als je gegevens importeert in een nieuw archief, dan is het de moeite waard om even goed na te denken over de structuur van het archief. Lees <xref linkend=\"tsvn-repository-layout\"/> voor advies hierover."
 
@@ -4463,9 +4460,8 @@ msgid "Show changes"
 msgstr "Toon wijzigingen"
 
 #. (para)
-#, fuzzy
 msgid "Show changes made in the selected revision for the selected file. This context menu is only available for files shown as <emphasis>modified</emphasis>."
-msgstr "Toon bestandswijzigingen in unified diff indeling. Dit context menu is alleen beschikbaar voor als <emphasis>gewijzigd</emphasis> gemarkeerde bestanden."
+msgstr "Toon bestandswijzigingen in het geselecteerde bestand. Dit context menu is alleen beschikbaar bij  als <emphasis>gewijzigd</emphasis> gemarkeerde bestanden."
 
 #. (term)
 msgid "Blame changes"
@@ -4677,22 +4673,20 @@ msgid "If you want to restrict the log messages to show only those you are inter
 msgstr "Als je de getoonde logboek berichten wilt beperken tot degene waarin jij geïnteresseerd bent, dan kun je hiervoor de instellingen boven aan het Logboekboodschappen venster gebruiken. Met de start- en einddatum instellingen kun je het datumbereik instellen. Met het zoekveld kun je de berichten laten zien die alleen een bepaalde term bevatten."
 
 #. (para)
-#, fuzzy
 msgid "Click on the search icon to select which information you want to search in, and to choose <emphasis>regex</emphasis> mode. Normally you will only need a simple text search, but if you need to more flexible search terms, you can use regular expressions. If you hover the mouse over the box, a tooltip will give hints on how to use the regex functions. You can also find online documentation and a tutorial at <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>. The filter works by checking whether your filter string matches the log entries, and then only those entries which <emphasis>match</emphasis> the filter string are shown."
-msgstr "Klik op het zoeken pictogram om te selecteren welke informatie je wilt zoeken en om de <emphasis>regex</emphasis> mode te kunnen kiezen. Normaal gesproken heb je alleen een deel-regel zoekopdracht nodig, maar als je een flexibelere zoekmethode wilt gebruiken, dan kun je ook vaak gebruikte expressies gebruiken. Als je de muis boven een vak houdt, dan worden er in een tooltip tips gegeven voor het gebruik van regex of deel-regel functies. Het filter vergelijkt de zoekopdracht met logboek berichten en toont dan de berichten die <emphasis>overeenkomen</emphasis> met de zoekopdracht."
+msgstr "Klik op het zoeken pictogram om te selecteren welke informatie je wilt zoeken en om de <emphasis>regex</emphasis> mode te kunnen kiezen. Normaal gesproken heb je alleen een eenvoudige tekst zoekopdracht nodig, maar als je een flexibelere zoekmethode wilt gebruiken, dan kun je ook vaak gebruikte expressies gebruiken. Als je de muis boven een vak houdt, dan worden er in een tooltip tips gegeven voor het gebruik van regex functies. Je kunt online documentatie en een tutorial vinden op <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>. Het filter vergelijkt de zoekopdracht met logboek berichten en toont dan de berichten die <emphasis>overeenkomen</emphasis> met de zoekopdracht."
 
 #. (para)
 msgid "To make the filter show all log entries that do <emphasis>not</emphasis> match the filter string, start the string with an exclamation mark ('!'). For example, a filter string <literal>!username</literal> will only show those entries which were not committed by <literal>username</literal>."
-msgstr ""
+msgstr "Om het filter in te stellen dat het alle logboek boodschappen toont die <emphasis>niet</emphasis> met het filter overeenkomen, begin dan met een uitroepteken ('!'). Bijvoorbeeld het filter <literal>!username</literal> toont alleen de objecten die niet vastgelegd zijn door <literal>username</literal>."
 
 #. (para)
 msgid "Note that these filters act on the messages already retrieved. They do not control downloading of messages from the repository."
 msgstr "Merk op dat de filters alleen toegepast worden op de berichten die al zijn opgehaald. Hiermee wordt niet het ophalen van berichten uit het archief gefilterd. "
 
 #. (para)
-#, fuzzy
 msgid "You can also filter the path names in the bottom pane using the <guilabel>Hide unrelated changed paths</guilabel> checkbox. Related paths are those which contain the path used to display the log. If you fetch the log for a folder, that means anything in that folder or below it. For a file it means just that one file. The checkbox is tristate: you can show all paths, grey out the unrelated ones, or hide the unrelated paths completely."
-msgstr "Je kunt ook filteren op pad-namen in het onderste deelvenster door gebruik te maken van het <guilabel>Toon alleen veranderde paden</guilabel> selectievak. Veranderde paden zijn de paden die gebruikt zijn om het logboek weer te geven. Als je het logboek voor een map ophaalt, dan houdt dat alles in die map en onderliggende mappen in. Bij een bestand gaat het dan alleen om het bestand. Normaliter wordt in de paden-lijst elk ander pad getoond die veranderd zijn bij een vastlegging, maar dan in het grijs. Als dit selectievak geselecteerd is, worden die paden verborgen."
+msgstr "Je kunt ook filteren op pad-namen in het onderste deelvenster door gebruik te maken van het <guilabel>Verberg ongerelateerde wijzigingspaden</guilabel> selectievak. Gerelateerde paden zijn de paden die gebruikt zijn om het logboek weer te geven. Als je het logboek voor een map ophaalt, dan houdt dat alles in die map en onderliggende mappen in. Bij een bestand gaat het dan alleen om het bestand. Dit selectievak heeft drie standen: je kunt alle paden tonen, ongerelateerde grijs maken, of ungerelateerde paden compleet verbergen."
 
 #. (para)
 msgid "Sometimes your working practices will require log messages to follow a particular format, which means that the text describing the changes is not visible in the abbreviated summary shown in the top pane. The property <literal>tsvn:logsummary</literal> can be used to extract a portion of the log message to be shown in the top pane. Read <xref linkend=\"tsvn-dug-propertypage-tsvn-props\"/> to find out how to use this property."
@@ -7752,7 +7746,7 @@ msgstr "Om het systeem te laten werken dienen deze eigenschappen op mappen te wo
 #. (para)
 #. (para)
 msgid "For <literal>tsvn:</literal> properties <emphasis>only</emphasis> you can use the <guilabel>Recursive</guilabel> checkbox to set the property to all sub-folders in the hierarchy, without also setting it on all files."
-msgstr ""
+msgstr "Voor <literal>tsvn:</literal> eigenschappen kun je het <guilabel>Recursief</guilabel> selectievak <emphasis>alleen</emphasis> gebruiken om de eigenschap op alle sub-mappen in de mapstructuur toe te passen, zonder het ook op alle bestanden in te stellen."
 
 #. (title)
 msgid "No Issue Tracker Information from Repository Browser"
@@ -7820,18 +7814,16 @@ msgstr "Stel deze eigenshap in op de URL van uw archief viewer om alle wijziging
 
 # In de GUI kon ik alleen Resource IDs: (114) vinden met de tekst "View revision for path in &webviewer" in plaats van de hier vermelde "View revision and path in webviewer".
 #. (para)
-#, fuzzy
 msgid "Set this property to the URL of your repo viewer to view changes to a specific file in a specific revision. It must be properly URI encoded and it has to contain <literal>%REVISION%</literal> and <literal>%PATH%</literal>. <literal>%PATH%</literal> is replaced with the path relative to the repository root. This allows TortoiseSVN to display a context menu entry in the log dialog <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>View revision and path in webviewer</guimenuitem></menuchoice> For example, if you right-click in the log dialog bottom pane on a file entry <literal>/trunk/src/file</literal> then the <literal>%PATH%</literal> in the URL will be replaced with <literal>/trunk/src/file</literal>."
-msgstr "Stel deze eigenshap in op de URL van uw archief viewer om de wijzigingen aan een specifiek bestand in een specifieke revisie te zien. Deze dient correct te zijn gecodeerd als URI en dient <literal>%REVISION%</literal> en <literal>%PATH%</literal> te bevatten. <literal>%PATH%</literal> wordt vervangen door het pad relatief aan de hoofdmap. Hierdoor kan TortoiseSVN een contextmenu optie tonen in het log venster <menuchoice><guimenu>Contextmenu</guimenu><guimenuitem>Bekijk revisie voor dit pad in webviewer</guimenuitem></menuchoice> Voorbeeld: als u in het onderste gedeelte van het log scherm met de rechter muisknop klikt op een bestand <literal>/trunk/src/file</literal> wordt de <literal>%PATH%</literal> in de URL vervangen door <literal>/trunk/src/file</literal>."
+msgstr "Stel deze eigenshap in op de URL van uw archief viewer om de wijzigingen aan een specifiek bestand in een specifieke revisie te zien. Deze dient correct te zijn gecodeerd als URI en dient <literal>%REVISION%</literal> en <literal>%PATH%</literal> te bevatten. <literal>%PATH%</literal> wordt vervangen door het pad relatief aan de archief hoofdmap. Hierdoor kan TortoiseSVN een contextmenu optie tonen in het log venster <menuchoice><guimenu>Contextmenu</guimenu><guimenuitem>Bekijk revisie voor dit pad in webviewer</guimenuitem></menuchoice> Voorbeeld: als u in het onderste gedeelte van het log scherm met de rechter muisknop klikt op een bestand <literal>/trunk/src/file</literal> wordt de <literal>%PATH%</literal> in de URL vervangen door <literal>/trunk/src/file</literal>."
 
 #. (para)
 msgid "You can also use relative URLs instead of absolute ones. This is useful in case your web viewer is on the same domain/server as your source repository. In case the domain name ever changes, you don't have to adjust the <literal>webviewer:revision</literal> and <literal>webviewer:pathrevision</literal> property. The format is the same as for the <literal>bugtraq:url</literal> property. See <xref linkend=\"tsvn-dug-bugtracker\"/>."
 msgstr "U kunt ook gebruik maken van relatieve URL's in plaats van absolute. Dit komt van pas in het geval dat uw webviewer zich op het zelfde domein/server bevindt as uw bronarchief. In het geval dat de domeinnaam ooit wijzigt hoeft u de <literal>webviewer:revision</literal> en <literal>webviewer:pathrevision</literal> eigenschappen niet aan te passen. De schrijfwijze is dezelfde als van de <literal>bugtraq:url</literal> eigenschap. Zie ook <xref linkend=\"tsvn-dug-bugtracker\"/>."
 
 #. (title)
-#, fuzzy
 msgid "No Repo Viewer Links from Repository Browser"
-msgstr "Geen Logopmaak van de archiefverkenner"
+msgstr "Geen Repo Viewer Koppelingen van de Archief-verkenner"
 
 #. (para)
 msgid "Because the repo viewer integration depends upon accessing subversion properties, you will only see the results when using a checked out working copy. Fetching properties remotely is a slow operation, so you will not see this feature in action from the repo browser."
@@ -9308,9 +9300,8 @@ msgid "Defines how many spaces to use for expansion when a tab character is foun
 msgstr "Definieert hoeveel spaties gebruikt moeten worden als een tab karakter gevonden is in de inhoud van een bestand."
 
 #. (title)
-#, fuzzy
 msgid "Registry Settings"
-msgstr "Netwerk Instellingen"
+msgstr "Register Instellingen"
 
 #. (primary)
 msgid "registry"
@@ -9341,27 +9332,24 @@ msgid "To show the command line parameters passed from the shell extension to To
 msgstr "Hier kun je een andere map specificeren voor het Subversion configuratiebestand. Dit heeft effect op alle TortoiseSVN acties."
 
 #. (term)
-#, fuzzy
 msgid "Context Menu Icons"
-msgstr "Contekstmenus"
+msgstr "Context Menu Pictogrammen"
 
 #. (para)
 msgid "This can be useful if you use something other than the windows explorer or if you get problems with the context menu displaying correctly. create a <literal>DWORD</literal> key with a value of 0 at <literal>HKCU\\Software\\TortoiseSVN\\ShowContextMenuIcons</literal> if you don't want TortoiseSVN to not show icons for the shell context menu items. Set this value to 1 to show the icons again."
 msgstr "Stel deze waarde in op <literal>true</literal> om een cache taakbalk pictogram toe te laten voegen voor het TSVNCache programma. Dit wordt echt alleen maar door ontwikkelaars gebruikt omdat het de mogelijkheid geeft het programma netjes af te sluiten."
 
 #. (term)
-#, fuzzy
 msgid "Block Overlay Status"
-msgstr "Overlappende Pictogram Instellingen"
+msgstr "Blokkeer Overlappende Pictogram Status"
 
 #. (para)
 msgid "If you don't want the explorer to update the status overlays while another TortoiseSVN command is running (e.g. Update, Commit, ...) then create a <literal>DWORD</literal> key with a value of 1 at <literal>HKCU\\Software\\TortoiseSVN\\BlockStatus</literal>."
 msgstr "Als je niet wilt dat TortoiseSVN pictogrammen laat zien voor de context menu's in zijn eigen schermen, stel deze waarde dan in op <literal>false</literal>."
 
 #. (term)
-#, fuzzy
 msgid "Update Check URL"
-msgstr "Standaard ophaal URL"
+msgstr "Ververs Controle URL"
 
 #. (para)
 msgid "<literal>HKCU\\Software\\TortoiseSVN\\UpdateCheckURL</literal> contains the URL from which TortoiseSVN tries to download a text file to find out if there are updates available. You can also set this under <literal>HKLM</literal> instead of <literal>HKCU</literal> if you want, but <literal>HKCU</literal> overwrites the setting in <literal>HKLM</literal>. This might be useful for company admins who don't want their users to update TortoiseSVN until they approve it."
@@ -9376,9 +9364,8 @@ msgid "The auto-completion list shown in the commit message editor displays the 
 msgstr "Het vastleg en logboek venster gebruiken stijlen (bijv. vet, schuingedrukt) bij vastleg berichten (lees <xref linkend=\"tsvn-dug-commit-log\"/> voor meer details). Als je dit niet wilt hebben, stel deze waarde dan in op <literal>false</literal>."
 
 #. (term)
-#, fuzzy
 msgid "Explorer columns everywhere"
-msgstr "Verkenner Kolommen"
+msgstr "Verkenner kolommen overal"
 
 #. (para)
 msgid "The extra columns the TortoiseSVN adds to the details view in Windows Explorer are normally only active in a working copy. If you want those to be accessible everywhere, not just in working copies, create a <literal>DWORD</literal> key with a value of 1 at <literal>HKCU\\Software\\TortoiseSVN\\ColumnsEveryWhere</literal>."
@@ -11314,7 +11301,7 @@ msgstr "Om het voortgangsscherm aan het einde van een commando automatisch te sl
 
 #. (para)
 msgid "To close the progress dialog at the end of a command automatically without using the permanent setting you can pass the <option>/closeonend</option> parameter. <placeholder-1/>"
-msgstr ""
+msgstr "Om het voortgangsscherm aan het eind van een commando automatisch te sluiten zonder gebruik te maken van de permanente instelling, kun je de parameter <option>/closeonend</option> meegeven. <placeholder-1/>"
 
 #. (para)
 msgid "The table below lists all the commands which can be accessed using the TortoiseProc.exe command line. As described above, these should be used in the form <literal>/command:abcd</literal>. In the table, the <literal>/command</literal> prefix is omitted to save space."
@@ -11757,18 +11744,17 @@ msgid "Certain items are optional, and these are often controlled by checkboxes 
 msgstr "Bepaalde onderdelen zijn optioneel. Deze zijn dan ook meestal als selectievak en radiobutton in TortoiseSVN beschikbaar. Deze opties worden weergegeven tussen [blokhaken] in de definitie van de opdrachtregel."
 
 #. (screen)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid ""
 "\n"
 "svn checkout [-N] [--ignore-externals] [-r rev] URL PATH\n"
 msgstr ""
 "\n"
-"svn checkout [-depth ARG] [--ignore-externals] [-r rev] URL PATH\n"
+"svn checkout [-N] [--ignore-externals] [-r rev] URL PATH\n"
 
 #. (para)
-#, fuzzy
 msgid "If <guilabel>Only checkout the top folder</guilabel> is checked, use the <literal>-N</literal> switch."
-msgstr "Als <guilabel>Alleen de bovenste map verversen</guilabel> is aangevinkt, gebruik dan de <literal>-N</literal> optie."
+msgstr "Als <guilabel>Alleen de bovenste map ophalen</guilabel> is aangevinkt, gebruik dan de <literal>-N</literal> optie."
 
 #. (para)
 #. (para)
@@ -11807,7 +11793,7 @@ msgid "Update to Revision"
 msgstr "Verversen naar Revisie"
 
 #. (screen)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid ""
 "\n"
 "svn info URL_of_WC\n"
@@ -11815,7 +11801,7 @@ msgid ""
 msgstr ""
 "\n"
 "svn info URL_of_WC\n"
-"svn update [-r rev] [-depth ARG] [--ignore-externals] PATH\n"
+"svn update [-r rev] [-N] [--ignore-externals] PATH\n"
 
 #. (para)
 msgid "If <guilabel>Only update the top folder</guilabel> is checked, use the <literal>-N</literal> switch."
@@ -11860,13 +11846,13 @@ msgid "When you click on OK, the Subversion commit takes place. If you have left
 msgstr "Als je op OK klikt, zal de Subversion vastlegging plaatsvinden. Als je alle bestandsselectievakken in de standaard stand hebt laten staan, zal TortoiseSVN een enkele recursieve vastlegging van je werkkopie uitvoeren. Als je enkele bestande de-selecteert, dan moet een niet-recursieve vastlegging (<literal>-N</literal>) gebruikt worden en moet elke pad apart gespecificeerd worden in de vastlegging opdrachtregel."
 
 #. (screen)
-#, fuzzy, no-wrap
+#, no-wrap
 msgid ""
 "\n"
 "svn commit -m \"LogMessage\" [-N] [--no-unlock] PATH...\n"
 msgstr ""
 "\n"
-"svn commit -m \"LogMessage\" [-depth ARG] [--no-unlock] PATH...\n"
+"svn commit -m \"LogMessage\" [-N] [--no-unlock] PATH...\n"
 
 #. (para)
 #. (para)
