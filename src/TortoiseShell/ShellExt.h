@@ -54,6 +54,29 @@ extern  CComCriticalSection	g_csGlobalCOMGuard;
 typedef CComCritSecLock<CComCriticalSection> AutoLocker;
 
 typedef DWORD ARGB;
+typedef HANDLE HPAINTBUFFER;  // handle to a buffered paint context
+
+// BP_BUFFERFORMAT
+typedef enum _BP_BUFFERFORMAT
+{
+	BPBF_COMPATIBLEBITMAP,    // Compatible bitmap
+	BPBF_DIB,                 // Device-independent bitmap
+	BPBF_TOPDOWNDIB,          // Top-down device-independent bitmap
+	BPBF_TOPDOWNMONODIB       // Top-down monochrome device-independent bitmap
+} BP_BUFFERFORMAT;
+
+// BP_PAINTPARAMS
+typedef struct _BP_PAINTPARAMS
+{
+	DWORD                       cbSize;
+	DWORD                       dwFlags; // BPPF_ flags
+	const RECT *                prcExclude;
+	const BLENDFUNCTION *       pBlendFunction;
+} BP_PAINTPARAMS, *PBP_PAINTPARAMS;
+
+#define BPPF_ERASE               0x0001 // Empty the buffer during BeginBufferedPaint()
+#define BPPF_NOCLIP              0x0002 // Don't apply the target DC's clip region to the double buffer
+#define BPPF_NONCLIENT           0x0004 // Using a non-client DC
 
 typedef HRESULT (WINAPI *FN_GetBufferedPaintBits) (HPAINTBUFFER hBufferedPaint, RGBQUAD **ppbBuffer, int *pcxRow);
 typedef HPAINTBUFFER (WINAPI *FN_BeginBufferedPaint) (HDC hdcTarget, const RECT *prcTarget, BP_BUFFERFORMAT dwFormat, BP_PAINTPARAMS *pPaintParams, HDC *phdc);
