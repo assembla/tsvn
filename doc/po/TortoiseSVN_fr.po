@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2009-12-09 09:22 +0000\n"
-"PO-Revision-Date: 2010-03-08 16:31+0100\n"
-"Last-Translator: Frédéric Bodin <grokwik@gmail.com>\n"
+"POT-Creation-Date: 2010-01-29 00:06 +0000\n"
+"PO-Revision-Date: 2010-03-15 10:00+0100\n"
+"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3147,7 +3147,7 @@ msgstr "Les serveurs de version inférieure à 1.5 ne supportent pas la notion d
 
 #. (para)
 msgid "If the project contains references to external projects which you do <emphasis>not</emphasis> want checked out at the same time, use the <guilabel>Omit externals</guilabel> checkbox."
-msgstr "Si le projet contient des références à des projets externes que vous ne voulez <emphasis>pas</emphasis> extraire en même temps, utilisez la case à cocher <guilabel>Omettre les externes</guilabel> ."
+msgstr "Si le projet contient des références à des projets externes que vous ne voulez <emphasis>pas</emphasis> extraire en même temps, utilisez la case à cocher <guilabel>Omettre les références externes</guilabel> ."
 
 #. (para)
 msgid "If <guilabel>Omit externals</guilabel> is checked, or if you wish to increase the depth value, you will have to perform updates to your working copy using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to Revision...</guimenuitem></menuchoice> instead of <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice>. The standard update will include all externals and keep the existing depth."
@@ -6479,12 +6479,11 @@ msgstr "Assitant de de fusion - Fusion d'arborescence"
 
 #. (para)
 msgid "<placeholder-1/> If you are using this method to merge a feature branch back to trunk, you need to start the merge wizard from within a working copy of trunk."
-msgstr ""
+msgstr "<placeholder-1/> Si vous utilisez cette méthode pour fusionner une branche avec le tronc, vous devez démarrer l'assistant de fusion depuis une CdT du tronc."
 
 #. (para)
-#, fuzzy
 msgid "In the <guilabel>From:</guilabel> field enter the full folder URL of the <emphasis>trunk</emphasis>. This may sound wrong, but remember that the trunk is the start point to which you want to add the branch changes. You may also click <guibutton>...</guibutton> to browse the repository."
-msgstr "Dans le champ <guilabel>De :</guilabel> entrez l'URL complète du dossier du <emphasis>tronc</emphasis>. Cela peut sembler faux, mais souvenez-vous que le tronc est le point de départ auquel vous voulez ajouter les changements de la branche. Vous pouvez aussi cliquer sur <guibutton>...</guibutton> pour parcourir le référentiel."
+msgstr "Dans le champ <guilabel>De :</guilabel> entrez l'URL complète du dossier du <emphasis>tronc</emphasis>. Cela peut sembler erroné, mais souvenez-vous que le tronc est l'endroit auquel vous souhaitez ajouter les modifications de la branche. Vous pouvez aussi cliquer sur <guibutton>...</guibutton> pour parcourir le référentiel."
 
 #. (para)
 msgid "In the <guilabel>To:</guilabel> field enter the full folder URL of the feature branch."
@@ -6492,7 +6491,7 @@ msgstr "Remplissez le champ <guilabel>To:</guilabel> par l'adresse complète de 
 
 #. (para)
 msgid "In both the <guilabel>From Revision</guilabel> field and the <guilabel>To Revision</guilabel> field, enter the last revision number at which the two trees were synchronized. If you are sure no-one else is making commits you can use the HEAD revision in both cases. If there is a chance that someone else may have made a commit since that synchronization, use the specific revision number to avoid losing more recent commits."
-msgstr "Dans les deux champs <guilabel>Depuis la révision</guilabel> et <guilabel>À la révision</guilabel>, entrez le numéro de la dernière révision à laquelle les deux arbres ont été synchronisés. Si vous êtes sûrs que personne d'autre ne fait de livraisons vous pouvez utiliser la révision HEAD dans les deux cas. S'il y a une chance que quelqu'un d'autre puisse avoir fait une livraison depuis cette synchronisation, utilisez le numéro de la révision particulière pour éviter pour perdre des livraisons plus récentes."
+msgstr "Dans les deux champs <guilabel>Depuis la révision</guilabel> et <guilabel>À la révision</guilabel>, entrez le numéro de la dernière révision à laquelle les deux arbres ont été synchronisés. Si vous êtes sûrs que personne d'autre ne fait de livraison vous pouvez utiliser la révision HEAD dans les deux cas. S'il y a une chance que quelqu'un d'autre ait fait une livraison depuis cette synchronisation, utilisez le numéro de la révision particulier pour éviter de perdre des livraisons plus récentes."
 
 #. (para)
 msgid "You can also use <guibutton>Show Log</guibutton> to select the revision."
@@ -6504,33 +6503,31 @@ msgstr "Options de fusion"
 
 #. (para)
 msgid "This page of the wizard lets you specify advanced options, before starting the merge process. Most of the time you can just use the default settings."
-msgstr ""
+msgstr "Cette page de l'assistant vous permet d'accéder à des options avancées, avant de commencer le processus de fusion. La plupart du temps vous ne pouvez utiliser que les options par défaut."
 
 #. (para)
 msgid "You can specify the depth to use for the merge, i.e. how far down into your working copy the merge should go. The depth terms used are described in <xref linkend=\"tsvn-dug-checkout-depth\"/>. The default depth is <guilabel>Working copy</guilabel>, which uses the existing depth setting, and is almost always what you want."
-msgstr ""
+msgstr "Vous pouvez donner la profondeur de fusion, i.e. à quelle profondeur dans la CdT, la fusion doit aller. Les termes de profondeur utilisés sont décrits dans <xref linkend=\"tsvn-dug-checkout-depth\"/>. La profondeur par défaut est <guilabel>Copie de travail</guilabel>, qui utilise la valeur existante de profondeur, et est presque toujours ce qui est nécessaire."
 
 #. (para)
-#, fuzzy
 msgid "Most of the time you want merge to take account of the file's history, so that changes relative to a common ancestor are merged. Sometimes you may need to merge files which are perhaps related, but not in your repository. For example you may have imported versions 1 and 2 of a third party library into two separate directories. Although they are logically related, Subversion has no knowledge of this because it only sees the tarballs you imported. If you attempt to merge the difference between these two trees you would see a complete removal followed by a complete add. To make Subversion use only path-based differences rather than history-based differences, check the <guilabel>Ignore ancestry</guilabel> box. Read more about this topic in the Subversion book, <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry\"><citetitle>Noticing or Ignoring Ancestry</citetitle></ulink>"
-msgstr "La plupart du temps vous voulez fusionner pour tenir compte de l'historique du fichier, pour que les changements relatifs à un ancêtre commun soient fusionnés. Parfois vous pouvez devoir fusionner des fichiers qui sont peut-être liés, mais pas dans votre référentiel. Par exemple vous pouvez avoir importé les versions 1 et 2 d'une bibliothèque tiers dans deux répertoires séparés. Bien qu'ils soient logiquement liés, Subversion n'en a aucune connaissance parce qu'il ne voit que le package que vous avez importé. Si vous essayez de fusionner les différences entre ces deux arbres vous verriez une suppression totale suivie par un ajout total. Pour faire que Subversion n'utilise que les différences basées sur le chemin plutôt que les différences basées sur l'historique, cochez la case <guilabel>Ignorer l'ascendance</guilabel>. Lisez en plus à ce sujet dans le manuel de Subversion, <ulink url=\"http://svnbook.red-bean.com/en/1.1/ch04s03.html#svn-ch-4-sect-3.3.4\"><citetitle>Noticing or Ignoring Ancestry</citetitle></ulink>"
+msgstr "La plupart du temps vous voulez fusionner pour tenir compte de l'historique du fichier, de sorte que les changements relatifs à un ancêtre commun soient fusionnés. Parfois vous pouvez avoir besoin de fusionner des fichiers qui sont liés, mais pas à l'intérieur de votre référentiel. Par exemple vous pouvez avoir importé les versions 1 et 2 d'une bibliothèque tiers dans deux répertoires séparés. Bien qu'ils soient logiquement liés, Subversion n'en a aucune connaissance puisqu''il ne voit que le package que vous avez importé. Si vous essayez de fusionner ces deux arborescences vous verriez une suppression totale suivie d'un ajout total. Pour faire en sorte que Subversion n'utilise que les différences basées sur le chemin plutôt que les différences basées sur l'historique, cochez la case <guilabel>Ignorer l'ascendance</guilabel>. Plus d'informations à ce sujet dans le manuel de Subversion, <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry\"><citetitle>Noticing or Ignoring Ancestry</citetitle></ulink>"
 
 #. (para)
 msgid "You can specify the way that line ending and whitespace changes are handled. These options are described in <xref linkend=\"tsvn-dug-diff-eol-whitespace\"/>. The default behaviour is to treat all whitespace and line-end differences as real changes to be merged."
-msgstr ""
+msgstr "Vous pouvez spécifier la gestion des caractères de fin de ligne et des espaces. Ces options sont décrites dans <xref linkend=\"tsvn-dug-diff-eol-whitespace\"/>. Le comportement par défaut est de traiter tous les espaces et les fins de lignes comme étant des modifications à part entière."
 
 #. (para)
 msgid "If you are using merge tracking and you want to mark a revision as having been merged, without actually doing the merge here, check the <guilabel>Only record the merge</guilabel> checkbox. There are two possible reasons you might want to do this. It may be that the merge is too complicated for the merge algorithms, so you code the changes by hand, then mark the change as merged so that the merge tracking algorithm is aware of it. Or you might want to prevent a particular revision from being merged. Marking it as already merged will prevent the merge occurring with merge-tracking-aware clients."
-msgstr ""
+msgstr "Si vous utilisez la fonction de suivi de fusion et que vous souhaitez marquer une révision comme ayant été fusionnée, sans vraiment avoir fait de fusion ici, cochez la case <guilabel>Enregistrer uniquement la fusion</guilabel>. Il y a deux raisons pour lesquelles vous pourriez être amenés à faire ceci. La fusion à effectuer est trop compliquée pour les algorithmes de fusion, vous faites donc la fusion à la main et marquez les modifications comme ayant été fusionnées de manière à ce que le suivi de fusion le sache. Ou vous voulez éviter qu'une révision particulière soit fusionnée. La marquer comme ayant été fusionnée empêchera les clients supportant le suivi de fusion de faire effectivement la fusion."
 
 #. (para)
-#, fuzzy
 msgid "Now everything is set up, all you have to do is click on the <guibutton>Merge</guibutton> button. If you want to preview the results <guibutton>Test Merge</guibutton> performs the merge operation, but does <emphasis>not</emphasis> modify the working copy at all. It shows you a list of the files that will be changed by a real merge, and notes those areas where conflicts will occur."
-msgstr "<guibutton>Exécution fictive</guibutton> exécute l'opération de fusion, mais ne modifie <emphasis>pas </emphasis> la copie de travail du tout. Il vous montre une liste des fichiers qui seront changés par une vraie fusion et note les secteurs où les conflits se produiront."
+msgstr "A présent que tout est correctement configuré, tout ce que vous avez à faire est de cliquer sur le bouton <guibutton>Fusionner</guibutton>. Si vous voulez avoir un aperçu du résultat, le bouton <guibutton>Tester la fusion</guibutton> fera la fusion mais <emphasis>sans</emphasis> modifier la CdT. La liste des fichiers affectés par la fusion s'affichera, ainsi que les endroits où il y a des conflits."
 
 #. (para)
 msgid "The merge progress dialog shows each stage of the merge, with the revision ranges involved. This may indicate one more revision than you were expecting. For example if you asked to merge revision 123 the progress dialog will report <quote>Merging revisions 122 through 123</quote>. To understand this you need to remember that Merge is closely related to Diff. The merge process works by generating a list of differences between two points in the repository, and applying those differences to your working copy. The progress dialog is simply showing the start and end points for the diff."
-msgstr ""
+msgstr "La barre de progression de la fusion montre chaque étape du processus, avec les plages de révision concernées. Cela peut indiquer une révision de plus que prévu. Par exemple, si vous demandez de fusionner la révision 123 la barre de progression affichera <quote>Fusion des révisions 122 à 123</quote>. Pour comprendre ce qui se passe, vous devez garder en mémoire que l'opération de fusion est très proche du diff. La fusion génère une liste de différences entre deux endroits du référentiel, et applique ces différences à votre CdT. La barre de progression montre simplement les points de départ et d'arrivée du diff."
 
 #. (title)
 msgid "Reviewing the Merge Results"
@@ -6538,30 +6535,27 @@ msgstr "Prévisualiser les résultats de la fusion"
 
 #. (para)
 msgid "The merge is now complete. It's a good idea to have a look at the merge and see if it's as expected. Merging is usually quite complicated. Conflicts often arise if the branch has drifted far from the trunk."
-msgstr ""
+msgstr "La fusion est a présent effectuée. C'est une bonne idée le résultat et vérfier que tout est conforme à vos attentes. Fussioner est normalement assez compliqué. Il y a souvent des conflits si la branche s'est beaucoup éloignée du tronc."
 
 #. (para)
-#, fuzzy
 msgid "For Subversion clients and servers prior to 1.5, no merge information is stored and merged revisions have to be tracked manually. When you have tested the changes and come to commit this revision, your commit log message should <emphasis>always</emphasis> include the revision numbers which have been ported in the merge. If you want to apply another merge at a later time you will need to know what you have already merged, as you do not want to port a change more than once. For more information about this, refer to <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>Best Practices for Merging</citetitle></ulink> in the Subversion book."
-msgstr "Quand vous avez testé les changements et que vous venez pour livrer cette révision, votre commentaire de livraison devrait <emphasis>toujours</emphasis> inclure les numéros des révisions qui ont été reportées dans la fusion. Si vous voulez appliquer une autre fusion plus tard, vous aurez besoin de connaître ce que vous avez déjà fusionné, puisque vous ne voulez pas reporter un changement plus d'une fois. Malheureusement l'information de fusion n'est pas stockée par Subversion. Pour plus d'informations à ce sujet, référez-vous à <ulink url=\"http://svnbook.red-bean.com/en/1.2/svn.branchmerge.copychanges.html\"><citetitle>Best Practices for Merging</citetitle></ulink> dans le manuel de Subversion."
+msgstr "Pour les clients et serveurs Subversion antérieurs à la version 1.5, aucune information de fusion n'est gardée et les révisions à fusionner sont à trouver manuellement. Lorsque vous avez testé et que vous allez livrer, le commentaire de livraison devrait <emphasis>toujours</emphasis> inclure les numéros de révision inclus dans la fusion. Si vous voulez faire une autre fusion plus tard vous aurez besoin de savoir ce que vous avez déjà fusionné pour ne pas applique vos modifications plusieurs fois. Pour plus d'informations, consultez <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>Best Practices for Merging</citetitle></ulink> dans la bible de Subversion."
 
 #. (para)
 msgid "If your server and all clients are running Subversion 1.5 or higher, the merge tracking facility will record the revisions merged and avoid a revision being merged more than once. This makes your life much simpler as you can simply merge the entire revision range each time and know that only new revisions will actually be merged."
-msgstr ""
+msgstr "Pour des clients et serveurs Subversion postérieurs à la version 1.5, la fonctionnalité de suivi de fusion enregistrera les révisions fusionnées et empêchera d'en fusionner une plus d'une fois. Cela vous simplifie la tâche dans la mesure où vous pouvez tout fusionner à chaque fois en étant sûr que seules les nouvelles révisions seront vraiment fusionnées."
 
 #. (para)
 msgid "Branch management is important. If you want to keep this branch up to date with the trunk, you should be sure to merge often so that the branch and trunk do not drift too far apart. Of course, you should still avoid repeated merging of changes, as explained above."
-msgstr "La gestion de branches est importante. Si vous voulez conserver cette branche à jour avec le tronc, vous devriez vous assurer de fusionner souvent pour que la branche et le tronc ne dérivent pas trop loin. Bien sûr, vous devriez toujours éviter la fusion répétée de changements, comme expliquée ci-dessus."
+msgstr "La gestion de branches est importante. Si vous voulez conserver une branche synchronisée avec le tronc, vous devrez vous assurer de fusionner souvent de sorte que la branche et le tronc ne soient pas trop éloignés. Bien sûr, vous devez toujours éviter de fusionner plusieurs fois les mêmes modifications comme expliqué ci-dessus."
 
 #. (para)
-#, fuzzy
 msgid "If you have just merged a feature branch back into the trunk, the trunk now contains all the new feature code, and the branch is obsolete. You can now delete it from the repository if required."
-msgstr "Dans ce cas, vous n'aurez plus besoin de la branche de fonction parce que la nouvelle fonction est maintenant intégrée au tronc. La branche de fonction est superflue et peut être supprimée du référentiel au besoin."
+msgstr "Si vous venez de fusionner une branche avec le tronc, celui ci contient le code de la nouvelle fontionnalité, et la branche est obsolète. Vous pouvez donc la supprimer du référentiel si besoin est."
 
 #. (para)
-#, fuzzy
 msgid "Subversion can't merge a file with a folder and vice versa - only folders to folders and files to files. If you click on a file and open up the merge dialog, then you have to give a path to a file in that dialog. If you select a folder and bring up the dialog, then you must specify a folder URL for the merge."
-msgstr "Subversion ne peut pas fusionner un fichier avec un dossier et vice versa - seulement des dossiers aux dossiers et des fichiers aux fichiers. Si vous cliquez sur un fichier et ouvrez la boîte de dialogue fusionner, vous devez alors donner un chemin vers un fichier dans cette boîte de dialogue. Si vous choisissez un dossier et affichez la boîte de dialogue, vous devez alors spécifier une URL de dossier pour la fusion."
+msgstr "Subversion ne peut pas fusionner un fichier avec un dossier et vice versa - seulement entre dossiers et entre fichiers. Si vous cliquez sur un fichier et ouvrez la boîte de dialogue fusionner, vous devez alors donner un chemin vers un fichier dans cette boîte de dialogue. Si vous choisissez un dossier et affichez la boîte de dialogue, vous devez alors spécifier une URL de dossier pour la fusion."
 
 #. (title)
 msgid "Merge Tracking"
@@ -9563,7 +9557,7 @@ msgstr "La ligne de commande SubWCRev"
 
 #. (para)
 msgid "SubWCRev reads the Subversion status of all files in a working copy, excluding externals by default. It records the highest commit revision number found, and the commit timestamp of that revision, It also records whether there are local modifications in the working copy, or mixed update revisions. The revision number, update revision range and modification status are displayed on stdout."
-msgstr "SubWCRev lit le statut Subversion de tous les fichiers d'une copie de travail, en excluant par défaut les externes. Il enregistre le plus haut numéro de révision livrée trouvé et la date de cette révision, Il enregistre aussi s'il y a des modifications locales dans la copie de travail, ou des révisions mélangées. Le numéro de révision, la plage de révisions mises à jour et le statut de modification sont affichés sur stdout."
+msgstr "SubWCRev lit le statut Subversion de tous les fichiers d'une copie de travail, en excluant par défaut les références externes. Il enregistre le plus haut numéro de révision livrée trouvé et la date de cette révision, Il enregistre aussi s'il y a des modifications locales dans la copie de travail, ou des révisions mélangées. Le numéro de révision, la plage de révisions mises à jour et le statut de modification sont affichés sur stdout."
 
 #. (para)
 msgid ""
@@ -9637,7 +9631,7 @@ msgstr "svn:externals"
 
 #. (entry)
 msgid "If this switch is given, SubWCRev will examine directories which are included with <placeholder-1/>, but only if they are from the same repository. The default behaviour is to ignore externals."
-msgstr "Si ce commutateur est donné, SubWCRev examinera les répertoires qui sont inclus avec <placeholder-1/>, mais seulement s'ils sont du même référentiel. Le comportement par défaut est d'ignorer les éléments externes."
+msgstr "Si ce commutateur est donné, SubWCRev examinera les répertoires qui sont inclus avec <placeholder-1/>, mais seulement s'ils sont du même référentiel. Le comportement par défaut est d'ignorer les références externes."
 
 #. (entry)
 msgid "If this switch is given, SubWCRev will output the revision numbers in HEX."
@@ -11767,7 +11761,7 @@ msgstr "Si <guilabel>Extraire seulement le répertoire de tête</guilabel> est c
 #. (para)
 #. (para)
 msgid "If <guilabel>Omit externals</guilabel> is checked, use the <literal>--ignore-externals</literal> switch."
-msgstr "Si <guilabel>Omettre les externes</guilabel> est coché, utilisez le commutateur <literal>--ignore-externals</literal>."
+msgstr "Si <guilabel>Omettre les références externes</guilabel> est coché, utilisez le commutateur <literal>--ignore-externals</literal>."
 
 #. (para)
 msgid "If you are checking out a specific revision, specify that after the URL using <literal>-r</literal> switch."
@@ -12154,7 +12148,7 @@ msgstr "Ce que fait TortoiseSVN est une copie de tous les fichiers vers le nouve
 
 #. (para)
 msgid "In both cases, if <guilabel>Omit externals</guilabel> is checked, use the <literal>--ignore-externals</literal> switch."
-msgstr "Dans les deux cas, si <guilabel>Omettre les externes</guilabel> est coché, utilisez le commutateur <literal>--ignore-externals</literal>."
+msgstr "Dans les deux cas, si <guilabel>Omettre les références externes</guilabel> est coché, utilisez le commutateur <literal>--ignore-externals</literal>."
 
 #. (screen)
 #, no-wrap
@@ -12819,6 +12813,18 @@ msgstr "Jérémy Badier <jeremy.badier@gmail.com>"
 msgid "translator-translation"
 msgstr "traduction"
 
+#~ msgid ""
+#~ "The checkbox marked <guilabel>Force the merge</guilabel> is used to avoid "
+#~ "a tree conflict where an incoming delete affects a file that is either "
+#~ "modified locally or not versioned at all. If the file is deleted then "
+#~ "there is no way to recover it, which is why that option is not checked by "
+#~ "default."
+#~ msgstr ""
+#~ "La case à cocher appelée <guilabel>Forcer la fusion</guilabel> est "
+#~ "utilisée pour éviter les conflits d'arborescence lors de la suppression "
+#~ "d'un fichier qui a été modifié localement ou qui n'est pas sous contrôle "
+#~ "de version. Si le fichier est supprimé, il n'y a aucun moyen de le "
+#~ "récupérer, ce qui explique que par défaut cette case ne soit pas cochée."
 #~ msgid "clean"
 #~ msgstr "nettoyer"
 #~ msgid "Other ways to create a branch or tag"
@@ -12845,7 +12851,6 @@ msgstr "traduction"
 #~ "vous permettant de choisir entre la copie ou le déplacement. Bien sûr, "
 #~ "pour créer une branche ou une étiquette vous devez le copier, pas le "
 #~ "déplacer."
-
 #~ msgid ""
 #~ "Yet another way is from the log dialog. You can show the log dialog for e."
 #~ "g. trunk, select a revision (either the HEAD revision at the very top or "
@@ -12857,6 +12862,7 @@ msgstr "traduction"
 #~ "de travail dans <placeholder-1/>."
 #~ msgid "Replaced items"
 #~ msgstr "Elements remplacés"
+
 #, fuzzy
 #~ msgid ""
 #~ "A replaced item is one where the original item has been deleted and "
@@ -12875,7 +12881,6 @@ msgstr "traduction"
 #~ "dernier noeud de branche, il est affiché en utilisant une ellipse. Cela "
 #~ "signifie que la dernière révision sur chaque branche est toujours montrée "
 #~ "sur le graphique."
-
 #~ msgid ""
 #~ "Because Subversion cannot provide all the information required, a certain "
 #~ "amount of interpretation is required, which can sometimes give strange "
@@ -12886,10 +12891,8 @@ msgstr "traduction"
 #~ "requises, une certaine dose d'interprétation est demandée, ce qui peut "
 #~ "parfois donner des résultats étranges. Néanmoins, le résultat pour le "
 #~ "tronc donnera généralement des résultats utiles."
-
 #~ msgid "Working copy depth cannot be reduced"
 #~ msgstr "La profondeur de la copie de travail ne peut être réduite"
-
 #~ msgid ""
 #~ "Once you have checked out a working copy to a particular depth you can "
 #~ "increase that depth later to get more content. However you cannot reduce "
@@ -12900,13 +12903,10 @@ msgstr "traduction"
 #~ "profondeur vous pouvez augmenter celle ci plus tard pour avoir plus de "
 #~ "contenu. Cependant, vous ne pouvez la réduire pour retirer du contenu. "
 #~ "Cette fonctionnalité sera ajoutée dans une version future de Subversion."
-
 #~ msgid "<filename>Bix.c</filename> is added with status normal."
 #~ msgstr "<filename>Bix.c</filename> est ajouté avec un statut normal."
-
 #~ msgid "Tree conflict on <filename>Foo.c</filename>."
 #~ msgstr "Conflit dans l'arborescence pour <filename>Foo.c</filename>."
-
 #~ msgid ""
 #~ "Then developer B has to decide which new filename of <filename>Foo.c</"
 #~ "filename> to keep - the one done by developer A or the rename done in his "
@@ -12915,7 +12915,6 @@ msgstr "traduction"
 #~ "Le développeur B doit alors décider quelle version du nouveau fichier "
 #~ "<filename>Foo.c</filename> garder - celle faite par le développeur A ou "
 #~ "celle issue du renommage effectué dans sa copie de travail."
-
 #~ msgid ""
 #~ "Even most Subversion users will never have to set up a server themselves. "
 #~ "The next chapter deals with how to set up such a server, and is useful "
@@ -12924,10 +12923,8 @@ msgstr "traduction"
 #~ "Même la plupart des utilisateurs de Subversion n'auront jamais à "
 #~ "configurer un serveur eux-mêmes. Le chapitre suivant traite comment "
 #~ "mettre en place un tel serveur et est utile pour des administrateurs."
-
 #~ msgid "Referenced Projects"
 #~ msgstr "Projets référencés"
-
 #~ msgid ""
 #~ "Developer B now has two choices: either merge the changes to "
 #~ "<filename>Foo.c</filename> into the renamed file <filename>Bar.c</"
@@ -12938,14 +12935,12 @@ msgstr "traduction"
 #~ "modifications de <filename>Foo.c</filename> dans le fichier renommé "
 #~ "<filename>Bar.c</filename> et marquer le conflit comme étant résolu, ou "
 #~ "marquer le conflit comme résolu et garder les deux fichiers."
-
 #~ msgid ""
 #~ "<filename>Bar.c</filename> is added to the working copy, but may not "
 #~ "contain developer A's modifications."
 #~ msgstr ""
 #~ "<filename>Bar.c</filename> est ajouté à la copie de travail, mais est "
 #~ "susceptible de ne pas inclure les modifications du développeur A."
-
 #~ msgid ""
 #~ "Then developer B has to decide whether to also rename his copy of "
 #~ "<filename>Foo.c</filename> and merge the changes in from the repository, "
@@ -12969,10 +12964,8 @@ msgstr "traduction"
 #~ msgstr ""
 #~ "Créez un autre dossier <filename>MonNouveauRéférentiel</filename> dans "
 #~ "<filename>D:\\SVN\\</filename>."
-
 #~ msgid "Setting Up A Server"
 #~ msgstr "Mettre en place un serveur"
-
 #~ msgid ""
 #~ "There may be situations where it's not possible to use Apache as your "
 #~ "server. Fortunately, Subversion includes Svnserve - a lightweight stand-"
@@ -12983,14 +12976,12 @@ msgstr "traduction"
 #~ "comme serveur. Heureusement, Subversion inclut Svnserve - un serveur "
 #~ "autonome léger qui utilise un protocole personnalisé sur une connexion "
 #~ "TCP/IP ordinaire."
-
 #~ msgid ""
 #~ "This property specifies the COM UUID of the IBugTraqProvider, for example "
 #~ "<literal>{91974081-2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal>."
 #~ msgstr ""
 #~ "La propriété spécifiant le COM UUID du IBugTraqProvider, par exemple "
 #~ "<literal>{91974081-2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal>."
-
 #~ msgid ""
 #~ "You can also export the list of changed files to a text file, or you can "
 #~ "export the changed files themselves to a folder. This operation works on "
@@ -13002,13 +12993,10 @@ msgstr "traduction"
 #~ "Cette opération ne fonctionne que sur les fichiers sélectionnés, donc "
 #~ "vous devez choisir les fichiers qui vous intéressent - en général, cela "
 #~ "revient à dire tous."
-
 #~ msgid "Added file/folder"
 #~ msgstr "Fichier/dossier ajouté"
-
 #~ msgid "Deleted file/folder"
 #~ msgstr "Fichier/dossier supprimé"
-
 #~ msgid "The revision graph shows several types of node: <placeholder-1/>"
 #~ msgstr ""
 #~ "Le graphique de révision montre différents type de noeuds: <placeholder-1/"
@@ -13046,16 +13034,12 @@ msgstr "traduction"
 #~ "Utiliser <literal>*/CVS</literal> tout seul ne fonctionnerait pas sur un "
 #~ "premier dossier enfant <literal>CVS</literal> et <literal>CVS</literal> "
 #~ "ne marcherait pas sur les sous-dossiers."
-
 #~ msgid "Replaced with the current time and date"
 #~ msgstr "Remplacer avec la date et l 'heure courants"
-
 #~ msgid "Replaced with the current time and date in standard format"
 #~ msgstr "Remplacer par la date et l'heure au format standard"
-
 #~ msgid "Replaced with the lock date"
 #~ msgstr "Remplacer avec la date du verrou"
-
 #~ msgid "Hook Scripts"
 #~ msgstr "Scripts hook"
 
@@ -13141,13 +13125,10 @@ msgstr "traduction"
 #~ "WScript.Echo(sInfo1);\n"
 #~ "WScript.Echo(sInfo2);\n"
 #~ "WScript.Echo(sInfo3);\n"
-
 #~ msgid "/mergefrom:xxx"
 #~ msgstr "/mergefrom:xxx"
-
 #~ msgid "/mergeto:xxx"
 #~ msgstr "/mergeto:xxx"
-
 #~ msgid ""
 #~ "TortoiseSVN comes with an easy to use installer. Double click on the "
 #~ "installer file and follow the instructions. The installer will take care "
@@ -13162,7 +13143,6 @@ msgstr "traduction"
 #~ "<emphasis>tous les utilisateurs</emphasis>, vous devez avoir les droits "
 #~ "administrateurs sur votre système. Si vous n'avez pas ces droits, "
 #~ "TortoiseSVN s'installera automatiquement que pour l'utilisateur courant."
-
 #~ msgid ""
 #~ "If you don't have the latest C-runtime and MFC libraries installed, you "
 #~ "still must have Administrator privileges to install TortoiseSVN. But once "
@@ -13173,7 +13153,6 @@ msgstr "traduction"
 #~ "vous devez avoir les privilèges Administrateurs pour installer "
 #~ "TortoiseSVN. Mais une fois que ces librairies sont installées, vous "
 #~ "pouvez mettre à jour ou installer TortoiseSVN sans ces privilèges."
-
 #~ msgid ""
 #~ "The Apache server doesn't have SSL support installed by default due to US-"
 #~ "export restrictions. But you can easily download the required module from "
@@ -13182,7 +13161,6 @@ msgstr "traduction"
 #~ "Le serveur Apache n'a pas le support SSL installé par défaut en raison "
 #~ "des restrictions d'exportation américaines. Mais vous pouvez facilement "
 #~ "télécharger ailleurs le module requis et l'installer vous-même."
-
 #~ msgid ""
 #~ "First you need the required files to enable SSL. You can find those in "
 #~ "the package available at <ulink url=\"http://hunter.campbus.com/"
@@ -13201,7 +13179,6 @@ msgstr "traduction"
 #~ "fichier <filename>openssl.exe</filename> dans le répertoire "
 #~ "<filename>bin</filename>. Copiez aussi le fichier <filename>conf/ssl."
 #~ "conf</filename> dans le répertoire <filename>conf</filename> d'Apache."
-
 #~ msgid ""
 #~ "Place a comment char (<literal>#</literal>) in front of the following "
 #~ "lines: <screen>\n"
@@ -13220,7 +13197,6 @@ msgstr "traduction"
 #~ "ErrorLog logs/error_log\n"
 #~ "TransferLog logs/access_log\n"
 #~ "</screen>"
-
 #~ msgid ""
 #~ "change the line <screen>\n"
 #~ "SSLCertificateFile conf/ssl.crt/server.crt\n"
@@ -13249,7 +13225,6 @@ msgstr "traduction"
 #~ "</screen> en <screen>\n"
 #~ "SSLMutex  default\n"
 #~ "</screen>"
-
 #~ msgid ""
 #~ "Delete the lines <screen>\n"
 #~ "&lt;IfDefine SSL&gt;\n"
@@ -13262,7 +13237,6 @@ msgstr "traduction"
 #~ "</screen> et <screen>\n"
 #~ "&lt;/IfDefine&gt;\n"
 #~ "</screen>"
-
 #~ msgid ""
 #~ "If you want that all the Apache modules are aware of the SSL ability, "
 #~ "change the registry key <filename>HKEY_LOCAL_MACHINE\\SYSTEM"
@@ -13277,14 +13251,12 @@ msgstr "traduction"
 #~ "\\Apache Group\\Apache2\\bin\\Apache.exe\" -k runservice</filename> en "
 #~ "<filename>\"C:\\Program Files\\Apache Group\\Apache2\\bin\\Apache.exe\" -"
 #~ "D SSL -k runservice</filename>."
-
 #~ msgid ""
 #~ "This will set an internal flag which Apache modules can read the next "
 #~ "time you start the Apache service."
 #~ msgstr ""
 #~ "Cette opération mettra un marqueur interne, qui pourra être lu par les "
 #~ "modules apache au prochain démarrage du service Apache."
-
 #~ msgid ""
 #~ "Open the Apache config file (<filename>httpd.conf</filename>) and "
 #~ "uncomment the line <screen>\n"
@@ -13295,7 +13267,6 @@ msgstr "traduction"
 #~ "filename>) et décommentez la ligne <screen>\n"
 #~ "#LoadModule ssl_module modules/mod_ssl.so\n"
 #~ "</screen>"
-
 #~ msgid ""
 #~ "OpenSSL needs a config file. You can download a working one from <ulink "
 #~ "url=\"http://tud.at/programm/openssl.cnf\"><citetitle>http://tud.at/"
@@ -13311,7 +13282,6 @@ msgstr "traduction"
 #~ "cnf</filename>. Veuillez noter : le fichier a le type <filename>*.cnf</"
 #~ "filename>. Windows traite de tels fichiers d'une façon spéciale mais ce "
 #~ "n'est vraiment qu'un fichier texte !"
-
 #~ msgid ""
 #~ "Get the latest version of Subversion from <ulink url=\"http://subversion."
 #~ "apache.org/getting.html\"><citetitle>http://subversion.apache.org/getting."
@@ -13321,7 +13291,6 @@ msgstr "traduction"
 #~ "\"http://subversion.apache.org/getting.html\"><citetitle>http://"
 #~ "subversion.tigris.org/servlets/ProjectDocumentList?folderID=91</"
 #~ "citetitle></ulink>."
-
 #~ msgid ""
 #~ "It is beyond the scope of this documentation to detail the installation "
 #~ "and setup of a secure shell, however you can find further information in "
@@ -13333,10 +13302,8 @@ msgstr "traduction"
 #~ "pouvez trouver plus d'informations dans la <ulink url=\"http://"
 #~ "tortoisesvn.net/faq\"><citetitle>FAQ TortoiseSVN</citetitle></ulink>. "
 #~ "Cherchez <quote>SSH</quote>."
-
 #~ msgid "Cyrus SASL Support"
 #~ msgstr "Support de Cyrus SASL"
-
 #~ msgid ""
 #~ "Starting with Subversion 1.5.0, svnserve and TortoiseSVN support Cyrus "
 #~ "SASL (Simple Authentication and Security Layer) for the <filename>svn://</"
@@ -13372,7 +13339,6 @@ msgstr "traduction"
 #~ "Si vous devez vous authentifier sur un domaine Windows NT, entrer votre "
 #~ "nom d'utilisateur en incluant le nom de domaine, comme : "
 #~ "<filename>MONDOMAINE/johnd</filename>."
-
 #~ msgid ""
 #~ "So if you haven't already created a basic folder structure inside your "
 #~ "repository you should do that now: <placeholder-1/>"
@@ -13380,21 +13346,18 @@ msgstr "traduction"
 #~ "Ainsi si vous n'avez pas déjà créé de structure de dossier de base à "
 #~ "l'intérieur de votre référentiel vous devriez faire cela maintenant : "
 #~ "<placeholder-1/>"
-
 #~ msgid ""
 #~ "You can also use the repository browser to create new folders directly in "
 #~ "the repository."
 #~ msgstr ""
 #~ "Vous pouvez aussi utiliser l'explorateur de référentiel pour créer de "
 #~ "nouveaux dossiers directement dans le référentiel."
-
 #~ msgid ""
 #~ "In this dialog you have to enter the URL of the repository into which you "
 #~ "want to import your project."
 #~ msgstr ""
 #~ "Dans cette boîte de dialogue vous devez entrer l'URL du référentiel dans "
 #~ "lequel vous voulez importer votre projet."
-
 #~ msgid ""
 #~ "The Subversion import command has limited functionality - you cannot "
 #~ "easily pick items for import. Also, the folder you are importing does not "
@@ -13429,7 +13392,6 @@ msgstr "traduction"
 #~ "référence à une étiquette d'un autre projet. Quand une nouvelle version "
 #~ "de ce projet sort, vous changez votre référence externe pour pointer sur "
 #~ "la nouvelle étiquette."
-
 #~ msgid ""
 #~ "URLs in <literal>svn:externals</literal> definitions are absolute. You "
 #~ "cannot use relative URLs. If you relocate your working copy, or if the "
@@ -13476,10 +13438,8 @@ msgstr "traduction"
 #~ "icône de recouvrement n'est montrée pour les fichiers non versionnés. "
 #~ "Nous faisons ainsi parce que le nombre de recouvrements d'icônes est "
 #~ "limité par le système et devrait être utilisé économiquement."
-
 #~ msgid "Keyword Expansion"
 #~ msgstr "Expansion de de mots-clé"
-
 #~ msgid ""
 #~ "An important point to remember is that Merge is closely related to Diff. "
 #~ "The merge process works by generating a list of differences between two "
@@ -13504,7 +13464,6 @@ msgstr "traduction"
 #~ "<guibutton>Voir le journal</guibutton> pour choisir une plage de "
 #~ "révisions à fusionner, TortoiseSVN fait automatiquement ce réglage pour "
 #~ "vous."
-
 #~ msgid ""
 #~ "Because you are porting a range of revisions from the same branch into "
 #~ "your working copy, make sure the <guilabel>Use \"From:\" URL</guilabel> "
@@ -13561,7 +13520,6 @@ msgstr "traduction"
 #~ "changements faits dans la révision 37 elle-même. Si cela semble "
 #~ "compliqué, ne vous inquiétez pas, il y a une manière plus simple dans "
 #~ "TortoiseSVN..."
-
 #~ msgid ""
 #~ "When the <guilabel>Use \"From:\" URL</guilabel> checkbox is checked, only "
 #~ "one <guibutton>Show Log</guibutton> button is enabled. This is because "
@@ -13574,7 +13532,6 @@ msgstr "traduction"
 #~ "parce que la boîte de dialogue du Journal définit les deux révisions "
 #~ "<guilabel>De :</guilabel > et <guilabel>À :</guilabel>, donc vous devez "
 #~ "utiliser la méthode de sélection multiple décrite ci-dessus."
-
 #~ msgid ""
 #~ "If you have not used <guibutton>Show Log</guibutton> to select the "
 #~ "revision range, then you will need to set the <guilabel>To Revision</"
@@ -13588,7 +13545,6 @@ msgstr "traduction"
 #~ "révision dans la plage que vous voulez fusionner. Souvent ce sera la "
 #~ "révision HEAD, bien que ce ne soit pas nécessaire - vous pouvez juste "
 #~ "vouloir fusionner une seule révision."
-
 #~ msgid ""
 #~ "<placeholder-1/> To merge revisions you need to go to a working copy of "
 #~ "the branch in which you want to receive the changes, often the trunk. "
@@ -13607,7 +13563,6 @@ msgstr "traduction"
 #~ "voir si elle correspond aux attentes. La fusion est d'habitude assez "
 #~ "compliquée. Les conflits surgissent souvent si la branche a dérivé loin "
 #~ "du tronc."
-
 #~ msgid ""
 #~ "Because you are comparing two different trees, make sure the "
 #~ "<guilabel>Use \"From:\" URL</guilabel> checkbox is <emphasis>not</"
@@ -13616,7 +13571,6 @@ msgstr "traduction"
 #~ "Parce que vous comparez deux arbres différents, assurez-vous que la case "
 #~ "<guilabel>Utiliser l'URL \"Depuis :\"</guilabel> n'est <emphasis>pas</"
 #~ "emphasis> cochée."
-
 #~ msgid ""
 #~ "You can also use <guibutton>Show Log</guibutton> to select the revision. "
 #~ "Note that in this case you are not selecting a range of revisions, so the "
@@ -13627,7 +13581,6 @@ msgstr "traduction"
 #~ "choisir la révision. Notez que dans ce cas vous ne sélectionnez pas une "
 #~ "plage de révisions, donc la révision que vous choisissez là est ce qui "
 #~ "apparaîtra en réalité dans le champ <guilabel>Révision</guilabel>."
-
 #~ msgid ""
 #~ "To merge the feature branch back into the trunk you need to go to a "
 #~ "working copy of the trunk. Select <menuchoice><guimenu>TortoiseSVN</"
@@ -13638,7 +13591,6 @@ msgstr "traduction"
 #~ "une copie de travail du tronc. Sélectionnez "
 #~ "<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Fusionner...</"
 #~ "guimenuitem></menuchoice> du menu contextuel. <placeholder-1/>"
-
 #~ msgid ""
 #~ "If you are uncertain about the merge operation, you may want to preview "
 #~ "what will happen do before you allow it to change your working copy. "
@@ -13647,7 +13599,6 @@ msgstr "traduction"
 #~ "Si vous n'êtes pas certain de l'opération de fusion, vous pouvez vouloir "
 #~ "prévisualiser ce qui arrivera avant de l'autoriser à modifier votre copie "
 #~ "de travail. Il y a trois boutons supplémentaires pour vous aider."
-
 #~ msgid ""
 #~ "<guibutton>Unified Diff</guibutton> creates the diff file (remember that "
 #~ "merge is based on diff) and shows you which lines will be changed in your "
@@ -13661,7 +13612,6 @@ msgstr "traduction"
 #~ "travail. Comme c'est un fichier de différences unifiées (patch) ce n'est "
 #~ "pas toujours facile à lire hors contexte, mais pour des changements à "
 #~ "petite échelle, c'est souvent utile."
-
 #~ msgid ""
 #~ "<guibutton>Diff</guibutton> shows you a list of changed files. "
 #~ "<action>Double click</action> on any of the listed files to start the "
@@ -13679,7 +13629,6 @@ msgstr "traduction"
 #~ "vous voyez ici sont les changements entre les révisions <guilabel>De :</"
 #~ "guilabel> et <guilabel>À :</guilabel>. Cela ne vous montre pas comment la "
 #~ "copie de travail sera affectée par l'application de ce changement."
-
 #~ msgid "Ignoring Ancestry"
 #~ msgstr "Ignorer l'ascendance"
 
@@ -13698,7 +13647,6 @@ msgstr "traduction"
 #~ msgstr ""
 #~ "Utiliser l'explorateur de référentiel pour créer un nouveau projet "
 #~ "directement dans le référentiel."
-
 #~ msgid ""
 #~ "If two expressions are set, then the first expression is used to find a "
 #~ "string which relates to the bug ID but may contain more than just the bug "
@@ -13712,34 +13660,27 @@ msgstr "traduction"
 #~ "\"résoud l'incident 123 \"). La deuxième expression est alors utilisée "
 #~ "pour extraire l'ID du bug seul de la chaîne extraite avec la première "
 #~ "expression. Un exemple :"
-
 #~ msgid "Use \"_svn\" instead of \".svn\" directories"
 #~ msgstr "Utiliser les répertoires \"_svn\" au lieu des répertoires \".svn\""
-
 #~ msgid "Look and Feel Settings"
 #~ msgstr "Configuration de l'Apparence et du comportement"
-
 #~ msgid "Wish List"
 #~ msgstr "Liste de voeux"
-
 #~ msgid "After running SubWCRev.exe, the output file looks like this:"
 #~ msgstr ""
 #~ "Après avoir exécuter SubWCRev.exe, le fichier résultant ressemble à cela :"
-
 #~ msgid ""
 #~ "If you have a question which is not answered anywhere else, the best "
 #~ "place to ask it is on the mailing list."
 #~ msgstr ""
 #~ "Si vous avez une question qui n'a pas de réponse, la meilleure place pour "
 #~ "la poser est sur la mailing list."
-
 #~ msgid ""
 #~ "Brings up the branch/tag dialog. The <placeholder-1/> is the working copy "
 #~ "to branch/tag from."
 #~ msgstr ""
 #~ "Affiche la boîte de dialogue de branche/étiquette. Le <placeholder-1/> "
 #~ "est la copie de travail vers la branche/étiquette."
-
 #~ msgid ""
 #~ "If no overlay is shown, the item status could be <literal>ignored</"
 #~ "literal>, <literal>unversioned</literal> or <literal>none</literal> (if "
@@ -13749,3 +13690,4 @@ msgstr "traduction"
 #~ "<literal>ignoré</literal>, <literal>non versionné</literal> ou "
 #~ "<literal>aucun</literal> (si l'élément se trouve hors d'une copie de "
 #~ "travail)."
+
