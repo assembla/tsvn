@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -138,7 +138,7 @@ const FileStatusCacheEntry * SVNFolderStatus::BuildCache(const CTSVNPath& filepa
 	// set up the configuration
 	// Note: I know this is an 'expensive' call, but without this, ignores
 	// done in the global ignore pattern won't show up.
-	if (g_ShellCache.ShowIgnoredOverlay())
+	if (g_unversionedovlloaded)
 		svn_error_clear(svn_config_get_config (&(localctx->config), g_pConfigDir, pool));
 
 	// strings pools are unused, now -> we may clear them

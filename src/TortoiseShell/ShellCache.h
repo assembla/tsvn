@@ -61,8 +61,6 @@ public:
 		includelist = CRegStdString(_T("Software\\TortoiseSVN\\OverlayIncludeList"));
 		simplecontext = CRegStdDWORD(_T("Software\\TortoiseSVN\\SimpleContext"), FALSE);
 		unversionedasmodified = CRegStdDWORD(_T("Software\\TortoiseSVN\\UnversionedAsModified"), FALSE);
-		showunversionedoverlay = CRegStdDWORD(_T("Software\\TortoiseSVN\\ShowUnversionedOverlay"), TRUE);
-		showignoredoverlay = CRegStdDWORD(_T("Software\\TortoiseSVN\\ShowIgnoredOverlay"), TRUE);
 		getlocktop = CRegStdDWORD(_T("Software\\TortoiseSVN\\GetLockTop"), TRUE);
 		excludedasnormal = CRegStdDWORD(_T("Software\\TortoiseSVN\\ShowExcludedFoldersAsNormal"), FALSE);
 		cachetypeticker = GetTickCount();
@@ -77,8 +75,6 @@ public:
 		includelistticker = 0;
 		simplecontextticker = cachetypeticker;
 		unversionedasmodifiedticker = cachetypeticker;
-		showunversionedoverlayticker = cachetypeticker;
-		showignoredoverlayticker = cachetypeticker;
 		admindirticker = cachetypeticker;
 		columnseverywhereticker = cachetypeticker;
 		getlocktopticker = cachetypeticker;
@@ -134,8 +130,6 @@ public:
 		includelist.read();
 		simplecontext.read();
 		unversionedasmodified.read();
-		showunversionedoverlay.read();
-		showignoredoverlay.read();
 		excludedasnormal.read();
 		menulayoutlow.read();
 		menulayouthigh.read();
@@ -230,24 +224,6 @@ public:
 			unversionedasmodified.read();
 		}
 		return (unversionedasmodified);
-	}
-	BOOL ShowUnversionedOverlay()
-	{
-		if ((GetTickCount() - showunversionedoverlayticker)>REGISTRYTIMEOUT)
-		{
-			showunversionedoverlayticker = GetTickCount();
-			showunversionedoverlay.read();
-		}
-		return (showunversionedoverlay);
-	}
-	BOOL ShowIgnoredOverlay()
-	{
-		if ((GetTickCount() - showignoredoverlayticker)>REGISTRYTIMEOUT)
-		{
-			showignoredoverlayticker = GetTickCount();
-			showignoredoverlay.read();
-		}
-		return (showignoredoverlay);
 	}
 	BOOL IsGetLockTop()
 	{
@@ -599,8 +575,6 @@ private:
 	CRegStdDWORD menumasklow_cu;
 	CRegStdDWORD menumaskhigh_cu;
 	CRegStdDWORD unversionedasmodified;
-	CRegStdDWORD showunversionedoverlay;
-	CRegStdDWORD showignoredoverlay;
 	CRegStdDWORD excludedasnormal;
 	CRegStdString excludelist;
 	CRegStdDWORD columnseverywhere;
@@ -625,8 +599,6 @@ private:
 	DWORD includelistticker;
 	DWORD simplecontextticker;
 	DWORD unversionedasmodifiedticker;
-	DWORD showunversionedoverlayticker;
-	DWORD showignoredoverlayticker;
 	DWORD excludedasnormalticker;
 	DWORD columnseverywhereticker;
 	UINT  drivetypecache[27];

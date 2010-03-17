@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2008 - TortoiseSVN
+// Copyright (C) 2003-2008, 2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -68,17 +68,23 @@ STDMETHODIMP CShellExt::GetPriority(int *pPriority)
 		case FileStateDeleted:
 			*pPriority = 2;
 			break;
-		case FileStateReadOnly:
+		case FileStateAddedOverlay:
 			*pPriority = 3;
 			break;
-		case FileStateLockedOverlay:
+		case FileStateVersioned:
 			*pPriority = 4;
 			break;
-		case FileStateAddedOverlay:
+		case FileStateUncontrolled:
 			*pPriority = 5;
 			break;
-		case FileStateVersioned:
+		case FileStateReadOnly:
 			*pPriority = 6;
+			break;
+		case FileStateIgnoredOverlay:
+			*pPriority = 7;
+			break;
+		case FileStateLockedOverlay:
+			*pPriority = 8;
 			break;
 		default:
 			*pPriority = 100;
@@ -248,14 +254,14 @@ STDMETHODIMP CShellExt::IsMemberOf(LPCWSTR pwszPath, DWORD /*dwAttrib*/)
 		case svn_wc_status_none:
 			return S_FALSE;
 		case svn_wc_status_unversioned:
-			if (g_ShellCache.ShowUnversionedOverlay() && g_unversionedovlloaded && (m_State == FileStateUnversionedOverlay))
+			if (g_unversionedovlloaded && (m_State == FileStateUnversionedOverlay))
 			{
 				g_filepath.clear();
 				return S_OK;
 			}
 			return S_FALSE;
 		case svn_wc_status_ignored:
-			if (g_ShellCache.ShowIgnoredOverlay() && g_ignoredovlloaded && (m_State == FileStateIgnoredOverlay))
+			if (g_ignoredovlloaded && (m_State == FileStateIgnoredOverlay))
 			{
 				g_filepath.clear();
 				return S_OK;
@@ -377,4 +383,3 @@ STDMETHODIMP CShellExt::IsMemberOf(LPCWSTR pwszPath, DWORD /*dwAttrib*/)
 	} // switch (status)
     //return S_FALSE;
 }
-
