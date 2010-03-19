@@ -107,7 +107,7 @@ UINT CCheckForUpdatesDlg::CheckThread()
 		if (sCheckURL.IsEmpty())
 			sCheckURL = SysInfo::Instance().IsWin2k()
 					  ? _T("http://tortoisesvn.tigris.org/version_w2k.txt")
-					  : _T("http://tortoisesvn.tigris.org/version.txt");
+					  : _T("http://tortoisesvn.googlecode.com/svn/trunk/version.txt");
 	}
 	HRESULT res = URLDownloadToFile(NULL, sCheckURL, tempfile, 0, NULL);
 	if (res == S_OK)
