@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2007-2009 - TortoiseSVN
+// Copyright (C) 2007-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -590,9 +590,9 @@ void CFileTextLines::CopySettings(CFileTextLines * pFileToCopySettingsTo)
 	{
 		pFileToCopySettingsTo->m_UnicodeType = m_UnicodeType;
 		pFileToCopySettingsTo->m_LineEndings = m_LineEndings;
+        pFileToCopySettingsTo->m_bReturnAtEnd = m_bReturnAtEnd;
 	}
 }
-
 
 
 
