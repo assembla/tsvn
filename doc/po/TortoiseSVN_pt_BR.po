@@ -15,9 +15,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2010-02-19 21:36 +0000\n"
-"PO-Revision-Date: 2010-03-21 00:14-0300\n"
-"Last-Translator: Rafael M. Heise <rmheise@gmail.com>\n"
+"POT-Creation-Date: 2010-01-29 00:06 +0000\n"
+"PO-Revision-Date: 2010-03-22 11:39+0100\n"
+"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5252,10 +5252,6 @@ msgid "You <emphasis>must</emphasis> commit a folder rename before changing any 
 msgstr "Você <emphasis>deve</emphasis> submeter um diretório renomeado antes de alterar qualquer arquivo dentro dele, caso contrário sua cópia de trabalho pode realmente se corromper."
 
 #. (para)
-msgid "Another way of moving or copying files is to use the Windows copy/cut commands. Select the files you want to copy, right-click and choose <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Copy</guimenuitem></menuchoice> from the explorer context menu. Then browse to the target folder, right-click and choose <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Paste</guimenuitem></menuchoice>. For moving files, choose <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Cut</guimenuitem></menuchoice> instead of <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Copy</guimenuitem></menuchoice>."
-msgstr "Outra forma de mover ou copiar arquivos é os comandos de cópia/recorte do Windows. Selecione os arquivos que voê quer copiar, clique com o botão direito e escolha <menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Copiar</guimenuitem></menuchoice> do menu de contexto do \"explorer\". Então vá até o diretório destino, clique com o botão direito e escolha <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Colar</guimenuitem></menuchoice>. Para mover arquivos, escolha <menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Recortar</guimenuitem></menuchoice> ao invés de <menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Copiar</guimenuitem></menuchoice>."
-
-#. (para)
 msgid "You can also use the repository browser to move items around. Read <xref linkend=\"tsvn-dug-repobrowser\"/> to find out more."
 msgstr "Você pode também usar o navegador de repositório para mover itens. Leia <xref linkend=\"tsvn-dug-repobrowser\"/> para descobrir mais."
 
@@ -5401,10 +5397,6 @@ msgstr "Se você quer desfazer a adição de um item, ele aparece no menu de con
 #. (para)
 msgid "The columns in this dialog can be customized in the same way as the columns in the <guilabel>Check for modifications</guilabel> dialog. Read <xref linkend=\"tsvn-dug-wcstatus-2\"/> for further details."
 msgstr "As colunas nesta janela podem ser personalizadas da mesma forma como as colunas da janela <guilabel>Verificar alterações</guilabel>. Leia <xref linkend=\"tsvn-dug-wcstatus-2\"/> para mais detalhes."
-
-#. (para)
-msgid "Since revert is sometimes used to clean up a working copy, there is an extra button which allows you to delete unversioned items as well. When you click this button another dialog comes up listing all the unversioned items, which you can then select for deletion."
-msgstr "Já que algumas vezes a opção reverter é usada para limpar uma cópia de trabalho, existe uma botão extra o qual também permite a você excluir arquivos não controlados. Quando você clicar neste botão outra janela será mostrada listando todos os arquivos não controlados, os quais você poderá selecionar para exclusão."
 
 #. (title)
 msgid "Undoing Changes which have been Committed"
@@ -7587,7 +7579,7 @@ msgid "Set this property to the URL of your repo viewer to view all changes in a
 msgstr ""
 
 #. (para)
-msgid "Set this property to the URL of your repo viewer to view changes to a specific file in a specific revision. It must be properly URI encoded and it has to contain <literal>%REVISION%</literal> and <literal>%PATH%</literal>. <literal>%PATH%</literal> is replaced with the path relative to the repository root. This allows TortoiseSVN to display a context menu entry in the log dialog <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>View revision for path in webviewer</guimenuitem></menuchoice> For example, if you right-click in the log dialog bottom pane on a file entry <literal>/trunk/src/file</literal> then the <literal>%PATH%</literal> in the URL will be replaced with <literal>/trunk/src/file</literal>."
+msgid "Set this property to the URL of your repo viewer to view changes to a specific file in a specific revision. It must be properly URI encoded and it has to contain <literal>%REVISION%</literal> and <literal>%PATH%</literal>. <literal>%PATH%</literal> is replaced with the path relative to the repository root. This allows TortoiseSVN to display a context menu entry in the log dialog <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>View revision and path in webviewer</guimenuitem></menuchoice> For example, if you right-click in the log dialog bottom pane on a file entry <literal>/trunk/src/file</literal> then the <literal>%PATH%</literal> in the URL will be replaced with <literal>/trunk/src/file</literal>."
 msgstr ""
 
 #. (para)
@@ -9170,10 +9162,6 @@ msgstr ""
 
 #. (para)
 msgid "For more information, and other ways to avoid this problem in the first place, check out the article about this in our <ulink url=\"http://tortoisesvn.net/aspdotnethack\"><citetitle>FAQ</citetitle></ulink>."
-msgstr ""
-
-#. (para)
-msgid "In most dialogs in TortoiseSVN, you can use <keycap>Ctrl+Enter</keycap> to dismiss the dialog as if you clicked on the OK button. If you don't want this, set this value to <literal>false</literal>."
 msgstr ""
 
 #. (title)
@@ -11159,12 +11147,11 @@ msgstr ""
 #, no-wrap
 msgid ""
 "\n"
-"svn checkout [-depth ARG] [--ignore-externals] [-r rev] URL PATH\n"
+"svn checkout [-N] [--ignore-externals] [-r rev] URL PATH\n"
 msgstr ""
 
 #. (para)
-#. (para)
-msgid "The depth combo box items relate to the <literal>-depth</literal> argument."
+msgid "If <guilabel>Only checkout the top folder</guilabel> is checked, use the <literal>-N</literal> switch."
 msgstr ""
 
 #. (para)
@@ -11205,7 +11192,11 @@ msgstr ""
 msgid ""
 "\n"
 "svn info URL_of_WC\n"
-"svn update [-r rev] [-depth ARG] [--ignore-externals] PATH\n"
+"svn update [-r rev] [-N] [--ignore-externals] PATH\n"
+msgstr ""
+
+#. (para)
+msgid "If <guilabel>Only update the top folder</guilabel> is checked, use the <literal>-N</literal> switch."
 msgstr ""
 
 #. (para)
@@ -11246,7 +11237,7 @@ msgstr ""
 #, no-wrap
 msgid ""
 "\n"
-"svn commit -m \"LogMessage\" [-depth ARG] [--no-unlock] PATH...\n"
+"svn commit -m \"LogMessage\" [-N] [--no-unlock] PATH...\n"
 msgstr ""
 
 #. (para)
@@ -12122,6 +12113,40 @@ msgstr ""
 msgid "translator-translation"
 msgstr ""
 
+#~ msgid ""
+#~ "Another way of moving or copying files is to use the Windows copy/cut "
+#~ "commands. Select the files you want to copy, right-click and choose "
+#~ "<menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Copy</"
+#~ "guimenuitem></menuchoice> from the explorer context menu. Then browse to "
+#~ "the target folder, right-click and choose "
+#~ "<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Paste</"
+#~ "guimenuitem></menuchoice>. For moving files, choose "
+#~ "<menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Cut</"
+#~ "guimenuitem></menuchoice> instead of <menuchoice><guimenu>Context Menu</"
+#~ "guimenu><guimenuitem>Copy</guimenuitem></menuchoice>."
+#~ msgstr ""
+#~ "Outra forma de mover ou copiar arquivos é os comandos de cópia/recorte do "
+#~ "Windows. Selecione os arquivos que voê quer copiar, clique com o botão "
+#~ "direito e escolha <menuchoice><guimenu>Menu de Contexto</"
+#~ "guimenu><guimenuitem>Copiar</guimenuitem></menuchoice> do menu de "
+#~ "contexto do \"explorer\". Então vá até o diretório destino, clique com o "
+#~ "botão direito e escolha <menuchoice><guimenu>TortoiseSVN</"
+#~ "guimenu><guimenuitem>Colar</guimenuitem></menuchoice>. Para mover "
+#~ "arquivos, escolha <menuchoice><guimenu>Menu de Contexto</"
+#~ "guimenu><guimenuitem>Recortar</guimenuitem></menuchoice> ao invés de "
+#~ "<menuchoice><guimenu>Menu de Contexto</guimenu><guimenuitem>Copiar</"
+#~ "guimenuitem></menuchoice>."
+#~ msgid ""
+#~ "Since revert is sometimes used to clean up a working copy, there is an "
+#~ "extra button which allows you to delete unversioned items as well. When "
+#~ "you click this button another dialog comes up listing all the unversioned "
+#~ "items, which you can then select for deletion."
+#~ msgstr ""
+#~ "Já que algumas vezes a opção reverter é usada para limpar uma cópia de "
+#~ "trabalho, existe uma botão extra o qual também permite a você excluir "
+#~ "arquivos não controlados. Quando você clicar neste botão outra janela "
+#~ "será mostrada listando todos os arquivos não controlados, os quais você "
+#~ "poderá selecionar para exclusão."
 #~ msgid "Other tree conflicts"
 #~ msgstr "Outros conflitos de estrutura"
 #~ msgid "clean"
