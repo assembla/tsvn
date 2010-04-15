@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -1980,23 +1980,19 @@ BOOL SVN::IsRepository(const CTSVNPath& path)
 {
 	svn_error_clear(Err);
 	Err = NULL;
+    SVNPool subPool(pool);
+
 	// The URL we get here is per definition properly encoded and escaped.
-	svn_repos_t* pRepos;
-	CString url = path.GetSVNPathString();
-	url += _T("/");
-	int pos = url.GetLength();
-	while ((pos = url.ReverseFind('/'))>=0)
+    const char * rootPath = svn_repos_find_root_path(path.GetSVNApiPath(subPool), subPool);
+    if (rootPath)
 	{
-		url = url.Left(pos);
-		if (PathFileExists(url))
-		{
-			Err = svn_repos_open (&pRepos, CUnicodeUtils::GetUTF8(url), pool);
+        svn_repos_t* pRepos = NULL;
+        Err = svn_repos_open (&pRepos, path.GetSVNApiPath(subPool), subPool);
 			if ((Err)&&(Err->apr_err == SVN_ERR_FS_BERKELEY_DB))
 				return TRUE;
 			if (Err == NULL)
 				return TRUE;
 		}
-	}
 
 	return FALSE;
 }
