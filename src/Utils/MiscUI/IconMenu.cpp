@@ -71,16 +71,19 @@ BOOL CIconMenu::CreatePopupMenu()
 
 BOOL CIconMenu::SetMenuStyle(void)
 {
-	MENUINFO MenuInfo;
+    if (SysInfo::Instance().IsVistaOrLater())
+    {
+        MENUINFO MenuInfo;
 
 
-	memset(&MenuInfo, 0, sizeof(MenuInfo));
-	
-	MenuInfo.cbSize  = sizeof(MenuInfo);
-	MenuInfo.fMask   = MIM_STYLE | MIM_APPLYTOSUBMENUS;
-	MenuInfo.dwStyle = MNS_CHECKORBMP;
-	
-	SetMenuInfo(&MenuInfo);
+        memset(&MenuInfo, 0, sizeof(MenuInfo));
+
+        MenuInfo.cbSize  = sizeof(MenuInfo);
+        MenuInfo.fMask   = MIM_STYLE | MIM_APPLYTOSUBMENUS;
+        MenuInfo.dwStyle = MNS_CHECKORBMP;
+
+        SetMenuInfo(&MenuInfo);
+    }
 
     return TRUE;
 }
