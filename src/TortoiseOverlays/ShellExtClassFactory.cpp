@@ -10,12 +10,12 @@ CShellExtClassFactory::CShellExtClassFactory(FileState state)
 
     m_cRef = 0L;
 	
-	InterlockedIncrement(g_cRefThisDll);
+	InterlockedIncrement(&g_cRefThisDll);
 }
 
 CShellExtClassFactory::~CShellExtClassFactory()          
 {
-	InterlockedDecrement(g_cRefThisDll);
+	InterlockedDecrement(&g_cRefThisDll);
 }
 
 STDMETHODIMP CShellExtClassFactory::QueryInterface(REFIID riid,
