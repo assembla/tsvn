@@ -1,26 +1,26 @@
-#
 # Portuguese translation for TortoiseSVN
 # Copyright (C) 2004-2010 the TortoiseSVN team
 # This file is distributed under the same license as TortoiseSVN
-#
 # Last commit by:
 # $Author: luisxbm $
 # $Date: 2009-04-04 12:22:13 +0100 (su, 12 apr 2009) $
 # $Rev: 15573 $
-#
 # Authors:
 # Luis X. B. Mourão luisxbm@gmail.com, 2009
-#
+# Paulo Justino <paulo.justino@netcabo.pt>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2010-01-29 00:06 +0000\n"
-"PO-Revision-Date: 2010-04-26 09:41+0100\n"
+"PO-Revision-Date: 2010-05-03 15:33+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
-"Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
+"Language-Team: Portuguese Translation Team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.6.0\n"
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Bookmarks: 72,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
@@ -71,7 +71,7 @@ msgstr "Simon"
 
 #. (surname)
 msgid "Large"
-msgstr "Grande"
+msgstr "Large"
 
 #. (title)
 msgid "Preface"
@@ -547,7 +547,7 @@ msgstr "Se quiseres instalar múltiplos dicionários, o TortoiseSVN utiliza esta
 
 #. (title)
 msgid "Basic Version-Control Concepts"
-msgstr "Conceitos Básicos de Controle de Versões"
+msgstr "Conceitos Básicos de Controlo de Versões"
 
 #. (primary)
 msgid "Subversion book"
@@ -555,15 +555,15 @@ msgstr "Livro sobre Subversion"
 
 #. (para)
 msgid "This chapter is a slightly modified version of the same chapter in the Subversion book. An online version of the Subversion book is available here: <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>http://svnbook.red-bean.com/</citetitle></ulink>."
-msgstr ""
+msgstr "Este capítulo é uma versão ligeiramente modificada do mesmo capítulo no livro do Subversion. Uma versão em linha do livro do Subversion pode ser encontrada aqui: <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>http://svnbook.red-bean.com/</citetitle></ulink>."
 
 #. (para)
 msgid "This chapter is a short, casual introduction to Subversion. If you're new to version control, this chapter is definitely for you. We begin with a discussion of general version control concepts, work our way into the specific ideas behind Subversion, and show some simple examples of Subversion in use."
-msgstr ""
+msgstr "Este capítulo é uma introdução curta e casual ao Subversion. Se estás a iniciar-te no controlo de versões, este capítulo é mesmo para ti. Nós vamos começar com um discussão dos conceitos gerais de controlo de versões, abordar ideias específicas por detrás do Subversion, e mostrar alguns exemplos simples do uso do Subversion."
 
 #. (para)
 msgid "Even though the examples in this chapter show people sharing collections of program source code, keep in mind that Subversion can manage any sort of file collection - it's not limited to helping computer programmers."
-msgstr ""
+msgstr "Mesmo que os exemplos deste capítulo mostrem pessoas a partilhar colecções de código fonte de programas, tem em mente que o Subversion pode gerir qualquer tipo de colecções de ficheiros - não está limitado a ajudar os programadores de computadores."
 
 #. (title)
 #. (title)
@@ -578,7 +578,7 @@ msgstr "repositório"
 
 #. (para)
 msgid "Subversion is a centralized system for sharing information. At its core is a <firstterm>repository</firstterm>, which is a central store of data. The repository stores information in the form of a <firstterm>filesystem tree</firstterm> - a typical hierarchy of files and directories. Any number of <firstterm>clients</firstterm> connect to the repository, and then read or write to these files. By writing data, a client makes the information available to others; by reading data, the client receives information from others."
-msgstr "O Subversion é um sistema centralizado para partilha de informação. No seu cerne está o  <firstterm>repository</firstterm>"
+msgstr "O Subversion é um sistema centralizado para partilha de informação. No seu cerne está o <firstterm>repository</firstterm>, que é um armazém central de dados. O repositório armazena informação na forma de uma firstterm>árvore de ficheiros</firstterm> - uma hierarquia típica de ficheiros e pastas. Qualquer número de <firstterm>clientes</firstterm> podem se ligar ao repositório, e então ler ou escrever nesses ficheiros. Ao escrever dados, o cliente torna a informação disponível a outros; ao ler dados, o cliente recebe informação de outros."
 
 #. (title)
 msgid "A Typical Client/Server System"
@@ -586,11 +586,11 @@ msgstr "Um sistema típico Cliente/Servidor"
 
 #. (para)
 msgid "So why is this interesting? So far, this sounds like the definition of a typical file server. And indeed, the repository <emphasis>is</emphasis> a kind of file server, but it's not your usual breed. What makes the Subversion repository special is that <emphasis>it remembers every change</emphasis> ever written to it: every change to every file, and even changes to the directory tree itself, such as the addition, deletion, and rearrangement of files and directories."
-msgstr ""
+msgstr "Então porque será isto interessante? Até agora isto parece-se com a definição de um servidor de ficheiros típico. E de facto, o repositório <emphasis>é</emphasis> uma espécie de servidor de ficheiros, mas não da sua raça normal. O que torna o repositório do Subversion especial é que <emphasis>ele lembra-se de qualquer alteração</emphasis> que lhe tenha sido alguma vez escrita: todas as alterações a qualquer ficheiro, e mesmo alterações na própria árvore de pastas, tal como adicionar, remover, e remodelar ficheiros e pastas."
 
 #. (para)
 msgid "When a client reads data from the repository, it normally sees only the latest version of the filesystem tree. But the client also has the ability to view <emphasis>previous</emphasis> states of the filesystem. For example, a client can ask historical questions like, <quote>what did this directory contain last Wednesday?</quote>, or <quote>who was the last person to change this file, and what changes did they make?</quote> These are the sorts of questions that are at the heart of any <firstterm>version control system</firstterm>: systems that are designed to record and track changes to data over time."
-msgstr ""
+msgstr "Quando um cliente lê dados do repositório, ele normalmente vê só a última versão da árvore do sistema de ficheiros. Mas o cliente também tem a possibilidade de ver estados <emphasis>prévios</emphasis> do sistema de ficheiros. Por exemplo, um cliente efectuar perguntas de histórico, tais como <quote>o que é que esta pasta continha na última Quarta-feira?</quote>, ou <quote>Quem foi a última pessoa e modificar este ficheiro, e que alterações foram efectuadas?</quote> Essas são o tipo de questões que estão no coração de qualquer <firstterm>sistema de controlo de versões</firstterm>: sistemas que são desenhados para recordar e guardar alterações em dados ao longo do tempo."
 
 #. (title)
 msgid "Versioning Models"
@@ -4409,7 +4409,7 @@ msgstr "Informação Estatística"
 
 #. (primary)
 msgid "statistics"
-msgstr ""
+msgstr "estatísticas"
 
 #. (para)
 msgid "The <guibutton>Statistics</guibutton> button brings up a box showing some interesting information about the revisions shown in the Log dialog. This shows how many authors have been at work, how many commits they have made, progress by week, and much more. Now you can see at a glance who has been working hardest and who is slacking ;-)"
@@ -4531,11 +4531,11 @@ msgstr "Ver Diferenças"
 #. (primary)
 #. (primary)
 msgid "diff"
-msgstr ""
+msgstr "dif"
 
 #. (primary)
 msgid "compare"
-msgstr ""
+msgstr "comparar"
 
 #. (para)
 msgid "One of the commonest requirements in project development is to see what has changed. You might want to look at the differences between two revisions of the same file, or the differences between two separate files. TortoiseSVN provides a built-in tool named <application>TortoiseMerge</application> for viewing differences of text files. For viewing differences of image files, TortoiseSVN also has a tool named <application>TortoiseIDiff</application>. Of course, you can use your own favourite diff program if you like."
@@ -11986,11 +11986,11 @@ msgstr "Aplicar correcções é um trabalho complicado, a não ser que a correc�
 
 #. (title)
 msgid "Implementation Details"
-msgstr "Pormenores de Implemtação"
+msgstr "Detalhes de Implementação"
 
 #. (para)
 msgid "This appendix contains a more detailed discussion of the implementation of some of TortoiseSVN's features."
-msgstr ""
+msgstr "Este anexo contém uma discussão mais detalhada da implementação de algumas das funcionalidades do TortoiseSVN."
 
 #. (primary)
 msgid "overlay priority"
@@ -11998,103 +11998,103 @@ msgstr "prioridade de sobreposição"
 
 #. (para)
 msgid "Every file and folder has a Subversion status value as reported by the Subversion library. In the command line client, these are represented by single letter codes, but in TortoiseSVN they are shown graphically using the icon overlays. Because the number of overlays is very limited, each overlay may represent one of several status values."
-msgstr ""
+msgstr "Cada ficheiro e pasta tem um valor de estado no Subversion como é reportado pela biblioteca do mesmo. No cliente de linha de comando, esse é representado por uma letra de código, mas no TortoiseSVN são mostrados graficamente como sobreposições de ícones. Porque o número de sobreposições é muito limitado, cada sobreposição poderá representar vários valores de estado. "
 
 #. (para)
 msgid "<graphic fileref=\"images/ConflictIcon.png\"/> The <emphasis>Conflicted</emphasis> overlay is used to represent the <literal>conflicted</literal> state, where an update or switch results in conflicts between local changes and changes downloaded from the repository. It is also used to indicate the <literal>obstructed</literal> state, which can occur when an operation is unable to complete."
-msgstr ""
+msgstr "<graphic fileref=\"images/ConflictIcon.png\"/> A sobreposição <emphasis>em conflito</emphasis> é usada para representar o estado <literal>em conflito</literal>, onde uma actualização ou troca resultou em conflitos entre as alterações locais e as alterações descarregadas do repositório. É também usado para indicar o estado <literal>obstruído</literal>, que pode ocorrer quando não é concluida uma operação."
 
 #. (para)
 msgid "<graphic fileref=\"images/ModifiedIcon.png\"/> The <emphasis>Modified</emphasis> overlay represents the <literal>modified</literal> state, where you have made local modifications, the <literal>merged</literal> state, where changes from the repository have been merged with local changes, and the <literal>replaced</literal> state, where a file has been deleted and replaced by another different file with the same name."
-msgstr ""
+msgstr "<graphic fileref=\"images/ModifiedIcon.png\"/> A sobreposição <emphasis>Modificado</emphasis> representa o estado <literal>modificado</literal>, quando efectuaste modificações locais, o estado  <literal>integrado</literal>, quando as alterações do repositório foram integradas com as alterações locais, e o estado <literal>substituído</literal>, quando o ficheiro foi removido e substituído por outro ficheiro diferente com o mesmo nome."
 
 #. (para)
 msgid "<graphic fileref=\"images/DeletedIcon.png\"/> The <emphasis>Deleted</emphasis> overlay represents the <literal>deleted</literal> state, where an item is scheduled for deletion, or the <literal>missing</literal> state, where an item is not present. Naturally an item which is missing cannot have an overlay itself, but the parent folder can be marked if one of its child items is missing."
-msgstr ""
+msgstr "<graphic fileref=\"images/DeletedIcon.png\"/> A sobreposição <emphasis>Removido</emphasis> representa o estado <literal>removido</literal>, quando um item foi escalonado para remoção, ou o estado <literal>desaparecido</literal>, quando um item não está presente. Naturalmetne um item que está desaparecido não tem ele próprio uma sobreposição, mas a pasta pai pode ser sinalizada quando um dos seus filhos está desaparecido."
 
 #. (para)
 msgid "<graphic fileref=\"images/AddedIcon.png\"/> The <emphasis>Added</emphasis> overlay is simply used to represent the <literal>added</literal> status when an item has been added to version control."
-msgstr ""
+msgstr "<graphic fileref=\"images/AddedIcon.png\"/> A sobreposição <emphasis>Adicionado</emphasis> é usado simplesmente para representar o estado <literal>adicionado</literal> quando um item foi adicionado ao controlo de versões."
 
 #. (para)
 msgid "<graphic fileref=\"images/InSubVersionIcon.png\"/> The <emphasis>In Subversion</emphasis> overlay is used to represent an item which is in the <literal>normal</literal> state, or a versioned item whose state is not yet known. Because TortoiseSVN uses a background caching process to gather status, it may take a few seconds before the overlay updates."
-msgstr ""
+msgstr "<graphic fileref=\"images/InSubVersionIcon.png\"/> A sobreposição <emphasis>No Subversion</emphasis> é usada para representar um item que está no estado <literal>normal</literal>, ou um item versionado cujo estado não é ainda conhecido. Porque o TortoiseSVN usa um processo de cache em background para recolher o estado, poderá levar alguns segundos a actualizar as sobreposições."
 
 #. (para)
 msgid "<graphic fileref=\"images/ReadOnlyIcon.png\"/> The <emphasis>Needs Lock</emphasis> overlay is used to indicate when a file has the <literal>svn:needs-lock</literal> property set. For working copies which were created using Subversion 1.4.0 and later, the <literal>svn:needs-lock</literal> status is cached locally by Subversion and this is used to determine when to show this overlay. For working copies which are in pre-1.4.x format, TortoiseSVN shows this overlay when the file has read-only status. Note that Subversion automatically upgrades working copies when you update them, although the caching of the <literal>svn:needs-lock</literal> property may not happen until the file itself is updated."
-msgstr ""
+msgstr "<graphic fileref=\"images/ReadOnlyIcon.png\"/> A sobreposição <emphasis>Necessita bloqueio</emphasis> é usada para indicar quando um ficheiro tem configurada a propriedade <literal>svn:needs-lock</literal>. Para cópias de trabalho que foram criadas usando o Subversion 1.4.0 e superior, o estado <literal>svn:needs-lock</literal> é guardado localmente em cache pelo Subversion, e isto é usado para determinar quando se deve mostrar esta sobreposição. Para cópias de trabalho no formato pré-1.4, o TortoiseSVN mostra esta sobreposição quando o ficheiro tem o estado só-de-leitura. Tem atenção que o Subversion actualizada automaticamente a versão das cópias de trabalho quando tu as actualizas, embora poderá não ser efectuada a cache da propriedade <literal>svn:needs-lock</literal> até o próprio ficheiro ser actualizado."
 
 #. (para)
 msgid "<graphic fileref=\"images/LockedIcon.png\"/> The <emphasis>Locked</emphasis> overlay is used when the local working copy holds a lock for that file."
-msgstr ""
+msgstr "<graphic fileref=\"images/LockedIcon.png\"/> A sobreposição <emphasis>Bloqueado</emphasis> é usado quando a cópia de trabalho local contém um bloqueio para esse ficheiro."
 
 #. (para)
 msgid "<graphic fileref=\"images/IgnoredIcon.png\"/> The <emphasis>Ignored</emphasis> overlay is used to represent an item which is in the <literal>ignored</literal> state, either due to a global ignore pattern, or the <literal>svn:ignore</literal> property of the parent folder. This overlay is optional."
-msgstr ""
+msgstr "<graphic fileref=\"images/IgnoredIcon.png\"/> A sobreposição <emphasis>Ignorado</emphasis> é usado para representar um item que está no estado <literal>ignorado</literal>, devido ao padrão global de ignorados, ou à propriedade <literal>svn:ignore</literal> da pasta pai. Esta sobreposição é opcional."
 
 #. (para)
 msgid "<graphic fileref=\"images/UnversionedIcon.png\"/> The <emphasis>Unversioned</emphasis> overlay is used to represent an item which is in the <literal>unversioned</literal> state. This is an item in a versioned folder, but which is not under version control itself. This overlay is optional."
-msgstr ""
+msgstr "<graphic fileref=\"images/UnversionedIcon.png\"/> A sobreposição <emphasis>Não versionado</emphasis> é usado para representar um item que está no estado <literal>não versionado</literal>. Isto é um item numa pasta versionada, mas que não está ele próprio sob o controlo de versões. Esta sobreposição é opcional."
 
 #. (para)
 msgid "If an item has subversion status <literal>none</literal> (the item is not within a working copy) then no overlay is shown. If you have chosen to disable the <emphasis>Ignored</emphasis> and <emphasis>Unversioned</emphasis> overlays then no overlay will be shown for those files either."
-msgstr ""
+msgstr "Se um item tem o estado subversion <literal>nenhum</literal> (o item não está dentro da cópia de trabalho) então não é mostrado nenhuma sobreposição. Se decidiste desactivar as sobreposições emphasis>Ignorado</emphasis> e <emphasis>Não versionado</emphasis> então não serão também mostradas sobreposições para esses ficheiros."
 
 #. (para)
 msgid "An item can only have one Subversion status value. For example a file could be locally modified and it could be marked for deletion at the same time. Subversion returns a single status value - in this case <literal>deleted</literal>. Those priorities are defined within Subversion itself."
-msgstr ""
+msgstr "Um item só pode ter um valor de estado no Subversion. Por exemplo, um ficheiro pode ser modificado localmente e pode ser marcado para remoção ao mesmo tempo. O Subversion retorna um único valor de estado - neste caso - <literal>removido</literal>. Essas propriedades estão definidas dentro do próprio Subversion."
 
 #. (para)
 msgid "When TortoiseSVN displays the status recursively (the default setting), each folder displays an overlay reflecting its own status and the status of all its children. In order to display a single <emphasis>summary</emphasis> overlay, we use the priority order shown above to determine which overlay to use, with the <emphasis>Conflicted</emphasis> overlay taking highest priority."
-msgstr ""
+msgstr "Quando o TortoiseSVN mostra recursivamente o estado (configuração por defeito), cada pasta mostra uma sobreposição que reflete o seu próprio estado e o estado de todos os seus filhos. De modo a mostrar uma simples sobreposição de <emphasis>summário</emphasis>, nós usamos a ordem de prioridade mostrada acima para determinar qual a sobreposição a usar, com a sobreposição <emphasis>Em conflito</emphasis> a tomar a prioridade mais elevada."
 
 #. (para)
 msgid "In fact, you may find that not all of these icons are used on your system. This is because the number of overlays allowed by Windows is limited to 15. Windows uses 4 of those, and the remaining 11 can be used by other applications. If there are not enough overlay slots available, TortoiseSVN tries to be a <quote>Good Citizen (TM)</quote> and limits its use of overlays to give other apps a chance."
-msgstr ""
+msgstr "De facto, poderás descobrir que nem todos esse ícones são usados no teu sistema. Isot é porque o número de sobreposições permitidas pelo Windows é limitada a 15. O Windows usa 4 dessas, e as restantes podem ser usadas por outras aplicações. Se não existirem disponíveis em número suficiente sobreposições vagas, o TortoiseSVN tenta ser um bom cidadão (<quote>Good Citizen (TM)</quote>) e limita o seu uso de sobreposições, para dar hipotese às outras aplicações."
 
 #. (para)
 msgid "<emphasis>Normal</emphasis>, <emphasis>Modified</emphasis> and <emphasis>Conflicted</emphasis> are always loaded and visible."
-msgstr ""
+msgstr "<emphasis>Normal</emphasis>, <emphasis>Modificado</emphasis> e <emphasis>Em conflito</emphasis> são sempre carregadas e visíveis."
 
 #. (para)
 msgid "<emphasis>Deleted</emphasis> is loaded if possible, but falls back to <emphasis>Modified</emphasis> if there are not enough slots."
-msgstr ""
+msgstr "<emphasis>Removido</emphasis> é se possivel carregado, mas descai para <emphasis>Modificado</emphasis> se não existem vagas suficientes."
 
 #. (para)
 msgid "<emphasis>Read-Only</emphasis> is loaded if possible, but falls back to <emphasis>Normal</emphasis> if there are not enough slots."
-msgstr ""
+msgstr "<emphasis>Só-de-Leitura</emphasis> é se possivel carregado, mas descai para <emphasis>Normal</emphasis> se não existem vagas suficientes."
 
 #. (para)
 msgid "<emphasis>Locked</emphasis> is only loaded if there are fewer than 13 overlays already loaded. It falls back to <emphasis>Normal</emphasis> if there are not enough slots."
-msgstr ""
+msgstr "<emphasis>Bloqueado</emphasis> só é carregada se existirem menos de 13 sobreposições já carregadas. Descai para <emphasis>Normal</emphasis> se não existirem vagas suficientes."
 
 #. (para)
 msgid "<emphasis>Added</emphasis> is only loaded if there are fewer than 14 overlays already loaded. It falls back to <emphasis>Modified</emphasis> if there are not enough slots."
-msgstr ""
+msgstr "<emphasis>Adicionado</emphasis>é só carregada se existirem menos de 14 sobreposições já carregadas. Descai para <emphasis>Modificado</emphasis> se não existirem vagas suficientes."
 
 #. (title)
 msgid "Securing Svnserve using SSH"
-msgstr "Protecção de Svnserve com SSH"
+msgstr "Protegendo o Svnserve ao usar o SSH"
 
 #. (para)
 msgid "This section provides a step-by-step guide to setting up Subversion and TortoiseSVN to use the <literal>svn+ssh</literal> protocol. If you already use authenticated SSH connections to login to your server, then you are already there and you can find more detail in the Subversion book. If you are not using SSH but would like to do so to protect your Subversion installation, this guide gives a simple method which does not involve creating a separate SSH user account on the server for every subversion user."
-msgstr ""
+msgstr "Esta secção fornece um guia passo-a-passo para configurar o Subversion e o TortoiseSVN para usar o protocolo <literal>svn+ssh</literal>. Se já usas conexões autenticadas por SSH para efectuares login no teu servidor, então já lá estás e poderás encontrar mais detalhes no livro do Subversion. Se não estás a usar o SSH mas gostarias de o fazer para proteger a tua instalação do Subversion este guia fornece-te um método simples, que não envolve criar uma conta de utilizador SSH separada no servidor, para cada utilizador do Subversion."
 
 #. (para)
 msgid "In this implementation we create a single SSH user account for all subversion users, and use different authentication keys to differentiate between the real Subversion users."
-msgstr ""
+msgstr "Nesta implementação criamos uma única conta de utilizador SSH para todos os utilizadores do Subversion, e usar diferentes chaves de autenticação para diferenciar entre os utilizadores reais do Subversion."
 
 #. (para)
 msgid "In this appendix we assume that you already have the subversion tools installed, and that you have created a repository as detailed elsewhere in this manual. Note that you should <emphasis>not</emphasis> start svnserve as a service or daemon when used with SSH."
-msgstr ""
+msgstr "Neste anexo assumimos que já instalaste as ferramentas do Subversion, e que criaste um repositório como detalhado algures neste manual. Tem atenção que tu <emphasis>não</emphasis> deves arrancar o svnserve como um serviço or daemon quando usado com o SSH."
 
 #. (para)
 msgid "Much of the information here comes from a tutorial provided by Marc Logemann, which can be found at <ulink url=\"http://www.logemann.org/2007/03/13/subversion-tortoisesvn-ssh-howto/\"><citetitle>www.logemann.org</citetitle></ulink> Additional information on setting up a Windows server was provided by Thorsten Müller. Thanks guys!"
-msgstr ""
+msgstr "Muita desta informação vem de um tutorial fornecido pelo Marc Logemann que foi arquivado em <ulink url=\"http://tortoisesvn.net/ssh_howto\"><citetitle>http://tortoisesvn.net/ssh_howto</citetitle></ulink> Informação adicional em como configurar um servidor Windows foi fornecida por Thorsten Müller. Obrigado malta! "
 
 #. (title)
 msgid "Setting Up a Linux Server"
-msgstr "Instalação de um servidor Linux"
+msgstr "Configuração de um Servidor Linux"
 
 #. (para)
 msgid ""
@@ -12102,10 +12102,13 @@ msgid ""
 "ps xa | grep sshd\n"
 "</screen> and look for ssh jobs."
 msgstr ""
+"Tu precisas de ter o SSH activado no servidor e assumimos que irás usar o OpenSSH. Na maioria das distribuições este já está instalado. Para descobrires escreve: <screen>\n"
+"ps xa | grep sshd\n"
+"</screen> e procura por jobs ssh."
 
 #. (para)
 msgid "One point to note is that if you build Subversion from source and do not provide any argument to <filename>./configure</filename>, Subversion creates a <filename>bin</filename> directory under <filename>/usr/local</filename> and places its binaries there. If you want to use tunneling mode with SSH, you have to be aware that the user logging in via SSH needs to execute the svnserve program and some other binaries. For this reason, either place <filename>/usr/local/bin</filename> into the <literal>PATH</literal> variable or create symbolic links of your binaries to the <filename>/usr/sbin</filename> directory, or to any other directory which is commonly in the <literal>PATH</literal>."
-msgstr ""
+msgstr "Um ponto a salientar é que ao construíres o Subversion a partir das fontes, e não forneceres qualquer parâmetro para o <filename>./configure</filename>, o Subversion cria uma pasta <filename>bin</filename> sob <filename>/usr/local</filename> e coloca aqui os binários. Se queres usar o modo tunel com o SSH deves ter em atenção que o utilizador autenticado via SSH necessita de executar o programa svnserve e outros binários. Por esta razão coloca o <filename>/usr/local/bin</filename> na variável <literal>PATH</literal> ou cria links simbólicos dos teus binários para a pasta <filename>/usr/sbin</filename>, ou para qualquer outra pasta que normalmente está no <literal>PATH</literal>."
 
 #. (para)
 msgid ""
@@ -12113,6 +12116,9 @@ msgid ""
 "which svnserve\n"
 "</screen> This command should tell you if svnserve is reachable."
 msgstr ""
+"Para verificares se está tudo OK, autentica-te através do SSH como um utilizador alvo e digita: <screen>\n"
+"which svnserve\n"
+"</screen> Este comando deverá informar-te se o svnserve está disponível."
 
 #. (para)
 msgid ""
@@ -12120,18 +12126,21 @@ msgid ""
 "useradd -m svnuser\n"
 "</screen> Be sure to give this user full access rights to the repository."
 msgstr ""
+"Cria um novo utilizador que será então usado para aceder ao repositório svn: <screen>\n"
+"useradd -m svnuser\n"
+"</screen> Tem a certeza que dás a este utilizador permissão total de acesso ao repositório."
 
 #. (title)
 msgid "Setting Up a Windows Server"
-msgstr "Instalação de um servidor Windows"
+msgstr "Configurar um Servidor Windows"
 
 #. (para)
 msgid "Install Cygwin SSH daemon as described here: <ulink url=\"http://pigtail.net/LRP/printsrv/cygwin-sshd.html\"><citetitle>http://pigtail.net/LRP/printsrv/cygwin-sshd.html</citetitle></ulink>"
-msgstr ""
+msgstr "Instala o daemon SSH Cygwin como descrito aqui: <ulink url=\"http://pigtail.net/LRP/printsrv/cygwin-sshd.html\"><citetitle>http://pigtail.net/LRP/printsrv/cygwin-sshd.html</citetitle></ulink>SSH Client Tools for use with TortoiseSVN"
 
 #. (para)
 msgid "Create a new Windows user account <literal>svnuser</literal> which we will use to access the repository. Be sure to give this user full access rights to the repository."
-msgstr ""
+msgstr "Cria uma nova conta de utilizador Windows <literal>svnuser</literal>, que será usada para aceder ao repositório. Tem a certeza que dás a este utilizador todos os privilégios de acesso ao repositório."
 
 #. (para)
 msgid ""
@@ -12139,14 +12148,17 @@ msgid ""
 "mkpasswd -l &gt; /etc/passwd\n"
 "</screen>"
 msgstr ""
+"Se ainda não existe nenhum ficheiro de palavra-passe, cria um a partir da consola do Cygwin usando o: <screen>\n"
+"mkpasswd -l &gt; /etc/passwd\n"
+"</screen>"
 
 #. (title)
 msgid "SSH Client Tools for use with TortoiseSVN"
-msgstr "Utilitários de client SSH para utilizaçäo com TortoiseSVN"
+msgstr "Ferramentas de cliente SSH para uso com o TortoiseSVN"
 
 #. (para)
 msgid "Grab the tools we need for using SSH on the windows client from this site: <ulink url=\"http://www.chiark.greenend.org.uk/~sgtatham/putty/\"><citetitle>http://www.chiark.greenend.org.uk/~sgtatham/putty/</citetitle></ulink> Just go to the download section and get <filename>Putty</filename>, <filename>Plink</filename>, <filename>Pageant</filename> and <filename>Puttygen</filename>."
-msgstr ""
+msgstr "Adquire as ferramentas que necessitas para usar o SSH no cliente Windows a partir deste sítio: <ulink url=\"http://www.chiark.greenend.org.uk/~sgtatham/putty/\"><citetitle>http://www.chiark.greenend.org.uk/~sgtatham/putty/</citetitle></ulink> Vai à secção de descarga e obtêm o <filename>Putty</filename>, <filename>Plink</filename>, <filename>Pageant</filename> e <filename>Puttygen</filename>."
 
 #. (title)
 msgid "Creating OpenSSH Certificates"
@@ -12154,11 +12166,11 @@ msgstr "Criação de certificados OpenSSH"
 
 #. (para)
 msgid "The next step is to create a key pair for authentication. There are two possible ways to create keys. The first is to create the keys with PuTTYgen on the client, upload the public key to your server and use the private key with PuTTY. The other is to create the key pair with the OpenSSH tool ssh-keygen, download the private key to your client and convert the private key to a PuTTY-style private key."
-msgstr ""
+msgstr "O próximo passo é criar um par de chaves para autenticação. Existem duas maneiras possíveis para criar as chaves. A primeira é criar as chaves com o PuTTYgen no cliente, carregar a chave pública para o teu servidor e usar a chave privada com o PuTTY. A outra é criar o par de chaves com a ferramenta do OpenSSH ssh-keygen, descarrega a chave privada para o teu cliente e converte-a numa chave privada ao estilo do PuTTY."
 
 #. (title)
 msgid "Create Keys using ssh-keygen"
-msgstr "Criar chaves com ssh-keygen"
+msgstr "Criar chaves com o ssh-keygen"
 
 #. (para)
 msgid ""
@@ -12168,6 +12180,11 @@ msgid ""
 "ls -l keyfile*\n"
 "</screen> you will see two files, <filename>keyfile</filename> and <filename>keyfile.pub</filename>. As you might guess, the <filename>.pub</filename> file is the public key file, the other is the private one."
 msgstr ""
+"Entra no teu servidor como <literal>root</literal> ou <literal>svnuser</literal> e digita: <screen>\n"
+"ssh-keygen -b 1024 -t dsa -N passphrase -f keyfile\n"
+"</screen> substituindo a palavra-passe real (que só tu conheces) e o ficheiro chave.Nós apenas criámos uma chave SSH2 DSA com uma palavra-chave de 1024 bites. Se digitares <screen>\n"
+"ls -l keyfile*\n"
+"</screen> irás ver dois ficheiros, <filename>keyfile</filename> e <filename>keyfile.pub</filename>. Como podes adivinhar o ficheiro <filename>.pub</filename> é o ficheiro de chave pública, o outro é o da chave privada."
 
 #. (para)
 msgid ""
@@ -12175,14 +12192,17 @@ msgid ""
 "cat keyfile.pub &gt;&gt; /home/svnuser/.ssh/authorized_keys\n"
 "</screen>"
 msgstr ""
+"Anexa a chave pública aquelas que estão na pasta <filename>.ssh</filename> dentro da pasta home <literal>svnuser</literal>: <screen>\n"
+"cat keyfile.pub &gt;&gt; /home/svnuser/.ssh/authorized_keys\n"
+"</screen>"
 
 #. (para)
 msgid "In order to use the private key we generated, we have to convert it to a putty format. This is because the private key file format is not specified by a standards body. After you download the private key file to your client PC, start PuTTYgen and use <menuchoice><guimenu>Conversions</guimenu><guimenuitem>Import key</guimenuitem></menuchoice>. Browse to your file <filename>keyfile</filename> which you got from the server the passphrase you used when creating the key. Finally click on <guibutton>Save private key</guibutton> and save the file as <filename>keyfile.PPK</filename>."
-msgstr ""
+msgstr "De modo a poder usar a chave privada que gerámos, temos de a converter para um formato putty. Isto é porque o formato de ficheiro da chave privada não é especificado por um organismo de standartização. Depois de descarregares para o teu PC cliente o ficheiro da chave privada, arranca o PuTTYgen e vai ao menu <menuchoice><guimenu>Conversions</guimenu><guimenuitem>Import key</guimenuitem></menuchoice>. Navega até ao teu ficheiro <filename>keyfile</filename>, do qual obtiveste do servidor a palavra-passe usada aquando da criação da chave. Finalmente clica no <guibutton>Save private key</guibutton> e guarda o ficheiro como <filename>keyfile.PPK</filename>."
 
 #. (title)
 msgid "Create Keys using PuTTYgen"
-msgstr "Criar chaves com PuTTYgen"
+msgstr "Criar chaves usando o PuTTYgen"
 
 #. (para)
 msgid ""
@@ -12190,18 +12210,21 @@ msgid ""
 "cat keyfile.pub &gt;&gt; /home/svnuser/.ssh/authorized_keys\n"
 "</screen>"
 msgstr ""
+"Usa o PuTTYgen para gerar o par chave-pública/chave-privada e guarda-a. Copia a chave pública para o servidor e anexa-a às que estão na pasta <filename>.ssh</filename>, dentro da pasta mãe <literal>svnuser</literal>: <screen>\n"
+"cat keyfile.pub &gt;&gt; /home/svnuser/.ssh/authorized_keys\n"
+"</screen>"
 
 #. (title)
 msgid "Test using PuTTY"
-msgstr "Testar com PuTTY"
+msgstr "Testar com o PuTTY"
 
 #. (para)
 msgid "To test the connection we will use PuTTY. Start the program and on the <guilabel>Session</guilabel> tab set the hostname to the name or IP address of your server, the protocol to SSH and save the session as <literal>SvnConnection</literal> or whatever name you prefer. On the <guilabel>SSH</guilabel> tab set the preferred SSH protocol version to 2 and from <guilabel>Auth</guilabel> set the full path to the <literal>.PPK</literal> private key file you converted earlier. Go back to the <guilabel>Sessions</guilabel> tab and hit the <guilabel>Save</guilabel> button. You will now see <literal>SvnConnection</literal> in the list of saved sessions."
-msgstr ""
+msgstr "Para testar a conexão iremos usar o PuTTY. Arranca o programa e na aba <guilabel>Session</guilabel> configura o hostname para o nome ou endereço IP do teu servidor, o protocolo para SSH e guarda a sessão como <literal>SvnConnection</literal>, ou outro nome que preferires. Na aba <guilabel>SSH</guilabel> configura versão preferida do protocolo SSH para 2, e na <guilabel>Auth</guilabel> fixa o caminho completo para o ficheiro de chave privada <literal>.PPK</literal>, que converteste anteriormente. Volta à aba <guilabel>Sessions</guilabel> e pressiona o botão <guilabel>Save</guilabel>.  Irás agora ver a <literal>SvnConnection</literal> na lista das sessões guardadas."
 
 #. (para)
 msgid "Click on <guilabel>Open</guilabel> and you should see a telnet style login prompt. Use <literal>svnuser</literal> as the user name and if all is well you should connect directly without being prompted for a password."
-msgstr ""
+msgstr "Clica no <guilabel>Open</guilabel> e irás ver uma janela de login ao estilo do telnet. Usa como utilizador o nome <literal>svnuser</literal> e se tudo estiver bem dever-te-ás ligar directamente, sem seres questionado pela palavra-passe."
 
 #. (para)
 msgid ""
@@ -12212,14 +12235,20 @@ msgid ""
 "ChallengeResponseAuthentication no\n"
 "</screen>"
 msgstr ""
+"Poderás necessitar de editar o <filename>/etc/sshd_config</filename> no servidor. Edita as linhas como mostrado em seguida, e depois re-arranca o serviço SSH. <screen>\n"
+"PubkeyAuthentication yes\n"
+"PasswordAuthentication no\n"
+"PermitEmptyPasswords no\n"
+"ChallengeResponseAuthentication no\n"
+"</screen>"
 
 #. (title)
 msgid "Testing SSH with TortoiseSVN"
-msgstr "Testar SSH com TortoiseSVN"
+msgstr "Testar SSH com o TortoiseSVN"
 
 #. (para)
 msgid "So far we have only tested that you can login using SSH. Now we need to make sure that the SSH connection can actually run svnserve. On the server modify <filename>/home/svnuser/.ssh/authorized_keys</filename> as follows to allow many subversion authors to use the same system account, <literal>svnuser</literal>. Note that every subversion author uses the same login but a different authentication key, thus you have to add one line for every author."
-msgstr ""
+msgstr "Até agora só testámos se consegues efectuar login usando o SSH. Agora precisamos de ter a certeza que a ligação SSH pode efectivamente correr o svnserve. No servidor modifica o <filename>/home/svnuser/.ssh/authorized_keys</filename> do seguinte modo  para permitir que vários autores do Subversion usem a mesma conta, <literal>svnuser</literal>. Tem em atenção que cada autor Subversion usa o mesmo login mas com uma chave de autenticação diferente, pelo que terás de adicionar uma linha por cada autor."
 
 #. (para)
 msgid ""
@@ -12229,22 +12258,27 @@ msgid ""
 "            no-pty ssh-rsa &lt;PublicKey&gt; &lt;Comment&gt;\n"
 "</screen> There are several values that you need to set according to your setup."
 msgstr ""
+"Nota: Esta é tudo numa linha muito longa. <screen>\n"
+"command=\"svnserve -t -r &lt;ReposRootPath&gt; --tunnel-user=&lt;author&gt;\",\n"
+"            no-port-forwarding,no-agent-forwarding,no-X11-forwarding,\n"
+"            no-pty ssh-rsa &lt;PublicKey&gt; &lt;Comment&gt;\n"
+"</screen> Existe vários valores que necessitas de configurar, de acordo com a tua instalação."
 
 #. (para)
 msgid "<literal>&lt;ReposRootPath&gt;</literal> should be replaced with the path to the directory containing your repositories. This avoids the need to specify full server paths within URLs. Note that you must use forward slashes even on a Windows server, e.g. <filename>c:/svn/reposroot</filename>. In the examples below we assume that you have a repository folder within the repository root called <filename>repos</filename>."
-msgstr ""
+msgstr "<literal>&lt;ReposRootPath&gt;</literal> deverá ser substituído com o caminho para a pasta onde estão os teus repositórios. Isto evita a necessidade de especificar os caminhos completos de servidor nos URLs. Tem atenção que deverás usar barras direitas, mesmo em servidores Windows, e.g.  <filename>c:/svn/reposroot</filename>. Nos exemplos abaixo assumimos que tu tens uma pasta no repositório, dentro da raiz, chamada <filename>repos</filename>."
 
 #. (para)
 msgid "<literal>&lt;author&gt;</literal> should be replaced with the svn author that you want to be stored on commit. This also allows svnserve to use its own access rights within <filename>svnserve.conf</filename>."
-msgstr ""
+msgstr "O <literal>&lt;author&gt;</literal> deverá ser substituído pelo autor svn que tu queres que seja armazenado na submissão. Isto permite também que o svnserve use os seus direitos de acesso dentro do <filename>svnserve.conf</filename>."
 
 #. (para)
 msgid "<literal>&lt;PublicKey&gt;</literal> should be replaced with the public key that you generated earlier."
-msgstr ""
+msgstr "O <literal>&lt;PublicKey&gt;</literal> deverá ser substituído pela chave pública que geraste anteriormente."
 
 #. (para)
 msgid "<literal>&lt;Comment&gt;</literal> can be any comment you like, but it is useful for mapping an svn author name to the person's real name."
-msgstr ""
+msgstr "O <literal>&lt;Comment&gt;</literal> pode ser qualquer comentário que desejares, mas será útil para mapear o nome de um autor svn com o nome real da pessoa."
 
 #. (para)
 msgid ""
@@ -12252,18 +12286,21 @@ msgid ""
 "svn+ssh://svnuser@SvnConnection/repos\n"
 "</screen> What does this URL mean? The Schema name is <literal>svn+ssh</literal> which tells TortoiseSVN how to handle the requests to the server. After the double slash, you specify the user to connect to the server, in our case <literal>svnuser</literal>. After the <literal>@</literal> we supply our PuTTY session name. This session name contains all details like where to find the private key and the server's IP or DNS. Lastly we have to provide the path to the repository, relative to the repository root on the server, as specified in the <filename>authorized_keys</filename> file."
 msgstr ""
+"Clica com o botão direito em qualquer pasta no explorador do Windows, e selecciona <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Navegador-de-repositório</guimenuitem></menuchoice>. Serás solicitado a introduzir o URL, que introduzirás deste modo: <screen>\n"
+"svn+ssh://svnuser@SvnConnection/repos\n"
+"</screen> O que é que significa este URL? O nome da Schema é <literal>svn+ssh</literal> que diz ao TortoiseSVN como lidar com os pedidos ao servidor. Depois da dupla barra especifica o utilizador a ligar-se ao servidor, que é no nosso caso <literal>svnuser</literal>. Depois do <literal>@</literal> fornecemos o nome da nossa sessão PuTTY. Este nome de sessão contém todos os detalhes, como por exemplo, onde encontrar a chave privada, o IP e DNS do servidor. Por último temos de fornecer o caminho para o repositório, relativamente à raiz do repositório no servidor, como especificado no ficheiro <filename>authorized_keys</filename>."
 
 #. (para)
 msgid "Click on <guibutton>OK</guibutton> and you should be able to browse the repository content. If so you now have a running SSH tunnel in conjunction with TortoiseSVN."
-msgstr ""
+msgstr "Clica no <guibutton>OK</guibutton>, e deverás conseguir navegar no conteúdo do repositório. Se tal acontecer, significa que tens um tunel SSH em conjunto com o TortoiseSVN."
 
 #. (para)
 msgid "Note that by default TortoiseSVN uses its own version of Plink to connect. This avoids a console window popping up for every authentication attempt, but it also means that there is nowhere for error messages to appear. If you receive the error <quote>Unable to write to standard output</quote>, you can try specifying Plink as the client in TortoiseSVN's network settings. This will allow you to see the real error message generated by Plink."
-msgstr ""
+msgstr "Tem em atenção que, por defeito, o TortoiseSVN usa a sua própria versão do Plink para se ligar. Isto evita que, para cada tentativa de autenticação, apareça uma janela de consola, mas também significa que não aparecerá em nenhum lado mensagens de erro. Se receberes um erro <quote>Não foi possivel escrever para a saida padrão</quote>, poderás tentar especificar o Plink como cliente nas preferências de rede do TortoiseSVN. Isto permite-a ver as mensagens de erro reais, geradas pelo Plink."
 
 #. (title)
 msgid "SSH Configuration Variants"
-msgstr "Variantes de Configuração de SSH"
+msgstr "Variantes da Configuração do SSH"
 
 #. (para)
 msgid ""
@@ -12271,22 +12308,25 @@ msgid ""
 "svn+ssh://SvnConnection/repos\n"
 "</screen> This time we only provide the PuTTY session <literal>SvnConnection</literal> to the SSH client TortoiseSVN uses (TortoisePlink.exe). This client will check the session for all necessary details."
 msgstr ""
+"Uma maneira de simplificar o URL no TortoiseSVN é configurar o utilizador dentro da sessão PuTTY. Para tal terás de carregar no PuTTY as tuas sessões já definidas <literal>SvnConnection</literal> e na aba <guilabel>Connection</guilabel> inserir para nome de utilizador <guilabel>Auto login user</guilabel>, e.g. <literal>svnuser</literal>. Guarda de novo a tua sessão PuTTY e tenta o seguinte URL no TortoiseSN: <screen>\n"
+"svn+ssh://SvnConnection/repos\n"
+"</screen> Desta vez só fornecemos a sessão PuTTY <literal>SvnConnection</literal> ao cliente SSH que o TortoiseSVN usa (TortoisePlink.exe). Este cliente irá verificar na sessão todos os detalhes necessários."
 
 #. (para)
 msgid "At the time of writing PuTTY does not check all saved configurations, so if you have multiple configurations with the same server name, it will pick the first one which matches. Also, if you edit the default configuration and save it, the auto login user name is <emphasis>not</emphasis> saved."
-msgstr ""
+msgstr "Até à altura da escrita o PuTTY na verificava todas as configurações guardadas, pelo que se tiveres múltiplas configurações para o mesmo nome de servidor, ele irá pegar na primeira que condizer com este. Se também editares a configuração por defeito e a guardares, o nome de utilizador auto login <emphasis>não</emphasis> será guardado."
 
 #. (para)
 msgid "Many people like to use Pageant for storing all their keys. Because a PuTTY session is capable of storing a key, you don't always need Pageant. But imagine you want to store keys for several different servers; in that case you would have to edit the PuTTY session over and over again, depending on the server you are trying to connect with. In this situation Pageant makes perfect sense, because when PuTTY, Plink, TortoisePlink or any other PuTTY-based tool is trying to connect to an SSH server, it checks all private keys that Pageant holds to initiate the connection."
-msgstr ""
+msgstr "Muitas pessoas gostam de usar o Pageant para armazenarem as suas chaves. Porque uma sessão de PuTTY é capaz de armazenar uma chave, tu nem sempre precisas do Pageant. Mas imagina que tu queres armazenar chaves para vários servidores diferentes; nesse caso terias de editar a sessão do Putty vez após vez, para cada servidor que estejas a tentar-te ligar. Nessa situação o Pageant tem todo o sentido porque quando o PuTTY, Plink, TortoisePlink e qualquer outra ferramenta baseada em PuTTY está a tentar-se ligar a um servidor SSH, esta verifica todas as chaves privadas que o Pageant armazena, para iniciar a ligação."
 
 #. (para)
 msgid "For this task, simply run Pageant and add the private key. It should be the same private key you defined in the PuTTY session above. If you use Pageant for private key storage, you can delete the reference to the private key file in your saved PuTTY session. You can add more keys for other servers, or other users of course."
-msgstr ""
+msgstr "Para esta tarefa corre simplesmente o Pageant e adiciona a chave privada. Deverá ser a mesma chave privada que tu definiste acima na sessão do PuTTY. Se usares o Pageant para armazenar a chave privada, tu podes remover na tua sessão de PuTTY guardada, a referência ao ficheiro de chave privada. Tu podes adicionar mais chaves para outros servidores ou, é claro, para outros utilizadores."
 
 #. (para)
 msgid "If you don't want to repeat this procedure after every reboot of your client, you should place Pageant in the auto-start group of your Windows installation. You can append the keys with complete paths as command line arguments to Pageant.exe"
-msgstr ""
+msgstr "Se não queres repetir este procedimento após cada reinício do sistema do teu cliente, deverás colocar o Pageant no grupo de auto-arranque do teu sistema Windows. Tu podes acrescentar as chaves com caminhos completos, como parâmetros de linha de comandos do Pageant.exe."
 
 #. (para)
 msgid ""
@@ -12295,10 +12335,14 @@ msgid ""
 "svn+ssh://svnuser@mydomain.com/repos\n"
 "</screen> As you can see, we don't use a saved PuTTY session but an IP address (or domain name) as the connection target. We also supply the user, but you might ask how the private key file will be found. Because TortoisePlink.exe is just a modified version of the standard Plink tool from the PuTTY suite, TortoiseSVN will also try all the keys stored in Pageant."
 msgstr ""
+"A última maneira de se conectar a um servidor SSH, será simplesmente através do uso deste URL dentro do TortoiseSVN: <screen>\n"
+"svn+ssh://svnuser@100.101.102.103/repos\n"
+"svn+ssh://svnuser@mydomain.com/repos\n"
+"</screen> Como podes ver, não usamos uma sessão PuTTY guardada, mas um endereço IP (ou nome de dominio) como o destino da ligação. Também fornecemos o utilizador, mas poderás perguntar como será encontrado o ficheiro de chave privada. Porque o TortoisePlink.exe é apenas uma versão modificada da ferramenta Plink padrão da suite PuTTY, o TortoiseSVN irá também tentar todas as chaves armazenadas no Pageant."
 
 #. (para)
 msgid "If you use this last method, be sure you do not have a default username set in PuTTY. We have had reports of a bug in PuTTY causing connections to close in this case. To remove the default user, simply clear <filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%20Settings\\HostName</filename>"
-msgstr ""
+msgstr "Se usares o último método, tem a certeza que não tens configurado por defeito um nome de utilizador no PuTTY. Temos tido relatórios de um problema no PuTTY que causa, neste caso, perdas de ligação. Para remover o utilizador por defeito, simplesmente limpa a <filename>HKEY_CURRENT_USER\\Software\\SimonTatham\\Putty\\Sessions\\Default%20Settings\\HostName</filename>"
 
 #. (title)
 msgid "Glossary"
@@ -12306,7 +12350,7 @@ msgstr "Glossário"
 
 #. (para)
 msgid "A Subversion command that is used to add a file or directory to your working copy. The new items are added to the repository when you commit."
-msgstr ""
+msgstr "Comando Subversion que é usado para adicionar um ficheiro ou pasta à tua cópia de trabalho. Os novos itens são adicionados ao repositório quando os submeteres."
 
 #. (glossterm)
 msgid "BASE revision"
@@ -12314,11 +12358,11 @@ msgstr "Revisão BASE"
 
 #. (para)
 msgid "The current base revision of a file or folder in your <emphasis>working copy</emphasis>. This is the revision the file or folder was in, when the last checkout, update or commit was run. The BASE revision is normally not equal to the HEAD revision."
-msgstr ""
+msgstr "A revisão base corrente para o ficheiro ou pasta na tua <emphasis>cópia de trabalho</emphasis>. Esta é a revisão que o ficheiro ou pasta tinha na última execução do checkout, actualização ou submissão. A revisão BASE é normalmente diferente da revisão HEAD."
 
 #. (para)
 msgid "This command is for text files only, and it annotates every line to show the repository revision in which it was last changed, and the author who made that change. Our GUI implementation is called TortoiseBlame and it also shows the commit date/time and the log message when you hover the mouse of the revision number."
-msgstr ""
+msgstr "Este comando dirige-se apenas a ficheiros de texto, e anota cada linha de modo a mostrar a revisão do repositório em que foi alterada por último, o autor que efectuou a alteração. A nossa implementação de GUI chama-se TortoiseBlame, e também mostra a data/Hora de submissão e a mensagem de registo, quando passas com o rato sobre o número de revisão."
 
 #. (glossterm)
 msgid "BDB"
@@ -12326,7 +12370,7 @@ msgstr "BDB"
 
 #. (para)
 msgid "Berkeley DB. A well tested database backend for repositories, that cannot be used on network shares. Default for pre 1.2 repositories."
-msgstr "A Berkeley DB. Uma base de dados extensamente testada em aplicações de \"backend\" que não é utilizável em \"shares\" de rede. Opção automática para repositórios anteriores á versão 1.2."
+msgstr "BD Berkeley. Uma base de dados extensamente testada em aplicações de \"backend\" que não é utilizável em \"shares\" de rede. Opção automática para repositórios anteriores à versão 1.2."
 
 #. (glossterm)
 msgid "Branch"
@@ -12334,19 +12378,19 @@ msgstr "Ramo"
 
 #. (para)
 msgid "A term frequently used in revision control systems to describe what happens when development forks at a particular point and follows 2 separate paths. You can create a branch off the main development line so as to develop a new feature without rendering the main line unstable. Or you can branch a stable release to which you make only bug fixes, while new developments take place on the unstable trunk. In Subversion a branch is implemented as a <quote>cheap copy</quote>."
-msgstr ""
+msgstr "Um termo usado frequentemente em sistemas de controlo de versões para descrever o que acontece quando o desenvolvimento se divide, no determinado ponto, e segue dois caminhos separados. Tu podes criar um ramo a partir da linha principal de desenvolvimento, para o desenvolvimento de uma nova funcionalidade sem tornar instável a linha principal. Ou tu podes criar um ramo estável de uma entrega para o qual só efectuas reparações de problemas, enquanto novos desenvolvimentos têm lugar no instável trunk. No Subversion um ramo é implementado como <quote>cópia barata</quote>."
 
 #. (para)
 msgid "A Subversion command which creates a local working copy in an empty directory by downloading versioned files from the repository."
-msgstr ""
+msgstr "Comando Subversion que criar uma cópia de trabalho local numa simples pasta, através da descarga de ficheiros versionados a partir do repositório."
 
 #. (para)
 msgid "To quote from the Subversion book: <quote> Recursively clean up the working copy, removing locks and resuming unfinished operations. If you ever get a <emphasis>working copy locked</emphasis> error, run this command to remove stale locks and get your working copy into a usable state again. </quote> Note that in this context <emphasis>lock</emphasis> refers to local filesystem locking, not repository locking."
-msgstr ""
+msgstr "Para citar o livro do Subversion: <quote> Recursively clean up the working copy, removing locks and resuming unfinished operations. If you ever get a <emphasis>working copy locked</emphasis> error, run this command to remove stale locks and get your working copy into a usable state again. </quote> Tem atenção que neste contexto o <emphasis>lock</emphasis> (bloqueio) refere-se ao bloqueio do sistema de ficheiros local e não ao bloqueio do repositório."
 
 #. (para)
 msgid "This Subversion command is used to pass the changes in your local working copy back into the repository, creating a new repository revision."
-msgstr ""
+msgstr "Este comando Subversion é usado para transferir as alterações, na tua cópia de trabalho local, de volta para o repositório, criando uma nova revisão do mesmo."
 
 #. (glossterm)
 msgid "Conflict"
@@ -12354,7 +12398,7 @@ msgstr "Conflito"
 
 #. (para)
 msgid "When changes from the repository are merged with local changes, sometimes those changes occur on the same lines. In this case Subversion cannot automatically decide which version to use and the file is said to be in conflict. You have to edit the file manually and resolve the conflict before you can commit any further changes."
-msgstr ""
+msgstr "Quando as alterações do repositório são integradas com as tuas alterações locais, por vezes essas alterações ocorrem nas mesmas linhas. Neste caso o Subversion não pode decidir automaticamente qual a versão a usar e o ficheiro é tido como em conflito. Terás de editar manualmente esse ficheiro e resolver o conflito antes de submeteres posteriormente mais alterações."
 
 #. (glossterm)
 msgid "Copy"
@@ -12362,19 +12406,19 @@ msgstr "Cópia"
 
 #. (para)
 msgid "In a Subversion repository you can create a copy of a single file or an entire tree. These are implemented as <quote>cheap copies</quote> which act a bit like a link to the original in that they take up almost no space. Making a copy preserves the history of the item in the copy, so you can trace changes made before the copy was made."
-msgstr ""
+msgstr "No repositório Subversion tu podes criar uma cópia de um simples ficheiro ou de uma árvore inteira. Essas são implementadas como <quote>cópias baratas</quote> que funcionam um pouco como um apontador para o original, pelo que não ocupam quase nenhum espaço. Criar cópias preserva o histórico do item na cópia, para que possas seguir as alterações efectuadas antes de a teres feito. "
 
 #. (para)
 msgid "When you delete a versioned item (and commit the change) the item no longer exists in the repository after the committed revision. But of course it still exists in earlier repository revisions, so you can still access it. If necessary, you can copy a deleted item and <quote>resurrect</quote> it complete with history."
-msgstr ""
+msgstr "Quando tu removes um item versionado (e submetes a alteração) o item deixa de existir no repositório, após a revisão submetida. Mas é claro que continuará a existir em revisões anteriores do repositório, pelo que poderás continuar a acedê-lo. Se necessário, tu podes copiar um item removido e <quote>ressuscitá-lo</quote> por completo com histórico."
 
 #. (para)
 msgid "Shorthand for <quote>Show Differences</quote>. Very useful when you want to see exactly what changes have been made."
-msgstr ""
+msgstr "Abreviatura para <quote>Mostrar Diferenças</quote>. Muito útil quando queres ver exactamente que alterações foram feitas."
 
 #. (para)
 msgid "This command produces a copy of a versioned folder, just like a working copy, but without the local <literal>.svn</literal> folders."
-msgstr ""
+msgstr "Este comando produz uma cópia de uma pasta versionada, tal como uma cópia de trabalho, mas sem as pastas locais <literal>.svn</literal>."
 
 #. (glossterm)
 msgid "FSFS"
@@ -12382,11 +12426,11 @@ msgstr "FSFS"
 
 #. (para)
 msgid "A proprietary Subversion filesystem backend for repositories. Can be used on network shares. Default for 1.2 and newer repositories."
-msgstr ""
+msgstr "É um sistema de ficheiros proprietário do Subversion para suporte aos repositórios. Pode ser usado em partilhas de rede. Por defeito para repositórios na versão 1.2 e nos mais recentes."
 
 #. (para)
 msgid "Group policy object"
-msgstr "Objecto de politica de grupo"
+msgstr "Objecto de política de grupo"
 
 #. (glossterm)
 msgid "HEAD revision"
@@ -12394,15 +12438,15 @@ msgstr "Revisão HEAD"
 
 #. (para)
 msgid "The latest revision of a file or folder in the <emphasis>repository</emphasis>."
-msgstr ""
+msgstr "A última revisão de um ficheiro ou pasta no <emphasis>repositório</emphasis>."
 
 #. (para)
 msgid "Subversion command to import an entire folder hierarchy into the repository in a single revision."
-msgstr ""
+msgstr "Comando do Subversion para importar uma hierarquia completa de pastas, para o repositório numa única revisão."
 
 #. (para)
 msgid "When you take out a lock on a versioned item, you mark it in the repository as non-committable, except from the working copy where the lock was taken out."
-msgstr ""
+msgstr "Quando efectuas um bloqueio no item versionado, tu irás marcá-lo no repositório como não submetível, à excepção da cópia de trabalho de onde foi efectuado o bloqueio."
 
 #. (glossterm)
 msgid "Log"
@@ -12410,7 +12454,7 @@ msgstr "Registo"
 
 #. (para)
 msgid "Show the revision history of a file or folder. Also known as <quote>History</quote>."
-msgstr ""
+msgstr "Mosta o histórico de revisões de um ficheiro ou pasta. Também conhecido como <quote>Histórico</quote>."
 
 #. (glossterm)
 msgid "History"
@@ -12418,15 +12462,15 @@ msgstr "História"
 
 #. (para)
 msgid "Show the revision history of a file or folder. Also known as <quote>Log</quote>."
-msgstr ""
+msgstr "Mostra o histórico de revisões de um ficheiro ou pasta. Também conhecido como <quote>Registo</quote>."
 
 #. (para)
 msgid "The process by which changes from the repository are added to your working copy without disrupting any changes you have already made locally. Sometimes these changes cannot be reconciled automatically and the working copy is said to be in conflict."
-msgstr ""
+msgstr "O processo pelo qual as alterações do repositório são adicionadas à tua cópia de trabalho destruir quaisquer alterações que tenhas efectuado localmente. Por vezes essas alterações não podem ser conciliadas automaticamente e, é dito que a cópia de trabalho está em conflito."
 
 #. (para)
 msgid "Merging happens automatically when you update your working copy. You can also merge specific changes from another branch using TortoiseSVN's Merge command."
-msgstr ""
+msgstr "A integração ocorre automáticamente quando actualizas a tua cópia de trabalho. Tu podes também integrar alterações específicas de outro ramo usando o comando TortoiseSVN's Merge."
 
 #. (glossterm)
 msgid "Patch"
@@ -12434,7 +12478,7 @@ msgstr "Remendo"
 
 #. (para)
 msgid "If a working copy has changes to text files only, it is possible to use Subversion's Diff command to generate a single file summary of those changes in Unified Diff format. A file of this type is often referred to as a <quote>Patch</quote>, and it can be emailed to someone else (or to a mailing list) and applied to another working copy. Someone without commit access can make changes and submit a patch file for an authorized committer to apply. Or if you are unsure about a change you can submit a patch for others to review."
-msgstr ""
+msgstr "Se uma cópia de trabalho tem alterações, só em ficheiros de texto, é possível usar o comando comparar do Subversion para gerar único ficheiro de sumário dessas alterações, no formato comparação-unificada. Um ficheiro desse tipo é normalmente referido como <quote>Correcção</quote>, e pode ser enviado por email para alguém (ou para uma lista de correio) e aplicado noutra cópia de trabalho. Alguém sem permissão para submeter pode efectuar as alterações, e submeter o ficheiro de correcção para alguém com autorização para submeter, para seja este a aplicar a correcção. Ou se não estiveres seguro da alteração efectuada, podes submeter a correcção para que outros a possam rever."
 
 #. (glossterm)
 msgid "Property"
@@ -12442,15 +12486,15 @@ msgstr "Propriedade"
 
 #. (para)
 msgid "In addition to versioning your directories and files, Subversion allows you to add versioned metadata - referred to as <quote>properties</quote> to each of your versioned directories and files. Each property has a name and a value, rather like a registry key. Subversion has some special properties which it uses internally, such as <literal>svn:eol-style</literal>. TortoiseSVN has some too, such as <literal>tsvn:logminsize</literal>. You can add your own properties with any name and value you choose."
-msgstr ""
+msgstr "Além de versionar as tuas pastas e ficheiros, o Subversion permite-te adicionar metadados versionados - referidos como <quote>propriedades</quote> a cada um das tuas pastas e ficheiros versionados. Cada propriedade tem um nome e valor, tal como uma chave do registo. O Subversion tem algumas propriedades especiais que usa internamente, como as <literal>svn:eol-style</literal>. O TortoiseSVN também tem algumas, tais como <literal>tsvn:logminsize</literal>. Tu podes também adicionar as tuas próprias propriedades com qualquer nome e valor que escolhas."
 
 #. (para)
 msgid "If your repository moves, perhaps because you have moved it to a different directory on your server, or the server domain name has changed, you need to <quote>relocate</quote> your working copy so that its repository URLs point to the new location."
-msgstr ""
+msgstr "Se o teu repositório mudou de localização, talvez porque o alteraste para uma pasta diferente no teu servidor, ou o nome de domínio do servidor foi alterado, será necessário <quote>reposicionar</quote> a tua cópia de trabalho para que o seu URL de repositório aponte para a nova localização."
 
 #. (para)
 msgid "Note: you should only use this command if your working copy is referring to the same location in the same repository, but the repository itself has moved. In any other circumstance you probably need the <quote>Switch</quote> command instead."
-msgstr ""
+msgstr "Nota: só deverás usar este comando se a tua cópia de trabalho se refere à mesma localização no mesmo repositório, mas apenas o próprio repositório foi movido. Em qualquer outra circunstância, o que provavelmente necessitarás, é do comando <quote>Trocar</quote>."
 
 #. (glossterm)
 msgid "Repository"
@@ -12458,15 +12502,15 @@ msgstr "Repositório"
 
 #. (para)
 msgid "A repository is a central place where data is stored and maintained. A repository can be a place where multiple databases or files are located for distribution over a network, or a repository can be a location that is directly accessible to the user without having to travel across a network."
-msgstr ""
+msgstr "Um repositório e um local central onde são armazenados e mantidos dados. Um repositório pode ser um local onde múltiplas bases de dados ou ficheiros estão localizados para distribuição pela rede, ou poderá também ser um local que está acessível ao utilizador directamente, sem o obrigar a navegar pela rede."
 
 #. (para)
 msgid "When files in a working copy are left in a conflicted state following a merge, those conflicts must be sorted out by a human using an editor (or perhaps TortoiseMerge). This process is referred to as <quote>Resolving Conflicts</quote>. When this is complete you can mark the conflicted files as being resolved, which allows them to be committed."
-msgstr ""
+msgstr "Quando na cópia de trabalho, são deixados ficheiros num estado de conflito após uma integração, esses conflitos têm de ser observados por um humano com o recurso a um editor (ou talvez o TortoiseMerge). Este processo é referido como <quote>Resolução de Conflitos</quote>. Quando estiver concluído, poderás marcar os ficheiros em conflito como estando resolvidos, o que permite que estes possam ser submetidos."
 
 #. (para)
 msgid "Subversion keeps a local <quote>pristine</quote> copy of each file as it was when you last updated your working copy. If you have made changes and decide you want to undo them, you can use the <quote>revert</quote> command to go back to the pristine copy."
-msgstr ""
+msgstr "O Subversion mantém um cópia <quote>prístina</quote> local de cada ficheiro como era, quando tu actualizaste pela última vez a tua cópia de trabalho. Se efectuaste alterações e decidiste que queres desfazê-las, podes então usar o comando <quote>reverter</quote> para retornares à cópia prístina."
 
 #. (glossterm)
 msgid "Revision"
@@ -12474,11 +12518,11 @@ msgstr "Revisão"
 
 #. (para)
 msgid "Every time you commit a set of changes, you create one new <quote>revision</quote> in the repository. Each revision represents the state of the repository tree at a certain point in its history. If you want to go back in time you can examine the repository as it was at revision N."
-msgstr ""
+msgstr "Cada vez que submetes um conjunto de alterações, tu crias uma nova <quote>revisão</quote> no repositório. Cada revisão representa o estado da árvore do repositório, num determinado ponto da sua história. Se quiseres voltar atrás, poderás examinar o repositório tal e qual estava na revisão N."
 
 #. (para)
 msgid "In another sense, a revision can refer to the set of changes that were made when that revision was created."
-msgstr ""
+msgstr "De outro modo, uma revisão refere-se a um conjunto de alterações que foram efectuadas, quando essa mesma revisão foi criada."
 
 #. (glossterm)
 msgid "Revision Property (revprop)"
@@ -12486,7 +12530,7 @@ msgstr "Propriedade de Revisão (revprop)"
 
 #. (para)
 msgid "Just as files can have properties, so can each revision in the repository. Some special revprops are added automatically when the revision is created, namely: <literal>svn:date svn:author svn:log</literal> which represent the commit date/time, the committer and the log message respectively. These properties can be edited, but they are not versioned, so any change is permanent and cannot be undone."
-msgstr ""
+msgstr "Tal como os ficheiros podem ter propriedades, assim pode cada revisão no repositório. Algumas revprops  especiais são automaticamente adicionadas quando é criada a revisão, nomeadamente: <literal>svn:date svn:author svn:log</literal> que representa a data/hora de submissão, o nome de quem submeteu e a respectiva mensagem de registo. Essas propriedades podem ser editadas, mas não estão versionadas pelo que qualquer alteração é permanente, e não poderá ser desfeita."
 
 #. (glossterm)
 msgid "SVN"
@@ -12494,19 +12538,19 @@ msgstr "SVN"
 
 #. (para)
 msgid "A frequently-used abbreviation for Subversion."
-msgstr "Abreviação de Subversion frequentement utilizada."
+msgstr "Uma abreviatura para Subversion, frequentemente utilizada."
 
 #. (para)
 msgid "The name of the Subversion custom protocol used by the <quote>svnserve</quote> repository server."
-msgstr ""
+msgstr "O nome do protocolo personalizado do Subversion, usado pelo servidor de repositório <quote>svnserve</quote>."
 
 #. (para)
 msgid "Just as <quote>Update-to-revision</quote> changes the time window of a working copy to look at a different point in history, so <quote>Switch</quote> changes the space window of a working copy so that it points to a different part of the repository. It is particularly useful when working on trunk and branches where only a few files differ. You can switch your working copy between the two and only the changed files will be transferred."
-msgstr ""
+msgstr "Tal como o <quote>Actualizar-para-revisão</quote> altera a janela temporal da cópia de trabalho, para olhar para um ponto diferente na história, o <quote>Trocar</quote> altera a janela de espaço da cópia de trabalho, para que aponte para uma parte diferente do repositório. É particularmente útil quando se está a trabalhar com o trunk e com ramos, onde apenas alguns ficheiros diferem. Podes assim trocar a tua cópia de trabalho entre esses dois e só os ficheiros alterados serão transferidos."
 
 #. (para)
 msgid "This Subversion command pulls down the latest changes from the repository into your working copy, merging any changes made by others with local changes in the working copy."
-msgstr ""
+msgstr "Este comando do Subversion adquire as últimas alterações do repositório para a tua cópia de trabalho, integrando quaisquer alterações efectuadas por outros com as alterações locais."
 
 #. (glossterm)
 msgid "Working Copy"
@@ -12514,7 +12558,7 @@ msgstr "Cópia de Trabalho"
 
 #. (para)
 msgid "This is your local <quote>sandbox</quote>, the area where you work on the versioned files, and it normally resides on your local hard disk. You create a working copy by doing a <quote>Checkout</quote> from a repository, and you feed your changes back into the repository using <quote>Commit</quote>."
-msgstr ""
+msgstr "Esta é a tua <quote>caixa de areia</quote> local, a área onde tu trabalhas nos ficheiros versionados que normalmente reside no teu disco local. Tu crias uma cópia local a partir do repositório ao efectuar o comando <quote>Checkout</quote>, e envias as tuas alterações de volta para o repositório com o comando <quote>Submeter</quote>."
 
 #. Put one translator per line, in the form of NAME <EMAIL>.
 #. (None)
@@ -12524,7 +12568,7 @@ msgstr " Paulo M. Santana Justino, Luis X. B. Mourão"
 #. Place the translation of 'translation' here.
 #. (None)
 msgid "translator-translation"
-msgstr "Tradução"
+msgstr "Tradutor-Tradução"
 
 #, fuzzy
 #~ msgid "for the log cache and revision graph"
