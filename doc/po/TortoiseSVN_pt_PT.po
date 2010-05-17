@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2010-04-21 22:39 +0000\n"
-"PO-Revision-Date: 2010-05-10 00:27-0000\n"
-"Last-Translator: Paulo Justino <paulo.justino@netcabo.pt>\n"
+"POT-Creation-Date: 2010-01-29 00:06 +0000\n"
+"PO-Revision-Date: 2010-05-17 09:26+0100\n"
+"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: Portuguese Translation Team\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1112,11 +1112,11 @@ msgstr "O TortoiseSVN não suporta o acesso <literal>file://</literal> para repo
 
 #. (para)
 msgid "Of course we also recommend that you don't use <literal>file://</literal> access at all, apart from local testing purposes. Using a server is more secure and more reliable for all but single-developer use."
-msgstr ""
+msgstr "É claro que nós também recomendamos que tu não uses, de modo algum, o acesso <literal>file://</literal> para além do uso para testes locais. Usar um servidor é muito mais seguro e mais confiável para todos os usos, excepto o desenvolvimento a solo."
 
 #. (title)
 msgid "Local Access to the Repository"
-msgstr ""
+msgstr "Acesso Local ao Repositório"
 
 #. (primary)
 msgid "Access"
@@ -1128,23 +1128,23 @@ msgstr ""
 
 #. (para)
 msgid "To access your local repository you need the path to that folder. Just remember that Subversion expects all repository paths in the form <systemitem class=\"url\">file:///C:/SVNRepository/</systemitem>. Note the use of forward slashes throughout."
-msgstr ""
+msgstr "Para aceder ao teu repositório local, precisas do caminho para essa pasta. Lembra-te que o Subversion está à espera que todos os caminhos estejam na forma <systemitem class=\"url\">file:///C:/SVNRepository/</systemitem>. Observa o uso de barras por todo o lado."
 
 #. (para)
 msgid "To access a repository located on a network share you can either use drive mapping, or you can use the UNC path. For UNC paths, the form is <systemitem class=\"url\">file://ServerName/path/to/repos/</systemitem>. Note that there are only 2 leading slashes here."
-msgstr ""
+msgstr "Para aceder a um repositório localizado numa partilha de rede, podes usar o mapeamento de unidades, ou podes usar um caminho UNC. Para caminhos UNC a forma é <systemitem class=\"url\">file://ServerName/path/to/repos/</systemitem>. Observa que só existem aqui 2 barras dianteiras."
 
 #. (para)
 msgid "Prior to SVN 1.2, UNC paths had to be given in the more obscure form <systemitem class=\"url\">file:///\\ServerName/path/to/repos</systemitem>. This form is still supported, but not recommended."
-msgstr ""
+msgstr "Antes do SVN 1.2, os caminhos UNC tinham de ser especificados numa forma mais obscura, <systemitem class=\"url\">file:///\\ServerName/path/to/repos</systemitem>. Esta forma é ainda suportada, mas não recomendada."
 
 #. (para)
 msgid "Do not create or access a Berkeley DB repository on a network share. It <emphasis>cannot</emphasis> exist on a remote file system. Not even if you have the network drive mapped to a drive letter. If you attempt to use Berkeley DB on a network share, the results are unpredictable - you may see mysterious errors right away, or it may be months before you discover that your repository database is subtly corrupted."
-msgstr ""
+msgstr "Não criar ou aceder a um repositório Berkeley DB numa partilha de rede. Ele <emphasis>não pode</emphasis> existir num sistema de ficheiros remoto. Nem mesmo se tu tens uma unidade de rede mapeada numa letra de unidade. Se tentares usar um Berkeley DB numa partilha de rede, os resultados serão inesperados - tu poderás ver de imediato erros misteriosos, ou poderão passar meses antes de descobrires que a tua base de dados do teu repositório está subtilmente corrompida. "
 
 #. (title)
 msgid "Accessing a Repository on a Network Share"
-msgstr ""
+msgstr "Aceder ao Repositório numa Partilha de Rede"
 
 #. (primary)
 msgid "Network share"
@@ -1152,35 +1152,35 @@ msgstr ""
 
 #. (para)
 msgid "Although in theory it is possible to put a FSFS repository on a network share and have multiple users access it using <literal>file://</literal> protocol, this is most definitely <emphasis>not</emphasis> recommended. In fact we would <emphasis>strongly</emphasis> discourage it, and do not support such use."
-msgstr ""
+msgstr "Embora em teoria é possível por um repositório FSFS numa partilha de rede, e ter múltiplos utilizadores a acedê-lo usando  o protocolo <literal>file://</literal>, mas isto <emphasis>não</emphasis> é definitivamente recomendável."
 
 #. (para)
 msgid "Firstly you are giving every user direct write access to the repository, so any user could accidentally delete the entire repository or make it unusable in some other way."
-msgstr ""
+msgstr "Em primeiro lugar, tu estás a dar a cada utilizador o acesso directo ao repositório, pelo que qualquer utilizador pode acidentalmente apagar todo o repositório ou inutilizá-lo de alguma forma."
 
 #. (para)
 msgid "Secondly not all network file sharing protocols support the locking that Subversion requires, so you may find your repository gets corrupted. It may not happen straight away, but one day two users will try to access the repository at the same time."
-msgstr ""
+msgstr "Em segundo lugar, nem todos os protocolos de partilha de ficheiros em rede suportam o bloqueio que o Subversion requer, pelo que podes encontrar o teu repositório corrompido. Poderá não acontecer de imediato, mas um dia dois utilizadores tentarão aceder ao repositório ao mesmo tempo."
 
 #. (para)
 msgid "Thirdly the file permissions have to be set just so. You may just about get away with it on a native Windows share, but SAMBA is particularly difficult."
-msgstr ""
+msgstr "Em terceiro lugar, as permissões dos ficheiros tem de ser configuradas como estão. Poderás, no entanto, quase dar a volta a isso numa partilha Windows nativa, mas será particularmente difícil no SAMBA."
 
 #. (para)
 msgid "<literal>file://</literal> access is intended for local, single-user access only, particularly testing and debugging. When you want to share the repository you <emphasis>really</emphasis> need to set up a proper server, and it is not nearly as difficult as you might think. Read <xref linkend=\"tsvn-serversetup\"/> for guidelines on choosing and setting up a server."
-msgstr ""
+msgstr "O acesso <literal>file://</literal> é dirigido para acesso local e de utilizador único, em particular para testes e depuração de problemas. Quando tu queres partilhar o repositório, precisarás <emphasis>realmente</emphasis> de instalar correctamente um servidor, e não é tão difícil como pensas. Consulta o <xref linkend=\"tsvn-serversetup\"/> para guias orientadoras na escolha e instalação de um servidor."
 
 #. (title)
 msgid "Repository Layout"
-msgstr ""
+msgstr "Estrutura do Repositório"
 
 #. (para)
 msgid "Before you import your data into the repository you should first think about how you want to organize your data. If you use one of the recommended layouts you will later have it much easier."
-msgstr ""
+msgstr "Antes de tu importares os teus dados para o repositório, deverás primeiro pensar em como o queres organizar. Se tu usares uma das estruturas recomendadas, mais tarde terás a tudo muito mais facilitado."
 
 #. (para)
 msgid "There are some standard, recommended ways to organize a repository. Most people create a <filename>trunk</filename> directory to hold the <quote>main line</quote> of development, a <filename>branches</filename> directory to contain branch copies, and a <filename>tags</filename> directory to contain tag copies. If a repository holds only one project, then often people create these top-level directories:"
-msgstr ""
+msgstr "Existem alguns métodos padrão e recomendados de organizar o repositório. A maioria das pessoas a pasta <filename>trunk</filename> para guardar a <quote>linha principal</quote> de desenvolvimento, uma pasta <filename>ramos</filename> para conter as cópias de ramos, e a pasta <filename>etiquetas</filename> para guardas as cópias etiquetas. Se o repositório tiver só um projecto, então frequentemente as pessoas criaram essas pastas de nível de topo:"
 
 #. (screen)
 #, no-wrap
@@ -1190,10 +1190,14 @@ msgid ""
 "/branches\n"
 "/tags\n"
 msgstr ""
+"\n"
+"/trunk\n"
+"/ramos\n"
+"/etiquetas\n"
 
 #. (para)
 msgid "If a repository contains multiple projects, people often index their layout by branch:"
-msgstr ""
+msgstr "Se o repositório conter vários projectos, as pessoas normalmente indexarão a sua estrutura por ramo:"
 
 #. (screen)
 #, no-wrap
@@ -1206,10 +1210,17 @@ msgid ""
 "/tags/paint\n"
 "/tags/calc\n"
 msgstr ""
+"\n"
+"/trunk/paint\n"
+"/trunk/calc\n"
+"/ramos/paint\n"
+"/ramos/calc\n"
+"/etiquetas/paint\n"
+"/etiquetas/calc\n"
 
 #. (para)
 msgid "...or by project:"
-msgstr ""
+msgstr "...ou por projecto:"
 
 #. (screen)
 #, no-wrap
@@ -1222,43 +1233,50 @@ msgid ""
 "/calc/branches\n"
 "/calc/tags\n"
 msgstr ""
+"\n"
+"/paint/trunk\n"
+"/paint/ramos\n"
+"/paint/etiquetas\n"
+"/calc/trunk\n"
+"/calc/ramos\n"
+"/calc/etiquetas\n"
 
 #. (para)
 msgid "Indexing by project makes sense if the projects are not closely related and each one is checked out individually. For related projects where you may want to check out all projects in one go, or where the projects are all tied together in a single distribution package, it is often better to index by branch. This way you have only one trunk to checkout, and the relationships between the sub-projects is more easily visible."
-msgstr ""
+msgstr "Indexar por projecto faz sentido, se os projectos não estão intimamente relacionados, e cada um é obtido individualmente por checkout. Para projectos relacionados onde poderás querer efectuar o checkout de todos os projectos de uma só vez, ou onde os projectos estão todos ligados num único pacote de distribuição. É normalmente melhor indexar por ramo. Deste modo tu podes ter um trunk para efectuar checkout e as relações entre subprojectos são mais facilmente visível."
 
 #. (para)
 msgid "If you adopt a top level <filename>/trunk /tags /branches</filename> approach, there is nothing to say that you have to copy the entire trunk for every branch and tag, and in some ways this structure offers the most flexibility."
-msgstr ""
+msgstr "Se adoptares por uma abordagem de um nível de topo <filename>/trunk /tags /branches</filename>, não é necessário referir que terás de copiar o trunk inteiro para cada ramo e etiqueta, e de algum modo esta estrutura oferece a maior flexibilidade."
 
 #. (para)
 msgid "For unrelated projects you may prefer to use separate repositories. When you commit changes, it is the revision number of the whole repository which changes, not the revision number of the project. Having 2 unrelated projects share a repository can mean large gaps in the revision numbers. The Subversion and TortoiseSVN projects appear at the same host address, but are completely separate repositories allowing independent development, and no confusion over build numbers."
-msgstr ""
+msgstr "Para projectos não relacionados, poderás preferir o uso de repositórios separados. Quando submetes as alterações, é o número de revisão do repositório inteiro que muda, e não o número de revisão do projecto. Ter 2 projectos não relacionados a partilhar o repositório, pode significar grandes falhas nos números de revisões. Os projectos  Subversion e TortoiseSVN aparecem no mesmo endereço de hospedeiro, mas estão completamente separados, permitindo desenvolvimentos separados, e sem confusão sobre números de construção."
 
 #. (para)
 msgid "Of course, you're free to ignore these common layouts. You can create any sort of variation, whatever works best for you or your team. Remember that whatever you choose, it's not a permanent commitment. You can reorganize your repository at any time. Because branches and tags are ordinary directories, TortoiseSVN can move or rename them however you wish."
-msgstr ""
+msgstr "Está claro que és livre para ignorar essas estruturas comuns. Tu podes criar qualquer género de variação, e o que funcionar melhor para ti e para a tua equipa. Lembra-te que o que escolheres não será um comprometimento permanente. Tu podes reorganizar, em qualquer altura, o teu repositório. Porque ramos e etiquetas são pastas comuns, o TortoiseSVN pode mover ou alterar o seu nome, quando assim o desejares."
 
 #. (para)
 msgid "Switching from one layout to another is just a matter of issuing a series of server-side moves; If you don't like the way things are organized in the repository, just juggle the directories around."
-msgstr ""
+msgstr "Trocar de uma estrutura para outra é só uma questão de executar uma série de movimentos do lado do servidor. Se não gostares do modo como as coisas estão organizadas no repositório, poderás manipular as pastas a teu modo."
 
 #. (para)
 msgid "create a new empty folder on your hard drive"
-msgstr ""
+msgstr "cria uma nova pasta vazia no teu disco rígido"
 
 #. (para)
 msgid "create your desired top-level folder structure inside that folder - don't put any files in it yet!"
-msgstr ""
+msgstr "cria a estrutura de pastas de nível de topo que desejas, dentro dessa pasta - não ponhas lá ainda nenhum ficheiro!"
 
 #. (para)
 #, fuzzy
 msgid "import this structure into the repository via a <action>right click</action> on the folder and selecting <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Import...</guimenuitem></menuchoice> This will import your temp folder into the repository root to create the basic repository layout."
-msgstr "Podes usar o comando Resolvido para ficheiros múltiplos, se clicares na pasta pai e seleccionares  <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Resolvido...</guimenuitem></menuchoice> Isto irá mostrar a caixa de diálogo listando todos os ficheiros em conflito nessa pasta, e podes seleccionar quais é queres marcar como resolvidos."
+msgstr "Importa esta estrutura para o repositório com um <action>clique com o botão direito</action> na pasta que contém esta estrutura de pastas, e seleccionando  <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Importar...</guimenuitem></menuchoice> Na caixa de diálogo importar, introduz o URL do teu repositório e clica OK. Então a tua pasta temp será importada para a raiz do repositório, para criar a estrutura básica do mesmo."
 
 #. (para)
 msgid "So if you haven't already created a basic folder structure inside your repository you should do that now. There are two ways to achieve this. If you simply want to create a <filename>/trunk /tags /branches</filename> structure, you can use the repository browser to create the three folders (in three separate commits). If you want to create a deeper hierarchy then it is simpler to create a folder structure on disk first and import it in a single commit, like this: <placeholder-1/>"
-msgstr ""
+msgstr "Então, se ainda não criaste a estrutura de pastas básica dentro do teu repositório, deverás faze-lo agora. Existem duas maneiras para o obteres. Se queres simplesmente criar a estrutura <filename>/trunk /tags /branches</filename>, tu podes usar para isso o navegador de repositório, para criar as três pastas (em três submissões separadas). Se queres criar uma hierarquia mais profunda, então é mais simples criar primeiro a estrutura de pastas em disco e importá-la numa simples submissão, assim: <placeholder-1/>"
 
 #. (para)
 msgid ""
@@ -1272,10 +1290,19 @@ msgid ""
 "/tags\n"
 "</screen>"
 msgstr ""
+"Tem em conta que o nome da pasta que estás a importar não aparecerá no repositório, só o seu conteúdo. Por exemplo, cria a seguinte estrutura de pastas:<screen>\n"
+"C:\\Temp\\New\\trunk\n"
+"C:\\Temp\\New\\ramos\n"
+"C:\\Temp\\New\\etiquetas\n"
+"</screen> Importa o <filename>C:\\Temp\\New</filename> para a raiz do repositório, que então terá o seguinte aspecto: <screen>\n"
+"/trunk\n"
+"/ramos\n"
+"/etiquetas\n"
+"</screen>"
 
 #. (title)
 msgid "Repository Backup"
-msgstr ""
+msgstr "Cópia de Segurança do Repositório"
 
 #. (primary)
 msgid "backup"
@@ -1283,11 +1310,11 @@ msgstr ""
 
 #. (para)
 msgid "Whichever type of repository you use, it is vitally important that you maintain regular backups, and that you verify the backup. If the server fails, you may be able to access a recent version of your files, but without the repository all your history is lost forever."
-msgstr ""
+msgstr "Qualquer que seja o tipo de repositório que uses é de importância vital manter cópias de segurança regulares, e que também as verifiques. Se o servidor falhar poderás ter acesso a uma versão recente dos teus ficheiros, mas sem o repositório, todo o teu histórico será perdido para sempre."
 
 #. (para)
 msgid "The simplest (but not recommended) way is just to copy the repository folder onto the backup medium. However, you have to be absolutely sure that no process is accessing the data. In this context, access means <emphasis>any</emphasis> access at all. A BDB repository is written to even when the operation only appears to require reading, such as getting status. If your repository is accessed at all during the copy, (web browser left open, WebSVN, etc.) the backup will be worthless."
-msgstr ""
+msgstr "O método mais simples (mas não recomendado) é copiar apenas a pasta do repositório para um meio de reserva. No entanto, tens de ter a certeza absoluta que não existe nenhum processo a aceder aos dados. Neste contexto, acesso  significa <emphasis>qualquer</emphasis> tipo de acesso. Um repositório BDB é escrito mesmo quando a operação parece apenas requerer leitura, como obter o estado. Se o teu repositório estiver a ser acedido de qualquer modo, durante a cópia (navegador web aberto, WebSVN, etc.), a cópia de segurança ficará inutilizada. "
 
 #. (para)
 msgid ""
@@ -1295,14 +1322,17 @@ msgid ""
 "svnadmin hotcopy path/to/repository path/to/backup --clean-logs\n"
 "</screen> to create a copy of your repository in a safe manner. Then backup the copy. The <literal>--clean-logs</literal> option is not required, but removes any redundant log files when you backup a BDB repository, which may save some space."
 msgstr ""
+"O método recomendado é correr <screen>\n"
+"svnadmin hotcopy path/to/repository path/to/backup --clean-logs\n"
+"</screen> para criar uma cópia, de maneira segura, do teu repositório. Então efectua a cópia de segurança da cópia. A opção <literal>--clean-logs</literal> não é necessária, mas remove quaisquer ficheiros de registo redundantes, quando efectuas a cópia de segurança de um repositório BDB, o que pode poupar algum espaço."
 
 #. (para)
 msgid "The <literal>svnadmin</literal> tool is installed automatically when you install the Subversion command line client. If you are installing the command line tools on a Windows PC, the best way is to download the Windows installer version. It is compressed more efficiently than the <filename>.zip</filename> version, so the download is smaller, and it takes care of setting the paths for you. You can download the latest version of the Subversion command line client from <ulink url=\"http://subversion.apache.org/getting.html\"><citetitle>http://subversion.apache.org/getting.html</citetitle></ulink>."
-msgstr ""
+msgstr "A ferramenta <literal>svnadmin</literal> é automaticamente instalada quando tu instalas o cliente de linha de comandos do Subversion. Se estás a instalar as ferramentas de linha de comandos num PC Windows, o melhor método é descarregar a versão com instalador Windows. É comprimido de modo mais eficiente do que a versão <filename>.zip</filename>, pelo que a descarga é mais pequena, e toma conta da configuração dos caminhos por ti. Tu podes descarregar a última versão do cliente de linha de comandos do Subversion a partir de <ulink url=\"http://subversion.apache.org/getting.html\"><citetitle>http://subversion.apache.org/getting.html</citetitle></ulink>."
 
 #. (title)
 msgid "Server side hook scripts"
-msgstr ""
+msgstr "Scripts de gancho de servidor"
 
 #. (primary)
 msgid "hooks"
@@ -1319,11 +1349,11 @@ msgstr ""
 
 #. (para)
 msgid "A hook script is a program triggered by some repository event, such as the creation of a new revision or the modification of an unversioned property. Each hook is handed enough information to tell what that event is, what target(s) it's operating on, and the username of the person who triggered the event. Depending on the hook's output or return status, the hook program may continue the action, stop it, or suspend it in some way. Please refer to the chapter on <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts</citetitle></ulink> in the Subversion Book for full details about the hooks which are implemented."
-msgstr ""
+msgstr "Um script de gancho é um programa disparado por algum evento no servidor, como a criação de uma nova revisão ou a modificação de uma propriedade não versionada. A cada gancho é dada informação suficiente para poder distinguir qual o evento, o alvo(s) da operação, e o nome de utilizador da pessoa que disparou o evento. Dependendo do produto dos ganchos ou estado de retorno, o programa gancho pode continua a acção, pará-la, ou suspendê-la de algum modo. Consulta ao capítulo <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts</citetitle></ulink> no livro do Subversion para todos os detalhes sobre os ganchos que estão implementados."
 
 #. (para)
 msgid "These hook scripts are executed by the server that hosts the repository. TortoiseSVN also allows you to configure client side hook scripts that are executed locally upon certain events. See <xref linkend=\"tsvn-dug-settings-hooks\"/> for more information."
-msgstr ""
+msgstr "Esses scripts de gancho são executados pelo servidor que hospeda o repositório. O TortoiseSVN também permite-te configurar scripts de gancho de cliente, que são executados localmente devido a certos eventos. Consultar <xref linkend=\"tsvn-dug-settings-hooks\"/> para mais informações."
 
 #. (para)
 msgid ""
@@ -1334,10 +1364,16 @@ msgid ""
 "exit 1\n"
 "</screen> Note that anything sent to stdout is discarded. if you want a message to appear in the Commit Reject dialog you must send it to stderr. In a batch file this is achieved using <filename>&gt;&amp;2</filename>"
 msgstr ""
+"Amostras de scripts de gancho podem ser encontrados na pasta <filename>hooks</filename> do repositório. Essas amostras de scritps são adequados para servidores Unix/Linux, mas precisam de ser modificados se o teu servidor é Windows. O gancho pode ser um ficheiro batch ou um executável. A amostra abaixo mostra um ficheiro batch que poderá ser usado para implementar um gancho pre-revprop-change. <screen>\n"
+"rem Only allow log messages to be changed.\n"
+"if \"%4\" == \"svn:log\" exit 0\n"
+"echo Property '%4' cannot be changed &gt;&amp;2\n"
+"exit 1\n"
+"</screen> Podes observar que tudo o que for enviado para o stdout é descartado. Se tu queres que uma mensagem apareça na caixa de diálogo Rejeição de Submissão, deverás enviá-la para o stderr. Num ficheiro batch isto é obtido através do uso de <filename>&gt;&amp;2</filename>"
 
 #. (title)
 msgid "Checkout Links"
-msgstr ""
+msgstr "Ligações de Checkout"
 
 #. (primary)
 msgid "checkout link"
@@ -1357,11 +1393,11 @@ msgstr ""
 
 #. (para)
 msgid "If you want to make your Subversion repository available to others you may want to include a link to it from your website. One way to make this more accessible is to include a <firstterm>checkout link</firstterm> for other TortoiseSVN users."
-msgstr ""
+msgstr "Se quiseres tornar o teu repositório Subversion disponível para outros, poderás querer incluir uma ligação para ele a partir do teu sítio web. Uma maneira de tornar isto mais acessível é incluir uma <firstterm>ligação de checkout</firstterm> para outros utilizadores TortoiseSVN."
 
 #. (para)
 msgid "When you install TortoiseSVN, it registers a new <literal>tsvn:</literal> protocol. When a TortoiseSVN user clicks on such a link, the checkout dialog will open automatically with the repository URL already filled in."
-msgstr ""
+msgstr "Quando instalas o TortoiseSVN, este regista um novo protocolo <literal>tsvn:</literal>. Quando o utilizador do TortoiseSVN clica em tal ligação, uma caixa de diálogo de checkout ir-se-á abrir automaticamente, com o URL do repositório já preenchido."
 
 #. (programlisting)
 #, no-wrap
@@ -1373,7 +1409,7 @@ msgstr ""
 
 #. (para)
 msgid "To include such a link in your own html page, you need to add code which looks something like this: <placeholder-1/>"
-msgstr ""
+msgstr "Para incluíres tal ligação na rua própria página de html, necessitas de adiciona o seguinte código: <placeholder-1/>"
 
 #. (programlisting)
 #, no-wrap
@@ -1385,7 +1421,7 @@ msgstr ""
 
 #. (para)
 msgid "Of course it would look even better if you included a suitable picture. You can use the <ulink url=\"http://tortoisesvn.tigris.org/images/TortoiseCheckout.png\"><citetitle>TortoiseSVN logo</citetitle></ulink> or you can provide your own image. <placeholder-1/>"
-msgstr ""
+msgstr "É claro que terá melhor aspecto se incluíres uma imagem adequada. Poderás usar o <ulink url=\"http://tortoisesvn.tigris.org/images/TortoiseCheckout.png\"><citetitle>logo TortoiseSVN</citetitle></ulink> ou podes providênciar a tua própria imagem. <placeholder-1/>"
 
 #. (programlisting)
 #, no-wrap
@@ -1397,67 +1433,67 @@ msgstr ""
 
 #. (para)
 msgid "You can also make the link point to a specific revision, for example <placeholder-1/>"
-msgstr ""
+msgstr "Também podes fazer com que a ligação aponte para uma revisão específica, por exemplo <placeholder-1/>"
 
 #. (title)
 msgid "Accessing the Repository"
-msgstr ""
+msgstr "Aceder ao Repositório"
 
 #. (para)
 msgid "To use TortoiseSVN (or any other Subversion client), you need a place where your repositories are located. You can either store your repositories locally and access them using the <literal>file://</literal> protocol or you can place them on a server and access them with the <literal>http://</literal> or <literal>svn://</literal> protocols. The two server protocols can also be encrypted. You use <literal>https://</literal> or <literal>svn+ssh://</literal>, or you can use <literal>svn://</literal> with SASL."
-msgstr ""
+msgstr "Para usar o TortoiseSVN (ou qualquer outro cliente Subversion) necessitas de um local para os repositórios. Podes armazená-los localmente e aceder a eles usando o protocolo <literal>file://</literal>, ou podes colocá-los num servidor e aceder a eles com os protocolos literal>http://</literal> ou <literal>svn://</literal>. Estes dois protocolos de ligação ao servidor podem também ser encriptados. Neste caso usarás <literal>https://</literal> ou <literal>svn+ssh://</literal>, ou poderás usar <literal>svn://</literal> com SASL."
 
 #. (para)
 msgid "If you are using a public hosting service such as <ulink url=\"http://code.google.com/hosting/\"><citetitle>Google Code</citetitle></ulink> or your server has already been setup by someone else then there is nothing else you need to do. Move along to <xref linkend=\"tsvn-dug\"/>."
-msgstr ""
+msgstr "Se estiveres a usar um serviço publico de alojamento como o  <ulink url=\"http://code.google.com/hosting/\"><citetitle>Google Code</citetitle></ulink> ou o teu servidor já foi configurado por alguém, então não precisas de fazer mais nada. Segue directamente para <xref linkend=\"tsvn-dug\"/>."
 
 #. (para)
 msgid "If you don't have a server and you work alone, or if you are just evaluating Subversion and TortoiseSVN in isolation, then local repositories are probably your best choice. Just create a repository on your own PC as described earlier in <xref linkend=\"tsvn-repository\"/>. You can skip the rest of this chapter and go directly to <xref linkend=\"tsvn-dug\"/> to find out how to start using it."
-msgstr ""
+msgstr "Se não tens um servidor e trabalhas a solo, ou se estás a avaliar o Subversion e o TortoiseSVN isoladamente, então os repositórios locais serão, provavelmente, a tua melhor escolha. Cria apenas um repositório no teu PC, como descrito anteriormente em <xref linkend=\"tsvn-repository\"/>. Podes saltar o resto deste capítulo e ir directamente para o <xref linkend=\"tsvn-dug\"/> para descobrires como começar a usá-lo."
 
 #. (para)
 msgid "If you were thinking about setting up a multi-user repository on a network share, think again. Read <xref linkend=\"tsvn-repository-local-share\"/> to find out why we think this is a bad idea. Setting up a server is not as hard as it sounds, and will give you better reliability and probably speed too."
-msgstr ""
+msgstr "Se estavas a pensar em instalares um repositório multi-utilizador numa partilha de rede, pensa outra vez. Consulta <xref linkend=\"tsvn-repository-local-share\"/> para descobrires porque é que nós pensamos que é uma má ideia. Instalar um servidor não é tão difícil como pensas, e dar-te-á mais fiabilidade e provavelmente também velocidade."
 
 #. (para)
 msgid "The next sections are a step-by-step guide on how you can set up such a server on a Windows machine. Of course you can also set up a server on a Linux machine, but that is beyond the scope of this guide. More detailed information on the Subversion server options, and how to choose the best architecture for your situation, can be found in the Subversion book under <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.serverconfig.html\"><citetitle>Server Configuration</citetitle></ulink>."
-msgstr ""
+msgstr "AS próximas secções são um guia passo-a-passo em como instalar tal servidor numa máquina Windows. É claro que também podes instalar o servidor numa máquina Linux, mas isso está para além do âmbito deste guia. Mais informação sobre as opções do servidor Subversion, e em como escolher a melhor arquitectura para a tua situação, podem ser encontradas no livro do Subversion, em <ulink url=\"http://svnbook.red-bean.com/en/1.5/svn.serverconfig.html\"><citetitle>Server Configuration</citetitle></ulink>."
 
 #. (title)
 msgid "Svnserve Based Server"
-msgstr ""
+msgstr "Servidor Baseado em Svnserve "
 
 #. (para)
 msgid "Subversion includes Svnserve - a lightweight stand-alone server which uses a custom protocol over an ordinary TCP/IP connection. It is ideal for smaller installations, or where a full blown Apache server cannot be used."
-msgstr ""
+msgstr "O Subversion inclui o Svnserve  - um servidor ligeiro e independente que usa um protocolo personalizado sobre uma vulgar ligação TCP/IP. É ideal para instalações pequenas, ou onde não pode ser usado um servidor Apache completo."
 
 #. (para)
 msgid "In most cases svnserve is easier to setup and runs faster than the Apache based server, although it doesn't have some of the advanced features. And now that SASL support is included it is easy to secure as well."
-msgstr ""
+msgstr "Na maioria dos casos o svnserve é mais fácil de instalar e corre mais rápido que um servidor baseado em Apache, apesar de que não terá algumas das funcionalidades avançadas. E agora que o suporte SASL está incluído é também mais fácil torná-lo seguro."
 
 #. (title)
 msgid "Installing svnserve"
-msgstr "Instalar svnserve"
+msgstr "Instalar o svnserve"
 
 #. (para)
 msgid "Get the latest version of Subversion from <ulink url=\"http://subversion.apache.org/getting.html\"><citetitle>http://subversion.apache.org/getting.html</citetitle></ulink>. Alternatively get a pre-packaged installer from CollabNet at <ulink url=\"http://www.collab.net/downloads/subversion\"><citetitle>http://www.collab.net/downloads/subversion</citetitle></ulink>. This installer will setup svnserve as a Windows service, and also includes some of the tools you need if you are going to use SASL for security."
-msgstr ""
+msgstr "Obter a última versão do Subversion a partir de <ulink url=\"http://subversion.apache.org/getting.html\"><citetitle>http://subversion.apache.org/getting.html</citetitle></ulink>. Ou em alternativa obter um instalador pré-embalado a partir do site CollabNet em <ulink url=\"http://www.collab.net/downloads/subversion\"><citetitle>http://www.collab.net/downloads/subversion</citetitle></ulink>. O instalador irá instalar o svnserve como um serviço Windows, e irá também incluir algumas das ferramentas que necessitarás se fores usar o SASL por razões de segurança."
 
 #. (para)
 msgid "If you already have a version of Subversion installed, and svnserve is running, you will need to stop it before continuing."
-msgstr ""
+msgstr "Se já tens uma versão do Subversion instalada, e o svnserve está a correr, necessitarás de o parar antes de continuares."
 
 #. (para)
 msgid "Run the Subversion installer. If you run the installer on your server (recommended) you can skip step 4."
-msgstr ""
+msgstr "Corre o instalador do Subversion. Se estiveres a correr o instalador no teu servidor (o que é recomendado) podes saltar o passo 4."
 
 #. (para)
 msgid "Open the windows-explorer, go to the installation directory of Subversion (usually <filename>C:\\Program Files\\Subversion</filename>) and in the <filename>bin</filename> directory, find the files <filename>svnserve.exe</filename>, <filename>intl3_svn.dll</filename>, <filename>libapr.dll</filename>, <filename>libapriconv.dll</filename>, <filename>libapriutil.dll</filename>, <filename>libdb*.dll</filename>, <filename>libeay32.dll</filename> and <filename>ssleay32.dll</filename> - copy these files, or just copy all of the <filename>bin</filename> directory, into a directory on your server e.g. <filename>c:\\svnserve</filename>"
-msgstr ""
+msgstr "Abre o explorador do Windows, vai para a pasta de instalação do Subversion (normalmente <filename>C:\\Program Files\\Subversion</filename>) e na pasta <filename>bin</filename>, encontra os ficheiros <filename>svnserve.exe</filename>, <filename>intl3_svn.dll</filename>, <filename>libapr.dll</filename>, <filename>libapriconv.dll</filename>, <filename>libapriutil.dll</filename>, <filename>libdb*.dll</filename>, <filename>libeay32.dll</filename> e <filename>ssleay32.dll</filename> - copiar esses ficheiros, ou copia apenas toda a pasta <filename>bin</filename> para uma pasta no teu servidor, e.g.  <filename>c:\\svnserve</filename>"
 
 #. (title)
 msgid "Running svnserve"
-msgstr "Executar svnserver"
+msgstr "Executar o svnserver"
 
 #. (para)
 msgid ""
@@ -1465,14 +1501,17 @@ msgid ""
 "svnserve.exe --daemon\n"
 "</screen> svnserve will now start waiting for incoming requests on port 3690. The --daemon switch tells svnserve to run as a daemon process, so it will always exist until it is manually terminated."
 msgstr ""
+"Agora que o svnserve está instalado, precisas de o correr no teu servidor. A abordagem mais simples é correr o seguinte a partir da shell do DOS, ou criar um atalho do Windows: <screen>\n"
+"svnserve.exe --daemon\n"
+"</screen> o svnserve irá arrancar à espera de pedidos na porta 3690. O parâmetro --daemon indica ao svnserve para correr como um processo daemon, para que exista sempre até ser terminado manualmente."
 
 #. (para)
 msgid "If you have not yet created a repository, follow the instructions given with the Apache server setup <xref linkend=\"tsvn-serversetup-apache-4\"/>."
-msgstr ""
+msgstr "Se ainda não criaste um repositório, segue as instruções dadas com a configuração do servidor Apache  <xref linkend=\"tsvn-serversetup-apache-4\"/>."
 
 #. (para)
 msgid "To test that svnserve is working, use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Repo-Browser</guimenuitem></menuchoice> to view a repository."
-msgstr ""
+msgstr "Para testar se o svnserve está a funcionar, usa o <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Naveguador de repositório</guimenuitem></menuchoice> para visualizares o repositório."
 
 #. (para)
 msgid ""
@@ -1480,6 +1519,9 @@ msgid ""
 "svn://localhost/repos/TestRepo\n"
 "</screen> when prompted by the repo browser."
 msgstr ""
+"Assumindo que o teu repositório está localizado em <filename>c:\\repos\\TestRepo</filename>, e o teu servidor chama-se <filename>localhost</filename>, introduz: <screen>\n"
+"svn://localhost/repos/TestRepo\n"
+"</screen> quando fores solicitado pelo navegador de repositório."
 
 #. (para)
 msgid ""
@@ -1491,18 +1533,25 @@ msgid ""
 "svn://localhost/TestRepo\n"
 "</screen> Note that the --root switch is also needed if your repository is located on a different partition or drive than the location of svnserve on your server."
 msgstr ""
+"Podes também aumentar a segurança e poupar tempo a introduzir URLs com o svnserve usando o parâmetro --root para indicares a localização raiz e restringir o acesso a determinada pasta no servidor: <screen>\n"
+"svnserve.exe --daemon --root drive:\\path\\to\\repository\\root\n"
+"</screen> Usando o teste prévio como guia, o svnserve irá agora correr como: <screen>\n"
+"svnserve.exe --daemon --root c:\\repos\n"
+"</screen> E no TortoiseSVN o nosso URL do navegador de repositório está agora encurtado para: <screen>\n"
+"svn://localhost/TestRepo\n"
+"</screen> Observa que o parâmetro --root é também preciso no caso de o teu repositório estar localizado numa partição ou unidade diferente, da localização do svnserve no teu servidor."
 
 #. (para)
 msgid "Svnserve will service any number of repositories. Just locate them somewhere below the root folder you just defined, and access them using a URL relative to that root."
-msgstr ""
+msgstr "O svnserve irá servir um número qualquer de repositórios. Coloca-os apenas sobre a pasta raiz que acabaste de definir, a acede a eles usando um URL relativo a essa raiz."
 
 #. (title)
 msgid "Run svnserve as a Service"
-msgstr "Executar svnserve como um Serviço"
+msgstr "Executar o svnserve como um Serviço"
 
 #. (para)
 msgid "Running svnserve as a user is usually not the best way. It means always having a user logged in on your server, and remembering to restart it after a reboot. A better way is to run svnserve as a windows service. Starting with Subversion 1.4, svnserve can be installed as a native windows service."
-msgstr ""
+msgstr "Correr o svnserve como utilizador não é normalmente a melhor abordagem. Isso significa ter um utilizador ligado no teu servidor, e lembra-lo de o voltar a arrancar após um reboot. A melhor abordagem é correr o svnserve como um serviço Windows. A partir do Subversion 1.4, o svnserve pode ser instalado como um serviço Windows nativo."
 
 #. (para)
 msgid ""
