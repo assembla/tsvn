@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
-"POT-Creation-Date: 2009-11-16 07:38 +0000\n"
-"PO-Revision-Date: 2010-05-10 09:56+0100\n"
-"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
+"POT-Creation-Date: 2010-01-29 00:06 +0000\n"
+"PO-Revision-Date: 2010-06-13 20:55-0300\n"
+"Last-Translator: Augusto Wloch <augustowloch@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4601,7 +4601,7 @@ msgstr "Dado que el diálogo de registro le muestra el registro desde HEAD, no d
 
 #. (para)
 msgid "When you show the log for a folder the revision highlighted is the highest revision found anywhere within that folder, which requires a crawl of the working copy. This can be a slow operation for large working copies, and the log messages are not displayed until the crawl completes. If you want to disable or limit this feature you need to set a registry key <literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> as described in <xref linkend=\"tsvn-dug-settings-registry\"/>."
-msgstr ""
+msgstr "Cuando se muestra el registro de una carpeta, la revisión resaltada es la máxima revisión encontrada dentro de la carpeta, lo cual requiere una busqueda en la copia de trabajo. Esto puede ser una operación lenta cuando se cuenta con muchas copias de trabajo, y el registro no se muestra hasta que se haya completado la operación. Si desea deshabilitar o limitar esta característica debera asignar un valor a la clave de registro<literal>HKCU\\Software\\TortoiseSVN\\RecursiveLogRev</literal> tal como se describe en <xref linkend=\"tsvn-dug-settings-registry\"/>."
 
 #. (title)
 msgid "Merge Tracking Features"
@@ -4772,19 +4772,16 @@ msgid "Offline Mode"
 msgstr "Modo sin conexión"
 
 #. (title)
-#, fuzzy
 msgid "Go Offline Dialog"
 msgstr "Modo sin conexión"
 
 #. (para)
-#, fuzzy
 msgid "<placeholder-1/> If the server is not reachable, and you have log caching enabled you can use the log dialog and revision graph in offline mode. This uses data from the cache, which allows you to continue working although the information may not be up-to-date or even complete."
-msgstr "Si no se puede alcanzar el servidor, y tiene habilitado el caché de registro, puede utilizar el diálogo de registro y el gráfico de revisiones en modo sin conexión. Esto utiliza la información de la caché, lo que le permite continuar trabajando aunqu ela información puede no estar actualizada o incluso completa."
+msgstr "<placeholder-1/>Si no se puede alcanzar el servidor, y tiene habilitado el caché de registro, puede utilizar el diálogo de registro y el gráfico de revisiones en modo sin conexión. Esto utiliza la información de la caché, lo que le permite continuar trabajando aunque la información puede no estar actualizada o incluso completa."
 
 #. (term)
-#, fuzzy
 msgid "Offline for now"
-msgstr "Modo sin conexión"
+msgstr "Sin conexión por ahora"
 
 #. (para)
 msgid "Complete the current operation in offline mode, but retry the repository next time log data is requested."
@@ -4807,9 +4804,8 @@ msgid "If you don't want to continue the operation with possibly stale data, jus
 msgstr "Si no desea continuar la operación con datos posiblemente antiguos, simplemente cancele."
 
 #. (para)
-#, fuzzy
 msgid "Here you have three options: <placeholder-1/>"
-msgstr "Crea un repositorio en <placeholder-1/>"
+msgstr "Existen tres opciones: <placeholder-1/>"
 
 #. (para)
 msgid "The <guilabel>Make this the default</guilabel> checkbox prevents this dialog from re-appearing and always picks the option you choose next. You can still change (or remove) the default after doing this from <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Settings</guimenuitem></menuchoice>."
@@ -7199,18 +7195,16 @@ msgid "The graph is normally restricted to showing branch points, but it is ofte
 msgstr "El gráfico normalmente se restringe para mostrar los puntos de ramas, pero a menudo es útil poder ver las revisiones HEAD respectivas de cada rama. Si selecciona <guilabel>Mostrar revisiones HEAD</guilabel>, cada nodo de revisión HEAD se mostrará como una elipse. Tenga en cuenta que HEAD aquí hace referencia a la última revisión confirmada en esa ruta, no a la revisión HEAD del repositorio."
 
 #. (term)
-#, fuzzy
 msgid "Working copy revision"
-msgstr "Revisión actual de la copia de trabajo"
+msgstr "Revisión de la copia de trabajo"
 
 #. (para)
 msgid "If you invoked the revision graph from a working copy, you can opt to show the BASE revision on the graph using <guilabel>Show WC revision</guilabel>, which marks the BASE node with a bold outline."
 msgstr "Si ha invocado el gráfico de revisiones desde una copia de trabajo, puede optar por mostrar la revisión BASE del gráfico utilizando <guilabel>Mostrar revisión copia de trabajo</guilabel>, que marca el nodo BASE con un borde remarcado."
 
 #. (term)
-#, fuzzy
 msgid "Modified working copy"
-msgstr "copia de trabajo"
+msgstr "Copia de trabajo modificada"
 
 #. (para)
 msgid "If you invoked the revision graph from a working copy, you can opt to show an additional node representing your modified working copy using <guilabel>Show WC modifications</guilabel>. This is an elliptical node with a bold outline in red by default."
@@ -7330,9 +7324,8 @@ msgid "Hides paths which are no longer present at the HEAD revision of the repos
 msgstr "Oculta las rutas que ya no están presentes en la revisión HEAD del repositorio, por ejemplo ramas eliminadas."
 
 #. (term)
-#, fuzzy
 msgid "Hide unchanged branches"
-msgstr "Ocultar ramas no utilizadas"
+msgstr "Ocultar ramas no modificadas"
 
 #. (para)
 #, fuzzy
@@ -7414,17 +7407,16 @@ msgid "You can also merge changes in the selected revision(s) into a different w
 msgstr "También puede fusionar cambios de la(s) revision(es) seleccionada(s) en una copia de trabajo distinta. Un diálogo de selección de carpeta le permitirá elegir la copia de trabajo donde desea fusionar, pero después de eso no hay diálogo de confirmación, ni oportunidad de probar la fusión sin ejecutarla realmente. Es una buena idea fusionar en una copia de trabajo sin cambios, ¡y así poder revertir los cambios si no funcionan! Esta es una funcionalidad útil si desea fusionar las revisiones seleccionadas de una rama a otra."
 
 #. (title)
-#, fuzzy
 msgid "Learn to Read the Revision Graph"
-msgstr "Un gráfico de revisiones"
+msgstr "Aprenda a leer el Gráfico de Revisiones"
 
 #. (para)
 msgid "First-time users may be surprised by the fact that the revision graph shows something that does not match the user's mental model. If a revision changes multiple copies or branches of a file or folder, for instance, then there will be multiple nodes for that single revision. It is a good practice to start with the leftmost options in the toolbar and customize the graph step-by-step until it comes close to your mental model."
-msgstr ""
+msgstr "Los nuevos usuarios pueden sorprenderse al notar que el gráfico de la revisión no coinicide con lo que se imaginaba o esperaba. Si una revision modifica varias copias o ramas de un archivo o carpeta, en ese caso se veran varios nodos para esa revisión. Es un buen hábito comenzar utilizando las opciones que se encuentran mas a la izquierda en la barra de herramientas y personalizarel grafico paso a paso hasta que se vuelva mas parecido a lo que el usuario espera."
 
 #. (para)
 msgid "All filter options try lose as little information as possible. That may cause some nodes to change their color, for instance. Whenever the result is unexpected, undo the last filter operation and try to understand what is special about that particular revision or branch. In most cases, the initially expected outcome of the filter operation would either be inaccurate or misleading."
-msgstr ""
+msgstr "Todas las opciones de filtro intentan perder la menor cantidad de información posible. Esto puede causar eventualmente, que algunos nodos pierdan su color. Cuando el resultado sea inesperado, deshaga la ultima operacion de filtrado e intente comprender que es lo extraordinario en la revisión o ramar particular. En la mayoría de los casos, la inicial salida inesperada de la operación de filtrado, será imprecisa y/o errónea."
 
 #. (para)
 msgid "If you want to check the server again for newer information, you can simply refresh the view using <keycap>F5</keycap>. If you are using the log cache (enabled by default), this will check the repository for newer commits and fetch only the new ones. If the log cache was in offline mode, this will also attempt to go back online."
@@ -7460,7 +7452,7 @@ msgstr "<graphic fileref=\"../images/RevGraphJoin.png\"/> Pulse en el botón cí
 
 #. (para)
 msgid "Click on the graph background for the main context menu, which offers options to <guilabel>Expand all</guilabel> and <guilabel>Join all</guilabel>. If no branch has been collapsed or split, the context menu will not be shown."
-msgstr ""
+msgstr "Haga clic en el fondo del gráfico para acceder al menú contextual principal, el cual ofrece opciones para <guilabel>Expandir todo</guilabel> y <guilabel>Unir todo</guilabel>. Si no se dividió o colapsó ninguna rama, el menú contextual no se mostrará."
 
 #. (title)
 msgid "Exporting a Subversion Working Copy"
@@ -9354,9 +9346,8 @@ msgid "To show the command line parameters passed from the shell extension to To
 msgstr "Para mostrar los parámetros de línea de comandos pasados desde la extensión shell a TortoiseProc.exe cree una clave <literal>DWORD</literal> con valor 1 en <literal>HKCU\\Software\\TortoiseSVN\\Debug</literal>."
 
 #. (term)
-#, fuzzy
 msgid "Context Menu Icons"
-msgstr "Menús contextuales"
+msgstr "Iconos del Menú contextual"
 
 #. (para)
 #, fuzzy
@@ -10186,26 +10177,11 @@ msgstr "IBugtraqProvider"
 
 #. (para)
 msgid "To get a tighter integration with issue trackers than by simply using the <literal>bugtraq:</literal> properties, TortoiseSVN can make use of COM plugins. With such plugins it is possible to fetch information directly from the issue tracker, interact with the user and provide information back to TortoiseSVN about open issues, verify log messages entered by the user and even run actions after a successful commit to e.g, close an issue."
-msgstr ""
-"Para lograr una integración más compacta con herramientas de seguimiento de "
-"problemas, que la lograda simplemente usando las propiedades "
-"<literal>bugtraq:</literal>, TortoiseSVN puede usar extensiones COM. Con "
-"estas extensiones es posible acceder a información directamente en el "
-"seguidor de problemas, interactuar con el usuario y proveer información a "
-"TortoiseSVN acerca de problemas no resueltos, verificar mensajes de registro "
-"introducidos por el usuario y hasta ejecutar acciones luego de una "
-"confirmación exitosa para, por ejemplo, cerrar un problema."
+msgstr "Para lograr una integración más compacta con herramientas de seguimiento de problemas, que la lograda simplemente usando las propiedades <literal>bugtraq:</literal>, TortoiseSVN puede usar extensiones COM. Con estas extensiones es posible acceder a información directamente en el seguidor de problemas, interactuar con el usuario y proveer información a TortoiseSVN acerca de problemas no resueltos, verificar mensajes de registro introducidos por el usuario y hasta ejecutar acciones luego de una confirmación exitosa para, por ejemplo, cerrar un problema."
 
 #. (para)
 msgid "We can't provide information and tutorials on how you have to implement a COM object in your preferred programming language, but we have example plugins in C++/ATL and C# in our repository in the <filename>contrib/issue-tracker-plugins</filename> folder. In that folder you can also find the required include files you need to build your plugin. (<xref linkend=\"tsvn-preface-source\"/> explains how to access the repository)."
-msgstr ""
-"Nosotros no podemos proveer información y tutoriales acerca de como "
-"implementar un objeto COM en su lenguaje favorito, pero sí tenemos ejemplos "
-"de extensiones en C++/ATL y C# en nuestro repositorio in el directiorio "
-"<filename>contrib/issue-tracker-plugins</filename>. En ese directorio usted "
-"tambien puede encontrar los archivos requeridos para compilar su extensión. "
-" (<xref linkend=\"tsvn-preface-source\"/> explica como acceder al "
-"repositorio)."
+msgstr "Nosotros no podemos proveer información y tutoriales acerca de como implementar un objeto COM en su lenguaje favorito, pero sí tenemos ejemplos de extensiones en C++/ATL y C# en nuestro repositorio in el directiorio <filename>contrib/issue-tracker-plugins</filename>. En ese directorio usted tambien puede encontrar los archivos requeridos para compilar su extensión.  (<xref linkend=\"tsvn-preface-source\"/> explica como acceder al repositorio)."
 
 #. (title)
 msgid "The IBugtraqProvider interface"
@@ -10246,20 +10222,7 @@ msgstr ""
 
 #. (para)
 msgid "<placeholder-1/> This method is called from the settings dialog where the user can add and configure the plugin. The <literal>parameters</literal> string can be used by a plugin to get additional required information, e.g., the URL to the issue tracker, login information, etc. The plugin should verify the <literal>parameters</literal> string and show an error dialog if the string is not valid. The <literal>hParentWnd</literal> parameter should be used for any dialog the plugin shows as the parent window. The plugin must return TRUE if the validation of the <literal>parameters</literal> string is successful. If the plugin returns FALSE, the settings dialog won't allow the user to add the plugin to a working copy path."
-msgstr ""
-"<placeholder-1> Este método es llamado desde el diálogo de configuración en el cual el "
-"usuario puede agregar y configurar la extensión. Los "
-"<literal>parámetros</literal> string pueden ser utilizados por la extensión "
-"para obtener información adicional requerida, ej., la URL al seguimiento de "
-"tareas, información de identificación, etc. La extensión debería verificar "
-"los <literal>parámetros</literal> string y mostrar un diálogo de error si la "
-"cadena de caracteres no es válida. El parámetro "
-"<literal>hParentWnd</literal> debería ser utilizado para cualquier diálogo "
-"que la extensión muestre como si fuese la ventana principal. La extensión "
-"debe retornar TRUE si la validación de los <literal>parámetros</literal> "
-"string es exitosa. Si la extensión retorna FALSE, el diálogo de "
-"configuración no le permitirá al usuario agregar la extensión a una ruta de "
-"una copia de trabajo."
+msgstr "<placeholder-1> Este método es llamado desde el diálogo de configuración en el cual el usuario puede agregar y configurar la extensión. Los <literal>parámetros</literal> string pueden ser utilizados por la extensión para obtener información adicional requerida, ej., la URL al seguimiento de tareas, información de identificación, etc. La extensión debería verificar los <literal>parámetros</literal> string y mostrar un diálogo de error si la cadena de caracteres no es válida. El parámetro <literal>hParentWnd</literal> debería ser utilizado para cualquier diálogo que la extensión muestre como si fuese la ventana principal. La extensión debe retornar TRUE si la validación de los <literal>parámetros</literal> string es exitosa. Si la extensión retorna FALSE, el diálogo de configuración no le permitirá al usuario agregar la extensión a una ruta de una copia de trabajo."
 
 #. (programlisting)
 #, no-wrap
@@ -10295,12 +10258,7 @@ msgstr ""
 
 #. (para)
 msgid "<placeholder-1/> The plugin can provide a string here which is used in the TortoiseSVN commit dialog for the button which invokes the plugin, e.g., \"Choose issue\" or \"Select ticket\". Make sure the string is not too long, otherwise it might not fit into the button. If the method returns an error (e.g., <literal>E_NOTIMPL</literal>), a default text is used for the button."
-msgstr "<placeholder-1> La extensión puede proveer un string aquí que sera utilizado en el diálogo "
-"de actualización del TortoiseSVN para el botón que invoca a la extensión, "
-"ej., \"Elija tema\" o \"Seleccione tiquet\". Asegúrese de que el string no sea "
-"demasiado largo, de lo contrario podría no caber en el botón. Si el método "
-"devuelve un error (ej., <literal>E_NOTIMPL</literal>), un texto por defecto "
-"será utilizado para el botón."
+msgstr "<placeholder-1> La extensión puede proveer un string aquí que sera utilizado en el diálogo de actualización del TortoiseSVN para el botón que invoca a la extensión, ej., \"Elija tema\" o \"Seleccione tiquet\". Asegúrese de que el string no sea demasiado largo, de lo contrario podría no caber en el botón. Si el método devuelve un error (ej., <literal>E_NOTIMPL</literal>), un texto por defecto será utilizado para el botón."
 
 #. (programlisting)
 #, no-wrap
@@ -10503,13 +10461,7 @@ msgstr "Dado que el desarrollo de TortoiseSVN es continuo, a veces es complicado
 
 #. (para)
 msgid "We also maintain a project <ulink url=\"http://issues.tortoisesvn.net\"><citetitle>Issue Tracker</citetitle></ulink> which tells you about some of the things we have on our To-Do list, and bugs which have already been fixed. If you think you have found a bug, or want to request a new feature, check here first to see if someone else got there before you."
-msgstr ""
-"También mantenemos un <ulink "
-"url=\"http://issues.tortoisesvn.net\"><citetitle>Gestor de "
-"incidencias</citetitle></ulink> que le puede informar de algunas de las "
-"cosas que tenemos en nuestra lista de tareas pendientes, y errores que ya "
-"han sido corregidos. Si cree que ha encontrado un error, o quiere pedir una "
-"nueva funcionalidad, mire aquí primero para ver si alguien se le adelantó."
+msgstr "También mantenemos un <ulink url=\"http://issues.tortoisesvn.net\"><citetitle>Gestor de incidencias</citetitle></ulink> que le puede informar de algunas de las cosas que tenemos en nuestra lista de tareas pendientes, y errores que ya han sido corregidos. Si cree que ha encontrado un error, o quiere pedir una nueva funcionalidad, mire aquí primero para ver si alguien se le adelantó."
 
 #. (para)
 msgid "If you have a question which is not answered anywhere else, the best place to ask it is on one of the mailing lists. <email>users@tortoisesvn.tigris.org</email> is the one to use if you have questions about using TortoiseSVN. If you want to help out with the development of TortoiseSVN, then you should take part in discussions on <email>dev@tortoisesvn.tigris.org</email>."
