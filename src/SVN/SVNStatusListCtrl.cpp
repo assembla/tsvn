@@ -3320,6 +3320,7 @@ void CSVNStatusListCtrl::OnContextMenuList(CWnd * pWnd, CPoint point)
 						// and update their status
 						POSITION pos = GetFirstSelectedItemPosition();
 						int index;
+                        int nListItems = GetItemCount();
 						while ((index = GetNextSelectedItem(pos)) >= 0)
 						{
 							FileEntry * e = GetListEntry(index);
@@ -3327,8 +3328,29 @@ void CSVNStatusListCtrl::OnContextMenuList(CWnd * pWnd, CPoint point)
 							e->propstatus = svn_wc_status_none;
 							e->status = svn_wc_status_added;
 							SetEntryCheck(e,index,true);
-						}
-					}
+
+                            const CTSVNPath& folderpath = entry->path;
+                            for (int parentindex = 0; parentindex < nListItems; ++parentindex)
+                            {
+                                FileEntry * testEntry = GetListEntry(parentindex);
+                                ASSERT(testEntry != NULL);
+                                if (testEntry == NULL)
+                                    continue;
+                                if (!testEntry->IsVersioned())
+                                {
+                                    if (testEntry->path.IsAncestorOf(folderpath) && (!testEntry->path.IsEquivalentTo(folderpath)))
+                                    {
+                                        testEntry->textstatus = svn_wc_status_added;
+                                        testEntry->propstatus = svn_wc_status_none;
+                                        testEntry->status = svn_wc_status_added;
+                                        if (!testEntry->checked)
+                                            m_nSelected++;
+                                        SetEntryCheck(testEntry, parentindex, true);
+                                    }
+                                }
+                            }
+                        }
+                    }
 					else
 					{
 						CMessageBox::Show(m_hWnd, svn.GetLastErrorMessage(), _T("TortoiseSVN"), MB_ICONERROR);
