@@ -3336,7 +3336,7 @@ void CSVNStatusListCtrl::OnContextMenuList(CWnd * pWnd, CPoint point)
                                 ASSERT(testEntry != NULL);
                                 if (testEntry == NULL)
                                     continue;
-                                if (!testEntry->IsVersioned())
+                                if ((testEntry->status == svn_wc_status_none)||(testEntry->status == svn_wc_status_unversioned))
                                 {
                                     if (testEntry->path.IsAncestorOf(folderpath) && (!testEntry->path.IsEquivalentTo(folderpath)))
                                     {
