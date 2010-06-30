@@ -9,7 +9,7 @@
 # $Rev$
 #
 # Authors:
-# Dongsheng Song <dongsheng.song@gmail.com>, 2006-2009
+# Dongsheng Song <dongsheng.song@gmail.com>, 2006-2010
 # NetCobra <netcobra@gmail.com>
 # Cecil Sheng <zcecil@csie.org>
 # Xingyu.Wang <xingyu.wang@gmail.com>
@@ -56,9 +56,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2010-03-08 09:11+0100\n"
-"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
+"POT-Creation-Date: 2010-02-22 17:12:15 +0800\n"
+"PO-Revision-Date: 2010-06-30 14:55+0800\n"
+"Last-Translator: Dongsheng Song <dongsheng.song@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -528,7 +528,7 @@ msgstr "删除(保留本地副本)(&D)"
 
 #. Resource IDs: (101)
 msgid "&Delete..."
-msgstr "删除(&D)"
+msgstr "删除(&D)..."
 
 #. Resource IDs: (12)
 msgid "&Diff"
@@ -2502,7 +2502,7 @@ msgstr "完毕"
 
 #. Resource IDs: (236)
 msgid "Configure Hook Scripts"
-msgstr "设置 Hook 脚本"
+msgstr "设置钩子脚本"
 
 #. Resource IDs: (284)
 msgid "Configure Issue Tracker Integration"
@@ -4239,7 +4239,7 @@ msgstr "家"
 
 #. Resource IDs: (103)
 msgid "Hook Scripts"
-msgstr "Hook 脚本"
+msgstr "钩子脚本"
 
 #. Resource IDs: (283)
 msgid "Hook Scripts::Issue Tracker Integration"
@@ -4247,11 +4247,11 @@ msgstr "钩子脚本::问题跟踪器集成"
 
 #. Resource IDs: (198)
 msgid "Hook Type"
-msgstr "Hook 类型"
+msgstr "钩子类型"
 
 #. Resource IDs: (1334)
 msgid "Hook Type:"
-msgstr "Hook 类型: "
+msgstr "钩子类型:"
 
 #. Resource IDs: (82)
 #, c-format
@@ -6005,11 +6005,11 @@ msgstr "饼图"
 
 #. Resource IDs: (83)
 msgid "Please enter a hook script to execute."
-msgstr "请输入要执行的 Hook 脚本"
+msgstr "请输入要执行的钩子脚本"
 
 #. Resource IDs: (83)
 msgid "Please enter a path where to apply the hook script to."
-msgstr "请输入要应用 Hook 脚本的路径。"
+msgstr "请输入要应用钩子脚本的路径。"
 
 #. Resource IDs: (251)
 msgid "Please execute the 'Cleanup' command."
@@ -6034,7 +6034,7 @@ msgstr "请选择下述选项之一解决冲突: "
 
 #. Resource IDs: (83)
 msgid "Please select a hook type"
-msgstr "请选择 Hook 类型"
+msgstr "请选择钩子类型"
 
 #. Resource IDs: (76)
 msgid "Please specify the certificate type"
@@ -6074,11 +6074,11 @@ msgstr "可能的取值: 0 (全透明) .. 255 (不透明)"
 
 #. Resource IDs: (569)
 msgid "Post-Commit Hook"
-msgstr "Post-Commit Hook"
+msgstr "提交之后钩子"
 
 #. Resource IDs: (570)
 msgid "Post-Update Hook"
-msgstr "Post-Update Hook"
+msgstr "更新之后钩子"
 
 #. Resource IDs: (58115)
 msgid "Pre&v Page"
@@ -6086,11 +6086,11 @@ msgstr "上页(&V)"
 
 #. Resource IDs: (569)
 msgid "Pre-Commit Hook"
-msgstr "Pre-Commit Hook"
+msgstr "提交之前钩子"
 
 #. Resource IDs: (570)
 msgid "Pre-Update Hook"
-msgstr "Pre-Update Hook"
+msgstr "更新之前钩子"
 
 #. Resource IDs: (65535)
 msgid "Press &New Shortcut Key:"
@@ -6602,7 +6602,7 @@ msgstr "改名版本控制树中的文件/文件夹"
 
 #. Resource IDs: (209)
 msgid "Repair move"
-msgstr "准备移动"
+msgstr "修复移动"
 
 #. Resource IDs: (3603)
 msgid ""
@@ -7167,7 +7167,7 @@ msgstr "选择保存选中文件的文件夹"
 
 #. Resource IDs: (197)
 msgid "Select hook script file"
-msgstr "选择 Hook 脚本文件..."
+msgstr "选择钩子脚本文件"
 
 #. Resource IDs: (1405)
 msgid "Select items automatically"
@@ -7676,7 +7676,7 @@ msgstr "标准"
 
 #. Resource IDs: (569)
 msgid "Start Commit Hook"
-msgstr "启动提交 Hook"
+msgstr "启动提交钩子"
 
 #. Resource IDs: (65535)
 msgid "Start Revision"
@@ -7684,7 +7684,7 @@ msgstr "起始版本"
 
 #. Resource IDs: (569)
 msgid "Start Update Hook"
-msgstr "开始更新 Hook"
+msgstr "启动更新钩子"
 
 #. Resource IDs: (16514)
 msgid "Static"
@@ -8071,7 +8071,7 @@ msgid ""
 "The hook script returned an error:\n"
 "%s"
 msgstr ""
-"Hook 脚本返回了一个错误: \n"
+"钩子脚本返回了一个错误:\n"
 "%s"
 
 #. Resource IDs: (7)
@@ -9102,7 +9102,7 @@ msgstr "使用本地"
 
 #. Resource IDs: (1432)
 msgid "Use recycle bin when reverting"
-msgstr "在恢复的时候使用垃圾箱"
+msgstr "在还原的时候使用回收站"
 
 #. Resource IDs: (116)
 msgid "Use regular expression"
@@ -10397,4 +10397,3 @@ msgstr "是"
 #. Resource IDs: (1382)
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
-
