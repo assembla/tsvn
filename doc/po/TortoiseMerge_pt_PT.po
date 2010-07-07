@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-03-03 10:39 +0000\n"
-"PO-Revision-Date: 2010-04-26 10:09+0100\n"
+"PO-Revision-Date: 2010-07-07 08:57+0100\n"
 "Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -173,15 +173,15 @@ msgstr "TortoiseMerge é uma aplicaçao open-source gratuita. Permite-lhe ver di
 
 #. (para)
 msgid "While working on text files, e.g. source files in your favourite programming language, or html/xml files for your documentation or website, you will often have a situation where you need to compare different versions of those files. Sometimes you get a different version from someone else, sometimes you just want to see the changes you've made."
-msgstr "Enquanto trabalha em ficheiros de texto, e.g ficheiros base na sua linguagem de programaçao favorita, ou ficheiros html/xml para a sua documentação ou website, terá muitas vezes que comparar diferentes versões desses ficheiros. Umas vezes obtém uma versão diferente de alguém, outras apenas quer ver as alterações que fez até ao momento."
+msgstr "Enquanto trabalhas em ficheiros de texto, i.e. ficheiros base na tua linguagem de programaçao favorita, ou ficheiros html/xml para a documentação ou website, terás muitas vezes que comparar as diferentes versões desses ficheiros. Umas vezes obténs de alguém uma versão diferente, outras apenas queres ver as alterações que fizeste até ao momento."
 
 #. (para)
 msgid "If you're working with a version control system (e.g. Subversion) then you sometimes get <emphasis>conflicts</emphasis> when you update your working copy. This happens if someone else changed the same parts of the file you're currently working on as you did. Then you have to resolve those conflicts manually. This is where TortoiseMerge can help you."
-msgstr "Se estiver a trabalhar com uma sistem de controlo de versão (e.g Subversion) então por vezes ocorrem <emphasis>conflictos</emphasis> ao actualizar a sua cópia de trabalho. Isto acontece quando alguém altera alguma coisa no ficheiro em que você está a trabalhar. Nessas situaçoes você tem que resolver esses confictos manualmente. É aqui que o TortoiseMerge o pode ajudar."
+msgstr "Se estiveres a trabalhar com um sistema de controlo de versões (e.g Subversion) então por vezes, ao actualizar a cópia de trabalho, ocorrem <emphasis>conflictos</emphasis>. Isto acontece quando alguém altera alguma parte do ficheiro em que estás a trabalhar. Nessas situaçoes tens de resolver manualmente esses confictos. É aqui que o TortoiseMerge te pode ajudar."
 
 #. (para)
 msgid "The following diagram shows you the relationships between the files involved in a conflict:"
-msgstr "O diagrama que segue mostra as relações entre os ficheiros involvidos no conflito:"
+msgstr "O diagrama seguinte mostra as relações entre os ficheiros envolvidos no conflito:"
 
 #. (title)
 #. (title)
@@ -190,31 +190,32 @@ msgstr "Conflito de Ficheiros"
 
 #. (para)
 msgid "A conflict can also occur if you try to apply an outdated patch file. In such cases, without TortoiseMerge, you would either have to ask the person you got that patch file from for a current version or try to apply that patch file manually."
-msgstr "Um conflicto pode ocorrer se você tentar aplicar um patch desactualizado. Quando isso acontece, sem o TortoiseMerge, você seria obrigado a pedir à pessoa que lhe deu o patch uma versão actualizada ou tentar aplicar o patch manualmente."
+msgstr "Um conflicto pode ocorrer se tentares aplicar uma correcção desactualizada. Quando isso acontece, sem o TortoiseMerge, serias obrigado a pedir à pessoa que lhe enviou a correcção uma versão actualizada ou tentares aplicar manualmente a correcção."
 
 #. (para)
 msgid "But now with TortoiseMerge this isn't necessary anymore - at least not if you're working with a version control system like Subversion. TortoiseMerge parses the patch file for the revision/version the patch was created for and automatically tries to fetch that specific version from your source-control. Then it applies the patch and lets you review both your changes to the file, and theirs. Then you can decide which changes you want to keep."
-msgstr "Mas agora com o TortoiseMerge isso já não é necessário - pelo menos se estiver a trabalhar com um sistem de controlo de versão como o Subversion. O TortoiseMerge analise o patch e procura a versão/revisão para a qual este foi criado e, automaticamente, tenta encontrar e carregar essa mesma versão a partir do source-control.Nessa altura aplica o patch e deixa-o rever as alterações, tanto as suas, como as de outras pessoas. Aí, é você que decide quais as alterações que mantém e quais elimina."
+msgstr "Mas agora, com o TortoiseMerge isso já não é necessário - pelo menos se estiveres a trabalhar com um sistema de controlo de versões como o Subversion. O TortoiseMerge analisa a correcção e procura pela versão/revisão para a qual esta foi criada, automaticamente tenta encontrar e carregar essa mesma versão a partir do controlo de versões. Então aplica a correcção e deixa-a rever todas as alterações, tanto as tuas, como as de outras pessoas. É então que decides quais as alterações que são para mantém e quais a eliminar."
 
 #. (title)
 msgid "TortoiseMerge's History"
-msgstr "História do TortoiseMerge"
+msgstr "A História do TortoiseMerge"
 
 #. (para)
+#, fuzzy
 msgid "While working on <ulink url=\"http://tortoisesvn.tigris.org\"><citetitle>TortoiseSVN</citetitle></ulink> we found that whenever users sent in patches to enhance the project or just to fix bugs, we had a lot of work just applying those patches. And many times those patches were outdated and couldn't be applied with the command line patch tool <ulink url=\"http://unxutils.sourceforge.net/\"><citetitle>http://unxutils.sourceforge.net/</citetitle></ulink> because we were working on those files and had sometimes changed those files already."
-msgstr "Enquanto trabalhavamos no <ulink url=\"http://tortoisesvn.tigris.org\"><citetitle>TortoiseSVN</citetitle></ulink> verificámos que sempre que um utilizador enviava  patches para melhorar o projecto ou simplesmente arranjar bugs, tinhamos um trabalho imenso só para os aplicar, sendo que muitas das vezes esses mesmos patches estavam desactualizados e nao podiam ser aplicados com a linha de comandos da ferramenta do patch <ulink url=\"http://unxutils.sourceforge.net/\"><citetitle>http://unxutils.sourceforge.net/</citetitle></ulink> porque estávamos a trabalhar nesses ficheiros e por vezes já tinham sido modificados."
+msgstr "Enquanto trabalhávamos no <ulink url=\"http://tortoisesvn.tigris.org\"><citetitle>TortoiseSVN</citetitle></ulink> verificámos que sempre que um utilizador enviava  correcções para melhorar o projecto ou simplesmente corrijir problemas, tinhamos um enorme trabalho só para os aplicar, sendo que muitas das vezes essas mesmas correcções estavam desactualizadas e nao podiam ser aplicadas através da linha de comandos da ferramenta de correcção <ulink url=\"http://unxutils.sourceforge.net/\"><citetitle>http://unxutils.sourceforge.net/</citetitle></ulink> porque estávamos a trabalhar nesses ficheiros e que por vezes já haviam sido alterados."
 
 #. (para)
 msgid "This was also the main reason why TortoiseSVN did not originally have a <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Create Patch</guimenuitem></menuchoice> implemented: we preferred users to send us the whole files because with those it was easier to apply patches."
-msgstr "Esta é também uma das principais razões pela qual o TortoiseSVN não tinha originalmente a <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Create Patch</guimenuitem></menuchoice> implementada: preferiamos que os utilizadores nos enviassem todos os ficheiros porque assim seria mais fácil aplicar os patches."
+msgstr "Esta é também uma das principais razões pela qual o TortoiseSVN não tinha originalmente a entrada <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Criar Correcção</guimenuitem></menuchoice> implementada: preferíamos que os utilizadores nos enviassem todos os ficheiros porque seria assim mais fácil a aplicação das correcções."
 
 #. (para)
 msgid "So we spent a lot of time, searching the Internet for a GUI tool which could apply patch files, but all we found was that such a tool didn't exist. So to cut a long story short: We decided that if no-one else could provide such a tool we would have to write our own. That's when TortoiseMerge was born."
-msgstr "Então procuramos durante muito tempo na Internet por uma ferramenta GUI que permitisse aplicar esses ficheiros patch, mas tudo o encontrámos foi a certeza de que essa ferramente não existia. Resumindo: Decidimos que se ninguem queria providenciar essa ferramenta, nós próprios a iriamos criar."
+msgstr "Então durante muito tempo, procurámos na Internet por uma ferramenta GUI que permitisse a aplicação de esses ficheiros de correcção, mas a única coisa que encontrámos foi a certeza de que essa ferramenta não existia. Então resumindo: Decidimos que se ninguém pretendia fornecer essa ferramenta, nós próprios a iríamos criar."
 
 #. (para)
 msgid "Since TortoiseSVN already uses the Subversion library, which has a nice diffing engine built in, it was just natural to use this library instead of the GNU diff."
-msgstr "Uma vez que TortoiseSVN já utiliza a biblioteca do Subversion, que tem um bom diffing engine, a escolha desta biblioteca em vez da GNU diff tornou-se óbvia."
+msgstr "Uma vez que TortoiseSVN já usa a biblioteca do Subversion, que tem um bom motor de comparação, tornou-se óbvia a escolha por esta biblioteca em detrimento da GNU diff."
 
 #. (title)
 msgid "Basic Concepts"
@@ -280,7 +281,7 @@ msgstr "No modo resolução de conflictos, você pode escolher usar blocos a par
 #. (title)
 #. (title)
 msgid "Applying Patches"
-msgstr "A Applicar Correções"
+msgstr "Aplicar Correcções"
 
 #. (para)
 msgid "A patch file is a Subversion unified diff file, which contains the information required to apply changes to a set of files. The patch may have been supplied by another developer so that you can see changes he has made and possibly commit them to the repository. Or it may have been generated internally by TortoiseSVN when comparing two folders. This happens when you compare a repository revision with your working copy folder, or if you compare two different repository revisions, or if you compare two different repository paths."
@@ -309,7 +310,7 @@ msgstr "O TortoiseMerge tem 3 modos de vista: um painél, dois paineis, e 3 pain
 #. (title)
 #. (title)
 msgid "Viewing / Merging"
-msgstr "A Visualizar/Corrigir"
+msgstr "Visualizar/Integrar"
 
 #. (title)
 msgid "One Pane View"
@@ -508,35 +509,35 @@ msgstr "A Integrar/Editar Confltos"
 
 #. (para)
 msgid "TortoiseMerge not only <emphasis>shows</emphasis> you the differences between files but also lets you resolve conflicts or apply changes."
-msgstr "O TortoiseMege não só <emphasis>mostra</emphasis> ao utilizador as diferenças entre ficheiros mas também deixa resolver conflitos ou aplicar alterações."
+msgstr "O TortoiseMege não só <emphasis>mostra</emphasis> ao utilizador as diferenças entre ficheiros mas também o deixa resolver conflitos ou aplicar alterações."
 
 #. (para)
 msgid "If you're in two pane view, then you can only edit the file in the right pane (<literal>Mine</literal>). To apply changes made in the left file (<literal>Theirs</literal>), <action>right-click</action> on the changed lines and select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>theirs</quote></guimenuitem></menuchoice>. Then the changes from the left file are added to the right file."
-msgstr "Se está na vista de 2 painéis, pode apenas editar o ficheiro do painél da $direita  (<literal>Mine</literal>). Para aplicar alterações feitas no painél da esquerda  (<literal>Theirs</literal>), <action>right-click</action> nas linhas alteradas e selecione <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>. Use o bloco de texto "
+msgstr "Se está na vista de 2 painéis, então apenas podes editar o ficheiro do painel da direita  (<literal>Meu</literal>). Para aplicar alterações feitas no painel da esquerda  (<literal>Deles</literal>), <action>clica-com-o-botão-direito</action> nas linhas alteradas e seleciona <menuchoice><guimenu>Menu Contexto</guimenu><guimenuitem>. Usa o bloco de texto <quote>deles</quote></guimenuitem></menuchoice>. Então as alterações do ficheiro da esquerda são adicionadas ao ficheiro da direita."
 
 #. (para)
 msgid "Sometimes you actually want both text blocks, and the context menu also offers you <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use both text blocks (this one first)</guimenuitem></menuchoice> and <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use both text blocks (this one last)</guimenuitem></menuchoice>."
-msgstr ""
+msgstr "Por vezes tu queres ambos os blocos de texto, e o menu de contexto também te oferece <menuchoice><guimenu>Menu Contexto</guimenu><guimenuitem>Usa ambos os blocos de texto (este primeiro)</guimenuitem></menuchoice> e <menuchoice><guimenu>Menu Contexto</guimenu><guimenuitem>Usa ambos os blocos de texto(este por último)</guimenuitem></menuchoice>."
 
 #. (para)
 msgid "You can also edit the output file just as you would in a text editor. Such lines are marked using a pencil icon. Please note that if you want to make any of the line/block-based changes described above, it is better to do those first since once you start editing the file yourself it becomes impossible for TortoiseMerge to keep track of the relationship to the original files."
-msgstr "Também pode editar o ficheiro de saída como se fosse fosse num editor de texto. Essas linhas são marcadas com o icone de um lápis. Por favor, note que se quiser fazer ás linhas/blocos uma das alterações descritas acima, é melhor faze-las primeiro uma vez que depois do utilizador começar a editar o ficheiro torna-se impossivel para o TortoiseMerge de guardar a relação com os ficheiros originais."
+msgstr "Também podes editar o ficheiro de saída como farias num editor de texto. Tais linhas são marcadas com o ícone de lápis. Tem atenção que se quiseres fazer algumas das alterações baseadas em linhas/blocos descritas acima, o melhor é faze-las primeiro pois uma vez que comeces a editar o ficheiro irá ser impossível para o TortoiseMerge seguir as relações com os ficheiros originais."
 
 #. (para)
 msgid "If you're in three pane view (sometimes called <emphasis>merge view</emphasis>) you can only edit the file in the bottom view (<literal>Merged</literal>). As in two pane view, you can <action>right-click</action> on conflicted lines and either select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>theirs</quote></guimenuitem></menuchoice> or <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>mine</quote></guimenuitem></menuchoice>. In addition, if you want <emphasis>both</emphasis> blocks, you can select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem> Use text block from <quote>mine</quote> before <quote>theirs</quote></guimenuitem></menuchoice> or <menuchoice><guimenu>Context Menu</guimenu><guimenuitem> Use text block from <quote>theirs</quote> before <quote>mine</quote></guimenuitem></menuchoice>. According to the command you've selected, the changes are used in the resulting <literal>Merged</literal> file."
-msgstr ""
+msgstr "Se estiveres na vista de três paineis (por vezes chamada <emphasis>vista de integração</emphasis>) tu apenas podes editar o ficheiro na vista de baixo  (<literal>Integrado</literal>). Como na vista de dois paineis, tu podes <action>clicar-com-o-botão-dreito</action> nas linhas em conflito e seleccionar <menuchoice><guimenu>Menu Contexto</guimenu><guimenuitem>Usar bloco de texto <quote>deles</quote></guimenuitem></menuchoice> ou <menuchoice><guimenu>Menu Contexto</guimenu><guimenuitem> Usar bloco de texto <quote>meu</quote></guimenuitem></menuchoice>. Adicionalmente, se queres <emphasis>ambos</emphasis> os blocos, podes seleccionar <menuchoice><guimenu>Menu Contexto</guimenu><guimenuitem> Usar bloco de texto  <quote>meu</quote> antes <quote>deles</quote></guimenuitem></menuchoice> ou <menuchoice><guimenu>Menu Contexto</guimenu><guimenuitem> Usar bloco de texto <quote>deles</quote> antes do <quote>meu</quote></guimenuitem></menuchoice>. De acordo com o comando que escolheste, as alterações são usadas no ficheiro <literal>integrado</literal> resultante."
 
 #. (para)
 msgid "Sometimes a file will be marked as conflicted in Subversion, yet when you view it using TortoiseMerge there are no conflicts shown. This may be due to the whitespace handling you have chosen. If you choose to ignore line-endings or whitespace changes, those lines will be marked using the <emphasis>Conflict-Ignored</emphasis> icon. To resolve the conflict you still need to pick which version you want to use."
-msgstr "Por vezes um ficheiro será marcado como conflituoso no Subversion, mas ao ser visualizado o TortoiseMerge não existirão conflitos visiveis. Isto pode ser devido à forma como o utilizador escolheu lidar com espaços brancos. Se escolheu ignorar line-endings ou espaços em branco, essas linhas serão marcadas usando o icone <emphasis>Conflict-Ignored</emphasis>. Para resolver o conflicto ainda precisa de escolher que versão quer usar."
+msgstr "Por vezes um ficheiro é marcado no Subversion como em conflito, no entanto quando o visualizas com o TortoiseMerge não são mostrados quaisquer conflitos. Isto pode ser devido à forma que escolheste para lidar com os espaços em branco. Se escolheste ignorar as alterações de fim-de-linha ou de espaços em branco, essas linhas serão marcadas com o ícone <emphasis>Conflito-Ignorado</emphasis>. Para resolver o conflito ainda ainda precisarás de escolher qual a versão que queres usar."
 
 #. (para)
 msgid "Sometimes the conflict is too difficult to resolve by simply picking <literal>Theirs</literal> and <literal>Mine</literal> and it requires hand editing. TortoiseMerge allows you to do all the easy changes visually first and then save the file, leaving only the difficult changes to be resolved by hand-editing."
-msgstr ""
+msgstr "Por vezes o conflito é demasiado difícil de resolver apenas ao escolher as alterações <literal>Deles</literal> e <literal>Minha</literal>, e requer edição manual. O TortoiseMerge permite-te primeiro efectuar todas as alterações simples de um modo visual e guarda em seguida o ficheiro, deixando apenas as alterações difíceis para serem depois resolvidas de modo manual."
 
 #. (para)
 msgid "Note that if you use TortoiseMerge on the same files again, any changes to your working copy, whether in TortoiseMerge, or by hand-editing, <emphasis>will be discarded</emphasis> and the file will appear as it did when conflict-editing first started."
-msgstr "Note que se usar o TortoiseMerge nos mesmos ficheiros novamente, quaisquer alterações à sua cópia de trabalho, quer no TortoiseMerge, ou ediçao manual, <emphasis>serão descartadas</emphasis> e o ficheiro aparecerá como estava antes do conflicto gerado pela edição ter sido criado."
+msgstr "Tem atenção que se usares outra vez o TortoiseMerge nos mesmos ficheiros, quaisquer alterações à tua cópia de trabalho, quer no TortoiseMerge, ou na edição manual, <emphasis>serão descartadas</emphasis> e o ficheiro aparecerá como estava quando foi iniciada da primeira vez a edição do conflito."
 
 #. (title)
 msgid "Open Files"
@@ -544,31 +545,31 @@ msgstr "Abrir Ficheiros"
 
 #. (para)
 msgid "When you start TortoiseMerge without any command line switches then you have to open the files manually, using <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice>."
-msgstr "Quando o TortoiseMerge é iniciado sem opções em linha de comando então o utilizador tem de abrir os ficheiros manualmente, usando <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice>."
+msgstr "Quando arrancas o TortoiseMerge este é iniciado sem opções de linha de comandos, então o utilizador tem de abrir manualmente os ficheiros usando <menuchoice><guimenu>Ficheiro</guimenu><guimenuitem>Abrir</guimenuitem></menuchoice>."
 
 #. (title)
 msgid "The Open Dialog"
-msgstr "O Diálogo de Abertura"
+msgstr "Caixa de Diálogo Abrir"
 
 #. (para)
 msgid "The first thing you have to do is to decide whether you just want to compare/merge files, or whether you want to apply a patch file. Depending on what you choose, the corresponding edit boxes and browse buttons are activated."
-msgstr "A primeira coisa que tem que dedicdir é se quer apenas comparar/integrar ficheiros, ou se quer aplicar um ficheiro patch. Dependendo da opção, as caixas de edição e botões de pesquisa serão activados."
+msgstr "A primeira coisa que tens de decidir é se apenas desejas comparar/integrar ficheiros, ou se queres aplicar um ficheiro de correcção. Dependendo do que escolheres, as caixas de edição e botões de navegação correspondentes serão activados."
 
 #. (para)
 msgid "If you want to compare / merge files you have to set at least two of the three possible paths for <literal>Base</literal>, <literal>Mine</literal> and <literal>Theirs</literal>. If you select only two files, then TortoiseMerge will show you the differences between those two files, either in a two pane view or in a one pane view."
-msgstr "Se quer comparar / integrar ficheiros tem que escolher pelo menos três caminhos possiveis para <literal>Base</literal>, <literal>Mine</literal> e <literal>Theirs</literal>. Se selecionar apenas dois ficheiros, então o TortoiseMerge mostrar-lhe-á as diferenças entre esses dois ficheiros em vista de dois painéis ou em vista de um painél."
+msgstr "Se tu queres comparar / integrar ficheiros, terás de especificar pelo menos dois dos três caminhos possíveis para a <literal>Base</literal>, <literal>Meu</literal> e <literal>Deles</literal>. Se seleccionares apenas dois ficheiros, então o TortoiseMerge mostrar-te-á as diferenças entre esses dois ficheiros numa vista de dois painéis ou numa vista de um painel."
 
 #. (para)
 msgid "If you want to merge three files, TortoiseMerge will show you the differences in a three pane view. This view is generally used if you need to resolve conflicted files. The output file is not named in this case and you will have to use the <menuchoice><guimenu>File</guimenu><guimenuitem>Save As...</guimenuitem></menuchoice>. to save the results."
-msgstr "Se quer integrar três ficheiros, o TortoiseMerge mostrar-lhe-á as diferenças numa vista de três painéis. Esta vista é geralmente usada se quiser resolver ficheiros conflituosos. Neste caso, o ficheiro de saída fica sem nome e terá de usar o <menuchoice><guimenu>File</guimenu><guimenuitem>Save As...</guimenuitem></menuchoice>. para salvar os resultados."
+msgstr "Se queres integrar três ficheiros, o TortoiseMerge mostrar-te-á as diferenças numa vista de três painéis. Esta vista é normalmente usada se tu queres resolver ficheiros em conflito. Neste caso, não é dado nome ao ficheiro de saída, e terás de usar <menuchoice><guimenu>Ficheiro</guimenu><guimenuitem>Guardar Como...</guimenuitem></menuchoice>. para guardar os resultados."
 
 #. (para)
 msgid "If you want to apply a patch file you have to set both the path to the patch file itself and the path to the folder where the patch file should be applied."
-msgstr "Se quer aplicar um ficheiro patch tem que selecionar tanto o caminho para o patch como o caminho para a pasta em que quer aplicar o patch."
+msgstr "Se queres aplicar um ficheiro de correcção, terás de seleccionar tanto o caminho para o ficheiro de correcção como o caminho para a pasta onde o ficheiro correcção deverá ser aplicado."
 
 #. (para)
 msgid "Currently, only patch files in <emphasis>Unified Diff Format</emphasis> are supported. And only files which were generated from a Subversion working copy. Other formats like patch files generated by CVS are currently not supported!"
-msgstr "Actualmente, apenas ficheiros patch em <emphasis>Unified Diff Format</emphasis> são suportados e apenas ficheiros que tenham sido gerados por uma cópia de trabalho do Subversion.Outros formatos como ficheiros patch gerados por CVS não são neste momento suportados!"
+msgstr "Actualmente, apenas ficheiros de correcção no formato <emphasis>Comparação Unificada</emphasis> são suportados. E apenas ficheiros que tenham sido gerados a partir de uma cópia de trabalho do Subversion. Outros formatos como ficheiros de correcção gerados pelo CVS não são suportados de momento!"
 
 #. (title)
 msgid "Settings"
@@ -584,35 +585,35 @@ msgstr "A Página Principal de Definições"
 
 #. (para)
 msgid "Most of the options here are self-explanatory, but a few points need clarifying."
-msgstr "A maioria das opçãoes são auto-explanatórias, mas algums pontos necessitam de clarificação."
+msgstr "A maioria das opções são auto-explicativas, no entanto em alguns pontos necessita de maior clarificação."
 
 #. (para)
 msgid "<guilabel>Backup original file</guilabel> renames the original file in the WC to <literal>filename.bak</literal> before saving the modified version."
-msgstr "<guilabel>Backup original file</guilabel> muda o nome do ficheiro original no WC para <literal>filename.bak</literal> antges de salvar a versão modificada."
+msgstr "<guilabel>Fazer cópia de segurança do arquivo original</guilabel> altera o nome do ficheiro original na CT para <literal>filename.bak</literal> antes de salvaguardar a versão modificada."
 
 #. (para)
 msgid "<guilabel>Ignore line endings</guilabel> hides changes which are due solely to difference in line-end style."
-msgstr "<guilabel>Ignore line endings</guilabel> esconde as alterações que são devidas somente a diferenças de estilo de fim de linha."
+msgstr "<guilabel>Ignorar fins-de-linha</guilabel> esconde as alterações que são devidas somente a diferenças no estilo de fim de linha."
 
 #. (para)
 msgid "<guilabel>Ignore case changes</guilabel> hides changes which are due solely to case changes within the text. This can be useful with apps such as Visual Basic, which changes case in variables without warning."
-msgstr ""
+msgstr "<guilabel>Ignorar alterações de maiúsculas/minúsculas</guilabel> esconde as alterações que são devidas apenas a mudanças no texto de minúsculas/minúsculas. Isso pode ser útil para aplicações, como por ex. em Visual Basic, que altera a altura das letras nas variáveis sem avisar."
 
 #. (para)
 msgid "<guilabel>Colour code in-line changes</guilabel> uses the same scheme as the line diff bar to show the detailed in-line changes within the main display panes. Lines which have been heavily modified will not be shown using this method as the results are simply confusing. In this case the line will be shown as replaced (old line deleted, new line added)."
-msgstr ""
+msgstr "<guilabel>Código de cor das alterações interiores às linhas</guilabel> usa o mesmo esquema de cores da barra de comparação de linha, para mostrar os detalhes das alterações no interior da linha, dentro dos painéis principais de visualização. As linhas que tenham sido muito modificadas não serão mostradas recorrendo a este método, já que os resultados seriam simplesmente confusos. Neste caso a linha será mostrada como tendo sido substituída (removida a linha antiga, adicionada linha nova)."
 
 #. (para)
 msgid "<guilabel>Compare whitespaces</guilabel> shows all changes in indentation and inline whitespace as added/removed lines (which is how Subversion treats such changes)."
-msgstr ""
+msgstr "<guilabel>Comparar espaços em branco</guilabel> mostra todas as alterações de indentação e espaços em branco no interior do texto, como linhas adicionadas/removidas (que é como o Subversion trata tais alterações)."
 
 #. (para)
 msgid "<guilabel>Ignore whitespace changes</guilabel> hides changes which are due solely to a change in the amount or type of whitespace, eg. changing the indentation or changing tabs to spaces. Adding whitespace where there was none before, or removing a whitespace completely is still shown as a change."
-msgstr ""
+msgstr "<guilabel>Ignorar alterações nos espaços em branco</guilabel> esconde as alterações que são apenas devidas à alteração na quantidade ou tipo de espaços em branco, e.g. alterar uma indentação ou alterar tabs para espaços. Adicionar espaços em branco onde não havia nenhum, ou remover completamente um espaço em branco é ainda mostrado como uma alteração."
 
 #. (para)
 msgid "<guilabel>Ignore all whitespaces</guilabel> hides all whitespace-only changes."
-msgstr "<guilabel>Ignorar espaços em branco</guilabel> esconde todas a modificações aos espaços em branco."
+msgstr "<guilabel>Ignorar todos os espaços em branco</guilabel> esconde todas as alterações de apenas espaços em branco."
 
 #. (title)
 msgid "Colour Settings Page"
@@ -624,7 +625,7 @@ msgstr "A Página de Definição de Cores "
 
 #. (para)
 msgid "This dialog allows you to select the background color coding used to highlight the different line changes."
-msgstr "Este dialog permite-te slecionar a côr de fundo utilizada para realçar as alterações efectudas nas linhas."
+msgstr "Esta caixa de diálogo permite-te seleccionar a cor de fundo usada para realçar as diferentes alterações de linhas."
 
 #. (term)
 msgid "Normal"
@@ -632,15 +633,15 @@ msgstr "Normal"
 
 #. (listitem)
 msgid "All lines which are unchanged, or where changes are hidden."
-msgstr "Todas as linhas que não foram modificadas, ou onde a modificações estão escondidas."
+msgstr "Todas as linhas que estão inalteradas, ou onde as alterações estão escondidas."
 
 #. (term)
 msgid "Added"
-msgstr "Acrescentado"
+msgstr "Adicionado"
 
 #. (listitem)
 msgid "Lines which have been added."
-msgstr "Linhas acrescentadas."
+msgstr "Linhas que foram adicionadas."
 
 #. (term)
 msgid "Removed"
@@ -648,11 +649,11 @@ msgstr "Removido"
 
 #. (listitem)
 msgid "Lines which have been deleted."
-msgstr "Linhas removidas."
+msgstr "Linhas que foram removidas."
 
 #. (term)
 msgid "Modified"
-msgstr "Modificado"
+msgstr "Alterado"
 
 #. (emphasis)
 msgid "unchanged"
@@ -664,11 +665,11 @@ msgstr "Codificar a cor a alterações inseridas"
 
 #. (listitem)
 msgid "Lines which have relatively small changes, and are shown using inline diff. This colour is used for the <placeholder-1/> portion of the line content. Changed portions will be shown using the inline added and deleted colours described below. If <placeholder-2/> is not enabled, this colour will not be used and changed lines will always be shown as replacements."
-msgstr ""
+msgstr "Linhas que têm alterações relativamente pequenas e que são mostradas utilizando a comparação em linha. Esta cor é usada para a parcela <placeholder-1/> do conteúdo da linha. Parcelas alteradas serão mostradas recorrendo às cores adicionado em linha e removido, como descrito em baixo. Se não está activo o <placeholder-2/>, esta cor não será usada e as linhas alteradas serão sempre mostradas como substituições."
 
 #. (term)
 msgid "Conflicted"
-msgstr "Conflito"
+msgstr "Conflituante"
 
 #. (listitem)
 msgid "Where the same line has been changed in both files."
@@ -680,7 +681,7 @@ msgstr "Conflito resolvido"
 
 #. (listitem)
 msgid "Where the same line has been changed in both files, and you have now selected which version should be used."
-msgstr "Onde a mesma linha foi alterada em ambos os ficheiros e selecionou a versão a utilizar."
+msgstr "Onde a mesma linha foi alterada em ambos os ficheiros e então seleccionaste qual a versão que deverá ser usada."
 
 #. (term)
 msgid "Empty"
@@ -688,15 +689,15 @@ msgstr "Vazio"
 
 #. (listitem)
 msgid "Where lines have been added in the opposite pane, and no such line existed in this pane."
-msgstr "Onde foram addicionadas linhas no painel adjacente sem que a linha exista neste painel."
+msgstr "Onde foram adicionadas linhas no painel adjacente, sem que tal linha exista neste painel."
 
 #. (term)
 msgid "Inline added text"
-msgstr "Texto inserido"
+msgstr "Texto adicionado"
 
 #. (listitem)
 msgid "When inline diffs are shown, added text is shown in this colour."
-msgstr "O texto addicionado é marcado com esta cor quando são indicadas as comparações em linha."
+msgstr "O texto adicionado é mostrado com esta cor quando são visualizadas comparações em linha."
 
 #. (term)
 msgid "Inline removed text"
@@ -704,15 +705,15 @@ msgstr "Texto removido"
 
 #. (listitem)
 msgid "When inline diffs are shown, deleted text is shown in this colour."
-msgstr "O texto removido é marcado com esta cor quando são indicadas as comparações em linha."
+msgstr "O texto removido é mostrado com esta cor quando são visualizadas comparações em linha."
 
 #. (term)
 msgid "Misc whitespaces"
-msgstr "Espaços em branco diversos"
+msgstr "Miscelânea: espaços em branco"
 
 #. (listitem)
 msgid "Characters used to indicate Whitespace are shown in a different colour from normal text."
-msgstr "Os caratéres utilizados para indicar Espaço Em Branco têm uma cor diferente do texto normal."
+msgstr "Os caracteres usados para indicar Espaço-em-Branco são mostrados numa cor diferente do texto normal."
 
 #. (title)
 msgid "keyboard shortcuts"
@@ -740,7 +741,7 @@ msgstr "Ctrl-C"
 
 #. (para)
 msgid "Copy the selected text to the clipboard"
-msgstr "Copiar o texto selecionada para a área de transferência."
+msgstr "Copiar o texto seleccionado para a área de transferência."
 
 #. (term)
 msgid "Ctrl-F"
@@ -748,7 +749,7 @@ msgstr "Ctrl-F"
 
 #. (para)
 msgid "Open the Find dialog for text searches"
-msgstr "Abrir o diálogo para procuras de texto"
+msgstr "Abrir a caixa de diálogo Localizar, para pesquisas de texto"
 
 #. (term)
 msgid "Ctrl-O"
@@ -756,7 +757,7 @@ msgstr "Ctrl-O"
 
 #. (para)
 msgid "Open files to diff/merge"
-msgstr "Abrir ficheiros a comparar/integrar"
+msgstr "Abrir ficheiros para comparar/integrar"
 
 #. (term)
 msgid "Ctrl-S"
@@ -764,7 +765,7 @@ msgstr "Ctrl-S"
 
 #. (para)
 msgid "Save the changes"
-msgstr "Salvar as alterações"
+msgstr "Guardar as alterações"
 
 #. (term)
 msgid "Ctrl-Shift-S"
@@ -772,7 +773,7 @@ msgstr "Ctrl-Shift-S"
 
 #. (para)
 msgid "Save as..."
-msgstr "Salvar como..."
+msgstr "Guardar como..."
 
 #. (term)
 msgid "F7"
@@ -780,7 +781,7 @@ msgstr "F7"
 
 #. (para)
 msgid "Go to next difference"
-msgstr "Ir para a próxima differença"
+msgstr "Avançar para a próxima diferença"
 
 #. (term)
 msgid "Shift-F7"
@@ -788,7 +789,7 @@ msgstr "Shift-F7"
 
 #. (para)
 msgid "Go to previous difference"
-msgstr "Ir para a differença anterior"
+msgstr "Avançar para a diferença anterior"
 
 #. (term)
 msgid "F8"
@@ -796,7 +797,7 @@ msgstr "F8"
 
 #. (para)
 msgid "Go to next conflict"
-msgstr "Ir para o próximo conflito"
+msgstr "Avançar para o próximo conflito"
 
 #. (term)
 msgid "Shift-F8"
@@ -804,7 +805,7 @@ msgstr "Shift-F8"
 
 #. (para)
 msgid "Go to previous conflict"
-msgstr "Ir para o conflito anterior"
+msgstr "Avançar para o conflito anterior"
 
 #. (term)
 msgid "Ctrl-D"
@@ -812,7 +813,7 @@ msgstr "Ctrl-D"
 
 #. (para)
 msgid "Toggle between one-pane diff and two-pane diff"
-msgstr "Alternar entre diff de um e dois painéis"
+msgstr "Alternar entre a comparação com um ou dois painéis."
 
 #. (term)
 msgid "Ctrl-R"
@@ -820,7 +821,7 @@ msgstr "Ctrl-R"
 
 #. (para)
 msgid "Reload the files and revert all changes made"
-msgstr "Recarregar os ficheiros e reverter todas a modificações efectuadas"
+msgstr "Recarregar os ficheiros e reverter todas as alterações efectuadas"
 
 #. (term)
 msgid "Ctrl-T"
@@ -828,7 +829,7 @@ msgstr "Ctrl-T"
 
 #. (para)
 msgid "Toggles between showing whitespaces or not"
-msgstr "Alterna ente mostrat ou não os espaços em branco"
+msgstr "Alternar entre mostrar ou não, os espaços em branco"
 
 #. (term)
 msgid "Ctrl-mousewheel"
@@ -836,19 +837,19 @@ msgstr "Ctrl-roda-do-rato"
 
 #. (para)
 msgid "Scroll the display left/right"
-msgstr "Deslocar o écran esquerda/direita"
+msgstr "Deslocar o écran para a esquerda/direita"
 
 #. (title)
 msgid "Automating TortoiseMerge"
-msgstr "A automatizar TortoiseMerge"
+msgstr "Automatizar o TortoiseMerge"
 
 #. (para)
 msgid "TortoiseMerge can be started with command line parameters to avoid having to go through the <guilabel>Open</guilabel> dialog to select the files yourself. This is useful also if you want to use TortoiseMerge from another application."
-msgstr ""
+msgstr "O TortoiseMerge pode ser arrancado com parâmetros na linha de comandos para evitar ter que passar pela caixa de diálogo <guilabel>Abrir</guilabel> e seleccionares os ficheiros por ti. Isto é também útil se queres utilizar o TortoiseMerge a partir de outra aplicação."
 
 #. (title)
 msgid "TortoiseMerge Command Line Switches"
-msgstr "Opções da linha de comando do TortoiseMerge"
+msgstr "Opções de linha de comandos do TortoiseMerge"
 
 #. (primary)
 msgid "automation"
@@ -864,10 +865,13 @@ msgid ""
 "/base:\"c:\\folder\\my base file.txt\"\n"
 "</screen>"
 msgstr ""
+"A maioria das opções requer informação adicional, como um caminho ou outra qualquer string. Noutros casos, anexa um ':' à opção e coloca a seguir uma string/caminho. Exemplo: <screen>\n"
+"/base:\"c:\\folder\\my base file.txt\"\n"
+"</screen>"
 
 #. (title)
 msgid "List of available command line options"
-msgstr "Lista de opções de comando disponíveis"
+msgstr "Lista de opções de linha de comandos disponíveis."
 
 #. (entry)
 msgid "Command"
@@ -879,7 +883,7 @@ msgstr "Descrição"
 
 #. (entry)
 msgid "Shows a dialog box with the most important command line switches."
-msgstr "Mostra um diálogo com as opções mais importantes da linha de comando."
+msgstr "Mostra uma caixa de diálogo com as mais importantes opções de linha de comandos."
 
 #. (option)
 msgid "?"
@@ -895,11 +899,11 @@ msgstr "base"
 
 #. (entry)
 msgid "Specifies the <placeholder-1/> file used in three way diffs. This is the common ancestor of the files being diffed, although it is not shown in a separate window. For two way diffs, this is the left file."
-msgstr ""
+msgstr "Especifica o ficheiro <placeholder-1/> usado na comparação de três caminhos. Este é o ascendente comum dos ficheiros a comparar, embora não seja mostrado numa janela separada. Para a comparação de dois caminhos, este é o ficheiro da esquerda."
 
 #. (entry)
 msgid "The name of the base file. This is shown in the view title instead of the file path. For three way diffs it is shown in a tooltip for the view title."
-msgstr ""
+msgstr "O nome do ficheiro base. Este é visualizado no título da vista em vez do caminho para o ficheiro. Para comparações de três caminhos, é mostrado numa etiqueta de dica na vista do título."
 
 #. (emphasis)
 msgid "theirs"
@@ -907,7 +911,7 @@ msgstr "deles"
 
 #. (entry)
 msgid "Specifies the <placeholder-1/> file used in three way diffs, displayed in the left pane."
-msgstr "Indica o <placeholder-1/> ficheiro utilizado em diffs a três, exibidos no painel da esquerda."
+msgstr "Indica o ficheiro <placeholder-1/> usado em comparações de três caminhos, exibidos no painel esquerdo."
 
 #. (entry)
 msgid "The name of the theirs file. This is shown in the view title instead of the file path."
@@ -919,7 +923,7 @@ msgstr "meu"
 
 #. (entry)
 msgid "Specifies the <placeholder-1/> file used in three way diffs, displayed in the right pane. For two way diffs, this is the right file."
-msgstr ""
+msgstr "Especifica o ficheiro <placeholder-1/> usado em comparações de três caminhos, mostrada no painel direito. Para comparações de dois caminhos este é o ficheiro à direita."
 
 #. (entry)
 msgid "The name of the mine file. This is shown in the view title instead of the file path."
@@ -931,40 +935,39 @@ msgstr "integrado"
 
 #. (entry)
 msgid "Specifies the resulting <placeholder-1/> file used in three way diffs. This is the file path where the result of the merge/conflict resolving is saved. If this is not set, then TortoiseMerge will ask the user where to save the result."
-msgstr ""
+msgstr "Especifica o ficheiro <placeholder-1/> resultante, usado nas comparações a três caminhos. Este é o caminho do ficheiro onde é guardado o resultado da resolução da integração/conflito. Se este não for especificado, então o tortoiseMerge irá perguntar ao utilizador onde poderá guardar o resultado."
 
 #. (entry)
-#, fuzzy
 msgid "The name of the merged file. This is shown in the view title instead of the file path."
-msgstr "O nome do ficheiro integrado."
+msgstr "O nome do ficheiro integrado. Isto é mostrado no título da vista em vez do caminho do ficheiro."
 
 #. (emphasis)
 msgid "very long"
-msgstr "muito longo"
+msgstr "muito tempo"
 
 #. (entry)
 msgid "The path where a patch should be applied to. If you don't set this path, then TortoiseMerge will try to find the path itself to match the paths in the patch file, but that can take <placeholder-1/>."
-msgstr ""
+msgstr "O caminho onde deverá ser aplicada a correcção. Se não especificares este caminho, o TortoiseMerge irá tentar encontrar o caminho por si mesmo de modo a encontrar correspondência com os caminhos do ficheiro correcção, mas isso pode levar <placeholder-1/>."
 
 #. (entry)
 msgid "The name of the original file to patch. Used for the view title."
-msgstr "O nome do ficheiro original a corrigir. Utilizado por exibir título."
+msgstr "O nome do ficheiro original a corrigir. Usado para o título da vista."
 
 #. (entry)
 msgid "The name of the resulting patched file. Used for the view title."
-msgstr "O nome do ficheiro corrigido resultante. Utilizado por exibir título."
+msgstr "O nome do resultante ficheiro corrigido. Usado como título da vista."
 
 #. (entry)
 msgid "The path to the patch/diff file to apply to a directory."
-msgstr "O caminho para o patch/diff a aplicar ao diretório."
+msgstr "O caminho para a correcção/comparação a aplicar à pasta."
 
 #. (entry)
 msgid "Forces TortoiseMerge to start with the one-way view instead of the view the user specified in the settings."
-msgstr "Obriga o TortoiseMerge a começar com uma vista unica em vez da vista especificado nas definições."
+msgstr "Obriga o TortoiseMerge a iniciar com a vista de um só caminho em vez da vista que o utilizador especificou nas definições."
 
 #. (entry)
 msgid "Switches the left and right view of the specified two files to diff."
-msgstr "Troca a painel esquerdo e direito dos ficheiros a comparar."
+msgstr "Troca a vista direita com a esquerda dos dois ficheiros especificados para comparar."
 
 #. (literal)
 msgid "/origfile:\"path_to_original_file\""
@@ -988,7 +991,7 @@ msgstr "/createunifieddiff"
 
 #. (entry)
 msgid "Creates a unified diff file (patch file) of two files specified with <placeholder-1/> and <placeholder-2/>. The target path is set with <placeholder-3/>. If <placeholder-4/> is not set, a file save dialog is shown so the user can choose the location to save the patch file. Note: If <placeholder-5/> is set, all other parameters are ignored."
-msgstr ""
+msgstr "Cria um ficheiro de comparação unificada (ficheiro correcção) dos dois ficheiros especificados com <placeholder-1/> e <placeholder-2/>. O caminho de destino é especificado com <placeholder-3/>. Se não for especificado o <placeholder-4/>, é mostrada uma caixa de diálogo guardar para que o utilizador possa escolher a localização para guardar o ficheiro correcção. Se for especificado o <placeholder-5/>, então todos os outros parâmetros são ignorados."
 
 #. (para)
 msgid ""
@@ -996,6 +999,9 @@ msgid ""
 "TortoiseMerge BaseFilePath MyFilePath [ TheirFilePath ]\n"
 "</screen> If two files are given they will be compared with each other. If three files are given, the first is taken as the BASE file, and the other two are compared with it in a three-way diff."
 msgstr ""
+"Podes também fornecer na linha de comandos simples nomes de ficheiros para compatibilidade com outros programas de comparação. Nesta forma simplificada a linha de comandos é <screen>\n"
+"TortoiseMerge BaseFilePath MyFilePath [ TheirFilePath ]\n"
+"</screen>  Se forem dados dois ficheiros, eles serão comparados entre si. Se forem dados três ficheiros, o primeiro é tomado como o ficheiro BASE, e os outros dois são comparados com este numa comparação a três caminhos."
 
 #. (title)
 msgid "Glossary"
@@ -1007,7 +1013,7 @@ msgstr "Adicionar"
 
 #. (para)
 msgid "A Subversion command that is used to add a file or directory to your working copy. The new items are added to the repository when you commit."
-msgstr ""
+msgstr "Comando Subversion que é usado para adicionar um ficheiro ou pasta à tua cópia de trabalho. Os novos itens são adicionados ao repositório quando submeteres."
 
 #. (glossterm)
 msgid "BASE revision"
@@ -1031,7 +1037,7 @@ msgstr "BDB"
 
 #. (para)
 msgid "Berkeley DB. A well tested database backend for repositories, that cannot be used on network shares. Default for pre 1.2 repositories."
-msgstr ""
+msgstr "Berkeley DB. Um formato de base de dados robusto para repositórios, que não pode ser usado em partilhas de rede. Por defeito para repositórios pré 1.2."
 
 #. (glossterm)
 msgid "Branch"
@@ -1047,7 +1053,7 @@ msgstr "Dar saida"
 
 #. (para)
 msgid "A Subversion command which creates a local working copy in an empty directory by downloading versioned files from the repository."
-msgstr ""
+msgstr "Comando Subversion que cria uma cópia de trabalho local numa pasta vazia, ao descarregar os ficheiros versionados do repositório."
 
 #. (glossterm)
 msgid "Cleanup"
@@ -1063,7 +1069,7 @@ msgstr "Submeter"
 
 #. (para)
 msgid "This Subversion command is used to pass the changes in your local working copy back into the repository, creating a new repository revision."
-msgstr ""
+msgstr "Este comando Subversion é usado para transferir as alterações na tua cópia de trabalho local para o repositório, criando uma nova revisão do mesmo."
 
 #. (glossterm)
 msgid "Conflict"
@@ -1071,7 +1077,7 @@ msgstr "Conflito"
 
 #. (para)
 msgid "When changes from the repository are merged with local changes, sometimes those changes occur on the same lines. In this case Subversion cannot automatically decide which version to use and the file is said to be in conflict. You have to edit the file manually and resolve the conflict before you can commit any further changes."
-msgstr ""
+msgstr "Quando as alterações do repositório são integradas com as alterações locais, por vezes estas ocorrem nas mesmas linhas. Neste caso, o Subversion não pode decidir automaticamente qual a versão que deverá usar, e o ficheiro é dado como estando em conflito. Terás de o editar manualmente, e resolver o conflito antes de poderes submeter quaisquer alterações."
 
 #. (glossterm)
 msgid "Copy"
@@ -1111,7 +1117,7 @@ msgstr "FSFS"
 
 #. (para)
 msgid "A proprietary Subversion filesystem backend for repositories. Can be used on network shares. Default for 1.2 and newer repositories."
-msgstr ""
+msgstr "Sistema de ficheiro proprietário do Subversion de suporte para os repositórios. Pode ser usado em partilhas de rede. Por defeito para repositórios a partir da versão 1.2."
 
 #. (glossterm)
 msgid "GPO"
@@ -1143,7 +1149,7 @@ msgstr "Bloquear"
 
 #. (para)
 msgid "When you take out a lock on a versioned item, you mark it in the repository as non-committable, except from the working copy where the lock was taken out."
-msgstr ""
+msgstr "Quando obténs um bloqueio para um item versionado, tu o marcas como não-submetivel  no repositório, à excepção da cópia de trabalho de onde foi obtido o bloqueio."
 
 #. (glossterm)
 msgid "Log"
@@ -1207,7 +1213,7 @@ msgstr "Repositório"
 
 #. (para)
 msgid "A repository is a central place where data is stored and maintained. A repository can be a place where multiple databases or files are located for distribution over a network, or a repository can be a location that is directly accessible to the user without having to travel across a network."
-msgstr ""
+msgstr "O repositório é um local central onde os dados são armazenados e mantidos. Um repositório pode ser um local onde múltiplas bases de dados ou ficheiros estão localizados para distribuição através da rede, pode ser uma localização que está directamente acessível ao utilizador sem ter de viajar através da rede."
 
 #. (glossterm)
 msgid "Resolve"
@@ -1251,15 +1257,15 @@ msgstr "SVN"
 
 #. (para)
 msgid "A frequently-used abbreviation for Subversion."
-msgstr "Uma abreviatura frequntemente utilizada para Subversion."
+msgstr "Abreviatura frequentemente utilizada para Subversion."
 
 #. (para)
 msgid "The name of the Subversion custom protocol used by the <quote>svnserve</quote> repository server."
-msgstr ""
+msgstr "O nome do protocolo personalizado Subversion e usado pelo servidor de repositório <quote>svnserve</quote>."
 
 #. (glossterm)
 msgid "Switch"
-msgstr "Interruptor"
+msgstr "parâmetro"
 
 #. (para)
 msgid "Just as <quote>Update-to-revision</quote> changes the time window of a working copy to look at a different point in history, so <quote>Switch</quote> changes the space window of a working copy so that it points to a different part of the repository. It is particularly useful when working on trunk and branches where only a few files differ. You can switch your working copy between the two and only the changed files will be transferred."
@@ -1267,7 +1273,7 @@ msgstr ""
 
 #. (glossterm)
 msgid "Update"
-msgstr "Atualizar"
+msgstr "Actualizar"
 
 #. (para)
 msgid "This Subversion command pulls down the latest changes from the repository into your working copy, merging any changes made by others with local changes in the working copy."
@@ -1284,10 +1290,20 @@ msgstr "Isto é o seu <quote>sandbox</quote> local, a área onde trabalha nos fi
 #. Put one translator per line, in the form of NAME <EMAIL>.
 #. (None)
 msgid "translator-credits"
-msgstr "Luis X. B. Mourão"
+msgstr "Luis X. B. Mourão, Paulo Santana Justino"
 
 #. Place the translation of 'translation' here.
 #. (None)
 msgid "translator-translation"
 msgstr "Tradução"
+
+#, fuzzy
+#~ msgid ""
+#~ "<guibutton>Help</guibutton> opens the TortoiseMerge help file, of course."
+#~ msgstr ""
+#~ "<guibutton>Definições</guibutton> mostra o diálogo de definições do "
+#~ "TortoiseMerge."
+#~ msgid "Specifies a line number to jump to after loading the files."
+#~ msgstr ""
+#~ "Especifica um número de linha para saltar após carregar os ficheiros."
 
