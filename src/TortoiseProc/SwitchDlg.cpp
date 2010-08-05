@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -144,6 +144,12 @@ void CSwitchDlg::OnOK()
 {
 	if (!UpdateData(TRUE))
 		return; // don't dismiss dialog (error message already shown by MFC framework)
+
+    if (::IsWindow(m_pLogDlg->GetSafeHwnd())&&(m_pLogDlg->IsWindowVisible()))
+    {
+        m_pLogDlg->SendMessage(WM_CLOSE);
+        return;
+    }
 
 	// if head revision, set revision as HEAD
 	if (GetCheckedRadioButton(IDC_REVISION_HEAD, IDC_REVISION_N) == IDC_REVISION_HEAD)

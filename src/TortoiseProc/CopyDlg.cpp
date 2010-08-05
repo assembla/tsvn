@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -200,6 +200,11 @@ UINT CCopyDlg::FindRevThread()
 
 void CCopyDlg::OnOK()
 {
+    if (::IsWindow(m_pLogDlg->GetSafeHwnd())&&(m_pLogDlg->IsWindowVisible()))
+    {
+        m_pLogDlg->SendMessage(WM_CLOSE);
+        return;
+    }
 	m_bCancelled = true;
 	// check if the status thread has already finished
 	if (m_pThread)
@@ -297,6 +302,11 @@ void CCopyDlg::OnBnClickedHelp()
 
 void CCopyDlg::OnCancel()
 {
+    if (::IsWindow(m_pLogDlg->GetSafeHwnd())&&(m_pLogDlg->IsWindowVisible()))
+    {
+        m_pLogDlg->SendMessage(WM_CLOSE);
+        return;
+    }
 	m_bCancelled = true;
 	// check if the status thread has already finished
 	if (m_pThread)

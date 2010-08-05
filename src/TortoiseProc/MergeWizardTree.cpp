@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009 - TortoiseSVN
+// Copyright (C) 2007-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -363,11 +363,43 @@ LRESULT CMergeWizardTree::OnWizardNext()
 	if (!CheckData(true))
 		return -1;
 
+    if (::IsWindow(m_pLogDlg->GetSafeHwnd())&&(m_pLogDlg->IsWindowVisible()))
+    {
+        m_pLogDlg->SendMessage(WM_CLOSE);
+        return -1;
+    }
+    if (::IsWindow(m_pLogDlg2->GetSafeHwnd())&&(m_pLogDlg2->IsWindowVisible()))
+    {
+        m_pLogDlg2->SendMessage(WM_CLOSE);
+        return -1;
+    }
+    if (::IsWindow(m_pLogDlg3->GetSafeHwnd())&&(m_pLogDlg3->IsWindowVisible()))
+    {
+        m_pLogDlg3->SendMessage(WM_CLOSE);
+        return -1;
+    }
+
 	return IDD_MERGEWIZARD_OPTIONS;
 }
 
 LRESULT CMergeWizardTree::OnWizardBack()
 {
+    if (::IsWindow(m_pLogDlg->GetSafeHwnd())&&(m_pLogDlg->IsWindowVisible()))
+    {
+        m_pLogDlg->SendMessage(WM_CLOSE);
+        return -1;
+    }
+    if (::IsWindow(m_pLogDlg2->GetSafeHwnd())&&(m_pLogDlg2->IsWindowVisible()))
+    {
+        m_pLogDlg2->SendMessage(WM_CLOSE);
+        return -1;
+    }
+    if (::IsWindow(m_pLogDlg3->GetSafeHwnd())&&(m_pLogDlg3->IsWindowVisible()))
+    {
+        m_pLogDlg3->SendMessage(WM_CLOSE);
+        return -1;
+    }
+
 	return IDD_MERGEWIZARD_START;
 }
 
