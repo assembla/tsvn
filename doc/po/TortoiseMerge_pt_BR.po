@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN Documentation\n"
 "POT-Creation-Date: 2009-03-03 10:39 +0000\n"
-"PO-Revision-Date: 2010-04-18 21:54-0300\n"
-"Last-Translator: Rafael M. Heise <rmheise@gmail.com>\n"
+"PO-Revision-Date: 2010-08-18 01:27-0300\n"
+"Last-Translator: Rafael Marcelo Heise <rmheise@gmail.com>\n"
 "Language-Team: TortoiseSVN translation team <dev@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,7 +96,7 @@ msgstr "TortoiseMerge é gratuito. Você não precisa pagar nada por ele, você 
 
 #. (para)
 msgid "TortoiseMerge is an Open Source project. That means you have full read access to the source code of this program. You can browse it on this link <ulink url=\"http://code.google.com/p/tortoisesvn/source/browse/\"><citetitle>http://code.google.com/p/tortoisesvn/source/browse/</citetitle></ulink>. You will be prompted to enter username and password. The username is <literal>guest</literal>, and the password must be left blank. The most recent version (where we're currently working) is located under <filename>/trunk/</filename>, and the released versions are located under <filename>/tags/</filename>."
-msgstr "TortoiseMerge é um projeto de Código Aberto. Isto significa que você tem total acesso para ver o código deste programa. Você pode vê-lo no sítio <ulink url=\"http://code.google.com/p/tortoisesvn/source/browse/\"><citetitle>http://code.google.com/p/tortoisesvn/source/browse/</citetitle></ulink>. Será necessário entrar com usuário e senha. O nome do usuário é <literal>guest</literal>, e a senha deve ser deixada em branco. A versão mais recente (a que está sendo trabalhada) está localizada em <filename>/trunk/</filename>, e as versões liberadas estão localizadas em <filename>/tags/</filename>."
+msgstr "TortoiseMerge é um projeto de Código Aberto. Isto significa que você tem total acesso para ver o código deste programa. Você pode vê-lo no sítio <ulink url=\"http://code.google.com/p/tortoisesvn/source/browse/\"><citetitle>http://code.google.com/p/tortoisesvn/source/browse/</citetitle></ulink>. Será necessário informar um usuário e uma senha. O usuário é <literal>guest</literal>, e a senha deve ser deixada em branco. A versão mais recente (a que está sendo trabalhada) está localizada em <filename>/trunk/</filename>, e as versões liberadas estão localizadas em <filename>/tags/</filename>."
 
 #. (title)
 msgid "Donate!"
@@ -197,7 +197,7 @@ msgstr "História do TortoiseMerge"
 
 #. (para)
 msgid "While working on <ulink url=\"http://tortoisesvn.tigris.org\"><citetitle>TortoiseSVN</citetitle></ulink> we found that whenever users sent in patches to enhance the project or just to fix bugs, we had a lot of work just applying those patches. And many times those patches were outdated and couldn't be applied with the command line patch tool <ulink url=\"http://unxutils.sourceforge.net/\"><citetitle>http://unxutils.sourceforge.net/</citetitle></ulink> because we were working on those files and had sometimes changed those files already."
-msgstr "Durante o trabalho com o <ulink url=\"http://tortoisesvn.tigris.org\"><citetitle>TortoiseSVN</citetitle></ulink> descobrimos que sempre que os usuários nos enviavam melhorias para o projeto ou apenas correções, nós gastavamos muito tempo só aplicando essas correções e melhorias. E muitas vezes as correções eram enviadas de códigos desatualizados e que não poderiam ser aplicandos usando a ferramenta de correção na linha de comando <ulink url=\"http://unxutils.sourceforge.net/\"><citetitle>http://unxutils.sourceforge.net/</citetitle></ulink> porque nós estávamos trabalhando nos arquivos e algumas vezes já havíamos alterado os arquivos."
+msgstr "Durante o trabalho com o <ulink url=\"http://tortoisesvn.tigris.org\"><citetitle>TortoiseSVN</citetitle></ulink> descobrimos que sempre que os usuários nos enviavam melhorias para o projeto ou apenas correções, nós gastavamos muito tempo só aplicando essas correções e melhorias. E muitas vezes as correções eram enviadas de código desatualizados e que não poderiam ser aplicandos usando a ferramenta de correção na linha de comando <ulink url=\"http://unxutils.sourceforge.net/\"><citetitle>http://unxutils.sourceforge.net/</citetitle></ulink> porque nós estávamos trabalhando nos arquivos e algumas vezes já havíamos alterado os arquivos."
 
 #. (para)
 msgid "This was also the main reason why TortoiseSVN did not originally have a <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Create Patch</guimenuitem></menuchoice> implemented: we preferred users to send us the whole files because with those it was easier to apply patches."
@@ -552,7 +552,7 @@ msgstr "Se você quer comparar/combinar arquivos você tem que definir pelo meno
 
 #. (para)
 msgid "If you want to merge three files, TortoiseMerge will show you the differences in a three pane view. This view is generally used if you need to resolve conflicted files. The output file is not named in this case and you will have to use the <menuchoice><guimenu>File</guimenu><guimenuitem>Save As...</guimenuitem></menuchoice>. to save the results."
-msgstr "Se você quer combinar três arquivos, TortoiseMerge vai mostrar a você as diferenças em três painéis. Está visualização é geralmente usada se você precisa resolver arquivos conflitantes. O arquivo de saída não possui nome, no caso, e você terá que usar o <menuchoice><guimenu>Arquivo</guimenu><guimenuitem>Salvar como...</guimenuitem></menuchoice> para salvar o resultado."
+msgstr "Se você quer combinar três arquivos, TortoiseMerge vai mostrar a você as diferenças em três painéis. Está visualização é geralmente usada se você precisa resolver arquivos conflitantes. O arquivo de saída não possui nome, no caso, e você terá que usar o <menuchoice><guimenu>Arquivo</guimenu><guimenuitem>Salvar como...</guimenuitem><menuchoice> para salvar o resultado."
 
 #. (para)
 msgid "If you want to apply a patch file you have to set both the path to the patch file itself and the path to the folder where the patch file should be applied."
@@ -1303,7 +1303,22 @@ msgstr "créditos de tradução"
 msgid "translator-translation"
 msgstr "tradutor-tradução"
 
+#~ msgid ""
+#~ "<guilabel>Collapse</guilabel> collapses unchanged regions to a single "
+#~ "line, leaving only the changed areas and minimal context. You can expand "
+#~ "the collapsed areas by double clicking on the collapse line, but you "
+#~ "cannot then re-collapse them unless you reload the file."
+#~ msgstr ""
+#~ "<guilabel>Contraido</guilabel> contrai áreas não modificadas para uma "
+#~ "única linha, deixando somente as áreas alteradas e um mínimo de contexto. "
+#~ "Você pode expandir as regiões contraidas com um clique duplo na linha "
+#~ "contraida, mas você não pode contrair  novamente as linhas a menos que "
+#~ "você recarregue o arquivo."
+
+#~ msgid ""
+#~ "<guibutton>Help</guibutton> opens the TortoiseMerge help file, of course."
+#~ msgstr "<guibutton>Ajuda</guibutton> abre a ajuda do TortoiseMerge, claro."
+
 #~ msgid "Specifies a line number to jump to after loading the files."
 #~ msgstr ""
 #~ "Especifica o número de uma linha para ir depois de carregar os arquivos."
-
