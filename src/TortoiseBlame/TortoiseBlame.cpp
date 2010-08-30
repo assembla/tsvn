@@ -1,6 +1,6 @@
 // TortoiseBlame - a Viewer for Subversion Blames
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 #include "TortoiseBlame.h"
 #include "registry.h"
 #include "LangDll.h"
-
+#include "SetDllDirectory.h"
 #define MAX_LOADSTRING 1000
 
 #pragma comment(linker, "\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -46,6 +46,7 @@ long TortoiseBlame::m_gotoline = 0;
 
 TortoiseBlame::TortoiseBlame()
 {
+    SetSafeDllSearchOrder();
 	hInstance = 0;
 	hResource = 0;
 	currentDialog = 0;

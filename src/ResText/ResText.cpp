@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006,2009 - Stefan Kueng
+// Copyright (C) 2003-2006,2009-2010- - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #include "stdafx.h"
 #include "ResModule.h"
-
+#include "..\utils\SetDllDirectory.h"
 #include <string>
 #include <vector>
 #include "shlwapi.h"
@@ -27,6 +27,7 @@ typedef std::basic_string<TCHAR> tstring;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+    SetSafeDllSearchOrder();
 	bool bShowHelp = true;
 	bool bQuiet = false;
 	bool bNoUpdate = false;

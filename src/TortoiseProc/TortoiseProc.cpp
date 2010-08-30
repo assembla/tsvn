@@ -41,7 +41,7 @@
 #include "Commands\Command.h"
 #include "..\version.h"
 #include "JumpListHelpers.h"
-
+#include "SetDllDirectory.h"
 #define APPID (_T("TSVN.TSVN.1") _T(TSVN_PLATFORM))
 
 
@@ -65,7 +65,8 @@ END_MESSAGE_MAP()
 
 CTortoiseProcApp::CTortoiseProcApp()
 {
-	EnableHtmlHelp();
+    SetSafeDllSearchOrder();
+    EnableHtmlHelp();
 	int argc = 0;
 	const char* const * argv = NULL;
 	apr_app_initialize(&argc, &argv, NULL);

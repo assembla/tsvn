@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2008 - Stefan Kueng
+// Copyright (C) 2003-2008, 2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #include "TortoiseUDiff.h"
 #include "MainWindow.h"
 #include "CmdLineParser.h"
-
+#include "SetDllDirectory.h"
 #include <commctrl.h>
 #pragma comment(lib, "comctl32.lib")
 
@@ -35,6 +35,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(nCmdShow);
+    SetSafeDllSearchOrder();
 
 	MSG msg;
 	HACCEL hAccelTable;

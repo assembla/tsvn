@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// External Cache Copyright (C) 2005 - 2006 - Will Dean, Stefan Kueng
+// External Cache Copyright (C) 2005-2006, 2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@
 #include "ioevent.h"
 #include "..\version.h"
 #include "svn_dso.h"
+#include "SetDllDirectory.h"
 
 #include <ShellAPI.h>
 
@@ -104,6 +105,7 @@ DWORD GetDllVersion(LPCTSTR lpszDllName)
 
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int /*cmdShow*/)
 {
+    SetSafeDllSearchOrder();
 	HANDLE hReloadProtection = ::CreateMutex(NULL, FALSE, GetCacheMutexName());
 
 	if (hReloadProtection == 0 || GetLastError() == ERROR_ALREADY_EXISTS)

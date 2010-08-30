@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2006-2009 - TortoiseSVN
+// Copyright (C) 2006-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 #include "PathUtils.h"
 #include "BrowseFolder.h"
 #include "DirFileEnum.h"
-
+#include "SetDllDirectory.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -41,6 +41,7 @@ END_MESSAGE_MAP()
 
 CTortoiseMergeApp::CTortoiseMergeApp()
 {
+    SetSafeDllSearchOrder();
 	EnableHtmlHelp();
 	m_bLoadUserToolbars = FALSE;
 	m_bSaveState = FALSE;

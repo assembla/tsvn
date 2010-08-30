@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,7 +16,7 @@
 // along with this program; if not, write to the Free Software Foundation,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #include "stdafx.h"
-
+#include "..\utils\SetDllDirectory.h"
 #include <iostream>
 #include <tchar.h>
 #include <windows.h>
@@ -371,6 +371,7 @@ void customInvalidParameterHandler(const wchar_t* /*expression*/,
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+    SetSafeDllSearchOrder();
 	// we have three parameters
 	const TCHAR * src = NULL;
 	const TCHAR * dst = NULL;
