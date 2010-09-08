@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2004-2009 - TortoiseSVN
+// Copyright (C) 2004-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -655,6 +655,8 @@ BOOL CPatch::HasExpandedKeyWords(const CString& line)
 	if (line.Find(_T("$URL"))>=0)
 		return TRUE;
 	if (line.Find(_T("$Id"))>=0)
+		return TRUE;
+	if (line.Find(_T("$Header"))>=0)
 		return TRUE;
 	return FALSE;
 }
