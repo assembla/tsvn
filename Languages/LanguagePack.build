@@ -394,7 +394,7 @@ NAnt build script for the TortoiseSVN language pack installers
 			<arg value="..\bin\WixUI_LanguagePacks.wixobj" />
 			<arg value="-ext" />
 			<arg value="WixUIExtension" />
-			<arg value="-cultures:${langWIX}" />
+			<arg value="-cultures:en-us" />
 		</exec>
 		<delete>
 			<fileset>
