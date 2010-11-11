@@ -56,7 +56,7 @@ All user/site specific configuration is stored in doc.build.user.
       <property name="doc.target.name" value="${app}_${lang.target}"/>
       <property name="doc.target.work" value="output/${doc.target.name}"/>
       <property name="doc.target.source" value="source/${lang.target}/${app}/${app}.xml"/>
-      <property name="lang.pofile" value="../Languages/${lang.target}/LC_MESSAGES/${app}.po" />
+      <property name="lang.pofile" value="../Languages/${lang.target}/LC_MESSAGES/TortoiseDoc.po" />
 
       <echo message="------------------------------------------------------------"/>
       <echo message="Creating '${doc.target.name}' documentation"/>
@@ -224,7 +224,7 @@ All user/site specific configuration is stored in doc.build.user.
 
     <foreach item="String" in="${potemplates}" delim="," property="app">
 
-      <property name="potfile" value="../Languages/${app}.pot" />
+      <property name="potfile" value="${app}.pot" />
       <property name="xslt.source" value="source/${lang.base}/${app}/${app}.xml"/>
       <property name="file.target" value="source/${app}_${lang.base}.xml"/>
 
@@ -249,6 +249,15 @@ All user/site specific configuration is stored in doc.build.user.
 
       <echo message="" />
     </foreach>
+
+    <!-- Create a common .pot file for both applications -->
+    <!-- Could be smart to replace the comma delimiters in potemplates by spaces 
+         and use this instead on the command line -->
+    <exec program="msgcat"
+          commandline="TortoiseSVN.pot TortoiseMerge.pot --use-first -o ../Languages/TortoiseSVN.pot"
+          basedir="${path.gettext}"
+          verbose="false"/>
+
   </target>
 
   <!-- ====================================================================== -->
