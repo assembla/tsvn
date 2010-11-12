@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009 - TortoiseSVN
+// Copyright (C) 2007-2010 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "registry.h"
 #include "StringUtils.h"
 #include "TempFile.h"
+#include "FormatMessageWrapper.h"
 
 CHooks* CHooks::m_pInstance;
 
@@ -212,7 +213,11 @@ void CHooks::AddPathParam(CString& sCmd, const CTSVNPathList& pathList)
 
 void CHooks::AddCWDParam(CString& sCmd, const CTSVNPathList& pathList)
 {
-	AddParam(sCmd, pathList.GetCommonRoot().GetDirectory().GetWinPathString());
+    CTSVNPath curDir = pathList.GetCommonRoot().GetDirectory();
+    while (!curDir.IsEmpty() && !curDir.Exists())
+        curDir = curDir.GetContainingDirectory();
+
+    AddParam(sCmd, curDir.GetWinPathString());
 }
 
 void CHooks::AddDepthParam(CString& sCmd, svn_depth_t depth)
@@ -369,11 +374,15 @@ DWORD CHooks::RunScript(CString cmd, const CTSVNPathList& paths, CString& error,
 	sa.nLength = sizeof(sa);
 	sa.bInheritHandle = TRUE;
 
-	CTSVNPath curDir = paths.GetCommonRoot().GetDirectory();
-	if (!curDir.Exists())
-		curDir = curDir.GetContainingDirectory();
-	if (!curDir.Exists())
-		curDir.Reset();
+    CTSVNPath curDir = paths.GetCommonRoot().GetDirectory();
+    while (!curDir.IsEmpty() && !curDir.Exists())
+        curDir = curDir.GetContainingDirectory();
+    if (curDir.IsEmpty())
+    {
+        WCHAR buf[MAX_PATH] = {0};
+        GetTempPath(MAX_PATH, buf);
+        curDir.SetFromWin(buf, true);
+    }
 
 	HANDLE hOut   = INVALID_HANDLE_VALUE;
 	HANDLE hRedir = INVALID_HANDLE_VALUE;
@@ -394,28 +403,31 @@ DWORD CHooks::RunScript(CString cmd, const CTSVNPathList& paths, CString& error,
 	// redirect handle must be READ mode, share WRITE
 	hErr   = CreateFile(szErr, GENERIC_WRITE, FILE_SHARE_READ, &sa, CREATE_ALWAYS, FILE_ATTRIBUTE_TEMPORARY,	0);
 
-	if (hErr  == INVALID_HANDLE_VALUE) 
-	{
-		return (DWORD)-1;
-	}
+    if (hErr  == INVALID_HANDLE_VALUE)
+    {
+        error = CFormatMessageWrapper();
+        return (DWORD)-1;
+    }
 
 	hRedir = CreateFile(szErr, GENERIC_READ, FILE_SHARE_WRITE, 0, OPEN_EXISTING, 0, 0);
 
-	if (hRedir  == INVALID_HANDLE_VALUE) 
-	{
-		CloseHandle(hErr);
-		return (DWORD)-1;
-	}
+    if (hRedir  == INVALID_HANDLE_VALUE)
+    {
+        error = CFormatMessageWrapper();
+        CloseHandle(hErr);
+        return (DWORD)-1;
+    }
 
 	GetTempFileName(szTempPath, _T("svn"), 0, szOutput);
 	hOut   = CreateFile(szOutput, GENERIC_WRITE, FILE_SHARE_READ, &sa, CREATE_ALWAYS, FILE_ATTRIBUTE_TEMPORARY,	0);
 
-	if (hOut  == INVALID_HANDLE_VALUE) 
-	{
-		CloseHandle(hErr);
-		CloseHandle(hRedir);
-		return (DWORD)-1;
-	}
+    if (hOut  == INVALID_HANDLE_VALUE)
+    {
+        error = CFormatMessageWrapper();
+        CloseHandle(hErr);
+        CloseHandle(hRedir);
+        return (DWORD)-1;
+    }
 
 	// setup startup info, set std out/err handles
 	// hide window
@@ -434,20 +446,20 @@ DWORD CHooks::RunScript(CString cmd, const CTSVNPathList& paths, CString& error,
 	SecureZeroMemory(&pi, sizeof(pi));
 
 	DWORD dwFlags = 0;
-
-	if (!CreateProcess(NULL, cmd.GetBuffer(), NULL, NULL, TRUE, dwFlags, NULL, curDir.GetWinPath(), &si, &pi)) 
-	{
-			int err = GetLastError();  // preserve the CreateProcess error
-			if (hErr != INVALID_HANDLE_VALUE) 
-			{
-				CloseHandle(hErr);
-				CloseHandle(hRedir);
-			}
-			SetLastError(err);
-			cmd.ReleaseBuffer();
-			return (DWORD)-1;
-	}
-	cmd.ReleaseBuffer();
+    if (!CreateProcess(NULL, cmd.GetBuffer(), NULL, NULL, TRUE, 0, NULL, curDir.IsEmpty() ? NULL : curDir.GetWinPath(), &si, &pi))
+    {
+        const DWORD err = GetLastError();  // preserve the CreateProcess error
+        if (hErr != INVALID_HANDLE_VALUE)
+        {
+            error = CFormatMessageWrapper(err);
+            CloseHandle(hErr);
+            CloseHandle(hRedir);
+        }
+        SetLastError(err);
+        cmd.ReleaseBuffer();
+        return (DWORD)-1;
+    }
+    cmd.ReleaseBuffer();
 
 	CloseHandle(pi.hThread);
 
