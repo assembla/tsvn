@@ -203,7 +203,7 @@
 				Optimization="1"
 				FavorSizeOrSpeed="2"
 				AdditionalIncludeDirectories="..\Utils;..\Utils\MiscUI"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_BIND_TO_CURRENT_CRT_VERSION"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				BufferSecurityCheck="true"
@@ -287,7 +287,7 @@
 				Optimization="1"
 				FavorSizeOrSpeed="2"
 				AdditionalIncludeDirectories="..\Utils;..\Utils\MiscUI"
-				PreprocessorDefinitions="WIN64;NDEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN64;NDEBUG;_WINDOWS;_BIND_TO_CURRENT_CRT_VERSION"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -915,11 +915,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\pandown.cur"
+				RelativePath="..\Resources\pandown.cur"
 				>
 			</File>
 			<File
-				RelativePath="..\Resources\pandown.cur"
+				RelativePath=".\pandown.cur"
 				>
 			</File>
 			<File

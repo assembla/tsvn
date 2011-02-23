@@ -115,6 +115,7 @@
 						<define name="APR_HAVE_IPV6" if="${ipv6 == 'enabled'}" />
 						<define name="WIN64" if="${platform == 'x64'}" />
 						<define name="NDEBUG" if="${configuration == 'release'}"/>
+						<define name="_BIND_TO_CURRENT_CRT_VERSION" if="${configuration == 'release'}"/>
 						<define name="_DEBUG" if="${configuration != 'release'}"/>
 					</defines>
 				</cl>
@@ -204,6 +205,7 @@
 						<define name="WIN64" if="${platform == 'x64'}" />
 						<define name="NDEBUG" if="${configuration == 'release'}"/>
 						<define name="_DEBUG" if="${configuration != 'release'}"/>
+						<define name="_BIND_TO_CURRENT_CRT_VERSION" if="${configuration == 'release'}"/>
 					</defines>
 				</cl>
 				<lib
@@ -302,6 +304,7 @@
 							<define name="WIN64" if="${platform == 'x64'}" />
 							<define name="NDEBUG" if="${configuration == 'release'}"/>
 							<define name="_DEBUG" if="${configuration != 'release'}"/>
+                            <define name="_BIND_TO_CURRENT_CRT_VERSION" if="${configuration == 'release'}"/>
 						</defines>
 					</cl>
 					<echo message="now linking ${toolname}" />

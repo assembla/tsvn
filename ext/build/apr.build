@@ -109,6 +109,7 @@
 				<define name="_WINDLL" if="${static != 'static'}" />
 				<define name="NDEBUG" if="${configuration == 'release'}"/>
 				<define name="_DEBUG" if="${configuration != 'release'}"/>
+				<define name="_BIND_TO_CURRENT_CRT_VERSION" if="${configuration == 'release'}"/>
 			</defines>
 		</cl>
 		<property name="machineoption" value="/MACHINE:X86" if="${platform == 'win32'}" />
