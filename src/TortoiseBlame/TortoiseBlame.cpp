@@ -1,6 +1,6 @@
 // TortoiseBlame - a Viewer for Subversion Blames
 
-// Copyright (C) 2003-2010 - TortoiseSVN
+// Copyright (C) 2003-2011 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -230,7 +230,7 @@ BOOL TortoiseBlame::OpenFile(const char *fileName)
 	SendEditor(SCI_SETUNDOCOLLECTION, 0);
 	::ShowWindow(wEditor, SW_HIDE);
 	std::ifstream File;
-	int retrycount = 5;
+	int retrycount = 10;
 	while (retrycount)
 	{
 		File.open(fileName);
