@@ -1,0 +1,1819 @@
+# Translation of the TortoiseSVN manuals
+# Copyright (C) 2004-2011 the TortoiseSVN team
+# 
+# This file is distributed under the same license as TortoiseSVN
+# 
+# Last commit by:
+# $Author$
+# $Date$
+# $Rev$
+# 
+# Authors:
+# Lübbe Onken <l.onken@rac.de>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: TortoiseSVN\n"
+"Report-Msgid-Bugs-To: "
+"http://code.google.com/p/tortoisesvn/wiki/IssueTracker?tm=3\n"
+"POT-Creation-Date: 2009-03-03 10:39 +0000\n"
+"PO-Revision-Date: 2011-03-03 11:06+0200\n"
+"Last-Translator: Lübbe Onken <l.onken@rac.de>\n"
+"Language-Team: RA Consulting GmbH <support@rac.de>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Virtaal 0.6.1\n"
+
+#.(title)
+msgid "TortoiseMerge"
+msgstr "TortoiseMerge"
+
+#.(subtitle)
+msgid "A diff/merge tool for Windows"
+msgstr "Nástroj porovnání/sloučení pro Windows"
+
+#. TRANSLATORS: "$MajorVersion$.$MinorVersion$.$MicroVersion$" is a literal value and should not be translated
+#.(subtitle)
+#, fuzzy
+msgid "Version $MajorVersion$.$MinorVersion$.$MicroVersion$"
+msgstr "Verze $MajorVersion$.$MinorVersion$.$MicroVersion$"
+
+#.(edition)
+msgid "First"
+msgstr "První"
+
+#.(firstname)
+msgid "Stefan"
+msgstr "Stefan"
+
+#.(surname)
+msgid "Küng"
+msgstr "Küng"
+
+#.(firstname)
+msgid "Lübbe"
+msgstr "Lübbe"
+
+#.(surname)
+msgid "Onken"
+msgstr "Onken"
+
+#.(firstname)
+msgid "Simon"
+msgstr "Simon"
+
+#.(surname)
+msgid "Large"
+msgstr "Large"
+
+#.(title)
+msgid "Preface"
+msgstr "Předmluva"
+
+#.(para)
+msgid "When working on a project, either an open-source project where several people review your code, or a commercial project where you sell a component with your source code, there will be people and customers who find bugs or want to improve your project. To do that they send you patches which you have to review and decide if you want to apply them."
+msgstr ""
+"Při práci na projektu a to buď na open-source projektu, ve kterém více lidí "
+"kontroluje Váš kód, nebo komerční projekt, kde budete prodávat komponentu s "
+"Vašim zdrojovým kódem, najdou se lidi a zákazníci, kteří najdou chyby, nebo "
+"chtějí zlepšit Váš projekt. Aby toto provedli, posílají Vám záplaty, které "
+"budete muset zhlédnout a rozhodnout, zda ji chcete použít."
+
+#.(para)
+msgid "Reviewing patches"
+msgstr "Přezkoumání záplat"
+
+#.(para)
+msgid "Applying the patches"
+msgstr "Uplatnění záplat"
+
+#.(para)
+msgid "TortoiseMerge helps you with both those tasks: <placeholder-1/>"
+msgstr "TortoiseMerge Vám pomůže s oběma těmito úkoly: <placeholder-1/>"
+
+#.(para)
+msgid "TortoiseMerge also helps you to sort out conflicted files which can occur if you're working with a source control system and others are working on the same files as you."
+msgstr ""
+"TortoiseMerge také Vám pomáhá vyřešit konfliktní soubory, které mohou "
+"nastat, pokud pracujete se systémem pro správu verzí a ostatní pracují na "
+"stejném soubory jako Vy."
+
+#.(title)
+msgid "TortoiseMerge is free!"
+msgstr "TortoiseMerge je zdarma!"
+
+#.(para)
+msgid "TortoiseMerge is free. You don't have to pay for it, you can use it any way you want. It is developed under the GP license (GPL)."
+msgstr ""
+"TortoiseMerge je zdarma. Nemusíte platit za něj platit, můžete jej použít "
+"jakýmkoli způsobem, kterým chcete. Je vyvíjen pod licencí GP (GPL)."
+
+#.(para)
+#, fuzzy
+msgid "TortoiseMerge is an Open Source project. That means you have full read access to the source code of this program. You can browse it on this link <ulink url=\"http://code.google.com/p/tortoisesvn/source/browse/\"><citetitle>http://code.google.com/p/tortoisesvn/source/browse/</citetitle></ulink>. You will be prompted to enter username and password. The username is <literal>guest</literal>, and the password must be left blank. The most recent version (where we're currently working) is located under <filename>/trunk/</filename>, and the released versions are located under <filename>/tags/</filename>."
+msgstr ""
+"TortoiseMerge je Open Source projekt. To znamená, že máte plný přístup je "
+"čtení zdrojového kódu tohoto programu. Můžete jej procházet na tomto odkazu "
+"<ulink url=\"http://code.google.com/p/tortoisesvn/source/browse/\"><citetitle>"
+"http://code.google.com/p/tortoisesvn/source/browse/</citetitle></ulink>. "
+"Nejnovější verze (na které se v současnosti pracuje) se nachází pod "
+"<filename>/trunk/</filename> a vydané verze jsou umístěny v "
+"<filename>/tags/</filename>."
+
+#.(title)
+msgid "Donate!"
+msgstr "Přispějte!"
+
+#.(para)
+msgid "Even though TortoiseSVN and TortoiseMerge are free, you can support the developers by sending in patches and play an active role in the development. You can also help to cheer us up during the endless hours we spend in front of our computers."
+msgstr ""
+"I když TortoiseSVN a TortoiseMerge jsou zdarma, můžete podpořit vývojáře "
+"zasláním záplat a hrát aktivní roli ve vývoji. Můžete také pomoci nás "
+"povzbudit během nekonečných hodin, které trávíme před našimi počítači."
+
+#.(para)
+#, fuzzy
+msgid "While working on TortoiseSVN we love to listen to music. And since we spend many hours on the project we need a <emphasis>lot</emphasis> of music. Therefore we have set up some wish-lists with our favourite music CDs and DVDs: <ulink url=\"http://tortoisesvn.tigris.org/donate.html\"><citetitle>http://tortoisesvn.tigris.org/donate.html</citetitle></ulink> Please also have a look at the list of people who contributed to the project by sending in patches or translations."
+msgstr ""
+"Při práci na TortoiseSVN rádi posloucháme hudbu. A protože trávíme na "
+"projektu mnoho hodin, potřebujeme <emphasis>hodně</emphasis> hudby. Proto "
+"jsme si vytvořili seznamy přání CD a DVD s naší oblíbenou hudbou a DVD: "
+"<ulink url=\"http://tortoisesvn.net/donate.html\"><citetitle>http://tortoisesv"
+"n.net/donate.html</citetitle></ulink> Prosím, podívejte se také na seznam "
+"lidí, kteří přispěli na projekt zasláním záplat nebo překladů."
+
+#.(title)
+msgid "Acknowledgments"
+msgstr "Poděkování"
+
+#.(term)
+msgid "Stefan Küng"
+msgstr "Stefan Küng"
+
+#.(para)
+msgid "for the hard work on TortoiseMerge"
+msgstr "za tvrdou práci na TortoiseMerge"
+
+#.(term)
+msgid "Lübbe Onken"
+msgstr "Lübbe Onken"
+
+#.(para)
+msgid "for the beautiful icons, logo, bug hunting and taking care of the documentation"
+msgstr "za nádherné ikony, logo, odchyt chyb a péči o dokumentaci"
+
+#.(term)
+msgid "The Tigris Style project"
+msgstr "Projektu Tigris Style"
+
+#.(para)
+msgid "for some of the styles which are reused in this documentation"
+msgstr "za některé styly, které byly použity v této dokumentaci"
+
+#.(term)
+msgid "Our Contributors"
+msgstr "Našim Přispěvatelům"
+
+#.(para)
+msgid "for the patches, bug reports and new ideas, and for helping others by answering questions on our mailing list."
+msgstr ""
+"za opravy, hlášení chyb a nové nápady, a za pomoc druhým odpovídáním na "
+"otázky týkající se našeho mailing listu."
+
+#.(term)
+msgid "Our Donators"
+msgstr "Našim Dárcům"
+
+#.(para)
+msgid "for many hours of joy with the music they sent us"
+msgstr "za mnoho hodin radosti s hudbou, kterou nám poslali"
+
+#.(title)
+msgid "Introduction"
+msgstr "Úvod"
+
+#.(title)
+msgid "Overview"
+msgstr "Přehled"
+
+#.(para)
+msgid "TortoiseMerge is a free/open-source application. It lets you see differences in text files, merge those changes and even review and apply unified diff files, often called <firstterm>patches</firstterm>."
+msgstr ""
+"TortoiseMerge je zdarma/open-source aplikace. Umožní Vám vidět rozdíly v "
+"textových souborech, sloučit tyto změny a dokonce i kontrolovat a uplatnit "
+"soubory sjednoceného rozdílu, často nazývané <firstterm>záplaty</firstterm>."
+
+#.(para)
+msgid "While working on text files, e.g. source files in your favourite programming language, or html/xml files for your documentation or website, you will often have a situation where you need to compare different versions of those files. Sometimes you get a different version from someone else, sometimes you just want to see the changes you've made."
+msgstr ""
+"Při práci na textových souborech, např. zdrojové soubory ve Vašem oblíbeném "
+"programovacím jazyce, nebo html/xml soubory pro Vaše dokumenty nebo webové "
+"stránky, budete často v situaci, kdy je třeba porovnat různé verze těchto "
+"souborů. Někdy máte jinou verzi od někoho jiného, někdy jen chcete vidět "
+"změny, které jste provedli."
+
+#.(para)
+msgid "If you're working with a version control system (e.g. Subversion) then you sometimes get <emphasis>conflicts</emphasis> when you update your working copy. This happens if someone else changed the same parts of the file you're currently working on as you did. Then you have to resolve those conflicts manually. This is where TortoiseMerge can help you."
+msgstr ""
+"Pokud pracujete se systémem pro správu verzí (např. Subversion), pak někdy "
+"při aktualizaci Vaší pracovní kopie dostanete <emphasis>konflikt</emphasis>. "
+"Ten nastane, pokud někdo jiný změnil stejné části souboru, na kterém v "
+"současné době pracujete ve stejnou dobu. Pak budete muset tyto konflikty "
+"ručně vyřešit. Zde Vám TortoiseMerge může pomoci."
+
+#.(para)
+msgid "The following diagram shows you the relationships between the files involved in a conflict:"
+msgstr "Následující graf zobrazuje vztah mezi soubory zapojené do konfliktu:"
+
+#.(title)
+#.(title)
+msgid "File Conflict"
+msgstr "Konflikt souboru"
+
+#.(para)
+msgid "A conflict can also occur if you try to apply an outdated patch file. In such cases, without TortoiseMerge, you would either have to ask the person you got that patch file from for a current version or try to apply that patch file manually."
+msgstr ""
+"Konflikt také může nastat, pokud se pokusíte použít zastaralý záplatový "
+"soubor. V takových případech, bez TortoiseMerge, byste museli buď požádat "
+"osobu, od které jste dostali tento záplatový soubor, o aktuální verzi, nebo "
+"zkusili uplatnit záplatový soubor ručně."
+
+#.(para)
+msgid "But now with TortoiseMerge this isn't necessary anymore - at least not if you're working with a version control system like Subversion. TortoiseMerge parses the patch file for the revision/version the patch was created for and automatically tries to fetch that specific version from your source-control. Then it applies the patch and lets you review both your changes to the file, and theirs. Then you can decide which changes you want to keep."
+msgstr ""
+"Ale nyní s TortoiseMerge to už není nutné - alespoň ne, pokud pracujete se "
+"systémem pro správu verzí, jako je Subversion. TortoiseMerge záplatový "
+"soubor rozebere na revizi/verzi, pro kterou byl vytvořen a automaticky se "
+"pokusí načíst konkrétní verzi ze systému pro správu verzí. Pak použije "
+"záplatu a umožňí Vám prozkoumat jak Vaše změny v souboru, tak jejich. Pak se "
+"můžete rozhodnout, které změny chcete zachovat."
+
+#.(title)
+msgid "TortoiseMerge's History"
+msgstr "Historie TortoiseMerge"
+
+#.(para)
+#, fuzzy
+msgid "While working on <ulink url=\"http://tortoisesvn.tigris.org\"><citetitle>TortoiseSVN</citetitle></ulink> we found that whenever users sent in patches to enhance the project or just to fix bugs, we had a lot of work just applying those patches. And many times those patches were outdated and couldn't be applied with the command line patch tool <ulink url=\"http://unxutils.sourceforge.net/\"><citetitle>http://unxutils.sourceforge.net/</citetitle></ulink> because we were working on those files and had sometimes changed those files already."
+msgstr ""
+"Při práci na <ulink "
+"url=\"http://tortoisesvn.net\"><citetitle>TortoiseSVN</citetitle></ulink> jsme "
+"zjistili, že vždy, když uživatelé pošlou záplaty pro vylepšení projektu "
+"nebo jen k opravě chyb, měli jsme hodně práce jenom tyto záplaty použit. A "
+"kolikrát tyto opravy byly zastaralé a nemohly být použity nástroj záplaty "
+"příkazové řádky <ulink url=\"http://unxutils.sourceforge.net/\"><citetitle>htt"
+"p://unxutils.sourceforge.net/</citetitle></ulink> protože jsme na těchto "
+"souborech pracovali a někdy už jsme tyto soubory změnili."
+
+#.(para)
+msgid "This was also the main reason why TortoiseSVN did not originally have a <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Create Patch</guimenuitem></menuchoice> implemented: we preferred users to send us the whole files because with those it was easier to apply patches."
+msgstr ""
+"Toto byl také hlavní důvod, proč TortoiseSVN původně neměl zavedenu "
+"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Vytvořit "
+"Záplatu</guimenuitem></menuchoice>: dávali jsme přednost, aby uživatelé nám "
+"posílali celé soubory, protože s nimi bylo snadnější záplaty použít."
+
+#.(para)
+msgid "So we spent a lot of time, searching the Internet for a GUI tool which could apply patch files, but all we found was that such a tool didn't exist. So to cut a long story short: We decided that if no-one else could provide such a tool we would have to write our own. That's when TortoiseMerge was born."
+msgstr ""
+"Tak jsme strávili spoustu času, prohledáváním internetu pro GUI nástroj, "
+"který by mohl používat záplatové soubory, ale pouze jsme zjistili, že takový "
+"nástroj neexistuje. Takže suma sumárum: Rozhodli jsme se, že pokud nikdo "
+"jiný nemůže poskytnout takový nástroj, musíme si napsat vlastní. A tehdy se "
+"zrodil TortoiseMerge."
+
+#.(para)
+msgid "Since TortoiseSVN already uses the Subversion library, which has a nice diffing engine built in, it was just natural to use this library instead of the GNU diff."
+msgstr ""
+"Vzhledem k tomu, že TortoiseSVN již používá knihovnu Subversion, který už má "
+"v sobě pěkné jádro porovnávání, bylo jen přirozené použít tuto knihovnu "
+"místo GNU diff."
+
+#.(title)
+msgid "Basic Concepts"
+msgstr "Základní představa"
+
+#.(para)
+msgid "Viewing the difference between two files and merging changes into one of them, or removing unwanted changes."
+msgstr ""
+"Zobrazení rozdílu mezi dvěma soubory a slučování změn do jednoho z nich, "
+"nebo odstraňování nežádoucích změn."
+
+#.(para)
+msgid "Editing conflicts between local changes and changes in the Subversion repository following an update."
+msgstr ""
+"Úprava konfliktů mezi místními změnami a změnami v úložišti Subversion po "
+"aktualizaci."
+
+#.(para)
+msgid "Applying patch files. This is the reason TortoiseMerge was created :)"
+msgstr ""
+"Uplatnění záplatových souborů. To je důvod, proč byl TortoiseMerge "
+"vytvořen:)"
+
+#.(para)
+msgid "TortoiseMerge has several different uses: <placeholder-1/>"
+msgstr "TortoiseMerge má několik různých použití: <placeholder-1/>"
+
+#.(title)
+msgid "Viewing and Merging Differences"
+msgstr "Prohlížení a Sloučení Rozdílů"
+
+#.(para)
+msgid "In this mode you are comparing two files. The file in the left pane is considered to be the original file (sometimes referred to as <emphasis>Theirs</emphasis>, and the file in the right pane is the modified file (sometimes referred to as <emphasis>Mine</emphasis>."
+msgstr ""
+"V tomto režimu porovnáváte dva soubory. Soubor v levém panelu je považován "
+"za původní soubor (někdy označován jako <emphasis>Jejich</emphasis> a soubor "
+"v pravém panelu je upravený soubor (někdy označované jako "
+"<emphasis>Můj</emphasis>."
+
+#.(para)
+msgid "Reverting changed lines back to the text shown in the left pane."
+msgstr "Vrátit změněné řádky zpět na text zobrazený v levém panelu."
+
+#.(para)
+msgid "Using a combination of both blocks, either <emphasis>Theirs</emphasis> before <emphasis>Mine</emphasis> or <emphasis>Mine</emphasis> before <emphasis>Theirs</emphasis>."
+msgstr ""
+"Pomocí kombinace obou bloků, a to buď <emphasis>Jejich</emphasis> před "
+"<emphasis>Můj</emphasis>, nebo <emphasis>Můj</emphasis> před "
+"<emphasis>Jejich</emphasis>."
+
+#.(para)
+msgid "You can make simple line-based changes to the file in the right pane which include: <placeholder-1/>"
+msgstr ""
+"Můžete provést jednoduché změny řádků v souborů v pravém panelu, které "
+"zahrnují: <placeholder-1/>"
+
+#.(para)
+msgid "You can also edit the file in the right pane just as you would in a text editor. Such lines are marked using a pencil icon. Please note that if you want to make any of the line/block-based changes described above, it is better to do those first since once you start editing the file yourself it becomes impossible for TortoiseMerge to keep track of the relationship to the original files."
+msgstr ""
+"Můžete soubor také upravit v pravém panelu, stejně jako v textovém editoru. "
+"Takové linky jsou označeny ikonou tužky. Vezměte prosím na vědomí, že pokud "
+"chcete některé ze změn řádků/bloků popsaných výše, je lepší je provést jako "
+"první, protože jakmile začnete upravovat soubor sami, stane se pro "
+"TortoiseMerge nemožné sledovat vztahy s původním souborem."
+
+#.(title)
+msgid "Editing Conflicts"
+msgstr "Úprava Konfliktů"
+
+#.(para)
+msgid "This is sometimes referred to as a three-way merge, and is shown in three panes. However there are actually four files involved. The file which is not shown is the common base file, the last common ancestor of the two files which are now in conflict. The relationships between the three files are explained in the diagram below:"
+msgstr ""
+"Tomuto se někdy říká trojité porovnávání sloučení a je uvedeno ve třech "
+"panelech. Vlastně jsou však zahrnuty čtyři soubory. Soubor, který není "
+"zobrazen, je soubor společného základu, poslední společný předek dvou "
+"souborů, které jsou nyní v konfliktu. Vztahy mezi třemi soubory jsou popsány "
+"v níže uvedeném diagramu:"
+
+#.(para)
+msgid "The base file represents the oldest version of a file, from where <emphasis>You</emphasis> and <emphasis>They</emphasis> start making changes. <emphasis>Mine</emphasis> represents the base file with all the changes <emphasis>you</emphasis> made, and <emphasis>Theirs</emphasis> is the file with all the changes <emphasis>someone else</emphasis> made to the file. The left pane shows the changes in <emphasis>Theirs</emphasis> relative to the base file and the right pane shows the changes in <emphasis>Mine</emphasis> relative to the base file. The bottom pane is the output file which is where you are trying to resolve the conflicts."
+msgstr ""
+"Základní soubor představuje nejstarší verzi souboru, odkud "
+"<emphasis>Vy</emphasis> a <emphasis>Oni</emphasis> začnete dělat změny. "
+"<emphasis>Můj</emphasis> představuje základní soubor se všemi změnami, které "
+"jste <emphasis>Vy</emphasis> provedli a <emphasis>Jejich</emphasis> je "
+"soubor se všemi změnami, které <emphasis>někdo jiný</emphasis> v souboru "
+"provedl. Levý panel zobrazuje změny v <emphasis>Jejich</emphasis> oproti "
+"základnímu souboru a pravý panel zobrazuje změny v <emphasis>Mém</emphasis> "
+"oproti základnímu souboru. Dolní panel je výstupní soubor, kde se snažíte "
+"vyřešit konflikty."
+
+#.(para)
+msgid "In conflict resolution view, you can choose to use blocks from <emphasis>Mine</emphasis> or <emphasis>Theirs</emphasis> or both. But in this case, the changes are shown in the bottom pane."
+msgstr ""
+"V zobrazení řešení konfliktů můžete použít bloky z <emphasis>Můj</emphasis> "
+"nebo <emphasis>Jejich</emphasis> nebo obojí. Ale v tomto případě jsou změny "
+"uvedeny ve spodním panelu."
+
+#.(title)
+#.(title)
+#.(title)
+msgid "Applying Patches"
+msgstr "Uplatnění Záplat"
+
+#.(para)
+msgid "A patch file is a Subversion unified diff file, which contains the information required to apply changes to a set of files. The patch may have been supplied by another developer so that you can see changes he has made and possibly commit them to the repository. Or it may have been generated internally by TortoiseSVN when comparing two folders. This happens when you compare a repository revision with your working copy folder, or if you compare two different repository revisions, or if you compare two different repository paths."
+msgstr ""
+"Záplatový soubor je soubor sjednoceného rozdílu Subversion, který obsahuje "
+"informace potřebné k použití změn na sadu souborů. Záplata může být dodána "
+"jiným vývojářem, takže můžete vidět změny, které udělal a možná je odevzdat "
+"do úložiště. Nebo mohl být interně vytvořen TortoiseSVN při porovnávání dvou "
+"adresářů. To se stane, když porovnáte revizi úložiště s adresářem Vaší "
+"pracovní kopie, nebo pokud porovnáváte dvě různé revize úložiště, nebo pokud "
+"porovnáváte dvě různé cesty úložiště."
+
+#.(para)
+msgid "In either case TortoiseMerge will show a small window listing the files included in the patch. By double clicking on one of these files you fetch the relevant file and apply the changes. The left pane shows the original file content and the right pane shows it after the patch is applied."
+msgstr ""
+"V každém případě TortoiseMerge zobrazí malé okno se seznamem souborů "
+"zahrnutých v záplatě. Dvojitým kliknutím na jeden z těchto souborů můžete "
+"načíst příslušný soubor a změny uplatit. Levý panel zobrazí původní obsah "
+"souboru a pravý panelu ho zobrazuje poté, co byla záplata použita."
+
+#.(para)
+msgid "You can edit the file in the right pane exactly as you would in compare/edit mode."
+msgstr ""
+"Můžete upravit soubor v pravém panelu přesně tak, jak byste dělali v režimu "
+"porovnání/úprav."
+
+#.(title)
+msgid "Using TortoiseMerge"
+msgstr "Použití TortoiseMerge"
+
+#.(title)
+msgid "Viewing Modes"
+msgstr "Režimy prohlížení"
+
+#.(para)
+msgid "TortoiseMerge has three main viewing modes: one-pane, two-pane and three-pane view. One/two-pane view is used to view changes and three-pane view is used to resolve conflicts."
+msgstr ""
+"TortoiseMerge má tři hlavní způsoby zobrazení: jedno panelový, dvou panelový "
+"a tři panelový pohled. Jeden/dvou panelový pohled se používá k zobrazení "
+"změn a tří panelový pohled se používá k řešení konfliktů."
+
+#.(title)
+#.(title)
+msgid "Viewing / Merging"
+msgstr "Prohlížení / Sloučení"
+
+#.(title)
+msgid "One Pane View"
+msgstr "Jedno panelové Zobrazení"
+
+#.(title)
+msgid "Two Pane View"
+msgstr "Dvou panelové Zobrazení"
+
+#.(para)
+msgid "Changes inside the modified lines are shown in different colors. Added string parts are shown with a lighter color, but you can of course configure the colors used here. Removed parts are indicated with a dark brown vertical line in the string. Check out the screenshot above to see how this works."
+msgstr ""
+"Změny uvnitř upravených řádků jsou zobrazeny v různých barvách. Přidané "
+"části řetězce jsou zobrazeny světlejší barvou, ale můžete samozřejmě "
+"používané barvy zde nastavit. Odstraněné části jsou v řetězci uvedeny tmavě "
+"hnědou svislou čárou. Podívejte se na obrázek výše, abyste viděli, jak to "
+"funguje."
+
+#.(para)
+msgid "Code reorganization usually means a lot of changes in whitespaces (space, tab, newlines) but no actual code change. For example, you split up a very long line into several lines, or you sometimes compact several lines together into one."
+msgstr ""
+"Reorganizace kódu obvykle znamená spoustu změn v mezerách (mezerník, "
+"tabulátor, nové řádky), ale žádné skutečné změny kódu. Například můžete "
+"rozdělit velmi dlouhý řádek do několika řádků, nebo někdy zhustíte několik "
+"řádků do jednoho."
+
+#.(para)
+msgid "Such changes are marked with a white circle symbol on the left side of the views. If you see such a white circle, you know immediately that no real code change is there and you don't have to check the changed block further."
+msgstr ""
+"Takové změny jsou označeny symbolem bílého kruhu na levé straně zobrazení. "
+"Pokud vidíte takový bílý kruh, víte hned, že tam nejsou žádné skutečné změny "
+"kódu a nemusíte už dále kontrolovat změněny blok."
+
+#.(para)
+msgid "Hand editing of the file in the right pane is possible in two-pane view. Such changes are marked with a pencil symbol."
+msgstr ""
+"Ruční úprava souboru v pravém panelu je možné ve dvou panelovém zobrazení. "
+"Takové změny jsou označeny symbolem tužky."
+
+#.(para)
+msgid "The two pane view has some features which are not available in the one pane view: <placeholder-1/>"
+msgstr ""
+"Dvou panelový pohled má některé vlastnosti, které nejsou dostupné v "
+"jednopanelovém zobrazení: <placeholder-1/>"
+
+#.(para)
+msgid "If you want to compare/merge three files, TortoiseMerge will show you the differences in a three pane view. This view is also used if you need to resolve conflicted files."
+msgstr ""
+"Pokud chcete porovnat/sloučit tři soubory, TortoiseMerge zobrazí rozdíly ve "
+"tří panelovém zobrazení. Toto zobrazení je také použito, pokud potřebujete "
+"vyřešit soubory v konfliktu."
+
+#.(title)
+msgid "Three Pane View"
+msgstr "Tří panelové zobrazení"
+
+#.(para)
+msgid "The left pane shows you the differences between <emphasis>Their</emphasis> file and the <emphasis>Base</emphasis> file, while the right pane shows you the differences between <emphasis>Mine</emphasis> file and the <emphasis>Base</emphasis> file. The bottom pane shows you the result of merging <emphasis>Base</emphasis>, <emphasis>Mine</emphasis> and <emphasis>Theirs</emphasis> with possible conflicts."
+msgstr ""
+"Levý panel zobrazuje rozdíly mezi <emphasis>Jejich</emphasis> a "
+"<emphasis>Původním</emphasis> souborem, zatímco pravý panel zobrazuje "
+"rozdíly mezi <emphasis>Mými</emphasis> a <emphasis>Původním</emphasis> "
+"souborem. Dolní panel zobrazuje výsledek sloučení "
+"<emphasis>Původního</emphasis>, <emphasis>Mého</emphasis> a "
+"<emphasis>Jejich</emphasis> s možnými konflikty."
+
+#.(para)
+msgid "If you hover the mouse over the pane title, a tooltip will show the filenames used for the diff in each pane."
+msgstr ""
+"Pokud myší najedete nad název panelu, popisek v každém panelu zobrazí názvy "
+"souborů použitých pro porovnání."
+
+#.(title)
+msgid "Patch File List"
+msgstr "Seznam Záplatových Souborů"
+
+#.(para)
+msgid "After TortoiseMerge parses the patch file it will show you a small window with all the files which have changes according to the patch file. <placeholder-1/> If the filename is shown in black, then the patch can be applied without any problems. That means the file is not outdated according to the patch. However, if the filename is shown in red, then the patch can't get applied directly because you already changed that file."
+msgstr ""
+"Až TortoiseMerge záplatový soubor rozebere, zobrazí Vám malé okno se všemi "
+"soubory, které se mají změny podle záplatového souboru. <placeholder-1/> Je-"
+"li název souboru zobrazen v černé barvě, pak záplatu lze použít bez "
+"problémů. To znamená, že soubor není podle záplaty zastaralý. Nicméně pokud "
+"název souboru je zobrazen v červené barvě, pak záplatu nelze použít přímo, "
+"protože jste již tento soubor změnili."
+
+#.(para)
+msgid "But don't worry. If you're working with Subversion you can retrieve an older version of the file and resolve the conflict. In fact, TortoiseMerge automatically tries to get that older version of the file and then shows you the diff between <emphasis>Base</emphasis> (the older version of the file), <emphasis>Mine</emphasis> (the file as it is currently in your working copy) and <emphasis>Theirs</emphasis> (the older version of the file with the patch already applied). Then you can resolve possible conflicts manually."
+msgstr ""
+"Ale nebojte se. Pokud pracujete se Subversion můžete získat starší verzi "
+"souboru a konflikt vyřešit. Ve skutečnosti, TortoiseMerge se automaticky "
+"pokusí dostat tuto starší verzi souboru a pak můžete vidět rozdíl mezi "
+"<emphasis>Původní</emphasis> (Starší verze souboru), "
+"<emphasis>Můj</emphasis> (Soubor, jaký v současnosti je ve Vaší pracovní "
+"kopii) a <emphasis>Jejich</emphasis> (Starší verze souboru s již použitou "
+"záplatou). Pak můžete případné konflikty řešit ručně."
+
+#.(para)
+#, fuzzy
+msgid "The patch file window has a context menu which allows you to preview the effect of the patch on the current file (apply without saving), to apply and save the changes for the selected file, or to apply and save changes to <emphasis>all</emphasis> files in the list. The double-click action is to preview."
+msgstr ""
+"Okno záplatových souborů má kontextové menu, které Vám umožní ukázat účinky "
+"záplaty v aktuálním souboru (použít bez uložení), použít a uložit změny pro "
+"vybraný soubor, nebo použít a uložit změny do <emphasis>všech</emphasis> "
+"souborů v seznamu. Dvojité kliknutí je pro zobrazení náhledu."
+
+#.(para)
+msgid "Depending on whether TortoiseMerge can apply the patch directly or by fetching an older version of the file first, it shows you a two pane view (patch can be applied directly) or a three pane view (older version of file fetched)."
+msgstr ""
+"V závislosti na tom, zda TortoiseMerge může uplatnit záplatu přímo, nebo "
+"nejdříve získáním starší verze souboru, ukáže buď dvou panelové zobrazení "
+"(záplatu lze aplikovat přímo), nebo tří panelové zobrazení (získaná starší "
+"verze souboru)."
+
+#.(title)
+msgid "Buttons and Other Controls"
+msgstr "Tlačítka a Další Ovládání"
+
+#.(title)
+msgid "The Toolbar"
+msgstr "Panel nástrojů"
+
+#.(para)
+msgid "<guibutton>Open</guibutton> accesses the file-open dialog. What else?"
+msgstr ""
+"<guibutton>Otevřít</guibutton> zobrazí dialogové okno otevřít soubor. Co "
+"jiného?"
+
+#.(para)
+msgid "<guibutton>Save</guibutton> saves any changes you have made."
+msgstr "<guibutton>Uložit</guibutton> uloží všechny změny, které jste provedli."
+
+#.(para)
+msgid "<guibutton>Reload</guibutton> discards any changes you have made in TortoiseMerge and reloads the files from disk."
+msgstr ""
+"<guibutton>Znovu načíst</guibutton> zahodí veškeré změny provedené v "
+"TortoiseMerge a znovu načte soubory z disku."
+
+#.(para)
+msgid "<guibutton>Undo</guibutton> implements a multi-level undo, allowing you to reverse any changes you have made within TortoiseMerge."
+msgstr ""
+"<guibutton>Zpět</guibutton> zavádí mnohoúrovňové zpět zrušení, což Vám "
+"umožní navrátit všechny změny provedené v rámci TortoiseMerge."
+
+#.(para)
+msgid "<guibutton>Prev/Next Difference</guibutton> jumps directly to the next point where the files differ. This saves scrolling through all the unchanged parts of the file."
+msgstr ""
+"<guibutton>Před/Další Rozdíl</guibutton> skočí přímo na další místo, kde se "
+"soubory liší. To Vás ušetří posouvání všemi nezměněnými částmi souboru."
+
+#.(para)
+msgid "When you do this in 2-pane diff mode, the detail bar at the bottom of the screen will show you the inline differences for the first line, regardless of where the mouse is hovering."
+msgstr ""
+"Když toto uděláte v dvoupanelovém zobrazení porovnání, bude řádek detaily v "
+"dolní části obrazovky zobrazovat rozdíly v řádku na prvním řádku, bez ohledu "
+"na to, kde je myš umístěna."
+
+#.(para)
+msgid "<guibutton>Prev/Next Conflict</guibutton> jumps directly to the next point where the file differences are in conflict and need to be resolved."
+msgstr ""
+"<guibutton>Před/Další Konflikt </guibutton> skočí přímo na další bod, kde "
+"jsou rozdíly souboru v konfliktu a je třeba je vyřešit."
+
+#.(para)
+msgid "<guibutton>Use Theirs/Use Mine</guibutton> selects whether to use a block from the left or the right pane. Refer to the next section for more information about editing changes and conflicts."
+msgstr ""
+"<guibutton>Použít Jejích/Použít Můj </guibutton> zvolí, zda použít blok z "
+"levého nebo pravého panelu. Podívejte se na další část pro více informací o "
+"úpravách změn a konfliktů."
+
+#.(para)
+msgid "<guibutton>Theirs before Mine/Mine before Theirs</guibutton> is used when you want to combine changes in a conflicted file. Refer to the next section for more information about editing changes and conflicts."
+msgstr ""
+"<guibutton>Jejich před Mým/Můj před Jejich</guibutton> se používá, když "
+"chcete zkombinovat změny v konfliktním souboru. Podívejte se na další část "
+"pro více informací o úpravách změn a konfliktů."
+
+#.(para)
+msgid "<guibutton>Mark as Resolved</guibutton> When you have resolved all the conflicts in a file and saved the changes, you can mark it as resolved from within TortoiseMerge, rather than going back to explorer and marking as resolved from there."
+msgstr ""
+"<guibutton>Označit jako vyřešený</guibutton> Když jste vyřešili všechny "
+"konflikty v souboru a uložili změny, můžete jej označit jako vyřešený "
+"zevnitř TortoiseMerge, raději než jít zpátky do průzkumníka a označit jako "
+"vyřešený odtamtud."
+
+#.(para)
+msgid "<guibutton>Show Whitespaces</guibutton> toggles the option to display space and tab characters as symbols so you can distinguish white space changes."
+msgstr ""
+"<guibutton>Zobrazit Mezery</guibutton> zapne možnost zobrazení mezer a na "
+"znaků tabulátoru jako symboly, takže můžete rozlišit změny v mezerách."
+
+#.(para)
+msgid "<guibutton>Inline Diff Word-wise</guibutton> toggles the method used to display inline diffs. In word-wise mode, when a character is changed, the whole word is highlighted. In char-wise mode, each individual changed character is highlighted."
+msgstr ""
+"<guibutton>Rozdíly na řádcích podle slov</guibutton> zapíná metodu sloužící "
+"k zobrazení rozdílů v řádcích. V režimu podle slov, když se znak změnil, je "
+"zvýrazněno celé slovo. V režimu podle znaků jsou zvýrazněny jednotlivé "
+"změněné znaky."
+
+#.(para)
+msgid "Word-wise is the default and in most cases it works better. For example if you change a variable name, the whole name is highlighted in word-wise mode, whereas in char-wise mode you tend to get a mess of added and deleted characters which doesn't make much sense. However, some content does not resolve neatly into words, for example a hex file, and in that case, char-wise display works better."
+msgstr ""
+"Podle slov je výchozí a ve většině případů funguje lépe. Například pokud "
+"změníte název proměnné, v režimu podle slov je celý název zvýrazněn, zatímco "
+"v režimu podle znaků máte sklon mít nepořádek v přidaných a odstraněných "
+"znacích, což nedává moc smysl. Nicméně, některé obsahy nejdou rozdělit "
+"úhledně do slov, například hex soubor a v tom případě, zobrazení podle znaků "
+"je lepší."
+
+#.(para)
+msgid "<guibutton>Switch View</guibutton> selects between one-pane and two-pane view. Disabled in 3-pane view."
+msgstr ""
+"<guibutton>Přepnout zobrazení</guibutton> volí mezi jedno panelovým a dvou "
+"panelovým zobrazení. Vypnuto v třípanelovém zobrazení."
+
+#.(para)
+msgid "<guibutton>Switch Left and Right View</guibutton> In 2-pane view, swaps the left and right windows. When you are comparing a file in 2 different trees, as opposed to 2 revisions of the same file, TortoiseSVN does not know which one should go in the left pane as the <quote>original/base</quote> version. If it gets this wrong, you can change it to make viewing easier."
+msgstr ""
+"<guibutton>Přepnout Levé a Pravé Zobrazení</guibutton> Ve dvou panelovém "
+"zobrazení, vymění levé a pravé okno. Když porovnáváte soubor ve 2 různých "
+"stromech, na rozdíl od 2 revizí stejného souboru, TortoiseSVN neví, který z "
+"nich by měl jít do levé části okna, jako <quote>originální/základní</quote> "
+"verze. Pokud je to špatně, můžete jej změnit, aby bylo prohlížení "
+"jednodušší."
+
+#.(para)
+msgid "<guibutton>Show/Hide Patch List</guibutton> When TortoiseMerge has a patch list, this button allows you to hide it (so you can see both windows), or show it (so you can review the file list)."
+msgstr ""
+"<guibutton>Skrýt/Zobrazit seznam záplat</guibutton> Když TortoiseMerge má "
+"seznam záplat, toto tlačítko Vám ho umožňuje skrýt (takže můžete vidět obě "
+"okna), nebo ukázat (takže si můžete zkontrolovat seznam souborů)."
+
+#.(para)
+msgid "<guibutton>Settings</guibutton> takes you to TortoiseMerge's settings dialog."
+msgstr ""
+"<guibutton>Nastavení</guibutton> Vás dostane do dialogového okna nastavení "
+"TortoiseMerge."
+
+#.(para)
+msgid "<placeholder-1/> Below the menu bar lies the tool bar. This provides easy access to the most commonly used tools, which are <placeholder-2/>"
+msgstr ""
+"<placeholder-1/> Pod menu se nachází panel nástrojů. Poskytuje snadný "
+"přístup k nejčastěji používaným nástrojům, které jsou <placeholder-2/>"
+
+#.(para)
+msgid "On the left side of the window is a locator bar. This provides a quick visual reference as to where the changes lie within the file. The bar has three columns. The left column refers to the left pane, the right column to the right pane, and the centre column to the bottom pane (if present). In one-pane view only the left column is used. The locator bar can also be used as a scroll bar to scroll all the windows simultaneously."
+msgstr ""
+"Na levé straně okna je lišta umístění. Poskytuje rychlou vizuální referenci "
+"o tom, kde leží změny uvnitř souboru. Lišta má tři sloupce. Levý sloupec "
+"odkazuje na levý panel, pravý sloupec na pravý panel a střední sloupec na "
+"dolní panel (pokud existuje). V jedno panelovém pohledu je použit pouze levý "
+"sloupec. Lišta umístění může být také použita jako posuvník pro posun všech "
+"oken najednou."
+
+#.(para)
+msgid "Below the bottom window is the status bar. This shows the number of lines added and deleted in <literal>Theirs</literal> and <literal>Mine</literal>, and the number of unresolved conflicts remaining. You can also see which line-ending style is in use, what encoding (ASCII, UTF-8, etc) is assumed by TortoiseMerge, and whether there is a byte-order-mark (BOM) present in UTF-8 files. The left side of the status bar is used to display hints when you hover the mouse over a control."
+msgstr ""
+"Pod spodním oknem je stavový řádek. Ukazuje počet přidaných a odstraněných "
+"řádků v <literal>Jejich</literal> a <literal>Mém</literal> a počet "
+"zbývajících nevyřešených konfliktů. Můžete také vidět, který styl konců "
+"řádků je použit, jaké kódování TortoiseMerge předpokládá (ASCII, UTF-8, "
+"atd.) a zda je označení pořadí bajtů (BOM) přítomno v souborech UTF-8. Levá "
+"strana stavového řádku se používá pro zobrazení popisu, když myší najedete "
+"nad kontrolu."
+
+#.(title)
+msgid "Line Status Icons"
+msgstr "Ikony Stavu Řádků"
+
+#.(para)
+msgid "Changed lines are marked with an icon to indicate what type of change has occurred."
+msgstr "Změněné řádky jsou označeny ikonou označující, jaký typ změny nastal."
+
+#.(para)
+msgid "<graphic fileref=\"images/TMerge_lineadded.png\"/> A line has been added."
+msgstr "<graphic fileref=\"images/TMerge_lineadded.png\"/> Byl přidán řádek"
+
+#.(para)
+msgid "<graphic fileref=\"images/TMerge_lineremoved.png\"/> A line has been removed."
+msgstr "<graphic fileref=\"images/TMerge_lineremoved.png\"/> Řádek byl odebrán."
+
+#.(para)
+msgid "<graphic fileref=\"images/TMerge_lineequal.png\"/> A change has been undone by reverting to the original content of the line."
+msgstr ""
+"<graphic fileref=\"images/TMerge_lineequal.png\"/> Byla vrácena změna "
+"navrácením k původnímu obsahu řádku."
+
+#.(para)
+msgid "<graphic fileref=\"images/TMerge_linewhitespace.png\"/> This line contains only whitespace changes. Where several consecutive lines are marked, the paragraph may have been re-wrapped, causing words to shuffle onto adjacent lines."
+msgstr ""
+"<graphic fileref=\"images/TMerge_linewhitespace.png\"/> Tento řádek obsahuje "
+"pouze změny mezer. Tam, kde je vyznačeno několik po sobě jdoucích řádků, "
+"mohl být odstavec znovu zalomen, což způsobilo, že slova se pošoupla na "
+"vedlejší řádky."
+
+#.(para)
+msgid "<graphic fileref=\"images/TMerge_lineedited.png\"/> A line has been edited by hand, using TortoiseMerge as a text editor."
+msgstr ""
+"<graphic fileref=\"images/TMerge_lineedited.png\"/> Řádek byl upraven ručně, "
+"pomocí TortoiseMerge jako textového editoru."
+
+#.(para)
+msgid "<graphic fileref=\"images/TMerge_lineconflicted.png\"/> This line is in conflict."
+msgstr ""
+"<graphic fileref=\"images/TMerge_lineconflicted.png\"/> Tento řádek je v "
+"konfliktu."
+
+#.(para)
+msgid "<graphic fileref=\"images/TMerge_lineconflictedignored.png\"/> This line is conflicted, but the effect is hidden by whitespace or line-ending settings."
+msgstr ""
+"<graphic fileref=\"images/TMerge_lineconflictedignored.png\"/> Tento řádek je "
+"v konfliktu, ale účinek je skryt mezerou nebo nastavením konce řádků."
+
+#.(title)
+msgid "Merging / Editing Conflicts"
+msgstr "Sloučení/Úprava konfliktů"
+
+#.(para)
+msgid "TortoiseMerge not only <emphasis>shows</emphasis> you the differences between files but also lets you resolve conflicts or apply changes."
+msgstr ""
+"TortoiseMerge Vám nejenom <emphasis>zobrazuje</emphasis> rozdíly mezi "
+"soubory, ale také umožňuje řešit konflikty, nebo použít změny."
+
+#.(para)
+#, fuzzy
+msgid "If you're in two pane view, then you can only edit the file in the right pane (<literal>Mine</literal>). To apply changes made in the left file (<literal>Theirs</literal>), <action>right-click</action> on the changed lines and select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>theirs</quote></guimenuitem></menuchoice>. Then the changes from the left file are added to the right file."
+msgstr ""
+"Pokud jste ve dvou panelovém zobrazení, pak můžete upravit soubor pouze v "
+"pravém panelu (<literal>Můj</literal>). Chcete-li použít změny provedené v "
+"levém souboru (<literal>Jejich</literal>), <action>klikněte pravým tlačítkem "
+"myši</action> na změněné řádky a zvolte <menuchoice><guimenu>Kontextové "
+"menu</guimenu><guimenuitem>Použít text z 'jejich' "
+"bloku</guimenuitem></menuchoice>. Pak se změny z levého souboru přidají do "
+"pravého souboru."
+
+#.(para)
+msgid "Sometimes you actually want both text blocks, and the context menu also offers you <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use both text blocks (this one first)</guimenuitem></menuchoice> and <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use both text blocks (this one last)</guimenuitem></menuchoice>."
+msgstr ""
+"Někdy ale opravdu chcete oba bloky textu a kontextové menu Vám také nabízí "
+"<menuchoice><guimenu>Kontextové menu</guimenu><guimenuitem>Použít oba "
+"textové bloky (tento první)</guimenuitem></menuchoice> a "
+"<menuchoice><guimenu>Kontextové menu</guimenu><guimenuitem>Použít oba "
+"textové bloky (tento poslední)</guimenuitem></menuchoice>."
+
+#.(para)
+msgid "You can also edit the output file just as you would in a text editor. Such lines are marked using a pencil icon. Please note that if you want to make any of the line/block-based changes described above, it is better to do those first since once you start editing the file yourself it becomes impossible for TortoiseMerge to keep track of the relationship to the original files."
+msgstr ""
+"Můžete také upravit výstupní soubor stejně, jako v textovém editoru. Takové "
+"řádky jsou označeny ikonou tužky. Vezměte prosím na vědomí, že pokud chcete "
+"provést některé změny řádků/bloků popsané výše, je lepší toto udělat jako "
+"první, protože jakmile začnete upravovat soubor sami, stane se nemožné pro "
+"TortoiseMerge sledovat vztah k původnímu souboru."
+
+#.(para)
+#, fuzzy
+msgid "If you're in three pane view (sometimes called <emphasis>merge view</emphasis>) you can only edit the file in the bottom view (<literal>Merged</literal>). As in two pane view, you can <action>right-click</action> on conflicted lines and either select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>theirs</quote></guimenuitem></menuchoice> or <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Use text block from <quote>mine</quote></guimenuitem></menuchoice>. In addition, if you want <emphasis>both</emphasis> blocks, you can select <menuchoice><guimenu>Context Menu</guimenu><guimenuitem> Use text block from <quote>mine</quote> before <quote>theirs</quote></guimenuitem></menuchoice> or <menuchoice><guimenu>Context Menu</guimenu><guimenuitem> Use text block from <quote>theirs</quote> before <quote>mine</quote></guimenuitem></menuchoice>. According to the command you've selected, the changes are used in the resulting <literal>Merged</literal> file."
+msgstr ""
+"Pokud jste ve tří panelovém zobrazení (někdy nazývaném <emphasis>zobrazení "
+"sloučení</emphasis>) Lze soubor upravovat pouze v dolní části zobrazení "
+"(<literal>Sloučeno</literal>). Tak jako ve dvou panelovém zobrazení můžete "
+"<action>kliknout pravým tlačítkem myši </action> na konfliktní řádek a buď "
+"vybrat <menuchoice><guimenu>Kontextové menu</guimenu><guimenuitem>Použít "
+"text z 'jejich' bloku</guimenuitem></menuchoice> nebo "
+"<menuchoice><guimenu>Kontextové menu</guimenu><guimenuitem>Použít text z "
+"'mého' bloku</guimenuitem></menuchoice>. Kromě toho, pokud chcete "
+"<emphasis>oba</emphasis> bloky, můžete vybrat "
+"<menuchoice><guimenu>Kontextové menu</guimenu><guimenuitem>Použít textový "
+"blok z 'mého' před 'jejich'</guimenuitem></menuchoice> nebo "
+"<menuchoice><guimenu>Kontextové menu</guimenu><guimenuitem>Použít textový "
+"blok z 'jejich' před 'mým'</guimenuitem></menuchoice>. Podle příkazu, který "
+"jste vybrali, jsou změny použity ve výsledném <literal>Sloučeném</literal> "
+"souboru."
+
+#.(para)
+msgid "Sometimes a file will be marked as conflicted in Subversion, yet when you view it using TortoiseMerge there are no conflicts shown. This may be due to the whitespace handling you have chosen. If you choose to ignore line-endings or whitespace changes, those lines will be marked using the <emphasis>Conflict-Ignored</emphasis> icon. To resolve the conflict you still need to pick which version you want to use."
+msgstr ""
+"Někdy bude soubor označen jako konfliktní v Subversion, ale při zobrazení "
+"pomocí TortoiseMerge nejsou zobrazeny žádné konflikty. To může být způsobeno "
+"zacházením s mezerami, které jste vybrali. Pokud se rozhodnete ignorovat "
+"konce řádků nebo změny mezer, budou tyto řádky označeny ikonou <emphasis"
+">Konflikt-Ignorované</emphasis>. Chcete-li konflikt vyřešit, stále musíte "
+"vybrat, kterou verzi chcete použít."
+
+#.(para)
+msgid "Sometimes the conflict is too difficult to resolve by simply picking <literal>Theirs</literal> and <literal>Mine</literal> and it requires hand editing. TortoiseMerge allows you to do all the easy changes visually first and then save the file, leaving only the difficult changes to be resolved by hand-editing."
+msgstr ""
+"Někdy je konflikt příliš složité vyřešit prostým výběrem "
+"<literal>Jejich</literal> a <literal>Můj</literal> a vyžaduje ruční úpravy. "
+"TortoiseMerge Vám umožní udělat všechny snadné změny vizuálně a pak soubor "
+"uložit, takže jen těžké změny musí být vyřešen ručními úpravami."
+
+#.(para)
+msgid "Note that if you use TortoiseMerge on the same files again, any changes to your working copy, whether in TortoiseMerge, or by hand-editing, <emphasis>will be discarded</emphasis> and the file will appear as it did when conflict-editing first started."
+msgstr ""
+"Nezapomeňte, že pokud použijete TortoiseMerge na stejné soubory znova, "
+"všechny změny ve Vaší pracovní kopii, ať už v TortoiseMerge, nebo ručními "
+"úpravami, <emphasis>budou zahozeny</emphasis> a soubor se zobrazí jako při "
+"první úpravě konfliktů."
+
+#.(title)
+msgid "Open Files"
+msgstr "Otevřít Soubory"
+
+#.(para)
+msgid "When you start TortoiseMerge without any command line switches then you have to open the files manually, using <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice>."
+msgstr ""
+"Když spustíte TortoiseMerge bez jakýchkoli přepínačů v příkazovém řádku pak "
+"musíte otevřít soubory ručně, použitím <menuchoice><guimenu>Soubor</guimenu>"
+"<guimenuitem>Otevřít</guimenuitem></menuchoice>."
+
+#.(title)
+msgid "The Open Dialog"
+msgstr "Dialogové okno Otevřít"
+
+#.(para)
+msgid "The first thing you have to do is to decide whether you just want to compare/merge files, or whether you want to apply a patch file. Depending on what you choose, the corresponding edit boxes and browse buttons are activated."
+msgstr ""
+"První věc, kterou musíte udělat, je rozhodnout, zda chcete jen "
+"porovnat/slučovat soubory, nebo zda chcete použít záplatový soubor. V "
+"závislosti na tom, co si vyberete, budou aktivována odpovídající textová "
+"pole a tlačítka Procházet."
+
+#.(para)
+msgid "If you want to compare / merge files you have to set at least two of the three possible paths for <literal>Base</literal>, <literal>Mine</literal> and <literal>Theirs</literal>. If you select only two files, then TortoiseMerge will show you the differences between those two files, either in a two pane view or in a one pane view."
+msgstr ""
+"Pokud chcete porovnávat/slučovat soubory, musíte nastavit alespoň dvě ze tří "
+"možných cest pro <literal>Originál</literal>, <literal>Můj</literal> a "
+"<literal>Jejich</literal>. Zvolíte-li pouze dva soubory, pak TortoiseMerge "
+"Vám zobrazí rozdíly mezi těmito dvěma soubory a to buď ve dvou panelovém "
+"nebo v jedno panelovém zobrazení."
+
+#.(para)
+msgid "If you want to merge three files, TortoiseMerge will show you the differences in a three pane view. This view is generally used if you need to resolve conflicted files. The output file is not named in this case and you will have to use the <menuchoice><guimenu>File</guimenu><guimenuitem>Save As...</guimenuitem></menuchoice>. to save the results."
+msgstr ""
+"Pokud chcete sloučit tři soubory, TortoiseMerge Vám rozdíly ukáže ve tři "
+"panelovém zobrazení. Toto zobrazení je obecně používáno, pokud potřebujete "
+"vyřešit konfliktní soubory. Výstupní soubor není v tomto případě pojmenován "
+"a budete muset použít "
+"<menuchoice><guimenu>Soubor</guimenu><guimenuitem>Uložit "
+"jako...</guimenuitem></menuchoice> pro uložení výsledků."
+
+#.(para)
+msgid "If you want to apply a patch file you have to set both the path to the patch file itself and the path to the folder where the patch file should be applied."
+msgstr ""
+"Pokud chcete použít záplatový soubor, musíte nastavit i cestu k samotnému "
+"souboru a cestu k adresáři, kde by měl být použit."
+
+#.(para)
+msgid "Currently, only patch files in <emphasis>Unified Diff Format</emphasis> are supported. And only files which were generated from a Subversion working copy. Other formats like patch files generated by CVS are currently not supported!"
+msgstr ""
+"V současné době jsou záplatové soubory podporovány pouze ve "
+"<emphasis>Formátu Sjednoceného Rozdílu</emphasis>. A pouze ty, které byly "
+"vytvořeny z pracovní kopie Subversion. Jiné formáty, jako je záplatový "
+"soubor vytvořený CVS, nejsou momentálně podporovány!"
+
+#.(title)
+msgid "Settings"
+msgstr "Nastavení"
+
+#.(title)
+msgid "Main Settings Page"
+msgstr "Stránka Hlavní Nastavení"
+
+#.(title)
+msgid "The Settings Main Page"
+msgstr "Stránka Hlavní nastavení"
+
+#.(para)
+msgid "Most of the options here are self-explanatory, but a few points need clarifying."
+msgstr "Většina voleb zde je evidentní, ale pár bodů je třeba vyjasnit."
+
+#.(para)
+msgid "<guilabel>Backup original file</guilabel> renames the original file in the WC to <literal>filename.bak</literal> before saving the modified version."
+msgstr ""
+"<guilabel>Zálohovat původní soubor</guilabel> přejmenuje původní soubor v "
+"pracovní kopii na <literal>jmenosouboru.bak</literal> před uložením upravené "
+"verze."
+
+#.(para)
+msgid "<guilabel>Ignore line endings</guilabel> hides changes which are due solely to difference in line-end style."
+msgstr ""
+"<guilabel>Ignorovat konce řádků</guilabel> skryje změny, které jsou pouze z "
+"důvodu rozdílu ve stylu konce řádků."
+
+#.(para)
+msgid "<guilabel>Ignore case changes</guilabel> hides changes which are due solely to case changes within the text. This can be useful with apps such as Visual Basic, which changes case in variables without warning."
+msgstr ""
+"<guilabel>Ignorovat změny velikosti</guilabel> skryje změny, které jsou "
+"pouze z důvodu změn velikosti textu. To může být užitečné v aplikacích, jako "
+"je Visual Basic, který mění velikost proměnných bez varování."
+
+#.(para)
+msgid "<guilabel>Colour code in-line changes</guilabel> uses the same scheme as the line diff bar to show the detailed in-line changes within the main display panes. Lines which have been heavily modified will not be shown using this method as the results are simply confusing. In this case the line will be shown as replaced (old line deleted, new line added)."
+msgstr ""
+"<guilabel>Barevně vyznačit změny v řádcích</guilabel> používá stejný systém "
+"jako sloupec porovnání řádků, ukazující podrobné změny v řádcích v rámci "
+"hlavních panelů zobrazení. Řádky, které byly velmi změněny nebudou zobrazeny "
+"pomocí této metody protože výsledky by byly prostě matoucí. V tomto případě "
+"bude řádek zobrazen jako vyměněný (starý řádek smazán, nový řádek přidán)."
+
+#.(para)
+msgid "<guilabel>Compare whitespaces</guilabel> shows all changes in indentation and inline whitespace as added/removed lines (which is how Subversion treats such changes)."
+msgstr ""
+"<guilabel>Porovnat mezery</guilabel> zobrazí všechny změny v odsazení a "
+"mezerách mezi řádky jako přidané/smazané řádky (a takto Subversion zachází s "
+"takovými změnami)."
+
+#.(para)
+#, fuzzy
+msgid "<guilabel>Ignore whitespace changes</guilabel> hides changes which are due solely to a change in the amount or type of whitespace, eg. changing the indentation or changing tabs to spaces. Adding whitespace where there was none before, or removing a whitespace completely is still shown as a change."
+msgstr ""
+"<guilabel>Ignorovat změny mezer</guilabel> skryje změny, které jsou pouze z "
+"důvodu změn v množství nebo druhu mezer, např. změna odsazení nebo změna "
+"tabulátorů na mezery. Přidání mezery tam, kde předtím nebyla nebo odstranění "
+"mezery úplně je stále zobrazeno jako změna."
+
+#.(para)
+msgid "<guilabel>Ignore all whitespaces</guilabel> hides all whitespace-only changes."
+msgstr ""
+"<guilabel>Ignorovat všechny mezery</guilabel> skryje všechny změny způsobené "
+"mezerami."
+
+#.(title)
+msgid "Colour Settings Page"
+msgstr "Stránka Nastavení Barev"
+
+#.(title)
+msgid "The Settings Color Page"
+msgstr "Stránka Nastavení Barev"
+
+#.(para)
+msgid "This dialog allows you to select the background color coding used to highlight the different line changes."
+msgstr ""
+"Toto dialogové okno Vám umožňuje vybrat vyznačení barev pozadí používané pro "
+"zvýraznění různých změn řádku."
+
+#.(term)
+msgid "Normal"
+msgstr "Normální"
+
+#.(listitem)
+msgid "All lines which are unchanged, or where changes are hidden."
+msgstr "Všechny řádky, které jsou beze změny, nebo kde jsou změny skryty."
+
+#.(term)
+msgid "Added"
+msgstr "Přidaný"
+
+#.(listitem)
+msgid "Lines which have been added."
+msgstr "Řádky, které byly přidány."
+
+#.(term)
+msgid "Removed"
+msgstr "Odstraněný"
+
+#.(listitem)
+msgid "Lines which have been deleted."
+msgstr "Řádky, které byly odstraněny."
+
+#.(term)
+msgid "Modified"
+msgstr "Změněný"
+
+#.(emphasis)
+msgid "unchanged"
+msgstr "nezměněnou"
+
+#.(guilabel)
+msgid "Colour code in-line changes"
+msgstr "Barevně vyznačit změny v řádce"
+
+#.(listitem)
+msgid "Lines which have relatively small changes, and are shown using inline diff. This colour is used for the <placeholder-1/> portion of the line content. Changed portions will be shown using the inline added and deleted colours described below. If <placeholder-2/> is not enabled, this colour will not be used and changed lines will always be shown as replacements."
+msgstr ""
+"Řádky, které mají relativně malé změny a jsou zobrazeny pomocí porovnání "
+"řádků. Tato barva se používá pro <placeholder-1/> část obsahu v řádku. "
+"Změněné části se zobrazí pomocí barev přidáno a smazáno v řádku popsané "
+"níže. Pokud <placeholder-2/> není povoleno, tato barva nebude použita a "
+"změněné řádky se vždy zobrazí jako nahrazené."
+
+#.(term)
+msgid "Conflicted"
+msgstr "Konfliktní"
+
+#.(listitem)
+msgid "Where the same line has been changed in both files."
+msgstr "Kde stejný řádek byl změněn v obou souborech."
+
+#.(term)
+msgid "Conflict resolved"
+msgstr "Konflikt vyřešen"
+
+#.(listitem)
+msgid "Where the same line has been changed in both files, and you have now selected which version should be used."
+msgstr ""
+"Kde stejná položka byla změněna v obou souborech, a Vy jste vybrali, která "
+"verze by měla být použita."
+
+#.(term)
+msgid "Empty"
+msgstr "Prázdný"
+
+#.(listitem)
+msgid "Where lines have been added in the opposite pane, and no such line existed in this pane."
+msgstr ""
+"Kde řádky byly přidány v protějším panelu a žádný takový řádek v tomto "
+"panelu neexistuje."
+
+#.(term)
+msgid "Inline added text"
+msgstr "Do řádku přidaný text"
+
+#.(listitem)
+msgid "When inline diffs are shown, added text is shown in this colour."
+msgstr ""
+"Jsou-li zobrazeny rozdíly v řádcích, přidaný text je uveden v této barvě."
+
+#.(term)
+msgid "Inline removed text"
+msgstr "Z řádku odstraněný text"
+
+#.(listitem)
+msgid "When inline diffs are shown, deleted text is shown in this colour."
+msgstr ""
+"Jsou-li zobrazeny rozdíly v řádcích, smazaný text je uveden v této barvě."
+
+#.(term)
+msgid "Misc whitespaces"
+msgstr "Různé mezery"
+
+#.(listitem)
+msgid "Characters used to indicate Whitespace are shown in a different colour from normal text."
+msgstr ""
+"Znaky používané k označení Mezer jsou zobrazeny v různých barvách od "
+"normálního textu."
+
+#.(title)
+msgid "keyboard shortcuts"
+msgstr "klávesové zkratky"
+
+#.(para)
+msgid "List of keyboard shortcuts and commands."
+msgstr "Seznam klávesových zkratek a příkazů."
+
+#.(title)
+msgid "Keyboard shortcuts"
+msgstr "Klávesové zkratky"
+
+#.(term)
+msgid "Ctrl-Q"
+msgstr "Ctrl-Q"
+
+#.(para)
+msgid "Quit the program"
+msgstr "Ukončit program"
+
+#.(term)
+msgid "Ctrl-C"
+msgstr "Ctrl-C"
+
+#.(para)
+msgid "Copy the selected text to the clipboard"
+msgstr "Kopírovat vybraný text do schránky"
+
+#.(term)
+msgid "Ctrl-F"
+msgstr "Ctrl-F"
+
+#.(para)
+msgid "Open the Find dialog for text searches"
+msgstr "Otevře dialogové okno Najít pro vyhledávání textu"
+
+#.(term)
+msgid "Ctrl-O"
+msgstr "Ctrl-O"
+
+#.(para)
+msgid "Open files to diff/merge"
+msgstr "Otevře soubory k porovnání/sloučení"
+
+#.(term)
+msgid "Ctrl-S"
+msgstr "Ctrl-S"
+
+#.(para)
+msgid "Save the changes"
+msgstr "Uložit změny"
+
+#.(term)
+msgid "Ctrl-Shift-S"
+msgstr "Ctrl-Shift-S"
+
+#.(para)
+msgid "Save as..."
+msgstr "Uložit jako..."
+
+#.(term)
+msgid "F7"
+msgstr "F7"
+
+#.(para)
+msgid "Go to next difference"
+msgstr "Přejít na další rozdíl"
+
+#.(term)
+msgid "Shift-F7"
+msgstr "Shift-F7"
+
+#.(para)
+msgid "Go to previous difference"
+msgstr "Přejít na předchozí rozdíl"
+
+#.(term)
+msgid "F8"
+msgstr "F8"
+
+#.(para)
+msgid "Go to next conflict"
+msgstr "Přejít na další konflikt"
+
+#.(term)
+msgid "Shift-F8"
+msgstr "Shift-F8"
+
+#.(para)
+msgid "Go to previous conflict"
+msgstr "Přejít na předchozí konflikt"
+
+#.(term)
+msgid "Ctrl-D"
+msgstr "Ctrl-D"
+
+#.(para)
+msgid "Toggle between one-pane diff and two-pane diff"
+msgstr "Přepínat mezi jedno panelovým a dvou panelovým porovnáním"
+
+#.(term)
+msgid "Ctrl-R"
+msgstr "Ctrl-R"
+
+#.(para)
+msgid "Reload the files and revert all changes made"
+msgstr "Znovu nahraje soubory a vrátit všechny provedené změny"
+
+#.(term)
+msgid "Ctrl-T"
+msgstr "Ctrl-T"
+
+#.(para)
+msgid "Toggles between showing whitespaces or not"
+msgstr "Přepíná mezi zobrazením mezer, nebo ne"
+
+#.(term)
+msgid "Ctrl-mousewheel"
+msgstr "Ctrl-kolečko myši"
+
+#.(para)
+msgid "Scroll the display left/right"
+msgstr "Posunuje zobrazení doleva/doprava"
+
+#.(title)
+msgid "Automating TortoiseMerge"
+msgstr "Automatizace TortoiseMerge"
+
+#.(para)
+msgid "TortoiseMerge can be started with command line parameters to avoid having to go through the <guilabel>Open</guilabel> dialog to select the files yourself. This is useful also if you want to use TortoiseMerge from another application."
+msgstr ""
+"TortoiseMerge může být spuštěn s parametry příkazového řádku, abyste se "
+"vyhnuli procházení dialogovým oknem <guilabel>Otevřít</guilabel> pro výběr "
+"souborů. To je také užitečné pokud chcete použít TortoiseMerge z jiné "
+"aplikace."
+
+#.(title)
+msgid "TortoiseMerge Command Line Switches"
+msgstr "Přepínače TortoiseMerge v příkazovém řádku"
+
+#.(primary)
+msgid "automation"
+msgstr "automatizace"
+
+#.(primary)
+msgid "command line"
+msgstr "příkazový řádek"
+
+#.(para)
+msgid "Most switches require additional information like a path or some other string. In those cases, append an ':' to the switch and put the string/path after it. Example: <screen>\n/base:\"c:\\folder\\my base file.txt\"\n</screen>"
+msgstr ""
+"Většina přepínačů požaduje další informace, jako cestu, nebo nějaký jiný "
+"řetězec. V těchto případech do přepínače přidejte ':' a řetězec/cesta "
+"zadejte po něm. Příklad: <screen>\n"
+"/base:\"c:\\adresář\\můjpůvodsoubor.txt\"\n"
+"</screen>"
+
+#.(title)
+msgid "List of available command line options"
+msgstr "Seznam dostupných voleb příkazové řádky"
+
+#.(entry)
+msgid "Command"
+msgstr "Příkaz"
+
+#.(entry)
+msgid "Description"
+msgstr "Popis"
+
+#.(entry)
+msgid "Shows a dialog box with the most important command line switches."
+msgstr "Zobrazí dialogové okno s nejdůležitějšími přepínači příkazového řádku."
+
+#.(option)
+msgid "?"
+msgstr "?"
+
+#.(entry)
+msgid "The same as <placeholder-1/>."
+msgstr "Stejné jako <placeholder-1/> ."
+
+#.(emphasis)
+msgid "base"
+msgstr "původní"
+
+#.(entry)
+msgid "Specifies the <placeholder-1/> file used in three way diffs. This is the common ancestor of the files being diffed, although it is not shown in a separate window. For two way diffs, this is the left file."
+msgstr ""
+"Určuje <placeholder-1/> soubor používaný v trojím porovnávání. Je společný "
+"předek porovnávaných souborů, ačkoli není zobrazen v samostatném okně. V "
+"dvojím porovnávání, je to soubor vlevo."
+
+#.(entry)
+msgid "The name of the base file. This is shown in the view title instead of the file path. For three way diffs it is shown in a tooltip for the view title."
+msgstr ""
+"Název původního souboru. Je zobrazen v zobrazení názvu namísto cesty k "
+"souboru. V trojím porovnávání je uveden v popisku zobrazení názvu."
+
+#.(emphasis)
+msgid "theirs"
+msgstr "jejich"
+
+#.(entry)
+msgid "Specifies the <placeholder-1/> file used in three way diffs, displayed in the left pane."
+msgstr ""
+"Určuje <placeholder-1/> soubor používaný v trojím porovnávání, zobrazí se v "
+"levém panelu."
+
+#.(entry)
+msgid "The name of the theirs file. This is shown in the view title instead of the file path."
+msgstr ""
+"Název jejich souboru. Je zobrazeno v zobrazení názvu namísto cesty k "
+"souboru."
+
+#.(emphasis)
+msgid "mine"
+msgstr "můj"
+
+#.(entry)
+msgid "Specifies the <placeholder-1/> file used in three way diffs, displayed in the right pane. For two way diffs, this is the right file."
+msgstr ""
+"Určuje <placeholder-1/> soubor používaný v trojím porovnávání, zobrazí se v "
+"pravém panelu. V dvojím porovnávání, je to soubor vpravo."
+
+#.(entry)
+msgid "The name of the mine file. This is shown in the view title instead of the file path."
+msgstr ""
+"Název mého souboru. Je zobrazen v zobrazení názvu namísto cesty k souboru."
+
+#.(emphasis)
+msgid "merged"
+msgstr "sloučený"
+
+#.(entry)
+msgid "Specifies the resulting <placeholder-1/> file used in three way diffs. This is the file path where the result of the merge/conflict resolving is saved. If this is not set, then TortoiseMerge will ask the user where to save the result."
+msgstr ""
+"Určuje výsledný <placeholder-1/> soubor používaný v trojím porovnávání. Je "
+"to cesta k souboru, kde je v důsledku sloučení/řešení konfliktů uložen. "
+"Pokud toto není nastaveno, pak TortoiseMerge požádá uživatele, kam se "
+"výsledek má uložit."
+
+#.(entry)
+msgid "The name of the merged file. This is shown in the view title instead of the file path."
+msgstr ""
+"Jméno sloučeného souboru. Je zobrazeno v zobrazení názvu namísto cesty k "
+"souboru."
+
+#.(emphasis)
+msgid "very long"
+msgstr "velmi dlouho"
+
+#.(entry)
+msgid "The path where a patch should be applied to. If you don't set this path, then TortoiseMerge will try to find the path itself to match the paths in the patch file, but that can take <placeholder-1/>."
+msgstr ""
+"Cesta, kde by záplata měla být použita. Pokud nechcete nastavit tuto cestu, "
+"pak se TortoiseMerge bude snažit najít cestu samo, aby se shodovala s cestou "
+"v záplatovém souboru, ale to může trvat <placeholder-1/>."
+
+#.(entry)
+msgid "The name of the original file to patch. Used for the view title."
+msgstr "Název původního souboru na opravu. Používá se pro zobrazení názvu."
+
+#.(entry)
+msgid "The name of the resulting patched file. Used for the view title."
+msgstr "Jméno výsledného záplatového souboru. Používá se pro zobrazení názvu."
+
+#.(entry)
+msgid "The path to the patch/diff file to apply to a directory."
+msgstr "Cesta k záplatovém/porovnávacímu souboru k použití na adresář."
+
+#.(entry)
+msgid "Forces TortoiseMerge to start with the one-way view instead of the view the user specified in the settings."
+msgstr ""
+"Donutí TortoiseMerge spustit v jedno panelovém zobrazení namísto pohledu, "
+"který uživatel v nastavení zadal."
+
+#.(entry)
+msgid "Switches the left and right view of the specified two files to diff."
+msgstr ""
+"Přepíná nezi levým a pravým zobrazením uvedených dvou souborů k porovnání."
+
+#.(literal)
+msgid "/origfile:\"path_to_original_file\""
+msgstr "/origfile:\"cesta_k_původnímu_souboru\""
+
+#.(literal)
+msgid "/modifiedfile:\"path_to_modified_file\""
+msgstr "/modifiedfile:\"ke_změněnému_souboru\""
+
+#.(literal)
+msgid "/outfile:\"path_to_resulting_patchfile\""
+msgstr "/outfile:\"cesta_k_výslednému_záplatovému_souboru\""
+
+#.(literal)
+msgid "/outfile"
+msgstr "/outfile"
+
+#.(literal)
+msgid "/createunifieddiff"
+msgstr "/createunifieddiff"
+
+#.(entry)
+msgid "Creates a unified diff file (patch file) of two files specified with <placeholder-1/> and <placeholder-2/>. The target path is set with <placeholder-3/>. If <placeholder-4/> is not set, a file save dialog is shown so the user can choose the location to save the patch file. Note: If <placeholder-5/> is set, all other parameters are ignored."
+msgstr ""
+"Vytvoří soubor jednotného rozdílu (záplatový soubor) dvou souborů zadaných "
+"<placeholder-1/> a <placeholder-2/>. Cílová cesta se nastavuje "
+"<placeholder-3/>. Pokud <placeholder-4/> není nastaven, zobrazí se dialogové "
+"okno uložit soubor, takže uživatel může vybrat umístění pro uložení "
+"záplatového souboru. Poznámka: Pokud je nastaven <placeholder-5/>, všechny "
+"ostatní parametry jsou ignorovány."
+
+#.(para)
+msgid "You can also supply simple filenames on the command line for compatibility with other diff programs. In this simplified form the command line is <screen>\nTortoiseMerge BaseFilePath MyFilePath [ TheirFilePath ]\n</screen> If two files are given they will be compared with each other. If three files are given, the first is taken as the BASE file, and the other two are compared with it in a three-way diff."
+msgstr ""
+"Můžete také dodat jednoduché názvy souborů na příkazovém řádku pro "
+"kompatibilitu s jinými programy rozdílů. V této zjednodušené formě je "
+"příkazový řádek <screen>\n"
+"TortoiseMerge CestaPůvSoubor CestaMůjSoubor [CestaJejichSoubor]</screen> "
+"jestliže jsou evedeny dva soubory budou porovnány mezi sebou. Pokud jsou "
+"uvedeny tři soubory, první je brán jako původní soubor a ostatní dva jsou s "
+"ním porovnány v trojím porovnávání."
+
+#.(title)
+msgid "Glossary"
+msgstr "Slovník pojmů"
+
+#.(glossterm)
+msgid "Add"
+msgstr "Přidat"
+
+#.(para)
+msgid "A Subversion command that is used to add a file or directory to your working copy. The new items are added to the repository when you commit."
+msgstr ""
+"Příkaz Subversion, který slouží k přidání souboru nebo adresáře do Vaší "
+"pracovní kopie. Nové položky jsou do úložiště přidány při odevzdání."
+
+#.(glossterm)
+msgid "BASE revision"
+msgstr "Základní revize"
+
+#.(para)
+msgid "The current base revision of a file or folder in your <emphasis>working copy</emphasis>. This is the revision the file or folder was in, when the last checkout, update or commit was run. The BASE revision is normally not equal to the HEAD revision."
+msgstr ""
+"Aktuální základní revize souboru nebo adresáře ve Vaší <emphasis>pracovní "
+"kopii</emphasis> . Jedná se o revizi, v které soubor nebo adresář byl, při "
+"posledním spuštění získání, aktualizace nebo odevzdání. BASE revize se "
+"obvykle rovná revizi HEAD."
+
+#.(glossterm)
+msgid "Blame"
+msgstr "Obvinit"
+
+#.(para)
+msgid "This command is for text files only, and it annotates every line to show the repository revision in which it was last changed, and the author who made that change. Our GUI implementation is called TortoiseBlame and it also shows the commit date/time and the log message when you hover the mouse of the revision number."
+msgstr ""
+"Tento příkaz je pouze pro textové soubory, okomentuje každý řádek pro "
+"zobrazení revize úložiště, v němž byl naposledy změněn a autora, který tuto "
+"změnu provedl. Naše GUI implementace se nazývá TortoiseBlame a také ukazuje "
+"datum, čas a zprávu odevzdání, když podržíte myš nad číslem revize."
+
+#.(glossterm)
+msgid "BDB"
+msgstr "BDB"
+
+#.(para)
+msgid "Berkeley DB. A well tested database backend for repositories, that cannot be used on network shares. Default for pre 1.2 repositories."
+msgstr ""
+"Berkeley Databáze. Prověřený databázový backend pro úložiště, které nelze "
+"použít ve sdílené síti. Výchozí pro úložiště před verzí 1.2."
+
+#.(glossterm)
+msgid "Branch"
+msgstr "Větev"
+
+#.(para)
+msgid "A term frequently used in revision control systems to describe what happens when development forks at a particular point and follows 2 separate paths. You can create a branch off the main development line so as to develop a new feature without rendering the main line unstable. Or you can branch a stable release to which you make only bug fixes, while new developments take place on the unstable trunk. In Subversion a branch is implemented as a <quote>cheap copy</quote>."
+msgstr ""
+"Termín často používaný v systémech pro správu verzí pro popis co se stane, "
+"když se vývoj na určitém místě rozdělí a pokračuje po 2 samostatných "
+"cestách. Můžete vytvořit větev mimo hlavní linii vývoje, abyste mohli "
+"vyvíjet novou funkci, aniž byste hlavní linii učinili nestabilní. Nebo "
+"můžete rozvětvit stabilní verzi, na které uděláte jen opravy chyb, zatímco "
+"nový vývoj probíhá v nestabilním kmenu. V Subversion je větev zavedena jako "
+"<quote>laciná kopie</quote>."
+
+#.(glossterm)
+msgid "Checkout"
+msgstr "Získat"
+
+#.(para)
+msgid "A Subversion command which creates a local working copy in an empty directory by downloading versioned files from the repository."
+msgstr ""
+"Příkaz Subversion, který vytvoří místní pracovní kopii v prázdném adresáři "
+"stažením verzí souborů z uložiště."
+
+#.(glossterm)
+msgid "Cleanup"
+msgstr "Vyčistit"
+
+#.(para)
+msgid "To quote from the Subversion book: <quote> Recursively clean up the working copy, removing locks and resuming unfinished operations. If you ever get a <emphasis>working copy locked</emphasis> error, run this command to remove stale locks and get your working copy into a usable state again. </quote> Note that in this context <emphasis>lock</emphasis> refers to local filesystem locking, not repository locking."
+msgstr ""
+"Citujeme z knihy Subversion: <quote>Rekurzivně vyčistí pracovní kopií, "
+"odstraní zámky a pokračuje v nedokončených operacích. Pokud někdy máte chybu "
+"<emphasis>pracovní kopie uzamčena</emphasis>, spusťte tento příkaz k "
+"odstranění starých zámků a dostaňte Vaši pracovní kopie zpět do použitelného "
+"stavu.</quote> Nezapomeňte, že v této souvislosti "
+"<emphasis>zámek</emphasis> odkazuje na zamknutí v místním souborovém "
+"systému, ne zamknutí úložiště."
+
+#.(glossterm)
+msgid "Commit"
+msgstr "Odevzdat"
+
+#.(para)
+msgid "This Subversion command is used to pass the changes in your local working copy back into the repository, creating a new repository revision."
+msgstr ""
+"Tento příkaz Subversion slouží k předání změn v místní pracovní kopii zpět "
+"do úložiště, vytvářející novou revizi úložiště."
+
+#.(glossterm)
+msgid "Conflict"
+msgstr "Konflikt"
+
+#.(para)
+msgid "When changes from the repository are merged with local changes, sometimes those changes occur on the same lines. In this case Subversion cannot automatically decide which version to use and the file is said to be in conflict. You have to edit the file manually and resolve the conflict before you can commit any further changes."
+msgstr ""
+"Když se změny z úložiště sloučí s místními změnami, někdy tyto změny "
+"nastanou na stejných řádcích. V tomto případě Subversion nemůže automaticky "
+"rozhodnout, kterou verzi použít a soubor je tak řečeno v konfliktu. Pro "
+"vyřešení konfliktu musíte upravit soubor ručně, než budete moci spáchat "
+"další změny."
+
+#.(glossterm)
+msgid "Copy"
+msgstr "Kopie"
+
+#.(para)
+msgid "In a Subversion repository you can create a copy of a single file or an entire tree. These are implemented as <quote>cheap copies</quote> which act a bit like a link to the original in that they take up almost no space. Making a copy preserves the history of the item in the copy, so you can trace changes made before the copy was made."
+msgstr ""
+"V Subversion můžete vytvořit kopii jednoho souboru nebo celého stromu. Ty "
+"jsou realizovány jako <quote>laciné kopie</quote> které působí trochu jako "
+"odkaz na původní kopii v tom, že nezabírají téměř žádný prostor. Zhotovení "
+"kopie zachová historii položky v kopii, takže můžete sledovat změny "
+"provedené dříve, než byla kopie vytvořena."
+
+#.(glossterm)
+msgid "Delete"
+msgstr "Smazat"
+
+#.(para)
+msgid "When you delete a versioned item (and commit the change) the item no longer exists in the repository after the committed revision. But of course it still exists in earlier repository revisions, so you can still access it. If necessary, you can copy a deleted item and <quote>resurrect</quote> it complete with history."
+msgstr ""
+"Když odstraníte položku s verzí (a změnit odevzdáte), položka již v úložišti "
+"po odevzdané revizi neexistuje. Ale samozřejmě, že ještě existuje v "
+"předchozích revizích úložiště, takže můžete stále k ní mít přístup. Pokud je "
+"to nutné, můžete zkopírovat odstraněnou položku a <quote>vzkřísit</quote> "
+"ji úplně i s historií."
+
+#.(glossterm)
+msgid "Diff"
+msgstr "Porovnat"
+
+#.(para)
+msgid "Shorthand for <quote>Show Differences</quote>. Very useful when you want to see exactly what changes have been made."
+msgstr ""
+"Zkratka pro <quote>Zobrazit Rozdíly</quote>. Velmi užitečné, pokud chcete "
+"přesně zjistit, jaké změny byly provedeny."
+
+#.(glossterm)
+msgid "Export"
+msgstr "Exportovat"
+
+#.(para)
+msgid "This command produces a copy of a versioned folder, just like a working copy, but without the local <literal>.svn</literal> folders."
+msgstr ""
+"Tento příkaz vytvoří kopii adresáře s verzí, stejně jako pracovní kopie, ale "
+"bez místních adresářů <literal>.Svn</literal>."
+
+#.(glossterm)
+msgid "FSFS"
+msgstr "FSFS"
+
+#.(para)
+msgid "A proprietary Subversion filesystem backend for repositories. Can be used on network shares. Default for 1.2 and newer repositories."
+msgstr ""
+"Vlastní backend souborového systému Subversion pro úložiště. Může být použit "
+"v sdílené síti. Výchozí pro úložiště od verze 1.2 a novější."
+
+#.(glossterm)
+msgid "GPO"
+msgstr "GPO"
+
+#.(para)
+msgid "Group policy object"
+msgstr "Objekt zásad skupiny"
+
+#.(glossterm)
+msgid "HEAD revision"
+msgstr "revize HEAD"
+
+#.(para)
+msgid "The latest revision of a file or folder in the <emphasis>repository</emphasis>."
+msgstr "Poslední revize souboru nebo adresáře v <emphasis>úložišti</emphasis>."
+
+#.(glossterm)
+msgid "Import"
+msgstr "Import"
+
+#.(para)
+msgid "Subversion command to import an entire folder hierarchy into the repository in a single revision."
+msgstr ""
+"Subversion příkaz pro import celé hierarchie adresářů do úložiště v jedné "
+"revizi."
+
+#.(glossterm)
+msgid "Lock"
+msgstr "Zámek"
+
+#.(para)
+msgid "When you take out a lock on a versioned item, you mark it in the repository as non-committable, except from the working copy where the lock was taken out."
+msgstr ""
+"Když si vezmete zámek na položku s verzí, označíte ji v úložišti jako "
+"neodevzdatelnou, s výjimkou pracovní kopie, kde byl zámek získán."
+
+#.(glossterm)
+msgid "Log"
+msgstr "Záznam"
+
+#.(para)
+msgid "Show the revision history of a file or folder. Also known as <quote>History</quote>."
+msgstr ""
+"Zobrazit historii revizí souboru nebo adresář. Také znám jako "
+"<quote>Historie</quote>."
+
+#.(glossterm)
+msgid "History"
+msgstr "Historie"
+
+#.(para)
+msgid "Show the revision history of a file or folder. Also known as <quote>Log</quote>."
+msgstr ""
+"Zobrazit historii revizí souboru nebo adresář. Také znám jako "
+"<quote>záznam</quote>."
+
+#.(glossterm)
+msgid "Merge"
+msgstr "Sloučit"
+
+#.(para)
+msgid "The process by which changes from the repository are added to your working copy without disrupting any changes you have already made locally. Sometimes these changes cannot be reconciled automatically and the working copy is said to be in conflict."
+msgstr ""
+"Proces, při kterém změny z úložiště jsou přidány do Vaší pracovní kopie bez "
+"přerušení jakýchkoli změn, které jste již místně udělali. Někdy tyto změny "
+"nemohou být srovnány automaticky a pracovní kopie je tzv. v konfliktu."
+
+#.(para)
+msgid "Merging happens automatically when you update your working copy. You can also merge specific changes from another branch using TortoiseSVN's Merge command."
+msgstr ""
+"Sloučení se děje automaticky při aktualizaci Vaší pracovní kopie. Můžete "
+"také sloučit konkrétní změny z jiné větve pomocí TortoiseSVN v příkazu "
+"Sloučit."
+
+#.(glossterm)
+msgid "Patch"
+msgstr "Záplata"
+
+#.(para)
+msgid "If a working copy has changes to text files only, it is possible to use Subversion's Diff command to generate a single file summary of those changes in Unified Diff format. A file of this type is often referred to as a <quote>Patch</quote>, and it can be emailed to someone else (or to a mailing list) and applied to another working copy. Someone without commit access can make changes and submit a patch file for an authorized committer to apply. Or if you are unsure about a change you can submit a patch for others to review."
+msgstr ""
+"Pokud pracovní kopie má změny pouze v textových souborech, je možné použít "
+"Subversion příkaz porovnat pro vytvoření jednoho souboru shrnující tyto "
+"změny ve formátu sjednoceného rozdílu. Soubor tohoto typu je často označován "
+"jako <quote>Záplata</quote> a může být poslán e-mailem někomu jinému (nebo "
+"do poštovního adresáře) a použít na jinou pracovní kopii. Někdo bez "
+"oprávnění k odevzdání může provést změny a předložit záplatový soubor, aby "
+"ho oprávněný vývojář mohl použít. Nebo pokud si nejste jisti provedenou "
+"změnou, může poslat záplatu ostatním k přezkoumání."
+
+#.(glossterm)
+msgid "Property"
+msgstr "Vlastnost"
+
+#.(para)
+msgid "In addition to versioning your directories and files, Subversion allows you to add versioned metadata - referred to as <quote>properties</quote> to each of your versioned directories and files. Each property has a name and a value, rather like a registry key. Subversion has some special properties which it uses internally, such as <literal>svn:eol-style</literal>. TortoiseSVN has some too, such as <literal>tsvn:logminsize</literal>. You can add your own properties with any name and value you choose."
+msgstr ""
+"Kromě Vašich adresářů a souborů Subversion umožňuje přidat i metadata s "
+"verzí - známá jako <quote>vlastnosti</quote> každému z Vašich adresářů a "
+"souborů s verzí. Každá vlastnost má název a hodnotu, podobně jako klíč v "
+"registru. Subversion má některé speciální vlastnosti, které používá vnitřně, "
+"jako je <literal>svn:EOL-style</literal>. TortoiseSVN má taky některé, jako "
+"například <literal>tsvn:logminsize</literal>. Můžete přidat vlastní "
+"vlastnosti s libovolným názvem a hodnotou, kterou zvolíte."
+
+#.(glossterm)
+msgid "Relocate"
+msgstr "Přemístit"
+
+#.(para)
+msgid "If your repository moves, perhaps because you have moved it to a different directory on your server, or the server domain name has changed, you need to <quote>relocate</quote> your working copy so that its repository URLs point to the new location."
+msgstr ""
+"Pokud se Vaše úložiště přesune, snad proto, že jste ho přestěhovali do "
+"jiného adresáře na Vašem serveru, nebo název domény serveru se změnil, je "
+"třeba <quote>přemístit</quote> Vaši pracovní kopie tak, aby její URL "
+"úložiště odkazovalo na nové umístění."
+
+#.(para)
+msgid "Note: you should only use this command if your working copy is referring to the same location in the same repository, but the repository itself has moved. In any other circumstance you probably need the <quote>Switch</quote> command instead."
+msgstr ""
+"Poznámka: měli byste používat tento příkaz pouze, pokud Vaše pracovní kopie "
+"odkazuje na stejné místo ve stejném úložišti, ale samotné úložiště se "
+"přesunulo. Za všech ostatních okolností, pravděpodobně budete muset místo "
+"toho použít příkaz <quote>Překlopit</quote>."
+
+#.(glossterm)
+msgid "Repository"
+msgstr "Úložiště"
+
+#.(para)
+msgid "A repository is a central place where data is stored and maintained. A repository can be a place where multiple databases or files are located for distribution over a network, or a repository can be a location that is directly accessible to the user without having to travel across a network."
+msgstr ""
+"Úložiště je centrální místo, kde jsou data uložena a udržována. Úložiště "
+"může být místo, kde se nachází více databází nebo souborů pro distribuci po "
+"síti, nebo úložiště může být také místo, které je přímo přístupné "
+"uživatelům, aniž by museli cestovat po celé síti."
+
+#.(glossterm)
+msgid "Resolve"
+msgstr "Vyřešit"
+
+#.(para)
+msgid "When files in a working copy are left in a conflicted state following a merge, those conflicts must be sorted out by a human using an editor (or perhaps TortoiseMerge). This process is referred to as <quote>Resolving Conflicts</quote>. When this is complete you can mark the conflicted files as being resolved, which allows them to be committed."
+msgstr ""
+"Pokud jsou soubory v pracovní kopii ponechány po sloučení ve stavu "
+"konfliktu, musí být tyto konflikty vyřešeny člověkem pomocí editoru (nebo "
+"možná TortoiseMerge). Tento proces je označován jako <quote>Řešení "
+"konfliktů</quote>. Až toto skončí, můžete označit konfliktní soubory jako "
+"vyřešené, což jim umožní být odevzdány."
+
+#.(glossterm)
+msgid "Revert"
+msgstr "Vrátit"
+
+#.(para)
+msgid "Subversion keeps a local <quote>pristine</quote> copy of each file as it was when you last updated your working copy. If you have made changes and decide you want to undo them, you can use the <quote>revert</quote> command to go back to the pristine copy."
+msgstr ""
+"Subversion udržuje místní <quote>nedotčenou</quote> kopii každého souboru, "
+"jaký byl, když jste naposledy aktualizovali Vaši pracovní kopii. Pokud jste "
+"provedli změny a rozhodnete se, že je chcete vrátit, můžete použít příkaz "
+"<quote>vrátit</quote>, abyste se vrátili k původní kopii."
+
+#.(glossterm)
+msgid "Revision"
+msgstr "Revize"
+
+#.(para)
+msgid "Every time you commit a set of changes, you create one new <quote>revision</quote> in the repository. Each revision represents the state of the repository tree at a certain point in its history. If you want to go back in time you can examine the repository as it was at revision N."
+msgstr ""
+"Pokaždé, když odevzdáte sadu změn, vytvoříte v úložišti jednu novou "
+"<quote>revize</quote>. Každá revize představuje stav stromu úložiště v "
+"určitém okamžiku v jeho historii. Pokud se chcete vrátit zpět v čase můžete "
+"úložiště prozkoumat, jaké bylo v revizi N."
+
+#.(para)
+msgid "In another sense, a revision can refer to the set of changes that were made when that revision was created."
+msgstr ""
+"V jiném smyslu, revize odkazuje na sadu změn, které byly provedeny, když "
+"byla tato revize vytvořena."
+
+#.(glossterm)
+msgid "Revision Property (revprop)"
+msgstr "Vlastnosti revize (revvlast)"
+
+#.(para)
+msgid "Just as files can have properties, so can each revision in the repository. Some special revprops are added automatically when the revision is created, namely: <literal>svn:date svn:author svn:log</literal> which represent the commit date/time, the committer and the log message respectively. These properties can be edited, but they are not versioned, so any change is permanent and cannot be undone."
+msgstr ""
+"Stejně jako soubory mohou mít vlastnosti, může je mít i každá revize v "
+"úložišti. Některé speciální vlastnosti jsou přidány automaticky při "
+"vytvoření revize a sice: <literal>svn:Datum svn:autor svn:záznam</literal> "
+"které představují datum a čas odevzdání, respektive autora a zprávu záznamu. "
+"Tyto vlastnosti lze upravit, ale nemají verzi, takže každá změna je trvalá "
+"a nelze ji vrátit zpět."
+
+#.(glossterm)
+msgid "SVN"
+msgstr "SVN"
+
+#.(para)
+msgid "A frequently-used abbreviation for Subversion."
+msgstr "Často používaná zkratka pro Subversion."
+
+#.(para)
+msgid "The name of the Subversion custom protocol used by the <quote>svnserve</quote> repository server."
+msgstr ""
+"Název vlastního protokolu Subversion používaného serverem úložiště "
+"<quote>svnserve</quote>."
+
+#.(glossterm)
+msgid "Switch"
+msgstr "Překlopit"
+
+#.(para)
+msgid "Just as <quote>Update-to-revision</quote> changes the time window of a working copy to look at a different point in history, so <quote>Switch</quote> changes the space window of a working copy so that it points to a different part of the repository. It is particularly useful when working on trunk and branches where only a few files differ. You can switch your working copy between the two and only the changed files will be transferred."
+msgstr ""
+"Stejně jako <quote>Aktualizovat na revizi</quote> změní časové okno pracovní "
+"kopie, aby se podívalo na jiné místo v historii, tak "
+"<quote>Překlopit</quote> změní prostorové okno pracovní kopie tak, aby "
+"ukazovalo na jinou část úložiště. To je zvláště užitečné při práci na kmeni "
+"a větvi, kde se liší jen několik souborů. Můžete mezi nimi svoji pracovní "
+"kopii překlopit a jen změněné soubory budou převedeny."
+
+#.(glossterm)
+msgid "Update"
+msgstr "Aktualizovat"
+
+#.(para)
+msgid "This Subversion command pulls down the latest changes from the repository into your working copy, merging any changes made by others with local changes in the working copy."
+msgstr ""
+"Tento příkaz Subversion stáhne poslední změny z úložiště do Vaší pracovní "
+"kopie, sloučí změny provedené ostatními s místními změnami v pracovní kopii."
+
+#.(glossterm)
+msgid "Working Copy"
+msgstr "Pracovní kopie"
+
+#.(para)
+msgid "This is your local <quote>sandbox</quote>, the area where you work on the versioned files, and it normally resides on your local hard disk. You create a working copy by doing a <quote>Checkout</quote> from a repository, and you feed your changes back into the repository using <quote>Commit</quote>."
+msgstr ""
+"Toto je Vaše místní <quote>pískoviště</quote>, Oblast, kde budete pracovat "
+"na souborech s verzemi a obvykle sídlí na Vašem místním pevném disku. Můžete "
+"vytvořit pracovní kopii tím, že ji <quote>Získáte</quote> z úložiště a "
+"přivádíte své změny zpět do úložiště pomocí <quote>Odevzdat</quote>."
+
+#. Put one translator per line, in the form of NAME <EMAIL>.
+#.(None)
+msgid "translator-credits"
+msgstr "Zbyněk Schwarz <zbynek.schwarz@gmail.com>"
+
+#. Place the translation of 'translation' here.
+#.(None)
+msgid "translator-translation"
+msgstr "Překlad"
