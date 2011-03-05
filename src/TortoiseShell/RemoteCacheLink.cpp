@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2009, 2011 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -99,6 +99,8 @@ bool CRemoteCacheLink::EnsurePipeOpen()
 			return false;
 		}
 		// create an unnamed (=local) manual reset event for use in the overlapped structure
+		if (m_hEvent != INVALID_HANDLE_VALUE)
+			return true;
 		m_hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 		if (m_hEvent)
 			return true;
