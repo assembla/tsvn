@@ -77,6 +77,7 @@
         <define name="NONLS" />
         <define name="NOCRYPT" />
         <define name="SERF_HAVE_SSPI" />
+        <define name="_BIND_TO_CURRENT_CRT_VERSION" if="${configuration == 'release'}"/>
       </defines>
     </cl>
     <property name="machineoption" value="/MACHINE:X86" if="${platform == 'win32'}" />
