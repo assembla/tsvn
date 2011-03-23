@@ -26,6 +26,7 @@
 CRemoteCacheLink::CRemoteCacheLink(void) 
 	: m_hPipe(INVALID_HANDLE_VALUE)
 	, m_hCommandPipe(INVALID_HANDLE_VALUE)
+    , m_hEvent(INVALID_HANDLE_VALUE)
 {
 	SecureZeroMemory(&m_dummyStatus, sizeof(m_dummyStatus));
 	m_dummyStatus.text_status = svn_wc_status_none;
@@ -104,6 +105,7 @@ bool CRemoteCacheLink::EnsurePipeOpen()
 		m_hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 		if (m_hEvent)
 			return true;
+        m_hEvent = INVALID_HANDLE_VALUE;
 		ATLTRACE("CreateEvent failed");
 		ClosePipe();
 		return false;
