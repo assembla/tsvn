@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2008 - TortoiseSVN
+// Copyright (C) 2008, 2011 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,8 +21,15 @@
 class Creds
 {
 public:
-	CStringA		username;
-	CStringA		password;
+    char *          GetUsername() { return Decrypt(username); }
+    void            SetUsername(const char * user) { username = Encrypt(user); }
+    char *          GetPassword() { return Decrypt(password); }
+    void            SetPassword(const char * pass) { password = Encrypt(pass); }
+private:
+    char *          Decrypt(const char * text);
+    CStringA        Encrypt(const char * text);
+    CStringA        username;
+    CStringA        password;
 };
 
 

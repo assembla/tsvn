@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2008 - TortoiseSVN
+// Copyright (C) 2008, 2011 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
 //
 #include "StdAfx.h"
 #include "TSVNAuth.h"
+#include <Wincrypt.h>
 
 std::map<CStringA,Creds> tsvn_creds;
 
@@ -29,18 +30,26 @@ svn_error_t * tsvn_simple_first_creds(void **credentials,
 									  const char *realmstring,
 									  apr_pool_t *pool)
 {
-	*iter_baton = NULL;
-	if (tsvn_creds.find(realmstring) != tsvn_creds.end())
-	{
-		Creds cr = tsvn_creds[realmstring];
-		svn_auth_cred_simple_t *creds = (svn_auth_cred_simple_t *)apr_pcalloc(pool, sizeof(*creds));
-		creds->username = cr.username;
-		creds->password = cr.password;
-		creds->may_save = false;
-		*credentials = creds;
-	}
-	else
-		*credentials = NULL;
+    *iter_baton = NULL;
+    if (tsvn_creds.find(realmstring) != tsvn_creds.end())
+    {
+        Creds cr = tsvn_creds[realmstring];
+        svn_auth_cred_simple_t *creds = (svn_auth_cred_simple_t *)apr_pcalloc(pool, sizeof(*creds));
+        char * t = cr.GetUsername();
+        creds->username = (char *)apr_pcalloc(pool, strlen(t)+1);
+        strcpy_s((char*)creds->username, strlen(t)+1, t);
+        SecureZeroMemory(t, strlen(t));
+        delete [] t;
+        t = cr.GetPassword();
+        creds->password = (char *)apr_pcalloc(pool, strlen(t)+1);
+        strcpy_s((char*)creds->password, strlen(t)+1, t);
+        SecureZeroMemory(t, strlen(t));
+        delete [] t;
+        creds->may_save = false;
+        *credentials = creds;
+    }
+    else
+        *credentials = NULL;
 
 	return SVN_NO_ERROR;
 }
@@ -62,3 +71,47 @@ void svn_auth_get_tsvn_simple_provider(svn_auth_provider_object_t **provider,
 	*provider = po;
 }
 
+
+char * Creds::Decrypt( const char * text )
+{
+    DATA_BLOB blobin;
+    DATA_BLOB blobout;
+    LPWSTR descr;
+    DWORD dwLen = 0;
+    CryptStringToBinaryA(text, (DWORD)strlen(text), CRYPT_STRING_HEX, NULL, &dwLen, NULL, NULL);
+    BYTE * strIn = new BYTE[dwLen + 1];
+    CryptStringToBinaryA(text, (DWORD)strlen(text), CRYPT_STRING_HEX, strIn, &dwLen, NULL, NULL);
+
+    blobin.cbData = dwLen;
+    blobin.pbData = strIn;
+    CryptUnprotectData(&blobin, &descr, NULL, NULL, NULL, CRYPTPROTECT_UI_FORBIDDEN, &blobout);
+    SecureZeroMemory(blobin.pbData, blobin.cbData);
+    delete [] strIn;
+
+    char * result = new char[blobout.cbData+1];
+    strncpy_s(result, blobout.cbData+1, (const char*)blobout.pbData, blobout.cbData);
+    SecureZeroMemory(blobout.pbData, blobout.cbData);
+    LocalFree(blobout.pbData);
+    LocalFree(descr);
+    return result;
+}
+
+CStringA Creds::Encrypt( const char * text )
+{
+    DATA_BLOB blobin;
+    DATA_BLOB blobout;
+
+    blobin.cbData = (DWORD)strlen(text);
+    blobin.pbData = (BYTE*) (LPCSTR)text;
+    CryptProtectData(&blobin, L"TSVNAuth", NULL, NULL, NULL, CRYPTPROTECT_UI_FORBIDDEN, &blobout);
+    DWORD dwLen = 0;
+    CryptBinaryToStringA(blobout.pbData, blobout.cbData, CRYPT_STRING_HEX, NULL, &dwLen);
+    char * strOut = new char[dwLen + 1];
+    CryptBinaryToStringA(blobout.pbData, blobout.cbData, CRYPT_STRING_HEX, strOut, &dwLen);
+    LocalFree(blobout.pbData);
+
+    CStringA result = strOut;
+    delete [] strOut;
+
+    return result;
+}

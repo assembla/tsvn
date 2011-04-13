@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2009, 2011 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -176,50 +176,50 @@ BOOL SVNPrompt::SimplePrompt(CString& username, CString& password, const CString
 
 svn_error_t* SVNPrompt::userprompt(svn_auth_cred_username_t **cred, void *baton, const char * realm, svn_boolean_t may_save, apr_pool_t *pool)
 {
-	SVNPrompt * svn = (SVNPrompt *)baton;
-	svn_auth_cred_username_t *ret = (svn_auth_cred_username_t *)apr_pcalloc (pool, sizeof (*ret));
-	CString username;
-	CString temp;
-	temp.LoadString(IDS_AUTH_USERNAME);
-	if (svn->Prompt(username, FALSE, temp, may_save))
-	{
-		ret->username = apr_pstrdup(pool, CUnicodeUtils::GetUTF8(username));
-		ret->may_save = may_save;
-		*cred = ret;
-		Creds c;
-		c.username = username;
-		tsvn_creds[realm] = c;
-	}
-	else
-		*cred = NULL;
-	if (svn->m_app)
-		svn->m_app->DoWaitCursor(0);
-	return SVN_NO_ERROR;
+    SVNPrompt * svn = (SVNPrompt *)baton;
+    svn_auth_cred_username_t *ret = (svn_auth_cred_username_t *)apr_pcalloc (pool, sizeof (*ret));
+    CString username;
+    CString temp;
+    temp.LoadString(IDS_AUTH_USERNAME);
+    if (svn->Prompt(username, FALSE, temp, may_save))
+    {
+        ret->username = apr_pstrdup(pool, CUnicodeUtils::GetUTF8(username));
+        ret->may_save = may_save;
+        *cred = ret;
+        Creds c;
+        c.SetUsername(CStringA(username));
+        tsvn_creds[realm] = c;
+    }
+    else
+        *cred = NULL;
+    if (svn->m_app)
+        svn->m_app->DoWaitCursor(0);
+    return SVN_NO_ERROR;
 }
 
 svn_error_t* SVNPrompt::simpleprompt(svn_auth_cred_simple_t **cred, void *baton, const char * realm, const char *username, svn_boolean_t may_save, apr_pool_t *pool)
 {
-	SVNPrompt * svn = (SVNPrompt *)baton;
-	svn_auth_cred_simple_t *ret = (svn_auth_cred_simple_t *)apr_pcalloc (pool, sizeof (*ret));
-	CString UserName = CUnicodeUtils::GetUnicode(username);
-	CString PassWord;
-	CString Realm = CUnicodeUtils::GetUnicode(realm);
-	if (svn->SimplePrompt(UserName, PassWord, Realm, may_save))
-	{
-		ret->username = apr_pstrdup(pool, CUnicodeUtils::GetUTF8(UserName));
-		ret->password = apr_pstrdup(pool, CUnicodeUtils::GetUTF8(PassWord));
-		ret->may_save = may_save;
-		*cred = ret;
-		Creds c;
-		c.username = ret->username;
-		c.password = ret->password;
-		tsvn_creds[realm] = c;
-	}
-	else
-		*cred = NULL;
-	if (svn->m_app)
-		svn->m_app->DoWaitCursor(0);
-	return SVN_NO_ERROR;
+    SVNPrompt * svn = (SVNPrompt *)baton;
+    svn_auth_cred_simple_t *ret = (svn_auth_cred_simple_t *)apr_pcalloc (pool, sizeof (*ret));
+    CString UserName = CUnicodeUtils::GetUnicode(username);
+    CString PassWord;
+    CString Realm = CUnicodeUtils::GetUnicode(realm);
+    if (svn->SimplePrompt(UserName, PassWord, Realm, may_save))
+    {
+        ret->username = apr_pstrdup(pool, CUnicodeUtils::GetUTF8(UserName));
+        ret->password = apr_pstrdup(pool, CUnicodeUtils::GetUTF8(PassWord));
+        ret->may_save = may_save;
+        *cred = ret;
+        Creds c;
+        c.SetUsername(ret->username);
+        c.SetPassword(ret->password);
+        tsvn_creds[realm] = c;
+    }
+    else
+        *cred = NULL;
+    if (svn->m_app)
+        svn->m_app->DoWaitCursor(0);
+    return SVN_NO_ERROR;
 }
 
 svn_error_t* SVNPrompt::sslserverprompt(svn_auth_cred_ssl_server_trust_t **cred_p, void *baton, const char *realm, apr_uint32_t failures, const svn_auth_ssl_server_cert_info_t *cert_info, svn_boolean_t may_save, apr_pool_t *pool)
