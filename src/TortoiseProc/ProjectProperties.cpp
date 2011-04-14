@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2009 - TortoiseSVN
+// Copyright (C) 2003-2009, 2011 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -722,68 +722,68 @@ void ProjectProperties::InsertAutoProps(svn_config_t *cfg)
 
 bool ProjectProperties::AddAutoProps(const CTSVNPath& path)
 {
-	if (!path.IsDirectory())
-		return true;	// no error, but nothing to do
+    if (!path.IsDirectory())
+        return true;    // no error, but nothing to do
 
-	bool bRet = true;
+    bool bRet = true;
 
-	char buf[1024] = {0};
-	SVNProperties props(path, SVNRev::REV_WC, false);
-	if (!sLabel.IsEmpty())
-		bRet = props.Add(BUGTRAQPROPNAME_LABEL, WideToUTF8((LPCTSTR)sLabel)) && bRet;
-	if (!sMessage.IsEmpty())
-		bRet = props.Add(BUGTRAQPROPNAME_MESSAGE, WideToUTF8((LPCTSTR)sMessage)) && bRet;
-	if (!bNumber)
-		bRet = props.Add(BUGTRAQPROPNAME_NUMBER, "false") && bRet;
-	if (!sCheckRe.IsEmpty())
-		bRet = props.Add(BUGTRAQPROPNAME_LOGREGEX, WideToUTF8((LPCTSTR)(sCheckRe + _T("\n") + sBugIDRe))) && bRet;
-	if (!sUrl.IsEmpty())
-		bRet = props.Add(BUGTRAQPROPNAME_URL, WideToUTF8((LPCTSTR)sUrl)) && bRet;
-	if (bWarnIfNoIssue)
-		bRet = props.Add(BUGTRAQPROPNAME_WARNIFNOISSUE, "true") && bRet;
-	if (!bAppend)
-		bRet = props.Add(BUGTRAQPROPNAME_APPEND, "false") && bRet;
-	if (!sProviderUuid.IsEmpty())
-		bRet = props.Add(BUGTRAQPROPNAME_PROVIDERUUID, WideToUTF8((LPCTSTR)sProviderUuid)) && bRet;
-	if (!sProviderParams.IsEmpty())
-		bRet = props.Add(BUGTRAQPROPNAME_PROVIDERPARAMS, WideToUTF8((LPCTSTR)sProviderParams)) && bRet;
-	if (nLogWidthMarker)
-	{
-		sprintf_s(buf, sizeof(buf), "%ld", nLogWidthMarker);
-		bRet = props.Add(PROJECTPROPNAME_LOGWIDTHLINE, buf) && bRet;
-	}
-	if (!sLogTemplate.IsEmpty())
-		bRet = props.Add(PROJECTPROPNAME_LOGTEMPLATE, WideToUTF8((LPCTSTR)sLogTemplate)) && bRet;
-	if (nMinLogSize)
-	{
-		sprintf_s(buf, sizeof(buf), "%ld", nMinLogSize);
-		bRet = props.Add(PROJECTPROPNAME_LOGMINSIZE, buf) && bRet;
-	}
-	if (nMinLockMsgSize)
-	{
-		sprintf_s(buf, sizeof(buf), "%ld", nMinLockMsgSize);
-		bRet = props.Add(PROJECTPROPNAME_LOCKMSGMINSIZE, buf) && bRet;
-	}
-	if (!bFileListInEnglish)
-		bRet = props.Add(PROJECTPROPNAME_LOGFILELISTLANG, "false") && bRet;
-	if (!sLogSummaryRe.IsEmpty())
-		bRet = props.Add(PROJECTPROPNAME_LOGSUMMARY, WideToUTF8((LPCTSTR)sLogSummaryRe)) && bRet;
-	if (lProjectLanguage)
-	{
-		sprintf_s(buf, sizeof(buf), "%ld", lProjectLanguage);
-		bRet = props.Add(PROJECTPROPNAME_PROJECTLANGUAGE, buf) && bRet;
-	}
-	if (!sFPPath.IsEmpty())
-		bRet = props.Add(PROJECTPROPNAME_USERFILEPROPERTY, WideToUTF8((LPCTSTR)sFPPath)) && bRet;
-	if (!sDPPath.IsEmpty())
-		bRet = props.Add(PROJECTPROPNAME_USERDIRPROPERTY, WideToUTF8((LPCTSTR)sDPPath)) && bRet;
-	if (!sWebViewerRev.IsEmpty())
-		bRet = props.Add(PROJECTPROPNAME_WEBVIEWER_REV, WideToUTF8((LPCTSTR)sWebViewerRev)) && bRet;
-	if (!sWebViewerPathRev.IsEmpty())
-		bRet = props.Add(PROJECTPROPNAME_WEBVIEWER_PATHREV, WideToUTF8((LPCTSTR)sWebViewerPathRev)) && bRet;
-	if (!sAutoProps.IsEmpty())
-		bRet = props.Add(PROJECTPROPNAME_AUTOPROPS, WideToUTF8((LPCTSTR)sAutoProps)) && bRet;
-	return bRet;
+    char buf[1024] = {0};
+    SVNProperties props(path, SVNRev::REV_WC, false);
+    if (!sLabel.IsEmpty())
+        bRet = props.Add(BUGTRAQPROPNAME_LABEL, CUnicodeUtils::StdGetUTF8((LPCTSTR)sLabel)) && bRet;
+    if (!sMessage.IsEmpty())
+        bRet = props.Add(BUGTRAQPROPNAME_MESSAGE, CUnicodeUtils::StdGetUTF8((LPCTSTR)sMessage)) && bRet;
+    if (bNumber)
+        bRet = props.Add(BUGTRAQPROPNAME_NUMBER, "true") && bRet;
+    if (!sCheckRe.IsEmpty())
+        bRet = props.Add(BUGTRAQPROPNAME_LOGREGEX, CUnicodeUtils::StdGetUTF8((LPCTSTR)(sCheckRe + _T("\n") + sBugIDRe))) && bRet;
+    if (!sUrl.IsEmpty())
+        bRet = props.Add(BUGTRAQPROPNAME_URL, CUnicodeUtils::StdGetUTF8((LPCTSTR)sUrl)) && bRet;
+    if (bWarnIfNoIssue)
+        bRet = props.Add(BUGTRAQPROPNAME_WARNIFNOISSUE, "true") && bRet;
+    if (!bAppend)
+        bRet = props.Add(BUGTRAQPROPNAME_APPEND, "false") && bRet;
+    if (!sProviderUuid.IsEmpty())
+        bRet = props.Add(BUGTRAQPROPNAME_PROVIDERUUID, CUnicodeUtils::StdGetUTF8((LPCTSTR)sProviderUuid)) && bRet;
+    if (!sProviderParams.IsEmpty())
+        bRet = props.Add(BUGTRAQPROPNAME_PROVIDERPARAMS, CUnicodeUtils::StdGetUTF8((LPCTSTR)sProviderParams)) && bRet;
+    if (nLogWidthMarker)
+    {
+        sprintf_s(buf, "%ld", nLogWidthMarker);
+        bRet = props.Add(PROJECTPROPNAME_LOGWIDTHLINE, buf) && bRet;
+    }
+    if (!sLogTemplate.IsEmpty())
+        bRet = props.Add(PROJECTPROPNAME_LOGTEMPLATE, CUnicodeUtils::StdGetUTF8((LPCTSTR)sLogTemplate)) && bRet;
+    if (nMinLogSize)
+    {
+        sprintf_s(buf, "%ld", nMinLogSize);
+        bRet = props.Add(PROJECTPROPNAME_LOGMINSIZE, buf) && bRet;
+    }
+    if (nMinLockMsgSize)
+    {
+        sprintf_s(buf, "%ld", nMinLockMsgSize);
+        bRet = props.Add(PROJECTPROPNAME_LOCKMSGMINSIZE, buf) && bRet;
+    }
+    if (!bFileListInEnglish)
+        bRet = props.Add(PROJECTPROPNAME_LOGFILELISTLANG, "false") && bRet;
+    if (!sLogSummaryRe.IsEmpty())
+        bRet = props.Add(PROJECTPROPNAME_LOGSUMMARY, CUnicodeUtils::StdGetUTF8((LPCTSTR)sLogSummaryRe)) && bRet;
+    if (lProjectLanguage)
+    {
+        sprintf_s(buf, "%ld", lProjectLanguage);
+        bRet = props.Add(PROJECTPROPNAME_PROJECTLANGUAGE, buf) && bRet;
+    }
+    if (!sFPPath.IsEmpty())
+        bRet = props.Add(PROJECTPROPNAME_USERFILEPROPERTY, CUnicodeUtils::StdGetUTF8((LPCTSTR)sFPPath)) && bRet;
+    if (!sDPPath.IsEmpty())
+        bRet = props.Add(PROJECTPROPNAME_USERDIRPROPERTY, CUnicodeUtils::StdGetUTF8((LPCTSTR)sDPPath)) && bRet;
+    if (!sWebViewerRev.IsEmpty())
+        bRet = props.Add(PROJECTPROPNAME_WEBVIEWER_REV, CUnicodeUtils::StdGetUTF8((LPCTSTR)sWebViewerRev)) && bRet;
+    if (!sWebViewerPathRev.IsEmpty())
+        bRet = props.Add(PROJECTPROPNAME_WEBVIEWER_PATHREV, CUnicodeUtils::StdGetUTF8((LPCTSTR)sWebViewerPathRev)) && bRet;
+    if (!sAutoProps.IsEmpty())
+        bRet = props.Add(PROJECTPROPNAME_AUTOPROPS, CUnicodeUtils::StdGetUTF8((LPCTSTR)sAutoProps)) && bRet;
+    return bRet;
 }
 
 CString ProjectProperties::GetLogSummary(const CString& sMessage)
