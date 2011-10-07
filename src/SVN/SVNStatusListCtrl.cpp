@@ -303,7 +303,6 @@ void CSVNStatusListCtrl::Init(DWORD dwColumns, const CString& sColumnInfoContain
     }
 
     SetRedraw(true);
-
     m_bUnversionedRecurse = !!((DWORD)CRegDWORD(_T("Software\\TortoiseSVN\\UnversionedRecurse"), TRUE));
     m_bWaitCursor = false;
 }
@@ -453,6 +452,8 @@ BOOL CSVNStatusListCtrl::GetStatus ( const CTSVNPathList& pathList
     m_bWaitCursor = false;
     GetCursorPos(&pt);
     SetCursorPos(pt.x, pt.y);
+    GetHeaderCtrl()->Invalidate();
+    Invalidate();
     return bRet;
 }
 
@@ -480,6 +481,8 @@ void CSVNStatusListCtrl::GetUserProps (bool bShowUserProps)
     m_bWaitCursor = false;
     GetCursorPos(&pt);
     SetCursorPos(pt.x, pt.y);
+    GetHeaderCtrl()->Invalidate();
+    Invalidate();
 }
 
 //
@@ -1150,6 +1153,7 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, const CTSVNPathList& checkedList, DW
     int nSelectedEntry = 0;
     if (posSelectedEntry)
         nSelectedEntry = GetNextSelectedItem(posSelectedEntry);
+
     {
         CAutoWriteLock locker(m_guard);
         SetRedraw(FALSE);
@@ -1299,6 +1303,7 @@ void CSVNStatusListCtrl::Show(DWORD dwShow, const CTSVNPathList& checkedList, DW
     m_bEmpty = (GetItemCount() == 0);
     if (m_pSelectButton)
         m_pSelectButton->EnableWindow(!m_bEmpty);
+    GetHeaderCtrl()->Invalidate();
     Invalidate();
 }
 
