@@ -34,7 +34,7 @@ import csv
 import time
 import subprocess
 
-urlTrunk = 'trunk/Languages'
+urlTrunk = 'branches/1.7.x/Languages'
 wrkDir   = '.'
 fileGui  = 'TortoiseUI'
 fileDoc  = 'TortoiseDoc'
