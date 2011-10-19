@@ -22,6 +22,7 @@
 #include "SVNHelpers.h"
 #include "SVNError.h"
 #include "SVN.h"
+#include "SVNInfo.h"
 #include "SVNRev.h"
 #include "SVNProperties.h"
 #include "UnicodeUtils.h"
@@ -86,10 +87,25 @@ bool SVNExternals::Add(const CTSVNPath& path, const std::string& extvalue, bool 
                     bool bswitched, bmodified, bsparse;
                     CTSVNPath p = path;
                     p.AppendPathString(ext.targetDir);
-                    if (svn.GetWCRevisionStatus(p, true, minrev, maxrev, bswitched, bmodified, bsparse))
+                    if (p.IsDirectory())
                     {
-                        ext.revision.kind = svn_opt_revision_number;
-                        ext.revision.value.number = maxrev;
+                        if (svn.GetWCRevisionStatus(p, true, minrev, maxrev, bswitched, bmodified, bsparse))
+                        {
+                            ext.revision.kind = svn_opt_revision_number;
+                            ext.revision.value.number = maxrev;
+                        }
+                    }
+                    else
+                    {
+                        // GetWCRevisionStatus() does not work for file externals, that's
+                        // why we use SVNInfo here to get the revision.
+                        SVNInfo svninfo;
+                        const SVNInfoData * info = svninfo.GetFirstFileInfo(p, SVNRev::REV_WC, SVNRev::REV_WC);
+                        if (info)
+                        {
+                            ext.revision.kind = svn_opt_revision_number;
+                            ext.revision.value.number = info->lastchangedrev;
+                        }
                     }
                 }
                 push_back(ext);
@@ -146,6 +162,7 @@ bool SVNExternals::TagExternals(bool bRemote, const CString& message, svn_revnum
         externals[it->path] = val;
     }
 
+    m_sError.Empty();
     SVN svn;
     // now set the new properties
     for (std::map<CTSVNPath, sb>::iterator it = externals.begin(); it != externals.end(); ++it)
@@ -170,17 +187,19 @@ bool SVNExternals::TagExternals(bool bRemote, const CString& message, svn_revnum
                 targeturl.AppendRawString(sInsidePath); // http://tortoisesvn.tigris.org/svn/tortoisesvn/tags/version-1.6.7/ext
 
                 SVNProperties props(targeturl, headrev, false);
-                props.Add(SVN_PROP_EXTERNALS, it->second.extvalue, false, svn_depth_empty, message);
+                if (!props.Add(SVN_PROP_EXTERNALS, it->second.extvalue, false, svn_depth_empty, message))
+                    m_sError = props.GetLastErrorMessage();
             }
             else
             {
                 SVNProperties props(it->first, SVNRev::REV_WC, false);
-                props.Add(SVN_PROP_EXTERNALS, it->second.extvalue);
+                if (!props.Add(SVN_PROP_EXTERNALS, it->second.extvalue))
+                    m_sError = props.GetLastErrorMessage();
             }
         }
     }
 
-    return true;
+    return m_sError.IsEmpty();
 }
 
 std::string SVNExternals::GetValue(const CTSVNPath& path) const
