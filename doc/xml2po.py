@@ -63,7 +63,7 @@ class MessageOutput:
             if self.output_msgstr:
                 self.translations.append(t)
                 return
-            
+
             if self.do_translations or (not t in self.messages):
                 self.messages.append(t)
                 if spacepreserve:
@@ -102,7 +102,7 @@ msgstr ""
 
     def outputAll(self, out):
         self.outputHeader(out)
-        
+
         for k in self.messages:
             if k in self.comments:
                 out.write("#. %s\n" % (self.comments[k].replace("\n","\n#. ")))
@@ -172,7 +172,7 @@ def normalizeString(text, ignorewhitespace = 1):
 
     result = re.sub('^ ','', result)
     result = re.sub(' $','', result)
-    
+
     return result
 
 def stringForEntity(node):
@@ -212,20 +212,31 @@ def escapePoString(text):
 def unEscapePoString(text):
     return text.replace('\\"', '"').replace('\\\\','\\')
 
+gt = None
+def setTranslations():
+    global gt
+    if gt:
+        return
+    else:
+        file = open(mofile, "rb")
+        if file:
+            gt = gettext.GNUTranslations(file)
+        return
+
 def getTranslation(text, spacepreserve = 0):
     """Returns a translation via gettext for specified snippet.
 
     text should be a string to look for, spacepreserve set to 1
     when spaces should be preserved.
     """
+    global gt
+
     text = normalizeString(text, not spacepreserve)
     if (text.strip() == ''):
         return text
-    file = open(mofile, "rb")
-    if file:
-        gt = gettext.GNUTranslations(file)
-        if gt:
-            return gt.ugettext(text.decode('utf-8'))
+    # timetick( "translating")
+    if gt:
+        return gt.ugettext(text.decode('utf-8'))
     return text
 
 def startTagForNode(node):
@@ -240,14 +251,14 @@ def startTagForNode(node):
                 # FIXME: This part sucks
                 params += p.serialize('utf-8')
     return result+params
-        
+
 def endTagForNode(node):
     if not node:
         return 0
 
     result = node.name
     return result
-        
+
 def isFinalNode(node):
     if automatic:
         auto = autoNodeIsFinal(node)
@@ -382,7 +393,7 @@ def worthOutputting(node):
         return 0
 
     return autoNodeIsFinal(node)
-    
+
 def processElementTag(node, replacements, restart = 0):
     """Process node with node.type == 'element'."""
     if node.type == 'element':
@@ -488,7 +499,7 @@ def doSerialize(node):
             child = child.next
         return outtxt
 
-    
+
 def read_finaltags(filelist):
     if CurrentXmlMode:
         return CurrentXmlMode.getFinalTags()
@@ -572,6 +583,17 @@ def xml_error_handler(arg, ctxt):
 
 libxml2.registerErrorHandler(xml_error_handler, None)
 
+from datetime import datetime
+
+t1 = datetime.now()
+
+def timetick(messg):
+    global t1
+    t2 = datetime.now()
+    tdelta = t2 - t1
+    print >> sys.stderr, messg," (",tdelta.seconds, ",", tdelta.microseconds,")"
+
+# timetick( "xml2po started")
 
 # Main program start
 if __name__ != '__main__': raise NotImplementedError
@@ -598,8 +620,8 @@ import getopt, fileinput
 
 def usage (with_help = False):
         print >> sys.stderr, "Usage:  %s [OPTIONS] [XMLFILE]..." % (sys.argv[0])
-	if (with_help):
-        	print >> sys.stderr, """
+    if (with_help):
+            print >> sys.stderr, """
 OPTIONS may be some of:
     -a    --automatic-tags     Automatically decides if tags are to be considered
                                  "final" or not
@@ -665,7 +687,7 @@ for opt, arg in opts:
         print VERSION
         sys.exit(0)
     elif opt in ('-h', '--help'):
-    	usage(True)
+        usage(True)
 
 # Treat remaining arguments as XML files
 while args:
@@ -699,15 +721,20 @@ else:
     filenames.append(origxml)
     msg = MessageOutput(1)
 
+# timetick( "start translation")
+
 for filename in filenames:
     try:
         if filename == origxml:
             msg.translationsFollow()
         ctxt = libxml2.createFileParserCtxt(filename)
+        # timetick( "context created")
         ctxt.lineNumbers(1)
         if expand_all_entities:
             ctxt.replaceEntities(1)
+            # timetick( "entities replaced")
         ctxt.parseDocument()
+        # timetick( "document parsed")
         doc = ctxt.doc()
     except:
         print >> sys.stderr, "Error: cannot open file '%s'." % (filename)
@@ -716,7 +743,10 @@ for filename in filenames:
     msg.setFilename(filename)
     if CurrentXmlMode and origxml=='':
         CurrentXmlMode.preProcessXml(doc,msg)
+        # timetick( "XML pre processed")
+    setTranslations()
     doSerialize(doc)
+    # timetick( "doc serialized")
 
 if output == '-':
     out = sys.stdout
@@ -740,6 +770,7 @@ if mode != 'merge':
             msg.outputMessage(tcmsg, 0, tccom)
 
     msg.outputAll(out)
+    # timetick( "file written")
 else:
     if CurrentXmlMode:
         tcmsg = CurrentXmlMode.getStringForTranslators()
@@ -755,3 +786,4 @@ else:
 
         CurrentXmlMode.postProcessXmlTranslation(doc, translationlanguage, tnames, tstring)
     out.write(doc.serialize('utf-8', 1))
+    # timetick( "file written (merge branch)")
