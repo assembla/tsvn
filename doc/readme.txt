@@ -23,6 +23,7 @@ The file is Tools-1.x.7z
 
 Currently you can build the docs using NAnt. Download a current release from:
 http://sourceforge.net/project/showfiles.php?group_id=31650
+Note: NAnt requires the full .NET framework installed, not just the client profile.
 
 Please note that having spaces in your directory path will (for the time being)
 cause the documentation build process to fail.
@@ -85,7 +86,7 @@ If you want to translate the docs into a new language (assume french), just go a
 and copy po\doc.pot to po\fr.po. Start to translate phrases and test your translation
 with "TranslateDoc fr" and "makedoc tortoisesvn fr".
 
-Place localized screenshots in images\fr. The file "screenshots.txt" contains some
+Place localized screenshots in images\fr. The file "/doc/notes/screenshots.txt" contains some
 instructions on how/where the images have been captured.
 
 Now go ahead and translate the rest.
