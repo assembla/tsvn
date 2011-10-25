@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/tortoisesvn/wiki/IssueTracker?tm=3\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-09-23 00:34+0000\n"
+"PO-Revision-Date: 2011-10-18 03:35+0000\n"
 "Last-Translator: slabrou <stavros.labrou@gmail.com>\n"
 "Language-Team: Greek <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,6 @@ msgstr ""
 "Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#. Resource IDs: (188)
 # msgid/msgstr fields for Accelerator keys
 # Format is: "ID:xxxxxx:VACS+X" where:
 #    ID:xxxxx = the menu ID corresponding to the accelerator
@@ -39,6 +38,7 @@ msgstr ""
 # updated i.e. function keys (F2), special keys (Delete, HoMe) etc. will not.
 # ONLY change the msgstr field. Do NOT change any other.
 # If you do not want to change an Accelerator Key, copy msgid to msgstr
+#. Resource IDs: (188)
 #, c-format
 msgid "! %d"
 msgstr "! %d"
@@ -90,11 +90,10 @@ msgstr "%1!d! επιλεγμένα αρχεία, %2!d! αρχεία συνολι
 
 #. Resource IDs: (246)
 #, c-format
-msgid ""
-"%1!d! most active author(s) with at least %2!d! commits each (%3!d! %%)"
+msgid "%1!d! most active author(s) with at least %2!d! commits each (%3!d! %%)"
 msgstr ""
-"%1!d! πιο ενεργός/η/οι συγγραφέας/εις με τουλάχιστον %2!d! δέσμευση/εις κάθε"
-" (%3!d! %%)"
+"%1!d! πιο ενεργός/η/οι συγγραφέας/εις με τουλάχιστον %2!d! δέσμευση/εις κάθε "
+"(%3!d! %%)"
 
 #. Resource IDs: (226)
 #, c-format
@@ -334,7 +333,8 @@ msgstr ""
 msgid ""
 "%s\n"
 "The folder %s\n"
-"contains unversioned and/or modified file(s). Do you want to remove it anyway?"
+"contains unversioned and/or modified file(s). Do you want to remove it "
+"anyway?"
 msgstr ""
 
 #. Resource IDs: (616)
@@ -1386,8 +1386,7 @@ msgstr "&Ενημέρωση στην έκδοση..."
 
 #. Resource IDs: (1184)
 msgid "&Use auto-completion of file paths and keywords"
-msgstr ""
-"&Χρήση αυτόματης συμπλήρωσης σε καταλόγους αρχείων και λέξεων-κλειδιών"
+msgstr "&Χρήση αυτόματης συμπλήρωσης σε καταλόγους αρχείων και λέξεων-κλειδιών"
 
 #. Resource IDs: (1432)
 msgid "&Use recycle bin"
@@ -1549,13 +1548,10 @@ msgid "- %d"
 msgstr "- %d"
 
 #. Resource IDs: (1007)
-msgid ""
-"-------------------------------------------------------------------------------------------"
-msgstr ""
-"-------------------------------------------------------------------------------------------"
+msgid "-------------------------------------------------------------------------------------------"
+msgstr "-------------------------------------------------------------------------------------------"
 
-#. Resource IDs: (1002, 1003, 1021, 1022, 1035, 1036, 1089, 1104, 1324, 1333,
-#. 1362, 1474)
+#. Resource IDs: (1002, 1003, 1021, 1022, 1035, 1036, 1089, 1104, 1324, 1333, 1362, 1474)
 msgid "..."
 msgstr "..."
 
@@ -1630,34 +1626,41 @@ msgid ""
 "Please go to http://tortoisesvn.net and download the current version."
 msgstr ""
 "Μια νέα έκδοση είναι διαθέσιμη.\n"
-"Παρακαλώ επισκευθείται το http://tortoisesvn.net για να κατεβάσετε την τρέχουσα έκδοση."
+"Παρακαλώ επισκευθείται το http://tortoisesvn.net για να κατεβάσετε την "
+"τρέχουσα έκδοση."
 
 #. Resource IDs: (195)
 msgid ""
 "A newline separated list of paths for which icon overlays are shown.\r\n"
-"If you add an '?' char at the end of a path, then only this path will be included.\r\n"
-"If you add an '*' or no char at all at the end of a path, then all files and subdirs inside that path are included too."
+"If you add an '?' char at the end of a path, then only this path will be "
+"included.\r\n"
+"If you add an '*' or no char at all at the end of a path, then all files and "
+"subdirs inside that path are included too."
 msgstr ""
 
 #. Resource IDs: (197)
 msgid ""
 "A newline separated list of paths for which no context menu is shown.\r\n"
-"If you add an '*' char at the end of a path, then all files and subdirs inside that path are excluded too.\r\n"
+"If you add an '*' char at the end of a path, then all files and subdirs "
+"inside that path are excluded too.\r\n"
 "An empty list will allow the context menu on all paths."
 msgstr ""
 
 #. Resource IDs: (194)
 msgid ""
 "A newline separated list of paths for which no icon overlays are shown.\r\n"
-"If you add an '?' char at the end of a path, then only this path will be excluded.\r\n"
-"If you add an '*' or no char at all at the end of a path, then all files and subdirs inside that path are excluded too.\r\n"
+"If you add an '?' char at the end of a path, then only this path will be "
+"excluded.\r\n"
+"If you add an '*' or no char at all at the end of a path, then all files and "
+"subdirs inside that path are excluded too.\r\n"
 "An empty list will allow overlays on all paths."
 msgstr ""
 
 #. Resource IDs: (90)
 msgid ""
 "A relocate is only needed if the path to a repository has changed.\n"
-"Changing to a different path inside a repository is done by a switch operation.\n"
+"Changing to a different path inside a repository is done by a switch "
+"operation.\n"
 "\n"
 "If you are not sure what to do, try a switch operation first."
 msgstr ""
@@ -1669,9 +1672,11 @@ msgstr "Ενας απαιτούμενος πόρος δεν είναι διαθ�
 #. Resource IDs: (89)
 #, c-format
 msgid ""
-"A valid path on windows must not contain '<>|\"?*:' or one of the following device names:\n"
+"A valid path on windows must not contain '<>|\"?*:' or one of the following "
+"device names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\n"
-"See the <a href=\"http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%29.aspx\">documentation</a> from Microsoft about this."
+"See the <a href=\"http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%"
+"29.aspx\">documentation</a> from Microsoft about this."
 msgstr ""
 
 #. Resource IDs: (79)
@@ -1757,7 +1762,8 @@ msgid ""
 "ActiveX objects cannot be saved while exiting Windows!\n"
 "Discard all changes to %1?"
 msgstr ""
-"Αντικείμενα ActiveX δεν μπορούν να αποθηκευτούν κατά την έξοδο από τα Windows!\n"
+"Αντικείμενα ActiveX δεν μπορούν να αποθηκευτούν κατά την έξοδο από τα "
+"Windows!\n"
 "Απόρριψη όλων των αλλαγών στο %1;"
 
 #. Resource IDs: (77, 155, 209, 229)
@@ -1827,8 +1833,8 @@ msgstr "Προσθήκη..."
 #. Resource IDs: (171)
 msgid "Add/Edit Extension Specific Diff/Merge Program"
 msgstr ""
-"Προσθήκη/Επεξεργασία συγκεκριμένου προγράμματος επίβλεψης "
-"διαφορών/συγχώνευσης σύμφωνα με την κατάληξη του αρχείου"
+"Προσθήκη/Επεξεργασία συγκεκριμένου προγράμματος επίβλεψης διαφορών/"
+"συγχώνευσης σύμφωνα με την κατάληξη του αρχείου"
 
 #. Resource IDs: (73, 264, 1509, 1549, 65535)
 msgid "Added"
@@ -1942,8 +1948,8 @@ msgid ""
 "All your changes will be lost! Do you really want to reset all toolbars and "
 "menus?"
 msgstr ""
-"Όλες οι αλλαγές σου θα χαθούν! Είστε σίγουροι ότι θέλετε να επαναφέρετε ολές"
-" τις γραμμές εργαλείων και μενού;"
+"Όλες οι αλλαγές σου θα χαθούν! Είστε σίγουροι ότι θέλετε να επαναφέρετε ολές "
+"τις γραμμές εργαλείων και μενού;"
 
 #. Resource IDs: (1008)
 msgid ""
@@ -1975,8 +1981,8 @@ msgstr "Επιτρέπονται διφορούμενα &UUIDs"
 
 #. Resource IDs: (345)
 msgid ""
-"Allow different repositories to use the same URL, e.g. "
-"http://localhost/myrepos/"
+"Allow different repositories to use the same URL, e.g. http://localhost/"
+"myrepos/"
 msgstr ""
 "Να επιτρέπεται διαφορετικές αποθήκες να χρησιμοποιούν το ίδιο URL, δηλ. "
 "http://localhost/myrepos/"
@@ -2100,8 +2106,7 @@ msgstr ""
 #. Resource IDs: (199)
 #, c-format
 msgid "Are you sure you want to remove the cache of the selected %d items?"
-msgstr ""
-"Είσαστε βέβαιοι ότι θέλετε να διαγράψετε την cache από τα %d στοιχεία;"
+msgstr "Είσαστε βέβαιοι ότι θέλετε να διαγράψετε την cache από τα %d στοιχεία;"
 
 #. Resource IDs: (79)
 #, c-format
@@ -3079,13 +3084,15 @@ msgstr "Δεσμεύει τις αλλαγές σας στην Αποθήκη"
 #. Resource IDs: (173)
 msgid ""
 "Committing an unversioned folder will not recursively add its child items!\n"
-"You might want to add these folders recursively by using the 'Add...' context menu item."
+"You might want to add these folders recursively by using the 'Add...' "
+"context menu item."
 msgstr ""
 
 #. Resource IDs: (170)
 msgid ""
 "Committing an unversioned folder will not recursively add its child items!\n"
-"You might want to add these folders recursively by using the 'Add...' context menu item.\n"
+"You might want to add these folders recursively by using the 'Add...' "
+"context menu item.\n"
 "\n"
 "Are you sure that you want to continue the commit?"
 msgstr ""
@@ -3133,8 +3140,8 @@ msgid ""
 "Compares the file with the last committed revision to show you the changes "
 "you made"
 msgstr ""
-"Συγκρίνει το αρχείο με την τελευταία δεσμευμένη έκδοση για να σας δείξει τις"
-" αλλαγές που κάνατε"
+"Συγκρίνει το αρχείο με την τελευταία δεσμευμένη έκδοση για να σας δείξει τις "
+"αλλαγές που κάνατε"
 
 #. Resource IDs: (17)
 msgid "Compares the selected file with a file in the repository"
@@ -3170,8 +3177,7 @@ msgstr ""
 msgid ""
 "Configure the program used for comparing different revisions of properties"
 msgstr ""
-"Ρύθμιση του προγράμματος για την σύγκριση διαφορετικών εκδόσεων των "
-"ιδιοτήτων"
+"Ρύθμιση του προγράμματος για την σύγκριση διαφορετικών εκδόσεων των ιδιοτήτων"
 
 #. Resource IDs: (65535)
 msgid "Configure the program used to resolve conflicted files."
@@ -3205,8 +3211,7 @@ msgstr "Διιστάσεις: %d"
 
 #. Resource IDs: (345)
 msgid "Connect to the repository server and download missing log data"
-msgstr ""
-"Σύνδεηση στο διακομιστή αποθηκών και λήψη χαμένων δεδομένων καταγραφής"
+msgstr "Σύνδεηση στο διακομιστή αποθηκών και λήψη χαμένων δεδομένων καταγραφής"
 
 #. Resource IDs: (65535)
 msgid "Container sizes"
@@ -3624,8 +3629,7 @@ msgstr "Δημιουργία Αποθήκης στη συγκεκριμένη τ
 #. Resource IDs: (14)
 msgid "Creates a unified diff file with all changes you made"
 msgstr ""
-"Δημιουργία ενός ενοιαίου αρχείου διαφορών με όλες τις αλλαγές που έχετε "
-"κάνει"
+"Δημιουργία ενός ενοιαίου αρχείου διαφορών με όλες τις αλλαγές που έχετε κάνει"
 
 #. Resource IDs: (65535)
 msgid "Credits:"
@@ -3713,8 +3717,7 @@ msgstr "Προεπιλεγμένη URL"
 #. Resource IDs: (1007)
 msgid "Default application menu. Appears when no documents are open."
 msgstr ""
-"Προεπιλεγμένο μενού εφαρμογής. Εμφανίζεται όταν δεν υπάρχουν ανοικτά "
-"έγγραφα."
+"Προεπιλεγμένο μενού εφαρμογής. Εμφανίζεται όταν δεν υπάρχουν ανοικτά έγγραφα."
 
 #. Resource IDs: (81)
 msgid "Default directory structure successfully created!"
@@ -3909,8 +3912,10 @@ msgid ""
 "Disable this option if you have really big working copies and experience\r\n"
 "too much disk access when browsing the working copy."
 msgstr ""
-"Απενεργοποιήστε αυτή την επιλογή αν πραγματικά έχετε μεγάλα αντίγραφα εργασίας \r\n"
-"και αντιμετωπίζετε συνεχείς προσβάσεις στο δίσκο όταν περιηγήστε στο αντίγραφο εργασίας."
+"Απενεργοποιήστε αυτή την επιλογή αν πραγματικά έχετε μεγάλα αντίγραφα "
+"εργασίας \r\n"
+"και αντιμετωπίζετε συνεχείς προσβάσεις στο δίσκο όταν περιηγήστε στο "
+"αντίγραφο εργασίας."
 
 #. Resource IDs: (596)
 msgid "Discards local changes upon incoming deletes"
@@ -3968,8 +3973,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Do not show the context menu for the following paths:"
-msgstr ""
-"Να μην εμφανίζεται το αναδυόμενο μενού για τους ακόλουθους καταλόγους:"
+msgstr "Να μην εμφανίζεται το αναδυόμενο μενού για τους ακόλουθους καταλόγους:"
 
 #. Resource IDs: (90)
 msgid "Do this for all existing files"
@@ -4009,7 +4013,8 @@ msgstr "Πραγματικά θέλετε να μετακινήσετε αυτό
 msgid ""
 "Do you really want to revert all changes in\n"
 "%s\n"
-"and go back to this revision? These changes will be reverted by reverse-merging the revisions into your working copy."
+"and go back to this revision? These changes will be reverted by reverse-"
+"merging the revisions into your working copy."
 msgstr ""
 
 #. Resource IDs: (76)
@@ -4017,7 +4022,8 @@ msgstr ""
 msgid ""
 "Do you really want to revert all changes in\n"
 "%s\n"
-"which were made in this revision? These changes will be reverted by reverse-merging the revision into your working copy."
+"which were made in this revision? These changes will be reverted by reverse-"
+"merging the revision into your working copy."
 msgstr ""
 
 #. Resource IDs: (99)
@@ -4046,7 +4052,8 @@ msgid ""
 "Do you want to reload the documents to reflect the settings changes?\n"
 "Note: you will lose all changes you've made!"
 msgstr ""
-"Θέλετε να επαναφόρτωσετε τα έγγραφα να αντικατοπτρίζουν τις ρυθμίσεις αλλαγές?\n"
+"Θέλετε να επαναφόρτωσετε τα έγγραφα να αντικατοπτρίζουν τις ρυθμίσεις "
+"αλλαγές?\n"
 "Σημείωση: θα χάσετε όλες τις αλλαγές που έχετε κάνει!"
 
 #. Resource IDs: (588)
@@ -4305,8 +4312,8 @@ msgstr "Εμφανίστηκε παραβίαση κλειδώματος κατ�
 #, c-format
 msgid "Encountered a sharing violation while accessing %1."
 msgstr ""
-"Αντιμετωπίστηκε σφάλμα παραβίασης κοινής χρήσης ενώ γινόταν προσπέλαση του "
-"%1."
+"Αντιμετωπίστηκε σφάλμα παραβίασης κοινής χρήσης ενώ γινόταν προσπέλαση του %"
+"1."
 
 #. Resource IDs: (3843)
 msgid "Encountered an improper argument."
@@ -4475,11 +4482,11 @@ msgstr "Εξαίρεση"
 
 #. Resource IDs: (1002)
 msgid ""
-"Executable (*.exe)|*.exe|Command (*.com)|*.com|Information "
-"(*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
+"Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|"
+"Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
 msgstr ""
-"Εκτελέσιμο αρχείο (*.exe)|*.exe|Εντολή com (*.com)|*.com|Έγγραφο PDF "
-"(*.pdf)|*.pdf|Batch (*.bat)|*.bat|Όλα τα αρχεία (*.*)|*.*||"
+"Εκτελέσιμο αρχείο (*.exe)|*.exe|Εντολή com (*.com)|*.com|Έγγραφο PDF (*.pdf)|"
+"*.pdf|Batch (*.bat)|*.bat|Όλα τα αρχεία (*.*)|*.*||"
 
 #. Resource IDs: (1002)
 msgid "Existing"
@@ -4527,8 +4534,7 @@ msgid "Export directory:"
 msgstr "Εξαγωγή φακέλου:"
 
 #. Resource IDs: (345)
-msgid ""
-"Export the selected cache as a set of Comma Separated Value (CSV) files"
+msgid "Export the selected cache as a set of Comma Separated Value (CSV) files"
 msgstr ""
 
 #. Resource IDs: (79)
@@ -4632,8 +4638,8 @@ msgstr "Αποτυχημένη προσπάθεια δημιουργίας άδ�
 
 #. Resource IDs: (3865)
 msgid ""
-"Failed to create object.  Make sure the application is entered in the system"
-" registry."
+"Failed to create object.  Make sure the application is entered in the system "
+"registry."
 msgstr ""
 "Αποτυχία δημιουργία αντικειμένου. Βεβαιωθείτε ότι η εφαρμογή έχει "
 "καταχωρηθεί στο μητρώο του συστήματος."
@@ -4973,10 +4979,14 @@ msgstr ""
 
 #. Resource IDs: (89)
 msgid ""
-"Getting a lock for files without the 'svn:needs-lock' property will not prevent others from editing them in their working copies.\n"
-"To enable strict locking please add the 'svn:needs-lock' property to all files that need locking, and commit those files.\n"
-"Each file will have the file-system read-only flag set, and getting a lock will make the file writable.\n"
-"Note that other users will need to update their working copies before they see the files as read-only."
+"Getting a lock for files without the 'svn:needs-lock' property will not "
+"prevent others from editing them in their working copies.\n"
+"To enable strict locking please add the 'svn:needs-lock' property to all "
+"files that need locking, and commit those files.\n"
+"Each file will have the file-system read-only flag set, and getting a lock "
+"will make the file writable.\n"
+"Note that other users will need to update their working copies before they "
+"see the files as read-only."
 msgstr ""
 
 #. Resource IDs: (119)
@@ -5166,21 +5176,13 @@ msgstr ""
 msgid "Highest revision number in the cache"
 msgstr "Υψηλότερος αριθμός έκδοσης στην κρυφή μνήμη"
 
-#. Resource IDs: (1127)
-msgid ""
-"Hint: Press F5 to refresh the selected subtree and Ctrl-F5 to load all "
-"children too"
-msgstr ""
-"Υπόδειξη: Πιέστε F5 για ανανέωση του επελεγμένου υποκλάδου και Ctrl-F5 για "
-"να φορτώσετε επίσης όλους τους θυγατρικούς"
-
 #. Resource IDs: (16519)
 msgid ""
 "Hint: select the context menu, change the page to 'Commands' and drag the "
 "toolbar buttons into the menu window."
 msgstr ""
-"Υπόδειξη: Επιλέξτε τον κατάλογο σμφραζομένων, ανοίξτε την σελίδα \"Εντολές\""
-" και μεταφέρετε τα πλήκτρα της μπάρας εργασίας στο παράθυρο καταλόγου."
+"Υπόδειξη: Επιλέξτε τον κατάλογο σμφραζομένων, ανοίξτε την σελίδα \"Εντολές\" "
+"και μεταφέρετε τα πλήκτρα της μπάρας εργασίας στο παράθυρο καταλόγου."
 
 #. Resource IDs: (1064)
 msgid "Home"
@@ -5406,7 +5408,8 @@ msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'branch'."
 msgstr ""
-"Αν ένα συστατικό (μέλος μεταξύ δύο '/') ενός δεδομένου μονοπάτιου ταιριάζει με ένα\n"
+"Αν ένα συστατικό (μέλος μεταξύ δύο '/') ενός δεδομένου μονοπάτιου ταιριάζει "
+"με ένα\n"
 "από αυτά τα πρότυπα, τότε θεωρείται κλάδος."
 
 #. Resource IDs: (346)
@@ -5414,7 +5417,8 @@ msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'tag'."
 msgstr ""
-"Αν ένα συστατικό (μέλος μεταξύ δύο '/') ενός δεδομένου μονοπάτιου ταιριάζει με ένα\n"
+"Αν ένα συστατικό (μέλος μεταξύ δύο '/') ενός δεδομένου μονοπάτιου ταιριάζει "
+"με ένα\n"
 "από αυτά τα πρότυπα, τότε θεωρείται ετικέττα."
 
 #. Resource IDs: (346)
@@ -5422,7 +5426,8 @@ msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'trunk'."
 msgstr ""
-"Αν ένα συστατικό (μέλος μεταξύ δύο '/') ενός δεδομένου μονοπάτιου ταιριάζει με ένα\n"
+"Αν ένα συστατικό (μέλος μεταξύ δύο '/') ενός δεδομένου μονοπάτιου ταιριάζει "
+"με ένα\n"
 "από αυτά τα πρότυπα, τότε θεωρείται κορμός."
 
 #. Resource IDs: (194)
@@ -5435,10 +5440,12 @@ msgstr ""
 
 #. Resource IDs: (198)
 msgid ""
-"If activated, the menu entry 'Get Lock' is always shown in the top level menu\n"
+"If activated, the menu entry 'Get Lock' is always shown in the top level "
+"menu\n"
 "if the selected file has the svn:needs-lock property set"
 msgstr ""
-"Εφόσον ενεργό, η εγγραφή καταλόγου 'Πάρε Κλείδωμα' εμφανίζεται πάντα στον κατάλογο ανώτατου επιπέδου\n"
+"Εφόσον ενεργό, η εγγραφή καταλόγου 'Πάρε Κλείδωμα' εμφανίζεται πάντα στον "
+"κατάλογο ανώτατου επιπέδου\n"
 "όταν στο επιλεγμένο αρχείο έχει τεθεί η ιδιότητα svn:needs-lock"
 
 #. Resource IDs: (95)
@@ -5454,7 +5461,8 @@ msgid ""
 "If checked, TortoiseSVN creates a temporary file of the BASE to do the diff\n"
 "with the keywords expanded and the line endings adjusted."
 msgstr ""
-"Αν τεθεί, το TortoiseSVN δημιουργεί ένα προσωρινό αρχείο από την ΒΑΣΗ γιά να κάνει την σύγκριση\n"
+"Αν τεθεί, το TortoiseSVN δημιουργεί ένα προσωρινό αρχείο από την ΒΑΣΗ γιά να "
+"κάνει την σύγκριση\n"
 "με τις επεκτάσεις των κλειδιών και προσαρμοσμένες λήξεις γραμμών."
 
 #. Resource IDs: (197)
@@ -5467,10 +5475,12 @@ msgstr ""
 
 #. Resource IDs: (195)
 msgid ""
-"If enabled, the Merge dialog initializes the 'From:' URL with the URL of the selected working copy\r\n"
+"If enabled, the Merge dialog initializes the 'From:' URL with the URL of the "
+"selected working copy\r\n"
 "instead of the last used URL."
 msgstr ""
-"Εφόσον του έχει επιτραπεί, ο διάλογος συγχώνευσης αρχικοποιεί την διέυθηνση 'Από:' με την διέυθηνση του επιλεγμένου αντιτύπου εργασίας\r\n"
+"Εφόσον του έχει επιτραπεί, ο διάλογος συγχώνευσης αρχικοποιεί την διέυθηνση "
+"'Από:' με την διέυθηνση του επιλεγμένου αντιτύπου εργασίας\r\n"
 "αντί της διέυθηνσης που έχει χρησημοποιηθεί τελευταία. "
 
 #. Resource IDs: (195)
@@ -5478,7 +5488,8 @@ msgid ""
 "If enabled, the repository is contacted when the dialog starts up.\r\n"
 "You don't have to click on 'Check Repository' anymore."
 msgstr ""
-"Εφόσον του έχει επιτραπεί, η αποθήκη ειδοποιείται όταν ο διάλογος αρχίζει.\r\n"
+"Εφόσον του έχει επιτραπεί, η αποθήκη ειδοποιείται όταν ο διάλογος αρχίζει."
+"\r\n"
 "Δεν χρειάζεται να πατήσετε το 'Έλεγχος Αποθήκης' πλέον."
 
 #. Resource IDs: (197)
@@ -5487,30 +5498,37 @@ msgid ""
 "showing overlays still show the overlay for status 'normal'"
 msgstr ""
 "Εφόσον έχει επιτραπεί, οι φακέλοι εργασίας οι οποίοι έχουν εξαιρεθεί από\n"
-"το να εμφανίζουν επιστρώσεις συνεχίζουν να εμφανίζουν την επικάλυψη για την 'κανονική' κατάσταση "
+"το να εμφανίζουν επιστρώσεις συνεχίζουν να εμφανίζουν την επικάλυψη για την "
+"'κανονική' κατάσταση "
 
 #. Resource IDs: (195)
 msgid ""
 "If set, TortoiseSVN will set the filetimes to the time they\r\n"
 "were last committed. If not set, TortoiseSVN uses the current time."
 msgstr ""
-"Αν τεθεί, το TortoiseSVN θα θέσει τον χρόνο των αρχείων στο χρονικό σημείο στο οποία αυτά\r\n"
-"αποθηκέυτηκαν τελευταία. Αν δεν τεθεί, το TortoiseSVN χρησιμοποιεί τον προκείμενο χρόνο."
+"Αν τεθεί, το TortoiseSVN θα θέσει τον χρόνο των αρχείων στο χρονικό σημείο "
+"στο οποία αυτά\r\n"
+"αποθηκέυτηκαν τελευταία. Αν δεν τεθεί, το TortoiseSVN χρησιμοποιεί τον "
+"προκείμενο χρόνο."
 
 #. Resource IDs: (196)
 msgid ""
-"If set, files inside unversioned folders can be shown in the status control.\r\n"
+"If set, files inside unversioned folders can be shown in the status control."
+"\r\n"
 "The status control is used for example in the commit dialog."
 msgstr ""
-"Αν τεθεί, τα αρχεία που ανήκουν σε φακέλους χωρίς έκδοση μπορούν να εμφανίζονται στον έλεγχο κατάστασης.\r\n"
+"Αν τεθεί, τα αρχεία που ανήκουν σε φακέλους χωρίς έκδοση μπορούν να "
+"εμφανίζονται στον έλεγχο κατάστασης.\r\n"
 "Ο έλεγχος κατάστασης χρησιμοποιείται για παράδειγμα στον διάλογο παράδοσης."
 
 #. Resource IDs: (196)
 msgid ""
-"If set, then unversioned files will mark the status of the parent directory as modified\r\n"
+"If set, then unversioned files will mark the status of the parent directory "
+"as modified\r\n"
 "i.e. they get the modified overlay icon."
 msgstr ""
-"Αν τεθεί, τότε αρχεία χωρίς έκδοση σημαδεύουν την κατάσταση του πατρικού κόμβου ως τροποποιημένου\r\n"
+"Αν τεθεί, τότε αρχεία χωρίς έκδοση σημαδεύουν την κατάσταση του πατρικού "
+"κόμβου ως τροποποιημένου\r\n"
 "δηλαδή λαμβάνουν το τροποποιημένο εικονίδιο επικάλυψης. "
 
 #. Resource IDs: (2052)
@@ -5867,7 +5885,8 @@ msgstr ""
 #. Resource IDs: (89)
 #, c-format
 msgid ""
-"It seems you are trying to relocate your working copy to a different path inside the same repository.\n"
+"It seems you are trying to relocate your working copy to a different path "
+"inside the same repository.\n"
 "From: %1!s!\n"
 "To: %2!s!\n"
 "\n"
@@ -5877,13 +5896,15 @@ msgstr ""
 #. Resource IDs: (88)
 #, c-format
 msgid ""
-"It seems you are trying to relocate your working copy to a different path inside the same repository.\n"
+"It seems you are trying to relocate your working copy to a different path "
+"inside the same repository.\n"
 "\n"
 "From:\t%1!s!\n"
 "To:\t%2!s!\n"
 "\n"
 "A relocate is only needed if the path to a repository has changed.\n"
-"Changing to a different path inside a repository is done by a switch operation.\n"
+"Changing to a different path inside a repository is done by a switch "
+"operation.\n"
 "\n"
 "Improper use of relocate will corrupt your working copy!\n"
 "If you are not sure what to do, please refer to our docs on relocate.\n"
@@ -6197,8 +6218,8 @@ msgstr "Μηνύματα ιστορικού (Εμφάνιση διαλόγου �
 #, c-format
 msgid "Lowest shown revision: %1!ld! - Highest shown revision: %2!ld!"
 msgstr ""
-"Χαμηλότερη εμφανιζόμενη έκδοση: %1!ld! - Υψηλότερη εμφανιζόμενη έκδοση: "
-"%2!ld!"
+"Χαμηλότερη εμφανιζόμενη έκδοση: %1!ld! - Υψηλότερη εμφανιζόμενη έκδοση: %2!"
+"ld!"
 
 #. Resource IDs: (238)
 #, c-format
@@ -6206,7 +6227,8 @@ msgid ""
 "Lowest shown revision: %1!ld! - Highest shown revision: %2!ld!\n"
 "HEAD revision: %3!ld!"
 msgstr ""
-"Χαμηλότερη εμφανιζόμενη έκδοση: %1!ld! - Υψηλότερη εμφανιζόμενη έκδοση: %2!ld!\n"
+"Χαμηλότερη εμφανιζόμενη έκδοση: %1!ld! - Υψηλότερη εμφανιζόμενη έκδοση: %2!"
+"ld!\n"
 " Έκδοση HEAD: %3!ld!"
 
 #. Resource IDs: (16973)
@@ -6268,7 +6290,8 @@ msgid ""
 "Marks the revisions as merged, without actually doing the merge.\r\n"
 "This blocks the revisions from getting merged in the future."
 msgstr ""
-"Σημαδεύει την έκδοση ως συγχωνευμένη, χωρίς να κάνει την ίδια την συγχώνευση.\r\n"
+"Σημαδεύει την έκδοση ως συγχωνευμένη, χωρίς να κάνει την ίδια την συγχώνευση."
+"\r\n"
 "Αυτή η διαδικασία εμποδίζει τις εκδόσεις από το να συγχωνευτούν στο μέλλον.  "
 
 #. Resource IDs: (1064)
@@ -6381,8 +6404,8 @@ msgstr "Συγχωνευμένη/ες εκδόση/εις %s από %s:\n"
 
 #. Resource IDs: (14)
 msgid ""
-"Merges all missing revisions back into the working copy using merge-tracking"
-" information"
+"Merges all missing revisions back into the working copy using merge-tracking "
+"information"
 msgstr ""
 "Συγχωνεύει πίσω στο αντίγραφο εργασίας όλες τις εκδόσεις οι οποίες λείπουν "
 "χρησιμοποιώντας πληροφορίες συγχώνευσης-ανίχνευσης"
@@ -6403,8 +6426,8 @@ msgstr "Συγχώνευση διαφορών μεταξύ διευθύνσεω�
 #. Resource IDs: (229)
 #, c-format
 msgid ""
-"Merging from %1!s!, revision %2!s! to %3!s!, revision %4!s! into %5!s!, "
-"%6!s!%7!s!%8!s!"
+"Merging from %1!s!, revision %2!s! to %3!s!, revision %4!s! into %5!s!, %6!s!"
+"%7!s!%8!s!"
 msgstr ""
 
 #. Resource IDs: (264)
@@ -6727,10 +6750,12 @@ msgstr "Όχι"
 #. Resource IDs: (81)
 msgid ""
 "No command specified!\n"
-"TortoiseProc.exe is used by the Shell extension and should not be called directly!"
+"TortoiseProc.exe is used by the Shell extension and should not be called "
+"directly!"
 msgstr ""
 "Δεν έχει οριστεί εντολή!\n"
-"Το εκτελέσιμο αρχείο Tortoise.exe είναι σε χρήση από την επέκταση κελύφους και δεν πρέπει να καλείται άμεσα!"
+"Το εκτελέσιμο αρχείο Tortoise.exe είναι σε χρήση από την επέκταση κελύφους "
+"και δεν πρέπει να καλείται άμεσα!"
 
 #. Resource IDs: (81)
 msgid "No command value specified!"
@@ -6763,11 +6788,13 @@ msgstr ""
 #. Resource IDs: (239)
 msgid ""
 "No files to show with the current setting.\n"
-"Check one or more settings below to see unversioned, ignored and/or unmodified files.\n"
+"Check one or more settings below to see unversioned, ignored and/or "
+"unmodified files.\n"
 "To see remote changes, click on 'Check Repository'"
 msgstr ""
 "Δεν υπάρχουν αρχεία για εμφάνιση με το επίκαιρο περιβάλλον.\n"
-"Θέστε μία ή περισσότερες από τις μεταβλητές περιβάλλοντος παρακάτω για να δείτε αρχεία χωρίς έκδοση, υπό αγνόηση και/ή χωρίς αλλαγές.\n"
+"Θέστε μία ή περισσότερες από τις μεταβλητές περιβάλλοντος παρακάτω για να "
+"δείτε αρχεία χωρίς έκδοση, υπό αγνόηση και/ή χωρίς αλλαγές.\n"
 "Για να δείτε απομακρυσμένες αλλαγές, πατήστε 'Έλεγχος Αποθήκης'"
 
 #. Resource IDs: (170)
@@ -6912,7 +6939,8 @@ msgstr "Ανακοίνωνη"
 
 #. Resource IDs: (99)
 msgid ""
-"Notice: if you upgrade your working copy, you won't be able to access the upgraded working copy with pre 1.7 SVN clients anymore!\n"
+"Notice: if you upgrade your working copy, you won't be able to access the "
+"upgraded working copy with pre 1.7 SVN clients anymore!\n"
 "Do you really want to upgrade this working copy?"
 msgstr ""
 
@@ -6972,19 +7000,18 @@ msgstr ""
 #. Resource IDs: (338)
 msgid "Number of different words used in log messages"
 msgstr ""
-"Πλήθος των διαφορετικών λέξεων που έχουν χρησιμοποιηθεί σε μηνύματα "
-"ιστορικού"
+"Πλήθος των διαφορετικών λέξεων που έχουν χρησιμοποιηθεί σε μηνύματα ιστορικού"
 
 #. Resource IDs: (339)
 msgid "Number of merged revisions that are not cached yet"
 msgstr ""
-"Πλήθος των συγχωνευμένων εκδόσεων οι οποίες δεν έχουν αποθηκευτεί στην κρυφή"
-" μνήμη ακόμα"
+"Πλήθος των συγχωνευμένων εκδόσεων οι οποίες δεν έχουν αποθηκευτεί στην κρυφή "
+"μνήμη ακόμα"
 
 #. Resource IDs: (338)
 msgid ""
-"Number of path elements. A path element is a folder or file name like "
-"'foo.txt' or 'mybranch'."
+"Number of path elements. A path element is a folder or file name like 'foo."
+"txt' or 'mybranch'."
 msgstr ""
 "Πλήθος των στοιχείων μονοπατιού. Το στοιχείο μονοπατιού είναι ένα όνομα "
 "φάκελου ή αρχείου όπως το 'foo.txt' ή 'mybranch'."
@@ -6994,7 +7021,8 @@ msgid ""
 "Number of times a log cache can fail to close properly\n"
 "due to crashes etc. until it gets deleted automatically."
 msgstr ""
-"Πλήθος περπτώσεων που η κρυφή μνήμη ιστορικού μπορεί να αποτύχει να κλείσει όπως πρέπει\n"
+"Πλήθος περπτώσεων που η κρυφή μνήμη ιστορικού μπορεί να αποτύχει να κλείσει "
+"όπως πρέπει\n"
 "λόγω κατάρρευσης κτλ. μέχρι να διαγραφεί αυτόματα."
 
 #. Resource IDs: (1160)
@@ -7054,7 +7082,8 @@ msgid ""
 "\n"
 "Are you sure you want to move the selected paths?"
 msgstr ""
-"Ένας από τους καταλόγους που προσπαθείτε να μετακινήσετε είναι ειδικός κατάλογος\n"
+"Ένας από τους καταλόγους που προσπαθείτε να μετακινήσετε είναι ειδικός "
+"κατάλογος\n"
 "(είναι 'Διακλάδωση','Ετικέτα' ή 'Κορμός').\n"
 "Είστε βέβαιοι ότι θέλετε να μετακινήσετε τους επιλεγμένους καταλόγους;"
 
@@ -7343,8 +7372,8 @@ msgstr "Εικόνα:"
 
 #. Resource IDs: (157)
 msgid ""
-"Pictures (*.svg, *.wmf, *.jpg, *.png, *.bmp, "
-"*.gif)|*.svg;*.wmf;*.jpg;*.jpeg;*.png;*.bmp;*.gif|All (*.*)|*.*||"
+"Pictures (*.svg, *.wmf, *.jpg, *.png, *.bmp, *.gif)|*.svg;*.wmf;*.jpg;*.jpeg;"
+"*.png;*.bmp;*.gif|All (*.*)|*.*||"
 msgstr ""
 
 #. Resource IDs: (246)
@@ -7366,15 +7395,19 @@ msgstr "Παρακαλώ εκτελέστε την εντολή \"Εκκαθάρ
 #. Resource IDs: (78)
 msgid ""
 "Please note:\n"
-"Your working copy remains on the previous path. If you want your next changes\n"
+"Your working copy remains on the previous path. If you want your next "
+"changes\n"
 "to be committed to the copy or branch you have just created,\n"
 "then you need to switch your working copy over to the new URL.\n"
 "Use the Switch command to do that."
 msgstr ""
 "Παρακαλώ σημειώστε:\n"
-"Το εργαζόμενο αντιγραφό σας παραμένει στην προηγούμενη διαδρομή. Εάν θέλετε οι αλλαγές\n"
-"που ακολουθούν να δεσμευτούν στο αντίγραφο ή στη διακλαδωσή που μόλις δημιουργήσατε,\n"
-"τότε χρειάζετε να μεταστρέψετε το εργαζόμενο αντίγραφο σασ στο καινούργιο URL.\n"
+"Το εργαζόμενο αντιγραφό σας παραμένει στην προηγούμενη διαδρομή. Εάν θέλετε "
+"οι αλλαγές\n"
+"που ακολουθούν να δεσμευτούν στο αντίγραφο ή στη διακλαδωσή που μόλις "
+"δημιουργήσατε,\n"
+"τότε χρειάζετε να μεταστρέψετε το εργαζόμενο αντίγραφο σασ στο καινούργιο "
+"URL.\n"
 "Χρησιμοποιήστε την εντολή Μεταστροφής για να το κάνετε αυτό."
 
 #. Resource IDs: (1287)
@@ -7900,8 +7933,7 @@ msgid "Release loc&k..."
 msgstr ""
 
 #. Resource IDs: (16)
-msgid ""
-"Releases locks even if you're not the owner of the locks (breaks them)."
+msgid "Releases locks even if you're not the owner of the locks (breaks them)."
 msgstr ""
 "Απελευθερώνει τα κλειδώματα αν δεν είστε ο κάτοχός τους (τα παραβιάζει)."
 
@@ -8300,8 +8332,7 @@ msgstr "Επαναφορά"
 
 #. Resource IDs: (345)
 msgid "Revert to default settings. Recommended for unexperienced users."
-msgstr ""
-"Επαναφορά στις αρχικές ρυθμίσεις. Προτείνετε για μη έμπειρους χρήστες."
+msgstr "Επαναφορά στις αρχικές ρυθμίσεις. Προτείνετε για μη έμπειρους χρήστες."
 
 #. Resource IDs: (147)
 msgid ""
@@ -8579,7 +8610,8 @@ msgstr "SVN σύντομο URL"
 msgid ""
 "Sample log message to test the bugtraq: regex strings.\n"
 "\n"
-"Testing mentions of issues inside a text: Mention issue #55. Mention issues #77, #78.\n"
+"Testing mentions of issues inside a text: Mention issue #55. Mention issues "
+"#77, #78.\n"
 "\n"
 "Update issue #101\n"
 "Fixes issue #202\n"
@@ -8845,8 +8877,7 @@ msgstr "Επιλογή των URL για τη συγχώνευση του δέν
 #. Resource IDs: (79)
 msgid ""
 "Select the behaviour of the progress dialog at the end of the operation."
-msgstr ""
-"Επιλέξτε τη συμπεριφορά του διαλόγου προόδου στο τέλος της διεργασίας."
+msgstr "Επιλέξτε τη συμπεριφορά του διαλόγου προόδου στο τέλος της διεργασίας."
 
 #. Resource IDs: (3603)
 msgid ""
@@ -9169,8 +9200,8 @@ msgstr "Εμφάνιση/Απόκρυψη"
 #. Resource IDs: (115)
 #, c-format
 msgid ""
-"Showing %1!ld! revision(s), from revision %2!ld! to revision %3!ld! - %4!ld!"
-" revision(s) selected, showing %5!ld! changed paths"
+"Showing %1!ld! revision(s), from revision %2!ld! to revision %3!ld! - %4!ld! "
+"revision(s) selected, showing %5!ld! changed paths"
 msgstr ""
 
 #. Resource IDs: (272)
@@ -9189,8 +9220,8 @@ msgstr ""
 
 #. Resource IDs: (13)
 msgid ""
-"Shows all files which were changed since the last update, locally and in the"
-" repository"
+"Shows all files which were changed since the last update, locally and in the "
+"repository"
 msgstr ""
 
 #. Resource IDs: (2050)
@@ -9443,18 +9474,25 @@ msgstr ""
 #. Resource IDs: (117)
 msgid ""
 "Sub-string filter:\r\n"
-"* Specify one or more strings, separated by spaces. They will be evaluated left to right.\r\n"
-"* Put a - in front of a sub-string to exclude revisions that contain this sub-string.\r\n"
-"* Put a + in front of a sub-string to include revisions that may not match the filter so far.\r\n"
+"* Specify one or more strings, separated by spaces. They will be evaluated "
+"left to right.\r\n"
+"* Put a - in front of a sub-string to exclude revisions that contain this "
+"sub-string.\r\n"
+"* Put a + in front of a sub-string to include revisions that may not match "
+"the filter so far.\r\n"
 "* Enclose strings that contain spaces etc. with \".\r\n"
-"* Put a ! at the beginning of the line to invert the whole filter condition.\r\n"
+"* Put a ! at the beginning of the line to invert the whole filter condition."
+"\r\n"
 "\r\n"
 "Examples:\r\n"
 "myname  2008    : my commits of 2008\r\n"
-".h  -.cpp              : commits that changed headers but no implementations\r\n"
+".h  -.cpp              : commits that changed headers but no implementations"
+"\r\n"
 ".doc +.xls 2010  : commits from 2010 with .doc or .xls files in it\r\n"
-"\" \"                        : commits with spaces (ex. when searching in paths only)\r\n"
-"-\"\"show all\"\"        : commits that don't contain the string \"show all\"\r\n"
+"\" \"                        : commits with spaces (ex. when searching in "
+"paths only)\r\n"
+"-\"\"show all\"\"        : commits that don't contain the string \"show all"
+"\"\r\n"
 "!myname  .cpp    : everything but my commits to .cpp files"
 msgstr ""
 
@@ -9692,8 +9730,8 @@ msgstr ""
 
 #. Resource IDs: (346)
 msgid ""
-"The color of creation, copy and rename nodes of tags will be shifted towards"
-" yellow."
+"The color of creation, copy and rename nodes of tags will be shifted towards "
+"yellow."
 msgstr ""
 
 #. Resource IDs: (346)
@@ -9783,7 +9821,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The folder %s\n"
-"contains unversioned and/or modified file(s). Do you want to remove it anyway?"
+"contains unversioned and/or modified file(s). Do you want to remove it "
+"anyway?"
 msgstr ""
 
 #. Resource IDs: (88)
@@ -9844,8 +9883,7 @@ msgstr ""
 
 #. Resource IDs: (608)
 #, c-format
-msgid ""
-"The last merge operation tried to delete/move/rename the directory '%s'"
+msgid "The last merge operation tried to delete/move/rename the directory '%s'"
 msgstr ""
 
 #. Resource IDs: (607)
@@ -10028,7 +10066,8 @@ msgid ""
 "The path/URL you've entered seems to be illegal on Windows!\n"
 "You can try it anyway, but you might get an error later.\n"
 "\n"
-"A valid path on windows must not contain '<>|\"?*:' or one of the following device names:\n"
+"A valid path on windows must not contain '<>|\"?*:' or one of the following "
+"device names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\n"
 "\n"
 "Do you want to proceed anyway?"
@@ -10044,7 +10083,8 @@ msgid ""
 "%2!s!\n"
 "which seems to match the directory you're applying the patch.\n"
 "\n"
-"Do you want to use the suggested path? Answering 'no' will quit TortoiseMerge."
+"Do you want to use the suggested path? Answering 'no' will quit "
+"TortoiseMerge."
 msgstr ""
 
 #. Resource IDs: (314)
@@ -10064,7 +10104,8 @@ msgid ""
 "The path\n"
 "%s\n"
 "in the patchfile does not exist.\n"
-"TortoiseMerge tried to apply the patch by stripping prefixes but no matching path could be found."
+"TortoiseMerge tried to apply the patch by stripping prefixes but no matching "
+"path could be found."
 msgstr ""
 
 #. Resource IDs: (84)
@@ -10199,8 +10240,10 @@ msgstr "Δικό τους"
 
 #. Resource IDs: (169)
 msgid ""
-"There are changes or unversioned items inside one or more directories which you have included with svn:externals.\n"
-"Those files are not listed for commit. You need to commit those files separately."
+"There are changes or unversioned items inside one or more directories which "
+"you have included with svn:externals.\n"
+"Those files are not listed for commit. You need to commit those files "
+"separately."
 msgstr ""
 
 #. Resource IDs: (64)
@@ -10213,7 +10256,8 @@ msgid ""
 "There are still unresolved conflicts in line %d!\n"
 "You should resolve those conflicts first before saving.\n"
 "Do you want to save the file with the conflicts still there?\n"
-"If you click YES, then you have to manually resolve the conflicts in another editor!"
+"If you click YES, then you have to manually resolve the conflicts in another "
+"editor!"
 msgstr ""
 
 #. Resource IDs: (313)
@@ -10243,8 +10287,8 @@ msgstr ""
 #. Resource IDs: (83)
 msgid "There's nothing to unlock. No file has a lock in this working copy."
 msgstr ""
-"Δεν υπάρχει κάτι για να ξεκλειδωθεί. Κανένα αρχείο δεν έχει κλείδωμα σε αυτό"
-" το αντίγραφο εργασίας."
+"Δεν υπάρχει κάτι για να ξεκλειδωθεί. Κανένα αρχείο δεν έχει κλείδωμα σε αυτό "
+"το αντίγραφο εργασίας."
 
 #. Resource IDs: (188)
 msgid "Thesaurus"
@@ -10287,14 +10331,15 @@ msgstr ""
 #. Resource IDs: (82)
 msgid ""
 "This is not a valid path!\n"
-"A valid path must not contain '<>|\"?*:' or one of the following device names:\n"
+"A valid path must not contain '<>|\"?*:' or one of the following device "
+"names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$"
 msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed"
-" in the Subversion book. Use this to merge all changes of a branch back to "
+"This method covers the case when you have made a feature branch as discussed "
+"in the Subversion book. Use this to merge all changes of a branch back to "
 "trunk."
 msgstr ""
 
@@ -10319,15 +10364,15 @@ msgstr ""
 
 #. Resource IDs: (1531)
 msgid ""
-"This product includes software from Apache™ Subversion® "
-"(http://subversion.apache.org)"
+"This product includes software from Apache™ Subversion® (http://subversion."
+"apache.org)"
 msgstr ""
 
 #. Resource IDs: (3857)
 #, c-format
 msgid ""
-"This program is linked to the missing export %s in the file %s. This machine"
-" may have an incompatible version of %s."
+"This program is linked to the missing export %s in the file %s. This machine "
+"may have an incompatible version of %s."
 msgstr ""
 
 #. Resource IDs: (3857)
@@ -10381,8 +10426,10 @@ msgstr ""
 
 #. Resource IDs: (284)
 msgid ""
-"To steal the lock, right-click on the parent folder of this item and select 'Get Lock' from the context menu.\n"
-"This will bring up the locking dialog where you can enforce the lock, i.e., 'steal' it from the one currently holding it."
+"To steal the lock, right-click on the parent folder of this item and select "
+"'Get Lock' from the context menu.\n"
+"This will bring up the locking dialog where you can enforce the lock, i.e., "
+"'steal' it from the one currently holding it."
 msgstr ""
 
 #. Resource IDs: (1201, 65535)
@@ -10435,7 +10482,8 @@ msgid ""
 "TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
 "instead.\n"
 "\n"
-"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
 msgstr ""
 
 #. Resource IDs: (7, 153)
@@ -10527,13 +10575,15 @@ msgstr ""
 msgid ""
 "TortoiseSVN is a shell extension.\n"
 "That means it is integrated into the Windows explorer.\n"
-"To use TortoiseSVN please open the explorer and right-click on any folder you like\n"
+"To use TortoiseSVN please open the explorer and right-click on any folder "
+"you like\n"
 "to bring up the context menu where you will find all TortoiseSVN commands.\n"
 "And read the manual!"
 msgstr ""
 "Το TortoiseSVN είναι μια προέκταση του κέλυφους.\n"
 "Αυτό σημαίνει ότι είναι ένσωματομένο μέσα στον Windows explorer.\n"
-"Για να χρησιμοποιήσετε τοTortoiseSVN παρακαλώ ανοίξτε τον Εxplorer και πατήστε το δεξί κλικ σε όποιον κατάλογο σας αρέσει\n"
+"Για να χρησιμοποιήσετε τοTortoiseSVN παρακαλώ ανοίξτε τον Εxplorer και "
+"πατήστε το δεξί κλικ σε όποιον κατάλογο σας αρέσει\n"
 "για να προβάλετε το μενου με όλες τις εντολές του TortoiseSVN.\n"
 "Και διαβάστε το εγχειρίδιο!"
 
@@ -10666,7 +10716,8 @@ msgstr ""
 msgid ""
 "Unable to reconstruct working copy path!\n"
 "This can happen if the file has been renamed.\n"
-"Please start the log dialog on this specific file alone and then revert the changes\n"
+"Please start the log dialog on this specific file alone and then revert the "
+"changes\n"
 "from the top pane in the log dialog."
 msgstr ""
 
@@ -11042,7 +11093,9 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"Use the log dialog to select the revisions you want to merge, or enter the revisions to merge, separated by commas. A revision range can be specified by a dash.\r\n"
+"Use the log dialog to select the revisions you want to merge, or enter the "
+"revisions to merge, separated by commas. A revision range can be specified "
+"by a dash.\r\n"
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
@@ -11132,7 +11185,8 @@ msgid ""
 "To set the values to their default, delete the value text."
 msgstr ""
 "ΠΡΟΣΟΧΗ:\r\n"
-"\"Αλλάξτε αυτές τις ρυθμίσεις μόνο αν είστε απόλυτα σίγουροι για το τι κάνετε!\r\n"
+"\"Αλλάξτε αυτές τις ρυθμίσεις μόνο αν είστε απόλυτα σίγουροι για το τι "
+"κάνετε!\r\n"
 "Για να επαναφέρετε τις προεπιλεγμένες τιμές, διαγράψτε το κείμενο της τιμής."
 
 #. Resource IDs: (65535)
@@ -11263,8 +11317,10 @@ msgstr "Έχετε ήδη εγκατεστημένη την τελευταία �
 #. Resource IDs: (144)
 msgid ""
 "You are creating a repository on a network share.\n"
-"This is safe, but once the repository is created you must access it by some other means.\n"
-"Accessing a repository via file:// on a network share may corrupt your data!\n"
+"This is safe, but once the repository is created you must access it by some "
+"other means.\n"
+"Accessing a repository via file:// on a network share may corrupt your "
+"data!\n"
 "Create the repository anyway?"
 msgstr ""
 
@@ -11279,7 +11335,8 @@ msgstr ""
 #. Resource IDs: (65535)
 msgid ""
 "You can disable specific Overlay handlers here.\n"
-"Disabled handlers won't use up an overlay slot and give other shell extensions a chance to show their overlays."
+"Disabled handlers won't use up an overlay slot and give other shell "
+"extensions a chance to show their overlays."
 msgstr ""
 
 #. Resource IDs: (1001)
@@ -11290,8 +11347,7 @@ msgstr ""
 #. Resource IDs: (1016)
 #, c-format
 msgid "You can't create more than %d user-defined toolbars!"
-msgstr ""
-"Δεν μπορείτε να δημιουργήσετε περισσότερα από %d εργαλειοθήκες χρήστη!"
+msgstr "Δεν μπορείτε να δημιουργήσετε περισσότερα από %d εργαλειοθήκες χρήστη!"
 
 #. Resource IDs: (16)
 msgid ""
@@ -11303,14 +11359,16 @@ msgstr ""
 #. Resource IDs: (105)
 msgid ""
 "You dropped more than one file or folder to add to the repository.\n"
-"It's not possible to do that in one step, so TortoiseSVN will add each file/folder\n"
+"It's not possible to do that in one step, so TortoiseSVN will add each file/"
+"folder\n"
 "individually, creating a new revision for every added item."
 msgstr ""
 
 #. Resource IDs: (105)
 msgid ""
 "You dropped more than one file or folder to add to the repository.\n"
-"It's not possible to do that in one step, so TortoiseSVN will add each file/folder\n"
+"It's not possible to do that in one step, so TortoiseSVN will add each file/"
+"folder\n"
 "individually, creating a new revision for every added item.\n"
 "\n"
 "Do you still want to do this?"
@@ -11374,7 +11432,8 @@ msgid ""
 "'%2!s!'\n"
 "already exists.\n"
 "\n"
-"It seems the item got renamed outside Subversion but only with case changes.\n"
+"It seems the item got renamed outside Subversion but only with case "
+"changes.\n"
 "Do you really want to add it?"
 msgstr ""
 
@@ -11412,7 +11471,8 @@ msgstr ""
 #. Resource IDs: (88)
 msgid ""
 "Your working copy has local modifications!\n"
-"Note: updating to another revision won't lose those modifications so the working copy\n"
+"Note: updating to another revision won't lose those modifications so the "
+"working copy\n"
 "won't look exactly as it was in the revision you're updating to!"
 msgstr ""
 
@@ -11580,7 +11640,8 @@ msgstr "συγγραφείς:"
 #. Resource IDs: (577)
 msgid ""
 "bugtraq:append\r\n"
-"Set to 'false' if you want the bugtracking ID to be inserted at the top of the\r\n"
+"Set to 'false' if you want the bugtracking ID to be inserted at the top of "
+"the\r\n"
 "log message. The default is 'true' which means the bugtracking ID\r\n"
 "is appended to the log message."
 msgstr ""
@@ -11603,14 +11664,16 @@ msgstr ""
 #, c-format
 msgid ""
 "bugtraq:message\r\n"
-"String which is appended to a log message when an issue number is entered.\r\n"
+"String which is appended to a log message when an issue number is entered."
+"\r\n"
 "The string must contain '%BUGID%' which gets replaced with the issue number."
 msgstr ""
 
 #. Resource IDs: (577)
 msgid ""
 "bugtraq:number\r\n"
-"Set to 'false' if your bugtracking system has issues which are referenced not by numbers."
+"Set to 'false' if your bugtracking system has issues which are referenced "
+"not by numbers."
 msgstr ""
 
 #. Resource IDs: (577)
@@ -11960,8 +12023,10 @@ msgstr ""
 #. Resource IDs: (576)
 msgid ""
 "svn:executable\r\n"
-"If present, make the file executable. This property cannot be set on a directory.\r\n"
-"A non-recursive attempt will fail, and a recursive attempt will set the property only on the file children of the directory."
+"If present, make the file executable. This property cannot be set on a "
+"directory.\r\n"
+"A non-recursive attempt will fail, and a recursive attempt will set the "
+"property only on the file children of the directory."
 msgstr ""
 
 #. Resource IDs: (318)
@@ -11972,7 +12037,8 @@ msgstr ""
 msgid ""
 "svn:externals\r\n"
 "A newline separated list of module specifiers, each of which consists of\r\n"
-"an optional revision, an URL with an optional peg revision and a relative directory path. For example\r\n"
+"an optional revision, an URL with an optional peg revision and a relative "
+"directory path. For example\r\n"
 "http://example.com/repos/zig foo\r\n"
 "-r 1234 http://example.com/repos/zag@1234 foo/bar\r\n"
 "\r\n"
@@ -12008,7 +12074,8 @@ msgstr ""
 #. Resource IDs: (576)
 msgid ""
 "svn:mergeinfo\r\n"
-"A newline separated list of merge tracking info. Each line consists of an absolute\r\n"
+"A newline separated list of merge tracking info. Each line consists of an "
+"absolute\r\n"
 "path followed by a colon and a list of comma separated revision numbers.\r\n"
 "For example\r\n"
 "/trunk:123-125,129"
@@ -12021,8 +12088,10 @@ msgstr ""
 #. Resource IDs: (576)
 msgid ""
 "svn:mime-type\r\n"
-"The mime type of the file. Used to determine whether to merge the file, and how to serve it from Apache.\r\n"
-"A mime type beginning with 'text/' (or an absent mime type) is treated as text.\r\n"
+"The mime type of the file. Used to determine whether to merge the file, and "
+"how to serve it from Apache.\r\n"
+"A mime type beginning with 'text/' (or an absent mime type) is treated as "
+"text.\r\n"
 "Anything else is treated as binary."
 msgstr ""
 
@@ -12090,7 +12159,8 @@ msgstr "διένεξη δένδρου"
 #. Resource IDs: (578)
 msgid ""
 "tsvn:autoprops\r\n"
-"A list of properties separated by newlines which get applied automatically when adding/importing files.\r\n"
+"A list of properties separated by newlines which get applied automatically "
+"when adding/importing files.\r\n"
 "Format: <filemask> = property=value;property=value\r\n"
 "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 msgstr ""
@@ -12104,7 +12174,8 @@ msgstr ""
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logfilelistenglish\r\n"
-"Set to 'false' if you don't want the list of changed files to be pasted in English\r\n"
+"Set to 'false' if you don't want the list of changed files to be pasted in "
+"English\r\n"
 "in the commit dialog."
 msgstr ""
 
@@ -12123,7 +12194,8 @@ msgstr ""
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logsummary\r\n"
-"A regex string which extracts a summary from a log message in its first group."
+"A regex string which extracts a summary from a log message in its first "
+"group."
 msgstr ""
 
 #. Resource IDs: (578)
@@ -12137,7 +12209,8 @@ msgstr ""
 msgid ""
 "tsvn:logtemplatebranch\r\n"
 "String which is inserted in the log message boxes in the commit dialogs.\r\n"
-"Use this as a log message template for branch/tags/copies for users to fill in."
+"Use this as a log message template for branch/tags/copies for users to fill "
+"in."
 msgstr ""
 
 #. Resource IDs: (579)
@@ -12164,7 +12237,8 @@ msgstr ""
 #. Resource IDs: (579)
 msgid ""
 "tsvn:logtemplatelock\r\n"
-"String which is inserted in the log message boxes in the get-lock dialogs.\r\n"
+"String which is inserted in the log message boxes in the get-lock dialogs."
+"\r\n"
 "Use this as a log message template for get-locks for users to fill in."
 msgstr ""
 
@@ -12172,7 +12246,8 @@ msgstr ""
 msgid ""
 "tsvn:logtemplatemkdir\r\n"
 "String which is inserted in the log message boxes in the commit dialogs.\r\n"
-"Use this as a log message template for directory creations for users to fill in."
+"Use this as a log message template for directory creations for users to fill "
+"in."
 msgstr ""
 
 #. Resource IDs: (579)
@@ -12186,14 +12261,17 @@ msgstr ""
 msgid ""
 "tsvn:logtemplatepropset\r\n"
 "String which is inserted in the log message boxes in the commit dialogs.\r\n"
-"Use this as a log message template for property modifications for users to fill in."
+"Use this as a log message template for property modifications for users to "
+"fill in."
 msgstr ""
 
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logwidthmarker\r\n"
-"Set this to the number of chars the log message should not exceed its width.\r\n"
-"A faded line is shown in the commit dialogs at that position. The default is 80 chars."
+"Set this to the number of chars the log message should not exceed its width."
+"\r\n"
+"A faded line is shown in the commit dialogs at that position. The default is "
+"80 chars."
 msgstr ""
 
 #. Resource IDs: (578)
@@ -12220,7 +12298,8 @@ msgstr ""
 #. Resource IDs: (577)
 msgid ""
 "tsvn:warnifnoissue\r\n"
-"Set to 'yes' if a warning shall be shown when no issue is entered in the commit dialog."
+"Set to 'yes' if a warning shall be shown when no issue is entered in the "
+"commit dialog."
 msgstr ""
 
 #. Resource IDs: (104)
@@ -12244,16 +12323,19 @@ msgstr "οι τιμές διαφέρουν"
 #, c-format
 msgid ""
 "webviewer:pathrevision\r\n"
-"URL pointing to the web viewer for the repository for a specific file and revision.\r\n"
+"URL pointing to the web viewer for the repository for a specific file and "
+"revision.\r\n"
 "The string %REVISION% in the URL is replaced with the revision number,\r\n"
-"the string %PATH% is replaced with the path to the file relative to the repository root."
+"the string %PATH% is replaced with the path to the file relative to the "
+"repository root."
 msgstr ""
 
 #. Resource IDs: (579)
 #, c-format
 msgid ""
 "webviewer:revision\r\n"
-"URL pointing to the web viewer for the repository for a specific revision.\r\n"
+"URL pointing to the web viewer for the repository for a specific revision."
+"\r\n"
 "The string %REVISION% in that URL is replaced with the revision number."
 msgstr ""
 
@@ -12281,4 +12363,9 @@ msgstr "ναι"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
-
+#~ msgid ""
+#~ "Hint: Press F5 to refresh the selected subtree and Ctrl-F5 to load all "
+#~ "children too"
+#~ msgstr ""
+#~ "Υπόδειξη: Πιέστε F5 για ανανέωση του επελεγμένου υποκλάδου και Ctrl-F5 "
+#~ "για να φορτώσετε επίσης όλους τους θυγατρικούς"
