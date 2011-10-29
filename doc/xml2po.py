@@ -499,7 +499,6 @@ def doSerialize(node):
             child = child.next
         return outtxt
 
-
 def read_finaltags(filelist):
     if CurrentXmlMode:
         return CurrentXmlMode.getFinalTags()
@@ -619,9 +618,9 @@ output  = '-' # this means to stdout
 import getopt, fileinput
 
 def usage (with_help = False):
-        print >> sys.stderr, "Usage:  %s [OPTIONS] [XMLFILE]..." % (sys.argv[0])
+    print >> sys.stderr, "Usage:  %s [OPTIONS] [XMLFILE]..." % (sys.argv[0])
     if (with_help):
-            print >> sys.stderr, """
+        print >> sys.stderr, """
 OPTIONS may be some of:
     -a    --automatic-tags     Automatically decides if tags are to be considered
                                  "final" or not
@@ -648,7 +647,7 @@ EXAMPLES:
         %s -p de.po chapter1.xml > chapter1.de.xml
         %s -p de.po chapter2.xml > chapter2.de.xml
 """ % (sys.argv[0], sys.argv[0], sys.argv[0])
-        sys.exit(0)
+    sys.exit(0)
 
 if len(sys.argv) < 2: usage()
 
@@ -744,7 +743,8 @@ for filename in filenames:
     if CurrentXmlMode and origxml=='':
         CurrentXmlMode.preProcessXml(doc,msg)
         # timetick( "XML pre processed")
-    setTranslations()
+    if mode == 'merge':
+        setTranslations()
     doSerialize(doc)
     # timetick( "doc serialized")
 
