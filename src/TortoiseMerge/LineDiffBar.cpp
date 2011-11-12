@@ -112,8 +112,8 @@ void CLineDiffBar::OnPaint()
             rightView->m_bShowSelection = false;
 
             // Use left and right view to display lines next to each other
-            leftView->DrawSingleLine(&cacheDC, &upperrect, m_nLineIndex);
-            rightView->DrawSingleLine(&cacheDC, &lowerrect, m_nLineIndex);
+            //leftView->DrawSingleLine(&cacheDC, &upperrect, &upperrect, m_nLineIndex);
+            //rightView->DrawSingleLine(&cacheDC, &lowerrect, &lowerrect, m_nLineIndex);
 
             leftView->m_bViewWhitespace = bViewWhiteSpace;
             leftView->m_bShowInlineDiff = bInlineDiffs;

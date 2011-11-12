@@ -25,6 +25,8 @@
 #include "LineColors.h"
 #include "TripleClick.h"
 #include "IconMenu.h"
+#include "D2D.h"
+#include "DiffColors.h"
 
 typedef struct inlineDiffPos
 {
@@ -271,16 +273,16 @@ protected:  // methods
     DECLARE_MESSAGE_MAP()
 
     void            DrawHeader(CDC *pdc, const CRect &rect);
-    void            DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex);
-    void            DrawSingleLine(CDC *pDC, const CRect &rc, int nLineIndex);
+    void            DrawMargin(CDC *pdc, const CRect &rect, const CRect &lineRect, int nLineIndex);
+    void            DrawSingleLine(CDC *pDC, const CRect &rc, const CRect &lineRect, int nLineIndex);
     /**
      * Draws the horizontal lines around current diff block or selection block.
      */
-    void            DrawBlockLine(CDC *pDC, const CRect &rc, int nLineIndex);
+    void            DrawBlockLine(CDC *pDC, const CRect &rc, const CRect &lineRect, int nLineIndex);
     /**
      * Draws the line ending 'char'.
      */
-    void            DrawLineEnding(CDC *pDC, const CRect &rc, int nLineIndex, const CPoint& origin);
+    void            DrawLineEnding(CDC *pDC, const CRect &rc, const CRect &lineRect, int nLineIndex, const CPoint& origin);
     void            ExpandChars(const CString &sLine, int nOffset, int nCount, CString &line);
     CString         ExpandChars(const CString &sLine, int nOffset = 0);
     int             CountExpandedChars(const CString &sLine, int nLength);
@@ -313,6 +315,8 @@ protected:  // methods
     CString         GetLineChars(int index);
     int             GetLineNumber(int index) const;
     CFont *         GetFont(BOOL bItalic = FALSE, BOOL bBold = FALSE, BOOL bStrikeOut = FALSE);
+    IDWriteTextFormat * GetTextFormat(BOOL bItalic = FALSE, BOOL bBold = FALSE);
+    void            CreateDeviceResources();
     int             GetLineFromPoint(CPoint point);
     int             GetMarginWidth();
     COLORREF        InlineDiffColor(int nLineIndex);
@@ -337,7 +341,7 @@ protected:  // methods
     int             CalculateActualOffset(const POINT& point);
     int             CalculateCharIndex(int nLineIndex, int nActualOffset);
     POINT           TextToClient(const POINT& point);
-    void            DrawTextLine(CDC * pDC, const CRect &rc, int nLineIndex, POINT coords);
+    void            DrawTextLine(CDC * pDC, const CRect &rc, const CRect &lineRect, int nLineIndex, POINT& coords);
     void            ClearCurrentSelection();
     void            AdjustSelection(bool bMoveLeft);
     bool            SelectNextBlock(int nDirection, bool bConflict, bool bSkipEndOfCurrentBlock = true, bool dryrun = false);
@@ -450,8 +454,25 @@ protected:  // variables
     CScrollTool     m_ScrollTool;
     CString         m_sWordSeparators;
 
+    // Directdraw interfaces
+    CComPtr<ID2D1HwndRenderTarget>          m_RenderTarget;
+    CComPtr<IDWriteTextFormat>              m_tfFonts[4];
+    CComPtr<ID2D1SolidColorBrush>           m_ScrollbarBrush;
+    CComPtr<ID2D1SolidColorBrush>           m_WindowBrush;
+    CComPtr<ID2D1SolidColorBrush>           m_WindowTextBrush;
+    CComPtr<ID2D1SolidColorBrush>           m_WindowTextBrushFaint;
+    CComPtr<ID2D1SolidColorBrush>           m_GrayTextBrush;
+    CComPtr<ID2D1SolidColorBrush>           m_InlineRemovedBkBrush;
+    CComPtr<ID2D1SolidColorBrush>           m_InlineAddedBkBrush;
+    CComPtr<ID2D1SolidColorBrush>           m_ModifiedBkBrush;
+    CComPtr<ID2D1SolidColorBrush>           m_WhiteSpaceFgBrush;
+    CD2DDiffColors                          m_d2dColors;
+
+
+    // Tooltips
     char            m_szTip[MAX_PATH*2+1];
     wchar_t         m_wszTip[MAX_PATH*2+1];
+
     // These three pointers lead to the three parent
     // classes CLeftView, CRightView and CBottomView
     // and are used for the communication between

@@ -25,25 +25,32 @@ struct linecolors_t
     COLORREF text;
     COLORREF background;
     COLORREF shot;
+    ID2D1SolidColorBrush * brText;
+    ID2D1SolidColorBrush * brBackground;
+    ID2D1SolidColorBrush * brShot;
 };
 
 class LineColors : public std::map<int, linecolors_t>
 {
 public:
-    void AddShotColor(int pos, COLORREF b)
+    void AddShotColor(int pos, COLORREF b, ID2D1SolidColorBrush * br)
     {
          // make sure position exists
          SplitBlock(pos);
          // set value
          (*this)[pos].shot = b;
+         (*this)[pos].brShot = br;
     }
 
-    void SetColor(int pos, COLORREF f, COLORREF b)
+    void SetColor(int pos, COLORREF f, COLORREF b, ID2D1SolidColorBrush * brf, ID2D1SolidColorBrush * brb)
     {
         linecolors_t c;
         c.text = f;
         c.background = b;
         c.shot = b;
+        c.brText = brf;
+        c.brBackground = brb;
+        c.brShot = brb;
         (*this)[pos] = c;
     }
 

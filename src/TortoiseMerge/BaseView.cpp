@@ -406,6 +406,27 @@ CFont* CBaseView::GetFont(BOOL bItalic /*= FALSE*/, BOOL bBold /*= FALSE*/, BOOL
     return m_apFonts[nIndex];
 }
 
+
+IDWriteTextFormat * CBaseView::GetTextFormat( BOOL bItalic /*= FALSE*/, BOOL bBold /*= FALSE*/)
+{
+    int nIndex = 0;
+    if (bBold)
+        nIndex |= 1;
+    if (bItalic)
+        nIndex |= 2;
+    if (m_tfFonts[nIndex] == NULL)
+    {
+        _tcsncpy_s(m_lfBaseFont.lfFaceName, (LPCTSTR)(CString)CRegString(_T("Software\\TortoiseMerge\\FontName"), _T("Courier New")), 32);
+        CD2D::Instance().CreateTextFormat(
+            (LPCTSTR)(CString)CRegString(_T("Software\\TortoiseMerge\\FontName"), _T("Courier New")),
+            bBold ? DWRITE_FONT_WEIGHT_BOLD : DWRITE_FONT_WEIGHT_NORMAL,
+            bItalic ? DWRITE_FONT_STYLE_ITALIC : DWRITE_FONT_STYLE_NORMAL,
+            DWRITE_FONT_STRETCH_NORMAL,
+            (DWORD)CRegDWORD(_T("Software\\TortoiseMerge\\FontSize"), 10), &m_tfFonts[nIndex]);
+    }
+    return m_tfFonts[nIndex];
+}
+
 void CBaseView::CalcLineCharDim()
 {
     CDC *pDC = GetDC();
@@ -1082,9 +1103,14 @@ void CBaseView::ScrollToLine(int nNewTopLine, BOOL bTrackScrollBar /*= TRUE*/)
 }
 
 
-void CBaseView::DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex)
+void CBaseView::DrawMargin(CDC *pdc, const CRect &rect, const CRect &lineRect, int nLineIndex)
 {
-    pdc->FillSolidRect(rect, ::GetSysColor(COLOR_SCROLLBAR));
+    D2D1_RECT_F d2drect = D2D1::RectF((FLOAT)lineRect.left, (FLOAT)lineRect.top, (FLOAT)lineRect.right, (FLOAT)lineRect.bottom);
+
+    if (m_RenderTarget)
+        m_RenderTarget->FillRectangle(d2drect, m_ScrollbarBrush);
+    else
+        pdc->FillSolidRect(rect, ::GetSysColor(COLOR_SCROLLBAR));
 
     if ((nLineIndex >= 0)&&(m_pViewData)&&(m_pViewData->GetCount()))
     {
@@ -1170,7 +1196,13 @@ void CBaseView::DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex)
 
         if (icon)
         {
-            ::DrawIconEx(pdc->m_hDC, rect.left + 2, rect.top + (rect.Height()-16)/2, icon, 16, 16, NULL, NULL, DI_NORMAL);
+            if (m_RenderTarget)
+            {
+                // TODO: draw the bitmaps
+                //m_RenderTarget->DrawBitmap();
+            }
+            else
+                ::DrawIconEx(pdc->m_hDC, rect.left + 2, rect.top + (rect.Height()-16)/2, icon, 16, 16, NULL, NULL, DI_NORMAL);
         }
         if ((m_bViewLinenumbers)&&(m_nDigits))
         {
@@ -1200,11 +1232,19 @@ void CBaseView::DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex)
                 }
                 if (!sLinenumber.IsEmpty())
                 {
-                    pdc->SetBkColor(::GetSysColor(COLOR_SCROLLBAR));
-                    pdc->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
+                    if (m_RenderTarget)
+                    {
+                        m_RenderTarget->FillRectangle(d2drect, m_ScrollbarBrush);
+                        m_RenderTarget->DrawTextW(sLinenumber, sLinenumber.GetLength(), GetTextFormat(), d2drect, m_WindowTextBrush);
+                    }
+                    else
+                    {
+                        pdc->SetBkColor(::GetSysColor(COLOR_SCROLLBAR));
+                        pdc->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
 
-                    pdc->SelectObject(GetFont());
-                    pdc->ExtTextOut(rect.left + 18, rect.top, ETO_CLIPPED, &rect, sLinenumber, NULL);
+                        pdc->SelectObject(GetFont());
+                        pdc->ExtTextOut(rect.left + 18, rect.top, ETO_CLIPPED, &rect, sLinenumber, NULL);
+                    }
                 }
             }
         }
@@ -1233,9 +1273,13 @@ void CBaseView::DrawHeader(CDC *pdc, const CRect &rect)
 {
     CRect textrect(rect.left, rect.top, rect.Width(), GetLineHeight()+HEADERHEIGHT);
     COLORREF crBk, crFg;
+    ID2D1SolidColorBrush* brBk;
+    ID2D1SolidColorBrush* brFg;
     if (IsBottomViewGood())
     {
         CDiffColors::GetInstance().GetColors(DIFFSTATE_NORMAL, crBk, crFg);
+        m_d2dColors.GetColors(DIFFSTATE_NORMAL, &brBk, &brFg);
+        brBk = m_ScrollbarBrush;
         crBk = ::GetSysColor(COLOR_SCROLLBAR);
     }
     else
@@ -1246,13 +1290,23 @@ void CBaseView::DrawHeader(CDC *pdc, const CRect &rect)
             state = DIFFSTATE_ADDED;
         }
         CDiffColors::GetInstance().GetColors(state, crBk, crFg);
+        m_d2dColors.GetColors(state, &brBk, &brFg);
     }
-    pdc->SetBkColor(crBk);
-    pdc->FillSolidRect(textrect, crBk);
+    if (m_RenderTarget)
+    {
+        D2D1_RECT_F rectangle2 = D2D1::RectF((FLOAT)textrect.left, (FLOAT)textrect.top, (FLOAT)textrect.right, (FLOAT)textrect.bottom);
 
-    pdc->SetTextColor(crFg);
+        m_RenderTarget->FillRectangle(rectangle2, brBk);
+    }
+    else
+    {
+        pdc->SetBkColor(crBk);
+        pdc->FillSolidRect(textrect, crBk);
 
-    pdc->SelectObject(GetFont(FALSE, TRUE, FALSE));
+        pdc->SetTextColor(crFg);
+
+        pdc->SelectObject(GetFont(FALSE, TRUE, FALSE));
+    }
 
     CString sViewTitle;
     if (IsModified())
@@ -1269,30 +1323,54 @@ void CBaseView::DrawHeader(CDC *pdc, const CRect &rect)
         int offset = std::min<int>(m_nOffsetChar, (nStringLength-rect.Width())/GetCharWidth()+1);
         sViewTitle = m_sWindowName.Mid(offset);
     }
-    pdc->ExtTextOut(std::max<int>(rect.left + (rect.Width()-nStringLength)/2, 1),
-        rect.top+(HEADERHEIGHT/2), ETO_CLIPPED, textrect, sViewTitle, NULL);
-    if (this->GetFocus() == this)
-        pdc->DrawEdge(textrect, EDGE_BUMP, BF_RECT);
+    if (m_RenderTarget)
+    {
+        D2D1_RECT_F rectangle2 = D2D1::RectF((FLOAT)std::max<int>(rect.left + (rect.Width()-nStringLength)/2, 1), 
+            (FLOAT)rect.top+(HEADERHEIGHT/2), (FLOAT)textrect.right, (FLOAT)textrect.bottom);
+        m_RenderTarget->DrawTextW(sViewTitle, sViewTitle.GetLength(), GetTextFormat(FALSE, TRUE), rectangle2, brFg);
+        // TODO: Draw edges - there's no DrawEdge() API in Direct2D.
+    }
     else
-        pdc->DrawEdge(textrect, EDGE_ETCHED, BF_RECT);
+    {
+        pdc->ExtTextOut(std::max<int>(rect.left + (rect.Width()-nStringLength)/2, 1),
+            rect.top+(HEADERHEIGHT/2), ETO_CLIPPED, textrect, sViewTitle, NULL);
+        if (this->GetFocus() == this)
+            pdc->DrawEdge(textrect, EDGE_BUMP, BF_RECT);
+        else
+            pdc->DrawEdge(textrect, EDGE_ETCHED, BF_RECT);
+    }
 }
 
 void CBaseView::OnDraw(CDC * pDC)
 {
+    PROFILE_BLOCK;
     CRect rcClient;
     GetClientRect(rcClient);
 
     int nLineCount = GetLineCount();
     int nLineHeight = GetLineHeight();
 
+
     CDC cacheDC;
-    VERIFY(cacheDC.CreateCompatibleDC(pDC));
-    if (m_pCacheBitmap == NULL)
+    CBitmap *pOldBitmap = NULL;
+    if (m_RenderTarget == NULL)
     {
-        m_pCacheBitmap = new CBitmap;
-        VERIFY(m_pCacheBitmap->CreateCompatibleBitmap(pDC, rcClient.Width(), nLineHeight));
+        VERIFY(cacheDC.CreateCompatibleDC(pDC));
+        if (m_pCacheBitmap == NULL)
+        {
+            m_pCacheBitmap = new CBitmap;
+            VERIFY(m_pCacheBitmap->CreateCompatibleBitmap(pDC, rcClient.Width(), nLineHeight));
+        }
+        pOldBitmap = cacheDC.SelectObject(m_pCacheBitmap);
     }
-    CBitmap *pOldBitmap = cacheDC.SelectObject(m_pCacheBitmap);
+    else
+    {
+        m_RenderTarget->BeginDraw();
+        //m_RenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+        //m_RenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+        //m_RenderTarget->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_CLEARTYPE);
+        //m_RenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
+    }
 
     DrawHeader(pDC, rcClient);
 
@@ -1309,25 +1387,56 @@ void CBaseView::OnDraw(CDC * pDC)
     {
         if (nCurrentLine < nLineCount)
         {
-            DrawMargin(&cacheDC, rcCacheMargin, nCurrentLine);
-            DrawSingleLine(&cacheDC, rcCacheLine, nCurrentLine);
+            CRect rcl = rcCacheMargin;
+            rcl.top = rcLine.top;
+            rcl.bottom = rcLine.bottom;
+            DrawMargin(&cacheDC, rcCacheMargin, rcl, nCurrentLine);
+            rcl = rcCacheLine;
+            rcl.top = rcLine.top;
+            rcl.bottom = rcLine.bottom;
+            DrawSingleLine(&cacheDC, rcCacheLine, rcl, nCurrentLine);
             bBeyondFileLineCached = false;
         }
         else if (!bBeyondFileLineCached)
         {
-            DrawMargin(&cacheDC, rcCacheMargin, -1);
-            DrawSingleLine(&cacheDC, rcCacheLine, -1);
+            CRect rcl = rcCacheMargin;
+            rcl.top = rcLine.top;
+            rcl.bottom = rcLine.bottom;
+            DrawMargin(&cacheDC, rcCacheMargin, rcl, -1);
+            rcl = rcCacheLine;
+            rcl.top = rcLine.top;
+            rcl.bottom = rcLine.bottom;
+            DrawSingleLine(&cacheDC, rcCacheLine, rcl, -1);
             bBeyondFileLineCached = true;
         }
 
-        VERIFY(pDC->BitBlt(rcLine.left, rcLine.top, rcLine.Width(), rcLine.Height(), &cacheDC, 0, 0, SRCCOPY));
+        if (m_RenderTarget == NULL)
+            VERIFY(pDC->BitBlt(rcLine.left, rcLine.top, rcLine.Width(), rcLine.Height(), &cacheDC, 0, 0, SRCCOPY));
 
         nCurrentLine ++;
         rcLine.OffsetRect(0, nLineHeight);
     }
 
-    cacheDC.SelectObject(pOldBitmap);
-    cacheDC.DeleteDC();
+    if (m_RenderTarget == NULL)
+    {
+        cacheDC.SelectObject(pOldBitmap);
+        cacheDC.DeleteDC();
+    }
+    else
+    {
+        HRESULT hr = m_RenderTarget->EndDraw();
+        if (hr == D2DERR_RECREATE_TARGET)
+        {
+            m_RenderTarget = NULL;
+            CD2D::Instance().CreateHwndRenderTarget(m_hWnd, &m_RenderTarget);
+            CreateDeviceResources();
+            hr = S_OK;
+        }
+        if (FAILED(hr))
+        {
+            ATLTRACE(L"Enddraw failed with error code %x\n", hr);
+        }
+    }
 }
 
 bool CBaseView::IsStateConflicted(DiffStates state)
@@ -1432,13 +1541,61 @@ COLORREF CBaseView::InlineViewLineDiffColor(int nViewLine)
     return IsViewLineRemoved(nViewLine) ? m_InlineRemovedBk : m_InlineAddedBk;
 }
 
-void CBaseView::DrawLineEnding(CDC *pDC, const CRect &rc, int nLineIndex, const CPoint& origin)
+void CBaseView::DrawLineEnding(CDC *pDC, const CRect &rc, const CRect &lineRect, int nLineIndex, const CPoint& origin)
 {
     if (!(m_bViewWhitespace && m_pViewData && (nLineIndex >= 0) && (nLineIndex < GetLineCount())))
         return;
     int viewLine = GetViewLineForScreen(nLineIndex);
     EOL ending = m_pViewData->GetLineEnding(viewLine);
-    if (m_bIconLFs)
+    if (m_RenderTarget)
+    {
+        int yMiddle = lineRect.top + lineRect.Height()/2;
+        int xMiddle = origin.x+GetCharWidth()/2;
+        bool bMultiline = false;
+        if (((int)m_Screen2View.size() > nLineIndex+1) && (GetViewLineForScreen(nLineIndex+1) == viewLine))
+        {
+            if (GetLineLength(nLineIndex+1))
+            {
+                // multiline
+                bMultiline = true;
+                m_RenderTarget->DrawLine(D2D1::Point2F((FLOAT)origin.x, (FLOAT)(yMiddle-2)), D2D1::Point2F((FLOAT)(origin.x+GetCharWidth()), (FLOAT)(yMiddle-2)), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F((FLOAT)(origin.x+GetCharWidth()), (FLOAT)(yMiddle-2)), D2D1::Point2F((FLOAT)(origin.x+GetCharWidth()), (FLOAT)(yMiddle+2)), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F((FLOAT)(origin.x+GetCharWidth()), (FLOAT)(yMiddle+2)), D2D1::Point2F((FLOAT)(origin.x, (FLOAT)(yMiddle+2))), m_WindowTextBrushFaint);
+            }
+            else if (GetLineLength(nLineIndex) == 0)
+                bMultiline = true;
+        }
+        else if ((nLineIndex > 0) && (GetViewLineForScreen(nLineIndex-1) == viewLine) && (GetLineLength(nLineIndex) == 0))
+            bMultiline = true;
+
+        if (!bMultiline)
+        {
+            switch (ending)
+            {
+            case EOL_CR:
+                // arrow from right to left
+                m_RenderTarget->DrawLine(D2D1::Point2F(origin.x+GetCharWidth(), yMiddle), D2D1::Point2F(origin.x, yMiddle), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F(origin.x, yMiddle), D2D1::Point2F(origin.x+4, yMiddle+4), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F(origin.x, yMiddle), D2D1::Point2F(origin.x+4, yMiddle-4), m_WindowTextBrushFaint);
+                break;
+            case EOL_AUTOLINE:
+            case EOL_CRLF:
+                // arrow from top to middle+2, then left
+                m_RenderTarget->DrawLine(D2D1::Point2F(origin.x+GetCharWidth(), lineRect.top+1), D2D1::Point2F(origin.x+GetCharWidth(), yMiddle), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F(origin.x+GetCharWidth(), yMiddle), D2D1::Point2F(origin.x, yMiddle), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F(origin.x, yMiddle), D2D1::Point2F(origin.x+4, yMiddle+4), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F(origin.x, yMiddle), D2D1::Point2F(origin.x+4, yMiddle-4), m_WindowTextBrushFaint);
+                break;
+            case EOL_LF:
+                // arrow from top to bottom
+                m_RenderTarget->DrawLine(D2D1::Point2F(xMiddle, lineRect.top), D2D1::Point2F(xMiddle, lineRect.bottom-1), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F(xMiddle, lineRect.bottom-1), D2D1::Point2F(xMiddle+4, lineRect.bottom-5), m_WindowTextBrushFaint);
+                m_RenderTarget->DrawLine(D2D1::Point2F(xMiddle, lineRect.bottom-1), D2D1::Point2F(xMiddle-4, lineRect.bottom-5), m_WindowTextBrushFaint);
+                break;
+            }
+        }
+    }
+    else if (m_bIconLFs)
     {
         HICON hEndingIcon = NULL;
         switch (ending)
@@ -1524,7 +1681,7 @@ void CBaseView::DrawLineEnding(CDC *pDC, const CRect &rc, int nLineIndex, const 
     }
 }
 
-void CBaseView::DrawBlockLine(CDC *pDC, const CRect &rc, int nLineIndex)
+void CBaseView::DrawBlockLine(CDC *pDC, const CRect &rc, const CRect &lineRect, int nLineIndex)
 {
     if (!m_bShowSelection)
         return;
@@ -1536,24 +1693,36 @@ void CBaseView::DrawBlockLine(CDC *pDC, const CRect &rc, int nLineIndex)
 
     const int THICKNESS = 2;
     COLORREF rectcol = GetSysColor(m_bFocused ? COLOR_WINDOWTEXT : COLOR_GRAYTEXT);
-
+    ID2D1SolidColorBrush * brush = m_bFocused ? m_WindowTextBrush : m_GrayTextBrush;
     int nViewLineIndex = GetViewLineForScreen(nLineIndex);
     int nSubLine = GetSubLineOffset(nLineIndex);
     bool bFirstLineOfViewLine = (nSubLine==0 || nSubLine==-1);
     if ((nViewLineIndex == nSelBlockStart) && bFirstLineOfViewLine)
     {
-        pDC->FillSolidRect(rc.left, rc.top, rc.Width(), THICKNESS, rectcol);
+        if (m_RenderTarget)
+        {
+            D2D1_RECT_F d2drect = D2D1::RectF(lineRect.left, lineRect.top, lineRect.Width(), lineRect.top+THICKNESS);
+            m_RenderTarget->FillRectangle(d2drect, brush);
+        }
+        else
+            pDC->FillSolidRect(rc.left, rc.top, rc.Width(), THICKNESS, rectcol);
     }
 
     bool bLastLineOfViewLine = (nLineIndex+1 == m_Screen2View.size()) || (GetViewLineForScreen(nLineIndex) != GetViewLineForScreen(nLineIndex+1));
     if ((nViewLineIndex == nSelBlockEnd) && bLastLineOfViewLine)
     {
-        pDC->FillSolidRect(rc.left, rc.bottom - THICKNESS, rc.Width(), THICKNESS, rectcol);
+        if (m_RenderTarget)
+        {
+            D2D1_RECT_F d2drect = D2D1::RectF(lineRect.left, lineRect.bottom-THICKNESS, lineRect.Width(), lineRect.bottom);
+            m_RenderTarget->FillRectangle(d2drect, brush);
+        }
+        else
+            pDC->FillSolidRect(rc.left, rc.bottom - THICKNESS, rc.Width(), THICKNESS, rectcol);
     }
 }
 
 void CBaseView::DrawTextLine(
-    CDC * pDC, const CRect &rc, int nLineIndex, POINT coords)
+    CDC * pDC, const CRect &rc, const CRect &lineRect, int nLineIndex, POINT& coords)
  {
     ASSERT(nLineIndex < GetLineCount());
     int nViewLine = GetViewLineForScreen(nLineIndex);
@@ -1593,6 +1762,7 @@ void CBaseView::DrawTextLine(
             std::map<int, linecolors_t>::iterator it = lineCols.lower_bound(selectedStart);
             for ( ; it != lineCols.end() && it->first < selectedEnd; ++it)
             {
+                // TODO
                 COLORREF crBk = CAppUtils::IntenseColor(intenseColorScale, it->second.background);
                 if (it->second.shot == it->second.background)
                 {
@@ -1628,9 +1798,12 @@ void CBaseView::DrawTextLine(
                 if (it->second.shot == it->second.background)
                 {
                     it->second.shot = crBk;
+                    it->second.brShot = m_WindowBrush;
                 }
                 it->second.background = crBk;
+                it->second.brBackground = m_WindowTextBrush;
                 it->second.text = CAppUtils::IntenseColor(nIntenseColorScale, it->second.text);
+                it->second.brText = m_WindowBrush;
             }
             findText += nMarkLength;
         }
@@ -1665,40 +1838,81 @@ void CBaseView::DrawTextLine(
         int nBlockLength = nEnd - nStart;
         if (nBlockLength > 0 && nEnd>=0)
         {
-            pDC->SetBkColor(itStart->second.background);
-            pDC->SetTextColor(itStart->second.text);
             int nEndExp = CountExpandedChars(sLine, nEnd);
             int nTextLength = nEndExp - nStartExp;
             LPCTSTR p_zBlockText = textExp + nStartExp;
-            SIZE Size;
-            GetTextExtentPoint32(pDC->operator HDC(), p_zBlockText, nTextLength, &Size); // falls time-2-tme
-            int nRight = nLeft + Size.cx;
-            if ((nRight > rc.left) && (nLeft < rc.right))
+            if (m_RenderTarget)
             {
-                pDC->ExtTextOut(nLeft, coords.y, ETO_CLIPPED, &rc, p_zBlockText, nTextLength, NULL);
-                if ((itStart->second.shot != itStart->second.background) && (itStart->first == nStart + nTextOffset))
+                CComPtr<IDWriteTextLayout> layout;
+                CD2D::Instance().CreateTextLayout(p_zBlockText, nTextLength, GetTextFormat(FALSE, FALSE), nTextLength*GetCharWidth()+100, lineRect.Height(), &layout);
+                if (IsLineRemoved(nLineIndex))
                 {
-                    pDC->FillSolidRect(nLeft-1, rc.top, 1, rc.Height(), itStart->second.shot);
+                    DWRITE_TEXT_RANGE textRange = {0, nTextLength};
+                    layout->SetStrikethrough(true, textRange);
                 }
+                DWRITE_TEXT_METRICS metrics;
+                layout->GetMetrics(&metrics);
+                int nRight = nLeft + (int)metrics.widthIncludingTrailingWhitespace;
+                if ((nRight > lineRect.left) && (nLeft < lineRect.right))
+                {
+                    m_RenderTarget->FillRectangle(D2D1::RectF(nLeft-1, lineRect.top, nRight, lineRect.bottom), itStart->second.brBackground);
+                    m_RenderTarget->DrawTextLayout(D2D1::Point2F(nLeft, lineRect.top), layout, itStart->second.brText, D2D1_DRAW_TEXT_OPTIONS_CLIP);
+                    if ((itStart->second.shot != itStart->second.background) && (itStart->first == nStart + nTextOffset))
+                    {
+                        m_RenderTarget->FillRectangle(D2D1::RectF(nLeft-1, lineRect.top, nLeft, lineRect.bottom), itStart->second.brShot);
+                    }
+                }
+                nLeft = nRight;
+                coords.x = nRight;
+                nStartExp = nEndExp;
             }
-            nLeft = nRight;
-            nStartExp = nEndExp;
+            else
+            {
+                pDC->SetBkColor(itStart->second.background);
+                pDC->SetTextColor(itStart->second.text);
+                SIZE Size;
+                GetTextExtentPoint32(pDC->GetSafeHdc(), p_zBlockText, nTextLength, &Size); // falls time-2-tme
+                int nRight = nLeft + Size.cx;
+                if ((nRight > rc.left) && (nLeft < rc.right))
+                {
+                    pDC->ExtTextOut(nLeft, coords.y, ETO_CLIPPED, &rc, p_zBlockText, nTextLength, NULL);
+                    if ((itStart->second.shot != itStart->second.background) && (itStart->first == nStart + nTextOffset))
+                    {
+                        pDC->FillSolidRect(nLeft-1, rc.top, 1, rc.Height(), itStart->second.shot);
+                    }
+                }
+                nLeft = nRight;
+                coords.x = nRight;
+                nStartExp = nEndExp;
+            }
         }
     }
 }
 
-void CBaseView::DrawSingleLine(CDC *pDC, const CRect &rc, int nLineIndex)
+void CBaseView::DrawSingleLine(CDC *pDC, const CRect &rc, const CRect &lineRect, int nLineIndex)
 {
     if (nLineIndex >= GetLineCount())
         nLineIndex = -1;
     ASSERT(nLineIndex >= -1);
 
+    D2D1_RECT_F d2drect = D2D1::RectF(lineRect.left, lineRect.top, lineRect.right, lineRect.bottom);
+
     if ((nLineIndex == -1) || !m_pViewData)
     {
         // Draw line beyond the text
-        COLORREF crBkgnd, crText;
-        CDiffColors::GetInstance().GetColors(DIFFSTATE_UNKNOWN, crBkgnd, crText);
-        pDC->FillSolidRect(rc, crBkgnd);
+        if (m_RenderTarget)
+        {
+            ID2D1SolidColorBrush * brBkgnd;
+            ID2D1SolidColorBrush * brText;
+            m_d2dColors.GetColors(DIFFSTATE_UNKNOWN, &brBkgnd, &brText);
+            m_RenderTarget->FillRectangle(d2drect, brBkgnd);
+        }
+        else
+        {
+            COLORREF crBkgnd, crText;
+            CDiffColors::GetInstance().GetColors(DIFFSTATE_UNKNOWN, crBkgnd, crText);
+            pDC->FillSolidRect(rc, crBkgnd);
+        }
         return;
     }
 
@@ -1707,34 +1921,57 @@ void CBaseView::DrawSingleLine(CDC *pDC, const CRect &rc, int nLineIndex)
     {
         if (m_pViewData->GetHideState(viewLine) == HIDESTATE_MARKER)
         {
-            COLORREF crBkgnd, crText;
-            CDiffColors::GetInstance().GetColors(DIFFSTATE_UNKNOWN, crBkgnd, crText);
-            pDC->FillSolidRect(rc, crBkgnd);
-
             const int THICKNESS = 2;
-            COLORREF rectcol = GetSysColor(COLOR_WINDOWTEXT);
-            pDC->FillSolidRect(rc.left, rc.top + (rc.Height()/2), rc.Width(), THICKNESS, rectcol);
-            pDC->SetTextColor(GetSysColor(COLOR_GRAYTEXT));
-            pDC->SetBkColor(crBkgnd);
-            CRect rect = rc;
-            pDC->DrawText(_T("{...}"), &rect, DT_NOPREFIX|DT_SINGLELINE|DT_CENTER);
+            if (m_RenderTarget)
+            {
+                ID2D1SolidColorBrush * brBkgnd;
+                ID2D1SolidColorBrush * brText;
+                m_d2dColors.GetColors(DIFFSTATE_UNKNOWN, &brBkgnd, &brText);
+                m_RenderTarget->FillRectangle(d2drect, brBkgnd);
+                D2D1_RECT_F rect = D2D1::RectF(lineRect.left, lineRect.top + (lineRect.Height()/2), lineRect.Width(), THICKNESS);
+                m_RenderTarget->FillRectangle(rect, m_WindowTextBrush);
+                m_RenderTarget->DrawTextW(L"{...}", 5, GetTextFormat(), d2drect, m_WindowTextBrush);
+            }
+            else
+            {
+                COLORREF crBkgnd, crText;
+                CDiffColors::GetInstance().GetColors(DIFFSTATE_UNKNOWN, crBkgnd, crText);
+                pDC->FillSolidRect(rc, crBkgnd);
+
+                COLORREF rectcol = GetSysColor(COLOR_WINDOWTEXT);
+                pDC->FillSolidRect(rc.left, rc.top + (rc.Height()/2), rc.Width(), THICKNESS, rectcol);
+                pDC->SetTextColor(GetSysColor(COLOR_GRAYTEXT));
+                pDC->SetBkColor(crBkgnd);
+                CRect rect = rc;
+                pDC->DrawText(_T("{...}"), &rect, DT_NOPREFIX|DT_SINGLELINE|DT_CENTER);
+            }
             return;
         }
     }
 
     DiffStates diffState = m_pViewData->GetState(viewLine);
     COLORREF crBkgnd, crText;
+    ID2D1SolidColorBrush * brBkgnd;
+    ID2D1SolidColorBrush * brText;
     CDiffColors::GetInstance().GetColors(diffState, crBkgnd, crText);
-
+    m_d2dColors.GetColors(diffState, &brBkgnd, &brText);
     if (diffState == DIFFSTATE_CONFLICTED)
     {
         // conflicted lines are shown without 'text' on them
-        CRect rect = rc;
-        pDC->FillSolidRect(rc, crBkgnd);
-        // now draw some faint text patterns
-        pDC->SetTextColor(CAppUtils::IntenseColor(130, crBkgnd));
-        pDC->DrawText(m_sConflictedText, rect, DT_LEFT|DT_NOPREFIX|DT_SINGLELINE);
-        DrawBlockLine(pDC, rc, nLineIndex);
+        if (m_RenderTarget)
+        {
+            m_RenderTarget->FillRectangle(d2drect, brBkgnd);
+            m_RenderTarget->DrawTextW(m_sConflictedText, m_sConflictedText.GetLength(), GetTextFormat(), d2drect, m_WindowTextBrushFaint);
+        }
+        else
+        {
+            CRect rect = rc;
+            pDC->FillSolidRect(rc, crBkgnd);
+            // now draw some faint text patterns
+            pDC->SetTextColor(CAppUtils::IntenseColor(130, crBkgnd));
+            pDC->DrawText(m_sConflictedText, rect, DT_LEFT|DT_NOPREFIX|DT_SINGLELINE);
+        }
+        DrawBlockLine(pDC, rc, lineRect, nLineIndex);
         return;
     }
 
@@ -1742,35 +1979,43 @@ void CBaseView::DrawSingleLine(CDC *pDC, const CRect &rc, int nLineIndex)
     CString sLine = GetLineChars(nLineIndex);
     if (sLine.IsEmpty())
     {
-        pDC->FillSolidRect(rc, crBkgnd);
-        DrawBlockLine(pDC, rc, nLineIndex);
-        DrawLineEnding(pDC, rc, nLineIndex, origin);
+        if (m_RenderTarget)
+            m_RenderTarget->FillRectangle(d2drect, brBkgnd);
+        else
+            pDC->FillSolidRect(rc, crBkgnd);
+        DrawBlockLine(pDC, rc, lineRect, nLineIndex);
+        DrawLineEnding(pDC, rc, lineRect, nLineIndex, origin);
         return;
     }
 
     CheckOtherView();
 
     // Draw the line
+    if (m_RenderTarget == NULL)
+        pDC->SelectObject(GetFont(FALSE, FALSE, IsLineRemoved(nLineIndex)));
 
-    pDC->SelectObject(GetFont(FALSE, FALSE, IsLineRemoved(nLineIndex)));
-
-    DrawTextLine(pDC, rc, nLineIndex, origin);
-    CString line = ExpandChars(sLine); // note: DrawTextLine can possibly return pixel text width
-    origin.x += pDC->GetTextExtent(line).cx;
+    DrawTextLine(pDC, rc, lineRect, nLineIndex, origin);
 
     // draw white space after the end of line
     CRect frect = rc;
     if (origin.x > frect.left)
         frect.left = origin.x;
     if (frect.right > frect.left)
-        pDC->FillSolidRect(frect, crBkgnd);
+    {
+        if (m_RenderTarget)
+        {
+            D2D1_RECT_F d2dfrect = D2D1::RectF(frect.left, lineRect.top, frect.right, lineRect.bottom);
+            m_RenderTarget->FillRectangle(d2dfrect, brBkgnd);
+        }
+        else
+            pDC->FillSolidRect(frect, crBkgnd);
+    }
 
     // draw the whitespace chars
-    LPCTSTR pszChars = sLine.operator LPCWSTR();
+    LPCTSTR pszChars = sLine;
     if (m_bViewWhitespace)
     {
         int xpos = 0;
-        int y = rc.top + (rc.bottom-rc.top)/2;
 
         int nActualOffset = 0;
         while ((nActualOffset < m_nOffsetChar) && (*pszChars))
@@ -1784,46 +2029,85 @@ void CBaseView::DrawSingleLine(CDC *pDC, const CRect &rc, int nLineIndex)
         if (nActualOffset > m_nOffsetChar)
             pszChars--;
 
-        CPen pen(PS_SOLID, 0, m_WhiteSpaceFg);
-        CPen pen2(PS_SOLID, 2, m_WhiteSpaceFg);
-        while (*pszChars)
+        if (m_RenderTarget)
         {
-            switch (*pszChars)
+            int y = lineRect.top + (lineRect.bottom-lineRect.top)/2;
+            while (*pszChars)
             {
-            case _T('\t'):
+                switch (*pszChars)
                 {
-                    // draw an arrow
-                    CPen * oldPen = pDC->SelectObject(&pen);
-                    int nSpaces = GetTabSize() - (m_nOffsetChar + xpos) % GetTabSize();
-                    pDC->MoveTo(xpos * GetCharWidth() + rc.left, y);
-                    pDC->LineTo((xpos + nSpaces) * GetCharWidth() + rc.left-2, y);
-                    pDC->LineTo((xpos + nSpaces) * GetCharWidth() + rc.left-6, y-4);
-                    pDC->MoveTo((xpos + nSpaces) * GetCharWidth() + rc.left-2, y);
-                    pDC->LineTo((xpos + nSpaces) * GetCharWidth() + rc.left-6, y+4);
-                    xpos += nSpaces;
-                    pDC->SelectObject(oldPen);
-                }
-                break;
-            case _T(' '):
-                {
-                    // draw a small dot
-                    CPen * oldPen = pDC->SelectObject(&pen2);
-                    pDC->MoveTo(xpos * GetCharWidth() + rc.left + GetCharWidth()/2-1, y);
-                    pDC->LineTo(xpos * GetCharWidth() + rc.left + GetCharWidth()/2+1, y);
+                case '\t':
+                    {
+                        // draw an arrow
+                        int nSpaces = GetTabSize() - (m_nOffsetChar + xpos) % GetTabSize();
+                        m_RenderTarget->DrawLine(D2D1::Point2F(xpos * GetCharWidth() + lineRect.left, y), D2D1::Point2F((xpos + nSpaces) * GetCharWidth() + lineRect.left-2, y), m_WindowTextBrushFaint);
+                        m_RenderTarget->DrawLine(D2D1::Point2F((xpos + nSpaces) * GetCharWidth() + lineRect.left-2, y), D2D1::Point2F((xpos + nSpaces) * GetCharWidth() + lineRect.left-6, y-4), m_WindowTextBrushFaint);
+                        m_RenderTarget->DrawLine(D2D1::Point2F((xpos + nSpaces) * GetCharWidth() + lineRect.left-2, y), D2D1::Point2F((xpos + nSpaces) * GetCharWidth() + lineRect.left-2, y), m_WindowTextBrushFaint);
+                        m_RenderTarget->DrawLine(D2D1::Point2F((xpos + nSpaces) * GetCharWidth() + lineRect.left-2, y), D2D1::Point2F((xpos + nSpaces) * GetCharWidth() + lineRect.left-6, y+4), m_WindowTextBrushFaint);
+                        xpos += nSpaces;
+                    }
+                    break;
+                case ' ':
+                    {
+                        // draw a small dot
+                        m_RenderTarget->DrawLine(D2D1::Point2F(xpos * GetCharWidth() + lineRect.left + GetCharWidth()/2-1, y), D2D1::Point2F(xpos * GetCharWidth() + lineRect.left + GetCharWidth()/2+1, y), m_WindowTextBrushFaint);
+                        xpos++;
+                    }
+                    break;
+                default:
                     xpos++;
-                    pDC->SelectObject(oldPen);
+                    break;
                 }
-                break;
-            default:
-                xpos++;
-                break;
+                pszChars++;
             }
-            pszChars++;
+        }
+        else
+        {
+            int y = rc.top + (rc.bottom-rc.top)/2;
+            CPen pen(PS_SOLID, 0, m_WhiteSpaceFg);
+            CPen pen2(PS_SOLID, 2, m_WhiteSpaceFg);
+            while (*pszChars)
+            {
+                switch (*pszChars)
+                {
+                case _T('\t'):
+                    {
+                        // draw an arrow
+                        CPen * oldPen = pDC->SelectObject(&pen);
+                        int nSpaces = GetTabSize() - (m_nOffsetChar + xpos) % GetTabSize();
+                        pDC->MoveTo(xpos * GetCharWidth() + rc.left, y);
+                        pDC->LineTo((xpos + nSpaces) * GetCharWidth() + rc.left-2, y);
+                        pDC->LineTo((xpos + nSpaces) * GetCharWidth() + rc.left-6, y-4);
+                        pDC->MoveTo((xpos + nSpaces) * GetCharWidth() + rc.left-2, y);
+                        pDC->LineTo((xpos + nSpaces) * GetCharWidth() + rc.left-6, y+4);
+                        xpos += nSpaces;
+                        pDC->SelectObject(oldPen);
+                    }
+                    break;
+                case _T(' '):
+                    {
+                        // draw a small dot
+                        CPen * oldPen = pDC->SelectObject(&pen2);
+                        pDC->MoveTo(xpos * GetCharWidth() + rc.left + GetCharWidth()/2-1, y);
+                        pDC->LineTo(xpos * GetCharWidth() + rc.left + GetCharWidth()/2+1, y);
+                        xpos++;
+                        pDC->SelectObject(oldPen);
+                    }
+                    break;
+                default:
+                    xpos++;
+                    break;
+                }
+                pszChars++;
+            }
         }
     }
-    DrawBlockLine(pDC, rc, nLineIndex);
+    DrawBlockLine(pDC, rc, lineRect, nLineIndex);
+
+    //CString line = ExpandChars(sLine); // note: DrawTextLine can possibly return pixel text width
+    //origin.x += pDC->GetTextExtent(line).cx;
     if (origin.x >= rc.left)
-        DrawLineEnding(pDC, rc, nLineIndex, origin);
+        DrawLineEnding(pDC, rc, lineRect, nLineIndex, origin);
 }
 
 void CBaseView::ExpandChars(const CString &sLine, int nOffset, int nCount, CString &line)
@@ -1952,6 +2236,12 @@ int CBaseView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     m_lfBaseFont.lfQuality = DEFAULT_QUALITY;
     m_lfBaseFont.lfPitchAndFamily = DEFAULT_PITCH;
 
+    if ((m_RenderTarget == NULL)&&(CD2D::Instance().IsD2D()))
+    {
+        CD2D::Instance().CreateHwndRenderTarget(m_hWnd, &m_RenderTarget);
+        CreateDeviceResources();
+    }
+
     return 0;
 }
 
@@ -2002,6 +2292,15 @@ void CBaseView::OnSize(UINT nType, int cx, int cy)
         RecalcHorzScrollBar();
     }
     UpdateCaret();
+    if (m_RenderTarget)
+    {
+        if (D2DERR_RECREATE_TARGET == m_RenderTarget->Resize(D2D1::SizeU(cx, cy)))
+        {
+            m_RenderTarget = NULL;
+            CD2D::Instance().CreateHwndRenderTarget(m_hWnd, &m_RenderTarget);
+            CreateDeviceResources();
+        }
+    }
 }
 
 BOOL CBaseView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
@@ -4343,9 +4642,12 @@ LineColors & CBaseView::GetLineColors(int nViewLine)
     LineColors oLineColors;
     // set main line color
     COLORREF crBkgnd, crText;
+    ID2D1SolidColorBrush * brBkgnd;
+    ID2D1SolidColorBrush * brText;
     DiffStates diffState = m_pViewData->GetState(nViewLine);
     CDiffColors::GetInstance().GetColors(diffState, crBkgnd, crText);
-    oLineColors.SetColor(0, crText, crBkgnd);
+    m_d2dColors.GetColors(diffState, &brBkgnd, &brText);
+    oLineColors.SetColor(0, crText, crBkgnd, brText, brBkgnd);
 
     do {
         if (!m_bShowInlineDiff)
@@ -4383,27 +4685,30 @@ LineColors & CBaseView::GetLineColors(int nViewLine)
             int nTextLength = s.GetLength();
 
             CDiffColors::GetInstance().GetColors(diffState, crBkgnd, crText);
+            m_d2dColors.GetColors(diffState, &brBkgnd, &brText);
             if ((m_bShowInlineDiff)&&(bInlineDiff))
             {
                 crBkgnd = InlineViewLineDiffColor(nViewLine);
+                // TODO
             }
             else if (bModified || (diffState == DIFFSTATE_EDITED))
             {
                 crBkgnd = m_ModifiedBk;
+                brBkgnd = m_ModifiedBkBrush;
             }
 
             if (bModified && (len < diff->modified_length))
             {
                 removedPositions[nTextStartOffset] = m_InlineRemovedBk;
             }
-            oLineColors.SetColor(nTextStartOffset, crText, crBkgnd);
+            oLineColors.SetColor(nTextStartOffset, crText, crBkgnd, brText, brBkgnd);
 
             nTextStartOffset += nTextLength;
             diff = diff->next;
         }
         for (std::map<int, COLORREF>::const_iterator it = removedPositions.begin(); it != removedPositions.end(); ++it)
         {
-            oLineColors.AddShotColor(it->first, it->second);
+            oLineColors.AddShotColor(it->first, it->second, m_InlineRemovedBkBrush);
         }
     } while (false); // error catch
 
@@ -4764,5 +5069,38 @@ void CBaseView::WrapChanged()
 {
     m_nMaxLineLength = -1;
     m_nOffsetChar = 0;
+}
+
+void CBaseView::CreateDeviceResources()
+{
+    if (m_RenderTarget)
+    {
+        m_d2dColors.CreateBrushes(m_RenderTarget);
+
+        for (int i = 0; i < 4; ++i)
+            m_tfFonts[i] = NULL;
+        m_ScrollbarBrush = NULL;
+        m_WindowBrush = NULL;
+        m_WindowTextBrush = NULL;
+        m_WindowTextBrushFaint = NULL;
+        m_GrayTextBrush = NULL;
+        m_InlineRemovedBkBrush = NULL;
+        m_InlineAddedBkBrush = NULL;
+        m_ModifiedBkBrush = NULL;
+        m_WhiteSpaceFgBrush = NULL;
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(::GetSysColor(COLOR_SCROLLBAR))),&m_ScrollbarBrush);
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(::GetSysColor(COLOR_WINDOW))),&m_WindowBrush);
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(::GetSysColor(COLOR_WINDOWTEXT))),&m_WindowTextBrush);
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(::GetSysColor(COLOR_WINDOWTEXT)), 0.5),&m_WindowTextBrushFaint);
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(::GetSysColor(COLOR_GRAYTEXT))),&m_GrayTextBrush);
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(m_InlineRemovedBk)),&m_InlineRemovedBkBrush);
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(m_InlineAddedBk)),&m_InlineAddedBkBrush);
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(m_ModifiedBk)),&m_ModifiedBkBrush);
+        m_RenderTarget->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(m_WhiteSpaceFg)),&m_WhiteSpaceFgBrush);
+    }
+    else
+    {
+        int hhhh= 0;
+    }
 }
 

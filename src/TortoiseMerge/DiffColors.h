@@ -19,6 +19,7 @@
 #pragma once
 #include "DiffStates.h"
 #include "registry.h"
+#include "D2D.h"
 
 #define INLINEADDED_COLOR                           RGB(255, 255, 150)
 #define INLINEREMOVED_COLOR                         RGB(200, 100, 100)
@@ -94,3 +95,20 @@ private:
     CDiffColors(void);
     ~CDiffColors(void);
 };
+
+class CD2DDiffColors
+{
+public:
+    CD2DDiffColors(void) {ClearBrushes();}
+    ~CD2DDiffColors(void) {}
+    void                        GetColors(DiffStates state, ID2D1SolidColorBrush** brBkgnd, ID2D1SolidColorBrush** brText);
+    void                        ClearBrushes();
+    void                        CreateBrushes(ID2D1HwndRenderTarget* target);
+
+protected:
+    CComPtr<ID2D1SolidColorBrush>   m_ForeGroundBrush[DIFFSTATE_END];
+    CComPtr<ID2D1SolidColorBrush>   m_BackGroundBrush[DIFFSTATE_END];
+    CComPtr<ID2D1SolidColorBrush>   m_WindowBrush;
+    CComPtr<ID2D1SolidColorBrush>   m_WindowTextBrush;
+};
+

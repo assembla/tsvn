@@ -89,7 +89,7 @@ void CDiffColors::GetColors(DiffStates state, COLORREF &crBkgnd, COLORREF &crTex
     if ((state < DIFFSTATE_END)&&(state >= 0))
     {
         crBkgnd = (COLORREF)(DWORD)m_regBackgroundColors[(int)state];
-        crText = (COLORREF)(DWORD)m_regForegroundColors[(int)state];
+        crText  = (COLORREF)(DWORD)m_regForegroundColors[(int)state];
     }
     else
     {
@@ -114,5 +114,51 @@ void CDiffColors::LoadRegistry()
         m_regForegroundColors[i].read();
         m_regBackgroundColors[i].read();
     }
+}
+
+void CD2DDiffColors::GetColors(DiffStates state, ID2D1SolidColorBrush** brBkgnd, ID2D1SolidColorBrush** brText)
+{
+    if ((state < DIFFSTATE_END)&&(state >= 0))
+    {
+        (*brBkgnd) = m_BackGroundBrush[(int)state];
+        (*brText)  = m_ForeGroundBrush[(int)state];
+    }
+    else
+    {
+        (*brBkgnd) = m_WindowBrush;
+        (*brText)  = m_WindowTextBrush;
+    }
+}
+
+void CD2DDiffColors::ClearBrushes()
+{
+    for (int i=0; i<DIFFSTATE_END; ++i)
+    {
+        m_ForeGroundBrush[i] = NULL;
+        m_BackGroundBrush[i] = NULL;
+    }
+    m_WindowBrush = NULL;
+    m_WindowTextBrush = NULL;
+}
+
+void CD2DDiffColors::CreateBrushes(ID2D1HwndRenderTarget* target)
+{
+    ClearBrushes();
+    for (int i=0; i<DIFFSTATE_END; ++i)
+    {
+        COLORREF crBkgnd, crText;
+        CDiffColors::GetInstance().GetColors((DiffStates)i, crBkgnd, crText);
+        if (FAILED(target->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(crText)),&m_ForeGroundBrush[i])))
+        {
+            int hhh=0;
+        }
+        if (FAILED(target->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(crBkgnd)),&m_BackGroundBrush[i])))
+        {
+            int hhh=0;
+        }
+
+    }
+    target->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(::GetSysColor(COLOR_WINDOW))),&m_WindowBrush);
+    target->CreateSolidColorBrush(D2D1::ColorF(CD2D::GetBgra(::GetSysColor(COLOR_WINDOWTEXT))),&m_WindowTextBrush);
 }
 
