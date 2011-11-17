@@ -20,6 +20,7 @@
 #include "Resource.h"
 #include "StandAloneDlg.h"
 
+
 const UINT TaskBarButtonCreated = RegisterWindowMessage(L"TaskbarButtonCreated");
 
 BEGIN_TEMPLATE_MESSAGE_MAP(CStandAloneDialogTmpl, BaseType, BaseType)
@@ -148,7 +149,12 @@ bool CResizableStandAloneDialog::OnEnterPressed()
 {
     if (GetAsyncKeyState(VK_CONTROL)&0x8000)
     {
-        if ( GetDlgItem(IDOK)->IsWindowEnabled() )
+        CWnd * pOkBtn = GetDlgItem(IDOK);
+#ifdef ID_OK
+        if (pOkBtn == NULL)
+            pOkBtn = GetDlgItem(ID_OK);
+#endif
+        if ( pOkBtn && pOkBtn->IsWindowEnabled() )
         {
             if (DWORD(CRegStdDWORD(_T("Software\\TortoiseSVN\\CtrlEnter"), TRUE)))
                 PostMessage(WM_COMMAND, IDOK);
