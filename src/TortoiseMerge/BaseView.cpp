@@ -105,6 +105,7 @@ CBaseView::CBaseView()
     m_bModified = FALSE;
     m_bOtherDiffChecked = false;
     m_bInlineWordDiff = true;
+    m_bWhitespaceInlineDiffs = false;
     m_nTabSize = (int)(DWORD)CRegDWORD(_T("Software\\TortoiseMerge\\TabSize"), 4);
     std::fill_n(m_apFonts, fontsCount, (CFont*)NULL);
     m_hConflictedIcon = LoadIcon(IDI_CONFLICTEDLINE);
@@ -2086,7 +2087,7 @@ BOOL CBaseView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
             ::SetCursor(m_margincursor);
             return TRUE;
         }
-        if (IsWritable()) // we show caret in all view, should we use edit cursor for all of them?
+        if (m_nMouseLine >= 0)
         {
             ::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_IBEAM)));    // Set To Edit Cursor
             return TRUE;
@@ -2799,6 +2800,8 @@ ECharGroup GetCharGroup(wchar_t zChar)
 void CBaseView::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
     const int nClickedLine = GetButtonEventLineIndex(point);
+    if ( nClickedLine < 0)
+        return;
     int nViewLine = GetViewLineForScreen(nClickedLine);
     if (point.x < GetMarginWidth())  // only if double clicked on the margin
     {
@@ -4335,9 +4338,15 @@ LineColors & CBaseView::GetLineColors(int nViewLine)
 {
     ASSERT(nViewLine < (int)m_ScreenedViewLine.size());
 
-    if (m_ScreenedViewLine[nViewLine].bLineColorsSet)
+    if (m_bWhitespaceInlineDiffs)
     {
-        return m_ScreenedViewLine[nViewLine].LineColors;
+        if (m_ScreenedViewLine[nViewLine].bLineColorsSetWhiteSpace)
+            return m_ScreenedViewLine[nViewLine].lineColorsWhiteSpace;
+    }
+    else
+    {
+        if (m_ScreenedViewLine[nViewLine].bLineColorsSet)
+            return m_ScreenedViewLine[nViewLine].lineColors;
     }
 
     LineColors oLineColors;
@@ -4350,6 +4359,10 @@ LineColors & CBaseView::GetLineColors(int nViewLine)
     do {
         if (!m_bShowInlineDiff)
             break;
+
+        if ((diffState == DIFFSTATE_NORMAL)&&(!m_bWhitespaceInlineDiffs))
+            break;
+
         CString sLine = GetViewLineChars(nViewLine);
         if (sLine.IsEmpty())
             break;
@@ -4407,8 +4420,16 @@ LineColors & CBaseView::GetLineColors(int nViewLine)
         }
     } while (false); // error catch
 
-    m_ScreenedViewLine[nViewLine].LineColors = oLineColors;
-    m_ScreenedViewLine[nViewLine].bLineColorsSet = true;
+    if (!m_bWhitespaceInlineDiffs)
+    {
+        m_ScreenedViewLine[nViewLine].lineColors = oLineColors;
+        m_ScreenedViewLine[nViewLine].bLineColorsSet = true;
+    }
+    else
+    {
+        m_ScreenedViewLine[nViewLine].lineColorsWhiteSpace = oLineColors;
+        m_ScreenedViewLine[nViewLine].bLineColorsSetWhiteSpace = true;
+    }
 
     return GetLineColors(nViewLine);
 }
