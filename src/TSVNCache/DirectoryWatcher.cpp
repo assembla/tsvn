@@ -409,10 +409,11 @@ void CDirectoryWatcher::WorkerThread()
                         do
                         {
                             pnotify = (PFILE_NOTIFY_INFORMATION)((LPBYTE)pnotify + nOffset);
-                            nOffset = pnotify->NextEntryOffset;
 
                             if ((ULONG_PTR)pnotify - (ULONG_PTR)pdi->m_Buffer > READ_DIR_CHANGE_BUFFER_SIZE)
                                 break;
+
+                            nOffset = pnotify->NextEntryOffset;
 
                             if (pnotify->FileNameLength >= (READ_DIR_CHANGE_BUFFER_SIZE*sizeof(TCHAR)))
                                 continue;
@@ -461,7 +462,7 @@ void CDirectoryWatcher::WorkerThread()
                                 CTraceToOutputDebugString::Instance()(_T(__FUNCTION__) _T(": change notification for %s\n"), buf);
                                 notifyPaths.push_back(CTSVNPath(buf));
                             }
-                        } while (nOffset > 0);
+                        } while ((nOffset > 0)&&(nOffset < READ_DIR_CHANGE_BUFFER_SIZE));
 
                         // setup next notification cycle
 
@@ -532,9 +533,16 @@ void CDirectoryWatcher::ClearInfoMap()
     }
 }
 
-CTSVNPath CDirectoryWatcher::CloseInfoMap(HDEVNOTIFY hdev)
+CTSVNPath CDirectoryWatcher::CloseInfoMap(HANDLE hDir)
 {
     AutoLocker lock(m_critSec);
+    auto d = watchInfoMap.find(hDir);
+    if (d != watchInfoMap.end())
+    {
+        CTSVNPath root = CTSVNPath(CTSVNPath(d->second->m_DirPath).GetRootPathString());
+        RemovePathAndChildren(root);
+        BlockPath(root);
+    }
     CloseWatchHandles();
 
     CTSVNPath path;
@@ -544,13 +552,6 @@ CTSVNPath CDirectoryWatcher::CloseInfoMap(HDEVNOTIFY hdev)
     for (TInfoMap::iterator I = watchInfoMap.begin(); I != watchInfoMap.end(); ++I)
     {
         CDirectoryWatcher::CDirWatchInfo * info = I->second;
-        I->second = NULL;
-        if (info->m_hDevNotify == hdev)
-        {
-            path = info->m_DirName;
-            RemovePathAndChildren(path);
-            BlockPath(path);
-        }
 
         ScheduleForDeletion (info);
     }
