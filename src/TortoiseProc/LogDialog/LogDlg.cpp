@@ -1523,17 +1523,23 @@ void CLogDlg::CopySelectionToClipBoard(bool bIncludeChangedList)
                     }
                 }
                 sPaths.Trim();
+                CString nlMessage = CUnicodeUtils::GetUnicode (pLogEntry->GetMessage().c_str());
+                nlMessage.Remove('\r');
+                nlMessage.Replace(L"\n", L"\r\n");
                 sLogCopyText.Format(_T("%s: %d\r\n%s: %s\r\n%s: %s\r\n%s:\r\n%s\r\n----\r\n%s\r\n\r\n"),
                     (LPCTSTR)sRev, pLogEntry->GetRevision(),
                     (LPCTSTR)sAuthor,  (LPCTSTR)CUnicodeUtils::GetUnicode (pLogEntry->GetAuthor().c_str()),
                     (LPCTSTR)sDate, (LPCTSTR)CUnicodeUtils::GetUnicode (pLogEntry->GetDateString().c_str()),
-                    (LPCTSTR)sMessage, (LPCTSTR)CUnicodeUtils::GetUnicode (pLogEntry->GetMessage().c_str()),
+                    (LPCTSTR)sMessage, (LPCTSTR)nlMessage,
                     (LPCTSTR)sPaths);
             }
             else
             {
+                CString nlMessage = CUnicodeUtils::GetUnicode (pLogEntry->GetMessage().c_str());
+                nlMessage.Remove('\r');
+                nlMessage.Replace(L"\n", L"\r\n");
                 sLogCopyText.Format(_T("%s\r\n----\r\n"),
-                    (LPCTSTR)CUnicodeUtils::GetUnicode (pLogEntry->GetMessage().c_str()));
+                    (LPCTSTR)nlMessage);
             }
             sClipdata +=  sLogCopyText;
         }
@@ -1623,7 +1629,7 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
     {
         ShowContextMenuForChangedpaths(pWnd, point);
     }
-    else if ((selCount == 1)&&(pWnd == GetDlgItem(IDC_MSGVIEW)))
+    else if ((selCount > 0)&&(pWnd == GetDlgItem(IDC_MSGVIEW)))
     {
         POSITION pos = m_LogList.GetFirstSelectedItemPosition();
         int selIndex = -1;
@@ -1646,7 +1652,7 @@ void CLogDlg::OnContextMenu(CWnd* pWnd, CPoint point)
             sMenuItemText.LoadString(IDS_SCIEDIT_SELECTALL);
             popup.AppendMenu(MF_STRING | MF_ENABLED, EM_SETSEL, sMenuItemText);
 
-            if (selIndex >= 0)
+            if ((selIndex >= 0)&&(selCount == 1))
             {
                 popup.AppendMenu(MF_SEPARATOR);
                 sMenuItemText.LoadString(IDS_LOG_POPUP_EDITLOG);
@@ -2388,7 +2394,7 @@ void CLogDlg::EditLogMessage(int index)
 BOOL CLogDlg::PreTranslateMessage(MSG* pMsg)
 {
     // Skip Ctrl-C when copying text out of the log message or search filter
-    BOOL bSkipAccelerator = ( pMsg->message == WM_KEYDOWN && pMsg->wParam=='C' && (GetFocus()==GetDlgItem(IDC_MSGVIEW) || GetFocus()==GetDlgItem(IDC_SEARCHEDIT) ) && GetKeyState(VK_CONTROL)&0x8000 );
+    BOOL bSkipAccelerator = ( pMsg->message == WM_KEYDOWN && (pMsg->wParam=='C' || pMsg->wParam== VK_INSERT) && (GetFocus()==GetDlgItem(IDC_MSGVIEW) || GetFocus()==GetDlgItem(IDC_SEARCHEDIT) ) && GetKeyState(VK_CONTROL)&0x8000 );
     if (pMsg->message == WM_KEYDOWN && pMsg->wParam==VK_RETURN)
     {
         if (GetAsyncKeyState(VK_CONTROL)&0x8000)
