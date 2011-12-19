@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-04 18:17+0000\n"
-"Last-Translator: mfuji <fujimoto@internet.ne.jp>\n"
+"PO-Revision-Date: 2011-12-14 14:50+0000\n"
+"Last-Translator: Masahiro Fujimoto <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -516,7 +516,7 @@ msgstr "参照(&B)..."
 
 #. Resource IDs: (32850)
 msgid "&Bugtraq (Issue tracker integration)"
-msgstr "課題追跡（課題追跡システムの統合）(&B)"
+msgstr "課題追跡（課題追跡システムとの統合）(&B)"
 
 #. Resource IDs: (16913)
 msgid "&Button Appearance..."
@@ -1946,7 +1946,7 @@ msgstr "差分の高度な設定"
 
 #. Resource IDs: (110)
 msgid "Advanced merge settings"
-msgstr "マージに関する高度な設定"
+msgstr "マージの高度な設定"
 
 #. Resource IDs: (65535)
 msgid "Age"
@@ -3292,7 +3292,7 @@ msgstr "フックスクリプトの設定"
 
 #. Resource IDs: (284)
 msgid "Configure Issue Tracker Integration"
-msgstr "課題追跡システムの統合に関する設定"
+msgstr "課題追跡システムとの統合に関する設定"
 
 #. Resource IDs: (65535)
 msgid "Configure the program used for comparing different revisions of files"
@@ -5414,7 +5414,7 @@ msgstr "フックスクリプト"
 
 #. Resource IDs: (283)
 msgid "Hook Scripts::Issue Tracker Integration"
-msgstr "フックスクリプト::課題追跡システムの統合"
+msgstr "フックスクリプト::課題追跡システムとの統合"
 
 #. Resource IDs: (198)
 msgid "Hook Type"
@@ -7536,7 +7536,7 @@ msgstr ""
 
 #. Resource IDs: (1076)
 msgid "Patch &all items"
-msgstr "全ての項目にパッチを適用(&A)"
+msgstr "すべての項目にパッチを適用(&A)"
 
 #. Resource IDs: (1075)
 msgid "Patch &selected item"
@@ -7544,7 +7544,7 @@ msgstr "選択された項目にパッチを適用(&S)"
 
 #. Resource IDs: (376)
 msgid "Patch all files"
-msgstr "全てのファイルにパッチを適用"
+msgstr "すべてのファイルにパッチを適用"
 
 #. Resource IDs: (376)
 msgid "Patch selected files"
@@ -13182,17 +13182,227 @@ msgstr "はい"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "&All"
+#~ msgstr "すべて(&A)"
+
+#~ msgid "&Do not ask again"
+#~ msgstr "再び表示しない(&D)"
+
+#~ msgid "&Empty the recycle bin now"
+#~ msgstr "ごみ箱を空にする(&E)"
+
+#~ msgid "&Goto line"
+#~ msgstr "行へ移動(&G)"
+
+#~ msgid "&Ignore and proceed"
+#~ msgstr "無視して続行する(&I)"
+
+#~ msgid "&Inline diff"
+#~ msgstr "行内差分(&I)"
+
+#~ msgid "&Line number"
+#~ msgstr "行番号(&L)"
+
+#~ msgid "&Line number (%d - %d)"
+#~ msgstr "行番号(&L)(%d～%d)"
+
+#~ msgid "&None"
+#~ msgstr "なし(&N)"
+
 #~ msgid "&Operative:"
 #~ msgstr "操作対象(&O):"
 
 #~ msgid "&Peg:"
 #~ msgstr "ペグ(&P):"
 
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Local modifications are kept."
+#~ msgstr ""
+#~ "キャンセル\n"
+#~ "ローカルの変更を保持する。"
+
 #~ msgid "Compare two files"
 #~ msgstr "2つのファイルを比較"
+
+#~ msgid "Configure &TortoiseSVN to never use the recycle bin"
+#~ msgstr "TortoiseSVNがごみ箱を使用しないように設定(&T)"
+
+#~ msgid "Conflicted (maybe)"
+#~ msgstr "競合（おそらく）"
+
+#~ msgid "Diff Viewer"
+#~ msgstr "差分ビューアー"
+
+#~ msgid "Diff Viewer::Merge Tool"
+#~ msgstr "差分ビューアー::マージツール"
+
+#~ msgid "Do you want to load the changed files?"
+#~ msgstr "変更されたファイルを読み込み直しますか？"
+
+#~ msgid ""
+#~ "Fetches the contents of folders in the background so browsing is faster"
+#~ msgstr "フォルダーの中身をバックグラウンドで先読みし、表示を高速化します"
+
+#~ msgid "General::Dialogs 3"
+#~ msgstr "一般::ダイアログ３"
+
+#~ msgid "Go To Line"
+#~ msgstr "指定した行へ移動"
+
+#~ msgid "ID:32893:V C +G"
+#~ msgstr "ID:32893:V C +G"
+
+#~ msgid ""
+#~ "Ignore changes\n"
+#~ "Ignore the outside changes."
+#~ msgstr ""
+#~ "変更を無視する\n"
+#~ "外部での変更を無視します。"
+
+#~ msgid "Keep c&hangelists"
+#~ msgstr "変更リストを保持する(&H)"
+
+#~ msgid ""
+#~ "Load changes\n"
+#~ "Changes made in TortoiseMerge are lost and replaced with the new content."
+#~ msgstr ""
+#~ "変更を読み込み直す\n"
+#~ "TortoiseMergeで行った変更を破棄し、新しい内容で置き換えます。"
+
+#~ msgid ""
+#~ "Load changes\n"
+#~ "The views are updated with the new content."
+#~ msgstr ""
+#~ "変更を読み込み直す\n"
+#~ "ビューは新しい内容で更新されます。"
 
 #~ msgid "Operative"
 #~ msgstr "操作対象"
 
 #~ msgid "Peg"
 #~ msgstr "ペグ"
+
+#~ msgid "Pre-fetch folders for faster browsing"
+#~ msgstr "高速に表示するためにフォルダーを先読みする"
+
+#~ msgid "Recycle bin"
+#~ msgstr "ごみ箱"
+
+#~ msgid "Repository browser"
+#~ msgstr "リポジトリブラウザー"
+
+#~ msgid ""
+#~ "Revert\n"
+#~ "All local modifications will be lost."
+#~ msgstr ""
+#~ "変更の取り消し\n"
+#~ "ローカルで行ったすべての変更は失われます。"
+
+#~ msgid "Revision range to merge"
+#~ msgstr "マージするリビジョンの範囲"
+
+#~ msgid ""
+#~ "Show Inline-Diff\n"
+#~ "Inline diff"
+#~ msgstr ""
+#~ "行内の差分を表示する\n"
+#~ "行内差分"
+
+#~ msgid "Show externals"
+#~ msgstr "外部参照を表示する"
+
+#~ msgid "Shows folders and files included with the svn:externals property"
+#~ msgstr "svn:externalsプロパティで指定されたフォルダーやファイルを表示する"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Do you want to load the changes?"
+#~ msgstr ""
+#~ "ファイルが TortoiseMerge の外で変更されました。\n"
+#~ "これらの変更を読み込みますか？"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Would you like to reload and lose your changes?"
+#~ msgstr ""
+#~ "ファイルが TortoiseMerge の外で変更されました。\n"
+#~ "変更を破棄して再読み込みしてもよろしいですか？"
+
+#~ msgid "The line number must be in between %d and %d"
+#~ msgstr "行番号は%d～%dの間でなければなりません"
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "このエラーは、 Subversion サーバー上のカスタムフックスクリプトで発生したも"
+#~ "のです。\n"
+#~ "問題解決を助けになるように、サーバーの管理者に連絡してください。"
+
+#~ msgid ""
+#~ "This error was generated by a custom post-commit hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "このエラーは、 Subversion サーバー上のカスタム post-commit フックスクリプ"
+#~ "トで発生したものです。\n"
+#~ "問題解決を助けになるように、サーバーの管理者に連絡してください。"
+
+#~ msgid ""
+#~ "This error was generated by a custom post-lock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "このエラーは、 Subversion サーバー上のカスタム post-lock フックスクリプト"
+#~ "で発生したものです。\n"
+#~ "問題解決を助けになるように、サーバーの管理者に連絡してください。"
+
+#~ msgid ""
+#~ "This error was generated by a custom post-unlock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "このエラーは、 Subversion サーバー上のカスタム post-unlock フックスクリプ"
+#~ "トで発生したものです。\n"
+#~ "問題解決を助けになるように、サーバーの管理者に連絡してください。"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "neon %s\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "neon %s\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+
+#~ msgid ""
+#~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+#~ "recycle bin. The recycle bin currently contains %2!ld! items, which most "
+#~ "likely is the reason for this slowdown.\n"
+#~ "To fix this, you should empty the recycle bin now."
+#~ msgstr ""
+#~ "%1!ld!個の項目をごみ箱に入れるのに、非常に時間がかかっています。ごみ箱に現"
+#~ "在%2!ld!個の項目が入っていることが原因と考えられます。\n"
+#~ "解決するには、ごみ箱を空にしてください。"
+
+#~ msgid "all &revisions"
+#~ msgstr "すべてのリビジョン(&R)"
+
+#~ msgid "specific r&ange"
+#~ msgstr "指定された範囲(&A)"

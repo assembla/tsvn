@@ -15,6 +15,7 @@
 # cuscu <agua.cuscu@gmail.com>, 2011.
 # Francisco Javier Rodríguez Mesa <javier.rodriguez@fjrodriguez.com>, 2011.
 #   <gdelahuebra@hotmail.com>, 2011.
+#   <jmtruppia@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 #   <luiceur@gmail.com>, 2011.
 # Tomás Christie <tommychristie@gmail.com>, 2011.
@@ -24,8 +25,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-11-16 07:47+0000\n"
-"Last-Translator: luebbe <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2011-12-16 21:43+0000\n"
+"Last-Translator: ggh <gdelahuebra@hotmail.com>\n"
 "Language-Team: Spanish (Castilian) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21456,6 +21457,14 @@ msgid ""
 "menuchoice>. or <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>SVN "
 "Move versioned files here</guimenuitem></menuchoice>."
 msgstr ""
+"La manera recomendada es a través de <action>right dragging</action> los "
+"archivos a la nueva ubicación. Simplemente <action>right click</action> en "
+"los archivos que deseas mover o copiar sin soltar el botón del mouse. Luego "
+"arrastra los archivos a su nueva ubicación y suelta el botón del mouse. Un "
+"menu contextual aparecerá donde podrás elegir <menuchoice><guimenu>Context "
+"Menu</guimenu><guimenuitem>SVN Copy versioned files here</guimenuitem></"
+"menuchoice>. o <menuchoice><guimenu>Context Menu</guimenu><guimenuitem>SVN "
+"Move versioned files here</guimenuitem></menuchoice>."
 
 #. (title)
 msgid "Force users to enter a log message"
@@ -21988,6 +21997,16 @@ msgid ""
 "</screen> and refer to the common code using a relative path, e.g. "
 "<filename>..\\..\\Common\\DSPcore</filename>."
 msgstr ""
+"Si usas el mismo código en varios proyectos, y no deseas mantener múltiples "
+"copias de trabajo en cada proyecto que lo usa, puedes simplemente hacer una "
+"copia del repositorio en una ubicación separada que esta relacionada con "
+"todos los proyectos que la usan. Por ejemplo: <screen>\n"
+"C:\\Projects\\Proj1\n"
+"C:\\Projects\\Proj2\n"
+"C:\\Projects\\Proj3\n"
+"C:\\Projects\\Common\n"
+"</screen> y referirse al código común usando una ruta relativa, e.g. "
+"<filename>..\\..\\Common\\DSPcore</filename>."
 
 #. (para)
 msgid ""
@@ -22003,6 +22022,15 @@ msgid ""
 "#include \"X:\\superio\\superio.h\"\n"
 "</screen>"
 msgstr ""
+"Si tus proyectos están dispersos en localizaciones no relacionadas puede "
+"usar una variante de esto, que es poner el código común en un localización y "
+"usar la sustitución de la letra de la unidad para mapear tu código en tus "
+"proyectos. Por ejemplo, obtén el código común a <filename>D:\\Documents"
+"\\Framework</filename> o <filename>C:\\Documents and Settings\\{login}\\My "
+"Documents\\framework</filename>, entonces usa <screen>⏎ SUBST X: \"D:"
+"\\Documents\\framework\"⏎ </screen> para crear el mapeado de la unidad usada "
+"en tu código fuente. Tu condigo podrá entonces usar localizaciones "
+"absolutas. <screen>⏎ #include \"X:\\superio\\superio.h\"⏎ </screen>"
 
 #. (para)
 msgid ""
@@ -22072,6 +22100,11 @@ msgid ""
 "guimenuitem></menuchoice> to undo the add. You should then add the file(s) "
 "to the ignore list so they don't get added again later by mistake."
 msgstr ""
+"Si aún no has subido lo añadido, entonces todo lo que tienes que hacer es "
+"usar <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Undo Add...</"
+"guimenuitem></menuchoice> para deshacer el añadir. Deberías entonces añadir "
+"el/los fichero/s a la lista de ignorar para que no vuelvan a añadirse por "
+"error posteriormente."
 
 #. (para)
 msgid ""
@@ -23335,6 +23368,9 @@ msgid ""
 "revision which the repository browser should show. If the <option>/rev:xxx</"
 "option> is omitted, it defaults to HEAD."
 msgstr ""
+"Una opción adicional <option>/rev:xxx</option> puede emplearse para "
+"especificar la revisión que deberá mostrar el explorador del repositorio. Si "
+"se omite la <option>/rev:xxx</option>, por defecto muestra la revisión HEAD."
 
 #. (para)
 msgid ""
@@ -23342,6 +23378,9 @@ msgid ""
 "projectpropertiespath:path/to/wc</option> specifies the path from where to "
 "read and use the project properties."
 msgstr ""
+"Si <option>/path</option> apunta a una URL, la <option>/"
+"projectpropertiespath:path/to/wc</option> especifica la ruta o path desde el "
+"que leer y usar las propiedades del proyecto."
 
 #. (para)
 msgid ""
@@ -23350,6 +23389,10 @@ msgid ""
 "The first line in that text file contains the URL, the second line the "
 "revision in text format."
 msgstr ""
+"Si <option>/outfile:path\\to\\file</option> se especifica, la URL y revisión "
+"seleccionadas se escriben a dicho fichero cuando el explorador del "
+"repositorio se cierra. La primera línea en el fichero de texto contiene la "
+"URL, la segunda es la revisión en formato de texto."
 
 #. (literal)
 msgid "svn:ignore"
@@ -23583,6 +23626,8 @@ msgid ""
 "A simple example URL might look like this: <placeholder-1/> or in a more "
 "complex case: <placeholder-2/>"
 msgstr ""
+"Una simple URL puede tener este aspecto: <placeholder-1/> o en un caso más "
+"complejo: <placeholder-2/>"
 
 #. (title)
 msgid "TortoiseIDiff Commands"
@@ -24772,6 +24817,10 @@ msgid ""
 "run the install program and follow the instructions. After the installation "
 "finishes, the translation will be available."
 msgstr ""
+"Cada paquete de lenguaje se encuentra como un instalador <literal>.msi</"
+"literal>. Simplemente ejecuta el programa de instalación y sigue las "
+"instrucciones. Cuando termine la instalación, la traducción estará "
+"disponible."
 
 #. (para)
 msgid ""
