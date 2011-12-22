@@ -175,6 +175,7 @@ CSVNStatusListCtrl::CSVNStatusListCtrl() : CListCtrl()
     , m_bDepthInfinity(false)
     , m_bBlockItemChangeHandler(false)
     , m_nSelected(0)
+    , m_bFixCaseRenames(true)
 {
 }
 
@@ -258,7 +259,7 @@ void CSVNStatusListCtrl::Init(DWORD dwColumns, const CString& sColumnInfoContain
         m_dwDefaultColumns = dwColumns | 1;
         m_dwContextMenus = dwContextMenus;
         m_bHasCheckboxes = bHasCheckboxes;
-
+        m_bFixCaseRenames = !!CRegDWORD(_T("Software\\TortoiseSVN\\FixCaseRenames"), TRUE);
         m_bWaitCursor = true;
         // set the extended style of the listcontrol
         // the style LVS_EX_FULLROWSELECT interferes with the background watermark image but it's more important to be able to select in the whole row.
@@ -2065,7 +2066,7 @@ bool CSVNStatusListCtrl::BuildStatistics()
             // But nested folders are also considered to be in unversioned folders, we have to do the
             // check in that case too, otherwise we would miss case-renamed folders - they show up
             // as nested folders.
-            if (((!entry->inunversionedfolder)||(entry->isNested))&&(m_bUnversionedLast))
+            if (m_bFixCaseRenames && (((!entry->inunversionedfolder)||(entry->isNested))&&(m_bUnversionedLast)))
             {
                 // check if the unversioned item is just
                 // a file differing in case but still versioned
@@ -2093,7 +2094,6 @@ bool CSVNStatusListCtrl::BuildStatistics()
                         // list again.
                         itFirstUnversionedEntry = std::partition(m_arStatusArray.begin(), m_arStatusArray.end(), IsEntryVersioned);
                     }
-                    break;
                 }
             }
             break;

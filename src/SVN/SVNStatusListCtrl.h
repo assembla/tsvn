@@ -1075,6 +1075,7 @@ private:
     CString                     m_sNoPropValueText;
 
     bool                        m_bUnversionedRecurse;
+    bool                        m_bFixCaseRenames;
 
     bool                        m_bCheckChildrenWithParent;
     bool                        m_bRevertMode;
