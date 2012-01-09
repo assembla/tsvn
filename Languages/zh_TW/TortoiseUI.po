@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-14 15:20+0000\n"
+"PO-Revision-Date: 2011-12-22 14:58+0000\n"
 "Last-Translator: zcecil <zcecil@csie.org>\n"
 "Language-Team: Chinese (Taiwan) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,9 @@ msgstr "! %d"
 
 #. Resource IDs: (1262)
 msgid "# authors shown individually:"
-msgstr "# 單獨顯示作者:"
+msgstr ""
+"將會執行指令:\n"
+"要設定工作複本內的路徑, 請使用 %REPOROOT% 變數作為檔案庫中的最上層URL"
 
 #. Resource IDs: (357)
 #, c-format
@@ -13002,6 +13004,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Line number (%d - %d)"
 #~ msgstr "行號 (%d - %d)(&L)"
 
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "行內差異最大長度(&M)"
+
 #~ msgid "&None"
 #~ msgstr "無(&N)"
 
@@ -13011,12 +13016,43 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Peg:"
 
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "允許或拒絕用戶端掛勾指令檔"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "允許\n"
+#~ "執行掛勾指令檔"
+
+#~ msgid "Approved hook scripts"
+#~ msgstr "已允許的掛勾指令檔"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "取消\n"
+#~ "不執行指令檔"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Local modifications are kept."
 #~ msgstr ""
 #~ "取消\n"
 #~ "保留本地端所做的修改。"
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "清除所有已允許的用戶端掛勾指令檔(共 %ld 個)"
+
+#~ msgid ""
+#~ "Command Line To Execute:\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "將會執行指令:\n"
+#~ "如果要指定工作複本內的路徑, 請使用 %REPOROOT% 來代表檔案庫的最上層URL."
 
 #~ msgid "Compare two files"
 #~ msgstr "比較兩個檔案"
@@ -13027,11 +13063,17 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "衝突 (推測)"
 
+#~ msgid "Dialog"
+#~ msgstr "視窗"
+
 #~ msgid "Diff Viewer"
 #~ msgstr "差異檢視工具"
 
 #~ msgid "Diff Viewer::Merge Tool"
 #~ msgstr "差異檢視工具::合併工具"
+
+#~ msgid "Do not ask again for this script"
+#~ msgstr "不再詢問"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "要載入變更過的檔案嗎?"
@@ -13072,6 +13114,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "載入變更\n"
 #~ "已更新為新的內容"
+
+#~ msgid "Local &Hooks"
+#~ msgstr "本地掛勾指令(&H)"
 
 #~ msgid "Operative"
 #~ msgstr "實施修訂"
@@ -13163,6 +13208,16 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Subversion 伺服器上的自訂解鎖後掛勾指令檔發生錯誤.\n"
 #~ "請向您的伺服器管理員洽詢如何解決問題."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "目前有用戶端掛勾指令設定在工作複本上. 要執行掛勾指令檔嗎?\n"
+#~ "將會執行命令:\n"
+#~ "%s"
 
 #~ msgid ""
 #~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
