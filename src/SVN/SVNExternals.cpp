@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2010-2011 - TortoiseSVN
+// Copyright (C) 2010-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,6 +26,18 @@
 #include "SVNRev.h"
 #include "SVNProperties.h"
 #include "UnicodeUtils.h"
+
+class sb
+{
+public:
+    sb() : adjust(false) {}
+    ~sb() {}
+
+    std::string extvalue;
+    CString     pathurl;
+    bool        adjust;
+};
+
 
 SVNExternals::SVNExternals()
 {
@@ -121,15 +133,6 @@ bool SVNExternals::TagExternals(bool bRemote, const CString& message, svn_revnum
     // create a map of paths and external properties
     // so that we have all externals which belong to the same
     // property
-    class sb
-    {
-    public:
-        sb() : adjust(false) {}
-
-        std::string extvalue;
-        CString     pathurl;
-        bool        adjust;
-    };
 
     std::map<CTSVNPath, sb> externals;
     for (std::vector<SVNExternal>::iterator it = begin(); it != end(); ++it)
@@ -146,9 +149,9 @@ bool SVNExternals::TagExternals(bool bRemote, const CString& message, svn_revnum
             peg.Empty();
 
         CString temp;
-        if (it->adjust)
+        if (it->adjust && !rev.IsHead())
             temp.Format(_T("-r %s %s%s %s"), rev.ToString(), it->url, (LPCTSTR)peg, it->targetDir);
-        else if (origrev.IsValid())
+        else if (origrev.IsValid() && !origrev.IsHead())
             temp.Format(_T("-r %s %s%s %s"), origrev.ToString(), it->url, (LPCTSTR)peg, it->targetDir);
         else
             temp.Format(_T("%s%s %s"), it->url, (LPCTSTR)peg, it->targetDir);
