@@ -12,15 +12,15 @@
 # Translators:
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # okloster <okl@sintef.no>, 2011.
-#   <okl@sintef.no>, 2011.
+#   <okl@sintef.no>, 2011, 2012.
 # Ronny N. Olsen <rnolsen@hotmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-21 07:44+0000\n"
-"Last-Translator: Lübbe <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2012-01-09 10:36+0000\n"
+"Last-Translator: okloster <okl@sintef.no>\n"
 "Language-Team: Norwegian Bokmål <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1315,7 +1315,7 @@ msgstr "&Til revisjon"
 
 #. Resource IDs: (1305, 1384)
 msgid "&To URL:"
-msgstr "&Til adresse:"
+msgstr "&Til URL:"
 
 #. Resource IDs: (1305, 1384)
 msgid "&To path:"
@@ -5424,19 +5424,19 @@ msgstr "Hjem"
 
 #. Resource IDs: (103)
 msgid "Hook Scripts"
-msgstr "Påhakings-skript"
+msgstr "Påhakingsskript"
 
 #. Resource IDs: (283)
 msgid "Hook Scripts::Issue Tracker Integration"
-msgstr "Påhakings-skript::Integrasjon med Saksporingssystem"
+msgstr "Påhakingsskript::Integrasjon med Saksporingssystem"
 
 #. Resource IDs: (198)
 msgid "Hook Type"
-msgstr "Påhakings-type"
+msgstr "Påhakingstype"
 
 #. Resource IDs: (1334)
 msgid "Hook Type:"
-msgstr "Påhakings-type:"
+msgstr "Påhakingstype:"
 
 #. Resource IDs: (173)
 msgid "Hook script failed!"
@@ -5685,7 +5685,7 @@ msgid ""
 "If not checked then the import goes directly to the specified URL."
 msgstr ""
 "Hvis huket av, opprettes en ny mappe i depotet.\n"
-"Hvis ikke huket av, går importen direkte til den angitte nettadressen."
+"Hvis ikke huket av, går importen direkte til den angitte URL."
 
 #. Resource IDs: (79)
 msgid ""
@@ -6342,8 +6342,8 @@ msgid ""
 "Location where the contents of the\n"
 "repository URL(s) will be saved to."
 msgstr ""
-"Plasseringen som innholdet i\n"
-"depotadressen(e) lagres til."
+"Plasseringen hvor innholdet i\n"
+"depot-URLen(e) lagres."
 
 #. Resource IDs: (32854)
 msgid "Locator Bar"
@@ -13237,6 +13237,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Line number (%d - %d)"
 #~ msgstr "&Linjenummer (%d - %d)"
 
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "&Maks linjelengde for linjeforskjeller"
+
 #~ msgid "&None"
 #~ msgstr "&Ingen"
 
@@ -13246,12 +13249,44 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Spiker:"
 
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "Godkjenn eller avvis klient-påhakingsskript"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Godkjenn\n"
+#~ "Kjør påhakingsskriptet"
+
+#~ msgid "Approved hook scripts"
+#~ msgstr "Godkjente påhakingsskript"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Avbryt\n"
+#~ "Ikke kjør skriptet"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Local modifications are kept."
 #~ msgstr ""
 #~ "Avbryt\n"
 #~ "Lokale endringer beholdes."
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "Sletter alle %ld godkjente klient-påhakingsskript"
+
+#~ msgid ""
+#~ "Command Line To Execute:\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Kommandolinje som skal kjøres:\n"
+#~ "For å angi en sti i en arbeidskopi, angi url-en i depotet med url for "
+#~ "depotroten som %REPOROOT%"
 
 #~ msgid "Compare two files"
 #~ msgstr "Sammenlign to filer"
@@ -13262,11 +13297,17 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "I konflikt (kanskje)"
 
+#~ msgid "Dialog"
+#~ msgstr "Dialog"
+
 #~ msgid "Diff Viewer"
 #~ msgstr "Diff-viser"
 
 #~ msgid "Diff Viewer::Merge Tool"
 #~ msgstr "Diff-viser::Fletteverktøy"
+
+#~ msgid "Do not ask again for this script"
+#~ msgstr "Ikke spør igjen for dette skriptet"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Vil du laste de endrede filene?"
@@ -13309,6 +13350,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Last endringer\n"
 #~ "Visningene oppdateres med det nye innholdet."
+
+#~ msgid "Local &Hooks"
+#~ msgstr "Lokale &Påhakinger"
 
 #~ msgid "Operative"
 #~ msgstr "Operativ"
@@ -13407,6 +13451,17 @@ msgstr "{BugTraq}"
 #~ "Subversion-tjeneren.\n"
 #~ "Vennligst kontakt tjener-administratoren for å få hjelp til å løse dette "
 #~ "problemet."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Denne arbeidskopien har et klient-påhakingsskript. Vil du kjøre dette "
+#~ "skriptet?\n"
+#~ "Kommandolinjen som vil kjøres er:\n"
+#~ "%s"
 
 #~ msgid ""
 #~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
