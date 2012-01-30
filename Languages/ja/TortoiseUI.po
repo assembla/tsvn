@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -10,14 +10,14 @@
 # 
 # Authors:
 # Translators:
-# Daisuke Deguchi <ddeguchi@is.nagoya-u.ac.jp>, 2011.
+# Daisuke Deguchi <ddeguchi@is.nagoya-u.ac.jp>, 2011, 2012.
 # Masahiro Fujimoto <fujimoto@internet.ne.jp>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-23 12:29+0000\n"
+"PO-Revision-Date: 2012-01-29 14:21+0000\n"
 "Last-Translator: Masahiro Fujimoto <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -6617,7 +6617,7 @@ msgstr "マージタイプ"
 
 #. Resource IDs: (263)
 msgid "Merged"
-msgstr "マージ終了"
+msgstr "マージ済み"
 
 #. Resource IDs: (286)
 #, c-format
@@ -8199,15 +8199,15 @@ msgstr "「%s」のためのパッチをリジェクト"
 
 #. Resource IDs: (16)
 msgid "Release loc&k..."
-msgstr "ロックを解除(&K)..."
+msgstr "ロックを解放(&K)..."
 
 #. Resource IDs: (16)
 msgid "Releases locks even if you're not the owner of the locks (breaks them)."
-msgstr "ロックの保持者でなくてもロックを解除する（破壊する）。"
+msgstr "ロックの保持者でなくてもロックを解放する（解除する）。"
 
 #. Resource IDs: (16)
 msgid "Releases locks on files so other users can edit them again."
-msgstr "他のユーザーが再び編集できるようにファイルのロックを解除する。"
+msgstr "他のユーザーが再び編集できるようにファイルのロックを解放する。"
 
 #. Resource IDs: (12)
 msgid "Relo&cate..."
@@ -13182,6 +13182,27 @@ msgstr "はい"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "リビジョン %2!s!、作者 %3!s!、日付 %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "リビジョン %2!s!、作者 %3!s!、サイズ %4!s!、日付 %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "%2!d!個のファイルと%3!d!個のフォルダー、計%4!d!項目を表示"
+
 #~ msgid "&All"
 #~ msgstr "すべて(&A)"
 
@@ -13191,14 +13212,8 @@ msgstr "{BugTraq}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "ごみ箱を空にする(&E)"
 
-#~ msgid "&Goto line"
-#~ msgstr "行へ移動(&G)"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "無視して続行する(&I)"
-
-#~ msgid "&Inline diff"
-#~ msgstr "行内差分(&I)"
 
 #~ msgid "&Line number"
 #~ msgstr "行番号(&L)"
@@ -13231,6 +13246,15 @@ msgstr "{BugTraq}"
 #~ msgid "Approved hook scripts"
 #~ msgstr "フックスクリプトを承認"
 
+#~ msgid "Aqua Style"
+#~ msgstr "Aqua Style"
+
+#~ msgid "Black Style"
+#~ msgstr "Black Style"
+
+#~ msgid "Blue Style"
+#~ msgstr "Blue Style"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Do not run the script"
@@ -13245,8 +13269,28 @@ msgstr "{BugTraq}"
 #~ "キャンセル\n"
 #~ "ローカルの変更を保持する。"
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "アプリケーションのスタイルを変更する\n"
+#~ "スタイルの変更"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "アプリケーションのスタイルの変更"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "%ld件のクライアント側スクリプトの承認をクリア"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "テキストのブロックを移動するためのコマンドを見るにはクリック\n"
+#~ "テキストブロックを使用"
+
+#~ msgid "Collapse"
+#~ msgstr "折りたたむ"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13266,6 +13310,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "競合（おそらく）"
 
+#~ msgid "Create patch file"
+#~ msgstr "パッチファイルを作成"
+
 #~ msgid "Dialog"
 #~ msgstr "ダイアログ"
 
@@ -13282,6 +13329,13 @@ msgstr "{BugTraq}"
 #~ msgstr "変更されたファイルを読み込み直しますか？"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "外部参照 \"%1!s!\"\r\n"
+#~ "リビジョン %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "フォルダーの中身をバックグラウンドで先読みし、表示を高速化します"
 
@@ -13290,6 +13344,26 @@ msgstr "{BugTraq}"
 
 #~ msgid "Go To Line"
 #~ msgstr "指定した行へ移動"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "次の行内の相違点へ移動する\n"
+#~ "次の行内相違点へ"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "前の行内の相違点へ移動する\n"
+#~ "前の行内相違点へ"
+
+#~ msgid "Goto Line"
+#~ msgstr "行へ移動"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "パッチファイルの一覧を表示/非表示"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13301,8 +13375,20 @@ msgstr "{BugTraq}"
 #~ "変更を無視する\n"
 #~ "外部での変更を無視します。"
 
+#~ msgid "Inline diff"
+#~ msgstr "行内差分"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "単語単位の行内差分"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "変更リストを保持する(&H)"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "%ldから移動した行"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "%ldへ移動した行"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13321,8 +13407,46 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "ローカルフック(&H)"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "ビュー内の特定の行に移動する\n"
+#~ "行へ移動"
+
+#~ msgid "Next conflict"
+#~ msgstr "次の競合点"
+
+#~ msgid "Next difference"
+#~ msgstr "次の相違点"
+
+#~ msgid "Next inline difference"
+#~ msgstr "次の行内相違点"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Office 2007 の配色"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "差分の表示やパッチの適用のためにファイルを開く\n"
+#~ "ファイルを開く"
+
 #~ msgid "Operative"
 #~ msgstr "操作対象"
+
+#~ msgid "Paste"
+#~ msgstr "貼り付け"
 
 #~ msgid "Peg"
 #~ msgstr "ペグ"
@@ -13330,11 +13454,26 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "高速に表示するためにフォルダーを先読みする"
 
+#~ msgid "Previous conflict"
+#~ msgstr "前の競合点"
+
+#~ msgid "Previous difference"
+#~ msgstr "前の相違点"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "前の行内相違点"
+
 #~ msgid "Recycle bin"
 #~ msgstr "ごみ箱"
 
 #~ msgid "Repository browser"
 #~ msgstr "リポジトリブラウザー"
+
+#~ msgid "Restore"
+#~ msgstr "復元"
+
+#~ msgid "Restore after commit"
+#~ msgstr "コミット後に復元"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13346,6 +13485,12 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "マージするリビジョンの範囲"
 
+#~ msgid "Save"
+#~ msgstr "保存"
+
+#~ msgid "Save as"
+#~ msgstr "名前を付けて保存"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13353,11 +13498,24 @@ msgstr "{BugTraq}"
 #~ "行内の差分を表示する\n"
 #~ "行内差分"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "空白を表示"
+
 #~ msgid "Show externals"
 #~ msgstr "外部参照を表示する"
 
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "空白や改行を特殊な記号で表示する\n"
+#~ "空白を表示"
+
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "svn:externalsプロパティで指定されたフォルダーやファイルを表示する"
+
+#~ msgid "Silver Style"
+#~ msgstr "Silver Style"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13372,6 +13530,15 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "ファイルが TortoiseMerge の外で変更されました。\n"
 #~ "変更を破棄して再読み込みしてもよろしいですか？"
+
+#~ msgid "Style"
+#~ msgstr "スタイル"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "1画面/2画面表示の切り替え"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "左右のビューの入れ替え"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "行番号は%d～%dの間でなければなりません"
@@ -13456,8 +13623,82 @@ msgstr "{BugTraq}"
 #~ "在%2!ld!個の項目が入っていることが原因と考えられます。\n"
 #~ "解決するには、ごみ箱を空にしてください。"
 
+#~ msgid "Undo"
+#~ msgstr "元に戻す"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "直前に行った変更を取り消す\n"
+#~ "元に戻す"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "「mine」のテキストブロックを使用"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "「mine」→「theirs」の順でテキストブロックを使用"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "「theirs」のテキストブロックを使用"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "「theirs」→「mine」の順でテキストブロックを使用"
+
+#~ msgid "Use Blocks"
+#~ msgstr "ブロックを使用する"
+
+#~ msgid "Use left block"
+#~ msgstr "左のブロックを使用"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "プロパティ値の検証に失敗しました。"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "長い行を折り返す"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "長い行をビューの右端で折り返す\n"
+#~ "長い行を折り返す"
+
 #~ msgid "all &revisions"
 #~ msgstr "すべてのリビジョン(&R)"
 
 #~ msgid "specific r&ange"
 #~ msgstr "指定された範囲(&A)"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
+
+#~ msgid "&Goto line"
+#~ msgstr "行へ移動(&G)"
+
+#~ msgid "&Inline diff"
+#~ msgstr "行内差分(&I)"

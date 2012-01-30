@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -11,13 +11,13 @@
 # Authors:
 # Translators:
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
-# Zbyněk Schwarz <zbynek.schwarz@gmail.com>, 2011.
+# Zbyněk Schwarz <zbynek.schwarz@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-21 08:53+0000\n"
+"PO-Revision-Date: 2012-01-23 10:16+0000\n"
 "Last-Translator: Zbyněk Schwarz <zbynek.schwarz@gmail.com>\n"
 "Language-Team: Czech <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13183,6 +13183,27 @@ msgstr "ano"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Revize %2!s!, Autor %3!s!, Datum %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Revize %2!s!, Autor %3!s!, Velikost %4!s!, Datum %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Zobrazeno %2!d! souborů a %3!d! složek, %4!d! položek celkem"
+
 #~ msgid "&All"
 #~ msgstr "&Vše"
 
@@ -13192,14 +13213,8 @@ msgstr "{BugTraq}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "&Vysypat koš nyní"
 
-#~ msgid "&Goto line"
-#~ msgstr "&Přejít na řádek"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Ignorovat a pokračovat"
-
-#~ msgid "&Inline diff"
-#~ msgstr "&Rozdíl v řádku"
 
 #~ msgid "&Line number"
 #~ msgstr "Čí&slo řádku"
@@ -13227,10 +13242,19 @@ msgstr "{BugTraq}"
 #~ "Run the hook script"
 #~ msgstr ""
 #~ "Schválit\n"
-#~ "Spustit hákový skript"
+#~ "Spustí hákový skript"
 
 #~ msgid "Approved hook scripts"
 #~ msgstr "Schválené hákové skripty"
+
+#~ msgid "Aqua Style"
+#~ msgstr "Vodní Styl"
+
+#~ msgid "Black Style"
+#~ msgstr "Černý styl"
+
+#~ msgid "Blue Style"
+#~ msgstr "Modrý styl"
 
 #~ msgid ""
 #~ "Cancel\n"
@@ -13246,8 +13270,28 @@ msgstr "{BugTraq}"
 #~ "Zrušit\n"
 #~ "Místní změny jsou zanechány."
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Změnit styl aplikace\n"
+#~ "Změnit styl"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Změní styl aplikace"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "Vyčistit všech %ld schválených hákových skriptů na straně klienta"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Klikněte pro zobrazení příkazů pro přesun částí textu\n"
+#~ "Použít textové bloky"
+
+#~ msgid "Collapse"
+#~ msgstr "Sbalit"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13267,6 +13311,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "V konfliktu (možná)"
 
+#~ msgid "Create patch file"
+#~ msgstr "Vytvořit záplatový soubor"
+
 #~ msgid "Dialog"
 #~ msgstr "Dialogové okno"
 
@@ -13283,6 +13330,13 @@ msgstr "{BugTraq}"
 #~ msgstr "Chcete načíst změněné soubory?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Externí \"%1!s!\"\r\n"
+#~ "Revize %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Získá obsahy adresářů v pozadí, takže procházení je rychlejší"
 
@@ -13291,6 +13345,26 @@ msgstr "{BugTraq}"
 
 #~ msgid "Go To Line"
 #~ msgstr "Přejít na řádek"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Přejít na další rozdíl v řádku\n"
+#~ "Další rozdíl v řádku"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Přejít na předchozí rozdíl v řádku\n"
+#~ "Předchozí rozdíl v řádku"
+
+#~ msgid "Goto Line"
+#~ msgstr "Přejít na řádek"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Skrýt/Zobrazit seznam záplatových souborů"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13302,8 +13376,20 @@ msgstr "{BugTraq}"
 #~ "Ignorovat změny\n"
 #~ "Ignorovat změny z vnějšku."
 
+#~ msgid "Inline diff"
+#~ msgstr "Rozdíl v řádku"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Rozdíl v řádku podle slov"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Ponechat &seznamy změn"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Řádek přesunut z řádku %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Řádek přesunut na řádek %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13322,8 +13408,46 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Místní &Háky"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Přejít na určitý řádek v zobrazení\n"
+#~ "Přejít na řádek"
+
+#~ msgid "Next conflict"
+#~ msgstr "Další konflikt"
+
+#~ msgid "Next difference"
+#~ msgstr "Další rozdíl"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Další rozdíl v řádku"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Barvy Office 2007"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Otevřít soubory pro porovnání či použití záplaty\n"
+#~ "Otevřít soubory"
+
 #~ msgid "Operative"
 #~ msgstr "Operativní"
+
+#~ msgid "Paste"
+#~ msgstr "Vložit"
 
 #~ msgid "Peg"
 #~ msgstr "Zavěsit"
@@ -13331,11 +13455,26 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Adresáře získávat předem pro rychlejší prohlížení"
 
+#~ msgid "Previous conflict"
+#~ msgstr "Předchozí konflikt"
+
+#~ msgid "Previous difference"
+#~ msgstr "Předchozí rozdíl"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Předchozí rozdíl v řádku"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Koš"
 
 #~ msgid "Repository browser"
 #~ msgstr "Průzkumník úložiště"
+
+#~ msgid "Restore"
+#~ msgstr "Obnovit"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Obnovit po odevzdání"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13347,6 +13486,12 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Rozsah revizí ke sloučení"
 
+#~ msgid "Save"
+#~ msgstr "Uložit"
+
+#~ msgid "Save as"
+#~ msgstr "Uložit jako"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13354,13 +13499,26 @@ msgstr "{BugTraq}"
 #~ "Zobrazit Rozdíl v řádku\n"
 #~ "Rozdíl v řádku"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "Zobrazit mezery"
+
 #~ msgid "Show externals"
 #~ msgstr "Zobrazit externí"
+
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Zobrazí zvláštní znaky pro mezery a nové řádky\n"
+#~ "Zobrazit mezery"
 
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr ""
 #~ "Zobrazí adresáře a soubory, které jsou zahrnuty ve vlastnosti svn:"
 #~ "externals"
+
+#~ msgid "Silver Style"
+#~ msgstr "Stříbrný Styl"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13375,6 +13533,15 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Některé soubory byly změněny mimo TortoiseMerge.\n"
 #~ "Chtěli byste znovu načíst a Vaše změny zahodit?"
+
+#~ msgid "Style"
+#~ msgstr "Styl"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Přwpnout mezi jedno- a dvou- panelovým zobraním"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Zaměnit levé a pravé zobrazení"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Číslo řádku musí být mezi %d a %d"
@@ -13463,8 +13630,82 @@ msgstr "{BugTraq}"
 #~ "zpomalení.\n"
 #~ "Abyste toto vyřešili, měli byste koš vyprázdnit nyní."
 
+#~ msgid "Undo"
+#~ msgstr "Zpět"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Vrátit poslední změny zpět\n"
+#~ "Zpět"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Použít textový blok 'můj'"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Použít textový blok 'můj' pak 'jejich'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Použít textový blok 'jejich'"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Použít textový blok 'jejich' pak 'můj'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Použít bloky"
+
+#~ msgid "Use left block"
+#~ msgstr "Použít blok vlevo"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Ověření hodnoty vlastnosti selhalo!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Zalomit dlouhé řádky"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Zalomí dlouhé řádky v právem okraji zobrazení\n"
+#~ "Zalomit dlouhé řádky"
+
 #~ msgid "all &revisions"
 #~ msgstr "všechny &revize"
 
 #~ msgid "specific r&ange"
 #~ msgstr "&určitý rozsah"
+
+#~ msgid "user:bool"
+#~ msgstr "uživatel:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "uživatel:víceřádkový"
+
+#~ msgid "user:singleline"
+#~ msgstr "uživatel:jednořádkový"
+
+#~ msgid "user:state"
+#~ msgstr "uživatel:stav"
+
+#~ msgid "&Goto line"
+#~ msgstr "&Přejít na řádek"
+
+#~ msgid "&Inline diff"
+#~ msgstr "&Rozdíl v řádku"

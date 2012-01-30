@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-21 08:27+0000\n"
+"PO-Revision-Date: 2012-01-24 12:48+0000\n"
 "Last-Translator: Nikolay Osinin <nikolay.osinin@gmail.com>\n"
 "Language-Team: Russian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1884,7 +1884,7 @@ msgstr ""
 
 #. Resource IDs: (73, 264, 1509, 1549, 65535)
 msgid "Added"
-msgstr "Добавленный"
+msgstr "Добавленные"
 
 #. Resource IDs: (126)
 msgid "Added a file remotely"
@@ -3941,7 +3941,7 @@ msgstr ""
 
 #. Resource IDs: (73, 264, 1510, 1551)
 msgid "Deleted"
-msgstr "Удалённый"
+msgstr "Удалённые"
 
 #. Resource IDs: (65535)
 msgid "Deleted node"
@@ -9480,7 +9480,7 @@ msgstr "Показывать исключенные корневые папки 
 
 #. Resource IDs: (1480)
 msgid "Show externals from &different repositories"
-msgstr "Показывать внешнее из &других хранилищ"
+msgstr "Показывать внешние из &других хранилищ"
 
 #. Resource IDs: (16656)
 msgid "Show f&ull menus after a short delay"
@@ -13299,6 +13299,27 @@ msgstr "да"
 msgid "{BugTraq}"
 msgstr "{СОП}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Ревизия %2!s!, Автор %3!s!, Дата %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Ревизия %2!s!, Автор %3!s!, Размер %4!s!, Дата %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Показано %2!d! файлов и %3!d! папок, всего %4!d! элементов"
+
 #~ msgid "&All"
 #~ msgstr "&Все"
 
@@ -13308,14 +13329,8 @@ msgstr "{СОП}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "&Очистить корзину сейчас"
 
-#~ msgid "&Goto line"
-#~ msgstr "&Перейти к строке"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Игнорировать и продолжить"
-
-#~ msgid "&Inline diff"
-#~ msgstr "&Внутристрочные различия"
 
 #~ msgid "&Line number"
 #~ msgstr "&Номер строки"
@@ -13348,6 +13363,15 @@ msgstr "{СОП}"
 #~ msgid "Approved hook scripts"
 #~ msgstr "Одобренные скрипты обработчика"
 
+#~ msgid "Aqua Style"
+#~ msgstr "Аква стиль"
+
+#~ msgid "Black Style"
+#~ msgstr "Черный стиль"
+
+#~ msgid "Blue Style"
+#~ msgstr "Синий стиль"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Do not run the script"
@@ -13362,8 +13386,28 @@ msgstr "{СОП}"
 #~ "Отменить\n"
 #~ "Локальные изменения сохраняются."
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Изменить стиль приложения\n"
+#~ "Изменить стиль"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Изменяет стиль приложения"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "Очищает все %ld одобренных клиентских скриптов обработчика"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Нажмите чтобы увидеть команды для перемещения блоков текста\n"
+#~ "Использовать текстовые блоки"
+
+#~ msgid "Collapse"
+#~ msgstr "Свернуть"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13383,6 +13427,9 @@ msgstr "{СОП}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Конфликтует (возможно)"
 
+#~ msgid "Create patch file"
+#~ msgstr "Создать файл заплатки"
+
 #~ msgid "Dialog"
 #~ msgstr "Диалог"
 
@@ -13399,6 +13446,13 @@ msgstr "{СОП}"
 #~ msgstr "Хотите ли загрузить измененные файлы?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Внешнее \"%1!s!\"\r\n"
+#~ "Ревизия %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Предварительно получает содержимое папок в фоновом режиме для более "
@@ -13410,6 +13464,26 @@ msgstr "{СОП}"
 #~ msgid "Go To Line"
 #~ msgstr "Перейти к строке"
 
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Перейти к следующему различию внутри строки\n"
+#~ "Следующее различие в строке"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Перейти к предыдущему различию внутри строки\n"
+#~ "Предыдущее различие в строке"
+
+#~ msgid "Goto Line"
+#~ msgstr "Перейти к строке"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Спрятать/показать список файлов заплаток"
+
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
 
@@ -13420,8 +13494,20 @@ msgstr "{СОП}"
 #~ "Игнорировать изменения\n"
 #~ "Игнорировать внешние изменения."
 
+#~ msgid "Inline diff"
+#~ msgstr "Различия в строке"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Различия в строке пословно"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Сохранить группы из&менений"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Строка перемещена со строки %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Строка перемещена на строку %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13441,8 +13527,46 @@ msgstr "{СОП}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Локальные &обработчики"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Перейти к определенной строке при просмотре\n"
+#~ "Перейти к строке"
+
+#~ msgid "Next conflict"
+#~ msgstr "Следующий конфликт"
+
+#~ msgid "Next difference"
+#~ msgstr "Следующее различие"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Следующее различие в строке"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "цвета Office 2007"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Открыть файлы для сравнения или применить заплатку\n"
+#~ "Открыть файлы"
+
 #~ msgid "Operative"
 #~ msgstr "Оперативная"
+
+#~ msgid "Paste"
+#~ msgstr "Вставить"
 
 #~ msgid "Peg"
 #~ msgstr "Стержневая (peg)"
@@ -13450,11 +13574,26 @@ msgstr "{СОП}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Предварительно выбирать папки для быстрого просмотра"
 
+#~ msgid "Previous conflict"
+#~ msgstr "Предыдущий конфликт"
+
+#~ msgid "Previous difference"
+#~ msgstr "Предыдущее различие"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Предыдущее различие в строке"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Корзина"
 
 #~ msgid "Repository browser"
 #~ msgstr "Обозреватель хранилища"
+
+#~ msgid "Restore"
+#~ msgstr "Восстановить"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Восстановить после фиксации"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13466,6 +13605,12 @@ msgstr "{СОП}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Диапазон ревизий для слияния"
 
+#~ msgid "Save"
+#~ msgstr "Сохранить"
+
+#~ msgid "Save as"
+#~ msgstr "Сохранить как"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13473,13 +13618,26 @@ msgstr "{СОП}"
 #~ "Показывать внутристрочные различия\n"
 #~ "Внутристрочные различия"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "Показать непечатаемые знаки"
+
 #~ msgid "Show externals"
 #~ msgstr "Показывать внешние"
+
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Показать специальные символы для непечатаемых знаков и переводов строк\n"
+#~ "Показать непечатаемые знаки"
 
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr ""
 #~ "Показывать папки и файлы, которые включены с помощью свойства svn:"
 #~ "externals"
+
+#~ msgid "Silver Style"
+#~ msgstr "Серебристый стиль"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13494,6 +13652,15 @@ msgstr "{СОП}"
 #~ msgstr ""
 #~ "Некоторые файлы были изменены снаружи T-Merge.\n"
 #~ "Хотите ли перезагрузить и потерять ваши изменения?"
+
+#~ msgid "Style"
+#~ msgstr "Стиль"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Переключить между одно- и двухпанельным видом"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Переключить левый и правый вид"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Номер строки должен быть между %d и %d"
@@ -13583,8 +13750,82 @@ msgstr "{СОП}"
 #~ "скорее всего являются причиной этого замедления.\n"
 #~ "Для исправления этого вы должны очистить корзину сейчас."
 
+#~ msgid "Undo"
+#~ msgstr "Отменить"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Отменить последние изменения\n"
+#~ "Отменить"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Использовать 'мой' текстовый блок"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Использовать 'мой' текстовый блок затем 'их'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Использовать 'их' текстовый блок"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Использовать 'их' текстовый блок затем 'мой'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Использовать блоки"
+
+#~ msgid "Use left block"
+#~ msgstr "Использовать левый блок"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Проверка значения свойства неудалась!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Переносить длинные строки"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Переносить длинные строки по правой видимой границе\n"
+#~ "Переносить длинные строки"
+
 #~ msgid "all &revisions"
 #~ msgstr "все &ревизии"
 
 #~ msgid "specific r&ange"
 #~ msgstr "определенный &диапазон"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
+
+#~ msgid "&Goto line"
+#~ msgstr "&Перейти к строке"
+
+#~ msgid "&Inline diff"
+#~ msgstr "&Внутристрочные различия"

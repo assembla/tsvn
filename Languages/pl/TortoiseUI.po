@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -11,7 +11,7 @@
 # Authors:
 # Translators:
 # Begina Felicysym <>, 2011.
-# Begina Felicysym <begina.felicysym@wp.eu>, 2011.
+# Begina Felicysym <begina.felicysym@wp.eu>, 2011, 2012.
 # <kkotowicz@gmail.com>, 2011.
 #   <kkotowicz@gmail.com>, 2011.
 # kkotowicz <kkotowicz@gmail.com>, 2011.
@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-21 21:13+0000\n"
+"PO-Revision-Date: 2012-01-23 22:36+0000\n"
 "Last-Translator: Begina Felicysym <begina.felicysym@wp.eu>\n"
 "Language-Team: Polish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13311,6 +13311,27 @@ msgstr "tak"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Wersja %2!s!, Autor %3!s!, Data %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Wersja %2!s!, Autor %3!s!, Wielkość %4!s!, Data %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Pokazano %2!d! plików i %3!d! folderów, w sumie %4!d! elementów"
+
 #~ msgid "&All"
 #~ msgstr "Wsz&ystko"
 
@@ -13320,14 +13341,8 @@ msgstr "{BugTraq}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "Opróżnij kosz t&eraz"
 
-#~ msgid "&Goto line"
-#~ msgstr "&Idź do linii"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Ignoruj ​​i kontynuuj"
-
-#~ msgid "&Inline diff"
-#~ msgstr "Różnice w l&inii"
 
 #~ msgid "&Line number"
 #~ msgstr "Numer &linii"
@@ -13360,6 +13375,15 @@ msgstr "{BugTraq}"
 #~ msgid "Approved hook scripts"
 #~ msgstr "Zatwierdzone skrypty przechwytujące"
 
+#~ msgid "Aqua Style"
+#~ msgstr "Styl aqua"
+
+#~ msgid "Black Style"
+#~ msgstr "Styl czarny"
+
+#~ msgid "Blue Style"
+#~ msgstr "Styl niebieski"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Do not run the script"
@@ -13374,9 +13398,29 @@ msgstr "{BugTraq}"
 #~ "Anuluj\n"
 #~ "Lokalne zmiany zostaną zachowane."
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Zmień styl aplikacji\n"
+#~ "Zmień styl"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Zmień styl aplikacji"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr ""
 #~ "Usuwa wszystkie %ld zatwierdzone skrypty przechwytujące po stronie klienta"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Kliknij by zobaczyć polecenia przenoszenia bloków tekstu\n"
+#~ "Użyj bloków tekstu"
+
+#~ msgid "Collapse"
+#~ msgstr "Zwiń"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13396,6 +13440,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "W stanie konfliktu (być może)"
 
+#~ msgid "Create patch file"
+#~ msgstr "Utwórz plik poprawki"
+
 #~ msgid "Dialog"
 #~ msgstr "Okno dialogowe"
 
@@ -13412,6 +13459,13 @@ msgstr "{BugTraq}"
 #~ msgstr "Czy chcesz wczytać zmienione pliki?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Zewnętrzne \"%1!s!\"\r\n"
+#~ "Wersja %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Pobiera zawartość folderów w tle, dzięki czemu przeglądanie jest szybsze"
@@ -13421,6 +13475,26 @@ msgstr "{BugTraq}"
 
 #~ msgid "Go To Line"
 #~ msgstr "Idź do linii"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Przechodzi do następnej różnicy w linii\n"
+#~ "następna różnica w linii"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Przechodzi do poprzedniej różnicy w linii\n"
+#~ "poprzednia różnica w linii"
+
+#~ msgid "Goto Line"
+#~ msgstr "Idź do linii"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Ukryj/Pokaż listę plików poprawki"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13432,8 +13506,20 @@ msgstr "{BugTraq}"
 #~ "Ignoruj zmiany\n"
 #~ "Zignoruj zmiany zewnętrzne."
 
+#~ msgid "Inline diff"
+#~ msgstr "Różnice w linii"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Różnice w linii wg słów"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Zachowaj &listy zmian"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Wiersz przeniesiony z linii %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Wiersz przeniesiony do linii %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13453,8 +13539,46 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Lokalne przec&hwycenia"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Przejdź do określonego wiersza w widoku\n"
+#~ "Idź do linii"
+
+#~ msgid "Next conflict"
+#~ msgstr "Następny konflikt"
+
+#~ msgid "Next difference"
+#~ msgstr "Następna różnica"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Następna różnica w linii"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Kolory Office 2007"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Otwórz pliki do porównania lub zastosowania pliku poprawek\n"
+#~ "Otwórz pliki"
+
 #~ msgid "Operative"
 #~ msgstr "Operacyjny"
+
+#~ msgid "Paste"
+#~ msgstr "Wklej"
 
 #~ msgid "Peg"
 #~ msgstr "Wieszakowa"
@@ -13462,11 +13586,26 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Wstępnie pobieranie folderów w celu szybszego przeglądania"
 
+#~ msgid "Previous conflict"
+#~ msgstr "Poprzedni konflikt"
+
+#~ msgid "Previous difference"
+#~ msgstr "Poprzednia różnica"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Poprzednia różnica w linii"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Kosz"
 
 #~ msgid "Repository browser"
 #~ msgstr "Przeglądarka repozytorium"
+
+#~ msgid "Restore"
+#~ msgstr "Przywrócenie"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Przywróć po zatwierdzeniu"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13478,6 +13617,12 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Zakres wersji do scalenia"
 
+#~ msgid "Save"
+#~ msgstr "Zapisz"
+
+#~ msgid "Save as"
+#~ msgstr "Zapisz jako"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13485,11 +13630,24 @@ msgstr "{BugTraq}"
 #~ "Pokaż różnice w linii\n"
 #~ "Różnice w linii"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "Pokaż białe znaki"
+
 #~ msgid "Show externals"
 #~ msgstr "Pokaż zewnętrzne"
 
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Pokazuje znaki specjalne by zobaczyć białe znaki i znaki końca linii\n"
+#~ "Pokaż białe znaki"
+
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "Pokazuje foldery i pliki dołączone atrybutem svn:externals"
+
+#~ msgid "Silver Style"
+#~ msgstr "Styl srebrny"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13504,6 +13662,15 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Niektóre pliki zostały zmienione poza T-Merge.\n"
 #~ "Czy chcesz przeładować i utracić zmiany?"
+
+#~ msgid "Style"
+#~ msgstr "Styl"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Przełącz pomiędzy widokiem jedno- i dwupanelowym"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Zamień lewy i prawy widok"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Numer linii musi być pomiędzy %d i %d"
@@ -13593,8 +13760,82 @@ msgstr "{BugTraq}"
 #~ "najprawdopodobniej jest przyczyną tego spowolnienia.\n"
 #~ "Aby rozwiązać ten problem, należy opróżnić teraz Kosz."
 
+#~ msgid "Undo"
+#~ msgstr "Cofnij"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Cofa ostatnie zmiany\n"
+#~ "Cofnij"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Użyj bloku tekstu z 'mój'"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Użyj bloków tekstu z 'mój' przed 'ich'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Użyj bloku tekstu z 'ich'"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Użyj bloków tekstu z 'ich' przed 'mój'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Użyj bloków"
+
+#~ msgid "Use left block"
+#~ msgstr "Użyj lewego bloku"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Sprawdzenie poprawności wartości atrybutu nie powiodło się!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Zawijaj długie linie"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Zawijanie długich linia na prawym brzegu widoku\n"
+#~ "Zawijaj długie linie"
+
 #~ msgid "all &revisions"
 #~ msgstr "wszystkie we&rsje"
 
 #~ msgid "specific r&ange"
 #~ msgstr "określony zak&res"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
+
+#~ msgid "&Goto line"
+#~ msgstr "&Idź do linii"
+
+#~ msgid "&Inline diff"
+#~ msgstr "Różnice w l&inii"

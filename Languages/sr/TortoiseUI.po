@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-21 19:55+0000\n"
+"PO-Revision-Date: 2012-01-23 20:05+0000\n"
 "Last-Translator: Milorad Popovic <MiloradSPopovic@gmail.com>\n"
 "Language-Team: Serbian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13221,6 +13221,27 @@ msgstr "да"
 msgid "{BugTraq}"
 msgstr "{БагТрек}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Ревизија %2!s!, Аутор %3!s!, Датум %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Ревизија %2!s!, Аутор %3!s!, Величина %4!s!, Датум %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Приказује %2!d! фајла и %3!d! фолдера, %4!d! укупно ставки"
+
 #~ msgid "&All"
 #~ msgstr "&Све"
 
@@ -13230,14 +13251,8 @@ msgstr "{БагТрек}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "&Испразни корпу за рециклирање"
 
-#~ msgid "&Goto line"
-#~ msgstr "&Иди на линију"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Занемари и настави"
-
-#~ msgid "&Inline diff"
-#~ msgstr "&Инлајн диф"
 
 #~ msgid "&Line number"
 #~ msgstr "&Бројеви линија"
@@ -13270,6 +13285,15 @@ msgstr "{БагТрек}"
 #~ msgid "Approved hook scripts"
 #~ msgstr "Потврђене закачиве скрипте"
 
+#~ msgid "Aqua Style"
+#~ msgstr "Водени стил"
+
+#~ msgid "Black Style"
+#~ msgstr "Црни стил"
+
+#~ msgid "Blue Style"
+#~ msgstr "Плави стил"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Do not run the script"
@@ -13284,8 +13308,28 @@ msgstr "{БагТрек}"
 #~ "Одустни\n"
 #~ "Локалне измене су сачуване"
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Промени стил апликације\n"
+#~ "Промени стил"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Промени стил апликације"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "Брише свих %ld потврђених клијентских скрипти"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Кликни да видиш команде за померанје блока текста\n"
+#~ "Користи текст блокове"
+
+#~ msgid "Collapse"
+#~ msgstr "Колапс"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13305,6 +13349,9 @@ msgstr "{БагТрек}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Конфликт (можда)"
 
+#~ msgid "Create patch file"
+#~ msgstr "Креира фајл закрпе"
+
 #~ msgid "Dialog"
 #~ msgstr "Фијалог"
 
@@ -13321,6 +13368,13 @@ msgstr "{БагТрек}"
 #~ msgstr "Желите ли да учитате измењене фајлове?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Екстернал \"%1!s!\"\r\n"
+#~ "Ревизија %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Добавља садржај фолдера у беграунду тако да је претраживање брже"
 
@@ -13329,6 +13383,26 @@ msgstr "{БагТрек}"
 
 #~ msgid "Go To Line"
 #~ msgstr "Иди на линију"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Иди на следећу разлику у линији\n"
+#~ "Следећа разлика у линији"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Иди на претходну разлику у линији\n"
+#~ "Претходна разлика у линији"
+
+#~ msgid "Goto Line"
+#~ msgstr "Иди на линију"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Сакри/Прикажи листу фајлова закрпа"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13340,8 +13414,20 @@ msgstr "{БагТрек}"
 #~ "Занемари измене\n"
 #~ "Занемари спољашње измене."
 
+#~ msgid "Inline diff"
+#~ msgstr "Диф у линији"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Диф у линији према речима"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Чувај л&исте измена"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Линија померено од линије %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Линија померено ка линији %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13360,8 +13446,46 @@ msgstr "{БагТрек}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Локалне &Закачаљке"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Управи се у специфичну линију у прегледу\n"
+#~ "Иди на линију"
+
+#~ msgid "Next conflict"
+#~ msgstr "Следећи конфликт"
+
+#~ msgid "Next difference"
+#~ msgstr "Следећа разлика"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Следећа разлика у линији"
+
+#~ msgid "Office 2003"
+#~ msgstr "Офице 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Офице 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Офице 2007 боје"
+
+#~ msgid "Office XP"
+#~ msgstr "Офице ХП"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Отвори фајлове за диф или да се примени закрпа\n"
+#~ "Отвори фајлове"
+
 #~ msgid "Operative"
 #~ msgstr "Оперативан"
+
+#~ msgid "Paste"
+#~ msgstr "Налепи"
 
 #~ msgid "Peg"
 #~ msgstr "Клин"
@@ -13369,11 +13493,26 @@ msgstr "{БагТрек}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Прибави фолдере за брже претраживање"
 
+#~ msgid "Previous conflict"
+#~ msgstr "Претходни конфликт"
+
+#~ msgid "Previous difference"
+#~ msgstr "Претходне разлике"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Претходне разлике у линији"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Корпа рециклирања"
 
 #~ msgid "Repository browser"
 #~ msgstr "Претраживач спремишта"
+
+#~ msgid "Restore"
+#~ msgstr "Вратити"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Вратити после урезивања"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13385,6 +13524,12 @@ msgstr "{БагТрек}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Ревизиони опсег за стапање"
 
+#~ msgid "Save"
+#~ msgstr "Сачувај"
+
+#~ msgid "Save as"
+#~ msgstr "Сачувај као"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13392,11 +13537,24 @@ msgstr "{БагТрек}"
 #~ "Прикажи Инлајн-диф\n"
 #~ "Инлајн диф"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "Прикажи белине"
+
 #~ msgid "Show externals"
 #~ msgstr "Прикажи екстернале"
 
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Прикажи специјалне карактере за белине и нове линије\n"
+#~ "Прикажи белине"
+
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "Приказује фолдере и фајлове укључене са особином свн:екстернали"
+
+#~ msgid "Silver Style"
+#~ msgstr "Сребрни стил"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13411,6 +13569,15 @@ msgstr "{БагТрек}"
 #~ msgstr ""
 #~ "Неки фајл(ови) је измењен ван  Т-Мерге.\n"
 #~ "Да ли желите да поново учитате и изгубите измене?"
+
+#~ msgid "Style"
+#~ msgstr "Стил"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Пребаци између појединачног и двоструког панел прегледа"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Пребаци ллеви и десни преглед"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Бројеви линија морају бити између %d и %d"
@@ -13500,8 +13667,82 @@ msgstr "{БагТрек}"
 #~ "што је могући разлог успоравања.\n"
 #~ "Да се ово фиксира, потребно је сада испразнити корпу за рециклирање."
 
+#~ msgid "Undo"
+#~ msgstr "Поништи"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Поништи последњу модификацију\n"
+#~ "Поништи"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Користи 'мој' текст бокс"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Користи 'мој' текст бокс затим  'њихов '  "
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Користи 'њихов' текст бокс"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Користи 'њихов' текст бокс затим  'мој '  "
+
+#~ msgid "Use Blocks"
+#~ msgstr "Користи блокове"
+
+#~ msgid "Use left block"
+#~ msgstr "Користи леви блок"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Провера неисправне вредности особине!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Вижуал студио 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Вижуал студио 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Виндоус 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Виндоус 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Виндоус ХП"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Зави дугачке линије"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Зави дугачке линије на десној ивици прегледа\n"
+#~ "Зави дугачке линије"
+
 #~ msgid "all &revisions"
 #~ msgstr "све &ревизије"
 
 #~ msgid "specific r&ange"
 #~ msgstr "специфич&ан опсег "
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
+
+#~ msgid "&Goto line"
+#~ msgstr "&Иди на линију"
+
+#~ msgid "&Inline diff"
+#~ msgstr "&Инлајн диф"

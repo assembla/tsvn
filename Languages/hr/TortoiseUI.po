@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -10,15 +10,15 @@
 # 
 # Authors:
 # Translators:
-#   <ivan@vucica.net>, 2011.
+#   <ivan@vucica.net>, 2011, 2012.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-21 07:44+0000\n"
-"Last-Translator: Lübbe <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2012-01-23 19:48+0000\n"
+"Last-Translator: ivucica <ivan@vucica.net>\n"
 "Language-Team: Croatian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13258,17 +13258,524 @@ msgstr "da"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revizija %2!s!, Autor %3!s!, Datum %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revizija %2!s!, Autor %3!s!, Veličina %4!s!, Datum %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Prikazujem %2!d! datoteka i %3!d! mapa, ukupno %4!d! stavki"
+
+#~ msgid "&All"
+#~ msgstr "&Sve"
+
+#~ msgid "&Do not ask again"
+#~ msgstr "&Ne pitaj više"
+
+#~ msgid "&Empty the recycle bin now"
+#~ msgstr "&Isprazni koš za smeće sada"
+
+#~ msgid "&Ignore and proceed"
+#~ msgstr "&Ignoriraj i nastavi"
+
+#~ msgid "&Line number"
+#~ msgstr "Broj &linije"
+
+#~ msgid "&Line number (%d - %d)"
+#~ msgstr "Broj &linije (%d - %d)"
+
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "&Najveća duljina retka za inline diffove"
+
+#~ msgid "&None"
+#~ msgstr "&Ništa"
+
 #~ msgid "&Operative:"
 #~ msgstr "&Operativna:"
 
 #~ msgid "&Peg:"
 #~ msgstr "Odabrana (&peg):"
 
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "Odobri ili odbij hook skriptu za klijenta"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Prihvati\n"
+#~ "Pokreni hook skriptu"
+
+#~ msgid "Approved hook scripts"
+#~ msgstr "Odobrene hook skripte"
+
+#~ msgid "Aqua Style"
+#~ msgstr "Aqua stil"
+
+#~ msgid "Black Style"
+#~ msgstr "Crni stil"
+
+#~ msgid "Blue Style"
+#~ msgstr "Plavi stil"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Poništi\n"
+#~ "Ne pokreći skriptu"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Local modifications are kept."
+#~ msgstr ""
+#~ "Poništi\n"
+#~ "Lokalne promjene će se zadržati."
+
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Promijeni stil aplikacije\n"
+#~ "Promijeni stil"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Mijenja stil aplikacije"
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "Čisti svih %ld odobrenih hook skripti za klijenta"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Kliknite kako biste vidjeli naredbe za pomicanje blokova teksta\n"
+#~ "Koristi blokove teksta"
+
+#~ msgid "Collapse"
+#~ msgstr "Zatvori"
+
+#~ msgid ""
+#~ "Command Line To Execute:\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Naredbeni redak za izvršavanje:\n"
+#~ "Da biste odredili stazu unutar radne kopije, odredite url u repozitoriju "
+#~ "s korijenskim urlom repozitorija navedenim s %REPOROOT%"
+
 #~ msgid "Compare two files"
 #~ msgstr "Usporedi dvije datoteke"
+
+#~ msgid "Configure &TortoiseSVN to never use the recycle bin"
+#~ msgstr "Konfiguriraj &TortoiseSVN da nikada ne koristi koš za smeće"
+
+#~ msgid "Conflicted (maybe)"
+#~ msgstr "U konfliktu (možda)"
+
+#~ msgid "Create patch file"
+#~ msgstr "Stvori datoteku sa zakrpom"
+
+#~ msgid "Dialog"
+#~ msgstr "Dijalog"
+
+#~ msgid "Diff Viewer"
+#~ msgstr "Preglednik razlika"
+
+#~ msgid "Diff Viewer::Merge Tool"
+#~ msgstr "Preglednik razlika::Alat za stapanje"
+
+#~ msgid "Do not ask again for this script"
+#~ msgstr "Ne pitaj više za ovu skriptu"
+
+#~ msgid "Do you want to load the changed files?"
+#~ msgstr "Želite li učitati promijenjene datoteke?"
+
+#~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "External \"%1!s!\"\n"
+#~ "Revizija %2!s!"
+
+#~ msgid ""
+#~ "Fetches the contents of folders in the background so browsing is faster"
+#~ msgstr "Dohvaća sadržaj mapa u pozadini kako bi pregledavanje bilo brže"
+
+#~ msgid "General::Dialogs 3"
+#~ msgstr "Općenito::Dijalozi 3"
+
+#~ msgid "Go To Line"
+#~ msgstr "Skoči na redak"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Idi na sljedeću inline razliku\n"
+#~ "Sljedeća inline razlika"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Idi na prethodnu inline razliku\n"
+#~ "Prethodna inline razlika"
+
+#~ msgid "Goto Line"
+#~ msgstr "Idi na redak"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Sakrij/prikaži popis datoteka sa zakrpama"
+
+#~ msgid "ID:32893:V C +G"
+#~ msgstr "ID:32893:V C +G"
+
+#~ msgid ""
+#~ "Ignore changes\n"
+#~ "Ignore the outside changes."
+#~ msgstr ""
+#~ "Ignoriraj promjene\n"
+#~ "Ignoriraj vanjske promjene"
+
+#~ msgid "Inline diff"
+#~ msgstr "Inline diff"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Inline diff po riječima"
+
+#~ msgid "Keep c&hangelists"
+#~ msgstr "Sačuvaj liste &promjena"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Redak pomaknut s retka %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Redak pomaknut na redak %ld"
+
+#~ msgid ""
+#~ "Load changes\n"
+#~ "Changes made in TortoiseMerge are lost and replaced with the new content."
+#~ msgstr ""
+#~ "Učitaj promjene\n"
+#~ "Promjene napravljene u TortoiseMerge će se izgubiti i zamijeniti novim "
+#~ "sadržajem."
+
+#~ msgid ""
+#~ "Load changes\n"
+#~ "The views are updated with the new content."
+#~ msgstr ""
+#~ "Učitaj promjene\n"
+#~ "Pogledi će se osvježiti novim sadržajem."
+
+#~ msgid "Local &Hooks"
+#~ msgstr "Lokalni &hookovi"
+
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Preseli se na određeni redak u pogledu\n"
+#~ "Idi na redak"
+
+#~ msgid "Next conflict"
+#~ msgstr "Sljedeći konflikt"
+
+#~ msgid "Next difference"
+#~ msgstr "Sljedeća razlika"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Sljedeća inline razlika"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Office 2007 boje"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Otvori datoteke za diff ili kako bi primijenili zakrpu\n"
+#~ "Otvori datoteke"
 
 #~ msgid "Operative"
 #~ msgstr "Operativna"
 
+#~ msgid "Paste"
+#~ msgstr "Zalijepi"
+
 #~ msgid "Peg"
 #~ msgstr "Odabrana (peg)"
+
+#~ msgid "Pre-fetch folders for faster browsing"
+#~ msgstr "Unaprijed dohvati mape za brže pregledavanje"
+
+#~ msgid "Previous conflict"
+#~ msgstr "Prethodni konflikt"
+
+#~ msgid "Previous difference"
+#~ msgstr "Prethodna razlika"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Prethodna inline razlika"
+
+#~ msgid "Recycle bin"
+#~ msgstr "Koš za smeće"
+
+#~ msgid "Repository browser"
+#~ msgstr "Pretraživač repozitorija"
+
+#~ msgid "Restore"
+#~ msgstr "Vrati"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Vrati nakon commita"
+
+#~ msgid ""
+#~ "Revert\n"
+#~ "All local modifications will be lost."
+#~ msgstr ""
+#~ "Vrati\n"
+#~ "Sve lokalne promjene će biti izgubljene"
+
+#~ msgid "Revision range to merge"
+#~ msgstr "Raspon revizija za stapanje"
+
+#~ msgid "Save"
+#~ msgstr "Spremi"
+
+#~ msgid "Save as"
+#~ msgstr "Spremi kao"
+
+#~ msgid ""
+#~ "Show Inline-Diff\n"
+#~ "Inline diff"
+#~ msgstr ""
+#~ "Prikaži inline diff\n"
+#~ "Inline diff"
+
+#~ msgid "Show Whitespaces"
+#~ msgstr "Prikaži praznine"
+
+#~ msgid "Show externals"
+#~ msgstr "Prikaži externale"
+
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Prikaži posebne znakove za praznine i nove redove\n"
+#~ "Prikaži praznine"
+
+#~ msgid "Shows folders and files included with the svn:externals property"
+#~ msgstr ""
+#~ "Prikazuje mape i datoteke uključene koristeći svojstvo svn:externals"
+
+#~ msgid "Silver Style"
+#~ msgstr "Srebrni stil"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Do you want to load the changes?"
+#~ msgstr ""
+#~ "Neke datoteke su izmijenjene izvan T-Merge.\n"
+#~ "Želite li učitati promjene?"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Would you like to reload and lose your changes?"
+#~ msgstr ""
+#~ "Neke datoteke su izmijenjene izvan T-Merge.\n"
+#~ "Želite li ponovo učitati datoteke i izgubiti svoje promjene?"
+
+#~ msgid "Style"
+#~ msgstr "Stil"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Prebaci između jednopoglednog i dvopoglednog prikaza"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Zamijeni lijevi i desni pogled"
+
+#~ msgid "The line number must be in between %d and %d"
+#~ msgstr "Broj linija mora biti između %d i %d"
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Ovu grešku je generirala korisnička hook skripta na Subversion "
+#~ "poslužitelju.\n"
+#~ "Molimo kontaktirajte administratora poslužitelja za pomoć u rješavanju "
+#~ "ovog problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-commit hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Ovu grešku je generirala korisnička post-commit hook skripta na "
+#~ "Subversion poslužitelju.\n"
+#~ "Molimo kontaktirajte administratora poslužitelja za pomoć u rješavanju "
+#~ "ovog problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-lock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Ovu grešku je generirala korisnička post-lock hook skripta na Subversion "
+#~ "poslužitelju.\n"
+#~ "Molimo kontaktirajte administratora poslužitelja za pomoć u rješavanju "
+#~ "ovog problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-unlock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Ovu grešku je generirala korisnička post-unlock hook skripta na "
+#~ "Subversion poslužitelju.\n"
+#~ "Molimo kontaktirajte administratora poslužitelja za pomoć u rješavanju "
+#~ "ovog problema."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ova radna kopija ima hook skriptu za klijenta. Želite li pokrenuti ovu "
+#~ "skriptu?\n"
+#~ "Naredbeni redak za pokretanje je:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "neon %s\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "neon %s\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
+
+#~ msgid ""
+#~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+#~ "recycle bin. The recycle bin currently contains %2!ld! items, which most "
+#~ "likely is the reason for this slowdown.\n"
+#~ "To fix this, you should empty the recycle bin now."
+#~ msgstr ""
+#~ "TortoiseSVN je otkrio ozbiljno usporenje pri pomicanju %1!ld! stavki u "
+#~ "koš za smeće. Koš za smeće trenutno sadrži %2!ld! stavki, što je "
+#~ "najvjerojatnije razlog za ovo usporenje.\n"
+#~ "Kako biste ovo popravili, trebali biste sada isprazniti koš za smeće."
+
+#~ msgid "Undo"
+#~ msgstr "Vrati"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Vrati zadnje promjene\n"
+#~ "Vrati"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Koristi 'moj' blok teksta"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Koristi 'moj' blok teksta, a tada 'njihov'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Koristi 'njihov' blok teksta"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Koristi 'njihov' blok teksta, a tada 'moj'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Koristi blokove"
+
+#~ msgid "Use left block"
+#~ msgstr "Koristi lijevi blok"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Provjera vrijednosti svojstva nije uspjela!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Prelomi dugačke retke"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Prelomi dugačke retke na desnom rubu pogleda\n"
+#~ "Prelomi dugačke retke"
+
+#~ msgid "all &revisions"
+#~ msgstr "sve &revizije"
+
+#~ msgid "specific r&ange"
+#~ msgstr "specifični r&aspon"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"

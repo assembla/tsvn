@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -13,14 +13,14 @@
 # Arith Hsu <arithmandar@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # Nick Vrvilo <nick@vrvilo.com>, 2011.
-#   <zcecil@csie.org>, 2011.
+#   <zcecil@csie.org>, 2011, 2012.
 # zcecil <zcecil@csie.org>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-22 14:58+0000\n"
+"PO-Revision-Date: 2012-01-29 10:58+0000\n"
 "Last-Translator: zcecil <zcecil@csie.org>\n"
 "Language-Team: Chinese (Taiwan) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -12980,6 +12980,27 @@ msgstr "是"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "版本 %2!s!, 作者 %3!s!, 日期 %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "版本 %2!s!, 作者 %3!s!, 大小 %4!s!, 日期 %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "正在顯示 %2!d! 個檔案以及 %3!d! 個目錄, 總共 %4!d! 個項目"
+
 #~ msgid "&All"
 #~ msgstr "選擇全部(&A)"
 
@@ -12989,14 +13010,8 @@ msgstr "{BugTraq}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "清空資源回收筒(&E)"
 
-#~ msgid "&Goto line"
-#~ msgstr "跳至行號(&G)"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "忽略並繼續(&I)"
-
-#~ msgid "&Inline diff"
-#~ msgstr "行內差異(&I)"
 
 #~ msgid "&Line number"
 #~ msgstr "行號(&L)"
@@ -13029,6 +13044,15 @@ msgstr "{BugTraq}"
 #~ msgid "Approved hook scripts"
 #~ msgstr "已允許的掛勾指令檔"
 
+#~ msgid "Aqua Style"
+#~ msgstr "Aqua 樣式"
+
+#~ msgid "Black Style"
+#~ msgstr "黑色樣式"
+
+#~ msgid "Blue Style"
+#~ msgstr "藍色樣式"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Do not run the script"
@@ -13043,8 +13067,28 @@ msgstr "{BugTraq}"
 #~ "取消\n"
 #~ "保留本地端所做的修改。"
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "變更應用程式的顯示樣式\n"
+#~ "變更樣式"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "變更應用程式的顯示樣式"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "清除所有已允許的用戶端掛勾指令檔(共 %ld 個)"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "點選可顯示移動文字方塊的指令\n"
+#~ "使用文字方塊"
+
+#~ msgid "Collapse"
+#~ msgstr "展開"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13063,6 +13107,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "衝突 (推測)"
 
+#~ msgid "Create patch file"
+#~ msgstr "產生補綴檔"
+
 #~ msgid "Dialog"
 #~ msgstr "視窗"
 
@@ -13079,6 +13126,13 @@ msgstr "{BugTraq}"
 #~ msgstr "要載入變更過的檔案嗎?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "外部 \"%1!s!\"\n"
+#~ "版本 %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "在背景載入目錄內容以加速瀏覽"
 
@@ -13087,6 +13141,26 @@ msgstr "{BugTraq}"
 
 #~ msgid "Go To Line"
 #~ msgstr "跳至行號"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "前往下一個行內差異\n"
+#~ "下一個行內差異"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "前往上一個行內差異\n"
+#~ "上一個行內差異"
+
+#~ msgid "Goto Line"
+#~ msgstr "前往行號"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "隱藏/顯示補綴檔列表"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13098,8 +13172,20 @@ msgstr "{BugTraq}"
 #~ "忽略變更\n"
 #~ "忽略外部的變更"
 
+#~ msgid "Inline diff"
+#~ msgstr "行內差異"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "行內逐字差異"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "保留變更列表(&H)"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "本行移動自第 %ld 行"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "本行移至第 %ld 行"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13118,8 +13204,46 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "本地掛勾指令(&H)"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "移動至特定的行數\n"
+#~ "前往行號"
+
+#~ msgid "Next conflict"
+#~ msgstr "下一個衝突"
+
+#~ msgid "Next difference"
+#~ msgstr "下一個差異"
+
+#~ msgid "Next inline difference"
+#~ msgstr "下一個行內差異"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Office 2007 色彩"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "開啟檔案並比對差異或套用補綴\n"
+#~ "開啟檔案"
+
 #~ msgid "Operative"
 #~ msgstr "實施修訂"
+
+#~ msgid "Paste"
+#~ msgstr "貼上"
 
 #~ msgid "Peg"
 #~ msgstr "Peg"
@@ -13127,11 +13251,26 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "預先載入目錄以加速瀏覽"
 
+#~ msgid "Previous conflict"
+#~ msgstr "上一個衝突"
+
+#~ msgid "Previous difference"
+#~ msgstr "上一個差異"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "上一個行內差異"
+
 #~ msgid "Recycle bin"
 #~ msgstr "資源回收筒"
 
 #~ msgid "Repository browser"
 #~ msgstr "檔案庫瀏覽器"
+
+#~ msgid "Restore"
+#~ msgstr "還原"
+
+#~ msgid "Restore after commit"
+#~ msgstr "送交後還原"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13143,6 +13282,12 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "要合併的版本範圍"
 
+#~ msgid "Save"
+#~ msgstr "儲存"
+
+#~ msgid "Save as"
+#~ msgstr "另存新檔"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13150,11 +13295,24 @@ msgstr "{BugTraq}"
 #~ "檢示單行差異\n"
 #~ "單行差異"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "顯示空白字元"
+
 #~ msgid "Show externals"
 #~ msgstr "顯示外部連結"
 
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "以特殊字元顯示空白和換行\n"
+#~ "顯示空白字元"
+
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "顯示svn:externals屬性中的外部目錄與檔案"
+
+#~ msgid "Silver Style"
+#~ msgstr "銀色樣式"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13169,6 +13327,15 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "有些檔案在 T-Merge 以外的地方有變更.\n"
 #~ "要載入並放棄你的變更嗎?"
+
+#~ msgid "Style"
+#~ msgstr "樣式"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "切換單一或雙重檢視"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "對調左右檢視"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "行號必須在 %d 到 %d 之間"
@@ -13248,8 +13415,82 @@ msgstr "{BugTraq}"
 #~ "有 %2!ld! 個項目, 這可能是產生延遲的原因.\n"
 #~ "建議您立刻清空資源回收筒修正此問題."
 
+#~ msgid "Undo"
+#~ msgstr "復原"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "復原最近一次修改\n"
+#~ "復原"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "使用本地端文字區塊"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "先套用本地再套用遠端的文字區塊"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "使用遠端的文字區塊"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "先套用遠端再套用本地的文字區塊"
+
+#~ msgid "Use Blocks"
+#~ msgstr "使用文字區塊"
+
+#~ msgid "Use left block"
+#~ msgstr " 使用左方區塊"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "屬性檢查失敗!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "自動折行"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "在畫面右端自動折行\n"
+#~ "自動折行"
+
 #~ msgid "all &revisions"
 #~ msgstr "所有版本 (&R)"
 
 #~ msgid "specific r&ange"
 #~ msgstr "指定範圍 (&A)"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
+
+#~ msgid "&Goto line"
+#~ msgstr "跳至行號(&G)"
+
+#~ msgid "&Inline diff"
+#~ msgstr "行內差異(&I)"

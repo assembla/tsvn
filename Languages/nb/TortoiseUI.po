@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -11,6 +11,7 @@
 # Authors:
 # Translators:
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
+# Lübbe  <luebbe.tortoisesvn@googlemail.com>, 2012.
 # okloster <okl@sintef.no>, 2011.
 #   <okl@sintef.no>, 2011, 2012.
 # Ronny N. Olsen <rnolsen@hotmail.com>, 2011.
@@ -19,7 +20,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-01-09 10:36+0000\n"
+"PO-Revision-Date: 2012-01-23 13:31+0000\n"
 "Last-Translator: okloster <okl@sintef.no>\n"
 "Language-Team: Norwegian Bokmål <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13213,6 +13214,27 @@ msgstr "ja"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revisjon %2!s!, Forfatter %3!s!, Dato %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revisjon %2!s!, Forfatter %3!s!, Størrelse %4!s!, Dato %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Viser %2!d! filer og %3!d! mapper, %4!d! elementer totalt"
+
 #~ msgid "&All"
 #~ msgstr "&Alt"
 
@@ -13222,14 +13244,8 @@ msgstr "{BugTraq}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "&Tøm papirkurven nå"
 
-#~ msgid "&Goto line"
-#~ msgstr "&Gå til linje"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Overse og fortsett"
-
-#~ msgid "&Inline diff"
-#~ msgstr "&Linje-forskjeller"
 
 #~ msgid "&Line number"
 #~ msgstr "&Linjenummer"
@@ -13262,6 +13278,15 @@ msgstr "{BugTraq}"
 #~ msgid "Approved hook scripts"
 #~ msgstr "Godkjente påhakingsskript"
 
+#~ msgid "Aqua Style"
+#~ msgstr "Aqua-stil"
+
+#~ msgid "Black Style"
+#~ msgstr "Sort stil"
+
+#~ msgid "Blue Style"
+#~ msgstr "Blå stil"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Do not run the script"
@@ -13276,8 +13301,28 @@ msgstr "{BugTraq}"
 #~ "Avbryt\n"
 #~ "Lokale endringer beholdes."
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Endre applikasjons-stilen\n"
+#~ "Endre stil"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Endrer applikasjons-stilen"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "Sletter alle %ld godkjente klient-påhakingsskript"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Klikk for å se kommandoer for å flytte tekstblokker\n"
+#~ "Bruk tekstblokker"
+
+#~ msgid "Collapse"
+#~ msgstr "Kollaps"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13292,10 +13337,13 @@ msgstr "{BugTraq}"
 #~ msgstr "Sammenlign to filer"
 
 #~ msgid "Configure &TortoiseSVN to never use the recycle bin"
-#~ msgstr "Sett opp TortoiseSVN til aldri å bruke papirkurven"
+#~ msgstr "Sett opp &TortoiseSVN til aldri å bruke papirkurven"
 
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "I konflikt (kanskje)"
+
+#~ msgid "Create patch file"
+#~ msgstr "Lag korreksjonsfil"
 
 #~ msgid "Dialog"
 #~ msgstr "Dialog"
@@ -13313,6 +13361,13 @@ msgstr "{BugTraq}"
 #~ msgstr "Vil du laste de endrede filene?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Ekstern \"%1!s!\"\n"
+#~ "Revisjon %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Henter innholdet i mapper i bakgrunnen slik at utforsking går raskere"
@@ -13322,6 +13377,26 @@ msgstr "{BugTraq}"
 
 #~ msgid "Go To Line"
 #~ msgstr "Gå til linje"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Gå til neste linjeforskjell\n"
+#~ "Neste linjeforskjell"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Gå til forrige linjeforskjell\n"
+#~ "Forrige linjeforskjell"
+
+#~ msgid "Goto Line"
+#~ msgstr "Gå til Linje"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Skjuler eller viser listen over korreksjonsfiler"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13333,8 +13408,20 @@ msgstr "{BugTraq}"
 #~ "Ignore changes\n"
 #~ "Ignorer the utvendige endringene."
 
+#~ msgid "Inline diff"
+#~ msgstr "Linjeforskjeller"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Linjeforskjeller per ord"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Behold &endringslister"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Linje flyttet fra linje %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Linje flyttet til linje %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13354,8 +13441,46 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Lokale &Påhakinger"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Naviger til en bestemt linje i visningen\n"
+#~ "Gå til Linje"
+
+#~ msgid "Next conflict"
+#~ msgstr "Neste konflikt"
+
+#~ msgid "Next difference"
+#~ msgstr "Neste forskjell"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Neste linjeforskjell"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Office 2007 farger"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Åpne filer for å sammenligne eller anvende en korreksjon\n"
+#~ "Åpne filer"
+
 #~ msgid "Operative"
 #~ msgstr "Operativ"
+
+#~ msgid "Paste"
+#~ msgstr "Lim inn"
 
 #~ msgid "Peg"
 #~ msgstr "Spiker"
@@ -13363,11 +13488,26 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "For-hent mapper for raskere utforsking"
 
+#~ msgid "Previous conflict"
+#~ msgstr "Forrige konflikt"
+
+#~ msgid "Previous difference"
+#~ msgstr "Forrige forskjell"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Forrige linjeforskjell"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Papirkurv"
 
 #~ msgid "Repository browser"
 #~ msgstr "Depotutforsker"
+
+#~ msgid "Restore"
+#~ msgstr "Gjenopprett"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Gjenopprett etter innsending"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13379,6 +13519,12 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Revisjonsintervall å flette"
 
+#~ msgid "Save"
+#~ msgstr "Lagre"
+
+#~ msgid "Save as"
+#~ msgstr "Lagre som"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13386,11 +13532,24 @@ msgstr "{BugTraq}"
 #~ "Vis linjeforskjeller\n"
 #~ "Linjeforskjeller"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "Vis Blanktegn"
+
 #~ msgid "Show externals"
 #~ msgstr "Vis eksterne"
 
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Vis spesielle symboler for blanktegn og linjeskift\n"
+#~ "Vis Blanktegn"
+
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "Viser mapper og filer med egenskapen svn:externals"
+
+#~ msgid "Silver Style"
+#~ msgstr "Sølv-stil"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13405,6 +13564,15 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Noen fil(er) har blitt endret utenfor T-Merge.\n"
 #~ "Vil du laste på nytt og miste dine endringer?"
+
+#~ msgid "Style"
+#~ msgstr "Stil"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Bytt mellom enkel og dobbel panelvisning"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Bytt venstre og høyre visning"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Linjenummeret må være mellom %d og %d"
@@ -13489,12 +13657,86 @@ msgstr "{BugTraq}"
 #~ "To fix this, you should empty the recycle bin now."
 #~ msgstr ""
 #~ "TortoiseSVN registrerte en alvorlig forsinkelse med å flytte %1!ld! "
-#~ "elementer til papirkurven. Papirkurven inneholder nå %2!ls! elementer, "
+#~ "elementer til papirkurven. Papirkurven inneholder nå %2!ld! elementer, "
 #~ "som mest sannsynlig er årsaken til forsinkelsen.\n"
 #~ "For å fikse dette bør du tømme papirkurven nå."
+
+#~ msgid "Undo"
+#~ msgstr "Angre"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Angre siste endring\n"
+#~ "Angre"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Bruk 'min' tekstblokk"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Bruk 'min' tekstblokk, deretter 'deres'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Bruk 'deres' tekstblokk"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Bruk 'deres' tekstblokk, deretter 'min'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Bruk Blokker"
+
+#~ msgid "Use left block"
+#~ msgstr "Bruk venstre blokk"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Validering av egenskapen feilet!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Del lange linjer"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Del lange linjer i høyre kant av visningen\n"
+#~ "Del lange linjer"
 
 #~ msgid "all &revisions"
 #~ msgstr "alle &revisjoner"
 
 #~ msgid "specific r&ange"
 #~ msgstr "angitt &intervall"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
+
+#~ msgid "&Goto line"
+#~ msgstr "&Gå til linje"
+
+#~ msgid "&Inline diff"
+#~ msgstr "&Linje-forskjeller"

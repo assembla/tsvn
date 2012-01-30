@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-01-11 22:56+0000\n"
+"PO-Revision-Date: 2012-01-23 17:08+0000\n"
 "Last-Translator: Kari Granö <kari.grano@gmail.com>\n"
 "Language-Team: Finnish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13237,6 +13237,27 @@ msgstr "kyllä"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Versio %2!s!, Tekijä %3!s!, Päiväys %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Versio %2!s!, Tekijä %3!s!, Koko %4!s!, Päiväys %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Näytetään %2!s! tiedostoa ja %3!s! kansiota (yhteensä %4!s!)"
+
 #~ msgid "&All"
 #~ msgstr "&Kaikki"
 
@@ -13246,14 +13267,8 @@ msgstr "{BugTraq}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "&Tyhjennä roskakori"
 
-#~ msgid "&Goto line"
-#~ msgstr "&Siirry riville"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Ohita ja jatka"
-
-#~ msgid "&Inline diff"
-#~ msgstr "&Rivin sisäiset erot"
 
 #~ msgid "&Line number"
 #~ msgstr "&Rivinumero"
@@ -13286,6 +13301,15 @@ msgstr "{BugTraq}"
 #~ msgid "Approved hook scripts"
 #~ msgstr "Hyväksytyt toimintokomennot"
 
+#~ msgid "Aqua Style"
+#~ msgstr "Vesityyli"
+
+#~ msgid "Black Style"
+#~ msgstr "Musta tyyli"
+
+#~ msgid "Blue Style"
+#~ msgstr "Sininen tyyli"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Do not run the script"
@@ -13300,8 +13324,28 @@ msgstr "{BugTraq}"
 #~ "Peruuta\n"
 #~ "Paikalliset muutokset säilytetään"
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Vaihda sovelluksen ulkonäköä\n"
+#~ "Vaihda ulkonäköä"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Vaihtaa sovelluksen ulkonäköä"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "Tyhjentää kaikki %ld hyväksyttyä asiakaspään toimintokomentoa"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Napsauta nähdäksesi komennot tekstilohkon siirtämiseksi\n"
+#~ "Käytä testilohkoja"
+
+#~ msgid "Collapse"
+#~ msgstr "Sulje"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13321,6 +13365,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Ristiriitainen (ehkä)"
 
+#~ msgid "Create patch file"
+#~ msgstr "Luo paikkatiedosto"
+
 #~ msgid "Dialog"
 #~ msgstr "Ikkuna"
 
@@ -13337,6 +13384,13 @@ msgstr "{BugTraq}"
 #~ msgstr "Haluatko noutaa muuttuneet tiedostot?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Ulkoinen \"%1!s!\"\r\n"
+#~ "Versio %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Noutaa kansioiden sisällöt taustalla käytön nopeuttamiseksi"
 
@@ -13345,6 +13399,26 @@ msgstr "{BugTraq}"
 
 #~ msgid "Go To Line"
 #~ msgstr "Siirry riville"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Siirry seuraavaan rivin sisäiseen eroon\n"
+#~ "Seuraava rivin sisäinen ero"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Siirry edelliseen rivin sisäiseen eroon\n"
+#~ "Edellinen rivin sisäinen ero"
+
+#~ msgid "Goto Line"
+#~ msgstr "Siirry riville"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Piilota/näytä paikkatiedostolista"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +S"
@@ -13356,8 +13430,20 @@ msgstr "{BugTraq}"
 #~ "Ohita muutokset\n"
 #~ "Ohita ulkopuoliset muutokset."
 
+#~ msgid "Inline diff"
+#~ msgstr "Vertailu rivin sisällä"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Rivin sisäiset erot sanoittain"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "&Säilytä muutoslistat"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Rivi siirretty riviltä %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Rivi siirretty riville %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13377,8 +13463,46 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Paikalliset &toimintokomennot"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Siirry annetulle riville näkymässä\n"
+#~ "Siirry riville"
+
+#~ msgid "Next conflict"
+#~ msgstr "Seuraava ristiriita"
+
+#~ msgid "Next difference"
+#~ msgstr "Seuraava ero"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Seuraava rivin sisäinen ero"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Office 2007 -värit"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Avaa tiedostoja vertailtavaksi tai paikattavaksi\n"
+#~ "Avaa tiedostoja"
+
 #~ msgid "Operative"
 #~ msgstr "Operatiivinen"
+
+#~ msgid "Paste"
+#~ msgstr "Liitä"
 
 #~ msgid "Peg"
 #~ msgstr "Ankkuri"
@@ -13386,11 +13510,26 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Nouda kansiot ennalta käytön nopeuttamiseksi"
 
+#~ msgid "Previous conflict"
+#~ msgstr "Edellinen ristiriita"
+
+#~ msgid "Previous difference"
+#~ msgstr "Edellinen ero"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Edellinen rivin sisäinen ero"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Roskakori"
 
 #~ msgid "Repository browser"
 #~ msgstr "Arkistoselain"
+
+#~ msgid "Restore"
+#~ msgstr "Palauta"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Palauta toimituksen jälkeen"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13402,6 +13541,12 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Yhdistettävä versioväli"
 
+#~ msgid "Save"
+#~ msgstr "Tallenna"
+
+#~ msgid "Save as"
+#~ msgstr "Tallenna nimellä"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13409,12 +13554,25 @@ msgstr "{BugTraq}"
 #~ "Näytä rivin sisäiset erot\n"
 #~ "Rivin sisäiset erot"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "Näytä tyhjämerkit"
+
 #~ msgid "Show externals"
 #~ msgstr "Näytä ulkoiset viitteet"
+
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Näyttää tyhjämerkit erikoismerkkien avulla\n"
+#~ "Näytä tyhjämerkit"
 
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr ""
 #~ "Näyttää svn:externals -ominaisuuden sisällyttämät tiedostot ja kansiot"
+
+#~ msgid "Silver Style"
+#~ msgstr "Hopeinen tyyli"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13429,6 +13587,15 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Tiedosto on muuttunut TortoiseMergen ulkopuolella\n"
 #~ "Haluatko noutaa muutokset ja menettää omat muutoksesi?"
+
+#~ msgid "Style"
+#~ msgstr "Tyyli"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Vaihda yhden ja kahden paneelin näkymien välillä"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Vaihda vasen ja oikea näkymä keskenään"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Rivinumeron on oltava välillä %d - %d"
@@ -13515,8 +13682,82 @@ msgstr "{BugTraq}"
 #~ "ja hidastuminen johtuu todennäköisesti tästä.\n"
 #~ "Korjataksesi tilanteen sinun kannattaa tyhjentää Roskakori heti."
 
+#~ msgid "Undo"
+#~ msgstr "Peru"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Peru viimeisin muutos\n"
+#~ "Peru"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Käytä 'minun' tekstilohkoani"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Käytä 'minun' tekstilohkoani ja sitten 'heidän'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Käytä 'heidän' tekstilohkoaan"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Käytä 'heidän' tekstilohkonsa ja sitten 'minun'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Käytä lohkoja"
+
+#~ msgid "Use left block"
+#~ msgstr "Käytä&vasenta lohkoa"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Ominaisuusarvon tarkistus epäonnistui!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Rivitä pitkät rivit"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Rivitä pitkät rivit näkymän oikeassa reunassa\n"
+#~ "Rivitä pitkät rivit"
+
 #~ msgid "all &revisions"
 #~ msgstr "kaikki &versiot"
 
 #~ msgid "specific r&ange"
 #~ msgstr "ertyinen &väli"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
+
+#~ msgid "&Goto line"
+#~ msgstr "&Siirry riville"
+
+#~ msgid "&Inline diff"
+#~ msgstr "&Rivin sisäiset erot"

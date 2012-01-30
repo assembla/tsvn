@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2011 the TortoiseSVN team
+# Copyright (C) 2004-2012 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -12,6 +12,7 @@
 # Translators:
 # Cecilia Saltori <csaltori@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
+# Lübbe  <luebbe.tortoisesvn@googlemail.com>, 2012.
 # Lübbe Onken <l.onken@rac.de>, 2011.
 #   <marco.cadenazzi@gmail.com>, 2011.
 # Roberto Casazza <roberto.casazza@alice.it>, 2011.
@@ -20,7 +21,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2011-12-26 10:09+0000\n"
+"PO-Revision-Date: 2012-01-27 13:19+0000\n"
 "Last-Translator: bovirus <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -519,7 +520,7 @@ msgstr "&Bugtrack (integrazione dell'issue tracker)"
 
 #. Resource IDs: (16913)
 msgid "&Button Appearance..."
-msgstr "&Stile dei pulsanti..."
+msgstr "&Tema dei pulsanti..."
 
 #. Resource IDs: (65535)
 msgid "&Button text:"
@@ -3105,7 +3106,7 @@ msgstr "Ragg&ruppa il ramo sorgente"
 
 #. Resource IDs: (275)
 msgid "Collapse &following tree"
-msgstr "Raggruppa i &seguenti rami"
+msgstr "Minimizza i &seguenti rami"
 
 #. Resource IDs: (2055)
 msgid ""
@@ -8957,7 +8958,7 @@ msgstr "URL SVN"
 
 #. Resource IDs: (17)
 msgid "SVN eol-style"
-msgstr "SVN stile EOL"
+msgstr "SVN tipo EOL"
 
 #. Resource IDs: (14)
 msgid "SVN mime-type"
@@ -12871,7 +12872,7 @@ msgid ""
 "One of 'native', 'LF', 'CR', 'CRLF'."
 msgstr ""
 "svn:eol-style\r\n"
-"Stile di fine di linea 'nativo', 'LF', 'CR', 'CRLF'."
+"Tipo fine di linea 'nativo', 'LF', 'CR', 'CRLF'."
 
 #. Resource IDs: (312)
 msgid "svn:executable"
@@ -13356,6 +13357,27 @@ msgstr "sì"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Revisione %2!s!, Autore %3!s!, Data %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Revisione %2!s!, Autore %3!s!, Dimensione %4!s!, Data %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\r\n"
+#~ "Totale %2!d! file e %3!d! cartelle, %4!d! elementi in totale"
+
 #~ msgid "&All"
 #~ msgstr "&Tutto"
 
@@ -13365,14 +13387,8 @@ msgstr "{BugTraq}"
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "Svuota ora il c&estino"
 
-#~ msgid "&Goto line"
-#~ msgstr "&Vai alla linea"
-
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Ingnora e procedi"
-
-#~ msgid "&Inline diff"
-#~ msgstr "Differenze &in linea"
 
 #~ msgid "&Line number"
 #~ msgstr "Numero &linea"
@@ -13405,6 +13421,15 @@ msgstr "{BugTraq}"
 #~ msgid "Approved hook scripts"
 #~ msgstr "Script aggancio approvati"
 
+#~ msgid "Aqua Style"
+#~ msgstr "Tema acqua"
+
+#~ msgid "Black Style"
+#~ msgstr "Tema nero"
+
+#~ msgid "Blue Style"
+#~ msgstr "Tema blu"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Do not run the script"
@@ -13419,8 +13444,28 @@ msgstr "{BugTraq}"
 #~ "Annulla\n"
 #~ "Le modifiche locali sono mantenute."
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Modifica il tema dell'applicazione\n"
+#~ "Modifica tema"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Modifica il tema dell'applicazione"
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "Azzera tutti gli %ld script aggancio lato client approvati"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Fai clic per vedere i comandi per spostare blocchi di testo\n"
+#~ "Usa blocchi di testo"
+
+#~ msgid "Collapse"
+#~ msgstr "Minimizza"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"
@@ -13441,6 +13486,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "In conflitto (può darsi)"
 
+#~ msgid "Create patch file"
+#~ msgstr "Crea file patch"
+
 #~ msgid "Dialog"
 #~ msgstr "Dialogo"
 
@@ -13457,6 +13505,13 @@ msgstr "{BugTraq}"
 #~ msgstr "Caricare i file modificati?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Esterna \"%1!s!\"\r\n"
+#~ "Revisione %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Carica il contenuto delle cartelle in sottofondo per una nvagiazione più "
@@ -13468,6 +13523,26 @@ msgstr "{BugTraq}"
 #~ msgid "Go To Line"
 #~ msgstr "Vai alla linea"
 
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Vai alla differenza inline successiva\n"
+#~ "Differenza inline successiva"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Vai alla precedenet differenza inline\n"
+#~ "Differenza inline precedente"
+
+#~ msgid "Goto Line"
+#~ msgstr "Vai alla linea"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "NAscondi/visualizza elenco file patch"
+
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
 
@@ -13478,8 +13553,20 @@ msgstr "{BugTraq}"
 #~ "Ignora modifiche\n"
 #~ "Ignora le modifiche esterne."
 
+#~ msgid "Inline diff"
+#~ msgstr "Differenze inline"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Differenze inline globale"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "&Mantieni elenco modifiche"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Linea spostata dalla liena %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Linea spostata alla linea %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13499,8 +13586,46 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "&Agganci locali"
 
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Vai a una specifica linea della vista\n"
+#~ "Vai alla linea"
+
+#~ msgid "Next conflict"
+#~ msgstr "Conflitto successivo"
+
+#~ msgid "Next difference"
+#~ msgstr "Differenza successiva"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Differenza inline successiva"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Colori Office 2007"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Apri file per differenze o applica una patch\n"
+#~ "Apri file"
+
 #~ msgid "Operative"
 #~ msgstr "Operativo"
+
+#~ msgid "Paste"
+#~ msgstr "Incolla"
 
 #~ msgid "Peg"
 #~ msgstr "Peg"
@@ -13508,11 +13633,26 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Caricamento anticipato cartelle per navigazione rapida"
 
+#~ msgid "Previous conflict"
+#~ msgstr "Conflitto precedente"
+
+#~ msgid "Previous difference"
+#~ msgstr "Differenza precedente"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Differenza inline precedente"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Cestino"
 
 #~ msgid "Repository browser"
 #~ msgstr "Navigatore repository"
+
+#~ msgid "Restore"
+#~ msgstr "Ripristina"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Ripristina dopo modifiche"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13524,6 +13664,12 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Intervallo revisione da unire"
 
+#~ msgid "Save"
+#~ msgstr "Salva"
+
+#~ msgid "Save as"
+#~ msgstr "Salva come"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13531,11 +13677,24 @@ msgstr "{BugTraq}"
 #~ "Visualizza differenze in linea\n"
 #~ "Differenze in linea"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "Visualizza spazi"
+
 #~ msgid "Show externals"
 #~ msgstr "Visualizza esterni"
 
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Visualizza caratteri speciali per spazi e ritorni a capo\n"
+#~ "Visualizza spazi"
+
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "Visualizza file e cartelle incluse con proprietà svn:esterne"
+
+#~ msgid "Silver Style"
+#~ msgstr "Tema argento"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13550,6 +13709,15 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Alcuni file sono stati modificati al di fuori di T-Merge.\n"
 #~ "Ricaricare il file e perdere le modifiche?"
+
+#~ msgid "Style"
+#~ msgstr "Tema"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Cambia tra vista pannello singolo e doppio"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Cambia vista sinistra e destra"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Il numero linea deve essere compreso tra %d e %d"
@@ -13639,8 +13807,82 @@ msgstr "{BugTraq}"
 #~ "elementi, che molto probabilmente sono la causa del rallentamento.\n"
 #~ "Per risolvere devi svuotare il Cestino."
 
+#~ msgid "Undo"
+#~ msgstr "Annulla modifiche"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Annulla l'ultima modifica\n"
+#~ "Annulla modifica"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Usa i 'miei' blocchi di testo"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Usa i 'miei' blocchi di testo al posto dei 'suoi'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Usa 'i suoi' blocchi di testo"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Usa i 'suoi' blocchi di testo al posto dei 'miei'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Usa blocchi"
+
+#~ msgid "Use left block"
+#~ msgstr "Usa blocchi a sinistra"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Valizaione fallita valore proprietà!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Wiindows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "A capo automatico"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "A capo bordo destr della vista per linee linghe\n"
+#~ "A capo automatico"
+
 #~ msgid "all &revisions"
 #~ msgstr "tutte le &revisioni"
 
 #~ msgid "specific r&ange"
-#~ msgstr "intervallo specifico"
+#~ msgstr "inter&vallo specifico"
+
+#~ msgid "user:bool"
+#~ msgstr "utente:booleana"
+
+#~ msgid "user:multiline"
+#~ msgstr "utente:multi linea"
+
+#~ msgid "user:singleline"
+#~ msgstr "utente:linea singola"
+
+#~ msgid "user:state"
+#~ msgstr "utente:stato"
+
+#~ msgid "&Goto line"
+#~ msgstr "&Vai alla linea"
+
+#~ msgid "&Inline diff"
+#~ msgstr "Differenze &in linea"
