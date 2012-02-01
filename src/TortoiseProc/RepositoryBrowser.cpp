@@ -2776,11 +2776,11 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
         }
     }
 
-    CAutoReadLock locker(m_guard);
     CRepositoryBrowserSelection selection;
     if (pWnd == &m_RepoList)
     {
         CString urls;
+        CAutoReadLock locker(m_guard);
 
         POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
         int index = -1;
@@ -2811,6 +2811,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
     }
     if ((pWnd == &m_RepoTree)|| selection.IsEmpty())
     {
+        CAutoReadLock locker(m_guard);
         UINT uFlags;
         CPoint ptTree = point;
         m_RepoTree.ScreenToClient(&ptTree);
@@ -2991,6 +2992,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
         auto stopJobs (m_lister.SuspendJobs());
         if (pWnd == &m_RepoTree)
         {
+            CAutoWriteLock locker(m_guard);
             UINT uFlags;
             CPoint ptTree = point;
             m_RepoTree.ScreenToClient(&ptTree);
@@ -3006,6 +3008,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
         }
         if (hSelectedTreeItem)
         {
+            CAutoWriteLock locker(m_guard);
             m_blockEvents = true;
             m_RepoTree.SetItemState(hSelectedTreeItem, 0, TVIS_DROPHILITED);
             m_RepoTree.SetItemState(hSelectedTreeItem, TVIS_SELECTED, TVIS_SELECTED);
@@ -3039,6 +3042,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
             break;
         case ID_PREPAREDIFF:
             {
+                CAutoWriteLock locker(m_guard);
                 m_RepoTree.SetItemState(FindUrl(m_diffURL.GetSVNPathString()), 0, TVIS_BOLD);
                 if (selection.GetPathCount(0) == 1)
                 {
@@ -3431,6 +3435,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
             {
                 if (pWnd == &m_RepoList)
                 {
+                    CAutoReadLock locker(m_guard);
                     POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
                     int selIndex = m_RepoList.GetNextSelectedItem(pos);
                     if (selIndex >= 0)
@@ -3448,6 +3453,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
                 }
                 else if (pWnd == &m_RepoTree)
                 {
+                    CAutoReadLock locker(m_guard);
                     m_RepoTree.SetFocus();
                     if (hChosenTreeItem != m_RepoTree.GetRootItem())
                         m_RepoTree.EditLabel(hChosenTreeItem);
