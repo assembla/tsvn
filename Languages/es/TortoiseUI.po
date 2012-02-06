@@ -16,14 +16,14 @@
 #   <jmtruppia@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # Mark O'Neill <phoenixteam1@gmail.com>, 2011.
-# Tomás Christie <tommychristie@gmail.com>, 2011.
+# Tomás Christie <tommychristie@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-01-23 08:37+0000\n"
-"Last-Translator: Lübbe <luebbe.tortoisesvn@googlemail.com>\n"
+"PO-Revision-Date: 2012-02-01 11:15+0000\n"
+"Last-Translator: Tomás Christie <tommychristie@gmail.com>\n"
 "Language-Team: Spanish (Castilian) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -9243,7 +9243,7 @@ msgstr "Seleccione la carpeta donde guardar los archivos seleccionados"
 
 #. Resource IDs: (197)
 msgid "Select hook script file"
-msgstr "Seleccione archivo de script de gancho"
+msgstr "Seleccione archivo de script gancho"
 
 #. Resource IDs: (1405)
 msgid "Select items automatically"
@@ -9482,8 +9482,8 @@ msgid ""
 "Show Inline-Diff word by word\n"
 "Inline diff word-wise"
 msgstr ""
-"Mostrar diff-en-línea palabra a palabra\n"
-"Diff en línea por-palabra"
+"Mostrar dif en línea palabra a palabra\n"
+"Dif en línea por palabra"
 
 #. Resource IDs: (1126)
 msgid "Show Lock dialog before locking files"
@@ -13397,6 +13397,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Line number (%d - %d)"
 #~ msgstr "&Número de línea (%d - %d)"
 
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "Largo &Max de línea para difs en linea"
+
 #~ msgid "&None"
 #~ msgstr "&Ninguno"
 
@@ -13406,12 +13409,44 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Fijo:"
 
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "Aprovar o rechazar script gancho del cliente"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Aprovar\n"
+#~ "Ejecutar el script gancho"
+
+#~ msgid "Approved hook scripts"
+#~ msgstr "Scripts gancho aprovados"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Cancelar\n"
+#~ "No ejecutar este script"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Local modifications are kept."
 #~ msgstr ""
 #~ "Cancelar\n"
 #~ "Las modificaciones locales serán guardadas"
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "Limpiar todos los %ld script gancho aprobados del cliente."
+
+#~ msgid ""
+#~ "Command Line To Execute:\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Línea de comando a ejecutar:\n"
+#~ "Para especificar una ruta dentro de una copia de trabajo, especifique la "
+#~ "url en el repositorio con la url raíz del repositorio como %REPOROOT%"
 
 #~ msgid "Compare two files"
 #~ msgstr "Comparar dos archivos"
@@ -13422,11 +13457,17 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "En conflicto (quiza)"
 
+#~ msgid "Dialog"
+#~ msgstr "Diálogo"
+
 #~ msgid "Diff Viewer"
 #~ msgstr "Visor de Diff"
 
 #~ msgid "Diff Viewer::Merge Tool"
 #~ msgstr "Visor de Diff::Herramienta de Merge"
+
+#~ msgid "Do not ask again for this script"
+#~ msgstr "No preguntar nuevamente por este script"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "¿Desea cargar los archivos con cambios?"
@@ -13443,6 +13484,20 @@ msgstr "{BugTraq}"
 #~ msgid "Go To Line"
 #~ msgstr "Ir a la línea"
 
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Ir a la siguiente diferencia en linea\n"
+#~ "Siguiente diferencia en linea"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Ir a la anterior diferencia en linea\n"
+#~ "Anterior diferencia en linea"
+
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C+G"
 
@@ -13452,6 +13507,12 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Ignorar cambios\n"
 #~ "Ignorar los cambios externos."
+
+#~ msgid "Inline diff"
+#~ msgstr "Dif en linea"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Dif en linea por palabra"
 
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Mantener &listas de cambios"
@@ -13471,6 +13532,9 @@ msgstr "{BugTraq}"
 #~ "Cargar cambios\n"
 #~ "Las vistas serán actualizadas con el nuevo contenido."
 
+#~ msgid "Next inline difference"
+#~ msgstr "Siguiente diferencia en linea"
+
 #~ msgid "Operative"
 #~ msgstr "Operativo"
 
@@ -13480,14 +13544,31 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Cargar las carpetas con antelación para acelerar la navegación"
 
+#~ msgid "Previous inline difference"
+#~ msgstr "Anterior diferencia en linea"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Papelera de reciclaje"
 
 #~ msgid "Repository browser"
 #~ msgstr "Navegador de repositorio"
 
+#~ msgid ""
+#~ "Revert\n"
+#~ "All local modifications will be lost."
+#~ msgstr ""
+#~ "Revertir\n"
+#~ "Todas las modificaciones locales se perderán."
+
 #~ msgid "Revision range to merge"
 #~ msgstr "Rango de revisiones a fusionar"
+
+#~ msgid ""
+#~ "Show Inline-Diff\n"
+#~ "Inline diff"
+#~ msgstr ""
+#~ "Mostrar dif en linea\n"
+#~ "Dif en línea"
 
 #~ msgid "Show externals"
 #~ msgstr "Mostrar externos"
@@ -13512,6 +13593,67 @@ msgstr "{BugTraq}"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "El número de línea debe estar entre %d y %d"
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este error se genero a causa de un script gancho personalizado en el "
+#~ "servidor de Subversion.\n"
+#~ "Por favor contacte a su administrador de servidor para que le ayude a "
+#~ "solucionar este problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-commit hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este error se genero a causa de un script gancho post-confirmación "
+#~ "personalizado en el servidor de Subversion.\n"
+#~ "Por favor contacte a su administrador de servidor para que le ayude a "
+#~ "solucionar este problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-lock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este error se genero a causa de un script gancho post-bloqueo "
+#~ "personalizado en el servidor de Subversion.\n"
+#~ "Por favor contacte a su administrador de servidor para que le ayude a "
+#~ "solucionar este problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-unlock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este error se genero a causa de un script gancho post-desbloqueo "
+#~ "personalizado en el servidor de Subversion.\n"
+#~ "Por favor contacte a su administrador de servidor para que le ayude a "
+#~ "solucionar este problema."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Esta copia de trabajo tiene configurado un script gancho del cliente. "
+#~ "¿Desea que se ejecute este script?\n"
+#~ "La línea de comando para ejecutar es:\n"
+#~ "%s"
+
+#~ msgid "all &revisions"
+#~ msgstr "todas las &revisiones"
+
+#~ msgid "specific r&ange"
+#~ msgstr "r&ango específico"
 
 #~ msgid "&Goto line"
 #~ msgstr "&Ir a la línea"
