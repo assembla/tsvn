@@ -891,7 +891,7 @@ public:
      * Returns a string which can be passed as the options string for the Merge()
      * methods and the Blame() method.
      */
-    static CString GetOptionsString(bool bIgnoreEOL, bool bIgnoreSpaces = FALSE, bool bIgnoreAllSpaces = FALSE);
+    static CString GetOptionsString(bool bIgnoreEOL, bool bIgnoreSpaces, bool bIgnoreAllSpaces);
     static CString GetOptionsString(bool bIgnoreEOL, svn_diff_file_ignore_space_t space = svn_diff_file_ignore_space_none);
 
     /**
@@ -902,6 +902,7 @@ public:
 
     void SetCancelBool(bool * bCancel) { m_pbCancel = bCancel; }
 
+    const CTSVNPath& GetRedirectedUrlPath() const {return m_redirectedUrl;}
 protected:
     apr_pool_t *                parentpool;     ///< the main memory pool
     apr_pool_t *                pool;           ///< 'root' memory pool
@@ -909,6 +910,7 @@ protected:
     svn_revnum_t                m_commitRev;    ///< revision of the last commit/add/mkdir
     bool *                      m_pbCancel;
     bool                        m_bListComplete;///< used for the List() command
+    CTSVNPath                   m_redirectedUrl;///< the target url in case of a redirect
 
     static LCID                 s_locale;
     static bool                 s_useSystemLocale;
@@ -921,7 +923,7 @@ protected:
     apr_hash_t *         MakeRevPropHash(const RevPropHash& revProps, apr_pool_t * pool);
 
     void                 CallPreConnectHookIfUrl(const CTSVNPathList& pathList, const CTSVNPath& path = CTSVNPath());
-
+    void                 Prepare();
     svn_error_t * get_uuid_from_target (const char **UUID, const char *target);
 
     void cancel();
