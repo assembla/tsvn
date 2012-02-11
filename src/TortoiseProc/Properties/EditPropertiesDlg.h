@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2010 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ public:
     void    SetProjectProperties(ProjectProperties * pProps) {m_pProjectProperties = pProps;}
     void    SetUUID(const CString& sUUID) {m_sUUID = sUUID;}
     void    RevProps(bool bRevProps = false) {m_bRevProps = bRevProps;}
-
+    void    UrlIsFolder(bool bFolder) {m_bUrlIsFolder = bFolder;}
 // Dialog Data
     enum { IDD = IDD_EDITPROPERTIES };
 
@@ -87,6 +87,7 @@ protected:
     BOOL            m_bRecursive;
     bool            m_bChanged;
     bool            m_bRevProps;
+    bool            m_bUrlIsFolder;
     volatile LONG   m_bThreadRunning;
 
     TProperties     m_properties;
