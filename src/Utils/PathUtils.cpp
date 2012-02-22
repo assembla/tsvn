@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -352,7 +352,7 @@ CString CPathUtils::GetLongPathname(const CString& path)
         return path;
     TCHAR pathbufcanonicalized[MAX_PATH]; // MAX_PATH ok.
     DWORD ret = 0;
-    CString sRet;
+    CString sRet = path;
     if (!PathIsURL(path) && PathIsRelative(path))
     {
         ret = GetFullPathName(path, 0, NULL, NULL);
