@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -248,10 +248,10 @@ BOOL CAppUtils::StartExtPatch(const CTSVNPath& patchfile, const CTSVNPath& dir, 
 
 CString CAppUtils::PickDiffTool(const CTSVNPath& file1, const CTSVNPath& file2)
 {
-    CString difftool = CRegString(_T("Software\\TortoiseSVN\\DiffTools\\.") + file2.GetFilename().MakeLower());
+    CString difftool = CRegString(_T("Software\\TortoiseSVN\\DiffTools\\") + file2.GetFilename().MakeLower());
     if (!difftool.IsEmpty())
         return difftool;
-    difftool = CRegString(_T("Software\\TortoiseSVN\\DiffTools\\.") + file1.GetFilename().MakeLower());
+    difftool = CRegString(_T("Software\\TortoiseSVN\\DiffTools\\") + file1.GetFilename().MakeLower());
     if (!difftool.IsEmpty())
         return difftool;
 
