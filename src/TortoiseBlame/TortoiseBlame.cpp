@@ -1,6 +1,6 @@
 // TortoiseBlame - a Viewer for Subversion Blames
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "UnicodeUtils.h"
 #include <ClipboardHelper.h>
 #include "TaskbarUUID.h"
+#include "../Utils/CrashReport.h"
 
 #include <algorithm>
 #include <cctype>
@@ -1382,6 +1383,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     app.hInstance = hInstance;
 
     SetDllDirectory(L"");
+    CCrashReportTSVN crasher(L"TortoiseBlame " _T(APP_X64_STRING));
     if (::LoadLibrary(_T("SciLexer.DLL")) == NULL)
         return FALSE;
 

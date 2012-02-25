@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// External Cache Copyright (C) 2005 - 2009, 2011 - TortoiseSVN
+// External Cache Copyright (C) 2005 - 2009, 2011-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include "CacheInterface.h"
 #include "Resource.h"
 #include "registry.h"
-#include "..\crashrpt\CrashReport.h"
+#include "CrashReport.h"
 #include "SVNAdminDir.h"
 #include "Dbt.h"
 #include <initguid.h>
@@ -45,7 +45,7 @@
 
 #pragma comment(linker, "\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
-CCrashReport crasher("tortoisesvn@gmail.com", "Crash Report for TSVNCache " APP_X64_STRING " : " STRPRODUCTVER, TRUE);// crash
+CCrashReportTSVN crasher(L"TSVNCache " _T(APP_X64_STRING));
 
 unsigned int __stdcall InstanceThread(LPVOID);
 unsigned int __stdcall PipeThread(LPVOID lpvParam);
@@ -764,7 +764,7 @@ unsigned int __stdcall CommandThread(LPVOID lpvParam)
                     CTSVNPath changedpath;
                     changedpath.SetFromWin(CString(command.path));
                     CTraceToOutputDebugString::Instance()(_T(__FUNCTION__) _T(": block path %s\n"), changedpath.GetWinPath());
-                    CSVNStatusCache::Instance().BlockPath(changedpath);
+                    CSVNStatusCache::Instance().BlockPath(changedpath, false);
                 }
                 break;
             case TSVNCACHECOMMAND_UNBLOCK:

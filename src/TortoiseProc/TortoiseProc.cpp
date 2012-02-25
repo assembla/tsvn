@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -65,7 +65,7 @@ END_MESSAGE_MAP()
 
 
 //////////////////////////////////////////////////////////////////////////
-CCrashReport crasher("tortoisesvn@gmail.com", "Crash Report for TortoiseSVN " APP_X64_STRING " : " STRPRODUCTVER, TRUE);// crash
+CCrashReportTSVN crasher(L"TortoiseSVN " _T(APP_X64_STRING));
 
 CTortoiseProcApp::CTortoiseProcApp() : hWndExplorer(NULL)
 {
@@ -101,7 +101,6 @@ CTortoiseProcApp::~CTortoiseProcApp()
     CHooks::Destroy();
     SYS_IMAGE_LIST().Cleanup();
     apr_terminate();
-    crasher.Uninstall();
 }
 
 // The one and only CTortoiseProcApp object
