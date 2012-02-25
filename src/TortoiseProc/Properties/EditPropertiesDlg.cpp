@@ -206,6 +206,7 @@ void CEditPropertiesDlg::Refresh()
 
 UINT CEditPropertiesDlg::PropsThreadEntry(LPVOID pVoid)
 {
+    CCrashReportThread crashthread;
     return ((CEditPropertiesDlg*)pVoid)->PropsThread();
 }
 
