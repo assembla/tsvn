@@ -12,13 +12,13 @@
 # Translators:
 # Daisuke Deguchi <ddeguchi@is.nagoya-u.ac.jp>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
-# Masahiro Fujimoto <fujimoto@internet.ne.jp>, 2011.
+# Masahiro Fujimoto <fujimoto@internet.ne.jp>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-01-16 17:03+0000\n"
+"PO-Revision-Date: 2012-02-14 08:21+0000\n"
 "Last-Translator: Masahiro Fujimoto <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -12996,10 +12996,10 @@ msgid ""
 msgstr ""
 "仕事仲間の一人がロックを取得し、解除しないまま休暇を取ってしまったら、どうし"
 "たらいいでしょう? Subversion は強制的にロックする方法を用意しています。他の誰"
-"かが持っているロックを解除することを、ロックの <firstterm>破壊</firstterm> と"
-"呼び、他の誰かが既にロックしているファイルを強制的にロックすることを、ロック"
-"の <firstterm>横取り</firstterm> と呼びます。当然、仕事仲間と友人でいたいな"
-"ら、軽々しく行うことではありません。"
+"かが持っているロックを解除することを、ロックの <firstterm>強制解除</"
+"firstterm> と呼び、他の誰かが既にロックしているファイルを強制的にロックするこ"
+"とを、ロックの <firstterm>横取り</firstterm> と呼びます。当然、仕事仲間と友人"
+"でいたいなら、軽々しく行うことではありません。"
 
 #. (para)
 msgid ""
@@ -13009,8 +13009,8 @@ msgid ""
 "always the definitive reference."
 msgstr ""
 "ロックはリポジトリに記録されます。また、ロックトークンはローカルの作業コピー"
-"に作成されます。他の誰かがロックを破壊したりして、食い違いが発生すると、ロー"
-"カルのロックは無効になります。リポジトリは常に決定的なリファレンスです。"
+"に作成されます。他の誰かがロックを強制解除したりして、食い違いが発生すると、"
+"ローカルのロックは無効になります。リポジトリは常に決定的なリファレンスです。"
 
 #. (title)
 msgid "Getting a Lock"
@@ -13128,20 +13128,20 @@ msgstr ""
 "<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>変更をチェック...</"
 "guimenuitem></menuchoice> を使用できます。ローカルに保持したロックの印はすぐ"
 "に現れます。他の人が保持しているロックをチェックするには (そして誰がロックを"
-"破壊したり奪ったかを見るには)、<guibutton>リポジトリをチェック</guibutton> を"
-"クリックしてください。"
+"強制解除したり横取りしたりしたかを見るには)、<guibutton>リポジトリをチェック"
+"</guibutton> をクリックしてください。"
 
 #. (para)
 msgid ""
 "From the context menu here, you can also get and release locks, as well as "
 "breaking and stealing locks held by others."
 msgstr ""
-"ここのコンテキストメニューから、他の人が保持しているロックを、破壊したり横取"
-"りしたりするように、ロックを取得したり解除したりもできます。"
+"ここのコンテキストメニューから、他の人が保持しているロックを、強制解除したり"
+"横取りしたりするように、ロックを取得したり解除したりもできます。"
 
 #. (title)
 msgid "Avoid Breaking and Stealing Locks"
-msgstr "ロックの破壊・横取りは避ける"
+msgstr "ロックの強制解除・横取りは避ける"
 
 #. (para)
 msgid ""
@@ -13151,11 +13151,11 @@ msgid ""
 "free to check in their changes and overwrite yours. Subversion doesn't lose "
 "data, but you have lost the team-working protection that locking gave you."
 msgstr ""
-"ほかの誰かのロックを、断りもなく破壊・横取りすると、潜在的に作業を失う原因に"
-"なります。マージ不可能なファイルの種類で作業していて、他の誰かのロックを奪っ"
-"た場合、自分がロックを解除すると、自由に上書きできます。Subversion はデータを"
-"失いませんが、ロックがもたらすはずだった、チーム作業の保護を失ってしまいま"
-"す。"
+"ほかの誰かのロックを、断りもなく強制解除・横取りすると、潜在的に作業を失う原"
+"因になります。マージ不可能なファイルの種類で作業していて、他の誰かのロックを"
+"横取りした場合、自分がロックを解除すると、自由に上書きできます。Subversion は"
+"データを失いませんが、ロックがもたらすはずだった、チーム作業の保護を失ってし"
+"まいます。"
 
 #. (title)
 msgid "Making Non-locked Files Read-Only"
