@@ -15,14 +15,14 @@
 # Eduardo Marques <ebmarques@gmail.com>, 2011.
 #   <igorruckert@yahoo.com.br>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
-# Rafael Heise <rmheise@gmail.com>, 2011.
+# Rafael Heise <rmheise@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-02-20 09:12+0000\n"
-"Last-Translator: Crhistian <crhistian.ti@gmail.com>\n"
+"PO-Revision-Date: 2012-02-29 11:36+0000\n"
+"Last-Translator: Rafael Heise <rmheise@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13324,6 +13324,27 @@ msgstr "sim"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revisão %2!s!, Autor %3!s!, Data %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revisão %2!s!, Autor %3!s!, Tamanho %4!s!, Data %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Mostrando %2!d! arquivos e %3!d! diretórios, %4!d! itens no total"
+
 #~ msgid "&All"
 #~ msgstr "&Todos"
 
@@ -13342,6 +13363,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Line number (%d - %d)"
 #~ msgstr "&Número da linha (%d - %d)"
 
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "Tamanho &máximo da linha para diferenças na linha"
+
 #~ msgid "&None"
 #~ msgstr "&Nenhum"
 
@@ -13350,6 +13374,28 @@ msgstr "{BugTraq}"
 
 #~ msgid "&Peg:"
 #~ msgstr "&Limite:"
+
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "Aprovar ou rejeitar script de gancho no lado do cliente"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Aprovar\n"
+#~ "Executar o script de gancho"
+
+#~ msgid "Approved hook scripts"
+#~ msgstr "Scripts de gancho aprovados"
+
+#~ msgid "Aqua Style"
+#~ msgstr "Estilo Água"
+
+#~ msgid "Black Style"
+#~ msgstr "Estilo Preto"
+
+#~ msgid "Blue Style"
+#~ msgstr "Estilo Azul"
 
 #~ msgid ""
 #~ "Cancel\n"
@@ -13365,11 +13411,68 @@ msgstr "{BugTraq}"
 #~ "Cancelar\n"
 #~ "Modificações locais são mantidas."
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Mudar o estilo da aplicação\n"
+#~ "Mudar o estilo"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Muda o estilo da aplicação"
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "Limpar todos %ld scripts de gancho aprovados no lado do cliente"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Clique para ver os comandos para mover blocos de texto\n"
+#~ "Use os blocos de texto"
+
+#~ msgid "Collapse"
+#~ msgstr "Comprimir"
+
+#~ msgid "Color by &age, indexed"
+#~ msgstr "Cor pela d&ata, ordenado"
+
+#~ msgid "Color by age, &continuous"
+#~ msgstr "Cor pela data, &contínuo"
+
+#~ msgid "Color by au&thor"
+#~ msgstr "Cor por au&tor"
+
+#~ msgid ""
+#~ "Command Line To Execute:\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Linha de comando para Executar:\n"
+#~ "Para especificar um caminho dentro da cópia de trabalho, especifique a "
+#~ "url no repositório com o diretório principal do repositório como %REPOROOT"
+#~ "%"
+
 #~ msgid "Compare two files"
 #~ msgstr "Comparar dois arquivos"
 
 #~ msgid "Configure &TortoiseSVN to never use the recycle bin"
 #~ msgstr "Configurar &TortoiseSVN para nunca usar a lixeira"
+
+#~ msgid "Conflicted (maybe)"
+#~ msgstr "Conflitante (talvez)"
+
+#~ msgid "Create patch file"
+#~ msgstr "Criar arquivo de correção"
+
+#~ msgid "Dialog"
+#~ msgstr "Janela"
+
+#~ msgid "Diff Viewer"
+#~ msgstr "Visualizador de diferenças"
+
+#~ msgid "Diff Viewer::Merge Tool"
+#~ msgstr "Visualizador de Diferenças::Ferramenta de Combinação"
 
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Não perguntar novamente para este script"
@@ -13378,16 +13481,46 @@ msgstr "{BugTraq}"
 #~ msgstr "Você deseja ler os arquivos alterados?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Externo \"%1!s!\"\n"
+#~ "Revisão %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Obtém o conteúdo das pastas em segundo plano, portanto a navegação é mais "
 #~ "rápida"
 
+#~ msgid "General::Dialogs 3"
+#~ msgstr "Geral::Janela 3"
+
 #~ msgid "Go To Line"
 #~ msgstr "Ir Para Linha"
 
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Vai para a próxima diferença na linha\n"
+#~ "Próxima diferença na linha"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Vai para a diferença anterior na linha\n"
+#~ "Diferença anterior na linha"
+
 #~ msgid "Goto Line"
 #~ msgstr "Ir Para Linha"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Esconder/Mostrar a lista de arquivos de correção"
+
+#~ msgid "ID:32893:V C +G"
+#~ msgstr "ID:32893:V C +G"
 
 #~ msgid ""
 #~ "Ignore changes\n"
@@ -13395,6 +13528,24 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Ignorar as alterações⏎\n"
 #~ "Ignorar as alterações externas."
+
+#~ msgid "Index colors:"
+#~ msgstr "Cores para ordenação:"
+
+#~ msgid "Inline diff"
+#~ msgstr "Diferença na linha"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Diferença na linha por palavra"
+
+#~ msgid "Keep c&hangelists"
+#~ msgstr "Manter alterações"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Linha movida da linha %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Linha movida para a linha %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13411,6 +13562,9 @@ msgstr "{BugTraq}"
 #~ "Ler alterações⏎\n"
 #~ "As visões são atualizadas com o novo conteúdo."
 
+#~ msgid "Local &Hooks"
+#~ msgstr "Ganc&hos Locais"
+
 #~ msgid ""
 #~ "Navigate to a specific line in the view\n"
 #~ "Goto Line"
@@ -13424,6 +13578,9 @@ msgstr "{BugTraq}"
 #~ msgid "Next difference"
 #~ msgstr "Próxima diferença"
 
+#~ msgid "Next inline difference"
+#~ msgstr "Próxima diferença na linha"
+
 #~ msgid "Office 2003"
 #~ msgstr "Office 2003"
 
@@ -13436,6 +13593,13 @@ msgstr "{BugTraq}"
 #~ msgid "Office XP"
 #~ msgstr "Office XP"
 
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Abrir arquivos para diferença ou para aplicar correção\n"
+#~ "Abrir arquivos"
+
 #~ msgid "Operative"
 #~ msgstr "Operativo"
 
@@ -13445,14 +13609,29 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Limite"
 
+#~ msgid "Pre-fetch folders for faster browsing"
+#~ msgstr "Pré-carga dos diretórios por uma navegação mais rápida"
+
 #~ msgid "Previous conflict"
 #~ msgstr "Conflito anterior"
 
 #~ msgid "Previous difference"
 #~ msgstr "Diferença anterior"
 
+#~ msgid "Previous inline difference"
+#~ msgstr "Diferença anterior na linha"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Lixeira"
+
+#~ msgid "Repository browser"
+#~ msgstr "Navegador de repositório"
+
+#~ msgid "Restore"
+#~ msgstr "Restaurar"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Restaurar após a submissão"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13461,17 +13640,165 @@ msgstr "{BugTraq}"
 #~ "Desfazer⏎\n"
 #~ "Todas as modificações locais serão perdidas."
 
+#~ msgid "Revision range to merge"
+#~ msgstr "Faixa de revisão para combinar"
+
 #~ msgid "Save"
 #~ msgstr "Salvar"
 
 #~ msgid "Save as"
 #~ msgstr "Salvar como"
 
+#~ msgid ""
+#~ "Show Inline-Diff\n"
+#~ "Inline diff"
+#~ msgstr ""
+#~ "Mostra diferença-nalinha\n"
+#~ "Diferença na linha"
+
 #~ msgid "Show Whitespaces"
 #~ msgstr "Mostrar Espaços Em Branco"
 
+#~ msgid "Show externals"
+#~ msgstr "Mostrar externos"
+
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Mostrar caracteres especiais para espaços em branco e quebras de linha\n"
+#~ "Mostrar espaços em branco"
+
+#~ msgid "Shows folders and files included with the svn:externals property"
+#~ msgstr ""
+#~ "Mostrar diretórios e arquivos incluídos com a propriedade svn:externals"
+
+#~ msgid "Silver Style"
+#~ msgstr "Estilo Prata"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Do you want to load the changes?"
+#~ msgstr ""
+#~ "Algum(ns) arquivo(s) podem ter sido modificados fora do T-Merge.\n"
+#~ "Você quer carregar essas alterações?"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Would you like to reload and lose your changes?"
+#~ msgstr ""
+#~ "Algum(ns) arquivo(s) podem ter sido alterados fora do T-Merge.\n"
+#~ "Você gostaria de recarregar e perder suas alterações?"
+
+#~ msgid "Start registry editor"
+#~ msgstr "Iniciar editor de registro"
+
+#~ msgid "Style"
+#~ msgstr "tilo"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Alternar entre painel de visualização simples ou duplo"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Alterar visualização esquerda e direita"
+
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "O número da linha deve estar entre %d e %d"
+
+#~ msgid ""
+#~ "There are currently %d overlay handlers installed besides the ones "
+#~ "Tortoise uses."
+#~ msgstr ""
+#~ "Existem atualmente %d controladores de sobreposição instalados junto aos "
+#~ "que o Tortoise usa."
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este erro foi gerado por um script de gancho personalizado no servidor do "
+#~ "Subversion.\n"
+#~ "Por favor contate seu administrador de servidor para ajudar a resolver "
+#~ "esse problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-commit hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este erro foi gerado por um script de gancho personalizado no pós-"
+#~ "submissão no servidor do Subversion.\n"
+#~ "Por favor contate seu administrador de servidor para ajudar a resolver "
+#~ "esse problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-lock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este erro foi gerado por um script de gancho personalizado no pós-"
+#~ "travamento no servidor do Subversion.\n"
+#~ "Por favor contate seu administrador de servidor para ajudar a resolver "
+#~ "esse problema."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-unlock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este erro foi gerado por um script de gancho personalizado no pós-"
+#~ "destravamento no servidor do Subversion.\n"
+#~ "Por favor contate seu administrador de servidor para ajudar a resolver "
+#~ "esse problema."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Esta cópia de trabalho tem um script de gancha configurado no lado do "
+#~ "cliente. Você quer executar este script?\n"
+#~ "A linha de comando para executar é:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "neon %s\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "neon %s\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
+
+#~ msgid ""
+#~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+#~ "recycle bin. The recycle bin currently contains %2!ld! items, which most "
+#~ "likely is the reason for this slowdown.\n"
+#~ "To fix this, you should empty the recycle bin now."
+#~ msgstr ""
+#~ "TortoiseSVN detectou sérias lentidões ao mover %1!d! itens para a "
+#~ "lixeira. A lixeira atualmente contém %2!d! itens, o que pode ser a razão "
+#~ "da lentidão.\n"
+#~ "Para corrigir isto você deve limpar a lixeira agora."
+
+#~ msgid "TortoiseSVN will not show the following overlays: %s"
+#~ msgstr "TortoiseSVN não mostrará as seguintes sobreposições: %s"
 
 #~ msgid "Undo"
 #~ msgstr "Desfazer"
@@ -13482,6 +13809,27 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Desfazer as últimas modificações⏎\n"
 #~ "Desfazer"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Usar o bloco de texto 'meu'"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Usar o bloco de texto 'meu' e então o 'deles'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Usar o bloco de texto 'deles'"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Usar o bloco de texto 'deles' e então o 'meu'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Usar Blocos"
+
+#~ msgid "Use left block"
+#~ msgstr "Usar bloco da esquerda"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Validação do valor da propriedade falhou!"
 
 #~ msgid "Visual Studio 2005"
 #~ msgstr "Visual Studio 2005"
@@ -13507,3 +13855,21 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Quebrar linhas longas na borda direita da visão⏎\n"
 #~ "Quebrar linhas longas"
+
+#~ msgid "all &revisions"
+#~ msgstr "todas as &revisões"
+
+#~ msgid "specific r&ange"
+#~ msgstr "f&aixa específica"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
