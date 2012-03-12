@@ -13,15 +13,15 @@
 #   <bandoche@hanmail.net>, 2011.
 #   <kmkh12@paran.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
-# Seongki Shin <skshin@gmail.com>, 2011.
+# Seongki Shin <skshin@gmail.com>, 2011, 2012.
 # TaeDong Kim <fly1004@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-02-20 09:12+0000\n"
-"Last-Translator: Lübbe <luebbe.tortoisesvn@googlemail.com>\n"
+"PO-Revision-Date: 2012-03-10 06:30+0000\n"
+"Last-Translator: Seongki Shin <skshin@gmail.com>\n"
 "Language-Team: Korean <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13086,17 +13086,542 @@ msgstr "예"
 msgid "{BugTraq}"
 msgstr "{버그트랙}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "리비전 %2!s!, 작업자 %3!s!, 날짜 %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "리비전 %2!s!, 작업자 %3!s!, 크기 %4!s!, 날짜 %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "%2!d! 개의 파일과 %3!d! 개의 폴더, 총 %4!d! 개의 항목을 표시"
+
+#~ msgid "&All"
+#~ msgstr "모두(&A)"
+
+#~ msgid "&Do not ask again"
+#~ msgstr "다시 묻지 않음(&D)"
+
+#~ msgid "&Empty the recycle bin now"
+#~ msgstr "지금 휴지통 비우기(&E)"
+
+#~ msgid "&Ignore and proceed"
+#~ msgstr "무시하고 계속하기(&I)"
+
+#~ msgid "&Line number"
+#~ msgstr "줄번호(&L)"
+
+#~ msgid "&Line number (%d - %d)"
+#~ msgstr "줄번호(&L) (%d - %d)"
+
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "Inline diff를 위한 최대 행 길이(&M)"
+
+#~ msgid "&None"
+#~ msgstr "없음(&N)"
+
 #~ msgid "&Operative:"
 #~ msgstr "Operative(&O):"
 
 #~ msgid "&Peg:"
 #~ msgstr "Peg(&P):"
 
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "클라이언트 후크 스크립트의 승인 또는 거부"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "승인\n"
+#~ "후크 스크립트를 실행합니다"
+
+#~ msgid "Approved hook scripts"
+#~ msgstr "후크 스크립트 승인"
+
+#~ msgid "Aqua Style"
+#~ msgstr "Aqua Style"
+
+#~ msgid "Black Style"
+#~ msgstr "Black Style"
+
+#~ msgid "Blue Style"
+#~ msgstr "Blue Style"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "취소\n"
+#~ "스크립트를 실행하지 않습니다"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Local modifications are kept."
+#~ msgstr ""
+#~ "취소\n"
+#~ "로컬 변경 내용을 유지합니다."
+
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "어플리케이션의 스타일을 변경\n"
+#~ "스타일 변경"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "어플리케이션의 스타일 변경"
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "%ld 개의 클라이언트 후크 스크립트 승인을 취소"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "텍스트 블럭을 이동하는 명령어 보기\n"
+#~ "텍스트 블럭 사용"
+
+#~ msgid "Collapse"
+#~ msgstr "축소"
+
+#~ msgid "Color by &age, indexed"
+#~ msgstr "시기별 색상(인덱스)(&A)"
+
+#~ msgid "Color by age, &continuous"
+#~ msgstr "시기별 색상(연속)(&C)"
+
+#~ msgid "Color by au&thor"
+#~ msgstr "편집자에 의한 색상(&T)"
+
+#~ msgid ""
+#~ "Command Line To Execute:\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "실행될 커맨드 라인:\n"
+#~ "작업 사본의 경로를 지정하려면 저장소의 루트 URL을 %REPOROOT% 로 지정하십시"
+#~ "오 "
+
 #~ msgid "Compare two files"
 #~ msgstr "두 파일 "
+
+#~ msgid "Configure &TortoiseSVN to never use the recycle bin"
+#~ msgstr "TortoiseSVN이 휴지통을 사용하지 않도록 설정(&T)"
+
+#~ msgid "Conflicted (maybe)"
+#~ msgstr "충돌 (아마도)"
+
+#~ msgid "Create patch file"
+#~ msgstr "패치 파일 만들기"
+
+#~ msgid "Dialog"
+#~ msgstr "대화상자"
+
+#~ msgid "Diff Viewer"
+#~ msgstr "수정사항(Diff) 뷰어"
+
+#~ msgid "Diff Viewer::Merge Tool"
+#~ msgstr "수정사항(Diff) 뷰어::병합 도구"
+
+#~ msgid "Do not ask again for this script"
+#~ msgstr "이 스크립트는 다시 물어보지 않기"
+
+#~ msgid "Do you want to load the changed files?"
+#~ msgstr "변경된 파일을 다시 로드하시겠습니까?"
+
+#~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "외부참조 \"%1!s!\"\n"
+#~ "리비전 %2!s!"
+
+#~ msgid ""
+#~ "Fetches the contents of folders in the background so browsing is faster"
+#~ msgstr "폴더의 내용을 백그라운드에서 미리 가져와서 브라우징이 더 빨라집니다"
+
+#~ msgid "General::Dialogs 3"
+#~ msgstr "일반::대화상자3"
+
+#~ msgid "Go To Line"
+#~ msgstr "지정된 행으로 이동"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "다음 차이나는 행으로 이동\n"
+#~ "다음 행단위 차이"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "이전 차이나는 행으로 이동\n"
+#~ "이전 행단위 차이"
+
+#~ msgid "Goto Line"
+#~ msgstr "특정 행으로 이동"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "패치 파일 목록 보이기/숨기기"
+
+#~ msgid "ID:32893:V C +G"
+#~ msgstr "ID:32893:V C +G"
+
+#~ msgid ""
+#~ "Ignore changes\n"
+#~ "Ignore the outside changes."
+#~ msgstr ""
+#~ "변경사항 무시\n"
+#~ "외부에서 변경된 사항을 무시합니다."
+
+#~ msgid "Index colors:"
+#~ msgstr "인덱스 색상:"
+
+#~ msgid "Inline diff"
+#~ msgstr "Inline diff"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "단어 단위 Inline diff"
+
+#~ msgid "Keep c&hangelists"
+#~ msgstr "변경 목록을 유지(&H)"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "%ld 번째 라인에서 라인 이동"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "%ld 번째 라인으로 라인 이동"
+
+#~ msgid ""
+#~ "Load changes\n"
+#~ "Changes made in TortoiseMerge are lost and replaced with the new content."
+#~ msgstr ""
+#~ "변경 사항을 다시 로드\n"
+#~ "TortoiseMerge에서 변경 내용을 삭제하고 새로운 내용으로 대체합니다."
+
+#~ msgid ""
+#~ "Load changes\n"
+#~ "The views are updated with the new content."
+#~ msgstr ""
+#~ "변경 사항을 다시 로드\n"
+#~ "뷰는 새로운 내용으로 업데이트됩니다."
+
+#~ msgid "Local &Hooks"
+#~ msgstr "로컬 후크(&H)"
+
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "뷰의 특정 행으로 이동\n"
+#~ "행 이동"
+
+#~ msgid "Next conflict"
+#~ msgstr "다음 충돌 지점"
+
+#~ msgid "Next difference"
+#~ msgstr "다음 차이점"
+
+#~ msgid "Next inline difference"
+#~ msgstr "다음 줄단위 차이점"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Office 2007 색상"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "패치를 적용하거나 보여줄 파일 열기\n"
+#~ "파일 열기"
 
 #~ msgid "Operative"
 #~ msgstr "Operative"
 
+#~ msgid "Paste"
+#~ msgstr "붙여넣기"
+
 #~ msgid "Peg"
 #~ msgstr "Peg"
+
+#~ msgid "Pre-fetch folders for faster browsing"
+#~ msgstr "빠르게 표시하기 위해 폴더를 미리 가져오기"
+
+#~ msgid "Previous conflict"
+#~ msgstr "이전 충돌 지점"
+
+#~ msgid "Previous difference"
+#~ msgstr "이전 차이점"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "이전 줄단위 차이점"
+
+#~ msgid "Recycle bin"
+#~ msgstr "휴지통"
+
+#~ msgid "Repository browser"
+#~ msgstr "저장소 브라우저"
+
+#~ msgid "Restore"
+#~ msgstr "복원"
+
+#~ msgid "Restore after commit"
+#~ msgstr "커밋 후에 복원"
+
+#~ msgid ""
+#~ "Revert\n"
+#~ "All local modifications will be lost."
+#~ msgstr ""
+#~ "되돌리기\n"
+#~ "로컬에서 변경된 모든 내용이 손실됩니다."
+
+#~ msgid "Revision range to merge"
+#~ msgstr "병합할 리비전 범위"
+
+#~ msgid "Save"
+#~ msgstr "저장하기"
+
+#~ msgid "Save as"
+#~ msgstr "다른 이름으로 저장하기"
+
+#~ msgid ""
+#~ "Show Inline-Diff\n"
+#~ "Inline diff"
+#~ msgstr ""
+#~ "Inline-Diff 보이기\n"
+#~ "Inline diff"
+
+#~ msgid "Show Whitespaces"
+#~ msgstr "공백 보이기"
+
+#~ msgid "Show externals"
+#~ msgstr "외부참조 보이기"
+
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "공백이나 줄바꿈 특수기호를 표시\n"
+#~ "공백 보이기"
+
+#~ msgid "Shows folders and files included with the svn:externals property"
+#~ msgstr "svn:externals 속성이 포함된 폴더와 파일을 표시하기"
+
+#~ msgid "Silver Style"
+#~ msgstr "Silver Style"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Do you want to load the changes?"
+#~ msgstr ""
+#~ "일부 파일이 TortoiseMerge 외부에서 변경되었습니다.\n"
+#~ "변경된 파일을 새로 로드하시겠습니까?"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Would you like to reload and lose your changes?"
+#~ msgstr ""
+#~ "일부 파일이 TortoiseMerge 외부에서 변경되었습니다.\n"
+#~ "변경사항을 잃게 되는데, 리로드 하시겠습니까?"
+
+#~ msgid "Start registry editor"
+#~ msgstr "레지스트리 편집기 시작하기"
+
+#~ msgid "Style"
+#~ msgstr "스타일"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "1화면/2화면 전환"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "좌/우 보기 전환"
+
+#~ msgid "The line number must be in between %d and %d"
+#~ msgstr "줄 번호는 %d ~ %d 사이에 있어야 합니다"
+
+#~ msgid ""
+#~ "There are currently %d overlay handlers installed besides the ones "
+#~ "Tortoise uses."
+#~ msgstr ""
+#~ "현재, Tortoise에서 사용하는 하나를 제외하고 %d 개의 오버레이 처리기가 설치"
+#~ "되어 있습니다."
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "이 오류는 Subversion 서버의 사용자 정의 후크 스크립트에서 발생한 것입니"
+#~ "다.\n"
+#~ "문제 해결을 위해서는 서버 관리자에게 문의하십시오."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-commit hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "이 오류는 Subversion 서버의 사용자 정의 post-commit 후크 스크립트에서 발생"
+#~ "한 것입니다.\n"
+#~ "문제 해결을 위해서는 서버 관리자에게 문의하십시오."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-lock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "이 오류는 Subversion 서버의 사용자 정의 post-lock 후크 스크립트에서 발생"
+#~ "한 것입니다.\n"
+#~ "문제 해결을 위해서는 서버 관리자에게 문의하십시오."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-unlock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "이 오류는 Subversion 서버의 사용자 정의 post-unlock 후크 스크립트에서 발생"
+#~ "한 것입니다.\n"
+#~ "문제 해결을 위해서는 서버 관리자에게 문의하십시오."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "이 작업 사본은 클라이언트 후크 스크립트가 설정되어 있습니다. 이 스크립트"
+#~ "를 실행시키시겠습니까?\n"
+#~ "실행될 커맨드 라인:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "neon %s\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "neon %s\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
+
+#~ msgid ""
+#~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+#~ "recycle bin. The recycle bin currently contains %2!ld! items, which most "
+#~ "likely is the reason for this slowdown.\n"
+#~ "To fix this, you should empty the recycle bin now."
+#~ msgstr ""
+#~ "%1!ld! 개의 항목을 휴지통으로 옮기는 데 상당한 시간이 걸립니다. 휴지통에 "
+#~ "현재 %2!ld! 개의 항목이 포함되어 있는 것이 원인으로 생각됩니다.\n"
+#~ "이것을 해결하기 위해서, 지금 휴지통을 비우십시오."
+
+#~ msgid "TortoiseSVN will not show the following overlays: %s"
+#~ msgstr "TortoiseSVN은 %s 오버레이를 표시할 수 없습니다."
+
+#~ msgid "Undo"
+#~ msgstr "실행취소"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "마지막 수정 사항 되돌리기\n"
+#~ "되돌리기"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "'mine' 텍스트 블럭을 사용"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "'mine'→'theirs'의 순서로 텍스트 블럭을 사용"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "'theirs' 테스트 블럭을 사용"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "'theirs'→'mine'의 순서로 텍스트 블럭을 사용"
+
+#~ msgid "Use Blocks"
+#~ msgstr "블럭 사용"
+
+#~ msgid "Use left block"
+#~ msgstr "왼쪽 블럭을 사용"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "속성 값의 유효성 검사를 실패했습니다!"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "긴 줄 보호"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "오른쪽 경계를 넘어가는 긴 줄을 줄 바꿈 하기\n"
+#~ "긴 줄 보호"
+
+#~ msgid "all &revisions"
+#~ msgstr "모든 리비전(&R)"
+
+#~ msgid "specific r&ange"
+#~ msgstr "지정된 범위(&A)"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
