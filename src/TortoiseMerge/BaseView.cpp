@@ -4459,6 +4459,8 @@ LineColors & CBaseView::GetLineColors(int nViewLine)
 
 void CBaseView::OnEditSelectall()
 {
+    if (m_pViewData == nullptr)
+        return;
     int nLastViewLine = m_pViewData->GetCount()-1;
     SetupAllViewSelection(0, nLastViewLine);
 
