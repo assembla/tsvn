@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-02-20 14:47+0000\n"
+"PO-Revision-Date: 2012-03-16 08:32+0000\n"
 "Last-Translator: Oto BREZINA <otik@e-posta.sk>\n"
 "Language-Team: Slovak <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -630,7 +630,7 @@ msgstr "&Prispôsobenie"
 
 #. Resource IDs: (1610, 1613)
 msgid "&Date"
-msgstr "&Dátum"
+msgstr "&Vynulovať údaje o používaní"
 
 #. Resource IDs: (1485)
 msgid "&Days of inactivity until small caches get removed"
@@ -1148,7 +1148,7 @@ msgstr "&Prednastaviť lištu"
 
 #. Resource IDs: (16657)
 msgid "&Reset my usage data"
-msgstr "&Vynulovať dáta o používaní"
+msgstr "Pripojiť sa ku serveru úložiska a stiahnuť chýbajúce údaje"
 
 #. Resource IDs: (16910)
 msgid "&Reset to Default"
@@ -1380,7 +1380,7 @@ msgstr "&Neznáme disky"
 
 #. Resource IDs: (8)
 msgid "&Update"
-msgstr "&Aktualizovať"
+msgstr "Vymazávanie údajov zo zásobníka"
 
 #. Resource IDs: (76)
 msgid "&Update item to revision"
@@ -1392,7 +1392,7 @@ msgstr "Akt&ualizovať objekt na revíziu..."
 
 #. Resource IDs: (11)
 msgid "&Update to revision..."
-msgstr "Akt&ualizovať na revíziu..."
+msgstr "Uložené údaje"
 
 #. Resource IDs: (1184)
 msgid "&Use auto-completion of file paths and keywords"
@@ -2040,7 +2040,12 @@ msgstr "Vždy zavrieť po miestnych úkonoch"
 
 #. Resource IDs: (197)
 msgid "Always use the system locale settings to show times and dates"
-msgstr "Vždy použiť systémové nastavenie pre zobrazenie času a dátumu"
+msgstr ""
+"Pri pokuse o pripojenie na server nastal problém.\n"
+"Chcete namiesto toho zobraziť údaje zo zásobníka?\n"
+"\n"
+"Prosím pochopte, že údaje v zásobníku môžu byť zastaralé,\n"
+"nekompletné, alebo dokonca mätúce z dôvodu nekompletnej histórie."
 
 #. Resource IDs: (339)
 msgid "Amount of memory required to load the cache"
@@ -2212,7 +2217,12 @@ msgstr "Autentifikácia"
 
 #. Resource IDs: (1278)
 msgid "Authentication data"
-msgstr "Autentifikačné dáta"
+msgstr ""
+"Vytvárate úložisko na sieťovom disku.\n"
+"Toto je bezpečné, ale potom musíte k nemu pristupovať iným spôsobom.\n"
+"Pristupovanie k úložisku cez file:// na sieťovom disku môže zničiť vaše "
+"údaje!\n"
+"Vytvoriť úložisko napriek tomu?"
 
 #. Resource IDs: (19, 76, 207, 1562)
 msgid "Author"
@@ -2450,7 +2460,7 @@ msgstr "Pamätanie si správ denníka urýchli ich získavanie"
 
 #. Resource IDs: (1127)
 msgid "Can double-click in log list to compare with previous revision"
-msgstr "Dvojklik na zoznam denníka na porovnanie s predošlou revíziou"
+msgstr "Dvojklik na zoznam denníka na porovnanie s predchádzajúcou revíziou"
 
 #. Resource IDs: (3865)
 msgid "Can not activate a static ActiveX object."
@@ -3238,7 +3248,7 @@ msgstr "Porovnať a &obviniť s pracovným základom"
 
 #. Resource IDs: (114)
 msgid "Compare and blame with previous revision"
-msgstr "Porovnať a obviniť s predošlou revíziou"
+msgstr "Porovnať a obviniť s predchádzajúcou revíziou"
 
 #. Resource IDs: (32871)
 msgid "Compare whitespaces"
@@ -3254,7 +3264,7 @@ msgstr "Porovnať so zákl&adom"
 
 #. Resource IDs: (114)
 msgid "Compare with previous revision"
-msgstr "Porovnať s predošlou revíziou"
+msgstr "Porovnať s predchádzajúcou revíziou"
 
 #. Resource IDs: (2055)
 msgid ""
@@ -3337,7 +3347,7 @@ msgstr "Konflikty: %d"
 
 #. Resource IDs: (345)
 msgid "Connect to the repository server and download missing log data"
-msgstr "Pripojiť sa ku serveru úložiska a stiahnuť chýbajúce dáta"
+msgstr "Pripojiť sa ku serveru úložiska a stiahnuť chýbajúce údaje"
 
 #. Resource IDs: (65535)
 msgid "Container sizes"
@@ -3640,7 +3650,7 @@ msgstr ""
 #. Resource IDs: (64)
 #, c-format
 msgid "Could not save the file %s!"
-msgstr "Nemožno uložiť súbor %s!"
+msgstr "Súbor %s nie je možné uložiť!"
 
 #. Resource IDs: (70, 81)
 #, c-format
@@ -3948,7 +3958,7 @@ msgstr "Vymazávanie"
 
 #. Resource IDs: (348)
 msgid "Deleting cached data"
-msgstr "Vymazávanie dát zo zásobníka"
+msgstr "Vymazávanie údajov zo zásobníka"
 
 #. Resource IDs: (348)
 msgid "Deleting file"
@@ -7761,8 +7771,8 @@ msgid ""
 "Previous Page\n"
 "Previous Page"
 msgstr ""
-"Predošlá strana\n"
-"predošlá strana"
+"Predchádzajúca strana\n"
+"Predchádzajúca strana"
 
 #. Resource IDs: (1069, 16990)
 msgid "Print"
@@ -8108,7 +8118,7 @@ msgid ""
 "Redo the previously undone action\n"
 "Redo"
 msgstr ""
-"Zopakovať predošlý vrátený úkon\n"
+"Zopakovať predchádzajúci vrátený úkon\n"
 "Zopakovať"
 
 #. Resource IDs: (32819)
@@ -8537,7 +8547,7 @@ msgstr "Vyriešiť všetko n&eskôr"
 
 #. Resource IDs: (282)
 msgid "Resolve conflict using 'mine'"
-msgstr "Vyriešiť konflikt použitím 'Moje'"
+msgstr "Vyriešiť konflikt použitím \"Moje\""
 
 #. Resource IDs: (282)
 msgid "Resolve conflict using 'theirs'"
@@ -8995,7 +9005,7 @@ msgstr ""
 
 #. Resource IDs: (108)
 msgid "Saved Data"
-msgstr "Uložené dáta"
+msgstr "Uložené údaje"
 
 #. Resource IDs: (344)
 msgid "Saves expensive server roundtrips when set to longer than 0 seconds"
@@ -10734,8 +10744,7 @@ msgstr ""
 "Na riadku %d je ešte stále nevyriešený konflikt!\n"
 "Pred uložením, by ste mali vyriešiť všetky konflikty.\n"
 "Chcete uložiť súbor aj s konfliktom?\n"
-"Keď vyberiete ANO, potom budete musieť vyriešiť konflikty ručne v inom "
-"editore!"
+"Keď vyberiete ANO budete musieť vyriešiť konflikty ručne v inom editore!"
 
 #. Resource IDs: (313)
 msgid ""
@@ -10754,7 +10763,7 @@ msgid ""
 "incomplete or even misleading due to incomplete history data."
 msgstr ""
 "Pri pokuse o pripojenie na server nastal problém.\n"
-"Chcete namiesto toho zobraziť dáta zo zásobníka?\n"
+"Chcete namiesto toho zobraziť údaje zo zásobníka?\n"
 "\n"
 "Prosím pochopte, že údaje v zásobníku môžu byť zastaralé,\n"
 "nekompletné, alebo dokonca mätúce z dôvodu nekompletnej histórie."
@@ -11260,8 +11269,8 @@ msgid ""
 msgstr ""
 "Nie je možné obnoviť cestu pracovnej kópie!\n"
 "Toto sa môže stať po premenovaní súboru.\n"
-"Prosím spustite okno záznamov pre vybraný súbor a vráťte zmeny\n"
-"z vrchu panelu v okne záznamov."
+"Prosím spustite okno záznamov pre vybraný súbor\n"
+"a vráťte zmeny z vrchu panelu v okne záznamov."
 
 #. Resource IDs: (3865)
 msgid "Unable to write read-only property."
@@ -11611,7 +11620,7 @@ msgstr ""
 
 #. Resource IDs: (251)
 msgid "Use text block from 't&heirs' before 'mine'"
-msgstr "Použiť blok \"i&ch\" pred \"moje\""
+msgstr "Použiť blok \"I&ch\" pred \"Moje\""
 
 #. Resource IDs: (2052)
 msgid ""
@@ -11832,7 +11841,7 @@ msgid ""
 "Select the default behaviour here."
 msgstr ""
 "Keď pripojenie k úložisku nie je možné, TSVN sa môže\n"
-"prepnúť do režimu používania iba zásobníkových dát.\n"
+"prepnúť do režimu používania iba zásobníkových údajov.\n"
 "Vyberte predvolené správanie."
 
 #. Resource IDs: (197)
@@ -11929,7 +11938,7 @@ msgstr ""
 "Vytvárate úložisko na sieťovom disku.\n"
 "Toto je bezpečné, ale potom musíte k nemu pristupovať iným spôsobom.\n"
 "Pristupovanie k úložisku cez file:// na sieťovom disku môže zničiť vaše "
-"dáta!\n"
+"údaje!\n"
 "Vytvoriť úložisko napriek tomu?"
 
 #. Resource IDs: (88)
@@ -13172,6 +13181,27 @@ msgstr "áno"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revízia %2!s!, Autor %3!s!, Dátum %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revízia %2!s!, Autor %3!s!, Veľkosť %4!s!, Dátum %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Zobrazovanie %2!d! súborov a %3!d! adresárov, celkom %4!d! objektov"
+
 #~ msgid "&All"
 #~ msgstr "&Všetko"
 
@@ -13190,6 +13220,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Line number (%d - %d)"
 #~ msgstr "Číslo &riadka (%d - %d)"
 
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "&Maximálna dĺžka riadku pre riadkové porovnanie"
+
 #~ msgid "&None"
 #~ msgstr "Žiad&ne"
 
@@ -13199,6 +13232,19 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Pripevniť:"
 
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "Schváliť alebo odmietnúť pripnuté skripty spúštané u klienta"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Schváliť\n"
+#~ "Spustiť pripnutý skript"
+
+#~ msgid "Approved hook scripts"
+#~ msgstr "Schválené spripnuté kripty"
+
 #~ msgid "Aqua Style"
 #~ msgstr "Vodný štýl"
 
@@ -13207,6 +13253,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Blue Style"
 #~ msgstr "Modrý štýl"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Zrušiť\n"
+#~ "Nespúštať skript"
 
 #~ msgid ""
 #~ "Cancel\n"
@@ -13225,6 +13278,16 @@ msgstr "{BugTraq}"
 #~ msgid "Changes the style of the application"
 #~ msgstr "Zmení štýl programu"
 
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "Zrušiť povolenie všetkých %ld klientských skriptov"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Kliknite aby sa zobrazili príkazy na presúvanie textu\n"
+#~ "Požiť blok textu"
+
 #~ msgid "Collapse"
 #~ msgstr "Zbaliť"
 
@@ -13236,6 +13299,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "Color by au&thor"
 #~ msgstr "Farby podľa &autora"
+
+#~ msgid ""
+#~ "Command Line To Execute:\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Príkazový riadok k spusteniu:\n"
+#~ "Udajte cestu v rámci pracovnej kópie, zadajte URL v úložisku s koreňouvou "
+#~ "URL zadanou ako %REPOROOT%"
 
 #~ msgid "Compare two files"
 #~ msgstr "Porovnať dva súbory"
@@ -13258,8 +13330,22 @@ msgstr "{BugTraq}"
 #~ msgid "Diff Viewer::Merge Tool"
 #~ msgstr "Prezerač rozdielov::Zlučovač"
 
+#~ msgid "Do not ask again for this script"
+#~ msgstr "Už sa na tento sktript nepýtať"
+
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Chcete načítať zmenený súbor?"
+
+#~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Externé \"%1!s!\"\n"
+#~ "Revízia %2!s!"
+
+#~ msgid ""
+#~ "Fetches the contents of folders in the background so browsing is faster"
+#~ msgstr "Načíta obsah adresárov na pozadí aby bolo prehliadanie rýchlejšie"
 
 #~ msgid "General::Dialogs 3"
 #~ msgstr "General::Dialógy 3"
@@ -13267,8 +13353,25 @@ msgstr "{BugTraq}"
 #~ msgid "Go To Line"
 #~ msgstr "Skočiť na riadok"
 
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Skočiť na nasledovný rozdiel\n"
+#~ "Nasledovný riadkový rozdiel"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Skočiť na predchádzajúci rozdiel\n"
+#~ "Predchazajúci riadkový rozdiel"
+
 #~ msgid "Goto Line"
 #~ msgstr "Skočiť na riadok"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Skryť/zobraziť zoznam záplat v súbore"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13300,10 +13403,20 @@ msgstr "{BugTraq}"
 
 #~ msgid ""
 #~ "Load changes\n"
+#~ "Changes made in TortoiseMerge are lost and replaced with the new content."
+#~ msgstr ""
+#~ "Načítať zmeny\n"
+#~ "Zmeny vykonané v TortoiseMerge sú stratené a nahradené novým obsahom."
+
+#~ msgid ""
+#~ "Load changes\n"
 #~ "The views are updated with the new content."
 #~ msgstr ""
 #~ "Načítať zmeny\n"
 #~ "Okná budú aktualizované novým obsahom."
+
+#~ msgid "Local &Hooks"
+#~ msgstr "Miestne &pripnuté sktripty"
 
 #~ msgid ""
 #~ "Navigate to a specific line in the view\n"
@@ -13333,6 +13446,13 @@ msgstr "{BugTraq}"
 #~ msgid "Office XP"
 #~ msgstr "Office XP"
 
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Otvoriť súbory na porovnanie alebo použiť záplatu\n"
+#~ "Otvoriť súbory"
+
 #~ msgid "Operative"
 #~ msgstr "Operatívne"
 
@@ -13342,14 +13462,17 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Pripevniť"
 
+#~ msgid "Pre-fetch folders for faster browsing"
+#~ msgstr "Prednačítať adresáre pre rýchlejšie prehliadanie"
+
 #~ msgid "Previous conflict"
-#~ msgstr "Predošlý konflikt"
+#~ msgstr "Predchádzajúci konflikt"
 
 #~ msgid "Previous difference"
-#~ msgstr "Predošlý rozdiel"
+#~ msgstr "Predchádzajúci rozdiel"
 
 #~ msgid "Previous inline difference"
-#~ msgstr "Predošlý riadkový rozdiel"
+#~ msgstr "Predchádzajúci riadkový rozdiel"
 
 #~ msgid "Recycle bin"
 #~ msgstr "Kôš"
@@ -13379,14 +13502,48 @@ msgstr "{BugTraq}"
 #~ msgid "Save as"
 #~ msgstr "Uložiť ako"
 
+#~ msgid ""
+#~ "Show Inline-Diff\n"
+#~ "Inline diff"
+#~ msgstr ""
+#~ "Zobraziť riadkové rozdiely\n"
+#~ "Riadkové rozdiely"
+
 #~ msgid "Show Whitespaces"
 #~ msgstr "Zobraziť biele znaky"
 
 #~ msgid "Show externals"
 #~ msgstr "Zobraziť externé"
 
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Zobraziť špeciálne znaky pre biele znaky a nové riadky.\n"
+#~ "Zobraziť biele znaky"
+
+#~ msgid "Shows folders and files included with the svn:externals property"
+#~ msgstr "Zobrazí adresáre a súbory zahrnuté vo vlastnosti svn:externals"
+
 #~ msgid "Silver Style"
 #~ msgstr "Strieborný štýl"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Do you want to load the changes?"
+#~ msgstr ""
+#~ "Jeden alebo viac súborov boli zmenené mimo T-Merge.\n"
+#~ "Chcete načítať zmeny?"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Would you like to reload and lose your changes?"
+#~ msgstr ""
+#~ "Jeden alebo viac súborov boli zmenené mimo T-Merge.\n"
+#~ "Chcete súbory znovu načítať a stratiť vaše zmeny?"
+
+#~ msgid "Start registry editor"
+#~ msgstr "Spustiť editor registrov"
 
 #~ msgid "Style"
 #~ msgstr "Štýl"
@@ -13396,6 +13553,70 @@ msgstr "{BugTraq}"
 
 #~ msgid "Switch left and right view"
 #~ msgstr "Prepnúť medzi ľavým a pravým panelom"
+
+#~ msgid "The line number must be in between %d and %d"
+#~ msgstr "Číslo riadka musí byť medzi %d a %d"
+
+#~ msgid ""
+#~ "There are currently %d overlay handlers installed besides the ones "
+#~ "Tortoise uses."
+#~ msgstr ""
+#~ "Momentálne je inštalových %d prekrytí okrem toho čo používa Tortoise."
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Táto chyba bola oznámená užívateľkým pripnutým skriptom na Subversion "
+#~ "servery.\n"
+#~ "Prosím kontaktujte vášho správcu servera, aby vám pomohol vyriešiť tento "
+#~ "problém."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-commit hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Táto chyba bola oznámená užívateľkým post-commit pripnutým skriptom na "
+#~ "Subversion servery.\n"
+#~ "Prosím kontaktujte vášho správcu servera, aby vám pomohol vyriešiť tento "
+#~ "problém."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-lock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Táto chyba bola oznámená užívateľkým post-lock pripnutým skriptom na "
+#~ "Subversion servery.\n"
+#~ "Prosím kontaktujte vášho správcu servera, aby vám pomohol vyriešiť tento "
+#~ "problém."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-unlock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Táto chyba bola oznámená užívateľkým post-unlock pripnutým skriptom na "
+#~ "Subversion servery.\n"
+#~ "Prosím kontaktujte vášho správcu servera, aby vám pomohol vyriešiť tento "
+#~ "problém."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Táto pracovná kópia má nastavený skript spúštaný u klienta. Chcete aby "
+#~ "bol tento skript spustený teraz?\n"
+#~ "Príkazový riadok je:\n"
+#~ "%s"
 
 #~ msgid ""
 #~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
@@ -13416,6 +13637,20 @@ msgstr "{BugTraq}"
 #~ "%s\n"
 #~ "zlib %s"
 
+#~ msgid ""
+#~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+#~ "recycle bin. The recycle bin currently contains %2!ld! items, which most "
+#~ "likely is the reason for this slowdown.\n"
+#~ "To fix this, you should empty the recycle bin now."
+#~ msgstr ""
+#~ "Pri presúvani %1!ld! objektov do odpadkového koša TortoiseSVN zistil "
+#~ "závažne spomalenie systému. Odpadkový kôš teraz obsahuje %2!ld! objektov, "
+#~ "čo je s najväčšou pravdepodobnosťou dôvodom spomalenia.\n"
+#~ "Z tohoto dôvodu odporúčame vysypať kôš."
+
+#~ msgid "TortoiseSVN will not show the following overlays: %s"
+#~ msgstr "TortoiseSVN nezobrazí nasledovné prekrytia: %s"
+
 #~ msgid "Undo"
 #~ msgstr "Vrátiť"
 
@@ -13430,19 +13665,22 @@ msgstr "{BugTraq}"
 #~ msgstr "Použiť blok \"Moje\""
 
 #~ msgid "Use 'mine' text block then 'theirs'"
-#~ msgstr "Použiť blok \"Moje\" pred \"Ich\""
+#~ msgstr "Použiť blok \"Moje\" potom \"Ich\""
 
 #~ msgid "Use 'theirs' text block"
 #~ msgstr "Použiť blok \"Ich\""
 
 #~ msgid "Use 'theirs' text block then 'mine'"
-#~ msgstr "Použiť blok  \"Ich\" pred \"Moje\""
+#~ msgstr "Použiť blok  \"Ich\" potom \"Moje\""
 
 #~ msgid "Use Blocks"
 #~ msgstr "Použiť blok"
 
 #~ msgid "Use left block"
 #~ msgstr "Použiť ľavý blok"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Kontrola správnosti hodnoty vlastnosti zlyhala!"
 
 #~ msgid "Visual Studio 2005"
 #~ msgstr "Visual Studio 2005"
@@ -13471,6 +13709,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "all &revisions"
 #~ msgstr "všetky &revízie"
+
+#~ msgid "specific r&ange"
+#~ msgstr "zadaný &rozsah"
 
 #~ msgid "user:bool"
 #~ msgstr "user:bool"
