@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2006, 2008-2011 - TortoiseSVN
+// Copyright (C) 2003-2006, 2008-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -350,7 +350,10 @@ CStringA CUnicodeUtils::GetUTF8(const CStringW& string)
     CBuffer<char> buffer (3 * size);
 
     char* end = UTF16ToUTF8 ((const wchar_t*)string, size, buffer);
-    return CStringA (buffer, static_cast<int>(end - buffer));
+    int len = static_cast<int>(end - buffer);
+    if (len)
+        return CStringA (buffer, len);
+    return CStringA();
 }
 
 CString CUnicodeUtils::GetUnicode(const CStringA& string)
@@ -359,7 +362,10 @@ CString CUnicodeUtils::GetUnicode(const CStringA& string)
     CBuffer<wchar_t> buffer (size);
 
     wchar_t* end = UTF8ToUTF16 ((const char*)string, size, buffer);
-    return CString (buffer, static_cast<int>(end - buffer));
+    int len = static_cast<int>(end - buffer);
+    if (len)
+        return CString (buffer, len);
+    return CString();
 }
 
 CString CUnicodeUtils::UTF8ToUTF16 (const std::string& string)
@@ -368,7 +374,10 @@ CString CUnicodeUtils::UTF8ToUTF16 (const std::string& string)
     CBuffer<wchar_t> buffer (size);
 
     wchar_t* end = UTF8ToUTF16 (string.c_str(), size, buffer);
-    return CString (buffer, static_cast<int>(end - buffer));
+    int len = static_cast<int>(end - buffer);
+    if (len)
+        return CString (buffer, len);
+    return CString();
 }
 #endif //_MFC_VER
 
@@ -378,7 +387,10 @@ std::string CUnicodeUtils::StdGetUTF8(const std::wstring& wide)
     CBuffer<char> buffer (3 * size);
 
     char* end = UTF16ToUTF8 (wide.c_str(), size, buffer);
-    return std::string (buffer, end - buffer);
+    int len = static_cast<int>(end - buffer);
+    if (len)
+        return std::string (buffer, len);
+    return std::string();
 }
 
 std::wstring CUnicodeUtils::StdGetUnicode(const std::string& utf8)
@@ -387,18 +399,10 @@ std::wstring CUnicodeUtils::StdGetUnicode(const std::string& utf8)
     CBuffer<wchar_t> buffer (size);
 
     wchar_t* end = UTF8ToUTF16 (utf8.c_str(), size, buffer);
-    return std::wstring (buffer, end - buffer);
-}
-
-// use system function for string conversion
-
-std::string WideToMultibyte(const std::wstring& wide)
-{
-    auto_buffer<char> narrow (wide.length()*3+2);
-    BOOL defaultCharUsed;
-    int ret = (int)WideCharToMultiByte(CP_ACP, 0, wide.c_str(), (int)wide.size(), narrow, (int)wide.length()*3 - 1, ".", &defaultCharUsed);
-
-    return std::string (narrow.get(), ret);
+    int len = static_cast<int>(end - buffer);
+    if (len)
+        return std::wstring (buffer, len);
+    return std::wstring();
 }
 
 // load a string resource
