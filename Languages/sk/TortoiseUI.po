@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-03-16 08:32+0000\n"
+"PO-Revision-Date: 2012-03-24 06:52+0000\n"
 "Last-Translator: Oto BREZINA <otik@e-posta.sk>\n"
 "Language-Team: Slovak <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,17 +51,17 @@ msgstr "počet samostatne zobrazených autorov:"
 #. Resource IDs: (357)
 #, c-format
 msgid "%.2f MBytes transferred"
-msgstr "Prenesené dáta: %.2f MB"
+msgstr "Prenesené dáta: %.2f MiB"
 
 #. Resource IDs: (357)
 #, c-format
 msgid "%.2f kBytes/s"
-msgstr "%.2f kB/s"
+msgstr "%.2f KiB/s"
 
 #. Resource IDs: (3868)
 #, c-format
 msgid "%1 contained an unexpected object."
-msgstr "%1 obsahuje neočakávaný objekt."
+msgstr "%1 obsahoval neočakávaný objekt."
 
 #. Resource IDs: (3867)
 #, c-format
@@ -91,8 +91,7 @@ msgstr "Vybraných %1!d! súborov, celkom %2!d! súborov"
 #. Resource IDs: (246)
 #, c-format
 msgid "%1!d! most active author(s) with at least %2!d! commits each (%3!d! %%)"
-msgstr ""
-"%1!d! najaktívnejších autorov s aspoň %2!d! odovzdaní každých %3!d! %%)"
+msgstr "%1!d! najaktívnejších autorov s aspoň %2!d! odovzdaní každý (%3!d! %%)"
 
 #. Resource IDs: (226)
 #, c-format
@@ -112,7 +111,7 @@ msgstr "%1!s! - na revízii: %2!d!"
 #. Resource IDs: (151)
 #, c-format
 msgid "%1!s! : Working Base, Revision %2!ld!"
-msgstr "%1!s! : Pracovný základ, Revízia %2!ld!"
+msgstr "%1!s! : Pracovný základ, revízia %2!ld!"
 
 #. Resource IDs: (226)
 #, c-format
@@ -151,7 +150,7 @@ msgid ""
 "Verify that the correct path and file name are given."
 msgstr ""
 "%1\n"
-"Súbor nemožno nájsť.\n"
+"Tento súbor nemožno nájsť.\n"
 "Skontrolujte, či je zadaná správna cesta a meno súboru."
 
 #. Resource IDs: (357)
@@ -167,7 +166,7 @@ msgstr "%I64d B/s"
 #. Resource IDs: (357)
 #, c-format
 msgid "%I64d kBytes transferred"
-msgstr "Prenesené dáta: %I64d kB"
+msgstr "Prenesené dáta: %I64d KiB"
 
 #. Resource IDs: (8)
 #, c-format
@@ -939,7 +938,7 @@ msgstr "&Zmeniť vlastnosť ručne"
 
 #. Resource IDs: (1486)
 msgid "&Maximum size [kByte] of a removed inactive cache"
-msgstr "&Maximálna veľkosť odstráneného neaktívneho zásobníka [kB]"
+msgstr "&Maximálna veľkosť odstráneného neaktívneho zásobníka [KiB]"
 
 #. Resource IDs: (16543)
 msgid "&Menu animations:"
@@ -2448,7 +2447,7 @@ msgstr "CAP"
 
 #. Resource IDs: (199)
 msgid "Cache size [kB]"
-msgstr "Veľkosť zásobníka [kB]"
+msgstr "Veľkosť zásobníka [KiB]"
 
 #. Resource IDs: (1440)
 msgid "Cached Repositories"
@@ -2958,9 +2957,7 @@ msgstr "Čistenie"
 #. Resource IDs: (146)
 #, c-format
 msgid "Cleaning up directory '%1!s!'"
-msgstr ""
-"Čistenie adresára\n"
-"%1!s!"
+msgstr "Čistenie adresára %1!s!"
 
 #. Resource IDs: (329)
 msgid "Cleanup"
@@ -7993,7 +7990,7 @@ msgstr "Vrátiť do tejto re&vízie"
 
 #. Resource IDs: (65535)
 msgid "RAM [kB]: "
-msgstr "RAM [kB]: "
+msgstr "RAM [KiB]: "
 
 #. Resource IDs: (3697)
 msgid "REC"
@@ -11379,7 +11376,7 @@ msgid ""
 "file is smaller than the given size in kBytes."
 msgstr ""
 "Nepoužitý zásobník denníka bude vymazaný iba keď jeho\n"
-"súbor je väčší ako udaná veľkosť v kBytes."
+"súbor je menší ako udaná veľkosť v KiB."
 
 #. Resource IDs: (146)
 msgid "Unversion"
@@ -12451,7 +12448,7 @@ msgstr "vymazané"
 
 #. Resource IDs: (65535)
 msgid "disk [kB]: "
-msgstr "disk [kB]: "
+msgstr "disk [KiB]: "
 
 #. Resource IDs: (58116)
 msgid "dummy"
@@ -13248,6 +13245,9 @@ msgstr "{BugTraq}"
 #~ msgid "Aqua Style"
 #~ msgstr "Vodný štýl"
 
+#~ msgid "Backwards in browsing history"
+#~ msgstr "Dopredu v historií prehliadania"
+
 #~ msgid "Black Style"
 #~ msgstr "Čierny štýl"
 
@@ -13347,6 +13347,9 @@ msgstr "{BugTraq}"
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Načíta obsah adresárov na pozadí aby bolo prehliadanie rýchlejšie"
 
+#~ msgid "Forwards in browsing history"
+#~ msgstr "Naspäť v historií prehliadania"
+
 #~ msgid "General::Dialogs 3"
 #~ msgstr "General::Dialógy 3"
 
@@ -13417,6 +13420,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Local &Hooks"
 #~ msgstr "Miestne &pripnuté sktripty"
+
+#~ msgid "Main"
+#~ msgstr "Hlavné"
+
+#~ msgid "Navigate"
+#~ msgstr "Navigácia"
 
 #~ msgid ""
 #~ "Navigate to a specific line in the view\n"
@@ -13671,7 +13680,7 @@ msgstr "{BugTraq}"
 #~ msgstr "Použiť blok \"Ich\""
 
 #~ msgid "Use 'theirs' text block then 'mine'"
-#~ msgstr "Použiť blok  \"Ich\" potom \"Moje\""
+#~ msgstr "Použiť blok \"Ich\" potom \"Moje\""
 
 #~ msgid "Use Blocks"
 #~ msgstr "Použiť blok"
@@ -13681,6 +13690,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Validation of the property value failed!"
 #~ msgstr "Kontrola správnosti hodnoty vlastnosti zlyhala!"
+
+#~ msgid "View"
+#~ msgstr "Zobrazenie"
 
 #~ msgid "Visual Studio 2005"
 #~ msgstr "Visual Studio 2005"
