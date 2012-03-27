@@ -676,7 +676,7 @@ bool CSVNStatusListCtrl::FetchStatusForSingleTarget(
     if (((wcFileStatus == svn_wc_status_unversioned)||(wcFileStatus == svn_wc_status_none)||((wcFileStatus == svn_wc_status_ignored)&&(m_bShowIgnores))) && svnPath.IsDirectory())
     {
         // we have an unversioned folder -> get all files in it recursively!
-        AddUnversionedFolder(svnPath, workingTarget.GetContainingDirectory());
+        AddUnversionedFolder(svnPath, workingTarget.GetContainingDirectory(), bEntryFromDifferentRepo);
     }
 
     // for folders, get all statuses inside it too
@@ -837,7 +837,8 @@ CSVNStatusListCtrl::AddNewFileEntry(
 }
 
 void CSVNStatusListCtrl::AddUnversionedFolder(const CTSVNPath& folderName,
-                                                const CTSVNPath& basePath)
+                                                const CTSVNPath& basePath,
+                                                bool inexternal)
 {
     if (!m_bUnversionedRecurse)
         return;
@@ -858,13 +859,14 @@ void CSVNStatusListCtrl::AddUnversionedFolder(const CTSVNPath& folderName,
             entry->basepath = basePath;
             entry->inunversionedfolder = true;
             entry->isfolder = filefinder.IsDirectory();
+            entry->inexternal = inexternal;
 
             CAutoWriteLock locker(m_guard);
             m_arStatusArray.push_back(entry);
             if (entry->isfolder)
             {
                 if (!SVNHelper::IsVersioned(entry->path, false))
-                    AddUnversionedFolder(entry->path, basePath);
+                    AddUnversionedFolder(entry->path, basePath, entry->inexternal);
             }
         }
     }
@@ -910,7 +912,7 @@ void CSVNStatusListCtrl::PostProcessEntry ( const FileEntry* entry
         if (entry->isfolder)
         {
             // we have an unversioned folder -> get all files in it recursively!
-            AddUnversionedFolder(entry->path, entry->basepath);
+            AddUnversionedFolder(entry->path, entry->basepath, entry->inexternal);
         }
     }
 }
