@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-03-21 18:55+0000\n"
+"PO-Revision-Date: 2012-03-29 18:21+0000\n"
 "Last-Translator: JustinoAveiro <paulojustino.nec@gmail.com>\n"
 "Language-Team: Portuguese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -3925,7 +3925,7 @@ msgstr "Remove a cache do Repositório"
 
 #. Resource IDs: (240)
 msgid "Delete Unversioned Items"
-msgstr "Remover Itens sem Controle de Versão"
+msgstr "Remover Itens Não Versionados"
 
 #. Resource IDs: (14)
 #, c-format
@@ -3943,7 +3943,7 @@ msgstr "Apagar itens sem controle de versão"
 
 #. Resource IDs: (17)
 msgid "Delete unversioned items..."
-msgstr "Remover itens sem controle de versão..."
+msgstr "Remover itens não versionados..."
 
 #. Resource IDs: (199)
 msgid ""
@@ -11012,9 +11012,10 @@ msgid ""
 "restore the default set of visible commands to the menus and toolbars. It "
 "will not undo any explicit customizations. Are you sure you want to do this?"
 msgstr ""
-"Isto removerá o registo dos comandos que usou nesta aplicação e restaurará o "
-"conjunto padrão de comandos visíveis no menus e barras de ferramentas. Não "
-"desfará nenhuma personalização explícita. Tem a certeza de que o quer fazer?"
+"Irá ser removido o registo dos comandos que usou nesta aplicação e "
+"restaurará o conjunto padrão de comandos visíveis no menus e barras de "
+"ferramentas. Não desfará nenhuma personalização explícita. Tem a certeza de "
+"que o quer fazer?"
 
 #. Resource IDs: (99)
 msgid ""
@@ -13379,6 +13380,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Line number (%d - %d)"
 #~ msgstr "Número de &Linha (%d - %d)"
 
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "&Máximo tamanho de linha para difs em linha"
+
 #~ msgid "&None"
 #~ msgstr "&Nenhum"
 
@@ -13387,6 +13391,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "&Peg:"
 #~ msgstr "&Cavilha:"
+
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "Aprova ou rejeita script de gancho de lado-cliente"
 
 #~ msgid ""
 #~ "Approve\n"
@@ -13400,6 +13407,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Estilo Aqua"
+
+#~ msgid "Backwards in browsing history"
+#~ msgstr "Para trás no histórico de navegação"
 
 #~ msgid "Black Style"
 #~ msgstr "Estilo Black"
@@ -13430,6 +13440,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Changes the style of the application"
 #~ msgstr "Altera o estilo da aplicação"
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "Remove todos os %ld scripts de gancho lado-cliente aprovados"
 
 #~ msgid ""
 #~ "Click to see commands to move blocks of text\n"
@@ -13489,14 +13502,34 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Adquire os conteúdos das pastas em background, para acelerar a navegação. "
 
+#~ msgid "Forwards in browsing history"
+#~ msgstr "Para a frente no histórico de navegação"
+
 #~ msgid "General::Dialogs 3"
 #~ msgstr "General::Dialogs 3"
 
 #~ msgid "Go To Line"
 #~ msgstr "Ir para linha"
 
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Ir para a próxima diferença em linha\n"
+#~ "Próxima diferença em linha"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Ir para a diferença em linha prévia\n"
+#~ "Diferença em linha prévia"
+
 #~ msgid "Goto Line"
 #~ msgstr "Ir para linha"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Ocultar/Mostrar a lista de ficheiros correcção"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13513,6 +13546,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Inline diff"
 #~ msgstr "Dif em-linha"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "&amp;Comparação em linha palavra-por-palavra"
 
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Manter &listas de alterações"
@@ -13546,6 +13582,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Navigate"
 #~ msgstr "Navegar"
+
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Navegar na vista para uma linha específica\n"
+#~ "Ir para Linha"
 
 #~ msgid "Next conflict"
 #~ msgstr "Próximo conflito"
@@ -13636,14 +13679,45 @@ msgstr "{BugTraq}"
 #~ msgid "Silver Style"
 #~ msgstr "Estilo Silver"
 
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Do you want to load the changes?"
+#~ msgstr ""
+#~ "Alguns ficheiro(s) foram alterados fora do T-Merge.\n"
+#~ "Desejas carregar as alterações?"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Would you like to reload and lose your changes?"
+#~ msgstr ""
+#~ "Alguns ficheiro(s) foram alterados fora do T-Merge.\n"
+#~ "Desejas recarrega-los e perder as tuas alterações"
+
 #~ msgid "Start registry editor"
 #~ msgstr "Iniciar editor do registo"
 
 #~ msgid "Style"
 #~ msgstr "Estilo"
 
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Comutar entre vista simples e com duplo painel"
+
 #~ msgid "Switch left and right view"
 #~ msgstr "Trocar vista direita e esquerda"
+
+#~ msgid "The line number must be in between %d and %d"
+#~ msgstr "O número de linha deverá estar entre %d and %d"
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Este erro foi gerado por um script de gancho personalizado no servidor "
+#~ "Subversion.\n"
+#~ "Contacta por favor o teu administrador do servidor para te ajudar a "
+#~ "resolver este assunto."
 
 #~ msgid ""
 #~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
@@ -13663,6 +13737,20 @@ msgstr "{BugTraq}"
 #~ "serf %d.%d.%d\n"
 #~ "%s\n"
 #~ "zlib %s"
+
+#~ msgid ""
+#~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+#~ "recycle bin. The recycle bin currently contains %2!ld! items, which most "
+#~ "likely is the reason for this slowdown.\n"
+#~ "To fix this, you should empty the recycle bin now."
+#~ msgstr ""
+#~ "O TortoiseSVN detectou uma lentidão severa ao mover so itens %1!ld! para "
+#~ "a reciclagem. O cesto de reciclagem contém correntemente %2!ld! itens, o "
+#~ "que será provavelmente a razão para a lentidão.\n"
+#~ "Para corrigir a situação deverás esvaziar já o cesto de reciclagem."
+
+#~ msgid "TortoiseSVN will not show the following overlays: %s"
+#~ msgstr "O TortoiseSVN não mostrará as seguintes sobreposições: %s"
 
 #~ msgid "Undo"
 #~ msgstr "desfazer"
@@ -13713,6 +13801,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Wrap long lines"
 #~ msgstr "Moldar linhas longas"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Ajustar linhas longas na ponta direita da vista\n"
+#~ "Ajustar linhas longas"
 
 #~ msgid "all &revisions"
 #~ msgstr "todas &revisões"
