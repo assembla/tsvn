@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -260,6 +260,7 @@ private:
     void        OnCommitFinished();
     bool        CheckUpdateAndRetry();
     void        ResetVars();
+    void        GenerateMergeLogMessage();
 
     /**
      * Resizes the columns of the progress list so that the headings are visible.
@@ -317,6 +318,7 @@ private:
     SVNRev                  m_RevisionEnd;
     SVNRev                  m_pegRev;
     SVNRevRangeArray        m_revisionArray;
+    SVNRevRangeArray        m_mergedRevisions;
     CString                 m_changelist;
     bool                    m_keepchangelist;
     RevPropHash             m_revProps;

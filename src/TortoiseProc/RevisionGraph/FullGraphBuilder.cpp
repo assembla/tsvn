@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2008 - TortoiseSVN
+// Copyright (C) 2003-2008, 2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,9 +42,12 @@ CFullGraphBuilder::~CFullGraphBuilder(void)
 
 void CFullGraphBuilder::Run()
 {
-    // special case: empty log
+    // special cases:
+	// * empty log
+	// * no history for that path (e.g. added but not yet committed)
 
-    if (history.GetHeadRevision() == NO_REVISION)
+    if (    (history.GetHeadRevision() == NO_REVISION)
+		 || !history.GetStartPath()->IsValid())
         return;
 
     // frequently used objects
