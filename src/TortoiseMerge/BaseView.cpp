@@ -2879,6 +2879,8 @@ void CBaseView::OnLButtonDblClk(UINT nFlags, CPoint point)
 
         POINT ptViewCarret = GetCaretViewPosition();
         nViewLine = ptViewCarret.y;
+        if (nViewLine >= GetViewCount())
+            return;
         CString sLine = GetViewLine(nViewLine);
         int nLineLength = sLine.GetLength();
         int nBasePos = ptViewCarret.x;
@@ -3380,6 +3382,8 @@ void CBaseView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
         RemoveSelectedText();
         POINT ptCaretViewPos = GetCaretViewPosition();
         int nViewLine = ptCaretViewPos.y;
+        if ((nViewLine==0)&&(GetViewCount()==0))
+            OnChar(VK_RETURN, 0, 0);
         viewdata lineData = GetViewData(nViewLine);
         lineData.sLine.Insert(ptCaretViewPos.x, (wchar_t)nChar);
         if (IsStateEmpty(lineData.state))
@@ -3640,6 +3644,9 @@ void CBaseView::PasteText()
     POINT ptCaretViewPos = GetCaretViewPosition();
     int nLeft = ptCaretViewPos.x;
     int nViewLine = ptCaretViewPos.y;
+
+    if ((nViewLine==0)&&(GetViewCount()==0))
+        OnChar(VK_RETURN, 0, 0);
 
     std::vector<CString> lines;
     int nStart = 0;
