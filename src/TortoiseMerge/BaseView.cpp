@@ -4076,10 +4076,16 @@ void CBaseView::BuildMarkedWordArray()
     bool bDoit = !m_sMarkedWord.IsEmpty();
     for (int i = 0; i < lineCount; ++i)
     {
-        LPCTSTR line = NULL;
-        if (bDoit && ((line = GetLineChars(i))!=NULL))
+        if (bDoit)
         {
-            m_arMarkedWordLines.push_back(_tcsstr(line, (LPCTSTR)m_sMarkedWord) != NULL);
+            CString line = GetLineChars(i);
+
+            if (!line.IsEmpty())
+            {
+                m_arMarkedWordLines.push_back(line.Find(m_sMarkedWord) != -1);
+            }
+            else
+                m_arMarkedWordLines.push_back(0);
         }
         else
             m_arMarkedWordLines.push_back(0);
@@ -4408,7 +4414,6 @@ LineColors & CBaseView::GetLineColors(int nViewLine)
         if (!diff || !SVNLineDiff::ShowInlineDiff(diff) || !diff->next)
             break;
 
-        bool bModified = true;
         int lineoffset = 0;
         int nTextStartOffset = 0;
         std::map<int, COLORREF> removedPositions;
@@ -4430,12 +4435,12 @@ LineColors & CBaseView::GetLineColors(int nViewLine)
             {
                 crBkgnd = InlineViewLineDiffColor(nViewLine);
             }
-            else if (bModified || (diffState == DIFFSTATE_EDITED))
+            else
             {
                 crBkgnd = m_ModifiedBk;
             }
 
-            if (bModified && (len < diff->modified_length))
+            if (len < diff->modified_length)
             {
                 removedPositions[nTextStartOffset] = m_InlineRemovedBk;
             }
