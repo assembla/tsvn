@@ -83,7 +83,7 @@ CStringA CUnicodeUtils::GetUTF8(const CStringW& string)
     int len = WideCharToMultiByte(CP_UTF8, 0, (const wchar_t*)string, size, buffer, 4*size, 0, NULL);
     if (len == 0)
         return CStringA();
-    return CStringA (buffer, len);
+    return CStringA (buffer, len-1);
 }
 
 CString CUnicodeUtils::GetUnicode(const CStringA& string)
@@ -96,7 +96,7 @@ CString CUnicodeUtils::GetUnicode(const CStringA& string)
     int len = MultiByteToWideChar(CP_UTF8, 0, (const char*)string, size, buffer, 2*size);
     if (len == 0)
         return CString();
-    return CString (buffer, len);
+    return CString (buffer, len-1);
 }
 
 CString CUnicodeUtils::UTF8ToUTF16 (const std::string& string)
@@ -119,7 +119,7 @@ std::string CUnicodeUtils::StdGetUTF8(const std::wstring& wide)
     int len = WideCharToMultiByte(CP_UTF8, 0, wide.c_str(), size, buffer, 4*size, 0, NULL);
     if (len == 0)
         return std::string();
-    return std::string (buffer, len);
+    return std::string (buffer, len-1);
 }
 
 std::wstring CUnicodeUtils::StdGetUnicode(const std::string& utf8)
@@ -130,7 +130,7 @@ std::wstring CUnicodeUtils::StdGetUnicode(const std::string& utf8)
     int len = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), size, buffer, 2*size);
     if (len==0)
         return std::wstring();
-    return std::wstring (buffer, len);
+    return std::wstring (buffer, len-1);
 }
 
 // load a string resource
@@ -214,6 +214,7 @@ public:
         result = CUnicodeUtils::GetUTF8(L"äöü");
         resultW = CUnicodeUtils::GetUnicode(result);
         ATLASSERT(resultW == L"äöü");
+        ATLASSERT(resultW.GetLength()==3);
         result = CUnicodeUtils::GetUTF8(L"Продолжить выполнение скрипта?");
         resultW = CUnicodeUtils::GetUnicode(result);
         ATLASSERT(resultW == L"Продолжить выполнение скрипта?");

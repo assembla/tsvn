@@ -1394,8 +1394,8 @@ HTREEITEM CRepositoryBrowser::AutoInsert (const CString& path)
                         tvitem.cChildren = 1;
                         m_RepoTree.SetItem(&tvitem);
                     }
-                    CItem * manualItem = new CItem(currentPath.Mid (currentPath.ReverseFind ('/') + 1), L"", svn_node_dir, 0, true, false, -1, 0, L"", L"", L"", L"", false, 0, 0, currentPath, pTreeItem->repository);
-                    node = AutoInsert (node, *manualItem);
+                    CItem manualItem(currentPath.Mid (currentPath.ReverseFind ('/') + 1), L"", svn_node_dir, 0, true, false, -1, 0, L"", L"", L"", L"", false, 0, 0, currentPath, pTreeItem->repository);
+                    node = AutoInsert (node, manualItem);
                 }
                 else
                     return NULL;
@@ -1609,6 +1609,8 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
     CWaitCursorEx wait;
     CAutoReadLock locker(m_guard);
     CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
+    if (!pTreeItem || pTreeItem->svnparentpathroot)
+        return false;
     HTREEITEM hSel1 = m_RepoTree.GetSelectedItem();
     if (m_RepoTree.ItemHasChildren(hNode))
     {
@@ -1626,8 +1628,6 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
         }
         m_blockEvents = false;
     }
-    if (pTreeItem == NULL)
-        return false;
 
     RefreshChildren (hNode);
 
