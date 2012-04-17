@@ -1609,7 +1609,7 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
     CWaitCursorEx wait;
     CAutoReadLock locker(m_guard);
     CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
-    if (!pTreeItem || pTreeItem->svnparentpathroot)
+    if (!pTreeItem)
         return false;
     HTREEITEM hSel1 = m_RepoTree.GetSelectedItem();
     if (m_RepoTree.ItemHasChildren(hNode))
