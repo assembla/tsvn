@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007 - Stefan Kueng
+// Copyright (C) 2003-2007, 2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -60,6 +60,7 @@ LRESULT CFindBar::DoCommand(int id, int msg)
     {
     case IDC_FINDPREV:
         bFindPrev = true;
+		// fallthrough
     case IDC_FINDNEXT:
         {
             DoFind(bFindPrev);
