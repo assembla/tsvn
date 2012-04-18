@@ -1035,6 +1035,8 @@ BOOL CResModule::ReplaceAccelerator(UINT nID, WORD wLanguage)
 
     BYTE xfVirt;
     WORD xkey;
+    static const size_t BufferSize = 1024;
+    TCHAR * pBuf = new TCHAR[BufferSize];
     for (i = 0; i < cAccelerators; i++)
     {
         m_bDefaultAcceleratorStrings++;
@@ -1043,8 +1045,7 @@ BOOL CResModule::ReplaceAccelerator(UINT nID, WORD wLanguage)
             (lpaccelNew[i].key >= 0x3A && lpaccelNew[i].key <= 0x40))
             continue;
 
-        TCHAR * pBuf = new TCHAR[1024];
-        SecureZeroMemory(pBuf, 1024 * sizeof(TCHAR));
+        SecureZeroMemory(pBuf, BufferSize * sizeof(TCHAR));
 
         _stprintf(pBuf, _T("ID:%d:"), lpaccelNew[i].cmd);
 
@@ -1107,6 +1108,8 @@ BOOL CResModule::ReplaceAccelerator(UINT nID, WORD wLanguage)
         }
     }
 
+    delete [] pBuf;
+
     // Create the new accelerator table
     hglAccTableNew = LocalAlloc(LPTR, cAccelerators * 4 * sizeof(WORD));
     p = (WORD *)hglAccTableNew;
@@ -1133,10 +1136,12 @@ BOOL CResModule::ReplaceAccelerator(UINT nID, WORD wLanguage)
         goto DONE_ERROR;
     }
 
+    LocalFree(hglAccTableNew);
     LocalFree(lpaccelNew);
     return TRUE;
 
 DONE_ERROR:
+    LocalFree(hglAccTableNew);
     LocalFree(lpaccelNew);
     MYERROR;
 }

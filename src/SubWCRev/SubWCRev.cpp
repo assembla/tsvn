@@ -817,6 +817,7 @@ int _tmain(int argc, _TCHAR* argv[])
             delete [] wc;
             delete [] dst;
             delete [] src;
+            delete [] pBufExisting;
             return ERR_READ;
         }
         if (readlengthExisting != filelengthExisting)
@@ -826,6 +827,7 @@ int _tmain(int argc, _TCHAR* argv[])
             delete [] wc;
             delete [] dst;
             delete [] src;
+            delete [] pBufExisting;
             return ERR_READ;
         }
         sameFileContent = (memcmp(pBuf, pBufExisting, filelength) == 0);
