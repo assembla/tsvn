@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2010 - TortoiseSVN
+// Copyright (C) 2007-2010, 2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -130,6 +130,9 @@ void CRevisionInfoContainer::UpdateChanges
 
     // splice
 
+    index_t firstChange = 0;
+    index_t firstCopy = 0;
+
     index_mapping_t::const_iterator mapEnd = indexMap.end();
     for (index_t i = 0, count = size(); i < count; ++i)
     {
@@ -169,10 +172,7 @@ void CRevisionInfoContainer::UpdateChanges
         {
             // keep existing data
 
-            index_t firstChange = changesOffsets[i];
             index_t lastChange = changesOffsets[i+1];
-
-            index_t firstCopy = copyFromOffsets[i];
             index_t lastCopy = copyFromOffsets[i+1];
 
             // standard per-path info
@@ -209,6 +209,9 @@ void CRevisionInfoContainer::UpdateChanges
         }
 
         // update positions
+
+        firstChange = changesOffsets[i+1];
+        firstCopy = copyFromOffsets[i+1];
 
         changesOffsets[i+1] = static_cast<index_t> (changes.size());
         copyFromOffsets[i+1] = static_cast<index_t> (copyFromPaths.size());
