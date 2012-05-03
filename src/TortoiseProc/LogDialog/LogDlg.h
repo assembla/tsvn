@@ -141,6 +141,7 @@ protected:
     afx_msg void OnLvnKeydownFilelist(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnNMClickLoglist(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnEnscrollMsgview();
+    afx_msg void OnDestroy();
 
     afx_msg void OnClose();
     virtual void OnCancel();
