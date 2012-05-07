@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-04-28 08:29+0000\n"
+"PO-Revision-Date: 2012-05-04 19:23+0000\n"
 "Last-Translator: Khoa Dang <dndk82@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.net/projects/p/tortoisesvn/"
 "language/vi/)\n"
@@ -8635,6 +8635,10 @@ msgstr "UUID của kho chứa:"
 msgid "Repository created"
 msgstr "Kho chứa đã được tạo"
 
+#. Resource IDs: (105)
+msgid "Repository query failed. Refresh to retry."
+msgstr "Truy vấn kho thất bại. Thực hiện làm mới để thử lại."
+
 #. Resource IDs: (106)
 msgid "Request cancelled by TSVN"
 msgstr "Yêu cầu bị huỷ bởi TSVN"
@@ -13359,6 +13363,27 @@ msgstr "vâng"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Bản sửa đổi %2!s!, Tác giả %3!s!, Ngày tháng %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Bản sửa đổi %2!s!, Tác giả %3!s!, Kích thước %4!s!, Ngày tháng %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Hiển thị %2!d! tập tin và %3!d! thư mục, %4!d! số món tổng cộng"
+
 #~ msgid "&All"
 #~ msgstr "&Tất Cả"
 
@@ -13377,6 +13402,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Line number (%d - %d)"
 #~ msgstr "&Số dòng (%d - %d)"
 
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "&Độ dài cực đại cho các diff nội tuyến"
+
 #~ msgid "&None"
 #~ msgstr "&Không"
 
@@ -13386,12 +13414,85 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&amp; Chốt:"
 
+#~ msgid "Approve or reject client-side hook script"
+#~ msgstr "Phê duyệt hoặc bác bỏ các kịch bản hook máy khách"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Phê duyệt\n"
+#~ "Chạy kịch bản hôk"
+
+#~ msgid "Approved hook scripts"
+#~ msgstr "Các kịch bản hook được phê duyệt"
+
+#~ msgid "Aqua Style"
+#~ msgstr "Kiểu Aqua"
+
+#~ msgid "Backwards in browsing history"
+#~ msgstr "Ngược lại lịch sử duyệt"
+
+#~ msgid "Black Style"
+#~ msgstr "Kiểu Màu Đen"
+
+#~ msgid "Blue Style"
+#~ msgstr "Kiểu Màu Xanh Dương"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Hủy bỏ\n"
+#~ "Không chạy kịch bản"
+
 #~ msgid ""
 #~ "Cancel\n"
 #~ "Local modifications are kept."
 #~ msgstr ""
 #~ "Huỷ Bỏ\n"
 #~ "Những sửa đổi cục bộ được giữ lại."
+
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Thay đổi phong cách của ứng dụng\n"
+#~ "Thay đổi phong cách"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Thay đổi phong cách của ứng dụng"
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "Xóa tất cả %ld kịch bản hook máy khách được phê duyệt"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Nhấn chuột để xem các lệnh di chuyển khối văn bản\n"
+#~ "Sử dụng khối văn bản"
+
+#~ msgid "Collapse"
+#~ msgstr "Thu gọn"
+
+#~ msgid "Color by &age, indexed"
+#~ msgstr "Tô màu theo &tuổi, danh mục"
+
+#~ msgid "Color by age, &continuous"
+#~ msgstr "Tô màu theo tuổi, &liên tục"
+
+#~ msgid "Color by au&thor"
+#~ msgstr "Tô màu theo &tác giả"
+
+#~ msgid ""
+#~ "Command Line To Execute:\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Dòng Lệnh Để Thi Hành:\n"
+#~ "Để chỉ định một đường dẫn bên trong một bản sao làm việc, chỉ định url "
+#~ "trong kho chứa với url gốc kho chứa là %REPOROOT%"
 
 #~ msgid "Compare two files"
 #~ msgstr "So sánh hai tập tin"
@@ -13402,24 +13503,63 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Mâu thuẫn (có lẽ)"
 
+#~ msgid "Create patch file"
+#~ msgstr "Tạo tập tin vá"
+
+#~ msgid "Dialog"
+#~ msgstr "Hộp thoại"
+
 #~ msgid "Diff Viewer"
 #~ msgstr "Trình xem Khác biệt"
 
 #~ msgid "Diff Viewer::Merge Tool"
 #~ msgstr "Trình Xem Khác Biệt::Công Cụ Hợp Nhất"
 
+#~ msgid "Do not ask again for this script"
+#~ msgstr "Đừng hỏi về kịch bản này nữa"
+
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Bạn có muốn tải những tập tin bị thay đổi?"
 
 #~ msgid ""
+#~ "External \"%1!s!\"\r\n"
+#~ "Revision %2!s!"
+#~ msgstr ""
+#~ "Bên ngoài \"%1!s!\"\n"
+#~ "Bản sửa đổi %2!s!"
+
+#~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Nạp các nội dung của những thư mục dưới nền để duyệt nhanh hơn"
+
+#~ msgid "Forwards in browsing history"
+#~ msgstr "Hướng tới lịch sử duyệt"
 
 #~ msgid "General::Dialogs 3"
 #~ msgstr "General::Dialogs 3"
 
 #~ msgid "Go To Line"
 #~ msgstr "Đi Tới Dòng"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Đi đến khác biệt nội tuyến tiếp theo\n"
+#~ "Khác biệt nội tuyến tiếp theo"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Đi đến khác biệt nội tuyến trước đó\n"
+#~ "Khác biệt nội tuyến trước đó"
+
+#~ msgid "Goto Line"
+#~ msgstr "Đi đến dòng"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Ẩn/Hiển thị danh sách tập tin vá"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13431,8 +13571,23 @@ msgstr "{BugTraq}"
 #~ "Bỏ qua các thay đổi\n"
 #~ "Bỏ qua các thay đổi bên ngoài."
 
+#~ msgid "Index colors:"
+#~ msgstr "Màu danh mục:"
+
+#~ msgid "Inline diff"
+#~ msgstr "Diff nội tuyến"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Diff nội tuyến theo từ"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Giữ các &danh sách thay đổi"
+
+#~ msgid "Line moved from line %ld"
+#~ msgstr "Dòng được di chuyển từ dòng %ld"
+
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Dòng được di chuyển tới dòng %ld"
 
 #~ msgid ""
 #~ "Load changes\n"
@@ -13449,8 +13604,55 @@ msgstr "{BugTraq}"
 #~ "Tải các thay đổi\n"
 #~ "Màn xem được cập nhật với nội dung mới."
 
+#~ msgid "Local &Hooks"
+#~ msgstr "Các Hook địa cục bộ"
+
+#~ msgid "Main"
+#~ msgstr "Chính"
+
+#~ msgid "Navigate"
+#~ msgstr "Định hướng"
+
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Định hướng đến một dòng cụ thể trong màn xem\n"
+#~ "Đi đến Dòng"
+
+#~ msgid "Next conflict"
+#~ msgstr "Xung đột tiếp theo"
+
+#~ msgid "Next difference"
+#~ msgstr "Khác biệt tiếp theo"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Khác biệt nội tuyến tiếp theo"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Màu Office 2007"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Mở các tập tin để xem khác biệt hoặc áp dụng một bản vá\n"
+#~ "Mở các tập tin"
+
 #~ msgid "Operative"
 #~ msgstr "Điều Hành"
+
+#~ msgid "Paste"
+#~ msgstr "Dán"
 
 #~ msgid "Peg"
 #~ msgstr "Chốt"
@@ -13458,11 +13660,26 @@ msgstr "{BugTraq}"
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Nạp-trước các thư mục để duyệt nhanh hơn"
 
+#~ msgid "Previous conflict"
+#~ msgstr "Xung đột trước đó"
+
+#~ msgid "Previous difference"
+#~ msgstr "Khác biệt trước đó"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Khác biệt nội tuyến trước đó"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Thùng rác"
 
 #~ msgid "Repository browser"
 #~ msgstr "Trình duyệt kho"
+
+#~ msgid "Restore"
+#~ msgstr "Khôi phục"
+
+#~ msgid "Restore after commit"
+#~ msgstr "Khôi phục sau khi cam kết"
 
 #~ msgid ""
 #~ "Revert\n"
@@ -13474,6 +13691,15 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Phạm vi sửa đổi để hợp nhất"
 
+#~ msgid "SVN Export changed items here"
+#~ msgstr "SVN Export thay đổi các món ở đây"
+
+#~ msgid "Save"
+#~ msgstr "Lưu"
+
+#~ msgid "Save as"
+#~ msgstr "Lưu dưới dạng"
+
 #~ msgid ""
 #~ "Show Inline-Diff\n"
 #~ "Inline diff"
@@ -13481,8 +13707,218 @@ msgstr "{BugTraq}"
 #~ "Hiện Khác biệt-trong dòng\n"
 #~ "Khác biệt trong dòng"
 
+#~ msgid "Show Whitespaces"
+#~ msgstr "Hiển thị Khoảng Trắng"
+
 #~ msgid "Show externals"
 #~ msgstr "Hiện các thành phần ngoài"
 
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Hiển thị ký tự đặc biệt cho các khoảng trắng và dòng mới\n"
+#~ "Hiển thị Khoảng Trắng"
+
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "Hiện các thư mục và tập tin bao gồm với thuộc tính svn:externals"
+
+#~ msgid "Silver Style"
+#~ msgstr "Kiều Màu Bạc"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Do you want to load the changes?"
+#~ msgstr ""
+#~ "Một (số) tập tin đã được thay đổi bên ngoài T-Merge.\n"
+#~ "Bạn có muốn tải các thay đổi đó?"
+
+#~ msgid ""
+#~ "Some file(s) have been changed outside T-Merge.\n"
+#~ "Would you like to reload and lose your changes?"
+#~ msgstr ""
+#~ "Một (số) tập tin đã được thay đổi bên ngoài T-Merge.\n"
+#~ "Bạn muốn tải lại và mất các thay đổi của bạn?"
+
+#~ msgid "Start registry editor"
+#~ msgstr "Chạy trình biên tập registry"
+
+#~ msgid "Style"
+#~ msgstr "Kiểu"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Hoán đổi giữa màn xem đơn và đôi"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Hoán đổi màn xem trái và phải"
+
+#~ msgid "The line number must be in between %d and %d"
+#~ msgstr "Số dòng phải ở giữa %d và %d"
+
+#~ msgid ""
+#~ "There are currently %d overlay handlers installed besides the ones "
+#~ "Tortoise uses."
+#~ msgstr ""
+#~ "Hiện có %d các cán lớp phủ được cài đặt bên cạnh những cán được dùng bởi "
+#~ "Tortoise"
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Lỗi này được sinh ra bởi một kịch bản hook tùy chỉnh trên máy chủ "
+#~ "Subversion.\n"
+#~ "Xin liên lạc quản trị máy chủ để được giúp giải quyết vấn đề này."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-commit hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Lỗi này được sinh ra bởi một kịch bản hook tùy chỉnh sau khi-cam kết trên "
+#~ "máy chủ Subversion.\n"
+#~ "Xin liên lạc với quản trị máy chủ để được giúp đỡ giải quyết vấn đề này."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-lock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Lỗi này được sinh ra bởi một kịch bản hook tùy chỉnh sau khi-khóa trên "
+#~ "máy chủ Subversion.\n"
+#~ "Xin liên lạc với quản trị máy chủ để được giúp đỡ giải quyết vấn đề này."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-unlock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Lỗi này được sinh ra bởi một kịch bản hook tùy chỉnh sau khi-mở khóa trên "
+#~ "máy chủ Subversion.\n"
+#~ "Xin liên lạc với quản trị máy chủ để được giúp đỡ giải quyết vấn đề này."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Bản làm việc này có một kịch bản hook được cấu hình. Bạn có muốn chạy "
+#~ "kịch bản không?\n"
+#~ "Dòng lệnh để chạy là:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "neon %s\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "neon %s\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
+
+#~ msgid ""
+#~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+#~ "recycle bin. The recycle bin currently contains %2!ld! items, which most "
+#~ "likely is the reason for this slowdown.\n"
+#~ "To fix this, you should empty the recycle bin now."
+#~ msgstr ""
+#~ "TortoiseSVN phát hiện một sự chậm xuống nghiêm trọng khi di chuyển %1!ld! "
+#~ "mục vào thùng rác. Thùng rác hiện có %2!ld! món, rất có thể là nguyên "
+#~ "nhân của việc chậm xuốn này.\n"
+#~ "Để sửa chữa lỗi này, bạn nên dọn dẹp thùng rác ngay."
+
+#~ msgid "TortoiseSVN will not show the following overlays: %s"
+#~ msgstr "TortoiseSVN sẽ không hiển thị các lớp phủ sau dây: %s"
+
+#~ msgid "Undo"
+#~ msgstr "Hoàn Tác"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Hoàn tác các sửa đổi cuối\n"
+#~ "Hoàn tác"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Sử dụng khối văn bản 'của tôi'"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Sử dụng khối văn bản 'của tôi' rồi đến 'của họ'"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Sử dụng khối 'của họ'"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Sử dụng khối văn bản 'của họ' rồi đến 'của tôi'"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Sử dụng các khối"
+
+#~ msgid "Use left block"
+#~ msgstr "Sử dụng khối bên trái"
+
+#~ msgid "Validation of the property value failed!"
+#~ msgstr "Xác nhận giá trị của thuộc tính bị thất bại!"
+
+#~ msgid "View"
+#~ msgstr "Xem"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Gói các dòng dài"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Gói các dòng dài ở biên bên phải của màn xem\n"
+#~ "Gói các dòng dài"
+
+#~ msgid "all &revisions"
+#~ msgstr "tất cả các &bản sửa đổi"
+
+#~ msgid "specific r&ange"
+#~ msgstr "phạm &vi cụ thể"
+
+#~ msgid "user:bool"
+#~ msgstr "user:bool"
+
+#~ msgid "user:multiline"
+#~ msgstr "user:multiline"
+
+#~ msgid "user:singleline"
+#~ msgstr "user:singleline"
+
+#~ msgid "user:state"
+#~ msgstr "user:state"
