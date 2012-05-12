@@ -110,9 +110,9 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /* lpReserved */)
                 AutoLocker lock(g_csGlobalCOMGuard);
                 g_shellObjects.DeleteAll();
             }
-            g_SVNAdminDir.Close();
             while (g_cAprInit--)
             {
+                g_SVNAdminDir.Close();
                 apr_terminate();
             }
         }
