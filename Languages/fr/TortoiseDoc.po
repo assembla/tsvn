@@ -11,20 +11,21 @@
 # Authors:
 # Translators:
 # Alexandre Paradis <paradial@hotmail.com>, 2011.
-#   <christophe@xhaleera.com>, 2011.
+#   <christophe@xhaleera.com>, 2011, 2012.
 #   <clbaldock@gmail.com>, 2011.
 # Clément  <rousseau.clement@gmail.com>, 2011.
 # Fabrice Daugan <fabrice.daugan@gmail.com>, 2011.
 #   <gobes2@gmail.com>, 2011.
 #   <grokwik@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
+# Stéphane Aulery <lkppo@free.fr>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-04-28 08:21+0000\n"
-"Last-Translator: Philippe <kissifrot@gmail.com>\n"
+"PO-Revision-Date: 2012-05-13 00:39+0000\n"
+"Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
 "Language-Team: French <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14345,6 +14346,8 @@ msgid ""
 "Checkout a single file. This creates a <quote>sparse</quote> working copy "
 "which contains just this one file."
 msgstr ""
+"Extraire un seul fichier. Cela crée une copie de travail <quote>épurée</"
+"quote> qui ne contient que ce seul fichier."
 
 #. (para)
 msgid "Delete or rename the file."
@@ -14979,6 +14982,9 @@ msgid ""
 "branch based on a tag, then that tag will be shown as a separate node rather "
 "than folded."
 msgstr ""
+"Notez que si un tag est lui-même utilisé comme source pour obtenir une "
+"copie, peut-être une nouvelle branche basée sur un tag, alors ce tag sera "
+"affiché comme un nœud distinct plutôt que plié."
 
 #. (term)
 msgid "Hide deleted paths"
@@ -19543,6 +19549,8 @@ msgid ""
 "This has no effect if the option <literal>GroupTaskbarIconsPerRepo</literal> "
 "is set to 0 (see above)."
 msgstr ""
+"Ceci n'a pas d'effet si l'option <literal>GroupTaskbarIconsPerRepo</literal> "
+"est définie à 0 (voir ci-dessus)."
 
 #. (title)
 msgid "Taskbar grouping with repository color overlays"
@@ -19656,6 +19664,10 @@ msgid ""
 "automatically after an <literal>Out of date</literal> error, set this value "
 "to <literal>false</literal>."
 msgstr ""
+"Si vous ne souhaitez pas que TortoiseSVN vous demander de mettre à jour la "
+"copie de travail automatiquement après une erreur de type <literal>Out of "
+"date</literal> (Copie de travail périmée), définissez cette valeur à "
+"<literal>false</literal>."
 
 #. (para)
 msgid ""
@@ -20390,6 +20402,8 @@ msgid ""
 "Replaced with the repository URL of the working copy path used in "
 "<placeholder-1/>. Equivalent to <placeholder-2/>."
 msgstr ""
+"Remplacé par l'URL du référentiel de la copie de travail utilisée dans "
+"<placeholder-1/>. Equivalent à <placeholder-2/>."
 
 #. (entry)
 msgid "True if the item is versioned."
@@ -25128,7 +25142,7 @@ msgstr ""
 
 #. (para)
 msgid "Group policy object."
-msgstr ""
+msgstr "Objet de la politique de groupe."
 
 #. (glossterm)
 msgid "HEAD revision"
@@ -27260,8 +27274,40 @@ msgstr ""
 "les deux autres seront comparés avec lui dans une différenciation tri-"
 "directionnelle."
 
+#~ msgid "propertyname=bool;labeltext(YESVALUE;NOVALUE;Checkboxtext)"
+#~ msgstr "propertyname=bool;labeltext(YESVALUE;NOVALUE;Checkboxtext)"
+
+#~ msgid ""
+#~ "propertyname=state;labeltext(DEFVAL;VAL1;TEXT1;VAL2;TEXT2;VAL3;TEXT3;...)"
+#~ msgstr ""
+#~ "propertyname=state;labeltext(DEFVAL;VAL1;TEXT1;VAL2;TEXT2;VAL3;TEXT3;...)"
+
+#~ msgid "propertyname=singleline;labeltext(regex)"
+#~ msgstr "propertyname=singleline;labeltext(regex)"
+
+#~ msgid "TortoiseSVN Dialog Settings 3"
+#~ msgstr "Boîte de Dialogue de Paramètres de TortoiseSVN 3"
+
+#~ msgid "The Settings Dialog, Dialogs 3 Page"
+#~ msgstr "La boîte de dialogue Configuration, page Boîtes de dialogue 3"
+
+#~ msgid "Pre-fetch folders for faster browsing"
+#~ msgstr "Pré-charger les dossiers pour une navigation plus rapide"
+
 #~ msgid "Show externals"
 #~ msgstr "Afficher les références externes"
+
+#~ msgid "$WCREV&amp;0xFFFF$"
+#~ msgstr "$WCREV&amp;0xFFFF$"
+
+#~ msgid "$WCREV-1000$"
+#~ msgstr "$WCREV-1000$"
+
+#~ msgid "/extended"
+#~ msgstr "/extended"
+
+#~ msgid "/switchaftercopy"
+#~ msgstr "/switchaftercopy"
 
 #~ msgid ""
 #~ "<guilabel>Default to UTF-8 encoding</guilabel> when set, ANSI files are "
