@@ -216,6 +216,11 @@ int SVNRevRangeArray::AddRevRange(const SVNRev& start, const SVNRev& end)
 
 int SVNRevRangeArray::AddRevRange(const SVNRevRange& revrange)
 {
+    if (!revrange.GetStartRevision().IsNumber() || !revrange.GetEndRevision().IsNumber())
+    {
+        m_array.push_back(revrange);
+        return GetCount();
+    }
     for (svn_revnum_t r = revrange.GetStartRevision(); r <= revrange.GetEndRevision(); ++r)
         AddRevision(r);
     for (svn_revnum_t r = revrange.GetEndRevision(); r >= revrange.GetStartRevision(); --r)
@@ -519,6 +524,8 @@ public:
         SVNRevRangeArray array2;
         array2.FromListString(array.ToListString());
         ATLASSERT(array2.GetCount()==5);
+        array.AddRevRange(1, SVNRev::REV_HEAD);
+        ATLASSERT(array.GetCount()==8);
     }
 } SVNRevListTests;
 #endif
