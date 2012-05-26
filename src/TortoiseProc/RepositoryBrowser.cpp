@@ -691,7 +691,8 @@ void CRepositoryBrowser::OnOK()
             return;
 
         POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
-        OpenFromList (m_RepoList.GetNextSelectedItem (pos));
+        if (pos)
+            OpenFromList (m_RepoList.GetNextSelectedItem (pos));
         return;
     }
 
@@ -699,6 +700,8 @@ void CRepositoryBrowser::OnOK()
     m_lister.Cancel();
 
 
+    if (m_EditFileCommand)
+        m_EditFileCommand->StopWaitingForEditor();
     m_backgroundJobs.WaitForEmptyQueue();
     if (!m_bSparseCheckoutMode)
     {
@@ -732,6 +735,8 @@ void CRepositoryBrowser::OnCancel()
     RevokeDragDrop(m_RepoList.GetSafeHwnd());
     RevokeDragDrop(m_RepoTree.GetSafeHwnd());
 
+    if (m_EditFileCommand)
+        m_EditFileCommand->StopWaitingForEditor();
     m_backgroundJobs.WaitForEmptyQueue();
     if (!m_bSparseCheckoutMode)
     {
@@ -1708,6 +1713,8 @@ void CRepositoryBrowser::OnDelete()
     {
         CAutoReadLock locker(m_guard);
         POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+        if (pos == NULL)
+            return;
         int index = -1;
         while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
         {
@@ -1784,6 +1791,8 @@ void CRepositoryBrowser::OnCopy()
     // Ctrl-C : copy the selected item urls to the clipboard
     CString url;
     POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+    if (pos == NULL)
+        return;
     int index = -1;
     CAutoReadLock locker(m_guard);
     while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
@@ -1808,6 +1817,8 @@ void CRepositoryBrowser::OnInlineedit()
     if (m_bSparseCheckoutMode)
         return;
     POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+    if (pos == NULL)
+        return;
     int selIndex = m_RepoList.GetNextSelectedItem(pos);
     m_blockEvents = true;
     if (selIndex >= 0)
@@ -2058,11 +2069,11 @@ void CRepositoryBrowser::EditFile(CTSVNPath url, CTSVNPath urlEscaped)
         = _T("/closeonend:1 /closeforlocal /hideprogress /revision:");
     CCmdLineParser parameters (paramString + revision.ToString());
 
-    EditFileCommand command;
-    command.SetPaths (CTSVNPathList (url), url);
-    command.SetParser (parameters);
+    m_EditFileCommand = std::unique_ptr<EditFileCommand>(new EditFileCommand());
+    m_EditFileCommand->SetPaths (CTSVNPathList (url), url);
+    m_EditFileCommand->SetParser (parameters);
 
-    if (command.Execute() && revision.IsHead())
+    if (m_EditFileCommand->Execute() && revision.IsHead())
     {
         CString dir = urlEscaped.GetContainingDirectory().GetSVNPathString();
         m_lister.RefreshSubTree (revision, dir);
@@ -2406,6 +2417,8 @@ void CRepositoryBrowser::OnBeginDrag(NMHDR *pNMHDR)
 
     CAutoReadLock locker(m_guard);
     POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+    if (pos == NULL)
+        return;
     int index = -1;
     while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
         selection.Add ((CItem *)m_RepoList.GetItemData(index));
@@ -2803,9 +2816,12 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
         {
             CRect rect;
             POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
-            m_RepoList.GetItemRect(m_RepoList.GetNextSelectedItem(pos), &rect, LVIR_LABEL);
-            m_RepoList.ClientToScreen(&rect);
-            point = rect.CenterPoint();
+            if (pos)
+            {
+                m_RepoList.GetItemRect(m_RepoList.GetNextSelectedItem(pos), &rect, LVIR_LABEL);
+                m_RepoList.ClientToScreen(&rect);
+                point = rect.CenterPoint();
+            }
         }
     }
 
@@ -2816,9 +2832,12 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
         CAutoReadLock locker(m_guard);
 
         POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
-        int index = -1;
-        while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
-            selection.Add ((CItem *)m_RepoList.GetItemData (index));
+        if (pos)
+        {
+            int index = -1;
+            while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
+                selection.Add ((CItem *)m_RepoList.GetItemData (index));
+        }
 
         if (selection.IsEmpty())
         {
@@ -3476,6 +3495,8 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
                 {
                     CAutoReadLock locker(m_guard);
                     POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+                    if (pos == NULL)
+                        break;
                     int selIndex = m_RepoList.GetNextSelectedItem(pos);
                     if (selIndex >= 0)
                     {
@@ -3959,6 +3980,8 @@ void CRepositoryBrowser::StoreSelectedURLs()
     // selections on the RHS list take precedence
 
     POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
+    if (pos == NULL)
+        return;
     int index = -1;
     while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
         selection.Add ((CItem *)m_RepoList.GetItemData (index));

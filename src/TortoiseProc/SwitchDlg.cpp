@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -165,6 +165,17 @@ void CSwitchDlg::OnBnClickedBrowse()
         rev = SVNRev::REV_HEAD;
     CAppUtils::BrowseRepository(m_repoRoot, m_URLCombo, this, rev);
     SetRevision(rev);
+}
+
+void CSwitchDlg::OnCancel()
+{
+    if (::IsWindow(m_pLogDlg->GetSafeHwnd())&&(m_pLogDlg->IsWindowVisible()))
+    {
+        m_pLogDlg->SendMessage(WM_CLOSE);
+        return;
+    }
+
+    CResizableStandAloneDialog::OnCancel();
 }
 
 void CSwitchDlg::OnOK()
