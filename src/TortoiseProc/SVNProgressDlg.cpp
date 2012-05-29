@@ -1298,7 +1298,7 @@ void CSVNProgressDlg::OnClose()
         TerminateThread(m_pThread->m_hThread, (DWORD)-1);
         InterlockedExchange(&m_bThreadRunning, FALSE);
     }
-    else
+    else if (!m_bCancelled)
     {
         m_bCancelled = TRUE;
         return;

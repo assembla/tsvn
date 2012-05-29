@@ -101,7 +101,7 @@ public:
     void OnCbenDragbeginUrlcombo(NMHDR *pNMHDR, LRESULT *pResult);
 
     void SetSparseCheckoutMode() { m_bSparseCheckoutMode = true; m_bStandAlone = false; }
-
+    bool IsThreadRunning() const override { return m_bThreadRunning; }
     /// overwrite SVN callbacks
     virtual BOOL Cancel();
 
