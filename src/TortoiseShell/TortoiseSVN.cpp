@@ -104,7 +104,7 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /* lpReserved */)
         // sometimes an application doesn't release all COM objects
         // but still unloads the dll.
         // in that case, we do it ourselves
-        if (g_cRefThisDll > 0)
+        if (g_cRefThisDll == 0)
         {
             {
                 AutoLocker lock(g_csGlobalCOMGuard);
