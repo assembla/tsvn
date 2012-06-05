@@ -1401,6 +1401,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     SetDllDirectory(L"");
     CCrashReportTSVN crasher(L"TortoiseBlame " _T(APP_X64_STRING));
+    CCrashReport::Instance().AddUserInfoToReport(L"CommandLine", GetCommandLine());
 
     HMODULE hSciLexerDll = ::LoadLibrary(_T("SciLexer.DLL"));
     if (hSciLexerDll == NULL)

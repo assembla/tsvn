@@ -83,6 +83,7 @@ BOOL CTortoiseMergeApp::InitInstance()
 {
     SetDllDirectory(L"");
     SetTaskIDPerUUID();
+    CCrashReport::Instance().AddUserInfoToReport(L"CommandLine", GetCommandLine());
 
     CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
     CMFCButton::EnableWindowsTheming();
