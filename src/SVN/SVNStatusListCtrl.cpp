@@ -3316,7 +3316,8 @@ void CSVNStatusListCtrl::OnContextMenuList(CWnd * pWnd, CPoint point)
                     {
                         SVNInfo info;
                         const SVNInfoData * infodata = info.GetFirstFileInfo(filepath, SVNRev(), SVNRev());
-                        logPath = infodata->copyfromurl;
+                        if (infodata)
+                            logPath = infodata->copyfromurl;
                     }
                     CString sCmd;
                     sCmd.Format(_T("/command:log /path:\"%s\""), (LPCTSTR)logPath);
@@ -3332,7 +3333,8 @@ void CSVNStatusListCtrl::OnContextMenuList(CWnd * pWnd, CPoint point)
                     {
                         SVNInfo info;
                         const SVNInfoData * infodata = info.GetFirstFileInfo(filepath, SVNRev(), SVNRev());
-                        blamePath = infodata->copyfromurl;
+                        if (infodata)
+                            blamePath = infodata->copyfromurl;
                     }
                     CString sCmd;
                     sCmd.Format(_T("/command:blame /path:\"%s\""), (LPCTSTR)blamePath);
