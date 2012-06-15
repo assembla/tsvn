@@ -222,14 +222,14 @@ int SVNRevRangeArray::AddRevRange(const SVNRevRange& revrange)
         return GetCount();
     }
     for (svn_revnum_t r = revrange.GetStartRevision(); r <= revrange.GetEndRevision(); ++r)
-        AddRevision(r);
-    for (svn_revnum_t r = revrange.GetEndRevision(); r >= revrange.GetStartRevision(); --r)
-        AddRevision(r);
+        AddRevision(r, false);
+    for (svn_revnum_t r = revrange.GetStartRevision(); r >= revrange.GetEndRevision(); --r)
+        AddRevision(r, true);
 
     return GetCount();
 }
 
-int SVNRevRangeArray::AddRevision(const SVNRev& revision)
+int SVNRevRangeArray::AddRevision(const SVNRev& revision, bool reverse)
 {
     ATLASSERT(revision.IsNumber());
     svn_revnum_t nRev = revision;
@@ -245,6 +245,8 @@ int SVNRevRangeArray::AddRevision(const SVNRev& revision)
             end = t;
             reversed = true;
         }
+        else if (start == end)
+            reversed = reverse;
         if ((start <= nRev)&&(nRev <= end))
             return count;  // revision is inside an existing range
         if (start == nRev + 1)
@@ -526,6 +528,11 @@ public:
         ATLASSERT(array2.GetCount()==5);
         array.AddRevRange(1, SVNRev::REV_HEAD);
         ATLASSERT(array.GetCount()==8);
+        SVNRevRangeArray revarray;
+        ATLASSERT(revarray.AddRevRange(25, 24)==1);
+        ATLASSERT(_tcscmp((LPCTSTR)revarray.ToListString(true), _T("25-24"))==0);
+        revarray.AdjustForMerge(true);
+        ATLASSERT(_tcscmp((LPCTSTR)revarray.ToListString(true), _T("25-23"))==0);
     }
 } SVNRevListTests;
 #endif

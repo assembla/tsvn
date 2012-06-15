@@ -568,12 +568,12 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, const CTSVNPath& url, svn_wc
         else if ((data->merge_range.start == data->merge_range.end) || (data->merge_range.start == data->merge_range.end - 1))
         {
             data->sActionColumnText.Format(IDS_SVNACTION_MERGEBEGINSINGLE, data->merge_range.end);
-            m_mergedRevisions.AddRevision(data->merge_range.end);
+            m_mergedRevisions.AddRevision(data->merge_range.end, false);
         }
         else if (data->merge_range.start - 1 == data->merge_range.end)
         {
             data->sActionColumnText.Format(IDS_SVNACTION_MERGEBEGINSINGLEREVERSE, data->merge_range.start);
-            m_mergedRevisions.AddRevision(data->merge_range.start);
+            m_mergedRevisions.AddRevision(data->merge_range.start, false); // we want the revisions in ascending order for the generated log message
         }
         else if (data->merge_range.start < data->merge_range.end)
         {
@@ -1212,8 +1212,12 @@ UINT CSVNProgressDlg::ProgressThread()
     DialogEnableWindow(IDCANCEL, FALSE);
     DialogEnableWindow(IDOK, TRUE);
     RefreshCursor();
-    SendMessage(DM_SETDEFID, IDOK);
-    GetDlgItem(IDOK)->SetFocus();
+    CWnd * pWndOk = GetDlgItem(IDOK);
+    if (pWndOk && ::IsWindow(pWndOk->GetSafeHwnd()))
+    {
+        SendMessage(DM_SETDEFID, IDOK);
+        GetDlgItem(IDOK)->SetFocus();
+    }
 
     DWORD dwAutoClose = CRegStdDWORD(_T("Software\\TortoiseSVN\\AutoClose"));
     BOOL bAutoCloseLocal = CRegStdDWORD(_T("Software\\TortoiseSVN\\AutoCloseLocal"), FALSE);
