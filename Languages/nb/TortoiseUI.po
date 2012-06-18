@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-06-02 08:31+0000\n"
+"PO-Revision-Date: 2012-06-14 10:05+0000\n"
 "Last-Translator: okloster <okl@sintef.no>\n"
 "Language-Team: Norwegian Bokmål <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1129,7 +1129,7 @@ msgstr "&Gjenoppfrisk"
 
 #. Resource IDs: (1562)
 msgid "&Remind me to enter a bug-ID"
-msgstr "&Minn meg på å angi en sak-ID"
+msgstr "&Minn meg på å angi en feil-ID"
 
 #. Resource IDs: (619, 1100, 1285, 1597, 16646)
 msgid "&Remove"
@@ -2395,7 +2395,7 @@ msgstr "Feil-ID"
 
 #. Resource IDs: (1578)
 msgid "Bug-ID e&xpression:"
-msgstr "Sak-ID &uttrykk:"
+msgstr "Feil-ID &uttrykk:"
 
 #. Resource IDs: (1119)
 msgid "Bug-ID is:"
@@ -13341,6 +13341,15 @@ msgstr "{BugTraq}"
 #~ msgid "Color by au&thor"
 #~ msgstr "Gi farge etter &forfatter"
 
+#~ msgid ""
+#~ "Command Line To Execute:\r\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Kommandolinje Som Kjøres:\n"
+#~ "For å oppgi en sti inni en arbeidskopi, oppgi url i depotet med url for "
+#~ "depotroten som %REPOROOT%"
+
 #~ msgid "Compare two files"
 #~ msgstr "Sammenlign to filer"
 
@@ -13352,6 +13361,24 @@ msgstr "{BugTraq}"
 
 #~ msgid "Create patch file"
 #~ msgstr "Lag korreksjonsfil"
+
+#~ msgid ""
+#~ "Custom title string. Available keywords are:\r\n"
+#~ "{mergeurl}:\tthe source url of the merge\r\n"
+#~ "{revisions}:\tA comma separated list of the merged revisions, e.g., 3, 5, "
+#~ "6, 7\r\n"
+#~ "{revisionsr}:\tLike {revisions} but with an 'r' in front of the revisions"
+#~ "\r\n"
+#~ "{revrange}:\tA comma separated list of the merged revisions, grouped into "
+#~ "ranges if possible, e.g., 3, 5-7"
+#~ msgstr ""
+#~ "Egendefinert tittelstreng. Tilgjengelige nøkkelord er:\n"
+#~ "{mergeurl}:\tkilde-url for flettingen\n"
+#~ "{revisions}:\tEn kommaseparert liste over de flettede revisjonene, f."
+#~ "eks., 3, 5, 6, 7\n"
+#~ "{revisionsr}:\tSom {revisions} men med en 'r' foran revisjonene\n"
+#~ "{revrange}:\tEn kommaseparert liste over de flettede revisjonene, "
+#~ "gruppert i intervaller hvis mulig, f.eks., 3, 5-7"
 
 #~ msgid "Dialog"
 #~ msgstr "Dialog"
@@ -13431,6 +13458,9 @@ msgstr "{BugTraq}"
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Behold &endringslister"
 
+#~ msgid "Like above, but used for reverse merges"
+#~ msgstr "Som over, men brukes for reversfletting"
+
 #~ msgid "Line moved from line %ld"
 #~ msgstr "Linje flyttet fra linje %ld"
 
@@ -13457,6 +13487,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Main"
 #~ msgstr "Hoved"
+
+#~ msgid "Merge Log &Templates"
+#~ msgstr "&Mønster for flettelogg"
+
+#~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr "Flettet revisjon(er) {revrange} fra {mergeurl}:\n"
 
 #~ msgid "Navigate"
 #~ msgstr "Naviger"
@@ -13529,6 +13565,9 @@ msgstr "{BugTraq}"
 #~ msgid "Restore after commit"
 #~ msgstr "Gjenopprett etter innsending"
 
+#~ msgid "Reverse merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr "Reversflettet revisjon(er) {revrange} fra {mergeurl}:\n"
+
 #~ msgid ""
 #~ "Revert\n"
 #~ "All local modifications will be lost."
@@ -13587,6 +13626,23 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Noen fil(er) har blitt endret utenfor T-Merge.\n"
 #~ "Vil du laste på nytt og miste dine endringer?"
+
+#~ msgid ""
+#~ "Specifies how the text for each merged revision should look like.\r\n"
+#~ "The following keywords can be used:\r\n"
+#~ "{msg}:\tThe log message of the merged revision, as it was entered.\r\n"
+#~ "{msgoneline}:\tThe log message force onto one line\r\n"
+#~ "{author}:\tThe author of the merged revision\r\n"
+#~ "{rev}:\tThe merged revision itself\r\n"
+#~ "{bugid}:\tThe bug ids of the merged revision"
+#~ msgstr ""
+#~ "Angir hvordan teksten for hver flettet revisjon skal se ut.\n"
+#~ "Følgende nøkkelord kan brukes:\n"
+#~ "{msg}:\tLoggmeldingen for den flettede revisjonen, slik den ble gitt.\n"
+#~ "{msgoneline}:\tLoggmeldingen komprimert til en linje\n"
+#~ "{author}:\tForfatteren til den flettede revisjonen\n"
+#~ "{rev}:\tSelve den flettede revisjonen\n"
+#~ "{bugid}:\tFeil-id'ene til den flettede revisjonen"
 
 #~ msgid "Start registry editor"
 #~ msgstr "Start register-redigeringsverktøyet"
