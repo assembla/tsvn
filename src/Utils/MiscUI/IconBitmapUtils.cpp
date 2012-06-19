@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2009-2011 - TortoiseSVN
+// Copyright (C) 2009-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -104,6 +104,8 @@ HBITMAP IconBitmapUtils::IconToBitmap(HINSTANCE hInst, UINT uIcon)
     if (old_dst_bmp == NULL)
     {
         DestroyIcon(hIcon);
+        ::DeleteDC(dst_hdc);
+        ::ReleaseDC(desktop, screen_dev);
         return NULL;
     }
 
