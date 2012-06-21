@@ -18,6 +18,9 @@
 #include "StdAfx.h"
 #include "Utils.h"
 #include ".\resmodule.h"
+#include "..\Utils\SysInfo.h"
+#include <regex>
+#include <memory>
 
 #define MYERROR {CUtils::Error(); return FALSE;}
 
@@ -154,7 +157,10 @@ BOOL CResModule::CreateTranslatedResources(LPCTSTR lpszSrcLangDllPath, LPCTSTR l
     int count = 0;
     do
     {
+        if (SysInfo::Instance().IsVistaOrLater())
         m_hResDll = LoadLibraryEx (lpszSrcLangDllPath, NULL, LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE|LOAD_LIBRARY_AS_IMAGE_RESOURCE|LOAD_IGNORE_CODE_AUTHZ_LEVEL);
+        else
+        m_hResDll = LoadLibraryEx (lpszSrcLangDllPath, NULL, LOAD_LIBRARY_AS_IMAGE_RESOURCE|LOAD_IGNORE_CODE_AUTHZ_LEVEL);
         if (m_hResDll == NULL)
             Sleep(100);
         count++;
