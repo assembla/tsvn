@@ -324,6 +324,7 @@ LPARAM CMergeWizardRevRange::OnWCStatus(WPARAM wParam, LPARAM /*lParam*/)
 
 bool CMergeWizardRevRange::OkToCancel()
 {
+    StopWCCheckThread();
     if (::IsWindow(m_pLogDlg->GetSafeHwnd())&&(m_pLogDlg->IsWindowVisible()))
     {
         m_pLogDlg->SendMessage(WM_CLOSE);
