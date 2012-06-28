@@ -2259,7 +2259,7 @@ void CRepositoryBrowser::OnLvnEndlabeleditRepolist(NMHDR *pNMHDR, LRESULT *pResu
     input.SetUUID (uuid);
     input.SetProjectProperties(&m_ProjectProperties, PROJECTPROPNAME_LOGTEMPLATEMOVE);
     CString sHint;
-    sHint.FormatMessage(IDS_INPUT_RENAME, (LPCTSTR)(absolutepath), (LPCTSTR)targetUrl.GetSVNPathString());
+    sHint.FormatMessage(IDS_INPUT_RENAME, (LPCTSTR)(absolutepath), (LPCTSTR)targetUrl.GetUIPathString());
     input.SetActionText(sHint);
     input.SetForceFocus (true);
     if (input.DoModal() == IDOK)
@@ -2325,7 +2325,7 @@ void CRepositoryBrowser::OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResu
     input.SetUUID(pItem->repository.uuid);
     input.SetProjectProperties(&m_ProjectProperties, PROJECTPROPNAME_LOGTEMPLATEMOVE);
     CString sHint;
-    sHint.FormatMessage(IDS_INPUT_RENAME, (LPCTSTR)(pItem->url), (LPCTSTR)targetUrl.GetSVNPathString());
+    sHint.FormatMessage(IDS_INPUT_RENAME, (LPCTSTR)(pItem->url), (LPCTSTR)targetUrl.GetUIPathString());
     input.SetActionText(sHint);
     input.SetForceFocus (true);
     if (input.DoModal() == IDOK)
@@ -2352,7 +2352,7 @@ void CRepositoryBrowser::OnTvnEndlabeleditRepotree(NMHDR *pNMHDR, LRESULT *pResu
             m_barRepository.ShowUrl(targetUrl.GetSVNPathString(), m_barRepository.GetCurrentRev());
         }
 
-        pItem->url = targetUrl.GetSVNPathString();
+        pItem->url = targetUrl.GetUIPathString();
         pItem->unescapedname = pTVDispInfo->item.pszText;
         pItem->repository = repository;
         m_RepoTree.SetItemData(hSelectedItem, (DWORD_PTR)pItem);
