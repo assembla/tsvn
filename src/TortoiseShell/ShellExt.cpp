@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -35,6 +35,8 @@ extern ShellObjects g_shellObjects;
 
 // *********************** CShellExt *************************
 CShellExt::CShellExt(FileState state)
+    : m_crasher(L"TortoiseSVN", false)
+
 {
     m_State = state;
 
@@ -288,7 +290,19 @@ STDMETHODIMP CShellExt::Load(LPCOLESTR /*pszFileName*/, DWORD /*dwMode*/)
 }
 
 // ICopyHook member
-UINT __stdcall CShellExt::CopyCallback(HWND /*hWnd*/, UINT wFunc, UINT /*wFlags*/, LPCTSTR pszSrcFile, DWORD /*dwSrcAttribs*/, LPCTSTR /*pszDestFile*/, DWORD /*dwDestAttribs*/)
+UINT __stdcall CShellExt::CopyCallback(HWND hWnd, UINT wFunc, UINT wFlags, LPCTSTR pszSrcFile, DWORD dwSrcAttribs, LPCTSTR pszDestFile, DWORD dwDestAttribs)
+{
+    __try
+    {
+        return CopyCallback_Wrap(hWnd, wFunc, wFlags, pszSrcFile, dwSrcAttribs, pszDestFile, dwDestAttribs);
+    }
+    __except(CCrashReport::Instance().SendReport(GetExceptionInformation()))
+    {
+    }
+    return IDYES;
+}
+
+UINT __stdcall CShellExt::CopyCallback_Wrap(HWND /*hWnd*/, UINT wFunc, UINT /*wFlags*/, LPCTSTR pszSrcFile, DWORD /*dwSrcAttribs*/, LPCTSTR /*pszDestFile*/, DWORD /*dwDestAttribs*/)
 {
     if (wFunc == FO_COPY)
         return IDYES;   // copying is not a problem for us

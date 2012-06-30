@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,8 +34,19 @@ BOOL CALLBACK PageProc (HWND, UINT, WPARAM, LPARAM);
 UINT CALLBACK PropPageCallbackProc ( HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp );
 
 // CShellExt member functions (needed for IShellPropSheetExt)
-STDMETHODIMP CShellExt::AddPages (LPFNADDPROPSHEETPAGE lpfnAddPage,
-                                  LPARAM lParam)
+STDMETHODIMP CShellExt::AddPages (LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam)
+{
+    __try
+    {
+        return AddPages_Wrap(lpfnAddPage, lParam);
+    }
+    __except(CCrashReport::Instance().SendReport(GetExceptionInformation()))
+    {
+    }
+    return E_FAIL;
+}
+
+STDMETHODIMP CShellExt::AddPages_Wrap (LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam)
 {
     for (std::vector<tstring>::iterator I = files_.begin(); I != files_.end(); ++I)
     {
@@ -112,9 +123,16 @@ BOOL CALLBACK PageProc (HWND hwnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
     }
 
     if (sheetpage != 0L)
-        return sheetpage->PageProc(hwnd, uMessage, wParam, lParam);
-    else
-        return FALSE;
+    {
+        __try
+        {
+            return sheetpage->PageProc(hwnd, uMessage, wParam, lParam);
+        }
+        __except(CCrashReport::Instance().SendReport(GetExceptionInformation()))
+        {
+        }
+    }
+    return FALSE;
 }
 
 UINT CALLBACK PropPageCallbackProc ( HWND /*hwnd*/, UINT uMsg, LPPROPSHEETPAGE ppsp )
