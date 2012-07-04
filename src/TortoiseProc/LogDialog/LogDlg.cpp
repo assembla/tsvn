@@ -4757,7 +4757,8 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
                     CTSVNPath url = CTSVNPath(dlg.m_URL);
                     SVNRev copyrev = dlg.m_CopyRev;
                     CString logmsg = dlg.m_sLogMessage;
-                    auto f = [=]()
+                    SVNExternals exts = dlg.GetExternalsToTag();
+                    auto f = [=]() mutable
                     {
                         CoInitialize(NULL);
                         this->EnableWindow(FALSE);
@@ -4767,7 +4768,14 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
                         if (!Copy(CTSVNPathList(CTSVNPath(pathURL)), url, copyrev, copyrev, logmsg))
                             ShowErrorDialog(m_hWnd);
                         else
-                            TSVNMessageBox(this->m_hWnd, IDS_LOG_COPY_SUCCESS, IDS_APPNAME, MB_ICONINFORMATION);
+                        {
+                            if (!exts.TagExternals(true, CString(MAKEINTRESOURCE(IDS_COPY_COMMITMSG)), m_commitRev, CTSVNPath(pathURL), url))
+                            {
+                                ShowErrorDialog(m_hWnd, CTSVNPath(), exts.GetLastErrorString());
+                            }
+                            else
+                                TSVNMessageBox(this->m_hWnd, IDS_LOG_COPY_SUCCESS, IDS_APPNAME, MB_ICONINFORMATION);
+                        }
 
                         this->EnableWindow(TRUE);
                         this->SetFocus();
