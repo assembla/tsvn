@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2011 - TortoiseSVN
+// Copyright (C) 2007-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -135,7 +135,7 @@ bool CleanupCommand::Execute()
         {
             CTSVNPathList revertItems = itemsToRevert;
             if (DWORD(CRegDWORD(_T("Software\\TortoiseSVN\\RevertWithRecycleBin"), TRUE)))
-                itemsToRevert.DeleteAllPaths(true, true);
+                itemsToRevert.DeleteAllPaths(true, true, NULL);
             SVN svn;
             if (!svn.Revert(revertItems, CStringArray(), false))
             {
@@ -151,14 +151,20 @@ bool CleanupCommand::Execute()
         progress.SetProgress(actionCounter++, actionTotal);
         progress.FormatPathLine(2, IDS_PROC_CLEANUP_INFODELUNVERSIONED, pathList.GetCommonRoot().GetWinPath());
         progress.SetProgress(actionCounter++, actionTotal);
-        unversionedItems.DeleteAllPaths(true, false);
+        HWND hErrorWnd = GetExplorerHWND();
+        if (hErrorWnd == NULL)
+            hErrorWnd = GetDesktopWindow();
+        unversionedItems.DeleteAllPaths(true, false, hErrorWnd);
     }
     if (!bFailed && bDelIgnored)
     {
         progress.SetProgress(actionCounter++, actionTotal);
         progress.FormatPathLine(2, IDS_PROC_CLEANUP_INFODELIGNORED, pathList.GetCommonRoot().GetWinPath());
         progress.SetProgress(actionCounter++, actionTotal);
-        ignoredItems.DeleteAllPaths(true, false);
+        HWND hErrorWnd = GetExplorerHWND();
+        if (hErrorWnd == NULL)
+            hErrorWnd = GetDesktopWindow();
+        ignoredItems.DeleteAllPaths(true, false, hErrorWnd);
     }
     if (!bFailed && bRefreshShell)
     {

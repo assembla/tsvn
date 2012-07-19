@@ -2605,7 +2605,7 @@ void CSVNStatusListCtrl::Revert (const CTSVNPath& filepath)
         }
     }
     if (DWORD(CRegDWORD(_T("Software\\TortoiseSVN\\RevertWithRecycleBin"), TRUE)))
-        delList.DeleteAllPaths(true, true);
+        delList.DeleteAllPaths(true, true, NULL);
 
     if (!svn.Revert(targetList, CStringArray(), bRecursive && !bNonRecursive))
     {

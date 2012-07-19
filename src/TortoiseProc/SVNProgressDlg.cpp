@@ -724,6 +724,8 @@ CString CSVNProgressDlg::BuildInfoString()
         case svn_wc_notify_add:
         case svn_wc_notify_update_add:
         case svn_wc_notify_commit_added:
+        case svn_wc_notify_commit_copied:
+        case svn_wc_notify_update_shadowed_add:
             if (dat->bConflictedActionItem)
                 conflicted++;
             else
@@ -735,6 +737,7 @@ CString CSVNProgressDlg::BuildInfoString()
         case svn_wc_notify_delete:
         case svn_wc_notify_update_delete:
         case svn_wc_notify_commit_deleted:
+        case svn_wc_notify_update_shadowed_delete:
             deleted++;
             break;
         case svn_wc_notify_restore:
@@ -747,6 +750,9 @@ CString CSVNProgressDlg::BuildInfoString()
             resolved++;
             break;
         case svn_wc_notify_update_update:
+        case svn_wc_notify_update_shadowed_update:
+        case svn_wc_notify_merge_record_info:
+        case svn_wc_notify_exists:
             if (dat->bConflictedActionItem)
                 conflicted++;
             else if ((dat->content_state == svn_wc_notify_state_merged) || (dat->prop_state == svn_wc_notify_state_merged))
@@ -758,9 +764,12 @@ CString CSVNProgressDlg::BuildInfoString()
             modified++;
             break;
         case svn_wc_notify_skip:
+        case svn_wc_notify_update_skip_working_only:
             skipped++;
             break;
         case svn_wc_notify_commit_replaced:
+        case svn_wc_notify_update_replace:
+        case svn_wc_notify_commit_copied_replaced:
             replaced++;
             break;
         }
@@ -3039,7 +3048,7 @@ bool CSVNProgressDlg::CmdRevert(CString& sWindowTitle, bool& localoperation)
 
     CTSVNPathList delList = m_selectedPaths;
     if (DWORD(CRegDWORD(_T("Software\\TortoiseSVN\\RevertWithRecycleBin"), TRUE)))
-        delList.DeleteAllPaths(true, true);
+        delList.DeleteAllPaths(true, true, NULL);
 
     ReportCmd(CString(MAKEINTRESOURCE(IDS_PROGRS_CMD_REVERT)));
     CBlockCacheForPath cacheBlock (m_targetPathList.GetCommonRoot().GetWinPath());
