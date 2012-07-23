@@ -10,6 +10,7 @@
 # 
 # Authors:
 # Translators:
+# Eric van Aert <ericvanaert@gmail.com>, 2012.
 # Jean-Marc van Leerdam <j.m.van.leerdam@gmail.com>, 2011, 2012.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@googlemail.com>, 2012.
@@ -21,8 +22,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-06-02 08:30+0000\n"
-"Last-Translator: Lübbe <luebbe.tortoisesvn@googlemail.com>\n"
+"PO-Revision-Date: 2012-07-21 08:35+0000\n"
+"Last-Translator: Eric van Aert <ericvanaert@gmail.com>\n"
 "Language-Team: Dutch <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8539,7 +8540,7 @@ msgstr "Archief aangemaakt"
 
 #. Resource IDs: (105)
 msgid "Repository query failed. Refresh to retry."
-msgstr ""
+msgstr "Bronaanvraag mislukt. Vernieuw om opnieuw te proberen."
 
 #. Resource IDs: (106)
 msgid "Request cancelled by TSVN"
@@ -13410,6 +13411,15 @@ msgstr "{BugTraq}"
 #~ msgid "Color by au&thor"
 #~ msgstr "Kleur per au&teur"
 
+#~ msgid ""
+#~ "Command Line To Execute:\r\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Opdrachtregel om uit te voeren:\n"
+#~ "Om een pad binnen de werkkopie aan te geven, geef de URL in de bron aan "
+#~ "met als bron URL %REPOROOT%"
+
 #~ msgid "Compare two files"
 #~ msgstr "Vergelijk twee bestanden"
 
@@ -13421,6 +13431,25 @@ msgstr "{BugTraq}"
 
 #~ msgid "Create patch file"
 #~ msgstr "Maak patch-bestand"
+
+#~ msgid ""
+#~ "Custom title string. Available keywords are:\r\n"
+#~ "{mergeurl}:\tthe source url of the merge\r\n"
+#~ "{revisions}:\tA comma separated list of the merged revisions, e.g., 3, 5, "
+#~ "6, 7\r\n"
+#~ "{revisionsr}:\tLike {revisions} but with an 'r' in front of the revisions"
+#~ "\r\n"
+#~ "{revrange}:\tA comma separated list of the merged revisions, grouped into "
+#~ "ranges if possible, e.g., 3, 5-7"
+#~ msgstr ""
+#~ "Eigen titel. Beschikbare trefwoorden:\n"
+#~ "{mergeurl}:» De bron-URL van de samenvoeging\n"
+#~ "{revisions}:» Een door komma's gescheiden lijst van samengevoegde "
+#~ "herzieningen. Bijvoorbeeld 3, 5, 6, 7\n"
+#~ "{revisionsr}:» Zoals {revisions} maar met 'r' voor de herziening.\n"
+#~ "{revrange}:» Een door komma's gescheiden lijst van de samengevoegde "
+#~ "herzieningen, gegroepeerd in reeksen (indien mogelijk). Bijvoorbeeld: 3, "
+#~ "5-7."
 
 #~ msgid "Dialog"
 #~ msgstr "Dialoog"
@@ -13499,6 +13528,11 @@ msgstr "{BugTraq}"
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Behoudt c&hangelists"
 
+#~ msgid "Like above, but used for reverse merges"
+#~ msgstr ""
+#~ "Zoals bovenstaand, wordt gebruikt voor het ongedaan maken van "
+#~ "samenvoegingen"
+
 #~ msgid "Line moved from line %ld"
 #~ msgstr "Regel verplaatst vanaf regel %ld"
 
@@ -13525,6 +13559,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Main"
 #~ msgstr "Hoofd"
+
+#~ msgid "Merge Log &Templates"
+#~ msgstr "Sjabloon en logbestand samenvoegen"
+
+#~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr "Herziening(en) {revrange} van {mergeurl} samengevoegd:\n"
 
 #~ msgid "Navigate"
 #~ msgstr "Navigeer"
@@ -13597,6 +13637,10 @@ msgstr "{BugTraq}"
 #~ msgid "Restore after commit"
 #~ msgstr "Herstel na vastleggen"
 
+#~ msgid "Reverse merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr ""
+#~ "Samenvoeging herziening(en) {revrange} van {mergeurl} ongedaan maken:\n"
+
 #~ msgid ""
 #~ "Revert\n"
 #~ "All local modifications will be lost."
@@ -13606,6 +13650,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Revision range to merge"
 #~ msgstr "Revisiebereik voor samenvoegen"
+
+#~ msgid "SVN Export changed items here"
+#~ msgstr "SVN exporteert gewijzigde onderdelen naar hier"
 
 #~ msgid "Save"
 #~ msgstr "Opslaan"
@@ -13652,6 +13699,23 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Sommige bestanden zijn buiten TMerge gewijzigd.\n"
 #~ "Wilt u opnieuw laden en uw wijzigingen verliezen?"
+
+#~ msgid ""
+#~ "Specifies how the text for each merged revision should look like.\r\n"
+#~ "The following keywords can be used:\r\n"
+#~ "{msg}:\tThe log message of the merged revision, as it was entered.\r\n"
+#~ "{msgoneline}:\tThe log message force onto one line\r\n"
+#~ "{author}:\tThe author of the merged revision\r\n"
+#~ "{rev}:\tThe merged revision itself\r\n"
+#~ "{bugid}:\tThe bug ids of the merged revision"
+#~ msgstr ""
+#~ "Bepaalt hoe de tekst voor elke herziening eruit moet zien.\n"
+#~ "De volgende trefwoorden zijn beschikbaar.\n"
+#~ "{msg}:» Het logbestand van de samengevoegde herziening, zoals ingevoerd.\n"
+#~ "{msgoneline}:» Het log-bericht op één lijn forceren.\n"
+#~ "{author}:» De auteur van de samengevoegde herziening.\n"
+#~ "{rev}:» De samengevoegde herziening zelf.\n"
+#~ "{bugid}:» De fout ID's van de samengevoegde herziening."
 
 #~ msgid "Start registry editor"
 #~ msgstr "Start register-bewerker"
