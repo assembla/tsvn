@@ -885,18 +885,19 @@ void CSVNProgressDlg::ResizeColumns()
 
         for (int index = 0; index<count; ++index)
         {
-            // get the width of the string and add 12 pixels for the column separator and margins
+            // get the width of the string and add 14 pixels for the column separator and margins
+#define SEPANDMARG 14
             int linewidth = cx;
             switch (col)
             {
             case 0:
-                linewidth = m_ProgList.GetStringWidth(m_arData[index]->sActionColumnText) + 12;
+                linewidth = m_ProgList.GetStringWidth(m_arData[index]->sActionColumnText) + SEPANDMARG;
                 break;
             case 1:
-                linewidth = m_ProgList.GetStringWidth(m_arData[index]->sPathColumnText) + 12;
+                linewidth = m_ProgList.GetStringWidth(m_arData[index]->sPathColumnText) + SEPANDMARG;
                 break;
             case 2:
-                linewidth = m_ProgList.GetStringWidth(m_arData[index]->mime_type) + 12;
+                linewidth = m_ProgList.GetStringWidth(m_arData[index]->mime_type) + SEPANDMARG;
                 break;
             }
             if (cx < linewidth)
