@@ -248,6 +248,7 @@ void CRevisionInfoContainer::UpdateMergers
 
     // splice
 
+    index_t firstMerge = 0;
     index_mapping_t::const_iterator mapEnd = indexMap.end();
     for (index_t i = 0, count = size(); i < count; ++i)
     {
@@ -275,7 +276,6 @@ void CRevisionInfoContainer::UpdateMergers
         {
             // keep existing data
 
-            index_t firstMerge = mergedRevisionsOffsets[i];
             index_t lastMerge = mergedRevisionsOffsets[i+1];
 
             mergedFromPaths.insert (mergedFromPaths.end()
@@ -294,6 +294,7 @@ void CRevisionInfoContainer::UpdateMergers
 
         // update positions
 
+        firstMerge = mergedRevisionsOffsets[i+1];
         mergedRevisionsOffsets[i+1] = static_cast<index_t> (mergedFromPaths.size());
     }
 }
@@ -328,6 +329,7 @@ void CRevisionInfoContainer::UpdateUserRevProps
 
     // splice
 
+    index_t firstProp = 0;
     index_t valueIndex = 0;
 
     index_mapping_t::const_iterator mapEnd = indexMap.end();
@@ -357,7 +359,6 @@ void CRevisionInfoContainer::UpdateUserRevProps
         {
             // keep existing data
 
-            index_t firstProp = userRevPropOffsets[i];
             index_t lastProp = userRevPropOffsets[i+1];
 
             userRevPropNames.insert (userRevPropNames.end()
@@ -370,6 +371,7 @@ void CRevisionInfoContainer::UpdateUserRevProps
 
         // update positions
 
+        firstProp = userRevPropOffsets[i+1];
         userRevPropOffsets[i+1] = static_cast<index_t> (userRevPropNames.size());
     }
 
@@ -425,7 +427,7 @@ void CRevisionInfoContainer::AppendNewEntries
     {
         // append a new revision info (no info available)
 
-        authors.insert (authors.end(), toAppend, (index_t) NO_INDEX);
+        authors.insert (authors.end(), toAppend, 0);
         timeStamps.insert (timeStamps.end(), toAppend, 0);
         presenceFlags.insert (presenceFlags.end(), toAppend, 0);
         rootPaths.insert (rootPaths.end(), toAppend, (index_t) NO_INDEX);
