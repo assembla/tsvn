@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2011 - TortoiseSVN
+// Copyright (C) 2007-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -367,16 +367,15 @@ bool CRepositoryInfo::CData::empty() const
 
 // data access
 
-const CRepositoryInfo::SPerRepositoryInfo* const *
-CRepositoryInfo::CData::begin() const
+size_t CRepositoryInfo::CData::size() const
 {
-    return data.empty() ? NULL : &data.front();
+    return data.size();
 }
 
-const CRepositoryInfo::SPerRepositoryInfo* const *
-CRepositoryInfo::CData::end() const
+const CRepositoryInfo::SPerRepositoryInfo*
+CRepositoryInfo::CData::operator[](size_t index) const
 {
-    return begin() + data.size();
+    return data[index];
 }
 
 // share the repository info pool thoughout this application

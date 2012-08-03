@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009 - TortoiseSVN
+// Copyright (C) 2007-2009, 2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -170,8 +170,8 @@ private:
 
         /// data access
 
-        const SPerRepositoryInfo* const * begin() const;
-        const SPerRepositoryInfo* const * end() const;
+        size_t size() const;
+        const SPerRepositoryInfo* operator[](size_t index) const;
     };
 
     /// cached repository properties
