@@ -527,7 +527,7 @@ public:
         array2.FromListString(array.ToListString());
         ATLASSERT(array2.GetCount()==5);
         array.AddRevRange(1, SVNRev::REV_HEAD);
-        ATLASSERT(array.GetCount()==8);
+        ATLASSERT(array.GetCount()==6);
         SVNRevRangeArray revarray;
         ATLASSERT(revarray.AddRevRange(25, 24)==1);
         ATLASSERT(_tcscmp((LPCTSTR)revarray.ToListString(true), _T("25-24"))==0);
