@@ -3755,6 +3755,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
             {
                 CBlameDlg dlg;
                 dlg.EndRev = selection.GetRepository(0).revision;
+                dlg.PegRev = m_repository.revision;
                 if (dlg.DoModal() == IDOK)
                 {
                     CBlame blame;
@@ -3764,7 +3765,7 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
                     tempfile = blame.BlameToTempFile ( path
                                                      , dlg.StartRev
                                                      , dlg.EndRev
-                                                     , dlg.EndRev
+                                                     , dlg.PegRev
                                                      , SVN::GetOptionsString (!!dlg.m_bIgnoreEOL, dlg.m_IgnoreSpaces)
                                                      , dlg.m_bIncludeMerge
                                                      , TRUE
@@ -3783,7 +3784,8 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
                                                                , CPathUtils::GetFileNameFromPath(selection.GetURL (0,0).GetFileOrDirectoryName())
                                                                , sParams
                                                                , dlg.StartRev
-                                                               , dlg.EndRev))
+                                                               , dlg.EndRev
+                                                               , dlg.PegRev))
                             {
                                 break;
                             }

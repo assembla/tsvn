@@ -1408,9 +1408,13 @@ void CLogDlg::LogThread()
         if ((cachedData.get() == NULL)&&(!m_path.IsUrl()))
         {
             // try again with REV_WC as the start revision, just in case the path doesn't
-            // exist anymore in HEAD
-            cachedData = ReceiveLog(CTSVNPathList(m_path), SVNRev(), SVNRev::REV_WC, m_endrev, m_limit, !!m_bStrict, !!m_bIncludeMerges, m_nRefresh==Cache);
+            // exist anymore in HEAD.
+            // Also, make sure we use these parameters for furter requests (like "next 100").
+
             m_pegrev = SVNRev::REV_WC;
+            m_startrev = SVNRev::REV_WC;
+
+            cachedData = ReceiveLog(CTSVNPathList(m_path), m_pegrev, m_startrev, m_endrev, m_limit, !!m_bStrict, !!m_bIncludeMerges, m_nRefresh==Cache);
         }
 
         // Err will also be set if the user cancelled.
@@ -5058,6 +5062,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
             {
                 CBlameDlg dlg;
                 dlg.EndRev = revSelected;
+                dlg.PegRev = m_pegrev;
                 if (dlg.DoModal() == IDOK)
                 {
                     SVNRev startrev = dlg.StartRev;
@@ -5071,7 +5076,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 
                         CBlame blame;
                         CString tempfile;
-                        tempfile = blame.BlameToTempFile(m_path, startrev, endrev, endrev, _T(""), includeMerge, TRUE, TRUE);
+                        tempfile = blame.BlameToTempFile(m_path, startrev, endrev, m_pegrev, _T(""), includeMerge, TRUE, TRUE);
                         if (!tempfile.IsEmpty())
                         {
                             if (textViewer)
@@ -5082,7 +5087,12 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
                             else
                             {
                                 CString sParams = _T("/path:\"") + m_path.GetSVNPathString() + _T("\" ");
-                                CAppUtils::LaunchTortoiseBlame(tempfile, CPathUtils::GetFileNameFromPath(m_path.GetFileOrDirectoryName()),sParams, startrev, endrev);
+                                CAppUtils::LaunchTortoiseBlame(tempfile,
+                                                               CPathUtils::GetFileNameFromPath(m_path.GetFileOrDirectoryName()),
+                                                               sParams,
+                                                               startrev,
+                                                               endrev,
+                                                               m_pegrev);
                             }
                         }
                         else
@@ -5733,6 +5743,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
                 {
                     SVNRev startrev = dlg.StartRev;
                     SVNRev endrev = dlg.EndRev;
+                    SVNRev pegrev = rev1;
                     bool includeMerge = !!dlg.m_bIncludeMerge;
                     bool textView = !!dlg.m_bTextView;
                     auto f = [=]()
@@ -5741,7 +5752,7 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
                         this->EnableWindow(FALSE);
                         CBlame blame;
                         CString tempfile;
-                        tempfile = blame.BlameToTempFile(CTSVNPath(filepath), startrev, endrev, endrev, _T(""), includeMerge, TRUE, TRUE);
+                        tempfile = blame.BlameToTempFile(CTSVNPath(filepath), startrev, endrev, pegrev, _T(""), includeMerge, TRUE, TRUE);
                         if (!tempfile.IsEmpty())
                         {
                             if (textView)
@@ -5752,7 +5763,12 @@ void CLogDlg::ShowContextMenuForChangedpaths(CWnd* /*pWnd*/, CPoint point)
                             else
                             {
                                 CString sParams = _T("/path:\"") + filepath + _T("\" ");
-                                CAppUtils::LaunchTortoiseBlame(tempfile, CPathUtils::GetFileNameFromPath(filepath),sParams, startrev, endrev);
+                                CAppUtils::LaunchTortoiseBlame(tempfile,
+                                                               CPathUtils::GetFileNameFromPath(filepath),
+                                                               sParams,
+                                                               startrev,
+                                                               endrev,
+                                                               pegrev);
                             }
                         }
                         else
