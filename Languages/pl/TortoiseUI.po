@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-07-24 22:25+0000\n"
+"PO-Revision-Date: 2012-08-12 15:41+0000\n"
 "Last-Translator: Begina Felicysym <begina.felicysym@wp.eu>\n"
 "Language-Team: Polish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -11095,13 +11095,16 @@ msgid ""
 "instead.\n"
 "\n"
 "TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
-"originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 msgstr ""
-"TortoiseBlame nie powinien być uruchamiany bezpośrednio! Zamiast tego użyj\n"
-"TortoiseProc.exe /command:blame /path:\"sciezka\\do\\pliku\"\n"
+"TortoiseBlame nie powinien być uruchamiany bezpośrednio! \n"
+"Zamiast tego wykonaj \n"
+"TortoiseProc.exe /command:blame /path:\"ścieżka\\do\\pliku\"\n"
 "\n"
 "TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
-"originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13367,15 +13370,14 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Wieszakowa:"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Dostosuj do wersji HEAD"
+
+#~ msgid "Always execute the script"
+#~ msgstr "Zawsze wykonuj skrypt"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Zatwierdź lub odrzuć skrypt przechwytujący po stronie klienta"
-
-#~ msgid ""
-#~ "Approve\n"
-#~ "Run the hook script"
-#~ msgstr ""
-#~ "Zatwierdź\n"
-#~ "Uruchom skrypt przechwytujący"
 
 #~ msgid "Approved hook scripts"
 #~ msgstr "Zatwierdzone skrypty przechwytujące"
@@ -13391,13 +13393,6 @@ msgstr "{BugTraq}"
 
 #~ msgid "Blue Style"
 #~ msgstr "Styl niebieski"
-
-#~ msgid ""
-#~ "Cancel\n"
-#~ "Do not run the script"
-#~ msgstr ""
-#~ "Anuluj\n"
-#~ "Nie uruchamiaj skryptu"
 
 #~ msgid ""
 #~ "Cancel\n"
@@ -13493,16 +13488,32 @@ msgstr "{BugTraq}"
 #~ msgstr "Czy chcesz wczytać zmienione pliki?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Nie uruchamiaj\n"
+#~ "Nie uruchamiaj skryptu"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Zewnętrzne \"%1!s!\"\r\n"
 #~ "Wersja %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Pobierz wersję HEAD i dopasuj do niej"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Pobiera zawartość folderów w tle, dzięki czemu przeglądanie jest szybsze"
+
+#~ msgid "Find &Head-Revision"
+#~ msgstr "Znajdź wersję &Główną"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Znajdź wersje HEAD"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Do przodu w historii przeglądania"
@@ -13530,8 +13541,14 @@ msgstr "{BugTraq}"
 #~ msgid "Goto Line"
 #~ msgstr "Idź do linii"
 
+#~ msgid "Head"
+#~ msgstr "Główna"
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Ukryj/Pokaż listę plików poprawki"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13552,8 +13569,17 @@ msgstr "{BugTraq}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "Różnice w linii wg słów"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "Przejdź do następnego &konfliktu"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Zachowaj &listy zmian"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Autor ostatniej zmiany:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Wersja ostatniej zmiany:"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Jak powyżej, ale używane do scaleń odwróconych"
@@ -13674,6 +13700,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Revision range to merge"
 #~ msgstr "Zakres wersji do scalenia"
+
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Uruchom\n"
+#~ "Uruchom skrypt przechwytujący"
 
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN Eksportuj zmienione elementy tutaj"
@@ -13894,6 +13927,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "Werrsja kopii:"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13916,6 +13952,15 @@ msgstr "{BugTraq}"
 #~ msgid "all &revisions"
 #~ msgstr "wszystkie we&rsje"
 
+#~ msgid "get HEAD revision:"
+#~ msgstr "pobierz wersję HEAD:"
+
+#~ msgid "get repository root urls:"
+#~ msgstr "pobierz url folderów głównych repozytoriów:"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "zablokowano (wymagane uporządkowanie):"
+
 #~ msgid "specific r&ange"
 #~ msgstr "określony zak&res"
 
@@ -13930,6 +13975,35 @@ msgstr "{BugTraq}"
 
 #~ msgid "user:state"
 #~ msgstr "user:state"
+
+#~ msgid ""
+#~ "TortoiseBlame should not be started directly! Use\n"
+#~ "TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
+#~ "instead.\n"
+#~ "\n"
+#~ "TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/"
+#~ "path:originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+#~ msgstr ""
+#~ "TortoiseBlame nie powinien być uruchamiany bezpośrednio! Zamiast tego "
+#~ "użyj\n"
+#~ "TortoiseProc.exe /command:blame /path:\"sciezka\\do\\pliku\"\n"
+#~ "\n"
+#~ "TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/"
+#~ "path:originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Zatwierdź\n"
+#~ "Uruchom skrypt przechwytujący"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Anuluj\n"
+#~ "Nie uruchamiaj skryptu"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"

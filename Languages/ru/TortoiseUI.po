@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-07-24 12:43+0000\n"
+"PO-Revision-Date: 2012-08-11 21:35+0000\n"
 "Last-Translator: Nikolay Osinin <nikolay.osinin@gmail.com>\n"
 "Language-Team: Russian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -11095,16 +11095,16 @@ msgid ""
 "instead.\n"
 "\n"
 "TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
-"originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 msgstr ""
 "TortoiseBlame не должна вызываться без параметров! Лучше воспользоваться "
 "командой\n"
 "TortoiseProc.exe /command:blame /path:\"путь\\к\\файлу\"\n"
 "\n"
 "TortoiseBlame.exe файл_авторства [файл_журнала [заголовок]] [/line:"
-"номер_строки]\n"
-"                [/path:путь_к_исходному_файлу] [/ignoreeol] [/ignorespaces] "
-"[/ignoreallspaces]"
+"номер_строки] [/path:путь_к_исходному_файлу] [/pegrev:peg] [/revrange:text] "
+"[/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13354,15 +13354,14 @@ msgstr "{СОП}"
 #~ msgid "&Peg:"
 #~ msgstr "&Стержневая (peg):"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Скорректировать на ревизию HEAD"
+
+#~ msgid "Always execute the script"
+#~ msgstr "Всегда выполнять скрипт"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Одобрить или отклонить клиентский скрипт обработчика"
-
-#~ msgid ""
-#~ "Approve\n"
-#~ "Run the hook script"
-#~ msgstr ""
-#~ "Одобрить\n"
-#~ "Выполнить скрипт обработчика"
 
 #~ msgid "Approved hook scripts"
 #~ msgstr "Одобренные скрипты обработчика"
@@ -13378,13 +13377,6 @@ msgstr "{СОП}"
 
 #~ msgid "Blue Style"
 #~ msgstr "Синий стиль"
-
-#~ msgid ""
-#~ "Cancel\n"
-#~ "Do not run the script"
-#~ msgstr ""
-#~ "Отменить\n"
-#~ "Не выполнять скрипт"
 
 #~ msgid ""
 #~ "Cancel\n"
@@ -13480,17 +13472,33 @@ msgstr "{СОП}"
 #~ msgstr "Хотите ли загрузить измененные файлы?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Не запускать\n"
+#~ "Не запускать скрипт"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Внешнее \"%1!s!\"\r\n"
 #~ "Ревизия %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Получить ревизию HEAD скорректировать на неё"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Предварительно получает содержимое папок в фоновом режиме для более "
 #~ "быстрого просмотра"
+
+#~ msgid "Find &Head-Revision"
+#~ msgstr "Найти &HEAD-ревизию"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Найти ревизии HEAD"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Вперед по истории просмотра"
@@ -13518,8 +13526,14 @@ msgstr "{СОП}"
 #~ msgid "Goto Line"
 #~ msgstr "Перейти к строке"
 
+#~ msgid "Head"
+#~ msgstr "Head"
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Спрятать/показать список файлов заплаток"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13540,8 +13554,17 @@ msgstr "{СОП}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "Различия в строке пословно"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "Перейти к следующему &конфликту"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Сохранить группы из&менений"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Автор последних изменений:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Последняя изменённая ревизия:"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Как и выше, но используется для обратного слияния"
@@ -13662,6 +13685,13 @@ msgstr "{СОП}"
 
 #~ msgid "Revision range to merge"
 #~ msgstr "Диапазон ревизий для слияния"
+
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Запустить\n"
+#~ "Запустить скрипт-обработчик"
 
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN Экспортировать изменённые элементы сюда"
@@ -13886,6 +13916,9 @@ msgstr "{СОП}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "Ревизия рабочей копии:"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13908,6 +13941,15 @@ msgstr "{СОП}"
 #~ msgid "all &revisions"
 #~ msgstr "все &ревизии"
 
+#~ msgid "get HEAD revision:"
+#~ msgstr "получить ревизию HEAD:"
+
+#~ msgid "get repository root urls:"
+#~ msgstr "получить URL корня хранилища: "
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "заблокировано (требуется очистка):"
+
 #~ msgid "specific r&ange"
 #~ msgstr "определенный &диапазон"
 
@@ -13922,6 +13964,37 @@ msgstr "{СОП}"
 
 #~ msgid "user:state"
 #~ msgstr "user:state"
+
+#~ msgid ""
+#~ "TortoiseBlame should not be started directly! Use\n"
+#~ "TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
+#~ "instead.\n"
+#~ "\n"
+#~ "TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/"
+#~ "path:originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+#~ msgstr ""
+#~ "TortoiseBlame не должна вызываться без параметров! Лучше воспользоваться "
+#~ "командой\n"
+#~ "TortoiseProc.exe /command:blame /path:\"путь\\к\\файлу\"\n"
+#~ "\n"
+#~ "TortoiseBlame.exe файл_авторства [файл_журнала [заголовок]] [/line:"
+#~ "номер_строки]\n"
+#~ "                [/path:путь_к_исходному_файлу] [/ignoreeol] [/"
+#~ "ignorespaces] [/ignoreallspaces]"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Одобрить\n"
+#~ "Выполнить скрипт обработчика"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Отменить\n"
+#~ "Не выполнять скрипт"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"

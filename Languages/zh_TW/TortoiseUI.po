@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-07-21 08:35+0000\n"
+"PO-Revision-Date: 2012-08-12 02:39+0000\n"
 "Last-Translator: zcecil <zcecil@csie.org>\n"
 "Language-Team: Chinese (Taiwan) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -10841,14 +10841,15 @@ msgid ""
 "instead.\n"
 "\n"
 "TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
-"originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 msgstr ""
-"不能直接執行 TortoiseBlame.exe!\n"
-"請由命令列輸入並參照以下語法： TortoiseProc.exe /command:blame /path:\"檔案"
-"\\的\\路徑\"\n"
+"請勿直接執行 TortoiseBlame! 請使用\n"
+"TortoiseProc.exe /command:blame /path:\"檔案路徑\".\n"
 "\n"
-"TortoiseBlame.exe 檔名 [[記錄檔] [視窗標題]] [/line:行號] [/path:原始路徑] [/"
-"ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13035,15 +13036,14 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Peg:"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "調整至 HEAD 版"
+
+#~ msgid "Always execute the script"
+#~ msgstr "永遠執行指令檔"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "允許或拒絕用戶端掛勾指令檔"
-
-#~ msgid ""
-#~ "Approve\n"
-#~ "Run the hook script"
-#~ msgstr ""
-#~ "允許\n"
-#~ "執行掛勾指令檔"
 
 #~ msgid "Approved hook scripts"
 #~ msgstr "已允許的掛勾指令檔"
@@ -13059,13 +13059,6 @@ msgstr "{BugTraq}"
 
 #~ msgid "Blue Style"
 #~ msgstr "藍色樣式"
-
-#~ msgid ""
-#~ "Cancel\n"
-#~ "Do not run the script"
-#~ msgstr ""
-#~ "取消\n"
-#~ "不執行指令檔"
 
 #~ msgid ""
 #~ "Cancel\n"
@@ -13159,15 +13152,31 @@ msgstr "{BugTraq}"
 #~ msgstr "要載入變更過的檔案嗎?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "不執行\n"
+#~ "不執行指令檔"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "外部 \"%1!s!\"\n"
 #~ "版本 %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "取出 HEAD 版並調整至此版"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "在背景載入目錄內容以加速瀏覽"
+
+#~ msgid "Find &Head-Revision"
+#~ msgstr "尋找 &HEAD 版"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "尋找 HEAD 版本"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "在瀏覽紀錄中向前"
@@ -13195,8 +13204,14 @@ msgstr "{BugTraq}"
 #~ msgid "Goto Line"
 #~ msgstr "前往行號"
 
+#~ msgid "Head"
+#~ msgstr "Head"
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "隱藏/顯示補綴檔列表"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13217,8 +13232,17 @@ msgstr "{BugTraq}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "行內逐字差異"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "跳到下一筆衝突(&C)"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "保留變更列表(&H)"
+
+#~ msgid "Last changed author:"
+#~ msgstr "最後變更的作者:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "最後變更的版本:"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "同上, 但是僅用在反向合併"
@@ -13339,6 +13363,13 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "要合併的版本範圍"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "執行\n"
+#~ "執行掛勾指令檔"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN 匯出變動過的檔案至此"
 
@@ -13407,6 +13438,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Start registry editor"
 #~ msgstr "啟動登錄編輯器"
+
+#~ msgid "Starting externals..."
+#~ msgstr "正在啟動外部程式..."
 
 #~ msgid "Style"
 #~ msgstr "樣式"
@@ -13543,6 +13577,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "工作複本版本:"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13565,6 +13602,15 @@ msgstr "{BugTraq}"
 #~ msgid "all &revisions"
 #~ msgstr "所有版本 (&R)"
 
+#~ msgid "get HEAD revision:"
+#~ msgstr "取得 HEAD 版本:"
+
+#~ msgid "get repository root urls:"
+#~ msgstr "取得檔案庫最上層 URL:"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "已被鎖定(需要執行清理動作):"
+
 #~ msgid "specific r&ange"
 #~ msgstr "指定範圍 (&A)"
 
@@ -13579,6 +13625,35 @@ msgstr "{BugTraq}"
 
 #~ msgid "user:state"
 #~ msgstr "user:state"
+
+#~ msgid ""
+#~ "TortoiseBlame should not be started directly! Use\n"
+#~ "TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
+#~ "instead.\n"
+#~ "\n"
+#~ "TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/"
+#~ "path:originalpath] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+#~ msgstr ""
+#~ "不能直接執行 TortoiseBlame.exe!\n"
+#~ "請由命令列輸入並參照以下語法： TortoiseProc.exe /command:blame /path:\"檔"
+#~ "案\\的\\路徑\"\n"
+#~ "\n"
+#~ "TortoiseBlame.exe 檔名 [[記錄檔] [視窗標題]] [/line:行號] [/path:原始路"
+#~ "徑] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+
+#~ msgid ""
+#~ "Approve\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "允許\n"
+#~ "執行掛勾指令檔"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "取消\n"
+#~ "不執行指令檔"
 
 #~ msgid ""
 #~ "Command Line To Execute:\n"

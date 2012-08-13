@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-08-03 06:27+0000\n"
+"PO-Revision-Date: 2012-08-10 15:49+0000\n"
 "Last-Translator: Masahiro Fujimoto <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -10890,14 +10890,14 @@ msgid ""
 "than at HEAD."
 msgstr ""
 "チェックアウトした外部フォルダーや、外部項目の Subversion の URL のサブフォル"
-"ダーの名前を設定する必要があります。外部フォルダーの HEAD リビジョンをチェッ"
-"クアウトしておけば、外部項目がリポジトリの中で変更されたときに、作業コピーを"
-"更新させることができます。しかし、特定の安定した時点のものを外部で参照できる"
-"ようにするには、使用する特定のリビジョンを指定することもできます。また、この"
-"場合、ペグリビジョンと同じリビジョンを指定したいかもしれません。 外部の項目が"
-"将来何らかの時点で改名されると、Subversionは作業コピーでこの項目を更新できな"
-"くなります。ペグリビジョンを指定することで、最新版ではなくペグリビジョンの時"
-"の名前をSubversionに検索させることができます。"
+"ダーの名前を設定する必要があります。外部フォルダーの最新リビジョンをチェック"
+"アウトしておけば、外部項目がリポジトリの中で変更されたときに、作業コピーを更"
+"新させることができます。しかし、特定の安定した時点のものを外部で参照できるよ"
+"うにするには、使用する特定のリビジョンを指定することもできます。また、この場"
+"合、ペグリビジョンと同じリビジョンを指定したいかもしれません。外部項目が将来"
+"何らかの時点で改名されると、Subversionは作業コピーでこの項目を更新できなくな"
+"ります。ペグリビジョンを指定することで、最新版ではなくペグリビジョンの時の名"
+"前をSubversionに検索させることができます。"
 
 #. (title)
 msgid "SVN Keywords"
@@ -11491,7 +11491,7 @@ msgstr ""
 #. (term)
 #. (listitem)
 msgid "HEAD revision in the repository"
-msgstr "リポジトリ内の HEAD リビジョン"
+msgstr "リポジトリ内の最新リビジョン"
 
 #. (para)
 msgid ""
@@ -11499,9 +11499,9 @@ msgid ""
 "No data needs to be transferred from your working copy, and the branch is "
 "created very quickly."
 msgstr ""
-"新しいブランチは、リポジトリの最新である HEAD リビジョンから直接コピーされま"
-"す。作業コピーから転送されるデータはなく、ブランチは非常に高速に作成されま"
-"す。"
+"新しいブランチは、リポジトリの最新である最新リビジョンから直接コピーされま"
+"す。データを作業コピーから転送する必要がないため、ブランチは非常に高速に作成"
+"されます。"
 
 #. (term)
 msgid "Specific revision in the repository"
@@ -26381,7 +26381,7 @@ msgstr "F7"
 
 #. (para)
 msgid "Go to next difference"
-msgstr "次の相違点へ移動する"
+msgstr "次の相違点へ移動"
 
 #. (term)
 msgid "Shift-F7"
@@ -26389,7 +26389,7 @@ msgstr "Shift+F7"
 
 #. (para)
 msgid "Go to previous difference"
-msgstr "前の相違点へ移動する"
+msgstr "前の相違点へ移動"
 
 #. (term)
 msgid "F8"
@@ -26397,7 +26397,7 @@ msgstr "F8"
 
 #. (para)
 msgid "Go to next conflict"
-msgstr "次の競合点へ移動する"
+msgstr "次の競合点へ移動"
 
 #. (term)
 msgid "Shift-F8"
@@ -26405,7 +26405,7 @@ msgstr "Shift+F8"
 
 #. (para)
 msgid "Go to previous conflict"
-msgstr "前の競合点へ移動する"
+msgstr "前の競合点へ移動"
 
 #. (term)
 msgid "Ctrl-D"
@@ -26413,7 +26413,7 @@ msgstr "Ctrl+D"
 
 #. (para)
 msgid "Toggle between one-pane diff and two-pane diff"
-msgstr "1画面表示と2画面表示を切り替える"
+msgstr "1画面表示と2画面表示を切り替え"
 
 #. (term)
 msgid "Ctrl-R"
@@ -26421,7 +26421,7 @@ msgstr "Ctrl+R"
 
 #. (para)
 msgid "Reload the files and revert all changes made"
-msgstr "ファイルを再読込し、すべての変更の取り消す"
+msgstr "ファイルを再読込し、すべての変更の取り消し"
 
 #. (term)
 msgid "Ctrl-T"
@@ -26429,7 +26429,7 @@ msgstr "Ctrl+T"
 
 #. (para)
 msgid "Toggles between showing whitespaces or not"
-msgstr "空白の表示・非表示を切り替える"
+msgstr "空白の表示・非表示を切り替え"
 
 #. (term)
 msgid "Ctrl-L"
@@ -26437,7 +26437,7 @@ msgstr "Ctrl+L"
 
 #. (para)
 msgid "Toggles between collapsing unchanged sections or not"
-msgstr "未変更箇所を折りたたむかどうかを切り替える"
+msgstr "未変更箇所を折りたたむかどうかを切り替え"
 
 #. (term)
 msgid "Ctrl-P"
@@ -26445,7 +26445,7 @@ msgstr "Ctrl+P"
 
 #. (para)
 msgid "Toggles between line wrapping"
-msgstr "行の折り返しの有無を切り替える"
+msgstr "行の折り返しの有無を切り替え"
 
 #. (term)
 msgid "Ctrl-mousewheel"
@@ -27043,6 +27043,35 @@ msgstr ""
 #~ "*)\n"
 #~ "</screen>"
 
+#~ msgid ""
+#~ "The button <guibutton>Find HEAD-Revision</guibutton> fetches the HEAD "
+#~ "revision of every external url and shows that HEAD revision in the "
+#~ "rightmost column. After the HEAD revision is known, a simple right click "
+#~ "on an external gives you the command to peg the selected externals to "
+#~ "their explicit HEAD revision. In case the HEAD revision is not known yet, "
+#~ "the right click command will fetch the HEAD revision first."
+#~ msgstr ""
+#~ "<guibutton>最新リビジョンを探す</guibutton>を押すと、外部項目の各URLを確認"
+#~ "し、右端の列に最新リビジョン表示されます。最新リビジョンが分かったら、外部"
+#~ "項目の上で右クリックすると、選択された外部項目を該当する最新リビジョンにペ"
+#~ "グ付けできます。最新リビジョンが不明な場合、右クリックのコマンドを実行する"
+#~ "と、まず最新リビジョンが取得されます。"
+
+#~ msgid ""
+#~ "<placeholder-1/> These 3 properties control the formatting of log "
+#~ "messages. The first 2 disable the <guibutton>OK</guibutton> in the commit "
+#~ "or lock dialogs until the message meets the minimum length. The border "
+#~ "position shows a marker at the given column width as a guide for projects "
+#~ "which have width limits on their log messages. Setting a value to zero "
+#~ "will delete the property."
+#~ msgstr ""
+#~ "<placeholder-1/>これら3つのプロパティは、ログメッセージの書式を制御しま"
+#~ "す。最初の２つを設定すると、コミットダイアログやロックダイアログで、メッ"
+#~ "セージが最小文字列の長さに達するまで<guibutton>OK</guibutton>ボタンが無効"
+#~ "になります。境界の位置は、それらのログメッセージの幅制限が設定されているプ"
+#~ "ロジェクトのためのガイドとして指定されたカラム幅でマーカーを示しています。"
+#~ "値をゼロに設定すると、プロパティが削除されます。"
+
 #~ msgid "Merge log message templates"
 #~ msgstr "マージログメッセージのテンプレート"
 
@@ -27140,6 +27169,14 @@ msgstr ""
 #~ "これはマージされたリビジョンがすでにログキャッシュにある場合のみ動作しま"
 #~ "す。もしログキャッシュを無効にしていたり、マージ前にログを表示していなかっ"
 #~ "たりすると、メッセージにはマージされたリビジョンの情報が入りません。"
+
+#~ msgid ""
+#~ "The edit dialog for <literal>svn:externals</literal> properties allows "
+#~ "you to select the externals and automatically set them explicitly to the "
+#~ "HEAD revision."
+#~ msgstr ""
+#~ "<literal>svn:externals</literal>プロパティの編集ダイアログでは外部参照を選"
+#~ "択できますが、明示的に最新リビジョンが選択されます。"
 
 #~ msgid ""
 #~ "To customize that generated message, set the corresponding project "
@@ -27505,6 +27542,21 @@ msgstr ""
 #~ "の行内差分を表示すると、遅くなってしまいます。そのため、3000文字未満の行の"
 #~ "み行内差分が表示されるようになっています。ここでその長さを変えることができ"
 #~ "ます。"
+
+#~ msgid "Ctrl-G"
+#~ msgstr "Ctrl+G"
+
+#~ msgid "Go to line"
+#~ msgstr "指定した行に移動"
+
+#~ msgid "Select all text"
+#~ msgstr "文字列全体を選択"
+
+#~ msgid "Ctrl-U"
+#~ msgstr "Ctrl+U"
+
+#~ msgid "Switches views"
+#~ msgstr "画面表示の切り替え"
 
 #~ msgid ""
 #~ "Shows the properties dialog for the path given in <option>/path</option>. "

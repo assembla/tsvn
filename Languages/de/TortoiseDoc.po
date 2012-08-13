@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-07-23 07:47+0000\n"
+"PO-Revision-Date: 2012-08-13 06:52+0000\n"
 "Last-Translator: Lübbe <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: German <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -4247,13 +4247,12 @@ msgid ""
 "<placeholder-1/> If you enter a folder name that does not yet exist, then a "
 "directory with that name is created."
 msgstr ""
-"Wählen Sie nun den Ordner im Windows Explorer in dem Sie Ihre Arbeitskopie "
+"Wählen Sie nun den Ordner im Windows Explorer, in dem Sie Ihre Arbeitskopie "
 "erstellen wollen und öffnen Sie mit einem <action>Rechtsklick</action> das "
 "Kontextmenü. Wählen Sie den Befehl <menuchoice> <guimenu>TortoiseSVN</"
 "guimenu> <guimenuitem>Auschecken...</guimenuitem> </menuchoice> worauf der "
 "folgende Dialog erscheint: <placeholder-1/> Wenn Sie einen Ordnernamen "
-"angeben, der noch nicht existiert, wird dieser Ordner im Projektarchiv "
-"angelegt."
+"angeben, der noch nicht existiert, wird dieser Ordner angelegt."
 
 #. (title)
 msgid "Checkout Depth"
@@ -7912,7 +7911,7 @@ msgstr ""
 #. (para)
 msgid "To refresh the log cache, hit the <keycap>Ctrl-F5</keycap> keys."
 msgstr ""
-"Um den Log-Puffer zu aktualisieren, drücken Sie <keycap>Strg-F5</keycap>."
+"Um den Log-Puffer zu aktualisieren, drücken Sie <keycap>Strg+F5</keycap>."
 
 #. (title)
 msgid "Current Working Copy Revision"
@@ -8533,8 +8532,8 @@ msgid ""
 "invalidate the entire cache for that repository."
 msgstr ""
 "Falls Sie den Log-Puffer verwenden und denken, dass sich der Inhalt oder der "
-"Autor einer Logmeldung geändert haben, können Sie <keycap>Umsch-F5</keycap> "
-"oder <keycap>Strg-F5</keycap> benutzen, um die angezeigten Meldungen erneut "
+"Autor einer Logmeldung geändert haben, können Sie <keycap>Umsch+F5</keycap> "
+"oder <keycap>Strg+F5</keycap> benutzen, um die angezeigten Meldungen erneut "
 "vom Server zu holen. Beachten Sie, dass das nur die gerade angezeigten "
 "Meldungen betrifft und dass nicht der gesamte Puffer für das Projektarchiv "
 "ungültig wird."
@@ -14858,7 +14857,7 @@ msgid ""
 msgstr ""
 "Sie können mit <keycap>F5</keycap> die Anzeige aktualisieren. Wenn Sie die "
 "Daten von Knoten, die bisher noch nicht geöffnet wurden, laden wollen, "
-"verwenden Sie dafür <keycap>Strg-F5</keycap>. Danach erfolgt das Öffnen "
+"verwenden Sie dafür <keycap>Strg+F5</keycap>. Danach erfolgt das Öffnen "
 "eines Knotens ohne Verzögerung, da keine Informationen mehr über das "
 "Netzwerk geladen werden müssen."
 
@@ -20180,7 +20179,7 @@ msgid ""
 msgstr ""
 "TortoiseSVN verwendet Abkürzungstasten für seine Explorer-Kontextmenüs. Da "
 "dies zu Duplikaten führen kann (z.B. haben sowohl <literal>Zeige Log</"
-"literal> als auch <literal>Löschen</literal> die Kurztaste <keycap>Alt-L</"
+"literal> als auch <literal>Löschen</literal> die Kurztaste <keycap>Alt+L</"
 "keycap>), besteht die Möglichkeit, diese Funktion abzuschalten, indem Sie "
 "diesen Wert auf <literal>false</literal> setzen."
 
@@ -27630,7 +27629,7 @@ msgstr "Tastaturkürzel"
 
 #. (term)
 msgid "Ctrl-Q, Ctrl-W, Escape"
-msgstr "Strg-Q, Strg-W, Escape"
+msgstr "Strg+Q, Strg+W, Escape"
 
 #. (para)
 msgid "Quit the program"
@@ -27642,7 +27641,7 @@ msgstr "Den markierten Text in die Zwischenablage kopieren"
 
 #. (term)
 msgid "Ctrl-X, Shift-Del"
-msgstr "Strg-X, Umsch-Entf"
+msgstr "Strg+X, Umsch+Entf"
 
 #. (para)
 msgid "Cut the selected text to the clipboard"
@@ -27650,7 +27649,7 @@ msgstr "Den markierten Text in die Zwischenablage ausschneiden"
 
 #. (term)
 msgid "Ctrl-V, Shift-Insert"
-msgstr "Strg-X, Umsch-Einf"
+msgstr "Strg+X, Umsch+Einf"
 
 #. (para)
 msgid "Paste the selected text from the clipboard"
@@ -27658,7 +27657,7 @@ msgstr "Den markierten Text aus der Zwischenablage einfügen"
 
 #. (term)
 msgid "Ctrl-Z, Alt-Backspace"
-msgstr "Strg-Z, Alt-Rück"
+msgstr "Strg+Z, Alt+Rück"
 
 #. (para)
 msgid "Undo the last edits"
@@ -27666,7 +27665,7 @@ msgstr "Die letzten Änderungen rückgängig machen"
 
 #. (term)
 msgid "Ctrl-F"
-msgstr "Strg-F"
+msgstr "Strg+F"
 
 #. (para)
 msgid "Open the Find dialog for text searches"
@@ -27674,7 +27673,7 @@ msgstr "Den Dialog zum Suchen von Text öffnen"
 
 #. (term)
 msgid "Ctrl-O"
-msgstr "Strg-O"
+msgstr "Strg+O"
 
 #. (para)
 msgid "Open files to diff/merge"
@@ -27682,7 +27681,7 @@ msgstr "Dateien zum Vergleichen/Zusammenführen öffnen"
 
 #. (term)
 msgid "Ctrl-S"
-msgstr "Strg-S"
+msgstr "Strg+S"
 
 #. (para)
 msgid "Save the changes"
@@ -27690,7 +27689,7 @@ msgstr "Änderungen speichern"
 
 #. (term)
 msgid "Ctrl-Shift-S"
-msgstr "Strg-Umsch-S"
+msgstr "Strg+Umsch+S"
 
 #. (para)
 msgid "Save as..."
@@ -27706,7 +27705,7 @@ msgstr "Zum nächsten Unterschied gehen"
 
 #. (term)
 msgid "Shift-F7"
-msgstr "Umsch-F7"
+msgstr "Umsch+F7"
 
 #. (para)
 msgid "Go to previous difference"
@@ -27722,7 +27721,7 @@ msgstr "Zum nächsten Konflikt gehen"
 
 #. (term)
 msgid "Shift-F8"
-msgstr "Umsch-F8"
+msgstr "Umsch+F8"
 
 #. (para)
 msgid "Go to previous conflict"
@@ -27730,7 +27729,7 @@ msgstr "Zum vorherigen Konflikt gehen"
 
 #. (term)
 msgid "Ctrl-D"
-msgstr "Strg-D"
+msgstr "Strg+D"
 
 #. (para)
 msgid "Toggle between one-pane diff and two-pane diff"
@@ -27738,7 +27737,7 @@ msgstr "Zwischen Einfenstersicht und Zweifenstersicht wechseln"
 
 #. (term)
 msgid "Ctrl-R"
-msgstr "Strg-R"
+msgstr "Strg+R"
 
 #. (para)
 msgid "Reload the files and revert all changes made"
@@ -27746,7 +27745,7 @@ msgstr "Dateien neu laden und alle Änderungen rückgängig machen"
 
 #. (term)
 msgid "Ctrl-T"
-msgstr "Strg-T"
+msgstr "Strg+T"
 
 #. (para)
 msgid "Toggles between showing whitespaces or not"
@@ -27754,7 +27753,7 @@ msgstr "Platzhalter für nicht druckbare Zeichen anzeigen/verstecken"
 
 #. (term)
 msgid "Ctrl-L"
-msgstr "Ctrl-L"
+msgstr "Strg+L"
 
 #. (para)
 msgid "Toggles between collapsing unchanged sections or not"
@@ -27762,7 +27761,7 @@ msgstr "Unveränderte Abschnitte anzeigen/verstecken"
 
 #. (term)
 msgid "Ctrl-P"
-msgstr "Ctrl-P"
+msgstr "Strg+P"
 
 #. (para)
 msgid "Toggles between line wrapping"
@@ -28389,6 +28388,37 @@ msgstr ""
 #~ "my:multilineprop=multline;Kopieren und fügen Sie ein vollständiges "
 #~ "Kapitel hier ein(.*)</screen>"
 
+#~ msgid ""
+#~ "The button <guibutton>Find HEAD-Revision</guibutton> fetches the HEAD "
+#~ "revision of every external url and shows that HEAD revision in the "
+#~ "rightmost column. After the HEAD revision is known, a simple right click "
+#~ "on an external gives you the command to peg the selected externals to "
+#~ "their explicit HEAD revision. In case the HEAD revision is not known yet, "
+#~ "the right click command will fetch the HEAD revision first."
+#~ msgstr ""
+#~ "Die Schaltfläche <guibutton>HEAD Revision finden</guibutton> holt die "
+#~ "HEAD Revision jeder externen URL und zeigt sie in der rechten Spalte an. "
+#~ "Nachdem diese Revision bekannt ist, genügt ein einfacher Doppelklick, um "
+#~ "den externen Verweis fest an diese HEAD Revision zu binden. Falls die "
+#~ "HEAD Revision noch nicht bekannt ist, wird sie bei einem Rechtsklick "
+#~ "zunächst geholt."
+
+#~ msgid ""
+#~ "<placeholder-1/> These 3 properties control the formatting of log "
+#~ "messages. The first 2 disable the <guibutton>OK</guibutton> in the commit "
+#~ "or lock dialogs until the message meets the minimum length. The border "
+#~ "position shows a marker at the given column width as a guide for projects "
+#~ "which have width limits on their log messages. Setting a value to zero "
+#~ "will delete the property."
+#~ msgstr ""
+#~ "</placeholder-1>Diese drei Eigenschaften steuern die Formatierung von "
+#~ "Logmeldungen. Die ersten beiden deaktivieren so lange die <guibutton>OK</"
+#~ "guibutton> Schaltfläche in den Übertragen- und Sperren Dialogen, bis die "
+#~ "Meldung die minimale Länge erreicht hat. Die Randposition zeigt eine "
+#~ "Markierung an der angegebenen Spalte als Hilfslinie für Projekte, die die "
+#~ "Breite ihrer Logmeldungen begrenzen. Wenn Sie einen Wert auf Null setzen, "
+#~ "wird die Eigenschaft gelöscht."
+
 #~ msgid "Merge log message templates"
 #~ msgstr "Vorlage für Zusammenführen-Log"
 
@@ -28495,6 +28525,15 @@ msgstr ""
 #~ "Log-Puffer sind. Wenn Sie den Log-Puffer deaktiviert oder das Log vor dem "
 #~ "Zusammenführen nicht angezeigt haben, wird die generierte Meldung keine "
 #~ "Informationen über die zusammengeführten Revisionen enthalten."
+
+#~ msgid ""
+#~ "The edit dialog for <literal>svn:externals</literal> properties allows "
+#~ "you to select the externals and automatically set them explicitly to the "
+#~ "HEAD revision."
+#~ msgstr ""
+#~ "Der Bearbeiten-Dialog für <literal>svn:externals</literal> Eigenschaften "
+#~ "erlaubt Ihnen, die externen Verweise zu definieren und sie automatisch an "
+#~ "die HEAD Revision zu binden."
 
 #~ msgid ""
 #~ "To customize that generated message, set the corresponding project "
@@ -28868,6 +28907,21 @@ msgstr ""
 #~ "langsam werden, wenn Inline Diffs für sehr lange Zeilen angezeigt werden "
 #~ "sollen. Deshalb werden nur Zeilen, die kürzer als 3000 Zeichen sind mit "
 #~ "Inline Diffs angezeigt. Sie können diesen Wert hier ändern."
+
+#~ msgid "Ctrl-G"
+#~ msgstr "Strg+G"
+
+#~ msgid "Go to line"
+#~ msgstr "Gehe zu Zeile"
+
+#~ msgid "Select all text"
+#~ msgstr "Gesamten Text auswählen"
+
+#~ msgid "Ctrl-U"
+#~ msgstr "Strg+U"
+
+#~ msgid "Switches views"
+#~ msgstr "Ansichten umschalten"
 
 #~ msgid ""
 #~ "Shows the properties dialog for the path given in <option>/path</option>. "
