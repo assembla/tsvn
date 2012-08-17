@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-08-11 08:45+0000\n"
+"PO-Revision-Date: 2012-08-14 13:14+0000\n"
 "Last-Translator: okloster <okl@sintef.no>\n"
 "Language-Team: Norwegian Bokmål <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -11032,6 +11032,13 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"TortoiseBlame bør ikke startes direkte! Bruk\n"
+"TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
+"i stedet.\n"
+"\n"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13264,6 +13271,12 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Spiker:"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Juster til HEAD-revisjon"
+
+#~ msgid "Always execute the script"
+#~ msgstr "Kjør skriptet alltid"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Godkjenn eller avvis klient-påhakingsskript"
 
@@ -13376,16 +13389,32 @@ msgstr "{BugTraq}"
 #~ msgstr "Vil du laste de endrede filene?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Ikke kjør\n"
+#~ "Ikke kjør skriptet"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Ekstern \"%1!s!\"\n"
 #~ "Revisjon %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Hent HEAD-revisjon og juster til den"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Henter innholdet i mapper i bakgrunnen slik at utforsking går raskere"
+
+#~ msgid "Find &Head-Revision"
+#~ msgstr "Finn &HEAD-Revisjon"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Finn HEAD-revisjoner"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Forover i utforskings-historien"
@@ -13413,8 +13442,14 @@ msgstr "{BugTraq}"
 #~ msgid "Goto Line"
 #~ msgstr "Gå til Linje"
 
+#~ msgid "Head"
+#~ msgstr "HEAD"
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Skjuler eller viser listen over korreksjonsfiler"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13435,8 +13470,17 @@ msgstr "{BugTraq}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "Linjeforskjeller per ord"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "Hopp til neste &konflikt"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Behold &endringslister"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Siste endring forfatter:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Siste endring revisjon:"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Som over, men brukes for reversfletting"
@@ -13558,6 +13602,13 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Revisjonsintervall å flette"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Kjør\n"
+#~ "Kjør påhakingsskriptet"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN Eksportér endrede elementer hit"
 
@@ -13626,6 +13677,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Start registry editor"
 #~ msgstr "Start register-redigeringsverktøyet"
+
+#~ msgid "Starting externals..."
+#~ msgstr "Starter eksterne..."
 
 #~ msgid "Style"
 #~ msgstr "Stil"
@@ -13771,6 +13825,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "Arbeidskopi-revisjon:"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13792,6 +13849,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "all &revisions"
 #~ msgstr "alle &revisjoner"
+
+#~ msgid "get HEAD revision:"
+#~ msgstr "hent HEAD-revisjon:"
+
+#~ msgid "get repository root urls:"
+#~ msgstr "hent depotrot-URLer:"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "låst (opprydning kreves):"
 
 #~ msgid "specific r&ange"
 #~ msgstr "angitt &intervall"

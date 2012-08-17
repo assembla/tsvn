@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-08-11 08:45+0000\n"
+"PO-Revision-Date: 2012-08-15 05:15+0000\n"
 "Last-Translator: Zbyněk Schwarz <zbynek.schwarz@gmail.com>\n"
 "Language-Team: Czech <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1268,7 +1268,7 @@ msgstr "Překlopit pracovní kopii do ce&sty a revize"
 
 #. Resource IDs: (275)
 msgid "&Switch WC to path@HEAD"
-msgstr "Překlopit pracovní kopii do ce&sta@HEAD"
+msgstr "&Překlopit pracovní kopii do cesta@HEAD"
 
 #. Resource IDs: (1173)
 msgid "&Symbol View"
@@ -13240,6 +13240,12 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Zavěsit"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Přejít na revizi HEAD"
+
+#~ msgid "Always execute the script"
+#~ msgstr "Vždy spustit skript"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Schválit nebo zamítnout hákový skript na straně klienta"
 
@@ -13351,15 +13357,31 @@ msgstr "{BugTraq}"
 #~ msgstr "Chcete načíst změněné soubory?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Nespouštět\n"
+#~ "Nespouštět skript"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Externí \"%1!s!\"\r\n"
 #~ "Revize %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Získat revizi HEAD a přejít na ni"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Získá obsahy adresářů v pozadí, takže procházení je rychlejší"
+
+#~ msgid "Find &Head-Revision"
+#~ msgstr "Najít revizi HEAD"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Najít revize HEAD"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Dopředu v procházení historie"
@@ -13387,8 +13409,14 @@ msgstr "{BugTraq}"
 #~ msgid "Goto Line"
 #~ msgstr "Přejít na řádek"
 
+#~ msgid "Head"
+#~ msgstr "Head"
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Skrýt/Zobrazit seznam záplatových souborů"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13414,6 +13442,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Ponechat &seznamy změn"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Poslední změněný autor:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Poslední změněná revize:"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Jako výše, ale použito pro zpětné sloučení"
@@ -13533,6 +13567,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Revision range to merge"
 #~ msgstr "Rozsah revizí ke sloučení"
+
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Spustit\n"
+#~ "Spustit hákový skript"
 
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN Exportovat změněné položky sem"
@@ -13754,6 +13795,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "Revize pracovní kopie:"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13775,6 +13819,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "all &revisions"
 #~ msgstr "všechny &revize"
+
+#~ msgid "get HEAD revision:"
+#~ msgstr "získat revizi HEAD:"
+
+#~ msgid "get repository root urls:"
+#~ msgstr "získat kořenové url úložišť:"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "uzamčeno (je třeba vyčistit):"
 
 #~ msgid "specific r&ange"
 #~ msgstr "&určitý rozsah"

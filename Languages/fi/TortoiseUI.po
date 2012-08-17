@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-08-11 08:45+0000\n"
+"PO-Revision-Date: 2012-08-13 21:32+0000\n"
 "Last-Translator: Kari Granö <kari.grano@gmail.com>\n"
 "Language-Team: Finnish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -11052,6 +11052,13 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"TortoiseBlame-ohjelmaa ei pitäisi käynnistää suoraan!\n"
+"Käytä sen sijaan komentoa TortoiseProc.exe /command:blame /path:\"polku"
+"\\tiedostoon\".\n"
+"\n"
+"TortoiseBlame.exe tekijätiedosto [lokitiedosto [ikkunaotsikko]] [/line:"
+"rivinumero] [/path:alkuperäinen polku] [/pegrev:ankkuri] [/revrange:"
+"versioväli] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13287,6 +13294,12 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Ankkuri:"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Mukaudu HEAD-versioon"
+
+#~ msgid "Always execute the script"
+#~ msgstr "Suorita komentojono aina"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Hyväksy tai hylkää asiakaspään toimintokomento"
 
@@ -13401,15 +13414,31 @@ msgstr "{BugTraq}"
 #~ msgstr "Haluatko noutaa muuttuneet tiedostot?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Älä suorita\n"
+#~ "Älä suorita komentoa"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Ulkoinen \"%1!s!\"\r\n"
 #~ "Versio %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Nouda HEAD-versio ja mukaudu siihen"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Noutaa kansioiden sisällöt taustalla käytön nopeuttamiseksi"
+
+#~ msgid "Find &Head-Revision"
+#~ msgstr "Etsi &HEAD-versio"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Etsi HEAD-versioita"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Eteenpäin selaushistoriassa"
@@ -13437,8 +13466,14 @@ msgstr "{BugTraq}"
 #~ msgid "Goto Line"
 #~ msgstr "Siirry riville"
 
+#~ msgid "Head"
+#~ msgstr "HEAD"
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Piilota/näytä paikkatiedostolista"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +S"
@@ -13459,8 +13494,17 @@ msgstr "{BugTraq}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "Rivin sisäiset erot sanoittain"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "Siirry seuraavaan ristiriitaan"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "&Säilytä muutoslistat"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Viimeisimmän muutoksen tekijä:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Viimeisimmän muutoksen versio:"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Kuten yllä, mutta käytetään käänteiseen yhdistämiseen"
@@ -13583,6 +13627,13 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Yhdistettävä versioväli"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Suorita\n"
+#~ "Suorita toimintokomento"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN: Vie muutetut kohteet tänne"
 
@@ -13654,6 +13705,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Start registry editor"
 #~ msgstr "Käynnistä rekisterin muokkaus"
+
+#~ msgid "Starting externals..."
+#~ msgstr "Käynnistetään ulkoiset..."
 
 #~ msgid "Style"
 #~ msgstr "Tyyli"
@@ -13798,6 +13852,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "Työkopion versio:"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13819,6 +13876,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "all &revisions"
 #~ msgstr "kaikki &versiot"
+
+#~ msgid "get HEAD revision:"
+#~ msgstr "hae  HEAD-versio:"
+
+#~ msgid "get repository root urls:"
+#~ msgstr "hae arkiston juuripaikantimet:"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "lukittu (siivous tarvitaan):"
 
 #~ msgid "specific r&ange"
 #~ msgstr "ertyinen &väli"
