@@ -1253,6 +1253,11 @@ void CRepositoryBrowser::FetchChildren (HTREEITEM node)
     std::deque<CItem>& children = pTreeItem->children;
     {
         CAutoWriteLock lockerw(m_guard);
+        if (pTreeItem == m_pListCtrlTreeItem)
+        {
+            m_RepoList.DeleteAllItems();
+            m_pListCtrlTreeItem = nullptr;
+        }
         CString redirectedUrl;
         children.clear();
         pTreeItem->has_child_folders = false;
@@ -3998,11 +4003,12 @@ void CRepositoryBrowser::StoreSelectedURLs()
     // selections on the RHS list take precedence
 
     POSITION pos = m_RepoList.GetFirstSelectedItemPosition();
-    if (pos == NULL)
-        return;
-    int index = -1;
-    while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
-        selection.Add ((CItem *)m_RepoList.GetItemData (index));
+    if (pos != NULL)
+    {
+        int index = -1;
+        while ((index = m_RepoList.GetNextSelectedItem(pos))>=0)
+            selection.Add ((CItem *)m_RepoList.GetItemData (index));
+    }
 
     // followed by the LHS tree view
 
