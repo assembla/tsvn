@@ -1,6 +1,6 @@
 // TortoiseIDiff - an image diff viewer in TortoiseSVN
 
-// Copyright (C) 2006-2010 - TortoiseSVN
+// Copyright (C) 2006-2010, 2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -56,6 +56,8 @@
  */
 class CPicWindow : public CWindow
 {
+private:
+    CPicWindow() : CWindow(NULL) {}
 public:
     CPicWindow(HINSTANCE hInst, const WNDCLASSEX* wcx = NULL) : CWindow(hInst, wcx)
         , bValid(false)
@@ -88,6 +90,8 @@ public:
         SetWindowTitle(_T("Picture Window"));
         m_lastTTPos.x = 0;
         m_lastTTPos.y = 0;
+        ptPanStart.x = -1;
+        ptPanStart.y = -1;
     };
 
     enum BlendType

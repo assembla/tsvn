@@ -45,10 +45,7 @@ public:
     /**
      * Returns the configuration
      */
-    apr_hash_t * GetConfig()
-    {
-        return config;
-    }
+    apr_hash_t * GetConfig(apr_pool_t * pool);
 
     /**
      * Reads the global ignore patterns which will be used later in
@@ -75,5 +72,6 @@ private:
     apr_hash_t *                config;
     apr_array_header_t *        patterns;
 
+    CComCriticalSection         m_critSec;
     static SVNConfig *          m_pInstance;
 };

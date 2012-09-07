@@ -59,7 +59,7 @@ SVNHelper::SVNHelper(void)
     m_ctx->cancel_func = cancelfunc;
     m_ctx->cancel_baton = this;
     m_ctx->client_name = SVNHelper::GetUserAgentString(m_pool);
-    m_config = SVNConfig::Instance().GetConfig();
+    m_config = SVNConfig::Instance().GetConfig(m_pool);
 }
 
 SVNHelper::~SVNHelper(void)
@@ -84,7 +84,7 @@ svn_client_ctx_t * SVNHelper::ClientContext(apr_pool_t * pool) const
     {
         ctx->cancel_func = cancelfunc;
         ctx->cancel_baton = (void *)this;
-        ctx->config = m_config;
+        ctx->config = SVNConfig::Instance().GetConfig(m_pool);
     }
 
     return ctx;

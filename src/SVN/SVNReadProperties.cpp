@@ -150,7 +150,7 @@ void SVNReadProperties::Construct()
 #ifdef _MFC_VER
 
     // set up the configuration
-    m_pctx->config = SVNConfig::Instance().GetConfig();
+    m_pctx->config = SVNConfig::Instance().GetConfig(m_pool);
     if (m_pctx->config == nullptr)
     {
         Err = svn_config_get_config (&(m_pctx->config), g_pConfigDir, m_pool);

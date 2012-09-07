@@ -275,6 +275,15 @@ BOOL CTortoiseProcApp::InitInstance()
         return FALSE;
     }
 
+    if (parser.HasVal(_T("configdir")))
+    {
+        // the user can override the location of the Subversion config directory here
+        CString sConfigDir = parser.GetVal(_T("configdir"));
+        g_SVNGlobal.SetConfigDir(sConfigDir);
+    }
+    // load the configuration now
+    SVNConfig::Instance();
+
     CTSVNPath cmdLinePath;
     CTSVNPathList pathList;
     if (g_sGroupingUUID.IsEmpty())
@@ -398,12 +407,6 @@ BOOL CTortoiseProcApp::InitInstance()
 
     CheckForNewerVersion();
 
-    if (parser.HasVal(_T("configdir")))
-    {
-        // the user can override the location of the Subversion config directory here
-        CString sConfigDir = parser.GetVal(_T("configdir"));
-        g_SVNGlobal.SetConfigDir(sConfigDir);
-    }
     // to avoid that SASL will look for and load its plugin dlls all around the
     // system, we set the path here.
     // Note that SASL doesn't have to be initialized yet for this to work
