@@ -47,6 +47,7 @@
 #include "TempFile.h"
 #include "SmartHandle.h"
 #include "TaskbarUUID.h"
+#include "SVNConfig.h"
 
 #define STRUCT_IOVEC_DEFINED
 #include "sasl.h"

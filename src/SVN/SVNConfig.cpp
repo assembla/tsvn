@@ -39,7 +39,7 @@ SVNConfig::SVNConfig(void)
     m_critSec.Init();
     parentpool = svn_pool_create(NULL);
 
-    err = svn_config_ensure(NULL, parentpool);
+    svn_error_t * err = svn_config_ensure(NULL, parentpool);
     pool = svn_pool_create (parentpool);
     // set up the configuration
     if (err == 0)
