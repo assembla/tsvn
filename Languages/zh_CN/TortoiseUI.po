@@ -26,14 +26,14 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-08-11 08:45+0000\n"
+"PO-Revision-Date: 2012-09-09 08:41+0000\n"
 "Last-Translator: Hong Xu <icehong@gmail.com>\n"
 "Language-Team: Chinese (China) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_CN\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 # msgid/msgstr fields for Accelerator keys
 # Format is: "ID:xxxxxx:VACS+X" where:
@@ -10841,6 +10841,10 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"不应该直接启动TortoiseBlame ! 使用⏎ TortoiseProc.exe /command:blame /path:"
+"\"path\\to\\file\"\n"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] "
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13017,6 +13021,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Peg:"
 
+#~ msgid "Always execute the script"
+#~ msgstr "总是执行这些脚本"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "接受或者拒绝客户侧钩子脚本"
 
@@ -13092,6 +13099,19 @@ msgstr "{BugTraq}"
 #~ msgid "Create patch file"
 #~ msgstr "生成补丁文件"
 
+#~ msgid ""
+#~ "Custom title string. Available keywords are:\r\n"
+#~ "{mergeurl}:\tthe source url of the merge\r\n"
+#~ "{revisions}:\tA comma separated list of the merged revisions, e.g., 3, 5, "
+#~ "6, 7\r\n"
+#~ "{revisionsr}:\tLike {revisions} but with an 'r' in front of the revisions"
+#~ "\r\n"
+#~ "{revrange}:\tA comma separated list of the merged revisions, grouped into "
+#~ "ranges if possible, e.g., 3, 5-7"
+#~ msgstr ""
+#~ "自定义标题\n"
+#~ "可用的关键字有"
+
 #~ msgid "Dialog"
 #~ msgstr "对话框"
 
@@ -13106,6 +13126,16 @@ msgstr "{BugTraq}"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "文件发生变化，希望重新加载吗？"
+
+#~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "不要执行\n"
+#~ "不要执行这些脚本"
+
+#~ msgid "Enforce"
+#~ msgstr "执行"
 
 #~ msgid ""
 #~ "External \"%1!s!\"\r\n"
@@ -13147,6 +13177,9 @@ msgstr "{BugTraq}"
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "隐藏/显示补丁文件列表"
 
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
+
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
 
@@ -13166,8 +13199,17 @@ msgstr "{BugTraq}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "行间差异（智能）"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "跳到下一处&c冲突"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "保留(c&)修改列表"
+
+#~ msgid "Last changed author:"
+#~ msgstr "上一个修改的作者："
+
+#~ msgid "Last changed revision:"
+#~ msgstr "上一个修改的修订号："
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "和上面的一样，但是反向合并时使用"
@@ -13200,6 +13242,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Merge Log &Templates"
 #~ msgstr "合并日志 (&T)模板"
+
+#~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr "合并了修改版本号{revrange} 从 {mergeurl}:\n"
 
 #~ msgid "Navigate"
 #~ msgstr "导航"
@@ -13272,6 +13317,9 @@ msgstr "{BugTraq}"
 #~ msgid "Restore after commit"
 #~ msgstr "提交后恢复"
 
+#~ msgid "Reverse merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr "从{mergeurl}　回了合并的修订版本(s) {revrange} :\n"
+
 #~ msgid ""
 #~ "Revert\n"
 #~ "All local modifications will be lost."
@@ -13281,6 +13329,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Revision range to merge"
 #~ msgstr "将要合并的修改版本范围"
+
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "执行\n"
+#~ "执行这些回调"
 
 #~ msgid "SVN Export changed items here"
 #~ msgstr "在这里显示 SVN 导出 改变的项"
@@ -13334,6 +13389,9 @@ msgstr "{BugTraq}"
 #~ msgid "Start registry editor"
 #~ msgstr "启动注册表编辑器"
 
+#~ msgid "Starting externals..."
+#~ msgstr "开始外部模块"
+
 #~ msgid "Style"
 #~ msgstr "风格"
 
@@ -13342,6 +13400,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "Switch left and right view"
 #~ msgstr "切换左边和右边的视图"
+
+#~ msgid ""
+#~ "The file\n"
+#~ "%s\n"
+#~ "is not a valid text file!"
+#~ msgstr ""
+#~ "这个文件\n"
+#~ "%s\n"
+#~ "不是一个有效的文本文件"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "行号必须在%d和%d之间"
@@ -13469,6 +13536,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "本地拷贝的修订号："
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13490,6 +13560,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "all &revisions"
 #~ msgstr "所有版本(&R)"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "已经锁定(需要执行清理命令)"
 
 #~ msgid "specific r&ange"
 #~ msgstr "指定(&a)范围"

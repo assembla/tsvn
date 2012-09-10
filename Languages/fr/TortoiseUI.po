@@ -28,14 +28,14 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-08-11 08:45+0000\n"
+"PO-Revision-Date: 2012-09-09 08:41+0000\n"
 "Last-Translator: Christophe SAUVEUR <christophe@xhaleera.com>\n"
 "Language-Team: French <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 # msgid/msgstr fields for Accelerator keys
 # Format is: "ID:xxxxxx:VACS+X" where:
@@ -11176,6 +11176,13 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"TortoiseBlame ne devrait pas être démarré directement ! Utilisez\n"
+"TortoiseProc.exe /command:blame /path:\"chemin\\vers\\le\\fichier\"\n"
+"à la place.\n"
+"\n"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:numerodeligne] [/"
+"path:cheminoriginal] [/pegrev:peg] [/revrange:texte] [/ignoreeol] [/"
+"ignorespaces] [/ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13441,6 +13448,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Piquet:"
 
+#~ msgid "Always execute the script"
+#~ msgstr "Toujours exécuter le script"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Approuver ou rejeter l'appel de script côté client"
 
@@ -13555,6 +13565,16 @@ msgstr "{BugTraq}"
 #~ msgstr "Voulez-vous charger les files modifiés ?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Ne pas exécuter\n"
+#~ "Ne pas exécuter le script"
+
+#~ msgid "Enforce"
+#~ msgstr "Renforcer"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
@@ -13596,6 +13616,9 @@ msgstr "{BugTraq}"
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Masquer / Afficher la liste fichier du patch"
 
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
+
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
 
@@ -13615,8 +13638,17 @@ msgstr "{BugTraq}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "Différences de ligne dans les mots"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "Aller au prochain &conflit"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Conserver les listes de &modifications"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Dernier auteur modifié :"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Dernière révision modifiée :"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Comme ci-dessus, mais utilisé pour les fusions inversées"
@@ -13740,6 +13772,13 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Plage de révisions à fusionner"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Exécuter\n"
+#~ "Exécuter le script crocheté"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "Exporter les éléments modifiés du SVN ici"
 
@@ -13811,6 +13850,9 @@ msgstr "{BugTraq}"
 #~ msgid "Start registry editor"
 #~ msgstr "Démarrer l'éditeur de registre"
 
+#~ msgid "Starting externals..."
+#~ msgstr "Démarrage des externes..."
+
 #~ msgid "Style"
 #~ msgstr "Style"
 
@@ -13819,6 +13861,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "Switch left and right view"
 #~ msgstr "Intervertir les vues gauche et droite"
+
+#~ msgid ""
+#~ "The file\n"
+#~ "%s\n"
+#~ "is not a valid text file!"
+#~ msgstr ""
+#~ "Le fichier\n"
+#~ "%s\n"
+#~ "n'est pas un fichier texte valide !"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Le numéro de ligne doit être compris entre %d et %d."
@@ -13959,6 +14010,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "Révision de la CT :"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13980,6 +14034,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "all &revisions"
 #~ msgstr "toutes les &révisions"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "verrouillé (nettoyage requis) :"
 
 #~ msgid "specific r&ange"
 #~ msgstr "pl&age spécifique"

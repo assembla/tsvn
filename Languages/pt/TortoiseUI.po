@@ -20,14 +20,14 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-08-11 08:45+0000\n"
-"Last-Translator: Lübbe <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2012-09-09 08:42+0000\n"
+"Last-Translator: JustinoAveiro <paulojustino.nec@gmail.com>\n"
 "Language-Team: Portuguese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # msgid/msgstr fields for Accelerator keys
 # Format is: "ID:xxxxxx:VACS+X" where:
@@ -11125,6 +11125,13 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"O TortoiseBlame não deve ser arrancado directamente! Usar\n"
+" TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
+"em alternativa.\n"
+"\n"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13393,6 +13400,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Cavilha:"
 
+#~ msgid "Always execute the script"
+#~ msgstr "Executar sempre o script"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Aprova ou rejeita script de gancho de lado-cliente"
 
@@ -13506,6 +13516,13 @@ msgstr "{BugTraq}"
 #~ msgstr "Desejas carregar os ficheiros alterados?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Não correr\n"
+#~ "Não corras o script"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
@@ -13546,6 +13563,9 @@ msgstr "{BugTraq}"
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Ocultar/Mostrar a lista de ficheiros correcção"
 
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
+
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
 
@@ -13565,8 +13585,17 @@ msgstr "{BugTraq}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "Comparação em linha palavra-por-palavra"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "Saltar para próximo &conflito"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Manter &listas de alterações"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Autor da última alteração:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Revisão da última alteração:"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Como acima, mas usada para integrações invertidas"
@@ -13688,6 +13717,13 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Gama de revisões para integração"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Corre\n"
+#~ "Corre o script de gancho"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "Aqui os Itens alterados do SVN Exportar"
 
@@ -13757,6 +13793,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Start registry editor"
 #~ msgstr "Iniciar editor do registo"
+
+#~ msgid "Starting externals..."
+#~ msgstr "Arrancar externos..."
 
 #~ msgid "Style"
 #~ msgstr "Estilo"
@@ -13903,6 +13942,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "Revisão  CT:"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13924,6 +13966,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "all &revisions"
 #~ msgstr "todas &revisões"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "Bloqueado (necessária limpesa):"
 
 #~ msgid "specific r&ange"
 #~ msgstr "&Gama específica"
