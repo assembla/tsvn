@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2006-2011 - TortoiseSVN
+// Copyright (C) 2006-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -207,6 +207,11 @@ protected:
     bool            m_bLineDiff;
     bool            m_bLocatorBar;
 
+    CRegDWORD       m_regWrapLines;
+    CRegDWORD       m_regViewModedBlocks;
+    CRegDWORD       m_regOneWay;
+    CRegDWORD       m_regCollapsed;
+    CRegDWORD       m_regInlineDiff;
 public:
     CLeftView *     m_pwndLeftView;
     CRightView *    m_pwndRightView;
