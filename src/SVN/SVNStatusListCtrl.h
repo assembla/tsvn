@@ -306,6 +306,7 @@ public:
             , isConflicted(false)
             , working_size(SVN_WC_ENTRY_WORKING_SIZE_UNKNOWN)
             , depth(svn_depth_unknown)
+            , kind(svn_node_unknown)
         {
         }
         const CTSVNPath& GetPath() const
@@ -402,6 +403,7 @@ public:
         bool                    differentrepo;          ///< if the item is from a different repository than the rest
         bool                    direct;                 ///< directly included (TRUE) or just a child of a folder
         bool                    isfolder;               ///< TRUE if entry refers to a folder
+        svn_node_kind_t         kind;                   ///< file/folder kind, used to know the 'unspecified' type
         bool                    isNested;               ///< TRUE if the folder from a different repository and/or path
         bool                    isConflicted;           ///< TRUE if a file entry is conflicted, i.e. if it has the conflicted paths set
         svn_revnum_t            Revision;               ///< the base revision
@@ -898,7 +900,7 @@ private:
     DWORD GetShowFlagsFromFileEntry(const FileEntry* entry);
 
     /// Build a FileEntry item and add it to the FileEntry array
-    const FileEntry* AddNewFileEntry(
+    FileEntry* AddNewFileEntry(
         const svn_client_status_t* pSVNStatus,  // The return from the SVN GetStatus functions
         const CTSVNPath& path,              // The path of the item we're adding
         const CTSVNPath& basePath,          // The base directory for this status build
