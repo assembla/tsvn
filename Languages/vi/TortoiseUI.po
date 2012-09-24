@@ -10,15 +10,15 @@
 # 
 # Authors:
 # Translators:
-# Khoa Dang <dndk82@yahoo.com>, 2011, 2012.
+# Khoa Dang <dndk82@yahoo.com>, 2011-2012.
 # Lübbe  <luebbe.tortoisesvn@googlemail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-09-09 08:42+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2012-09-21 23:06+0000\n"
+"Last-Translator: Khoa Dang <dndk82@yahoo.com>\n"
 "Language-Team: Vietnamese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -11157,6 +11157,13 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"TortoiseBlame không nên được chạy trực tiếp! Sử dụng\n"
+"TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
+"thay vào đó.\n"
+"\n"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13409,6 +13416,12 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&amp; Chốt:"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Điều chỉnh đến bản sửa đổi CHÍNH"
+
+#~ msgid "Always execute the script"
+#~ msgstr "Luôn luôn thi hành kịch bản"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Phê duyệt hoặc bác bỏ các kịch bản hook máy khách"
 
@@ -13484,6 +13497,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Mâu thuẫn (có lẽ)"
 
+#~ msgid "Create intermediate folders"
+#~ msgstr "Tạo các thư mục trung gian"
+
 #~ msgid "Create patch file"
 #~ msgstr "Tạo tập tin vá"
 
@@ -13522,15 +13538,34 @@ msgstr "{BugTraq}"
 #~ msgstr "Bạn có muốn tải những tập tin bị thay đổi?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Đừng chạy\n"
+#~ "Đừng chạy kịch bản"
+
+#~ msgid "Enforce"
+#~ msgstr "Giám sát"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Bên ngoài \"%1!s!\"\n"
 #~ "Bản sửa đổi %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Nạp bản sửa đổi CHÍNH và điều chỉnh đến nó"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Nạp các nội dung của những thư mục dưới nền để duyệt nhanh hơn"
+
+#~ msgid "Find &Head-Revision"
+#~ msgstr "Tìm Bản sửa đổi &Chính"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Tìm các bản sửa đổi CHÍNH"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Hướng tới lịch sử duyệt"
@@ -13558,8 +13593,14 @@ msgstr "{BugTraq}"
 #~ msgid "Goto Line"
 #~ msgstr "Đi đến dòng"
 
+#~ msgid "Head"
+#~ msgstr "Chính"
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Ẩn/Hiển thị danh sách tập tin vá"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13580,8 +13621,17 @@ msgstr "{BugTraq}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "Diff nội tuyến theo từ"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "nhảy tới &mâu thuẫn kế tiếp"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Giữ các &danh sách thay đổi"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Tác giả được thay đổi cuối:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Bản sửa đổi được thay đổi cuối:"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Giống như trên, nhưng được dùng cho các bản kết hợp ngược"
@@ -13703,6 +13753,13 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Phạm vi sửa đổi để hợp nhất"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Chạy\n"
+#~ "Chạy kịch bản móc"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN Export thay đổi các món ở đây"
 
@@ -13773,6 +13830,9 @@ msgstr "{BugTraq}"
 #~ msgid "Start registry editor"
 #~ msgstr "Chạy trình biên tập registry"
 
+#~ msgid "Starting externals..."
+#~ msgstr "Bắt đầu các thành phần ngoài..."
+
 #~ msgid "Style"
 #~ msgstr "Kiểu"
 
@@ -13781,6 +13841,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "Switch left and right view"
 #~ msgstr "Hoán đổi màn xem trái và phải"
+
+#~ msgid ""
+#~ "The file\n"
+#~ "%s\n"
+#~ "is not a valid text file!"
+#~ msgstr ""
+#~ "Tập tin\n"
+#~ "%s\n"
+#~ "không phải là một tập tin văn bản hợp lệ!"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Số dòng phải ở giữa %d và %d"
@@ -13916,6 +13985,9 @@ msgstr "{BugTraq}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "Bản sửa đổi WC:"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13937,6 +14009,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "all &revisions"
 #~ msgstr "tất cả các &bản sửa đổi"
+
+#~ msgid "get HEAD revision:"
+#~ msgstr "lấy bản sửa đổi CHÍNH:"
+
+#~ msgid "get repository root urls:"
+#~ msgstr "lấy các url kho chứa gốc"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "đã khóa (cần được dọn dẹp)"
 
 #~ msgid "specific r&ange"
 #~ msgstr "phạm &vi cụ thể"

@@ -11,13 +11,13 @@
 # Authors:
 # Translators:
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
-# Oto BREZINA <otik@e-posta.sk>, 2011, 2012.
+# Oto BREZINA <otik@e-posta.sk>, 2011-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-09-09 08:42+0000\n"
+"PO-Revision-Date: 2012-09-23 07:29+0000\n"
 "Last-Translator: Oto BREZINA <otik@e-posta.sk>\n"
 "Language-Team: Slovak <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -793,7 +793,7 @@ msgstr "&Zoskupiť podľa vetiev"
 
 #. Resource IDs: (1115)
 msgid "&HEAD Revision"
-msgstr "&HEAD (hlavná) Revízia"
+msgstr "&HEAD (hlavná) revízia"
 
 #. Resource IDs: (1032, 1115)
 msgid "&HEAD revision"
@@ -1299,7 +1299,7 @@ msgstr "Iba &Text"
 
 #. Resource IDs: (1438)
 msgid "&Timeout in seconds before updating the HEAD revision"
-msgstr "Časový in&terval v sekundách pred aktualizáciou HEAD revízie"
+msgstr "Časový in&terval v sekundách pred aktualizáciou HEAD (hlavnej) revízie"
 
 #. Resource IDs: (1222)
 msgid "&Timeout in seconds to stop the auto-completion parsing"
@@ -1496,7 +1496,7 @@ msgstr "(zmenené)"
 
 #. Resource IDs: (277)
 msgid "(modified, HEAD revision)"
-msgstr "(zmenený, HEAD revízia)"
+msgstr "(zmenené, HEAD (hlavná) revízia)"
 
 #. Resource IDs: (208)
 msgid "(multiple targets selected)"
@@ -5302,7 +5302,7 @@ msgstr "Skupina zoznamu zmien"
 
 #. Resource IDs: (1032)
 msgid "H&EAD Revision"
-msgstr "&HEAD (hlavná) Revízia"
+msgstr "H&EAD (hlavná) Revízia"
 
 #. Resource IDs: (65535)
 msgid "H&ue:"
@@ -5314,7 +5314,7 @@ msgstr "Hlavná revízia"
 
 #. Resource IDs: (65535)
 msgid "HEAD node"
-msgstr "HEAD uzol"
+msgstr "HEAD (hlavný) uzol"
 
 #. Resource IDs: (106)
 #, c-format
@@ -6452,7 +6452,7 @@ msgid ""
 "HEAD revision: %3!ld!"
 msgstr ""
 "Najnižšia zobrazená revízia: %1!ld! - Najvyššia zobrazená revízia: %2!ld!\n"
-"HEAD revízia: %3!ld!"
+"HEAD (hlavná) revízia: %3!ld!"
 
 #. Resource IDs: (16973)
 msgid "Lum"
@@ -11321,7 +11321,7 @@ msgstr ""
 
 #. Resource IDs: (274, 32786)
 msgid "Unified &diff of HEAD revisions"
-msgstr "Unifikovaný \"&diff\" HEAD revízie"
+msgstr "Unifikovaný \"&diff\" HEAD (hlavnej) revízie"
 
 #. Resource IDs: (81)
 #, c-format
@@ -12137,8 +12137,8 @@ msgid ""
 "show up in the branch/tag!"
 msgstr ""
 "Vaša pracovná kópia obsahuje miestne zmeny.\n"
-"Ak ste spravili vetvu/značku z HEAD revízie, vaše miestne zmeny nebudú\n"
-"zobrazené vo vetve/značke!"
+"Ak ste spravili vetvu/značku z HEAD (hlavnej) revízie,\n"
+"vaše miestne zmeny nebudú zobrazené vo vetve/značke!"
 
 #. Resource IDs: (221)
 #, c-format
@@ -13225,6 +13225,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Pripevniť:"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Nastaviť na HEAD (hlavnú) revíziu"
+
 #~ msgid "Always execute the script"
 #~ msgstr "Spúštať skript vždy"
 
@@ -13303,6 +13306,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Konflikné (možno)"
 
+#~ msgid "Create intermediate folders"
+#~ msgstr "Vytvoriť medziadresáre"
+
 #~ msgid "Create patch file"
 #~ msgstr "Vytvoriť záplatu"
 
@@ -13339,15 +13345,34 @@ msgstr "{BugTraq}"
 #~ msgstr "Chcete načítať zmenený súbor?"
 
 #~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Nespustiť\n"
+#~ "Dávka nebude vykonaná"
+
+#~ msgid "Enforce"
+#~ msgstr "Vynútiť"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Externé \"%1!s!\"\n"
 #~ "Revízia %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Získať HEAD (hlavnú) revíziu a nastaviť na ňu"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Načíta obsah adresárov na pozadí aby bolo prehliadanie rýchlejšie"
+
+#~ msgid "Find &Head-Revision"
+#~ msgstr "Nájsť &HEAD (hlavnú) revíziu"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Nájsť HEAD (hlavnú) revíziu"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Naspäť v historií prehliadania"
@@ -13374,6 +13399,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Goto Line"
 #~ msgstr "Skočiť na riadok"
+
+#~ msgid "Head"
+#~ msgstr "HEAD (hlavná) revízia"
 
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Skryť/zobraziť zoznam záplat v súbore"
@@ -13531,6 +13559,13 @@ msgstr "{BugTraq}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Rozsah revízií k zlúčeniu"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Spustiť\n"
+#~ "Dávka bude spustená"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN exportovať zmenené objekty sem"
 
@@ -13611,6 +13646,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "Switch left and right view"
 #~ msgstr "Prepnúť medzi ľavým a pravým panelom"
+
+#~ msgid ""
+#~ "The file\n"
+#~ "%s\n"
+#~ "is not a valid text file!"
+#~ msgstr ""
+#~ "Súbor\n"
+#~ "%s\n"
+#~ "nie je platný textový súbor!"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Číslo riadka musí byť medzi %d a %d"
@@ -13774,6 +13818,12 @@ msgstr "{BugTraq}"
 #~ msgid "all &revisions"
 #~ msgstr "všetky &revízie"
 
+#~ msgid "get HEAD revision:"
+#~ msgstr "Získať HEAD (hlavnú) revíziu"
+
+#~ msgid "get repository root urls:"
+#~ msgstr "Získať URL adresu HEAD (hlavnej) revízie"
+
 #~ msgid "locked (cleanup required):"
 #~ msgstr "zamknuté (nevyhnuté vyčistiť):"
 
@@ -13791,15 +13841,6 @@ msgstr "{BugTraq}"
 
 #~ msgid "user:state"
 #~ msgstr "user:state"
-
-#~ msgid "Head"
-#~ msgstr "Hlavná"
-
-#~ msgid "get HEAD revision:"
-#~ msgstr "získať HEAD revíziu:"
-
-#~ msgid "get repository root urls:"
-#~ msgstr "získať koreňovú url úložiska:"
 
 #~ msgid ""
 #~ "TortoiseBlame should not be started directly! Use\n"
