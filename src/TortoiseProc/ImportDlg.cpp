@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -134,8 +134,11 @@ void CImportDlg::OnOK()
 
     UpdateData();
     m_sMessage = m_cMessage.GetText();
-    m_History.AddEntry(m_sMessage);
-    m_History.Save();
+    if (!m_sMessage.IsEmpty())
+    {
+        m_History.AddEntry(m_sMessage);
+        m_History.Save();
+    }
 
     CResizableStandAloneDialog::OnOK();
 }
@@ -178,8 +181,14 @@ void CImportDlg::OnCancel()
 {
     UpdateData();
     if (m_ProjectProperties.GetLogMsgTemplate(PROJECTPROPNAME_LOGTEMPLATEIMPORT).Compare(m_cMessage.GetText()) != 0)
-        m_History.AddEntry(m_cMessage.GetText());
-    m_History.Save();
+    {
+        CString sMsg = m_cMessage.GetText();
+        if (!sMsg.IsEmpty())
+        {
+            m_History.AddEntry(sMsg);
+            m_History.Save();
+        }
+    }
     CResizableStandAloneDialog::OnCancel();
 }
 

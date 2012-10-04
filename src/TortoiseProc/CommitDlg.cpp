@@ -735,8 +735,11 @@ void CCommitDlg::OnOK()
         }
     }
 
-    m_History.AddEntry(m_sLogMessage);
-    m_History.Save();
+    if (!m_sLogMessage.IsEmpty())
+    {
+        m_History.AddEntry(m_sLogMessage);
+        m_History.Save();
+    }
 
     SaveSplitterPos();
 
@@ -945,9 +948,12 @@ void CCommitDlg::OnCancel()
         else
             m_sLogMessage = sBugID + _T("\n") + m_sLogMessage;
     }
-    if (m_ProjectProperties.GetLogMsgTemplate(PROJECTPROPNAME_LOGTEMPLATECOMMIT).Compare(m_sLogMessage) != 0)
+    if ((m_ProjectProperties.GetLogMsgTemplate(PROJECTPROPNAME_LOGTEMPLATECOMMIT).Compare(m_sLogMessage) != 0) &&
+        !m_sLogMessage.IsEmpty())
+    {
         m_History.AddEntry(m_sLogMessage);
-    m_History.Save();
+        m_History.Save();
+    }
     SaveSplitterPos();
     CResizableStandAloneDialog::OnCancel();
 }
