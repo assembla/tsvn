@@ -13,14 +13,14 @@
 #   <bandoche@hanmail.net>, 2011.
 #   <kmkh12@paran.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
-# Seongki Shin <skshin@gmail.com>, 2011, 2012.
+# Seongki Shin <skshin@gmail.com>, 2011-2012.
 # TaeDong Kim <fly1004@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-09-09 08:41+0000\n"
+"PO-Revision-Date: 2012-10-04 01:53+0000\n"
 "Last-Translator: Seongki Shin <skshin@gmail.com>\n"
 "Language-Team: Korean <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -10936,6 +10936,12 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"TortoiseBlame을 직접 시작할 수 없습니다. 대신 TortoiseProc.exe /command:"
+"blame /path:\"<파일경로>\"를 사용하십시오.\n"
+"\n"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:<행 번호>] [/path:<"
+"파일 경로>] [/pegrev:<peg>] [/revrange:<리비전 범위>] [/ignoreeol] [/"
+"ignorespaces] [/ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13138,6 +13144,12 @@ msgstr "{버그트랙}"
 #~ msgid "&Peg:"
 #~ msgstr "Peg(&P):"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "최신 리비전으로 맞추기"
+
+#~ msgid "Always execute the script"
+#~ msgstr "항상 스크립트를 실행"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "클라이언트 후크 스크립트의 승인 또는 거부"
 
@@ -13213,6 +13225,9 @@ msgstr "{버그트랙}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "충돌 (아마도)"
 
+#~ msgid "Create intermediate folders"
+#~ msgstr "중간(intermediate) 폴더 만들기"
+
 #~ msgid "Create patch file"
 #~ msgstr "패치 파일 만들기"
 
@@ -13249,15 +13264,46 @@ msgstr "{버그트랙}"
 #~ msgstr "변경된 파일을 다시 로드하시겠습니까?"
 
 #~ msgid ""
+#~ "Do you want to mark the file\n"
+#~ "%s\n"
+#~ "as resolved?"
+#~ msgstr ""
+#~ "파일\n"
+#~ "%s\n"
+#~ "를(을) 해결된 것으로 표시하시겠습니까?"
+
+#~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "실행하지 않기\n"
+#~ "스크립트를 실행하지 않기"
+
+#~ msgid "Enforce"
+#~ msgstr "강제"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "외부참조 \"%1!s!\"\n"
 #~ "리비전 %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "최신 리비전 가져와서 적용하기"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "폴더의 내용을 백그라운드에서 미리 가져와서 브라우징이 더 빨라집니다"
+
+#~ msgid "File has no conflicts"
+#~ msgstr "파일 충돌은 없습니다"
+
+#~ msgid "Find &HEAD-Revision"
+#~ msgstr "최신 리비전 찾기(&H)"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "최신 리비전 찾기"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "표시된 기록의 이후"
@@ -13285,8 +13331,14 @@ msgstr "{버그트랙}"
 #~ msgid "Goto Line"
 #~ msgstr "특정 행으로 이동"
 
+#~ msgid "HEAD revision is %s"
+#~ msgstr "최신 리비전은 %s 입니다."
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "패치 파일 목록 보이기/숨기기"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13307,8 +13359,24 @@ msgstr "{버그트랙}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "단어 단위 Inline diff"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "다음 충돌로 가기(&C)"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "변경 목록을 유지(&H)"
+
+#~ msgid "Last changed author:"
+#~ msgstr "최종 수정자:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "최종 변경된 리비전:"
+
+#~ msgid ""
+#~ "Leave as conflicted\n"
+#~ "The conflict status of the file is kept"
+#~ msgstr ""
+#~ "충돌상태로 남기기\n"
+#~ "이 파일의 충돌상태가 유지됩니다."
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "위와 같음. 그러나 역병합이 사용되었음."
@@ -13338,6 +13406,13 @@ msgstr "{버그트랙}"
 
 #~ msgid "Main"
 #~ msgstr "메인"
+
+#~ msgid ""
+#~ "Mark as resolved\n"
+#~ "The file status is changed to modified"
+#~ msgstr ""
+#~ "해결상태로 표시하기\n"
+#~ "이 파일의 상태가 변경으로 됩니다."
 
 #~ msgid "Merge Log &Templates"
 #~ msgstr "병합 로그 템플릿(&T)"
@@ -13429,6 +13504,13 @@ msgstr "{버그트랙}"
 #~ msgid "Revision range to merge"
 #~ msgstr "병합할 리비전 범위"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "실행하기\n"
+#~ "후크 스크립트 실행하기"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "여기에서 SVN 변경된 항목을 내보내기"
 
@@ -13498,6 +13580,9 @@ msgstr "{버그트랙}"
 #~ msgid "Start registry editor"
 #~ msgstr "레지스트리 편집기 시작하기"
 
+#~ msgid "Starting externals..."
+#~ msgstr "외부 프로그램을 시작하는 중..."
+
 #~ msgid "Style"
 #~ msgstr "스타일"
 
@@ -13506,6 +13591,15 @@ msgstr "{버그트랙}"
 
 #~ msgid "Switch left and right view"
 #~ msgstr "좌/우 보기 전환"
+
+#~ msgid ""
+#~ "The file\n"
+#~ "%s\n"
+#~ "is not a valid text file!"
+#~ msgstr ""
+#~ "파일\n"
+#~ "%s\n"
+#~ "는(은) 유효한 텍스트 파일이 아닙니다."
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "줄 번호는 %d ~ %d 사이에 있어야 합니다"
@@ -13516,6 +13610,28 @@ msgstr "{버그트랙}"
 #~ msgstr ""
 #~ "현재, Tortoise에서 사용하는 하나를 제외하고 %d 개의 오버레이 처리기가 설치"
 #~ "되어 있습니다."
+
+#~ msgid ""
+#~ "This commit is not recursive, and there are moved/renamed/copied folders "
+#~ "selected for commit. Such moves/renames are always performed recursively "
+#~ "in the repository. Do you want to commit anyway?"
+#~ msgstr ""
+#~ "이 커밋이 재귀적이지는 않지만, 커밋 대상으로 이동/이름변경/복사된 폴더가 "
+#~ "포함됩니다. 이러한 이동이나 이름변경은 저장소에서 항상 재귀적으로 수행됩니"
+#~ "다. 계속 커밋을 진행하시겠습니까?"
+
+#~ msgid ""
+#~ "This commit is not recursive, and there are moved/renamed/copied\n"
+#~ "folders selected for commit. Such moves/renames\n"
+#~ "are always performed recursively in the repository.\n"
+#~ "\n"
+#~ "Do you want to commit anyway?"
+#~ msgstr ""
+#~ "이 커밋이 재귀적이지는 않지만, 커밋 대상으로 이동/이름변경/복사된 폴더가 "
+#~ "포함됩니다.\n"
+#~ "이러한 이동이나 이름변경은 저장소에서 항상 재귀적으로 수행됩니다.\n"
+#~ "\n"
+#~ "계속 커밋을 진행하시겠습니까?"
 
 #~ msgid ""
 #~ "This error was generated by a custom hook script on the Subversion "
@@ -13640,6 +13756,17 @@ msgstr "{버그트랙}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Visual Studio 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "작업사본 리비전:"
+
+#~ msgid ""
+#~ "When resolving conflicts, you always have to save even if there is no "
+#~ "conflict shown. TortoiseMerge can merge changes that SVN can't and won't "
+#~ "show a conflict for those!"
+#~ msgstr ""
+#~ "충돌을 해결할 때에는 충돌 내용이 보이지 않아도 항상 저장해야 합니다. "
+#~ "TortoiseMerge는 SVN에서 볼 수 없는 충돌을 병합할 수 있습니다."
+
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
 
@@ -13661,6 +13788,18 @@ msgstr "{버그트랙}"
 
 #~ msgid "all &revisions"
 #~ msgstr "모든 리비전(&R)"
+
+#~ msgid "get HEAD revision:"
+#~ msgstr "최신 리비전 얻기:"
+
+#~ msgid "get repository root URLs:"
+#~ msgstr "저장소 루트 URL 얻기:"
+
+#~ msgid "last HEAD update: "
+#~ msgstr "최신(HEAD) 변경일:"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "잠금중(정리 필요):"
 
 #~ msgid "specific r&ange"
 #~ msgstr "지정된 범위(&A)"

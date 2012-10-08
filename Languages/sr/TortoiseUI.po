@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-09-09 08:42+0000\n"
+"PO-Revision-Date: 2012-10-05 22:09+0000\n"
 "Last-Translator: Milorad Popovic <MiloradSPopovic@gmail.com>\n"
 "Language-Team: Serbian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -11026,6 +11026,13 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"ТортоисеБламе неће се покренути директно! Користи\n"
+"TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
+"уместо.\n"
+"\n"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13272,6 +13279,12 @@ msgstr "{БагТрек}"
 #~ msgid "&Peg:"
 #~ msgstr "&Клин:"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Подесити према ГЛАВНОЈ ревизији"
+
+#~ msgid "Always execute the script"
+#~ msgstr "Увек изврши скрипту"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Потврди или одбаци клијентске закачиве скрипте"
 
@@ -13347,6 +13360,9 @@ msgstr "{БагТрек}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Конфликт (можда)"
 
+#~ msgid "Create intermediate folders"
+#~ msgstr "Креирај посредне фолдере"
+
 #~ msgid "Create patch file"
 #~ msgstr "Креира фајл закрпе"
 
@@ -13384,15 +13400,46 @@ msgstr "{БагТрек}"
 #~ msgstr "Желите ли да учитате измењене фајлове?"
 
 #~ msgid ""
+#~ "Do you want to mark the file\n"
+#~ "%s\n"
+#~ "as resolved?"
+#~ msgstr ""
+#~ "Да ли желите да означите фајл\n"
+#~ "%s\n"
+#~ "као решен?"
+
+#~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Не извршавај\n"
+#~ "Не извршавај скрипту"
+
+#~ msgid "Enforce"
+#~ msgstr "Присили"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Екстернал \"%1!s!\"\r\n"
 #~ "Ревизија %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "НађиГЛАВНУ ревизију и подеси према њој"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Добавља садржај фолдера у беграунду тако да је претраживање брже"
+
+#~ msgid "File has no conflicts"
+#~ msgstr "Фајл нема конфликт"
+
+#~ msgid "Find &HEAD-Revision"
+#~ msgstr "Нађи &ГЛАВНУ - ревизију"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Нађи ГЛАВНУ ревизију"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Унапред претраживање историје"
@@ -13420,8 +13467,14 @@ msgstr "{БагТрек}"
 #~ msgid "Goto Line"
 #~ msgstr "Иди на линију"
 
+#~ msgid "HEAD revision is %s"
+#~ msgstr "ГЛАВНА ревизија је %s"
+
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Сакри/Прикажи листу фајлова закрпа"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13442,8 +13495,24 @@ msgstr "{БагТрек}"
 #~ msgid "Inline diff word-wise"
 #~ msgstr "Диф у линији према речима"
 
+#~ msgid "Jump to next &conflict"
+#~ msgstr "Скочи на следећи &конфликт"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Чувај л&исте измена"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Последњи промењен аутор:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Поседња промењена ревизија:"
+
+#~ msgid ""
+#~ "Leave as conflicted\n"
+#~ "The conflict status of the file is kept"
+#~ msgstr ""
+#~ "Остави у конфликту\n"
+#~ "Конфликтни статус фајла је сачуван"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Као изнад, али коришћењем инверзно стапање"
@@ -13473,6 +13542,13 @@ msgstr "{БагТрек}"
 
 #~ msgid "Main"
 #~ msgstr "Главни"
+
+#~ msgid ""
+#~ "Mark as resolved\n"
+#~ "The file status is changed to modified"
+#~ msgstr ""
+#~ "Означи као решен\n"
+#~ "Статус фајла је промењен у измењен"
 
 #~ msgid "Merge Log &Templates"
 #~ msgstr "Стапа Дневник &Шаблон"
@@ -13564,6 +13640,13 @@ msgstr "{БагТрек}"
 #~ msgid "Revision range to merge"
 #~ msgstr "Ревизиони опсег за стапање"
 
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Покрени\n"
+#~ "Покрени закачив скрипт"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "СВН Извези измењене ставке овде"
 
@@ -13633,6 +13716,9 @@ msgstr "{БагТрек}"
 #~ msgid "Start registry editor"
 #~ msgstr "Покрени уређивач регистра"
 
+#~ msgid "Starting externals..."
+#~ msgstr "Започињу екстернали..."
+
 #~ msgid "Style"
 #~ msgstr "Стил"
 
@@ -13642,6 +13728,15 @@ msgstr "{БагТрек}"
 #~ msgid "Switch left and right view"
 #~ msgstr "Пребаци ллеви и десни преглед"
 
+#~ msgid ""
+#~ "The file\n"
+#~ "%s\n"
+#~ "is not a valid text file!"
+#~ msgstr ""
+#~ "Фајл\n"
+#~ "%s\n"
+#~ "није ваљани текс фајл!"
+
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Бројеви линија морају бити између %d и %d"
 
@@ -13650,6 +13745,28 @@ msgstr "{БагТрек}"
 #~ "Tortoise uses."
 #~ msgstr ""
 #~ "Постоји текућих %d руковаоца прекривача инсталираних по Тортоисе кориснику"
+
+#~ msgid ""
+#~ "This commit is not recursive, and there are moved/renamed/copied folders "
+#~ "selected for commit. Such moves/renames are always performed recursively "
+#~ "in the repository. Do you want to commit anyway?"
+#~ msgstr ""
+#~ "Урезивање није рекурзивно и постоје померени/преименовани/копирани фолдер "
+#~ "изабрани за урезивање. Таква померања/преименовања се увек извршавају "
+#~ "рекурзивно у спремишту. Желите ли да урежете у сваком случају?"
+
+#~ msgid ""
+#~ "This commit is not recursive, and there are moved/renamed/copied\n"
+#~ "folders selected for commit. Such moves/renames\n"
+#~ "are always performed recursively in the repository.\n"
+#~ "\n"
+#~ "Do you want to commit anyway?"
+#~ msgstr ""
+#~ "Урезивање није рекурзивно и постоје померени/преименовани/копирани\n"
+#~ " фолдер изабрани за урезивање. Таква померања/преименовања\n"
+#~ " се увек извршавају рекурзивно у спремишту. \n"
+#~ "\n"
+#~ "Желите ли да урежете у сваком случају?"
 
 #~ msgid ""
 #~ "This error was generated by a custom hook script on the Subversion "
@@ -13779,6 +13896,18 @@ msgstr "{БагТрек}"
 #~ msgid "Visual Studio 2008"
 #~ msgstr "Вижуал студио 2008"
 
+#~ msgid "WC Revision:"
+#~ msgstr "РК Ревизија:"
+
+#~ msgid ""
+#~ "When resolving conflicts, you always have to save even if there is no "
+#~ "conflict shown. TortoiseMerge can merge changes that SVN can't and won't "
+#~ "show a conflict for those!"
+#~ msgstr ""
+#~ "Када решавате конфликт, ви увек морате да извршите меморисање чак и када "
+#~ "конфликт није приказан. ТортоисеМерге може стопити измене које СВН не "
+#~ "може и неће да прикаже њихове конфликте!"
+
 #~ msgid "Windows 2000"
 #~ msgstr "Виндоус 2000"
 
@@ -13800,6 +13929,18 @@ msgstr "{БагТрек}"
 
 #~ msgid "all &revisions"
 #~ msgstr "све &ревизије"
+
+#~ msgid "get HEAD revision:"
+#~ msgstr "узми ГЛАВНУ ревизију:"
+
+#~ msgid "get repository root URLs:"
+#~ msgstr "узми рут УРЛ спремишта:"
+
+#~ msgid "last HEAD update: "
+#~ msgstr "последње ГЛАВНО усклађивање"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "закључано (чишћење потребно):"
 
 #~ msgid "specific r&ange"
 #~ msgstr "специфич&ан опсег "

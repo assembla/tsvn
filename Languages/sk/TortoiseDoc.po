@@ -11,13 +11,14 @@
 # Authors:
 # Translators:
 # Michal Nosál <a2.nosal@gmail.com>, 2011.
+# otik <otik@printflow.eu>, 2012.
 # Oto BREZINA <otik@e-posta.sk>, 2011-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-09-23 19:53+0000\n"
+"PO-Revision-Date: 2012-09-26 08:30+0000\n"
 "Last-Translator: Oto BREZINA <otik@e-posta.sk>\n"
 "Language-Team: Slovak <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -2097,7 +2098,7 @@ msgid ""
 "in revision 5.'' Notice that in general, revisions N and M of a file do "
 "<emphasis>not</emphasis> necessarily differ!"
 msgstr ""
-"Na rozdiel od mnohých iných systémov pre správu verzii, revizne číslo "
+"Na rozdiel od mnohých iných systémov pre správu verzií, číslo revízie v "
 "Subversion zodpovedá  <emphasis>celému stromu</emphasis>, nie jednotlivým "
 "súborom. Každé revizné číslo vyberá celý strom,  konkrétny stav repozitára "
 "po prijatí zmien. Ďalším spôsobom ako si to predsatviť je, že revízia N "
@@ -3224,7 +3225,7 @@ msgid ""
 "find out why we think this is a bad idea. Setting up a server is not as hard "
 "as it sounds, and will give you better reliability and probably speed too."
 msgstr ""
-"Ak rozmýšlate na nastavením úložiska pre viacero užívateľov v zdielanej "
+"Ak rozmýšlate nad nastavením úložiska pre viacero užívateľov v zdielanej "
 "sieti, zamyslite sa ešte raz. Pozrite si <xref linkend=\"tsvn-repository-"
 "local-share\"/>, aby ste zistili prečo je to zlý nápad. Nastavenie servera "
 "nie je až také tažke ako sa môže zdať a poskytne vám lepšiu spoľahlivosť a "
@@ -3240,15 +3241,15 @@ msgstr ""
 
 #. (citetitle)
 msgid "VisualSVN"
-msgstr ""
+msgstr "VisualSVN"
 
 #. (citetitle)
 msgid "CollabNet"
-msgstr ""
+msgstr "CollabNet"
 
 #. (citetitle)
 msgid "UberSVN"
-msgstr ""
+msgstr "UberSVN"
 
 #. (para)
 msgid ""
@@ -3262,6 +3263,14 @@ msgid ""
 "\"http://subversion.apache.org/packages.html\"><citetitle>Subversion</"
 "citetitle></ulink> website."
 msgstr ""
+"V predošlých časoch Subversion, nastavenie servera vyžadovalo dobrú znalosť "
+"na nakonfigurovanie server. V minulých verziách návodu sme preto zaradili "
+"detailný popis ako nastaviť server. Odvtedy sa veci zjednodušili "
+"dostupnosťou predkonfigurovaných inštalátorov servera, ktoré vás prevedú "
+"procesom nastavenia. Tu su odkazy ne niektoré nám známe inštalátory: "
+"<placeholder-1/> Najaktuálnejší zoznam je dostupný na stránke <ulink url="
+"\"http://subversion.apache.org/packages.html\"><citetitle>Subversion</"
+"citetitle></ulink>."
 
 #. (para)
 msgid ""
@@ -3293,7 +3302,7 @@ msgid ""
 "recommend you read the fantastic book: <ulink url=\"http://svnbook.red-bean."
 "com/\"><citetitle>Version Control with Subversion</citetitle></ulink>."
 msgstr ""
-"Ak potrebujete úvod do spŕavy na kontrolu verzii, potom vám odporúčame "
+"Ak potrebujete úvod do správy na kontrolu verzii, potom vám odporúčame "
 "prečítať si výbornú knihu <ulink url=\"http://svnbook.red-bean.com/"
 "\"><citetitle>Version Control with Subversion</citetitle></ulink>."
 
@@ -3339,7 +3348,7 @@ msgstr ""
 
 #. (title)
 msgid "General Features"
-msgstr ""
+msgstr "Hlavné vlastnosti"
 
 #. (para)
 msgid ""
@@ -3347,6 +3356,9 @@ msgid ""
 "just about everything in the manual. Note that many of these features will "
 "only show up within a Subversion working copy."
 msgstr ""
+"Tento odsek popisuje niektoré vlastnosti TortoiseSVN, ktoré sa týkajú "
+"všetkého v tomto návode. Poznamenávame, že veľa týchto vlastností sa ukáže "
+"iba v pracovnej kópii Subversion."
 
 #. (title)
 #. (title)
@@ -3403,10 +3415,13 @@ msgid ""
 "context menu. To bring up the extended context menu, hold down the "
 "<keycap>Shift</keycap> key when you <action>right click</action>."
 msgstr ""
+"Niektoré príkazy sú používane tak zriedka, že sú dostupné iba v rozšírenom "
+"kontextovom menu. Na vyvolanie rozšíreneého kontextového menu, držte klávesu "
+"<keycap>šift</keycap> keď bobíte <action>pravý šťuk</action> myšou."
 
 #. (title)
 msgid "Explorer file menu for a shortcut in a versioned folder"
-msgstr ""
+msgstr "Ponuka vo Windows Explorer-i pre odkaz v pracovnej kópií"
 
 #. (para)
 msgid ""
@@ -3419,6 +3434,13 @@ msgid ""
 "lower right corner to show whether the menu entry is for a file, a folder, a "
 "shortcut or for multiple selected items."
 msgstr ""
+"V nietorých prípadoch sa vám môže zobraziť viacero TortoiseSVN položiek. "
+"Toto nie je chyba! <placeholder-1/> Tento príklad je pre neverziovaný odkaz "
+"vo verziovanej kópií a vo Windows Explorer-i sú <emphasis>tri</emphasis> "
+"položky TortoiseSVN. Jedna pre adresár, jedna pre samotný odkaz a tretia pre "
+"objekt na ktorý odkaz ukazuje. Aby ich bolo možné rozoznať ikonky majú "
+"dolnom pravom rohu indikátor či ide o ponuku pre súbor, adresár, odkaz, "
+"alebo viacero vybraných položiek."
 
 #. (para)
 msgid ""
@@ -3428,6 +3450,11 @@ msgid ""
 "handlers work for Vista, requiring us to use a different display method "
 "which unfortunately does not work on Windows 2000."
 msgstr ""
+"Pokiaľ používate Windows 2000 zistíte že položky kontextovej ponuky sú "
+"zobrazené ako čistý text bez ikoniek. Sme si vedomí, že to v "
+"predchádzajúcich verziách fungovalo. Avšak Microsoft zmenil spôsob ako sú "
+"ikonky riešené vo Windows Vista a teda sme sa museli prispôsobiť. Tento "
+"prístup však nefunguje vo Windows 2000."
 
 #. (title)
 #. (title)
@@ -3436,7 +3463,7 @@ msgstr "Preťahovanie"
 
 #. (primary)
 msgid "drag handler"
-msgstr ""
+msgstr "ovládač pretiahnutia"
 
 #. (primary)
 msgid "drag-n-drop"
@@ -3592,6 +3619,14 @@ msgid ""
 "\"><citetitle>http://www.windows-help-central.com/windows-shutdown-script."
 "html</citetitle></ulink>."
 msgstr ""
+"Niektrý ľudia chcú aby ich prihlasovacie údaje boli vymazaneé pri "
+"odhlasovaní alebo vypnutí Windows. Spôsob ako to dosiahnuť je použiť skript "
+"spúštaný pri odhlasovávaní, ktorý vymaže adresár <filename>%APPDATA%"
+"\\Subversion\\auth</filename>, napr. <screen>⏎ @echo off⏎ rmdir /s /q \"%"
+"APPDATA%\\Subversion\\auth\"⏎ </screen> Popis ako takýto skript nainštalovať "
+"do Windows nájdete v <ulink url=\"http://www.windows-help-central.com/"
+"windows-shutdown-script.html\"><citetitle>http://www.windows-help-central."
+"com/windows-shutdown-script.html</citetitle></ulink>."
 
 #. (para)
 msgid ""
@@ -3618,6 +3653,12 @@ msgid ""
 "mouse</action> button to maximize vertically, and <action>right mouse</"
 "action> to maximize horizontally."
 msgstr ""
+"Mnoho dialógových okien TortoseSVN obsahuje veľa informácií, ale často je "
+"žiaduce maximalizovať iba výšku, alebo širku, miesto celého okna na "
+"obrazovku. Pre vaše pohodlie sú na toto dostupné zkratky na tlačidle  "
+"<guilabel>maximalizovať</guilabel>. Použite <action>stredné</action> "
+"tlačidlo myši ak chcete maximalozovať vertikálne (výšku) a <action>pravé</"
+"action> tlačidlo myši aby ste maximalizovali okno horizontálne (širku)."
 
 #. (title)
 msgid "Importing Data Into A Repository"
@@ -3667,7 +3708,7 @@ msgstr ""
 
 #. (para)
 msgid "It is easy to import to the wrong folder level in the repository."
-msgstr ""
+msgstr "Je jednoduché importovať zlý adresár do úložiska."
 
 #. (para)
 msgid ""
@@ -3686,6 +3727,8 @@ msgid ""
 "Remove all files which are not needed to build the project (temporary files, "
 "files which are generated by a compiler e.g. *.obj, compiled binaries, ...)"
 msgstr ""
+"Odstrániť všetky súbory nepotrebné k preloženiu projektu (dočasné súbory, "
+"subory generované počas prekladu napr.  *.obj, binárny výstup prekladu, ...)."
 
 #. (para)
 msgid ""
@@ -3693,11 +3736,14 @@ msgid ""
 "rename/move files later it is highly recommended to get your project's "
 "structure straight before importing!"
 msgstr ""
+"Zorganizuovať súbory do adresárov a podadresárov. Aj keď je i neskôr možné "
+"premenovať/presunúť je veľmi odporúčané dať projektu jeho podobu rovno pri "
+"importovaní."
 
 #. (para)
 msgid ""
 "Before you import your project into a repository you should: <placeholder-1/>"
-msgstr ""
+msgstr "Pred importovaním projektu do úložiska by ste mali: <placeholder-1/>"
 
 #. (para)
 msgid ""
@@ -3753,11 +3799,11 @@ msgstr ""
 
 #. (title)
 msgid "Import in Place"
-msgstr ""
+msgstr "Importovanie na mieste"
 
 #. (primary)
 msgid "import in place"
-msgstr ""
+msgstr "importovanie na mieste"
 
 #. (para)
 msgid ""
@@ -3860,6 +3906,8 @@ msgid ""
 "To obtain a working copy you need to do a <firstterm>checkout</firstterm> "
 "from a repository."
 msgstr ""
+"Aby ste získali pracovnú kópiu je nutné použiť <firstterm>zíkať</firstterm>  "
+"z úložiska."
 
 #. (title)
 msgid "The Checkout dialog"
@@ -3885,36 +3933,39 @@ msgstr "Úplne rekurzívne"
 
 #. (para)
 msgid "Checkout the entire tree, including all child folders and sub-folders."
-msgstr ""
+msgstr "Získa celý strom vrátane všetkých adresárov a podadresárov."
 
 #. (term)
 msgid "Immediate children, including folders"
-msgstr ""
+msgstr "Priame objekty, vrátane adresárov"
 
 #. (para)
 msgid ""
 "Checkout the specified directory, including all files and child folders, but "
 "do not populate the child folders."
 msgstr ""
+"Získa udaný adresár vrátane všetkých súborov a podadresárov, ale podadresáre "
+"ostanú prázdne."
 
 #. (term)
 msgid "Only file children"
-msgstr ""
+msgstr "Iba súbory"
 
 #. (para)
 msgid ""
 "Checkout the specified directory, including all files but do not checkout "
 "any child folders."
 msgstr ""
+"Získa vybraný adresár a jeho súbory, ale žiadne iné adresáre nebudú získané."
 
 #. (term)
 msgid "Only this item"
-msgstr ""
+msgstr "Len túto položku"
 
 #. (para)
 msgid ""
 "Checkout the directory only. Do not populate it with files or child folders."
-msgstr ""
+msgstr "Získa len adresár bez akýchkoľvek iných súborov či adresárov."
 
 #. (term)
 #. (term)
@@ -3928,10 +3979,13 @@ msgid ""
 "the checkout dialog, but it is the default in all other dialogs which have a "
 "depth setting."
 msgstr ""
+"Ponechať hĺbku uvedenú v pracovnej kópií. Táto možnosť nie je možná pri "
+"získavaní, ale je predvolenou možnosťou pre všetky ostatné akcie, ktoré "
+"závisia od hĺbky."
 
 #. (term)
 msgid "Exclude"
-msgstr ""
+msgstr "Vylúčenie"
 
 #. (para)
 msgid ""
@@ -4026,7 +4080,7 @@ msgstr ""
 
 #. (para)
 msgid "Repeat the same process for <literal>Project25</literal>."
-msgstr ""
+msgstr "Opakujte tento postup aj pre <literal>Project25</literal>."
 
 #. (para)
 msgid ""
@@ -4051,7 +4105,7 @@ msgstr ""
 
 #. (title)
 msgid "Using an older server"
-msgstr ""
+msgstr "Použivanie staršieho servera"
 
 #. (para)
 msgid ""
@@ -4061,6 +4115,11 @@ msgid ""
 "what is not required, which may mean a lot of network traffic. If possible "
 "you should upgrade your server to at least 1.5."
 msgstr ""
+"Servery pred verziou 1.5 nerozumia žiadostiam s určenou hĺbkou, takže nemôžu "
+"efektívne takéto požiadavky zodpovedať. Príkaz bude pracovať, ale staršie "
+"servery môžu poslať viac dát ponechajúc na filtrovanie na klientovi. Toto "
+"može zvýšiť výrazne zvýšiť prenesené údaje. Pokiaľ je to požne aktualizujte "
+"váš server aspoň na verziu 1.5."
 
 #. (para)
 msgid ""
@@ -4068,6 +4127,9 @@ msgid ""
 "<emphasis>not</emphasis> want checked out at the same time, use the "
 "<guilabel>Omit externals</guilabel> checkbox."
 msgstr ""
+"Ak projekt obsahuje odkazy na externé projekty, ktoré <emphasis>nechcete</"
+"emphasis> získať naraz s projektom, zaškrtnite <guilabel>Vynechať externé</"
+"guilabel>."
 
 #. (para)
 msgid ""
@@ -15122,7 +15184,7 @@ msgstr ""
 
 #. (title)
 msgid "Exporting TSVN Settings"
-msgstr ""
+msgstr "Exportovanie nastavenia TSVN"
 
 #. (para)
 msgid ""
@@ -15141,7 +15203,7 @@ msgstr ""
 
 #. (title)
 msgid "Final Step"
-msgstr ""
+msgstr "Záverečný krok"
 
 #. (title)
 msgid "Donate!"
@@ -15169,6 +15231,12 @@ msgid ""
 "the list of people who contributed to the project by sending in patches or "
 "translations."
 msgstr ""
+"Pri práci na TortoiseSVN veľmi radi počúvame hudbu. A keďže strávime veľa "
+"hodín na tomto projekte, potrebujeme <emphasis>veľa</emphasis> hudby. Preto "
+"sme vytvorili zoznam želaní v podobe hudobných CDs and DVDs: <ulink url="
+"\"http://tortoisesvn.net/donate.html\"><citetitle>http://tortoisesvn.net/"
+"donate.html</citetitle></ulink> Prosím tiež si pozrite zoznam ľudí, ktorí "
+"prispeli záplatou, či prekladom."
 
 #. (title)
 msgid "The SubWCRev Program"
@@ -15364,7 +15432,7 @@ msgstr ""
 
 #. (title)
 msgid "Keyword Substitution"
-msgstr "Nahradzovanie kľúčových slov."
+msgstr "Nahradzovanie kľúčových slov"
 
 #. (entry)
 msgid "Keyword"
@@ -15539,6 +15607,14 @@ msgid ""
 "#define SVN_REVISION    \"$WCMIXED?SVN_RANGE:SVN_REV$\"\n"
 "</screen>"
 msgstr ""
+"SubWCRev nepodporuje priamo vnorené výrazy, takže nemôžete použiť niečo "
+"takéto: <screen>\n"
+"#define SVN_REVISION    \"$WCMIXED?$WCRANGE$:$WCREV$$\"\n"
+"</screen> Ale zvyčajne to môžete obísť iným spôsobom, napríklad: <screen>\n"
+"#define SVN_RANGE       $WCRANGE$\n"
+"#define SVN_REV         $WCREV$\n"
+"#define SVN_REVISION    \"$WCMIXED?SVN_RANGE:SVN_REV$\"\n"
+"</screen>"
 
 #. (para)
 msgid ""
@@ -15694,12 +15770,13 @@ msgid ""
 "The highest commit revision in the working copy. Equivalent to <placeholder-"
 "1/>."
 msgstr ""
+"Najvyššia odovzdaná revízia v pracovnej kópii. Zhodná s <placeholder-1/>."
 
 #. (entry)
 msgid ""
 "The commit date/time of the highest commit revision. Equivalent to "
 "<placeholder-1/>."
-msgstr ""
+msgstr "Dátum a čas odovzdania najvyššej revízie. Zhodná s <placeholder-1/>."
 
 #. (entry)
 msgid ""
@@ -15722,7 +15799,7 @@ msgstr "Najnižšia revízia aktualizácie, ako je v <placeholder-1/>."
 #. (row)
 #. (row)
 msgid "<placeholder-1/>."
-msgstr ""
+msgstr "<placeholder-1/>."
 
 #. (entry)
 msgid "The maximum update revision, as shown in <placeholder-1/>"
@@ -15745,6 +15822,8 @@ msgid ""
 "Replaced with the repository URL of the working copy path used in "
 "<placeholder-1/>. Equivalent to <placeholder-2/>."
 msgstr ""
+"Nahradené s URL úložiska cesty pracovnej kópie použitej v <placeholder-1/>. "
+"Ekvivalent <placeholder-2/>."
 
 #. (entry)
 msgid "True if the item is versioned."
@@ -15974,6 +16053,18 @@ msgid ""
 "    MessageBox.Show(\"not versioned\");\n"
 "}\n"
 msgstr ""
+"\n"
+"using LibSubWCRev;\n"
+"SubWCRev sub = new SubWCRev();\n"
+"sub.GetWCInfo(\"C:\\\\PathToMyFile\\\\MyFile.cc\", true, true);\n"
+"if (sub.IsSvnItem == true)\n"
+"{\n"
+"    MessageBox.Show(\"versioned\");\n"
+"}\n"
+"else\n"
+"{\n"
+"    MessageBox.Show(\"not versioned\");\n"
+"}\n"
 
 #. (para)
 msgid ""
@@ -16032,7 +16123,7 @@ msgstr ""
 
 #. (title)
 msgid "Naming conventions"
-msgstr ""
+msgstr "Pomenovanie"
 
 #. (para)
 msgid ""
@@ -16043,18 +16134,23 @@ msgid ""
 "TortoiseCVS, TortoiseSVN, TortoiseHg, TortoiseGit and TortoiseBzr are all "
 "version control clients."
 msgstr ""
+"Pokiaľ vyvýjate zásuvný modul pre TortoiseSVN, prosím <emphasis>nenazvite</"
+"emphasis> ho <emphasis>Tortoise&lt;niečo&gt;</emphasis>. Radi by sme "
+"rezervovali predponu <emphasis>Tortoise</emphasis> pre klientov verziovanie "
+"integrovaných to Windows šelu. Napríklad TortoiseCVS, TortoiseSVN, "
+"TortoiseHg, TortoiseGit a TortoiseBzr sú všetko klienti správy verzií."
 
 #. (para)
 msgid "Gurtle - An issue tracker plugin for Google code"
-msgstr ""
+msgstr "Gurtle - Zásuvný modul sledovania prípadov pre Google code"
 
 #. (para)
 msgid "TurtleMine - An issue tracker plugin for Redmine"
-msgstr ""
+msgstr "TurtleMine - Zásuvný modul sledovania prípadov pre Redmine"
 
 #. (para)
 msgid "VurtleOne - An issue tracker plugin for VersionOne"
-msgstr ""
+msgstr "VurtleOne - Zásuvný modul sledovania prípadov pre VersionOne"
 
 #. (para)
 msgid ""
@@ -16095,6 +16191,18 @@ msgid ""
 "  [out, retval] VARIANT_BOOL *valid\n"
 ");\n"
 msgstr ""
+"\n"
+"HRESULT ValidateParameters (\n"
+"  // Parent window for any UI that needs to be\n"
+"  // displayed during validation.\n"
+"  [in] HWND hParentWnd,\n"
+"\n"
+"  // The parameter string that needs to be validated.\n"
+"  [in] BSTR parameters,\n"
+"\n"
+"  // Is the string valid?\n"
+"  [out, retval] VARIANT_BOOL *valid\n"
+");\n"
 
 #. (para)
 msgid ""
@@ -16137,6 +16245,19 @@ msgid ""
 "  [out, retval] BSTR *linkText\n"
 ");\n"
 msgstr ""
+"\n"
+"HRESULT GetLinkText (\n"
+"  // Parent window for any (error) UI that needs to be displayed.\n"
+"  [in] HWND hParentWnd,\n"
+"\n"
+"  // The parameter string, just in case you need to talk to your\n"
+"  // web service (e.g.) to find out what the correct text is.\n"
+"  [in] BSTR parameters,\n"
+"\n"
+"  // What text do you want to display?\n"
+"  // Use the current thread locale.\n"
+"  [out, retval] BSTR *linkText\n"
+");\n"
 
 #. (para)
 msgid ""
@@ -16175,6 +16296,25 @@ msgid ""
 "  [out, retval] BSTR *newMessage\n"
 ");\n"
 msgstr ""
+"\n"
+"HRESULT GetCommitMessage (\n"
+"  // Parent window for your provider's UI.\n"
+"  [in] HWND hParentWnd,\n"
+"\n"
+"  // Parameters for your provider.\n"
+"  [in] BSTR parameters,\n"
+"  [in] BSTR commonRoot,\n"
+"  [in] SAFEARRAY(BSTR) pathList,\n"
+"\n"
+"  // The text already present in the commit message.\n"
+"  // Your provider should include this text in the new message,\n"
+"  // where appropriate.\n"
+"  [in] BSTR originalMessage,\n"
+"\n"
+"  // The new text for the commit message.\n"
+"  // This replaces the original message.\n"
+"  [out, retval] BSTR *newMessage\n"
+");\n"
 
 #. (para)
 msgid ""
@@ -16298,6 +16438,44 @@ msgid ""
 "  [out, retval] BSTR * newMessage\n"
 ");\n"
 msgstr ""
+"\n"
+"HRESULT GetCommitMessage2 (\n"
+"  // Parent window for your provider's UI.\n"
+"  [in] HWND hParentWnd,\n"
+"\n"
+"  // Parameters for your provider.\n"
+"  [in] BSTR parameters,\n"
+"  // The common URL of the commit\n"
+"  [in] BSTR commonURL,\n"
+"  [in] BSTR commonRoot,\n"
+"  [in] SAFEARRAY(BSTR) pathList,\n"
+"\n"
+"  // The text already present in the commit message.\n"
+"  // Your provider should include this text in the new message,\n"
+"  // where appropriate.\n"
+"  [in] BSTR originalMessage,\n"
+"\n"
+"  // You can assign custom revision properties to a commit\n"
+"  // by setting the next two params.\n"
+"  // note: Both safearrays must be of the same length.\n"
+"  //       For every property name there must be a property value!\n"
+"\n"
+"  // The content of the bugID field (if shown)\n"
+"  [in] BSTR bugID,\n"
+"\n"
+"  // Modified content of the bugID field\n"
+"  [out] BSTR * bugIDOut,\n"
+"\n"
+"  // The list of revision property names.\n"
+"  [out] SAFEARRAY(BSTR) * revPropNames,\n"
+"\n"
+"  // The list of revision property values.\n"
+"  [out] SAFEARRAY(BSTR) * revPropValues,\n"
+"\n"
+"  // The new text for the commit message.\n"
+"  // This replaces the original message\n"
+"  [out, retval] BSTR * newMessage\n"
+");\n"
 
 #. (para)
 msgid ""
@@ -16451,6 +16629,29 @@ msgid ""
 "  [out, retval] BSTR * error\n"
 ");\n"
 msgstr ""
+"\n"
+"HRESULT  OnCommitFinished (\n"
+"  // Parent window for any (error) UI that needs to be displayed.\n"
+"  [in] HWND hParentWnd,\n"
+"\n"
+"  // The common root of all paths that got committed.\n"
+"  [in] BSTR commonRoot,\n"
+"\n"
+"  // All the paths that got committed.\n"
+"  [in] SAFEARRAY(BSTR) pathList,\n"
+"\n"
+"\n"
+"  // The text already present in the commit message.\n"
+"  [in] BSTR logMessage,\n"
+"\n"
+"  // The revision of the commit.\n"
+"  [in] ULONG revision,\n"
+"\n"
+"\n"
+"  // An error to show to the user if this function\n"
+"  // returns something else than S_OK\n"
+"  [out, retval] BSTR * error\n"
+");\n"
 
 #. (para)
 msgid ""
@@ -16473,6 +16674,11 @@ msgid ""
 "  [out, retval] VARIANT_BOOL *ret\n"
 ");\n"
 msgstr ""
+"\n"
+"HRESULT HasOptions(\n"
+"  // Whether the provider provides options\n"
+"  [out, retval] VARIANT_BOOL *ret\n"
+");\n"
 
 #. (para)
 msgid ""
@@ -16500,6 +16706,17 @@ msgid ""
 "  [out, retval] BSTR * newparameters\n"
 ");\n"
 msgstr ""
+"\n"
+"HRESULT ShowOptionsDialog(\n"
+"  // Parent window for the options dialog\n"
+"  [in] HWND hParentWnd,\n"
+"\n"
+"  // Parameters for your provider.\n"
+"  [in] BSTR parameters,\n"
+"\n"
+"  // The parameters string\n"
+"  [out, retval] BSTR * newparameters\n"
+");\n"
 
 #. (para)
 msgid ""
@@ -16550,6 +16767,11 @@ msgid ""
 "the TortoiseSVN mailing lists <email>dev@tortoisesvn.tigris.org</email> and "
 "<email>users@tortoisesvn.tigris.org</email>."
 msgstr ""
+"Kedže TortoiseSVN sa neustále vyvíja je ťažké udržať dokumentáciu úplne "
+"aktuálnu. Udržujeme <ulink url=\"http://tortoisesvn.net/faq.html"
+"\"><citetitle>online FAQ</citetitle></ulink>, kde je výber často kladených "
+"otázok na e-mailových konferenciách TortoiseSVN <email>dev@tortoisesvn."
+"tigris.org</email> a <email>users@tortoisesvn.tigris.org</email>."
 
 #. (para)
 msgid ""
@@ -16796,7 +17018,7 @@ msgstr "Vrátenie revízií v úložisku"
 
 #. (primary)
 msgid "rollback"
-msgstr " vrátenie"
+msgstr "vrátenie"
 
 #. (primary)
 msgid "undo commit"
@@ -16951,13 +17173,13 @@ msgid ""
 "possible reason would be that someone committed a confidential document to a "
 "public repository."
 msgstr ""
-"Keďe TortoiseSVN nikdy dáta nestráca , váš <quote>navrátené</quote> revízie "
-"stále existujú ako medzi revízie v úložisku. Iba hlavná (HEAD) revízia bola "
+"Keďe TortoiseSVN nikdy dáta nestráca, vaše <quote>navrátené</quote> revízie "
+"stále existujú ako medzirevízie v úložisku. Iba hlavná (HEAD) revízia bola "
 "zmenená na prechadzajúci stav. Keď chcete aby revízie úplne zmizli z vašeho "
 "úložiska vymažúc všetky stopy, ktoré kedy existovali, musíte použiť "
-"extrémnejšie opatrenia. Keď nie je skutočne dobrý dôvod, aby ste to "
-"urobili , je to <emphasis>neodporúčané</emphasis>. Jedným z možných dôvodov "
-"môže byť, že niekto odovzdal dôverné dokumenty do verejného úložiska."
+"extrémnejšie opatrenia. Keď nie je skutočne dobrý dôvod, aby ste to urobili, "
+"je to <emphasis>neodporúčané</emphasis>. Jedným z možných dôvodov môže byť, "
+"že niekto odovzdal dôverné dokumenty do verejného úložiska."
 
 #. (para)
 msgid ""
@@ -17541,6 +17763,10 @@ msgid ""
 "require this hack to be activated! So unless you're using that ancient tool, "
 "DO NOT USE THIS!"
 msgstr ""
+"Upozorňujeme, že táto obchádzka je nevyhnutná len pokiaľ stále používate VS."
+"NET2002. Všetky novšie verzie Visual Studia <emphasis>nepotrebujú</emphasis> "
+"toto nastavenie. Takže pokiaľ nepoužívate tento zastaralý nástroj TOTO "
+"NEPOUŽÍVAJTE!"
 
 #. (title)
 msgid "Disable context menu entries"
@@ -17565,6 +17791,15 @@ msgid ""
 "hidden, and the commands are still available through other means, e.g. the "
 "command line or even other dialogs in TortoiseSVN itself!"
 msgstr ""
+"Od verzie 1.5.0 TortoiseSVN umožňuje zakázať (v skutočnosti skryť) položky "
+"kontextového menu. Keďže toto nie je vlastnosť, ktorá by mala byť ľahko "
+"dostupná, ale len vo vynimočných prípadoch, nie je pre GUI, ale je to "
+"potrebné urobiť priamo vo Windows registroch. Prosím uvedomte si, že toto "
+"može vypnúť niektoré príkazy pre užívateľov, ktorý by ich nemali používať. "
+"Prosím buďte si však vedomí, že len položky kontextovej ponuky v "
+"<emphasis>Explorer</emphasis>-i sú skryté a samotné príkazy sú stále "
+"dostupné inými spôsobmi ako je príkazový riadok, či v niektorých dialógoch "
+"samotného TortoiseSVN!"
 
 #. (para)
 msgid ""
@@ -18064,7 +18299,7 @@ msgstr "<option>/findtype:8</option> filtrované podľa revízií"
 
 #. (para)
 msgid "<option>/findtype:16</option> not used"
-msgstr ""
+msgstr "<option>/findtype:16</option> nepoužité"
 
 #. (para)
 msgid "<option>/findtype:32</option> filter by bug ID"
@@ -18072,19 +18307,19 @@ msgstr "<option>/findtype:32</option> filtrované podľa ID-chyby"
 
 #. (para)
 msgid "<option>/findtype:64</option> not used"
-msgstr ""
+msgstr "<option>/findtype:64</option> nepoužité"
 
 #. (para)
 msgid "<option>/findtype:128</option> filter by date"
-msgstr ""
+msgstr "<option>/findtype:128</option> filtrované podľa dátumu"
 
 #. (para)
 msgid "<option>/findtype:256</option> filter by date range"
-msgstr ""
+msgstr "<option>/findtype:256</option> filtrované podľa rozsahu dátumov"
 
 #. (option)
 msgid "/outfile:path\\to\\file"
-msgstr ""
+msgstr "/outfile:cesta\\k\\suboru"
 
 #. (entry)
 msgid ""
@@ -18223,35 +18458,35 @@ msgstr "/noui"
 
 #. (option)
 msgid "/noprogressui"
-msgstr ""
+msgstr "/noprogressui"
 
 #. (option)
 msgid "/nodlg"
-msgstr ""
+msgstr "/nodlg"
 
 #. (option)
 msgid "/cleanup"
-msgstr ""
+msgstr "/cleanup"
 
 #. (option)
 msgid "/revert"
-msgstr ""
+msgstr "/revert"
 
 #. (option)
 msgid "/delunversioned"
-msgstr ""
+msgstr "/delunversioned"
 
 #. (option)
 msgid "/delignored"
-msgstr ""
+msgstr "/delignored"
 
 #. (option)
 msgid "/refreshshell"
-msgstr ""
+msgstr "/refreshshell"
 
 #. (option)
 msgid "/externals"
-msgstr ""
+msgstr "/externals"
 
 #. (entry)
 msgid ""
@@ -18265,6 +18500,14 @@ msgid ""
 "<placeholder-6/>, <placeholder-7/>, <placeholder-8/>, <placeholder-9/> and "
 "<placeholder-10/>."
 msgstr ""
+"Vyčistí prerušenú, alebo zrušenú akciu a odomkne pracovnú kópiu v "
+"<placeholder-1/>. Použitím <placeholder-2/> zakážete zobraziť okno s "
+"výsledkom (hovoriaci o úspešnom, alebo neúspešnom dokončení čistenia). "
+"<placeholder-3/> zakáže okno s priebehom. <placeholder-4/> zakáže dialogové "
+"okno čistenia, kde si užívateľ môže vybrať čo presne chce vyčistiť. Dostupné "
+"akcie môžu byť zadané prepínačmi <placeholder-5/> pre vyčistenie stavu, "
+"<placeholder-6/>, <placeholder-7/>, <placeholder-8/>, <placeholder-9/> a "
+"<placeholder-10/>."
 
 #. (option)
 #. (option)
@@ -19504,7 +19747,7 @@ msgid ""
 "svn import -m LogMessage PATH URL\n"
 msgstr ""
 "\n"
-"svn import -m SPRAVA_DENNIKA CESTA URL\n"
+"svn import -m SpravaDennika CESTA URL\n"
 
 #. (screen)
 #, no-wrap
@@ -19539,6 +19782,10 @@ msgid ""
 "{edit new ignore item into tempfile}\n"
 "svn propset svn:ignore -F tempfile PATH\n"
 msgstr ""
+"\n"
+"svn propget svn:ignore PATH &gt; tempfile\n"
+"{edit new ignore item into tempfile}\n"
+"svn propset svn:ignore -F tempfile PATH\n"
 
 #. (para)
 msgid ""
@@ -21322,7 +21569,7 @@ msgid ""
 "as a scroll bar to scroll all the windows simultaneously."
 msgstr ""
 "Na ľavej strane okna je prehľadový stĺpec. Tento poskytuje rýchly vizuálny "
-"prehľad kde boli vykonané zmeny v súbore.  Stĺpec má tri podstĺpcee. Ľavý "
+"prehľad kde boli vykonané zmeny v súbore. Stĺpec má tri podstĺpcee. Ľavý "
 "popisuje ľavý súbor, pravý popisuje pravý súbor a stredný podstĺpec spodný "
 "panel (ak je prítomný). V jedno-panelovom zobrazení je použitý iba ľavý "
 "stĺpec. Prehľadový stĺpec môže byť použitý ako skrolovací na skrolovanie "
@@ -21334,12 +21581,17 @@ msgid ""
 "highlighted throughout the document, both in the main panes and the locator "
 "bar. Double click on the word again to remove the highlighting."
 msgstr ""
+"Po dvoj-šťuku na slovo všetky výskyty toho slova budú zvýraznené v celom "
+"dokumente, v hlavných paneloch aj v navigačnom stĺpci. Dvoj-šťuk na takto "
+"zvýraznené slovo zvýraznenie zruší."
 
 #. (para)
 msgid ""
 "If you click in the left margin, or if you triple click within a line, that "
 "whole line will be selected."
 msgstr ""
+"Keď kliknete na ľavý okraj riadka, alebo na neho troj-šťuknete, celý riadok "
+"bude označený."
 
 #. (para)
 msgid ""
@@ -22239,6 +22491,199 @@ msgstr ""
 "</screen> Ak sú zadané dva súbory, sú tieto súbory porovnané navzájom. Keď "
 "sú zadané tri súbory prvý po použitý ako základový, a zvyšné dva sú s ním "
 "porovnané trojcestným porovnaním."
+
+#~ msgid ""
+#~ "Before we get stuck into working with some real files, it is important to "
+#~ "get an overview of how Subversion works and the terms that are used."
+#~ msgstr ""
+#~ "Predtím ako sa zakusneme do pracovnej kópie s reálnymi súbormi, je "
+#~ "dôležité získať prehľad ako Subversion pracuje a aká terminológia je "
+#~ "použitá."
+
+#~ msgid ""
+#~ "Use <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Delete</"
+#~ "guimenuitem></menuchoice> to remove files or folders from Subversion."
+#~ msgstr ""
+#~ "Použite <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Vymazať</"
+#~ "guimenuitem></menuchoice> k odstráneniu súborov, alebo adresárov zo "
+#~ "Subversion."
+
+#~ msgid "intermediate folders"
+#~ msgstr "medziadresáre"
+
+#~ msgid ""
+#~ "If you are merging revisions in chunks, the method shown in the "
+#~ "Subversion book will have you merge 100-200 this time and 200-300 next "
+#~ "time. With TortoiseSVN you would merge 100-200 this time and 201-300 next "
+#~ "time."
+#~ msgstr ""
+#~ "Ak zlučujete zmeny v blokoch, metodou ukázanou v knihe Subversion budete "
+#~ "zlučovať 100-200 teraz a 200-300 neskôr. S TortoiseSVN by ste zlúčili 100-"
+#~ "200 teraz a 201-300 potom."
+
+#~ msgid "The Three Meanings of <quote>Lock</quote>"
+#~ msgstr "Tri význami pre <quote>Zámok</quote>"
+
+#~ msgid ""
+#~ "In this section, and almost everywhere in this book, the words "
+#~ "<quote>lock</quote> and <quote>locking</quote> describe a mechanism for "
+#~ "mutual exclusion between users to avoid clashing commits. Unfortunately, "
+#~ "there are two other sorts of <quote>lock</quote> with which Subversion, "
+#~ "and therefore this book, sometimes needs to be concerned."
+#~ msgstr ""
+#~ "V tomto oddiely, podobne ako v celej knihe, slovo <quote>zámok</quote> "
+#~ "popisuje mechanizmus na dosiahnutie excuzívneho prístupu medzi užívateľmi "
+#~ "aby nedošlo k stretovým odozdaniam. Žiaľ, ešte existujú dva iné významy "
+#~ "pre <quote>zámok</quote> s ktorými Subversion, a teda aj táto kniha, sa "
+#~ "musí zaoberať."
+
+#~ msgid ""
+#~ "The second is <literal>working copy locks</literal>, used internally by "
+#~ "Subversion to prevent clashes between multiple Subversion clients "
+#~ "operating on the same working copy. Usually you get these locks whenever "
+#~ "a command like update/commit/... is interrupted due to an error. These "
+#~ "locks can be removed by running the cleanup command on the working copy, "
+#~ "as described in <xref linkend=\"tsvn-dug-cleanup\"/>."
+#~ msgstr ""
+#~ "Druhým je <literal>zámok pracovnej kópie</literal>. Tento Subversion  "
+#~ "vnútorne používa aby pri prístupe viacerých klientov k tej istej "
+#~ "pracovnej kópií nedošlo k zmätku. Zvyčajne tento typ zámku sa dostane k "
+#~ "slovu pri operáciach ako je aktualizovať, odovzdať a pod. Pokial takáto "
+#~ "oprerácia zlyhá, alebo je prerušená možete tento zámok odsrániť spustením "
+#~ "príkazu vyčistiť na dotknutej pracovnej kópií, tak ako je popísané v "
+#~ "<xref linkend=\"tsvn-dug-cleanup\"/>."
+
+#~ msgid ""
+#~ "And third, files and folders can get locked if they're in use by another "
+#~ "process, for example if you have a word document opened in Word, that "
+#~ "file is locked and can not be accessed by TortoiseSVN."
+#~ msgstr ""
+#~ "A za tretie, súbory a adresáre môžu byť uzamknuté inými procesmi, "
+#~ "napríklad keď je dokument otvorený vo Word-e, súbor je zamknutý a "
+#~ "TortoiseSVN k nemu nemôže prístupiť."
+
+#~ msgid ""
+#~ "You can generally forget about these other kinds of locks until something "
+#~ "goes wrong that requires you to care about them. In this book, "
+#~ "<quote>lock</quote> means the first sort unless the contrary is either "
+#~ "clear from context or explicitly stated."
+#~ msgstr ""
+#~ "Vo všeobecnosti môžete na iné druhy zámkov zabudnúť až do chvíle kým "
+#~ "niečo neprestane isť, čo vás donúti ich vziať do úvahy. V tejto knihe "
+#~ "<quote>zámok</quote> znamená prvý druh pokiaľ z kontextu nie je jasné "
+#~ "inak, alebo je to priamo spomenuté."
+
+#~ msgid "$WCREV&amp;0xFFFF$"
+#~ msgstr "$WCREV&amp;0xFFFF$"
+
+#~ msgid ""
+#~ "Replaced with the highest commit revision in the working copy, ANDed with "
+#~ "the value after the &amp; char. For example: <placeholder-1/>"
+#~ msgstr ""
+#~ "Nahradené najvyššiou revíziou v pracovnej kópií a maskované s hodnotou za "
+#~ "znakom &amp;. Napríklad: <placeholder-1/>"
+
+#~ msgid "$WCREV-1000$"
+#~ msgstr "$WCREV-1000$"
+
+#~ msgid ""
+#~ "Replaced with the highest commit revision in the working copy, with the "
+#~ "value after the + or - char added or subtracted. For example: "
+#~ "<placeholder-1/>"
+#~ msgstr ""
+#~ "Nahradené najvyššiou revíziou v pracovnej kópií s hodnotou upravenou o "
+#~ "čislo za + alebo -. Napríklad: <placeholder-1/>"
+
+#~ msgid ""
+#~ "By far the easiest way to revert the changes from one or more revisions, "
+#~ "is to use the revision log dialog."
+#~ msgstr ""
+#~ "Na vrátenie zmien z jednej alebo viacerých revízií je omnoho jednoduchšie "
+#~ "použiť denník."
+
+#~ msgid ""
+#~ "Make sure the <guilabel>Reverse merge</guilabel> checkbox is checked."
+#~ msgstr "t"
+
+#~ msgid ""
+#~ "In the <guilabel>Merge options</guilabel> dialog accept the defaults."
+#~ msgstr ""
+#~ "V dialógovom okne <guilabel>Nastavenia zlučovania</guilabel> ponechajte "
+#~ "predvolené."
+
+#~ msgid "Click <guibutton>Merge</guibutton> to complete the merge."
+#~ msgstr "Kliknite na <guibutton>Zlúčiť</guibutton> k dokončeniu zlúčenia."
+
+#~ msgid ""
+#~ "You have reverted the changes within your working copy. Check that the "
+#~ "results are as expected, then commit the changes."
+#~ msgstr ""
+#~ "Vrátili ste zmeny vo vašej pracovnej kópií. Najprv skontroľujte či "
+#~ "výsledok zodpovedá očakávaniu a potom zmeny odovzdajte."
+
+#~ msgid ""
+#~ "You can customize the MSI file if you wish so that all your users end up "
+#~ "with the same settings. TSVN settings are stored in the registry under "
+#~ "<filename>HKEY_CURRENT_USER\\Software\\TortoiseSVN</filename> and general "
+#~ "Subversion settings (which affect all Subversion clients) are stored in "
+#~ "config files under <filename>%APPDATA%\\Subversion</filename>. If you "
+#~ "need help with MSI customization, try one of the MSI transform forums or "
+#~ "search the web for <quote>MSI transform</quote>."
+#~ msgstr ""
+#~ "Možete si upraviť MSI súbor aby všetci vaši užívatelia mali rovnaké "
+#~ "nastavenia. TSVN nastavenia sú uložené vo Windows registroch pod "
+#~ "<filename>HKEY_CURRENT_USER\\Software\\TortoiseSVN</filename> a halvné "
+#~ "Subversion nastavenia (ktoré ovplyvňujú všetkých klientov Subversion) sú "
+#~ "uložené v konfiguračných súboroch v <filename>%APPDATA%\\Subversion</"
+#~ "filename>. Keď potrebujete pomôcť s úpravou MSI skúste niektoré z fór "
+#~ "ktoré sa zaoberajú transformáciou MSI, alebo hľadať skúste na internete  "
+#~ "<quote>MSI transform</quote>."
+
+#~ msgid "/extended"
+#~ msgstr "/extended"
+
+#~ msgid "localchanges"
+#~ msgstr "miestne zmeny"
+
+#~ msgid "unversioned"
+#~ msgstr "neverziované"
+
+#~ msgid ""
+#~ "If an item has Subversion status <literal>none</literal> (the item is not "
+#~ "within a working copy) then no overlay is shown. If you have chosen to "
+#~ "disable the <emphasis>Ignored</emphasis> and <emphasis>Unversioned</"
+#~ "emphasis> overlays then no overlay will be shown for those files either."
+#~ msgstr ""
+#~ "Pokiaľ Subversion stav je <literal>žiadne</literal> (objekt nieje "
+#~ "súčasťou pracovnej kópie) nie je zobrazené žiadne prekrytie. Ak ste "
+#~ "zakázali <emphasis>Ignorované</emphasis> a <emphasis>Neverziované</"
+#~ "emphasis> prekrytia potom ani tieto nebudú zobrazené."
+
+#~ msgid ""
+#~ "<guilabel>Max line length for inline diffs</guilabel> TortoiseMerge can "
+#~ "get slow when showing inline diffs for very long lines. Because of that "
+#~ "only lines that are shorter than 3000 chars are shown with inline diffs. "
+#~ "You can change this value here."
+#~ msgstr ""
+#~ "<guilabel>Maximálna dĺžka pre riadkové porovnanie</guilabel> "
+#~ "TortoiseMerge sa môže výrazne spomaliť keď zobrazuje riadkové porovnie "
+#~ "veľmi dlhých riadkov. Preto iba riadky kratšie ako 3000 znakov sú "
+#~ "zobrazené s riadkovým porovnaním. Tu môžete túto hodnotu zmeniť."
+
+#~ msgid "Ctrl-G"
+#~ msgstr "Ctrl-G"
+
+#~ msgid "Go to line"
+#~ msgstr "Prejsť na riadok"
+
+#~ msgid "Select all text"
+#~ msgstr "Vybrať celý text"
+
+#~ msgid "Ctrl-U"
+#~ msgstr "Ctrl-U"
+
+#~ msgid "Switches views"
+#~ msgstr "Prepnutie panelov"
 
 #~ msgid ""
 #~ "You can create a repository with the FSFS backend or with the older "
