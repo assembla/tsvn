@@ -1282,13 +1282,13 @@ void CRepositoryBrowser::FetchChildren (HTREEITEM node)
         CTreeItem* parentItem = (CTreeItem *)m_RepoTree.GetItemData (node);
         if (parentItem == NULL)
             continue;
-        pTreeItem->error = m_lister.AddSubTreeExternals ( parentItem->url
-                                                        , parentItem->is_external
-                                                             ? parentItem->repository.peg_revision
-                                                             : SVNRev()
-                                                        , parentItem->repository
-                                                        , relPath
-                                                        , children);
+        parentItem->error = m_lister.AddSubTreeExternals ( parentItem->url
+                                                         , parentItem->is_external
+                                                              ? parentItem->repository.peg_revision
+                                                              : SVNRev()
+                                                         , parentItem->repository
+                                                         , relPath
+                                                         , children);
         relPath = parentItem->unescapedname + _T('/') + relPath;
     }
 
