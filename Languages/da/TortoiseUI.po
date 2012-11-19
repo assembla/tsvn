@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-10-28 08:07+0000\n"
+"PO-Revision-Date: 2012-11-06 08:18+0000\n"
 "Last-Translator: Mikkel Elmholdt <mikkel@elmholdt.dk>\n"
 "Language-Team: Danish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8540,7 +8540,7 @@ msgstr "Versionsarkiv oprettet"
 
 #. Resource IDs: (105)
 msgid "Repository query failed. Refresh to retry."
-msgstr ""
+msgstr "Versionsarkiv søgning fejlede. Genopfrisk for at gentage forsøget."
 
 #. Resource IDs: (106)
 msgid "Request cancelled by TSVN"
@@ -11065,6 +11065,13 @@ msgid ""
 "originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 msgstr ""
+"TortoiseBlame bør ikke startes direkte! Brug \n"
+"TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
+"i stedet for.\n"
+"\n"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
 msgid "TortoiseIDiff"
@@ -13260,6 +13267,27 @@ msgstr "ja"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Date %4!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revision %2!s!, Forfatter %3!s!, Dato %4!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Revision %2!s!, Author %3!s!, Size %4!s!, Date %5!s!"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Revision %2!s!, Forfatter %3!s!, Størrelse %4!s!, Dato %5!s!"
+
+#~ msgid ""
+#~ "%1!s!\r\n"
+#~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
+#~ msgstr ""
+#~ "%1!s!\n"
+#~ "Viser %2!d! filer og %3!d! foldere, %4!d! elementer i alt"
+
 #~ msgid "&All"
 #~ msgstr "&Alle"
 
@@ -13278,6 +13306,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Line number (%d - %d)"
 #~ msgstr "&Linie nummer (%d - %d)"
 
+#~ msgid "&Max line length for inline diffs"
+#~ msgstr "&Max linie længde for indlejrede forskelle"
+
 #~ msgid "&None"
 #~ msgstr "&Ingen"
 
@@ -13287,6 +13318,12 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Klemme:"
 
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Juster til HEAD revision"
+
+#~ msgid "Always execute the script"
+#~ msgstr "Eksekver altid scriptene"
+
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Godkendt eller afvis tilkoblings-script på klient-siden"
 
@@ -13295,6 +13332,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Aqua stil"
+
+#~ msgid "Backwards in browsing history"
+#~ msgstr "Gå tilbage i browser historik"
 
 #~ msgid "Black Style"
 #~ msgstr "Sort stil"
@@ -13309,8 +13349,46 @@ msgstr "{BugTraq}"
 #~ "Fortryd\n"
 #~ "Lokale modifikationer bevares."
 
+#~ msgid ""
+#~ "Change the style of the application\n"
+#~ "Change Style"
+#~ msgstr ""
+#~ "Skift programmets stil\n"
+#~ "Skift Stil"
+
+#~ msgid "Changes the style of the application"
+#~ msgstr "Skift programmets stil"
+
+#~ msgid "Clears all %ld approved client-side hook scripts"
+#~ msgstr "Slet alle %ld godkendte klient-side tilkoblings-scripts"
+
+#~ msgid ""
+#~ "Click to see commands to move blocks of text\n"
+#~ "Use text blocks"
+#~ msgstr ""
+#~ "Klik for at vise kommandoer til at flyytte blokke aftekst\n"
+#~ "Brug tekst blokke"
+
 #~ msgid "Collapse"
 #~ msgstr "Kollaps"
+
+#~ msgid "Color by &age, indexed"
+#~ msgstr "Farvelæg efter &alder, indiceret"
+
+#~ msgid "Color by age, &continuous"
+#~ msgstr "Farvelæg efter alder, &fortløbende"
+
+#~ msgid "Color by au&thor"
+#~ msgstr "Farvelæg efter forfa&tter"
+
+#~ msgid ""
+#~ "Command Line To Execute:\r\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%"
+#~ msgstr ""
+#~ "Kommando linie:\n"
+#~ "For at specificere en sti inde i en arbejdskopi, angiv URL'en i "
+#~ "versionsarkivet med versionsarkivets rod angivet som %REPOROOT%"
 
 #~ msgid "Compare two files"
 #~ msgstr "Sammenlign to filer"
@@ -13318,8 +13396,32 @@ msgstr "{BugTraq}"
 #~ msgid "Configure &TortoiseSVN to never use the recycle bin"
 #~ msgstr "Konfigurer &TortoiseSVN til aldrig at benytte papirkurven"
 
+#~ msgid "Conflicted (maybe)"
+#~ msgstr "Konflikter (måske)"
+
+#~ msgid "Create intermediate folders"
+#~ msgstr "Opret midlertidige foldere"
+
 #~ msgid "Create patch file"
 #~ msgstr "Opret rettelses-fil"
+
+#~ msgid ""
+#~ "Custom title string. Available keywords are:\r\n"
+#~ "{mergeurl}:\tthe source url of the merge\r\n"
+#~ "{revisions}:\tA comma separated list of the merged revisions, e.g., 3, 5, "
+#~ "6, 7\r\n"
+#~ "{revisionsr}:\tLike {revisions} but with an 'r' in front of the revisions"
+#~ "\r\n"
+#~ "{revrange}:\tA comma separated list of the merged revisions, grouped into "
+#~ "ranges if possible, e.g., 3, 5-7"
+#~ msgstr ""
+#~ "Tilpasset titel streng. Mulige nøgleord er:\n"
+#~ "{mergeurl}:\tkilde URL som skal flettes\n"
+#~ "{revisions}:\tEn komma-separeret liste af flettede revisioner, f.eks., 3, "
+#~ "5, 6, 7\n"
+#~ "{revisionsr}:\tSom for {revisions} men med et 'r' foran revisionsnumrene\n"
+#~ "{revrange}:\tEn komma-separeret liste af de flettede revisioner, "
+#~ "grupperet i sammenhængende områder hvor muligt, f.eks. 3, 5-7"
 
 #~ msgid "Dialog"
 #~ msgstr "Dialog"
@@ -13337,21 +13439,81 @@ msgstr "{BugTraq}"
 #~ msgstr "Vil du indlæse de ændrede filer?"
 
 #~ msgid ""
+#~ "Do you want to mark the file\n"
+#~ "%s\n"
+#~ "as resolved?"
+#~ msgstr ""
+#~ "Ønsker du at markere filen\n"
+#~ "%s\n"
+#~ "som løst?"
+
+#~ msgid ""
+#~ "Don't run\n"
+#~ "Do not run the script"
+#~ msgstr ""
+#~ "Kør ikke\n"
+#~ "Kør ikke scriptet"
+
+#~ msgid "Enforce"
+#~ msgstr "Gennemtving"
+
+#~ msgid ""
 #~ "External \"%1!s!\"\r\n"
 #~ "Revision %2!s!"
 #~ msgstr ""
 #~ "Ekstern \"%1!s!\"\n"
 #~ "Revision %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Hent HEAD revision og juster"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Hent indhold af foldere i baggrunden så gennemsyn er hurtigere"
+
+#~ msgid "File has no conflicts"
+#~ msgstr "Filen har ingen konflikter"
+
+#~ msgid "Find &HEAD-Revision"
+#~ msgstr "Find &HEAD-revision"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Find HEAD revisioner"
+
+#~ msgid "Forwards in browsing history"
+#~ msgstr "Gå frem i browser historik"
 
 #~ msgid "General::Dialogs 3"
 #~ msgstr "Generelt::Dialoger 3"
 
 #~ msgid "Go To Line"
 #~ msgstr "Gå til linie"
+
+#~ msgid ""
+#~ "Go to the next inline difference\n"
+#~ "Next inline difference"
+#~ msgstr ""
+#~ "Gå til den næste indlejrede forskel\n"
+#~ "Næste indlejrede forskel"
+
+#~ msgid ""
+#~ "Go to the previous inline difference\n"
+#~ "Previous inline difference"
+#~ msgstr ""
+#~ "Gå til den forrige indlejrede forskel\n"
+#~ "Forrige indlejrede forskel"
+
+#~ msgid "Goto Line"
+#~ msgstr "Gå til linie"
+
+#~ msgid "HEAD revision is %s"
+#~ msgstr "HEAD revision er %s"
+
+#~ msgid "Hide/Show the patch file list"
+#~ msgstr "Vis/Skjul rettelsesfil listen"
+
+#~ msgid "ID:32811:V C +U"
+#~ msgstr "ID:32811:V C +U"
 
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
@@ -13363,23 +13525,141 @@ msgstr "{BugTraq}"
 #~ "Ignorer ændringer\n"
 #~ "Ignorer eksterne ændringer"
 
+#~ msgid "Index colors:"
+#~ msgstr "Indeks farver:"
+
+#~ msgid "Inline diff"
+#~ msgstr "Indlejret forskel"
+
+#~ msgid "Inline diff word-wise"
+#~ msgstr "Indlejret forskel ord-baseret"
+
+#~ msgid "Jump to next &conflict"
+#~ msgstr "Hop til næste &konflikt"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Behold &ændringslister"
+
+#~ msgid "Last changed author:"
+#~ msgstr "Sidste ændrings-forfatter:"
+
+#~ msgid "Last changed revision:"
+#~ msgstr "Sidst ændrede revision:"
+
+#~ msgid ""
+#~ "Leave as conflicted\n"
+#~ "The conflict status of the file is kept"
+#~ msgstr ""
+#~ "Bevar konflikt\n"
+#~ "Filens konflikt-status bevares"
+
+#~ msgid "Like above, but used for reverse merges"
+#~ msgstr "Som ovenfor, men brugt til omvendte fletninger"
 
 #~ msgid "Line moved from line %ld"
 #~ msgstr "Linie flyttet fra linie %ld"
 
+#~ msgid "Line moved to line %ld"
+#~ msgstr "Linie flyttet til linie %ld"
+
+#~ msgid ""
+#~ "Load changes\n"
+#~ "Changes made in TortoiseMerge are lost and replaced with the new content."
+#~ msgstr ""
+#~ "Indlæs ændringer\n"
+#~ "Ændringer lavet i TortoiseMerge vil blive tabt og erstattet med det nye "
+#~ "indhold."
+
+#~ msgid ""
+#~ "Load changes\n"
+#~ "The views are updated with the new content."
+#~ msgstr ""
+#~ "Indlæs ændringer\n"
+#~ "Visningerne vil blive opdateret med det nye indhold."
+
 #~ msgid "Local &Hooks"
 #~ msgstr "Lokale &Tilkoblinger"
+
+#~ msgid "Main"
+#~ msgstr "Hoved"
+
+#~ msgid ""
+#~ "Mark as resolved\n"
+#~ "The file status is changed to modified"
+#~ msgstr ""
+#~ "Marker som løst\n"
+#~ "Filens status sættes til ændret"
+
+#~ msgid "Merge Log &Templates"
+#~ msgstr "Flet Log &Skabeloner"
+
+#~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr "Flettet revision(er) {revrange} fra {mergeurl}:\n"
+
+#~ msgid "Navigate"
+#~ msgstr "Naviger"
+
+#~ msgid ""
+#~ "Navigate to a specific line in the view\n"
+#~ "Goto Line"
+#~ msgstr ""
+#~ "Naviger til en specifik linie i visningen\n"
+#~ "Gå til linie"
+
+#~ msgid "Next conflict"
+#~ msgstr "Næste konflikt"
+
+#~ msgid "Next difference"
+#~ msgstr "Næste forskel"
+
+#~ msgid "Next inline difference"
+#~ msgstr "Næste indlejrede forskel"
+
+#~ msgid "Office 2003"
+#~ msgstr "Office 2003"
+
+#~ msgid "Office 2007"
+#~ msgstr "Office 2007"
+
+#~ msgid "Office 2007 colors"
+#~ msgstr "Office 2007 farver"
+
+#~ msgid "Office XP"
+#~ msgstr "Office XP"
+
+#~ msgid ""
+#~ "Open files for diff or to apply a patch\n"
+#~ "Open files"
+#~ msgstr ""
+#~ "Åben filer for forskelsvisning eller læg en rettelse på\n"
+#~ "Åben filer"
 
 #~ msgid "Operative"
 #~ msgstr "Operativ"
 
+#~ msgid "Paste"
+#~ msgstr "Sæt ind"
+
 #~ msgid "Peg"
 #~ msgstr "Klemme"
 
+#~ msgid "Pre-fetch folders for faster browsing"
+#~ msgstr "Hent foldere tidligt for hurtigere visning"
+
+#~ msgid "Previous conflict"
+#~ msgstr "Forrige konflikt"
+
+#~ msgid "Previous difference"
+#~ msgstr "Forrige forskel"
+
+#~ msgid "Previous inline difference"
+#~ msgstr "Forrige indlejrede forskel"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Papirkurv"
+
+#~ msgid "Repository browser"
+#~ msgstr "Versionsarkiv browser"
 
 #~ msgid "Restore"
 #~ msgstr "Gendan"
@@ -13387,8 +13667,61 @@ msgstr "{BugTraq}"
 #~ msgid "Restore after commit"
 #~ msgstr "Gendan efter arkivering"
 
+#~ msgid "Reverse merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr ""
+#~ "Omvendt fletning af flettede revision(er) {revrange} fra {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Revert\n"
+#~ "All local modifications will be lost."
+#~ msgstr ""
+#~ "Tilbagefør\n"
+#~ "Alle lokale ændringer vil blive tabt."
+
+#~ msgid "Revision range to merge"
+#~ msgstr "Revisionsområde til fletning"
+
+#~ msgid ""
+#~ "Run\n"
+#~ "Run the hook script"
+#~ msgstr ""
+#~ "Kør\n"
+#~ "Kør tlkoblings-scriptet"
+
+#~ msgid "SVN Export changed items here"
+#~ msgstr "SVN Eksport ændrede elementer her"
+
+#~ msgid "Save"
+#~ msgstr "Gem"
+
+#~ msgid "Save as"
+#~ msgstr "Gem som"
+
+#~ msgid ""
+#~ "Show Inline-Diff\n"
+#~ "Inline diff"
+#~ msgstr ""
+#~ "Vis forskelle indlejret\n"
+#~ "Indlejret Forskelle"
+
+#~ msgid "Show Whitespaces"
+#~ msgstr "Vis blanktegn"
+
 #~ msgid "Show externals"
 #~ msgstr "Vis eksterne"
+
+#~ msgid ""
+#~ "Show special characters for whitespaces and newlines\n"
+#~ "Show Whitespaces"
+#~ msgstr ""
+#~ "Vis specielle karakterer for blanktegn og linieskift\n"
+#~ "Vis blanktegn"
+
+#~ msgid "Shows folders and files included with the svn:externals property"
+#~ msgstr "Vis kataloger og filer indkluderet med svn:externals egenskab"
+
+#~ msgid "Silver Style"
+#~ msgstr "Sølv-stil"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13404,14 +13737,251 @@ msgstr "{BugTraq}"
 #~ "En eller flere filer er blevet ændret udenfor T-Merge. Vil du genindlæse "
 #~ "og miste dine egne ændringer?"
 
+#~ msgid ""
+#~ "Specifies how the text for each merged revision should look like.\r\n"
+#~ "The following keywords can be used:\r\n"
+#~ "{msg}:\tThe log message of the merged revision, as it was entered.\r\n"
+#~ "{msgoneline}:\tThe log message force onto one line\r\n"
+#~ "{author}:\tThe author of the merged revision\r\n"
+#~ "{rev}:\tThe merged revision itself\r\n"
+#~ "{bugid}:\tThe bug ids of the merged revision"
+#~ msgstr ""
+#~ "Angiver hvordan teksten for hver flettet revision skal se ud.\n"
+#~ "Følgende nøgleord kan bruges:\n"
+#~ "{msg}:\tLog beskeden for den flettede revision, som den blev skrevet "
+#~ "oprindeligt.\n"
+#~ "{msgoneline}:\tLog beskeden skrevet på en linie\n"
+#~ "{author}:\tForfatteren af den flettede revision\n"
+#~ "{rev}:\tDen flettede revison\n"
+#~ "{bugid}:\tFejl-dentifikationerne for den flettede revision."
+
+#~ msgid "Start registry editor"
+#~ msgstr "Start registry editor"
+
+#~ msgid "Starting externals..."
+#~ msgstr "Starter eksterne..."
+
+#~ msgid "Style"
+#~ msgstr "Stil"
+
+#~ msgid "Switch between single and double pane view"
+#~ msgstr "Skift mellem enkelt og dobbelt panel visning"
+
+#~ msgid "Switch left and right view"
+#~ msgstr "Skift om på venstre og højre visning"
+
+#~ msgid ""
+#~ "The file\n"
+#~ "%s\n"
+#~ "is not a valid text file!"
+#~ msgstr ""
+#~ "Filen\n"
+#~ "%s\n"
+#~ "er ikke en valid tekst fil!"
+
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Linienummeret skal ligge mellem %d og %d"
+
+#~ msgid ""
+#~ "There are currently %d overlay handlers installed besides the ones "
+#~ "Tortoise uses."
+#~ msgstr ""
+#~ "Der er for øjeblikket %d overlejringer installeret ud over den som "
+#~ "Tortoise anvender."
+
+#~ msgid ""
+#~ "This commit is not recursive, and there are moved/renamed/copied folders "
+#~ "selected for commit. Such moves/renames are always performed recursively "
+#~ "in the repository. Do you want to commit anyway?"
+#~ msgstr ""
+#~ "Denne arkivering er ikke rekursiv og nogle af de valgte foldere er blevet "
+#~ "flyttet, omdøbt eller kopieret. Sådanne ændringer vil altid blive udført "
+#~ "rekursivt i arkivet. Ønsker du at arkivere alligevel?"
+
+#~ msgid ""
+#~ "This commit is not recursive, and there are moved/renamed/copied\n"
+#~ "folders selected for commit. Such moves/renames\n"
+#~ "are always performed recursively in the repository.\n"
+#~ "\n"
+#~ "Do you want to commit anyway?"
+#~ msgstr ""
+#~ "Denne arkivering er ikke rekursiv og nogle af de valgte foldere er blevet "
+#~ "flyttet, omdøbt eller kopieret. Sådanne ændringer vil altid blive udført "
+#~ "rekursivt i arkivet.\n"
+#~ "\n"
+#~ "Ønsker du at arkivere alligevel?"
+
+#~ msgid ""
+#~ "This error was generated by a custom hook script on the Subversion "
+#~ "server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Denne fejl blev generet af et tilpasset tilkoblings-script på Subversion "
+#~ "serveren. Kontakt venligst din server administrator for hjælp til at løse "
+#~ "problemet."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-commit hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Denne fejl blev generet af et tilpasset post-commit tilkoblings-script på "
+#~ "Subversion serveren. Kontakt venligst din server administrator for hjælp "
+#~ "til at løse problemet."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-lock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Denne fejl blev generet af et tilpasset låsnings-tilkoblings-script på "
+#~ "Subversion serveren. Kontakt venligst din server administrator for hjælp "
+#~ "til at løse problemet."
+
+#~ msgid ""
+#~ "This error was generated by a custom post-unlock hook script on the "
+#~ "Subversion server.\n"
+#~ "Please contact your server administrator for help with resolving this "
+#~ "issue."
+#~ msgstr ""
+#~ "Denne fejl blev generet af et tilpasset oplåsnings-tilkoblings-script på "
+#~ "Subversion serveren. Kontakt venligst din server administrator for hjælp "
+#~ "til at løse problemet."
+
+#~ msgid ""
+#~ "This working copy has a client-side hook script configured. Do you want "
+#~ "this script to run?\n"
+#~ "The command line to run is:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Denne arbejdskopi har et klient-side tilkoblings-script tilknyttet. "
+#~ "Ønsker du at køre dette script? Kommandoen til at køre det er:\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "neon %s\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "neon %s\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
+
+#~ msgid ""
+#~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+#~ "recycle bin. The recycle bin currently contains %2!ld! items, which most "
+#~ "likely is the reason for this slowdown.\n"
+#~ "To fix this, you should empty the recycle bin now."
+#~ msgstr ""
+#~ "TortoiseSVN detekterede et stort tidsforbrug da %1!ld! elementer blev "
+#~ "flyttet til skraldespanden. Skraldespanden indeholder p.t. %2!ld! "
+#~ "elementer, hvilket sandsynligvis er årsagen til denne forsinkelse. For at "
+#~ "udbedre dette bør du tømme skraldespanden nu."
+
+#~ msgid "TortoiseSVN will not show the following overlays: %s"
+#~ msgstr "TortoiseSVN viser ikke følgende overlejringer: %s"
+
+#~ msgid "Undo"
+#~ msgstr "Gendan"
+
+#~ msgid ""
+#~ "Undo the last modifications\n"
+#~ "Undo"
+#~ msgstr ""
+#~ "Gendan de senete ændringer\n"
+#~ "Gendan"
+
+#~ msgid "Use 'mine' text block"
+#~ msgstr "Brug 'min' tekst blok"
+
+#~ msgid "Use 'mine' text block then 'theirs'"
+#~ msgstr "Brug først 'min' og dernæst 'deres' tekst blok"
+
+#~ msgid "Use 'theirs' text block"
+#~ msgstr "Brug 'deres' tekst blok"
+
+#~ msgid "Use 'theirs' text block then 'mine'"
+#~ msgstr "Brug først 'deres' og dernæst 'min' tekst blok"
+
+#~ msgid "Use Blocks"
+#~ msgstr "Brug blokke"
+
+#~ msgid "Use left block"
+#~ msgstr "Brug venstre blok"
 
 #~ msgid "Validation of the property value failed!"
 #~ msgstr "Validering af egenskabs-værdi fejlede!"
 
+#~ msgid "View"
+#~ msgstr "Visning"
+
+#~ msgid "Visual Studio 2005"
+#~ msgstr "Visual Studio 2005"
+
+#~ msgid "Visual Studio 2008"
+#~ msgstr "Visual Studio 2008"
+
+#~ msgid "WC Revision:"
+#~ msgstr "AK Revision:"
+
+#~ msgid ""
+#~ "When resolving conflicts, you always have to save even if there is no "
+#~ "conflict shown. TortoiseMerge can merge changes that SVN can't and won't "
+#~ "show a conflict for those!"
+#~ msgstr ""
+#~ "Når du løser konflikter skal du altid gemme, selv når der ikke er vist "
+#~ "nogen konflikter. TortoiseMerge kan flette ændringer som SVN må give op "
+#~ "over for og vil ikke vise en konflikt for disse."
+
+#~ msgid "Windows 2000"
+#~ msgstr "Windows 2000"
+
+#~ msgid "Windows 7"
+#~ msgstr "Windows 7"
+
+#~ msgid "Windows XP"
+#~ msgstr "Windows XP"
+
+#~ msgid "Wrap long lines"
+#~ msgstr "Ombryd lange linier"
+
+#~ msgid ""
+#~ "Wrap long lines at the right border of the view\n"
+#~ "Wrap long lines"
+#~ msgstr ""
+#~ "Ombryd lange linier ved højre kant af visningen\n"
+#~ "Ombryd lange linier"
+
 #~ msgid "all &revisions"
 #~ msgstr "alle &revisioner"
+
+#~ msgid "get HEAD revision:"
+#~ msgstr "vis HEAD revision:"
+
+#~ msgid "get repository root URLs:"
+#~ msgstr "hent versionsarkivets rod URL'er:"
+
+#~ msgid "last HEAD update: "
+#~ msgstr "sidste HEAD opdatering:"
+
+#~ msgid "locked (cleanup required):"
+#~ msgstr "låst (oprydning nødvendig):"
+
+#~ msgid "specific r&ange"
+#~ msgstr "specifikt &område"
 
 #~ msgid "user:bool"
 #~ msgstr "user:bool"
