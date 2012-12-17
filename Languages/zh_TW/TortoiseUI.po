@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-12-05 13:20+0000\n"
+"PO-Revision-Date: 2012-12-16 14:27+0000\n"
 "Last-Translator: zcecil <zcecil@csie.org>\n"
 "Language-Team: Chinese (Taiwan) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8075,7 +8075,7 @@ msgstr "重新整合合併"
 #. Resource IDs: (230)
 #, c-format
 msgid "Reintegrate merge %1!s! into %2!s!"
-msgstr "重新合併 %1!s! 至 %2!s!"
+msgstr "重新整合 %1!s! 至 %2!s!"
 
 #. Resource IDs: (82)
 msgid "Reject"
@@ -13066,6 +13066,12 @@ msgstr "{BugTraq}"
 #~ msgid "Aqua Style"
 #~ msgstr "Aqua 樣式"
 
+#~ msgid "Auto-Merge"
+#~ msgstr "自動合併"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "自動合併 %1!s! 至 %2!s!"
+
 #~ msgid "Backwards in browsing history"
 #~ msgstr "在瀏覽紀錄中向後"
 
@@ -13166,6 +13172,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Do not ask again for this script"
 #~ msgstr "不再詢問"
+
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "重新整合/不使用自動合併"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "要載入變更過的檔案嗎?"
@@ -13386,6 +13395,9 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Peg"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr "正在確認合併的參數, 請稍候"
+
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "預先載入目錄以加速瀏覽"
 
@@ -13397,6 +13409,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Previous inline difference"
 #~ msgstr "上一個行內差異"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "重新合併分支/自動合併(&R)"
 
 #~ msgid "Recycle bin"
 #~ msgstr "資源回收筒"
@@ -13531,6 +13546,18 @@ msgstr "{BugTraq}"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "行號必須在 %d 到 %d 之間"
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like, and the \"only record "
+#~ "the merge\" option can not be used."
+#~ msgstr "必須的自動合併方式類似重新整合, 不能使用「僅紀錄合併」的選項."
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like.\n"
+#~ "Only the merge depth option \"Working copy\" can be used."
+#~ msgstr ""
+#~ "必須的自動合併方式類似重新整合.\n"
+#~ "僅能使用「工作複本」的合併深度選項."
 
 #~ msgid ""
 #~ "There are currently %d overlay handlers installed besides the ones "
@@ -13727,6 +13754,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "get repository root URLs:"
 #~ msgstr "取得檔案庫最上層 URL:"
+
+#~ msgid "include properties"
+#~ msgstr "包含性質"
 
 #~ msgid "last HEAD update: "
 #~ msgstr "上次 HEAD 更新:"
