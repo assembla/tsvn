@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2010-2011 - TortoiseSVN
+// Copyright (C) 2010-2012 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -724,5 +724,18 @@ svn_tristate_t ShellCache::CPathFilter::IsPathAllowed (LPCTSTR path) const
 {
     if (path == NULL)
         return svn_tristate_unknown;
+    // always ignore the recycle bin
+    PTSTR pFound = StrStrI(path, L":\\RECYCLER");
+    if (pFound != NULL)
+    {
+        if ((*(pFound + 10) == '\0') || (*(pFound + 10) == '\\'))
+            return svn_tristate_false;
+    }
+    pFound = StrStrI(path, L":\\$Recycle.Bin");
+    if (pFound != NULL)
+    {
+        if ((*(pFound + 14) == '\0') || (*(pFound + 10) == '\\'))
+            return svn_tristate_false;
+    }
     return IsPathAllowed (path, data.begin(), data.end());
 }
