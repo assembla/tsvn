@@ -23,8 +23,6 @@
           <Merge Id='MFC' Language='0' SourceFile='$(env.MergeModules)\Microsoft_VC$(env.VCVERSION)_MFC_x64.msm' DiskId='1' />
           <Merge Id='MFCLOC' Language='0' SourceFile='$(env.MergeModules)\Microsoft_VC$(env.VCVERSION)_MFCLOC_x64.msm' DiskId='1' />
           <Merge Id='CRT32' Language='0' SourceFile='$(env.MergeModules)\Microsoft_VC$(env.VCVERSION)_CRT_x86.msm' DiskId='1' />
-          <Merge Id='MFC32' Language='0' SourceFile='$(env.MergeModules)\Microsoft_VC$(env.VCVERSION)_MFC_x86.msm' DiskId='1' />
-          <Merge Id='MFCLOC32' Language='0' SourceFile='$(env.MergeModules)\Microsoft_VC$(env.VCVERSION)_MFCLOC_x86.msm' DiskId='1' />
           <?endif ?>
 
           <?if $(env.Platform) = "win32" ?>
@@ -1096,7 +1094,7 @@
             <Component Id="C__PlatformSettingsShortcuts" Guid="$(var.GuidPlatformSettingsShortcuts)" Win64="$(var.Win64YesNo)">
               <RegistryValue Root="HKCU" Key="Software\TortoiseSVN" KeyPath="yes" Name="TortoiseSVN" Value="TortoiseSVN" Type="string" />
               <Condition>VersionNT64</Condition>
-              <Shortcut Id="S__PlatformConfig" Directory="D_TortoisePrgMenu" Name="Settings $(var.PlatformUserVisible)" Advertise="no"
+              <Shortcut Id="S__PlatformConfig" Directory="D_TortoisePrgMenu" Name="Settings" Advertise="no"
               Target="[INSTALLDIR]bin\TortoiseProc.exe" Description="TortoiseSVN" Arguments="/command:settings" Show="normal" />
             </Component>
 
