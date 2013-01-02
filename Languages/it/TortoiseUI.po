@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-12-16 08:40+0000\n"
+"PO-Revision-Date: 2013-01-02 08:34+0000\n"
 "Last-Translator: bovirus <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13384,6 +13384,21 @@ msgstr "{BugTraq}"
 #~ "%1!s!\r\n"
 #~ "Totale %2!d! file e %3!d! cartelle, %4!d! elementi in totale"
 
+#~ msgid "%s (recursively)"
+#~ msgstr "%s (ricorsivamente)"
+
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, ma la cartella è stata spostata altrove"
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, ma la cartella è stata spostata qui"
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, ma il file è stata spostato altrove"
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, ma il file è stata spostato qui"
+
 #~ msgid "&All"
 #~ msgstr "&Tutto"
 
@@ -13411,8 +13426,20 @@ msgstr "{BugTraq}"
 #~ msgid "&Operative:"
 #~ msgstr "&Operativi:"
 
+#~ msgid "&Other"
+#~ msgstr "Altr&o"
+
 #~ msgid "&Peg:"
 #~ msgstr "&Peg:"
+
+#~ msgid ""
+#~ "Added the file pattern(s)\n"
+#~ "%s\n"
+#~ "to the global ignore list."
+#~ msgstr ""
+#~ "Aggiunta la maschera\n"
+#~ "%s\n"
+#~ "all'elenco globale ignorati."
 
 #~ msgid "Adjust to HEAD revision"
 #~ msgstr "Adatta a revisione HEAD"
@@ -13428,6 +13455,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Tema acqua"
+
+#~ msgid "Auto-Merge"
+#~ msgstr "Unione automatica"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "Unisci automaticamente %1!s! a %2!s!"
 
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Indietro nella cronologia navigazione"
@@ -13477,6 +13510,17 @@ msgstr "{BugTraq}"
 #~ msgid "Color by au&thor"
 #~ msgstr "Colore in base all'au&tore"
 
+#~ msgid ""
+#~ "Command Line To Execute:\r\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%, or %REPOROOT+% "
+#~ "deeper down the working copy root."
+#~ msgstr ""
+#~ "Linea di comando da eseguire:\r\n"
+#~ "Per specificare un percorso all'interno della copia di lavoro, specifica "
+#~ "la URL nel repository con la URL radice del repository come %REPOROOT%, o "
+#~ "%REPOROOT+% un livello inferiore alla radice della copia lavoro."
+
 #~ msgid "Compare two files"
 #~ msgstr "Compara due file"
 
@@ -13521,6 +13565,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Non chiedere nuovamente per questo script"
+
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Effettua reintegrazione invece di unione automatica"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Caricare i file modificati?"
@@ -13642,6 +13689,9 @@ msgstr "{BugTraq}"
 #~ "Lascia come in conflitto\n"
 #~ "Lo stato conflitto del file è mantenuto"
 
+#~ msgid "Left local modifications"
+#~ msgstr "Modifiche a sinsistra in locale"
+
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Come soprastante, ma usato per il ripristino unioni"
 
@@ -13669,6 +13719,9 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "&Agganci locali"
 
+#~ msgid "Lock broken"
+#~ msgstr "Blocco interrotto"
+
 #~ msgid "Main"
 #~ msgstr "Principale"
 
@@ -13684,6 +13737,23 @@ msgstr "{BugTraq}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Unisci revisioni {revrange} da {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Spostato da\r\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Spostatto da\r\n"
+#~ "%s"
+
+#~ msgid "Name"
+#~ msgstr "Nome"
 
 #~ msgid "Navigate"
 #~ msgstr "Naviga"
@@ -13703,6 +13773,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "Next inline difference"
 #~ msgstr "Differenza inline successiva"
+
+#~ msgid ""
+#~ "Notice: if you upgrade your working copy, you won't be able to access the "
+#~ "upgraded working copy with pre 1.8 SVN clients anymore!\n"
+#~ "Do you really want to upgrade this working copy?"
+#~ msgstr ""
+#~ "Nota: se aggiorni la copia di lavoro, non avrai più accesso alla copia "
+#~ "aggiornata usando cliente pre 1.8 SVN!\n"
+#~ "Vuoi effettuare l'aggiornamento della copia di lavoro?"
 
 #~ msgid "Office 2003"
 #~ msgstr "Office 2003"
@@ -13732,6 +13811,9 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Peg"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr "Attendi mentre controllo i parametri per l'unione."
+
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Caricamento anticipato cartelle per navigazione rapida"
 
@@ -13744,8 +13826,20 @@ msgstr "{BugTraq}"
 #~ msgid "Previous inline difference"
 #~ msgstr "Differenza inline precedente"
 
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "R&eingra un ramo/unione automatica"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Cestino"
+
+#~ msgid ""
+#~ "Removed the file pattern(s)\n"
+#~ "%s\n"
+#~ "from the global ignore list."
+#~ msgstr ""
+#~ "Rimuovi file maschera\n"
+#~ "%s\n"
+#~ "dall'elenco globle ignorati."
 
 #~ msgid "Repository browser"
 #~ msgstr "Navigatore repository"
@@ -13811,6 +13905,12 @@ msgstr "{BugTraq}"
 #~ msgid "Silver Style"
 #~ msgstr "Tema argento"
 
+#~ msgid "Skipped, access denied"
+#~ msgstr "Ignorato, accesso negato"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Ignorato, rimane in conflitto"
+
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
 #~ "Do you want to load the changes?"
@@ -13869,6 +13969,20 @@ msgstr "{BugTraq}"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Il numero linea deve essere compreso tra %d e %d"
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like, and the \"only record "
+#~ "the merge\" option can not be used."
+#~ msgstr ""
+#~ "L'unione automatica richiesta è tipo una reingrazione, e può essre usata "
+#~ "solo l'opzione \"only record the merge\" ."
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like.\n"
+#~ "Only the merge depth option \"Working copy\" can be used."
+#~ msgstr ""
+#~ "L'unione automatica richiesta è tipo una reintegrazione.\n"
+#~ "Può essere usata solo l'opzione \"Working copy\" come profondità unione."
 
 #~ msgid ""
 #~ "There are currently %d overlay handlers installed besides the ones "
@@ -13944,6 +14058,13 @@ msgstr "{BugTraq}"
 #~ "problema."
 
 #~ msgid ""
+#~ "This will upgrade your working copy to the new 1.8 format and make it "
+#~ "unusable for older clients."
+#~ msgstr ""
+#~ "Questo aggiornerà la copia di lavoro al nuovo formato 1.8 e la renderà "
+#~ "non usabile per i client pre 1.8."
+
+#~ msgid ""
 #~ "This working copy has a client-side hook script configured. Do you want "
 #~ "this script to run?\n"
 #~ "The command line to run is:\n"
@@ -13953,6 +14074,23 @@ msgstr "{BugTraq}"
 #~ "Avviare ora lo script?\n"
 #~ "La linea di comando da eseguire è:\n"
 #~ "%s"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversione %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
 
 #~ msgid ""
 #~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
@@ -13968,6 +14106,9 @@ msgstr "{BugTraq}"
 #~ msgid "TortoiseSVN will not show the following overlays: %s"
 #~ msgstr "TortoiseSVN non visualizzerà i seguenti overlay: %s"
 
+#~ msgid "Type"
+#~ msgstr "Tipo"
+
 #~ msgid "Undo"
 #~ msgstr "Annulla modifiche"
 
@@ -13977,6 +14118,13 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Annulla l'ultima modifica\n"
 #~ "Annulla modifica"
+
+#~ msgid ""
+#~ "Upgrade the working copy\n"
+#~ "to the new 1.8 format."
+#~ msgstr ""
+#~ "Aggiorna la copia di lavoro\n"
+#~ "al nuovo formato 1.8."
 
 #~ msgid "Use 'mine' text block"
 #~ msgstr "Usa i 'miei' blocchi di testo"
@@ -14048,6 +14196,9 @@ msgstr "{BugTraq}"
 #~ msgid "get repository root URLs:"
 #~ msgstr "ottieni URL radice repository:"
 
+#~ msgid "include properties"
+#~ msgstr "includi proprietà"
+
 #~ msgid "last HEAD update: "
 #~ msgstr "ultimo aggiornamento INTESTAZIONE:"
 
@@ -14056,6 +14207,28 @@ msgstr "{BugTraq}"
 
 #~ msgid "specific r&ange"
 #~ msgstr "inter&vallo specifico"
+
+#~ msgid ""
+#~ "svn:auto-props\r\n"
+#~ "A list of properties separated by newlines which get applied recursively "
+#~ "automatically when adding/importing files.\r\n"
+#~ "Format: <filemask> = property=value;property=value\r\n"
+#~ "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+#~ msgstr ""
+#~ "svn:auto-props\r\n"
+#~ "Un elenco di proprietà, separate da un ritorno a capo, che verranno "
+#~ "applicate ricorsivamente e automaticamente quando si aggiungono/importano "
+#~ "file.\r\n"
+#~ "Formato: <maschera file> = propietà=valore;proprietà=valore\r\n"
+#~ "Esempio: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+
+#~ msgid ""
+#~ "svn:global-ignores\r\n"
+#~ "A newline separated list of file patterns to ignore recursively."
+#~ msgstr ""
+#~ "svn:global-ignores\r\n"
+#~ "Un elenco separato da ritorni a capo di maschere da ignorare "
+#~ "ricorsivamente."
 
 #~ msgid "user:bool"
 #~ msgstr "utente:booleana"

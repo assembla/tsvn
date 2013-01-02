@@ -12,6 +12,7 @@
 # Translators:
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # Lübbe Onken <l.onken@rac.de>, 2011-2012.
+# Lübbe Onken <l.onken@rac.de>, 2011-2012, 2013.
 # <peu@rekoba.de>, 2012.
 #   <peu@rekoba.de>, 2012.
 # Stefan Kueng <tortoisesvn@gmail.com>, 2011.
@@ -20,7 +21,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-11-19 08:36+0000\n"
+"PO-Revision-Date: 2013-01-02 10:29+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: German <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -29112,6 +29113,21 @@ msgstr ""
 #~ "Arbeitskopie heraus gestartet. Wenn Sie die URL des Projektarchivs direkt "
 #~ "eingeben steht die Funktion nicht zur Verfügung."
 
+#~ msgid ""
+#~ "This ignore pattern will affect all your projects. It is not versioned, "
+#~ "so it will not affect other users. By contrast you can also use the "
+#~ "versioned <literal>svn:ignore</literal> or <literal>svn:global-ignores</"
+#~ "literal> property to exclude files or directories from version control. "
+#~ "Read <xref linkend=\"tsvn-dug-ignore\"/> for more information."
+#~ msgstr ""
+#~ "Dieses Ausschluss-Muster beeinflusst alle Ihre Projekte. Es ist nicht "
+#~ "versioniert, also wird es keine anderen Anwender beeinflussen. Im "
+#~ "Gegensatz dazu können Sie auch die versionierte <literal>svn:ignore</"
+#~ "literal> oder <literal>svn:global-ignores</literal> Eigenschaft "
+#~ "verwenden, um Dateien oder Verzeichnisse von der Versionskontrolle "
+#~ "auszuschließen. Lesen Sie <xref linkend=\"tsvn-dug-ignore\"/> für weitere "
+#~ "Information."
+
 #~ msgid "TortoiseSVN Dialog Settings 3"
 #~ msgstr "TortoiseSVN Dialoge Seite 3"
 
@@ -29696,6 +29712,18 @@ msgstr ""
 #~ "Änderungen."
 
 #~ msgid ""
+#~ "Sometimes you will want to include another project within your working "
+#~ "copy, perhaps some library code. There are at least 4 ways of dealing "
+#~ "with this."
+#~ msgstr ""
+#~ "Manchmal möchten Sie ein anderes Projekt, vielleicht eine Bibliothek, in "
+#~ "ihre Arbeitskopie einbinden. Es gibt mindestens vier Methoden, damit "
+#~ "umzugehen."
+
+#~ msgid "Add the project to the repository"
+#~ msgstr "Das Projekt zum Projektarchiv hinzufügen"
+
+#~ msgid ""
 #~ "You can customize the MSI file if you wish so that all your users end up "
 #~ "with the same settings. TSVN settings are stored in the registry under "
 #~ "<filename>HKEY_CURRENT_USER\\Software\\TortoiseSVN</filename> and general "
@@ -29713,6 +29741,9 @@ msgstr ""
 #~ "Wenn Sie Hilfe bei der Anpassung von MSI Dateien benötigen, schauen Sie "
 #~ "in eines der <quote>MSI transform</quote> oder suchen Sie im Internet "
 #~ "nach <quote>MSI transform</quote>."
+
+#~ msgid "/skipprechecks"
+#~ msgstr "/skipprechecks"
 
 #~ msgid ""
 #~ "Opens the switch dialog. The <placeholder-1/> specifies the target "

@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-12-16 08:40+0000\n"
+"PO-Revision-Date: 2013-01-02 08:34+0000\n"
 "Last-Translator: Nikolay Osinin <nikolay.osinin@gmail.com>\n"
 "Language-Team: Russian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -229,72 +229,72 @@ msgstr "%s [Возвращено]"
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory already exists unversioned locally."
-msgstr "%s, но этот неверсированный элемент уже существует локально."
+msgstr "%s, но директория уже существует локально как неверсированная."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory is missing locally."
-msgstr "%s, но этот элемент локально отсутствует."
+msgstr "%s, но директория отсутствует локально."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was already added locally."
-msgstr "%s, но этот элемент был уже добавлен локально."
+msgstr "%s, но директория локально уже была добавлена."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was already edited."
-msgstr "%s, но этот элемент был уже отредактирован."
+msgstr "%s, но директория уже была отредактирована."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was deleted, moved or renamed locally."
-msgstr "%s, но этот элемент был удалён, перемещён или переименован локально."
+msgstr "%s, но директория локально была удалена, перемещена или переименована."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was obstructed in the working copy."
-msgstr "%s, но этот элемент был мешающим в рабочей копии."
+msgstr "%s, но директория была мешающей в рабочей копии."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was replaced"
-msgstr "%s, но локальный файл был уже отредактирован."
+msgstr "%s, но директория была заменена"
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file already exists unversioned locally."
-msgstr "%s, но этот неверсированный элемент уже существует локально."
+msgstr "%s, но файл уже существует локально как неверсированный."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file is missing locally."
-msgstr "%s, но этот элемент локально отсутствует."
+msgstr "%s, но файл отсутствует локально."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file was already added locally."
-msgstr "%s, но этот элемент был уже добавлен локально."
+msgstr "%s, но файл локально уже был добавлен."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file was already edited."
-msgstr "%s, но локальный файл был уже отредактирован."
+msgstr "%s, но файл уже был отредактирован."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file was deleted, moved or renamed locally."
-msgstr "%s, но этот элемент был удалён, перемещён или переименован локально."
+msgstr "%s, но файл локально был удалён, перемещён или переименован."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file was obstructed in the working copy."
-msgstr "%s, но этот элемент был мешающим в рабочей копии."
+msgstr "%s, но файл был мешающим в рабочей копии."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file was replaced"
-msgstr "%s, но локальный файл был уже отредактирован."
+msgstr "%s, но файл был заменён"
 
 #. Resource IDs: (376)
 #, c-format
@@ -13328,6 +13328,18 @@ msgstr "{СОП}"
 #~ msgid "%s (recursively)"
 #~ msgstr "%s (рекурсивно)"
 
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, но директория была перемещена"
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, но директория была перемещена сюда"
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, но файл был перемещён"
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, но файл был перемещён сюда"
+
 #~ msgid "&All"
 #~ msgstr "&Все"
 
@@ -13384,6 +13396,12 @@ msgstr "{СОП}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Аква стиль"
+
+#~ msgid "Auto-Merge"
+#~ msgstr "Автослияние"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "Слить автоматически %1!s! в %2!s!"
 
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Назад по истории просмотра"
@@ -13488,6 +13506,9 @@ msgstr "{СОП}"
 
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Не спрашивать больше для этого скрипта"
+
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Воссоединить вместо автоматического слияния"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Хотите ли загрузить измененные файлы?"
@@ -13609,6 +13630,9 @@ msgstr "{СОП}"
 #~ "Оставить конфликтующим\n"
 #~ "Файл сохраняется в статусе конфликта"
 
+#~ msgid "Left local modifications"
+#~ msgstr "Остались локальные изменения"
+
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Как и выше, но используется для обратного слияния"
 
@@ -13636,6 +13660,9 @@ msgstr "{СОП}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Локальные &обработчики"
 
+#~ msgid "Lock broken"
+#~ msgstr "Блокировка повреждена"
+
 #~ msgid "Main"
 #~ msgstr "Главный"
 
@@ -13651,6 +13678,20 @@ msgstr "{СОП}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Объединённые ревизии {revrange} из {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Перемещено из\r\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Перемещено в\r\n"
+#~ "%s"
 
 #~ msgid "Name"
 #~ msgstr "Имя"
@@ -13711,6 +13752,9 @@ msgstr "{СОП}"
 #~ msgid "Peg"
 #~ msgstr "Стержневая (peg)"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr "Подождите, пожайлуйста, пока мы проверим параметры слияния. "
+
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Предварительно выбирать папки для быстрого просмотра"
 
@@ -13722,6 +13766,9 @@ msgstr "{СОП}"
 
 #~ msgid "Previous inline difference"
 #~ msgstr "Предыдущее различие в строке"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "&Воссоединить ответвление / слить автоматически"
 
 #~ msgid "Recycle bin"
 #~ msgstr "Корзина"
@@ -13801,6 +13848,12 @@ msgstr "{СОП}"
 #~ msgid "Silver Style"
 #~ msgstr "Серебристый стиль"
 
+#~ msgid "Skipped, access denied"
+#~ msgstr "Пропущено, доступ запрещён"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Пропущено, остаётся в состоянии конфликта"
+
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
 #~ "Do you want to load the changes?"
@@ -13860,6 +13913,20 @@ msgstr "{СОП}"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Номер строки должен быть между %d и %d"
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like, and the \"only record "
+#~ "the merge\" option can not be used."
+#~ msgstr ""
+#~ "Требуемое автоматическое слияние похоже на воссоединение, и параметр "
+#~ "\"только зарегистрировать слияние\" не может быть использован."
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like.\n"
+#~ "Only the merge depth option \"Working copy\" can be used."
+#~ msgstr ""
+#~ "Требуемое автоматическое слияние похоже на воссоединение.\n"
+#~ "Может быть использован только параметр глубины слияния \"Рабочая копия\"."
 
 #~ msgid ""
 #~ "There are currently %d overlay handlers installed besides the ones "
@@ -14072,6 +14139,9 @@ msgstr "{СОП}"
 
 #~ msgid "get repository root URLs:"
 #~ msgstr "получить URL-адреса корня хранилища:"
+
+#~ msgid "include properties"
+#~ msgstr "включать свойства"
 
 #~ msgid "last HEAD update: "
 #~ msgstr "последнее обновление HEAD:"

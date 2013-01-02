@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-12-16 08:40+0000\n"
+"PO-Revision-Date: 2013-01-02 08:34+0000\n"
 "Last-Translator: Oto BREZINA <otik@e-posta.sk>\n"
 "Language-Team: Slovak <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13195,6 +13195,21 @@ msgstr "{BugTraq}"
 #~ "%1!s!\n"
 #~ "Zobrazovanie %2!d! súborov a %3!d! adresárov, celkom %4!d! objektov"
 
+#~ msgid "%s (recursively)"
+#~ msgstr "%s (rekurzívne)"
+
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, ale adresár bol presunutý inam"
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, ale bol sem presunutý adresár"
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, ale súbor bol presunutý inam"
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, ale bol sem presunutý súbor"
+
 #~ msgid "&All"
 #~ msgstr "&Všetko"
 
@@ -13222,6 +13237,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Operative:"
 #~ msgstr "&Operatívne:"
 
+#~ msgid "&Other"
+#~ msgstr "&Iné"
+
 #~ msgid "&Peg:"
 #~ msgstr "&Pripevniť:"
 
@@ -13239,6 +13257,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Vodný štýl"
+
+#~ msgid "Auto-Merge"
+#~ msgstr "Automaticky zlúčiť"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "Automaticky zlučiť %1!s! do %2!s!"
 
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Dopredu v historií prehliadania"
@@ -13332,6 +13356,9 @@ msgstr "{BugTraq}"
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Na tento sktript sa viac nepýtať"
 
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Aplikovať reintergaciu miesto automatického zlučovania"
+
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Chcete načítať zmenený súbor?"
 
@@ -13399,6 +13426,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Goto Line"
 #~ msgstr "Skočiť na riadok"
+
+#~ msgid "HEAD revision is %s"
+#~ msgstr "HEAD reviízia je %s"
 
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Skryť/zobraziť zoznam záplat v súbore"
@@ -13470,6 +13500,9 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Miestne &pripnuté sktripty"
 
+#~ msgid "Lock broken"
+#~ msgstr "Zámok zlomený"
+
 #~ msgid "Main"
 #~ msgstr "Hlavné"
 
@@ -13485,6 +13518,23 @@ msgstr "{BugTraq}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Zlúčené revízia(e) {revrange} do {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Presunuté z\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Presunuté do\n"
+#~ "%s"
+
+#~ msgid "Name"
+#~ msgstr "Meno"
 
 #~ msgid "Navigate"
 #~ msgstr "Navigácia"
@@ -13532,6 +13582,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Peg"
 #~ msgstr "Pripevniť"
+
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr "Prosím, počkajte kým skontrolujeme parametre na slučovanie"
 
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Prednačítať adresáre pre rýchlejšie prehliadanie"
@@ -13611,6 +13664,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Silver Style"
 #~ msgstr "Strieborný štýl"
+
+#~ msgid "Skipped, access denied"
+#~ msgstr "Preskočené, prístup zamietnutý"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Preskočené, ostáva v konflikte"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13745,6 +13804,9 @@ msgstr "{BugTraq}"
 #~ msgid "TortoiseSVN will not show the following overlays: %s"
 #~ msgstr "TortoiseSVN nezobrazí nasledovné prekrytia: %s"
 
+#~ msgid "Type"
+#~ msgstr "Typ"
+
 #~ msgid "Undo"
 #~ msgstr "Vrátiť"
 
@@ -13754,6 +13816,13 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Vrátiť poslednú zmenu\n"
 #~ "Vrátiť"
+
+#~ msgid ""
+#~ "Upgrade the working copy\n"
+#~ "to the new 1.8 format."
+#~ msgstr ""
+#~ "Vynoviť pracovnú kópiu\n"
+#~ "do nového formátu 1.8."
 
 #~ msgid "Use 'mine' text block"
 #~ msgstr "Použiť blok \"Moje\""
@@ -13813,11 +13882,21 @@ msgstr "{BugTraq}"
 #~ msgid "get HEAD revision:"
 #~ msgstr "Získať HEAD (hlavnú) revíziu"
 
+#~ msgid "last HEAD update: "
+#~ msgstr "posledná aktualizácia HEAD:"
+
 #~ msgid "locked (cleanup required):"
 #~ msgstr "zamknuté (nevyhnuté vyčistiť):"
 
 #~ msgid "specific r&ange"
 #~ msgstr "zadaný &rozsah"
+
+#~ msgid ""
+#~ "svn:global-ignores\r\n"
+#~ "A newline separated list of file patterns to ignore recursively."
+#~ msgstr ""
+#~ "svn:global-ignores\n"
+#~ "Novzmi riadkami oddený zoznam vzorov mien súborov k rekurzívnemu ignorova"
 
 #~ msgid "user:bool"
 #~ msgstr "user:bool"

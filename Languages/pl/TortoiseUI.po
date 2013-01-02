@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-12-16 08:40+0000\n"
+"PO-Revision-Date: 2013-01-02 08:34+0000\n"
 "Last-Translator: Begina Felicysym <begina.felicysym@wp.eu>\n"
 "Language-Team: Polish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13343,6 +13343,18 @@ msgstr "{BugTraq}"
 #~ msgid "%s (recursively)"
 #~ msgstr "%s (rekurencyjnie)"
 
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, ale folder został przeniesiony gdzie indziej"
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, ale folder został przeniesiony tutaj"
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, ale plik został przeniesiony gdzie indziej"
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, ale plik został przeniesiony tutaj"
+
 #~ msgid "&All"
 #~ msgstr "Wsz&ystko"
 
@@ -13399,6 +13411,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Styl aqua"
+
+#~ msgid "Auto-Merge"
+#~ msgstr "Auto-Scalanie"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "Auto-scalenie %1!s! do %2!s!"
 
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Wstecz w historii przeglądania"
@@ -13503,6 +13521,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Nie pytaj więcej o ten skrypt"
+
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Wykonaj reintegrację zamiast automatycznego scalenia"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Czy chcesz wczytać zmienione pliki?"
@@ -13623,6 +13644,9 @@ msgstr "{BugTraq}"
 #~ "Pozostaw jako w stanie konfliktu\n"
 #~ "Oznaczenie konfliktu dla pliku zostaje zachowane"
 
+#~ msgid "Left local modifications"
+#~ msgstr "Pozostawiono zmiany lokalne"
+
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Jak powyżej, ale używane do scaleń odwróconych"
 
@@ -13650,6 +13674,9 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Lokalne przec&hwycenia"
 
+#~ msgid "Lock broken"
+#~ msgstr "Blokada złamana"
+
 #~ msgid "Main"
 #~ msgstr "Główna"
 
@@ -13665,6 +13692,20 @@ msgstr "{BugTraq}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Scalone wersje {revrange} z {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Przeniesiono z\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Przeniesiono do\n"
+#~ "%s"
 
 #~ msgid "Name"
 #~ msgstr "Nazwa"
@@ -13725,6 +13766,9 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Wieszakowa"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr "Poczekaj na sprawdzenie parametrów scalenia."
+
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Wstępnie pobieranie folderów w celu szybszego przeglądania"
 
@@ -13736,6 +13780,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Previous inline difference"
 #~ msgstr "Poprzednia różnica w linii"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "R&eintegruj gałąź / scal automatycznie"
 
 #~ msgid "Recycle bin"
 #~ msgstr "Kosz"
@@ -13813,6 +13860,12 @@ msgstr "{BugTraq}"
 #~ msgid "Silver Style"
 #~ msgstr "Styl srebrny"
 
+#~ msgid "Skipped, access denied"
+#~ msgstr "Pominięto, brak dostępu"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Pominięto, pozostaje w konflikcie"
+
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
 #~ "Do you want to load the changes?"
@@ -13870,6 +13923,20 @@ msgstr "{BugTraq}"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Numer linii musi być pomiędzy %d i %d"
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like, and the \"only record "
+#~ "the merge\" option can not be used."
+#~ msgstr ""
+#~ "Wymagane automatyczne scalenie jest jak reintegracja, przez co nie może "
+#~ "być użyta opcja \"tylko nagraj scalenie\"."
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like.\n"
+#~ "Only the merge depth option \"Working copy\" can be used."
+#~ msgstr ""
+#~ "Wymagane automatyczne scalenie jest jak reintegracja.\n"
+#~ "Może być użyta tylko wartość \"Kopia robocza\" dla głębokości scalenia."
 
 #~ msgid ""
 #~ "There are currently %d overlay handlers installed besides the ones "
@@ -14084,6 +14151,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "get repository root URLs:"
 #~ msgstr "pobierz URLe folderu głównego repozytorium:"
+
+#~ msgid "include properties"
+#~ msgstr "dołącz atrybuty"
 
 #~ msgid "last HEAD update: "
 #~ msgstr "Ostatnia aktualizacja HEAD:"

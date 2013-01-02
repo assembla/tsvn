@@ -13,14 +13,14 @@
 # Arith Hsu <arithmandar@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # Nick Vrvilo <nick@vrvilo.com>, 2011.
-#   <zcecil@csie.org>, 2011-2012.
+#   <zcecil@csie.org>, 2011-2013.
 # zcecil <zcecil@csie.org>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2012-12-16 14:27+0000\n"
+"PO-Revision-Date: 2013-01-02 08:33+0000\n"
 "Last-Translator: zcecil <zcecil@csie.org>\n"
 "Language-Team: Chinese (Taiwan) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1515,11 +1515,11 @@ msgstr "(無行號)"
 
 #. Resource IDs: (277)
 msgid "(no modification but copy created from here)"
-msgstr "(無修改但是複本自此建立)"
+msgstr "(無變更但是複本自此建立)"
 
 #. Resource IDs: (278)
 msgid "(no modification but relevant for working copy)"
-msgstr "(無修改但是與工作複本相關)"
+msgstr "(無變更但是與工作複本相關)"
 
 #. Resource IDs: (214)
 msgid "(no value)"
@@ -2804,7 +2804,7 @@ msgstr "檢查更新..."
 
 #. Resource IDs: (276)
 msgid "Check for &modifications"
-msgstr "檢查異動(&M)"
+msgstr "檢查變更(&M)"
 
 #. Resource IDs: (13)
 msgid "Check for modi&fications"
@@ -2812,7 +2812,7 @@ msgstr "檢查異動(&F)"
 
 #. Resource IDs: (65535)
 msgid "Check for modifications"
-msgstr "檢查異動"
+msgstr "檢查變更"
 
 #. Resource IDs: (65535)
 msgid "Check for updates"
@@ -2862,7 +2862,7 @@ msgstr "勾選可在記錄訊息中使用較簡短的日期及時間"
 
 #. Resource IDs: (2052)
 msgid "Check working copy for modifications"
-msgstr "檢查工作複本中的修改"
+msgstr "檢查工作複本中的變更"
 
 #. Resource IDs: (1504)
 msgid "Check:"
@@ -5699,7 +5699,7 @@ msgstr ""
 msgid ""
 "If you want to break the lock, use the 'Check For Modifications' dialog or "
 "the repository browser."
-msgstr "如果你想要破壞鎖定, 請使用檔案庫瀏覽器的「檢查異動」選項。"
+msgstr "如果你想要破壞鎖定, 請使用檔案庫瀏覽器的「檢查變更」選項。"
 
 #. Resource IDs: (563)
 msgid "Ignore"
@@ -6656,7 +6656,7 @@ msgstr "混合"
 
 #. Resource IDs: (208)
 msgid "Modification date"
-msgstr "修改日期"
+msgstr "變更日期"
 
 #. Resource IDs: (315)
 msgid "Modifications detected"
@@ -9303,7 +9303,7 @@ msgstr "在工具列上顯示畫面提示(&T)"
 
 #. Resource IDs: (32831)
 msgid "Show WC &modifications"
-msgstr "顯示工作複本修改(&M)"
+msgstr "顯示工作複本變更(&M)"
 
 #. Resource IDs: (2051)
 msgid "Show an overview of the whole graph"
@@ -9498,11 +9498,11 @@ msgstr "未壓縮的快取大小"
 
 #. Resource IDs: (564)
 msgid "Skip"
-msgstr "忽略"
+msgstr "略過"
 
 #. Resource IDs: (564)
 msgid "Skip all"
-msgstr "全部忽略"
+msgstr "全部略過"
 
 #. Resource IDs: (74)
 msgid "Skipped"
@@ -9510,15 +9510,15 @@ msgstr "略過"
 
 #. Resource IDs: (263)
 msgid "Skipped missing target"
-msgstr "已跳過的缺少目標"
+msgstr "已略過的缺少目標"
 
 #. Resource IDs: (265)
 msgid "Skipped obstructing working copy"
-msgstr "已忽略故障中的工作複本"
+msgstr "已略過故障中的工作複本"
 
 #. Resource IDs: (265)
 msgid "Skipped, no versioned parent"
-msgstr "已忽略, 無版本控制的上層."
+msgstr "上層目錄無版本控制, 已略過"
 
 #. Resource IDs: (1070)
 msgid "Slide"
@@ -10499,14 +10499,14 @@ msgstr "目標工作目錄 '%s' 已有本地變更. 建議先送交變更之後�
 
 #. Resource IDs: (279)
 msgid "The target working copy has local modifications!"
-msgstr "目標工作複本含有本地異動!"
+msgstr "目標工作複本含有本地變更!"
 
 #. Resource IDs: (279)
 msgid ""
 "The target working copy has local modifications.\n"
 "Do you want to merge anyway?"
 msgstr ""
-"目標工作複本含有本地異動!\n"
+"目標工作複本含有本地變更!\n"
 "是否確定要合併?"
 
 #. Resource IDs: (195)
@@ -11942,7 +11942,7 @@ msgid ""
 "Lowest revision in working copy: %1!ld!\n"
 "Path: %2!s!"
 msgstr ""
-"您的工作複本已經有修改.\n"
+"您的工作複本已經有變更.\n"
 "工作複本中最低的版號是: %1!ld!\n"
 "路徑: %2!s!"
 
@@ -11953,7 +11953,7 @@ msgid ""
 "working copy\n"
 "won't look exactly as it was in the revision you're updating to!"
 msgstr ""
-"您的工作複本已有異動!\n"
+"您的工作複本已有變更!\n"
 "注意:更新至其它版本不會失去目前工作複本的變更.\n"
 "所以更新後不會得到與目標版本完全相同的檔案!"
 
@@ -11963,8 +11963,8 @@ msgid ""
 "If you branch/tag from the HEAD revision, your local changes won't\n"
 "show up in the branch/tag!"
 msgstr ""
-"您的工作複本有本地端的更動.\n"
-"如果您從 HEAD 版本分支或標記, 本地的更動將\n"
+"您的工作複本有本地端的變更.\n"
+"如果您從 HEAD 版本分支或標記, 本地的變更將\n"
 "不會作用在檔案庫中!"
 
 #. Resource IDs: (221)
@@ -12694,7 +12694,7 @@ msgstr "工作複本是這個版本"
 
 #. Resource IDs: (583)
 msgid "there are conflicting modifications."
-msgstr "有衝突的更動."
+msgstr "有變更發生衝充."
 
 #. Resource IDs: (3845)
 #, c-format
@@ -12862,9 +12862,9 @@ msgid ""
 "Use this as a log message template for property modifications for users to "
 "fill in."
 msgstr ""
-"tsvn:logtemplatepropset\r\n"
-"自動加入記錄訊息對話框中的字串.\r\n"
-"可以用作讓使用者修改屬性時填寫的記錄訊息模板."
+"tsvn:logtemplatepropset\n"
+"自動加入記錄訊息對話框中的字串.\n"
+"可以用作讓使用者變更屬性時填寫的記錄訊息模板."
 
 #. Resource IDs: (578)
 msgid ""
@@ -13009,6 +13009,18 @@ msgstr "{BugTraq}"
 #~ msgid "%s (recursively)"
 #~ msgstr "%s (包含子項目)"
 
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, 但是目錄已經被移走了."
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, 但是目錄已被移到此處."
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, 但是檔案已經被移走了."
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, 但是檔案已經被移到此處."
+
 #~ msgid "&All"
 #~ msgstr "選擇全部(&A)"
 
@@ -13086,7 +13098,7 @@ msgstr "{BugTraq}"
 #~ "Local modifications are kept."
 #~ msgstr ""
 #~ "取消\n"
-#~ "保留本地端所做的修改。"
+#~ "保留本地端所做的變更。"
 
 #~ msgid ""
 #~ "Change the style of the application\n"
@@ -13294,6 +13306,9 @@ msgstr "{BugTraq}"
 #~ "保留衝突狀態\n"
 #~ "保留檔案的衝突狀態"
 
+#~ msgid "Left local modifications"
+#~ msgstr "左側本地端變更"
+
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "同上, 但是僅用在反向合併"
 
@@ -13320,6 +13335,9 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "本地掛勾指令(&H)"
 
+#~ msgid "Lock broken"
+#~ msgstr "鎖定已被破壞"
+
 #~ msgid "Main"
 #~ msgstr "主選單"
 
@@ -13335,6 +13353,20 @@ msgstr "{BugTraq}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "已合併版本 {revrange} 至 {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "自 %s\n"
+#~ "移動而來"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "往 %s\n"
+#~ "移動"
 
 #~ msgid "Name"
 #~ msgstr "名稱"
@@ -13488,6 +13520,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Silver Style"
 #~ msgstr "銀色樣式"
+
+#~ msgid "Skipped, access denied"
+#~ msgstr "存取被拒, 已略過"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "尚有衝突存在, 已略過"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13676,7 +13714,7 @@ msgstr "{BugTraq}"
 #~ "Undo the last modifications\n"
 #~ "Undo"
 #~ msgstr ""
-#~ "復原最近一次修改\n"
+#~ "復原最近一次變更\n"
 #~ "復原"
 
 #~ msgid ""
