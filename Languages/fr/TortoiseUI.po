@@ -11,7 +11,7 @@
 # Authors:
 # Translators:
 # Alexandre Paradis <paradial@hotmail.com>, 2011.
-# Christophe SAUVEUR <christophe@xhaleera.com>, 2012.
+# Christophe SAUVEUR <christophe@xhaleera.com>, 2012-2013.
 #   <christophe@xhaleera.com>, 2011, 2012.
 #   <gobes2@gmail.com>, 2011.
 # <grokwik@gmail.com>, 2011.
@@ -28,7 +28,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-01-02 08:33+0000\n"
+"PO-Revision-Date: 2013-01-05 16:01+0000\n"
 "Last-Translator: Christophe SAUVEUR <christophe@xhaleera.com>\n"
 "Language-Team: French <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13418,6 +13418,21 @@ msgstr "{BugTraq}"
 #~ "Affichage de %2!d! fichiers et de %3!d! dossiers, de %4!d! éléments au "
 #~ "total"
 
+#~ msgid "%s (recursively)"
+#~ msgstr "%s (récursivement)"
+
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, mais le répertoire a été déplacé ailleurs"
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, mais le répertoire a été déplacé ici"
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, mais le fichier a été déplacé ailleurs"
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, mais le fichier a été déplacé ici"
+
 #~ msgid "&All"
 #~ msgstr "&Tous"
 
@@ -13445,8 +13460,23 @@ msgstr "{BugTraq}"
 #~ msgid "&Operative:"
 #~ msgstr "&Opératif:"
 
+#~ msgid "&Other"
+#~ msgstr "&Autre"
+
 #~ msgid "&Peg:"
 #~ msgstr "&Piquet:"
+
+#~ msgid ""
+#~ "Added the file pattern(s)\n"
+#~ "%s\n"
+#~ "to the global ignore list."
+#~ msgstr ""
+#~ "A ajouté le(s) modèle(s) de fichiers\n"
+#~ "%s\n"
+#~ "à la liste globale à ignorer."
+
+#~ msgid "Adjust to HEAD revision"
+#~ msgstr "Adapter à la révision HEAD"
 
 #~ msgid "Always execute the script"
 #~ msgstr "Toujours exécuter le script"
@@ -13459,6 +13489,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Style Aqua"
+
+#~ msgid "Auto-Merge"
+#~ msgstr "Auto-Fusionner"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "Auto-fusionner %1!s! dans %2!s!"
 
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Reculer dans l'historique de navigation"
@@ -13517,6 +13553,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "En conflit (peut-être)"
 
+#~ msgid "Create intermediate folders"
+#~ msgstr "Créer des dossiers intermédiaires"
+
 #~ msgid "Create patch file"
 #~ msgstr "Créer un fichier de patch"
 
@@ -13551,8 +13590,20 @@ msgstr "{BugTraq}"
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Ne pas redemander pour ce script"
 
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Procéder à une réintégration au lieu d'une fusion automatique"
+
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Voulez-vous charger les files modifiés ?"
+
+#~ msgid ""
+#~ "Do you want to mark the file\n"
+#~ "%s\n"
+#~ "as resolved?"
+#~ msgstr ""
+#~ "Voulez-vous marquer le fichier\n"
+#~ "%s\n"
+#~ "comme résolu ?"
 
 #~ msgid ""
 #~ "Don't run\n"
@@ -13571,11 +13622,29 @@ msgstr "{BugTraq}"
 #~ "Référence externe \"%1!s!\"\n"
 #~ "Révision %2!s!"
 
+#~ msgid "Fetch HEAD revision and adjust to it"
+#~ msgstr "Récupèrer la révision HEAD et s'y adapter"
+
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Récupère le contenu des dossiers en arrière-plan pour que la navigation "
 #~ "soit plus rapide"
+
+#~ msgid "Fetching file list of source"
+#~ msgstr "Récupère la liste des fichiers de la source"
+
+#~ msgid "Fetching file list of target"
+#~ msgstr "Récupère la liste des fichiers de la destination"
+
+#~ msgid "File has no conflicts"
+#~ msgstr "Le fichier n'a pas de conflit"
+
+#~ msgid "Find &HEAD-Revision"
+#~ msgstr "Trouver la révision &HEAD"
+
+#~ msgid "Find HEAD revisions"
+#~ msgstr "Trouver les révisions HEAD"
 
 #~ msgid "Forwards in browsing history"
 #~ msgstr "Avancer dans l'historique de navigation"
@@ -13602,6 +13671,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Goto Line"
 #~ msgstr "Aller à la ligne"
+
+#~ msgid "HEAD revision is %s"
+#~ msgstr "La révision HEAD est %s"
 
 #~ msgid "Hide/Show the patch file list"
 #~ msgstr "Masquer / Afficher la liste fichier du patch"
@@ -13640,6 +13712,16 @@ msgstr "{BugTraq}"
 #~ msgid "Last changed revision:"
 #~ msgstr "Dernière révision modifiée :"
 
+#~ msgid ""
+#~ "Leave as conflicted\n"
+#~ "The conflict status of the file is kept"
+#~ msgstr ""
+#~ "Laisser comme conflictuel\n"
+#~ "Le statut de conflit du fichier est conservé"
+
+#~ msgid "Left local modifications"
+#~ msgstr "Modifications locales restantes"
+
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Comme ci-dessus, mais utilisé pour les fusions inversées"
 
@@ -13667,14 +13749,44 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "&Appels de script locaux"
 
+#~ msgid "Lock broken"
+#~ msgstr "Verrou cassé"
+
 #~ msgid "Main"
 #~ msgstr "Principal"
+
+#~ msgid ""
+#~ "Mark as resolved\n"
+#~ "The file status is changed to modified"
+#~ msgstr ""
+#~ "Marquer comme résolu\n"
+#~ "Le statut du fichier change pour modifié"
+
+#~ msgid "Mark missing files as removed"
+#~ msgstr "Marquer les fichiers manquants comme supprimés"
 
 #~ msgid "Merge Log &Templates"
 #~ msgstr "Fusionner les &Modèles de Journaux"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "A fusionné la(es) révision(s) {revrange} à partir de {mergeurl} :\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Déplacé depuis\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Déplacé vers\n"
+#~ "%s"
+
+#~ msgid "Name"
+#~ msgstr "Nom"
 
 #~ msgid "Navigate"
 #~ msgstr "Naviguer"
@@ -13694,6 +13806,16 @@ msgstr "{BugTraq}"
 
 #~ msgid "Next inline difference"
 #~ msgstr "Prochaine ligne différente"
+
+#~ msgid ""
+#~ "Notice: if you upgrade your working copy, you won't be able to access the "
+#~ "upgraded working copy with pre 1.8 SVN clients anymore!\n"
+#~ "Do you really want to upgrade this working copy?"
+#~ msgstr ""
+#~ "Note : si vous mettez à jour votre copie de travail, vous ne serez plus "
+#~ "en mesure d'accéder à la copie de travail actualisée avec des clients SVN "
+#~ "antérieur à la version 1.8 !\n"
+#~ "Voulez-vous vraiment mettre à jour la copie de travail ?"
 
 #~ msgid "Office 2003"
 #~ msgstr "Office 2003"
@@ -13723,6 +13845,11 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Piquet"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr ""
+#~ "Veuillez patienter pendant que nous vérifier les paramètres pour la "
+#~ "fusion."
+
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Pré-charger les dossiers pour une navigation plus rapide"
 
@@ -13735,8 +13862,20 @@ msgstr "{BugTraq}"
 #~ msgid "Previous inline difference"
 #~ msgstr "Précedente ligne différente"
 
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "Réintégr&er une branche / fusion automatique"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Corbeille"
+
+#~ msgid ""
+#~ "Removed the file pattern(s)\n"
+#~ "%s\n"
+#~ "from the global ignore list."
+#~ msgstr ""
+#~ "A supprimé le(s) modèle(s) de fichiers\n"
+#~ "%s\n"
+#~ "de la liste globale à ignorer."
 
 #~ msgid "Repository browser"
 #~ msgstr "Navigateur de dépôt"
@@ -13768,6 +13907,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Exécuter\n"
 #~ "Exécuter le script crocheté"
+
+#~ msgid "SVN &Vendorbranch here"
+#~ msgstr "Branche du &vendeur SVN ici"
 
 #~ msgid "SVN Export changed items here"
 #~ msgstr "Exporter les éléments modifiés du SVN ici"
@@ -13804,6 +13946,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Silver Style"
 #~ msgstr "Style Silver"
+
+#~ msgid "Skipped, access denied"
+#~ msgstr "Passé, accès refusé"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Passé, reste conflictuel"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13872,6 +14020,30 @@ msgstr "{BugTraq}"
 #~ "TortoiseSVN."
 
 #~ msgid ""
+#~ "This commit is not recursive, and there are moved/renamed/copied folders "
+#~ "selected for commit. Such moves/renames are always performed recursively "
+#~ "in the repository. Do you want to commit anyway?"
+#~ msgstr ""
+#~ "Ce dépôt n'est pas récursif, et il y a des répertoires déplacés/renommés/"
+#~ "copiés sélectionnés pour le dépôt. Ces déplacements/renommages sont "
+#~ "toujours appliqués récursivement dans le référentiel. Voulez-vous "
+#~ "procéder au dépôt tout de même ?"
+
+#~ msgid ""
+#~ "This commit is not recursive, and there are moved/renamed/copied\n"
+#~ "folders selected for commit. Such moves/renames\n"
+#~ "are always performed recursively in the repository.\n"
+#~ "\n"
+#~ "Do you want to commit anyway?"
+#~ msgstr ""
+#~ "Ce dépôt n'est pas récursif, et il y a des répertoires déplacés/renommés/"
+#~ "copiés\n"
+#~ "sélectionnés pour le dépôt. Ces déplacements/renommages\n"
+#~ "sont toujours appliqués récursivement dans le référentiel.\n"
+#~ "\n"
+#~ "Voulez-vous procéder au dépôt tout de même ?"
+
+#~ msgid ""
 #~ "This error was generated by a custom hook script on the Subversion "
 #~ "server.\n"
 #~ "Please contact your server administrator for help with resolving this "
@@ -13916,6 +14088,13 @@ msgstr "{BugTraq}"
 #~ "problème."
 
 #~ msgid ""
+#~ "This will upgrade your working copy to the new 1.8 format and make it "
+#~ "unusable for older clients."
+#~ msgstr ""
+#~ "Cela va mettre à jour votre copie de travail vers le nouveau format 1.8 "
+#~ "et la rendre inutilisable avec les anciens clients."
+
+#~ msgid ""
 #~ "This working copy has a client-side hook script configured. Do you want "
 #~ "this script to run?\n"
 #~ "The command line to run is:\n"
@@ -13925,6 +14104,23 @@ msgstr "{BugTraq}"
 #~ "vous exécuter ce script ?\n"
 #~ "La ligne de commande à exécuter est :\n"
 #~ "%s"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
 
 #~ msgid ""
 #~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
@@ -13941,6 +14137,9 @@ msgstr "{BugTraq}"
 #~ msgid "TortoiseSVN will not show the following overlays: %s"
 #~ msgstr "TortoiseSVN n'affichera pas les superpositions suivantes:%s"
 
+#~ msgid "Type"
+#~ msgstr "Type"
+
 #~ msgid "Undo"
 #~ msgstr "Annuler"
 
@@ -13950,6 +14149,13 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Annuler les dernières modifications\n"
 #~ "Annuler"
+
+#~ msgid ""
+#~ "Upgrade the working copy\n"
+#~ "to the new 1.8 format."
+#~ msgstr ""
+#~ "Mettre à jour la copie de travail\n"
+#~ "vers le nouveau format 1.8."
 
 #~ msgid "Use 'mine' text block"
 #~ msgstr "Utilisez 'mon' bloc de texte"
@@ -13972,6 +14178,9 @@ msgstr "{BugTraq}"
 #~ msgid "Validation of the property value failed!"
 #~ msgstr "La validation de la valeur de la propriété a échoué !"
 
+#~ msgid "Vendor branch"
+#~ msgstr "Branche du vendeur"
+
 #~ msgid "View"
 #~ msgstr "Vue"
 
@@ -13983,6 +14192,16 @@ msgstr "{BugTraq}"
 
 #~ msgid "WC Revision:"
 #~ msgstr "Révision de la CT :"
+
+#~ msgid ""
+#~ "When resolving conflicts, you always have to save even if there is no "
+#~ "conflict shown. TortoiseMerge can merge changes that SVN can't and won't "
+#~ "show a conflict for those!"
+#~ msgstr ""
+#~ "Lors de la résolution de conflits, vous devez toujours sauvegarder même "
+#~ "s'il n'y a pas de conflit affiché. TortoiseMerge peut fusionner des "
+#~ "modifications que SVN ne peut pas et ne montrera pas de conflit dans ces "
+#~ "cas-là !"
 
 #~ msgid "Windows 2000"
 #~ msgstr "Windows 2000"
@@ -14006,11 +14225,45 @@ msgstr "{BugTraq}"
 #~ msgid "all &revisions"
 #~ msgstr "toutes les &révisions"
 
+#~ msgid "get HEAD revision:"
+#~ msgstr "obtenir la révision HEAD :"
+
+#~ msgid "get repository root URLs:"
+#~ msgstr "obtenir les URLs de la racine du référentiel :"
+
+#~ msgid "include properties"
+#~ msgstr "inclure les propriétés"
+
+#~ msgid "last HEAD update: "
+#~ msgstr "Dernière mise à jour de HEAD :"
+
 #~ msgid "locked (cleanup required):"
 #~ msgstr "verrouillé (nettoyage requis) :"
 
 #~ msgid "specific r&ange"
 #~ msgstr "pl&age spécifique"
+
+#~ msgid ""
+#~ "svn:auto-props\r\n"
+#~ "A list of properties separated by newlines which get applied recursively "
+#~ "automatically when adding/importing files.\r\n"
+#~ "Format: <filemask> = property=value;property=value\r\n"
+#~ "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+#~ msgstr ""
+#~ "svn:auto-props\n"
+#~ "Une liste séparée par des sauts de lignes de propriétés qui seront "
+#~ "automatiquement appliquées récursivement lors de l'ajout / import de "
+#~ "fichiers.\n"
+#~ "Format : <filemask> = property=value;property=value\n"
+#~ "Exemple : *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+
+#~ msgid ""
+#~ "svn:global-ignores\r\n"
+#~ "A newline separated list of file patterns to ignore recursively."
+#~ msgstr ""
+#~ "svn:global-ignores\n"
+#~ "Une liste séparée par des sauts de ligne de modèles de fichiers à ignorer "
+#~ "récursivement."
 
 #~ msgid "user:bool"
 #~ msgstr "user:bool"

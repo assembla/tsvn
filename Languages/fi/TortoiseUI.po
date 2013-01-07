@@ -11,6 +11,7 @@
 # Authors:
 # Translators:
 # Kari Granö <kari.grano@gmail.com>, 2011-2012.
+# Kari Granö <kari.grano@gmail.com>, 2011-2012, 2013.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@googlemail.com>, 2012.
 msgid ""
@@ -18,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-01-02 08:33+0000\n"
+"PO-Revision-Date: 2013-01-05 23:00+0000\n"
 "Last-Translator: Kari Granö <kari.grano@gmail.com>\n"
 "Language-Team: Finnish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1908,9 +1909,9 @@ msgid ""
 "%s\n"
 "to the ignore list."
 msgstr ""
-"Lisätty tiedostonimihahmo(t)\n"
+"Tiedostonimilausekkeet\n"
 "%s\n"
-"ohituslistaan."
+"lisättiin ohituslistaan."
 
 #. Resource IDs: (263)
 msgid "Adding"
@@ -8403,9 +8404,9 @@ msgid ""
 "%s\n"
 "from the ignore list."
 msgstr ""
-"Lauseketta\n"
+"Tiedostolausekkeet\n"
 "%s\n"
-"vastaavat tiedostot poistettu ohituslistasta."
+"poistettiin ohituslistasta."
 
 #. Resource IDs: (17)
 msgid "Removes all unversioned and ignored items"
@@ -8866,11 +8867,11 @@ msgstr "SVN: Kopioi ja lisää tiedostot tähän työkopioon"
 
 #. Resource IDs: (16)
 msgid "SVN Copy and rename versioned item here"
-msgstr "SVN Kopioi ja uudelleennimeä versioitu kohde tänne"
+msgstr "SVN: Kopioi ja uudelleennimeä versioitu kohde tänne"
 
 #. Resource IDs: (13)
 msgid "SVN Copy versioned item(s) here"
-msgstr "SVN Kopioi versioidut kohteet tänne"
+msgstr "SVN: Kopioi versioidut kohteet tänne"
 
 #. Resource IDs: (14)
 msgid "SVN Export all items here"
@@ -8886,11 +8887,11 @@ msgstr "SVN-lukitus (paikallinen)"
 
 #. Resource IDs: (17)
 msgid "SVN Move and rename versioned item here"
-msgstr "SVN Siirrä ja uudelleennimeä versioidut kohteet tänne"
+msgstr "SVN: Siirrä ja uudelleennimeä versioidut kohteet tänne"
 
 #. Resource IDs: (12)
 msgid "SVN Move versioned item(s) here"
-msgstr "SVN Siirrä versioidut kohteet tänne"
+msgstr "SVN: Siirrä versioidut kohteet tänne"
 
 #. Resource IDs: (11)
 msgid "SVN Revision"
@@ -12827,7 +12828,7 @@ msgid ""
 "A newline separated list of file patterns to ignore."
 msgstr ""
 "svn:ignore\r\n"
-"Rivinvaihdoin eroteltu lista ohitettavista tiedostohahmoista."
+"Rivinvaihdoin eroteltu lista ohitettavista tiedostonimilausekkeista."
 
 #. Resource IDs: (317)
 msgid "svn:keywords"
@@ -13264,6 +13265,21 @@ msgstr "{BugTraq}"
 #~ "%1!s!\n"
 #~ "Näytetään %2!d! tiedostoa ja %3!d! kansiota (yhteensä %4!d!)"
 
+#~ msgid "%s (recursively)"
+#~ msgstr "%s (palautuvasti)"
+
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, mutta hakemisto oli siirretty pois"
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, mutta hakemisto oli siirretty tänne"
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, mutta tiedosto oli siirretty pois"
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, mutta tiedosto oli siirretty tänne"
+
 #~ msgid "&All"
 #~ msgstr "&Kaikki"
 
@@ -13291,8 +13307,20 @@ msgstr "{BugTraq}"
 #~ msgid "&Operative:"
 #~ msgstr "&Operatiivinen:"
 
+#~ msgid "&Other"
+#~ msgstr "&Muu"
+
 #~ msgid "&Peg:"
 #~ msgstr "&Ankkuri:"
+
+#~ msgid ""
+#~ "Added the file pattern(s)\n"
+#~ "%s\n"
+#~ "to the global ignore list."
+#~ msgstr ""
+#~ "Tiedostonimilausekkeet\n"
+#~ "%s\n"
+#~ "lisättiin globaaliin ohituslistaan."
 
 #~ msgid "Adjust to HEAD revision"
 #~ msgstr "Mukaudu HEAD-versioon"
@@ -13308,6 +13336,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Vesityyli"
+
+#~ msgid "Auto-Merge"
+#~ msgstr "Automaattinen yhdistäminen"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "%1!s! yhdistetty automaattisesti kohteeseen %2!s!"
 
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Taaksepäin selaushistoriassa"
@@ -13413,6 +13447,9 @@ msgstr "{BugTraq}"
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Älä kysy uudestaan tälle toimintokomennolle"
 
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Tee takaisinyhdistäminen automaattisen yhdistämisen sijaan"
+
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Haluatko noutaa muuttuneet tiedostot?"
 
@@ -13448,6 +13485,12 @@ msgstr "{BugTraq}"
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Noutaa kansioiden sisällöt taustalla käytön nopeuttamiseksi"
+
+#~ msgid "Fetching file list of source"
+#~ msgstr "Haetaan lähteen tiedostolista"
+
+#~ msgid "Fetching file list of target"
+#~ msgstr "Haetaan kohteen tiedostolista"
 
 #~ msgid "File has no conflicts"
 #~ msgstr "Tiedostolla ei ole ristiriitoja"
@@ -13531,6 +13574,9 @@ msgstr "{BugTraq}"
 #~ "Jätä ristiriitaiseksi\n"
 #~ "Tiedoston ristiriitatila säilytetään"
 
+#~ msgid "Left local modifications"
+#~ msgstr "Vasen paikalliset muutokset"
+
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Kuten yllä, mutta käytetään käänteiseen yhdistämiseen"
 
@@ -13558,6 +13604,9 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Paikalliset &toimintokomennot"
 
+#~ msgid "Lock broken"
+#~ msgstr "Lukko rikki"
+
 #~ msgid "Main"
 #~ msgstr "Main"
 
@@ -13568,11 +13617,28 @@ msgstr "{BugTraq}"
 #~ "Merkitse ratkaistuksi\n"
 #~ "Tiedosto merkitään muuttuneeksi"
 
+#~ msgid "Mark missing files as removed"
+#~ msgstr "Merkitse puuttuvat tiedostot poistetuiksi"
+
 #~ msgid "Merge Log &Templates"
 #~ msgstr "Yhdistämisloki&kaavaimet"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Yhdistettiin versio(t) {revrange} paikantimesta {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Siirretty paikasta\r\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Siirretty paikkaan\r\n"
+#~ "%s"
 
 #~ msgid "Name"
 #~ msgstr "Nimi"
@@ -13595,6 +13661,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "Next inline difference"
 #~ msgstr "Seuraava rivin sisäinen ero"
+
+#~ msgid ""
+#~ "Notice: if you upgrade your working copy, you won't be able to access the "
+#~ "upgraded working copy with pre 1.8 SVN clients anymore!\n"
+#~ "Do you really want to upgrade this working copy?"
+#~ msgstr ""
+#~ "Huomaa: Jos muunnat työkopiosi, et voi enää käyttää sitä versiota 1.8 "
+#~ "vanhemmilla SVN-ohjelmilla!\n"
+#~ "Haluatko todella muuntaa  tämän työkopion?"
 
 #~ msgid "Office 2003"
 #~ msgstr "Office 2003"
@@ -13624,6 +13699,9 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Ankkuri"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr "Odota hetki, tarkistetaan yhdistämiseparametreja."
+
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Nouda kansiot ennalta käytön nopeuttamiseksi"
 
@@ -13636,8 +13714,20 @@ msgstr "{BugTraq}"
 #~ msgid "Previous inline difference"
 #~ msgstr "Edellinen rivin sisäinen ero"
 
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "&Yhdistä haara takaisin päähaaraan / automaattinen yhdistäminen"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Roskakori"
+
+#~ msgid ""
+#~ "Removed the file pattern(s)\n"
+#~ "%s\n"
+#~ "from the global ignore list."
+#~ msgstr ""
+#~ "Tiedostolausekkeet\n"
+#~ "%s\n"
+#~ "poistettiin globaalista ohituslistasta."
 
 #~ msgid "Repository browser"
 #~ msgstr "Arkistoselain"
@@ -13668,6 +13758,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Suorita\n"
 #~ "Suorita toimintokomento"
+
+#~ msgid "SVN &Vendorbranch here"
+#~ msgstr "SVN: &Päivitä kirjastohaara tänne"
 
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN: Vie muutetut kohteet tänne"
@@ -13704,6 +13797,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Silver Style"
 #~ msgstr "Hopeinen tyyli"
+
+#~ msgid "Skipped, access denied"
+#~ msgstr "Ohitettu, pääsy evätty"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Ohitettu, säilyy ristiriitaisena"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13764,6 +13863,21 @@ msgstr "{BugTraq}"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Rivinumeron on oltava välillä %d - %d"
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like, and the \"only record "
+#~ "the merge\" option can not be used."
+#~ msgstr ""
+#~ "Tarvittava automaattinen yhdistäminen on takaisin yhdistämisen kaltainen, "
+#~ "eikä \"pelkkä yhdistämismerkintä\"-valintaa voida käyttää."
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like.\n"
+#~ "Only the merge depth option \"Working copy\" can be used."
+#~ msgstr ""
+#~ "Tarvittava automaattinen yhdistäminen on takaisin yhdistämisen "
+#~ "kaltainen.\n"
+#~ "\"Työkopio\" on ainoa mahdollinen yhdistämissyvyysvalinta."
 
 #~ msgid ""
 #~ "There are currently %d overlay handlers installed besides the ones "
@@ -13834,6 +13948,13 @@ msgstr "{BugTraq}"
 #~ "Ota yhteyttä palvelimen ylläpitoon ongelman ratkaisemikseksi."
 
 #~ msgid ""
+#~ "This will upgrade your working copy to the new 1.8 format and make it "
+#~ "unusable for older clients."
+#~ msgstr ""
+#~ "Työkopiosi muunnetaan uuteen 1.8-muotoon, jolloin vanhemmat SVN-ohjelmat "
+#~ "eivät enää voi käyttää sitä."
+
+#~ msgid ""
 #~ "This working copy has a client-side hook script configured. Do you want "
 #~ "this script to run?\n"
 #~ "The command line to run is:\n"
@@ -13888,6 +14009,13 @@ msgstr "{BugTraq}"
 #~ "Peru viimeisin muutos\n"
 #~ "Peru"
 
+#~ msgid ""
+#~ "Upgrade the working copy\n"
+#~ "to the new 1.8 format."
+#~ msgstr ""
+#~ "Muunna työkopio\n"
+#~ "uuteen 1.8-muotoon."
+
 #~ msgid "Use 'mine' text block"
 #~ msgstr "Käytä 'minun' tekstilohkoani"
 
@@ -13908,6 +14036,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Validation of the property value failed!"
 #~ msgstr "Ominaisuusarvon tarkistus epäonnistui!"
+
+#~ msgid "Vendor branch"
+#~ msgstr "Kirjastohaara"
 
 #~ msgid "View"
 #~ msgstr "Näkymä"
@@ -13958,6 +14089,9 @@ msgstr "{BugTraq}"
 #~ msgid "get repository root URLs:"
 #~ msgstr "hae arkiston juuripaikantimet:"
 
+#~ msgid "include properties"
+#~ msgstr "sisällytä ominaisuudet"
+
 #~ msgid "last HEAD update: "
 #~ msgstr "viimeisin HEAD-päivitys:"
 
@@ -13966,6 +14100,28 @@ msgstr "{BugTraq}"
 
 #~ msgid "specific r&ange"
 #~ msgstr "ertyinen &väli"
+
+#~ msgid ""
+#~ "svn:auto-props\r\n"
+#~ "A list of properties separated by newlines which get applied recursively "
+#~ "automatically when adding/importing files.\r\n"
+#~ "Format: <filemask> = property=value;property=value\r\n"
+#~ "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+#~ msgstr ""
+#~ "svn:autoprops\r\n"
+#~ "Luettelo rivinvaihdoin erotettuja ominaisuuksia, jotka otetaan "
+#~ "automaattisesti palautuvasti käyttöön lisättäessä/tuotaessa tiedostoja."
+#~ "\r\n"
+#~ "Muoto: <tiedostomääritys> = ominaisuus=arvo;ominaisuus=arvo\r\n"
+#~ "Esimerkki: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+
+#~ msgid ""
+#~ "svn:global-ignores\r\n"
+#~ "A newline separated list of file patterns to ignore recursively."
+#~ msgstr ""
+#~ "svn:global-ignores\r\n"
+#~ "Rivinvaihdoin eroteltu lista palautuvasti ohitettavista "
+#~ "tiedostonimilausekkeista."
 
 #~ msgid "user:bool"
 #~ msgstr "user:bool"
