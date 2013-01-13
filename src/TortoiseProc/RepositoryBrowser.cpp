@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2012 - TortoiseSVN
+// Copyright (C) 2003-2013 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -141,12 +141,13 @@ CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, CW
 void CRepositoryBrowser::ConstructorInit(const SVNRev& rev)
 {
     m_repository.revision = rev;
-    s_bSortLogical = !CRegDWORD(L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoStrCmpLogical", 0, false, HKEY_CURRENT_USER);
+    s_bSortLogical   = !CRegDWORD(L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoStrCmpLogical", 0, false, HKEY_CURRENT_USER);
     if (s_bSortLogical)
         s_bSortLogical = !CRegDWORD(L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoStrCmpLogical", 0, false, HKEY_LOCAL_MACHINE);
     std::fill_n(m_arColumnWidths, _countof(m_arColumnWidths), 0);
     m_bFetchChildren = !!CRegDWORD(L"Software\\TortoiseSVN\\RepoBrowserPrefetch", true);
     m_bShowExternals = !!CRegDWORD(L"Software\\TortoiseSVN\\RepoBrowserShowExternals", true);
+    m_bShowLocks     = !!CRegDWORD(L"Software\\TortoiseSVN\\RepoBrowserShowLocks", true);
 }
 
 CRepositoryBrowser::~CRepositoryBrowser()
@@ -1147,10 +1148,13 @@ void CRepositoryBrowser::FillList(CTreeItem * pTreeItem)
     // column 5: date
     temp.LoadString(IDS_LOG_DATE);
     m_RepoList.InsertColumn(c++, temp, LVCFMT_LEFT, LVSCW_AUTOSIZE_USEHEADER);
-    //
-    // column 6: lock owner
-    temp.LoadString(IDS_STATUSLIST_COLLOCK);
-    m_RepoList.InsertColumn(c++, temp, LVCFMT_LEFT, LVSCW_AUTOSIZE_USEHEADER);
+    if (m_bShowLocks)
+    {
+        //
+        // column 6: lock owner
+        temp.LoadString(IDS_STATUSLIST_COLLOCK);
+        m_RepoList.InsertColumn(c++, temp, LVCFMT_LEFT, LVSCW_AUTOSIZE_USEHEADER);
+    }
 
     // special case: error to show
     if (!pTreeItem->error.IsEmpty() && pTreeItem->children.empty())
@@ -4321,8 +4325,11 @@ void CRepositoryBrowser::SetListItemInfo( int index, const CItem * it )
         SVN::formatDate(date_native, (apr_time_t&)it->time, true);
     m_RepoList.SetItemText(index, 5, date_native);
 
-    // lock owner
-    m_RepoList.SetItemText(index, 6, it->lockowner);
+    if (m_bShowLocks)
+    {
+        // lock owner
+        m_RepoList.SetItemText(index, 6, it->lockowner);
+    }
 }
 
 

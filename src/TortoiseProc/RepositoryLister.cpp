@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2009-2012 - TortoiseSVN
+// Copyright (C) 2009-2013 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,6 +34,9 @@
 /////////////////////////////////////////////////////////////////////
 
 // auto-schedule upon construction
+
+CRegDWORD fetchingLocksEnabled(_T("Software\\TortoiseSVN\\RepoBrowserShowLocks"), TRUE);
+
 
 CRepositoryLister::CQuery::CQuery
     ( const CTSVNPath& path
@@ -158,7 +161,8 @@ BOOL CRepositoryLister::CListQuery::Cancel()
 
 void CRepositoryLister::CListQuery::InternalExecute()
 {
-    if (!List (path, GetRevision(), GetPegRevision(), svn_depth_immediates, true, complete))
+    bool fetchLocks = !!(DWORD)fetchingLocksEnabled;
+    if (!List (path, GetRevision(), GetPegRevision(), svn_depth_immediates, true, complete && fetchLocks))
     {
         // something went wrong or query was cancelled
         // -> store error, clear results and terminate sub-queries
