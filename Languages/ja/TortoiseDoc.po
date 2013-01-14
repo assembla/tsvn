@@ -13,13 +13,13 @@
 # Daisuke Deguchi <ddeguchi@is.nagoya-u.ac.jp>, 2011-2012.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # Masahiro Fujimoto <fujimoto@internet.ne.jp>, 2011-2012.
-# Masahiro FUJIMOTO <fujimoto@internet.ne.jp>, 2012.
+# Masahiro FUJIMOTO <fujimoto@internet.ne.jp>, 2012-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-01-03 18:21+0000\n"
+"PO-Revision-Date: 2013-01-10 16:20+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -27901,6 +27901,82 @@ msgstr ""
 #~ "ティで指定された特定のリビジョンしか含まれていない場合は、リビジョンが特定"
 #~ "された外部参照を無視します。そのため、リビジョンが混同することがありませ"
 #~ "ん。"
+
+#~ msgid "List of SubWCRev error codes"
+#~ msgstr "SubWCRevのエラーコードの一覧"
+
+#~ msgid "Error Code"
+#~ msgstr "エラーコード"
+
+#~ msgid "Syntax error. One or more command line parameters are invalid."
+#~ msgstr "文法エラー。1つまたは複数のコマンドライン引数が無効です。"
+
+#~ msgid "The file or folder specified on the command line was not found."
+#~ msgstr ""
+#~ "コマンドラインで指定されたファイルまたはフォルダーが見つかりません。"
+
+#~ msgid ""
+#~ "The input file could not be opened, or the target file could not be "
+#~ "created."
+#~ msgstr "入力ファイルが開けないか、ターゲットファイルが作成できません。"
+
+#~ msgid ""
+#~ "Could not allocate memory. This could happen if e.g. the source file is "
+#~ "too big."
+#~ msgstr ""
+#~ "メモリを確保できません。これは、ソースファイルが大きすぎる場合などに発生す"
+#~ "る可能性があります。"
+
+#~ msgid "The source file can not be scanned properly."
+#~ msgstr "ソースファイルのプロパティをスキャンできません。"
+
+#~ msgid ""
+#~ "SVN error: Subversion returned with an error when SubWCRev tried to find "
+#~ "the information from the working copy."
+#~ msgstr ""
+#~ "SVNエラー: SubWCRevが作業コピーから情報を検索しようとする際に、Subversion"
+#~ "がエラーで復帰しました。"
+
+#~ msgid "-n"
+#~ msgstr "-n"
+
+#~ msgid ""
+#~ "The working copy has local modifications. This requires the <placeholder-"
+#~ "1/> switch."
+#~ msgstr ""
+#~ "作業コピーはローカルで変更されました。この場合は<placeholder-1/>スイッチが"
+#~ "必要です。"
+
+#~ msgid "-m"
+#~ msgstr "-m"
+
+#~ msgid ""
+#~ "The working copy has mixed revisions. This requires the <placeholder-1/> "
+#~ "switch."
+#~ msgstr ""
+#~ "作業コピーに複数のリビジョンが混在しています。この場合は<placeholder-1/>ス"
+#~ "イッチが必要です。"
+
+#~ msgid "-d"
+#~ msgstr "-d"
+
+#~ msgid ""
+#~ "The output file already exists. This requires the <placeholder-1/> switch."
+#~ msgstr ""
+#~ "出力ファイルが既に存在しています。この場合は<placeholder-1/>スイッチが必要"
+#~ "です。"
+
+#~ msgid "The specified path is not a working copy or part or one."
+#~ msgstr "指定されたパスは作業コピーやその一部を指すものではありません。"
+
+#~ msgid ""
+#~ "If there is no error, SubWCRev returns zero. But in case an error occurs, "
+#~ "the error message is written to stderr and shown in the console. And the "
+#~ "returned error codes are: <placeholder-1/>"
+#~ msgstr ""
+#~ "エラーがない場合、SubWCRevは0を返します。しかしエラーが発生した場合は、標"
+#~ "準エラー出力（コンソール）にエラーメッセージが出力されます。そして、"
+#~ "<placeholder-1/>のエラーが返却されます。"
 
 #~ msgid "List of available keywords"
 #~ msgstr "利用可能なキーワードの一覧"
