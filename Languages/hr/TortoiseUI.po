@@ -10,7 +10,7 @@
 # 
 # Authors:
 # Translators:
-# Ivan Vučica <ivan@vucica.net>, 2012.
+# Ivan Vučica <ivan@vucica.net>, 2012-2013.
 #   <ivan@vucica.net>, 2011, 2012.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-01-14 08:38+0000\n"
+"PO-Revision-Date: 2013-01-25 09:14+0000\n"
 "Last-Translator: Ivan Vučica <ivan@vucica.net>\n"
 "Language-Team: Croatian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13379,6 +13379,24 @@ msgstr "{BugTraq}"
 #~ msgid "Create patch file"
 #~ msgstr "Stvori datoteku sa zakrpom"
 
+#~ msgid ""
+#~ "Custom title string. Available keywords are:\r\n"
+#~ "{mergeurl}:\tthe source url of the merge\r\n"
+#~ "{revisions}:\tA comma separated list of the merged revisions, e.g., 3, 5, "
+#~ "6, 7\r\n"
+#~ "{revisionsr}:\tLike {revisions} but with an 'r' in front of the revisions"
+#~ "\r\n"
+#~ "{revrange}:\tA comma separated list of the merged revisions, grouped into "
+#~ "ranges if possible, e.g., 3, 5-7"
+#~ msgstr ""
+#~ "Vlastiti string za naslov. Dostupne ključne riječi su:\n"
+#~ " {mergeurl}:»izvorni url za stapanje\n"
+#~ " {revisions}:»zarezima odvojena lista stopljenih revizija, primjerice: 3, "
+#~ "5, 6, 7\n"
+#~ " {revisionsr}:»poput {revisions} no uz 'r' ispred revizija\n"
+#~ " {revrange}:»zarezima odvojena lista stopljenih revizija, grupirana u "
+#~ "raspone, ako je moguće; primjerice: 3, 5-7"
+
 #~ msgid "Dialog"
 #~ msgstr "Dijalog"
 
@@ -13456,6 +13474,9 @@ msgstr "{BugTraq}"
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Sačuvaj liste &promjena"
 
+#~ msgid "Like above, but used for reverse merges"
+#~ msgstr "Kao iznad, ali koristi se za obrnuta stapanja"
+
 #~ msgid "Line moved from line %ld"
 #~ msgstr "Redak pomaknut s retka %ld"
 
@@ -13482,6 +13503,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Main"
 #~ msgstr "Glavno"
+
+#~ msgid "Merge Log &Templates"
+#~ msgstr "Predlošci za dnevnik s&tapanja"
+
+#~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr "Stopljene revizije {revrange} iz {mergeurl}:\n"
 
 #~ msgid "Navigate"
 #~ msgstr "Navigacija"
@@ -13550,6 +13577,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Restore after commit"
 #~ msgstr "Vrati nakon commita"
+
+#~ msgid "Reverse merged revision(s) {revrange} from {mergeurl}:\n"
+#~ msgstr "Obrnuto stopljene revizije {revrange} iz {mergeurl}:\n"
 
 #~ msgid ""
 #~ "Revert\n"
