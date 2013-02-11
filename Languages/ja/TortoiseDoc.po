@@ -12,14 +12,14 @@
 # Translators:
 # Daisuke Deguchi <ddeguchi@is.nagoya-u.ac.jp>, 2011-2012.
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
-# Masahiro Fujimoto <fujimoto@internet.ne.jp>, 2011-2012.
+# Masahiro Fujimoto <fujimoto@internet.ne.jp>, 2011-2013.
 # Masahiro FUJIMOTO <fujimoto@internet.ne.jp>, 2012-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-01-26 07:41+0000\n"
+"PO-Revision-Date: 2013-02-08 12:20+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -27834,6 +27834,22 @@ msgstr ""
 #~ "す。"
 
 #~ msgid ""
+#~ "Note that you can also specify such hook scripts using special properties "
+#~ "on your working copy. See the section <xref linkend=\"tsvn-dug-"
+#~ "propertypage-tsvn-props\"/> for details."
+#~ msgstr ""
+#~ "なお、フックスクリプトは作業コピーの特殊なプロパティで指定することもできま"
+#~ "す。詳しくは、<xref linkend=\"tsvn-dug-propertypage-tsvn-props\"/>を参照し"
+#~ "てください。"
+
+#~ msgid ""
+#~ "Note that for operations done remotely, e.g. in the repository browser, "
+#~ "those paths are not local paths but the urls of the affected items."
+#~ msgstr ""
+#~ "なお、操作がリモートで行われた場合（例えばリポジトリブラウザー内で）、それ"
+#~ "らのパスはローカルパスではなく、影響する項目のURLになります。"
+
+#~ msgid ""
 #~ "When debugging hook scripts you may want to echo progress lines to the "
 #~ "DOS console, or insert a pause to stop the console window disappearing "
 #~ "when the script completes. Because I/O is redirected this will not "
@@ -27851,6 +27867,13 @@ msgstr ""
 #~ "echo Checking Status &gt; con\n"
 #~ "pause &lt; con &gt; con\n"
 #~ "</screen>"
+
+#~ msgid ""
+#~ "The minimum amount of chars from which the editor shows an auto-"
+#~ "completion popup. The default value is <literal>3</literal>."
+#~ msgstr ""
+#~ "エディターが自動補完のポップアップを表示する最小文字数です。初期値は"
+#~ "<literal>3</literal>です。"
 
 #~ msgid ""
 #~ "If this is set to <literal>false</literal>, then every <literal>svn:"

@@ -14,6 +14,7 @@
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
 # Lübbe  <luebbe.tortoisesvn@googlemail.com>, 2012.
 # okloster <okl@sintef.no>, 2011.
+#  <okl@sintef.no>, 2013.
 #   <okl@sintef.no>, 2011-2012.
 # Ronny N. Olsen <rnolsen@hotmail.com>, 2011.
 msgid ""
@@ -21,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-01-29 09:05+0000\n"
+"PO-Revision-Date: 2013-02-08 10:24+0000\n"
 "Last-Translator: okloster <okl@sintef.no>\n"
 "Language-Team: Norwegian Bokmål <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1906,7 +1907,7 @@ msgid ""
 msgstr ""
 "La til filmønsteret(ne)\n"
 "%s\n"
-"i ignorerings-listen."
+"i ignoreringslisten."
 
 #. Resource IDs: (263)
 msgid "Adding"
@@ -8398,9 +8399,9 @@ msgid ""
 "%s\n"
 "from the ignore list."
 msgstr ""
-"Fjernet filmønsteret/mønstrene\n"
+"Fjernet filmønsteret(ne)\n"
 "%s\n"
-"fra ignorerings-listen."
+"fra ignoreringslisten."
 
 #. Resource IDs: (17)
 msgid "Removes all unversioned and ignored items"
@@ -9722,9 +9723,9 @@ msgid ""
 "should ignore in all working copies.\r\n"
 "Separate the patterns with a space."
 msgstr ""
-"Angi filene eller mappene som TortoiseSVN\r\n"
-"skal ignorere i alle arbeidskopier.\r\n"
-"Del stiene med mellomrom."
+"Angi filene eller mappene som TortoiseSVN\n"
+"skal ignorere i alle arbeidskopier.\n"
+"Del mønstrene med mellomrom."
 
 #. Resource IDs: (16976, 16977, 16978, 16979, 16980, 16981)
 msgid "Spin1"
@@ -12799,9 +12800,8 @@ msgid ""
 "svn:ignore\r\n"
 "A newline separated list of file patterns to ignore."
 msgstr ""
-"svn:ignore\r\n"
-"En linjedelt liste over søkestrenger (jokertegn er tilatt) som skal "
-"ignoreres."
+"svn:ignore\n"
+"En linjedelt liste av filmønstre som skal ignoreres."
 
 #. Resource IDs: (317)
 msgid "svn:keywords"
@@ -12938,10 +12938,10 @@ msgid ""
 "Format: <filemask> = property=value;property=value\r\n"
 "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 msgstr ""
-"tsvn:autoprops\r\n"
+"tsvn:autoprops\n"
 "En linjedelt liste av egenskaper som blir satt automatisk når filer legges "
-"til/importeres.\r\n"
-"Format: <filmønster> = egenskap=verdi;egenskap=verdi\r\n"
+"til/importeres.\n"
+"Format: <filmønster> = egenskap=verdi;egenskap=verdi\n"
 "Eksempel: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 
 #. Resource IDs: (578)
@@ -13244,6 +13244,18 @@ msgstr "{BugTraq}"
 #~ msgid "%s (recursively)"
 #~ msgstr "%s (rekursivt)"
 
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, men katalogen var flyttet vekk"
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, men katalogen var flyttet hit"
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, men filen var flyttet vekk"
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, men filen var flyttet hit"
+
 #~ msgid "&All"
 #~ msgstr "&Alt"
 
@@ -13277,6 +13289,18 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Spiker:"
 
+#~ msgid "&Pre-fetch folders for faster browsing"
+#~ msgstr "&Hent mapper på forhånd for raskere utforsking"
+
+#~ msgid ""
+#~ "Added the file pattern(s)\n"
+#~ "%s\n"
+#~ "to the global ignore list."
+#~ msgstr ""
+#~ "La til filmønsteret(ne)\n"
+#~ "%s\n"
+#~ "i den globale ignorerings-listen."
+
 #~ msgid "Adjust to HEAD revision"
 #~ msgstr "Juster til HEAD-revisjon"
 
@@ -13291,6 +13315,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Aqua-stil"
+
+#~ msgid "Auto-Merge"
+#~ msgstr "Auto-Flett"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "Auto-flett %1!s! til %2!s!"
 
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Bakover i utforskings-historien"
@@ -13395,6 +13425,9 @@ msgstr "{BugTraq}"
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Ikke spør igjen for dette skriptet"
 
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Gjør reintegrering i stedet for automatisk fletting"
+
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Vil du laste de endrede filene?"
 
@@ -13431,6 +13464,12 @@ msgstr "{BugTraq}"
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr ""
 #~ "Henter innholdet i mapper i bakgrunnen slik at utforsking går raskere"
+
+#~ msgid "Fetching file list of source"
+#~ msgstr "Henter kildens fil-liste"
+
+#~ msgid "Fetching file list of target"
+#~ msgstr "Henter målets fil-liste"
 
 #~ msgid "File has no conflicts"
 #~ msgstr "Filen har ingen konflikter"
@@ -13514,6 +13553,9 @@ msgstr "{BugTraq}"
 #~ "La være i konflikt\n"
 #~ "Filens konfliktstatus forblir"
 
+#~ msgid "Left local modifications"
+#~ msgstr "Lot lokale endringer være"
+
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Som over, men brukes for reversfletting"
 
@@ -13541,6 +13583,9 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Lokale &Påhakinger"
 
+#~ msgid "Lock broken"
+#~ msgstr "Lås brutt"
+
 #~ msgid "Main"
 #~ msgstr "Hoved"
 
@@ -13551,11 +13596,28 @@ msgstr "{BugTraq}"
 #~ "Merk som løst\n"
 #~ "Filstatusen blir satt til endret"
 
+#~ msgid "Mark missing files as removed"
+#~ msgstr "Merk manglende filer som fjernet"
+
 #~ msgid "Merge Log &Templates"
 #~ msgstr "&Mønster for flettelogg"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Flettet revisjon(er) {revrange} fra {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Flyttet fra\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Flyttet til\n"
+#~ "%s"
 
 #~ msgid "Name"
 #~ msgstr "Navn"
@@ -13578,6 +13640,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "Next inline difference"
 #~ msgstr "Neste linjeforskjell"
+
+#~ msgid ""
+#~ "Notice: if you upgrade your working copy, you won't be able to access the "
+#~ "upgraded working copy with pre 1.8 SVN clients anymore!\n"
+#~ "Do you really want to upgrade this working copy?"
+#~ msgstr ""
+#~ "Merk: Hvis du oppgraderer arbeidskopien, vil du ikke kunne bruke den "
+#~ "oppgraderte arbeidskopien med klienter fra før 1.8 lenger!\n"
+#~ "Vil du virkelig oppgradere denne arbeidskopien?"
 
 #~ msgid "Office 2003"
 #~ msgstr "Office 2003"
@@ -13607,6 +13678,9 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Spiker"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr "Vennligs vent mens vi sjekker parametrene for flettingen."
+
 #~ msgid "Previous conflict"
 #~ msgstr "Forrige konflikt"
 
@@ -13616,8 +13690,20 @@ msgstr "{BugTraq}"
 #~ msgid "Previous inline difference"
 #~ msgstr "Forrige linjeforskjell"
 
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "R&eintegrer gren / automatisk fletting"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Papirkurv"
+
+#~ msgid ""
+#~ "Removed the file pattern(s)\n"
+#~ "%s\n"
+#~ "from the global ignore list."
+#~ msgstr ""
+#~ "Fjernet filmønsteret(ne)\n"
+#~ "%s\n"
+#~ "fra den globale ignoreringslisten."
 
 #~ msgid "Repository browser"
 #~ msgstr "Depotutforsker"
@@ -13648,6 +13734,9 @@ msgstr "{BugTraq}"
 #~ "Kjør\n"
 #~ "Kjør påhakingsskriptet"
 
+#~ msgid "SVN &Vendorbranch here"
+#~ msgstr "SVN &Leverandørgren her"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN Eksportér endrede elementer hit"
 
@@ -13656,6 +13745,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Save as"
 #~ msgstr "Lagre som"
+
+#~ msgid "Show &externals"
+#~ msgstr "Vis &eksterne"
+
+#~ msgid "Show &locks"
+#~ msgstr "Vis &låser"
 
 #~ msgid ""
 #~ "Show Inline-Diff\n"
@@ -13677,8 +13772,21 @@ msgstr "{BugTraq}"
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "Viser mapper og filer med egenskapen svn:externals"
 
+#~ msgid ""
+#~ "Shows the lock owner of locked files. Disable this to improve performance "
+#~ "with older servers."
+#~ msgstr ""
+#~ "Viser lås-eieren for låste filer. Slå av for å bedre ytelsen mot eldre "
+#~ "tjenere."
+
 #~ msgid "Silver Style"
 #~ msgstr "Sølv-stil"
+
+#~ msgid "Skipped, access denied"
+#~ msgstr "Hoppet over, tilgang nektet"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Hoppet over, forblir i konflikt"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13735,13 +13843,33 @@ msgstr "{BugTraq}"
 #~ "%s\n"
 #~ "er ikke en gyldig tekstfil!"
 
+#~ msgid "The hook script was not approved to run"
+#~ msgstr "Påhakingsskriptet ble ikke godkjent for kjøring"
+
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Linjenummeret må være mellom %d og %d"
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like, and the \"only record "
+#~ "the merge\" option can not be used."
+#~ msgstr ""
+#~ "Den påkrevde automatiske flettingen er reintegrering-aktig, og opsjonen "
+#~ "\"bare ta opp\" kan ikke brukes."
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like.\n"
+#~ "Only the merge depth option \"Working copy\" can be used."
+#~ msgstr ""
+#~ "Den påkrevde automatiske flettingen er reintegrering-aktig.\n"
+#~ "Bare \"arbeidskopi\" kan brukes som flettedybde."
 
 #~ msgid ""
 #~ "There are currently %d overlay handlers installed besides the ones "
 #~ "Tortoise uses."
 #~ msgstr "Det er nå %d ikonlag installert i tillegg til de Tortoise bruker."
+
+#~ msgid "There's already a plugin configured for this path"
+#~ msgstr "En ekstramodul er allerede konfigurert for denne stien"
 
 #~ msgid ""
 #~ "This commit is not recursive, and there are moved/renamed/copied folders "
@@ -13809,6 +13937,13 @@ msgstr "{BugTraq}"
 #~ "problemet."
 
 #~ msgid ""
+#~ "This will upgrade your working copy to the new 1.8 format and make it "
+#~ "unusable for older clients."
+#~ msgstr ""
+#~ "Dette vil oppgradere arbeidskopien din til det nye 1.8-formatet og gjøre "
+#~ "den ubrukelig for eldre klienter."
+
+#~ msgid ""
 #~ "This working copy has a client-side hook script configured. Do you want "
 #~ "this script to run?\n"
 #~ "The command line to run is:\n"
@@ -13863,6 +13998,13 @@ msgstr "{BugTraq}"
 #~ "Angre siste endring\n"
 #~ "Angre"
 
+#~ msgid ""
+#~ "Upgrade the working copy\n"
+#~ "to the new 1.8 format."
+#~ msgstr ""
+#~ "Oppgrader arbeidskopien\n"
+#~ "til det nye 1.8-formatet."
+
 #~ msgid "Use 'mine' text block"
 #~ msgstr "Bruk 'min' tekstblokk"
 
@@ -13883,6 +14025,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Validation of the property value failed!"
 #~ msgstr "Validering av egenskapen feilet!"
+
+#~ msgid "Vendor branch"
+#~ msgstr "Leverandørgren"
 
 #~ msgid "View"
 #~ msgstr "Vis"
@@ -13924,6 +14069,9 @@ msgstr "{BugTraq}"
 #~ "Del lange linjer i høyre kant av visningen\n"
 #~ "Del lange linjer"
 
+#~ msgid "\"ignore-on-commit\" files do not mark parent folder modified"
+#~ msgstr "\"ingore-on-commit\"-filer markerer ikke mappen over som endret"
+
 #~ msgid "all &revisions"
 #~ msgstr "alle &revisjoner"
 
@@ -13933,6 +14081,9 @@ msgstr "{BugTraq}"
 #~ msgid "get repository root URLs:"
 #~ msgstr "hent URLer for depot-røtter:"
 
+#~ msgid "include properties"
+#~ msgstr "ta med egenskaper"
+
 #~ msgid "last HEAD update: "
 #~ msgstr "siste HEAD-oppdatering:"
 
@@ -13941,6 +14092,26 @@ msgstr "{BugTraq}"
 
 #~ msgid "specific r&ange"
 #~ msgstr "angitt &intervall"
+
+#~ msgid ""
+#~ "svn:auto-props\r\n"
+#~ "A list of properties separated by newlines which get applied recursively "
+#~ "automatically when adding/importing files.\r\n"
+#~ "Format: <filemask> = property=value;property=value\r\n"
+#~ "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+#~ msgstr ""
+#~ "tsvn:autoprops\n"
+#~ "En linjedelt liste av egenskaper som rekursivt blir satt automatisk når "
+#~ "filer legges til/importeres.\n"
+#~ "Format: <filmønster> = egenskap=verdi;egenskap=verdi\n"
+#~ "Eksempel: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+
+#~ msgid ""
+#~ "svn:global-ignores\r\n"
+#~ "A newline separated list of file patterns to ignore recursively."
+#~ msgstr ""
+#~ "svn:global-ignores\n"
+#~ "En linjedelt liste av filmønstre som skal ignoreres rekursivt."
 
 #~ msgid "user:bool"
 #~ msgstr "user:bool"

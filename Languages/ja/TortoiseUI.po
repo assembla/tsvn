@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-01-30 15:03+0000\n"
+"PO-Revision-Date: 2013-02-08 12:53+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -63,27 +63,27 @@ msgstr "%.2f KB/秒"
 #. Resource IDs: (3868)
 #, c-format
 msgid "%1 contained an unexpected object."
-msgstr "%1 は予期せぬオブジェクトを含んでいます。"
+msgstr "%1は予期せぬオブジェクトを含んでいます。"
 
 #. Resource IDs: (3867)
 #, c-format
 msgid "%1 contains an incorrect path."
-msgstr "%1 は不正確なパスを含んでいます。"
+msgstr "%1 に不正なパスが含まれています。"
 
 #. Resource IDs: (3868)
 #, c-format
 msgid "%1 contains an incorrect schema."
-msgstr "%1 は不正確なスキーマを含んでいます。"
+msgstr "%1 に不正なスキーマが含まれています。"
 
 #. Resource IDs: (3868)
 #, c-format
 msgid "%1 has a bad format."
-msgstr "%1 は不正なフォーマットです。"
+msgstr "%1 の書式が不正です。"
 
 #. Resource IDs: (3867)
 #, c-format
 msgid "%1 was not found."
-msgstr "%1が見つかりませんでした。"
+msgstr "%1 が見つかりませんでした。"
 
 #. Resource IDs: (169)
 #, c-format
@@ -394,7 +394,7 @@ msgstr "&..."
 
 #. Resource IDs: (57664)
 msgid "&About TortoiseMerge..."
-msgstr "TortoiseMerge について(&A)..."
+msgstr "TortoiseMergeについて(&A)..."
 
 #. Resource IDs: (16920)
 msgid "&Activate"
@@ -814,7 +814,7 @@ msgstr "ヘルプ(&H)"
 
 #. Resource IDs: (57670)
 msgid "&Help Topics"
-msgstr "ヘルプ(&H)"
+msgstr "ヘルプトピック(&H)"
 
 #. Resource IDs: (1066, 3842)
 msgid "&Hide"
@@ -2153,7 +2153,7 @@ msgstr "本当に、ファイルの競合を解決済としてもよろしいで
 #. Resource IDs: (199)
 #, c-format
 msgid "Are you sure you want to remove the cache of the selected %d items?"
-msgstr "選択した%d件のキャッシュを本当に削除してもよろしいですか？？"
+msgstr "選択した%d件のキャッシュを本当に削除してもよろしいですか？"
 
 #. Resource IDs: (79)
 #, c-format
@@ -2161,8 +2161,8 @@ msgid ""
 "Are you sure you want to revert %d item(s)? You will lose all changes since "
 "the last update!"
 msgstr ""
-"本当に%d件の項目をの変更を取り消してもよろしいですか？ 最後の更新以降のすべて"
-"の変更が失われます。"
+"本当に項目%d件の変更を取り消してもよろしいですか？ 最後の更新以降のすべての変"
+"更が失われます。"
 
 #. Resource IDs: (32793)
 msgid "Arrange &vertical"
@@ -3884,12 +3884,12 @@ msgstr "バージョン管理外の項目を削除"
 #. Resource IDs: (14)
 #, c-format
 msgid "Delete and &ignore %d items by name"
-msgstr "削除して同じ名前の%d件の項目を無視する(&I)"
+msgstr "削除して同じ名前の%d件の項目を無視(&I)"
 
 #. Resource IDs: (14)
 #, c-format
 msgid "Delete and ignore %d items by &extension"
-msgstr "削除して同じ拡張子の%d件の項目を無視する(&E)"
+msgstr "削除して同じ拡張子の%d件の項目を無視(&E)"
 
 #. Resource IDs: (616)
 msgid "Delete unversioned items"
@@ -13207,7 +13207,7 @@ msgstr "{BugTraq}"
 #~ "Showing %2!d! files and %3!d! folders, %4!d! items in total"
 #~ msgstr ""
 #~ "%1!s!\r\n"
-#~ "%2!d!件のファイルと%3!d!件のフォルダー、計%4!d!項目を表示"
+#~ "%2!d!個のファイルと%3!d!個のフォルダー、計%4!d!項目を表示"
 
 #~ msgid "%s (recursively)"
 #~ msgstr "%s（再帰的）"
@@ -13810,7 +13810,7 @@ msgstr "{BugTraq}"
 #~ "はテキストファイルではありません。"
 
 #~ msgid "The hook script was not approved to run"
-#~ msgstr "実行するフックスクリプトが設定されませんでした"
+#~ msgstr "フックスクリプトが実行用に設定されませんでした"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "行番号は%d～%dの間でなければなりません"
@@ -13981,6 +13981,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Use Blocks"
 #~ msgstr "ブロックを使用する"
+
+#~ msgid "Use Ribbons"
+#~ msgstr "リボンを使用"
 
 #~ msgid "Use left block"
 #~ msgstr "左のブロックを使用"
