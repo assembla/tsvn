@@ -143,13 +143,15 @@ bool CheckoutCommand::Execute()
               || ((dlg.m_URLs.GetCount() > 1) && dlg.m_bIndependentWCs);
 
         progDlg.SetCommand
-            (useStandardCheckout
-                ? dlg.m_checkoutDepths.size()
-                    ? CSVNProgressDlg::SVNProgress_SparseCheckout
-                    : CSVNProgressDlg::SVNProgress_Checkout
-                : dlg.m_parentExists && (dlg.m_URLs.GetCount() == 1)
-                    ? CSVNProgressDlg::SVNProgress_Update
-                    : CSVNProgressDlg::SVNProgress_SingleFileCheckout);
+            (dlg.m_bClone
+                ? CSVNProgressDlg::SVNProgress_Clone
+                : useStandardCheckout
+                    ? dlg.m_checkoutDepths.size()
+                        ? CSVNProgressDlg::SVNProgress_SparseCheckout
+                        : CSVNProgressDlg::SVNProgress_Checkout
+                    : dlg.m_parentExists && (dlg.m_URLs.GetCount() == 1)
+                        ? CSVNProgressDlg::SVNProgress_Update
+                        : CSVNProgressDlg::SVNProgress_SingleFileCheckout);
 
         if (dlg.m_checkoutDepths.size())
             progDlg.SetPathDepths(dlg.m_checkoutDepths);

@@ -22,6 +22,7 @@
 #include "TSVNPath.h"
 #include "ProjectProperties.h"
 #include "SVN.h"
+#include "GIT.h"
 #include "Colors.h"
 #include "SVNExternals.h"
 #include "..\IBugTraqProvider\IBugTraqProvider_h.h"
@@ -82,7 +83,7 @@ typedef enum
  * in a listbox. Since several Subversion commands have similar notify
  * messages they are grouped together in this single class.
  */
-class CSVNProgressDlg : public CResizableStandAloneDialog, public SVN
+class CSVNProgressDlg : public CResizableStandAloneDialog, public SVN, public GIT
 {
 public:
     typedef enum
@@ -108,6 +109,7 @@ public:
         SVNProgress_SwitchBackToParent,
         SVNProgress_Unlock,
         SVNProgress_Update,
+        SVNProgress_Clone,
     } Command;
 
 
@@ -225,6 +227,8 @@ protected:
         svn_error_t * err, apr_pool_t * pool) override;
     virtual svn_wc_conflict_choice_t    ConflictResolveCallback(const svn_wc_conflict_description2_t *description, CString& mergedfile) override;
     virtual BOOL                        Cancel() override;
+    virtual int                         CheckoutNotify(git_checkout_notify_t why, const CString& path) override;
+    virtual void                        GitNotify(const CString& action, const CString& info) override;
 
     virtual BOOL                        OnInitDialog();
     virtual void                        OnCancel();
@@ -315,6 +319,7 @@ private:
     bool        CmdSwitchBackToParent(CString& sWindowTitle, bool& localoperation);
     bool        CmdUnlock(CString& sWindowTitle, bool& localoperation);
     bool        CmdUpdate(CString& sWindowTitle, bool& localoperation);
+    bool        CmdClone(CString& sWindowTitle, bool& localoperation);
 private:
     typedef std::map<CStringA, svn_revnum_t> StringRevMap;
     typedef std::map<CString, svn_revnum_t> StringWRevMap;

@@ -883,6 +883,7 @@ CString CAppUtils::GetProjectNameFromURL(CString url)
         url.TrimLeft(_T("/"));
         name = url.Left(url.Find('.'));
     }
+    name.TrimRight(L".git");
     return name;
 }
 

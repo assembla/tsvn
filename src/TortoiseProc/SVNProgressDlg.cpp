@@ -1228,7 +1228,8 @@ UINT CSVNProgressDlg::ProgressThread()
 
     DialogEnableWindow(IDOK, FALSE);
     DialogEnableWindow(IDCANCEL, TRUE);
-    SetAndClearProgressInfo(m_hWnd);
+    SVN::SetAndClearProgressInfo(m_hWnd);
+    GIT::SetAndClearProgressInfo(m_hWnd);
     m_itemCount = m_itemCountTotal;
 
     InterlockedExchange(&m_bThreadRunning, TRUE);
@@ -1305,6 +1306,9 @@ UINT CSVNProgressDlg::ProgressThread()
         break;
     case SVNProgress_Update:
         bSuccess = CmdUpdate(sWindowTitle, localoperation);
+        break;
+    case SVNProgress_Clone:
+        bSuccess = CmdClone(sWindowTitle, localoperation);
         break;
     }
     if (!bSuccess)
@@ -3565,6 +3569,51 @@ bool CSVNProgressDlg::CmdUpdate(CString& sWindowTitle, bool& /*localoperation*/)
     return true;
 }
 
+bool CSVNProgressDlg::CmdClone( CString& sWindowTitle, bool& localoperation )
+{
+    ASSERT(m_targetPathList.GetCount() == 1);
+    sWindowTitle.LoadString(IDS_PROGRS_TITLE_CLONE);
+    SetBackgroundImage(IDI_CHECKOUT_BKG);
+
+    CTSVNPathList urls;
+    urls.LoadFromAsteriskSeparatedString(m_url.GetSVNPathString());
+    for (int i=0; i<urls.GetCount(); ++i)
+    {
+        CAppUtils::SetWindowTitle(m_hWnd, urls[i].GetUIFileOrDirectoryName(), sWindowTitle);
+        CTSVNPath checkoutdir = m_targetPathList[0];
+        if (urls.GetCount() > 1)
+        {
+            CString fileordir = urls[i].GetFileOrDirectoryName();
+            fileordir = CPathUtils::PathUnescape(fileordir);
+            checkoutdir.AppendPathString(fileordir);
+        }
+        CString sCmdInfo;
+        sCmdInfo.FormatMessage(IDS_PROGRS_CMD_CLONE,
+            (LPCTSTR)urls[i].GetSVNPathString(), checkoutdir.GetWinPath());
+        ReportCmd(sCmdInfo);
+
+        CBlockCacheForPath cacheBlock (checkoutdir.GetWinPath());
+        ReportString(urls[i].GetSVNPathString(), CString(MAKEINTRESOURCE(IDS_PROGRS_CMD_CLONE1)));
+        if (!Clone(urls[i].GetSVNPathString(), checkoutdir.GetWinPathString()))
+        {
+            ReportError(GIT::GetLastError());
+        }
+    }
+
+    DWORD exitcode = 0;
+    CString error;
+    CHooks::Instance().SetProjectProperties(m_targetPathList.GetCommonRoot(), m_ProjectProperties);
+    if ((!m_bNoHooks)&&(CHooks::Instance().PostUpdate(m_hWnd, m_targetPathList, m_depth, m_RevisionEnd, exitcode, error)))
+    {
+        if (exitcode)
+        {
+            ReportHookFailed(post_update_hook, m_targetPathList, error);
+            return false;
+        }
+    }
+    return true;
+}
+
 void CSVNProgressDlg::OnBnClickedNoninteractive()
 {
     LRESULT res = ::SendMessage(GetDlgItem(IDC_NONINTERACTIVE)->GetSafeHwnd(), BM_GETCHECK, 0, 0);
@@ -4016,5 +4065,43 @@ LRESULT CSVNProgressDlg::OnCheck( WPARAM wnd, LPARAM )
         }
     }
     return 0;
+}
+
+int CSVNProgressDlg::CheckoutNotify( git_checkout_notify_t why, const CString& path )
+{
+    NotificationData * data = new NotificationData();
+    data->path = CTSVNPath(path);
+    data->indent = (int)m_ExtStack.GetCount();
+    data->sPathColumnText = data->path.GetUIPathString();
+    if (!m_basePath.IsEmpty())
+        data->basepath = m_basePath;
+
+    switch (why)
+    {
+        case GIT_CHECKOUT_NOTIFY_CONFLICT:
+            data->color = m_Colors.GetColor(((m_options & ProgOptDryRun)!=0) ? CColors::DryRunConflict : CColors::Conflict);
+            data->bConflictedActionItem = true;
+            data->sActionColumnText.LoadString(((m_options & ProgOptDryRun)!=0) ? IDS_SVNACTION_DRYRUN_CONFLICTED : IDS_SVNACTION_CONFLICTED);
+            m_nConflicts++;
+            m_bConflictWarningShown = false;
+            break;
+        case GIT_CHECKOUT_NOTIFY_DIRTY:
+            data->sActionColumnText.LoadString(IDS_SVNACTION_MODIFIED);
+            data->color = m_Colors.GetColor(CColors::Modified);
+            break;
+        case GIT_CHECKOUT_NOTIFY_UPDATED:
+            data->sActionColumnText.LoadString(IDS_SVNACTION_MODIFIED);
+            data->color = m_Colors.GetColor(CColors::Modified);
+            break;
+    }
+
+    AddItemToList(data);
+
+    return 0;
+}
+
+void CSVNProgressDlg::GitNotify( const CString& action, const CString& info )
+{
+    ReportString(info, action);
 }
 

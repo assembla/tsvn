@@ -61,6 +61,8 @@ protected:
     afx_msg void OnCbnEditchangeUrlcombo();
     afx_msg void OnCbnSelchangeDepth();
     afx_msg void OnBnClickedSparse();
+    afx_msg void OnBnClickedSubversion();
+    afx_msg void OnBnClickedGit();
 
     DECLARE_MESSAGE_MAP()
 
@@ -69,6 +71,7 @@ protected:
     void SetRevision(const SVNRev& rev);
     SVNRev GetSelectedRevision();
     SVNRev GetSelectedRevisionOrHead();
+    void EnableControlsForSCM();
 
 protected:
     CToolTips       m_tooltips;
@@ -91,6 +94,7 @@ public:
     CLogDlg *       m_pLogDlg;
     svn_depth_t     m_depth;
     BOOL            m_blockPathAdjustments;
+    BOOL            m_bClone;
 
     std::map<CString,svn_depth_t> m_checkoutDepths;
     bool            m_standardCheckout; ///< true if only one path got selected and that URL path is a folder

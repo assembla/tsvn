@@ -42,6 +42,7 @@ CCheckoutDlg::CCheckoutDlg(CWnd* pParent /*=NULL*/)
     , m_bBlockMessages(false)
     , m_bAutoCreateTargetName(false)
     , m_depth(svn_depth_unknown)
+    , m_bClone(false)
 {
 }
 
@@ -75,6 +76,8 @@ BEGIN_MESSAGE_MAP(CCheckoutDlg, CResizableStandAloneDialog)
     ON_CBN_EDITCHANGE(IDC_URLCOMBO, &CCheckoutDlg::OnCbnEditchangeUrlcombo)
     ON_CBN_SELCHANGE(IDC_DEPTH, &CCheckoutDlg::OnCbnSelchangeDepth)
     ON_BN_CLICKED(IDC_SPARSE, &CCheckoutDlg::OnBnClickedSparse)
+    ON_BN_CLICKED(IDC_SUBVERSION, &CCheckoutDlg::OnBnClickedSubversion)
+    ON_BN_CLICKED(IDC_GIT, &CCheckoutDlg::OnBnClickedGit)
 END_MESSAGE_MAP()
 
 void CCheckoutDlg::UpdateURLsFromCombo()
@@ -152,6 +155,8 @@ BOOL CCheckoutDlg::OnInitDialog()
     AdjustControlSize(IDC_NOEXTERNALS);
     AdjustControlSize(IDC_REVISION_HEAD);
     AdjustControlSize(IDC_REVISION_N);
+
+    CheckRadioButton(IDC_SUBVERSION, IDC_GIT, IDC_SUBVERSION);
 
     m_sCheckoutDirOrig = m_strCheckoutDirectory;
 
@@ -429,6 +434,7 @@ void CCheckoutDlg::OnOK()
         }
     }
 
+    m_bClone = (GetCheckedRadioButton(IDC_SUBVERSION, IDC_GIT) == IDC_GIT);
     // store state info & close dialog
 
     UpdateData(FALSE);
@@ -604,4 +610,31 @@ SVNRev CCheckoutDlg::GetSelectedRevisionOrHead()
     if (rev.IsValid())
         return rev;
     return SVNRev(SVNRev::REV_HEAD);
+}
+
+
+void CCheckoutDlg::OnBnClickedSubversion()
+{
+    EnableControlsForSCM();
+}
+
+
+void CCheckoutDlg::OnBnClickedGit()
+{
+    EnableControlsForSCM();
+}
+
+void CCheckoutDlg::EnableControlsForSCM()
+{
+    bool bSVN = (GetCheckedRadioButton(IDC_SUBVERSION, IDC_GIT) == IDC_SUBVERSION);
+    {
+        DialogEnableWindow(IDC_DEPTH, bSVN);
+        DialogEnableWindow(IDC_NOEXTERNALS, bSVN);
+        DialogEnableWindow(IDC_SPARSE, bSVN);
+        DialogEnableWindow(IDC_REVISION_HEAD, bSVN);
+        DialogEnableWindow(IDC_REVISION_N, bSVN);
+        DialogEnableWindow(IDC_REVISION_NUM, bSVN);
+        DialogEnableWindow(IDC_SHOW_LOG, bSVN);
+        DialogEnableWindow(IDC_INDEPENDENTWCS, bSVN);
+    }
 }

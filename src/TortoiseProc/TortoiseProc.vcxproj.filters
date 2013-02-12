@@ -171,6 +171,9 @@
     <Filter Include="Commands\RepoCreate">
       <UniqueIdentifier>{02543189-d6fa-451f-be9e-4531c5051a70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GIT">
+      <UniqueIdentifier>{b1cdac8a-32bb-4c4b-9dff-dd6b8b324172}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Utils\accHelper.cpp">
@@ -1102,6 +1105,9 @@
     </ClCompile>
     <ClCompile Include="..\..\ext\hunspell\hunzip.cxx">
       <Filter>Utils\3rd Party\hunspell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GIT\GIT.cpp">
+      <Filter>GIT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2124,6 +2130,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ext\hunspell\hunzip.hxx">
       <Filter>Utils\3rd Party\hunspell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GIT\GIT.h">
+      <Filter>GIT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
