@@ -11,13 +11,13 @@
 # Authors:
 # Translators:
 # Lübbe  <luebbe.tortoisesvn@gmail.com>, 2011.
-# Mikkel Elmholdt <mikkel@elmholdt.dk>, 2011-2012.
+# Mikkel Elmholdt <mikkel@elmholdt.dk>, 2011-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-02-20 15:12+0000\n"
+"PO-Revision-Date: 2013-02-28 09:07+0000\n"
 "Last-Translator: Mikkel Elmholdt <mikkel@elmholdt.dk>\n"
 "Language-Team: Danish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -811,7 +811,7 @@ msgstr "&Hjælp"
 
 #. Resource IDs: (57670)
 msgid "&Help Topics"
-msgstr "&Hjælpeemner"
+msgstr "&Hjælp emner"
 
 #. Resource IDs: (1066, 3842)
 msgid "&Hide"
@@ -13288,6 +13288,9 @@ msgstr "{BugTraq}"
 #~ "%1!s!\n"
 #~ "Viser %2!d! filer og %3!d! foldere, %4!d! elementer i alt"
 
+#~ msgid "%s (recursively)"
+#~ msgstr "%s (rekursivt)"
+
 #~ msgid "&All"
 #~ msgstr "&Alle"
 
@@ -13315,8 +13318,20 @@ msgstr "{BugTraq}"
 #~ msgid "&Operative:"
 #~ msgstr "&Operativ:"
 
+#~ msgid "&Other"
+#~ msgstr "&Andet"
+
 #~ msgid "&Peg:"
 #~ msgstr "&Klemme:"
+
+#~ msgid ""
+#~ "Added the file pattern(s)\n"
+#~ "%s\n"
+#~ "to the global ignore list."
+#~ msgstr ""
+#~ "Tilføjede filmønstre(ne)\n"
+#~ "%s\n"
+#~ "til den globale ignoreringsliste."
 
 #~ msgid "Adjust to HEAD revision"
 #~ msgstr "Juster til HEAD revision"
@@ -13333,6 +13348,12 @@ msgstr "{BugTraq}"
 #~ msgid "Aqua Style"
 #~ msgstr "Aqua stil"
 
+#~ msgid "Auto-Merge"
+#~ msgstr "Auto-Flet"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "Auto-flet %1!s! ind i %2!s!"
+
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Gå tilbage i browser historik"
 
@@ -13341,6 +13362,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Blue Style"
 #~ msgstr "Blå stil"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Don't show the diff."
+#~ msgstr ""
+#~ "Afbryd\n"
+#~ "Vis ikke forskellen."
 
 #~ msgid ""
 #~ "Cancel\n"
@@ -13381,8 +13409,22 @@ msgstr "{BugTraq}"
 #~ msgid "Color by au&thor"
 #~ msgstr "Farvelæg efter forfa&tter"
 
+#~ msgid ""
+#~ "Command Line To Execute:\r\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%, or %REPOROOT+% "
+#~ "deeper down the working copy root."
+#~ msgstr ""
+#~ "Udfør kommando linie:\n"
+#~ "For at specificere en sti ind i en arbejdskopi skal du angive URL'en i "
+#~ "versionsarkivet med rod-URL'en sat til %REPOROOT%, eller  %REPOROOT+% d "
+#~ "længere nede i arbejdskopi roden."
+
 #~ msgid "Compare two files"
 #~ msgstr "Sammenlign to filer"
+
+#~ msgid "Compare with &HEAD and BASE"
+#~ msgstr "Sammenlign med &HEAD og BASE"
 
 #~ msgid "Configure &TortoiseSVN to never use the recycle bin"
 #~ msgstr "Konfigurer &TortoiseSVN til aldrig at benytte papirkurven"
@@ -13426,6 +13468,9 @@ msgstr "{BugTraq}"
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Spørg ikke igen for dette script."
 
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Udfør reintegration i stedet for automatisk fletning"
+
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Vil du indlæse de ændrede filer?"
 
@@ -13461,6 +13506,12 @@ msgstr "{BugTraq}"
 #~ msgid ""
 #~ "Fetches the contents of folders in the background so browsing is faster"
 #~ msgstr "Hent indhold af foldere i baggrunden så gennemsyn er hurtigere"
+
+#~ msgid "Fetching file list of source"
+#~ msgstr "Henter filliste fra kilde"
+
+#~ msgid "Fetching file list of target"
+#~ msgstr "Henter filliste fra destination"
 
 #~ msgid "File has no conflicts"
 #~ msgstr "Filen har ingen konflikter"
@@ -13571,6 +13622,9 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Lokale &Tilkoblinger"
 
+#~ msgid "Lock broken"
+#~ msgstr "Lås brudt op"
+
 #~ msgid "Main"
 #~ msgstr "Hoved"
 
@@ -13581,11 +13635,31 @@ msgstr "{BugTraq}"
 #~ "Marker som løst\n"
 #~ "Filens status sættes til ændret"
 
+#~ msgid "Mark missing files as removed"
+#~ msgstr "Marker manglende filer som fjernet"
+
 #~ msgid "Merge Log &Templates"
 #~ msgstr "Flet Log &Skabeloner"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Flettet revision(er) {revrange} fra {mergeurl}:\n"
+
+#~ msgid ""
+#~ "Moved from\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Flyttet fra\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Moved to\r\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Flyttet til\n"
+#~ "%s"
+
+#~ msgid "Name"
+#~ msgstr "Navn"
 
 #~ msgid "Navigate"
 #~ msgstr "Naviger"
@@ -13634,6 +13708,9 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Klemme"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr "Vent venligst mens vi checker flette-parametrene."
+
 #~ msgid "Previous conflict"
 #~ msgstr "Forrige konflikt"
 
@@ -13643,8 +13720,20 @@ msgstr "{BugTraq}"
 #~ msgid "Previous inline difference"
 #~ msgstr "Forrige indlejrede forskel"
 
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "R&eintegrer en sidegren / automatisk fletning"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Papirkurv"
+
+#~ msgid ""
+#~ "Removed the file pattern(s)\n"
+#~ "%s\n"
+#~ "from the global ignore list."
+#~ msgstr ""
+#~ "Fjernede filmønstre(ne)\n"
+#~ "%s\n"
+#~ "fra den globale ignoreringsliste."
 
 #~ msgid "Repository browser"
 #~ msgstr "Versionsarkiv browser"
@@ -13684,6 +13773,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Save as"
 #~ msgstr "Gem som"
+
+#~ msgid "Show &externals"
+#~ msgstr "Vis &eksterne"
+
+#~ msgid "Show &locks"
+#~ msgstr "Vis &låse"
 
 #~ msgid ""
 #~ "Show Inline-Diff\n"
@@ -13768,6 +13863,20 @@ msgstr "{BugTraq}"
 #~ msgstr "Linienummeret skal ligge mellem %d og %d"
 
 #~ msgid ""
+#~ "The required automatic merge is reintegrate like, and the \"only record "
+#~ "the merge\" option can not be used."
+#~ msgstr ""
+#~ "Den krævede automatiske fletning udføres som reintegration, og \"Noter "
+#~ "kun fletningen\" optionen kan ikke bruges."
+
+#~ msgid ""
+#~ "The required automatic merge is reintegrate like.\n"
+#~ "Only the merge depth option \"Working copy\" can be used."
+#~ msgstr ""
+#~ "Den krævede atomatiske fletning udføres som reintegration.\n"
+#~ "Fletningsdybde-optionen \"Arbejdskopi\" er den eneste der kan bruges."
+
+#~ msgid ""
 #~ "There are currently %d overlay handlers installed besides the ones "
 #~ "Tortoise uses."
 #~ msgstr ""
@@ -13837,6 +13946,13 @@ msgstr "{BugTraq}"
 #~ "til at løse problemet."
 
 #~ msgid ""
+#~ "This will upgrade your working copy to the new 1.8 format and make it "
+#~ "unusable for older clients."
+#~ msgstr ""
+#~ "Dette vil opgradere din arbejdskopi til det nye 1.8 format og gøre den "
+#~ "utilgængelig for ældre klienter."
+
+#~ msgid ""
 #~ "This working copy has a client-side hook script configured. Do you want "
 #~ "this script to run?\n"
 #~ "The command line to run is:\n"
@@ -13845,6 +13961,23 @@ msgstr "{BugTraq}"
 #~ "Denne arbejdskopi har et klient-side tilkoblings-script tilknyttet. "
 #~ "Ønsker du at køre dette script? Kommandoen til at køre det er:\n"
 #~ "%s"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
 
 #~ msgid ""
 #~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
@@ -13860,6 +13993,9 @@ msgstr "{BugTraq}"
 #~ msgid "TortoiseSVN will not show the following overlays: %s"
 #~ msgstr "TortoiseSVN viser ikke følgende overlejringer: %s"
 
+#~ msgid "Type"
+#~ msgstr "Type"
+
 #~ msgid "Undo"
 #~ msgstr "Gendan"
 
@@ -13869,6 +14005,13 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Gendan de senete ændringer\n"
 #~ "Gendan"
+
+#~ msgid ""
+#~ "Upgrade the working copy\n"
+#~ "to the new 1.8 format."
+#~ msgstr ""
+#~ "Opgrader arbejdskopien\n"
+#~ "til det nye 1.8 format."
 
 #~ msgid "Use 'mine' text block"
 #~ msgstr "Brug 'min' tekst blok"
@@ -13884,6 +14027,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Use Blocks"
 #~ msgstr "Brug blokke"
+
+#~ msgid "Use Ribbons"
+#~ msgstr "Brug Bånd"
 
 #~ msgid "Use left block"
 #~ msgstr "Brug venstre blok"
