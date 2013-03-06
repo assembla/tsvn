@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2011 - TortoiseSVN
+// Copyright (C) 2003-2011, 2013 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -178,6 +178,8 @@ public:
     const CString& GetProviderUUID() const { return (sProviderUuid64.IsEmpty() ? sProviderUuid : sProviderUuid64); }
 
     const CString& GetLogMsgTemplate(const CStringA& prop) const;
+
+    const CString& GetLogRevRegex() const;
 public:
     /** The label to show in the commit dialog where the issue number/bug id
      * is entered. Example: "Bug-ID: " or "Issue-No.:". Default is "Bug-ID :" */
@@ -246,10 +248,6 @@ public:
      */
     CString     sLogSummaryRe;
 
-    /**
-     * A regex string to extract revisions from a log message.
-     */
-    CString     sLogRevRegex;
 
 private:
 
@@ -290,5 +288,10 @@ private:
     CString     sLogTemplateMkDir;
     CString     sLogTemplatePropset;
     CString     sLogTemplateLock;
+    /**
+     * A regex string to extract revisions from a log message.
+     */
+    CString     sLogRevRegex;
+
     int         nBugIdPos;              ///< result of sMessage.Find(L"%BUGID%");
 };
