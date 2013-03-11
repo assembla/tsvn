@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-02-20 15:12+0000\n"
+"PO-Revision-Date: 2013-03-10 17:38+0000\n"
 "Last-Translator: bovirus <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13435,6 +13435,12 @@ msgstr "{BugTraq}"
 #~ msgid "&Pre-fetch folders for faster browsing"
 #~ msgstr "&Pre-carica le cartelle per una esplorazione veloce"
 
+#~ msgid "(content and properties)"
+#~ msgstr "(contenuti e proprietà)"
+
+#~ msgid "(content only)"
+#~ msgstr "(solo contenuti)"
+
 #~ msgid ""
 #~ "Added the file pattern(s)\n"
 #~ "%s\n"
@@ -13449,6 +13455,17 @@ msgstr "{BugTraq}"
 
 #~ msgid "Always execute the script"
 #~ msgstr "Esegui sempre lo script"
+
+#~ msgid ""
+#~ "Another process is blocking the working copy database, or the underlying "
+#~ "filesystem does not support file locking; if the working copy is on a "
+#~ "network filesystem, make sure file locking has been enabled on the file "
+#~ "server."
+#~ msgstr ""
+#~ "Un altro processo sta bloccando la copia di lavoro del database, o il "
+#~ "file system non supporta il blocco dei file. Se la copia di lavoro del "
+#~ "database ha un file system di rete, assicurati che il blocco dei file sia "
+#~ "stato abilitato nel file server."
 
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Approva o rifiuta script aggancio lato client "
@@ -13476,6 +13493,13 @@ msgstr "{BugTraq}"
 
 #~ msgid ""
 #~ "Cancel\n"
+#~ "Don't show the diff."
+#~ msgstr ""
+#~ "Annulla\n"
+#~ "Non visualizzare le differenze."
+
+#~ msgid ""
+#~ "Cancel\n"
 #~ "Local modifications are kept."
 #~ msgstr ""
 #~ "Annulla\n"
@@ -13490,6 +13514,16 @@ msgstr "{BugTraq}"
 
 #~ msgid "Changes the style of the application"
 #~ msgstr "Modifica il tema dell'applicazione"
+
+#~ msgid "Check the authentication items you want to delete below"
+#~ msgstr ""
+#~ "Controlla gli elementi di autentificazione che vuoi cancellare qui sotto"
+
+#~ msgid "Clear all"
+#~ msgstr "Azzera tutto"
+
+#~ msgid "Clear..."
+#~ msgstr "Azzera..."
 
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "Azzera tutti gli %ld script aggancio lato client approvati"
@@ -13524,8 +13558,17 @@ msgstr "{BugTraq}"
 #~ "la URL nel repository con la URL radice del repository come %REPOROOT%, o "
 #~ "%REPOROOT+% un livello inferiore alla radice della copia lavoro."
 
+#~ msgid "Compare revisions (&properties only)"
+#~ msgstr "Compara revisioni (solo &proprietà)"
+
+#~ msgid "Compare revisions (conten&t only)"
+#~ msgstr "Compara revisioni (solo con&tenuti)"
+
 #~ msgid "Compare two files"
 #~ msgstr "Compara due file"
+
+#~ msgid "Compare with &HEAD and BASE"
+#~ msgstr "Compara con &HEAD e BASE"
 
 #~ msgid "Configure &TortoiseSVN to never use the recycle bin"
 #~ msgstr "Configura &TortoiseSVN per non usare il cestino"
@@ -13685,6 +13728,9 @@ msgstr "{BugTraq}"
 #~ msgid "Keep c&hangelists"
 #~ msgstr "&Mantieni elenco modifiche"
 
+#~ msgid "Kind"
+#~ msgstr "Tipo"
+
 #~ msgid "Last changed author:"
 #~ msgstr "Autore ultima modifica:"
 
@@ -13733,6 +13779,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Main"
 #~ msgstr "Principale"
+
+#~ msgid "Many items selected to show diff"
+#~ msgstr "Molti elementi selezionati per visualizzazione differenze"
 
 #~ msgid ""
 #~ "Mark as resolved\n"
@@ -13838,8 +13887,14 @@ msgstr "{BugTraq}"
 #~ msgid "R&eintegrate a branch / automatic merge"
 #~ msgstr "R&eingra un ramo/unione automatica"
 
+#~ msgid "Realm String"
+#~ msgstr "Stringa Realm"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Cestino"
+
+#~ msgid "Remove Saved Authentication Data"
+#~ msgstr "Rimuovi dati autentificazione salvati"
 
 #~ msgid ""
 #~ "Removed the file pattern(s)\n"
@@ -13913,6 +13968,13 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Visualizza caratteri speciali per spazi e ritorni a capo\n"
 #~ "Visualizza spazi"
+
+#~ msgid ""
+#~ "Show the diff\n"
+#~ "The diff viewer is started for every selected item."
+#~ msgstr ""
+#~ "Visualizza le differenze\n"
+#~ "Il visualizzatore differenze verrà avviato per ogni elmento selezionato."
 
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "Visualizza file e cartelle incluse con proprietà svn:esterne"
@@ -14220,6 +14282,18 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "A capo bordo destr della vista per linee linghe\n"
 #~ "A capo automatico"
+
+#~ msgid ""
+#~ "You have selected %d items to show the diff for.\n"
+#~ "For every of these items a new instance of the diff viewer will be "
+#~ "started.\n"
+#~ "Do you really want to show the diff for so many items at once?"
+#~ msgstr ""
+#~ "Hai selezionato %d elementi per visualizzare le differenze.\n"
+#~ "Per ciascuno di questi elemnti verrà avviata una nuova istanza del "
+#~ "visualizzatore differenze.\n"
+#~ "Vuoi realmente visualizzare le differenze per così tanti elementi in una "
+#~ "solo volta?"
 
 #~ msgid "\"ignore-on-commit\" files do not mark parent folder modified"
 #~ msgstr ""
