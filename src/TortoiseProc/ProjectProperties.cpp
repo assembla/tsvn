@@ -30,6 +30,7 @@ using namespace std;
 
 #define LOG_REVISIONREGEX _T("\\b(r\\d+)|\\b(revisions?(\\(s\\))?\\s#?\\d+([, ]+(and\\s?)?\\d+)*)|\\b(revs?\\.?\\s?\\d+([, ]+(and\\s?)?\\d+)*)")
 
+const CString sLOG_REVISIONREGEX = LOG_REVISIONREGEX;
 
 ProjectProperties::ProjectProperties(void)
     : regExNeedUpdate (true)
@@ -881,7 +882,7 @@ const CString& ProjectProperties::GetLogRevRegex() const
 {
     if (!sLogRevRegex.IsEmpty())
         return sLogRevRegex;
-    return LOG_REVISIONREGEX;
+    return sLOG_REVISIONREGEX;
 }
 
 #ifdef DEBUG
