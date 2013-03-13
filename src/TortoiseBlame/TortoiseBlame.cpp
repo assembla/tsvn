@@ -1,6 +1,6 @@
 // TortoiseBlame - a Viewer for Subversion Blames
 
-// Copyright (C) 2003-2012 - TortoiseSVN
+// Copyright (C) 2003-2013 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -199,6 +199,7 @@ BOOL TortoiseBlame::OpenFile(const TCHAR *fileName)
     SendEditor(SCI_SETSAVEPOINT);
     SendEditor(SCI_CANCEL);
     SendEditor(SCI_SETUNDOCOLLECTION, 0);
+    SendEditor(SCI_SETCODEPAGE, SC_CP_UTF8);
     ::ShowWindow(wEditor, SW_HIDE);
 
     FILE * File = NULL;
@@ -219,7 +220,6 @@ BOOL TortoiseBlame::OpenFile(const TCHAR *fileName)
 
     m_lowestRev = LONG_MAX;
     m_highestRev = 0;
-    bool bUTF8 = true;
     size_t len = 0;
     LONG linenumber = 0;
     svn_revnum_t rev = 0;
@@ -352,7 +352,8 @@ BOOL TortoiseBlame::OpenFile(const TCHAR *fileName)
             // check each line for illegal utf8 sequences. If one is found, we treat
             // the file as ASCII, otherwise we assume an UTF8 file.
             unsigned char * utf8CheckBuf = (unsigned char*)lineptr;
-            while ((bUTF8)&&(*utf8CheckBuf))
+            bool bUTF8 = false;
+            while (*utf8CheckBuf)
             {
                 if ((*utf8CheckBuf == 0xC0)||(*utf8CheckBuf == 0xC1)||(*utf8CheckBuf >= 0xF5))
                 {
@@ -361,6 +362,7 @@ BOOL TortoiseBlame::OpenFile(const TCHAR *fileName)
                 }
                 if ((*utf8CheckBuf & 0xE0)==0xC0)
                 {
+                    bUTF8 = true;
                     utf8CheckBuf++;
                     if (*utf8CheckBuf == 0)
                         break;
@@ -372,6 +374,7 @@ BOOL TortoiseBlame::OpenFile(const TCHAR *fileName)
                 }
                 if ((*utf8CheckBuf & 0xF0)==0xE0)
                 {
+                    bUTF8 = true;
                     utf8CheckBuf++;
                     if (*utf8CheckBuf == 0)
                         break;
@@ -391,6 +394,7 @@ BOOL TortoiseBlame::OpenFile(const TCHAR *fileName)
                 }
                 if ((*utf8CheckBuf & 0xF8)==0xF0)
                 {
+                    bUTF8 = true;
                     utf8CheckBuf++;
                     if (*utf8CheckBuf == 0)
                         break;
@@ -419,7 +423,13 @@ BOOL TortoiseBlame::OpenFile(const TCHAR *fileName)
 
                 utf8CheckBuf++;
             }
-            SendEditor(SCI_ADDTEXT, strlen(lineptr), reinterpret_cast<LPARAM>(static_cast<char *>(lineptr)));
+            if (!bUTF8)
+            {
+                std::string utf8line = CUnicodeUtils::StdAnsiToUTF8(lineptr);
+                SendEditor(SCI_ADDTEXT, utf8line.length(), reinterpret_cast<LPARAM>(utf8line.c_str()));
+            }
+            else
+                SendEditor(SCI_ADDTEXT, strlen(lineptr), reinterpret_cast<LPARAM>(static_cast<char *>(lineptr)));
         }
         if (len == 0)
             break;
@@ -466,9 +476,6 @@ BOOL TortoiseBlame::OpenFile(const TCHAR *fileName)
     };
 
     fclose(File);
-
-    if (bUTF8)
-        SendEditor(SCI_SETCODEPAGE, SC_CP_UTF8);
 
     SendEditor(SCI_SETUNDOCOLLECTION, 1);
     ::SetFocus(wEditor);
