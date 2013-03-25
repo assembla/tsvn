@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2012 - TortoiseSVN
+// Copyright (C) 2003-2013 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -505,7 +505,8 @@ void CCommitDlg::OnOK()
                     // items which are not modified, i.e. won't get committed can
                     // still be shown in a changelist, e.g. the 'don't commit' changelist.
                     if ((entry->status > svn_wc_status_normal) ||
-                        (entry->propstatus > svn_wc_status_normal))
+                        (entry->propstatus > svn_wc_status_normal) ||
+                        (entry->IsCopied()))
                     {
                         // This algorithm is for the sake of simplicity of the complexity O(N²)
                         for (int k=0; k<nListItems; k++)
