@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-03-20 10:33+0000\n"
+"PO-Revision-Date: 2013-04-08 06:25+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: German <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13407,14 +13407,24 @@ msgstr "{BugTraq}"
 #~ msgid "%s, but the file was moved here"
 #~ msgstr "%s, aber die Datei wurde hierher verschoben"
 
+#~ msgid "&Accept current working copy state (mark as resolved)"
+#~ msgstr ""
+#~ "Aktuellen Status der Arbeitskopie &akzeptieren (als aufgelöst markieren)"
+
 #~ msgid "&All"
 #~ msgstr "&Alle"
+
+#~ msgid "&Apply the udpate to the move destination"
+#~ msgstr "Die &Aktualisierung auf das Ziel anwenden"
 
 #~ msgid "&Do not ask again"
 #~ msgstr "&Nicht mehr fragen"
 
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "&Jetzt den Papierkorb leeren"
+
+#~ msgid "&Enable edit"
+#~ msgstr "B&earbeiten aktivieren"
 
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Ignorieren und fortsetzen"
@@ -13440,6 +13450,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Fix:"
 
+#~ msgid "&Postpone all remaining conflicts"
+#~ msgstr "Alle übrigen Konflikte &verschieben"
+
 #~ msgid "&Pre-fetch folders for faster browsing"
 #~ msgstr "&Ordner zum schnellen Blättern im Voraus laden"
 
@@ -13460,6 +13473,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Adjust to HEAD revision"
 #~ msgstr "An HEAD Revision anpassen"
+
+#~ msgid ""
+#~ "Allow Editing for this view\n"
+#~ "Allow Edit"
+#~ msgstr ""
+#~ "Bearbeiten für diese Ansicht zulassen\n"
+#~ "Bearbeiten zulassen"
 
 #~ msgid "Always execute the script"
 #~ msgstr "Skript immer ausführen"
@@ -13501,6 +13521,13 @@ msgstr "{BugTraq}"
 
 #~ msgid ""
 #~ "Cancel\n"
+#~ "Don't reload views"
+#~ msgstr ""
+#~ "Abbrechen\n"
+#~ "Die Ansichten nicht neu laden"
+
+#~ msgid ""
+#~ "Cancel\n"
 #~ "Don't show the diff."
 #~ msgstr ""
 #~ "Abbrechen\n"
@@ -13512,6 +13539,20 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Abbrechen\n"
 #~ "Lokale Änderungen bleiben erhalten."
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Stay with current files"
+#~ msgstr ""
+#~ "Abbrechen\n"
+#~ "Die aktuellen Dateien beibehalten"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Stay with current settings"
+#~ msgstr ""
+#~ "Abbrechen\n"
+#~ "Die aktuellen Einstellungen beibehalten"
 
 #~ msgid ""
 #~ "Change the style of the application\n"
@@ -13585,6 +13626,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Konflikt (vielleicht)"
 
+#~ msgid "Copying from foreign repository URL"
+#~ msgstr "Von fremder Projektarchiv-URL kopieren"
+
 #~ msgid "Create intermediate folders"
 #~ msgstr "Zwischenordner erstellen"
 
@@ -13642,6 +13686,16 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Nicht ausführen\n"
 #~ "Das Skript nicht ausführen"
+
+#~ msgid ""
+#~ "Don't save\n"
+#~ "Close the views without saving the modifications"
+#~ msgstr ""
+#~ "Nicht speichern\n"
+#~ "Die Ansichten schließen, ohne die Änderungen zu speichern."
+
+#~ msgid "Enable Edit"
+#~ msgstr "Bearbeiten aktivieren"
 
 #~ msgid "Enforce"
 #~ msgstr "Erzwinge"
@@ -13715,6 +13769,9 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
 
+#~ msgid "ID:32976:V C +E"
+#~ msgstr "ID:32976:V C +E"
+
 #~ msgid ""
 #~ "Ignore changes\n"
 #~ "Ignore the outside changes."
@@ -13733,6 +13790,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Jump to next &conflict"
 #~ msgstr "Springe zum &nächsten Konflikt"
+
+#~ msgid "Keep any moves affected by this operation"
+#~ msgstr "Alle von dieser Operation beeinflussten Verschiebungen beibehalten"
 
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Änderungsliste &beibehalten"
@@ -13792,6 +13852,9 @@ msgstr "{BugTraq}"
 #~ msgid "Many items selected to show diff"
 #~ msgstr "Viele Objekte zum Vergleichen gewählt"
 
+#~ msgid "Mark as &resolved (the move will become a copy)"
+#~ msgstr "Als &aufgelöst markieren (diese Verschiebung wird zu einer Kopie)"
+
 #~ msgid ""
 #~ "Mark as resolved\n"
 #~ "The file status is changed to modified"
@@ -13807,6 +13870,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Revision(en) {revrange} von {mergeurl} zusammengeführt:\n"
+
+#~ msgid "Move broken"
+#~ msgstr "Verschieben beschädigt"
 
 #~ msgid ""
 #~ "Moved from\r\n"
@@ -13928,6 +13994,12 @@ msgstr "{BugTraq}"
 #~ msgid "Repository browser"
 #~ msgstr "Projektarchivbetrachter"
 
+#~ msgid "Resolve &later"
+#~ msgstr "Später &auflösen"
+
+#~ msgid "Resolve using &their property"
+#~ msgstr "Mit &deren Eigenschaft auflösen"
+
 #~ msgid "Restore"
 #~ msgstr "Wiederherstellen"
 
@@ -13962,6 +14034,48 @@ msgstr "{BugTraq}"
 
 #~ msgid "Save"
 #~ msgstr "Speichern"
+
+#~ msgid "Save File"
+#~ msgstr "Datei speichern"
+
+#~ msgid ""
+#~ "Save Left File as\n"
+#~ "You're asked where to save the left file"
+#~ msgstr ""
+#~ "Linke Datei speichern unter\n"
+#~ "Sie werden gefragt, wo sie die linke Datei speichern wollen"
+
+#~ msgid ""
+#~ "Save Left File\n"
+#~ "The modifications are saved to\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Linke Datei speichern\n"
+#~ "Die Änderungen werden in\n"
+#~ "%s gespeichert"
+
+#~ msgid ""
+#~ "Save Right File as\n"
+#~ "You're asked where to save the right file"
+#~ msgstr ""
+#~ "Rechte Datei speichern unter\n"
+#~ "Sie werden gefragt, wo sie die rechte Datei speichern wollen"
+
+#~ msgid ""
+#~ "Save Right File\n"
+#~ "The modifications are saved to\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Rechte Datei speichern\n"
+#~ "Die Änderungen werden in\n"
+#~ "%s gespeichert"
+
+#~ msgid ""
+#~ "Save all\n"
+#~ "Both Files are saved"
+#~ msgstr ""
+#~ "Beide speichern\n"
+#~ "Alle beiden Dateien werden gespeichert"
 
 #~ msgid "Save as"
 #~ msgstr "Speichern unter …"
@@ -14102,6 +14216,13 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Derzeit sind %d überlagerte Symbole neben den von TortoiseSVN verwendeten "
 #~ "installiert."
+
+#~ msgid ""
+#~ "There are more editable views.\n"
+#~ "What view do you want to save?"
+#~ msgstr ""
+#~ "Es gibt weitere bearbeitbare Ansichten.\n"
+#~ "Welche Ansicht möchten Sie speichern?"
 
 #~ msgid "There's already a plugin configured for this path"
 #~ msgstr "Es ist bereits ein Plugin für diesen Pfad konfiguriert"

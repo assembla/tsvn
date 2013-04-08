@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-03-20 09:02+0000\n"
+"PO-Revision-Date: 2013-04-07 09:02+0000\n"
 "Last-Translator: okloster <okl@sintef.no>\n"
 "Language-Team: Norwegian Bokmål <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -2990,25 +2990,25 @@ msgstr "Rydder opp avbrutte operasjoner, sperrede filer, ..."
 
 #. Resource IDs: (1273, 1275, 1276, 1279, 1281, 1427)
 msgid "Clear"
-msgstr "Blank ut"
+msgstr "Fjern"
 
 #. Resource IDs: (1057)
 msgid ""
 "Clear Tool\n"
 "Clear"
 msgstr ""
-"Slett Verktøy\n"
-"Slett"
+"Fjerneverktøy\n"
+"Fjern"
 
 #. Resource IDs: (196)
 #, c-format
 msgid "Clears %1!ld! URLs stored for %2!ld! working copies"
-msgstr "Sletter %1!ld! URL lagret for %2!ld! arbeidskopier"
+msgstr "Fjerner %1!ld! URL lagret for %2!ld! arbeidskopier"
 
 #. Resource IDs: (196)
 #, c-format
 msgid "Clears %1!ld! log messages stored for %2!ld! working copies"
-msgstr "Sletter %1!ld! loggmeldinger lagret for %2!ld! arbeidskopier"
+msgstr "Fjerner %1!ld! loggmeldinger lagret for %2!ld! arbeidskopier"
 
 #. Resource IDs: (196)
 #, c-format
@@ -3016,26 +3016,26 @@ msgid ""
 "Clears %1!ld! username/password pairs, %2!ld! ssl certificates and %3!ld! "
 "usernames"
 msgstr ""
-"Sletter %1!ld! par av brukernavn/passord, %2!ld! ssl-sertifikater og %3!ld! "
+"Fjerner %1!ld! par av brukernavn/passord, %2!ld! ssl-sertifikater og %3!ld! "
 "brukernavn"
 
 #. Resource IDs: (197)
 #, c-format
 msgid "Clears cached logs from %ld repositories"
-msgstr "Sletter mellomlagrede logger fra %ld depoter"
+msgstr "Fjerner mellomlagrede logger fra %ld depoter"
 
 #. Resource IDs: (195)
 msgid ""
 "Clears the stored authentication.\r\n"
 "You will have to enter your username/password again for all repositories."
 msgstr ""
-"Sletter lagret autentisering.\r\n"
+"Fjerner lagret autentisering.\n"
 "Du vil måtte angi brukernavn og passord for alle depoter igjen."
 
 #. Resource IDs: (196)
 #, c-format
 msgid "Clears the stored sizes and positions of %ld dialogs"
-msgstr "Sletter lagret størrelse og plassering for %ld dialoger"
+msgstr "Fjerner lagret størrelse og plassering for %ld dialoger"
 
 #. Resource IDs: (1466)
 msgid "Click here to go to the website"
@@ -13291,6 +13291,12 @@ msgstr "{BugTraq}"
 #~ msgid "&Pre-fetch folders for faster browsing"
 #~ msgstr "&Hent mapper på forhånd for raskere utforsking"
 
+#~ msgid "(content and properties)"
+#~ msgstr "(innhold og egenskaper)"
+
+#~ msgid "(content only)"
+#~ msgstr "(bare innhold)"
+
 #~ msgid ""
 #~ "Added the file pattern(s)\n"
 #~ "%s\n"
@@ -13305,6 +13311,16 @@ msgstr "{BugTraq}"
 
 #~ msgid "Always execute the script"
 #~ msgstr "Kjør skriptet alltid"
+
+#~ msgid ""
+#~ "Another process is blocking the working copy database, or the underlying "
+#~ "filesystem does not support file locking; if the working copy is on a "
+#~ "network filesystem, make sure file locking has been enabled on the file "
+#~ "server."
+#~ msgstr ""
+#~ "En annen prosess blokkerer arbeidskopiens database, eller fillåsing er "
+#~ "ikke støttet i det underliggende filsystemet; hvis arbeidskopien er på et "
+#~ "nett-filsystem, påse at fillåsing er stått på på tjeneren."
 
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Godkjenn eller avvis klient-påhakingsskript"
@@ -13332,6 +13348,13 @@ msgstr "{BugTraq}"
 
 #~ msgid ""
 #~ "Cancel\n"
+#~ "Don't show the diff."
+#~ msgstr ""
+#~ "Avbryt\n"
+#~ "Ikke vis diff'en."
+
+#~ msgid ""
+#~ "Cancel\n"
 #~ "Local modifications are kept."
 #~ msgstr ""
 #~ "Avbryt\n"
@@ -13347,8 +13370,17 @@ msgstr "{BugTraq}"
 #~ msgid "Changes the style of the application"
 #~ msgstr "Endrer applikasjons-stilen"
 
+#~ msgid "Check the authentication items you want to delete below"
+#~ msgstr "Huk av de autentiseringselementene du vil slette nedenfor"
+
+#~ msgid "Clear all"
+#~ msgstr "Fjern alt"
+
+#~ msgid "Clear..."
+#~ msgstr "Fjern..."
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
-#~ msgstr "Sletter alle %ld godkjente klient-påhakingsskript"
+#~ msgstr "Fjerner alle %ld godkjente klient-påhakingsskript"
 
 #~ msgid ""
 #~ "Click to see commands to move blocks of text\n"
@@ -13379,8 +13411,17 @@ msgstr "{BugTraq}"
 #~ "For å angi en sti i en arbeidskopi, oppgi url'en i depotet med depotroten "
 #~ "som %REPOROOT%, eller %REPOROOT+% for en mappe et sted under depotroten."
 
+#~ msgid "Compare revisions (&properties only)"
+#~ msgstr "Sammenlign revisjoner (bare &egenskaper)"
+
+#~ msgid "Compare revisions (conten&t only)"
+#~ msgstr "Sammenlign revisjoner (bare &innhold)"
+
 #~ msgid "Compare two files"
 #~ msgstr "Sammenlign to filer"
+
+#~ msgid "Compare with &HEAD and BASE"
+#~ msgstr "Sammenlign med &HEAD og BASE"
 
 #~ msgid "Configure &TortoiseSVN to never use the recycle bin"
 #~ msgstr "Sett opp &TortoiseSVN til aldri å bruke papirkurven"
@@ -13539,6 +13580,9 @@ msgstr "{BugTraq}"
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Behold &endringslister"
 
+#~ msgid "Kind"
+#~ msgstr "Type"
+
 #~ msgid "Last changed author:"
 #~ msgstr "Siste endring forfatter:"
 
@@ -13587,6 +13631,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Main"
 #~ msgstr "Hoved"
+
+#~ msgid "Many items selected to show diff"
+#~ msgstr "Mange elementer er valgt for diff-visning"
 
 #~ msgid ""
 #~ "Mark as resolved\n"
@@ -13661,6 +13708,12 @@ msgstr "{BugTraq}"
 #~ msgid "Office XP"
 #~ msgstr "Office XP"
 
+#~ msgid "Open &local"
+#~ msgstr "Åpne &lokal"
+
+#~ msgid "Open &with local..."
+#~ msgstr "Åpne &med lokal..."
+
 #~ msgid ""
 #~ "Open files for diff or to apply a patch\n"
 #~ "Open files"
@@ -13692,8 +13745,14 @@ msgstr "{BugTraq}"
 #~ msgid "R&eintegrate a branch / automatic merge"
 #~ msgstr "R&eintegrer gren / automatisk fletting"
 
+#~ msgid "Realm String"
+#~ msgstr "Rike-streng"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Papirkurv"
+
+#~ msgid "Remove Saved Authentication Data"
+#~ msgstr "Fjern Lagrede Autentiseringsdata"
 
 #~ msgid ""
 #~ "Removed the file pattern(s)\n"
@@ -13767,6 +13826,13 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Vis spesielle symboler for blanktegn og linjeskift\n"
 #~ "Vis Blanktegn"
+
+#~ msgid ""
+#~ "Show the diff\n"
+#~ "The diff viewer is started for every selected item."
+#~ msgstr ""
+#~ "Vis diff\n"
+#~ "Diff-programmet vil startes for hvert valgt element."
 
 #~ msgid "Shows folders and files included with the svn:externals property"
 #~ msgstr "Viser mapper og filer med egenskapen svn:externals"
@@ -14070,6 +14136,17 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Del lange linjer i høyre kant av visningen\n"
 #~ "Del lange linjer"
+
+#~ msgid ""
+#~ "You have selected %d items to show the diff for.\n"
+#~ "For every of these items a new instance of the diff viewer will be "
+#~ "started.\n"
+#~ "Do you really want to show the diff for so many items at once?"
+#~ msgstr ""
+#~ "Du har valgt å vise diff for %d elementer.\n"
+#~ "En ny instans av diff-programmet vil startes for hvert av disse "
+#~ "elementene.\n"
+#~ "Vil du virkelig vise diff for så mange elementer på en gang?"
 
 #~ msgid "\"ignore-on-commit\" files do not mark parent folder modified"
 #~ msgstr "\"ingore-on-commit\"-filer markerer ikke mappen over som endret"

@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-03-20 18:39+0000\n"
+"PO-Revision-Date: 2013-04-07 09:02+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr "! %d"
 
 #. Resource IDs: (1262)
 msgid "# authors shown individually:"
-msgstr "表示する作者の数:"
+msgstr "個別に表示する作者の数:"
 
 #. Resource IDs: (357)
 #, c-format
@@ -4450,7 +4450,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Enabled Overlay Handlers"
-msgstr "オーバーレイハンドラーを有効にする"
+msgstr "有効なオーバーレイハンドラー"
 
 #. Resource IDs: (195)
 msgid ""
@@ -13221,14 +13221,23 @@ msgstr "{BugTraq}"
 #~ msgid "%s, but the file was moved here"
 #~ msgstr "%s、しかし、ファイルはここに移動されました"
 
+#~ msgid "&Accept current working copy state (mark as resolved)"
+#~ msgstr "現在の作業コピーの状態（解決済みとしてマーク）を受け入れる(&A)"
+
 #~ msgid "&All"
 #~ msgstr "すべて(&A)"
+
+#~ msgid "&Apply the udpate to the move destination"
+#~ msgstr "移動方向への更新を了承(&A)"
 
 #~ msgid "&Do not ask again"
 #~ msgstr "再び表示しない(&D)"
 
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "ごみ箱を空にする(&E)"
+
+#~ msgid "&Enable edit"
+#~ msgstr "編集を有効にする(&E)"
 
 #~ msgid "&Ignore and proceed"
 #~ msgstr "無視して続行する(&I)"
@@ -13254,6 +13263,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "ペグ(&P):"
 
+#~ msgid "&Postpone all remaining conflicts"
+#~ msgstr "残りの競合を後回しにする(&P)"
+
 #~ msgid "&Pre-fetch folders for faster browsing"
 #~ msgstr "高速に表示するためにフォルダーを先読みする(&P)"
 
@@ -13274,6 +13286,13 @@ msgstr "{BugTraq}"
 
 #~ msgid "Adjust to HEAD revision"
 #~ msgstr "最新リビジョンに合わせる"
+
+#~ msgid ""
+#~ "Allow Editing for this view\n"
+#~ "Allow Edit"
+#~ msgstr ""
+#~ "このビューの編集を許可する\n"
+#~ "編集を許可"
 
 #~ msgid "Always execute the script"
 #~ msgstr "常にスクリプトを実行する"
@@ -13396,6 +13415,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "競合（おそらく）"
 
+#~ msgid "Copying from foreign repository URL"
+#~ msgstr "外部リポジトリのURLからコピー"
+
 #~ msgid "Create intermediate folders"
 #~ msgstr "中間フォルダーを作成"
 
@@ -13452,6 +13474,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "実行しない\n"
 #~ "スクリプトを実行しない"
+
+#~ msgid "Enable Edit"
+#~ msgstr "編集を有効化"
 
 #~ msgid "Enforce"
 #~ msgstr "強制"
@@ -13523,6 +13548,9 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +G"
 
+#~ msgid "ID:32976:V C +E"
+#~ msgstr "ID:32976:V C +E"
+
 #~ msgid ""
 #~ "Ignore changes\n"
 #~ "Ignore the outside changes."
@@ -13541,6 +13569,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Jump to next &conflict"
 #~ msgstr "次の競合へ(&C)"
+
+#~ msgid "Keep any moves affected by this operation"
+#~ msgstr "この操作の移動結果を保持する"
 
 #~ msgid "Keep c&hangelists"
 #~ msgstr "変更リストを保持(&H)"
@@ -13599,6 +13630,9 @@ msgstr "{BugTraq}"
 #~ msgid "Many items selected to show diff"
 #~ msgstr "差分を表示するために多くの項目が選択されました"
 
+#~ msgid "Mark as &resolved (the move will become a copy)"
+#~ msgstr "解決済みとしてマーク（移動はコピーになる）(&R)"
+
 #~ msgid ""
 #~ "Mark as resolved\n"
 #~ "The file status is changed to modified"
@@ -13614,6 +13648,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "{mergeurl}からリビジョン{revrange}をマージ:\n"
+
+#~ msgid "Move broken"
+#~ msgstr "移動の破損"
 
 #~ msgid ""
 #~ "Moved from\r\n"
@@ -13729,6 +13766,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Repository browser"
 #~ msgstr "リポジトリブラウザー"
+
+#~ msgid "Resolve &later"
+#~ msgstr "後で解決(&L)"
+
+#~ msgid "Resolve using &their property"
+#~ msgstr "&theirのプロパティを使用して解決"
 
 #~ msgid "Restore"
 #~ msgstr "復元"

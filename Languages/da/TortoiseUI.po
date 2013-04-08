@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-03-20 09:02+0000\n"
+"PO-Revision-Date: 2013-04-07 09:02+0000\n"
 "Last-Translator: Mikkel Elmholdt <mikkel@elmholdt.dk>\n"
 "Language-Team: Danish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -6364,7 +6364,7 @@ msgstr ""
 
 #. Resource IDs: (32854)
 msgid "Locator Bar"
-msgstr "Lokationsbar"
+msgstr "Lokationslinie"
 
 #. Resource IDs: (65535)
 msgid "Locator bar"
@@ -13291,6 +13291,18 @@ msgstr "{BugTraq}"
 #~ msgid "%s (recursively)"
 #~ msgstr "%s (rekursivt)"
 
+#~ msgid "%s, but the directory was moved away"
+#~ msgstr "%s, men kataloget blev flyttet væk"
+
+#~ msgid "%s, but the directory was moved here"
+#~ msgstr "%s, men kataloget blev flyttet hertil"
+
+#~ msgid "%s, but the file was moved away"
+#~ msgstr "%s, men filen blev flyttet væk"
+
+#~ msgid "%s, but the file was moved here"
+#~ msgstr "%s, men filen blev flyttet hertil"
+
 #~ msgid "&All"
 #~ msgstr "&Alle"
 
@@ -13323,6 +13335,15 @@ msgstr "{BugTraq}"
 
 #~ msgid "&Peg:"
 #~ msgstr "&Klemme:"
+
+#~ msgid "&Pre-fetch folders for faster browsing"
+#~ msgstr "&Hent foldere tidligt for hurtigere visning"
+
+#~ msgid "(content and properties)"
+#~ msgstr "(indhold og egenskaber)"
+
+#~ msgid "(content only)"
+#~ msgstr "(kun indhold)"
 
 #~ msgid ""
 #~ "Added the file pattern(s)\n"
@@ -13387,6 +13408,12 @@ msgstr "{BugTraq}"
 #~ msgid "Changes the style of the application"
 #~ msgstr "Skift programmets stil"
 
+#~ msgid "Clear all"
+#~ msgstr "Ryd alt"
+
+#~ msgid "Clear..."
+#~ msgstr "Ryd..."
+
 #~ msgid "Clears all %ld approved client-side hook scripts"
 #~ msgstr "Slet alle %ld godkendte klient-side tilkoblings-scripts"
 
@@ -13419,6 +13446,12 @@ msgstr "{BugTraq}"
 #~ "For at specificere en sti ind i en arbejdskopi skal du angive URL'en i "
 #~ "versionsarkivet med rod-URL'en sat til %REPOROOT%, eller  %REPOROOT+% d "
 #~ "længere nede i arbejdskopi roden."
+
+#~ msgid "Compare revisions (&properties only)"
+#~ msgstr "Sammenlign revisioner (&kun egenskaber)"
+
+#~ msgid "Compare revisions (conten&t only)"
+#~ msgstr "Sammenlign revisioner (kun &indhold)"
 
 #~ msgid "Compare two files"
 #~ msgstr "Sammenlign to filer"
@@ -13582,6 +13615,9 @@ msgstr "{BugTraq}"
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Behold &ændringslister"
 
+#~ msgid "Kind"
+#~ msgstr "Slags"
+
 #~ msgid "Last changed author:"
 #~ msgstr "Sidste ændrings-forfatter:"
 
@@ -13594,6 +13630,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Bevar konflikt\n"
 #~ "Filens konflikt-status bevares"
+
+#~ msgid "Left local modifications"
+#~ msgstr "Efterlod lokale ændringer"
 
 #~ msgid "Like above, but used for reverse merges"
 #~ msgstr "Som ovenfor, men brugt til omvendte fletninger"
@@ -13680,6 +13719,15 @@ msgstr "{BugTraq}"
 #~ msgid "Next inline difference"
 #~ msgstr "Næste indlejrede forskel"
 
+#~ msgid ""
+#~ "Notice: if you upgrade your working copy, you won't be able to access the "
+#~ "upgraded working copy with pre 1.8 SVN clients anymore!\n"
+#~ "Do you really want to upgrade this working copy?"
+#~ msgstr ""
+#~ "Bemærk: Hvis du opgraderer din arbejdskopi, vil du ikke længere kunne få "
+#~ "adgang til den opgraderede arbejdskopi med pre-1.8 SVN klienter! Ønsker "
+#~ "du at fortsætte med at opgradere denne arbejdskopi?"
+
 #~ msgid "Office 2003"
 #~ msgstr "Office 2003"
 
@@ -13691,6 +13739,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Office XP"
 #~ msgstr "Office XP"
+
+#~ msgid "Open &local"
+#~ msgstr "Åbn &lokal"
+
+#~ msgid "Open &with local..."
+#~ msgstr "Åbn &med lokal..."
 
 #~ msgid ""
 #~ "Open files for diff or to apply a patch\n"
@@ -13765,6 +13819,9 @@ msgstr "{BugTraq}"
 #~ "Kør\n"
 #~ "Kør tlkoblings-scriptet"
 
+#~ msgid "SVN &Vendorbranch here"
+#~ msgstr "SVN &Forhandlergren her"
+
 #~ msgid "SVN Export changed items here"
 #~ msgstr "SVN Eksport ændrede elementer her"
 
@@ -13802,6 +13859,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Silver Style"
 #~ msgstr "Sølv-stil"
+
+#~ msgid "Skipped, access denied"
+#~ msgstr "Sprunget over, adgang nægtet"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Sprunget over, stadig konflikt-ramt"
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13858,6 +13921,9 @@ msgstr "{BugTraq}"
 #~ "Filen\n"
 #~ "%s\n"
 #~ "er ikke en valid tekst fil!"
+
+#~ msgid "The hook script was not approved to run"
+#~ msgstr "Tilkoblingen blev ikke godkendt til at køre"
 
 #~ msgid "The line number must be in between %d and %d"
 #~ msgstr "Linienummeret skal ligge mellem %d og %d"
@@ -14086,6 +14152,9 @@ msgstr "{BugTraq}"
 #~ msgid "get repository root URLs:"
 #~ msgstr "hent versionsarkivets rod URL'er:"
 
+#~ msgid "include properties"
+#~ msgstr "inkluder egenskaber"
+
 #~ msgid "last HEAD update: "
 #~ msgstr "sidste HEAD opdatering:"
 
@@ -14094,6 +14163,19 @@ msgstr "{BugTraq}"
 
 #~ msgid "specific r&ange"
 #~ msgstr "specifikt &område"
+
+#~ msgid ""
+#~ "svn:auto-props\r\n"
+#~ "A list of properties separated by newlines which get applied recursively "
+#~ "automatically when adding/importing files.\r\n"
+#~ "Format: <filemask> = property=value;property=value\r\n"
+#~ "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
+#~ msgstr ""
+#~ "svn:autoprops\n"
+#~ "En liste af linjeseparerede egenskaber som automatisk påføres rekursivt "
+#~ "når filer tilføjes eller importeres.\n"
+#~ "Format: <filmaske> = egenskab=værdi;egenskab=værdi\n"
+#~ "Eksempel: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 
 #~ msgid "user:bool"
 #~ msgstr "user:bool"
