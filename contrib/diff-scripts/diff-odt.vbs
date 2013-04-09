@@ -19,8 +19,8 @@ dim objArgs,num,sBaseDoc,sNewDoc,objScript,word,destination
 Set objArgs = WScript.Arguments
 num = objArgs.Count
 if num < 2 then
-   MsgBox "Usage: [CScript | WScript] diff-odt.vbs base.odt new.odt", vbExclamation, "Invalid arguments"
-   WScript.Quit 1
+    MsgBox "Usage: [CScript | WScript] diff-odt.vbs base.odt new.odt", vbExclamation, "Invalid arguments"
+    WScript.Quit 1
 end if
 
 sBaseDoc=objArgs(0)
@@ -46,8 +46,8 @@ On Error Resume Next
 'If there is no office running then an office is started
 Set objServiceManager= Wscript.CreateObject("com.sun.star.ServiceManager")
 If Err.Number <> 0 Then
-   Wscript.Echo "You must have OpenOffice installed to perform this operation."
-   Wscript.Quit 1
+    Wscript.Echo "You must have OpenOffice installed to perform this operation."
+    Wscript.Quit 1
 End If
 
 On Error Goto 0
@@ -58,10 +58,10 @@ On Error Goto 0
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objFile = objFSO.GetFile(sNewDoc)
 If (objFile.Attributes AND 1)=1 Then
-    objFile.Attributes = objFile.Attributes XOR 1 
+    objFile.Attributes = objFile.Attributes XOR 1
 End If
 
-'Create the DesktopSet 
+'Create the DesktopSet
 Set objDesktop = objServiceManager.createInstance("com.sun.star.frame.Desktop")
 Set objUriTranslator = objServiceManager.createInstance("com.sun.star.uri.ExternalUriReferenceTranslator")
 'Adjust the paths for OO
@@ -69,12 +69,14 @@ sBaseDoc=Replace(sBaseDoc, "\", "/")
 sBaseDoc=Replace(sBaseDoc, ":", "|")
 sBaseDoc=Replace(sBaseDoc, "%", "%25")
 sBaseDoc=Replace(sBaseDoc, " ", "%20")
+sBaseDoc=Replace(sBaseDoc, "#", "%23")
 sBaseDoc="file:///"&sBaseDoc
 sBaseDoc=objUriTranslator.translateToInternal(sBaseDoc)
 sNewDoc=Replace(sNewDoc, "\", "/")
 sNewDoc=Replace(sNewDoc, ":", "|")
 sNewDoc=Replace(sNewDoc, "%", "%25")
 sNewDoc=Replace(sNewDoc, " ", "%20")
+sNewDoc=Replace(sNewDoc, "#", "%23")
 sNewDoc="file:///"&sNewDoc
 sNewDoc=objUriTranslator.translateToInternal(sNewDoc)
 
@@ -95,6 +97,3 @@ dispatcher.executeDispatch Frame, ".uno:ShowTrackedChanges", "", 0, oPropertyVal
 oPropertyValue(0).Name = "URL"
 oPropertyValue(0).Value = sBaseDoc
 dispatcher.executeDispatch Frame, ".uno:CompareDocuments", "", 0, oPropertyValue
-
-
-
