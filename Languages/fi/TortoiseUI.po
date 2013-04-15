@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-04-07 09:02+0000\n"
+"PO-Revision-Date: 2013-04-09 21:14+0000\n"
 "Last-Translator: Kari Granö <kari.grano@gmail.com>\n"
 "Language-Team: Finnish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -13280,14 +13280,23 @@ msgstr "{BugTraq}"
 #~ msgid "%s, but the file was moved here"
 #~ msgstr "%s, mutta tiedosto oli siirretty tänne"
 
+#~ msgid "&Accept current working copy state (mark as resolved)"
+#~ msgstr "&Hyväksy nykyinen työkopion tila (merkitse ratkaistuksi)"
+
 #~ msgid "&All"
 #~ msgstr "&Kaikki"
+
+#~ msgid "&Apply the udpate to the move destination"
+#~ msgstr "&Tee päivitys siirtokohteeseen"
 
 #~ msgid "&Do not ask again"
 #~ msgstr "&Älä kysy uudestaan"
 
 #~ msgid "&Empty the recycle bin now"
 #~ msgstr "&Tyhjennä roskakori"
+
+#~ msgid "&Enable edit"
+#~ msgstr "&Salli muokkaus"
 
 #~ msgid "&Ignore and proceed"
 #~ msgstr "&Ohita ja jatka"
@@ -13313,6 +13322,9 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Ankkuri:"
 
+#~ msgid "&Postpone all remaining conflicts"
+#~ msgstr "&Ratkaise loput ristiriidat myöhemmmin"
+
 #~ msgid "&Pre-fetch folders for faster browsing"
 #~ msgstr "&Nouda kansiot ennalta käytön nopeuttamiseksi"
 
@@ -13333,6 +13345,11 @@ msgstr "{BugTraq}"
 
 #~ msgid "Adjust to HEAD revision"
 #~ msgstr "Mukaudu HEAD-versioon"
+
+#~ msgid ""
+#~ "Allow Editing for this view\n"
+#~ "Allow Edit"
+#~ msgstr "Salli muokkaus tässä näkymässä⏎Salli muokkaus"
 
 #~ msgid "Always execute the script"
 #~ msgstr "Suorita komentojono aina"
@@ -13374,6 +13391,13 @@ msgstr "{BugTraq}"
 
 #~ msgid ""
 #~ "Cancel\n"
+#~ "Don't reload views"
+#~ msgstr ""
+#~ "Peru\n"
+#~ "Älä lue näkymiä uudelleen"
+
+#~ msgid ""
+#~ "Cancel\n"
 #~ "Don't show the diff."
 #~ msgstr "Peruuta⏎Älä näytä eroja."
 
@@ -13383,6 +13407,20 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Peruuta\n"
 #~ "Paikalliset muutokset säilytetään"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Stay with current files"
+#~ msgstr ""
+#~ "Peru\n"
+#~ "Säilytä nykyiset tiedostot"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "Stay with current settings"
+#~ msgstr ""
+#~ "Peru\n"
+#~ "Säilytä nykyiset asetukset"
 
 #~ msgid ""
 #~ "Change the style of the application\n"
@@ -13453,6 +13491,9 @@ msgstr "{BugTraq}"
 #~ msgid "Conflicted (maybe)"
 #~ msgstr "Ristiriitainen (ehkä)"
 
+#~ msgid "Copying from foreign repository URL"
+#~ msgstr "Kopioidaan ulkoisesta arkistopaikantimesta"
+
 #~ msgid "Create intermediate folders"
 #~ msgstr "Luo välihakemistot"
 
@@ -13511,6 +13552,16 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Älä suorita\n"
 #~ "Älä suorita komentoa"
+
+#~ msgid ""
+#~ "Don't save\n"
+#~ "Close the views without saving the modifications"
+#~ msgstr ""
+#~ "Älä talleta\n"
+#~ "Sulje näkymät tallettamatta muutoksia"
+
+#~ msgid "Enable Edit"
+#~ msgstr "Salli muokkaus"
 
 #~ msgid "Enforce"
 #~ msgstr "Pakota"
@@ -13582,6 +13633,9 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32893:V C +G"
 #~ msgstr "ID:32893:V C +S"
 
+#~ msgid "ID:32976:V C +E"
+#~ msgstr "ID:32976:V C +E"
+
 #~ msgid ""
 #~ "Ignore changes\n"
 #~ "Ignore the outside changes."
@@ -13600,6 +13654,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Jump to next &conflict"
 #~ msgstr "Siirry seuraavaan &ristiriitaan"
+
+#~ msgid "Keep any moves affected by this operation"
+#~ msgstr "Säilytä kaikki siirrot, joita tämä toimenpide koskee"
 
 #~ msgid "Keep c&hangelists"
 #~ msgstr "&Säilytä muutoslistat"
@@ -13659,6 +13716,9 @@ msgstr "{BugTraq}"
 #~ msgid "Many items selected to show diff"
 #~ msgstr "Useita vertailukohteita vallittu"
 
+#~ msgid "Mark as &resolved (the move will become a copy)"
+#~ msgstr "Merkitse &ratkaistuksi (siirrosta tulee kopio)"
+
 #~ msgid ""
 #~ "Mark as resolved\n"
 #~ "The file status is changed to modified"
@@ -13674,6 +13734,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Yhdistettiin versio(t) {revrange} paikantimesta {mergeurl}:\n"
+
+#~ msgid "Move broken"
+#~ msgstr "Rikkoutunut siirto"
 
 #~ msgid ""
 #~ "Moved from\r\n"
@@ -13790,6 +13853,12 @@ msgstr "{BugTraq}"
 #~ msgid "Repository browser"
 #~ msgstr "Arkistoselain"
 
+#~ msgid "Resolve &later"
+#~ msgstr "Ratkaise &myöhemmin"
+
+#~ msgid "Resolve using &their property"
+#~ msgstr "Ratkaise käyttämällä &heidän ominaisuuttaan"
+
 #~ msgid "Restore"
 #~ msgstr "Palauta"
 
@@ -13825,6 +13894,48 @@ msgstr "{BugTraq}"
 
 #~ msgid "Save"
 #~ msgstr "Tallenna"
+
+#~ msgid "Save File"
+#~ msgstr "Tallenna tiedosto"
+
+#~ msgid ""
+#~ "Save Left File as\n"
+#~ "You're asked where to save the left file"
+#~ msgstr ""
+#~ "Tallenna vasen tiedosto nimellä\n"
+#~ "Vasemman tiedoston talletuspaikka kysytään"
+
+#~ msgid ""
+#~ "Save Left File\n"
+#~ "The modifications are saved to\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Tallenna vasen tiedosto\n"
+#~ "Muutokset talletetaan paikkaan\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Save Right File as\n"
+#~ "You're asked where to save the right file"
+#~ msgstr ""
+#~ "Tallenna oikea tiedosto nimellä\n"
+#~ "Oikean tiedoston talletuspaikka kysytään"
+
+#~ msgid ""
+#~ "Save Right File\n"
+#~ "The modifications are saved to\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Tallenna oikea tiedosto\n"
+#~ "Muutokset tallennetaan paikkaan\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Save all\n"
+#~ "Both Files are saved"
+#~ msgstr ""
+#~ "Tallenna kaikki\n"
+#~ "Molemmat tiedostot tallennetaan"
 
 #~ msgid "Save as"
 #~ msgstr "Tallenna nimellä"
@@ -13962,6 +14073,13 @@ msgstr "{BugTraq}"
 #~ "Tortoise uses."
 #~ msgstr ""
 #~ "Tortoisen käyttämien lisäksi asennettuna on %d kuvakepäällyskäsittelijää."
+
+#~ msgid ""
+#~ "There are more editable views.\n"
+#~ "What view do you want to save?"
+#~ msgstr ""
+#~ "Muokattavia näkymiä on useita.\n"
+#~ "Minkä näkymän haluat tallettaa?"
 
 #~ msgid "There's already a plugin configured for this path"
 #~ msgstr "Tälle polulle on jo määritetty lisäosa"
