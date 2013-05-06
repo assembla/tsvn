@@ -17,15 +17,15 @@
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2012
 # mkbu95 <mkbu95@gmail.com>, 2013
-# Rafael Heise <rmheise@gmail.com>, 2011, 2012
+# Rafael Heise <rmheise@gmail.com>, 2011-2013
 # Ricardo RCDMK Souza <srrcdmk@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-04-28 08:38+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-04-29 14:55+0000\n"
+"Last-Translator: Rafael Heise <rmheise@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -246,7 +246,7 @@ msgstr "%s, mas o diretório já existe localmente."
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was already edited."
-msgstr "%s, mas o diretório já foi editado."
+msgstr "%s, mas o diretório já foi alterado."
 
 #. Resource IDs: (609)
 #, c-format
@@ -13388,6 +13388,15 @@ msgstr "{BugTraq}"
 #~ msgid "&Peg:"
 #~ msgstr "&Limite:"
 
+#~ msgid ""
+#~ "Added the file pattern(s)\n"
+#~ "%s\n"
+#~ "to the global ignore list."
+#~ msgstr ""
+#~ "Adicionar (s) arquivo(s) padrão(ões)\n"
+#~ "%s\n"
+#~ "para a lista global de arquivos ignorados"
+
 #~ msgid "Adjust to HEAD revision"
 #~ msgstr "Ajustar para revisão HEAD"
 
@@ -13402,6 +13411,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "Aqua Style"
 #~ msgstr "Estilo Água"
+
+#~ msgid "Auto-Merge"
+#~ msgstr "Auto-combinação"
+
+#~ msgid "Auto-merge %1!s! into %2!s!"
+#~ msgstr "Auto-combinação %1!s! em %2!s!"
 
 #~ msgid "Backwards in browsing history"
 #~ msgstr "Voltar no histórico"
@@ -13450,6 +13465,18 @@ msgstr "{BugTraq}"
 
 #~ msgid "Color by au&thor"
 #~ msgstr "Cor por au&tor"
+
+#~ msgid ""
+#~ "Command Line To Execute:\r\n"
+#~ "To specify a path inside a working copy, specify the url in the "
+#~ "repository with the repository root url as %REPOROOT%, or %REPOROOT+% "
+#~ "deeper down the working copy root."
+#~ msgstr ""
+#~ "Linha de comando para Executar:»\n"
+#~ "Para especificar um caminho dentro da cópia de trabalho, especifique o "
+#~ "endereço no repositório com o diretório principal do repositório como %"
+#~ "REPOROOT%, ou %REPOROOT+% d até o diretório principal da cópia de "
+#~ "trabalho."
 
 #~ msgid "Compare two files"
 #~ msgstr "Comparar dois arquivos"
@@ -13640,6 +13667,9 @@ msgstr "{BugTraq}"
 #~ msgid "Local &Hooks"
 #~ msgstr "Ganc&hos Locais"
 
+#~ msgid "Lock broken"
+#~ msgstr "Bloqueio desfeito."
+
 #~ msgid "Main"
 #~ msgstr "Principal"
 
@@ -13691,6 +13721,15 @@ msgstr "{BugTraq}"
 #~ msgid "Next inline difference"
 #~ msgstr "Próxima diferença na linha"
 
+#~ msgid ""
+#~ "Notice: if you upgrade your working copy, you won't be able to access the "
+#~ "upgraded working copy with pre 1.8 SVN clients anymore!\n"
+#~ "Do you really want to upgrade this working copy?"
+#~ msgstr ""
+#~ "Nota: se você atualizar sua cópia de trabalho você não poderá mais "
+#~ "acessar uma cópia de trabalho anterior à versão 1.8 de clientes SVN!\n"
+#~ "Você tem certeza que quer atualizar sua cópia de trabalho?"
+
 #~ msgid "Office 2003"
 #~ msgstr "Office 2003"
 
@@ -13719,6 +13758,10 @@ msgstr "{BugTraq}"
 #~ msgid "Peg"
 #~ msgstr "Limite"
 
+#~ msgid "Please wait while we check the parameters for the merge."
+#~ msgstr ""
+#~ "Por favor espere enquanto verificamos os parâmetros para a combinação."
+
 #~ msgid "Previous conflict"
 #~ msgstr "Conflito anterior"
 
@@ -13728,8 +13771,20 @@ msgstr "{BugTraq}"
 #~ msgid "Previous inline difference"
 #~ msgstr "Diferença anterior na linha"
 
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "R&eintegrar o ramo / combinação automática"
+
 #~ msgid "Recycle bin"
 #~ msgstr "Lixeira"
+
+#~ msgid ""
+#~ "Removed the file pattern(s)\n"
+#~ "%s\n"
+#~ "from the global ignore list."
+#~ msgstr ""
+#~ "Removido o(s) arquivo(s) padrão(ões)\n"
+#~ "%s\n"
+#~ "da lista de arquivos ignorados."
 
 #~ msgid "Repository browser"
 #~ msgstr "Navegador de repositório"
@@ -13793,6 +13848,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Skipped, access denied"
 #~ msgstr "Pulado, acesso negado"
+
+#~ msgid "Skipped, remains conflicted"
+#~ msgstr "Ignorado, continua em conflito."
 
 #~ msgid ""
 #~ "Some file(s) have been changed outside T-Merge.\n"
@@ -13923,6 +13981,13 @@ msgstr "{BugTraq}"
 #~ "esse problema."
 
 #~ msgid ""
+#~ "This will upgrade your working copy to the new 1.8 format and make it "
+#~ "unusable for older clients."
+#~ msgstr ""
+#~ "A ação atualizará sua cópia de trabalho para o novo formato versão 1.8 e "
+#~ "ficará inutilizado para versões anteriores."
+
+#~ msgid ""
 #~ "This working copy has a client-side hook script configured. Do you want "
 #~ "this script to run?\n"
 #~ "The command line to run is:\n"
@@ -13932,23 +13997,6 @@ msgstr "{BugTraq}"
 #~ "cliente. Você quer executar este script?\n"
 #~ "A linha de comando para executar é:\n"
 #~ "%s"
-
-#~ msgid ""
-#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
-#~ "Subversion %d.%d.%d, %s\r\n"
-#~ "apr %d.%d.%d\r\n"
-#~ "apr-utils %d.%d.%d\r\n"
-#~ "serf %d.%d.%d\r\n"
-#~ "%s\r\n"
-#~ "zlib %s"
-#~ msgstr ""
-#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
-#~ "Subversion %d.%d.%d, %s\n"
-#~ "apr %d.%d.%d\n"
-#~ "apr-utils %d.%d.%d\n"
-#~ "serf %d.%d.%d\n"
-#~ "%s\n"
-#~ "zlib %s"
 
 #~ msgid ""
 #~ "TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
@@ -13976,6 +14024,13 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Desfazer as últimas modificações⏎\n"
 #~ "Desfazer"
+
+#~ msgid ""
+#~ "Upgrade the working copy\n"
+#~ "to the new 1.8 format."
+#~ msgstr ""
+#~ "Atualizar a cópia local\n"
+#~ "para o novo formato 1.8."
 
 #~ msgid "Use 'mine' text block"
 #~ msgstr "Usar o bloco de texto 'meu'"
@@ -14070,6 +14125,23 @@ msgstr "{BugTraq}"
 
 #~ msgid "user:state"
 #~ msgstr "user:state"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
 
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Pré-carga dos diretórios por uma navegação mais rápida"

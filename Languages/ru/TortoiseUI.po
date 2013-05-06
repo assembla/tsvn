@@ -13,17 +13,19 @@
 # shcham <shcham@gmail.com>, 2013
 # Arkadiy Shapkin <arkadiy_s@inbox.ru>, 2011
 # _deniska <denis_levin@mail.ru>, 2011
+# Dmitry Sytkov <sytkov@gmail.com>, 2011
 # Lübbe Onken <l.onken@rac.de>, 2011
 # Nikolay Osinin <nikolay.osinin@gmail.com>, 2011-2012
+# shcham <shcham@gmail.com>, 2013
 # Dmitry Sytkov <sytkov@gmail.com>, 2011
-# Вячеслав Третьяков <tret2003@gmail.com>, 2012
+# Вячеслав Третьяков <tret2003@gmail.com>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-04-28 08:38+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-04-30 08:06+0000\n"
+"Last-Translator: Nikolay Osinin <nikolay.osinin@gmail.com>\n"
 "Language-Team: Russian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13347,6 +13349,9 @@ msgstr "{СОП}"
 #~ msgid "&All"
 #~ msgstr "&Все"
 
+#~ msgid "&Apply the udpate to the move destination"
+#~ msgstr "&применить обновление к месту назначения"
+
 #~ msgid "&Do not ask again"
 #~ msgstr "&Не спрашивать больше"
 
@@ -13379,6 +13384,9 @@ msgstr "{СОП}"
 
 #~ msgid "&Peg:"
 #~ msgstr "&Стержневая (peg):"
+
+#~ msgid "&Postpone all remaining conflicts"
+#~ msgstr "&Отложить все остальные конфликты"
 
 #~ msgid "&Pre-fetch folders for faster browsing"
 #~ msgstr "&Предварительно выбирать папки для быстрого просмотра"
@@ -13421,6 +13429,12 @@ msgstr "{СОП}"
 #~ "система не поддерживает блокировку файла; если рабочая копия находится в "
 #~ "сетевой файловой системе, то убедитесь, что на файловом сервере разрешена "
 #~ "блокировка файлов."
+
+#~ msgid "Append right block"
+#~ msgstr "Присоединить в конец правый блок"
+
+#~ msgid "Append this block to left"
+#~ msgstr "Присоединить этот блок в конец левого"
 
 #~ msgid "Approve or reject client-side hook script"
 #~ msgstr "Одобрить или отклонить клиентский скрипт обработчика"
@@ -13590,8 +13604,8 @@ msgstr "{СОП}"
 #~ msgid "Do not ask again for this script"
 #~ msgstr "Не спрашивать больше для этого скрипта"
 
-#~ msgid "Do reintegrate instead of automatic merge"
-#~ msgstr "Воссоединить вместо автоматического слияния"
+#~ msgid "Do reintegrate instead of automatic merge (old style)"
+#~ msgstr "Сделать воссоединение вместо автоматического слияния (старый стиль)"
 
 #~ msgid "Do you want to load the changed files?"
 #~ msgstr "Хотите ли загрузить измененные файлы?"
@@ -13716,8 +13730,18 @@ msgstr "{СОП}"
 #~ msgid "Jump to next &conflict"
 #~ msgstr "Перейти к следующему &конфликту"
 
+#~ msgid "Keep any moves affected by this operation"
+#~ msgstr "Сохранить все действия, затронутые этой операцией"
+
 #~ msgid "Keep c&hangelists"
 #~ msgstr "Сохранить группы из&менений"
+
+#~ msgid ""
+#~ "Keep resolving\n"
+#~ "Jump to first unresolved conflict"
+#~ msgstr ""
+#~ "Продолжать улаживание\n"
+#~ "Перейти к первому неулаженному конфликту"
 
 #~ msgid "Kind"
 #~ msgstr "Вид"
@@ -13792,6 +13816,9 @@ msgstr "{СОП}"
 
 #~ msgid "Merged revision(s) {revrange} from {mergeurl}:\n"
 #~ msgstr "Объединённые ревизии {revrange} из {mergeurl}:\n"
+
+#~ msgid "Move broken"
+#~ msgstr "Перемещение прервано"
 
 #~ msgid ""
 #~ "Moved from\r\n"
@@ -13875,6 +13902,12 @@ msgstr "{СОП}"
 #~ msgid "Please wait while we check the parameters for the merge."
 #~ msgstr "Подождите, пожайлуйста, пока мы проверим параметры слияния. "
 
+#~ msgid "Prepend right block"
+#~ msgstr "Присоединить спереди правый блок"
+
+#~ msgid "Prepend this block to left"
+#~ msgstr "Присоединить этот блок спереди левого"
+
 #~ msgid "Previous conflict"
 #~ msgstr "Предыдущий конфликт"
 
@@ -13949,6 +13982,13 @@ msgstr "{СОП}"
 #~ msgid "Save"
 #~ msgstr "Сохранить"
 
+#~ msgid ""
+#~ "Save Bottom File as\n"
+#~ "You're asked where to save the bottom file"
+#~ msgstr ""
+#~ "Сохранить нижний файл как\n"
+#~ "У вас спросили куда сохранить нижний файл"
+
 #~ msgid "Save File"
 #~ msgstr "Сохранить файл"
 
@@ -13993,6 +14033,16 @@ msgstr "{СОП}"
 
 #~ msgid "Save as"
 #~ msgstr "Сохранить как"
+
+#~ msgid "Select what file you want to save as"
+#~ msgstr "Выберите файл, который вы хотите сохранить"
+
+#~ msgid ""
+#~ "Select what file you want to save as\n"
+#~ "Note: There is unresolved conflict!"
+#~ msgstr ""
+#~ "Выберите файл, который вы хотите сохранить\n"
+#~ "Примечание: Есть неулаженный конфликт!"
 
 #~ msgid "Show &externals"
 #~ msgstr "Показывать &внешние"
@@ -14224,20 +14274,31 @@ msgstr "{СОП}"
 #~ "%s"
 
 #~ msgid ""
+#~ "TortoiseMerge %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "libsvn_diff %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-util %d.%d.%d"
+#~ msgstr ""
+#~ "TortoiseMerge %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "libsvn_diff %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-util %d.%d.%d"
+
+#~ msgid ""
 #~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
 #~ "Subversion %d.%d.%d, %s\r\n"
 #~ "apr %d.%d.%d\r\n"
-#~ "apr-utils %d.%d.%d\r\n"
+#~ "apr-util %d.%d.%d\r\n"
 #~ "serf %d.%d.%d\r\n"
 #~ "%s\r\n"
 #~ "zlib %s"
 #~ msgstr ""
-#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
-#~ "Subversion %d.%d.%d, %s\n"
-#~ "apr %d.%d.%d\n"
-#~ "apr-utils %d.%d.%d\n"
-#~ "serf %d.%d.%d\n"
-#~ "%s\n"
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-util %d.%d.%d\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
 #~ "zlib %s"
 
 #~ msgid ""
@@ -14294,6 +14355,12 @@ msgstr "{СОП}"
 
 #~ msgid "Use left block"
 #~ msgstr "Использовать левый блок"
+
+#~ msgid "Use right block"
+#~ msgstr "Использовать правый блок"
+
+#~ msgid "Use this block on left"
+#~ msgstr "Использовать этот блок слева"
 
 #~ msgid "Validation of the property value failed!"
 #~ msgstr "Проверка значения свойства неудалась!"
@@ -14411,6 +14478,26 @@ msgstr "{СОП}"
 
 #~ msgid "user:state"
 #~ msgstr "user:state"
+
+#~ msgid "Do reintegrate instead of automatic merge"
+#~ msgstr "Воссоединить вместо автоматического слияния"
+
+#~ msgid ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\r\n"
+#~ "Subversion %d.%d.%d, %s\r\n"
+#~ "apr %d.%d.%d\r\n"
+#~ "apr-utils %d.%d.%d\r\n"
+#~ "serf %d.%d.%d\r\n"
+#~ "%s\r\n"
+#~ "zlib %s"
+#~ msgstr ""
+#~ "TortoiseSVN %d.%d.%d, Build %d - %s, %s\n"
+#~ "Subversion %d.%d.%d, %s\n"
+#~ "apr %d.%d.%d\n"
+#~ "apr-utils %d.%d.%d\n"
+#~ "serf %d.%d.%d\n"
+#~ "%s\n"
+#~ "zlib %s"
 
 #~ msgid "Pre-fetch folders for faster browsing"
 #~ msgstr "Предварительно выбирать папки для быстрого просмотра"
