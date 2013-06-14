@@ -18,26 +18,35 @@
 //
 #pragma once
 
-/**
-  * \ingroup TortoiseProc
-  * Helper class to hold & load code collaborator tool info.
-  */
-class CodeCollaboratorInfo
+// CodeCollaboratorSettingsDlg dialog
+
+class CodeCollaboratorSettingsDlg : public CDialog
 {
+    DECLARE_DYNAMIC(CodeCollaboratorSettingsDlg)
+
 public:
-    CodeCollaboratorInfo(CString revisions, CString urlOfTrunk);
-    static bool IsInstalled();
-    static CString GetPathToCollabGuiExe();
-    CString GetCommandLine();
-    bool IsUserInfoSet();
+    CodeCollaboratorSettingsDlg(CWnd* pParent = NULL);   // standard constructor
+    virtual ~CodeCollaboratorSettingsDlg();
+    
+// Dialog Data
+    enum { IDD = IDD_COLLABORATORSETTINGS };
+
+protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    virtual BOOL OnInitDialog();
+    
+    DECLARE_MESSAGE_MAP()
 
 private:
-    CString m_Revisions;
-public:
-    CRegString CollabUser;
-    CRegString CollabPassword;
-    CRegString SvnPassword;
-    CRegString SvnUser;
-    CString RepoUrl;
-};
+    CString         m_svnUser;
+    CString         m_svnPassword;
+    CString         m_collabUser;
+    CString         m_collabPassword;
 
+    CRegString      m_regSvnUser;
+    CRegString      m_regSvnPassword;
+    CRegString      m_regCollabUser;
+    CRegString      m_regCollabPassword;
+public:
+    afx_msg void OnBnClickedOk();
+};
