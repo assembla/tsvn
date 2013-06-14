@@ -19,9 +19,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/tortoisesvn/wiki/IssueTracker?tm=3\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-06-03 08:26+0000\n"
+"PO-Revision-Date: 2013-06-10 09:27+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Thai <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,6 @@ msgstr ""
 "Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. Resource IDs: (188)
 # msgid/msgstr fields for Accelerator keys
 # Format is: "ID:xxxxxx:VACS+X" where:
 #    ID:xxxxx = the menu ID corresponding to the accelerator
@@ -44,6 +43,7 @@ msgstr ""
 # updated i.e. function keys (F2), special keys (Delete, HoMe) etc. will not.
 # ONLY change the msgstr field. Do NOT change any other.
 # If you do not want to change an Accelerator Key, copy msgid to msgstr
+#. Resource IDs: (188)
 #, c-format
 msgid "! %d"
 msgstr "! %d"
@@ -94,8 +94,7 @@ msgstr "เลือก %1!d! ไฟล์, ทั้งหมด %2!d! ไฟ�
 
 #. Resource IDs: (246)
 #, c-format
-msgid ""
-"%1!d! most active author(s) with at least %2!d! commits each (%3!d! %%)"
+msgid "%1!d! most active author(s) with at least %2!d! commits each (%3!d! %%)"
 msgstr ""
 
 #. Resource IDs: (226)
@@ -164,7 +163,9 @@ msgstr ""
 msgid ""
 "%1: %2\n"
 "Continue running script?"
-msgstr "%1: %2\nดำเนินการเรียกใช้สคริปต์ต่อหรือไม่?"
+msgstr ""
+"%1: %2\n"
+"ดำเนินการเรียกใช้สคริปต์ต่อหรือไม่?"
 
 #. Resource IDs: (3859)
 #, c-format
@@ -172,7 +173,10 @@ msgid ""
 "%1\n"
 "Cannot find this file.\n"
 "Verify that the correct path and file name are given."
-msgstr "%1\nไม่สามารถค้นหาไฟล์นี้ได้\nโปรดตรวจสอบว่า path และชื่อไฟล์ที่ระบุนั้นถูกต้อง"
+msgstr ""
+"%1\n"
+"ไม่สามารถค้นหาไฟล์นี้ได้\n"
+"โปรดตรวจสอบว่า path และชื่อไฟล์ที่ระบุนั้นถูกต้อง"
 
 #. Resource IDs: (357)
 #, c-format
@@ -349,7 +353,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "%s"
-msgstr "%s\n%s"
+msgstr ""
+"%s\n"
+"%s"
 
 #. Resource IDs: (145)
 #, c-format
@@ -363,21 +369,26 @@ msgstr "%s⏎ Do you want to remove it anyway?"
 msgid ""
 "%s\n"
 "Do you want to remove the %d files anyway?"
-msgstr "%s\nคุณต้องการลบไฟล์ %d นี้หรือไม่?"
+msgstr ""
+"%s\n"
+"คุณต้องการลบไฟล์ %d นี้หรือไม่?"
 
 #. Resource IDs: (147)
 #, c-format
 msgid ""
 "%s\n"
 "Do you want to remove the file '%s' anyway?"
-msgstr "%s\nคุณต้องการลบไฟล์ '%s' นี้หรือไม่?"
+msgstr ""
+"%s\n"
+"คุณต้องการลบไฟล์ '%s' นี้หรือไม่?"
 
 #. Resource IDs: (147)
 #, c-format
 msgid ""
 "%s\n"
 "The folder %s\n"
-"contains unversioned and/or modified file(s). Do you want to remove it anyway?"
+"contains unversioned and/or modified file(s). Do you want to remove it "
+"anyway?"
 msgstr ""
 
 #. Resource IDs: (616)
@@ -404,7 +415,11 @@ msgid ""
 "r%s | %s\n"
 "\n"
 "%s\n"
-msgstr "%s\nr%s | %s\n\n%s\n"
+msgstr ""
+"%s\n"
+"r%s | %s\n"
+"\n"
+"%s\n"
 
 #. Resource IDs: (16923)
 msgid "&..."
@@ -1478,7 +1493,9 @@ msgstr ""
 msgid ""
 "'%s'\n"
 "is not a valid URL or path!"
-msgstr "'%s'\nไม่ใช่ URL หรือเส้นทางที่ถูกต้อง!"
+msgstr ""
+"'%s'\n"
+"ไม่ใช่ URL หรือเส้นทางที่ถูกต้อง!"
 
 #. Resource IDs: (338)
 msgid ""
@@ -1597,12 +1614,10 @@ msgid "- %d"
 msgstr "- %d"
 
 #. Resource IDs: (1007)
-msgid ""
-"-------------------------------------------------------------------------------------------"
+msgid "-------------------------------------------------------------------------------------------"
 msgstr "-------------------------------------------------------------------------------------------"
 
-#. Resource IDs: (1002, 1003, 1021, 1022, 1035, 1036, 1089, 1104, 1324, 1333,
-#. 1362, 1474)
+#. Resource IDs: (1002, 1003, 1021, 1022, 1035, 1036, 1089, 1104, 1324, 1333, 1362, 1474)
 msgid "..."
 msgstr "..."
 
@@ -1671,34 +1686,42 @@ msgstr ""
 msgid ""
 "A newer version is available.\r\n"
 "Please go to http://tortoisesvn.net and download the current version."
-msgstr "เวอร์ชันใหม่พร้อมให้บริการแล้ว\nโปรดไปที่ http://tortoisesvn.net แล้วดาว์นโหลดเวอร์ชันล่าสุด"
+msgstr ""
+"เวอร์ชันใหม่พร้อมให้บริการแล้ว\n"
+"โปรดไปที่ http://tortoisesvn.net แล้วดาว์นโหลดเวอร์ชันล่าสุด"
 
 #. Resource IDs: (195)
 msgid ""
 "A newline separated list of paths for which icon overlays are shown.\r\n"
-"If you add an '?' char at the end of a path, then only this path will be included.\r\n"
-"If you add an '*' or no char at all at the end of a path, then all files and subdirs inside that path are included too."
+"If you add an '?' char at the end of a path, then only this path will be "
+"included.\r\n"
+"If you add an '*' or no char at all at the end of a path, then all files and "
+"subdirs inside that path are included too."
 msgstr ""
 
 #. Resource IDs: (197)
 msgid ""
 "A newline separated list of paths for which no context menu is shown.\r\n"
-"If you add an '*' char at the end of a path, then all files and subdirs inside that path are excluded too.\r\n"
+"If you add an '*' char at the end of a path, then all files and subdirs "
+"inside that path are excluded too.\r\n"
 "An empty list will allow the context menu on all paths."
 msgstr ""
 
 #. Resource IDs: (194)
 msgid ""
 "A newline separated list of paths for which no icon overlays are shown.\r\n"
-"If you add an '?' char at the end of a path, then only this path will be excluded.\r\n"
-"If you add an '*' or no char at all at the end of a path, then all files and subdirs inside that path are excluded too.\r\n"
+"If you add an '?' char at the end of a path, then only this path will be "
+"excluded.\r\n"
+"If you add an '*' or no char at all at the end of a path, then all files and "
+"subdirs inside that path are excluded too.\r\n"
 "An empty list will allow overlays on all paths."
 msgstr ""
 
 #. Resource IDs: (90)
 msgid ""
 "A relocate is only needed if the path to a repository has changed.\n"
-"Changing to a different path inside a repository is done by a switch operation.\n"
+"Changing to a different path inside a repository is done by a switch "
+"operation.\n"
 "\n"
 "If you are not sure what to do, try a switch operation first."
 msgstr ""
@@ -1710,10 +1733,16 @@ msgstr "ทรัพยากรที่จำเป็นไม่พร้อ
 #. Resource IDs: (89)
 #, c-format
 msgid ""
-"A valid path on windows must not contain '<>|\"?*:' or one of the following device names:\n"
+"A valid path on windows must not contain '<>|\"?*:' or one of the following "
+"device names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\n"
-"See the <a href=\"http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%29.aspx\">documentation</a> from Microsoft about this."
-msgstr "เส้นทางที่ถูกต้องสำหรับ Windows ต้องไม่มีเครื่องหมาย '<>|\"?*:' หรือใช้ชื่อดังต่อไปนี้:\ncom1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\nศึกษา<a href=\"http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%29.aspx\">เอกสาร</a>ของ Microsoft เกี่ยวกับเรื่องนี้"
+"See the <a href=\"http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%"
+"29.aspx\">documentation</a> from Microsoft about this."
+msgstr ""
+"เส้นทางที่ถูกต้องสำหรับ Windows ต้องไม่มีเครื่องหมาย '<>|\"?*:' หรือใช้ชื่อดังต่อไปนี้:\n"
+"com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\n"
+"ศึกษา<a href=\"http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%29."
+"aspx\">เอกสาร</a>ของ Microsoft เกี่ยวกับเรื่องนี้"
 
 #. Resource IDs: (79)
 msgid ""
@@ -1757,13 +1786,17 @@ msgstr "ตอบรับถาวร"
 msgid ""
 "Accept the certificate permanently\n"
 "You won't get asked about this certificate again."
-msgstr "ตอบรับใบรับรองนี้ถาวร\nจะไม่มีการถามเกี่ยวกับใบรับรองนี้อีกต่อไป"
+msgstr ""
+"ตอบรับใบรับรองนี้ถาวร\n"
+"จะไม่มีการถามเกี่ยวกับใบรับรองนี้อีกต่อไป"
 
 #. Resource IDs: (148)
 msgid ""
 "Accept the certificate\n"
 "The certificate is accepted only this one time."
-msgstr "ตอบรับใบรับรอง\nยอมรับใบรับรองนี้เพียงแค่ครั้งนี้"
+msgstr ""
+"ตอบรับใบรับรอง\n"
+"ยอมรับใบรับรองนี้เพียงแค่ครั้งนี้"
 
 #. Resource IDs: (3867)
 #, c-format
@@ -1923,7 +1956,9 @@ msgstr ""
 msgid ""
 "Adjust the settings\n"
 "Settings"
-msgstr "ปรับแต่งการตั้งค่า\nตั้งค่า"
+msgstr ""
+"ปรับแต่งการตั้งค่า\n"
+"ตั้งค่า"
 
 #. Resource IDs: (591)
 msgid "Adjust to HEAD revision"
@@ -2005,8 +2040,8 @@ msgstr "ยอมให้มี &UUID ที่กำกวม"
 
 #. Resource IDs: (345)
 msgid ""
-"Allow different repositories to use the same URL, e.g. "
-"http://localhost/myrepos/"
+"Allow different repositories to use the same URL, e.g. http://localhost/"
+"myrepos/"
 msgstr "ยอมให้คลังต่างๆ ใช้ URL เดียวกันได้ เช่น http://localhost/myrepos/"
 
 #. Resource IDs: (345)
@@ -2220,7 +2255,11 @@ msgstr "ผู้แต่ง"
 
 #. Resource IDs: (65535)
 msgid "Author:\t\t\t\tStefan Kueng"
-msgstr "ผู้แต่ง:<span class=\"whitespace other\" title=\"Tab\">»</span><span class=\"whitespace other\" title=\"Tab\">»</span><span class=\"whitespace other\" title=\"Tab\">»</span><span class=\"whitespace other\" title=\"Tab\">»</span>Stefan Kueng"
+msgstr ""
+"ผู้แต่ง:<span class=\"whitespace other\" title=\"Tab\">»</span><span class="
+"\"whitespace other\" title=\"Tab\">»</span><span class=\"whitespace other\" "
+"title=\"Tab\">»</span><span class=\"whitespace other\" title=\"Tab\">»</"
+"span>Stefan Kueng"
 
 #. Resource IDs: (116)
 msgid "Authors"
@@ -2477,7 +2516,11 @@ msgid ""
 "%1!s!\n"
 "to\n"
 "%2!s!"
-msgstr "ไม่สามารถคัดลอก\n%1!s!\nไปยัง\n%2!s!"
+msgstr ""
+"ไม่สามารถคัดลอก\n"
+"%1!s!\n"
+"ไปยัง\n"
+"%2!s!"
 
 #. Resource IDs: (1001)
 msgid "Can't copy bitmap image into the clipboard!"
@@ -2539,7 +2582,9 @@ msgstr ""
 msgid ""
 "Cancel\n"
 "Don't quit TortoiseMerge"
-msgstr "ยกเลิก\nไม่ปิด TortoiseMerge"
+msgstr ""
+"ยกเลิก\n"
+"ไม่ปิด TortoiseMerge"
 
 #. Resource IDs: (315)
 msgid ""
@@ -2563,7 +2608,9 @@ msgstr ""
 msgid ""
 "Cancel\n"
 "Don't switch the views"
-msgstr "ยกเลิก\nไม่เปลี่ยนมุมมอง"
+msgstr ""
+"ยกเลิก\n"
+"ไม่เปลี่ยนมุมมอง"
 
 #. Resource IDs: (173)
 msgid ""
@@ -2593,13 +2640,17 @@ msgstr ""
 msgid ""
 "Cancel\n"
 "Keep the empty file."
-msgstr "ยกเลิก\nปล่อยไฟล์ว่างไว้"
+msgstr ""
+"ยกเลิก\n"
+"ปล่อยไฟล์ว่างไว้"
 
 #. Resource IDs: (199)
 msgid ""
 "Cancel\n"
 "Leave the cache on disk."
-msgstr "ยกเลิก\nเก็บแคชบนดิสก์"
+msgstr ""
+"ยกเลิก\n"
+"เก็บแคชบนดิสก์"
 
 #. Resource IDs: (148)
 msgid ""
@@ -2611,7 +2662,9 @@ msgstr ""
 msgid ""
 "Cancel\n"
 "Resolve the conflicts first."
-msgstr "ยกเลิก\nแก้ปัญหาความขัดแย้งก่อน"
+msgstr ""
+"ยกเลิก\n"
+"แก้ปัญหาความขัดแย้งก่อน"
 
 #. Resource IDs: (315)
 msgid ""
@@ -2629,7 +2682,9 @@ msgstr ""
 msgid ""
 "Cancel\n"
 "The conflict is not resolved."
-msgstr "ยกเลิก\nไม่แก้ปัญหาความขัดแย้ง"
+msgstr ""
+"ยกเลิก\n"
+"ไม่แก้ปัญหาความขัดแย้ง"
 
 #. Resource IDs: (90)
 msgid ""
@@ -2659,7 +2714,9 @@ msgstr ""
 msgid ""
 "Cancel\n"
 "The property is not removed."
-msgstr "ยกเลิก\nไม่เอาคุณสมบัติดังกล่าวออก"
+msgstr ""
+"ยกเลิก\n"
+"ไม่เอาคุณสมบัติดังกล่าวออก"
 
 #. Resource IDs: (147)
 msgid ""
@@ -2918,7 +2975,9 @@ msgstr ""
 msgid ""
 "Cleanup has successfully processed the following paths:\n"
 "%s"
-msgstr "ทำความสะอาดเส้นทางดังกล่าวเรียบร้อยแล้ว:\n%s"
+msgstr ""
+"ทำความสะอาดเส้นทางดังกล่าวเรียบร้อยแล้ว:\n"
+"%s"
 
 #. Resource IDs: (9)
 msgid "Cleanup interrupted operations, locked files, ..."
@@ -3022,7 +3081,9 @@ msgstr "ปิดเต็มจอ"
 msgid ""
 "Close Print Preview\n"
 "&Close"
-msgstr "ปิดตัวอย่างก่อนพิมพ์\n&ปิด"
+msgstr ""
+"ปิดตัวอย่างก่อนพิมพ์\n"
+"&ปิด"
 
 #. Resource IDs: (222)
 msgid "Close manually"
@@ -3102,7 +3163,9 @@ msgstr ""
 #, c-format
 msgid ""
 "Command Line To Execute:\r\n"
-"To specify a path inside a working copy, specify the url in the repository with the repository root url as %REPOROOT%, or %REPOROOT+% deeper down the working copy root."
+"To specify a path inside a working copy, specify the url in the repository "
+"with the repository root url as %REPOROOT%, or %REPOROOT+% deeper down the "
+"working copy root."
 msgstr ""
 
 #. Resource IDs: (616)
@@ -3165,13 +3228,15 @@ msgstr ""
 #. Resource IDs: (173)
 msgid ""
 "Committing an unversioned folder will not recursively add its child items!\n"
-"You might want to add these folders recursively by using the 'Add...' context menu item."
+"You might want to add these folders recursively by using the 'Add...' "
+"context menu item."
 msgstr ""
 
 #. Resource IDs: (170)
 msgid ""
 "Committing an unversioned folder will not recursively add its child items!\n"
-"You might want to add these folders recursively by using the 'Add...' context menu item.\n"
+"You might want to add these folders recursively by using the 'Add...' "
+"context menu item.\n"
 "\n"
 "Are you sure that you want to continue the commit?"
 msgstr ""
@@ -3327,6 +3392,14 @@ msgstr "ต่อ"
 msgid "Contract docked window"
 msgstr ""
 
+#. Resource IDs: (501)
+msgid "Convert spaces to tabs"
+msgstr ""
+
+#. Resource IDs: (501)
+msgid "Convert tabs to spaces"
+msgstr ""
+
 #. Resource IDs: (15)
 msgid "Converts the working copy format to the new version"
 msgstr ""
@@ -3365,7 +3438,9 @@ msgstr "คัดลอก"
 msgid ""
 "Copy %1!ld! items to\r\n"
 "%2!s!"
-msgstr "คัดลอก %1!ld! รายการไปยัง\n%2!s!"
+msgstr ""
+"คัดลอก %1!ld! รายการไปยัง\n"
+"%2!s!"
 
 #. Resource IDs: (229)
 #, c-format
@@ -3377,7 +3452,9 @@ msgstr ""
 msgid ""
 "Copy %1!s!\r\n"
 "to %2!s!"
-msgstr "คัดลอก %1!s!\nไปยัง %2!s!"
+msgstr ""
+"คัดลอก %1!s!\n"
+"ไปยัง %2!s!"
 
 #. Resource IDs: (103)
 #, c-format
@@ -3392,7 +3469,9 @@ msgstr "คัดลอก (Branch / Tag)"
 msgid ""
 "Copy Tool\n"
 "Copy"
-msgstr "เครื่องในการคัดลอก\nคัดลอก"
+msgstr ""
+"เครื่องในการคัดลอก\n"
+"คัดลอก"
 
 #. Resource IDs: (101)
 msgid "Copy URL to clipboard"
@@ -3503,7 +3582,9 @@ msgstr "ไม่สามารถตรวจหาการปรับรุ
 msgid ""
 "Could not copy the files!\n"
 "%s"
-msgstr "ไม่สามารถคัดลอกไฟล์!\n%s"
+msgstr ""
+"ไม่สามารถคัดลอกไฟล์!\n"
+"%s"
 
 #. Resource IDs: (3867)
 #, c-format
@@ -3559,7 +3640,9 @@ msgstr ""
 msgid ""
 "Could not open the file\n"
 "%s"
-msgstr "ไม่สามารถอ่านไฟล์\n%s"
+msgstr ""
+"ไม่สามารถอ่านไฟล์\n"
+"%s"
 
 #. Resource IDs: (3867)
 #, c-format
@@ -3586,7 +3669,9 @@ msgstr "ไม่สามารถแทนที่สถานะ '%1!s!' ข
 msgid ""
 "Could not retrieve URL of the file!\n"
 "%s"
-msgstr "ไม่สามารถค้นคืน URL ของไฟล์ดังกล่าวได้!\n%s"
+msgstr ""
+"ไม่สามารถค้นคืน URL ของไฟล์ดังกล่าวได้!\n"
+"%s"
 
 #. Resource IDs: (66)
 #, c-format
@@ -3650,6 +3735,10 @@ msgstr ""
 
 #. Resource IDs: (208)
 msgid "Create Patch"
+msgstr ""
+
+#. Resource IDs: (64)
+msgid "Create code collaborator revie&w..."
 msgstr ""
 
 #. Resource IDs: (1385)
@@ -3744,9 +3833,11 @@ msgstr ""
 msgid ""
 "Custom title string. Available keywords are:\r\n"
 "{mergeurl}:\tthe source url of the merge\r\n"
-"{revisions}:\tA comma separated list of the merged revisions, e.g., 3, 5, 6, 7\r\n"
+"{revisions}:\tA comma separated list of the merged revisions, e.g., 3, 5, 6, "
+"7\r\n"
 "{revisionsr}:\tLike {revisions} but with an 'r' in front of the revisions\r\n"
-"{revrange}:\tA comma separated list of the merged revisions, grouped into ranges if possible, e.g., 3, 5-7"
+"{revrange}:\tA comma separated list of the merged revisions, grouped into "
+"ranges if possible, e.g., 3, 5-7"
 msgstr ""
 
 #. Resource IDs: (1007, 17074)
@@ -3863,7 +3954,9 @@ msgstr ""
 msgid ""
 "Delete\n"
 "The file is removed."
-msgstr "ลบทิ้ง\nไฟล์ถูกลบทิ้งแล้ว"
+msgstr ""
+"ลบทิ้ง\n"
+"ไฟล์ถูกลบทิ้งแล้ว"
 
 #. Resource IDs: (73, 264, 1510, 1551)
 msgid "Deleted"
@@ -4102,7 +4195,8 @@ msgstr ""
 msgid ""
 "Do you really want to revert all changes in\n"
 "%s\n"
-"and go back to this revision? These changes will be reverted by reverse-merging the revisions into your working copy."
+"and go back to this revision? These changes will be reverted by reverse-"
+"merging the revisions into your working copy."
 msgstr ""
 
 #. Resource IDs: (76)
@@ -4110,7 +4204,8 @@ msgstr ""
 msgid ""
 "Do you really want to revert all changes in\n"
 "%s\n"
-"which were made in this revision? These changes will be reverted by reverse-merging the revision into your working copy."
+"which were made in this revision? These changes will be reverted by reverse-"
+"merging the revision into your working copy."
 msgstr ""
 
 #. Resource IDs: (315)
@@ -4354,7 +4449,9 @@ msgstr "แก้ไขบันทึกเหตุการณ์"
 msgid ""
 "Edit property '%1!S!' on\r\n"
 "%2!s!"
-msgstr "แก้ไขคุณสมบัติ '%1!S!' ของ\n%2!s!"
+msgstr ""
+"แก้ไขคุณสมบัติ '%1!S!' ของ\n"
+"%2!s!"
 
 #. Resource IDs: (1331, 1382)
 msgid "Edit..."
@@ -4592,8 +4689,8 @@ msgstr ""
 
 #. Resource IDs: (1002)
 msgid ""
-"Executable (*.exe)|*.exe|Command (*.com)|*.com|Information "
-"(*.pdf)|*.pdf|Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
+"Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|"
+"Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
 msgstr ""
 
 #. Resource IDs: (1002)
@@ -4642,8 +4739,7 @@ msgid "Export directory:"
 msgstr ""
 
 #. Resource IDs: (345)
-msgid ""
-"Export the selected cache as a set of Comma Separated Value (CSV) files"
+msgid "Export the selected cache as a set of Comma Separated Value (CSV) files"
 msgstr ""
 
 #. Resource IDs: (79)
@@ -4740,8 +4836,8 @@ msgstr ""
 
 #. Resource IDs: (3865)
 msgid ""
-"Failed to create object.  Make sure the application is entered in the system"
-" registry."
+"Failed to create object.  Make sure the application is entered in the system "
+"registry."
 msgstr ""
 
 #. Resource IDs: (3857)
@@ -4785,8 +4881,7 @@ msgid "Fetch HEAD revision and adjust to it"
 msgstr ""
 
 #. Resource IDs: (199)
-msgid ""
-"Fetches the contents of folders in the background so browsing is faster"
+msgid "Fetches the contents of folders in the background so browsing is faster"
 msgstr ""
 
 #. Resource IDs: (92)
@@ -5109,10 +5204,14 @@ msgstr ""
 
 #. Resource IDs: (89)
 msgid ""
-"Getting a lock for files without the 'svn:needs-lock' property will not prevent others from editing them in their working copies.\n"
-"To enable strict locking please add the 'svn:needs-lock' property to all files that need locking, and commit those files.\n"
-"Each file will have the file-system read-only flag set, and getting a lock will make the file writable.\n"
-"Note that other users will need to update their working copies before they see the files as read-only."
+"Getting a lock for files without the 'svn:needs-lock' property will not "
+"prevent others from editing them in their working copies.\n"
+"To enable strict locking please add the 'svn:needs-lock' property to all "
+"files that need locking, and commit those files.\n"
+"Each file will have the file-system read-only flag set, and getting a lock "
+"will make the file writable.\n"
+"Note that other users will need to update their working copies before they "
+"see the files as read-only."
 msgstr ""
 
 #. Resource IDs: (119)
@@ -5579,7 +5678,8 @@ msgstr ""
 
 #. Resource IDs: (198)
 msgid ""
-"If activated, the menu entry 'Get Lock' is always shown in the top level menu\n"
+"If activated, the menu entry 'Get Lock' is always shown in the top level "
+"menu\n"
 "if the selected file has the svn:needs-lock property set"
 msgstr ""
 
@@ -5603,7 +5703,8 @@ msgstr ""
 
 #. Resource IDs: (195)
 msgid ""
-"If enabled, the Merge dialog initializes the 'From:' URL with the URL of the selected working copy\r\n"
+"If enabled, the Merge dialog initializes the 'From:' URL with the URL of the "
+"selected working copy\r\n"
 "instead of the last used URL."
 msgstr ""
 
@@ -5627,13 +5728,15 @@ msgstr ""
 
 #. Resource IDs: (196)
 msgid ""
-"If set, files inside unversioned folders can be shown in the status control.\r\n"
+"If set, files inside unversioned folders can be shown in the status control."
+"\r\n"
 "The status control is used for example in the commit dialog."
 msgstr ""
 
 #. Resource IDs: (196)
 msgid ""
-"If set, then unversioned files will mark the status of the parent directory as modified\r\n"
+"If set, then unversioned files will mark the status of the parent directory "
+"as modified\r\n"
 "i.e. they get the modified overlay icon."
 msgstr ""
 
@@ -5959,7 +6062,8 @@ msgstr ""
 #. Resource IDs: (89)
 #, c-format
 msgid ""
-"It seems you are trying to relocate your working copy to a different path inside the same repository.\n"
+"It seems you are trying to relocate your working copy to a different path "
+"inside the same repository.\n"
 "From: %1!s!\n"
 "To: %2!s!\n"
 "\n"
@@ -5969,13 +6073,15 @@ msgstr ""
 #. Resource IDs: (88)
 #, c-format
 msgid ""
-"It seems you are trying to relocate your working copy to a different path inside the same repository.\n"
+"It seems you are trying to relocate your working copy to a different path "
+"inside the same repository.\n"
 "\n"
 "From:\t%1!s!\n"
 "To:\t%2!s!\n"
 "\n"
 "A relocate is only needed if the path to a repository has changed.\n"
-"Changing to a different path inside a repository is done by a switch operation.\n"
+"Changing to a different path inside a repository is done by a switch "
+"operation.\n"
 "\n"
 "Improper use of relocate will corrupt your working copy!\n"
 "If you are not sure what to do, please refer to our docs on relocate.\n"
@@ -6514,8 +6620,8 @@ msgstr ""
 
 #. Resource IDs: (14)
 msgid ""
-"Merges all missing revisions back into the working copy using merge-tracking"
-" information"
+"Merges all missing revisions back into the working copy using merge-tracking "
+"information"
 msgstr ""
 
 #. Resource IDs: (1073)
@@ -6534,8 +6640,8 @@ msgstr ""
 #. Resource IDs: (229)
 #, c-format
 msgid ""
-"Merging from %1!s!, revision %2!s! to %3!s!, revision %4!s! into %5!s!, "
-"%6!s!%7!s!%8!s!"
+"Merging from %1!s!, revision %2!s! to %3!s!, revision %4!s! into %5!s!, %6!s!"
+"%7!s!%8!s!"
 msgstr ""
 
 #. Resource IDs: (264)
@@ -6880,7 +6986,8 @@ msgstr ""
 #. Resource IDs: (81)
 msgid ""
 "No command specified!\n"
-"TortoiseProc.exe is used by the Shell extension and should not be called directly!"
+"TortoiseProc.exe is used by the Shell extension and should not be called "
+"directly!"
 msgstr ""
 
 #. Resource IDs: (81)
@@ -6912,7 +7019,8 @@ msgstr ""
 #. Resource IDs: (239)
 msgid ""
 "No files to show with the current setting.\n"
-"Check one or more settings below to see unversioned, ignored and/or unmodified files.\n"
+"Check one or more settings below to see unversioned, ignored and/or "
+"unmodified files.\n"
 "To see remote changes, click on 'Check Repository'"
 msgstr ""
 
@@ -7047,7 +7155,8 @@ msgstr ""
 
 #. Resource IDs: (99)
 msgid ""
-"Notice: if you upgrade your working copy, you won't be able to access the upgraded working copy with pre 1.8 SVN clients anymore!\n"
+"Notice: if you upgrade your working copy, you won't be able to access the "
+"upgraded working copy with pre 1.8 SVN clients anymore!\n"
 "Do you really want to upgrade this working copy?"
 msgstr ""
 
@@ -7104,8 +7213,8 @@ msgstr ""
 
 #. Resource IDs: (338)
 msgid ""
-"Number of path elements. A path element is a folder or file name like "
-"'foo.txt' or 'mybranch'."
+"Number of path elements. A path element is a folder or file name like 'foo."
+"txt' or 'mybranch'."
 msgstr ""
 
 #. Resource IDs: (345)
@@ -7248,8 +7357,8 @@ msgstr ""
 msgid "Open image file..."
 msgstr "เปิดไฟล์รูปภาพ..."
 
-#. Resource IDs: (115)
-msgid "Open local file in &Visual Studio..."
+#. Resource IDs: (64)
+msgid "Open multiple &local..."
 msgstr ""
 
 #. Resource IDs: (282)
@@ -7469,8 +7578,8 @@ msgstr ""
 
 #. Resource IDs: (157)
 msgid ""
-"Pictures (*.svg, *.wmf, *.jpg, *.png, *.bmp, "
-"*.gif)|*.svg;*.wmf;*.jpg;*.jpeg;*.png;*.bmp;*.gif|All (*.*)|*.*||"
+"Pictures (*.svg, *.wmf, *.jpg, *.png, *.bmp, *.gif)|*.svg;*.wmf;*.jpg;*.jpeg;"
+"*.png;*.bmp;*.gif|All (*.*)|*.*||"
 msgstr ""
 
 #. Resource IDs: (246)
@@ -7492,7 +7601,8 @@ msgstr ""
 #. Resource IDs: (78)
 msgid ""
 "Please note:\n"
-"Your working copy remains on the previous path. If you want your next changes\n"
+"Your working copy remains on the previous path. If you want your next "
+"changes\n"
 "to be committed to the copy or branch you have just created,\n"
 "then you need to switch your working copy over to the new URL.\n"
 "Use the Switch command to do that."
@@ -8039,8 +8149,7 @@ msgid "Release loc&k..."
 msgstr ""
 
 #. Resource IDs: (16)
-msgid ""
-"Releases locks even if you're not the owner of the locks (breaks them)."
+msgid "Releases locks even if you're not the owner of the locks (breaks them)."
 msgstr ""
 
 #. Resource IDs: (16)
@@ -8702,13 +8811,22 @@ msgstr "SVN URL สั้น"
 msgid ""
 "Sample log message to test the bugtraq: regex strings.\n"
 "\n"
-"Testing mentions of issues inside a text: Mention issue #55. Mention issues #77, #78.\n"
+"Testing mentions of issues inside a text: Mention issue #55. Mention issues "
+"#77, #78.\n"
 "\n"
 "Update issue #101\n"
 "Fixes issue #202\n"
 "Resolves issue #88.\n"
 "Closes issue #99.\n"
-msgstr "ข้อความตัวอย่างเพื่อทดสอบ bugtraq: regex strings.\n\nทดสอบกล่าวถึงปัญหาในประโยค: กล่าวถึงปัญหา #55. กล่าวถึงปัญหา #77, #78.\n\nปัญหาที่ปรับปรุง #101\nปัญหาที่แก้ไข #202\nปัญหาที่กลับสู่ปกติ #88.\nปัญหาที่ปิด #99.\n"
+msgstr ""
+"ข้อความตัวอย่างเพื่อทดสอบ bugtraq: regex strings.\n"
+"\n"
+"ทดสอบกล่าวถึงปัญหาในประโยค: กล่าวถึงปัญหา #55. กล่าวถึงปัญหา #77, #78.\n"
+"\n"
+"ปัญหาที่ปรับปรุง #101\n"
+"ปัญหาที่แก้ไข #202\n"
+"ปัญหาที่กลับสู่ปกติ #88.\n"
+"ปัญหาที่ปิด #99.\n"
 
 #. Resource IDs: (1612)
 msgid "Sample text:"
@@ -9290,6 +9408,10 @@ msgstr ""
 msgid "Show lo&g"
 msgstr ""
 
+#. Resource IDs: (64)
+msgid "Show multiple &changes..."
+msgstr ""
+
 #. Resource IDs: (2051)
 msgid "Show oldest node at top"
 msgstr ""
@@ -9363,8 +9485,8 @@ msgstr ""
 #. Resource IDs: (115)
 #, c-format
 msgid ""
-"Showing %1!ld! revision(s), from revision %2!ld! to revision %3!ld! - %4!ld!"
-" revision(s) selected, showing %5!ld! changed paths"
+"Showing %1!ld! revision(s), from revision %2!ld! to revision %3!ld! - %4!ld! "
+"revision(s) selected, showing %5!ld! changed paths"
 msgstr ""
 
 #. Resource IDs: (272)
@@ -9383,8 +9505,8 @@ msgstr ""
 
 #. Resource IDs: (13)
 msgid ""
-"Shows all files which were changed since the last update, locally and in the"
-" repository"
+"Shows all files which were changed since the last update, locally and in the "
+"repository"
 msgstr ""
 
 #. Resource IDs: (2050)
@@ -9673,18 +9795,25 @@ msgstr ""
 #. Resource IDs: (117)
 msgid ""
 "Sub-string filter:\r\n"
-"* Specify one or more strings, separated by spaces. They will be evaluated left to right.\r\n"
-"* Put a - in front of a sub-string to exclude revisions that contain this sub-string.\r\n"
-"* Put a + in front of a sub-string to include revisions that may not match the filter so far.\r\n"
+"* Specify one or more strings, separated by spaces. They will be evaluated "
+"left to right.\r\n"
+"* Put a - in front of a sub-string to exclude revisions that contain this "
+"sub-string.\r\n"
+"* Put a + in front of a sub-string to include revisions that may not match "
+"the filter so far.\r\n"
 "* Enclose strings that contain spaces etc. with \".\r\n"
-"* Put a ! at the beginning of the line to invert the whole filter condition.\r\n"
+"* Put a ! at the beginning of the line to invert the whole filter condition."
+"\r\n"
 "\r\n"
 "Examples:\r\n"
 "myname  2008    : my commits of 2008\r\n"
-".h  -.cpp              : commits that changed headers but no implementations\r\n"
+".h  -.cpp              : commits that changed headers but no implementations"
+"\r\n"
 ".doc +.xls 2010  : commits from 2010 with .doc or .xls files in it\r\n"
-"\" \"                        : commits with spaces (ex. when searching in paths only)\r\n"
-"-\"\"show all\"\"        : commits that don't contain the string \"show all\"\r\n"
+"\" \"                        : commits with spaces (ex. when searching in "
+"paths only)\r\n"
+"-\"\"show all\"\"        : commits that don't contain the string \"show all"
+"\"\r\n"
 "!myname  .cpp    : everything but my commits to .cpp files"
 msgstr ""
 
@@ -9714,7 +9843,22 @@ msgid ""
 "\n"
 "you can copy the content of this dialog\n"
 "to the clipboard using Ctrl-C."
-msgstr "Subversion ประสบปัญหาร้ายแรง\nโปรดสละเวลารายงานปัญหานี้ผ่านทางกลุ่มเมลของ Subversion\nด้วยรายละเอียดที่มากที่สุดเท่าที่จะทำได้\nว่าคุณพยายามจะทำสิ่งใด\nกรุณาค้นข้อความผิดพลาดนี้ในหอจดหมายเหตุก่อน\nเพื่อลีกเลี่ยงการแจ้งปัญหาซ้ำซ้อน\nคุณสามารถพบหอจดหมายเหตุได้ที่\nhttp://subversion.apache.org/mailing-lists.html\n\nSubversion ประสบปัญหากับ:\nไฟล์ %1!s!, บรรทัดที่ %2!ld!\nนิพจน์ = %3!s!\n\nคุณสามารถคัดลอกเนื้อหาดังกล่าว\nไปยังคลิปบอร์ดได้โดยกดปุ่ม Ctrl-C"
+msgstr ""
+"Subversion ประสบปัญหาร้ายแรง\n"
+"โปรดสละเวลารายงานปัญหานี้ผ่านทางกลุ่มเมลของ Subversion\n"
+"ด้วยรายละเอียดที่มากที่สุดเท่าที่จะทำได้\n"
+"ว่าคุณพยายามจะทำสิ่งใด\n"
+"กรุณาค้นข้อความผิดพลาดนี้ในหอจดหมายเหตุก่อน\n"
+"เพื่อลีกเลี่ยงการแจ้งปัญหาซ้ำซ้อน\n"
+"คุณสามารถพบหอจดหมายเหตุได้ที่\n"
+"http://subversion.apache.org/mailing-lists.html\n"
+"\n"
+"Subversion ประสบปัญหากับ:\n"
+"ไฟล์ %1!s!, บรรทัดที่ %2!ld!\n"
+"นิพจน์ = %3!s!\n"
+"\n"
+"คุณสามารถคัดลอกเนื้อหาดังกล่าว\n"
+"ไปยังคลิปบอร์ดได้โดยกดปุ่ม Ctrl-C"
 
 #. Resource IDs: (84)
 msgid ""
@@ -9730,20 +9874,36 @@ msgid ""
 "Subversion reported the following\n"
 "(you can copy the content of this dialog\n"
 "to the clipboard using Ctrl-C):"
-msgstr "Subversion ประสบปัญหาร้ายแรง\nโปรดสละเวลารายงานปัญหานี้ผ่านทางกลุ่มเมลของ Subversion\nด้วยรายละเอียดที่มากที่สุดเท่าที่จะทำได้\nว่าคุณพยายามจะทำสิ่งใด\nกรุณาค้นข้อความผิดพลาดนี้ในหอจดหมายเหตุก่อน\nเพื่อลีกเลี่ยงการแจ้งปัญหาซ้ำซ้อน\nคุณสามารถพบหอจดหมายเหตุได้ที่\nhttp://subversion.apache.org/mailing-lists.html\n\nSubversion รายงานผลดังนี้\n(คุณสามารถคัดลอกเนื้อหาดังกล่าว\nไปยังคลิปบอร์ดได้โดยกดปุ่ม Ctrl-C)"
+msgstr ""
+"Subversion ประสบปัญหาร้ายแรง\n"
+"โปรดสละเวลารายงานปัญหานี้ผ่านทางกลุ่มเมลของ Subversion\n"
+"ด้วยรายละเอียดที่มากที่สุดเท่าที่จะทำได้\n"
+"ว่าคุณพยายามจะทำสิ่งใด\n"
+"กรุณาค้นข้อความผิดพลาดนี้ในหอจดหมายเหตุก่อน\n"
+"เพื่อลีกเลี่ยงการแจ้งปัญหาซ้ำซ้อน\n"
+"คุณสามารถพบหอจดหมายเหตุได้ที่\n"
+"http://subversion.apache.org/mailing-lists.html\n"
+"\n"
+"Subversion รายงานผลดังนี้\n"
+"(คุณสามารถคัดลอกเนื้อหาดังกล่าว\n"
+"ไปยังคลิปบอร์ดได้โดยกดปุ่ม Ctrl-C)"
 
 #. Resource IDs: (79)
 msgid ""
 "Subversion reported an error while creating a repository!\n"
 "Make sure the folder is empty and not write protected."
-msgstr "Subversion รายงานข้อผิดพลาดในการสร้างคลัง!\nโปรดตรวจสอบว่าโฟลเดอร์ว่างเปล่าและไม่มีการป้องกันการเขียน"
+msgstr ""
+"Subversion รายงานข้อผิดพลาดในการสร้างคลัง!\n"
+"โปรดตรวจสอบว่าโฟลเดอร์ว่างเปล่าและไม่มีการป้องกันการเขียน"
 
 #. Resource IDs: (81)
 #, c-format
 msgid ""
 "Subversion reported an error while doing a cleanup!\n"
 "%s"
-msgstr "Subversion รายงานข้อผิดพลาดระหว่างทำความสะอาด!\n%s"
+msgstr ""
+"Subversion รายงานข้อผิดพลาดระหว่างทำความสะอาด!\n"
+"%s"
 
 #. Resource IDs: (15)
 msgid "Subversion reported an error:"
@@ -9915,8 +10075,8 @@ msgstr ""
 
 #. Resource IDs: (346)
 msgid ""
-"The color of creation, copy and rename nodes of tags will be shifted towards"
-" yellow."
+"The color of creation, copy and rename nodes of tags will be shifted towards "
+"yellow."
 msgstr ""
 
 #. Resource IDs: (346)
@@ -9964,7 +10124,11 @@ msgid ""
 "%s\n"
 "is empty.\n"
 "Do you want to remove the file?"
-msgstr "ไฟล์\n%s\nว่างเปล่า\nคุณต้องการเอาไฟล์นี้ออกหรือไม่?"
+msgstr ""
+"ไฟล์\n"
+"%s\n"
+"ว่างเปล่า\n"
+"คุณต้องการเอาไฟล์นี้ออกหรือไม่?"
 
 #. Resource IDs: (69)
 msgid "The file is too big"
@@ -9980,7 +10144,10 @@ msgid ""
 "The file\n"
 "%s\n"
 "already exists! Do you want to overwrite it?"
-msgstr "มีไฟล์\n%s\nอยู่แล้ว! คุณต้องการเขียนทับหรือไม่?"
+msgstr ""
+"มีไฟล์\n"
+"%s\n"
+"อยู่แล้ว! คุณต้องการเขียนทับหรือไม่?"
 
 #. Resource IDs: (69)
 #, c-format
@@ -9994,7 +10161,8 @@ msgstr ""
 #, c-format
 msgid ""
 "The folder %s\n"
-"contains unversioned and/or modified file(s). Do you want to remove it anyway?"
+"contains unversioned and/or modified file(s). Do you want to remove it "
+"anyway?"
 msgstr ""
 
 #. Resource IDs: (88)
@@ -10004,7 +10172,10 @@ msgid ""
 "%s\n"
 "does not exist.\n"
 "Would you like to create it first?"
-msgstr "ไม่มีโฟลเดอร์\n%s\nคุณต้องการสร้างมันก่อนหรือไม่?"
+msgstr ""
+"ไม่มีโฟลเดอร์\n"
+"%s\n"
+"คุณต้องการสร้างมันก่อนหรือไม่?"
 
 #. Resource IDs: (99)
 #, c-format
@@ -10012,7 +10183,10 @@ msgid ""
 "The folder\n"
 "%s\n"
 "already exists!"
-msgstr "มีโฟลเดอร์\n%s\nอยู่แล้ว!"
+msgstr ""
+"มีโฟลเดอร์\n"
+"%s\n"
+"อยู่แล้ว!"
 
 #. Resource IDs: (83)
 #, c-format
@@ -10056,8 +10230,7 @@ msgstr ""
 
 #. Resource IDs: (608)
 #, c-format
-msgid ""
-"The last merge operation tried to delete/move/rename the directory '%s'"
+msgid "The last merge operation tried to delete/move/rename the directory '%s'"
 msgstr ""
 
 #. Resource IDs: (607)
@@ -10234,14 +10407,17 @@ msgstr ""
 msgid ""
 "The path/URL '%s' seems to be illegal on Windows!\n"
 "You can try it anyway, but you might get an error later."
-msgstr "ดูเหมือน เส้นทาง/URL '%s' ผิดกฏของ Windows!\nคุณสามารถลองใช้มันได้แต่อาจจะเกิดข้อผิดพลาดในภายหลัง"
+msgstr ""
+"ดูเหมือน เส้นทาง/URL '%s' ผิดกฏของ Windows!\n"
+"คุณสามารถลองใช้มันได้แต่อาจจะเกิดข้อผิดพลาดในภายหลัง"
 
 #. Resource IDs: (88)
 msgid ""
 "The path/URL you've entered seems to be illegal on Windows!\n"
 "You can try it anyway, but you might get an error later.\n"
 "\n"
-"A valid path on windows must not contain '<>|\"?*:' or one of the following device names:\n"
+"A valid path on windows must not contain '<>|\"?*:' or one of the following "
+"device names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\n"
 "\n"
 "Do you want to proceed anyway?"
@@ -10257,7 +10433,8 @@ msgid ""
 "%2!s!\n"
 "which seems to match the directory you're applying the patch.\n"
 "\n"
-"Do you want to use the suggested path? Answering 'no' will quit TortoiseMerge."
+"Do you want to use the suggested path? Answering 'no' will quit "
+"TortoiseMerge."
 msgstr ""
 
 #. Resource IDs: (314)
@@ -10277,7 +10454,8 @@ msgid ""
 "The path\n"
 "%s\n"
 "in the patchfile does not exist.\n"
-"TortoiseMerge tried to apply the patch by stripping prefixes but no matching path could be found."
+"TortoiseMerge tried to apply the patch by stripping prefixes but no matching "
+"path could be found."
 msgstr ""
 
 #. Resource IDs: (84)
@@ -10309,7 +10487,9 @@ msgstr ""
 msgid ""
 "The returned error was:\n"
 "%s"
-msgstr "ข้อผิดพลาดที่ได้รับคือ:\n%s"
+msgstr ""
+"ข้อผิดพลาดที่ได้รับคือ:\n"
+"%s"
 
 #. Resource IDs: (78)
 msgid ""
@@ -10323,7 +10503,10 @@ msgid ""
 "The target URL\n"
 "%s\n"
 "already exists!"
-msgstr "URL เป้าหมาย\n%s\nมีอยู่แล้ว!"
+msgstr ""
+"URL เป้าหมาย\n"
+"%s\n"
+"มีอยู่แล้ว!"
 
 #. Resource IDs: (147)
 msgid "The target already exists."
@@ -10336,7 +10519,11 @@ msgid ""
 "%s\n"
 " already exists.\n"
 "Do you want to replace the file?"
-msgstr "ไฟล์เป้าหมาย\n%s\n มีอยู่แล้ว\nคุณต้องการแทนที่ไฟล์หรือไม่?"
+msgstr ""
+"ไฟล์เป้าหมาย\n"
+"%s\n"
+" มีอยู่แล้ว\n"
+"คุณต้องการแทนที่ไฟล์หรือไม่?"
 
 #. Resource IDs: (88)
 #, c-format
@@ -10411,8 +10598,10 @@ msgstr ""
 
 #. Resource IDs: (169)
 msgid ""
-"There are changes or unversioned items inside one or more directories which you have included with svn:externals.\n"
-"Those files are not listed for commit. You need to commit those files separately."
+"There are changes or unversioned items inside one or more directories which "
+"you have included with svn:externals.\n"
+"Those files are not listed for commit. You need to commit those files "
+"separately."
 msgstr ""
 
 #. Resource IDs: (200)
@@ -10438,7 +10627,8 @@ msgid ""
 "There are still unresolved conflicts in line %d!\n"
 "You should resolve those conflicts first before saving.\n"
 "Do you want to save the file with the conflicts still there?\n"
-"If you click YES, then you have to manually resolve the conflicts in another editor!"
+"If you click YES, then you have to manually resolve the conflicts in another "
+"editor!"
 msgstr ""
 
 #. Resource IDs: (313)
@@ -10505,19 +10695,22 @@ msgstr ""
 
 #. Resource IDs: (251)
 msgid ""
-"This error was generated by a custom post-commit hook script on the Subversion server.\n"
+"This error was generated by a custom post-commit hook script on the "
+"Subversion server.\n"
 "Please contact your server administrator for help with resolving this issue."
 msgstr ""
 
 #. Resource IDs: (251)
 msgid ""
-"This error was generated by a custom post-lock hook script on the Subversion server.\n"
+"This error was generated by a custom post-lock hook script on the Subversion "
+"server.\n"
 "Please contact your server administrator for help with resolving this issue."
 msgstr ""
 
 #. Resource IDs: (251)
 msgid ""
-"This error was generated by a custom post-unlock hook script on the Subversion server.\n"
+"This error was generated by a custom post-unlock hook script on the "
+"Subversion server.\n"
 "Please contact your server administrator for help with resolving this issue."
 msgstr ""
 
@@ -10534,14 +10727,15 @@ msgstr ""
 #. Resource IDs: (82)
 msgid ""
 "This is not a valid path!\n"
-"A valid path must not contain '<>|\"?*:' or one of the following device names:\n"
+"A valid path must not contain '<>|\"?*:' or one of the following device "
+"names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$"
 msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed"
-" in the Subversion book. Use this to merge all changes of a branch back to "
+"This method covers the case when you have made a feature branch as discussed "
+"in the Subversion book. Use this to merge all changes of a branch back to "
 "trunk."
 msgstr ""
 
@@ -10562,19 +10756,21 @@ msgstr ""
 msgid ""
 "This product includes software developed by the OpenSSL Project for use in "
 "the OpenSSL Toolkit (http://www.openssl.org/)"
-msgstr "ผลิตภัณฑ์นี้บรรจุซอร์ฟแวร์ซึ่งพัฒนาโดย OpenSSL Project สำหรับ OpenSSL Toolkit (http://www.openssl.org/)"
+msgstr ""
+"ผลิตภัณฑ์นี้บรรจุซอร์ฟแวร์ซึ่งพัฒนาโดย OpenSSL Project สำหรับ OpenSSL Toolkit (http://"
+"www.openssl.org/)"
 
 #. Resource IDs: (1531)
 msgid ""
-"This product includes software from Apache™ Subversion® "
-"(http://subversion.apache.org)"
+"This product includes software from Apache™ Subversion® (http://subversion."
+"apache.org)"
 msgstr ""
 
 #. Resource IDs: (3857)
 #, c-format
 msgid ""
-"This program is linked to the missing export %s in the file %s. This machine"
-" may have an incompatible version of %s."
+"This program is linked to the missing export %s in the file %s. This machine "
+"may have an incompatible version of %s."
 msgstr ""
 
 #. Resource IDs: (3857)
@@ -10606,7 +10802,8 @@ msgstr ""
 #. Resource IDs: (363)
 #, c-format
 msgid ""
-"This working copy has a client-side hook script configured. Do you want this script to run?\n"
+"This working copy has a client-side hook script configured. Do you want this "
+"script to run?\n"
 "The command line to run is:\n"
 "%s"
 msgstr ""
@@ -10634,8 +10831,10 @@ msgstr ""
 
 #. Resource IDs: (284)
 msgid ""
-"To steal the lock, right-click on the parent folder of this item and select 'Get Lock' from the context menu.\n"
-"This will bring up the locking dialog where you can enforce the lock, i.e., 'steal' it from the one currently holding it."
+"To steal the lock, right-click on the parent folder of this item and select "
+"'Get Lock' from the context menu.\n"
+"This will bring up the locking dialog where you can enforce the lock, i.e., "
+"'steal' it from the one currently holding it."
 msgstr ""
 
 #. Resource IDs: (1201, 65535)
@@ -10686,7 +10885,9 @@ msgid ""
 "TortoiseProc.exe /command:blame /path:\"path\\to\\file\"\n"
 "instead.\n"
 "\n"
-"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/ignoreallspaces]"
+"TortoiseBlame.exe blamefile [logfile [viewtitle]] [/line:linenumber] [/path:"
+"originalpath] [/pegrev:peg] [/revrange:text] [/ignoreeol] [/ignorespaces] [/"
+"ignoreallspaces]"
 msgstr ""
 
 #. Resource IDs: (7, 153)
@@ -10757,7 +10958,9 @@ msgstr ""
 #. Resource IDs: (507)
 #, c-format
 msgid ""
-"TortoiseSVN detected a serious slowdown when moving %1!ld! items to the recycle bin. The recycle bin currently contains %2!ld! items, which most likely is the reason for this slowdown.\n"
+"TortoiseSVN detected a serious slowdown when moving %1!ld! items to the "
+"recycle bin. The recycle bin currently contains %2!ld! items, which most "
+"likely is the reason for this slowdown.\n"
 "To fix this, you should empty the recycle bin now."
 msgstr ""
 
@@ -10766,13 +10969,16 @@ msgstr ""
 msgid ""
 "TortoiseSVN has detected similar filenames. Do you want the files:%s\n"
 "to be renamed too?"
-msgstr "TortoiseSVN ตรวจพบชื่อไฟล์ซ้ำกัน คุณต้องการเปลี่ยนชื่อไฟล์: %s\nหรือไม่"
+msgstr ""
+"TortoiseSVN ตรวจพบชื่อไฟล์ซ้ำกัน คุณต้องการเปลี่ยนชื่อไฟล์: %s\n"
+"หรือไม่"
 
 #. Resource IDs: (145)
 msgid ""
 "TortoiseSVN is a shell extension.\n"
 "That means it is integrated into the Windows explorer.\n"
-"To use TortoiseSVN please open the explorer and right-click on any folder you like\n"
+"To use TortoiseSVN please open the explorer and right-click on any folder "
+"you like\n"
 "to bring up the context menu where you will find all TortoiseSVN commands.\n"
 "And read the manual!"
 msgstr ""
@@ -10821,6 +11027,10 @@ msgstr ""
 
 #. Resource IDs: (595)
 msgid "Tree merge"
+msgstr ""
+
+#. Resource IDs: (501)
+msgid "Trim right"
 msgstr ""
 
 #. Resource IDs: (65535)
@@ -10913,7 +11123,8 @@ msgstr ""
 msgid ""
 "Unable to reconstruct working copy path!\n"
 "This can happen if the file has been renamed.\n"
-"Please start the log dialog on this specific file alone and then revert the changes\n"
+"Please start the log dialog on this specific file alone and then revert the "
+"changes\n"
 "from the top pane in the log dialog."
 msgstr ""
 
@@ -10981,7 +11192,10 @@ msgid ""
 "Unknown certificate issuer.\n"
 "  Fingerprint: %1!s!\n"
 "  Distinguished name: %2!s!"
-msgstr "ผู้ออกใบรับรองที่ไม่รู้จัก.\n  ลายนิ้วมือ: %1!s!\n  ชื่อเฉพาะ: %2!s!"
+msgstr ""
+"ผู้ออกใบรับรองที่ไม่รู้จัก.\n"
+"  ลายนิ้วมือ: %1!s!\n"
+"  ชื่อเฉพาะ: %2!s!"
 
 #. Resource IDs: (20)
 msgid "Unknown depth"
@@ -11261,7 +11475,9 @@ msgstr ""
 msgid ""
 "Use text block from 'mine'\n"
 "Use 'mine' text block"
-msgstr "ใช้กลุ่มประโยคจาก 'mine'\nใช้กลุ่มประโยค 'mine'"
+msgstr ""
+"ใช้กลุ่มประโยคจาก 'mine'\n"
+"ใช้กลุ่มประโยค 'mine'"
 
 #. Resource IDs: (251)
 msgid "Use text block from 't&heirs' before 'mine'"
@@ -11271,7 +11487,9 @@ msgstr "ใช้กลุ่มประโยคจาก 't&heirs' ก่อ�
 msgid ""
 "Use text block from 'theirs' before 'mine'\n"
 "Use 'theirs' text block then 'mine'"
-msgstr "ใช้กลุ่มประโยคจาก 'theirs' ก่อน 'mine'\nใช้กลุ่มประโยค 'theirs' ตามด้วย 'mine'"
+msgstr ""
+"ใช้กลุ่มประโยคจาก 'theirs' ก่อน 'mine'\n"
+"ใช้กลุ่มประโยค 'theirs' ตามด้วย 'mine'"
 
 #. Resource IDs: (2052)
 msgid ""
@@ -11299,7 +11517,9 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"Use the log dialog to select the revisions you want to merge, or enter the revisions to merge, separated by commas. A revision range can be specified by a dash.\r\n"
+"Use the log dialog to select the revisions you want to merge, or enter the "
+"revisions to merge, separated by commas. A revision range can be specified "
+"by a dash.\r\n"
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
@@ -11407,7 +11627,10 @@ msgid ""
 "WARNING:\r\n"
 "Only change these settings if you are absolutely sure what you are doing!\r\n"
 "To set the values to their default, delete the value text."
-msgstr "คำเตือน:\nแก้ไขการตั้งค่าเหล่านี้เมื่อคุณแน่ใจโดยสมบูรณ์ว่ากำลังทำอะไรอยู่เท่านั้น\nลบข้อความทิ้งเพื่อใช้ค่าโดยปริยาย"
+msgstr ""
+"คำเตือน:\n"
+"แก้ไขการตั้งค่าเหล่านี้เมื่อคุณแน่ใจโดยสมบูรณ์ว่ากำลังทำอะไรอยู่เท่านั้น\n"
+"ลบข้อความทิ้งเพื่อใช้ค่าโดยปริยาย"
 
 #. Resource IDs: (65535)
 msgid "WC Revision:"
@@ -11556,8 +11779,10 @@ msgstr "คุณได้ติดตั้งเวอร์ชั่นล่
 #. Resource IDs: (144)
 msgid ""
 "You are creating a repository on a network share.\n"
-"This is safe, but once the repository is created you must access it by some other means.\n"
-"Accessing a repository via file:// on a network share may corrupt your data!\n"
+"This is safe, but once the repository is created you must access it by some "
+"other means.\n"
+"Accessing a repository via file:// on a network share may corrupt your "
+"data!\n"
 "Create the repository anyway?"
 msgstr ""
 
@@ -11572,7 +11797,8 @@ msgstr ""
 #. Resource IDs: (65535)
 msgid ""
 "You can disable specific Overlay handlers here.\n"
-"Disabled handlers won't use up an overlay slot and give other shell extensions a chance to show their overlays."
+"Disabled handlers won't use up an overlay slot and give other shell "
+"extensions a chance to show their overlays."
 msgstr ""
 
 #. Resource IDs: (1001)
@@ -11595,14 +11821,16 @@ msgstr ""
 #. Resource IDs: (105)
 msgid ""
 "You dropped more than one file or folder to add to the repository.\n"
-"It's not possible to do that in one step, so TortoiseSVN will add each file/folder\n"
+"It's not possible to do that in one step, so TortoiseSVN will add each file/"
+"folder\n"
 "individually, creating a new revision for every added item."
 msgstr ""
 
 #. Resource IDs: (105)
 msgid ""
 "You dropped more than one file or folder to add to the repository.\n"
-"It's not possible to do that in one step, so TortoiseSVN will add each file/folder\n"
+"It's not possible to do that in one step, so TortoiseSVN will add each file/"
+"folder\n"
 "individually, creating a new revision for every added item.\n"
 "\n"
 "Do you still want to do this?"
@@ -11672,7 +11900,8 @@ msgid ""
 "'%2!s!'\n"
 "already exists.\n"
 "\n"
-"It seems the item got renamed outside Subversion but only with case changes.\n"
+"It seems the item got renamed outside Subversion but only with case "
+"changes.\n"
 "Do you really want to add it?"
 msgstr ""
 
@@ -11710,7 +11939,8 @@ msgstr ""
 #. Resource IDs: (88)
 msgid ""
 "Your working copy has local modifications!\n"
-"Note: updating to another revision won't lose those modifications so the working copy\n"
+"Note: updating to another revision won't lose those modifications so the "
+"working copy\n"
 "won't look exactly as it was in the revision you're updating to!"
 msgstr ""
 
@@ -11761,13 +11991,17 @@ msgstr "ขยาย 100%"
 msgid ""
 "Zoom In\n"
 "Zoom In"
-msgstr "ขยายเข้า\nขยายเข้า"
+msgstr ""
+"ขยายเข้า\n"
+"ขยายเข้า"
 
 #. Resource IDs: (3633)
 msgid ""
 "Zoom Out\n"
 "Zoom Out"
-msgstr "ขยายออก\nขยายออก"
+msgstr ""
+"ขยายออก\n"
+"ขยายออก"
 
 #. Resource IDs: (32784)
 msgid "Zoom i&n"
@@ -11882,7 +12116,8 @@ msgstr ""
 #. Resource IDs: (577)
 msgid ""
 "bugtraq:append\r\n"
-"Set to 'false' if you want the bugtracking ID to be inserted at the top of the\r\n"
+"Set to 'false' if you want the bugtracking ID to be inserted at the top of "
+"the\r\n"
 "log message. The default is 'true' which means the bugtracking ID\r\n"
 "is appended to the log message."
 msgstr ""
@@ -11905,14 +12140,16 @@ msgstr ""
 #, c-format
 msgid ""
 "bugtraq:message\r\n"
-"String which is appended to a log message when an issue number is entered.\r\n"
+"String which is appended to a log message when an issue number is entered."
+"\r\n"
 "The string must contain '%BUGID%' which gets replaced with the issue number."
 msgstr ""
 
 #. Resource IDs: (577)
 msgid ""
 "bugtraq:number\r\n"
-"Set to 'false' if your bugtracking system has issues which are referenced not by numbers."
+"Set to 'false' if your bugtracking system has issues which are referenced "
+"not by numbers."
 msgstr ""
 
 #. Resource IDs: (577)
@@ -11972,7 +12209,10 @@ msgid ""
 "current size: %1!s!\r\n"
 "old size: %2!s!\r\n"
 "change: %3!s!"
-msgstr "ขนาดปัจจุบัน: %1!s!\nขนาดเดิม: %2!s!\nเปลี่ยนไป: %3!s!"
+msgstr ""
+"ขนาดปัจจุบัน: %1!s!\n"
+"ขนาดเดิม: %2!s!\n"
+"เปลี่ยนไป: %3!s!"
 
 #. Resource IDs: (247)
 msgid "day"
@@ -12001,7 +12241,11 @@ msgid ""
 "%s\n"
 "to\n"
 "%s"
-msgstr "ส่งออก\n%s\nไปยัง\n%s"
+msgstr ""
+"ส่งออก\n"
+"%s\n"
+"ไปยัง\n"
+"%s"
 
 #. Resource IDs: (13)
 msgid "external"
@@ -12258,7 +12502,8 @@ msgstr ""
 #. Resource IDs: (582)
 msgid ""
 "svn:auto-props\r\n"
-"A list of properties separated by newlines which get applied recursively automatically when adding/importing files.\r\n"
+"A list of properties separated by newlines which get applied recursively "
+"automatically when adding/importing files.\r\n"
 "Format: <filemask> = property=value;property=value\r\n"
 "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 msgstr ""
@@ -12271,7 +12516,9 @@ msgstr "svn:eol-style"
 msgid ""
 "svn:eol-style\r\n"
 "One of 'native', 'LF', 'CR', 'CRLF'."
-msgstr "svn:eol-style\n'native', 'LF', 'CR', 'CRLF' อย่างใดอย่างหนึ่ง"
+msgstr ""
+"svn:eol-style\n"
+"'native', 'LF', 'CR', 'CRLF' อย่างใดอย่างหนึ่ง"
 
 #. Resource IDs: (312)
 msgid "svn:executable"
@@ -12280,8 +12527,10 @@ msgstr "svn:executable"
 #. Resource IDs: (576)
 msgid ""
 "svn:executable\r\n"
-"If present, make the file executable. This property cannot be set on a directory.\r\n"
-"A non-recursive attempt will fail, and a recursive attempt will set the property only on the file children of the directory."
+"If present, make the file executable. This property cannot be set on a "
+"directory.\r\n"
+"A non-recursive attempt will fail, and a recursive attempt will set the "
+"property only on the file children of the directory."
 msgstr ""
 
 #. Resource IDs: (318)
@@ -12292,7 +12541,8 @@ msgstr "svn:externals"
 msgid ""
 "svn:externals\r\n"
 "A newline separated list of module specifiers, each of which consists of\r\n"
-"an optional revision, an URL with an optional peg revision and a relative directory path. For example\r\n"
+"an optional revision, an URL with an optional peg revision and a relative "
+"directory path. For example\r\n"
 "http://example.com/repos/zig foo\r\n"
 "-r 1234 http://example.com/repos/zag@1234 foo/bar\r\n"
 "\r\n"
@@ -12314,7 +12564,9 @@ msgstr ""
 msgid ""
 "svn:ignore\r\n"
 "A newline separated list of file patterns to ignore."
-msgstr "svn:ignore\nแต่ละบรรทัดแบ่งแยกรูปแบบไฟล์ที่ละเว้น"
+msgstr ""
+"svn:ignore\n"
+"แต่ละบรรทัดแบ่งแยกรูปแบบไฟล์ที่ละเว้น"
 
 #. Resource IDs: (317)
 msgid "svn:keywords"
@@ -12334,7 +12586,8 @@ msgstr ""
 #. Resource IDs: (576)
 msgid ""
 "svn:mergeinfo\r\n"
-"A newline separated list of merge tracking info. Each line consists of an absolute\r\n"
+"A newline separated list of merge tracking info. Each line consists of an "
+"absolute\r\n"
 "path followed by a colon and a list of comma separated revision numbers.\r\n"
 "For example\r\n"
 "/trunk:123-125,129"
@@ -12347,8 +12600,10 @@ msgstr "svn:mime-type"
 #. Resource IDs: (576)
 msgid ""
 "svn:mime-type\r\n"
-"The mime type of the file. Used to determine whether to merge the file, and how to serve it from Apache.\r\n"
-"A mime type beginning with 'text/' (or an absent mime type) is treated as text.\r\n"
+"The mime type of the file. Used to determine whether to merge the file, and "
+"how to serve it from Apache.\r\n"
+"A mime type beginning with 'text/' (or an absent mime type) is treated as "
+"text.\r\n"
 "Anything else is treated as binary."
 msgstr ""
 
@@ -12370,7 +12625,9 @@ msgstr ""
 msgid ""
 "switched to\r\n"
 "%s"
-msgstr "เปลี่ยนเป็น\n%s"
+msgstr ""
+"เปลี่ยนเป็น\n"
+"%s"
 
 #. Resource IDs: (65535)
 msgid "switched:"
@@ -12414,7 +12671,8 @@ msgstr ""
 #. Resource IDs: (578)
 msgid ""
 "tsvn:autoprops\r\n"
-"A list of properties separated by newlines which get applied automatically when adding/importing files.\r\n"
+"A list of properties separated by newlines which get applied automatically "
+"when adding/importing files.\r\n"
 "Format: <filemask> = property=value;property=value\r\n"
 "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 msgstr ""
@@ -12428,7 +12686,8 @@ msgstr ""
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logfilelistenglish\r\n"
-"Set to 'false' if you don't want the list of changed files to be pasted in English\r\n"
+"Set to 'false' if you don't want the list of changed files to be pasted in "
+"English\r\n"
 "in the commit dialog."
 msgstr ""
 
@@ -12447,7 +12706,8 @@ msgstr ""
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logsummary\r\n"
-"A regex string which extracts a summary from a log message in its first group."
+"A regex string which extracts a summary from a log message in its first "
+"group."
 msgstr ""
 
 #. Resource IDs: (578)
@@ -12461,7 +12721,8 @@ msgstr ""
 msgid ""
 "tsvn:logtemplatebranch\r\n"
 "String which is inserted in the log message boxes in the commit dialogs.\r\n"
-"Use this as a log message template for branch/tags/copies for users to fill in."
+"Use this as a log message template for branch/tags/copies for users to fill "
+"in."
 msgstr ""
 
 #. Resource IDs: (579)
@@ -12488,7 +12749,8 @@ msgstr ""
 #. Resource IDs: (579)
 msgid ""
 "tsvn:logtemplatelock\r\n"
-"String which is inserted in the log message boxes in the get-lock dialogs.\r\n"
+"String which is inserted in the log message boxes in the get-lock dialogs."
+"\r\n"
 "Use this as a log message template for get-locks for users to fill in."
 msgstr ""
 
@@ -12496,7 +12758,8 @@ msgstr ""
 msgid ""
 "tsvn:logtemplatemkdir\r\n"
 "String which is inserted in the log message boxes in the commit dialogs.\r\n"
-"Use this as a log message template for directory creations for users to fill in."
+"Use this as a log message template for directory creations for users to fill "
+"in."
 msgstr ""
 
 #. Resource IDs: (579)
@@ -12510,14 +12773,17 @@ msgstr ""
 msgid ""
 "tsvn:logtemplatepropset\r\n"
 "String which is inserted in the log message boxes in the commit dialogs.\r\n"
-"Use this as a log message template for property modifications for users to fill in."
+"Use this as a log message template for property modifications for users to "
+"fill in."
 msgstr ""
 
 #. Resource IDs: (578)
 msgid ""
 "tsvn:logwidthmarker\r\n"
-"Set this to the number of chars the log message should not exceed its width.\r\n"
-"A faded line is shown in the commit dialogs at that position. The default is 80 chars."
+"Set this to the number of chars the log message should not exceed its width."
+"\r\n"
+"A faded line is shown in the commit dialogs at that position. The default is "
+"80 chars."
 msgstr ""
 
 #. Resource IDs: (578)
@@ -12544,7 +12810,8 @@ msgstr ""
 #. Resource IDs: (577)
 msgid ""
 "tsvn:warnifnoissue\r\n"
-"Set to 'yes' if a warning shall be shown when no issue is entered in the commit dialog."
+"Set to 'yes' if a warning shall be shown when no issue is entered in the "
+"commit dialog."
 msgstr ""
 
 #. Resource IDs: (104)
@@ -12584,16 +12851,19 @@ msgstr "ค่าดังกล่าวต่างกัน"
 #, c-format
 msgid ""
 "webviewer:pathrevision\r\n"
-"URL pointing to the web viewer for the repository for a specific file and revision.\r\n"
+"URL pointing to the web viewer for the repository for a specific file and "
+"revision.\r\n"
 "The string %REVISION% in the URL is replaced with the revision number,\r\n"
-"the string %PATH% is replaced with the path to the file relative to the repository root."
+"the string %PATH% is replaced with the path to the file relative to the "
+"repository root."
 msgstr ""
 
 #. Resource IDs: (579)
 #, c-format
 msgid ""
 "webviewer:revision\r\n"
-"URL pointing to the web viewer for the repository for a specific revision.\r\n"
+"URL pointing to the web viewer for the repository for a specific revision."
+"\r\n"
 "The string %REVISION% in that URL is replaced with the revision number."
 msgstr ""
 
