@@ -2592,7 +2592,7 @@ bool CMainFrame::HasUnsavedEdits() const
 
 bool CMainFrame::HasUnsavedEdits(const CBaseView* view)
 {
-    if(view == 0)
+    if (!CBaseView::IsViewGood(view))
         return false;
     return view->IsModified();
 }
