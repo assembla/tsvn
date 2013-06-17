@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-06-10 10:06+0000\n"
-"Last-Translator: Вячеслав Третьяков <tret2003@gmail.com>\n"
+"PO-Revision-Date: 2013-06-16 21:57+0000\n"
+"Last-Translator: Nikolay Osinin <nikolay.osinin@gmail.com>\n"
 "Language-Team: Russian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -626,6 +626,10 @@ msgstr "&Закрыть"
 #. Resource IDs: (16922)
 msgid "&Close Window(s)"
 msgstr "&Закрыть окна"
+
+#. Resource IDs: (65535)
+msgid "&Collaborator username"
+msgstr "Имя пользователя &Collaborator"
 
 #. Resource IDs: (65535)
 msgid "&Command:"
@@ -1349,6 +1353,10 @@ msgstr "Перехватить &блокировки"
 #. Resource IDs: (1130)
 msgid "&Stop on copy/rename"
 msgstr "Остановиться на ко&пировании/переименовании"
+
+#. Resource IDs: (65535)
+msgid "&Subversion username"
+msgstr "Имя пользователя &Subversion"
 
 #. Resource IDs: (276)
 msgid "&Switch WC to path and revision"
@@ -3283,9 +3291,17 @@ msgstr "Закрывать вручную"
 msgid "Close the active window and prompts to save the documents"
 msgstr "Закрывает активное окно и приглашает сохранить документы"
 
+#. Resource IDs: (350)
+msgid "Code Collaborator Settings"
+msgstr "Настройки Code Collaborator"
+
 #. Resource IDs: (275)
 msgid "Coll&apse source tree"
 msgstr "Све&рнуть исходное дерево"
+
+#. Resource IDs: (65535)
+msgid "Collaborator &password"
+msgstr "&Пароль Collaborator"
 
 #. Resource IDs: (156)
 msgid "Collapse"
@@ -6398,6 +6414,14 @@ msgstr "Импорт файла %1!s!"
 #. Resource IDs: (10)
 msgid "Imports the directory to a repository"
 msgstr "Импортирует папку в хранилище"
+
+#. Resource IDs: (65535)
+msgid ""
+"In order to show this dialog in the future, press <Ctrl> while executing the "
+"Code Collaborator menu command."
+msgstr ""
+"Чтобы в дальнейшем показывать этот диалог, нажмите <Ctrl> при выполнении "
+"команды меню Code Collaborator."
 
 #. Resource IDs: (1616)
 msgid "Include e&xternals"
@@ -10759,6 +10783,10 @@ msgstr ""
 "(вы можете скопировать содержимое этого диалога\n"
 "в буфер обмена с помощью клавиш Ctrl-C):"
 
+#. Resource IDs: (65535)
+msgid "Subversion passwor&d"
+msgstr "&Пароль Subversion"
+
 #. Resource IDs: (79)
 msgid ""
 "Subversion reported an error while creating a repository!\n"
@@ -11888,6 +11916,10 @@ msgstr "Выстроить по &горизонтали"
 #. Resource IDs: (65535)
 msgid "Timeouts"
 msgstr "Таймауты"
+
+#. Resource IDs: (65535)
+msgid "Tip"
+msgstr "Подсказка"
 
 #. Resource IDs: (224)
 msgid ""
@@ -14339,20 +14371,69 @@ msgstr "да"
 msgid "{BugTraq}"
 msgstr "{СОП}"
 
+#~ msgid "&Don't ask anymore, always save without fixing."
+#~ msgstr "&Не спрашивать больше, всегда сохранять без исправления."
+
+#~ msgid "&Fix and Save"
+#~ msgstr "&Исправить и Сохранить"
+
+#~ msgid "&Remove Trailing spaces and Tabs"
+#~ msgstr "&Удалить конечные пробелы и символы табуляции"
+
+#~ msgid "&Trailing spaces and Tabs"
+#~ msgstr "&Конечные пробелы и символы табуляции"
+
 #~ msgid "Convert Spaces to &Tabs"
 #~ msgstr "Заменить пробелы Табом"
 
 #~ msgid "Convert Tabs to &Spaces"
 #~ msgstr "Заменить Табы пробелом"
 
-#~ msgid "Don't ask anymore"
-#~ msgstr "Больше не спрашивать"
+#~ msgid "Details ..."
+#~ msgstr "Подробнее..."
+
+#~ msgid "Don't ask to fix inconsistencies when saving"
+#~ msgstr "Не спрашивать чтобы исправить несоответствия при сохранении"
 
 #~ msgid "End of Line Style"
 #~ msgstr "Стиль конца строки"
 
 #~ msgid "File Encoding"
 #~ msgstr "Кодировка файла"
+
+#~ msgid "Formatting inconsistencies"
+#~ msgstr "Форматирование несоответствий"
+
+#~ msgid "Formatting inconsistencies have been detected!"
+#~ msgstr "Обнаружено форматирование несоответствий"
+
+#~ msgid "Inconsistent &EOLs"
+#~ msgstr "Несоответствие символов &конца строки"
+
+#~ msgid "Inconsistent Tabs and &Spaces"
+#~ msgstr "Несоответствие символов табуляции и &пробелов"
+
+#~ msgid ""
+#~ "Select what TortoiseMerge should automatically detect and offer to fix "
+#~ "when saving"
+#~ msgstr ""
+#~ "Выберите, что TortoiseMerge должен автоматически обнаружить и предложить "
+#~ "исправить при сохранении"
+
+#~ msgid "Select what TortoiseMerge should fix:"
+#~ msgstr "Выберите, что TortoiseMerge должен исправить:"
+
+#~ msgid "Setu&p ..."
+#~ msgstr "&Настройка..."
+
+#~ msgid "Unify &EOLs"
+#~ msgstr "Унифицировать &символы конца строки"
+
+#~ msgid "Whitespace-fix setup"
+#~ msgstr "Настройка исправления пробела"
+
+#~ msgid "Don't ask anymore"
+#~ msgstr "Больше не спрашивать"
 
 #~ msgid "File formating change have been detected"
 #~ msgstr "Обнаружено изменение форматирования файла"

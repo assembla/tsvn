@@ -13,7 +13,7 @@
 # andreas88 <andreaspower@gmail.com>, 2011
 # Chandra <chandra@utama.us>, 2012
 # Chandra <chandra@utama.us>, 2011
-# Endra Granasamsa <endra.granasamsa@gmail.com>, 2011
+# Endra Granasamsa <endra.granasamsa@gmail.com>, 2011,2013
 # Heri Zhang <zhang.heri@gmail.com>, 2011
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # omixen <omixen@gmail.com>, 2011
@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-06-10 09:27+0000\n"
+"PO-Revision-Date: 2013-06-16 08:27+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Indonesian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -488,7 +488,7 @@ msgstr "&Lanjutan..."
 
 #. Resource IDs: (1505)
 msgid "&All"
-msgstr ""
+msgstr "&Semua"
 
 #. Resource IDs: (1471)
 msgid "&Allow ambiguous URLs"
@@ -616,7 +616,7 @@ msgstr "&Membersihkan status salinan pekerjaan"
 
 #. Resource IDs: (8)
 msgid "&Clean up..."
-msgstr ""
+msgstr "&Membersihkan..."
 
 #. Resource IDs: (17, 58112)
 msgid "&Close"
@@ -625,6 +625,10 @@ msgstr "&Tutup"
 #. Resource IDs: (16922)
 msgid "&Close Window(s)"
 msgstr "&Tutup Jendela"
+
+#. Resource IDs: (65535)
+msgid "&Collaborator username"
+msgstr ""
 
 #. Resource IDs: (65535)
 msgid "&Command:"
@@ -732,7 +736,7 @@ msgstr "&Direktori"
 
 #. Resource IDs: (1562)
 msgid "&Do not ask again"
-msgstr ""
+msgstr "&Jangan ditanyakan lagi"
 
 #. Resource IDs: (1066)
 msgid "&Docking"
@@ -760,7 +764,7 @@ msgstr "&Edit..."
 
 #. Resource IDs: (1542)
 msgid "&Empty the recycle bin now"
-msgstr ""
+msgstr "&Kosongkan kotak sampah sekarang"
 
 #. Resource IDs: (1023)
 msgid "&Enable Proxy Server"
@@ -901,7 +905,7 @@ msgstr "Aba&ikan leluhur"
 
 #. Resource IDs: (2)
 msgid "&Ignore and proceed"
-msgstr ""
+msgstr "&Abaikan dan lanjutkan"
 
 #. Resource IDs: (16914)
 msgid "&Image"
@@ -1348,6 +1352,10 @@ msgstr "&Curi kunci"
 #. Resource IDs: (1130)
 msgid "&Stop on copy/rename"
 msgstr "&Hentikan saat menyalin/ganti nama"
+
+#. Resource IDs: (65535)
+msgid "&Subversion username"
+msgstr ""
 
 #. Resource IDs: (276)
 msgid "&Switch WC to path and revision"
@@ -3265,9 +3273,17 @@ msgstr "Tutup secara manual"
 msgid "Close the active window and prompts to save the documents"
 msgstr "Tutup jendela aktif dan tanya untuk menyimpan dokumen"
 
+#. Resource IDs: (350)
+msgid "Code Collaborator Settings"
+msgstr ""
+
 #. Resource IDs: (275)
 msgid "Coll&apse source tree"
 msgstr "Run&tuhkan pohon sumber"
+
+#. Resource IDs: (65535)
+msgid "Collaborator &password"
+msgstr ""
 
 #. Resource IDs: (156)
 msgid "Collapse"
@@ -4451,7 +4467,7 @@ msgstr ""
 
 #. Resource IDs: (315)
 msgid "Do you want to load the changed files?"
-msgstr ""
+msgstr "Apakah Anda ingin memuat file yang telah berubah?"
 
 #. Resource IDs: (99)
 #, c-format
@@ -5172,7 +5188,7 @@ msgstr ""
 
 #. Resource IDs: (199)
 msgid "Fetches the contents of folders in the background so browsing is faster"
-msgstr ""
+msgstr "Muat isi folder di belakang agar browsing menjadi lebih cepat"
 
 #. Resource IDs: (92)
 msgid "Fetching file list of source"
@@ -6344,6 +6360,12 @@ msgstr "Mengimpor berkas %1!s!"
 #. Resource IDs: (10)
 msgid "Imports the directory to a repository"
 msgstr "Mengimpor direktori ke repositori"
+
+#. Resource IDs: (65535)
+msgid ""
+"In order to show this dialog in the future, press <Ctrl> while executing the "
+"Code Collaborator menu command."
+msgstr ""
 
 #. Resource IDs: (1616)
 msgid "Include e&xternals"
@@ -8652,7 +8674,7 @@ msgstr ""
 
 #. Resource IDs: (333)
 msgid "Recycle bin"
-msgstr ""
+msgstr "Kotak sampah"
 
 #. Resource IDs: (265)
 msgid "Redirecting to url"
@@ -9044,7 +9066,7 @@ msgstr "UUID Repositori:"
 
 #. Resource IDs: (65535)
 msgid "Repository browser"
-msgstr ""
+msgstr "Browser Repositori"
 
 #. Resource IDs: (324)
 msgid "Repository created"
@@ -9188,6 +9210,8 @@ msgid ""
 "Revert\n"
 "All local modifications will be lost."
 msgstr ""
+"Muat ulang\n"
+"Modifikasi pada lokal akan hilang"
 
 #. Resource IDs: (119)
 msgid ""
@@ -9263,7 +9287,7 @@ msgstr "Grafik Revisi"
 
 #. Resource IDs: (1492)
 msgid "Revision range to merge"
-msgstr ""
+msgstr "Rentang revisi untuk digabung"
 
 #. Resource IDs: (75)
 msgid "Revision: "
@@ -10201,7 +10225,7 @@ msgstr "Menampilkan semua revisi dimana perubahan dibuat ke item ini"
 
 #. Resource IDs: (200)
 msgid "Shows folders and files included with the svn:externals property"
-msgstr ""
+msgstr "Tampilkan folder dan file beserta keterangan svn:externals"
 
 #. Resource IDs: (10)
 msgid "Shows information about TortoiseSVN"
@@ -10608,6 +10632,10 @@ msgstr ""
 "Subversion dilaporkan sebagai berikut\n"
 "(anda bisa menyalin konten pada dialog ini\n"
 "ke clipboard menggunakan Ctrl-C);"
+
+#. Resource IDs: (65535)
+msgid "Subversion passwor&d"
+msgstr ""
 
 #. Resource IDs: (79)
 msgid ""
@@ -11697,6 +11725,10 @@ msgstr "Susun secara hori&zontal"
 #. Resource IDs: (65535)
 msgid "Timeouts"
 msgstr "Habis waktu"
+
+#. Resource IDs: (65535)
+msgid "Tip"
+msgstr ""
 
 #. Resource IDs: (224)
 msgid ""

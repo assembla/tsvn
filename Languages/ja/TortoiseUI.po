@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-06-10 11:01+0000\n"
+"PO-Revision-Date: 2013-06-16 12:08+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -495,7 +495,7 @@ msgstr "プロパティを再帰的に適用(&A)"
 
 #. Resource IDs: (610)
 msgid "&Apply the udpate to the move destination"
-msgstr "移動方向への更新を了承(&A)"
+msgstr "移動方向への更新を適用(&A)"
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -620,6 +620,10 @@ msgstr "閉じる(&C)"
 #. Resource IDs: (16922)
 msgid "&Close Window(s)"
 msgstr "ウィンドウを閉じる(&C)"
+
+#. Resource IDs: (65535)
+msgid "&Collaborator username"
+msgstr "Collaboratorのユーザー名(&C)"
 
 #. Resource IDs: (65535)
 msgid "&Command:"
@@ -1343,6 +1347,10 @@ msgstr "ロックを横取りする(&S)"
 #. Resource IDs: (1130)
 msgid "&Stop on copy/rename"
 msgstr "コピー/名前変更が発生したら停止(&S)"
+
+#. Resource IDs: (65535)
+msgid "&Subversion username"
+msgstr "&Subversionのユーザー名"
 
 #. Resource IDs: (276)
 msgid "&Switch WC to path and revision"
@@ -3260,9 +3268,17 @@ msgid "Close the active window and prompts to save the documents"
 msgstr ""
 "ドキュメントを保存するために、アクティブなウィンドウとプロンプトを閉じる"
 
+#. Resource IDs: (350)
+msgid "Code Collaborator Settings"
+msgstr "Code Collaboratorの設定"
+
 #. Resource IDs: (275)
 msgid "Coll&apse source tree"
 msgstr "ソースツリーを折りたたむ(&A)"
+
+#. Resource IDs: (65535)
+msgid "Collaborator &password"
+msgstr "Collaboratorのパスワード(&P)"
 
 #. Resource IDs: (156)
 msgid "Collapse"
@@ -3943,7 +3959,7 @@ msgstr "パッチを作成"
 
 #. Resource IDs: (64)
 msgid "Create code collaborator revie&w..."
-msgstr "コード協力者レビューを作成(&W)..."
+msgstr "Code Collaboratorのレビューを作成(&W)..."
 
 #. Resource IDs: (1385)
 msgid "Create copy in the repository from:"
@@ -4495,7 +4511,7 @@ msgid ""
 "Note: you will lose all changes you've made!"
 msgstr ""
 "設定の変更を反映させるために、ドキュメントの再読み込みを行いますか？\n"
-"【注意】行ったすべての変更が失われます。"
+"注意: 行ったすべての変更が失われます。"
 
 #. Resource IDs: (588)
 #, c-format
@@ -6357,6 +6373,14 @@ msgstr "インポートファイル %1!s!"
 msgid "Imports the directory to a repository"
 msgstr "ディレクトリをリポジトリにインポート"
 
+#. Resource IDs: (65535)
+msgid ""
+"In order to show this dialog in the future, press <Ctrl> while executing the "
+"Code Collaborator menu command."
+msgstr ""
+"後でこのダイアログを表示するには、Ctrlを押しながらCode Collaboratorのメニュー"
+"コマンドを実行してください。"
+
 #. Resource IDs: (1616)
 msgid "Include e&xternals"
 msgstr "外部参照を含める(&X)"
@@ -7685,21 +7709,21 @@ msgstr ""
 
 #. Resource IDs: (1481)
 msgid "Note: the folder contains unversioned items"
-msgstr "【注意】フォルダーはバージョン管理外の項目を含んでいます"
+msgstr "注意: フォルダーはバージョン管理外の項目を含んでいます"
 
 #. Resource IDs: (65535)
 msgid "Note: the font settings also affect the TortoiseUDiff viewer"
-msgstr "【注意】フォントの設定は TortoiseUDiff ビューアーにも影響します"
+msgstr "注意: フォントの設定は TortoiseUDiff ビューアーにも影響します"
 
 #. Resource IDs: (65535)
 msgid "Note: this affects all Tortoise clients, not just TortoiseSVN!"
 msgstr ""
-"【注意】これは TortoiseSVN だけでなく、すべての Tortoise クライアントに影響を"
-"与えます。"
+"注意: これは TortoiseSVN だけでなく、すべての Tortoise クライアントに影響しま"
+"す。"
 
 #. Resource IDs: (1557)
 msgid "Note: this property has no effect on Windows"
-msgstr "【注意】このプロパティは Windows では効果がありません"
+msgstr "注意: このプロパティは Windows では効果がありません"
 
 #. Resource IDs: (173)
 msgid "Nothing is selected for commit!"
@@ -7715,8 +7739,8 @@ msgid ""
 "upgraded working copy with pre 1.8 SVN clients anymore!\n"
 "Do you really want to upgrade this working copy?"
 msgstr ""
-"【注意】作業コピーをアップグレードすると、アップグレード後の作業コピーには"
-"バージョン1.8以前の SVN クライアントからアクセスできなくなります。\n"
+"注意: 作業コピーをアップグレードすると、アップグレード後の作業コピーにはバー"
+"ジョン1.8以前のSVNクライアントからアクセスできなくなります。\n"
 "本当にこの作業コピーをアップグレードしてもよろしいですか？"
 
 #. Resource IDs: (247)
@@ -8204,7 +8228,7 @@ msgid ""
 "then you need to switch your working copy over to the new URL.\n"
 "Use the Switch command to do that."
 msgstr ""
-"【注意】\n"
+"ご注意ください:\n"
 "作業コピーは従来のパスのままです。もし、今作成したコピーもしくはブランチに\n"
 "今後の変更をコミットする場合は、そのコピー先の新しいURLに作業コピー全体を\n"
 "切り替える必要があります。\n"
@@ -10682,6 +10706,10 @@ msgstr ""
 "Subversion の報告内容（Ctrl+Cを使用すると、このダイアログの\n"
 "内容をクリップボードにコピーできます。）:"
 
+#. Resource IDs: (65535)
+msgid "Subversion passwor&d"
+msgstr "Subversionのパスワード(&D)"
+
 #. Resource IDs: (79)
 msgid ""
 "Subversion reported an error while creating a repository!\n"
@@ -11797,6 +11825,10 @@ msgstr "水平方向に並べる(&Z)"
 #. Resource IDs: (65535)
 msgid "Timeouts"
 msgstr "タイムアウト"
+
+#. Resource IDs: (65535)
+msgid "Tip"
+msgstr "Tip"
 
 #. Resource IDs: (224)
 msgid ""
@@ -13098,7 +13130,7 @@ msgid ""
 "won't look exactly as it was in the revision you're updating to!"
 msgstr ""
 "作業コピーはローカルで変更されています。\n"
-"【注意】他のリビジョンへ更新する際に、これらの変更は失われません。\n"
+"注意: 他のリビジョンへ更新する際に、これらの変更は失われません。\n"
 "そのため、更新しようとしているリビジョンとは同じにはなりません。"
 
 #. Resource IDs: (89)
@@ -14203,20 +14235,67 @@ msgstr "はい"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "&Don't ask anymore, always save without fixing."
+#~ msgstr "今後は確認せず、常に修正なしで保存する(&D)。"
+
+#~ msgid "&Fix and Save"
+#~ msgstr "修正して保存(&F)"
+
+#~ msgid "&Remove Trailing spaces and Tabs"
+#~ msgstr "末尾の空白やタブを削除(&R)"
+
+#~ msgid "&Trailing spaces and Tabs"
+#~ msgstr "末尾の空白やタブ(&T)"
+
 #~ msgid "Convert Spaces to &Tabs"
 #~ msgstr "空白をタブに変換(&T)"
 
 #~ msgid "Convert Tabs to &Spaces"
 #~ msgstr "タブを空白に変換(&S)"
 
-#~ msgid "Don't ask anymore"
-#~ msgstr "再び確認しない"
+#~ msgid "Details ..."
+#~ msgstr "詳細..."
+
+#~ msgid "Don't ask to fix inconsistencies when saving"
+#~ msgstr "保存時に不統一の修正を確認しない"
 
 #~ msgid "End of Line Style"
-#~ msgstr "改行文字"
+#~ msgstr "改行文字の形式"
 
 #~ msgid "File Encoding"
 #~ msgstr "ファイルのエンコーディング"
+
+#~ msgid "Formatting inconsistencies"
+#~ msgstr "書式の不統一"
+
+#~ msgid "Formatting inconsistencies have been detected!"
+#~ msgstr "書式の不統一が検出されました。"
+
+#~ msgid "Inconsistent &EOLs"
+#~ msgstr "行末の不統一(&E)"
+
+#~ msgid "Inconsistent Tabs and &Spaces"
+#~ msgstr "タブと空白の不統一(&S)"
+
+#~ msgid ""
+#~ "Select what TortoiseMerge should automatically detect and offer to fix "
+#~ "when saving"
+#~ msgstr "TortoiseMergeが保存時に自動的に検出・提案するものを選択してください"
+
+#~ msgid "Select what TortoiseMerge should fix:"
+#~ msgstr "TortoiseMergeが修正するものを選択してください:"
+
+#~ msgid "Setu&p ..."
+#~ msgstr "設定(&P)..."
+
+#~ msgid "Unify &EOLs"
+#~ msgstr "改行文字を統一(&E)"
+
+#~ msgid "Whitespace-fix setup"
+#~ msgstr "空白文字の修正の設定"
+
+#~ msgid "Don't ask anymore"
+#~ msgstr "再び確認しない"
 
 #~ msgid "File formating change have been detected"
 #~ msgstr "ファイル形式の変更を検出しました"

@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-06-10 09:27+0000\n"
+"PO-Revision-Date: 2013-06-16 08:26+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -621,6 +621,10 @@ msgstr "關閉(&C)"
 #. Resource IDs: (16922)
 msgid "&Close Window(s)"
 msgstr "關閉視窗(&C)"
+
+#. Resource IDs: (65535)
+msgid "&Collaborator username"
+msgstr ""
 
 #. Resource IDs: (65535)
 msgid "&Command:"
@@ -1344,6 +1348,10 @@ msgstr "偷取鎖定(&S)"
 #. Resource IDs: (1130)
 msgid "&Stop on copy/rename"
 msgstr "複製/重新命名時停止(&S)"
+
+#. Resource IDs: (65535)
+msgid "&Subversion username"
+msgstr ""
 
 #. Resource IDs: (276)
 msgid "&Switch WC to path and revision"
@@ -3227,9 +3235,17 @@ msgstr "手動關閉"
 msgid "Close the active window and prompts to save the documents"
 msgstr "關閉目前視窗並提示儲存文件"
 
+#. Resource IDs: (350)
+msgid "Code Collaborator Settings"
+msgstr ""
+
 #. Resource IDs: (275)
 msgid "Coll&apse source tree"
 msgstr "展開原始目錄樹(&A)"
+
+#. Resource IDs: (65535)
+msgid "Collaborator &password"
+msgstr ""
 
 #. Resource IDs: (156)
 msgid "Collapse"
@@ -3545,11 +3561,11 @@ msgstr "縮短停駐的視窗"
 
 #. Resource IDs: (501)
 msgid "Convert spaces to tabs"
-msgstr ""
+msgstr "將空白轉為 Tabs"
 
 #. Resource IDs: (501)
 msgid "Convert tabs to spaces"
-msgstr ""
+msgstr "將 Tabs 轉為空白"
 
 #. Resource IDs: (15)
 msgid "Converts the working copy format to the new version"
@@ -3904,7 +3920,7 @@ msgstr "建立補綴"
 
 #. Resource IDs: (64)
 msgid "Create code collaborator revie&w..."
-msgstr ""
+msgstr "建立 code collaborator 原始碼審核(&W)..."
 
 #. Resource IDs: (1385)
 msgid "Create copy in the repository from:"
@@ -6285,6 +6301,12 @@ msgstr "正在匯入檔案 %1!s!"
 msgid "Imports the directory to a repository"
 msgstr "匯入目錄至檔案庫"
 
+#. Resource IDs: (65535)
+msgid ""
+"In order to show this dialog in the future, press <Ctrl> while executing the "
+"Code Collaborator menu command."
+msgstr ""
+
 #. Resource IDs: (1616)
 msgid "Include e&xternals"
 msgstr "包含外部連結(&X)"
@@ -7838,7 +7860,7 @@ msgstr "開啟影像檔..."
 
 #. Resource IDs: (64)
 msgid "Open multiple &local..."
-msgstr ""
+msgstr "開啟多個本地端(&L)..."
 
 #. Resource IDs: (282)
 msgid "Open parent folder"
@@ -9002,7 +9024,7 @@ msgstr "需要帳號和密碼"
 
 #. Resource IDs: (8)
 msgid "Res&olve..."
-msgstr ""
+msgstr "解決(&R)..."
 
 #. Resource IDs: (16614)
 msgid "Reset &All"
@@ -10043,7 +10065,7 @@ msgstr "顯示記錄(&G)"
 
 #. Resource IDs: (64)
 msgid "Show multiple &changes..."
-msgstr ""
+msgstr "顯示多筆變更(&C)..."
 
 #. Resource IDs: (2051)
 msgid "Show oldest node at top"
@@ -10559,6 +10581,10 @@ msgstr ""
 "\n"
 "Subversion 回報下列訊息\n"
 "(您可以利用 Ctrl-C 鍵將此對話方塊的內容複製到剪貼簿):"
+
+#. Resource IDs: (65535)
+msgid "Subversion passwor&d"
+msgstr ""
 
 #. Resource IDs: (79)
 msgid ""
@@ -11617,6 +11643,10 @@ msgstr "水平排列(&Z)"
 msgid "Timeouts"
 msgstr "暫停"
 
+#. Resource IDs: (65535)
+msgid "Tip"
+msgstr ""
+
 #. Resource IDs: (224)
 msgid ""
 "To commit recursively and work around this error,\n"
@@ -11873,7 +11903,7 @@ msgstr "合併版本樹"
 
 #. Resource IDs: (501)
 msgid "Trim right"
-msgstr ""
+msgstr "切齊右側"
 
 #. Resource IDs: (65535)
 msgid "Trunk nodes"
@@ -13991,6 +14021,18 @@ msgstr "是"
 #. Resource IDs: (1382)
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
+
+#~ msgid "Convert Spaces to &Tabs"
+#~ msgstr "將空白轉為 &Tabs"
+
+#~ msgid "Convert Tabs to &Spaces"
+#~ msgstr "將 Tabs 轉為空白 (&S)"
+
+#~ msgid "End of Line Style"
+#~ msgstr "行尾格式"
+
+#~ msgid "File Encoding"
+#~ msgstr "檔案編碼"
 
 #~ msgid "Open local file in &Visual Studio..."
 #~ msgstr "在 Visual Studio 中開啟本地檔案 (&V)..."
