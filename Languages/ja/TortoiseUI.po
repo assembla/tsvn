@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-06-19 09:39+0000\n"
+"PO-Revision-Date: 2013-06-28 09:47+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -2120,13 +2120,12 @@ msgid ""
 "Allow different repositories to use the same URL, e.g. http://localhost/"
 "myrepos/"
 msgstr ""
-"異なるリポジトリで同じURLを用いることを許す。【例】http://localhost/myrepos/"
+"異なるリポジトリで同じURLを用いることを許す。例: http://localhost/myrepos/"
 
 #. Resource IDs: (345)
 msgid ""
 "Allow different repositories to use the same UUID, e.g. copied repositories"
-msgstr ""
-"異なるリポジトリで同じUUIDを用いることを許す。【例】コピーしたリポジトリ"
+msgstr "異なるリポジトリで同じUUIDを用いることを許す。例: コピーしたリポジトリ"
 
 #. Resource IDs: (119)
 msgid "Already merged"
@@ -5105,7 +5104,7 @@ msgstr ""
 
 #. Resource IDs: (263)
 msgid "External failed"
-msgstr "外部が失敗しました"
+msgstr "外部参照の処理に失敗"
 
 #. Resource IDs: (226)
 msgid "Externals excluded"
@@ -5809,8 +5808,8 @@ msgid ""
 "Hint: select the context menu, change the page to 'Commands' and drag the "
 "toolbar buttons into the menu window."
 msgstr ""
-"【ヒント】コンテキストメニューを選択し、ページを「コマンド」に変更してメ"
-"ニューウィンドウにツールバーボタンをドラッグします。"
+"ヒント: コンテキストメニューを選択し、ページを「コマンド」に変更してメニュー"
+"ウィンドウにツールバーボタンをドラッグします。"
 
 #. Resource IDs: (1064)
 msgid "Home"
@@ -6543,7 +6542,7 @@ msgstr ""
 "無効なリビジョン範囲です。\n"
 "有効なリビジョンはコンマで区切られた数字とHEADです。\n"
 "範囲はハイフンで指定することができます。\n"
-"【例】2-5,7,10,44-70,300-HEAD"
+"例: 2-5,7,10,44-70,300-HEAD"
 
 #. Resource IDs: (1571)
 msgid "Issue tracker"
@@ -6721,7 +6720,7 @@ msgstr "左側の画像"
 
 #. Resource IDs: (266)
 msgid "Left local modifications"
-msgstr "ローカルでの変更が残っています"
+msgstr "ローカルでの変更が残存"
 
 #. Resource IDs: (590)
 msgid "Like above, but used for reverse merges"
@@ -8228,7 +8227,7 @@ msgid ""
 "then you need to switch your working copy over to the new URL.\n"
 "Use the Switch command to do that."
 msgstr ""
-"ご注意ください:\n"
+"注意:\n"
 "作業コピーは従来のパスのままです。もし、今作成したコピーもしくはブランチに\n"
 "今後の変更をコミットする場合は、そのコピー先の新しいURLに作業コピー全体を\n"
 "切り替える必要があります。\n"
@@ -9924,7 +9923,7 @@ msgid ""
 "Note: There is unresolved conflict!"
 msgstr ""
 "どのファイルを名前を付けて保存するか選択してください\n"
-"【注】未解決の競合があります。"
+"注: 未解決の競合があります。"
 
 #. Resource IDs: (65535)
 msgid "Selected node"
@@ -10534,7 +10533,7 @@ msgstr "レジストリエディターを起動する"
 
 #. Resource IDs: (226)
 msgid "Starting externals..."
-msgstr "外部プログラムを起動中..."
+msgstr "外部参照の処理を開始..."
 
 #. Resource IDs: (16514)
 msgid "Static"
@@ -10629,7 +10628,7 @@ msgstr ""
 "* 空白などを含む文字列は \" で囲む。\n"
 "* 行の先頭に ! を付加すると、絞り込み条件全体を反転させる。\n"
 "\n"
-"【例】\n"
+"例:\n"
 "ichiro  2008    : 2008年のichiroによるコミット\n"
 ".h  -.cpp       : ヘッダーファイルが変更されたが実装がされていないコミット\n"
 ".doc +.xls 2010 : 2010年の .doc もしくは .xls ファイルが含まれるコミット\n"
@@ -12440,7 +12439,7 @@ msgid ""
 msgstr ""
 "除外指定にはワイルドカードとして「*」を用い、\r\n"
 "複数指定する場合はコンマ（「,」）を使用します。\r\n"
-"【例】*.mylan.com, *.company.com"
+"例: *.mylan.com, *.company.com"
 
 #. Resource IDs: (156)
 msgid "Use 'mine' text block"
@@ -12626,7 +12625,7 @@ msgstr ""
 "マージしたいリビジョンをログダイアログで選択するか、コンマで区切って入力して"
 "ください。リビジョンの範囲はハイフンで指定することができます。\r\n"
 "\r\n"
-"【例】4-7,9,11,15-HEAD@pegrevision\r\n"
+"例: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
 "すべてのリビジョンをマージするには、入力ボックスを空のままにしてください。"
 
@@ -12742,8 +12741,8 @@ msgid ""
 "Only change these settings if you are absolutely sure what you are doing!\r\n"
 "To set the values to their default, delete the value text."
 msgstr ""
-"【警告】\r\n"
-"何を行うかを把握している場合のみこれらの設定を変更してください。\r\n"
+"警告:\r\n"
+"何をしているか分からない場合はこれらの設定を変更しないでください。\r\n"
 "デフォルト値に設定するには、値を削除してください。"
 
 #. Resource IDs: (65535)
@@ -14235,6 +14234,15 @@ msgstr "はい"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "End of Line Style"
+#~ msgstr "改行文字の形式"
+
+#~ msgid "File Encoding"
+#~ msgstr "ファイルのエンコーディング"
+
+#~ msgid "Use Task Dialog"
+#~ msgstr "タスクダイアログを使用"
+
 #~ msgid "&Don't ask anymore, always save without fixing."
 #~ msgstr "今後は確認せず、常に修正なしで保存する(&D)。"
 
@@ -14258,12 +14266,6 @@ msgstr "{BugTraq}"
 
 #~ msgid "Don't ask to fix inconsistencies when saving"
 #~ msgstr "保存時に不統一の修正を確認しない"
-
-#~ msgid "End of Line Style"
-#~ msgstr "改行文字の形式"
-
-#~ msgid "File Encoding"
-#~ msgstr "ファイルのエンコーディング"
 
 #~ msgid "Formatting inconsistencies"
 #~ msgstr "書式の不統一"
