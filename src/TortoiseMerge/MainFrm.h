@@ -147,6 +147,7 @@ protected:
     afx_msg void    OnIndicatorLeftviewPopup();
     afx_msg void    OnIndicatorRightviewPopup();
     afx_msg void    OnIndicatorBottomviewPopup();
+    afx_msg void    OnTimer(UINT_PTR nIDEvent);
 
     afx_msg void    OnRemoveTrailSpaces();
     afx_msg void    OnTabToSpaces();
