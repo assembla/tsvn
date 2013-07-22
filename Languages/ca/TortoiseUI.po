@@ -12,13 +12,14 @@
 # Translators:
 # Adrià Vilanova Martínez <jocdeladria@gmail.com>, 2012
 # Libre El Chaval <el.libre@gmail.com>, 2011
+# jmonguillot <jmonguillot@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 08:27+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-07-21 11:17+0000\n"
+"Last-Translator: jmonguillot <jmonguillot@gmail.com>\n"
 "Language-Team: Catalan <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,7 +87,7 @@ msgstr "%1 no ha sigut trobat."
 #. Resource IDs: (169)
 #, c-format
 msgid "%1!d! files selected, %2!d! files total"
-msgstr ""
+msgstr "%1!d! fitxers seleccionats, %2!d! fitxers en total"
 
 #. Resource IDs: (246)
 #, c-format
@@ -250,27 +251,28 @@ msgstr ""
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory already exists unversioned locally."
-msgstr ""
+msgstr "%s, però el directori ja existeix sense versionar localment."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory is missing locally."
-msgstr ""
+msgstr "%s, però el directori no existeix localment."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was already added locally."
-msgstr ""
+msgstr "%s, però el directori ja ha estat afegit localment."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was already edited."
-msgstr ""
+msgstr "%s, però el directori ja ha sigut editat."
 
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was deleted, moved or renamed locally."
 msgstr ""
+"%s, però el directori ja ha sigut esborrat, mogut o renombrat localment."
 
 #. Resource IDs: (610)
 #, c-format
@@ -290,7 +292,7 @@ msgstr ""
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the directory was replaced"
-msgstr ""
+msgstr "%s, però el directori ha sigut substituït"
 
 #. Resource IDs: (609)
 #, c-format
@@ -305,7 +307,7 @@ msgstr ""
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file was already added locally."
-msgstr ""
+msgstr "%s, però el fitxer ja ha estat afegit localment."
 
 #. Resource IDs: (609)
 #, c-format
@@ -335,7 +337,7 @@ msgstr ""
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file was replaced"
-msgstr ""
+msgstr "%s, però el fitxer ha sigut substituït"
 
 #. Resource IDs: (376)
 #, c-format
@@ -2573,7 +2575,7 @@ msgstr "No es pot crear una nova imatge!"
 
 #. Resource IDs: (1001)
 msgid "Can't customize menus!"
-msgstr ""
+msgstr "No es poden personalitzar menús!"
 
 #. Resource IDs: (1001)
 msgid "Can't paste bitmap image from the clipboard!"
@@ -3558,7 +3560,7 @@ msgstr "Copia i canvia el nom aquí"
 
 #. Resource IDs: (209)
 msgid "Copy column to clipboard"
-msgstr ""
+msgstr "Copia columna al portapapers"
 
 #. Resource IDs: (101)
 msgid "Copy error message to clipboard"
@@ -8304,10 +8306,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "Unitats R&AM"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr ""
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "R&eseteja"
@@ -8510,10 +8508,6 @@ msgstr ""
 "\\W   : any caràcter no-alfanumèric\r\n"
 "\\d   : digits 0-9\r\n"
 "\\s   : espais en blanc"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "Reintegra fusió"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9522,10 +9516,6 @@ msgstr "Selecciona inici de la revisió"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "Selecciona aplicació d'editor de text"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "Selecciona l'URL des d'on reintegrar"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11243,16 +11233,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"Aquest mètode serveix per quan feu una branca rellevant (feature) tal com es "
-"descriu al manual del Subversion. Utilitzeu-la per fusionar tots els canvis "
-"d'una branca altre cop cap al tronc."
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12112,7 +12092,7 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
 
 #. Resource IDs: (314)
@@ -12958,6 +12938,10 @@ msgstr ""
 msgid "incomplete"
 msgstr "incomplet"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "no existeix."
@@ -12972,7 +12956,7 @@ msgstr "no està versionat."
 
 #. Resource IDs: (214)
 msgid "item kept locally"
-msgstr "item guradat localment"
+msgstr "item guardat localment"
 
 #. Resource IDs: (1562)
 msgid "keep the file lists in English"
@@ -13652,3 +13636,18 @@ msgstr "sí"
 #. Resource IDs: (1382)
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "Reintegra fusió"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "Selecciona l'URL des d'on reintegrar"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "Aquest mètode serveix per quan feu una branca rellevant (feature) tal com "
+#~ "es descriu al manual del Subversion. Utilitzeu-la per fusionar tots els "
+#~ "canvis d'una branca altre cop cap al tronc."

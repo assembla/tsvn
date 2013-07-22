@@ -32,7 +32,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 08:27+0000\n"
+"PO-Revision-Date: 2013-07-16 08:32+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Chinese (China) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8470,10 +8470,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "内存虚拟磁盘(&A)"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr "重整分支 / 自动合并"
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "重置(&E)"
@@ -8680,10 +8676,6 @@ msgstr ""
 "\\W   : 任意非字母与数字字符\r\n"
 "\\d   : 数字 0-9\r\n"
 "\\s   : 空白"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "复兴合并"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9755,10 +9747,6 @@ msgstr "选择开始版本"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "选择文字编辑器"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "为复兴选择 URL"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11535,15 +11523,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"这个方法适用于你创建了在 Subversion 手册中讨论的新特性分支，要合并分支到主干"
-"的场合。"
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12406,13 +12385,8 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
-"用日志对话框选择您需要合并的版本，或者输入要合并的版本号，用逗号隔开。可以用"
-"减号指定版本号范围。\n"
-"比如: 4-7,9,11,15-HEAD@pegrevision\n"
-"\n"
-"要合并所有版本，就不要填写版本信息。"
 
 #. Resource IDs: (314)
 #, c-format
@@ -13276,6 +13250,10 @@ msgstr "包含属性"
 msgid "incomplete"
 msgstr "未完成"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "它不存在。"
@@ -13992,6 +13970,38 @@ msgstr "{BugTraq}"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "使用任务对话框"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "重整分支 / 自动合并"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "复兴合并"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "为复兴选择 URL"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "这个方法适用于你创建了在 Subversion 手册中讨论的新特性分支，要合并分支到主"
+#~ "干的场合。"
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "用日志对话框选择您需要合并的版本，或者输入要合并的版本号，用逗号隔开。可以"
+#~ "用减号指定版本号范围。\n"
+#~ "比如: 4-7,9,11,15-HEAD@pegrevision\n"
+#~ "\n"
+#~ "要合并所有版本，就不要填写版本信息。"
 
 #~ msgid "Convert Spaces to &Tabs"
 #~ msgstr "转换空格到制表符(&T)"

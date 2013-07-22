@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 08:27+0000\n"
+"PO-Revision-Date: 2013-07-16 08:32+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Persian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8518,10 +8518,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "درایوهای &رَم"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr ""
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "باز&نشانی"
@@ -8728,10 +8724,6 @@ msgstr ""
 "\\W   : any non-alphanumeric character\r\n"
 "\\d   : digits 0-9\r\n"
 "\\s   : whitespaces"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "Reintegrate merge"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9797,10 +9789,6 @@ msgstr "اصلاحیه شروع را انتخاب کنید"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "انتخاب برنامه ویرایش متن"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "Select the URL from which to reintegrate"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11589,16 +11577,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"این روش موردی را پوشش می دهد که شما یک انشعاب برای ویژگی جدید به شکلی که در "
-"کتاب سابورژن بحث شده ایجاد کرده اید. از این ادغام برای انتقال تمامی تغییرات "
-"از انشعاب به شاخه اصلی استفاده نمایید."
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12462,15 +12440,8 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
-"Use the log dialog to select the revisions you want to merge, or enter the "
-"revisions to merge, separated by commas. A revision range can be specified "
-"by a dash.\n"
-"\n"
-"Example: 4-7,9,11,15-HEAD@pegrevision\n"
-"\n"
-"To merge all revisions, leave the box empty."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13344,6 +13315,10 @@ msgstr ""
 msgid "incomplete"
 msgstr "ناتمام"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "وجود ندارد."
@@ -14068,3 +14043,35 @@ msgstr "بله"
 #. Resource IDs: (1382)
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "Reintegrate merge"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "Select the URL from which to reintegrate"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "این روش موردی را پوشش می دهد که شما یک انشعاب برای ویژگی جدید به شکلی که "
+#~ "در کتاب سابورژن بحث شده ایجاد کرده اید. از این ادغام برای انتقال تمامی "
+#~ "تغییرات از انشعاب به شاخه اصلی استفاده نمایید."
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\n"
+#~ "\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\n"
+#~ "\n"
+#~ "To merge all revisions, leave the box empty."

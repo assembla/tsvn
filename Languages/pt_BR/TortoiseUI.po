@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-12 02:59+0000\n"
-"Last-Translator: mkbu95 <mkbu95@gmail.com>\n"
+"PO-Revision-Date: 2013-07-16 08:32+0000\n"
+"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8639,10 +8639,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "Unidades R&AM"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr "R&eintegrar o ramo / combinação automática"
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "Reini&ciar"
@@ -8850,10 +8846,6 @@ msgstr ""
 "\\W   : qualquer caractere não alfanumérico\r\n"
 "\\d   : dígitos 0-9\r\n"
 "\\s   : espaços em branco"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "Reintegrar combinação"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9925,10 +9917,6 @@ msgstr "Selecionar revisão inicial"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "Selecionar editor de texto"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "Selecione a URL a partir da qual irá reintegrar"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11764,16 +11752,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"Este método cobre o caso em que você criou um ramo de novos recursos como "
-"mostrado do livro do Subversion. Use-o para fazer a fusão de todas as "
-"modificações de um ramo para o tronco."
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12672,15 +12650,8 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
-"Use a janela de log para selecionar as revisões que você quer combinar, ou "
-"digite as revisões para combinar, separadas por vírgulas. Uma série de "
-"revisões pode ser especificada usando um traço.\n"
-"\n"
-"Exemplo: 4-7,9,11,15-HEAD@pegrevision\n"
-"\n"
-"Para combinar todas as revisões, deixe a caixa em branco."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13572,6 +13543,10 @@ msgstr "incluir propriedades"
 msgid "incomplete"
 msgstr "incompleto"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "não existe."
@@ -14314,3 +14289,38 @@ msgstr "sim"
 #. Resource IDs: (1382)
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "R&eintegrar o ramo / combinação automática"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "Reintegrar combinação"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "Selecione a URL a partir da qual irá reintegrar"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "Este método cobre o caso em que você criou um ramo de novos recursos como "
+#~ "mostrado do livro do Subversion. Use-o para fazer a fusão de todas as "
+#~ "modificações de um ramo para o tronco."
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "Use a janela de log para selecionar as revisões que você quer combinar, "
+#~ "ou digite as revisões para combinar, separadas por vírgulas. Uma série de "
+#~ "revisões pode ser especificada usando um traço.\n"
+#~ "\n"
+#~ "Exemplo: 4-7,9,11,15-HEAD@pegrevision\n"
+#~ "\n"
+#~ "Para combinar todas as revisões, deixe a caixa em branco."

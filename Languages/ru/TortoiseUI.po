@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 10:29+0000\n"
+"PO-Revision-Date: 2013-07-17 11:08+0000\n"
 "Last-Translator: Nikolay Osinin <nikolay.osinin@gmail.com>\n"
 "Language-Team: Russian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8633,10 +8633,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "RAM &диски"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr "&Воссоединить ответвление / слить автоматически"
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "&Сбросить"
@@ -8844,10 +8840,6 @@ msgstr ""
 "\\W   : любой не цифро-буквенный символ\r\n"
 "\\d   : цифры 0-9\r\n"
 "\\s   : непечатаемые знаки (пробельные символы)"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "Воссоединительное слияние"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9936,10 +9928,6 @@ msgstr "Выберите начальную ревизию"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "Выберите текстовый редактор"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "Выберите URL, из которого выполнять воссоединительное слияние"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11812,16 +11800,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"Этот метод применяется в случае, когда вы сделали ответвление для новой "
-"функции, как описано в книге о Subversion. Используйте его для слияния всех "
-"изменений из ответвления обратно в ствол."
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12727,7 +12705,7 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
 "Используйте диалог журнала чтобы выбрать ревизии, которые вы хотите слить, "
 "или введите ревизии разделяя их запятыми. Диапазон ревизий может быть указан "
@@ -12735,7 +12713,8 @@ msgstr ""
 "\r\n"
 "Образец: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"Для слияния всех ревизии оставьте поле пустым."
+"Для слияния всех ревизии (воссоединительного/автоматического слияния) "
+"оставьте поле пустым."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13628,6 +13607,10 @@ msgstr "включать свойства"
 msgid "incomplete"
 msgstr "неполный"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "этот элемент не существует."
@@ -14394,8 +14377,49 @@ msgstr "{СОП}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "New name must not be empty or the same as the original name!"
+#~ msgstr "Новое имя не должно быть пустым или таким же как исходное имя!"
+
+#~ msgid "Rename '%s':"
+#~ msgstr "Переименовать '%s':"
+
 #~ msgid "Use Task Dialog"
 #~ msgstr "Использовать диалог задач"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "&Воссоединить ответвление / слить автоматически"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "Воссоединительное слияние"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "Выберите URL, из которого выполнять воссоединительное слияние"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "Этот метод применяется в случае, когда вы сделали ответвление для новой "
+#~ "функции, как описано в книге о Subversion. Используйте его для слияния "
+#~ "всех изменений из ответвления обратно в ствол."
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "Используйте диалог журнала чтобы выбрать ревизии, которые вы хотите "
+#~ "слить, или введите ревизии разделяя их запятыми. Диапазон ревизий может "
+#~ "быть указан с помощью тире.\r\n"
+#~ "\r\n"
+#~ "Образец: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "Для слияния всех ревизии оставьте поле пустым."
 
 #~ msgid "&Don't ask anymore, always save without fixing."
 #~ msgstr "&Не спрашивать больше, всегда сохранять без исправления."

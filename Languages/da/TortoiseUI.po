@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 08:27+0000\n"
+"PO-Revision-Date: 2013-07-16 08:32+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Danish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8617,10 +8617,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "&Hukommelsesdrev"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr "R&eintegrer en sidegren / automatisk fletning"
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "N&ulstil"
@@ -8827,10 +8823,6 @@ msgstr ""
 "\\W   : vilkårligt ikke-alfanumerisk tegn\r\n"
 "\\d   : cifrene 0-9\r\n"
 "\\s   : blanktegn"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "Reintegrer fletning"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9912,10 +9904,6 @@ msgstr "Vælg start-revision"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "Vælg tekstredigeringsprogram"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "Vælg URL'erne til reintegrationen"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11774,16 +11762,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"Denne metode dækker tilfældet når du har lavet en funktionsgren, som omtalt "
-"i Subversion-bogen. Brug denne til at flette alle ændringer af en gren "
-"tilbage til stammen."
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12680,15 +12658,8 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
-"Brug log dialogen til at vælge de revisioner du ønsker at flette, eller "
-"indtast de revisioner  du ønsker at flette, separeret med kommaer. En "
-"revisions-serie kan specificeres med en bindestreg.\n"
-"\n"
-"Eksempel: 4-7,9,11,15-HEAD@pegrevision\n"
-"\n"
-"For at flette alle revisoner kan du lade feltet være tomt."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13578,6 +13549,10 @@ msgstr "inkluder egenskaber"
 msgid "incomplete"
 msgstr "ukomplet"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "emnet findes ikke."
@@ -14333,6 +14308,41 @@ msgstr "{BugTraq}"
 
 #~ msgid "File Encoding"
 #~ msgstr "Fil Indkodning"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "R&eintegrer en sidegren / automatisk fletning"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "Reintegrer fletning"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "Vælg URL'erne til reintegrationen"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "Denne metode dækker tilfældet når du har lavet en funktionsgren, som "
+#~ "omtalt i Subversion-bogen. Brug denne til at flette alle ændringer af en "
+#~ "gren tilbage til stammen."
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "Brug log dialogen til at vælge de revisioner du ønsker at flette, eller "
+#~ "indtast de revisioner  du ønsker at flette, separeret med kommaer. En "
+#~ "revisions-serie kan specificeres med en bindestreg.\n"
+#~ "\n"
+#~ "Eksempel: 4-7,9,11,15-HEAD@pegrevision\n"
+#~ "\n"
+#~ "For at flette alle revisoner kan du lade feltet være tomt."
 
 #~ msgid "Convert Spaces to &Tabs"
 #~ msgstr "Konverter Blanktegn til &Tabulatortegn"

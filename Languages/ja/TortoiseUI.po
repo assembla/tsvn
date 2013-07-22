@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 08:33+0000\n"
+"PO-Revision-Date: 2013-07-19 06:13+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8580,10 +8580,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "RAMドライブ(&A)"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr "ブランチを再統合/自動マージ(&E)"
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "リセット(&E)"
@@ -8790,10 +8786,6 @@ msgstr ""
 "\\W   : アルファベットと数字以外にマッチ\r\n"
 "\\d   : 十進数0～9にマッチ\r\n"
 "\\s   : ホワイトスペース（空白やタブなど）"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "マージを再統合する"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9872,10 +9864,6 @@ msgstr "開始リビジョンを選択"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "テキスト編集用アプリケーションを選択"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "再統合するものからURLを選択"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11719,16 +11707,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"この方法は、Subversion book で述べられている機能ブランチを作成した場合に使用"
-"します。ブランチでのすべての変更をトランクへマージしたい場合にこの方法を使用"
-"してください。"
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12625,14 +12603,15 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
 "マージしたいリビジョンをログダイアログで選択するか、コンマで区切って入力して"
-"ください。リビジョンの範囲はハイフンで指定することができます。\r\n"
-"\r\n"
-"例: 4-7,9,11,15-HEAD@pegrevision\r\n"
-"\r\n"
-"すべてのリビジョンをマージするには、入力ボックスを空のままにしてください。"
+"ください。リビジョンの範囲はハイフンで指定することができます。\n"
+"\n"
+"【例】4-7,9,11,15-HEAD@pegrevision\n"
+"\n"
+"すべてのリビジョンをマージ（再統合または自動マージ）するには、入力ボックスを"
+"空のままにしてください。"
 
 #. Resource IDs: (314)
 #, c-format
@@ -13516,6 +13495,10 @@ msgstr "プロパティを含む"
 msgid "incomplete"
 msgstr "未完了"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "存在していません。"
@@ -14240,7 +14223,7 @@ msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
 #~ msgid "End of Line Style"
-#~ msgstr "改行文字の形式"
+#~ msgstr "改行コードの形式"
 
 #~ msgid "File Encoding"
 #~ msgstr "ファイルのエンコーディング"
@@ -14257,8 +14240,48 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "New name must not be empty or the same as the original name!"
+#~ msgstr "新しい名前を空欄にしたり元の名前と同じにしたりしてはいけません。"
+
+#~ msgid "Rename '%s':"
+#~ msgstr "「%s」の名前変更"
+
 #~ msgid "Use Task Dialog"
 #~ msgstr "タスクダイアログを使用"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "ブランチを再統合/自動マージ(&E)"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "マージを再統合する"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "再統合するものからURLを選択"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "この方法は、Subversion book で述べられている機能ブランチを作成した場合に使"
+#~ "用します。ブランチでのすべての変更をトランクへマージしたい場合にこの方法を"
+#~ "使用してください。"
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "マージしたいリビジョンをログダイアログで選択するか、コンマで区切って入力し"
+#~ "てください。リビジョンの範囲はハイフンで指定することができます。\r\n"
+#~ "\r\n"
+#~ "例: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "すべてのリビジョンをマージするには、入力ボックスを空のままにしてください。"
 
 #~ msgid "&Don't ask anymore, always save without fixing."
 #~ msgstr "今後は確認せず、常に修正なしで保存する(&D)。"

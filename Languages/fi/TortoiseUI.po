@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 08:27+0000\n"
+"PO-Revision-Date: 2013-07-16 08:32+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Finnish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8600,10 +8600,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "&RAM-asemat"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr "&Yhdistä haara takaisin päähaaraan / automaattinen yhdistäminen"
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "P&alauta"
@@ -8812,10 +8808,6 @@ msgstr ""
 "\\W   : täsmää mikä tahansa ei-alfanumeerinen merkki\r\n"
 "\\d   : täsmää numeromerkki 0-9\r\n"
 "\\s   : täsmää tyhjämerkit"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "Takaisin yhdistäminen"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9901,10 +9893,6 @@ msgstr "Valitse alkuversio"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "Valitse tekstieditoriohjelma"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "Valitse paikannin, josta takaisin yhdistäminen suoritetaan"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11759,16 +11747,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"Tämä menetelmä sopii tilanteeseen, jossa olet luonut kehityshaaran "
-"Subversion-kirjan kuvaamalla tavalla. Käytä menetelmää kaikkien haaran "
-"muutosten yhdistämiseksi takaisin päähaaraan."
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12667,14 +12645,8 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
-"Käytä loki-ikkunaa valitaksesi yhdistettävät versiot tai anna ne suoraan "
-"pilkuin erotettuina. Versioväli voidaan antaa väliviivan avulla.\r\n"
-"\r\n"
-"Esimerkki: 4-7,9,11,15-HEAD@pegrevision\r\n"
-"\r\n"
-"Yhdistääksesi kaikki versiot jätä valinta tyhjäksi."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13559,6 +13531,10 @@ msgstr "sisällytä ominaisuudet"
 msgid "incomplete"
 msgstr "epätäydellinen"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "sitä ei ole olemasa."
@@ -14305,6 +14281,40 @@ msgstr "{BugTraq}"
 
 #~ msgid "File Encoding"
 #~ msgstr "Tiedoston koodaus"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "&Yhdistä haara takaisin päähaaraan / automaattinen yhdistäminen"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "Takaisin yhdistäminen"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "Valitse paikannin, josta takaisin yhdistäminen suoritetaan"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "Tämä menetelmä sopii tilanteeseen, jossa olet luonut kehityshaaran "
+#~ "Subversion-kirjan kuvaamalla tavalla. Käytä menetelmää kaikkien haaran "
+#~ "muutosten yhdistämiseksi takaisin päähaaraan."
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "Käytä loki-ikkunaa valitaksesi yhdistettävät versiot tai anna ne suoraan "
+#~ "pilkuin erotettuina. Versioväli voidaan antaa väliviivan avulla.\r\n"
+#~ "\r\n"
+#~ "Esimerkki: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "Yhdistääksesi kaikki versiot jätä valinta tyhjäksi."
 
 #~ msgid "Convert Spaces to &Tabs"
 #~ msgstr "Muunna välilyönnit &sarkainmerkeiksi"

@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 08:27+0000\n"
+"PO-Revision-Date: 2013-07-16 08:32+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -8601,10 +8601,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "R&AM-disker"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr "R&eintegrer gren / automatisk fletting"
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "N&ullstill"
@@ -8811,10 +8807,6 @@ msgstr ""
 "\\W   : ethvert ikke-alfanumerisk tegn\r\n"
 "\\d   : sifrene 0-9\r\n"
 "\\s   : blanktegn"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "Reintegrer flett"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9896,10 +9888,6 @@ msgstr "Velg første revisjon"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "Velg tekstredigeringsprogram"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "Velg URL det skal reintegreres fra"
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11739,16 +11727,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"Denne metoden dekker tilfellet hvor du har laget en utviklingsgren som "
-"omtalt i Subversion-boken. Bruk dette for å flette alle endringene i grenen "
-"tilbake til stammen."
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12640,15 +12618,8 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
-"Bruk loggdialogen til å velge de revisjonene du vil flette, eller skriv inn "
-"revisjonene som skal flettes, skilt av kommaer. Et revisjonsintervall kan "
-"angis med bindestrek.\n"
-"\n"
-"Eksempel: 4-7,9,11,15-HEAD@spikerrevisjon\n"
-"\n"
-"For å flette alle revisjoner, la boksen stå tom."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13533,6 +13504,10 @@ msgstr "ta med egenskaper"
 msgid "incomplete"
 msgstr "ufullstendig"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "den finnes ikke."
@@ -14281,6 +14256,41 @@ msgstr "{BugTraq}"
 
 #~ msgid "File Encoding"
 #~ msgstr "Filkoding"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "R&eintegrer gren / automatisk fletting"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "Reintegrer flett"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "Velg URL det skal reintegreres fra"
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "Denne metoden dekker tilfellet hvor du har laget en utviklingsgren som "
+#~ "omtalt i Subversion-boken. Bruk dette for å flette alle endringene i "
+#~ "grenen tilbake til stammen."
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "Bruk loggdialogen til å velge de revisjonene du vil flette, eller skriv "
+#~ "inn revisjonene som skal flettes, skilt av kommaer. Et revisjonsintervall "
+#~ "kan angis med bindestrek.\n"
+#~ "\n"
+#~ "Eksempel: 4-7,9,11,15-HEAD@spikerrevisjon\n"
+#~ "\n"
+#~ "For å flette alle revisjoner, la boksen stå tom."
 
 #~ msgid "&Don't ask anymore, always save without fixing."
 #~ msgstr "&Ikke spør mer, alltid lagre uten å fikse."

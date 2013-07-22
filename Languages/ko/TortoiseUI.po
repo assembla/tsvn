@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-09 08:27+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-07-17 23:23+0000\n"
+"Last-Translator: Seongki Shin <skshin@gmail.com>\n"
 "Language-Team: Korean <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4439,7 +4439,7 @@ msgstr ""
 #. Resource IDs: (92)
 #, c-format
 msgid "Do you want to drop the vendor branch into the working copy \"%s\"?"
-msgstr ""
+msgstr "\"%s\"를 vendor 브랜치에서 작업사본으로 떨어뜨리(drop)겠습니까?"
 
 #. Resource IDs: (315)
 msgid "Do you want to load the changed files?"
@@ -8525,10 +8525,6 @@ msgstr ""
 msgid "R&AM drives"
 msgstr "램 드라이브(&A)"
 
-#. Resource IDs: (1469)
-msgid "R&eintegrate a branch / automatic merge"
-msgstr "브랜치를 다시 통합 / 자동병합(&E)"
-
 #. Resource IDs: (16623)
 msgid "R&eset"
 msgstr "리셋(&E)"
@@ -8735,10 +8731,6 @@ msgstr ""
 "\\W   : a-z,A-Z,0-9,_ 아닌 것 중 하나\r\n"
 "\\d   : 숫자 0-9\r\n"
 "\\s   : 공백,탭"
-
-#. Resource IDs: (595)
-msgid "Reintegrate merge"
-msgstr "재통합 병합"
 
 #. Resource IDs: (230)
 #, c-format
@@ -9815,10 +9807,6 @@ msgstr "시작 리비전 선택"
 #. Resource IDs: (79)
 msgid "Select text editor application"
 msgstr "텍스트 에디터 프로그램 선택"
-
-#. Resource IDs: (595)
-msgid "Select the URL from which to reintegrate"
-msgstr "어떤 URL로부터 재통합할지 URL을 선택해 주십시오."
 
 #. Resource IDs: (595)
 msgid "Select the URLs for the tree merge"
@@ -11637,15 +11625,6 @@ msgstr ""
 
 #. Resource IDs: (594)
 msgid ""
-"This method covers the case when you have made a feature branch as discussed "
-"in the Subversion book. Use this to merge all changes of a branch back to "
-"trunk."
-msgstr ""
-"Subversion 책에서 언급된 새로운 기능을 위한 브랜치를 만들었을 때 사용하는 명"
-"령입니다. 브랜치의 모든 변경사항을 트렁크에 병합할 때 이 명령을 사용하십시오."
-
-#. Resource IDs: (594)
-msgid ""
 "This method covers the case when you have made one or more revisions to a "
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
@@ -12529,15 +12508,14 @@ msgid ""
 "\r\n"
 "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
 "\r\n"
-"To merge all revisions, leave the box empty."
+"To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
-"병합하기 위한 리비전을 선택하기 위해 로그 대화상자를 이용하거나, 쉼표(,)로 구"
-"분된 리비전을 입력하세요. 리비전 구간은 대시(-)를 이용하여 표현할 수 있습니"
-"다.\n"
+"병합하려는 버전을 로그 대화상자에서 선택하거나 쉽표로 구분하여 입력하십시오. "
+"리비전 범위는 하이픈(-)으로 지정할 수 있습니다.\n"
 "\n"
-"예: 4-7,9,11,15-HEAD\n"
+"예: 4-7,9,11,15-HEAD@pegrevision\n"
 "\n"
-"모든 리비전을 병합하려면, 빈 칸으로 두십시오."
+"모든 버전을 병합(재 통합 또는 자동 병합)하려면, 입력상자를 비워 두십시오."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13411,6 +13389,10 @@ msgstr "속성을 포함"
 msgid "incomplete"
 msgstr "미완성"
 
+#. Resource IDs: (589)
+msgid "inherited from"
+msgstr ""
+
 #. Resource IDs: (583)
 msgid "it does not exist."
 msgstr "존재하지 않습니다"
@@ -14138,6 +14120,62 @@ msgstr "{버그트랙}"
 
 #~ msgid "File Encoding"
 #~ msgstr "파일 인코딩"
+
+#~ msgid "Fit image &heights"
+#~ msgstr "이미지 높이 맞추기 (&H)"
+
+#~ msgid "Fit image &widths"
+#~ msgstr "이미지 넓이 맞추기 (&W)"
+
+#~ msgid "ID:32817:V   +W"
+#~ msgstr "ID:32817:V   +W"
+
+#~ msgid "ID:32818:V   +H"
+#~ msgstr "ID:32818:V   +H"
+
+#~ msgid "New name must not be empty or the same as the original name!"
+#~ msgstr "새 이름은 비어있거나 원래 이름과 동일해서는 안됩니다."
+
+#~ msgid "Rename '%s':"
+#~ msgstr "'%s'의 이름 변경"
+
+#~ msgid "Use Task Dialog"
+#~ msgstr "작업 대화상자를 사용"
+
+#~ msgid "R&eintegrate a branch / automatic merge"
+#~ msgstr "브랜치를 다시 통합 / 자동병합(&E)"
+
+#~ msgid "Reintegrate merge"
+#~ msgstr "재통합 병합"
+
+#~ msgid "Select the URL from which to reintegrate"
+#~ msgstr "어떤 URL로부터 재통합할지 URL을 선택해 주십시오."
+
+#~ msgid ""
+#~ "This method covers the case when you have made a feature branch as "
+#~ "discussed in the Subversion book. Use this to merge all changes of a "
+#~ "branch back to trunk."
+#~ msgstr ""
+#~ "Subversion 책에서 언급된 새로운 기능을 위한 브랜치를 만들었을 때 사용하는 "
+#~ "명령입니다. 브랜치의 모든 변경사항을 트렁크에 병합할 때 이 명령을 사용하십"
+#~ "시오."
+
+#~ msgid ""
+#~ "Use the log dialog to select the revisions you want to merge, or enter "
+#~ "the revisions to merge, separated by commas. A revision range can be "
+#~ "specified by a dash.\r\n"
+#~ "\r\n"
+#~ "Example: 4-7,9,11,15-HEAD@pegrevision\r\n"
+#~ "\r\n"
+#~ "To merge all revisions, leave the box empty."
+#~ msgstr ""
+#~ "병합하기 위한 리비전을 선택하기 위해 로그 대화상자를 이용하거나, 쉼표(,)"
+#~ "로 구분된 리비전을 입력하세요. 리비전 구간은 대시(-)를 이용하여 표현할 수 "
+#~ "있습니다.\n"
+#~ "\n"
+#~ "예: 4-7,9,11,15-HEAD\n"
+#~ "\n"
+#~ "모든 리비전을 병합하려면, 빈 칸으로 두십시오."
 
 #~ msgid "&Don't ask anymore, always save without fixing."
 #~ msgstr "앞으로는 확인하지 않고 항상 수정없이 저장하기(&D)."
