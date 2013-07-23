@@ -45,6 +45,7 @@ void CEditPropMergeLogTemplate::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CEditPropMergeLogTemplate, CResizableStandAloneDialog)
+    ON_BN_CLICKED(IDHELP, &CEditPropMergeLogTemplate::OnBnClickedHelp)
 END_MESSAGE_MAP()
 
 
@@ -89,6 +90,7 @@ BOOL CEditPropMergeLogTemplate::OnInitDialog()
 
     CString sWindowTitle;
     GetWindowText(sWindowTitle);
+    sWindowTitle.Remove('&');
     CAppUtils::SetWindowTitle(m_hWnd, m_pathList.GetCommonRoot().GetUIPathString(), sWindowTitle);
 
     GetDlgItem(IDC_PROPRECURSIVE)->EnableWindow(m_bFolder || m_bMultiple);
@@ -138,12 +140,17 @@ void CEditPropMergeLogTemplate::OnOK()
     GetDlgItemText(IDC_MSG, sText);
     propVal = CUnicodeUtils::GetUTF8(sText);
     propVal.Replace("\r\n", "\n");
-    pVal.remove = (pVal.value.empty());
     pVal.value = propVal;
+    pVal.remove = (pVal.value.empty());
     newProps[PROJECTPROPNAME_MERGELOGTEMPLATEMSG] = pVal;
 
     m_bChanged = true;
     m_properties = newProps;
 
     __super::OnOK();
+}
+
+void CEditPropMergeLogTemplate::OnBnClickedHelp()
+{
+    OnHelp();
 }
