@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-16 08:32+0000\n"
+"PO-Revision-Date: 2013-07-25 08:26+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Serbian <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -12228,7 +12228,8 @@ msgid "Undo 1 Action"
 msgstr "Поништи 1 Акцију"
 
 #. Resource IDs: (14)
-msgid "Undo Add.."
+#, fuzzy
+msgid "Undo Add..."
 msgstr "Поништи Додај..."
 
 #. Resource IDs: (3603)
@@ -12624,6 +12625,14 @@ msgid ""
 "\r\n"
 "To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
+"Користи дијалог дневник да изабереш ревизију коју желиш да стопиш, или унеси "
+"ревизије за стапање, раздвојене запетама. Опсег ревизија може се "
+"специфицирати цртицом.\r\n"
+"\r\n"
+"Пример: 4-7,9,11,15-HEAD@pegrevision\r\n"
+"\r\n"
+"Да би се стопиле све ревизије (реинтегрисано/аутоматско стапање) оставите "
+"празан бокс."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13514,7 +13523,7 @@ msgstr "недовршено"
 
 #. Resource IDs: (589)
 msgid "inherited from"
-msgstr ""
+msgstr "наслеђено од"
 
 #. Resource IDs: (583)
 msgid "it does not exist."
@@ -14282,6 +14291,12 @@ msgstr "{БагТрек}"
 
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
+
+#~ msgid "New name must not be empty or the same as the original name!"
+#~ msgstr "Ново име не може бити празно или исто као оригинално име!"
+
+#~ msgid "Rename '%s':"
+#~ msgstr "Преименуј '%s':"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "Користи дијалог задатка"

@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-07-16 08:32+0000\n"
+"PO-Revision-Date: 2013-07-25 08:26+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Finnish <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -626,7 +626,7 @@ msgstr "&Sulje ikkuna(t)"
 
 #. Resource IDs: (65535)
 msgid "&Collaborator username"
-msgstr ""
+msgstr "&Collaborator -käyttäjänimi"
 
 #. Resource IDs: (65535)
 msgid "&Command:"
@@ -1355,7 +1355,7 @@ msgstr "P&ysäytä kopion / uudelleennimennän kohdalla"
 
 #. Resource IDs: (65535)
 msgid "&Subversion username"
-msgstr ""
+msgstr "&Subversion -käyttäjänimi"
 
 #. Resource IDs: (276)
 msgid "&Switch WC to path and revision"
@@ -3279,7 +3279,7 @@ msgstr "Sulkee aktiivisen ikkunan ja pyytää tallettamaan tiedostot"
 
 #. Resource IDs: (350)
 msgid "Code Collaborator Settings"
-msgstr ""
+msgstr "Code Collaborator -asetukset"
 
 #. Resource IDs: (275)
 msgid "Coll&apse source tree"
@@ -3287,7 +3287,7 @@ msgstr "S&ulje lähdepuu"
 
 #. Resource IDs: (65535)
 msgid "Collaborator &password"
-msgstr ""
+msgstr "Collaborator -&salasana"
 
 #. Resource IDs: (156)
 msgid "Collapse"
@@ -4486,7 +4486,7 @@ msgstr ""
 #. Resource IDs: (92)
 #, c-format
 msgid "Do you want to drop the vendor branch into the working copy \"%s\"?"
-msgstr ""
+msgstr "Haluatko lisätä kirjastohaaran työkopioon \"%s\"?"
 
 #. Resource IDs: (315)
 msgid "Do you want to load the changed files?"
@@ -6400,6 +6400,8 @@ msgid ""
 "In order to show this dialog in the future, press <Ctrl> while executing the "
 "Code Collaborator menu command."
 msgstr ""
+"Näyttääksesi tämän ikkunan jatkossa, paina <Ctrl> -näppäintä suorittaessasi "
+"Code Collaborator -toiminnon."
 
 #. Resource IDs: (1616)
 msgid "Include e&xternals"
@@ -10740,7 +10742,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Subversion passwor&d"
-msgstr ""
+msgstr "Subversion -&salasana"
 
 #. Resource IDs: (79)
 msgid ""
@@ -11846,7 +11848,7 @@ msgstr "Aikakatkaisut"
 
 #. Resource IDs: (65535)
 msgid "Tip"
-msgstr ""
+msgstr "Vihje"
 
 #. Resource IDs: (224)
 msgid ""
@@ -12251,7 +12253,8 @@ msgid "Undo 1 Action"
 msgstr "Peru 1 toiminto"
 
 #. Resource IDs: (14)
-msgid "Undo Add.."
+#, fuzzy
+msgid "Undo Add..."
 msgstr "Peru lisäys..."
 
 #. Resource IDs: (3603)
@@ -12647,6 +12650,12 @@ msgid ""
 "\r\n"
 "To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
+"Käytä loki-ikkunaa valitaksesi yhdistettävät versiot tai anna ne suoraan "
+"pilkuin erotettuina. Versioväli voidaan antaa väliviivan avulla.\n"
+"\n"
+"Esimerkki: 4-7,9,11,15-HEAD@pegrevision\n"
+"\n"
+"Yhdistääksesi kaikki versiot jätä valinta tyhjäksi."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13533,7 +13542,7 @@ msgstr "epätäydellinen"
 
 #. Resource IDs: (589)
 msgid "inherited from"
-msgstr ""
+msgstr "peritty"
 
 #. Resource IDs: (583)
 msgid "it does not exist."
@@ -14281,6 +14290,27 @@ msgstr "{BugTraq}"
 
 #~ msgid "File Encoding"
 #~ msgstr "Tiedoston koodaus"
+
+#~ msgid "Fit image &heights"
+#~ msgstr "Sovita kuvien &korkeudet"
+
+#~ msgid "Fit image &widths"
+#~ msgstr "Sovita kuvien &leveydet"
+
+#~ msgid "ID:32817:V   +W"
+#~ msgstr "ID:32817:V +L"
+
+#~ msgid "ID:32818:V   +H"
+#~ msgstr "ID:32817:V +K"
+
+#~ msgid "New name must not be empty or the same as the original name!"
+#~ msgstr "Uusi nimi ei saa olla tyhjä tai sama kuin alkuperäinen nimi!"
+
+#~ msgid "Rename '%s':"
+#~ msgstr "Nimeä uudelleen '%s':"
+
+#~ msgid "Use Task Dialog"
+#~ msgstr "Käytä Task-ikkunoita"
 
 #~ msgid "R&eintegrate a branch / automatic merge"
 #~ msgstr "&Yhdistä haara takaisin päähaaraan / automaattinen yhdistäminen"
