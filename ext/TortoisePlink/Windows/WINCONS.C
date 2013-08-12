@@ -43,7 +43,7 @@ void notify_remote_exit(void *frontend)
 {
 }
 
-void timer_change_notify(long next)
+void timer_change_notify(unsigned long next)
 {
 }
 
@@ -66,13 +66,12 @@ int verify_ssh_host_key(void *frontend, char *host, int port, char *keytype,
 	"think it is.\n"
 	"The server's %s key fingerprint is:\n"
 	"%s\n"
-	"If you trust this host, enter \"y\" to add the key to\n"
+	"If you trust this host, hit Yes to add the key to\n"
 	"PuTTY's cache and carry on connecting.\n"
 	"If you want to carry on connecting just once, without\n"
-	"adding the key to the cache, enter \"n\".\n"
-	"If you do not trust this host, press Return to abandon the\n"
-	"connection.\n"
-	"Store key in cache? (y/n) ";
+	"adding the key to the cache, hit No.\n"
+	"If you do not trust this host, hit Cancel to abandon the\n"
+	"connection.\n";
 
     static const char wrongmsg_batch[] =
 	"WARNING - POTENTIAL SECURITY BREACH!\n"
@@ -86,6 +85,7 @@ int verify_ssh_host_key(void *frontend, char *host, int port, char *keytype,
 	"Connection abandoned.\n";
     static const char wrongmsg[] =
 	"WARNING - POTENTIAL SECURITY BREACH!\n"
+	"\n"
 	"The server's host key does not match the one PuTTY has\n"
 	"cached in the registry. This means that either the\n"
 	"server administrator has changed the host key, or you\n"
@@ -94,13 +94,11 @@ int verify_ssh_host_key(void *frontend, char *host, int port, char *keytype,
 	"The new %s key fingerprint is:\n"
 	"%s\n"
 	"If you were expecting this change and trust the new key,\n"
-	"enter \"y\" to update PuTTY's cache and continue connecting.\n"
+	"hit Yes to update PuTTY's cache and continue connecting.\n"
 	"If you want to carry on connecting but without updating\n"
-	"the cache, enter \"n\".\n"
-	"If you want to abandon the connection completely, press\n"
-	"Return to cancel. Pressing Return is the ONLY guaranteed\n"
-	"safe choice.\n"
-	"Update cached key? (y/n, Return cancels connection) ";
+	"the cache, hit No.\n"
+	"If you want to abandon the connection completely, hit\n"
+	"Cancel. Hitting Cancel is the ONLY guaranteed safe\n" "choice.\n";
 
     static const char abandoned[] = "Connection abandoned.\n";
 
@@ -118,7 +116,7 @@ int verify_ssh_host_key(void *frontend, char *host, int port, char *keytype,
 	int mbret;
 	char *message, *title;
 
-	message = dupprintf(wrongmsg, appname, keytype, fingerprint, appname);
+	message = dupprintf(wrongmsg, keytype, fingerprint, appname);
 	title = dupprintf(mbtitle, appname);
 
 	mbret = MessageBox(GetParentHwnd(), message, title, MB_ICONWARNING | MB_YESNOCANCEL | MB_DEFBUTTON3);
@@ -197,7 +195,7 @@ int askalg(void *frontend, const char *algtype, const char *algname,
  * Ask whether to wipe a session log file before writing to it.
  * Returns 2 for wipe, 1 for append, 0 for cancel (don't log).
  */
-int askappend(void *frontend, Filename filename,
+int askappend(void *frontend, Filename *filename,
 	      void (*callback)(void *ctx, int result), void *ctx)
 {
     HANDLE hin;
@@ -219,11 +217,11 @@ int askappend(void *frontend, Filename filename,
     char line[32];
 
     if (console_batch_mode) {
-	fprintf(stderr, msgtemplate_batch, FILENAME_MAX, filename.path);
+	fprintf(stderr, msgtemplate_batch, FILENAME_MAX, filename->path);
 	fflush(stderr);
 	return 0;
     }
-    fprintf(stderr, msgtemplate, FILENAME_MAX, filename.path);
+    fprintf(stderr, msgtemplate, FILENAME_MAX, filename->path);
     fflush(stderr);
 
     hin = GetStdHandle(STD_INPUT_HANDLE);
@@ -310,7 +308,7 @@ int console_get_userpass_input(prompts_t *p, unsigned char *in, int inlen)
     {
 	int i;
 	for (i = 0; i < (int)p->n_prompts; i++)
-	    memset(p->prompts[i]->result, 0, p->prompts[i]->result_len);
+            prompt_set_result(p->prompts[i], "");
     }
 
     if (console_batch_mode)
@@ -320,7 +318,7 @@ int console_get_userpass_input(prompts_t *p, unsigned char *in, int inlen)
     for (curr_prompt = 0; curr_prompt < p->n_prompts; curr_prompt++) {
 		
 	prompt_t *pr = p->prompts[curr_prompt];
-	if (!DoLoginDialog(pr->result, pr->result_len-1, pr->prompt))
+	if (!DoLoginDialog(pr->result, pr->resultsize-1, pr->prompt))
 	return 0;
     }
 
