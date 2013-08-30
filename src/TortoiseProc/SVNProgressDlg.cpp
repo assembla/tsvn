@@ -2853,6 +2853,7 @@ bool CSVNProgressDlg::CmdCommit(CString& sWindowTitle, bool& /*localoperation*/)
         {
             CopyFile(it->first, it->second, FALSE);
         }
+        m_restorepaths.clear();
     }
 
     // after a commit, show the user the merge button, but only if only one single item was committed
