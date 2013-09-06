@@ -107,7 +107,7 @@ CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev)
     , m_bSparseCheckoutMode(false)
     , m_InitialUrl(url)
     , m_bInitDone(false)
-    , m_blockEvents(false)
+    , m_blockEvents(0)
     , m_bSortAscending(true)
     , m_nSortedColumn(0)
     , m_pTreeDropTarget(NULL)
@@ -137,7 +137,7 @@ CRepositoryBrowser::CRepositoryBrowser(const CString& url, const SVNRev& rev, CW
     , m_bSparseCheckoutMode(false)
     , m_InitialUrl(url)
     , m_bInitDone(false)
-    , m_blockEvents(false)
+    , m_blockEvents(0)
     , m_bSortAscending(true)
     , m_nSortedColumn(0)
     , m_pTreeDropTarget(NULL)
@@ -1153,10 +1153,10 @@ bool CRepositoryBrowser::ChangeToUrl(CString& url, SVNRev& rev, bool bAlreadyChe
     m_RepoTree.Expand(hItem, TVE_EXPAND);
     FillList(pTreeItem);
 
-    m_blockEvents = true;
+    ++m_blockEvents;
     m_RepoTree.EnsureVisible(hItem);
     m_RepoTree.SelectItem(hItem);
-    m_blockEvents = false;
+    --m_blockEvents;
 
     m_RepoList.ClearText();
     m_RepoTree.ClearText();
@@ -1687,8 +1687,19 @@ HTREEITEM CRepositoryBrowser::Insert
             }
         }
         else
-            m_RepoTree.SetCheck(hNewItem, false);
-
+        {
+            if (!m_wcPath.IsEmpty() || m_RepoTree.GetRootItem() == hParent)
+            {
+                // node without depth in already checked out WC or item on second (below root) level.
+                // this nodes should be unchecked
+                m_RepoTree.SetCheck(hNewItem, false);
+            }
+            else
+            {
+                // other nodes inherit parent state
+                m_RepoTree.SetCheck(hNewItem, m_RepoTree.GetCheck(hParent));
+            }
+        }
     }
 
     return hNewItem;
@@ -1747,11 +1758,11 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
     CWaitCursorEx wait;
     CAutoReadLock locker(m_guard);
     // block all events until the list control is refreshed as well
-    m_blockEvents = true;
+    ++m_blockEvents;
     CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData(hNode);
     if (!pTreeItem || pTreeItem->svnparentpathroot)
     {
-        m_blockEvents = false;
+        --m_blockEvents;
         return false;
     }
     HTREEITEM hSel1 = m_RepoTree.GetSelectedItem();
@@ -1786,7 +1797,7 @@ bool CRepositoryBrowser::RefreshNode(HTREEITEM hNode, bool force /* = false*/)
     if (pTreeItem->children_fetched && pTreeItem->error.IsEmpty())
         if ((force)||(hSel1 == hNode)||(hSel1 != m_RepoTree.GetSelectedItem())||(m_pListCtrlTreeItem == nullptr))
             FillList(pTreeItem);
-    m_blockEvents = false;
+    --m_blockEvents;
     return true;
 }
 
@@ -1964,7 +1975,7 @@ void CRepositoryBrowser::OnInlineedit()
     if (pos == NULL)
         return;
     int selIndex = m_RepoList.GetNextSelectedItem(pos);
-    m_blockEvents = true;
+    ++m_blockEvents;
     if (selIndex >= 0)
     {
         CAutoReadLock locker(m_guard);
@@ -1987,14 +1998,14 @@ void CRepositoryBrowser::OnInlineedit()
                 m_RepoTree.EditLabel(hTreeItem);
         }
     }
-    m_blockEvents = false;
+    --m_blockEvents;
 }
 
 void CRepositoryBrowser::OnRefresh()
 {
     CWaitCursorEx waitCursor;
 
-    m_blockEvents = true;
+    ++m_blockEvents;
 
     // try to get the tree node to refresh
 
@@ -2004,7 +2015,7 @@ void CRepositoryBrowser::OnRefresh()
 
     if (hSelected == NULL)
     {
-        m_blockEvents = false;
+        --m_blockEvents;
         if (m_InitialUrl.IsEmpty())
             return;
         // try re-init
@@ -2021,7 +2032,7 @@ void CRepositoryBrowser::OnRefresh()
 
     RefreshNode(m_RepoTree.GetSelectedItem(), true);
 
-    m_blockEvents = false;
+    --m_blockEvents;
 }
 
 void CRepositoryBrowser::OnTvnSelchangedRepotree(NMHDR *pNMHDR, LRESULT *pResult)
@@ -2240,10 +2251,10 @@ void CRepositoryBrowser::OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult)
         m_bSortAscending = !m_bSortAscending;
     m_nSortedColumn = phdr->iItem;
 
-    m_blockEvents = true;
+    ++m_blockEvents;
     ListView_SortItemsEx(m_RepoList, ListSort, this);
     SetSortArrow();
-    m_blockEvents = false;
+    --m_blockEvents;
     *pResult = 0;
 }
 
@@ -2318,6 +2329,14 @@ int CRepositoryBrowser::TreeSort(LPARAM lParam1, LPARAM lParam2, LPARAM /*lParam
 {
     CTreeItem * Item1 = (CTreeItem*)lParam1;
     CTreeItem * Item2 = (CTreeItem*)lParam2;
+
+    // directories are always above the other nodes
+    if(Item1->kind == svn_node_dir && Item2->kind != svn_node_dir)
+        return -1;
+
+    if(Item1->kind != svn_node_dir && Item2->kind == svn_node_dir)
+        return 1;
+
     return SortStrCmp(Item1->unescapedname, Item2->unescapedname);
 }
 
@@ -3071,19 +3090,19 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
             {
                 // Seems to be a right-click on the list view background.
                 // Use the currently selected item in the tree view as the source.
-                m_blockEvents = true;
+                ++m_blockEvents;
                 hSelectedTreeItem = m_RepoTree.GetSelectedItem();
                 if (hSelectedTreeItem)
                 {
                     m_RepoTree.SetItemState(hSelectedTreeItem, 0, TVIS_SELECTED);
-                    m_blockEvents = false;
+                    --m_blockEvents;
                     m_RepoTree.SetItemState(hSelectedTreeItem, TVIS_DROPHILITED, TVIS_DROPHILITED);
                     CTreeItem * pTreeItem = (CTreeItem *)m_RepoTree.GetItemData (hSelectedTreeItem);
                     bSVNParentPathUrl = pTreeItem->svnparentpathroot;
                     selection.Add (pTreeItem);
                 }
                 else
-                    m_blockEvents = false;
+                    --m_blockEvents;
             }
         }
     }
@@ -3099,10 +3118,10 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
         // the context menu will work on
         if ((hItem) && (uFlags & TVHT_ONITEM) && (hItem != m_RepoTree.GetSelectedItem()))
         {
-            m_blockEvents = true;
+            ++m_blockEvents;
             hSelectedTreeItem = m_RepoTree.GetSelectedItem();
             m_RepoTree.SetItemState(hSelectedTreeItem, 0, TVIS_SELECTED);
-            m_blockEvents = false;
+            --m_blockEvents;
             m_RepoTree.SetItemState(hItem, TVIS_DROPHILITED, TVIS_DROPHILITED);
         }
         if (hItem)
@@ -3299,19 +3318,19 @@ void CRepositoryBrowser::OnContextMenu(CWnd* pWnd, CPoint point)
             // restore the previously selected item state
             if ((hItem) && (uFlags & TVHT_ONITEM) && (hItem != m_RepoTree.GetSelectedItem()))
             {
-                m_blockEvents = true;
+                ++m_blockEvents;
                 m_RepoTree.SetItemState(hSelectedTreeItem, TVIS_SELECTED, TVIS_SELECTED);
-                m_blockEvents = false;
+                --m_blockEvents;
                 m_RepoTree.SetItemState(hItem, 0, TVIS_DROPHILITED);
             }
         }
         if (hSelectedTreeItem)
         {
             CAutoWriteLock locker(m_guard);
-            m_blockEvents = true;
+            ++m_blockEvents;
             m_RepoTree.SetItemState(hSelectedTreeItem, 0, TVIS_DROPHILITED);
             m_RepoTree.SetItemState(hSelectedTreeItem, TVIS_SELECTED, TVIS_SELECTED);
-            m_blockEvents = false;
+            --m_blockEvents;
         }
         DialogEnableWindow(IDOK, FALSE);
         bool bOpenWith = false;
@@ -4316,7 +4335,7 @@ void CRepositoryBrowser::OnTvnItemChangedRepotree(NMHDR *pNMHDR, LRESULT *pResul
     NMTVITEMCHANGE *pNMTVItemChange = reinterpret_cast<NMTVITEMCHANGE*>(pNMHDR);
     *pResult = 0;
 
-    if (!m_bSparseCheckoutMode)
+    if (!m_bSparseCheckoutMode || m_blockEvents)
         return;
 
     if (pNMTVItemChange->uStateOld == 0 && pNMTVItemChange->uStateNew == 0)
@@ -4336,6 +4355,8 @@ void CRepositoryBrowser::OnTvnItemChangedRepotree(NMHDR *pNMHDR, LRESULT *pResul
 
     bChecked = m_RepoTree.GetCheck(pNMTVItemChange->hItem);
 
+    m_blockEvents++;
+
     CheckTreeItem(pNMTVItemChange->hItem, !!bChecked);
 
     if (pNMTVItemChange->uStateNew & TVIS_SELECTED)
@@ -4352,6 +4373,7 @@ void CRepositoryBrowser::OnTvnItemChangedRepotree(NMHDR *pNMHDR, LRESULT *pResul
             hItem = m_RepoTree.GetNextItem(hItem, TVGN_NEXTSELECTED);
         }
     }
+    m_blockEvents--;
 }
 
 bool CRepositoryBrowser::CheckoutDepthForItem( HTREEITEM hItem )
@@ -4423,39 +4445,108 @@ void CRepositoryBrowser::OnNMClickRepotree(NMHDR *pNMHDR, LRESULT *pResult)
     if (TVHT_ONITEMSTATEICON & ht.flags)
     {
         CheckTreeItem(ht.hItem, !m_RepoTree.GetCheck(ht.hItem));
+        // invert check. tree control inverts it again after this method
+        m_RepoTree.SetCheck(ht.hItem, !m_RepoTree.GetCheck(ht.hItem));
     }
 }
 
+void CRepositoryBrowser::CheckParentsOfTreeItem( HTREEITEM hItem )
+{
+    HTREEITEM hParent = m_RepoTree.GetParentItem(hItem);
+    while (hParent)
+    {
+        m_RepoTree.SetCheck(hParent, TRUE);
+        hParent = m_RepoTree.GetParentItem(hParent);
+    }
+}
+
+void CRepositoryBrowser::CheckTreeItemRecursive( HTREEITEM hItem, bool bCheck )
+{
+    // process item
+    m_RepoTree.SetCheck(hItem, bCheck);
+
+    // process all children
+    HTREEITEM hChild = m_RepoTree.GetChildItem(hItem);
+    while (hChild)
+    {
+        CheckTreeItemRecursive(hChild, bCheck);
+        hChild = m_RepoTree.GetNextItem(hChild, TVGN_NEXT);
+    }
+}
+
+bool CRepositoryBrowser::HaveAllChildrenSameCheckState( HTREEITEM hItem, bool bChecked /* = false */ )
+{
+    // analyze all children
+    HTREEITEM hChild = m_RepoTree.GetChildItem(hItem);
+    while (hChild)
+    {
+        // child item doesn't have expected state. interrupt walk and return false
+        if(m_RepoTree.GetCheck(hChild) != bChecked)
+            return false;
+
+        // check condition on all descendants.
+        if(!HaveAllChildrenSameCheckState(hChild))
+            return false;
+
+        hChild = m_RepoTree.GetNextItem(hChild, TVGN_NEXT);
+    }
+
+    return true;
+}
+
+// Check item has next logic for emulate tri-state checkbox:
+// if user click collapsed item or selected more then one item or item without children - proposed check
+// state propogated to whole subtree. (depth: 'Fully recursive' or 'Exclude')
+// otherwise:
+// if user click unchecked item - only this item will be checked. (Depth: 'Only this item')
+// if user click checked item and all children unchecked then item and all children
+// will be checked. (subtree depth: 'Fully recursive')
+//
+// summary: item will be cyclicaly switched:
+// unchecked -> checked only item -> checked whole subtree -> unchecked whole subtree
+// for collapsed items (and when more than one item selected) will be cyclicaly switched:
+// unchecked -> checked whole subtree -> unchecked whole subtree
 void CRepositoryBrowser::CheckTreeItem( HTREEITEM hItem, bool bCheck )
 {
-    if (bCheck)
+    bool itemExpanded = m_RepoTree.GetItemState(hItem, TVIS_EXPANDED) & TVIS_EXPANDED;
+    bool multiselectMode = m_RepoTree.GetSelectedCount() > 1;
+
+    // tri-state logic will be emulated for expanded, checked items, in single selection mode,
+    // with at least one child, when all children unchecked
+    if(!bCheck && !multiselectMode && itemExpanded && m_RepoTree.GetChildItem(hItem) != NULL && HaveAllChildrenSameCheckState(hItem))
     {
-        // check all parents
-        HTREEITEM hParent = m_RepoTree.GetParentItem(hItem);
-        while (hParent)
+        // instead of reseting item itself - set all children to checked state
+        CheckTreeItemRecursive(hItem, TRUE);
+        return;
+    }
+
+    if(bCheck)
+    {
+        if(!itemExpanded || multiselectMode)
         {
-            m_RepoTree.SetCheck(hParent, TRUE);
-            CheckTreeItem(hParent, true);
-            hParent = m_RepoTree.GetParentItem(hParent);
+            // perform check recursively for special cases
+            CheckTreeItemRecursive(hItem, bCheck);
         }
+        else
+        {
+            // 'Only this item' depth
+            m_RepoTree.SetCheck(hItem, bCheck);
+        }
+
+        // check all parents
+        CheckParentsOfTreeItem(hItem);
     }
     else
     {
-        // uncheck all children
-        HTREEITEM hChild = m_RepoTree.GetChildItem(hItem);
-        while (hChild)
-        {
-            m_RepoTree.SetCheck(hChild, FALSE);
-            CheckTreeItem(hChild, false);
-            hChild = m_RepoTree.GetNextItem(hChild, TVGN_NEXT);
-        }
+        // uncheck item and all children
+        CheckTreeItemRecursive(hItem, bCheck);
+
         // force the root item to be checked
         if (hItem == m_RepoTree.GetRootItem())
         {
             m_RepoTree.SetCheck(hItem);
         }
     }
-
 }
 
 
@@ -4476,6 +4567,8 @@ void CRepositoryBrowser::OnTvnKeydownRepotree(NMHDR *pNMHDR, LRESULT *pResult)
         if (item)
         {
             CheckTreeItem(item, !m_RepoTree.GetCheck(item));
+            // invert check. tree control inverts it again after this method
+            m_RepoTree.SetCheck(item, !m_RepoTree.GetCheck(item));
         }
     }
 }

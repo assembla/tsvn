@@ -277,6 +277,9 @@ protected:
     void HandleDividerMove(CPoint point, bool bDraw);
     bool CheckoutDepthForItem( HTREEITEM hItem );
     void CheckTreeItem( HTREEITEM hItem, bool bCheck );
+    void CheckTreeItemRecursive( HTREEITEM hItem, bool bCheck );
+    bool HaveAllChildrenSameCheckState( HTREEITEM hItem, bool bChecked = false );
+    void CheckParentsOfTreeItem( HTREEITEM hItem );
     bool CheckAndConfirmPath(const CTSVNPath& path);
     void SaveDividerPosition();
 
@@ -320,7 +323,7 @@ private:
     int                 m_nExternalOvl;
     int                 m_nSVNParentPath;
 
-    volatile bool       m_blockEvents;
+    volatile int        m_blockEvents;
 
     static bool         s_bSortLogical;
     bool                m_bSortAscending;
