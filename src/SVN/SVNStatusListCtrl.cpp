@@ -3849,7 +3849,7 @@ void CSVNStatusListCtrl::OnContextMenuList(CWnd * pWnd, CPoint point)
                 OnIgnoreMask(filepath, true);
                 break;
             case IDSVNLC_IGNORE:
-                OnIgnore(filepath, true);
+                OnIgnore(filepath, false);
                 break;
             case IDSVNLC_IGNOREGLOBAL:
                 OnIgnore(filepath, true);
