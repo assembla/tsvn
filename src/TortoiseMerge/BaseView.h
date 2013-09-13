@@ -253,7 +253,8 @@ public: // variables
     int             SaveFileTo(CString FileName, int Flags = 0);
 
     EOL             GetLineEndings();                                           ///< Get Line endings on view from lineendings or "mixed"
-    void            SetLineEndings(EOL);                                        ///< Set AUTO lineendings and replaces all EOLs
+    void            ReplaceLineEndings(EOL);                                    ///< Set AUTO lineending and replaces all EOLs
+    void            SetLineEndingStyle(EOL);                                    ///< Set AUTO lineending
     UnicodeType     GetTextType() { return m_texttype; }
     void            SetTextType(UnicodeType);                                   ///< Changes TextType
     void            AskUserForNewLineEndingsAndTextType(int);                   ///< Open gui
