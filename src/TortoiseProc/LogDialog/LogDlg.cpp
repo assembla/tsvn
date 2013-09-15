@@ -3916,7 +3916,8 @@ void CLogDlg::OnLvnGetdispinfoLoglist(NMHDR *pNMHDR, LRESULT *pResult)
 
         if (m_bLogThreadRunning || bOutOfRange)
             return;
-
+        if (pItem->cchTextMax == 0)
+            return;
 
         // Which column?
         switch (pItem->iSubItem)
