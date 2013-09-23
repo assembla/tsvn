@@ -13,12 +13,13 @@
 # Adrià Vilanova Martínez <jocdeladria@gmail.com>, 2012
 # Libre El Chaval <el.libre@gmail.com>, 2011
 # jmonguillot <jmonguillot@gmail.com>, 2013
+# Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-09-15 19:15+0000\n"
+"PO-Revision-Date: 2013-09-18 21:21+0000\n"
 "Last-Translator: jmonguillot <jmonguillot@gmail.com>\n"
 "Language-Team: Catalan <translators@tortoisesvn.tigris.org>\n"
 "MIME-Version: 1.0\n"
@@ -1172,7 +1173,7 @@ msgstr "&Port:"
 
 #. Resource IDs: (3)
 msgid "&Postpone all remaining conflicts"
-msgstr ""
+msgstr "&Posposa tots els conflictes restants"
 
 #. Resource IDs: (1489)
 msgid "&Power user defaults"
@@ -1180,7 +1181,7 @@ msgstr "Valor per defecte &Power user"
 
 #. Resource IDs: (1562)
 msgid "&Pre-fetch folders for faster browsing"
-msgstr ""
+msgstr "&Fes prefetch de carpetes per navegar més ràpid"
 
 #. Resource IDs: (1069)
 msgid "&Print Preview"
@@ -2215,7 +2216,7 @@ msgstr "Error desconegut accedint %1."
 #. Resource IDs: (63)
 #, c-format
 msgid "An unknown line type was found in line %d !"
-msgstr "Un tipus de línea desconegut s´ha trobat a la línia %d !"
+msgstr "Un tipus de línia desconegut s'ha trobat a la línia %d !"
 
 #. Resource IDs: (251)
 msgid ""
@@ -2224,6 +2225,10 @@ msgid ""
 "network filesystem, make sure file locking has been enabled on the file "
 "server."
 msgstr ""
+"Un altre procés està bloquejant la base de dades de la còpia de treball, o "
+"el sistema de fitxers subjacent no admet bloqueig de fitxers; si la còpia de "
+"treball està en un sistema de fitxers en xarxa, assegura't que el bloqueig "
+"de fitxers està habilitat en el servidor de fitxers."
 
 #. Resource IDs: (251)
 msgid "Append right block"
@@ -3362,6 +3367,10 @@ msgid ""
 "with the repository root url as %REPOROOT%, or %REPOROOT+% deeper down the "
 "working copy root."
 msgstr ""
+"Línia d'ordres a executar:↩⏎\n"
+"Per especificar un path dins d'una còpia de treball, especifica la url en el "
+"repositori amb la url arrel del repositori com %REPOROOT%, o %REPOROOT+% "
+"dmés profund a l'arrel de la còpia de treball."
 
 #. Resource IDs: (616)
 msgid "Command failed - Update needed"
@@ -3769,7 +3778,7 @@ msgstr "S'està copiant %1!s!"
 
 #. Resource IDs: (266)
 msgid "Copying from foreign repository URL"
-msgstr ""
+msgstr "Copiant d'una URL de repositori exterior"
 
 #. Resource IDs: (80)
 msgid "Copying..."
@@ -4080,6 +4089,13 @@ msgid ""
 "{revrange}:\tA comma separated list of the merged revisions, grouped into "
 "ranges if possible, e.g., 3, 5-7"
 msgstr ""
+"Títol personalitzat. Les paraules clau disponibles són:↩⏎\n"
+"{mergeurl}:⇥la URL font de la fusió↩⏎\n"
+"{revisions}:⇥Una llista separada per comes de les revisions fusionades, per "
+"exemple 3, 5, 6, 7↩⏎\n"
+"{revisionsr}:⇥Com {revisions} però amb una 'r' davant de les revisions↩⏎\n"
+"{revrange}:⇥Una llista separada per comes de les revisions fusionades, si és "
+"possible agrupada per rangs, per exemple 3, 5-7"
 
 #. Resource IDs: (1007, 17074)
 msgid "Customize"
@@ -4816,7 +4832,7 @@ msgstr ""
 
 #. Resource IDs: (300, 301)
 msgid "Encoding"
-msgstr ""
+msgstr "Codificació"
 
 #. Resource IDs: (3867)
 #, c-format
@@ -6745,7 +6761,7 @@ msgstr "Imatge esquerra"
 
 #. Resource IDs: (266)
 msgid "Left local modifications"
-msgstr ""
+msgstr "Modificacions locals restants"
 
 #. Resource IDs: (590)
 msgid "Like above, but used for reverse merges"
@@ -6787,7 +6803,7 @@ msgstr "Línia moguda a línia %ld"
 
 #. Resource IDs: (65535)
 msgid "Line:"
-msgstr "Línea:"
+msgstr "Línia:"
 
 #. Resource IDs: (269)
 #, c-format
@@ -7371,7 +7387,7 @@ msgstr "Mou i canvia el nom aquí"
 
 #. Resource IDs: (266)
 msgid "Move broken"
-msgstr ""
+msgstr "Moure trencat"
 
 #. Resource IDs: (103)
 msgid "Move items to here"
@@ -7762,6 +7778,9 @@ msgid ""
 "upgraded working copy with pre 1.8 SVN clients anymore!\n"
 "Do you really want to upgrade this working copy?"
 msgstr ""
+"Nota: si actualitzes la teva còpia de treball, no podràs accedir aquesta "
+"còpia de treball actualitzada amb clients pre 1.8 SVN mai més!\n"
+"Vols realment actualitzar aquesta còpia de treball?"
 
 #. Resource IDs: (247)
 #, c-format
@@ -8658,7 +8677,7 @@ msgstr "Llegeix la  'Guia d'Us Diari' abans de que et quedis bloquejat..."
 
 #. Resource IDs: (349)
 msgid "Realm String"
-msgstr ""
+msgstr "Cadena de domini"
 
 #. Resource IDs: (1002)
 msgid "Recent"
@@ -8921,7 +8940,7 @@ msgstr "Suprimeix %s"
 
 #. Resource IDs: (348)
 msgid "Remove Saved Authentication Data"
-msgstr ""
+msgstr "Treu les Dades d'Autenticació Desades"
 
 #. Resource IDs: (15)
 msgid "Remove from &ignore list"
@@ -9149,7 +9168,7 @@ msgstr "Demana un nom d'usuari i contrasenya"
 
 #. Resource IDs: (8)
 msgid "Res&olve..."
-msgstr ""
+msgstr "Res&ol..."
 
 #. Resource IDs: (16614)
 msgid "Reset &All"
@@ -9251,7 +9270,7 @@ msgstr "Revisió(ns) fusionada(es) revertidament {revrange} de {mergeurl}:⏎\n"
 #. Resource IDs: (264)
 #, c-format
 msgid "Reverse merging %1!ld! through %2!ld!"
-msgstr "Reverteix fusió %1!ld! a través de %2!ld"
+msgstr "Reverteix fusió %1!ld! a través de %2!ld!"
 
 #. Resource IDs: (264)
 #, c-format
@@ -9480,7 +9499,7 @@ msgstr "SSH"
 
 #. Resource IDs: (17)
 msgid "SVN &Vendorbranch here"
-msgstr ""
+msgstr "Branca del &venedor SVN aquí"
 
 #. Resource IDs: (16)
 msgid "SVN Author"
@@ -10214,7 +10233,7 @@ msgid ""
 "Show or hide the line diff bar\n"
 "Toggle LineDiffBar"
 msgstr ""
-"Mostra o amaga barra de diferències de Línea\n"
+"Mostra o amaga barra de diferències de Línia\n"
 "Mostra o Amaga BarDifLin"
 
 #. Resource IDs: (2054)
@@ -10464,6 +10483,14 @@ msgid ""
 "{rev}:\tThe merged revision itself\r\n"
 "{bugid}:\tThe bug ids of the merged revision"
 msgstr ""
+"Especifica l'aspecte del text de cada revisió fusionada.↩⏎\n"
+"Pots utilitzar les següents paraules clau:↩⏎\n"
+"{msg}:⇥El missatge de log de la revisió fusionada, tal com es va introduir."
+"↩⏎\n"
+"{msgoneline}:⇥El missatge de log es força a una línia↩⏎\n"
+"{author}:⇥L'autor de la revisió fusionada↩⏎\n"
+"{rev}:⇥La revisió fusionada pròpiament↩⏎\n"
+"{bugid}:⇥Id's d'errors de la revisió fusionada"
 
 #. Resource IDs: (1572)
 msgid ""
@@ -11309,7 +11336,7 @@ msgid ""
 "%2!s!\n"
 "do not match!"
 msgstr ""
-"El pedaç no sembla actualitzat! La línea del fitxer\n"
+"El pedaç no sembla actualitzat! La línia del fitxer\n"
 "%1!s!⏎\n"
 "i la línia del pedaç⏎\n"
 "%2!s!⏎\n"
@@ -11380,7 +11407,7 @@ msgstr ""
 "%1!s!\n"
 "sembla que no concorda amb els paths del fitxer de pedaç.\n"
 "Però TortoiseMerge ha trobat que el path\n"
-"%2!s\n"
+"%2!s!\n"
 "és millor. Vols utilitzar el path suggerit?"
 
 #. Resource IDs: (314)
@@ -11607,7 +11634,7 @@ msgid ""
 "If you click YES, then you have to manually resolve the conflicts in another "
 "editor!"
 msgstr ""
-"Encara hi ha conflictes sense resoldre a la línea %d!\n"
+"Encara hi ha conflictes sense resoldre a la línia %d!\n"
 "Heu de resoldre aquests conflictes abans de desar.\n"
 "Voleu desar el fitxer amb conflictes?\n"
 "Si cliqueu SÍ, llavors heu de resoldre els conflictes manualment en un altre "
@@ -11813,7 +11840,7 @@ msgstr "Aquesta propietat només s'accepta en carpetes, no en fitxers."
 #. Resource IDs: (15)
 msgid "This property must not have multiple lines. Only one line is allowed."
 msgstr ""
-"Aquesta propietat no pot tenir vàries línies. Només s'accepta una sola línea."
+"Aquesta propietat no pot tenir vàries línies. Només s'accepta una sola línia."
 
 #. Resource IDs: (1016)
 msgid ""
@@ -11976,7 +12003,7 @@ msgid ""
 msgstr ""
 "TortoiseIDiff: el visualitzador de diferències gràfic per a TortoiseSVN\n"
 "\n"
-"Les comandes disponibles des de línea de comandes són:\n"
+"Els paràmetres disponibles a la línia d'ordres són:\n"
 "/left:\"path a la imatge esquerra\"\n"
 "/lefttitle:\"títol per la imatge de l'esquerra\"\n"
 "/right:\"path a la imatge de la dreta\"\n"
@@ -12126,7 +12153,7 @@ msgstr "Fusió d'Arbre"
 
 #. Resource IDs: (501)
 msgid "Trim right"
-msgstr ""
+msgstr "Elimina espais a la dreta"
 
 #. Resource IDs: (65535)
 msgid "Trunk nodes"
@@ -12666,6 +12693,14 @@ msgid ""
 "\r\n"
 "To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
+"Utilitza el diàleg de log per seleccionar les revisions que vols fusionar, o "
+"introdueix les revisions a fusionar, separades per comes. Pots especificar "
+"un rang de revisions amb un guió.↩⏎\n"
+"↩⏎\n"
+"Exemple: 4-7,9,11,15-HEAD@pegrevision↩⏎\n"
+"↩⏎\n"
+"Per fusionar totes les revisions (reintegrar/fusió automàtica), deixa buit "
+"el quadre."
 
 #. Resource IDs: (314)
 #, c-format
@@ -12684,7 +12719,7 @@ msgstr "Utilitza  &tot aquest fitxer"
 
 #. Resource IDs: (251)
 msgid "Use this block on left"
-msgstr ""
+msgstr "Utilitza aquest bloc a l'esquerra"
 
 #. Resource IDs: (12)
 msgid "Use this if the URL of the repository has changed"
@@ -13274,6 +13309,7 @@ msgstr "[Sense assignar]"
 #. Resource IDs: (1562)
 msgid "\"ignore-on-commit\" files do not mark parent folder modified"
 msgstr ""
+"Els fitxers \"ignora-en-entrega\" no marquen la carpeta pare com a modificada"
 
 #. Resource IDs: (346)
 msgid ""
@@ -13385,9 +13421,9 @@ msgid ""
 "The first expression is used to find a string referring to an issue,\r\n"
 "the second expression is used to extract the bare bug ID from that string."
 msgstr ""
-"bugtraq:logregex\r\n"
-"dues expressions regulars separades per una nova línea.\r\n"
-"La primera s'utilitza per trobar una cadena referent a una incidència,\r\n"
+"bugtraq:logregex\n"
+"dues expressions regulars separades per una nova línia.\n"
+"La primera s'utilitza per trobar una cadena referent a una incidència,\n"
 "i la segona per extreure la ID del bug de la cadena."
 
 #. Resource IDs: (577)
@@ -13556,7 +13592,7 @@ msgstr "incomplet"
 
 #. Resource IDs: (589)
 msgid "inherited from"
-msgstr ""
+msgstr "heretat de"
 
 #. Resource IDs: (583)
 msgid "it does not exist."
@@ -13858,14 +13894,17 @@ msgid ""
 "svn:global-ignores\r\n"
 "A newline separated list of file patterns to ignore recursively."
 msgstr ""
+"svn:global-ignores\n"
+"Una llista de patrons de fitxers, separats per retorns de línia, a ignorar "
+"recursivament."
 
 #. Resource IDs: (576)
 msgid ""
 "svn:ignore\r\n"
 "A newline separated list of file patterns to ignore."
 msgstr ""
-"svn:ignore\r\n"
-"Una llista separada per retorns de línea de patrons de fitxer a ignorar."
+"svn:ignore\n"
+"Una llista separada per retorns de línia de patrons de fitxer a ignorar."
 
 #. Resource IDs: (317)
 msgid "svn:keywords"
@@ -13899,12 +13938,11 @@ msgid ""
 "For example\r\n"
 "/trunk:123-125,129"
 msgstr ""
-"svn:mergeinfo\r\n"
-"Una llista separada de línies amb informació de la fusió. Cada línea "
-"consisteix en un path absolut\r\n"
-"seguit de dos punts i una llista separade per comes de  números de revisió."
-"\r\n"
-"Per exemple\r\n"
+"svn:mergeinfo\n"
+"Una llista separada per línies amb informació de la fusió. Cada línia "
+"consisteix en un path absolut\n"
+"seguit de dos punts i una llista separada per comes de  números de revisió.\n"
+"Per exemple\n"
 "/tronc:123-125,129"
 
 #. Resource IDs: (314)
@@ -14178,11 +14216,11 @@ msgid ""
 "A faded line is shown in the commit dialogs at that position. The default is "
 "80 chars."
 msgstr ""
-"tsvn:logwidthmarker\r\n"
+"tsvn:logwidthmarker\n"
 "Establiu-ho al nombre de caràcters d'amplada màxim que pot tenir un missatge "
-"de log.\r\n"
-"Es mostrarà una línea esborronadaA als diàlegs d'entrega en aquesta posició. "
-"Per defecte  és 80 caràcters."
+"de log.\n"
+"Es mostrarà una línia esborronada als diàlegs d'entrega en aquesta posició. "
+"Per defecte és 80 caràcters."
 
 #. Resource IDs: (578)
 msgid ""
@@ -14344,6 +14382,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Number of %s:"
 #~ msgstr "Nombre de %s:"
+
+#~ msgid "Rename '%s':"
+#~ msgstr "Canvia el nom '%s':"
 
 #~ msgid "Select"
 #~ msgstr "Selecciona"
