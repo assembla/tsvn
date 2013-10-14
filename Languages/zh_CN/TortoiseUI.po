@@ -33,9 +33,10 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-08-16 12:14+0000\n"
-"Last-Translator: Gongong <gongong83@gmail.com>\n"
-"Language-Team: Chinese (China) <translators@tortoisesvn.tigris.org>\n"
+"PO-Revision-Date: 2013-10-14 01:22+0000\n"
+"Last-Translator: Y.F Yang <yfdyh000@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/"
+"tortoisesvn/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1333,7 +1334,7 @@ msgstr "显示菜单(&S):"
 
 #. Resource IDs: (16612)
 msgid "&Show text labels"
-msgstr "现实文本标签(&S)"
+msgstr "显示文本标签(&S)"
 
 #. Resource IDs: (1185)
 msgid "&Specific revision in repository"
@@ -13987,8 +13988,17 @@ msgstr "是"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "C&ompare URLs (content only)"
+#~ msgstr "比较网址(仅内容)(&O)"
+
+#~ msgid "Check-Commit Hook"
+#~ msgstr "检查提交钩子"
+
 #~ msgid "Commits each %s:"
 #~ msgstr "每 %s 提交次数:"
+
+#~ msgid "Compare with base (content only)"
+#~ msgstr "同 base 比较(仅内容)"
 
 #~ msgid "End of Line Style"
 #~ msgstr "行尾风格"
@@ -14011,6 +14021,9 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "Manual Pre-Commit Hook"
+#~ msgstr "手动提交前钩子"
+
 #~ msgid "Merge Log Templates"
 #~ msgstr "合并日志模板"
 
@@ -14020,11 +14033,71 @@ msgstr "{BugTraq}"
 #~ msgid "Number of %s:"
 #~ msgstr "%s 数:"
 
+#~ msgid "Proceed anyway"
+#~ msgstr "仍然继续"
+
 #~ msgid "Rename '%s':"
 #~ msgstr "重命名“%s”："
 
+#~ msgid "Reopen dialog after commit if items were left uncommitted"
+#~ msgstr "提交后如果有项目未被提交则重新打开对话框"
+
+#~ msgid ""
+#~ "Reopens the commit dialog after a successful commit if there were files "
+#~ "and/or folders left uncommitted."
+#~ msgstr "提交成功后若仍有文件和/或文件夹未被提交则重新打开提交对话框。"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%7!s!"
+#~ msgstr ""
+#~ "版本: %1!ld! %2!s!\n"
+#~ "URL: %3!s!\n"
+#~ "%4!s!作者: %5!s!\n"
+#~ "日期: %6!s!\n"
+#~ "\n"
+#~ "日志信息:\n"
+#~ "%7!s!"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Tags (%7!d!):%8!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%9!s!"
+#~ msgstr ""
+#~ "版本: %1!ld! %2!s!\n"
+#~ "URL: %3!s!\n"
+#~ "%4!s!作者: %5!s!\n"
+#~ "日期: %6!s!\n"
+#~ "标签 (%7!d!):%8!s!\n"
+#~ "\n"
+#~ "日志信息:\n"
+#~ "%9!s!"
+
+#~ msgid "Run hoo&k script"
+#~ msgstr "运行钩子脚本(&K)"
+
 #~ msgid "Select"
 #~ msgstr "选择"
+
+#~ msgid "Show c&hanges (content only)"
+#~ msgstr "显示更改(仅内容)(&H)"
+
+#~ msgid "Show multiple &changes... (content only)"
+#~ msgstr "显示多个更改(仅内容)(&C)... "
+
+#~ msgid "The hook script executed successfully"
+#~ msgstr "钩子脚本执行成功"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "使用任务对话框"
