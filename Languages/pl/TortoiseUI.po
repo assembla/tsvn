@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-10-12 08:29+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-10-20 12:03+0000\n"
+"Last-Translator: Begina Felicysym <begina.felicysym@wp.eu>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -503,7 +503,8 @@ msgid "&Apply property recursively"
 msgstr "&Zastosuj atrybut rekursywnie"
 
 #. Resource IDs: (610)
-msgid "&Apply the udpate to the move destination"
+#, fuzzy
+msgid "&Apply the update to the move destination"
 msgstr "&Zaaplikuj zmiany do miejsca docelowego przeniesienia"
 
 #. Resource IDs: (1013)
@@ -7437,10 +7438,6 @@ msgstr ""
 "Przenieś\n"
 "Elementy są przenoszone na ścieżkę docelową."
 
-#. Resource IDs: (65535)
-msgid "Moved from"
-msgstr "Przeniesiono z"
-
 #. Resource IDs: (210)
 #, c-format
 msgid ""
@@ -7453,10 +7450,6 @@ msgstr ""
 #. Resource IDs: (126)
 msgid "Moved remotely"
 msgstr "Przeniesiono zdalnie"
-
-#. Resource IDs: (65535)
-msgid "Moved to"
-msgstr "Przeniesiono do"
 
 #. Resource IDs: (210)
 #, c-format
@@ -14368,8 +14361,23 @@ msgstr "tak"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "C&ompare URLs (content only)"
+#~ msgstr "P&orównaj URLe (tylko zawartość)"
+
+#~ msgid "Check-Commit Hook"
+#~ msgstr "Skrypt sprawdzenia zatwierdzenia"
+
 #~ msgid "Commits each %s:"
 #~ msgstr "Liczba zatwierdzeń w każdym %s:"
+
+#~ msgid "Compare with base (content only)"
+#~ msgstr "Porównaj z bazą (tylko zawartość)"
+
+#~ msgid "Coun&t"
+#~ msgstr "Zlic&z"
+
+#~ msgid "Count: %d matches."
+#~ msgstr "Zlicz: %d dopasowań."
 
 #~ msgid "End of Line Style"
 #~ msgstr "Styl Końca Linii"
@@ -14392,6 +14400,9 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "Manual Pre-Commit Hook"
+#~ msgstr "Ręczne przechwycenie przed zatwierdzeniem"
+
 #~ msgid "Merge Log Templates"
 #~ msgstr "Szablony Dziennika Scaleń"
 
@@ -14401,11 +14412,76 @@ msgstr "{BugTraq}"
 #~ msgid "Number of %s:"
 #~ msgstr "Liczba %s:"
 
+#~ msgid "Proceed anyway"
+#~ msgstr "Wykonaj mimo wszystko"
+
 #~ msgid "Rename '%s':"
 #~ msgstr "Zmiana nazwy '%s':"
 
+#~ msgid "Reopen dialog after commit if items were left uncommitted"
+#~ msgstr ""
+#~ "Ponownie otwórz okno po zatwierdzeniu jeśli pozostaną niezatwierdzone "
+#~ "elementy"
+
+#~ msgid ""
+#~ "Reopens the commit dialog after a successful commit if there were files "
+#~ "and/or folders left uncommitted."
+#~ msgstr ""
+#~ "Otwiera okno zatwierdzenia po pomyślnym zatwierdzeniu zmian jeśli "
+#~ "pozostały niezatwierdzone pliki i/lub foldery."
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%7!s!"
+#~ msgstr ""
+#~ "Wersja: %1!ld! %2!s!↩⏎\n"
+#~ "Adres URL: %3!s!↩⏎\n"
+#~ "%4!s!Autor: %5!s!↩⏎\n"
+#~ "Data: %6!s!↩⏎\n"
+#~ "↩⏎\n"
+#~ "Komunikat dziennika:↩⏎\n"
+#~ "%7!s!"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Tags (%7!d!):%8!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%9!s!"
+#~ msgstr ""
+#~ "Wersja: %1!ld! %2!s!↩⏎\n"
+#~ "Adres URL: %3!s!↩⏎\n"
+#~ "%4!s!Autor: %5!s!↩⏎\n"
+#~ "Data: %6!s!↩⏎\n"
+#~ "↩⏎\n"
+#~ "Znaczniki (%7!d!):%8!s!↩⏎\n"
+#~ "↩⏎\n"
+#~ "Komunikat dziennika:↩⏎\n"
+#~ "%9!s!"
+
+#~ msgid "Run hoo&k script"
+#~ msgstr "Uruchom s&krypt przechwytujący"
+
 #~ msgid "Select"
 #~ msgstr "Zaznacz"
+
+#~ msgid "Show c&hanges (content only)"
+#~ msgstr "Pokaż z&miany (tylko zawartość)"
+
+#~ msgid "Show multiple &changes... (content only)"
+#~ msgstr "Pokaż zmiany &wielokrotne (tylko zawartość)"
+
+#~ msgid "The hook script executed successfully"
+#~ msgstr "Skrypr przechwytujący wykonany pomyślnie"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "Użyj Okna Zadań"
@@ -14424,6 +14500,12 @@ msgstr "{BugTraq}"
 
 #~ msgid "years"
 #~ msgstr "lat"
+
+#~ msgid "Moved from"
+#~ msgstr "Przeniesiono z"
+
+#~ msgid "Moved to"
+#~ msgstr "Przeniesiono do"
 
 #~ msgid "R&eintegrate a branch / automatic merge"
 #~ msgstr "R&eintegruj gałąź / scal automatycznie"

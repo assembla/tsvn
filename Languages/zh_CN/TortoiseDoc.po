@@ -22,6 +22,7 @@
 # pluwen <pluwen@gmail.com>, 2011
 # Verplusor, 2011
 # stephen zhu <huasoft@163.com>, 2011
+# Y.F Yang <yfdyh000@gmail.com>, 2013
 # zhang chuan <zhangchuan.cn@gmail.com>, 2011
 # Ziang Song <songziang@gmail.com>, 2011
 msgid ""
@@ -29,8 +30,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-10-12 08:41+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-10-15 00:30+0000\n"
+"Last-Translator: Y.F Yang <yfdyh000@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/"
 "tortoisesvn/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -6811,7 +6812,7 @@ msgstr ""
 
 #. (term)
 msgid "Open multiple local..."
-msgstr ""
+msgstr "打开多个本地项目..."
 
 #. (para)
 msgid ""
@@ -17123,13 +17124,13 @@ msgstr ""
 #. (term)
 #. (term)
 msgid "Pre-connect"
-msgstr ""
+msgstr "连接之前"
 
 #. (para)
 msgid ""
 "Called before an attempt to contact the repository. Called at most once in "
 "five minutes."
-msgstr ""
+msgstr "在尝试连接版本库前调用。每五分钟最多调用一次。"
 
 #. (para)
 msgid "There are currently six types of hook script available <placeholder-1/>"
@@ -17301,7 +17302,7 @@ msgstr ""
 
 #. (title)
 msgid "The Settings Dialog, Issue Tracker Integration Page"
-msgstr ""
+msgstr "设置对话框，问题跟踪集成页"
 
 #. (para)
 msgid ""
@@ -17405,7 +17406,7 @@ msgstr "定义在文件中出现的制表字符用多少空格扩展。"
 
 #. (title)
 msgid "Advanced Settings"
-msgstr ""
+msgstr "高级设置"
 
 #. (primary)
 msgid "registry"
@@ -18081,13 +18082,13 @@ msgstr ""
 
 #. (literal)
 msgid "-N"
-msgstr ""
+msgstr "-N"
 
 #. (entry)
 msgid ""
 "The working copy has unversioned files or folders in it. This requires the "
 "<placeholder-1/> switch."
-msgstr ""
+msgstr "此工作副本中有未版本控制的文件或文件夹。这需要 <placeholder-1/> 切换。"
 
 #. (para)
 msgid ""
@@ -18228,7 +18229,7 @@ msgstr ""
 
 #. (literal)
 msgid "$WCUNVER?TText:FText$"
-msgstr ""
+msgstr "$WCUNVER?TText:FText$"
 
 #. (entry)
 msgid ""
@@ -18534,7 +18535,7 @@ msgstr "若本地存在修改，就为真"
 
 #. (entry)
 msgid "True if there are unversioned items"
-msgstr ""
+msgstr "如果是未版本控制项目则为真"
 
 #. (literal)
 msgid "GetWCInfo"
@@ -20333,11 +20334,11 @@ msgstr "删除未版本控制的项目"
 
 #. (entry)
 msgid "Merge All"
-msgstr ""
+msgstr "合并所有"
 
 #. (entry)
 msgid "Diff with previous version"
-msgstr ""
+msgstr "与前一版本比较差异"
 
 #. (entry)
 msgid "Paste"
@@ -20571,19 +20572,19 @@ msgstr "/strict"
 
 #. (option)
 msgid "/merge"
-msgstr ""
+msgstr "/merge"
 
 #. (option)
 msgid "/findstring:\"filterstring\""
-msgstr ""
+msgstr "/findstring:\"filterstring\""
 
 #. (option)
 msgid "/findtext"
-msgstr ""
+msgstr "/findtext"
 
 #. (option)
 msgid "/findregex"
-msgstr ""
+msgstr "/findregex"
 
 #. (option)
 msgid "/findtype:X"
@@ -20603,7 +20604,7 @@ msgstr ""
 
 #. (para)
 msgid "<option>/findtype:4</option> filter by authors"
-msgstr ""
+msgstr "<option>/findtype:4</option> 按作者筛选"
 
 #. (para)
 msgid "<option>/findtype:8</option> filter by revisions"
@@ -20658,11 +20659,11 @@ msgstr "/url"
 #. (option)
 #. (option)
 msgid "/blockpathadjustments"
-msgstr ""
+msgstr "/blockpathadjustments"
 
 #. (option)
 msgid "/revision:XXX"
-msgstr ""
+msgstr "/revision:XXX"
 
 #. (entry)
 msgid ""
@@ -20722,7 +20723,7 @@ msgstr "/ignoreexternals"
 
 #. (option)
 msgid "/stickydepth"
-msgstr ""
+msgstr "/stickydepth"
 
 #. (option)
 msgid "/skipprechecks"
@@ -20986,7 +20987,7 @@ msgstr "/blame"
 
 #. (option)
 msgid "/line:xxx"
-msgstr ""
+msgstr "/line:xxx"
 
 #. (entry)
 msgid ""
@@ -21035,11 +21036,11 @@ msgstr "打开帮助文件"
 
 #. (option)
 msgid "/remote"
-msgstr ""
+msgstr "/remote"
 
 #. (guilabel)
 msgid "Check repository"
-msgstr ""
+msgstr "检查版本库"
 
 #. (entry)
 msgid ""
@@ -21048,6 +21049,9 @@ msgid ""
 "contacts the repository immediately on startup, as if the user clicked on "
 "the <placeholder-3/> button."
 msgstr ""
+"打开检查修改对话框。在 <placeholder-1/> 指定工作副本目录。如果已指定 "
+"<placeholder-2/>，对话框将在启动时立即联系版本库，如同用户点击了 "
+"<placeholder-3/> 按钮。"
 
 #. (para)
 msgid ""
@@ -21139,7 +21143,7 @@ msgstr ""
 
 #. (option)
 msgid "/noview"
-msgstr ""
+msgstr "/noview"
 
 #. (entry)
 msgid ""

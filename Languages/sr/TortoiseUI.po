@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-10-12 08:29+0000\n"
+"PO-Revision-Date: 2013-10-16 08:29+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/sr/)\n"
@@ -495,7 +495,8 @@ msgid "&Apply property recursively"
 msgstr "Примени особине пон&ављајући"
 
 #. Resource IDs: (610)
-msgid "&Apply the udpate to the move destination"
+#, fuzzy
+msgid "&Apply the update to the move destination"
 msgstr "Примени усклађив&ање да помериш дестинацију"
 
 #. Resource IDs: (1013)
@@ -7405,10 +7406,6 @@ msgstr ""
 "Померање\n"
 "Ставке се померају ка циљној путањи."
 
-#. Resource IDs: (65535)
-msgid "Moved from"
-msgstr "Премештено од"
-
 #. Resource IDs: (210)
 #, c-format
 msgid ""
@@ -7421,10 +7418,6 @@ msgstr ""
 #. Resource IDs: (126)
 msgid "Moved remotely"
 msgstr "Премештено на даљину"
-
-#. Resource IDs: (65535)
-msgid "Moved to"
-msgstr "Премештено у"
 
 #. Resource IDs: (210)
 #, c-format
@@ -14274,8 +14267,17 @@ msgstr "да"
 msgid "{BugTraq}"
 msgstr "{БагТрек}"
 
+#~ msgid "C&ompare URLs (content only)"
+#~ msgstr "Уп&оређује УРЛове (само садржај)"
+
+#~ msgid "Check-Commit Hook"
+#~ msgstr "Провери-Урежи закачаљке"
+
 #~ msgid "Commits each %s:"
 #~ msgstr "Урезује свако %s:"
+
+#~ msgid "Compare with base (content only)"
+#~ msgstr "Упоређује са основом (само садржај)"
 
 #~ msgid "End of Line Style"
 #~ msgstr "Стил краја линије"
@@ -14298,6 +14300,9 @@ msgstr "{БагТрек}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "Manual Pre-Commit Hook"
+#~ msgstr "Ручне Пре-уреуивања закачаљка"
+
 #~ msgid "Merge Log Templates"
 #~ msgstr "Стапи Дневник Шаблона"
 
@@ -14307,11 +14312,76 @@ msgstr "{БагТрек}"
 #~ msgid "Number of %s:"
 #~ msgstr "Број %s:"
 
+#~ msgid "Proceed anyway"
+#~ msgstr "Размотри свакако"
+
 #~ msgid "Rename '%s':"
 #~ msgstr "Преименуј '%s':"
 
+#~ msgid "Reopen dialog after commit if items were left uncommitted"
+#~ msgstr ""
+#~ "Поново отвори дијалог после урезивања његових ставки које су преостале "
+#~ "неурезане"
+
+#~ msgid ""
+#~ "Reopens the commit dialog after a successful commit if there were files "
+#~ "and/or folders left uncommitted."
+#~ msgstr ""
+#~ "Поново отвори дијалог урезивања после успешног урезивања ако је било "
+#~ "фајлова и/или фолдери преосталих неурезаних"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%7!s!"
+#~ msgstr ""
+#~ "Ревизија: %1!ld! %2!s!\r\n"
+#~ "УРЛ: %3!s!\r\n"
+#~ "%4!s!Аутор: %5!s!\r\n"
+#~ "Датум: %6!s!\r\n"
+#~ "\r\n"
+#~ "Порука дневника:\r\n"
+#~ "%7!s!"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Tags (%7!d!):%8!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%9!s!"
+#~ msgstr ""
+#~ "Ревизија: %1!ld! %2!s!\r\n"
+#~ "УРЛ: %3!s!\r\n"
+#~ "%4!s!Аутор: %5!s!\r\n"
+#~ "Датум: %6!s!\r\n"
+#~ "\r\n"
+#~ "Знаци (%7!d!):%8!s!\r\n"
+#~ "\r\n"
+#~ "Порука дневника:\r\n"
+#~ "%9!s!"
+
+#~ msgid "Run hoo&k script"
+#~ msgstr "Изврши скрипту за&качаљке"
+
 #~ msgid "Select"
 #~ msgstr "Изабери"
+
+#~ msgid "Show c&hanges (content only)"
+#~ msgstr "Прикажи и&змене (само садржај)"
+
+#~ msgid "Show multiple &changes... (content only)"
+#~ msgstr "Прикажи вишеструке и&змен... (само садржај)"
+
+#~ msgid "The hook script executed successfully"
+#~ msgstr "Скрипта закачаљке извршена успешно"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "Користи дијалог задатка"
@@ -14330,6 +14400,12 @@ msgstr "{БагТрек}"
 
 #~ msgid "years"
 #~ msgstr "године"
+
+#~ msgid "Moved from"
+#~ msgstr "Премештено од"
+
+#~ msgid "Moved to"
+#~ msgstr "Премештено у"
 
 #~ msgid "R&eintegrate a branch / automatic merge"
 #~ msgstr "Р&еинтегрише грана / аутоматско стапање"
