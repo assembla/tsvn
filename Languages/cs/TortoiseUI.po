@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-10-21 08:29+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-11-02 20:10+0000\n"
+"Last-Translator: Zbyněk Schwarz <zbynek.schwarz@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -492,7 +492,7 @@ msgstr "&Použít vlastnost rekurzivně"
 
 #. Resource IDs: (610)
 msgid "&Apply the update to the move destination"
-msgstr ""
+msgstr "&Použít aktualizaci pro přesun cíle"
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -14228,8 +14228,29 @@ msgstr "ano"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "Add to Bookmarks"
+#~ msgstr "Přidat do záložek"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Záložky"
+
+#~ msgid "C&ompare URLs (content only)"
+#~ msgstr "P&orovnat URL (pouze obsah)"
+
+#~ msgid "Check-Commit Hook"
+#~ msgstr "Hák kontroly odevzdání"
+
 #~ msgid "Commits each %s:"
 #~ msgstr "Odevzdání za každý %s:"
+
+#~ msgid "Compare with base (content only)"
+#~ msgstr "Porovnat s originálem (pouze obsah)"
+
+#~ msgid "Coun&t"
+#~ msgstr "Spočíta&t"
+
+#~ msgid "Count: %d matches."
+#~ msgstr "Počet: %d shod."
 
 #~ msgid "End of Line Style"
 #~ msgstr "Styl konce řádku"
@@ -14239,6 +14260,20 @@ msgstr "{BugTraq}"
 
 #~ msgid "File changes each %s:"
 #~ msgstr "Počet změn souborů za každý %s:"
+
+#~ msgid "Find: Can't find the text \"%s\""
+#~ msgstr "Hledání: Nelze najít text \"%s\""
+
+#~ msgid ""
+#~ "Find: First occurrence from the bottom found. Beginning of document "
+#~ "reached."
+#~ msgstr ""
+#~ "Hledání: Nalezen první výskyt při hledání zdola. Dosaženo začátku "
+#~ "dokumentu."
+
+#~ msgid "Find: First occurrence from the top found. End of document reached."
+#~ msgstr ""
+#~ "Hledání: Nalezen první výskyt při hledání shora. Dosaženo konce dokumentu."
 
 #~ msgid "Fit image &heights"
 #~ msgstr "Přizpůsobit &délky obrázku"
@@ -14252,6 +14287,9 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "Manual Pre-Commit Hook"
+#~ msgstr "Ruční hák před odevzdáním"
+
 #~ msgid "Merge Log Templates"
 #~ msgstr "&Sloučit šablony záznamu"
 
@@ -14261,6 +14299,12 @@ msgstr "{BugTraq}"
 #~ msgid "Number of %s:"
 #~ msgstr "Počet %s:"
 
+#~ msgid "Proceed anyway"
+#~ msgstr "Přesto pokračovat"
+
+#~ msgid "Remove Bookmark"
+#~ msgstr "Odstranit záložku"
+
 #~ msgid "Rename '%s':"
 #~ msgstr "Přejmenovat '%s':"
 
@@ -14268,8 +14312,65 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Znovu otevřít dialogové okno po odevzdání, pokud položky nebyly odevzdány"
 
+#~ msgid ""
+#~ "Reopens the commit dialog after a successful commit if there were files "
+#~ "and/or folders left uncommitted."
+#~ msgstr ""
+#~ "Znovu otevře dialogové okno odevzdání po úspěšném odevzdání, pokud "
+#~ "existují neodevzdané soubory a/nebo složky."
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%7!s!"
+#~ msgstr ""
+#~ "Revize: %1!ld! %2!s!\n"
+#~ "URL: %3!s!\n"
+#~ "%4!s!Autor: %5!s!\n"
+#~ "Datum: %6!s!\n"
+#~ "\n"
+#~ "Zpráva záznamu:\n"
+#~ "%7!s!"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Tags (%7!d!):%8!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%9!s!"
+#~ msgstr ""
+#~ "Revize: %1!ld! %2!s!\n"
+#~ "URL: %3!s!\n"
+#~ "%4!s!Autor: %5!s!\n"
+#~ "Datum: %6!s!\n"
+#~ "\n"
+#~ "Značky (%7!d!):%8!s!\n"
+#~ "\n"
+#~ "Zpráva záznamu:\n"
+#~ "%9!s!"
+
+#~ msgid "Run hoo&k script"
+#~ msgstr "Spustit há&kový skript"
+
 #~ msgid "Select"
 #~ msgstr "Vybrat"
+
+#~ msgid "Show c&hanges (content only)"
+#~ msgstr "Zobrazit z&měny (pouze obsah)"
+
+#~ msgid "Show multiple &changes... (content only)"
+#~ msgstr "&Zobrazit více změn.... (pouze obsah)"
+
+#~ msgid "The hook script executed successfully"
+#~ msgstr "Hákový skript byl úspěšně spuštěn"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "Použít dialogové okno úlohy"
