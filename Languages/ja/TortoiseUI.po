@@ -11,15 +11,28 @@
 # Authors:
 # Translators:
 # Daisuke Deguchi <ddeguchi@nagoya-u.jp>, 2011-2012
+# Diego Búrigo Zacarão <diegobz@indifex.com>, 2011
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008
+# Ilias-Dimitrios Vrachnis, 2013
 # Lübbe  <luebbe.tortoisesvn@googlemail.com>, 2012
 # Masahiro FUJIMOTO <fujimoto@internet.ne.jp>, 2011-2013
 # Masahiro FUJIMOTO <fujimoto@internet.ne.jp>, 2013
+# Nozomu Kaneko <nozom.kaneko@gmail.com>, 2013
+# Osamu NAKAMURA <osamu0329nakamura@gmail.com>, 2013
+# plazmism <gomidori@live.jp>, 2013
+# Ratnadeep Debnath <rtnpro@transifex.com>, 2012
+# Shinya Okano <tokibito@gmail.com>, 2011
+# Tadashi Jokagi <elf@elf.no-ip.org>, 2011
+# Tetsuya Morimoto <tetsuya.morimoto@gmail.com>, 2011
+# Yoshitaka Yamashita <drum@magic-touch.org>, 2013
+# youten, 2011
+# 高一人参 @欠陥遺伝子 <www.carrotsoft@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-10-28 15:50+0000\n"
+"PO-Revision-Date: 2013-11-13 01:50+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/ja/)\n"
@@ -1820,7 +1833,7 @@ msgstr "マージ中止(&M)"
 
 #. Resource IDs: (9)
 msgid "About"
-msgstr "TortoiseSVN について"
+msgstr "TortoiseSVNについて"
 
 #. Resource IDs: (136)
 msgid "About TortoiseMerge"
@@ -11728,7 +11741,7 @@ msgid ""
 "This product includes software from Apache™ Subversion® (http://subversion."
 "apache.org)"
 msgstr ""
-"本製品は Apache™ Subversion®　(http://subversion.apache.org) のソフトウェアを"
+"本製品は Apache™ Subversion® (http://subversion.apache.org) のソフトウェアを"
 "含んでいます"
 
 #. Resource IDs: (3857)
@@ -14215,6 +14228,18 @@ msgstr "はい"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "&Add Filter"
+#~ msgstr "フィルターを追加(&A)"
+
+#~ msgid "&Delete Filter"
+#~ msgstr "フィルターを削除(&D)"
+
+#~ msgid "&Edit Filter"
+#~ msgstr "フィルターを編集(&E)"
+
+#~ msgid "&Up"
+#~ msgstr "上へ(&U)"
+
 #~ msgid "Add to Bookmarks"
 #~ msgstr "ブックマークに追加"
 
@@ -14232,6 +14257,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Compare with base (content only)"
 #~ msgstr "作業ベースと比較（内容のみ）"
+
+#~ msgid "Configure Filter Regexes"
+#~ msgstr "フィルターの正規表現を設定"
 
 #~ msgid "Coun&t"
 #~ msgstr "カウント(&T)"
@@ -14273,14 +14301,23 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "Ignore Comments"
+#~ msgstr "コメントを無視"
+
 #~ msgid "Manual Pre-Commit Hook"
 #~ msgstr "手動Pre-Commitフック"
 
 #~ msgid "Merge Log Templates"
 #~ msgstr "マージログのテンプレート"
 
+#~ msgid "Name:"
+#~ msgstr "名前:"
+
 #~ msgid "New name must not be empty or the same as the original name!"
 #~ msgstr "新しい名前は空欄や元の名前と同じにはできません。"
+
+#~ msgid "Newlines"
+#~ msgstr "改行"
 
 #~ msgid "Number of %s:"
 #~ msgstr "%s数:"
@@ -14288,8 +14325,24 @@ msgstr "{BugTraq}"
 #~ msgid "Proceed anyway"
 #~ msgstr "強制的に実行"
 
+#~ msgid "Regex Filter"
+#~ msgstr "正規表現フィルター"
+
+#~ msgid "Regex Filters"
+#~ msgstr "正規表現フィルター"
+
+#~ msgid "Regex:"
+#~ msgstr "正規表現:"
+
 #~ msgid "Remove Bookmark"
 #~ msgstr "ブックマークを削除"
+
+#~ msgid ""
+#~ "Remove all comments before doing the diff so changes inside comments "
+#~ "don't show as different"
+#~ msgstr ""
+#~ "差分を取る前にすべてのコメントを削除するので、コメント内の変更は差分として"
+#~ "表示されません"
 
 #~ msgid "Rename '%s':"
 #~ msgstr "「%s」の名前変更"
@@ -14304,6 +14357,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "コミットされなかったファイルやフォルダーが残った場合、コミット完了後に再度"
 #~ "コミットダイアログを開きます。"
+
+#~ msgid "Replace:"
+#~ msgstr "置換:"
 
 #~ msgid ""
 #~ "Revision: %1!ld! %2!s!\r\n"
@@ -14358,8 +14414,18 @@ msgstr "{BugTraq}"
 #~ msgid "The hook script executed successfully"
 #~ msgstr "フックスクリプトの実行に成功しました"
 
+#~ msgid ""
+#~ "The text is identical, but the files do not match!\r\n"
+#~ "The following differences were found:"
+#~ msgstr ""
+#~ "テキストは同一ですが、ファイルは一致していません。\n"
+#~ "次の差異が見つかりました。"
+
 #~ msgid "Use Task Dialog"
 #~ msgstr "タスクダイアログを使用"
+
+#~ msgid "Whitespace changes (tabs, spaces)"
+#~ msgstr "空白文字の変更（タブ、スペース）"
 
 #~ msgid "days"
 #~ msgstr "日"

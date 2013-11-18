@@ -22,19 +22,22 @@
 # grokwik <grokwik@gmail.com>, 2011-2012
 # guillaumefrancois55 <guillaume.francois55@gmail.com>, 2011
 # guillaumefrancois55 <guillaume.francois55@gmail.com>, 2011
+# Kegnarok <kegnarok.rm@laposte.net>, 2013
 # Linus Fredrich Levisse <linukcs@live.fr>, 2011
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Lübbe Onken <l.onken@rac.de>, 2011
+# Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Mickael Patron <mickael_patron@hotmail.com>, 2012
+# Philippe <kissifrot@gmail.com>, 2012-2013
 # Philippe <kissifrot@gmail.com>, 2012
-# Philippe <kissifrot@gmail.com>, 2012
+# Walach <basleynicolas@hotmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-10-28 15:40+0000\n"
-"Last-Translator: Kegnarok <kegnarok.rm@laposte.net>\n"
+"PO-Revision-Date: 2013-11-12 08:40+0000\n"
+"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -14459,6 +14462,15 @@ msgstr "oui"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "&Up"
+#~ msgstr "&Monter"
+
+#~ msgid "Add to Bookmarks"
+#~ msgstr "Ajouter au favoris"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Favoris"
+
 #~ msgid "C&ompare URLs (content only)"
 #~ msgstr "C&omparer les URLs (contenu uniquement)"
 
@@ -14489,8 +14501,17 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "Ignore Comments"
+#~ msgstr "Ignorer les commentaires"
+
+#~ msgid "Manual Pre-Commit Hook"
+#~ msgstr "Hook pré-livraison manuel"
+
 #~ msgid "Merge Log Templates"
 #~ msgstr "Fusionner les Modèles de Journaux"
+
+#~ msgid "Name:"
+#~ msgstr "Nom :"
 
 #~ msgid "New name must not be empty or the same as the original name!"
 #~ msgstr "Le nouveau nom ne pas être vide ou identique à l'original !"
@@ -14498,8 +14519,29 @@ msgstr "{BugTraq}"
 #~ msgid "Number of %s:"
 #~ msgstr "Nombre de %s :"
 
+#~ msgid "Proceed anyway"
+#~ msgstr "Exécuter quand même"
+
+#~ msgid "Regex:"
+#~ msgstr "Regex :"
+
+#~ msgid "Remove Bookmark"
+#~ msgstr "Supprimer le "
+
+#~ msgid ""
+#~ "Remove all comments before doing the diff so changes inside comments "
+#~ "don't show as different"
+#~ msgstr ""
+#~ "Supprime tous les commentaires avant de faire la différence afin que les "
+#~ "changements dans le commentaires ne s'affichent pas comme une différence"
+
 #~ msgid "Rename '%s':"
 #~ msgstr "Renommer '%s' :"
+
+#~ msgid "Reopen dialog after commit if items were left uncommitted"
+#~ msgstr ""
+#~ "Rouvre la boîte de dialogue de dépôt après un dépôt réussi si il y avait "
+#~ "des éléments non déposés."
 
 #~ msgid ""
 #~ "Reopens the commit dialog after a successful commit if there were files "
@@ -14507,6 +14549,47 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Réouvre la boîte de dialogue de dépôt après un dépôt réussi si il y  "
 #~ "avait des fichiers et/ou des dossiers non déposés."
+
+#~ msgid "Replace:"
+#~ msgstr "Remplacer :"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%7!s!"
+#~ msgstr ""
+#~ "Révision : %1!ld! %2!s!\r\n"
+#~ "URL : %3!s!\r\n"
+#~ "%4!s!Auteur : %5!s!\r\n"
+#~ "Date : %6!s!\r\n"
+#~ "\r\n"
+#~ "Message :\r\n"
+#~ "%7!s!"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Tags (%7!d!):%8!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%9!s!"
+#~ msgstr ""
+#~ "Révision : %1!ld! %2!s!\r\n"
+#~ "URL : %3!s!\r\n"
+#~ "%4!s!Auteur : %5!s!\r\n"
+#~ "Date : %6!s!\r\n"
+#~ "\r\n"
+#~ "Tags (%7!d!) :%8!s!\r\n"
+#~ "\r\n"
+#~ "Commentaire :\r\n"
+#~ "%9!s!"
 
 #~ msgid "Select"
 #~ msgstr "Sélectionner"
@@ -14517,8 +14600,18 @@ msgstr "{BugTraq}"
 #~ msgid "Show multiple &changes... (content only)"
 #~ msgstr "Montres les &changements multiples... (contenu uniquement)"
 
+#~ msgid ""
+#~ "The text is identical, but the files do not match!\r\n"
+#~ "The following differences were found:"
+#~ msgstr ""
+#~ "Le texte est identique, mais les fichiers sont différents !\r\n"
+#~ "Les différences suivantes ont été trouvées :"
+
 #~ msgid "Use Task Dialog"
 #~ msgstr "Utiliser la Boîte de Dialogue de Tâche"
+
+#~ msgid "Whitespace changes (tabs, spaces)"
+#~ msgstr "Changements d'espaces blancs (tabulations, espaces)"
 
 #~ msgid "days"
 #~ msgstr "jours"

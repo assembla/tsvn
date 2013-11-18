@@ -11,7 +11,7 @@
 # Authors:
 # Translators:
 # Arith Hsu <arithmandar@gmail.com>, 2011,2013
-# binota <liu.bangjyh@gmail.com>, 2013
+# binota <binota@binota.org>, 2013
 # zcecil <zcecil@csie.org>, 2013
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Nick Vrvilo <nick@vrvilo.com>, 2011
@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-10-21 13:41+0000\n"
+"PO-Revision-Date: 2013-11-12 08:50+0000\n"
 "Last-Translator: zcecil <zcecil@csie.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/"
 "tortoisesvn/language/zh_TW/)\n"
@@ -14004,6 +14004,18 @@ msgstr "是"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "&Add Filter"
+#~ msgstr "新增過濾器(&A)"
+
+#~ msgid "&Delete Filter"
+#~ msgstr "刪除過濾器(&D)"
+
+#~ msgid "&Edit Filter"
+#~ msgstr "編輯過濾器(&E)"
+
+#~ msgid "&Up"
+#~ msgstr "上(&U)"
+
 #~ msgid "Add to Bookmarks"
 #~ msgstr "新增至書籤"
 
@@ -14021,6 +14033,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Compare with base (content only)"
 #~ msgstr "與基礎檔比對 (僅內容)"
+
+#~ msgid "Configure Filter Regexes"
+#~ msgstr "設定過濾器正規表示式 "
 
 #~ msgid "Coun&t"
 #~ msgstr "計數(T)"
@@ -14060,14 +14075,23 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
 
+#~ msgid "Ignore Comments"
+#~ msgstr "忽略註解"
+
 #~ msgid "Manual Pre-Commit Hook"
 #~ msgstr "手動式送交前掛勾"
 
 #~ msgid "Merge Log Templates"
 #~ msgstr "合併紀錄樣版"
 
+#~ msgid "Name:"
+#~ msgstr "名稱:"
+
 #~ msgid "New name must not be empty or the same as the original name!"
 #~ msgstr "新的名稱不能與舊名稱相同也不能留空!"
+
+#~ msgid "Newlines"
+#~ msgstr "換行"
 
 #~ msgid "Number of %s:"
 #~ msgstr "%s數:"
@@ -14075,8 +14099,22 @@ msgstr "{BugTraq}"
 #~ msgid "Proceed anyway"
 #~ msgstr "強制執行"
 
+#~ msgid "Regex Filter"
+#~ msgstr "正規表示式過濾器"
+
+#~ msgid "Regex Filters"
+#~ msgstr "正規表示式過濾器"
+
+#~ msgid "Regex:"
+#~ msgstr "正規表示式:"
+
 #~ msgid "Remove Bookmark"
 #~ msgstr "刪除書籤"
+
+#~ msgid ""
+#~ "Remove all comments before doing the diff so changes inside comments "
+#~ "don't show as different"
+#~ msgstr "比對差異前先移除所有註解, 註解中的異動將不會顯示出來."
 
 #~ msgid "Rename '%s':"
 #~ msgstr "重新命名 '%s':"
@@ -14088,6 +14126,9 @@ msgstr "{BugTraq}"
 #~ "Reopens the commit dialog after a successful commit if there were files "
 #~ "and/or folders left uncommitted."
 #~ msgstr "如果有檔案或是目錄未被送交, 在送交成功之後重新顯示送交視窗."
+
+#~ msgid "Replace:"
+#~ msgstr "取代:"
 
 #~ msgid ""
 #~ "Revision: %1!ld! %2!s!\r\n"
@@ -14142,8 +14183,18 @@ msgstr "{BugTraq}"
 #~ msgid "The hook script executed successfully"
 #~ msgstr "掛勾指令檔執行成功"
 
+#~ msgid ""
+#~ "The text is identical, but the files do not match!\r\n"
+#~ "The following differences were found:"
+#~ msgstr ""
+#~ "內文是相同的, 但檔案並不完全相符!\n"
+#~ "找到以下的差異:"
+
 #~ msgid "Use Task Dialog"
 #~ msgstr "使用待辦事項視窗"
+
+#~ msgid "Whitespace changes (tabs, spaces)"
+#~ msgstr "空白字元的變更(tab或空白)"
 
 #~ msgid "days"
 #~ msgstr "日"
