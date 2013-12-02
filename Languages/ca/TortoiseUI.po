@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-11-20 11:51+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-11-27 22:50+0000\n"
+"Last-Translator: jmonguillot <jmonguillot@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -498,7 +498,7 @@ msgstr "&Aplica propietat recursivament"
 
 #. Resource IDs: (610)
 msgid "&Apply the update to the move destination"
-msgstr ""
+msgstr "&Aplica l'actualització a la destinació del moviment"
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -1222,7 +1222,7 @@ msgstr "&Recorda'm d'introduir un ID d'error"
 
 #. Resource IDs: (619, 1100, 1285, 1597, 16646)
 msgid "&Remove"
-msgstr "&Treu"
+msgstr "&Suprimeix"
 
 #. Resource IDs: (101)
 msgid "&Rename"
@@ -1402,7 +1402,7 @@ msgstr "&Temps d'espera en segons per aturar parsing d'autocompletació"
 
 #. Resource IDs: (65535)
 msgid "&To Revision"
-msgstr "&Cap a la Revisió"
+msgstr "&A la Revisió"
 
 #. Resource IDs: (1305, 1384)
 msgid "&To URL:"
@@ -2377,7 +2377,7 @@ msgstr "Autors"
 
 #. Resource IDs: (1265)
 msgid "Authors case sensitive"
-msgstr "Autors sense importar Majusc./minúsc."
+msgstr "Autors sense importar majusc./minúsc."
 
 #. Resource IDs: (1444)
 msgid "Authors:"
@@ -2992,7 +2992,7 @@ msgstr "Llista de canvis:"
 
 #. Resource IDs: (1242)
 msgid "Changes made (double-click on file for diff):"
-msgstr "Canvis fets (Fer doble click sobre el fitxer per veure diferències):"
+msgstr "Canvis fets (fer doble click sobre el fitxer per veure diferències):"
 
 #. Resource IDs: (2060)
 msgid "Changes the style of the application"
@@ -7638,8 +7638,8 @@ msgid ""
 "for TortoiseSVN to do here..."
 msgstr ""
 "Cap fitxer ha sigut modificat o afegit des de\n"
-"la darrera entrega. No hi ha res\n"
-"per fer aquí pel TortoiseSVN ..."
+"la darrera entrega. TortoiseSVN\n"
+"no hi pot fer res aquí..."
 
 #. Resource IDs: (273)
 msgid "No graph available"
@@ -8863,7 +8863,7 @@ msgstr "Torna a Sit&uar..."
 
 #. Resource IDs: (32794)
 msgid "Reload"
-msgstr "Recarega"
+msgstr "Recarrega"
 
 #. Resource IDs: (2050)
 msgid ""
@@ -8919,7 +8919,7 @@ msgstr "Estat remot del text"
 
 #. Resource IDs: (1332, 1470)
 msgid "Remove"
-msgstr "Treu"
+msgstr "Suprimeix"
 
 #. Resource IDs: (126)
 #, c-format
@@ -8937,7 +8937,7 @@ msgstr "Treu les Dades d'Autenticació Desades"
 
 #. Resource IDs: (15)
 msgid "Remove from &ignore list"
-msgstr "Treu de la llista d'&ignorats"
+msgstr "Suprimeix de la llista d'&ignorats"
 
 #. Resource IDs: (1068)
 msgid "Remove from Quick Access Toolbar"
@@ -8998,7 +8998,7 @@ msgstr "Fitxer/Carpeta tret"
 
 #. Resource IDs: (264)
 msgid "Removed from changelist"
-msgstr "Tret de la Changelist"
+msgstr "Suprimit de la changelist"
 
 #. Resource IDs: (146)
 #, c-format
@@ -10296,7 +10296,7 @@ msgid ""
 "revision(s) selected, showing %5!ld! changed paths"
 msgstr ""
 "Mostrant %1!ld! revisió(ns), de revisió %2!ld! a revisió %3!ld! - %4!ld! "
-"revisió(ns) selecccionada(es), mostrant %5!ld! paths canviats"
+"revisió(ns) seleccionada(es), mostrant %5!ld! paths canviats"
 
 #. Resource IDs: (272)
 #, c-format
@@ -13772,7 +13772,7 @@ msgstr "revisió %1!s!-%2!s!, revisió %3!s!-%4!s!"
 
 #. Resource IDs: (65535)
 msgid "revision count: "
-msgstr "compte de revisions : "
+msgstr "nombre de revisions:"
 
 #. Resource IDs: (626)
 msgid "revision has already been merged"
@@ -14343,8 +14343,44 @@ msgstr "sí"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "&Add Filter"
+#~ msgstr "&Afegir Filtre"
+
+#~ msgid "&Delete Filter"
+#~ msgstr "&Suprimir Filtre"
+
+#~ msgid "&Edit Filter"
+#~ msgstr "&Editar Filtre"
+
+#~ msgid "&Up"
+#~ msgstr "&Amunt"
+
+#~ msgid "Add to Bookmarks"
+#~ msgstr "Afegir als Favorits"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Favorits"
+
+#~ msgid "C&ompare URLs (content only)"
+#~ msgstr "C&ompara URLs (només contingut)"
+
+#~ msgid "Check-Commit Hook"
+#~ msgstr "Hook de Comprovació-Entrega"
+
 #~ msgid "Commits each %s:"
 #~ msgstr "Entregues cada %s:"
+
+#~ msgid "Compare with base (content only)"
+#~ msgstr "Compara amb la base (només contingut)"
+
+#~ msgid "Configure Filter Regexes"
+#~ msgstr "Configurar Filtres regex"
+
+#~ msgid "Coun&t"
+#~ msgstr "Compt&a"
+
+#~ msgid "Count: %d matches."
+#~ msgstr "Recompte: %d coincidències."
 
 #~ msgid "End of Line Style"
 #~ msgstr "Estil final de línia"
@@ -14355,11 +14391,35 @@ msgstr "{BugTraq}"
 #~ msgid "File changes each %s:"
 #~ msgstr "Canvis en el fitxer cada %s:"
 
+#~ msgid "Filenames"
+#~ msgstr "Noms de fitxer"
+
+#~ msgid "Find: Can't find the text \"%s\""
+#~ msgstr "Troba: No pot trobar el text \"%s\""
+
+#~ msgid ""
+#~ "Find: First occurrence from the bottom found. Beginning of document "
+#~ "reached."
+#~ msgstr ""
+#~ "Troba: Primera ocurrència trobada des del final. Ha arribat a l'inici del "
+#~ "document."
+
+#~ msgid "Find: First occurrence from the top found. End of document reached."
+#~ msgstr ""
+#~ "Troba: Primera ocurrència trobada des de l'inici. Ha arribat al final del "
+#~ "document."
+
 #~ msgid "Fit image &heights"
 #~ msgstr "Ajusta &alçades d'imatge"
 
 #~ msgid "Fit image &widths"
 #~ msgstr "Ajusta &amplades d'imatge"
+
+#~ msgid "Full data"
+#~ msgstr "Dades completes"
+
+#~ msgid "Full revision data without changed paths"
+#~ msgstr "Dades de revisió completa sense paths modificats"
 
 #~ msgid "ID:32817:V   +W"
 #~ msgstr "ID:32817:V +W"
@@ -14367,32 +14427,162 @@ msgstr "{BugTraq}"
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V +H"
 
+#~ msgid "Ignore Comments"
+#~ msgstr "Ignora Comentaris"
+
+#~ msgid "Manual Pre-Commit Hook"
+#~ msgstr "Hook Pre-Entrega manual"
+
 #~ msgid "Merge Log Templates"
 #~ msgstr "Fusiona Plantilles de Log"
+
+#~ msgid "Name:"
+#~ msgstr "Nom:"
 
 #~ msgid "New name must not be empty or the same as the original name!"
 #~ msgstr "El nou nom no pot ser buit o igual que el nom original!"
 
+#~ msgid "Newlines"
+#~ msgstr "Salts de línia"
+
 #~ msgid "Number of %s:"
 #~ msgstr "Nombre de %s:"
+
+#~ msgid "Paths relative to root"
+#~ msgstr "Paths relatius a l'arrel"
+
+#~ msgid "Proceed anyway"
+#~ msgstr "Segueix igualment"
+
+#~ msgid "Regex Filter"
+#~ msgstr "Filtre regex"
+
+#~ msgid "Regex Filters"
+#~ msgstr "Filtres regex"
+
+#~ msgid "Regex:"
+#~ msgstr "Regex:"
+
+#~ msgid "Remove Bookmark"
+#~ msgstr "Elimina Favorit"
+
+#~ msgid ""
+#~ "Remove all comments before doing the diff so changes inside comments "
+#~ "don't show as different"
+#~ msgstr ""
+#~ "Suprimeix tots els comentaris abans de fer el diff de manera que els "
+#~ "canvis en els comentaris no es mostrin com a diferències"
 
 #~ msgid "Rename '%s':"
 #~ msgstr "Canvia el nom '%s':"
 
+#~ msgid "Reopen dialog after commit if items were left uncommitted"
+#~ msgstr ""
+#~ "Reobre diàleg després de l'entrega si alguns items han quedat sense "
+#~ "entregar"
+
+#~ msgid ""
+#~ "Reopens the commit dialog after a successful commit if there were files "
+#~ "and/or folders left uncommitted."
+#~ msgstr ""
+#~ "Reobre el diàleg d'entrega després d'una entrega satisfactòria si han "
+#~ "quedat fitxers i/o carpetes sense entregar."
+
+#~ msgid "Replace:"
+#~ msgstr "Substitueix:"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%7!s!"
+#~ msgstr ""
+#~ "Revisió: %1!ld! %2!s!↩\n"
+#~ "URL: %3!s!↩\n"
+#~ "%4!s!Autor: %5!s!↩\n"
+#~ "Data: %6!s!↩\n"
+#~ "↩\n"
+#~ "Missatge de log:↩\n"
+#~ "%7!s!"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Tags (%7!d!):%8!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%9!s!"
+#~ msgstr ""
+#~ "Revisió: %1!ld! %2!s!↩\n"
+#~ "URL: %3!s!↩\n"
+#~ "%4!s!Autor: %5!s!↩\n"
+#~ "Data: %6!s!↩\n"
+#~ "↩\n"
+#~ "Tags (%7!d!):%8!s!↩\n"
+#~ "↩\n"
+#~ "Missatge de log:↩\n"
+#~ "%9!s!"
+
+#~ msgid "Run hoo&k script"
+#~ msgstr "Executa l'script de hook"
+
 #~ msgid "Select"
 #~ msgstr "Selecciona"
+
+#~ msgid "Show c&hanges (content only)"
+#~ msgstr "Mostra c&anvis (només contingut)"
+
+#~ msgid "Show multiple &changes... (content only)"
+#~ msgstr "Mostra &canvis múltiples... (només contingut)"
+
+#~ msgid "The hook script executed successfully"
+#~ msgstr "L'script de hook s'ha executat satisfactòriament"
+
+#~ msgid ""
+#~ "The text is identical, but the files do not match!\r\n"
+#~ "The following differences were found:"
+#~ msgstr ""
+#~ "El text és idèntic, però els fitxers no coincideixen!↩\n"
+#~ "S'han trobat les següents diferències:"
+
+#~ msgid "Urls"
+#~ msgstr "Urls"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "Utilitza Diàleg de Tasca"
 
+#~ msgid "Whitespace changes (tabs, spaces)"
+#~ msgstr "Canvis d'espai en blanc (tabuladors, espais)"
+
+#~ msgid "all information"
+#~ msgstr "tota la informació"
+
+#~ msgid "column '%s'"
+#~ msgstr "columna '%s'"
+
 #~ msgid "days"
 #~ msgstr "dies"
+
+#~ msgid "file/foldernames"
+#~ msgstr "fitxer/noms de carpeta"
+
+#~ msgid "full paths"
+#~ msgstr "paths complets"
 
 #~ msgid "months"
 #~ msgstr "mesos"
 
 #~ msgid "quarters of year"
 #~ msgstr "trimestres"
+
+#~ msgid "relative paths"
+#~ msgstr "paths relatius"
 
 #~ msgid "weeks"
 #~ msgstr "setmanes"
