@@ -32,7 +32,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-11-27 14:00+0000\n"
+"PO-Revision-Date: 2013-12-08 20:34+0000\n"
 "Last-Translator: Masahiro FUJIMOTO <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/ja/)\n"
@@ -14264,8 +14264,14 @@ msgstr "{BugTraq}"
 #~ msgid "Coun&t"
 #~ msgstr "カウント(&T)"
 
-#~ msgid "Count: %d matches."
-#~ msgstr "カウント: %d件の一致。"
+#~ msgid "Count: %u matches."
+#~ msgstr "カウント: %u件の一致。"
+
+#~ msgid "Diff later"
+#~ msgstr "比較元として選択"
+
+#~ msgid "Diff with"
+#~ msgstr "次のファイルと比較:"
 
 #~ msgid "End of Line Style"
 #~ msgstr "改行コードの形式"
@@ -14423,6 +14429,20 @@ msgstr "{BugTraq}"
 #~ msgid "Show multiple &changes... (content only)"
 #~ msgstr "複数の変更を表示（内容のみ）(&C)..."
 
+#~ msgid ""
+#~ "Starts the diff viewer with the currently selected file and the one "
+#~ "marked before for diffing later."
+#~ msgstr ""
+#~ "比較元として選択したファイルと現在選択しているファイルで差分ビューアーを起"
+#~ "動します。"
+
+#~ msgid ""
+#~ "Stores the path of the file to be used for a diff on a later right-click. "
+#~ "Hold down the Ctrl key to remove the last saved path."
+#~ msgstr ""
+#~ "後で右クリックして比較を行うパスを記憶します。Ctrlキーを押しながらクリック"
+#~ "すると、保存されたパスを削除します。"
+
 #~ msgid "The hook script executed successfully"
 #~ msgstr "フックスクリプトの実行に成功しました"
 
@@ -14471,6 +14491,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "years"
 #~ msgstr "年"
+
+#~ msgid "Count: %d matches."
+#~ msgstr "カウント: %d件の一致。"
 
 #~ msgid "Moved from"
 #~ msgstr "移動元"

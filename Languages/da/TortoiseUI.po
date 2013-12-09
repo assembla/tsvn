@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-11-27 08:29+0000\n"
+"PO-Revision-Date: 2013-12-07 08:28+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/da/)\n"
@@ -52,12 +52,12 @@ msgstr "# forfattere vist enkeltvis:"
 #. Resource IDs: (357)
 #, c-format
 msgid "%.2f MBytes transferred"
-msgstr "%.2f MB overført"
+msgstr "%.2f Mbyte overført"
 
 #. Resource IDs: (357)
 #, c-format
 msgid "%.2f kBytes/s"
-msgstr "%.2f kBytes/s"
+msgstr "%.2f Kbytes/s"
 
 #. Resource IDs: (3868)
 #, c-format
@@ -82,7 +82,7 @@ msgstr "%1 har et forkert format."
 #. Resource IDs: (3867)
 #, c-format
 msgid "%1 was not found."
-msgstr "%1 findes ikke."
+msgstr "%1 blev ikke fundet."
 
 #. Resource IDs: (169)
 #, c-format
@@ -493,7 +493,7 @@ msgstr "&Anvend egenskaben rekursivt"
 
 #. Resource IDs: (610)
 msgid "&Apply the update to the move destination"
-msgstr ""
+msgstr "&Anvend ændringen af flytnings-destinationen"
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -621,7 +621,7 @@ msgstr "&Luk Vindue(r)"
 
 #. Resource IDs: (65535)
 msgid "&Collaborator username"
-msgstr ""
+msgstr "&Samarbejdspartner brugernavn"
 
 #. Resource IDs: (65535)
 msgid "&Command:"
@@ -3294,7 +3294,7 @@ msgstr "Lukker det aktive vindue og spørger, om dokumenterne skal gemmes"
 
 #. Resource IDs: (350)
 msgid "Code Collaborator Settings"
-msgstr ""
+msgstr "Kode Samarbejdspartner Opsætning"
 
 #. Resource IDs: (275)
 msgid "Coll&apse source tree"
@@ -3302,7 +3302,7 @@ msgstr "Koll&aps kilde-træ"
 
 #. Resource IDs: (65535)
 msgid "Collaborator &password"
-msgstr ""
+msgstr "Samarbejdspartner &kodeord"
 
 #. Resource IDs: (156)
 msgid "Collapse"
@@ -4502,7 +4502,7 @@ msgstr ""
 #. Resource IDs: (92)
 #, c-format
 msgid "Do you want to drop the vendor branch into the working copy \"%s\"?"
-msgstr ""
+msgstr "Ønsker du at hente udbyder-sidegrenen ind i arbejdskopien \"%s\"?"
 
 #. Resource IDs: (315)
 msgid "Do you want to load the changed files?"
@@ -4597,8 +4597,7 @@ msgid ""
 "Documentation : Simon Large\n"
 "Code : Tobias Schäfer, Stefan Fuhrmann"
 msgstr ""
-"Dokumentation : Simon Large, Dansk oversættelse : Christian Funder "
-"Sommerlund\n"
+"Dokumentation : Simon Large, Dansk oversættelse : Mikkel Elmholdt\n"
 "Kode : Tobias Schäfer, Stefan Fuhrmann"
 
 #. Resource IDs: (564)
@@ -6415,6 +6414,8 @@ msgid ""
 "In order to show this dialog in the future, press <Ctrl> while executing the "
 "Code Collaborator menu command."
 msgstr ""
+"For at vise denne dialog i fremtiden tryk <Ctrl> mens du vælger Kode "
+"Samarbejdspartner menu-punktet."
 
 #. Resource IDs: (1616)
 msgid "Include e&xternals"
@@ -10741,7 +10742,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Subversion passwor&d"
-msgstr ""
+msgstr "Subversion &kodeord"
 
 #. Resource IDs: (79)
 msgid ""
@@ -11784,7 +11785,7 @@ msgid ""
 "This product includes software from Apache™ Subversion® (http://subversion."
 "apache.org)"
 msgstr ""
-"Dette produkt indeholder software fre Apache™ Subversion® (http://subversion."
+"Dette produkt indeholder software fra Apache™ Subversion® (http://subversion."
 "apache.org)"
 
 #. Resource IDs: (3857)
@@ -12258,7 +12259,7 @@ msgstr "Fortryd 1 Handling"
 
 #. Resource IDs: (14)
 msgid "Undo Add..."
-msgstr ""
+msgstr "Fortryd Tilføj..."
 
 #. Resource IDs: (3603)
 msgid ""
@@ -12653,6 +12654,14 @@ msgid ""
 "\r\n"
 "To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
+"Brug log dialogen til at vælge de revisioner du ønsker at flette, eller "
+"indtast de revisioner du ønsker at flette, separeret med kommaer. En "
+"revisions-serie kan specificeres med en bindestreg.\n"
+"\n"
+" Eksempel: 4-7,9,11,15-HEAD@pegrevision \n"
+"\n"
+"For at flette alle revisioner (reintegration/automatisk fletning) kan du "
+"lade feltet være tomt."
 
 #. Resource IDs: (314)
 #, c-format
@@ -13544,7 +13553,7 @@ msgstr "ukomplet"
 
 #. Resource IDs: (589)
 msgid "inherited from"
-msgstr ""
+msgstr "arvet fra"
 
 #. Resource IDs: (583)
 msgid "it does not exist."
@@ -14296,17 +14305,252 @@ msgstr "ja"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "&Add Filter"
+#~ msgstr "&Tilføj Filter"
+
+#~ msgid "&Delete Filter"
+#~ msgstr "&Slet Filter"
+
+#~ msgid "&Edit Filter"
+#~ msgstr "&Rediger Filter"
+
+#~ msgid "&Up"
+#~ msgstr "&Op"
+
+#~ msgid "Add to Bookmarks"
+#~ msgstr "Tilføj til Bogmærker"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Bogmærker"
+
+#~ msgid "C&ompare URLs (content only)"
+#~ msgstr "S&ammenlign URLer (kun indhold)"
+
+#~ msgid "Check-Commit Hook"
+#~ msgstr "Check-Arkivering Tilkobling"
+
+#~ msgid "Commits each %s:"
+#~ msgstr "Arkiverer hver %s:"
+
+#~ msgid "Compare with base (content only)"
+#~ msgstr "Sammenlign med base (kun indhold)"
+
+#~ msgid "Configure Filter Regexes"
+#~ msgstr "Konfigurer Filter Regexer"
+
+#~ msgid "Coun&t"
+#~ msgstr "&Antal"
+
+#~ msgid "Count: %u matches."
+#~ msgstr "Antal: %u fundne."
+
 #~ msgid "End of Line Style"
 #~ msgstr "Linieafslutningstype"
 
 #~ msgid "File Encoding"
 #~ msgstr "Fil Indkodning"
 
+#~ msgid "File changes each %s:"
+#~ msgstr "Fil ændringer hver %s:"
+
+#~ msgid "Filenames"
+#~ msgstr "Filnavne"
+
+#~ msgid "Find: Can't find the text \"%s\""
+#~ msgstr "Find: Kan ikke finde teksten \"%s\""
+
+#~ msgid ""
+#~ "Find: First occurrence from the bottom found. Beginning of document "
+#~ "reached."
+#~ msgstr ""
+#~ "Find: Første forekomst fra bunden blev fundet. Starten af dokumentet nået."
+
+#~ msgid "Find: First occurrence from the top found. End of document reached."
+#~ msgstr ""
+#~ "Find: Første forekomst fra toppen blev fundet. Slutningen af dokumentet "
+#~ "nået."
+
 #~ msgid "Fit image &heights"
 #~ msgstr "Tilpas billed-&højde"
 
 #~ msgid "Fit image &widths"
 #~ msgstr "Tilpas billed-&bredde"
+
+#~ msgid "Full data"
+#~ msgstr "Alle data"
+
+#~ msgid "Full revision data without changed paths"
+#~ msgstr "Alle ændringsdata uden ændrede stier"
+
+#~ msgid "ID:32817:V   +W"
+#~ msgstr "ID:32817:V   +W"
+
+#~ msgid "ID:32818:V   +H"
+#~ msgstr "ID:32818:V   +H"
+
+#~ msgid "Ignore Comments"
+#~ msgstr "Ignorer Kommentarer"
+
+#~ msgid "Manual Pre-Commit Hook"
+#~ msgstr "Manuelt Før-Arkivering-Tilkobling"
+
+#~ msgid "Merge Log Templates"
+#~ msgstr "Flet Log Skabeloner"
+
+#~ msgid "Name:"
+#~ msgstr "Navn:"
+
+#~ msgid "New name must not be empty or the same as the original name!"
+#~ msgstr ""
+#~ "Det nye navn kan ikke være tomt eller have samme værdi som det originale "
+#~ "navn!"
+
+#~ msgid "Newlines"
+#~ msgstr "Linieskift"
+
+#~ msgid "Number of %s:"
+#~ msgstr "Antal %s:"
+
+#~ msgid "Paths relative to root"
+#~ msgstr "Stier relative til roden"
+
+#~ msgid "Proceed anyway"
+#~ msgstr "Fortsæt alligevel"
+
+#~ msgid "Regex Filter"
+#~ msgstr "Regex Filter"
+
+#~ msgid "Regex Filters"
+#~ msgstr "Regex Filtre"
+
+#~ msgid "Regex:"
+#~ msgstr "Regex:"
+
+#~ msgid "Remove Bookmark"
+#~ msgstr "Fjern Bogmærke"
+
+#~ msgid ""
+#~ "Remove all comments before doing the diff so changes inside comments "
+#~ "don't show as different"
+#~ msgstr ""
+#~ "Fjern alle kommentarer før differenscheck så ændringer i kommentarer ikke "
+#~ "vises"
+
+#~ msgid "Rename '%s':"
+#~ msgstr "Omdøb '%s':"
+
+#~ msgid "Reopen dialog after commit if items were left uncommitted"
+#~ msgstr ""
+#~ "Genåbn dialog efter arkivering hvis nogle elementer stadig er uarkiverede"
+
+#~ msgid ""
+#~ "Reopens the commit dialog after a successful commit if there were files "
+#~ "and/or folders left uncommitted."
+#~ msgstr ""
+#~ "Genåbn arkiveringsdialog efter en succesfuld arkivering hvis der er filer "
+#~ "og/eller foldere der stadig er uarkiverede."
+
+#~ msgid "Replace:"
+#~ msgstr "Erstat:"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%7!s!"
+#~ msgstr ""
+#~ "Revision: %1!ld! %2!s!\n"
+#~ "URL: %3!s!\n"
+#~ "%4!s!Forfatter: %5!s!\n"
+#~ "Dato: %6!s!\n"
+#~ "\n"
+#~ "Log besked:\n"
+#~ "%7!s!"
+
+#~ msgid ""
+#~ "Revision: %1!ld! %2!s!\r\n"
+#~ "URL: %3!s!\r\n"
+#~ "%4!s!Author: %5!s!\r\n"
+#~ "Date: %6!s!\r\n"
+#~ "\r\n"
+#~ "Tags (%7!d!):%8!s!\r\n"
+#~ "\r\n"
+#~ "Log message:\r\n"
+#~ "%9!s!"
+#~ msgstr ""
+#~ "Revision: %1!ld! %2!s!\n"
+#~ "URL: %3!s!\n"
+#~ "%4!s!Forfatter: %5!s!\n"
+#~ "Dato: %6!s!\n"
+#~ "\n"
+#~ "Mærker (%7!d!):%8!s!\n"
+#~ "\n"
+#~ "Log besked:\n"
+#~ "%9!s!"
+
+#~ msgid "Run hoo&k script"
+#~ msgstr "Kør tilkoblings-script"
+
+#~ msgid "Select"
+#~ msgstr "Vælg"
+
+#~ msgid "Show c&hanges (content only)"
+#~ msgstr "Vis &ændringer (kun indhold)"
+
+#~ msgid "Show multiple &changes... (content only)"
+#~ msgstr "Vis multiple &ændringer... (kun indhold)"
+
+#~ msgid "The hook script executed successfully"
+#~ msgstr "Tilkoblings-scriptet blev succesfuldt udført"
+
+#~ msgid ""
+#~ "The text is identical, but the files do not match!\r\n"
+#~ "The following differences were found:"
+#~ msgstr ""
+#~ "Teksten er identisk, men filerne er ikke!\n"
+#~ "Følgener ændringer blev fundet:"
+
+#~ msgid "Urls"
+#~ msgstr "Url'er"
+
+#~ msgid "Use Task Dialog"
+#~ msgstr "Brug Opgave Dialog"
+
+#~ msgid "Whitespace changes (tabs, spaces)"
+#~ msgstr "Blanktegns-ændringer (tabulator, mellemrum)"
+
+#~ msgid "all information"
+#~ msgstr "al information"
+
+#~ msgid "column '%s'"
+#~ msgstr "kolonne '%s'"
+
+#~ msgid "days"
+#~ msgstr "dage"
+
+#~ msgid "file/foldernames"
+#~ msgstr "filer/foldernavne"
+
+#~ msgid "full paths"
+#~ msgstr "fulde stier"
+
+#~ msgid "months"
+#~ msgstr "måneder"
+
+#~ msgid "quarters of year"
+#~ msgstr "kvartal"
+
+#~ msgid "relative paths"
+#~ msgstr "relative stier"
+
+#~ msgid "weeks"
+#~ msgstr "uger"
+
+#~ msgid "years"
+#~ msgstr "år"
 
 #~ msgid "Moved from"
 #~ msgstr "Flyttet fra"
