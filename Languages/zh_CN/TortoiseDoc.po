@@ -16,6 +16,7 @@
 # Gongong <gongong83@gmail.com>, 2013
 # Hong Xu <icehong@gmail.com>, 2012
 # coxxs <hxx107@gmail.com>, 2011
+# Gones <liejie050911@163.com>, 2013
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Nick Vrvilo <nick@vrvilo.com>, 2012
 # ninjasai <ninjasai@gmail.com>, 2011
@@ -30,8 +31,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-12-07 08:20+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2013-12-15 10:20+0000\n"
+"Last-Translator: Gones <liejie050911@163.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/"
 "tortoisesvn/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -17070,6 +17071,9 @@ msgid ""
 "hook is called at an early stage, the full list of objects selected for "
 "commit is not available."
 msgstr ""
+"在提交对话框显示之前被调用.当钩子修改了一个受版本控制的文件,而且影响了需要提"
+"交的文件或者要提交的内容,可能需要使用它.然而,需要注意,钩子是在之前的某个时候"
+"被调用的,所以被选中提交的完整文件列表是不可用的."
 
 #. (term)
 #. (term)
@@ -17082,6 +17086,8 @@ msgid ""
 "and before the actual commit begins. This hook has a list of exactly what "
 "will be committed."
 msgstr ""
+"在用户点击了提交对话框的确定按钮,并且实际的提交过程开始后被调用.钩子包含所有"
+"要提交的内容的详细信息."
 
 #. (term)
 #. (term)
@@ -17154,6 +17160,9 @@ msgid ""
 "Windows shell execute will not allow such scripts to run due to security "
 "restrictions."
 msgstr ""
+"接下来需要指定要执行的命令行,以钩子脚本或可执行文件的路径开始.它可以是批处理"
+"文件,可执行文件,或者有效的windows关联的其它文件,例如Perl脚本.注意,此命令不能"
+"使用UNC路径,Windows Shell由于安全限制而不允许这样的命令执行."
 
 #. (para)
 msgid ""
@@ -17162,6 +17171,8 @@ msgid ""
 "hook has its own parameters which are passed in the following order: "
 "<placeholder-1/>"
 msgstr ""
+"命令行包含一些由TortoiseSVN填写的参数,这些参数依赖于调用的钩子.每个钩子有对应"
+"的参数,按照以下的顺序调用:<placeholder-1/>"
 
 #. (para)
 msgid ""
@@ -17215,6 +17226,8 @@ msgid ""
 "the text in UTF-8 encoding. After successful execution of the start-commit "
 "hook, the log message is read back, giving the hook a chance to modify it."
 msgstr ""
+"指向包含日志信息的提交文件.此文件使用UTF-8编码.在成功执行开始提交钩子后,日志"
+"信息会回显,以便于钩子修改."
 
 #. (para)
 msgid ""
@@ -17232,7 +17245,7 @@ msgstr "指到包含错误信息的文件的路径， 如果没有错误的话�
 msgid ""
 "The current working directory with which the script is run. This is set to "
 "the common root directory of all affected paths."
-msgstr ""
+msgstr "脚本正在运行的工作目录,设置为所有受影响的路径的公用根目录."
 
 #. (para)
 msgid ""
@@ -17246,6 +17259,8 @@ msgid ""
 "listed for a particular hook are always passed, whether you want them or "
 "not ;-)"
 msgstr ""
+"注意,尽管为了方便提供了这些参数名称,但是设置钩子的时候不是必须使用它们.不管是"
+"否需要,为特定钩子列出的参数都会传递. ;-)"
 
 #. (para)
 msgid ""
@@ -17260,6 +17275,8 @@ msgid ""
 "Normally you will want to hide ugly DOS boxes when the script runs, so "
 "<guilabel>Hide the script while running</guilabel> is checked by default."
 msgstr ""
+"当运行脚本的时候通常希望隐藏DOS窗口,所以默认检查<guilabel>隐藏运行中的脚本</"
+"guilabel>"
 
 #. (para)
 msgid ""
@@ -17269,6 +17286,10 @@ msgid ""
 "ulink>. (<xref linkend=\"tsvn-preface-source\"/> explains how to access the "
 "repository.)"
 msgstr ""
+"钩子脚本实例可以在  <ulink url=\"http://tortoisesvn.googlecode.com/svn/trunk/"
+"contrib/hook-scripts\"><citetitle>TortoiseSVN 代码库</citetitle></ulink>的 "
+"<literal>contrib</literal>文件夹下面找到.(<xref linkend=\"tsvn-preface-source"
+"\"/>解释了如何访问这个代码库.)"
 
 #. (para)
 msgid ""
@@ -17290,6 +17311,8 @@ msgid ""
 "to connect to a repository. Just pass the name of the VPN connection as the "
 "first parameter to the tool."
 msgstr ""
+"在TortoiseSVN 的安装文件夹下有一个名为 <literal>ConnectVPN.exe</literal>的小"
+"工具.在TortoiseSVN连接到代码库之前,可以使用这个连接前的钩子自动连接到VPN."
 
 #. (para)
 msgid ""
@@ -17299,6 +17322,9 @@ msgid ""
 "plugin, which you have already installed and registered, this is the place "
 "to specify how it integrates with your working copy."
 msgstr ""
+"TortoiseSVN可以使用COM插件在提交对话框中查询问题跟踪器.在<xref linkend="
+"\"tsvn-dug-bugtracker-ref\"/>中描述了这类插件的使用.如果系统管理员提供了插件,"
+"用户也安装和注册了,这里就是指定插件和工作副本相结合的地方."
 
 #. (title)
 msgid "The Settings Dialog, Issue Tracker Integration Page"
@@ -17313,6 +17339,10 @@ msgid ""
 "to the plugin, but might include your user name on the issue tracker so that "
 "the plugin can query for issues which are assigned to you."
 msgstr ""
+"<placeholder-1/> 点击 <guibutton>增加...</guibutton>按钮,在工作副本上使用这个"
+"插件.可以指定工作副本的路径.可以在所有注册过的问题跟踪器插件列表中,选择要使用"
+"的插件和要传递的参数.这些参数指定到插件,但是可能包含在问题跟踪器上的用户名,这"
+"样插件才能查找分配给用户的问题."
 
 #. (para)
 msgid ""
@@ -17323,16 +17353,23 @@ msgid ""
 "provider for the <ulink url=\"http://code.google.com/hosting/"
 "\"><citetitle>Google Code</citetitle></ulink> issue tracker.)"
 msgstr ""
+"这个属性为COM组件的IBugtraqProvider接口指定UUID,例如, <literal>{91974081-"
+"2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal>.(这个例子是 <ulink url=\"http://code."
+"google.com/p/gurtle/\"><citetitle>Gurtle bugtraq provider</citetitle></ulink>"
+"的UUID,它是<ulink url=\"http://code.google.com/hosting/\"><citetitle>Google "
+"Code</citetitle></ulink>的问题追踪器.)"
 
 #. (para)
 msgid ""
 "This is the same as <literal>bugtraq:provideruuid</literal>, but for the 64-"
 "bit version of the IBugtraqProvider."
 msgstr ""
+"这和 <literal>bugtraq:provideruuid</literal>相同,但是是针对IBugtraqProvider接"
+"口的64位版本."
 
 #. (para)
 msgid "This property specifies the parameters passed to the IBugtraqProvider."
-msgstr ""
+msgstr "这个属性指定了传递给IBugtraqProvider的参数."
 
 #. (para)
 msgid ""
@@ -17343,6 +17380,10 @@ msgid ""
 "your IBugtraqProvider plugin to find out what to specify in these two "
 "properties."
 msgstr ""
+"如果希望项目中的所有的用户使用同样的COM组件,可以为插件指定如下的属性,"
+"<literal>bugtraq:provideruuid</literal>, <literal>bugtraq:provideruuid64</"
+"literal> 和<literal>bugtraq:providerparams</literal>.  <placeholder-1/>请检查"
+"IBugtraqProvider 插件的相关文档,查明如何设置这两个属性."
 
 #. (title)
 msgid "TortoiseBlame Settings"
@@ -17419,6 +17460,9 @@ msgid ""
 "have to know what each of these settings is used for and what it does. Do "
 "not modify these settings unless you are sure you need to change them."
 msgstr ""
+"一些不常用的设置只在设置对话框的高级页面上,这些设置直接修改注册表.需要知道这"
+"些设置是做什么用的以及它们做出了什么改动.除非确定需要修改这些设置,否则不要修"
+"改它们."
 
 #. (para)
 msgid ""
@@ -17444,6 +17488,9 @@ msgid ""
 "force TortoiseSVN to always show those extended commands, set this value to "
 "<literal>true</literal>."
 msgstr ""
+"和桌面一样,当上下文菜单打开的时候,按下<keycap>Shift</keycap>键,TortoiseSVN就"
+"会显示附件的命令.要强制TortoiseSVN总是显示这些拓展的命令,需要设置参数值为 "
+"<literal>true</literal>."
 
 #. (para)
 msgid ""
@@ -17471,6 +17518,8 @@ msgid ""
 "<literal>true</literal>. This is really only useful for developers as it "
 "allows you to terminate the program gracefully."
 msgstr ""
+"要为TSVNCache程序增加一个缓存托盘图标,可以设置这个值为<literal>true</"
+"literal>.这实际只是对开发人员有作用,它允许开发人员以优雅的方式终止程序."
 
 #. (para)
 msgid ""
@@ -17500,6 +17549,8 @@ msgid ""
 "Set this to <literal>true</literal> if you want a dialog to pop up for every "
 "command showing the command line used to start TortoiseProc.exe."
 msgstr ""
+"如果希望在每一次在启动TortoiseProc.exe的命令行时都弹出对话框,可以设置这为"
+"<literal>true</literal>."
 
 #. (para)
 msgid ""
@@ -17547,6 +17598,10 @@ msgid ""
 "the bottom right, which can look ugly. To disable full row select, set this "
 "value to <literal>false</literal>."
 msgstr ""
+"这个状态列表控件在多个对话框中使用(例如,commit, check-for-modifications, "
+"add, revert, ...),可以选择整行(例如,如果选择一个项,这一行会被选中,而不仅仅是"
+"这一列).这很好,但是选中的行也覆盖了底部右侧的背景图片.设置参数值"
+"<literal>false</literal>可以取消选中整行."
 
 #. (para)
 msgid ""
@@ -17675,6 +17730,9 @@ msgid ""
 "very big working copies this can take a while, you can set this value to "
 "<literal>false</literal> to deactivate this feature."
 msgstr ""
+"日志对话框显示了版本修订信息,其中工作路径以粗体显示.这需要日志对话框获取此路"
+"径的状态信息.对于一个非常大的工作副本来来说,这可能需要一些时间.设置参数值为"
+"<literal>false</literal>可以使这个特性无效."
 
 #. (para)
 msgid ""
@@ -17725,6 +17783,10 @@ msgid ""
 "accelerators of the TortoiseSVN entries, set this value to <literal>false</"
 "literal>."
 msgstr ""
+"TortoiseSVN 为上下文菜单设置快捷键.这可能导致快捷键重复(例如,<literal>SVN "
+"Commit</literal>使用快捷键<keycap>Alt-C</keycap>,但是这也是 <literal>Copy</"
+"literal>的快捷键).如果不希望使用或者不需要使用TortoiseSVN快捷键,设置参数值为"
+"<literal>false</literal>."
 
 #. (para)
 msgid ""
@@ -17734,12 +17796,17 @@ msgid ""
 "icons for the shell context menu items. Set this value to <literal>true</"
 "literal> to show the icons again."
 msgstr ""
+"如果使用windows桌面或者遇到上下文菜单显示不正确的问题时,这很有用.如果不希望"
+"TortoiseSVN为shell上下文菜单选项显示图标,设置参数值为<literal>false</"
+"literal>.设置参数值为<literal>true</literal>则可以再次显示图标."
 
 #. (para)
 msgid ""
 "If you don't want TortoiseSVN to show icons for the context menus in its own "
 "dialogs, set this value to <literal>false</literal>."
 msgstr ""
+"如果不希望TortoiseSVN为上下文菜单对话框显示图标,设置参数值为<literal>false</"
+"literal>."
 
 #. (para)
 msgid ""
@@ -17747,6 +17814,9 @@ msgid ""
 "(see <xref linkend=\"tsvn-dug-commit-log\"/> for details). If you don't want "
 "to do this, set the value to <literal>false</literal>."
 msgstr ""
+"提交和日志对话框在提交信息中使用不同的字体风格(例如,粗体,斜体) (详情请见"
+"<xref linkend=\"tsvn-dug-commit-log\"/>).如果不希望这样显示,可以设置参数值为 "
+"<literal>false</literal>."
 
 #. (para)
 msgid ""
