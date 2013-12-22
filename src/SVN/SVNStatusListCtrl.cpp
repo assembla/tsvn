@@ -2949,7 +2949,10 @@ void CSVNStatusListCtrl::OnContextMenuList(CWnd * pWnd, CPoint point)
     bool bShift = !!(GetAsyncKeyState(VK_SHIFT) & 0x8000);
 
     CAutoReadWeakLock readLock(m_guard);
+    CAutoReadWeakLock readLockProp(m_PropertyMapGuard);
     if (!readLock.IsAcquired())
+        return;
+    if (!readLockProp.IsAcquired())
         return;
     bool bInactiveItem = false;
     int selIndex = GetSelectionMark();
@@ -4055,7 +4058,10 @@ void CSVNStatusListCtrl::OnContextMenuHeader(CWnd * pWnd, CPoint point)
         point = rect.CenterPoint();
     }
     CAutoReadWeakLock readLock(m_guard);
+    CAutoReadWeakLock readLockProp(m_PropertyMapGuard);
     if (!readLock.IsAcquired())
+        return;
+    if (!readLockProp.IsAcquired())
         return;
     CMenu popup;
     if (!popup.CreatePopupMenu())
