@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-12-10 08:30+0000\n"
+"PO-Revision-Date: 2013-12-17 08:29+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/projects/p/"
 "tortoisesvn/language/nb/)\n"
@@ -14252,6 +14252,18 @@ msgstr "ja"
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
 
+#~ msgid "&Add Filter"
+#~ msgstr "&Legg Til Filter"
+
+#~ msgid "&Delete Filter"
+#~ msgstr "&Slett Filter"
+
+#~ msgid "&Edit Filter"
+#~ msgstr "&Editer Filter"
+
+#~ msgid "&Up"
+#~ msgstr "&Opp"
+
 #~ msgid "Add to Bookmarks"
 #~ msgstr "Legg til i bokmerker"
 
@@ -14270,8 +14282,20 @@ msgstr "{BugTraq}"
 #~ msgid "Compare with base (content only)"
 #~ msgstr "Sammenlign med basis (bare innhold)"
 
+#~ msgid "Configure Filter Regexes"
+#~ msgstr "Konfigurer Regulært Uttrykk-filtre"
+
 #~ msgid "Coun&t"
 #~ msgstr "An&tall"
+
+#~ msgid "Count: %u matches."
+#~ msgstr "Antall: %u treff."
+
+#~ msgid "Diff later"
+#~ msgstr "Sammenlign senere"
+
+#~ msgid "Diff with \"%s\""
+#~ msgstr "Sammenlign med \"%s\""
 
 #~ msgid "End of Line Style"
 #~ msgstr "Linjeslutt-stil"
@@ -14281,6 +14305,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "File changes each %s:"
 #~ msgstr "Filendringer per %s:"
+
+#~ msgid "Filenames"
+#~ msgstr "Filnavn"
 
 #~ msgid "Find: Can't find the text \"%s\""
 #~ msgstr "Finn: Kan ikke finne teksten \"%s\""
@@ -14301,11 +14328,20 @@ msgstr "{BugTraq}"
 #~ msgid "Fit image &widths"
 #~ msgstr "Tilpass bilde&bredder"
 
+#~ msgid "Full data"
+#~ msgstr "Alle data"
+
+#~ msgid "Full revision data without changed paths"
+#~ msgstr "Alle revisjonsdata unntatt endrede stier"
+
 #~ msgid "ID:32817:V   +W"
 #~ msgstr "ID:32817:V   +W"
 
 #~ msgid "ID:32818:V   +H"
 #~ msgstr "ID:32818:V   +H"
+
+#~ msgid "Ignore Comments"
+#~ msgstr "Ignorer Kommetarer"
 
 #~ msgid "Manual Pre-Commit Hook"
 #~ msgstr "Manuell Påhaking Før Innsending"
@@ -14313,17 +14349,42 @@ msgstr "{BugTraq}"
 #~ msgid "Merge Log Templates"
 #~ msgstr "Mønstre For Flettelogg"
 
+#~ msgid "Name:"
+#~ msgstr "Navn:"
+
 #~ msgid "New name must not be empty or the same as the original name!"
 #~ msgstr "Det nye navnet kan ikke være tomt eller likt det gamle navnet!"
+
+#~ msgid "Newlines"
+#~ msgstr "Linjeskift"
 
 #~ msgid "Number of %s:"
 #~ msgstr "Antall %s:"
 
+#~ msgid "Paths relative to root"
+#~ msgstr "Stier relativt til roten"
+
 #~ msgid "Proceed anyway"
 #~ msgstr "Fortsett likevel"
 
+#~ msgid "Regex Filter"
+#~ msgstr "Regulært Uttrykk-filter"
+
+#~ msgid "Regex Filters"
+#~ msgstr "Regulært Uttrykk-filtre"
+
+#~ msgid "Regex:"
+#~ msgstr "Regulært uttrykk:"
+
 #~ msgid "Remove Bookmark"
 #~ msgstr "Fjern bokmerke"
+
+#~ msgid ""
+#~ "Remove all comments before doing the diff so changes inside comments "
+#~ "don't show as different"
+#~ msgstr ""
+#~ "Fjern alle kommentarer før sammenligning slik at endringer inne i "
+#~ "kommentarer ikke vises som forskjeller"
 
 #~ msgid "Rename '%s':"
 #~ msgstr "Omdøp '%s':"
@@ -14339,6 +14400,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "Åpner innsendingsdialogen på nytt etter en vellykket innsending hvis det "
 #~ "gjenstår filer og/eller mapper som ikke ble sendt inn."
+
+#~ msgid "Replace:"
+#~ msgstr "Erstatt:"
 
 #~ msgid ""
 #~ "Revision: %1!ld! %2!s!\r\n"
@@ -14390,20 +14454,62 @@ msgstr "{BugTraq}"
 #~ msgid "Show multiple &changes... (content only)"
 #~ msgstr "Vis mange e&ndinger... (bare innhold)"
 
+#~ msgid ""
+#~ "Starts the diff viewer with the currently selected file and the one "
+#~ "marked before for diffing later."
+#~ msgstr ""
+#~ "Starter sammenligning mellom den valgte filen og den som ble markert for "
+#~ "sammenligning tidligere."
+
+#~ msgid ""
+#~ "Stores the path of the file to be used for a diff on a later right-click. "
+#~ "Hold down the Ctrl key to remove the last saved path."
+#~ msgstr ""
+#~ "Lagrer stien til filen for bruk i sammenligning ved et senere høyreklikk. "
+#~ "Hold nede Ctrl-tasten for å fjerne sist lagrede sti."
+
 #~ msgid "The hook script executed successfully"
 #~ msgstr "Påhakingsskriptet kjørte vellykket"
+
+#~ msgid ""
+#~ "The text is identical, but the files do not match!\r\n"
+#~ "The following differences were found:"
+#~ msgstr ""
+#~ "Teksten er identisk, men filene matcher ikke!\n"
+#~ "Følgende forskjeller ble funnet:"
+
+#~ msgid "Urls"
+#~ msgstr "Url-er"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "Bruk Oppgave-dialogen"
 
+#~ msgid "Whitespace changes (tabs, spaces)"
+#~ msgstr "Endringer i blanktegn (tab, mellomrom)"
+
+#~ msgid "all information"
+#~ msgstr "all informasjon"
+
+#~ msgid "column '%s'"
+#~ msgstr "kolonne '%s'"
+
 #~ msgid "days"
 #~ msgstr "dager"
+
+#~ msgid "file/foldernames"
+#~ msgstr "fil/mappenavn"
+
+#~ msgid "full paths"
+#~ msgstr "fulle stier"
 
 #~ msgid "months"
 #~ msgstr "måneder"
 
 #~ msgid "quarters of year"
 #~ msgstr "kvartaler"
+
+#~ msgid "relative paths"
+#~ msgstr "relative stier"
 
 #~ msgid "weeks"
 #~ msgstr "uker"
