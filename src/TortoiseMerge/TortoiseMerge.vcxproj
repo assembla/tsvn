@@ -319,6 +319,9 @@
     <Image Include="..\Resources\ribbon\ribbonlarge.png" />
     <Image Include="..\Resources\ribbon\ribbonsmall.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\compatibility.manifest" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

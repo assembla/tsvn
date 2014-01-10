@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007, 2009, 2012-2013 - TortoiseSVN
+// Copyright (C) 2007, 2009, 2012-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -237,7 +237,7 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD Reason, LPVOID Reserved)
     // This prevents other apps from loading the dll and locking it.
 
     BOOL bInShellTest = FALSE;
-    TCHAR buf[MAX_PATH + 1];       // MAX_PATH ok, the test really is for debugging anyway.
+    TCHAR buf[MAX_PATH + 1] = { 0 };       // MAX_PATH ok, the test really is for debugging anyway.
     DWORD pathLength = GetModuleFileName(NULL, buf, MAX_PATH);
 
     UNREFERENCED_PARAMETER(Reserved);

@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -4500,7 +4500,7 @@ void CLogDlg::ResizeAllListCtrlCols(bool bOnlyVisible)
     }
     for (int col = 0; col <= maxcol; col++)
     {
-        TCHAR textbuf[MAX_PATH + 1] = {};
+        TCHAR textbuf[MAX_PATH + 1] = { 0 };
         HDITEM hdi = {0};
         hdi.mask = HDI_TEXT;
         hdi.pszText = textbuf;

@@ -20,7 +20,7 @@
 
   <target name="build">
     <mkdir dir="${configuration}_${platform}" />
-    <rc rcfile="win32\include\CyrusSasl.rc" output="${configuration}_${platform}\libsasl.res">
+    <rc rcfile="win32\include\CyrusSasl.rc" output="${configuration}_${platform}\libsasl.res" options="/nologo">
       <includedirs>
         <include name="include" />
       </includedirs>
@@ -167,6 +167,13 @@
       <arg value="-nologo" />
       <arg value="-manifest" />
       <arg value="${configuration}_${platform}\libsasl.dll.manifest" />
+      <arg value="..\..\src\compatibility.manifest" />
+      <arg value="/out:${configuration}_${platform}\libsasl.dll.manifest" />
+    </exec>
+    <exec program="mt.exe">
+      <arg value="-nologo" />
+      <arg value="-manifest" />
+      <arg value="${configuration}_${platform}\libsasl.dll.manifest" />
       <arg value='/outputresource:"${configuration}_${platform}\libsasl${platext}.dll;#2"' />
     </exec>
 
@@ -258,6 +265,13 @@
       <arg value="-nologo" />
       <arg value="-manifest" />
       <arg value="${configuration}_${platform}\saslANONYMOUS.dll.manifest" />
+      <arg value="..\..\src\compatibility.manifest" />
+      <arg value="/out:${configuration}_${platform}\saslANONYMOUS.dll.manifest" />
+    </exec>
+    <exec program="mt.exe">
+      <arg value="-nologo" />
+      <arg value="-manifest" />
+      <arg value="${configuration}_${platform}\saslANONYMOUS.dll.manifest" />
       <arg value='/outputresource:"${configuration}_${platform}\saslANONYMOUS.dll;#2"' />
     </exec>
 
@@ -270,6 +284,13 @@
         <include name="${configuration}_${platform}\cram*.obj" />
       </sources>
     </link>
+    <exec program="mt.exe">
+      <arg value="-nologo" />
+      <arg value="-manifest" />
+      <arg value="${configuration}_${platform}\saslCRAMMD5.dll.manifest" />
+      <arg value="..\..\src\compatibility.manifest" />
+      <arg value="/out:${configuration}_${platform}\saslCRAMMD5.dll.manifest" />
+    </exec>
     <exec program="mt.exe">
       <arg value="-nologo" />
       <arg value="-manifest" />
@@ -290,6 +311,13 @@
       <arg value="-nologo" />
       <arg value="-manifest" />
       <arg value="${configuration}_${platform}\saslDIGESTMD5.dll.manifest" />
+      <arg value="..\..\src\compatibility.manifest" />
+      <arg value="/out:${configuration}_${platform}\saslDIGESTMD5.dll.manifest" />
+    </exec>
+    <exec program="mt.exe">
+      <arg value="-nologo" />
+      <arg value="-manifest" />
+      <arg value="${configuration}_${platform}\saslDIGESTMD5.dll.manifest" />
       <arg value='/outputresource:"${configuration}_${platform}\saslDIGESTMD5.dll;#2"' />
     </exec>
 
@@ -302,6 +330,13 @@
         <include name="${configuration}_${platform}\login*.obj" />
       </sources>
     </link>
+    <exec program="mt.exe">
+      <arg value="-nologo" />
+      <arg value="-manifest" />
+      <arg value="${configuration}_${platform}\saslLOGIN.dll.manifest" />
+      <arg value="..\..\src\compatibility.manifest" />
+      <arg value="/out:${configuration}_${platform}\saslLOGIN.dll.manifest" />
+    </exec>
     <exec program="mt.exe">
       <arg value="-nologo" />
       <arg value="-manifest" />
@@ -322,6 +357,13 @@
       <arg value="-nologo" />
       <arg value="-manifest" />
       <arg value="${configuration}_${platform}\saslNTLM.dll.manifest" />
+      <arg value="..\..\src\compatibility.manifest" />
+      <arg value="/out:${configuration}_${platform}\saslNTLM.dll.manifest" />
+    </exec>
+    <exec program="mt.exe">
+      <arg value="-nologo" />
+      <arg value="-manifest" />
+      <arg value="${configuration}_${platform}\saslNTLM.dll.manifest" />
       <arg value='/outputresource:"${configuration}_${platform}\saslNTLM.dll;#2"' />
     </exec>
 
@@ -338,6 +380,13 @@
       <arg value="-nologo" />
       <arg value="-manifest" />
       <arg value="${configuration}_${platform}\saslPLAIN.dll.manifest" />
+      <arg value="..\..\src\compatibility.manifest" />
+      <arg value="/out:${configuration}_${platform}\saslPLAIN.dll.manifest" />
+    </exec>
+    <exec program="mt.exe">
+      <arg value="-nologo" />
+      <arg value="-manifest" />
+      <arg value="${configuration}_${platform}\saslPLAIN.dll.manifest" />
       <arg value='/outputresource:"${configuration}_${platform}\saslPLAIN.dll;#2"' />
     </exec>
 
@@ -350,6 +399,13 @@
         <include name="${configuration}_${platform}\gssapi*.obj" />
       </sources>
     </link>
+    <exec program="mt.exe">
+      <arg value="-nologo" />
+      <arg value="-manifest" />
+      <arg value="${configuration}_${platform}\saslGSSAPI.dll.manifest" />
+      <arg value="..\..\src\compatibility.manifest" />
+      <arg value="/out:${configuration}_${platform}\saslGSSAPI.dll.manifest" />
+    </exec>
     <exec program="mt.exe">
       <arg value="-nologo" />
       <arg value="-manifest" />

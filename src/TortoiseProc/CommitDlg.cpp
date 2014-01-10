@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -1376,7 +1376,7 @@ bool CCommitDlg::HandleMenuItemClick(int cmd, CSciEdit * pSciEdit)
     if (cmd == m_nPopupPasteListCmd)
     {
         CString logmsg;
-        TCHAR buf[MAX_STATUS_STRING_LENGTH];
+        TCHAR buf[MAX_STATUS_STRING_LENGTH] = { 0 };
         int nListItems = m_ListCtrl.GetItemCount();
         for (int i=0; i<nListItems; ++i)
         {

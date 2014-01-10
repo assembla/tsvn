@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -370,7 +370,7 @@ int CBrowseFolder::BrowseCallBackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARA
     if (uMsg == BFFM_SELCHANGED)
     {
         // Set the status window to the currently selected path.
-        TCHAR szDir[MAX_PATH];
+        TCHAR szDir[MAX_PATH] = { 0 };
         if (SHGetPathFromIDList((PCIDLIST_ABSOLUTE)lParam, szDir))
         {
             SendMessage(hwnd,BFFM_SETSTATUSTEXT, 0, (LPARAM)szDir);

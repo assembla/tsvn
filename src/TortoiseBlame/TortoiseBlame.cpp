@@ -1,6 +1,6 @@
 // TortoiseBlame - a Viewer for Subversion Blames
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,12 +51,12 @@
 #pragma warning(disable:4127)       // conditional expression is constant
 
 // Global Variables:
-TCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
-TCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+TCHAR szTitle[MAX_LOADSTRING] = { 0 };                  // The title bar text
+TCHAR szWindowClass[MAX_LOADSTRING] = { 0 };            // the main window class name
 std::wstring szViewtitle;
 std::wstring szOrigPath;
 std::wstring szPegRev;
-TCHAR searchstringnotfound[MAX_LOADSTRING];
+TCHAR searchstringnotfound[MAX_LOADSTRING] = { 0 };
 
 const bool ShowDate = false;
 const bool ShowAuthor = true;
@@ -689,7 +689,7 @@ void TortoiseBlame::DoSearchNext()
 
 bool TortoiseBlame::DoSearch(LPTSTR what, DWORD flags)
 {
-    TCHAR szWhat[80];
+    TCHAR szWhat[80] = { 0 };
     int pos = (int)SendEditor(SCI_GETCURRENTPOS);
     int line = (int)SendEditor(SCI_LINEFROMPOSITION, pos);
     bool bFound = false;
@@ -706,7 +706,7 @@ bool TortoiseBlame::DoSearch(LPTSTR what, DWORD flags)
 
     int textSelStart = 0;
     int textSelEnd = 0;
-    TCHAR buf[20];
+    TCHAR buf[20] = { 0 };
     int i=0;
     for (i=line; (i<(int)m_authors.size())&&(!bFound); ++i)
     {
@@ -896,13 +896,13 @@ void TortoiseBlame::BlamePreviousRevision()
         }
     }
 
-    TCHAR bufStartRev[20];
+    TCHAR bufStartRev[20] = { 0 };
     _stprintf_s(bufStartRev, _T("%d"), nSmallestRevision);
 
-    TCHAR bufEndRev[20];
+    TCHAR bufEndRev[20] = { 0 };
     _stprintf_s(bufEndRev, _T("%d"), nRevisionTo);
 
-    TCHAR bufLine[20];
+    TCHAR bufLine[20] = { 0 };
     _stprintf_s(bufLine, _T("%d"), m_selectedLine+1); //using the current line is a good guess.
 
     tstring svnCmd = _T(" /command:blame ");
@@ -941,10 +941,10 @@ void TortoiseBlame::DiffPreviousRevision()
 
     LONG nRevisionFrom = nRevisionTo-1;
 
-    TCHAR bufStartRev[20];
+    TCHAR bufStartRev[20] = { 0 };
     _stprintf_s(bufStartRev, _T("%d"), nRevisionFrom);
 
-    TCHAR bufEndRev[20];
+    TCHAR bufEndRev[20] = { 0 };
     _stprintf_s(bufEndRev, _T("%d"), nRevisionTo);
 
     tstring svnCmd = _T(" /command:diff ");
@@ -967,7 +967,7 @@ void TortoiseBlame::DiffPreviousRevision()
 
 void TortoiseBlame::ShowLog()
 {
-    TCHAR bufRev[20];
+    TCHAR bufRev[20] = { 0 };
     _stprintf_s(bufRev, 20, _T("%d"), m_selectedOrigRev);
 
     tstring svnCmd = _T(" /command:log ");
@@ -1156,7 +1156,7 @@ INT_PTR CALLBACK TortoiseBlame::GotoDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wPar
                     HWND hEditCtrl = GetDlgItem(hwndDlg, IDC_LINENUMBER);
                     if (hEditCtrl)
                     {
-                        TCHAR buf[MAX_PATH];
+                        TCHAR buf[MAX_PATH] = { 0 };
                         if (::GetWindowText(hEditCtrl, buf, _countof(buf)))
                         {
                             m_gotoLine = _ttol(buf);
@@ -1184,7 +1184,7 @@ LONG TortoiseBlame::GetBlameWidth()
     CreateFont();
     HDC hDC = ::GetDC(wBlame);
     HFONT oldfont = (HFONT)::SelectObject(hDC, m_font);
-    TCHAR buf[MAX_PATH];
+    TCHAR buf[MAX_PATH] = { 0 };
     _stprintf_s(buf, _T("*%8ld "), 88888888);
     ::GetTextExtentPoint(hDC, buf, (int)_tcslen(buf), &width);
     m_revWidth = width.cx + BLAMESPACE;
@@ -1260,7 +1260,7 @@ void TortoiseBlame::DrawBlame(HDC hDC)
     LONG_PTR linesonscreen = SendEditor(SCI_LINESONSCREEN);
     LONG_PTR height = SendEditor(SCI_TEXTHEIGHT);
     LONG_PTR Y = 0;
-    TCHAR buf[MAX_PATH];
+    TCHAR buf[MAX_PATH] = { 0 };
     RECT rc;
     BOOL sel = FALSE;
     GetClientRect(wBlame, &rc);
@@ -1397,7 +1397,7 @@ void TortoiseBlame::DrawHeader(HDC hDC)
 
     RECT drawRc = rc;
 
-    TCHAR szText[MAX_LOADSTRING];
+    TCHAR szText[MAX_LOADSTRING] = { 0 };
     LoadString(app.hResource, IDS_HEADER_REVISION, szText, MAX_LOADSTRING);
     drawRc.left = LOCATOR_WIDTH;
     DrawText(hDC, szText, -1, &drawRc, DT_SINGLELINE|DT_VCENTER);
@@ -1611,7 +1611,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     }
     if ((blamefile[0]==0) || parser.HasKey(_T("?")) || parser.HasKey(_T("help")))
     {
-        TCHAR szInfo[MAX_LOADSTRING];
+        TCHAR szInfo[MAX_LOADSTRING] = { 0 };
         LoadString(app.hResource, IDS_COMMANDLINE_INFO, szInfo, MAX_LOADSTRING);
         MessageBox(NULL, szInfo, _T("TortoiseBlame"), MB_ICONERROR);
         langDLL.Close();
@@ -2115,7 +2115,7 @@ LRESULT CALLBACK WndBlameProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
                         {
                             if (!msg.empty())
                                 msg += _T("\n------------------\n");
-                            TCHAR revBuf[100];
+                            TCHAR revBuf[100] = { 0 };
                             _stprintf_s(revBuf, _T("merged in r%ld:\n----\n"), origrev);
                             msg += revBuf;
                             msg += iter2->second;

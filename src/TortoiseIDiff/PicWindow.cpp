@@ -1,6 +1,6 @@
 // TortoiseIDiff - an image diff viewer in TortoiseSVN
 
-// Copyright (C) 2006-2012 - TortoiseSVN
+// Copyright (C) 2006-2012, 2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -338,7 +338,7 @@ LRESULT CALLBACK CPicWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam, 
     case WM_DROPFILES:
         {
             HDROP hDrop = (HDROP)wParam;
-            TCHAR szFileName[MAX_PATH];
+            TCHAR szFileName[MAX_PATH] = { 0 };
             // we only use the first file dropped (if multiple files are dropped)
             if (DragQueryFile(hDrop, 0, szFileName, _countof(szFileName)))
             {
@@ -594,7 +594,7 @@ void CPicWindow::DrawViewTitle(HDC hDC, RECT * rect)
 
     if (HasMultipleImages())
     {
-        TCHAR buf[MAX_PATH];
+        TCHAR buf[MAX_PATH] = { 0 };
         if (nFrames > 1)
             _stprintf_s(buf, (const TCHAR *)ResString(hResource, IDS_DIMENSIONSANDFRAMES), nCurrentFrame, nFrames);
         else

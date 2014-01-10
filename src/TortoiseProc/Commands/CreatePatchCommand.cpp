@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2013 - TortoiseSVN
+// Copyright (C) 2007-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -300,7 +300,7 @@ bool CreatePatchCommand::CreatePatch(const CTSVNPath& root, const CTSVNPathList&
         if(inFile)
         {
             CStringA sClipdata;
-            char chunkBuffer[16384];
+            char chunkBuffer[16384] = { 0 };
             while(!feof(inFile))
             {
                 size_t readLength = fread(chunkBuffer, 1, sizeof(chunkBuffer), inFile);

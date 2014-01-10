@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -245,8 +245,8 @@ void CSVNPropertyPage::Time64ToTimeString(__time64_t time, TCHAR * buf, size_t b
 {
     struct tm newtime;
     SYSTEMTIME systime;
-    TCHAR timebuf[MAX_STRING_LENGTH];
-    TCHAR datebuf[MAX_STRING_LENGTH];
+    TCHAR timebuf[MAX_STRING_LENGTH] = { 0 };
+    TCHAR datebuf[MAX_STRING_LENGTH] = { 0 };
 
     bool bUseSystemLocale = !!(DWORD)CRegStdDWORD(_T("Software\\TortoiseSVN\\UseSystemLocaleForDates"), TRUE);
     LCID locale = bUseSystemLocale ? MAKELCID(MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), SORT_DEFAULT) : (WORD)CRegStdDWORD(_T("Software\\TortoiseSVN\\LanguageID"), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT));
@@ -291,7 +291,7 @@ void CSVNPropertyPage::InitWorkfileView()
         if (svn.GetStatus(CTSVNPath(filenames.front().c_str()))>(-2))
         {
             const SVNInfoData * infodata = info.GetFirstFileInfo(CTSVNPath(filenames.front().c_str()), SVNRev(), SVNRev());
-            TCHAR buf[MAX_STRING_LENGTH];
+            TCHAR buf[MAX_STRING_LENGTH] = { 0 };
             __time64_t  time;
             if (svn.status->versioned)
             {
@@ -434,7 +434,7 @@ void CSVNPropertyPage::InitWorkfileView()
             if (svn.status->repos_relpath)
             {
                 CPathUtils::Unescape((char*)svn.status->repos_relpath);
-                TCHAR tbuf[MAX_STRING_LENGTH];
+                TCHAR tbuf[MAX_STRING_LENGTH] = { 0 };
                 _tcsncpy_s(tbuf, CUnicodeUtils::StdGetUnicode(svn.status->repos_relpath).c_str(), _countof(tbuf)-1);
                 TCHAR * ptr = _tcsrchr(tbuf, '/');
                 if (ptr != 0)

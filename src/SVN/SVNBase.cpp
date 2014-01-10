@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2010-2013 - TortoiseSVN
+// Copyright (C) 2010-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -69,7 +69,7 @@ CString SVNBase::GetErrorString(svn_error_t * Err, int wrap /* = 80 */)
 {
     CString msg;
     CString temp;
-    char errbuf[256];
+    char errbuf[256] = { 0 };
 
     if (Err != NULL)
     {
@@ -254,8 +254,8 @@ int SVNBase::ShowErrorDialog( HWND hParent, const CTSVNPath& wcPath, const CStri
             {
                 // run cleanup
                 CString sCmd;
-                sCmd.Format(_T("/command:cleanup /path:\"%s\" /cleanup /nodlg /hwnd:%ld"),
-                    wcPath.GetDirectory().GetWinPath(), hParent);
+                sCmd.Format(_T("/command:cleanup /path:\"%s\" /cleanup /nodlg /hwnd:%p"),
+                    wcPath.GetDirectory().GetWinPath(), (void*)hParent);
                 CAppUtils::RunTortoiseProc(sCmd);
             }
 #endif

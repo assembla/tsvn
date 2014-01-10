@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2008, 2010-2013 - TortoiseSVN
+// Copyright (C) 2003-2008, 2010-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -159,7 +159,7 @@ void CShellUpdater::UpdateShell()
 bool CShellUpdater::RebuildIcons()
 {
     const int BUFFER_SIZE = 1024;
-    TCHAR buf[BUFFER_SIZE];
+    TCHAR buf[BUFFER_SIZE] = { 0 };
     HKEY hRegKey = 0;
     DWORD dwRegValue;
     DWORD dwRegValueTemp;

@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -402,7 +402,7 @@ int CStatGraphDlg::GetCalendarWeek(const CTime& time)
     int iYear = time.GetYear();
     int iFirstDayOfWeek = 0;
     int iFirstWeekOfYear = 0;
-    TCHAR loc[2];
+    TCHAR loc[2] = { 0 };
     GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_IFIRSTDAYOFWEEK, loc, _countof(loc));
     iFirstDayOfWeek = int(loc[0]-'0');
     GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_IFIRSTWEEKOFYEAR, loc, _countof(loc));
@@ -957,12 +957,12 @@ void CStatGraphDlg::ShowStats()
     SetDlgItemText(IDC_NUMWEEKVALUE, number);
     number.Format(_T("%ld"), nAuthors);
     SetDlgItemText(IDC_NUMAUTHORVALUE, number);
-    number.Format(_T("%ld"), m_nTotalCommits);
+    number.Format(_T("%Id"), m_nTotalCommits);
     SetDlgItemText(IDC_NUMCOMMITSVALUE, number);
     number.Format(_T("%ld"), m_nTotalFileChanges);
     SetDlgItemText(IDC_NUMFILECHANGESVALUE, number);
 
-    number.Format(_T("%ld"), m_parAuthors->GetCount() / nWeeks);
+    number.Format(_T("%Id"), m_parAuthors->GetCount() / nWeeks);
     SetDlgItemText(IDC_COMMITSEACHWEEKAVG, number);
     number.Format(_T("%ld"), nCommitsMax);
     SetDlgItemText(IDC_COMMITSEACHWEEKMAX, number);
@@ -1433,7 +1433,7 @@ void CStatGraphDlg::SaveGraph(CString sFilename)
         }
         catch (CException * pE)
         {
-            TCHAR szErrorMsg[2048];
+            TCHAR szErrorMsg[2048] = { 0 };
             pE->GetErrorMessage(szErrorMsg, 2048);
             pE->Delete();
             ::MessageBox(m_hWnd, szErrorMsg, _T("TortoiseSVN"), MB_ICONERROR);

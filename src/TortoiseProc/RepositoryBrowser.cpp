@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -4194,7 +4194,7 @@ bool CRepositoryBrowser::StringToWidthArray(const CString& WidthString, int Widt
 CString CRepositoryBrowser::WidthArrayToString(int WidthArray[])
 {
     CString sResult;
-    TCHAR buf[10];
+    TCHAR buf[10] = { 0 };
     for (int i=0; i<7; ++i)
     {
         _stprintf_s(buf, _T("%08X"), WidthArray[i]);
@@ -4700,7 +4700,7 @@ void CRepositoryBrowser::SetListItemInfo( int index, const CItem * it )
     }
 
     // date
-    TCHAR date_native[SVN_DATE_BUFFER];
+    TCHAR date_native[SVN_DATE_BUFFER] = { 0 };
     if ((it->time == 0) && (it->is_external))
         date_native[0] = 0;
     else

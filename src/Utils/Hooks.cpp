@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2013 - TortoiseSVN
+// Copyright (C) 2007-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -508,9 +508,9 @@ DWORD CHooks::RunScript(CString cmd, const CTSVNPathList& paths, CString& error,
     error.Empty();
 
     // Create Temp File for redirection
-    TCHAR szTempPath[MAX_PATH];
-    TCHAR szOutput[MAX_PATH];
-    TCHAR szErr[MAX_PATH];
+    TCHAR szTempPath[MAX_PATH] = { 0 };
+    TCHAR szOutput[MAX_PATH] = { 0 };
+    TCHAR szErr[MAX_PATH] = { 0 };
     GetTempPath(_countof(szTempPath),szTempPath);
     GetTempFileName(szTempPath, _T("svn"), 0, szErr);
 

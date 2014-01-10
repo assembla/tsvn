@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2012-2013 - TortoiseSVN
+// Copyright (C) 2012-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -256,7 +256,7 @@ public:
     CCrashReportTSVN(LPCTSTR appname, bool bOwnProcess = true)
         : m_nInstallStatus(0)
     {
-        char s_month[6];
+        char s_month[6] = { 0 };
         int month, day, year;
         struct tm t = {0};
         static const char month_names[] = "JanFebMarAprMayJunJulAugSepOctNovDec";

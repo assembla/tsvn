@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -99,7 +99,7 @@ BOOL CSetMainPage::OnInitDialog()
     DialogEnableWindow(IDC_CREATELIB, SysInfo::Instance().IsWin7OrLater());
 
     // set up the language selecting combobox
-    TCHAR buf[MAX_PATH];
+    TCHAR buf[MAX_PATH] = { 0 };
     GetLocaleInfo(1033, LOCALE_SNATIVELANGNAME, buf, _countof(buf));
     m_LanguageCombo.AddString(buf);
     m_LanguageCombo.SetItemData(0, 1033);
@@ -177,7 +177,7 @@ BOOL CSetMainPage::OnApply()
 
 void CSetMainPage::OnBnClickedEditconfig()
 {
-    TCHAR buf[MAX_PATH];
+    TCHAR buf[MAX_PATH] = { 0 };
     SVN::EnsureConfigFile();
     SHGetFolderPath(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, buf);
     CString path = buf;
@@ -187,7 +187,7 @@ void CSetMainPage::OnBnClickedEditconfig()
 
 void CSetMainPage::OnBnClickedChecknewerbutton()
 {
-    TCHAR com[MAX_PATH+100];
+    TCHAR com[MAX_PATH + 100] = { 0 };
     GetModuleFileName(NULL, com, MAX_PATH);
 
     CCreateProcessHelper::CreateProcessDetached(com, L" /command:updatecheck /visible");

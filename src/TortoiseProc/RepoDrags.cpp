@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2008, 2010-2012 - TortoiseSVN
+// Copyright (C) 2003-2008, 2010-2012, 2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -378,7 +378,7 @@ void CBaseDropTarget::HandleDropFormats(FORMATETC* pFmtEtc, STGMEDIUM& medium, D
         if(hDrop != NULL)
         {
             CTSVNPathList urlList;
-            TCHAR szFileName[MAX_PATH];
+            TCHAR szFileName[MAX_PATH] = { 0 };
 
             UINT cFiles = DragQueryFile(hDrop, 0xFFFFFFFF, NULL, 0);
             for(UINT i = 0; i < cFiles; ++i)
