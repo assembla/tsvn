@@ -12,7 +12,7 @@
 # Translators:
 # Arith Hsu <arithmandar@gmail.com>, 2011,2013
 # binota <binota@binota.org>, 2013
-# zcecil <zcecil@csie.org>, 2013
+# zcecil <zcecil@csie.org>, 2013-2014
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Nick Vrvilo <nick@vrvilo.com>, 2011
 # zcecil <zcecil@csie.org>, 2013
@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-12-18 08:25+0000\n"
+"PO-Revision-Date: 2014-01-11 14:10+0000\n"
 "Last-Translator: zcecil <zcecil@csie.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/"
 "tortoisesvn/language/zh_TW/)\n"
@@ -14019,11 +14019,28 @@ msgstr "{BugTraq}"
 #~ msgid "Add to Bookmarks"
 #~ msgstr "新增至書籤"
 
+#~ msgid "Blocks"
+#~ msgstr "區塊"
+
 #~ msgid "Bookmarks"
 #~ msgstr "書籤"
 
 #~ msgid "C&ompare URLs (content only)"
 #~ msgstr "比對 URL(僅內容) (&O)"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "The tagged revision of the external is left as is."
+#~ msgstr ""
+#~ "取消\n"
+#~ "標記的外部連結版號不作變更."
+
+#~ msgid ""
+#~ "Change the tagged revision\n"
+#~ "The svn:external property of the parent folder is changed accordingly."
+#~ msgstr ""
+#~ "修改標記的版號\n"
+#~ "上層目錄的 svn:external 屬性會有對應的改變."
 
 #~ msgid "Check-Commit Hook"
 #~ msgstr "送交檢查掛勾"
@@ -14043,6 +14060,9 @@ msgstr "{BugTraq}"
 #~ msgid "Count: %u matches."
 #~ msgstr "總計 %u 筆符合."
 
+#~ msgid "Diff"
+#~ msgstr "比對差異"
+
 #~ msgid "Diff later"
 #~ msgstr "稍後比對差異"
 
@@ -14060,6 +14080,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "Filenames"
 #~ msgstr "檔案名稱"
+
+#~ msgid "Filter:"
+#~ msgstr "過濾條件:"
 
 #~ msgid "Find: Can't find the text \"%s\""
 #~ msgstr "搜尋: 找不到文字 '%s'"
@@ -14198,6 +14221,11 @@ msgstr "{BugTraq}"
 #~ msgid "Show multiple &changes... (content only)"
 #~ msgstr "顯示多筆變更 (僅內容)(&C)..."
 
+#~ msgid ""
+#~ "Shows a unified diff of all changes of the path and those below, "
+#~ "including property changes."
+#~ msgstr "顯示包含此路徑及以下列表中所有變更的單一差異檔, 屬性變更也會列出."
+
 #~ msgid "Smart tab char"
 #~ msgstr "智慧 Tab"
 
@@ -14223,6 +14251,9 @@ msgstr "{BugTraq}"
 #~ msgstr ""
 #~ "內文是相同的, 但檔案並不完全相符!\n"
 #~ "找到以下的差異:"
+
+#~ msgid "Unified Diff"
+#~ msgstr "單一差異檔"
 
 #~ msgid "Urls"
 #~ msgstr "URL"
@@ -14250,6 +14281,15 @@ msgstr "{BugTraq}"
 #~ msgid "Whitespace changes (tabs, spaces)"
 #~ msgstr "空白字元的變更(tab或空白)"
 
+#~ msgid ""
+#~ "You've committed changes to external item that is tagged to a specific "
+#~ "revision.\n"
+#~ "Do you want to change the tagged revision now to the just committed "
+#~ "revision?"
+#~ msgstr ""
+#~ "您對外部連結項目送交了變更. 此外部項目目前標記為特定的版號.\n"
+#~ "要更新標記中的版號為最新的版本嗎?"
+
 #~ msgid "all information"
 #~ msgstr "全部資訊"
 
@@ -14273,6 +14313,9 @@ msgstr "{BugTraq}"
 
 #~ msgid "relative paths"
 #~ msgstr "相對路徑"
+
+#~ msgid "tagging externals"
+#~ msgstr "正在標記外部連結"
 
 #~ msgid "weeks"
 #~ msgstr "週"

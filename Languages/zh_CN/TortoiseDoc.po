@@ -16,7 +16,7 @@
 # Gongong <gongong83@gmail.com>, 2013
 # Hong Xu <icehong@gmail.com>, 2012
 # coxxs <hxx107@gmail.com>, 2011
-# Gones <liejie050911@163.com>, 2013
+# Gones <liejie050911@163.com>, 2013-2014
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Nick Vrvilo <nick@vrvilo.com>, 2012
 # ninjasai <ninjasai@gmail.com>, 2011
@@ -31,8 +31,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-12-18 08:20+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2014-01-01 15:30+0000\n"
+"Last-Translator: Gones <liejie050911@163.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/"
 "tortoisesvn/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -17480,6 +17480,9 @@ msgid ""
 "the repository. If you would prefer TortoiseSVN to create a conflict in such "
 "situations, set this value to <literal>false</literal>."
 msgstr ""
+"如果版本更新从版本库增加了一个新的文件,而此文件在本地是非版本控制的文件,默认"
+"的处理是保留本地文件,同时把它当作新文件的一个(可能的)修改版本.如果更希望"
+"TortoiseSVN在此情况下产生一个冲突,设置参数值为 <literal>false</literal>."
 
 #. (para)
 msgid ""
@@ -17511,6 +17514,8 @@ msgid ""
 "TortoiseSVN command is running (e.g. Update, Commit, ...) then set this "
 "value to <literal>true</literal>."
 msgstr ""
+"当另一个TortoiseSVN命令(如,更新,提交,...)正在执行的时候,如果不希望图形管理器"
+"更新TortoiseSVN图标状态,可以设置参数值为<literal>true</literal>."
 
 #. (para)
 msgid ""
@@ -17529,6 +17534,9 @@ msgid ""
 "<literal>true</literal>. Note that the extra columns are only available in "
 "XP. Vista and later doesn't support that feature any more."
 msgstr ""
+"TortoiseSVN增加到明细查看窗口里额外的列,通常只在工作副本显示.如果希望到处都可"
+"以访问,而不仅仅是在工作副本,设置参数值为<literal>true</literal>. 需要注意的"
+"是,多余的列只在XP操作系统可用,Vista和后续的版本不再支持这个特性."
 
 #. (para)
 msgid ""
@@ -17756,6 +17764,9 @@ msgid ""
 "with that info. If you prefer the old behavior back where a dialog pops up "
 "notifying you about the update, set this value to <literal>true</literal>."
 msgstr ""
+"不管是否有新版本可用,TortoiseSVN默认每周检查一次更新.如果有可用的更新,提交对"
+"话框会显示链接信息.如果更希望按照以前的方式来显示,也就是弹出对话框通知有更新,"
+"设置参数值为 <literal>true</literal>."
 
 #. (para)
 msgid ""
@@ -17825,6 +17836,8 @@ msgid ""
 "company admins who don't want their users to update TortoiseSVN until they "
 "approve it."
 msgstr ""
+"这个值包含了URL,TortoiseSVN尝试从这个URL下载文本文件,以确定是否有可用的更新."
+"这对于公司的管理员来说可能有用.他们更希望核准后才让用户更新TortoiseSVN."
 
 #. (para)
 msgid ""
@@ -17832,6 +17845,8 @@ msgid ""
 "week. If you don't want TortoiseSVN to do this check, set this value to "
 "<literal>false</literal>."
 msgstr ""
+"不管是否有新版本可用,TortoiseSVN默认每周检查一次更新.如果不希望TortoiseSVN做"
+"此检查,设置参数值为<literal>false</literal>."
 
 #. (title)
 msgid "Exporting TSVN Settings"

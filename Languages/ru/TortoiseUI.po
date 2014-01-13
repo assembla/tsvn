@@ -27,8 +27,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2013-12-17 08:29+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2014-01-09 14:20+0000\n"
+"Last-Translator: Nikolay Osinin <nikolay.osinin@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -14371,11 +14371,28 @@ msgstr "{СОП}"
 #~ msgid "Add to Bookmarks"
 #~ msgstr "Добавить в закладки"
 
+#~ msgid "Blocks"
+#~ msgstr "Блоки"
+
 #~ msgid "Bookmarks"
 #~ msgstr "Закладки"
 
 #~ msgid "C&ompare URLs (content only)"
 #~ msgstr "С&равнить URL (только содержимое)"
+
+#~ msgid ""
+#~ "Cancel\n"
+#~ "The tagged revision of the external is left as is."
+#~ msgstr ""
+#~ "Отменить\n"
+#~ "Отмеченная ревизия внешнего включения останется как есть."
+
+#~ msgid ""
+#~ "Change the tagged revision\n"
+#~ "The svn:external property of the parent folder is changed accordingly."
+#~ msgstr ""
+#~ "Изменить отмеченную ревизию\n"
+#~ "Свойство svn:external родительской папки изменяется соответственно."
 
 #~ msgid "Check-Commit Hook"
 #~ msgstr "Ловушка проверки фиксации"
@@ -14395,6 +14412,9 @@ msgstr "{СОП}"
 #~ msgid "Count: %u matches."
 #~ msgstr "Подсчёт: %u совпадений."
 
+#~ msgid "Diff"
+#~ msgstr "Различие"
+
 #~ msgid "Diff later"
 #~ msgstr "Сравнить позже"
 
@@ -14412,6 +14432,9 @@ msgstr "{СОП}"
 
 #~ msgid "Filenames"
 #~ msgstr "Имена файлов"
+
+#~ msgid "Filter:"
+#~ msgstr "Фильтр:"
 
 #~ msgid "Find: Can't find the text \"%s\""
 #~ msgstr "Поиск: Не могу найти текст \"%s\""
@@ -14555,6 +14578,16 @@ msgstr "{СОП}"
 #~ msgstr "Показать несколько &изменений... (только содержимое)"
 
 #~ msgid ""
+#~ "Shows a unified diff of all changes of the path and those below, "
+#~ "including property changes."
+#~ msgstr ""
+#~ "Показывает объединённые различия всех изменений по пути и ниже, в том "
+#~ "числе и изменения свойств."
+
+#~ msgid "Smart tab char"
+#~ msgstr "Символ \"умной\" табуляции"
+
+#~ msgid ""
 #~ "Starts the diff viewer with the currently selected file and the one "
 #~ "marked before for diffing later."
 #~ msgstr ""
@@ -14578,14 +14611,46 @@ msgstr "{СОП}"
 #~ "Текст идентичный, но файлы не совпадают!\r\n"
 #~ "Найдены следующие различия:"
 
+#~ msgid "Unified Diff"
+#~ msgstr "Объединённые Различия"
+
 #~ msgid "Urls"
 #~ msgstr "Urls"
 
 #~ msgid "Use Task Dialog"
 #~ msgstr "Использовать диалог задач"
 
+#~ msgid "Use spaces"
+#~ msgstr "Использовать пробелы"
+
+#~ msgid ""
+#~ "When selected, Spaces will be used instead of tab\n"
+#~ "Use spaces"
+#~ msgstr ""
+#~ "Если выбрано, то вместо табуляции будут использоваться пробелы\n"
+#~ "Использовать пробелы"
+
+#~ msgid ""
+#~ "When selected, it tries to infer tab / spaces to use\n"
+#~ "Smart tab char"
+#~ msgstr ""
+#~ "Если выбрано, то пробует определить, что использовать — табуляцию или "
+#~ "пробелы\n"
+#~ "Символ \"умной\" табуляции"
+
 #~ msgid "Whitespace changes (tabs, spaces)"
 #~ msgstr "Изменения непечатаемых знаков (символы табуляции, пробелы)"
+
+#~ msgid ""
+#~ "You've committed changes to external item that is tagged to a specific "
+#~ "revision.\n"
+#~ "Do you want to change the tagged revision now to the just committed "
+#~ "revision?"
+#~ msgstr ""
+#~ "Вы зафиксировали изменения во внешний элемент, который привязан к "
+#~ "определенной ревизии.\n"
+#~ "Вы хотите сейчас изменить помеченную ревизию на только что "
+#~ "зафиксированную ревизию?"
 
 #~ msgid "all information"
 #~ msgstr "вся информация"
@@ -14610,6 +14675,9 @@ msgstr "{СОП}"
 
 #~ msgid "relative paths"
 #~ msgstr "относительные пути"
+
+#~ msgid "tagging externals"
+#~ msgstr "пометка внешних"
 
 #~ msgid "weeks"
 #~ msgstr "недель"
