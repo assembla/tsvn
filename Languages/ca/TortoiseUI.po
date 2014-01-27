@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2014-01-14 10:18+0000\n"
-"Last-Translator: jmonguillot <jmonguillot@gmail.com>\n"
+"PO-Revision-Date: 2014-01-27 08:28+0000\n"
+"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr "%1 conté un objecte no esperat."
 #. Resource IDs: (3867)
 #, c-format
 msgid "%1 contains an incorrect path."
-msgstr "%1 conté un path incorrecte."
+msgstr "%1 conté un camí incorrecte."
 
 #. Resource IDs: (3868)
 #, c-format
@@ -182,7 +182,7 @@ msgid ""
 msgstr ""
 "%1\n"
 "No es troba el fitxer.\n"
-"Si us plau verifiqueu que el path i el nom són c orrectes."
+"Si us plau verifica que el camí i el nom són correctes."
 
 #. Resource IDs: (357)
 #, c-format
@@ -218,7 +218,7 @@ msgstr "%ld de %ld"
 #. Resource IDs: (563)
 #, c-format
 msgid "%ld paths"
-msgstr "%ld paths"
+msgstr "%ld camins"
 
 #. Resource IDs: (272)
 #, c-format
@@ -602,7 +602,7 @@ msgstr "&Categoria:"
 
 #. Resource IDs: (65535)
 msgid "&Choose commands from:"
-msgstr "&Escull comandes de:"
+msgstr "&Escull ordres de:"
 
 #. Resource IDs: (1606)
 msgid "&Choose items..."
@@ -630,7 +630,7 @@ msgstr "Nom d'usuari del &col·laborador"
 
 #. Resource IDs: (65535)
 msgid "&Command:"
-msgstr "&Comanda:"
+msgstr "&Ordre:"
 
 #. Resource IDs: (8)
 msgid "&Commit..."
@@ -1037,7 +1037,7 @@ msgstr "&Fusiona"
 
 #. Resource IDs: (32786)
 msgid "&Merge paths"
-msgstr "Paths de &Fusiona"
+msgstr "Camins de &Fusiona"
 
 #. Resource IDs: (9)
 msgid "&Merge..."
@@ -1358,7 +1358,7 @@ msgstr "Nom d'usuari de &Subversion"
 
 #. Resource IDs: (276)
 msgid "&Switch WC to path and revision"
-msgstr "&Canvia còpia de treball a path i revisió"
+msgstr "&Canvia còpia de treball a camí i revisió"
 
 #. Resource IDs: (275)
 msgid "&Switch WC to path@HEAD"
@@ -1410,7 +1410,7 @@ msgstr "&Cap a la URL:"
 
 #. Resource IDs: (1305, 1384)
 msgid "&To path:"
-msgstr "&A la ruta:"
+msgstr "&Al camí:"
 
 #. Resource IDs: (1495)
 msgid "&To: (end URL and revision of the range to merge)"
@@ -1490,7 +1490,7 @@ msgstr "&Actualitza a revisió..."
 
 #. Resource IDs: (1184)
 msgid "&Use auto-completion of file paths and keywords"
-msgstr "&Usar autocompletació de paths de fitxers i paraules clau"
+msgstr "&Usar autocompletació de camins de fitxers i paraules clau"
 
 #. Resource IDs: (1432)
 msgid "&Use recycle bin"
@@ -1531,7 +1531,7 @@ msgid ""
 "is not a valid URL or path!"
 msgstr ""
 "'%s'\n"
-"URL o path invàlids"
+"URL o camí invàlids"
 
 #. Resource IDs: (338)
 msgid ""
@@ -1740,11 +1740,11 @@ msgid ""
 "If you add an '*' or no char at all at the end of a path, then all files and "
 "subdirs inside that path are included too."
 msgstr ""
-"Una llista de paths separats per salts de línia pels quals es mostren icones "
-"superposades .\n"
-"Afegint el caràcter '?' al final del path , només s'inclourà aquest path. \n"
-"Afegint el caràcter '*' o cap caràcter al final del path, tots els fitxers i "
-"subdirectoris dins d'aquest path també s'inclouen."
+"Una llista de camins separats per salts de línia pels quals es mostren "
+"icones superposades .\n"
+"Afegint el caràcter '?' al final del camí, només s'inclourà aquest camí. \n"
+"Afegint el caràcter '*' o cap caràcter al final del camí, tots els fitxers i "
+"subdirectoris dins d'aquest camí també s'inclouen."
 
 #. Resource IDs: (197)
 msgid ""
@@ -1753,10 +1753,10 @@ msgid ""
 "inside that path are excluded too.\r\n"
 "An empty list will allow the context menu on all paths."
 msgstr ""
-"Una llista de paths per la qual no es mostra el menú.\r\n"
-"Afegint un caracter '*'  al final del path, tots els fitxers i subdirectoris "
-"dins d'aquest són també exclosos.\r\n"
-"Una llista buida permetrà sobreposicions en tots els paths."
+"Una llista de camins per la qual no es mostra el menú.\n"
+"Afegint un caracter '*' al final del camí, tots els fitxers i subdirectoris "
+"dins d'aquest són també exclosos.\n"
+"Una llista buida permetrà sobreposicions en tots els camins."
 
 #. Resource IDs: (194)
 msgid ""
@@ -1767,12 +1767,12 @@ msgid ""
 "subdirs inside that path are excluded too.\r\n"
 "An empty list will allow overlays on all paths."
 msgstr ""
-"Una llista de paths separats per salts de línia pels quals no es mostren "
+"Una llista de camins separats per salts de línia pels quals no es mostren "
 "icones superposades. \n"
-"Afegint el caràcter '?' al final del path , només s'exclourà aquest path. \n"
-"Afegint el caràcter '*' o cap caràcter al final del path, tots els fitxers i "
-"subdirectoris dins d'aquest path també s'exclouen. \n"
-"Una llista buida permetrà superposicions a tots els paths."
+"Afegint el caràcter '?' al final del camí, només s'exclourà aquest camí. \n"
+"Afegint el caràcter '*' o cap caràcter al final del camí, tots els fitxers i "
+"subdirectoris dins d'aquest camí també s'exclouen. \n"
+"Una llista buida permetrà superposicions a tots els camins."
 
 #. Resource IDs: (90)
 msgid ""
@@ -1782,8 +1782,8 @@ msgid ""
 "\n"
 "If you are not sure what to do, try a switch operation first."
 msgstr ""
-"Un trasllat només cal si ha canviat el path al repositori.\n"
-"Canviar a un path diferent dins del repositori es fa amb una operació de "
+"Un trasllat només cal si ha canviat el camí al repositori.\n"
+"Canviar a un camí diferent dins del repositori es fa amb una operació de "
 "canvi.\n"
 "\n"
 "Si no estàs segur del que vols fer, prova primer amb una operació de canvi."
@@ -1801,7 +1801,7 @@ msgid ""
 "See the <a href=\"http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%"
 "29.aspx\">documentation</a> from Microsoft about this."
 msgstr ""
-"Un path correcte a Windows no ha de contenir '<>|\"?*:' o algun dels "
+"Un camí correcte a Windows no ha de contenir '<>|\"?*:' o algun dels "
 "següents noms de dispositiu:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\n"
 "Consulta la <a href=\"http://msdn.microsoft.com/en-us/library/aa365247%"
@@ -2072,7 +2072,7 @@ msgstr "Tot"
 
 #. Resource IDs: (1007)
 msgid "All Commands"
-msgstr "Totes les Comandes"
+msgstr "Totes les Ordres"
 
 #. Resource IDs: (3841)
 msgid "All Files (*.*)"
@@ -2172,11 +2172,11 @@ msgid ""
 "%base : the base file\r\n"
 "%mine : the modified file"
 msgstr ""
-"Un programa extern utilitzat\r\n"
-"per comparar diferents revisions de fitxers\r\n"
-"\r\n"
-"Podeu especificar els següents paràmetres al path:\r\n"
-"%base : fitxer base\r\n"
+"Un programa extern utilitzat\n"
+"per comparar diferents revisions de fitxers\n"
+"\n"
+"Podeu especificar els següents paràmetres al camí:\n"
+"%base : fitxer base\n"
 "%mine : fitxer modificat"
 
 #. Resource IDs: (79)
@@ -2191,13 +2191,13 @@ msgid ""
 "%mine : your own file, with your changes\r\n"
 "%base : the original file without your changes"
 msgstr ""
-"Un programa extern utilitzat\r\n"
-"per comparar diferents revisions de fitxers\r\n"
-"\r\n"
-"Podeu especificar els següents paràmetres al path:\r\n"
-"%merged : fitxer amb conflicte, lloc on desar\r\n"
-"%theirs : fitxer tal com és al repositor\r\n"
-"%mine : el vostre fitxer, amb els canvis que has fet\r\n"
+"Un programa extern utilitzat\n"
+"per comparar diferents revisions de fitxers\n"
+"\n"
+"Podeu especificar els següents paràmetres al camí:\n"
+"%merged : fitxer amb conflicte, lloc on desar\n"
+"%theirs : fitxer tal com és al repositor\n"
+"%mine : el vostre fitxer, amb els canvis que has fet\n"
 "%base : fitxer original sense els vostres canvis"
 
 #. Resource IDs: (3867)
@@ -2508,7 +2508,8 @@ msgstr ""
 msgid ""
 "Both the path to the patch file and the target path must be absolute paths!"
 msgstr ""
-"Tant el path del fitxer de pedaç com el path destí han de ser paths absoluts!"
+"Tant el camí del fitxer de pedaç com el camí destí han de ser camins "
+"absoluts!"
 
 #. Resource IDs: (188)
 msgid "Bottom View:"
@@ -2754,7 +2755,7 @@ msgid ""
 "Go back and enter an issue number."
 msgstr ""
 "Cancel·lar\n"
-"Torna i introdueix un número de tema."
+"Torna i introdueix un número d'incidència."
 
 #. Resource IDs: (90)
 msgid ""
@@ -2770,7 +2771,7 @@ msgid ""
 "I will enter a different path/URL."
 msgstr ""
 "Cancel·lar\n"
-"Introduiré un path/URL diferent."
+"Introduiré un camí/URL diferent."
 
 #. Resource IDs: (89)
 msgid ""
@@ -3056,7 +3057,7 @@ msgstr ""
 
 #. Resource IDs: (251)
 msgid "Check the path and/or URL you've entered."
-msgstr "Comprova el  path i/o la URL que has introduit."
+msgstr "Comprova el camí i/o la URL que has introduït."
 
 #. Resource IDs: (194)
 msgid ""
@@ -3144,7 +3145,7 @@ msgid ""
 "Cleanup failed to process the following paths:\n"
 "%s"
 msgstr ""
-"Cleanup failed to process the following paths:\n"
+"Neteja no ha pogut processar els següents camins:\n"
 "%s"
 
 #. Resource IDs: (79)
@@ -3153,7 +3154,7 @@ msgid ""
 "Cleanup has successfully processed the following paths:\n"
 "%s"
 msgstr ""
-"Neteja ha processat satisfactòriament els següents paths:\n"
+"Neteja ha processat satisfactòriament els següents camins:\n"
 "%s"
 
 #. Resource IDs: (9)
@@ -3350,15 +3351,15 @@ msgstr "Coman&des:"
 
 #. Resource IDs: (220, 1002)
 msgid "Command"
-msgstr "Comanda"
+msgstr "Ordre"
 
 #. Resource IDs: (198)
 msgid "Command Line"
-msgstr "Línia de comandes"
+msgstr "Línia d'ordres"
 
 #. Resource IDs: (1336)
 msgid "Command Line To Execute:"
-msgstr "Comanda a Executar:"
+msgstr "Línia d'ordre A Executar:"
 
 #. Resource IDs: (590)
 #, c-format
@@ -3369,7 +3370,7 @@ msgid ""
 "working copy root."
 msgstr ""
 "Línia d'ordres a executar:\n"
-"Per especificar un path dins d'una còpia de treball, especifica la url en el "
+"Per especificar un camí dins d'una còpia de treball, especifica la url en el "
 "repositori amb la url arrel del repositori com %REPOROOT%, o %REPOROOT+% "
 "dmés profund a l'arrel de la còpia de treball."
 
@@ -3379,11 +3380,11 @@ msgstr "La línia d'ordres ha fallat - Actualització necessària"
 
 #. Resource IDs: (3857)
 msgid "Command failed."
-msgstr "La comanda ha fallat."
+msgstr "L'ordre ha fallat."
 
 #. Resource IDs: (16104)
 msgid "Commands"
-msgstr "Comandes"
+msgstr "Ordres"
 
 #. Resource IDs: (77, 135, 229, 1083)
 msgid "Commit"
@@ -3728,7 +3729,7 @@ msgstr "Copia el missatge d'error al portapapers"
 
 #. Resource IDs: (76)
 msgid "Copy from path"
-msgstr "Còpia del path"
+msgstr "Còpia del camí"
 
 #. Resource IDs: (103)
 msgid "Copy items to here"
@@ -4160,7 +4161,7 @@ msgstr "Estructura de directoris per defecte creada satisfactòriament!"
 
 #. Resource IDs: (1515)
 msgid "Default path:"
-msgstr "Path per defecte:"
+msgstr "Camí per defecte:"
 
 #. Resource IDs: (1064)
 msgid "Default to UTF-8 encoding"
@@ -4342,7 +4343,7 @@ msgstr "Diferència entre"
 
 #. Resource IDs: (32817)
 msgid "Differential path &names"
-msgstr "&Noms path diferencial "
+msgstr "&Noms de camí diferencials"
 
 #. Resource IDs: (1022)
 msgid "Diffing"
@@ -4401,7 +4402,7 @@ msgid ""
 "Display help for current task or command\n"
 "Help"
 msgstr ""
-"Mostra ajuda per la tasca o comandament actuals\n"
+"Mostra ajuda per la tasca o ordre actual\n"
 "Ajuda"
 
 #. Resource IDs: (3605)
@@ -4430,7 +4431,7 @@ msgstr "No expandeix paraules clau"
 
 #. Resource IDs: (65535)
 msgid "Do not show the context menu for the following paths:"
-msgstr "No mostreu el menú pels següents paths:"
+msgstr "No mostreu el menú pels següents camins:"
 
 #. Resource IDs: (1562)
 msgid "Do reintegrate instead of automatic merge (old style)"
@@ -4679,7 +4680,7 @@ msgstr "Còpies E&xactes de les fonts"
 
 #. Resource IDs: (1518)
 msgid "E&xclude paths:"
-msgstr "&No incloguis aquests paths:"
+msgstr "&No incloguis aquests camins:"
 
 #. Resource IDs: (32839)
 msgid "E&xecutable"
@@ -5026,8 +5027,8 @@ msgid ""
 "Executable (*.exe)|*.exe|Command (*.com)|*.com|Information (*.pdf)|*.pdf|"
 "Batch (*.bat)|*.bat|All Files (*.*)|*.*||"
 msgstr ""
-"Executable (*.exe)|*.exe|Comanda (*.com)|*.com|Informació (*.pdf)|*.pdf|"
-"Batch (*.bat)|*.bat|Tots els Fitxers (*.*)|*.*||"
+"Executable (*.exe)|*.exe|Ordre (*.com)|*.com|Informació (*.pdf)|*.pdf|Batch "
+"(*.bat)|*.bat|Tots els Fitxers (*.*)|*.*||"
 
 #. Resource IDs: (1002)
 msgid "Existing"
@@ -5221,7 +5222,7 @@ msgstr ""
 
 #. Resource IDs: (220)
 msgid "Failed!"
-msgstr "Ha fallat!"
+msgstr "ha fallat!"
 
 #. Resource IDs: (591)
 msgid "Fetch HEAD revision and adjust to it"
@@ -5441,12 +5442,12 @@ msgid ""
 "Filter out paths that contain one of the following strings\n"
 "(separate multiple paths with the '*' char):"
 msgstr ""
-"Filtra els paths que contenen una de les següents cadenes\n"
-"(separeu paths múltiples amb el caràcter '*' ):"
+"Filtra els camins que contenen una de les següents cadenes\n"
+"(separeu camins múltiples amb el caràcter '*' ):"
 
 #. Resource IDs: (321)
 msgid "Filter paths"
-msgstr "Paths de filtres"
+msgstr "Camins de filtres"
 
 #. Resource IDs: (139)
 msgid "Find"
@@ -5786,11 +5787,11 @@ msgstr "Hex"
 
 #. Resource IDs: (32820)
 msgid "Hide &deleted paths"
-msgstr "Amaga paths &suprimits"
+msgstr "Amaga camins &suprimits"
 
 #. Resource IDs: (1562)
 msgid "Hide Menus for unversioned paths"
-msgstr "Amaga Menús pels paths sense versionar"
+msgstr "Amaga Menús pels camins sense versionar"
 
 #. Resource IDs: (2052)
 msgid "Hide all branches that did not modify the item"
@@ -5845,7 +5846,7 @@ msgid ""
 "Hint: select the context menu, change the page to 'Commands' and drag the "
 "toolbar buttons into the menu window."
 msgstr ""
-"Ajuda: seleccioneu el menú, canvieu la pàgina a 'Comandes' i arrossegueu els "
+"Ajuda: seleccioneu el menú, canvieu la pàgina a 'Ordres' i arrossegueu els "
 "botons de la barra d'eines cap a la finestra del menú."
 
 #. Resource IDs: (1064)
@@ -5891,7 +5892,7 @@ msgstr "I&gnorat"
 
 #. Resource IDs: (1519)
 msgid "I&nclude paths:"
-msgstr "&Inclou els paths:"
+msgstr "&Inclou els camins:"
 
 #. Resource IDs: (1580)
 msgid "IBugTraqProvider"
@@ -6084,24 +6085,24 @@ msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'branch'."
 msgstr ""
-"Si una component (part entre dos '/') d'un path qualsevol coincideix amb\n"
-"un d'aquests patrons, es considerat un 'branch'."
+"Si una component (part entre dos '/') d'un camí qualsevol coincideix amb\n"
+"un d'aquests patrons, és considerat una 'branca'."
 
 #. Resource IDs: (346)
 msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'tag'."
 msgstr ""
-"Si una component (part entre dos '/') d'un path qualsevol coincideix amb\n"
-"un d'aquests patrons, es considerat una  'etiqueta' (tag)."
+"Si una component (part entre dos '/') d'un camí qualsevol coincideix amb\n"
+"un d'aquests patrons, és considerat una 'etiqueta' (tag)."
 
 #. Resource IDs: (346)
 msgid ""
 "If a component (part between two '/') of a given path matches one\n"
 "of these patterns, it is considered a 'trunk'."
 msgstr ""
-"Si una component (part entre dos '/') d'un path qualsevol coincideix amb\n"
-"un d'aquests patrons, es considerat un  'tronc'."
+"Si una component (part entre dos '/') d'un camí qualsevol coincideix amb\n"
+"un d'aquests patrons, és considerat un  'tronc'."
 
 #. Resource IDs: (194)
 msgid ""
@@ -6318,7 +6319,7 @@ msgstr ""
 
 #. Resource IDs: (89)
 msgid "Illegal path"
-msgstr "Path no acceptat"
+msgstr "Camí no acceptat"
 
 #. Resource IDs: (16916)
 msgid "Image &and Text"
@@ -6595,7 +6596,7 @@ msgid ""
 "\n"
 "Improper use of relocate will corrupt your working copy!"
 msgstr ""
-"Sembla que intentes traslladar la teva còpia de treball a un path diferent "
+"Sembla que intentes traslladar la teva còpia de treball a un camí diferent "
 "dins del mateix repositori.\n"
 "De: %1!s!\n"
 "A: %2!s!\n"
@@ -6619,14 +6620,14 @@ msgid ""
 "If you are not sure what to do, please refer to our docs on relocate.\n"
 "Do you really want to relocate?"
 msgstr ""
-"Sembla que intentes traslladar la teva còpia de treball a un path diferent "
+"Sembla que intentes traslladar la teva còpia de treball a un camí diferent "
 "dins del mateix repositori.\n"
 "\n"
 "De: %1!s!\n"
 "A: %2!s!\n"
 "\n"
-"Un trasllat només cal si ha canviat el path al repositori.\n"
-"Canviar a un path diferent dins del repositori es fa amb una operació de "
+"Un trasllat només cal si ha canviat el camí al repositori.\n"
+"Canviar a un camí diferent dins del repositori es fa amb una operació de "
 "canvi.\n"
 "\n"
 "Un ús incorrecte del trasllat malmetrà la teva còpia de treball!\n"
@@ -6833,7 +6834,7 @@ msgstr "Llistant repositori recursivament..."
 
 #. Resource IDs: (1599)
 msgid "Lo&cal path:"
-msgstr "Path lo&cal:"
+msgstr "Camí lo&cal:"
 
 #. Resource IDs: (130)
 msgid "Load Images"
@@ -7106,7 +7107,7 @@ msgstr "Màxim nombre de &falles d'eina fins que s'esborri el cache"
 
 #. Resource IDs: (16655)
 msgid "Me&nus show recently used commands first"
-msgstr "Els Me&nús mostren primer les comandes més recents"
+msgstr "Els Me&nús mostren primer les ordres més recents"
 
 #. Resource IDs: (16134)
 msgid "Menu"
@@ -7322,7 +7323,7 @@ msgstr "Més Botons"
 
 #. Resource IDs: (1069)
 msgid "More Commands..."
-msgstr "Més  Comandes..."
+msgstr "Més Ordres..."
 
 #. Resource IDs: (438)
 msgid "More colors..."
@@ -7422,7 +7423,7 @@ msgid ""
 "The items are moved to the target path."
 msgstr ""
 "Moure\n"
-"Els elements es mouen al path destí."
+"Els elements es mouen al camí destí."
 
 #. Resource IDs: (210)
 #, c-format
@@ -7510,7 +7511,7 @@ msgstr "Necessita-bloqueig"
 #. Resource IDs: (84)
 msgid ""
 "Neither /path nor /pathfile was specified or does not contain a valid path!"
-msgstr "No s'ha especificat ni /path ni /pathfile, o conté un path invàlid!"
+msgstr "No s'ha especificat ni /path ni /pathfile, o conté un camí invàlid!"
 
 #. Resource IDs: (213)
 msgid "Nested"
@@ -7575,7 +7576,7 @@ msgid ""
 "TortoiseProc.exe is used by the Shell extension and should not be called "
 "directly!"
 msgstr ""
-"No s'ha especificat cap comanda!\n"
+"No s'ha especificat cap ordre!\n"
 "TortoiseProc.exe s'utilitza per la extensió Shell i no ha de ser cridat "
 "directament!"
 
@@ -7652,7 +7653,7 @@ msgstr "No s'ha trobat encoder d'imatge per %s."
 
 #. Resource IDs: (84)
 msgid "No path or pathfile specified on the command line!"
-msgstr "No hi ha camí ni pathfile especificats a la línia de comandes!"
+msgstr "No hi ha camí ni fitxer de camí especificats a la línia d'ordres!"
 
 #. Resource IDs: (188)
 msgid "No spell corrections"
@@ -7822,7 +7823,7 @@ msgstr ""
 msgid ""
 "Number of different paths shown in the log dialog, including parent paths"
 msgstr ""
-"Nombre de paths diferents no mostrats al diàleg de log, incloent-hi paths "
+"Nombre de camins diferents mostrats al diàleg de log, incloent-hi camins "
 "superiors"
 
 #. Resource IDs: (338)
@@ -7838,8 +7839,8 @@ msgid ""
 "Number of path elements. A path element is a folder or file name like 'foo."
 "txt' or 'mybranch'."
 msgstr ""
-"Nombre d'elementsde path. Un element de path és un  carpeta o un nom de "
-"fitxer tal com 'pep.txt' o 'meutreball'."
+"Nombre d'elements de camí. Un element de camí és una carpeta o un nom de "
+"fitxer tal com 'foo.txt' o 'mybranch'."
 
 #. Resource IDs: (345)
 msgid ""
@@ -7902,7 +7903,7 @@ msgid ""
 "One of the paths you are attempting to move appears to be a special path\n"
 "(one of 'branches', 'tags' or 'trunk')."
 msgstr ""
-"Un dels paths que vols moure sembla un path especial\n"
+"Un dels camins que vols moure sembla un camí especial\n"
 "(un de 'branques', 'etiquetes' o 'tronc')."
 
 #. Resource IDs: (63)
@@ -7912,10 +7913,10 @@ msgid ""
 "\n"
 "Are you sure you want to move the selected paths?"
 msgstr ""
-"Un dels paths que voleu moure sembla un path especial\n"
+"Un dels camins que vols moure sembla un camí especial\n"
 "(un de 'branques', 'etiquetes' o 'tronc').\n"
 "\n"
-"Esteu segur que voleu moure els path seleccionats?"
+"Estàs segur que vols moure els camins seleccionats?"
 
 #. Resource IDs: (3887)
 msgid "One or more auto-saved documents were found."
@@ -8152,7 +8153,7 @@ msgid ""
 "Pastes the svn path from the clipboard, resulting in a move (cut) or copy "
 "operation"
 msgstr ""
-"Enganxa el path  svn  del portapapers, fent una operació de moure (tallar) o "
+"Enganxa el camí svn del portapapers, fent una operació de moure (tallar) o "
 "copiar"
 
 #. Resource IDs: (1076)
@@ -8186,15 +8187,15 @@ msgstr "Aplicant pedaç a fitxer '%1'"
 
 #. Resource IDs: (20, 63, 77, 198, 207)
 msgid "Path"
-msgstr "Path"
+msgstr "Camí"
 
 #. Resource IDs: (314)
 msgid "Path found that matches the patch better."
-msgstr "S'ha trobat un path que coincideix millor amb el pedaç."
+msgstr "S'ha trobat un camí que coincideix millor amb el pedaç."
 
 #. Resource IDs: (116)
 msgid "Paths"
-msgstr "Paths"
+msgstr "Camins"
 
 #. Resource IDs: (218)
 msgid "Peg"
@@ -8250,11 +8251,11 @@ msgstr "Introdueix un script tipus hook per executar."
 
 #. Resource IDs: (83)
 msgid "Please enter a path where to apply the hook script to."
-msgstr "Introdueix un path on aplicar l'script de hook."
+msgstr "Introdueix un camí on aplicar l'script de hook."
 
 #. Resource IDs: (251)
 msgid "Please execute the 'Cleanup' command."
-msgstr "Executa el comandament  'Neteja '."
+msgstr "Executa l'ordre 'Neteja'."
 
 #. Resource IDs: (78)
 msgid ""
@@ -8266,11 +8267,11 @@ msgid ""
 "Use the Switch command to do that."
 msgstr ""
 "Atenció:\n"
-"La teva còpia de treball segueix en el path anterior. Si vols que els teus "
+"La teva còpia de treball segueix en el camí anterior. Si vols que els teus "
 "canvis següents\n"
-"siguin entregats a la còpia que avabes de crear, \n"
+"siguin entregats a la còpia que acabes de crear, \n"
 "has de canviar la teva còpia de treball a la nova URL.\n"
-"Utilitza el comandament Canvia per fer-ho."
+"Utilitza l'ordre Canvia per fer-ho."
 
 #. Resource IDs: (1287)
 msgid "Please resolve the conflict by choosing one of the following options:"
@@ -8446,7 +8447,7 @@ msgid ""
 "Proceed with the entered path\n"
 "I'm aware of the possible problems."
 msgstr ""
-"Segueix amb el path introduït\n"
+"Seguir amb el camí introduït\n"
 "Sóc conscient de possibles problemes."
 
 #. Resource IDs: (279)
@@ -9681,7 +9682,7 @@ msgstr "Desa canvis a %1?"
 
 #. Resource IDs: (232)
 msgid "Save client certificate path"
-msgstr "Desa path del certificat del client"
+msgstr "Desa el camí del certificat del client"
 
 #. Resource IDs: (617)
 msgid "Save in Git format"
@@ -10211,14 +10212,14 @@ msgstr "Mostra node més vell a dalt"
 
 #. Resource IDs: (1229)
 msgid "Show only a&ffected paths"
-msgstr "Mostra només els paths a&fectats"
+msgstr "Mostra només els camins a&fectats"
 
 #. Resource IDs: (2052)
 msgid ""
 "Show only the changed parts of the path name. Replace unchanged elements "
 "with dots."
 msgstr ""
-"Mostra només les parts modificades del nom del path. Reemplaça els elements "
+"Mostra només les parts modificades del nom del camí. Reemplaça els elements "
 "sense canviar per punts."
 
 #. Resource IDs: (2054)
@@ -10296,7 +10297,7 @@ msgid ""
 "revision(s) selected, showing %5!ld! changed paths"
 msgstr ""
 "Mostrant %1!ld! revisió(ns), de revisió %2!ld! a revisió %3!ld! - %4!ld! "
-"revisió(ns) seleccionada(es), mostrant %5!ld! paths canviats"
+"revisió(ns) seleccionada(es), mostrant %5!ld! camins canviats"
 
 #. Resource IDs: (272)
 #, c-format
@@ -10670,7 +10671,7 @@ msgstr ""
 "elmeunom 2008 : les meves entregues del 2008\n"
 ".h -.cpp : entregues que han canviat de capçalera però no implementacions\n"
 ".doc +.xls 2010 : entregues del 2010 amb fitxers .doc o .xls\n"
-"\" \" : entregues amb espais (per ex: quan cerqueu només en paths)\n"
+"\" \" : entregues amb espais (per ex: quan cerqueu només en camins)\n"
 "-\"\"mostra tot\"\" : entregues que no contenen la cadena \"mostra tot\"\n"
 "!elmeunom .cpp : tot excepte les meves entregues a fitxers .cpp"
 
@@ -10973,7 +10974,7 @@ msgstr "La URL per defecte d'on obtenir  si no s'especifica res més"
 
 #. Resource IDs: (196)
 msgid "The default path to checkout to if nothing else is specified"
-msgstr "El path per defecte a on obtenir si no s'especifica res més"
+msgstr "El camí per defecte a on obtenir si no s'especifica res més"
 
 #. Resource IDs: (226)
 #, c-format
@@ -11316,7 +11317,7 @@ msgid ""
 "The parameters '/path' and '/pathfile' are mutually exclusive.\n"
 "You must only specify one of them."
 msgstr ""
-"Els paràmetres '/path' i '/pathfile' són mutuament exclusius.\n"
+"Els paràmetres '/path' i '/pathfile' són mútuament exclusius.\n"
 "Has d'especificar-ne només un."
 
 #. Resource IDs: (64)
@@ -11340,7 +11341,7 @@ msgid ""
 "The path/URL '%s' seems to be illegal on Windows!\n"
 "You can try it anyway, but you might get an error later."
 msgstr ""
-"El path/URL '%s' sembla que no és acceptat pel Windows!\n"
+"El camí/URL '%s' sembla que no és acceptat pel Windows!\n"
 "Podeu provar-lo igualment, però pot donar un error més endavant."
 
 #. Resource IDs: (88)
@@ -11354,10 +11355,10 @@ msgid ""
 "\n"
 "Do you want to proceed anyway?"
 msgstr ""
-"El path/URL introduit sembla que no és acceptat pel Windows!\n"
+"El camí/URL introduït sembla que no és acceptat pel Windows!\n"
 "Podeu provar-lo igualment, però pot donar un error més endavant.\n"
 "\n"
-"Un path vàlid al Windows no ha de tenir '<>|\"?*:' ni cap dels següents noms "
+"Un camí vàlid al Windows no ha de tenir '<>|\"?*:' ni cap dels següents noms "
 "de dispositu:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$\n"
 "\n"
@@ -11395,12 +11396,12 @@ msgid ""
 "%2!s!\n"
 "matches it better. Do you want to use the suggested path instead?"
 msgstr ""
-"El path\n"
+"El camí\n"
 "%1!s!\n"
-"sembla que no concorda amb els paths del fitxer de pedaç.\n"
-"Però TortoiseMerge ha trobat que el path\n"
+"sembla que no concorda amb els camins del fitxer de pedaç.\n"
+"Però TortoiseMerge ha trobat que el camí\n"
 "%2!s!\n"
-"és millor. Vols utilitzar el path suggerit?"
+"és millor. Vols utilitzar el camí suggerit?"
 
 #. Resource IDs: (314)
 #, c-format
@@ -11666,7 +11667,7 @@ msgstr ""
 
 #. Resource IDs: (64)
 msgid "There's already a plugin configured for this path"
-msgstr "Ja existeix un connector configurat per aquest path"
+msgstr "Ja existeix un connector configurat per aquest camí"
 
 #. Resource IDs: (83)
 msgid "There's nothing to unlock. No file has a lock in this working copy."
@@ -11773,8 +11774,8 @@ msgid ""
 "names:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$"
 msgstr ""
-"Això no és un path vàlid!\n"
-"Un path vàlid no pot contenir '<>|\"?*:' ni cap dels següents noms de "
+"Això no és un camí vàlid!\n"
+"Un camí vàlid no pot contenir '<>|\"?*:' ni cap dels següents noms de "
 "dispositiu:\n"
 "com1-com9, lpt1-lpt9, prn, aux, con, nul, clock$"
 
@@ -11840,10 +11841,10 @@ msgid ""
 "restore the default set of visible commands to the menus and toolbars. It "
 "will not undo any explicit customizations. Are you sure you want to do this?"
 msgstr ""
-"Això esborrarà el registre de les comandes que heu utilitzat en aquesta "
-"aplicació i restaurarà el conjunt per defecte  de comandes visibles als "
-"menús i barres d'eines. No desfarà cap personalització explícita. Esteu "
-"segur que voleu fer això?"
+"Això esborrarà el registre de les ordres que heu utilitzat en aquesta "
+"aplicació i restaurarà el conjunt per defecte d'ordres visibles als menús i "
+"barres d'eines. No desfarà cap personalització explícita. Esteu segur que "
+"voleu fer això?"
 
 #. Resource IDs: (99)
 msgid ""
@@ -11965,10 +11966,10 @@ msgid ""
 "ignoreallspaces]"
 msgstr ""
 "TortoiseBlame no s'ha d'iniciar directament! Useu\n"
-"TortoiseProc.exe /command:blame /path:\"path\\del\\fitxer\".\n"
+"TortoiseProc.exe /command:blame /path:\"camí\\del\\fitxer\".\n"
 "\n"
 "TortoiseBlame.exe fitxerblame [fitxerlog [títol_visualització]] [/line:"
-"número_de_línia] [/path:path_original] [/ignoreeol] [/ignorespaces] [/"
+"número_de_línia] [/path:camí_original] [/ignoreeol] [/ignorespaces] [/"
 "ignoreallspaces]"
 
 #. Resource IDs: (7, 153)
@@ -11996,9 +11997,9 @@ msgstr ""
 "TortoiseIDiff: el visualitzador de diferències gràfic per a TortoiseSVN\n"
 "\n"
 "Els paràmetres disponibles a la línia d'ordres són:\n"
-"/left:\"path a la imatge esquerra\"\n"
+"/left:\"camí a la imatge esquerra\"\n"
 "/lefttitle:\"títol per la imatge de l'esquerra\"\n"
-"/right:\"path a la imatge de la dreta\"\n"
+"/right:\"camí a la imatge de la dreta\"\n"
 "/righttitle:\"títol per mostrar a la imatge de la dreta\"\n"
 "/overlay\t\tper habilitar mode sobreposició\n"
 "/fit\t\tper encaixar els tamanys de les imatges\n"
@@ -12093,7 +12094,7 @@ msgstr ""
 "Això vol dir que està integrat dins de l'explorador de Windows.\n"
 "Per utilitzar TortoiseSVN obriu l'explorador i feu click amb el botó dret "
 "sobre qualsevol carpeta\n"
-"per tal de fer apareixer el  menú contextual on trobareu totes les comandes "
+"per tal de fer apareixer el  menú contextual on trobareu totes les ordres "
 "del TortoiseSVN.\n"
 "I llegiu el manual!"
 
@@ -12227,7 +12228,7 @@ msgstr "No s 'ha pogut carregar suport pel sistema d'e-mail"
 
 #. Resource IDs: (3865)
 msgid "Unable to process command, server busy."
-msgstr "No es pot processar la comanda. El servidor es troba ocupat."
+msgstr "No es pot processar l'ordre. El servidor es troba ocupat."
 
 #. Resource IDs: (3859)
 #, c-format
@@ -12246,7 +12247,7 @@ msgid ""
 "changes\n"
 "from the top pane in the log dialog."
 msgstr ""
-"No s'ha pogut reconstruir el path de la còpia de treball!\n"
+"No s'ha pogut reconstruir el camí de la còpia de treball!\n"
 "Això pot passar si el fitxer ha sigut canviat de nom.\n"
 "Inicieu el diàleg de log només amb aquest fitxer concret i revertiu els "
 "canvis\n"
@@ -12671,7 +12672,7 @@ msgid ""
 "Apply the patch to\n"
 "%s"
 msgstr ""
-"Utilitza el path trobat.\n"
+"Utilitza el camí trobat.\n"
 "Aplica el pedaç a\n"
 "%s"
 
@@ -12701,7 +12702,7 @@ msgid ""
 "Apply the patch to\n"
 "%s"
 msgstr ""
-"Utilitza el path original.\n"
+"Utilitza el camí original.\n"
 "Aplica el pedaç a\n"
 "%s"
 
@@ -12739,13 +12740,13 @@ msgid ""
 "/diff:<path to unified diff file>\n"
 "/patchpath:<path to folder>"
 msgstr ""
-"Les comandes vàlides són:\n"
-"/base:<path del fitxer base>\n"
-"/theirs:<path del seu fitxer>\n"
-"/mine:<path del meu fitxer>\n"
-"/merged:<path del fitxer fusionat resultant>\n"
-"/diff:<path del fitxer diff unificat>\n"
-"/patchpath:<path de la carpeta>"
+"Les ordres vàlides són:\n"
+"/base:<camí del fitxer base>\n"
+"/theirs:<camí del seu fitxer>\n"
+"/mine:<camí del meu fitxer>\n"
+"/merged:<camí del fitxer fusionat resultant>\n"
+"/diff:<camí del fitxer diff unificat>\n"
+"/patchpath:<camí de la carpeta>"
 
 #. Resource IDs: (84)
 msgid "Validation of the property value failed!"
@@ -12782,7 +12783,7 @@ msgstr "Visualització"
 
 #. Resource IDs: (114)
 msgid "View revision for path in &webviewer"
-msgstr "Visualitza revisió pel path al visor &web"
+msgstr "Visualitza revisió pel camí al visor &web"
 
 #. Resource IDs: (114)
 msgid "View revision in &webviewer"
@@ -12928,7 +12929,7 @@ msgstr "Còpia de Treball"
 
 #. Resource IDs: (1335, 1472)
 msgid "Working Copy Path:"
-msgstr "Path de la còpia de Treball"
+msgstr "Camí de la Còpia de Treball"
 
 #. Resource IDs: (20)
 msgid "Working copy"
@@ -13086,12 +13087,12 @@ msgid ""
 "You haven't entered an issue number!\n"
 "Are you sure you want to commit without an issue number?"
 msgstr ""
-"No heu introduit un número d'emissió!\n"
-"Esteu segur que voleu fer una entrega sense número d'emissió?"
+"No has introduït un número d'emissió!\n"
+"Estàs segur que vols fer una entrega sense número d'emissió?"
 
 #. Resource IDs: (173)
 msgid "You haven't entered an issue number."
-msgstr "No has introduït un número de tema."
+msgstr "No has introduït un número d'incidència."
 
 #. Resource IDs: (1002)
 #, c-format
@@ -13170,7 +13171,7 @@ msgid ""
 "\n"
 "Do you want to commit anyway?"
 msgstr ""
-"La còpia de treball sembla que es troba a un path d'etiquetes!\n"
+"La còpia de treball sembla que es troba a un camí d'etiquetes!\n"
 "S'ha de canviar a una branca o al tronc principal abans de fer una entrega.\n"
 "\n"
 "Voleu entregar de totes maneres?"
@@ -13184,7 +13185,7 @@ msgid ""
 msgstr ""
 "La teva còpia de treball conté modificacions.\n"
 "Revisió més baixa a la còpia de treball: %1!ld!\n"
-"Path: %2!s!"
+"Camí: %2!s!"
 
 #. Resource IDs: (88)
 msgid ""
@@ -13438,9 +13439,9 @@ msgid ""
 "Set to 'false' if your bugtracking system has issues which are referenced "
 "not by numbers."
 msgstr ""
-"bugtraq:number\r\n"
-"Establiu a   'fals ' si el vostre sistema de bugtracking té identificadors "
-"d'incidència no númerics."
+"bugtraq:number\n"
+"Estableix a  'fals ' si el teu sistema de bugtracking té identificadors "
+"d'incidència no numèrics."
 
 #. Resource IDs: (577)
 msgid ""
@@ -13693,7 +13694,7 @@ msgstr "no"
 
 #. Resource IDs: (10)
 msgid "no description for this command is available"
-msgstr "no hi ha descripció disponible per aquesta comanda"
+msgstr "no hi ha descripció disponible per aquesta ordre"
 
 #. Resource IDs: (10)
 msgid "non-versioned"
@@ -13730,11 +13731,11 @@ msgstr "parelles de tokens: "
 
 #. Resource IDs: (65535)
 msgid "path elements: "
-msgstr "elements del path: "
+msgstr "elements del camí: "
 
 #. Resource IDs: (65535)
 msgid "paths: "
-msgstr "paths: "
+msgstr "camins: "
 
 #. Resource IDs: (3869)
 msgid "pixels"
@@ -13869,7 +13870,7 @@ msgstr ""
 "svn:externals\n"
 "Una llista d'especificadors de mòdul, separats per salt de línia, cadascun "
 "dels quals consisteix en\n"
-"una revisió opcional, una URL amb una revisió peg opcional i un path relatiu "
+"una revisió opcional, una URL amb una revisió peg opcional i un camí relatiu "
 "de directori. Per exemple\n"
 "http://example.com/repos/zig foo\n"
 "-r 1234 http://example.com/repos/zag foo/bar\n"
@@ -13932,7 +13933,7 @@ msgid ""
 msgstr ""
 "svn:mergeinfo\n"
 "Una llista separada per línies amb informació de la fusió. Cada línia "
-"consisteix en un path absolut\n"
+"consisteix en un camí absolut\n"
 "seguit de dos punts i una llista separada per comes de  números de revisió.\n"
 "Per exemple\n"
 "/tronc:123-125,129"
@@ -14341,361 +14342,3 @@ msgstr "sí"
 #. Resource IDs: (1382)
 msgid "{BugTraq}"
 msgstr "{BugTraq}"
-
-#~ msgid "&Add Filter"
-#~ msgstr "&Afegir Filtre"
-
-#~ msgid "&Delete Filter"
-#~ msgstr "&Suprimir Filtre"
-
-#~ msgid "&Edit Filter"
-#~ msgstr "&Editar Filtre"
-
-#~ msgid "&Up"
-#~ msgstr "&Amunt"
-
-#~ msgid "Add to Bookmarks"
-#~ msgstr "Afegir als Favorits"
-
-#~ msgid "Blocks"
-#~ msgstr "Blocs"
-
-#~ msgid "Bookmarks"
-#~ msgstr "Favorits"
-
-#~ msgid "C&ompare URLs (content only)"
-#~ msgstr "C&ompara URLs (només contingut)"
-
-#~ msgid ""
-#~ "Cancel\n"
-#~ "The tagged revision of the external is left as is."
-#~ msgstr ""
-#~ "Cancel·la\n"
-#~ "La revisió etiquetada de l'extern es deixa com està."
-
-#~ msgid ""
-#~ "Change the tagged revision\n"
-#~ "The svn:external property of the parent folder is changed accordingly."
-#~ msgstr ""
-#~ "Canvia la revisió etiquetada\n"
-#~ "La propietat svn:external de la carpeta pare es canvia corresponentment."
-
-#~ msgid "Check-Commit Hook"
-#~ msgstr "Hook de Comprovació-Entrega"
-
-#~ msgid "Commits each %s:"
-#~ msgstr "Entregues cada %s:"
-
-#~ msgid "Compare with base (content only)"
-#~ msgstr "Compara amb la base (només contingut)"
-
-#~ msgid "Configure Filter Regexes"
-#~ msgstr "Configurar Filtres regex"
-
-#~ msgid "Coun&t"
-#~ msgstr "Compt&a"
-
-#~ msgid "Count: %u matches."
-#~ msgstr "Recompte: %u coincidències."
-
-#~ msgid "Diff"
-#~ msgstr "Compara"
-
-#~ msgid "Diff later"
-#~ msgstr "Compara més endavant"
-
-#~ msgid "Diff with \"%s\""
-#~ msgstr "Compara amb \"%s\""
-
-#~ msgid "End of Line Style"
-#~ msgstr "Estil final de línia"
-
-#~ msgid "File Encoding"
-#~ msgstr "Codificació de fitxer"
-
-#~ msgid "File changes each %s:"
-#~ msgstr "Canvis en el fitxer cada %s:"
-
-#~ msgid "Filenames"
-#~ msgstr "Noms de fitxer"
-
-#~ msgid "Filter:"
-#~ msgstr "Filtre:"
-
-#~ msgid "Find: Can't find the text \"%s\""
-#~ msgstr "Troba: No pot trobar el text \"%s\""
-
-#~ msgid ""
-#~ "Find: First occurrence from the bottom found. Beginning of document "
-#~ "reached."
-#~ msgstr ""
-#~ "Troba: Primera ocurrència trobada des del final. Ha arribat a l'inici del "
-#~ "document."
-
-#~ msgid "Find: First occurrence from the top found. End of document reached."
-#~ msgstr ""
-#~ "Troba: Primera ocurrència trobada des de l'inici. Ha arribat al final del "
-#~ "document."
-
-#~ msgid "Fit image &heights"
-#~ msgstr "Ajusta &alçades d'imatge"
-
-#~ msgid "Fit image &widths"
-#~ msgstr "Ajusta &amplades d'imatge"
-
-#~ msgid "Full data"
-#~ msgstr "Dades completes"
-
-#~ msgid "Full revision data without changed paths"
-#~ msgstr "Dades de revisió completa sense paths modificats"
-
-#~ msgid "ID:32817:V   +W"
-#~ msgstr "ID:32817:V +W"
-
-#~ msgid "ID:32818:V   +H"
-#~ msgstr "ID:32818:V +H"
-
-#~ msgid "Ignore Comments"
-#~ msgstr "Ignora Comentaris"
-
-#~ msgid "Manual Pre-Commit Hook"
-#~ msgstr "Hook Pre-Entrega manual"
-
-#~ msgid "Merge Log Templates"
-#~ msgstr "Fusiona Plantilles de Log"
-
-#~ msgid "Name:"
-#~ msgstr "Nom:"
-
-#~ msgid "New name must not be empty or the same as the original name!"
-#~ msgstr "El nou nom no pot ser buit o igual que el nom original!"
-
-#~ msgid "Newlines"
-#~ msgstr "Salts de línia"
-
-#~ msgid "Number of %s:"
-#~ msgstr "Nombre de %s:"
-
-#~ msgid "Paths relative to root"
-#~ msgstr "Paths relatius a l'arrel"
-
-#~ msgid "Proceed anyway"
-#~ msgstr "Segueix de totes maneres"
-
-#~ msgid "Regex Filter"
-#~ msgstr "Filtre regex"
-
-#~ msgid "Regex Filters"
-#~ msgstr "Filtres regex"
-
-#~ msgid "Regex:"
-#~ msgstr "Regex:"
-
-#~ msgid "Remove Bookmark"
-#~ msgstr "Elimina Favorit"
-
-#~ msgid ""
-#~ "Remove all comments before doing the diff so changes inside comments "
-#~ "don't show as different"
-#~ msgstr ""
-#~ "Suprimeix tots els comentaris abans de fer el diff de manera que els "
-#~ "canvis en els comentaris no es mostrin com a diferències"
-
-#~ msgid "Rename '%s':"
-#~ msgstr "Canvia el nom '%s':"
-
-#~ msgid "Reopen dialog after commit if items were left uncommitted"
-#~ msgstr ""
-#~ "Reobre diàleg després de l'entrega si alguns elements han quedat sense "
-#~ "entregar"
-
-#~ msgid ""
-#~ "Reopens the commit dialog after a successful commit if there were files "
-#~ "and/or folders left uncommitted."
-#~ msgstr ""
-#~ "Reobre el diàleg d'entrega després d'una entrega satisfactòria si han "
-#~ "quedat fitxers i/o carpetes sense entregar."
-
-#~ msgid "Replace:"
-#~ msgstr "Substitueix:"
-
-#~ msgid ""
-#~ "Revision: %1!ld! %2!s!\r\n"
-#~ "URL: %3!s!\r\n"
-#~ "%4!s!Author: %5!s!\r\n"
-#~ "Date: %6!s!\r\n"
-#~ "\r\n"
-#~ "Log message:\r\n"
-#~ "%7!s!"
-#~ msgstr ""
-#~ "Revisió: %1!ld! %2!s!\n"
-#~ "URL: %3!s!\n"
-#~ "%4!s!Autor: %5!s!\n"
-#~ "Data: %6!s!\n"
-#~ "\n"
-#~ "Missatge de log:\n"
-#~ "%7!s!"
-
-#~ msgid ""
-#~ "Revision: %1!ld! %2!s!\r\n"
-#~ "URL: %3!s!\r\n"
-#~ "%4!s!Author: %5!s!\r\n"
-#~ "Date: %6!s!\r\n"
-#~ "\r\n"
-#~ "Tags (%7!d!):%8!s!\r\n"
-#~ "\r\n"
-#~ "Log message:\r\n"
-#~ "%9!s!"
-#~ msgstr ""
-#~ "Revisió: %1!ld! %2!s!\n"
-#~ "URL: %3!s!\n"
-#~ "%4!s!Autor: %5!s!\n"
-#~ "Data: %6!s!\n"
-#~ "\n"
-#~ "Tags (%7!d!):%8!s!\n"
-#~ "\n"
-#~ "Missatge de log:\n"
-#~ "%9!s!"
-
-#~ msgid "Run hoo&k script"
-#~ msgstr "Executa l'script de hook"
-
-#~ msgid "Select"
-#~ msgstr "Selecciona"
-
-#~ msgid "Show c&hanges (content only)"
-#~ msgstr "Mostra c&anvis (només contingut)"
-
-#~ msgid "Show multiple &changes... (content only)"
-#~ msgstr "Mostra &canvis múltiples... (només contingut)"
-
-#~ msgid ""
-#~ "Shows a unified diff of all changes of the path and those below, "
-#~ "including property changes."
-#~ msgstr ""
-#~ "Mostra una comparativa unificada de tots els canvis del path a sota, "
-#~ "incloent els canvis de propietats."
-
-#~ msgid "Smart tab char"
-#~ msgstr "Caràcter tabulador intel·ligent"
-
-#~ msgid ""
-#~ "Starts the diff viewer with the currently selected file and the one "
-#~ "marked before for diffing later."
-#~ msgstr ""
-#~ "Inicia el visualitzador de diferències entre el fitxer seleccionat "
-#~ "actualment i el fitxer triat abans per comparar més endavant."
-
-#~ msgid ""
-#~ "Stores the path of the file to be used for a diff on a later right-click. "
-#~ "Hold down the Ctrl key to remove the last saved path."
-#~ msgstr ""
-#~ "Desa el path del fitxer que s'utilitzará per la comparació en un clic "
-#~ "posterior amb el botó dret. Manté premuda la tecla Ctrl per suprimir el "
-#~ "darrer path desat."
-
-#~ msgid "The hook script executed successfully"
-#~ msgstr "L'script de hook s'ha executat satisfactòriament"
-
-#~ msgid ""
-#~ "The text is identical, but the files do not match!\r\n"
-#~ "The following differences were found:"
-#~ msgstr ""
-#~ "El text és idèntic, però els fitxers no coincideixen!\n"
-#~ "S'han trobat les següents diferències:"
-
-#~ msgid "Unified Diff"
-#~ msgstr "Compara unificat"
-
-#~ msgid "Urls"
-#~ msgstr "Urls"
-
-#~ msgid "Use Task Dialog"
-#~ msgstr "Utilitza Diàleg de Tasca"
-
-#~ msgid "Use spaces"
-#~ msgstr "Utilitza espais"
-
-#~ msgid ""
-#~ "When selected, Spaces will be used instead of tab\n"
-#~ "Use spaces"
-#~ msgstr ""
-#~ "Quan està seleccionat, Espais s'utilitzarà enlloc de tabulador\n"
-#~ "Utilitza espais"
-
-#~ msgid ""
-#~ "When selected, it tries to infer tab / spaces to use\n"
-#~ "Smart tab char"
-#~ msgstr ""
-#~ "Quan està seleccionat, intenta inferir tabulador / espais a utilitzar\n"
-#~ "Caràcter tabulador intel·ligent"
-
-#~ msgid "Whitespace changes (tabs, spaces)"
-#~ msgstr "Canvis d'espai en blanc (tabuladors, espais)"
-
-#~ msgid ""
-#~ "You've committed changes to external item that is tagged to a specific "
-#~ "revision.\n"
-#~ "Do you want to change the tagged revision now to the just committed "
-#~ "revision?"
-#~ msgstr ""
-#~ "Has entregat canvis d'un element extern que està etiquetat amb una "
-#~ "determinada revisió.\n"
-#~ "Vols canviar ara la revisió etiquetada a la revisió tot just entregada?"
-
-#~ msgid "all information"
-#~ msgstr "tota la informació"
-
-#~ msgid "column '%s'"
-#~ msgstr "columna '%s'"
-
-#~ msgid "days"
-#~ msgstr "dies"
-
-#~ msgid "file/foldernames"
-#~ msgstr "fitxer/noms de carpeta"
-
-#~ msgid "full paths"
-#~ msgstr "paths complets"
-
-#~ msgid "months"
-#~ msgstr "mesos"
-
-#~ msgid "quarters of year"
-#~ msgstr "trimestres"
-
-#~ msgid "relative paths"
-#~ msgstr "paths relatius"
-
-#~ msgid "tagging externals"
-#~ msgstr "etiquetant externs"
-
-#~ msgid "weeks"
-#~ msgstr "setmanes"
-
-#~ msgid "years"
-#~ msgstr "anys"
-
-#~ msgid "Count: %d matches."
-#~ msgstr "Recompte: %d coincidències."
-
-#~ msgid "Moved from"
-#~ msgstr "Mogut de"
-
-#~ msgid "Moved to"
-#~ msgstr "Mogut a"
-
-#~ msgid "Reintegrate merge"
-#~ msgstr "Reintegra fusió"
-
-#~ msgid "Select the URL from which to reintegrate"
-#~ msgstr "Selecciona l'URL des d'on reintegrar"
-
-#~ msgid ""
-#~ "This method covers the case when you have made a feature branch as "
-#~ "discussed in the Subversion book. Use this to merge all changes of a "
-#~ "branch back to trunk."
-#~ msgstr ""
-#~ "Aquest mètode serveix per quan feu una branca rellevant (feature) tal com "
-#~ "es descriu al manual del Subversion. Utilitzeu-la per fusionar tots els "
-#~ "canvis d'una branca altre cop cap al tronc."
