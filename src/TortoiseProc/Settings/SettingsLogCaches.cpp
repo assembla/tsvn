@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2013 - TortoiseSVN
+// Copyright (C) 2007-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -175,7 +175,7 @@ void CSettingsLogCaches::OnBnClickedExport()
             CCachedLogInfo* cache
                 = svn.GetLogCachePool()->GetCache (repo.second, repo.first);
             CCSVWriter writer;
-            writer.Write (*cache, (LPCTSTR)dialog.GetFileName());
+            writer.Write (*cache, (LPCTSTR)dialog.GetPathName());
         }
     }
 }
