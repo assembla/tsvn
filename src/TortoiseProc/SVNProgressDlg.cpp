@@ -4027,7 +4027,9 @@ void CSVNProgressDlg::GenerateMergeLogMessage()
 {
     CString sUUID = GetUUIDFromPath(m_targetPathList[0]);
     CString sRepositoryRoot = GetRepositoryRoot(m_targetPathList[0]);
-    CString relUrl = m_url.GetSVNPathString().Mid(sRepositoryRoot.GetLength()+1);
+    CString escapedUrl = CUnicodeUtils::GetUnicode(m_url.GetSVNApiPath(pool));
+    CString relUrl = escapedUrl.Mid(sRepositoryRoot.GetLength() + 1);
+    relUrl = CPathUtils::PathUnescape(relUrl);
     CString sSeparator = CRegString(_T("Software\\TortoiseSVN\\MergeLogSeparator"), _T("........"));
     CString sRevListRange;
     CString sRevList;
