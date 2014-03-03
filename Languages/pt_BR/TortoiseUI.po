@@ -17,15 +17,15 @@
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2012
 # mkbu95 <mkbu95@gmail.com>, 2013
-# Rafael Heise <rmheise@gmail.com>, 2011-2013
+# Rafael Heise <rmheise@gmail.com>, 2011-2014
 # Ricardo RCDMK Souza <srrcdmk@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2014-01-27 08:28+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2014-03-02 15:38+0000\n"
+"Last-Translator: Rafael Heise <rmheise@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
 "tortoisesvn/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -244,7 +244,7 @@ msgstr "%s (recursivamente)"
 #. Resource IDs: (151)
 #, c-format
 msgid "%s : Merged file"
-msgstr ""
+msgstr "%s : Arquivo combinado"
 
 #. Resource IDs: (151)
 #, c-format
@@ -294,12 +294,12 @@ msgstr "%s, mas o diretório foi apagado, movido ou renomeado localmente."
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the directory was moved away"
-msgstr ""
+msgstr "%s, mas o diretório foi movido"
 
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the directory was moved here"
-msgstr ""
+msgstr "%s, mas o diretório foi movido aqui"
 
 #. Resource IDs: (609)
 #, c-format
@@ -324,7 +324,7 @@ msgstr "%s, mas o arquivo não existe localmente."
 #. Resource IDs: (609)
 #, c-format
 msgid "%s, but the file was already added locally."
-msgstr "%s, mas o arquivo já existe localmente."
+msgstr "%s, mas o arquivo já foi adicionado localmente."
 
 #. Resource IDs: (609)
 #, c-format
@@ -344,7 +344,7 @@ msgstr "%s, porém o arquivo foi movido"
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the file was moved here"
-msgstr ""
+msgstr "%s, mas o arquivo foi movido aqui"
 
 #. Resource IDs: (609)
 #, c-format
@@ -460,7 +460,7 @@ msgstr "&Sobre o TortoiseMerge..."
 
 #. Resource IDs: (610)
 msgid "&Accept current working copy state (mark as resolved)"
-msgstr ""
+msgstr "&Aceitar estado atual da cópia de trabalho (marcar como resolvido)"
 
 #. Resource IDs: (16920)
 msgid "&Activate"
@@ -500,7 +500,7 @@ msgstr "&Aplicar propriedade recursivamente"
 
 #. Resource IDs: (610)
 msgid "&Apply the update to the move destination"
-msgstr ""
+msgstr "&Aplicar a atualização para a movimentação destino"
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -628,7 +628,7 @@ msgstr "Fe&char Janela(s)"
 
 #. Resource IDs: (65535)
 msgid "&Collaborator username"
-msgstr ""
+msgstr "Identificação do &colaborador"
 
 #. Resource IDs: (65535)
 msgid "&Command:"
@@ -1175,7 +1175,7 @@ msgstr "&Porta:"
 
 #. Resource IDs: (3)
 msgid "&Postpone all remaining conflicts"
-msgstr ""
+msgstr "Adiar todos os conflitos restantes"
 
 #. Resource IDs: (1489)
 msgid "&Power user defaults"
@@ -1183,7 +1183,7 @@ msgstr "Padrão para &Power user"
 
 #. Resource IDs: (1562)
 msgid "&Pre-fetch folders for faster browsing"
-msgstr ""
+msgstr "&Pré-carga dos diretórios para navegação mais rápida"
 
 #. Resource IDs: (1069)
 msgid "&Print Preview"
@@ -1355,7 +1355,7 @@ msgstr "&Parar ao copiar/renomear"
 
 #. Resource IDs: (65535)
 msgid "&Subversion username"
-msgstr ""
+msgstr "Identificação do &subversion"
 
 #. Resource IDs: (276)
 msgid "&Switch WC to path and revision"
@@ -2130,6 +2130,8 @@ msgid ""
 "Allow Editing for this view\n"
 "Allow Edit"
 msgstr ""
+"Permitir Edição para esta visualização\n"
+"Permitir Edição"
 
 #. Resource IDs: (1484)
 msgid "Allow ambiguous &UUIDs"
@@ -2239,14 +2241,18 @@ msgid ""
 "network filesystem, make sure file locking has been enabled on the file "
 "server."
 msgstr ""
+"Outro processo está bloqueando a copia local da base de dados, ou o sistema "
+"de arquivos usado não suporte o bloqueio de arquivos; se a cópia local está "
+"em um sistema de arquivos de rede tenha certeza que o bloqueio de arquivos "
+"está habilitado no servidor de arquivos."
 
 #. Resource IDs: (251)
 msgid "Append right block"
-msgstr ""
+msgstr "Concatenar bloco direito"
 
 #. Resource IDs: (251)
 msgid "Append this block to left"
-msgstr ""
+msgstr "Concatenar este bloco para a esquerda"
 
 #. Resource IDs: (65535)
 msgid "Application Frame Menus: "
@@ -2524,7 +2530,7 @@ msgstr ""
 
 #. Resource IDs: (188)
 msgid "Bottom View:"
-msgstr ""
+msgstr "Janela Inferior:"
 
 #. Resource IDs: (1007)
 msgid "Br&owse..."
@@ -2748,6 +2754,8 @@ msgid ""
 "Cancel\n"
 "Don't show the diff."
 msgstr ""
+"Cancelar\n"
+"Não mostrar a diferença."
 
 #. Resource IDs: (315)
 msgid ""
@@ -2826,12 +2834,16 @@ msgid ""
 "Cancel\n"
 "Stay with current files"
 msgstr ""
+"Cancelar\n"
+"Ficar com os arquivos atuais"
 
 #. Resource IDs: (315)
 msgid ""
 "Cancel\n"
 "Stay with current settings"
 msgstr ""
+"Cancelar\n"
+"Ficar com as configurações atuais"
 
 #. Resource IDs: (226)
 msgid ""
@@ -3052,7 +3064,7 @@ msgstr "Obter uma cópia de trabalho a partir de um repositório"
 
 #. Resource IDs: (1536)
 msgid "Check the authentication items you want to delete below"
-msgstr ""
+msgstr "Verificar os itens de autenticação que você quer apagar abaixo"
 
 #. Resource IDs: (95)
 msgid ""
@@ -3182,11 +3194,11 @@ msgstr ""
 
 #. Resource IDs: (1279)
 msgid "Clear all"
-msgstr ""
+msgstr "Limpar tudo"
 
 #. Resource IDs: (1284)
 msgid "Clear..."
-msgstr ""
+msgstr "Limpar..."
 
 #. Resource IDs: (196)
 #, c-format
@@ -3293,7 +3305,7 @@ msgstr "Fecha a janela ativa e pede para salvar os documentos"
 
 #. Resource IDs: (350)
 msgid "Code Collaborator Settings"
-msgstr ""
+msgstr "Configurações do Colaborador de Código"
 
 #. Resource IDs: (275)
 msgid "Coll&apse source tree"
@@ -3301,7 +3313,7 @@ msgstr "Re&duzir árvore principal"
 
 #. Resource IDs: (65535)
 msgid "Collaborator &password"
-msgstr ""
+msgstr "Senha do colaborador"
 
 #. Resource IDs: (156)
 msgid "Collapse"
@@ -3501,7 +3513,7 @@ msgstr "Comparar espaços em branco"
 
 #. Resource IDs: (138)
 msgid "Compare with &HEAD and BASE"
-msgstr ""
+msgstr "Comparar com ÚLTIMA VERSÃO e BASE"
 
 #. Resource IDs: (76)
 msgid "Compare with &working copy"
@@ -3631,11 +3643,11 @@ msgstr "Contrair janela ancorada"
 
 #. Resource IDs: (501)
 msgid "Convert spaces to tabs"
-msgstr ""
+msgstr "Converter espaços em tabulações"
 
 #. Resource IDs: (501)
 msgid "Convert tabs to spaces"
-msgstr ""
+msgstr "Converter tabulações em espaços"
 
 #. Resource IDs: (15)
 msgid "Converts the working copy format to the new version"
@@ -3787,7 +3799,7 @@ msgstr "Copiando %1!s!"
 
 #. Resource IDs: (266)
 msgid "Copying from foreign repository URL"
-msgstr ""
+msgstr "Copiando de uma URL de um repositório de outro domínio"
 
 #. Resource IDs: (80)
 msgid "Copying..."
@@ -3991,7 +4003,7 @@ msgstr "Criar Correção"
 
 #. Resource IDs: (64)
 msgid "Create code collaborator revie&w..."
-msgstr ""
+msgstr "Criar colaborador de revisão de código..."
 
 #. Resource IDs: (1385)
 msgid "Create copy in the repository from:"
@@ -4445,7 +4457,7 @@ msgstr "Não exibir o menu de contexto para os seguintes caminhos:"
 
 #. Resource IDs: (1562)
 msgid "Do reintegrate instead of automatic merge (old style)"
-msgstr ""
+msgstr "Reintegrar ao invés de combinar automaticamente (estilo antigo)"
 
 #. Resource IDs: (90)
 msgid "Do this for all existing files"
@@ -4510,6 +4522,7 @@ msgstr ""
 #, c-format
 msgid "Do you want to drop the vendor branch into the working copy \"%s\"?"
 msgstr ""
+"Você quer baixar a ramificação do vendedor para a cópia de trabalho \"%s\"?"
 
 #. Resource IDs: (315)
 msgid "Do you want to load the changed files?"
@@ -4639,6 +4652,8 @@ msgid ""
 "Don't save\n"
 "Close the views without saving the modifications"
 msgstr ""
+"Não salvar\n"
+"Fechar as janelas sem salvar as modificações"
 
 #. Resource IDs: (315)
 msgid ""
@@ -4711,7 +4726,7 @@ msgstr "E&xportar..."
 
 #. Resource IDs: (303)
 msgid "EOL"
-msgstr ""
+msgstr "EOL"
 
 #. Resource IDs: (3697)
 msgid "EXT"
@@ -4816,7 +4831,7 @@ msgstr "Habilitar Auto-Propriedades"
 
 #. Resource IDs: (156)
 msgid "Enable Edit"
-msgstr ""
+msgstr "Habilitar Edição"
 
 #. Resource IDs: (344)
 msgid "Enable log caching to speed up log and revision graph dialogs"
@@ -4838,7 +4853,7 @@ msgstr ""
 
 #. Resource IDs: (300, 301)
 msgid "Encoding"
-msgstr ""
+msgstr "Codificação"
 
 #. Resource IDs: (3867)
 #, c-format
@@ -5242,11 +5257,11 @@ msgstr ""
 
 #. Resource IDs: (92)
 msgid "Fetching file list of source"
-msgstr ""
+msgstr "Carregar a lista de arquivos do código"
 
 #. Resource IDs: (92)
 msgid "Fetching file list of target"
-msgstr ""
+msgstr "Carregar a lista de arquivo do destino"
 
 #. Resource IDs: (313)
 msgid "Fetching file..."
@@ -6020,7 +6035,7 @@ msgstr "ID:32893:V C +G"
 
 #. Accelerator Entry for Menu ID:32976; '&Enable edit'
 msgid "ID:32976:V C +E"
-msgstr ""
+msgstr "ID:32976:V C +E"
 
 #. Accelerator Entry for Menu ID:57601; '&Open'
 msgid "ID:57601:V C +O"
@@ -6428,6 +6443,8 @@ msgid ""
 "In order to show this dialog in the future, press <Ctrl> while executing the "
 "Code Collaborator menu command."
 msgstr ""
+"Para mostrar esta janela no futuro, pressione <Ctrl> enquanto abre o menu de "
+"contexto do Colaborador de Código."
 
 #. Resource IDs: (1616)
 msgid "Include e&xternals"
@@ -6678,7 +6695,7 @@ msgstr "Manter &bloqueios"
 
 #. Resource IDs: (611)
 msgid "Keep any moves affected by this operation"
-msgstr ""
+msgstr "Manter qualquer movimentação afetada por esta operação"
 
 #. Resource IDs: (1126)
 msgid "Keep c&hangelists"
@@ -6689,6 +6706,8 @@ msgid ""
 "Keep resolving\n"
 "Jump to first unresolved conflict"
 msgstr ""
+"Continuar resolvendo\n"
+"Ir para o primeiro conflito não resolvido"
 
 #. Resource IDs: (16136)
 msgid "Keyboard"
@@ -6772,7 +6791,7 @@ msgstr "Imagem esquerda"
 
 #. Resource IDs: (266)
 msgid "Left local modifications"
-msgstr ""
+msgstr "Deixar as modificações locais"
 
 #. Resource IDs: (590)
 msgid "Like above, but used for reverse merges"
@@ -7038,11 +7057,11 @@ msgstr "Gerenciar propriedades do Subversion"
 
 #. Resource IDs: (214)
 msgid "Many items selected to show diff"
-msgstr ""
+msgstr "Muitos itens selecionados para mostrar a diferença"
 
 #. Resource IDs: (611)
 msgid "Mark as &resolved (the move will become a copy)"
-msgstr ""
+msgstr "Marcar como &resolvido (a movimentação virará uma cópia)"
 
 #. Resource IDs: (148, 282)
 msgid "Mark as resolved"
@@ -7072,7 +7091,7 @@ msgstr "Marcar para comparação"
 
 #. Resource IDs: (92)
 msgid "Mark missing files as removed"
-msgstr ""
+msgstr "Marcar arquivos não encontrados como removidos"
 
 #. Resource IDs: (65535)
 msgid "Markers"
@@ -7398,7 +7417,7 @@ msgstr "Mover e renomear item para cá"
 
 #. Resource IDs: (266)
 msgid "Move broken"
-msgstr ""
+msgstr "Movimentação corrompida"
 
 #. Resource IDs: (103)
 msgid "Move items to here"
@@ -7987,7 +8006,7 @@ msgstr "Abrir &local"
 
 #. Resource IDs: (115)
 msgid "Open &with local..."
-msgstr ""
+msgstr "Abrir com local..."
 
 #. Resource IDs: (76)
 msgid "Open client certificate file"
@@ -8011,7 +8030,7 @@ msgstr "Abrir arquivo de imagem..."
 
 #. Resource IDs: (64)
 msgid "Open multiple &local..."
-msgstr ""
+msgstr "Abrir múltiplos locais..."
 
 #. Resource IDs: (282)
 msgid "Open parent folder"
@@ -8372,11 +8391,11 @@ msgstr "Usar &repositório"
 
 #. Resource IDs: (251)
 msgid "Prepend right block"
-msgstr ""
+msgstr "Concatenar ao início o bloco direito"
 
 #. Resource IDs: (251)
 msgid "Prepend this block to left"
-msgstr ""
+msgstr "Concatenar ao início este bloco para a esquerda"
 
 #. Resource IDs: (65535)
 msgid "Press &New Shortcut Key:"
@@ -8530,7 +8549,7 @@ msgstr "Propriedade %1!s! : Base de Trabalho, Revisão %2!ld!"
 #. Resource IDs: (151)
 #, c-format
 msgid "Property %s : merged"
-msgstr ""
+msgstr "Propriedade %s : combinada"
 
 #. Resource IDs: (151)
 #, c-format
@@ -8690,7 +8709,7 @@ msgstr "Leia o 'Guia de Uso Diário' antes que você fique empacado..."
 
 #. Resource IDs: (349)
 msgid "Realm String"
-msgstr ""
+msgstr "Texto de Domínio"
 
 #. Resource IDs: (1002)
 msgid "Recent"
@@ -8952,7 +8971,7 @@ msgstr "Remover %s"
 
 #. Resource IDs: (348)
 msgid "Remove Saved Authentication Data"
-msgstr ""
+msgstr "Remove os dados salvos de autenticação"
 
 #. Resource IDs: (15)
 msgid "Remove from &ignore list"
@@ -9180,7 +9199,7 @@ msgstr "Solicita um nome de usuário e uma senha"
 
 #. Resource IDs: (8)
 msgid "Res&olve..."
-msgstr ""
+msgstr "Res&olver..."
 
 #. Resource IDs: (16614)
 msgid "Reset &All"
@@ -9224,7 +9243,7 @@ msgstr "Resolver mais t&arde"
 
 #. Resource IDs: (1383)
 msgid "Resolve using &their property"
-msgstr ""
+msgstr "Resolver usando a propriedade deles"
 
 #. Resource IDs: (148)
 msgid ""
@@ -9510,7 +9529,7 @@ msgstr "SSH"
 
 #. Resource IDs: (17)
 msgid "SVN &Vendorbranch here"
-msgstr ""
+msgstr "SVN & Ramo do vendedor aqui"
 
 #. Resource IDs: (16)
 msgid "SVN Author"
@@ -9623,16 +9642,20 @@ msgid ""
 "Save Bottom File as\n"
 "You're asked where to save the bottom file"
 msgstr ""
+"Salvar Arquivo Inferior como\n"
+"Você foi perguntado sobre onde salvar o arquivo da parte inferior"
 
 #. Resource IDs: (316)
 msgid "Save File"
-msgstr ""
+msgstr "Salvar o arquivo"
 
 #. Resource IDs: (316)
 msgid ""
 "Save Left File as\n"
 "You're asked where to save the left file"
 msgstr ""
+"Salvar o Arquivo Esquerdo como\n"
+"Você foi perguntado sobre onde salvar o arquivo do lado esquerdo"
 
 #. Resource IDs: (316)
 #, c-format
@@ -9641,12 +9664,17 @@ msgid ""
 "The modifications are saved to\n"
 "%s"
 msgstr ""
+"Salvar o Arquivo Esquerdo\n"
+"As modificações foram salvas em\n"
+"%s"
 
 #. Resource IDs: (316)
 msgid ""
 "Save Right File as\n"
 "You're asked where to save the right file"
 msgstr ""
+"Salvar o Arquivo Direito como\n"
+"Você foi perguntado sobre onde salvar o arquivo do lado direito"
 
 #. Resource IDs: (316)
 #, c-format
@@ -9655,12 +9683,17 @@ msgid ""
 "The modifications are saved to\n"
 "%s"
 msgstr ""
+"Salvar o Arquivo Direito\n"
+"As modificações foram salvas em\n"
+"%s"
 
 #. Resource IDs: (316)
 msgid ""
 "Save all\n"
 "Both Files are saved"
 msgstr ""
+"Salvar tudo\n"
+"Ambos os arquivos foram salvos"
 
 #. Resource IDs: (156)
 msgid "Save as"
@@ -9954,13 +9987,15 @@ msgstr "Selecionar visualizador para arquivos de comparação"
 
 #. Resource IDs: (316)
 msgid "Select what file you want to save as"
-msgstr ""
+msgstr "Selecione qual arquivo você quer salvar como"
 
 #. Resource IDs: (316)
 msgid ""
 "Select what file you want to save as\n"
 "Note: There is unresolved conflict!"
 msgstr ""
+"Selecione qual arquivo você quer salvar como\n"
+"Nota: Existe um conflito não resolvido!"
 
 #. Resource IDs: (65535)
 msgid "Selected node"
@@ -10080,11 +10115,11 @@ msgstr "Exibir &alterações..."
 
 #. Resource IDs: (1480)
 msgid "Show &externals"
-msgstr ""
+msgstr "Mostrar &externos"
 
 #. Resource IDs: (1529)
 msgid "Show &locks"
-msgstr ""
+msgstr "Mostrar b&loqueados"
 
 #. Resource IDs: (12, 101, 1016, 1031, 1132, 1228, 1420, 1467, 32784)
 msgid "Show &log"
@@ -10208,7 +10243,7 @@ msgstr "Exibir lo&g"
 
 #. Resource IDs: (64)
 msgid "Show multiple &changes..."
-msgstr ""
+msgstr "Mostrar múltiplas modificações..."
 
 #. Resource IDs: (2051)
 msgid "Show oldest node at top"
@@ -10287,6 +10322,8 @@ msgid ""
 "Show the diff\n"
 "The diff viewer is started for every selected item."
 msgstr ""
+"Mostrar a diferença\n"
+"O visualizador de diferenças abrirá para cada item selecionado."
 
 #. Resource IDs: (198)
 msgid "Show/Hide"
@@ -10349,6 +10386,8 @@ msgid ""
 "Shows the lock owner of locked files. Disable this to improve performance "
 "with older servers."
 msgstr ""
+"Mostra o autor da reserva dos arquivos bloqueados. Desabilitar esta função "
+"para melhorar o desempenho em servidores antigos."
 
 #. Resource IDs: (12)
 msgid "Shows the log for the selected file / folder"
@@ -10743,7 +10782,7 @@ msgstr ""
 
 #. Resource IDs: (65535)
 msgid "Subversion passwor&d"
-msgstr ""
+msgstr "Senha do subversion"
 
 #. Resource IDs: (79)
 msgid ""
@@ -11082,7 +11121,7 @@ msgstr ""
 
 #. Resource IDs: (84)
 msgid "The hook script was not approved to run"
-msgstr ""
+msgstr "O script de gancho não foi aprovador para execução"
 
 #. Resource IDs: (7)
 msgid "The image can not be shown."
@@ -11579,6 +11618,8 @@ msgid ""
 "There are more editable views.\n"
 "What view do you want to save?"
 msgstr ""
+"Existem mais janelas editáveis.\n"
+"Qual janela você quer salvar?"
 
 #. Resource IDs: (64)
 msgid "There are no issue-tracker providers available."
@@ -11633,7 +11674,7 @@ msgstr ""
 
 #. Resource IDs: (64)
 msgid "There's already a plugin configured for this path"
-msgstr ""
+msgstr "Atualmente já existe um plugin configurado para este caminho"
 
 #. Resource IDs: (83)
 msgid "There's nothing to unlock. No file has a lock in this working copy."
@@ -11846,7 +11887,7 @@ msgstr "Prazos excedidos"
 
 #. Resource IDs: (65535)
 msgid "Tip"
-msgstr ""
+msgstr "Dica"
 
 #. Resource IDs: (224)
 msgid ""
@@ -11987,6 +12028,10 @@ msgid ""
 "apr %d.%d.%d\r\n"
 "apr-util %d.%d.%d"
 msgstr ""
+"TortoiseMerge %d.%d.%d, Build %d - %s, %s\n"
+"libsvn_diff %d.%d.%d, %s\n"
+"apr %d.%d.%d\n"
+"apr-util %d.%d.%d"
 
 #. Resource IDs: (80, 65535)
 msgid "TortoiseSVN"
@@ -12103,7 +12148,7 @@ msgstr "Combinar árvores"
 
 #. Resource IDs: (501)
 msgid "Trim right"
-msgstr ""
+msgstr "Apagar espaços à direita"
 
 #. Resource IDs: (65535)
 msgid "Trunk nodes"
@@ -12244,7 +12289,7 @@ msgstr "Desfazer 1 Ação"
 
 #. Resource IDs: (14)
 msgid "Undo Add..."
-msgstr ""
+msgstr "Desfazer Adição..."
 
 #. Resource IDs: (3603)
 msgid ""
@@ -12488,7 +12533,7 @@ msgstr "Usar Blocos"
 
 #. Resource IDs: (1066)
 msgid "Use Ribbons"
-msgstr ""
+msgstr "Usar Listas"
 
 #. Resource IDs: (1230)
 msgid "Use URL of &WC as the default \"From:\" URL"
@@ -12558,7 +12603,7 @@ msgstr "Usar expressão regular"
 
 #. Resource IDs: (251)
 msgid "Use right block"
-msgstr ""
+msgstr "Usar bloco direito"
 
 #. Resource IDs: (1426)
 msgid "Use system locale for date/time"
@@ -12645,6 +12690,14 @@ msgid ""
 "\r\n"
 "To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
+"Use a janela de auditoria para selecionar as revisões que você quer "
+"combinar, ou digite as revisões para combinar separadas por vírgulas. Uma "
+"faixa de revisões pode ser informada usando um traço.\n"
+"\n"
+"Exemplo: 4-7,9,11,15-HEAD@pegrevision\n"
+"\n"
+"Para combinar todas as revisões (reintegrar/combinação automática), deixa o "
+"campo em branco."
 
 #. Resource IDs: (314)
 #, c-format
@@ -12663,7 +12716,7 @@ msgstr "Use esse arquivo &inteiro"
 
 #. Resource IDs: (251)
 msgid "Use this block on left"
-msgstr ""
+msgstr "Usar este bloco à esquerda"
 
 #. Resource IDs: (12)
 msgid "Use this if the URL of the repository has changed"
@@ -12709,7 +12762,7 @@ msgstr "Valor"
 
 #. Resource IDs: (92)
 msgid "Vendor branch"
-msgstr ""
+msgstr "Ramo do vendedor"
 
 #. Resource IDs: (1004, 1075)
 msgid "Version"
@@ -13028,6 +13081,9 @@ msgid ""
 "For every of these items a new instance of the diff viewer will be started.\n"
 "Do you really want to show the diff for so many items at once?"
 msgstr ""
+"Você selecionou %d itens para apresentar a diferença.\n"
+"Para cada um desses itens uma nova instância do visualizar será aberta.\n"
+"Você realmente quer ver as diferenças para tantos itens de uma vez?"
 
 #. Resource IDs: (251)
 msgid "You have to update your working copy first."
@@ -13255,6 +13311,8 @@ msgstr "[Não atribuído]"
 #. Resource IDs: (1562)
 msgid "\"ignore-on-commit\" files do not mark parent folder modified"
 msgstr ""
+"Arquivos \"ignore-on-commit\" não identificam o diretório acima como "
+"modificado"
 
 #. Resource IDs: (346)
 msgid ""
@@ -13538,7 +13596,7 @@ msgstr "incompleto"
 
 #. Resource IDs: (589)
 msgid "inherited from"
-msgstr ""
+msgstr "herdado de"
 
 #. Resource IDs: (583)
 msgid "it does not exist."
@@ -13764,6 +13822,12 @@ msgid ""
 "Format: <filemask> = property=value;property=value\r\n"
 "Example: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 msgstr ""
+"svn:auto-props\n"
+"Uma lista de propriedades formatada em linhas e que são aplicadas "
+"recursivamente e automaticamente quando são adicionados/importados "
+"arquivos.\n"
+"Formato: <máscara-arquivo> = propriedade=valor;propriedade=valor\n"
+"Exemplo: *.xml = svn:eol-style=native;svn:mime-type=text/xml"
 
 #. Resource IDs: (316)
 msgid "svn:eol-style"
@@ -13835,6 +13899,9 @@ msgid ""
 "svn:global-ignores\r\n"
 "A newline separated list of file patterns to ignore recursively."
 msgstr ""
+"svn:global-ignores\n"
+"Uma lista formatada em linhas de padrões de arquivo para serem ignorados "
+"recursivamente."
 
 #. Resource IDs: (576)
 msgid ""
