@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007, 2010-2011 - TortoiseSVN
+// Copyright (C) 2007, 2010-2011, 2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ CLogFile::~CLogFile(void)
 
 bool CLogFile::Open()
 {
-    CTSVNPath logfile = CTSVNPath(CPathUtils::GetAppDataDirectory() + _T("\\logfile.txt"));
+    CTSVNPath logfile = CTSVNPath(CPathUtils::GetLocalAppDataDirectory() + L"\\logfile.txt");
     return Open(logfile);
 }
 

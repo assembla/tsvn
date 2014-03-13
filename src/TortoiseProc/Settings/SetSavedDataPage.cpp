@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -144,7 +144,7 @@ BOOL CSetSavedDataPage::OnInitDialog()
     // the "Repositories.dat" is not a cache file
     nLogHistRepo--;
 
-    BOOL bActionLog = PathFileExists(CPathUtils::GetAppDataDirectory() + _T("logfile.txt"));
+    BOOL bActionLog = PathFileExists(CPathUtils::GetLocalAppDataDirectory() + L"logfile.txt");
 
     INT_PTR nHooks = 0;
     CRegistryKey regHooks(_T("Software\\TortoiseSVN\\approvedhooks"));
@@ -295,13 +295,13 @@ void CSetSavedDataPage::OnBnClickedRepologclear()
 
 void CSetSavedDataPage::OnBnClickedActionlogshow()
 {
-    CString logfile = CPathUtils::GetAppDataDirectory() + _T("logfile.txt");
+    CString logfile = CPathUtils::GetLocalAppDataDirectory() + L"logfile.txt";
     CAppUtils::StartTextViewer(logfile);
 }
 
 void CSetSavedDataPage::OnBnClickedActionlogclear()
 {
-    CString logfile = CPathUtils::GetAppDataDirectory() + _T("logfile.txt");
+    CString logfile = CPathUtils::GetLocalAppDataDirectory() + L"logfile.txt";
     DeleteFile(logfile);
     DialogEnableWindow(&m_btnActionLogClear, false);
     DialogEnableWindow(&m_btnActionLogShow, false);
