@@ -17,14 +17,15 @@
 # Marcelo Boeira <marceloboeira@live.com>, 2013
 # Marco Tulio Costa <mmarcottulio@gmail.com>, 2012
 # Rafael Heise <rmheise@gmail.com>, 2011-2012,2014
+# Rhapy <raphael.mendonca@hotmail.com>, 2014
 # Ricardo RCDMK Souza <srrcdmk@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2014-03-20 00:20+0000\n"
-"Last-Translator: Rafael Heise <rmheise@gmail.com>\n"
+"PO-Revision-Date: 2014-03-25 18:50+0000\n"
+"Last-Translator: Rhapy <raphael.mendonca@hotmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
 "tortoisesvn/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -3292,15 +3293,15 @@ msgstr ""
 
 #. (citetitle)
 msgid "VisualSVN"
-msgstr ""
+msgstr "VisualSVN"
 
 #. (citetitle)
 msgid "CollabNet"
-msgstr ""
+msgstr "CollabNet"
 
 #. (citetitle)
 msgid "UberSVN"
-msgstr ""
+msgstr "UberSVN"
 
 #. (para)
 msgid ""
@@ -4073,7 +4074,7 @@ msgstr ""
 
 #. (primary)
 msgid "partial checkout"
-msgstr ""
+msgstr "Obter parcialmente"
 
 #. (para)
 msgid ""
@@ -4733,7 +4734,7 @@ msgstr ""
 
 #. (title)
 msgid "Commit only parts of files"
-msgstr ""
+msgstr "Enviar somente partes dos arquivos"
 
 #. (para)
 msgid ""
@@ -7338,7 +7339,7 @@ msgstr ""
 
 #. (term)
 msgid "Create code collaborator review..."
-msgstr ""
+msgstr "Criar análise do código colaborativo"
 
 #. (para)
 msgid ""
@@ -7580,7 +7581,7 @@ msgstr ""
 
 #. (term)
 msgid "Show multiple changes..."
-msgstr ""
+msgstr "Exibir múltiplas mudanças..."
 
 #. (para)
 msgid ""
@@ -8268,6 +8269,13 @@ msgid ""
 "<guilabel>Authors case insensitive</guilabel> checkbox to control how this "
 "is handled."
 msgstr ""
+"Por padrão a analise é case-sensitive, portanto usuários como "
+"<literal>PeterEgan</literal> e <literal>PeteRegan</literal> são considerados "
+"autores diferentes. Entretanto, em muitos casos os nomes de usuários não são "
+"case-sensitive, e às vezes são inseridos de forma inconsistente, então você "
+"pode querer que <literal>DavidMorgan</literal> e <literal>davidmorgan</"
+"literal> sejam considerados a mesma pessoa. Use a seleção <guilabel>Authors "
+"case insensitive</guilabel> para escolher como lidar com isso."
 
 #. (para)
 msgid ""
@@ -8293,6 +8301,10 @@ msgid ""
 "uses data from the cache, which allows you to continue working although the "
 "information may not be up-to-date or even complete."
 msgstr ""
+"<placeholder-1/> Se o servidor não está acessível, e você tem o habilitar o "
+"cache de log, você pode usar a caixa de diálogo e gráfico de revisão no modo "
+"offline. Este usa dados do cache, o que lhe permite continuar a trabalhar, "
+"embora a informação não possa ser atualizada ou mesmo completada."
 
 #. (term)
 msgid "Offline for now"
@@ -8797,7 +8809,7 @@ msgstr ""
 
 #. (primary)
 msgid "Microsoft Word"
-msgstr ""
+msgstr "Microsoft Word"
 
 #. (para)
 msgid ""
@@ -8815,7 +8827,7 @@ msgstr ""
 
 #. (title)
 msgid "Problems with Office 2010"
-msgstr ""
+msgstr "Problemas com o Office 2010"
 
 #. (para)
 msgid ""
@@ -9894,7 +9906,7 @@ msgstr ""
 
 #. (term)
 msgid "Clean up working copy status"
-msgstr ""
+msgstr "Limpar situação da cópia de trabalho"
 
 #. (para)
 msgid ""
@@ -9930,6 +9942,8 @@ msgstr ""
 #. (term)
 msgid "Delete unversioned files and folders, Delete ignored files and folders"
 msgstr ""
+"Apagar arquivos e diretórios não versionados, Apagar arquivos e diretórios "
+"ignorados"
 
 #. (para)
 msgid ""
@@ -9948,7 +9962,7 @@ msgstr ""
 
 #. (term)
 msgid "Revert all changes recursively"
-msgstr ""
+msgstr "Reverter todas as modificações recursivamente"
 
 #. (para)
 msgid ""
@@ -10028,15 +10042,15 @@ msgstr "Revisão da última submissão conhecida"
 
 #. (para)
 msgid "Author who made the last known commit."
-msgstr ""
+msgstr "Autor que fez a última submissão conhecida."
 
 #. (para)
 msgid "The full URL of this file in the repository."
-msgstr ""
+msgstr "A URL completa deste arquivo no repositório"
 
 #. (para)
 msgid "A compressed combination of the previous four keywords."
-msgstr ""
+msgstr "A combinação comprimida das quatro palavras-chave anteriores."
 
 #. (para)
 msgid ""
@@ -10099,18 +10113,26 @@ msgid ""
 "folder in the hierarchy below the current folder, check the "
 "<guilabel>Recursive</guilabel> checkbox."
 msgstr ""
+"Se deseja aplicar a propriedade para <emphasis>todos</emphasis> os arquivos "
+"e diretórios na hierarquia abaixo do diretório atual, marque a opção  "
+"<guilabel>Recursivo</guilabel> ."
 
 #. (para)
 msgid ""
 "If you wish to edit an existing property, select that property from the list "
 "of existing properties, then click on <guibutton>Edit...</guibutton>."
 msgstr ""
+"Se deseja editar uma propriedade existente, selecione a propriedade da lista "
+"de propriedades existentes e então clique em <guibutton>Editar...</"
+"guibutton>."
 
 #. (para)
 msgid ""
 "If you wish to remove an existing property, select that property from the "
 "list of existing properties, then click on <guibutton>Remove</guibutton>."
 msgstr ""
+"Se deseja editar uma propriedade existente, selecione a propriedade da lista "
+"de propriedades existentes e então clique em <guibutton>Remover</guibutton>."
 
 #. (para)
 msgid ""
@@ -10118,6 +10140,10 @@ msgid ""
 "projects from the same repository or a completely different repository. For "
 "more information, read <xref linkend=\"tsvn-dug-externals\"/>."
 msgstr ""
+"A propriedade <literal>svn:externals</literal> pode ser usada para enviar "
+"outros projetos para o mesmo repositório ou para um repositório "
+"completamente diferente. Para maiores informações, leia <xref linkend=\"tsvn-"
+"dug-externals\"/>."
 
 #. (title)
 msgid "Edit properties at HEAD revision"
@@ -10130,6 +10156,11 @@ msgid ""
 "revision in the repository browser, you will see a list of properties and "
 "values, but no edit controls."
 msgstr ""
+"Pelo fato das propriedades serem versionadas, não é possível editar as "
+"revisões anteriores. Se verificar as propriedades pela caixa de dialogo do "
+"log, ou por uma revisão no navegador do repositório que não seja a ultima, "
+"poderá visualizar a lista de propriedades e valores, porem não terá nenhum "
+"controle de edição disponível."
 
 #. (title)
 msgid "Exporting and Importing Properties"
@@ -10516,27 +10547,27 @@ msgstr ""
 
 #. (listitem)
 msgid "tsvn:startcommithook"
-msgstr ""
+msgstr "tsvn:startcommithook"
 
 #. (listitem)
 msgid "tsvn:precommithook"
-msgstr ""
+msgstr "tsvn:precommithook"
 
 #. (listitem)
 msgid "tsvn:postcommithook"
-msgstr ""
+msgstr "tsvn:postcommithook"
 
 #. (listitem)
 msgid "tsvn:startupdatehook"
-msgstr ""
+msgstr "tsvn:startupdatehook"
 
 #. (listitem)
 msgid "tsvn:preupdatehook"
-msgstr ""
+msgstr "tsvn:preupdatehook"
 
 #. (listitem)
 msgid "tsvn:postupdatehook"
-msgstr ""
+msgstr "tsvn:postupdatehook"
 
 #. (para)
 msgid "The available properties/hook-scripts are <placeholder-1/>"
@@ -11061,7 +11092,7 @@ msgstr ""
 
 #. (para)
 msgid "The author of the merged revision."
-msgstr ""
+msgstr "O autor da revisão mesclada"
 
 #. (para)
 msgid "The merged revision itself."
@@ -11592,6 +11623,8 @@ msgid ""
 "Now you have to select the source of the copy. Here you have three options: "
 "<placeholder-1/>"
 msgstr ""
+"Agora você tem que selecionar a fonte da cópia. Aqui você tem três opções: "
+"<placeholder-1/>"
 
 #. (para)
 msgid ""
@@ -12097,6 +12130,8 @@ msgstr ""
 msgid ""
 "You can also use <guibutton>Show Log</guibutton> to select the revision."
 msgstr ""
+"Você também pode utilizar o <guibutton>Visualizar Histórico</guibutton> para "
+"selecionar a revisão."
 
 #. (title)
 msgid "Merge Options"
@@ -13319,6 +13354,7 @@ msgstr "Salvar uma cópia não versionada do arquivo para o seu disco."
 #. (para)
 msgid "Copy the URL shown in the address bar to the clipboard."
 msgstr ""
+"Copie o URL mostrado na barra de endereços para a área de transferência."
 
 #. (para)
 msgid ""
@@ -13773,7 +13809,7 @@ msgstr ""
 
 #. (term)
 msgid "Fold tags"
-msgstr ""
+msgstr "Rótulo duplicado"
 
 #. (para)
 msgid ""
@@ -13820,7 +13856,7 @@ msgstr ""
 
 #. (term)
 msgid "Hide unused branches"
-msgstr ""
+msgstr "Esconder ramos não utilizados"
 
 #. (para)
 msgid ""
@@ -13884,7 +13920,7 @@ msgstr ""
 
 #. (term)
 msgid "Show overview"
-msgstr ""
+msgstr "Exibir visão geral"
 
 #. (para)
 msgid ""
@@ -14633,6 +14669,9 @@ msgid ""
 "For the same reason, project properties will not be propagated automatically "
 "when a child folder is added using the repo browser."
 msgstr ""
+"Pela mesma razão, as propriedades do projeto não se propagarão "
+"automaticamente quando são adicionadas pastas filhas através do navegador da "
+"repo"
 
 #. (para)
 msgid ""
@@ -14693,7 +14732,7 @@ msgstr ""
 
 #. (title)
 msgid "Integration with Web-based Repository Viewers"
-msgstr ""
+msgstr "Integração com visualizadores de repositórios locados na web"
 
 #. (primary)
 msgid "web view"
@@ -14705,7 +14744,7 @@ msgstr "visualizar de repositório"
 
 #. (primary)
 msgid "ViewVC"
-msgstr ""
+msgstr "ViewVC"
 
 #. (primary)
 msgid "WebSVN"
@@ -14810,6 +14849,7 @@ msgstr "Idioma"
 #. (para)
 msgid "Selects your user interface language. What else did you expect?"
 msgstr ""
+"Selecione o idioma da sua interface de usuário. O que mais você espera?"
 
 #. (term)
 msgid "Check for updates"
@@ -14861,7 +14901,7 @@ msgstr ""
 
 #. (term)
 msgid "Create Library"
-msgstr ""
+msgstr "Criar Biblioteca"
 
 #. (para)
 msgid ""
@@ -14919,6 +14959,7 @@ msgstr ""
 #. (term)
 msgid "Set file dates to the <quote>last commit time</quote>"
 msgstr ""
+"Altera as datas dos arquivos para <quote>hora da última submissão</quote>"
 
 #. (para)
 msgid ""
@@ -15027,7 +15068,7 @@ msgstr ""
 
 #. (term)
 msgid "Default number of log messages"
-msgstr ""
+msgstr "Número padrão de mensagens de log"
 
 #. (para)
 msgid ""
@@ -15040,7 +15081,7 @@ msgstr ""
 
 #. (term)
 msgid "Font for log messages"
-msgstr ""
+msgstr "Fonte para mensagens de log"
 
 #. (para)
 msgid ""
@@ -15051,7 +15092,7 @@ msgstr ""
 
 #. (term)
 msgid "Short date / time format in log messages"
-msgstr ""
+msgstr "Formato curto de data / hora no histórico"
 
 #. (para)
 msgid ""
@@ -15062,6 +15103,7 @@ msgstr ""
 #. (term)
 msgid "Can double click in log list to compare with previous revision"
 msgstr ""
+"Duplo-clique na lista de comentários para comparar com a revisão anterior"
 
 #. (para)
 msgid ""
@@ -15074,7 +15116,7 @@ msgstr ""
 
 #. (term)
 msgid "Auto-close"
-msgstr ""
+msgstr "Fechamento Automático"
 
 #. (para)
 msgid ""
@@ -15151,7 +15193,7 @@ msgstr ""
 
 #. (term)
 msgid "Default checkout path"
-msgstr ""
+msgstr "Caminho padrão de envio:"
 
 #. (para)
 msgid ""
@@ -15203,7 +15245,7 @@ msgstr ""
 
 #. (term)
 msgid "Use auto-completion of file paths and keywords"
-msgstr ""
+msgstr "Usar autocompletar para caminhos de arquivo e palavras-chave"
 
 #. (para)
 msgid ""
@@ -15215,7 +15257,7 @@ msgstr ""
 
 #. (term)
 msgid "Timeout in seconds to stop the auto-completion parsing"
-msgstr ""
+msgstr "Tempo limite, em segundos, para parar a interpretação do autocompletar"
 
 #. (para)
 msgid ""
@@ -15561,7 +15603,7 @@ msgstr "Nó Adicionado"
 
 #. (para)
 msgid "Items newly added, or copied (add with history)."
-msgstr ""
+msgstr "Itens recém-adicionado, ou copiados (adicionar com histórico)."
 
 #. (term)
 msgid "Renamed Node"
@@ -15570,7 +15612,7 @@ msgstr "Nó Renomeado"
 #. (para)
 msgid ""
 "Items deleted from one location and added in another in the same revision."
-msgstr ""
+msgstr "Itens excluídos de um local e acrescentou em outro na mesma revisão."
 
 #. (term)
 msgid "Modified Node"
@@ -15578,11 +15620,11 @@ msgstr "Nó Modificado"
 
 #. (para)
 msgid "Simple modifications without any add or delete."
-msgstr ""
+msgstr "Modificações simples, sem qualquer adição ou exclusão."
 
 #. (term)
 msgid "Unchanged Node"
-msgstr ""
+msgstr "Nó não alterado"
 
 #. (para)
 msgid ""
@@ -15596,7 +15638,7 @@ msgstr "Nó Principal"
 
 #. (para)
 msgid "Current HEAD revision in the repository."
-msgstr ""
+msgstr "Atual última revisão no repositório"
 
 #. (term)
 msgid "WC Node"
@@ -15624,7 +15666,7 @@ msgstr "Nós de rótulos"
 
 #. (para)
 msgid "Nodes classified as tags may be blended with this color."
-msgstr ""
+msgstr "Nós classificados como etiquetas podem ser misturados com essa cor"
 
 #. (term)
 msgid "Trunk Nodes"
@@ -15632,11 +15674,11 @@ msgstr "Nós do tronco"
 
 #. (para)
 msgid "Nodes classified as trunk may be blended with this color."
-msgstr ""
+msgstr "Nodes classificados como tronco podem ser misturados com esta cor."
 
 #. (term)
 msgid "Folded Tag Markers"
-msgstr ""
+msgstr "Marcador dobrado"
 
 #. (para)
 msgid ""
@@ -15646,7 +15688,7 @@ msgstr ""
 
 #. (term)
 msgid "Selected Node Markers"
-msgstr ""
+msgstr "Marcadores de Nós Selecionados"
 
 #. (para)
 msgid ""
@@ -15667,7 +15709,7 @@ msgstr ""
 
 #. (title)
 msgid "Icon Overlay Settings"
-msgstr ""
+msgstr "Configurações de Sobreposição dos Ícones"
 
 #. (title)
 msgid "The Settings Dialog, Icon Overlays Page"
@@ -15914,7 +15956,7 @@ msgstr ""
 
 #. (title)
 msgid "Icon Set Selection"
-msgstr ""
+msgstr "Seleção de conjuntos de ícones"
 
 #. (title)
 msgid "The Settings Dialog, Icon Set Page"
@@ -15946,7 +15988,7 @@ msgstr ""
 
 #. (title)
 msgid "Network Settings"
-msgstr ""
+msgstr "Configurações de rede"
 
 #. (primary)
 msgid "proxy server"
@@ -16026,7 +16068,7 @@ msgstr ""
 
 #. (title)
 msgid "External Program Settings"
-msgstr ""
+msgstr "Configuração de Programa Externo"
 
 #. (title)
 msgid "The Settings Dialog, Diff Viewer Page"
@@ -16051,29 +16093,29 @@ msgstr "Visualizador de Diferenças"
 
 #. (para)
 msgid "The original file without your changes"
-msgstr ""
+msgstr "O arquivo original sem alterações."
 
 #. (para)
 #. (para)
 msgid "The window title for the base file"
-msgstr ""
+msgstr "O título da janela para o arquivo de base"
 
 #. (para)
 msgid "Your own file, with your changes"
-msgstr ""
+msgstr "Seu próprio arquivo com suas mudanças"
 
 #. (para)
 #. (para)
 msgid "The window title for your file"
-msgstr ""
+msgstr "O título da janela para o seu arquivo"
 
 #. (para)
 msgid "The URL of the original file, if available"
-msgstr ""
+msgstr "A URL do arquivo original, se disponível"
 
 #. (para)
 msgid "The URL of the second file, if available"
-msgstr ""
+msgstr "A URL do segundo arquivo, se disponível"
 
 #. (para)
 msgid "The revision of the original file, if available"
@@ -16177,27 +16219,27 @@ msgstr "Ferramente de Unificação"
 
 #. (para)
 msgid "the original file without your or the others changes"
-msgstr ""
+msgstr "o arquivo original sem as suas ou quaisquer mudanças"
 
 #. (para)
 msgid "your own file, with your changes"
-msgstr ""
+msgstr "Seu próprio arquivo com suas mudanças."
 
 #. (para)
 msgid "the file as it is in the repository"
-msgstr ""
+msgstr "o arquivo como ele é no repositório"
 
 #. (para)
 msgid "The window title for the file in the repository"
-msgstr ""
+msgstr "O título da janela para o arquivo no repositório"
 
 #. (para)
 msgid "the conflicted file, the result of the merge operation"
-msgstr ""
+msgstr "O arquivo conflitante, o resultado da operação de mesclagem."
 
 #. (para)
 msgid "The window title for the merged file"
-msgstr ""
+msgstr "O título da janela para o arquivo mesclado"
 
 #. (para)
 msgid ""
@@ -16205,6 +16247,9 @@ msgid ""
 "substitution is used in the same way as with the Diff Program. <placeholder-"
 "1/>"
 msgstr ""
+"Um programa externo de mesclagem usado para resolver arquivos conflitantes. "
+"É utilizado substituição de parâmetro do mesmo modo como seria com um "
+"problema comparador.  <placeholder-1/>"
 
 #. (para)
 msgid ""
@@ -16226,7 +16271,7 @@ msgstr ""
 
 #. (title)
 msgid "Diff/Merge Advanced Settings"
-msgstr ""
+msgstr "Configurações Avançadas Comparação/Combinação"
 
 #. (title)
 msgid "The Settings Dialog, Diff/Merge Advanced Dialog"
@@ -16240,6 +16285,12 @@ msgid ""
 "files :-) You can also associate the <literal>svn:mime-type</literal> "
 "property with a diff or merge program."
 msgstr ""
+"<placeholder-1/> Nas configurações avançadas, é possível definir um "
+"comparador e um mesclador diferente para cada extensão de arquivo. Para cada "
+"instancia pode-se associar o Photoshop como o programa <quote>Comparador</"
+"quote> para arquivos <filename>.jpg</filename> :-) É possível também "
+"associar a propriedade <literal>svn:mime-type</literal> como programa "
+"comparador ou de mesclagem."
 
 #. (para)
 msgid ""
@@ -16251,7 +16302,7 @@ msgstr ""
 
 #. (title)
 msgid "Saved Data Settings"
-msgstr ""
+msgstr "Dados de configuração salvos"
 
 #. (title)
 msgid "The Settings Dialog, Saved Data Page"
@@ -16263,6 +16314,9 @@ msgid ""
 "settings you use, and remembers where you have been lately. If you want to "
 "clear out that cache of data, you can do it here."
 msgstr ""
+"<placeholder-1/> Para sua comodidade, TortoiseSVN salva muitas das "
+"configurações que você utiliza, e lembra onde você esteve anteriormente. Se "
+"você desejar limpar os dados de cache, pode ser feito aqui."
 
 #. (term)
 msgid "URL history"
@@ -16314,6 +16368,8 @@ msgstr "Dimensões e posições das janelas"
 #. (para)
 msgid "Many dialogs remember the size and screen position that you last used."
 msgstr ""
+"Muitos diálogos lembrar o tamanho e tela de posição que você usado pela "
+"última vez."
 
 #. (term)
 msgid "Authentication data"
@@ -16363,7 +16419,7 @@ msgstr "Cache de Log"
 
 #. (primary)
 msgid "log cache"
-msgstr ""
+msgstr "Cache de log"
 
 #. (title)
 msgid "The Settings Dialog, Log Cache Page"
@@ -16380,7 +16436,7 @@ msgstr ""
 
 #. (term)
 msgid "Enable log caching"
-msgstr ""
+msgstr "Habilitar cache de log"
 
 #. (para)
 msgid ""
@@ -16397,7 +16453,7 @@ msgstr ""
 
 #. (term)
 msgid "Allow ambiguous URLs"
-msgstr ""
+msgstr "Permitir URLs ambíguas"
 
 #. (para)
 msgid ""
@@ -16409,7 +16465,7 @@ msgstr ""
 
 #. (term)
 msgid "Allow ambiguous UUIDs"
-msgstr ""
+msgstr "Permitir UUIDs ambíguos"
 
 #. (para)
 msgid ""
@@ -16423,7 +16479,7 @@ msgstr ""
 
 #. (term)
 msgid "If the repository cannot be contacted"
-msgstr ""
+msgstr "Se o repositório não pode ser acessado"
 
 #. (para)
 msgid ""
@@ -16441,7 +16497,7 @@ msgstr ""
 
 #. (term)
 msgid "Timeout before updating the HEAD revision"
-msgstr ""
+msgstr "Tempo limite antes de atualizar a última revisão"
 
 #. (para)
 msgid ""
@@ -16456,7 +16512,7 @@ msgstr ""
 
 #. (term)
 msgid "Days of inactivity until small caches get removed"
-msgstr ""
+msgstr "Dias de inatividade até que pequenos caches sejam removidos"
 
 #. (para)
 msgid ""
@@ -16468,7 +16524,7 @@ msgstr ""
 
 #. (term)
 msgid "Maximum size of removed inactive caches"
-msgstr ""
+msgstr "Tamanho máximo de um cache inativo removido"
 
 #. (para)
 msgid ""
@@ -16478,7 +16534,7 @@ msgstr ""
 
 #. (term)
 msgid "Maximum number of tool failures before cache removal"
-msgstr ""
+msgstr "Número máximo de falhas da ferramenta antes da remoção do cache"
 
 #. (para)
 msgid ""
@@ -16536,7 +16592,7 @@ msgstr "RAM"
 
 #. (para)
 msgid "The amount of memory required to service this cache."
-msgstr ""
+msgstr "Quantidade de memória necessária para carregar o cache"
 
 #. (term)
 msgid "Disk"
@@ -16547,6 +16603,8 @@ msgid ""
 "The amount of disk space used for the cache. Data is compressed, so disk "
 "usage is generally fairly modest."
 msgstr ""
+"Quantidade de espaço em disco usado para o cache, Dados são comprimidos, "
+"então o uso do disco é geralmente bastante modesto."
 
 #. (term)
 msgid "Connection"
@@ -16556,6 +16614,7 @@ msgstr "Conexão"
 msgid ""
 "Shows whether the repository was available last time the cache was used."
 msgstr ""
+"Mostra se o repositório estava disponível última vez que o cache foi usado."
 
 #. (term)
 msgid "Last update"
@@ -16563,7 +16622,7 @@ msgstr "Última atualização"
 
 #. (para)
 msgid "The last time the cache content was changed."
-msgstr ""
+msgstr "A última vez que o conteúdo do cache foi alterado."
 
 #. (term)
 msgid "Last head update"
@@ -16571,7 +16630,7 @@ msgstr "Última atualização principal"
 
 #. (para)
 msgid "The last time we requested the HEAD revision from the server."
-msgstr ""
+msgstr "A Última vez que foi requisitada a última revisão do servidor."
 
 #. (term)
 msgid "Authors"
@@ -16579,7 +16638,7 @@ msgstr "Autores"
 
 #. (para)
 msgid "The number of different authors with messages recorded in the cache."
-msgstr ""
+msgstr "O número de autores diferentes com mensagens registradas no cache."
 
 #. (term)
 msgid "Paths"
@@ -16590,6 +16649,8 @@ msgid ""
 "The number of paths listed, as you would see using <literal>svn log -v</"
 "literal>."
 msgstr ""
+"O número de caminhos listados, como você veria usando <literal>svn log -v</"
+"literal>."
 
 #. (term)
 msgid "Skip ranges"
@@ -16608,7 +16669,7 @@ msgstr "Revisão máxima"
 
 #. (para)
 msgid "The highest revision number stored in the cache."
-msgstr ""
+msgstr "O maior número de revisão armazenada em cache"
 
 #. (term)
 msgid "Revision count"
@@ -16619,6 +16680,8 @@ msgid ""
 "The number of revisions stored in the cache. This is another measure of "
 "cache completeness."
 msgstr ""
+"O número de revisões armazenadas no cache. Esta é outra medida de cache "
+"complementar."
 
 #. (para)
 msgid ""
@@ -16627,6 +16690,10 @@ msgid ""
 "are mainly of interest to the developers of TortoiseSVN, so they are not all "
 "described in detail. <placeholder-2/>"
 msgstr ""
+"<placeholder-1/> clique no botão <guibutton>Detalhes</guibutton> para ver "
+"statisticas detalhadas de um cache em particular. Muitos dos campos "
+"mostrados aqui são de interesse de desenvolvedores do TortoiseSVN, por esse "
+"motivo não são exibidos todos os seus detalhes. <placeholder-2/>"
 
 #. (title)
 msgid "Client Side Hook Scripts"
@@ -16706,6 +16773,7 @@ msgstr "Post-commit"
 #. (para)
 msgid "Called after the commit finishes (whether successful or not)."
 msgstr ""
+"Chamado após o termino do envio (não importando se foi bem sucedido ou não)."
 
 #. (term)
 #. (term)
@@ -16714,7 +16782,7 @@ msgstr "Start-update"
 
 #. (para)
 msgid "Called before the update-to-revision dialog is shown."
-msgstr ""
+msgstr "Chamado antes que a notificação de uptate-to-revision seja exibida. "
 
 #. (term)
 #. (term)
@@ -16739,7 +16807,7 @@ msgstr ""
 #. (term)
 #. (term)
 msgid "Pre-connect"
-msgstr ""
+msgstr "Pré-conexão"
 
 #. (para)
 msgid ""
@@ -16818,7 +16886,7 @@ msgstr "svn_depth_infinity"
 
 #. (para)
 msgid "Possible values are: <placeholder-1/>"
-msgstr ""
+msgstr "Os valores possíveis são: <placeholder-1/>"
 
 #. (para)
 msgid ""
@@ -17394,7 +17462,7 @@ msgstr ""
 
 #. (title)
 msgid "Final Step"
-msgstr ""
+msgstr "Passo Final"
 
 #. (title)
 msgid "Donate!"
@@ -17425,7 +17493,7 @@ msgstr "SubWCRev"
 
 #. (primary)
 msgid "version extraction"
-msgstr ""
+msgstr "extração versão"
 
 #. (primary)
 msgid "SubWCRev"
@@ -17438,7 +17506,7 @@ msgstr "COM"
 
 #. (primary)
 msgid "version number in files"
-msgstr ""
+msgstr "Número de versão nos arquivos"
 
 #. (para)
 msgid ""
@@ -17612,20 +17680,24 @@ msgstr ""
 
 #. (entry)
 msgid "Error Code"
-msgstr ""
+msgstr "Código de Erro"
 
 #. (entry)
 msgid "Syntax error. One or more command line parameters are invalid."
 msgstr ""
+"Erro de sintaxe. Um ou mais parâmetros de linha de comando são inválidos."
 
 #. (entry)
 msgid "The file or folder specified on the command line was not found."
 msgstr ""
+"O arquivo ou pasta especificada na linha de comando não foi encontrado."
 
 #. (entry)
 msgid ""
 "The input file could not be opened, or the target file could not be created."
 msgstr ""
+"O arquivo de entrada não pôde ser aberto, ou o arquivo de destino não pode "
+"ser criado."
 
 #. (entry)
 msgid ""
@@ -17635,7 +17707,7 @@ msgstr ""
 
 #. (entry)
 msgid "The source file can not be scanned properly."
-msgstr ""
+msgstr "O arquivo fonte não pode ser escaneado apropriadamente."
 
 #. (entry)
 msgid ""
@@ -17645,7 +17717,7 @@ msgstr ""
 
 #. (literal)
 msgid "-n"
-msgstr ""
+msgstr "-n"
 
 #. (entry)
 msgid ""
@@ -17655,7 +17727,7 @@ msgstr ""
 
 #. (literal)
 msgid "-m"
-msgstr ""
+msgstr "-m"
 
 #. (entry)
 msgid ""
@@ -17665,7 +17737,7 @@ msgstr ""
 
 #. (literal)
 msgid "-d"
-msgstr ""
+msgstr "-d"
 
 #. (entry)
 msgid ""
@@ -17674,11 +17746,11 @@ msgstr ""
 
 #. (entry)
 msgid "The specified path is not a working copy or part or one."
-msgstr ""
+msgstr "O caminho especificado não é uma cópia de trabalho ou parte de uma."
 
 #. (literal)
 msgid "-N"
-msgstr ""
+msgstr "-N"
 
 #. (entry)
 msgid ""
@@ -17695,15 +17767,15 @@ msgstr ""
 
 #. (title)
 msgid "Keyword Substitution"
-msgstr ""
+msgstr "Alteração da palavra-chave"
 
 #. (title)
 msgid "List of available keywords"
-msgstr ""
+msgstr "Lista de palavras-chave disponíveis"
 
 #. (entry)
 msgid "Keyword"
-msgstr ""
+msgstr "Palavra-chave"
 
 #. (entry)
 msgid "Replaced with the highest commit revision in the working copy."
@@ -17744,7 +17816,7 @@ msgstr "$WCDATE=%a %b %d %I:%M:%S %p$"
 
 #. (citetitle)
 msgid "online reference"
-msgstr ""
+msgstr "referência online"
 
 #. (entry)
 msgid ""
@@ -17821,7 +17893,7 @@ msgstr ""
 
 #. (literal)
 msgid "$WCUNVER?TText:FText$"
-msgstr ""
+msgstr "$WCUNVER?TText:FText$"
 
 #. (entry)
 msgid ""
@@ -17831,7 +17903,7 @@ msgstr ""
 
 #. (literal)
 msgid "$WCEXTALLFIXED?TText:FText$"
-msgstr ""
+msgstr "$WCEXTALLFIXED?TText:FText$"
 
 #. (entry)
 msgid ""
@@ -17841,7 +17913,7 @@ msgstr ""
 
 #. (literal)
 msgid "$WCISTAGGED?TText:FText$"
-msgstr ""
+msgstr "$WCISTAGGED?TText:FText$"
 
 #. (entry)
 msgid ""
@@ -17892,11 +17964,11 @@ msgstr ""
 
 #. (entry)
 msgid "Replaced with the name of the lock owner."
-msgstr ""
+msgstr "Substituído com o nome do dono do bloqueio"
 
 #. (entry)
 msgid "Replaced with the comment of the lock."
-msgstr ""
+msgstr "Substituído com o comentário do bloqueio"
 
 #. (para)
 msgid ""
@@ -17929,7 +18001,7 @@ msgstr ""
 
 #. (title)
 msgid "Keyword Example"
-msgstr ""
+msgstr "Exemplo de Palavra-chave"
 
 #. (para)
 msgid ""
@@ -18065,11 +18137,11 @@ msgstr ""
 
 #. (literal)
 msgid "GetWCInfo()"
-msgstr ""
+msgstr "GetWCInfo()"
 
 #. (literal)
 msgid "-E"
-msgstr ""
+msgstr "-E"
 
 #. (entry)
 msgid ""
@@ -18113,7 +18185,7 @@ msgstr ""
 #. (row)
 #. (row)
 msgid "<placeholder-1/>."
-msgstr ""
+msgstr "<placeholder-1/>."
 
 #. (entry)
 msgid "The maximum update revision, as shown in <placeholder-1/>"
@@ -18121,11 +18193,11 @@ msgstr ""
 
 #. (entry)
 msgid "True if there are local modifications"
-msgstr ""
+msgstr "Verdadeiro se houver modificações locais"
 
 #. (entry)
 msgid "True if there are unversioned items"
-msgstr ""
+msgstr "Verdadeiro se existirem itens não versionados."
 
 #. (literal)
 msgid "GetWCInfo"
@@ -18143,7 +18215,7 @@ msgstr ""
 
 #. (entry)
 msgid "True if the item is versioned."
-msgstr ""
+msgstr "Verdadeiro se o item estiver versionado."
 
 #. (entry)
 msgid "True if the item has the <placeholder-1/> property set."
@@ -18151,7 +18223,7 @@ msgstr ""
 
 #. (entry)
 msgid "True if the item is locked."
-msgstr ""
+msgstr "Verdadeiro se o item estiver bloqueado"
 
 #. (entry)
 msgid ""
@@ -18800,7 +18872,7 @@ msgstr "movendo"
 
 #. (primary)
 msgid "reorganize"
-msgstr ""
+msgstr "reorganizar"
 
 #. (para)
 msgid ""
@@ -18878,7 +18950,7 @@ msgstr ""
 
 #. (title)
 msgid "Project properties"
-msgstr ""
+msgstr "Propriedades do projeto"
 
 #. (para)
 msgid ""
@@ -18927,7 +18999,7 @@ msgstr ""
 
 #. (primary)
 msgid "rollback"
-msgstr ""
+msgstr "retroceder"
 
 #. (primary)
 msgid "undo commit"
@@ -19033,13 +19105,15 @@ msgstr ""
 
 #. (para)
 msgid "Click <guibutton>Merge</guibutton> to complete the merge."
-msgstr ""
+msgstr "Clique <guibutton>Merge</guibutton> para completar a mesclagem."
 
 #. (para)
 msgid ""
 "You have reverted the changes within your working copy. Check that the "
 "results are as expected, then commit the changes."
 msgstr ""
+"Você reverteu as mudanças dentro de sua cópia de trabalho. Verifique se "
+"ocorreu conforme o esperado, em seguida, confirmar as alterações."
 
 #. (title)
 msgid "Use <literal>svndumpfilter</literal>"
@@ -19072,15 +19146,15 @@ msgstr ""
 
 #. (primary)
 msgid "compare files"
-msgstr ""
+msgstr "Comparar arquivos"
 
 #. (primary)
 msgid "compare folders"
-msgstr ""
+msgstr "Comparar diretórios"
 
 #. (primary)
 msgid "changes"
-msgstr ""
+msgstr "mudanças"
 
 #. (para)
 msgid ""
@@ -19122,7 +19196,7 @@ msgstr ""
 
 #. (primary)
 msgid "common projects"
-msgstr ""
+msgstr "Projetos comuns"
 
 #. (primary)
 msgid "vendor projects"
@@ -19133,6 +19207,9 @@ msgid ""
 "Sometimes you will want to include another project within your working copy, "
 "perhaps some library code. There are at least 4 ways of dealing with this."
 msgstr ""
+"Às vezes você vai querer incluir outro projeto dentro de sua cópia de "
+"trabalho, talvez alguma biblioteca de código . Há pelo menos 4 maneiras de "
+"lidar com isso."
 
 #. (title)
 msgid "Use svn:externals"
@@ -19231,7 +19308,7 @@ msgstr ""
 
 #. (title)
 msgid "Add the project to the repository"
-msgstr ""
+msgstr "Adicione o projeto para o repositório"
 
 #. (para)
 msgid ""
@@ -19253,11 +19330,11 @@ msgstr ""
 
 #. (title)
 msgid "Create a shortcut to a repository"
-msgstr ""
+msgstr "Criar atalho para um repositório"
 
 #. (primary)
 msgid "shortcut"
-msgstr ""
+msgstr "atalho"
 
 #. (para)
 msgid ""
@@ -19470,7 +19547,7 @@ msgstr ""
 
 #. (primary)
 msgid "SVN_ASP_DOT_NET_HACK"
-msgstr ""
+msgstr "SVN_ASP_DOT_NET_HACK"
 
 #. (primary)
 msgid "VS2003"
@@ -19548,7 +19625,7 @@ msgstr ""
 
 #. (title)
 msgid "Menu entries and their values"
-msgstr ""
+msgstr "Entradas do menu e seus valores"
 
 #. (entry)
 msgid "Value"
@@ -19706,11 +19783,11 @@ msgstr "Excluir não versionados"
 
 #. (entry)
 msgid "Merge All"
-msgstr ""
+msgstr "Mesclar tudo"
 
 #. (entry)
 msgid "Diff with previous version"
-msgstr ""
+msgstr "Diferença com a revisão anterior"
 
 #. (entry)
 msgid "Paste"
@@ -19929,7 +20006,7 @@ msgstr "/strict"
 
 #. (option)
 msgid "/merge"
-msgstr ""
+msgstr "/merge"
 
 #. (option)
 msgid "/findstring:\"filterstring\""
@@ -19949,15 +20026,15 @@ msgstr "/findtype:X"
 
 #. (para)
 msgid "<option>/findtype:0</option> filter by everything"
-msgstr ""
+msgstr "<option>/findtype:0</option> filtrar por tudo"
 
 #. (para)
 msgid "<option>/findtype:1</option> filter by messages"
-msgstr ""
+msgstr "<option>/findtype:1</option> filtrar por mensagens"
 
 #. (para)
 msgid "<option>/findtype:2</option> filter by path"
-msgstr ""
+msgstr "<option>/findtype:2</option> filtrar pelo caminho"
 
 #. (para)
 msgid "<option>/findtype:4</option> filter by authors"
@@ -19965,23 +20042,23 @@ msgstr ""
 
 #. (para)
 msgid "<option>/findtype:8</option> filter by revisions"
-msgstr ""
+msgstr "<option>/findtype:8</option> filtrar por revisão"
 
 #. (para)
 msgid "<option>/findtype:16</option> not used"
-msgstr ""
+msgstr "<option>/findtype:16</option> não usado"
 
 #. (para)
 msgid "<option>/findtype:32</option> filter by bug ID"
-msgstr ""
+msgstr "<option>/findtype:32</option> filtrar pelo ID do erro"
 
 #. (para)
 msgid "<option>/findtype:64</option> not used"
-msgstr ""
+msgstr "<option>/findtype:64</option> não usado"
 
 #. (para)
 msgid "<option>/findtype:128</option> filter by date"
-msgstr ""
+msgstr "<option>/findtype:128</option> filtrar por data"
 
 #. (para)
 msgid "<option>/findtype:256</option> filter by date range"
@@ -19989,7 +20066,7 @@ msgstr ""
 
 #. (option)
 msgid "/outfile:path\\to\\file"
-msgstr ""
+msgstr "/outfile:path\\to\\file"
 
 #. (entry)
 msgid ""
@@ -20016,11 +20093,11 @@ msgstr "/url"
 #. (option)
 #. (option)
 msgid "/blockpathadjustments"
-msgstr ""
+msgstr "/blockpathadjustments"
 
 #. (option)
 msgid "/revision:XXX"
-msgstr ""
+msgstr "/revision:XXX"
 
 #. (entry)
 msgid ""
@@ -20080,11 +20157,11 @@ msgstr "/includeexternals"
 
 #. (option)
 msgid "/stickydepth"
-msgstr ""
+msgstr "/stickydepth"
 
 #. (option)
 msgid "/skipprechecks"
-msgstr ""
+msgstr "/skipprechecks"
 
 #. (entry)
 msgid ""
@@ -20130,35 +20207,35 @@ msgstr "/noui"
 
 #. (option)
 msgid "/noprogressui"
-msgstr ""
+msgstr "/noprogressui"
 
 #. (option)
 msgid "/nodlg"
-msgstr ""
+msgstr "/nodlg"
 
 #. (option)
 msgid "/cleanup"
-msgstr ""
+msgstr "/cleanup"
 
 #. (option)
 msgid "/revert"
-msgstr ""
+msgstr "/revert"
 
 #. (option)
 msgid "/delunversioned"
-msgstr ""
+msgstr "/delunversioned"
 
 #. (option)
 msgid "/delignored"
-msgstr ""
+msgstr "/delignored"
 
 #. (option)
 msgid "/refreshshell"
-msgstr ""
+msgstr "/refreshshell"
 
 #. (option)
 msgid "/externals"
-msgstr ""
+msgstr "/externals"
 
 #. (entry)
 msgid ""
@@ -20207,27 +20284,27 @@ msgstr ""
 #. (option)
 #. (option)
 msgid "/droptarget"
-msgstr ""
+msgstr "/droptarget"
 
 #. (option)
 msgid "/overwrite"
-msgstr ""
+msgstr "/overwrite"
 
 #. (option)
 msgid "/autorename"
-msgstr ""
+msgstr "/autorename"
 
 #. (option)
 msgid "/extended"
-msgstr ""
+msgstr "/extended"
 
 #. (literal)
 msgid "localchanges"
-msgstr ""
+msgstr "alterações locais"
 
 #. (literal)
 msgid "unversioned"
-msgstr ""
+msgstr "Não versionado"
 
 #. (entry)
 msgid ""
@@ -20291,7 +20368,7 @@ msgstr ""
 
 #. (option)
 msgid "/switchaftercopy"
-msgstr ""
+msgstr "/switchaftercopy"
 
 #. (entry)
 msgid ""
@@ -20327,7 +20404,7 @@ msgstr "/path2"
 
 #. (option)
 msgid "/pegrevision:xxx"
-msgstr ""
+msgstr "/pegrevision:xxx"
 
 #. (option)
 msgid "/blame"
@@ -20479,7 +20556,7 @@ msgstr ""
 
 #. (option)
 msgid "/noview"
-msgstr ""
+msgstr "/noview"
 
 #. (entry)
 msgid ""
@@ -23422,7 +23499,7 @@ msgstr "Alterna entre quebrar a linha ou não"
 
 #. (term)
 msgid "Ctrl-G"
-msgstr ""
+msgstr "Ctrl-G"
 
 #. (para)
 msgid "Go to line"
@@ -23430,15 +23507,15 @@ msgstr "Ir para linha"
 
 #. (para)
 msgid "Select all text"
-msgstr ""
+msgstr "Selecionar todo o texto"
 
 #. (term)
 msgid "Ctrl-U"
-msgstr ""
+msgstr "Ctrl-U"
 
 #. (para)
 msgid "Switches views"
-msgstr ""
+msgstr "Alternar visões"
 
 #. (term)
 msgid "Ctrl-mousewheel"
@@ -23450,11 +23527,11 @@ msgstr "Rolar a tela esquerda/diretia"
 
 #. (term)
 msgid "Ctrl-Tab"
-msgstr ""
+msgstr "Ctrl-Tab"
 
 #. (para)
 msgid "Switch between left/right/bottom view"
-msgstr ""
+msgstr "Alternar entre visualização a esquerda/direita/inferior"
 
 #. (title)
 msgid "Automating TortoiseMerge"

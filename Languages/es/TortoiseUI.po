@@ -29,8 +29,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2014-03-24 09:54+0000\n"
-"Last-Translator: japaol <japaol@gmail.com>\n"
+"PO-Revision-Date: 2014-03-28 08:27+0000\n"
+"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -508,7 +508,7 @@ msgstr "&Aplicar propiedad recursivamente"
 
 #. Resource IDs: (610)
 msgid "&Apply the update to the move destination"
-msgstr ""
+msgstr "&Aplicar cambios al destino movido"
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -1465,7 +1465,7 @@ msgstr "Dos pa&ginas"
 
 #. Resource IDs: (1058, 1376, 1394)
 msgid "&URL of repository:"
-msgstr "&URL de repositorio:"
+msgstr "&URL del repositorio:"
 
 #. Resource IDs: (1076, 1305, 1561)
 msgid "&URL:"
@@ -1752,12 +1752,12 @@ msgid ""
 "If you add an '*' or no char at all at the end of a path, then all files and "
 "subdirs inside that path are included too."
 msgstr ""
-"Una lista de rutas, una por línea, para las cuales se mostrarán los íconos "
-"de estado de TortoiseSVN.\r\n"
-"Si añade un carácter '?' al final de la ruta, entonces solo esta ruta será "
-"incluida.\r\n"
-"Si añade un carácter '*' o ningún carácter al final de la ruta, entonces "
-"todos los archivos y subdirectorios dentro de la ruta serán incluidos."
+"Lista de rutas, una por línea, para las cuales se mostrarán los iconos "
+"superpuestos.\n"
+"Si se añade un carácter '?' al final de la ruta, sólo se incluirá esta "
+"ruta.\n"
+"Si se añade un carácter '*', o nada, al final de la ruta, se incluirán "
+"también todos los archivos y subcarpetas que contenga."
 
 #. Resource IDs: (197)
 msgid ""
@@ -1781,14 +1781,14 @@ msgid ""
 "subdirs inside that path are excluded too.\r\n"
 "An empty list will allow overlays on all paths."
 msgstr ""
-"Una lista de rutas, una por línea, para las cuales no se mostrarán los "
-"íconos de estado de TortoiseSVN.\r\n"
-"Si añade un carácter '?' al final de la ruta, entonces solo esta ruta será "
-"excluida.\r\n"
-"Si añade un carácter '*' o ningún carácter al final de la ruta, entonces "
-"todos los archivos y subdirectorios dentro de la ruta serán excluidos "
-"también.Una lista vacía permitirá íconos de estado de TortoiseSVN en todas "
-"las rutas."
+"Lista de ubicaciones, una por línea, que quedarán excluidas de mostrar "
+"superposiciones de iconos.\n"
+"Si se añade un '?' al final de una ubicación, se excluye únicamente la "
+"ubicación indicada.\n"
+"Si se añade un '*', o nada, se excluirán también todos los archivos y "
+"subcarpetas que contenga la ubicación indicada.\n"
+"Si la lista está vacía, se mostrarán las superposiciones de iconos en todas "
+"las ubicaciones."
 
 #. Resource IDs: (90)
 msgid ""
@@ -6101,19 +6101,19 @@ msgstr "ID:57665:V C +W"
 
 #. Resource IDs: (106)
 msgid "Icon Overlays"
-msgstr "Iconos Sobrepuestos"
+msgstr "Superposición de Iconos"
 
 #. Resource IDs: (65535)
 msgid "Icon Overlays / Status Columns"
-msgstr "Sobreimpresión de iconos / Columnas de estado"
+msgstr "Superposición de iconos / Columnas de estado"
 
 #. Resource IDs: (184)
 msgid "Icon Overlays::Icon Set"
-msgstr "Iconos Sobrepuestos::Conjunto de Iconos"
+msgstr "Superposición de Iconos::Iconos"
 
 #. Resource IDs: (308)
 msgid "Icon Overlays::Overlay Handlers"
-msgstr "Iconos Sobrepuestos::Conjunto de Iconos"
+msgstr "Superposición de Iconos::Controladores"
 
 #. Resource IDs: (65535)
 msgid "Icons/Design/Code:\t\tLuebbe Onken"
@@ -6148,8 +6148,8 @@ msgid ""
 "If activated, prevents the overlays and the context menu from showing in "
 "'save as...' or 'open' dialogs"
 msgstr ""
-"Si se activa, previene la aparición de iconos sobreimpresos y del menú "
-"contextual en los diálogos de 'guardar como...' o 'abrir'"
+"Si está marcada, no se mostrarán las superposiciones de iconos ni el menú "
+"contextual en los cuadro  de diálogos 'Guardar como...' o 'Abrir'"
 
 #. Resource IDs: (198)
 msgid ""
@@ -6210,8 +6210,8 @@ msgid ""
 "If enabled, working copy folders which are excluded from\n"
 "showing overlays still show the overlay for status 'normal'"
 msgstr ""
-"Si se habilita, las carpetas de las copias de trabajo que estén excluídas\n"
-"de mostrar íconos sobrepuestos mostrarán el icono del estado 'normal'"
+"Si está macado, las carpetas de copias de trabajo excluidas de mostrar "
+"iconos superpuestos mostrarán el icono de estado 'normal'"
 
 #. Resource IDs: (195)
 msgid ""
@@ -6237,10 +6237,9 @@ msgid ""
 "as modified\r\n"
 "i.e. they get the modified overlay icon."
 msgstr ""
-"Si está marcado, los archivos sin versionar marcarán el estado de su "
-"directorio padre como modificado\r\n"
-"es decir, esos directorios obtendrán el icono sobreimpresionado de estar "
-"modificados."
+"Si está marcado, los archivos no versionados marcarán el estado de la "
+"carpeta contenedora como modificado, es decir, estas carpetas se mostrarán "
+"con el icono superpuesto de modificado."
 
 #. Resource IDs: (2052)
 msgid ""
@@ -6928,7 +6927,7 @@ msgstr "Barra de localización"
 
 #. Resource IDs: (207, 221, 229, 65535)
 msgid "Lock"
-msgstr "Bloquear"
+msgstr "Bloqueo"
 
 #. Resource IDs: (208)
 msgid "Lock Date"
@@ -7714,8 +7713,8 @@ msgid ""
 "No status cache. Only versioned folders get an overlay, files don't get an "
 "overlay"
 msgstr ""
-"Sin caché de estado. Sólo tienen sobreimpresiones las carpetas versionadas, "
-"los archivos no"
+"Sin caché de estado. Sólo las carpetas versionadas mostrarán iconos "
+"superpuestos, los archivos no"
 
 #. Resource IDs: (84)
 #, c-format
@@ -7748,7 +7747,7 @@ msgstr "no-versionado"
 
 #. Resource IDs: (1070, 1271, 1506)
 msgid "None"
-msgstr "Ninguno"
+msgstr "Ninguna"
 
 #. Resource IDs: (264, 65535)
 msgid "Normal"
@@ -10169,7 +10168,7 @@ msgstr "Mostrar &registro..."
 
 #. Resource IDs: (1088)
 msgid "Show &overlays and context menu only in explorer"
-msgstr "M&ostrar iconos sobreimpresos y menú contextual sólo en el explorador"
+msgstr "Mostrar sólo en el 'Explorador de archivos' de Windows"
 
 #. Resource IDs: (1073)
 msgid "Show &unversioned files"
@@ -10257,7 +10256,7 @@ msgstr "Mostrar diferencias como 'diff &unificado'"
 
 #. Resource IDs: (1126)
 msgid "Show excluded root folders as normal"
-msgstr "Mostrar carpetas raíz excluidas de forma normal"
+msgstr "Mostrar carpetas excluidas con el estado 'normal'"
 
 #. Resource IDs: (1480)
 msgid "Show externals from &different repositories"
@@ -10680,12 +10679,14 @@ msgstr "Caché de estado"
 msgid ""
 "Status cache kept in an external process, can show the overlay recursively"
 msgstr ""
-"Caché de estado almacenado en un proceso externo, puede mostrar "
-"sobreimpresiones recursivamente"
+"La caché de estado se mantiene en un proceso externo, permite mostrar las "
+"superposiciones recursivamente"
 
 #. Resource IDs: (196)
 msgid "Status cache only for one folder, no recursive overlays"
-msgstr "Caché de estado sólo para una carpeta, sin sobreimpresiones recursivas"
+msgstr ""
+"La caché de estado se mantiene sólo para una carpeta, sin superposiciones "
+"recursivas"
 
 #. Resource IDs: (11)
 msgid "Status of item in SVN"
@@ -12465,7 +12466,7 @@ msgstr "No versionado"
 
 #. Resource IDs: (1313)
 msgid "Unversioned files mark parent folder as modified"
-msgstr "Archivos sin versionar marcan la carpeta padre como modificada"
+msgstr "Archivos no versionados marcan la carpeta contenedora como modificada"
 
 #. Resource IDs: (286)
 #, c-format
@@ -13392,8 +13393,8 @@ msgstr "[Sin asignar]"
 #. Resource IDs: (1562)
 msgid "\"ignore-on-commit\" files do not mark parent folder modified"
 msgstr ""
-"Los ficheros marcados como \"ignorar al subir\" no marcarán la carpeta padre "
-"como modificada"
+"Los archivos en \"ignore-on-commit\" no marcan la carpeta contenedora como "
+"modificada"
 
 #. Resource IDs: (346)
 msgid ""
@@ -13625,7 +13626,7 @@ msgstr "dummy"
 
 #. Resource IDs: (1342)
 msgid "eol style"
-msgstr "eol style"
+msgstr "Finales de línea"
 
 #. Resource IDs: (79)
 #, c-format
