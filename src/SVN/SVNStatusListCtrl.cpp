@@ -1003,6 +1003,7 @@ void CSVNStatusListCtrl::AddUnversionedFolder(const CTSVNPath& folderName,
 {
     if (!m_bUnversionedRecurse)
         return;
+    SVNConfig::Instance().GetWCIgnores(basePath);
     CSimpleFileFind filefinder(folderName.GetWinPathString());
 
     CTSVNPath filename;
@@ -1033,6 +1034,7 @@ void CSVNStatusListCtrl::AddUnversionedFolder(const CTSVNPath& folderName,
             }
         }
     }
+    SVNConfig::Instance().GetDefaultIgnores();
 }
 
 void CSVNStatusListCtrl::PostProcessEntry ( const FileEntry* entry
