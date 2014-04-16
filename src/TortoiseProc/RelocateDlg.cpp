@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2012 - TortoiseSVN
+// Copyright (C) 2003-2012, 2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -59,6 +59,7 @@ BOOL CRelocateDlg::OnInitDialog()
     m_aeroControls.SubclassOkCancelHelp(this);
 
     m_URLCombo.SetURLHistory(true, true);
+    m_URLCombo.LoadHistory(L"Software\\TortoiseSVN\\History\\repoURLS", L"url");
     m_URLCombo.SetCurSel(0);
 
     RECT rect;
@@ -89,6 +90,7 @@ BOOL CRelocateDlg::OnInitDialog()
 void CRelocateDlg::OnOK()
 {
     UpdateData(TRUE);
+    m_URLCombo.SaveHistory();
     m_sToUrl = m_URLCombo.GetString();
     UpdateData(FALSE);
 
