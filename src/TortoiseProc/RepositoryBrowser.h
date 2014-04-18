@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,6 +52,7 @@ public:
         , is_external(false)
         , kind(svn_node_unknown)
         , svnparentpathroot(false)
+        , unversioned(false)
     {
     }
 
@@ -62,6 +63,7 @@ public:
     bool            is_external;                ///< if set, several operations may not be available
     bool            children_fetched;           ///< whether the contents of the folder are known/fetched or not
     bool            has_child_folders;
+    bool            unversioned;
     std::deque<CItem>    children;
     CString         error;
     svn_node_kind_t kind;

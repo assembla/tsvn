@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2009-2013 - TortoiseSVN
+// Copyright (C) 2009-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -74,6 +74,7 @@ public:
         , is_dav_comment(false)
         , lock_creationdate(0)
         , lock_expirationdate(0)
+        , unversioned(false)
     {
     }
     CItem
@@ -114,6 +115,7 @@ public:
         , lock_expirationdate (lock_expirationdate)
         , absolutepath (absolutepath)
         , repository (repository)
+        , unversioned(false)
     {
     }
 
@@ -132,6 +134,7 @@ public:
     bool                has_props;
     bool                is_external;
     bool                complete;
+    bool                unversioned;
 
     /// number of levels up the local path hierarchy to find the external spec.
     /// -1, if this is not an external
