@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -429,7 +429,7 @@ svn_revnum_t SVN::Commit(const CTSVNPathList& pathlist, const CString& message,
                                   keep_locks,
                                   keepchangelist,
                                   true,       // commit_as_operations
-                                  false,      // include file externals
+                                  true,       // include file externals
                                   false,      // include dir externals
                                   clists,
                                   revprop_table,
