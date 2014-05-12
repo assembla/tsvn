@@ -464,6 +464,8 @@ void CCommitDlg::OnOK()
     std::set<CString> checkedLists;
     std::set<CString> uncheckedLists;
     m_restorepaths.clear();
+    m_restorepaths = m_ListCtrl.GetRestorePaths();
+    bool bAllowPeggedExternals = !DWORD(CRegDWORD(L"Software\\TortoiseSVN\\BlockPeggedExternals", TRUE));
     for (int j=0; j<nListItems; j++)
     {
         const CSVNStatusListCtrl::FileEntry * entry = m_ListCtrl.GetConstListEntry(j);
@@ -500,10 +502,6 @@ void CCommitDlg::OnOK()
             if (entry->IsCopied() && entry->IsFolder())
             {
                 bHasDirCopyPlus = true;
-            }
-            if (!entry->GetRestorePath().IsEmpty())
-            {
-                m_restorepaths[entry->GetRestorePath()] = entry->GetPath().GetWinPathString();
             }
             checkedLists.insert(entry->GetChangeList());
         }
