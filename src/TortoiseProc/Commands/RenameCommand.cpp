@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2011, 2013 - TortoiseSVN
+// Copyright (C) 2007-2011, 2013-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -93,9 +93,15 @@ bool RenameCommand::Execute()
     else
     {
         CString sFilemask = cmdLinePath.GetFilename();
-        int slashpos = sFilemask.ReverseFind('\\');
-        if (slashpos < 0)
-            slashpos = 0;
+        int slashpos = 0;
+        // find out up to which char sFilemask and sNewName are identical
+        int minlen = min(sFilemask.GetLength(), sNewName.GetLength());
+        for (; slashpos < minlen; ++slashpos)
+        {
+            if (sFilemask[slashpos] != sNewName[slashpos])
+                break;
+        }
+
         if (sFilemask.ReverseFind('.')>=slashpos)
         {
             while (sFilemask.ReverseFind('.')>=slashpos)
@@ -104,16 +110,23 @@ bool RenameCommand::Execute()
         else
             sFilemask.Empty();
         CString sNewMask = sNewName;
-        if (sNewMask.ReverseFind('.')>=0)
+        if (sNewMask.ReverseFind('.') >= slashpos)
         {
-            while (sNewMask.ReverseFind('.')>=0)
+            while (sNewMask.ReverseFind('.') >= slashpos)
                 sNewMask = sNewMask.Left(sNewMask.ReverseFind('.'));
         }
         else
             sNewMask.Empty();
 
-        if (((!sFilemask.IsEmpty()) && (parser.HasKey(_T("noquestion")))) ||
-            (cmdLinePath.GetFileExtension().Compare(destinationPath.GetFileExtension())!=0))
+        CString sRightPartNew = sNewName.Mid(sNewMask.GetLength());
+        CString sRightPartOld = cmdLinePath.GetFilename().Mid(sFilemask.GetLength());
+
+        // if the file extension changed, or the old and new right parts are not the
+        // same then we can not correctly guess the new names of similar files, so
+        // just do the plain rename of the selected file and don't offer to rename similar ones.
+        if (((!sFilemask.IsEmpty()) && (parser.HasKey(L"noquestion"))) ||
+            (cmdLinePath.GetFileExtension().Compare(destinationPath.GetFileExtension())!=0) ||
+            (sRightPartOld.CompareNoCase(sRightPartNew)))
         {
             if (RenameWithReplace(GetExplorerHWND(), CTSVNPathList(cmdLinePath), destinationPath, sMsg))
                 bRet = true;
@@ -245,7 +258,8 @@ bool RenameCommand::RenameWithReplace(HWND hWnd, const CTSVNPathList &srcPathLis
     }
     if ((idret != IDCANCEL)&&(!svn.Move(srcPathList, destPath, message, move_as_child, make_parents)))
     {
-        if (svn.GetSVNError()->apr_err == SVN_ERR_ENTRY_NOT_FOUND)
+        auto apr_err = svn.GetSVNError()->apr_err;
+        if ((apr_err == SVN_ERR_ENTRY_NOT_FOUND) || (apr_err == SVN_ERR_WC_PATH_NOT_FOUND))
         {
             bRet = !!MoveFile(srcPathList[0].GetWinPath(), destPath.GetWinPath());
         }
