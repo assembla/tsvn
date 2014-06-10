@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007, 2009, 2011-2013 - TortoiseSVN
+// Copyright (C) 2007, 2009, 2011-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -378,16 +378,12 @@ void CFilterEdit::DrawDimText()
         return;
 
     CClientDC   dcDraw(this);
-    CRect       rRect;
     int         iState = dcDraw.SaveDC();
-
-    GetClientRect(&rRect);
-    rRect.OffsetRect(1, 1);
 
     dcDraw.SelectObject((*GetFont()));
     dcDraw.SetTextColor(GetSysColor(COLOR_GRAYTEXT));
     dcDraw.SetBkColor(GetSysColor(COLOR_WINDOW));
-    dcDraw.DrawText(m_pCueBanner.get(), (int)_tcslen(m_pCueBanner.get()), &rRect, DT_CENTER | DT_VCENTER);
+    dcDraw.DrawText(m_pCueBanner.get(), (int)wcslen(m_pCueBanner.get()), &m_rcEditArea, DT_CENTER | DT_VCENTER);
     dcDraw.RestoreDC(iState);
     return;
 }
