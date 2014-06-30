@@ -12,18 +12,18 @@
 # Translators:
 # Adam Harper <cadamharper@gmail.com>, 2012
 # cuscu <agua.cuscu@gmail.com>, 2011
-# mx1810 <mx1810@gmail.com>, 2014
+# Arturo Álvarez García <mx1810@gmail.com>, 2014
 # augusto wloch <augustowloch@gmail.com>, 2014
 # dark_nexus <cool.dark.nexus@gmail.com>, 2011
 # cuscu <agua.cuscu@gmail.com>, 2011
 # dark_nexus <cool.dark.nexus@gmail.com>, 2011
-# Dharth <emilpg@gmail.com>, 2013
-# Dharth <emilpg@gmail.com>, 2013
+# Emilio Plaza García <emilpg@gmail.com>, 2013
+# Emilio Plaza García <emilpg@gmail.com>, 2013
 # Francisco Javier Rodríguez Mesa <javier.rodriguez@fjrodriguez.com>, 2011
 # ggh <gdelahuebra@hotmail.com>, 2011
 # ggh <gdelahuebra@hotmail.com>, 2011
-# japaol <japaol@gmail.com>, 2014
-# japaol <japaol@gmail.com>, 2014
+# Javi <japaol@gmail.com>, 2014
+# Javi <japaol@gmail.com>, 2014
 # juancentro <jmtruppia@gmail.com>, 2011
 # juancentro <jmtruppia@gmail.com>, 2011
 # Juan Chacon <jchacon.fossey@gmail.com>, 2012
@@ -33,10 +33,10 @@
 # luiceur <luiceur@gmail.com>, 2011
 # luiceur <luiceur@gmail.com>, 2011
 # Luis Valencia <luis.valencia.medina@gmail.com>, 2012
-# pabloFiumi <plf.asser@gmail.com>, 2013
-# pabloFiumi <plf.asser@gmail.com>, 2013
+# Pablo L. Fiumidinisi <plf.asser@gmail.com>, 2013
+# Pablo L. Fiumidinisi <plf.asser@gmail.com>, 2013
 # RGomez, 2013
-# RGomez, 2013
+# Roberto Gómez, 2013-2014
 # Tomás Christie <tommychristie@gmail.com>, 2011-2012
 # toro <victor.velazco@gmail.com>, 2011
 # toro <victor.velazco@gmail.com>, 2011
@@ -45,8 +45,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2014-05-06 17:41+0000\n"
-"Last-Translator: mx1810 <mx1810@gmail.com>\n"
+"PO-Revision-Date: 2014-06-29 15:31+0000\n"
+"Last-Translator: Roberto Gómez\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -385,9 +385,7 @@ msgstr ""
 
 #. (title)
 msgid "License"
-msgstr ""
-"<emphasis>Añadido</emphasis> se carga si es posible, pero vuelve a "
-"<emphasis>Modificado</emphasis> si no hay suficientes huecos."
+msgstr "Licencia"
 
 #. (para)
 msgid ""
@@ -867,9 +865,9 @@ msgid ""
 "into many different languages. Please check <xref linkend=\"tsvn-lang\"/> "
 "for more information on how to install these."
 msgstr ""
-"Están disponibles paquetes de lenguajes que traducen la interfaz de usuario "
-"de TortoiseSVN en varios idiomas. Por favor revise  <xref linkend=\"tsvn-lang"
-"\"/> para más información sobre como instalarlos."
+"Están disponibles paquetes de idioma que traducen la interfaz de usuario de "
+"TortoiseSVN en varios idiomas. Por favor revise  <xref linkend=\"tsvn-lang\"/"
+"> para más información sobre cómo instalarlos."
 
 #. (para)
 msgid ""
@@ -3171,17 +3169,17 @@ msgid ""
 "Scripts</citetitle></ulink> in the Subversion Book for full details about "
 "the hooks which are implemented."
 msgstr ""
-"Un script gancho es un programa lanzado desde algún evento de repositorio, "
-"como la creación de una nueva revisión o la modificación de una propiedad no "
-"versionada. Cada gancho maneja suficiente información para decir de que "
-"evento se trata, con que destino(s)  está operando, y el nombre de usuario "
-"de la persona que lanzó el evento. Dependiendo del resultado del gancho o "
-"del estado de la respuesta, el programa gancho puede continuar la acción, "
-"detenerla o suspenderla de alguna manera. Por favor dirígase al capítulo "
-"<ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.reposadmin.create."
-"html#svn.reposadmin.create.hooks\"><citetitle>Scripts gancho</citetitle></"
-"ulink> en el libro de Subversion para ver todos los detalles acerca de los "
-"ganchos que están implementados."
+"Un script gancho (N.d.T.: <emphasis>hook</emphasis> en inglés) es un "
+"programa lanzado desde algún evento de repositorio, como la creación de una "
+"nueva revisión o la modificación de una propiedad no versionada. Cada gancho "
+"maneja suficiente información para decir de que evento se trata, con que "
+"destino(s)  está operando, y el nombre de usuario de la persona que lanzó el "
+"evento. Dependiendo del resultado del gancho o del estado de la respuesta, "
+"el programa gancho puede continuar la acción, detenerla o suspenderla de "
+"alguna manera. Por favor dirígase al capítulo <ulink url=\"http://svnbook."
+"red-bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks"
+"\"><citetitle>Scripts gancho</citetitle></ulink> en el libro de Subversion "
+"para ver todos los detalles acerca de los ganchos que están implementados."
 
 #. (para)
 msgid ""
@@ -5594,6 +5592,16 @@ msgid ""
 "then you should search for lines starting with the string <literal>&lt;&lt;"
 "&lt;&lt;&lt;&lt;&lt;</literal>."
 msgstr ""
+"Puede lanzar una herramienta de fusión / editor de conflictos externo con "
+"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Editar Conflictos</"
+"guimenuitem></menuchoice> o puede usar cualquier editor de texto para "
+"resolver el conflicto manualmente. Debe decidir cómo debe quedar finalmente "
+"el código, hacer los cambios necesarios y guardar el fichero. Usando una "
+"herramienta de fusión como TortoiseMerge o cualquier otra herramienta "
+"popular es normalmente la mejor opción ya que generalmente presentan los "
+"ficheros en una vista de 3 paneles y no tiene que preocuparse de las marcas "
+"de conflicto. Si usa un editor de texto entonces debe buscar las líneas que "
+"comiencen con el literal  <literal>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</literal>."
 
 #. (para)
 msgid ""
@@ -6390,7 +6398,7 @@ msgstr ""
 "en su sistema. Esto se debe a que el número de íconos superpuestos "
 "permitidos por Windows es muy limitado y si está utilizando también una "
 "versión antigua de TortoiseCVS, no hay suficientes lugares disponibles para "
-"íconos superpuestos.  TortoiseSVN intenta ser un <quote>Buen Ciudadano (TM)</"
+"íconos superpuestos.  TortoiseSVN intenta ser un <quote>Buen Ciudadano ® </"
 "quote> y limita su uso de superposiciones para darles una oportunidad al "
 "resto de las aplicaciones."
 
@@ -6402,6 +6410,11 @@ msgid ""
 "DLL, which can be used by all Tortoise clients. Check with your client "
 "provider to see if this has been integrated yet :-)"
 msgstr ""
+"Ahora que hay muchos otros clientes Tortoise (TortoiseCVS, TortoiseHg, ...) "
+"el límite de iconos comienza a ser un problema real. Para evitar esto, el "
+"proyecto TortoiseSVN introdujo un set de iconos compartidos, cargados como "
+"una DLL, que pueden ser usados por todos los clientes Tortoise. Compruebe "
+"con el proveedor de su cliente si esto ya se ha integrado :-)"
 
 #. (para)
 msgid ""
@@ -6612,34 +6625,45 @@ msgstr ""
 #. (para)
 msgid "Checkout depth <literal>empty</literal>, meaning only the item itself."
 msgstr ""
+"Profundidad de obtención <literal>vacía</literal>, significando solo el "
+"propio ítem."
 
 #. (para)
 msgid ""
 "Checkout depth <literal>files</literal>, meaning only the item itself and "
 "all file children without child folders."
 msgstr ""
+"Profundidad de obtención <literal>archivos</literal>, significando solo el "
+"propio ítem y todos los archivos hijo sin carpetas hijas."
 
 #. (para)
 msgid ""
 "Checkout depth <literal>immediates</literal>, meaning only the item itself "
 "and all file and folder children, but without children of the child folders."
 msgstr ""
+"Profundidad de obtención <literal>inmediata</literal>, significando solo el "
+"propio ítem y todos los archivos y carpetas hijos, pero sin los hijos de las "
+"carpetas hijas."
 
 #. (para)
 msgid "Nested items, i.e., working copies inside the working copy."
-msgstr ""
+msgstr "Ítems anidados, como copias de trabajo dentro de la copia de trabajo."
 
 #. (para)
 msgid ""
 "External items, i.e., all items that are added via an <literal>svn:"
 "externals</literal> property."
 msgstr ""
+"Ítems externos, como todos los ítems añadidos usando la propiedad "
+"<literal>svn:externals</literal>."
 
 #. (para)
 msgid ""
 "Items that are restored after a commit. See <xref linkend=\"tsvn-dug-commit-"
 "restore\"/> for details."
 msgstr ""
+"Ítems restaurados tras una confirmacion. Para más información, lea <xref "
+"linkend=\"tsvn-dug-commit-restore\"/>."
 
 #. (para)
 msgid ""
@@ -6647,6 +6671,9 @@ msgid ""
 "mergeinfo</literal> property. If any other property is modified, the overlay "
 "is not used."
 msgstr ""
+"Ítems con modificación de propiedades, pero solo en la propiedad "
+"<literal>svn:mergeinfo</literal>. Si tiene cualquier otra propiedad "
+"modificada, el icono superpuesto no se usa."
 
 #. (para)
 msgid ""
@@ -6655,6 +6682,11 @@ msgid ""
 "fileref=\"../images/statuslistoverlays.png\"/> Overlays are shown for the "
 "following states: <placeholder-1/>"
 msgstr ""
+"Se usan íconos superpustos para indicar también otros estados. La captura de "
+"pantalla siguiente muestra todas las posibles superposiciones que se pueden "
+"llegar a ver.  <graphic fileref=\"../images/statuslistoverlays.png\"/> Los "
+"íconos superpuestos se muestran para los siguientes estados:  <placeholder-1/"
+">"
 
 #. (para)
 msgid ""
@@ -11159,27 +11191,27 @@ msgstr ""
 
 #. (listitem)
 msgid "tsvn:startcommithook"
-msgstr ""
+msgstr "tsvn:startcommithook"
 
 #. (listitem)
 msgid "tsvn:precommithook"
-msgstr ""
+msgstr "tsvn:precommithook"
 
 #. (listitem)
 msgid "tsvn:postcommithook"
-msgstr ""
+msgstr "tsvn:postcommithook"
 
 #. (listitem)
 msgid "tsvn:startupdatehook"
-msgstr ""
+msgstr "tsvn:startupdatehook"
 
 #. (listitem)
 msgid "tsvn:preupdatehook"
-msgstr ""
+msgstr "tsvn:preupdatehook"
 
 #. (listitem)
 msgid "tsvn:postupdatehook"
-msgstr ""
+msgstr "tsvn:postupdatehook"
 
 #. (para)
 msgid "The available properties/hook-scripts are <placeholder-1/>"
@@ -19376,8 +19408,8 @@ msgid ""
 "Windows shell execute will not allow such scripts to run due to security "
 "restrictions."
 msgstr ""
-"Leugo, usted debe especificar la línea de comando a ejecutar, empezando con "
-"la ruta al hook script o ejecutable. Este podría ser un archivo por lotes, "
+"Luego, usted debe especificar la línea de comando a ejecutar, empezando con "
+"la ruta al script gancho o ejecutable. Este podría ser un archivo por lotes, "
 "un archivo ejecutable o cualquier otro archivo que tenga una asociación de "
 "fichero válida para Windows, por ejemplo, un script en perl. Debe saber que "
 "el script no debe de ser especificado usando una ruta UNC ya que la consola "
@@ -19523,7 +19555,7 @@ msgid ""
 "ulink>. (<xref linkend=\"tsvn-preface-source\"/> explains how to access the "
 "repository.)"
 msgstr ""
-"Ejemplos de hook scripts clientes pueden ser encontrados en la carpeta "
+"Ejemplos de scripts gancho del cliente pueden ser encontrados en la carpeta "
 "<literal>contrib</literal> en el <ulink url=\"http://tortoisesvn.googlecode."
 "com/svn/trunk/contrib/hook-scripts\"><citetitle> repositorio de TortoiseSVN "
 "</citetitle></ulink>. (<xref linkend=\"tsvn-preface-source\"/> explica cómo "
@@ -21258,7 +21290,7 @@ msgstr ""
 
 #. (title)
 msgid "IBugtraqProvider interface"
-msgstr "Interfase IBugtraqProvider"
+msgstr "Interfaz IBugtraqProvider"
 
 #. (primary)
 msgid "plugin"
@@ -21326,11 +21358,11 @@ msgid ""
 "version control clients."
 msgstr ""
 "Si usted libera una extensión del gestor de incidencias para TortoiseSVN, "
-"por favor <emphasis>no</emphasis> lo nombre <emphasis>Tortoise&lt;...algo-"
-"más...&gt;</emphasis>. Nos gustaría reservar el prefixo <emphasis>Tortoise</"
-"emphasis> para el cliente de control de versión integrado a windows. Por "
-"ejemplo: TortoiseCVS, TortoiseSVN, TortoiseHg, TortoiseGit y TortoiseBzr son "
-"todos clientes de control de versión."
+"por favor <emphasis>no</emphasis> lo nombre <emphasis>Tortoise&lt;XXXXX&gt;</"
+"emphasis>. Nos gustaría reservar el prefijo <emphasis>Tortoise</emphasis> "
+"para el cliente de control de versión integrado a windows. Por ejemplo: "
+"TortoiseCVS, TortoiseSVN, TortoiseHg, TortoiseGit y TortoiseBzr son todos "
+"clientes de control de versión."
 
 #. (para)
 msgid "Gurtle - An issue tracker plugin for Google code"
@@ -21353,10 +21385,15 @@ msgid ""
 "a name that sounds like <emphasis>Turtle</emphasis> but has a different "
 "first letter. Nice examples are: <placeholder-1/>"
 msgstr ""
+"Por favor, nombre su extensión para un cliente Tortoise <emphasis>Turtle&lt;"
+"XXXXX&gt;</emphasis>, donde <emphasis>&lt;XXXXX&gt;</emphasis> se refiere al "
+"gestor de incidencias al que se está usted conectando. Como alternativa "
+"puede elegir un nombre que suene como <emphasis>Turtle</emphasis> pero que "
+"comience por otra letra. Buenos ejemplos son: <placeholder-1/>"
 
 #. (title)
 msgid "The IBugtraqProvider interface"
-msgstr "La interfase de IBugtraqProvider"
+msgstr "La interfaz de IBugtraqProvider"
 
 #. (para)
 msgid ""
@@ -22248,6 +22285,8 @@ msgid ""
 "By far the easiest way to revert the changes from one or more revisions, is "
 "to use the revision log dialog."
 msgstr ""
+"La manera más simple para revertir los cambios desde una o varias versiones "
+"es usar el diálogo de registro de revisiones."
 
 #. (para)
 msgid ""
@@ -22280,6 +22319,13 @@ msgid ""
 "<menuchoice><guimenu>Context Menu</guimenu><guimenuitem>Revert changes from "
 "this revision</guimenuitem></menuchoice>."
 msgstr ""
+"Elija la revisión que desea revertir. Si desea deshacer un rango de "
+"revisiones, elija la primera y pulse la tecla <keycap>Mayús</keycap> "
+"mientras selecciona la última. Si quiere elegir revisiones sueltas y rangos, "
+"use la tecla <keycap>Ctrl</keycap> mientras seleciona revisiones. Haga "
+"<action>click con el botón derecho</action> en las selección y elija "
+"<guimenu>Menú Contextual</guimenu><guimenuitem>Revertir cambios de esta "
+"revisión</guimenuitem></menuchoice>."
 
 #. (para)
 msgid ""
@@ -22851,6 +22897,14 @@ msgid ""
 "help with MSI customization, try one of the MSI transform forums or search "
 "the web for <quote>MSI transform</quote>."
 msgstr ""
+"Si lo desea, puede personalizar el fichero MSI par que todos sus usuarios "
+"tengan la misma configuración. La configuración de TSVN se almacena en el "
+"registro en <filename>HKEY_CURRENT_USER\\Software\\TortoiseSVN</filename> y "
+"los parámetros generales de Subversion (que afectan a todos los clientes "
+"Subversion) se guardan en ficheros de configración en <filename>%APPDATA%"
+"\\Subversion</filename>. Si necesita ayuda con la personalización del MSI, "
+"pruebe en algún foro de MSI transform o busque en la web <quote>MSI "
+"transform</quote>."
 
 #. (title)
 msgid "Redirect the upgrade check"
@@ -25532,7 +25586,7 @@ msgid ""
 "run the install program and follow the instructions. After the installation "
 "finishes, the translation will be available."
 msgstr ""
-"Cada paquete de lenguaje se encuentra como un instalador <literal>.msi</"
+"Cada paquete de idioma se encuentra como un instalador <literal>.msi</"
 "literal>. Simplemente ejecuta el programa de instalación y sigue las "
 "instrucciones. Cuando termine la instalación, la traducción estará "
 "disponible."
@@ -25582,12 +25636,12 @@ msgid ""
 "files as well as the TortoiseSVN local user interface. After the "
 "installation finishes, the dictionary will be available too."
 msgstr ""
-"El instalador añade los EE.UU. y del Reino Unido los diccionarios "
-"automáticamente. Si desea otros idiomas, la opción más sencilla es instalar "
-"uno de los paquetes de idiomas de TortoiseSVN. Esto instalará los ficheros "
-"de diccionario adecuados, así como la interfaz de usuario de TortoiseSVN "
-"local. Una vez finalizada la instalación, el diccionario también estará "
-"listo para usar."
+"El instalador añade automáticamente los diccionarios de inglés de EE.UU. "
+"(US) y de Reino Unido (UK). Si desea otros idiomas, la opción más sencilla "
+"es instalar uno de los paquetes de idiomas de TortoiseSVN. Esto instalará "
+"los ficheros de diccionario adecuados, así como la interfaz de usuario de "
+"TortoiseSVN local. Una vez finalizada la instalación, el diccionario también "
+"estará listo para usar."
 
 #. (para)
 msgid ""
@@ -26831,6 +26885,15 @@ msgid ""
 "side of the status bar is used to display hints when you hover the mouse "
 "over a control."
 msgstr ""
+"Bajo la ventana inferior se encuentra la barra de estado. Esta muestra el "
+"número de líneas añadidas y eliminadas en <literal>De otros</literal> y "
+"<literal>Mío</literal>, y la cantidad de conflictos no resueltos restantes. "
+"También puede el tipo de final de línea que se usa, qué codificación (ASCII, "
+"UTF-8, etc.) se asume por TortoiseMerge, y si hay marca de orden de bytes "
+"(BOM) en los ficheros UTF-8. Puede cambiar el tipo de final de línea y la "
+"codificación haciendo doble-click en la columna correspondiente de esa "
+"vista. Se mostrará un cuadro de diálogo. La parte izquierda de la barra de "
+"estado se usa para mostrar ayudas cuando pasa el ratón sobre un control."
 
 #. (title)
 msgid "Line Status Icons"
