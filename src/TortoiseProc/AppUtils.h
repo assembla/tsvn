@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -130,6 +130,11 @@ public:
 
     static std::vector<CHARRANGE> FindRegexMatches (const std::wstring& text, const CString& matchstring, const CString& matchsubstring = _T(".*"));
 
+	/**
+	 * implements URL searching with the same logic as CSciEdit::StyleURLs
+	 */
+	static std::vector<CHARRANGE> FindURLMatches (const CString& msg);
+	
     static bool FindStyleChars(const CString& sText, TCHAR stylechar, int& start, int& end);
 
     static bool BrowseRepository(CHistoryCombo& combo, CWnd * pParent, SVNRev& rev, bool multiSelection = false, const CString& root = CString(), const CString& selUrl = CString());

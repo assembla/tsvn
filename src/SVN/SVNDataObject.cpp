@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2013 - TortoiseSVN
+// Copyright (C) 2007-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -196,7 +196,7 @@ STDMETHODIMP SVNDataObject::GetData(FORMATETC* pformatetcIn, STGMEDIUM* pmedium)
             {
                 // if all paths are in the same directory, we can fetch the info recursively
                 // from the parent folder to save a lot of time.
-                const SVNInfoData * infodata = svnInfo.GetFirstFileInfo(commonDir, m_pegRev, m_revision, svn_depth_infinity);
+                const SVNInfoData * infodata = svnInfo.GetFirstFileInfo(commonDir, m_pegRev, m_revision, svn_depth_files);
                 while (infodata)
                 {
                     // check if the returned item is one in our list
@@ -218,7 +218,7 @@ STDMETHODIMP SVNDataObject::GetData(FORMATETC* pformatetcIn, STGMEDIUM* pmedium)
                 {
                     if (m_svnPaths[i].IsUrl())
                     {
-                        const SVNInfoData * infodata = svnInfo.GetFirstFileInfo(m_svnPaths[i], m_pegRev, m_revision, svn_depth_infinity);
+                        const SVNInfoData * infodata = svnInfo.GetFirstFileInfo(m_svnPaths[i], m_pegRev, m_revision, svn_depth_files);
                         while (infodata)
                         {
                             SVNDataObject::SVNObjectInfoData id = {m_svnPaths[i], *infodata};
