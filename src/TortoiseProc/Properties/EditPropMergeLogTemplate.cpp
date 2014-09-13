@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2012-2013 - TortoiseSVN
+// Copyright (C) 2012-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -68,6 +68,8 @@ BOOL CEditPropMergeLogTemplate::OnInitDialog()
 
     for (auto it = m_properties.begin(); it != m_properties.end(); ++it)
     {
+        if (it->second.isinherited)
+            continue;
         if (it->first.compare(PROJECTPROPNAME_MERGELOGTEMPLATETITLE) == 0)
         {
             CString sTitle = CUnicodeUtils::StdGetUnicode(it->second.value).c_str();

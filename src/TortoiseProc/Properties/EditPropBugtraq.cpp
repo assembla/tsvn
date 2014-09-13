@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2010-2011, 2013 - TortoiseSVN
+// Copyright (C) 2010-2011, 2013-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -89,6 +89,8 @@ BOOL CEditPropBugtraq::OnInitDialog()
 
     for (IT it = m_properties.begin(); it != m_properties.end(); ++it)
     {
+        if (it->second.isinherited)
+            continue;
         if (it->first.compare(BUGTRAQPROPNAME_URL) == 0)
         {
             m_sBugtraqUrl = CUnicodeUtils::StdGetUnicode(it->second.value).c_str();
