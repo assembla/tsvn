@@ -32,7 +32,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2014-06-28 10:50+0000\n"
+"PO-Revision-Date: 2014-09-13 08:08+0000\n"
 "Last-Translator: Masahiro Fujimoto <fujimoto@internet.ne.jp>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/ja/)\n"
@@ -469,7 +469,7 @@ msgstr "TortoiseMergeについて(&A)..."
 
 #. Resource IDs: (610)
 msgid "&Accept current working copy state (mark as resolved)"
-msgstr "現在の作業コピーの状態を受け入れる（解決済みとしてマーク）(&A)"
+msgstr "現在の作業コピーの状態を受け入れる（解決済みとみなす）(&A)"
 
 #. Resource IDs: (16920)
 msgid "&Activate"
@@ -2298,7 +2298,7 @@ msgstr "任意のテキスト(&I)"
 
 #. Resource IDs: (145)
 msgid "Are you sure you want to mark the conflicted file(s) as resolved?"
-msgstr "本当に、ファイルの競合を解決済としてもよろしいですか？"
+msgstr "競合したファイルを解決済みとみなしてもよろしいですか？"
 
 #. Resource IDs: (199)
 #, c-format
@@ -4503,7 +4503,7 @@ msgstr ""
 #. Resource IDs: (148)
 #, c-format
 msgid "Do you want to mark '%s' as resolved?"
-msgstr "「%s」を解決済みとしてよろしいですか？"
+msgstr "「%s」を解決済みとみなしてよろしいですか？"
 
 #. Resource IDs: (319)
 #, c-format
@@ -4513,7 +4513,7 @@ msgid ""
 "as resolved?"
 msgstr ""
 "%s\n"
-"を解決済みとしてよろしいですか？"
+"を解決済みとみなしてよろしいですか？"
 
 #. Resource IDs: (76)
 msgid "Do you want to proceed?"
@@ -6179,8 +6179,8 @@ msgid ""
 "as modified\r\n"
 "i.e. they get the modified overlay icon."
 msgstr ""
-"有効にすると、バージョン管理外のファイルを含むフォルダーの状態を変更として"
-"マークします。\r\n"
+"有効にすると、バージョン管理外のファイルを含むフォルダーの状態を変更とみなし"
+"ます。\n"
 "つまり、変更のオーバーレイアイコンが付きます。"
 
 #. Resource IDs: (2052)
@@ -7004,18 +7004,18 @@ msgstr "差分を表示するために多くの項目が選択されました"
 
 #. Resource IDs: (611)
 msgid "Mark as &resolved (the move will become a copy)"
-msgstr "解決済みとしてマーク（移動はコピーになる）(&R)"
+msgstr "解決済みとみなす（移動はコピーになる）(&R)"
 
 #. Resource IDs: (148, 282)
 msgid "Mark as resolved"
-msgstr "解決済みとする"
+msgstr "解決済みとみなす"
 
 #. Resource IDs: (226)
 msgid ""
 "Mark as resolved\n"
 "The conflict is resolved."
 msgstr ""
-"解決済みとする\n"
+"解決済みとみなす\n"
 "競合は解決されます。"
 
 #. Resource IDs: (319)
@@ -7023,7 +7023,7 @@ msgid ""
 "Mark as resolved\n"
 "The file status is changed to modified"
 msgstr ""
-"解決済みとする\n"
+"解決済みとみなす\n"
 "このファイルの状態が変更に変わります"
 
 #. Resource IDs: (2052)
@@ -7047,16 +7047,16 @@ msgid ""
 "Marks a file as resolved in Subversion\n"
 "Mark as resolved"
 msgstr ""
-"バージョン管理下のファイルを解決済みとする\n"
-"解決済みとする"
+"バージョン管理下のファイルを解決済みとみなす\n"
+"解決済みとみなす"
 
 #. Resource IDs: (596)
 msgid ""
 "Marks the revisions as merged, without actually doing the merge.\r\n"
 "This blocks the revisions from getting merged in the future."
 msgstr ""
-"実際にマージを行わずに、リビジョンをマージ済みとしてマークする。\r\n"
-"これにより、今後リビジョンがマージされるのをブロックする。"
+"実際にマージを行わずに、リビジョンをマージ済みとみなします。\n"
+"これにより、今後リビジョンがマージされるのをブロックします。"
 
 #. Resource IDs: (1064)
 msgid "Match &case"
@@ -9183,7 +9183,7 @@ msgid ""
 "The item is marked as resolved."
 msgstr ""
 "解決\n"
-"項目は解決済みとしてマークされます。"
+"項目は解決済みとみなされます。"
 
 #. Resource IDs: (74, 209)
 msgid "Resolved"
@@ -11404,7 +11404,7 @@ msgid ""
 "Are you sure you want to mark the file resolved?"
 msgstr ""
 "選択されたファイル内には、まだ競合状態のファイルがあります。\n"
-"本当に、ファイルを解決済みにしてもよろしいですか？"
+"ファイルを解決済みとみなしてよろしいですか？"
 
 #. Resource IDs: (102)
 #, c-format
@@ -11564,10 +11564,10 @@ msgid ""
 "If you click YES, then you have to manually resolve the conflicts in another "
 "editor!"
 msgstr ""
-"未解決の競合が%d行目に存在しています。\n"
-"保存する前に、まずそれらの競合を解決してください。\n"
-"競合が存在する状態のままで、ファイルの保存を行ってもよろしいですか？\n"
-"「はい」をクリックすると、他のエディタを使用して手作業で編集する必要がありま"
+"未解決の競合が%d行目にあります。\n"
+"保存する前に、まず競合を解決してください。\n"
+"競合がある状態のままで、ファイルを保存してもよろしいですか？\n"
+"「はい」をクリックすると、他のエディタを使用して手作業で解決する必要がありま"
 "す。"
 
 #. Resource IDs: (313)
@@ -12317,7 +12317,7 @@ msgstr "バージョン管理外"
 
 #. Resource IDs: (1313)
 msgid "Unversioned files mark parent folder as modified"
-msgstr "バージョン管理外のファイルを含むフォルダーに変更マークを付ける"
+msgstr "バージョン管理外のファイルを含むフォルダーを変更されたとみなす"
 
 #. Resource IDs: (286)
 #, c-format
@@ -13225,8 +13225,8 @@ msgstr "[Unassigned]"
 #. Resource IDs: (1562)
 msgid "\"ignore-on-commit\" files do not mark parent folder modified"
 msgstr ""
-"コミット時に無視されるファイルがあっても、親フォルダーは変更状態にはなりませ"
-"ん"
+"コミット時に無視されるファイルがあっても、親フォルダーは変更されたとみなされ"
+"ません"
 
 #. Resource IDs: (346)
 msgid ""
@@ -14100,8 +14100,8 @@ msgid ""
 "A faded line is shown in the commit dialogs at that position. The default is "
 "80 chars."
 msgstr ""
-"tsvn:logwidthmarker\r\n"
-"ログメッセージの文字数が規定の幅を超えないようにする。\r\n"
+"tsvn:logwidthmarker\n"
+"ログメッセージの文字数が規定の幅を超えないようにする。\n"
 "コミットダイアログに超過した行を示します。デフォルトは80文字です。"
 
 #. Resource IDs: (578)
