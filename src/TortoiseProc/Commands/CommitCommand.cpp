@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2013 - TortoiseSVN
+// Copyright (C) 2007-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -158,6 +158,9 @@ bool CommitCommand::Execute()
                     // not what we want!
                     updateProgDlg.SetDepth(svn_depth_unknown);
                     updateProgDlg.SetProjectProperties(props);
+                    CRegDWORD updateExternals(L"Software\\TortoiseSVN\\IncludeExternals", true);
+                    int options = DWORD(updateExternals) ? 0 : ProgOptIgnoreExternals;
+                    updateProgDlg.SetOptions(options);
                     updateProgDlg.DoModal();
 
                     // re-open commit dialog only if update *SUCCEEDED*
