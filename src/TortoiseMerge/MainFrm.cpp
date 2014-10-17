@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2004-2013 - TortoiseSVN
+// Copyright (C) 2004-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -189,6 +189,16 @@ CMainFrame::CMainFrame()
     m_bInlineDiff = !!m_regInlineDiff;
     m_bUseRibbons = !!m_regUseRibbons;
     CMFCVisualManagerWindows::m_b3DTabsXPTheme = TRUE;
+#ifdef WIN64
+    OSVERSIONINFOEX vex = { 0 };
+    vex.dwOSVersionInfoSize = sizeof(vex);
+    GetVersionEx((OSVERSIONINFO*)&vex);
+    if (vex.dwMajorVersion == 5)
+    {
+        m_regUseRibbons = CRegDWORD(L"Software\\TortoiseMerge\\UseRibbons", FALSE);
+        m_bUseRibbons = !!m_regUseRibbons;
+    }
+#endif
 }
 
 CMainFrame::~CMainFrame()
