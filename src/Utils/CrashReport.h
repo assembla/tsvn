@@ -26,6 +26,17 @@
 // dummy define, needed only when we use crashrpt instead of this.
 #define CR_AF_MAKE_FILE_COPY 0
 
+__forceinline HMODULE get_my_module_handle(void)
+{
+    static int s_module_marker = 0;
+    MEMORY_BASIC_INFORMATION memory_basic_information;
+    if (!VirtualQuery(&s_module_marker, &memory_basic_information, sizeof(memory_basic_information)))
+    {
+        return NULL;
+    }
+    return (HMODULE)memory_basic_information.AllocationBase;
+}
+
 /**
  * \ingroup Utils
  * helper class for the CrashServerSDK
@@ -196,8 +207,30 @@ private:
         IsWow64Process(GetCurrentProcess(), &bIsWow);
         HMODULE hCrshhndlDll = NULL;
         if (bIsWow == FALSE)
-            hCrshhndlDll = ::LoadLibraryW(L"crshhndl.dll");
-        if (hCrshhndlDll != NULL)
+        {
+            if (crashHandlerPath == nullptr)
+            {
+                HMODULE hDll = get_my_module_handle();
+                wchar_t modpath[1024] = { 0 };
+                if (GetModuleFileName(hDll, modpath, _countof(modpath)))
+                {
+                    wchar_t * dirpoint = wcsrchr(modpath, '\\');
+                    if (dirpoint)
+                    {
+                        *dirpoint = 0;
+                        wcscat_s(modpath, L"\\crshhndl.dll");
+                        hCrashHandlerDll = ::LoadLibraryW(modpath);
+                    }
+                    else
+                        hCrashHandlerDll = ::LoadLibraryW(L"crshhndl.dll");
+                }
+                else
+                    hCrashHandlerDll = ::LoadLibraryW(L"crshhndl.dll");
+            }
+            else
+                hCrashHandlerDll = ::LoadLibraryW(crashHandlerPath);
+        }
+        if (hCrashHandlerDll != NULL)
         {
             m_InitCrashHandler = (pfnInitCrashHandler) GetProcAddress(hCrshhndlDll, "InitCrashHandler");
             m_SendReport = (pfnSendReport) GetProcAddress(hCrshhndlDll, "SendReport");
