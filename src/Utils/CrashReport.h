@@ -208,29 +208,24 @@ private:
         HMODULE hCrshhndlDll = NULL;
         if (bIsWow == FALSE)
         {
-            if (crashHandlerPath == nullptr)
+            HMODULE hDll = get_my_module_handle();
+            wchar_t modpath[1024] = { 0 };
+            if (GetModuleFileName(hDll, modpath, _countof(modpath)))
             {
-                HMODULE hDll = get_my_module_handle();
-                wchar_t modpath[1024] = { 0 };
-                if (GetModuleFileName(hDll, modpath, _countof(modpath)))
+                wchar_t * dirpoint = wcsrchr(modpath, '\\');
+                if (dirpoint)
                 {
-                    wchar_t * dirpoint = wcsrchr(modpath, '\\');
-                    if (dirpoint)
-                    {
-                        *dirpoint = 0;
-                        wcscat_s(modpath, L"\\crshhndl.dll");
-                        hCrashHandlerDll = ::LoadLibraryW(modpath);
-                    }
-                    else
-                        hCrashHandlerDll = ::LoadLibraryW(L"crshhndl.dll");
+                    *dirpoint = 0;
+                    wcscat_s(modpath, L"\\crshhndl.dll");
+                    hCrshhndlDll = ::LoadLibraryW(modpath);
                 }
                 else
-                    hCrashHandlerDll = ::LoadLibraryW(L"crshhndl.dll");
+                    hCrshhndlDll = ::LoadLibraryW(L"crshhndl.dll");
             }
             else
-                hCrashHandlerDll = ::LoadLibraryW(crashHandlerPath);
+                hCrshhndlDll = ::LoadLibraryW(L"crshhndl.dll");
         }
-        if (hCrashHandlerDll != NULL)
+        if (hCrshhndlDll != NULL)
         {
             m_InitCrashHandler = (pfnInitCrashHandler) GetProcAddress(hCrshhndlDll, "InitCrashHandler");
             m_SendReport = (pfnSendReport) GetProcAddress(hCrshhndlDll, "SendReport");
