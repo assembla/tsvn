@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -56,6 +56,8 @@ CString sContentOnly;
 CString sPropertiesOnly;
 CString sContentAndProps;
 
+bool s_bSortLogical = true;
+
 
 IMPLEMENT_DYNAMIC(CFileDiffDlg, CResizableStandAloneDialog)
 CFileDiffDlg::CFileDiffDlg(CWnd* pParent /*=NULL*/)
@@ -71,6 +73,9 @@ CFileDiffDlg::CFileDiffDlg(CWnd* pParent /*=NULL*/)
     , m_depth(svn_depth_unknown)
 {
     m_columnbuf[0] = 0;
+    s_bSortLogical = !CRegDWORD(L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoStrCmpLogical", 0, false, HKEY_CURRENT_USER);
+    if (s_bSortLogical)
+        s_bSortLogical = !CRegDWORD(L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoStrCmpLogical", 0, false, HKEY_LOCAL_MACHINE);
 }
 
 CFileDiffDlg::~CFileDiffDlg()
@@ -1167,7 +1172,10 @@ bool CFileDiffDlg::SortCompare(const FileDiff& Data1, const FileDiff& Data2)
     switch (m_nSortedColumn)
     {
     case 0:     //path column
-        result = Data1.path.GetWinPathString().Compare(Data2.path.GetWinPathString());
+        if (s_bSortLogical)
+            result = StrCmpLogicalW(Data1.path.GetWinPathString(), Data2.path.GetWinPathString());
+        else
+            result = StrCmpI(Data1.path.GetWinPathString(), Data2.path.GetWinPathString());
         break;
     case 1:     //action column
         result = Data1.kind - Data2.kind;
