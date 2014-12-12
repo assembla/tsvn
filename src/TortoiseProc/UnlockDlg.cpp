@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2012 - TortoiseSVN
+// Copyright (C) 2003-2012, 2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -147,8 +147,8 @@ UINT CUnlockDlg::UnlockThread()
     {
         m_unlockListCtrl.SetEmptyString(m_unlockListCtrl.GetLastErrorMessage());
     }
-    m_unlockListCtrl.Show(SVNSLC_SHOWLOCKS | SVNSLC_SHOWDIRECTFILES, CTSVNPathList(),
-        SVNSLC_SHOWLOCKS | SVNSLC_SHOWDIRECTFILES, true, true);
+    m_unlockListCtrl.Show(SVNSLC_SHOWLOCKS | SVNSLC_SHOWDIRECTFILES | SVNSLC_SHOWINEXTERNALS, CTSVNPathList(),
+                          SVNSLC_SHOWLOCKS | SVNSLC_SHOWDIRECTFILES | SVNSLC_SHOWINEXTERNALS, true, true);
 
     InterlockedExchange(&m_bThreadRunning, FALSE);
     return 0;
