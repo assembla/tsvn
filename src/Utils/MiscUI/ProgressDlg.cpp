@@ -297,8 +297,8 @@ void CProgressDlg::Stop()
             // the progress dialog is really gone.
             AttachThreadInput(GetWindowThreadProcessId(m_hWndProgDlg, 0), GetCurrentThreadId(), TRUE);
             ShowWindow(m_hWndProgDlg, SW_HIDE);
-            auto start = GetTickCount64();
-            while (::IsWindow(m_hWndProgDlg) && ((GetTickCount64() - start) < 3000))
+            auto start = GetTickCount();
+            while (::IsWindow(m_hWndProgDlg) && ((GetTickCount() - start) < 3000))
             {
                 MSG msg = { 0 };
                 while (PeekMessage(&msg, m_hWndProgDlg, 0, 0, PM_REMOVE))
