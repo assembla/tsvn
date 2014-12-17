@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2013 - TortoiseSVN
+// Copyright (C) 2003-2014 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include "registry.h"
 #include "AppUtils.h"
 #include "TempFile.h"
-
+#include "SysInfo.h"
 
 IMPLEMENT_DYNAMIC(CCheckForUpdatesDlg, CStandAloneDialog)
 CCheckForUpdatesDlg::CCheckForUpdatesDlg(CWnd* pParent /*=NULL*/)
@@ -137,10 +137,16 @@ UINT CCheckForUpdatesDlg::CheckThread()
                 int build = _ttoi(vertemp);
                 BOOL bNewer = FALSE;
                 if (major > TSVN_VERMAJOR)
-                    bNewer = TRUE;
+                {
+                    if (SysInfo::Instance().IsVistaOrLater())
+                        bNewer = TRUE;
+                }
                 else if ((minor > TSVN_VERMINOR)&&(major == TSVN_VERMAJOR))
-                    bNewer = TRUE;
-                else if ((micro > TSVN_VERMICRO)&&(minor == TSVN_VERMINOR)&&(major == TSVN_VERMAJOR))
+                {
+                    if (SysInfo::Instance().IsVistaOrLater())
+                        bNewer = TRUE;
+                }
+                else if ((micro > TSVN_VERMICRO) && (minor == TSVN_VERMINOR) && (major == TSVN_VERMAJOR))
                     bNewer = TRUE;
                 else if ((build > TSVN_VERBUILD)&&(micro == TSVN_VERMICRO)&&(minor == TSVN_VERMINOR)&&(major == TSVN_VERMAJOR))
                     bNewer = TRUE;
