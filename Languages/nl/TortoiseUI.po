@@ -18,14 +18,15 @@
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2012
 # Maarten Hilferink <mhilferink@objectvision.nl>, 2011
 # Paul <paul@piak.nl>, 2011
+# Sander Boele <sboele@hotmail.com>, 2014
 # W VB <vanbeirendonck.willem@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2014-06-28 08:46+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2014-12-30 14:11+0000\n"
+"Last-Translator: Sander Boele <sboele@hotmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -243,7 +244,7 @@ msgstr "%s (recursief)"
 #. Resource IDs: (151)
 #, c-format
 msgid "%s : Merged file"
-msgstr ""
+msgstr "%s : Samengevoegd bestand"
 
 #. Resource IDs: (151)
 #, c-format
@@ -293,12 +294,12 @@ msgstr "%s, maar de map was lokaal verwijderd, verplaatst of hernoemd."
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the directory was moved away"
-msgstr ""
+msgstr "%s, maar de map is verplaatst"
 
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the directory was moved here"
-msgstr ""
+msgstr "%s, maar de map is hierheen verplaatst"
 
 #. Resource IDs: (609)
 #, c-format
@@ -338,12 +339,12 @@ msgstr "%s, maar het bestand was lokaal verwijderd, verplaatst of hernoemd."
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the file was moved away"
-msgstr ""
+msgstr "%s, maar het bestand is verplaatst"
 
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the file was moved here"
-msgstr ""
+msgstr "%s, maar het bestand is hierheen verplaatst"
 
 #. Resource IDs: (609)
 #, c-format
@@ -460,7 +461,7 @@ msgstr "&Over TortoiseMerge..."
 
 #. Resource IDs: (610)
 msgid "&Accept current working copy state (mark as resolved)"
-msgstr ""
+msgstr "&Accepteer status huidige werkkopie (markeer als opgelost)"
 
 #. Resource IDs: (16920)
 msgid "&Activate"
@@ -500,7 +501,7 @@ msgstr "Eigenschap &recursief toepassen"
 
 #. Resource IDs: (610)
 msgid "&Apply the update to the move destination"
-msgstr ""
+msgstr " &Pas de update toe op de verhuislocatie"
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -1143,7 +1144,7 @@ msgstr "&Opties"
 
 #. Resource IDs: (32849)
 msgid "&Other"
-msgstr ""
+msgstr "&Overig"
 
 #. Resource IDs: (32772)
 msgid "&Overlay images"
@@ -1355,7 +1356,7 @@ msgstr "&Stoppen bij kopie/hernoemd bestand"
 
 #. Resource IDs: (65535)
 msgid "&Subversion username"
-msgstr ""
+msgstr "&Subversion gebruikersnaam"
 
 #. Resource IDs: (276)
 msgid "&Switch WC to path and revision"
@@ -1556,11 +1557,11 @@ msgstr "(binaire waarde)"
 
 #. Resource IDs: (438)
 msgid "(content and properties)"
-msgstr ""
+msgstr "(inhoud en eigenschappen)"
 
 #. Resource IDs: (438)
 msgid "(content only)"
-msgstr ""
+msgstr "(alleen inhoud)"
 
 #. Resource IDs: (277)
 msgid "(copy)"
@@ -2115,6 +2116,8 @@ msgid ""
 "Allow Editing for this view\n"
 "Allow Edit"
 msgstr ""
+"Bewerken toestaan voor deze view\n"
+"Bewerken toestaan"
 
 #. Resource IDs: (1484)
 msgid "Allow ambiguous &UUIDs"
@@ -2223,14 +2226,18 @@ msgid ""
 "network filesystem, make sure file locking has been enabled on the file "
 "server."
 msgstr ""
+"Een ander proces blokkeert de database van de werklocatie, of het "
+"onderliggende besturingssysteem ondersteunt geen bestandsvergrendeling; als "
+"de werklocatie op een netwerk bestandssysteem staat, controleer dan of deze "
+"bestandsvergrendeling ingeschakeld heeft.  "
 
 #. Resource IDs: (251)
 msgid "Append right block"
-msgstr ""
+msgstr "Voeg blok rechts toe"
 
 #. Resource IDs: (251)
 msgid "Append this block to left"
-msgstr ""
+msgstr "Voeg dit blok links toe"
 
 #. Resource IDs: (65535)
 msgid "Application Frame Menus: "
@@ -2731,6 +2738,8 @@ msgid ""
 "Cancel\n"
 "Don't show the diff."
 msgstr ""
+"Annuleren\n"
+"Toon geen verschillen."
 
 #. Resource IDs: (315)
 msgid ""
@@ -2809,12 +2818,16 @@ msgid ""
 "Cancel\n"
 "Stay with current files"
 msgstr ""
+"Annuleren\n"
+"Behoud de huidige bestanden"
 
 #. Resource IDs: (315)
 msgid ""
 "Cancel\n"
 "Stay with current settings"
 msgstr ""
+"Annuleren\n"
+"Behoud de huidige instellingen"
 
 #. Resource IDs: (226)
 msgid ""
@@ -4604,6 +4617,8 @@ msgid ""
 "Don't save\n"
 "Close the views without saving the modifications"
 msgstr ""
+"Niet opslaan,\n"
+"Sluit de views zonder de wijzigingen op te slaan"
 
 #. Resource IDs: (315)
 msgid ""
@@ -4676,7 +4691,7 @@ msgstr "E&xporteer..."
 
 #. Resource IDs: (303)
 msgid "EOL"
-msgstr ""
+msgstr "EOL"
 
 #. Resource IDs: (3697)
 msgid "EXT"
@@ -4801,7 +4816,7 @@ msgstr ""
 
 #. Resource IDs: (300, 301)
 msgid "Encoding"
-msgstr ""
+msgstr "Codering"
 
 #. Resource IDs: (3867)
 #, c-format
@@ -11539,6 +11554,8 @@ msgid ""
 "There are more editable views.\n"
 "What view do you want to save?"
 msgstr ""
+"Er zijn meer bewerkbare views.\n"
+"Welke view wilt u opslaan?"
 
 #. Resource IDs: (64)
 msgid "There are no issue-tracker providers available."
