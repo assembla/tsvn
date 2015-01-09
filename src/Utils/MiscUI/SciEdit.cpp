@@ -367,7 +367,7 @@ CString CSciEdit::GetWordUnderCursor(bool bSelectWord)
 
 void CSciEdit::SetFont(CString sFontName, int iFontSizeInPoints)
 {
-    CRegStdDWORD used2d(L"Software\\TortoiseSVN\\ScintillaDirect2D", TRUE);
+    CRegStdDWORD used2d(L"Software\\TortoiseSVN\\ScintillaDirect2D", FALSE);
     CStringA fontName;
     if (SysInfo::Instance().IsWin7OrLater() && DWORD(used2d))
         fontName = CUnicodeUtils::GetUTF8(sFontName);
