@@ -10,6 +10,7 @@
 # 
 # Authors:
 # Translators:
+# Emre Can ÖZTAŞ <mynameisemre@hotmail.com.tr>, 2015
 # Huseyin <hyagli@hotmail.com>, 2013
 # ibrahim YENER <jdavide222@hotmail.com>, 2014
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
@@ -23,8 +24,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2015-01-18 11:40+0000\n"
-"Last-Translator: Vural Göze <vuralgoze@gmail.com>\n"
+"PO-Revision-Date: 2015-02-07 03:50+0000\n"
+"Last-Translator: Emre Can ÖZTAŞ <mynameisemre@hotmail.com.tr>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -292,12 +293,12 @@ msgstr "%s, ancak dizin silinmiş, taşınmış veya dizinin ismi değiştirilmi
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the directory was moved away"
-msgstr ""
+msgstr "%s, fakat belirtilen dizin taşınmış"
 
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the directory was moved here"
-msgstr ""
+msgstr "%s, fakat belirtilen dizin buraya taşındı"
 
 #. Resource IDs: (609)
 #, c-format
@@ -337,12 +338,12 @@ msgstr "%s, ancak dosya silinmiş, taşınmış veya dosyanın ismi değiştiril
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the file was moved away"
-msgstr ""
+msgstr "%s, fakat belirtilen dosya taşındı"
 
 #. Resource IDs: (610)
 #, c-format
 msgid "%s, but the file was moved here"
-msgstr ""
+msgstr "%s, fakat belirtilen dosya buraya taşındı"
 
 #. Resource IDs: (609)
 #, c-format
@@ -458,7 +459,7 @@ msgstr "&TortoiseMerge Hakkında.."
 
 #. Resource IDs: (610)
 msgid "&Accept current working copy state (mark as resolved)"
-msgstr ""
+msgstr "&Kabul Et geçerli çalışan kopya durumu (çözüldü olarak işaretlendi)"
 
 #. Resource IDs: (16920)
 msgid "&Activate"
@@ -498,7 +499,7 @@ msgstr "&Özelliği özyineli uygula"
 
 #. Resource IDs: (610)
 msgid "&Apply the update to the move destination"
-msgstr ""
+msgstr "&Uygula belirtilen yere göndermeye güncelleştir "
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -626,7 +627,7 @@ msgstr "&Pencere(leri)yi Kapat "
 
 #. Resource IDs: (65535)
 msgid "&Collaborator username"
-msgstr ""
+msgstr "%Ortak kullanıcı"
 
 #. Resource IDs: (65535)
 msgid "&Command:"
@@ -770,7 +771,7 @@ msgstr "&Vekil Sunucusunu etkinleştir"
 
 #. Resource IDs: (32976)
 msgid "&Enable edit"
-msgstr ""
+msgstr "&Etkinleştir düzenleme"
 
 #. Resource IDs: (1434)
 msgid "&Enable log caching"
@@ -1016,7 +1017,7 @@ msgstr "&Elle değiştirme özelliği"
 
 #. Resource IDs: (65535)
 msgid "&Max line length for inline diffs"
-msgstr ""
+msgstr "&Maksimum satır hizalama farkları için satır uzunluk"
 
 #. Resource IDs: (1486)
 msgid "&Maximum size [kByte] of a removed inactive cache"
@@ -1133,7 +1134,7 @@ msgstr "&Aç"
 
 #. Resource IDs: (1602)
 msgid "&Operative:"
-msgstr ""
+msgstr "&İşlevsel: "
 
 #. Resource IDs: (1382)
 msgid "&Options"
@@ -1157,7 +1158,7 @@ msgstr "&Yapıştır"
 
 #. Resource IDs: (1600)
 msgid "&Peg:"
-msgstr ""
+msgstr "&Askı:"
 
 #. Resource IDs: (1382)
 msgid "&Permanently offline"
@@ -1173,7 +1174,7 @@ msgstr "&Port:"
 
 #. Resource IDs: (3)
 msgid "&Postpone all remaining conflicts"
-msgstr ""
+msgstr "&Ertele kalan tüm çalışmalar"
 
 #. Resource IDs: (1489)
 msgid "&Power user defaults"
@@ -1181,7 +1182,7 @@ msgstr "&Uzman kullanıcı varsayılan değerleri"
 
 #. Resource IDs: (1562)
 msgid "&Pre-fetch folders for faster browsing"
-msgstr ""
+msgstr "&Ön Yükleme dosyaları hızlı sayfalamak için"
 
 #. Resource IDs: (1069)
 msgid "&Print Preview"
@@ -1555,7 +1556,7 @@ msgstr "(ikilik taban değeri)"
 
 #. Resource IDs: (438)
 msgid "(content and properties)"
-msgstr ""
+msgstr "(içerik ve özellikler)"
 
 #. Resource IDs: (438)
 msgid "(content only)"
@@ -1992,6 +1993,9 @@ msgid ""
 "%s\n"
 "to the global ignore list."
 msgstr ""
+"Dosya şablon(ları) eklendi\n"
+"%s\n"
+"Gözardı edilenler listesine"
 
 #. Resource IDs: (145)
 #, c-format
@@ -2117,6 +2121,8 @@ msgid ""
 "Allow Editing for this view\n"
 "Allow Edit"
 msgstr ""
+"bu görüntü için düzenlemeye izin ver\n"
+"İzin ver Düzenle"
 
 #. Resource IDs: (1484)
 msgid "Allow ambiguous &UUIDs"
@@ -2228,11 +2234,11 @@ msgstr ""
 
 #. Resource IDs: (251)
 msgid "Append right block"
-msgstr ""
+msgstr "Sağ blok ekle"
 
 #. Resource IDs: (251)
 msgid "Append this block to left"
-msgstr ""
+msgstr "Bu bloğu sola ekle"
 
 #. Resource IDs: (65535)
 msgid "Application Frame Menus: "
