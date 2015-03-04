@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2014 - TortoiseSVN
+// Copyright (C) 2003-2015 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -212,6 +212,8 @@ LRESULT CSVNProgressDlg::OnShowConflictResolver(WPARAM /*wParam*/, LPARAM lParam
             {
                 CTSVNPath treeConflictPath;
                 treeConflictPath.SetFromSVN(description->merged_file);
+                if (treeConflictPath.IsEmpty())
+                    treeConflictPath.SetFromSVN(description->local_abspath);
 
                 CTreeConflictEditorDlg dlg;
                 dlg.SetInteractive();
@@ -3712,7 +3714,8 @@ bool CSVNProgressDlg::CmdUpdate(CString& sWindowTitle, bool& /*localoperation*/)
         // find the HEAD revision number and update specifically to that.
         if (m_Revision.IsHead() && !multipleUUIDs)
         {
-            m_Revision = GetHEADRevision(m_targetPathList[0]);
+            // don't use the cache to fetch the HEAD here, we need the current HEAD
+            m_Revision = GetHEADRevision(m_targetPathList[0], false);
         }
     }
     if (wcroots.size() <= 1)
