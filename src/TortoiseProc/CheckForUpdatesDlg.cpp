@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2014 - TortoiseSVN
+// Copyright (C) 2003-2015 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -116,7 +116,7 @@ UINT CCheckForUpdatesDlg::CheckThread()
     {
         sCheckURL = checkurlmachine;
         if (sCheckURL.IsEmpty())
-            sCheckURL = _T("http://tortoisesvn.googlecode.com/svn/trunk/version.txt");
+            sCheckURL = L"https://svn.code.sf.net/p/tortoisesvn/code/trunk/version.txt";
     }
     HRESULT res = URLDownloadToFile(NULL, sCheckURL, tempfile, 0, NULL);
     if (res == S_OK)
