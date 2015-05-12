@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2014 - TortoiseSVN
+// Copyright (C) 2003-2015 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -1062,6 +1062,8 @@ void CTSVNPathList::SortByPathname(bool bReverse /*= false*/)
 
 void CTSVNPathList::DeleteAllPaths(bool bTrash, bool bFilesOnly, HWND hErrorWnd)
 {
+    if (m_paths.empty())
+        return;
     PathVector::const_iterator it;
     SortByPathname (true); // nested ones first
 
@@ -1077,6 +1079,8 @@ void CTSVNPathList::DeleteAllPaths(bool bTrash, bool bFilesOnly, HWND hErrorWnd)
             sPaths += '\0';
         }
     }
+    if (sPaths.IsEmpty())
+        return;
     sPaths += '\0';
     sPaths += '\0';
     DeleteViaShell((LPCTSTR)sPaths, bTrash, hErrorWnd);
