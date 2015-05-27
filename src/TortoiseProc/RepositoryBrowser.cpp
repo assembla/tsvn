@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2014 - TortoiseSVN
+// Copyright (C) 2003-2015 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -2274,6 +2274,8 @@ void CRepositoryBrowser::EditFile(CTSVNPath url, CTSVNPath urlEscaped)
     m_EditFileCommand->SetPaths (CTSVNPathList (url), url);
     m_EditFileCommand->SetParser (parameters);
 
+    CoInitialize(NULL);
+
     if (m_EditFileCommand->Execute() && revision.IsHead())
     {
         CString dir = urlEscaped.GetContainingDirectory().GetSVNPathString();
@@ -2283,6 +2285,7 @@ void CRepositoryBrowser::EditFile(CTSVNPath url, CTSVNPath urlEscaped)
         const TCHAR* lParam = _tcsdup((LPCTSTR)dir);
         PostMessage(WM_REFRESHURL, 0, reinterpret_cast<LPARAM>(lParam));
     }
+    CoUninitialize();
 }
 
 void CRepositoryBrowser::OnHdnItemclickRepolist(NMHDR *pNMHDR, LRESULT *pResult)
