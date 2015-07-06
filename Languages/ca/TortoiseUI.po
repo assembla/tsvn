@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2015-04-17 08:26+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2015-07-04 17:45+0000\n"
+"Last-Translator: Joan Monguillot <jmonguillot@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/tortoisesvn/"
 "language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -209,8 +209,8 @@ msgid ""
 "double click to automatically toggle alpha"
 msgstr ""
 "%i%% alfa\n"
-"fes clic per commutar alfa\n"
-"fes doble clic per commutar automàticament alfa"
+"feu clic per commutar alfa\n"
+"feu doble clic per commutar automàticament alfa"
 
 #. Resource IDs: (7)
 #, c-format
@@ -497,7 +497,7 @@ msgstr "&Aplica la propietat recursivament"
 
 #. Resource IDs: (610)
 msgid "&Apply the update to the move destination"
-msgstr "&Aplica l'actualització a la destinació del moviment"
+msgstr "&Aplica l'actualització a la destinació del desplaçament"
 
 #. Resource IDs: (1013)
 msgid "&Apply unified diff"
@@ -557,7 +557,7 @@ msgstr "&Contorn:"
 
 #. Resource IDs: (1568)
 msgid "&Bottom"
-msgstr "A&baix de tot"
+msgstr "A &baix de tot"
 
 #. Resource IDs: (65535)
 msgid "&Branches"
@@ -778,7 +778,7 @@ msgstr "&Habilita cache del log "
 #. Resource IDs: (1213)
 msgid "&Enter a message describing why you are locking the file(s)."
 msgstr ""
-"&Introdueix un missatge explicant el perquè del bloqueig del(s) fitxer(s)."
+"&Introduïu un missatge explicant el perquè del bloqueig del(s) fitxer(s)."
 
 #. Resource IDs: (1554)
 msgid "&Executable"
@@ -854,7 +854,7 @@ msgstr "&De: (URL inicial i revisió del rang a fusionar)"
 
 #. Resource IDs: (32779)
 msgid "&Go To Line..."
-msgstr "&Vés a la línia ..."
+msgstr "&Aneu a la línia ..."
 
 #. Resource IDs: (65535)
 msgid "&Green:"
@@ -1064,7 +1064,7 @@ msgstr "&Modifica el color per les còpies tronc"
 
 #. Resource IDs: (32880)
 msgid "&Moved blocks"
-msgstr "&Blocs moguts"
+msgstr "&Blocs desplaçats"
 
 #. Resource IDs: (65535)
 msgid "&Navigate"
@@ -1728,8 +1728,8 @@ msgid ""
 "A newer version is available.\r\n"
 "Please go to http://tortoisesvn.net and download the current version."
 msgstr ""
-"Hi ha una versió disponible més nova.\n"
-"Sisplau vés a http://tortoisesvn.net i baixa la versió actual."
+"Hi ha una nova versió disponible.\n"
+"Aneu a http://tortoisesvn.net i baixeu la versió actual."
 
 #. Resource IDs: (195)
 msgid ""
@@ -1782,11 +1782,11 @@ msgid ""
 "\n"
 "If you are not sure what to do, try a switch operation first."
 msgstr ""
-"Un trasllat només cal si ha canviat el camí al repositori.\n"
-"Canviar a un camí diferent dins del repositori es fa amb una operació de "
+"Només cal reubicar si ha canviat el camí al repositori.\n"
+"El canvi a un camí diferent dins del repositori es fa amb una operació de "
 "canvi.\n"
 "\n"
-"Si no estàs segur del que vols fer, prova primer amb una operació de canvi."
+"Si no esteu segur del que voleu fer, proveu primer amb una operació de canvi."
 
 #. Resource IDs: (3843)
 msgid "A required resource was unavailable."
@@ -1852,8 +1852,8 @@ msgid ""
 "Accept the certificate permanently\n"
 "You won't get asked about this certificate again."
 msgstr ""
-"Accepta el certificat permanentment\n"
-"No et preguntarem més sobre aquest certificat."
+"Accepteu el certificat permanentment\n"
+"No us preguntarem més sobre aquest certificat."
 
 #. Resource IDs: (148)
 msgid ""
@@ -2087,7 +2087,7 @@ msgid ""
 "All your changes will be lost! Do you really want to reset all toolbars and "
 "menus?"
 msgstr ""
-"Tots els canvis es perdran! Realment vols reinicialitzar totes les barres i "
+"Tots els canvis es perdran! Realment voleu reinicialitzar totes les barres i "
 "menús?"
 
 #. Resource IDs: (1008)
@@ -2095,21 +2095,22 @@ msgid ""
 "All your changes will be lost! Do you really want to reset the keyboard "
 "assignments?"
 msgstr ""
-"Tots els canvis es perdran! Realment vols reinicialitzar totes les "
+"Tots els canvis es perdran! Realment voleu reinicialitzar totes les "
 "assignacions de teclat?"
 
 #. Resource IDs: (1008)
 #, c-format
 msgid ""
 "All your changes will be lost! Do you really want to reset the menu '%s'?"
-msgstr "Tots els canvis es perdran! Realment vols reinicialitzar el menú '%s'?"
+msgstr ""
+"Tots els canvis es perdran! Realment voleu reinicialitzar el menú '%s'?"
 
 #. Resource IDs: (1007)
 #, c-format
 msgid ""
 "All your changes will be lost! Do you really want to reset the toolbar '%s'?"
 msgstr ""
-"Tots els canvis es perdran! Realment vols reinicialitzar la barra d'eines '%"
+"Tots els canvis es perdran! Realment voleu reinicialitzar la barra d'eines '%"
 "s'?"
 
 #. Resource IDs: (2062)
@@ -2193,12 +2194,12 @@ msgid ""
 "%base : the original file without your changes"
 msgstr ""
 "Un programa extern utilitzat\n"
-"per comparar diferents revisions de fitxers\n"
+"per solucionar fitxers en conflicte.\n"
 "\n"
-"Podeu especificar els següents paràmetres al camí:\n"
+"Especifiqueu els següents paràmetres al camí:\n"
 "%merged : fitxer amb conflicte, lloc on desar\n"
-"%theirs : fitxer tal com és al repositor\n"
-"%mine : el vostre fitxer, amb els canvis que has fet\n"
+"%theirs : fitxer tal com és al repositori\n"
+"%mine : el vostre fitxer, amb els canvis que heu fet\n"
 "%base : fitxer original sense els vostres canvis"
 
 #. Resource IDs: (3867)
@@ -2300,7 +2301,7 @@ msgstr ""
 #. Resource IDs: (199)
 #, c-format
 msgid "Are you sure you want to remove the cache of the selected %d items?"
-msgstr "Estàs segur que vols treure el cache dels %d elements seleccionats?"
+msgstr "Esteu segur d'eliminar la memòria cau dels %d elements seleccionats?"
 
 #. Resource IDs: (79)
 #, c-format
@@ -2308,8 +2309,8 @@ msgid ""
 "Are you sure you want to revert %d item(s)? You will lose all changes since "
 "the last update!"
 msgstr ""
-"Estàs segur que vols revertir %d element(s)? Perdràs tots els canvis des de "
-"la darrera actualització!"
+"Esteu segur de revertir %d element(s)? Perdreu tots els canvis des de la "
+"darrera actualització!"
 
 #. Resource IDs: (32793)
 msgid "Arrange &vertical"
@@ -2623,7 +2624,7 @@ msgstr "Desa missatges de log per accelerar la creació del log"
 
 #. Resource IDs: (1127)
 msgid "Can double-click in log list to compare with previous revision"
-msgstr "Fes doble clic a la llista de log per comparar amb la revisió prèvia"
+msgstr "Feu doble clic a la llista de log per comparar amb la revisió prèvia"
 
 #. Resource IDs: (3865)
 msgid "Can not activate a static ActiveX object."
@@ -2755,8 +2756,8 @@ msgid ""
 "Cancel\n"
 "Go back and enter an issue number."
 msgstr ""
-"Cancel·lar\n"
-"Torna i introdueix un número d'incidència."
+"Cancel·la\n"
+"Torneu i introduïu un número d'incidència."
 
 #. Resource IDs: (90)
 msgid ""
@@ -2795,7 +2796,7 @@ msgid ""
 "Cancel\n"
 "Leave the cache on disk."
 msgstr ""
-"Cancel·lar\n"
+"Cancel·la\n"
 "Deixa el cache al disc."
 
 #. Resource IDs: (148)
@@ -2883,7 +2884,7 @@ msgid ""
 "Cancel\n"
 "The target file is left as is"
 msgstr ""
-"Cancel·lar\n"
+"Cancel·la\n"
 "El fitxer destí es deixa com està"
 
 #. Resource IDs: (173)
@@ -2891,8 +2892,8 @@ msgid ""
 "Cancel\n"
 "You have to add the folder manually."
 msgstr ""
-"Cancel·lar\n"
-"Has d'afegir la carpeta manualment."
+"Cancel·la\n"
+"Heu d'afegir la carpeta manualment."
 
 #. Resource IDs: (100)
 msgid ""
@@ -2995,7 +2996,7 @@ msgstr "Llista de canvis:"
 
 #. Resource IDs: (1242)
 msgid "Changes made (double-click on file for diff):"
-msgstr "Canvis fets (fes doble clic sobre el fitxer per veure diferències):"
+msgstr "Canvis fets (feu doble clic sobre el fitxer per veure diferències):"
 
 #. Resource IDs: (2060)
 msgid "Changes the style of the application"
@@ -3019,11 +3020,11 @@ msgstr "Selecciona"
 
 #. Resource IDs: (174)
 msgid "Check For Updates"
-msgstr "Busca actualitzacions"
+msgstr "Cerca actualitzacions"
 
 #. Resource IDs: (1031)
 msgid "Check For Updates..."
-msgstr "Busca actualitzacions..."
+msgstr "Cerca actualitzacions..."
 
 #. Resource IDs: (276)
 msgid "Check for &modifications"
@@ -3047,7 +3048,7 @@ msgstr "Obté una còpia de treball des d'un repositori"
 
 #. Resource IDs: (1536)
 msgid "Check the authentication items you want to delete below"
-msgstr "Activa els elements d'autenticació que vols suprimir a sota"
+msgstr "Activeu els elements d'autenticació que voleu suprimir a sota"
 
 #. Resource IDs: (95)
 msgid ""
@@ -3059,15 +3060,15 @@ msgstr ""
 
 #. Resource IDs: (251)
 msgid "Check the path and/or URL you've entered."
-msgstr "Comprova el camí i/o la URL que has introduït."
+msgstr "Comproveu el camí i/o l'URL introduït."
 
 #. Resource IDs: (194)
 msgid ""
 "Check those menu entries you want to appear in the top context menu instead "
 "of the TortoiseSVN submenu"
 msgstr ""
-"Comprova què vols que aparegui en el menú superior enlloc del submenú del "
-"TortoiseSVN."
+"Marqueu les entrades de menú que s'han de mostrar al menú superior de "
+"context enlloc del submenú del TortoiseSVN."
 
 #. Resource IDs: (80)
 msgid "Check to use a less verbose date and time format in log messages"
@@ -3229,7 +3230,7 @@ msgstr "Deixa en blanc les mides i posicions de %ld formularis"
 
 #. Resource IDs: (1466)
 msgid "Click here to go to the website"
-msgstr "Fes clic aquí per anar a la pàgina web"
+msgstr "Feu clic aquí per anar a la pàgina web"
 
 #. Resource IDs: (170)
 msgid "Click here to select a recently typed message"
@@ -3240,7 +3241,7 @@ msgid ""
 "Click on \"Advanced\" to specify alternate diff programs based on file "
 "extension"
 msgstr ""
-"Fes clic a \"Avançat\" per especificar programes de comparació alternatius "
+"Feu clic a \"Avançat\" per especificar programes de comparació alternatius "
 "segons l'extensió dels fitxers"
 
 #. Resource IDs: (65535)
@@ -3248,7 +3249,7 @@ msgid ""
 "Click on \"Advanced\" to specify alternate merge programs based on file "
 "extension"
 msgstr ""
-"Fes clic a \"Avançat\" per especificar programes de fusió de fitxers "
+"Feu clic a \"Avançat\" per especificar programes de fusió de fitxers "
 "alternatius segons l'extensió dels fitxers"
 
 #. Resource IDs: (2058)
@@ -3256,8 +3257,8 @@ msgid ""
 "Click to see commands to move blocks of text\n"
 "Use text blocks"
 msgstr ""
-"Fes clic per veure les ordres per moure blocs de text\n"
-"Utilitza blocs de text"
+"Feu clic per veure les ordres de moure blocs de text\n"
+"Utilitzeu blocs de text"
 
 #. Resource IDs: (257)
 msgid "Clipboard"
@@ -3524,8 +3525,8 @@ msgid ""
 "Compares the file with the last committed revision to show you the changes "
 "you made"
 msgstr ""
-"Compara fitxer amb l'última revisió entregada per mostrar els canvis que has "
-"fet"
+"Compara el fitxer amb l'última revisió entregada per mostrar-vos els canvis "
+"que heu fet"
 
 #. Resource IDs: (17)
 msgid "Compares the selected file with a file in the repository"
@@ -4048,7 +4049,7 @@ msgstr "Crea una base de dades del repositori al lloc actual"
 
 #. Resource IDs: (14)
 msgid "Creates a unified diff file with all changes you made"
-msgstr "Crea un fitxer de diferències unificat amb tots els canvis que has fet"
+msgstr "Crea un fitxer de diferències unificat amb tots els canvis que heu fet"
 
 #. Resource IDs: (65535)
 msgid "Credits:"
@@ -4297,7 +4298,7 @@ msgstr "La unitat de destinació és plena."
 
 #. Resource IDs: (2056)
 msgid "Detect and highlight moved blocks"
-msgstr "Detecta i ressalta els blocs moguts"
+msgstr "Detecta i ressalta els blocs desplaçats"
 
 #. Resource IDs: (3849)
 msgid ""
@@ -4437,31 +4438,31 @@ msgstr "No mostreu el menú pels següents camins:"
 
 #. Resource IDs: (1562)
 msgid "Do reintegrate instead of automatic merge (old style)"
-msgstr "Fes reintegrar enlloc de fusionar automàticament (estil antic)"
+msgstr "Feu reintegrar enlloc de fusionar automàticament (estil antic)"
 
 #. Resource IDs: (90)
 msgid "Do this for all existing files"
-msgstr "Fes això per tots els fitxers existents"
+msgstr "Feu això per a tots els fitxers existents"
 
 #. Resource IDs: (91)
 msgid "Do this for all existing folders"
-msgstr "Fes això per totes les carpetes existents"
+msgstr "Feu això per a totes les carpetes existents"
 
 #. Resource IDs: (147)
 msgid "Do this for all existing items"
-msgstr "Fes això per tots els elements existents"
+msgstr "Feu això per a tots els elements existents"
 
 #. Resource IDs: (589)
 msgid "Do this for all selected items"
-msgstr "Fes això per tots els elements seleccionats"
+msgstr "Feu això per a tots els elements seleccionats"
 
 #. Resource IDs: (173)
 msgid "Do this for all selected unversioned folders"
-msgstr "Fes això per totes les carpetes sense versionar seleccionades"
+msgstr "Feu això per a totes les carpetes sense versionar seleccionades"
 
 #. Resource IDs: (148)
 msgid "Do this for all unversioned/modified items"
-msgstr "Fes això per tots els elements sense versionar o modificats"
+msgstr "Feu això per a tots els elements sense versionar o modificats"
 
 #. Resource IDs: (1007)
 #, c-format
@@ -4506,7 +4507,7 @@ msgstr ""
 
 #. Resource IDs: (315)
 msgid "Do you want to load the changed files?"
-msgstr "Vols carregar els fitxers canviats?"
+msgstr "Voleu carregar els fitxers canviats?"
 
 #. Resource IDs: (99)
 #, c-format
@@ -4537,19 +4538,20 @@ msgstr ""
 
 #. Resource IDs: (76)
 msgid "Do you want to proceed?"
-msgstr "Vols seguir?"
+msgstr "Voleu seguir?"
 
 #. Resource IDs: (3887)
 msgid "Do you want to recover these auto-saved documents?"
-msgstr "Vols recuperar aquests documents desats automàticament?"
+msgstr "Voleu recuperar aquests documents desats automàticament?"
 
 #. Resource IDs: (313)
 msgid ""
 "Do you want to reload the documents to reflect the settings changes?\n"
 "Note: you will lose all changes you've made!"
 msgstr ""
-"Vols recarregar els documents per reflectir els canvis en la configuració?\n"
-"Nota: Perdràs tots els canvis que hagis fet!"
+"Voleu tornar a carregar els documents per reflectir els canvis en la "
+"configuració?\n"
+"Nota: Perdreu tots els canvis que hagueu fet!"
 
 #. Resource IDs: (588)
 #, c-format
@@ -4881,7 +4883,7 @@ msgstr "Engrandeix la finestra a la mida màxima"
 
 #. Resource IDs: (241)
 msgid "Enter Log Message"
-msgstr "Introdueix Text del Log"
+msgstr "Introduïu un missatge de log"
 
 #. Resource IDs: (80)
 msgid "Enter URL"
@@ -4889,7 +4891,7 @@ msgstr "Introdueix URL"
 
 #. Resource IDs: (65535)
 msgid "Enter a &name for the changelist:"
-msgstr "Introdueix un &nom per a la llista de canvis:"
+msgstr "Introduïu un &nom per a la llista de canvis:"
 
 #. Resource IDs: (3858)
 msgid "Enter a GUID."
@@ -4909,7 +4911,7 @@ msgstr "Introduïu una data."
 
 #. Resource IDs: (313)
 msgid "Enter a lock message (optional):"
-msgstr "Introdueix un missatge pel bloqueig (opcional)"
+msgstr "Introduïu un missatge pel bloqueig (opcional)"
 
 #. Resource IDs: (3858)
 #, c-format
@@ -4947,11 +4949,11 @@ msgstr "Introduïu el contingut del fitxer de prova a sota:"
 
 #. Resource IDs: (1065)
 msgid "Enter log &message:"
-msgstr "Introdueix un &missatge de log:"
+msgstr "Introduïu un &missatge de log:"
 
 #. Resource IDs: (126)
 msgid "Enter log message:"
-msgstr "Introdueix missatge de log:"
+msgstr "Introduïu un missatge de log:"
 
 #. Resource IDs: (3858)
 #, c-format
@@ -4967,8 +4969,8 @@ msgid ""
 "Enter the regular expression patterns for filtering out the bug-ID from a "
 "commit message."
 msgstr ""
-"Introdueix els patrons d'expressions regulars per filtrar l'ID d'error en un "
-"missatge d'entrega."
+"Introduïu els patrons d'expressions regulars per filtrar fora l'ID d'error "
+"en un missatge d'entrega."
 
 #. Resource IDs: (3603)
 msgid ""
@@ -5228,7 +5230,7 @@ msgstr "Ha fallat!"
 
 #. Resource IDs: (591)
 msgid "Fetch HEAD revision and adjust to it"
-msgstr "Busca la revisió HEAD i ajusta't-hi"
+msgstr "Cerca la revisió HEAD i s'hi ajusta"
 
 #. Resource IDs: (199)
 msgid "Fetches the contents of folders in the background so browsing is faster"
@@ -5673,18 +5675,18 @@ msgstr "Paràmetres globals"
 
 #. Resource IDs: (155)
 msgid "Go To Line"
-msgstr "Vés a la Línia"
+msgstr "Aneu a la línia"
 
 #. Resource IDs: (130)
 msgid "Go to line"
-msgstr "Vés a la línia"
+msgstr "Aneu a la línia"
 
 #. Resource IDs: (2051)
 msgid ""
 "Go to the next conflict\n"
 "Next conflict"
 msgstr ""
-"Vés a el proper conflicte\n"
+"Aneu al proper conflicte\n"
 "Proper conflicte"
 
 #. Resource IDs: (2049)
@@ -5692,7 +5694,7 @@ msgid ""
 "Go to the next difference\n"
 "Next difference"
 msgstr ""
-"Vés a la propera diferència\n"
+"Aneu a la propera diferència\n"
 "Propera diferència"
 
 #. Resource IDs: (2055)
@@ -5700,7 +5702,7 @@ msgid ""
 "Go to the next inline difference\n"
 "Next inline difference"
 msgstr ""
-"Vés a la propera diferència a la línia\n"
+"Aneu a la propera diferència a la línia\n"
 "Propera diferència a la línia"
 
 #. Resource IDs: (2051)
@@ -5708,7 +5710,7 @@ msgid ""
 "Go to the previous conflict\n"
 "Previous conflict"
 msgstr ""
-"Vés al conflicte previ\n"
+"Aneu al conflicte previ\n"
 "Conflicte previ"
 
 #. Resource IDs: (2049)
@@ -5716,7 +5718,7 @@ msgid ""
 "Go to the previous difference\n"
 "Previous difference"
 msgstr ""
-"Vés a la diferència prèvia\n"
+"Aneu a la diferència prèvia\n"
 "Diferència prèvia"
 
 #. Resource IDs: (2055)
@@ -5724,12 +5726,12 @@ msgid ""
 "Go to the previous inline difference\n"
 "Previous inline difference"
 msgstr ""
-"Vés a l'anterior diferència a la línia\n"
+"Aneu a l'anterior diferència a la línia\n"
 "Anterior diferència a la línia"
 
 #. Resource IDs: (156)
 msgid "Goto Line"
-msgstr "Vés a la línia"
+msgstr "Aneu a la línia"
 
 #. Resource IDs: (1134)
 msgid "Graph type:"
@@ -6223,16 +6225,16 @@ msgid ""
 "to upgrade those clients too. Otherwise those clients won't be able to "
 "access the working copy with the new format."
 msgstr ""
-"Si en aquest ordinador utilitzes clients SVN diferents de TortoiseSVN, també "
-"has d'actualitzar aquests clients. En cas contrari, aquests clients no "
-"podran accedir a la còpia de treball amb el nou format."
+"Si en aquest ordinador utilitzeu clients SVN diferents de TortoiseSVN, també "
+"els heu d'actualitzar. En cas contrari, aquests clients no podran accedir a "
+"la còpia de treball amb el nou format."
 
 #. Resource IDs: (251)
 msgid ""
 "If you want to break the lock, use the 'Check For Modifications' dialog or "
 "the repository browser."
 msgstr ""
-"Si vols trencar el bloqueig, utilitza el diàleg 'Troba Modificacions' o el "
+"Si voleu trencar el bloqueig, utilitzeu el diàleg 'Troba Modificacions' o el "
 "navegador del repositori."
 
 #. Resource IDs: (563)
@@ -6752,7 +6754,7 @@ msgid ""
 "The conflict status of the file is kept"
 msgstr ""
 "Deixa en conflicte\n"
-"L'estat de conflicte del fitxer es manté"
+"Es manté l'estat de conflicte del fitxer"
 
 #. Resource IDs: (1404)
 msgid "Leave conflicted:"
@@ -6801,12 +6803,12 @@ msgstr "Diferències de línia"
 #. Resource IDs: (176)
 #, c-format
 msgid "Line moved from line %ld"
-msgstr "Línia moguda des de línia %ld"
+msgstr "Línia desplaçada des de línia %ld"
 
 #. Resource IDs: (176)
 #, c-format
 msgid "Line moved to line %ld"
-msgstr "Línia moguda a línia %ld"
+msgstr "Línia desplaçada a línia %ld"
 
 #. Resource IDs: (65535)
 msgid "Line:"
@@ -6946,7 +6948,7 @@ msgid ""
 "Do you want to update and try again?"
 msgstr ""
 "Bloqueig fallit perquè existeix una versió més nova!\n"
-"Vols actualitzar i provar de nou?"
+"Voleu actualitzar i provar de nou?"
 
 #. Resource IDs: (16)
 msgid "Locks a file for other users and makes it editable by you."
@@ -7024,7 +7026,7 @@ msgstr "Principal"
 
 #. Resource IDs: (1431)
 msgid "Make this the default"
-msgstr "Fes aquesta la selecció per defecte"
+msgstr "Feu aquesta la selecció per defecte"
 
 #. Resource IDs: (17)
 msgid "Manage Subversion properties"
@@ -7060,7 +7062,7 @@ msgstr ""
 
 #. Resource IDs: (2052)
 msgid "Mark current revision of your working copy"
-msgstr "Marca revisió actual de la teva còpia de treball"
+msgstr "Marca revisió actual de la còpia de treball"
 
 #. Resource IDs: (101)
 msgid "Mark for comparison"
@@ -7374,7 +7376,7 @@ msgstr "Mou &Avall"
 
 #. Resource IDs: (17025)
 msgid "Move &Up"
-msgstr "Moure &Amunt"
+msgstr "Desplaça &amunt"
 
 #. Resource IDs: (1002)
 msgid "Move Item Down"
@@ -7394,7 +7396,7 @@ msgstr "Mou i canvia el nom aquí"
 
 #. Resource IDs: (266)
 msgid "Move broken"
-msgstr "Moure trencat"
+msgstr "Desplaçament trencat"
 
 #. Resource IDs: (103)
 msgid "Move items to here"
@@ -7427,8 +7429,8 @@ msgid ""
 "Move\n"
 "The items are moved to the target path."
 msgstr ""
-"Moure\n"
-"Els elements es mouen al camí destí."
+"Desplaça\n"
+"Els elements es desplacen al camí destinació."
 
 #. Resource IDs: (210)
 #, c-format
@@ -7490,8 +7492,8 @@ msgid ""
 "Navigate to a specific line in the view\n"
 "Goto Line"
 msgstr ""
-"Navega a una línia específica dins la vista\n"
-"Vés a la Línia"
+"Navegueu fins a una línia específica dins la vista\n"
+"Aneu a la línia"
 
 #. Resource IDs: (17004)
 msgid "Navigation Pane Options"
@@ -7632,9 +7634,9 @@ msgid ""
 "You can show the unversioned items by enabling them\n"
 "with the checkbox at the bottom."
 msgstr ""
-"Cap fitxer ha sigut modificat o afegit des de la darrera entrega. \n"
+"No s'ha modificat o afegit cap fitxer des de la darrera entrega. \n"
 "Aquí TortoiseSVN no hi té res a fer...\n"
-"Pots mostrar els elements sense versionar si els habilites\n"
+"Podeu mostrar els elements sense versionar si els habiliteu\n"
 "amb la casella de selecció a la part inferior."
 
 #. Resource IDs: (77)
@@ -7695,7 +7697,7 @@ msgstr "Colors del node"
 
 #. Resource IDs: (170)
 msgid "Non-recursive commit of moved/renamed folders."
-msgstr "Entrega no recursiva de les carpetes mogudes o canviades de nom."
+msgstr "Entrega no recursiva de les carpetes desplaçades o canviades de nom."
 
 #. Resource IDs: (1507)
 msgid "Non-versioned"
@@ -7741,10 +7743,9 @@ msgid ""
 "explicitly save them to overwrite the original documents.  If you choose to "
 "not recover the auto-saved versions, they will be deleted."
 msgstr ""
-"Observa que si tries recuperar els documents desats automàticament, hauràs "
-"de desar-los explícitament per sobreescriure els documents originals. Si "
-"tries no recuperar les versions desades automàticament, aquestes es "
-"suprimiran."
+"Si trieu recuperar els documents desats automàticament, haureu de desar-los "
+"explícitament per sobreescriure els documents originals. Si trieu no "
+"recuperar les versions desades automàticament, aquestes es suprimiran."
 
 #. Resource IDs: (1481)
 msgid "Note: the folder contains unversioned items"
@@ -7908,7 +7909,7 @@ msgid ""
 "One of the paths you are attempting to move appears to be a special path\n"
 "(one of 'branches', 'tags' or 'trunk')."
 msgstr ""
-"Un dels camins que vols moure sembla un camí especial\n"
+"Un dels camins que voleu desplaçar sembla un camí especial\n"
 "(un de 'branques', 'etiquetes' o 'tronc')."
 
 #. Resource IDs: (63)
@@ -7988,7 +7989,7 @@ msgid ""
 "Open files for diff or to apply a patch\n"
 "Open files"
 msgstr ""
-"Obrir fitxers per comparar diferències o per aplicar un pedaç\n"
+"Obre fitxers per comparar diferències o per aplicar un pedaç\n"
 "Obre fitxers"
 
 #. Resource IDs: (376, 1132)
@@ -8021,7 +8022,7 @@ msgstr ""
 
 #. Resource IDs: (13)
 msgid "Opens the repository browser to tweak the repository online"
-msgstr "Obre repositori ambel navegador per modificar-lo \"online\""
+msgstr "Obre el navegador del repositori per ajustar-lo \"online\""
 
 #. Resource IDs: (199)
 msgid "Operate from log cache for now only"
@@ -8080,7 +8081,7 @@ msgid ""
 "Overwrite\n"
 "Replace the target folder."
 msgstr ""
-"Sobreescriure\n"
+"Sobreescriu\n"
 "Susbtitueix la carpeta destinació."
 
 #. Resource IDs: (147)
@@ -8088,16 +8089,16 @@ msgid ""
 "Overwrite\n"
 "The target file gets replaced"
 msgstr ""
-"Sobreescriure\n"
-"El fitxer destí es substitueix"
+"Sobreescriu\n"
+"Es substitueix el fitxer destí"
 
 #. Resource IDs: (90)
 msgid ""
 "Overwrite\n"
 "The target file is replaced."
 msgstr ""
-"Sobreescriure\n"
-"La carpeta destinació s'ha substituït."
+"Sobreescriu\n"
+"S'ha substituït la carpeta de destinació."
 
 #. Resource IDs: (76)
 msgid "PEM"
@@ -8158,8 +8159,8 @@ msgid ""
 "Pastes the svn path from the clipboard, resulting in a move (cut) or copy "
 "operation"
 msgstr ""
-"Enganxa el camí svn del porta-retalls, fent una operació de moure (tallar) o "
-"copiar"
+"Enganxa el camí svn del porta-retalls, resultant en un desplaçament "
+"(retalla) o còpia"
 
 #. Resource IDs: (1076)
 msgid "Patch &all items"
@@ -8252,11 +8253,11 @@ msgstr "Gràfic Tortell"
 
 #. Resource IDs: (83)
 msgid "Please enter a hook script to execute."
-msgstr "Introdueix un script tipus hook per executar."
+msgstr "Introduïu un script tipus hook per executar."
 
 #. Resource IDs: (83)
 msgid "Please enter a path where to apply the hook script to."
-msgstr "Introdueix un camí on aplicar l'script de hook."
+msgstr "Introduïu un camí on aplicar l'script de hook."
 
 #. Resource IDs: (251)
 msgid "Please execute the 'Cleanup' command."
@@ -8272,11 +8273,11 @@ msgid ""
 "Use the Switch command to do that."
 msgstr ""
 "Atenció:\n"
-"La teva còpia de treball segueix en el camí anterior. Si vols que els teus "
-"canvis següents\n"
-"siguin entregats a la còpia que acabes de crear, \n"
-"has de canviar la teva còpia de treball a la nova URL.\n"
-"Utilitza l'ordre Canvia per fer-ho."
+"La vostra còpia de treball segueix en el camí previ. Si voleu que els "
+"propers canvis\n"
+"siguin entregats a la còpia o branca que acabeu de crear, \n"
+"heu de canviar la còpia de treball al nou URL.\n"
+"Utilitzeu l'ordre Canvia per fer-ho."
 
 #. Resource IDs: (1287)
 msgid "Please resolve the conflict by choosing one of the following options:"
@@ -8444,7 +8445,7 @@ msgid ""
 "the renamed/moved folders are committed recursively in the repository."
 msgstr ""
 "Seguir amb l'entrega\n"
-"les carpetes canviades de nom o mogudes s'entreguen recursivament en el "
+"les carpetes canviades de nom o desplaçades s'entreguen recursivament en el "
 "repositori."
 
 #. Resource IDs: (89)
@@ -8672,7 +8673,7 @@ msgstr "Re&visió"
 
 #. Resource IDs: (12)
 msgid "Read the 'Daily Use Guide' before you are stuck..."
-msgstr "Llegeix la  'Guia d'Us Diari' abans de que et quedis bloquejat..."
+msgstr "Llegiu la 'Guia d'ús diari' abans que us quedeu penjat..."
 
 #. Resource IDs: (349)
 msgid "Realm String"
@@ -8722,7 +8723,7 @@ msgid ""
 "Recover the auto-saved documents\n"
 "Open the auto-saved versions instead of the explicitly saved versions"
 msgstr ""
-"Recuperar els documents desats automàticament\n"
+"Recupera els documents desats automàticament\n"
 "Obre les versions desades automàticament enlloc de les versions desades "
 "explícitament"
 
@@ -9099,11 +9100,11 @@ msgstr "Renombra fitxers / carpetes dins de versió de control"
 
 #. Resource IDs: (209)
 msgid "Repair copy"
-msgstr "Repara còpia"
+msgstr "Repara la còpia"
 
 #. Resource IDs: (209)
 msgid "Repair move"
-msgstr "Reparar moviment"
+msgstr "Repara el desplaçament"
 
 #. Resource IDs: (3603)
 msgid ""
@@ -9139,7 +9140,7 @@ msgstr "Navegador de repositori"
 
 #. Resource IDs: (199)
 msgid "Repository URL"
-msgstr "URL del Repositori "
+msgstr "URL del repositori "
 
 #. Resource IDs: (65535)
 msgid "Repository UUID:"
@@ -9155,7 +9156,7 @@ msgstr "S'ha creat el repositori"
 
 #. Resource IDs: (105)
 msgid "Repository query failed. Refresh to retry."
-msgstr "La consulta del repositori ha fallat. Refresca per tornar-ho a provar."
+msgstr "La consulta del repositori ha fallat. Torneu-ho a provar."
 
 #. Resource IDs: (106)
 msgid "Request cancelled by TSVN"
@@ -9195,11 +9196,11 @@ msgstr "Resol tots des&prés"
 
 #. Resource IDs: (282)
 msgid "Resolve conflict using 'mine'"
-msgstr "Resoldre conflicte utilitzant  'el meu '"
+msgstr "Resol conflicte utilitzant  'el meu '"
 
 #. Resource IDs: (282)
 msgid "Resolve conflict using 'theirs'"
-msgstr "Resoldre conflicte usant  'el seu'"
+msgstr "Resol conflicte usant  'el seu'"
 
 #. Resource IDs: (1403)
 msgid "Resolve conflict:"
@@ -9611,8 +9612,8 @@ msgid ""
 "Save Bottom File as\n"
 "You're asked where to save the bottom file"
 msgstr ""
-"Anomena i desa el Fitxer Inferior\n"
-"On vols desar el fitxer inferior?"
+"Anomena i desa el fitxer inferior\n"
+"On voleu desar el fitxer inferior?"
 
 #. Resource IDs: (316)
 msgid "Save File"
@@ -9624,7 +9625,7 @@ msgid ""
 "You're asked where to save the left file"
 msgstr ""
 "Anomena i desa Fitxer esquerre\n"
-"On vols desar el fitxer esquerre?"
+"On voleu desar el fitxer esquerre?"
 
 #. Resource IDs: (316)
 #, c-format
@@ -9643,7 +9644,7 @@ msgid ""
 "You're asked where to save the right file"
 msgstr ""
 "Anomena i desa Fitxer Dret\n"
-"On vols desar el fitxer dret?"
+"On voleu desar el fitxer dret?"
 
 #. Resource IDs: (316)
 #, c-format
@@ -9678,7 +9679,7 @@ msgid ""
 "You're asked where to save the file"
 msgstr ""
 "Anomena i Desa\n"
-"On vols desar el fitxer?"
+"On voleu desar el fitxer?"
 
 #. Resource IDs: (3857)
 #, c-format
@@ -9868,7 +9869,7 @@ msgid ""
 "You might need to create a new folder before performing this export."
 msgstr ""
 "Seleccioneu la carpeta a on voleu exportar.\n"
-"Potser vulgueu crear una carpeta nova abans de fer la exportació."
+"Podeu crear una carpeta nova abans de fer l'exportació."
 
 #. Resource IDs: (197)
 msgid "Select folder to run script for"
@@ -9953,15 +9954,15 @@ msgstr "Selecciona visualitzador per fitxers diff"
 
 #. Resource IDs: (316)
 msgid "Select what file you want to save as"
-msgstr "Selecciona quin fitxer vols anomenar i desar"
+msgstr "Seleccioneu quin fitxer s'ha d'anomenar i desar"
 
 #. Resource IDs: (316)
 msgid ""
 "Select what file you want to save as\n"
 "Note: There is unresolved conflict!"
 msgstr ""
-"Selecciona quin fitxer vols anomenar i desar\n"
-"Nota: Hi ha conflicte sense resoldre!"
+"Seleccioneu quin fitxer s'ha d'anomenar i desar\n"
+"Nota: Hi ha un conflicte sense resoldre!"
 
 #. Resource IDs: (65535)
 msgid "Selected node"
@@ -10337,7 +10338,7 @@ msgstr ""
 
 #. Resource IDs: (10)
 msgid "Shows information about TortoiseSVN"
-msgstr "Mostra informació sobre TortoiseSVN"
+msgstr "Mostra informació sobre el TortoiseSVN"
 
 #. Resource IDs: (198)
 msgid "Shows the action log file in the default text editor"
@@ -10433,7 +10434,7 @@ msgid ""
 "Do you want to load the changes?"
 msgstr ""
 "Algun(s) fitxer(s) s'ha(n) canviat fora de Tortoise-Merge.\n"
-"Vols carregar els canvis?"
+"Voleu carregar els canvis?"
 
 #. Resource IDs: (314)
 msgid ""
@@ -10441,7 +10442,7 @@ msgid ""
 "Would you like to reload and lose your changes?"
 msgstr ""
 "Algun(s) fitxer(s) s'ha(n) canviat fora de Tortoise-Merge.\n"
-"Vols tornar a carregar i perdre els teus canvis?"
+"Voleu tornar a carregar i perdre els canvis?"
 
 #. Resource IDs: (1126)
 msgid "Sort by commit count"
@@ -10483,7 +10484,7 @@ msgid ""
 "{bugid}:\tThe bug ids of the merged revision"
 msgstr ""
 "Especifica l'aspecte del text de cada revisió fusionada.\n"
-"Pots utilitzar les següents paraules clau:\n"
+"Es poden utilitzar les següents paraules clau:\n"
 "{msg}:⇥El missatge de log de la revisió fusionada, tal com es va introduir.\n"
 "{msgoneline}:⇥El missatge de log es força a una línia\n"
 "{author}:⇥L'autor de la revisió fusionada\n"
@@ -10663,19 +10664,20 @@ msgid ""
 "!myname  .cpp    : everything but my commits to .cpp files"
 msgstr ""
 "Filtre de sub-cadenes:\n"
-"* Especifica una o més cadenes, separades per espais. S'avaluaran d'esquerra "
-"a dreta.\n"
-"* Posa - davant d'una sub-cadena per excloure revisions que contenen aquesta "
-"sub-cadena.\n"
-"* Posa + davant d'una sub-cadena per incloure revisions que potser no "
-"coincideixen amb el filtre fins ara.\n"
-"* Inclou cadenes que contenen espais, etc. amb \".\n"
-"* Posa ! al principi  de la línia per invertir tota la condició del filtre.\n"
+"* Especifiqueu una o més cadenes, separades per espais. S'avaluaran "
+"d'esquerra a dreta.\n"
+"* Poseu - davant d'una sub-cadena per excloure revisions que contenen "
+"aquesta sub-cadena.\n"
+"* Poseu + davant d'una sub-cadena per incloure revisions que no han "
+"coincidit amb el filtre fins ara.\n"
+"* Tanqueu les cadenes que contenen espais, etc. entre \".\n"
+"* Poseu ! al principi  de la línia per invertir tota la condició del "
+"filtre.\n"
 "\n"
 "Exemples:\n"
-"elmeunom 2008 : les meves entregues del 2008\n"
+"elmeunom 2015 : les entregues meves del 2015\n"
 ".h -.cpp : entregues que han canviat de capçalera però no implementacions\n"
-".doc +.xls 2010 : entregues del 2010 amb fitxers .doc o .xls\n"
+".doc +.xls 2014 : entregues del 2014 amb fitxers .doc o .xls\n"
 "\" \" : entregues amb espais (per ex: quan cerqueu només en camins)\n"
 "-\"\"mostra tot\"\" : entregues que no contenen la cadena \"mostra tot\"\n"
 "!elmeunom .cpp : tot excepte les meves entregues a fitxers .cpp"
@@ -10739,18 +10741,17 @@ msgid ""
 "(you can copy the content of this dialog\n"
 "to the clipboard using Ctrl-C):"
 msgstr ""
-"Subversion ha trobat un problema greu.\n"
-"Si us plau pots reportar-ho a la llista de correu de Subversion\n"
-"amb el màxim d'informació com sigui possible sobre\n"
-"el que estaves intentant fer.\n"
-"Però si us plau primer busca el missatge d'error als arxius de la llista de "
-"correu\n"
+"El Subversion ha trobat un problema greu.\n"
+"Si us plau reporteu-ho a la llista de correu de Subversion\n"
+"amb tanta informació com sigui possible sobre\n"
+"el que estàveu intentant fer.\n"
+"Cerqueu  primer el missatge d'error als arxius de la llista de correu\n"
 "per evitar reportar el mateix problema repetidament.\n"
-"Pots trobar els arxius de la llista de correu a\n"
+"Trobareu els arxius de la llista de correu a\n"
 "http://subversion.apache.org/mailing-lists.html\n"
 "\n"
-"Subversion ha informat el següent\n"
-"(pots copiar el contingut d'aquest diàleg\n"
+"El Subversion ha informat el següent\n"
+"(copieu el contingut d'aquest diàleg\n"
 "al porta-retalls amb Ctrl-C):"
 
 #. Resource IDs: (65535)
@@ -10943,9 +10944,9 @@ msgid ""
 "operation. The repository won't be affected. You can review the changes "
 "before you commit them."
 msgstr ""
-"Els canvis s'aplicaran a la teva còpia de treball amb una operació de fusió "
-"revertida. El repositori no quedarà afectat. Pots revisar els canvis abans "
-"de fer-ne l'entrega."
+"Els canvis s'aplicaran a la còpia de treball amb una operació de fusió "
+"revertida. El repositori no quedarà afectat. Reviseu els canvis abans de fer-"
+"ne l'entrega."
 
 #. Resource IDs: (63)
 msgid "The chunk size did not match the number of added/removed lines!"
@@ -11303,9 +11304,8 @@ msgid ""
 "The maximum number of action log lines to keep.\n"
 "Any lines added over this limit will remove the oldest lines from the file."
 msgstr ""
-"Màxim nombre de línies d'acció de per guardar.\n"
-"Totes les línies per sobre d'aquest límit esborraran les anteriors del "
-"fitxer."
+"Màxim nombre de línies per mantenir el registre d'accions.\n"
+"Les línies per sobre d'aquest límit esborraran les anteriors del fitxer."
 
 #. Resource IDs: (63)
 msgid ""
@@ -11325,7 +11325,7 @@ msgid ""
 "You must only specify one of them."
 msgstr ""
 "Els paràmetres '/path' i '/pathfile' són mútuament exclusius.\n"
-"Has d'especificar-ne només un."
+"Especifiqueu-ne només un."
 
 #. Resource IDs: (64)
 #, c-format
@@ -11430,8 +11430,8 @@ msgid ""
 "The regular expression is invalid!\n"
 "Please enter a valid regular expression."
 msgstr ""
-"L'expressió regular és incorrecta!\n"
-"Introdueix si us plau una expressió regular correcta."
+"L'expressió regular és incorrecta.\n"
+"Introduïu una expressió regular correcta."
 
 #. Resource IDs: (80, 65535)
 msgid ""
@@ -11439,7 +11439,7 @@ msgid ""
 "Do you want to create the default folder structure (trunk/branches/tags) now?"
 msgstr ""
 "El repositori s'ha creat satisfactòriament.\n"
-"Vols crear ara l'estructura de carpetes per defecte (tronc/branques/"
+"Voleu crear ara l'estructura de carpetes per defecte (tronc/branques/"
 "etiquetes)?"
 
 #. Resource IDs: (279)
@@ -11619,7 +11619,7 @@ msgid ""
 "What view do you want to save?"
 msgstr ""
 "Hi ha més vistes editables.\n"
-"Quina vista vols desar?"
+"Quina vista voleu desar?"
 
 #. Resource IDs: (64)
 msgid "There are no issue-tracker providers available."
@@ -11700,9 +11700,9 @@ msgid ""
 "selected for commit. Such moves/renames are always performed recursively in "
 "the repository. Do you want to commit anyway?"
 msgstr ""
-"Aquesta entrega és no recursiva, i hi ha carpetes mogudes, canviades de nom "
-"o copiades, seleccionades per entregar. Aquestes accions sempre es fan "
-"recursivament en el repositori. Vols fer l'entrega de totes maneres?"
+"Aquesta entrega és no recursiva, i hi ha carpetes desplaçades, canviades de "
+"nom o copiades, seleccionades per entregar. Aquestes accions sempre es fan "
+"recursivament en el repositori. Voleu fer l'entrega de totes maneres?"
 
 #. Resource IDs: (170)
 msgid ""
@@ -11792,8 +11792,8 @@ msgid ""
 "branch (or to the trunk) and you want to port those changes across to a "
 "different branch."
 msgstr ""
-"Aquest mètode cobreix el cas de quan fas una o més revisions a una branca (o "
-"al tronc) i vols portar els canvis a una branca diferent."
+"Aquest mètode cobreix el cas de quan es fa una o més revisions a una branca "
+"(o al tronc) i es volen dur els canvis a una branca diferent."
 
 #. Resource IDs: (594)
 msgid ""
@@ -11859,8 +11859,8 @@ msgid ""
 "This will upgrade your working copy to the new 1.8 format and make it "
 "unusable for older clients."
 msgstr ""
-"Això actualitzarà la teva còpia de treball al nou format 1.8 i deixarà de "
-"ser utilitzable per clients antics."
+"Això actualitzarà la còpia de treball al nou format 1.8 i deixarà de ser "
+"utilitzable per clients antics."
 
 #. Resource IDs: (363)
 #, c-format
@@ -11912,10 +11912,10 @@ msgid ""
 "This will bring up the locking dialog where you can enforce the lock, i.e., "
 "'steal' it from the one currently holding it."
 msgstr ""
-"Per robar el bloqueig, fes clic amb el botó dret a la carpeta superior "
-"d'aquest element i selecciona  'Obté Bloqueig ' del menú contextual.\n"
-"Això farà aparèixer el diàleg de bloqueig on pots prendre el bloqueig, o "
-"sigui 'robar-lo' de qui actualment el posseeix."
+"Per robar el bloqueig, feu clic amb el botó dret a la carpeta superior "
+"d'aquest element i seleccioneu 'Obté Bloqueig ' del menú contextual.\n"
+"Apareixerà el diàleg de bloqueig on podeu prendre el bloqueig, o sigui "
+"'robar-lo' de qui actualment el posseeix."
 
 #. Resource IDs: (1201, 65535)
 msgid "To:"
@@ -12075,10 +12075,10 @@ msgid ""
 "likely is the reason for this slowdown.\n"
 "To fix this, you should empty the recycle bin now."
 msgstr ""
-"TortoiseSVN ha detectat un alentiment important mentre es movien %1!ld! "
-"elements a la paperera. El motiu d'aquest alentiment pot ser degut a que la "
-"paperera conté actualment %2!ld! elements.\n"
-"Per solucionar-ho, hauries de buidar ara la paperera."
+"TortoiseSVN ha detectat un alentiment important mentre es desplaçaven %1!ld! "
+"elements a la paperera. El motiu d'aquest alentiment pot ser que la paperera "
+"conté actualment %2!ld! elements.\n"
+"Per solucionar-ho, hauríeu de buidar ara la paperera."
 
 #. Resource IDs: (98)
 #, c-format
@@ -12098,13 +12098,13 @@ msgid ""
 "to bring up the context menu where you will find all TortoiseSVN commands.\n"
 "And read the manual!"
 msgstr ""
-"TortoiseSVN és una extensió shell.\n"
+"El TortoiseSVN és una extensió shell.\n"
 "Això vol dir que està integrat dins de l'explorador de Windows.\n"
-"Per utilitzar TortoiseSVN obre l'explorador i fes clic amb el botó dret "
+"Per utilitzar TortoiseSVN obriu l'explorador i feu clic amb el botó dret "
 "sobre qualsevol carpeta\n"
-"per tal de fer aparèixer el  menú contextual on trobaràs totes les ordres "
+"per tal de fer aparèixer el  menú contextual on trobareu totes les ordres "
 "del TortoiseSVN.\n"
-"I llegeix el manual!"
+"I llegiu el manual."
 
 #. Resource IDs: (200)
 #, c-format
@@ -12163,7 +12163,7 @@ msgstr "Nodes Tronc"
 #. Resource IDs: (251)
 msgid "Try a 'Cleanup'. If that doesn't work you need to do a fresh checkout."
 msgstr ""
-"Prova de fer  'Neteja '. Si això no funciona haureu d'obtenir a una carpeta "
+"Mireu de fer  'Neteja '. Si això no funciona haureu d'obtenir a una carpeta "
 "buida."
 
 #. Resource IDs: (564)
@@ -12422,7 +12422,7 @@ msgid ""
 "Update\n"
 "Update the file and try locking again."
 msgstr ""
-"Actualitzar\n"
+"Actualitza\n"
 "Actualitza el fitxer i torna a provar el bloqueig."
 
 #. Resource IDs: (90)
@@ -12694,14 +12694,14 @@ msgid ""
 "\r\n"
 "To merge all revisions (reintegrate/automatic merge), leave the box empty."
 msgstr ""
-"Utilitza el diàleg de log per seleccionar les revisions que vols fusionar, o "
-"introdueix les revisions a fusionar, separades per comes. Pots especificar "
+"Utilitzeu el diàleg de log per seleccionar les revisions a fusionar, o "
+"introduïu les revisions a fusionar, separades per comes. Podeu especificar "
 "un rang de revisions amb un guió.\n"
 "\n"
 "Exemple: 4-7,9,11,15-HEAD@pegrevision\n"
 "\n"
-"Per fusionar totes les revisions (reintegrar/fusió automàtica), deixa buit "
-"el quadre."
+"Per fusionar totes les revisions (reintegrar/fusió automàtica), deixeu el "
+"quadre buit."
 
 #. Resource IDs: (314)
 #, c-format
@@ -12816,8 +12816,8 @@ msgid ""
 "To set the values to their default, delete the value text."
 msgstr ""
 "ATENCIÓ:\n"
-"Canvia aquesta configuració només si estàs del tot segur del que fas!\n"
-"Per establir els valors per defecte, esborra el text del valor."
+"Canvieu aquesta configuració només si n'esteu ben segur!\n"
+"Per establir els valors per defecte, esborreu el text del valor."
 
 #. Resource IDs: (65535)
 msgid "WC Revision:"
@@ -12864,7 +12864,7 @@ msgid ""
 "When activated, hold down the SHIFT key when right-clicking to get the "
 "TortoiseSVN menus added to the context menu"
 msgstr ""
-"Quan estigui activat, manté premuda la tecla Maj quan fas clic amb el botó "
+"Quan estigui activat, mantén premuda la tecla Maj quan feu clic amb el botó "
 "dret per afegir els menús de TortoiseSVN al menú de context"
 
 #. Resource IDs: (344)
@@ -12979,7 +12979,7 @@ msgstr "Sí a tot"
 
 #. Resource IDs: (201)
 msgid "You already have the latest version installed."
-msgstr "Ja heu provat la darrera versió instal·lada"
+msgstr "Ja heu provat la darrera versió instal·lada."
 
 #. Resource IDs: (144)
 msgid ""
@@ -13015,9 +13015,9 @@ msgid ""
 "Disabled handlers won't use up an overlay slot and give other shell "
 "extensions a chance to show their overlays."
 msgstr ""
-"Aquí pots inhabilitar gestors específics de Superposició.\n"
-"Els gestors inhabilitats no usaran cap espai de superposició, permetent a "
-"altres extensions de shell mostrar les seves superposicions."
+"Aquí podeu inhabilitar gestors específics de Superposició.\n"
+"Els gestors inhabilitats no usaran cap espai de superposició, permetent que "
+"altres extensions de shell mostrin les seves superposicions."
 
 #. Resource IDs: (1001)
 #, c-format
@@ -13046,7 +13046,7 @@ msgid ""
 "folder\n"
 "individually, creating a new revision for every added item."
 msgstr ""
-"Has deixat anar més d'un fitxer o carpeta per afegir al repositori.\n"
+"Heu deixat anar més d'un fitxer o carpeta per afegir al repositori.\n"
 "No és possible fer-ho en un sol pas. TortoiseSVN afegirà cada fitxer/"
 "carpeta\n"
 "individualment, creant una nova revisió per cada element afegit."
@@ -13081,10 +13081,10 @@ msgid ""
 "For every of these items a new instance of the diff viewer will be started.\n"
 "Do you really want to show the diff for so many items at once?"
 msgstr ""
-"Has seleccionat %d elements per mostrar-ne la diferència.\n"
+"Heu seleccionat %d elements per mostrar-ne la diferència.\n"
 "Per cadascun d'aquests elements s'obrirà una nova instància del "
 "visualitzador de diferències.\n"
-"Vols mostrar realment les diferències de tants elements alhora?"
+"Voleu mostrar realment les diferències de tants elements alhora?"
 
 #. Resource IDs: (251)
 msgid "You have to update your working copy first."
@@ -13100,7 +13100,7 @@ msgstr ""
 
 #. Resource IDs: (173)
 msgid "You haven't entered an issue number."
-msgstr "No has introduït un número d'incidència."
+msgstr "No heu introduït un número d'incidència."
 
 #. Resource IDs: (1002)
 #, c-format
@@ -13121,7 +13121,7 @@ msgstr ""
 
 #. Resource IDs: (173)
 msgid "You selected an unversioned folder for a commit!"
-msgstr "Has seleccionat una carpeta sense versionar per fer entrega!"
+msgstr "Heu seleccionat una carpeta sense versionar per fer l'entrega."
 
 #. Resource IDs: (1001)
 msgid "You should enter a text!"
@@ -13161,7 +13161,7 @@ msgid ""
 "Click here to read and insert them again."
 msgstr ""
 "Els missatges de log han sigut desats.\n"
-"Fes clic aquí per llegir-los i inserir-los de nou."
+"Feu clic aquí per llegir-los i inserir-los de nou."
 
 #. Resource IDs: (1112)
 msgid "Your version is:"
@@ -13170,7 +13170,7 @@ msgstr "La versió és:"
 #. Resource IDs: (201)
 #, c-format
 msgid "Your version is: %d.%d.%d.%d"
-msgstr "La teva versió és: %d.%d.%d.%d"
+msgstr "La vostra versió és: %d.%d.%d.%d"
 
 #. Resource IDs: (78)
 msgid ""
@@ -13213,8 +13213,8 @@ msgid ""
 "If you branch/tag from the HEAD revision, your local changes won't\n"
 "show up in the branch/tag!"
 msgstr ""
-"La teva còpia de treball  té modificacions locals.\n"
-"Si fas una  branca/etiqueta de la revisió HEAD, els teus  canvis locals\n"
+"La còpia de treball  té modificacions locals.\n"
+"Si feu una  branca/etiqueta de la revisió HEAD, els canvis locals\n"
 "no es mostraran a la branca/etiqueta!"
 
 #. Resource IDs: (221)
@@ -13412,8 +13412,8 @@ msgid ""
 "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "bugtraq:label\n"
-"Etiqueta de text que es mostra per la casella on l'usuari introdueix el "
-"número d'incidència."
+"Text de l'etiqueta per al quadre d'edició on l'usuari introdueix el número "
+"d'incidència."
 
 #. Resource IDs: (577)
 msgid ""
@@ -13850,9 +13850,9 @@ msgid ""
 "property only on the file children of the directory."
 msgstr ""
 "svn:executable\n"
-"Si hi és present, fes el fitxer executable. Aquesta propietat no es pot "
-"establir per un directori.\n"
-"Un intent no-recursiu fallarà un intent recursiu establirà la propietat "
+"Si hi és present, fa el fitxer executable. Aquesta propietat no es pot "
+"establir per a un directori.\n"
+"Un intent no-recursiu fallarà, i un intent recursiu establirà la propietat "
 "només al fitxers fills del directori."
 
 #. Resource IDs: (318)
@@ -14260,7 +14260,7 @@ msgid ""
 "Set to 'yes' if a warning shall be shown when no issue is entered in the "
 "commit dialog."
 msgstr ""
-"tsvn:warnifnoissue\r\n"
+"tsvn:warnifnoissue\n"
 "Establiu-ho a  'yes ' si s'ha de mostrar un missatge quan no s'introdueix "
 "assumpte al diàleg d'entrega."
 
