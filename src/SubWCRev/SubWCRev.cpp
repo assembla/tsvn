@@ -973,8 +973,10 @@ int _tmain(int argc, _TCHAR* argv[])
     if (bUseSubWCRevIgnore)
     {
         const char *wcroot;
-        svn_client_get_wc_root(&wcroot, internalpath, ctx, pool, pool);
-        LoadIgnorePatterns(wcroot, &SubStat);
+        svnerr = svn_client_get_wc_root(&wcroot, internalpath, ctx, pool, pool);
+        if ((svnerr == SVN_NO_ERROR) && wcroot)
+            LoadIgnorePatterns(wcroot, &SubStat);
+        svn_error_clear(svnerr);
         LoadIgnorePatterns(internalpath, &SubStat);
     }
 
