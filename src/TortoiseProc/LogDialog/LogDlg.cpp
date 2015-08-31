@@ -5408,7 +5408,7 @@ void CLogDlg::ShowContextMenuForRevisions(CWnd* /*pWnd*/, CPoint point)
 CString CLogDlg::GetUrlOfTrunk()
 {
     // this may not work for SVNSERVE based repos...
-    CString returnedString = L"";
+    CString returnedString;
     CString repositoryRootUrl = GetRepositoryRoot(m_path);
     CString selectedUrl = GetSUrl();
     int slashPos = selectedUrl.Find(L"/", repositoryRootUrl.GetLength() + 1);
@@ -5440,8 +5440,8 @@ void CLogDlg::ExecuteAddCodeCollaboratorReview()
 CString CLogDlg::GetSpaceSeparatedSelectedRevisions()
 {
     POSITION pos = m_LogList.GetFirstSelectedItemPosition();
-    CString sRevisions = L"";
-    CString sRevision = L"";
+    CString sRevisions;
+    CString sRevision;
 
     if (pos != NULL)
     {
