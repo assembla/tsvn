@@ -5503,7 +5503,7 @@ void CLogDlg::ExecuteGnuDiff2MenuRevisions(ContextMenuInfoForRevisionsPtr& pCmi)
     }
     // use the previous revision of the lowest rev so the lowest rev
     // is included in the diff
-    r2 = r2 - 1;
+    r2 = r2 - svn_revnum_t(1);
     CString options;
     if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
     {
@@ -8100,15 +8100,6 @@ void CLogDlg::OnMonitorCheckNow()
         SetDlgItemText(IDC_LOGINFO, CString(MAKEINTRESOURCE(IDS_MONITOR_THREADRUNNING)));
         return;
     }
-    // clear the log view
-    m_ChangedFileListCtrl.SetItemCountEx(0);
-    m_ChangedFileListCtrl.Invalidate();
-    m_LogList.SetItemCountEx(0);
-    m_LogList.Invalidate();
-    CWnd * pMsgView = GetDlgItem(IDC_MSGVIEW);
-    pMsgView->SetWindowText(L"");
-    m_logEntries.ClearAll();
-    GetDlgItem(IDC_LOGLIST)->UpdateData(FALSE);
     // mark all entries as 'never checked before'
     RecurseMonitorTree(TVI_ROOT, [&](HTREEITEM hItem)->bool
     {
@@ -8568,13 +8559,13 @@ void CLogDlg::MonitorThread()
                 }
                 else
                 {
-                    auto Error = svn.GetSVNError();
-                    if (Error)
+                    auto SVNError = svn.GetSVNError();
+                    if (SVNError)
                     {
-                        if ((SVN_ERROR_IN_CATEGORY(Error->apr_err, SVN_ERR_AUTHN_CATEGORY_START)) ||
-                            (SVN_ERROR_IN_CATEGORY(Error->apr_err, SVN_ERR_AUTHZ_CATEGORY_START)) ||
-                            (Error->apr_err == SVN_ERR_RA_DAV_FORBIDDEN) ||
-                            (Error->apr_err == SVN_ERR_RA_CANNOT_CREATE_SESSION))
+                        if ((SVN_ERROR_IN_CATEGORY(SVNError->apr_err, SVN_ERR_AUTHN_CATEGORY_START)) ||
+                            (SVN_ERROR_IN_CATEGORY(SVNError->apr_err, SVN_ERR_AUTHZ_CATEGORY_START)) ||
+                            (SVNError->apr_err == SVN_ERR_RA_DAV_FORBIDDEN) ||
+                            (SVNError->apr_err == SVN_ERR_RA_CANNOT_CREATE_SESSION))
                         {
                             item.authfailed = true;
                             item.lastErrorMsg = svn.GetLastErrorMessage();
@@ -8586,14 +8577,14 @@ void CLogDlg::MonitorThread()
             }
             else
             {
-                auto Error = svn.GetSVNError();
-                if (Error)
+                auto SVNError = svn.GetSVNError();
+                if (SVNError)
                 {
-                    if ((SVN_ERROR_IN_CATEGORY(Error->apr_err, SVN_ERR_AUTHN_CATEGORY_START)) ||
-                        (SVN_ERROR_IN_CATEGORY(Error->apr_err, SVN_ERR_AUTHZ_CATEGORY_START)) ||
-                        (Error->apr_err == SVN_ERR_RA_DAV_FORBIDDEN)||
-                        (Error->apr_err == SVN_ERR_RA_CANNOT_CREATE_SESSION)||
-                        (Error->apr_err == SVN_ERR_WC_NOT_WORKING_COPY))
+                    if ((SVN_ERROR_IN_CATEGORY(SVNError->apr_err, SVN_ERR_AUTHN_CATEGORY_START)) ||
+                        (SVN_ERROR_IN_CATEGORY(SVNError->apr_err, SVN_ERR_AUTHZ_CATEGORY_START)) ||
+                        (SVNError->apr_err == SVN_ERR_RA_DAV_FORBIDDEN)||
+                        (SVNError->apr_err == SVN_ERR_RA_CANNOT_CREATE_SESSION)||
+                        (SVNError->apr_err == SVN_ERR_WC_NOT_WORKING_COPY))
                     {
                         item.authfailed = true;
                     }
