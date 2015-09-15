@@ -1684,15 +1684,19 @@ void CLogDlg::LogThread()
             svnPath
             )
 
-        bool bFindCopyFrom = !!(DWORD)CRegDWORD(L"Software\\TortoiseSVN\\LogFindCopyFrom", FALSE);
-        if (bFindCopyFrom)
+        bool bFindCopyFrom = !!(DWORD)CRegDWORD(L"Software\\TortoiseSVN\\LogFindCopyFrom", TRUE);
+        if (bFindCopyFrom && m_bStrict)
         {
             SVNLogHelper helper;
             CString sCopyFrom;
             CTSVNPath mergeUrl = CTSVNPath(GetURLFromPath(m_mergePath) + L"/");
             SVNRev rev = helper.GetCopyFromRev(mergeUrl, SVNRev::REV_HEAD, sCopyFrom);
             if (sCopyFrom.Compare(m_sURL) == 0)
+            {
                 m_copyfromrev = rev;
+                if (svn_revnum_t(m_startrev) > svn_revnum_t(m_endrev))
+                    m_endrev = m_copyfromrev;
+            }
         }
     }
 
@@ -3425,6 +3429,8 @@ void CLogDlg::OnNMCustomdrawLoglist(NMHDR *pNMHDR, LRESULT *pResult)
                     if (data->GetChangedPaths().ContainsCopies())
                         crText = m_Colors.GetColor(CColors::Modified);
                     if ((data->GetDepth())||(m_mergedRevs.find(data->GetRevision()) != m_mergedRevs.end()))
+                        crText = GetSysColor(COLOR_GRAYTEXT);
+                    if ((m_copyfromrev > data->GetRevision()) && !m_mergePath.IsEmpty())
                         crText = GetSysColor(COLOR_GRAYTEXT);
                     if ((data->GetRevision() == m_wcRev) || data->GetUnread())
                     {
@@ -5980,6 +5986,8 @@ void CLogDlg::ExecuteBlameMenuRevisions(ContextMenuInfoForRevisionsPtr& pCmi)
         SVNRev endrev = dlg.EndRev;
         bool includeMerge = !!dlg.m_bIncludeMerge;
         bool textViewer = !!dlg.m_bTextView;
+        CString options = SVN::GetOptionsString(!!dlg.m_bIgnoreEOL, dlg.m_IgnoreSpaces);
+
         auto f = [=]()
         {
             CoInitialize(NULL);
@@ -5990,7 +5998,7 @@ void CLogDlg::ExecuteBlameMenuRevisions(ContextMenuInfoForRevisionsPtr& pCmi)
             CBlame blame;
             CString tempfile;
             tempfile = blame.BlameToTempFile(m_path, startrev, endrev, m_pegrev,
-                                             L"", includeMerge, TRUE, TRUE);
+                                             options, includeMerge, TRUE, TRUE);
             if (!tempfile.IsEmpty())
             {
                 if (textViewer)
@@ -7424,6 +7432,7 @@ void CLogDlg::ExecuteBlameChangedPaths( ContextMenuInfoForChangedPathsPtr pCmi, 
         SVNRev pegrev = pCmi->Rev1;
         bool includeMerge = !!dlg.m_bIncludeMerge;
         bool textView = !!dlg.m_bTextView;
+        CString options = SVN::GetOptionsString(!!dlg.m_bIgnoreEOL, dlg.m_IgnoreSpaces);
         auto f = [=]()
         {
             CoInitialize(NULL);
@@ -7433,7 +7442,7 @@ void CLogDlg::ExecuteBlameChangedPaths( ContextMenuInfoForChangedPathsPtr pCmi, 
             CBlame blame;
             CString tempfile;
             tempfile = blame.BlameToTempFile(CTSVNPath(pCmi->fileUrl), startrev,
-                endrev, pegrev, L"", includeMerge, TRUE, TRUE);
+                endrev, pegrev, options, includeMerge, TRUE, TRUE);
             if (!tempfile.IsEmpty())
             {
                 if (textView)
@@ -7971,7 +7980,7 @@ void CLogDlg::RefreshMonitorProjTree()
         m_SystemTray.uFlags = NIF_MESSAGE | NIF_ICON;
         Shell_NotifyIcon(NIM_ADD, &m_SystemTray);
     }
-    ::SendMessage(m_hwndToolbar, TB_ENABLEBUTTON, ID_LOGDLG_MONITOR_REMOVE, MAKELONG(bHasWorkingCopies, 0));
+    ::SendMessage(m_hwndToolbar, TB_ENABLEBUTTON, ID_MISC_UPDATE, MAKELONG(bHasWorkingCopies, 0));
 
     if (m_pTaskbarList)
     {
@@ -9440,6 +9449,8 @@ void CLogDlg::OnMonitorUpdateAll()
         }
         return false;
     });
+    if (pathlist.GetCount() == 0)
+        return;
     CTSVNPath tempfile = CTempFiles::Instance().GetTempFilePath(false);
     if (pathlist.WriteToFile(tempfile.GetWinPathString()))
     {
