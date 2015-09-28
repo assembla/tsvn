@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2015-08-18 09:21+0000\n"
-"Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
+"PO-Revision-Date: 2015-09-25 00:47+0000\n"
+"Last-Translator: Cecil Sheng <zcecil@csie.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/luebbe/tortoisesvn/"
 "language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -206,7 +206,7 @@ msgstr "傳輸了 %I64d k位元組"
 #. Resource IDs: (62186)
 #, c-format
 msgid "%Ts [Recovered]"
-msgstr ""
+msgstr "%Ts [已復原]"
 
 #. Resource IDs: (61585, 61586)
 #, c-format
@@ -214,6 +214,8 @@ msgid ""
 "%Ts\n"
 "%Ts"
 msgstr ""
+"%Ts\n"
+"%Ts"
 
 #. Resource IDs: (1022)
 #, c-format
@@ -816,11 +818,11 @@ msgstr "搜尋(&F)"
 
 #. Resource IDs: (32771)
 msgid "&Find...\t(Ctrl+F)"
-msgstr ""
+msgstr "搜尋...\t(Ctrl+&F)"
 
 #. Resource IDs: (32778)
 msgid "&Fit images in window\t(F)"
-msgstr ""
+msgstr "調整影像至視窗大小\t(&F)"
 
 #. Resource IDs: (1646)
 msgid "&Fix time stamps"
@@ -860,7 +862,7 @@ msgstr "從(&F): (URL 以及合併範圍的起始版本)"
 
 #. Resource IDs: (32779)
 msgid "&Go To Line...\t(Ctrl+G)"
-msgstr ""
+msgstr "前往行數...\t(Ctrl+&G)"
 
 #. Resource IDs: (65535)
 msgid "&Green:"
@@ -921,7 +923,7 @@ msgstr "影像(&I)"
 
 #. Resource IDs: (32790)
 msgid "&Image info\t(I)"
-msgstr ""
+msgstr "影像資訊\t(&I)"
 
 #. Resource IDs: (16505)
 msgid "&Image only"
@@ -1143,7 +1145,7 @@ msgstr "開啟(&O)"
 
 #. Resource IDs: (32773)
 msgid "&Open\t(Ctrl+O)"
-msgstr ""
+msgstr "開啟\t(Ctrl+&O)"
 
 #. Resource IDs: (1602)
 msgid "&Operative:"
@@ -1159,7 +1161,7 @@ msgstr "其它(&O)"
 
 #. Resource IDs: (32772)
 msgid "&Overlay images\t(O)"
-msgstr ""
+msgstr "影像覆蓋\t(&O)"
 
 #. Resource IDs: (1411, 65535)
 msgid "&Password:"
@@ -1988,7 +1990,7 @@ msgstr "新增專案或目錄..."
 #. Resource IDs: (9804)
 #, c-format
 msgid "Add to %1!ls!"
-msgstr ""
+msgstr "新增至 %1!ls!"
 
 #. Resource IDs: (194)
 msgid "Add to &ignore list"
@@ -2132,13 +2134,13 @@ msgstr "全部的變更都會消失! 是否確定要重置鍵盤配置?"
 #, c-format
 msgid ""
 "All your changes will be lost! Do you really want to reset the menu '%Ts'?"
-msgstr ""
+msgstr "您所有的變更都會清失! 確定要重置選單'%Ts'嗎?"
 
 #. Resource IDs: (16111)
 #, c-format
 msgid ""
 "All your changes will be lost! Do you really want to reset the toolbar '%Ts'?"
-msgstr ""
+msgstr "您所有的變更都會清失! 確定要重置工具列'%Ts'嗎?"
 
 #. Resource IDs: (32976)
 msgid ""
@@ -2321,7 +2323,7 @@ msgstr "是否確定要復原 %d 項目嗎? 從上一版本之後的所有變更
 
 #. Resource IDs: (32793)
 msgid "Arrange &vertical\t(V)"
-msgstr ""
+msgstr "縱向排列\t(&V)"
 
 #. Resource IDs: (1587)
 msgid "As &is (no specific EOL)"
@@ -3703,7 +3705,7 @@ msgstr ""
 #. Resource IDs: (9802)
 #, c-format
 msgid "Copy to %1!ls!"
-msgstr ""
+msgstr "複製至 %1!ls!"
 
 #. Resource IDs: (1809)
 msgid "Copy to clipboard"
@@ -4435,7 +4437,7 @@ msgstr "對所有無版本控制/有變更的項目進行作業"
 #. Resource IDs: (16109)
 #, c-format
 msgid "Do you really want to delete the toolbar '%Ts'?"
-msgstr ""
+msgstr "確定要刪除工具列 '%Ts'嗎?"
 
 #. Resource IDs: (1464)
 #, c-format
@@ -4606,7 +4608,7 @@ msgstr "磁碟機 A: B:"
 #. Resource IDs: (9800)
 #, c-format
 msgid "Drop not possible on %1!ls!"
-msgstr ""
+msgstr "無法對 %1!ls! 進行拖放操作"
 
 #. Resource IDs: (32816)
 msgid "E&xact copy sources"
@@ -4626,7 +4628,7 @@ msgstr "離開(&X)"
 
 #. Resource IDs: (105)
 msgid "E&xit\t(Ctrl+W)"
-msgstr ""
+msgstr "離開(&X)\t(Ctrl+W)"
 
 #. Resource IDs: (4384)
 msgid "E&xpand all"
@@ -4714,6 +4716,8 @@ msgid ""
 "Edit property '%1!S!' on\r\n"
 "%2!ls!"
 msgstr ""
+"編輯 %2!ls! 的屬性\n"
+"'%1!S!' "
 
 #. Resource IDs: (1331, 1382)
 msgid "Edit..."
@@ -4998,7 +5002,7 @@ msgstr "擴展下列目錄樹(&F)"
 #. Resource IDs: (16025)
 #, c-format
 msgid "Expand (%Ts)"
-msgstr ""
+msgstr "展開 (%Ts)"
 
 #. Resource IDs: (16012)
 msgid "Expand docked window"
@@ -5471,11 +5475,11 @@ msgstr "符合高度"
 
 #. Resource IDs: (32818)
 msgid "Fit image &heights\t(H)"
-msgstr ""
+msgstr "符合影像高度\t(&H)"
 
 #. Resource IDs: (32817)
 msgid "Fit image &widths\t(W)"
-msgstr ""
+msgstr "符合影像寬度\t(&W)"
 
 #. Resource IDs: (32803)
 msgid "Fit width"
@@ -6247,7 +6251,7 @@ msgstr ""
 
 #. Resource IDs: (32896)
 msgid "Ignore comments"
-msgstr ""
+msgstr "忽略註解"
 
 #. Resource IDs: (1126, 1127)
 msgid "Ignore line &endings"
@@ -6369,7 +6373,7 @@ msgstr ""
 #. Resource IDs: (9801)
 #, c-format
 msgid "Import to %1!ls!"
-msgstr ""
+msgstr "匯入至 %1!ls!"
 
 #. Resource IDs: (1673)
 msgid ""
@@ -6828,7 +6832,7 @@ msgstr "本地掛勾指令(&H)"
 
 #. Resource IDs: (334)
 msgid "Local hook scripts"
-msgstr ""
+msgstr "本地掛勾指令檔"
 
 #. Resource IDs: (1500)
 msgid ""
@@ -7400,7 +7404,7 @@ msgstr "移動特殊檔案或目錄"
 #. Resource IDs: (9803)
 #, c-format
 msgid "Move to %1!ls!"
-msgstr ""
+msgstr "移動至 %1!ls!"
 
 #. Resource IDs: (3340)
 msgid "Move to changelist"
@@ -7549,7 +7553,7 @@ msgstr "新增選單"
 
 #. Resource IDs: (1239)
 msgid "New branch/tag is not ready yet, retrying switch..."
-msgstr ""
+msgstr "新建立的分支/標記還沒準備好, 重新進行切換動作..."
 
 #. Resource IDs: (1506)
 msgid "New name must not be empty or the same as the original name!"
@@ -7981,7 +7985,7 @@ msgstr "選項"
 
 #. Resource IDs: (32779)
 msgid "Ori&ginal size\t(S)"
-msgstr ""
+msgstr "原始大小(&G)\t(S)"
 
 #. Resource IDs: (17024)
 msgid "Other Task Panes"
@@ -8138,7 +8142,7 @@ msgstr "正在補綴"
 #. Resource IDs: (2703)
 #, c-format
 msgid "Patching file '%1!ls!'"
-msgstr ""
+msgstr "正在補綴檔案 '%1!ls!'"
 
 #. Resource IDs: (304, 1004, 1223, 2704, 3153, 3300)
 msgid "Path"
@@ -8940,6 +8944,8 @@ msgid ""
 "Remove property '%1!S!' from\r\n"
 "%2!ls!"
 msgstr ""
+"刪除 %2!ls! 的屬性\n"
+" '%1!S!' "
 
 #. Resource IDs: (5507)
 msgid "Remove the selected cache(s) from disk"
@@ -10002,6 +10008,8 @@ msgid ""
 "Set property '%1!S!' on\r\n"
 "%2!ls!"
 msgstr ""
+"設定 %2!ls! 的屬性\n"
+"'%1!S!' "
 
 #. Resource IDs: (200)
 msgid "Setting properties..."
@@ -10614,7 +10622,7 @@ msgstr "開啟屬性視窗以便自行編輯屬性."
 
 #. Resource IDs: (2705)
 msgid "State"
-msgstr ""
+msgstr "狀態"
 
 #. Resource IDs: (16514)
 msgid "Static"
@@ -10630,7 +10638,7 @@ msgstr "狀態"
 
 #. Resource IDs: (59393)
 msgid "Status Bar"
-msgstr ""
+msgstr "狀態列"
 
 #. Resource IDs: (17087)
 msgid "Status Bar Configuration"
@@ -11425,6 +11433,9 @@ msgid ""
 "%ls\n"
 "is invalid!"
 msgstr ""
+"指定的路徑/URL\n"
+"%ls\n"
+"不正確!"
 
 #. Resource IDs: (2339)
 msgid "The target already exists."
@@ -11709,11 +11720,12 @@ msgid ""
 "This program is linked to the missing export %Ts in the file %Ts. This "
 "machine may have an incompatible version of %Ts."
 msgstr ""
+"找不到本程式連結的 %Ts (包含於 %Ts). 系統上可能缺少或安裝了不相容版本的 %Ts."
 
 #. Resource IDs: (61709)
 #, c-format
 msgid "This program requires the file %Ts, which was not found on this system."
-msgstr ""
+msgstr "系統中找不到本程式需要的 %Ts."
 
 #. Resource IDs: (230)
 msgid "This property is only allowed on folders, not files."
@@ -12726,7 +12738,7 @@ msgstr "檢視"
 
 #. Resource IDs: (32898)
 msgid "View Bars"
-msgstr ""
+msgstr "檢視工具列"
 
 #. Resource IDs: (1815)
 msgid "View revision for path in &webviewer"
@@ -12780,7 +12792,7 @@ msgstr "等待指令檔完成"
 
 #. Resource IDs: (1046)
 msgid "Waiting for monitoring thread to finish..."
-msgstr ""
+msgstr "正在等待監視執行緒完成工作..."
 
 #. Resource IDs: (280)
 msgid "Want to go offline?"
@@ -13081,7 +13093,7 @@ msgstr ""
 
 #. Resource IDs: (32783)
 msgid "Zoo&m out\t(-)"
-msgstr ""
+msgstr "縮小(&M)\t(-)"
 
 #. Resource IDs: (17093)
 msgid "Zoom"
@@ -13126,7 +13138,7 @@ msgstr ""
 
 #. Resource IDs: (32784)
 msgid "Zoom i&n\t(+)"
-msgstr ""
+msgstr "放大(&N)\t(+)"
 
 #. Resource IDs: (32772)
 msgid "Zoom in"
@@ -13406,7 +13418,7 @@ msgstr "外部"
 #. Resource IDs: (2706)
 #, c-format
 msgid "failed hunks: %d"
-msgstr ""
+msgstr "%d 組失敗區塊"
 
 #. Resource IDs: (65535)
 msgid "file external:"
@@ -13602,7 +13614,7 @@ msgstr "配對符號:"
 
 #. Resource IDs: (2707)
 msgid "patched"
-msgstr ""
+msgstr "已補綴"
 
 #. Resource IDs: (65535)
 msgid "path elements: "
