@@ -220,13 +220,9 @@ bool CPicture::Load(tstring sFilePathName)
                                         bResult = true;
                                         for (int i=0; i<lpIconDir->idCount; ++i)
                                         {
-                                            if (lpIconDir->idEntries[i].bHeight == 0)
-                                                lpIconDir->idEntries[i].bHeight = 0xff;
-                                            if (lpIconDir->idEntries[i].bWidth == 0)
-                                                lpIconDir->idEntries[i].bWidth = 0xff;
                                             hIcons[i] = (HICON)LoadImage(NULL, sFilePathName.c_str(), IMAGE_ICON,
-                                                                         lpIconDir->idEntries[i].bWidth,
-                                                                         lpIconDir->idEntries[i].bHeight,
+                                                                         lpIconDir->idEntries[i].bWidth == 0 ? 256 : lpIconDir->idEntries[i].bWidth,
+                                                                         lpIconDir->idEntries[i].bHeight == 0 ? 256 : lpIconDir->idEntries[i].bHeight,
                                                                          LR_LOADFROMFILE);
                                             if (hIcons[i] == NULL)
                                             {
@@ -732,7 +728,7 @@ UINT CPicture::GetHeight() const
     if ((bIsIcon)&&(lpIcons))
     {
         LPICONDIR lpIconDir = (LPICONDIR)lpIcons;
-        return lpIconDir->idEntries[nCurrentIcon].bHeight;
+        return lpIconDir->idEntries[nCurrentIcon].bHeight == 0 ? 256 : lpIconDir->idEntries[nCurrentIcon].bHeight;
     }
     return pBitmap ? pBitmap->GetHeight() : 0;
 }
@@ -742,7 +738,7 @@ UINT CPicture::GetWidth() const
     if ((bIsIcon)&&(lpIcons))
     {
         LPICONDIR lpIconDir = (LPICONDIR)lpIcons;
-        return lpIconDir->idEntries[nCurrentIcon].bWidth;
+        return lpIconDir->idEntries[nCurrentIcon].bWidth == 0 ? 256 : lpIconDir->idEntries[nCurrentIcon].bWidth;
     }
     return pBitmap ? pBitmap->GetWidth() : 0;
 }

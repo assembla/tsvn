@@ -330,7 +330,6 @@ void CEditPropExternals::OnBnClickedFindhead()
         }
     }
 
-    std::map<CString, svn_revnum_t> headrevs;
     progDlg.SetLine(1, CString(MAKEINTRESOURCE(IDS_EDITPROPS_PROG_FINDHEADREVS)));
     for (auto it = m_externals.begin(); it != m_externals.end(); ++it)
     {
@@ -341,18 +340,11 @@ void CEditPropExternals::OnBnClickedFindhead()
         count += 4;
         if (!it->root.IsEmpty())
         {
-            auto hi = headrevs.find(it->root);
-            if (hi == headrevs.end())
-            {
-                const SVNInfoData * pInfo = svnInfo.GetFirstFileInfo(CTSVNPath(it->fullurl), SVNRev(), SVNRev::REV_HEAD);
-                if ((pInfo == nullptr) || (pInfo->lastchangedrev <= 0))
-                    it->headrev = svn.GetHEADRevision(CTSVNPath(it->fullurl), true);
-                else
-                    it->headrev = pInfo->lastchangedrev;
-                headrevs[it->root] = it->headrev;
-            }
+            const SVNInfoData * pInfo = svnInfo.GetFirstFileInfo(CTSVNPath(it->fullurl), SVNRev(), SVNRev::REV_HEAD);
+            if ((pInfo == nullptr) || (pInfo->rev <= 0))
+                it->headrev = svn.GetHEADRevision(CTSVNPath(it->fullurl), true);
             else
-                it->headrev = hi->second;
+                it->headrev = pInfo->rev;
         }
     }
     progDlg.Stop();
@@ -437,10 +429,10 @@ void CEditPropExternals::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
                             }
 
                             const SVNInfoData * pInfo = svnInfo.GetFirstFileInfo(CTSVNPath(m_externals[index].fullurl), SVNRev(), SVNRev::REV_HEAD);
-                            if ((pInfo == nullptr) || (pInfo->lastchangedrev <= 0))
+                            if ((pInfo == nullptr) || (pInfo->rev <= 0))
                                 m_externals[index].headrev = svn.GetHEADRevision(CTSVNPath(m_externals[index].fullurl), true);
                             else
-                                m_externals[index].headrev = pInfo->lastchangedrev;
+                                m_externals[index].headrev = pInfo->rev;
                         }
                     }
                 }
