@@ -272,9 +272,13 @@ void CSciEdit::Init(LONG lLanguage)
     Call(SCI_ASSIGNCMDKEY, SCK_END + (SCMOD_SHIFT << 16), SCI_LINEENDWRAPEXTEND);
     Call(SCI_ASSIGNCMDKEY, SCK_HOME, SCI_HOMEWRAP);
     Call(SCI_ASSIGNCMDKEY, SCK_HOME + (SCMOD_SHIFT << 16), SCI_HOMEWRAPEXTEND);
+
     CRegStdDWORD used2d(L"Software\\TortoiseSVN\\ScintillaDirect2D", TRUE);
     if (SysInfo::Instance().IsWin7OrLater() && DWORD(used2d))
     {
+        // set font quality for the popup window, since that window does not use D2D
+        Call(SCI_SETFONTQUALITY, SC_EFF_QUALITY_LCD_OPTIMIZED);
+        // now enable D2D
         Call(SCI_SETTECHNOLOGY, SC_TECHNOLOGY_DIRECTWRITERETAIN);
         Call(SCI_SETBUFFEREDDRAW, 0);
     }
@@ -309,7 +313,7 @@ void CSciEdit::SetIcon(const std::map<int, UINT> &icons)
     for (auto icon : icons)
     {
         auto hIcon = (HICON)::LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(icon.second), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
-        std::unique_ptr<BYTE> bytes(Icon2Image(hIcon));
+        std::unique_ptr<UINT[]> bytes((LPUINT)Icon2Image(hIcon));
         DestroyIcon(hIcon);
         Call(SCI_REGISTERRGBAIMAGE, icon.first, (LPARAM)bytes.get());
     }
