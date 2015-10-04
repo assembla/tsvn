@@ -7823,6 +7823,7 @@ void CLogDlg::InitMonitorProjTree()
     CString sDataFilePath = CPathUtils::GetAppDataDirectory();
     sDataFilePath += L"\\MonitoringData.ini";
     m_monitoringFile.SetMultiLine();
+    m_monitoringFile.SetUnicode();
     if (PathFileExists(sDataFilePath))
     {
         int retrycount = 5;
@@ -8248,7 +8249,15 @@ void CLogDlg::MonitorEditProject(MonitorItem * pProject, const CString& sParentP
         if (pProject == nullptr)
             pEditProject = new MonitorItem();
         pEditProject->Name = dlg.m_sName;
-        pEditProject->WCPathOrUrl = dlg.m_sPathOrURL;
+        if (SVN::PathIsURL(CTSVNPath(dlg.m_sPathOrURL)))
+            pEditProject->WCPathOrUrl = CPathUtils::PathUnescape(dlg.m_sPathOrURL);
+        else
+            pEditProject->WCPathOrUrl = dlg.m_sPathOrURL;
+        if (!pEditProject->WCPathOrUrl.IsEmpty())
+        {
+            // remove quotes in case the user put the url/path in quotes
+            pEditProject->WCPathOrUrl.Trim(L"\" \t");
+        }
         pEditProject->interval = dlg.m_monitorInterval;
         pEditProject->username = CStringUtils::Encrypt(dlg.m_sUsername);
         pEditProject->password = CStringUtils::Encrypt(dlg.m_sPassword);

@@ -103,10 +103,10 @@ bool DropVendorCommand::Execute()
             versionedFiles.erase(found);
             if (!it->second)
             {
-                if (!CopyFile(srcPath, dstPath, FALSE))
+                if (!CopyFileHandleReadOnly(srcPath, dstPath))
                 {
-                    progress.Stop();
                     CFormatMessageWrapper error;
+                    progress.Stop();
                     CString sErr;
                     sErr.Format(IDS_ERR_COPYFAILED, (LPCWSTR)srcPath, (LPCWSTR)dstPath, (LPCWSTR)error);
                     MessageBox(progress.GetHwnd(), sErr, L"TortoiseSVN", MB_ICONERROR);
@@ -132,10 +132,10 @@ bool DropVendorCommand::Execute()
                         }
                         if (!it->second)
                         {
-                            if (!CopyFile(srcPath, dstPath, FALSE))
+                            if (!CopyFileHandleReadOnly(srcPath, dstPath))
                             {
-                                progress.Stop();
                                 CFormatMessageWrapper error;
+                                progress.Stop();
                                 CString sErr;
                                 sErr.Format(IDS_ERR_COPYFAILED, (LPCWSTR)srcPath, (LPCWSTR)dstPath, (LPCWSTR)error);
                                 MessageBox(progress.GetHwnd(), sErr, L"TortoiseSVN", MB_ICONERROR);
@@ -168,10 +168,10 @@ bool DropVendorCommand::Execute()
                 CTSVNPathList plist = CTSVNPathList(CTSVNPath(dstPath));
                 if (!it->second)
                 {
-                    if (!CopyFile(srcPath, dstPath, FALSE))
+                    if (!CopyFileHandleReadOnly(srcPath, dstPath))
                     {
-                        progress.Stop();
                         CFormatMessageWrapper error;
+                        progress.Stop();
                         CString sErr;
                         sErr.Format(IDS_ERR_COPYFAILED, (LPCWSTR)srcPath, (LPCWSTR)dstPath, (LPCWSTR)error);
                         MessageBox(progress.GetHwnd(), sErr, L"TortoiseSVN", MB_ICONERROR);
@@ -234,4 +234,19 @@ bool DropVendorCommand::Execute()
     }
 
     return TRUE;
+}
+
+bool DropVendorCommand::CopyFileHandleReadOnly(LPCWSTR lpExistingFilename, LPCWSTR lpNewFilename)
+{
+    if (!CopyFile(lpExistingFilename, lpNewFilename, FALSE))
+    {
+        // try again with the readonly attribute removed
+        auto attribs = ::GetFileAttributes(lpNewFilename);
+        OnOutOfScope(::SetFileAttributes(lpNewFilename, attribs));
+
+        ::SetFileAttributes(lpNewFilename, FILE_ATTRIBUTE_NORMAL);
+        if (!CopyFile(lpExistingFilename, lpNewFilename, FALSE))
+            return false;
+    }
+    return true;
 }
