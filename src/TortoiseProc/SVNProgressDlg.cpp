@@ -4097,10 +4097,6 @@ void CSVNProgressDlg::GenerateMergeLogMessage()
                 if (!m_ProjectProperties.sMergeLogTemplateReverseTitle.IsEmpty())
                     sFormatTitle = m_ProjectProperties.sMergeLogTemplateReverseTitle;
             }
-            if (!sRevList.IsEmpty())
-                sRevList += L", ";
-            if (!sRevListR.IsEmpty())
-                sRevListR += L", ";
             if (!sRevListRange.IsEmpty())
                 sRevListRange += L", ";
             if (startRev == endRev)
