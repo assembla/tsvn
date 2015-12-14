@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2015-12-04 13:12+0000\n"
+"PO-Revision-Date: 2015-12-14 10:22+0000\n"
 "Last-Translator: Joan Monguillot <jmonguillot@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/luebbe/tortoisesvn/language/"
 "ca/)\n"
@@ -97,7 +97,7 @@ msgstr "%1!d! fitxers seleccionats, %2!d! fitxers en total"
 #, c-format
 msgid "%1!d! most active author(s) with at least %2!d! commits each (%3!d! %%)"
 msgstr ""
-"%1!d! autor(s) més actiu(s) amb almenys %2!d! entregues cadascun (%3!d! %%)"
+"%1!d! autor(s) més actiu(s) amb almenys %2!d! pujades cadascun (%3!d! %%)"
 
 #. Resource IDs: (3602)
 #, c-format
@@ -629,7 +629,7 @@ msgstr "&Ordre:"
 
 #. Resource IDs: (122)
 msgid "&Commit..."
-msgstr "&Entrega..."
+msgstr "&Puja..."
 
 #. Resource IDs: (1614)
 msgid "&Compare URLs"
@@ -1574,7 +1574,7 @@ msgstr "Control de &llista de fitxers"
 #. Resource IDs: (1024)
 #, c-format
 msgid "'%ls' : %ld new commits"
-msgstr "'%ls' : %ld entregues noves"
+msgstr "'%ls' : %ld pujades noves"
 
 #. Resource IDs: (1337)
 #, c-format
@@ -1951,7 +1951,7 @@ msgid ""
 "ActiveX objects cannot be saved while exiting Windows!\n"
 "Discard all changes to %1?"
 msgstr ""
-"Els objectes ActiveX no es poden desar quan se surt de Windows!\n"
+"Els objectes ActiveX no es poden desar quan se surt de Windows.\n"
 "Descarto tots els canvis de %1?"
 
 #. Resource IDs: (155, 1229, 3330, 3657)
@@ -2692,11 +2692,11 @@ msgstr "No es pot copiar imatge bitmap al porta-retalls"
 
 #. Resource IDs: (16003)
 msgid "Can't create a new image!"
-msgstr "No es pot crear una nova imatge!"
+msgstr "No es pot crear una nova imatge."
 
 #. Resource IDs: (16007)
 msgid "Can't customize menus!"
-msgstr "No es poden personalitzar menús!"
+msgstr "No es poden personalitzar menús."
 
 #. Resource IDs: (16004)
 msgid "Can't paste bitmap image from the clipboard!"
@@ -2712,7 +2712,7 @@ msgid ""
 "Change the selection for the commit."
 msgstr ""
 "Cancel·lar\n"
-"Canvia la selecció per l'entrega."
+"Canvia la selecció per a la pujada."
 
 #. Resource IDs: (1588)
 msgid ""
@@ -2728,7 +2728,7 @@ msgid ""
 "Do not commit to a tag."
 msgstr ""
 "Cancel·lar\n"
-"No associar a una etiqueta."
+"No pugis a una etiqueta."
 
 #. Resource IDs: (2345)
 msgid ""
@@ -3050,7 +3050,7 @@ msgstr "Canvia l'estil de l'aplicació"
 
 #. Resource IDs: (65535)
 msgid "Char position where to show a border line in commit text boxes:"
-msgstr "Posició on es mostra una línia de vora als quadres de text d'entrega:"
+msgstr "Posició on es mostra una línia de vora als quadres de text de pujada:"
 
 #. Resource IDs: (120)
 msgid "Chec&kout..."
@@ -3108,7 +3108,7 @@ msgstr ""
 msgid "Check to use a less verbose date and time format in log messages"
 msgstr ""
 "Marca per utilitzar un format de temps/data simplificat en els missatges del "
-"log de les entregues. "
+"log "
 
 #. Resource IDs: (32831)
 msgid "Check working copy for modifications"
@@ -3116,7 +3116,7 @@ msgstr "Comprova modificacions a la còpia de treball"
 
 #. Resource IDs: (9108)
 msgid "Check-Commit Hook"
-msgstr "Hook de Comprovació-Entrega"
+msgstr "Hook de Comprovació-Pujada"
 
 #. Resource IDs: (1504)
 msgid "Check:"
@@ -3425,52 +3425,52 @@ msgstr "Ordres"
 
 #. Resource IDs: (135, 1083, 1228, 3658)
 msgid "Commit"
-msgstr "Entrega"
+msgstr "Pujada"
 
 #. Resource IDs: (2757)
 msgid ""
 "Commit only the folder\n"
 "Files inside the folder won't get committed."
 msgstr ""
-"Entrega només la carpeta\n"
-"Els fitxers dins de la carpeta no s'entregaran."
+"Puja només la carpeta\n"
+"Els fitxers dins de la carpeta no es pujaran."
 
 #. Resource IDs: (1110)
 msgid "Commit to:"
-msgstr "Entrega a:"
+msgstr "Puja a:"
 
 #. Resource IDs: (3333)
 msgid "Commit..."
-msgstr "Entrega..."
+msgstr "Puja..."
 
 #. Resource IDs: (3522)
 msgid ""
 "Commit\n"
 "Commit the changes to the target."
 msgstr ""
-"Entregar\n"
-"Entrega els canvis a la destinació."
+"Pujar\n"
+"Puja els canvis a la destinació."
 
 #. Resource IDs: (3900)
 msgid "Commits by author"
-msgstr "Entregues per autor"
+msgstr "Pujades per autor"
 
 #. Resource IDs: (3901)
 msgid "Commits by date"
-msgstr "Entregues per data"
+msgstr "Pujades per data"
 
 #. Resource IDs: (3941)
 #, c-format
 msgid "Commits each %ls:"
-msgstr "Entregues cada %ls:"
+msgstr "Pujades cada %ls:"
 
 #. Resource IDs: (1135)
 msgid "Commits each week:"
-msgstr "Entregues cada setmana:"
+msgstr "Pujades cada setmana:"
 
 #. Resource IDs: (138)
 msgid "Commits your changes to the repository"
-msgstr "Entrega els canvis al repositori"
+msgstr "Puja els canvis al repositori"
 
 #. Resource IDs: (2755)
 msgid ""
@@ -3478,14 +3478,14 @@ msgid ""
 "You might want to add these folders recursively by using the 'Add...' "
 "context menu item."
 msgstr ""
-"Entregar una carpeta sense versionar no afegeix recursivament els seus "
-"elements fills.\n"
+"Pujar una carpeta sense versionar no afegeix recursivament els seus elements "
+"fills.\n"
 "Afegiu aquestes carpetes recursivament utilitzant l'ordre 'Afegeix...' del "
 "menú contextual."
 
 #. Resource IDs: (3521)
 msgid "Committing to a tag"
-msgstr "Entregant a una etiqueta"
+msgstr "Pujant a una etiqueta"
 
 #. Resource IDs: (4247)
 msgid "Committing transaction..."
@@ -3552,8 +3552,8 @@ msgid ""
 "Compares the file with the last committed revision to show you the changes "
 "you made"
 msgstr ""
-"Compara el fitxer amb l'última revisió entregada per mostrar-vos els canvis "
-"que heu fet"
+"Compara el fitxer amb l'última revisió pujada per mostrar-vos els canvis que "
+"heu fet"
 
 #. Resource IDs: (262)
 msgid "Compares the selected file with a file in the repository"
@@ -3826,7 +3826,7 @@ msgid ""
 "Could not copy the files!\n"
 "%ls"
 msgstr ""
-"No s'han pogut copiar els fitxers!\n"
+"No s'han pogut copiar els fitxers.\n"
 "%ls"
 
 #. Resource IDs: (61864)
@@ -3836,7 +3836,7 @@ msgstr "No s'ha pogut crear %1 perquè el directori és ple."
 
 #. Resource IDs: (1334)
 msgid "Could not create temp folder!"
-msgstr "No s'ha pogut crear carpeta temp!"
+msgstr "No s'ha pogut crear la carpeta temp."
 
 #. Resource IDs: (9302)
 #, c-format
@@ -3850,7 +3850,7 @@ msgstr "No s'ha pogut eliminar la propietat  '%1!ls!' sobre '%2!ls!' perquè"
 
 #. Resource IDs: (1323)
 msgid "Could not determine the last committed revision!"
-msgstr "No s'ha pogut determinar la darrera revisió entregada."
+msgstr "No s'ha pogut determinar la darrera revisió pujada."
 
 #. Resource IDs: (1335)
 #, c-format
@@ -3863,7 +3863,7 @@ msgstr ""
 
 #. Resource IDs: (1285)
 msgid "Could not get the status!"
-msgstr "No s'ha pogut obtenir l'estat!"
+msgstr "No s'ha pogut obtenir l'estat."
 
 #. Resource IDs: (9301)
 #, c-format
@@ -3915,7 +3915,7 @@ msgid ""
 "Could not retrieve URL of the file!\n"
 "%ls"
 msgstr ""
-"No s'ha pogut obtenir la URL del fitxer!\n"
+"No s'ha pogut obtenir l'URL del fitxer\n"
 "%ls"
 
 #. Resource IDs: (1040)
@@ -3933,7 +3933,7 @@ msgid ""
 "Could not start diff viewer!\n"
 "%ls"
 msgstr ""
-"No s'ha pogut iniciar el visualitzador de diferències!\n"
+"No s'ha pogut iniciar el visualitzador de diferències.\n"
 "%ls"
 
 #. Resource IDs: (1282)
@@ -3942,7 +3942,7 @@ msgid ""
 "Could not start external diff program!\n"
 "%ls"
 msgstr ""
-"No s'ha pogut iniciar el visualitzador de diferències!\n"
+"No s'ha pogut iniciar el programa extern de diferències.\n"
 "%ls"
 
 #. Resource IDs: (1290)
@@ -3951,7 +3951,7 @@ msgid ""
 "Could not start external merge program!\n"
 "%ls"
 msgstr ""
-"No s'ha pogut engegar el programa extern de fusió !\n"
+"No s'ha pogut iniciar el programa extern de fusió.\n"
 "%ls"
 
 #. Resource IDs: (61702)
@@ -3964,12 +3964,12 @@ msgid ""
 "Could not start text viewer!\n"
 "%ls"
 msgstr ""
-"No s'ha pogut iniciar el visualitzador de text!\n"
+"No s'ha pogut iniciar el visualitzador de text.\n"
 "%ls"
 
 #. Resource IDs: (1281)
 msgid "Could not start thread!"
-msgstr "No s'ha pogut iniciar el fil!"
+msgstr "No s'ha pogut iniciar el fil."
 
 #. Resource IDs: (1501)
 msgid "Coun&t"
@@ -4401,7 +4401,7 @@ msgstr "Trobant diferències"
 msgid "Diffs the working copy file with the one before the last commit."
 msgstr ""
 "Troba diferències de la còpia de treball amb la que hi havia abans de la "
-"darrera entrega."
+"darrera pujada."
 
 #. Resource IDs: (1513)
 msgid "Directories"
@@ -4999,7 +4999,7 @@ msgid ""
 "commit message."
 msgstr ""
 "Introduïu els patrons d'expressions regulars per filtrar fora l'ID d'error "
-"en un missatge d'entrega."
+"en un missatge de pujada."
 
 #. Resource IDs: (57633)
 msgid ""
@@ -5023,7 +5023,7 @@ msgstr "Error"
 
 #. Resource IDs: (2315)
 msgid "Error rebuilding Shell Icon Cache!"
-msgstr "Error refent Cache d'Icones Shell!"
+msgstr "Error refent memòria cau d'icones Shell."
 
 #. Resource IDs: (1294)
 #, c-format
@@ -5041,7 +5041,7 @@ msgstr ""
 
 #. Resource IDs: (2751)
 msgid "Every commit should be assigned to an issue."
-msgstr "Cada entrega s'hauria d'assignar a una incidència."
+msgstr "Cada pujada s'hauria d'assignar a una incidència."
 
 #. Resource IDs: (32853)
 msgid "Ex&ternals"
@@ -5650,7 +5650,7 @@ msgstr "Totalment recursiu"
 
 #. Resource IDs: (4360)
 msgid "GDI+ couldn't be initialized!"
-msgstr "No s'ha pogut iniciar GDI+!"
+msgstr "No s'ha pogut iniciar GDI+."
 
 #. Resource IDs: (4361)
 msgid ""
@@ -5803,7 +5803,7 @@ msgstr "Tipus de gràfic:"
 
 #. Resource IDs: (4365)
 msgid "Graphs for repository roots are always empty!"
-msgstr "Les gràfiques d'arrels de repositori estan sempre buides!"
+msgstr "Les gràfiques d'arrels de repositori sempre estan buides."
 
 #. Resource IDs: (16972)
 msgid "Gray"
@@ -5944,7 +5944,7 @@ msgstr "L'script Hook ha fallat"
 
 #. Resource IDs: (2760)
 msgid "Hook script failed!"
-msgstr "L'script Hook ha fallat!"
+msgstr "L'script Hook ha fallat."
 
 #. Resource IDs: (1296)
 #, c-format
@@ -6251,7 +6251,7 @@ msgid ""
 "were last committed. If not set, TortoiseSVN uses the current time."
 msgstr ""
 "Si està seleccionat, TortoiseSVN posa els temps en els quals es varen\n"
-"entregar els fitxers el darrer cop. Si no ho està, TortoiseSVN utilitza el "
+"pujar els fitxers el darrer cop. Si no ho està, TortoiseSVN utilitza el "
 "temps actual."
 
 #. Resource IDs: (3121)
@@ -6262,7 +6262,7 @@ msgid ""
 msgstr ""
 "Si està seleccionat, els fitxers dins de carpetes sense versionar es mostren "
 "al control d'estat.\n"
-"El control d'estat s'utilitza per exemple al diàleg d'entrega."
+"El control d'estat s'utilitza per exemple al diàleg de pujada."
 
 #. Resource IDs: (3134)
 msgid ""
@@ -6271,7 +6271,7 @@ msgid ""
 "i.e., they get the normal icon unless another file or folder is modified."
 msgstr ""
 "Si està seleccionat, els fitxers modificats de la llista de canvis \"ignora-"
-"en-entrega\" no marquen les carpetes pare com a modificades; \n"
+"en-pujada\" no marquen les carpetes pare com a modificades; \n"
 "o sigui, tenen la icona normal excepte si s'ha modificat un altre fitxer o "
 "carpeta."
 
@@ -6682,7 +6682,7 @@ msgid ""
 "A range can be specified with a dash.\n"
 "Example: 2-5,7,10,44-70,300-HEAD"
 msgstr ""
-"Rang de revisió no vàlid!\n"
+"El rang de revisió no és vàlid.\n"
 "Les revisions vàlides són números i HEAD, separades per comes.\n"
 "Un rang pot ser especificat amb un guió.\n"
 "Exemple: 2-5,7,10,44-70,300-HEAD"
@@ -6981,7 +6981,7 @@ msgstr "Bloqueig eliminat"
 
 #. Resource IDs: (3400)
 msgid "Lock broken!"
-msgstr "Bloqueig eliminat!"
+msgstr "Bloqueig eliminat."
 
 #. Resource IDs: (3310)
 msgid "Lock comment"
@@ -7022,7 +7022,7 @@ msgid ""
 "Locking failed because a newer version exists!\n"
 "Do you want to update and try again?"
 msgstr ""
-"Bloqueig fallit perquè existeix una versió més nova!\n"
+"Bloqueig fallit perquè existeix una versió més nova.\n"
 "Voleu actualitzar i provar de nou?"
 
 #. Resource IDs: (242)
@@ -7055,7 +7055,7 @@ msgstr "Missatge de log"
 
 #. Resource IDs: (2761)
 msgid "Log message is too short!"
-msgstr "Missatge de log massa curt!"
+msgstr "El missatge de log és massa curt."
 
 #. Resource IDs: (65535)
 msgid "Log messages"
@@ -7105,7 +7105,7 @@ msgstr "Administra propietats del Subversion"
 
 #. Resource IDs: (9107)
 msgid "Manual Pre-Commit Hook"
-msgstr "Hook de pre-entrega manual"
+msgstr "Hook de pre-pujada manual"
 
 #. Resource IDs: (65535)
 msgid "Manual import/export"
@@ -7395,7 +7395,7 @@ msgstr "Minimitza la cinta"
 
 #. Resource IDs: (65535)
 msgid "Minimum number of chars for a commit message:"
-msgstr "Nombre mínim de caràcters per un missatge d'entrega:"
+msgstr "Nombre mínim de caràcters en un missatge de pujada:"
 
 #. Resource IDs: (65535)
 msgid "Minimum number of chars for a lock message:"
@@ -7709,9 +7709,9 @@ msgid ""
 "TortoiseProc.exe is used by the Shell extension and should not be called "
 "directly!"
 msgstr ""
-"No s'ha especificat cap ordre!\n"
-"TortoiseProc.exe s'utilitza per la extensió Shell i no ha de ser cridat "
-"directament!"
+"No s'ha especificat cap ordre.\n"
+"TortoiseProc.exe s'utilitza per la extensió Shell i no s'ha de cridar "
+"directament."
 
 #. Resource IDs: (1305)
 msgid "No differences found!"
@@ -7748,7 +7748,7 @@ msgid ""
 "You can show the unversioned items by enabling them\n"
 "with the checkbox at the bottom."
 msgstr ""
-"No s'ha modificat o afegit cap fitxer des de la darrera entrega. \n"
+"No s'ha modificat o afegit cap fitxer des de la darrera pujada. \n"
 "Aquí TortoiseSVN no hi té res a fer...\n"
 "Mostreu els elements sense versionar activant la casella de selecció a la "
 "part inferior."
@@ -7760,7 +7760,7 @@ msgid ""
 "for TortoiseSVN to do here..."
 msgstr ""
 "No s'ha modificat o afegit cap fitxer des de\n"
-"la darrera entrega. TortoiseSVN\n"
+"la darrera pujada. TortoiseSVN\n"
 "no hi té res a fer..."
 
 #. Resource IDs: (4363)
@@ -7774,7 +7774,8 @@ msgstr "No s'ha trobat encoder d'imatge per %ls."
 
 #. Resource IDs: (1330)
 msgid "No path or pathfile specified on the command line!"
-msgstr "No hi ha camí ni fitxer de camí especificats a la línia d'ordres!"
+msgstr ""
+"No hi ha cap camí ni cap fitxer de camí especificats a la línia d'ordres."
 
 #. Resource IDs: (3125)
 msgid ""
@@ -7803,7 +7804,7 @@ msgstr "Colors del node"
 
 #. Resource IDs: (2709)
 msgid "Non-recursive commit of moved/renamed folders."
-msgstr "Entrega no recursiva de les carpetes desplaçades o canviades de nom."
+msgstr "Pujada no recursiva de les carpetes desplaçades o canviades de nom."
 
 #. Resource IDs: (1507)
 msgid "Non-versioned"
@@ -7859,7 +7860,7 @@ msgstr "Nota: aquesta propietat no té cap efecte en Windows"
 
 #. Resource IDs: (2762)
 msgid "Nothing is selected for commit!"
-msgstr "No hi ha res seleccionat per entregar!"
+msgstr "No hi ha res seleccionat per pujar."
 
 #. Resource IDs: (1406)
 msgid "Notice"
@@ -8335,12 +8336,12 @@ msgid ""
 "Picture (Metafile)\n"
 "a picture"
 msgstr ""
-"Dibuix (Metafile)\n"
-"un dibuix"
+"Imatge (Metafile)\n"
+"una imatge"
 
 #. Resource IDs: (65535)
 msgid "Picture:"
-msgstr "Dibuix:"
+msgstr "Imatge:"
 
 #. Resource IDs: (2504)
 msgid ""
@@ -8378,7 +8379,7 @@ msgstr ""
 "Atenció:\n"
 "La còpia de treball segueix al camí anterior. Si voleu que els propers "
 "canvis\n"
-"s'entreguin a la còpia o branca que acabeu de crear, \n"
+"es pugin a la còpia o branca que acabeu de crear, \n"
 "heu de canviar la còpia de treball al nou URL.\n"
 "Utilitzeu l'ordre Canvia per fer-ho."
 
@@ -8424,7 +8425,7 @@ msgstr "Valors possibles: 0 (totalment transparent) .. 255 (opac)"
 
 #. Resource IDs: (9102)
 msgid "Post-Commit Hook"
-msgstr "Hook de post-entrega"
+msgstr "Hook de post-pujada"
 
 #. Resource IDs: (9105)
 msgid "Post-Update Hook"
@@ -8436,7 +8437,7 @@ msgstr "Pàgina Prè&via"
 
 #. Resource IDs: (9101)
 msgid "Pre-Commit Hook"
-msgstr "Hook de pre-entrega"
+msgstr "Hook de pre-pujada"
 
 #. Resource IDs: (9106)
 msgid "Pre-Connect Hook"
@@ -8551,8 +8552,8 @@ msgid ""
 "Proceed with the commit\n"
 "the renamed/moved folders are committed recursively in the repository."
 msgstr ""
-"Seguir amb l'entrega\n"
-"les carpetes canviades de nom o desplaçades s'entreguen recursivament en el "
+"Seguir amb la pujada\n"
+"les carpetes canviades de nom o desplaçades es pugen recursivament en el "
 "repositori."
 
 #. Resource IDs: (1417)
@@ -8573,7 +8574,7 @@ msgid ""
 "The commit won't be assigned to an issue."
 msgstr ""
 "Segueix sense un número d'incidència\n"
-"L'entrega no s'assignarà a una incidència."
+"La pujada no s'assignarà a una incidència."
 
 #. Resource IDs: (2103)
 #, c-format
@@ -9215,16 +9216,15 @@ msgstr "Renombra fitxers / carpetes dins de versió de control"
 #. Resource IDs: (1562)
 msgid "Reopen dialog after commit if items were left uncommitted"
 msgstr ""
-"Reobre diàleg després de l'entrega si alguns elements han quedat sense "
-"entregar"
+"Reobre diàleg després de la pujada si alguns elements han quedat sense pujar"
 
 #. Resource IDs: (3146)
 msgid ""
 "Reopens the commit dialog after a successful commit if there were files and/"
 "or folders left uncommitted."
 msgstr ""
-"Reobre el diàleg d'entrega després d'una entrega satisfactòria si han quedat "
-"fitxers i/o carpetes sense entregar."
+"Reobre el diàleg de pujada després d'una pujada satisfactòria si han quedat "
+"fitxers i/o carpetes sense pujar."
 
 #. Resource IDs: (3342)
 msgid "Repair copy"
@@ -9386,7 +9386,7 @@ msgstr "Restaura per defecte"
 
 #. Resource IDs: (9911)
 msgid "Restore after commit"
-msgstr "Restaura després de l'entrega"
+msgstr "Restaura després de la pujada"
 
 #. Resource IDs: (61202)
 msgid "Restore the window to normal size"
@@ -10097,8 +10097,8 @@ msgid ""
 "Select the language this project is using. This settings affects the spell "
 "checker used for commit messages."
 msgstr ""
-"Selecciona l'idioma per aquest projecte. Aquesta configuració afecta el "
-"corrector ortogràfic utilitzat en els missatges d'entrega."
+"Selecciona l'idioma d'aquest projecte. Aquesta configuració afecta el "
+"corrector ortogràfic utilitzat en els missatges de pujada."
 
 #. Resource IDs: (9517)
 msgid "Select the merge options"
@@ -10154,7 +10154,7 @@ msgstr "Estableix una revisió explícita per aquests externs:"
 
 #. Resource IDs: (1088)
 msgid "Set file dates to the \"last commit &time\""
-msgstr "Canvia les dates dels fitxers a \"&temps darrera entrega\""
+msgstr "Canvia les dates dels fitxers a \"&temps darrera pujada\""
 
 #. Resource IDs: (2024)
 #, c-format
@@ -10638,7 +10638,7 @@ msgstr "Alguna cosa ha fallat"
 
 #. Resource IDs: (1126)
 msgid "Sort by commit count"
-msgstr "Ordena per nombre d'entregues"
+msgstr "Ordena per nombre de pujades"
 
 #. Resource IDs: (1501)
 msgid "Source Left:"
@@ -10689,10 +10689,10 @@ msgid ""
 "the placeholder %BUGID% for the real bug-ID. If you leave these settings "
 "empty, TortoiseSVN will use the regular expressions instead."
 msgstr ""
-"Especifica com es construeix el missatge d'entrega a partir del bug-ID "
-"introduït. Utilitza espai reservat %BUGID% per al número d'incidència real. "
-"Si deixes aquests paràmetres buits, TortoiseSVN utilitzarà les expressions "
-"regulars."
+"Especifiqueu com es construeix el missatge de pujada a partir del bug-ID "
+"introduït. Utilitzeu la paraula reservada %BUGID% per al número d'incidència "
+"real. Si deixeu aquests paràmetres buits, TortoiseSVN utilitzarà les "
+"expressions regulars."
 
 #. Resource IDs: (1305)
 msgid ""
@@ -10754,7 +10754,7 @@ msgstr "Estàndard"
 
 #. Resource IDs: (9100)
 msgid "Start Commit Hook"
-msgstr "Hook d'inici d'entrega"
+msgstr "Hook d'inici de pujada"
 
 #. Resource IDs: (65535)
 msgid "Start Revision"
@@ -10905,12 +10905,12 @@ msgstr ""
 "filtre.\n"
 "\n"
 "Exemples:\n"
-"elmeunom 2015 : les entregues meves del 2015\n"
-".h -.cpp : entregues que han canviat de capçalera però no implementacions\n"
-".doc +.xls 2014 : entregues del 2014 amb fitxers .doc o .xls\n"
-"\" \" : entregues amb espais (per ex: quan cerqueu només en camins)\n"
-"-\"\"mostra tot\"\" : entregues que no contenen la cadena \"mostra tot\"\n"
-"!elmeunom .cpp : tot excepte les meves entregues a fitxers .cpp"
+"elmeunom 2015 : pujades meves del 2015\n"
+".h -.cpp : pujades que han canviat de capçalera però no implementacions\n"
+".doc +.xls 2014 : pujades del 2014 amb fitxers .doc o .xls\n"
+"\" \" : pujades amb espais (per ex: quan cerqueu només en camins)\n"
+"-\"\"mostra tot\"\" : pujades que no contenen la cadena \"mostra tot\"\n"
+"!elmeunom .cpp : tot excepte les pujades meves a fitxers .cpp"
 
 #. Resource IDs: (65535)
 msgid "Subversion"
@@ -11177,7 +11177,7 @@ msgid ""
 msgstr ""
 "Els canvis s'aplicaran a la còpia de treball amb una operació de fusió "
 "revertida. El repositori no quedarà afectat. Reviseu els canvis abans de fer-"
-"ne l'entrega."
+"ne la pujada."
 
 #. Resource IDs: (1007)
 msgid "The chunk size did not match the number of added/removed lines!"
@@ -11213,7 +11213,7 @@ msgid ""
 "The depth of this commit is \"%ls\", but copies are always performed "
 "recursively in the repository."
 msgstr ""
-"La profunditat d'aquesta entrega és \"%ls\", però les còpies sempre es fan "
+"La profunditat d'aquesta pujada és \"%ls\", però les còpies sempre es fan "
 "recursivament en el repositori."
 
 #. Resource IDs: (1080)
@@ -11710,8 +11710,8 @@ msgid ""
 "The target working copy '%ls' has local modifications. It is recommended to "
 "commit those changes first before merging new changes."
 msgstr ""
-"La còpia de treball destí '%ls' té modificacions locals. Es recomana "
-"entregar aquests canvis primer, abans de fusionar nous canvis."
+"La còpia de treball destí '%ls' té modificacions locals. Es recomana pujar "
+"aquests canvis primer, abans de fusionar nous canvis."
 
 #. Resource IDs: (4456)
 msgid "The target working copy has local modifications!"
@@ -11746,7 +11746,7 @@ msgstr ""
 
 #. Resource IDs: (252)
 msgid "The user who did the last commit"
-msgstr "L'usuari que ha fet la darrera entrega"
+msgstr "L'usuari que ha fet la darrera pujada"
 
 #. Resource IDs: (248)
 msgid "The user who owns the lock of the file"
@@ -11769,7 +11769,7 @@ msgid ""
 msgstr ""
 "Hi ha canvis dins d'un o més elements sense versionar dins d'un o més "
 "directoris que heu inclòs amb svn:externals.\n"
-"Aquests fitxers no han estat llistats per a l'entrega. Heu d'entregar-los "
+"Aquests fitxers no han estat llistats per a la pujada. Heu de pujar-los "
 "separadament."
 
 #. Resource IDs: (3185)
@@ -11868,9 +11868,9 @@ msgid ""
 "selected for commit. Such moves/renames are always performed recursively in "
 "the repository. Do you want to commit anyway?"
 msgstr ""
-"Aquesta entrega és no recursiva, i hi ha carpetes desplaçades, canviades de "
-"nom o copiades, seleccionades per entregar. Aquestes accions sempre es fan "
-"recursivament en el repositori. Voleu fer l'entrega de totes maneres?"
+"Aquesta pujada és no recursiva, i hi ha carpetes desplaçades, canviades de "
+"nom o copiades, seleccionades per pujar. Aquestes accions sempre es fan "
+"recursivament en el repositori. Voleu fer la pujada de totes maneres?"
 
 #. Resource IDs: (4009)
 msgid ""
@@ -11888,8 +11888,8 @@ msgid ""
 "Subversion server.\n"
 "Please contact your server administrator for help with resolving this issue."
 msgstr ""
-"Aquest error s'ha generat per un script hook de post-entrega personalitzat "
-"en el servidor del Subversion.\n"
+"Aquest error s'ha generat per un script hook de post-pujada personalitzat en "
+"el servidor del Subversion.\n"
 "Contacteu amb l'administrador del servidor per ajudar-vos a resoldre la "
 "incidència."
 
@@ -12058,10 +12058,10 @@ msgid ""
 "Otherwise, TortoiseSVN must do a non-recursive commit\n"
 "which does not allow directory deletion."
 msgstr ""
-"Per entregar recursivament i evitar aquest error,\n"
+"Per pujar recursivament i evitar aquest error,\n"
 "assegureu-vos que tot els elements fills de la carpeta marcada\n"
-"també són marcats al diàleg d'entrega.\n"
-"Si no, TortoiseSVN ha de fer una entrega no-recursiva\n"
+"també són marcats al diàleg de pujada.\n"
+"Si no, TortoiseSVN ha de fer una pujada no-recursiva\n"
 "que no permet esborrar directoris."
 
 #. Resource IDs: (4540)
@@ -12234,7 +12234,7 @@ msgid ""
 "%d new commit in %d project"
 msgstr ""
 "Monitor de Projectes TortoiseSVN\n"
-"%d nova entrega en %d projecte"
+"%d nova pujada en %d projecte"
 
 #. Resource IDs: (1026)
 #, c-format
@@ -12243,11 +12243,11 @@ msgid ""
 "%d new commits in %d projects"
 msgstr ""
 "Monitor de Projectes TortoiseSVN\n"
-"%d noves entregues en %d projectes"
+"%d noves pujades en %d projectes"
 
 #. Resource IDs: (4482)
 msgid "TortoiseSVN auto commit: changed externals to fixed revision."
-msgstr "Auto entrega de TortoiseSVN: ha canviat externs a revisió específica"
+msgstr "Auto pujada de TortoiseSVN: ha canviat externs a revisió específica"
 
 #. Resource IDs: (8100)
 #, c-format
@@ -12299,7 +12299,7 @@ msgstr "TortoiseUDiff"
 
 #. Resource IDs: (1162)
 msgid "Total commits analyzed:"
-msgstr "Nombre total d'entregues analitzades:"
+msgstr "Nombre total de pujades analitzades:"
 
 #. Resource IDs: (1163)
 msgid "Total file changes:"
@@ -12631,7 +12631,7 @@ msgid ""
 "Update the working copy and reopen the commit dialog to try again."
 msgstr ""
 "Actualitza\n"
-"Actualitza la còpia de treball i reobre el diàleg d'entrega per intentar de "
+"Actualitza la còpia de treball i reobre el diàleg de pujada per intentar de "
 "nou."
 
 #. Resource IDs: (4653)
@@ -13132,8 +13132,8 @@ msgid ""
 "When enabled, the versioned items listed in the commit dialog are "
 "automatically selected"
 msgstr ""
-"Quan està habilitat, els elements versionats llistats se seleccionen "
-"automàticament"
+"Quan està habilitat, els elements versionats llistats al diàleg de pujada es "
+"seleccionen automàticament"
 
 #. Resource IDs: (3137)
 msgid ""
@@ -13298,7 +13298,7 @@ msgstr "Heu de reiniciar el sistema per tal que els canvis tinguin efecte."
 
 #. Resource IDs: (2756)
 msgid "You selected an unversioned folder for a commit!"
-msgstr "Heu seleccionat una carpeta sense versionar per fer l'entrega."
+msgstr "Heu seleccionat una carpeta sense versionar per fer la pujada."
 
 #. Resource IDs: (16002)
 msgid "You should enter a text!"
@@ -13338,9 +13338,9 @@ msgid ""
 "revision.\n"
 "Do you want to change the tagged revision now to the just committed revision?"
 msgstr ""
-"Heu entregat canvis d'un element extern que està etiquetat amb una "
-"determinada revisió.\n"
-"Voleu canviar ara la revisió etiquetada a la revisió tot just entregada?"
+"Heu pujat canvis d'un element extern que està etiquetat amb una determinada "
+"revisió.\n"
+"Voleu canviar ara la revisió etiquetada a la revisió tot just pujada?"
 
 #. Resource IDs: (2706)
 msgid ""
@@ -13387,7 +13387,7 @@ msgid ""
 "You should first switch to a branch or the main trunk before committing."
 msgstr ""
 "La còpia de treball apunta a %ls, que sembla ser una etiqueta!\n"
-"Hauríeu de canviar a una branca o al tronc principal abans de fer l'entrega."
+"Hauríeu de canviar a una branca o al tronc principal abans de fer la pujada."
 
 #. Resource IDs: (32783)
 msgid "Zoo&m out\t(-)"
@@ -13473,7 +13473,7 @@ msgstr "[Sense assignar]"
 #. Resource IDs: (1562)
 msgid "\"ignore-on-commit\" files do not mark parent folder modified"
 msgstr ""
-"Els fitxers \"ignora-en-entrega\" no marquen la carpeta pare com a modificada"
+"Els fitxers \"ignora-en-pujada\" no marquen la carpeta pare com a modificada"
 
 #. Resource IDs: (5523)
 msgid ""
@@ -13656,11 +13656,11 @@ msgstr "columna '%ls'"
 
 #. Resource IDs: (3903, 3905)
 msgid "commits"
-msgstr "Entregues"
+msgstr "Pujades"
 
 #. Resource IDs: (4431)
 msgid "committed revision"
-msgstr "revisió entregada"
+msgstr "revisió pujada"
 
 #. Resource IDs: (161)
 msgid "conflicted"
@@ -13829,7 +13829,7 @@ msgstr "màx. en aquesta revisió"
 
 #. Resource IDs: (4433)
 msgid "max. committed revision"
-msgstr "màx. revisió entregada"
+msgstr "màx. revisió pujada"
 
 #. Resource IDs: (160, 65535)
 msgid "merged"
@@ -13845,7 +13845,7 @@ msgstr "mín. en aquesta revisió"
 
 #. Resource IDs: (4432)
 msgid "min. committed revision"
-msgstr "mín. revisió entregada"
+msgstr "mín. revisió pujada"
 
 #. Resource IDs: (156)
 msgid "missing"
@@ -14172,13 +14172,13 @@ msgid ""
 "indicating that a user must acquire a lock on the file\r\n"
 "before they can edit it and commit changes."
 msgstr ""
-"svn:needs-lock\r\n"
+"svn:needs-lock\n"
 "Establir-ho a qualsevol valor (per exemple  '*') per forçar el bloqueig del "
-"fitxer.\r\n"
+"fitxer.\n"
 "El fitxer serà establert com a fitxer de només lectura quan sigui obtingut o "
-"actualitzat,\r\n"
-"indicant que un usuari ha d'adquirir un bloqueig del fitxer\r\n"
-"abans de poder editar-lo o entregar-ne canvis."
+"actualitzat,\n"
+"indicant que un usuari ha d'adquirir un bloqueig del fitxer\n"
+"abans de poder editar-lo o pujar-ne canvis."
 
 #. Resource IDs: (3323)
 #, c-format
@@ -14257,10 +14257,10 @@ msgid ""
 "English\r\n"
 "in the commit dialog."
 msgstr ""
-"tsvn:logfilelistenglish\r\n"
+"tsvn:logfilelistenglish\n"
 "Establiu-ho a  'fals 'si no voleu que la llista de fitxers modificats sigui "
-"enganxada en anglès\r\n"
-"al diàleg d'entrega."
+"enganxada en anglès\n"
+"al diàleg de pujada."
 
 #. Resource IDs: (9242)
 msgid ""
@@ -14269,7 +14269,7 @@ msgid ""
 msgstr ""
 "tsvn:logminsize\n"
 "Mida mínima en caràcters que un missatge de log ha de tenir abans de que es "
-"permeti una entrega."
+"permeti una pujada."
 
 #. Resource IDs: (9250)
 msgid ""
@@ -14297,8 +14297,8 @@ msgid ""
 "Use this as a log message template for users to fill in."
 msgstr ""
 "tsvn:logtemplate\n"
-"Cadena que s'insereix a les caixes del missatge de log als diàlegs "
-"d'entrega.\n"
+"Cadena que s'insereix a les caixes del missatge de log als diàlegs de "
+"pujada.\n"
 "Utilitza-ho com a plantilla de missatges de log perquè els usuaris l'omplin."
 
 #. Resource IDs: (9252)
@@ -14309,8 +14309,8 @@ msgid ""
 "in."
 msgstr ""
 "tsvn:logtemplatebranch\n"
-"Cadena que s'insereix a les caixes del missatge de log als diàlegs "
-"d'entrega.\n"
+"Cadena que s'insereix a les caixes del missatge de log als diàlegs de "
+"pujada.\n"
 "Utilitza-ho com a plantilla de missatge de log a branca/etiquetes/còpies "
 "perquè els usuaris l'omplin."
 
@@ -14321,9 +14321,9 @@ msgid ""
 "Use this as a log message template for commits for users to fill in."
 msgstr ""
 "tsvn:logtemplatecommit\n"
-"Cadena que s'insereix a les caixes del missatge de log als diàlegs "
-"d'entrega.\n"
-"Utilitza-ho com a plantilla de missatge de log a les entregues perquè els "
+"Cadena que s'insereix a les caixes del missatge de log als diàlegs de "
+"pujada.\n"
+"Utilitza-ho com a plantilla de missatge de log a les pujades perquè els "
 "usuaris l'omplin."
 
 #. Resource IDs: (9254)
@@ -14333,8 +14333,8 @@ msgid ""
 "Use this as a log message template for deletes for users to fill in."
 msgstr ""
 "tsvn:logtemplatedelete\n"
-"Cadena que s'insereix a les caixes del missatge de log als diàlegs "
-"d'entrega.\n"
+"Cadena que s'insereix a les caixes del missatge de log als diàlegs de "
+"pujada.\n"
 "Utilitza-ho com a plantilla de missatge de log a les supressions perquè els "
 "usuaris l'omplin."
 
@@ -14345,8 +14345,8 @@ msgid ""
 "Use this as a log message template for imports for users to fill in."
 msgstr ""
 "tsvn:logtemplateimport\n"
-"Cadena que s'insereix a les caixes del missatge de log als diàlegs "
-"d'entrega.\n"
+"Cadena que s'insereix a les caixes del missatge de log als diàlegs de "
+"pujada.\n"
 "Utilitza-ho com a plantilla de missatge de log a les importacions perquè els "
 "usuaris l'omplin."
 
@@ -14371,8 +14371,8 @@ msgid ""
 "in."
 msgstr ""
 "tsvn:logtemplatemkdir\n"
-"Cadena que s'insereix a les caixes del missatge de log als diàlegs "
-"d'entrega.\n"
+"Cadena que s'insereix a les caixes del missatge de log als diàlegs de "
+"pujada.\n"
 "Utilitza-ho com a plantilla de missatge de log a les creacions de directori "
 "perquè els usuaris l'omplin."
 
@@ -14383,8 +14383,8 @@ msgid ""
 "Use this as a log message template for moves/renames for users to fill in."
 msgstr ""
 "tsvn:logtemplatemove\n"
-"Cadena que s'insereix a les caixes del missatge de log als diàlegs "
-"d'entrega.\n"
+"Cadena que s'insereix a les caixes del missatge de log als diàlegs de "
+"pujada.\n"
 "Utilitza-ho com a plantilla de missatge de log als moviments/canvis de nom "
 "perquè els usuaris l'omplin."
 
@@ -14396,8 +14396,8 @@ msgid ""
 "fill in."
 msgstr ""
 "tsvn:logtemplatepropset\n"
-"Cadena que s'insereix a les caixes del missatge de log als diàlegs "
-"d'entrega.\n"
+"Cadena que s'insereix a les caixes del missatge de log als diàlegs de "
+"pujada.\n"
 "Utilitza-ho com a plantilla de missatge de log a les modificacions de "
 "propietats perquè els usuaris l'omplin."
 
@@ -14412,7 +14412,7 @@ msgstr ""
 "tsvn:logwidthmarker\n"
 "Establiu-ho al nombre de caràcters d'amplada màxim que pot tenir un missatge "
 "de log.\n"
-"Es mostrarà una línia esborronada als diàlegs d'entrega en aquesta posició. "
+"Es mostrarà una línia esborronada als diàlegs de pujada en aquesta posició. "
 "Per defecte és 80 caràcters."
 
 #. Resource IDs: (9246)
@@ -14433,8 +14433,8 @@ msgid ""
 "commit dialog."
 msgstr ""
 "tsvn:warnifnoissue\n"
-"Establiu-ho a  'yes ' si s'ha de mostrar un missatge quan no s'introdueix "
-"assumpte al diàleg d'entrega."
+"Establiu-ho a  'yes' si s'ha de mostrar un missatge quan no s'introdueix "
+"assumpte al diàleg de pujada."
 
 #. Resource IDs: (65535)
 msgid "user revprops total: "
