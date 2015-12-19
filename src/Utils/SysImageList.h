@@ -80,8 +80,6 @@ public:
      */
     int AddIcon(const HICON hIcon);
 
-    void EnsureFileIconIsLoaded(const CTSVNPath& file) const;
-
 private:
     static CSysImageList *instance;
 
