@@ -1,5 +1,5 @@
 // TortoiseOverlays - an overlay handler for Tortoise clients
-// Copyright (C) 2007, 2010-2011, 2013 - TortoiseSVN
+// Copyright (C) 2007, 2010-2011, 2013, 2015 - TortoiseSVN
 #include "stdafx.h"
 
 // Initialize GUIDs (should be done only and at-least once per DLL/EXE)
@@ -64,12 +64,12 @@ STDMETHODIMP CShellExt::QueryInterface(REFIID riid, LPVOID FAR *ppv)
 
 STDMETHODIMP_(ULONG) CShellExt::AddRef()
 {
-    return ++m_cRef;
+    return InterlockedIncrement(&m_cRef);
 }
 
 STDMETHODIMP_(ULONG) CShellExt::Release()
 {
-    if (--m_cRef)
+    if (InterlockedDecrement(&m_cRef))
         return m_cRef;
 
     delete this;
