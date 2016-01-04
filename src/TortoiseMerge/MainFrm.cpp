@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2004-2015 - TortoiseSVN
+// Copyright (C) 2004-2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -2092,7 +2092,8 @@ void CMainFrame::OnMergeMarkasresolved()
     {
         if (IsViewGood(m_pwndBottomView)&&(m_pwndBottomView->m_pViewData))
         {
-            FileSave(false);
+            if (!FileSave(false))
+                return;
             m_bSaveRequired = false;
         }
     }

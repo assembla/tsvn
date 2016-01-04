@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015 - TortoiseSVN
+// Copyright (C) 2003-2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -4310,10 +4310,11 @@ void CLogDlg::OnLvnGetdispinfoLoglist(NMHDR *pNMHDR, LRESULT *pResult)
                 *pBuf = 0;
             }
             break;
-        case 1: //action -- dummy text, not drawn. Used to trick the auto-column resizing to not
-            // go below the icons
+        case 1: // action -- dummy text, not drawn. Used to trick the auto-column resizing to not
+                // go below the icons. Note this is required for Ctrl+ auto-resizing, manual auto-resizing
+                // could be handled in ResizeAllListCtrlCols().
             if (pLogEntry)
-                lstrcpyn(pItem->pszText, L"XXXXXXXXXXXXXXXX", pItem->cchTextMax - 1);
+                lstrcpyn(pItem->pszText, L"Action column"/*L"XXXXXXXXXXXXXXXX"*/, pItem->cchTextMax - 1);
             break;
         case 2: //author
             if (pLogEntry)
