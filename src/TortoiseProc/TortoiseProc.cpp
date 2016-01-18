@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015 - TortoiseSVN
+// Copyright (C) 2003-2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -66,13 +66,14 @@ END_MESSAGE_MAP()
 //////////////////////////////////////////////////////////////////////////
 CCrashReportTSVN crasher(L"TortoiseSVN " _T(APP_X64_STRING));
 
-CTortoiseProcApp::CTortoiseProcApp() : hWndExplorer(NULL)
+CTortoiseProcApp::CTortoiseProcApp() : hWndExplorer(NULL), m_GlobalPool(NULL)
 {
     SetDllDirectory(L"");
     EnableHtmlHelp();
     apr_initialize();
     svn_dso_initialize2();
-    SYS_IMAGE_LIST();
+    m_GlobalPool = svn_pool_create(NULL);
+    svn_utf_initialize2(FALSE, m_GlobalPool);
     CHooks::Create();
     g_SVNAdminDir.Init();
     m_bLoadUserToolbars = FALSE;
@@ -94,7 +95,7 @@ CTortoiseProcApp::~CTortoiseProcApp()
     // *now* instead of later when the object itself is destroyed.
     g_SVNAdminDir.Close();
     CHooks::Destroy();
-    SYS_IMAGE_LIST().Cleanup();
+    svn_pool_destroy(m_GlobalPool);
     apr_terminate();
     sasl_done();
 }
@@ -237,6 +238,8 @@ BOOL CTortoiseProcApp::InitInstance()
     AfxInitRichEdit5();
     CWinAppEx::InitInstance();
     SetRegistryKey(L"TortoiseSVN");
+
+    SYS_IMAGE_LIST();
 
     CCmdLineParser parser(AfxGetApp()->m_lpCmdLine);
 
@@ -597,6 +600,8 @@ void CTortoiseProcApp::DoInitializeJumpList(const CString& appid)
 
 int CTortoiseProcApp::ExitInstance()
 {
+    SYS_IMAGE_LIST().Cleanup();
+
     CWinAppEx::ExitInstance();
     if (retSuccess)
         return 0;

@@ -1615,7 +1615,7 @@ bool CSciEdit::IsValidURLChar(unsigned char ch)
     return isalnum(ch) ||
         ch == '_' || ch == '/' || ch == ';' || ch == '?' || ch == '&' || ch == '=' ||
         ch == '%' || ch == ':' || ch == '.' || ch == '#' || ch == '-' || ch == '+' ||
-        ch == '|' || ch == '>' || ch == '<';
+        ch == '|' || ch == '>' || ch == '<' || ch == '!';
 }
 
 void CSciEdit::StyleURLs(int startstylepos, int endstylepos)
