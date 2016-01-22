@@ -2004,6 +2004,8 @@ void CCommitDlg::GetAsyncFileListStatus()
     }
     else
     {
+        InterlockedExchange(&m_bThreadRunning, TRUE);// so the main thread knows that this thread is still running
+        InterlockedExchange(&m_bRunThread, TRUE);   // if this is set to FALSE, the thread should stop
         m_pThread->m_bAutoDelete = FALSE;
         m_pThread->ResumeThread();
     }
