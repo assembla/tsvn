@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2008, 2012 - TortoiseSVN
+// Copyright (C) 2007-2008, 2012,2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -64,19 +64,14 @@ protected:
         return last - current;
     }
 
-    unsigned char GetByte() throw()
+    unsigned char GetByte()
     {
+        if (GetRemaining() < 1)
+        {
+            throw CStreamException("unexpected end of stream");
+        }
+
         return *(current++);
-    }
-
-    const unsigned char* GetData (size_t size)
-    {
-        if (GetRemaining() < size)
-            return NULL;
-
-        current += size;
-
-        return current;
     }
 
 public:
@@ -133,5 +128,5 @@ public:
     using TBase::GetSize;
     using TBase::GetRemaining;
     using TBase::GetByte;
-    using TBase::GetData;
+    //using TBase::GetData;
 };
