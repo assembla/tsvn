@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009, 2011 - TortoiseSVN
+// Copyright (C) 2007-2009, 2011, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -183,11 +183,10 @@ IHierarchicalInStream& operator>> ( IHierarchicalInStream& stream
         = stream.GetSubStream (CPathDictionary::PATHS_STREAM_ID);
     *pathsStream >> dictionary.paths;
 
-    // ready
-
-#ifdef _DEBUG
+    // validate data loaded from disk
     dictionary.Validate();
-#endif
+
+    // ready
 
     return stream;
 }

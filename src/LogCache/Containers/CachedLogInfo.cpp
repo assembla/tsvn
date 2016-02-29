@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2010, 2012, 2014-2015 - TortoiseSVN
+// Copyright (C) 2007-2010, 2012, 2014-2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -349,6 +349,20 @@ void CCachedLogInfo::Load (int maxFailures)
             IHierarchicalInStream* skipRevisionsStream
                 = stream.GetSubStream (SKIP_REVISIONS_STREAM_ID);
             *skipRevisionsStream >> skippedRevisions;
+
+            // validate data
+            for(revision_t rev = revisions.GetFirstRevision();
+                rev < revisions.GetLastRevision(); rev++)
+            {
+                index_t revIndex = revisions[rev];
+                if (revIndex != NO_INDEX)
+                {
+                    if (revIndex >= logInfo.size())
+                    {
+                        throw CContainerException("invalid reference in revision index");
+                    }
+                }
+            }
         }
     }
     catch (...)
@@ -466,6 +480,7 @@ void CCachedLogInfo::Clear()
 
     revisions.Clear();
     logInfo.Clear();
+    skippedRevisions.Clear();
 }
 
 // return false if concurrent read accesses

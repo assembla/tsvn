@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2008, 2012 - TortoiseSVN
+// Copyright (C) 2007-2008, 2012, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 ///////////////////////////////////////////////////////////////
 
 #include "HuffmanBase.h"
+#include "StreamException.h"
 
 ///////////////////////////////////////////////////////////////
 //
@@ -32,6 +33,91 @@
 
 class CHuffmanDecoder : public CHuffmanBase
 {
+public:
+    class CInputBuffer
+    {
+    public:
+        CInputBuffer(const BYTE *buf, size_t len)
+            : current(buf)
+            , remaining(len)
+        {
+        }
+
+        const void * GetData(size_t len)
+        {
+            if (remaining < len)
+            {
+                throw CStreamException("corrupted huffman stream");
+            }
+
+            const void *result = current;
+            current += len;
+            remaining -= len;
+
+            return result;
+        }
+
+        BYTE GetByte()
+        {
+            return *reinterpret_cast<const BYTE*>(GetData(1));
+        }
+
+        BYTE PeekByte()
+        {
+            if (remaining < 1)
+            {
+                throw CStreamException("corrupted huffman stream");
+            }
+
+            return *current;
+        }
+
+        DWORD GetDWORD()
+        {
+            return *reinterpret_cast<const DWORD*>(GetData(sizeof(DWORD)));
+        }
+
+        size_t GetRemaining()
+        {
+            return remaining;
+        }
+    private:
+        const BYTE *current;
+        size_t remaining;
+    };
+
+    class COutputBuffer
+    {
+    public:
+        COutputBuffer(BYTE *buf, size_t len)
+            : current(buf)
+            , remaining(len)
+        {
+        }
+
+        inline size_t GetRemaining()
+        {
+            return remaining;
+        }
+
+        BYTE * GetBuffer(size_t len)
+        {
+            if (remaining < len)
+            {
+                throw CStreamException("huffman buffer overflow");
+            }
+
+            BYTE *result = current;
+            current += len;
+            remaining -= len;
+
+            return result;
+        }
+
+    private:
+        BYTE *current;
+        size_t remaining;
+    };
 private:
 
     // decoder table:
@@ -49,17 +135,16 @@ private:
     // compressed data buffer and fill the value[] and
     // length[] arrays.
 
-    void BuildDecodeTable (const BYTE*& first);
+    void BuildDecodeTable (CInputBuffer & source);
 
     // efficiently decode the source stream until the
     // plain text stream reaches decodedSize.
 
     void WriteDecodedStream ( const BYTE* first
-                            , BYTE* dest
+                            , COutputBuffer & target
                             , DWORD decodedSize);
 
 public:
-
     // construction / destruction: nothing special to do
 
     CHuffmanDecoder()
@@ -71,5 +156,5 @@ public:
 
     // decompress the source data and return the target buffer.
 
-    void Decode (const BYTE*& source, BYTE*& target);
+    void Decode (CInputBuffer & source, COutputBuffer & target);
 };

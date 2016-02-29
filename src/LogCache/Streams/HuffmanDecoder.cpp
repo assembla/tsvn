@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2010, 2014 - TortoiseSVN
+// Copyright (C) 2007-2010, 2014, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,12 +19,11 @@
 #include "stdafx.h"
 #include "HuffmanDecoder.h"
 
-void CHuffmanDecoder::BuildDecodeTable (const BYTE*& first)
+void CHuffmanDecoder::BuildDecodeTable (CInputBuffer & source)
 {
     // get the table size (full table is indicated by length == 0)
 
-    size_t entryCount = *first;
-    ++first;
+    size_t entryCount = source.GetByte();
 
     if (entryCount == 0)
         entryCount = BUCKET_COUNT;
@@ -35,15 +34,14 @@ void CHuffmanDecoder::BuildDecodeTable (const BYTE*& first)
     BYTE keyLength[BUCKET_COUNT];
     for (size_t i = 0; i < entryCount; ++i)
     {
-        values[i] = *first;
-        ++first;
+        values[i] = source.GetByte();
     }
 
     for (size_t i = 0; i < entryCount; i += 2)
     {
-        keyLength[i] = *first & 0x0f;
-        keyLength[i+1] = *first / 0x10;
-        ++first;
+        BYTE b = source.GetByte();
+        keyLength[i] = b & 0x0f;
+        keyLength[i+1] = b / 0x10;
     }
 
     // reconstruct the keys
@@ -84,13 +82,16 @@ void CHuffmanDecoder::BuildDecodeTable (const BYTE*& first)
 }
 
 void CHuffmanDecoder::WriteDecodedStream ( const BYTE* first
-                                         , BYTE* dest
+                                         , COutputBuffer & target
                                          , DWORD decodedSize)
 {
     key_block_type cachedCode = 0;
     BYTE cachedBits = 0;
 
     // main loop
+
+    // Obtain large enough buffer in destination.
+    BYTE *dest = target.GetBuffer(decodedSize);
 
     BYTE* blockDest = dest;
     BYTE* blockEnd = blockDest + (decodedSize & (0-sizeof (encode_block_type)));
@@ -172,15 +173,12 @@ void CHuffmanDecoder::WriteDecodedStream ( const BYTE* first
 
 // decompress the source data and return the target buffer.
 
-void CHuffmanDecoder::Decode (const BYTE*& source, BYTE*& target)
+void CHuffmanDecoder::Decode (CInputBuffer & source, COutputBuffer & target)
 {
     // get size info from stream
-
-    const BYTE* localSource = source;
-    DWORD decodedSize = *reinterpret_cast<const DWORD*>(localSource);
-    localSource += sizeof (DWORD);
-    size_t encodedSize = *reinterpret_cast<const DWORD*>(localSource);
-    localSource += sizeof (DWORD);
+    size_t totalSourceLen = source.GetRemaining();
+    DWORD decodedSize = source.GetDWORD();
+    size_t encodedSize = source.GetDWORD();
 
     // special case: empty stream (hence, empty tables etc.)
 
@@ -189,25 +187,22 @@ void CHuffmanDecoder::Decode (const BYTE*& source, BYTE*& target)
 
     // special case: unpacked data
 
-    if ((encodedSize == decodedSize+MIN_HEADER_LENGTH) && (*localSource == 0))
+    if ((encodedSize == decodedSize+MIN_HEADER_LENGTH) && (source.PeekByte() == 0))
     {
+        source.GetByte();
         // plain copy (and skip empty huffman table)
 
-        memcpy (target, ++localSource, decodedSize);
+        memcpy (target.GetBuffer(decodedSize), source.GetData(decodedSize), decodedSize);
     }
     else
     {
         // read all the decode-info
 
-        BuildDecodeTable (localSource);
+        BuildDecodeTable (source);
 
         // actually decode
-
+        size_t headerLen  = totalSourceLen - source.GetRemaining();
+        const BYTE *localSource = reinterpret_cast<const BYTE *>(source.GetData(encodedSize - headerLen));
         WriteDecodedStream (localSource, target, decodedSize);
     }
-
-    // update source and target buffer pointers
-
-    source += encodedSize;
-    target += decodedSize;
 }

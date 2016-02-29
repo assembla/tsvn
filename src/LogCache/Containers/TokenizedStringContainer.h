@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2008 - TortoiseSVN
+// Copyright (C) 2007-2008, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -261,6 +261,7 @@ private:
     /// range check
 
     void CheckIndex (index_t index) const;
+    bool IsValidTokenIndex(index_t token) const;
 
     /// call this to re-assign indices in an attempt to reduce file size
 

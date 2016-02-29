@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009, 2013 - TortoiseSVN
+// Copyright (C) 2007-2009, 2013, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -69,16 +69,17 @@ void CHierachicalInStreamBase::DecodeThisStream()
     packedFirst = first;
 
     DWORD decodedSize = *(reinterpret_cast<const DWORD*>(last)-1);
-    BYTE* target = new BYTE [decodedSize];
+    BYTE* targetBuf = new BYTE [decodedSize];
 
     // Huffman-compress the raw stream data
 
     CHuffmanDecoder decoder;
-    const BYTE* source = first;
-    first = target;
-    last = target + decodedSize;
+    first = targetBuf;
+    last = targetBuf + decodedSize;
 
-    while (target != last)
+    CHuffmanDecoder::CInputBuffer source(packedFirst, packedLast - packedFirst);
+    CHuffmanDecoder::COutputBuffer target(targetBuf, decodedSize);
+    while (target.GetRemaining() > 0)
         decoder.Decode (source, target);
 }
 

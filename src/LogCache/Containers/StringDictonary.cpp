@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009, 2011, 2013 - TortoiseSVN
+// Copyright (C) 2007-2009, 2011, 2013, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -120,7 +120,12 @@ void CStringDictionary::RebuildIndexes()
         * (begin+i) = offset;
         temp.push_back (packedStringsStart + offset);
 
-        offset += static_cast<index_t> (strlen (packedStringsStart + offset) +1);
+        size_t len = strnlen(packedStringsStart + offset, packedStrings.size() - offset);
+
+        offset += static_cast<index_t> (len + 1);
+
+        if (offset > packedStrings.size())
+            throw CContainerException("missing nul terminator in string dictionary");
     }
 
     hashIndex.clear();
