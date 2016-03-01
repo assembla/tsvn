@@ -878,6 +878,7 @@ bool CMainFrame::LoadViews(int line)
             m_pwndLeftView->SetHidden(FALSE);
             m_pwndRightView->SetHidden(FALSE);
             m_pwndBottomView->SetHidden(TRUE);
+            progDlg.Stop();
         }
     }
     if (m_Data.IsBaseFileInUse() && !m_Data.IsYourFileInUse() && m_Data.IsTheirFileInUse())
