@@ -68,6 +68,10 @@ void nonfatal(char *p, ...)
     MessageBox(GetParentHwnd(), stuff, morestuff,
         MB_SYSTEMMODAL | MB_ICONERROR | MB_OK);
     sfree(stuff);
+    if (logctx) {
+        log_free(logctx);
+        logctx = NULL;
+    }
 }
 void connection_fatal(void *frontend, char *p, ...)
 {
@@ -193,47 +197,50 @@ static void usage(void)
     char buf[10000];
     int j = 0;
 
-    j += sprintf(buf+j, "TortoisePlink: command-line connection utility (based on PuTTY Plink)\n");
-    j += sprintf(buf+j, "%s\n", ver);
-    j += sprintf(buf+j, "Usage: tortoiseplink [options] [user@]host [command]\n");
-    j += sprintf(buf+j, "       (\"host\" can also be a PuTTY saved session name)\n");
-    j += sprintf(buf+j, "Options:\n");
-    j += sprintf(buf+j, "  -V        print version information and exit\n");
-    j += sprintf(buf+j, "  -pgpfp    print PGP key fingerprints and exit\n");
-    j += sprintf(buf+j, "  -v        show verbose messages\n");
-    j += sprintf(buf+j, "  -load sessname  Load settings from saved session\n");
-    j += sprintf(buf+j, "  -ssh -telnet -rlogin -raw -serial\n");
-    j += sprintf(buf+j, "            force use of a particular protocol\n");
-    j += sprintf(buf+j, "  -P port   connect to specified port\n");
-    j += sprintf(buf+j, "  -l user   connect with specified username\n");
-    j += sprintf(buf+j, "  -sercfg configuration-string (e.g. 19200,8,n,1,X)\n");
-    j += sprintf(buf+j, "            Specify the serial configuration (serial only)\n");
-    j += sprintf(buf+j, "The following options only apply to SSH connections:\n");
-    j += sprintf(buf+j, "  -pw passw login with specified password\n");
-    j += sprintf(buf+j, "  -D [listen-IP:]listen-port\n");
-    j += sprintf(buf+j, "            Dynamic SOCKS-based port forwarding\n");
-    j += sprintf(buf+j, "  -L [listen-IP:]listen-port:host:port\n");
-    j += sprintf(buf+j, "            Forward local port to remote address\n");
-    j += sprintf(buf+j, "  -R [listen-IP:]listen-port:host:port\n");
-    j += sprintf(buf+j, "            Forward remote port to local address\n");
-    j += sprintf(buf+j, "  -X -x     enable / disable X11 forwarding\n");
-    j += sprintf(buf+j, "  -A -a     enable / disable agent forwarding\n");
-    j += sprintf(buf+j, "  -t -T     enable / disable pty allocation\n");
-    j += sprintf(buf+j, "  -1 -2     force use of particular protocol version\n");
-    j += sprintf(buf+j, "  -4 -6     force use of IPv4 or IPv6\n");
-    j += sprintf(buf+j, "  -C        enable compression\n");
-    j += sprintf(buf+j, "  -i key    private key file for user authentication\n");
-    j += sprintf(buf+j, "  -noagent  disable use of Pageant\n");
-    j += sprintf(buf+j, "  -agent    enable use of Pageant\n");
-    j += sprintf(buf+j, "  -hostkey aa:bb:cc:...\n");
-    j += sprintf(buf+j, "            manually specify a host key (may be repeated)\n");
-    j += sprintf(buf+j, "  -m file   read remote command(s) from file\n");
-    j += sprintf(buf+j, "  -s        remote command is an SSH subsystem (SSH-2 only)\n");
-    j += sprintf(buf+j, "  -N        don't start a shell/command (SSH-2 only)\n");
-    j += sprintf(buf+j, "  -nc host:port\n");
-    j += sprintf(buf+j, "            open tunnel in place of session (SSH-2 only)\n");
-    MessageBox(NULL, buf, "TortoisePlink", MB_ICONINFORMATION);
-    exit(1);
+    j += sprintf(buf + j, "TortoisePlink: command-line connection utility (based on PuTTY Plink)\n");
+    j += sprintf(buf + j, "%s\n", ver);
+    j += sprintf(buf + j, "Usage: tortoiseplink [options] [user@]host [command]\n");
+    j += sprintf(buf + j, "       (\"host\" can also be a PuTTY saved session name)\n");
+    j += sprintf(buf + j, "Options:\n");
+    j += sprintf(buf + j, "  -V        print version information and exit\n");
+    j += sprintf(buf + j, "  -pgpfp    print PGP key fingerprints and exit\n");
+    j += sprintf(buf + j, "  -v        show verbose messages\n");
+    j += sprintf(buf + j, "  -load sessname  Load settings from saved session\n");
+    j += sprintf(buf + j, "  -ssh -telnet -rlogin -raw -serial\n");
+    j += sprintf(buf + j, "            force use of a particular protocol\n");
+    j += sprintf(buf + j, "  -P port   connect to specified port\n");
+    j += sprintf(buf + j, "  -l user   connect with specified username\n");
+    j += sprintf(buf + j, "  -batch    disable all interactive prompts\n");
+    j += sprintf(buf + j, "  -sercfg configuration-string (e.g. 19200,8,n,1,X)\n");
+    j += sprintf(buf + j, "            Specify the serial configuration (serial only)\n");
+    j += sprintf(buf + j, "The following options only apply to SSH connections:\n");
+    j += sprintf(buf + j, "  -pw passw login with specified password\n");
+    j += sprintf(buf + j, "  -D [listen-IP:]listen-port\n");
+    j += sprintf(buf + j, "            Dynamic SOCKS-based port forwarding\n");
+    j += sprintf(buf + j, "  -L [listen-IP:]listen-port:host:port\n");
+    j += sprintf(buf + j, "            Forward local port to remote address\n");
+    j += sprintf(buf + j, "  -R [listen-IP:]listen-port:host:port\n");
+    j += sprintf(buf + j, "            Forward remote port to local address\n");
+    j += sprintf(buf + j, "  -X -x     enable / disable X11 forwarding\n");
+    j += sprintf(buf + j, "  -A -a     enable / disable agent forwarding\n");
+    j += sprintf(buf + j, "  -t -T     enable / disable pty allocation\n");
+    j += sprintf(buf + j, "  -1 -2     force use of particular protocol version\n");
+    j += sprintf(buf + j, "  -4 -6     force use of IPv4 or IPv6\n");
+    j += sprintf(buf + j, "  -C        enable compression\n");
+    j += sprintf(buf + j, "  -i key    private key file for user authentication\n");
+    j += sprintf(buf + j, "  -noagent  disable use of Pageant\n");
+    j += sprintf(buf + j, "  -agent    enable use of Pageant\n");
+    j += sprintf(buf + j, "  -hostkey aa:bb:cc:...\n");
+    j += sprintf(buf + j, "            manually specify a host key (may be repeated)\n");
+    j += sprintf(buf + j, "  -m file   read remote command(s) from file\n");
+    j += sprintf(buf + j, "  -s        remote command is an SSH subsystem (SSH-2 only)\n");
+    j += sprintf(buf + j, "  -N        don't start a shell/command (SSH-2 only)\n");
+    j += sprintf(buf + j, "  -nc host:port\n");
+    j += sprintf(buf + j, "            open tunnel in place of session (SSH-2 only)\n");
+    j += sprintf(buf + j, "  -sshlog file\n");
+    j += sprintf(buf + j, "  -sshrawlog file\n");
+    j += sprintf(buf + j, "            log protocol details to a file\n");
+    MessageBox(NULL, buf, "TortoisePlink", MB_ICONINFORMATION);    exit(1);
 }
 
 static void version(void)
@@ -342,24 +349,11 @@ int main(int argc, char **argv)
     conf = conf_new();
     do_defaults(NULL, conf);
     loaded_session = FALSE;
-    default_protocol = conf_get_int(conf, CONF_protocol);
-    default_port = conf_get_int(conf, CONF_port);
     errors = 0;
-    {
-	/*
-	 * Override the default protocol if PLINK_PROTOCOL is set.
-	 */
-	char *p = getenv("PLINK_PROTOCOL");
-	if (p) {
-	    const Backend *b = backend_from_name(p);
-	    if (b) {
-		default_protocol = b->protocol;
-		default_port = b->default_port;
-		conf_set_int(conf, CONF_protocol, default_protocol);
-		conf_set_int(conf, CONF_port, default_port);
-	    }
-	}
-    }
+    conf_set_int(conf, CONF_protocol, default_protocol);
+    conf_set_int(conf, CONF_port, default_port);
+    conf_set_int(conf, CONF_agentfwd, 0);
+    conf_set_int(conf, CONF_x11_forward, 0);
     while (--argc) {
 	char *p = *++argv;
 	if (*p == '-') {

@@ -28,7 +28,7 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_SWISS
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-200                     ICON                    "putty.ico"
+200                     ICON                    "..\putty.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -53,31 +53,31 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,64,0,9999
- PRODUCTVERSION 0,64,0,9999
- FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+ FILEVERSION 0,63,0,9999
+ PRODUCTVERSION 0,63,0,9999
+ FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
- FILEFLAGS VS_FF_DEBUG
+ FILEFLAGS 0x1L
 #else
  FILEFLAGS 0x0L
 #endif
- FILEOS VOS_NT_WINDOWS32
- FILETYPE VFT_APP
- FILESUBTYPE VFT2_UNKNOWN
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
         BLOCK "080904b0"
         BEGIN
             VALUE "Comments", "Adapted from PuTTY plink (http://www.chiark.greenend.org.uk/~sgtatham/putty/)"
-            VALUE "CompanyName", "PuTTY team, TortoiseSVN team and TortoiseGit team"
+            VALUE "CompanyName", "http://tortoisesvn.net"
             VALUE "FileDescription", "TortoisePlink"
-            VALUE "FileVersion", "Release 0.66"
+            VALUE "FileVersion", "Release 0.63"
             VALUE "InternalName", "TortoisePlink"
-            VALUE "LegalCopyright", "Copyright © 2003-2015"
+            VALUE "LegalCopyright", "Copyright © 2003-2013"
             VALUE "OriginalFilename", "TortoisePlink.exe"
             VALUE "ProductName", "TortoiseSVN TortoisePlink"
-            VALUE "ProductVersion", "Release 0.66"
+            VALUE "ProductVersion", "Release 0.63"
         END
     END
     BLOCK "VarFileInfo"

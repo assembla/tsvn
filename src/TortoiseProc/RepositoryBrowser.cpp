@@ -822,7 +822,9 @@ void CRepositoryBrowser::OnOK()
         FilterInfinityDepthItems(m_updateDepths);
     }
 
+    ++m_blockEvents;
     ClearUI();
+    --m_blockEvents;
 
     RevokeDragDrop(m_RepoList.GetSafeHwnd());
     RevokeDragDrop(m_RepoTree.GetSafeHwnd());

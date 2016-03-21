@@ -219,6 +219,9 @@
     <ClCompile Include="LoginDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\wincapi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\int64.h">
@@ -275,7 +278,7 @@
     <ClInclude Include="LoginDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\sshbn.h">
+    <ClInclude Include="..\wincapi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
