@@ -33,6 +33,7 @@
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011
 # Philippe <kissifrot@gmail.com>, 2014
+# Philippe PERIN, 2016
 # ShevAbam, 2015
 # ShevAbam, 2015
 # lkppo, 2012
@@ -41,8 +42,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2016-03-05 11:10+0000\n"
-"Last-Translator: Louis Boucherie\n"
+"PO-Revision-Date: 2016-03-17 20:47+0000\n"
+"Last-Translator: Philippe PERIN\n"
 "Language-Team: French (http://www.transifex.com/luebbe/tortoisesvn/language/"
 "fr/)\n"
 "MIME-Version: 1.0\n"
@@ -1166,6 +1167,11 @@ msgid ""
 "commands that are not in the submenu have <literal>SVN</literal> prepended: "
 "<menuchoice><guimenuitem>SVN Checkout...</guimenuitem></menuchoice>"
 msgstr ""
+"Dans les réglages par défaut, la commande récupérer n'est pas située dans le "
+"sous-menu TortoiseSVN mais est affichée dans le menu tout en haut de "
+"l'explorateur. Les commandes de TortoiseSVN qui ne sont pas dans le sous-"
+"menu ont le terme <literal> SVN </ literal> préfixé: <menuchoice> "
+"<guimenuitem> SVN Récupérer ... </ guimenuitem> </ menuchoice>"
 
 #. (para)
 msgid ""
@@ -1193,6 +1199,12 @@ msgid ""
 "files have now changed to red, indicating that changes have been made "
 "locally."
 msgstr ""
+"Il est temps de se mettre au travail. Dans le répertoire <filename> Widget 1-"
+"Dev </ filename> nous commencons à éditer les fichiers - disons que nous "
+"apportons des modifications sur <filename> Widget 1c </ filename> et "
+"<filename> ReadMe.txt </ filename>. Notez que les icônes de recouvrement sur "
+"ces fichiers ont changé pour le rouge, ce qui indique que des modifications "
+"ont été apportées en local."
 
 #. (title)
 msgid "File Difference Viewer"
@@ -1293,6 +1305,13 @@ msgid ""
 "important). <placeholder-1/> OK, so I cheated a little here and used a "
 "screenshot from the TortoiseSVN repository."
 msgstr ""
+"L'une des caractéristiques les plus utiles de TortoiseSVN est la fenêtre des "
+"journaux. Celle-ci vous affiche la liste de toutes les modifications que "
+"vous avez apportées à un fichier ou un dossier, et montre les messages "
+"détaillés que vous avez entré (vous <emphasis> avez </ emphasis> entré un "
+"message de changement comme suggéré? Si non, vous voyez maintenant pourquoi "
+"c'est important). <Placeholder-1 /> OK, j'ai triché un peu ici, j'ai utilisé "
+"une capture d'écran à partir du référentiel TortoiseSVN."
 
 #. (para)
 msgid ""
@@ -12290,6 +12309,10 @@ msgid ""
 "of the branch/tag dialog. For each external, the target path and the source "
 "URL is shown."
 msgstr ""
+"Si votre copie de travail contient d'autres projets incluant des propriétés "
+"<literal>svn:externals</literal>, ces ressources externes seront énumérées "
+"au bas de la fenêtre de branche/étiquette. Pour chaque ressource externe, le "
+"chemin cible et l'URL source sont affichés."
 
 #. (para)
 msgid ""
@@ -12314,7 +12337,7 @@ msgstr "Copier la source"
 #. (entry)
 #. (entry)
 msgid "external's repos HEAD revision"
-msgstr ""
+msgstr "révision de tête HEAD du repository externe"
 
 #. (entry)
 #. (listitem)
@@ -12323,7 +12346,7 @@ msgstr "Révision spécifique dans le dépôt"
 
 #. (entry)
 msgid "external's WC BASE revision"
-msgstr ""
+msgstr "révision CdT externe"
 
 #. (para)
 msgid ""
@@ -12331,10 +12354,13 @@ msgid ""
 "or the working copy BASE revision, depending on the source of the branch/"
 "tag: <placeholder-1/>"
 msgstr ""
+"Les éléments externes sont automatiquement épinglé soit à la révision "
+"courante de tête soit à la révision de travail de base, selon la source de "
+"la branche/tag : <placeholder-1/>"
 
 #. (title)
 msgid "externals within externals"
-msgstr ""
+msgstr "externes avec externes"
 
 #. (para)
 msgid ""
@@ -12342,6 +12368,9 @@ msgid ""
 "then those will not be tagged! Only externals that are direct children can "
 "be tagged."
 msgstr ""
+"Si un projet qui est inclus comme un élément externe a lui-même, alors ils "
+"ne seront pas marqués! Seuls les éléments externes qui sont les enfants "
+"directs peuvent être marqués."
 
 #. (para)
 msgid ""
@@ -12404,6 +12433,11 @@ msgid ""
 "earlier revision), right click and choose <menuchoice><guimenuitem>create "
 "branch/tag from revision...</guimenuitem></menuchoice>."
 msgstr ""
+"Une autre façon provient des journaux. Vous pouvez afficher les journaux par "
+"exemple tronc, sélectionnez une révision (soit la révision de tête "
+"principale soit une révision antérieure), clic droit et choisissez "
+"<menuchoice> <gui menuitem> créer branche / étiquette de la révision ... </ "
+"gui menuitem> </ option de menu> ."
 
 #. (title)
 msgid "To Checkout or to Switch..."
@@ -12593,6 +12627,13 @@ msgid ""
 "citetitle></ulink> in the Subversion book, which gives a full description "
 "and many examples of how it is used."
 msgstr ""
+"Il est important de comprendre comment les embranchements et les fusions "
+"fonctionnent dans Subversion avant de commencer à l'utiliser, car ils "
+"peuvent devenir assez complexe. Il est fortement recommandé de lire le "
+"chapitre <ulink url = \"http://svnbook.red-bean.com/en/1.8/svn.branchmerge."
+"html\"> <citetitle> Embranchement et Fusion </ citetitle> </ ulink > dans le "
+"livre de Subversion, qui donne une description complète et de nombreux "
+"exemples sur la façon de l'utiliser."
 
 #. (para)
 msgid ""
