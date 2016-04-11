@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2009-2010, 2013 - TortoiseSVN
+// Copyright (C) 2009-2010, 2013, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ inline bool CCreateProcessHelper::CreateProcess(LPCTSTR applicationName,
 
     SecureZeroMemory(processInfo, sizeof(PROCESS_INFORMATION));
     const BOOL result = ::CreateProcess( applicationName,
-                    commandLine, NULL, NULL, FALSE, 0, 0, currentDirectory,
+                    commandLine, nullptr, nullptr, FALSE, CREATE_UNICODE_ENVIRONMENT, nullptr, currentDirectory,
                     &startupInfo, processInfo );
     return result != 0;
 }
