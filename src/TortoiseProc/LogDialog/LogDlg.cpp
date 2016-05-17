@@ -171,7 +171,6 @@ enum LogDlgShowBtnCommands
     ID_CMD_SHOWRANGE,
 };
 
-
 IMPLEMENT_DYNAMIC(CLogDlg, CResizableStandAloneDialog)
 CLogDlg::CLogDlg(CWnd* pParent /*=NULL*/)
     : CResizableStandAloneDialog(CLogDlg::IDD, pParent)
@@ -257,14 +256,10 @@ CLogDlg::CLogDlg(CWnd* pParent /*=NULL*/)
     m_sMultiLogFormat = CRegString(L"Software\\TortoiseSVN\\LogMultiRevFormat", L"r%1!ld!\n%2!s!\n---------------------\n");
     m_sMultiLogFormat.Replace(L"\\r", L"\r");
     m_sMultiLogFormat.Replace(L"\\n", L"\n");
+
     // just in case the user sets an impossible/illegal format string: try to use that format
     // string and handle possible exceptions. In case of an exception, fall back to the default.
-    try
-    {
-        CString sRevMsg;
-        sRevMsg.FormatMessage(m_sMultiLogFormat, 0, L"test");
-    }
-    catch (...)
+    if (!CStringUtils::ValidateFormatString(m_sMultiLogFormat, 0, L"test"))
     {
         // fall back to the default
         m_sMultiLogFormat = L"r%1!ld!\n%2!s!\n---------------------\n";
@@ -1516,21 +1511,24 @@ BOOL CLogDlg::Log(svn_revnum_t rev, const std::string& author, const std::string
     if (m_startrev == -1)
         m_startrev = rev;
 
+    PLOGENTRYDATA logItem = m_logEntries[m_logEntries.size() - 1];
+    if (logItem->GetDepth() > 0)
+        m_cMergedRevisionsReceived++;
+
     if (m_limit != 0)
     {
-        m_LogProgress.SetPos ((int)(m_logEntries.size() - m_prevLogEntriesSize));
+        m_LogProgress.SetPos ((int)(m_logEntries.size() - m_prevLogEntriesSize - m_cMergedRevisionsReceived));
         if (!m_bMonitoringMode && m_pTaskbarList)
         {
             int l,u;
             m_LogProgress.GetRange(l, u);
             m_pTaskbarList->SetProgressState(m_hWnd, TBPF_NORMAL);
-            m_pTaskbarList->SetProgressValue(m_hWnd, m_logEntries.size() - m_prevLogEntriesSize - l, u-l);
+            m_pTaskbarList->SetProgressValue(m_hWnd, m_logEntries.size() - m_prevLogEntriesSize - l - m_cMergedRevisionsReceived, u-l);
         }
     }
     else if (m_startrev.IsNumber() && m_endrev.IsNumber())
     {
-        svn_revnum_t range = (svn_revnum_t)m_startrev - (svn_revnum_t)m_endrev;
-        if ((rev > m_temprev) || (m_temprev - rev) > (range / 100))
+        if (!logItem->HasParent() && rev < m_temprev)
         {
             m_temprev = rev;
             m_LogProgress.SetPos((svn_revnum_t)m_startrev-rev+(svn_revnum_t)m_endrev);
@@ -1707,9 +1705,15 @@ void CLogDlg::LogThread()
         m_pTaskbarList->SetProgressState(m_hWnd, TBPF_INDETERMINATE);
     }
     if (m_limit != 0)
+    {
+        m_cMergedRevisionsReceived = 0;
         m_LogProgress.SetRange32(0, m_limit);
+    }
     else
+    {
         m_LogProgress.SetRange32(m_endrev, m_startrev);
+        m_temprev = m_startrev;
+    }
 
     if (!m_pegrev.IsValid())
         m_pegrev = m_startrev;

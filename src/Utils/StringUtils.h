@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2010, 2013-2014 - TortoiseSVN
+// Copyright (C) 2003-2010, 2013-2014, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -181,6 +181,10 @@ public:
      */
     static bool WriteStringToTextFile(const std::wstring& path, const std::wstring& text, bool bUTF8 = true);
     static bool WriteStringToTextFile(const std::wstring& path, const std::string& text);
+
+    /* Attempts to format string with variable arguments and returns true if
+     * format operations succedeed with SEH or errors. */
+    static bool ValidateFormatString(LPCWSTR pszFormat, ...);
 #endif
 
     /**

@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015 - TortoiseSVN
+// Copyright (C) 2003-2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -460,6 +460,7 @@ private:
     svn_revnum_t        m_head;     ///< only used in Range case of log
     RefreshEnum         m_nRefresh;
     svn_revnum_t        m_temprev;  ///< only used during ReceiveLog
+    int                 m_cMergedRevisionsReceived;  ///< only used during ReceiveLog
     SVNRev              m_LogRevision;
     SVNRev              m_endrev;
     SVNRev              m_wcRev;
