@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2014 - TortoiseSVN
+// Copyright (C) 2003-2014, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "BrowseFolder.h"
 #include "PathUtils.h"
 #include "SmartHandle.h"
+#include "FileDlgEventHandler.h"
 #include <strsafe.h>
 
 BOOL CBrowseFolder::m_bCheck = FALSE;
@@ -34,6 +35,30 @@ TCHAR CBrowseFolder::m_CheckText2[200];
 CString CBrowseFolder::m_sDefaultPath;
 bool CBrowseFolder::m_DisableCheckbox2WhenCheckbox1IsChecked = false;
 
+class BrowseFolderDlgEventHandler : public CFileDlgEventHandler
+{
+public:
+    BrowseFolderDlgEventHandler()
+        : m_DisableCheckbox2WhenCheckbox1IsChecked(false)
+    {
+    }
+
+    bool m_DisableCheckbox2WhenCheckbox1IsChecked;
+
+    STDMETHODIMP OnCheckButtonToggled(IFileDialogCustomize *pfdc,
+                                      DWORD dwIDCtl,
+                                      BOOL bChecked) override
+    {
+        if (m_DisableCheckbox2WhenCheckbox1IsChecked && dwIDCtl == 101)
+        {
+            if (bChecked)
+                pfdc->SetControlState(102, CDCS_VISIBLE | CDCS_INACTIVE);
+            else
+                pfdc->SetControlState(102, CDCS_VISIBLE | CDCS_ENABLED);
+        }
+        return S_OK;
+    }
+};
 
 CBrowseFolder::CBrowseFolder(void)
 :   m_style(0),
@@ -167,9 +192,18 @@ CBrowseFolder::retVal CBrowseFolder::Show(HWND parent, CString& path, const CStr
         else
             ret = CANCEL;
 
-        pfd->Release();
-    }
-    else
+    // set the default folder
+    CComPtr<IShellItem> psiDefault;
+    if (FAILED(SHCreateItemFromParsingName(m_sDefaultPath, nullptr, IID_PPV_ARGS(&psiDefault))))
+        return CANCEL;
+    if (FAILED(pfd->SetFolder(psiDefault)))
+        return CANCEL;
+
+    CComObjectStackEx<BrowseFolderDlgEventHandler> cbk;
+    cbk.m_DisableCheckbox2WhenCheckbox1IsChecked = m_DisableCheckbox2WhenCheckbox1IsChecked;
+    CComQIPtr<IFileDialogEvents> pEvents = cbk.GetUnknown();
+
+    if (m_CheckText[0] != 0)
     {
         BROWSEINFO browseInfo       = {};
         browseInfo.hwndOwner        = parent;
@@ -182,9 +216,15 @@ CBrowseFolder::retVal CBrowseFolder::Show(HWND parent, CString& path, const CStr
 
         PCIDLIST_ABSOLUTE itemIDList = SHBrowseForFolder(&browseInfo);
 
-        //is the dialog canceled?
-        if (!itemIDList)
-            ret = CANCEL;
+    DWORD eventsCookie;
+    if (FAILED(pfd->Advise(pEvents, &eventsCookie)))
+        return CANCEL;
+
+    OnOutOfScope(pfd->Unadvise(eventsCookie););
+
+    // Show the open file dialog
+    if (FAILED(pfd->Show(parent)))
+        return CANCEL;
 
         if (ret != CANCEL)
         {
