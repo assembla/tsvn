@@ -1,6 +1,6 @@
 Index: engines/e_capi.c
 ===================================================================
---- engines/e_capi.c	(revision 27222)
+--- engines/e_capi.c	(revision 27453)
 +++ engines/e_capi.c	(working copy)
 @@ -66,15 +66,17 @@
  #  include <openssl/rsa.h>
@@ -149,7 +149,7 @@ Index: engines/e_capi.c
  }
  # endif
  
-@@ -1453,10 +1562,14 @@
+@@ -1466,10 +1575,14 @@
      }
      if (ctx->store_flags & CERT_SYSTEM_STORE_LOCAL_MACHINE)
          dwFlags = CRYPT_MACHINE_KEYSET;
@@ -168,7 +168,7 @@ Index: engines/e_capi.c
      }
      if (!CryptGetUserKey(key->hprov, keyspec, &key->key)) {
          CAPIerr(CAPI_F_CAPI_GET_KEY, CAPI_R_GETUSERKEY_ERROR);
-@@ -1680,6 +1793,7 @@
+@@ -1693,6 +1806,7 @@
      PCCERT_CONTEXT cert = NULL, excert = NULL;
      CAPI_CTX *ctx;
      CAPI_KEY *key;
@@ -176,7 +176,7 @@ Index: engines/e_capi.c
      ctx = ENGINE_get_ex_data(e, capi_idx);
  
      *pcert = NULL;
-@@ -1736,9 +1850,22 @@
+@@ -1749,9 +1863,22 @@
          return 0;
  
      /* Select the appropriate certificate */
@@ -201,7 +201,7 @@ Index: engines/e_capi.c
      /* Set the selected certificate and free the rest */
  
      for (i = 0; i < sk_X509_num(certs); i++) {
-@@ -1771,7 +1898,9 @@
+@@ -1784,7 +1911,9 @@
  
  static int cert_select_simple(ENGINE *e, SSL *ssl, STACK_OF(X509) *certs)
  {
@@ -212,7 +212,7 @@ Index: engines/e_capi.c
  }
  
  # ifdef OPENSSL_CAPIENG_DIALOG
-@@ -1791,7 +1920,7 @@
+@@ -1804,7 +1933,7 @@
  #   define CRYPTUI_SELECT_INTENDEDUSE_COLUMN                0x000000004
  #  endif
  
@@ -221,7 +221,7 @@ Index: engines/e_capi.c
  #  define dlg_prompt L"Select a certificate to use for authentication"
  #  define dlg_columns      CRYPTUI_SELECT_LOCATION_COLUMN \
                          |CRYPTUI_SELECT_INTENDEDUSE_COLUMN
-@@ -1829,8 +1958,10 @@
+@@ -1842,8 +1971,10 @@
          }
  
      }
