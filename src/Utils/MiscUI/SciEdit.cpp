@@ -82,6 +82,7 @@ CSciEdit::CSciEdit(void) : m_DirectFunction(NULL)
     , m_nAutoCompleteMinChars(3)
     , m_spellCheckerFactory(nullptr)
     , m_SpellChecker(nullptr)
+    , m_blockModifiedHandler(false)
 {
     m_hModule = ::LoadLibrary(L"SciLexer.DLL");
 }
@@ -936,7 +937,7 @@ BOOL CSciEdit::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT
             break;
         case SCN_MODIFIED:
             {
-                if (lpSCN->modificationType & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT))
+                if (!m_blockModifiedHandler && (lpSCN->modificationType & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT)))
                 {
                     LRESULT firstline = Call(SCI_GETFIRSTVISIBLELINE);
                     LRESULT lastline = firstline + Call(SCI_LINESONSCREEN);
@@ -1341,6 +1342,8 @@ void CSciEdit::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
                 int marker = (int)(Call(SCI_GETEDGECOLUMN) * Call(SCI_TEXTWIDTH, 0, (LPARAM)" "));
                 if (marker)
                 {
+                    m_blockModifiedHandler = true;
+                    OnOutOfScope(m_blockModifiedHandler = false);
                     Call(SCI_TARGETFROMSELECTION);
                     Call(SCI_LINESJOIN);
                     Call(SCI_LINESSPLIT, marker);
