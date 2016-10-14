@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015 - TortoiseSVN
+// Copyright (C) 2003-2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -224,9 +224,9 @@ BOOL ProjectProperties::ReadProps(CTSVNPath path)
             val = sPropVal;
             val = val.Trim(L" \n\r\t");
             if ((val.CompareNoCase(L"true") == 0) || (val.CompareNoCase(L"yes") == 0))
-                bFileListInEnglish = TRUE;
+                bMergeLogTemplateMsgTitleBottom = TRUE;
             else
-                bFileListInEnglish = FALSE;
+                bMergeLogTemplateMsgTitleBottom = FALSE;
         }
     }
 
