@@ -10,6 +10,7 @@
 # 
 # Authors:
 # Translators:
+# Adem YILMAZ, 2016
 # Emre Can ÖZTAŞ <mynameisemre@hotmail.com.tr>, 2015
 # Huseyin <hyagli@hotmail.com>, 2013
 # ibrahim YENER <jdavide222@hotmail.com>, 2014
@@ -26,8 +27,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2016-09-23 11:19+0000\n"
-"Last-Translator: Vural Göze <turinhurinov@yahoo.com>\n"
+"PO-Revision-Date: 2016-10-17 07:34+0000\n"
+"Last-Translator: Adem YILMAZ\n"
 "Language-Team: Turkish (http://www.transifex.com/luebbe/tortoisesvn/language/"
 "tr/)\n"
 "MIME-Version: 1.0\n"
@@ -66,7 +67,7 @@ msgstr "%.2f MBayt transfer edildi"
 #. Resource IDs: (5706)
 #, c-format
 msgid "%.2f kBytes/s"
-msgstr "%.2f kBytes/s"
+msgstr "%.2f kBayt/s"
 
 #. Resource IDs: (61878)
 #, c-format
@@ -96,7 +97,7 @@ msgstr "%1 bulunamadı."
 #. Resource IDs: (2701)
 #, c-format
 msgid "%1!d! files selected, %2!d! files total"
-msgstr "%1!d! dosya seçili, %2!d! toplam dosya"
+msgstr "Toplam %2!d! dosyadan, %1!d! dosya seçili"
 
 #. Resource IDs: (3935)
 #, c-format
@@ -199,7 +200,7 @@ msgstr "%I64d Bayt transfer edildi"
 #. Resource IDs: (5705)
 #, c-format
 msgid "%I64d Bytes/s"
-msgstr "%I64d Bytes/s"
+msgstr "%I64d Bayt/s"
 
 #. Resource IDs: (5701)
 #, c-format
@@ -209,7 +210,7 @@ msgstr "%I64d kBayt transfer edildi"
 #. Resource IDs: (62186)
 #, c-format
 msgid "%Ts [Recovered]"
-msgstr ""
+msgstr "%Ts [Kurtarılan]"
 
 #. Resource IDs: (61585, 61586)
 #, c-format
@@ -821,11 +822,11 @@ msgstr "&Bul"
 
 #. Resource IDs: (32771)
 msgid "&Find...\t(Ctrl+F)"
-msgstr ""
+msgstr "&Bul...⇥(Ctrl+F)"
 
 #. Resource IDs: (32778)
 msgid "&Fit images in window\t(F)"
-msgstr ""
+msgstr "&Görselleri pencereye sığdır⇥(F)"
 
 #. Resource IDs: (1646)
 msgid "&Fix time stamps"
@@ -865,7 +866,7 @@ msgstr "&Buradan: (başlangıç URLsi ve birleştirilecek aralığın revizyonu)
 
 #. Resource IDs: (32779)
 msgid "&Go To Line...\t(Ctrl+G)"
-msgstr ""
+msgstr "&Satıra git...⇥(Ctrl+G)"
 
 #. Resource IDs: (65535)
 msgid "&Green:"
@@ -926,7 +927,7 @@ msgstr "&Resim"
 
 #. Resource IDs: (32790)
 msgid "&Image info\t(I)"
-msgstr ""
+msgstr "&Görsel bilgisi⇥(I)"
 
 #. Resource IDs: (16505)
 msgid "&Image only"
@@ -2006,7 +2007,7 @@ msgstr "Proje veya klasör ekle..."
 #. Resource IDs: (9804)
 #, c-format
 msgid "Add to %1"
-msgstr ""
+msgstr "%1 Ekle"
 
 #. Resource IDs: (194)
 msgid "Add to &ignore list"
@@ -2157,12 +2158,16 @@ msgstr ""
 msgid ""
 "All your changes will be lost! Do you really want to reset the menu '%Ts'?"
 msgstr ""
+"Tüm değişiklikler kaybolacak! Gerçekten '%Ts' menüsünü sıfırlamak istiyor "
+"musunuz ?"
 
 #. Resource IDs: (16111)
 #, c-format
 msgid ""
 "All your changes will be lost! Do you really want to reset the toolbar '%Ts'?"
 msgstr ""
+"Tüm değişiklikler kaybolacak! Gerçekten '%Ts' araç çubuğunu sıfırlamak "
+"istiyor musunuz ?"
 
 #. Resource IDs: (32976)
 msgid ""
@@ -2463,7 +2468,7 @@ msgstr ""
 #. Resource IDs: (3535)
 #, c-format
 msgid "Auto-merge %1!ls! into %2!ls!"
-msgstr ""
+msgstr "%1!ls! içinde ki %2!ls! otomatik birleştir"
 
 #. Resource IDs: (7001)
 msgid "Automatic"
@@ -2561,7 +2566,7 @@ msgstr "Hem yama dosyası yolu hem de hedef yol mutlak yol olmalıdır!"
 
 #. Resource IDs: (3006)
 msgid "Bottom View:"
-msgstr ""
+msgstr "Alt Görüntü:"
 
 #. Resource IDs: (1007)
 msgid "Br&owse..."
@@ -3355,7 +3360,7 @@ msgstr ""
 
 #. Resource IDs: (32793)
 msgid "Color by au&thor"
-msgstr ""
+msgstr "Color by au&thor"
 
 #. Resource IDs: (138, 16961, 65535)
 msgid "Colors"
@@ -4657,7 +4662,7 @@ msgstr "Çı&kış"
 
 #. Resource IDs: (105)
 msgid "E&xit\t(Ctrl+W)"
-msgstr ""
+msgstr "Çıkış⇥(Ctrl+W)"
 
 #. Resource IDs: (4384)
 msgid "E&xpand all"
@@ -4745,6 +4750,8 @@ msgid ""
 "Edit property '%1!S!' on\r\n"
 "%2!ls!"
 msgstr ""
+"'%1!S!' özelliğini %2!s! üzerinde\n"
+"düzenle"
 
 #. Resource IDs: (1331, 1382)
 msgid "Edit..."
@@ -4938,7 +4945,7 @@ msgstr "%1 den fazla karakter girmeyin."
 
 #. Resource IDs: (1017)
 msgid "Enter the prefix|*"
-msgstr ""
+msgstr "Öneki girin|*"
 
 #. Resource IDs: (65535)
 msgid "Enter the regex string below:"
@@ -5034,7 +5041,7 @@ msgstr "Sonraki& ağacı aç"
 #. Resource IDs: (16025)
 #, c-format
 msgid "Expand (%Ts)"
-msgstr ""
+msgstr "Genişlet (%Ts)"
 
 #. Resource IDs: (16012)
 msgid "Expand docked window"
@@ -5238,7 +5245,7 @@ msgstr "Kaynağın dosya listesini alıyor"
 
 #. Resource IDs: (1461)
 msgid "Fetching file list of target"
-msgstr ""
+msgstr "Kaynağın dosya listesini alıyor"
 
 #. Resource IDs: (5003)
 msgid "Fetching file..."
@@ -6780,7 +6787,7 @@ msgstr "Soldaki resim"
 
 #. Resource IDs: (4240)
 msgid "Left local modifications"
-msgstr ""
+msgstr "Kalan yerel değişiklikler"
 
 #. Resource IDs: (9434)
 msgid "Like above, but used for reverse merges"
@@ -13879,7 +13886,7 @@ msgstr "değiştirildi:"
 
 #. Resource IDs: (4600)
 msgid "tagging externals"
-msgstr ""
+msgstr "harici etiketlemeler"
 
 #. Resource IDs: (9601)
 msgid "temp. offline"
@@ -14117,7 +14124,7 @@ msgstr "kullanıcı revizyon özelliklleri:"
 
 #. Resource IDs: (336, 1562)
 msgid "user:bool"
-msgstr ""
+msgstr "kullanıcı:bool"
 
 #. Resource IDs: (339)
 msgid "user:multiline"
@@ -14125,11 +14132,11 @@ msgstr ""
 
 #. Resource IDs: (338)
 msgid "user:singleline"
-msgstr ""
+msgstr "kullanıcı:tek satır"
 
 #. Resource IDs: (337, 1622, 1623, 1624)
 msgid "user:state"
-msgstr ""
+msgstr "kullanıcı:durumu"
 
 #. Resource IDs: (1583)
 msgid "uuid x6&4:"
