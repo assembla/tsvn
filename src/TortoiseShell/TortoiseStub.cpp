@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007, 2009, 2012-2014 - TortoiseSVN
+// Copyright (C) 2007, 2009, 2012-2014, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -97,7 +97,7 @@ static BOOL WantRealVersion(void)
 
     TRACE(L"WantRealVersion() - Enter\n");
 
-    LONG Result = RegOpenKeyEx(HKEY_CURRENT_USER, TSVNRootKey, 0, KEY_READ, &hKey);
+    LONG Result = RegOpenKeyEx(HKEY_CURRENT_USER, TSVNRootKey, 0, KEY_READ | KEY_WOW64_64KEY, &hKey);
     if (Result == ERROR_SUCCESS)
     {
         Result = RegQueryValueEx(hKey, ExplorerOnlyValue, NULL, &Type, (BYTE *)&bExplorerOnly, &Len);

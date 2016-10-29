@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2014 - TortoiseSVN
+// Copyright (C) 2014, 2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,6 +29,6 @@
 #define UDIFF_COLORBACKPOSITION ::GetSysColor(COLOR_WINDOW)
 #define UDIFF_COLORBACKHEADER   RGB(0xFF, 0xFF, 0x80)
 #define UDIFF_COLORBACKCOMMENT  ::GetSysColor(COLOR_WINDOW)
-#define UDIFF_COLORBACKADDED    RGB(0x80, 0xFF, 0x80)
-#define UDIFF_COLORBACKREMOVED  RGB(0xFF, 0x80, 0x80)
+#define UDIFF_COLORBACKADDED    RGB(0xCC, 0xFF, 0xCC)
+#define UDIFF_COLORBACKREMOVED  RGB(0xFF, 0xDD, 0xDD)
 
