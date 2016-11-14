@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015 - TortoiseSVN
+// Copyright (C) 2003-2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -243,11 +243,14 @@ void CPathUtils::ConvertToBackslash(LPTSTR dest, LPCTSTR src, size_t len)
 CStringA CPathUtils::PathEscape(const CStringA& path)
 {
     CStringA ret2;
-    int c;
-    int i;
-    for (i=0; path[i]; ++i)
+    // if we encounter a char that needs escaping, we assume
+    // that the hole string needs escaping, skipping the "DoesPercentNeedEscaping" check.
+    int j = 0;
+    bool needsEscaping = false;
+    std::set<int> escapedPositions;
+    for (int i=0; path[i]; ++i)
     {
-        c = (unsigned char)path[i];
+        auto c = (unsigned char)path[i];
         if (iri_escape_chars[c])
         {
             // no escaping needed for that char
@@ -256,23 +259,24 @@ CStringA CPathUtils::PathEscape(const CStringA& path)
         else
         {
             // char needs escaping
-            CStringA temp;
-            temp.Format("%%%02X", (unsigned char)c);
-            ret2 += temp;
+            ret2.AppendFormat("%%%02X", (unsigned char)c);
+            escapedPositions.insert(j);
+            needsEscaping = true;
+            j += 2;
         }
+        ++j;
     }
     CStringA ret;
-    for (i=0; ret2[i]; ++i)
+    for (int i=0; ret2[i]; ++i)
     {
-        c = (unsigned char)ret2[i];
+        auto c = (unsigned char)ret2[i];
         if (uri_autoescape_chars[c])
         {
-            if ((c == '%')&&(DoesPercentNeedEscaping(ret2.Mid(i))))
+            if ((c == '%')&&((needsEscaping && (escapedPositions.find(i) == escapedPositions.end())) || DoesPercentNeedEscaping(ret2.Mid(i))))
             {
                 // this percent sign needs escaping!
-                CStringA temp;
-                temp.Format("%%%02X", (unsigned char)c);
-                ret += temp;
+                ret.AppendFormat("%%%02X", (unsigned char)c);
+                needsEscaping = true;
             }
             else
             {
@@ -283,9 +287,8 @@ CStringA CPathUtils::PathEscape(const CStringA& path)
         else
         {
             // char needs escaping
-            CStringA temp;
-            temp.Format("%%%02X", (unsigned char)c);
-            ret += temp;
+            ret.AppendFormat("%%%02X", (unsigned char)c);
+            needsEscaping = true;
         }
     }
 

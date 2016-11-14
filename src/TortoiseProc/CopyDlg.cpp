@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015 - TortoiseSVN
+// Copyright (C) 2003-2016 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -160,12 +160,12 @@ BOOL CCopyDlg::OnInitDialog()
             relPath = m_URL.Mid(1);
     }
     CTSVNPath r = CTSVNPath(relPath);
-    relPath = r.GetUIPathString();
+    relPath = CPathUtils::PathUnescape(r.GetSVNPathString());
     relPath.Replace('\\', '/');
     m_URLCombo.AddString(relPath, 0);
     m_URLCombo.SelectString(-1, relPath);
     m_URL = m_wcURL;
-    SetDlgItemText(IDC_DESTURL, CPathUtils::CombineUrls(m_repoRoot, relPath));
+    OnCbnEditchangeUrlcombo(); m_bSettingChanged = false;
     SetDlgItemText(IDC_FROMURL, m_wcURL);
 
     CString reg;
@@ -424,8 +424,10 @@ void CCopyDlg::OnOK()
     CString combourl = m_URLCombo.GetWindowString();
     if (combourl.IsEmpty())
         combourl = m_URLCombo.GetString();
+    auto comboUrlA = CUnicodeUtils::GetUTF8(combourl);
+    auto comboUrlW = CUnicodeUtils::GetUnicode(CPathUtils::PathEscape(comboUrlA));
 
-    if ((m_wcURL.CompareNoCase(combourl)==0)&&(m_CopyRev.IsHead()))
+    if ((m_wcURL.CompareNoCase(comboUrlW)==0)&&(m_CopyRev.IsHead()))
     {
         CString temp;
         temp.FormatMessage(IDS_ERR_COPYITSELF, (LPCTSTR)m_wcURL, (LPCTSTR)m_URLCombo.GetString());
@@ -882,7 +884,9 @@ void CCopyDlg::OnEnChangeCopyrevtext()
 void CCopyDlg::OnCbnEditchangeUrlcombo()
 {
     m_bSettingChanged = true;
-    SetDlgItemText(IDC_DESTURL, CPathUtils::CombineUrls(m_repoRoot, m_URLCombo.GetWindowString()));
+    auto urlA = CUnicodeUtils::GetUTF8(m_URLCombo.GetWindowString());
+    auto urlW = CUnicodeUtils::GetUnicode(CPathUtils::PathEscape(urlA));
+    SetDlgItemText(IDC_DESTURL, CPathUtils::CombineUrls(m_repoRoot, urlW));
 }
 
 void CCopyDlg::OnNMCustomdrawExternalslist(NMHDR *pNMHDR, LRESULT *pResult)
