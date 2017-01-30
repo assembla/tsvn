@@ -19,6 +19,7 @@
 # Dmitriy Mamonov <sassy.but.classic@gmail.com>, 2013
 # Dmitry Oshkalo <dmitry.oshkalo@gmail.com>, 2015
 # netpatriciapussy <Deshe1973@jourrapide.com>, 2016
+# Nikolay Falileev <kelvinkolyan@mail.ru>, 2017
 # Nikolay Osinin <nikolay.osinin@gmail.com>, 2011
 # Red Tigerbear <redtigerbear@gmail.com>, 2015
 # rlagutin <inactive+drbeep@transifex.com>, 2014
@@ -33,8 +34,8 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2016-06-28 10:51+0000\n"
-"Last-Translator: netpatriciapussy <Deshe1973@jourrapide.com>\n"
+"PO-Revision-Date: 2017-01-30 11:16+0000\n"
+"Last-Translator: Nikolay Falileev <kelvinkolyan@mail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/luebbe/tortoisesvn/language/"
 "ru/)\n"
 "MIME-Version: 1.0\n"
@@ -60,27 +61,27 @@ msgstr "Первая"
 
 #. (firstname)
 msgid "Stefan"
-msgstr "Stefan"
+msgstr "Стефан"
 
 #. (surname)
 msgid "Küng"
-msgstr "Küng"
+msgstr "Кюнг"
 
 #. (firstname)
 msgid "Lübbe"
-msgstr "Lübbe"
+msgstr "Люббэ"
 
 #. (surname)
 msgid "Onken"
-msgstr "Onken"
+msgstr "Онкен"
 
 #. (firstname)
 msgid "Simon"
-msgstr "Simon"
+msgstr "Саймон"
 
 #. (surname)
 msgid "Large"
-msgstr "Large"
+msgstr "Ладж"
 
 #. (title)
 msgid "Preface"
@@ -88,7 +89,7 @@ msgstr "Предисловие"
 
 #. (primary)
 msgid "version control"
-msgstr "управление версиями"
+msgstr "контроль версий"
 
 #. (para)
 msgid ""
@@ -3046,6 +3047,12 @@ msgid ""
 "emphasis> access at all. If your repository is accessed at all during the "
 "copy, (web browser left open, WebSVN, etc.) the backup will be worthless."
 msgstr ""
+"Наиболее простой (но не рекомендуемый) способ - скопировать каталог "
+"хранилища на резервный носитель. При этом вы должны быть полностью уверены, "
+"что ни один процесс не имеет доступа к данным. Под доступом подразумевается "
+"<emphasis>любой</emphasis> доступ вообще. Если во время копирования к вашему "
+"хранилищу имеет доступ какой-либо процесс (остался открытым веб-браузер, "
+"WebSVN и др.), то резервное копирование станет бессмысленным."
 
 #. (para)
 msgid ""
@@ -3054,6 +3061,10 @@ msgid ""
 "    </screen> to create a copy of your repository in a safe manner. Then "
 "backup the copy."
 msgstr ""
+"Для создания копии вашего хранилища безопасным способом рекомендуется "
+"выполнить <screen>\n"
+"svnadmin hotcopy путь/к/хранилищу путь/к/резервной/копии\n"
+"</screen> После этого резервная копия будет готова."
 
 #. (para)
 msgid ""
@@ -10587,7 +10598,7 @@ msgstr ""
 
 #. (title)
 msgid "Revert is Slow"
-msgstr "Убирание изменений работает медленно"
+msgstr "Отмена изменений работает медленно"
 
 #. (para)
 msgid ""
@@ -10630,6 +10641,12 @@ msgid ""
 "guimenu><guimenuitem>Cleanup</guimenuitem></menuchoice> on the folder. It is "
 "a good idea to do this at the top level of the working copy. <placeholder-1/>"
 msgstr ""
+"Если команда Subversion не может быть завершена, например, из-за проблем "
+"сервера, то ваша рабочая копия может остаться в несогласованном состоянии. В "
+"этом случае вам необходимо выполнить команду для папки: "
+"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Очистка</"
+"guimenuitem></menuchoice> Рекомендуется выполнять эту команду для папки "
+"верхнего уровня вашей рабочей копии. <placeholder-1/>"
 
 #. (term)
 msgid "Clean up working copy status"
@@ -20385,15 +20402,15 @@ msgstr ""
 #. (term)
 #. (term)
 msgid "Pre-connect"
-msgstr "Перед-соединением"
+msgstr "Предварительное соединение"
 
 #. (para)
 msgid ""
 "Called before an attempt to contact the repository. Called at most once in "
 "five minutes."
 msgstr ""
-"Вызывается перед попыткой соединится с хранилищем. Вызывается как минимум "
-"раз в пять минут."
+"Вызывается перед попыткой соединения с хранилищем. Вызывается не более "
+"одного раза в пять минут."
 
 #. (para)
 msgid ""
@@ -21265,6 +21282,10 @@ msgid ""
 "was created are also shown. These revisions are shown in black because those "
 "can't be merged."
 msgstr ""
+"Когда диалог журнала запускается из мастера объединений, объединенные "
+"ревизии отображаются серым цветом, но при этом также отображаются ревизиии "
+"за пределами точки ветвления. Эти ревизии отображаются черным цветом, потому "
+"что они не могут быть объединены."
 
 #. (para)
 msgid ""
@@ -21276,6 +21297,14 @@ msgid ""
 "com/p/support/issues/detail?id=5471\"><citetitle>issue #5471</citetitle></"
 "ulink>)."
 msgstr ""
+"Если эта опция <literal> включена </literal>, то TortoiseSVN попытается "
+"найти ревизию, от которой была создана ветка, и скроет все ревизии, которые "
+"находятся за пределами \n"
+" этой ревизии. Так как процесс может занять неопределенное время, эта опция "
+"отключена по умолчанию. Кроме того, эта функция не работает с некоторыми "
+"серверами SVN (например, Google Code Hosting, см. <ulink url = \"http://code."
+"google.com/p/support/issues/detail?id=5471\"> <citetitle> вопрос # 5471 </ "
+"citetitle> </ ulink>)."
 
 #. (para)
 msgid ""
@@ -21744,6 +21773,8 @@ msgid ""
 "If you hold down the <keycap>Shift</keycap> key when clicking the button, "
 "all error states are also cleared if there are any."
 msgstr ""
+"Если вы удерживаете нажатой клавишу <keycap>Shift</keycap>, когда кликаете "
+"на кнопку, то все имеющиеся ошибочные состояния также будут удалены."
 
 #. (term)
 msgid "Update all"
@@ -22617,6 +22648,41 @@ msgid ""
 "\n"
 "// End of file\n"
 msgstr ""
+"\n"
+"// Тестовый файл для SubWCRev\n"
+"\n"
+"char *Revision      = \"22837\";\n"
+"char *Revision16    = \"53\";\n"
+"char *Revisionp100  = \"22937\";\n"
+"char *Revisionm100  = \"22737\";\n"
+"char *Modified      = \"Модифицированный\";\n"
+"char *Unversioned   = \"нет неверсированных элементов\";\n"
+"char *Date          = \"2012/04/26 18:47:57\";\n"
+"char *CustDate      = \"Четверг, 26 Апрель 2012\";\n"
+"char *DateUTC       = \"2012/04/26 16:47:57\";\n"
+"char *CustDateUTC   = \"Четверг, 26 Апрель 2012\";\n"
+"char *TimeNow       = \"2012/04/26 20:51:17\";\n"
+"char *TimeNowUTC    = \"2012/04/26 18:51:17\";\n"
+"char *RevRange      = \"22836:22837\";\n"
+"char *Mixed         = \"Смешанная ревизия WC\";\n"
+"char *ExtAllFixed   = \"Все внешние зафиксированы\";\n"
+"char *IsTagged      = \"Не отмечен\";\n"
+"char *URL           = \"https://svn.code.sf.net/p/tortoisesvn/code/trunk\";\n"
+"char *isInSVN       = \"версирован\";\n"
+"char *needslck      = \"FALSE\";\n"
+"char *islocked      = \"не заблокирован\";\n"
+"char *lockdateutc   = \"1970/01/01 00:00:00\";\n"
+"char *lockdate      = \"1970/01/01 01:00:00\";\n"
+"char *lockcustutc   = \"Четверг, 01 Январь 1970\";\n"
+"char *lockcust      = \"Четверг, 01 Январь 1970\";\n"
+"char *lockown       = \"\";\n"
+"char *lockcmt       = \"\";\n"
+"\n"
+"#if 1\n"
+"#error Источник модифицирован\n"
+"#endif\n"
+"\n"
+"// Конец файла\n"
 
 #. (para)
 msgid ""
@@ -23866,7 +23932,7 @@ msgstr ""
 
 #. (title)
 msgid "Hook-script on the server"
-msgstr "Скрипт ловушки на сервере"
+msgstr "Скрипт-ловушка на сервере"
 
 #. (para)
 msgid ""
