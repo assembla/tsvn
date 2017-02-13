@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2016 the TortoiseSVN team
+# Copyright (C) 2004-2017 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -18,9 +18,11 @@
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2011-2012
 # Lübbe  <luebbe.tortoisesvn@googlemail.com>, 2012
 # Lübbe Onken <l.onken@rac.de>, 2011-2012
-# Lübbe Onken <l.onken@rac.de>, 2011-2012, 2013-2016
+# Lübbe Onken <l.onken@rac.de>, 2011-2012, 2013-2017
 # Lübbe Onken <l.onken@rac.de>, 2011-2012, 2013-2014, 2015-2016
-# Lübbe Onken <l.onken@rac.de>, 2011-2012, 2013-2015, 2016
+# Lübbe Onken <l.onken@rac.de>, 2011-2012, 2013-2014, 2015-2016, 2017
+# Lübbe Onken <l.onken@rac.de>, 2011-2012, 2013-2015, 2016-2017
+# Lübbe Onken <l.onken@rac.de>, 2011-2012, 2013-2016, 2017
 # Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>, 2012-2015
 # peu <peu@rekoba.de>, 2013
 # peu <peu@rekoba.de>, 2013
@@ -31,7 +33,7 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2016-10-10 14:14+0000\n"
+"PO-Revision-Date: 2017-02-13 10:15+0000\n"
 "Last-Translator: Lübbe TortoiseSVN <luebbe.tortoisesvn@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/luebbe/tortoisesvn/language/"
 "de/)\n"
@@ -1256,7 +1258,7 @@ msgstr "&Aktualisieren"
 
 #. Resource IDs: (1562)
 msgid "&Remind me to enter a bug-ID"
-msgstr "&Erinnere mich daran, eine Problem-ID einzugeben"
+msgstr "&Erinnere mich daran, eine Ticket-Id einzugeben"
 
 #. Resource IDs: (1100, 1285, 1597, 9901, 16646)
 msgid "&Remove"
@@ -2618,23 +2620,23 @@ msgstr "Suchen..."
 
 #. Resource IDs: (1119)
 msgid "Bug-&ID / Issue-Nr:"
-msgstr "Problem-&ID:"
+msgstr "Ticket-&Id:"
 
 #. Resource IDs: (1840)
 msgid "Bug-ID"
-msgstr "Problem-ID"
+msgstr "Ticket-Id"
 
 #. Resource IDs: (1578)
 msgid "Bug-ID e&xpression:"
-msgstr "Problem-ID &RegEx:"
+msgstr "Ticket-Id &RegEx:"
 
 #. Resource IDs: (1119)
 msgid "Bug-ID is:"
-msgstr "Problem-ID ist:"
+msgstr "Ticket-Id ist:"
 
 #. Resource IDs: (1856)
 msgid "Bug-IDs"
-msgstr "Problem-IDs"
+msgstr "Ticket-Ids"
 
 #. Resource IDs: (327)
 msgid "Bugtraq Regex Tester - TortoiseSVN"
@@ -5033,7 +5035,7 @@ msgid ""
 "Enter the regular expression patterns for filtering out the bug-ID from a "
 "commit message."
 msgstr ""
-"Geben Sie die regulären Ausdrücke zum Herausfiltern der Problem-ID aus einer "
+"Geben Sie die regulären Ausdrücke zum Herausfiltern der Ticket-Id aus einer "
 "Logmeldung an."
 
 #. Resource IDs: (57633)
@@ -5076,7 +5078,7 @@ msgstr ""
 
 #. Resource IDs: (2751)
 msgid "Every commit should be assigned to an issue."
-msgstr "Jeder Übertragung sollte eine Problem-ID zugewiesen werden."
+msgstr "Jeder Übertragung sollte eine Ticket-Id zugewiesen werden."
 
 #. Resource IDs: (32853)
 msgid "Ex&ternals"
@@ -9794,13 +9796,13 @@ msgid ""
 msgstr ""
 "Beispiel-Logmeldung zum Test der bugtraq:regex Zeichenfolgen.\n"
 "\n"
-"Test von Eintragsnummern, die im Text erwähnt werden: Eintrag #55. Fehler "
-"Nummer #77,#78.\n"
+"Test von Ticket-Ids, die im Text erwähnt werden: Ticket #55. Ticket Nummer "
+"#77,#78.\n"
 "\n"
-"Aktualisiere Eintrag #101\n"
-"Behebt Eintrag #202\n"
-"Löst Eintrag #88.\n"
-"Schließt Eintrag #99.\n"
+"Aktualisiere Ticket #101\n"
+"Behebt Ticket #202\n"
+"Löst Ticket #88.\n"
+"Schließt Ticket #99.\n"
 
 #. Resource IDs: (1612)
 msgid "Sample text:"
@@ -10772,9 +10774,9 @@ msgid ""
 "the placeholder %BUGID% for the real bug-ID. If you leave these settings "
 "empty, TortoiseSVN will use the regular expressions instead."
 msgstr ""
-"Geben Sie an, wie die Logmeldung aus der angegebenen Problem-ID "
+"Geben Sie an, wie die Logmeldung aus der angegebenen Ticket-Id "
 "zusammengesetzt werden soll. Verwenden Sie %BUGID% als Platzhalter für die "
-"Problem-ID. Falls Sie diese Felder leer lassen, wird TortoiseSVN stattdessen "
+"Ticket-Id. Falls Sie diese Felder leer lassen, wird TortoiseSVN stattdessen "
 "die regulären Ausdrücke verwenden"
 
 #. Resource IDs: (1305)
@@ -10783,7 +10785,7 @@ msgid ""
 "for the real issue number."
 msgstr ""
 "Geben Sie die URL zum Zugriff auf das Fehlerverfolgungssystem an. Verwenden "
-"Sie %BUGID% als Platzhalter für die Problem-ID."
+"Sie %BUGID% als Platzhalter für die Ticket-Id."
 
 #. Resource IDs: (1248)
 msgid ""
@@ -12618,7 +12620,7 @@ msgid ""
 "  Fingerprint: %1!ls!\n"
 "  Distinguished name: %2!ls!"
 msgstr ""
-"Zertifikat von unbekannter Stelle zertifiziert.\n"
+"Zertifikat von unbekannter Stelle herausgegeben.\n"
 "  Fingerabdruck: %1!ls!\n"
 "  Ermittelter Name: %2!ls!"
 
@@ -13384,7 +13386,7 @@ msgstr "Sie müssen erst Ihre Arbeitskopie aktualisieren."
 
 #. Resource IDs: (2752)
 msgid "You haven't entered an issue number."
-msgstr "Sie haben keine Problem-ID eingegeben."
+msgstr "Sie haben keine Ticket-Id eingegeben."
 
 #. Resource IDs: (16024)
 #, c-format
@@ -13675,7 +13677,7 @@ msgid ""
 "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
 "bugtraq:label\r\n"
-"Beschriftung für das Eingabefeld der Problem-ID."
+"Beschriftung für das Eingabefeld der Ticket-Id."
 
 #. Resource IDs: (9226)
 msgid ""
@@ -13688,7 +13690,7 @@ msgstr ""
 "zwei durch eine Leerzeile getrennte reguläre Ausdrücke.\r\n"
 "Der erste Ausdruck dient dazu, eine Zeichenkette, die sich auf\r\n"
 "einen Eintrag bezieht, zu finden. Der zweite Ausdruck wird\r\n"
-"verwendet, um die Eintrags-ID aus der Zeichenkette zu extrahieren."
+"verwendet, um die Ticket-Id aus der Zeichenkette zu extrahieren."
 
 #. Resource IDs: (9221)
 #, c-format
@@ -13699,10 +13701,10 @@ msgid ""
 "The string must contain '%BUGID%' which gets replaced with the issue number."
 msgstr ""
 "bugtraq:message\r\n"
-"Zeichenkette, die an eine Logmeldung angefügt wird, wenn eine ID angegeben "
-"wird.\r\n"
+"Zeichenkette, die an eine Logmeldung angefügt wird, wenn eine Ticket-Id "
+"angegeben wird.\r\n"
 "Die Zeichenkette muss '%BUGID%' enthalten, welches dann durch die "
-"eingegebene ID ersetzt wird."
+"eingegebene Ticket-Id ersetzt wird."
 
 #. Resource IDs: (9222)
 msgid ""
@@ -13739,7 +13741,7 @@ msgid ""
 msgstr ""
 "bugtraq:url\r\n"
 "URL, die zum Fehlerverfolgungssystem zeigt. Muss '%BUGID%\r\n"
-"enthalten, welches dann durch die eingegebene Problem-ID ersetzt wird."
+"enthalten, welches dann durch die eingegebene Ticket-Id ersetzt wird."
 
 #. Resource IDs: (65535)
 msgid "changes total: "
@@ -14526,7 +14528,7 @@ msgid ""
 msgstr ""
 "tsvn:warnifnoissue\r\n"
 "Auf 'yes' setzen, wenn eine Warnung ausgegeben werden soll, falls keine "
-"Problem-ID im Übertragen-Dialog eingegeben wird."
+"Ticket-Id im Übertragen-Dialog eingegeben wird."
 
 #. Resource IDs: (65535)
 msgid "user revprops total: "
