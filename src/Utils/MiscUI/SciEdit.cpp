@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2016 - TortoiseSVN
+// Copyright (C) 2003-2017 - TortoiseSVN
 // Copyright (C) 2015 - TortoiseGit
 
 // This program is free software; you can redistribute it and/or
@@ -1641,7 +1641,7 @@ bool CSciEdit::IsValidURLChar(unsigned char ch)
     return isalnum(ch) ||
         ch == '_' || ch == '/' || ch == ';' || ch == '?' || ch == '&' || ch == '=' ||
         ch == '%' || ch == ':' || ch == '.' || ch == '#' || ch == '-' || ch == '+' ||
-        ch == '|' || ch == '>' || ch == '<' || ch == '!';
+        ch == '|' || ch == '>' || ch == '<' || ch == '!' || ch == '@' || ch == '~';
 }
 
 void CSciEdit::StyleURLs(int startstylepos, int endstylepos)
