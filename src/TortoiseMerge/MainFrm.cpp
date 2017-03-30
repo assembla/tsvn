@@ -1,6 +1,6 @@
 // TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2004-2016 - TortoiseSVN
+// Copyright (C) 2004-2017 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -1056,7 +1056,26 @@ bool CMainFrame::LoadViews(int line)
     {
         int n = line == -1 ? min( nOldLineNumber, nOldLine ) : line;
         if (n >= 0)
+        {
             n = m_pwndRightView->m_pViewData->FindLineNumber(n);
+            if (m_bCollapsed)
+            {
+                // adjust the goto-line position if we're collapsed
+                int step = m_pwndRightView->m_nTopLine > n ? -1 : 1;
+                int skip = 0;
+                for (int i = m_pwndRightView->m_nTopLine; i != n; i += step)
+                {
+                    if (m_pwndRightView->m_pViewData->GetHideState(i) == HIDESTATE_HIDDEN)
+                        ++skip;
+                }
+                if (m_pwndRightView->m_pViewData->GetHideState(n) == HIDESTATE_HIDDEN)
+                {
+                    OnViewTextFoldUnfold();
+                }
+                else
+                    n = n + (skip*step*-1);
+            }
+        }
         if (n < 0)
             n = nOldLine;
 
