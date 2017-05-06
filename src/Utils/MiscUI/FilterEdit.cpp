@@ -93,7 +93,7 @@ BOOL CFilterEdit::PreTranslateMessage( MSG* pMsg )
     return CEdit::PreTranslateMessage(pMsg);
 }
 
-BOOL CFilterEdit::SetCancelBitmaps(UINT uCancelNormal, UINT uCancelPressed, BOOL bShowAlways)
+BOOL CFilterEdit::SetCancelBitmaps(UINT uCancelNormal, UINT uCancelPressed, int cx96dpi, int cy96dpi, BOOL bShowAlways)
 {
     m_bShowCancelButtonAlways = bShowAlways;
 
@@ -102,8 +102,8 @@ BOOL CFilterEdit::SetCancelBitmaps(UINT uCancelNormal, UINT uCancelPressed, BOOL
     if (m_hIconCancelPressed)
         DestroyIcon(m_hIconCancelPressed);
 
-    m_hIconCancelNormal = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(uCancelNormal), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR);
-    m_hIconCancelPressed = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(uCancelPressed), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR);
+    m_hIconCancelNormal = LoadDpiScaledIcon(uCancelNormal, cx96dpi, cy96dpi);
+    m_hIconCancelPressed = LoadDpiScaledIcon(uCancelPressed, cx96dpi, cy96dpi);
 
     if ((m_hIconCancelNormal == 0) || (m_hIconCancelPressed == 0))
         return FALSE;
@@ -114,12 +114,12 @@ BOOL CFilterEdit::SetCancelBitmaps(UINT uCancelNormal, UINT uCancelPressed, BOOL
     return TRUE;
 }
 
-BOOL CFilterEdit::SetInfoIcon(UINT uInfo)
+BOOL CFilterEdit::SetInfoIcon(UINT uInfo, int cx96dpi, int cy96dpi)
 {
     if (m_hIconInfo)
         DestroyIcon(m_hIconInfo);
 
-    m_hIconInfo = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(uInfo), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR);
+    m_hIconInfo = LoadDpiScaledIcon(uInfo, cx96dpi, cy96dpi);
 
     if (m_hIconInfo == 0)
         return FALSE;
@@ -148,7 +148,7 @@ void CFilterEdit::ResizeWindow()
     if (!::IsWindow(m_hWnd))
         return;
 
-    RECT editrc, rc;
+    CRect editrc, rc;
     GetRect(&editrc);
     GetClientRect(&rc);
     editrc.left = rc.left + 4;
@@ -156,10 +156,16 @@ void CFilterEdit::ResizeWindow()
     editrc.right = rc.right - 4;
     editrc.bottom = rc.bottom - 4;
 
+    CWindowDC dc(this);
+    HGDIOBJ oldFont = dc.SelectObject(GetFont()->GetSafeHandle());
+    TEXTMETRIC tm = { 0 };
+    dc.GetTextMetrics(&tm);
+    dc.SelectObject(oldFont);
+
     m_rcEditArea.left = editrc.left + m_sizeInfoIcon.cx;
     m_rcEditArea.right = editrc.right - m_sizeCancelIcon.cx - 5;
-    m_rcEditArea.top = editrc.top;
-    m_rcEditArea.bottom = editrc.bottom;
+    m_rcEditArea.top = (rc.Height() - tm.tmHeight) / 2;
+    m_rcEditArea.bottom = m_rcEditArea.top + tm.tmHeight;
 
     m_rcButtonArea.left = m_rcEditArea.right + 5;
     m_rcButtonArea.right = rc.right;
@@ -386,6 +392,16 @@ void CFilterEdit::DrawDimText()
     dcDraw.DrawText(m_pCueBanner.get(), (int)wcslen(m_pCueBanner.get()), &m_rcEditArea, DT_CENTER | DT_VCENTER);
     dcDraw.RestoreDC(iState);
     return;
+}
+
+HICON CFilterEdit::LoadDpiScaledIcon(UINT resourceId, int cx96dpi, int cy96dpi)
+{
+    CWindowDC dc(this);
+
+    int cx = MulDiv(cx96dpi, dc.GetDeviceCaps(LOGPIXELSX), 96);
+    int cy = MulDiv(cy96dpi, dc.GetDeviceCaps(LOGPIXELSY), 96);
+
+    return (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(resourceId), IMAGE_ICON, cx, cy, LR_DEFAULTCOLOR);
 }
 
 void CFilterEdit::OnEnKillfocus()

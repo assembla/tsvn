@@ -154,8 +154,8 @@ BOOL CFileDiffDlg::OnInitDialog()
     m_SwitchButton.SetImage((HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_SWITCHLEFTRIGHT), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR));
     m_SwitchButton.Invalidate();
 
-    m_cFilter.SetCancelBitmaps(IDI_CANCELNORMAL, IDI_CANCELPRESSED);
-    m_cFilter.SetInfoIcon(IDI_FILTEREDIT);
+    m_cFilter.SetCancelBitmaps(IDI_CANCELNORMAL, IDI_CANCELPRESSED, 14, 14);
+    m_cFilter.SetInfoIcon(IDI_FILTEREDIT, 19, 19);
     temp.LoadString(IDS_FILEDIFF_FILTERCUE);
     temp = L"   "+temp;
     m_cFilter.SetCueBanner(temp);
