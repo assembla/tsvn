@@ -59,12 +59,18 @@ CString GetCacheID()
 
 bool SendCacheCommand(BYTE command, const WCHAR * path /* = NULL */)
 {
-    int retrycount = 2;
     CAutoFile hPipe;
-    do
+    CString pipeName = GetCacheCommandPipeName();
+
+    for(int retry = 0; retry < 2; retry++)
     {
+        if (retry > 0)
+        {
+            WaitNamedPipe(pipeName, 50);
+        }
+
         hPipe = CreateFile(
-            GetCacheCommandPipeName(),      // pipe name
+            pipeName,                       // pipe name
             GENERIC_READ |                  // read and write access
             GENERIC_WRITE,
             0,                              // no sharing
@@ -72,10 +78,21 @@ bool SendCacheCommand(BYTE command, const WCHAR * path /* = NULL */)
             OPEN_EXISTING,                  // opens existing pipe
             FILE_FLAG_OVERLAPPED,           // default attributes
             NULL);                          // no template file
-        retrycount--;
-        if (!hPipe)
-            Sleep(10);
-    } while ((!hPipe) && (retrycount));
+        if (hPipe)
+            break;
+
+        if (GetLastError() == ERROR_PIPE_BUSY)
+        {
+            // TSVNCache is running but is busy connecting a different client.
+            // Do not give up immediately but wait for a few milliseconds until
+            // the server has created the next pipe instance
+        }
+        else
+        {
+            // Some other error -- fail immediately.
+            break;
+        }
+    }
 
     if (!hPipe)
     {
@@ -98,20 +115,22 @@ bool SendCacheCommand(BYTE command, const WCHAR * path /* = NULL */)
         if (path)
             wcsncpy_s(cmd.path, path, _TRUNCATE);
 
-        retrycount = 2;
         BOOL fSuccess = FALSE;
-        do
+        for (int retry = 0; retry < 2; retry++)
         {
+            if (retry > 0)
+                Sleep(10);
+
             fSuccess = WriteFile(
                 hPipe,          // handle to pipe
                 &cmd,           // buffer to write from
                 sizeof(cmd),    // number of bytes to write
                 &cbWritten,     // number of bytes written
                 NULL);          // not overlapped I/O
-            retrycount--;
-            if (! fSuccess || sizeof(cmd) != cbWritten)
-                Sleep(10);
-        } while ((retrycount) && (! fSuccess || sizeof(cmd) != cbWritten));
+
+            if (fSuccess && sizeof(cmd) == cbWritten)
+                break;
+        }
 
         if (! fSuccess || sizeof(cmd) != cbWritten)
         {
@@ -140,20 +159,32 @@ bool SendCacheCommand(BYTE command, const WCHAR * path /* = NULL */)
 }
 
 CBlockCacheForPath::CBlockCacheForPath(const WCHAR * aPath)
+    : m_bBlocked(false)
 {
     wcsncpy_s(path, aPath, MAX_PATH - 1);
 
-    SendCacheCommand (TSVNCACHECOMMAND_BLOCK, path);
-    // Wait a short while to make sure the cache has
-    // processed this command. Without this, we risk
-    // executing the svn command before the cache has
-    // blocked the path and already gets change notifications.
-    Sleep(20);
+    if (SendCacheCommand(TSVNCACHECOMMAND_BLOCK, path))
+    {
+        // Wait a short while to make sure the cache has
+        // processed this command. Without this, we risk
+        // executing the svn command before the cache has
+        // blocked the path and already gets change notifications.
+        Sleep(20);
+        m_bBlocked = true;
+    }
 }
 
 CBlockCacheForPath::~CBlockCacheForPath()
 {
-    int retry = 3;
-    while (retry-- && !SendCacheCommand (TSVNCACHECOMMAND_UNBLOCK, path))
-        Sleep(10);
+    if (m_bBlocked)
+    {
+        for (int retry = 0; retry < 3; retry++)
+        {
+            if (retry > 0)
+                Sleep(10);
+
+            if (SendCacheCommand(TSVNCACHECOMMAND_UNBLOCK, path))
+                break;
+        }
+    }
 }
