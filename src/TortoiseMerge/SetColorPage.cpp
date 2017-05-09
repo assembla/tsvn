@@ -103,7 +103,7 @@ void CSetColorPage::SaveData()
     cFg = m_cFgWhitespaces.GetColor();
     if (cFg == -1)
         cFg = m_cFgWhitespaces.GetAutomaticColor();
-    CRegDWORD regWhitespaceColor(L"Software\\TortoiseMerge\\Colors\\Whitespace", GetSysColor(COLOR_GRAYTEXT));
+    CRegDWORD regWhitespaceColor(L"Software\\TortoiseMerge\\Colors\\Whitespace", GetSysColor(COLOR_3DSHADOW));
     regWhitespaceColor = cFg;
 }
 
@@ -194,9 +194,9 @@ BOOL CSetColorPage::OnInitDialog()
     m_cBkConflictResolved.EnableOtherButton(sCustomText);
 
 
-    CRegDWORD regWhitespaceColor(L"Software\\TortoiseMerge\\Colors\\Whitespace", GetSysColor(COLOR_GRAYTEXT));
+    CRegDWORD regWhitespaceColor(L"Software\\TortoiseMerge\\Colors\\Whitespace", GetSysColor(COLOR_3DSHADOW));
     m_cFgWhitespaces.SetColor((COLORREF)(DWORD)regWhitespaceColor);
-    m_cFgWhitespaces.EnableAutomaticButton(sDefaultText, GetSysColor(COLOR_GRAYTEXT));
+    m_cFgWhitespaces.EnableAutomaticButton(sDefaultText, GetSysColor(COLOR_3DSHADOW));
     m_cFgWhitespaces.EnableOtherButton(sCustomText);
 
 
