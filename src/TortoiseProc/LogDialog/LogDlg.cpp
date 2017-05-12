@@ -527,27 +527,37 @@ void CLogDlg::SetupLogListControl()
         dwStyle |= LVS_EX_CHECKBOXES | 0x08000000 /*LVS_EX_AUTOCHECKSELECT*/;
     m_LogList.SetExtendedStyle(dwStyle);
     m_LogList.SetTooltipProvider(this);
+
+    // Configure fake imagelist for LogList with 1px width and height = GetSystemMetrics(SM_CYSMICON)
+    // to set minimum item height: we draw icons in actions column, but on High-DPI
+    // displays font height may be less than small icon height.
+    ASSERT((m_LogList.GetStyle() & LVS_SHAREIMAGELISTS) == 0);
+    HIMAGELIST hImageList = ImageList_Create(1, GetSystemMetrics(SM_CYSMICON), 0, 1, 0);
+    ListView_SetImageList(m_LogList, hImageList, LVSIL_SMALL);
 }
 
 void CLogDlg::LoadIconsForActionColumns()
 {
     // load the icons for the action columns
+    int cx = GetSystemMetrics(SM_CXSMICON);
+    int cy = GetSystemMetrics(SM_CYSMICON);
+
     m_hModifiedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_ACTIONMODIFIED),
-                                                                        IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+                                                                        IMAGE_ICON, cx, cy, 0);
     m_hReplacedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_ACTIONREPLACED),
-                                                                        IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+                                                                        IMAGE_ICON, cx, cy, 0);
     m_hAddedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_ACTIONADDED),
-                                                                        IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+                                                                        IMAGE_ICON, cx, cy, 0);
     m_hDeletedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_ACTIONDELETED),
-                                                                        IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+                                                                        IMAGE_ICON, cx, cy, 0);
     m_hMergedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_ACTIONMERGED),
-                                                                        IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+                                                                        IMAGE_ICON, cx, cy, 0);
     m_hReverseMergedIcon = (HICON)LoadImage(AfxGetResourceHandle(),
-                                MAKEINTRESOURCE(IDI_ACTIONREVERSEMERGED), IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+                                MAKEINTRESOURCE(IDI_ACTIONREVERSEMERGED), IMAGE_ICON, cx, cy, 0);
     m_hMovedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_ACTIONREPLACED),
-                                       IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+                                       IMAGE_ICON, cx, cy, 0);
     m_hMoveReplacedIcon = (HICON)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDI_ACTIONREPLACED),
-                                       IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+                                       IMAGE_ICON, cx, cy, 0);
 }
 
 void CLogDlg::ConfigureColumnsForLogListControl()
@@ -4950,7 +4960,7 @@ void CLogDlg::ResizeAllListCtrlCols(bool bOnlyVisible)
         // Adjust columns "Actions" containing icons
         if (col == 1)
         {
-            const int nMinimumWidth = ICONITEMBORDER+16*7;
+            const int nMinimumWidth = ICONITEMBORDER+GetSystemMetrics(SM_CXSMICON) * 7;
             if (cx < nMinimumWidth)
             {
                 cx = nMinimumWidth;
@@ -4958,7 +4968,7 @@ void CLogDlg::ResizeAllListCtrlCols(bool bOnlyVisible)
         }
         if ((col == 0) && m_bSelect)
         {
-            cx += 16;   // add space for the checkbox
+            cx += GetSystemMetrics(SM_CXSMICON);   // add space for the checkbox
         }
         // keep the bug id column small
         if ((col == 4)&&(m_bShowBugtraqColumn))
