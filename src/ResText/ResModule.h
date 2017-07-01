@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007, 2011-2012, 2014 - TortoiseSVN
+// Copyright (C) 2003-2007, 2011-2012, 2014-2017 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -116,6 +116,10 @@ private:
     const WORD* ReplaceControlInfo(const WORD * res, size_t * wordcount, WORD * newDialog, BOOL bEx);
 
     void    ReplaceStr(LPCWSTR src, WORD * dest, size_t * count, int * translated, int * def);
+
+    bool    AdjustCheckSum(const std::wstring& resFile);
+    void    RemoveSignatures(LPCTSTR lpszDestLangDllPath);
+
 
     HMODULE         m_hResDll;
     HANDLE          m_hUpdateRes;
