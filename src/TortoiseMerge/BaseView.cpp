@@ -46,7 +46,6 @@
 #define new DEBUG_NEW
 #endif
 
-#define MARGINWIDTH 20
 #define HEADERHEIGHT 10
 
 #define IDT_SCROLLTIMER 101
@@ -128,18 +127,21 @@ CBaseView::CBaseView()
     m_nTabMode = (int)(DWORD)CRegDWORD(L"Software\\TortoiseMerge\\TabMode", TABMODE_NONE);
     m_bEditorConfigEnabled = !!(DWORD)CRegDWORD(L"Software\\TortoiseMerge\\EnableEditorConfig", FALSE);
     std::fill_n(m_apFonts, fontsCount, (CFont*)NULL);
-    m_hConflictedIcon = LoadIcon(IDI_CONFLICTEDLINE);
-    m_hConflictedIgnoredIcon = LoadIcon(IDI_CONFLICTEDIGNOREDLINE);
-    m_hRemovedIcon = LoadIcon(IDI_REMOVEDLINE);
-    m_hAddedIcon = LoadIcon(IDI_ADDEDLINE);
-    m_hWhitespaceBlockIcon = LoadIcon(IDI_WHITESPACELINE);
-    m_hEqualIcon = LoadIcon(IDI_EQUALLINE);
-    m_hLineEndingCR = LoadIcon(IDI_LINEENDINGCR);
-    m_hLineEndingCRLF = LoadIcon(IDI_LINEENDINGCRLF);
-    m_hLineEndingLF = LoadIcon(IDI_LINEENDINGLF);
-    m_hEditedIcon = LoadIcon(IDI_LINEEDITED);
-    m_hMovedIcon = LoadIcon(IDI_MOVEDLINE);
-    m_hMarkedIcon = LoadIcon(IDI_LINEMARKED);
+
+    int cxIcon = GetSystemMetrics(SM_CXSMICON);
+    int cyIcon = GetSystemMetrics(SM_CYSMICON);
+    m_hConflictedIcon = CCommonAppUtils::LoadIconEx(IDI_CONFLICTEDLINE, cxIcon, cyIcon, 0);
+    m_hConflictedIgnoredIcon = CCommonAppUtils::LoadIconEx(IDI_CONFLICTEDIGNOREDLINE, cxIcon, cyIcon, 0);
+    m_hRemovedIcon = CCommonAppUtils::LoadIconEx(IDI_REMOVEDLINE, cxIcon, cyIcon, 0);
+    m_hAddedIcon = CCommonAppUtils::LoadIconEx(IDI_ADDEDLINE, cxIcon, cyIcon, 0);
+    m_hWhitespaceBlockIcon = CCommonAppUtils::LoadIconEx(IDI_WHITESPACELINE, cxIcon, cyIcon, 0);
+    m_hEqualIcon = CCommonAppUtils::LoadIconEx(IDI_EQUALLINE, cxIcon, cyIcon, 0);
+    m_hLineEndingCR = CCommonAppUtils::LoadIconEx(IDI_LINEENDINGCR, cxIcon, cyIcon, 0);
+    m_hLineEndingCRLF = CCommonAppUtils::LoadIconEx(IDI_LINEENDINGCRLF, cxIcon, cyIcon, 0);
+    m_hLineEndingLF = CCommonAppUtils::LoadIconEx(IDI_LINEENDINGLF, cxIcon, cyIcon, 0);
+    m_hEditedIcon = CCommonAppUtils::LoadIconEx(IDI_LINEEDITED, cxIcon, cyIcon, 0);
+    m_hMovedIcon = CCommonAppUtils::LoadIconEx(IDI_MOVEDLINE, cxIcon, cyIcon, 0);
+    m_hMarkedIcon = CCommonAppUtils::LoadIconEx(IDI_LINEMARKED, cxIcon, cyIcon, 0);
     m_margincursor = (HCURSOR)LoadImage(AfxGetResourceHandle(), MAKEINTRESOURCE(IDC_MARGINCURSOR), IMAGE_CURSOR, 0, 0, LR_DEFAULTSIZE);
 
     for (int i=0; i<1024; ++i)
@@ -1337,10 +1339,11 @@ void CBaseView::DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex)
             break;
         }
 
-
+        int iconWidth = GetSystemMetrics(SM_CXSMICON);
+        int iconHeight = GetSystemMetrics(SM_CYSMICON);
         if (icon)
         {
-            ::DrawIconEx(pdc->m_hDC, rect.left + 2, rect.top + (rect.Height()-16)/2, icon, 16, 16, NULL, NULL, DI_NORMAL);
+            ::DrawIconEx(pdc->m_hDC, rect.left + 2, rect.top + (rect.Height() - iconHeight) / 2, icon, iconWidth, iconHeight, NULL, NULL, DI_NORMAL);
         }
         if ((m_bViewLinenumbers)&&(m_nDigits))
         {
@@ -1374,7 +1377,7 @@ void CBaseView::DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex)
                     pdc->SetTextColor(::GetSysColor(COLOR_WINDOWTEXT));
 
                     pdc->SelectObject(GetFont());
-                    pdc->ExtTextOut(rect.left + 18, rect.top, ETO_CLIPPED, &rect, sLinenumber, NULL);
+                    pdc->ExtTextOut(rect.left + iconWidth + 2, rect.top, ETO_CLIPPED, &rect, sLinenumber, NULL);
                 }
             }
         }
@@ -1383,6 +1386,8 @@ void CBaseView::DrawMargin(CDC *pdc, const CRect &rect, int nLineIndex)
 
 int CBaseView::GetMarginWidth()
 {
+    int marginWidth = GetSystemMetrics(SM_CXSMICON) + 2 + 2;
+
     if ((m_bViewLinenumbers)&&(m_pViewData)&&(m_pViewData->GetCount()))
     {
         if (m_nDigits <= 0)
@@ -1394,9 +1399,10 @@ int CBaseView::GetMarginWidth()
             m_nDigits = sMax.GetLength();
         }
         int nWidth = GetCharWidth();
-        return (MARGINWIDTH + (m_nDigits * nWidth) + 2);
+        marginWidth += (m_nDigits * nWidth) + 2;
     }
-    return MARGINWIDTH;
+
+    return marginWidth;
 }
 
 void CBaseView::DrawHeader(CDC *pdc, const CRect &rect)
@@ -2938,10 +2944,11 @@ INT_PTR CBaseView::OnToolHitTest(CPoint point, TOOLINFO* pTI) const
     CRect rcClient;
     GetClientRect(rcClient);
     CRect textrect(rcClient.left, rcClient.top, rcClient.Width(), m_nLineHeight+HEADERHEIGHT);
-    int marginwidth = MARGINWIDTH;
+
+    int marginwidth = GetSystemMetrics(SM_CXSMICON) + 2 + 2;
     if ((m_bViewLinenumbers)&&(m_pViewData)&&(m_pViewData->GetCount())&&(m_nDigits > 0))
     {
-        marginwidth = (MARGINWIDTH + (m_nDigits * m_nCharWidth) + 2);
+        marginwidth += (m_nDigits * m_nCharWidth) + 2;
     }
     CRect borderrect(rcClient.left, rcClient.top+m_nLineHeight+HEADERHEIGHT, marginwidth, rcClient.bottom);
 
