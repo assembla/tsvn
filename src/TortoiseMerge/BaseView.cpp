@@ -1,6 +1,6 @@
 ﻿// TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2003-2015 - TortoiseSVN
+// Copyright (C) 2003-2015, 2017 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -5008,6 +5008,11 @@ BOOL CBaseView::PreTranslateMessage(MSG* pMsg)
     if (RelayTrippleClick(pMsg))
         return TRUE;
     return CView::PreTranslateMessage(pMsg);
+}
+
+ULONG CBaseView::GetGestureStatus(CPoint /*ptTouch*/)
+{
+    return 0;
 }
 
 

@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2010-2013 - TortoiseSVN
+// Copyright (C) 2010-2013, 2015, 2017 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "EditPropBase.h"
 #include "StandAloneDlg.h"
 #include "SVNExternals.h"
+#include "HintCtrl.h"
 
 
 class CEditPropExternals : public CResizableStandAloneDialog, public EditPropBase
@@ -53,7 +54,7 @@ protected:
     INT_PTR DoModal() override { return CResizableStandAloneDialog::DoModal(); }
 
 private:
-    CListCtrl       m_ExtList;
+    CHintCtrl<CListCtrl>    m_ExtList;
     SVNExternals    m_externals;
     TCHAR           m_columnbuf[MAX_PATH];
     CTSVNPath       m_url;

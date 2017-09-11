@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015 - TortoiseSVN
+// Copyright (C) 2003-2017 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -415,6 +415,11 @@ BOOL CRepositoryBar::PreTranslateMessage(MSG* pMsg)
 {
     m_tooltips.RelayEvent(pMsg);
     return CReBarCtrl::PreTranslateMessage(pMsg);
+}
+
+ULONG CRepositoryBar::GetGestureStatus(CPoint /*ptTouch*/)
+{
+    return 0;
 }
 
 void CRepositoryBar::OnHistoryBack()

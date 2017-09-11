@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2016 - TortoiseSVN
+// Copyright (C) 2003-2017 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -446,7 +446,7 @@ private:
     CString             m_sURL;
     CString             m_sUUID;    ///< empty if the log cache is not used
     CHintCtrl<CSubTooltipListCtrl> m_LogList;
-    CListCtrl           m_ChangedFileListCtrl;
+    CHintCtrl<CListCtrl>           m_ChangedFileListCtrl;
     CFilterEdit         m_cFilter;
     CLogDlgFilter       m_filter;
     CProgressCtrl       m_LogProgress;

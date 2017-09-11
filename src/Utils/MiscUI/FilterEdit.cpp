@@ -1,6 +1,6 @@
 // TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007, 2009, 2011-2015 - TortoiseSVN
+// Copyright (C) 2007, 2009, 2011-2015, 2017 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -91,6 +91,11 @@ void CFilterEdit::PreSubclassWindow( )
 BOOL CFilterEdit::PreTranslateMessage( MSG* pMsg )
 {
     return CEdit::PreTranslateMessage(pMsg);
+}
+
+ULONG CFilterEdit::GetGestureStatus(CPoint /*ptTouch*/)
+{
+    return 0;
 }
 
 BOOL CFilterEdit::SetCancelBitmaps(UINT uCancelNormal, UINT uCancelPressed, int cx96dpi, int cy96dpi, BOOL bShowAlways)
